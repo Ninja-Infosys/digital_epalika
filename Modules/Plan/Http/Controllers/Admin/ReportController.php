@@ -7,6 +7,7 @@ use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -345,7 +346,7 @@ class ReportController extends Controller
         ]);
     }
 
-    public function projectChoosePage()
+    public function priceRangeReportPage()
     {
         $fiscalYears = FiscalYear::get();
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
@@ -353,30 +354,50 @@ class ReportController extends Controller
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
         $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.project_choose', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.price_range_report', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
     }
 
-    public function getProjectChooseData(Request $request)
+    public function getPriceRangeReportData(Request $request)
     {
-        $projects = Project::select('allocated_amount')
-            ->where(function ($q) use ($request) {
-                $this->filterDataFromUser($q, $request);
-            })->get()
-            ->filter(function ($project) use ($request) {
-                if (!empty($request->input('ward_no'))) {
-                    return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
-                }
-                return true;
-            })
-            ->map(function ($project, $key) {
-                return [
-                    'sn' => (int)$key + 1
-                ];
-            });
-
-        return response()->json([
-            'data' => $projects
+        $range = collect([
+            'below_1_lakh' => 0,
+            '1_lakh_to_2_lakh' => 0,
+            '2_lakh_to_5_lakh' => 0,
+            '5_lakh_to_10_lakh' => 0,
+            '10_lakh_to_50_lakh' => 0,
+            'more_than_50_lakh' => 0,
+            'total' => 0,
         ]);
+        DB::table('projects')
+            ->select('allocated_amount')
+            ->where('deleted_at', null)
+            ->where(function ($query) use ($request) {
+                $this->filterDataFromUser($query, $request);
+            })
+            ->get()
+            ->each(function ($project) use ($range) {
+                $range['total'] += 1;
+
+                if ($project->allocated_amount < 100000) {
+                    $range['below_1_lakh'] += 1;
+                }
+                if ($project->allocated_amount >= 100000 && $project->allocated_amount < 200000) {
+                    $range['1_lakh_to_2_lakh'] += 1;
+                }
+                if ($project->allocated_amount >= 200000 && $project->allocated_amount < 500000) {
+                    $range['2_lakh_to_5_lakh'] += 1;
+                }
+                if ($project->allocated_amount >= 500000 && $project->allocated_amount < 1000000) {
+                    $range['5_lakh_to_10_lakh'] += 1;
+                }
+                if ($project->allocated_amount >= 1000000 && $project->allocated_amount < 5000000) {
+                    $range['10_lakh_to_50_lakh'] += 1;
+                }
+                if ($project->allocated_amount >= 5000000) {
+                    $range['more_than_50_lakh'] += 1;
+                }
+            });
+        return $range;
     }
 
     public function workDetailReportPage()
@@ -408,10 +429,10 @@ class ReportController extends Controller
                     'sn' => (int)$key + 1,
                     'project_name' => $project->project_name ?? 0.00,
                     'total_expenses_amount' => $project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumer_committee_transactions_sum_amount : $project->project_bid_submissions_sum_amount,
-                    'from_consumer_committee_count'=>$project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? 1 : '',
-                    'from_consumer_committee_amount'=>$project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumer_committee_transactions_sum_amount : '',
-                    'from_contract_count'=>$project->operated_through != ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? 1 : '',
-                    'from_contract_amount'=>$project->operated_through != ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->project_bid_submissions_sum_amount : '',
+                    'from_consumer_committee_count' => $project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? 1 : '',
+                    'from_consumer_committee_amount' => $project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumer_committee_transactions_sum_amount : '',
+                    'from_contract_count' => $project->operated_through != ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? 1 : '',
+                    'from_contract_amount' => $project->operated_through != ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->project_bid_submissions_sum_amount : '',
                 ];
             });
 
