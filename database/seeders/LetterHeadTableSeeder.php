@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Plan\Database\Seeders;
+namespace Database\Seeders;
 
 use App\Models\Settings\LetterHead;
 use Illuminate\Database\Seeder;

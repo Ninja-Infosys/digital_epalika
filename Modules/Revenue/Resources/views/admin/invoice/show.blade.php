@@ -42,20 +42,13 @@
                 <div class="card-body">
                     <div class="bg-white" id="report-table">
                         <div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span>
-                                        <img alt="nepal-government-logo"
-                                             class="logo img-responsive center-block d-block mx-auto"
-                                             src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                                    </span>
-                                    <x-header-component :has-clock="false"/>
-                                    <span>
-                                    सेवाग्राही प्रति <br>
-                                    रसिद नं.: {{$invoice->invoice_no}}
-                                </span>
-                                </div>
-                                    <h3 class="text-center">आम्दानी रसिद</h3>
+                            {!! letterHead() !!}
+                            <div class="text-center">
+                                <h4 class="fw-bold mb-0 text-decoration-underline">आम्दानी रसिद</h4>
+                                <p>(सेवाग्राही प्रति)</p>
+                            </div>
                                     <div class="d-flex justify-content-between">
+                                        <p>रसिद नं.: {{$invoice->invoice_no}}</p>
                                         <p>करदाता नं: {{$invoice->taxPayer->registration_no}}</p>
                                         <p>करदाताको नाम: {{$invoice->name}}</p>
                                         <p>ठेगाना: {{$invoice->address}}</p>
@@ -127,25 +120,19 @@
                         </div>
                         <hr class="dashed">
                         <div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span>
-                                    <img alt="nepal-government-logo"
-                                         class="logo img-responsive center-block d-block mx-auto"
-                                         src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                                </span>
-                                <x-header-component :has-clock="false"/>
-                                <span>
-                                    कार्यालय प्रति <br>
-                                    रसिद नं. : {{$invoice->invoice_no}}
-                                </span>
-                            </div>
+
+                            {!! letterHead() !!}
                             <div>
-                                <h3 class="text-center">आम्दानी रसिद</h3>
+                                <div class="text-center">
+                                    <h4 class="fw-bold mb-0 text-decoration-underline">आम्दानी रसिद</h4>
+                                    <p>(कार्यालय प्रति)</p>
+                                </div>
                                 <div class="d-flex justify-content-between">
+                                    <p>रसिद नं.: {{$invoice->invoice_no}}</p>
                                     <p>करदाता नं: {{$invoice->taxPayer->registration_no}}</p>
                                     <p>करदाताको नाम: {{$invoice->name}}</p>
                                     <p>ठेगाना: {{$invoice->address}}</p>
-                                    <p>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
+                                    <p>मिति: <x-ad-to-bs id="payment_date_office" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                 </div>
                                 <table class="table table-bordered table-sm mt-1">
                                     <thead>
