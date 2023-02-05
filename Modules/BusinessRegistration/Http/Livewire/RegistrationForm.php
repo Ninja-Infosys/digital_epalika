@@ -114,7 +114,7 @@ class RegistrationForm extends Component
         'form.district_id' => ['required', 'exists:districts,id'],
         'form.local_body_id' => ['required', 'exists:local_bodies,id'],
         'form.ward_no' => ['required', 'integer'],
-        'form.way' => ['required', 'string'],
+        'form.way' => ['nullable', 'string'],
         'form.tole' => ['required', 'string'],
         'form.is_rent' => ['required', 'boolean'],
         'form.house_owner_name' => ['required_if:form.is_rent,1'],
@@ -156,7 +156,7 @@ class RegistrationForm extends Component
         'form.partners.*.issue_district_id' => ['required', 'exists:districts,id'],
         'form.partners.*.local_body_id' => ['required', 'exists:local_bodies,id'],
         'form.partners.*.ward_no' => ['required', 'integer'],
-        'form.partners.*.way' => ['required', 'string'],
+        'form.partners.*.way' => ['nullable', 'string'],
         'form.partners.*.tole' => ['required', 'string'],
     ];
 
@@ -207,7 +207,6 @@ class RegistrationForm extends Component
 
     public function submitForm()
     {
-//        dd($this->form);
         $this->validate();
         $businessDetail = DB::transaction(function () {
             $businessDetail = BusinessDetail::create(\Arr::except($this->form,['working_capital','fixed_capital']) + [

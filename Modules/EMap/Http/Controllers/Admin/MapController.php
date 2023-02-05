@@ -22,6 +22,7 @@ class MapController extends Controller
 {
     public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
+
         $this->checkAuthorization('mapApply_access');
         $application_types = collect();
 
