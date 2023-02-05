@@ -31,7 +31,7 @@
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
                             </button>
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title=" उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण रिपोर्ट"
                             />
                         </div>
@@ -161,38 +161,29 @@
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
                             </button>
-
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive d-none">
-                        <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
-                            <span class="main-logo">
-                                <img alt="nepal-government-logo"
-                                     class="logo img-responsive center-block d-block mx-auto"
-                                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                            </span>
-                            <x-header-component :has-clock="false"/>
+                    <div class="table-responsive">
+                        <div id="report-content" class="d-none">
+                            {!! letterHead() !!}
+                            <table id="report-table" class="table table-sm mt-3 table-bordered">
+                                <thead class="align-middle">
+                                <tr>
+                                    <th rowspan="2">क्र.सं.</th>
+                                    <th rowspan="2">कार्यक्रमको नाम</th>
+                                    <th rowspan="2">निर्माणमा भएको कुल खर्च</th>
+                                    <th colspan="2">उपभोक्ता समितिबाट</th>
+                                    <th colspan="2">निर्माण ब्यबसायबाट</th>
+                                </tr>
+                                <tr>
+                                    <th>संख्या</th>
+                                    <th>रकम</th>
+                                    <th>संख्या</th>
+                                    <th>रकम</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div>
-
-                        </div>
-                        <table class="table table-stripped table-bordered">
-                            <thead class="align-middle">
-                            <tr>
-                                <th rowspan="2">क्र.सं.</th>
-                                <th rowspan="2">कार्यक्रमको नाम</th>
-                                <th rowspan="2">निर्माणमा भएको कुल खर्च</th>
-                                <th colspan="2">उपभोक्ता समितिबाट</th>
-                                <th colspan="2">निर्माण ब्यबसायबाट</th>
-                            </tr>
-                            <tr>
-                                <th>संख्या</th>
-                                <th>रकम</th>
-                                <th>संख्या</th>
-                                <th>रकम</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -205,9 +196,7 @@
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const div = document.getElementById('report-table');
-                    // select table inside div
-                    const table = div.querySelector('table');
+                    const table = document.querySelector('#report-table');
                     // create tbody
                     // delete tbody tag if exists
                     if (table.querySelector('tbody')) {
@@ -262,7 +251,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            $('#report-table').removeClass('d-none')
+                            $('#report-content').removeClass('d-none')
                             createTable(resp.data)
 
                         },
