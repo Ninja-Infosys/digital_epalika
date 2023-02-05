@@ -37,7 +37,7 @@
                         @csrf
                         @method('put')
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="storey" class="form-label">तल्ला *</label>
                                 <input
                                     type="text"
@@ -51,7 +51,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="rate" class="form-label">दर *</label>
                                 <input
                                     type="number"

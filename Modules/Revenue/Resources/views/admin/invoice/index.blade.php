@@ -22,20 +22,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नगदी रसिदहरु सूची</h4>
-                        @can('revenueCategory_create')
-                            <a href="{{route('admin.revenue.invoice.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                            <h4 class="header-title mb-0">नगदी रसिदहरु सूची</h4>
+                            <div class="d-flex flex-wrap align-items-center">
+                                @includeIf('inc.filter_form')
+                                @can('revenueCategory_create')
+                                <a href="{{route('admin.revenue.invoice.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                                @endcan
+                            </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -46,7 +46,6 @@
                                 <th>रकम</th>
                                 <th>कैफियत</th>
                                 <th>#</th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -62,8 +61,8 @@
                                     <td>
                                         @can('taxPayerType_access')
                                             <a
-                                               href="{{route('admin.revenue.invoice.show',[$invoice])}}"
-                                               class="btn btn-xs btn-outline-success">
+                                                href="{{route('admin.revenue.invoice.show',[$invoice])}}"
+                                                class="btn btn-xs btn-outline-success">
                                                 <i class="fa fa-eye"></i> हेर्नुहोस्
                                             </a>
                                         @endcan

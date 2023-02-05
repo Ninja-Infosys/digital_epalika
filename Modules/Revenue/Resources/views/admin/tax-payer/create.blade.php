@@ -34,7 +34,7 @@
                     <form action="{{route('admin.revenue.taxPayer.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="tax_payer_type_id" class="form-label">करदाताको प्रकार</label>
                                 <select
                                     name="tax_payer_type_id"
@@ -56,32 +56,33 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="name" class="form-label">नाम *</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value="{{old('name')}}"
-                                    class="form-control @error('name') is-invalid @enderror"
-                                    id="name"
-                                    placeholder="नाम"
-                                />
-                                @error('name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="name_en" class="form-label">नाम (English) *</label>
-                                <input
-                                    type="text"
-                                    name="name_en"
-                                    value="{{old('name_en')}}"
-                                    class="form-control @error('name_en') is-invalid @enderror"
-                                    id="name_en"
-                                    placeholder="नाम (English)"
-                                />
-                                @error('name_en')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                                <label for="name" class="form-label">करदाताको नाम *</label>
+                                <div class="input-group">
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value="{{old('name')}}"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        id="name"
+                                        placeholder="नेपाली"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="name_en"
+                                        value="{{old('name_en')}}"
+                                        class="form-control @error('name_en') is-invalid @enderror"
+                                        id="name_en"
+                                        placeholder="English"
+                                    />
+                                </div>
+                                <div class="d-flex">
+                                    @error('name')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    @error('name_en')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="phone" class="form-label">फोन *</label>
@@ -100,7 +101,7 @@
                             <div class="col-md-4 mb-2">
                                 <label for="email" class="form-label">इमेल *</label>
                                 <input
-                                    type="text"
+                                    type="email"
                                     name="email"
                                     value="{{old('email')}}"
                                     class="form-control @error('email') is-invalid @enderror"
@@ -175,7 +176,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="issued_district" class="form-label">जारी जिल्ला</label>
+                                <label for="issued_district" class="form-label">नागरिकता जारी जिल्ला</label>
                                 <select
                                     name="issued_district"
                                     class="form-select @error('issued_district') is-invalid @enderror"
@@ -197,7 +198,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <x-date-input-component
-                                    nameNe="issued_date" labelNe="जारी मिति *"
+                                    nameNe="issued_date" labelNe="नागरिकता जारी मिति *"
                                     nameEn="issued_date_en" labelEn="Issued Date"
                                 />
                             </div>

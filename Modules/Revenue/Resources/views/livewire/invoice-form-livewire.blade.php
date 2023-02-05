@@ -1,8 +1,8 @@
-<div>
-    <fieldset class="m-2">
+<div class="col-md-12">
+    <fieldset>
         <legend>फारम</legend>
-        <div class="row mb-2">
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6 mb-2">
                 <label for="form.revenue_category_id">राजस्वको वर्ग</label>
                 <select
                     wire:model="form.revenue_category_id"
@@ -21,7 +21,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <label for="form.revenue_id">राजस्वको शिर्षक</label>
                 <select
                     wire:model="form.revenue_id"
@@ -41,7 +41,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-2">
                 <label for="form.quantity">मात्रा</label>
                 <input type="number" id="form.quantity"
                        class="form-control @error('form.quantity') is-invalid @enderror"
@@ -50,7 +50,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-2">
                 <label for="form.rate">दर</label>
                 <input type="number" id="form.rate" class="form-control @error('form.rate') is-invalid @enderror"
                        wire:model="form.rate" value="0" step="0.01" min="0">
@@ -58,7 +58,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-2">
                 <label for="form.fine">जरिवाना</label>
                 <input type="number" id="form.fine" class="form-control @error('form.fine') is-invalid @enderror"
                        wire:model="form.fine" value="0" step="0.01" min="0">
@@ -66,7 +66,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-2">
                 <label for="form.remarks">कैफियत</label>
                 <input type="text" id="form.remarks" class="form-control @error('form.remarks') is-invalid @enderror"
                        wire:model="form.remarks">
@@ -79,7 +79,7 @@
             <i class="fa fa-save"></i>
         </button>
     </fieldset>
-    <table class="table table-bordered table-stripped table-centered">
+    <table class="table table-bordered table-sm mt-2">
         <thead>
         <tr>
             <th rowspan="2">क्र.सं</th>
@@ -89,9 +89,7 @@
             <th rowspan="2">जरिवाना</th>
             <th rowspan="2">जम्मा</th>
             <th rowspan="2">कैफियत</th>
-            <th rowspan="2">
-                #
-            </th>
+            <th rowspan="2">#</th>
         </tr>
         <tr>
             <th>वर्ग</th>

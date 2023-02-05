@@ -26,20 +26,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}} सुची</h4>
-                        @can('user_create')
-                            <a href="{{route('admin.digitalBoard.notice.create',$type)}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ {{$type==='Notice' ?'सूचना':'समाचार'}} थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">{{$type==='Notice' ?'सूचना':'समाचार'}}हरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('digitalBoardNotice_create')
+                                <a href="{{route('admin.digitalBoard.notice.create',$type)}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -57,37 +57,32 @@
                                     <td>{{$notice->title}}</td>
                                     <td>{{$notice->date}}</td>
                                     <td>
-                                        <a data-bs-type="edit"
-                                           href="{{route('admin.digitalBoard.notice.updateShowOnIndex',[$type,$notice])}}"
+                                        <a href="{{route('admin.digitalBoard.notice.updateShowOnIndex',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->show_on_index==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}">
                                             <i class="fa  {{$notice->show_on_index==1 ?' fa-check':'fa-window-close'}}"></i>
-
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-bs-type="edit"
-                                           href="{{route('admin.digitalBoard.notice.updateClosedDate',[$type,$notice])}}"
+                                        <a href="{{route('admin.digitalBoard.notice.updateClosedDate',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->closed_at==null ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}">
                                             <i class="fa  {{$notice->closed_at==null ?' fa-check':'fa-window-close'}}"></i>
-
-
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-bs-type="edit"
-                                           href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
+                                        <a href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}"
                                            title="विवरण हेर्नुहोस्">
                                             <i class="fa fa-eye"></i>
-
-
                                         </a>
+                                        @can('digitalBoardNotice_edit')
                                         <a data-bs-type="edit"
                                            href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}"
                                            title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        @endcan
+                                        @can('digitalBoardNotice_delete')
                                         <form action="{{route('admin.digitalBoard.notice.destroy',[$type,$notice])}}"
                                               method="post">
                                             @csrf
@@ -98,6 +93,7 @@
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
