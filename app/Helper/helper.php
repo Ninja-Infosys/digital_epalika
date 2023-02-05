@@ -4,6 +4,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\FeatureActivation;
+use App\Models\OfficeHeader;
 use App\Models\Settings\LetterHead;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
@@ -16,6 +17,14 @@ if (!function_exists('officeSetting')) {
     {
         return Cache::rememberForever('office_setting', function () {
             return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
+        });
+    }
+}
+if (!function_exists('get_office_header')) {
+    function get_office_header()
+    {
+        return Cache::rememberForever('officeHeaders', function () {
+            return OfficeHeader::orderBy('position')->get();
         });
     }
 }
