@@ -47,15 +47,15 @@
                                 <h4 class="fw-bold mb-0 text-decoration-underline">आम्दानी रसिद</h4>
                                 <p>(सेवाग्राही प्रति)</p>
                             </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p>रसिद नं.: {{$invoice->invoice_no}}</p>
-                                        <p>करदाता नं: {{$invoice->taxPayer->registration_no}}</p>
-                                        <p>करदाताको नाम: {{$invoice->name}}</p>
-                                        <p>ठेगाना: {{$invoice->address}}</p>
-                                        <p>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
+                                    <div class="info">
+                                        <p class="d-inline"><strong>रसिद नं.:</strong> {{$invoice->invoice_no}}</p>
+                                        <p class="d-inline ms-2"><strong>करदाता नं:</strong> {{$invoice->taxPayer->registration_no}}</p>
+                                        <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{$invoice->name}}</p><br>
+                                        <p class="d-inline"><strong>ठेगाना:</strong> {{$invoice->address}}</p>
+                                        <p class="d-inline ms-2"><strong>मिति:</strong> <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                     </div>
-                                    <div class="row mt-1">
-                                        <div class="col-md-8">
+                                    <div class="d-flex gap-2">
+                                        <div class="col-8">
                                             <table class="table table-bordered table-sm">
                                                 <thead>
                                                 <tr>
@@ -107,7 +107,7 @@
                                                 </tfoot>
                                             </table>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col">
                                             <p>कर तिरौ, सभ्य नागरिक बनौ ।</p>
                                             <p>समय मै कर तिरौ, जरिवानाबाट बचौ ।</p>
                                             <p>कर सम्बन्धि बिस्तृत जानकारीको लागि राजस्व प्रशासन शाखामा सम्पर्क राख्नु होला । <strong>कर तिर्नु भएकोमा धन्यबाद ।</strong></p>
@@ -117,24 +117,28 @@
                                     <div class="dashed">बुझाउनेको सहि</div>
                                     <div class="dashed">बुझिलिनेको सहि</div>
                                 </div>
+                            <div class="text-center">
+                                <p> तयार गर्ने: {{$invoice->user->name}} प्रिन्ट:
+                                    <x-ad-to-bs id="print_service"
+                                                :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}</p>
+                            </div>
                         </div>
                         <hr class="dashed">
                         <div>
-
                             {!! letterHead() !!}
                             <div>
                                 <div class="text-center">
                                     <h4 class="fw-bold mb-0 text-decoration-underline">आम्दानी रसिद</h4>
                                     <p>(कार्यालय प्रति)</p>
                                 </div>
-                                <div class="d-flex justify-content-between">
-                                    <p>रसिद नं.: {{$invoice->invoice_no}}</p>
-                                    <p>करदाता नं: {{$invoice->taxPayer->registration_no}}</p>
-                                    <p>करदाताको नाम: {{$invoice->name}}</p>
-                                    <p>ठेगाना: {{$invoice->address}}</p>
-                                    <p>मिति: <x-ad-to-bs id="payment_date_office" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
+                                <div class="info">
+                                    <p class="d-inline"><strong>रसिद नं.:</strong> {{$invoice->invoice_no}}</p>
+                                    <p class="d-inline ms-2"><strong>करदाता नं:</strong> {{$invoice->taxPayer->registration_no}}</p>
+                                    <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{$invoice->name}}</p><br>
+                                    <p class="d-inline"><strong>ठेगाना:</strong> {{$invoice->address}}</p>
+                                    <p class="d-inline ms-2"><strong>मिति:</strong> <x-ad-to-bs id="payment_date_office" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                 </div>
-                                <table class="table table-bordered table-sm mt-1">
+                                <table class="table table-bordered table-sm">
                                     <thead>
                                     <tr>
                                         <th>बिषय</th>
@@ -184,13 +188,18 @@
                                     </tr>
                                     </tfoot>
                                 </table>
-                                <div class="d-flex justify-content-between mt-1">
+                                <div class="d-flex justify-content-between">
                                     <div class="dashed">
                                         रकम बुझाउनेको सहि
                                     </div>
                                     <div class="dashed">
                                         रकम बुझिलिनेको सहि
                                     </div>
+                                </div>
+                                <div class="text-center">
+                                    <p> तयार गर्ने: {{$invoice->user->name}} प्रिन्ट:
+                                        <x-ad-to-bs id="print_office"
+                                                    :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}</p>
                                 </div>
                             </div>
                         </div>
