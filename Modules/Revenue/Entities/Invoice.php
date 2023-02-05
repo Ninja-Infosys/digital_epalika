@@ -36,6 +36,7 @@ class Invoice extends Model
         'ward',
         'remarks',
         'invoice_copy',
+        'is_cash_invoice'
     ];
 
     public function taxPayer(): BelongsTo

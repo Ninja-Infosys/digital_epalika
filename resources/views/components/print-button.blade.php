@@ -10,6 +10,7 @@
                 type: 'html',
                 documentTitle: '{{$title}}',
                 showModal: true,
+                targetStyles: ['*'],
                 css: '{{asset('assets/backend/css/print.css')}}',
                 honorMarginPadding: false,
                 modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'

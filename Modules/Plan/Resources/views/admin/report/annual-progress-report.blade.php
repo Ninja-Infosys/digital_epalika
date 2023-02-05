@@ -165,61 +165,53 @@
 
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive d-none">
-                        <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
-                            <span class="main-logo">
-                                <img alt="nepal-government-logo"
-                                     class="logo img-responsive center-block d-block mx-auto"
-                                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                            </span>
-                            <x-header-component :has-clock="false"/>
+                    <div class="table-responsive">
+                        <div id="report-table d-none">
+                            {!! letterHead() !!}
+                            <table class="table table-stripped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th rowspan="3">क्र.सं.</th>
+                                    <th rowspan="3">क्रियाकलाप/विवरण</th>
+                                    <th rowspan="3">एकाई</th>
+                                    <th rowspan="2" colspan="3">आयोजनाको कुल क्रियाकलाप</th>
+                                    <th rowspan="2" colspan="3">सम्पूर्ण कार्य मध्ये गत आ.व. सम्मको</th>
+                                    <th rowspan="2" colspan="3">चालु आ.व.को यथार्थ खर्च</th>
+                                    <th colspan="12">चालु आ.व.को लक्ष्य</th>
+                                    <th rowspan="3">कैफियत</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="3">वार्षिक</th>
+                                    <th colspan="3">प्रथम चौमसिक</th>
+                                    <th colspan="3">दोश्रो चौमासिक</th>
+                                    <th colspan="3">तेश्रो चौमासिक</th>
+                                </tr>
+                                <tr>
+                                    <th>परिमाण</th>
+                                    <th>लागत</th>
+                                    <th>भार</th>
+                                    <th>सम्पन्न परिमाण</th>
+                                    <th>खर्च</th>
+                                    <th>भारित प्रगति</th>
+                                    <th>लक्ष्य परिमाण</th>
+                                    <th>प्रगति सनुमन</th>
+                                    <th>खर्च अनुमान</th>
+                                    <th>परिमाण</th>
+                                    <th>भार</th>
+                                    <th>बजेट</th>
+                                    <th>परिमाण</th>
+                                    <th>भार</th>
+                                    <th>बजेट</th>
+                                    <th>परिमाण</th>
+                                    <th>भार</th>
+                                    <th>बजेट</th>
+                                    <th>परिमाण</th>
+                                    <th>भार</th>
+                                    <th>बजेट</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div>
-
-                        </div>
-                        <table class="table table-stripped table-bordered">
-                            <thead>
-                            <tr>
-                                <th rowspan="3">क्र.सं.</th>
-                                <th rowspan="3">क्रियाकलाप/विवरण</th>
-                                <th rowspan="3">एकाई</th>
-                                <th rowspan="2" colspan="3">आयोजनाको कुल क्रियाकलाप</th>
-                                <th rowspan="2" colspan="3">सम्पूर्ण कार्य मध्ये गत आ.व. सम्मको</th>
-                                <th rowspan="2" colspan="3">चालु आ.व.को यथार्थ खर्च</th>
-                                <th colspan="12">चालु आ.व.को लक्ष्य</th>
-                                <th rowspan="3">कैफियत</th>
-                            </tr>
-                            <tr>
-                                <th colspan="3">वार्षिक</th>
-                                <th colspan="3">प्रथम चौमसिक</th>
-                                <th colspan="3">दोश्रो चौमासिक</th>
-                                <th colspan="3">तेश्रो चौमासिक</th>
-                            </tr>
-                            <tr>
-                                <th>परिमाण</th>
-                                <th>लागत</th>
-                                <th>भार</th>
-                                <th>सम्पन्न परिमाण</th>
-                                <th>खर्च</th>
-                                <th>भारित प्रगति</th>
-                                <th>लक्ष्य परिमाण</th>
-                                <th>प्रगति सनुमन</th>
-                                <th>खर्च अनुमान</th>
-                                <th>परिमाण</th>
-                                <th>भार</th>
-                                <th>बजेट</th>
-                                <th>परिमाण</th>
-                                <th>भार</th>
-                                <th>बजेट</th>
-                                <th>परिमाण</th>
-                                <th>भार</th>
-                                <th>बजेट</th>
-                                <th>परिमाण</th>
-                                <th>भार</th>
-                                <th>बजेट</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
