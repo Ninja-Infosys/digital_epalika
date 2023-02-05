@@ -176,7 +176,7 @@
             <div class="col-md-3 border">
                 <a href="{{route('admin.revenue.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/rajashow.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/revenue.png')}}"
                              height="50" width="50" alt="">
                         <h5 class="p-1 text-white">राजस्व</h5>
                     </div>

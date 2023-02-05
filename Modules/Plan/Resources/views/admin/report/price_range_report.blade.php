@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{route('admin.plan.report.get-project-choose-data')}}">
+                              data-bs-url="{{route('admin.plan.report.get-price-range-report-data')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -179,7 +179,6 @@
                         <table class="table table-stripped table-bordered">
                             <thead class="align-middle">
                             <tr>
-                                <th>क्र.सं.</th>
                                 <th>रू. १ लाख सम्म</th>
                                 <th>१ लाख देखि २ लाख सम्म</th>
                                 <th>२ लाख देखि ५ लाख सम्म</th>
@@ -213,22 +212,16 @@
 
                     const tbody = document.createElement('tbody');
 
-                    data.forEach(function (item) {
-                        // create row
-                        const tr = document.createElement('tr');
-                        // create cell
-                        Object.values(item).forEach(data => {
-                            const td = document.createElement('td');
-                            // set cell content
-                            td.innerHTML = data;
-                            // append cell to row
-                            tr.appendChild(td);
-                        });
+                    const tr = document.createElement('tr');
 
-                        // append row to tbody
-                        tbody.appendChild(tr);
+                    Object.values(data).forEach(el => {
+                        const td = document.createElement('td');
+                        // set cell content
+                        td.innerHTML = el;
+                        // append cell to row
+                        tr.appendChild(td);
                     });
-
+                    tbody.appendChild(tr);
                     table.appendChild(tbody);
                 }
 
@@ -260,7 +253,7 @@
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
                             $('#report-table').removeClass('d-none')
-                            createTable(resp.data)
+                            createTable(resp)
 
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -269,70 +262,6 @@
                             toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     });
-                })
-
-
-                $(document.body).delegate('#plan_area_id', 'change', function (e) {
-                    let plan_area_id = $('#plan_area_id').val()
-                    $('#plan_sub_area_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!plan_area_id.length) {
-                        return false;
-                    }
-                    $.ajax({
-                        type: 'get',
-                        data: {plan_area_id: plan_area_id},
-                        url: "{{route('admin.plan.planSubArea')}}",
-                        success: function (resp) {
-                            $(resp.data).each(function (key, data) {
-                                $('#plan_sub_area_id').append("<option value=" + data.id + ">" + data.area_name + "</option>")
-                            })
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    })
-                })
-
-                $(document.body).delegate('#plan_level_id', 'change', function (e) {
-                    let plan_level_id = $('#plan_level_id').val()
-                    $('#plan_sub_level_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!plan_level_id.length) {
-                        return false;
-                    }
-                    $.ajax({
-                        type: 'get',
-                        data: {plan_level_id: plan_level_id},
-                        url: "{{route('admin.plan.planSubLevel')}}",
-                        success: function (resp) {
-                            $(resp.data).each(function (key, data) {
-                                $('#plan_sub_level_id').append("<option value=" + data.id + ">" + data.level_name + "</option>")
-                            })
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    })
-                })
-
-                $(document.body).delegate('#budget_head_id', 'change', function (e) {
-                    let budget_head_id = $('#budget_head_id').val()
-                    $('#budget_sub_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!budget_head_id.length) {
-                        return false;
-                    }
-                    $.ajax({
-                        type: 'get',
-                        data: {budget_head_id: budget_head_id},
-                        url: "{{route('admin.plan.budgetSubHead')}}",
-                        success: function (resp) {
-                            $(resp.data).each(function (key, data) {
-                                $('#budget_sub_head_id').append("<option value=" + data.id + ">" + data.title + "</option>")
-                            })
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    })
                 })
 
                 function toastMessage(type, title) {

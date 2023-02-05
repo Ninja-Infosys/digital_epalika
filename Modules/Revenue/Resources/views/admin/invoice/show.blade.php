@@ -24,18 +24,19 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नगदी रसिद</h4>
-
-                        @can('revenueCategory_create')
-                            <a href="{{route('admin.revenue.invoice.index')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i>
-                                नगदी रसिदहरु सूची
-                            </a>
-                        @endcan
-                        <x-print-button
-                            target-element="report-table"
-                            title="आम्दानी रसिद"
-                        />
+                        <div class="d-flex gap-2">
+                            @can('revenueCategory_create')
+                                <a href="{{route('admin.revenue.invoice.index')}}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-list"></i>
+                                    नगदी रसिदहरुको सूची
+                                </a>
+                            @endcan
+                            <x-print-button
+                                target-element="report-table"
+                                title="आम्दानी रसिद"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,10 +46,6 @@
                                 <style>
                                     .dashed {
                                         border-top: 2px dashed #999;
-                                    }
-
-                                    #report-table * {
-                                        font-size: 12px;
                                     }
                                 </style>
                                 <div class="container-fluid mb-1 d-lg-flex justify-content-between align-items-center">
@@ -60,23 +57,20 @@
                                     <x-header-component :has-clock="false"/>
                                     <span>
                                     सेवाग्राही प्रति <br>
-                                    रसिद नं.:{{$invoice->invoice_no}}
+                                    रसिद नं.: {{$invoice->invoice_no}}
                                 </span>
                                 </div>
                                 <div style="margin-bottom: 20px; ">
-                                    <h3 class="text-center">
-                                        आम्दानी रसिद
-                                    </h3>
-                                    <div class="mb-2">
-                                        <b>करदाताको नाम</b>: {{$invoice->name}} | <b>ठेगाना</b>: {{$invoice->address}} |
-                                        <b>करदाताको नं</b>: {{$invoice->taxPayer->registration_no}} |
-                                        <b>मिति</b>:
-                                        <x-ad-to-bs id="payment_date_customer"
-                                                    :ad-date="$invoice->payment_date_ad"></x-ad-to-bs>
+                                    <h3 class="text-center">आम्दानी रसिद</h3>
+                                    <div class="d-flex justify-content-between">
+                                        <span>करदाताको नाम: {{$invoice->name}}</span>
+                                        <span>ठेगाना: {{$invoice->address}}</span>
+                                        <span>करदाताको नं: {{$invoice->taxPayer->registration_no}}</span>
+                                        <span>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></span>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mt-2">
                                         <div class="col-8">
-                                            <table class=" table-bordered table-sm">
+                                            <table class="table table-bordered table-sm">
                                                 <thead>
                                                 <tr>
                                                     <th>बिषय</th>
@@ -128,38 +122,27 @@
                                             </table>
                                         </div>
                                         <div class="col-4">
-                                            <ul>
-                                                <li>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
                                                     कर तिरौ, सभ्य नागरिक बनौ ।
                                                 </li>
-                                                <li>
+                                                <li class="list-group-item">
                                                     समय मै कर तिरौ, जरिवानाबाट बचौ ।
                                                 </li>
                                             </ul>
-                                            कर सम्बन्धि बिस्तृत जानकारीको
-                                            लागि राजस्व प्रशासन शाखामा सम्पर्क राख्नु होला । <strong>कर तिर्नु भएकोमा
-                                                धन्यबाद ।</strong>
+                                            कर सम्बन्धि बिस्तृत जानकारीको लागि राजस्व प्रशासन शाखामा सम्पर्क राख्नु होला । <strong>कर तिर्नु भएकोमा धन्यबाद ।</strong>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-between mt-4">
-                                    <div class="dashed">
-                                        बुझाउनेको सहि
-                                    </div>
-                                    <div class="dashed">
-                                        बुझिलिनेको सहि
-                                    </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="dashed">बुझाउनेको सहि</div>
+                                    <div class="dashed">बुझिलिनेको सहि</div>
                                 </div>
                                 <p class="text-center">
-
-                                    तयार गर्ने:{{$invoice->user->name}} | प्रिन्ट:
-                                    <x-ad-to-bs id="print_cstomer"
-                                                :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}
+                                    तयार गर्ने: {{$invoice->user->name}}  प्रिन्ट: <x-ad-to-bs id="print_cstomer" :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}
                                     <br>
-                                    पुनः राजस्व बुझुना आउदा यो रसिद लिएर आउनु होला
-                                    धन्यवाद
-
+                                    पुनः राजस्व बुझुना आउदा यो रसिद लिएर आउनु होला धन्यवाद
                                 </p>
 
                             </div>
@@ -191,7 +174,7 @@
                                                 :ad-date="$invoice->payment_date_ad"></x-ad-to-bs>
                                 </div>
                                 <div>
-                                    <table class="table-bordered table-sm">
+                                    <table class="table table-bordered table-sm">
                                         <thead>
                                         <tr>
                                             <th>बिषय</th>

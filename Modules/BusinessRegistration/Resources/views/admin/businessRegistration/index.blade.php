@@ -26,14 +26,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय दर्ता सूची</h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">दर्ता भएका व्यवसायहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-bordered table-sm mb-2 table-striped table-hover text-center mt-3">
+                        <table class="table table-bordered table-sm table-striped">
                             <thead>
                             <tr>
                                 <th rowspan="2">क्र.स</th>

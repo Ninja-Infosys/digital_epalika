@@ -22,20 +22,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">करदाता सूची</h4>
-                        @can('revenueCategory_create')
-                            <a href="{{route('admin.revenue.taxPayer.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">करदाताहरुको सूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('revenueCategory_create')
+                                <a href="{{route('admin.revenue.taxPayer.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -59,9 +59,9 @@
                                     <td>{{$taxPayer->ward}}</td>
                                     <td>
                                         @if($taxPayer->is_active == 1)
-                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="bg-success text-white rounded p-1">सक्रिय</a>
+                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="btn btn-xs btn-primary waves-effect waves-light">सक्रिय</a>
                                         @else
-                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="bg-danger text-white rounded p-1">निष्क्रिय</a>
+                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="btn btn-xs btn-danger waves-effect waves-light">निष्क्रिय</a>
                                         @endif
                                     </td>
                                     <td>

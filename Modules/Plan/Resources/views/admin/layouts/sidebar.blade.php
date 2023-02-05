@@ -51,8 +51,8 @@
                     <span>सम्पन्न हुन बाकि योजनाहरुको रिपोर्ट </span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/plan/report/project-choose') ? 'active' : ''}}">
-                <a href="{{route('admin.plan.report.project-choose-page')}}">
+            <li class="{{request()->is('admin/plan/report/price-range-report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.price-range-report-page')}}">
                     <span>योजना छनौट रिपोर्ट</span>
                 </a>
             </li>

@@ -25,8 +25,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नक्शा दस्तुर सूची</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title mb-0">नक्शा दस्तुर सूची</h4>
                         @can('mapFee_create')
                             <a href="{{route('emap.admin.mapFee.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

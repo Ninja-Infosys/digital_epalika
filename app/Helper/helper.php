@@ -19,6 +19,15 @@ if (!function_exists('officeSetting')) {
     }
 }
 
+if (!function_exists('letterHead')) {
+    function letterHead($type = 'header')
+    {
+        $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null);
+
+        return $type == 'letter_head' ? ($letterHead->letter_head ?? '') : ($letterHead->header ?? '');
+    }
+}
+
 if (!function_exists('get_setting')) {
     function get_setting($key, $default = null)
     {
