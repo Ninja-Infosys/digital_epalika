@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('ward')->nullable();
             $table->text('remarks')->nullable();
             $table->string('invoice_copy')->nullable();
+            $table->boolean('is_cash_invoice')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
