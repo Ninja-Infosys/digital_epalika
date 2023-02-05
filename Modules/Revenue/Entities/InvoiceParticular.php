@@ -25,6 +25,7 @@ class InvoiceParticular extends Model
         'revenue',
         'quantity',
         'rate',
+        'due',
         'fine',
         'remarks',
     ];
@@ -33,6 +34,7 @@ class InvoiceParticular extends Model
         'quantity' => 'float',
         'rate' => 'float',
         'fine' => 'float',
+        'due' => 'int'
     ];
 
     protected $appends = [

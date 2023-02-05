@@ -210,7 +210,7 @@
                                     id="ward" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
 
-                                    @foreach(get_local_bodies(localBodyId: $officeSetting->local_body_id)->ward_no as $ward)
+                                    @foreach($officeSetting->local_body_id ? get_local_bodies(localBodyId: $officeSetting->local_body_id)->ward_no : [] as $ward)
                                         <option
                                             value="{{$ward}}"
                                             {{old('ward') == $ward ? 'selected' : ''}}

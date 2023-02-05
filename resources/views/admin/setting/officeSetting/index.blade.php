@@ -239,7 +239,7 @@
                             Save
                         </button>
                     </form>
-                    @livewire('office-header')
+                    @livewire('office-header-livewire')
                 </div>
             </div>
         </div>

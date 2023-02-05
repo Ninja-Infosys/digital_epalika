@@ -34,7 +34,7 @@ class RevenueCategory extends Model
 
     public function revenueCategories(): HasMany
     {
-        return $this->hasMany(RevenueCategory::class, 'revenue_category_id');
+        return $this->hasMany(RevenueCategory::class, 'revenue_category_id')->with('revenueCategories');
     }
 
     public function user(): BelongsTo

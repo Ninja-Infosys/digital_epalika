@@ -23,7 +23,7 @@ class RevenueController extends Controller
     public function create()
     {
         $this->checkAuthorization('revenue_create');
-        $revenueCategories = RevenueCategory::whereNull('revenue_category_id')->latest()->get();
+        $revenueCategories = RevenueCategory::with('revenueCategories')->whereNull('revenue_category_id')->latest()->get();
         return view('revenue::admin.setting.revenue.create', compact('revenueCategories'));
     }
 

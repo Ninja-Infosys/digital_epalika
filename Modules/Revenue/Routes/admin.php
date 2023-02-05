@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LandInvoiceController;
 use Modules\Revenue\Http\Controllers\Admin\DashboardController;
 use Modules\Revenue\Http\Controllers\Admin\InvoiceController;
 use Modules\Revenue\Http\Controllers\Admin\RevenueCategoryController;
@@ -11,6 +12,8 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::get('taxPayer/{taxPayer}/update-status', [TaxPayerController::class, 'updateStatus'])->name('taxPayer.update-status');
 Route::resource('taxPayer', TaxPayerController::class);
+
+Route::resource('land/invoice', LandInvoiceController::class)->names('land.invoice');
 
 Route::resource('invoice', InvoiceController::class);
 
