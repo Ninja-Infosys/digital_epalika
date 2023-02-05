@@ -15,7 +15,7 @@
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">अनुदान विवरण</h4>
+                <h4 class="page-title">जारी भएका अनुदानहरु</h4>
             </div>
         </div>
     </div>
@@ -23,20 +23,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान विवरण सूची</h4>
-                        @can('grantDetail_create')
-                            <a href="{{route('admin.grant.grantDetail.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">जारी भएका अनुदानहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('grantDetail_create')
+                                <a href="{{route('admin.grant.grantDetail.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th class="text-center">क्र.सं</th>
@@ -46,7 +46,7 @@
                                 <th class="text-center">नयाँ/निरन्तर</th>
                                 <th class="text-center">योजना स्थल</th>
                                 <th class="text-center">सम्पर्क नम्बर</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">#</th>
                             </tr>
                             </thead>
                             <tbody>
