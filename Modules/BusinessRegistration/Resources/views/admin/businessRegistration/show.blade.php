@@ -36,16 +36,16 @@
                                 दर्ता
                             </a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="#tax" data-bs-toggle="tab" aria-expanded="true" class="nav-link">--}}
-{{--                                व्यवसाय कर दर्ता किताव--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="#application" data-bs-toggle="tab" aria-expanded="false" class="nav-link">--}}
-{{--                                व्यवसाय दर्ता प्रमाण-पत्र--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a href="#tax" data-bs-toggle="tab" aria-expanded="true" class="nav-link">--}}
+                        {{--                                व्यवसाय कर दर्ता किताव--}}
+                        {{--                            </a>--}}
+                        {{--                        </li>--}}
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a href="#application" data-bs-toggle="tab" aria-expanded="false" class="nav-link">--}}
+                        {{--                                व्यवसाय दर्ता प्रमाण-पत्र--}}
+                        {{--                            </a>--}}
+                        {{--                        </li>--}}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="detail">
@@ -451,82 +451,112 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                            <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
-                                  method="post"
-                                  enctype="multipart/form-data">
-                                @csrf
-                                <fieldset class="border p-2 mb-2">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-2">
-                                            <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
-                                            <input
-                                                type="number"
-                                                name="taxpayer_number"
-                                                step="0.01"
-                                                placeholder="करदाता नम्बर "
-                                                value="{{old('taxpayer_number',$businessDetail->taxpayer_number??'')}}"
-                                                class="form-control @error('taxpayer_number') is-invalid @enderror"
-                                                id="taxpayer_number"
-                                            />
-                                            @error('taxpayer_number')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
+                            @if(empty($businessDetail->taxpayer_number))
+                                <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
+                                      method="post"
+                                      enctype="multipart/form-data">
+                                    @csrf
+                                    <fieldset class="border p-2 mb-2">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
+                                                <input
+                                                    type="number"
+                                                    name="taxpayer_number"
+                                                    step="0.01"
+                                                    placeholder="करदाता नम्बर "
+                                                    value="{{old('taxpayer_number',$businessDetail->taxpayer_number??'')}}"
+                                                    class="form-control @error('taxpayer_number') is-invalid @enderror"
+                                                    id="taxpayer_number"
+                                                />
+                                                @error('taxpayer_number')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
 
-                                        <div class="col-md-6 mb-2">
-                                            <label for="bill_no" class="form-label">बिल नं</label>
-                                            <input
-                                                type="text"
-                                                name="bill_no"
-                                                value="{{old('bill_no',$businessDetail->bill_no??'')}}"
-                                                placeholder="बिल नं"
-                                                class="form-control @error('bill_no') is-invalid @enderror"
-                                                id="bill_no"
-                                            />
-                                            @error('bill_no')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
+                                            <div class="col-md-6 mb-2">
+                                                <label for="bill_no" class="form-label">बिल नं</label>
+                                                <input
+                                                    type="text"
+                                                    name="bill_no"
+                                                    value="{{old('bill_no',$businessDetail->bill_no??'')}}"
+                                                    placeholder="बिल नं"
+                                                    class="form-control @error('bill_no') is-invalid @enderror"
+                                                    id="bill_no"
+                                                />
+                                                @error('bill_no')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <x-date-input-component
+                                                    name-ne="bill_date_bs" label-ne="बिल मिति (बि स.)"
+                                                    name-en="bill_date_ad" label-en="बिल मिति"
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="amount" class="form-label">रकम </label>
+                                                <input
+                                                    type="number"
+                                                    name="amount"
+                                                    step="0.01"
+                                                    placeholder="रकम"
+                                                    value="{{old('amount',$businessDetail->amount??'')}}"
+                                                    class="form-control @error('amount') is-invalid @enderror"
+                                                    id="amount"
+                                                />
+                                                @error('amount')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-12 mb-2">
+                                                <label for="other_file" class="form-label"> फाईल </label>
+                                                <input
+                                                    type="file"
+                                                    name="other_file"
+                                                    class="form-control @error('other_file') is-invalid @enderror"
+                                                    id="other_file"
+                                                />
+                                                @error('other_file')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
-                                            <x-date-input-component
-                                                name-ne="bill_date_bs" label-ne="बिल मिति (बि स.)"
-                                                name-en="bill_date_ad" label-en="बिल मिति"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label for="amount" class="form-label">रकम </label>
-                                            <input
-                                                type="number"
-                                                name="amount"
-                                                step="0.01"
-                                                placeholder="रकम"
-                                                value="{{old('amount',$businessDetail->amount??'')}}"
-                                                class="form-control @error('amount') is-invalid @enderror"
-                                                id="amount"
-                                            />
-                                            @error('amount')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-12 mb-2">
-                                            <label for="other_file" class="form-label"> फाईल </label>
-                                            <input
-                                                type="file"
-                                                name="other_file"
-                                                class="form-control @error('other_file') is-invalid @enderror"
-                                                id="other_file"
-                                            />
-                                            @error('other_file')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <button type="submit" class="btn btn-primary">
-                                    Save
-                                </button>
-                            </form>
-
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                </form>
+                            @else
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>करदाता नम्बर</th>
+                                            <th>बिल नं</th>
+                                            <th>रकम</th>
+                                            <th>फाईल</th>
+                                            <th>#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{$businessDetail->taxpayer_number}}</td>
+                                        <td>{{$businessDetail->bill_no}}</td>
+                                        <td>{{$businessDetail->amount}}</td>
+                                        <td>
+                                            <a href="{{$businessDetail->other_file}}">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
 
                         {{--                        <div class="tab-pane" id="tax">--}}
