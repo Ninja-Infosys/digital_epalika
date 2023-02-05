@@ -18,6 +18,7 @@
             font-weight: 300;
         }
 
+
         .row {
 
         }
@@ -56,9 +57,12 @@
             margin-top: 40px;
             border: 1px solid black;
         }
+        hr{
+            margin-top: 5px;
+        }
     </style>
 </head>
-<body style="margin: 0;padding: 0;">
+<body>
 <div style="background-image: url({{asset('assets/backend/back1.png')}}); padding: 0; background-repeat: no-repeat;background-size: 100%;height: 1400px;">
     <div class="row" style="padding-top: 110px;">
         <div class="col-md-3">
@@ -78,7 +82,7 @@
             <h2 style="text-align: center;">व्यवसाय दर्ता प्रमाण-पत्र</h2><br>
         </div>
     </div>
-    <div class="row" style="padding: 0px 110px 0px 110px" >
+    <div class="row" style="padding: 0 110px 0 110px" >
         <p>
             करदाता नं : {{$businessDetail->taxpayer_number}} <br>
             दर्ता मिति : {{$businessDetail->registration_date_ne}} <br>
@@ -100,7 +104,7 @@
             पुजीगत लगानी (रु मा) : <span>{{$businessDetail->investment}}</span>
         </p>
     </div>
-    <div class="row" style="padding: 0px 110px 0px 110px" >
+    <div class="row" style="padding: 0 110px 0 110px" >
         <div class="col-md-6">
             ..................... <br>
             करवालाको हस्ताक्षर
@@ -109,8 +113,8 @@
             ..................... <br>
             स्वीकृत गर्नेको हस्ताक्षर
         </div>
-        <hr style="margin-top: 5px;">
-    </div><div class="row" style="padding: 0px 110px 0px 110px" >
+        <hr>
+    </div><div class="row" style="padding: 0 110px 0 110px" >
        <ul>
            <li>
                प्रत्येक आर्थिक वर्षको असार मसान्त भित्र नविकरण गराई सक्नु पर्नेछ । अन्यथा यस {{$officeSetting->localBody->local_body??''}}को प्रचलित आर्थिक एन बमोजिम कारवाही हुनेछ ।

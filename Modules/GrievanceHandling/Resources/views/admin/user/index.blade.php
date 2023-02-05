@@ -14,10 +14,10 @@
                             <a href="{{ route('admin.grievanceHandling.grievanceDetail.index') }}">प्रयोगकर्ताको
                                 बिबरण </a>
                         </li>
-                        <li class="breadcrumb-item active">प्रयोगकर्ताको बिबरण</li>
+                        <li class="breadcrumb-item active">गुनासो प्रयोगकर्ताहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title">प्रयोगकर्ताको बिबरण </h4>
+                <h4 class="page-title">गुनासो प्रयोगकर्ताहरु</h4>
             </div>
         </div>
     </div>
@@ -26,14 +26,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">प्रयोगकर्ताको बिबरण </h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">गुनासो प्रयोगकर्ताहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>

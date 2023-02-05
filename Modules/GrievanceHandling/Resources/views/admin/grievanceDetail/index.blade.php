@@ -13,10 +13,10 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.grievanceHandling.grievanceDetail.index')}}">गुनासो बिबरण </a>
                         </li>
-                        <li class="breadcrumb-item active">गुनासो बिबरण</li>
+                        <li class="breadcrumb-item active">प्राप्त गुनासोहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title">गुनासो बिबरण </h4>
+                <h4 class="page-title">प्राप्त गुनासोहरु </h4>
             </div>
         </div>
     </div>
@@ -25,14 +25,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">गुनासो बिबरण </h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">प्राप्त गुनासोहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -68,7 +70,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="8">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

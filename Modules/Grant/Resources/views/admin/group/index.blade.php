@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">समूह आव्धता</li>
+                        <li class="breadcrumb-item active">समूह</li>
                     </ol>
                 </div>
-                <h4 class="page-title">समूह आव्धता</h4>
+                <h4 class="page-title">समूह</h4>
             </div>
         </div>
     </div>
@@ -22,20 +22,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">समूह आव्धता</h4>
-                        @can('group_access')
-                            <a href="{{route('admin.grant.group.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0"> समूहहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('group_access')
+                                <a href="{{route('admin.grant.group.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -44,7 +44,7 @@
                                 <th>दर्ता मिति</th>
                                 <th>दर्ता भएको कार्यलय</th>
                                 <th>पाना/भ्याट</th>
-                                <th>Action</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
