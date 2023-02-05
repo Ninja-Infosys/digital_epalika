@@ -31,7 +31,7 @@
                                        </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">आ.व. {{officeSetting()->fiscalYear->title}}मा काटिएको नगदी रसिद</p>
+                            <p class="text my-1">आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
