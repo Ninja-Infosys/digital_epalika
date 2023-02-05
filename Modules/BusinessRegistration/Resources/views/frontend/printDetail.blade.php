@@ -17,13 +17,10 @@
             color: #0a53be;
             border-bottom: 2px dotted blue;
         }
-
         p {
             line-height: 1.8;
         }
-        .subject{
-            text-align: center;
-        }
+
         @font-face {
             font-family: 'Kalimati';
             font-style: normal;
@@ -71,7 +68,7 @@
                         {{$officeSetting->district->district??''}}
                     </p>
                 </div>
-                <p class="subject">बिषय : व्यवसाय दर्ता / नवीकरण सम्बन्धमा </p>
+                <p class="subject text-center">बिषय : व्यवसाय दर्ता / नवीकरण सम्बन्धमा </p>
                 <div class="col-md-12 middle-part">
                     <p>
                         मैले/हामीले निमन् स्थानमा व्यवसाय दर्ता/नविकरण गर्न लागेकोले आवश्यक कागजात सहित दरखास्त गर्न
@@ -114,7 +111,6 @@
                         १२. संलगन गर्नुपर्ने कागजातहरु
                     </p>
                 </div>
-
                 <div class="col-md-12">
                     <ul>
                         <li>आफनै घर जग्गा भए जग्गा धनि प्रमाणपत्रको प्रतिलिपि</li>
