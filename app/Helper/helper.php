@@ -4,6 +4,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\FeatureActivation;
+use App\Models\Settings\LetterHead;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -22,7 +23,7 @@ if (!function_exists('officeSetting')) {
 if (!function_exists('letterHead')) {
     function letterHead($type = 'header')
     {
-        $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null);
+        $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null) ?? LetterHead::first();
 
         return $type == 'letter_head' ? ($letterHead->letter_head ?? '') : ($letterHead->header ?? '');
     }

@@ -32,7 +32,7 @@
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
                             </button>
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="वार्षिक प्रगति प्रतिवेदन रिपोर्ट"
                             />
                         </div>
@@ -166,9 +166,9 @@
                         </form>
                     </div>
                     <div class="table-responsive">
-                        <div id="report-table" class="d-none">
+                        <div id="report-content" class="d-none">
                             {!! letterHead() !!}
-                            <table class="table table-stripped table-bordered">
+                            <table id="report-table" class="table table-sm table-stripped table-bordered">
                                 <thead>
                                 <tr>
                                     <th rowspan="3">क्र.सं.</th>
@@ -224,9 +224,8 @@
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const div = document.getElementById('report-table');
                     // select table inside div
-                    const table = div.querySelector('table');
+                    const table = document.querySelector('#report-table');
                     // create tbody
                     // delete tbody tag if exists
                     if (table.querySelector('tbody')) {
@@ -281,7 +280,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            $('#report-table').removeClass('d-none')
+                            $('#report-content').removeClass('d-none')
                             createTable(resp.data)
 
                         },
