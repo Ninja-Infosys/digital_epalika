@@ -213,15 +213,21 @@
                             </table>
                         </div>
                     </div>
+                    <button id="export-to-excel">Export to Excel</button>
                 </div>
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
+
         <script>
+            document.getElementById('export-to-excel').addEventListener('click', function() {
+                var table = document.getElementById('report-table');
+                var wb = XLSX.utils.table_to_book(table);
+                XLSX.writeFile(wb, 'table-export.xlsx');
+            });
+
             $(document).ready(function () {
                 function createTable(data) {
                     // select table inside div
