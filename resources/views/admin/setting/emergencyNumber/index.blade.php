@@ -26,24 +26,24 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> आपतकालीन सम्पर्क सूची</h4>
-                        @can('user_create')
+                        @can('emergencyNumber_create')
                             <a href="{{route('admin.emergencyNumber.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ आपतकालीन सम्पर्क थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>प्रकार</th>
                                 <th>शिर्षक</th>
                                 <th>आपतकालीन सम्पर्क नं.</th>
-                                <th>कार्य</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>

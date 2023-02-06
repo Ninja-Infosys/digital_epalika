@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">शाखा</li>
+                        <li class="breadcrumb-item active">शाखा/उपशाखा</li>
                     </ol>
                 </div>
-                <h4 class="page-title">शाखा</h4>
+                <h4 class="page-title">शाखा/उपशाखा</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">शाखा सूची</h4>
+                        <h4 class="header-title">शाखा/उपशाखाहरु</h4>
                         @can('branch_create')
                             <a href="{{route('admin.branch.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
