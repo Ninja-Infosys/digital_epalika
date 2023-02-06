@@ -168,13 +168,12 @@
                                 <td>रू. {{$project->allocated_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
                                 <td>
-                                    <div class="btn-group dropdown mb-2">
+                                    <div class="btn-group mb-2 dropstart">
                                         <a href="{{route('admin.plan.project.show',$project)}}"
                                            class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"> विवरण </i>
                                         </a>
-                                        <button type="button"
-                                                class="btn btn-sm btn-info dropdown-toggle dropdown-toggle-split"
+                                        <button type="button" class="btn btn-info waves-effect waves-light dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">
                                             <i class="fa fa-angle-down"></i>
