@@ -33,6 +33,7 @@ class BusinessDetail extends Model
 //    use BusinessDetailTemplateTrait;
 
     protected $fillable = [
+        'reg_no',
         'submission_no',
         'fiscal_year_id',
         'registration_no',
