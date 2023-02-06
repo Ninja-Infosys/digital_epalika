@@ -1,20 +1,9 @@
 <div class="navbar-custom">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
-            <li>
+            <li class="d-none d-xl-block">
                 <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
-            <li class="dropdown d-inline-block d-lg-none">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                   data-bs-toggle="dropdown"
-                   href="#"
-                   role="button"
-                   aria-haspopup="false"
-                   aria-expanded="false">
-                    <i class="fa fa-search noti-icon"></i>
-                </a>
-            </li>
-
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
                    data-toggle="fullscreen" id="full-tour"
@@ -123,9 +112,12 @@
             </li>
         </ul>
         <!-- LOGO -->
-        <div class="logo-box dropdown notification-list topbar-dropdown">
-            <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
+        <div class="logo-box dropdown">
+            <a class="logo logo-light text-center"
                data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
+                <span class="logo-sm">
+                                <img src="https://coderthemes.com/ubold/layouts/default/assets/images/logo-sm.png" alt="" height="22">
+                </span>
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
                         <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
@@ -145,28 +137,15 @@
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-
             <li>
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fa fa-bars"></i>
                 </button>
             </li>
-
-            <li>
+            <li class="d-none d-xl-block">
                 <h3 class="top-heading text-light fw-bold">
                     {{$officeSetting->localBody->local_body ?? ''}}
                 </h3>
-            </li>
-            <li>
-                <a class="navbar-toggle nav-link"
-                   data-bs-toggle="collapse"
-                   data-bs-target="#topnav-menu-content">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
             </li>
         </ul>
     </div>
