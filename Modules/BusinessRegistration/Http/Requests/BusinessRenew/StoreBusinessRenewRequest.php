@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\OrganizationRegistration\Http\Requests\BusinessRenew;
+namespace Modules\BusinessRegistration\Http\Requests\BusinessRenew;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class UpdateBusinessRenewRequest extends FormRequest
+class StoreBusinessRenewRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
-        return Gate::allows('businessRenew_edit');
+        return Gate::allows('businessRenew_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'business_renew_date' => ['required'],

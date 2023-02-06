@@ -7,11 +7,12 @@
 @can('businessRegistration_access')
     <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
         <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
-            <i class="fa fa-building"></i>
+            <i class="fa fa-file"></i>
             <span> दर्ता भएका व्यवसाय</span>
         </a>
     </li>
 @endcan
+
 
 {{--<li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">--}}
 {{--    <a href="{{route('admin.businessRegistration.report.report')}}">--}}

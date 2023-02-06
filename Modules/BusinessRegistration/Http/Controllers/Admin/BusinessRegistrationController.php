@@ -13,6 +13,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
+use Modules\BusinessRegistration\Entities\BusinessNature;
+use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
@@ -27,13 +29,31 @@ class BusinessRegistrationController extends Controller
         $this->checkAuthorization('businessRegistration_access');
         $businessDetails = BusinessDetail::with('partners', 'partners.localBody', 'localBody', 'businessNature')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
+                $q->whereLike(['name','submission_no','registration_no'], request('search'));
+            }
+            if (!empty(request('object_transaction_id'))) {
+                $q->where('object_transaction_id', request('object_transaction_id'));
+            }
+            if (!empty(request('business_nature_id'))) {
+                $q->where('business_nature_id', request('business_nature_id'));
+            }
+            if (!empty(request('to_date'))) {
+                $q->whereDate('registration_date_ne', '>=' ,request('to_date'));
+            }
+            if (!empty(request('from_date'))) {
+                $q->whereDate('registration_date_ne', '<=', request('from_date'));
+            }
+            if (!empty(request('registration_no'))) {
+                $q->where('registration_no', request('registration_no'));
             }
         })->latest()
             ->paginate(15);
 
 
-        return view('businessregistration::admin.businessRegistration.index', compact('businessDetails'));
+        $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        $businessNatures = BusinessNature::all();
+
+        return view('businessregistration::admin.businessRegistration.index', compact('businessDetails','objectTransactions','businessNatures'));
     }
 
     public function show(BusinessDetail $businessDetail): Factory|View|Application
