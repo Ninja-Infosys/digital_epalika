@@ -451,7 +451,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                            @if(empty($businessDetail->taxpayer_number))
+                            @if(empty($businessDetail->registration_no))
                                 <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
                                       method="post"
                                       enctype="multipart/form-data">
