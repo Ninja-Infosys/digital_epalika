@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">नगदी रसिद</li>
+                        <li class="breadcrumb-item active">मालपोत रसिद</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नगदी रसिद</h4>
+                <h4 class="page-title">मालपोत रसिद</h4>
             </div>
         </div>
     </div>
@@ -23,13 +23,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नगदी रसिद</h4>
+                        <h4 class="header-title">मालपोत रसिद</h4>
                         <div class="d-flex gap-2">
                             @can('revenueCategory_create')
-                                <a href="{{route('admin.revenue.invoice.index')}}"
+                                <a href="{{route('admin.revenue.land.invoice.index')}}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-list"></i>
-                                    नगदी रसिदहरुको सूची
+                                    मालपोत रसिदहरुको सूची
                                 </a>
                             @endcan
                             <x-print-button
@@ -44,7 +44,7 @@
                         <div>
                             {!! letterHead() !!}
                             <div class="text-center">
-                                <h4 class="fw-bold mb-0 text-decoration-underline">आम्दानी रसिद</h4>
+                                <h4 class="fw-bold mb-0 text-decoration-underline">मालपोत रसिद</h4>
                                 <p>(सेवाग्राही प्रति)</p>
                             </div>
                                     <div class="info">
@@ -60,8 +60,9 @@
                                                 <thead>
                                                 <tr>
                                                     <th>बिषय</th>
-                                                    <th>परिमाण</th>
+                                                    <th>क्षेत्रफल</th>
                                                     <th>दर</th>
+                                                    <th>बक्यौता</th>
                                                     <th>जरिवाना</th>
                                                     <th>जम्मा</th>
                                                 </tr>
@@ -79,6 +80,10 @@
                                                                                   number="{{$particular->rate}}"/>
                                                         </td>
                                                         <td>रु.
+                                                            <x-convert-to-unicode id="total__customer_rate{{$key}}"
+                                                                                  number="{{$particular->due_amount}}"/>
+                                                        </td>
+                                                        <td>रु.
                                                             <x-convert-to-unicode id="total__customer_fine{{$key}}"
                                                                                   number="{{$particular->fine}}"/>
                                                         </td>
@@ -91,14 +96,14 @@
                                                 </tbody>
                                                 <tfoot>
                                                 <tr>
-                                                    <th colspan="4" class="text-right">जम्मा</th>
+                                                    <th colspan="5" class="text-right">जम्मा</th>
                                                     <td>रु.
                                                         <x-convert-to-unicode id="total__customer_sum"
                                                                               number="{{$invoice->invoice_particulars_sum_total}}"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5"><b>अक्षरुपि</b>:
+                                                    <td colspan="6"><b>अक्षरुपि</b>:
                                                         <x-number-into-unicode id="customer_word"
                                                                                number="{{$invoice->invoice_particulars_sum_total}}"/>
                                                         मात्र
@@ -128,7 +133,7 @@
                             {!! letterHead() !!}
                             <div>
                                 <div class="text-center">
-                                    <h4 class="fw-bold mb-0 text-decoration-underline">आम्दानी रसिद</h4>
+                                    <h4 class="fw-bold mb-0 text-decoration-underline">मालपोत रसिद</h4>
                                     <p>(कार्यालय प्रति)</p>
                                 </div>
                                 <div class="info">
@@ -142,8 +147,9 @@
                                     <thead>
                                     <tr>
                                         <th>बिषय</th>
-                                        <th>परिमाण</th>
+                                        <th>क्षेत्रफल</th>
                                         <th>दर</th>
+                                        <th>बक्यौता</th>
                                         <th>जरिवाना</th>
                                         <th>जम्मा</th>
                                     </tr>
@@ -161,6 +167,10 @@
                                                                       number="{{$particular->rate}}"/>
                                             </td>
                                             <td>रु.
+                                                <x-convert-to-unicode id="total__office_rate{{$key}}"
+                                                                      number="{{$particular->due_amount}}"/>
+                                            </td>
+                                            <td>रु.
                                                 <x-convert-to-unicode id="total__office_fine{{$key}}"
                                                                       number="{{$particular->fine}}"/>
                                             </td>
@@ -173,14 +183,14 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th colspan="4" class="text-right">जम्मा</th>
+                                        <th colspan="5" class="text-right">जम्मा</th>
                                         <td>रु.
                                             <x-convert-to-unicode id="total__office_sum"
                                                                   number="{{$invoice->invoice_particulars_sum_total}}"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5"><b>अक्षरुपि</b>:
+                                        <td colspan="6"><b>अक्षरुपि</b>:
                                             <x-number-into-unicode id="office_word"
                                                                    number="{{$invoice->invoice_particulars_sum_total}}"/>
                                             मात्र

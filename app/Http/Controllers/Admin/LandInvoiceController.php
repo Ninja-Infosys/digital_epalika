@@ -60,7 +60,7 @@ class LandInvoiceController extends Controller
 
 
         $invoice->loadSum(['invoiceParticulars' => function ($query) {
-            $query->select(DB::raw('SUM((rate * quantity) + fine) as total'));
+            $query->select(DB::raw('SUM((rate * quantity) + (rate * quantity) * due + fine) as total'));
         }], 'total');
 
         $invoice->loadSum('invoiceParticulars', 'fine');
