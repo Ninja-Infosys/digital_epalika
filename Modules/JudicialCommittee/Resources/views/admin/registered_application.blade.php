@@ -58,7 +58,7 @@
                                         {{ $complaintApplication->lawsuitNature->title ?? '' }}
                                     </td>
                                     <td width="180" class="text-center">
-                                        <div class="dropdown">
+                                        <div class="dropdown dropstart">
                                             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton{{ $loop->iteration }}"
                                                     data-bs-toggle="dropdown" aria-haspopup="true"
