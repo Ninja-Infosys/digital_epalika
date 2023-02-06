@@ -2,8 +2,10 @@
 
 namespace Modules\BusinessRegistration\Entities;
 
+use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -30,4 +32,14 @@ class BusinessRenew extends Model
         'payment_receipt_date',
         'payment_receipt_date_en',
     ];
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function businessDetail(): BelongsTo
+    {
+        return $this->belongsTo(BusinessDetail::class);
+    }
 }

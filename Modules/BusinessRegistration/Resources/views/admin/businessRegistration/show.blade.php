@@ -461,9 +461,9 @@
                                             <div class="col-md-6 mb-2">
                                                 <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     name="taxpayer_number"
-                                                    step="0.01"
+
                                                     placeholder="करदाता नम्बर "
                                                     value="{{old('taxpayer_number',$businessDetail->taxpayer_number??'')}}"
                                                     class="form-control @error('taxpayer_number') is-invalid @enderror"
