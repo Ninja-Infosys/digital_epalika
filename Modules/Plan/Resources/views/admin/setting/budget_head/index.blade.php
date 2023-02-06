@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -72,7 +72,7 @@
 
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

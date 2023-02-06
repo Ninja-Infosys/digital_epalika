@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मुद्दा प्रकृति सूची</h4>
+                        <h4 class="header-title">मुद्दा प्रकृतिहरु</h4>
                         @can('lawsuitNature_create')
                             <a href="{{route('admin.judicialCommittee.lawsuitNature.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

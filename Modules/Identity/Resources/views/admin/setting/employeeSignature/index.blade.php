@@ -10,11 +10,11 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">प्रसाशक</li>
-                        <li class="breadcrumb-item active">प्रसाशक</li>
+                        <li class="breadcrumb-item">सेटिङ</li>
+                        <li class="breadcrumb-item active">हस्ताक्षर गर्ने व्यक्ति</li>
                     </ol>
                 </div>
-                <h4 class="page-title">प्रसाशक </h4>
+                <h4 class="page-title">हस्ताक्षर गर्ने व्यक्ति </h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">प्रसाशाक सूची</h4>
+                        <h4 class="header-title">हस्ताक्षर गर्ने व्यक्तिहरु</h4>
                         @can('employeeSignature_create')
                             <a href="{{route('identity.admin.setting.employeeSignature.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                    <table class="table table-sm table-striped table-bordered">
                         <thead>
                         <tr>
                             <th scope="col">क्र.सं.</th>
@@ -74,7 +74,6 @@
                                     </form>
                                 </td>
                                 <td>
-
                                     @can('employeeSignature_edit')
                                         <a data-bs-type="edit" href="{{route('identity.admin.setting.employeeSignature.edit', $employeeSignature)}}"
                                            type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
@@ -98,6 +97,9 @@
                                 </td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

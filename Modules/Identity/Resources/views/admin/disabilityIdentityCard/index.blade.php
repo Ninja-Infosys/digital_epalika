@@ -22,17 +22,18 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> अपाङ्गता परिचय पत्र सूची</h4>
-                        <a href="{{route('identity.admin.disabilityIdentityCard.create')}}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                        </a>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">अपाङ्गता परिचय पत्रहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                                <a href="{{route('identity.admin.disabilityIdentityCard.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -111,7 +112,7 @@
                     method:"GET",
                     url:$(this).attr("route_action"),
                     success:function(resp){
-                        var print_area = window.open();
+                        const print_area = window.open();
                         print_area.document.write(resp.view);
                         print_area.document.close();
                         print_area.focus();

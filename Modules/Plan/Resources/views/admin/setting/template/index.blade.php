@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

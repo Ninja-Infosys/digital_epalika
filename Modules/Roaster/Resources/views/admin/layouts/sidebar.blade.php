@@ -4,26 +4,11 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-<li class="{{request()->is('admin/roaster/dashboard/*') ? 'active' : ''}}">
-    <a href="#sidebarEMapSetting"
-       {{request()->is('admin/roaster/dashboard/*') ? 'aria-expanded=true' : ''}}
-       data-bs-toggle="collapse">
-        <i class="fa fa-user"></i>
-        <span>प्रशिक्षक थप्नुहोस्</span>
-        <span class="menu-arrow">
-            <i class="fas fa-angle-right"></i>
-        </span>
+<li class="{{request()->is('admin/roaster/trainer/*') ? 'active' : ''}}">
+    <a href="{{route('admin.roaster.trainer.index')}}">
+        <i class="fa fa-users"></i>
+        <span>प्रशिक्षकहरु</span>
     </a>
-    <div class="collapse {{request()->is('admin/roaster/trainer/*') ? 'show' : ''}}"
-         id="sidebarEMapSetting">
-        <ul class="nav-second-level">
-            <li class="{{request()->is('admin/roaster/trainer/*') ? 'active' : ''}}">
-                <a href="{{route('admin.roaster.trainer.index')}}">
-                    <span>प्रशिक्षक</span>
-                </a>
-            </li>
-        </ul>
-    </div>
 </li>
 <li class="{{request()->is('admin/roaster/training/*') ? 'active' : ''}}">
     <a href="{{route('admin.roaster.training.index')}}">
@@ -33,7 +18,7 @@
 </li>
 <li class="{{request()->is('admin/roaster/training/*') ? 'active' : ''}}">
     <a href="{{route('admin.roaster.report.report')}}">
-        <i class="fa fa-book"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span>तालिम दर्ता रिपोर्ट</span>
     </a>
 </li>
@@ -42,7 +27,7 @@
     <a href="#sidebarRoaster"
        {{request()->is('admin/roaster/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-user"></i>
+        <i class="fa fa-cogs"></i>
         <span>सेटिङ </span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>

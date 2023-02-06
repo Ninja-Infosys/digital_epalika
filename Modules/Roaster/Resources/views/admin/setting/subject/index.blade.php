@@ -15,7 +15,7 @@
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">विषय विवरण</h4>
+                <h4 class="page-title">विषय</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">विषय सूची</h4>
+                        <h4 class="header-title">विषयहरु</h4>
                         @can('subject_create')
                             <a href="{{route('admin.roaster.setting.subject.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.सं</th>
@@ -43,7 +43,7 @@
                                 <th>स्तर</th>
                                 <th>अवधि</th>
                                 <th>बिषय सामग्री</th>
-                                <th></th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>

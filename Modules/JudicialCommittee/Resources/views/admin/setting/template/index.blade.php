@@ -10,7 +10,7 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">टेम्प्लेट सूची</li>
+                        <li class="breadcrumb-item active">टेम्प्लेट</li>
                     </ol>
                 </div>
                 <h4 class="page-title">टेम्प्लेट</h4>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">टेम्प्लेट सूची</h4>
+                        <h4 class="header-title">टेम्प्लेटहरु</h4>
                         @can('judicialCommitteeTemplate_create')
                             <a href="{{route('admin.judicialCommittee.judicialCommitteeTemplate.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

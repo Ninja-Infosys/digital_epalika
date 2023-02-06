@@ -15,21 +15,21 @@
 @can('complaintApplication_access')
     <li>
         <a href="{{ route('admin.judicialCommittee.complaintApplication.index') }}">
-            <i class="fa fa-edit"></i>
+            <i class="fa fa-clipboard-check"></i>
             <span>निबेदन फारम</span>
         </a>
     </li>
 
     <li>
         <a href="{{ route('admin.judicialCommittee.registeredApplication') }}">
-            <i class="fa fa-file"></i>
+            <i class="fa fa-clipboard"></i>
             <span>दर्ता भएका उजुरी</span>
         </a>
     </li>
 @endcan
 <li>
     <a href="{{ route('admin.judicialCommittee.report.index') }}">
-        <i class="fa fa-file"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
     </a>
 </li>

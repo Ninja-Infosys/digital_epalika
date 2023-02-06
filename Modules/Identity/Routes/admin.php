@@ -36,11 +36,11 @@ Route::prefix('seniorCitizen')->group(function () {
 });
 
 Route::prefix('seniorCitizenReport')->group(function (){
-Route::get('seniorCitizenReport', [SeniorCitizenDetailReportController::class,'index'])->name('seniorCitizenReport.index');
 Route::post('seniorCitizenReport/reportData', [SeniorCitizenDetailReportController::class,'report'])->name('seniorCitizenReport.report');
 });
 
 Route::prefix('reports')->group(function () {
+    Route::get('seniorCitizenReport', [SeniorCitizenDetailReportController::class,'index'])->name('seniorCitizenReport.index');
     Route::get('disabilityIdentityCardReport', [DisabilityIdentityCardReportController::class,'report'])->name('disabilityIdentityCardReport');
 });
 Route::view('test', 'identity::admin.test');

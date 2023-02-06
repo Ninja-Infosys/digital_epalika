@@ -10,7 +10,7 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">अपांगताको कारण</li>
+                        <li class="breadcrumb-item">सेटिङ</li>
                         <li class="breadcrumb-item active">अपांगताको कारण</li>
                     </ol>
                 </div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                    <table class="table table-sm table-striped table-bordered">
                         <thead>
                         <tr>
                             <th scope="col">क्र.सं.</th>
@@ -69,6 +69,9 @@
                                 </td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>
