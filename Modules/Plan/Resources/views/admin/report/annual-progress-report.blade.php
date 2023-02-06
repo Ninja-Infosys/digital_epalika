@@ -24,13 +24,17 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">वार्षिक प्रगति प्रतिवेदन रिपोर्ट</h4>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed"
+                        <div class="d-flex gap-1 justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
                                     type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                                <i class="fa fa-filter"> फिल्टर</i>
                             </button>
+                            <x-html-to-excel
+                                file-name="वार्षिक प्रगति प्रतिवेदन रिपोर्ट"
+                                target-table="report-table"
+                            />
                             <x-print-button
                                 target-element="report-content"
                                 title="वार्षिक प्रगति प्रतिवेदन रिपोर्ट"
@@ -213,21 +217,12 @@
                             </table>
                         </div>
                     </div>
-                    <button id="export-to-excel">Export to Excel</button>
                 </div>
             </div>
         </div>
     </div>
     @push('scripts')
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
-
         <script>
-            document.getElementById('export-to-excel').addEventListener('click', function() {
-                var table = document.getElementById('report-table');
-                var wb = XLSX.utils.table_to_book(table);
-                XLSX.writeFile(wb, 'table-export.xlsx');
-            });
-
             $(document).ready(function () {
                 function createTable(data) {
                     // select table inside div
