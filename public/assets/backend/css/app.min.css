@@ -1895,7 +1895,7 @@ body {
 #sidebar-menu > ul > li > a:active, #sidebar-menu > ul > li > a:hover {
     background-color: var(--secondary);
 }
-#sidebar-menu .menuitem-active .active{
+#sidebar-menu li .active{
     background-color: var(--secondary);
 }
 
