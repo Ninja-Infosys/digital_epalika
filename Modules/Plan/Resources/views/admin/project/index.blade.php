@@ -96,9 +96,11 @@
                                     <select name="is_contracted"
                                             id="is_contracted" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>भएको
+                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>
+                                            भएको
                                         </option>
-                                        <option value="0" {{request('is_contracted')==0 ? 'selected' : ''}}>नभएको
+                                        <option value="0" {{request('is_contracted')=="0" ? 'selected' : ''}}>
+                                            नभएको
                                         </option>
                                     </select>
                                 </div>
@@ -168,12 +170,12 @@
                                 <td>रू. {{$project->allocated_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
                                 <td>
-                                    <div class="btn-group mb-2 dropstart">
+                                    <div class="btn-group dropstart">
                                         <a href="{{route('admin.plan.project.show',$project)}}"
                                            class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"> विवरण </i>
                                         </a>
-                                        <button type="button" class="btn btn-info waves-effect waves-light dropdown-toggle"
+                                        <button type="button" class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">
                                             <i class="fa fa-angle-down"></i>
