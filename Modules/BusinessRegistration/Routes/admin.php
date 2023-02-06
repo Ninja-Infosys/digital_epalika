@@ -11,6 +11,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionSubCate
 use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
+use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -27,8 +28,9 @@ Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [Busine
 Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
 Route::get('businessDetail/{businessDetail}/print',[BusinessRegistrationController::class,'print'])->name('businessRegistration.print');
-Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
 
+Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
+Route::resource('businessDetail.businessRenew', BusinessRenewController::class)->names('businessRegistration.businessRenew');
 Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {
     Route::get('dateWise', 'dateWise')->name('dateWise');
     Route::get('businessNature', 'businessNature')->name('businessNature');

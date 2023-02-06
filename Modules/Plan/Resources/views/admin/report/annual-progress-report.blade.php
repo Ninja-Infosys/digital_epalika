@@ -24,13 +24,17 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">वार्षिक प्रगति प्रतिवेदन रिपोर्ट</h4>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed"
+                        <div class="d-flex gap-1 justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
                                     type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                                <i class="fa fa-filter"> फिल्टर</i>
                             </button>
+                            <x-html-to-excel
+                                file-name="वार्षिक प्रगति प्रतिवेदन रिपोर्ट"
+                                target-table="report-table"
+                            />
                             <x-print-button
                                 target-element="report-content"
                                 title="वार्षिक प्रगति प्रतिवेदन रिपोर्ट"
@@ -217,9 +221,6 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
         <script>
             $(document).ready(function () {

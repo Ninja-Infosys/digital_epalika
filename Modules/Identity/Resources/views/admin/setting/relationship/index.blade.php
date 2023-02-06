@@ -23,18 +23,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नाता सूची</h4>
-                        @can('relationship_create')
-                            <a href="{{route('identity.admin.setting.relationship.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">नाताहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('relationship_create')
+                                <a href="{{route('identity.admin.setting.relationship.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                    <table class="table table-sm table-striped table-bordered">
                         <thead>
                         <tr>
                             <th scope="col">क्र.सं.</th>
@@ -69,6 +70,9 @@
                                 </td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

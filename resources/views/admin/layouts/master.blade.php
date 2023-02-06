@@ -32,11 +32,8 @@
 <body>
 <!-- Begin page -->
 <div id="wrapper">
-
     @include('admin.layouts.header')
-
     @include('admin.layouts.side_nav')
-
     <div class="content-page">
         <div class="content">
             <!-- Start Content-->
@@ -46,8 +43,6 @@
             <!-- container -->
             @include('inc.floating-menu')
         </div>
-        <!-- content -->
-        <!-- Footer Start -->
         <footer class="footer">
             <div class="container-fluid text-center">
                 {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
@@ -56,14 +51,8 @@
         <!-- end Footer -->
     </div>
 </div>
-<!-- END wrapper -->
-
-<!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
-
-<!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-<!-- App js-->
 <script src="{{asset('assets/backend/libs/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
 
@@ -73,7 +62,6 @@
 @include('sweetalert::alert')
 
 @stack('scripts')
-<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 @livewireScripts
 <script>
     const validationUrl = '{{ route("admin.pin.check-pin") }}';
@@ -81,5 +69,6 @@
 
 <script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}"></script>
 <script src="{{asset('js/newRelic.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>
 </html>

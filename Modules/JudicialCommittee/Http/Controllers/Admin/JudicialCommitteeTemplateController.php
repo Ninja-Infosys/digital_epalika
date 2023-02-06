@@ -62,7 +62,7 @@ class JudicialCommitteeTemplateController extends Controller
         Cache::forget('judicialCommitteeTemplates');
 
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
+        return redirect(route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index'));
     }
 
     public function destroy(JudicialCommitteeTemplate $judicialCommitteeTemplate)

@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मुद्दा प्रकृति सूची</h4>
+                        <h4 class="header-title">मुद्दा प्रकृतिहरु</h4>
                         @can('lawsuitNature_create')
-                            <a href="{{route('admin.judicialCommittee.lawsuitNature.create')}}"
+                            <a href="{{route('admin.judicialCommittee.setting.lawsuitNature.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -53,7 +53,7 @@
                                     <td>{{$lawSuitNature->code}}</td>
                                     <td>
                                         @can('lawsuitNature_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.lawsuitNature.edit',$lawSuitNature)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.setting.lawsuitNature.edit',$lawSuitNature)}}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
@@ -61,7 +61,7 @@
                                         @endcan
                                         @can('lawsuitNature_delete')
                                             <form
-                                                action="{{route('admin.judicialCommittee.lawsuitNature.destroy',$lawSuitNature)}}"
+                                                action="{{route('admin.judicialCommittee.setting.lawsuitNature.destroy',$lawSuitNature)}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')

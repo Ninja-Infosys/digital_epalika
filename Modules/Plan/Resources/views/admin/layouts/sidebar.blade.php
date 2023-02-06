@@ -17,7 +17,7 @@
     <a href="#sidebarPlanReport"
        {{request()->is('admin/plan/report*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-file"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>

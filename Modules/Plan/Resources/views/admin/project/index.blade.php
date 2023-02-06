@@ -96,9 +96,11 @@
                                     <select name="is_contracted"
                                             id="is_contracted" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>भएको
+                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>
+                                            भएको
                                         </option>
-                                        <option value="0" {{request('is_contracted')==0 ? 'selected' : ''}}>नभएको
+                                        <option value="0" {{request('is_contracted')=="0" ? 'selected' : ''}}>
+                                            नभएको
                                         </option>
                                     </select>
                                 </div>
@@ -114,27 +116,25 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना/कार्यक्रमहरु</h4>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed"
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">योजना/कार्यक्रमहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
                                     type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                                <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             @can('project_create')
-                                <a href="{{route('admin.plan.project.create')}}"
-                                   class="btn btn-sm btn-outline-primary">
-                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                                </a>
+                                <a href="{{route('admin.plan.project.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    @includeIf('inc.filter_form')
-                    <table class="table table-bordered table-sm table-striped mt-2 table-hover">
+                    <table class="table table-bordered table-sm table-striped">
                         <thead>
                         <tr>
                             <th>क्र.स</th>
@@ -170,13 +170,12 @@
                                 <td>रू. {{$project->allocated_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
                                 <td>
-                                    <div class="btn-group dropdown mb-2">
+                                    <div class="btn-group dropstart">
                                         <a href="{{route('admin.plan.project.show',$project)}}"
                                            class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"> विवरण </i>
                                         </a>
-                                        <button type="button"
-                                                class="btn btn-sm btn-info dropdown-toggle dropdown-toggle-split"
+                                        <button type="button" class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">
                                             <i class="fa fa-angle-down"></i>

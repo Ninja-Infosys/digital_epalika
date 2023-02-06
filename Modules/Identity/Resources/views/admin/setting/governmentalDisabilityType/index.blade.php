@@ -10,11 +10,11 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">सरकारी असक्षमता प्रकार</li>
-                        <li class="breadcrumb-item active">सरकारी असक्षमता प्रकार</li>
+                        <li class="breadcrumb-item">सेटिङ</li>
+                        <li class="breadcrumb-item active">नेपाल सरकारको परिभाषा र बर्गिकरण अपाङ्गताको प्रकार</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सरकारी असक्षमता प्रकार</h4>
+                <h4 class="page-title">नेपाल सरकारको परिभाषा र बर्गिकरण अपाङ्गताको प्रकार</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सरकारी असक्षमता प्रकार सूची</h4>
+                        <h4 class="header-title">नेपाल सरकारको परिभाषा र बर्गिकरण अपाङ्गताको प्रकारहरु</h4>
                         <a href="{{route('identity.admin.setting.governmentalDisabilityType.create')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                    <table class="table table-sm table-striped table-bordered">
                         <thead>
                         <tr>
                             <th scope="col">क्र.सं.</th>
@@ -61,7 +61,9 @@
                                 </td>
                             </tr>
                         @empty
-
+                            <tr>
+                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

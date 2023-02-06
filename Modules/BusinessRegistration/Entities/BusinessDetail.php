@@ -33,6 +33,7 @@ class BusinessDetail extends Model
 //    use BusinessDetailTemplateTrait;
 
     protected $fillable = [
+        'reg_no',
         'submission_no',
         'fiscal_year_id',
         'registration_no',
@@ -146,6 +147,10 @@ class BusinessDetail extends Model
         return $this->morphMany(File::class, 'model');
     }
 
+    public function businessRenew(): HasMany
+    {
+        return $this->hasMany(BusinessRenew::class);
+    }
 
 
     public function rentAgreement(): Attribute

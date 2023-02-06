@@ -7,14 +7,14 @@
 
 <li class="{{request()->is('admin/listregistration/listRegistration*') ? 'active' : ''}}">
     <a href="{{route('admin.listRegistrations.listRegistration.index')}}">
-        <i class="fa fa-file-contract"></i>
+        <i class="fa fa-clipboard-check"></i>
         <span>मौजुदा सुची दर्ता</span>
     </a>
 </li>
 
 <li class="{{request()->is('admin/listregistration/report*') ? 'active' : ''}}">
     <a href="{{route('admin.listRegistrations.report.index')}}">
-        <i class="fa fa-file"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
     </a>
 </li>

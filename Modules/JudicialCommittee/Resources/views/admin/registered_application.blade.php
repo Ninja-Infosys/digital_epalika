@@ -23,14 +23,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">दर्ता भएका उजुरी</h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">दर्ता भएका उजुरीहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-md">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 mt-3 table-bordered">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

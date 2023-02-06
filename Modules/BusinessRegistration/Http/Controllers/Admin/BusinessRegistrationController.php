@@ -12,7 +12,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
+use Modules\BusinessRegistration\Entities\BusinessNature;
+use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
@@ -27,13 +30,31 @@ class BusinessRegistrationController extends Controller
         $this->checkAuthorization('businessRegistration_access');
         $businessDetails = BusinessDetail::with('partners', 'partners.localBody', 'localBody', 'businessNature')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
+                $q->whereLike(['name', 'submission_no', 'registration_no'], request('search'));
+            }
+            if (!empty(request('object_transaction_id'))) {
+                $q->where('object_transaction_id', request('object_transaction_id'));
+            }
+            if (!empty(request('business_nature_id'))) {
+                $q->where('business_nature_id', request('business_nature_id'));
+            }
+            if (!empty(request('to_date'))) {
+                $q->whereDate('registration_date_ne', '>=', request('to_date'));
+            }
+            if (!empty(request('from_date'))) {
+                $q->whereDate('registration_date_ne', '<=', request('from_date'));
+            }
+            if (!empty(request('registration_no'))) {
+                $q->where('registration_no', request('registration_no'));
             }
         })->latest()
             ->paginate(15);
 
 
-        return view('businessregistration::admin.businessRegistration.index', compact('businessDetails'));
+        $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        $businessNatures = BusinessNature::all();
+
+        return view('businessregistration::admin.businessRegistration.index', compact('businessDetails', 'objectTransactions', 'businessNatures'));
     }
 
     public function show(BusinessDetail $businessDetail): Factory|View|Application
@@ -56,21 +77,22 @@ class BusinessRegistrationController extends Controller
             'bill_no' => ['required'],
             'bill_date_bs' => ['required'],
             'bill_date_ad' => ['required'],
-            'other_file' => ['nullable','mimes:png,jpg,jpeg'],
+            'other_file' => ['nullable', 'mimes:png,jpg,jpeg'],
             'amount' => ['required'],
             'taxpayer_number' => ['nullable'],
         ]);
 
 
-        DB::transaction(function () use ($businessDetail, $data,$request) {
+        DB::transaction(function () use ($businessDetail, $data, $request) {
             if (empty($businessDetail->registration_no)) {
-                $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
-                $registrationNo = BusinessDetail::whereFiscalYearId($fiscal_year)
-                        ->max('registration_no') + 1;
+                $reg_no = BusinessDetail::whereFiscalYearId(\officeSetting()->fiscal_year_id)
+                        ->max('reg_no') + 1;
+
 
                 $data = array_merge($data, [
-                    'fiscal_year_id' => $fiscal_year,
-                    'registration_no' => $registrationNo,
+                    'reg_no' => $reg_no,
+                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                    'registration_no' => 'BR-' . officeSetting()->fiscalYear->title . '-' . Str::padLeft($reg_no,4,0),
                     'registration_date_en' => today()->toDateString(),
                     'registration_date_ne' => $this->get_today_nepali_date()
                 ]);
@@ -137,7 +159,6 @@ class BusinessRegistrationController extends Controller
     }
 
 
-
     public function print(BusinessDetail $businessDetail)
     {
         $officeHeaders = OfficeHeader::get();
@@ -146,7 +167,7 @@ class BusinessRegistrationController extends Controller
             }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
         );
 
-        $view = (string)\Illuminate\Support\Facades\View::make('businessregistration::admin.businessRegistration.print', compact('businessDetail','officeHeaders'));
+        $view = (string)\Illuminate\Support\Facades\View::make('businessregistration::admin.businessRegistration.print', compact('businessDetail', 'officeHeaders'));
         return response()->json([
             'view' => $view,
         ]);

@@ -10,11 +10,11 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">कोड रङ</li>
-                        <li class="breadcrumb-item active">कोड रङ</li>
+                        <li class="breadcrumb-item">सेटिङ</li>
+                        <li class="breadcrumb-item active">रंग कोड सेटअप</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कोड रङ </h4>
+                <h4 class="page-title">रंग कोड सेटअप</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अपांगताको कारण सूची</h4>
+                        <h4 class="header-title">रंग कोडहरु</h4>
                         @can('disabilityReason_create')
                             <a href="{{route('identity.admin.setting.cardColor.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                    <table class="table table-sm table-striped table-bordered">
                         <thead>
                         <tr>
                             <th scope="col">क्र.सं.</th>
@@ -72,6 +72,9 @@
                                 </td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

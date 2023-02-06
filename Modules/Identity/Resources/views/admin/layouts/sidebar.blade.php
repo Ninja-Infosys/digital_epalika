@@ -9,7 +9,7 @@
     <a href="#sidebarDisabilityIdentityCard"
        {{request()->is('admin/identity/disability*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-file"></i>
+        <i class="fa fa-clipboard"></i>
         <span>निवेदन</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
@@ -30,19 +30,32 @@
         </ul>
     </div>
 </li>
-<li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
-    <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
-        <i class="fa fa-file"></i>
-        <span> अपाङ्गता परिचयपत्र रिपोर्ट</span>
+<li class="{{request()->is('admin/identity/reports*') ? 'active' : ''}}">
+    <a href="#sidebarIdentityReport"
+       {{request()->is('admin/identity/reports*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-clipboard-list"></i>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/identity/reports*') ? 'show' : ''}}"
+         id="sidebarIdentityReport">
+        <ul class="nav-second-level">
+                <li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
+                        <span> अपाङ्गता परिचयपत्र रिपोर्ट</span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.seniorCitizenReport.index')}}">
+                        <span>जेष्ठ नागरिक  रिपोर्ट</span>
+                    </a>
+                </li>
+        </ul>
+    </div>
 </li>
-<li class="{{request()->is('admin/identity/seniorCitizenReport') ? 'active' : ''}}">
-    <a href="{{route('identity.admin.seniorCitizenReport.index')}}">
-        <i class="fa fa-file"></i>
-        <span>जेष्ठ नागरिक  रिपोर्ट</span>
-    </a>
-</li>
-
 <li class="{{request()->is('admin/identity/setting*') ? 'active' : ''}}">
     <a href="#sidebarIdentitySetting"
        {{request()->is('admin/identity/setting*') ? 'aria-expanded=true' : ''}}
@@ -87,7 +100,7 @@
             @can('cardColor_access')
                 <li class="{{request()->is('admin/identity/setting/cardColor') ? 'active' : ''}}">
                     <a href="{{route('identity.admin.setting.cardColor.index')}}">
-                        <span>कोड रङ</span>
+                        <span>रंग कोड सेटअप</span>
                     </a>
                 </li>
             @endcan

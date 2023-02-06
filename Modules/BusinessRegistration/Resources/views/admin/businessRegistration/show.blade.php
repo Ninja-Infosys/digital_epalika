@@ -451,7 +451,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                            @if(empty($businessDetail->taxpayer_number))
+                            @if(empty($businessDetail->registration_no))
                                 <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
                                       method="post"
                                       enctype="multipart/form-data">
@@ -461,9 +461,9 @@
                                             <div class="col-md-6 mb-2">
                                                 <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     name="taxpayer_number"
-                                                    step="0.01"
+
                                                     placeholder="करदाता नम्बर "
                                                     value="{{old('taxpayer_number',$businessDetail->taxpayer_number??'')}}"
                                                     class="form-control @error('taxpayer_number') is-invalid @enderror"
