@@ -123,7 +123,7 @@
                         <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
                              height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                        <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
                              height="40"/>
                     @endif
                 </span>
