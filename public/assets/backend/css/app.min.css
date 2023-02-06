@@ -2564,7 +2564,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 }
 
 .navbar-custom {
-    background-color: #E8E9EB;
+    background-color: #FFFFFF;
     -webkit-box-shadow: var(--ct-box-shadow);
     box-shadow: var(--ct-box-shadow);
     padding: 0 10px 0 0;
