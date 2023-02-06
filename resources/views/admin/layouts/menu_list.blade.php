@@ -99,7 +99,7 @@
             <div class="col-md-3 border">
                 <a href="{{route('admin.recommendation.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/sifarish-parnali.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/recommendation.png')}}"
                              height="50" width="50" alt="">
                         <h5 class="p-1 text-white">शिफारिस प्रणाली</h5>
                     </div>
@@ -121,7 +121,7 @@
             <div class="col-md-3 border">
                 <a href="{{route('admin.taskManagement.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/task.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/taskmanagement.png')}}"
                              height="50" width="50" alt="">
                         <h5 class="p-1 text-white">कार्य व्यवस्थापन</h5>
                     </div>
@@ -143,7 +143,7 @@
             <div class="col-md-3 border">
                 <a href="{{route('admin.judicialCommittee.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/nyayik.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/judicialcommittee.png')}}"
                              height="50" width="50" alt="">
                         <h5 class="p-1 text-white">न्यायिक समिति</h5>
                     </div>

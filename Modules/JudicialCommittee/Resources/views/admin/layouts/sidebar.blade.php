@@ -46,16 +46,24 @@
         id="sidebarJudicialCommitteeSetting">
         <ul class="nav-second-level">
             @can('lawsuitNature_access')
-                <li class="{{ request()->is('admin/judicialcommittee/setting/lawsuitNature') ? 'active' : '' }}">
-                    <a href="{{ route('admin.judicialCommittee.lawsuitNature.index') }}">
+                <li class="{{ request()->routeIs('admin.judicialCommittee.setting.lawsuitNature.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.judicialCommittee.setting.lawsuitNature.index') }}">
                         <span> मुद्दा प्रकृति </span>
+                    </a>
+                </li>
+            @endcan
+            @can('complaintSubject_access')
+                <li
+                    class="{{ request()->routeIs('admin.judicialCommittee.setting.complaintSubject.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.judicialCommittee.setting.complaintSubject.index') }}">
+                        <span> उजुरी विषय </span>
                     </a>
                 </li>
             @endcan
             @can('judicialCommitteeTemplate_access')
                 <li
-                    class="{{ request()->is('admin/judicialcommittee/setting/judicialCommitteeTemplate') ? 'active' : '' }}">
-                    <a href="{{ route('admin.judicialCommittee.judicialCommitteeTemplate.index') }}">
+                    class="{{ request()->routeIs('admin.judicialCommittee.setting.judicialCommitteeTemplate.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index') }}">
                         <span> टेम्प्लेट </span>
                     </a>
                 </li>

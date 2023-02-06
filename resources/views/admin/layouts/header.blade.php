@@ -116,7 +116,16 @@
             <a class="logo logo-light text-center"
                data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
                 <span class="logo-sm">
-                                <img src="https://coderthemes.com/ubold/layouts/default/assets/images/logo-sm.png" alt="" height="22">
+                    @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
+                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                             height="40"/>
+                    @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
+                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                             height="40"/>
+                    @else
+                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                             height="40"/>
+                    @endif
                 </span>
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))

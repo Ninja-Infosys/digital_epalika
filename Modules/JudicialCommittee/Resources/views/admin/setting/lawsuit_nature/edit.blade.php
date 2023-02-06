@@ -24,14 +24,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मुद्दा प्रकृति सम्पादन गर्नुहोस् </h4>
-                        <a href="{{route('admin.judicialCommittee.lawsuitNature.index')}}"
+                        <a href="{{route('admin.judicialCommittee.setting.lawsuitNature.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> मुद्दा प्रकृति सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.judicialCommittee.lawsuitNature.update',$lawsuitNature)}}" method="post">
+                    <form action="{{route('admin.judicialCommittee.setting.lawsuitNature.update',$lawsuitNature)}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">

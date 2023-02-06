@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">मुद्दा प्रकृति</li>
+                        <li class="breadcrumb-item active">उजुरी विषय</li>
                     </ol>
                 </div>
-                <h4 class="page-title">मुद्दा प्रकृति</h4>
+                <h4 class="page-title">उजुरी विषय</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मुद्दा प्रकृतिहरु</h4>
-                        @can('lawsuitNature_create')
-                            <a href="{{route('admin.judicialCommittee.setting.lawsuitNature.create')}}"
+                        <h4 class="header-title">उजुरी विषय सुची</h4>
+                        @can('complaintSubject_create')
+                            <a href="{{route('admin.judicialCommittee.setting.complaintSubject.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -38,30 +38,28 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शीर्षक</th>
-                                <th>शीर्षक_en</th>
-                                <th>कोड</th>
+                                <th>विषय</th>
+                                <th>मुद्दा प्रकृति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($lawSuitNatures as $lawSuitNature)
+                            @forelse($complaintSubjects as $complaintSubject)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$lawSuitNature->title}}</td>
-                                    <td>{{$lawSuitNature->title_en}}</td>
-                                    <td>{{$lawSuitNature->code}}</td>
+                                    <td>{{$complaintSubject->subject}}</td>
+                                    <td>{{$complaintSubject->lawsuitNature->title??''}}</td>
                                     <td>
-                                        @can('lawsuitNature_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.setting.lawsuitNature.edit',$lawSuitNature)}}"
+                                        @can('complaintSubject_edit')
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.setting.complaintSubject.edit',$complaintSubject)}}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('lawsuitNature_delete')
+                                        @can('complaintSubject_delete')
                                             <form
-                                                action="{{route('admin.judicialCommittee.setting.lawsuitNature.destroy',$lawSuitNature)}}"
+                                                action="{{route('admin.judicialCommittee.setting.complaintSubject.destroy',$complaintSubject)}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
@@ -75,7 +73,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
