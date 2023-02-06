@@ -5,6 +5,7 @@ use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintDecisionController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintLogController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintSubjectController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateCompensationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateSheetController;
@@ -28,9 +29,10 @@ Route::resource('complaintApplication/{complaintApplication}/writtenAnswer', Wri
 Route::resource('complaintApplication/{complaintApplication}/complaintDecision', ComplaintDecisionController::class)->names('complaintApplication.complaintDecision');
 Route::get('complaintApplication/{complaintApplication}/complaintLog',[ComplaintLogController::class,'index'])->name('complaintApplication.complaintLog.index');
 
-Route::prefix('setting')->group(function () {
+Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('lawsuitNature', LawsuitNatureController::class);
     Route::resource('judicialCommitteeTemplate', JudicialCommitteeTemplateController::class);
+    Route::resource('complaintSubject', ComplaintSubjectController::class);
 });
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {

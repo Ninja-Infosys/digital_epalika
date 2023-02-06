@@ -39,9 +39,6 @@ class RegistrationForm extends Component
     public $businessNatures = [];
     public $partners = [];
     public $registeredBusinesses = [];
-
-
-
     public array $form = [
         //first step
         'name' => null,

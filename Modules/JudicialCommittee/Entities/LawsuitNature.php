@@ -30,4 +30,9 @@ class LawsuitNature extends Model
     {
         return $this->hasMany(ComplaintApplication::class);
     }
+
+    public function complaintSubjects(): HasMany
+    {
+        return $this->hasMany(ComplaintSubject::class);
+    }
 }

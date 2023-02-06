@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.judicialCommittee.judicialCommitteeTemplate.index') }}">
+                            <a href="{{ route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index') }}">
                                 टेम्प्लेट
                             </a>
                         </li>
@@ -29,7 +29,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट विवरण अद्यावधिक गर्नुहोस्</h4>
-                        <a href="{{ route('admin.judicialCommittee.judicialCommitteeTemplate.index') }}"
+                        <a href="{{ route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index') }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{ route('admin.judicialCommittee.judicialCommitteeTemplate.update', $judicialCommitteeTemplate) }}"
+                        action="{{ route('admin.judicialCommittee.setting.judicialCommitteeTemplate.update', $judicialCommitteeTemplate) }}"
                         method="post">
                         @csrf
                         @method('put')

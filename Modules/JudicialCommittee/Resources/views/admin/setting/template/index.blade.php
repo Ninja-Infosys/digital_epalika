@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेटहरु</h4>
                         @can('judicialCommitteeTemplate_create')
-                            <a href="{{route('admin.judicialCommittee.judicialCommitteeTemplate.create')}}"
+                            <a href="{{route('admin.judicialCommittee.setting.judicialCommitteeTemplate.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
@@ -52,7 +52,7 @@
                                     <td>{{$judicialCommitteeTemplate->type->label()}}</td>
                                     <td>
                                         @can('judicialCommitteeTemplate_edit')
-                                            <a href="{{route('admin.judicialCommittee.judicialCommitteeTemplate.edit',$judicialCommitteeTemplate)}}"
+                                            <a href="{{route('admin.judicialCommittee.setting.judicialCommitteeTemplate.edit',$judicialCommitteeTemplate)}}"
                                                class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>

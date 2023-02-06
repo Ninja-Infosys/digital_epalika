@@ -50,7 +50,7 @@
                                 <th>#</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-nowrap">
                             @forelse($complaintApplications as $complaintApplication)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
