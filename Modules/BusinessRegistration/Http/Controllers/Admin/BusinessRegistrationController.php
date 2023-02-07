@@ -87,8 +87,6 @@ class BusinessRegistrationController extends Controller
             if (empty($businessDetail->registration_no)) {
                 $reg_no = BusinessDetail::whereFiscalYearId(\officeSetting()->fiscal_year_id)
                         ->max('reg_no') + 1;
-
-
                 $data = array_merge($data, [
                     'reg_no' => $reg_no,
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,

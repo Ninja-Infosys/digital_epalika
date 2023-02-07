@@ -112,17 +112,15 @@
                                 <th rowspan="2">क्र.स</th>
                                 <th rowspan="2">दर्ता नं</th>
                                 <th rowspan="2">दर्ता मिति</th>
-                                <th colspan="3">व्यवसायी</th>
-                                <th colspan="3">व्यवसाय</th>
+                                <th colspan="2">व्यवसायी</th>
+                                <th colspan="2">व्यवसाय</th>
                                 <th rowspan="2">#</th>
                             </tr>
                             <tr>
                                 <th>नाम</th>
                                 <th>ठेगाना</th>
-                                <th>फोन</th>
                                 <th>नाम</th>
                                 <th>ठेगाना</th>
-                                <th>पूँजी लगानी रु.:</th>
                             </tr>
                             </thead>
                             <tbody class="text-nowrap text-center">
@@ -136,15 +134,11 @@
                                         <span>{{$businessDetail->partners->first()?->localBody->local_body??''}}
                                 - {{$businessDetail->partners->first()?->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$businessDetail->partners->first()?->phone ?? ''}}</td>
-
                                     <td>{{$businessDetail->name ?? ''}}</td>
                                     <td>
                                         <span>{{$businessDetail->localBody->local_body??''}}
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-
-                                    <td>{{$businessDetail->investment ?? ''}}</td>
                                     <td>
                                         @can('businessRegistration_access')
                                             <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
