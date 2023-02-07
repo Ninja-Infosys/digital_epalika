@@ -21,7 +21,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="collapse mb-2" id="collapseFilterForm">
@@ -113,17 +112,15 @@
                                 <th rowspan="2">क्र.स</th>
                                 <th rowspan="2">दर्ता नं</th>
                                 <th rowspan="2">दर्ता मिति</th>
-                                <th colspan="3">व्यवसायी</th>
-                                <th colspan="3">व्यवसाय</th>
+                                <th colspan="2">व्यवसायी</th>
+                                <th colspan="2">व्यवसाय</th>
                                 <th rowspan="2">#</th>
                             </tr>
                             <tr>
                                 <th>नाम</th>
                                 <th>ठेगाना</th>
-                                <th>फोन</th>
                                 <th>नाम</th>
                                 <th>ठेगाना</th>
-                                <th>पूँजी लगानी रु.:</th>
                             </tr>
                             </thead>
                             <tbody class="text-nowrap text-center">
@@ -137,15 +134,11 @@
                                         <span>{{$businessDetail->partners->first()?->localBody->local_body??''}}
                                 - {{$businessDetail->partners->first()?->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$businessDetail->partners->first()?->phone ?? ''}}</td>
-
                                     <td>{{$businessDetail->name ?? ''}}</td>
                                     <td>
                                         <span>{{$businessDetail->localBody->local_body??''}}
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-
-                                    <td>{{$businessDetail->investment ?? ''}}</td>
                                     <td>
                                         @can('businessRegistration_access')
                                             <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
@@ -161,9 +154,8 @@
                                         @endcan
                                         @if(!is_null($businessDetail->registration_no))
                                             @can('businessRegistration_access')
-                                                <a data-bs-type="edit" href="javascript:void(0)" title="प्रिन्ट गर्नुहोस"
-                                                   route_action="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}"
-                                                   class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}} printDetail">
+                                                <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}" title="प्रिन्ट गर्नुहोस"
+                                                   class="btn btn-xs btn-outline-warning">
                                                     <i class="fa fa-print"></i>
                                                 </a>
                                             @endcan
@@ -184,26 +176,5 @@
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        <script>
-            $(".printDetail").on("click", function (e) {
-                $.ajax({
-                    method: "GET",
-                    url: $(this).attr("route_action"),
-                    success: function (resp) {
-                        var print_area = window.open();
-                        print_area.document.write(resp.view);
-                        print_area.document.close();
-                        print_area.focus();
-                        print_area.print();
-                        print_area.close();
-                    }, error: function () {
-                        alert("Something Went Wrong");
-                    }
-                });
-            });
-        </script>
-    @endpush
 @endsection
 

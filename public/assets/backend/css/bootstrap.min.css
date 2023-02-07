@@ -14429,3 +14429,13 @@ textarea.form-control-lg {
 .dashed-bottom{
     border-bottom: 2px dashed var(--ct-secondary);
 }
+.certificate-title h3{
+    padding: 6px;
+    color: #FF0000;
+    border: 2px solid #FF0000;
+    border-radius: 0 22px;
+}
+.certificate{
+    border: 10px solid transparent;
+    padding: 15px;
+}
