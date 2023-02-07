@@ -62,7 +62,7 @@ class Partner extends Model
     public function photo(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Storage::url($value),
+            get: fn($value) =>  !empty($value) ? Storage::url($value) : asset("assets/backend/images/user_icon.jpg"),
             set: fn($value) => (!empty($value) && !is_string($value))
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null

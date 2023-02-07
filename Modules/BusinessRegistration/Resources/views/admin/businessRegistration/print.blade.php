@@ -28,14 +28,17 @@
                     <h4 class="header-title mb-0">दर्ता भएका व्यवसायहरु</h4>
                     <x-print-button
                         target-element="print"
-                        title="Test"
+                        title="{{$businessDetail-> registration_no}}"
                     />
                 </div>
             </div>
             <div class="card-body">
-                <div id="print" class="p-1">
-                    <div class="lh-lg font-15">
+                <div id="print" class="certificate" style="border-image: url({{asset('assets/backend/border.png')}}) 30 stretch">
+                    <div class="lh-lg font-15 position-relative">
                         {!! letterHead() !!}
+                        <div class="position-absolute top-0 end-0">
+                            <img src="{{$businessDetail->partners->first()?->photo ?? ''}}" height="80" width="90" alt=""/>
+                        </div>
                         <div class="d-flex justify-content-between mt-3">
                             <div>
                                 <p><strong>करदाता नं :</strong> {{$businessDetail->taxpayer_number}}</p>
