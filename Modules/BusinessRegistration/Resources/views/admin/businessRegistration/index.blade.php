@@ -21,7 +21,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="collapse mb-2" id="collapseFilterForm">
@@ -161,9 +160,8 @@
                                         @endcan
                                         @if(!is_null($businessDetail->registration_no))
                                             @can('businessRegistration_access')
-                                                <a data-bs-type="edit" href="javascript:void(0)" title="प्रिन्ट गर्नुहोस"
-                                                   route_action="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}"
-                                                   class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}} printDetail">
+                                                <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}" title="प्रिन्ट गर्नुहोस"
+                                                   class="btn btn-xs btn-outline-warning">
                                                     <i class="fa fa-print"></i>
                                                 </a>
                                             @endcan
@@ -184,26 +182,5 @@
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        <script>
-            $(".printDetail").on("click", function (e) {
-                $.ajax({
-                    method: "GET",
-                    url: $(this).attr("route_action"),
-                    success: function (resp) {
-                        var print_area = window.open();
-                        print_area.document.write(resp.view);
-                        print_area.document.close();
-                        print_area.focus();
-                        print_area.print();
-                        print_area.close();
-                    }, error: function () {
-                        alert("Something Went Wrong");
-                    }
-                });
-            });
-        </script>
-    @endpush
 @endsection
 

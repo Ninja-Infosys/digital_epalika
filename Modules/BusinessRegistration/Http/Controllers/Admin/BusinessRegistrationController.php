@@ -167,10 +167,7 @@ class BusinessRegistrationController extends Controller
             }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
         );
 
-        $view = (string)\Illuminate\Support\Facades\View::make('businessregistration::admin.businessRegistration.print', compact('businessDetail', 'officeHeaders'));
-        return response()->json([
-            'view' => $view,
-        ]);
+        return view('businessregistration::admin.businessRegistration.print', compact('businessDetail', 'officeHeaders'));
 
     }
 }

@@ -1,132 +1,100 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        @font-face {
-            font-family: 'Kalimati';
-            font-style: normal;
-            src: url({{asset('assets/fonts/Kalimati.otf')}});
-        }
-
-        * {
-            font-family: Kalimati;
-            font-weight: 300;
-        }
-
-
-        .row {
-
-        }
-
-        .col-md-6 {
-            float: left;
-            width: 50%;
-        }
-
-        .col-md-12 {
-            float: left;
-            width: 100%;
-        }
-
-        .col-md-3 {
-            float: left;
-            width: 25%;
-        }
-
-        p {
-            font-size: 20px;
-            line-height: 1.5;
-        }
-        span{
-            color: #0a53be;
-            border-bottom: 2px dotted blue;
-        }
-        .middle-part-line-height {
-            line-height: 1.8;
-        }
-        .left_image{
-            padding-left: 110px;
-            margin-top: 40px;
-        }
-        .right_image{
-            margin-top: 40px;
-            border: 1px solid black;
-        }
-        hr{
-            margin-top: 5px;
-        }
-    </style>
-</head>
-<body>
-<div style="background-image: url({{asset('assets/backend/back1.png')}}); padding: 0; background-repeat: no-repeat;background-size: 100%;height: 1400px;">
-    <div class="row" style="padding-top: 110px;">
-        <div class="col-md-3">
-            <img src="{{$officeSetting->logo_url}}" alt="logo" height="80" class="left_image">
-        </div>
-        <div class="col-md-6">
-            @foreach($officeHeaders as $officeHeader)
-                <p style="text-align: center;line-height: 0.7;font-weight: {{$officeHeader->font}}rem;color: {{$officeHeader->font_color}}">{{$officeHeader->title}}</p>
-            @endforeach
-        </div>
-        <div class="col-md-3">
-            <img src="{{$businessDetail->partners->first()?->photo ??''}}" class="right_image" alt="{{$businessDetail->partners->first()?->name??''}}" height="80" >
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">व्यवसाय
+                                दर्ता </a>
+                        </li>
+                        <li class="breadcrumb-item active">व्यवसाय दर्ता</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">व्यवसाय दर्ता </h4>
+            </div>
         </div>
     </div>
-    <div class="row" style="margin-bottom: 100px;">
-        <div class="col-md-12">
-            <h2 style="text-align: center;">व्यवसाय दर्ता प्रमाण-पत्र</h2><br>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="header-title mb-0">दर्ता भएका व्यवसायहरु</h4>
+                    <x-print-button
+                        target-element="print"
+                        title="Test"
+                    />
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="print" class="p-1">
+                    <div class="lh-lg font-15">
+                        {!! letterHead() !!}
+                        <div class="d-flex justify-content-between mt-3">
+                            <div>
+                                <p><strong>करदाता नं :</strong> {{$businessDetail->taxpayer_number}}</p>
+                                <p><strong>प्रमाणपत्र नं :</strong> {{$businessDetail-> registration_no}}</p>
+                            </div>
+                            <div class="certificate-title">
+                                <h3>व्यवसाय दर्ता प्रमाण-पत्र</h3>
+                            </div>
+                            <div>
+                                <p><strong>दर्ता मिति :</strong> {{$businessDetail->registration_date_ne}}</p>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p>जिल्ला <span
+                                    class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->district->district ??''}}</span>
+                                गा.बि.स./नगरपालिका <span
+                                    class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->localBody->local_body ??''}}</span>
+                                वडा नं. <span
+                                    class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->ward_no ??''}}</span>
+                                बस्ने श्री <span
+                                    class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->name ??''}}</span>
+                                लाई निम्न विवरण अनुसारको व्यवसाय दर्ता गरी यो प्रमाण-पत्र जारी गरिएको छ ।
+                            </p>
+                        </div>
+                        <div class="mt-2">
+                            <p><strong>व्यवसायको नाम :</strong> <span class="mx-1">{{$businessDetail->name}}</span></p>
+                            <p><strong>व्यवसाय रहने स्थान :</strong>
+                                <span class="mx-1">{{$businessDetail->localBody->local_body??''}}</span>
+                                वडा नं. <span class="mx-1">{{$businessDetail->ward_no}}</span>
+                                बाटोको नाम <span class="mx-1">{{$businessDetail->way}}</span></p>
+                            <p><strong>घर नं. .............. टोल</strong> <span class="mx-1">{{$businessDetail->tole}}</span></p>
+                            <p><strong>व्यवसाय रहने घर/जगाधानी नाम :</strong>
+                                <span class="mx-1">{{$businessDetail->house_owner_name}}</span></p>
+                            <p><strong>व्यवसायको प्रकृति :</strong>
+                                <span class="mx-1">{{$businessDetail->businessNature->title??''}}</span></p>
+                            <p><strong>विवरण :</strong> <span class="mx-1">{{$businessDetail->objectTransaction->title??''}}</span>
+                            </p>
+                            <p><strong>उद्देश्य : </strong><span class="mx-1">{{$businessDetail->purpose}}</span></p>
+                            <p><strong>परिचयपाटीको साइज : </strong><span class="mx-1">({{$businessDetail->length}} * {{$businessDetail->length}}) Sq.ft</span>
+                            </p>
+                            <p><strong>पुजीगत लगानी (रु मा) :</strong><span class="mx-1">{{$businessDetail->investment}}</span></p>
+
+                        </div>
+                        <div class="d-flex justify-content-between mt-5">
+                            <p class="dashed">करवालाको हस्ताक्षर</p>
+                            <p class="dashed">स्वीकृत गर्नेको हस्ताक्षर</p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="fw-bold">नोट:</p>
+                            <p>१. प्रत्येक आर्थिक वर्षको असार मसान्त भित्र नविकरण गराई सक्नु पर्नेछ । अन्यथा
+                                यस {{$officeSetting->localBody->local_body??''}}को प्रचलित आर्थिक एन बमोजिम कारवाही
+                                हुनेछ ।</p>
+                            <p>२. {{$officeSetting->localBody->local_body??''}}को कर ,शुल्क ,दस्तुर समयमा नबुझाएमा
+                                करदातालाई {{$officeSetting->localBody->local_body??''}}का तथा वडा समितिबाट दिएको
+                                सेवा, सुबिधा र सिफारिसमा समेत रोक्का गरिनेछ ।</p>
+                            <p>३. यो प्रमाण-पत्र गर्ने स्थानमा सबैले देख्ने गरी राख्नुपर्नेछ ।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row" style="padding: 0 110px 0 110px" >
-        <p>
-            करदाता नं : {{$businessDetail->taxpayer_number}} <br>
-            दर्ता मिति : {{$businessDetail->registration_date_ne}} <br>
-            प्रमाणपत्र नं : {{$businessDetail-> registration_no}}
-        </p>
-        <p class="middle-part-line-height">
-            जिल्ला <span>{{$businessDetail->partners->first()?->district->district ??''}}</span> गा.बि.स./नगरपालिका <span>{{$businessDetail->partners->first()?->localBody->local_body ??''}}</span> वडा
-            नं. <span>{{$businessDetail->partners->first()?->ward_no ??''}}</span> बस्ने श्री <span>{{$businessDetail->partners->first()?->name ??''}}</span> लाई निम्न विवरण अनुसारको व्यवसाय दर्ता गरी यो प्रमाण-पत्र जारी गरिएको छ |
-        </p>
-        <p class="middle-part-line-height">
-            व्यवसायको नाम : <span>{{$businessDetail->name}}</span> <br>
-            व्यवसाय रहने स्थान : <span>{{$businessDetail->localBody->local_body??''}}</span> वडा नं. <span>{{$businessDetail->ward_no}}</span> बाटोको नाम <span>{{$businessDetail->way}}</span> <br>
-            घर नं. .......... टोल <span>{{$businessDetail->tole}}</span> <br>
-            व्यवसाय रहने घर/जगाधानी नाम : <span>{{$businessDetail->house_owner_name}}</span> <br>
-            व्यवसायको प्रकृति : <span>{{$businessDetail->businessNature->title??''}}</span> <br>
-            विवरण : <span>{{$businessDetail->objectTransaction->title??''}}</span> <br>
-            उद्देश्य : <span>{{$businessDetail->purpose}}</span> <br>
-            परिचयपाटीको साइज : <span>({{$businessDetail->length}} * {{$businessDetail->length}}) Sq.ft</span> <br>
-            पुजीगत लगानी (रु मा) : <span>{{$businessDetail->investment}}</span>
-        </p>
-    </div>
-    <div class="row" style="padding: 0 110px 0 110px" >
-        <div class="col-md-6">
-            ..................... <br>
-            करवालाको हस्ताक्षर
-        </div>
-        <div class="col-md-6">
-            ..................... <br>
-            स्वीकृत गर्नेको हस्ताक्षर
-        </div>
-        <hr>
-    </div><div class="row" style="padding: 0 110px 0 110px" >
-       <ul>
-           <li>
-               प्रत्येक आर्थिक वर्षको असार मसान्त भित्र नविकरण गराई सक्नु पर्नेछ । अन्यथा यस {{$officeSetting->localBody->local_body??''}}को प्रचलित आर्थिक एन बमोजिम कारवाही हुनेछ ।
-           </li>
-           <li>
-               {{$officeSetting->localBody->local_body??''}}को कर ,शुल्क ,दस्तुर समयमा नबुझाएमा करदातालाई {{$officeSetting->localBody->local_body??''}}का तथा वडा समितिबाट दिएको सेवा, सुबिधा र सिफारिसमा समेत रोक्का गरिनेछ ।
-           </li>
-            <li>
-                यो प्रमाण-पत्र गर्ने स्थानमा सबैले देख्ने गरी राख्नुपर्नेछ ।
-            </li>
-       </ul>
-    </div>
-</div>
-</body>
-</html>
+@endsection
