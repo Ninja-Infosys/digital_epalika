@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,7 +42,7 @@ class OrganizationController extends Controller
             if (empty($organization->password) && $organization->is_active == 1) {
                 $url = URL::signedRoute('organization.invitation', $organization);
 
-                dispatch(new OrganizationRegisteredJob($organization, $url));
+                Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
             }
         });
 
