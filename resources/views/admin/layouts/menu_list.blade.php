@@ -1,10 +1,8 @@
 <div class="offcanvas-header">
-        <a href="{{route('admin.dashboard')}}" class="offcanvas-title"
-           id="offcanvasExampleLabel">
-            <h4>डिजिटल ई-पालिका</h4>
+        <a href="{{route('admin.dashboard')}}" class="offcanvas-title" id="offcanvasExampleLabel">
+            <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="35"/>
         </a>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-            aria-label="Close"></button>
+    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
 </div>
 
 <div class="offcanvas-body">
@@ -178,7 +176,7 @@
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/revenue.png')}}"
                              height="50" width="50" alt="">
-                        <h5 class="p-1 text-white">राजस्व</h5>
+                        <h5 class="p-1 text-white">राजस्व व्यवस्थापन</h5>
                     </div>
                 </a>
             </div>

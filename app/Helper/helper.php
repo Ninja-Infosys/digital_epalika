@@ -306,11 +306,15 @@ if (!function_exists('getFileIconClass')) {
 
 
 if (!function_exists('get_revenue_categories')) {
-    function get_revenue_categories(int $revenueCategoryId = null)
+    function get_revenue_categories(int $revenueCategoryId = null, bool $all = false)
     {
         $revenueCategories = Cache::rememberForever('revenueCategories', function () {
-            return RevenueCategory::all();
+            return RevenueCategory::with('revenueCategories')->get();
         });
+
+        if (!$all) {
+            $revenueCategories = $revenueCategories->whereNull('revenue_category_id');
+        }
 
         if ($revenueCategoryId !== null) {
             $revenueCategories = $revenueCategories->where('id', $revenueCategoryId)->first();

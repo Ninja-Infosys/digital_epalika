@@ -10,11 +10,7 @@
                     id="form.revenue_category_id">
                     <option value="">--- छान्नुहोस् ---</option>
                     @foreach($revenueCategories as $revenue_category)
-                        <option
-                            value="{{$revenue_category->id}}"
-                        >
-                            {{$revenue_category->title}}
-                        </option>
+                        @include('revenue::admin.setting.revenue.option' , ['revenueCategory' => $revenue_category])
                     @endforeach
                 </select>
                 @error('form.revenue_category_id')

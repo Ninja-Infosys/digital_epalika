@@ -1498,7 +1498,6 @@ input.form-control[type=color], input.form-control[type=range] {
 .modal-colored-header .btn-close {
     color: #fff !important
 }
-
 .nav-pills > li > a, .nav-tabs > li > a {
     color: var(--ct-gray-700);
     font-weight: 600
@@ -9852,4 +9851,7 @@ table[data-toggle=table] {
 }
 .top-heading{
     line-height: 60px;
+}
+.offcanvas-header{
+    background-color: var(--primary);
 }
