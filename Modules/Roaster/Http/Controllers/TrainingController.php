@@ -112,7 +112,7 @@ class TrainingController extends Controller
         return redirect(route('admin.roaster.training.index'));
     }
 
-    public function pdfExport(Training $training): JsonResponse
+    public function pdfExport(Training $training)
     {
         $training->load(['trainingTrainees.model' => function ($query) {
             $query->with('province', 'district', 'localBody', 'designation', 'department', 'ethnicity');
@@ -123,11 +123,7 @@ class TrainingController extends Controller
             $trainees = collect();
         }
 
-        $view = (string) View::make('roaster::admin.training.print_trainee', compact('training', 'trainees'));
-
-        return response()->json([
-            'view' => $view,
-        ]);
+        return view('roaster::admin.training.print_trainee', compact('training', 'trainees'));
     }
 
     public function setFormStatus(Training $training)

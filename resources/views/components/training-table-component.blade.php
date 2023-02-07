@@ -61,10 +61,10 @@
 
                         @endcan
 
-                    <a href="javascript:void(0)"
-                       class="btn btn-xs btn-outline-info printDetail"
+                    <a href="{{route('admin.roaster.training.pdfExport', $training)}}"
+                       class="btn btn-xs btn-outline-info"
                        data-toggle="tooltip"
-                       title="Print Trainees Detail" route_action="{{route('admin.roaster.training.pdfExport', $training)}}" >
+                       title="Print Trainees Detail">
                         <i class="fa fa-print"></i>
                     </a>
                         @can('training_delete')

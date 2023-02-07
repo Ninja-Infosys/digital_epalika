@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 use Modules\EMap\Entities\Organization;
 
 class OrganizationRegisteredJob implements ShouldQueue
@@ -30,6 +31,6 @@ class OrganizationRegisteredJob implements ShouldQueue
      */
     public function handle(): void
     {
-        \Mail::to($this->organization->email)->send(new OrganizationRegistered($this->organization, $this->url));
+        Mail::to($this->organization->email)->send(new OrganizationRegistered($this->organization, $this->url));
     }
 }
