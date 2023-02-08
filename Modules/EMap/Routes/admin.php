@@ -20,13 +20,14 @@ Route::resource('map/mapApply/{mapApply}/map-registration', MapRegistrationContr
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
         Route::prefix('upload')->as('upload.')->group(function () {
-            Route::post('storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('store-template-data');
-            Route::get('getTemplateData/{noticeTypeEnum}', 'getTemplateData')->name('get-template-data');
+            Route::post('storeTemplateData/{applicationFormTypeEnum}/{noticeTypeEnum}', 'storeTemplateData')->name('store-template-data');
+            Route::get('getTemplateData/{applicationFormTypeEnum}/{noticeTypeEnum}', 'getTemplateData')->name('get-template-data');
             Route::put('reject/{noticeTypeEnum}', 'reject')->name('reject');
         });
     });
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
-    Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail', 'show')->name('mapApply.show');
+    Route::get('mapApply/{mapApply}/register', 'register')->name('mapApply.register');
+    Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
     Route::get('mapApply/{applicationFormTypeEnum}', 'index')->name('mapApply.index');
 });
