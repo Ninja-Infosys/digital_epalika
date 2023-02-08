@@ -12,18 +12,11 @@
         </a>
     </li>
 @endcan
-<li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
-    <a href="{{route('emap.admin.report.report')}}">
-        <i class="fa fa-clipboard-list"></i>
-        <span>नक्सा दर्ता रिपोर्ट</span>
-    </a>
-</li>
-
 <li class="{{request()->is('admin/emap/map/mapApply*') ? 'active' : ''}}">
     <a href="#sidebarMaptype" {{request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-map"></i>
-        <span>नक्सा दर्ता प्रमाणित</span>
+        <span>नक्सा दर्ता/प्रमाणित</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -85,6 +78,13 @@
         </ul>
     </div>
 </li>
+<li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
+    <a href="{{route('emap.admin.report.report')}}">
+        <i class="fa fa-clipboard-list"></i>
+        <span>रिपोर्ट</span>
+    </a>
+</li>
+
 <li class="{{request()->is('admin/emap/files') ? 'active' : ''}}">
     <a href="{{route('emap.admin.files.file')}}">
         <i class="fa fa-file-archive"></i>

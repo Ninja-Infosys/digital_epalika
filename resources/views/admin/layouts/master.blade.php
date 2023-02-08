@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     <!-- App css -->
+    <link href="{{asset('assets/backend/css/stickyTable.min.css')}}" rel="stylesheet" type="text/css" id="table-style"/>
     <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
     <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media='screen,print'/>
 
@@ -53,12 +54,14 @@
 </div>
 <div class="rightbar-overlay"></div>
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/stickyTable.min.js')}}"></script>
 <script src="{{asset('assets/backend/libs/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
 
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/pages/form-advanced.init.js')}}"></script>
+<script src="{{asset('assets/backend/js/pages/responsive-table.init.js')}}"></script>
 @include('sweetalert::alert')
 
 @stack('scripts')

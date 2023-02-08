@@ -5,7 +5,6 @@ namespace Modules\EMap\Entities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MapRegistration extends Model
@@ -21,13 +20,13 @@ class MapRegistration extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'form_receipt',
-        'application_registration_fee',
-        'other',
         'nepali_date',
         'english_date',
         'receipt_no',
         'recipient',
+        'amount',
+        'remarks',
+        'tax_payer',
     ];
 
     public function mapApply(): BelongsTo
@@ -55,8 +54,4 @@ class MapRegistration extends Model
         return $this->attributes['form_receipt'] + $this->attributes['application_registration_fee'] + $this->attributes['other'] + $this->getParticularTotalAmountAttribute();
     }
 
-    public function mapRegistrationParticulars(): HasMany
-    {
-        return $this->hasMany(MapRegistrationParticular::class);
-    }
 }

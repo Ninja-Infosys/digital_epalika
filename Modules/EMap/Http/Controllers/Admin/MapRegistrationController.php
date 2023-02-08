@@ -13,6 +13,14 @@ use Modules\EMap\Http\Requests\MapRegistration\UpdateMapRegistrationRequest;
 
 class MapRegistrationController extends Controller
 {
+    public function index(MapApply $mapApply){
+
+        $mapApply->load('mapRegistration');
+        if(!$mapApply->mapRegistration){
+            return redirect(route('emap.admin.mapApply.mapRegistration.create', $mapApply));
+        }
+        return view('emap::admin.map.map-registration.index', compact('mapApply'));
+    }
     public function create(MapApply $mapApply)
     {
         $mapApply->load(['storeyDetails', 'storeyDetails.mapFee']);
@@ -23,26 +31,22 @@ class MapRegistrationController extends Controller
     public function store(StoreMapRegistrationRequest $request, MapApply $mapApply): RedirectResponse
     {
         DB::transaction(function () use ($request, $mapApply) {
-            $mapRegistration = MapRegistration::create($request->validated() + ['map_apply_id' => $mapApply->id]);
+            $mapRegistration=MapRegistration::updateOrCreate(
+                ['map_apply_id' => $mapApply->id],
+                $request->validated()
+            );
 
-            if (!empty($request->input('particulars'))) {
-                foreach ($request->input('particulars') as $particular) {
-                    $mapRegistration->mapRegistrationParticulars()->create($particular);
-                }
-            }
-
-            if (empty($mapApply->registration_no)) {
-                $registrationNo = MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1;
+            if($mapRegistration->wasRecentlyCreated){
                 $mapApply->update([
                     'registration_date' => now(),
-                    'registration_no' => $registrationNo,
+                    'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
                 ]);
             }
         });
 
         toast('दस्तुर तथा दर्ता सफलतापूर्वक थपियो', 'success');
 
-        return back();
+        return redirect(route('emap.admin.mapApply.mapRegistration.index', $mapApply));
     }
 
     public function edit(MapApply $mapApply, MapRegistration $mapRegistration)

@@ -14,18 +14,13 @@ class StoreMapRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'particulars' => ['nullable', 'array'],
-            'particulars.*.storey' => ['required', 'string'],
-            'particulars.*.area' => ['required', 'numeric', 'min:0'],
-            'particulars.*.rate' => ['required', 'numeric', 'min:0'],
-            'particulars.*.remarks' => ['nullable', 'string'],
-            'form_receipt' => ['required', 'numeric', 'min:0'],
-            'application_registration_fee' => ['required', 'numeric', 'min:0'],
-            'other' => ['required', 'numeric', 'min:0'],
             'nepali_date' => ['required', 'date'],
             'english_date' => ['required', 'date'],
             'receipt_no' => ['required'],
             'recipient' => ['required'],
+            'amount' => ['required','numeric'],
+            'remarks' => ['nullable'],
+            'tax_payer' => ['nullable']
         ];
     }
 }
