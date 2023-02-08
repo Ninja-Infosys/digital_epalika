@@ -15,7 +15,7 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
-Route::resource('map/mapApply/{mapApply}/map-registration', MapRegistrationController::class)->names('map.map-apply.map-registration');
+Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
@@ -26,7 +26,6 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         });
     });
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
-    Route::get('mapApply/{mapApply}/register', 'register')->name('mapApply.register');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
     Route::get('mapApply/{applicationFormTypeEnum}', 'index')->name('mapApply.index');

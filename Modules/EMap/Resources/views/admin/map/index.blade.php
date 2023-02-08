@@ -11,8 +11,8 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">संगठन</li>
-                        <li class="breadcrumb-item active">नक्सा</li>
+                        <li class="breadcrumb-item">नक्सा दर्ता/प्रमाणित</li>
+                        <li class="breadcrumb-item active">{{$applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित'}}</li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{$applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित'}}</h4>
@@ -29,7 +29,10 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-sm table-bordered">
+            <div class="responsive-table-design">
+                <div class="table-rep-design">
+                    <div class="table-responsive" data-pattern="priority-columns">
+            <table id="responsive-table" class="table table-sm table-bordered">
                 <thead>
                 <tr>
                     <th scope="col">क्र.सं.</th>
@@ -54,18 +57,14 @@
                         <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                         <td>{{$mapApply->organization->name ?? ''}}</td>
                         <td>
-                            @if(empty($mapApply->registration_no))
-                                <a href="{{route('emap.admin.map.mapApply.register', $mapApply)}}"
-                                   type="button" class="btn btn-outline-primary btn-sm" title="दर्ता गर्नुहोस्">
-                                    <i class="fa fa-check-circle"></i> दर्ता
-                                </a>
-                            @endif
-                            @if(!empty($mapApply->registration_no))
-                                <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
-                                   type="button" class="btn btn-outline-info btn-sm" title="पनिबेदन/प्रतिबेदन हेर्नुहोस्">
-                                    <i class="fa fa-eye"></i> निबेदन/प्रतिबेदनहरु
-                                </a>
-                            @endif
+                            <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
+                               type="button" class="btn btn-outline-primary btn-sm" title="पनिबेदन/प्रतिबेदन हेर्नुहोस्">
+                                <i class="fa fa-eye"></i> निबेदन/प्रतिबेदनहरु
+                            </a>
+                            <a href="{{route('emap.admin.mapApply.mapRegistration.index', $mapApply)}}"
+                               type="button" class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
+                                <i class="fa fa-{{empty($mapApply->registration_no) ? 'times-circle':  'check-circle'}}"></i> दर्ता {{empty($mapApply->registration_no) ? 'गर्नुहोस्':  'भएको'}}
+                            </a>
                         </td>
                     </tr>
                 @empty
@@ -75,6 +74,9 @@
                 @endforelse
                 </tbody>
             </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="mt-2">
             {{ $maps->onEachSide(config('app.pagination_count'))->links() }}

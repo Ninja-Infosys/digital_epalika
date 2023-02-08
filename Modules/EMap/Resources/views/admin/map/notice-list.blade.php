@@ -25,7 +25,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title"> निबेदन/प्रतिबेदनको स्थिति</h4>
-                        @includeIf('inc.filter_form')
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                                <a href="{{route('emap.admin.map.mapApply.index',$applicationFormTypeEnum)}}" class="btn btn-sm btn-outline-success waves-effect waves-light">
+                                    <i class="fas fa-list"></i> नक्सा प्रमाणित सुची</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -90,7 +94,7 @@
                                                 <td>
                                                     <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,$noticeTypeEnum])}}"
                                                        type="button"
-                                                       class="btn btn-outline-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
+                                                       class="btn btn-outline-primary btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 </td>

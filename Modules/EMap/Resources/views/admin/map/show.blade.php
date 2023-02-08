@@ -77,7 +77,7 @@
                             @endcan
                         @endif
                             <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
-                               class="btn btn-outline-warning btn-sm">
+                               class="btn btn-outline-success btn-sm">
                                 <i class="fas fa-list"></i> निबेदन/प्रतिबेदन सुची
                             </a>
                     </div>

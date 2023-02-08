@@ -27,6 +27,9 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="responsive-table-design">
+                <div class="table-rep-design">
+                    <div id="responsive-table" class="table-responsive" data-pattern="priority-columns">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-bordered">
                     <thead>
@@ -49,27 +52,17 @@
                             <td>{{$organization->organizationDetail->org_name_ne ?? ''}}</td>
                             <td>
                                 @can('organization_edit')
-                                    <a data-bs-type="edit"
-                                       href="{{route('emap.admin.organization.update-login-status',$organization)}}"
+                                    <a href="{{route('emap.admin.organization.update-login-status',$organization)}}"
                                        class="btn btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin':''}}"
                                        title="लग इन {{$organization->is_active==1 ?'गर्न मिल्छ':'गर्न मिल्दैन'}}">
                                         <i class="fa  {{$organization->is_active==1 ?' fa-check':'fa-window-close'}}"></i>
                                     </a>
                                 @endcan
                                 @can('organization_access')
-                                    <a data-bs-type="edit"
-                                       href="{{route('emap.admin.organization.show',$organization)}}"
+                                    <a href="{{route('emap.admin.organization.show',$organization)}}"
                                        title="हेर्नुहोस्"
                                        class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                         <i class="fa fa-eye"></i>
-                                    </a>
-                                @endcan
-                                @can('organization_edit')
-                                    <a data-bs-type="edit"
-                                       href="{{route('emap.admin.organization.edit',$organization)}}"
-                                       title="सम्पादन गर्नुहोस्"
-                                       class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                        <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
                                 @can('organization_delete')
@@ -98,6 +91,9 @@
             </div>
             <div class="mt-2">
                 {{ $organizations->onEachSide(config('app.pagination_count'))->links() }}
+            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
