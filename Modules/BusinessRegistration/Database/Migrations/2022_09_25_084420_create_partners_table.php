@@ -20,7 +20,7 @@ return new class () extends Migration {
             $table->foreignId('province_id')->nullable()->comment('प्रदेश')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->comment('जिल्ला')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->comment('पालिका')->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->string('ward_no')->nullable()->comment('वार्ड');
+            $table->string('ward_no')->nullable()->comment('वडा नं');
             $table->string('way')->nullable()->comment('मार्ग');
             $table->string('tole')->nullable()->comment('टोल');
             $table->string('house_no')->nullable()->comment('घर नम्बर');
@@ -33,8 +33,8 @@ return new class () extends Migration {
             $table->string('grandfather_name')->nullable()->comment('हजुरबुबाको नाम');
             $table->string('photo')->nullable()->comment('पासपोर्ट साइजको फोटो');
             $table->string('signature')->nullable()->comment('हस्ताक्षर');
-            $table->string('citizenship_front')->nullable()->comment('नागरिकता अपलोड गर्नुहोस् (आगाडी)');
-            $table->string('citizenship_back')->nullable()->comment('नागरिकता अपलोड गर्नुहोस् (पछाडी)');
+            $table->string('citizenship_front')->nullable()->comment('नागरिकता (आगाडी)');
+            $table->string('citizenship_back')->nullable()->comment('नागरिकता (पछाडी)');
             $table->integer('position');
             $table->timestamps();
             $table->softDeletes();
