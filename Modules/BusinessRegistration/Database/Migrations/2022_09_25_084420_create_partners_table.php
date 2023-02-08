@@ -11,10 +11,10 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('business_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name')->comment('नाम');
-            $table->string('name_en')->comment('नाम');
+            $table->string('name_en')->comment('नाम अंग्रेजीमा');
             $table->string('citizenship_no')->comment('नागरिकता नम्बर');
             $table->string('issue_date')->comment('जारि मिति');
-            $table->foreignId('issue_district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('issue_district_id')->nullable()->comment('नागरिकता जारी जिल्ला')->constrained('districts')->nullOnDelete()->onUpdate('no action');
             $table->string('phone')->nullable()->comment('फोन');
             $table->string('email')->nullable()->comment('इमेल');
             $table->foreignId('province_id')->nullable()->comment('प्रदेश')->constrained()->nullOnDelete()->onUpdate('no action');

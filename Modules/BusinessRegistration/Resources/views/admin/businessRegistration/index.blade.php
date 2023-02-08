@@ -140,6 +140,12 @@
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
                                     <td>
+                                        @can('businessRegistration_edit')
+                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.edit',$businessDetail)}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"  title="पुरा विवरण हेर्नुहोस">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
                                         @can('businessRegistration_access')
                                             <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
                                                class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"  title="पुरा विवरण हेर्नुहोस">
