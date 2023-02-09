@@ -12,12 +12,12 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a href="">
-                                {{Str::words($noticeTypeEnum->label(),3)}} </a>
+                                {{$templateTypeEnum->label()??''}} </a>
                         </li>
-                        <li class="breadcrumb-item active"> {{Str::words($noticeTypeEnum->label(),3)}}</li>
+                        <li class="breadcrumb-item active"> {{$templateTypeEnum->label()}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{Str::words($noticeTypeEnum->label(),5)}}</h4>
+                <h4 class="page-title">{{$templateTypeEnum->label()}}</h4>
             </div>
         </div>
     </div>
@@ -27,14 +27,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">   {{$noticeTypeEnum->label()}}</h4>
+                        <h4 class="header-title">   {{$templateTypeEnum->label()}}</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form
-                        action="{{route('emap.admin.map.map-apply.notice.upload.store-template-data',[$mapApply, $applicationFormTypeEnum,$noticeTypeEnum])}}"
-                        method="post"
-                        enctype="multipart/form-data">
+                    <form action="{{route('admin.businessRegistration.store.template',[$businessDetail,$templateTypeEnum])}}"
+                          method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
 
@@ -42,13 +41,13 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
                                     <textarea name="data" id="data" cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
+                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($printed_data->data ?? $businessDetail->getSpecificTemplateData($templateTypeEnum) ?? ''))}}</textarea>
                                     @error('data')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="files" class="form-label">फाइल </label>
+                                    <label for="files" class="form-label">फाइल *</label>
                                     <input
                                         type="file"
                                         name="files[]"
@@ -56,13 +55,6 @@
                                         class="form-control @error('files') is-invalid @enderror"
                                         id="files"
                                         multiple/>
-                                    @foreach($mapApply->applyMapNotices as $applyMapNotice)
-                                        @foreach($applyMapNotice->files as $file)
-                                            <a href="{{$file->file_url}}" download="{{$file->file_url}}">
-                                                <i class="fa fa-download"></i>
-                                                Download &nbsp;</a>
-                                        @endforeach
-                                    @endforeach
                                     @error('files')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

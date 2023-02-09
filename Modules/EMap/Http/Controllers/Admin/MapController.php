@@ -50,16 +50,22 @@ class MapController extends Controller
     {
         return view('emap::admin.map.notice-list', compact('mapApply', 'applicationFormTypeEnum'));
     }
-
-    public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
+    public function register(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
+        return view('emap::admin.map.register', compact('mapApply'));
+    }
+
+    public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum,NoticeTypeEnum $noticeTypeEnum)
+    {
+        $mapApply->load(['fiscalYear', 'mapRegistration', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
 
+            $data=$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->data ??  $mapApply->getSpecificTemplateData($noticeTypeEnum)?? '';
+
         $districts = get_districts();
 
-        return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum'));
+        return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum','data','noticeTypeEnum'));
     }
 
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
@@ -97,17 +103,17 @@ class MapController extends Controller
         return view('emap::admin.notice.superstructure', compact('mapApply'));
     }
 
-    public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    public function getTemplateData(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum)
     {
         $mapApply->load(['applyMapNotices.files', 'applyMapNotices' => function ($q) use ($noticeTypeEnum) {
             $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
         }]);
 
 
-        return \view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum'));
+        return \view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum', 'applicationFormTypeEnum'));
     }
 
-    public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
+    public function storeTemplateData(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
         $this->checkAuthorization('mapApplyNotice_access');
 
@@ -144,7 +150,7 @@ class MapController extends Controller
 
         toast('फाईल सफलता पुर्बक थपियो', 'success');
 
-        return back();
+        return redirect()->route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,$noticeTypeEnum]);
     }
 
     private function uploadDocuments($request, $mapApplyData): void

@@ -8,26 +8,41 @@
     <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
         <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
             <i class="fa fa-file"></i>
-            <span> दर्ता भएका व्यवसाय</span>
+            <span> व्यवसाय दर्ता / नविकरण</span>
         </a>
     </li>
 @endcan
 
+<li class="{{request()->is('admin/businessRegistration/report*') ? 'active' : ''}}">
+    <a href="#sidebarBusinessRegistrationReport"
+       {{request()->is('admin/businessRegistration/report*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-clipboard-list"></i>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/businessRegistration/report*') ? 'show' : ''}}"
+         id="sidebarBusinessRegistrationReport">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/businessRegistration/report') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.index')}}">
+                    <span>रिपोर्ट</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
 
-{{--<li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">--}}
-{{--    <a href="{{route('admin.businessRegistration.report.report')}}">--}}
-{{--        <i class="fa fa-file"></i>--}}
-{{--        <span>रिपोर्ट</span>--}}
-{{--    </a>--}}
-{{--</li>--}}
 
 
 <li class="{{request()->is('admin/businessRegistration/setting/*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationSetting"
        {{request()->is('admin/businessRegistration/setting/*') ? 'aria-expanded=true  ' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-cog"></i>
-        <span>सेटिङ</span>
+        <i class="fa fa-cogs"></i>
+        <span>आधारभूत सेटिङ</span>
         <span class="menu-arrow">
                         <i class="fa fa-angle-right"></i>
                     </span>

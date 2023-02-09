@@ -85,6 +85,15 @@ class BusinessDetail extends Model
         'deleted_at',
     ];
 
+    protected $appends=[
+        'is_register'
+    ];
+
+    public function getIsRegisterAttribute(): bool
+    {
+        return $this->registeredBusinesses->count()>0;
+    }
+
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
@@ -153,25 +162,101 @@ class BusinessDetail extends Model
     }
 
 
-    public function rentAgreement(): Attribute
+    public function setRentAgreementAttribute($value): void
     {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['rent_agreement'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
     }
 
-    public function landOwnershipCertificate(): Attribute
+    public function getRentAgreementAttribute(): string
     {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
+        return $this->attributes['rent_agreement'] ? Storage::disk('public')->url($this->attributes['rent_agreement']) : '';
+
     }
+
+    public function setLandOwnershipCertificateAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['land_ownership_certificate'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
+    }
+
+    public function getLandOwnershipCertificateAttribute(): string
+    {
+        return $this->attributes['land_ownership_certificate'] ? Storage::disk('public')->url($this->attributes['land_ownership_certificate']) : '';
+
+    }
+
+
+    public function setWardRecommendationAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['ward_recommendation'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
+    }
+
+    public function getWardRecommendationAttribute(): string
+    {
+        return $this->attributes['ward_recommendation'] ? Storage::disk('public')->url($this->attributes['ward_recommendation']) : '';
+
+    }
+
+    public function setEmbassyDocumentAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['embassy_document'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
+    }
+
+    public function getEmbassyDocumentAttribute(): string
+    {
+        return $this->attributes['embassy_document'] ? Storage::disk('public')->url($this->attributes['embassy_document']) : '';
+
+    }
+
+
+    public function setRegistrationDocumentAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['registration_document'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
+    }
+
+    public function getRegistrationDocumentAttribute(): string
+    {
+        return $this->attributes['registration_document'] ? Storage::disk('public')->url($this->attributes['registration_document']) : '';
+
+    }
+
+
+    public function setLicenseAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['license'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
+    }
+
+    public function getLicenseAttribute(): string
+    {
+        return $this->attributes['license'] ? Storage::disk('public')->url($this->attributes['license']) : '';
+
+    }
+
+
+    public function setTaxDocumentAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['tax_document'] = $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public');
+        }
+    }
+
+    public function getTaxDocumentAttribute(): string
+    {
+        return $this->attributes['tax_document'] ? Storage::disk('public')->url($this->attributes['tax_document']) : '';
+
+    }
+
 
     public function otherFile(): Attribute
     {
@@ -179,58 +264,6 @@ class BusinessDetail extends Model
             get: fn($value) => Storage::url($value),
             set: fn($value) => (!empty($value) && !is_string($value))
                 ? $value->store('other_file', 'public')
-                : null
-        );
-    }
-
-    public function wardRecommendation(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
-    }
-
-
-    public function embassyDocument(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
-    }
-
-    public function registrationDocument(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
-    }
-
-    public function license(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
-    }
-
-    public function taxDocument(): Attribute
-    {
-
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
     }

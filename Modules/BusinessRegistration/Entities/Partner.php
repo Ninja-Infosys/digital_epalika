@@ -59,6 +59,11 @@ class Partner extends Model
         'position',
     ];
 
+    protected $casts=[
+        'gender'=>Gender::class,
+        'education_qualification'=>Qualification::class
+    ];
+
     public function photo(): Attribute
     {
         return Attribute::make(
@@ -95,17 +100,6 @@ class Partner extends Model
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
-    }
-
-
-    public function Gender(): Attribute
-    {
-        return Attribute::get(fn($value) => Gender::tryFrom($value)?->label() ?? null);
-    }
-
-    public function EducationQualification(): Attribute
-    {
-        return Attribute::get(fn($value) => Qualification::tryFrom($value)?->label() ?? null);
     }
 
     public function province(): BelongsTo

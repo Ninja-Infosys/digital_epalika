@@ -18,6 +18,8 @@ use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
+use Modules\BusinessRegistration\Entities\Partner;
+use Modules\BusinessRegistration\Entities\RegisteredBusiness;
 
 class RegistrationForm extends Component
 {
@@ -39,6 +41,9 @@ class RegistrationForm extends Component
     public $businessNatures = [];
     public $partners = [];
     public $registeredBusinesses = [];
+
+    public BusinessDetail $businessDetail;
+
     public array $form = [
         //first step
         'name' => null,
@@ -47,9 +52,9 @@ class RegistrationForm extends Component
         'address_en' => null,
         'business_nature_id' => null,
         'object_transaction_id' => null,
-        'working_capital' => null,
-        'fixed_capital' => null,
-        'investment' => null,
+        'working_capital' => 0,
+        'fixed_capital' => 0,
+        'investment' => 0,
         'purpose' => null,
         'province_id' => null,
         'district_id' => null,
@@ -84,17 +89,69 @@ class RegistrationForm extends Component
     ];
 
 
-    public function mount()
+    public function mount($businessDetail = null)
     {
-        $this->partnerArrayIncrement();
-        $officeSetting = OfficeSetting::first();
         $this->provinces = get_provinces();
-        $this->form['province_id'] = $officeSetting->province_id;
-        $this->form['district_id'] = $officeSetting->district_id;
-        $this->form['local_body_id'] = $officeSetting->local_body_id;
         $this->businessNatures = BusinessNature::all();
         $this->objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        if (!empty($businessDetail)) {
+            $this->businessDetail = $businessDetail;
+            $this->assignBusinessDetailData();
+        } else {
+            $this->partnerArrayIncrement();
+            $this->form['province_id'] = \officeSetting()->province_id;
+            $this->form['district_id'] = \officeSetting()->district_id;
+            $this->form['local_body_id'] = \officeSetting()->local_body_id;
+        }
+
+
     }
+
+    private function assignBusinessDetailData()
+    {
+        foreach (\Arr::except($this->form, ['photo', 'partners','files', 'registeredBusinesses', 'rent_agreement', 'land_ownership_certificate', 'ward_recommendation', 'embassy_document', 'registration_document', 'license', 'tax_document']) as $key => $data) {
+            $this->form[$key] = $this->businessDetail[$key];
+        }
+
+        foreach ($this->businessDetail->partners as $partner) {
+            $this->form['partners'][] = [
+                'id' => $partner->id ?? null,
+                'name' => $partner->name ?? null,
+                'name_en' => $partner->name_en ?? null,
+                'citizenship_no' => $partner->citizenship_no ?? null,
+                'issue_date' => $partner->issue_date ?? null,
+                'phone' => $partner->phone ?? null,
+                'email' => $partner->email ?? null,
+                'house_no' => $partner->house_no ?? null,
+                'account_no' => $partner->account_no ?? null,
+                'national_card_no' => $partner->national_card_no ?? null,
+                'gender' => $partner->gender?->value ?? null,
+                'education_qualification' => $partner->education_qualification?->value ?? null,
+                'occupation' => $partner->occupation ?? null,
+                'father_name' => $partner->father_name ?? null,
+                'grandfather_name' => $partner->grandfather_name ?? null,
+                'position' => $partner->position ?? null,
+                'province_id' => $partner->province_id ?? null,
+                'district_id' => $partner->district_id ?? null,
+                'issue_district_id' => $partner->issue_district_id ?? null,
+                'local_body_id' => $partner->local_body_id ?? null,
+                'ward_no' => $partner->ward_no ?? null,
+                'way' => $partner->way ?? null,
+                'tole' => $partner->tole ?? null,
+            ];
+        }
+
+        foreach ($this->businessDetail->registeredBusinesses as $registeredBusiness) {
+            $this->form['registeredBusinesses'][] = [
+                'id' => $registeredBusiness->id ?? null,
+                'registration_no' => $registeredBusiness->registration_no ?? null,
+                'business_name' => $registeredBusiness->business_name ?? null,
+                'registration_date' => $registeredBusiness->registration_date ?? null,
+                'is_active' => $registeredBusiness->is_active ?? null,
+            ];
+        }
+    }
+
 
     protected array $firstStepValidations = [
         'form.name' => ['required'],
@@ -118,7 +175,6 @@ class RegistrationForm extends Component
         'form.house_owner_phone' => ['nullable'],
         'form.house_owner_address' => ['nullable'],
         'form.house_owner_monthly_rent' => ['required_if:form.is_rent,1'],
-        'form.rent_agreement' => ['nullable'],
         'form.is_register' => ['nullable'],
         'form.registeredBusinesses' => ['required_if:form.is_register,1', 'array'],
         'form.registeredBusinesses.*.business_name' => ['required_if:form.is_register,1'],
@@ -126,6 +182,17 @@ class RegistrationForm extends Component
         'form.registeredBusinesses.*.registration_date' => ['nullable'],
         'form.registeredBusinesses.*.is_active' => ['nullable'],
     ];
+
+    protected function firstStepValidation(): array
+    {
+        return !empty($this->businessDetail)
+            ? array_merge($this->firstStepValidations, [
+                'form.rent_agreement' => ['nullable'],
+            ])
+            : array_merge($this->firstStepValidations, [
+                'form.rent_agreement' => ['nullable'],
+            ]);
+    }
 
     protected array $secondStepValidations = [
         'form.partners' => ['required', 'array'],
@@ -143,11 +210,7 @@ class RegistrationForm extends Component
         'form.partners.*.occupation' => ['required'],
         'form.partners.*.father_name' => ['required'],
         'form.partners.*.grandfather_name' => ['required'],
-        'form.partners.*.photo' => ['nullable'],
-        'form.partners.*.signature' => ['nullable'],
-        'form.partners.*.citizenship_front' => ['nullable'],
-        'form.partners.*.citizenship_back' => ['nullable'],
-        'form.partners.*.position' => ['required','integer'],
+        'form.partners.*.position' => ['required', 'integer'],
         'form.partners.*.province_id' => ['required', 'exists:provinces,id'],
         'form.partners.*.district_id' => ['required', 'exists:districts,id'],
         'form.partners.*.issue_district_id' => ['required', 'exists:districts,id'],
@@ -157,30 +220,61 @@ class RegistrationForm extends Component
         'form.partners.*.tole' => ['required', 'string'],
     ];
 
+    protected function secondStepValidations(): array
+    {
+        return !empty($this->businessDetail)
+            ? array_merge($this->secondStepValidations, [
+                'form.partners.*.photo' => ['nullable'],
+                'form.partners.*.signature' => ['nullable'],
+                'form.partners.*.citizenship_front' => ['nullable'],
+                'form.partners.*.citizenship_back' => ['nullable'],
+            ])
+            : array_merge($this->secondStepValidations, [
+                'form.partners.*.photo' => ['nullable'],
+                'form.partners.*.signature' => ['nullable'],
+                'form.partners.*.citizenship_front' => ['nullable'],
+                'form.partners.*.citizenship_back' => ['nullable'],
+            ]);
+    }
+
     protected array $thirdStepValidations = [
 
         'form.length' => ['required'],
         'form.width' => ['nullable'],
         'form.application_date' => ['required'],
         'form.application_date_en' => ['required'],
-        'form.land_ownership_certificate' => ['nullable'],
-        'form.ward_recommendation' => ['required'],
-        'form.embassy_document' => ['nullable'],
-        'form.registration_document' => ['nullable'],
-        'form.license' => ['nullable'],
-        'form.tax_document' => ['nullable'],
         'form.other_document' => ['nullable', 'array'],
 
 
     ];
 
+    protected function thirdStepValidations(): array
+    {
+        return !empty($this->businessDetail)
+            ? array_merge($this->thirdStepValidations, [
+                'form.land_ownership_certificate' => ['nullable'],
+                'form.ward_recommendation' => ['nullable'],
+                'form.embassy_document' => ['nullable'],
+                'form.registration_document' => ['nullable'],
+                'form.license' => ['nullable'],
+                'form.tax_document' => ['nullable'],
+            ])
+            : array_merge($this->thirdStepValidations, [
+                'form.land_ownership_certificate' => ['nullable'],
+                'form.ward_recommendation' => ['required'],
+                'form.embassy_document' => ['nullable'],
+                'form.registration_document' => ['nullable'],
+                'form.license' => ['nullable'],
+                'form.tax_document' => ['nullable'],
+            ]);
+    }
 
     public function rules(): array
     {
         return match ($this->currentStep) {
-            2 => $this->secondStepValidations,
-            3 => $this->thirdStepValidations,
-            default => $this->firstStepValidations,
+            2 => $this->secondStepValidations(),
+            3 => $this->thirdStepValidations(),
+            default => $this->firstStepValidation(),
         };
     }
 
@@ -205,25 +299,29 @@ class RegistrationForm extends Component
     public function submitForm()
     {
         $this->validate();
+
+        if (!empty($this->businessDetail)) {
+            DB::transaction(function () {
+                $this->businessDetail->update(\Arr::except($this->form, ['working_capital', 'fixed_capital']) + [
+                        'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
+                        'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
+                    ]);
+                $this->saveBusinessDetailsData($this->businessDetail);
+            });
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => 'success',
+                'title' => 'तपाइको व्यवसाय सफलता पुर्बक अध्याबधिक भयो'
+            ]);
+            return redirect(route('admin.businessRegistration.businessRegistration.index'));
+        }
+
         $businessDetail = DB::transaction(function () {
-            $businessDetail = BusinessDetail::create(\Arr::except($this->form,['working_capital','fixed_capital']) + [
+            $businessDetail = BusinessDetail::create(\Arr::except($this->form, ['working_capital', 'fixed_capital']) + [
                     'submission_no' => time(),
-                    'working_capital'=> is_null($this->form['working_capital']) ?   0 : $this->form['working_capital'],
-                    'fixed_capital'=> is_null($this->form['fixed_capital']) ?   0 : $this->form['fixed_capital']
+                    'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
+                    'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
                 ]);
-            foreach ($this->form['partners'] as $partner) {
-                $businessDetail->partners()->create($partner);
-            }
-            foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
-                $businessDetail->registeredBusinesses()->create($registeredBusiness);
-            }
-            foreach ($this->form['other_document'] as $document) {
-                $businessDetail->files()->create([
-                    'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
-                    'extension' => $document->getClientOriginalExtension(),
-                    'file' => $document->store('otherDocument/', 'public')
-                ]);
-            }
+            $this->saveBusinessDetailsData($businessDetail);
             return $businessDetail;
         });
         $this->dispatchBrowserEvent('alert_message', [
@@ -236,13 +334,43 @@ class RegistrationForm extends Component
 
     }
 
+    private function saveBusinessDetailsData($businessDetail)
+    {
+        foreach ($this->form['partners'] as $partner) {
+            Partner::updateOrCreate(
+                ['business_detail_id' => $businessDetail->id, 'id' => $partner['id'] ?? null],
+                $partner
+            );
+        }
+        foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
+            RegisteredBusiness::updateOrCreate(
+                ['business_detail_id' => $businessDetail->id, 'id' => $registeredBusiness['id'] ?? null],
+                $registeredBusiness
+            );
+        }
+        foreach ($this->form['other_document']??[] as $document) {
+            $businessDetail->files()->create([
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $document->getClientOriginalExtension(),
+                'file' => $document->store('otherDocument/', 'public')
+            ]);
+        }
+    }
+
     public function partnerArrayIncrement(): void
     {
-        $this->form['partners'][] = [];
+        $this->form['partners'][] = [
+            'province_id' => \officeSetting()->province_id,
+            'district_id' => \officeSetting()->district_id,
+            'local_body_id' => \officeSetting()->local_body_id,
+        ];
     }
 
     public function partnerArrayDecrement($index): void
     {
+        if (!empty($this->form['partners'][$index]['id'])) {
+            Partner::find($this->form['partners'][$index]['id'])->delete();
+        }
         unset($this->form['partners'][$index]);
         $this->form['partners'] = array_values($this->form['partners']);
     }
@@ -254,6 +382,9 @@ class RegistrationForm extends Component
 
     public function registeredBusinessArrayDecrement($index): void
     {
+        if (!empty($this->form['registeredBusinesses'][$index]['id'])) {
+            RegisteredBusiness::find($this->form['registeredBusinesses'][$index]['id'])->delete();
+        }
         unset($this->form['registeredBusinesses'][$index]);
         $this->form['registeredBusinesses'] = array_values($this->form['registeredBusinesses']);
     }
@@ -290,6 +421,7 @@ class RegistrationForm extends Component
         $this->reset('progressPercentage');
         $this->progressPercentage = $this->currentStep / 3 * 100;
     }
+
     public function messages(): array
     {
         return [
