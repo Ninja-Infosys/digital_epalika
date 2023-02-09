@@ -11,9 +11,6 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="">स्लाइडर</a>
-                        </li>
                         <li class="breadcrumb-item active">स्लाइडर</li>
                     </ol>
                 </div>
@@ -31,14 +28,14 @@
                         @can('slider_create')
                             <a href="{{route('admin.website.slider.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ स्लाइडर थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
