@@ -327,7 +327,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> वर्गफिट</th>
-                                                        <td>{{$businessDetail->square??''}}</td>
+                                                        <td>({{$businessDetail->length??'' }} * {{ $businessDetail->width??''}}) Sq.ft</td>
                                                     </tr>
                                                     </thead>
                                                 </table>

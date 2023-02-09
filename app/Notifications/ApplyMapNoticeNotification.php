@@ -7,12 +7,13 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\ApplyMapNotice;
+use Modules\EMap\Entities\MapApply;
 
 class ApplyMapNoticeNotification extends Notification
 {
     use Queueable;
 
-    public function __construct(public ApplyMapNotice $applyMapNotice)
+    public function __construct(public ApplyMapNotice $applyMapNotice ,public MapApply $mapApply)
     {
         //
     }
@@ -33,9 +34,11 @@ class ApplyMapNoticeNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'map_apply_id' => $this->applyMapNotice->map_apply_id,
-            'data' => Str::words(strip_tags($this->applyMapNotice->data, 10)),
-            'file_type' => $this->applyMapNotice->file_type,
+            'सब्मिसन आइडी' => $this->mapApply->unique_id,
+            'घर धनीको नाम' => $this->mapApply->houseOwner->name ?? '',
+            'निर्माण कार्यको किसिम' => $this->mapApply->construction_type->label() ?? '',
+            'निबेदन/प्रतिबेदन' => $this->applyMapNotice->file_type->label() ?? '',
+            'परामर्शदाताको नाम' => $this->mapApply->organization->name ?? '',
         ];
     }
 }

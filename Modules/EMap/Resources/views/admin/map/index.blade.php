@@ -29,42 +29,58 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="responsive-table-design">
-                <div class="table-rep-design">
-                    <div class="table-responsive" data-pattern="priority-columns">
-            <table id="responsive-table" class="table table-sm table-bordered">
+            <table id="demo-foo-accordion" class="table table-bordered mb-0 toggle-arrow-tiny">
                 <thead>
                 <tr>
-                    <th scope="col">क्र.सं.</th>
-                    <th scope="col">आर्थिक वर्ष</th>
-                    <th scope="col">दर्ता नं</th>
-                    <th scope="col">युनिक आइडी</th>
-                    <th scope="col">निर्माण कार्यको किसिम</th>
-                    <th scope="col">आवेदन भर्ने संस्था</th>
-                    <th scope="col">#</th>
+                    <th data-toggle="true">क्र.सं.</th>
+                    <th data-hide="phone">आर्थिक वर्ष</th>
+                    <th>युनिक आइडी</th>
+                    <th>दर्ता नं</th>
+                    <th data-hide="phone">निर्माण कार्यको किसिम</th>
+                    <th data-hide="phone">आवेदन भर्ने संस्था</th>
+                    <th data-hide="phone">#</th>
+                    <th data-hide="all"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($maps as $mapApply)
-                    <tr @class([
-                                           "table-danger"=>empty($mapApply->registration_no),
-                                           "table-success"=>!empty($mapApply->registration_no),
-                                          ])>
+                    <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$mapApply->fiscalYear->title ?? ''}}</td>
-                        <td>{{$mapApply->registration_no ?? ''}}</td>
                         <td>{{$mapApply->unique_id ?? ''}}</td>
+                        <td>{{$mapApply->registration_no ?? ''}}</td>
                         <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                         <td>{{$mapApply->organization->name ?? ''}}</td>
                         <td>
-                            <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
-                               type="button" class="btn btn-outline-primary btn-sm" title="पनिबेदन/प्रतिबेदन हेर्नुहोस्">
-                                <i class="fa fa-eye"></i> निबेदन/प्रतिबेदनहरु
-                            </a>
                             <a href="{{route('emap.admin.mapApply.mapRegistration.index', $mapApply)}}"
                                type="button" class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
-                                <i class="fa fa-{{empty($mapApply->registration_no) ? 'times-circle':  'check-circle'}}"></i> दर्ता {{empty($mapApply->registration_no) ? 'गर्नुहोस्':  'भएको'}}
+                                <i class="fa fa-{{empty($mapApply->registration_no) ? 'times-circle':  'check-circle'}}"></i>
+                                दर्ता {{empty($mapApply->registration_no) ? 'गर्नुहोस्':  'भएको'}}
                             </a>
+                        </td>
+                        <td>
+                            <div class="button-list">
+                            @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeTypeEnum)
+                                @if($applicationFormTypeEnum===\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)
+                                    @if($noticeTypeEnum->showInMapVerification())
+                                        <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,$noticeTypeEnum])}}"
+                                            @class([
+                                               "btn btn-sm waves-effect waves-light btn-outline-danger"=>!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
+                                               "btn btn-sm waves-effect waves-light btn-outline-success"=>$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
+                                              ])>
+                                            {{$noticeTypeEnum->label() ?? ''}}
+                                        </a>
+                                    @endif
+                                @else
+                                    <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,$noticeTypeEnum])}}"
+                                        @class(["btn btn-sm waves-effect waves-light btn-outline-danger"=>!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
+                                                "btn btn-sm waves-effect waves-light btn-outline-success"=>$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
+                                               ])>
+                                        {{$noticeTypeEnum->label() ?? ''}}
+                                    </a>
+                                @endif
+                            @endforeach
+                            </div>
                         </td>
                     </tr>
                 @empty
@@ -74,13 +90,10 @@
                 @endforelse
                 </tbody>
             </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            {{ $maps->onEachSide(config('app.pagination_count'))->links() }}
-        </div>
+    </div>
+    <div class="mt-2">
+        {{ $maps->onEachSide(config('app.pagination_count'))->links() }}
+    </div>
     </div>
 @endsection
 
