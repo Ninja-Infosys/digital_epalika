@@ -53,10 +53,10 @@
                                                 @break
                                             @case('MapApplyNotification')
                                                 घर-नक्सा पासमा नयाँ नक्सा प्राप्त
-                                            @break
-                                                @default
-                                            नयाँ नोटिफिकेसन
-                                            @endswitch
+                                                @break
+                                            @default
+                                                नयाँ नोटिफिकेसन
+                                        @endswitch
                                     </td>
                                     <td>
                                         @foreach ($notification->data as $key=>$data)
@@ -65,11 +65,10 @@
                                     </td>
                                     <td>{{ $notification->created_at->diffForHumans() }}</td>
                                     <td>
-                                        @if(!$notification->read_at)
-                                            <a href="{{ route('admin.notification.read',$notification) }}" class="btn btn-success btn-sm" >
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('admin.notification.read',$notification) }}"
+                                           class="btn btn-outline-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
