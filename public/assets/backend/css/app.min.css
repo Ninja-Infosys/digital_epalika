@@ -8048,8 +8048,11 @@ div.hopscotch-bubble .hopscotch-content {
 
 .footable.breakpoint > tbody > tr > td > span.footable-toggle {
     display: inline-block;
-    font-family: 'Mukta', sans-serif;
-    padding-right: 5px;
+    padding: 0 5px 0 5px;
+    border-radius: 2px;
+    margin-right: 5px;
+    background-color: var(--primary);
+    color: #FFFFFF;
     font-size: 14px
 }
 
@@ -8122,11 +8125,11 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .footable.breakpoint.toggle-arrow-tiny > tbody > tr.footable-detail-show > td > span.footable-toggle:before {
-    content: "\e01f"
+    content: "-"
 }
 
 .footable.breakpoint.toggle-arrow-tiny > tbody > tr > td > span.footable-toggle:before {
-    content: "\e021"
+    content: "+"
 }
 
 .footable.breakpoint.toggle-arrow-alt > tbody > tr.footable-detail-show > td > span.footable-toggle:before {
@@ -8167,7 +8170,6 @@ div.hopscotch-bubble .hopscotch-content {
 
 .footable > thead > tr > th > span.footable-sort-indicator {
     display: inline-block;
-    font-family: 'Mukta', sans-serif;
     padding-left: 5px;
     opacity: .3
 }
@@ -8189,8 +8191,8 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .footable-row-detail-row {
-    display: table-row;
-    line-height: 1.5em
+    line-height: 1.5em;
+    margin-top: 10px;
 }
 
 .footable-row-detail-group {

@@ -41,16 +41,22 @@
 
                     <div class="noti-scroll" data-simplebar>
                         @forelse (auth()->user()->unreadNotifications as $notification)
-                            <a
-                                href="{{ route('admin.notification.read',$notification) }}"
-                                class="dropdown-item notify-item"
-                            >
-                                <div class="notify-icon bg-secondary">
-                                    <i class="fa fa-heart"></i>
+                            <a href="{{ route('admin.notification.read',$notification) }}"
+                                class="dropdown-item notify-item">
+                                <div class="notify-icon bg-info">
+                                    <i class="fas fa-bell"></i>
                                 </div>
                                 <p class="notify-details">
-                                    {{class_basename($notification->type)}}
-
+                                    @switch(class_basename($notification->type))
+                                        @case('ApplyMapNoticeNotification')
+                                            घर-नक्सा पासमा नयाँ निबेदन/प्रतिबेदन प्राप्त
+                                            @break
+                                        @case('MapApplyNotification')
+                                            घर-नक्सा पासमा नयाँ नक्सा प्राप्त
+                                            @break
+                                        @default
+                                            नयाँ नोटिफिकेसन
+                                    @endswitch
                                     <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
                                 </p>
                             </a>

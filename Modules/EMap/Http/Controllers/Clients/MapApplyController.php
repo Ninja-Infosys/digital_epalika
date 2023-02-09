@@ -98,7 +98,7 @@ class MapApplyController extends Controller
             return $mapApplyData;
         });
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData, $mapApply));
 
         toast('फाईल सफलता पुर्बक थपियो', 'success');
 

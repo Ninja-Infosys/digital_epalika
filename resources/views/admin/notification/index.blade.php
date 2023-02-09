@@ -32,27 +32,36 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0">
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
-                                <th>SN</th>
-                                <th>Type</th>
-                                <th>Data</th>
-                                <th>Created</th>
-                                <th>Action</th>
+                                <th>क्र.स</th>
+                                <th>विषय</th>
+                                <th>विवरण</th>
+                                <th>समय</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($notifications as $key=>$notification )
-                                <tr style="{{ $notification->read_at ? '' : 'background-color:#edeff1;' }}">
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $notification->type }}</td>
+                            @foreach ($notifications as $notification )
+                                <tr @class(['table-secondary'=> !$notification->read_at])>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <ul>
-                                            @foreach ($notification->data as $key=>$data)
-                                                <li>{{ Str::upper($key).' : ' .$data }}</li>
-                                            @endforeach
-                                        </ul>
+                                        @switch(class_basename($notification->type))
+                                            @case('ApplyMapNoticeNotification')
+                                                घर-नक्सा पासमा नयाँ निबेदन/प्रतिबेदन प्राप्त
+                                                @break
+                                            @case('MapApplyNotification')
+                                                घर-नक्सा पासमा नयाँ नक्सा प्राप्त
+                                            @break
+                                                @default
+                                            नयाँ नोटिफिकेसन
+                                            @endswitch
+                                    </td>
+                                    <td>
+                                        @foreach ($notification->data as $key=>$data)
+                                            <p class="lh-lg">{{ Str::upper($key).' : ' .$data }}</p>
+                                        @endforeach
                                     </td>
                                     <td>{{ $notification->created_at->diffForHumans() }}</td>
                                     <td>
