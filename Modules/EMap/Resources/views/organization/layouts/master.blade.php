@@ -13,13 +13,8 @@
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/bootstrap1.min.css')}}"/>
 
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/vendors/themefy_icon/themify-icons.css')}}"/>
-
-
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/vendors/font_awesome/css/all.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
-
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/metisMenu.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/style1.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
@@ -58,14 +53,7 @@
 
 <script src="{{asset('assets/backend/emap/admin/js/jquery1-3.4.1.min.js')}}"></script>
 <script src="{{asset('assets/backend/emap/admin/js/bootstrap1.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/js/metisMenu.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/count_up/jquery.waypoints.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/count_up/jquery.counterup.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/niceselect/js/jquery.nice-select.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/owl_carousel/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/tagsinput/tagsinput.js')}}"></script>
 <script src="{{asset('assets/backend/emap/admin/vendors/text_editor/summernote-bs4.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/js/custom.js')}}"></script>
 
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
 
