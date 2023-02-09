@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 class RevenuePermissionSeeder extends Seeder
 {
     use StorePermissionTrait;
+
     public function run()
     {
         $permissions = [
@@ -31,6 +32,14 @@ class RevenuePermissionSeeder extends Seeder
             'revenueCategory_create',
             'revenueCategory_edit',
             'revenueCategory_delete',
+            'sector_access',
+            'sector_create',
+            'sector_edit',
+            'sector_delete',
+            'place_access',
+            'place_create',
+            'place_edit',
+            'place_delete',
         ];
 
         $this->storePermission($permissions);

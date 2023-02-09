@@ -60,6 +60,13 @@
                     </a>
                 </li>
             @endcan
+            @can('sector_access')
+                <li class="{{request()->routeIs('admin.revenue.setting.sector.*') ? 'active' : ''}}">
+                    <a href="{{route('admin.revenue.setting.sector.index')}}">
+                        <span>क्षेत्र</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

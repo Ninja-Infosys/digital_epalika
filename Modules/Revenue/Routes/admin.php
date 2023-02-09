@@ -5,6 +5,7 @@ use Modules\Revenue\Http\Controllers\Admin\DashboardController;
 use Modules\Revenue\Http\Controllers\Admin\InvoiceController;
 use Modules\Revenue\Http\Controllers\Admin\RevenueCategoryController;
 use Modules\Revenue\Http\Controllers\Admin\RevenueController;
+use Modules\Revenue\Http\Controllers\Admin\SectorController;
 use Modules\Revenue\Http\Controllers\Admin\TaxPayerController;
 use Modules\Revenue\Http\Controllers\Admin\TaxPayerTypeController;
 
@@ -24,4 +25,5 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('revenue', RevenueController::class)->except('show');
 
     Route::resource('taxPayerType', TaxPayerTypeController::class)->except('show');
+    Route::resource('sector', SectorController::class)->except('show');
 });
