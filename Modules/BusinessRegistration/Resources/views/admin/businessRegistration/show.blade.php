@@ -63,54 +63,54 @@
                                                     <thead>
                                                     <tr>
                                                         <th>नाम</th>
-                                                        <th>{{$businessDetail->name??''}}</th>
+                                                        <td>{{$businessDetail->name??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>नाम अंग्रेजी</th>
-                                                        <th>{{$businessDetail->name_en??''}}</th>
+                                                        <td>{{$businessDetail->name_en??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
-                                                        <th>{{$businessDetail->address??''}}</th>
+                                                        <td>{{$businessDetail->address??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना अंग्रेजी</th>
-                                                        <th>{{$businessDetail->address_en??''}}</th>
+                                                        <td>{{$businessDetail->address_en??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> व्यवसायको प्रकृति</th>
-                                                        <th>{{$businessDetail->businessNature->title??''}}</th>
+                                                        <td>{{$businessDetail->businessNature->title??''}}</td>
                                                     </tr>
 
                                                     <tr>
                                                         <th> कारोबार गर्ने वस्तु</th>
-                                                        <th>{{$businessDetail->objectTransaction->title??''}}</th>
+                                                        <td>{{$businessDetail->objectTransaction->title??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> चालु पूँजी</th>
-                                                        <th>{{ $businessDetail->working_capital ?? ''}}</th>
+                                                        <td>{{ $businessDetail->working_capital ?? ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> स्थिर पूँजी</th>
-                                                        <th>{{$businessDetail->fixed_capital??''}}</th>
+                                                        <td>{{$businessDetail->fixed_capital??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> पुँजीगत लगानी</th>
-                                                        <th>{{$businessDetail->investment??''}}</th>
+                                                        <td>{{$businessDetail->investment??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> उदेश्य</th>
-                                                        <th>{{$businessDetail->purpose ??''}}</th>
+                                                        <td>{{$businessDetail->purpose ??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
-                                                        <th>
+                                                        <td>
                                                             {{$businessDetail->LocalBody->local_body ?? ''}}
                                                             -{{$businessDetail->ward_no ?? ''}}
                                                             , {{$businessDetail->tole ?? ''}}
                                                             , {{$businessDetail->District->district ?? ''}}
                                                             , {{$businessDetail->Province->province ?? ''}}
-                                                        </th>
+                                                        </td>
                                                     </tr>
 
 
@@ -134,92 +134,92 @@
                                                         <thead>
                                                         <tr>
                                                             <th>फोटो</th>
-                                                            <th><img src="{{$partner->photo}}" height="60"
+                                                            <td><img src="{{$partner->photo}}" height="60"
                                                                      class="rounded-circle"
-                                                                     alt="{{$partner->name}}"></th>
+                                                                     alt="{{$partner->name}}"></td>
                                                         </tr>
                                                         <tr>
                                                             <th>नागरिकता नं</th>
-                                                            <th>{{$partner->citizenship_no}}</th>
+                                                            <td>{{$partner->citizenship_no}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>जारी मिति</th>
-                                                            <th>{{$partner->issue_date}}</th>
+                                                            <td>{{$partner->issue_date}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>जारी जिल्ला</th>
-                                                            <th>{{$partner->issueDistrict->district??''}}</th>
+                                                            <td>{{$partner->issueDistrict->district??''}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>फोन</th>
-                                                            <th>{{$partner->phone}}</th>
+                                                            <td>{{$partner->phone}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>ईमेल</th>
-                                                            <th>{{$partner->email}}</th>
+                                                            <td>{{$partner->email}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>घर नं</th>
-                                                            <th>{{$partner->house_no}}</th>
+                                                            <td>{{$partner->house_no}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>व्यक्तिगत स्थाई लेखा नम्बर</th>
-                                                            <th>{{$partner->account_no}}</th>
+                                                            <td>{{$partner->account_no}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>राष्ट्रियता परिचयपत्र नम्बर</th>
-                                                            <th>{{$partner->national_card_no}}</th>
+                                                            <td>{{$partner->national_card_no}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>लिङ्ग</th>
-                                                            <th>{{$partner->gender}}</th>
+                                                            <td>{{$partner->gender?->label()??''}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>शैक्षिक योग्यता</th>
-                                                            <th>{{$partner->education_qualification}}</th>
+                                                            <td>{{$partner->education_qualification?->label()??''}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>मुख्य पेशा</th>
-                                                            <th>{{$partner->occupation}}</th>
+                                                            <td>{{$partner->occupation}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>बुवाको नाम</th>
-                                                            <th>{{$partner->father_name}}</th>
+                                                            <td>{{$partner->father_name}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>हजुरबुवाको नाम</th>
-                                                            <th>{{$partner->grandfather_name}}</th>
+                                                            <td>{{$partner->grandfather_name}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>ठेगाना</th>
-                                                            <th>
+                                                            <td>
                                                                 {{$partner->localBody->local_body ?? ''}}
                                                                 -{{$partner->ward_no ?? ''}}
                                                                 , {{$partner->tole ?? ''}}
                                                                 , {{$partner->district->district ?? ''}}
 
-                                                            </th>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th>नागरिकता (आगाडी)</th>
-                                                            <th>
+                                                            <td>
                                                                 <a href="{{$partner->citizenship_front}}"><i
                                                                         class="fa fa-download"></i> </a>
-                                                            </th>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th>नागरिकता (पछाडी)</th>
-                                                            <th>
+                                                            <td>
                                                                 <a href="{{$partner->citizenship_back}}"><i
                                                                         class="fa fa-download"></i> </a>
-                                                            </th>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th> हस्ताक्षर</th>
-                                                            <th>
+                                                            <td>
                                                                 <a href="{{$partner->signature}}"><i
                                                                         class="fa fa-download"></i> </a>
-                                                            </th>
+                                                            </td>
                                                         </tr>
                                                         </thead>
                                                     </table>
@@ -241,20 +241,27 @@
                                                     <table class="table table-sm mb-0 table-striped table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <th> घर धनिको नाम थर</th>
-                                                            <th>{{$businessDetail->house_owner_name??''}}</th>
+                                                            <td> घर धनिको नाम थर</td>
+                                                            <td>{{$businessDetail->house_owner_name??''}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th> घर धनिको मोबाइल नं</th>
-                                                            <th>{{$businessDetail->house_owner_phone??''}}</th>
+                                                            <td> घर धनिको मोबाइल नं</td>
+                                                            <td>{{$businessDetail->house_owner_phone??''}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th> ठेगाना</th>
-                                                            <th>{{$businessDetail->house_owner_address??''}}</th>
+                                                            <td> ठेगाना</td>
+                                                            <td>{{$businessDetail->house_owner_address??''}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th> मासिक भाडा रु</th>
-                                                            <th>{{$businessDetail->house_owner_monthly_rent??''}}</th>
+                                                            <td> मासिक भाडा रु</td>
+                                                            <td>{{$businessDetail->house_owner_monthly_rent??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> भाडा सम्झौता </td>
+                                                            <td>
+                                                                <a href="{{$businessDetail->rent_agreement??''}}"><i
+                                                                        class="fa fa-download"></i> </a>
+                                                            </td>
                                                         </tr>
                                                         </thead>
                                                     </table>
@@ -312,15 +319,15 @@
                                                     <thead>
                                                     <tr>
                                                         <th> लम्बाई</th>
-                                                        <th>{{$businessDetail->length??''}}</th>
+                                                        <td>{{$businessDetail->length??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> चौडाई</th>
-                                                        <th>{{$businessDetail->width??''}}</th>
+                                                        <td>{{$businessDetail->width??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> वर्गफिट</th>
-                                                        <th>{{$businessDetail->square??''}}</th>
+                                                        <td>{{$businessDetail->square??''}}</td>
                                                     </tr>
                                                     </thead>
                                                 </table>
@@ -451,7 +458,6 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                            @if(empty($businessDetail->registration_no))
                                 <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
                                       method="post"
                                       enctype="multipart/form-data">
@@ -509,6 +515,11 @@
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>
+                                            @if(!empty($businessDetail->other_file))
+                                                <a href="{{$businessDetail->other_file}}" download="{{$businessDetail->other_file}}">
+                                                    <i class="fa fa-download"></i> Download
+                                                </a>
+                                            @endif
                                             <div class="col-md-12 mb-2">
                                                 <label for="other_file" class="form-label"> फाईल </label>
                                                 <input
@@ -527,36 +538,6 @@
                                         Save
                                     </button>
                                 </form>
-                            @else
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>करदाता नम्बर</th>
-                                            <th>बिल नं</th>
-                                            <th>रकम</th>
-                                            <th>फाईल</th>
-                                            <th>#</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>{{$businessDetail->taxpayer_number}}</td>
-                                        <td>{{$businessDetail->bill_no}}</td>
-                                        <td>{{$businessDetail->amount}}</td>
-                                        <td>
-                                            <a href="{{$businessDetail->other_file}}">
-                                                <i class="fa fa-download"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            @endif
                         </div>
 
                         {{--                        <div class="tab-pane" id="tax">--}}

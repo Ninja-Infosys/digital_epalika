@@ -37,8 +37,8 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
 });
 
 
-Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
-    Route::get('/', 'getRequiredData')->name('report');
+Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
+    Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
 });
 
