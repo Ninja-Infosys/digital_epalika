@@ -20,14 +20,18 @@ class HeaderComponent extends Component
     public string $year = '';
     public string $month = '';
     public string $day = '';
+    public bool $hasClock = true;
 
-    public function __construct()
+    public function __construct($hasClock = true)
     {
         $this->headers = OfficeHeader::orderBy('position')->get();
-        $nepaliDate = $this->get_nepali_date(date('Y'), date('m'), date('d'));
-        $this->year = Str::padLeft($nepaliDate['y'], 4, 0);
-        $this->day = Str::padLeft($nepaliDate['d'], 2, 0);
-        $this->month = Str::padLeft($nepaliDate['M'], 2, 0);
+        $this->hasClock = $hasClock;
+        if ($hasClock) {
+            $nepaliDate = $this->get_nepali_date(date('Y'), date('m'), date('d'));
+            $this->year = Str::padLeft($nepaliDate['y'], 4, 0);
+            $this->day = Str::padLeft($nepaliDate['d'], 2, 0);
+            $this->month = $nepaliDate['M'];
+        }
     }
 
     public function render()

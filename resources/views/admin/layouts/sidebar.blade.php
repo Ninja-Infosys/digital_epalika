@@ -10,3 +10,9 @@
         <span> प्राविधिक मद्दत (सहयोग)</span>
     </a>
 </li>
+<li class="">
+    <a href="{{asset('assets/backend/apk/mobile_app.apk')}}" download="{{asset('assets/backend/apk/mobile_app.apk')}}">
+        <i class="fa fa-download"></i>
+        <span> मोबाइल एप</span>
+    </a>
+</li>

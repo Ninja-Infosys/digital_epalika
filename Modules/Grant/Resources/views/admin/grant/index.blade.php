@@ -1,0 +1,113 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.grant.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">कार्यक्रम/क्रियाकलाप</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">जारी भएका कार्यक्रम/क्रियाकलापहरु</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">कार्यक्रम/क्रियाकलापहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('grant_create')
+                                <a href="{{route('admin.grant.grant.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>आ.व.</th>
+                                <th>अनुदान दिने सस्था</th>
+                                <th>अनुदानको कार्यक्रमको नाम</th>
+                                <th>अनुदानको प्रकार</th>
+                                <th>शाखा</th>
+                                <th>अनुदानको रकम</th>
+                                <th>अनुदानको लागि</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($grants as $grant)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$grant->fiscalYear->title??''}}</td>
+                                    <td>{{$grant->grantOffice->office_name??''}}</td>
+                                    <td>{{$grant->grantProgram->name??''}}</td>
+                                    <td>{{$grant->grantType->title??''}}</td>
+                                    <td>{{$grant->branch->branch_name??''}}</td>
+                                    <td>{{$grant->grant_amount}}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach($grant->grant_for_data as $grant_for)
+                                                <li>
+                                                    {{\Modules\Grant\Enums\GranteeEnum::tryFrom($grant_for)->label()}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        @can('grant_edit')
+                                            <a data-bs-type="edit" href="{{route('admin.grant.grant.edit', $grant)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                            @can('grant_access')
+                                            <a data-bs-type="edit" href="{{route('admin.grant.grant.show', $grant)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('grant_delete')
+                                            <form
+                                                action="{{route('admin.grant.grant.destroy', $grant)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                        title=" मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $grants->onEachSide(config('app.pagination_count'))->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

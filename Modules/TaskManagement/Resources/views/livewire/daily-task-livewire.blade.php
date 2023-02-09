@@ -3,7 +3,7 @@
         <div class="col-md-4 mb-2">
             <label for="date">मिति *</label>
             <input type="text"
-                   wire:model="form.date" class="form-control" id="date" placeholder="मिति">
+                   wire:model="form.date" class="form-control" id="date" placeholder="मिति" wire:ignore>
             @error('form.date')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
@@ -13,7 +13,7 @@
             <select
                 wire:model="form.branch_id"
                 class="form-select @error('branch_id') is-invalid @enderror"
-                id="branch_id">
+                id="branch_id" wire:ignore>
                 <option value="">--- छान्नुहोस् ---</option>
                 @foreach($branches as $branch)
                     @if(count($branch->branches)>0)
@@ -54,7 +54,7 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-6 mb-2">
             <label for="branch_id" class="form-label">कार्य क्षेत्र *</label>
             <select
                 wire:model="form.task_division_id"
@@ -71,9 +71,9 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-6 mb-2">
             <label for="documents" class="form-label">कागजातहरू (Multiple)</label>
-            <input type="file" wire:model="form.documents" id="documents" multiple class="form-control">
+            <input type="file" wire:model="form.documents" id="documents" multiple class="form-control" wire:ignore>
             @error('form.documents')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
@@ -81,9 +81,9 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-12 mb-2">
             <label for="remarks" class="form-label">कैफियत</label>
-            <textarea class="form-control" wire:model="form.remarks" id="remarks" rows="5"></textarea>
+            <textarea class="form-control" wire:model="form.remarks" id="remarks" rows="2" wire:ignore></textarea>
             @error('form.remarks')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror

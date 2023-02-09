@@ -14,11 +14,11 @@
                             <a href="{{route('admin.roaster.trainer.index')}}">प्रशिक्षक</a>
                         </li>
                         <li class="breadcrumb-item">
-                            प्रशिक्षकहरुको विवरण
+                            प्रशिक्षकहरु
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">प्रशिक्षकहरुको विवरण</h4>
+                <h4 class="page-title">प्रशिक्षकहरु</h4>
             </div>
         </div>
     </div>
@@ -26,14 +26,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">प्रशिक्षक सूची</h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">प्रशिक्षकहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-bordered table-hover mt-2">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.सं</th>
@@ -42,9 +44,9 @@
                                 <th>विभाग</th>
                                 <th>पद</th>
                                 <th>कार्यालय</th>
-                                <th>Approved</th>
+                                <th>स्वीकृत</th>
                                 <th>सम्पर्क</th>
-                                <th class="text-center">कार्य</th>
+                                <th class="text-center">#</th>
 
                             </tr>
                             </thead>
@@ -75,14 +77,14 @@
 
                                     <td>
                                         @can('trainer_access')
-                                            <a href="{{route('admin.roaster.trainer.show', $trainer)}}"
-                                               class="btn btn-xs btn-outline-info">
+                                            <a data-bs-type="edit" href="{{route('admin.roaster.trainer.show', $trainer)}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                             @can('trainer_edit')
-                                            <a href="{{route('admin.roaster.trainer.edit', $trainer)}}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('admin.roaster.trainer.edit', $trainer)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -91,7 +93,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

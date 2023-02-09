@@ -91,8 +91,8 @@ class DailyTaskLivewire extends Component
                     'remarks' => $formData['remarks'],
                 ]);
             }
-            if (! empty($this->form['documents'])) {
-                foreach ($this->form['documents'] as $document) {
+            if (! empty($formData['documents'])) {
+                foreach ($formData['documents'] as $document) {
                     $dailyTask->files()->create([
                         'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                         'extension' => $document->getClientOriginalExtension(),

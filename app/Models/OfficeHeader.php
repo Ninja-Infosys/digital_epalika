@@ -23,5 +23,7 @@ class OfficeHeader extends Model
         'font_size',
         'position',
         'font_color',
+        'title_en',
+        'card_font'
     ];
 }

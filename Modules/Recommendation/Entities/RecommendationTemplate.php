@@ -21,23 +21,22 @@ class RecommendationTemplate extends Model
     ];
 
     protected $fillable = [
-        'application_type',
-        'title',
+        'user_id',
+        'recommendation_category_id',
+        'is_active',
         'data',
-        'status'
+        'title'
     ];
 
-    protected $casts = [
-        'application_type' => ApplicationTypeEnum::class,
-    ];
+  
 
     public function scopeActive($q)
     {
-        return $q->where('status', 1);
+        return $q->where('is_active', 1);
     }
 
     public function scopeNotActive($q)
     {
-        return $q->where('status', 0);
+        return $q->where('is_active', 0);
     }
 }

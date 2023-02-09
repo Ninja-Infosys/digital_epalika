@@ -21,22 +21,22 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कार्य विभाजन </h4>
-                        <a href="{{route('admin.taskManagement.taskDivision.create')}}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                        </a>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">कार्य विभाजन</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                                <a href="{{route('admin.taskManagement.taskDivision.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शाखाहरु अनुसार कार्यहरू </th>
+                                <th>शाखाहरु अनुसार कार्यहरू</th>
                                 <th>शीर्षक</th>
                                 <th>#</th>
                             </tr>
@@ -50,16 +50,16 @@
                                 </td>
                                 <td>{{\Illuminate\Support\Str::words($taskDivision->title,10)}}</td>
                                 <td>
-                                    <a href="{{route('admin.taskManagement.taskDivision.edit',$taskDivision)}}"
+                                    <a data-bs-type="edit" href="{{route('admin.taskManagement.taskDivision.edit',$taskDivision)}}"
                                        title="सम्पादन गर्नुहोस्"
-                                       class="btn btn-xs btn-outline-primary">
+                                       class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <form action="{{route('admin.taskManagement.taskDivision.destroy',$taskDivision)}}"
                                           method="post">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}} " title="मेटाउनु होस्">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

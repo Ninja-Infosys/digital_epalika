@@ -1,22 +1,13 @@
-<div class="background" style="background-image: url('{{$officeSetting->background_image_url}}')">
-    <div class="container d-flex justify-content-around">
-        <div class="col-md-2 col-sm-2 col-xs-2">
+<div class="background" style="background-image: url('{{$officeSetting->background_image_url??''}}')">
+    <div class="container-fluid d-lg-flex justify-content-between align-items-center">
             <a href="{{route('welcome')}}" class="main-logo">
-                <img alt="nepal-government-logo" class="logo"
+                <img alt="nepal-government-logo" class="logo img-responsive center-block d-block mx-auto"
                      src="{{ asset('assets/frontend/image/logo.png') }}"/>
             </a>
-        </div>
-        <div class="col-md-8 col-sm-8 col-xs-8">
-            <div class="row mt-3">
-                <x-header-component/>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-2 col-xs-2 d-flex justify-content-around">
+        <x-header-component/>
             <a href="{{route('welcome')}}" class="main-logo">
-                <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
+                <img alt="nepal-flag" class="logo-nep d-none d-lg-block"
                      src="{{ asset('assets/backend/images/nepal_flag.gif') }}"/>
             </a>
-        </div>
     </div>
 </div>

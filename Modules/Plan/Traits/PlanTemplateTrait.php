@@ -2,6 +2,8 @@
 
 namespace Modules\Plan\Traits;
 
+use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -9,15 +11,22 @@ use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
+use Modules\Plan\Entities\PlanTemplate;
+use Modules\Plan\Enums\PlanTemplateTypeEnum;
 
 trait PlanTemplateTrait
 {
+    use NepaliDateConverter;
     private array $template = [
         [
             'title' => 'आयोजनाको विवरण',
             'data' => [
+                'मिति' => '[@date]',
+                'आर्थिक बर्ष' => '[@fiscalYear]',
                 'योजना/कार्यक्रमको नाम' => '[@project_name]',
                 'दर्ता नं.' => '[@registration_no]',
+                'खर्चको किसिम' => '[@expense_head]',
+                'अनुदान किसिम' => '[@grant_category]',
                 'योजनाको क्षेत्र' => '[@plan_area]',
                 'योजनाको अबस्था' => '[@project_status]',
                 'आयोजना सुरु हुने मिति' => '[@project_start_date]',
@@ -40,18 +49,20 @@ trait PlanTemplateTrait
         [
             'title' => 'आयोजनाको लागत सम्वन्धि विवरण',
             'data' => [
-                'अनुमानित लागत' => '[@projectCostDetail.estimated_total_cost]',
-                'सघंबाट' => '[@projectCostDetail.federal_invest]',
-                'प्रदेशबाट' => '[@projectCostDetail.province_invest]',
-                'स्थानीय तह/कार्यालय बाट' => '[@projectCostDetail.local_level_invest]',
-                'जन श्रमदान/उपभोक्ता समिति बाट' => '[@projectCostDetail.consumer_committee_invest]',
-                'गैरसरकारी सघंसंस्थाबाट' => '[@projectCostDetail.ngo_invest]',
-                'विदेशी दात्री सघंसंस्थाबाट' => '[@projectCostDetail.foreign_donor_invest]',
-                'अन्य लगानी' => '[@projectCostDetail.others_invest]',
-                'लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी बाहेक)' => '[@projectCostDetail.estimated_cost_excluding_vat]',
+                'आयोजनाको अनुमान लागत रु' => '[@total_cost_estimate_amount]',
+                'कार्यालयबाट स्वीकृत रकम ' => '[@allocated_amount]',
+                'अन्य निकायबाट प्राप्त रकम' => '[@agencies_grants]',
+                'अन्य साझेदारी रकम' => '[@share_amount]',
+                'समितिबाट नगद साझेदारी रकम' => '[@committee_share_amount]',
+                'कन्टिजेन्सी सहितको कुल रकम' => '[@total_amount_for_contingency]',
+                'कन्टिजेन्सी कट्टी रकम' => '[@contingency_amount]',
+                'कन्टिजेन्सी %' => '[@contingency_percent]',
+                'अन्य करकट्टी रकम' => '[@other_taxes]',
+                'योजना सम्झौता रकम' => '[@project_contract_amount]',
+                'समितिबाट जनश्रमदान रकम' => '[@labor_amount]',
                 'बस्तुगत अनुदान सम्बन्धी विवरण' => '[@projectGrantDetails]',
-                'संगठित संस्था' => '[@projectCostDetail.benefited_organization]',
-                'अन्य' => '[@projectCostDetail.others_benefited]',
+                'लाभान्वित संस्था' => '[@benefited_organization]',
+                'अन्य लाभान्वित' => '[@others_benefited]',
                 'योजनाबाट प्रत्यक्ष रुपमा लाभान्वित हुने घरधुरी तथा जनसंख्याको विवरण' => '[@benefitedMemberDetails]',
             ],
         ],
@@ -69,6 +80,7 @@ trait PlanTemplateTrait
                 'सदस्य संख्या' => '[@consumerCommittee.member_number]',
                 'आयोजना संचालन सम्बन्धी अनुभव' => '[@consumerCommittee.experience_in_project]',
                 'उपभोक्ता समिति सदस्य विवरण' => '[@consumerCommittee.consumerCommitteeOfficials]',
+                'अध्यक्षको नाम' => '[@consumerCommittee.chairman]',
             ],
         ],
         [
@@ -88,8 +100,8 @@ trait PlanTemplateTrait
                 'ठेक्का पत्रिकाको नाम' => '[@projectBidDetail.contract_newspaper_name]',
                 'ठेक्का स्वीकृतीको निर्णय मिति' => '[@projectBidDetail.contract_acceptance_decision_date]',
                 'ठेक्का विलो प्रतिशत' => '[@projectBidDetail.contract_percentage]',
-                'ठेकेदारको नाम' => '[@projectBidDetail.contractor_name]',
-                'ठेकेदारको ठेगाना' => '[@projectBidDetail.contractor_address]',
+                'कम्पनीको नाम' => '[@projectBidDetail.contractor_name]',
+                'कम्पनीको ठेगाना' => '[@projectBidDetail.contractor_address]',
                 'सम्पर्क नम्बर' => '[@projectBidDetail.contractor_phone]',
                 'कबोल अंक' => '[@projectBidDetail.confession_number]',
                 'ठेक्का सम्झौता मिति' => '[@projectBidDetail.contract_agreement_date]',
@@ -111,32 +123,51 @@ trait PlanTemplateTrait
             ],
         ],
         [
-            'title' => 'मोविलाईजेशन पेश्की/रनिङ विल विवरण',
+            'title' => 'आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था',
             'data' => [
-                'विवरण' => '[@projectBidSubmissions]',
+                'जिम्मा लिने समिती संस्थाको नाम' => '[@projectMaintenanceArrangement.office_name]',
+                'जनश्रमदान' => '[@projectMaintenanceArrangement.public_service]',
+                'सेवा शुल्क' => '[@projectMaintenanceArrangement.service_fee]',
+                'दस्तुर, चन्दाबाट' => '[@projectMaintenanceArrangement.from_fee_donation]',
+                'अन्य केहि भए' => '[@projectMaintenanceArrangement.others]'
             ],
         ],
+        [
+            'title' => 'सम्झौताको शर्तहरु',
+            'data' => [
+                'डाटा' => '[@projectAgreementTerm.data]'
+            ],
+        ]
     ];
 
     public function getTemplateDataAttribute(): Collection
     {
-        return $this->getEmapTemplates()->map(function ($applicationTemplate) {
-            $data = $this->getData($applicationTemplate->data);
+        return $this->getPlanTemplates()->map(function ($planTemplate) {
+            $data = $this->getData($planTemplate->data);
 
             return [
-                'for' => $applicationTemplate->for,
+                'type' => $planTemplate->type,
                 'data' => $data,
             ];
         });
     }
 
-    public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
+    public function getPlanTemplateData(PlanTemplate $planTemplate): string
     {
-        $eMapTemplate = $this->getEmapTemplates();
-        $mapTemplate = $eMapTemplate->where('for', $noticeTypeEnum)->where('status', 1)->first();
+        return $this->getData($planTemplate->data);
+    }
 
-        if ($mapTemplate) {
-            return $this->getData($mapTemplate->data);
+    public function getSpecificTemplateData(PlanTemplateTypeEnum $planTemplateTypeEnum): string
+    {
+        $planTemplates = $this->getPlanTemplates();
+        $planTemplate = $planTemplates->where('type', $planTemplateTypeEnum);
+        if (!empty($this->operated_through)) {
+            $planTemplate = $planTemplate->where('template_for', $this->operated_through);
+        }
+        $planTemplate = $planTemplate->first();
+
+        if ($planTemplate) {
+            return $this->getData($planTemplate->data);
         }
 
         return '';
@@ -152,188 +183,142 @@ trait PlanTemplateTrait
         $replace = [];
 
         $replace = array_merge(
-            $this->getMapApplyReplacement(),
-            $replace,
-            $this->getLandDetailReplacement(),
-            $this->getLandOwnerReplacement(),
-            $this->getHouseOwnerReplacement(),
-            $this->getFourFortsReplacement(),
-            $this->getApplicantDetailReplacement(),
-            $this->getCriteriaDetailsReplacement(),
-            $this->getBuildingDetailsReplacement(),
-            $this->getDesignerDetailsReplacement(),
-            $this->getSupervisorDetailsReplacement(),
-            $this->getContractorDetailsReplacement()
+            $this->getProjectReplacement(),
+            $this->getConsumerCommitteeReplacement(),
+            $this->getProjectBidDetailReplacement(),
+            $this->getProjectMaintenanceArrangementReplacement(),
+            $this->getProjectAgreementTermReplacement(),
+            $replace
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
-    private function getMapApplyReplacement(): array
+    public function getProjectReplacement(): array
     {
+
         return [
+            '[@date]'=>$this->get_today_nepali_date(),
+            '[@fiscalYear]' => $this->fiscalYear->title ?? '',
+            '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
-            '[@registration_date]' => $this->registration_date ?? '',
-            '[@construction_type]' => $this->construction_type?->label() ?? '',
-            '[@usage]' => $this->usage?->label() ?? '',
-            '[@building_category]' => $this->building_category?->label() ?? '',
-            '[@structureType]' => $this->structureType->title ?? '',
-            '[@current_storey]' => $this->current_storey ?? '',
-            '[@future_storey]' => $this->future_storey ?? '',
-            '[@area_of_plinth]' => $this->area_of_plinth ?? '',
-            '[@length]' => $this->length ?? '',
-            '[@breadth]' => $this->breadth ?? '',
-            '[@height]' => $this->height ?? '',
-        ];
-    }
-
-    private function getLandDetailReplacement(): array
-    {
-        return [
-            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
-            '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
-            '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
-            '[@landDetail.tole]' => $this->landDetail->tole ?? '',
-            '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
-            '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
-            '[@landDetail.area]' => $this->landDetail->area ?? '',
-            '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
-        ];
-    }
-
-    private function getLandOwnerReplacement(): array
-    {
-        return [
-            '[@landOwner.land_owner_type]' => $this->landOwner->land_owner_type->label() ?? '',
-            '[@landOwner.name]' => $this->landOwner->name ?? '',
-            '[@landOwner.phone]' => $this->landOwner->phone ?? '',
-            '[@landOwner.father_name]' => $this->landOwner->father_name ?? '',
-            '[@landOwner.grandfather_name]' => $this->landOwner->grandfather_name ?? '',
-            '[@landOwner.citizenship_issue_district]' => $this->landOwner->citizenshipIssueDistrict->district ?? '',
-            '[@landOwner.citizenship_no]' => $this->landOwner->citizenship_no ?? '',
-            '[@landOwner.citizenship_issue_date]' => $this->landOwner->citizenship_issue_date ?? '',
-            '[@landOwner.address]' => $this->landOwner->address ?? '',
-            '[@landOwner.local_body]' => $this->landOwner->local_body ?? '',
-            '[@landOwner.ward_no]' => $this->landOwner->ward_no ?? '',
-        ];
-    }
-
-    private function getHouseOwnerReplacement(): array
-    {
-        return [
-            '[@houseOwner.name]' => $this->houseOwner->name ?? '',
-            '[@houseOwner.phone]' => $this->houseOwner->phone ?? '',
-            '[@houseOwner.father_name]' => $this->houseOwner->father_name ?? '',
-            '[@houseOwner.grandfather_name]' => $this->houseOwner->grandfather_name ?? '',
-            '[@houseOwner.citizenship_issue_district]' => $this->houseOwner->citizenshipIssueDistrict->district ?? '',
-            '[@houseOwner.citizenship_no]' => $this->houseOwner->citizenship_no ?? '',
-            '[@houseOwner.citizenship_issue_date]' => $this->houseOwner->citizenship_issue_date ?? '',
-            '[@houseOwner.address]' => $this->houseOwner->address ?? '',
-            '[@houseOwner.local_body]' => $this->houseOwner->local_body ?? '',
-            '[@houseOwner.ward_no]' => $this->houseOwner->ward_no ?? '',
-        ];
-    }
-
-    private function getFourFortsReplacement(): array
-    {
-        return [
-            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
-                'fourForts' => $this->fourForts,
+            '[@expense_head]' => $this->expenseHead->title ?? '',
+            '[@grant_category]' => $this->grantCategory->title ?? '',
+            '[@plan_area]' => $this->planArea->area_name ?? '',
+            '[@project_status]' => $this->project_status?->label() ?? '',
+            '[@project_start_date]' => $this->project_start_date ?? '',
+            '[@project_completion_date]' => $this->project_completion_date ?? '',
+            '[@plan_level]' => $this->planLevel->level_name ?? '',
+            '[@ward_no]' => implode(',', $this->ward_no ?? ''),
+            '[@budget_source]' => $this->budgetSource->source_name ?? '',
+            '[@budget_head]' => $this->budgetHead->title ?? '',
+            '[@allocated_amount]' => $this->allocated_amount ?? '',
+            '[@project_venue]' => $this->project_venue ?? '',
+            '[@purpose]' => $this->purpose ?? '',
+            '[@operated_through]' => $this->operated_through?->label() ?? '',
+            '[@extended_date]' => $this->extended_date ?? '',
+            '[@progress_spent_amount]' => $this->progress_spent_amount ?? '',
+            '[@physical_progress_target]' => $this->physical_progress_target ?? '',
+            '[@physical_progress_completed]' => $this->physical_progress_completed ?? '',
+            '[@physical_progress_unit]' => $this->physical_progress_unit ?? '',
+            '[@total_cost_estimate_amount]' => $this->total_cost_estimate_amount ?? 0,
+            '[@agencies_grants]' => $this->agencies_grants ?? 0,
+            '[@share_amount]' => $this->share_amount ?? 0,
+            '[@committee_share_amount]' => $this->committee_share_amount ?? 0,
+            '[@total_amount_for_contingency]' => $this->total_amount_for_contingency ?? 0,
+            '[@contingency_amount]' => $this->contingency_amount ?? 0,
+            '[@contingency_percent]' => $this->contingency_percent ?? 0,
+            '[@other_taxes]' => $this->other_taxes ?? 0,
+            '[@project_contract_amount]' => $this->project_contract_amount ?? 0,
+            '[@labor_amount]' => $this->labor_amount ?? 0,
+            '[@projectGrantDetails]' => (string)View::make('plan::admin.template_table.project_grant_details', [
+                'projectGrantDetails' => $this->projectGrantDetails
+            ]),
+            '[@benefited_organization]' => $this->benefited_organization ?? 0,
+            '[@others_benefited]' => $this->others_benefited ?? 0,
+            '[@benefitedMemberDetails]' => (string)View::make('plan::admin.template_table.benefited_member_details', [
+                'benefitedMemberDetails' => $this->benefitedMemberDetails
             ]),
         ];
     }
 
-    private function getDesignerDetailsReplacement(): array
-    {
-        $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
-
-        return [
-            '[@designerDetail.name]' => $designerDetail->name ?? '',
-            '[@designerDetail.father_name]' => $designerDetail->father_name ?? '',
-            '[@designerDetail.phone]' => $designerDetail->name ?? '',
-            '[@designerDetail.address]' => $designerDetail->address ?? '',
-            '[@designerDetail.local_body]' => $designerDetail->local_body ?? '',
-            '[@designerDetail.ward_no]' => $designerDetail->ward_no ?? '',
-            '[@designerDetail.nec_council_no]' => $designerDetail->nec_council_no ?? '',
-            '[@designerDetail.local_body_registration_no]' => $designerDetail->local_body_registration_no ?? '',
-            '[@designerDetail.consulting_firm_name]' => $designerDetail->consulting_firm_name ?? '',
-        ];
-    }
-
-    private function getSupervisorDetailsReplacement(): array
-    {
-        $supervisorDetail = $this->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
-
-        return [
-            '[@supervisorDetail.name]' => $supervisorDetail->name ?? '',
-            '[@supervisorDetail.father_name]' => $supervisorDetail->father_name ?? '',
-            '[@supervisorDetail.phone]' => $supervisorDetail->name ?? '',
-            '[@supervisorDetail.address]' => $supervisorDetail->address ?? '',
-            '[@supervisorDetail.local_body]' => $supervisorDetail->local_body ?? '',
-            '[@supervisorDetail.ward_no]' => $supervisorDetail->ward_no ?? '',
-            '[@supervisorDetail.nec_council_no]' => $supervisorDetail->nec_council_no ?? '',
-            '[@supervisorDetail.local_body_registration_no]' => $supervisorDetail->local_body_registration_no ?? '',
-            '[@supervisorDetail.consulting_firm_name]' => $supervisorDetail->consulting_firm_name ?? '',
-        ];
-    }
-
-    private function getContractorDetailsReplacement(): array
-    {
-        $contractorDetail = $this->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
-
-        return [
-            '[@contractorDetail.name]' => $contractorDetail->name ?? '',
-            '[@contractorDetail.father_name]' => $contractorDetail->father_name ?? '',
-            '[@contractorDetail.phone]' => $contractorDetail->name ?? '',
-            '[@contractorDetail.address]' => $contractorDetail->address ?? '',
-            '[@contractorDetail.local_body]' => $contractorDetail->local_body ?? '',
-            '[@contractorDetail.ward_no]' => $contractorDetail->ward_no ?? '',
-            '[@contractorDetail.nec_council_no]' => $contractorDetail->nec_council_no ?? '',
-            '[@contractorDetail.local_body_registration_no]' => $contractorDetail->local_body_registration_no ?? '',
-            '[@contractorDetail.consulting_firm_name]' => $contractorDetail->consulting_firm_name ?? '',
-        ];
-    }
-
-    private function getApplicantDetailReplacement(): array
+    public function getConsumerCommitteeReplacement(): array
     {
         return [
-            '[@applicantDetail.applicant_type]' => $this->applicantDetail->applicant_type->label() ?? '',
-            '[@applicantDetail.relation_with_owner]' => $this->applicantDetail->relation_with_owner->label() ?? '',
-            '[@applicantDetail.name]' => $this->applicantDetail->name ?? '',
-            '[@applicantDetail.phone]' => $this->applicantDetail->phone ?? '',
-            '[@applicantDetail.father_name]' => $this->applicantDetail->father_name ?? '',
-            '[@applicantDetail.citizenship_issue_district]' => $this->applicantDetail->citizenshipIssueDistrict->district ?? '',
-            '[@applicantDetail.citizenship_no]' => $this->applicantDetail->citizenship_no ?? '',
-            '[@applicantDetail.citizenship_issue_date]' => $this->applicantDetail->citizenship_issue_date ?? '',
-            '[@applicantDetail.signature_url]' => $this->applicantDetail->signature_url ?? '',
-        ];
-    }
-
-    private function getCriteriaDetailsReplacement(): array
-    {
-        return [
-            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
-                'criteriaDetails' => $this->criteriaDetails,
+            '[@consumerCommittee.name]' => $this->consumerCommittee->name ?? '',
+            '[@consumerCommittee.address]' => $this->consumerCommittee->address ?? '',
+            '[@consumerCommittee.phone]' => $this->consumerCommittee->phone ?? '',
+            '[@consumerCommittee.formation_date]' => $this->consumerCommittee->formation_date ?? '',
+            '[@consumerCommittee.committee_registration_date]' => $this->consumerCommittee->committee_registration_date ?? '',
+            '[@consumerCommittee.meeting_date]' => $this->consumerCommittee->meeting_date ?? '',
+            '[@consumerCommittee.registration_no]' => $this->consumerCommittee->registration_no ?? '',
+            '[@consumerCommittee.beneficiary_no]' => $this->consumerCommittee->beneficiary_no ?? '',
+            '[@consumerCommittee.member_number]' => $this->consumerCommittee->member_number ?? '',
+            '[@consumerCommittee.experience_in_project]' => $this->consumerCommittee->experience_in_project ?? '',
+            '[@consumerCommittee.chairman]' => $this->consumerCommittee?->consumerCommitteeOfficials->where('post', \Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)?->first()->name ?? '',
+            '[@consumerCommittee.consumerCommitteeOfficials]' => (string)View::make('plan::admin.template_table.consumerCommitteeOfficials', [
+                'consumerCommitteeMembers' => $this->consumerCommittee->consumerCommitteeOfficials ?? collect()
             ]),
+
         ];
     }
 
-    private function getBuildingDetailsReplacement(): array
+    public function getProjectBidDetailReplacement(): array
     {
         return [
-            '[@buildingDetails]' => (string)View::make('emap::inc.building_details', [
-                'buildingDetails' => $this->buildingDetails,
-            ]),
+            '[@projectBidDetail.cost_estimation]' => $this->projectBidDetail->cost_estimation ?? '',
+            '[@projectBidDetail.notice_published_date]' => $this->projectBidDetail->notice_published_date ?? '',
+            '[@projectBidDetail.newspaper_name]' => $this->projectBidDetail->newspaper_name ?? '',
+            '[@projectBidDetail.contract_evaluation_decision_date]' => $this->projectBidDetail->contract_evaluation_decision_date ?? '',
+            '[@projectBidDetail.intent_notice_publish_date]' => $this->projectBidDetail->intent_notice_publish_date ?? '',
+            '[@projectBidDetail.contract_newspaper_name]' => $this->projectBidDetail->contract_newspaper_name ?? '',
+            '[@projectBidDetail.contract_acceptance_decision_date]' => $this->projectBidDetail->contract_acceptance_decision_date ?? '',
+            '[@projectBidDetail.contract_percentage]' => $this->projectBidDetail->contract_percentage ?? '',
+            '[@projectBidDetail.contractor_name]' => $this->projectBidDetail->contractor_name ?? '',
+            '[@projectBidDetail.contractor_address]' => $this->projectBidDetail->contractor_address ?? '',
+            '[@projectBidDetail.contractor_phone]' => $this->projectBidDetail->contractor_phone ?? '',
+            '[@projectBidDetail.confession_number]' => $this->projectBidDetail->confession_number ?? '',
+            '[@projectBidDetail.contract_agreement_date]' => $this->projectBidDetail->contract_agreement_date ?? '',
+            '[@projectBidDetail.contract_assigned_date]' => $this->projectBidDetail->contract_assigned_date ?? '',
+            '[@projectBidDetail.bid_bond_amount]' => $this->projectBidDetail->bid_bond_amount ?? '',
+            '[@projectBidDetail.bid_bond_no]' => $this->projectBidDetail->bid_bond_no ?? '',
+            '[@projectBidDetail.bid_bond_bank_name]' => $this->projectBidDetail->bid_bond_bank_name ?? '',
+            '[@projectBidDetail.bid_bond_issue_date]' => $this->projectBidDetail->bid_bond_issue_date ?? '',
+            '[@projectBidDetail.bid_bond_expiry_date]' => $this->projectBidDetail->bid_bond_expiry_date ?? '',
+            '[@projectBidDetail.performance_bond_no]' => $this->projectBidDetail->performance_bond_no ?? '',
+            '[@projectBidDetail.performance_bond_amount]' => $this->projectBidDetail->performance_bond_amount ?? '',
+            '[@projectBidDetail.performance_bond_bank]' => $this->projectBidDetail->performance_bond_bank ?? '',
+            '[@projectBidDetail.performance_bond_issue_date]' => $this->projectBidDetail->performance_bond_issue_date ?? '',
+            '[@projectBidDetail.performance_bond_expiry_date]' => $this->projectBidDetail->performance_bond_expiry_date ?? '',
+            '[@projectBidDetail.performance_bond_extended_date]' => $this->projectBidDetail->performance_bond_extended_date ?? '',
+            '[@projectBidDetail.insurance_issue_date]' => $this->projectBidDetail->insurance_issue_date ?? '',
+            '[@projectBidDetail.insurance_expiry_date]' => $this->projectBidDetail->insurance_expiry_date ?? '',
+            '[@projectBidDetail.insurance_extended_date]' => $this->projectBidDetail->insurance_extended_date ?? '',
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmapTemplates(): mixed
+    public function getProjectMaintenanceArrangementReplacement(): array
     {
-        return Cache::rememberForever('eMapTemplates', function () {
-            return EMapTemplate::all();
+        return [
+            '[@projectMaintenanceArrangement.office_name]' => $this->projectMaintenanceArrangement->office_name ?? '',
+            '[@projectMaintenanceArrangement.public_service]' => $this->projectMaintenanceArrangement->public_service ?? '',
+            '[@projectMaintenanceArrangement.service_fee]' => $this->projectMaintenanceArrangement->service_fee ?? '',
+            '[@projectMaintenanceArrangement.from_fee_donation]' => $this->projectMaintenanceArrangement->from_fee_donation ?? '',
+            '[@projectMaintenanceArrangement.others]' => $this->projectMaintenanceArrangement->others ?? '',
+        ];
+    }
+
+    public function getProjectAgreementTermReplacement(): array
+    {
+        return [
+            '[@projectAgreementTerm.data]' => $this->projectAgreementTerm->data ?? '',
+        ];
+    }
+
+    public function getPlanTemplates(): mixed
+    {
+        return Cache::rememberForever('plan_templates', function () {
+            return PlanTemplate::all();
         });
     }
 }

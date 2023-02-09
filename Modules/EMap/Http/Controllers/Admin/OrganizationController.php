@@ -3,11 +3,13 @@
 namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\OrganizationRegisteredJob;
 use App\Mail\OrganizationRegistered;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,10 +21,10 @@ class OrganizationController extends Controller
         $this->checkAuthorization('organization_access');
         $organizations = Organization::with('organizationDetail')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['email','phone','name'], request('search'));
+                $q->whereLike(['email', 'phone', 'name'], request('search'));
             }
         })
-        ->latest()->paginate(10);
+            ->latest()->paginate(10);
 
 
         return view('emap::admin.organization.index', compact('organizations'));
@@ -34,13 +36,13 @@ class OrganizationController extends Controller
 
         DB::transaction(function () use ($organization) {
             $organization->update([
-                'is_active' => ! $organization->is_active,
+                'is_active' => !$organization->is_active,
             ]);
 
             if (empty($organization->password) && $organization->is_active == 1) {
                 $url = URL::signedRoute('organization.invitation', $organization);
 
-                \Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+                Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
             }
         });
 

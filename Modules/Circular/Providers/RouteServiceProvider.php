@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/circular')
             ->as('admin.circular.')
             ->group(module_path('Circular', '/Routes/admin.php'));

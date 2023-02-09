@@ -8,17 +8,26 @@
 @can('fiscalYear_access')
     <li class="{{request()->is('admin/setting/fiscalYear*') ? 'active' : ''}}">
         <a href="{{route('admin.fiscalYear.index')}}">
-            <i class="fa fa-calendar"></i>
+            <i class="fas fa-calendar-alt"></i>
             <span> आर्थिक बर्ष </span>
         </a>
     </li>
 @endcan
 
 @can('ethnicity_access')
-    <li class="{{request()->is('admin/setting/fiscalYear/*') ? 'active' : ''}}">
+    <li class="{{request()->is('admin/setting/ethnicity/*') ? 'active' : ''}}">
         <a href="{{route('admin.ethnicity.index')}}">
-            <i class="fa fa-user"></i>
+            <i class="fas fa-address-card"></i>
             <span> जातियता </span>
+        </a>
+    </li>
+@endcan
+
+@can('occupation_access')
+    <li class="{{request()->is('admin/setting/occupation/*') ? 'active' : ''}}">
+        <a href="{{route('admin.occupation.index')}}">
+            <i class="fas fa-address-book"></i>
+            <span> पेसा </span>
         </a>
     </li>
 @endcan
@@ -26,7 +35,7 @@
 @can('emergencyNumber_access')
     <li class="{{request()->is('admin/setting/fiscalYear/*') ? 'active' : ''}}">
         <a href="{{route('admin.emergencyNumber.index')}}">
-            <i class="fa fa-phone"></i>
+            <i class="fas fa-phone-square-alt"></i>
             <span> आपतकालीन सम्पर्क नं. </span>
         </a>
     </li>
@@ -36,7 +45,7 @@
     <li class="{{request()->is('admin/setting/branch*') ? 'active' : ''}}">
         <a href="{{route('admin.branch.index')}}">
             <i class="fa fa-code-branch"></i>
-            <span> शाखा/उपशाखा थप्नुहोस् </span>
+            <span> शाखा/उपशाखा </span>
         </a>
     </li>
 @endcan
@@ -48,6 +57,12 @@
         </a>
     </li>
 @endcan
+<li class="{{request()->is('admin/setting/letterHead*') ? 'active' : ''}}">
+    <a href="{{route('admin.letterHead.index')}}">
+        <i class="fas fa-envelope-open-text"></i>
+        <span> लेटर हेड </span>
+    </a>
+</li>
 @can('feature_access')
     <li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
         <a href="{{route('admin.feature-activation')}}">

@@ -9,6 +9,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,26 +18,15 @@ use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
+use Modules\BusinessRegistration\Entities\Partner;
+use Modules\BusinessRegistration\Entities\RegisteredBusiness;
 
 class RegistrationForm extends Component
 {
     use WithFileUploads;
 
     public int $currentStep = 1;
-
-    public $district_preview;
-
-    public $province_preview;
-
-    public $localBody_preview;
-
-    public $issue_district_preview;
-
-    public $permanent_district_preview;
-
-    public $permanent_province_preview;
-
-    public $permanent_localBody_preview;
+    public float $progressPercentage = 0;
 
     public $provinces = [];
 
@@ -44,285 +34,247 @@ class RegistrationForm extends Component
 
     public $localBodies = [];
 
-    public $wards = 0;
+    public $wards = [];
 
     public $objectTransactions = [];
 
-    public $businessPurposes = [];
-
-    public $investmentRevenues = [];
-
-    public $threeGenerationDetails = [];
-
-    public $partnerDetails = [];
-
-    public $permanent_provinces = [];
-
-    public $permanent_districts = [];
-
-    public $all_districts = [];
-
-    public $permanent_localBodies = [];
-
-    public $permanent_wards = '';
-
     public $businessNatures = [];
+    public $partners = [];
+    public $registeredBusinesses = [];
 
-    public $dbBusinessPurposes = [];
+    public BusinessDetail $businessDetail;
 
     public array $form = [
+        //first step
         'name' => null,
-        'business_type' => null,
-        'gender' => null,
-        'house_no' => null,
-        'phone' => null,
-        'account_no' => null,
-        'national_card_no' => null,
-        'education_qualification' => null,
+        'name_en' => null,
+        'address' => null,
+        'address_en' => null,
+        'business_nature_id' => null,
         'object_transaction_id' => null,
-        'investment_revenues_id' => null,
-        'occupation' => null,
-        'email' => null,
-        'citizenship_no' => null,
-        'issue_date' => null,
-        'issue_district_id' => null,
-        'permanent_province_id' => null,
-        'permanent_district_id' => null,
-        'permanent_local_body_id' => null,
-        'permanent_way' => null,
-        'permanent_tole' => null,
-        'permanent_ward_no' => null,
+        'working_capital' => 0,
+        'fixed_capital' => 0,
+        'investment' => 0,
+        'purpose' => null,
         'province_id' => null,
         'district_id' => null,
         'local_body_id' => null,
         'ward_no' => null,
         'way' => null,
         'tole' => null,
-        'business_detail_name' => null,
-        'business_detail_name_en' => null,
-        'business_nature' => null,
-        'establish_year' => null,
-        'registration_date' => null,
-        'pan_no' => null,
-        'amount_cost' => null,
-        'source_of_capital' => null,
-        'purpose' => [],
-        'employment' => null,
+        'is_rent' => 0,
+        'is_register' => 0,
+        'registeredBusinesses' => [],
         'house_owner_name' => null,
         'house_owner_phone' => null,
         'house_owner_address' => null,
         'house_owner_monthly_rent' => null,
-        'photo' => null,
-        'citizenship_back' => null,
-        'citizenship_front' => null,
-        'company_registration' => null,
-        'tax_pay_file' => null,
-        'signature' => null,
-        'thumb' => null,
-        'threeGenerationDetails' => [],
-        'partnerDetails' => [],
-        'registeredBusinesses' => [],
-        'is_rent' => 0,
-        'is_registered' => 0,
-        'is_confirmed' => null,
+        'rent_agreement' => null,
+        //third step
         'length' => null,
         'width' => null,
-        'square' => 0,
+        'application_date' => null,
+        'application_date_en' => null,
+        'land_ownership_certificate' => null,
+        'ward_recommendation' => null,
+        'embassy_document' => null,
+        'registration_document' => null,
+        'license' => null,
+        'tax_document' => null,
+
+        //second step
+        'partners' => [],
+        'other_document' => []
 
     ];
 
-    public function mount()
+
+    public function mount($businessDetail = null)
     {
-        $officeSetting = OfficeSetting::first();
-        $this->permanent_provinces = Province::all();
-        $this->provinces = Province::all();
-        $this->form['province_id'] = $officeSetting->province_id;
-        $this->form['district_id'] = $officeSetting->district_id;
-        $this->form['local_body_id'] = $officeSetting->local_body_id;
-        $this->all_districts = District::all();
+        $this->provinces = get_provinces();
         $this->businessNatures = BusinessNature::all();
-        $this->businessPurposes = BusinessPurpose::all();
         $this->objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        if (!empty($businessDetail)) {
+            $this->businessDetail = $businessDetail;
+            $this->assignBusinessDetailData();
+        } else {
+            $this->partnerArrayIncrement();
+            $this->form['province_id'] = \officeSetting()->province_id;
+            $this->form['district_id'] = \officeSetting()->district_id;
+            $this->form['local_body_id'] = \officeSetting()->local_body_id;
+        }
+
+
     }
 
-    public function nextStep($step): void
+    private function assignBusinessDetailData()
     {
-        $this->validate();
-        $this->currentStep = $step;
+        foreach (\Arr::except($this->form, ['photo', 'partners','files', 'registeredBusinesses', 'rent_agreement', 'land_ownership_certificate', 'ward_recommendation', 'embassy_document', 'registration_document', 'license', 'tax_document']) as $key => $data) {
+            $this->form[$key] = $this->businessDetail[$key];
+        }
+
+        foreach ($this->businessDetail->partners as $partner) {
+            $this->form['partners'][] = [
+                'id' => $partner->id ?? null,
+                'name' => $partner->name ?? null,
+                'name_en' => $partner->name_en ?? null,
+                'citizenship_no' => $partner->citizenship_no ?? null,
+                'issue_date' => $partner->issue_date ?? null,
+                'phone' => $partner->phone ?? null,
+                'email' => $partner->email ?? null,
+                'house_no' => $partner->house_no ?? null,
+                'account_no' => $partner->account_no ?? null,
+                'national_card_no' => $partner->national_card_no ?? null,
+                'gender' => $partner->gender?->value ?? null,
+                'education_qualification' => $partner->education_qualification?->value ?? null,
+                'occupation' => $partner->occupation ?? null,
+                'father_name' => $partner->father_name ?? null,
+                'grandfather_name' => $partner->grandfather_name ?? null,
+                'position' => $partner->position ?? null,
+                'province_id' => $partner->province_id ?? null,
+                'district_id' => $partner->district_id ?? null,
+                'issue_district_id' => $partner->issue_district_id ?? null,
+                'local_body_id' => $partner->local_body_id ?? null,
+                'ward_no' => $partner->ward_no ?? null,
+                'way' => $partner->way ?? null,
+                'tole' => $partner->tole ?? null,
+            ];
+        }
+
+        foreach ($this->businessDetail->registeredBusinesses as $registeredBusiness) {
+            $this->form['registeredBusinesses'][] = [
+                'id' => $registeredBusiness->id ?? null,
+                'registration_no' => $registeredBusiness->registration_no ?? null,
+                'business_name' => $registeredBusiness->business_name ?? null,
+                'registration_date' => $registeredBusiness->registration_date ?? null,
+                'is_active' => $registeredBusiness->is_active ?? null,
+            ];
+        }
     }
 
-    public function backStep($step): void
-    {
-        $this->currentStep = $step;
-    }
 
     protected array $firstStepValidations = [
-        'form.name' => ['required', 'string', 'max:255'],
-        'form.business_type' => ['required', 'string'],
-        'form.gender' => ['required'],
-        'form.house_no' => ['nullable'],
-        'form.phone' => ['required'],
-        'form.account_no' => ['nullable'],
-        'form.national_card_no' => ['nullable'],
-        'form.education_qualification' => ['nullable'],
-        'form.occupation' => ['nullable'],
-        'form.email' => ['nullable', 'email'],
-        'form.citizenship_no' => ['required'],
-        'form.issue_date' => ['required'],
-        'form.issue_district_id' => ['nullable'],
-        'form.permanent_province_id' => ['nullable'],
-        'form.permanent_district_id' => ['nullable'],
-        'form.permanent_local_body_id' => ['nullable'],
-        'form.permanent_ward_no' => ['nullable'],
-        'form.permanent_way' => ['nullable'],
-        'form.permanent_tole' => ['nullable'],
-        'form.threeGenerationDetails' => ['nullable', 'array'],
-        'form.threeGenerationDetails.*.relation' => ['nullable', 'string'],
-        'form.threeGenerationDetails.*.name' => ['nullable', 'string'],
-        'form.threeGenerationDetails.*.name_en' => ['nullable', 'string'],
-        'form.threeGenerationDetails.*.citizenship_no' => ['nullable', 'string'],
-        'form.threeGenerationDetails.*.mobile_no' => ['nullable', 'string'],
+        'form.name' => ['required'],
+        'form.name_en' => ['required'],
+        'form.address' => ['required'],
+        'form.address_en' => ['required'],
+        'form.business_nature_id' => ['required', 'exists:business_natures,id'],
+        'form.object_transaction_id' => ['nullable', 'exists:object_transactions,id'],
+        'form.working_capital' => ['nullable'],
+        'form.fixed_capital' => ['nullable'],
+        'form.investment' => ['required'],
+        'form.purpose' => ['required'],
+        'form.province_id' => ['required', 'exists:provinces,id'],
+        'form.district_id' => ['required', 'exists:districts,id'],
+        'form.local_body_id' => ['required', 'exists:local_bodies,id'],
+        'form.ward_no' => ['required', 'integer'],
+        'form.way' => ['nullable', 'string'],
+        'form.tole' => ['required', 'string'],
+        'form.is_rent' => ['required', 'boolean'],
+        'form.house_owner_name' => ['required_if:form.is_rent,1'],
+        'form.house_owner_phone' => ['nullable'],
+        'form.house_owner_address' => ['nullable'],
+        'form.house_owner_monthly_rent' => ['required_if:form.is_rent,1'],
+        'form.is_register' => ['nullable'],
+        'form.registeredBusinesses' => ['required_if:form.is_register,1', 'array'],
+        'form.registeredBusinesses.*.business_name' => ['required_if:form.is_register,1'],
+        'form.registeredBusinesses.*.registration_no' => ['nullable'],
+        'form.registeredBusinesses.*.registration_date' => ['nullable'],
+        'form.registeredBusinesses.*.is_active' => ['nullable'],
     ];
+
+    protected function firstStepValidation(): array
+    {
+        return !empty($this->businessDetail)
+            ? array_merge($this->firstStepValidations, [
+                'form.rent_agreement' => ['nullable'],
+            ])
+            : array_merge($this->firstStepValidations, [
+                'form.rent_agreement' => ['nullable'],
+            ]);
+    }
 
     protected array $secondStepValidations = [
-        'form.is_rent' => ['nullable'],
-        'form.is_registered' => ['nullable'],
-        'form.business_detail_name' => ['nullable'],
-        'form.business_detail_name_en' => ['nullable'],
-        'form.business_nature' => ['required'],
-        'form.establish_year' => ['nullable', 'numeric', 'digits:4'],
-        'form.registration_date' => ['nullable'],
-        'form.pan_no' => ['nullable'],
-        'form.object_transaction_id' => ['nullable'],
-        'form.investment_revenue_id' => ['nullable'],
-        'form.amount_cost' => ['nullable'],
-        'form.source_of_capital' => ['nullable'],
-        'form.employment' => ['nullable'],
-        'form.house_owner_name' => ['required_if:form.is_rent,1'],
-        'form.house_owner_phone' => ['required_if:form.is_rent,1'],
-        'form.house_owner_address' => ['required_if:form.is_rent,1'],
-        'form.house_owner_monthly_rent' => ['required_if:form.is_rent,1'],
-        'form.province_id' => ['nullable'],
-        'form.district_id' => ['nullable'],
-        'form.local_body_id' => ['nullable'],
-        'form.ward_no' => ['nullable'],
-        'form.way' => ['nullable'],
-        'form.tole' => ['nullable'],
-        'form.purpose' => ['nullable', 'array'],
-        'form.partnerDetails' => ['required_if:form.business_nature,partnership', 'array'],
-        'form.partnerDetails.*.relation' => ['nullable'],
-        'form.partnerDetails.*.name' => ['nullable'],
-        'form.partnerDetails.*.name_en' => ['nullable'],
-        'form.partnerDetails.*.citizenship_no' => ['nullable'],
-        'form.partnerDetails.*.mobile_no' => ['nullable'],
-        'form.registeredBusinesses' => ['nullable', 'array'],
-        'form.registeredBusinesses.*.registration_no' => ['required_if:form.is_registered,1'],
-        'form.registeredBusinesses.*.business_name' => ['required_if:form.is_registered,1'],
-        'form.registeredBusinesses.*.registration_date' => ['required_if:form.is_registered,1'],
-        'form.registeredBusinesses.*.active' => ['required_if:form.is_registered,1'],
-
+        'form.partners' => ['required', 'array'],
+        'form.partners.*.name' => ['required'],
+        'form.partners.*.name_en' => ['required'],
+        'form.partners.*.citizenship_no' => ['required'],
+        'form.partners.*.issue_date' => ['required'],
+        'form.partners.*.phone' => ['required'],
+        'form.partners.*.email' => ['nullable'],
+        'form.partners.*.house_no' => ['nullable'],
+        'form.partners.*.account_no' => ['nullable'],
+        'form.partners.*.national_card_no' => ['nullable'],
+        'form.partners.*.gender' => ['required'],
+        'form.partners.*.education_qualification' => ['required'],
+        'form.partners.*.occupation' => ['required'],
+        'form.partners.*.father_name' => ['required'],
+        'form.partners.*.grandfather_name' => ['required'],
+        'form.partners.*.position' => ['required', 'integer'],
+        'form.partners.*.province_id' => ['required', 'exists:provinces,id'],
+        'form.partners.*.district_id' => ['required', 'exists:districts,id'],
+        'form.partners.*.issue_district_id' => ['required', 'exists:districts,id'],
+        'form.partners.*.local_body_id' => ['required', 'exists:local_bodies,id'],
+        'form.partners.*.ward_no' => ['required', 'integer'],
+        'form.partners.*.way' => ['nullable', 'string'],
+        'form.partners.*.tole' => ['required', 'string'],
     ];
+
+    protected function secondStepValidations(): array
+    {
+        return !empty($this->businessDetail)
+            ? array_merge($this->secondStepValidations, [
+                'form.partners.*.photo' => ['nullable'],
+                'form.partners.*.signature' => ['nullable'],
+                'form.partners.*.citizenship_front' => ['nullable'],
+                'form.partners.*.citizenship_back' => ['nullable'],
+            ])
+            : array_merge($this->secondStepValidations, [
+                'form.partners.*.photo' => ['nullable'],
+                'form.partners.*.signature' => ['nullable'],
+                'form.partners.*.citizenship_front' => ['nullable'],
+                'form.partners.*.citizenship_back' => ['nullable'],
+            ]);
+    }
 
     protected array $thirdStepValidations = [
-        'form.photo' => ['nullable'],
-        'form.citizenship_back' => ['nullable'],
-        'form.citizenship_front' => ['nullable'],
-        'form.company_registration' => ['nullable'],
-        'form.tax_pay_file' => ['nullable'],
-        'form.signature' => ['nullable'],
-        'form.thumb' => ['nullable'],
-    ];
 
-    protected array $fourthStepValidations = [
-
-        'form.length' => ['nullable'],
+        'form.length' => ['required'],
         'form.width' => ['nullable'],
-        'form.square' => ['nullable'],
+        'form.application_date' => ['required'],
+        'form.application_date_en' => ['required'],
+        'form.other_document' => ['nullable', 'array'],
+
+
     ];
 
-    protected array $fifthStepValidations = [
-        'form.is_confirmed' => ['required'],
-    ];
-
-    public function messages(): array
+    protected function thirdStepValidations(): array
     {
-        return [
-            'form.name.required' => ['नाम आवश्यक छ'],
-            'form.business_type.required' => ['आवश्यक छ'],
-            'form.is_confirmed.required' => ['बिवरण पुष्टि गर्नुहोस्'],
-            'form.gender.required' => ['लिंग आबश्यक छ '],
-            'form.house_no.required' => ['घर न. आबश्यक छ '],
-            'form.phone.required' => ['फोन आबश्यक छ '],
-            'form.account_no.required' => ['खाता न. आबश्यक छ '],
-            'form.national_card_no.required' => ['राष्ट्रिय परिचय पत्र न. आबश्यक छ '],
-            'form.education_qualification.required' => ['शैक्षिक योग्यता आबश्यक छ '],
-            'form.occupation.required' => ['पेशा आबश्यक छ '],
-            'form.email.required' => ['इमेल आबश्यक छ '],
-            'form.email.email' => ['इमेल फर्म मा हुनुपर्छ '],
-            'form.citizenship_no.required' => ['नागरिकता न. आबश्यक छ '],
-            'form.issue_date.required' => ['जारी मिति आबश्यक छ '],
-            'form.issue_district_id.required' => ['जारी गर्ने जिल्ला आबश्यक छ '],
-            'form.permanent_province_id.required' => ['प्रदेश आबश्यक छ '],
-            'form.permanent_district_id.required' => ['जिल्ला आबश्यक छ '],
-            'form.permanent_local_body_id.required' => ['स्थानीय निकाय आबश्यक छ '],
-            'form.permanent_ward_no.required' => ['वार्ड न. आबश्यक छ '],
-            'form.permanent_way.required' => ['मार्ग आबश्यक छ '],
-            'form.permanent_tole.required' => ['टोल आबश्यक छ '],
-            'form.threeGenerationDetails.required' => ['तिन पुस्ते विवरण आबश्यक छ '],
-            'form.threeGenerationDetails.*.relation.required' => [' नाता आबश्यक छ '],
-            'form.threeGenerationDetails.*.name.required' => [' नाम आबश्यक छ '],
-            'form.threeGenerationDetails.*.name_en.required' => [' नाम आबश्यक छ '],
-            'form.threeGenerationDetails.*.citizenship_no.required' => [' नागरिकता न. आबश्यक छ '],
-            'form.threeGenerationDetails.*.mobile_no.required' => ['मोबाइल न. आबश्यक छ '],
-            'form.business_detail_name.required' => ['ब्यबसायको नाम आबश्यक छ '],
-            'form.business_detail_name_en.required' => ['ब्यबसायको नाम आबश्यक छ '],
-            'form.business_nature.required' => ['ब्यबसायको प्रकृति आबश्यक छ '],
-            'form.establish_year.required' => ['स्थापना मिति आबश्यक छ '],
-            'form.registration_date.required' => ['दर्ता मिति आबश्यक छ '],
-            'form.pan_no.required' => ['पाना न. आबश्यक छ '],
-            'form.transaction_object.required' => ['लेनदेन वस्तु आबश्यक छ '],
-            'form.amount_cost.cost' => ['लागत आबश्यक छ '],
-            'form.source_of_capital.required' => ['पुँजीको स्रोत आबश्यक छ '],
-            'form.purpose.required' => ['उधेश्य आबश्यक छ '],
-            'form.employment.required' => ['रोजगारी आबश्यक छ '],
-            'form.house_owner_name.required' => ['घर धनि को नाम आबश्यक छ '],
-            'form.house_owner_phone.required' => ['घर धनिको फोन आबश्यक छ '],
-            'form.house_owner_address.required' => ['घर धनि को ठेगाना आबश्यक छः '],
-            'form.house_owner_monthly_rent.required' => ['मासिक घर भाडा आबश्यक छ '],
-            'form.province_id.required' => ['प्रदेश आबश्यक छ '],
-            'form.district_id.required' => ['जिल्ला आबश्यक छ '],
-            'form.local_body_id.required' => ['स्थानीय निकाय  आबश्यक छ '],
-            'form.ward_no.required' => ['वार्ड न. आबस्यक छ'],
-            'form.way.required' => ['मार्ग आबश्यक छ '],
-            'form.tole.required' => ['टोल आबश्यक छ '],
-            'form.partnerDetails.*.relation.required' => ['साथीको नाता आबश्यक छ '],
-            'form.partnerDetails.*.name.required' => ['नाम आबश्यक छ '],
-            'form.partnerDetails.*.name_en.required' => ['नाम आबश्यक छ '],
-            'form.partnerDetails.*.citizenship_no.required' => ['नागरिकता न. आबश्यक छ '],
-            'form.partnerDetails.*.mobile_no.required' => ['मोबाइल न. आबश्यक छ '],
-            'form.registeredBusinesses.*.registration_no.required' => ['दर्ता न. आबश्यक छ '],
-            'form.registeredBusinesses.*.business_name.required' => ['ब्यबसाय को नाम आबश्यक छ '],
-            'form.registeredBusinesses.*.registration_date.required' => ['दर्ता मिति आबश्यक छ '],
-            'form.registeredBusinesses.*.active.required' => ['ब्यबसाय सक्रिय आबस्यक छ '],
-            'form.photo.required' => ['फोटो आबश्यक छ '],
-            'form.citizenship_front.required' => ['नागरिकता आबश्यकता छ '],
-            'form.citizenship_back.required' => ['नागरिकता आबश्यकता छ '],
-            'form.company_registration.required' => ['कम्पनि दर्ता आबश्यक छ '],
-            'form.tax_pay_file.required' => ['कर तिरेको फाइल आबश्यक छ '],
-            'form.signature.required' => ['हस्ताक्षर आबश्यक छ '],
-            'form.thumb.required' => ['औंलाको छाप आबश्यक छ '],
-
-        ];
+        return !empty($this->businessDetail)
+            ? array_merge($this->thirdStepValidations, [
+                'form.land_ownership_certificate' => ['nullable'],
+                'form.ward_recommendation' => ['nullable'],
+                'form.embassy_document' => ['nullable'],
+                'form.registration_document' => ['nullable'],
+                'form.license' => ['nullable'],
+                'form.tax_document' => ['nullable'],
+            ])
+            : array_merge($this->thirdStepValidations, [
+                'form.land_ownership_certificate' => ['nullable'],
+                'form.ward_recommendation' => ['required'],
+                'form.embassy_document' => ['nullable'],
+                'form.registration_document' => ['nullable'],
+                'form.license' => ['nullable'],
+                'form.tax_document' => ['nullable'],
+            ]);
     }
 
     public function rules(): array
     {
         return match ($this->currentStep) {
-            1 => $this->firstStepValidations,
-            2 => $this->secondStepValidations,
-            3 => $this->thirdStepValidations,
-            4 => $this->fourthStepValidations,
-            default => array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations, $this->fifthStepValidations),
+            2 => $this->secondStepValidations(),
+            3 => $this->thirdStepValidations(),
+            default => $this->firstStepValidation(),
         };
     }
 
@@ -331,137 +283,96 @@ class RegistrationForm extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function nextStep($step): void
+    {
+        $this->validate();
+        $this->currentStep = $step;
+        $this->calculateProgressPercentage();
+    }
+
+    public function backStep($step): void
+    {
+        $this->currentStep = $step;
+        $this->calculateProgressPercentage();
+    }
+
     public function submitForm()
     {
         $this->validate();
-        $businessDetails = DB::transaction(function () {
-            $businessDetail = BusinessDetail::create([
-                'business_type' => $this->form['business_type'] ?? null,
-                'business_detail_name' => $this->form['business_detail_name'] ?? null,
-                'investment_revenue_id' => $this->form['investment_revenue_id'] ?? null,
-                'is_rent' => $this->form['is_rent'] ?? null,
-                'is_registered' => $this->form['is_registered'] ?? null,
-                'submission_no' => time(),
-                'business_detail_name_en' => $this->form['business_detail_name_en'] ?? null,
-                'business_nature' => $this->form['business_nature'] ?? null,
-                'establish_year' => $this->form['establish_year'] ?? null,
-                'registration_date' => $this->form['registration_date'] ?? null,
-                'pan_no' => $this->form['pan_no'] ?? null,
-                'amount_cost' => $this->form['amount_cost'] ?? 0,
-                'source_of_capital' => $this->form['source_of_capital'] ?? null,
-                'employment' => $this->form['employment'] ?? null,
-                'house_owner_name' => $this->form['house_owner_name'] ?? null,
-                'house_owner_phone' => $this->form['house_owner_phone'] ?? null,
-                'house_owner_address' => $this->form['house_owner_address'] ?? null,
-                'house_owner_monthly_rent' => $this->form['house_owner_monthly_rent'] ?? null,
-                'province_id' => $this->form['province_id'] ?? null,
-                'district_id' => $this->form['district_id'] ?? null,
-                'local_body_id' => $this->form['local_body_id'] ?? null,
-                'ward_no' => $this->form['ward_no'] ?? null,
-                'way' => $this->form['way'] ?? null,
-                'tole' => $this->form['tole'] ?? null,
-                'photo' => $this->form['photo'] ?? null,
-                'citizenship_front' => $this->form['citizenship_front'] ?? null,
-                'citizenship_back' => $this->form['citizenship_back'] ?? null,
-                'company_registration' => $this->form['company_registration'] ?? null,
-                'tax_pay_file' => $this->form['tax_pay_file'] ?? null,
-                'signature' => $this->form['signature'] ?? null,
-                'thumb' => $this->form['thumb'] ?? null,
-                'length' => $this->form['length'] ?? 0,
-                'width' => $this->form['width'] ?? 0,
-                'square' => $this->form['square'] ?? 0,
+
+        if (!empty($this->businessDetail)) {
+            DB::transaction(function () {
+                $this->businessDetail->update(\Arr::except($this->form, ['working_capital', 'fixed_capital']) + [
+                        'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
+                        'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
+                    ]);
+                $this->saveBusinessDetailsData($this->businessDetail);
+            });
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => 'success',
+                'title' => 'तपाइको व्यवसाय सफलता पुर्बक अध्याबधिक भयो'
             ]);
+            return redirect(route('admin.businessRegistration.businessRegistration.index'));
+        }
 
-            $proprietorDetail = $businessDetail->proprietorDetail()->create([
-                'name' => $this->form['name'] ?? null,
-                'citizenship_no' => $this->form['citizenship_no'] ?? null,
-                'issue_date' => $this->form['issue_date'] ?? null,
-                'issue_district_id' => $this->form['issue_district_id'] ?? null,
-                'phone' => $this->form['phone'] ?? null,
-                'email' => $this->form['email'] ?? null,
-                'province_id' => $this->form['permanent_province_id'] ?? null,
-                'district_id' => $this->form['permanent_district_id'] ?? null,
-                'local_body_id' => $this->form['permanent_local_body_id'] ?? null,
-                'ward_no' => $this->form['permanent_ward_no'] ?? null,
-                'way' => $this->form['permanent_way'] ?? null,
-                'tole' => $this->form['permanent_tole'] ?? null,
-                'house_no' => $this->form['house_no'] ?? null,
-                'account_no' => $this->form['account_no'] ?? null,
-                'national_card_no' => $this->form['national_card_no'] ?? null,
-                'gender' => $this->form['gender'] ?? null,
-                'education_qualification' => $this->form['education_qualification'] ?? null,
-                'occupation' => $this->form['occupation'] ?? null,
-            ]);
-
-
-
-            $businessDetail->businessPurposes()->attach($this->form['purpose'] ?? null);
-
-            foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
-                $proprietorDetail->threeGenerationDetails()->create([
-                    'relation' => $threeGenerationDetail['relation'] ?? null,
-                    'name' => $threeGenerationDetail['name'] ?? null,
-                    'name_en' => $threeGenerationDetail['name_en'] ?? null,
-                    'citizenship_no' => $threeGenerationDetail['citizenship_no'] ?? null,
-                    'mobile_no' => $threeGenerationDetail['mobile_no'] ?? null,
+        $businessDetail = DB::transaction(function () {
+            $businessDetail = BusinessDetail::create(\Arr::except($this->form, ['working_capital', 'fixed_capital']) + [
+                    'submission_no' => time(),
+                    'working_capital' => is_null($this->form['working_capital']) ? 0 : $this->form['working_capital'],
+                    'fixed_capital' => is_null($this->form['fixed_capital']) ? 0 : $this->form['fixed_capital']
                 ]);
-            }
-
-            foreach ($this->form['partnerDetails'] as $partnerDetail) {
-                $businessDetail->partnerDetails()->create([
-                    'relation' => $partnerDetail['relation'] ?? null,
-                    'name' => $partnerDetail['name'] ?? null,
-                    'citizenship_no' => $partnerDetail['citizenship_no'] ?? null,
-                    'mobile_no' => $partnerDetail['mobile_no'] ?? null,
-                ]);
-            }
-
-            foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
-                $businessDetail->registeredBusinesses()->create([
-                    'registration_no' => $registeredBusiness['registration_no'] ?? null,
-                    'business_name' => $registeredBusiness['business_name'] ?? null,
-                    'registration_date' => $registeredBusiness['registration_date'] ?? null,
-                    'active' => $registeredBusiness['active'] ?? null,
-                ]);
-            }
-
-
+            $this->saveBusinessDetailsData($businessDetail);
             return $businessDetail;
         });
-
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
             'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
         ]);
-
-        $this->emit('productStore');
-
         $this->reset('form');
+        return redirect()->route('businessRegistration.detail.print', $businessDetail->id);
 
-        return redirect()->route('businessRegistration.detail.print', $businessDetails->id);
     }
 
-    public function documentsArrayIncrement(): void
+    private function saveBusinessDetailsData($businessDetail)
     {
-        $this->form['threeGenerationDetails'][] = [];
+        foreach ($this->form['partners'] as $partner) {
+            Partner::updateOrCreate(
+                ['business_detail_id' => $businessDetail->id, 'id' => $partner['id'] ?? null],
+                $partner
+            );
+        }
+        foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
+            RegisteredBusiness::updateOrCreate(
+                ['business_detail_id' => $businessDetail->id, 'id' => $registeredBusiness['id'] ?? null],
+                $registeredBusiness
+            );
+        }
+        foreach ($this->form['other_document']??[] as $document) {
+            $businessDetail->files()->create([
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $document->getClientOriginalExtension(),
+                'file' => $document->store('otherDocument/', 'public')
+            ]);
+        }
     }
 
-    public function documentsArrayDecrement($index): void
+    public function partnerArrayIncrement(): void
     {
-        unset($this->form['threeGenerationDetails'][$index]);
-        $this->form['threeGenerationDetails'] = array_values($this->form['threeGenerationDetails']);
+        $this->form['partners'][] = [
+            'province_id' => \officeSetting()->province_id,
+            'district_id' => \officeSetting()->district_id,
+            'local_body_id' => \officeSetting()->local_body_id,
+        ];
     }
 
-    public function partnerDetailIncrement(): void
+    public function partnerArrayDecrement($index): void
     {
-        $this->form['partnerDetails'][] = [];
-    }
-
-    public function partnerDetailDecrement($index): void
-    {
-        unset($this->form['partnerDetails'][$index]);
-        $this->form['partnerDetails'] = array_values($this->form['partnerDetails']);
+        if (!empty($this->form['partners'][$index]['id'])) {
+            Partner::find($this->form['partners'][$index]['id'])->delete();
+        }
+        unset($this->form['partners'][$index]);
+        $this->form['partners'] = array_values($this->form['partners']);
     }
 
     public function registeredBusinessArrayIncrement(): void
@@ -471,71 +382,114 @@ class RegistrationForm extends Component
 
     public function registeredBusinessArrayDecrement($index): void
     {
+        if (!empty($this->form['registeredBusinesses'][$index]['id'])) {
+            RegisteredBusiness::find($this->form['registeredBusinesses'][$index]['id'])->delete();
+        }
         unset($this->form['registeredBusinesses'][$index]);
         $this->form['registeredBusinesses'] = array_values($this->form['registeredBusinesses']);
     }
 
+
     public function render(): Factory|View|Application
     {
-        if (!empty($this->form['permanent_province_id'])) {
-            $this->permanent_districts = Province::with('districts')->findOrFail($this->form['permanent_province_id'])->districts;
-        }
-        if (!empty($this->form['permanent_district_id'])) {
-            $this->permanent_localBodies = District::with('localBodies')->findOrFail($this->form['permanent_district_id'])->localBodies;
-        }
-        if (!empty($this->form['permanent_local_body_id'])) {
-            $this->permanent_wards = LocalBody::findOrFail($this->form['permanent_local_body_id'])->wards;
-        }
-
         if (!empty($this->form['province_id'])) {
-            $this->districts = Province::with('districts')->findOrFail($this->form['province_id'])->districts;
+            $this->districts = get_districts($this->form['province_id']);
         }
         if (!empty($this->form['district_id'])) {
-            $this->localBodies = District::with('localBodies')->findOrFail($this->form['district_id'])->localBodies;
+            $this->localBodies = get_local_bodies($this->form['district_id']);
         }
         if (!empty($this->form['local_body_id'])) {
-            $this->wards = LocalBody::findOrFail($this->form['local_body_id'])->wards;
+            $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
-        if (!empty($this->form['object_transaction_id'])) {
-            $this->investmentRevenues = InvestmentRevenue::where('object_transaction_id', $this->form['object_transaction_id'])->get();
+        if ($this->form['is_rent'] == '0') {
+            $this->form['house_owner_name'] = null;
+            $this->form['house_owner_phone'] = null;
+            $this->form['house_owner_address'] = null;
+            $this->form['house_owner_monthly_rent'] = null;
         }
 
-        //temporary address preview
-        if (!empty($this->form['district_id'])) {
-            $this->district_preview = District::find($this->form['district_id']);
-        }
-        if (!empty($this->form['province_id'])) {
-            $this->province_preview = Province::find($this->form['province_id']);
-        }
-        if (!empty($this->form['local_body_id'])) {
-            $this->localBody_preview = LocalBody::find($this->form['local_body_id']);
-        }
-
-        //permanent address preview
-
-        if (!empty($this->form['permanent_province_id'])) {
-            $this->permanent_province_preview = Province::find($this->form['permanent_province_id']);
-        }
-        if (!empty($this->form['permanent_district_id'])) {
-            $this->permanent_district_preview = District::find($this->form['permanent_district_id']);
-        }
-        if (!empty($this->form['permanent_local_body_id'])) {
-            $this->permanent_localBody_preview = LocalBody::find($this->form['permanent_local_body_id']);
-        }
-
-        if (!empty($this->form['issue_district_id'])) {
-            $this->issue_district_preview = District::find($this->form['issue_district_id']);
-        }
-        if (!empty($this->form['purpose'])) {
-            $this->dbBusinessPurposes = BusinessPurpose::whereIn('id', $this->form['purpose'])->get();
-        }
-        if (!empty($this->form['length'] && $this->form['width'])) {
-            $this->form['square'] = $this->form['length'] * $this->form['width'];
-        } else {
-            $this->form['square'] = '';
+        if ($this->form['is_register'] == '0') {
+            $this->form['registeredBusinesses'] = [];
         }
 
         return view('businessregistration::livewire.registration-form');
+    }
+
+    private function calculateProgressPercentage()
+    {
+        $this->reset('progressPercentage');
+        $this->progressPercentage = $this->currentStep / 3 * 100;
+    }
+
+    public function messages(): array
+    {
+        return [
+            'form.name.required' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['नाम अंग्रेजीमा आवश्यक छ'],
+            'form.address.required' => ['ठेगाना आबश्यक छ '],
+            'form.address_en.required' => ['ठेगाना अंग्रेजीमा आबश्यक छ '],
+            'form.business_nature_id.required' => ['व्यवसायको प्रकृति आबश्यक छ'],
+            'form.object_transaction_id.required' => ['व्यवसायको कारोबार गर्ने बस्तु आबश्यक छ '],
+            'form.working_capital.required' => ['चालु पूँजी आबश्यक छ '],
+            'form.fixed_capital.required' => ['स्थिर पूँजी आबश्यक छ '],
+            'form.investment.required' => ['पूँजीगत लगानी आबश्यक छ '],
+            'form.purpose.required' => ['उधेश्य आबश्यक छ '],
+            'form.province_id.required' => ['प्रदेश आबश्यक छ '],
+            'form.district_id.required' => ['जिल्ला आबश्यक छ '],
+            'form.local_body_id.required' => ['स्थानीय निकाय  आबश्यक छ '],
+            'form.ward_no.required' => ['वार्ड न. आबस्यक छ'],
+            'form.way.required' => ['मार्ग आबश्यक छ '],
+            'form.tole.required' => ['टोल आबश्यक छ '],
+            'form.house_owner_name.required_if' => ['नाम आवश्यक छ'],
+            'form.house_owner_phone.required_if' => ['फोन आवश्यक छ'],
+            'form.house_owner_address.required_if' => ['ठेगाना आबश्यक छ'],
+            'form.house_owner_monthly_rent.required_if' => ['भाडा आबश्यक छ'],
+            'form.rent_agreement.required_if' => ['भाडा सम्झौता आबश्यक छ'],
+            'form.registeredBusinesses.required_if' => ['व्यवसाय दर्ता आबश्यक छ'],
+            'form.registeredBusinesses.*.business_name.required_if' => ['व्यवसाय नाम आबश्यक छ'],
+            'form.registeredBusinesses.*.registration_no.required_if' => ['दर्ता नम्बर आबश्यक छ'],
+            'form.registeredBusinesses.*.registration_date.required_if' => ['दर्ता मिति आबश्यक छ'],
+            'form.registeredBusinesses.*.is_active.required_if' => ['सक्रिय आबश्यक छ'],
+            'form.partners.required' => ['पार्टनर आबश्यक छ'],
+            'form.partners.*.name.required' => ['नाम आबश्यक छ'],
+            'form.partners.*.name_en.required' => ['नाम अंग्रेजीमा आबश्यक छ'],
+            'form.partners.*.citizenship_no.required' => ['नागरिकता नं आबश्यक छ'],
+            'form.partners.*.issue_date.required' => ['जारि मिति आबश्यक छ'],
+            'form.partners.*.phone.required' => ['फोन आबश्यक छ'],
+            'form.partners.*.email.required' => ['इमेल आबश्यक छ'],
+            'form.partners.*.house_no.required' => ['घर नं आबश्यक छ'],
+            'form.partners.*.account_no.required' => ['व्यक्तिगत स्थाई लेखा नं आबश्यक छ'],
+            'form.partners.*.national_card_no.required' => ['राष्ट्रियता परिचयपत्र नं आबश्यक छ'],
+            'form.partners.*.gender.required' => ['लिङ्ग आबश्यक छ'],
+            'form.partners.*.education_qualification.required' => ['शैक्षिक योग्यता आबश्यक छ'],
+            'form.partners.*.occupation.required' => ['पेशा आबश्यक छ'],
+            'form.partners.*.father_name.required' => ['बुवाको नाम आबश्यक छ'],
+            'form.partners.*.grandfather_name.required' => ['बजेको नाम आबश्यक छ'],
+            'form.partners.*.photo.required' => ['फोटो आबश्यक छ'],
+            'form.partners.*.signature.required' => ['हस्ताक्षर आबश्यक छ'],
+            'form.partners.*.citizenship_front.required' => ['नागरिकता (अगाडि) आबश्यक छ'],
+            'form.partners.*.citizenship_back.required' => ['नागरिकता (पछाडी) आबश्यक छ'],
+            'form.partners.*.position.required' => ['मर्यादाक्रम आबश्यक छ'],
+            'form.partners.*.province_id.required' => ['प्रदेश आबश्यक छ'],
+            'form.partners.*.district_id.required' => ['जिल्ला आबश्यक छ'],
+            'form.partners.*.issue_district_id.required' => ['नागरिकता जारी जिल्ला आबश्यक छ'],
+            'form.partners.*.local_body_id.required' => ['पालिका आबश्यक छ'],
+            'form.partners.*.ward_no.required' => ['वार्ड नं आबश्यक छ'],
+            'form.partners.*.way.required' => ['मार्ग आबश्यक छ'],
+            'form.partners.*.tole.required' => ['टोल आबश्यक छ'],
+            'form.length.required' => ['लम्बाई आबश्यक छ'],
+            'form.width.required' => ['चौडाई आबश्यक छ'],
+            'form.application_date.required' => ['आवेदन मिति बि सं आबश्यक छ'],
+            'form.application_date_en.required' => ['आवेदन मिति सं आबश्यक छ'],
+            'form.land_ownership_certificate.required' => ['जग्गा धनि प्रमाणपत्र आबश्यक छ'],
+            'form.ward_recommendation.required' => [' वार्ड सिफारिस आबश्यक छ'],
+            'form.embassy_document.required' => [' राजदूतावासको कागजात आबश्यक छ'],
+            'form.registration_document.required' => [' दर्ता प्रमाणपत्र आबश्यक छ'],
+            'form.license.required' => [' इजाजत पत्र आबश्यक छ'],
+            'form.tax_document.required' => [' कर तिरेको प्रमाणपत्र आबश्यक छ'],
+            'form.other_document' => ['अन्य कागजात आबश्यक छ'],
+
+        ];
     }
 }

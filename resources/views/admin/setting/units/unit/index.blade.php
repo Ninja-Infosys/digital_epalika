@@ -27,24 +27,25 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> मापन एकाइ विविधता सूची</h4>
-                        @can('user_create')
+                        <h4 class="header-title"> मापन एकाइ</h4>
+                        @can('unit_create')
                             <a href="{{route('admin.units.unit.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ मापन एकाइ थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>प्रकार</th>
                                 <th>मापन एकाइ विविधता</th>
                                 <th>मापन एकाइ</th>
+                                <th>नोटेशन</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -56,7 +57,7 @@
                                         {{$unit->measurementUnit->type->title ?? ''}}
                                     </td>
                                     <td>
-                                        {{$unit->measurementUnit->title ?? ''}}
+                                        {{$unit->measurementUnit->title ?? ''}}( {{$unit->measurementUnit->title_en ?? ''}})
                                     </td>
                                     <td>
                                         {{$unit->title ?? ''}}
@@ -73,10 +74,12 @@
                                            class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-exchange-alt"></i> आन्तरिक रूपान्तरण
                                         </a>
+                                    </td>
+                                    <td>
                                         @can('unit_edit')
-                                            <a href="{{route('admin.units.unit.edit',$unit)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <a data-bs-type="edit" href="{{route('admin.units.unit.edit',$unit)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('unit_delete')
@@ -85,8 +88,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
@@ -94,7 +97,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="4">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

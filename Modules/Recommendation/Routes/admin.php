@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
+use Modules\Recommendation\Http\Controllers\admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
-use Modules\Recommendation\Http\Controllers\ShowApplicationListController;
+use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::view('relation_identify', 'recommendation::admin.relation.relation_identify')->name('relation_identify');
@@ -55,8 +56,13 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('{applicationTypeEnum}/formBuilder/{formBuilder}/updateStatus', [FormBuilderController::class, 'updateStatus'])->name('formBuilder.updateStatus');
     Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class)->names('formBuilder');
     Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
-    Route::resource('{applicationTypeEnum}/recommendationTemplate', RecommendationTemplateController::class)->names('recommendationTemplate');
-    Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
+   
+    // Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
+    Route::get('{type}/recommendationCategory/{recommendationCategory}/updatestatus', [RecommendationCategoryController::class,'updatestatus'])->name('recommendationCategory.updatestatus');
+    Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
+    Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
+    Route::resource('personalDetail', PersonalDetailController::class);
+    
 });
 
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');

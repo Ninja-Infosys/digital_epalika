@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">योजना क्षेत्रहरु</li>
+                        <li class="breadcrumb-item active">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना क्षेत्रहरु</h4>
+                <h4 class="page-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना क्षेत्र सूची</h4>
+                        <h4 class="header-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्र':'क्षेत्र'}} सूची</h4>
                         @can('planArea_create')
-                            <a href="{{route('admin.plan.planArea.create')}}"
+                            <a href="{{route('admin.plan.planArea.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -35,10 +35,13 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                @if($type=='planAreaSubCategory')
+                                    <th>योजनाको उपक्षेत्र</td>
+                                @endif
                                 <th>योजनाको क्षेत्र</th>
                                 <th>#</th>
                             </tr>
@@ -46,49 +49,29 @@
                             <tbody>
                             @forelse($planAreas as $key=>$planArea)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$planArea->area_name}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td> {{$planArea->area_name}} </td>
+                                    @if($type=='planAreaSubCategory')
+                                    <td>{{$planArea->planArea->area_name ??''}}</td>
+                                    @endif
                                     <td>
-                                        <a href="{{route('admin.plan.planArea.edit',$planArea)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.plan.planArea.edit',[$type,$planArea])}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.plan.planArea.destroy',$planArea)}}"
+                                        <form action="{{route('admin.plan.planArea.destroy',[$type,$planArea])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
-                                @foreach($planArea->planAreas as $planSubArea)
-                                    <tr>
-                                        <td>
-                                            {{$key+1}}.
-                                            {{$loop->iteration}}
-                                        </td>
-                                        <td>{{$planSubArea->area_name}}</td>
-                                        <td>
-                                            <a href="{{route('admin.plan.planArea.edit',$planSubArea)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                            <form action="{{route('admin.plan.planArea.destroy',$planSubArea)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

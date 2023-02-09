@@ -12,9 +12,14 @@ class CheckRoleMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!empty($request->user()->role)) {
-            $permissions = Cache::remember('permissions', 12*60*60, function () use ($request) {
-                return $request->user()->role->permissions->pluck('title');
-            });
+            if (Cache::has($this->getCacheKey())) {
+                $permissions = Cache::get($this->getCacheKey());
+            } else {
+                $permissions = Cache::remember($this->getCacheKey(), 12 * 60 * 60, function () use ($request) {
+                    return $request->user()->role->permissions->pluck('title');
+                });
+            }
+
 
             collect($permissions)->each(function ($title) {
                 Gate::define($title, function () {
@@ -24,5 +29,10 @@ class CheckRoleMiddleware
         }
 
         return $next($request);
+    }
+
+    public function getCacheKey(): string
+    {
+        return md5('permissions-' . auth()->id());
     }
 }

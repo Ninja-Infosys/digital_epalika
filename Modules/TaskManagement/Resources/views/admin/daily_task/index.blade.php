@@ -21,18 +21,18 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">दैनिक कार्य</h4>
-                            <a href="{{route('admin.taskManagement.dailyTask.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">दैनिक कार्यहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                                <a href="{{route('admin.taskManagement.dailyTask.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -60,19 +60,19 @@
                                     </td>
                                     <td>{{$dailyTask->remarks}}</td>
                                     <td width="140">
-                                        <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
-                                           class="btn btn-xs btn-outline-info">
+                                        <a data-bs-type="edit" href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
+                                           class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <a href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.taskManagement.dailyTask.destroy',$dailyTask)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

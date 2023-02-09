@@ -6,10 +6,15 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
+use Modules\JudicialCommittee\Entities\RelatedMember;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 
 class ComplaintApplicationLivewire extends Component
 {
@@ -29,6 +34,10 @@ class ComplaintApplicationLivewire extends Component
 
     public $defendantWards = [];
     public $lawsuitNatures = [];
+
+    public OfficeSetting $officeSetting;
+
+    public ComplaintApplication $complaintApplication;
 
     public array $form = [
         'complainant_province_id' => null,
@@ -51,7 +60,6 @@ class ComplaintApplicationLivewire extends Component
         'defendant_name' => null,
         'lawsuit_nature_id' => null,
         'subject' => null,
-        'submission_no' => null,
         'complaint_detail' => null,
         'date' => null,
         'en_date' => null,
@@ -59,12 +67,29 @@ class ComplaintApplicationLivewire extends Component
         'applicant_phone' => null,
         'applicant_address' => null,
         'applicant_signature' => null,
+        'relatedMembers' => []
     ];
 
-    public function mount()
+    public function mount($complaintApplication = null)
     {
         $this->provinces = Province::all();
         $this->lawsuitNatures = LawsuitNature::all();
+        $this->officeSetting = OfficeSetting::with('fiscalYear')->first();
+        if (!empty($complaintApplication)) {
+            $this->assignComplaintApplicationData($complaintApplication);
+        } else {
+            $this->setDefaultAddress();
+        }
+    }
+
+    private function setDefaultAddress()
+    {
+        $this->form['complainant_province_id'] = $this->officeSetting->province_id;
+        $this->form['complainant_district_id'] = $this->officeSetting->district_id;
+        $this->form['complainant_local_body_id'] = $this->officeSetting->local_body_id;
+        $this->form['defendant_province_id'] = $this->officeSetting->province_id;
+        $this->form['defendant_district_id'] = $this->officeSetting->district_id;
+        $this->form['defendant_local_body_id'] = $this->officeSetting->local_body_id;
     }
 
     protected $listeners = ['dateChanged'];
@@ -75,7 +100,7 @@ class ComplaintApplicationLivewire extends Component
         $this->form['en_date'] = $englishDate;
     }
 
-    protected array $rules = [
+    protected $rules = [
         'form.complainant_province_id' => ['required', 'exists:provinces,id'],
         'form.complainant_district_id' => ['required', 'exists:districts,id'],
         'form.complainant_local_body_id' => ['required', 'exists:local_bodies,id'],
@@ -96,14 +121,19 @@ class ComplaintApplicationLivewire extends Component
         'form.defendant_name' => ['required', 'string', 'max:255'],
         'form.lawsuit_nature_id' => ['required', 'exists:lawsuit_natures,id'],
         'form.subject' => ['required', 'string', 'max:255'],
-        'form.submission_no' => ['required', 'unique:complaint_applications,submission_no'],
         'form.complaint_detail' => ['required'],
         'form.date' => ['required'],
         'form.en_date' => ['required'],
         'form.applicant_name' => ['required', 'string', 'max:255'],
         'form.applicant_phone' => ['required'],
         'form.applicant_address' => ['nullable'],
-        'form.applicant_signature' => ['required', 'image'],
+        'form.applicant_signature' => ['nullable', 'image'],
+        'form.relatedMembers' => ['nullable', 'array'],
+        'form.relatedMembers.*.name' => ['required'],
+        'form.relatedMembers.*.phone' => ['required'],
+        'form.relatedMembers.*.email' => ['nullable', 'email'],
+        'form.relatedMembers.*.designation' => ['required'],
+        'form.relatedMembers.*.address' => ['nullable'],
     ];
 
     public function updated($propertyName): void
@@ -111,18 +141,77 @@ class ComplaintApplicationLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function addRelatedMembers()
+    {
+        $this->form['relatedMembers'][] = [];
+    }
+
+    public function removeRelatedMember($index)
+    {
+        if (!empty($this->form['relatedMembers'][$index]['id'])) {
+            RelatedMember::find($this->form['relatedMembers'][$index]['id'])->delete();
+        }
+        unset($this->form['relatedMembers'][$index]);
+        $this->form['relatedMembers'] = array_values($this->form['relatedMembers']);
+    }
+
     public function submitFormData()
     {
-        ComplaintApplication::create($this->validate()['form'] + [
-            'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-        ]);
+        $formData = $this->validate()['form'];
 
-        $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
+        DB::transaction(function () use ($formData) {
+            if (!empty($this->complaintApplication)) {
+                $complaintApplication = $this->complaintApplication;
+                $complaintApplication->update($formData);
+            } else {
+                $complaintApplication = ComplaintApplication::create($this->validate()['form'] + [
+                        'fiscal_year_id' => $this->officeSetting->fiscal_year_id,
+                        'submission_no' => $this->officeSetting->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0)
+                    ]);
+                //complaint log event
+                event(new ComplaintLogEvent($complaintApplication->id, ComplaintApplication::class, $complaintApplication->id, 'निवेदन दर्ता', "$complaintApplication->date गते निवेदन दर्ता गरियो"));
+            }
+            foreach ($this->form['relatedMembers'] as $member) {
+                RelatedMember::updateOrCreate(
+                    ['complaint_application_id' => $complaintApplication->id, 'id' => $member['id'] ?? null],
+                    $member
+                );
+            }
+        });
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
-        ]);
+        if (!empty($this->complaintApplication)) {
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'उजुरी पत्र सफलतापूर्वक अद्यावधिक गरियो',
+            ]);
+
+            return redirect(route('admin.judicialCommittee.complaintApplication.index'));
+        } else {
+            $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
+            $this->setDefaultAddress();
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
+            ]);
+        }
+    }
+
+    private function assignComplaintApplicationData($complaintApplication)
+    {
+        $this->complaintApplication = $complaintApplication;
+        foreach (Arr::except($this->form, ['relatedMembers','applicant_signature']) as $key => $data) {
+            $this->form[$key] = $complaintApplication[$key];
+        }
+        foreach ($complaintApplication->relatedMembers as $member) {
+            $this->form['relatedMembers'][] = [
+                'id' => $member->id ?? null,
+                'name' => $member->name ?? null,
+                'phone' => $member->phone ?? null,
+                'email' => $member->email ?? null,
+                'designation' => $member->designation ?? null,
+                'address' => $member->address ?? null
+            ];
+        }
     }
 
     public function render()
@@ -171,14 +260,15 @@ class ComplaintApplicationLivewire extends Component
             'form.defendant_name.required' => 'प्रतिवादीको नाम अनिवार्य छ',
             'form.lawsuit_nature_id' => 'मुद्दा प्रकृति अनिवार्य छ',
             'form.subject.required' => 'विषय अनिवार्य छ',
-            'form.submission_no.required' => 'सबमिशन नम्बर अनिवार्य छ',
-            'form.submission_no.unique' => 'सबमिशन नम्बर पहिले नै अवस्थित छ',
             'form.complaint_detail.required' => 'उजुरी विवरण अनिवार्य छ',
             'form.date.required' => 'मिति अनिवार्य छ',
             'form.en_date.required' => 'मिति अनिवार्य छ',
             'form.applicant_name.required' => 'आवेदकको नाम अनिवार्य छ',
             'form.applicant_phone.required' => 'आवेदकको फोन अनिवार्य छ',
-            'form.applicant_signature.required' => 'आवेदकको हस्ताक्षर अनिवार्य छ',
+            'form.relatedMembers.*.name.required' => ['नाम अनिवार्य छ'],
+            'form.relatedMembers.*.phone.required' => ['फोन अनिवार्य छ'],
+            'form.relatedMembers.*.email.email' => ['ईमेल मान्य छैन'],
+            'form.relatedMembers.*.designation.required' => ['पद आवश्यक छ'],
         ];
     }
 }

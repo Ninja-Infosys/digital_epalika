@@ -53,7 +53,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'name' => env('APP_NAME'),
+            'channels' => ['single', 'slack'],
             'ignore_exceptions' => false,
         ],
 
@@ -66,14 +67,15 @@ return [
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 14,
+            'level' => 'debug',
+            'days' => 7,
+            'log_name' => 'laravel-{Y-m-d}.log',
         ],
 
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => 'Laravel Log',
+            'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
             'emoji' => ':boom:',
             'level' => env('LOG_LEVEL', 'critical'),
         ],
@@ -85,7 +87,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
         ],
 

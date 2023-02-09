@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\MailSettingController;
+use App\Http\Controllers\Admin\Setting\OccupationController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
 use App\Http\Controllers\Admin\Setting\SmsSettingController;
@@ -23,12 +24,14 @@ use App\Http\Controllers\Admin\Setting\Units\InternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
 use App\Http\Controllers\Admin\Setting\Units\TypeController;
 use App\Http\Controllers\Admin\Setting\Units\UnitController;
+use App\Http\Controllers\Admin\Settings\LetterHeadController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
+use App\Http\Controllers\PinController;
 use App\Http\Controllers\TechController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +71,7 @@ Route::prefix('setting')->group(function () {
     Route::post('send-test-mail', [MailSettingController::class, 'sendTestMail'])->name('send-test-mail');
 
 
+    Route::resource('occupation', OccupationController::class);
     Route::resource('ethnicity', EthnicityController::class);
     Route::resource('fiscalYear', FiscalYearController::class);
     Route::resource('emergencyNumber', EmergencyNumberController::class);
@@ -75,10 +79,12 @@ Route::prefix('setting')->group(function () {
     Route::resource('department', DepartmentController::class);
     Route::resource('designation', DesignationController::class);
 
-    Route::get('subBranch', [BranchController::class,'subBranch'])->name('subBranch');
+    Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
     Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
+        Route::get('role/{role}/letterHead',[RoleController::class,'letterHeadPage'])->name('role.letterHead');
+        Route::post('role/{role}/letterHead',[RoleController::class,'letterHeadStore'])->name('role.letterHead');
         Route::resource('role', RoleController::class);
         Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
         Route::resource('user', UserController::class);
@@ -93,11 +99,13 @@ Route::prefix('setting')->group(function () {
     });
     Route::resource('officeSetting', OfficeSettingController::class);
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
+    Route::resource('letterHead', LetterHeadController::class)->only('index','store');
 });
 
 //file
-Route::get('file/{file}/download', [FileController::class,'download'])->name('file.download');
-Route::get('file-download', [FileController::class,'downloadFile'])->name('file-url-download');
+Route::get('file/{file}/download', [FileController::class, 'download'])->name('file.download');
+Route::get('file-download', [FileController::class, 'downloadFile'])->name('file-url-download');
+Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes
@@ -110,3 +118,9 @@ Route::prefix('website')->as('website.')->group(function () {
 
 //activity logs
 Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');
+
+//check pin
+
+Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
+Route::post('ckeditor-file-upload', [PinController::class, 'fileUpload']);
+Route::resource('pin', PinController::class);

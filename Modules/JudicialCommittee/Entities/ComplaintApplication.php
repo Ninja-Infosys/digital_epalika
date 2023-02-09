@@ -7,17 +7,24 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
+use App\Traits\GetAllColumns;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
 
 class ComplaintApplication extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use JudicialCommitteeTemplateTrait;
     use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -58,18 +65,33 @@ class ComplaintApplication extends Model
         'applicant_signature',
     ];
 
-    public function getApplicantSignatureUrlAttribute(): string
+    protected $appends=[
+        'month',
+        'en_month'
+    ];
+
+    public function getApplicantSignatureAttribute(): string
     {
-        return ! empty($this->attributes['applicant_signature'])
+        return !empty($this->attributes['applicant_signature'])
             ? Storage::disk('public')->url($this->attributes['applicant_signature'])
             : '';
     }
 
     public function setApplicantSignatureAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['applicant_signature'] = $value->store('judicial_committee/applicant_signature', 'public');
         }
+    }
+
+    public function getMonthAttribute(): string
+    {
+        return explode('-', $this->date)[1] ?? '';
+    }
+
+    public function getEnMonthAttribute(): string
+    {
+        return explode('-', $this->en_date)[1] ?? '';
     }
 
     public function fiscalYear(): BelongsTo
@@ -110,5 +132,45 @@ class ComplaintApplication extends Model
     public function defendantLocalBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class, 'defendant_local_body_id');
+    }
+
+    public function judicialReceiptBill(): HasOne
+    {
+        return $this->hasOne(JudicialReceiptBill::class);
+    }
+
+    public function relatedMembers(): HasMany
+    {
+        return $this->hasMany(RelatedMember::class);
+    }
+
+    public function dateSheets(): HasMany
+    {
+        return $this->hasMany(DateSheet::class);
+    }
+
+    public function defendantIssuedDeadlines(): HasMany
+    {
+        return $this->hasMany(DefendantIssuedDeadline::class);
+    }
+
+    public function dateCompensation(): HasOne
+    {
+        return $this->hasOne(DateCompensation::class);
+    }
+
+    public function writtenAnswers(): HasMany
+    {
+        return $this->hasMany(WrittenAnswer::class);
+    }
+
+    public function complaintDecision(): HasOne
+    {
+        return $this->hasOne(ComplaintDecision::class);
+    }
+
+    public function complaintLogs(): HasMany
+    {
+        return $this->hasMany(ComplaintLog::class);
     }
 }

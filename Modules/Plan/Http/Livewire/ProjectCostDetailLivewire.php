@@ -13,22 +13,28 @@ use Modules\Plan\Enums\GrantSourceEnum;
 class ProjectCostDetailLivewire extends Component
 {
     public array $form = [
-        'estimated_total_cost' => null,
-        'federal_invest' => null,
-        'province_invest' => null,
-        'local_level_invest' => null,
-        'consumer_committee_invest' => null,
-        'ngo_invest' => null,
-        'foreign_donor_invest' => null,
-        'others_invest' => null,
-        'estimated_cost_excluding_vat' => null,
-        'benefited_organization' => null,
-        'others_benefited' => null,
+        'benefited_organization' => 0,
+        'others_benefited' => 0,
         'projectGrantDetails' => [],
-        'benefitedMemberDetails' => []
+        'benefitedMemberDetails' => [],
+        'progress_spent_amount' => 0,
+        'physical_progress_target' => 0,
+        'physical_progress_completed' => 0,
+        'physical_progress_unit' => '',
+        'office_grant' => 0,
+        'agencies_grants' => 0,
+        'share_amount' => 0,
+        'committee_share_amount' => 0,
+        'total_amount_for_contingency' => 0,
+        'contingency_percent' => 0,
+        'contingency_amount' => 0,
+        'other_taxes' => 0,
+        'project_contract_amount' => 0,
+        'labor_amount' => 0,
+        'total_cost_estimate_amount' => 0
     ];
 
-    public object $project;
+    public Project $project;
 
     public function mount($project_id = null)
     {
@@ -40,17 +46,18 @@ class ProjectCostDetailLivewire extends Component
     public function rules(): array
     {
         return [
-            'form.estimated_total_cost' => ['required', 'numeric'],
-            'form.federal_invest' => ['nullable', 'numeric'],
-            'form.province_invest' => ['nullable', 'numeric'],
-            'form.local_level_invest' => ['nullable', 'numeric'],
-            'form.consumer_committee_invest' => ['nullable', 'numeric'],
-            'form.ngo_invest' => ['nullable', 'numeric'],
-            'form.foreign_donor_invest' => ['nullable', 'numeric'],
-            'form.others_invest' => ['nullable', 'numeric'],
-            'form.estimated_cost_excluding_vat' => ['nullable', 'numeric'],
             'form.benefited_organization' => ['required', 'numeric'],
             'form.others_benefited' => ['required', 'numeric'],
+            'form.progress_spent_amount' => ['nullable', 'numeric'],
+            'form.physical_progress_target' => ['nullable', 'numeric'],
+            'form.physical_progress_completed' => ['nullable', 'numeric'],
+            'form.physical_progress_unit' => ['nullable'],
+            'form.agencies_grants' => ['nullable', 'numeric'],
+            'form.share_amount' => ['nullable', 'numeric'],
+            'form.committee_share_amount' => ['nullable', 'numeric'],
+            'form.contingency_amount' => ['nullable', 'numeric'],
+            'form.other_taxes' => ['nullable', 'numeric'],
+            'form.labor_amount' => ['nullable', 'numeric'],
             'form.projectGrantDetails.*' => ['nullable', 'array'],
             'form.projectGrantDetails.*.grant_source' => ['required', new Enum(GrantSourceEnum::class)],
             'form.projectGrantDetails.*.asset_name' => ['required'],
@@ -61,7 +68,7 @@ class ProjectCostDetailLivewire extends Component
             'form.benefitedMemberDetails.*.dalit_backward_no' => ['required', 'integer'],
             'form.benefitedMemberDetails.*.other_households_no' => ['required', 'integer'],
             'form.benefitedMemberDetails.*.no_of_male' => ['required', 'integer'],
-            'form.benefitedMemberDetails.*.no_of_female' => ['required', 'integer'],
+            'form.benefitedMemberDetails.*.no_of_female' => ['required', 'integer']
         ];
     }
 
@@ -100,15 +107,26 @@ class ProjectCostDetailLivewire extends Component
 
     private function assignProjectData($project_id)
     {
-        $project = Project::with('projectCostDetail', 'projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+        $project = Project::with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+
         $this->project = $project;
-        if ($projectCostDetail = $project->projectCostDetail) {
-            foreach ($this->form as $key => $data) {
-                if ($key != 'projectGrantDetails' && $key != 'benefitedMemberDetails') {
-                    $this->form[$key] = $projectCostDetail[$key];
-                }
-            }
-        }
+
+        $this->form['office_grant'] = $project->allocated_amount ?? 0;
+        $this->form['agencies_grants'] = $project->agencies_grants ?? 0;
+        $this->form['share_amount'] = $project->share_amount ?? 0;
+        $this->form['committee_share_amount'] = $project->committee_share_amount ?? 0;
+        $this->form['contingency_amount'] = $project->contingency_amount ?? 0;
+        $this->form['contingency_percent'] = round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2);
+        $this->form['other_taxes'] = $project->other_taxes ?? 0;
+        $this->form['labor_amount'] = $project->labor_amount ?? 0;
+        $this->form['benefited_organization'] = $project->benefited_organization ?? 0;
+        $this->form['others_benefited'] = $project->others_benefited ?? 0;
+        $this->form['progress_spent_amount'] = $project->progress_spent_amount ?? 0;
+        $this->form['physical_progress_target'] = $project->physical_progress_target ?? 0;
+        $this->form['physical_progress_completed'] = $project->physical_progress_completed ?? 0;
+        $this->form['physical_progress_unit'] = $project->physical_progress_unit ?? '';
+
+
         foreach ($project->projectGrantDetails as $projectGrantDetail) {
             $this->form['projectGrantDetails'][] = [
                 'id' => $projectGrantDetail->id ?? null,
@@ -134,23 +152,20 @@ class ProjectCostDetailLivewire extends Component
     public function submitFormData()
     {
         $formData = $this->validate()['form'];
-
-        ProjectCostDetail::updateOrCreate(
-            ['project_id' => $this->project->id],
-            [
-                'estimated_total_cost' => $formData['estimated_total_cost'] ?? 0,
-                'federal_invest' => $formData['federal_invest'] ?? 0,
-                'province_invest' => $formData['province_invest'] ?? 0,
-                'local_level_invest' => $formData['local_level_invest'] ?? 0,
-                'consumer_committee_invest' => $formData['consumer_committee_invest'] ?? 0,
-                'ngo_invest' => $formData['ngo_invest'] ?? 0,
-                'foreign_donor_invest' => $formData['foreign_donor_invest'] ?? 0,
-                'others_invest' => $formData['others_invest'] ?? 0,
-                'estimated_cost_excluding_vat' => $formData['estimated_cost_excluding_vat'] ?? 0,
-                'benefited_organization' => $formData['benefited_organization'] ?? 0,
-                'others_benefited' => $formData['others_benefited'] ?? 0
-            ]
-        );
+        $this->project->update([
+            'progress_spent_amount' => $formData['progress_spent_amount'] ?: 0,
+            'physical_progress_target' => $formData['physical_progress_target'] ?: 0,
+            'physical_progress_completed' => $formData['physical_progress_completed'] ?: 0,
+            'physical_progress_unit' => $formData['physical_progress_unit'] ?? null,
+            'agencies_grants' => $formData['agencies_grants'] ?: 0,
+            'share_amount' => $formData['share_amount'] ?: 0,
+            'committee_share_amount' => $formData['committee_share_amount'] ?: 0,
+            'contingency_amount' => $formData['contingency_amount'] ?: 0,
+            'other_taxes' => $formData['other_taxes'] ?: 0,
+            'labor_amount' => $formData['labor_amount'] ?: 0,
+            'benefited_organization' => $formData['benefited_organization'] ?: 0,
+            'others_benefited' => $formData['others_benefited'] ?: 0
+        ]);
 
         foreach ($this->form['projectGrantDetails'] as $projectGrantDetail) {
             ProjectGrantDetail::updateOrCreate(
@@ -175,8 +190,35 @@ class ProjectCostDetailLivewire extends Component
         ]);
     }
 
+    private function assignCalculatedAmount()
+    {
+        $this->form['total_amount_for_contingency'] = $this->totalAmountForContingency();
+        $this->form['contingency_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) * ($this->form['contingency_percent'] ?? 0) / 100;
+        $this->form['project_contract_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) - ($this->form['contingency_amount'] ?? 0) - ($this->form['other_taxes'] ?? 0);
+        $this->form['total_cost_estimate_amount'] = ($this->form['project_contract_amount'] ?? 0) + ($this->form['labor_amount'] ?? 0);
+    }
+
+    private function totalAmountForContingency(): float|int
+    {
+        return ((double)$this->form['office_grant'] ?? 0) + ((double)$this->form['agencies_grants'] ?? 0) + ((double)$this->form['share_amount'] ?? 0) + ((double)$this->form['committee_share_amount'] ?? 0);
+    }
+
+    public function messages(): array
+    {
+        return [
+            'form.benefitedMemberDetails.*.ward_no.required' => 'वडा नं. आबश्यक छ',
+            'form.benefitedMemberDetails.*.village.required' => 'गाँउ बस्ति आबश्यक छ',
+            'form.benefitedMemberDetails.*.dalit_backward_no.required' => 'दलित/पिछडिएका संख्या आबश्यक छ',
+            'form.benefitedMemberDetails.*.other_households_no.required' => 'अन्य घरधुरी संख्या आबश्यक छ',
+            'form.benefitedMemberDetails.*.no_of_female.required' => 'महिला संख्या आबश्यक छ',
+            'form.benefitedMemberDetails.*.no_of_male.required' => 'पुरुष संख्या आबश्यक छ',
+        ];
+    }
+
     public function render()
     {
+        $this->assignCalculatedAmount();
+
         return view('plan::livewire.project-cost-detail-livewire');
     }
 }

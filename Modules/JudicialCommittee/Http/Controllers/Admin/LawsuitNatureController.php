@@ -49,7 +49,7 @@ class LawsuitNatureController extends Controller
         $lawsuitNature->update($request->validated());
 
         toast('मुद्दा प्रकृति सफलतापूर्वक अपडेट गरियो', 'success');
-        return redirect(route('admin.judicialCommittee.lawsuitNature.index'));
+        return redirect(route('admin.judicialCommittee.setting.lawsuitNature.index'));
     }
 
     public function destroy(LawsuitNature $lawsuitNature)

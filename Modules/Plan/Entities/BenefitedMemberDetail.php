@@ -34,4 +34,14 @@ class BenefitedMemberDetail extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function getTotalHouseholdAttribute()
+    {
+        return $this->attributes['dalit_backward_no'] + $this->attributes['other_households_no'];
+    }
+    public function getTotalPopulationAttribute()
+    {
+        return $this->attributes['no_of_male'] + $this->attributes['no_of_female'];
+    }
+
 }

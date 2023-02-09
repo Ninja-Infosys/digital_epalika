@@ -2,6 +2,7 @@
 
 namespace Modules\Plan\Entities;
 
+use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +24,7 @@ class ProjectBidSubmission extends Model
 
     protected $fillable = [
         'project_id',
+        'fiscal_year_id',
         'submission_type',
         'submission_no',
         'date',
@@ -36,5 +38,10 @@ class ProjectBidSubmission extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 }

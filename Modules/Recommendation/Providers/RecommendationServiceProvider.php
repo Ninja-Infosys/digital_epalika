@@ -3,6 +3,8 @@
 namespace Modules\Recommendation\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Recommendation\Entities\PersonalDetail;
+use Modules\Recommendation\Observers\PersonalDetailObserver;
 
 class RecommendationServiceProvider extends ServiceProvider
 {
@@ -23,10 +25,12 @@ class RecommendationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        PersonalDetail::observe(PersonalDetailObserver::class);
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+//        RecommendationFormData::observe(RecommendationFormDataObserver::class);
     }
 
     /**

@@ -14,10 +14,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use App\Traits\GetAllColumns;
 
 class Enterprise extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait,GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -64,18 +65,21 @@ class Enterprise extends Model
         return $this->belongsTo(User::class);
     }
 
-//    public function enterprisePersons(): HasMany
-//    {
-//        return $this->hasMany(EnterprisePerson::class)->orderBy('position');
-//    }
+    //    public function enterprisePersons(): HasMany
+    //    {
+    //        return $this->hasMany(EnterprisePerson::class)->orderBy('position');
+    //    }
 
     public function farmers(): BelongsToMany
     {
         return $this->belongsToMany(Farmer::class);
     }
-
-//    public function grantDetails(): MorphMany
-//    {
-//        return $this->morphMany(GrantDetail::class, 'model');
-//    }
+     public function enterpriseTypes(): BelongsTo
+     {
+         return $this->belongsTo(enterpriseType::class);
+     }
+       public function grantDetails(): MorphMany
+       {
+           return $this->morphMany(GrantDetail::class, 'model');
+       }
 }

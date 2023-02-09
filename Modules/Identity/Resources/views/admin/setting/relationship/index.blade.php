@@ -1,0 +1,87 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">नाता</li>
+                        <li class="breadcrumb-item active">नाता</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">नाता </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">नाताहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('relationship_create')
+                                <a href="{{route('identity.admin.setting.relationship.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">क्र.सं.</th>
+                            <th scope="col">शिर्षक</th>
+                            <th scope="col">#</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($relationships as $relationship)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$relationship->title ?? ''}}</td>
+                                <td>
+                                    @can('relationship_edit')
+                                        <a data-bs-type="edit" href="{{route('identity.admin.setting.relationship.edit', $relationship)}}"
+                                           type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    @endcan
+                                    @can('relationship_delete')
+                                        <form
+                                            action="{{route('identity.admin.setting.relationship.destroy',$relationship)}}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                    title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2">
+                    {{ $relationships->onEachSide(config('app.pagination_count'))->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+

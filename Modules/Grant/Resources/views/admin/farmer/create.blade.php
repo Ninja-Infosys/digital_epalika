@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">कृषक थप</li>
+                        <li class="breadcrumb-item active">कृषक/व्यक्ति थप</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> कृषकहरु</h4>
+                <h4 class="page-title"> कृषक/व्यक्तिहरु</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ कृषक थप्नुहोस्</h4>
+                        <h4 class="header-title">नयाँ कृषक/व्यक्ति थप्नुहोस्</h4>
                         <a href="{{route('admin.grant.farmer.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> कृषक सुची
+                            <i class="fa fa-list"></i> कृषक/व्यक्ति सुची
                         </a>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                         @csrf
 
                         <fieldset>
-                            <legend><h4 class="text-info">कृषक विवरण</h4></legend>
-                            <h6 class="py-2">नोट: कृपया कृषकको विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>
+                            <legend><h4 class="text-info">कृषक/व्यक्ति विवरण</h4></legend>
+                            <h6 class="py-2">नोट: कृपया कृषक/व्यक्तिको विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="first_name" class="form-label">पहिलो नाम *</label>
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="gender" class="form-label">लिंग *</label>
-                                    <select id="gender" name="gender" class="form-control">
+                                    <select id="gender" name="gender" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
                                             <option
@@ -121,32 +121,19 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4 mb-2" id="marital-status-div">
                                     <label for="marital_status" class="form-label">बैबाहिक अवस्था *</label>
-                                    <select id="marital_status" name="marital_status" class="form-control">
+                                    <select id="marital_status" name="marital_status" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\MaritalStatusEnum::cases() as $marital_status)
                                             <option
-                                                value="{{$marital_status->value}}" {{$marital_status->value==old('marital_status') ? 'selected' : ''}}>
+                                                value="{{$marital_status->value}}"
+                                                {{$marital_status->value==old('marital_status') ? 'selected' : ''}}>
                                                 {{$marital_status->label()}}
                                             </option>
                                         @endforeach
                                     </select>
                                     @error('marital_status')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <label for="spouse_name" class="form-label">पति/पत्नी नाम</label>
-                                    <input
-                                        type="text"
-                                        name="spouse_name"
-                                        value="{{old('spouse_name')}}"
-                                        class="form-control @error('spouse_name') is-invalid @enderror"
-                                        id="spouse_name"
-                                        placeholder="पति/पत्नी नाम"
-                                    />
-                                    @error('spouse_name')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -157,7 +144,7 @@
                                         name="father_name"
                                         value="{{old('father_name')}}"
                                         class="form-control @error('father_name') is-invalid @enderror"
-                                        id="phone_no"
+                                        id="father_name"
                                         placeholder="बुवाको नाम थर"
                                     />
                                     @error('father_name')
@@ -193,7 +180,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं</label>
+                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं (कृषक सूचीकरण
+                                        नम्बर)</label>
                                     <input
                                         type="text"
                                         name="farmer_id_card_no"
@@ -225,9 +213,14 @@
                         </fieldset>
                         <fieldset class="my-2">
                             <legend><h4 class="text-info">स्थायी ठेगाना *</h4></legend>
-                            <h6 class="py-2">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् । </h6>
+                            <h6 class="py-2">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट
+                                गर्नुहोस् । </h6>
+                            @livewire('address', [
+                            'province_id' =>$officeSetting->province_id,
+                            'district_id' => $officeSetting->district_id,
+                            'local_body_id' => $officeSetting->local_body_id
+                            ])
                             <div class="row">
-                                @livewire('address')
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">
                                         गाउँ</label>
@@ -264,16 +257,24 @@
                             <legend><h4 class="text-info">संलग्नता ? *</h4></legend>
                             <h6 class="py-2"> नोट: कुनै समूह, सहकारी वा उद्यममा संलग्न भएमा ।</h6>
                             <div class="row">
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4  mb-2">
                                     <label for="cooperatives" class="form-label">
                                         सहकारी</label>
-                                    <select name="cooperatives[]" multiple data-toggle="select2"
-                                            id="cooperatives" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($cooperatives as $cooperative)
-                                            <option value="{{$cooperative->id}}">{{$cooperative->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="input-group">
+                                        <select name="cooperatives[]" multiple data-toggle="select2"
+                                                id="cooperatives" class="form-select"
+                                                aria-describedby="button-cooperatives">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($cooperatives as $cooperative)
+                                                <option value="{{$cooperative->id}}">{{$cooperative->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-cooperatives"
+                                                title="सहकारी थप" data-bs-toggle="modal"
+                                                data-bs-target="#cooperative-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('cooperatives')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -281,13 +282,18 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="group" class="form-label">
                                         समूह</label>
-                                    <select name="group[]" multiple data-toggle="select2"
-                                            id="group" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($groups as $group)
-                                            <option value="{{$group->id}}">{{$group->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="input-group">
+                                        <select name="groups[]" multiple data-toggle="select2"
+                                                id="groups" class="form-control" aria-describedby="button-group">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($groups as $group)
+                                                <option value="{{$group->id}}">{{$group->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" id="button-group"
+                                                title="समुह थप" data-bs-toggle="modal" data-bs-target="#group-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('group')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -295,27 +301,76 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="enterprise" class="form-label">
                                         उद्यम</label>
-                                    <select name="enterprise[]" multiple data-toggle="select2"
-                                            id="enterprise" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($enterprises as $enterprise)
-                                            <option value="{{$enterprise->id}}">{{$enterprise->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('enterprise')
+                                    <div class="input-group">
+                                        <select name="enterprises[]" multiple data-toggle="select2"
+                                                id="enterprises" class="form-control"
+                                                aria-describedby="button-enterprise">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($enterprises as $enterprise)
+                                                <option value="{{$enterprise->id}}">{{$enterprise->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="उधम थप" data-bs-toggle="modal"
+                                                data-bs-target="#enterprise-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
+                                    @error('enterprises')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
+    {{--cooperative add modal--}}
+    @include('grant::admin.inc.cooperative_form')
+
+    {{--group add modal--}}
+    @include('grant::admin.inc.group_form')
+
+    {{--enterprise add modal--}}
+    @include('grant::admin.inc.enterprise_form')
+
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                if ($('#marital_status').val() === 'married') {
+                    setStatus($('#marital_status').val())
+                }
+                $('#marital_status').on('change', function () {
+                    setStatus($(this).val())
+                });
+
+                function setStatus(status) {
+                    if (status === 'married') {
+                        $('#marital-status-div').after(spouseInput())
+                    } else {
+                        $('.spouse').remove()
+                    }
+                }
+
+                function spouseInput() {
+                    return "<div class='spouse col-md-4 mb-2'>" +
+                        "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
+                        "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
+                        "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
+                }
+
+            });
+        </script>
+    @endpush
+    @push('style')
+
+    @endpush
 @endsection
 
 

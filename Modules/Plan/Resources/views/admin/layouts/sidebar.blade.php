@@ -8,16 +8,61 @@
     <li class="{{request()->is('admin/plan/project') ? 'active' : ''}}">
         <a href="{{route('admin.plan.project.index')}}">
             <i class="fa fa-list"></i>
-            <span> योजना/आयोजना दर्ता </span>
+            <span> योजना/कार्यक्रमहरु </span>
         </a>
     </li>
 @endcan
 
 <li class="{{request()->is('admin/plan/report*') ? 'active' : ''}}">
-    <a href="{{route('admin.plan.report.index')}}">
-        <i class="fa fa-file"></i>
-        <span> रिपोर्ट</span>
+    <a href="#sidebarPlanReport"
+       {{request()->is('admin/plan/report*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-clipboard-list"></i>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/plan/report*') ? 'show' : ''}}"
+         id="sidebarPlanReport">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/plan/report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.index')}}">
+                    <span>प्रतिवेदनहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/annual-progress-report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.annual-progress-report')}}">
+                    <span>वार्षिक प्रगति प्रतिवेदन</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/consumer-committee-projects') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.consumer-committee-projects')}}">
+                    <span>उ.स. अन्तर्गतका योजनाहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/contract-projects') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.contract-projects-page')}}">
+                    <span>ठेक्का अन्तर्गतका योजनाहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/incomplete-projects') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.incomplete-projects')}}">
+                    <span>सम्पन्न हुन बाकि योजनाहरुको रिपोर्ट </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/price-range-report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.price-range-report-page')}}">
+                    <span>योजना छनौट रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/work-detail-report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.work-detail-report-page')}}">
+                    <span>उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
 
 <li class="{{request()->is('admin/plan/setting/*') ? 'active' : ''}}">
@@ -25,7 +70,7 @@
        {{request()->is('admin/plan/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
-        <span>सेटिङ</span>
+        <span>  आधारभूत सेटिङ</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -35,22 +80,43 @@
         <ul class="nav-second-level">
             @can('planArea_access')
                 <li class="{{request()->is('admin/plan/setting/planArea') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.planArea.index')}}">
-                        <span>  योजना क्षेत्र/उप-क्षेत्र  </span>
+                    <a href="{{route('admin.plan.planArea.index','planAreaCategory')}}">
+                        <span>  योजना क्षेत्र  </span>
+                    </a>
+                </li>
+            @endcan
+            @can('planArea_access')
+                <li class="{{request()->is('admin/plan/setting/planArea') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planArea.index','planAreaSubCategory')}}">
+                        <span>  योजना उप-क्षेत्र  </span>
                     </a>
                 </li>
             @endcan
             @can('planLevel_access')
                 <li class="{{request()->is('admin/plan/setting/planLevel') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.planLevel.index')}}">
-                        <span> योजना स्तर/उप-स्तरहरु </span>
+                    <a href="{{route('admin.plan.planLevel.index','planLevel')}}">
+                        <span> योजना स्तरहरु </span>
+                    </a>
+                </li>
+            @endcan
+            @can('planLevel_access')
+                <li class="{{request()->is('admin/plan/setting/planLevel') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planLevel.index','planSubLevel')}}">
+                        <span> योजना उप-स्तरहरु </span>
                     </a>
                 </li>
             @endcan
             @can('budgetHead_access')
                 <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.budgetHead.index')}}">
-                        <span> बजेट शिर्षक/उप-शिर्षक </span>
+                    <a href="{{route('admin.plan.budgetHead.index','budgetHead')}}">
+                        <span> बजेट शिर्षक </span>
+                    </a>
+                </li>
+            @endcan
+            @can('budgetHead_access')
+                <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.budgetHead.index','budgetSubHead')}}">
+                        <span> बजेट उप-शिर्षक </span>
                     </a>
                 </li>
             @endcan
@@ -62,13 +128,30 @@
                 </li>
             @endcan
 
+
             @can('planTemplate_access')
-                <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.planTemplate.index')}}">
-                        <span> टेम्प्लेट </span>
+                <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.expenseHead.index')}}">
+                        <span> खर्च शीर्षक </span>
                     </a>
                 </li>
             @endcan
+
+            @can('planTemplate_access')
+                <li class="{{request()->is('admin/plan/setting/grantCategory') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.grantCategory.index')}}">
+                        <span> अनुदान प्रकार </span>
+                    </a>
+                </li>
+            @endcan
+                @can('planTemplate_access')
+                    <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
+                        <a href="{{route('admin.plan.planTemplate.index')}}">
+                            <span> टेम्प्लेट </span>
+                        </a>
+                    </li>
+                @endcan
+
         </ul>
     </div>
 </li>

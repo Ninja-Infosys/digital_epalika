@@ -20,14 +20,11 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required', 'email', Rule::unique('users', 'email')->withoutTrashed()->ignore($this->user)],
             'phone' => ['nullable', 'numeric', Rule::unique('users', 'phone')->withoutTrashed()->ignore($this->user)],
             'role_id' => ['required', Rule::exists('roles', 'id')->withoutTrashed()],
-            'province_id' => ['nullable', Rule::exists('provinces', 'id')],
-            'district_id' => ['nullable', Rule::exists('districts', 'id')],
-            'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')],
             'ward_no' => ['nullable', 'integer'],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return[
             'name.required' => 'नाम अनिबार्य छ।',

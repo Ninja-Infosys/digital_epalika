@@ -26,6 +26,9 @@ class Unit extends Model
         'type_id',
         'measurement_unit_id',
         'title',
+        'title_en',
+        'notation',
+        'notation_ne',
         'position',
         'is_smallest',
     ];

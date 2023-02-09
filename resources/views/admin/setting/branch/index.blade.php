@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">शाखा</li>
+                        <li class="breadcrumb-item active">शाखा/उपशाखा</li>
                     </ol>
                 </div>
-                <h4 class="page-title">शाखा</h4>
+                <h4 class="page-title">शाखा/उपशाखा</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">शाखा सूची</h4>
+                        <h4 class="header-title">शाखा/उपशाखाहरु</h4>
                         @can('branch_create')
                             <a href="{{route('admin.branch.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -52,8 +52,8 @@
                                     <td></td>
                                     <td>
                                         @can('branch_edit')
-                                            <a href="{{route('admin.branch.edit',$branch)}}"
-                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <a data-bs-type="edit" href="{{route('admin.branch.edit',$branch)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -62,7 +62,7 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -80,9 +80,9 @@
                                         <td>{{$subBranch->branch->branch_name??''}}</td>
                                         <td>
                                             @can('branch_edit')
-                                                <a href="{{route('admin.branch.edit',$subBranch)}}"
+                                                <a data-bs-type="edit" href="{{route('admin.branch.edit',$subBranch)}}"
                                                    title="सम्पादन गर्नुहोस्"
-                                                   class="btn btn-xs btn-outline-primary">
+                                                   class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                             @endcan
@@ -91,7 +91,7 @@
                                                       method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                             title="मेटाउनु होस्">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

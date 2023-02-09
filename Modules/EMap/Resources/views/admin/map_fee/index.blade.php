@@ -25,8 +25,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नक्शा दस्तुर सूची</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title mb-0">नक्शा दस्तुर सूची</h4>
                         @can('mapFee_create')
                             <a href="{{route('emap.admin.mapFee.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -56,8 +56,8 @@
                                     <td>{{$mapFee->rate}}</td>
                                     <td>
                                         @can('mapFee_edit')
-                                        <a href="{{route('emap.admin.mapFee.edit',$mapFee)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('emap.admin.mapFee.edit',$mapFee)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         @endcan
@@ -67,8 +67,8 @@
                                             @csrf
                                             @method('delete')
                                             @can('mapFee_delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i> मेटाउनु होस्
                                             </button>
                                             @endcan
                                         </form>

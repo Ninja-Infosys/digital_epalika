@@ -16,6 +16,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "laravolt/avatar": "^4.1",
         "livewire/livewire": "^2.5",
         "maatwebsite/excel": "^3.1",
         "mhmiton/laravel-modules-livewire": "^1.5",

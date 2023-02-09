@@ -23,36 +23,39 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">उजुरी फारम सूची</h4>
-                        @can('complaintApplication_create')
-                            <a href="{{route('admin.judicialCommittee.complaintApplication.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">निवेदन फारमहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('complaintApplication_create')
+                                <a href="{{route('admin.judicialCommittee.complaintApplication.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-bordered">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>सबमिशन नं.</th>
-                                <th>निवेदकको पुरा नाम </th>
-                                <th>प्रतिवादीको पुरा नाम </th>
+                                <th>दर्ता नं.</th>
+                                <th>निवेदकको पुरा नाम</th>
+                                <th>प्रतिवादीको पुरा नाम</th>
                                 <th>मिति</th>
                                 <th>विषय</th>
                                 <th>मुद्दा प्रकृति</th>
-                                <th>कार्य</th>
+                                <th>#</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-nowrap">
                             @forelse($complaintApplications as $complaintApplication)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$complaintApplication->submission_no}}</td>
+                                    <td>{{$complaintApplication->registration_no}}</td>
                                     <td>{{$complaintApplication->complainant_name}}</td>
                                     <td>{{$complaintApplication->defendant_name}}</td>
                                     <td>{{$complaintApplication->date}}</td>
@@ -61,16 +64,18 @@
                                         {{$complaintApplication->lawsuitNature->title??''}}
                                     </td>
                                     <td>
-                                        @can('complaintApplication_edit')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
-                                               class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-edit"></i>
+                                        @can('complaintApplication_access')
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
+                                               title="विवरण हेर्नुहोस्"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                            @can('complaintApplication_access')
-                                            <a href="{{route('admin.judicialCommittee.applicationForm')}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i>
+                                        @can('complaintApplication_edit')
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
+                                               title="सम्पादन गर्नुहोस्"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('complaintApplication_delete')
@@ -79,7 +84,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
@@ -88,11 +93,14 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $complaintApplications->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

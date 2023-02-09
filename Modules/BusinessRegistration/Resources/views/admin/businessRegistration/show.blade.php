@@ -33,19 +33,19 @@
                         </li>
                         <li class="nav-item">
                             <a href="#reg" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                दर्ता/नबिकरण निबेदन फाराम
+                                दर्ता
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#tax" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
-                                व्यवसाय कर दर्ता किताव
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#application" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                व्यवसाय दर्ता प्रमाण-पत्र
-                            </a>
-                        </li>
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a href="#tax" data-bs-toggle="tab" aria-expanded="true" class="nav-link">--}}
+                        {{--                                व्यवसाय कर दर्ता किताव--}}
+                        {{--                            </a>--}}
+                        {{--                        </li>--}}
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a href="#application" data-bs-toggle="tab" aria-expanded="false" class="nav-link">--}}
+                        {{--                                व्यवसाय दर्ता प्रमाण-पत्र--}}
+                        {{--                            </a>--}}
+                        {{--                        </li>--}}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="detail">
@@ -54,7 +54,7 @@
                                     <div class="card mt-3">
                                         <div class="card-header">
                                             <h4 class="header-title">
-                                                प्रोपाईटरको विवरण
+                                                व्यवसायीको विवरण
                                             </h4>
                                         </div>
                                         <div class="card-body">
@@ -62,148 +62,55 @@
                                                 <table class="table table-sm mb-0 table-striped table-hover">
                                                     <thead>
                                                     <tr>
-                                                        <th>व्यवसायीको नाम</th>
-                                                        <th>{{$businessDetail->proprietorDetail->name}}</th>
+                                                        <th>नाम</th>
+                                                        <td>{{$businessDetail->name??''}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>फोन नं.</th>
-                                                        <th>{{$businessDetail->proprietorDetail->phone}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>इमेल</th>
-                                                        <th>{{$businessDetail->proprietorDetail->email}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>नागरिकता नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>लिङ्ग</th>
-                                                        <th>{{$businessDetail->proprietorDetail->gender->label()}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>इमेल</th>
-                                                        <th>{{$businessDetail->proprietorDetail->email}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> घर नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->house_no}}</th>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th> व्यक्तिगत स्थाई लेखा नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->account_no}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> राष्ट्रियता परिचयपत्र नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->national_card_no}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> शैक्षिक योग्यता</th>
-                                                        <th>{{$businessDetail->proprietorDetail->education_qualification?->label() ??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> मुख्य पेशा</th>
-                                                        <th>{{$businessDetail->proprietorDetail->occupation}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> नागरिकता नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> जारी मिति</th>
-                                                        <th>{{$businessDetail->proprietorDetail->issue_date}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> जारी जिल्ला</th>
-                                                        <th>{{$businessDetail->proprietorDetail->issueDistrict->district??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>ठेगाना</th>
-                                                        <th>{{$businessDetail->proprietorDetail->LocalBody->local_body ?? ''}}
-                                                            -{{$businessDetail->proprietorDetail->ward_no ?? ''}}
-                                                            , {{$businessDetail->proprietorDetail->tole ?? ''}}
-                                                            , {{$businessDetail->proprietorDetail->District->district ?? ''}}
-                                                            , {{$businessDetail->proprietorDetail->Province->province ?? ''}}</th>
-                                                    </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card mt-3">
-                                        <div class="card-header">
-                                            <h4 class="header-title">
-                                                व्यावसाहिक विवरण
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-sm mb-0 table-striped table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th> फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
-                                                        <th>{{$businessDetail->business_detail_name??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
-                                                        <th>{{$businessDetail->business_detail_name_en??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> व्यवसायको प्रकृति</th>
-                                                        <th>{{$businessDetail->business_nature->label()??''}}</th>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th> व्यवसाय स्थापना गरेको साल</th>
-                                                        <th>{{$businessDetail->establish_year??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> पान नम्बर</th>
-                                                        <th>{{$businessDetail->pan_no??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> कारोबार गर्ने वस्तु</th>
-                                                        <th>{{$businessDetail->investmentRevenue->objectTransaction->title??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> पुँजीगत लगानी</th>
-                                                        <th>{{$businessDetail->investmentRevenue->registration_amount??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> लागत रकम रु</th>
-                                                        <th>{{$businessDetail->amount_cost??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> पूजीको स्रोत</th>
-                                                        <th>{{$businessDetail->source_of_capital?->label()??''}}</th>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <th> उदेश्य</th>
-                                                        <th>@foreach($businessDetail->businessPurposes as $businessPurposes)
-                                                                {{$businessPurposes->title}} {{!$loop->last ? ", ":''}}
-                                                            @endforeach</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> रोजगार संख्या</th>
-                                                        <th>{{$businessDetail->employment??''}}</th>
+                                                        <th>नाम अंग्रेजी</th>
+                                                        <td>{{$businessDetail->name_en??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
-                                                        <th>
+                                                        <td>{{$businessDetail->address??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> ठेगाना अंग्रेजी</th>
+                                                        <td>{{$businessDetail->address_en??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> व्यवसायको प्रकृति</th>
+                                                        <td>{{$businessDetail->businessNature->title??''}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th> कारोबार गर्ने वस्तु</th>
+                                                        <td>{{$businessDetail->objectTransaction->title??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> चालु पूँजी</th>
+                                                        <td>{{ $businessDetail->working_capital ?? ''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> स्थिर पूँजी</th>
+                                                        <td>{{$businessDetail->fixed_capital??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> पुँजीगत लगानी</th>
+                                                        <td>{{$businessDetail->investment??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> उदेश्य</th>
+                                                        <td>{{$businessDetail->purpose ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> ठेगाना</th>
+                                                        <td>
                                                             {{$businessDetail->LocalBody->local_body ?? ''}}
                                                             -{{$businessDetail->ward_no ?? ''}}
                                                             , {{$businessDetail->tole ?? ''}}
                                                             , {{$businessDetail->District->district ?? ''}}
                                                             , {{$businessDetail->Province->province ?? ''}}
-
-
-                                                        </th>
+                                                        </td>
                                                     </tr>
 
 
@@ -213,43 +120,114 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($businessDetail->proprietorDetail->threeGenerationDetails->count() >0)
+                                @foreach($businessDetail->partners as $partner)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
                                                 <h4 class="header-title">
-                                                    तिन पुस्ते विवरण
+                                                    {{$partner->name}} को विवरण
                                                 </h4>
                                             </div>
                                             <div class="card-body">
-                                                <div>
+                                                <div class="table-responsive">
                                                     <table class="table table-sm mb-0 table-striped table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <th>नाता</th>
-                                                            <th>नाम, थर</th>
-                                                            <th>नाम, थर( अंग्रेजीमा)</th>
+                                                            <th>फोटो</th>
+                                                            <td><img src="{{$partner->photo}}" height="60"
+                                                                     class="rounded-circle"
+                                                                     alt="{{$partner->name}}"></td>
+                                                        </tr>
+                                                        <tr>
                                                             <th>नागरिकता नं</th>
-                                                            <th>सम्पर्क नं</th>
+                                                            <td>{{$partner->citizenship_no}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>जारी मिति</th>
+                                                            <td>{{$partner->issue_date}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>जारी जिल्ला</th>
+                                                            <td>{{$partner->issueDistrict->district??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>फोन</th>
+                                                            <td>{{$partner->phone}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>ईमेल</th>
+                                                            <td>{{$partner->email}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>घर नं</th>
+                                                            <td>{{$partner->house_no}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>व्यक्तिगत स्थाई लेखा नम्बर</th>
+                                                            <td>{{$partner->account_no}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>राष्ट्रियता परिचयपत्र नम्बर</th>
+                                                            <td>{{$partner->national_card_no}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>लिङ्ग</th>
+                                                            <td>{{$partner->gender?->label()??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>शैक्षिक योग्यता</th>
+                                                            <td>{{$partner->education_qualification?->label()??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>मुख्य पेशा</th>
+                                                            <td>{{$partner->occupation}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>बुवाको नाम</th>
+                                                            <td>{{$partner->father_name}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>हजुरबुवाको नाम</th>
+                                                            <td>{{$partner->grandfather_name}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>ठेगाना</th>
+                                                            <td>
+                                                                {{$partner->localBody->local_body ?? ''}}
+                                                                -{{$partner->ward_no ?? ''}}
+                                                                , {{$partner->tole ?? ''}}
+                                                                , {{$partner->district->district ?? ''}}
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>नागरिकता (आगाडी)</th>
+                                                            <td>
+                                                                <a href="{{$partner->citizenship_front}}"><i
+                                                                        class="fa fa-download"></i> </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>नागरिकता (पछाडी)</th>
+                                                            <td>
+                                                                <a href="{{$partner->citizenship_back}}"><i
+                                                                        class="fa fa-download"></i> </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> हस्ताक्षर</th>
+                                                            <td>
+                                                                <a href="{{$partner->signature}}"><i
+                                                                        class="fa fa-download"></i> </a>
+                                                            </td>
                                                         </tr>
                                                         </thead>
-                                                        <tbody>
-                                                        @foreach($businessDetail->proprietorDetail->threeGenerationDetails as $threeGenerationDetail)
-                                                            <tr>
-                                                                <td>{{$threeGenerationDetail->relation}}</td>
-                                                                <td>{{$threeGenerationDetail->name}}</td>
-                                                                <td>{{$threeGenerationDetail->name_en}}</td>
-                                                                <td>{{$threeGenerationDetail->citizenship_no}}</td>
-                                                                <td>{{$threeGenerationDetail->mobile_no}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+                                @endforeach
                                 @if($businessDetail->is_rent==1)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
@@ -263,20 +241,27 @@
                                                     <table class="table table-sm mb-0 table-striped table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <th> घर धनिको नाम थर</th>
-                                                            <th>{{$businessDetail->house_owner_name??''}}</th>
+                                                            <td> घर धनिको नाम थर</td>
+                                                            <td>{{$businessDetail->house_owner_name??''}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th> घर धनिको मोबाइल नं</th>
-                                                            <th>{{$businessDetail->house_owner_phone??''}}</th>
+                                                            <td> घर धनिको मोबाइल नं</td>
+                                                            <td>{{$businessDetail->house_owner_phone??''}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th> ठेगाना</th>
-                                                            <th>{{$businessDetail->house_owner_address??''}}</th>
+                                                            <td> ठेगाना</td>
+                                                            <td>{{$businessDetail->house_owner_address??''}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th> मासिक भाडा रु</th>
-                                                            <th>{{$businessDetail->house_owner_monthly_rent??''}}</th>
+                                                            <td> मासिक भाडा रु</td>
+                                                            <td>{{$businessDetail->house_owner_monthly_rent??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> भाडा सम्झौता </td>
+                                                            <td>
+                                                                <a href="{{$businessDetail->rent_agreement??''}}"><i
+                                                                        class="fa fa-download"></i> </a>
+                                                            </td>
                                                         </tr>
                                                         </thead>
                                                     </table>
@@ -285,42 +270,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if($businessDetail->business_nature->value == \Modules\BusinessRegistration\Enums\BusinessNature::PARTNERSHIP->value)
-                                    <div class="col-md-6">
-                                        <div class="card mt-3">
-                                            <div class="card-header">
-                                                <h4 class="header-title">
-                                                    साझेदार हरुको विवरण
-                                                </h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div>
-                                                    <table class="table table-sm mb-0 table-striped table-hover">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>साझेदार सँगको नाता</th>
-                                                            <th>साझेदार को नाम थर</th>
-                                                            <th>नागरिकता नं</th>
-                                                            <th>सम्पर्क नं</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach($businessDetail->partnerDetails as $partnerDetails)
-                                                            <tr>
-                                                                <td>{{$partnerDetails->relation}}</td>
-                                                                <td>{{$partnerDetails->name}}</td>
-                                                                <td>{{$partnerDetails->citizenship_no}}</td>
-                                                                <td>{{$partnerDetails->mobile_no}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                                @if($businessDetail->is_registered == 1)
+                                @if($businessDetail->registeredBusinesses->count() > 0)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
@@ -345,7 +295,7 @@
                                                                 <td>{{$registeredBusinesses->registration_no}}</td>
                                                                 <td>{{$registeredBusinesses->business_name}}</td>
                                                                 <td>{{$registeredBusinesses->registration_date}}</td>
-                                                                <td>{{$registeredBusinesses->active==1 ? 'छ':'छैन'}}</td>
+                                                                <td>{{$registeredBusinesses->is_active==1 ? 'छ':'छैन'}}</td>
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
@@ -355,7 +305,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="card mt-3">
                                         <div class="card-header">
                                             <h4 class="header-title">
@@ -369,15 +319,15 @@
                                                     <thead>
                                                     <tr>
                                                         <th> लम्बाई</th>
-                                                        <th>{{$businessDetail->length??''}}</th>
+                                                        <td>{{$businessDetail->length??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> चौडाई</th>
-                                                        <th>{{$businessDetail->width??''}}</th>
+                                                        <td>{{$businessDetail->width??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> वर्गफिट</th>
-                                                        <th>{{$businessDetail->square??''}}</th>
+                                                        <td>{{$businessDetail->square??''}}</td>
                                                     </tr>
                                                     </thead>
                                                 </table>
@@ -385,20 +335,19 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>व्यवसायीको पासपोर्ट साइजको फोटो</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->photo])}}"
+                                            <p>आफ्नै घर जग्गा भए जग्गा धनि प्रमाणपत्र </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->getRawOriginal('land_ownership_certificate')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <img src="{{$businessDetail->photo_url??''}}"
+                                            <img src="{{$businessDetail->land_ownership_certificate??''}}"
                                                  alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -407,203 +356,231 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>नागरिकता (आगाडी)</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->citizenship_front])}}"
+                                            <p> वार्ड सिफारिस </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->getRawOriginal('ward_recommendation')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$businessDetail->citizenship_front_url??''}}"
+                                                src="{{$businessDetail->ward_recommendation??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>नागरिकता (पछाडी)</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->citizenship_back])}}"
+                                            <p> राजदूतावासको कागजात </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->getRawOriginal('embassy_document')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$businessDetail->citizenship_back_url??''}}"
+                                                src="{{$businessDetail->embassy_document??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->company_registration])}}"
+                                            <p> दर्ता प्रमाणपत्र </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->getRawOriginal('registration_document')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$businessDetail->company_registration_url??''}}"
+                                                src="{{$businessDetail->registration_document??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको
-                                            करदाता प्रमाणपत्रको प्रतिलिपि</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->tax_pay_file])}}"
+                                            <p> इजाजत पत्र </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->getRawOriginal('license')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$businessDetail->tax_pay_file_url??''}}"
+                                                src="{{$businessDetail->license??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>हस्ताक्षर</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->tax_pay_file])}}"
+                                            <p> कर तिरेको प्रमाणपत्र </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->getRawOriginal('tax_document')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <img src="{{$businessDetail->signature_url??''}}"
+                                            <img src="{{$businessDetail->tax_document??''}}"
                                                  alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-header d-flex justify-content-around">
-                                            <p>औठाको छाप</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->thumb])}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-download"></i>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <img src="{{$businessDetail->thumb_url??''}}"
-                                                 alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                @foreach($businessDetail->files as $file)
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>अन्य </p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$file->getRawOriginal('file')])}}"
+                                                   class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <img src="{{$file->file_url??''}}"
+                                                     alt=""
+                                                     style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                            <div class="d-flex justify-content-end mb-2">
-                                @can('businessRegistration_edit')
-                                    <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                @endcan
-                                @can('businessRegistrationPrint_access')
-                                    <button class="btn btn btn-info mx-1" onclick="print('print1')"><i
-                                            class="fa fa-print"></i>
+                                <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
+                                      method="post"
+                                      enctype="multipart/form-data">
+                                    @csrf
+                                    <fieldset class="border p-2 mb-2">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
+                                                <input
+                                                    type="text"
+                                                    name="taxpayer_number"
+
+                                                    placeholder="करदाता नम्बर "
+                                                    value="{{old('taxpayer_number',$businessDetail->taxpayer_number??'')}}"
+                                                    class="form-control @error('taxpayer_number') is-invalid @enderror"
+                                                    id="taxpayer_number"
+                                                />
+                                                @error('taxpayer_number')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col-md-6 mb-2">
+                                                <label for="bill_no" class="form-label">बिल नं</label>
+                                                <input
+                                                    type="text"
+                                                    name="bill_no"
+                                                    value="{{old('bill_no',$businessDetail->bill_no??'')}}"
+                                                    placeholder="बिल नं"
+                                                    class="form-control @error('bill_no') is-invalid @enderror"
+                                                    id="bill_no"
+                                                />
+                                                @error('bill_no')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <x-date-input-component
+                                                    name-ne="bill_date_bs" label-ne="बिल मिति (बि स.)"
+                                                    name-en="bill_date_ad" label-en="बिल मिति"
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="amount" class="form-label">रकम </label>
+                                                <input
+                                                    type="number"
+                                                    name="amount"
+                                                    step="0.01"
+                                                    placeholder="रकम"
+                                                    value="{{old('amount',$businessDetail->amount??'')}}"
+                                                    class="form-control @error('amount') is-invalid @enderror"
+                                                    id="amount"
+                                                />
+                                                @error('amount')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            @if(!empty($businessDetail->other_file))
+                                                <a href="{{$businessDetail->other_file}}" download="{{$businessDetail->other_file}}">
+                                                    <i class="fa fa-download"></i> Download
+                                                </a>
+                                            @endif
+                                            <div class="col-md-12 mb-2">
+                                                <label for="other_file" class="form-label"> फाईल </label>
+                                                <input
+                                                    type="file"
+                                                    name="other_file"
+                                                    class="form-control @error('other_file') is-invalid @enderror"
+                                                    id="other_file"
+                                                />
+                                                @error('other_file')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
                                     </button>
-                                @endcan
-
-
-                            </div>
-                            <div class="font-black ckEditor" id="print1">
-
-                                {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data
-                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)
-                                   ?? ''!!}
-
-                            </div>
-
-
-                            <div class="d-flex justify-content-end mb-2 mt-2">
-                                @can('businessRegistration_edit')
-                                    <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                @endcan
-                                @can('businessRegistrationPrint_access')
-                                    <button class="btn btn btn-info mx-1" onclick="print('print2')"><i
-                                            class="fa fa-print"></i>
-                                    </button>
-                                @endcan
-                                @can('customs_edit')
-                                    <a href="{{route('admin.businessRegistration.add-data.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
-                                       class="btn btn-primary">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                @endcan
-                            </div>
-                            <div class="font-black ckEditor" id="print2">
-
-                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data
-                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)
-                                   ?? ''!!}
-                            </div>
+                                </form>
                         </div>
 
-                        <div class="tab-pane" id="tax">
-                            <div class="d-flex justify-content-end mb-2">
-                                @can('businessRegistration_edit')
-                                    <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                @endcan
-                                @can('businessRegistrationPrint_access')
-                                    <button class="btn btn btn-info mx-1" onclick="print('print3')"><i
-                                            class="fa fa-print"></i>
-                                    </button>
-                                @endcan
-                            </div>
-                            <div class="font-black ckEditor" id="print3">
-                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
-                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)
-                                   ?? ''!!}
+                        {{--                        <div class="tab-pane" id="tax">--}}
+                        {{--                            <div class="d-flex justify-content-end mb-2">--}}
+                        {{--                                @can('businessRegistration_edit')--}}
+                        {{--                                    <a class="btn btn-primary btn-sm"--}}
+                        {{--                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">--}}
+                        {{--                                        <i class="fa fa-pen"></i>--}}
+                        {{--                                    </a>--}}
+                        {{--                                @endcan--}}
+                        {{--                                @can('businessRegistrationPrint_access')--}}
+                        {{--                                    <button class="btn btn btn-info mx-1" onclick="print('print3')"><i--}}
+                        {{--                                            class="fa fa-print"></i>--}}
+                        {{--                                    </button>--}}
+                        {{--                                @endcan--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="font-black ckEditor" id="print3">--}}
+                        {{--                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data--}}
+                        {{--                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)--}}
+                        {{--                                   ?? ''!!}--}}
 
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="application">
-                            <div class="d-flex justify-content-end mb-2">
-                                @can('businessRegistration_edit')
-                                    <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                @endcan
-                                @can('businessRegistrationPrint_access')
-                                    <button class="btn btn btn-info mx-1" onclick="print('print4')"><i
-                                            class="fa fa-print"></i>
-                                    </button>
-                                @endcan
-                            </div>
-                            <div class="font-black ckEditor" id="print4">
-                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data
-                                                            ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)
-                                                            ?? ''!!}
-                            </div>
-                        </div>
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+                        {{--                        <div class="tab-pane" id="application">--}}
+                        {{--                            <div class="d-flex justify-content-end mb-2">--}}
+                        {{--                                @can('businessRegistration_edit')--}}
+                        {{--                                    <a class="btn btn-primary btn-sm"--}}
+                        {{--                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">--}}
+                        {{--                                        <i class="fa fa-pen"></i>--}}
+                        {{--                                    </a>--}}
+                        {{--                                @endcan--}}
+                        {{--                                @can('businessRegistrationPrint_access')--}}
+                        {{--                                    <button class="btn btn btn-info mx-1" onclick="print('print4')"><i--}}
+                        {{--                                            class="fa fa-print"></i>--}}
+                        {{--                                    </button>--}}
+                        {{--                                @endcan--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="font-black ckEditor" id="print4">--}}
+                        {{--                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data--}}
+                        {{--                                                            ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)--}}
+                        {{--                                                            ?? ''!!}--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
                     </div>
                 </div>

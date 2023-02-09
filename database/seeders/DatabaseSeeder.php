@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UserSeeder::class,
             OfficeSettingSeeder::class,
+            FeatureActivationSeeder::class,
+            LetterHeadTableSeeder::class,
         ]);
     }
 }

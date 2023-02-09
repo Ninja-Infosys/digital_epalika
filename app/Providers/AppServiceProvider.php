@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\PageRenderMiddleware;
 use App\Models\FeatureActivation;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Units\Unit;
@@ -11,6 +12,7 @@ use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
 use Gate;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
@@ -27,7 +29,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-//        Model::preventLazyLoading(!$this->app->isProduction());
+        Model::preventLazyLoading(!$this->app->isProduction());
+
         $this->defileObservers();
 
         Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');
@@ -37,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
 
         $this->defineMacro();
+
+        $this->app->singleton(PageRenderMiddleware::class);
     }
 
     /**

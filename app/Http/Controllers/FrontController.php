@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OfficeHeader;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
+use App\Traits\NepaliDateConverter;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
+use Modules\Identity\Entities\DisabilityIdentityCard;
+use Modules\Identity\Entities\SeniorCitizenDetail;
 
 class FrontController extends Controller
 {
+    use NepaliDateConverter;
+
     public function __construct()
     {
         parent::__construct();
@@ -117,5 +125,24 @@ class FrontController extends Controller
     public function service_details(): void
     {
 //        return view('frontend.static.chat.service');
+    }
+
+    public function seniorCitizenDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
+    {
+
+        $seniorCitizenDetail->load('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody');
+        $officeHeaders = OfficeHeader::get();
+        $todayDate = $this->get_today_nepali_date();
+        return view('frontend.seniorCitizenprint', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
+
+    }
+
+    public function disabilityIdentityCardQrcode(DisabilityIdentityCard $disabilityIdentityCard)
+    {
+        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        $officeHeaders = OfficeHeader::get();
+        $todayDate = $this->get_today_nepali_date();
+        return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
+
     }
 }

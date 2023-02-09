@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('recommendation')
             ->group(module_path('Recommendation', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/recommendation')
             ->as('admin.recommendation.')
             ->group(module_path('Recommendation', '/Routes/admin.php'));

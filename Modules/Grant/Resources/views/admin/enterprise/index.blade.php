@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">निजि उधम/फर्म आव्धता</li>
+                        <li class="breadcrumb-item active">निजि उधम/फर्म</li>
                     </ol>
                 </div>
-                <h4 class="page-title">निजि उधम/फर्म आव्धता</h4>
+                <h4 class="page-title">निजि उधम/फर्म</h4>
             </div>
         </div>
     </div>
@@ -22,46 +22,52 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">निजि उधम/फर्म आव्धता</h4>
-                        @can('enterprise_access')
-                            <a href="{{route('admin.grant.enterprise.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0"> निजि उधम/फर्महरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('enterprise_access')
+                                <a href="{{route('admin.grant.enterprise.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>निजि उधम/फर्म परिचय पत्र नं. </th>
                                 <th>निजि उधम/फर्मको नाम </th>
+                                <th>निजि उधम/फर्मको प्रकार </th>
                                 <th>पाना/भ्याट</th>
-                                <th>Action</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($enterprises as $enterprise)
                                 <tr>
-                                    <th>{{ $loop->iteration }}</th>
-                                    <th>{{$enterprise->unique_id}}</th>
-                                    <th>{{$enterprise->name}}</th>
-                                    <th>{{$enterprise->vat_pan}}</th>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{$enterprise->unique_id}}</td>
+                                    <td>{{$enterprise->name}}</td>
+                                    <td>{{$enterprise->enterpriseType->title ?? ''}}</td>
+                                    <td>{{$enterprise->vat_pan}}</td>
                                     <td>
-                                        <a href="{{route('admin.grant.enterprise.edit', $enterprise)}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                        <a data-bs-type="edit" href="{{route('admin.grant.enterprise.show', $enterprise)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a data-bs-type="edit" href="{{route('admin.grant.enterprise.edit', $enterprise)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.grant.enterprise.destroy', $enterprise)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -69,7 +75,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

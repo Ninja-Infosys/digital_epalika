@@ -32,11 +32,11 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>शिर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -47,8 +47,9 @@
                                     <td>{{$noticeTypeEnum->label() ??''}}</td>
                                     <td>
                                         @can('eMapTemplate_edit')
-                                            <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit"
+                                               href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan

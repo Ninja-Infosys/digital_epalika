@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">योजना स्तरहरू</li>
+                        <li class="breadcrumb-item active">योजना {{$type=='planSubLevel' ? 'उपस्तरहरु':'स्तरहरू'}} </li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना स्तरहरू</h4>
+                <h4 class="page-title">योजना {{$type=='planSubLevel' ? 'उपस्तरहरु':'स्तरहरू'}}</h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना स्तर सूची</h4>
+                        <h4 class="header-title">योजना {{$type=='planSubLevel' ? 'उपस्तरहरु':'स्तरहरू'}} सूची</h4>
                         @can('planLevel_create')
-                            <a href="{{route('admin.plan.planLevel.create')}}"
+                            <a href="{{route('admin.plan.planLevel.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -35,10 +35,13 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                @if($type=='planSubLevel')
+                                    <th>योजनाको उपस्तर</td>
+                                @endif
                                 <th>योजनाको स्तर</th>
                                 <th>#</th>
                             </tr>
@@ -46,49 +49,29 @@
                             <tbody>
                             @forelse($planLevels as $key=>$planLevel)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$planLevel->level_name}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$planLevel->level_name}}</td>
+                                    @if($type=='planSubLevel')
+                                        <td>{{$planLevel->planLevel->level_name??''}}</td>
+                                    @endif
                                     <td>
-                                        <a href="{{route('admin.plan.planLevel.edit',$planLevel)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.plan.planLevel.edit',[$type,$planLevel])}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.plan.planLevel.destroy',$planLevel)}}"
+                                        <form action="{{route('admin.plan.planLevel.destroy',[$type,$planLevel])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
-                                @foreach($planLevel->planLevels as $planSubLevel)
-                                    <tr>
-                                        <td>
-                                            {{$key+1}}.
-                                            {{$loop->iteration}}
-                                        </td>
-                                        <td>{{$planSubLevel->level_name}}</td>
-                                        <td>
-                                            <a href="{{route('admin.plan.planLevel.edit',$planSubLevel)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                            <form action="{{route('admin.plan.planLevel.destroy',$planSubLevel)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

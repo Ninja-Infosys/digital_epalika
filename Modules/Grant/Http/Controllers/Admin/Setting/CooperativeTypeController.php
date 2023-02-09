@@ -2,23 +2,26 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Factory;
 use Illuminate\Console\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\CooperativeType;
-use Modules\Grant\Http\Requests\CooperativeType\StoreCooperativeTypeRequest;
-use Modules\Grant\Http\Requests\CooperativeType\UpdateCooperativeTypeRequest;
-
+use Modules\Grant\Http\Requests\Setting\CooperativeType\StoreCooperativeTypeRequest;
+use Modules\Grant\Http\Requests\Setting\CooperativeType\UpdateCooperativeTypeRequest;
+use Illuminate\Database\Eloquent\Builder;
 class CooperativeTypeController extends Controller
 {
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('cooperativeType_access');
-       $cooperativeTypes = CooperativeType::latest()->get();
+       $cooperativeTypes = CooperativeType::where(function (Builder $q) {
+        if (!is_null(request('search'))) {
+            $q->whereLike(['title'], request('search'));
+        }
+    })
+        ->latest()->paginate(10);
         return view('grant::admin.setting.cooperativeType.index', compact('cooperativeTypes'));
     }
 
@@ -49,7 +52,7 @@ class CooperativeTypeController extends Controller
     {
         $this->checkAuthorization('cooperative_edit');
         $cooperativeType->update($request->validated());
-        toast('Cooperative Type updated Successfully', 'success');
+        toast('सहकारी प्रकार सफलता पूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.cooperativeType.index'));
     }
 

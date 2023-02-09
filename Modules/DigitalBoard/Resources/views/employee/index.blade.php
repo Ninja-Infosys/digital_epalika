@@ -17,7 +17,7 @@
                         <li class="breadcrumb-item active">कर्मचारी </li>
                     </ol>
                 </div>
-                <h4 class="page-title">कर्मचारीहरु </h4>
+                <h4 class="page-title">जनप्रतिनिधि/कर्मचारीहरु </h4>
             </div>
         </div>
     </div>
@@ -26,27 +26,27 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कर्मचारी सुची</h4>
-                        @can('user_create')
-                            <a href="{{route('admin.digitalBoard.employee.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ कर्मचारी थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">जनप्रतिनिधि/कर्मचारीहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('employee_create')
+                                <a href="{{route('admin.digitalBoard.employee.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>नाम </th>
                                 <th>समुह </th>
                                 <th>पद </th>
-                                <th>स्थान</th>
+                                <th>मर्यादाक्रम</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -59,20 +59,20 @@
                                     <td>{{$employee->designation}}</td>
                                     <td>{{$employee->position}}</td>
                                     <td>
-                                        <a href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
-                                           class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}}" title="स्थिति">
+                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
+                                           class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}" title="स्थिति">
                                             <i class="fa  {{$employee->status==1 ?' fa-check':'fa-window-close'}}"></i>
 
                                         </a>
-                                        <a href="{{route('admin.digitalBoard.employee.edit',$employee)}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.employee.edit',$employee)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.employee.destroy',$employee)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}" title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

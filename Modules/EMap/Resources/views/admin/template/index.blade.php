@@ -58,7 +58,7 @@
                                     <td>
                                         @can('eMapTemplate_access')
                                             <a href="{{route('emap.admin.eMapTemplate.updateStatus',[$noticeTypeEnum,$eMapTemplate])}}">
-                                                <i class="fa fa-2x  {{$eMapTemplate->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                                <i class="fa fa-2x  {{$eMapTemplate->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
@@ -68,8 +68,8 @@
                                     </td>
                                     <td>
                                         @can('eMapTemplate_edit')
-                                            <a href="{{route('emap.admin.eMapTemplate.edit',[$noticeTypeEnum,$eMapTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.edit',[$noticeTypeEnum,$eMapTemplate])}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
@@ -80,8 +80,8 @@
                                             @method('delete')
                                             @can('eMapTemplate_delete')
                                                 @if($eMapTemplate->status==0)
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
+                                                        <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i> मेटाउनु होस्
                                                     </button>
                                                 @endif
                                             @endcan

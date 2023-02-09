@@ -108,26 +108,26 @@
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="contractor_name" class="form-label">ठेकेदारको नाम</label>
+            <label for="contractor_name" class="form-label">कम्पनीको नाम</label>
             <input
                 type="text"
                 wire:model="form.contractor_name"
                 class="form-control @error('form.contractor_name') is-invalid @enderror"
                 id="contractor_name"
-                placeholder="ठेकेदारको नाम"
+                placeholder="कम्पनीको नाम"
             />
             @error('form.contractor_name')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="contractor_address" class="form-label">ठेकेदारको ठेगाना</label>
+            <label for="contractor_address" class="form-label">कम्पनीको ठेगाना</label>
             <input
                 type="text"
                 wire:model="form.contractor_address"
                 class="form-control @error('form.contractor_address') is-invalid @enderror"
                 id="contractor_address"
-                placeholder="ठेकेदारको ठेगाना"
+                placeholder="कम्पनीको ठेगाना"
             />
             @error('form.contractor_address')
             <div class="invalid-feedback">{{$message}}</div>

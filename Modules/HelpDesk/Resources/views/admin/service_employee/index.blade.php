@@ -163,8 +163,8 @@
                                     <td>{{$serviceEmployee->phone}}</td>
                                     <td>{{$serviceEmployee->email}}</td>
                                     <td>
-                                        <a href="{{route('admin.helpDesk.service.serviceEmployee.edit',[$service,$serviceEmployee])}}"
-                                           class="btn btn-xs btn-outline-warning">
+                                        <a data-bs-type="edit" href="{{route('admin.helpDesk.service.serviceEmployee.edit',[$service,$serviceEmployee])}}"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form
@@ -172,7 +172,7 @@
                                             method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>

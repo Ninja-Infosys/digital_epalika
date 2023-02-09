@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">कृषक</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कृषकहरु</h4>
+                <h4 class="page-title">कृषक/व्यक्तिहरु</h4>
             </div>
         </div>
     </div>
@@ -22,29 +22,29 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदनाग्राही कृषकहरुको विवरण </h4>
-                        @can('farmer_access')
-                            <a href="{{route('admin.grant.farmer.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0"> कृषक/व्यक्तिहरुको विवरण</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('farmer_access')
+                                <a href="{{route('admin.grant.farmer.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>कृषक परिचय पत्र नं.</th>
+                                <th>परिचय पत्र नं.</th>
                                 <th>पुरा नाम</th>
-                                <th>फोटो</th>
-                                <th>बुबाको नाम</th>
+                                <th>कृषक सूचीकरण नं</th>
                                 <th>नागरिकता नं</th>
                                 <th>सम्पर्क नं.</th>
-                                <th>Action</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -53,22 +53,17 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$farmer->unique_id}}</td>
                                     <td>{{$farmer->name}}</td>
-
-                                    <td class="table-user"><img class="me-2 rounded-circle" src="{{$farmer->photo_url}}"
-                                                                alt="{{$farmer->name}}"
-                                        >
-                                    </td>
-                                    <td>{{$farmer->father_name}}</td>
+                                    <td>{{$farmer->farmer_id_card_no}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
                                     <td>{{$farmer->phone_no}}</td>
                                     <td>
-                                        <a href="{{route('admin.grant.farmer.show', $farmer)}}"
-                                           class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
+                                        <a data-bs-type="edit" href="{{route('admin.grant.farmer.show', $farmer)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         @can('farmer_edit')
-                                            <a href="{{route('admin.grant.farmer.edit', $farmer)}}"
-                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <a data-bs-type="edit" href="{{route('admin.grant.farmer.edit', $farmer)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -78,7 +73,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title=" मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -93,6 +88,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $farmers->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

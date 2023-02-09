@@ -14,8 +14,8 @@ class UpdateRecommendationTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
             'data' => ['required'],
+            'title' => ['required','string'],
         ];
     }
 }

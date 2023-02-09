@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class PrintButton extends Component
 {
-    public function __construct(public $title)
+    public function __construct(public $title='Document',public $targetElement='printData')
     {
     }
 

@@ -2,17 +2,25 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
+use Modules\Plan\Entities\ExpenseHead;
+use Modules\Plan\Entities\GrantCategory;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
+use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
-use Modules\Plan\Entities\ProjectAgreementTerm;
+use Modules\Plan\Enums\PlanTemplateTypeEnum;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
+use Modules\Plan\Enums\ProjectStatusEnum;
+use Modules\Plan\Http\Requests\Project\StoreProjectRequest;
+use Modules\Plan\Http\Requests\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -20,15 +28,40 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $projects = Project::where(function (Builder $q) {
+        $projects = Project::with('planArea')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['registration_no', 'project_name', 'ward_no'], request('search'));
+                $q->whereLike(['registration_no', 'project_name'], request('search'));
             }
+            if (!empty(request('from_date'))) {
+                $q->whereDate('project_start_date', '>=', request('from_date'));
+            }
+            if (!empty(request('to_date'))) {
+                $q->whereDate('project_start_date', '<=', request('to_date'));
+            }
+            if (!empty(request('project_status'))) {
+                $q->where('project_status', request('project_status'));
+            }
+            if (!empty(request('grant_category_id'))) {
+                $q->where('grant_category_id', request('grant_category_id'));
+            }
+            if (!empty(request('budget_source_id'))) {
+                $q->where('budget_source_id', request('budget_source_id'));
+            }
+            if (!empty(request('expense_head_id'))) {
+                $q->where('expense_head_id', request('expense_head_id'));
+            }
+            if (!is_null(request('is_contracted'))) {
+                $q->where('is_contracted', request('is_contracted'));
+            }
+
         })
             ->latest()->paginate(10);
+        $budgetSources = BudgetSource::all();
+        $grantCategories = GrantCategory::all();
+        $expenseHeads = ExpenseHead::all();
 
 
-        return view('plan::admin.project.index', compact('projects'));
+        return view('plan::admin.project.index', compact('projects', 'budgetSources', 'grantCategories', 'expenseHeads'));
     }
 
     public function create()
@@ -39,8 +72,11 @@ class ProjectController extends Controller
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
         $budgetSources = BudgetSource::all();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $grantCategories = GrantCategory::all();
+        $expenseHeads = ExpenseHead::all();
+        $registration_no = "PP-" . (\officeSetting()->fiscalYear->title ?? '') . '-' . Str::padLeft(Project::max('id') + 1, 3, 0);
 
-        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads'));
+        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads', 'registration_no'));
     }
 
     public function store(StoreProjectRequest $request)
@@ -48,7 +84,8 @@ class ProjectController extends Controller
         $this->checkAuthorization('project_create');
 
         Project::create($request->validated() + [
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
+                'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                'project_status' => ProjectStatusEnum::NOT_STARTED
             ]);
 
         toast('योजना/कार्यक्रम सफलतापूर्वक थपियो', 'success');
@@ -59,9 +96,40 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectCostDetail', 'projectGrantDetails', 'projectAgreementTerm', 'projectDocuments', 'files');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates.unit');
+
+        if (request()->ajax()) {
+            return response()->json([
+                'view' => (string)View::make('plan::admin.project.detail', compact('project'))
+            ]);
+        }
 
         return view('plan::admin.project.show', compact('project'));
+    }
+
+    public function edit(Project $project)
+    {
+        $this->checkAuthorization('project_edit');
+
+        $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
+        $budgetSources = BudgetSource::all();
+        $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $grantCategories = GrantCategory::all();
+        $expenseHeads = ExpenseHead::all();
+
+        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads'));
+    }
+
+    public function update(UpdateProjectRequest $request, Project $project)
+    {
+        $this->checkAuthorization('project_edit');
+
+        $project->update($request->validated());
+
+        toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
+        return redirect(route('admin.plan.project.index'));
     }
 
     public function destroy(Project $project)
@@ -69,21 +137,11 @@ class ProjectController extends Controller
         $this->checkAuthorization('project_delete');
     }
 
-    public function saveProjectAgreementTerm(Request $request, Project $project)
+    public function fileList(Project $project)
     {
-        $request->validate([
-            'data' => ['required']
-        ]);
+        $project->load('files');
 
-        ProjectAgreementTerm::updateOrCreate(
-            ['project_id' => $project->id],
-            [
-                'data' => $request->input('data')
-            ]
-        );
-
-        toast('सम्झौता शर्त सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
+        return view('plan::admin.project.file_list', compact('project'));
     }
 
     public function uploadFilePage(Project $project)
@@ -95,16 +153,39 @@ class ProjectController extends Controller
     {
         $formData = $request->validate([
             'file_name' => ['nullable'],
-            'file' => ['required', 'file']
+            'files' => ['required', 'array'],
+            'file.*' => ['mimes:jpg,png,jpeg,pdf']
         ]);
 
-        $project->files()->create([
-            'file_name' => $formData['file_name'] ?? pathinfo($formData['file']->getClientOriginalName(), PATHINFO_FILENAME),
-            'extension' => $formData['file']->getClientOriginalExtension(),
-            'file' => $formData['file']->store('project_files', 'public')
-        ]);
+        foreach ($request->file('files') as $file) {
+            $project->files()->create([
+                'file_name' => $formData['file_name'] ?: pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $file->getClientOriginalExtension(),
+                'file' => $file->store('plan/project_files', 'public')
+            ]);
+        }
 
         toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
-        return back();
+
+        return redirect(route('admin.plan.project.fileList', $project));
     }
+
+    public function print(Request $request, Project $project, PlanTemplateTypeEnum $planTemplateTypeEnum)
+    {
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $project->getSpecificTemplateData($planTemplateTypeEnum)
+            ]);
+        }
+    }
+
+    public function templateData(Request $request, Project $project, PlanTemplate $planTemplate)
+    {
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $project->getPlanTemplateData($planTemplate)
+            ]);
+        }
+    }
+
 }

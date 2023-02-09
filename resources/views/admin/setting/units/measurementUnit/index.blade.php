@@ -27,18 +27,18 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> मापन एकाइ विविधता सूची</h4>
-                        @can('user_create')
+                        <h4 class="header-title"> मापन एकाइ विविधता</h4>
+                        @can('MeasurementUnit_create')
                             <a href="{{route('admin.units.measurementUnit.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ मापन एकाइ विविधता थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm mb-0 table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>प्रकार</th>
@@ -58,9 +58,9 @@
 
                                     <td>
                                         @can('MeasurementUnit_edit')
-                                            <a href="{{route('admin.units.measurementUnit.edit',$type->measurementUnit->first())}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <a data-bs-type="edit" href="{{route('admin.units.measurementUnit.edit',$type->measurementUnit->first())}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('MeasurementUnit_delete')
@@ -69,8 +69,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
@@ -84,9 +84,9 @@
 
                                         <td>
                                             @can('MeasurementUnit_edit')
-                                                <a href="{{route('admin.units.measurementUnit.edit',$unit)}}"
-                                                   class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <a data-bs-type="edit" href="{{route('admin.units.measurementUnit.edit',$unit)}}"
+                                                   class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
                                             @endcan
                                             @can('MeasurementUnit_delete')
@@ -95,8 +95,8 @@
                                                     method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                        <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
                                             @endcan

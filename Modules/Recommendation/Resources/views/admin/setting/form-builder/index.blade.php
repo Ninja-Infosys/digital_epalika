@@ -20,7 +20,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -53,7 +53,7 @@
                                     <td>
                                         @can('formBuilder_access')
                                         <a href="{{route('admin.recommendation.setting.formBuilder.updateStatus',[$applicationTypeEnum,$formBuilder])}}">
-                                            <i class="fa fa-2x  {{$formBuilder->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                            <i class="fa fa-2x  {{$formBuilder->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                         </a>
                                         @endcan
                                     </td>
@@ -63,14 +63,14 @@
                                     <td>
 
                                         @can('formBuilder_access')
-                                            <a href="{{ route('admin.recommendation.setting.formBuilder.show', [$applicationTypeEnum,$formBuilder]) }}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{ route('admin.recommendation.setting.formBuilder.show', [$applicationTypeEnum,$formBuilder]) }}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('formBuilder_edit')
-                                            <a href="{{ route('admin.recommendation.setting.formBuilder.edit', [$applicationTypeEnum,$formBuilder]) }}"
-                                               class="btn btn-xs btn-outline-info">
+                                            <a data-bs-type="edit" href="{{ route('admin.recommendation.setting.formBuilder.edit', [$applicationTypeEnum,$formBuilder]) }}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -80,8 +80,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if($formBuilder->status===0)
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                @if(!$formBuilder->status)
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                                 @endif
@@ -95,13 +95,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
+        </div> --}}
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
-                        @can('eMapTemplate_create')
+                        @can('recommendationTemplate_create')
                             <a href="{{route('admin.recommendation.setting.recommendationTemplate.create',$applicationTypeEnum)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
@@ -130,8 +130,8 @@
                                     <td>{{$recommendationTemplate->application_type->label() ??''}}</td>
                                     <td>
                                         @can('recommendationTemplate_access')
-                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
-                                                <i class="fa fa-2x  {{$recommendationTemplate->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
+                                                <i class="fa fa-2x  {{$recommendationTemplate->status  ? 'fa-toggle-on':'fa-toggle-off'}} {{get_setting('Pin')?'confirm_pin':''}}"></i>
                                             </a>
                                         @endcan
                                     </td>
@@ -140,8 +140,8 @@
                                     </td>
                                     <td>
                                         @can('recommendationTemplate_edit')
-                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -151,9 +151,9 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if($recommendationTemplate->status===0)
+                                                @if(!$recommendationTemplate->status)
                                                     @can('recommendationTemplate_delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                     @endcan

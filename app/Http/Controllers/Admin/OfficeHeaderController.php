@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OfficeHeader\UpdateOfficeHeaderRequest;
 use App\Models\OfficeHeader;
+use Illuminate\Support\Facades\Cache;
 
 class OfficeHeaderController extends Controller
 {
@@ -18,6 +19,7 @@ class OfficeHeaderController extends Controller
     {
         $this->checkAuthorization('officeHeader_edit');
         $officeHeader->update($request->validated());
+        Cache::forget('officeHeaders');
         toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.officeSetting.index'));
@@ -27,6 +29,7 @@ class OfficeHeaderController extends Controller
     {
         $this->checkAuthorization('officeHeader_delete');
         $officeHeader->delete();
+        Cache::forget('officeHeaders');
         toast('सफलतापूर्वक मेटियो', 'success');
 
         return back();

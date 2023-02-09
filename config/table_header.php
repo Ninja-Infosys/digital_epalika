@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'businessRegistration' => [
+    'businessregistration' => [
         "business_type" => "निवेदनको प्रकार",
         "business_detail_name" => "व्यवसाय विवरण नाम (नेपाली)",
         "submission_no" => "सबमिशन नम्बर",
@@ -45,6 +45,13 @@ return [
         "title" => "शिर्षक",
         "registration_amount" => "दर्ता शुल्क",
         "renew_amount" => "नवीकरण शुल्क",
+        "province" => "प्रदेश ",
+        "province_en" => "प्रदेश en",
+        "district" => "जिल्ला",
+        "district_en" => "जिल्ला en",
+        "local_body" => "स्थानीय निकाय",
+        "local_body_en" => "स्थानीय निकाय en",
+        "wards" => "वार्ड",
         "relation" => "नाता",
         "name" => "नाम",
         "citizenship_no" => "नागरिकता नम्बर",
@@ -59,5 +66,46 @@ return [
         "gender" => "लिङ्ग",
         "education_qualification" => "शैक्षिक योग्यता",
         "occupation" => "मुख्य पेशा",
+    ],
+    'listregistration' => [
+        "registration_no" => "दर्ता नं",
+        "applicant_type" => "आवेदक प्रकार",
+        "name" => "नाम",
+        "address" => "ठेगाना",
+        "mailing_address" => "पत्राचार ठेगाना",
+        "main_person" => "मुख्य व्यक्ति",
+        "telephone" => "टेलिफोन",
+        "mobile_no" => "मोबाइल नम्बर",
+        "application_photo" => "आवेदन फोटो",
+        "registration_certificate" => "दर्ता प्रमाणपत्र",
+        "pan_photo" => "प्यान फोटो",
+        "tax_payment_certificate" => "कर भुक्तानी प्रमाणपत्र",
+        "license_photo" => "लाइसेन्स फोटो",
+        "business_nature" => "व्यापार प्रकृति",
+        "business_nature_description" => "व्यापार प्रकृति विवरण",
+        "date" => "मिति",
+        "title" => "आर्थिक वर्ष"
+    ],
+    'circular' => [
+        "registration_no" => "दर्ता नं.",
+        "registration_date" => "दर्ता मिति वि.स.",
+        "en_registration_date" => "दर्ता मिति AD",
+        "letter_number" => "पत्र संख्या",
+        "en_letter_date" => "पत्र मिति AD",
+        "letter_date" => "पत्र मिति",
+        "sender_name" => "प्रेषकको नाम",
+        "subject" => "विषय",
+        "receiver_name" => "प्राप्तकर्ता नाम",
+        "phone" => "फोन",
+        "signature_image" => "हस्ताक्षर",
+        "date" => "मिति",
+        "remarks" => "टिप्पणीहरू",
+        "dispatch_no" => "चलानी नं.",
+        "dispatch_date" => "चलानी मिति",
+        "en_dispatch_date" => "चलानी मिति अंग्रेजी",
+        "receiver_address" => "प्राप्तकर्ता ठेगाना",
+        "receiver_contact" => "प्राप्तकर्ता सम्पर्क",
+        "receiver_signature" => "प्राप्तकर्ता हस्ताक्षर",
+        "title" => "आर्थिक वर्ष"
     ]
 ];

@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
@@ -22,6 +23,7 @@ class FrontendController extends Controller
 {
     public function eMap()
     {
+
         return view('emap::frontend.e-map.index');
     }
 
@@ -157,7 +159,6 @@ class FrontendController extends Controller
             $q->where('otp', $request->input('otp'));
         }]);
 
-        info($checkedMapApply->otp->is_expired);
 
         return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
     }

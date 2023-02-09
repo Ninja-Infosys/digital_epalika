@@ -2,6 +2,7 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
+use App\Enums\MaritalStatusEnum;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,8 +12,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
+use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Farmer\StoreFarmerRequest;
 use Modules\Grant\Http\Requests\Farmer\UpdateFarmerRequest;
@@ -29,7 +34,6 @@ class FarmerController extends Controller
             }
         })
             ->latest()->paginate(10);
-
         return view('grant::admin.farmer.index', compact('farmers'));
     }
 
@@ -40,21 +44,33 @@ class FarmerController extends Controller
         $cooperatives = Cooperative::latest()->get();
         $groups = Group::latest()->get();
         $enterprises = Enterprise::latest()->get();
+        $cooperativeTypes=CooperativeType::all();
+        $enterpriseTypes=EnterpriseType::all();
 
-        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises'));
+        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises','cooperativeTypes', 'enterpriseTypes'));
     }
 
     public function store(StoreFarmerRequest $request)
     {
         $this->checkAuthorization('farmer_create');
 
-        DB::transaction(function () use ($request) {
+        $farmer = DB::transaction(function () use ($request) {
             $farmer = Farmer::create($request->validated());
 
             $farmer->groups()->attach($request->input('groups'));
             $farmer->enterprises()->attach($request->input('enterprises'));
             $farmer->cooperatives()->attach($request->input('cooperatives'));
+            return $farmer;
         });
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => [
+                    'farmer_id' => $farmer->id,
+                    'farmer_name' => $farmer->name
+                ],
+                'message' => 'कृषक सफलता पुर्वक थपियो !'
+            ]);
+        }
 
         toast('कृषक सफलता पुर्वक थपियो !', 'success');
         return back();
@@ -64,9 +80,10 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_access');
 
-        $farmer->load('province', 'district', 'localBody', 'groups', 'enterprises', 'cooperatives');
+        $farmer->load('province', 'district', 'localBody', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
+        $grantPrograms = GrantProgram::all();
 
-        return view('grant::admin.farmer.show', compact('farmer'));
+        return view('grant::admin.farmer.show', compact('farmer', 'grantPrograms'));
     }
 
     public function edit(Farmer $farmer)
@@ -78,8 +95,10 @@ class FarmerController extends Controller
         $cooperatives = Cooperative::latest()->get();
         $groups = Group::latest()->get();
         $enterprises = Enterprise::latest()->get();
+        $cooperativeTypes=CooperativeType::all();
+        $enterpriseTypes=EnterpriseType::all();
 
-        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises'));
+        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises','cooperativeTypes', 'enterpriseTypes'));
     }
 
     public function update(UpdateFarmerRequest $request, Farmer $farmer): Redirector|Application|RedirectResponse
@@ -91,6 +110,9 @@ class FarmerController extends Controller
                 $this->deleteFile($farmer->photo);
             }
             $farmer->update($request->validated());
+            if ($farmer->marital_status == MaritalStatusEnum::UNMARRIED) {
+                $farmer->update(['spouse_name' => null]);
+            }
 
             $farmer->groups()->sync($request->input('groups'));
             $farmer->enterprises()->sync($request->input('enterprises'));
@@ -116,5 +138,14 @@ class FarmerController extends Controller
         toast('कृषक सफलता पुर्वक हटाईयो !', 'success');
 
         return back();
+    }
+    public function grantDetails(Farmer $farmer)
+    {
+        $this->checkAuthorization('farmer_access');
+
+        $farmer->load('grantDetails.grant.grantProgram');
+
+
+        return view('grant::admin.farmer.grant_details', compact('farmer'));
     }
 }

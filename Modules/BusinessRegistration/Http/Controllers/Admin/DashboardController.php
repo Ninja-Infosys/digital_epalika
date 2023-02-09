@@ -9,46 +9,27 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
-use Modules\BusinessRegistration\Entities\BusinessPurpose;
-use Modules\BusinessRegistration\Entities\InvestmentRevenue;
+use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
-use Modules\BusinessRegistration\Entities\ProprietorDetail;
+use Modules\BusinessRegistration\Entities\Partner;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 
 class DashboardController extends Controller
 {
     public function __invoke(): Factory|View|Application
     {
-        $totalBusinessCount = ProprietorDetail::count();
-        $totalBusinessDetailPurposeCount = BusinessPurpose::count();
+        $totalBusinessCount = BusinessDetail::count();
+        $totalBusinessDetailNatureCount = BusinessNature::count();
         $totalObjectTransactionCategoryCount = ObjectTransaction::count();
-        $totalInvestmentRevenueCount = InvestmentRevenue::count();
 
-        $businessPurposesChartData = $this->getTotalBusinessPurposesData();
 
         $businessRegistrationAccordingToFiscalYear = $this->getBusinessRegistrationAccordingToFiscalYear();
 
         $businessDetailTransaction = $this->getTotalTransactionData();
 
         $businessDetailAccordingToBusinessType = $this->getBusinessDetailAccordingToBusinessTypes();
-        $investmentRevenueDetail = $this->getInvestmentRevenueData();
 
-        return view('businessregistration::admin.dashboard', compact('investmentRevenueDetail', 'businessDetailAccordingToBusinessType', 'businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailPurposeCount', 'totalObjectTransactionCategoryCount', 'totalInvestmentRevenueCount', 'businessPurposesChartData'));
-    }
-
-    public function getTotalBusinessPurposesData(): array
-    {
-        $businessPurposes = BusinessPurpose::withCount('businessDetails')->get();
-
-        return [
-            'labels' => $businessPurposes->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'label' => 'व्यवसायको उदेश्य',
-                    'data' => $businessPurposes->pluck('business_details_count')->toArray(),
-                ],
-            ],
-        ];
+        return view('businessregistration::admin.dashboard', compact('businessDetailAccordingToBusinessType', 'businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailNatureCount', 'totalObjectTransactionCategoryCount'));
     }
 
 
@@ -103,7 +84,7 @@ class DashboardController extends Controller
     public function getBusinessDetailAccordingToBusinessTypes(): array
     {
         $officeSetting = $this->getOfficeSetting();
-        $proprietorDetail = ProprietorDetail::whereHas('businessDetail', function ($query) use ($officeSetting) {
+        $proprietorDetail = Partner::whereHas('businessDetail', function ($query) use ($officeSetting) {
             $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
         })->get();
         return [
@@ -120,33 +101,4 @@ class DashboardController extends Controller
         ];
     }
 
-
-    public function getInvestmentRevenueData(): array
-    {
-        $investmentRevenues = InvestmentRevenue::withCount(['businessDetails',
-            'businessDetails as registered_business_count' => fn ($q) => $q->whereNotNull('registration_no'),
-            'businessDetails as not_registered_business_count' => fn ($q) => $q->whereNull('registration_no'),
-        ])
-            ->get();
-        return [
-            'labels' => $investmentRevenues->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $investmentRevenues->pluck('business_details_count')->toArray(),
-                    'label' => 'जम्मा व्यवसाय',
-                    'fill' => 'false',
-                ],
-                [
-                    'data' => $investmentRevenues->pluck('registered_business_count')->toArray(),
-                    'label' => 'दर्ता भएका',
-                    'fill' => 'false',
-                ],
-                [
-                    'data' => $investmentRevenues->pluck('not_registered_business_count')->toArray(),
-                    'label' => 'दर्ता नभएको',
-                    'fill' => 'false',
-                ]
-            ],
-        ];
-    }
 }

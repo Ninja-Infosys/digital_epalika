@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">योजना/कार्यक्रम दर्ता गर्नुहोस </h4>
                         <a href="{{route('admin.plan.project.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> योजना/कार्यक्रम हरू
+                            <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
                         </a>
                     </div>
                 </div>
@@ -52,12 +52,50 @@
                                 <input
                                     type="text"
                                     name="registration_no"
-                                    value="{{old('registration_no')}}"
+                                    value="{{old('registration_no',$registration_no)}}"
                                     class="form-control @error('registration_no') is-invalid @enderror"
                                     id="registration_no"
                                     placeholder="दर्ता नं."
                                 />
                                 @error('registration_no')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="grant_category_id" class="form-label">अनुदान किसिम *</label>
+                                <select
+                                    name="grant_category_id"
+                                    class="form-control @error('grant_category_id') is-invalid @enderror"
+                                    id="grant_category_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($grantCategories as $grantCategory)
+                                        <option
+                                            {{old('grant_category_id')==$grantCategory->id ? 'selected' : ''}}
+                                            value="{{$grantCategory->id}}">
+                                            {{$grantCategory->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('grant_category_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="expense_head_id" class="form-label">खर्चको किसिम *</label>
+                                <select
+                                    name="expense_head_id"
+                                    class="form-control @error('expense_head_id') is-invalid @enderror"
+                                    id="expense_head_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($expenseHeads as $expenseHead)
+                                        <option
+                                            {{old('expense_head_id')==$expenseHead->id ? 'selected' : ''}}
+                                            value="{{$expenseHead->id}}">
+                                            {{$expenseHead->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('expense_head_id')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -93,37 +131,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="project_status" class="form-label">योजनाको अबस्था *</label>
-                                <select
-                                    name="project_status"
-                                    class="form-control @error('project_status') is-invalid @enderror"
-                                    id="project_status" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
-                                        <option
-                                            {{old('project_status')==$projectStatus->value ? 'selected' : ''}}
-                                            value="{{$projectStatus->value}}">
-                                            {{$projectStatus->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('project_status')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="project_start_date" labelNe="आयोजना सुरु हुने मिति "
-                                    nameEn="en_project_start_date" labelEn="Start Date"
-                                    :getTodayDate="false"></x-date-input-component>
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="project_completion_date" labelNe="आयोजना सम्पन्न हुने मिति"
-                                    nameEn="en_project_completion_date" labelEn="Completion Date"
-                                    :getTodayDate="false"></x-date-input-component>
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="plan_level_id" class="form-label">योजनाको स्तर *</label>
                                 <select
                                     name="plan_level_id"
@@ -157,13 +164,13 @@
                             <div class="col-md-4 mb-2">
                                 <label for="ward_no" class="form-label"> वडा नं.</label>
                                 <select
-                                    name="ward_no"
+                                    name="ward_no[]"
                                     class="form-control @error('ward_no') is-invalid @enderror"
+                                    multiple
                                     id="ward_no" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
+                                    <option disabled>--- छान्नुहोस् ---</option>
                                     @foreach($officeSetting->localBody->ward_no as $ward)
                                         <option
-                                            {{old('ward_no')==$ward ? 'selected' : ''}}
                                             value="{{$ward}}">
                                             {{$ward}}
                                         </option>
@@ -182,7 +189,7 @@
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($budgetSources as $budgetSource)
                                         <option
-                                            {{old('budget_source_id')==$budgetSource ? 'selected' : ''}}
+                                            {{old('budget_source_id')==$budgetSource->id ? 'selected' : ''}}
                                             value="{{$budgetSource->id}}">
                                             {{$budgetSource->source_name}}
                                         </option>
@@ -220,20 +227,6 @@
                                     @endforeach
                                 </select>
                                 @error('budget_head_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="allocated_amount" class="form-label">विनियोजित रकम </label>
-                                <input
-                                    type="number"
-                                    name="allocated_amount"
-                                    value="{{old('allocated_amount')}}"
-                                    class="form-control @error('allocated_amount') is-invalid @enderror"
-                                    id="allocated_amount"
-                                    placeholder="विनियोजित रकम"
-                                />
-                                @error('allocated_amount')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -284,8 +277,105 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="allocated_amount" class="form-label">योजना स्वीकृत रकम</label>
+                                <input
+                                    type="number"
+                                    name="allocated_amount"
+                                    value="{{old('allocated_amount')}}"
+                                    class="form-control @error('allocated_amount') is-invalid @enderror"
+                                    id="allocated_amount"
+                                    placeholder="योजना स्वीकृत रकम"
+                                />
+                                @error('allocated_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="first_quarterly_amount" class="form-label">पहिलो चौमासिक रकम</label>
+                                <input
+                                    type="number"
+                                    name="first_quarterly_amount"
+                                    value="{{old('first_quarterly_amount')}}"
+                                    class="form-control @error('first_quarterly_amount') is-invalid @enderror"
+                                    id="first_quarterly_amount"
+                                    placeholder="पहिलो चौमासिक रकम"
+                                />
+                                @error('first_quarterly_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="first_quarterly_goal" class="form-label">पहिलो चौमासिक लक्ष्य</label>
+                                <input
+                                    type="number"
+                                    name="first_quarterly_goal"
+                                    value="{{old('first_quarterly_goal')}}"
+                                    class="form-control @error('first_quarterly_goal') is-invalid @enderror"
+                                    id="first_quarterly_goal"
+                                    placeholder="पहिलो चौमासिक लक्ष्य"
+                                />
+                                @error('first_quarterly_goal')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="second_quarterly_amount" class="form-label">दोश्रो चौमासिक रकम</label>
+                                <input
+                                    type="number"
+                                    name="second_quarterly_amount"
+                                    value="{{old('second_quarterly_amount')}}"
+                                    class="form-control @error('second_quarterly_amount') is-invalid @enderror"
+                                    id="second_quarterly_amount"
+                                    placeholder="दोश्रो चौमासिक रकम"
+                                />
+                                @error('second_quarterly_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="second_quarterly_goal" class="form-label">दोश्रो चौमासिक लक्ष्य</label>
+                                <input
+                                    type="number"
+                                    name="second_quarterly_goal"
+                                    value="{{old('second_quarterly_goal')}}"
+                                    class="form-control @error('second_quarterly_goal') is-invalid @enderror"
+                                    id="second_quarterly_goal"
+                                    placeholder="दोश्रो चौमासिक लक्ष्य"
+                                />
+                                @error('second_quarterly_goal')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="third_quarterly_amount" class="form-label">तेश्रो चौमासिक रकम</label>
+                                <input
+                                    type="number"
+                                    name="third_quarterly_amount"
+                                    value="{{old('third_quarterly_amount')}}"
+                                    class="form-control @error('third_quarterly_amount') is-invalid @enderror"
+                                    id="third_quarterly_amount"
+                                    placeholder="तेश्रो चौमासिक रकम"
+                                />
+                                @error('third_quarterly_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="third_quarterly_goal" class="form-label">तेश्रो चौमासिक लक्ष्य</label>
+                                <input
+                                    type="number"
+                                    name="third_quarterly_goal"
+                                    value="{{old('third_quarterly_goal')}}"
+                                    class="form-control @error('third_quarterly_goal') is-invalid @enderror"
+                                    id="third_quarterly_goal"
+                                    placeholder="तेश्रो चौमासिक लक्ष्य"
+                                />
+                                @error('third_quarterly_goal')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
-
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

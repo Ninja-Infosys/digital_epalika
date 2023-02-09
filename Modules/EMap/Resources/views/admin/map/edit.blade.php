@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{route('emap.admin.map.map-apply.notice.upload.store-template-data',[$mapApply,$noticeTypeEnum])}}"
+                        action="{{route('emap.admin.map.map-apply.notice.upload.store-template-data',[$mapApply, $applicationFormTypeEnum,$noticeTypeEnum])}}"
                         method="post"
                         enctype="multipart/form-data">
                         @csrf
@@ -48,7 +48,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="files" class="form-label">फाइल *</label>
+                                    <label for="files" class="form-label">फाइल </label>
                                     <input
                                         type="file"
                                         name="files[]"

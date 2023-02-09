@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -23,8 +23,8 @@
         </div> <!-- end col-->
 
         <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -42,7 +42,7 @@
 
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -59,8 +59,8 @@
         </div> <!-- end col-->
 
         <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -77,7 +77,7 @@
 
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -93,8 +93,8 @@
         </div> <!-- end col-->
 
         <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -174,8 +174,35 @@
             </div>
         </div>
     </div>
+    @if(\Illuminate\Support\Facades\App::environment('production'))
+    <div class="modal fade" id="info-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="info-modal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-danger text-center">Alert !!!</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>
+                        यो डिजिटल ई-पालिकाको डेमो भर्जन हो। यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन, पालिकामा उक्त प्रणाली सुचारु भइसकेपछि थप अन्य फिचर देख्न पाउनुहुनेछ। धन्यबाद।
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     @push('scripts')
         <script src="{{asset('assets/backend/libs/hopscotch/js/hopscotch.min.js')}}"></script>
-        <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
+        @if(app()->environment('production'))
+            <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
+            <script>
+                $(document).ready(function (){
+                    $('#info-modal').modal('show');
+                })
+            </script>
+
+        @endif
+
     @endpush
 @endsection

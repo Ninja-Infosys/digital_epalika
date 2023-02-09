@@ -14423,32 +14423,19 @@ textarea.form-control-lg {
         display: none !important
     }
 }
-
-/*# sourceMappingURL=bootstrap.min.css.map */
- h5{
-    color: white;
-    margin: 2px 0;
- }
- .blink {
-    width: 220px;
-    height: 50px;
-    padding: 10px;
-    text-align: center;
-  }
-  h4 span {
-    font-family: cursive;
-    color: #fff;
-    animation: blink 2s linear infinite;
-    font-size: 10px;
-  }
-  @keyframes blink {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: .5;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+.dashed{
+    border-top: 2px dashed var(--ct-secondary);
+}
+.dashed-bottom{
+    border-bottom: 2px dashed var(--ct-secondary);
+}
+.certificate-title h3{
+    padding: 6px;
+    color: #FF0000;
+    border: 2px solid #FF0000;
+    border-radius: 0 22px;
+}
+.certificate{
+    border: 10px solid transparent;
+    padding: 15px;
+}

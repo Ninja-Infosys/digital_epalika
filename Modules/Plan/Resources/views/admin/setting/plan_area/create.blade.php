@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">योजना क्षेत्रहरु</li>
+                        <li class="breadcrumb-item active">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना क्षेत्रहरु</h4>
+                <h4 class="page-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</h4>
             </div>
         </div>
     </div>
@@ -23,16 +23,17 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ क्षेत्र थप्नुहोस्</h4>
-                        <a href="{{route('admin.plan.planArea.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> योजना क्षेत्रहरु
+                        <h4 class="header-title">नयाँ {{$type=='planAreaSubCategory' ? 'उपक्षेत्र':'क्षेत्र'}} थप्नुहोस्</h4>
+                        <a href="{{route('admin.plan.planArea.index',$type)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.planArea.store')}}" method="post">
+                    <form action="{{route('admin.plan.planArea.store',$type)}}" method="post">
                         @csrf
                         <div class="row">
+                            @if($type=='planAreaSubCategory')
                             <div class="col-md-12 mb-2">
                                 <label for="plan_area_id" class="form-label">मुख्य योजना क्षेत्र</label>
                                 <select
@@ -51,6 +52,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            @endif
                             <div class="col-md-12 mb-2">
                                 <label for="area_name" class="form-label">क्षेत्र को नाम *</label>
                                 <input

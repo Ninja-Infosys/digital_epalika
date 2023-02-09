@@ -43,6 +43,10 @@ class Dispatch extends Model
         'remarks',
     ];
 
+    protected $appends=[
+        'dispatch_month'
+    ];
+
     public function getReceiverSignatureUrlAttribute(): string
     {
         return $this->attributes['receiver_signature']
@@ -55,6 +59,11 @@ class Dispatch extends Model
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['receiver_signature'] = $value->store('dispatch/signature/'.Str::slug($this->attributes['receiver_name'], '_'), 'public');
         }
+    }
+
+    public function getDispatchMonthAttribute(): string
+    {
+        return explode('-', $this->dispatch_date)[1] ?? '';
     }
 
     public function fiscalYear(): BelongsTo

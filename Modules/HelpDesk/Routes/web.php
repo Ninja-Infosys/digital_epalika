@@ -22,4 +22,5 @@ Route::get('service/{service}', [FrontController::class, 'showServiceDetail'])->
 Route::controller(FrontController::class)->group(function () {
     Route::get('helpdesk', 'helpDesk')->name('helpdesk.helpdesk');
     Route::get('service', 'service')->name('service');
+    Route::get('getServices/{id?}', 'getServices')->name('getServices');
 });

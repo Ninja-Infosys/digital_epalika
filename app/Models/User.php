@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\LetterHead;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
 use App\Traits\LockableTrait;
@@ -12,12 +13,14 @@ use App\Traits\QueryFilterTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Laravolt\Avatar\Avatar;
 
 class User extends Authenticatable
 {
@@ -43,11 +46,9 @@ class User extends Authenticatable
         'role_id',
         'is_active',
         'password',
-        'province_id',
-        'district_id',
-        'local_body_id',
         'ward_no',
         'profile_photo_path',
+        'pin',
     ];
 
     protected $hidden = [
@@ -68,6 +69,13 @@ class User extends Authenticatable
         }
     }
 
+    public function setPinAttribute($value): void
+    {
+        if (! empty($value)) {
+            $this->attributes['pin'] = bcrypt($value);
+        }
+    }
+
     public function getProfilePhotoUrlAttribute(): string
     {
         return $this->attributes['profile_photo_path']
@@ -80,16 +88,6 @@ class User extends Authenticatable
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
-    }
-
-    public function getAddressAttribute(): array
-    {
-        return [
-            'province_id' => $this->attributes['province_id'],
-            'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
-            'ward_no' => $this->attributes['ward_no'],
-        ];
     }
 
     public function scopeFilter($query, $param = [])
@@ -113,19 +111,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-
-    public function province(): BelongsTo
+    public function getAvatarAttribute(): string
     {
-        return $this->belongsTo(Province::class);
+        $name = $this->attributes['name'] ?? 'User';
+        return (new Avatar)->create($name)->toBase64();
     }
 
-    public function district(): BelongsTo
+    public function letterHead(): MorphOne
     {
-        return $this->belongsTo(District::class);
-    }
-
-    public function localBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class);
+        return $this->morphOne(LetterHead::class,'model');
     }
 }

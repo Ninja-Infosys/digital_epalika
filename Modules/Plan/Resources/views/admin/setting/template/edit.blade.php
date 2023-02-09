@@ -15,24 +15,19 @@
                                 टेम्प्लेट
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">
-                            टेम्प्लेट विवरण अद्यावधिक गर्नुहोस्
-                        </li>
+                        <li class="breadcrumb-item active">टेम्प्लेट विवरण सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">टेम्प्लेट</h4>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">
-                            टेम्प्लेट विवरण अद्यावधिक गर्नुहोस्
-                        </h4>
+                        <h4 class="header-title">टेम्प्लेट विवरण सम्पादन गर्नुहोस्</h4>
                         <a href="{{route('admin.plan.planTemplate.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> टेम्प्लेट सूची
@@ -42,9 +37,9 @@
                 <div class="card-body">
                     <form action="{{route('admin.plan.planTemplate.update',$planTemplate)}}" method="post">
                         @csrf
-                        @method('put')
+                        @method('PUT')
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -58,12 +53,27 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="type" class="form-label">टेम्प्लेट *</label>
+                            <div class="col-md-4 mb-2">
+                                <label for="template_for" class="form-label">उपभोक्ता समिति/बोलपत्र(टेन्डर) को लागि</label>
+                                <select name="template_for" id="type" class="form-control">
+                                    <option value="">छान्नुहोस्</option>
+                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThroughEnum)
+                                        <option {{old('template_for',$planTemplate->template_for?->value)==$operatedThroughEnum->value ? 'selected':''}}
+                                                value="{{$operatedThroughEnum->value}}">
+                                            {{$operatedThroughEnum->label()}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('template_for')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="type" class="form-label">टेम्प्लेट</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $templateType)
-                                        <option {{old('type',$planTemplate->type)==$templateType->value ? 'selected':''}}
+                                    @foreach(\Modules\Plan\Enums\PlanTemplateTypeEnum::cases() as $templateType)
+                                        <option {{old('type',$planTemplate->type?->value)==$templateType->value ? 'selected':''}}
                                                 value="{{$templateType->value}}">
                                             {{$templateType->label()}}
                                         </option>
@@ -75,7 +85,7 @@
                             </div>
                             <div class="row">
 
-                                @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
+                                @foreach( (new \Modules\Plan\Entities\Project())->getTemplateOptions() as $template)
                                     <div class="col-md-12 mt-1">
                                         <h6>{{$template['title'] ?? ''}}</h6>
                                     </div>
@@ -88,31 +98,6 @@
                                         @endforeach
                                     </div>
                                 @endforeach
-                                <div class="col-md-12 mt-1">
-                                    <h6>Static Template</h6>
-                                </div>
-                                <div class="col-md-12">
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="level">
-                                        प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="superstructure">
-                                        भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="construction-completion-certificate">
-                                        भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="naksa_certificate">
-                                        नक्सा प्रमाणित प्रमाण-पत्र
-                                    </span>
-                                </div>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>
@@ -133,6 +118,7 @@
             </div>
         </div>
     </div>
+
     @push('style')
         <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
         <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">

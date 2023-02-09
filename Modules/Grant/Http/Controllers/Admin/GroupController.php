@@ -11,6 +11,8 @@ use Modules\Grant\Http\Requests\Group\UpdateGroupRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantProgram;
 
 class GroupController extends Controller
 {
@@ -41,12 +43,26 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_create');
 
-        DB::transaction(function () use ($request) {
-            $group = Group::create($request->validated());
+        $group = DB::transaction(function () use ($request) {
+            $group = Group::create($request->validated() + [
+                    'registration_date' => $request->input('g_registration_date')
+                ]);
 
             $group->farmers()->attach($request->input('farmers'));
 
+            return $group;
         });
+
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => [
+                    'group_id' => $group->id,
+                    'group_name' => $group->name
+                ],
+                'message' => 'group Added Successfully'
+            ]);
+        }
+
         toast('समूह सफलतापूर्वक थपियो', 'success');
         return back();
     }
@@ -58,7 +74,7 @@ class GroupController extends Controller
         $farmers = Farmer::latest()->get();
         $group->load('farmers');
 
-        return view('grant::admin.group.edit', compact('farmers','group'));
+        return view('grant::admin.group.edit', compact('farmers', 'group'));
     }
 
     public function update(UpdateGroupRequest $request, Group $group)
@@ -86,5 +102,24 @@ class GroupController extends Controller
 
         toast('समूह सफलतापूर्वक मेटाइयो', 'success');
         return back();
+    }
+
+    public function show(Group $group)
+    {
+        $this->checkAuthorization('group_access');
+
+        $group->load('province', 'district', 'localBody', 'farmers', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
+        $grantPrograms = GrantProgram::all();
+
+        return view('grant::admin.group.show', compact('group', 'grantPrograms'));
+    }
+
+    public function grantDetails(Group $group)
+    {
+        $this->checkAuthorization('group_access');
+
+        $group->load('grantDetails.grant.grantProgram');
+
+        return view('grant::admin.group.grant_details', compact('group'));
     }
 }

@@ -41,12 +41,12 @@ class GrievanceDetailController extends Controller
     {
         $this->checkAuthorization('grievanceDetail_access');
         $grievanceDetail->load(
-            'grievanceDetails',
+            'grievanceDetails.files',
+            'grievanceDetails.user',
             'grievanceType',
             'grievanceOffice',
             'files'
         );
-
         return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail'));
     }
 

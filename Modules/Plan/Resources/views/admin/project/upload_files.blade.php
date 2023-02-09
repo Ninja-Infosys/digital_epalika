@@ -10,11 +10,15 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-
-                        <li class="breadcrumb-item active">योजनाहरु</li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.plan.project.index')}}">
+                                योजनाहरु
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">योजना संग सम्बन्धित फोटो/फाईलहरू थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नयाँ कागजात थप्नुहोस्</h4>
+                <h4 class="page-title">योजना संग सम्बन्धित फोटो/फाईलहरू थप्नुहोस्</h4>
             </div>
         </div>
     </div>
@@ -23,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ कागजात थप्नुहोस्</h4>
+                        <h4 class="header-title">योजना संग सम्बन्धित फोटो/फाईलहरू</h4>
                         <a href="{{route('admin.plan.project.show',$project)}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> योजना विवरण
                         </a>
@@ -48,14 +52,18 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="file" class="form-label">फाइल * </label>
+                                <label for="files" class="form-label">फाइल (Multiple) * </label>
                                 <input
                                     type="file"
-                                    name="file"
-                                    class="form-control @error('file') is-invalid @enderror"
-                                    id="file"
+                                    name="files[]"
+                                    multiple
+                                    class="form-control @error('files') is-invalid @enderror"
+                                    id="files"
                                 />
-                                @error('file')
+                                @error('files')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                @error('files.*')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

@@ -44,6 +44,10 @@ class Registration extends Model
         'remarks',
     ];
 
+    protected $appends = [
+        'registration_month'
+    ];
+
     public function getSignatureImageUrlAttribute(): string
     {
         return
@@ -54,9 +58,14 @@ class Registration extends Model
 
     public function setSignatureImageAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['signature_image'] = $value->store('registration/'.Str::slug($this->attributes['receiver_name'], '_').'/signature', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['signature_image'] = $value->store('Registration/' . Str::slug($this->attributes['registration_no'] ?? $this->attributes['receiver_name'], '_'), 'public');
         }
+    }
+
+    public function getRegistrationMonthAttribute(): string
+    {
+        return explode('-', $this->registration_date)[1] ?? '';
     }
 
     public function fiscalYear(): BelongsTo

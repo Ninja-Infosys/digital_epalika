@@ -22,20 +22,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सेवा सूची</h4>
-                        @can('branch_create')
-                            <a href="{{route('admin.helpDesk.service.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">सेवाहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('branch_create')
+                                <a href="{{route('admin.helpDesk.service.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -59,19 +59,19 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-plus-circle"></i> कर्मचारी
                                         </a>
-                                        <a href="{{route('admin.helpDesk.service.show',$service)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.helpDesk.service.show',$service)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i> थप हेर्नुहोस्
                                         </a>
-                                        <a href="{{route('admin.helpDesk.service.edit',$service)}}"
-                                           class="btn btn-xs btn-outline-warning">
+                                        <a data-bs-type="edit" href="{{route('admin.helpDesk.service.edit',$service)}}"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.helpDesk.service.destroy',$service)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger  {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>

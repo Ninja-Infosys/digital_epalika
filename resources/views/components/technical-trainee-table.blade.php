@@ -35,13 +35,13 @@
             </td>
             <td class="d-flex justify-center">
                 @can('technicalTrainee_edit')
-                <a href="{{route('admin.roaster.technicalTrainee.edit', $trainee)}}" type="button"
-                   class="btn btn-sm btn-primary">
+                <a data-bs-type="edit" href="{{route('admin.roaster.technicalTrainee.edit', $trainee)}}" type="button"
+                   class="btn btn-sm btn-primary {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-edit"></i>
                 </a>
                 @endcan
                 @can('technicalTrainee_access')
-                <a href="{{route('admin.roaster.technicalTrainee.show',$trainee )}}" class="btn btn-info btn-sm">
+                <a data-bs-type="edit" href="{{route('admin.roaster.technicalTrainee.show',$trainee )}}" class="btn btn-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-eye"></i>
                 </a>
                     @endcan
