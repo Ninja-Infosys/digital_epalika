@@ -46,7 +46,7 @@ class ReportController extends Controller
 
         if (!empty($request->input('columns')['partners'])) {
             $projects->load(['partners' => function ($q) {
-                $q->with('province', 'localBody', 'district');
+                $q->with('province', 'localBody', 'district', 'issueDistrict');
             }]);
         }
 
@@ -54,8 +54,10 @@ class ReportController extends Controller
             $projects->load('registeredBusinesses');
         }
 
-        if (!empty($request->input('columns')['businessRenew'])) {
-            $projects->load('businessRenew');
+        if (!empty($request->input('columns')['business_renews'])) {
+            $projects->load(['businessRenew' => function ($q) {
+                $q->with('fiscalYear');
+            }]);
         }
 
         return response()->json([
@@ -99,5 +101,13 @@ class ReportController extends Controller
         if (!empty($request->input('business_nature'))) {
             $q->whereIn('business_nature_id', $request->input('business_nature'));
         }
+    }
+
+    public function businessRegistrationBook()
+    {
+        $fiscalYears = FiscalYear::all();
+        $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        $businessNatures = BusinessNature::all();
+        return view('businessregistration::admin.report.business-registration-book',compact('businessNatures','objectTransactions','fiscalYears'));
     }
 }

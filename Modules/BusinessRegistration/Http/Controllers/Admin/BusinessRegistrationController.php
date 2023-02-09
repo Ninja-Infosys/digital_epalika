@@ -77,7 +77,7 @@ class BusinessRegistrationController extends Controller
             'bill_no' => ['required'],
             'bill_date_bs' => ['required'],
             'bill_date_ad' => ['required'],
-            'other_file' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'other_file' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'amount' => ['required'],
             'taxpayer_number' => ['nullable'],
         ]);

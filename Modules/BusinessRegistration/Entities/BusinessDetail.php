@@ -261,7 +261,7 @@ class BusinessDetail extends Model
     public function otherFile(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Storage::url($value),
+            get: fn($value) => !empty($value) ? Storage::url($value) : null,
             set: fn($value) => (!empty($value) && !is_string($value))
                 ? $value->store('other_file', 'public')
                 : null

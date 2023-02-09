@@ -40,6 +40,7 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
+    Route::get('business-registration-book', 'businessRegistrationBook')->name('business-registration-book');
 });
 
 Route::prefix('files')->as('files.')->group(function () {
