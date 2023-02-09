@@ -18,19 +18,14 @@
                                data-bs-toggle="dropdown"
                                aria-expanded="false"
                             >
-
-                                <i @class([
-            'ring-bell'=>count(auth('organization')->user()->unreadNotifications)>0,
-            'fa', 'fa-bell', 'noti-icon','fs-2', 'px-2'
-            ])></i>
+                                <i @class(['ring-bell'=>count(auth('organization')->user()->unreadNotifications)>0,'fa', 'fa-bell', 'noti-icon'])></i>
                                 <span class="badge bg-danger {{count(auth('organization')->user()->unreadNotifications)>0 ? 'd-block':'d-none'}} rounded-circle noti-icon-badge">
                                         {{count(auth('organization')->user()->unreadNotifications)}}
                                     </span>
-
                             </a>
                             <div class="dropdown-menu p-3" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-item d-flex justify-content-around">
-                                    <p class="m-0 text-dark px-5">नोटिफिकेसन</p>
+                                <div class="dropdown-item d-flex gap-4">
+                                    <p class="m-0 text-dark">नोटिफिकेसन</p>
                                     <a href="{{route('organization.admin.notification.readAllNotification')}}">
                                         <p class="text-danger">सबै खाली गर्नुहोस्</p>
                                     </a>
@@ -41,41 +36,41 @@
                                     <li>
                                         <a href="{{route('organization.admin.notification',$notification)}}" id="scrollspyHeading2">
                                             <p class="text-dark">
-                                                {{class_basename($notification->type)}}
-                                                <i class="fa fa-bell"></i>
-                                                <br/>
-                                                <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
+                                                @switch(class_basename($notification->type))
+                                                    @case('ApplyMapNoticeNotification')
+                                                        घर-नक्सा पासमा नयाँ निबेदन/प्रतिबेदन प्राप्त
+                                                        @break
+                                                    @case('MapApplyNotification')
+                                                        घर-नक्सा पासमा नयाँ नक्सा प्राप्त
+                                                        @break
+                                                    @default
+                                                        नयाँ नोटिफिकेसन
+                                                @endswitch
+                                                <br>
+                                                    <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
                                             </p>
                                         </a>
                                     </li>
                                     @empty
-                                        <li class="text-center p-1">कुनै डाटा उपलब्ध छैन <i
-                                                class="fa fa-exclamation ring-bell noti-icon text-danger px-2"></i></li>
+                                        <li class="text-center">कुनै डाटा उपलब्ध छैन</li>
                                     @endforelse
 
                                 </ul>
                             </div>
                         </li>
-
-                        <li>
-                            <a href="#"> <img src="{{asset('assets/backend/emap/admin/img/icon/msg.svg')}}" alt=""> </a>
-                        </li>
                     </div>
                     <div class="profile_info">
-                        <img src="{{auth('organization')->user()->profile_photo_url ??''}}" alt="#">
+                        <img src="{{auth('organization')->user()->profile_photo_url ??''}}" alt="#" height="30" width="30">
                         <div class="profile_info_iner">
                             <p>{{auth('organization')->user()->email ??''}}</p>
                             <h5>{{auth('organization')->user()->name ??''}}</h5>
                             <div class="profile_info_details">
                                 <a href="{{route('organization.admin.auth-organization.profile')}}">My Profile <i
                                         class="ti-user"></i></a>
-                                <a href="#">Settings <i class="ti-settings"></i></a>
                                 <form method="get" action="{{ route('organization.logout') }}">
                                     @csrf
-
                                     <a href="{{ route('organization.logout') }}">Log Out <i
                                             class="ti-shift-left"></i></a>
-
                                 </form>
                             </div>
                         </div>
