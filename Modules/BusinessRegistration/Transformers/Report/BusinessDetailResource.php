@@ -10,7 +10,6 @@ class BusinessDetailResource extends JsonResource
     {
         $request_columns = $request->input('columns')['business_details'] ?? [];
         return [
-            'दर्ता नं.' => $this->when(in_array('registration_no', $request_columns), $this->registration_no ?? ''),
             'सबमिशन नम्बर' => $this->when(in_array('submission_no', $request_columns), $this->submission_no ?? ''),
             'व्यवसाय ठेगाना ' => $this->when((bool)array_intersect(['province_id', 'district_id', 'local_body_id', 'ward_no', 'tole','way'], $request_columns), function () use ($request_columns) {
                 return $this->resolveAddress($request_columns);
@@ -51,6 +50,7 @@ class BusinessDetailResource extends JsonResource
             'कर तिरेको प्रमाणपत्र' => $this->when(in_array('tax_document', $request_columns), $this->tax_document ?? ''),
             'व्यवसायी विवरण' => PartnerResource::collection($this->whenLoaded('partners')),
             'अघि दर्ता भएका व्यवसाय' => RegisterBusinessResource::collection($this->whenLoaded('registeredBusinesses')),
+            'व्यवसाय नवीकरण' => BusinessRenewResource::collection($this->whenLoaded('businessRenew')),
         ];
 
     }
