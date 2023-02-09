@@ -3,11 +3,15 @@
 namespace Modules\Revenue\Entities;
 
 use App\Enums\Gender;
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -41,6 +45,12 @@ class TaxPayer extends Model
         'tole',
         'remarks',
         'is_active',
+        'occupation',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'village',
+        'house_no',
     ];
 
     protected $casts = [
@@ -63,6 +73,21 @@ class TaxPayer extends Model
         return $this->belongsTo(FiscalYear::class);
     }
 
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -72,4 +97,10 @@ class TaxPayer extends Model
     {
         return $query->where('is_active', false);
     }
+
+    public function taxPayerFamilies(): HasMany
+    {
+        return $this->hasMany(TaxPayerFamily::class);
+    }
+
 }
