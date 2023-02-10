@@ -172,6 +172,7 @@ class ReportController extends Controller
         ]);
 
         $businessNatures = BusinessNature::with(['businessDetails' => function ($query) use ($request) {
+            $query->whereNotNull('registration_no');
             $this->filterDataFromUser($query, $request);
         }])
             ->where(function ($query) use ($request) {
@@ -192,6 +193,8 @@ class ReportController extends Controller
                 ];
             });
         return response()->json([
+            'total' => $businessNatures->sum('total'),
+            'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
             'view' => (string)View::make('businessregistration::admin.report.inc.business_nature_table', compact('businessNatures'))
         ]);
     }
@@ -216,6 +219,7 @@ class ReportController extends Controller
 
         $objectTransactions = ObjectTransaction::with(['objectTransactions.businessDetails', 'businessDetails' => function ($query) use ($request) {
             $this->filterDataFromUser($query, $request);
+            $query->whereNotNull('registration_no');
         }])
             ->where(function ($query) use ($request) {
                 if (!empty($request->input('object_transaction'))) {
@@ -224,7 +228,7 @@ class ReportController extends Controller
             })->whereNull('object_transaction_id')
             ->get()->map(function ($objectTransaction) {
                 $wardData = [];
-                $total_count=$objectTransaction->businessDetails->count();
+                $total_count = $objectTransaction->businessDetails->count();
                 foreach (officeSetting()->localBody->ward_no as $ward_no) {
                     $count = 0;
                     $sub_total_count = 0;
@@ -232,7 +236,7 @@ class ReportController extends Controller
                         $sub_total_count += $subObjectTransaction->businessDetails->where('ward_no', $ward_no)->count();
                         $count += $subObjectTransaction->businessDetails->where('ward_no', $ward_no)->count();
                     }
-                    $total_count+=$sub_total_count;
+                    $total_count += $sub_total_count;
                     $wardData[] = $objectTransaction->businessDetails->where('ward_no', $ward_no)->count() + $count;
                 }
                 return [
