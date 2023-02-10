@@ -69,7 +69,7 @@
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.taxPayer.edit',[$taxPayer])}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('taxPayerType_delete')
@@ -80,7 +80,7 @@
                                                 @method('delete')
                                                 <button data-bs-type="delete"
                                                         class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

@@ -16,12 +16,9 @@
     <!-- App css -->
     <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
     <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media='screen,print'/>
-
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
-
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     @stack('style')
@@ -70,7 +67,8 @@
 </script>
 
 <script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}"></script>
-<script src="{{asset('js/newRelic.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/custom.js')}}"></script>
+{{--<script src="{{asset('js/newRelic.min.js')}}"></script>--}}
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>
 </html>

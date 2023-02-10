@@ -40,6 +40,7 @@ Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('cache-clear', [DashboardController::class, 'cacheClear'])->name('cache-clear');
 Route::get('tech-help', [TechController::class, 'index'])->name('tech');
 Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
 Route::view('terms', 'admin.terms_and_conditions.index')->name('terms');

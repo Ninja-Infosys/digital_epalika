@@ -9855,3 +9855,6 @@ table[data-toggle=table] {
 .offcanvas-header{
     background-color: var(--primary);
 }
+.ck.ck-editor__main > .ck-editor__editable{
+    height: 50vh;
+}
