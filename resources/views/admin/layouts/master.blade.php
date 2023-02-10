@@ -67,6 +67,7 @@
 </script>
 
 <script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/custom.js')}}"></script>
 {{--<script src="{{asset('js/newRelic.min.js')}}"></script>--}}
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>

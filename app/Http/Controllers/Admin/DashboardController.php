@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
@@ -103,6 +104,12 @@ class DashboardController extends Controller
                     'fill' => 'false',
                 ],
             ],
+        ];
+    }
+    public function cacheClear(){
+        Artisan::call('optimize:clear');
+        return [
+            'message' => 'क्यास सफलतापूर्वक खाली गरियो'
         ];
     }
 }

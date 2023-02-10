@@ -5,11 +5,11 @@
                 <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-none d-lg-inline-block">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                   data-toggle="fullscreen" id="full-tour"
-                   href="#" title="मोमोरी खाली गर्नुहोस्">
-                    <i class="fas fa-brush noti-icon"></i>
-                </a>
+                <div class="nav-link dropdown-toggle arrow-none waves-effect waves-light">
+                    <button class="btn btn-primary btn-xs cacheButton" id="cacheBtn" type="button" data="{{route('admin.cache-clear')}}">
+                        <i class="fas fa-brush"></i>
+                    </button>
+                </div>
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">

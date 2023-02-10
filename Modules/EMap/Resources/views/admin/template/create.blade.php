@@ -124,19 +124,6 @@
     @push('scripts')
         <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
         <script>
-            $('.ckEditor').each(function (){
-                ClassicEditor.create(document.getElementById(this.id), {
-                        licenseKey: '',
-                    })
-                    .then(editor => {
-                        window.editor = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            })
-        </script>
-        <script>
             $(document).ready(function () {
                 $.ajaxSetup({
                     headers: {
