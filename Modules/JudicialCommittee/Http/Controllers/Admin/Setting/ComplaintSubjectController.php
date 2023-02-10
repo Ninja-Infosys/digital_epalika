@@ -1,9 +1,7 @@
 <?php
 
-namespace Modules\JudicialCommittee\Http\Controllers\Admin;
+namespace Modules\JudicialCommittee\Http\Controllers\Admin\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintSubject;
 use Modules\JudicialCommittee\Entities\LawsuitNature;

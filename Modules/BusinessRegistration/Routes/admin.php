@@ -41,6 +41,11 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
     Route::get('business-registration-book', 'businessRegistrationBook')->name('business-registration-book');
+    Route::post('business-registration-book-report', 'businessRegistrationBookReport')->name('business-registration-book-report');
+    Route::get('business-nature-wise', 'businessNatureWise')->name('business-nature-wise');
+    Route::post('business-nature-report', 'businessNatureWiseReport')->name('business-nature-report');
+    Route::get('object-transaction','objectTransaction')->name('object-transaction');
+    Route::post('object-transaction-report','objectTransactionReport')->name('object-transaction-report');
 });
 
 Route::prefix('files')->as('files.')->group(function () {

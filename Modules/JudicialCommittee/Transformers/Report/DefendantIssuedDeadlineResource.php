@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\JudicialCommittee\Transformers;
+namespace Modules\JudicialCommittee\Transformers\Report;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

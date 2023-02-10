@@ -19,6 +19,8 @@ class DefendantIssuedDeadlineController extends Controller
     {
         $this->checkAuthorization('defendantIssuedDeadline_access');
 
+        $complaintApplication->load('defendantIssuedDeadlines');
+
         return view('judicialcommittee::admin.defendant_issued_deadline.index', compact('complaintApplication'));
     }
 

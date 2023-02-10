@@ -4,6 +4,7 @@ namespace Modules\BusinessRegistration\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BusinessNature extends Model
@@ -20,4 +21,9 @@ class BusinessNature extends Model
     protected $fillable = [
         'title',
     ];
+
+    public function businessDetails(): HasMany
+    {
+        return $this->hasMany(BusinessDetail::class);
+    }
 }
