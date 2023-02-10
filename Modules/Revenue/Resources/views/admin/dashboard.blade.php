@@ -1,78 +1,82 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card-primary">
+    <div class="row mt-2">
+        <div class="col-xl-4">
+            <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                          {{ $taxPayerCount}}
-                                        </span>
-                                </h3>
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-primary rounded-circle">
+                                <i class="fas fa-user avatar-title font-22 text-white"></i>
                             </div>
-                            <p class="text my-1">करदाता</p>
                         </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card-secondary">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$invoiceCount}}
-                                       </span>
-                                </h3>
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1"><span data-plugin="counterup"> {{ $taxPayerCount}}</span></h3>
+                                <p class="text-muted mb-1 text-truncate">करदाता</p>
                             </div>
-                            <p class="text my-1">आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद</p>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card-primary">
+            </div> <!-- end card-->
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-{{--                            <div class="avatar-lg rounded-circle bg-light border">--}}
-                                <h3 class="mt-1 text-center text-white"><span
-                                        data-plugin="counterup">
-                                        45625
-                                    </span>
-                                </h3>
-{{--                            </div>--}}
-                            <p class="text my-1">चालु आर्थिक वर्षको संकलन राजस्व</p>
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-blue rounded-circle">
+                                <i class="fas fa-clipboard-list avatar-title font-22 text-white"></i>
+                            </div>
                         </div>
-                    </div> <!-- end row-->
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1"><span data-plugin="counterup">{{$invoiceCount}}</span></h3>
+                                <p class="text-muted mb-1"> आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card-secondary">
+            </div> <!-- end card-->
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-{{--                            <div class="avatar-lg rounded-circle bg-light border">--}}
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                        12345
-                                       </span>
-                                </h3>
-{{--                            </div>--}}
-                            <p class="text my-1">कुल राजस्व</p>
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-success rounded-circle">
+                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                            </div>
                         </div>
-                    </div> <!-- end row-->
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1">रु. <span data-plugin="counterup">86765453435</span></h3>
+                                <p class="text-muted mb-1 text-truncate">चालु आर्थिक वर्षको संकलन राजस्व</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
+            </div> <!-- end card-->
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-info rounded-circle">
+                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1">रु. <span data-plugin="counterup">86765453435</span></h3>
+                                <p class="text-muted mb-1 text-truncate">कुल राजस्व</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card-->
+        </div>
     </div>
 @endsection

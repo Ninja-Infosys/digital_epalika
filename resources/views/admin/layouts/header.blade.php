@@ -7,30 +7,25 @@
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
                    data-toggle="fullscreen" id="full-tour"
-                   href="#">
-                    <i class="fa fa-expand-arrows-alt noti-icon"></i>
+                   href="#" title="मोमोरी खाली गर्नुहोस्">
+                    <i class="fas fa-brush noti-icon"></i>
                 </a>
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a
-                    class="nav-link dropdown-toggle waves-effect waves-light"
+                <a class="nav-link dropdown-toggle waves-effect waves-light"
                     data-bs-toggle="dropdown"
                     href="#"
                     role="button"
                     aria-haspopup="false"
                     aria-expanded="false" id="noti-tour">
-                    <i @class([
-            'ring-bell'=>count(auth()->user()->unreadNotifications)>0,
-            'fa', 'fa-bell', 'noti-icon'
-            ])></i>
+                    <i @class(['ring-bell'=>count(auth()->user()->unreadNotifications)>0,'fa', 'fa-bell', 'noti-icon'])></i>
                     @if(count(auth()->user()->unreadNotifications)>0)
                         <span class="badge bg-danger rounded-circle noti-icon-badge">
                         {{count(auth()->user()->unreadNotifications)}}</span>
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-                    <!-- item-->
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
                             <span class="float-end">
@@ -38,7 +33,6 @@
                         <small>सबै खाली गर्नुहोस्</small>
                       </a> </span>नोटिफिकेसन</h5>
                     </div>
-
                     <div class="noti-scroll" data-simplebar>
                         @forelse (auth()->user()->unreadNotifications as $notification)
                             <a href="{{ route('admin.notification.read',$notification) }}"
@@ -64,7 +58,6 @@
                             <h4 class="text-center">कुनै डाटा उपलब्ध छैन !</h4>
                         @endforelse
                     </div>
-
                     <!-- All-->
                     <a href="{{route('admin.notification')}}"
                        class="dropdown-item text-center text-primary notify-item notify-all">
@@ -73,7 +66,6 @@
                     </a>
                 </div>
             </li>
-
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                    data-bs-toggle="dropdown"
