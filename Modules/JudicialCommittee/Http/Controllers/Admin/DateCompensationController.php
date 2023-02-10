@@ -11,21 +11,13 @@ use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\DateCompensation\StoreDateCompensationRequest;
+use Modules\JudicialCommittee\Http\Requests\DateCompensation\UpdateDateCompensationRequest;
 
 class DateCompensationController extends Controller
 {
     public function index(ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('dateCompensation_access');
-
-        if (!$complaintApplication->dateCompensation) {
-            return redirect(route('admin.judicialCommittee.complaintApplication.dateCompensation.create', $complaintApplication));
-        }
-
-        if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::DATE_COMPENSATION)->count() == 0) {
-            toast('टेम्प्लेट सेट गरिएको छैन', 'error');
-            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
-        }
 
         return view('judicialcommittee::admin.date_compensation.index', compact('complaintApplication'));
     }
@@ -34,8 +26,6 @@ class DateCompensationController extends Controller
     {
         $this->checkAuthorization('dateCompensation_create');
 
-        $complaintApplication->load('dateCompensation');
-
         return view('judicialcommittee::admin.date_compensation.create', compact('complaintApplication'));
     }
 
@@ -43,14 +33,9 @@ class DateCompensationController extends Controller
     {
         $this->checkAuthorization('dateCompensation_create');
 
-        $dateCompensation=DateCompensation::updateOrCreate(
-            ['complaint_application_id' => $complaintApplication->id],
-            $request->validated()
-        );
+        $dateCompensation = $complaintApplication->dateCompensations()->create($request->validated());
 
-        if($dateCompensation->wasRecentlyCreated){
-            event(new ComplaintLogEvent($complaintApplication->id, DateCompensation::class, $dateCompensation->id, 'तारिख भरपाई', "मिति $dateCompensation->decision_date गते समय $dateCompensation->decision_time मा $dateCompensation->decision_subject विषयमा निर्णय हुने छ भनेर तारिख भरपाई गरियो।"));
-        }
+        event(new ComplaintLogEvent($complaintApplication->id, DateCompensation::class, $dateCompensation->id, 'तारिख भरपाई', "मिति $dateCompensation->decision_date गते समय $dateCompensation->decision_time मा $dateCompensation->decision_subject विषयमा निर्णय हुने छ भनेर तारिख भरपाई गरियो।"));
 
         toast('तारिख भरपाई सफलतापूर्वक पेश गरियो', 'success');
 
@@ -61,19 +46,30 @@ class DateCompensationController extends Controller
     {
         $this->checkAuthorization('dateCompensation_access');
 
-        return view('judicialcommittee::show');
+        if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::DATE_COMPENSATION)->count() == 0) {
+            toast('टेम्प्लेट सेट गरिएको छैन', 'error');
+            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
+        }
+
+        return view('judicialcommittee::admin.date_compensation.show',compact('dateCompensation','complaintApplication'));
     }
 
     public function edit(ComplaintApplication $complaintApplication, DateCompensation $dateCompensation)
     {
         $this->checkAuthorization('dateCompensation_access');
 
-        return view('judicialcommittee::edit');
+        return view('judicialcommittee::admin.date_compensation.edit',compact('complaintApplication','dateCompensation'));
     }
 
-    public function update(Request $request, ComplaintApplication $complaintApplication, DateCompensation $dateCompensation)
+    public function update(UpdateDateCompensationRequest $request, ComplaintApplication $complaintApplication, DateCompensation $dateCompensation)
     {
         $this->checkAuthorization('dateCompensation_edit');
+
+        $dateCompensation->update($request->validated());
+
+        toast('तारिख भरपाई सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
+        return redirect(route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication));
     }
 
     public function destroy(ComplaintApplication $complaintApplication, DateCompensation $dateCompensation)

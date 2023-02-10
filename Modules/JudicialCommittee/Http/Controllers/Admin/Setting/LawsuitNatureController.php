@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\JudicialCommittee\Http\Controllers\Admin;
+namespace Modules\JudicialCommittee\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
