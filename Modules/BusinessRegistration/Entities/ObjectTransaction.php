@@ -33,4 +33,9 @@ class ObjectTransaction extends Model
     {
         return $this->hasMany(__CLASS__);
     }
+
+    public function businessDetails(): HasMany
+    {
+        return $this->hasMany(BusinessDetail::class);
+    }
 }

@@ -28,12 +28,24 @@
         <ul class="nav-second-level">
             <li class="{{request()->is('admin/businessRegistration/report') ? 'active' : ''}}">
                 <a href="{{route('admin.businessRegistration.report.index')}}">
-                    <span>रिपोर्ट</span>
+                    <span>प्रतिवेदनहरु</span>
                 </a>
             </li>
             <li class="{{request()->is('admin/businessRegistration/report/business-registration-book') ? 'active' : ''}}">
                 <a href="{{route('admin.businessRegistration.report.business-registration-book')}}">
-                    <span>रिपोर्ट १</span>
+                    <span>व्यवसाय दर्ता प्रतिवेदन</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/business-nature-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.business-nature-wise')}}">
+                    <span>व्यवसायको प्रकृति अनुसार रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/object-transaction') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.object-transaction')}}">
+                    <span>
+                        व्यवसायको कारोबार गर्ने मुख्य सेवा वा बस्तु
+                    </span>
                 </a>
             </li>
         </ul>

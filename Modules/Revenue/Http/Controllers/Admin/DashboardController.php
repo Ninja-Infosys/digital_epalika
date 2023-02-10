@@ -13,16 +13,30 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $taxPayerCount = TaxPayer::active()->count();
+        $fiscal_year_id = officeSetting()->fiscal_year_id;
 
-        $invoiceCount = Invoice::where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
+        $taxPayerCount = DB::table('tax_payers')
+            ->whereNull('deleted_at')
+            ->where('is_active', true)
+            ->count();
 
-        $revenue = Invoice::withSum(['invoiceParticulars' => function ($query) {
-            $query->select(DB::raw('SUM((rate * quantity) + fine) as total'));
-        }], 'total')
+        $invoiceCount = DB::table('invoices')
+            ->where('fiscal_year_id', $fiscal_year_id)
+            ->whereNull('deleted_at')
+            ->count();
+
+        $results = DB::table('invoices')
+            ->selectRaw('invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity) + invoice_particulars.fine) as total')
+            ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
+            ->whereNull('invoices.deleted_at')
+            ->whereNull('invoice_particulars.deleted_at')
+            ->groupBy('invoices.fiscal_year_id')
             ->get();
 
+        $all_total = $results->sum('total');
+        $fiscal_year_total = $results->where('fiscal_year_id', $fiscal_year_id)->first()->total;
 
-        return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'revenue'));
+
+        return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total'));
     }
 }
