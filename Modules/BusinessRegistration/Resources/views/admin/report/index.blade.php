@@ -37,6 +37,7 @@
                             <x-print-button
                                 target-element="report-table"
                                 title="प्रतिवेदन रिपोर्ट"
+                                :headerRequired="true"
 
                             />
                         </div>
