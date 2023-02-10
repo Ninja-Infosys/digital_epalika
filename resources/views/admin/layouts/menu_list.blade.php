@@ -7,7 +7,7 @@
 
 <div class="offcanvas-body">
     <div class="row">
-        @if(Route::has('admin.admin.digitalBoard.dashboard'))
+        @if(Route::has('admin.digitalBoard.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.digitalBoard.dashboard')}}">
                     <div class="p-2 text-center">
