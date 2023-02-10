@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> प्रतिवेदनहरु</li>
+                        <li class="breadcrumb-item active">व्यवसायको प्रकृति अनुसार रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> प्रतिवेदनहरु </h4>
+                <h4 class="page-title"> व्यवसायको प्रकृति अनुसार रिपोर्ट </h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय दर्ता प्रतिवेदन</h4>
+                        <h4 class="header-title">व्यवसायको प्रकृति अनुसार रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
+                                    type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
@@ -35,16 +36,16 @@
                                 target-table="report-table"
                             />
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="व्यवसाय दर्ता रिपोर्ट"
-                                :header-required="true"
                             />
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" data-bs-url="{{route('admin.businessRegistration.report.report-data')}}">
+                        <form id="report-filter-form"
+                              data-bs-url="{{route('admin.businessRegistration.report.business-nature-report')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -71,30 +72,6 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="object_transaction">कारोबार गर्ने वस्तु</label>
-                                    <select name="object_transaction[]" multiple data-toggle="select2"
-                                            id="object_transaction" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($objectTransactions as $objectTransaction)
-                                            @if(count($objectTransaction->objectTransactions)>0)
-                                                <optgroup label="{{$objectTransaction->title}}">
-                                                    @foreach($objectTransaction->objectTransactions as $subObjectTransaction)
-                                                        <option
-                                                            value="{{$subObjectTransaction->id}}">
-                                                            {{$subObjectTransaction->title}}
-                                                        </option>
-                                                    @endforeach
-                                                </optgroup>
-                                            @else
-                                                <option
-                                                    value="{{$objectTransaction->id}}">
-                                                    {{$objectTransaction->title}}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3 mb-2">
                                     <label for="business_nature">व्यवसायको प्रकृति </label>
                                     <select name="business_nature[]" multiple data-toggle="select2"
                                             id="business_nature" class="form-control">
@@ -105,48 +82,90 @@
                                     </select>
                                 </div>
                             </div>
-                            <fieldset class="border p-2 mb-2">
-                                <legend class="font-16 text-info">
-                                    <strong>
-                                        Columns
-                                    </strong>
-                                </legend>
-                                <div class="row">
-                                    @foreach($columnData as $columns)
-                                        <div class="col-md-6 mb-2">
-                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
-                                            <select name="columns[{{$columns['table_name']}}][]"
-                                                    id="column.{{$columns['table_name']}}" multiple
-                                                    data-toggle="select2"
-                                                    class="form-control">
-                                                <option disabled>--- छान्नुहोस् ---</option>
-                                                @foreach($columns['columns'] as $column)
-                                                    <option
-                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                    @endforeach
-
-                                </div>
-                            </fieldset>
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
                             </button>
                         </form>
                     </div>
                     <div class="table-responsive">
-                        <div id="report-table"></div>
+                        <div id="report-content" class="d-none">
+                            {!! letterHead() !!}
+                            <table id="report-table" class="table table-sm mt-3 table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>क्र.सं.</th>
+                                    <th>प्रकृति</th>
+                                    @foreach(officeSetting()->localBody->ward_no as $ward_no)
+                                        <th> वडा नं. {{$ward_no}}</th>
+                                    @endforeach
+                                    <th>जम्मा</th>
+                                </tr>
+                                </thead>
+                                <tbody id="report-data">
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
+        <script>
+            $(document).ready(function () {
+                // x-csrf protection
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
+                    e.preventDefault()
+                    // get attribute data-bs-url from form and assign it to const variable url
+                    const url = $(this).attr('data-bs-url');
+                    const submitFormBtn = $("#submitFormBtn");
+                    const collapseFilterForm = $("#collapseFilterForm");
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+                            submitFormBtn.prop('disabled', true);
+                            submitFormBtn.html("<i class='fa fa-spinner fa-spin'></i>");
+                        },
+                        success: function (resp) {
+                            submitFormBtn.prop('disabled', false);
+                            collapseFilterForm.collapse('hide')
+                            submitFormBtn.html("पेश गर्नुहोस्");
+                            $('#report-content').removeClass('d-none');
+                            $('#report-data').html(resp.view)
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            submitFormBtn.prop('disabled', false)
+                            submitFormBtn.html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    });
+                });
+
+                function toastMessage(type, title) {
+                    swal.fire({
+                        title: title,
+                        toast: true,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        width: 450,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: type,
+                    });
+                }
+            });
+        </script>
     @endpush
+
 @endsection
