@@ -11,20 +11,15 @@
         <span>करदाता</span>
     </a>
 </li>
+@can('invoice_access')
+    <li class="{{request()->routeIs('admin.revenue.invoice.*') ? 'active' : ''}}">
+        <a href="{{route('admin.revenue.invoice.index')}}">
+            <i class="fa fa-money-bill"></i>
+            <span>नगदी रसिद</span>
+        </a>
+    </li>
+@endcan
 
-<li class="{{request()->routeIs('admin.revenue.invoice.*') ? 'active' : ''}}">
-    <a href="{{route('admin.revenue.invoice.index')}}">
-        <i class="fa fa-money-bill"></i>
-        <span>नगदी रसिद</span>
-    </a>
-</li>
-
-<li class="{{request()->routeIs('admin.revenue.land.invoice.*') ? 'active' : ''}}">
-    <a href="{{route('admin.revenue.land.invoice.index')}}">
-        <i class="fa fa-money-bill"></i>
-        <span>मालपोत रसिदहरु</span>
-    </a>
-</li>
 
 <li class="{{request()->routeIs('admin.revenue.setting.*') ? 'active' : ''}}">
     <a href="#sidebarRevenueSetting"

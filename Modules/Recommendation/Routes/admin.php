@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Circular\Http\Controllers\Admin\RegistrationController;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
 use Modules\Recommendation\Http\Controllers\admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
+use Modules\Recommendation\Http\Controllers\admin\RegistrationController as AdminRegistrationController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -63,8 +65,10 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
     Route::resource('personalDetail', PersonalDetailController::class);
     
+    
 });
 
+Route::resource('registration', AdminRegistrationController::class);
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
 Route::get('application/recommendation/{recommendation}/print', [RecommendationController::class, 'printRecommendation'])->name('recommendation.print');
 Route::post('recommendation/{recommendation}/storeFormData', [RecommendationController::class,'formData'])->name('recommendation.storeFormData');

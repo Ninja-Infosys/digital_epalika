@@ -10,12 +10,18 @@
         <span>व्यक्तिगत विवरण</span>
     </a>
 </li>
-<li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
+<li class="{{request()->is('admin/recommendation/registration*') ? 'active' : ''}}">
+    <a href="{{route('admin.recommendation.registration.index')}}">
+        <i class="fa fa-id-card"></i>
+        <span>सिफारिस</span>
+    </a>
+</li>
+{{-- <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
     <a href="{{route('admin.recommendation.recommendation.list')}}">
         <i class="fa fa-thumbs-up"></i>
         <span>सिफारिस</span>
     </a>
-</li>
+</li> --}}
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#setting"
        {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'aria-expanded=true' : ''}}

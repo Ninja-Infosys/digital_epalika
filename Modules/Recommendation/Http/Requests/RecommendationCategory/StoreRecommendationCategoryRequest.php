@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Requests\RecommendationCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRecommendationCategoryRequest extends FormRequest
 {
@@ -15,7 +16,7 @@ class StoreRecommendationCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'recommendation_category_id' => ['required'],
+            'recommendation_category_id' => ['nullable',Rule::exists('recommendation_categories','id')->withoutTrashed()],
         ];
     }
 }

@@ -36,7 +36,6 @@ class RecommendationCategoryController extends Controller
 
     public function store(StoreRecommendationCategoryRequest $request,$type)
     {
-        
         RecommendationCategory::create($request->validated()+[
             'user_id'=>auth()->id(),
             'is_active' => RecommendationCategory::where('recommendation_category_id', $request->input('recommendation_category_id')

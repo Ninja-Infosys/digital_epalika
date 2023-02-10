@@ -24,7 +24,7 @@ class PersonalDetailController extends Controller
 
     public function store(StorePersonalDetailRequest $request)
     {
-       PersonalDetail::create($request->validated());;
+       PersonalDetail::create($request->validated());
        toast('व्यक्तिगत विवरण सफलतापूर्वक थपियो','success');
        return redirect()->route('admin.recommendation.setting.personalDetail.index');
     }
