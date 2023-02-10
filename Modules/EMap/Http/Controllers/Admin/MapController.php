@@ -110,7 +110,7 @@ class MapController extends Controller
         }]);
 
 
-        return \view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum', 'applicationFormTypeEnum'));
+        return view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum', 'applicationFormTypeEnum'));
     }
 
     public function storeTemplateData(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum): RedirectResponse

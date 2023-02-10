@@ -2,16 +2,15 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Traits\ExcelTrait;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
-use Modules\JudicialCommittee\Transformers\ComplaintApplicationResource;
+use Modules\JudicialCommittee\Transformers\Report\ComplaintApplicationResource;
 
 class ReportController extends Controller
 {
@@ -59,11 +58,17 @@ class ReportController extends Controller
             );
         }
 
-        $complaintApplications = ComplaintApplication::with($this->relations)
+        $complaintApplications = ComplaintApplication::with('fiscalYear', 'lawsuitNature')
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
             })
             ->get();
+        if (!empty($request->input('columns')['complainant_defendants'])) {
+            $complaintApplications->load('complainantDefendants.province', 'complainantDefendants.district', 'complainantDefendants.localBody');
+        }
+        if (!empty($request->input('columns')['witnesses'])) {
+            $complaintApplications->load('witnesses');
+        }
         if (!empty($request->input('columns')['related_members'])) {
             $complaintApplications->load('relatedMembers');
         }
@@ -75,21 +80,9 @@ class ReportController extends Controller
         }
 
         return response()->json([
-            'data' => ComplaintApplicationResource::collection($complaintApplications),
-            //'excelUrl' => $excelUrl
+            'data' => ComplaintApplicationResource::collection($complaintApplications)
         ]);
     }
-
-    private array $relations = [
-        'fiscalYear',
-        'lawsuitNature',
-        'complainantProvince',
-        'complainantDistrict',
-        'complainantLocalBody',
-        'defendantProvince',
-        'defendantDistrict',
-        'defendantLocalBody'
-    ];
 
     private function filterDataFromUser($q, Request $request): void
     {

@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use Modules\JudicialCommittee\Entities\DateCompensation;
 use Modules\JudicialCommittee\Entities\DateSheet;
 use Modules\JudicialCommittee\Entities\DefendantIssuedDeadline;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
@@ -25,29 +26,33 @@ trait JudicialCommitteeTemplateTrait
         [
             'title' => 'वादीको विवरण',
             'data' => [
-                'वादीको नाम' => '[@complainant_name]',
-                'वादीको उमेर' => '[@complainant_age]',
-                'अभिभावकको नाम' => '[@complainant_guardian_name]',
-                'नाता' => '[@complainant_relationship]',
-                'प्रदेश' => '[@complainant_province]',
-                'जिल्ला' => '[@complainant_district]',
-                'स्थानीय तह' => '[@complainant_local_body]',
-                'वडा नं.' => '[@complainant_ward_no]',
-                'टोल' => '[@complainant_tole]'
+                'वादीको नाम (संक्षिप्त)' => '[@complainant.brief_name]',
+                'वादीको नाम' => '[@complainant.name]',
+                'वादीको उमेर' => '[@complainant.age]',
+                'बुवाको नाम' => '[@complainant.father_name]',
+                'हजुरबुबाको नाम' => '[@complainant.grandfather_name]',
+                'पति/पत्नीको नाम' => '[@complainant.spouse_name]',
+                'प्रदेश' => '[@complainant.province]',
+                'जिल्ला' => '[@complainant.district]',
+                'स्थानीय तह' => '[@complainant.local_body]',
+                'वडा नं.' => '[@complainant.ward_no]',
+                'टोल' => '[@complainant.tole]'
             ],
         ],
         [
             'title' => 'प्रतिवादी विवरण',
             'data' => [
-                'प्रतिवादीको नाम' => '[@defendant_name]',
-                'प्रतिवादीको उमेर' => '[@defendant_age]',
-                'अभिभावकको नाम' => '[@defendant_guardian_name]',
-                'नाता' => '[@defendant_relationship]',
-                'प्रदेश' => '[@defendant_province]',
-                'जिल्ला' => '[@defendant_district]',
-                'स्थानीय तह' => '[@defendant_local_body]',
-                'वडा नं.' => '[@defendant_ward_no]',
-                'टोल' => '[@defendant_tole]'
+                'वादीको नाम (संक्षिप्त)' => '[@defendant.brief_name]',
+                'वादीको नाम' => '[@defendant.name]',
+                'वादीको उमेर' => '[@defendant.age]',
+                'बुवाको नाम' => '[@defendant.father_name]',
+                'हजुरबुबाको नाम' => '[@defendant.grandfather_name]',
+                'पति/पत्नीको नाम' => '[@defendant.spouse_name]',
+                'प्रदेश' => '[@defendant.province]',
+                'जिल्ला' => '[@defendant.district]',
+                'स्थानीय तह' => '[@defendant.local_body]',
+                'वडा नं.' => '[@defendant.ward_no]',
+                'टोल' => '[@defendant.tole]'
             ],
         ],
         [
@@ -148,6 +153,31 @@ trait JudicialCommitteeTemplateTrait
         return '';
     }
 
+    public function getDateCompensationTemplate(DateCompensation $dateCompensation): string
+    {
+        $judicialCommitteeTemplates = $this->getJudicialCommitteeTemplates();
+        $judicialTemplate = $judicialCommitteeTemplates->where('type', JudicialTemplateTypeEnum::DATE_COMPENSATION)->first();
+
+        if ($judicialTemplate) {
+            $replace = [];
+
+            $replace = array_merge(
+                $this->getComplaintApplicationReplacement(),
+                $replace,
+                [
+                    '[@dateCompensation.decision_date]' => $dateCompensation->decision_date ?? '',
+                    '[@dateCompensation.decision_subject]' => $dateCompensation->decision_subject ?? '',
+                    '[@dateCompensation.decision_time]' => $dateCompensation->decision_time ?? '',
+                    '[@dateCompensation.submitted_date]' => $dateCompensation->submitted_date ?? '',
+                ]
+            );
+
+            return Str::replace(array_keys($replace), $replace, $judicialTemplate->data);
+        }
+
+        return '';
+    }
+
     public function getDefendantIssuedDeadlineTemplate(DefendantIssuedDeadline $defendantIssuedDeadline): string
     {
         $judicialCommitteeTemplates = $this->getJudicialCommitteeTemplates();
@@ -183,7 +213,8 @@ trait JudicialCommitteeTemplateTrait
         $replace = array_merge(
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getDateCompensationReplacement(),
+            $this->getComplainantReplacement(),
+            $this->getDefendantReplacement(),
             $this->getJudicialReceiptBillReplacement()
         );
 
@@ -196,26 +227,6 @@ trait JudicialCommitteeTemplateTrait
             '[@applicant_name]' => $this->applicant_name ?? '',
             '[@applicant_phone]' => $this->applicant_phone ?? '',
             '[@applicant_address]' => $this->applicant_address ?? '',
-            //complainant detail
-            '[@complainant_name]' => $this->complainant_name ?? '',
-            '[@complainant_age]' => $this->complainant_age ?? '',
-            '[@complainant_guardian_name]' => $this->complainant_guardian_name ?? '',
-            '[@complainant_relationship]' => $this->complainant_relationship ?? '',
-            '[@complainant_province]' => $this->complainantProvince->province ?? '',
-            '[@complainant_district]' => $this->complainantDistrict->district ?? '',
-            '[@complainant_local_body]' => $this->complainantLocalBody->local_body ?? '',
-            '[@complainant_ward_no]' => $this->complainant_ward_no ?? '',
-            '[@complainant_tole]' => $this->complainant_tole ?? '',
-            //defendant detail
-            '[@defendant_name]' => $this->defendant_name ?? '',
-            '[@defendant_age]' => $this->defendant_age ?? '',
-            '[@defendant_guardian_name]' => $this->defendant_guardian_name ?? '',
-            '[@defendant_relationship]' => $this->defendant_relationship ?? '',
-            '[@defendant_province]' => $this->defendantProvince->province ?? '',
-            '[@defendant_district]' => $this->defendantDistrict->district ?? '',
-            '[@defendant_local_body]' => $this->defendantLocalBody->local_body ?? '',
-            '[@defendant_ward_no]' => $this->defendant_ward_no ?? '',
-            '[@defendant_tole]' => $this->defendant_tole ?? '',
             //complaint details
             '[@submission_no]' => $this->submission_no ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
@@ -226,6 +237,44 @@ trait JudicialCommitteeTemplateTrait
         ];
     }
 
+    private function getComplainantReplacement(): array
+    {
+        $complainants = $this->complainantDefendants->where('type', 'complainant');
+
+        return [
+            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . $complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : '',
+            '[@complainant.name]' => implode(',', $complainants->pluck('name')),
+            '[@complainant.age]' => ($complainants?->first()->age ?? ''),
+            '[@complainant.father_name]' => ($complainants?->first()->father_name ?? ''),
+            '[@complainant.grandfather_name]' => ($complainants?->first()->grandfather_name ?? ''),
+            '[@complainant.spouse_name]' => ($complainants?->first()->spouse_name ?? ''),
+            '[@complainant.province]' => ($complainants?->first()->province->province ?? ''),
+            '[@complainant.district]' => ($complainants?->first()->district->district ?? ''),
+            '[@complainant.local_body]' => ($complainants?->first()->localBody->local_body ?? ''),
+            '[@complainant.ward_no]' => ($complainants?->first()->ward_no ?? ''),
+            '[@complainant.tole]' => ($complainants?->first()->tole ?? ''),
+        ];
+    }
+
+    private function getDefendantReplacement(): array
+    {
+        $defendants = $this->complainantDefendants->where('type', 'defendant');
+
+        return [
+            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . $defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : '',
+            '[@defendant.name]' => implode(',', $defendants->pluck('name')),
+            '[@defendant.age]' => ($defendants?->first()->age ?? ''),
+            '[@defendant.father_name]' => ($defendants?->first()->father_name ?? ''),
+            '[@defendant.grandfather_name]' => ($defendants?->first()->grandfather_name ?? ''),
+            '[@defendant.spouse_name]' => ($defendants?->first()->spouse_name ?? ''),
+            '[@defendant.province]' => ($defendants?->first()->province->province ?? ''),
+            '[@defendant.district]' => ($defendants?->first()->district->district ?? ''),
+            '[@defendant.local_body]' => ($defendants?->first()->localBody->local_body ?? ''),
+            '[@defendant.ward_no]' => ($defendants?->first()->ward_no ?? ''),
+            '[@defendant.tole]' => ($defendants?->first()->tole ?? ''),
+        ];
+    }
+
     private function getJudicialReceiptBillReplacement(): array
     {
         return [
@@ -233,27 +282,6 @@ trait JudicialCommitteeTemplateTrait
             '[@judicialReceiptBill.entry_person]' => $this->judicialReceiptBill->entry_person ?? '',
             '[@judicialReceiptBill.amount]' => $this->judicialReceiptBill->amount ?? '',
             '[@judicialReceiptBill.bill_date]' => $this->judicialReceiptBill->bill_date ?? '',
-        ];
-    }
-
-    private function getDateSheetReplacement(): array
-    {
-        return [
-            '[@dateSheet.year]' => $this->dateSheet->year ?? '',
-            '[@dateSheet.case_name]' => $this->dateSheet->case_name ?? '',
-            '[@dateSheet.appearance_date]' => $this->dateSheet->appearance_date ?? '',
-            '[@dateSheet.appearance_time]' => $this->dateSheet->appearance_time ?? '',
-            '[@dateSheet.submitted_date]' => $this->dateSheet->submitted_date ?? ''
-        ];
-    }
-
-    private function getDateCompensationReplacement(): array
-    {
-        return [
-            '[@dateCompensation.decision_date]' => $this->dateCompensation->decision_date ?? '',
-            '[@dateCompensation.decision_subject]' => $this->dateCompensation->decision_subject ?? '',
-            '[@dateCompensation.decision_time]' => $this->dateCompensation->decision_time ?? '',
-            '[@dateCompensation.submitted_date]' => $this->dateCompensation->submitted_date ?? '',
         ];
     }
 

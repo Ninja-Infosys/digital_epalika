@@ -1,28 +1,31 @@
-<div class="flex-container" style="display:flex">
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:0rem; margin-right:4rem; margin-top:0rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:80px; width:110px" /></div>
-
-    <div class="item-auto" style="flex:1 1 auto; margin-right:1rem; margin-top:0rem; text-align:center"><strong><span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका</span><br />
-            <span style="font-size:16px">नगर कार्यपालिका कार्यलय</span></strong><br />
-        <span style="font-size:14px">नेपालगन्ज,बाँके<br />
-लुम्बिनी प्रदेश,नेपाल</span></div>
-
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:0rem; margin-top:0rem; text-align:center">
-        <div class="photo" style="border:1px solid black; height:6rem; width:6rem">&nbsp;
-            <h5><span style="font-size:16px"><strong>फोटो</strong></span></h5>
-        </div>
-    </div>
-</div>
-
-<div class="date">
-    <div class="mt-2 row">
-        <div class="col-md-6"><span style="font-size:16px">पत्र सं: ......................<br />
-चलानी नं: ....................</span></div>
-
-        <div class="col-md-6 text-end" style="text-align:right"><span style="font-size:16px">मिति: ..............................</span></div>
-    </div>
-</div>
-
-<h4 style="text-align:center"><span style="font-size:24px"><strong>प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</strong></span></h4>
+{!! letterHead() !!}
+<figure class="table">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <p>
+                    पत्र सं: ......................
+                </p>
+                <p>
+                    चलानी नं: .................…
+                </p>
+            </td>
+            <td>
+                <p style="text-align:right;">
+                    मिति: ..............................
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</figure>
+<p>
+    &nbsp;
+</p>
+<h4 style="text-align:center;">
+    <strong>प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</strong>
+</h4>
 
 <div class="top" style="text-align:justify"><span style="font-size:16px"><strong>&emsp;&emsp;&emsp;</strong></span><span style="font-size:14px">&emsp;</span><span style="font-size:16px">तपाई श्री/श्रीमती ................... ले जग्गा धनी <u>[@landOwner.name]</u> को नाममा दर्ता रहेको ने. उ.म.न.पा. वडा नं <u>[@landDetail.ward_no]</u> टोल <u>[@landDetail.tole]</u> मा रहेको साविक <u>[@landDetail.former_ward_no]</u> गा.वि.स. वडा नं <u>[@landDetail.ward_no]</u> किता नं <u>[@landDetail.plot_no]</u> ज.वि.जम्मा 24 को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति २०७९-०७-२० मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा &#39;स्थानीय सरकार संचालन ऐन, २०७४&#39; को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति २०७९-०७-२५ को निर्माण बमोजिम प्रथम चरणमा &#39;आधारभूत निर्माण मापदण्ड-२०७२&#39; तथा &#39;राष्ट्रिय भवन निर्माण संहिता-२०६०&#39; बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।</span></div>
 

@@ -1,20 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintDecisionController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintLogController;
-use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintSubjectController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateCompensationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateSheetController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DefendantIssuedDeadlineController;
-use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialCommitteeTemplateController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialReceiptBillController;
-use Modules\JudicialCommittee\Http\Controllers\Admin\LawsuitNatureController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ReportController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\Setting\ComplaintSubjectController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\Setting\JudicialCommitteeTemplateController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\Setting\LawsuitNatureController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\WrittenAnswerController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');

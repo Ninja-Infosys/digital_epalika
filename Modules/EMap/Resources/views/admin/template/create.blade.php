@@ -22,138 +22,118 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
-                        <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> टेम्प्लेट सूची
-                        </a>
-                    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="header-title mb-0">टेम्प्लेट थप्नुहोस्</h4>
+                    <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
+                       class="btn btn-sm btn-outline-primary">
+                        <i class="fa fa-list"></i> टेम्प्लेट सूची
+                    </a>
                 </div>
-                <div class="card-body">
-                    <form action="{{route('emap.admin.eMapTemplate.store',$noticeTypeEnum)}}"
-                          method="post"
-                          enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="title" class="form-label">शिर्षक *</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value="{{old('title')}}"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="शिर्षक "
-                                />
-                                @error('title')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-2">
-                                <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
-                                <select name="type" id="type" class="form-select">
-                                    <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
-                                        <option {{old('type')==$type->value ? 'selected':''}}
-                                                value="{{$type->value}}">{{$type->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('type')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="row">
-
-                                @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
-                                    <div class="col-md-12 mt-1">
-                                        <h6>{{$template['title'] ?? ''}}</h6>
-                                    </div>
-                                    <div class="col-md-12">
-                                        @foreach($template['data'] as $key=>$templateValue)
-                                            <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                               onclick="copyText('{{$templateValue}}')">
-                                                {{$key}}
-                                            </a>
-                                        @endforeach
-                                    </div>
+            </div>
+            <div class="card-body">
+                <form action="{{route('emap.admin.eMapTemplate.store',$noticeTypeEnum)}}"
+                      method="post"
+                      enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="title" class="form-label">शिर्षक *</label>
+                            <input
+                                type="text"
+                                name="title"
+                                value="{{old('title')}}"
+                                class="form-control @error('title') is-invalid @enderror"
+                                id="title"
+                                placeholder="शिर्षक"
+                            />
+                            @error('title')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
+                            <select name="type" id="type" class="form-select">
+                                <option value="">--- छान्नुहोस् ---</option>
+                                @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
+                                    <option {{old('type')==$type->value ? 'selected':''}}
+                                            value="{{$type->value}}">{{$type->label()}}
+                                    </option>
                                 @endforeach
-                                <div class="col-md-12 mt-1">
-                                    <h6>Static Template</h6>
+                            </select>
+                            @error('type')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
+                                <div class="mt-2">
+                                    <h4>{{$template['title'] ?? ''}} :</h4>
+                                    <div class="button-list">
+                                    @foreach($template['data'] as $key=>$templateValue)
+                                            <button type="button" class="btn btn-outline-primary btn-xs"
+                                                    onclick="copyText('{{$templateValue}}')">
+                                                {{$key}}
+                                            </button>
+                                    @endforeach
+                                    </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="level">
-                                        प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="superstructure">
-                                        भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="construction-completion-certificate">
-                                        भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="naksa_certificate">
-                                        नक्सा प्रमाणित प्रमाण-पत्र
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <label for="data" class="form-label">डाटा *</label>
-                                <textarea name="data"
-                                          id="data"
-                                          cols="30" rows="10"
-                                          class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
-                                @error('data')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                            @endforeach
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <h4>Static Template :</h4>
+                            <div class="button-list">
+                            <button class="btn btn-outline-primary btn-xs getTemplate"
+                                    data-bs-type="level">
+                                प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र
+                            </button>
+                            <button class="btn btn-outline-primary btn-xs getTemplate"
+                                    data-bs-type="superstructure">
+                                भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)
+                            </button>
+                            <button class="btn btn-outline-primary btn-xs getTemplate"
+                                    data-bs-type="construction-completion-certificate">
+                                भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र
+                            </button>
+                            <button class="btn btn-outline-primary btn-xs getTemplate"
+                                    data-bs-type="naksa_certificate">
+                                नक्सा प्रमाणित प्रमाण-पत्र
+                            </button>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            Save
-                        </button>
-                    </form>
-                </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="data" class="form-label">डाटा *</label>
+                            <textarea name="data"
+                                      id="data"
+                                      cols="30" rows="10"
+                                      class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
+                            @error('data')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Save
+                    </button>
+                </form>
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
         <script>
-
             $(document).ready(function () {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
                 $('.getTemplate').on('click', function (event) {
                     event.preventDefault();
-
                     const button = event.target
-                    // Extract info from data-bs-* attributes
                     const type = button.getAttribute('data-bs-type')
-
                     $.ajax({
                         type: "POST",
                         url: "{{route('emap.admin.template-emap.get-static-template')}}",
@@ -161,7 +141,7 @@
                             type: type
                         },
                         success: function (resp) {
-                            CKEDITOR.instances.data.setData(resp);
+                            editor.setData(resp);
                         },
                         error: function () {
                             alert("Something Went Wrong");

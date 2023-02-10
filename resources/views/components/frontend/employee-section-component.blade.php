@@ -6,7 +6,7 @@
                     @foreach ($empChunk as $employee)
                         <div class="emp-card d-flex align-items-center p-1 rounded border">
                             <div class="flex-shrink-0">
-                                <img src="{{ $employee->photo_url }}" class="rounded" alt="{{ $employee->name }}" height="120">
+                                <img src="{{ $employee->photo_url }}" class="rounded" alt="{{ $employee->name }}" width="100" height="120">
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <h5>{{ $employee->name }}</h5>
