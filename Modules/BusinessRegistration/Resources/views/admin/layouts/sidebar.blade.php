@@ -31,6 +31,11 @@
                     <span>रिपोर्ट</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/businessRegistration/report/business-registration-book') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.business-registration-book')}}">
+                    <span>रिपोर्ट १</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

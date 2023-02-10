@@ -2,7 +2,9 @@
 
 namespace Modules\Recommendation\Http\Requests\RecommendationCategory;
 
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRecommendationCategoryRequest extends FormRequest
 {
@@ -15,7 +17,7 @@ class UpdateRecommendationCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'recommendation_category_id' => ['nullable'],
+            'recommendation_category_id' => ['nullable',Rule::exists('recommendation_categories','id')->withoutTrashed()],
         ];
     }
 }

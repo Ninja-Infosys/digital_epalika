@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-{{--    <title>{{config('app.name','Digital E-Palika')}}</title>--}}
+    <title>{{config('app.name','Digital E-Palika')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="A complete solution for a digital palika." name="description"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
