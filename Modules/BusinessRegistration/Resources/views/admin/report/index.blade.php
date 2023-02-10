@@ -31,13 +31,13 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name="व्यवसाय दर्ता रिपोर्ट"
+                                file-name="प्रतिवेदन रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
                                 target-element="report-table"
-                                title="व्यवसाय दर्ता रिपोर्ट"
-                                :header-required="true"
+                                title="प्रतिवेदन रिपोर्ट"
+
                             />
                         </div>
                     </div>
