@@ -5,45 +5,58 @@ namespace Modules\Recommendation\Http\Controllers\admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\Circular\Entities\Registration;
+use Modules\Recommendation\Entities\PersonalDetail;
+use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RegistrationDetail;
+use Modules\Recommendation\Http\Requests\Registration\StoreRegistrationRequest;
+use Modules\Recommendation\Http\Requests\Registration\UpdateRegistrationRequest;
 
 class RegistrationController extends Controller
 {
     public function index()
     {
-        $registrations = RegistrationDetail::all();
-        return view('recommendation::admin.registration.index', compact('registrations'));
+        $registrationDetails = RegistrationDetail::all();
+        return view('recommendation::admin.registration.index', compact('registrationDetails'));
     }
 
     public function create()
     {
-        return view('recommendation::admin.registration.create');
+        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
+        $personaldetails = PersonalDetail::all();
+        return view('recommendation::admin.registration.create', compact('recommendationCategories','personaldetails'));
     }
 
-    public function store(Request $request)
+    public function store(StoreRegistrationRequest $request)
     {
         RegistrationDetail::create($request->validated());
        toast('दर्ता सफलतापूर्वक गरियो','success');
-       return redirect()->route('admin.recommendation.registration.index');
+       return redirect()->route('admin.recommendation.registrationDetail.index');
     }
 
-    public function show($id)
+    public function show(RegistrationDetail $registrationDetail)
     {
-        return view('recommendation::show');
+        return view('recommendation::admin.registration.show', compact('registrationDetail'));
     }
 
-    public function edit($id)
+    public function edit(RegistrationDetail $registrationDetail)
     {
-        return view('recommendation::edit');
+        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
+        $personaldetails = PersonalDetail::all();
+        return view('recommendation::admin.registration.edit', compact('registrationDetail','recommendationCategories','personaldetails'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRegistrationRequest $request, RegistrationDetail $registrationDetail)
     {
-        //
+        $registrationDetail->update($request->validated());
+        toast('दर्ता विवरण सफलतापूर्वक गरियो','success');
+         return redirect()->route('admin.recommendation.registrationDetail.index');
     }
 
-    public function destroy($id)
+    public function destroy(RegistrationDetail $registrationDetail)
     {
-        //
+        $registrationDetail->delete();
+        toast('व्यक्तिगत विवरण सफलतापूर्वक मेटियो','success');
+        return back();
     }
 }

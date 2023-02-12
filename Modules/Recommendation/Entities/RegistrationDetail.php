@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,11 +21,22 @@ class RegistrationDetail extends Model
    protected $fillable = [
     'user_id',
     'registration_no',
-    'date',
+    'date_ne',
+    'date_en',
     'application',
     'recommendation',
     'recommendation_data',
     'personal_detail_id',
     'recommendation_category_id'
    ];
+   public function user(){
+    return $this->belongsTo(User::class);
+   }
+   public function personalDetail(){
+    return $this->belongsTo(PersonalDetail::class);
+   }
+   public function recommendationCategory(){
+    return $this->belongsTo(RecommendationCategory::class);
+   }
 }
+

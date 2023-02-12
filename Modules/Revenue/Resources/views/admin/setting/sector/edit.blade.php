@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">करदाताको प्रकार</li>
+                        <li class="breadcrumb-item active">क्षेत्र</li>
                     </ol>
                 </div>
-                <h4 class="page-title">करदाताको प्रकार</h4>
+                <h4 class="page-title">क्षेत्र</h4>
             </div>
         </div>
     </div>
@@ -23,15 +23,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ करदाताको प्रकार थप्नुहोस्</h4>
-                        <a href="{{route('admin.revenue.setting.taxPayerType.index')}}"
+                        <h4 class="header-title">क्षेत्र अपडेट</h4>
+                        <a href="{{route('admin.revenue.setting.sector.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> करदाताको प्रकार सूची
+                            <i class="fa fa-list"></i> क्षेत्र सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.revenue.setting.taxPayerType.update', $taxPayerType)}}" method="post">
+                    <form action="{{route('admin.revenue.setting.sector.update', $sector)}}" method="post">
                         @csrf
                         @method('PATCH')
                         <div class="row">
@@ -40,7 +40,7 @@
                                 <input
                                     type="text"
                                     name="title"
-                                    value="{{old('title', $taxPayerType->title)}}"
+                                    value="{{old('title', $sector->title)}}"
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
@@ -49,21 +49,6 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <label for="code" class="form-label">कोड *</label>
-                                <input
-                                    type="text"
-                                    name="code"
-                                    value="{{old('code', $taxPayerType->code)}}"
-                                    class="form-control @error('code') is-invalid @enderror"
-                                    id="code"
-                                    placeholder="कोड"
-                                />
-                                @error('code')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
                         </div>
 
                         <button type="submit" class="btn btn-primary">

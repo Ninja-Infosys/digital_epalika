@@ -42,9 +42,9 @@ trait JudicialCommitteeTemplateTrait
         [
             'title' => 'प्रतिवादी विवरण',
             'data' => [
-                'वादीको नाम (संक्षिप्त)' => '[@defendant.brief_name]',
-                'वादीको नाम' => '[@defendant.name]',
-                'वादीको उमेर' => '[@defendant.age]',
+                'प्रतिवादीको नाम (संक्षिप्त)' => '[@defendant.brief_name]',
+                'प्रतिवादीको नाम' => '[@defendant.name]',
+                'प्रतिवादीको उमेर' => '[@defendant.age]',
                 'बुवाको नाम' => '[@defendant.father_name]',
                 'हजुरबुबाको नाम' => '[@defendant.grandfather_name]',
                 'पति/पत्नीको नाम' => '[@defendant.spouse_name]',
@@ -240,9 +240,10 @@ trait JudicialCommitteeTemplateTrait
     private function getComplainantReplacement(): array
     {
         $complainants = $this->complainantDefendants->where('type', 'complainant');
+        $complainants->load('province','district','localBody');
 
         return [
-            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . $complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : '',
+            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : ''),
             '[@complainant.name]' => implode(',', $complainants->pluck('name')->toArray()),
             '[@complainant.age]' => ($complainants?->first()->age ?? ''),
             '[@complainant.father_name]' => ($complainants?->first()->father_name ?? ''),
@@ -259,9 +260,10 @@ trait JudicialCommitteeTemplateTrait
     private function getDefendantReplacement(): array
     {
         $defendants = $this->complainantDefendants->where('type', 'defendant');
+        $defendants->load('province','district','localBody');
 
         return [
-            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . $defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : '',
+            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : ''),
             '[@defendant.name]' => implode(',', $defendants->pluck('name')->toArray()),
             '[@defendant.age]' => ($defendants?->first()->age ?? ''),
             '[@defendant.father_name]' => ($defendants?->first()->father_name ?? ''),

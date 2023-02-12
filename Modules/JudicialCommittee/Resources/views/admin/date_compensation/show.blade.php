@@ -28,11 +28,11 @@
                         <h4 class="header-title">तारिख भरपाई</h4>
                         <div class="d-flex justify-content-between">
                             <x-print-button
-                                target-element="printDateCompensation"
+                                target-element="print-content"
                                 title="तारिख भरपाई"
                             />
                             @can('dateCompensation_edit')
-                                <a data-bs-type="edit" href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.create', $complaintApplication) }}"
+                                <a data-bs-type="edit" href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.edit', [$complaintApplication,$complaintApplication]) }}"
                                    class="btn btn-sm btn-outline-warning mx-1 {{get_setting('Pin')?'confirm_pin':''}}">
                                     <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
                                 </a>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printDateCompensation" class="ckEditor">
+                    <div id="print-content">
                         {!! $complaintApplication->getDateCompensationTemplate($dateCompensation) !!}
                     </div>
                 </div>

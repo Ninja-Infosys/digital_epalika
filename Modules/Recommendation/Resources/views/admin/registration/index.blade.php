@@ -23,7 +23,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">दर्ता सूची</h4>
                         @can('branch_create')
-                            <a href="{{ route('admin.recommendation.registration.create') }}"
+                            <a href="{{ route('admin.recommendation.registrationDetail.create') }}"
                                 class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ दर्ता गर्नुहोस
                             </a>
@@ -39,27 +39,35 @@
                                     <th>दर्ता नं</th>
                                     <th>सिफारिस</th>
                                     <th>मिति</th>
+                                    <th>फोटो</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($registrations as $registrationDetail)
+                                @foreach ($registrationDetails as $registrationDetail)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $registrationDetail->registration_no }}</td>
                                         <td>
                                             {{ $registrationDetail->recommendation }}
                                         </td>
-                                      <td>{{ $registrationDetail->date }}</td>
+                                      <td>{{ $registrationDetail->date_ne }}</td>
+                                      <td>{{ $registrationDetail->application }}</td>
                                         <td>
                                             <a data-bs-type="edit"
-                                                href="{{ route('admin.recommendation.registration.edit', $registrationDetail) }}"
+                                                href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
+                                                class="btn btn-xs btn-outline-warning"
+                                                title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a data-bs-type="edit"
+                                                href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
                                                 class="btn btn-xs btn-outline-warning"
                                                 title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                             <form
-                                                action="{{ route('admin.recommendation.registration.destroy',$registrationDetail) }}"
+                                                action="{{ route('admin.recommendation.registrationDetail.destroy',$registrationDetail) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')

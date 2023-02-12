@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Revenue\Entities\Sector;
+use Modules\Revenue\Http\Requests\StoreSectorRequest;
+use Modules\Revenue\Http\Requests\UpdateSectorRequest;
 
 class SectorController extends Controller
 {
@@ -19,33 +21,33 @@ class SectorController extends Controller
     public function create()
     {
         $this->checkAuthorization('sector_create');
-        return view('revenue::admin.setting.tax-payer-type.create');
+        return view('revenue::admin.setting.sector.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreSectorRequest $request)
     {
         $this->checkAuthorization('sector_create');
 
-        Sector::create($request->validated() + ['user_id' => auth()->id()]);
+        Sector::create($request->validated());
 
-        toast('करदाताको प्रकार सफलतापुर्वक राखियो', 'success')->autoClose(2000)->timerProgressBar();
+        toast('क्षेत्र सफलतापुर्वक राखियो', 'success')->autoClose(2000)->timerProgressBar();
         return redirect()->back();
     }
 
     public function edit(Sector $sector)
     {
         $this->checkAuthorization('sector_edit');
-        return view('revenue::admin.setting.tax-payer-type.edit', compact('taxPayerType'));
+        return view('revenue::admin.setting.sector.edit', compact('sector'));
     }
 
-    public function update(Request $request, Sector $sector)
+    public function update(UpdateSectorRequest $request, Sector $sector)
     {
         $this->checkAuthorization('sector_edit');
 
         $sector->update($request->validated());
 
-        toast('करदाताको प्रकार सफलतापुर्वक अपडेट भयो', 'success')->autoClose(2000)->timerProgressBar();
-        return redirect()->route('admin.revenue.setting.taxPayerType.index');
+        toast('क्षेत्र सफलतापुर्वक अपडेट भयो', 'success')->autoClose(2000)->timerProgressBar();
+        return redirect()->route('admin.revenue.setting.sector.index');
     }
 
     public function destroy(Sector $sector)
@@ -54,7 +56,7 @@ class SectorController extends Controller
 
         $sector->delete();
 
-        toast('करदाताको प्रकार सफलतापुर्वक हटाइयो', 'success')->autoClose(2000)->timerProgressBar();
-        return redirect()->route('admin.revenue.setting.taxPayerType.index');
+        toast('क्षेत्र सफलतापुर्वक हटाइयो', 'success')->autoClose(2000)->timerProgressBar();
+        return redirect()->route('admin.revenue.setting.sector.index');
     }
 }

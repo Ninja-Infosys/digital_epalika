@@ -62,6 +62,13 @@
                     </a>
                 </li>
             @endcan
+            @can('place_access')
+                <li class="{{request()->routeIs('admin.revenue.setting.place.*') ? 'active' : ''}}">
+                    <a href="{{route('admin.revenue.setting.place.index')}}">
+                        <span>जग्गाको मुल्यांकन</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>
