@@ -64,7 +64,7 @@
                     <x-charts.pie-chart-component
                         id="bar-chart15"
                         chartType="pie"
-                        chartName=" आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} दर्ता भएका व्यवसायहरु"
+                        chartName=" आर्थिक वर्ष {{$officeSetting->fiscalYear->title??''}} दर्ता भएका व्यवसायहरु"
                         :labels="$businessRegistrationAccordingToFiscalYear['labels']"
                         :dataSets="$businessRegistrationAccordingToFiscalYear['dataSets']"
                     />
@@ -85,17 +85,34 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="bar-chart17"
-                        chartName=" आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} व्यवसायको अवस्था"
-                        :labels="$businessDetailAccordingToBusinessType['labels']"
-                        :dataSets="$businessDetailAccordingToBusinessType['dataSets']"
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <x-charts.bar-chart-component
+                            id="ward-wise-chart"
+                            chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार  व्यवसाय दर्ता विवरण"
+                            :labels="$wardWise['labels']"
+                            :dataSets="$wardWise['dataSets']"
+                            :displayLegend="false"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    />
-
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <x-charts.bar-chart-component
+                            id="fiscalYear-wise-chart"
+                            chartTitle=" आर्थिक वर्ष अनुसार  व्यवसाय दर्ता विवरण"
+                            :labels="$fiscalYearWise['labels']"
+                            :dataSets="$fiscalYearWise['dataSets']"
+                            :displayLegend="false"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
