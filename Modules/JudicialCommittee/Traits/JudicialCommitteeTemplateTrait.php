@@ -240,6 +240,7 @@ trait JudicialCommitteeTemplateTrait
     private function getComplainantReplacement(): array
     {
         $complainants = $this->complainantDefendants->where('type', 'complainant');
+        $complainants->load('province','district','localBody');
 
         return [
             '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : ''),
@@ -259,6 +260,7 @@ trait JudicialCommitteeTemplateTrait
     private function getDefendantReplacement(): array
     {
         $defendants = $this->complainantDefendants->where('type', 'defendant');
+        $defendants->load('province','district','localBody');
 
         return [
             '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : ''),

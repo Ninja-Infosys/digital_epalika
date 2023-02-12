@@ -27,10 +27,10 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">निस्सा सनाखत </h4>
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn btn-sm btn-outline-primary" type="button"
-                                    onclick="print('printJudicialReceiptBill')">
-                                <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                            </button>
+                            <x-print-button
+                                title="निस्सा सनाखत"
+                                target-element="printJudicialReceiptBill"
+                            />
                             @can('judicialReceiptBill_edit')
                                 <a data-bs-type="edit" href="{{ route('admin.judicialCommittee.complaintApplication.judicialReceiptBill.create', $complaintApplication) }}"
                                    class="btn btn-sm btn-outline-warning mx-1 {{get_setting('Pin')?'confirm_pin':''}}">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printJudicialReceiptBill" class="ckEditor">
+                    <div id="printJudicialReceiptBill">
                         {!! $complaintApplication->getSpecificTemplateData(
                             \Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::JUDICIAL_RECEIPT_BILL,
                         ) !!}
@@ -54,16 +54,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/ckeditor.js') }}"></script>
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/print.js') }}"></script>
-
-
-        <script>
-            function print(editorName) {
-                const editor = CKEDITOR.instances[editorName];
-                editor.execCommand('print');
-            }
-        </script>
-    @endpush
 @endsection
