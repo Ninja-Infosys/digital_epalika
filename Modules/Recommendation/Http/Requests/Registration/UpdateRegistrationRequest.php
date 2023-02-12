@@ -15,8 +15,9 @@ class UpdateRegistrationRequest extends FormRequest
     public function rules():array
     {
         return [
-            'date'=>['required'],
-            'application'=>['required'],
+            'date_ne'=>['required'],
+            'date_en'=>['required'],
+            'application'=>['required','image'],
             'recommendation'=>['required'],
             'recommendation_data'=>['required'],
             'personal_detail_id'=>['nullable',Rule::exists('personal_details','id')->withoutTrashed()],

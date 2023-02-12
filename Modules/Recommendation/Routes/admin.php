@@ -68,7 +68,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     
 });
 
-Route::resource('registration', AdminRegistrationController::class);
+Route::resource('registrationDetail', AdminRegistrationController::class);
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
 Route::get('application/recommendation/{recommendation}/print', [RecommendationController::class, 'printRecommendation'])->name('recommendation.print');
 Route::post('recommendation/{recommendation}/storeFormData', [RecommendationController::class,'formData'])->name('recommendation.storeFormData');

@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Observers;
+namespace Modules\Recommendation\Observers;
 
 
-use Modules\Recommendation\Entities\RegistrationDetail as EntitiesRegistrationDetail;
+use Modules\Recommendation\Entities\RegistrationDetail;
 
 class RegistrationDetailObserver
 {
-    public function created(EntitiesRegistrationDetail $registrationDetail)
+    public function creating(RegistrationDetail $registrationDetail)
     {
-        $registrationDetail->reg_no = rand(0,999);
-        $registrationDetail->user_id = auth()->id();   
-    }
-
- 
+        $registrationDetail->registration_no = rand(0,999);
+        $registrationDetail->user_id = auth()->id();
+    } 
 }
