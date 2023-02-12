@@ -3,9 +3,11 @@
 namespace Modules\Plan\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Models\RevenueSetting;
 use App\Models\Settings\Units\Type;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 use Modules\EMap\Entities\MapSetting;
 
@@ -14,11 +16,11 @@ class RevenueSettingController extends Controller
     public function index()
     {
         $this->checkAuthorization('revenueSetting_access');
-        $mapSetting = MapSetting::first();
+        $revenueSetting = RevenueSetting::first();
         $unitTypes = Type::all();
         $units = Unit::all();
 
-        return view('emap::admin.setting.index', compact('mapSetting', 'unitTypes', 'units'));
+        return view('revenue::admin.setting.index', compact('revenueSetting', 'unitTypes', 'units'));
     }
 
     public function store(Request $request)
@@ -29,12 +31,14 @@ class RevenueSettingController extends Controller
             'land_measurement_standard_id' => ['nullable', Rule::exists('units', 'id')->withoutTrashed()],
         ]);
 
-        MapSetting::updateOrCreate([
+        RevenueSetting::updateOrCreate([
             'id' => 1,
         ], $data);
 
+        Cache::forget('revenue_setting');
+
         toast('सेटिंग अद्यावधिक गरियो', 'success');
 
-        return redirect(route('emap.admin.mapSetting.index'));
+        return redirect(route('admin.revenue.setting.index'));
     }
 }
