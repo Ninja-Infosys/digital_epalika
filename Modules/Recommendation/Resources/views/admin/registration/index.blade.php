@@ -52,7 +52,9 @@
                                             {{ $registrationDetail->recommendation }}
                                         </td>
                                       <td>{{ $registrationDetail->date_ne }}</td>
-                                      <td>{{ $registrationDetail->application }}</td>
+                                      <td>
+                                          <img src="{{ $registrationDetail->application }}" alt="{{$registrationDetail->registration_no}}" height="60">
+                                      </td>
                                         <td>
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
@@ -71,7 +73,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

@@ -41,7 +41,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-4 mb-2">
-                                    <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरणआ.ई.डी</label>
+                                    <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण</label>
                                     <select id="personal_detail_id" name="personal_detail_id" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach ($personaldetails as $personaldetail)
@@ -55,7 +55,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="recommendation_category_id" class="form-label">सिफारिस आ.ई.डी *</label>
+                                    <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
                                     <select id="recommendation_category_id" name="recommendation_category_id"
                                         class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
@@ -71,12 +71,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <x-date-input-component 
-                                    name-ne="date_ne" label-ne="नेपाली मिति *" 
-                                    name-en="date_en" label-en="English Date" 
-                                    :getTodayDate="false" 
-                                    :editDateNe="$registrationDetail->date_ne" 
-                                    :editDateEn="$registrationDetail->date_en" 
+                                    <x-date-input-component
+                                    name-ne="date_ne" label-ne="नेपाली मिति *"
+                                    name-en="date_en" label-en="English Date"
+                                    :getTodayDate="false"
+                                    :editDateNe="$registrationDetail->date_ne"
+                                    :editDateEn="$registrationDetail->date_en"
                                     />
                                 </div>
                                 <div class="col-md-12 mb-2">

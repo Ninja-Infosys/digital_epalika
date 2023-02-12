@@ -37,12 +37,12 @@
                             <legend><h4 class="text-info">दर्ता फाराम</h4></legend>
                             <div class="row">
                                 <div class="col-md-4 mb-2">
-                                    <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरणआ.ई.डी</label>
+                                    <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण</label>
                                     <select id="personal_detail_id" name="personal_detail_id" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach($personaldetails as $personaldetail)
                                             <option
-                                                {{$personaldetail->value==old('personal_detail_id') ? 'selected' : ''}}
+                                                {{$personaldetail->id==old('personal_detail_id') ? 'selected' : ''}}
                                                 value="{{$personaldetail->id}}">{{$personaldetail->name}}</option>
                                         @endforeach
                                     </select>
@@ -51,12 +51,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="recommendation_category_id" class="form-label">सिफारिस आ.ई.डी *</label>
+                                    <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
                                     <select id="recommendation_category_id" name="recommendation_category_id" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach($recommendationCategories as $recommendationCategory)
                                             <option
-                                                {{$recommendationCategory->value==old('recommendation_category_id') ? 'selected' : ''}}
+                                                {{$recommendationCategory->id==old('recommendation_category_id') ? 'selected' : ''}}
                                                 value="{{$recommendationCategory->id}}">{{$recommendationCategory->title}}</option>
                                         @endforeach
                                     </select>
@@ -66,19 +66,20 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <x-date-input-component
-                                        name-ne="date_ne" label-ne="नेपाली मिति *"
+                                        get-today-date="{{false}}"
+                                        name-ne="date_ne" label-ne="मिति*"
                                     name-en="date_en" label-en="English Date"
                                     />
                                 </div>
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="application" class="form-label">डकुमेन्ट </label>
                                     <input
-                                    id="application" name="application" type="file">
+                                    id="application" name="application" type="file" class="form-control">
                                     @error('application')
                                     <p class="text-red-600">{{ $message }}</p>
                                 @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="recommendation" class="form-label">सिफारिस *</label>
                                     <input
                                         type="text"

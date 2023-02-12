@@ -63,7 +63,6 @@
                                             <a href="{{route('admin.recommendation.setting.recommendationCategory.updatestatus',[$type,$recommendationCategory])}}">
                                                 <i class="fa fa-2x {{ $recommendationCategory->is_active ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
-                                          
                                         </td>
                                         <td>
                                             <a class="btn btn-xs btn-outline-warning" href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory]) }}">
@@ -81,7 +80,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 @if(!$recommendationCategory->status)
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                                 @endif
