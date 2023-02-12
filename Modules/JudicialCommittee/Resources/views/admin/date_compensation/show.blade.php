@@ -28,7 +28,7 @@
                         <h4 class="header-title">तारिख भरपाई</h4>
                         <div class="d-flex justify-content-between">
                             <x-print-button
-                                target-element="printDateCompensation"
+                                target-element="print-content"
                                 title="तारिख भरपाई"
                             />
                             @can('dateCompensation_edit')
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printDateCompensation" class="ckEditor">
+                    <div id="print-content">
                         {!! $complaintApplication->getDateCompensationTemplate($dateCompensation) !!}
                     </div>
                 </div>

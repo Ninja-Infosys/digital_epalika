@@ -26,11 +26,11 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रतिवादी म्याद जारी</h4>
-                        <div class="d-flex justify-content-between">
-                            <button class="mx-1 btn btn btn-sm btn-outline-primary" type="button"
-                                    onclick="print('printDefendantIssuedDeadline')">
-                                <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                            </button>
+                        <div class="d-flex gap-1 justify-content-between">
+                            <x-print-button
+                                title="प्रतिवादी म्याद जारी"
+                                target-element="print-content"
+                            />
                             <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"> दर्ता भएका उजुरी</i>
@@ -39,23 +39,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printDefendantIssuedDeadline" class="ckEditor">
+                    <div id="print-content">
                         {!! $complaintApplication->getDefendantIssuedDeadlineTemplate($defendantIssuedDeadline) !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/ckeditor.js') }}"></script>
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/print.js') }}"></script>
-
-
-        <script>
-            function print(editorName) {
-                const editor = CKEDITOR.instances[editorName];
-                editor.execCommand('print');
-            }
-        </script>
-    @endpush
 @endsection
