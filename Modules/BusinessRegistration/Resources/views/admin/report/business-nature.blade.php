@@ -102,9 +102,9 @@
                                 </tr>
                                 </thead>
                                 <tbody id="report-data">
-
                                 </tbody>
                             </table>
+                            <p id="year"></p>
                         </div>
                     </div>
                 </div>
@@ -143,6 +143,7 @@
                             submitFormBtn.html("पेश गर्नुहोस्");
                             $('#report-content').removeClass('d-none');
                             $('#report-data').html(resp.view)
+                            $('#year').html("आर्थिक बर्ष " + resp.fiscal_years.toString() + " मा " + resp.total + " वटा व्यवसाय दर्ता भएका छन !")
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)
