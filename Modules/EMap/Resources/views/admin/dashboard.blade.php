@@ -133,7 +133,7 @@
                                 <h4 class="header-title mb-0">Mixed Chart - Line & Area</h4>
                             </div>
                             <div class="card-body">
-                                    <div id="apex-mixed-1" class="apex-charts pt-3" data-colors="#CED4DC,#6658dd"></div>
+                                    <div id="apex-mixed-1" class="apex-charts pt-3" data-chart-url="test-1" data-colors="#CED4DC,#6658dd"></div>
                             </div> <!-- end card-body -->
                         </div> <!-- end card-->
                     </div> <!-- end col-->
@@ -143,10 +143,19 @@
                                 <h4 class="header-title mb-0">Simple Pie Chart</h4>
                             </div>
                             <div class="card-body">
-                                    <div id="apex-pie-1" class="apex-charts pt-3" data-colors="#6658dd,#4fc6e1,#4a81d4,#00b19d,#f1556c"></div>
-                            </div> <!-- end card-body -->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
+                                    <div id="apex-pie-1" class="apex-charts pt-3"
+
+                                         data-chart-url="urrtyur"
+                                    >
+                                    </div>
+                                <div id="apex-pie-2" class="apex-charts pt-3"
+
+                                     data-chart-url="urrtyur22"
+                                >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 </div>
