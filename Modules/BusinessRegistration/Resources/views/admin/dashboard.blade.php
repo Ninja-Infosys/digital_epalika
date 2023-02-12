@@ -57,65 +57,79 @@
 
 
     </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
+    <div class="row">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="bar-chart15"
-                        chartType="pie"
-                        chartName=" आर्थिक वर्ष {{$officeSetting->fiscalYear->title??''}} दर्ता भएका व्यवसायहरु"
-                        :labels="$businessRegistrationAccordingToFiscalYear['labels']"
-                        :dataSets="$businessRegistrationAccordingToFiscalYear['dataSets']"
+                    <x-charts.bar-chart-component id="register-chart"
+                                                  chartTitle="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्ष अनुसार व्यवसाय दर्ता विवरण"
+                                                  chartType="line" :labels="$monthlyWise['labels']"
+                                                  :dataSets="$monthlyWise['dataSets']"
+                                                  :displayLegend="false"
                     />
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
-        </div><!-- end col -->
+        </div> <!-- end col -->
+    </div>
+{{--    <div class="row mt-2">--}}
+{{--        <div class="col-lg-6">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <x-charts.pie-chart-component--}}
+{{--                        id="bar-chart15"--}}
+{{--                        chartType="pie"--}}
+{{--                        chartName=" आर्थिक वर्ष {{$officeSetting->fiscalYear->title??''}} दर्ता भएका व्यवसायहरु"--}}
+{{--                        :labels="$businessRegistrationAccordingToFiscalYear['labels']"--}}
+{{--                        :dataSets="$businessRegistrationAccordingToFiscalYear['dataSets']"--}}
+{{--                    />--}}
+{{--                </div> <!-- end card-body-->--}}
+{{--            </div> <!-- end card-->--}}
+{{--        </div><!-- end col -->--}}
 
-        <div class="col-lg-6">
+{{--        <div class="col-lg-6">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <x-charts.bar-chart-component--}}
+{{--                        id="bar-chart16"--}}
+{{--                        chartTitle="कारोबार गर्ने वस्तु श्रेणी"--}}
+{{--                        :labels="$businessDetailTransaction['labels']"--}}
+{{--                        :dataSets="$businessDetailTransaction['dataSets']"></x-charts.bar-chart-component>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+
+    <div class="row">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <x-charts.bar-chart-component
-                        id="bar-chart16"
-                        chartTitle="कारोबार गर्ने वस्तु श्रेणी"
-                        :labels="$businessDetailTransaction['labels']"
-                        :dataSets="$businessDetailTransaction['dataSets']"></x-charts.bar-chart-component>
-
+                        id="ward-wise-chart"
+                        chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार  व्यवसाय दर्ता विवरण"
+                        :labels="$wardWise['labels']"
+                        :dataSets="$wardWise['dataSets']"
+                        :displayLegend="false"
+                    />
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <x-charts.bar-chart-component
-                            id="ward-wise-chart"
-                            chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार  व्यवसाय दर्ता विवरण"
-                            :labels="$wardWise['labels']"
-                            :dataSets="$wardWise['dataSets']"
-                            :displayLegend="false"
-                        />
-                    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="fiscalYear-wise-chart"
+                        chartTitle=" आर्थिक वर्ष अनुसार  व्यवसाय दर्ता विवरण"
+                        :labels="$fiscalYearWise['labels']"
+                        :dataSets="$fiscalYearWise['dataSets']"
+                        :displayLegend="false"
+                    />
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <x-charts.bar-chart-component
-                            id="fiscalYear-wise-chart"
-                            chartTitle=" आर्थिक वर्ष अनुसार  व्यवसाय दर्ता विवरण"
-                            :labels="$fiscalYearWise['labels']"
-                            :dataSets="$fiscalYearWise['dataSets']"
-                            :displayLegend="false"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 @endsection

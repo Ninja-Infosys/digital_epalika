@@ -86,7 +86,8 @@ class BusinessDetail extends Model
     ];
 
     protected $appends=[
-        'is_register'
+        'is_register',
+        'registration_month'
     ];
 
     public function getIsRegisterAttribute(): bool
@@ -272,6 +273,11 @@ class BusinessDetail extends Model
     {
         return $this->attributes['length'] * $this->attributes['width'];
 
+    }
+
+    public function getRegistrationMonthAttribute(): string
+    {
+        return explode('-', $this->registration_date_ne)[1] ?? '';
     }
 
 }
