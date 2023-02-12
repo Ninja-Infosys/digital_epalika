@@ -23,9 +23,9 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">तारिख भरपाई डाटा भर्नुहोस्</h4>
-                        <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
+                        <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index',$complaintApplication) }}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दर्ता भएका उजुरी
+                            <i class="fa fa-list"></i> तारिख भरपाई विवरण
                         </a>
                     </div>
                 </div>
@@ -37,16 +37,14 @@
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <x-date-input-component
-                                    nameNe="decision_date" labelNe="निर्णय हुने मिति *" nameEn="en_decision_date"
-                                    labelEn="Decision Date"
-                                    :editDateNe="$complaintApplication->dateCompensation->decision_date ?? ''"
+                                    nameNe="decision_date" labelNe="निर्णय हुने मिति *"
                                     :getTodayDate="false"/>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="decision_subject" class="form-label"> निर्णय हुने विषय <span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="decision_subject" class="form-control"
-                                       value="{{ old('decision_subject', $complaintApplication->dateCompensation->decision_subject ?? '') }}"
+                                       value="{{ old('decision_subject') }}"
                                        id="decision_subject" placeholder="निर्णय हुने विषय"/>
                                 @error('decision_subject')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -56,7 +54,7 @@
                                 <label for="decision_time" class="form-label"> निर्णय हुने समय  <span
                                         class="text-danger">*</span></label>
                                 <input type="time" name="decision_time" class="form-control"
-                                       value="{{ old('decision_time', $complaintApplication->dateCompensation->decision_time ?? '') }}"
+                                       value="{{ old('decision_time') }}"
                                        id="decision_time" placeholder="निर्णय हुने समय "/>
                                 @error('decision_time')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -65,10 +63,8 @@
                             <div class="col-md-6 mb-2">
                                 <x-date-input-component
                                     nameNe="submitted_date" labelNe="पेश मिति *"
-                                    nameEn="en_submitted_date"
                                     labelEn="Submitted Date"
-                                    :editDateNe="$complaintApplication->dateCompensation->submitted_date ?? ''"
-                                    :getTodayDate="!isset($complaintApplication->dateCompensation->submitted_date)"/>
+                                />
                             </div>
 
                             <div class="d-flex justify-content-between">

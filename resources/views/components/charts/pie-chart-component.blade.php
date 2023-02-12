@@ -11,7 +11,6 @@
                 const y = Math.floor(Math.random() * 256);
                 const z = Math.floor(Math.random() * 256);
                 return "rgb(" + x + "," + y + "," + z + ")";
-
             }
         </script>
     @endpush

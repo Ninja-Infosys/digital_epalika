@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -7,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.judicialCommittee.dashboard') }}">
+                            <a href="{{route('admin.judicialCommittee.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -25,45 +24,63 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">तारिख भरपाई</h4>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn btn-sm btn-outline-primary" type="button"
-                                    onclick="print('printDateCompensation')">
-                                <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                            </button>
-                            @can('dateCompensation_edit')
-                                <a data-bs-type="edit" href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.create', $complaintApplication) }}"
-                                   class="btn btn-sm btn-outline-warning mx-1 {{get_setting('Pin')?'confirm_pin':''}}">
-                                    <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
-                                </a>
-                            @endcan
-                            <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
+                        <h4 class="header-title">तारिख भरपाई सूची</h4>
+                        @can('dateCompensation_create')
+                            <a href="{{route('admin.judicialCommittee.complaintApplication.dateCompensation.create',$complaintApplication)}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"> दर्ता भएका उजुरी</i>
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
-                        </div>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printDateCompensation" class="ckEditor">
-                        {!! $complaintApplication->getSpecificTemplateData(
-                            \Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DATE_COMPENSATION,
-                        ) !!}
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>निर्णय हुने मिति </th>
+                                <th>निर्णय हुने समय</th>
+                                <th>निर्णय हुने विषय</th>
+                                <th>पेश मिति</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($complaintApplication->dateCompensations as $dateCompensation)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$dateCompensation->decision_date}}</td>
+                                    <td>{{$dateCompensation->decision_time}}</td>
+                                    <td>{{$dateCompensation->decision_subject}}</td>
+                                    <td>{{$dateCompensation->submitted_date}}</td>
+                                    <td>
+                                        @can('dateCompensation_access')
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.dateCompensation.show',[$complaintApplication,$dateCompensation])}}"
+                                               title="विवरण हेर्नुहोस्"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('dateCompensation_edit')
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.dateCompensation.edit',[$complaintApplication,$dateCompensation])}}"
+                                               title="सम्पादन गर्नुहोस्"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/ckeditor.js') }}"></script>
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/print.js') }}"></script>
-
-
-        <script>
-            function print(editorName) {
-                const editor = CKEDITOR.instances[editorName];
-                editor.execCommand('print');
-            }
-        </script>
-    @endpush
 @endsection

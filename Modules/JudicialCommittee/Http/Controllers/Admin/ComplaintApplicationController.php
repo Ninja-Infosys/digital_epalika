@@ -51,7 +51,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantProvince', 'complainantDistrict', 'complainantLocalBody', 'defendantProvince', 'defendantDistrict', 'defendantLocalBody');
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers','complainantDefendants.province','complainantDefendants.district','complainantDefendants.localBody','witnesses');
 
         return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
@@ -60,7 +60,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_edit');
 
-        $complaintApplication->load('relatedMembers');
+        $complaintApplication->load('complainantDefendants', 'relatedMembers','witnesses');
 
         return view('judicialcommittee::admin.complaint_application.edit', compact('complaintApplication'));
     }
@@ -74,8 +74,9 @@ class ComplaintApplicationController extends Controller
         }
 
         $complaintApplication->relatedMembers()->delete();
-        if ($signature = $complaintApplication->getRawOriginal('applicant_signature')) {
-            $this->deleteFile($signature);
+        $complaintApplication->complainantDefendants()->delete();
+        if ($complaintApplication->applicant_signature) {
+            $this->deleteFile($complaintApplication->applicant_signature);
         }
         $complaintApplication->delete();
 

@@ -1,21 +1,23 @@
 <div class="offcanvas-header">
-        <a href="{{route('admin.dashboard')}}" class="offcanvas-title" id="offcanvasExampleLabel">
-            <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="35"/>
-        </a>
+    <a href="{{route('admin.dashboard')}}" class="offcanvas-title" id="offcanvasExampleLabel">
+        <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="35"/>
+    </a>
     <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
 </div>
 
 <div class="offcanvas-body">
     <div class="row">
-        <div class="col-md-3 border">
-            <a href="{{route('admin.digitalBoard.dashboard')}}">
-                <div class="p-2 text-center">
-                    <img src="{{asset('assets/backend/images/modules/digitalboard.png')}}"
-                         height="50" width="50">
-                    <h5 class="p-1 text-white">नागरिक वडापत्र</h5>
-                </div>
-            </a>
-        </div>
+        @if(Route::has('admin.digitalBoard.dashboard'))
+            <div class="col-md-3 border">
+                <a href="{{route('admin.digitalBoard.dashboard')}}">
+                    <div class="p-2 text-center">
+                        <img src="{{asset('assets/backend/images/modules/digitalboard.png')}}"
+                             height="50" width="50">
+                        <h5 class="p-1 text-white">नागरिक वडापत्र</h5>
+                    </div>
+                </a>
+            </div>
+        @endif
         @if(Route::has('admin.circular.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.circular.dashboard')}}">
@@ -204,5 +206,5 @@
                 </a>
             </div>
         @endif
-        </div>
     </div>
+</div>

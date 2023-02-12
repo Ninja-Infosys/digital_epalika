@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> व्यवसाय दर्ता रिपोर्ट</li>
+                        <li class="breadcrumb-item active"> प्रतिवेदनहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> व्यवसाय दर्ता रिपोर्ट </h4>
+                <h4 class="page-title"> प्रतिवेदनहरु </h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय दर्ता रिपोर्ट</h4>
+                        <h4 class="header-title">व्यवसाय दर्ता प्रतिवेदन</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
@@ -31,13 +31,14 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name="व्यवसाय दर्ता रिपोर्ट"
+                                file-name="प्रतिवेदन रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
                                 target-element="report-table"
-                                title="व्यवसाय दर्ता रिपोर्ट"
-                                :header-required="true"
+                                title="प्रतिवेदन रिपोर्ट"
+                                :headerRequired="true"
+
                             />
                         </div>
                     </div>

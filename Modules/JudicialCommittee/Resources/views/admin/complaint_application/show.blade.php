@@ -43,23 +43,27 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-bordered">
+                        <table class="table table-sm mb-0 table-bordered">
                             <tbody>
                             <tr>
                                 <td>
-                                    <span class="fw-bold">निवेदकको पुरा नाम : </span> {{$complaintApplication->applicant_name}}
+                                    <span
+                                        class="fw-bold">निवेदकको पुरा नाम : </span> {{$complaintApplication->applicant_name}}
                                 </td>
                                 <td>
-                                    <span class="fw-bold">निवेदकको फोन : </span> {{$complaintApplication->applicant_phone}}
+                                    <span
+                                        class="fw-bold">निवेदकको फोन : </span> {{$complaintApplication->applicant_phone}}
                                 </td>
                                 <td rowspan="4" class="text-center">
                                     <span class="fw-bold pb-2">निवेदकको सहि : </span> <br>
-                                    <img src="{{$complaintApplication->applicant_signature}}" height="80" width="80" alt="Signature">
+                                    <img src="{{$complaintApplication->applicant_signature_url}}" height="80" width="80"
+                                         alt="Signature">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="fw-bold">निवेदकको ठेगाना : </span> {{$complaintApplication->applicant_address}}
+                                    <span
+                                        class="fw-bold">निवेदकको ठेगाना : </span> {{$complaintApplication->applicant_address}}
                                 </td>
                                 <td>
                                     <span class="fw-bold">सबमिशन नं. : </span> {{$complaintApplication->submission_no}}
@@ -84,43 +88,87 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="fw-bold">वादीको नाम : </span> {{$complaintApplication->complainant_name}}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">वादीको उमेर : </span> {{$complaintApplication->complainant_age}}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">वादीको अभिभावकको नाम : </span> {{$complaintApplication->complainant_guardian_name}}
+                                <td colspan="3" class="text-primary fw-bold border-bottom-0">
+                                    वादीको विवरण
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="fw-bold">वादीको नाता : </span> {{$complaintApplication->complainant_relationship}}
-                                </td>
-                                <td colspan="2">
-                                    <span class="fw-bold">वादीको ठेगाना : </span>
-                                    {{$complaintApplication->complainantLocalBody->local_body??''}}-{{$complaintApplication->complainant_ward_no}},{{$complaintApplication->complainant_tole}}
+                                <td colspan="3">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm mb-0 table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>क्र.स.</th>
+                                                <th>नाम</th>
+                                                <th>उमेर</th>
+                                                <th>बुवाको नाम</th>
+                                                <th>हजुरबुबाको नाम</th>
+                                                <th>पति/पत्नी</th>
+                                                <th>ठेगाना</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($complaintApplication->complainantDefendants->where('type','complainant') as $complainant)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$complainant->name}}</td>
+                                                    <td>{{$complainant->age}}</td>
+                                                    <td>{{$complainant->father_name}}</td>
+                                                    <td>{{$complainant->grandfather_name}}</td>
+                                                    <td>{{$complainant->spouse_name}}</td>
+                                                    <td>
+                                                        {{$complainant->localBody->local_body??''}}
+                                                        -{{$complainant->ward_no}},{{$complainant->tole}}
+                                                        ,{{$complainant->district->district??''}}
+                                                        ,{{$complainant->province->province??''}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="fw-bold">प्रतिवादीको नाम : </span> {{$complaintApplication->defendant_name}}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">प्रतिवादीको उमेर : </span> {{$complaintApplication->defendant_age}}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">प्रतिवादीको अभिभावकको नाम : </span> {{$complaintApplication->defendant_guardian_name}}
+                                <td colspan="3" class="text-primary fw-bold border-bottom-0">
+                                    प्रतिवादीको विवरण
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="fw-bold">प्रतिवादीको नाता : </span> {{$complaintApplication->defendant_relationship}}
-                                </td>
-                                <td colspan="2">
-                                    <span class="fw-bold">प्रतिवादीको ठेगाना : </span>
-                                    {{$complaintApplication->defendantLocalBody->local_body??''}}-{{$complaintApplication->defendant_ward_no}},{{$complaintApplication->defendant_tole}}
+                                <td colspan="3">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm mb-0 table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>क्र.स.</th>
+                                                <th>नाम</th>
+                                                <th>उमेर</th>
+                                                <th>बुवाको नाम</th>
+                                                <th>हजुरबुबाको नाम</th>
+                                                <th>पति/पत्नी</th>
+                                                <th>ठेगाना</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($complaintApplication->complainantDefendants->where('type','defendant') as $defendant)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$defendant->name}}</td>
+                                                    <td>{{$defendant->age}}</td>
+                                                    <td>{{$defendant->father_name}}</td>
+                                                    <td>{{$defendant->grandfather_name}}</td>
+                                                    <td>{{$defendant->spouse_name}}</td>
+                                                    <td>
+                                                        {{$defendant->localBody->local_body??''}}
+                                                        -{{$defendant->ward_no}},{{$defendant->tole}}
+                                                        ,{{$defendant->district->district??''}}
+                                                        ,{{$defendant->province->province??''}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -131,14 +179,47 @@
         </div>
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सम्बन्धित सदस्यहरू</h4>
+                <div class="card-body">
+                    <h4 class="header-title">साक्षीहरु</h4>
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-bordered">
+                            <thead>
+                            <tr>
+                                <th>क्र.स.</th>
+                                <th>नाम</th>
+                                <th>उमेर</th>
+                                <th>फोन</th>
+                                <th>ठेगाना</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($complaintApplication->witnesses as $key=>$witness)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$witness->name}}</td>
+                                    <td>{{$witness->age}}</td>
+                                    <td>{{$witness->phone}}</td>
+                                    <td>{{$witness->address}}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="5">
+                                        तालिकामा कुनै डाटा उपलब्ध छैन !!!
+                                    </td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
                 <div class="card-body">
+                    <h4 class="header-title">सम्बन्धित सदस्यहरू</h4>
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered">
+                        <table class="table table-sm mb-0 table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स.</th>
@@ -162,15 +243,12 @@
                             @empty
                                 <tr>
                                     <td class="text-center" colspan="6">
-                                        विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                                        तालिकामा कुनै डाटा उपलब्ध छैन !!!
                                     </td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
-                        @error('form.relatedMembers')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
                     </div>
                 </div>
             </div>

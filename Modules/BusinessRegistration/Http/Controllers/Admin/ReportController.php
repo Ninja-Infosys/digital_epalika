@@ -5,7 +5,10 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rule;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
@@ -42,7 +45,7 @@ class ReportController extends Controller
 
         $projects = BusinessDetail::with('fiscalYear', 'province', 'localBody', 'district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
-        })->get();
+        })->whereNotNull('registration_no')->get();
 
         if (!empty($request->input('columns')['partners'])) {
             $projects->load(['partners' => function ($q) {
@@ -101,6 +104,9 @@ class ReportController extends Controller
         if (!empty($request->input('business_nature'))) {
             $q->whereIn('business_nature_id', $request->input('business_nature'));
         }
+        if (!empty($request->input('ward_no'))) {
+            $q->whereIn('ward_no', $request->input('ward_no'));
+        }
     }
 
     public function businessRegistrationBook()
@@ -108,6 +114,140 @@ class ReportController extends Controller
         $fiscalYears = FiscalYear::all();
         $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
         $businessNatures = BusinessNature::all();
-        return view('businessregistration::admin.report.business-registration-book',compact('businessNatures','objectTransactions','fiscalYears'));
+        return view('businessregistration::admin.report.business-registration-book', compact('businessNatures', 'objectTransactions', 'fiscalYears'));
+    }
+
+    public function businessRegistrationBookReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+            'ward_no' => ['nullable', 'array'],
+            'object_transaction' => ['nullable', 'array'],
+            'object_transaction.*' => [Rule::exists('object_transactions', 'id')],
+            'business_nature' => ['nullable', 'array'],
+            'business_nature.*' => [Rule::exists('business_natures', 'id')],
+        ]);
+
+        $businessDetails = BusinessDetail::with('partners', 'district', 'localBody', 'province', 'businessNature')->where(function ($q) use ($request) {
+            $this->filterDataFromUser($q, $request);
+        })->whereNotNull('registration_no')->get()->map(function ($businessDetail, $key) {
+            return [
+                'sn' => (int)$key + 1,
+                'registration_date' => $businessDetail->registration_date_ne,
+                'registration_no' => $businessDetail->registration_no,
+                'code' => $businessDetail->submission_no,
+                'partner_name' => $businessDetail->partners?->first()?->name ?? '',
+                'form_name' => $businessDetail->name ?? '',
+                'address' => $businessDetail->address,
+                'ward_no' => $businessDetail->ward_no,
+                'phone' => $businessDetail->partners?->first()?->phone ?? '',
+                'business_nature' => $businessDetail->businessNature->title ?? '',
+                'is_rent' => $businessDetail->is_rent == 0 ? 'आफ्नो' : 'बहाल',
+            ];
+        });
+        return response()->json([
+            'data' => $businessDetails
+        ]);
+    }
+
+    public function businessNatureWise()
+    {
+        $fiscalYears = FiscalYear::all();
+        $businessNatures = BusinessNature::all();
+        return view('businessregistration::admin.report.business-nature', compact('businessNatures', 'fiscalYears'));
+    }
+
+    public function businessNatureWiseReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+            'business_nature' => ['nullable', 'array'],
+            'business_nature.*' => [Rule::exists('business_natures', 'id')],
+        ]);
+
+        $businessNatures = BusinessNature::with(['businessDetails' => function ($query) use ($request) {
+            $query->whereNotNull('registration_no');
+            $this->filterDataFromUser($query, $request);
+        }])
+            ->where(function ($query) use ($request) {
+                if (!empty($request->input('business_nature'))) {
+                    $query->whereIn('id', $request->input('business_nature'));
+                }
+            })
+            ->get()->map(function ($businessNature) {
+                $wardData = [];
+                foreach (officeSetting()->localBody->ward_no as $ward_no) {
+                    $wardData[] = $businessNature->businessDetails->where('ward_no', $ward_no)->count();
+                }
+
+                return [
+                    'title' => $businessNature->title,
+                    'wards' => $wardData,
+                    'total' => $businessNature->businessDetails->count()
+                ];
+            });
+        return response()->json([
+            'total' => $businessNatures->sum('total'),
+            'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
+            'view' => (string)View::make('businessregistration::admin.report.inc.business_nature_table', compact('businessNatures'))
+        ]);
+    }
+
+    public function objectTransaction()
+    {
+        $fiscalYears = FiscalYear::all();
+        $objectTransactions = ObjectTransaction::whereNull('object_transaction_id')->get();
+        return view('businessregistration::admin.report.object-transaction', compact('objectTransactions', 'fiscalYears'));
+    }
+
+    public function objectTransactionReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+            'object_transaction' => ['nullable', 'array'],
+            'object_transaction.*' => [Rule::exists('object_transactions', 'id')],
+        ]);
+
+        $objectTransactions = ObjectTransaction::with(['objectTransactions.businessDetails', 'businessDetails' => function ($query) use ($request) {
+            $this->filterDataFromUser($query, $request);
+            $query->whereNotNull('registration_no');
+        }])
+            ->where(function ($query) use ($request) {
+                if (!empty($request->input('object_transaction'))) {
+                    $query->whereIn('id', $request->input('object_transaction'));
+                }
+            })->whereNull('object_transaction_id')
+            ->get()->map(function ($objectTransaction) {
+                $wardData = [];
+                $total_count = $objectTransaction->businessDetails->count();
+                foreach (officeSetting()->localBody->ward_no as $ward_no) {
+                    $count = 0;
+                    $sub_total_count = 0;
+                    foreach ($objectTransaction->objectTransactions as $subObjectTransaction) {
+                        $sub_total_count += $subObjectTransaction->businessDetails->where('ward_no', $ward_no)->count();
+                        $count += $subObjectTransaction->businessDetails->where('ward_no', $ward_no)->count();
+                    }
+                    $total_count += $sub_total_count;
+                    $wardData[] = $objectTransaction->businessDetails->where('ward_no', $ward_no)->count() + $count;
+                }
+                return [
+                    'title' => $objectTransaction->title,
+                    'wards' => $wardData,
+                    'total' => $total_count
+                ];
+            });
+        return response()->json([
+            'fiscal_years' => FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->get(),
+            'view' => (string)View::make('businessregistration::admin.report.inc.object_transaction', compact('objectTransactions'))
+        ]);
     }
 }

@@ -36,9 +36,9 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                <th>सबमिशन नं.</th>
                                 <th>दर्ता नं.</th>
                                 <th>निवेदकको पुरा नाम</th>
-                                <th>प्रतिवादीको पुरा नाम</th>
                                 <th>मिति</th>
                                 <th>विषय</th>
                                 <th>मुद्दा प्रकृति</th>
@@ -49,9 +49,9 @@
                             @forelse($complaintApplications as $complaintApplication)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{$complaintApplication->submission_no}}</td>
                                     <td>{{ $complaintApplication->registration_no }}</td>
-                                    <td>{{ $complaintApplication->complainant_name }}</td>
-                                    <td>{{ $complaintApplication->defendant_name }}</td>
+                                    <td>{{ $complaintApplication->applicant_name }}</td>
                                     <td>{{ $complaintApplication->date }}</td>
                                     <td>{{ $complaintApplication->subject }}</td>
                                     <td>

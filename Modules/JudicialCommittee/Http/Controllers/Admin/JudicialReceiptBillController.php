@@ -22,7 +22,7 @@ class JudicialReceiptBillController extends Controller
 
         if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::JUDICIAL_RECEIPT_BILL)->count() == 0) {
             toast('टेम्प्लेट सेट गरिएको छैन', 'error');
-            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
+            return redirect(route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index'));
         }
 
         return view('judicialcommittee::admin.receipt_bill.index', compact('complaintApplication'));

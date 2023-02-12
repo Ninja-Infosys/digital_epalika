@@ -213,12 +213,4 @@
             </div>
         </div>
     </section>
-
-    @push('styles')
-    @endpush
-    @push('scripts')
-    @endpush
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
-    @endpush
 @endsection
