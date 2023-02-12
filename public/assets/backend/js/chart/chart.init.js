@@ -1,11 +1,11 @@
 Apex.grid = {padding: {right: 0, left: 0}}, Apex.dataLabels = {enabled: !1};
 
-$(window).on('load',function () {
-    $.ajax({
+$(window).on('load', async() =>{
+    await $.ajax({
         method: 'get',
         url: $('#charts').attr('data-chart-url'),
-        success: function (res) {
-            Object.keys(res).forEach(key => {
+        success:  async(res) =>{
+           await Object.keys(res).forEach(key => {
                 const targetElement = document.getElementById(key);
                 if (targetElement) {
                     if (res[key].chartType === 'pie' || res[key].chartType==='donut') {
@@ -33,7 +33,6 @@ function setBarData(el, labels, dataSets) {
         })
         colors.push(randomColors())
     })
-    console.log(chartDatasets)
     const options = {
         chart: {height: 320, type: "bar"},
         series: chartDatasets,

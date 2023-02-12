@@ -121,6 +121,6 @@
     </div>
     @push('scripts')
         <script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/emap.init.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
     @endpush
 @endsection
