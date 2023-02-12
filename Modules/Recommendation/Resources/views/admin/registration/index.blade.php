@@ -10,6 +10,10 @@
                             <i class="fa fa-home"></i> गृहपृष्ठ
                         </a>
                     </li>
+                    <li class="breadcrumb-item active">दर्ता</li>
+                </ol>
+            </div>
+            <h4 class="page-title">दर्ता</h4>
                 </ol>
             </div>
         </div>
