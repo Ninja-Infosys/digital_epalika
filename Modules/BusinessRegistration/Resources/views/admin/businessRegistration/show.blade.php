@@ -498,6 +498,7 @@
                                                 <x-date-input-component
                                                     get-today-date="{{false}}"
                                                     edit-date-ne="{{$businessDetail->bill_date_bs}}"
+                                                    edit-date-en="{{$businessDetail->bill_date_ad}}"
                                                     name-ne="bill_date_bs" label-ne="बिल मिति (बि स.)"
                                                     name-en="bill_date_ad" label-en="बिल मिति"
                                                 />
