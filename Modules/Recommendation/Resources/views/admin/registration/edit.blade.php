@@ -79,14 +79,14 @@
                                     :editDateEn="$registrationDetail->date_en"
                                     />
                                 </div>
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="application" class="form-label">डकुमेन्ट </label>
-                                    <input id="application" name="application" type="file">
+                                    <input id="application" name="application" type="file" class="form-control">
                                     @error('application')
                                         <p class="text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="recommendation" class="form-label">सिफारिस *</label>
                                     <input type="text" name="recommendation" value="{{ old('recommendation', $registrationDetail->recommendation) }}"
                                         class="form-control @error('recommendation') is-invalid @enderror"
@@ -116,12 +116,7 @@
 
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{ asset('assets/backend/editor/ckEditor/css/editor.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/backend/editor/ckEditor/css/neo.css') }}">
-    @endpush
     @push('scripts')
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/ckeditor.js') }}"></script>
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/editor.js') }}"></script>
+    <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
     @endpush
 @endsection
