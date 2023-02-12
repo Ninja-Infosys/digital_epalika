@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\LandInvoiceController;
 use Modules\Revenue\Http\Controllers\Admin\DashboardController;
 use Modules\Revenue\Http\Controllers\Admin\InvoiceController;
+use Modules\Revenue\Http\Controllers\Admin\PlaceController;
 use Modules\Revenue\Http\Controllers\Admin\RevenueCategoryController;
 use Modules\Revenue\Http\Controllers\Admin\RevenueController;
 use Modules\Revenue\Http\Controllers\Admin\SectorController;
@@ -26,4 +27,5 @@ Route::prefix('setting')->as('setting.')->group(function () {
 
     Route::resource('taxPayerType', TaxPayerTypeController::class)->except('show');
     Route::resource('sector', SectorController::class)->except('show');
+    Route::resource('place', PlaceController::class)->except('show');
 });

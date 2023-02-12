@@ -3,6 +3,7 @@
 namespace Modules\Revenue\Entities;
 
 use App\Models\Settings\Units\Unit;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +23,7 @@ class Place extends Model
     protected $fillable = [
         'sector_id',
         'title',
-        'ward',
+        'ward_no',
         'rate',
         'unit_id',
     ];
@@ -35,5 +36,13 @@ class Place extends Model
     public function unit(): BelongsTo
     {
         return $this->belongsTo(Unit::class);
+    }
+
+    protected function wardNo(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => explode(",", $value),
+            set: fn($value) => implode(",", $value),
+        );
     }
 }

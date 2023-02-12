@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">क्षेत्र</li>
+                        <li class="breadcrumb-item active">जग्गाको मुल्यांकन</li>
                     </ol>
                 </div>
-                <h4 class="page-title">क्षेत्र</h4>
+                <h4 class="page-title">जग्गाको मुल्यांकन</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">क्षेत्र सूची</h4>
+                        <h4 class="header-title">जग्गाको मुल्यांकन सूची</h4>
                         @can('sector_create')
-                            <a href="{{route('admin.revenue.setting.sector.create')}}"
+                            <a href="{{route('admin.revenue.setting.place.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,25 +39,29 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>क्षेत्र</th>
+                                <th>स्थान</th>
+                                <th>दर</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($sectors as $key=>$sector)
+                            @forelse($places as $key=>$place)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$sector->title}}</td>
+                                    <td>{{$place->sector->title ?? ''}}</td>
+                                    <td>{{$place->title}}</td>
+                                    <td>रु. {{$place->rate}} / {{$place->unit->title ?? ''}}</td>
                                     <td>
                                         @can('sector_edit')
                                             <a data-bs-type="edit"
-                                               href="{{route('admin.revenue.setting.sector.edit',[$sector])}}"
+                                               href="{{route('admin.revenue.setting.place.edit',[$place])}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
                                         @can('sector_delete')
                                             <form
-                                                action="{{route('admin.revenue.setting.sector.destroy',[$sector])}}"
+                                                action="{{route('admin.revenue.setting.place.destroy',[$place])}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
