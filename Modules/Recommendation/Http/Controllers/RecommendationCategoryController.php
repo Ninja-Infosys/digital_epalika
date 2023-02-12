@@ -24,7 +24,7 @@ class RecommendationCategoryController extends Controller
                 $query->whereNull('recommendation_category_id');
             }
         })->get();
-       
+
         return view('recommendation::admin.setting.recommendationcategory.index',compact('recommendationCategories', 'type'));
     }
 
@@ -67,7 +67,7 @@ class RecommendationCategoryController extends Controller
     public function destroy($type,RecommendationCategory $recommendationCategory)
     {
         if ($recommendationCategory->is_active == 1) {
-            toast('Error while deleting file', 'error');
+            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
 
             return back();
         }
@@ -77,7 +77,7 @@ class RecommendationCategoryController extends Controller
     }
     public function updateStatus($type, RecommendationCategory $recommendationCategory)
     {
-    
+
         $recommendationCategory->update([
             'is_active'=>!$recommendationCategory->is_active
         ]);

@@ -28,20 +28,21 @@ class DashboardController extends Controller
         $in_progress_project_count = $this->projects->where('project_status', ProjectStatusEnum::IN_PROGRESS)->count();
         $completed_project_count = $this->projects->where('project_status', ProjectStatusEnum::COMPLETED)->count();
         $deadline_extended_project_count = Project::whereHas('projectDeadlineExtensions')->count();
-        $wardWiseProjects = $this->getWardWiseProjects();
-        $planAreaWiseProjects = $this->getPlanAreaWiseProjects();
-        $budgetHeadWiseProjects = $this->getBudgetHeadWiseProjects();
-        $planLevelWiseProjects = $this->getPlanLevelWiseProjects();
+
+        if (request()->ajax()) {
+            return [
+                'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
+                'wardWiseProjects' => $this->getWardWiseProjects(),
+                'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
+                'planAreaWiseProjects' => $this->getPlanAreaWiseProjects()
+            ];
+        }
 
         return view('plan::admin.dashboard', compact(
             'not_started_project_count',
             'in_progress_project_count',
             'deadline_extended_project_count',
-            'completed_project_count',
-            'wardWiseProjects',
-            'planAreaWiseProjects',
-            'budgetHeadWiseProjects',
-            'planLevelWiseProjects'
+            'completed_project_count'
         ));
     }
 
@@ -62,6 +63,7 @@ class DashboardController extends Controller
         }
 
         return [
+            'chartType' => 'bar',
             'labels' => $wardsData->pluck('ward_no')->toArray(),
             'dataSets' => [
                 [
@@ -90,6 +92,7 @@ class DashboardController extends Controller
             });
 
         return [
+            'chartType' => 'bar',
             'labels' => $planAreas->pluck('area_name')->toArray(),
             'dataSets' => [
                 [
@@ -129,15 +132,9 @@ class DashboardController extends Controller
             });
 
         return [
+            'chartType' => 'pie',
             'labels' => $budgetHeads->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $budgetHeads->pluck('projects_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-
+            'data' => $budgetHeads->pluck('projects_count')->toArray(),
         ];
     }
 
@@ -158,15 +155,9 @@ class DashboardController extends Controller
             });
 
         return [
+            'chartType' => 'pie',
             'labels' => $planLevels->pluck('level_name')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $planLevels->pluck('projects_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-
+            'data' => $planLevels->pluck('projects_count')->toArray()
         ];
     }
 }

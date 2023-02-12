@@ -11,10 +11,10 @@
                         </a>
                     </li>
 
-                    <li class="breadcrumb-item active">आधरभूत सेटिंग</li>
+                    <li class="breadcrumb-item active">व्यक्तिगत विवरण</li>
                 </ol>
             </div>
-            <h4 class="page-title">आधरभूत सेटिंग</h4>
+            <h4 class="page-title">व्यक्तिगत विवरण</h4>
         </div>
     </div>
 </div>
@@ -68,7 +68,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

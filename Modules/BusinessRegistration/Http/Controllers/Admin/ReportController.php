@@ -43,7 +43,7 @@ class ReportController extends Controller
             );
         }
 
-        $projects = BusinessDetail::with('fiscalYear', 'province', 'localBody', 'district')->where(function ($q) use ($request) {
+        $projects = BusinessDetail::with('fiscalYear', 'province', 'localBody', 'district', 'businessNature', 'objectTransaction')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->whereNotNull('registration_no')->get();
 
@@ -248,6 +248,82 @@ class ReportController extends Controller
         return response()->json([
             'fiscal_years' => FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->get(),
             'view' => (string)View::make('businessregistration::admin.report.inc.object_transaction', compact('objectTransactions'))
+        ]);
+    }
+
+
+    public function businessObjectTransactionNatureWise()
+    {
+        $fiscalYears = FiscalYear::all();
+        $businessNatures = BusinessNature::all();
+        $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        return view('businessregistration::admin.report.business-objectTransaction-nature-wise', compact('fiscalYears', 'objectTransactions', 'businessNatures'));
+    }
+
+    public function businessObjectTransactionNatureReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+            'object_transaction' => ['nullable', 'array'],
+            'object_transaction.*' => [Rule::exists('object_transactions', 'id')],
+            'business_nature' => ['nullable', 'array'],
+            'business_nature.*' => [Rule::exists('business_natures', 'id')],
+        ]);
+
+        $businessDetails = BusinessDetail::where(function ($query) use ($request) {
+            $this->filterDataFromUser($query, $request);
+        })->whereNotNull('registration_no')->get();
+
+        $wardData = [];
+        foreach (officeSetting()->localBody->ward_no as $ward_no) {
+            $wardData[] = $businessDetails->where('ward_no', $ward_no)->count();
+        }
+
+        return response()->json([
+            'fiscal_years' => FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->get(),
+            'wardsData' => $wardData
+        ]);
+    }
+
+    public function wardWise()
+    {
+        $fiscalYears = FiscalYear::all();
+        $businessNatures = BusinessNature::all();
+        $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
+        return view('businessregistration::admin.report.ward-wise', compact('objectTransactions', 'fiscalYears', 'businessNatures'));
+    }
+
+    public function wardWiseReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+            'object_transaction' => ['nullable', 'array'],
+            'object_transaction.*' => [Rule::exists('object_transactions', 'id')],
+            'business_nature' => ['nullable', 'array'],
+            'ward_no' => ['nullable', 'array'],
+            'business_nature.*' => [Rule::exists('business_natures', 'id')],
+        ]);
+
+        $businessDetails = BusinessDetail::with('fiscalYear', 'partners', 'businessNature', 'objectTransaction', 'businessRenew.fiscalYear')->where(function ($query) use ($request) {
+            $this->filterDataFromUser($query, $request);
+        })->whereNotNull('registration_no')->get()->map(function ($businessDetail, $key) {
+            return [
+                'sn' => (int)$key + 1,
+                'partner_name' => $businessDetail->partners->first()?->name ?? '',
+                'name' => $businessDetail->name,
+                'address' => $businessDetail->address,
+                'phone' => $businessDetail->partners->first()?->phone ?? '',
+                'renew_fiscal_year' => $businessDetail->businessRenew->count() > 0 ? $businessDetail->businessRenew->first()?->fiscalYear->title ?? '' : $businessDetail->fiscalYear->title ?? '',
+            ];
+        });
+        return response()->json([
+            'data' => $businessDetails
         ]);
     }
 }

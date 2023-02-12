@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">व्यवसायको प्रकृति अनुसार रिपोर्ट</li>
+                        <li class="breadcrumb-item active">वडा अनुसार रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> व्यवसायको प्रकृति अनुसार रिपोर्ट </h4>
+                <h4 class="page-title">वडा अनुसार रिपोर्ट</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसायको प्रकृति अनुसार रिपोर्ट</h4>
+                        <h4 class="header-title">वडा अनुसार रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
                                     type="button"
@@ -32,12 +32,13 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name="व्यवसाय दर्ता रिपोर्ट"
+                                file-name="वडा अनुसार रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
                                 target-element="report-content"
-                                title="व्यवसाय दर्ता रिपोर्ट"
+                                title="वडा अनुसार रिपोर्ट"
+
                             />
                         </div>
                     </div>
@@ -45,7 +46,7 @@
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{route('admin.businessRegistration.report.business-nature-report')}}">
+                              data-bs-url="{{route('admin.businessRegistration.report.ward-wise-report')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -72,12 +73,46 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
+                                    <label for="object_transaction">कारोबार गर्ने वस्तु</label>
+                                    <select name="object_transaction[]" multiple data-toggle="select2"
+                                            id="object_transaction" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($objectTransactions as $objectTransaction)
+                                            @if(count($objectTransaction->objectTransactions)>0)
+                                                <optgroup label="{{$objectTransaction->title}}">
+                                                    @foreach($objectTransaction->objectTransactions as $subObjectTransaction)
+                                                        <option
+                                                            value="{{$subObjectTransaction->id}}">
+                                                            {{$subObjectTransaction->title}}
+                                                        </option>
+                                                    @endforeach
+                                                </optgroup>
+                                            @else
+                                                <option
+                                                    value="{{$objectTransaction->id}}">
+                                                    {{$objectTransaction->title}}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
                                     <label for="business_nature">व्यवसायको प्रकृति </label>
                                     <select name="business_nature[]" multiple data-toggle="select2"
                                             id="business_nature" class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($businessNatures as $businessNature)
                                             <option value="{{$businessNature->id}}">{{$businessNature->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="ward_no">वडा नं </label>
+                                    <select name="ward_no[]" multiple data-toggle="select2"
+                                            id="ward_no" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($officeSetting->localBody->ward_no as $ward_no)
+                                            <option value="{{$ward_no}}">{{$ward_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -94,26 +129,55 @@
                                 <thead>
                                 <tr>
                                     <th>क्र.सं.</th>
-                                    <th>प्रकृति</th>
-                                    @foreach(officeSetting()->localBody->ward_no as $ward_no)
-                                        <th> वडा नं. {{$ward_no}}</th>
-                                    @endforeach
-                                    <th>जम्मा</th>
+                                    <th>व्यसायीको नाम</th>
+                                    <th>व्यवसाय / फर्मको नाम</th>
+                                    <th>ठेगाना</th>
+                                    <th>फोन</th>
+                                    <th>नवीकरण / दर्ता भएको आर्थिक वर्ष</th>
                                 </tr>
                                 </thead>
-                                <tbody id="report-data">
-                                </tbody>
                             </table>
-                            <p id="year"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
+    @endpush
     @push('scripts')
         <script>
             $(document).ready(function () {
+                function createTable(data) {
+                    const table = document.querySelector('#report-table');
+                    // create tbody
+                    // delete tbody tag if exists
+                    if (table.querySelector('tbody')) {
+                        table.querySelector('tbody').remove();
+                    }
+
+                    const tbody = document.createElement('tbody');
+
+                    data.forEach(function (item) {
+                        // create row
+                        const tr = document.createElement('tr');
+                        // create cell
+                        Object.values(item).forEach(data => {
+                            const td = document.createElement('td');
+                            // set cell content
+                            td.innerHTML = data;
+                            // append cell to row
+                            tr.appendChild(td);
+                        });
+
+                        // append row to tbody
+                        tbody.appendChild(tr);
+                    });
+
+                    table.appendChild(tbody);
+                }
+
                 // x-csrf protection
                 $.ajaxSetup({
                     headers: {
@@ -142,8 +206,7 @@
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
                             $('#report-content').removeClass('d-none');
-                            $('#report-data').html(resp.view)
-                            $('#year').html("आर्थिक वर्ष " + resp.fiscal_years.toString() + " मा " + resp.total + " वटा व्यवसाय दर्ता भएका छन !")
+                            createTable(resp.data)
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)
@@ -152,7 +215,6 @@
                         }
                     });
                 });
-
                 function toastMessage(type, title) {
                     swal.fire({
                         title: title,

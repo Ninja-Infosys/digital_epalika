@@ -53,7 +53,7 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$recommendationTemplate->title ?? ''}}</td>
-                                   
+
                                     <td>
                                         @can('recommendationTemplate_access')
                                         <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$type,$recommendationTemplate])}}">
@@ -68,7 +68,7 @@
                                         @can('recommendationTemplate_edit')
                                             <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.edit',[$type,$recommendationCategory,$recommendationTemplate])}}"
                                                class="btn btn-xs btn-outline-warning{{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
-                                                <i class="fa fa-edit"></i> 
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         <form
@@ -77,7 +77,7 @@
                                         @csrf
                                         @method('delete')
                                         @if(!$recommendationCategory->status)
-                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
+                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                         @endif

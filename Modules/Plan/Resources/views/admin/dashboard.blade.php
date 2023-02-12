@@ -73,28 +73,24 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2">
+    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.plan.dashboard')}}">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="budget-head-wise-chart"
-                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु"
-                        :labels="$budgetHeadWiseProjects['labels']"
-                        :dataSets="$budgetHeadWiseProjects['dataSets']"
-                    />
+                    <h5 class="card-title">
+                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु
+                    </h5>
+                    <div id="budgetHeadWiseProjects" class="apex-charts pt-3"></div>
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="plan-level-wise-chart"
-                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) योजना स्तर अनुसारका योजनाहरु"
-                        :labels="$planLevelWiseProjects['labels']"
-                        :dataSets="$planLevelWiseProjects['dataSets']"
-                    />
+                    <h5 class="card-title">
+                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजना स्तर अनुसारका योजनाहरु
+                    </h5>
+                    <div id="planLevelWiseProjects" class="apex-charts pt-3"></div>
                 </div>
             </div>
         </div>
@@ -103,12 +99,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.bar-chart-component
-                        id="area-wise-chart"
-                        chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"
-                        :labels="$planAreaWiseProjects['labels']"
-                        :dataSets="$planAreaWiseProjects['dataSets']"
-                    />
+                    <h5 class="card-title">
+                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु
+                    </h5>
+                    <div id="planAreaWiseProjects" class="apex-charts pt-3"></div>
                 </div>
             </div>
         </div>
@@ -117,15 +111,16 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.bar-chart-component
-                        id="ward-wise-chart"
-                        chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"
-                        :labels="$wardWiseProjects['labels']"
-                        :dataSets="$wardWiseProjects['dataSets']"
-                        :displayLegend="false"
-                    />
+                    <h5 class="card-title">
+                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
+                    </h5>
+                    <div id="wardWiseProjects" class="apex-charts pt-3"></div>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    @endpush
 @endsection
