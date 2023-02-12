@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
-    @if(is_null(auth()->user()->pin))
+    @if(empty(auth()->user()->pin))
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
