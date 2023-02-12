@@ -33,18 +33,30 @@
             </li>
             <li class="{{request()->is('admin/businessRegistration/report/business-registration-book') ? 'active' : ''}}">
                 <a href="{{route('admin.businessRegistration.report.business-registration-book')}}">
-                    <span>व्यवसाय दर्ता प्रतिवेदन</span>
+                    <span>दर्ता प्रतिवेदन</span>
                 </a>
             </li>
             <li class="{{request()->is('admin/businessRegistration/report/business-nature-wise') ? 'active' : ''}}">
                 <a href="{{route('admin.businessRegistration.report.business-nature-wise')}}">
-                    <span>व्यवसायको प्रकृति अनुसार रिपोर्ट</span>
+                    <span>प्रकृति अनुसार </span>
                 </a>
             </li>
             <li class="{{request()->is('admin/businessRegistration/report/object-transaction') ? 'active' : ''}}">
                 <a href="{{route('admin.businessRegistration.report.object-transaction')}}">
                     <span>
-                        व्यवसायको कारोबार गर्ने मुख्य सेवा वा बस्तु
+                         मुख्य सेवा/बस्तु
+                    </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/business-objectTransaction-nature-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.business-objectTransaction-nature-wise')}}">
+                    <span>प्रकृति तथा मुख्य सेवा/बस्तु </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/ward-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.ward-wise')}}">
+                    <span>
+                        वडा अनुसार
                     </span>
                 </a>
             </li>

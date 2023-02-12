@@ -46,6 +46,10 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::post('business-nature-report', 'businessNatureWiseReport')->name('business-nature-report');
     Route::get('object-transaction','objectTransaction')->name('object-transaction');
     Route::post('object-transaction-report','objectTransactionReport')->name('object-transaction-report');
+    Route::get('business-objectTransaction-nature-wise','businessObjectTransactionNatureWise')->name('business-objectTransaction-nature-wise');
+    Route::post('business-objectTransaction-nature-report','businessObjectTransactionNatureReport')->name('business-objectTransaction-nature-report');
+    Route::get('ward-wise','wardWise')->name('ward-wise');
+    Route::post('ward-wise-report','wardWiseReport')->name('ward-wise-report');
 });
 
 Route::prefix('files')->as('files.')->group(function () {
