@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->comment('प्रयोगकर्ता')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('registration_no')->comment('दर्ता नं');
-            $table->string('date')->nullable()->comment('मिति');
             $table->string('application')->nullable()->comment('निवेदन');
             $table->string('recommendation')->nullable()->comment('सिफारिस');
             $table->string('recommendation_data')->nullable()->comment('सिफारिस डाटा');

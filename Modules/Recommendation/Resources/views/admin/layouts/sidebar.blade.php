@@ -10,8 +10,8 @@
         <span>व्यक्तिगत विवरण</span>
     </a>
 </li>
-<li class="{{request()->is('admin/recommendation/registration*') ? 'active' : ''}}">
-    <a href="{{route('admin.recommendation.registration.index')}}">
+<li class="{{request()->is('admin/recommendation/registrationDetail*') ? 'active' : ''}}">
+    <a href="{{route('admin.recommendation.registrationDetail.index')}}">
         <i class="fa fa-id-card"></i>
         <span>सिफारिस</span>
     </a>
