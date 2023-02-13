@@ -80,7 +80,9 @@
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु
                     </h5>
-                    <div id="budgetHeadWiseProjects" class="apex-charts pt-3"></div>
+                    <div id="budgetHeadWiseProjects" class="apex-charts pt-3">
+
+                    </div>
                 </div>
             </div>
         </div>
