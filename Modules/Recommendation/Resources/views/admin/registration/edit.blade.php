@@ -11,9 +11,10 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item active">सिफारिस</li>
+                        <li class="breadcrumb-item active">सिफारिस सम्पादन</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नयाँ सिफारिस</h4>
+                <h4 class="page-title">सिफारिस सम्पादन गर्नुहोस</h4>
             </div>
         </div>
     </div>
@@ -23,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
+                        <h4 class="header-title">सिफारिस सम्पादन गर्नुहोस</h4>
                         <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची

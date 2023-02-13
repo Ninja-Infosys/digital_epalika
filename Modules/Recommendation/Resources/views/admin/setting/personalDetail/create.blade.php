@@ -11,6 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> व्यक्तिगत विवरण </li>
+                        <li class="breadcrumb-item active">नयाँ व्यक्तिगत विवरण </li>
                     </ol>
                 </div>
                 <h4 class="page-title">व्यक्तिगत विवरण</h4>
