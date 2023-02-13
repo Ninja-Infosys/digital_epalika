@@ -43,8 +43,8 @@ class PersonalDetailController extends Controller
 
     public function show(PersonalDetail $personalDetail)
     {
-        $personalDetail->load('province','district','localBody');
-        return view('recommendation::admin.setting.personalDetail.show', compact('personalDetail'));
+        $personalDetail->load('province','district','localBody','registrationDetails');
+        return view('recommendation::admin.setting.personalDetail.show',compact('personalDetail'));
     }
 
     public function edit(PersonalDetail $personalDetail)

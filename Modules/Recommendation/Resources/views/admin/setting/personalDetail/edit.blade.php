@@ -10,9 +10,11 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
+                        <li class="breadcrumb-item active"> व्यक्तिगत विवरण </li>
+                        <li class="breadcrumb-item active">व्यक्तिगत विवरण सम्पादन </li>
                     </ol>
                 </div>
-                <h4 class="page-title">व्यक्तिगत विवरण</h4>
+                <h4 class="page-title">व्यक्तिगत विवरण सम्पादन गर्नुहोस</h4>
             </div>
         </div>
     </div>

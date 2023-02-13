@@ -7,7 +7,7 @@ use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
 use Modules\Recommendation\Http\Controllers\admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
-use Modules\Recommendation\Http\Controllers\admin\RegistrationController as AdminRegistrationController;
+use Modules\Recommendation\Http\Controllers\admin\RegistrationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -55,22 +55,19 @@ Route::view('way_house_proof', 'recommendation::admin.relation.way_house_proof')
 Route::view('fort_detail_proof', 'recommendation::admin.relation.fort_detail_proof')->name('fort_detail_proof');
 
 Route::prefix('setting')->as('setting.')->group(function () {
-    Route::get('{applicationTypeEnum}/formBuilder/{formBuilder}/updateStatus', [FormBuilderController::class, 'updateStatus'])->name('formBuilder.updateStatus');
-    Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class)->names('formBuilder');
+//    Route::get('{applicationTypeEnum}/formBuilder/{formBuilder}/updateStatus', [FormBuilderController::class, 'updateStatus'])->name('formBuilder.updateStatus');
+//    Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class)->names('formBuilder');
     Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
-   
-    // Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
+    Route::get('recommendationCategory/{recommendationCategory}/getTemplate',[RecommendationCategoryController::class,'getTemplateData'])->name('recommendationCategory.getTemplate');
     Route::get('{type}/recommendationCategory/{recommendationCategory}/updatestatus', [RecommendationCategoryController::class,'updatestatus'])->name('recommendationCategory.updatestatus');
     Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
     Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
     Route::resource('personalDetail', PersonalDetailController::class);
-    
-    
 });
 
-Route::resource('registrationDetail', AdminRegistrationController::class);
-Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
-Route::get('application/recommendation/{recommendation}/print', [RecommendationController::class, 'printRecommendation'])->name('recommendation.print');
-Route::post('recommendation/{recommendation}/storeFormData', [RecommendationController::class,'formData'])->name('recommendation.storeFormData');
-Route::resource('application/{applicationTypeEnum}/recommendation', RecommendationController::class)->names('recommendation');
+Route::resource('registrationDetail', RegistrationDetailController::class);
+//Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
+//Route::get('application/recommendation/{recommendation}/print', [RecommendationController::class, 'printRecommendation'])->name('recommendation.print');
+//Route::post('recommendation/{recommendation}/storeFormData', [RecommendationController::class,'formData'])->name('recommendation.storeFormData');
+//Route::resource('application/{applicationTypeEnum}/recommendation', RecommendationController::class)->names('recommendation');
 

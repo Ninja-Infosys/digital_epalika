@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-xl-6">
+                    <div class="col-lg-12 col-xl-12">
                         <div class="card text-center">
                             <div class="card-body">
                                 <h4>व्यक्तिगत विवरण</h4>
@@ -58,6 +58,24 @@
                                                 , {{ $personalDetail->tole }}</span>
                                         </p>
                                 </div>
+                                <table class="table table-bordered mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>क्र.स</th>
+                                        <th>शिर्षक</th>
+                                        <th>मिति</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($personalDetail->registrationDetails as $registrationDetail)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $registrationDetail->recommendationCategory->title ??'' }}</td>
+                                            <td>{{ $registrationDetail->date_ne }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>

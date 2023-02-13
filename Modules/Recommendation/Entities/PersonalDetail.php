@@ -55,4 +55,9 @@ class PersonalDetail extends Model
    {
     return $this->belongsTo(localBody::class);
    }
+
+   public function registrationDetails()
+   {
+    return $this->hasMany(RegistrationDetail::class);
+   }
 }

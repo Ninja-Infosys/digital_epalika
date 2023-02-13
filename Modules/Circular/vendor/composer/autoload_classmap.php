@@ -13,7 +13,7 @@ return array(
     'Modules\\Circular\\Entities\\Registration' => $baseDir . '/Entities/Registration.php',
     'Modules\\Circular\\Http\\Controllers\\Admin\\DashboardController' => $baseDir . '/Http/Controllers/DashboardController.php',
     'Modules\\Circular\\Http\\Controllers\\Admin\\DispatchController' => $baseDir . '/Http/Controllers/DispatchController.php',
-    'Modules\\Circular\\Http\\Controllers\\Admin\\RegistrationController' => $baseDir . '/Http/Controllers/RegistrationController.php',
+    'Modules\\Circular\\Http\\Controllers\\Admin\\RegistrationController' => $baseDir . '/Http/Controllers/RegistrationDetailController.php',
     'Modules\\Circular\\Http\\Livewire\\DispatchReport' => $baseDir . '/Http/Livewire/DispatchReport.php',
     'Modules\\Circular\\Http\\Livewire\\RegistrationReport' => $baseDir . '/Http/Livewire/RegistrationReport.php',
     'Modules\\Circular\\Http\\Requests\\Dispatch\\StoreDispatchRequest' => $baseDir . '/Http/Requests/Dispatch/StoreDispatchRequest.php',

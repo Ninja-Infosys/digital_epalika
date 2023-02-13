@@ -81,7 +81,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

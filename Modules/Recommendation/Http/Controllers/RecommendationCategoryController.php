@@ -84,4 +84,15 @@ class RecommendationCategoryController extends Controller
 
         return back();
     }
+
+    public function getTemplateData(Request $request ,RecommendationCategory $recommendationCategory)
+    {
+
+        if($request->ajax())
+        {
+            return response()->json([
+                'data'=>$recommendationCategory->recommendationTemplates->where('is_active',1)->first()->data??''
+            ]);
+        }
+    }
 }

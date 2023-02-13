@@ -2,17 +2,15 @@
 
 namespace Modules\Recommendation\Http\Controllers\admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Circular\Entities\Registration;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RegistrationDetail;
 use Modules\Recommendation\Http\Requests\Registration\StoreRegistrationRequest;
 use Modules\Recommendation\Http\Requests\Registration\UpdateRegistrationRequest;
 
-class RegistrationController extends Controller
+class RegistrationDetailController extends Controller
 {
     public function index()
     {
@@ -22,7 +20,7 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->withCount('recommendationCategories')->whereNull('recommendation_category_id')->get();
+        $recommendationCategories = RecommendationCategory::get();
         $personaldetails = PersonalDetail::all();
         return view('recommendation::admin.registration.create', compact('recommendationCategories','personaldetails'));
     }
@@ -41,7 +39,7 @@ class RegistrationController extends Controller
 
     public function edit(RegistrationDetail $registrationDetail)
     {
-        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
+        $recommendationCategories = RecommendationCategory::get();
         $personaldetails = PersonalDetail::all();
         return view('recommendation::admin.registration.edit', compact('registrationDetail','recommendationCategories','personaldetails'));
     }
@@ -59,4 +57,6 @@ class RegistrationController extends Controller
         toast('सिफारिस सफलतापूर्वक मेटियो','success');
         return back();
     }
+
+
 }
