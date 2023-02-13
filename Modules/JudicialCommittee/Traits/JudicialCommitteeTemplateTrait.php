@@ -2,6 +2,7 @@
 
 namespace Modules\JudicialCommittee\Traits;
 
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -14,12 +15,15 @@ use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 
 trait JudicialCommitteeTemplateTrait
 {
+    use NepaliDateConverter;
+
     private array $template = [
         [
-            'title' => 'कार्यालय विवरण',
+            'title' => 'विवरण',
             'data' => [
                 'कार्यालय नाम' => '[@office_name]',
                 'कार्यालय लेटर हेड' => '[@letter_head]',
+                'आजको मिति' => '[@today_date]',
             ],
         ],
         [
@@ -234,6 +238,7 @@ trait JudicialCommitteeTemplateTrait
         return [
             '[@office_name]' => officeSetting()->name,
             '[@letter_head]' => letterHead(),
+            '[@today_date]' => $this->get_today_nepali_date(),
         ];
     }
 
