@@ -57,8 +57,8 @@
                                             @endforeach
                                         </select>
                                         <button class="btn btn-sm btn-outline-primary" type="button"
-                                                id="button-farmer"
-                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
+                                                id="button-personalDetail"
+                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#personalDetail-modal">
                                             <i class="fa fa-plus"></i></button>
                                     </div>
                                     @error('personal_detail_id')
@@ -137,7 +137,7 @@
 
 
 
-    <div class="modal fade" id="farmer-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="personalDetail-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -282,10 +282,8 @@
                             $("#personalDetailSubmitBtn").html("पेश गर्नुहोस्");
                             $('.personalDetail').append("<option value=" + resp.data.personal_detail_id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
                             toastMessage('success', resp.message)
-                            $('#farmer-modal').modal('toggle')
-                            $('#farmer-form').trigger('reset')
-                            //for grant detail livewire
-                            Livewire.emit('fetchGranteesData');
+                            $('#personalDetail-modal').modal('toggle')
+                            $('#personalDetail-form').trigger('reset')
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $('#personalDetailSubmitBtn').prop('disabled', false)
