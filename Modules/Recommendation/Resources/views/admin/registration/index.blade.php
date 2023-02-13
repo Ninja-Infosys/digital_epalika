@@ -10,6 +10,10 @@
                             <i class="fa fa-home"></i> गृहपृष्ठ
                         </a>
                     </li>
+                    <li class="breadcrumb-item active">दर्ता</li>
+                </ol>
+            </div>
+            <h4 class="page-title">दर्ता</h4>
                 </ol>
             </div>
         </div>
@@ -52,7 +56,9 @@
                                             {{ $registrationDetail->recommendation }}
                                         </td>
                                       <td>{{ $registrationDetail->date_ne }}</td>
-                                      <td>{{ $registrationDetail->application }}</td>
+                                      <td>
+                                          <img src="{{ $registrationDetail->application }}" alt="{{$registrationDetail->registration_no}}" height="60">
+                                      </td>
                                         <td>
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
@@ -71,7 +77,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

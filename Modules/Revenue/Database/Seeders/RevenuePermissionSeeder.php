@@ -24,6 +24,10 @@ class RevenuePermissionSeeder extends Seeder
             'taxPayer_create',
             'taxPayer_edit',
             'taxPayer_delete',
+            'taxPayerLand_access',
+            'taxPayerLand_create',
+            'taxPayerLand_edit',
+            'taxPayerLand_delete',
             'taxPayerType_access',
             'taxPayerType_create',
             'taxPayerType_edit',
@@ -40,6 +44,8 @@ class RevenuePermissionSeeder extends Seeder
             'place_create',
             'place_edit',
             'place_delete',
+            'revenueSetting_access',
+            'revenueSetting_create',
         ];
 
         $this->storePermission($permissions);
