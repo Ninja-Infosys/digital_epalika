@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Requests\PersonalDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePersonalDetailRequest extends FormRequest
 {
@@ -19,9 +20,9 @@ class UpdatePersonalDetailRequest extends FormRequest
             'is_minor' => ['nullable','boolean'],
             'citizenship_no' => ['required', 'string'],
             'gender' => ['required','string'],
-            'province_id' =>['required', 'integer'],
-            'district_id' => ['required','integer'],
-            'local_body_id' => ['required','integer'],
+            'province_id' =>['required', Rule::exists('provinces','id')->withoutTrashed()],
+            'district_id' => ['required', Rule::exists('districts','id')->withoutTrashed()],
+            'local_body_id' => ['required',Rule::exists('local_bodies','id')->withoutTrashed()],
             'ward_no' => ['required','integer'],
             'tole' => ['required','string']
         ];
