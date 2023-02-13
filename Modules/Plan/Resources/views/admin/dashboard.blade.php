@@ -76,20 +76,20 @@
     <div class="row mt-2" id="charts" data-chart-url="{{route('admin.plan.dashboard')}}">
         <div class="col-lg-6">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0"> चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु
-                    </h5>
                     <div id="budgetHeadWiseProjects" chart-type="pie"></div>
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">  चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजना स्तर अनुसारका योजनाहरु</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजना स्तर अनुसारका योजनाहरु
-                    </h5>
                     <div id="planLevelWiseProjects" chart-type="pie"></div>
                 </div>
             </div>
@@ -98,10 +98,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">   चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु
-                    </h5>
                     <div id="planAreaWiseProjects" chart-type="column"></div>
                 </div>
             </div>
@@ -110,19 +110,20 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
-                    </h5>
                     <div id="wardWiseProjects" chart-type="column"></div>
                 </div>
             </div>
         </div>
     </div>
     @push('scripts')
-        <script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
     @endpush
 @endsection
