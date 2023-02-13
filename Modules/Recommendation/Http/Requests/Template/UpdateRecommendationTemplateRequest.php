@@ -3,12 +3,13 @@
 namespace Modules\Recommendation\Http\Requests\Template;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateRecommendationTemplateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('recommendationTemplate_edit');
     }
 
     public function rules(): array

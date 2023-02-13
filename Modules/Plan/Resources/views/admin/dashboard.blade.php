@@ -80,7 +80,9 @@
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु
                     </h5>
-                    <div id="budgetHeadWiseProjects" class="apex-charts pt-3"></div>
+                    <div id="budgetHeadWiseProjects" class="apex-charts pt-3">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,12 +110,26 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
+                    </h5>
+                    <div id="container"></div>
+                    <div id="wardWiseProjects" class="apex-charts pt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
                     </h5>
+                    <div id="test"></div>
                     <div id="wardWiseProjects" class="apex-charts pt-3"></div>
                 </div>
             </div>
@@ -121,6 +137,8 @@
     </div>
     @push('scripts')
         <script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
     @endpush
 @endsection

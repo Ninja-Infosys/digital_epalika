@@ -35,7 +35,7 @@
                         <div class="card text-center">
                             <div class="card-body">
                                 <h4>व्यक्तिगत विवरण</h4>
-                                
+
                                 <div class="text-start mt-3">
 
                                     <p class="mb-2 font-15"><strong>पुरा नाम :</strong> <span
@@ -45,10 +45,10 @@
                                             class="ms-2">{{ $personalDetail->phone_no }}</span></p>
 
                                     <p class="mb-2 font-15"><strong>लिङ्ग:</strong> <span
-                                            class="ms-2">{{ $personalDetail->gender }}</span></p>
+                                            class="ms-2">{{ $personalDetail->gender?->label()??'' }}</span></p>
 
                                     <p class="mb-2 font-15"><strong>नाबालिक हो/होइन:</strong> <span
-                                            class="ms-2">{{ $personalDetail->is_minor }}</span></p>
+                                            class="ms-2">{{ $personalDetail->is_minor==0 ? 'होइन':'हो' }}</span></p>
 
                                     <p class="mb-2 font-15"><strong>नागरिकता नं:</strong> <span
                                             class="ms-2">{{ $personalDetail->citizenship_no }}</span></p>

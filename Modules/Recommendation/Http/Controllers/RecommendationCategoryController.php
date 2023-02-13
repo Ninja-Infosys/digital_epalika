@@ -15,7 +15,7 @@ class RecommendationCategoryController extends Controller
 {
     public function index($type)
     {
-        $recommendationCategories  = RecommendationCategory::with('recommendationCategory')->where(function($query) use($type){
+        $recommendationCategories  = RecommendationCategory::with('recommendationCategory')->withCount(['recommendationCategories'])->where(function($query) use($type){
             if($type=='recommendationSubCategory')
             {
                 $query->whereNotNull('recommendation_category_id');
@@ -38,8 +38,6 @@ class RecommendationCategoryController extends Controller
     {
         RecommendationCategory::create($request->validated()+[
             'user_id'=>auth()->id(),
-            'is_active' => RecommendationCategory::where('recommendation_category_id', $request->input('recommendation_category_id')
-            )->where('is_active', 1)->count() === 0 ? '1' : '0'
         ]);
         toast('सिफारिस सफलतापूर्वक थपियो', 'success');
         return back();

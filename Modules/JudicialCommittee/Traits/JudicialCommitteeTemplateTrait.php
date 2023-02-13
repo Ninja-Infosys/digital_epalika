@@ -222,11 +222,8 @@ trait JudicialCommitteeTemplateTrait
         $replace = [];
 
         $replace = array_merge(
-            $this->getOfficeSettingReplacement(),
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getComplainantReplacement(),
-            $this->getDefendantReplacement(),
             $this->getJudicialReceiptBillReplacement()
         );
 
@@ -244,18 +241,23 @@ trait JudicialCommitteeTemplateTrait
 
     private function getComplaintApplicationReplacement(): array
     {
-        return [
-            '[@applicant_name]' => $this->applicant_name ?? '',
-            '[@applicant_phone]' => $this->applicant_phone ?? '',
-            '[@applicant_address]' => $this->applicant_address ?? '',
-            //complaint details
-            '[@submission_no]' => $this->submission_no ?? '',
-            '[@registration_no]' => $this->registration_no ?? '',
-            '[@lawsuit_nature]' => $this->lawsuitNature->title ?? '',
-            '[@subject]' => $this->subject ?? '',
-            '[@date]' => $this->date ?? '',
-            '[@complaint_detail]' => $this->complaint_detail ?? '',
-        ];
+        return array_merge(
+            [
+                '[@applicant_name]' => $this->applicant_name ?? '',
+                '[@applicant_phone]' => $this->applicant_phone ?? '',
+                '[@applicant_address]' => $this->applicant_address ?? '',
+                //complaint details
+                '[@submission_no]' => $this->submission_no ?? '',
+                '[@registration_no]' => $this->registration_no ?? '',
+                '[@lawsuit_nature]' => $this->lawsuitNature->title ?? '',
+                '[@subject]' => $this->subject ?? '',
+                '[@date]' => $this->date ?? '',
+                '[@complaint_detail]' => $this->complaint_detail ?? '',
+            ],
+            $this->getComplainantReplacement(),
+            $this->getDefendantReplacement(),
+            $this->getOfficeSettingReplacement()
+        );
     }
 
     private function getComplainantReplacement(): array
