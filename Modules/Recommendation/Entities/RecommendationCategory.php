@@ -4,6 +4,7 @@ namespace Modules\Recommendation\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,22 +26,23 @@ class RecommendationCategory extends Model
     'user_id'
    ];
 
-   public function recommendationCategory()
+   public function recommendationCategory(): BelongsTo
    {
     return $this->belongsTo(RecommendationCategory::class);
    }
 
-   public function recommendationCategories()
+   public function recommendationCategories(): HasMany
    {
     return $this->hasMany(RecommendationCategory::class);
    }
 
-   public function user()
+   public function user(): BelongsTo
    {
     return $this->belongsTo(RecommendationCategory::class);
    }
 
-   public function recommendationTemplates(){
+   public function recommendationTemplates(): HasMany
+   {
     return $this->hasMany(RecommendationTemplate::class);
    }
    public function scopeActive($q)

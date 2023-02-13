@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\Province;
 use App\Models\Address\LocalBody;
@@ -12,7 +13,7 @@ use App\Traits\EventObserveTrait;
 
 class PersonalDetail extends Model
 {
- 
+
     use HasFactory,SoftDeletes,EventObserveTrait;
 
    protected $dates = [
@@ -35,6 +36,10 @@ class PersonalDetail extends Model
     'ward_no',
     'tole'
    ];
+
+   protected $casts = [
+       'gender'=>Gender::class
+       ];
 
    public function province()
    {

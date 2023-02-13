@@ -7,9 +7,9 @@ use Modules\Recommendation\Entities\PersonalDetail;
 class PersonalDetailObserver
 {
 
-    public function creating(PersonalDetail $personalDetail)
+    public function creating(PersonalDetail $personalDetail): void
     {
-        $personalDetail->reg_no = rand(0,999);
+        $personalDetail->reg_no = 'R'.'-' .rand(0, 999) . '-'.officeSetting()->fiscalYear->title ??'';
         $personalDetail->user_id = auth()->id();
     }
 

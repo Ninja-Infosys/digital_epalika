@@ -22,7 +22,7 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
+        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->withCount('recommendationCategories')->whereNull('recommendation_category_id')->get();
         $personaldetails = PersonalDetail::all();
         return view('recommendation::admin.registration.create', compact('recommendationCategories','personaldetails'));
     }

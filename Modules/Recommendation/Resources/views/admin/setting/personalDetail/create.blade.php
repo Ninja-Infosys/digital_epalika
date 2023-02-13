@@ -24,14 +24,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ व्यक्तिगतको विवरण थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> व्यक्तिगत विवरण सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <form action="{{route('admin.recommendation.setting.personalDetail.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.recommendation.setting.personalDetail.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <fieldset>
                             <legend><h4 class="text-info">व्यक्तिगत विवरण</h4></legend>
@@ -116,21 +118,20 @@
                             'local_body_id' => old('local_body_id',$officeSetting->local_body_id) ,
                             'ward_no' =>  old('ward_no',$officeSetting->ward_no)
                             ])
-                                <div class="col-md-6 mb-2">
-                                    <label for="tole" class="form-label">
-                                        टोल</label>
-                                    <input
-                                        type="text"
-                                        name="tole"
-                                        value="{{old('tole')}}"
-                                        class="form-control @error('tole') is-invalid @enderror"
-                                        id="tole"
-                                        placeholder="टोल"
-                                    />
-                                    @error('tole')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="tole" class="form-label">
+                                    टोल</label>
+                                <input
+                                    type="text"
+                                    name="tole"
+                                    value="{{old('tole')}}"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    id="tole"
+                                    placeholder="टोल"
+                                />
+                                @error('tole')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
