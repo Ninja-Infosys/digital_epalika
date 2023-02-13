@@ -37,20 +37,17 @@
         id="setting">
         <ul class="nav-second-level">
 
-            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+            <li class="{{request()->routeIs('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationCategory')}}">
                     <span>सिफारिस</span>
                 </a>
             </li>
 
-            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+            <li class="{{request()->routeIs('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
                     <span>सिफारिस उप श्रेणी</span>
                 </a>
             </li>
-           
-               
-
         </ul>
     </div>
 </li>
