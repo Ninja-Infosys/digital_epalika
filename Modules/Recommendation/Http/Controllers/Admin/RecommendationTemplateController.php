@@ -24,14 +24,14 @@ class RecommendationTemplateController extends Controller
 
     public function create($type,RecommendationCategory $recommendationCategory)
     {
-    
+
         $this->checkAuthorization('recommendationTemplate_create');
         return view('recommendation::admin.setting.recommendationTemplate.create',compact('type','recommendationCategory'));
     }
 
     public function store(StoreRecommendationTemplateRequest $request,$type,RecommendationCategory $recommendationCategory)
     {
-       
+
         $this->checkAuthorization('recommendationTemplate_create');
         RecommendationTemplate::create($request->validated() + [
                 'user_id'=>auth()->id(),
@@ -51,7 +51,7 @@ class RecommendationTemplateController extends Controller
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
-    
+
         return view('recommendation::admin.setting.recommendationTemplate.edit', compact('type','recommendationTemplate','recommendationCategory'));
     }
 
@@ -60,7 +60,6 @@ class RecommendationTemplateController extends Controller
         $this->checkAuthorization('recommendationTemplate_edit');
 
         $recommendationTemplate->update($request->validated());
-        $recommendationCategory->update($request->validated());
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
@@ -70,8 +69,7 @@ class RecommendationTemplateController extends Controller
     {
         $this->checkAuthorization('recommendationTemplate_delete');
         if ($recommendationTemplate->is_active == 1) {
-            toast('Error while deleting file', 'error');
-
+            toast('सक्रिय भएको टेम्प्लेट मेटाउन मनाहि छ', 'error');
             return back();
         }
 

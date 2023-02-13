@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">आधरभूत सेटिंग</li>
+                        <li class="breadcrumb-item active">{{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">आधरभूत सेटिंग</h4>
+                <h4 class="page-title">{{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}}</h4>
             </div>
         </div>
     </div>
@@ -24,11 +24,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सिफारिस प्रकार थप्नुहोस</h4>
+                        <h4 class="header-title">{{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} सम्पादन गर्नुहोस</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.setting.recommendationCategory.index', $type) }}"
                                 class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"></i> सिफारिस प्रकार सूची
+                                <i class="fa fa-list"></i> {{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} सूची
                             </a>
                         @endcan
                     </div>
@@ -41,13 +41,13 @@
                         <div class="row">
                             @if($type=='recommendationSubCategory')
                             <div class="col-md-12">
-                                <label for="recommendation_category_id">सिफारिसको प्रकार छान्नुहोस्</label>
+                                <label for="recommendation_category_id">वर्ग</label>
                                 <select id="recommendation_category_id" name="recommendation_category_id" class="form-control">
                                     <option>छान्नुहोस्</option>
                                     @foreach ($recommendationCategories as $recommendationCategoryData )
-                                    <option value="{{ $recommendationCategoryData->id }}" {{ old('recommendation_category_id',$recommendationCategory->recommendation_category_id) == $recommendationCategoryData->id ? 'selected':''}}>{{ $recommendationCategoryData->title }}</option> 
+                                    <option value="{{ $recommendationCategoryData->id }}" {{ old('recommendation_category_id',$recommendationCategory->recommendation_category_id) == $recommendationCategoryData->id ? 'selected':''}}>{{ $recommendationCategoryData->title }}</option>
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
                             @endif

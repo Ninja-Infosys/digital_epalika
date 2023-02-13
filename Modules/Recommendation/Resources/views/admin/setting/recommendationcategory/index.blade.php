@@ -11,10 +11,10 @@
                         </a>
                     </li>
 
-                    <li class="breadcrumb-item active">सिफारिस</li>
+                    <li class="breadcrumb-item active">{{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}}</li>
                 </ol>
             </div>
-            <h4 class="page-title">सिफारिस</h4>
+            <h4 class="page-title">{{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}}</h4>
         </div>
     </div>
 </div>
@@ -24,11 +24,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सिफारिस प्रकार सूची</h4>
+                        <h4 class="header-title">{{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} सूची</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.setting.recommendationCategory.create', $type) }}"
                                 class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ सिफारिस प्रकार थप्नुहोस
+                                <i class="fa fa-plus-circle"></i> नयाँ {{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} थप्नुहोस
                             </a>
                         @endcan
                     </div>
@@ -40,9 +40,9 @@
                                 <tr>
                                     <th>क्र.स</th>
                                     @if($type=='recommendationSubCategory')
-                                    <th>सिफारिस उप श्रेणी</th>
+                                    <th>शिर्षक</th>
                                     @endif
-                                    <th>सिफारिस</th>
+                                    <th> {{$type=='recommendationCategory' ? 'शिर्षक':'वर्ग'}}</th>
                                     <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
@@ -65,9 +65,11 @@
                                             </a>
                                         </td>
                                         <td>
+                                            @if(!$recommendationCategory->recommendation_categories_count)
                                             <a class="btn btn-xs btn-outline-warning" href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory]) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+                                            @endif
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.recommendation.setting.recommendationCategory.edit', [$type,$recommendationCategory]) }}"
                                                 class="btn btn-xs btn-outline-warning"
@@ -79,11 +81,9 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if(!$recommendationCategory->status)
                                                 <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                                @endif
                                             </form>
                                         </td>
                                     </tr>

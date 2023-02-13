@@ -68,19 +68,18 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="row">
-
-                                @foreach ((new \Modules\JudicialCommittee\Entities\ComplaintApplication())->getTemplateOptions() as $template)
-                                    <div class="col-md-12 mt-1">
-                                        <h6>{{ $template['title'] ?? '' }}</h6>
-                                    </div>
-                                    <div class="col-md-12">
-                                        @foreach ($template['data'] as $key => $templateValue)
-                                            <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                                onclick="copyText('{{ $templateValue }}')">
-                                                {{ $key }} : {{ $templateValue }}
-                                            </a>
-                                        @endforeach
+                            <div class="col-md-12 mb-2">
+                                @foreach( (new \Modules\JudicialCommittee\Entities\ComplaintApplication())->getTemplateOptions() as $template)
+                                    <div class="mt-2">
+                                        <h4>{{$template['title'] ?? ''}} :</h4>
+                                        <div class="button-list">
+                                            @foreach($template['data'] as $key=>$templateValue)
+                                                <button type="button" class="btn btn-outline-primary btn-xs"
+                                                        onclick="copyText('{{$templateValue}}')">
+                                                    {{$key}}
+                                                </button>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>

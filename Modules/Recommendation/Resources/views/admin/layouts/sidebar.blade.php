@@ -16,12 +16,6 @@
         <span>सिफारिस</span>
     </a>
 </li>
-{{-- <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
-    <a href="{{route('admin.recommendation.recommendation.list')}}">
-        <i class="fa fa-thumbs-up"></i>
-        <span>सिफारिस</span>
-    </a>
-</li> --}}
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#setting"
        {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'aria-expanded=true' : ''}}
@@ -37,20 +31,17 @@
         id="setting">
         <ul class="nav-second-level">
 
-            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationCategory')}}">
-                    <span>सिफारिस</span>
+                    <span>सिफारिस श्रेणी</span>
                 </a>
             </li>
 
-            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+            <li class="{{request()->is('admin/recommendation/setting/recommendationSubCategory/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
                     <span>सिफारिस उप श्रेणी</span>
                 </a>
             </li>
-           
-               
-
         </ul>
     </div>
 </li>

@@ -2,6 +2,7 @@
 
 namespace Modules\JudicialCommittee\Traits;
 
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -14,7 +15,17 @@ use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 
 trait JudicialCommitteeTemplateTrait
 {
+    use NepaliDateConverter;
+
     private array $template = [
+        [
+            'title' => 'विवरण',
+            'data' => [
+                'कार्यालय नाम' => '[@office_name]',
+                'कार्यालय लेटर हेड' => '[@letter_head]',
+                'आजको मिति' => '[@today_date]',
+            ],
+        ],
         [
             'title' => 'निवेदक को विवरण',
             'data' => [
@@ -213,37 +224,49 @@ trait JudicialCommitteeTemplateTrait
         $replace = array_merge(
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getComplainantReplacement(),
-            $this->getDefendantReplacement(),
             $this->getJudicialReceiptBillReplacement()
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
-    private function getComplaintApplicationReplacement(): array
+    private function getOfficeSettingReplacement(): array
     {
         return [
-            '[@applicant_name]' => $this->applicant_name ?? '',
-            '[@applicant_phone]' => $this->applicant_phone ?? '',
-            '[@applicant_address]' => $this->applicant_address ?? '',
-            //complaint details
-            '[@submission_no]' => $this->submission_no ?? '',
-            '[@registration_no]' => $this->registration_no ?? '',
-            '[@lawsuit_nature]' => $this->lawsuitNature->title ?? '',
-            '[@subject]' => $this->subject ?? '',
-            '[@date]' => $this->date ?? '',
-            '[@complaint_detail]' => $this->complaint_detail ?? '',
+            '[@office_name]' => officeSetting()->name,
+            '[@letter_head]' => letterHead(),
+            '[@today_date]' => $this->get_today_nepali_date(),
         ];
+    }
+
+    private function getComplaintApplicationReplacement(): array
+    {
+        return array_merge(
+            [
+                '[@applicant_name]' => $this->applicant_name ?? '',
+                '[@applicant_phone]' => $this->applicant_phone ?? '',
+                '[@applicant_address]' => $this->applicant_address ?? '',
+                //complaint details
+                '[@submission_no]' => $this->submission_no ?? '',
+                '[@registration_no]' => $this->registration_no ?? '',
+                '[@lawsuit_nature]' => $this->lawsuitNature->title ?? '',
+                '[@subject]' => $this->subject ?? '',
+                '[@date]' => $this->date ?? '',
+                '[@complaint_detail]' => $this->complaint_detail ?? '',
+            ],
+            $this->getComplainantReplacement(),
+            $this->getDefendantReplacement(),
+            $this->getOfficeSettingReplacement()
+        );
     }
 
     private function getComplainantReplacement(): array
     {
         $complainants = $this->complainantDefendants->where('type', 'complainant');
-        $complainants->load('province','district','localBody');
+        $complainants->load('province', 'district', 'localBody');
 
         return [
-            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : ''),
+            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित " . ($complainants->count() - 1) . " जना" : ''),
             '[@complainant.name]' => implode(',', $complainants->pluck('name')->toArray()),
             '[@complainant.age]' => ($complainants?->first()->age ?? ''),
             '[@complainant.father_name]' => ($complainants?->first()->father_name ?? ''),
@@ -260,10 +283,10 @@ trait JudicialCommitteeTemplateTrait
     private function getDefendantReplacement(): array
     {
         $defendants = $this->complainantDefendants->where('type', 'defendant');
-        $defendants->load('province','district','localBody');
+        $defendants->load('province', 'district', 'localBody');
 
         return [
-            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : ''),
+            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित " . ($defendants->count() - 1) . " जना" : ''),
             '[@defendant.name]' => implode(',', $defendants->pluck('name')->toArray()),
             '[@defendant.age]' => ($defendants?->first()->age ?? ''),
             '[@defendant.father_name]' => ($defendants?->first()->father_name ?? ''),
