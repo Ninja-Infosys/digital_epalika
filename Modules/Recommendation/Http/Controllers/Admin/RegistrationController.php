@@ -49,14 +49,14 @@ class RegistrationController extends Controller
     public function update(UpdateRegistrationRequest $request, RegistrationDetail $registrationDetail)
     {
         $registrationDetail->update($request->validated());
-        toast('दर्ता विवरण सफलतापूर्वक गरियो','success');
+        toast('सिफारिस विवरण सफलतापूर्वक गरियो','success');
          return redirect()->route('admin.recommendation.registrationDetail.index');
     }
 
     public function destroy(RegistrationDetail $registrationDetail)
     {
         $registrationDetail->delete();
-        toast('व्यक्तिगत विवरण सफलतापूर्वक मेटियो','success');
+        toast('सिफारिस सफलतापूर्वक मेटियो','success');
         return back();
     }
 }
