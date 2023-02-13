@@ -10,7 +10,7 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> आधारभूत सेटिंग</li>
+                        <li class="breadcrumb-item active"> व्यक्तिगत विवरण </li>
                     </ol>
                 </div>
                 <h4 class="page-title">व्यक्तिगत विवरण</h4>
