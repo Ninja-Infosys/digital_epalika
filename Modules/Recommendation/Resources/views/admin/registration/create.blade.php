@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <x-date-input-component
-                                        get-today-date="{{false}}"
+                                        get-today-date="{{true}}"
                                         name-ne="date_ne" label-ne="मिति*"
                                         name-en="date_en" label-en="English Date"
                                     />
