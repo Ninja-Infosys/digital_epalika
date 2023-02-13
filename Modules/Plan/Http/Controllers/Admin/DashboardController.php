@@ -31,9 +31,9 @@ class DashboardController extends Controller
 
         if (request()->ajax()) {
             return [
-                'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
+                //'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
                 'wardWiseProjects' => $this->getWardWiseProjects(),
-                'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
+                //'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
                 'planAreaWiseProjects' => $this->getPlanAreaWiseProjects()
             ];
         }
@@ -92,7 +92,6 @@ class DashboardController extends Controller
             });
 
         return [
-            'chartType' => 'bar',
             'labels' => $planAreas->pluck('area_name')->toArray(),
             'dataSets' => [
                 [
@@ -132,9 +131,13 @@ class DashboardController extends Controller
             });
 
         return [
-            'chartType' => 'pie',
             'labels' => $budgetHeads->pluck('title')->toArray(),
-            'data' => $budgetHeads->pluck('projects_count')->toArray(),
+            'dataSets'=>[
+                [
+                    'data' => $budgetHeads->pluck('projects_count')->toArray(),
+                    'label' => 'जम्मा'
+                ],
+            ]
         ];
     }
 

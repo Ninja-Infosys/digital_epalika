@@ -110,27 +110,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
-                    </h5>
-                    <div id="container"></div>
-                    <div id="wardWiseProjects" class="apex-charts pt-3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
                     </h5>
-                    <div id="test"></div>
-                    <div id="wardWiseProjects" class="apex-charts pt-3"></div>
+                    <div id="wardWiseProjects"></div>
                 </div>
             </div>
         </div>
