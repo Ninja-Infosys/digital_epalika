@@ -264,7 +264,7 @@ trait JudicialCommitteeTemplateTrait
         $complainants->load('province', 'district', 'localBody');
 
         return [
-            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : ''),
+            '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित " . ($complainants->count() - 1) . " जना" : ''),
             '[@complainant.name]' => implode(',', $complainants->pluck('name')->toArray()),
             '[@complainant.age]' => ($complainants?->first()->age ?? ''),
             '[@complainant.father_name]' => ($complainants?->first()->father_name ?? ''),
@@ -284,7 +284,7 @@ trait JudicialCommitteeTemplateTrait
         $defendants->load('province', 'district', 'localBody');
 
         return [
-            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : ''),
+            '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित " . ($defendants->count() - 1) . " जना" : ''),
             '[@defendant.name]' => implode(',', $defendants->pluck('name')->toArray()),
             '[@defendant.age]' => ($defendants?->first()->age ?? ''),
             '[@defendant.father_name]' => ($defendants?->first()->father_name ?? ''),
