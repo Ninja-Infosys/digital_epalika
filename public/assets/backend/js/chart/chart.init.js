@@ -1,24 +1,4 @@
 Apex.grid = {padding: {right: 0, left: 0}}, Apex.dataLabels = {enabled: !1};
-
-$(window).on('load', async() =>{
-    await $.ajax({
-        method: 'get',
-        url: $('#charts').attr('data-chart-url'),
-        success:  async(res) =>{
-           await Object.keys(res).forEach(key => {
-                const targetElement = document.getElementById(key);
-                if (targetElement) {
-                    if (res[key].chartType === 'pie' || res[key].chartType==='donut') {
-                        setPieData(targetElement, res[key].labels, res[key].data)
-                    } else {
-                        setBarData(targetElement, res[key].labels, res[key].dataSets)
-                    }
-                }
-            })
-        }
-    })
-})
-
 function randomColors() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -77,4 +57,46 @@ function setPieData(el, labels, data) {
     };
     (chart = new ApexCharts(el, options)).render();
 }
+$(document).ready(async () => {
+    $('.apex-charts').each((key,el)=>{
+        let options = {
+            chart: {height: 320, type: "pie"},
+            series: [],
+            //labels: labels,
+            //colors: colors,
+            legend: {
+                show: !0,
+                position: "bottom",
+                horizontalAlign: "center",
+                verticalAlign: "middle",
+                floating: !1,
+                fontSize: "14px",
+                offsetX: 0,
+                offsetY: 7
+            },
+            responsive: [{breakpoint: 600, options: {chart: {height: 240}, legend: {show: !1}}}]
+        };
+        let chart1 = new ApexCharts(el, options);
+    })
+    await $.ajax({
+        method: 'get',
+        url: $('#charts').attr('data-chart-url'),
+        success: (res) => {
+            for (const key of Object.keys(res)) {
+                const targetElement = document.getElementById(key);
+                if (targetElement) {
+                    if (res[key].chartType === 'pie' || res[key].chartType === 'donut') {
+                        setPieData(targetElement, res[key].labels, res[key].data)
+                    } else {
+                        setBarData(targetElement, res[key].labels, res[key].dataSets)
+                    }
+                }
+            }
+        },
+        error: function () {
+            alert('Something Went Wrong')
+        }
+    })
+})
+
 

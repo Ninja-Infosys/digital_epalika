@@ -45,4 +45,9 @@ class Place extends Model
             set: fn($value) => implode(",", $value),
         );
     }
+
+    public function getSiUnitRateAttribute()
+    {
+        $standardUnit = get_revenue_setting()->standard_unit;
+    }
 }

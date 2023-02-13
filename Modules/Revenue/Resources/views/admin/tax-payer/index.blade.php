@@ -26,8 +26,9 @@
                         <h4 class="header-title mb-0">करदाताहरुको सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            @can('revenueCategory_create')
-                                <a href="{{route('admin.revenue.taxPayer.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            @can('taxPayer_create')
+                                <a href="{{route('admin.revenue.taxPayer.create')}}"
+                                   class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -59,20 +60,29 @@
                                     <td>{{$taxPayer->ward}}</td>
                                     <td>
                                         @if($taxPayer->is_active == 1)
-                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="btn btn-xs btn-primary waves-effect waves-light">सक्रिय</a>
+                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}"
+                                               class="btn btn-xs btn-primary waves-effect waves-light">सक्रिय</a>
                                         @else
-                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="btn btn-xs btn-danger waves-effect waves-light">निष्क्रिय</a>
+                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}"
+                                               class="btn btn-xs btn-danger waves-effect waves-light">निष्क्रिय</a>
                                         @endif
                                     </td>
                                     <td>
-                                        @can('taxPayerType_edit')
+                                        @can('taxPayerLand_access')
+                                            <a
+                                                href="{{route('admin.revenue.taxPayer.taxPayerLand.index',[$taxPayer])}}"
+                                                class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-mountain-sun"></i>
+                                            </a>
+                                        @endcan
+                                        @can('taxPayer_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.taxPayer.edit',[$taxPayer])}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('taxPayerType_delete')
+                                        @can('taxPayer_delete')
                                             <form
                                                 action="{{route('admin.revenue.taxPayer.destroy',[$taxPayer])}}"
                                                 method="post">

@@ -34,6 +34,13 @@
     <div class="collapse {{request()->routeIs('admin.revenue.setting.*') ? 'show' : ''}}"
          id="sidebarRevenueSetting">
         <ul class="nav-second-level">
+            @can('setting_access')
+                <li class="{{request()->routeIs('admin.revenue.setting.index') || request()->routeIs('admin.revenue.setting.store') ? 'active' : ''}}">
+                    <a href="{{route('admin.revenue.setting.index')}}">
+                        <span>सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
             @can('revenueCategory_access')
                 <li class="{{request()->routeIs('admin.revenue.setting.revenue-category.*') ? 'active' : ''}}">
                     <a href="{{route('admin.revenue.setting.revenue-category.index')}}">

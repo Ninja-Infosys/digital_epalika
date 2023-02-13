@@ -5,6 +5,7 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,10 +15,10 @@ use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\Partner;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
-use mysql_xdevapi\DocResult;
 
 class DashboardController extends Controller
 {
+    use NepaliDateConverter;
 
     protected Collection $businessDetail;
 
@@ -25,7 +26,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
 
-        $this->businessDetail = BusinessDetail::selectRaw('fiscal_year_id,ward_no,registration_no')->whereNotNull('registration_no')->get();
+        $this->businessDetail = BusinessDetail::selectRaw('fiscal_year_id,ward_no,registration_no,registration_date_ne')->whereNotNull('registration_no')->get();
     }
     public function __invoke(): Factory|View|Application
     {
@@ -36,7 +37,8 @@ class DashboardController extends Controller
         $businessDetailTransaction = $this->getTotalTransactionData();
         $wardWise = $this->getWardWiseData();
         $fiscalYearWise = $this->getFiscalYearWiseData();
-        return view('businessregistration::admin.dashboard', compact( 'fiscalYearWise','businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailNatureCount', 'totalObjectTransactionCategoryCount','wardWise'));
+        $monthlyWise = $this->getMonthlyWise();
+        return view('businessregistration::admin.dashboard', compact( 'monthlyWise','fiscalYearWise','businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailNatureCount', 'totalObjectTransactionCategoryCount','wardWise'));
     }
 
 
@@ -116,6 +118,28 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYear->pluck('business_detail_count')->toArray(),
                     'label' => 'जम्मा',
+                    'fill' => 'false',
+                ],
+            ],
+        ];
+    }
+
+
+    public function getMonthlyWise(): array
+    {
+        $monthlyRegistrations = [];
+
+        foreach ($this->month_name as $key => $month) {
+            $monthlyRegistrations[] = $this->businessDetail->where('fiscal_year_id',\officeSetting()->fiscal_year_id)
+                ->where('registration_month', ($key + 1))
+                ->count();
+        }
+        return [
+            'labels' => $this->month_name,
+            'dataSets' => [
+                [
+                    'data' => $monthlyRegistrations,
+                    'label' => 'दर्ता',
                     'fill' => 'false',
                 ],
             ],

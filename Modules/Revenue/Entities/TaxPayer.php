@@ -103,4 +103,9 @@ class TaxPayer extends Model
         return $this->hasMany(TaxPayerFamily::class);
     }
 
+    public function taxPayerLands(): HasMany
+    {
+        return $this->hasMany(TaxPayerLand::class);
+    }
+
 }
