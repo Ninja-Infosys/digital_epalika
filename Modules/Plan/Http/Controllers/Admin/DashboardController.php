@@ -31,9 +31,9 @@ class DashboardController extends Controller
 
         if (request()->ajax()) {
             return [
-                //'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
+                'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
                 'wardWiseProjects' => $this->getWardWiseProjects(),
-                //'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
+                'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
                 'planAreaWiseProjects' => $this->getPlanAreaWiseProjects()
             ];
         }
@@ -63,7 +63,6 @@ class DashboardController extends Controller
         }
 
         return [
-            'chartType' => 'bar',
             'labels' => $wardsData->pluck('ward_no')->toArray(),
             'dataSets' => [
                 [
@@ -125,20 +124,12 @@ class DashboardController extends Controller
                 }]);
             }])->whereNull('budget_head_id')->get()->map(function ($budgetHead) {
                 return [
-                    'title' => $budgetHead->title,
-                    'projects_count' => $budgetHead->projects_count + $budgetHead->budgetHeads->sum('projects_count')
+                    'name' => $budgetHead->title,
+                    'data' => $budgetHead->projects_count + $budgetHead->budgetHeads->sum('projects_count')
                 ];
             });
 
-        return [
-            'labels' => $budgetHeads->pluck('title')->toArray(),
-            'dataSets'=>[
-                [
-                    'data' => $budgetHeads->pluck('projects_count')->toArray(),
-                    'label' => 'जम्मा'
-                ],
-            ]
-        ];
+        return $budgetHeads;
     }
 
     private function getPlanLevelWiseProjects()
@@ -152,15 +143,11 @@ class DashboardController extends Controller
                 }]);
             }])->whereNull('plan_level_id')->get()->map(function ($planLevel) {
                 return [
-                    'level_name' => $planLevel->level_name,
-                    'projects_count' => $planLevel->projects_count + $planLevel->planLevels->sum('projects_count')
+                    'name' => $planLevel->level_name,
+                    'data' => $planLevel->projects_count + $planLevel->planLevels->sum('projects_count')
                 ];
             });
 
-        return [
-            'chartType' => 'pie',
-            'labels' => $planLevels->pluck('level_name')->toArray(),
-            'data' => $planLevels->pluck('projects_count')->toArray()
-        ];
+        return $planLevels;
     }
 }

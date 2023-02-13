@@ -1,19 +1,13 @@
-function getRandomColor() {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
 $(document).ready(() => {
     const url = $('#charts').data('chart-url');
     $.ajax({
         method: 'GET',
         url,
-        async: true,
-        cache: false,
         success: (response) => {
             Object.keys(response).forEach((key) => {
                 const targetElement = document.getElementById(key);
                 if (targetElement) {
-                    const {labels, dataSets} = response[key];
-                    createChart(targetElement, labels, dataSets);
+                    createChart(targetElement, response[key]);
                 }
             })
         },
@@ -22,27 +16,37 @@ $(document).ready(() => {
         },
     })
 
-    function createChart(element, labels, dataSets) {
-        const chartDatasets = [];
-        const pieDataSet =[];
-        dataSets.forEach((dataset) => {
-            chartDatasets.push({
-                name: dataset.label,
-                data: dataset.data,
-            });
-        });
-        dataSets.forEach((dataset)=>{
-            pieDataSet.push({
-                name: dataset.label,
-                y: dataset.data,
-            })
-        })
+    function createChart(element, data) {
+        const chartType = $(element).attr('chart-type');
+        if (['pie', 'donut'].includes(chartType)) {
+            if (Array.isArray(data)) {
+                const pieData = data.map(val => {
+                    return {
+                        name: val.name,
+                        y: val.data
+                    }
+                })
+                setPieChart(element, chartType, pieData)
+            } else {
+                toastMessage('error', 'पाई चार्ट डाटा मान्य ढाँचामा छैन')
+            }
+        } else {
+            if (typeof data === 'object' && data.labels && data.dataSets) {
+                const chartDatasets = [];
+                data.dataSets.forEach((dataset) => {
+                    chartDatasets.push({
+                        name: dataset.label,
+                        data: dataset.data,
+                    });
+                });
+                setBarChart(element, chartType, data.labels, chartDatasets)
+            } else {
+                toastMessage('error', 'बार चार्ट डाटा मान्य ढाँचामा छैन')
+            }
+        }
+    }
 
-        // setBarChart(element,'pie',labels,chartDatasets)
-        setPieChart(element,'pie',labels,pieDataSet)
-}
-
-    function setBarChart(element,charType='pie',labels,dataSets){
+    function setBarChart(element, charType = 'column', labels, dataSets) {
         Highcharts.chart(element, {
             chart: {
                 type: charType
@@ -54,14 +58,12 @@ $(document).ready(() => {
             },
             yAxis: {
                 min: 0,
-                title: {
-                    text: 'Rainfall (mm)'
-                }
+                title: false,
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
@@ -76,7 +78,7 @@ $(document).ready(() => {
         });
     }
 
-    function setPieChart(element,chartType='pie', labels, dataSets){
+    function setPieChart(element, chartType = 'pie', data) {
         Highcharts.chart(element, {
             chart: {
                 plotBackgroundColor: null,
@@ -84,10 +86,7 @@ $(document).ready(() => {
                 plotShadow: false,
                 type: chartType
             },
-            title: {
-                text: 'Browser market shares in May, 2020',
-                align: 'left'
-            },
+            title: false,
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
@@ -101,43 +100,29 @@ $(document).ready(() => {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    }
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'डाटा',
                 colorByPoint: true,
-                data: [{
-                    name: 'Chrome',
-                    y: 70.67
-                }, {
-                    name: 'Edge',
-                    y: 14.77
-                },  {
-                    name: 'Firefox',
-                    y: 4.86
-                }, {
-                    name: 'Safari',
-                    y: 2.63
-                }, {
-                    name: 'Internet Explorer',
-                    y: 1.53
-                },  {
-                    name: 'Opera',
-                    y: 1.40
-                }, {
-                    name: 'Sogou Explorer',
-                    y: 0.84
-                }, {
-                    name: 'QQ',
-                    y: 0.51
-                }, {
-                    name: 'Other',
-                    y: 2.6
-                }]
+                data: data
             }]
         });
     }
 })
+
+function toastMessage(type, title) {
+    swal.fire({
+        title: title,
+        toast: true,
+        position: 'top-right',
+        showConfirmButton: false,
+        width: 450,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: type,
+    });
+}
