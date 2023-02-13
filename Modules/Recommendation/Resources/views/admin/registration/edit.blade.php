@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">दर्ता</li>
+                        <li class="breadcrumb-item active">सिफारिस</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नयाँ दर्ता</h4>
+                <h4 class="page-title">नयाँ सिफारिस</h4>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                         <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
                         <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
                             class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दर्ता सुची
+                            <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                         @method('put')
                         <fieldset>
                             <legend>
-                                <h4 class="text-info">दर्ता फाराम</h4>
+                                <h4 class="text-info">सिफारिस फाराम</h4>
                             </legend>
                             <div class="row">
                                 <div class="col-md-4 mb-2">

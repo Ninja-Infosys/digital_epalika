@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">दर्ता</li>
+                        <li class="breadcrumb-item active">सिफारिस</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नयाँ दर्ता</h4>
+                <h4 class="page-title">नयाँ सिफारिस</h4>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                         <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
                         <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
                             class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दर्ता सुची
+                            <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
                 </div>
@@ -36,13 +36,13 @@
                             <div class="card-body">
                                 <div class="text-start mt-3">
 
-                                    <p class="mb-2 font-15"><strong>प्रयोगकर्ता आ.ई.डी :</strong> <span
+                                    <p class="mb-2 font-15"><strong>प्रयोगकर्ता :</strong> <span
                                             class="ms-2">{{ $registrationDetail->user->name ?? '' }}</span>
                                     </p>
-                                    <p class="mb-2 font-15"><strong>व्यक्तिगत विवरण आ.ई.डी :</strong><span
+                                    <p class="mb-2 font-15"><strong>व्यक्तिगत विवरण :</strong><span
                                             class="ms-2">{{ $registrationDetail->personalDetail->name ?? '' }}</span></p>
 
-                                    <p class="mb-2 font-15"><strong>सिफारिस आ.ई.डी:</strong> <span
+                                    <p class="mb-2 font-15"><strong>सिफारिस:</strong> <span
                                             class="ms-2">{{ $registrationDetail->recommendationCategory->title ?? '' }}</span></p>
                                 </div>
 

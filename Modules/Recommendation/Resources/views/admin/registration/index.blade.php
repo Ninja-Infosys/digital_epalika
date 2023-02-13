@@ -25,11 +25,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">दर्ता सूची</h4>
+                        <h4 class="header-title">सिफारिस सूची</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.registrationDetail.create') }}"
                                 class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ दर्ता गर्नुहोस
+                                <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                             </a>
                         @endcan
                     </div>
