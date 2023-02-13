@@ -56,7 +56,7 @@ class RegistrationController extends Controller
     public function destroy(RegistrationDetail $registrationDetail)
     {
         $registrationDetail->delete();
-        toast('व्यक्तिगत विवरण सफलतापूर्वक मेटियो','success');
+        toast('सिफारिस सफलतापूर्वक मेटियो','success');
         return back();
     }
 }
