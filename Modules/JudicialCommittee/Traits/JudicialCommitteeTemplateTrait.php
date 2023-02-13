@@ -148,8 +148,6 @@ trait JudicialCommitteeTemplateTrait
 
             $replace = array_merge(
                 $this->getComplaintApplicationReplacement(),
-                $this->getComplainantReplacement(),
-                $this->getDefendantReplacement(),
                 $replace,
                 [
                     '[@dateSheet.year]' => $dateSheet->year ?? '',
