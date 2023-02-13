@@ -16,6 +16,13 @@ trait JudicialCommitteeTemplateTrait
 {
     private array $template = [
         [
+            'title' => 'कार्यालय विवरण',
+            'data' => [
+                'कार्यालय नाम' => '[@office_name]',
+                'कार्यालय लेटर हेड' => '[@letter_head]',
+            ],
+        ],
+        [
             'title' => 'निवेदक को विवरण',
             'data' => [
                 'आवेदकको नाम' => '[@applicant_name]',
@@ -211,6 +218,7 @@ trait JudicialCommitteeTemplateTrait
         $replace = [];
 
         $replace = array_merge(
+            $this->getOfficeSettingReplacement(),
             $this->getComplaintApplicationReplacement(),
             $replace,
             $this->getComplainantReplacement(),
@@ -219,6 +227,14 @@ trait JudicialCommitteeTemplateTrait
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
+    }
+
+    private function getOfficeSettingReplacement(): array
+    {
+        return [
+            '[@office_name]' => officeSetting()->name,
+            '[@letter_head]' => letterHead(),
+        ];
     }
 
     private function getComplaintApplicationReplacement(): array
@@ -240,7 +256,7 @@ trait JudicialCommitteeTemplateTrait
     private function getComplainantReplacement(): array
     {
         $complainants = $this->complainantDefendants->where('type', 'complainant');
-        $complainants->load('province','district','localBody');
+        $complainants->load('province', 'district', 'localBody');
 
         return [
             '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित" . ($complainants->count() - 1) . " जना" : ''),
@@ -260,7 +276,7 @@ trait JudicialCommitteeTemplateTrait
     private function getDefendantReplacement(): array
     {
         $defendants = $this->complainantDefendants->where('type', 'defendant');
-        $defendants->load('province','district','localBody');
+        $defendants->load('province', 'district', 'localBody');
 
         return [
             '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित" . ($defendants->count() - 1) . " जना" : ''),
