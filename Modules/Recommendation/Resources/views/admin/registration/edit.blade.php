@@ -47,7 +47,7 @@
                                         @foreach ($personaldetails as $personaldetail)
                                             <option
                                                 {{ $personaldetail->value == old('personal_detail_id') ? 'selected' : '' }}
-                                                value="{{ $personaldetail->id }}">{{ $personaldetail->name }}</option>
+                                                value="{{ $personaldetail->id }}">{{ $personaldetail->name }} ({{$personaldetail->reg_no}})</option>
                                         @endforeach
                                     </select>
                                     @error('personal_detail_id')

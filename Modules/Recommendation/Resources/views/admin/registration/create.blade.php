@@ -24,14 +24,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
-                        <a href="{{route('admin.recommendation.registrationDetail.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.recommendation.registrationDetail.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> दर्ता सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <form action="{{route('admin.recommendation.registrationDetail.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.recommendation.registrationDetail.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <fieldset>
                             <legend><h4 class="text-info">दर्ता फाराम</h4></legend>
@@ -39,12 +41,15 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण</label>
                                     <div class="d-flex justify-content-between">
-                                        <select id="personal_detail_id" name="personal_detail_id" class="form-select personalDetail">
+                                        <select id="personal_detail_id" name="personal_detail_id"
+                                                class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
                                             @foreach($personaldetails as $personaldetail)
                                                 <option
                                                     {{$personaldetail->id==old('personal_detail_id') ? 'selected' : ''}}
-                                                    value="{{$personaldetail->id}}">{{$personaldetail->name}} ({{$personaldetail->reg_no}})</option>
+                                                    value="{{$personaldetail->id}}">{{$personaldetail->name}}
+                                                    ({{$personaldetail->reg_no}})
+                                                </option>
                                             @endforeach
                                         </select>
                                         <button class="btn btn-sm btn-outline-primary" type="button"
@@ -59,15 +64,13 @@
 
                                 <div class="col-md-4 mb-2">
                                     <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
-                                    <select id="recommendation_category_id" name="recommendation_category_id"  class="form-select">
+                                    <select id="recommendation_category_id" name="recommendation_category_id"
+                                            class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach($recommendationCategories as $recommendationCategory)
                                             <option
                                                 {{$recommendationCategory->id==old('recommendation_category_id') ? 'selected' : ''}}
-                                                value="{{$recommendationCategory->id}}" {{$recommendationCategory->recommendation_categories_count > 0 ? 'disabled':''}}>{{$recommendationCategory->title}}</option>
-                                        @foreach($recommendationCategory->recommendationCategories as $categoryData)
-                                                <option>&nbsp;&nbsp;&nbsp;&nbsp;{{$categoryData->title}}</option>
-                                        @endforeach
+                                                value="{{$recommendationCategory->id}}" >{{$recommendationCategory->title}}</option>
                                         @endforeach
                                     </select>
                                     @error('recommendation_category_id')
@@ -78,16 +81,16 @@
                                     <x-date-input-component
                                         get-today-date="{{false}}"
                                         name-ne="date_ne" label-ne="मिति*"
-                                    name-en="date_en" label-en="English Date"
+                                        name-en="date_en" label-en="English Date"
                                     />
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="application" class="form-label">डकुमेन्ट </label>
                                     <input
-                                    id="application" name="application" type="file" class="form-control">
+                                        id="application" name="application" type="file" class="form-control">
                                     @error('application')
                                     <p class="text-red-600">{{ $message }}</p>
-                                @enderror
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="recommendation" class="form-label">सिफारिस *</label>
@@ -243,7 +246,8 @@
                         </fieldset>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
-                            <button type="submit" id="personalDetailSubmitBtn" class="btn btn-primary">पेश गर्नुहोस्</button>
+                            <button type="submit" id="personalDetailSubmitBtn" class="btn btn-primary">पेश गर्नुहोस्
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -251,57 +255,70 @@
             </div>
         </div>
     </div>
-@push('scripts')
-<script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
-<script>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
+        <script>
 
-    $(document).ready(function () {
-        //farmer form submit
-        $('#personalDetail-form').on('submit', function (e) {
-            e.preventDefault()
-            $.ajax({
-                type: "post",
-                url: "{{route('admin.recommendation.setting.personalDetail.store')}}",
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                beforeSend: function () {
-                    $("#personalDetailSubmitBtn").prop('disabled', true);
-                    $("#personalDetailSubmitBtn").html("<i class='fa fa-spinner fa-spin'></i>");
-                },
-                success: function (resp) {
-                    $("#personalDetailSubmitBtn").prop('disabled', false);
-                    $("#personalDetailSubmitBtn").html("पेश गर्नुहोस्");
-                    $('.personalDetail').append("<option value=" + resp.data.personal_detail_id + ">" + resp.data.name + " ("+resp.data.reg_no +")"+ "</option>")
-                    toastMessage('success', resp.message)
-                    $('#farmer-modal').modal('toggle')
-                    $('#farmer-form').trigger('reset')
-                    //for grant detail livewire
-                    Livewire.emit('fetchGranteesData');
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $('#personalDetailSubmitBtn').prop('disabled', false)
-                    $("#personalDetailSubmitBtn").html("पेश गर्नुहोस्");
-                    toastMessage('error', XMLHttpRequest.responseJSON.message)
+            $(document).ready(function () {
+                //farmer form submit
+                $('#personalDetail-form').on('submit', function (e) {
+                    e.preventDefault()
+                    $.ajax({
+                        type: "post",
+                        url: "{{route('admin.recommendation.setting.personalDetail.store')}}",
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+                            $("#personalDetailSubmitBtn").prop('disabled', true);
+                            $("#personalDetailSubmitBtn").html("<i class='fa fa-spinner fa-spin'></i>");
+                        },
+                        success: function (resp) {
+                            $("#personalDetailSubmitBtn").prop('disabled', false);
+                            $("#personalDetailSubmitBtn").html("पेश गर्नुहोस्");
+                            $('.personalDetail').append("<option value=" + resp.data.personal_detail_id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
+                            toastMessage('success', resp.message)
+                            $('#farmer-modal').modal('toggle')
+                            $('#farmer-form').trigger('reset')
+                            //for grant detail livewire
+                            Livewire.emit('fetchGranteesData');
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $('#personalDetailSubmitBtn').prop('disabled', false)
+                            $("#personalDetailSubmitBtn").html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    });
+                });
+
+                function toastMessage(type, title) {
+                    swal.fire({
+                        title: title,
+                        toast: true,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        width: 450,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: type,
+                    });
                 }
+                $('#recommendation_category_id').on('change', function () {
+                    let val=$(this).val();
+                    $.ajax({
+                        type: 'GET',
+                        url: window.location.origin + '/admin/recommendation/setting/recommendationCategory' + '/' +val + '/getTemplate',
+                        success: function (resp) {
+                            editor.setData(resp.data);
+                        },
+                        error: function () {
+                            alert('Something Went Wrong')
+                        }
+                    })
+                })
             });
-        });
-
-        function toastMessage(type, title) {
-            swal.fire({
-                title: title,
-                toast: true,
-                position: 'top-right',
-                showConfirmButton: false,
-                width: 450,
-                timer: 3000,
-                timerProgressBar: true,
-                icon: type,
-            });
-        }
-    });
-</script>
-@endpush
+        </script>
+    @endpush
 @endsection
 
 
