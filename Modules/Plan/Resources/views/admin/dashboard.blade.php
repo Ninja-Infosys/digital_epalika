@@ -80,9 +80,7 @@
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु
                     </h5>
-                    <div id="budgetHeadWiseProjects" class="apex-charts pt-3">
-
-                    </div>
+                    <div id="budgetHeadWiseProjects" chart-type="pie"></div>
                 </div>
             </div>
         </div>
@@ -92,7 +90,7 @@
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजना स्तर अनुसारका योजनाहरु
                     </h5>
-                    <div id="planLevelWiseProjects" class="apex-charts pt-3"></div>
+                    <div id="planLevelWiseProjects" chart-type="pie"></div>
                 </div>
             </div>
         </div>
@@ -104,20 +102,7 @@
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु
                     </h5>
-                    <div id="planAreaWiseProjects" class="apex-charts pt-3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
-                    </h5>
-                    <div id="container"></div>
-                    <div id="wardWiseProjects" class="apex-charts pt-3"></div>
+                    <div id="planAreaWiseProjects" chart-type="column"></div>
                 </div>
             </div>
         </div>
@@ -129,8 +114,7 @@
                     <h5 class="card-title">
                         चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण
                     </h5>
-                    <div id="test"></div>
-                    <div id="wardWiseProjects" class="apex-charts pt-3"></div>
+                    <div id="wardWiseProjects" chart-type="column"></div>
                 </div>
             </div>
         </div>
