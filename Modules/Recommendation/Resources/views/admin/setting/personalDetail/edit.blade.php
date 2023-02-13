@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ व्यक्तिगतको विवरण थप्नुहोस्</h4>
+                        <h4 class="header-title">व्यक्तिगतको विवरण सम्पादन गर्नुहोस</h4>
                         <a href="{{route('admin.recommendation.setting.personalDetail.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> व्यक्तिगत विवरण सुची
