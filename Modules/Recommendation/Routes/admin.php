@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Modules\Circular\Http\Controllers\Admin\RegistrationController;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
-use Modules\Recommendation\Http\Controllers\admin\PersonalDetailController;
+use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
-use Modules\Recommendation\Http\Controllers\admin\RegistrationDetailController;
+use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
