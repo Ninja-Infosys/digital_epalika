@@ -1,10 +1,3 @@
-/*
- Highcharts JS v10.3.3 (2023-01-20)
-
- (c) 2009-2021 Torstein Honsi
-
- License: www.highcharts.com/license
-*/
 (function(aa,K){"object"===typeof module&&module.exports?(K["default"]=K,module.exports=aa.document?K(aa):K):"function"===typeof define&&define.amd?define("highcharts/highcharts",function(){return K(aa)}):(aa.Highcharts&&aa.Highcharts.error(16,!0),aa.Highcharts=K(aa))})("undefined"!==typeof window?window:this,function(aa){function K(a,A,g,F){a.hasOwnProperty(A)||(a[A]=F.apply(null,g),"function"===typeof CustomEvent&&aa.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:A,module:a[A]}})))}
     var g={};K(g,"Core/Globals.js",[],function(){var a;(function(a){a.SVG_NS="http://www.w3.org/2000/svg";a.product="Highcharts";a.version="10.3.3";a.win="undefined"!==typeof aa?aa:{};a.doc=a.win.document;a.svg=a.doc&&a.doc.createElementNS&&!!a.doc.createElementNS(a.SVG_NS,"svg").createSVGRect;a.userAgent=a.win.navigator&&a.win.navigator.userAgent||"";a.isChrome=-1!==a.userAgent.indexOf("Chrome");a.isFirefox=-1!==a.userAgent.indexOf("Firefox");a.isMS=/(edge|msie|trident)/i.test(a.userAgent)&&!a.win.opera;
         a.isSafari=!a.isChrome&&-1!==a.userAgent.indexOf("Safari");a.isTouchDevice=/(Mobile|Android|Windows Phone)/.test(a.userAgent);a.isWebKit=-1!==a.userAgent.indexOf("AppleWebKit");a.deg2rad=2*Math.PI/360;a.hasBidiBug=a.isFirefox&&4>parseInt(a.userAgent.split("Firefox/")[1],10);a.hasTouch=!!a.win.TouchEvent;a.marginNames=["plotTop","marginRight","marginBottom","plotLeft"];a.noop=function(){};a.supportsPassiveEvents=function(){var g=!1;if(!a.isMS){var A=Object.defineProperty({},"passive",{get:function(){g=
@@ -599,4 +592,3 @@
         g.css;a.defined=g.defined;a.destroyObjectProperties=g.destroyObjectProperties;a.discardElement=g.discardElement;a.distribute=t.distribute;a.erase=g.erase;a.error=g.error;a.extend=g.extend;a.extendClass=g.extendClass;a.find=g.find;a.fireEvent=g.fireEvent;a.getMagnitude=g.getMagnitude;a.getStyle=g.getStyle;a.inArray=g.inArray;a.isArray=g.isArray;a.isClass=g.isClass;a.isDOMElement=g.isDOMElement;a.isFunction=g.isFunction;a.isNumber=g.isNumber;a.isObject=g.isObject;a.isString=g.isString;a.keys=g.keys;
         a.merge=g.merge;a.normalizeTickInterval=g.normalizeTickInterval;a.objectEach=g.objectEach;a.offset=g.offset;a.pad=g.pad;a.pick=g.pick;a.pInt=g.pInt;a.relativeLength=g.relativeLength;a.removeEvent=g.removeEvent;a.seriesType=u.seriesType;a.splat=g.splat;a.stableSort=g.stableSort;a.syncTimeout=g.syncTimeout;a.timeUnits=g.timeUnits;a.uniqueKey=g.uniqueKey;a.useSerialIds=g.useSerialIds;a.wrap=g.wrap;q.compose(z);O.compose(b);m.compose(h);k.compose(h);J.compose(K);p.compose(h);Q.compose(w);f.compose(h,
             w,b);return a});g["masters/highcharts.src.js"]._modules=g;return g["masters/highcharts.src.js"]});
-//# sourceMappingURL=highcharts.js.map

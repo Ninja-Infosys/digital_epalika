@@ -76,21 +76,26 @@
     <div class="row mt-2" id="charts" data-chart-url="{{route('admin.plan.dashboard')}}">
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0"> चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु</h4>
-                </div>
                 <div class="card-body">
-                    <div id="budgetHeadWiseProjects" chart-type="pie"></div>
+                    <div id="budgetHeadWiseProjects" chart-type="pie" chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">  चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजना स्तर अनुसारका योजनाहरु</h4>
-                </div>
                 <div class="card-body">
-                    <div id="planLevelWiseProjects" chart-type="pie"></div>
+                    <div id="planLevelWiseProjects" chart-type="pie" chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजना स्तर अनुसारका योजनाहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,11 +103,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">   चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु</h4>
-                </div>
                 <div class="card-body">
-                    <div id="planAreaWiseProjects" chart-type="column"></div>
+                    <div id="planAreaWiseProjects" chart-type="column" chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,11 +117,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण</h4>
-                </div>
                 <div class="card-body">
-                    <div id="wardWiseProjects" chart-type="column"></div>
+                    <div id="wardWiseProjects" chart-type="column" chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

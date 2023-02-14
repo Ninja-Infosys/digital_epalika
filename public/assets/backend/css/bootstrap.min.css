@@ -14439,3 +14439,7 @@ textarea.form-control-lg {
     border: 10px solid transparent;
     padding: 15px;
 }
+.highcharts-menu hr{
+    margin: 0 !important;
+    border-top: 1px solid var(--primary);
+}

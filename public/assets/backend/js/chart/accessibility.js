@@ -1,13 +1,3 @@
-/*
- Highcharts JS v10.3.3 (2023-01-20)
-
- Accessibility module
-
- (c) 2010-2021 Highsoft AS
- Author: Oystein Moseng
-
- License: www.highcharts.com/license
-*/
 (function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/modules/accessibility",["highcharts"],function(A){a(A);a.Highcharts=A;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function A(a,h,l,x){a.hasOwnProperty(h)||(a[h]=x.apply(null,l),"function"===typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:h,module:a[h]}})))}a=a?a._modules:{};
     A(a,"Accessibility/Utils/HTMLUtilities.js",[a["Core/Globals.js"],a["Core/Utilities.js"]],function(a,h){function l(a){if("function"===typeof p.MouseEvent)return new p.MouseEvent(a.type,a);if(m.createEvent){var g=m.createEvent("MouseEvent");if(g.initMouseEvent)return g.initMouseEvent(a.type,a.bubbles,a.cancelable,a.view||p,a.detail,a.screenX,a.screenY,a.clientX,a.clientY,a.ctrlKey,a.altKey,a.shiftKey,a.metaKey,a.button,a.relatedTarget),g}return x(a.type)}function x(a,k,w){k=k||{x:0,y:0};return"function"===
     typeof p.MouseEvent?new p.MouseEvent(a,{bubbles:!0,cancelable:!0,composed:!0,button:0,buttons:1,relatedTarget:w||z,view:p,detail:"click"===a?1:0,screenX:k.x,screenY:k.y,clientX:k.x,clientY:k.y}):m.createEvent&&(w=m.createEvent("MouseEvent"),w.initMouseEvent)?(w.initMouseEvent(a,!0,!0,p,"click"===a?1:0,k.x,k.y,k.x,k.y,!1,!1,!1,!1,0,null),w):{type:a}}var m=a.doc,p=a.win,u=h.css,z=p.EventTarget&&new p.EventTarget||"none";return{addClass:function(a,k){a.classList?a.classList.add(k):0>a.className.indexOf(k)&&
@@ -261,4 +251,3 @@
     (p.push(a),a.prototype.updateA11yEnabled=l,C(a,"destroy",d),C(a,"render",e),C(a,"update",h),["addSeries","init"].forEach(function(b){C(a,b,function(){this.a11yDirty=!0})}),["afterApplyDrilldown","drillupall"].forEach(function(b){C(a,b,function(){var a=this.accessibility;a&&!a.zombie&&a.update()})}));-1===p.indexOf(r)&&(p.push(r),C(r,"update",n));-1===p.indexOf(u)&&(p.push(u),["update","updatedData","remove"].forEach(function(a){C(u,a,function(){this.chart.accessibility&&(this.chart.a11yDirty=!0)})}))}})(h||
         (h={}));q(!0,a,I,{accessibility:{highContrastTheme:E},lang:J});return h});A(a,"masters/modules/accessibility.src.js",[a["Core/Globals.js"],a["Accessibility/Accessibility.js"],a["Accessibility/AccessibilityComponent.js"],a["Accessibility/Utils/ChartUtilities.js"],a["Accessibility/Utils/HTMLUtilities.js"],a["Accessibility/KeyboardNavigationHandler.js"],a["Accessibility/Components/SeriesComponent/SeriesDescriber.js"]],function(a,h,l,x,m,p,A){a.i18nFormat=h.i18nFormat;a.A11yChartUtilities=x;a.A11yHTMLUtilities=
         m;a.AccessibilityComponent=l;a.KeyboardNavigationHandler=p;a.SeriesAccessibilityDescriber=A;h.compose(a.Chart,a.Legend,a.Point,a.Series,a.SVGElement,a.RangeSelector)})});
-//# sourceMappingURL=accessibility.js.map

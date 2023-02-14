@@ -1,12 +1,3 @@
-/*
- Highcharts JS v10.3.3 (2023-01-20)
-
- Exporting module
-
- (c) 2010-2021 Torstein Honsi
-
- License: www.highcharts.com/license
-*/
 (function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/modules/exporting",["highcharts"],function(m){a(m);a.Highcharts=m;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function m(a,l,J,x){a.hasOwnProperty(l)||(a[l]=x.apply(null,J),"function"===typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:l,module:a[l]}})))}a=a?a._modules:{};m(a,
     "Core/Chart/ChartNavigationComposition.js",[],function(){var a;(function(a){a.compose=function(a){a.navigation||(a.navigation=new e(a));return a};var e=function(){function a(a){this.updates=[];this.chart=a}a.prototype.addUpdate=function(a){this.chart.navigation.updates.push(a)};a.prototype.update=function(a,D){var e=this;this.updates.forEach(function(b){b.call(e.chart,a,D)})};return a}();a.Additions=e})(a||(a={}));return a});m(a,"Extensions/Exporting/ExportingDefaults.js",[a["Core/Globals.js"]],function(a){a=
     a.isTouchDevice;return{exporting:{allowTableSorting:!0,type:"image/png",url:"https://export.highcharts.com/",pdfFont:{normal:void 0,bold:void 0,bolditalic:void 0,italic:void 0},printMaxWidth:780,scale:2,buttons:{contextButton:{className:"highcharts-contextbutton",menuClassName:"highcharts-contextmenu",symbol:"menu",titleKey:"contextButtonTitle",menuItems:"viewFullscreen printChart separator downloadPNG downloadJPEG downloadPDF downloadSVG".split(" ")}},menuItemDefinitions:{viewFullscreen:{textKey:"viewFullscreen",
@@ -46,4 +37,3 @@ c.textKey&&f.isDataTableVisible&&(c.textKey="hideData"),h=E("li",{className:"hig
         /^length$/,/^[0-9]+$/],O="fill stroke strokeLinecap strokeLinejoin strokeWidth textAnchor x y".split(" ");l.inlineAllowlist=[];var fa=["clipPath","defs","desc"],I;l.compose=function(a,d){D.compose(d);A.compose(a);-1===K.indexOf(a)&&(K.push(a),d=a.prototype,d.afterPrint=x,d.exportChart=Y,d.inlineStyles=ea,d.print=ka,d.sanitizeSVG=ma,d.getChartHTML=Z,d.getSVG=ba,d.getSVGForExport=ca,d.getFilename=aa,d.moveContainers=ia,d.beforePrint=H,d.contextMenu=W,d.addButton=n,d.destroyExport=X,d.renderExporting=
         la,d.callbacks.push(V),B(a,"init",ja),b.isSafari&&b.win.matchMedia("print").addListener(function(a){I&&(a.matches?I.beforePrint():I.afterPrint())}));-1===K.indexOf(J)&&(K.push(J),e.exporting=r(q.exporting,e.exporting),e.lang=r(q.lang,e.lang),e.navigation=r(q.navigation,e.navigation))}})(H||(H={}));"";"";return H});m(a,"masters/modules/exporting.src.js",[a["Core/Globals.js"],a["Extensions/Exporting/Exporting.js"],a["Core/HttpUtilities.js"]],function(a,l,m){a.HttpUtilities=m;a.ajax=m.ajax;a.getJSON=
     m.getJSON;a.post=m.post;l.compose(a.Chart,a.Renderer)})});
-//# sourceMappingURL=exporting.js.map
