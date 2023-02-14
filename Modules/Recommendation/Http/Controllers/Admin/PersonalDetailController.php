@@ -1,9 +1,7 @@
 <?php
 
-namespace Modules\Recommendation\Http\Controllers\admin;
+namespace Modules\Recommendation\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Http\Requests\PersonalDetail\StorePersonalDetailRequest;
@@ -24,9 +22,7 @@ class PersonalDetailController extends Controller
 
     public function store(StorePersonalDetailRequest $request)
     {
-
         $personalDetail = PersonalDetail::create($request->validated());
-
         if ($request->ajax()) {
             return response()->json([
                 'data' => [
@@ -34,7 +30,7 @@ class PersonalDetailController extends Controller
                     'name' => $personalDetail->name,
                     'reg_no' => $personalDetail->reg_no,
                 ],
-                'message' => 'कृषक सफलता पुर्वक थपियो !'
+                'message' => 'व्यक्तिगत विवरण सफलतापूर्वक थपियो !'
             ]);
         }
         toast('व्यक्तिगत विवरण सफलतापूर्वक थपियो', 'success');
