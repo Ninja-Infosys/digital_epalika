@@ -57,9 +57,9 @@
 
                                     <td>
                                         @can('recommendationTemplate_access')
-                                            <a data-bs-type="edit"
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
                                                href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$type,$recommendationCategory,$recommendationTemplate])}}">
-                                                <i class="fa fa-2x  {{$recommendationTemplate->is_active  ? 'fa-toggle-on':'fa-toggle-off'}} {{get_setting('Pin')?'confirm_pin':''}}"></i>
+                                                <i class="fa fa-2x  {{$recommendationTemplate->is_active  ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
@@ -71,7 +71,7 @@
                                         @can('recommendationTemplate_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.edit',[$type,$recommendationCategory,$recommendationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning{{get_setting('Pin')?'confirm_pin':''}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -84,7 +84,7 @@
                                             @if(!$recommendationCategory->status)
                                                 @can('recommendationTemplate_delete')
                                                     <button data-bs-type="delete"
-                                                            class="btn btn-xs btn-outline-danger show_confirm"
+                                                            class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                             title="मेटाउनु होस्">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

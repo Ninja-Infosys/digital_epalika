@@ -63,14 +63,14 @@
                                     @endif
                                     <td>
                                         @can('recommendationCategory_access')
-                                            <a href="{{route('admin.recommendation.setting.recommendationCategory.updatestatus',[$type,$recommendationCategory])}}">
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.setting.recommendationCategory.updatestatus',[$type,$recommendationCategory])}}">
                                                 <i class="fa fa-2x {{ $recommendationCategory->is_active ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td>
                                         @if(!$recommendationCategory->recommendation_categories_count)
-                                            <a class="btn btn-xs btn-outline-warning"
+                                            <a data-bs-type="edit" class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory]) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
@@ -78,7 +78,7 @@
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.setting.recommendationCategory.edit', [$type,$recommendationCategory]) }}"
-                                               class="btn btn-xs btn-outline-warning"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
@@ -90,7 +90,7 @@
                                             @method('delete')
                                             @can('recommendationCategory_delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger show_confirm"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

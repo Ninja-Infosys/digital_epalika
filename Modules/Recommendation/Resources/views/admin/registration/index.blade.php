@@ -62,7 +62,7 @@
                                         @can('recommendation_access')
                                         <a data-bs-type="edit"
                                            href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
-                                           class="btn btn-xs btn-outline-warning"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                            title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
                                         </a>
@@ -70,7 +70,7 @@
                                         @can('recommendation_edit')
                                         <a data-bs-type="edit"
                                            href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
-                                           class="btn btn-xs btn-outline-warning"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                            title="फारम सम्पादन गर्नुहोस">
                                             <i class="fa fa-pen"></i>
                                         </a>
@@ -82,7 +82,7 @@
                                             @method('delete')
                                             @can('recommendation_delete')
                                             <button data-bs-type="delete"
-                                                    class="btn btn-xs btn-outline-danger show_confirm"
+                                                    class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                     title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
