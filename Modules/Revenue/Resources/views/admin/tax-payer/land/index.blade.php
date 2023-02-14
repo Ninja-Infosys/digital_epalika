@@ -52,7 +52,7 @@
                                 <th>कि.नं.</th>
                                 <th>साबिक <small>(गाविस र वडा)</small></th>
                                 <th>हालको वडा नं.</th>
-                                <th>क्षेत्रफल</th>
+                                <th>क्षेत्रफल (वर्ग मीटरमा)</th>
                             </tr>
                             </thead>
 
@@ -62,12 +62,12 @@
                                     <td>{{$taxPayerLand->plot_no}}</td>
                                     <td>{{$taxPayerLand->former_vdc}}-{{$taxPayerLand->former_ward}}</td>
                                     <td>{{$taxPayerLand->ward_no}}</td>
-                                    <td>{{$taxPayerLand->area}}/{{$taxPayerLand->areaUnit->title ?? ''}}</td>
+                                    <td>{{$taxPayerLand->area}}</td>
                                     <td>{{$taxPayerLand->land_address}}</td>
                                     <td>{{$taxPayerLand->place->title ?? ''}}</td>
                                     <td>{{$taxPayerLand->sector->title ?? ''}}</td>
                                     <td>{{$taxPayerLand->land_use}}</td>
-                                    <td>{{$taxPayerLand->land_address}}</td>
+                                    <td>रु. {{$taxPayerLand->current_rate}}</td>
                                     <td>{{$taxPayerLand->remarks}}</td>
                                     <td>
                                         @can('taxPayerLand_edit')
@@ -92,7 +92,7 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr >
+                                <tr>
                                     <td colspan="11" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse

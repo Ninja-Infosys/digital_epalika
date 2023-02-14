@@ -28,12 +28,15 @@ class TaxPayerLand extends Model
         'former_vdc',
         'ward_no',
         'area',
-        'area_unit_id',
         'sector_id',
         'place_id',
         'land_address',
         'land_use',
         'remarks',
+    ];
+
+    protected $appends = [
+        'current_rate'
     ];
 
     public function user(): BelongsTo
@@ -46,10 +49,6 @@ class TaxPayerLand extends Model
         return $this->belongsTo(TaxPayer::class);
     }
 
-    public function areaUnit(): BelongsTo
-    {
-        return $this->belongsTo(Unit::class, 'area_unit_id');
-    }
 
     public function sector(): BelongsTo
     {
@@ -61,4 +60,8 @@ class TaxPayerLand extends Model
         return $this->belongsTo(Place::class);
     }
 
+    public function getCurrentRateAttribute(): float|int
+    {
+        return round(($this->place->rate ?? 0) * ($this->attributes['area'] ?? 0), 2);
+    }
 }

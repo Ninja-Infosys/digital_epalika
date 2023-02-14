@@ -25,17 +25,11 @@ class Place extends Model
         'title',
         'ward_no',
         'rate',
-        'unit_id',
     ];
 
     public function sector(): BelongsTo
     {
         return $this->belongsTo(Sector::class);
-    }
-
-    public function unit(): BelongsTo
-    {
-        return $this->belongsTo(Unit::class);
     }
 
     protected function wardNo(): Attribute
@@ -44,10 +38,5 @@ class Place extends Model
             get: fn($value) => explode(",", $value),
             set: fn($value) => implode(",", $value),
         );
-    }
-
-    public function getSiUnitRateAttribute()
-    {
-        $standardUnit = get_revenue_setting()->standard_unit;
     }
 }

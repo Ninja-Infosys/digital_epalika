@@ -8,6 +8,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,13 +55,19 @@ class TaxPayer extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'gender' => Gender::class
+        'is_active' => 'boolean'
     ];
 
     public function taxPayerType(): BelongsTo
     {
         return $this->belongsTo(TaxPayerType::class, 'tax_payer_type_id');
+    }
+
+    public function gender(): Attribute
+    {
+        return Attribute::set(function ($value) {
+            return Gender::tryFrom($value) ?? '';
+        });
     }
 
     public function user(): BelongsTo
