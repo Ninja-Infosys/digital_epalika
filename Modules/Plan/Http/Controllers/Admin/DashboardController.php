@@ -68,7 +68,6 @@ class DashboardController extends Controller
                 [
                     'data' => $wardsData->pluck('projects_count')->toArray(),
                     'label' => 'जम्मा',
-                    'fill' => 'false',
                 ],
             ],
         ];
@@ -115,21 +114,22 @@ class DashboardController extends Controller
 
     private function getBudgetHeadWiseProjects()
     {
-        $budgetHeads = BudgetHead::withCount(['projects' => function ($query) {
+        return BudgetHead::withCount(['projects' => function ($query) {
             $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
         }])
             ->with(['budgetHeads' => function ($query) {
                 $query->withCount(['projects' => function ($sub_query) {
                     $sub_query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                 }]);
-            }])->whereNull('budget_head_id')->get()->map(function ($budgetHead) {
+            }])
+            ->whereNull('budget_head_id')
+            ->get()
+            ->map(function ($budgetHead) {
                 return [
                     'name' => $budgetHead->title,
                     'data' => $budgetHead->projects_count + $budgetHead->budgetHeads->sum('projects_count')
                 ];
             });
-
-        return $budgetHeads;
     }
 
     private function getPlanLevelWiseProjects()

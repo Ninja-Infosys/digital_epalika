@@ -6,14 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.revenue.dashboard')}}">
+                            <a href="{{route('organization.admin.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">नगदी रसिदहरु</li>
+                        <li class="breadcrumb-item active">नक्साहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नगदी रसिदहरु</h4>
+                <h4 class="page-title">नक्साहरु</h4>
             </div>
         </div>
     </div>

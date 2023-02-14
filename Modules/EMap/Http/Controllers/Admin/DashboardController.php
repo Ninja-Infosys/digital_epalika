@@ -20,7 +20,7 @@ use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
 class DashboardController extends Controller
 {
-    public function __invoke(): Factory|View|Application
+    public function __invoke()
     {
         $organization_count = Organization::count();
         $map_apply_count = MapApply::count();
@@ -30,26 +30,30 @@ class DashboardController extends Controller
         $mapApplyConstructionTypeAccordingToFiscalYears = $this->getMapApplyConstructionTypeAccordingToFiscalYear();
         $mapApplyStructureTypeAccordingToFiscalYears = $this->getMapApplyStructureTypeAccordingToFiscalYear();
 
+        if(request()->ajax()){
+            return [
+                'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
+                'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
+                'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
+                'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
+                'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear()
+            ];
+        }
         return view('emap::admin.dashboard', compact('mapApplyStructureTypeAccordingToFiscalYears', 'mapApplyBuildingUsageAccordingToFiscalYears', 'mapApplyBuildingCategoryAccordingToFiscalYears', 'organization_count', 'mapApplyConstructionTypeAccordingToFiscalYears', 'map_apply_count', 'mapAppliesAccordingToFiscalYears'));
     }
 
 
-    public function getMapApplyStructureTypeAccordingToFiscalYear(): array
+    public function getMapApplyStructureTypeAccordingToFiscalYear()
     {
-        $structure = StructureType::withCount(['mapApply'])
+        return StructureType::withCount(['mapApply'])
             ->selectRaw('id,title')
-            ->get();
-
-        return [
-            'labels' => $structure->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $structure->pluck('map_apply_count')->toArray(),
-                    'label' => 'जम्मा नक्सा',
-                    'fill' => 'false',
-                ],
-            ],
+            ->get()
+        ->map(function ($structure){
+            return [
+                'name' => $structure->title,
+                'data'=> $structure->map_apply_count
             ];
+        });
     }
 
     public function getMapApplyAccordingToFiscalYear(): array
@@ -68,17 +72,14 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYear->pluck('map_applies_count')->toArray(),
                     'label' => 'जम्मा नक्सा',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYear->pluck('mapRegistrationCount')->toArray(),
                     'label' => 'नक्सा दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYear->pluck('mapVerificationCount')->toArray(),
                     'label' => 'नक्सा प्रमाणित',
-                    'fill' => 'false',
                 ]
             ],
 
@@ -99,33 +100,28 @@ class DashboardController extends Controller
             ->get();
     }
 
-    public function getMapApplyBuildingUsageAccordingToFiscalYear(): array
+    public function getMapApplyBuildingUsageAccordingToFiscalYear()
     {
         $officeSetting = $this->getOfficeSetting();
 
-        $map_applies = $this->getMapApply($officeSetting->fiscal_year_id)
-            ->groupBy('usage')
-            ->map(function ($map_apply, $key) {
-                return [
-                    'usage' => BuildingUsageEnum::tryFrom($key)?->label(),
-                    'count' => count($map_apply)
-                ];
-            });
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $buildingUsages = $mapApplies->pluck('usage')->unique();
 
-        return [
-            'labels' => $map_applies->pluck('usage')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $map_applies->pluck('count')->toArray(),
-                    'fill' => 'false',
-                ]
-            ],
+        $result = collect();
+        foreach ($buildingUsages as $usage) {
+            $count = $mapApplies->where('usage', $usage)->count();
+            $label = BuildingUsageEnum::tryFrom($usage)?->label();
+            $result->push([
+                'name' => $label,
+                'data' => $count
+            ]);
+        }
 
+        return $result;
 
-        ];
     }
 
-    public function getMapApplyBuildingCategoryAccordingToFiscalYear(): array
+    public function getMapApplyBuildingCategoryAccordingToFiscalYear()
     {
         $officeSetting = $this->getOfficeSetting();
 
@@ -165,38 +161,30 @@ class DashboardController extends Controller
     }
 
 
-    public function getMapApplyConstructionTypeAccordingToFiscalYear(): array
+    public function getMapApplyConstructionTypeAccordingToFiscalYear()
     {
         $officeSetting = $this->getOfficeSetting();
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $buildingUsages = $mapApplies->pluck('construction_type')->unique();
 
-        $map_applies = $this->getMapApply($officeSetting->fiscal_year_id)
-            ->groupBy('construction_type')
-            ->map(function ($map_apply, $key) {
-                return [
-                    'construction_type' => TypeOfConstructionWorkEnum::tryFrom($key)?->label(),
-                    'count' => count($map_apply),
-                ];
-            });
+        $result = collect();
+        foreach ($buildingUsages as $usage) {
+            $count = $mapApplies->where('construction_type', $usage)->count();
+            $label = TypeOfConstructionWorkEnum::tryFrom($usage)?->label();
+            $result->push([
+                'name' => $label,
+                'data' => $count
+            ]);
+        }
 
-        return [
-            'labels' => $map_applies->pluck('construction_type')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $map_applies->pluck('count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ],
-            ],
-
-
-        ];
+        return $result;
     }
 
     /**
      * @return mixed
      */
-    public function getOfficeSetting(): mixed
+    public function getOfficeSetting()
     {
-        return OfficeSetting::first();
+        return officeSetting();
     }
 }

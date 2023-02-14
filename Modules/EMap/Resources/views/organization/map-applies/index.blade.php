@@ -1,48 +1,68 @@
 @extends('emap::organization.layouts.master')
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('organization.admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">नगदी रसिदहरु</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">नगदी रसिदहरु</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-12">
-            <div class="card mb_30">
-                <div class="card-header p-3">
-                    <div class="main-title d-flex justify-content-between">
-                        <h3 class="mb-0">नक्सा विवरण</h3>
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">नक्साहरु</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">सब्मिसन आइडी</th>
-                            <th scope="col">घर धनीको नाम</th>
-                            <th scope="col">घर धनीको फोन नं.</th>
-                            <th scope="col">निर्माण कार्यको किसिम</th>
-                            <th scope="col">#</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($mapApplies as $mapApply)
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
                             <tr>
-                                <td>{{$loop->iteration ?? ''}}</td>
-                                <td>{{$mapApply->unique_id ?? ''}}</td>
-                                <td>{{$mapApply->houseOwner->name??''}}</td>
-                                <td>{{$mapApply->houseOwner->phone??''}}</td>
-                                <td>{{$mapApply->construction_type->label()}}</td>
-                                <td>
-                                    <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapApply.show', $mapApply)}}">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-warning" href="{{route('organization.admin.updateStatus', $mapApply)}}">
-                                        <i class="fa {{$mapApply->sent_to_admin_at==null ? 'fa-check':'fa-times'}}"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-info" href="{{route('organization.admin.mapFormInfo', $mapApply)}}">
-                                        <i class="fa fa-list"></i>
-                                    </a>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">सब्मिसन आइडी</th>
+                                <th scope="col">घर धनीको नाम</th>
+                                <th scope="col">घर धनीको फोन नं.</th>
+                                <th scope="col">निर्माण कार्यको किसिम</th>
+                                <th scope="col">#</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($mapApplies as $mapApply)
+                                <tr>
+                                    <td>{{$loop->iteration ?? ''}}</td>
+                                    <td>{{$mapApply->unique_id ?? ''}}</td>
+                                    <td>{{$mapApply->houseOwner->name??''}}</td>
+                                    <td>{{$mapApply->houseOwner->phone??''}}</td>
+                                    <td>{{$mapApply->construction_type->label()}}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-outline-primary" href="{{route('organization.admin.mapApply.show', $mapApply)}}">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-outline-info" href="{{route('organization.admin.mapFormInfo', $mapApply)}}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-xs {{$mapApply->sent_to_admin_at==null ? 'btn-outline-danger':'btn-outline-success'}}" href="{{route('organization.admin.updateStatus', $mapApply)}}">
+                                            <i class="fa {{$mapApply->sent_to_admin_at==null ? 'fa-times':'fa-check'}}"></i>  {{$mapApply->sent_to_admin_at==null ? 'सक्रिय गर्नुहोस्': 'निष्क्रिय गर्नुहोस्'}}
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

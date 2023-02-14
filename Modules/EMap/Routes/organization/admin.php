@@ -22,7 +22,6 @@ Route::controller(MapApplyController::class)->group(function () {
     Route::post('mapApply/{mapApply}/storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('storeTemplateData');
 });
 Route::resource('mapApply', MapApplyController::class);
-Route::resource('client', ClientController::class);
 Route::resource('taxClearance', TaxClearanceController::class);
 
 
