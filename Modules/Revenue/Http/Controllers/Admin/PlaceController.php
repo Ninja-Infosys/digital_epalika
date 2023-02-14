@@ -14,7 +14,7 @@ class PlaceController extends Controller
     public function index()
     {
         $this->checkAuthorization('place_access');
-        $places = Place::with('sector', 'unit')->latest()->get();
+        $places = Place::with('sector')->latest()->get();
         return view('revenue::admin.setting.place.index', compact('places'));
     }
 
@@ -22,8 +22,7 @@ class PlaceController extends Controller
     {
         $this->checkAuthorization('place_create');
         $sectors = Sector::latest()->get();
-        $units = Unit::latest()->get();
-        return view('revenue::admin.setting.place.create', compact('sectors', 'units'));
+        return view('revenue::admin.setting.place.create', compact('sectors'));
     }
 
     public function store(StorePlaceRequest $request)
@@ -41,8 +40,7 @@ class PlaceController extends Controller
     {
         $this->checkAuthorization('place_edit');
         $sectors = Sector::latest()->get();
-        $units = Unit::latest()->get();
-        return view('revenue::admin.setting.place.edit', compact('place', 'sectors', 'units'));
+        return view('revenue::admin.setting.place.edit', compact('place', 'sectors'));
     }
 
     public function update(UpdatePlaceRequest $request, Place $place)

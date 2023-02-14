@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class Sector extends Model
+class PhysicalStructureType extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,11 +21,6 @@ class Sector extends Model
     protected $fillable = [
         'title'
     ];
-
-    public function places(): HasMany
-    {
-        return $this->hasMany(Place::class);
-    }
 
     public function structureAssessmentRates(): HasMany
     {

@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">जग्गाको मुल्यांकन</li>
+                        <li class="breadcrumb-item active">स्ट्रकचर</li>
                     </ol>
                 </div>
-                <h4 class="page-title">जग्गाको मुल्यांकन</h4>
+                <h4 class="page-title">स्ट्रकचर</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">जग्गाको मुल्यांकन सूची</h4>
-                        @can('sector_create')
-                            <a href="{{route('admin.revenue.setting.place.create')}}"
+                        <h4 class="header-title">स्ट्रकचर सूची</h4>
+                        @can('physicalStructureType_create')
+                            <a href="{{route('admin.revenue.setting.physicalStructureType.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -38,30 +38,26 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>क्षेत्र</th>
-                                <th>स्थान</th>
-                                <th>दर (वर्ग मीटरमा)</th>
+                                <th>स्ट्रकचर</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($places as $key=>$place)
+                            @forelse($physicalStructureTypes as $physicalStructureType)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$place->sector->title ?? ''}}</td>
-                                    <td>{{$place->title}}</td>
-                                    <td>रु. {{$place->rate}}</td>
+                                    <td>{{$physicalStructureType->title}}</td>
                                     <td>
-                                        @can('sector_edit')
+                                        @can('physicalStructureType_edit')
                                             <a data-bs-type="edit"
-                                               href="{{route('admin.revenue.setting.place.edit',[$place])}}"
+                                               href="{{route('admin.revenue.setting.physicalStructureType.edit',[$physicalStructureType])}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('sector_delete')
+                                        @can('physicalStructureType_delete')
                                             <form
-                                                action="{{route('admin.revenue.setting.place.destroy',[$place])}}"
+                                                action="{{route('admin.revenue.setting.physicalStructureType.destroy',[$physicalStructureType])}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')

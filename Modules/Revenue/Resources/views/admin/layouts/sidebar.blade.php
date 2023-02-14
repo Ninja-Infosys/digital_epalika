@@ -76,6 +76,20 @@
                     </a>
                 </li>
             @endcan
+            @can('physicalStructureType_access')
+                <li class="{{request()->routeIs('admin.revenue.setting.physicalStructureType.*') ? 'active' : ''}}">
+                    <a href="{{route('admin.revenue.setting.physicalStructureType.index')}}">
+                        <span>स्ट्रकचर</span>
+                    </a>
+                </li>
+            @endcan
+            @can('structureAssessmentRate_access')
+                <li class="{{request()->routeIs('admin.revenue.setting.structureAssessmentRate.*') ? 'active' : ''}}">
+                    <a href="{{route('admin.revenue.setting.structureAssessmentRate.index')}}">
+                        <span>संरचनाको मुल्यांकन</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

@@ -68,7 +68,7 @@
                 @enderror
             </div>
             <div class="col-md-3 mb-2">
-                <label for="taxPayerLand.area" class="form-label">क्षेत्रफल *</label>
+                <label for="taxPayerLand.area" class="form-label">क्षेत्रफल (वर्ग मीटरमा) *</label>
                 <input
                     type="number"
                     step="0.01"
@@ -84,28 +84,7 @@
                 @enderror
             </div>
             <div class="col-md-3 mb-2">
-                <label for="taxPayerLand.area_unit_id" class="form-label">क्षेत्रफलको मापन एकाई *</label>
-                <select
-                    name="taxPayerLand.area_unit_id"
-                    class="form-select @error('taxPayerLand.area_unit_id') is-invalid @enderror"
-                    wire:model="taxPayerLand.area_unit_id"
-                    id="taxPayerLand.area_unit_id" data-width="100%">
-                    <option value="">--- छान्नुहोस् ---</option>
-                    @foreach($areaUnits as $areaUnit)
-                        <option
-                            value="{{$areaUnit->id}}"
-                            {{old('taxPayerLand.area_unit_id') == $areaUnit->id ? 'selected' : ''}}
-                        >
-                            {{$areaUnit->title}}
-                        </option>
-                    @endforeach
-                </select>
-                @error('taxPayerLand.area_unit_id')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-            </div>
-            <div class="col-md-3 mb-2">
-                <label for="taxPayerLand.land_address" class="form-label">जग्गा रहेको स्थान*</label>
+                <label for="taxPayerLand.land_address" class="form-label">जग्गा रहेको स्थान *</label>
                 <input
                     type="text"
                     name="taxPayerLand.land_address"

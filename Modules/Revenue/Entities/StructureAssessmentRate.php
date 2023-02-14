@@ -2,15 +2,13 @@
 
 namespace Modules\Revenue\Entities;
 
-use App\Models\Settings\Units\Unit;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class Place extends Model
+class StructureAssessmentRate extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -22,21 +20,23 @@ class Place extends Model
 
     protected $fillable = [
         'sector_id',
-        'title',
-        'ward_no',
+        'physical_structure_type_id',
+        'usage',
         'rate',
+        'user_id'
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class);
+    }
     public function sector(): BelongsTo
     {
         return $this->belongsTo(Sector::class);
     }
 
-    protected function wardNo(): Attribute
+    public function physicalStructureType(): BelongsTo
     {
-        return Attribute::make(
-            get: fn($value) => explode(",", $value),
-            set: fn($value) => implode(",", $value),
-        );
+        return $this->belongsTo(PhysicalStructureType::class);
     }
 }

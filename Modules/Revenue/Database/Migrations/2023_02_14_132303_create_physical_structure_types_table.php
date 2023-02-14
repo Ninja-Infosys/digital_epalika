@@ -7,12 +7,9 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('places', function (Blueprint $table) {
+        Schema::create('physical_structure_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sector_id')->constrained('sectors')->onDelete('cascade');
-            $table->string('ward_no');
             $table->string('title');
-            $table->double('rate', 15, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -20,6 +17,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('places');
+        Schema::dropIfExists('physical_structure_types');
     }
 };
