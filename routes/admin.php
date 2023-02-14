@@ -106,6 +106,7 @@ Route::prefix('setting')->group(function () {
 //file
 Route::get('file/{file}/download', [FileController::class, 'download'])->name('file.download');
 Route::get('file-download', [FileController::class, 'downloadFile'])->name('file-url-download');
+Route::post('file-upload', [FileController::class, 'fileUpload'])->name('file-upload');
 Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
@@ -123,5 +124,4 @@ Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activi
 //check pin
 
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
-Route::post('ckeditor-file-upload', [PinController::class, 'fileUpload']);
 Route::resource('pin', PinController::class);

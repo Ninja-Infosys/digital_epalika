@@ -76,6 +76,7 @@
     </div>
     @push('scripts')
         <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/js/editor.js')}}"></script>
     @endpush
 @endsection
 

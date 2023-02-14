@@ -46,11 +46,4 @@ class PinController extends Controller
 
     }
 
-    public function fileUpload(Request $request)
-    {
-        return response()->json([
-            'url'=>'d'
-        ]);
-    }
-
 }

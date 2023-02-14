@@ -64,6 +64,7 @@
 @livewireScripts
 <script>
     const validationUrl = '{{ route("admin.pin.check-pin") }}';
+    const uploadFileUrl = '{{ route('admin.file-upload') }}';
 </script>
 
 <script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}"></script>

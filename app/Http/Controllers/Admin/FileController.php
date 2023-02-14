@@ -110,4 +110,24 @@ class FileController extends Controller
             ];
         }
     }
+
+    public function fileUpload(Request $request)
+    {
+
+        $file = $request->file('upload');
+        $path = 'ckEditor/' . date("Y-m-d");
+        $filename = $file->getClientOriginalName();
+        $counter = 1;
+        while (Storage::disk('public')->exists($path . $filename)) {
+            $filename =  $counter. '_' . $file->getClientOriginalName();
+            $counter++;
+        }
+
+        $path = $file->storePubliclyAs($path, $filename, 'public');
+
+        return response()->json([
+            'url' => Storage::disk('public')->url($path)
+        ]);
+    }
+
 }
