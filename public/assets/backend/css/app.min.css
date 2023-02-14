@@ -9861,3 +9861,10 @@ table[data-toggle=table] {
 .highcharts-credits{
     display: none;
 }
+.highcharts-data-table table {
+    border-collapse: bordered;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 500px;
+}
