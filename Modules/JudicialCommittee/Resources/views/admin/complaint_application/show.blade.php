@@ -256,7 +256,11 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="complainant-application" role="tabpanel">
-                            <div>
+                            <x-print-button
+                                title="वादी दर्ता नालेस"
+                                target-element="print-complainant-application"
+                            />
+                            <div id="print-complainant-application">
                                 {!! $complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::COMPLAINANT_APPLICATION) !!}
                             </div>
                         </div>
