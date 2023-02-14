@@ -261,7 +261,7 @@ trait JudicialCommitteeTemplateTrait
                 '[@complaint_detail]' => $this->complaint_detail ?? '',
                 //last defendant issued deadline
                 '[@defendantIssuedDeadline.last_submitted_date]' => $this->defendantIssuedDeadlines?->last()->submitted_date ?? '',
-                '[@defendantIssuedDeadline.last_day_to_attend]' => $this->defendantIssuedDeadlines?->last()->last_day_to_attend ?? ''
+                '[@defendantIssuedDeadline.last_day_to_attend]' => $this->defendantIssuedDeadlines?->last()->day_to_attend ?? ''
             ],
             $this->getComplainantReplacement(),
             $this->getDefendantReplacement(),
