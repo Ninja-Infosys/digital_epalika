@@ -103,6 +103,8 @@ trait JudicialCommitteeTemplateTrait
         [
             'title' => 'प्रतिवादी म्याद जारी विवरण',
             'data' => [
+                'पछिल्लो जारी म्याद मिति' => '[@defendantIssuedDeadline.last_submitted_date]',
+                'पछिल्लो सहभागी हुनुपर्ने दिन' => '[@defendantIssuedDeadline.last_day_to_attend]',
                 'सहभागी हुनुपर्ने दिन' => '[@defendantIssuedDeadline.day_to_attend]',
                 'पेश मिति' => '[@defendantIssuedDeadline.submitted_date]'
             ],
@@ -257,6 +259,9 @@ trait JudicialCommitteeTemplateTrait
                 '[@subject]' => $this->subject ?? '',
                 '[@date]' => $this->date ?? '',
                 '[@complaint_detail]' => $this->complaint_detail ?? '',
+                //last defendant issued deadline
+                '[@defendantIssuedDeadline.last_submitted_date]' => $this->defendantIssuedDeadlines?->last()->submitted_date ?? '',
+                '[@defendantIssuedDeadline.last_day_to_attend]' => $this->defendantIssuedDeadlines?->last()->last_day_to_attend ?? ''
             ],
             $this->getComplainantReplacement(),
             $this->getDefendantReplacement(),
