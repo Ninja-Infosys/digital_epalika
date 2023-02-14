@@ -3,13 +3,14 @@
 namespace Modules\Recommendation\Http\Requests\PersonalDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StorePersonalDetailRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('personalDetail_create');
     }
 
     public function rules(): array

@@ -57,9 +57,9 @@ Route::view('fort_detail_proof', 'recommendation::admin.relation.fort_detail_pro
 Route::prefix('setting')->as('setting.')->group(function () {
 //    Route::get('{applicationTypeEnum}/formBuilder/{formBuilder}/updateStatus', [FormBuilderController::class, 'updateStatus'])->name('formBuilder.updateStatus');
 //    Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class)->names('formBuilder');
-    Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
+    Route::get('{type}/recommendationCategory/{recommendationCategory}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
     Route::get('recommendationCategory/{recommendationCategory}/getTemplate',[RecommendationCategoryController::class,'getTemplateData'])->name('recommendationCategory.getTemplate');
-    Route::get('{type}/recommendationCategory/{recommendationCategory}/updatestatus', [RecommendationCategoryController::class,'updatestatus'])->name('recommendationCategory.updatestatus');
+    Route::get('{type}/recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class,'updatestatus'])->name('recommendationCategory.updatestatus');
     Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
     Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
     Route::resource('personalDetail', PersonalDetailController::class);

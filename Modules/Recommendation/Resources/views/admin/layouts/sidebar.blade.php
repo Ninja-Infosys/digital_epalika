@@ -4,18 +4,22 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+@can('personalDetail_access')
 <li class="{{request()->is('admin/recommendation/setting/personalDetail*') ? 'active' : ''}}">
     <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
         <i class="fa fa-user"></i>
         <span>व्यक्तिगत विवरण</span>
     </a>
 </li>
+@endcan
+@can('recommendation_access')
 <li class="{{request()->is('admin/recommendation/registrationDetail*') ? 'active' : ''}}">
     <a href="{{route('admin.recommendation.registrationDetail.index')}}">
         <i class="fa fa-id-card"></i>
         <span>सिफारिस</span>
     </a>
 </li>
+@endcan
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#setting"
        {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'aria-expanded=true' : ''}}
@@ -30,7 +34,7 @@
         class="collapse {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'show' : ''}}"
         id="setting">
         <ul class="nav-second-level">
-
+            @can('recommendationCategory_access')
             <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationCategory')}}">
                     <span>सिफारिस श्रेणी</span>
@@ -42,6 +46,7 @@
                     <span>सिफारिस उप श्रेणी</span>
                 </a>
             </li>
+            @endcan
         </ul>
     </div>
 </li>
