@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('tax_payer_lands', function (Blueprint $table) {
@@ -17,7 +16,6 @@ return new class extends Migration
             $table->string('former_vdc')->nullable();
             $table->string('ward_no')->nullable();
             $table->string('area')->nullable();
-            $table->foreignId('area_unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('sector_id')->constrained('sectors')->onDelete('cascade');
             $table->foreignId('place_id')->constrained('places')->onDelete('cascade');
             $table->string('land_address')->nullable();
@@ -30,6 +28,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('land_details');
+        Schema::dropIfExists('tax_payer_lands');
     }
 };

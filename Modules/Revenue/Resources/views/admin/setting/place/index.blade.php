@@ -40,7 +40,7 @@
                                 <th>क्र.स</th>
                                 <th>क्षेत्र</th>
                                 <th>स्थान</th>
-                                <th>दर</th>
+                                <th>दर (वर्ग मीटरमा)</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -50,7 +50,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$place->sector->title ?? ''}}</td>
                                     <td>{{$place->title}}</td>
-                                    <td>रु. {{$place->rate}} / {{$place->unit->title ?? ''}}</td>
+                                    <td>रु. {{$place->rate}}</td>
                                     <td>
                                         @can('sector_edit')
                                             <a data-bs-type="edit"

@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">सिफारिस सूची</h4>
-                        @can('branch_create')
+                        @can('recommendation_create')
                             <a href="{{ route('admin.recommendation.registrationDetail.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
@@ -40,7 +40,7 @@
                                 <th>दर्ता नं</th>
                                 <th>सिफारिस</th>
                                 <th>मिति</th>
-                                <th>फोटो</th>
+                                <th>डकुमेन्ट</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -50,36 +50,43 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $registrationDetail->registration_no }}</td>
                                     <td>
-                                        {{ $registrationDetail->recommendation }}
+                                        {{ $registrationDetail->recommendationCategory->title??'' }}
                                     </td>
                                     <td>{{ $registrationDetail->date_ne }}</td>
                                     <td>
-                                        <img src="{{ $registrationDetail->application }}"
-                                             alt="{{$registrationDetail->registration_no}}" height="60">
+                                        <a href="{{$registrationDetail->application}}" download="{{$registrationDetail->application}}">
+                                            <i class="fa fa-download"></i> डाउनलोड
+                                        </a>
                                     </td>
                                     <td>
+                                        @can('recommendation_access')
                                         <a data-bs-type="edit"
                                            href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
-                                           class="btn btn-xs btn-outline-warning"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                            title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
                                         </a>
+                                        @endcan
+                                        @can('recommendation_edit')
                                         <a data-bs-type="edit"
                                            href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
-                                           class="btn btn-xs btn-outline-warning"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                            title="फारम सम्पादन गर्नुहोस">
                                             <i class="fa fa-pen"></i>
                                         </a>
+                                        @endcan
                                         <form
                                             action="{{ route('admin.recommendation.registrationDetail.destroy',$registrationDetail) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('recommendation_delete')
                                             <button data-bs-type="delete"
-                                                    class="btn btn-xs btn-outline-danger show_confirm"
+                                                    class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                     title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

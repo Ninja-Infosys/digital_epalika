@@ -1,13 +1,14 @@
 <?php
 
-namespace Modules\Recommendation\Entities;
+namespace Modules\Revenue\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class RecommendationFormData extends Model
+class PhysicalStructureType extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -18,9 +19,11 @@ class RecommendationFormData extends Model
     ];
 
     protected $fillable = [
-        'recommendation_id',
-        'data',
-        'update_times'
+        'title'
     ];
 
+    public function structureAssessmentRates(): HasMany
+    {
+        return $this->hasMany(StructureAssessmentRate::class);
+    }
 }

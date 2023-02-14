@@ -11,17 +11,20 @@ class PersonalDetailController extends Controller
 {
     public function index()
     {
-        $personaldetails = PersonalDetail::all();
-        return view('recommendation::admin.setting.personalDetail.index', compact('personaldetails'));
+        $this->checkAuthorization('personalDetail_access');
+        $personalDetails = PersonalDetail::all();
+        return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
     }
 
     public function create()
     {
+        $this->checkAuthorization('personalDetail_create');
         return view('recommendation::admin.setting.personalDetail.create');
     }
 
     public function store(StorePersonalDetailRequest $request)
     {
+        $this->checkAuthorization('personalDetail_create');
         $personalDetail = PersonalDetail::create($request->validated());
         if ($request->ajax()) {
             return response()->json([
@@ -39,17 +42,20 @@ class PersonalDetailController extends Controller
 
     public function show(PersonalDetail $personalDetail)
     {
+        $this->checkAuthorization('personalDetail_access');
         $personalDetail->load('province','district','localBody','registrationDetails');
         return view('recommendation::admin.setting.personalDetail.show',compact('personalDetail'));
     }
 
     public function edit(PersonalDetail $personalDetail)
     {
+        $this->checkAuthorization('personalDetail_edit');
         return view('recommendation::admin.setting.personalDetail.edit', compact('personalDetail'));
     }
 
     public function update(UpdatePersonalDetailRequest $request, PersonalDetail $personalDetail)
     {
+        $this->checkAuthorization('personalDetail_edit');
         $personalDetail->update($request->validated());
         toast('व्यक्तिगत विवरण सफलतापूर्वक गरियो', 'success');
         return back();
@@ -57,6 +63,7 @@ class PersonalDetailController extends Controller
 
     public function destroy(PersonalDetail $personalDetail)
     {
+        $this->checkAuthorization('personalDetail_delete');
         $personalDetail->delete();
         toast('व्यक्तिगत विवरण सफलतापूर्वक मेटियो', 'success');
         return back();

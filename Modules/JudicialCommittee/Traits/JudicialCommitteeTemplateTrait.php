@@ -38,6 +38,8 @@ trait JudicialCommitteeTemplateTrait
             'title' => 'वादीको विवरण',
             'data' => [
                 'वादीको नाम (संक्षिप्त)' => '[@complainant.brief_name]',
+                'वादीहरुको पुरा विवरण' => '[@complainant.full_description]',
+                'साक्षीहरु' => '[@complainant.witnesses]',
                 'वादीको नाम' => '[@complainant.name]',
                 'वादीको उमेर' => '[@complainant.age]',
                 'बुवाको नाम' => '[@complainant.father_name]',
@@ -54,6 +56,8 @@ trait JudicialCommitteeTemplateTrait
             'title' => 'प्रतिवादी विवरण',
             'data' => [
                 'प्रतिवादीको नाम (संक्षिप्त)' => '[@defendant.brief_name]',
+                'प्रतिवादीहरुको पुरा विवरण' => '[@defendant.full_description]',
+                'साक्षीहरु' => '[@complainant.witnesses]',
                 'प्रतिवादीको नाम' => '[@defendant.name]',
                 'प्रतिवादीको उमेर' => '[@defendant.age]',
                 'बुवाको नाम' => '[@defendant.father_name]',
@@ -99,6 +103,8 @@ trait JudicialCommitteeTemplateTrait
         [
             'title' => 'प्रतिवादी म्याद जारी विवरण',
             'data' => [
+                'पछिल्लो जारी म्याद मिति' => '[@defendantIssuedDeadline.last_submitted_date]',
+                'पछिल्लो सहभागी हुनुपर्ने दिन' => '[@defendantIssuedDeadline.last_day_to_attend]',
                 'सहभागी हुनुपर्ने दिन' => '[@defendantIssuedDeadline.day_to_attend]',
                 'पेश मिति' => '[@defendantIssuedDeadline.submitted_date]'
             ],
@@ -253,6 +259,9 @@ trait JudicialCommitteeTemplateTrait
                 '[@subject]' => $this->subject ?? '',
                 '[@date]' => $this->date ?? '',
                 '[@complaint_detail]' => $this->complaint_detail ?? '',
+                //last defendant issued deadline
+                '[@defendantIssuedDeadline.last_submitted_date]' => $this->defendantIssuedDeadlines?->last()->submitted_date ?? '',
+                '[@defendantIssuedDeadline.last_day_to_attend]' => $this->defendantIssuedDeadlines?->last()->day_to_attend ?? ''
             ],
             $this->getComplainantReplacement(),
             $this->getDefendantReplacement(),
@@ -264,9 +273,14 @@ trait JudicialCommitteeTemplateTrait
     {
         $complainants = $this->complainantDefendants->where('type', 'complainant');
         $complainants->load('province', 'district', 'localBody');
+        $witnesses = $this->witnesses->where('type', 'complainant');
 
         return [
             '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित " . ($complainants->count() - 1) . " जना" : ''),
+            '[@complainant.full_description]' => (string)View::make('judicialcommittee::admin.setting.template.inc.complainant_defendants', [
+                'data' => $complainants
+            ]),
+            '[@complainant.witnesses]' => (string)View::make('judicialcommittee::admin.setting.template.inc.witness_list', compact('witnesses')),
             '[@complainant.name]' => implode(',', $complainants->pluck('name')->toArray()),
             '[@complainant.age]' => ($complainants?->first()->age ?? ''),
             '[@complainant.father_name]' => ($complainants?->first()->father_name ?? ''),
@@ -284,9 +298,14 @@ trait JudicialCommitteeTemplateTrait
     {
         $defendants = $this->complainantDefendants->where('type', 'defendant');
         $defendants->load('province', 'district', 'localBody');
+        $witnesses = $this->witnesses->where('type', 'defendant');
 
         return [
             '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित " . ($defendants->count() - 1) . " जना" : ''),
+            '[@defendant.full_description]' => (string)View::make('judicialcommittee::admin.setting.template.inc.complainant_defendants', [
+                'data' => $defendants
+            ]),
+            '[@defendant.witnesses]' => (string)View::make('judicialcommittee::admin.setting.template.inc.witness_list', compact('witnesses')),
             '[@defendant.name]' => implode(',', $defendants->pluck('name')->toArray()),
             '[@defendant.age]' => ($defendants?->first()->age ?? ''),
             '[@defendant.father_name]' => ($defendants?->first()->father_name ?? ''),

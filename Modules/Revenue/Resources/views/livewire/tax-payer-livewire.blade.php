@@ -180,7 +180,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="taxPayerDetail.citizenship_no" class="form-label">नागरिकता नम्बर *</label>
+                <label for="taxPayerDetail.citizenship_no" class="form-label">नागरिकता नम्बर/दर्ता नं. *</label>
                 <input
                     type="text"
                     name="taxPayerDetail.citizenship_no"
@@ -217,12 +217,12 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="issued_date">जारि मिति *</label>
+                <label for="issued_date">जारि मिति</label>
                 <input type="text" name="issued_date" wire:model="taxPayerDetail.issued_date" class="form-control"
                        id="issued_date">
             </div>
             <div class="col-md-6 mb-2">
-                <label for="province_id" class="form-label">प्रदेश </label>
+                <label for="province_id" class="form-label">प्रदेश *</label>
                 <select
                     name="taxPayerDetail.province_id"
                     wire:model="taxPayerDetail.province_id"
@@ -240,7 +240,7 @@
                 @enderror
             </div>
             <div class="col-md-6 mb-2">
-                <label for="taxPayerDetail.district_id" class="form-label">जिल्ला </label>
+                <label for="taxPayerDetail.district_id" class="form-label">जिल्ला *</label>
                 <select
                     name="taxPayerDetail.district_id"
                     wire:model="taxPayerDetail.district_id"
@@ -258,7 +258,7 @@
                 @enderror
             </div>
             <div class="col-md-6 mb-2">
-                <label for="taxPayerDetail.local_body_id" class="form-label">पालिका </label>
+                <label for="taxPayerDetail.local_body_id" class="form-label">पालिका *</label>
                 <select
                     name="taxPayerDetail.local_body_id"
                     wire:model="taxPayerDetail.local_body_id"
@@ -324,7 +324,7 @@
                 @enderror
             </div>
             <div class="col-md-3 mb-2">
-                <label for="taxPayerDetail.address" class="form-label">ठेगाना</label>
+                <label for="taxPayerDetail.address" class="form-label">ठेगाना *</label>
                 <input
                     type="text"
                     name="taxPayerDetail.address"
@@ -395,7 +395,7 @@
                 </table>
             </div>
             <div class="col-md-12 mb-2">
-                <label for="taxPayerDetail.remarks" class="form-label">कैफियत *</label>
+                <label for="taxPayerDetail.remarks" class="form-label">कैफियत</label>
                 <textarea class="form-control @error('taxPayerDetail.remarks') is_invalid @enderror"
                           wire:model="taxPayerDetail.remarks" name="taxPayerDetail.remarks" id="taxPayerDetail.remarks"
                           cols="30" rows="5">{{old('taxPayerDetail.remarks')}}</textarea>

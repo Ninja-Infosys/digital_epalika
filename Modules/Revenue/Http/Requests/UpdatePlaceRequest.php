@@ -20,7 +20,6 @@ class UpdatePlaceRequest extends FormRequest
             'ward_no' => ['required', 'array'],
             'ward_no.*' => ['integer'],
             'rate' => ['required', 'numeric'],
-            'unit_id' => ['required', Rule::exists('units', 'id')->withoutTrashed()],
         ];
     }
 }

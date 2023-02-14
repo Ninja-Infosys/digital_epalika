@@ -13,7 +13,6 @@ return new class extends Migration {
             $table->string('ward_no');
             $table->string('title');
             $table->double('rate', 15, 2)->default(0);
-            $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
