@@ -1,12 +1,3 @@
-/*
- Highcharts JS v10.3.3 (2023-01-20)
-
- Exporting module
-
- (c) 2010-2021 Torstein Honsi
-
- License: www.highcharts.com/license
-*/
 (function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/modules/export-data",["highcharts","highcharts/modules/exporting"],function(p){a(p);a.Highcharts=p;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function p(a,f,c,y){a.hasOwnProperty(f)||(a[f]=y.apply(null,c),"function"===typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:f,module:a[f]}})))}
     a=a?a._modules:{};p(a,"Extensions/ExportData/ExportDataDefaults.js",[],function(){"";return{exporting:{csv:{annotations:{itemDelimiter:"; ",join:!1},columnHeaderFormatter:null,dateFormat:"%Y-%m-%d %H:%M:%S",decimalPoint:null,itemDelimiter:null,lineDelimiter:"\n"},showTable:!1,useMultiLevelHeaders:!0,useRowspanHeaders:!0},lang:{downloadCSV:"Download CSV",downloadXLS:"Download XLS",exportData:{annotationHeader:"Annotations",categoryHeader:"Category",categoryDatetimeHeader:"DateTime"},viewData:"View data table",
             hideData:"Hide data table"}}});p(a,"Extensions/DownloadURL.js",[a["Core/Globals.js"]],function(a){var f=a.isSafari,c=a.win,y=c.document,p=c.URL||c.webkitURL||c,D=a.dataURLtoBlob=function(a){if((a=a.replace(/filename=.*;/,"").match(/data:([^;]*)(;base64)?,([0-9A-Za-z+/]+)/))&&3<a.length&&c.atob&&c.ArrayBuffer&&c.Uint8Array&&c.Blob&&p.createObjectURL){var m=c.atob(a[3]),v=new c.ArrayBuffer(m.length);v=new c.Uint8Array(v);for(var q=0;q<v.length;++q)v[q]=m.charCodeAt(q);a=new c.Blob([v],{type:a[1]});
@@ -32,4 +23,3 @@
         h.indexOf(a)&&(h.push(a),V(a,"afterViewData",ha),V(a,"render",ia),a=a.prototype,a.downloadCSV=f,a.downloadXLS=v,a.getCSV=q,a.getDataRows=D,a.getTable=Q,a.getTableAST=ba,a.hideData=ca,a.toggleDataTable=da,a.viewData=fa);if(-1===h.indexOf(O)){h.push(O);if(a=ja().exporting)U(a.menuItemDefinitions,{downloadCSV:{textKey:"downloadCSV",onclick:function(){this.downloadCSV()}},downloadXLS:{textKey:"downloadXLS",onclick:function(){this.downloadXLS()}},viewData:{textKey:"viewData",onclick:function(){this.toggleDataTable()}}}),
         a.buttons&&a.buttons.contextButton.menuItems&&a.buttons.contextButton.menuItems.push("separator","downloadCSV","downloadXLS","viewData");O(p)}F&&-1===h.indexOf(F)&&(h.push(F),F.prototype.keyToAxis={low:"y",high:"y"});G&&-1===h.indexOf(G)&&(h.push(G),G.prototype.keyToAxis={start:"x",end:"x"});H&&-1===h.indexOf(H)&&(h.push(H),H.prototype.exportKey="name");I&&-1===h.indexOf(I)&&(h.push(I),I.prototype.exportKey="name");J&&-1===h.indexOf(J)&&(h.push(J),J.prototype.exportKey="name")}}});p(a,"masters/modules/export-data.src.js",
         [a["Core/Globals.js"],a["Extensions/ExportData/ExportData.js"]],function(a,f){f.compose(a.Chart)})});
-//# sourceMappingURL=export-data.js.map
