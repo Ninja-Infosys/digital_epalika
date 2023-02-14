@@ -50,7 +50,7 @@ class DefendantIssuedDeadlineController extends Controller
 
         if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::DEFENDANT_ISSUED_DEADLINE)->count() == 0) {
             toast('टेम्प्लेट सेट गरिएको छैन', 'error');
-            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
+            return redirect(route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index'));
         }
 
         return view('judicialcommittee::admin.defendant_issued_deadline.show',compact('complaintApplication','defendantIssuedDeadline'));
