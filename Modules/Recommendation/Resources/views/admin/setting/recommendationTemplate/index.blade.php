@@ -11,7 +11,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory])}}"> टेम्प्लेट</a>
+                            <a href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory])}}">
+                                टेम्प्लेट</a>
                         </li>
                         <li class="breadcrumb-item active">टेम्प्लेट</li>
                     </ol>
@@ -42,7 +43,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>शिर्षक</th>
                                 <th>स्थिति</th>
                                 <th>मिति</th>
                                 <th>#</th>
@@ -56,32 +57,40 @@
 
                                     <td>
                                         @can('recommendationTemplate_access')
-                                        <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$type,$recommendationTemplate])}}">
-                                            <i class="fa fa-2x  {{$recommendationTemplate->is_active  ? 'fa-toggle-on':'fa-toggle-off'}} {{get_setting('Pin')?'confirm_pin':''}}"></i>
-                                        </a>
-                                    @endcan
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$type,$recommendationCategory,$recommendationTemplate])}}">
+                                                <i class="fa fa-2x  {{$recommendationTemplate->is_active  ? 'fa-toggle-on':'fa-toggle-off'}} {{get_setting('Pin')?'confirm_pin':''}}"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                     <td>
-                                        <x-ad-to-bs id="fb_{{$loop->iteration}}" adDate="{{$recommendationTemplate->created_at->toDateString()}}" />
+                                        <x-ad-to-bs id="fb_{{$loop->iteration}}"
+                                                    adDate="{{$recommendationTemplate->created_at->toDateString()}}"/>
                                     </td>
                                     <td>
                                         @can('recommendationTemplate_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.edit',[$type,$recommendationCategory,$recommendationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning{{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.edit',[$type,$recommendationCategory,$recommendationTemplate])}}"
+                                               class="btn btn-xs btn-outline-warning{{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         <form
-                                        action="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.destroy', [$type,$recommendationCategory,$recommendationTemplate]) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('delete')
-                                        @if(!$recommendationCategory->status)
-                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                        @endif
-                                    </form>
+                                            action="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.destroy', [$type,$recommendationCategory,$recommendationTemplate]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            @if(!$recommendationCategory->status)
+                                                @can('recommendationTemplate_delete')
+                                                    <button data-bs-type="delete"
+                                                            class="btn btn-xs btn-outline-danger show_confirm"
+                                                            title="मेटाउनु होस्">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                @endcan
+                                            @endif
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

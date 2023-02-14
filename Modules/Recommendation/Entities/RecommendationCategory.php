@@ -11,41 +11,42 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RecommendationCategory extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-    'title',
-    'recommendation_category_id',
-    'is_active',
-    'user_id'
-   ];
+    protected $fillable = [
+        'title',
+        'recommendation_category_id',
+        'is_active',
+        'user_id'
+    ];
 
-   public function recommendationCategory(): BelongsTo
-   {
-    return $this->belongsTo(RecommendationCategory::class);
-   }
+    public function recommendationCategory(): BelongsTo
+    {
+        return $this->belongsTo(RecommendationCategory::class);
+    }
 
-   public function recommendationCategories(): HasMany
-   {
-    return $this->hasMany(RecommendationCategory::class);
-   }
+    public function recommendationCategories(): HasMany
+    {
+        return $this->hasMany(RecommendationCategory::class);
+    }
 
-   public function user(): BelongsTo
-   {
-    return $this->belongsTo(RecommendationCategory::class);
-   }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(RecommendationCategory::class);
+    }
 
-   public function recommendationTemplates(): HasMany
-   {
-    return $this->hasMany(RecommendationTemplate::class);
-   }
-   public function scopeActive($q)
+    public function recommendationTemplates(): HasMany
+    {
+        return $this->hasMany(RecommendationTemplate::class);
+    }
+
+    public function scopeActive($q)
     {
         return $q->where('is_active', 1);
     }

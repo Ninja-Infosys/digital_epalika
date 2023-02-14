@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
                         <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
-                            class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
@@ -40,10 +40,12 @@
                                             class="ms-2">{{ $registrationDetail->user->name ?? '' }}</span>
                                     </p>
                                     <p class="mb-2 font-15"><strong>व्यक्तिगत विवरण :</strong><span
-                                            class="ms-2">{{ $registrationDetail->personalDetail->name ?? '' }}</span></p>
+                                            class="ms-2">{{ $registrationDetail->personalDetail->name ?? '' }}</span>
+                                    </p>
 
                                     <p class="mb-2 font-15"><strong>सिफारिस:</strong> <span
-                                            class="ms-2">{{ $registrationDetail->recommendationCategory->title ?? '' }}</span></p>
+                                            class="ms-2">{{ $registrationDetail->recommendationCategory->title ?? '' }}</span>
+                                    </p>
                                 </div>
 
                             </div>
@@ -64,9 +66,7 @@
                                     <p class="mb-2 font-15"><strong>सिफारिस :</strong> <span
                                             class="ms-2">{{ $registrationDetail->recommendation }}</span></p>
                                     <p class="mb-2 font-15"><strong>निवेदन :</strong><span>
-                                            <button type="button" class="btn btn-primary btn-sm waves-effect waves-light">
-                                                <i class="fa fa-download"></i>
-                                            </button></span>
+
                                     </p>
                                 </div>
 
@@ -75,7 +75,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
+                        <x-print-button
+                            target-element="print"
+                            title="{{$registrationDetail-> date_ne}}"
+                        />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="print" class="p-1">
+                        {!! $registrationDetail->recommendation_data !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
