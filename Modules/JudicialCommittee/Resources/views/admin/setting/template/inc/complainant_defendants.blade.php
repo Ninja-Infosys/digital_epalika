@@ -5,5 +5,6 @@
         <u>{{$complainantDefendant->localBody->local_body??''}}-{{$complainantDefendant->ward_no}}
             ,{{$complainantDefendant->district->district??''}}</u> बस्ने वर्ष <u>{{$complainantDefendant->age}}</u> को
         <u>{{$complainantDefendant->name}}</u>
-    </p> {{!$loop->last ? ',' : ''}}
+        {{!$loop->last ? ',' : ''}}
+    </p>
 @endforeach
