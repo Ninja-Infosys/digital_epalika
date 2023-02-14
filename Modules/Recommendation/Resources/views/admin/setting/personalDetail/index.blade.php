@@ -47,19 +47,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($personaldetails as $personalDetailw)
+                            @foreach ($personalDetails as $personalDetail)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $personalDetailw->reg_no }}</td>
+                                    <td>{{ $personalDetail->reg_no }}</td>
                                     <td>
-                                        {{ $personalDetailw->name }}
+                                        {{ $personalDetail->name }}
                                     </td>
-                                    <td>{{ $personalDetailw->citizenship_no }}</td>
-                                    <td>{{ $personalDetailw->phone_no }}</td>
+                                    <td>{{ $personalDetail->citizenship_no }}</td>
+                                    <td>{{ $personalDetail->phone_no }}</td>
                                     <td>
                                         @can('personalDetail_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.setting.personalDetail.edit', $personalDetailw) }}"
+                                               href="{{ route('admin.recommendation.setting.personalDetail.edit', $personalDetail) }}"
                                                class="btn btn-xs btn-outline-warning"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
@@ -67,14 +67,14 @@
                                         @endcan
                                         @can('personalDetail_access')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.setting.personalDetail.show', $personalDetailw) }}"
+                                               href="{{ route('admin.recommendation.setting.personalDetail.show', $personalDetail) }}"
                                                class="btn btn-xs btn-outline-warning"
                                                title="व्यक्तिगत विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         <form
-                                            action="{{ route('admin.recommendation.setting.personalDetail.destroy',$personalDetailw) }}"
+                                            action="{{ route('admin.recommendation.setting.personalDetail.destroy',$personalDetail) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')

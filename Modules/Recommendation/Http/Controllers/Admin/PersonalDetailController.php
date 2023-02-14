@@ -12,8 +12,8 @@ class PersonalDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('personalDetail_access');
-        $personaldetails = PersonalDetail::all();
-        return view('recommendation::admin.setting.personalDetail.index', compact('personaldetails'));
+        $personalDetails = PersonalDetail::all();
+        return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
     }
 
     public function create()
