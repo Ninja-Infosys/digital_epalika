@@ -20,6 +20,7 @@ class Witness extends Model
 
     protected $fillable = [
         'complaint_application_id',
+        'type',
         'name',
         'age',
         'address',

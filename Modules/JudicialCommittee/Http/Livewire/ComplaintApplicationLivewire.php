@@ -215,7 +215,7 @@ class ComplaintApplicationLivewire extends Component
 
             foreach ($this->form['witnesses'] as $witness) {
                 Witness::updateOrCreate(
-                    ['complaint_application_id' => $complaintApplication->id, 'id' => $witness['id'] ?? null],
+                    ['complaint_application_id' => $complaintApplication->id, 'type' => 'complainant', 'id' => $witness['id'] ?? null],
                     $witness
                 );
             }

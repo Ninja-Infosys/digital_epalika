@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('tax_payers', function (Blueprint $table) {
-            $table->string('occupation')->nullable()->after('address');
+            $table->string('occupation')->nullable();
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->after('occupation');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->after('province_id');
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->after('district_id');
