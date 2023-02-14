@@ -44,17 +44,28 @@
                 <div class="card-body">
                     <ul class="nav nav-pills navtab-bg nav-justified" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a href="#complaint-application" data-bs-toggle="tab" aria-expanded="true" class="nav-link active"
+                            <a href="#complaint-application" data-bs-toggle="tab" aria-expanded="true"
+                               class="nav-link active"
                                aria-selected="true" role="tab">
                                 उजुरी फारम विवरण
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a href="#complainant-application" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
+                            <a href="#complainant-application" data-bs-toggle="tab" aria-expanded="false"
+                               class="nav-link"
                                aria-selected="false" tabindex="-1" role="tab">
                                 वादी दर्ता नालेस
                             </a>
                         </li>
+                        @if($complaintApplication->defendantIssuedDeadlines->count()>0)
+                            <li class="nav-item" role="presentation">
+                                <a href="#defendant-application" data-bs-toggle="tab" aria-expanded="false"
+                                   class="nav-link"
+                                   aria-selected="false" tabindex="-1" role="tab">
+                                    प्रतिवादी दर्ता नालेस
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="complaint-application" role="tabpanel">
@@ -72,7 +83,8 @@
                                         </td>
                                         <td rowspan="4" class="text-center">
                                             <span class="fw-bold pb-2">निवेदकको सहि : </span> <br>
-                                            <img src="{{$complaintApplication->applicant_signature_url}}" height="80" width="80"
+                                            <img src="{{$complaintApplication->applicant_signature_url}}" height="80"
+                                                 width="80"
                                                  alt="Signature">
                                         </td>
                                     </tr>
@@ -82,12 +94,14 @@
                                         class="fw-bold">निवेदकको ठेगाना : </span> {{$complaintApplication->applicant_address}}
                                         </td>
                                         <td>
-                                            <span class="fw-bold">सबमिशन नं. : </span> {{$complaintApplication->submission_no}}
+                                            <span
+                                                class="fw-bold">सबमिशन नं. : </span> {{$complaintApplication->submission_no}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="fw-bold">दर्ता नं. : </span> {{$complaintApplication->registration_no}}
+                                            <span
+                                                class="fw-bold">दर्ता नं. : </span> {{$complaintApplication->registration_no}}
                                         </td>
                                         <td>
                                             <span class="fw-bold">मिति : </span> {{$complaintApplication->date}}
@@ -256,7 +270,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="complainant-application" role="tabpanel">
-                            <div class="border m-4 border-secondary">
+                            <div class="border m-4 p-2 border-secondary">
                                 <x-print-button
                                     title="वादी दर्ता नालेस"
                                     target-element="print-complainant-application"
@@ -266,8 +280,20 @@
                                 </div>
                             </div>
                         </div>
+                        @if($complaintApplication->defendantIssuedDeadlines->count()>0)
+                            <div class="tab-pane" id="defendant-application" role="tabpanel">
+                                <div class="border m-4 p-2 border-secondary">
+                                    <x-print-button
+                                        title="प्रतिवादी दर्ता नालेस"
+                                        target-element="print-defendant-application"
+                                    />
+                                    <div id="print-defendant-application">
+                                        {!! $complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DEFENDANT_APPLICATION) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
-
                 </div>
             </div>
         </div>
