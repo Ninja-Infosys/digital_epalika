@@ -6,11 +6,11 @@ use App\Traits\StoreSqlInDatabaseTrait;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RecommendationFormBuilderSeederTableSeeder extends Seeder
+class RecommendationTemplateTableSeeder extends Seeder
 {
     use StoreSqlInDatabaseTrait;
     public function run()
     {
-        $this->storeSql(storage_path('sql/Recommendation/form_builders.sql'));
+        $this->storeSql(storage_path('sql/Recommendation/recommendation_templates.sql'));
     }
 }
