@@ -60,7 +60,7 @@
                                         @can('personalDetail_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.setting.personalDetail.edit', $personalDetail) }}"
-                                               class="btn btn-xs btn-outline-warning"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
@@ -68,7 +68,7 @@
                                         @can('personalDetail_access')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.setting.personalDetail.show', $personalDetail) }}"
-                                               class="btn btn-xs btn-outline-warning"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="व्यक्तिगत विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
@@ -80,7 +80,7 @@
                                             @method('delete')
                                             @can('personalDetail_delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger show_confirm"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
