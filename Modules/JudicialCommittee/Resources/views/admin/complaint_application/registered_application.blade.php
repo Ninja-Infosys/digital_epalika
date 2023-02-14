@@ -57,16 +57,19 @@
                                     <td>
                                         {{ $complaintApplication->lawsuitNature->title ?? '' }}
                                     </td>
-                                    <td width="180" class="text-center">
-                                        <div class="dropdown dropstart">
-                                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton{{ $loop->iteration }}"
+                                    <td>
+                                        <div class="btn-group dropstart">
+                                            <a href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
+                                               class="btn btn-sm btn-primary">
+                                                <i class="fa fa-eye"> विवरण </i>
+                                            </a>
+                                            <button type="button"
+                                                    class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
                                                     data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="true">
-                                                -- छान्नुहोस् -- <i class="fa fa-angle-down"></i>
+                                                    aria-expanded="false">
+                                                <i class="fa fa-angle-down"></i>
                                             </button>
-                                            <div class="dropdown-menu"
-                                                 aria-labelledby="dropdownMenuButton{{ $loop->iteration }}">
+                                            <div class="dropdown-menu" style="">
                                                 @can('judicialReceiptBill_access')
                                                     <a href="{{ route('admin.judicialCommittee.complaintApplication.judicialReceiptBill.index', $complaintApplication) }}"
                                                        class="dropdown-item">
@@ -109,7 +112,6 @@
                                                 </a>
                                             </div>
                                         </div>
-
                                     </td>
                                 </tr>
                             @empty

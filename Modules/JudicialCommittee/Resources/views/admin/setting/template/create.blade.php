@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="type" class="form-label">टेम्प्लेट *</label>
-                                <select name="type" id="type" class="form-control">
+                                <select name="type" id="type" class="form-select">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::cases() as $type)
                                         <option {{old('type')==$type->value ? 'selected':''}}

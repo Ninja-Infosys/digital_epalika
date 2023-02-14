@@ -23,7 +23,7 @@ class ComplaintApplicationController extends Controller
                 }
             })->orderByDesc('date')->paginate(10);
 
-        return view('judicialcommittee::admin.registered_application', compact('complaintApplications'));
+        return view('judicialcommittee::admin.complaint_application.registered_application', compact('complaintApplications'));
     }
 
     public function index()

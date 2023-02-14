@@ -38,6 +38,7 @@ trait JudicialCommitteeTemplateTrait
             'title' => 'वादीको विवरण',
             'data' => [
                 'वादीको नाम (संक्षिप्त)' => '[@complainant.brief_name]',
+                'वादीहरुको पुरा विवरण' => '[@complainant.full_description]',
                 'वादीको नाम' => '[@complainant.name]',
                 'वादीको उमेर' => '[@complainant.age]',
                 'बुवाको नाम' => '[@complainant.father_name]',
@@ -54,6 +55,7 @@ trait JudicialCommitteeTemplateTrait
             'title' => 'प्रतिवादी विवरण',
             'data' => [
                 'प्रतिवादीको नाम (संक्षिप्त)' => '[@defendant.brief_name]',
+                'प्रतिवादीहरुको पुरा विवरण' => '[@defendant.full_description]',
                 'प्रतिवादीको नाम' => '[@defendant.name]',
                 'प्रतिवादीको उमेर' => '[@defendant.age]',
                 'बुवाको नाम' => '[@defendant.father_name]',
@@ -267,6 +269,9 @@ trait JudicialCommitteeTemplateTrait
 
         return [
             '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित " . ($complainants->count() - 1) . " जना" : ''),
+            '[@complainant.full_description]' => (string)View::make('judicialcommittee::admin.setting.template.inc.complainant_defendants', [
+                'data' => $complainants
+            ]),
             '[@complainant.name]' => implode(',', $complainants->pluck('name')->toArray()),
             '[@complainant.age]' => ($complainants?->first()->age ?? ''),
             '[@complainant.father_name]' => ($complainants?->first()->father_name ?? ''),
@@ -287,6 +292,9 @@ trait JudicialCommitteeTemplateTrait
 
         return [
             '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित " . ($defendants->count() - 1) . " जना" : ''),
+            '[@defendant.full_description]' => (string)View::make('judicialcommittee::admin.setting.template.inc.complainant_defendants', [
+                'data' => $defendants
+            ]),
             '[@defendant.name]' => implode(',', $defendants->pluck('name')->toArray()),
             '[@defendant.age]' => ($defendants?->first()->age ?? ''),
             '[@defendant.father_name]' => ($defendants?->first()->father_name ?? ''),

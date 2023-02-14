@@ -136,15 +136,15 @@
                 <div class="card-body">
                     <table class="table table-bordered table-sm table-striped">
                         <thead>
-                        <tr>
+                        <tr class="text-nowrap">
                             <th>क्र.स</th>
                             <th>दर्ता नं.</th>
-                            <th class="text-nowrap">आयोजना/कार्यक्रमको नाम</th>
-                            <th class="text-nowrap">योजना उपक्षेत्र</th>
-                            <th class="text-nowrap">सुरु हुने मिति</th>
-                            <th class="text-nowrap">वडा नं.</th>
-                            <th class="text-nowrap">स्वीकृत रकम</th>
-                            <th class="text-nowrap">आयोजनाको अवस्था</th>
+                            <th>आयोजना/कार्यक्रमको नाम</th>
+                            <th>योजना उपक्षेत्र</th>
+                            <th>सुरु हुने मिति</th>
+                            <th>वडा नं.</th>
+                            <th>स्वीकृत रकम</th>
+                            <th>आयोजनाको अवस्था</th>
                             <th>#</th>
                         </tr>
                         </thead>
