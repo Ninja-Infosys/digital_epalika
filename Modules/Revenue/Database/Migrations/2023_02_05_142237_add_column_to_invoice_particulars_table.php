@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('invoice_particulars', function (Blueprint $table) {
-            $table->integer('due')->default(0)->after('rate');
+            $table->integer('due')->comment('बाकि')->default(0)->after('rate');
         });
     }
 

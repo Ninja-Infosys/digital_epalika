@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('tax_payer_families', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tax_payer_id')->constrained('tax_payers')->cascadeOnDelete();
-            $table->string('name');
-            $table->string('relation');
+            $table->string('name')->comment('नाम');
+            $table->string('relation')->comment('नाता');
             $table->timestamps();
             $table->softDeletes();
         });
