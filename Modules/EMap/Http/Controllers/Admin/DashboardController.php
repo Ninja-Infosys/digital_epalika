@@ -67,7 +67,15 @@ class DashboardController extends Controller
                 $query->where('application_type', ApplicationFormTypeEnum::MAP_VERIFIED);
             },])
             ->selectRaw('id,title')
-            ->get();
+            ->get()
+        ->map(function ($fiscalYear){
+            return [
+                'title' => $fiscalYear->title,
+                'map_applies_count'=> (int)$fiscalYear->map_applies_count,
+                'mapRegistrationCount'=> (int)$fiscalYear->mapRegistrationCount,
+                'mapVerificationCount' => (int)$fiscalYear->mapVerificationCount,
+            ];
+        });
         return [
             'labels' => $fiscalYear->pluck('title')->toArray(),
             'dataSets' => [
