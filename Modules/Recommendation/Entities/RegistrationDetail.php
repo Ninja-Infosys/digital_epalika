@@ -2,11 +2,13 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
@@ -26,8 +28,6 @@ class RegistrationDetail extends Model
         'registration_no',
         'date_ne',
         'date_en',
-        'application',
-        'recommendation',
         'recommendation_data',
         'personal_detail_id',
         'recommendation_category_id'
@@ -46,6 +46,11 @@ class RegistrationDetail extends Model
     public function recommendationCategory(): BelongsTo
     {
         return $this->belongsTo(RecommendationCategory::class);
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class,'model');
     }
 
     public function Application(): Attribute

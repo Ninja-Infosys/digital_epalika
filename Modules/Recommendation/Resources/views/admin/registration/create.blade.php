@@ -15,10 +15,8 @@
                     </ol>
                 </div>
                 <h4 class="page-title">नयाँ सिफारिस</h4>
-                </ol>
             </div>
         </div>
-    </div>
     </div>
 
 
@@ -89,14 +87,7 @@
                                         name-en="date_en" label-en="English Date"
                                     />
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="application" class="form-label">डकुमेन्ट </label>
-                                    <input
-                                        id="application" name="application" type="file" class="form-control">
-                                    @error('application')
-                                    <p class="text-red-600">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                               @livewire('multiple-file')
                             </div>
                         </fieldset>
                         <div class="row mt-2">
