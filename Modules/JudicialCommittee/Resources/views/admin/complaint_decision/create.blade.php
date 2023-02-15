@@ -40,7 +40,7 @@
                                 <textarea name="description"
                                           id="description"
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->complaintDecision->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DECISION)}}</textarea>
+                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->complaintDecision->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DECISION))}}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
