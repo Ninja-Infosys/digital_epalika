@@ -17,6 +17,7 @@ use Modules\JudicialCommittee\Entities\ComplaintSubject;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
 use Modules\JudicialCommittee\Entities\RelatedMember;
 use Modules\JudicialCommittee\Entities\Witness;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 
 class ComplaintApplicationLivewire extends Component
@@ -42,7 +43,8 @@ class ComplaintApplicationLivewire extends Component
         'applicant_address' => null,
         'applicant_signature' => null,
         'relatedMembers' => [],
-        'witnesses' => []
+        'witnesses' => [],
+        'supportedDocuments' => []
     ];
 
     public function mount($complaintApplication = null)
@@ -106,6 +108,9 @@ class ComplaintApplicationLivewire extends Component
         'form.witnesses.*.age' => ['nullable', 'integer'],
         'form.witnesses.*.phone' => ['nullable'],
         'form.witnesses.*.address' => ['nullable'],
+        'form.supportedDocuments' => ['array'],
+        'form.supportedDocuments.*.document_name' => ['required', 'string', 'max:255'],
+        'form.supportedDocuments.*.document' => ['required', 'mimes:jpg,jpeg,png,pdf']
     ];
 
     public function updated($propertyName): void
@@ -163,6 +168,17 @@ class ComplaintApplicationLivewire extends Component
         $this->form['witnesses'] = array_values($this->form['witnesses']);
     }
 
+    public function addSupportedDocuments()
+    {
+        $this->form['supportedDocuments'][] = [];
+    }
+
+    public function removeSupportedDocument($index)
+    {
+        unset($this->form['supportedDocuments'][$index]);
+        $this->form['supportedDocuments'] = array_values($this->form['supportedDocuments']);
+    }
+
     public function addRelatedMembers()
     {
         $this->form['relatedMembers'][] = [];
@@ -200,7 +216,7 @@ class ComplaintApplicationLivewire extends Component
                 ComplainantDefendant::updateOrCreate(
                     ['complaint_application_id' => $complaintApplication->id, 'id' => $complainant['id'] ?? null],
                     $complainant + [
-                        'type' => 'complainant'
+                        'type' => ComplainantDefendantTypeEnum::COMPLAINANT
                     ]
                 );
             }
@@ -208,14 +224,14 @@ class ComplaintApplicationLivewire extends Component
                 ComplainantDefendant::updateOrCreate(
                     ['complaint_application_id' => $complaintApplication->id, 'id' => $defendant['id'] ?? null],
                     $defendant + [
-                        'type' => 'defendant'
+                        'type' => ComplainantDefendantTypeEnum::DEFENDANT
                     ]
                 );
             }
 
             foreach ($this->form['witnesses'] as $witness) {
                 Witness::updateOrCreate(
-                    ['complaint_application_id' => $complaintApplication->id, 'type' => 'complainant', 'id' => $witness['id'] ?? null],
+                    ['complaint_application_id' => $complaintApplication->id, 'type' => ComplainantDefendantTypeEnum::COMPLAINANT, 'id' => $witness['id'] ?? null],
                     $witness
                 );
             }
@@ -225,6 +241,14 @@ class ComplaintApplicationLivewire extends Component
                     ['complaint_application_id' => $complaintApplication->id, 'id' => $member['id'] ?? null],
                     $member
                 );
+            }
+
+            foreach ($this->form['supportedDocuments'] as $supportedDocument) {
+                $complaintApplication->supportedDocuments()->create([
+                    'type' => ComplainantDefendantTypeEnum::COMPLAINANT,
+                    'document_name' => $supportedDocument['document_name'],
+                    'document' => $supportedDocument['document']
+                ]);
             }
         });
 
@@ -249,11 +273,12 @@ class ComplaintApplicationLivewire extends Component
     private function assignComplaintApplicationData($complaintApplication)
     {
         $this->complaintApplication = $complaintApplication;
-        foreach (Arr::except($this->form, ['relatedMembers', 'witnesses', 'complaintDefendants', 'applicant_signature']) as $key => $data) {
+
+        foreach (Arr::except($this->form, ['relatedMembers', 'witnesses', 'complaintDefendants', 'applicant_signature','supportedDocuments']) as $key => $data) {
             $this->form[$key] = $complaintApplication[$key];
         }
 
-        foreach ($complaintApplication->complainantDefendants->where('type', 'complainant') as $complainant) {
+        foreach ($complaintApplication->complainantDefendants->where('type', ComplainantDefendantTypeEnum::COMPLAINANT) as $complainant) {
             $this->form['complainants'][] = [
                 'id' => $complainant->id,
                 'name' => $complainant->name ?? null,
@@ -269,7 +294,7 @@ class ComplaintApplicationLivewire extends Component
             ];
         }
 
-        foreach ($complaintApplication->complainantDefendants->where('type', 'defendant') as $defendant) {
+        foreach ($complaintApplication->complainantDefendants->where('type', ComplainantDefendantTypeEnum::DEFENDANT) as $defendant) {
             $this->form['defendants'][] = [
                 'id' => $defendant->id,
                 'name' => $defendant->name ?? null,
@@ -344,6 +369,8 @@ class ComplaintApplicationLivewire extends Component
             'form.relatedMembers.*.email.email' => ['ईमेल मान्य छैन'],
             'form.relatedMembers.*.designation.required' => ['पद आवश्यक छ'],
             'form.witnesses.*.name.required' => 'नाम अनिवार्य छ',
+            'form.supportedDocuments.*.document_name.required' => 'फाइलको नाम अनिवार्य छ',
+            'form.supportedDocuments.*.document.required' => 'फाइल अनिवार्य छ',
         ];
     }
 }

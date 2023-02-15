@@ -43,7 +43,7 @@ class PersonalDetailController extends Controller
     public function show(PersonalDetail $personalDetail)
     {
         $this->checkAuthorization('personalDetail_access');
-        $personalDetail->load('province','district','localBody','registrationDetails');
+        $personalDetail->load('province','district','localBody','registrationDetails.recommendationCategory');
         return view('recommendation::admin.setting.personalDetail.show',compact('personalDetail'));
     }
 

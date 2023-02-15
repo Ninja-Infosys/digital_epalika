@@ -19,6 +19,7 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\WrittenAnswerController;
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::resource('judicialMember', JudicialMemberController::class);
 Route::get('complaintApplication/registered', [ComplaintApplicationController::class, 'registeredApplications'])->name('registeredApplication');
+Route::delete('complaintApplication/{complaintApplication}/supportedDocument/{supportedDocument}',[ComplaintApplicationController::class,'deleteSupportedDocument'])->name('complaintApplication.supportedDocument.destroy');
 Route::resource('complaintApplication', ComplaintApplicationController::class);
 Route::resource('complaintApplication/{complaintApplication}/judicialReceiptBill', JudicialReceiptBillController::class)->names('complaintApplication.judicialReceiptBill');
 Route::resource('complaintApplication/{complaintApplication}/dateSheet', DateSheetController::class)->names('complaintApplication.dateSheet');

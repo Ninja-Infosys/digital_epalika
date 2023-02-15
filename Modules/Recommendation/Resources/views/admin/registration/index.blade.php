@@ -19,6 +19,16 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            @error('oc_file')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
+            @error('oc_file.*')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -38,9 +48,9 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>दर्ता नं</th>
+                                <th>नाम</th>
                                 <th>सिफारिस</th>
                                 <th>मिति</th>
-                                <th>डकुमेन्ट</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,31 +59,31 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $registrationDetail->registration_no }}</td>
+                                    <td>{{ $registrationDetail->personalDetail->name??'' }}</td>
                                     <td>
                                         {{ $registrationDetail->recommendationCategory->title??'' }}
                                     </td>
                                     <td>{{ $registrationDetail->date_ne }}</td>
                                     <td>
-                                        <a href="{{$registrationDetail->application}}" download="{{$registrationDetail->application}}">
-                                            <i class="fa fa-download"></i> डाउनलोड
+                                        <a type="button" class="btn btn-xs btn-outline-warning" data-bs-toggle="modal"
+                                           data-bs-target="#staticBackdrop">
+                                            <i class="fa fa-file"></i>
                                         </a>
-                                    </td>
-                                    <td>
                                         @can('recommendation_access')
-                                        <a data-bs-type="edit"
-                                           href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
-                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                           title="विवरण हेर्नुहोस">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+                                            <a data-bs-type="edit"
+                                               href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                         @endcan
                                         @can('recommendation_edit')
-                                        <a data-bs-type="edit"
-                                           href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
-                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                           title="फारम सम्पादन गर्नुहोस">
-                                            <i class="fa fa-pen"></i>
-                                        </a>
+                                            <a data-bs-type="edit"
+                                               href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="फारम सम्पादन गर्नुहोस">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
                                         @endcan
                                         <form
                                             action="{{ route('admin.recommendation.registrationDetail.destroy',$registrationDetail) }}"
@@ -81,15 +91,16 @@
                                             @csrf
                                             @method('delete')
                                             @can('recommendation_delete')
-                                            <button data-bs-type="delete"
-                                                    class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
-                                                    title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                             @endcan
                                         </form>
                                     </td>
                                 </tr>
+                                @includeIf('recommendation::admin.registration.inc.document')
                             @endforeach
                             </tbody>
                         </table>
@@ -98,4 +109,5 @@
             </div>
         </div>
     </div>
+
 @endsection

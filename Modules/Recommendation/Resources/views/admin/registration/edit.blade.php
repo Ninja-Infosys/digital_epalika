@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.grant.dashboard') }}">
+                            <a href="{{ route('admin.recommendation.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -91,13 +91,7 @@
                                     :editDateEn="$registrationDetail->date_en"
                                     />
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="application" class="form-label">डकुमेन्ट </label>
-                                    <input id="application" name="application" type="file" class="form-control">
-                                    @error('application')
-                                        <p class="text-red-600">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                @livewire('multiple-file')
 
                             </div>
                         </fieldset>

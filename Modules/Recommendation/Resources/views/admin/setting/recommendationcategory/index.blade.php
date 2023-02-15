@@ -63,7 +63,7 @@
                                     @endif
                                     <td>
                                         @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.setting.recommendationCategory.updatestatus',[$type,$recommendationCategory])}}">
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.setting.recommendationCategory.updateStatus',[$type,$recommendationCategory])}}">
                                                 <i class="fa fa-2x {{ $recommendationCategory->is_active ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan

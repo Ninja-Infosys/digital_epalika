@@ -3,6 +3,10 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RegistrationDetail;
@@ -14,7 +18,7 @@ class RegistrationDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('recommendation_access');
-        $registrationDetails = RegistrationDetail::with('recommendationCategory')->get();
+        $registrationDetails = RegistrationDetail::with('recommendationCategory', 'personalDetail')->get();
         return view('recommendation::admin.registration.index', compact('registrationDetails'));
     }
 
@@ -29,7 +33,20 @@ class RegistrationDetailController extends Controller
     public function store(StoreRegistrationRequest $request)
     {
         $this->checkAuthorization('recommendation_create');
-        RegistrationDetail::create($request->validated());
+        DB::transaction(function () use ($request) {
+            $registrationDetail = RegistrationDetail::create($request->validated());
+            if($request->input('files')) {
+                foreach ($request->validated()['files'] as $file) {
+                    $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
+                    $registrationDetail->files()->create([
+                        'file_name' => $file['file_name'],
+                        'file' => $data,
+                        'extension' => $file['file']->getClientOriginalExtension(),
+                        'type' => 'ClientFile'
+                    ]);
+                }
+            }
+        });
         toast('दर्ता सफलतापूर्वक गरियो', 'success');
         return redirect()->route('admin.recommendation.registrationDetail.index');
     }
@@ -37,6 +54,7 @@ class RegistrationDetailController extends Controller
     public function show(RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_access');
+        $registrationDetail->load('personalDetail','files','recommendationCategory');
         return view('recommendation::admin.registration.show', compact('registrationDetail'));
     }
 
@@ -64,5 +82,27 @@ class RegistrationDetailController extends Controller
         return back();
     }
 
+    public function ocFile(Request $request, RegistrationDetail $registrationDetail)
+    {
+        $request->validate([
+            'oc_file' => ['array', 'required'],
+            'oc_file.*' => ['mimes:png,jpg,jpeg,pdf']
+        ]);
+        DB::transaction(function () use ($request, $registrationDetail) {
+            if ($request->hasFile('oc_file')) {
+                foreach ($request->file('oc_file') as $file) {
+                    $file_data = $file->store('oc_file', 'public');
+                    $registrationDetail->files()->create([
+                        'file' => $file_data,
+                        'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                        'extension' => $file->getClientOriginalExtension(),
+                        'type'=>'OcFile'
+                    ]);
+                }
+            }
+        });
+        toast('सिफारिस फाईल सफलतापूर्वक थपियो', 'success');
+        return back();
+    }
 
 }
