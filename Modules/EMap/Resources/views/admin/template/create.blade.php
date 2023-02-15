@@ -142,7 +142,7 @@
                             type: type
                         },
                         success: function (resp) {
-                            editor.setData(resp);
+                            CKEDITOR.instances.data.setData(resp);
                         },
                         error: function () {
                             alert("Something Went Wrong");
