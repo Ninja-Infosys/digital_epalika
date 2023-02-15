@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -47,7 +47,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($personalDetails as $personalDetail)
+                            @forelse ($personalDetails as $personalDetail)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $personalDetail->reg_no }}</td>
@@ -88,7 +88,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

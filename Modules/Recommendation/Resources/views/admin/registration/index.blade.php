@@ -43,7 +43,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -55,7 +55,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($registrationDetails as $registrationDetail)
+                            @forelse ($registrationDetails as $registrationDetail)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $registrationDetail->registration_no }}</td>
@@ -101,7 +101,11 @@
                                     </td>
                                 </tr>
                                 @includeIf('recommendation::admin.registration.inc.document')
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
