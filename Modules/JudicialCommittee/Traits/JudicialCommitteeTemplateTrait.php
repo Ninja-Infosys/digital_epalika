@@ -11,6 +11,7 @@ use Modules\JudicialCommittee\Entities\DateCompensation;
 use Modules\JudicialCommittee\Entities\DateSheet;
 use Modules\JudicialCommittee\Entities\DefendantIssuedDeadline;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 
 trait JudicialCommitteeTemplateTrait
@@ -271,9 +272,9 @@ trait JudicialCommitteeTemplateTrait
 
     private function getComplainantReplacement(): array
     {
-        $complainants = $this->complainantDefendants->where('type', 'complainant');
+        $complainants = $this->complainantDefendants->where('type', ComplainantDefendantTypeEnum::COMPLAINANT);
         $complainants->load('province', 'district', 'localBody');
-        $witnesses = $this->witnesses->where('type', 'complainant');
+        $witnesses = $this->witnesses->where('type', ComplainantDefendantTypeEnum::COMPLAINANT);
 
         return [
             '[@complainant.brief_name]' => ($complainants?->first()->name ?? '') . ($complainants->count() > 1 ? " सहित " . ($complainants->count() - 1) . " जना" : ''),
@@ -296,9 +297,9 @@ trait JudicialCommitteeTemplateTrait
 
     private function getDefendantReplacement(): array
     {
-        $defendants = $this->complainantDefendants->where('type', 'defendant');
+        $defendants = $this->complainantDefendants->where('type', ComplainantDefendantTypeEnum::DEFENDANT);
         $defendants->load('province', 'district', 'localBody');
-        $witnesses = $this->witnesses->where('type', 'defendant');
+        $witnesses = $this->witnesses->where('type', ComplainantDefendantTypeEnum::DEFENDANT);
 
         return [
             '[@defendant.brief_name]' => ($defendants?->first()->name ?? '') . ($defendants->count() > 1 ? " सहित " . ($defendants->count() - 1) . " जना" : ''),

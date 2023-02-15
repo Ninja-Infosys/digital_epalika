@@ -10,13 +10,16 @@ use Illuminate\Support\Str;
 use Modules\Grant\Enums\GranteeEnum;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\JudicialReceiptBill;
+use Modules\JudicialCommittee\Entities\SupportedDocument;
 use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
 
 class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature')->whereHas('judicialReceiptBill')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature')
+            ->withCount('dateSheets')
+            ->whereHas('judicialReceiptBill')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['submission_no', 'registration_no', 'subject', 'date'], request('search'));
@@ -81,6 +84,18 @@ class ComplaintApplicationController extends Controller
         $complaintApplication->delete();
 
         toast('आवेदन सफलतापूर्वक मेटाइयो', 'success');
+
+        return back();
+    }
+
+    public function deleteSupportedDocument(ComplaintApplication $complaintApplication,SupportedDocument $supportedDocument)
+    {
+        if ($supportedDocument->document) {
+            $this->deleteFile($supportedDocument->document);
+        }
+        $supportedDocument->delete();
+
+        toast('फाइल सफलतापूर्वक मेटियो', 'success');
 
         return back();
     }
