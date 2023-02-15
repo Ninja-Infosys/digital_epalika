@@ -4,12 +4,8 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapApply;
@@ -54,12 +50,12 @@ class DashboardController extends Controller
         return StructureType::withCount(['mapApply'])
             ->selectRaw('id,title')
             ->get()
-            ->map(function ($structure) {
-                return [
-                    'name' => $structure->title,
-                    'data' => $structure->map_apply_count
-                ];
-            });
+        ->map(function ($structure){
+            return [
+                'name' => $structure->title,
+                'data'=> (int)$structure->map_apply_count
+            ];
+        });
     }
 
     public function getMapApplyAccordingToFiscalYear(): array

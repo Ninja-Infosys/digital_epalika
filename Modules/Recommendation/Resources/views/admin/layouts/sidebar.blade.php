@@ -20,18 +20,40 @@
     </a>
 </li>
 @endcan
+<li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">
+    <a href="#recommendationReport"
+       {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-clipboard-list"></i>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div
+        class="collapse {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'show' : ''}}"
+        id="recommendationReport">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/recommendation/report') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.report.index')}}">
+                    <span>प्रतिवेदन</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#setting"
-       {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'aria-expanded=true' : ''}}
+       {{request()->is('admin/recommendation/setting*') || request()->is('admin/recommendation/setting*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-cog"></i>
+        <i class="fa fa-cogs"></i>
         <span>आधारभूत सेटिंग</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
     <div
-        class="collapse {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'show' : ''}}"
+        class="collapse {{request()->is('admin/recommendation/setting*') || request()->is('admin/recommendation/setting*') ? 'show' : ''}}"
         id="setting">
         <ul class="nav-second-level">
             @can('recommendationCategory_access')

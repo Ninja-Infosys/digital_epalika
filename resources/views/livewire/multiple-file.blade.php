@@ -1,11 +1,11 @@
 <div>
-    <table class="table">
+    <table class="table table-bordered table-striped table-sm">
         <thead>
         <tr>
             <th>फाइलको नाम</th>
             <th>फाइल</th>
             <th>
-                <button type="button" wire:click="addFileRow" class="btn btn-sm btn-primary">
+                <button type="button" wire:click="addFileRow" class="btn btn-sm btn-outline-primary">
                     <i class="fa fa-plus"></i>
                 </button>
             </th>
@@ -21,7 +21,7 @@
                 <td>
                     <input type="file" name="files[{{$key}}][file]" class="form-control">
                 <td>
-                    <button type="button" wire:click="removeFileRow({{$key}})" class="btn btn-sm btn-danger">
+                    <button type="button" wire:click="removeFileRow({{$key}})" class="btn btn-sm btn-outline-danger">
                         <i class="fa fa-minus"></i>
                     </button>
                 </td>

@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
+use Modules\BusinessRegistration\Entities\BusinessRenew;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\Partner;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
@@ -38,7 +39,11 @@ class DashboardController extends Controller
         $wardWise = $this->getWardWiseData();
         $fiscalYearWise = $this->getFiscalYearWiseData();
         $monthlyWise = $this->getMonthlyWise();
-        return view('businessregistration::admin.dashboard', compact( 'monthlyWise','fiscalYearWise','businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailNatureCount', 'totalObjectTransactionCategoryCount','wardWise'));
+        $businessRenewCount = BusinessRenew::where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
+        return view('businessregistration::admin.dashboard', compact( 'monthlyWise',
+            'fiscalYearWise','businessDetailTransaction', 'totalBusinessCount',
+            'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailNatureCount',
+            'totalObjectTransactionCategoryCount','wardWise', 'businessRenewCount'));
     }
 
 
