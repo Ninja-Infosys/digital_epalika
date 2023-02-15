@@ -140,4 +140,9 @@ class ComplaintApplication extends Model
     {
         return $this->hasMany(Witness::class);
     }
+
+    public function supportedDocuments(): HasMany
+    {
+        return $this->hasMany(SupportedDocument::class);
+    }
 }

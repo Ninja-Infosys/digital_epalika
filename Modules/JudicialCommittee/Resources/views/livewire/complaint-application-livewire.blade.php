@@ -663,6 +663,70 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="supported_documents" class="form-label">सम्बन्धित कागजातहरू</label>
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0 table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>क्र.स.</th>
+                                    <th>फाइलको नाम</th>
+                                    <th>फाइल</th>
+                                    <th>
+                                        <button type="button" wire:click="addSupportedDocuments"
+                                                class="btn btn-xs btn-outline-primary" title="नयाँ फाइल थप्नुहोस्">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($form['supportedDocuments'] as $key=>$document)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.supportedDocuments.{{$key}}.document_name"
+                                                class="form-control form-control-sm"
+                                                placeholder="फाइलको नाम"
+                                            />
+                                            @error("form.supportedDocuments.$key.document_name")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="file"
+                                                wire:model="form.supportedDocuments.{{$key}}.document"
+                                                class="form-control form-control-sm"
+                                                placeholder="फाइल"
+                                            />
+                                            @error("form.supportedDocuments.$key.document")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <button type="button" wire:click="removeSupportedDocument({{$key}})"
+                                                    class="btn btn-xs btn-outline-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="7">
+                                            विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                            @error('form.relatedMembers')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
             </fieldset>
         </div>

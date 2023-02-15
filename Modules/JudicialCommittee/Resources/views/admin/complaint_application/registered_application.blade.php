@@ -76,18 +76,22 @@
                                                         <i class="fa fa-cash-register"> निस्सा सनाखत </i>
                                                     </a>
                                                 @endcan
-                                                @can('dateSheet_access')
-                                                    <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}"
-                                                       class="dropdown-item">
-                                                        <i class="fa fa-calendar-alt"> तारिख पर्चा </i>
-                                                    </a>
-                                                @endcan
-                                                @can('defendantIssuedDeadline_access')
-                                                    <a href="{{ route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.index', $complaintApplication) }}"
-                                                       class="dropdown-item">
-                                                        <i class="fa fa-calendar-alt"> प्रतिवादी म्याद जारी </i>
-                                                    </a>
-                                                @endcan
+                                                @if($complaintApplication->judicialReceiptBill)
+                                                    @can('dateSheet_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}"
+                                                           class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> तारिख पर्चा </i>
+                                                        </a>
+                                                    @endcan
+                                                @endif
+                                                @if($complaintApplication->date_sheets_count>0)
+                                                    @can('defendantIssuedDeadline_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.index', $complaintApplication) }}"
+                                                           class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> प्रतिवादी म्याद जारी </i>
+                                                        </a>
+                                                    @endcan
+                                                @endif
                                                 @can('dateCompensation_access')
                                                     <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication) }}"
                                                        class="dropdown-item">
