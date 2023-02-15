@@ -19,6 +19,14 @@
         </a>
     </li>
 @endcan
+@can('invoice_access')
+    <li class="{{request()->routeIs('admin.revenue.land.invoice.*') ? 'active' : ''}}">
+        <a href="{{route('admin.revenue.land.invoice.index')}}">
+            <i class="fa fa-money-bill"></i>
+            <span>मालपोत रसिद</span>
+        </a>
+    </li>
+@endcan
 
 
 <li class="{{request()->routeIs('admin.revenue.setting.*') ? 'active' : ''}}">
@@ -62,7 +70,7 @@
                     </a>
                 </li>
             @endcan
-            @can('sector_access')
+          {{--  @can('sector_access')
                 <li class="{{request()->routeIs('admin.revenue.setting.sector.*') ? 'active' : ''}}">
                     <a href="{{route('admin.revenue.setting.sector.index')}}">
                         <span>क्षेत्र</span>
@@ -89,7 +97,7 @@
                         <span>संरचनाको मुल्यांकन</span>
                     </a>
                 </li>
-            @endcan
+            @endcan--}}
 
         </ul>
     </div>

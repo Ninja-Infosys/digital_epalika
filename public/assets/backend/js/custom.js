@@ -96,18 +96,6 @@ $(document).ready(function () {
             }
         });
     })
-    $('.ckEditor').each(function (){
-        ClassicEditor.create(document.getElementById(this.id), {
-            licenseKey: '',
-            extraPlugins: [ SimpleUploadAdapterAnswerPlugin ],
-        })
-            .then(editor => {
-                window.editor = editor;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    })
 })
 function copyText(element) {
     navigator.clipboard.writeText(element);

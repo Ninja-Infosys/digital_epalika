@@ -68,13 +68,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @can('taxPayerLand_access')
+                                    {{--    @can('taxPayerLand_access')
                                             <a
                                                 href="{{route('admin.revenue.taxPayer.taxPayerLand.index',[$taxPayer])}}"
                                                 class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-mountain-sun"></i>
                                             </a>
-                                        @endcan
+                                        @endcan--}}
                                         @can('taxPayer_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.taxPayer.edit',[$taxPayer])}}"
