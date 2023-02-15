@@ -28,6 +28,28 @@
     </li>
 @endcan
 
+<li class="{{request()->is('admin/plan/report*') ? 'active' : ''}}">
+    <a href="#sidebarPlanReport"
+       {{request()->is('admin/plan/report*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-clipboard-list"></i>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/plan/report*') ? 'show' : ''}}"
+         id="sidebarPlanReport">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/plan/report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.index')}}">
+                    <span>प्रतिवेदनहरु</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
+
 
 <li class="{{request()->routeIs('admin.revenue.setting.*') ? 'active' : ''}}">
     <a href="#sidebarRevenueSetting"
@@ -70,34 +92,34 @@
                     </a>
                 </li>
             @endcan
-          {{--  @can('sector_access')
-                <li class="{{request()->routeIs('admin.revenue.setting.sector.*') ? 'active' : ''}}">
-                    <a href="{{route('admin.revenue.setting.sector.index')}}">
-                        <span>क्षेत्र</span>
-                    </a>
-                </li>
-            @endcan
-            @can('place_access')
-                <li class="{{request()->routeIs('admin.revenue.setting.place.*') ? 'active' : ''}}">
-                    <a href="{{route('admin.revenue.setting.place.index')}}">
-                        <span>जग्गाको मुल्यांकन</span>
-                    </a>
-                </li>
-            @endcan
-            @can('physicalStructureType_access')
-                <li class="{{request()->routeIs('admin.revenue.setting.physicalStructureType.*') ? 'active' : ''}}">
-                    <a href="{{route('admin.revenue.setting.physicalStructureType.index')}}">
-                        <span>स्ट्रकचर</span>
-                    </a>
-                </li>
-            @endcan
-            @can('structureAssessmentRate_access')
-                <li class="{{request()->routeIs('admin.revenue.setting.structureAssessmentRate.*') ? 'active' : ''}}">
-                    <a href="{{route('admin.revenue.setting.structureAssessmentRate.index')}}">
-                        <span>संरचनाको मुल्यांकन</span>
-                    </a>
-                </li>
-            @endcan--}}
+            {{--  @can('sector_access')
+                  <li class="{{request()->routeIs('admin.revenue.setting.sector.*') ? 'active' : ''}}">
+                      <a href="{{route('admin.revenue.setting.sector.index')}}">
+                          <span>क्षेत्र</span>
+                      </a>
+                  </li>
+              @endcan
+              @can('place_access')
+                  <li class="{{request()->routeIs('admin.revenue.setting.place.*') ? 'active' : ''}}">
+                      <a href="{{route('admin.revenue.setting.place.index')}}">
+                          <span>जग्गाको मुल्यांकन</span>
+                      </a>
+                  </li>
+              @endcan
+              @can('physicalStructureType_access')
+                  <li class="{{request()->routeIs('admin.revenue.setting.physicalStructureType.*') ? 'active' : ''}}">
+                      <a href="{{route('admin.revenue.setting.physicalStructureType.index')}}">
+                          <span>स्ट्रकचर</span>
+                      </a>
+                  </li>
+              @endcan
+              @can('structureAssessmentRate_access')
+                  <li class="{{request()->routeIs('admin.revenue.setting.structureAssessmentRate.*') ? 'active' : ''}}">
+                      <a href="{{route('admin.revenue.setting.structureAssessmentRate.index')}}">
+                          <span>संरचनाको मुल्यांकन</span>
+                      </a>
+                  </li>
+              @endcan--}}
 
         </ul>
     </div>

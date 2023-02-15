@@ -12,11 +12,11 @@ return new class extends Migration {
             $table->foreignId('invoice_id')->constrained('invoices')->cascadeOnDelete();
             $table->foreignId('revenue_category_id')->nullable()->constrained('revenue_categories')->nullOnDelete();
             $table->foreignId('revenue_id')->nullable()->constrained('revenues')->nullOnDelete();
-            $table->text('revenue');
-            $table->double('quantity', 12, 2)->default(0);
-            $table->double('rate', 12, 2)->default(0);
-            $table->double('fine', 12, 2)->default(0);
-            $table->string('remarks')->nullable();
+            $table->text('revenue')->comment('विवरण');
+            $table->double('quantity', 12, 2)->comment('परिमाण')->default(0);
+            $table->double('rate', 12, 2)->comment('दर')->default(0);
+            $table->double('fine', 12, 2)->comment('जरिवाना')->default(0);
+            $table->string('remarks')->comment('कैफियत')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
