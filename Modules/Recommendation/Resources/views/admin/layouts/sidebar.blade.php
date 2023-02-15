@@ -24,7 +24,7 @@
     <a href="#recommendationReport"
        {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-file"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
@@ -46,7 +46,7 @@
     <a href="#setting"
        {{request()->is('admin/recommendation/setting*') || request()->is('admin/recommendation/setting*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-cog"></i>
+        <i class="fa fa-cogs"></i>
         <span>आधारभूत सेटिंग</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
