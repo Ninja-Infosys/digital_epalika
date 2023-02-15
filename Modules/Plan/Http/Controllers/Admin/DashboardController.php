@@ -46,7 +46,7 @@ class DashboardController extends Controller
         ));
     }
 
-    private function getWardWiseProjects()
+    public function getWardWiseProjects()
     {
         $wardsData = collect();
 
@@ -112,7 +112,7 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getBudgetHeadWiseProjects()
+    public function getBudgetHeadWiseProjects()
     {
         return BudgetHead::withCount(['projects' => function ($query) {
             $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);

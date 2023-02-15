@@ -22,14 +22,6 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
-        $organization_count = Organization::count();
-        $map_apply_count = MapApply::count();
-        $mapAppliesAccordingToFiscalYears = $this->getMapApplyAccordingToFiscalYear();
-        $mapApplyBuildingUsageAccordingToFiscalYears = $this->getMapApplyBuildingUsageAccordingToFiscalYear();
-        $mapApplyBuildingCategoryAccordingToFiscalYears = $this->getMapApplyBuildingCategoryAccordingToFiscalYear();
-        $mapApplyConstructionTypeAccordingToFiscalYears = $this->getMapApplyConstructionTypeAccordingToFiscalYear();
-        $mapApplyStructureTypeAccordingToFiscalYears = $this->getMapApplyStructureTypeAccordingToFiscalYear();
-
         if (request()->ajax()) {
             return [
                 'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
@@ -41,7 +33,9 @@ class DashboardController extends Controller
 
             ];
         }
-        return view('emap::admin.dashboard', compact('mapApplyStructureTypeAccordingToFiscalYears', 'mapApplyBuildingUsageAccordingToFiscalYears', 'mapApplyBuildingCategoryAccordingToFiscalYears', 'organization_count', 'mapApplyConstructionTypeAccordingToFiscalYears', 'map_apply_count', 'mapAppliesAccordingToFiscalYears'));
+        $organization_count = Organization::count();
+        $map_apply_count = MapApply::count();
+        return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count',));
     }
 
 

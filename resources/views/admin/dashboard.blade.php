@@ -109,7 +109,91 @@
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
         <div class="row mt-2">
-            <div class="col-md-6">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="totalRevenue" chart-type="pie" chart-title="कुल राजस्व"></div>
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="revenueAccordingToMonth" chart-type="column" chart-title="चालु आर्थिक वर्षको महिना अनुसार कुल राजस्व"></div>
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="wardWiseProjects" chart-type="column" chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"></div>
+                            <div class="loading">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="budgetHeadWiseProjects" chart-type="pie" chart-title="चालु आ.व बजेट शिर्षक अनुसारका योजनाहरु"></div>
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="constructionType" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम"></div>
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="structureType" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} इस्टकचर अनुसार भवनको किसिम"></div>
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="mapAccordingToMonth" chart-type="column" chart-title="चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण"></div>
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
@@ -149,26 +233,6 @@
 
                         </div>
                         {{$activityLogs->onEachSide(config('app.pagination_count'))->links()}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <h4 class="header-title">
-                                आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} को क्षेत्र अनुसार रिपोर्ट
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <x-charts.pie-chart-component
-                            id="bar-chart17"
-                            chartName=""
-                            :labels="$planAreas['labels']"
-                            :dataSets="$planAreas['dataSets']"
-
-                        />
                     </div>
                 </div>
             </div>
