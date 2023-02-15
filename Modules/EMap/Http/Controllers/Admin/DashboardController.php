@@ -51,7 +51,7 @@ class DashboardController extends Controller
         ->map(function ($structure){
             return [
                 'name' => $structure->title,
-                'data'=> $structure->map_apply_count
+                'data'=> (int)$structure->map_apply_count
             ];
         });
     }

@@ -1,6 +1,55 @@
 @extends('admin.layouts.master')
-
 @section('content')
+    <div class="row mt-2">
+        <div class="col-12">
+            <div class="card widget-inline">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-briefcase avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$not_started_project_count}}</span></h3>
+                                <p class="text-muted font-15 mb-0">शुरु नभएका योजनाहरु</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-briefcase avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$in_progress_project_count}}</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate">चालु योजनाहरु</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-briefcase avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$completed_project_count}}</span></h3>
+                                <p class="text-muted font-15 mb-0">सम्पन्न योजनाहरू</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-briefcase avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$deadline_extended_project_count}}</span></h3>
+                                <p class="text-muted font-15 mb-0">म्याद थप योजनाहरु</p>
+                            </div>
+                        </div>
+
+                    </div> <!-- end row -->
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
     <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary">
