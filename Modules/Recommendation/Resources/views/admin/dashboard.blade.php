@@ -2,57 +2,51 @@
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            सिफारिस प्रणाली
-                        </li>
-                    </ol>
-                </div>
-                <h4 class="page-title">गृहपृष्ठ </h4>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
-                        <div class="card-body" style="padding: 10px 20px;">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            2
-                                        </span>
-                                            </h3>
-                                    </div>
-                                    <p class="text my-1">जम्मा सिफारिस</p>
+            <div class="card widget-inline">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-id-card avatar-title font-18 text-white"></i>
                                 </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> 4</span></h3>
+                                <p class="text-muted font-15 mb-0">जम्मा सिफारिस</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-secondary">
-                        <div class="card-body" style="padding: 10px 20px;">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            3
-                                       </span>
-                                           </h3>
-                                    </div>
-                                    <p class="text my-1">आ.व. २०७९ को शिफारिस</p>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-id-card avatar-title font-18 text-white"></i>
                                 </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">5</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate">आ.व. २०७९ को शिफारिस</p>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
+                                <p class="text-muted font-15 mb-0">वार्षिक दर्ता नक्सा</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
+                                <p class="text-muted font-15 mb-0">मासिक दर्ता नक्सा</p>
+                            </div>
+                        </div>
+
+                    </div> <!-- end row -->
                 </div>
-            </div>
-        </div>
+            </div> <!-- end card-->
+        </div> <!-- end col-->
     </div>
 @endsection

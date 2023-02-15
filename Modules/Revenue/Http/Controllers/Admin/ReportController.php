@@ -2,44 +2,70 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
+use App\Models\Settings\FiscalYear;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+use Modules\Revenue\Entities\TaxPayer;
 
 class ReportController extends Controller
 {
     public function index()
     {
-        return view('revenue::index');
+        $fiscalYears = FiscalYear::get();
+        $columnData = $this->getColumns();
+
+        return view('revenue::admin.report.index', compact('fiscalYears', 'columnData'));
     }
 
-    public function create()
+    public function report(Request $request)
     {
-        return view('revenue::create');
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable', 'after_or_equal:from_date'],
+            'columns' => ['nullable', 'array']
+        ]);
+
+        if (empty($request->input('columns'))) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'projects' => ['registration_no', 'project_name', 'project_start_date', 'project_completion_date', 'allocated_amount']
+                    ]
+                ]
+            );
+        }
+
+        $projects = TaxPayer::with('fiscalYear', 'budgetHead', 'budgetSource', 'planArea', 'planLevel')->where(function ($q) use ($request) {
+            $this->filterDataFromUser($q, $request);
+        })->get();
+
+        if (!empty($request->input('columns')['project_grant_details'])) {
+            $projects->load('projectGrantDetails');
+        }
+
+        if (!empty($request->input('columns')['benefited_member_details'])) {
+            $projects->load('benefitedMemberDetails');
+        }
+
+        return response()->json([
+            'data' => ProjectResource::collection($projects)
+        ]);
     }
 
-    public function store(Request $request)
+    private function getColumns(): Collection
     {
-        //
-    }
+        $columnData = collect();
 
-    public function show($id)
-    {
-        return view('revenue::show');
-    }
-
-    public function edit($id)
-    {
-        return view('revenue::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        (new TaxPayer())
+            ->ownAndRelatedModelsFillableColumns()
+//            ->filter(function ($column) {
+//                return !array_keys($column, 'printedData');
+//            })
+            ->each(function ($column) use ($columnData) {
+                $columnData->push(collect($column)->put('columns', $column['columns']));
+            });
+        return $columnData;
     }
 }

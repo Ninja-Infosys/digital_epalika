@@ -75,7 +75,7 @@ class ReportController extends Controller
     {
         $columnData = collect();
 
-        (new project())
+        (new Project())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
                 return !array_keys($column, 'printedData');

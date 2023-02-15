@@ -7,7 +7,7 @@
 @can('businessRegistration_access')
     <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
         <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
-            <i class="fa fa-file"></i>
+            <i class="fa fa-clipboard"></i>
             <span> व्यवसाय दर्ता / नविकरण</span>
         </a>
     </li>

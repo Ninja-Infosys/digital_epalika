@@ -42,7 +42,7 @@
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण</label>
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between gap-1">
                                         <select id="personal_detail_id" name="personal_detail_id"
                                                 class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
