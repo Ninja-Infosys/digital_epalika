@@ -92,7 +92,7 @@ class DashboardController extends Controller
     public function getMapApply($hasCurrentFiscalYear = null): Collection
     {
         return DB::table('map_applies')
-            ->select('usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
+            ->select('registration_date','usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
             ->whereNull('deleted_at')
             ->where(function ($query) use ($hasCurrentFiscalYear) {
                 if ($hasCurrentFiscalYear) {
@@ -195,7 +195,8 @@ class DashboardController extends Controller
 
         foreach ($mapApplies as $mapApply) {
             if (!empty($mapApply->registration_date)) {
-                $registrationDate = $this->get_nepali_date($mapApply->registration_date->format('Y'), $mapApply->registration_date->format('m'), $mapApply->registration_date->format('d'));
+                $registration_date = Carbon::parse($mapApply->registration_date);
+                $registrationDate = $this->get_nepali_date($registration_date->format('Y'), $registration_date->format('m'), $registration_date->format('d'));
                 $month[$registrationDate['m'] - 1] += 1;
             }
         }
@@ -206,7 +207,6 @@ class DashboardController extends Controller
                 [
                     'data' => $month,
                     'label' => 'नक्सा दर्ता',
-                    'fill' => 'false',
                 ]
             ]
         ];
