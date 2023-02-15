@@ -2,13 +2,12 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
+use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\Revenue\Entities\Invoice;
-use Modules\Revenue\Entities\TaxPayer;
 
 class DashboardController extends Controller
 {
@@ -29,24 +28,111 @@ class DashboardController extends Controller
             ->count();
 
         $results = DB::table('invoices')
-            ->selectRaw('invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity) + invoice_particulars.fine) as total')
+            ->selectRaw('invoices.is_cash_invoice,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
             ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
             ->whereNull('invoices.deleted_at')
             ->whereNull('invoice_particulars.deleted_at')
-            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.payment_date_en')
+            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_date_en')
             ->get();
 
         $all_total = $results->sum('total');
+
         $fiscal_year_total = $results->where('fiscal_year_id', $fiscal_year_id)->sum('total');
+
         $today_total = $results->where('payment_date_en', today())->sum('total');
+
         $nepaliMonth = $this->get_nepali_date(date('Y'), date('m'), date('d'));
-        $this_month_total = $results->filter(function ($item) use ($nepaliMonth) {
-            return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'];
-        })->sum('total');
-        $previous_month_total = $results->filter(function ($item) use ($nepaliMonth) {
-            return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
-        })->sum('total');
+
+        $this_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
+            ->filter(function ($item) use ($nepaliMonth) {
+                return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'];
+            })
+            ->sum('total');
+
+        $previous_month_total = $results->where('fiscal_year_id', $fiscal_year_id)
+            ->filter(function ($item) use ($nepaliMonth) {
+                return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
+            })
+            ->sum('total');
 
         return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
+    }
+
+    public function totalRevenue(Collection $result): Collection
+    {
+        return collect([
+            [
+                'label' => 'नगदी रसिद',
+                'data' => $result->where('is_cash_invoice', 1)->sum('total')
+            ],
+            [
+                'label' => 'मालपोत रसिद',
+                'data' => $result->where('is_cash_invoice', 0)->sum('total')
+            ]
+        ]);
+    }
+
+    public function totalCashBankRevenue(Collection $result): Collection
+    {
+
+        return collect([
+            [
+                'label' => 'नगद',
+                'data' => $result->where('payment_method', 'Cash')->sum('total')
+            ],
+            [
+                'label' => 'बैंक',
+                'data' => $result->where('payment_method', 'Bank')->sum('total')
+            ]
+        ]);
+    }
+
+    public function accordingToFy(Collection $result)
+    {
+        $totalRevenue = collect();
+        $totalLandRevenue = collect();
+        $totalCashRevenue = collect();
+        $fiscalYears = FiscalYear::all()->each(function ($fiscalYear) use ($result, $totalCashRevenue, $totalRevenue, $totalLandRevenue) {
+            $totalRevenue->push($result->where('fiscal_year_id', $fiscalYear->id)->sum('total'));
+            $totalLandRevenue->push($result->where('fiscal_year_id', $fiscalYear->id)->where('is_cash_invoice', 0)->sum('total'));
+            $totalCashRevenue->push($result->where('fiscal_year_id', $fiscalYear->id)->where('is_cash_invoice', 1)->sum('total'));
+        });
+
+
+        return [
+            'labels' => $fiscalYears->pluck('title')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $totalRevenue,
+                    'label' => 'जम्मा राजस्व',
+                ],
+                [
+                    'data' => $totalLandRevenue,
+                    'label' => 'मालपोत राजस्व',
+                ],
+                [
+                    'data' => $totalCashRevenue,
+                    'label' => 'नगदी राजस्व',
+                ]
+            ],
+        ];
+    }
+
+    public function accordingToMonth(Collection $result)
+    {
+        $data = collect();
+
+        foreach ($this->month_name as $key => $month) {
+            $data->push([
+                'label' => $month,
+                'data' => $result->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+                    ->filter(function ($item) use ($key) {
+                        return date('m', strtotime($item->payment_date)) == $key+1;
+                    })
+                    ->sum('total')
+            ]);
+        }
+
+        return $data;
     }
 }

@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('invoice_particulars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('invoice_id')->constrained('invoices')->cascadeOnDelete();
-            $table->foreignId('revenue_category_id')->constrained('revenue_categories')->cascadeOnDelete();
-            $table->foreignId('revenue_id')->constrained('revenues')->cascadeOnDelete();
+            $table->foreignId('revenue_category_id')->nullable()->constrained('revenue_categories')->nullOnDelete();
+            $table->foreignId('revenue_id')->nullable()->constrained('revenues')->nullOnDelete();
             $table->text('revenue');
             $table->double('quantity', 12, 2)->default(0);
             $table->double('rate', 12, 2)->default(0);
