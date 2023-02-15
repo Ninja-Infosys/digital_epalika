@@ -82,6 +82,12 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+                                        @can('taxPayer_access')
+                                            <a href="{{route('admin.revenue.taxPayer.show',[$taxPayer])}}"
+                                               class="btn btn-xs btn-outline-success">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
                                         @can('taxPayer_delete')
                                             <form
                                                 action="{{route('admin.revenue.taxPayer.destroy',[$taxPayer])}}"
