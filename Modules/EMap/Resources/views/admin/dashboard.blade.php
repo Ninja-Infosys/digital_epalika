@@ -104,6 +104,18 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
+                                <div id="mapAccordingToMonth" chart-type="column" chart-title="चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण"></div>
+                                <div class="loading">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="spinner-border" role="status"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
                                 <div id="mapApply" chart-type="column" chart-title="आर्थिक बर्ष अनुसारले नक्सा बिवरण"></div>
                                 <div class="loading">
                                     <div class="d-flex justify-content-center">
