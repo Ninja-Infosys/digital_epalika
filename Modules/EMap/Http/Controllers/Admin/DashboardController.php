@@ -194,9 +194,11 @@ class DashboardController extends Controller
         $month = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0];
 
         foreach ($mapApplies as $mapApply) {
-            $date = Carbon::parse($mapApply->registration_date);
-            $registrationDate = $this->get_nepali_date($date->year, $date->month, $date->day);
-            $month[$registrationDate['m'] - 1] += 1;
+            if (!empty($mapApply->registration_date)) {
+                $date = Carbon::parse($mapApply->registration_date);
+                $registrationDate = $this->get_nepali_date($date->year, $date->month, $date->day);
+                $month[$registrationDate['m'] - 1] += 1;
+            }
         }
 
         return [
