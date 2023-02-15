@@ -25,57 +25,72 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">लिखित जवाफ विवरण</h4>
-                        <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दर्ता भएका उजुरी
-                        </a>
+                        <div class="d-flex justify-content-between gap-1">
+                            <x-print-button
+                                title="लिखित जवाफ"
+                                target-element="print-content"
+                            />
+                            <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-list"></i> दर्ता भएका उजुरी
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-bordered">
-                            <tbody>
-                            <tr>
-                                <th>पेश मिति</th>
-                                <td>{{$writtenAnswer->submitted_date}}</td>
-                            </tr>
-                            <tr>
-                                <th>विवरण</th>
-                                <td>
-                                    {!! $writtenAnswer->description !!}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="mx-4 p-2 border border-secondary">
+                        <div id="print-content">
+                            {!! $writtenAnswer->description??'' !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        @foreach($writtenAnswer->files as $document)
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <form action="{{route('admin.file.destroy',$document)}}"
-                              method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
-                                <i class="fa fa-window-close"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="card-body">
-                        @if($document->extension ==='pdf')
-                            <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
-                        @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
-                            <img src="{{ $document->file_url }}" class="card-image" alt="Image"
-                                 height=150px;" width="100%">
-                        @endif
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title fw-bold">
+                        सम्बन्धित फोटो/फाईलहरू
+                    </h4>
+                    <div class="row">
+                        @foreach($writtenAnswer->files??collect() as $file)
+                            <div class="col-md-4 mb-3">
+                                <div class="card border border-info">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5 class="card-title">
+                                            {{$file->file_name}}
+                                        </h5>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{route('admin.file.download', $file)}}"
+                                               class="btn btn-xs btn-outline-primary mx-1">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <form action="{{route('admin.file.destroy',$file)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
+                                                    <i class="fa fa-window-close"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @if($file->extension ==='pdf')
+                                            <iframe src="{{$file->file_url}}" frameborder="0" width="100%"></iframe>
+                                        @elseif(($file->extension ==='png') or ($file->extension ==='jpg') or ($file->extension ==='jpeg'))
+                                            <img src="{{ $file->file_url }}" class="card-image" alt="Image"
+                                                 height=150px;" width="100%">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
     </div>
 @endsection

@@ -30,6 +30,7 @@ class MapApply extends Model
         'updated_at',
         'deleted_at',
         'sent_to_admin_at',
+        'registration_date',
     ];
 
     protected $fillable = [
@@ -61,12 +62,12 @@ class MapApply extends Model
         'construction_type' => TypeOfConstructionWorkEnum::class,
         'usage' => BuildingUsageEnum::class,
         'building_category' => CategorizationEnum::class,
-        'application_type'=>ApplicationFormTypeEnum::class
+        'application_type' => ApplicationFormTypeEnum::class
     ];
 
     public function setConsultantSignatureAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
         }
     }

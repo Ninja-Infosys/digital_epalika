@@ -139,7 +139,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div id="accordingToMonth" chart-type="column" chart-title="चालु आर्थिक वर्ष अनुसार कुल राजस्व"></div>
+                    <div id="accordingToMonth" chart-type="column" chart-title="चालु आर्थिक वर्षको महिना अनुसार कुल राजस्व"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>

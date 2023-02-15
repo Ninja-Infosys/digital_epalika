@@ -272,7 +272,7 @@
                             <div class="row">
                                 @foreach($complaintApplication->supportedDocuments as $supportedDocument)
                                     <div class="col-md-4 mb-3">
-                                        <div class="card">
+                                        <div class="card border border-info">
                                             <div class="card-header d-flex justify-content-between">
                                                 <h5 class="card-title">
                                                     {{$supportedDocument->document_name}}
@@ -310,7 +310,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="complainant-application" role="tabpanel">
-                            <div class="border m-4 p-2 border-secondary">
+                            <div class="border mx-4 p-2 border-secondary">
                                 <x-print-button
                                     title="वादी दर्ता नालेस"
                                     target-element="print-complainant-application"
@@ -322,7 +322,7 @@
                         </div>
                         @if($complaintApplication->defendantIssuedDeadlines->count()>0)
                             <div class="tab-pane" id="defendant-application" role="tabpanel">
-                                <div class="border m-4 p-2 border-secondary">
+                                <div class="border mx-4 p-2 border-secondary">
                                     <x-print-button
                                         title="प्रतिवादी दर्ता नालेस"
                                         target-element="print-defendant-application"
