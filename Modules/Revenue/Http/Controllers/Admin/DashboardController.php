@@ -28,11 +28,11 @@ class DashboardController extends Controller
             ->count();
 
         $results = DB::table('invoices')
-            ->selectRaw('invoices.is_cash_invoice,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
+            ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
             ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
             ->whereNull('invoices.deleted_at')
             ->whereNull('invoice_particulars.deleted_at')
-            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_date_en')
+            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
             ->get();
 
         $all_total = $results->sum('total');
@@ -54,6 +54,14 @@ class DashboardController extends Controller
                 return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
             })
             ->sum('total');
+        if(request()->ajax()){
+             return [
+                 'totalRevenue' => $this->totalRevenue($results),
+                 'totalCashBankRevenue' => $this->totalCashBankRevenue($results),
+                 'accordingToFy' => $this->accordingToFy($results),
+                 'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)),
+            ];
+        }
 
         return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
     }
@@ -62,11 +70,11 @@ class DashboardController extends Controller
     {
         return collect([
             [
-                'label' => 'नगदी रसिद',
+                'name' => 'नगदी रसिद',
                 'data' => $result->where('is_cash_invoice', 1)->sum('total')
             ],
             [
-                'label' => 'मालपोत रसिद',
+                'name' => 'मालपोत रसिद',
                 'data' => $result->where('is_cash_invoice', 0)->sum('total')
             ]
         ]);
@@ -77,11 +85,11 @@ class DashboardController extends Controller
 
         return collect([
             [
-                'label' => 'नगद',
+                'name' => 'नगद',
                 'data' => $result->where('payment_method', 'Cash')->sum('total')
             ],
             [
-                'label' => 'बैंक',
+                'name' => 'बैंक',
                 'data' => $result->where('payment_method', 'Bank')->sum('total')
             ]
         ]);
@@ -123,16 +131,21 @@ class DashboardController extends Controller
         $data = collect();
 
         foreach ($this->month_name as $key => $month) {
-            $data->push([
-                'label' => $month,
-                'data' => $result->where('fiscal_year_id', officeSetting()->fiscal_year_id)
-                    ->filter(function ($item) use ($key) {
+            $data->push($result->filter(function ($item) use ($key) {
                         return date('m', strtotime($item->payment_date)) == $key+1;
                     })
                     ->sum('total')
-            ]);
+            );
         }
 
-        return $data;
+        return [
+        'labels' => $this->month_name,
+        'dataSets' => [
+            [
+                'data' => $data,
+                'label' => 'जम्मा राजस्व',
+            ],
+        ],
+    ];
     }
 }

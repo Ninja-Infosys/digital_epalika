@@ -42,9 +42,7 @@ class TaxPayerController extends Controller
     public function show(TaxPayer $taxPayer)
     {
         $this->checkAuthorization('taxPayer_access');
-
-//        TODO: Alert Show Form For Tax Payer
-        return view('revenue::show');
+        return view('revenue::admin.tax-payer.show', compact('taxPayer'));
     }
 
     public function edit(TaxPayer $taxPayer)

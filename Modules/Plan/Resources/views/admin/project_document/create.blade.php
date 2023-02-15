@@ -79,7 +79,8 @@
         </div>
     </div>
         @push('scripts')
-            <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
+            <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+            <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
             <script>
                 $(document).ready(function (){
                     $('#plan_template_id').on('change',function (){
@@ -87,7 +88,7 @@
                             type:'GET',
                             url:$(this).val(),
                             success:function (resp){
-                                editor.setData(resp.data);
+                                CKEDITOR.instances.data.setData(resp);
                             },
                             error:function (){
                                 alert('Something Went Wrong')

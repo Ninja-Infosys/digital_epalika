@@ -75,8 +75,9 @@ class FileController extends Controller
         if ($file->file) {
             $this->deleteFile($file->file);
         }
-        toast('फाइल सफलतापूर्वक मेटियो', 'success');
+
         $file->delete();
+        toast('फाइल सफलतापूर्वक मेटियो', 'success');
 
         return back();
     }
@@ -119,7 +120,7 @@ class FileController extends Controller
         $filename = $file->getClientOriginalName();
         $counter = 1;
         while (Storage::disk('public')->exists($path . $filename)) {
-            $filename =  $counter. '_' . $file->getClientOriginalName();
+            $filename = $counter . '_' . $file->getClientOriginalName();
             $counter++;
         }
 

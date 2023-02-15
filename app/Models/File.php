@@ -23,6 +23,7 @@ class File extends Model
         'file_name',
         'extension',
         'file',
+        'type',
     ];
 
     public function getFileUrlAttribute(): string

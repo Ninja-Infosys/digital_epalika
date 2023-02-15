@@ -268,6 +268,46 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <h4 class="header-title mt-3">सम्बन्धित कागजातहरू</h4>
+                            <div class="row">
+                                @foreach($complaintApplication->supportedDocuments as $supportedDocument)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <h5 class="card-title">
+                                                    {{$supportedDocument->document_name}}
+                                                </h5>
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="{{route('admin.file-url-download',['file_url'=>$supportedDocument->document])}}"
+                                                       class="btn btn-xs btn-outline-primary mx-1">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <form
+                                                        action="{{route('admin.judicialCommittee.complaintApplication.supportedDocument.destroy',[$complaintApplication,$supportedDocument])}}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit"
+                                                                class="show_confirm btn btn-sm btn-danger ml-2">
+                                                            <i class="fa fa-window-close"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                @if($supportedDocument->extension ==='pdf')
+                                                    <iframe src="{{$supportedDocument->document_url}}" frameborder="0"
+                                                            width="100%"></iframe>
+                                                @elseif(in_array($supportedDocument->extension,['png','jpg','jpeg']))
+                                                    <img src="{{ $supportedDocument->document_url }}" class="card-image"
+                                                         alt="Image"
+                                                         height=150px;" width="100%">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="tab-pane" id="complainant-application" role="tabpanel">
                             <div class="border m-4 p-2 border-secondary">

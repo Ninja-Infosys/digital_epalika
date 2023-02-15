@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">व्यक्तिगतको विवरण </h4>
                         <a href="{{ route('admin.recommendation.setting.personalDetail.index') }}"
-                            class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> व्यक्तिगत विवरण सुची
                         </a>
                     </div>
@@ -52,28 +52,28 @@
 
                                     <p class="mb-2 font-15"><strong>नागरिकता नं:</strong> <span
                                             class="ms-2">{{ $personalDetail->citizenship_no }}</span></p>
-                                            <p class="mb-2 font-15"><strong> ठेगाना (स्थायी) : :</strong> <span
-                                                class="ms-2">  {{ $personalDetail->localBody->local_body}}
+                                    <p class="mb-2 font-15"><strong> ठेगाना (स्थायी) : :</strong> <span
+                                            class="ms-2">  {{ $personalDetail->localBody->local_body}}
                                                 -{{ $personalDetail->ward_no }}
                                                 , {{ $personalDetail->tole }}</span>
-                                        </p>
+                                    </p>
                                 </div>
                                 <table class="table table-bordered mt-2">
                                     <thead>
-                                        <tr>
-                                            <th>क्र.स</th>
-                                        <th>शिर्षक</th>
+                                    <tr>
+                                        <th>क्र.स</th>
+                                        <th>सिफारिस</th>
                                         <th>मिति</th>
-                                        </tr>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($personalDetail->registrationDetails as $registrationDetail)
+                                    @foreach ($personalDetail->registrationDetails as $registrationDetail)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $registrationDetail->recommendationCategory->title ??'' }}</td>
                                             <td>{{ $registrationDetail->date_ne }}</td>
                                         </tr>
-                                        @endforeach
+                                    @endforeach
                                     </tbody>
                                 </table>
 

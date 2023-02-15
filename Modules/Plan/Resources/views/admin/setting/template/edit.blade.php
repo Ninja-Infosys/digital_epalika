@@ -120,7 +120,8 @@
     </div>
 
     @push('scripts')
-        <script src="{{asset('assets/backend/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 @endsection
 
