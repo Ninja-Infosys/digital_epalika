@@ -17,7 +17,7 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature','judicialReceiptBill','complaintDecision')
             ->withCount('dateSheets')
             ->whereHas('judicialReceiptBill')
             ->where(function (Builder $q) {
