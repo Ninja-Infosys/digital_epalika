@@ -50,12 +50,12 @@ class DashboardController extends Controller
         return StructureType::withCount(['mapApply'])
             ->selectRaw('id,title')
             ->get()
-        ->map(function ($structure){
-            return [
-                'name' => $structure->title,
-                'data'=> (int)$structure->map_apply_count
-            ];
-        });
+            ->map(function ($structure) {
+                return [
+                    'name' => $structure->title,
+                    'data' => (int)$structure->map_apply_count
+                ];
+            });
     }
 
     public function getMapApplyAccordingToFiscalYear(): array
