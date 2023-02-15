@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Entities;
 
 use App\Models\File;
+use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -30,9 +31,14 @@ class RegistrationDetail extends Model
         'date_en',
         'recommendation_data',
         'personal_detail_id',
-        'recommendation_category_id'
+        'recommendation_category_id',
+        'fiscal_year_id',
+        'ward_no',
     ];
 
+    protected $appends=[
+        'registration_month'
+    ];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -41,6 +47,11 @@ class RegistrationDetail extends Model
     public function personalDetail(): BelongsTo
     {
         return $this->belongsTo(PersonalDetail::class);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 
     public function recommendationCategory(): BelongsTo
@@ -60,5 +71,11 @@ class RegistrationDetail extends Model
             set: fn($value) => (!empty($value) && !is_string($value)) ? $value->store('registrationDetail', 'public') : null,
         );
     }
+
+    public function getRegistrationMonthAttribute(): string
+    {
+        return explode('-', $this->date_ne)[1] ?? '';
+    }
+
 }
 

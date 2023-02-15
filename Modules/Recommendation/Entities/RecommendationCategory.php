@@ -46,6 +46,11 @@ class RecommendationCategory extends Model
         return $this->hasMany(RecommendationTemplate::class);
     }
 
+    public function registrationDetails(): HasMany
+    {
+        return $this->hasMany(RegistrationDetail::class);
+    }
+
     public function scopeActive($q)
     {
         return $q->where('is_active', 1);

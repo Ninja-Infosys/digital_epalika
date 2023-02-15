@@ -11,6 +11,6 @@ class ReportController extends Controller
 
     public function index()
     {
-
+        return view('recommendation::admin.reports.index');
     }
 }

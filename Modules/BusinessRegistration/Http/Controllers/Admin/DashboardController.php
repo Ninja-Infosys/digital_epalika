@@ -4,7 +4,6 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -13,8 +12,6 @@ use Illuminate\Support\Collection;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
-use Modules\BusinessRegistration\Entities\Partner;
-use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 
 class DashboardController extends Controller
 {

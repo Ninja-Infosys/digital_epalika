@@ -18,6 +18,7 @@ class UpdateRegistrationRequest extends FormRequest
         return [
             'date_ne'=>['required'],
             'date_en'=>['required'],
+            'ward_no' => ['required','integer'],
             'recommendation_data'=>['required'],
             'personal_detail_id'=>['nullable',Rule::exists('personal_details','id')->withoutTrashed()],
             'recommendation_category_id'=>['nullable',Rule::exists('recommendation_categories','id')->withoutTrashed()]

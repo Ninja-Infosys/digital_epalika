@@ -68,21 +68,34 @@
 
                                 <div class="col-md-4 mb-2">
                                     <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
-                                    <select id="recommendation_category_id" name="recommendation_category_id"
-                                        class="form-select">
-                                        <option value="">-- छान्नुहोस् --</option>
-                                        @foreach ($recommendationCategories as $recommendationCategory)
-                                            <option
-                                                {{ $recommendationCategory->id == old('recommendation_category_id',$registrationDetail->recommendation_category_id) ? 'selected' : '' }}
-                                                value="{{ $recommendationCategory->id }}">
-                                                {{ $recommendationCategory->title }}</option>
+                                    <select name="recommendation_category_id"  data-toggle="select2"
+                                            id="recommendation_category_id" class="form-control" >
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($recommendationCategories as $recommendationCategory)
+                                            @if(count($recommendationCategory->recommendationCategories)>0)
+                                                <optgroup label="{{$recommendationCategory->title}}">
+                                                    @foreach($recommendationCategory->recommendationCategories as $subRecommendationCategory)
+                                                        <option
+                                                            value="{{$subRecommendationCategory->id}}" {{old('recommendation_category_id',$registrationDetail->recommendation_category_id)==$subRecommendationCategory->id ? 'selected':''}}>
+                                                            {{$subRecommendationCategory->title}}
+                                                        </option>
+                                                    @endforeach
+                                                </optgroup>
+                                            @else
+                                                <option
+                                                    value="{{$recommendationCategory->id}}" {{old('recommendation_category_id',$registrationDetail->recommendation_category_id)==$recommendationCategory->id ? 'selected':''}}>
+                                                    {{$recommendationCategory->title}}
+                                                </option>
+                                            @endif
                                         @endforeach
+
                                     </select>
+
                                     @error('recommendation_category_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-2 mb-2">
                                     <x-date-input-component
                                     name-ne="date_ne" label-ne="नेपाली मिति *"
                                     name-en="date_en" label-en="English Date"
@@ -90,6 +103,21 @@
                                     :editDateNe="$registrationDetail->date_ne"
                                     :editDateEn="$registrationDetail->date_en"
                                     />
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="ward_no" class="form-label">वडा नं</label>
+                                    <select id="ward_no" name="ward_no"
+                                            class="form-select">
+                                        <option value="">-- छान्नुहोस् --</option>
+                                        @foreach(officeSetting()->localBody->ward_no as $ward)
+                                            <option
+                                                value="{{$ward}}" {{old('ward_no',$registrationDetail->ward_no)==$ward ? 'selected':''}}>{{$ward}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('ward_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
                                 @livewire('multiple-file')
 

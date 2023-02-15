@@ -49,4 +49,49 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
+    <div class="row" id="charts" data-chart-url="{{route('admin.recommendation.dashboard')}}">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="wardWiseRegistration" chart-type="column" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार जम्मा सिफारिस विवरण"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="monthlyWiseRegistration" chart-type="column" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका महिना अनुसार जम्मा सिफारिस विवरण"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-pull-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="categoryWise" chart-type="pie" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका सिफारिस अनुसार जम्मा सिफारिस विवरण"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    @endpush
 @endsection
