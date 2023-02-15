@@ -5,6 +5,8 @@ namespace Modules\EMap\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -20,6 +22,8 @@ use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
 class DashboardController extends Controller
 {
+    use NepaliDateConverter;
+
     public function __invoke()
     {
         $organization_count = Organization::count();
@@ -30,13 +34,15 @@ class DashboardController extends Controller
         $mapApplyConstructionTypeAccordingToFiscalYears = $this->getMapApplyConstructionTypeAccordingToFiscalYear();
         $mapApplyStructureTypeAccordingToFiscalYears = $this->getMapApplyStructureTypeAccordingToFiscalYear();
 
-        if(request()->ajax()){
+        if (request()->ajax()) {
             return [
                 'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
                 'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
                 'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
                 'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
-                'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear()
+                'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
+                'mapAccordingToMonth' => $this->mapAccordingToMonth(),
+
             ];
         }
         return view('emap::admin.dashboard', compact('mapApplyStructureTypeAccordingToFiscalYears', 'mapApplyBuildingUsageAccordingToFiscalYears', 'mapApplyBuildingCategoryAccordingToFiscalYears', 'organization_count', 'mapApplyConstructionTypeAccordingToFiscalYears', 'map_apply_count', 'mapAppliesAccordingToFiscalYears'));
@@ -48,12 +54,12 @@ class DashboardController extends Controller
         return StructureType::withCount(['mapApply'])
             ->selectRaw('id,title')
             ->get()
-        ->map(function ($structure){
-            return [
-                'name' => $structure->title,
-                'data'=> $structure->map_apply_count
-            ];
-        });
+            ->map(function ($structure) {
+                return [
+                    'name' => $structure->title,
+                    'data' => $structure->map_apply_count
+                ];
+            });
     }
 
     public function getMapApplyAccordingToFiscalYear(): array
@@ -180,11 +186,32 @@ class DashboardController extends Controller
         return $result;
     }
 
-    /**
-     * @return mixed
-     */
     public function getOfficeSetting()
     {
         return officeSetting();
+    }
+
+    public function mapAccordingToMonth()
+    {
+        $officeSetting = $this->getOfficeSetting();
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $month = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0];
+
+        foreach ($mapApplies as $mapApply) {
+            $date = Carbon::parse($mapApply->registration_date);
+            $registrationDate = $this->get_nepali_date($date->year, $date->month, $date->day);
+            $month[$registrationDate['m'] - 1] += 1;
+        }
+
+        return [
+            'labels' => $this->month_name,
+            'dataSets' => [
+                [
+                    'data' => $month,
+                    'label' => 'नक्सा दर्ता',
+                    'fill' => 'false',
+                ]
+            ]
+        ];
     }
 }
