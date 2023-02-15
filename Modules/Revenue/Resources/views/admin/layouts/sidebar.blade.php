@@ -19,6 +19,14 @@
         </a>
     </li>
 @endcan
+@can('invoice_access')
+    <li class="{{request()->routeIs('admin.revenue.land.invoice.*') ? 'active' : ''}}">
+        <a href="{{route('admin.revenue.land.invoice.index')}}">
+            <i class="fa fa-money-bill"></i>
+            <span>मालपोत रसिद</span>
+        </a>
+    </li>
+@endcan
 
 
 <li class="{{request()->routeIs('admin.revenue.setting.*') ? 'active' : ''}}">
