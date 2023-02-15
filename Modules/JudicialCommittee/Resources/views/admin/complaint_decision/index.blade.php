@@ -25,10 +25,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">निर्णय विवरण</h4>
-                        <div>
+                        <div class="d-flex justify-content-between gap-1">
+                            <x-print-button
+                                title="निर्णय विवरण"
+                                target-element="print-content"
+                            />
                             @can('complaintDecision_edit')
                                 <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.create', $complaintApplication) }}"
-                                   class="btn btn-sm btn-outline-warning mx-1">
+                                   class="btn btn-sm btn-outline-warning">
                                     <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
                                 </a>
                             @endcan
@@ -40,35 +44,59 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {!! $complaintApplication->complaintDecision->description??'' !!}
+                    <div class="mx-4 p-2 border border-secondary">
+                        <div id="print-content">
+                            {!! $complaintApplication->complaintDecision->description??'' !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        @foreach($complaintApplication->complaintDecision->files??collect() as $document)
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <form action="{{route('admin.file.destroy',$document)}}"
-                              method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
-                                <i class="fa fa-window-close"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="card-body">
-                        @if($document->extension ==='pdf')
-                            <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
-                        @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
-                            <img src="{{ $document->file_url }}" class="card-image" alt="Image"
-                                 height=150px;" width="100%">
-                        @endif
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title fw-bold">
+                        सम्बन्धित फोटो/फाईलहरू
+                    </h4>
+                    <div class="row">
+                        @foreach($complaintApplication->complaintDecision->files??collect() as $file)
+                            <div class="col-md-4 mb-3">
+                                <div class="card border border-info">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5 class="card-title">
+                                            {{$file->file_name}}
+                                        </h5>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{route('admin.file.download', $file)}}"
+                                               class="btn btn-xs btn-outline-primary mx-1">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <form action="{{route('admin.file.destroy',$file)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
+                                                    <i class="fa fa-window-close"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @if($file->extension ==='pdf')
+                                            <iframe src="{{$file->file_url}}" frameborder="0" width="100%"></iframe>
+                                        @elseif(($file->extension ==='png') or ($file->extension ==='jpg') or ($file->extension ==='jpeg'))
+                                            <img src="{{ $file->file_url }}" class="card-image" alt="Image"
+                                                 height=150px;" width="100%">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
     </div>
 @endsection
