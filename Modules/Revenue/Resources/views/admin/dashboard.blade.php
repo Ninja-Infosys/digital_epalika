@@ -1,40 +1,47 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
             <div class="card widget-inline">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="p-2 text-center">
-                                <i class="fas fa-user text-primary font-22"></i>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                    <div class="avatar-sm bg-blue rounded-circle">
+                                        <i class="fas fa-user avatar-title font-18 text-white"></i>
+                                </div>
                                 <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $taxPayerCount}}</span></h3>
                                 <p class="text-muted font-15 mb-0">करदाता</p>
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="p-2 text-center">
-                                <i class="fas fa-clipboard-list text-success font-22"></i>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="avatar-sm bg-blue rounded-circle">
+                                        <i class="fas fa-clipboard-list avatar-title font-18 text-white"></i>
+                                    </div>
                                 <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$invoiceCount}}</span></h3>
                                 <p class="text-muted font-15 mb-0 text-truncate"
                                    title="आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद">
                                     आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद</p>
-                            </div>
+                                </div>
                         </div>
 
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="p-2 text-center">
-                                <i class="fas fa-dollar-sign text-danger font-22"></i>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-dollar-sign avatar-title font-18 text-white"></i>
+                                </div>
                                 <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$fiscal_year_total}}</span></h3>
                                 <p class="text-muted font-15 mb-0">चालु आर्थिक वर्षको संकलन राजस्व</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xl-3">
-                            <div class="p-2 text-center">
-                                <i class="fas fa-dollar-sign text-blue font-22"></i>
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-dollar-sign avatar-title font-18 text-white"></i>
+                                </div>
                                 <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$all_total}}</span></h3>
                                 <p class="text-muted font-15 mb-0">कुल राजस्व</p>
                             </div>
