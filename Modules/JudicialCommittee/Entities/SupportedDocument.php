@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 
 class SupportedDocument extends Model
 {
@@ -24,6 +25,10 @@ class SupportedDocument extends Model
         'type',
         'document_name',
         'document'
+    ];
+
+    protected $casts = [
+        'type' => ComplainantDefendantTypeEnum::class
     ];
 
     public function getDocumentUrlAttribute(): string

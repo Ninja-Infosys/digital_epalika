@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\WrittenAnswer;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\WrittenAnswer\StoreWrittenAnswerRequest;
 use Modules\JudicialCommittee\Http\Requests\WrittenAnswer\UpdateWrittenAnswerRequest;
@@ -17,7 +18,14 @@ class WrittenAnswerController extends Controller
     {
         $this->checkAuthorization('writtenAnswer_access');
 
-        $complaintApplication->load('writtenAnswers');
+        $complaintApplication->load(['writtenAnswers',
+            'supportedDocuments' => function ($query) {
+                $query->where('type', ComplainantDefendantTypeEnum::DEFENDANT);
+            },
+            'witnesses' => function ($query) {
+                $query->where('type', ComplainantDefendantTypeEnum::DEFENDANT);
+            }
+        ]);
 
         return view('judicialcommittee::admin.written_answer.index', compact('complaintApplication'));
     }

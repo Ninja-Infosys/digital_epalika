@@ -1315,7 +1315,9 @@ html[dir=rtl] .dropdown-megamenu {
 html[dir=ltr] .megamenu-list li:before {
     content: "\f0141"
 }
-
+.menu-list{
+    height: 60vh;
+}
 .dropdown-icon-item {
     display: block;
     border-radius: 3px;
@@ -1323,12 +1325,13 @@ html[dir=ltr] .megamenu-list li:before {
     text-align: center;
     padding: 15px 0 9px;
     display: block;
-    border: 1px solid transparent;
-    color: var(--ct-dropdown-link-color)
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    margin: 2px;
 }
 
 .dropdown-icon-item img {
-    height: 24px
+    height: 40px
 }
 
 .dropdown-icon-item span {
@@ -1339,7 +1342,7 @@ html[dir=ltr] .megamenu-list li:before {
 }
 
 .dropdown-icon-item:hover {
-    background-color: var(--ct-dropdown-link-hover-bg)
+    background-color: var(--secondary)
 }
 
 @media (min-width: 992px) {
@@ -1888,7 +1891,6 @@ body {
     list-style: none;
     padding: 0
 }
-
 #sidebar-menu > ul > li > a {
     display: block;
     padding: 12px 20px;

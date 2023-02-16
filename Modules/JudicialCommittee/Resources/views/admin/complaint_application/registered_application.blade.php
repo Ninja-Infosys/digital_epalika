@@ -98,12 +98,12 @@
                                                         </a>
                                                     @endcan
                                                 @endif
-                                                @can('dateCompensation_access')
-                                                    <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication) }}"
-                                                       class="dropdown-item">
-                                                        <i class="fa fa-calendar-alt"> तारिख भरपाई </i>
-                                                    </a>
-                                                @endcan
+{{--                                                @can('dateCompensation_access')--}}
+{{--                                                    <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication) }}"--}}
+{{--                                                       class="dropdown-item">--}}
+{{--                                                        <i class="fa fa-calendar-alt"> तारिख भरपाई </i>--}}
+{{--                                                    </a>--}}
+{{--                                                @endcan--}}
                                                 @if($complaintApplication->complaintDecision)
                                                     @can('complaintDecision_access')
                                                         <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.index', $complaintApplication) }}"
