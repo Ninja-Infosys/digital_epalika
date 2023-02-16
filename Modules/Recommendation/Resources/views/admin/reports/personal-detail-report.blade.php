@@ -31,13 +31,12 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name=" श्रेणी अनुसार रिपोर्ट"
+                                file-name=" व्यक्तिगत अनुसार रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
-                                target-element="report-table"
-                                title=" श्रेणी अनुसार रिपोर्ट"
-                                :headerRequired="true"
+                                target-element="report-content"
+                                title=" व्यक्तिगत अनुसार रिपोर्ट"
 
                             />
                         </div>
@@ -114,6 +113,7 @@
                                 </tr>
                                 </thead>
                             </table>
+                            <p id="total"></p>
                         </div>
                     </div>
                 </div>
@@ -184,6 +184,8 @@
                             submitFormBtn.html("पेश गर्नुहोस्");
                             $('#report-content').removeClass('d-none');
                             createTable(resp.data)
+                            $('#total').html("आर्थिक वर्ष " + resp.fiscal_years.toString() + " मा "+resp.total+" सिफारिस दर्ता भएका छन !" )
+
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)

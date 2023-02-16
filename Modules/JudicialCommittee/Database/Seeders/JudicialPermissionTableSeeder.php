@@ -56,6 +56,18 @@ class JudicialPermissionTableSeeder extends Seeder
             'complaintDecision_create',
             'complaintDecision_edit',
             'complaintDecision_delete',
+            'conciliationApplication_access',
+            'conciliationApplication_create',
+            'conciliationApplication_edit',
+            'conciliationApplication_delete',
+            'conciliationVerification_access',
+            'conciliationVerification_create',
+            'conciliationVerification_edit',
+            'conciliationVerification_delete',
+            'conciliation_access',
+            'conciliation_create',
+            'conciliation_edit',
+            'conciliation_delete',
         ];
 
         $this->storePermission($permissions);

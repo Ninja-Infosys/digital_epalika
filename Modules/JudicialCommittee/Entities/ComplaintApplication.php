@@ -145,4 +145,9 @@ class ComplaintApplication extends Model
     {
         return $this->hasMany(SupportedDocument::class);
     }
+
+    public function conciliationApplication(): HasOne
+    {
+        return $this->hasOne(ConciliationApplication::class);
+    }
 }

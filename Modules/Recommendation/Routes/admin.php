@@ -23,6 +23,7 @@ Route::resource('registrationDetail', RegistrationDetailController::class);
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function (){
     Route::get('/','index')->name('index');
+    Route::post('report-data','report')->name('report-data');
     Route::get('ward-wise','wardWise')->name('ward-wise');
     Route::post('ward-wise-report','wardWiseReport')->name('ward-wise-report');
     Route::get('recommendation-category-wise','recommendationCategoryWise')->name('recommendation-category-wise');

@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RegistrationDetail;
 use Illuminate\Support\Collection;
+use Modules\Recommendation\Transformers\Report\RegistrationDetailResource;
 
 class ReportController extends Controller
 {
@@ -35,7 +36,7 @@ class ReportController extends Controller
             $request->request->add(
                 ['columns' =>
                     [
-                        'registration_details' => ['name', 'registration_no', 'registration_date_ne', 'business_nature_id']
+                        'registration_details' => ['recommendation_category_id', 'personal_detail_id', 'fiscal_year_id', 'date_ne']
                     ]
                 ]
             );
@@ -45,9 +46,9 @@ class ReportController extends Controller
             $this->filterDataFromUser($q, $request);
         })->get();
 
-//        return response()->json([
-//            'data' => BusinessDetailResource::collection($projects)
-//        ]);
+        return response()->json([
+            'data' => RegistrationDetailResource::collection($registrationDetails)
+        ]);
     }
 
     private function getColumns(): Collection
@@ -72,23 +73,17 @@ class ReportController extends Controller
         }
 
         if (!empty($request->input('from_date'))) {
-            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
+            $q->whereDate('date_ne', '>=', $request->input('from_date'));
         }
 
         if (!empty($request->input('to_date'))) {
-            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
+            $q->whereDate('date_ne', '<=', $request->input('to_date'));
         }
 
         if (!empty($request->input('recommendation_category'))) {
             $q->whereIn('recommendation_category_id', $request->input('recommendation_category'));
         }
 
-//        if (!empty($request->input('business_nature'))) {
-//            $q->whereIn('business_nature_id', $request->input('business_nature'));
-//        }
-//        if (!empty($request->input('ward_no'))) {
-//            $q->whereIn('ward_no', $request->input('ward_no'));
-//        }
     }
 
     public function wardWise()
@@ -207,21 +202,24 @@ class ReportController extends Controller
         ]);
 
         $registrationDetails = RegistrationDetail::with('personalDetail', 'fiscalYear', 'recommendationCategory')
-            ->where(function ($q) use ($request){
+            ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
             })
             ->get()
             ->map(function ($registrationDetail, $key) {
                 return [
                     'sn' => (int)$key + 1,
-                    'name' => $registrationDetail->personalDetail->name??'',
-                    'category' => $registrationDetail->recommendationCategory->title??'',
-                    'date' => $registrationDetail->date_ne??'',
+                    'name' => $registrationDetail->personalDetail->name ?? '',
+                    'category' => $registrationDetail->recommendationCategory->title ?? '',
+                    'date' => $registrationDetail->date_ne ?? '',
                 ];
             });
 
+
         return response()->json([
-            'data'=>$registrationDetails
+            'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
+            'total' => $registrationDetails->count(),
+            'data' => $registrationDetails
         ]);
     }
 }

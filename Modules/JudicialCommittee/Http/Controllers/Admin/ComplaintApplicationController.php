@@ -13,8 +13,10 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision','conciliationApplication')
             ->withCount('dateSheets')
+            ->withCount('writtenAnswers')
+            ->withCount('defendantIssuedDeadlines')
             ->whereHas('judicialReceiptBill')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {

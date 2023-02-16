@@ -31,13 +31,12 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name=" श्रेणी अनुसार रिपोर्ट"
+                                file-name=" सिफारिस अनुसार रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
-                                target-element="report-table"
-                                title=" श्रेणी अनुसार रिपोर्ट"
-                                :headerRequired="true"
+                                target-element="report-content"
+                                title=" सिफारिस अनुसार रिपोर्ट"
 
                             />
                         </div>

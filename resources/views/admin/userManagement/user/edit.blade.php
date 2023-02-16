@@ -70,7 +70,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="phone" class="form-label">फोन नम्बर *</label>
                                     <input
                                         type="text"
@@ -84,14 +84,15 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="role_id" class="form-label">भूमिका *</label>
                                     <select name="role_id"
                                             class="form-select @error('role_id') is-invalid @enderror"
                                             id="role_id">
                                         <option value="">भूमिका छान्नुहोस्</option>
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}" {{$role->id==old('role_id',$user->role_id) ? 'selected' : ''}}>
+                                            <option
+                                                value="{{$role->id}}" {{$role->id==old('role_id',$user->role_id) ? 'selected' : ''}}>
                                                 {{$role->title}}
                                             </option>
                                         @endforeach
@@ -100,19 +101,43 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="ward_no" class="form-label">वडा नं.</label>
                                     <select name="ward_no"
                                             class="form-select @error('ward_no') is-invalid @enderror"
                                             id="ward_no">
                                         <option value="">वडा छान्नुहोस्</option>
                                         @foreach($officeSetting->localBody->ward_no as $ward)
-                                            <option value="{{$ward}}" {{$ward==old('ward_no',$user->ward_no) ? 'selected' : ''}}>
+                                            <option
+                                                value="{{$ward}}" {{$ward==old('ward_no',$user->ward_no) ? 'selected' : ''}}>
                                                 {{$ward}}
                                             </option>
                                         @endforeach
                                     </select>
                                     @error('ward_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="branch_id" class="form-label">शाखा</label>
+                                    <select name="branch_id"
+                                            class="form-select @error('branch_id') is-invalid @enderror"
+                                            id="branch_id">
+                                        <option value="">छान्नुहोस्</option>
+                                        @foreach($branches as $branch)
+                                            <option
+                                                value="{{$branch->id}}" {{$branch->id==old('branch_id', $user->branch_id) ? 'selected' : ''}}>
+                                                {{$branch->branch_name}}
+                                            </option>
+                                            @foreach($branch->branches as $subBranch)
+                                                <option
+                                                    value="{{$subBranch->id}}" {{$subBranch->id==old('branch_id', $user->branch_id) ? 'selected' : ''}}>
+                                                    --- {{$subBranch->branch_name}}
+                                                </option>
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                    @error('branch_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

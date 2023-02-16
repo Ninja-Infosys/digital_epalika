@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintDecisionController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintLogController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\ConciliationApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateCompensationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateSheetController;
@@ -29,6 +30,7 @@ Route::resource('complaintApplication/{complaintApplication}/defendantIssuedDead
 Route::resource('complaintApplication/{complaintApplication}/dateCompensation', DateCompensationController::class)->names('complaintApplication.dateCompensation');
 Route::resource('complaintApplication/{complaintApplication}/writtenAnswer', WrittenAnswerController::class)->names('complaintApplication.writtenAnswer');
 Route::resource('complaintApplication/{complaintApplication}/complaintDecision', ComplaintDecisionController::class)->names('complaintApplication.complaintDecision');
+Route::resource('complaintApplication/{complaintApplication}/conciliationApplication', ConciliationApplicationController::class)->names('complaintApplication.conciliationApplication');
 Route::get('complaintApplication/{complaintApplication}/complaintLog', [ComplaintLogController::class, 'index'])->name('complaintApplication.complaintLog.index');
 
 Route::prefix('setting')->as('setting.')->group(function () {
