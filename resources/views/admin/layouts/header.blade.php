@@ -116,7 +116,7 @@
         </ul>
         <!-- LOGO -->
         <div class="logo-box dropdown">
-            <div class="logo logo-light text-center">
+            <a href="{{route('admin.dashboard')}}" class="logo logo-light text-center">
                 <span class="logo-sm">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
                         <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}"
@@ -147,7 +147,7 @@
                              height="35"/>
                     @endif
               </span>
-            </div>
+            </a>
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
@@ -161,9 +161,16 @@
                     {{$officeSetting->localBody->local_body ?? ''}}
                 </h3>
             </li>
+            @if(config('app.app_is_demo'))
             <li class="d-none d-xl-block ms-2">
                 <p class="top-heading text-danger">
                     नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
+                </p>
+            </li>
+            @endif
+            <li class="d-none d-xl-block ms-1">
+                <p class="top-heading text-danger">
+                    ({{config('app.app_version')}})
                 </p>
             </li>
         </ul>
