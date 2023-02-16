@@ -3,21 +3,17 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Modules\Grant\Enums\GranteeEnum;
+use Illuminate\Http\Request;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
-use Modules\JudicialCommittee\Entities\JudicialReceiptBill;
 use Modules\JudicialCommittee\Entities\SupportedDocument;
-use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 
 class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature','judicialReceiptBill','complaintDecision')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision')
             ->withCount('dateSheets')
             ->whereHas('judicialReceiptBill')
             ->where(function (Builder $q) {
@@ -54,7 +50,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers','complainantDefendants.province','complainantDefendants.district','complainantDefendants.localBody','witnesses','defendantIssuedDeadlines');
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantDefendants.province', 'complainantDefendants.district', 'complainantDefendants.localBody', 'witnesses', 'defendantIssuedDeadlines');
 
         return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
@@ -63,9 +59,49 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_edit');
 
-        $complaintApplication->load('complainantDefendants', 'relatedMembers','witnesses');
+        $complaintApplication->load('complainantDefendants', 'relatedMembers', 'witnesses');
 
         return view('judicialcommittee::admin.complaint_application.edit', compact('complaintApplication'));
+    }
+
+    public function storeWitness(Request $request, ComplaintApplication $complaintApplication)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'age' => ['nullable', 'integer'],
+            'phone' => ['nullable'],
+            'address' => ['nullable'],
+        ],
+            ['name.required' => 'नाम आवश्यक छ'],
+        );
+
+        $complaintApplication->witnesses()->create($validated + [
+                'type' => ComplainantDefendantTypeEnum::DEFENDANT,
+            ]);
+
+        toast('साक्षी सफलतापूर्वक थपियो', 'success');
+        return back();
+    }
+
+    public function uploadSupportedDocument(Request $request, ComplaintApplication $complaintApplication)
+    {
+        $request->validate([
+            'document_name' => ['required', 'string', 'max:255'],
+            'document' => ['required', 'mimes:jpg,jpeg,png,pdf']
+        ],
+            ['document_name.required' => 'फाइलको नाम आवश्यक छ'],
+            ['document.required' => 'फाइल आवश्यक छ'],
+        );
+
+        $complaintApplication->supportedDocuments()->create([
+            'type' => ComplainantDefendantTypeEnum::DEFENDANT,
+            'document_name' => $request->input('document_name'),
+            'document' => $request->file('document')
+        ]);
+
+        toast('फाइल सफलतापूर्वक थपियो', 'success');
+
+        return back();
     }
 
     public function destroy(ComplaintApplication $complaintApplication)
@@ -88,7 +124,7 @@ class ComplaintApplicationController extends Controller
         return back();
     }
 
-    public function deleteSupportedDocument(ComplaintApplication $complaintApplication,SupportedDocument $supportedDocument)
+    public function deleteSupportedDocument(ComplaintApplication $complaintApplication, SupportedDocument $supportedDocument)
     {
         if ($supportedDocument->document) {
             $this->deleteFile($supportedDocument->document);

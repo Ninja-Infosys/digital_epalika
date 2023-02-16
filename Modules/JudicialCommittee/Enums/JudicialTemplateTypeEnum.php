@@ -12,6 +12,9 @@ enum JudicialTemplateTypeEnum: string
     case DEFENDANT_ISSUED_DEADLINE = "defendant_issued_deadline";
     case DATE_COMPENSATION = "date_compensation";
     case DECISION = "decision";
+    case CONCILIATION_APPLICATION = 'conciliation_application';
+    case CONCILIATION_VERIFICATION = 'conciliation_verification';
+    case CONCILIATION = 'conciliation';
 
     public function label(): string
     {
@@ -28,7 +31,10 @@ enum JudicialTemplateTypeEnum: string
             self::DEFENDANT_APPLICATION_IDENTIFICATION => 'प्रतिवादी निस्सा सनाखत',
             self::COMPLAINANT_APPLICATION => 'वादी दर्ता नालेस',
             self::DEFENDANT_APPLICATION => 'प्रतिवादी दर्ता नालेस',
-            self::DECISION => 'निर्णय'
+            self::DECISION => 'निर्णय',
+            self::CONCILIATION_APPLICATION => 'मिलापत्रको निवेदन',
+            self::CONCILIATION_VERIFICATION => 'मिलापत्रको प्रमाणीकरण',
+            self::CONCILIATION => 'मिलापत्र'
         };
     }
 }

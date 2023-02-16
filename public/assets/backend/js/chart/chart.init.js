@@ -74,8 +74,8 @@ $(document).ready(() => {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     innerSize: isDonut,
-                    dataLabels: {enabled: false},
-                    showInLegend: true
+                    dataLabels: {enabled: true},
+                    // showInLegend: true
                 }
             },
             series: [{name: 'डाटा', colorByPoint: true, data: data}]

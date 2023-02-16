@@ -57,15 +57,6 @@
                                 वादी दर्ता नालेस
                             </a>
                         </li>
-                        @if($complaintApplication->defendantIssuedDeadlines->count()>0)
-                            <li class="nav-item" role="presentation">
-                                <a href="#defendant-application" data-bs-toggle="tab" aria-expanded="false"
-                                   class="nav-link"
-                                   aria-selected="false" tabindex="-1" role="tab">
-                                    प्रतिवादी दर्ता नालेस
-                                </a>
-                            </li>
-                        @endif
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="complaint-application" role="tabpanel">
@@ -268,9 +259,49 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <h4 class="header-title mt-3">सम्बन्धित कागजातहरू</h4>
+                            <h4 class="header-title mt-3">वादीको सम्बन्धित कागजातहरू</h4>
                             <div class="row">
-                                @foreach($complaintApplication->supportedDocuments as $supportedDocument)
+                                @foreach($complaintApplication->supportedDocuments->where('type',\Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum::COMPLAINANT) as $supportedDocument)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border border-info">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <h5 class="card-title">
+                                                    {{$supportedDocument->document_name}}
+                                                </h5>
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="{{route('admin.file-url-download',['file_url'=>$supportedDocument->document])}}"
+                                                       class="btn btn-xs btn-outline-primary mx-1">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <form
+                                                        action="{{route('admin.judicialCommittee.complaintApplication.supportedDocument.destroy',[$complaintApplication,$supportedDocument])}}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit"
+                                                                class="show_confirm btn btn-sm btn-danger ml-2">
+                                                            <i class="fa fa-window-close"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                @if($supportedDocument->extension ==='pdf')
+                                                    <iframe src="{{$supportedDocument->document_url}}" frameborder="0"
+                                                            width="100%"></iframe>
+                                                @elseif(in_array($supportedDocument->extension,['png','jpg','jpeg']))
+                                                    <img src="{{ $supportedDocument->document_url }}" class="card-image"
+                                                         alt="Image"
+                                                         height=150px;" width="100%">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <h4 class="header-title mt-3">प्रतिवादीको सम्बन्धित कागजातहरू</h4>
+                            <div class="row">
+                                @foreach($complaintApplication->supportedDocuments->where('type',\Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum::DEFENDANT) as $supportedDocument)
                                     <div class="col-md-4 mb-3">
                                         <div class="card border border-info">
                                             <div class="card-header d-flex justify-content-between">
@@ -320,19 +351,6 @@
                                 </div>
                             </div>
                         </div>
-                        @if($complaintApplication->defendantIssuedDeadlines->count()>0)
-                            <div class="tab-pane" id="defendant-application" role="tabpanel">
-                                <div class="border mx-4 p-2 border-secondary">
-                                    <x-print-button
-                                        title="प्रतिवादी दर्ता नालेस"
-                                        target-element="print-defendant-application"
-                                    />
-                                    <div id="print-defendant-application">
-                                        {!! $complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DEFENDANT_APPLICATION) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>

@@ -310,7 +310,7 @@ class ComplaintApplicationLivewire extends Component
             ];
         }
 
-        foreach ($complaintApplication->witnesses as $witness) {
+        foreach ($complaintApplication->witnesses->where('type',ComplainantDefendantTypeEnum::COMPLAINANT) as $witness) {
             $this->form['witnesses'][] = [
                 'id' => $witness->id,
                 'name' => $witness->name ?? null,

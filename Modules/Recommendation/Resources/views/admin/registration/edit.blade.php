@@ -70,7 +70,7 @@
                                     <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
                                     <select name="recommendation_category_id"  data-toggle="select2"
                                             id="recommendation_category_id" class="form-control" >
-                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($recommendationCategories as $recommendationCategory)
                                             @if(count($recommendationCategory->recommendationCategories)>0)
                                                 <optgroup label="{{$recommendationCategory->title}}">

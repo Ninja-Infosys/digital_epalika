@@ -5,6 +5,7 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RegistrationDetail;
 
@@ -30,7 +31,11 @@ class DashboardController extends Controller
             ];
         }
 
-        return view('recommendation::admin.dashboard');
+        $registrationDetailCount = $this->registrationDetail->count();
+        $todayRegistrationDetailCount = RegistrationDetail::whereDate('date_en',today()->toDateString())->count();
+        $totalPersonalDetailCount = PersonalDetail::count();
+        $totalYealyRegistrationDetailCount = $this->registrationDetail->where('fiscal_year_id',officeSetting()->fiscal_year_id)->count();
+        return view('recommendation::admin.dashboard',compact('totalYealyRegistrationDetailCount','totalPersonalDetailCount','registrationDetailCount','todayRegistrationDetailCount'));
     }
 
     public function getWardWiseData()

@@ -5,6 +5,7 @@ namespace Modules\Recommendation\Entities;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RegistrationDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',
