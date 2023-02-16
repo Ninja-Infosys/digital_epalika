@@ -92,7 +92,7 @@
                                                         </a>
                                                     @endcan
                                                 @endif
-                                                @if($complaintApplication->defendent_issued_deadlines_count>0)
+                                                @if($complaintApplication->defendant_issued_deadlines_count>0)
                                                     @can('writtenAnswer_access')
                                                         <a href="{{ route('admin.judicialCommittee.complaintApplication.writtenAnswer.index', $complaintApplication) }}"
                                                            class="dropdown-item">
