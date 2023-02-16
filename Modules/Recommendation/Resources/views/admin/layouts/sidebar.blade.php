@@ -39,6 +39,21 @@
                     <span>प्रतिवेदन</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/recommendation/report/ward-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.report.ward-wise')}}">
+                    <span>वडा नं अनुसार</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/recommendation/report/recommendation-category-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.report.recommendation-category-wise')}}">
+                    <span>सिफारिस अनुसार</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/recommendation/report/personal-detail') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.report.personal-detail')}}">
+                    <span>व्यक्तिगत अनुसार</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
