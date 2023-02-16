@@ -10,7 +10,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-id-card avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> 4</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{$registrationDetailCount}}</span></h3>
                                 <p class="text-muted font-15 mb-0">जम्मा सिफारिस</p>
                             </div>
                         </div>
@@ -19,28 +19,28 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-id-card avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">5</span></h3>
-                                <p class="text-muted font-15 mb-0 text-truncate">आ.व. २०७९ को शिफारिस</p>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$todayRegistrationDetailCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate">आज दर्ता भएका सिफारिस</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                    <i class="fas fa-user avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
-                                <p class="text-muted font-15 mb-0">वार्षिक दर्ता नक्सा</p>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$totalPersonalDetailCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0">जम्मा व्यक्ति</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xl-3">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                    <i class="fas fa-file avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
-                                <p class="text-muted font-15 mb-0">मासिक दर्ता नक्सा</p>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$totalYealyRegistrationDetailCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0">आर्थिक वर्षमा दर्ता भएका सिफारिस</p>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-pull-12">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div id="categoryWise" chart-type="pie" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका सिफारिस अनुसार जम्मा सिफारिस विवरण"></div>
