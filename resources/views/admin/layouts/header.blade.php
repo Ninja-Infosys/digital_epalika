@@ -73,12 +73,7 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="profile-tour">
-                    <img src="{{auth()->user()->profile_photo_url ?? ''}}"
-                         alt="user-image"
-                         class="rounded-circle"/>
-                    <span class="pro-user-name ms-1">
-                  {{auth()->user()->name ?? ''}} <i class="fa fa-angle-down"></i>
-                </span>
+                    <img src="{{auth()->user()->profile_photo_url ?? ''}}" alt="user-image" class="rounded-circle"/>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
