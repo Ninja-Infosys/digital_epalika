@@ -8,5 +8,8 @@ class TaskManagementDatabaseSeeder extends Seeder
 {
     public function run()
     {
+        $this->call([
+            TaskManagementPermissionSeederTableSeeder::class,
+        ]);
     }
 }
