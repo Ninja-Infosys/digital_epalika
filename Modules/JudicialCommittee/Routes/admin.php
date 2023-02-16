@@ -19,7 +19,9 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\WrittenAnswerController;
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::resource('judicialMember', JudicialMemberController::class);
 Route::get('complaintApplication/registered', [ComplaintApplicationController::class, 'registeredApplications'])->name('registeredApplication');
-Route::delete('complaintApplication/{complaintApplication}/supportedDocument/{supportedDocument}',[ComplaintApplicationController::class,'deleteSupportedDocument'])->name('complaintApplication.supportedDocument.destroy');
+Route::post('complaintApplication/{complaintApplication}/supportedDocument', [ComplaintApplicationController::class, 'uploadSupportedDocument'])->name('complaintApplication.supportedDocument.store');
+Route::delete('complaintApplication/{complaintApplication}/supportedDocument/{supportedDocument}', [ComplaintApplicationController::class, 'deleteSupportedDocument'])->name('complaintApplication.supportedDocument.destroy');
+Route::post('complaintApplication/{complaintApplication}/witness', [ComplaintApplicationController::class, 'storeWitness'])->name('complaintApplication.witness.store');
 Route::resource('complaintApplication', ComplaintApplicationController::class);
 Route::resource('complaintApplication/{complaintApplication}/judicialReceiptBill', JudicialReceiptBillController::class)->names('complaintApplication.judicialReceiptBill');
 Route::resource('complaintApplication/{complaintApplication}/dateSheet', DateSheetController::class)->names('complaintApplication.dateSheet');
@@ -27,7 +29,7 @@ Route::resource('complaintApplication/{complaintApplication}/defendantIssuedDead
 Route::resource('complaintApplication/{complaintApplication}/dateCompensation', DateCompensationController::class)->names('complaintApplication.dateCompensation');
 Route::resource('complaintApplication/{complaintApplication}/writtenAnswer', WrittenAnswerController::class)->names('complaintApplication.writtenAnswer');
 Route::resource('complaintApplication/{complaintApplication}/complaintDecision', ComplaintDecisionController::class)->names('complaintApplication.complaintDecision');
-Route::get('complaintApplication/{complaintApplication}/complaintLog',[ComplaintLogController::class,'index'])->name('complaintApplication.complaintLog.index');
+Route::get('complaintApplication/{complaintApplication}/complaintLog', [ComplaintLogController::class, 'index'])->name('complaintApplication.complaintLog.index');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('lawsuitNature', LawsuitNatureController::class);

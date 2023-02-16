@@ -2,23 +2,24 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
             <li class="d-none d-xl-block">
-                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक
+                    वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-none d-lg-inline-block">
                 <div class="nav-link dropdown-toggle arrow-none waves-effect waves-light">
-                    <button class="btn btn-primary btn-xs cacheButton" id="cacheBtn" type="button" data="{{route('admin.cache-clear')}}">
+                    <button class="btn btn-primary btn-xs cacheButton" id="cacheBtn" type="button"
+                            data="{{route('admin.cache-clear')}}">
                         <i class="fas fa-brush"></i>
                     </button>
                 </div>
             </li>
-
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false" id="noti-tour">
+                   data-bs-toggle="dropdown"
+                   href="#"
+                   role="button"
+                   aria-haspopup="false"
+                   aria-expanded="false" id="noti-tour">
                     <i @class(['ring-bell'=>count(auth()->user()->unreadNotifications)>0,'fa', 'fa-bell', 'noti-icon'])></i>
                     @if(count(auth()->user()->unreadNotifications)>0)
                         <span class="badge bg-danger rounded-circle noti-icon-badge">
@@ -36,7 +37,7 @@
                     <div class="noti-scroll" data-simplebar>
                         @forelse (auth()->user()->unreadNotifications as $notification)
                             <a href="{{ route('admin.notification.read',$notification) }}"
-                                class="dropdown-item notify-item">
+                               class="dropdown-item notify-item">
                                 <div class="notify-icon bg-info">
                                     <i class="fas fa-bell"></i>
                                 </div>
@@ -55,15 +56,24 @@
                                 </p>
                             </a>
                         @empty
-                            <h4 class="text-center">कुनै डाटा उपलब्ध छैन !</h4>
+                            <h4 class="text-center my-3">कुनै डाटा उपलब्ध छैन !</h4>
                         @endforelse
                     </div>
                     <!-- All-->
                     <a href="{{route('admin.notification')}}"
                        class="dropdown-item text-center text-primary notify-item notify-all">
                         सबै हेर्नुहोस्
-                        <i class="fe-arrow-right"></i>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
+                </div>
+            </li>
+            <li class="dropdown topbar-dropdown">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown"
+                   href="#" role="button" aria-haspopup="false" aria-expanded="true">
+                    <i class="fas fa-th noti-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-xl dropdown-menu-end" data-popper-placement="bottom-end">
+                    @includeIf('admin.layouts.menu_list')
                 </div>
             </li>
             <li class="dropdown notification-list topbar-dropdown">
@@ -73,12 +83,7 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="profile-tour">
-                    <img src="{{auth()->user()->profile_photo_url ?? ''}}"
-                         alt="user-image"
-                         class="rounded-circle"/>
-                    <span class="pro-user-name ms-1">
-                  {{auth()->user()->name ?? ''}} <i class="fa fa-angle-down"></i>
-                </span>
+                    <img src="{{auth()->user()->profile_photo_url ?? ''}}" alt="user-image" class="rounded-circle"/>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
@@ -111,14 +116,15 @@
         </ul>
         <!-- LOGO -->
         <div class="logo-box dropdown">
-            <a class="logo logo-light text-center"
-               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
+            <div class="logo logo-light text-center">
                 <span class="logo-sm">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
-                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}"
+                             alt=""
                              height="40"/>
                     @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
-                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}"
+                             alt=""
                              height="40"/>
                     @else
                         <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
@@ -127,19 +133,20 @@
                 </span>
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
-                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
-                             height="40"/>
+                        <img
+                            src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}"
+                            alt=""
+                            height="40"/>
                     @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
-                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
-                             height="40"/>
+                        <img
+                            src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}"
+                            alt=""
+                            height="40"/>
                     @else
                         <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
                              height="35"/>
                     @endif
               </span>
-            </a>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                @includeIf('admin.layouts.menu_list')
             </div>
         </div>
 
@@ -153,6 +160,11 @@
                 <h3 class="top-heading text-light fw-bold">
                     {{$officeSetting->localBody->local_body ?? ''}}
                 </h3>
+            </li>
+            <li class="d-none d-xl-block ms-2">
+                <p class="top-heading text-danger">
+                    नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
+                </p>
             </li>
         </ul>
     </div>
