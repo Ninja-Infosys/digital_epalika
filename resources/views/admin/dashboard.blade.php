@@ -57,7 +57,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-info rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-comment avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">
@@ -76,7 +76,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-info rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-building avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">
@@ -95,7 +95,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-info rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-map avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">
@@ -114,7 +114,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-info rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-handshake avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">
@@ -133,7 +133,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-info rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-chalkboard-teacher avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">
