@@ -165,7 +165,7 @@
             <div class="col-md-3 border">
                 <a href="{{route('admin.grant.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/anudan.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/grant.png')}}"
                              height="50" width="50" alt="">
                         <h5 class="p-1 text-white">अनुदान व्यवस्थापन</h5>
                     </div>

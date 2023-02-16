@@ -154,6 +154,11 @@
                     {{$officeSetting->localBody->local_body ?? ''}}
                 </h3>
             </li>
+            <li class="d-none d-xl-block ms-2">
+                <p class="top-heading text-danger">
+                    नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
+                </p>
+            </li>
         </ul>
     </div>
 </div>
