@@ -91,6 +91,8 @@
                                                             <i class="fa fa-calendar-alt"> प्रतिवादी म्याद जारी </i>
                                                         </a>
                                                     @endcan
+                                                @endif
+                                                @if($complaintApplication->defendent_issued_deadlines_count>0)
                                                     @can('writtenAnswer_access')
                                                         <a href="{{ route('admin.judicialCommittee.complaintApplication.writtenAnswer.index', $complaintApplication) }}"
                                                            class="dropdown-item">
@@ -98,17 +100,39 @@
                                                         </a>
                                                     @endcan
                                                 @endif
-{{--                                                @can('dateCompensation_access')--}}
-{{--                                                    <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication) }}"--}}
-{{--                                                       class="dropdown-item">--}}
-{{--                                                        <i class="fa fa-calendar-alt"> तारिख भरपाई </i>--}}
-{{--                                                    </a>--}}
-{{--                                                @endcan--}}
-                                                @if($complaintApplication->complaintDecision)
+                                                @if($complaintApplication->written_answers_count>0)
                                                     @can('complaintDecision_access')
                                                         <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.index', $complaintApplication) }}"
                                                            class="dropdown-item">
                                                             <i class="fa fa-file-alt"> निर्णयहरु </i>
+                                                        </a>
+                                                    @endcan
+                                                @endif
+                                                {{--                                                @can('dateCompensation_access')--}}
+                                                {{--                                                    <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication) }}"--}}
+                                                {{--                                                       class="dropdown-item">--}}
+                                                {{--                                                        <i class="fa fa-calendar-alt"> तारिख भरपाई </i>--}}
+                                                {{--                                                    </a>--}}
+                                                {{--                                                @endcan--}}
+                                                @if($complaintApplication->complaintDecision)
+                                                    @can('conciliationApplication_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.conciliationApplication.index', $complaintApplication) }}"
+                                                           class="dropdown-item">
+                                                            <i class="fa fa-file"> मिलापत्रको निवेदन </i>
+                                                        </a>
+                                                    @endcan
+                                                @endif
+                                                @if($complaintApplication->conciliationApplication)
+                                                    @can('conciliationVerification_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.index', $complaintApplication) }}"
+                                                           class="dropdown-item">
+                                                            <i class="fa fa-file-alt"> ममिलापत्र प्रमाणीकरण आदेश </i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('complaintDecision_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.index', $complaintApplication) }}"
+                                                           class="dropdown-item">
+                                                            <i class="fa fa-file-alt"> मिलापत्र </i>
                                                         </a>
                                                     @endcan
                                                 @endif
