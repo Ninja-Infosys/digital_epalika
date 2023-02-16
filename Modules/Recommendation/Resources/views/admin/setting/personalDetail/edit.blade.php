@@ -75,7 +75,7 @@
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
                                             <option
-                                                {{$gender->value==old('gender', $personalDetail->gender) ? 'selected' : ''}}
+                                                {{$gender->value==old('gender', $personalDetail->gender->value) ? 'selected' : ''}}
                                                 value="{{$gender->value}}">{{$gender->label()}}</option>
                                         @endforeach
                                     </select>
