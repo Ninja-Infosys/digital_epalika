@@ -55,14 +55,14 @@
                                 </p>
                             </a>
                         @empty
-                            <h4 class="text-center">कुनै डाटा उपलब्ध छैन !</h4>
+                            <h4 class="text-center my-3">कुनै डाटा उपलब्ध छैन !</h4>
                         @endforelse
                     </div>
                     <!-- All-->
                     <a href="{{route('admin.notification')}}"
                        class="dropdown-item text-center text-primary notify-item notify-all">
                         सबै हेर्नुहोस्
-                        <i class="fe-arrow-right"></i>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </li>
@@ -74,6 +74,9 @@
                    aria-haspopup="false"
                    aria-expanded="false" id="profile-tour">
                     <img src="{{auth()->user()->profile_photo_url ?? ''}}" alt="user-image" class="rounded-circle"/>
+                    <span class="pro-user-name ms-1">
+                                    {{auth()->user()->name ?? ''}} <i class="fas fa-chevron-down"></i>
+                                </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
