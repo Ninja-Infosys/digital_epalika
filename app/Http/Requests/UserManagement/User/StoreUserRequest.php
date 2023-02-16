@@ -20,6 +20,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'email', Rule::unique('users', 'email')->withoutTrashed()],
             'phone' => ['nullable', 'numeric', Rule::unique('users', 'phone')->withoutTrashed()],
             'role_id' => ['required', Rule::exists('roles', 'id')->withoutTrashed()],
+            'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'password' => ['required', 'confirmed', 'min:7'],
             'ward_no' => ['nullable', 'integer'],
         ];
@@ -38,6 +39,7 @@ class StoreUserRequest extends FormRequest
             'password.confirmed' => 'पासवर्डसंग मेल खाएन।',
             'password.min' => 'पासवर्ड न्युनतम ७ अक्षरको हुनुपर्छ ।',
             'ward_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ।',
+            'branch_id.integer' => 'शाखा अंकमा हुनुपर्छ ।',
         ];
     }
 }
