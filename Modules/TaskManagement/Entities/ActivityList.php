@@ -2,9 +2,11 @@
 
 namespace Modules\TaskManagement\Entities;
 
+use App\Models\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -28,5 +30,10 @@ class ActivityList extends Model
     public function activity(): BelongsTo
     {
         return $this->belongsTo(Activity::class);
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'model');
     }
 }

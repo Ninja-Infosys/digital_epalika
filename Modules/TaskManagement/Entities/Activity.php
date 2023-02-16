@@ -40,7 +40,7 @@ class Activity extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function activities(): HasMany
+    public function activityLists(): HasMany
     {
         return $this->hasMany(ActivityList::class);
     }

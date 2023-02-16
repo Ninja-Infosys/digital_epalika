@@ -1,17 +1,16 @@
 <div>
-    <form action="{{route('admin.taskManagement.activity.store')}}" method="post">
-        @csrf
+    <form wire:submit.prevent="save">
         <div class="row">
             <div class="col-md-6 mb-2">
                 <label for="date" class="form-label">मिति<span class="text-danger">*</span></label>
                 <input
                     type="text"
-                    wire:model="activity.date"
+                    wire:model="formActivity.date"
                     class="form-control"
                     id="date"
                     placeholder="मिति"
                 />
-                @error('activity.date')
+                @error('$formActivity.date')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
@@ -20,19 +19,19 @@
                 <fieldset>
                     <legend>क्रियाकलाप</legend>
                     <button type="button" wire:click.prevent="addActivity">Add</button>
-                    @foreach($activity['activity_lists'] as $index=>$activityList)
+                    @foreach($formActivity['activity_lists'] as $index=>$activityList)
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
                                     name="title"
-                                    wire:model="activity.activity_lists.{{$index}}.title"
+                                    wire:model="formActivity.activity_lists.{{$index}}.title"
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
                                 />
-                                @error('activity.activity_lists.'.$index.'.title')
+                                @error('formActivity.activity_lists.'.$index.'.title')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -40,37 +39,38 @@
                                 <label for="documents" class="form-label">डकुमेन्ट </label>
                                 <input
                                     type="file"
-                                    name="activity.activity_lists.{{$index}}.documents[]"
-                                    wire:model="activity.activity_lists.{{$index}}.documents"
-                                    class="form-control @error('activity.activity_lists.'.$index.'documents') is-invalid @enderror"
+                                    name="formActivity.activity_lists.{{$index}}.documents[]"
+                                    wire:model="formActivity.activity_lists.{{$index}}.documents"
+                                    class="form-control @error('formActivity.activity_lists.'.$index.'documents') is-invalid @enderror"
                                     id="Documents"
                                     multiple/>
-                                @error('activity.activity_lists.'.$index.'documents')
+                                @error('formActivity.activity_lists.'.$index.'documents')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                                @error('activity.activity_lists.'.$index.'documents.*')
+                                @error('formActivity.activity_lists.'.$index.'documents.*')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="activity.activity_lists.{{$index}}.description"
+                                <label for="formActivity.activity_lists.{{$index}}.description"
                                        class="form-label">विवरण</label>
-                                <textarea name="activity[activity_lists][{{$index}}][description]"
-                                          id="activity.activity_lists.{{$index}}.description" cols="30" rows="5"
-                                          class="form-control ckEditor @error('remarks') is-invalid @enderror"
+                                <textarea name="formActivity[activity_lists][{{$index}}][description]"
+                                          wire:model="formActivity.activity_lists.{{$index}}.description"
+                                          id="formActivity.activity_lists.{{$index}}.description" cols="30" rows="5"
+                                          class="form-control ckEditor @error('formActivity.activity_lists.'.$index.'description') is-invalid @enderror"
                                           placeholder="विवरण"></textarea>
-                                @error('remarks')
+                                @error('formActivity.activity_lists.'.$index.'description')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="remarks" class="form-label">कैफ़ियत</label>
-                                <textarea name="activity.[activity_lists][{{$index}}][remarks]"
-                                          wire:model="activity.activity_lists.{{$index}}.remarks"
+                                <textarea name="formActivity.[activity_lists][{{$index}}][remarks]"
+                                          wire:model="formActivity.activity_lists.{{$index}}.remarks"
                                           id="remarks" cols="30" rows="5"
-                                          class="form-control @error('activity.activity_lists.'.$index.'remarks') is-invalid @enderror"
+                                          class="form-control @error('formActivity.activity_lists.'.$index.'remarks') is-invalid @enderror"
                                           placeholder="कैफ़ियत"></textarea>
-                                @error('activity.activity_lists.'.$index.'remarks')
+                                @error('formActivity.activity_lists.'.$index.'remarks')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -82,12 +82,13 @@
             </div>
 
             <div class="col-md-12 mb-2">
-                <label for="remarks" class="form-label">कैफ़ियत</label>
-                <textarea name="remarks"
-                          id="remarks" cols="30" rows="5"
-                          class="form-control summernote @error('remarks') is-invalid @enderror"
-                          placeholder="कैफ़ियत">{{old('remarks')}}</textarea>
-                @error('remarks')
+                <label for="formActivity.remarks" class="form-label">कैफ़ियत</label>
+                <textarea name="formActivity.remarks"
+                          id="formActivity.remarks" cols="30" rows="5"
+                          wire:model="formActivity.remarks"
+                          class="form-control @error('formActivity.remarks') is-invalid @enderror"
+                          placeholder="कैफ़ियत"></textarea>
+                @error('formActivity.remarks')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
@@ -104,8 +105,8 @@
         @endpush
     @endonce
     @push('scripts')
-{{--        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>--}}
-{{--        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>--}}
+        {{--        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>--}}
+        {{--        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>--}}
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#date").nepaliDatePicker({

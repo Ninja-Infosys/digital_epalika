@@ -12,7 +12,7 @@ class ActivityController extends Controller
     public function index()
     {
         $this->checkAuthorization('taskActivity_access');
-        $activities = Activity::latest('date_en')->paginate(50);
+        $activities = Activity::with('branch', 'activityLists')->latest('date_en')->paginate(50);
 
         return view('taskmanagement::admin.activity.index', compact('activities'));
     }
@@ -39,7 +39,8 @@ class ActivityController extends Controller
     public function edit(Activity $activity)
     {
         $this->checkAuthorization('taskActivity_edit');
-        return view('taskmanagement::edit');
+        $activity->load('activityLists.files');
+        return view('taskmanagement::admin.activity.edit', compact('activity'));
     }
 
     public function update(Request $request, Activity $activity)

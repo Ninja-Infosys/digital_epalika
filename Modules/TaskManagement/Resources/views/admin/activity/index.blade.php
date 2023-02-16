@@ -25,8 +25,9 @@
                         <h4 class="header-title mb-0">कार्यहरू </h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                                <a href="{{route('admin.taskManagement.activity.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
-                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            <a href="{{route('admin.taskManagement.activity.create')}}"
+                               class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                         </div>
                     </div>
                 </div>
@@ -44,34 +45,44 @@
                             </thead>
                             <tbody>
                             @forelse($activities as $activity)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                        <a data-bs-type="edit" href="{{route('admin.taskManagement.activities.edit',$activity)}}"
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        {{$activity->date}}
+                                    </td>
+                                    <td>
+                                        {{$activity->branch->title ?? ''}}
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            @foreach($activity->activityLists as $list)
+                                                <li>{{$list->title}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.taskManagement.activity.edit',$activity)}}"
                                            title="सम्पादन गर्नुहोस्"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{route('admin.taskManagement.activities.destroy',$activity)}}"
+                                        <form action="{{route('admin.taskManagement.activity.destroy',$activity)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
+                                            <button data-bs-type="delete"
+                                                    class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                    title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             @empty
-                            <tr>
-                                <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
                             @endforelse
                             </tbody>
                         </table>
