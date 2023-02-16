@@ -25,7 +25,7 @@ class RegistrationDetailController extends Controller
     public function create()
     {
         $this->checkAuthorization('recommendation_create');
-        $recommendationCategories = RecommendationCategory::all();
+        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
         $personalDetails = PersonalDetail::all();
         return view('recommendation::admin.registration.create', compact('recommendationCategories', 'personalDetails'));
     }
@@ -34,8 +34,10 @@ class RegistrationDetailController extends Controller
     {
         $this->checkAuthorization('recommendation_create');
         DB::transaction(function () use ($request) {
-            $registrationDetail = RegistrationDetail::create($request->validated());
-            if($request->input('files')) {
+            $registrationDetail = RegistrationDetail::create($request->validated() + [
+                    'fiscal_year_id' => officeSetting()->fiscal_year_id
+                ]);
+            if ($request->input('files')) {
                 foreach ($request->validated()['files'] as $file) {
                     $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
                     $registrationDetail->files()->create([
@@ -54,14 +56,14 @@ class RegistrationDetailController extends Controller
     public function show(RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_access');
-        $registrationDetail->load('personalDetail','files','recommendationCategory');
+        $registrationDetail->load('personalDetail', 'files', 'recommendationCategory');
         return view('recommendation::admin.registration.show', compact('registrationDetail'));
     }
 
     public function edit(RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_edit');
-        $recommendationCategories = RecommendationCategory::all();
+        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
         $personalDetails = PersonalDetail::all();
         return view('recommendation::admin.registration.edit', compact('registrationDetail', 'recommendationCategories', 'personalDetails'));
     }
@@ -96,7 +98,7 @@ class RegistrationDetailController extends Controller
                         'file' => $file_data,
                         'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
                         'extension' => $file->getClientOriginalExtension(),
-                        'type'=>'OcFile'
+                        'type' => 'OcFile'
                     ]);
                 }
             }
