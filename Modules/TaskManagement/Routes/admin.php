@@ -7,7 +7,7 @@ use Modules\TaskManagement\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-Route::resource('activity', ActivityController::class);
+Route::resource('activity', ActivityController::class)->except('store', 'update');
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');

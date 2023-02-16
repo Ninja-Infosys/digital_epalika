@@ -24,16 +24,12 @@ class ActivityController extends Controller
         return view('taskmanagement::admin.activity.create');
     }
 
-    public function store(Request $request)
-    {
-        $this->checkAuthorization('taskActivity_create');
-        //
-    }
 
     public function show(Activity $activity)
     {
         $this->checkAuthorization('taskActivity_access');
-        return view('taskmanagement::show');
+        $activity->load('activityLists.files');
+        return view('taskmanagement::admin.activity.show', compact('activity'));
     }
 
     public function edit(Activity $activity)
@@ -43,15 +39,15 @@ class ActivityController extends Controller
         return view('taskmanagement::admin.activity.edit', compact('activity'));
     }
 
-    public function update(Request $request, Activity $activity)
-    {
-        $this->checkAuthorization('taskActivity_edit');
-        //
-    }
 
     public function destroy(Activity $activity)
     {
         $this->checkAuthorization('taskActivity_delete');
-        //
+        $activity->load('activityLists');
+        foreach ($activity->activityLists as $activityList) {
+            $activityList->files()->delete();
+        }
+        $activity->activityLists()->delete();
+        $activity->delete();
     }
 }
