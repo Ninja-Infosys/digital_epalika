@@ -35,9 +35,8 @@
                                 target-table="report-table"
                             />
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="वडा नं अनुसार रिपोर्ट"
-                                :headerRequired="true"
 
                             />
                         </div>

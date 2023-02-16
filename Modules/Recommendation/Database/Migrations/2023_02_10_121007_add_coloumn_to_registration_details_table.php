@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('registration_details', function (Blueprint $table) {
-            $table->string('date_ne')->nullable()->comment('नेपाली मिति');
-            $table->string('date_en')->nullable()->comment('अंग्रेजी मिति');
+            $table->string('date_ne')->nullable()->comment('मिति वि.स.');
+            $table->string('date_en')->nullable()->comment('मिति ई.स');
         });
     }
 

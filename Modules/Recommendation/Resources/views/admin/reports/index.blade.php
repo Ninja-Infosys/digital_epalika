@@ -45,7 +45,7 @@
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" data-bs-url="{{route('admin.businessRegistration.report.report-data')}}">
+                        <form id="report-filter-form" data-bs-url="{{route('admin.recommendation.report.report-data')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
