@@ -8,6 +8,7 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Entities\DailyTask;
 
 class ReportController extends Controller
@@ -15,35 +16,46 @@ class ReportController extends Controller
     public function index()
     {
         $fiscalYears = FiscalYear::get();
-        $branches=Branch::whereNull('branch_id')->get();
-        $columnData = $this->getColumns();
-
-        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'columnData', 'branches'));
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $activities = [];
+        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'activities'));
     }
 
     public function report(Request $request)
     {
-        $request->validate([
-            'from_date' => ['nullable'],
-            'to_date' => ['nullable', 'after_or_equal:from_date'],
-            'columns' => ['nullable', 'array']
-        ]);
-
-        $dailyTasks = DailyTask::with('branch', 'taskCategory', 'taskDivision')->where(function ($q) use ($request) {
-            $this->filterDataFromUser($q, $request);
-        })
-            ->get();
-
-        return response()->json([
-            'view' => (string)View::make('taskmanagement::admin.report.table_data', compact('dailyTasks'))
-        ]);
+        $fiscalYears = FiscalYear::get();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })
+            ->get()
+            ->map(function ($activity) {
+                $data = collect([
+                    'date' => $activity->date,
+                    'user' => $activity->user->name ?? '',
+                    'branch' => $activity->branch->name ?? '',
+                    'remarks' => $activity->remarks ?? '',
+                ]);
+                $list = [];
+                foreach ($activity->activityLists as $key => $activityList) {
+                    $list[] = [
+                        'title' => $activityList->title,
+                        'description' => $activityList->description,
+                        'remarks' => $activityList->remarks,
+                    ];
+                }
+                $data->put('list', $list);
+                return $data;
+            });
+        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'activities'));
     }
 
     private function getColumns(): Collection
     {
         $columnData = collect();
 
-        (new DailyTask())
+        (new Activity())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
                 return array_keys($column, 'DailyTask');
@@ -68,16 +80,8 @@ class ReportController extends Controller
             $q->whereDate('date', '<=', $request->input('to_date'));
         }
 
-        if (!empty($request->input('sub_branch_id'))) {
-            $q->whereIn('branch_id', $request->input('sub_branch_id'));
-        }
-
-        if (!empty($request->input('task_category_id'))) {
-            $q->whereIn('task_category_id', $request->input('task_category_id'));
-        }
-
-        if (!empty($request->input('task_division_id'))) {
-            $q->whereIn('task_division_id', $request->input('task_division_id'));
+        if (!empty($request->input('branch_id'))) {
+            $q->whereIn('branch_id', $request->input('branch_id'));
         }
     }
 }

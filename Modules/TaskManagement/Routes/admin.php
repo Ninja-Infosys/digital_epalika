@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\TaskManagement\Http\Controllers\Admin\ActivityController;
+use Modules\TaskManagement\Http\Controllers\Admin\AllActivityController;
 use Modules\TaskManagement\Http\Controllers\Admin\DashboardController;
 use Modules\TaskManagement\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
+Route::resource('allActivity', AllActivityController::class)->only('index');
 Route::resource('activity', ActivityController::class)->except('store', 'update');
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
