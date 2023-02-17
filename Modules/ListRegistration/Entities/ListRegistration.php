@@ -48,22 +48,13 @@ class ListRegistration extends Model
         'business_nature',
         'business_nature_description',
         'date',
+        'en_date'
     ];
 
-//    protected $casts = [
-//        'applicant_type' => ApplicantCategoryEnum::class,
-//        'business_nature' => BusinessNatureEnum::class
-//    ];
-
-    public function getApplicantTypeAttribute(): string
-    {
-        return ApplicantCategoryEnum::tryFrom($this->attributes['applicant_type'])?->label();
-    }
-
-    public function getBusinessNatureAttribute(): string
-    {
-        return BusinessNatureEnum::tryFrom($this->attributes['business_nature'])?->label();
-    }
+    protected $casts = [
+        'applicant_type' => ApplicantCategoryEnum::class,
+        'business_nature' => BusinessNatureEnum::class
+    ];
 
     protected function ApplicationPhoto(): Attribute
     {

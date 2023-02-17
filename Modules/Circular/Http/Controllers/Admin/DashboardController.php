@@ -4,6 +4,7 @@ namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
+use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Modules\Circular\Entities\Dispatch;
@@ -15,13 +16,15 @@ class DashboardController extends Controller
 
     protected Collection $currentYearRegistrations;
     protected Collection $currentYearDispatches;
+    protected OfficeSetting $officeSetting;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->currentYearRegistrations = Registration::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
-        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
+        $this->officeSetting = officeSetting();
+        $this->currentYearRegistrations = Registration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
     }
 
     public function __invoke()
@@ -35,9 +38,9 @@ class DashboardController extends Controller
         if (request()->ajax()) {
             return [
                 'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
-                'totalMonthRegistrationAndDispatch'=>$this->getCurrentFyRegistrationAndDispatch()
+                'totalMonthRegistrationAndDispatch' => $this->getCurrentFyRegistrationAndDispatch()
             ];
-                }
+        }
         return view(
             'circular::admin.dashboard',
             compact(
@@ -54,7 +57,15 @@ class DashboardController extends Controller
      */
     public function getFyRegistrationAndDispatchData(): array
     {
-        $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])->get();
+        $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])
+            ->get()
+            ->map(function ($fiscalYear) {
+                return [
+                    'title' => $fiscalYear->title,
+                    'registrations_count' => (int)$fiscalYear->registrations_count,
+                    'dispatch_count' => (int)$fiscalYear->dispatch_count,
+                ];
+            });
 
         return [
             'labels' => $fiscalYears->pluck('title')->toArray(),
@@ -62,12 +73,10 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
                     'label' => 'दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
                     'label' => 'चलानी',
-                    'fill' => 'false',
                 ],
             ],
         ];
@@ -89,12 +98,10 @@ class DashboardController extends Controller
                 [
                     'data' => $monthlyRegistrations,
                     'label' => 'दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $monthlyDispatches,
                     'label' => 'चलानी',
-                    'fill' => 'false',
                 ],
             ],
         ];

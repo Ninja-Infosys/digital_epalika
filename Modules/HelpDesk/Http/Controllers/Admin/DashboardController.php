@@ -14,18 +14,17 @@ class DashboardController extends Controller
         $sub_branch_count = Branch::subBranch()->count();
         $service_count = Service::count();
 
-        $branchesData = $this->getTotalBranchesData();
-        $branchServicesData = $this->getTotalServiceData();
-        $subBranchServicesData = $this->getTotalSubBranchesData();
-
+        if(request()->ajax()){
+            return [
+            'branchServicesData' => $this->getTotalServiceData(),
+            'subBranchServicesData' => $this->getTotalSubBranchesData(),
+            ];
+        }
 
         return view('helpdesk::admin.dashboard', compact(
             'main_branch_count',
             'sub_branch_count',
             'service_count',
-            'branchesData',
-            'branchServicesData',
-            'subBranchServicesData'
         ));
     }
 
@@ -38,29 +37,12 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $branches->pluck('total_service_count')->toArray(),
-                    'label' => 'उप शाखा ',
-                    'fill' => 'false',
+                    'label' => 'उप शाखा '
                 ]
             ],
         ];
     }
 
-
-    public function getTotalBranchesData(): array
-    {
-        $branches = Branch::withCount('branches')->mainBranch()->get();
-
-        return [
-            'labels' => $branches->pluck('branch_name')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $branches->pluck('branches_count')->toArray(),
-                    'label' => 'सेवा',
-                    'fill' => 'false',
-                ]
-            ],
-        ];
-    }
     public function getTotalSubBranchesData(): array
     {
         $branches = Branch::withCount('services')->subBranch()->get();
@@ -70,8 +52,7 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $branches->pluck('services_count')->toArray(),
-                    'label' => 'सेवा',
-                    'fill' => 'false',
+                    'label' => 'सेवा'
                 ]
             ],
         ];
