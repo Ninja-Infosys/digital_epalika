@@ -4,6 +4,8 @@ namespace Modules\JudicialCommittee\Http\Requests\ComplaintDecision;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rules\Enum;
+use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 
 class StoreComplaintDecisionRequest extends FormRequest
 {
@@ -18,7 +20,8 @@ class StoreComplaintDecisionRequest extends FormRequest
             'description' => ['required'],
             'submitted_date' => ['required'],
             'files' => ['nullable', 'array'],
-            'files.*' => ['mimes:jpg,png,jpeg,pdf']
+            'files.*' => ['mimes:jpg,png,jpeg,pdf'],
+            'application_status' => ['nullable', new Enum(ComplaintApplicationStatusEnum::class)]
         ];
     }
 

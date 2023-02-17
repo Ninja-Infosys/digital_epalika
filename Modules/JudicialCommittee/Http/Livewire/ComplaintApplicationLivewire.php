@@ -18,6 +18,7 @@ use Modules\JudicialCommittee\Entities\LawsuitNature;
 use Modules\JudicialCommittee\Entities\RelatedMember;
 use Modules\JudicialCommittee\Entities\Witness;
 use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
+use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 
 class ComplaintApplicationLivewire extends Component
@@ -207,7 +208,8 @@ class ComplaintApplicationLivewire extends Component
                 $complaintApplication = ComplaintApplication::create($this->validate()['form'] + [
                         'fiscal_year_id' => \officeSetting()->fiscal_year_id,
                         'submission_no' => \officeSetting()->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0),
-                        'subject' => ComplaintSubject::find($this->form['complaint_subject_id'])->subject ?? null
+                        'subject' => ComplaintSubject::find($this->form['complaint_subject_id'])->subject ?? null,
+                        'application_status' => ComplaintApplicationStatusEnum::PENDING
                     ]);
                 //complaint log event
                 event(new ComplaintLogEvent($complaintApplication->id, ComplaintApplication::class, $complaintApplication->id, 'निवेदन दर्ता', "$complaintApplication->date गते निवेदन दर्ता गरियो"));
@@ -274,7 +276,7 @@ class ComplaintApplicationLivewire extends Component
     {
         $this->complaintApplication = $complaintApplication;
 
-        foreach (Arr::except($this->form, ['relatedMembers', 'witnesses', 'complaintDefendants', 'applicant_signature','supportedDocuments']) as $key => $data) {
+        foreach (Arr::except($this->form, ['relatedMembers', 'witnesses', 'complaintDefendants', 'applicant_signature', 'supportedDocuments']) as $key => $data) {
             $this->form[$key] = $complaintApplication[$key];
         }
 
@@ -310,7 +312,7 @@ class ComplaintApplicationLivewire extends Component
             ];
         }
 
-        foreach ($complaintApplication->witnesses->where('type',ComplainantDefendantTypeEnum::COMPLAINANT) as $witness) {
+        foreach ($complaintApplication->witnesses->where('type', ComplainantDefendantTypeEnum::COMPLAINANT) as $witness) {
             $this->form['witnesses'][] = [
                 'id' => $witness->id,
                 'name' => $witness->name ?? null,
