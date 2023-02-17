@@ -18,6 +18,7 @@ class ReportController extends Controller
 
     public function index()
     {
+        $this->checkAuthorization('recommendationReport_main');
         $fiscalYears = FiscalYear::all();
         $columnData = $this->getColumns();
         $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
@@ -88,6 +89,7 @@ class ReportController extends Controller
 
     public function wardWise()
     {
+        $this->checkAuthorization('recommendationReport_ward');
         $fiscalYears = FiscalYear::all();
         $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
         return view('recommendation::admin.reports.ward-wise', compact('fiscalYears', 'recommendationCategories'));
@@ -140,6 +142,7 @@ class ReportController extends Controller
 
     public function recommendationCategoryWise()
     {
+        $this->checkAuthorization('recommendationReport_recommendationCategory');
         $fiscalYears = FiscalYear::all();
         $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
         return view('recommendation::admin.reports.recommendation-category-wise', compact('fiscalYears', 'recommendationCategories'));
@@ -185,6 +188,7 @@ class ReportController extends Controller
 
     public function personalDetail()
     {
+        $this->checkAuthorization('recommendationReport_personalDetail');
         $fiscalYears = FiscalYear::all();
         $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
         return view('recommendation::admin.reports.personal-detail-report', compact('fiscalYears', 'recommendationCategories'));

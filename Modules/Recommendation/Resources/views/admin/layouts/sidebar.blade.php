@@ -5,20 +5,20 @@
     </a>
 </li>
 @can('personalDetail_access')
-<li class="{{request()->is('admin/recommendation/setting/personalDetail*') ? 'active' : ''}}">
-    <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
-        <i class="fa fa-user"></i>
-        <span>व्यक्तिगत विवरण</span>
-    </a>
-</li>
+    <li class="{{request()->is('admin/recommendation/setting/personalDetail*') ? 'active' : ''}}">
+        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
+            <i class="fa fa-user"></i>
+            <span>व्यक्तिगत विवरण</span>
+        </a>
+    </li>
 @endcan
 @can('recommendation_access')
-<li class="{{request()->is('admin/recommendation/registrationDetail*') ? 'active' : ''}}">
-    <a href="{{route('admin.recommendation.registrationDetail.index')}}">
-        <i class="fa fa-id-card"></i>
-        <span>सिफारिस</span>
-    </a>
-</li>
+    <li class="{{request()->is('admin/recommendation/registrationDetail*') ? 'active' : ''}}">
+        <a href="{{route('admin.recommendation.registrationDetail.index')}}">
+            <i class="fa fa-id-card"></i>
+            <span>सिफारिस</span>
+        </a>
+    </li>
 @endcan
 <li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">
     <a href="#recommendationReport"
@@ -34,26 +34,34 @@
         class="collapse {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'show' : ''}}"
         id="recommendationReport">
         <ul class="nav-second-level">
-            <li class="{{request()->is('admin/recommendation/report') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.report.index')}}">
-                    <span>प्रतिवेदन</span>
-                </a>
-            </li>
-            <li class="{{request()->is('admin/recommendation/report/ward-wise') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.report.ward-wise')}}">
-                    <span>वडा नं अनुसार</span>
-                </a>
-            </li>
-            <li class="{{request()->is('admin/recommendation/report/recommendation-category-wise') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.report.recommendation-category-wise')}}">
-                    <span>सिफारिस अनुसार</span>
-                </a>
-            </li>
-            <li class="{{request()->is('admin/recommendation/report/personal-detail') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.report.personal-detail')}}">
-                    <span>व्यक्तिगत अनुसार</span>
-                </a>
-            </li>
+            @can('recommendationReport_main')
+                <li class="{{request()->is('admin/recommendation/report') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.report.index')}}">
+                        <span>प्रतिवेदन</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationReport_ward')
+                <li class="{{request()->is('admin/recommendation/report/ward-wise') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.report.ward-wise')}}">
+                        <span>वडा नं अनुसार</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationReport_recommendationCategory')
+                <li class="{{request()->is('admin/recommendation/report/recommendation-category-wise') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.report.recommendation-category-wise')}}">
+                        <span>सिफारिस अनुसार</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationReport_personalDetail')
+                <li class="{{request()->is('admin/recommendation/report/personal-detail') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.report.personal-detail')}}">
+                        <span>व्यक्तिगत अनुसार</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
@@ -72,17 +80,17 @@
         id="setting">
         <ul class="nav-second-level">
             @can('recommendationCategory_access')
-            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationCategory')}}">
-                    <span>सिफारिस श्रेणी</span>
-                </a>
-            </li>
+                <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationCategory')}}">
+                        <span>सिफारिस श्रेणी</span>
+                    </a>
+                </li>
 
-            <li class="{{request()->is('admin/recommendation/setting/recommendationSubCategory/recommendationCategory*') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
-                    <span>सिफारिस उप श्रेणी</span>
-                </a>
-            </li>
+                <li class="{{request()->is('admin/recommendation/setting/recommendationSubCategory/recommendationCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
+                        <span>सिफारिस उप श्रेणी</span>
+                    </a>
+                </li>
             @endcan
         </ul>
     </div>

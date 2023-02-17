@@ -13,7 +13,7 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision','conciliationApplication')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision','conciliationApplication','conciliationVerification')
             ->withCount('dateSheets')
             ->withCount('writtenAnswers')
             ->withCount('defendantIssuedDeadlines')
