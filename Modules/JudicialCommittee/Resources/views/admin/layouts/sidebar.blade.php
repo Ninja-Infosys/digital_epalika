@@ -45,9 +45,9 @@
                     <span>प्रतिवेदनहरु</span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/plan/report/annual-progress-report') ? 'active' : ''}}">
-                <a href="{{route('admin.plan.report.annual-progress-report')}}">
-                    <span>वार्षिक प्रगति प्रतिवेदन</span>
+            <li class="{{request()->is('admin/judicialCommittee/report/complainant-defendant-report') ? 'active' : ''}}">
+                <a href="{{route('admin.judicialCommittee.report.complainant-defendant-report-page')}}">
+                    <span>पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट</span>
                 </a>
             </li>
         </ul>
