@@ -22,7 +22,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
         $this->listRegistrations = DB::table('list_registrations')
-            ->selectRaw('applicant_type,business_nature,date,fiscal_year_id')
+            ->selectRaw('applicant_type,business_nature,date,en_date,fiscal_year_id')
             ->whereNull('deleted_at')
             ->get();
     }
@@ -45,7 +45,9 @@ class DashboardController extends Controller
         $yearlyRegistrations = $this->listRegistrations
             ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
             ->count();
-
+        $weeklyRegistrations =  $this->listRegistrations
+            ->whereBetween('en_date', [now()->subWeek()->toDateString(), now()->toDateString() ])
+            ->count();
         $monthlyRegistrations = $this->listRegistrations
             ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
             ->filter(function ($Lr) use ($nepali_date) {
@@ -59,7 +61,8 @@ class DashboardController extends Controller
             compact(
                 'totalRegistrations',
                 'yearlyRegistrations',
-                'monthlyRegistrations'
+                'monthlyRegistrations',
+                'weeklyRegistrations'
             )
         );
     }

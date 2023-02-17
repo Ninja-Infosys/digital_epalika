@@ -15,17 +15,6 @@
                                 <p class="text-muted font-15 mb-0">जम्मा दर्ताहरु</p>
                             </div>
                         </div>
-
-                        <div class="col-sm-6 col-xl-3 border-end">
-                            <div class="d-flex flex-column align-items-center">
-                                <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
-                                </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$yearlyRegistrations}}</span></h3>
-                                <p class="text-muted font-15 mb-0 text-truncate">वार्षिक दर्ताहरु</p>
-                            </div>
-                        </div>
-
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
@@ -35,14 +24,22 @@
                                 <p class="text-muted font-15 mb-0">मासिक दर्ताहरु</p>
                             </div>
                         </div>
-
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$weeklyRegistrations}}</span></h3>
+                                <p class="text-muted font-15 mb-0">साप्ताहिक दर्ताहरु</p>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-xl-3">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-map avatar-title font-18 text-white"></i>
+                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
-                                <p class="text-muted font-15 mb-0">मासिक दर्ता नक्सा</p>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$yearlyRegistrations}}</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate">वार्षिक दर्ताहरु</p>
                             </div>
                         </div>
 
