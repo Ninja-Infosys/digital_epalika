@@ -17,6 +17,7 @@ class TaskManagementPermissionSeederTableSeeder extends Seeder
             'taskActivity_create',
             'taskActivity_edit',
             'taskActivity_delete',
+            'allTaskActivity_access'
         ];
 
         $this->storePermission($permissions);

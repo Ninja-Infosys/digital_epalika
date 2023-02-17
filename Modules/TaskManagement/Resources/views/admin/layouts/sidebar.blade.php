@@ -12,6 +12,14 @@
         </a>
     </li>
 @endcan
+@can('allTaskActivity_access')
+    <li class="{{request()->RouteIs('admin.taskManagement.allActivity.*') ? 'active' : ''}}">
+        <a href="{{route('admin.taskManagement.allActivity.index')}}">
+            <i class="fa fa-tasks"></i>
+            <span>सबै क्रियाकलाप</span>
+        </a>
+    </li>
+@endcan
 
 <li class="{{request()->is('admin/taskmanagement/report') ? 'active' : ''}}">
     <a href="{{route('admin.taskManagement.report.index')}}">
