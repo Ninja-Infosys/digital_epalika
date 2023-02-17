@@ -13,6 +13,7 @@ use Modules\DigitalBoard\Entities\Notice;
 use Modules\EMap\Entities\MapApply;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\Revenue\Entities\Invoice;
+use Modules\Roaster\Entities\Training;
 use Modules\TaskManagement\Entities\DailyTask;
 
 class FiscalYear extends Model
@@ -64,5 +65,10 @@ class FiscalYear extends Model
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function trainings(): HasMany
+    {
+        return $this->hasMany(Training::class);
     }
 }

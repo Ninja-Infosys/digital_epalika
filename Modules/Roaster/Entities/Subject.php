@@ -5,6 +5,7 @@ namespace Modules\Roaster\Entities;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subject extends Model
@@ -26,7 +27,7 @@ class Subject extends Model
         'content',
     ];
 
-    public function trainers()
+    public function trainers(): BelongsToMany
     {
         return $this->belongsToMany(Trainer::class);
     }
