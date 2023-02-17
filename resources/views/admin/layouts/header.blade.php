@@ -72,7 +72,7 @@
                    href="#" role="button" aria-haspopup="false" aria-expanded="true">
                     <i class="fas fa-th noti-icon"></i>
                 </a>
-                <div class="dropdown-menu dropdown-xl dropdown-menu-end" data-popper-placement="bottom-end">
+                <div class="dropdown-menu dropdown-lg dropdown-menu-end" data-popper-placement="bottom-end">
                     @includeIf('admin.layouts.menu_list')
                 </div>
             </li>

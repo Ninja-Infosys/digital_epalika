@@ -34,6 +34,8 @@
                 </a>
             </div>
         @endif
+    </div>
+    <div class="row g-0">
         @if(Route::has('admin.helpDesk.dashboard'))
             <div class="col">
                 <a class="dropdown-icon-item" href="{{route('admin.helpDesk.dashboard')}}">
@@ -42,8 +44,6 @@
                 </a>
             </div>
         @endif
-    </div>
-    <div class="row g-0">
         @if(Route::has('admin.grievanceHandling.dashboard'))
             <div class="col">
                 <a class="dropdown-icon-item" href="{{route('admin.grievanceHandling.dashboard')}}">
@@ -60,6 +60,8 @@
                 </a>
             </div>
         @endif
+    </div>
+    <div class="row g-0">
         @if(Route::has('emap.admin.dashboard'))
             <div class="col">
                 <a class="dropdown-icon-item" href="{{route('emap.admin.dashboard')}}">
@@ -77,8 +79,6 @@
                 </a>
             </div>
         @endif
-    </div>
-    <div class="row g-0">
         @if(Route::has('admin.recommendation.dashboard'))
             <div class="col">
                 <a class="dropdown-icon-item" href="{{route('admin.recommendation.dashboard')}}">
@@ -87,6 +87,8 @@
                 </a>
             </div>
         @endif
+    </div>
+    <div class="row g-0">
         @if(Route::has('admin.taskManagement.dashboard'))
             <div class="col">
                 <a class="dropdown-icon-item" href="{{route('admin.taskManagement.dashboard')}}">
@@ -137,8 +139,10 @@
                 </a>
             </div>
         @endif
+    </div>
+    <div class="row g-0">
         @if(Route::has('identity.admin.dashboard'))
-            <div class="col">
+            <div class="col-4">
                 <a class="dropdown-icon-item" href="{{route('identity.admin.dashboard')}}">
                     <img src="{{asset('assets/backend/images/modules/identity.png')}}" alt="">
                     <span>परिचयपत्र</span>
