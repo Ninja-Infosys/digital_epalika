@@ -29,16 +29,94 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="collapse mb-2" id="collapseFilterForm">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <label for="recommendation_category" class="form-label">सिफारिस *</label>
+                                    <select name="recommendation_category"  data-toggle="select2"
+                                            id="recommendation_category" class="form-control" >
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($recommendationCategories as $recommendationCategory)
+                                            @if(count($recommendationCategory->recommendationCategories)>0)
+                                                <optgroup label="{{$recommendationCategory->title}}">
+                                                    @foreach($recommendationCategory->recommendationCategories as $subRecommendationCategory)
+                                                        <option {{request('recommendation_category') == $subRecommendationCategory->id ? 'selected':''}}
+                                                            value="{{$subRecommendationCategory->id}}">
+                                                            {{$subRecommendationCategory->title}}
+                                                        </option>
+                                                    @endforeach
+                                                </optgroup>
+                                            @else
+                                                <option {{request('recommendation_category') == $recommendationCategory->id ? 'selected':''}}
+                                                    value="{{$recommendationCategory->id}}">
+                                                    {{$recommendationCategory->title}}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="personal_detail" class="form-label">व्यक्तिगत विवरण *</label>
+                                    <select name="personal_detail"  data-toggle="select2"
+                                            id="personal_detail" class="form-control" >
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($personalDetails as $personalDetail)
+                                                <option {{request('personal_detail') == $personalDetail->id ? 'selected':''}}
+                                                    value="{{$personalDetail->id}}">
+                                                    {{$personalDetail->name}}
+                                                </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <x-date-input-component
+                                        nameNe="to_date" labelNe="देखि"
+                                        :get-today-date="false"
+                                        :edit-date-ne="request('to_date')"
+                                    />
+                                </div>
+                                <div class="col-md-4">
+                                    <x-date-input-component
+                                        nameNe="from_date" labelNe="सम्म"
+                                        :get-today-date="false"
+                                        :edit-date-ne="request('from_date')"
+                                    />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="registration_no">दर्ता नं</label>
+                                    <input type="text" name="registration_no" value="{{request('registration_no')}}" id="registration_no"
+                                           placeholder="दर्ता नं" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" class="mt-2 btn btn-sm btn-primary">
+                                <i class="fa fa-search"> पेश गर्नुहोस्</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सिफारिस सूची</h4>
-                        @can('recommendation_create')
-                            <a href="{{ route('admin.recommendation.registrationDetail.create') }}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">सिफारिस सूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('recommendation_create')
+                                <a href="{{ route('admin.recommendation.registrationDetail.create') }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
+                                </a>
+                            @endcan
+                            <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -108,6 +186,7 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$registrationDetails->links()}}
                     </div>
                 </div>
             </div>
