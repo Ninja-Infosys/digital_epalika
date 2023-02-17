@@ -1,86 +1,98 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-4">
-            <div class="widget-rounded-circle card-primary">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center">
-                                    <span data-plugin="counterup">
-                                            {{$totalRegistrations}}
-                                        </span>
-                                </h3>
-                            </div>
-                            <p class="text my-1">जम्मा दर्ताहरु</p>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div>
-        <div class="col-md-4">
-            <div class="widget-rounded-circle card-secondary">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                           {{$yearlyRegistrations}}
-                                       </span>
-                                </h3>
-                            </div>
-                            <p class="text my-1">वार्षिक दर्ताहरु</p>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div>
-        <div class="col-md-4">
-            <div class="widget-rounded-circle card-primary">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center">
-                                    <span data-plugin="counterup">
-                                            {{$monthlyRegistrations}}
-                                        </span>
-                                </h3>
-                            </div>
-                            <p class="text my-1">मासिक दर्ताहरु</p>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div>
-    </div>
     <div class="row mt-2">
+        <div class="col-12">
+            <div class="card widget-inline">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{$totalRegistrations}}</span></h3>
+                                <p class="text-muted font-15 mb-0">जम्मा दर्ताहरु</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup"> {{$monthlyRegistrations}}</span></h3>
+                                <p class="text-muted font-15 mb-0">मासिक दर्ताहरु</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$weeklyRegistrations}}</span></h3>
+                                <p class="text-muted font-15 mb-0">साप्ताहिक दर्ताहरु</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-clipboard-check avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$yearlyRegistrations}}</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate">वार्षिक दर्ताहरु</p>
+                            </div>
+                        </div>
+
+                    </div> <!-- end row -->
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
+    <div class="row" id="charts" data-chart-url="{{route('admin.listRegistrations.dashboard')}}">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="applicant-type-wise-chart"
-                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) आवेदक प्रकार अनुसारका सुची दर्ताहरु"
-                        :labels="$applicantTypeWiseData['labels']"
-                        :dataSets="$applicantTypeWiseData['dataSets']"
-                    />
+                    <div id="applicantTypeWiseData" chart-type="pie" chart-title="चालु आ.व. आवेदक प्रकार अनुसारका सुची दर्ताहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="business-nature-wise-chart"
-                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) खरिद प्रकृति अनुसारका सुची दर्ताहरु"
-                        :labels="$businessNatureWiseData['labels']"
-                        :dataSets="$businessNatureWiseData['dataSets']"
-                    />
+                    <div id="businessNatureWiseData" chart-type="pie" chart-title="चालु आ.व. खरिद प्रकृति अनुसारका सुची दर्ताहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="monthWise" chart-type="column" chart-title="चालु आ.व.को महिना अनुसारका सुची दर्ताहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    @endpush
 @endsection
 

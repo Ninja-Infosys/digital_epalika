@@ -285,6 +285,7 @@
                                         nameEn="en_date" labelEn="Date"
                                         :getTodayDate="false"
                                         :editDateNe="$listRegistration->date"
+                                        :editDateEn="$listRegistration->en_date"
                                     />
                                 </div>
                             </div>

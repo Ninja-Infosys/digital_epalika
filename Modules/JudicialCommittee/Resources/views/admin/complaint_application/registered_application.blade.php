@@ -124,13 +124,15 @@
                                                 @endif
                                                 @if($complaintApplication->conciliationApplication)
                                                     @can('conciliationVerification_access')
-                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.index', $complaintApplication) }}"
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.conciliationVerification.index', $complaintApplication) }}"
                                                            class="dropdown-item">
-                                                            <i class="fa fa-file-alt"> ममिलापत्र प्रमाणीकरण आदेश </i>
+                                                            <i class="fa fa-file-alt"> मिलापत्र प्रमाणीकरण आदेश </i>
                                                         </a>
                                                     @endcan
-                                                    @can('complaintDecision_access')
-                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.index', $complaintApplication) }}"
+                                                @endif
+                                                @if($complaintApplication->conciliationVerification)
+                                                    @can('conciliation_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.conciliation.index', $complaintApplication) }}"
                                                            class="dropdown-item">
                                                             <i class="fa fa-file-alt"> मिलापत्र </i>
                                                         </a>
