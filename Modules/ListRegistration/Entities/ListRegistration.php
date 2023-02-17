@@ -48,6 +48,7 @@ class ListRegistration extends Model
         'business_nature',
         'business_nature_description',
         'date',
+        'en_date'
     ];
 
     protected $casts = [
