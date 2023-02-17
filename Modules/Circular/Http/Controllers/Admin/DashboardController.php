@@ -4,7 +4,6 @@ namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Modules\Circular\Entities\Dispatch;
@@ -16,15 +15,13 @@ class DashboardController extends Controller
 
     protected Collection $currentYearRegistrations;
     protected Collection $currentYearDispatches;
-    protected OfficeSetting $officeSetting;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->officeSetting = OfficeSetting::first();
-        $this->currentYearRegistrations = Registration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
-        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+        $this->currentYearRegistrations = Registration::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
+        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
     }
 
     public function __invoke()
