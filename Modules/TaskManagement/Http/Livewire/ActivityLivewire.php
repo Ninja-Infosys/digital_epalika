@@ -90,7 +90,12 @@ class ActivityLivewire extends Component
             if (!empty($this->DbActivity)) {
                 $this->DbActivity->update($this->formActivity);
             } else {
-                $this->DbActivity = Activity::create($this->formActivity + ['user_id' => auth()->id(), 'branch_id' => auth()->user()->branch_id, 'fiscal_year_id' => officeSetting()->fiscal_year_id]);
+                $this->DbActivity = Activity::create($this->formActivity +
+                    [
+                        'user_id' => auth()->id(),
+                        'branch_id' => auth()->user()->branch_id,
+                        'fiscal_year_id' => officeSetting()->fiscal_year_id
+                    ]);
             }
 
             foreach ($this->formActivity['activity_lists'] as $activityList) {

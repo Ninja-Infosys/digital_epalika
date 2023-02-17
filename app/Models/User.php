@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
+use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
 {
@@ -64,14 +65,14 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value): void
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
 
     public function setPinAttribute($value): void
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             $this->attributes['pin'] = bcrypt($value);
         }
     }
@@ -85,8 +86,8 @@ class User extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -111,6 +112,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
     public function getAvatarAttribute(): string
     {
         $name = $this->attributes['name'] ?? 'User';
@@ -119,6 +121,11 @@ class User extends Authenticatable
 
     public function letterHead(): MorphOne
     {
-        return $this->morphOne(LetterHead::class,'model');
+        return $this->morphOne(LetterHead::class, 'model');
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(Activity::class);
     }
 }

@@ -52,5 +52,7 @@ class ActivityController extends Controller
         }
         $activity->activityLists()->delete();
         $activity->delete();
+        toast('सफलतापूर्वक हटाइयो', 'success');
+        return redirect(route('admin.taskManagement.activity.index'));
     }
 }
