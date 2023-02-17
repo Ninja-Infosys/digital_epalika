@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Http\Requests\PersonalDetail\StorePersonalDetailRequest;
 use Modules\Recommendation\Http\Requests\PersonalDetail\UpdatePersonalDetailRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class PersonalDetailController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('personalDetail_access');
-        $personalDetails = PersonalDetail::all();
+        $personalDetails = PersonalDetail::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name', 'phone_no', 'reg_no','gender'], request('search'));
+            }
+        })->latest()
+            ->paginate(15);
         return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
     }
 

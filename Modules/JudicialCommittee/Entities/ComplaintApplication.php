@@ -155,4 +155,9 @@ class ComplaintApplication extends Model
     {
         return $this->hasOne(ConciliationVerification::class);
     }
+
+    public function conciliation(): HasOne
+    {
+        return $this->hasOne(Conciliation::class);
+    }
 }
