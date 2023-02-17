@@ -35,6 +35,7 @@ class StoreListRegistrationRequest extends FormRequest
             'business_nature' => ['required',new Enum(BusinessNatureEnum::class)],
             'business_nature_description' => ['required'],
             'date' => ['required'],
+            'en_date' => ['required','date'],
             'files' => ['nullable', 'array'],
             'files.*.file_name' => ['required'],
             'files.*.file' => ['required', 'mimes:jpg,jpeg,png,pdf'],
