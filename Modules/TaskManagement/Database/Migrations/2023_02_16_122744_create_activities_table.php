@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('date')->comment('मिति बि.सं.');
             $table->string('date_en')->comment('मिति ई.सं.');
             $table->foreignId('branch_id')->nullable()->constrained('branches')->nullOnDelete()->comment('शाखा');
+            $table->foreignId('fiscal_year_id')->nullable()->constrained('fiscal_years')->nullOnDelete()->comment('शाखा');
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->comment('कार्य गरेको व्यक्ति');
             $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
