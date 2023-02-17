@@ -28,6 +28,10 @@ class RecommendationPermissionTableSeeder extends Seeder
             'personalDetail_create',
             'personalDetail_edit',
             'personalDetail_delete',
+            'recommendationReport_main',
+            'recommendationReport_ward',
+            'recommendationReport_recommendationCategory',
+            'recommendationReport_personalDetail',
         ];
 
         $this->storePermission($permissions);
