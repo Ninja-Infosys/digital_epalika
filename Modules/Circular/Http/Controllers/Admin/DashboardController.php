@@ -22,7 +22,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
 
-        $this->officeSetting = OfficeSetting::first();
+        $this->officeSetting = officeSetting();
         $this->currentYearRegistrations = Registration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
         $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
     }
@@ -38,9 +38,9 @@ class DashboardController extends Controller
         if (request()->ajax()) {
             return [
                 'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
-                'totalMonthRegistrationAndDispatch'=>$this->getCurrentFyRegistrationAndDispatch()
+                'totalMonthRegistrationAndDispatch' => $this->getCurrentFyRegistrationAndDispatch()
             ];
-                }
+        }
         return view(
             'circular::admin.dashboard',
             compact(
@@ -57,7 +57,15 @@ class DashboardController extends Controller
      */
     public function getFyRegistrationAndDispatchData(): array
     {
-        $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])->get();
+        $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])
+            ->get()
+            ->map(function ($fiscalYear) {
+                return [
+                    'title' => $fiscalYear->title,
+                    'registrations_count' => (int)$fiscalYear->registrations_count,
+                    'dispatch_count' => (int)$fiscalYear->dispatch_count,
+                ];
+            });
 
         return [
             'labels' => $fiscalYears->pluck('title')->toArray(),
@@ -65,12 +73,10 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
                     'label' => 'दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
                     'label' => 'चलानी',
-                    'fill' => 'false',
                 ],
             ],
         ];
@@ -92,12 +98,10 @@ class DashboardController extends Controller
                 [
                     'data' => $monthlyRegistrations,
                     'label' => 'दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $monthlyDispatches,
                     'label' => 'चलानी',
-                    'fill' => 'false',
                 ],
             ],
         ];

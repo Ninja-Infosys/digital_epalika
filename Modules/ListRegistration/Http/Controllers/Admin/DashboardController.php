@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Modules\ListRegistration\Entities\ListRegistration;
 use Modules\ListRegistration\Enums\ApplicantCategoryEnum;
 use Modules\ListRegistration\Enums\BusinessNatureEnum;
@@ -20,30 +21,46 @@ class DashboardController extends Controller
     public function __construct()
     {
         parent::__construct();
-
-        $this->officeSetting = OfficeSetting::with('localBody')->first();
-        $this->listRegistrations = ListRegistration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+        $this->listRegistrations = DB::table('list_registrations')
+            ->selectRaw('applicant_type,business_nature,date,fiscal_year_id')
+            ->whereNull('deleted_at')
+            ->get();
     }
 
     public function __invoke()
     {
-        $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
+        $nepali_date = $this->get_nepali_date(today()->format('Y'), today()->format('m'), today()->format('d'));
 
-        $applicantTypeWiseData = $this->getApplicantTypeWiseData();
-        $businessNatureWiseData = $this->getBusinessNatureWiseData();
-        $totalRegistrations = ListRegistration::count();
-        $yearlyRegistrations = $this->listRegistrations->count();
-        $monthlyRegistrations = ListRegistration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->whereMonth('date', $nepali_date['m'])->count();
+        if (request()->ajax()) {
+            return [
+                'applicantTypeWiseData' => $this->getApplicantTypeWiseData(),
+                'businessNatureWiseData' => $this->getBusinessNatureWiseData(),
+                'monthWise'=> $this->getAccordingToMonth()
+            ];
+        }
+
+
+        $totalRegistrations = $this->listRegistrations->count();
+
+        $yearlyRegistrations = $this->listRegistrations
+            ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+            ->count();
+
+        $monthlyRegistrations = $this->listRegistrations
+            ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+            ->filter(function ($Lr) use ($nepali_date) {
+                $date = explode('-', $Lr->date);
+                return $date[1] == $nepali_date['m'];
+            })
+            ->count();
 
         return view(
             'listregistration::admin.dashboard',
             compact(
-            'applicantTypeWiseData',
-            'businessNatureWiseData',
-            'totalRegistrations',
-            'yearlyRegistrations',
-            'monthlyRegistrations'
-        )
+                'totalRegistrations',
+                'yearlyRegistrations',
+                'monthlyRegistrations'
+            )
         );
     }
 
@@ -53,22 +70,15 @@ class DashboardController extends Controller
 
         foreach (ApplicantCategoryEnum::cases() as $applicantType) {
             $applicantTypeWiseData->push([
-                'applicant_type' => $applicantType->label(),
-                'registrations_count' => $this->listRegistrations->where('applicant_type', $applicantType)->count()
+                'name' => $applicantType->label(),
+                'data' => $this->listRegistrations
+                    ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+                    ->where('applicant_type', $applicantType->value)
+                    ->count()
             ]);
         }
 
-        return [
-            'labels' => $applicantTypeWiseData->pluck('applicant_type')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $applicantTypeWiseData->pluck('registrations_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-
-        ];
+        return $applicantTypeWiseData;
     }
 
     private function getBusinessNatureWiseData()
@@ -77,21 +87,35 @@ class DashboardController extends Controller
 
         foreach (BusinessNatureEnum::cases() as $businessNature) {
             $businessNatureWiseData->push([
-                'business_nature' => $businessNature->label(),
-                'registrations_count' => $this->listRegistrations->where('business_nature', $businessNature)->count()
+                'name' => $businessNature->label(),
+                'data' => $this->listRegistrations
+                    ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+                    ->where('business_nature', $businessNature->value)
+                    ->count()
             ]);
         }
 
+        return $businessNatureWiseData;
+    }
+    public function getAccordingToMonth()
+    {
+        $totalCount = collect([0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0]);
+
+        $this->listRegistrations->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+            ->each(function ($notice) use($totalCount) {
+                $nepaliDate = explode('-', $notice->date);
+                $totalCount[(int)$nepaliDate[1]-1] +=1;
+            });
+
         return [
-            'labels' => $businessNatureWiseData->pluck('business_nature')->toArray(),
+            'labels' => $this->month_name,
             'dataSets' => [
                 [
-                    'data' => $businessNatureWiseData->pluck('registrations_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
+                    'data' => $totalCount,
+                    'label' => 'दर्ता'
+                ],
             ],
-
         ];
     }
+
 }

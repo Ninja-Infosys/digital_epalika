@@ -56,31 +56,51 @@
             </div> <!-- end widget-rounded-circle-->
         </div>
     </div>
-    <div class="row mt-2">
+    <div class="row" id="charts" data-chart-url="{{route('admin.listRegistrations.dashboard')}}">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="applicant-type-wise-chart"
-                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) आवेदक प्रकार अनुसारका सुची दर्ताहरु"
-                        :labels="$applicantTypeWiseData['labels']"
-                        :dataSets="$applicantTypeWiseData['dataSets']"
-                    />
+                    <div id="applicantTypeWiseData" chart-type="pie" chart-title="चालु आ.व. आवेदक प्रकार अनुसारका सुची दर्ताहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.pie-chart-component
-                        id="business-nature-wise-chart"
-                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) खरिद प्रकृति अनुसारका सुची दर्ताहरु"
-                        :labels="$businessNatureWiseData['labels']"
-                        :dataSets="$businessNatureWiseData['dataSets']"
-                    />
+                    <div id="businessNatureWiseData" chart-type="pie" chart-title="चालु आ.व. खरिद प्रकृति अनुसारका सुची दर्ताहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="monthWise" chart-type="column" chart-title="चालु आ.व.को महिना अनुसारका सुची दर्ताहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    @endpush
 @endsection
 
