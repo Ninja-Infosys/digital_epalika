@@ -12,7 +12,7 @@ class PersonalDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('personalDetail_access');
-        $personalDetails = PersonalDetail::where(function (Builder $q) {
+        $personalDetails = PersonalDetail::filterData()->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['name', 'phone_no', 'reg_no','gender'], request('search'));
             }
