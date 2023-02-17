@@ -27,11 +27,31 @@
         </a>
     </li>
 @endcan
-<li>
-    <a href="{{ route('admin.judicialCommittee.report.index') }}">
+<li class="{{request()->is('admin/judicialcommittee/report*') ? 'active' : ''}}">
+    <a href="#sidebarJudicialCommitteeReport"
+       {{request()->is('admin/judicialcommittee/report*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
         <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/judicialcommittee/report*') ? 'show' : ''}}"
+         id="sidebarJudicialCommitteeReport">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/plan/report') ? 'active' : ''}}">
+                <a href="{{route('admin.judicialCommittee.report.index')}}">
+                    <span>प्रतिवेदनहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/judicialCommittee/report/complainant-defendant-report') ? 'active' : ''}}">
+                <a href="{{route('admin.judicialCommittee.report.complainant-defendant-report-page')}}">
+                    <span>पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
 <li class="{{ request()->is('admin/judicialcommittee/setting/*') ? 'active' : '' }}">
     <a href="#sidebarJudicialCommitteeSetting"

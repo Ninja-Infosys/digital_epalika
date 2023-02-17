@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\Conciliation;
+use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\Conciliation\StoreConciliationRequest;
 
@@ -22,17 +23,17 @@ class ConciliationController extends Controller
 
         $complaintApplication->load('conciliation.files');
 
-        return view('judicialcommittee::admin.conciliation.index',compact('complaintApplication'));
+        return view('judicialcommittee::admin.conciliation.index', compact('complaintApplication'));
     }
 
     public function create(ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('conciliation_create');
 
-        return view('judicialcommittee::admin.conciliation.create',compact('complaintApplication'));
+        return view('judicialcommittee::admin.conciliation.create', compact('complaintApplication'));
     }
 
-    public function store(StoreConciliationRequest $request,ComplaintApplication $complaintApplication)
+    public function store(StoreConciliationRequest $request, ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('conciliation_create');
 
@@ -49,6 +50,9 @@ class ConciliationController extends Controller
 
         if ($conciliation->wasRecentlyCreated) {
             event(new ComplaintLogEvent($complaintApplication->id, Conciliation::class, $conciliation->id, 'मिलापत्र', "मिति $conciliation->submitted_date मा मिलापत्र पेश गरियो।"));
+            $complaintApplication->update([
+                'application_status' => ComplaintApplicationStatusEnum::COMPLETED
+            ]);
         }
 
         toast('मिलापत्र सफलतापूर्वक पेश गरियो', 'success');

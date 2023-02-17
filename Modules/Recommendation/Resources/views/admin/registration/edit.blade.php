@@ -26,14 +26,14 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">सिफारिस सम्पादन गर्नुहोस</h4>
                         <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
-                            class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('admin.recommendation.registrationDetail.update', $registrationDetail) }}"
-                        method="post" enctype="multipart/form-data">
+                          method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <fieldset>
@@ -68,8 +68,8 @@
 
                                 <div class="col-md-4 mb-2">
                                     <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
-                                    <select name="recommendation_category_id"  data-toggle="select2"
-                                            id="recommendation_category_id" class="form-control" >
+                                    <select name="recommendation_category_id" data-toggle="select2"
+                                            id="recommendation_category_id" class="form-control">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($recommendationCategories as $recommendationCategory)
                                             @if(count($recommendationCategory->recommendationCategories)>0)
@@ -92,44 +92,45 @@
                                     </select>
 
                                     @error('recommendation_category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <x-date-input-component
-                                    name-ne="date_ne" label-ne="नेपाली मिति *"
-                                    name-en="date_en" label-en="English Date"
-                                    :getTodayDate="false"
-                                    :editDateNe="$registrationDetail->date_ne"
-                                    :editDateEn="$registrationDetail->date_en"
+                                        name-ne="date_ne" label-ne="नेपाली मिति *"
+                                        name-en="date_en" label-en="English Date"
+                                        :getTodayDate="false"
+                                        :editDateNe="$registrationDetail->date_ne"
+                                        :editDateEn="$registrationDetail->date_en"
                                     />
                                 </div>
-                                <div class="col-md-2 mb-2">
-                                    <label for="ward_no" class="form-label">वडा नं</label>
-                                    <select id="ward_no" name="ward_no"
-                                            class="form-select">
-                                        <option value="">-- छान्नुहोस् --</option>
-                                        @foreach(officeSetting()->localBody->ward_no as $ward)
-                                            <option
-                                                value="{{$ward}}" {{old('ward_no',$registrationDetail->ward_no)==$ward ? 'selected':''}}>{{$ward}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('ward_no')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+                                @if(auth()->user()->role->type === 'Super')
+                                    <div class="col-md-2 mb-2">
+                                        <label for="ward_no" class="form-label">वडा नं</label>
+                                        <select id="ward_no" name="ward_no"
+                                                class="form-select">
+                                            <option value="">-- छान्नुहोस् --</option>
+                                            @foreach(officeSetting()->localBody->ward_no as $ward)
+                                                <option
+                                                    value="{{$ward}}" {{old('ward_no',$registrationDetail->ward_no)==$ward ? 'selected':''}}>{{$ward}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('ward_no')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                @endif
                                 @livewire('multiple-file')
-
                             </div>
                         </fieldset>
                         <div class="row mt-2">
                             <div class="col-md-12 mb-2">
                                 <label for="recommendation_data" class="form-label">डाटा *</label>
                                 <textarea name="recommendation_data" id="recommendation_data" cols="30" rows="10"
-                                    class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data', $registrationDetail->recommendation_data) }}</textarea>
+                                          class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data', $registrationDetail->recommendation_data) }}</textarea>
                                 @error('recommendation_data')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

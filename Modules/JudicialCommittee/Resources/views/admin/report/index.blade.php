@@ -37,6 +37,7 @@
                             <x-print-button
                                 target-element="report-table"
                                 title="न्यायिक समिति रिपोर्ट"
+                                :header-required="true"
                             />
                         </div>
                     </div>
