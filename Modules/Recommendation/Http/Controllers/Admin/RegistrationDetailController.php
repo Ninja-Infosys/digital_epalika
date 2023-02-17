@@ -4,6 +4,7 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -18,8 +19,31 @@ class RegistrationDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('recommendation_access');
-        $registrationDetails = RegistrationDetail::with('recommendationCategory', 'personalDetail')->get();
-        return view('recommendation::admin.registration.index', compact('registrationDetails'));
+        $registrationDetails = RegistrationDetail::with('recommendationCategory', 'personalDetail')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['registration_no', 'date_ne'], request('search'));
+            }
+            if (!empty(request('recommendation_category'))) {
+                $q->where('recommendation_category_id', request('recommendation_category'));
+            }
+            if (!empty(request('personal_detail'))) {
+                $q->where('personal_detail_id', request('personal_detail'));
+            }
+            if (!empty(request('registration_no'))) {
+                $q->where('registration_no', request('registration_no'));
+            }
+            if (!empty(request('to_date'))) {
+                $q->whereDate('date_ne', '>=', request('to_date'));
+            }
+            if (!empty(request('from_date'))) {
+                $q->whereDate('date_ne', '<=', request('from_date'));
+            }
+        })->latest()
+            ->paginate(15);
+        $personalDetails = PersonalDetail::all();
+        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
+
+        return view('recommendation::admin.registration.index', compact('recommendationCategories','personalDetails','registrationDetails'));
     }
 
     public function create()

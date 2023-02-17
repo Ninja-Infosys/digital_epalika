@@ -3,10 +3,12 @@
 
     function e() {}
     e.prototype.initSelect2 = function() {
-        t('[data-toggle="select2"]').select2()
+        t('[data-toggle="select2"]').select2({
+            width:'100%'
+        })
     }, e.prototype.init = function() {
         this.initSelect2(), window.addEventListener("resize", function() {
-            var e = document.body.querySelectorAll("span"),
+            let e = document.body.querySelectorAll("span"),
                 a = e[e.length - 1];
             "-99999px" == a.style.top && a.remove()
         })

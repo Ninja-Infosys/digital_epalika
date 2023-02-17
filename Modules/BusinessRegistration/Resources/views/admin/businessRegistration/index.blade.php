@@ -36,12 +36,12 @@
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($objectTransactions as $objectTransaction)
                                             <option
-
+                                                {{request('object_transaction_id')==$objectTransaction->id ? 'selected':''}}
                                                 value="{{$objectTransaction->id}}" class="fw-bold"
                                                 @if($objectTransaction->objectTransactions->count() > 0 ) disabled @endif>{{$objectTransaction->title}}</option>
                                             @foreach($objectTransaction->objectTransactions as $data)
                                                 <option
-
+                                                    {{request('object_transaction_id')==$data->id ? 'selected':''}}
                                                     value="{{$data->id}}">
                                                     &nbsp;&nbsp;&nbsp;&nbsp;{{$data->title}}</option>
                                             @endforeach
@@ -55,6 +55,8 @@
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($businessNatures as $businessNature)
                                             <option
+
+                                                {{request('business_nature_id')==$businessNature->id ? 'selected':''}}
 
                                                 value="{{$businessNature->id}}">{{$businessNature->title}}</option>
                                         @endforeach
@@ -76,11 +78,12 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="registration_no">दर्ता नं</label>
-                                    <input type="text" name="registration_no" id="registration_no"
+                                    <input type="text" name="registration_no" value="{{request('registration_no')}}"
+                                           id="registration_no"
                                            placeholder="दर्ता नं" class="form-control">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" class="mt-2 btn btn-sm btn-primary">
                                 <i class="fa fa-search"> पेश गर्नुहोस्</i>
                             </button>
 
@@ -141,26 +144,34 @@
                                     </td>
                                     <td>
                                         @can('businessRegistration_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.edit',$businessDetail)}}"
-                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"  title="पुरा विवरण हेर्नुहोस">
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.businessRegistration.businessRegistration.edit',$businessDetail)}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="पुरा विवरण हेर्नुहोस">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('businessRegistration_access')
-                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
-                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"  title="पुरा विवरण हेर्नुहोस">
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="पुरा विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('businessRenew_access')
-                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.businessRenew.index',$businessDetail)}}"
-                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}" title="व्यवसाय नवीकरण">
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.businessRegistration.businessRegistration.businessRenew.index',$businessDetail)}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="व्यवसाय नवीकरण">
                                                 <i class="fas fa-undo"></i>
                                             </a>
                                         @endcan
                                         @if(!is_null($businessDetail->registration_no))
                                             @can('businessRegistration_access')
-                                                <a data-bs-type="edit" href="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}" title="प्रिन्ट गर्नुहोस"
+                                                <a data-bs-type="edit"
+                                                   href="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}"
+                                                   title="प्रिन्ट गर्नुहोस"
                                                    class="btn btn-xs btn-outline-warning">
                                                     <i class="fa fa-print"></i>
                                                 </a>

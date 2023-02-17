@@ -23,14 +23,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यक्तिगत विवरण सूची</h4>
-                        @can('personalDetail_delete')
-                            <a href="{{ route('admin.recommendation.setting.personalDetail.create') }}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ व्यक्तिगत विवरण थप्नुहोस
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">व्यक्तिगत विवरण सूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('personalDetail_delete')
+                                <a href="{{ route('admin.recommendation.setting.personalDetail.create') }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-plus-circle"></i> नयाँ व्यक्तिगत विवरण थप्नुहोस
+                                </a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -88,13 +91,14 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                    </tr>
-                                @endforelse
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
+                        {{$personalDetails->links()}}
                     </div>
                 </div>
             </div>
