@@ -5,7 +5,7 @@
     </a>
 </li>
 @can('personalDetail_access')
-    <li class="{{request()->is('admin/recommendation/setting/personalDetail*') ? 'active' : ''}}">
+    <li class="{{request()->is('admin/recommendation/setting/personalDetail') ? 'active' : ''}}">
         <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
             <i class="fa fa-user"></i>
             <span>व्यक्तिगत विवरण</span>
@@ -66,8 +66,8 @@
     </div>
 </li>
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
-    <a href="#setting"
-       {{request()->is('admin/recommendation/setting*') || request()->is('admin/recommendation/setting*') ? 'aria-expanded=true' : ''}}
+    <a href="#recommendationSetting"
+       {{request()->is('admin/recommendation/setting/recommendation*') || request()->is('admin/recommendation/setting/recommendation*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>आधारभूत सेटिंग</span>
@@ -76,8 +76,8 @@
         </span>
     </a>
     <div
-        class="collapse {{request()->is('admin/recommendation/setting*') || request()->is('admin/recommendation/setting*') ? 'show' : ''}}"
-        id="setting">
+        class="collapse {{request()->is('admin/recommendation/setting/recommendation*') || request()->is('admin/recommendation/setting/recommendation*') ? 'show' : ''}}"
+        id="recommendationSetting">
         <ul class="nav-second-level">
             @can('recommendationCategory_access')
                 <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">

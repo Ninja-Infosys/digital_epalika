@@ -15,10 +15,9 @@ class StoreRegistrationRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+        $data = [
             'date_ne' => ['required'],
             'date_en' => ['required'],
-            'ward_no' => ['required','integer'],
             'recommendation_data' => ['required'],
             'personal_detail_id' => ['nullable', Rule::exists('personal_details', 'id')->withoutTrashed()],
             'recommendation_category_id' => ['nullable', Rule::exists('recommendation_categories', 'id')->withoutTrashed()],
@@ -26,5 +25,11 @@ class StoreRegistrationRequest extends FormRequest
             'files.*.file_name' => ['nullable', 'string'],
             'files.*.file' => ['nullable', 'mimes:jpg,png,jpeg,pdf'],
         ];
+        if (auth()->user()->role->type === 'Super') {
+            $data = array_merge($data, [
+                'ward_no' => ['required', 'integer'],
+            ]);
+        }
+        return $data;
     }
 }

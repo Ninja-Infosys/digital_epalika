@@ -62,4 +62,12 @@ class PersonalDetail extends Model
     {
         return $this->hasMany(RegistrationDetail::class);
     }
+
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+        }
+        return $query;
+    }
 }

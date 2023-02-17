@@ -36,21 +36,23 @@
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="recommendation_category" class="form-label">सिफारिस *</label>
-                                    <select name="recommendation_category"  data-toggle="select2"
-                                            id="recommendation_category" class="form-control" >
+                                    <select name="recommendation_category" data-toggle="select2"
+                                            id="recommendation_category" class="form-control">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($recommendationCategories as $recommendationCategory)
                                             @if(count($recommendationCategory->recommendationCategories)>0)
                                                 <optgroup label="{{$recommendationCategory->title}}">
                                                     @foreach($recommendationCategory->recommendationCategories as $subRecommendationCategory)
-                                                        <option {{request('recommendation_category') == $subRecommendationCategory->id ? 'selected':''}}
+                                                        <option
+                                                            {{request('recommendation_category') == $subRecommendationCategory->id ? 'selected':''}}
                                                             value="{{$subRecommendationCategory->id}}">
                                                             {{$subRecommendationCategory->title}}
                                                         </option>
                                                     @endforeach
                                                 </optgroup>
                                             @else
-                                                <option {{request('recommendation_category') == $recommendationCategory->id ? 'selected':''}}
+                                                <option
+                                                    {{request('recommendation_category') == $recommendationCategory->id ? 'selected':''}}
                                                     value="{{$recommendationCategory->id}}">
                                                     {{$recommendationCategory->title}}
                                                 </option>
@@ -60,14 +62,15 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="personal_detail" class="form-label">व्यक्तिगत विवरण *</label>
-                                    <select name="personal_detail"  data-toggle="select2"
-                                            id="personal_detail" class="form-control" >
+                                    <select name="personal_detail" data-toggle="select2"
+                                            id="personal_detail" class="form-control">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($personalDetails as $personalDetail)
-                                                <option {{request('personal_detail') == $personalDetail->id ? 'selected':''}}
-                                                    value="{{$personalDetail->id}}">
-                                                    {{$personalDetail->name}}
-                                                </option>
+                                            <option
+                                                {{request('personal_detail') == $personalDetail->id ? 'selected':''}}
+                                                value="{{$personalDetail->id}}">
+                                                {{$personalDetail->name}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -87,7 +90,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="registration_no">दर्ता नं</label>
-                                    <input type="text" name="registration_no" value="{{request('registration_no')}}" id="registration_no"
+                                    <input type="text" name="registration_no" value="{{request('registration_no')}}"
+                                           id="registration_no"
                                            placeholder="दर्ता नं" class="form-control">
                                 </div>
                             </div>

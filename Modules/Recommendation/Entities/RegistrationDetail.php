@@ -78,5 +78,16 @@ class RegistrationDetail extends Model
         return explode('-', $this->date_ne)[1] ?? '';
     }
 
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+            $query->where('ward_no', auth()->user()->ward_no);
+        }
+        return $query;
+    }
+
+
+
 }
 

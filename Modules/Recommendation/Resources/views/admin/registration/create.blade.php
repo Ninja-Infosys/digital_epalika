@@ -99,6 +99,7 @@
                                         name-en="date_en" label-en="English Date"
                                     />
                                 </div>
+                                @if(auth()->user()->role->type === 'Super')
                                 <div class="col-md-2 mb-2">
                                     <label for="ward_no" class="form-label">वडा नं</label>
                                     <select id="ward_no" name="ward_no"
@@ -114,6 +115,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                @endif
                                @livewire('multiple-file')
                             </div>
                         </fieldset>

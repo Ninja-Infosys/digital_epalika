@@ -19,7 +19,7 @@ class RegistrationDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('recommendation_access');
-        $registrationDetails = RegistrationDetail::with('recommendationCategory', 'personalDetail')->where(function (Builder $q) {
+        $registrationDetails = RegistrationDetail::filterData()->with('recommendationCategory', 'personalDetail')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['registration_no', 'date_ne'], request('search'));
             }
@@ -43,7 +43,7 @@ class RegistrationDetailController extends Controller
         $personalDetails = PersonalDetail::all();
         $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
 
-        return view('recommendation::admin.registration.index', compact('recommendationCategories','personalDetails','registrationDetails'));
+        return view('recommendation::admin.registration.index', compact('recommendationCategories', 'personalDetails', 'registrationDetails'));
     }
 
     public function create()
@@ -59,7 +59,8 @@ class RegistrationDetailController extends Controller
         $this->checkAuthorization('recommendation_create');
         DB::transaction(function () use ($request) {
             $registrationDetail = RegistrationDetail::create($request->validated() + [
-                    'fiscal_year_id' => officeSetting()->fiscal_year_id
+                    'fiscal_year_id' => officeSetting()->fiscal_year_id,
+                    'ward_no' => auth()->user()->role->type === 'Super' ? $request->input('ward_no') : auth()->user()->ward_no
                 ]);
             if ($request->input('files')) {
                 foreach ($request->validated()['files'] as $file) {
