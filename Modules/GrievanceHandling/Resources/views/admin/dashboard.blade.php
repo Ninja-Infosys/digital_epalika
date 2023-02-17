@@ -1,191 +1,181 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.grievanceHandling.dashboard')}}">ई-गुनासो</a>
-                        </li>
-                    </ol>
+            <div class="card widget-inline">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-comment-alt avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$grievanceCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0">प्राप्त गुनासोहरु</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-comment-dots avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$registeredGrievanceCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate">दर्ता भएका गुनासोहरु</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3 border-end">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-comment-slash avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$closedGrievanceCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0">फर्छ्यौट भएका</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-comment-medical avatar-title font-18 text-white"></i>
+                                </div>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$investigatedGrievanceCount}}</span></h3>
+                                <p class="text-muted font-15 mb-0">अनुसन्धान गरिदै</p>
+                            </div>
+                        </div>
+
+                    </div> <!-- end row -->
                 </div>
-                <h4 class="page-title">गृहपृष्ठ </h4>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$grievanceCount}}
-                                        </span>
-                                            </h3>
-                                    </div>
-                                    <p class="text my-1">गुनासो</p>
-                                </div>
-                            </div> <!-- end row-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-info rounded-circle">
+                                <i class="fas fa-comment avatar-title font-22 text-white"></i>
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-secondary" >
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$registeredGrievanceCount}}
-                                       </span>
-                                           </h3>
-                                    </div>
-                                    <p class="text my-1">दर्ता गुनासो</p>
-                                </div>
-                            </div> <!-- end row-->
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1"><span data-plugin="counterup">{{ $seenGrievanceCount }}</span></h3>
+                                <p class="text-muted mb-1 text-truncate">हेरिएको गुनासोहरु</p>
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
-                        <div class="card-body" >
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">{{$closedGrievanceCount}}</span>
-                                        </h3>
-                                    </div>
-                                    <p class="text my-1">फर्छ्यौट भएको</p>
-                                </div>
-                            </div> <!-- end row-->
+                    </div>
+                </div>
+            </div> <!-- end card-->
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-info rounded-circle">
+                                <i class="fas fa-comment-slash avatar-title font-22 text-white"></i>
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-secondary">
-                        <div class="card-body" >
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$investigatedGrievanceCount}}
-                                         </span></h3>
-                                    </div>
-                                    <p class="text my-1">अनुसन्धान गरिदै</p>
-                                </div>
-                            </div> <!-- end row-->
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1"><span data-plugin="counterup">{{ $unseenGrievanceCount }}</span></h3>
+                                <p class="text-muted mb-1 text-truncate">नहेरिएका गुनासोहरु</p>
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
-                        <div class="card-body" >
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$unseenGrievanceCount}}
-                                    </span></h3>
-                                    </div>
-                                    <p class="text my-1">नहेरिएका गुनासो</p>
-                                </div>
-                            </div> <!-- end row-->
+                    </div>
+                </div>
+            </div> <!-- end card-->
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="avatar-md bg-info rounded-circle">
+                                <i class="fas fa-comment-alt avatar-title font-22 text-white"></i>
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-secondary">
-                        <div class="card-body" >
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$publicGrievanceCount}}
-                                    </span></h3>
-                                    </div>
-                                    <p class="text my-1">सार्वजनिक गुनासो</p>
-                                </div>
-                            </div> <!-- end row-->
+                        <div class="col-10">
+                            <div class="text-end">
+                                <h3 class="my-1"><span data-plugin="counterup">{{ $publicGrievanceCount }}</span></h3>
+                                <p class="text-muted mb-1 text-truncate">सार्वजनिक गुनासोहरु</p>
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
-                        <div class="card-body" >
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            {{$seenGrievanceCount}}
-                                        </span></h3>
-                                    </div>
-                                    <p class="text my-1">हेरिएको गुनासो</p>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-            </div>
-
-
-            <div class="row mt-2">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component :labels="$dataAccordingToGrievanceType['labels']"
-                                                          :dataSets="$dataAccordingToGrievanceType['dataSets']"
-                                                          id="grievanceType" chartName="गुनासोको प्रकार अनुसार"
-                                                          chartType="pie"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component :labels="$grievanceCountAccordingToSeverity['labels']"
-                                                          :dataSets="$grievanceCountAccordingToSeverity['dataSets']"
-                                                          id="grievanceSeverity" chartName="गुनासो गम्भीरता अनुसार"
-                                                          chartType="doughnut"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component :labels="$dataAccordingToGrievanceOffice['labels']"
-                                                          :dataSets="$dataAccordingToGrievanceOffice['dataSets']"
-                                                          id="grievanceOffice" chartName="गुनासो शाखा अनुसार"
-                                                          chartType="doughnut"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component :labels="$grievanceCountAccordingToStatus['labels']"
-                                                          :dataSets="$grievanceCountAccordingToStatus['dataSets']"
-                                                          id="grievanceStatus" chartName="गुनासोको स्थिति अनुसार"
-                                                          chartType="pie"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
+                    </div>
+                </div>
+            </div> <!-- end card-->
         </div>
     </div>
+    <div class="row" id="charts" data-chart-url="{{route('admin.grievanceHandling.dashboard')}}">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="dataAccordingToGrievanceType" chart-type="pie" chart-title="गुनासोको प्रकार अनुसार"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="grievanceCountAccordingToSeverity" chart-type="pie" chart-title="गुनासोको गम्भीरता अनुसार"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="dataAccordingToGrievanceOffice" chart-type="pie" chart-title="गुनासो प्राप्त गर्ने शाखा/कार्यालय अनुसार"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="grievanceCountAccordingToStatus" chart-type="pie" chart-title="गुनासोको स्थिति अनुसार"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="getDataAccordingToMonth" chart-type="column" chart-title="महिना अनुसार गुनासोहरु"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    @endpush
 @endsection

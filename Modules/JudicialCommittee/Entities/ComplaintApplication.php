@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
 
 class ComplaintApplication extends Model
@@ -46,11 +47,16 @@ class ComplaintApplication extends Model
         'applicant_phone',
         'applicant_address',
         'applicant_signature',
+        'application_status'
     ];
 
     protected $appends = [
         'month',
         'en_month'
+    ];
+
+    protected $casts = [
+        'application_status' => ComplaintApplicationStatusEnum::class
     ];
 
     public function getApplicantSignatureUrlAttribute(): string
@@ -116,6 +122,7 @@ class ComplaintApplication extends Model
     {
         return $this->hasMany(DefendantIssuedDeadline::class);
     }
+
     public function dateCompensations(): HasMany
     {
         return $this->hasMany(DateCompensation::class);
@@ -154,5 +161,10 @@ class ComplaintApplication extends Model
     public function conciliationVerification(): HasOne
     {
         return $this->hasOne(ConciliationVerification::class);
+    }
+
+    public function conciliation(): HasOne
+    {
+        return $this->hasOne(Conciliation::class);
     }
 }

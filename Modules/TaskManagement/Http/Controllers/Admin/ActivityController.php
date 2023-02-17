@@ -12,7 +12,10 @@ class ActivityController extends Controller
     public function index()
     {
         $this->checkAuthorization('taskActivity_access');
-        $activities = Activity::with('branch', 'activityLists')->latest('date_en')->paginate(50);
+        $activities = Activity::with('branch', 'activityLists')
+            ->where('user_id', auth()->id())
+            ->latest('date_en')
+            ->paginate(50);
 
         return view('taskmanagement::admin.activity.index', compact('activities'));
     }

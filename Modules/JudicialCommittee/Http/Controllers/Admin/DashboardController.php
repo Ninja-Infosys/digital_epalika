@@ -34,20 +34,19 @@ class DashboardController extends Controller
         $registeredApplicationsCount = ComplaintApplication::whereHas('judicialReceiptBill')->count();
         $currentYearApplicationsCount = $this->currentYearApplications->count();
         $currentMonthApplicationsCount = $this->currentYearApplications->where('month', $today_nepali_date['m'])->count();
-        $monthlyApplications = $this->getMonthlyApplications();
-        $lawsuitNatureWiseApplications = $this->getLawsuitNatureWiseApplications();
-        $fiscalYearWiseApplications = $this->getFiscalYearWiseApplications();
-        $lawsuitNatureWiseApplicationsData = $this->getLawsuitNatureWiseApplicationsData();
-
+        if (request()->ajax()){
+           return [
+            'monthlyApplications' => $this->getMonthlyApplications(),
+            'lawsuitNatureWiseApplications' => $this->getLawsuitNatureWiseApplications(),
+            'fiscalYearWiseApplications' => $this->getFiscalYearWiseApplications(),
+            'lawsuitNatureWiseApplicationsData' => $this->getLawsuitNatureWiseApplicationsData()
+           ];
+        }
         return view('judicialcommittee::admin.dashboard', compact(
             'totalApplicationsCount',
             'registeredApplicationsCount',
             'currentYearApplicationsCount',
             'currentMonthApplicationsCount',
-            'monthlyApplications',
-            'lawsuitNatureWiseApplications',
-            'fiscalYearWiseApplications',
-            'lawsuitNatureWiseApplicationsData'
         ));
     }
 
@@ -80,21 +79,14 @@ class DashboardController extends Controller
 
     private function getLawsuitNatureWiseApplications()
     {
-        $lawsuitNatures = LawsuitNature::withCount(['complaintApplications' => function ($query) {
+        return LawsuitNature::withCount(['complaintApplications' => function ($query) {
             $query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
-        }])->get();
-
-        return [
-            'labels' => $lawsuitNatures->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $lawsuitNatures->pluck('complaint_applications_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-
-        ];
+        }])->get()->map(function ($lawsuitNature){
+            return [
+              'name' => $lawsuitNature->title,
+                'data' => $lawsuitNature->complaint_applications_count
+            ];
+        });
     }
 
     private function getFiscalYearWiseApplications()

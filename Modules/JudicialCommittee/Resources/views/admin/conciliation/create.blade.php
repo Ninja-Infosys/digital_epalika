@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">निर्णय थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">मिलापत्र पेश गर्नुहोस</li>
                     </ol>
                 </div>
-                <h4 class="page-title">निर्णय</h4>
+                <h4 class="page-title">मिलापत्र</h4>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">निर्णय थप्नुहोस्</h4>
+                        <h4 class="header-title">मिलापत्र पेश गर्नुहोस</h4>
                         <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> दर्ता भएका उजुरी
@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{ route('admin.judicialCommittee.complaintApplication.complaintDecision.store', $complaintApplication) }}"
+                        action="{{ route('admin.judicialCommittee.complaintApplication.conciliation.store', $complaintApplication) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -40,37 +40,23 @@
                                 <textarea name="description"
                                           id="description"
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->complaintDecision->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DECISION))}}</textarea>
+                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->conciliation->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::CONCILIATION))}}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="application_status" class="form-label">उजुरी अवस्था </label>
-                                <select name="application_status" class="form-select" id="application_status">
-                                    <option value="">-- छान्नुहोस् --</option>
-                                    @foreach(\Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum::cases() as $applicationStatus)
-                                        <option
-                                            {{$applicationStatus->value==old('application_status',$complaintApplication->application_status?->value) ? 'selected' : ''}}
-                                            value="{{$applicationStatus->value}}">
-                                            {{$applicationStatus->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('application_status')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                            <div class="col-md-6 mb-2">
+                                <div class="col-md-6 mb-2">
+                                    <x-date-input-component
+                                        nameNe="submitted_date" labelNe="पेश मिति *"
+                                        nameEn="en_submitted_date"
+                                        labelEn="Submitted Date"
+                                        :editDateNe="$complaintApplication->conciliation->submitted_date ?? ''"
+                                        :getTodayDate="!isset($complaintApplication->conciliation->submitted_date)"/>
+                                </div>
                             </div>
-                            <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="submitted_date" labelNe="पेश मिति *"
-                                    nameEn="en_submitted_date"
-                                    labelEn="Submitted Date"
-                                    :editDateNe="$complaintApplication->complaintDecision->submitted_date ?? ''"
-                                    :getTodayDate="!isset($complaintApplication->complaintDecision->submitted_date)"/>
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="files" class="form-label"> निर्णय फाइल (Multiple)</label>
+                            <div class="col-md-6 mb-2">
+                                <label for="files" class="form-label"> फाइल (Multiple)</label>
                                 <input type="file" id="files" name="files[]" multiple class="form-control">
                                 @error('files')
                                 <div class="invalid-feedback">{{$message}}</div>
