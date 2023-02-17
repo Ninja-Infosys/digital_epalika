@@ -21,14 +21,17 @@ class DashboardController extends Controller
         $notice_count = Notice::whereType('Notice')->count();
         $news_count = Notice::whereType('News')->count();
 
-        $noticeFyChartData = $this->getNoticeAccordingToFy();
+        if(request()->ajax()){
+            return [
+                'allNoticeAccordingMonth' => $this->getNoticeAccordingToMonth(),
+                'allNoticeAccordingFY' => $this->getTotalNewsNoticeAccordingToFy()
+            ];
+        }
 
-        $totalNewsAndNoticeChartData = $this->getTotalNewsNoticeAccordingToFy();
-
-        return view('digitalboard::admin.dashboard', compact('employee_count', 'video_count', 'notice_count', 'news_count', 'noticeFyChartData', 'totalNewsAndNoticeChartData'));
+        return view('digitalboard::admin.dashboard', compact('employee_count', 'video_count', 'notice_count', 'news_count'));
     }
 
-    public function getNoticeAccordingToFy(): array
+    public function getNoticeAccordingToMonth(): array
     {
         $officeSetting = OfficeSetting::first();
         $monthlyNotices = [];

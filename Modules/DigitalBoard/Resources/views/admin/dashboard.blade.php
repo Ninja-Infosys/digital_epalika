@@ -50,31 +50,37 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row mt-2">
-        <div class="col-12">
-            <div class="row mt-2">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार सूचना समाचार"
-                                                          :labels="$totalNewsAndNoticeChartData['labels']"
-                                                          :dataSets="$totalNewsAndNoticeChartData['dataSets']"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.bar-chart-component id="register-chart" chartTitle="चालु आर्थिक({{$officeSetting->fiscalYear->title ?? ''}}) वर्षका सूचना समाचार"
-                                                          chartType="line"
-                                                          :labels="$noticeFyChartData['labels']"
-                                                          :dataSets="$noticeFyChartData['dataSets']"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-
+    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard')}}">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="allNoticeAccordingMonth" chart-type="column" chart-title="महिना अनुसार सूचना समाचार"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="allNoticeAccordingFY" chart-type="column" chart-title="चालु आ.वका सूचना समाचार"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    @endpush
 @endsection

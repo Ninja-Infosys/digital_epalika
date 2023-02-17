@@ -24,20 +24,15 @@
     @stack('style')
     @livewireStyles
 </head>
-
-<!-- body start -->
 <body>
-<!-- Begin page -->
 <div id="wrapper">
     @include('admin.layouts.header')
     @include('admin.layouts.side_nav')
     <div class="content-page">
         <div class="content">
-            <!-- Start Content-->
             <div class="container-fluid">
                 @yield('content')
             </div>
-            <!-- container -->
             @include('inc.floating-menu')
         </div>
         <footer class="footer">
@@ -45,7 +40,6 @@
                 {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
             </div>
         </footer>
-        <!-- end Footer -->
     </div>
 </div>
 <div class="rightbar-overlay"></div>
@@ -56,8 +50,6 @@
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/pages/form-advanced.init.js')}}"></script>
-<script src="{{asset('assets/backend/libs/footable/footable.all.min.js')}}"></script>
-<script src="{{asset('assets/backend/js/pages/foo-tables.init.js')}}"></script>
 @include('sweetalert::alert')
 
 @stack('scripts')

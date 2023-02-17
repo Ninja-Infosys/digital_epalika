@@ -4,7 +4,6 @@ namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Modules\Circular\Entities\Dispatch;
@@ -16,15 +15,13 @@ class DashboardController extends Controller
 
     protected Collection $currentYearRegistrations;
     protected Collection $currentYearDispatches;
-    protected OfficeSetting $officeSetting;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->officeSetting = OfficeSetting::first();
-        $this->currentYearRegistrations = Registration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
-        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+        $this->currentYearRegistrations = Registration::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
+        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
     }
 
     public function __invoke()
@@ -32,27 +29,22 @@ class DashboardController extends Controller
         $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
 
         $total_registrations = Registration::count();
-        $yearly_registrations = $this->currentYearRegistrations->count();
         $monthly_registrations = $this->currentYearRegistrations->where('registration_month', $nepali_date['m'])->count();
         $total_dispatches = Dispatch::count();
-        $yearly_dispatches = $this->currentYearDispatches->count();
         $monthly_dispatches = $this->currentYearDispatches->where('dispatch_month', $nepali_date['m'])->count();
-
-        $registrationChartData = $this->getTotalRegistrationAndDispatchData();
-
-        $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch();
-
+        if (request()->ajax()) {
+            return [
+                'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
+                'totalMonthRegistrationAndDispatch'=>$this->getCurrentFyRegistrationAndDispatch()
+            ];
+                }
         return view(
             'circular::admin.dashboard',
             compact(
                 'total_registrations',
-                'yearly_registrations',
                 'monthly_registrations',
                 'total_dispatches',
-                'yearly_dispatches',
-                'monthly_dispatches',
-                'registrationChartData',
-                'registrationYearlyChartData'
+                'monthly_dispatches'
             )
         );
     }
@@ -60,7 +52,7 @@ class DashboardController extends Controller
     /**
      * @return array
      */
-    public function getTotalRegistrationAndDispatchData(): array
+    public function getFyRegistrationAndDispatchData(): array
     {
         $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])->get();
 
@@ -81,7 +73,7 @@ class DashboardController extends Controller
         ];
     }
 
-    public function getCurrentFyMonthlyRegistrationAndDispatch(): array
+    public function getCurrentFyRegistrationAndDispatch(): array
     {
         $monthlyRegistrations = [];
         $monthlyDispatches = [];
