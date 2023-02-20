@@ -18,7 +18,10 @@
             <div class="col-md-12">
                 <fieldset>
                     <legend>क्रियाकलाप</legend>
-                    <button type="button" wire:click.prevent="addActivity">Add</button>
+                    <button class="btn btn-sm btn-outline-primary float-end"
+                            type="button" wire:click.prevent="addActivity">
+                        <i class="fas fa-plus"></i>
+                    </button>
                     @foreach($formActivity['activity_lists'] as $index=>$activityList)
                         <div class="row">
                             <div class="col-md-6 mb-2">
@@ -75,7 +78,10 @@
                                 @enderror
                             </div>
                         </div>
-                        <button type="button" wire:click.prevent="removeActivity({{$index}})">Remove</button>
+                        <button class="btn btn-sm btn-outline-danger float-end"
+                                type="button" wire:click.prevent="removeActivity({{$index}})">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     @endforeach
                 </fieldset>
 

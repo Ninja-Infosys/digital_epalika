@@ -45,17 +45,27 @@
                     <span>प्रतिवेदनहरु</span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/plan/report/annual-progress-report') ? 'active' : ''}}">
-                <a href="{{route('admin.plan.report.annual-progress-report')}}">
-                    <span>वार्षिक प्रगति प्रतिवेदन</span>
+            <li class="{{request()->is('admin/judicialCommittee/report/complainant-defendant-report') ? 'active' : ''}}">
+                <a href="{{route('admin.judicialCommittee.report.complainant-defendant-report-page')}}">
+                    <span>पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/judicialCommittee/report/complaint-subject-wise-report') ? 'active' : ''}}">
+                <a href="{{route('admin.judicialCommittee.report.complaint-subject-wise-report-page')}}">
+                    <span>उजुरी विषय अनुसारको रिपोर्ट </span>
+                </a>
+            </li>
+{{--            <li class="{{request()->is('admin/judicialCommittee/report/complainant-defendant-report') ? 'active' : ''}}">--}}
+{{--                <a href="{{route('admin.judicialCommittee.report.complainant-defendant-report-page')}}">--}}
+{{--                    <span>वडा अनुसारको रिपोर्ट</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
     </div>
 </li>
 <li class="{{ request()->is('admin/judicialcommittee/setting/*') ? 'active' : '' }}">
     <a href="#sidebarJudicialCommitteeSetting"
-        {{ request()->is('admin/judicialcommittee/setting/*') ? 'aria-expanded=true' : '' }} data-bs-toggle="collapse">
+       {{ request()->is('admin/judicialcommittee/setting/*') ? 'aria-expanded=true' : '' }} data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>सेटिङ</span>
         <span class="menu-arrow">
@@ -63,7 +73,7 @@
         </span>
     </a>
     <div class="collapse {{ request()->is('admin/judicialcommittee/setting/*') ? 'show' : '' }}"
-        id="sidebarJudicialCommitteeSetting">
+         id="sidebarJudicialCommitteeSetting">
         <ul class="nav-second-level">
             @can('lawsuitNature_access')
                 <li class="{{ request()->routeIs('admin.judicialCommittee.setting.lawsuitNature.*') ? 'active' : '' }}">
