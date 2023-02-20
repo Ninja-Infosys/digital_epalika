@@ -7,6 +7,7 @@ use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\DigitalBoard\Entities\Service;
 use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Transformers\api\v1\ServiceResource;
 use Modules\DigitalBoard\Transformers\EmployeeResource;
@@ -15,7 +16,6 @@ use Modules\DigitalBoard\Transformers\NoticeResource;
 use Modules\DigitalBoard\Transformers\OfficeHeaderResource;
 use Modules\DigitalBoard\Transformers\OfficeSettingResource;
 use Modules\DigitalBoard\Transformers\VideoResource;
-use Modules\HelpDesk\Entities\Service;
 
 class DigitalBoardApiController extends Controller
 {

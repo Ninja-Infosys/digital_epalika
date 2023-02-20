@@ -3,7 +3,7 @@
 namespace App\View\Components\Frontend;
 
 use Illuminate\View\Component;
-use Modules\HelpDesk\Entities\Service;
+use Modules\DigitalBoard\Entities\Service;
 
 class NoticeSectionComponent extends Component
 {
