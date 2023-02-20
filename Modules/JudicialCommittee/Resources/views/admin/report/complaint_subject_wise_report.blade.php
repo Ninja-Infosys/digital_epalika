@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट</li>
+                        <li class="breadcrumb-item active"> उजुरी विषय अनुसारको रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title">पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट </h4>
+                <h4 class="page-title">उजुरी विषय अनुसारको रिपोर्ट</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट</h4>
+                        <h4 class="header-title">उजुरी विषय अनुसारको रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
                                     type="button"
@@ -32,12 +32,12 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name="पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट"
+                                file-name="उजुरी विषय अनुसारको रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
                                 target-element="report-content"
-                                title="पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट"
+                                title="उजुरी विषय अनुसारको रिपोर्ट"
                             />
                         </div>
                     </div>
@@ -45,78 +45,38 @@
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{route('admin.judicialCommittee.report.get-complaint-defendant-report')}}">
+                              data-bs-url="{{route('admin.judicialCommittee.report.get-complaint-subject-wise-data')}}">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
-                                            <strong>निवेदन मिति </strong>
-                                        </legend>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-2">
-                                                <x-date-input-component
-                                                    nameNe="from_date" labelNe="देखि"
-                                                    nameEn="en_from_date" labelEn="From Date"
-                                                    :get-today-date="false"
-                                                />
-
-                                            </div>
-                                            <div class="col-md-6 mb-2">
-                                                <x-date-input-component
-                                                    nameNe="to_date" labelNe="सम्म"
-                                                    nameEn="en_to_date" labelEn="To Date"
-                                                    :get-today-date="false"
-                                                />
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                <div class="col-md-4">
+                                    <x-date-input-component
+                                        nameNe="from_date" labelNe="देखि"
+                                        nameEn="en_from_date" labelEn="From Date"
+                                        :get-today-date="false"
+                                    />
                                 </div>
-                                <div class="col-md-3">
-                                    <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
-                                            <strong>आर्थिक बर्ष </strong>
-                                        </legend>
-                                        <div class="row">
-                                            <div class="col-md-12 mb-2">
-                                                <label for="fiscal_year">आर्थिक बर्ष</label>
-                                                <select name="fiscal_year[]" multiple data-toggle="select2"
-                                                        id="fiscal_year" class="form-control">
-                                                    <option disabled>--- छान्नुहोस् ---</option>
-                                                    @foreach($fiscalYears as $fiscalYear)
-                                                        <option
-                                                            value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                <div class="col-md-4 mb-2">
+                                    <x-date-input-component
+                                        nameNe="to_date" labelNe="सम्म"
+                                        nameEn="en_to_date" labelEn="To Date"
+                                        :get-today-date="false"
+                                    />
                                 </div>
-                                <div class="col-md-3">
-                                    <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
-                                            <strong>मुद्दा प्रकृति</strong>
-                                        </legend>
-                                        <div class="row">
-                                            <div class="col-md-12 mb-2">
-                                                <label for="lawsuit_nature_id">मुद्दा प्रकृति</label>
-                                                <select name="lawsuit_nature_id[]" multiple data-toggle="select2"
-                                                        id="lawsuit_nature_id" class="form-control">
-                                                    <option disabled>--- छान्नुहोस् ---</option>
-                                                    @foreach($lawsuitNatures as $lawsuitNature)
-                                                        <option
-                                                            value="{{$lawsuitNature->id}}">{{$lawsuitNature->title}}</option>
-                                                    @endforeach
-                                                </select>
+                                <div class="col-md-4 mb-2">
+                                    <label for="fiscal_year">आर्थिक बर्ष</label>
+                                    <select name="fiscal_year[]" multiple data-toggle="select2"
+                                            id="fiscal_year" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($fiscalYears as $fiscalYear)
+                                            <option
+                                                value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
+                                        @endforeach
+                                    </select>
 
-                                            </div>
-                                        </div>
-                                    </fieldset>
                                 </div>
                             </div>
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                                पेश गर्नुहोस्
+                                <i class="fa fa-search"> पेश गर्नुहोस्</i>
                             </button>
                         </form>
                     </div>
@@ -124,14 +84,18 @@
                         <div id="report-content" class="d-none">
                             {!! letterHead() !!}
                             <table id="report-table" class="table table-sm mt-3 table-bordered">
-                                <thead>
+                                <thead class="align-middle">
                                 <tr>
-                                    <th>क्र.सं.</th>
-                                    <th>उजुरीको विवरण</th>
-                                    <th>पक्ष</th>
-                                    <th>विपक्ष</th>
-                                    <th>दर्ता नं.</th>
-                                    <th>अवस्था</th>
+                                    <th rowspan="2">क्र.सं.</th>
+                                    <th colspan="2">प्राप्त भएका उजुरीहरुको</th>
+                                    <th rowspan="2">फर्छ्यौट भएका</th>
+                                    <th rowspan="2">फर्छ्यौट हुन बाँकी</th>
+                                    <th rowspan="2">माथिल्लो निकायमा सिफारिस</th>
+                                    <th rowspan="2">समाज मै मिलापत्र</th>
+                                </tr>
+                                <tr>
+                                    <th>विवरण</th>
+                                    <th>संख्या</th>
                                 </tr>
                                 </thead>
                             </table>

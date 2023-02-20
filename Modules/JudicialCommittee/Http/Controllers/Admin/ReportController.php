@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\JudicialCommittee\Entities\ComplaintSubject;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
 use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
+use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 use Modules\JudicialCommittee\Transformers\Report\ComplaintApplicationResource;
 
 class ReportController extends Controller
@@ -106,7 +108,7 @@ class ReportController extends Controller
         $fiscalYears = FiscalYear::all();
         $lawsuitNatures = LawsuitNature::all();
 
-        return view('judicialcommittee::admin.report.complainant_defendant_report',compact('fiscalYears','lawsuitNatures'));
+        return view('judicialcommittee::admin.report.complainant_defendant_report', compact('fiscalYears', 'lawsuitNatures'));
     }
 
     public function getComplainantDefendantData(Request $request)
@@ -117,16 +119,45 @@ class ReportController extends Controller
             ->map(function ($complaintApplication, $key) {
                 return [
                     'sn' => (int)$key + 1,
-                    'subject' => $complaintApplication->subject ??'',
-                    'complainant'=>$complaintApplication->complainantDefendants->where('type',ComplainantDefendantTypeEnum::COMPLAINANT)->pluck('name'),
-                    'defendant'=>$complaintApplication->complainantDefendants->where('type',ComplainantDefendantTypeEnum::DEFENDANT)->pluck('name'),
-                    'registration_no'=>$complaintApplication->registration_no??'',
-                    'application_status'=>$complaintApplication->application_status?->label()
+                    'subject' => $complaintApplication->subject ?? '',
+                    'complainant' => $complaintApplication->complainantDefendants->where('type', ComplainantDefendantTypeEnum::COMPLAINANT)->pluck('name'),
+                    'defendant' => $complaintApplication->complainantDefendants->where('type', ComplainantDefendantTypeEnum::DEFENDANT)->pluck('name'),
+                    'registration_no' => $complaintApplication->registration_no ?? '',
+                    'application_status' => $complaintApplication->application_status?->label()
                 ];
             });
 
         return response()->json([
             'data' => $complaintApplications
+        ]);
+    }
+
+    public function complaintSubjectWiseReportPage()
+    {
+        $fiscalYears = FiscalYear::all();
+        $lawsuitNatures = LawsuitNature::all();
+
+        return view('judicialcommittee::admin.report.complaint_subject_wise_report', compact('fiscalYears', 'lawsuitNatures'));
+    }
+
+    public function getComplaintSubjectWiseData(Request $request)
+    {
+        $complaintSubjects = ComplaintSubject::with(['complaintApplications' => function ($query) use ($request) {
+            $this->filterDataFromUser($query, $request);
+        }])->get()->map(function ($complaintSubject,$key){
+            return [
+                'sn' => (int)$key + 1,
+                'subject' => $complaintSubject->subject ?? '',
+                'total'=>$complaintSubject->complaintApplications->count(),
+                'completed'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::COMPLETED)->count(),
+                'pending'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::PENDING)->count(),
+                'recommended'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::RECOMMENDED)->count(),
+                'society_conciliated'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::SOCIETY_CONCILIATED)->count(),
+            ];
+        });
+
+        return response()->json([
+            'data' => $complaintSubjects
         ]);
     }
 }
