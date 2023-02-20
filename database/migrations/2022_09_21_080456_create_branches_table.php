@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->nullable()->comment('शाखा आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('branch_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('branch_name')->comment('शाखाको नाम');
             $table->timestamps();
             $table->softDeletes();
