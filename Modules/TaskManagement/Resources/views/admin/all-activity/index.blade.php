@@ -49,7 +49,7 @@
                                         {{$activity->date}}
                                     </td>
                                     <td>
-                                        {{$activity->branch->title ?? ''}}
+                                        {{$activity->branch->branch_name ?? ''}}
                                     </td>
                                     <td>
                                         {{$activity->user->name ?? ''}}
