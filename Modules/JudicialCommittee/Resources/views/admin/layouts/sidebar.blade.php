@@ -55,11 +55,11 @@
                     <span>उजुरी विषय अनुसारको रिपोर्ट </span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/judicialCommittee/report/complainant-defendant-report') ? 'active' : ''}}">
-                <a href="{{route('admin.judicialCommittee.report.complainant-defendant-report-page')}}">
-                    <span>वडा अनुसारको रिपोर्ट</span>
-                </a>
-            </li>
+{{--            <li class="{{request()->is('admin/judicialCommittee/report/complainant-defendant-report') ? 'active' : ''}}">--}}
+{{--                <a href="{{route('admin.judicialCommittee.report.complainant-defendant-report-page')}}">--}}
+{{--                    <span>वडा अनुसारको रिपोर्ट</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
     </div>
 </li>
