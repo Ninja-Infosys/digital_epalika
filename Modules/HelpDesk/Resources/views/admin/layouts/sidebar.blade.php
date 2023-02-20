@@ -4,11 +4,4 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('service_access')
-<li class="{{request()->is('admin/helpDesk/service*') ? 'active' : ''}}">
-    <a href="{{route('admin.helpDesk.service.index')}}">
-        <i class="fa fa-scroll"></i>
-        <span> सेवाहरु</span>
-    </a>
-</li>
-@endcan
+

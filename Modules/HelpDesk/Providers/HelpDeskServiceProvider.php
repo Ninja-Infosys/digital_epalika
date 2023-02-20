@@ -3,7 +3,7 @@
 namespace Modules\HelpDesk\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\HelpDesk\Entities\ServiceEmployee;
+use Modules\DigitalBoard\Entities\ServiceEmployee;
 use Modules\HelpDesk\Observers\ServiceEmployeeObserver;
 
 class HelpDeskServiceProvider extends ServiceProvider

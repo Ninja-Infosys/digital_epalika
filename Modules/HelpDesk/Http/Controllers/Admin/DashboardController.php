@@ -4,7 +4,7 @@ namespace Modules\HelpDesk\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
-use Modules\HelpDesk\Entities\Service;
+use Modules\DigitalBoard\Entities\Service;
 
 class DashboardController extends Controller
 {

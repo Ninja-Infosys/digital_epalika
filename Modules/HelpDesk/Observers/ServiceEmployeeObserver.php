@@ -2,7 +2,7 @@
 
 namespace Modules\HelpDesk\Observers;
 
-use Modules\HelpDesk\Entities\ServiceEmployee;
+use Modules\DigitalBoard\Entities\ServiceEmployee;
 
 class ServiceEmployeeObserver
 {
