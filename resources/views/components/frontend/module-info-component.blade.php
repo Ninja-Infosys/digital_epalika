@@ -23,10 +23,10 @@
         </div>
     </div>
         @endif
-        @if(Route::has('helpdesk.helpdesk'))
+        @if(Route::has('digitalBoard.helpdesk.helpdesk'))
     <div class="col-md-2">
         <div class="info-card">
-            <a href="{{route('helpdesk.helpdesk')}}">
+            <a href="{{route('digitalBoard.helpdesk.helpdesk')}}">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/help-desk.png')}}" width="50" height="50">
                     <h4 class="p-2">हेल्प डेस्क</h4>

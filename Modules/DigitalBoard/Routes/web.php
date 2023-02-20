@@ -2,10 +2,6 @@
 
 use Modules\DigitalBoard\Http\Controllers\FrontController;
 
-Route::prefix('helpdesk')->group(function () {
-    Route::get('/', 'HelpDeskController@index');
-});
-
 Route::get('service/{service}', [FrontController::class, 'showServiceDetail'])->name('service.view');
 
 Route::controller(FrontController::class)->group(function () {

@@ -41,14 +41,14 @@
                                         <ul class="list-group">
                                             @forelse($branch->branches as $subBranch)
                                                 <li class="list-group-item d-flex justify-content-between align-items-center load_data"
-                                                    data-bs-url="{{route('getServices',$subBranch)}}">
+                                                    data-bs-url="{{route('digitalBoard.getServices',$subBranch)}}">
                                                     <h6>{{$loop->iteration}}. {{$subBranch->branch_name}}</h6>
                                                     <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
                                                     </button>
                                                 </li>
                                             @empty
                                                 <li class="list-group-item d-flex justify-content-between align-items-center load_data"
-                                                    data-bs-url="{{route('getServices',$branch)}}">
+                                                    data-bs-url="{{route('digitalBoard.getServices',$branch)}}">
                                                     <h6> {{$branch->branch_name}}</h6>
                                                     <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
                                                     </button>
@@ -87,7 +87,7 @@
                 document.onmousemove = resetTimer;
                 document.onkeypress = resetTimer;
                 function resetData() {
-                    ajaxCall('{{route('getServices')}}');
+                    ajaxCall('{{route('digitalBoard.getServices')}}');
                 }
                 function resetTimer() {
                     clearTimeout(time);
@@ -95,7 +95,7 @@
                 }
             };
             $(document).ready(function () {
-                ajaxCall('{{route('getServices')}}');
+                ajaxCall('{{route('digitalBoard.getServices')}}');
                 inactivityTime();
             });
             $('.load_data').click(function () {
@@ -103,7 +103,7 @@
                 ajaxCall(url);
             });
             $('.resetBtn').click(function () {
-                ajaxCall('{{route('getServices')}}');
+                ajaxCall('{{route('digitalBoard.getServices')}}');
             });
             function ajaxCall(url) {
                 $.ajax({
@@ -114,7 +114,7 @@
                         printTo.empty();
                         data.forEach(function (item, key) {
                             let sn = key+1;
-                            let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
+                            let url = "{{route('digitalBoard.service.view', ":id")}}".replace(':id', item.id);
                             printTo.append(`<li class="list-group-item d-flex justify-content-between align-items-center">
                                    <h6>`+sn+`. ` + item.service_name + `</h6>
                                  <a class="btn btn-info btn-sm text-white" href="` + url + `">सेवाहरु हेर्नुहोस्</a>

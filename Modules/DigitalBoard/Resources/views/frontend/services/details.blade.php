@@ -3,7 +3,7 @@
         <div class="content-section">
             <div class="breadcrumb mt-3 d-flex">
                 <div class="breadcrumb-item">
-                    <a class="whitespace-nowrap text-primary-500" href="{{route('helpdesk.helpdesk')}}">हेल्प डेस्क</a>
+                    <a class="whitespace-nowrap text-primary-500" href="{{route('digitalBoard.helpdesk.helpdesk')}}">हेल्प डेस्क</a>
                     <i class="fa fa-angle-double-right text-light"></i>
                     <a class="ml-1 text-primary-500">{{$service->service_name}}</a>
                 </div>
@@ -93,7 +93,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-danger" href="{{route('helpdesk.helpdesk')}}">
+                                <a class="btn btn-danger" href="{{route('digitalBoard.helpdesk.helpdesk')}}">
                                     छैनन्
                                 </a>
                             </div>
