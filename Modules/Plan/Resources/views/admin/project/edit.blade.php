@@ -63,25 +63,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="grant_category_id" class="form-label">अनुदान किसिम *</label>
-                                <select
-                                    name="grant_category_id"
-                                    class="form-control @error('grant_category_id') is-invalid @enderror"
-                                    id="grant_category_id" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($grantCategories as $grantCategory)
-                                        <option
-                                            {{old('grant_category_id',$project->grant_category_id)==$grantCategory->id ? 'selected' : ''}}
-                                            value="{{$grantCategory->id}}">
-                                            {{$grantCategory->title}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('grant_category_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="expense_head_id" class="form-label">खर्चको किसिम *</label>
                                 <select
                                     name="expense_head_id"
@@ -198,25 +179,6 @@
                                     @endforeach
                                 </select>
                                 @error('ward_no')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="budget_source_id" class="form-label"> बजेटको श्रोत *</label>
-                                <select
-                                    name="budget_source_id"
-                                    class="form-control @error('budget_source_id') is-invalid @enderror"
-                                    id="budget_source_id" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($budgetSources as $budgetSource)
-                                        <option
-                                            {{old('budget_source_id',$project->budget_source_id)==$budgetSource->id ? 'selected' : ''}}
-                                            value="{{$budgetSource->id}}">
-                                            {{$budgetSource->source_name}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('budget_source_id')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Plan\Entities\BudgetHead;
-use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
@@ -31,9 +30,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.index', compact('fiscalYears', 'columnData', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.index', compact('fiscalYears', 'columnData', 'planAreas', 'planLevels', 'budgetHeads'));
     }
 
     public function report(Request $request)
@@ -54,7 +52,7 @@ class ReportController extends Controller
             );
         }
 
-        $projects = Project::with('fiscalYear', 'budgetHead', 'budgetSource', 'planArea', 'planLevel')->where(function ($q) use ($request) {
+        $projects = Project::with('fiscalYear', 'budgetHead', 'planArea', 'planLevel')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
@@ -123,9 +121,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.annual-progress-report', compact('fiscalYears', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.annual-progress-report', compact('fiscalYears', 'planAreas', 'planLevels', 'budgetHeads'));
     }
 
     public function getAnnualProgressReport(Request $request)
@@ -150,8 +147,6 @@ class ReportController extends Controller
             'budget_head_id.*' => [Rule::exists('budget_heads', 'id')],
             'budget_sub_head_id' => ['nullable', 'array'],
             'budget_sub_head_id.*' => [Rule::exists('budget_heads', 'id')],
-            'budget_source_id' => ['nullable', 'array'],
-            'budget_source_id.*' => [Rule::exists('budget_sources', 'id')],
             'project_status' => ['nullable', 'array'],
             'project_status.*' => [new Enum(ProjectStatusEnum::class)],
         ]);
@@ -207,9 +202,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.consumer_committee_projects', compact('fiscalYears', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.consumer_committee_projects', compact('fiscalYears', 'planAreas', 'planLevels', 'budgetHeads'));
     }
 
     public function getConsumerCommitteeProjects(Request $request)
@@ -251,9 +245,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.contract_projects', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.contract_projects', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads'));
     }
 
     public function getContractProjects(Request $request)
@@ -308,9 +301,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.incomplete_projects', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.incomplete_projects', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads'));
     }
 
     public function getIncompleteProjects(Request $request)
@@ -352,9 +344,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.price_range_report', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.price_range_report', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads'));
     }
 
     public function getPriceRangeReportData(Request $request)
@@ -406,9 +397,8 @@ class ReportController extends Controller
         $planAreas = PlanArea::whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
-        return view('plan::admin.report.work_detail_report', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+        return view('plan::admin.report.work_detail_report', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads'));
     }
 
     public function getWorkDetailReport(Request $request)

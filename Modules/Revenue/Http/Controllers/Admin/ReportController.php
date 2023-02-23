@@ -37,7 +37,7 @@ class ReportController extends Controller
             );
         }
 
-        $projects = TaxPayer::with('fiscalYear', 'budgetHead', 'budgetSource', 'planArea', 'planLevel')->where(function ($q) use ($request) {
+        $projects = TaxPayer::with('fiscalYear')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 

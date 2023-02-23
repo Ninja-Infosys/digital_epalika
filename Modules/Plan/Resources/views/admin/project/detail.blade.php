@@ -84,9 +84,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <b class="text-primary">बजेटको श्रोत : </b> {{$project->budgetSource->source_name??''}}
-                        </td>
-                        <td>
                             <b class="text-primary">पहिलो चौमासिक लक्ष्य : </b> रू. {{$project->first_quarterly_goal}}
                         </td>
                     </tr>

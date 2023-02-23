@@ -144,7 +144,8 @@ class ProjectCostDetailLivewire extends Component
                 'dalit_backward_no' => $benefitedMemberDetail->dalit_backward_no ?? 0,
                 'other_households_no' => $benefitedMemberDetail->other_households_no ?? 0,
                 'no_of_male' => $benefitedMemberDetail->no_of_male ?? 0,
-                'no_of_female' => $benefitedMemberDetail->no_of_female ?? 0
+                'no_of_female' => $benefitedMemberDetail->no_of_female ?? 0,
+                'no_of_others' => $benefitedMemberDetail->no_of_others ?? 0,
             ];
         }
     }

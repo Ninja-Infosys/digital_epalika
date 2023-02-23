@@ -20,13 +20,11 @@ class StoreProjectRequest extends FormRequest
         return [
             'registration_no' => ['required', Rule::unique('projects', 'registration_no')->withoutTrashed()],
             'project_name' => ['required'],
-            'grant_category_id' => ['required', Rule::exists('grant_categories', 'id')->withoutTrashed()],
             'expense_head_id' => ['required', Rule::exists('expense_heads', 'id')->withoutTrashed()],
             'plan_area_id' => ['required', Rule::exists('plan_areas', 'id')->withoutTrashed()],
             'plan_level_id' => ['required', Rule::exists('plan_levels', 'id')->withoutTrashed()],
             'ward_no' => ['nullable', 'array'],
             'ward_no.*' => ['integer'],
-            'budget_source_id' => ['nullable', Rule::exists('budget_sources', 'id')->withoutTrashed()],
             'budget_head_id' => ['nullable', Rule::exists('budget_heads', 'id')->withoutTrashed()],
             'allocated_amount' => ['nullable', 'numeric'],
             'project_venue' => ['nullable'],

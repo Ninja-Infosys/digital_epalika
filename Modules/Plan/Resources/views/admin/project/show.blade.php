@@ -60,7 +60,6 @@
                         <h5>योजनाको उपक्षेत्र : {{$project->planArea->area_name??''}}</h5>
                         <h5>संचालन हुने वडा नं : {{implode(',',$project->ward_no)}}</h5>
                         <h5>बजेट उप-शीर्षक : {{$project->budgetHead->title??''}}</h5>
-                        <h5>बजेटको श्रोत : {{$project->budgetSource->source_name??''}}</h5>
                         <h5>विनियोजित रकम रु. : {{$project->allocated_amount}}</h5>
                         <h5>आयोजना स्थल : {{$project->project_venue}}</h5>
                         <h5>मूल्याङ्कन रकम रु. : {{$project->evaluation_amount}}</h5>
@@ -173,7 +172,7 @@
                                 <td rowspan="2">वडा नं.</td>
                                 <td rowspan="2">गाँउ बस्ति</td>
                                 <td colspan="3" class="align-middle text-center">घरधुरी संख्या</td>
-                                <td colspan="3" class="align-middle text-center">जनसंख्या</td>
+                                <td colspan="4" class="align-middle text-center">जनसंख्या</td>
 
                             </tr>
                             <tr>
@@ -182,6 +181,7 @@
                                 <td>जम्मा</td>
                                 <td>महिला</td>
                                 <td>पुरुष</td>
+                                <td>अन्य</td>
                                 <td>जम्मा</td>
                             </tr>
                             </thead>
@@ -195,6 +195,7 @@
                                     <td>{{$benefitedMemberDetail->total_household}}</td>
                                     <td>{{$benefitedMemberDetail->no_of_male}}</td>
                                     <td>{{$benefitedMemberDetail->no_of_female}}</td>
+                                    <td>{{$benefitedMemberDetail->no_of_others}}</td>
                                     <td>{{$benefitedMemberDetail->total_population}}</td>
                                 </tr>
                             @empty

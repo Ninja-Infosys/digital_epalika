@@ -27,7 +27,8 @@ class BenefitedMemberDetail extends Model
         'dalit_backward_no',
         'other_households_no',
         'no_of_male',
-        'no_of_female'
+        'no_of_female',
+        'no_of_others'
     ];
 
     public function project(): BelongsTo
@@ -41,7 +42,7 @@ class BenefitedMemberDetail extends Model
     }
     public function getTotalPopulationAttribute()
     {
-        return $this->attributes['no_of_male'] + $this->attributes['no_of_female'];
+        return $this->no_of_male + $this->no_of_female+$this->no_of_others;
     }
 
 }
