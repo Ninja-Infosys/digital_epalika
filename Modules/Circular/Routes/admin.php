@@ -8,10 +8,7 @@ use Modules\Circular\Http\Controllers\Admin\RegistrationController;
 use Modules\Circular\Http\Controllers\Admin\RegistrationReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-//report
-Route::prefix('report')->group(function () {
-    Route::get('registration', [RegistrationController::class, 'registrationReport'])->name('registration.report');
-});
+
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('registration-file', 'circular::admin.file.registration_file')->name('registration-file');
     Route::view('dispatch-file', 'circular::admin.file.dispatch_file')->name('dispatch-file');
