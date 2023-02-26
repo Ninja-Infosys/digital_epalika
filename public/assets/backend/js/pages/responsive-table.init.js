@@ -1,1 +1,0 @@
-!function(t){"use strict";function e(){}e.prototype.init=function(){document.addEventListener("DOMContentLoaded",function(){t(".table-rep-design").responsiveTable("update")})},t.ResponsiveTable=new e,t.ResponsiveTable.Constructor=e}(window.jQuery),function(){"use strict";window.jQuery.ResponsiveTable.init()}();

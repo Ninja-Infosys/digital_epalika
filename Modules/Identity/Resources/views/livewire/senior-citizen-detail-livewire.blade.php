@@ -626,7 +626,6 @@
 
 @once
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#dob_bs").nepaliDatePicker({
@@ -734,8 +733,6 @@
         <script src="{{ asset('assets/backend/finger/js/jquery-1.11.2.min.js') }}" defer></script>
         <script src="{{ asset('assets/backend/finger/js/msf100.min.js') }}" defer></script>
         <script src="{{ asset('assets/backend/finger/js/msfDevice.js') }}" defer></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     @endpush
 @endonce
 

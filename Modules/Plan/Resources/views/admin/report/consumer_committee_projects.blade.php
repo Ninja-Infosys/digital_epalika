@@ -182,9 +182,6 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
         <script>
             $(document).ready(function () {

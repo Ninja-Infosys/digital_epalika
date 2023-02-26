@@ -7,7 +7,7 @@
         <x-header-component/>
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-flag" class="logo-nep d-none d-lg-block"
-                     src="{{ asset('assets/backend/images/nepal_flag.gif') }}"/>
+                     src="{{ asset('assets/frontend/image/nepal_flag.gif') }}"/>
             </a>
     </div>
 </div>

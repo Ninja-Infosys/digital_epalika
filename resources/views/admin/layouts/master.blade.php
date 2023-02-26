@@ -10,18 +10,16 @@
     <meta name="upload-file-url" content="{{ route('admin.file-upload') }}"/>
     <meta content="Ninja Infosys" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
-    <link href="{{asset('assets/backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
-    <!-- App css -->
+    <!-- plugins -->
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/select2.min.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/sweetalert2.min.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/datepicker.min.css')}}" type="text/css"/>
+    <!-- app styles -->
     <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
     <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media='screen,print'/>
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
-    <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     @stack('style')
     @livewireStyles
 </head>

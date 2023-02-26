@@ -9,7 +9,6 @@
     <title>{{config('app.name')}}</title>
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}"/>
     <link href="{{asset('assets/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/fontawesome/all.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}">
 
@@ -36,7 +35,7 @@
 <script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/fontawesome/all.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
-<script src="{{asset('assets/backend/print/print.min.js')}}"></script>
+<script src="{{asset('assets/frontend/js/print.min.js')}}"></script>
 
 @livewireScripts
 

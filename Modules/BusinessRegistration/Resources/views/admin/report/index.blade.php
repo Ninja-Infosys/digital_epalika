@@ -144,9 +144,6 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
     @endpush
