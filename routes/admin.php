@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
@@ -40,10 +41,16 @@ Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::controller(AddressController::class)->prefix('address')->as('address.')->group(function(){
+   Route::get('districts', 'district')->name('districts');
+   Route::get('local-bodies', 'localBodies')->name('local-bodies');
+   Route::get('ward-no', 'wardNo')->name('ward-no');
+});
 Route::get('cache-clear', [DashboardController::class, 'cacheClear'])->name('cache-clear');
 Route::get('tech-help', [TechController::class, 'index'])->name('tech');
 Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
 Route::view('terms', 'admin.terms_and_conditions.index')->name('terms');
+Route::get('fileView', [FileController::class, 'index'])->name('fileView');
 
 //notification
 Route::get('notification', [NotificationController::class, 'notification'])->name('notification');

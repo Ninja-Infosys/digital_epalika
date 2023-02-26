@@ -7,7 +7,8 @@
             width:'100%'
         })
     }, e.prototype.init = function() {
-        this.initSelect2(), window.addEventListener("resize", function() {
+        this.initSelect2(),
+            window.addEventListener("resize", function() {
             let e = document.body.querySelectorAll("span"),
                 a = e[e.length - 1];
             "-99999px" == a.style.top && a.remove()

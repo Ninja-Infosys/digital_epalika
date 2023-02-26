@@ -302,3 +302,17 @@ if (!function_exists('get_revenues')) {
         return $revenues ?? [];
     }
 }
+if (!function_exists('get_file_type')) {
+    function get_file_type($extension): string
+    {
+        return match ($extension) {
+            'jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico', 'webp' => 'image',
+            'pdf' => 'PDF',
+            'doc', 'docx', 'odt', 'rtf', 'txt' => 'document',
+            'mp3', 'wav', 'wma', 'aac', 'flac' => 'audio',
+            'mp4', 'avi', 'wmv', 'mov', 'flv' => 'video',
+            'zip', 'rar', '7z', 'tar' => 'archive',
+            default => 'unknown',
+        };
+    }
+}

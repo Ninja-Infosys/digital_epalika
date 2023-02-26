@@ -163,7 +163,8 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
-                    <div id="revenueAccordingToMonth" chart-type="column" chart-title="चालु आर्थिक वर्षको महिना अनुसार कुल राजस्व"></div>
+                    <div id="revenueAccordingToMonth" chart-type="column"
+                         chart-title="चालु आर्थिक वर्षको महिना अनुसार कुल राजस्व"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>
@@ -175,7 +176,8 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
-                    <div id="wardWiseProjects" chart-type="column" chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"></div>
+                    <div id="wardWiseProjects" chart-type="column"
+                         chart-title="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>
@@ -187,7 +189,8 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <div id="budgetHeadWiseProjects" chart-type="pie" chart-title="चालु आ.व बजेट शिर्षक अनुसारका योजनाहरु"></div>
+                    <div id="budgetHeadWiseProjects" chart-type="pie"
+                         chart-title="चालु आ.व बजेट शिर्षक अनुसारका योजनाहरु"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>
@@ -199,7 +202,8 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <div id="constructionType" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम"></div>
+                    <div id="constructionType" chart-type="pie"
+                         chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>
@@ -211,7 +215,8 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <div id="structureType" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} इस्टकचर अनुसार भवनको किसिम"></div>
+                    <div id="structureType" chart-type="pie"
+                         chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} इस्टकचर अनुसार भवनको किसिम"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>
@@ -223,7 +228,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div id="mapAccordingToMonth" chart-type="column" chart-title="चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण"></div>
+                    <div id="mapAccordingToMonth" chart-type="column"
+                         chart-title="चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण"></div>
                     <div class="loading">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border" role="status"></div>
@@ -276,11 +282,58 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <x-address-component
+            :province-id="old('province_id')"
+            :district-id="old('district_id')"
+            :local-body-id="old('local_body_id')"
+            :word-no="old('word_no')"
+        />
+    </div>
+    <div class="mt-4">
+        <div class="dynamic">
+        </div>
+        <button
+            type="button"
+            class="btn btn-soft-secondary btn-sm"
+            data-toggle="add-more"
+            data-content='<div class="row gutters-5">
+								<div class="col-4">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="test" name="header_menu_labels[]">
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="test2">
+									</div>
+								</div>
+								<div class="col-auto">
+									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>'
+            data-target=".dynamic">
+            Add New
+        </button>
+    </div>
+    <div>
+        <button class="{{get_setting('Pin')?'confirm_pin' : ''}}">test</button>
+        <button
+            class="btn btn-xs btn-outline-danger show_confirm"
+            data-bs-type="delete" title="मेटाउनु होस्">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
     @push('scripts')
-            <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-            <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-            <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-            <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-            <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+        <script>
+
+        </script>
+        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
+        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
     @endpush
 @endsection

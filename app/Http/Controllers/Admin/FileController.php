@@ -10,11 +10,44 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $files = File::whereNull('model_type')->get();
+        $all_uploads = File:: where(function ($query) {
+                if (auth()->user()->role->type !== 'Super')
+                    $query->where('user_id', auth()->id())
+                        ->orWhere('branch_id', auth()->user()->branch_id);
+            });
 
-        return view('admin.files.index', compact('files'));
+        $search = null;
+        $sort_by = null;
+
+        if ($request->input('search') != null) {
+            $search = $request->input('search');
+            $all_uploads->where('file_original_name', 'like', '%' . $search . '%');
+        }
+
+        $sort_by = $request->input('sort');
+        switch ($sort_by) {
+            case 'oldest':
+                $all_uploads->orderBy('created_at');
+                break;
+            case 'smallest':
+                $all_uploads->orderBy('file_size');
+                break;
+            case 'largest':
+                $all_uploads->orderBy('file_size', 'desc');
+                break;
+            case 'newest':
+            default:
+                $all_uploads->orderBy('created_at', 'desc');
+                break;
+        }
+
+        $all_uploads = $all_uploads->paginate(60)
+            ->appends(request()->query());
+
+
+        return view('admin.file-manager.file', compact('all_uploads', 'search', 'sort_by'));
     }
 
     public function show(File $file): JsonResponse

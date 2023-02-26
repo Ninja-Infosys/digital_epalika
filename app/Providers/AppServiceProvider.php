@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Http\Middleware\PageRenderMiddleware;
 use App\Models\FeatureActivation;
+use App\Models\File;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Units\Unit;
 use App\Models\Website\MunicipalDetail;
 use App\Observers\FeatureActivationObserver;
+use App\Observers\FileObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
@@ -31,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::preventLazyLoading(!$this->app->isProduction());
 
-        $this->defileObservers();
+        $this->defineObservers();
 
         Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');
 
@@ -47,12 +49,13 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function defileObservers(): void
+    public function defineObservers(): void
     {
         OfficeHeader::observe(OfficeHeaderObserver::class);
         FeatureActivation::observe(FeatureActivationObserver::class);
         Unit::observe(UnitObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);
+        File::observe(FileObserver::class);
     }
 
     /**

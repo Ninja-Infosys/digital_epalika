@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="A complete solution for a digital palika." name="description"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <meta name="check-pin-url" content="{{ route("admin.pin.check-pin") }}"/>
+    <meta name="upload-file-url" content="{{ route('admin.file-upload') }}"/>
     <meta content="Ninja Infosys" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
     <link href="{{asset('assets/backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     <!-- App css -->
     <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
@@ -33,7 +34,6 @@
             <div class="container-fluid">
                 @yield('content')
             </div>
-            @include('inc.floating-menu')
         </div>
         <footer class="footer">
             <div class="container-fluid text-center">
@@ -44,22 +44,14 @@
 </div>
 <div class="rightbar-overlay"></div>
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-<script src="{{asset('assets/backend/libs/select2/js/select2.min.js')}}"></script>
-<script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
-
-<script src="{{asset('assets/backend/print/print.min.js')}}"></script>
-<script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
-<script src="{{asset('assets/backend/js/pages/form-advanced.init.js')}}"></script>
+<script src="{{asset('assets/backend/js/plugins/select2.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/plugins/print.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/plugins/sweetalert2.min.js')}}"></script>
 @include('sweetalert::alert')
 
 @stack('scripts')
 @livewireScripts
-<script>
-    const validationUrl = '{{ route("admin.pin.check-pin") }}';
-    const uploadFileUrl = '{{ route('admin.file-upload') }}';
-</script>
 
-<script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/custom.js')}}"></script>
 {{--<script src="{{asset('js/newRelic.min.js')}}"></script>--}}
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
