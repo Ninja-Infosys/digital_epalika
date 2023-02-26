@@ -5,6 +5,7 @@ namespace Modules\Circular\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Http\Requests\Dispatch\StoreDispatchRequest;
@@ -58,6 +59,7 @@ class DispatchController extends Controller
     public function show(Dispatch $dispatch)
     {
         $this->checkAuthorization('dispatch_access');
+
         $dispatch->load('fiscalYear', 'files');
 
         return view('circular::admin.dispatch.show', compact('dispatch'));

@@ -106,11 +106,6 @@ class RegistrationController extends Controller
         return back();
     }
 
-    public function registrationReport()
-    {
-        return view('circular::admin.registration.report');
-    }
-
     private function uploadDocuments($request, $registration)
     {
         foreach ($request->validated()['documents'] as $document) {

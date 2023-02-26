@@ -120,15 +120,6 @@
                     </a>
                 </li>
             @endcan
-            @can('budgetSource_access')
-                <li class="{{request()->is('admin/plan/setting/budgetSource') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.budgetSource.index')}}">
-                        <span> बजेट श्रोत </span>
-                    </a>
-                </li>
-            @endcan
-
-
             @can('planTemplate_access')
                 <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
                     <a href="{{route('admin.plan.expenseHead.index')}}">
@@ -136,21 +127,13 @@
                     </a>
                 </li>
             @endcan
-
             @can('planTemplate_access')
-                <li class="{{request()->is('admin/plan/setting/grantCategory') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.grantCategory.index')}}">
-                        <span> अनुदान प्रकार </span>
+                <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planTemplate.index')}}">
+                        <span> टेम्प्लेट </span>
                     </a>
                 </li>
             @endcan
-                @can('planTemplate_access')
-                    <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
-                        <a href="{{route('admin.plan.planTemplate.index')}}">
-                            <span> टेम्प्लेट </span>
-                        </a>
-                    </li>
-                @endcan
 
         </ul>
     </div>

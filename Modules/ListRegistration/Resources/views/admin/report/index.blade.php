@@ -24,16 +24,27 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मौजुदा सुची दर्ता रिपोर्ट</h4>
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                aria-controls="collapseExample">
-                            <i class="fa fa-filter"></i>
-                        </button>
+                        <div class="d-flex gap-1 justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर</i>
+                            </button>
+                            <x-html-to-excel
+                                file-name="मौजुदा सुची दर्ता रिपोर्ट"
+                                target-table="report-table"
+                            />
+                            <x-print-button
+                                target-element="report-table"
+                                title="मौजुदा सुची दर्ता रिपोर्ट"
+                                :header-required="true"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm" style="">
-                        <form id="report-filter-form" method="POST">
+                        <form id="report-filter-form" data-bs-url="{{route('admin.listRegistrations.report.report-data')}}">
                             <div class="row">
                                 <div class="col-md-8">
                                     <fieldset class="border p-2 mb-2">
@@ -106,7 +117,7 @@
                                 </legend>
                                 <div class="row">
                                     @foreach($columnData as $columns)
-                                        <div class="col-md-3 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
                                             <select name="columns[{{$columns['table_name']}}][]"
                                                     id="column.{{$columns['table_name']}}" multiple
@@ -126,7 +137,7 @@
                             </fieldset>
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                                पेश गर्नुहोस्
+                                <i class="fa fa-search"> पेश गर्नुहोस्</i>
                             </button>
                         </form>
                     </div>
@@ -136,56 +147,10 @@
         </div>
     </div>
 
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
+    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script>
-            $(document).ready(function () {
-                // x-csrf protection
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
-                    e.preventDefault()
-                    $.ajax({
-                        type: "post",
-                        url: "{{route('admin.listRegistrations.report.report-data')}}",
-                        data: new FormData(this),
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function () {
-                            $("#submitFormBtn").prop('disabled', true);
-                            $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
-                        },
-                        success: function (resp) {
-                            $("#submitFormBtn").prop('disabled', false);
-                            $("#collapseFilterForm").collapse('hide')
-                            $("#submitFormBtn").html("पेश गर्नुहोस्");
-                            $('#report-table').html(resp.view)
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            $('#submitFormBtn').prop('disabled', false)
-                            $("#submitFormBtn").html("पेश गर्नुहोस्");
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    });
-                })
-
-                function toastMessage(type, title) {
-                    swal.fire({
-                        title: title,
-                        toast: true,
-                        position: 'top-right',
-                        showConfirmButton: false,
-                        width: 450,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        icon: type,
-                    });
-                }
-            });
-        </script>
+        <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
     @endpush
 @endsection

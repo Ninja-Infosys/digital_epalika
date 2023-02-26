@@ -46,6 +46,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
-    Route::get('complainant-defendant-report',[ReportController::class,'complainantDefendantReportPage'])->name('complainant-defendant-report-page');
-    Route::post('complaint-defendant-report',[ReportController::class,'getComplainantDefendantData'])->name('get-complaint-defendant-report');
+    Route::get('complainant-defendant-report', [ReportController::class, 'complainantDefendantReportPage'])->name('complainant-defendant-report-page');
+    Route::post('complaint-defendant-report', [ReportController::class, 'getComplainantDefendantData'])->name('get-complaint-defendant-report');
+    Route::get('complaint-subject-wise-report', [ReportController::class, 'complaintSubjectWiseReportPage'])->name('complaint-subject-wise-report-page');
+    Route::post('complaint-subject-wise-report', [ReportController::class, 'getComplaintSubjectWiseData'])->name('get-complaint-subject-wise-data');
 });

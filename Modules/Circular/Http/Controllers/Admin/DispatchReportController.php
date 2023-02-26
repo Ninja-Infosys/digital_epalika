@@ -3,19 +3,18 @@
 namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Models\Settings\FiscalYear;
-use App\Traits\ExcelTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Modules\Circular\Entities\Dispatch;
+use Modules\Circular\Transformers\Report\DispatchResource;
 
 class DispatchReportController extends Controller
 {
-    use ExcelTrait;
     public function index()
     {
-        $fiscalYears = FiscalYear::get();
+        $fiscalYears = FiscalYear::all();
         $columnData = $this->getColumns();
 
         return view('circular::admin.report.dispatch.index', compact('fiscalYears', 'columnData'));
@@ -30,22 +29,25 @@ class DispatchReportController extends Controller
             'en_to_letter_date' => ['nullable', 'after_or_equal:en_from_letter_date'],
             'columns' => ['nullable', 'array']
         ]);
-        list($dispatchColumns, $fiscalYearColumns) = $this->resolveColumns($request);
 
-        $lists = $this->getDataFromDispatch($request, $dispatchColumns);
-
-        if (!empty($fiscalYearColumns)) {
-            $lists->load(['fiscalYear' => function($query) use($fiscalYearColumns) {
-                $query->select($fiscalYearColumns);
-            }]);
+        if (empty($request->input('columns'))) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'dispatches' => ['dispatch_no', 'dispatch_date', 'letter_number', 'letter_date', 'subject']
+                    ]
+                ]
+            );
         }
 
-        $lists = $this->excludeColumnsFromListRegistration($lists);
+        $dispatches = Dispatch::with('fiscalYear')->where(function ($q) use ($request) {
+            $this->filterDataFromUser($q, $request);
+        })->get();
 
-        $excelUrl = $this->storeExcelFile($lists);
         return response()->json([
-            'view' => (string)View::make('report.table', compact('lists','excelUrl'))
+            'data' => DispatchResource::collection($dispatches)
         ]);
+
     }
 
     private function getColumns(): Collection
@@ -54,9 +56,9 @@ class DispatchReportController extends Controller
 
         (new Dispatch())
             ->ownAndRelatedModelsFillableColumns()
-//            ->filter(function ($column) {
-//                return array_keys($column, 'Dispatch');
-//            })
+            ->filter(function ($column) {
+                return !array_keys($column, 'printedData');
+            })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
             });
@@ -89,55 +91,5 @@ class DispatchReportController extends Controller
         if (!empty($request->input('letter_number'))) {
             $q->where('letter_number', $request->input('letter_number'));
         }
-    }
-
-    private function resolveColumns(Request $request): array
-    {
-        $dispatchColumns = [
-
-            'dispatch_no',
-            'dispatch_date',
-            'letter_number',
-            'letter_date',
-            'subject',
-            'receiver_name',
-            'receiver_address',
-            'receiver_contact',
-            'remarks',
-        ];
-        $fiscalYearColumns = [];
-
-        if (!empty($request->input('columns'))) {
-            $dispatchColumns = ['id'];
-            if (!empty($request->input('columns')['dispatches'])) {
-                $dispatchColumns = $request->input('columns')['dispatches'];
-            }
-
-            if (!empty($request->input('columns')['fiscal_years'])) {
-                $dispatchColumns[] = 'fiscal_year_id';
-
-                $fiscalYearColumns = $request->input('columns')['fiscal_years'];
-                $fiscalYearColumns[] = 'id';
-            }
-
-        }
-        return array($dispatchColumns, $fiscalYearColumns);
-    }
-
-    private function getDataFromDispatch(Request $request, mixed $registrationColumns)
-    {
-        return Dispatch::where(function ($q) use ($request) {
-            $this->filterDataFromUser($q, $request);
-        })
-            ->select($registrationColumns)
-            ->get();
-    }
-
-    private function excludeColumnsFromListRegistration($lists)
-    {
-        return $lists
-            ->map(function ($list) {
-                return removeColumns($list->toArray(), ['id', 'created_at', 'updated_at', 'deleted_at', 'fiscal_year_id']);
-            });
     }
 }

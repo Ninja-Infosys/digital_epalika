@@ -19,6 +19,7 @@
             <x-print-button
                 target-element="printData"
                 title="{{$businessDetail->name}}"
+
             />
             <div id="printData">
                 <p>
@@ -90,5 +91,6 @@
     </div>
 </section>
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </body>
 </html>
