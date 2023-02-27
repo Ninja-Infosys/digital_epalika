@@ -368,13 +368,8 @@
         </div>
     </div>
 
-    @once
-        @push('scripts')
-            <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        @endpush
-    @endonce
-
     @push('scripts')
+        <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#from_date").nepaliDatePicker({

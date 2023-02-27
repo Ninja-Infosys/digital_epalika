@@ -12,9 +12,9 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index',$type)}}">{{$type==='Notice' ?'सूचना':'समाचार'}}  </a>
+                            <a href="{{route('admin.digitalBoard.notice.index',$type)}}">{{$type==='Notice' ?'सूचना':'समाचार'}} </a>
                         </li>
-                        <li class="breadcrumb-item active">{{$type==='Notice' ?'सूचना':'समाचार'}} सम्पादन गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ {{$type==='Notice' ?'सूचना':'समाचार'}}  थप्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  </h4>
@@ -27,17 +27,16 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  सम्पादन गर्नुहोस्</h4>
+                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  थप्नुहोस्</h4>
                         <a href="{{route('admin.digitalBoard.notice.index',$type)}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> {{$type==='Notice' ?'सूचना':'समाचार'}}  सूची
+                            <i class="fa fa-list"></i> {{$type==='Notice' ?'सूचना':'समाचार'}} सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.notice.update',[$type,$notice])}}" method="post"
+                    <form action="{{route('admin.digitalBoard.notice.store',$type)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('put')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong> विवरण </strong>
@@ -48,7 +47,7 @@
                                     <input
                                         type="text"
                                         name="title"
-                                        value="{{old('title',$notice->title)}}"
+                                        value="{{old('title')}}"
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
@@ -58,23 +57,13 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        value="{{old('date',$notice->date)}}"
-                                        class="form-control nepali_date @error('date') is-invalid @enderror"
-                                        id="date"
-                                        placeholder=" मिति"
+                                    <x-date-input-component
+                                     label-ne="मिति *" name-ne="date"
                                     />
-                                    @error('date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
-
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण </label>
-                                    <textarea name="description" id="description" placeholder="बिवरण"  class="form-control summernote" cols="30" rows="5">{{old('description',$notice->description)}}</textarea>
+                                    <textarea name="description" id="description" placeholder="बिवरण"  class="form-control summernote" cols="30" rows="5">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -88,7 +77,7 @@
                                         class="form-control @error('files') is-invalid @enderror"
                                         id="files"
 
-                                        multiple />
+                                   multiple />
                                     @error('files')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -106,16 +95,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".nepali_date").nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYear: true
-                });
-            });
-        </script>
-    @endpush
 @endsection

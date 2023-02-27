@@ -320,7 +320,6 @@
     </div>
 
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
         <script>
             $(document).ready(function () {
                 // x-csrf protection
