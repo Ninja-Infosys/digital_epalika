@@ -254,84 +254,84 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="first_quarterly_amount" class="form-label">पहिलो चौमासिक रकम</label>
+                                <label for="first_quarterly_amount" class="form-label">पहिलो चौमासिक आर्थिक लक्ष्य</label>
                                 <input
                                     type="number"
                                     name="first_quarterly_amount"
                                     value="{{old('first_quarterly_amount')}}"
                                     class="form-control @error('first_quarterly_amount') is-invalid @enderror"
                                     id="first_quarterly_amount"
-                                    placeholder="पहिलो चौमासिक रकम"
+                                    placeholder="पहिलो चौमासिक आर्थिक लक्ष्य"
                                 />
                                 @error('first_quarterly_amount')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="first_quarterly_goal" class="form-label">पहिलो चौमासिक लक्ष्य</label>
+                                <label for="first_quarterly_goal" class="form-label">पहिलो चौमासिक भौतिक लक्ष्य</label>
                                 <input
                                     type="number"
                                     name="first_quarterly_goal"
                                     value="{{old('first_quarterly_goal')}}"
                                     class="form-control @error('first_quarterly_goal') is-invalid @enderror"
                                     id="first_quarterly_goal"
-                                    placeholder="पहिलो चौमासिक लक्ष्य"
+                                    placeholder="पहिलो चौमासिक भौतिक लक्ष्य"
                                 />
                                 @error('first_quarterly_goal')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="second_quarterly_amount" class="form-label">दोश्रो चौमासिक रकम</label>
+                                <label for="second_quarterly_amount" class="form-label">दोश्रो चौमासिक आर्थिक लक्ष्य</label>
                                 <input
                                     type="number"
                                     name="second_quarterly_amount"
                                     value="{{old('second_quarterly_amount')}}"
                                     class="form-control @error('second_quarterly_amount') is-invalid @enderror"
                                     id="second_quarterly_amount"
-                                    placeholder="दोश्रो चौमासिक रकम"
+                                    placeholder="दोश्रो चौमासिक आर्थिक लक्ष्य"
                                 />
                                 @error('second_quarterly_amount')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="second_quarterly_goal" class="form-label">दोश्रो चौमासिक लक्ष्य</label>
+                                <label for="second_quarterly_goal" class="form-label">दोश्रो चौमासिक भौतिक लक्ष्य</label>
                                 <input
                                     type="number"
                                     name="second_quarterly_goal"
                                     value="{{old('second_quarterly_goal')}}"
                                     class="form-control @error('second_quarterly_goal') is-invalid @enderror"
                                     id="second_quarterly_goal"
-                                    placeholder="दोश्रो चौमासिक लक्ष्य"
+                                    placeholder="दोश्रो चौमासिक भौतिक लक्ष्य"
                                 />
                                 @error('second_quarterly_goal')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="third_quarterly_amount" class="form-label">तेश्रो चौमासिक रकम</label>
+                                <label for="third_quarterly_amount" class="form-label">तेश्रो चौमासिक आर्थिक लक्ष्य</label>
                                 <input
                                     type="number"
                                     name="third_quarterly_amount"
                                     value="{{old('third_quarterly_amount')}}"
                                     class="form-control @error('third_quarterly_amount') is-invalid @enderror"
                                     id="third_quarterly_amount"
-                                    placeholder="तेश्रो चौमासिक रकम"
+                                    placeholder="तेश्रो चौमासिक आर्थिक लक्ष्य"
                                 />
                                 @error('third_quarterly_amount')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="third_quarterly_goal" class="form-label">तेश्रो चौमासिक लक्ष्य</label>
+                                <label for="third_quarterly_goal" class="form-label">तेश्रो चौमासिक भौतिक लक्ष्य</label>
                                 <input
                                     type="number"
                                     name="third_quarterly_goal"
                                     value="{{old('third_quarterly_goal')}}"
                                     class="form-control @error('third_quarterly_goal') is-invalid @enderror"
                                     id="third_quarterly_goal"
-                                    placeholder="तेश्रो चौमासिक लक्ष्य"
+                                    placeholder="तेश्रो चौमासिक भौतिक लक्ष्य"
                                 />
                                 @error('third_quarterly_goal')
                                 <div class="invalid-feedback">{{$message}}</div>
