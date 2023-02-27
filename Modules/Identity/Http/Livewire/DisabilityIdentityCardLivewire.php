@@ -52,7 +52,7 @@ class DisabilityIdentityCardLivewire extends Component
     public DisabilityIdentityCard $disabilityIdentityCard;
 
     public array $form = [
-        'is_citizenship'=>null,
+        'is_citizenship' => null,
         'material_name' => null,
         'is_necessary' => null,
         'identity_type' => null,
@@ -486,19 +486,18 @@ class DisabilityIdentityCardLivewire extends Component
                             'iso_image' => $this->form['left_finger']['isoImage'],
                             'quality' => $this->form['left_finger']['quality'],
                         ]);
-                }
-                else{
+                } else {
                     $this->disabilityIdentityCard
-                           ->fingerPrints()
-                            ->create([
-                               'finger_image' => $this->form['left_finger']['image'],
-                               'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                               'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                               'iso_image' => $this->form['left_finger']['isoImage'],
-                               'finger' => 'left',
-                               'quality' => $this->form['left_finger']['quality'],
-                               'user_id' => auth()->id(),
-                           ]);
+                        ->fingerPrints()
+                        ->create([
+                            'finger_image' => $this->form['left_finger']['image'],
+                            'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                            'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                            'iso_image' => $this->form['left_finger']['isoImage'],
+                            'finger' => 'left',
+                            'quality' => $this->form['left_finger']['quality'],
+                            'user_id' => auth()->id(),
+                        ]);
                 }
                 if (!empty($this->form['right_finger']['id'])) {
                     $this->disabilityIdentityCard
@@ -512,20 +511,18 @@ class DisabilityIdentityCardLivewire extends Component
                             'iso_image' => $this->form['right_finger']['isoImage'],
                             'quality' => $this->form['right_finger']['quality'],
                         ]);
-                }
-                else
-                {
+                } else {
                     $this->disabilityIdentityCard
                         ->fingerPrints()
                         ->create([
-                        'finger_image' => $this->form['right_finger']['image'],
-                        'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                        'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                        'iso_image' => $this->form['right_finger']['isoImage'],
-                        'finger' => 'right',
-                        'quality' => $this->form['right_finger']['quality'],
-                        'user_id' => auth()->id(),
-                    ]);
+                            'finger_image' => $this->form['right_finger']['image'],
+                            'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                            'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                            'iso_image' => $this->form['right_finger']['isoImage'],
+                            'finger' => 'right',
+                            'quality' => $this->form['right_finger']['quality'],
+                            'user_id' => auth()->id(),
+                        ]);
                 }
             }
             $this->dispatchBrowserEvent('toast_message', [
@@ -535,7 +532,10 @@ class DisabilityIdentityCardLivewire extends Component
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
         DB::transaction(function () {
-            $disabilityIdentityCard = DisabilityIdentityCard::create($this->form);
+            $disabilityIdentityCard = DisabilityIdentityCard::create($this->form + [
+                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                    'user_id'=>auth()->id()
+                ]);
             if ($this->form['finger_print_type'] !== 'none') {
                 $disabilityIdentityCard->fingerPrints()->create([
                     'finger_image' => $this->form['left_finger']['image'],
