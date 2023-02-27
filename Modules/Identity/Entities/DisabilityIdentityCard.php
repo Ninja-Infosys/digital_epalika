@@ -9,6 +9,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
+use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -98,6 +99,7 @@ class DisabilityIdentityCard extends Model
         'card_no',
         'user_id',
         'is_citizenship',
+        'fiscal_year_id',
     ];
 
     protected $casts = [
@@ -108,6 +110,10 @@ class DisabilityIdentityCard extends Model
 
     ];
 
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
 
     public function temporaryProvince(): BelongsTo
     {
