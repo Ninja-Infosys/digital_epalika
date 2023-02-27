@@ -285,7 +285,9 @@
     };
     // plugins
     plugins.selectInit();
-    plugins.chartInit();
+    $(document).ready(function() {
+        plugins.chartInit();
+    });
     // extra
     extra.checkPin();
     extra.addMore();
