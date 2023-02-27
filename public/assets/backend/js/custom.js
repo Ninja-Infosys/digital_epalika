@@ -283,19 +283,19 @@
             });
         }
     };
-    // plugins
-    plugins.selectInit();
     $(document).ready(function() {
+        // plugins
+        plugins.selectInit();
         plugins.chartInit();
+        // extra
+        extra.checkPin();
+        extra.addMore();
+        extra.removeParent();
+        extra.confirmPin();
+        extra.deleteConfirm();
+        extra.cacheClear();
+        extra.searchFocusOut();
     });
-    // extra
-    extra.checkPin();
-    extra.addMore();
-    extra.removeParent();
-    extra.confirmPin();
-    extra.deleteConfirm();
-    extra.cacheClear();
-    extra.searchFocusOut();
 })(jQuery);
 
 function toastmessage(message, type) {
