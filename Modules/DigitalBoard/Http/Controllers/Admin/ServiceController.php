@@ -26,7 +26,6 @@ class ServiceController extends Controller
         })
         ->latest()->paginate(10);
 
-
         return view('digitalboard::admin.service.index', compact('services'));
     }
 
@@ -78,27 +77,20 @@ class ServiceController extends Controller
     public function update(UpdateServiceRequest $request, Service $service)
     {
         $this->checkAuthorization('service_edit');
-
         DB::transaction(function () use ($request, $service) {
             $service->update($request->validated());
 
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
-                if (! empty($serviceDocument['id'])) {
-                    ServiceDocument::find($serviceDocument['id'])->update([
-                        'description' => $serviceDocument['description'],
-                    ]);
-                } else {
-                    $service->serviceDocuments()->create($serviceDocument);
-                }
+                ServiceDocument::updateOrCreate(
+                    ['service_id'=>$service->id,'id'=>$serviceDocument['id'] ?? null],
+                    $serviceDocument
+                );
             }
             foreach ($request->input('serviceProcesses') as $serviceProcess) {
-                if (! empty($serviceProcess['id'])) {
-                    ServiceProcess::find($serviceProcess['id'])->update([
-                        'description' => $serviceProcess['description'],
-                    ]);
-                } else {
-                    $service->serviceProcesses()->create($serviceProcess);
-                }
+                ServiceProcess::updateOrCreate(
+                    ['service_id'=>$service->id,'id'=>$serviceProcess['id'] ?? null],
+                    $serviceProcess
+                );
             }
         });
 

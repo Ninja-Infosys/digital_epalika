@@ -30,11 +30,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.service.update',$service)}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('admin.digitalBoard.service.update',$service)}}" enctype="multipart/form-data"
+                          method="post">
                         @csrf
                         @method('put')
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="branch_id" class="form-label">शाखा *</label>
                                 <select
                                     name="branch_id"
@@ -43,13 +44,13 @@
                                     <option value="">छान्नुहोस्</option>
                                     @foreach($mainBranches as $mainBranch)
                                         <option
-                                            {{$mainBranch->id===old('branch_id',$service->branch_id) ? 'selected' : ''}}
+                                            {{$mainBranch->id==old('branch_id',$service->branch_id) ? 'selected' : ''}}
                                             value="{{$mainBranch->id}}">
                                             {{$mainBranch->branch_name}}
                                         </option>
                                         @foreach($mainBranch->branches as $branch)
                                             <option
-                                                {{$branch->id===old('branch_id',$service->branch_id) ? 'selected' : ''}}
+                                                {{$branch->id==old('branch_id',$service->branch_id) ? 'selected' : ''}}
                                                 value="{{$branch->id}}">
                                                 &nbsp;&nbsp;
                                                 - - {{$branch->branch_name}}
@@ -61,7 +62,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="service_name" class="form-label">सेवा नाम *</label>
                                 <input
                                     type="text"
@@ -75,8 +76,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="time_taken" class="form-label">लाग्ने समय *</label>
                                 <input
                                     type="text"
@@ -90,8 +90,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="responsible_officer" class="form-label">जिम्मेवार अधिकारी *</label>
                                 <input
                                     type="text"
@@ -105,8 +104,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="office" class="form-label">कोठा नम्बर /कार्यालय *</label>
                                 <input
                                     type="text"
@@ -121,14 +119,85 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12 mb-2">
-                                @livewire('digitalboard::service-document-livewire',['service'=>$service])
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <label for="important-document" class="form-label">आबश्यक कागजात *</label>
+                                    <button
+                                        type="button"
+                                        class="btn btn-xs btn-outline-info"
+                                        data-toggle="add-more"
+                                        data-content='<div class="row align-items-center gap-1 mb-2 gutters-5">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceDocuments[][description]">
+								</div>
+								<div class="col-auto">
+									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>' data-target=".important-document">
+                                        <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                    </button>
+                                </div>
+                                <div class="important-document">
+                                    @foreach($service->serviceDocuments as $key=>$serviceDocument)
+                                        <div class="row align-items-center gap-1 mb-2 gutters-5">
+                                            <input type="hidden" name="serviceDocuments[{{$key}}][id]"
+                                                   value="{{$serviceDocument->id}}">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="शीर्षक"
+                                                       name="serviceDocuments[{{$key}}][description]"
+                                                       value="{{old('description',$serviceDocument->description)}}">
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-sm btn-danger"
+                                                        data-toggle="remove-parent" data-parent=".row">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-
-                            <div class="col-md-12 mb-2">
-                                @livewire('digitalboard::service-process-livewire',['service'=>$service])
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <label for="process" class="form-label">उपलब्ध गराउने प्रक्रिया *</label>
+                                    <button
+                                        type="button"
+                                        class="btn btn-xs btn-outline-info"
+                                        data-toggle="add-more"
+                                        data-content='<div class="row align-items-center gap-1 mb-2 gutters-5">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceProcesses[][description]">
+								</div>
+								<div class="col-auto">
+									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>' data-target=".process"><i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                    </button>
+                                </div>
+                                <div class="process">
+                                    @foreach($service->serviceProcesses as $key=>$serviceProcess)
+                                        <div class="row align-items-center gap-1 mb-2 gutters-5">
+                                            <input type="hidden" name="serviceProcesses[{{$key}}][id]"
+                                                   value="{{$serviceProcess->id}}">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="शीर्षक"
+                                                       name="serviceProcesses[{{$key}}][description]"
+                                                       value="{{old('description',$serviceProcess->description)}}">
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-sm btn-danger"
+                                                        data-toggle="remove-parent" data-parent=".row">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-
                         </div>
 
                         <button type="submit" class="btn btn-primary">

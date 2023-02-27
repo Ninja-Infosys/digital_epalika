@@ -30,10 +30,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.service.store')}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('admin.digitalBoard.service.store')}}" enctype="multipart/form-data"
+                          method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="branch_id" class="form-label">शाखा *</label>
                                 <select
                                     name="branch_id"
@@ -59,7 +60,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="service_name" class="form-label">सेवा नाम *</label>
                                 <input
                                     type="text"
@@ -74,7 +75,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="time_taken" class="form-label">लाग्ने समय *</label>
                                 <input
                                     type="text"
@@ -89,7 +90,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="responsible_officer" class="form-label">जिम्मेवार अधिकारी *</label>
                                 <input
                                     type="text"
@@ -104,7 +105,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="office" class="form-label">कोठा नम्बर /कार्यालय *</label>
                                 <input
                                     type="text"
@@ -118,15 +119,48 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-                            <div class="col-md-12 mb-2">
-                                @livewire('digitalboard::service-document-livewire')
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <label for="important-document" class="form-label">आबश्यक कागजात *</label>
+                                    <button
+                                        type="button"
+                                        class="btn btn-xs btn-outline-info"
+                                        data-toggle="add-more"
+                                        data-content='<div class="row align-items-center gap-1 mb-2">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceDocuments[][description]">
+								</div>
+								<div class="col-auto">
+									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>' data-target=".important-document">
+                                       <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                    </button>
+                                </div>
+                                <div class="important-document"></div>
                             </div>
-
-                            <div class="col-md-12 mb-2">
-                                @livewire('digitalboard::service-process-livewire')
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                <label for="process" class="form-label">उपलब्ध गराउने प्रक्रिया *</label>
+                                    <button
+                                        type="button"
+                                        class="btn btn-xs btn-outline-info"
+                                        data-toggle="add-more"
+                                        data-content='<div class="row align-items-center gap-1 mb-2">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceProcesses[][description]">
+								</div>
+								<div class="col-auto">
+									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>' data-target=".process"><i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्</button>
+                                </div>
+                                <div class="process"></div>
                             </div>
-
                         </div>
 
                         <button type="submit" class="btn btn-primary">

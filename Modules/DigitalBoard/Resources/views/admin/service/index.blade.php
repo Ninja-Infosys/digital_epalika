@@ -57,22 +57,22 @@
                                     <td>
                                         <a href="{{route('admin.digitalBoard.service.serviceEmployee.index',$service)}}"
                                            class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-plus-circle"></i> कर्मचारी
+                                            <i class="fa fa-plus-circle"></i>
                                         </a>
                                         <a data-bs-type="edit" href="{{route('admin.digitalBoard.service.show',$service)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <a data-bs-type="edit" href="{{route('admin.digitalBoard.service.edit',$service)}}"
                                            class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.service.destroy',$service)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             <button data-bs-type="delete" class="btn btn-xs btn-outline-danger  {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
