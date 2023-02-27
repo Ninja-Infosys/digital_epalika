@@ -21,7 +21,7 @@ class StoreComplaintDecisionRequest extends FormRequest
             'submitted_date' => ['required'],
             'files' => ['nullable', 'array'],
             'files.*' => ['mimes:jpg,png,jpeg,pdf'],
-            'application_status' => ['nullable', new Enum(ComplaintApplicationStatusEnum::class)]
+            'application_status' => ['required', new Enum(ComplaintApplicationStatusEnum::class)]
         ];
     }
 
