@@ -13,6 +13,7 @@ use Modules\Revenue\Http\Controllers\Admin\StructureAssessmentRateController;
 use Modules\Revenue\Http\Controllers\Admin\TaxPayerController;
 use Modules\Revenue\Http\Controllers\Admin\TaxPayerLandController;
 use Modules\Revenue\Http\Controllers\Admin\TaxPayerTypeController;
+use Modules\Revenue\Http\Controllers\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -38,4 +39,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('physicalStructureType', PhysicalStructureTypeController::class)->except('show');
     Route::resource('sector', SectorController::class)->except('show');
     Route::resource('place', PlaceController::class)->except('show');
+});
+
+Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function (){
+    Route::get('/','index')->name('index');
 });
