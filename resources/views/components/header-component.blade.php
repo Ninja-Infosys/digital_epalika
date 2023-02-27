@@ -15,8 +15,8 @@
                 <x-convert-to-unicode number="{{$day}}" id="today_day"></x-convert-to-unicode>
             </h6>
             <h6><i class="fa fa-clock"></i> <span id="clock-container"></span></h6>
-            <h6><i class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}</h6>
-            <h6><i class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}</h6>
+            <h6><i class="fa fa-phone"></i> {{$officeSetting->phone??''}}</h6>
+            <h6><i class="fa fa-envelope"></i> {{$officeSetting->email??''}}</h6>
         </div>
     @endif
 </div>
