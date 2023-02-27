@@ -282,54 +282,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <x-address-component
-            :province-id="old('province_id')"
-            :district-id="old('district_id')"
-            :local-body-id="old('local_body_id')"
-            :word-no="old('word_no')"
-        />
-    </div>
-    <div class="mt-4">
-        <div class="dynamic">
-        </div>
-        <button
-            type="button"
-            class="btn btn-soft-secondary btn-sm"
-            data-toggle="add-more"
-            data-content='<div class="row gutters-5">
-								<div class="col-4">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="test" name="header_menu_labels[]">
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="test2">
-									</div>
-								</div>
-								<div class="col-auto">
-									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
-										<i class="fa fa-times"></i>
-									</button>
-								</div>
-							</div>'
-            data-target=".dynamic">
-            Add New
-        </button>
-    </div>
-    <div>
-        <button class="{{get_setting('Pin')?'confirm_pin' : ''}}">test</button>
-        <button
-            class="btn btn-xs btn-outline-danger show_confirm"
-            data-bs-type="delete" title="मेटाउनु होस्">
-            <i class="fa fa-trash"></i>
-        </button>
-    </div>
     @push('scripts')
-        <script>
-
-        </script>
         <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>

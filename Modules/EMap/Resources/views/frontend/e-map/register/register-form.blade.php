@@ -387,8 +387,4 @@
                 </div>
             </div>
     </section>
-
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/e-map/register.css')}}">
-    @endpush
 @endsection

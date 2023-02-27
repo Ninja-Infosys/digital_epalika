@@ -141,28 +141,4 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <style>
-            .doc {
-                top: 45vh;
-                position: relative;
-                box-sizing: border-box;
-                animation: marquee 50s linear infinite;
-                margin: 0 auto;
-                text-align: left !important;
-                color: var(--mainColor);
-            }
-
-            .scroll {
-                border-radius: 5px;
-                border: 2px solid #0D6EFD;
-                width: 100%;
-                height: 50vh;
-                margin: 10px  auto;
-                overflow: hidden;
-                position: relative;
-                box-sizing: border-box;
-            }
-        </style>
-    @endpush
 @endsection

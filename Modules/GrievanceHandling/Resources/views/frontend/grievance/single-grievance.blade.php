@@ -113,28 +113,11 @@
                                     @endforeach
                                 </div>
                             </div>
-{{--                            <div class="d-flex justify-content-start align-items-center my-4 p-2">--}}
-{{--                                <input type="text" class="form-control flex-shrink-1" id="exampleFormControlInput3"--}}
-{{--                                       placeholder="Type message">--}}
-{{--                                <div class="flex-shrink-0">--}}
-{{--                                    <a class="ms-1 text-muted" href="#"><i class="fas fa-paperclip"></i></a>--}}
-{{--                                    <a class="ms-3 link-info" href="#"><i class="fas fa-paper-plane"></i></a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    @push('scripts')
-    <script>
-        $(document).ready(function () {
-            const ChatDiv = $('.grievanceChat');
-            const height = ChatDiv[0].scrollHeight;
-            ChatDiv.scrollTop(height);
-        });
-    </script>
-    @endpush
 @endsection
 

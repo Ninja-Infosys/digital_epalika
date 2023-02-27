@@ -107,7 +107,6 @@
                             </div>`)
                             })
                         });
-                        console.log(data.directories)
                     }
                 });
             }
