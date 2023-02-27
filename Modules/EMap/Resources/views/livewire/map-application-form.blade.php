@@ -1,6 +1,4 @@
-<form wire:submit.prevent="saveFormData" method="post"
-      class="building-construction-application needs-validation">
-    @csrf
+<form wire:submit.prevent="saveFormData">
     <div class="row mb-3">
         <div class="col-md-3">
             <label for="organization_id" class="form-label fw-bold">संस्था <span class="text-danger">*</span></label>

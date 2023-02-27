@@ -13,7 +13,7 @@
                 <h4 class="fw-semibold text-center">नक्सा दरखास्त फारम</h4>
                 <div class="row justify-content-center">
                         <div class="card">
-                            <div class="card-body"
+                            <div class="card-body">
                             <livewire:emap::map-application-form/>
                             </div>
                         </div>
