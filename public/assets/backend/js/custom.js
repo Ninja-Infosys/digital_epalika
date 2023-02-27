@@ -283,12 +283,8 @@
                 $(this).closest('form').submit();
             });
         },
-        browserBack: function (){
-            const url = window.location.href;
-            history.pushState({url: url}, '', url);
-        }
     };
-    $(document).ready(function() {
+    $(document).ready(function () {
         // plugins
         plugins.selectInit();
         plugins.chartInit();
@@ -300,9 +296,17 @@
         extra.deleteConfirm();
         extra.cacheClear();
         extra.searchFocusOut();
-        extra.browserBack();
     });
 })(jQuery);
+
+$(function () {
+    const previousUrl = document.referrer;
+    const currentUrl = window.location.href;
+    history.pushState({ url: currentUrl }, '', currentUrl);
+    $(window).on('popstate', function () {
+        window.location.href = previousUrl;
+    });
+})
 
 function toastmessage(message, type) {
     swal.fire({
