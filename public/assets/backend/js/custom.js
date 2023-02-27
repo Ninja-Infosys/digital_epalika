@@ -24,8 +24,6 @@
                         }
                     })
                     loading.addClass('d-none');
-                    const url = window.location.href;
-                    history.pushState({url: url}, '', url);
                 },
                 error: () => {
                     loading.html('<p class="text-center">डाटा छैन !!!</p>');
@@ -284,6 +282,10 @@
             $('.filter-form').focusout(function () {
                 $(this).closest('form').submit();
             });
+        },
+        browserBack: function (){
+            const url = window.location.href;
+            history.pushState({url: url}, '', url);
         }
     };
     $(document).ready(function() {
@@ -298,6 +300,7 @@
         extra.deleteConfirm();
         extra.cacheClear();
         extra.searchFocusOut();
+        extra.browserBack();
     });
 })(jQuery);
 
