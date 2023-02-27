@@ -24,10 +24,13 @@
                         }
                     })
                     loading.addClass('d-none');
+                    const url = window.location.href;
+                    history.pushState({url: url}, '', url);
                 },
                 error: () => {
                     loading.html('<p class="text-center">डाटा छैन !!!</p>');
                 },
+
             })
 
             function createChart(element, data) {
