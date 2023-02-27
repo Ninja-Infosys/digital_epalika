@@ -22,14 +22,14 @@ class VideoController extends Controller
         ->latest()->paginate(10);
 
 
-        return view('digitalboard::video.index', compact('videos'));
+        return view('digitalboard::admin.video.index', compact('videos'));
     }
 
     public function create()
     {
         $this->checkAuthorization('digitalBoardVideo_create');
 
-        return view('digitalboard::video.create');
+        return view('digitalboard::admin.video.create');
     }
 
     public function store(StoreVideoRequest $request)
@@ -52,7 +52,7 @@ class VideoController extends Controller
     {
         $this->checkAuthorization('digitalBoardVideo_edit');
 
-        return view('digitalboard::video.edit', compact('video'));
+        return view('digitalboard::admin.video.edit', compact('video'));
     }
 
     public function update(UpdateVideoRequest $request, Video $video)

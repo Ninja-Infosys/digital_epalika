@@ -23,14 +23,14 @@ class EmployeeController extends Controller
         ->latest()->paginate(10);
 
 
-        return view('digitalboard::employee.index', compact('employees'));
+        return view('digitalboard::admin.employee.index', compact('employees'));
     }
 
     public function create()
     {
         $this->checkAuthorization('employee_create');
 
-        return view('digitalboard::employee.create');
+        return view('digitalboard::admin.employee.create');
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -47,14 +47,14 @@ class EmployeeController extends Controller
     {
         $this->checkAuthorization('employee_access');
 
-        return view('digitalboard::employee.show', compact('employee'));
+        return view('digitalboard::admin.employee.show', compact('employee'));
     }
 
     public function edit(Employee $employee)
     {
         $this->checkAuthorization('employee_edit');
 
-        return view('digitalboard::employee.edit', compact('employee'));
+        return view('digitalboard::admin.employee.edit', compact('employee'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
