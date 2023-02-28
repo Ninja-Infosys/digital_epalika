@@ -102,7 +102,6 @@
                 const $this = $(this);
                 const content = $this.data("content");
                 const target = $this.data("target");
-
                 $this.on("click", function (e) {
                     e.preventDefault();
                     $(target).append(content);
@@ -323,7 +322,6 @@
         extra.formFillAlert();
     });
 })(jQuery);
-
 function toastmessage(message, type) {
     swal.fire({
         title: message,
@@ -336,7 +334,6 @@ function toastmessage(message, type) {
         icon: type,
     });
 }
-
 function copyText(el) {
     try {
         navigator.clipboard.writeText(el);
