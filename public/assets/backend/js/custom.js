@@ -300,24 +300,6 @@
             $(window).on('beforeunload', function(event) {
                 if (unsavedChanges) {
                     event.preventDefault();
-                    swal.fire({
-                        title: 'तपाईंसँग सुरक्षित नगरिएका परिवर्तनहरू छन्।',
-                        text: 'के तपाईं साँच्चै छोड्न चाहनुहुन्छ?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'हो',
-                        cancelButtonText: 'होइन'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            unsavedChanges = false;
-                            window.location.reload();
-                        }else {
-                            event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
-                        }
-                    });
-                    return false;
                 }
             });
             $('form').submit(function() {
