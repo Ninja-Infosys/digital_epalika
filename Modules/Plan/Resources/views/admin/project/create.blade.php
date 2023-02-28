@@ -341,6 +341,14 @@
                                 @enderror
                             </div>
                         </div>
+                        <select name="attributes[]" id="attributes" class="form-control" multiple>
+                                <option value="1">Test</option>
+                                <option value="2">Test</option>
+                                <option value="3">Test</option>
+                        </select>
+                        <div id="test_options">
+
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
@@ -351,18 +359,23 @@
     </div>
     @push('scripts')
         <script>
-            $(document).ready(function () {
-                $(document.body).delegate('#budget_head_id', 'change', function (e) {
-                    const selectedOptions = $('#budget_head_id option:selected');
-                    selectedOptions.each((key,opt)=>{
-                        let col_div=document.createElement('div')
-                        col_div.addClass='col-md-3'
-
-                    })
-                    let budget_head_id = $('#budget_head_id').val()
-                    //$('#budget_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    console.log(budget_head_id)
-                })
+            function add_html_element (){
+                $('#test_options').append('\
+                <div class="form-group row">\
+                    <div class="col-md-3">\
+                        <input type="hidden" name="test[]" value="1">\
+                        <input type="text" class="form-control" name="choice[]" value="test" placeholder="test" readonly>\
+                    </div>\
+                    <div class="col-md-8">\
+                    <input type="text" class="form-control" name="test[]" value="test" placeholder="test">\
+                    </div>\
+                </div>');
+            }
+            $('#attributes').on('change', function() {
+                $('#options').html(null);
+                $.each($("#attributes option:selected"), function(){
+                    add_html_element();
+                });
             });
         </script>
     @endpush
