@@ -6,12 +6,14 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\TaskManagement\Entities\Activity;
+use Modules\TaskManagement\Http\Requests\Activity\StoreActivityRequest;
 
 class ActivityController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('taskActivity_access');
+
         $activities = Activity::with('branch', 'activityLists')
             ->where('user_id', auth()->id())
             ->latest('date_en')
@@ -25,6 +27,11 @@ class ActivityController extends Controller
         $this->checkAuthorization('taskActivity_create');
 
         return view('taskmanagement::admin.activity.create');
+    }
+
+    public function store(StoreActivityRequest $request)
+    {
+        $this->checkAuthorization('taskActivity_create');
     }
 
 

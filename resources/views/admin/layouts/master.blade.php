@@ -17,13 +17,17 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/datepicker.min.css')}}" type="text/css"/>
     <!-- app styles -->
     <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
-    <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media='screen,print'/>
+    <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"
+          media='screen,print'/>
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
     @stack('style')
     @livewireStyles
 </head>
 <body>
+<div id="preloader">
+    <img class="heartBeat animate" src="{{asset('assets/backend/images/logo.png')}}">
+</div>
 <div id="wrapper">
     @include('admin.layouts.header')
     @include('admin.layouts.side_nav')
@@ -50,8 +54,8 @@
 @stack('scripts')
 @livewireScripts
 
-<script src="{{asset('assets/backend/js/custom.js')}}"></script>
 {{--<script src="{{asset('js/newRelic.min.js')}}"></script>--}}
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/custom.js')}}"></script>
 </body>
 </html>

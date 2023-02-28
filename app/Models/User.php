@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use App\Models\Settings\LetterHead;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;

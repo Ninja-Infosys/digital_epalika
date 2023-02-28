@@ -28,9 +28,9 @@
     </li>
 @endcan
 
-<li class="{{request()->is('admin/plan/report*') ? 'active' : ''}}">
-    <a href="#sidebarPlanReport"
-       {{request()->is('admin/plan/report*') ? 'aria-expanded=true' : ''}}
+<li class="{{request()->is('admin/revenue/report*') ? 'active' : ''}}">
+    <a href="#sidebarRevenueReport"
+       {{request()->is('admin/revenue/report*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
@@ -38,12 +38,22 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/plan/report*') ? 'show' : ''}}"
-         id="sidebarPlanReport">
+    <div class="collapse {{request()->is('admin/revenue/report*') ? 'show' : ''}}"
+         id="sidebarRevenueReport">
         <ul class="nav-second-level">
-            <li class="{{request()->is('admin/plan/report') ? 'active' : ''}}">
-                <a href="{{route('admin.plan.report.index')}}">
+            <li class="{{request()->is('admin/revenue/report') ? 'active' : ''}}">
+                <a href="{{route('admin.revenue.report.index')}}">
                     <span>प्रतिवेदनहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/revenue/report/invoice') ? 'active' : ''}}">
+                <a href="{{route('admin.revenue.report.invoice')}}">
+                    <span>वडा अनुसार रसिद</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/revenue/report/tax-payer') ? 'active' : ''}}">
+                <a href="{{route('admin.revenue.report.tax-payer')}}">
+                    <span>करदाताको प्रकार</span>
                 </a>
             </li>
         </ul>
