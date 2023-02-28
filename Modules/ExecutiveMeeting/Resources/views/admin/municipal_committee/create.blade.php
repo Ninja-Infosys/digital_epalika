@@ -51,6 +51,7 @@
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
                                         placeholder="नाम"
+                                        required
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -65,6 +66,7 @@
                                         class="form-control @error('designation') is-invalid @enderror"
                                         id="designation"
                                         placeholder="पद"
+                                        required
                                     />
                                     @error('designation')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -106,6 +108,7 @@
                                         class="form-control @error('phone') is-invalid @enderror"
                                         id="phone"
                                         placeholder="फोन नम्बर"
+                                        required
                                     />
                                     @error('phone')
                                     <div class="invalid-feedback">{{$message}}</div>

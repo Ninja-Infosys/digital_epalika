@@ -48,6 +48,7 @@
                                     class="form-control @error('event_name') is-invalid @enderror"
                                     id="event_name"
                                     placeholder="नाम"
+                                    required
                                 />
                                 @error('event_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -90,7 +91,7 @@
                                     name="recurrence"
                                     class="form-control @error('recurrence') is-invalid @enderror"
                                     data-toggle="select2"
-                                    id="recurrence">
+                                    id="recurrence" required>
                                     <option value="" selected disabled>-- छान्नुहोस् ---</option>
                                     @foreach(\Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum::cases() as $recurrence)
                                         <option
@@ -118,6 +119,7 @@
                                     id="description"
                                     class="form-control @error('description') is-invalid @enderror"
                                     placeholder="विवरण"
+                                    required
                                     cols="30" rows="3">{{old('description')}}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{$message}}</div>

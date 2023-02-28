@@ -21,6 +21,7 @@
         </div>
     </div>
 
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -29,95 +30,107 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
+                        <div class="col-md-4">
+                        <h4 class="header-title"><b>बिषय : </b>{{ $grievanceDetail->subject }}</h4></div>
+                        <div class="col-md-4">
+                        <h4 class="header-title"><b>शाखा</b>
+                            : {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                        <form class="form-inline"
+                            action="{{ route('admin.grievanceHandling.grievanceDetail.updateStatus', $grievanceDetail->id) }}"
+                            method="post">
+                            @method('put')
+                            @csrf
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label text-black"><b>स्थिति</b></label>
+                                <select name="status" class="form-control mt-1" id="grievanceDetailStatus">
+                                    @foreach (\Modules\GrievanceHandling\Enums\GrievanceStatus::cases() as $status)
+                                        <option value="{{ $status->value }}"
+                                            {{ $status == $grievanceDetail->status ? 'selected' : '' }}>
+                                            {{ $status->label() }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                        <div class="col-md-4">
+                            <h4 class="mt-3"><b>दर्ता स्थिति:</b> <a
+                                    href="{{ route('admin.grievanceHandling.grievanceDetail.approve', $grievanceDetail) }}"
+                                    @class([
+                                        'mx-2',
+                                        'px-3',
+                                        'text-white',
+                                        'btn btn-lg ',
+                                        'bg-success' => $grievanceDetail->is_approved == 1,
+                                        'bg-danger' => $grievanceDetail->is_approved == 0,
+                                    ])><i @class([
+                                        'fa',
+                                        'fa-check' => $grievanceDetail->is_approved == 1,
+                                        'fa-window-close' => $grievanceDetail->is_approved == 0,
+                                    ])></i></a>
+                                    {{ $grievanceDetail->is_approved == 1 ? 'निसक्रिय गर्नुहोस':'सक्रिय गर्नुहोस' }}
+                            </h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="mt-3"> <b>सार्वजनिक गरेको स्थिति:</b> <a
+                                    href="{{ route('admin.grievanceHandling.grievance-detail.show-to-public', $grievanceDetail) }}"
+                                    @class([
+                                        'mx-2',
+                                        'px-3',
+                                        'text-white',
+                                        'btn btn-lg',
+                                        'bg-success' => $grievanceDetail->is_public == 1,
+                                        'bg-danger' => $grievanceDetail->is_public == 0,
+                                    ])><i @class([
+                                        'fa',
+                                        'fa-check' => $grievanceDetail->is_public == 1,
+                                        'fa-window-close' => $grievanceDetail->is_public == 0,
+                                    ])></i></a>
+                                     {{ $grievanceDetail->is_approved == 1 ? 'निसक्रिय गर्नुहोस':'सक्रिय गर्नुहोस' }}
+                            </h4>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex justify-content between">
                                 <div class="col-md-6">
-                                    <h4 class="header-title"><b>बिषय : </b>{{ $grievanceDetail->subject }}</h4>
-                                    <h4 class="header-title mt-2"><b>शाखा</b>
-                                        : {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h4>
-                                    <form class="form-inline"
-                                        action="{{ route('admin.grievanceHandling.grievanceDetail.updateStatus', $grievanceDetail->id) }}"
-                                        method="post">
-                                        @method('put')
-                                        @csrf
-                                        <div class="d-flex justify-content-space">
-                                            <div class="col-auto my-1">
-                                                <label class="text-black" for="grievanceDetailStatus"><b>स्थिति :</b></label>
-                                                <select name="status" class="custom-select" id="grievanceDetailStatus">
-                                                    @foreach (\Modules\GrievanceHandling\Enums\GrievanceStatus::cases() as $status)
-                                                        <option value="{{ $status->value }}"
-                                                            {{ $status == $grievanceDetail->status ? 'selected' : '' }}>
-                                                            {{ $status->label() }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-auto my-1">
-                                                <button type="submit"
-                                                    class="btn-sm bg-primary text-white mt-2 mx-2 px-2">Save</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="d-flex justify-content between">
-                                    <div class="col-md-6">
-                                        <h4 class="text-decoration-underline mb-1">
-                                           <b> प्रयोगकर्ता</b>
-                                        </h4>
-                                        <h4 class="mt-2"><b>नाम :- </b>{{ $grievanceDetail->grievanceUser->name ?? '' }}</h4>
-                                        <h4 class="mt-2"><b>ईमेल :- </b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
-                                        <h4 class="mt-2"><b>सम्पर्क नं :-</b> {{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
-                                        <h4 class="mt-2"><b>ठेगाना :- </b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <h4 class="mb-1"><b>गुनासो गम्भीरता :</b>
-                                            {{ $grievanceDetail->complaint_severity->label() }}
-                                        </h4>
-                                        <h4 class="mt-2"><b>दर्ता स्थिति:</b> <a
-                                                href="{{ route('admin.grievanceHandling.grievanceDetail.approve', $grievanceDetail) }}"
-                                                @class([
-                                                    'mx-2',
-                                                    'px-2',
-                                                    'text-white',
-                                                    'btn-sm',
-                                                    'bg-success' => $grievanceDetail->is_approved == 1,
-                                                    'bg-danger' => $grievanceDetail->is_approved == 0,
-                                                ])><i @class([
-                                                    'fa',
-                                                    'fa-check' => $grievanceDetail->is_approved == 1,
-                                                    'fa-window-close' => $grievanceDetail->is_approved == 0,
-                                                ])></i></a>
-                                        </h4>
-                                        <h4 class="mt-3"> <b>सार्वजनिक गरेको स्थिति:</b> <a
-                                                href="{{ route('admin.grievanceHandling.grievance-detail.show-to-public', $grievanceDetail) }}"
-                                                @class([
-                                                    'mx-2',
-                                                    'px-2',
-                                                    'text-white',
-                                                    'btn-sm',
-                                                    'bg-success' => $grievanceDetail->is_public == 1,
-                                                    'bg-danger' => $grievanceDetail->is_public == 0,
-                                                ])><i @class([
-                                                    'fa',
-                                                    'fa-check' => $grievanceDetail->is_public == 1,
-                                                    'fa-window-close' => $grievanceDetail->is_public == 0,
-                                                ])></i></a>
-                                        </h4>
-                                    </div>
+                                    <h4 class="text-decoration-underline mt-4">
+                                        <b> प्रयोगकर्ता विवरण</b>
+                                    </h4>
+                                    <h4 class="mt-2"><b>नाम :-
+                                        </b>{{ $grievanceDetail->grievanceUser->name ?? '' }}</h4>
+                                    <h4 class="mt-2"><b>ईमेल :-
+                                        </b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
+                                    <h4 class="mt-2"><b>सम्पर्क नं :-</b>
+                                        {{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
+                                    <h4 class="mt-2"><b>ठेगाना :-
+                                        </b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
+                                    <h4 class="mb-1"><b>गुनासो गम्भीरता
+                                            :</b>{{ $grievanceDetail->complaint_severity->label() }}
+                                    </h4>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-7 mt-3">
                         <div class="d-flex justify-content-center">
-                            <div class="col-md-8 mx-10">
+                            <div class="col-md-12 mx-10">
                                 <div class="row">
-                                    <div class="grievanceChat mt-2 border shadow rounded px-2 h-50 overflow-auto">
+                                    <div
+                                        class="grievanceChat mt-2 border border-dark shadow rounded px-2 h-50 overflow-auto">
                                         <div id="chat">
                                             <div class="my-2 p-2">
                                                 <div class="border rounded p-2">
@@ -128,7 +141,8 @@
                                                                 alt="avatar 1" height="50">
                                                             <div class="order-2">
                                                                 <p class="small">
-                                                                    {{ $grievanceDetail->grievanceUser->name ?? '' }}</p>
+                                                                    {{ $grievanceDetail->grievanceUser->name ?? '' }}
+                                                                </p>
                                                                 <p class="small text-muted">
                                                                     {{ $grievanceDetail->created_at?->calendar() }}</p>
                                                             </div>
@@ -156,7 +170,8 @@
                                                                         src="{{ $detail->user->avatar ?? '' }}"
                                                                         alt="avatar 1" height="50">
                                                                     <div class="order-1">
-                                                                        <p class="small">{{ $detail->user->name ?? '' }}
+                                                                        <p class="small">
+                                                                            {{ $detail->user->name ?? '' }}
                                                                         </p>
                                                                         <p class="small text-muted">
                                                                             {{ $detail->created_at?->calendar() }}</p>
@@ -185,7 +200,8 @@
                                                                         alt="avatar 1" height="50">
                                                                     <div class="order-1">
                                                                         <p class="small">
-                                                                            {{ $detail->grievanceUser->name ?? '' }}</p>
+                                                                            {{ $detail->grievanceUser->name ?? '' }}
+                                                                        </p>
                                                                         <p class="small text-muted">
                                                                             {{ $detail->created_at?->calendar() }}</p>
                                                                     </div>
@@ -228,8 +244,8 @@
 
 
 
-                                                    <button type="submit" class="btn bg-white ms-3 link-info" href="#"><i
-                                                            class="fas fa-paper-plane"></i></button>
+                                                    <button type="submit" class="btn bg-white ms-3 link-info"
+                                                        href="#"><i class="fas fa-paper-plane"></i></button>
                                                 </div>
                                             </div>
                                         </form>
@@ -248,12 +264,13 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-            </div>
 
+
+            </div>
         </div>
+
+    </div>
     </div>
 
     @push('style')

@@ -63,6 +63,7 @@
                                     class="form-control @error('branch_name') is-invalid @enderror"
                                     id="branch_name"
                                     placeholder="शाखा नाम"
+                                    required
                                 />
                                 @error('branch_name')
                                 <div class="invalid-feedback">{{$message}}</div>

@@ -44,7 +44,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="dispatch_no" class="form-label">चलानी न.</label>
+                                    <label for="dispatch_no" class="form-label">चलानी न.*</label>
                                     <input
                                         type="text"
                                         name="dispatch_no"
@@ -52,6 +52,7 @@
                                         class="form-control @error('dispatch_no') is-invalid @enderror"
                                         id="dispatch_no"
                                         placeholder="चलानी न."
+                                        required
                                     />
                                     @error('dispatch_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -67,7 +68,7 @@
                                     />
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_number" class="form-label">पत्र संख्या</label>
+                                    <label for="letter_number" class="form-label">पत्र संख्या *</label>
                                     <input
                                         type="text"
                                         name="letter_number"
@@ -75,6 +76,7 @@
                                         class="form-control @error('letter_number') is-invalid @enderror"
                                         id="letter_number"
                                         placeholder="पत्र संख्या"
+                                        required
                                     />
                                     @error('letter_number')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -98,6 +100,7 @@
                                         class="form-control @error('receiver_name') is-invalid @enderror"
                                         id="receiver_name"
                                         placeholder="पाउने कार्यालयको नाम"
+                                        required
                                     />
                                     @error('receiver_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -112,6 +115,7 @@
                                         class="form-control @error('receiver_address') is-invalid @enderror"
                                         id="receiver_address"
                                         placeholder="पाउने कार्यालयको ठेगाना"
+                                        required
                                     />
                                     @error('receiver_address')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -126,6 +130,7 @@
                                         class="form-control @error('subject') is-invalid @enderror"
                                         id="subject"
                                         placeholder="बिषय"
+                                        required
                                     />
                                     @error('subject')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -140,6 +145,7 @@
                                         class="form-control @error('receiver_contact') is-invalid @enderror"
                                         id="receiver_contact"
                                         placeholder="हुलाक/ र.न. "
+                                        required
                                     />
                                     @error('receiver_contact')
                                     <div class="invalid-feedback">{{$message}}</div>

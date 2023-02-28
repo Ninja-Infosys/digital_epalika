@@ -43,7 +43,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{ old('name') }}"
                                            class="form-control @error('name') is-invalid @enderror" id="name"
-                                           placeholder="समूह नाम"/>
+                                           placeholder="समूह नाम" required/>
                                     @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -53,7 +53,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" name="registered_office" value="{{ old('registered_office') }}"
                                            class="form-control @error('registered_office') is-invalid @enderror"
-                                           id="registered_office" placeholder="दर्ता भएको कार्यालय"/>
+                                           id="registered_office" placeholder="दर्ता भएको कार्यालय" required/>
                                     @error('registered_office')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

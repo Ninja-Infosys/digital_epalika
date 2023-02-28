@@ -50,7 +50,7 @@
                                     <select
                                         name="meeting_event_id"
                                         class="form-select @error('meeting_event_id') is-invalid @enderror"
-                                        id="meeting_event_id">
+                                        id="meeting_event_id" required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($meetingEvents as $meetingEvent)
                                             <option {{$meetingEvent->id===old('meeting_event_id',$meetingDecision->meeting_event_id) ? 'selected' : ''}}
@@ -82,6 +82,7 @@
                                         class="form-control @error('subject') is-invalid @enderror"
                                         id="subject"
                                         placeholder="विषय"
+                                        required
                                     />
                                     @error('subject')
                                     <div class="invalid-feedback">{{$message}}</div>

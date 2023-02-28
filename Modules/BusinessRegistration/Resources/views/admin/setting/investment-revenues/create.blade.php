@@ -53,6 +53,7 @@
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
+                                        required
                                     />
                                     @error('title')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -62,7 +63,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="object_transaction_id" class="form-label">बर्ग *</label>
                                     <select name="object_transaction_id" id="object_transaction_id"
-                                            class="form-control @error('object_transaction_id') is-invalid @enderror">
+                                            class="form-control @error('object_transaction_id') is-invalid @enderror" required>
                                         <option value="">छान्नुहोस्</option>
                                         @foreach($objectTransactions as $objectTransaction)
                                             <option value="{{$objectTransaction->id}}"
@@ -91,6 +92,7 @@
                                         class="form-control @error('registration_amount') is-invalid @enderror"
                                         id="registration_amount"
                                         placeholder="नयाँ व्यवसाय दर्ता गर्दा लाग्ने शुल्क"
+                                        required
                                     />
                                     @error('registration_amount')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -106,6 +108,7 @@
                                         class="form-control @error('renew_amount') is-invalid @enderror"
                                         id="renew_amount"
                                         placeholder="व्यवसाय नबिकरण दर्ता गर्दा लाग्ने शुल्क"
+                                        required
                                     />
                                     @error('renew_amount')
                                     <div class="invalid-feedback">{{$message}}</div>
