@@ -46,6 +46,16 @@
                     <span>प्रतिवेदनहरु</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/revenue/report/invoice') ? 'active' : ''}}">
+                <a href="{{route('admin.revenue.report.invoice')}}">
+                    <span>वडा अनुसार रसिद</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/revenue/report/tax-payer') ? 'active' : ''}}">
+                <a href="{{route('admin.revenue.report.tax-payer')}}">
+                    <span>करदाताको प्रकार</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
