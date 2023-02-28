@@ -236,7 +236,7 @@
                                 data: {pin: pin},
                                 success: function (response) {
                                     console.log(response, response.valid);
-                                    if (response == true) {
+                                    if (response === true) {
                                         resolve();
                                     } else {
                                         extra.invalidPin()
@@ -254,12 +254,11 @@
                     if (result.value) {
                         // get value in data bs type
                         var type = $(this).data('bs-type');
-                        if (type == 'delete') {
+                        if (type === 'delete') {
                             $(this).closest('form').submit();
-                        } else if (type == 'edit') {
+                        } else if (type === 'edit') {
                             // get href value
-                            var href = $(this).attr('href');
-                            window.location.href = href;
+                            window.location.href = $(this).attr('href');
                         }
                     }
                 });
@@ -283,6 +282,48 @@
                 $(this).closest('form').submit();
             });
         },
+        browserBack: function (){
+            const previousUrl = document.referrer;
+            const currentUrl = window.location.href;
+            history.pushState({ url: currentUrl }, '', currentUrl);
+            $(window).on('popstate', function () {
+                window.location.href = previousUrl;
+            });
+        },
+        formFillAlert: function (){
+            let unsavedChanges = false;
+            $('form input').blur(function() {
+                if ($(this).val() !== '') {
+                    unsavedChanges = true;
+                }
+            });
+            $(window).on('beforeunload', function(event) {
+                if (unsavedChanges) {
+                    event.preventDefault();
+                    swal.fire({
+                        title: 'तपाईंसँग सुरक्षित नगरिएका परिवर्तनहरू छन्।',
+                        text: 'के तपाईं साँच्चै छोड्न चाहनुहुन्छ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'हो',
+                        cancelButtonText: 'होइन'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            unsavedChanges = false;
+                            window.location.reload();
+                        }else {
+                            event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+                        }
+                    });
+                    return false;
+                }
+            });
+            $('form').submit(function() {
+                unsavedChanges = false;
+            });
+        }
     };
     $(document).ready(function () {
         // plugins
@@ -296,17 +337,10 @@
         extra.deleteConfirm();
         extra.cacheClear();
         extra.searchFocusOut();
+        extra.browserBack();
+        extra.formFillAlert();
     });
 })(jQuery);
-
-$(function () {
-    const previousUrl = document.referrer;
-    const currentUrl = window.location.href;
-    history.pushState({ url: currentUrl }, '', currentUrl);
-    $(window).on('popstate', function () {
-        window.location.href = previousUrl;
-    });
-})
 
 function toastmessage(message, type) {
     swal.fire({
