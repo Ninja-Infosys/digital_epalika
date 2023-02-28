@@ -43,7 +43,6 @@ class Project extends Model
         'project_completion_date',
         'plan_level_id',
         'ward_no',
-        'budget_head_id',
         'allocated_amount',
         'project_venue',
         'evaluation_amount',
@@ -206,5 +205,10 @@ class Project extends Model
     public function technicalCostEstimates(): HasMany
     {
         return $this->hasMany(TechnicalCostEstimate::class);
+    }
+
+    public function projectAllocatedAmounts(): HasMany
+    {
+        return $this->hasMany(ProjectAllocatedAmount::class);
     }
 }

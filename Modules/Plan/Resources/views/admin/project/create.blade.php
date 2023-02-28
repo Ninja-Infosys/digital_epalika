@@ -162,37 +162,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="budget_head_id" class="form-label">बजेट शिर्षक *</label>
-                                <select
-                                    name="budget_head_id"
-                                    class="form-control @error('budget_head_id') is-invalid @enderror"
-                                    id="budget_head_id" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($budgetHeads as $budgetHead)
-                                        @if(count($budgetHead->budgetHeads)>0)
-                                            <optgroup label="{{$budgetHead->title}}">
-                                                @foreach($budgetHead->budgetHeads as $budget_sub_head)
-                                                    <option
-                                                        {{old('budget_head_id')==$budget_sub_head->id ? 'selected' : ''}}
-                                                        value="{{$budget_sub_head->id}}">
-                                                        {{$budget_sub_head->title}}
-                                                    </option>
-                                                @endforeach
-                                            </optgroup>
-                                        @else
-                                            <option
-                                                {{old('budget_head_id')==$budgetHead->id ? 'selected' : ''}}
-                                                value="{{$budgetHead->id}}">
-                                                {{$budgetHead->title}}
-                                            </option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                @error('budget_head_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="project_venue" class="form-label">आयोजना स्थल </label>
                                 <input
                                     type="text"
@@ -219,6 +188,40 @@
                                 @error('purpose')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="budget_head_id" class="form-label">बजेट शिर्षक *</label>
+                                <select
+                                    name="budget_head_id[]"
+                                    class="form-control @error('budget_head_id') is-invalid @enderror"
+                                    id="budget_head_id" data-toggle="select2" multiple data-width="100%">
+                                    <option value="" disabled>--- छान्नुहोस् ---</option>
+                                    @foreach($budgetHeads as $budgetHead)
+                                        @if(count($budgetHead->budgetHeads)>0)
+                                            <optgroup label="{{$budgetHead->title}}">
+                                                @foreach($budgetHead->budgetHeads as $budget_sub_head)
+                                                    <option
+                                                        {{old('budget_head_id')==$budget_sub_head->id ? 'selected' : ''}}
+                                                        value="{{$budget_sub_head->id}}">
+                                                        {{$budget_sub_head->title}}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option
+                                                {{old('budget_head_id')==$budgetHead->id ? 'selected' : ''}}
+                                                value="{{$budgetHead->id}}">
+                                                {{$budgetHead->title}}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('budget_head_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div id="allocated-amounts">
+
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="operated_through" class="form-label">खरिद बिधि *</label>
@@ -346,4 +349,21 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $(document.body).delegate('#budget_head_id', 'change', function (e) {
+                    const selectedOptions = $('#budget_head_id option:selected');
+                    selectedOptions.each((key,opt)=>{
+                        let col_div=document.createElement('div')
+                        col_div.addClass='col-md-3'
+
+                    })
+                    let budget_head_id = $('#budget_head_id').val()
+                    //$('#budget_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    console.log(budget_head_id)
+                })
+            });
+        </script>
+    @endpush
 @endsection
