@@ -37,6 +37,7 @@
                                 <label for="data" class="form-label">डाटा *</label>
                                 <textarea name="data"
                                           id="data"
+                                          required
                                           cols="30" rows="10"
                                           class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',$project->projectAgreementTerm->data??$agreementTermTemplate)}}</textarea>
                                 @error('data')

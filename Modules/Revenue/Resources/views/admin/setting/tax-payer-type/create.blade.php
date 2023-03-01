@@ -43,6 +43,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -57,6 +58,7 @@
                                     class="form-control @error('code') is-invalid @enderror"
                                     id="code"
                                     placeholder="कोड"
+                                    required
                                 />
                                 @error('code')
                                 <div class="invalid-feedback">{{$message}}</div>

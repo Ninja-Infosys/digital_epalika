@@ -44,7 +44,7 @@
                                 <select
                                     name="type"
                                     class="form-select @error('type') is-invalid @enderror"
-                                    id="type">
+                                    id="type" required>
                                     <option value=""> -- छान्नुहोस् --</option>
                                     @foreach(\Modules\Plan\Enums\TransactionTypeEnum::cases() as $transactionType)
                                         <option value="{{$transactionType->value}}">
@@ -72,6 +72,7 @@
                                     class="form-control @error('amount') is-invalid @enderror"
                                     id="amount"
                                     placeholder="रकम"
+                                    required
                                 />
                                 @error('amount')
                                 <div class="invalid-feedback">{{$message}}</div>

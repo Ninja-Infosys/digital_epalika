@@ -99,12 +99,20 @@
     const extra = {
         addMore: function () {
             $('[data-toggle="add-more"]').each(function () {
-                const $this = $(this);
-                const content = $this.data("content");
-                const target = $this.data("target");
-                $this.on("click", function (e) {
+                const target_element = $(this).data("target-element");
+                const target_class = $(this).data('target');
+                $(this).on("click", function (e) {
                     e.preventDefault();
-                    $(target).append(content);
+                    const row_element = $(`#${target_element}`).children().first().clone();
+                    const row_index = $(`#${target_element} > div`).length;
+                    row_element.find('input, textarea, select').each(function(col_key, col) {
+                            const name = $(col).attr('name');
+                            const array_name = name.split('[');
+                            const key_name = array_name.pop().replace(']', '');
+                            const new_name = `${array_name.shift()}[${row_index}][${key_name}]`;
+                            $(col).attr('name', new_name);
+                        });
+                    $(target_class).append(row_element);
                 });
             });
         },
@@ -281,27 +289,27 @@
                 $(this).closest('form').submit();
             });
         },
-        browserBack: function (){
+        browserBack: function () {
             const previousUrl = document.referrer;
             const currentUrl = window.location.href;
-            history.pushState({ url: currentUrl }, '', currentUrl);
+            history.pushState({url: currentUrl}, '', currentUrl);
             $(window).on('popstate', function () {
                 window.location.href = previousUrl;
             });
         },
-        formFillAlert: function (){
+        formFillAlert: function () {
             let unsavedChanges = false;
-            $('form input').blur(function() {
+            $('form input').blur(function () {
                 if ($(this).val() !== '') {
                     unsavedChanges = true;
                 }
             });
-            $(window).on('beforeunload', function(event) {
+            $(window).on('beforeunload', function (event) {
                 if (unsavedChanges) {
                     event.preventDefault();
                 }
             });
-            $('form').submit(function() {
+            $('form').submit(function () {
                 unsavedChanges = false;
             });
         }
@@ -322,6 +330,7 @@
         extra.formFillAlert();
     });
 })(jQuery);
+
 function toastmessage(message, type) {
     swal.fire({
         title: message,
@@ -334,6 +343,7 @@ function toastmessage(message, type) {
         icon: type,
     });
 }
+
 function copyText(el) {
     try {
         navigator.clipboard.writeText(el);

@@ -7,7 +7,7 @@
                     name="structureAssessmentRate.sector_id"
                     class="form-select @error('structureAssessmentRate.sector_id') is-invalid @enderror"
                     wire:model="structureAssessmentRate.sector_id"
-                    id="structureAssessmentRate.sector_id" data-width="100%">
+                    id="structureAssessmentRate.sector_id" data-width="100%" required>
                     <option value="">--- छान्नुहोस् ---</option>
                     @foreach($sectors as $sector)
                         <option
@@ -29,7 +29,7 @@
                     name="structureAssessmentRate.physical_structure_type_id"
                     class="form-select @error('structureAssessmentRate.physical_structure_type_id') is-invalid @enderror"
                     wire:model="structureAssessmentRate.physical_structure_type_id"
-                    id="structureAssessmentRate.physical_structure_type_id" data-width="100%">
+                    id="structureAssessmentRate.physical_structure_type_id" data-width="100%" required>
                     <option value="">--- छान्नुहोस् ---</option>
                     @foreach($physicalStructureTypes as $physicalStructureType)
                         <option
@@ -54,7 +54,7 @@
                     value="{{old('structureAssessmentRate.usage')}}"
                     class="form-control @error('structureAssessmentRate.usage') is-invalid @enderror"
                     id="structureAssessmentRate.usage"
-                    placeholder="प्रयोजन"
+                    placeholder="प्रयोजन" required
                 />
                 @error('structureAssessmentRate.usage')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -71,7 +71,7 @@
                     value="{{old('structureAssessmentRate.rate')}}"
                     class="form-control @error('structureAssessmentRate.rate') is-invalid @enderror"
                     id="structureAssessmentRate.rate"
-                    placeholder="दर"
+                    placeholder="दर" required
                 />
                 @error('structureAssessmentRate.rate')
                 <div class="invalid-feedback">{{$message}}</div>

@@ -47,6 +47,7 @@
                                     value="{{old('office_name',$project->projectMaintenanceArrangement->office_name??'')}}"
                                     id="office_name"
                                     placeholder="जिम्मा लिने समिती संस्थाको नाम"
+                                    required
                                 />
                                 @error('office_name')
                                 <div class="invalid-feedback">{{$message}}</div>

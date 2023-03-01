@@ -48,7 +48,7 @@
                                         value="{{old('name')}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
-                                        placeholder="पुरा नाम "
+                                        placeholder="पुरा नाम " required
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -62,7 +62,7 @@
                                         value="{{old('phone_no')}}"
                                         class="form-control @error('phone_no') is-invalid @enderror"
                                         id="phone_no"
-                                        placeholder="सम्पर्क नं."
+                                        placeholder="सम्पर्क नं." required
                                     />
                                     @error('phone_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="gender" class="form-label">लिंग *</label>
-                                    <select id="gender" name="gender" class="form-select">
+                                    <select id="gender" name="gender" class="form-select" required>
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
                                             <option
@@ -101,7 +101,7 @@
                                         value="{{old('citizenship_no')}}"
                                         class="form-control @error('citizenship_no') is-invalid @enderror"
                                         id="citizenship_no"
-                                        placeholder="नागरिकता नं."
+                                        placeholder="नागरिकता नं." required
                                     />
                                     @error('citizenship_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -128,7 +128,7 @@
                                     value="{{old('tole')}}"
                                     class="form-control @error('tole') is-invalid @enderror"
                                     id="tole"
-                                    placeholder="टोल"
+                                    placeholder="टोल" required
                                 />
                                 @error('tole')
                                 <div class="invalid-feedback">{{$message}}</div>

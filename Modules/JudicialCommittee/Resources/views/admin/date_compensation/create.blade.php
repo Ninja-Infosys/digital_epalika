@@ -45,7 +45,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" name="decision_subject" class="form-control"
                                        value="{{ old('decision_subject') }}"
-                                       id="decision_subject" placeholder="निर्णय हुने विषय"/>
+                                       id="decision_subject" placeholder="निर्णय हुने विषय" required/>
                                 @error('decision_subject')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -55,7 +55,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="time" name="decision_time" class="form-control"
                                        value="{{ old('decision_time') }}"
-                                       id="decision_time" placeholder="निर्णय हुने समय "/>
+                                       id="decision_time" placeholder="निर्णय हुने समय " required/>
                                 @error('decision_time')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

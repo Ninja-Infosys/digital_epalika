@@ -108,7 +108,7 @@
                                     <div class="col-md-2 mb-2">
                                         <label for="ward_no" class="form-label">वडा नं</label>
                                         <select id="ward_no" name="ward_no"
-                                                class="form-select">
+                                                class="form-select" required>
                                             <option value="">-- छान्नुहोस् --</option>
                                             @foreach(officeSetting()->localBody->ward_no as $ward)
                                                 <option
@@ -127,7 +127,7 @@
                         <div class="row mt-2">
                             <div class="col-md-12 mb-2">
                                 <label for="recommendation_data" class="form-label">डाटा *</label>
-                                <textarea name="recommendation_data" id="recommendation_data" cols="30" rows="10"
+                                <textarea name="recommendation_data" id="recommendation_data" required cols="30" rows="10"
                                           class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data', $registrationDetail->recommendation_data) }}</textarea>
                                 @error('recommendation_data')
                                 <div class="invalid-feedback">{{ $message }}</div>

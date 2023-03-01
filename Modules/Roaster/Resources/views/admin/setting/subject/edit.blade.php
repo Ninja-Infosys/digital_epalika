@@ -44,7 +44,7 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="title" class="form-label">बिषय *</label>
                                     <input id="title" type="text" name="title" placeholder="बिषय"
-                                           class="form-control @error('title') is-invalid @enderror" value="{{old('title',$subject->title)}}">
+                                           class="form-control @error('title') is-invalid @enderror" value="{{old('title',$subject->title)}}" required>
                                     @error('title')
                                     <div class="text-danger">{{$message}}</div>
                                     @enderror
@@ -52,7 +52,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="level" class="form-label">स्तर *</label>
                                     <input id="level" type="text" name="level" placeholder="स्तर"
-                                           class="form-control @error('level') is-invalid @enderror" value="{{old('level',$subject->level)}}">
+                                           class="form-control @error('level') is-invalid @enderror" value="{{old('level',$subject->level)}}" required>
                                     @error('level')
                                     <div class="text-danger">{{$message}}</div>
                                     @enderror
@@ -60,7 +60,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="duration" class="form-label">अवधि *</label>
                                     <input id="duration" type="text" name="duration" placeholder="बिषय"
-                                           class="form-control @error('duration') is-invalid @enderror" value="{{old('duration',$subject->duration)}}">
+                                           class="form-control @error('duration') is-invalid @enderror" value="{{old('duration',$subject->duration)}}" required>
                                     @error('duration')
                                     <div class="text-danger">{{$message}}</div>
                                     @enderror

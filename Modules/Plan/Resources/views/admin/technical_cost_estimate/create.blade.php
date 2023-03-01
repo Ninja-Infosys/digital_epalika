@@ -48,6 +48,7 @@
                                     class="form-control @error('detail') is-invalid @enderror"
                                     id="detail"
                                     placeholder="विवरण"
+                                    required
                                 />
                                 @error('detail')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -118,6 +119,7 @@
                                     class="form-control @error('quantity') is-invalid @enderror"
                                     id="quantity"
                                     placeholder="परिमाण"
+                                    required
                                 />
                                 @error('quantity')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -132,6 +134,7 @@
                                     class="form-control @error('unit') is-invalid @enderror"
                                     id="unit"
                                     placeholder="इकाइ"
+                                    required
                                 />
                                 @error('unit')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -146,6 +149,7 @@
                                     class="form-control @error('rate') is-invalid @enderror"
                                     id="rate"
                                     placeholder="दर"
+                                    required
                                 />
                                 @error('rate')
                                 <div class="invalid-feedback">{{$message}}</div>

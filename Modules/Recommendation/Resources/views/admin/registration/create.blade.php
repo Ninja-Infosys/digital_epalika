@@ -103,7 +103,7 @@
                                 <div class="col-md-2 mb-2">
                                     <label for="ward_no" class="form-label">वडा नं</label>
                                     <select id="ward_no" name="ward_no"
-                                            class="form-select">
+                                            class="form-select" required>
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(officeSetting()->localBody->ward_no as $ward)
                                             <option
@@ -124,6 +124,7 @@
                                 <label for="recommendation_data" class="form-label">डाटा *</label>
                                 <textarea name="recommendation_data"
                                           id="recommendation_data"
+                                          required
                                           cols="30" rows="10"
                                           class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{old('recommendation_data')}}</textarea>
                                 @error('recommendation_data')

@@ -9,7 +9,7 @@
                         name="taxPayerDetail.tax_payer_type_id"
                         class="form-select @error('taxPayerDetail.tax_payer_type_id') is-invalid @enderror"
                         wire:model="taxPayerDetail.tax_payer_type_id"
-                        id="taxPayerDetail.tax_payer_type_id" data-width="100%">
+                        id="taxPayerDetail.tax_payer_type_id" data-width="100%" required>
                         <option value="">--- छान्नुहोस् ---</option>
                         @foreach($taxPayerTypes as $taxPayerType)
                             <option
@@ -35,6 +35,7 @@
                         class="form-control @error('newTaxPayerType.title') is-invalid @enderror"
                         id="newTaxPayerType.title"
                         placeholder="करदाताको प्रकार"
+                        required
                     />
                     <input
                         type="text"
@@ -44,6 +45,7 @@
                         class="form-control @error('newTaxPayerType.code') is-invalid @enderror"
                         id="newTaxPayerType.code"
                         placeholder="कोड"
+                        required
                     />
 
                     <button class="btn btn-success" wire:click.prevent="saveTaxPayerType()" type="button"><i
@@ -62,6 +64,7 @@
                         class="form-control @error('taxPayerDetail.name') is-invalid @enderror"
                         id="taxPayerDetail.name"
                         placeholder="नेपाली"
+                        required
                     />
                     <input
                         type="text"
@@ -71,6 +74,7 @@
                         class="form-control @error('taxPayerDetail.name_en') is-invalid @enderror"
                         id="taxPayerDetail.name_en"
                         placeholder="English"
+                        required
                     />
                 </div>
                 <div class="d-flex">
@@ -92,6 +96,7 @@
                     class="form-control @error('taxPayerDetail.phone') is-invalid @enderror"
                     id="taxPayerDetail.phone"
                     placeholder="फोन"
+                    required
                 />
                 @error('taxPayerDetail.phone')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -122,6 +127,7 @@
                     class="form-control @error('taxPayerDetail.occupation') is-invalid @enderror"
                     id="taxPayerDetail.occupation"
                     placeholder="पेशा"
+                    required
                 />
                 @error('taxPayerDetail.occupation')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -133,7 +139,7 @@
                     name="taxPayerDetail.gender"
                     wire:model="taxPayerDetail.gender"
                     class="form-select @error('taxPayerDetail.gender') is-invalid @enderror"
-                    id="taxPayerDetail.gender" data-width="100%">
+                    id="taxPayerDetail.gender" data-width="100%" required>
                     <option value="">--- छान्नुहोस् ---</option>
                     @foreach(\App\Enums\Gender::cases() as $gender)
                         <option
@@ -158,7 +164,7 @@
                     value="{{old('taxPayerDetail.father_name')}}"
                     class="form-control @error('taxPayerDetail.father_name') is-invalid @enderror"
                     id="taxPayerDetail.father_name"
-                    placeholder="बुवाको नाम"
+                    placeholder="बुवाको नाम" required
                 />
                 @error('taxPayerDetail.father_name')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -173,7 +179,7 @@
                     value="{{old('taxPayerDetail.grandfather_name')}}"
                     class="form-control @error('taxPayerDetail.grandfather_name') is-invalid @enderror"
                     id="taxPayerDetail.grandfather_name"
-                    placeholder="हजुरबुवाको नाम"
+                    placeholder="हजुरबुवाको नाम" required
                 />
                 @error('taxPayerDetail.grandfather_name')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -188,7 +194,7 @@
                     value="{{old('taxPayerDetail.citizenship_no')}}"
                     class="form-control @error('taxPayerDetail.citizenship_no') is-invalid @enderror"
                     id="taxPayerDetail.citizenship_no"
-                    placeholder="नागरिकता नम्बर"
+                    placeholder="नागरिकता नम्बर" required
                 />
                 @error('taxPayerDetail.citizenship_no')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -200,7 +206,7 @@
                     name="taxPayerDetail.issued_district"
                     wire:model="taxPayerDetail.issued_district"
                     class="form-select @error('taxPayerDetail.issued_district') is-invalid @enderror"
-                    id="taxPayerDetail.issued_district" data-width="100%">
+                    id="taxPayerDetail.issued_district" data-width="100%" required>
                     <option value="">--- छान्नुहोस् ---</option>
                     @foreach(get_districts() as $district)
                         <option
@@ -219,7 +225,7 @@
             <div class="col-md-4 mb-2">
                 <label for="issued_date">जारि मिति</label>
                 <input type="text" name="issued_date" wire:model="taxPayerDetail.issued_date" class="form-control"
-                       id="issued_date">
+                       id="issued_date" required>
             </div>
             <div class="col-md-6 mb-2">
                 <label for="province_id" class="form-label">प्रदेश *</label>
@@ -227,7 +233,7 @@
                     name="taxPayerDetail.province_id"
                     wire:model="taxPayerDetail.province_id"
                     class="form-select @error('taxPayerDetail.province_id') is-invalid @enderror"
-                    id="taxPayerDetail.province_id">
+                    id="taxPayerDetail.province_id" required>
                     <option value="">प्रदेश छान्नुहोस्</option>
                     @foreach($provinces as $province)
                         <option value="{{$province->id}}">
@@ -245,7 +251,7 @@
                     name="taxPayerDetail.district_id"
                     wire:model="taxPayerDetail.district_id"
                     class="form-select @error('taxPayerDetail.district_id') is-invalid @enderror"
-                    id="taxPayerDetail.district_id">
+                    id="taxPayerDetail.district_id" required>
                     <option value="">जिल्ला छान्नुहोस्</option>
                     @foreach($districts as $district)
                         <option value="{{$district->id}}">
@@ -263,7 +269,7 @@
                     name="taxPayerDetail.local_body_id"
                     wire:model="taxPayerDetail.local_body_id"
                     class="form-select @error('taxPayerDetail.local_body_id') is-invalid @enderror"
-                    id="taxPayerDetail.local_body_id">
+                    id="taxPayerDetail.local_body_id" required>
                     <option value="">पालिका छान्नुहोस्</option>
                     @foreach($localBodies as $localBody)
                         <option value="{{$localBody->id}}">
@@ -281,7 +287,7 @@
                     name="taxPayerDetail.ward"
                     wire:model="taxPayerDetail.ward"
                     class="form-select @error('taxPayerDetail.ward') is-invalid @enderror"
-                    id="taxPayerDetail.ward">
+                    id="taxPayerDetail.ward" required>
                     <option value="">वडा नं. छान्नुहोस्</option>
                     @foreach($wards as $ward)
                         <option value="{{$ward}}">
@@ -302,7 +308,7 @@
                     value="{{old('taxPayerDetail.tole')}}"
                     class="form-control @error('taxPayerDetail.tole') is-invalid @enderror"
                     id="taxPayerDetail.tole"
-                    placeholder="टोल"
+                    placeholder="टोल" required
                 />
                 @error('taxPayerDetail.tole')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -318,6 +324,7 @@
                     class="form-control @error('taxPayerDetail.village') is-invalid @enderror"
                     id="taxPayerDetail.village"
                     placeholder="गाउँ"
+                    required
                 />
                 @error('taxPayerDetail.village')
                 <div class="invalid-feedback">{{$message}}</div>

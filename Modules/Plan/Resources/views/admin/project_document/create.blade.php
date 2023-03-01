@@ -42,6 +42,7 @@
                                     class="form-control @error('document_name') is-invalid @enderror"
                                     id="document_name"
                                     placeholder="कागजात नाम"
+                                    required
                                 />
                                 @error('document_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -62,6 +63,7 @@
                                 <label for="data" class="form-label">डाटा *</label>
                                 <textarea name="data"
                                           id="data"
+                                          required
                                           cols="30" rows="10"
                                           class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
                                 @error('data')
