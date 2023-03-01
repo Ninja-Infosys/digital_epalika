@@ -7,7 +7,7 @@
                     <label for="name" class="form-label">पुरा नाम *</label>
                     <input type="text" wire:model="form.full_name"
                            class="form-control @error('form.full_name') is-invalid @enderror" id="name"
-                           placeholder="पुरा नाम">
+                           placeholder="पुरा नाम" required>
                     @error('form.full_name')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -15,7 +15,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="formFile" class="form-label">फोटो *</label>
                     <input wire:model="form.photo" class="form-control @error('form.photo') is-invalid @enderror"
-                           type="file" id="formFile">
+                           type="file" id="formFile" required required>
                     @error('form.photo')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -24,7 +24,7 @@
                     <label for="citizenship_no" class="form-label">नागरिता नं. * </label>
                     <input type="text" wire:model="form.citizenship_no"
                            class="form-control @error('form.citizenship_no') is-invalid @enderror" id="citizenship_no"
-                           placeholder="नागरिता नं.">
+                           placeholder="नागरिता नं." required required>
                     @error('form.citizenship_no')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -33,7 +33,7 @@
                     <label for="phone" class="form-label">सम्पर्क न. * </label>
                     <input type="text" wire:model="form.phone_no"
                            class="form-control @error('form.phone_no') is-invalid @enderror" id="phone"
-                           placeholder="सम्पर्क न.">
+                           placeholder="सम्पर्क न." required required>
                     @error('form.phone_no')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -50,7 +50,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="qualification" class="form-label">शैक्षिक योग्यता * </label>
                     <input type="text" wire:model="form.qualification" class="form-control" id="qualification"
-                           placeholder="शैक्षिक योग्यता">
+                           placeholder="शैक्षिक योग्यता" required required>
                     @error('form.qualification')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -58,7 +58,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="gender" class="form-label">लिङ्ग *</label>
                     <select wire:model="form.gender" class="form-select @error('form.gender') is-invalid @enderror"
-                            id="gender">
+                            id="gender" required required>
                         <option value="">-- लिङ्ग --</option>
                         @foreach(\App\Enums\Gender::cases() as $key=>$gender)
                         <option value="{{$gender->value}}">{{$gender->label()}}</option>
@@ -72,7 +72,7 @@
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="ethnicity_id">जातीयता *</label>
                     <select wire:model="form.ethnicity_id"
-                            class="form-select @error('form.ethnicity_id') is-invalid @enderror" id="ethnicity_id">
+                            class="form-select @error('form.ethnicity_id') is-invalid @enderror" id="ethnicity_id" required required>
                         <option value="">-- जातीयता छान्नुहोस् --</option>
                         @foreach($ethnicities as $ethnicity)
                             <option value="{{$ethnicity->id}}">{{$ethnicity->title}}</option>
@@ -100,7 +100,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="province_id" class="form-label">प्रदेश *</label>
                     <select wire:model="form.province_id"
-                            class="form-select @error('form.province_id') is-invalid @enderror" id="province_id">
+                            class="form-select @error('form.province_id') is-invalid @enderror" id="province_id" required>
                         <option value="">-- प्रदेश छान्नुहोस्--</option>
                         @foreach($provinces as $province)
                             <option value="{{$province->id}}">{{$province->province}}</option>
@@ -113,7 +113,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="district_id" class="form-label">जिल्ला *</label>
                     <select wire:model="form.district_id"
-                            class="form-select @error('form.district_id') is-invalid @enderror" id="district_id">
+                            class="form-select @error('form.district_id') is-invalid @enderror" id="district_id" required>
                         <option value="">-- जिल्ला छान्नुहोस्--</option>
                         @foreach($districts as $district)
                             <option value="{{$district->id}}">{{$district->district}}</option>
@@ -127,7 +127,7 @@
                     <label for="local_body_id" class="form-label">पालिका *</label>
                     <select wire:model="form.local_body_id"
                             class="form-select @error('form.local_body_id') is-invalid @enderror"
-                            id="local_body_id">
+                            id="local_body_id" required>
                         <option value="">-- पालिका छान्नुहोस्--</option>
                         @foreach($localBodies as $localBody)
                             <option value="{{$localBody->id}}">{{$localBody->local_body}}</option>
@@ -140,7 +140,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="ward_no" class="form-label">वडा नं. *</label>
                     <select wire:model="form.ward_no"
-                            class="form-select @error('form.ward_no') is-invalid @enderror" id="ward_no">
+                            class="form-select @error('form.ward_no') is-invalid @enderror" id="ward_no" required>
                         <option value="">-- वडा छान्नुहोस्--</option>
                         @foreach($wards as $ward)
                             <option value="{{$ward}}">{{$ward}}</option>
@@ -166,7 +166,7 @@
                     <label class="form-label" id="application_form">आवेदन फारम *</label>
                     <input wire:model="form.application_form"
                            class="form-control @error('form.application_form') is-invalid @enderror" type="file"
-                           id="application_form">
+                           id="application_form" required>
                     @error('form.application_form')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -175,7 +175,7 @@
                     <label class="form-label" for="ward_recommendation">वडाको सिफारिस *</label>
                     <input wire:model="form.ward_recommendation"
                            class="form-control @error('form.ward_recommendation') is-invalid @enderror" type="file"
-                           id="ward_recommendation">
+                           id="ward_recommendation" required>
                     @error('form.ward_recommendation')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
@@ -193,7 +193,7 @@
                     <label class="form-label" for="citizenship_front">नागरीकता (अगाडी) *</label>
                     <input wire:model="form.citizenship_front"
                            class="form-control @error('form.citizenship_front') is-invalid @enderror" type="file"
-                           id="citizenship_front">
+                           id="citizenship_front" required>
                     @error('form.citizenship_front')
                     <div class="text-danger">{{$message}}</div>
                     @enderror

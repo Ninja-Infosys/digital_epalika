@@ -40,7 +40,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" name="year" class="form-control"
                                        value="{{ old('year')}}" id="year"
-                                       placeholder="आवेदन वर्ष" />
+                                       placeholder="आवेदन वर्ष"  required/>
                                 @error('year')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -50,7 +50,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" name="case_name" class="form-control"
                                        value="{{ old('case_name') }}"
-                                       id="case_name" placeholder="केस नाम"/>
+                                       id="case_name" placeholder="केस नाम" required/>
                                 @error('case_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -66,7 +66,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="time" name="appearance_time" class="form-control"
                                        value="{{ old('appearance_time') }}"
-                                       id="appearance_time" placeholder="हाजिर हुने समय"/>
+                                       id="appearance_time" placeholder="हाजिर हुने समय" required/>
                                 @error('appearance_time')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

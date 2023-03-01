@@ -45,7 +45,7 @@
                                 <select
                                     name="tax_payer_id"
                                     class="form-select @error('tax_payer_id') is-invalid @enderror"
-                                    id="tax_payer_id" data-toggle="select2" data-width="100%">
+                                    id="tax_payer_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($taxPayers as $taxPayer)
                                         <option
@@ -65,7 +65,7 @@
                                 <select
                                     name="fiscal_year_id"
                                     class="form-select @error('fiscal_year_id') is-invalid @enderror"
-                                    id="fiscal_year_id" data-toggle="select2" data-width="100%">
+                                    id="fiscal_year_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($fiscalYears as $fiscalYear)
                                         <option
@@ -86,7 +86,7 @@
                                     <select
                                         name="payment_method"
                                         class="form-select @error('payment_method') is-invalid @enderror"
-                                        id="payment_method" data-toggle="select2" data-width="100%">
+                                        id="payment_method" data-toggle="select2" data-width="100%" required>
                                         <option value="Cash" {{old('payment_method') =='Cash' ? 'selected' : ''}}>नगद
                                         </option>
                                         <option value="Bank" {{old('payment_method')=='Bank' ? 'selected' : ''}}>बैंक
@@ -104,7 +104,8 @@
                                         value="{{old('reference_code')}}"
                                         class="form-control @error('reference_code') is-invalid @enderror"
                                         id="reference_code"
-                                        placeholder="Reference Code"/>
+                                        placeholder="Reference Code"
+                                        required/>
                                     @error('reference_code')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

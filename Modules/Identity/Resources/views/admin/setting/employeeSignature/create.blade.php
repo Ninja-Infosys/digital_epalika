@@ -42,6 +42,7 @@
                                     class="form-control @error('name') is-invalid @enderror"
                                     id="name"
                                     placeholder="नाम"
+                                    required
                                 />
                                 @error('name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -56,6 +57,7 @@
                                     class="form-control @error('name_en') is-invalid @enderror"
                                     id="name_en"
                                     placeholder="नाम(English)"
+                                    required
                                 />
                                 @error('name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -70,6 +72,7 @@
                                     class="form-control @error('designation') is-invalid @enderror"
                                     id="designation"
                                     placeholder="पद"
+                                    required
                                 />
                                 @error('designation')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -84,6 +87,7 @@
                                     class="form-control @error('designation_en') is-invalid @enderror"
                                     id="designation_en"
                                     placeholder="पद (English)"
+                                    required
                                 />
                                 @error('designation_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -98,6 +102,7 @@
                                     class="form-control @error('pin') is-invalid @enderror"
                                     id="pin"
                                     placeholder="पिन"
+                                    required
                                 />
                                 @error('pin')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -110,6 +115,7 @@
                                     name="red_signature"
                                     class="form-control @error('red_signature') is-invalid @enderror"
                                     id="red_signature"
+                                    required
 
                                 />
                                 @error('red_signature')
@@ -123,6 +129,7 @@
                                     name="black_signature"
                                     class="form-control @error('black_signature') is-invalid @enderror"
                                     id="black_signature"
+                                    required
 
                                 />
                                 @error('black_signature')

@@ -41,7 +41,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="number" name="day_to_attend" class="form-control"
                                        value="{{ old('day_to_attend',$defendantIssuedDeadline->day_to_attend) }}"
-                                       id="day_to_attend" placeholder="सहभागी हुनुपर्ने दिन" />
+                                       id="day_to_attend" placeholder="सहभागी हुनुपर्ने दिन" required/>
                                 @error('day_to_attend')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

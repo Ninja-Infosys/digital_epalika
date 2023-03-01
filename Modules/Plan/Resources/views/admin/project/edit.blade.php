@@ -43,6 +43,7 @@
                                     class="form-control @error('project_name') is-invalid @enderror"
                                     id="project_name"
                                     placeholder="योजना/कार्यक्रमको नाम"
+                                    required
                                 />
                                 @error('project_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -57,6 +58,7 @@
                                     class="form-control @error('registration_no') is-invalid @enderror"
                                     id="registration_no"
                                     placeholder="दर्ता नं."
+                                    required
                                 />
                                 @error('registration_no')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -67,7 +69,7 @@
                                 <select
                                     name="expense_head_id"
                                     class="form-control @error('expense_head_id') is-invalid @enderror"
-                                    id="expense_head_id" data-toggle="select2" data-width="100%">
+                                    id="expense_head_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($expenseHeads as $expenseHead)
                                         <option
@@ -86,7 +88,7 @@
                                 <select
                                     name="plan_area_id"
                                     class="form-control @error('plan_area_id') is-invalid @enderror"
-                                    id="plan_area_id" data-toggle="select2" data-width="100%">
+                                    id="plan_area_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($planAreas as $planArea)
                                         @if(count($planArea->planAreas)>0)

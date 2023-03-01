@@ -39,6 +39,7 @@
                                 <label for="description" class="form-label">विवरण *</label>
                                 <textarea name="description"
                                           id="description"
+                                          required
                                           cols="30" rows="10"
                                           class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->conciliationVerification->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::CONCILIATION_VERIFICATION))}}</textarea>
                                 @error('description')

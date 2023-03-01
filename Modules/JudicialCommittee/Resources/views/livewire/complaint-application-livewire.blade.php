@@ -15,6 +15,7 @@
                             class="form-control"
                             id="applicant_name"
                             placeholder="निवेदक को नाम"
+                            required
                         />
                         @error('form.applicant_name')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -27,8 +28,9 @@
                             type="text"
                             wire:model="form.applicant_phone"
                             class="form-control"
-                            id="applicant_name"
+                            id="applicant_phone"
                             placeholder="फोन न"
+                            required
                         />
                         @error('form.applicant_phone')
 
@@ -80,6 +82,7 @@
                             class="form-control"
                             id="complainants.{{$key}}.name"
                             placeholder="वादी को नाम"
+                            required
                         />
                         @error("form.complainants.$key.name")
                         <div class="invalid-feedback">{{$message}}</div>
@@ -93,6 +96,7 @@
                             class="form-control"
                             id="complainants.{{$key}}.age"
                             placeholder="उमेर"
+                            required
                         />
                         @error("form.complainants.$key.age")
                         <div class="invalid-feedback">{{$message}}</div>
@@ -107,6 +111,7 @@
                             class="form-control"
                             id="complainants.{{$key}}.father_name"
                             placeholder="बुवाको नाम"
+                            required
                         />
                         @error("form.complainants.$key.father_name")
                         <div class="invalid-feedback">{{$message}}</div>
@@ -148,7 +153,7 @@
                             <label for="complainants.{{$key}}.province_id" class="form-label">प्रदेश <span
                                     class="text-danger">*</span></label>
                             <select wire:model="form.complainants.{{$key}}.province_id" class="form-select"
-                                    id="complainants.{{$key}}.province_id">
+                                    id="complainants.{{$key}}.province_id" required>
                                 <option value=""> - - छान्नुहोस् - - </option>
                                 @foreach($provinces as $province)
                                     <option
@@ -163,7 +168,7 @@
                             <label for="complainants.{{$key}}.district_id" class="form-label">जिल्ला <span
                                     class="text-danger">*</span></label>
                             <select wire:model="form.complainants.{{$key}}.district_id" class="form-select"
-                                    id="complainants.{{$key}}.district_id">
+                                    id="complainants.{{$key}}.district_id" required>
                                 <option value="">- - छान्नुहोस् - -</option>
                                 @foreach(!empty($form['complainants'][$key]['province_id']) ? get_districts(province_ids: $form['complainants'][$key]['province_id']):[] as $district)
                                     <option
@@ -178,7 +183,7 @@
                             <label for="complainants.{{$key}}.local_body_id" class="form-label">पालिका <span
                                     class="text-danger">*</span></label>
                             <select wire:model="form.complainants.{{$key}}.local_body_id" class="form-select"
-                                    id="complainants.{{$key}}.local_body_id">
+                                    id="complainants.{{$key}}.local_body_id" required>
                                 <option value="">- - छान्नुहोस् - -</option>
                                 @foreach(!empty($form['complainants'][$key]['district_id']) ? get_local_bodies(district_ids: $form['complainants'][$key]['district_id']):[] as $localBody)
                                     <option
@@ -193,7 +198,7 @@
                             <label for="complainants.{{$key}}.ward_no" class="form-label">वार्ड न:<span
                                     class="text-danger">*</span></label>
                             <select wire:model="form.complainants.{{$key}}.ward_no" class="form-select"
-                                    id="complainants.{{$key}}.ward_no">
+                                    id="complainants.{{$key}}.ward_no" required>
                                 <option value="">- - छान्नुहोस् - -</option>
                                 @foreach(!empty($form['complainants'][$key]['local_body_id']) ? get_local_bodies(localBodyId: $form['complainants'][$key]['local_body_id'])->ward_no:[] as $ward)
                                     <option
@@ -251,6 +256,7 @@
                             class="form-control"
                             id="defendants.{{$key}}.name"
                             placeholder="प्रतिवादी को नाम"
+                            required
                         />
                         @error("form.defendants.$key.name")
                         <div class="invalid-feedback">{{$message}}</div>
@@ -419,7 +425,7 @@
                         <select
                             wire:model="form.lawsuit_nature_id"
                             class="form-select"
-                            id="lawsuit_nature_id">
+                            id="lawsuit_nature_id" required>
                             <option value="">--छान्नुहोस्--</option>
                             @foreach($lawsuitNatures as $lawsuitNature)
                                 <option
@@ -437,7 +443,7 @@
                         <select
                             wire:model="form.complaint_subject_id"
                             class="form-select"
-                            id="complaint_subject_id">
+                            id="complaint_subject_id" required>
                             <option value="">--छान्नुहोस्--</option>
                             @foreach($complaintSubjects as $complaintSubject)
                                 <option
@@ -458,6 +464,7 @@
                             class="form-control"
                             id="date"
                             placeholder="मिति"
+                            required
                         />
                         @error('form.date')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -470,7 +477,8 @@
                                   wire:model="form.complaint_detail"
                                   class="form-control @error('form.complaint_detail') is-invalid @enderror"
                                   cols="100"
-                                  placeholder="विवरण"></textarea>
+                                  placeholder="विवरण"
+                                  required></textarea>
                         @error('form.complaint_detail')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -504,6 +512,7 @@
                                                 wire:model="form.witnesses.{{$key}}.name"
                                                 class="form-control form-control-sm"
                                                 placeholder="नाम"
+                                                required
                                             />
                                             @error("form.witnesses.$key.name")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -593,6 +602,7 @@
                                                 wire:model="form.relatedMembers.{{$key}}.name"
                                                 class="form-control form-control-sm"
                                                 placeholder="नाम"
+                                                required
                                             />
                                             @error("form.relatedMembers.$key.name")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -604,6 +614,7 @@
                                                 wire:model="form.relatedMembers.{{$key}}.phone"
                                                 class="form-control form-control-sm"
                                                 placeholder="फोन"
+                                                required
                                             />
                                             @error("form.relatedMembers.$key.phone")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -626,6 +637,7 @@
                                                 wire:model="form.relatedMembers.{{$key}}.designation"
                                                 class="form-control form-control-sm"
                                                 placeholder="पद"
+                                                required
                                             />
                                             @error("form.relatedMembers.$key.designation")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -690,6 +702,7 @@
                                                 wire:model="form.supportedDocuments.{{$key}}.document_name"
                                                 class="form-control form-control-sm"
                                                 placeholder="फाइलको नाम"
+                                                required
                                             />
                                             @error("form.supportedDocuments.$key.document_name")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -701,6 +714,7 @@
                                                 wire:model="form.supportedDocuments.{{$key}}.document"
                                                 class="form-control form-control-sm"
                                                 placeholder="फाइल"
+                                                required
                                             />
                                             @error("form.supportedDocuments.$key.document")
                                             <div class="invalid-feedback">{{$message}}</div>
