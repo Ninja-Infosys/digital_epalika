@@ -190,19 +190,16 @@ class ReportController extends Controller
 
         foreach (officeSetting()->localBody->ward_no as $ward_no) {
             $data->push([
-                'ward' => 'वडा नं ' .$ward_no,
+                'ward' => 'वडा नं ' . $ward_no,
                 'land_invoice' => $invoices->where('ward', $ward_no)->where('invoice', 0)->sum('grand_total_amount'),
                 'invoice' => $invoices->where('ward', $ward_no)->where('invoice', 1)->sum('grand_total_amount'),
                 'total' => $invoices->where('ward', $ward_no)->where('invoice', 0)->sum('grand_total_amount') + $invoices->where('ward', $ward_no)->where('invoice', 1)->sum('grand_total_amount'),
-                ]);
-
+            ]);
         }
         return response()->json([
-            'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
             'data' => $data,
+            'view' => (string)View::make('revenue::admin.report.inc.ward-wise-invoice', compact('data'))
         ]);
-
-
     }
 
 }
