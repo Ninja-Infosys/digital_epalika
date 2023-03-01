@@ -47,21 +47,6 @@
                         <form id="report-filter-form" data-bs-url="{{route('admin.revenue.report.tax-payer-report')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
-                                    <x-date-input-component
-                                        nameNe="from_date" labelNe="मिति देखि"
-                                        nameEn="en_from_date" labelEn="From Date"
-                                        :get-today-date="false"
-                                    />
-                                </div>
-                                <div class="col-md-3">
-                                    <x-date-input-component
-                                        nameNe="to_date" labelNe="मिति सम्म"
-                                        nameEn="en_to_date" labelEn="To Date"
-                                        :get-today-date="false"
-                                    />
-                                </div>
-
-                                <div class="col-md-3 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2"
                                             id="fiscal_year" class="form-control">

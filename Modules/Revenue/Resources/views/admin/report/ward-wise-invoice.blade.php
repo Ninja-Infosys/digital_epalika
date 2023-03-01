@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">वडा अनुसार रसिद रिपोर्ट</li>
+                        <li class="breadcrumb-item active">वडा अनुसार राजस्व रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title">वडा अनुसार रसिद रिपोर्ट </h4>
+                <h4 class="page-title">वडा अनुसार राजस्व रिपोर्ट </h4>
             </div>
         </div>
     </div>
@@ -23,27 +23,29 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">वडा अनुसार रसिद रिपोर्ट</h4>
+                        <h4 class="header-title">वडा अनुसार राजस्व रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
+                                    type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name="वडा अनुसार रसिद रिपोर्ट"
+                                file-name="वडा अनुसार राजस्व रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
                                 target-element="report-content"
-                                title="वडा अनुसार रसिद रिपोर्ट"
+                                title="वडा अनुसार राजस्व रिपोर्ट"
                             />
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" data-bs-url="{{route('admin.revenue.report.invoice-report')}}">
+                        <form id="report-filter-form"
+                              data-bs-url="{{route('admin.revenue.report.word-wise-invoice-report')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -76,7 +78,7 @@
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2"
                                             id="fiscal_year" class="form-control">
-                                        <option >--- छान्नुहोस् ---</option>
+                                        <option>--- छान्नुहोस् ---</option>
                                         @foreach($fiscalYears as $fiscalYear)
                                             <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                         @endforeach
@@ -94,17 +96,13 @@
                             <table id="report-table" class="table table-sm mt-3 table-bordered">
                                 <thead>
                                 <tr>
-                                    @foreach(officeSetting()->localBody->ward_no as $ward_no)
-                                        <th> वडा नं. {{$ward_no}}</th>
-                                    @endforeach
+                                    <th> वडा नं.</th>
+                                    <th> मालपोत रकम </th>
+                                    <th> नगदी रकम</th>
                                     <th>जम्मा</th>
                                 </tr>
                                 </thead>
-                                <tbody >
-                                    <tr id="report_data">
 
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -116,19 +114,32 @@
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const row = document.querySelector('#report_data');
-                    row.innerHTML=''
+                    const table = document.querySelector('#report-table');
+                    // create tbody
+                    // delete tbody tag if exists
+                    if (table.querySelector('tbody')) {
+                        table.querySelector('tbody').remove();
+                    }
 
-                    data.forEach(el => {
-                        const td = document.createElement('td');
-                        td.innerHTML = el;
-                        row.appendChild(td);
+                    const tbody = document.createElement('tbody');
+
+                    data.forEach(function (item) {
+                        // create row
+                        const tr = document.createElement('tr');
+                        // create cell
+                        Object.values(item).forEach(data => {
+                            const td = document.createElement('td');
+                            // set cell content
+                            td.innerHTML = data;
+                            // append cell to row
+                            tr.appendChild(td);
+                        });
+
+                        // append row to tbody
+                        tbody.appendChild(tr);
                     });
-                    const td = document.createElement('td');
-                    td.innerHTML = data.reduce((val,sum)=>{
-                        return sum+val;
-                    },0);
-                    row.appendChild(td);
+
+                    table.appendChild(tbody);
                 }
 
                 // x-csrf protection
@@ -159,7 +170,7 @@
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
                             $('#report-content').removeClass('d-none');
-                            createTable(resp.wardsData)
+                            createTable(resp.data)
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)
@@ -168,6 +179,7 @@
                         }
                     });
                 });
+
                 function toastMessage(type, title) {
                     swal.fire({
                         title: title,
