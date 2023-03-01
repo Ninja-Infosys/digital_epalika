@@ -109,10 +109,12 @@
                             const name = $(col).attr('name');
                             const array_name = name.split('[');
                             const key_name = array_name.pop().replace(']', '');
-                            const new_name = `${array_name.shift()}[${row_key}][${key_name}]`;
+                            const new_name = `${array_name.shift()}[${row_key+1}][${key_name}]`;
                             $(col).attr('name', new_name);
                         });
-                        $(target_class).append(row_element[0].outerHTML);
+                        row_element.each((key,row)=>{
+                            $(target_class).append(row.outerHTML);
+                        })
                     })
                 });
             });

@@ -5,6 +5,8 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Http\Requests\Activity\StoreActivityRequest;
 
@@ -33,7 +35,23 @@ class ActivityController extends Controller
     {
         $this->checkAuthorization('taskActivity_create');
 
-        dd($request->all());
+        DB::transaction(function () use ($request) {
+            $activity = Activity::create($request->validated() + [
+                    'user_id' => auth()->id(),
+                    'branch_id' => auth()->user()->branch_id,
+                    'fiscal_year_id' => officeSetting()->fiscal_year_id
+                ]);
+            foreach ($request->input('activity_lists') as $activityList) {
+                $activity->activityLists()->create($activityList);
+
+                if (!empty($activityList['documents'])) {
+                    $this->uploadDocuments($activityList['documents'], $activityList);
+                }
+            }
+        });
+
+        toast('आजको गतिविधि सफलतापूर्वक थपियो','success');
+        return back();
     }
 
 
@@ -63,5 +81,16 @@ class ActivityController extends Controller
         $activity->delete();
         toast('सफलतापूर्वक हटाइयो', 'success');
         return redirect(route('admin.taskManagement.activity.index'));
+    }
+
+    private function uploadDocuments($documents, $activityList)
+    {
+        foreach ($documents as $document) {
+            $activityList->files()->create([
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $document->getClientOriginalExtension(),
+                'file' => $document->store('task_management/' . Str::slug($activityList->title, '_'), 'public'),
+            ]);
+        }
     }
 }
