@@ -51,6 +51,11 @@
                     <span>वडा अनुसार रसिद</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/revenue/report/word-wise-invoice') ? 'active' : ''}}">
+                <a href="{{route('admin.revenue.report.word-wise-invoice')}}">
+                    <span>वडा अनुसार राजस्व</span>
+                </a>
+            </li>
             <li class="{{request()->is('admin/revenue/report/tax-payer') ? 'active' : ''}}">
                 <a href="{{route('admin.revenue.report.tax-payer')}}">
                     <span>करदाताको प्रकार</span>
