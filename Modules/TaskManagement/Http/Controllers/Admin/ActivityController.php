@@ -5,10 +5,13 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\TaskManagement\Entities\Activity;
+use Modules\TaskManagement\Entities\ActivityList;
 use Modules\TaskManagement\Http\Requests\Activity\StoreActivityRequest;
+use Modules\TaskManagement\Http\Requests\Activity\UpdateActivityRequest;
 
 class ActivityController extends Controller
 {
@@ -50,7 +53,7 @@ class ActivityController extends Controller
             }
         });
 
-        toast('आजको गतिविधि सफलतापूर्वक थपियो','success');
+        toast('आजको गतिविधि सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -69,10 +72,35 @@ class ActivityController extends Controller
         return view('taskmanagement::admin.activity.edit', compact('activity'));
     }
 
+    public function update(UpdateActivityRequest $request, Activity $activity)
+    {
+        $this->checkAuthorization('taskActivity_edit');
+
+        DB::transaction(function () use ($request, $activity) {
+            $activity->update($request->validated());
+
+            foreach ($request->input('activity_lists') as $activityList) {
+                ActivityList::updateOrCreate(
+                    ['activity_id' => $activity->id, 'id' => $activityList['id']] ?? null,
+                    $activityList
+                );
+
+                if (!empty($activityList['documents'])) {
+                    $this->uploadDocuments($activityList['documents'], $activityList);
+                }
+            }
+            $activity->activityLists()->whereNotIn('id', Arr::pluck($request->input('activity_lists'), 'id'))->delete();
+        });
+
+        toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return redirect(route('admin.taskManagement.activity.index'));
+    }
+
 
     public function destroy(Activity $activity)
     {
         $this->checkAuthorization('taskActivity_delete');
+
         $activity->load('activityLists');
         foreach ($activity->activityLists as $activityList) {
             $activityList->files()->delete();
@@ -80,7 +108,7 @@ class ActivityController extends Controller
         $activity->activityLists()->delete();
         $activity->delete();
         toast('सफलतापूर्वक हटाइयो', 'success');
-        return redirect(route('admin.taskManagement.activity.index'));
+        return back();
     }
 
     private function uploadDocuments($documents, $activityList)

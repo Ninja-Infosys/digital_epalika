@@ -26,7 +26,7 @@
                         <div class="d-flex flex-wrap align-items-center">
                             <a href="{{route('admin.taskManagement.activity.index')}}"
                                class="btn btn-sm btn-outline-primary waves-effect waves-light">
-                                <i class="fa fa-list"></i>कार्यहरूको सुची</a>
+                                <i class="fa fa-list"></i> कार्यहरूको सुची</a>
                         </div>
                     </div>
                 </div>

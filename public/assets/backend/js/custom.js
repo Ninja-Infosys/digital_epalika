@@ -100,19 +100,19 @@
         addMore: function () {
             $('[data-toggle="add-more"]').each(function () {
                 const target_element = $(this).data("target-element");
-                const target_class = $(this).data('target');
                 $(this).on("click", function (e) {
                     e.preventDefault();
                     const row_element = $(`#${target_element}`).children().first().clone();
-                    const row_index = $(`#${target_element} > div`).length;
+                    const row_index = $(`#${target_element}`).children().length;
                     row_element.find('input, textarea, select').each(function(col_key, col) {
                             const name = $(col).attr('name');
                             const array_name = name.split('[');
                             const key_name = array_name.pop().replace(']', '');
                             const new_name = `${array_name.shift()}[${row_index}][${key_name}]`;
                             $(col).attr('name', new_name);
+                            $(col).val('');
                         });
-                    $(target_class).append(row_element);
+                    $(`#${target_element}`).append(row_element);
                 });
             });
         },
@@ -125,7 +125,11 @@
             $(document).on("click", '[data-toggle="remove-parent"]', function () {
                 const $this = $(this);
                 const parent = $this.data("parent");
-                $this.closest(parent).remove();
+                const target_element = $(this).data("target-element");
+                const element_length = $(`#${target_element}`).children().length;
+                if (element_length > 1){
+                    $this.closest(parent).remove();
+                }
             });
         },
         checkPin: function () {

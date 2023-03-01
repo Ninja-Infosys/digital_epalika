@@ -48,15 +48,13 @@
                                         type="button"
                                         class="btn btn-xs btn-outline-info"
                                         data-target-element="activities"
-                                        data-toggle="add-more"
-                                        data-target=".activities"
-                                    >
+                                        data-toggle="add-more">
                                         <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                                     </button>
                                 </div>
                                 <fieldset>
-                                    <div class="activities" id="activities">
-                                        <div class="row justify-content-center border-bottom mb-2 activities-5">
+                                    <div id="activities">
+                                        <div class="row justify-content-center border-bottom mb-2">
                                             <div class="col-md-6 mb-2">
                                                 <label for="title" class="form-label">शिर्षक *</label>
                                                 <input
@@ -93,7 +91,8 @@
                                                           placeholder="कैफ़ियत"></textarea>
                                             </div>
                                             <button type="button" class="col-1 btn btn-sm btn-danger mb-1"
-                                                    data-toggle="remove-parent" data-parent=".row">
+                                                    data-toggle="remove-parent" data-parent=".row"
+                                                    data-target-element="activities">
                                                 <i class="fa fa-times"></i>
                                             </button>
                                         </div>
