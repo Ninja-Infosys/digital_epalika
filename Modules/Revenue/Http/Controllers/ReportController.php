@@ -18,7 +18,7 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $columnData = $this->getColumns();
-        return view('revenue::admin.report.index',compact('fiscalYears','columnData'));
+        return view('revenue::admin.report.index', compact('fiscalYears', 'columnData'));
     }
 
     public function report(Request $request)
@@ -34,7 +34,7 @@ class ReportController extends Controller
             $request->request->add(
                 ['columns' =>
                     [
-                        'invoices' => ['invoice_no','name', 'address', 'payment_method']
+                        'invoices' => ['invoice_no', 'name', 'address', 'payment_method']
                     ]
                 ]
             );
@@ -97,7 +97,7 @@ class ReportController extends Controller
     public function invoice()
     {
         $fiscalYears = FiscalYear::all();
-        return view('revenue::admin.report.invoice',compact('fiscalYears'));
+        return view('revenue::admin.report.invoice', compact('fiscalYears'));
     }
 
     public function invoiceReport(Request $request)
@@ -111,21 +111,16 @@ class ReportController extends Controller
         ]);
         $invoices = Invoice::where(function ($query) use ($request) {
             $this->filterDataFromUser($query, $request);
-        })
-            ->get()->map(function ($invoice) {
-                $wardData = [];
-                foreach (officeSetting()->localBody->ward_no as $ward_no) {
-                    $wardData[] = $invoice->where('ward', $ward_no)->count();
-                }
-                return [
-                    'wards' => $wardData,
-                    'total' => $invoice->count()
-                ];
-            });
+        })->get();
+        $wardData = [];
+        foreach (officeSetting()->localBody->ward_no as $ward_no) {
+            $wardData[] = $invoices->where('ward', $ward_no)->count();
+        }
+
+
         return response()->json([
-            'total' => $invoices->sum('total'),
             'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
-            'view' => (string)View::make('revenue::admin.report.inc.invoice', compact('invoices'))
+            'wardsData' => $wardData
         ]);
     }
 
@@ -133,7 +128,7 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $taxPayerTypes = TaxPayerType::all();
-        return view('revenue::admin.report.tax-payer',compact('fiscalYears','taxPayerTypes'));
+        return view('revenue::admin.report.tax-payer', compact('fiscalYears', 'taxPayerTypes'));
     }
 
     public function taxPayerReport(Request $request)
@@ -146,9 +141,9 @@ class ReportController extends Controller
             'fiscal_year' => ['nullable', 'array'],
             'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
         ]);
-        $taxPayerTypes = TaxPayerType::with(['taxPayer'=>function ($query) use ($request) {
+        $taxPayerTypes = TaxPayerType::with(['taxPayer' => function ($query) use ($request) {
             $this->filterDataFromUser($query, $request);
-        }])  ->where(function ($query) use ($request) {
+        }])->where(function ($query) use ($request) {
             if (!empty($request->input('tax_payer_type'))) {
                 $query->whereIn('id', $request->input('tax_payer_type'));
             }
@@ -163,6 +158,51 @@ class ReportController extends Controller
             'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
             'view' => (string)View::make('revenue::admin.report.inc.tax-payer', compact('taxPayerTypes'))
         ]);
+    }
+
+    public function wordWiseInvoice()
+    {
+        $fiscalYears = FiscalYear::all();
+        return \view('revenue::admin.report.ward-wise-invoice', compact('fiscalYears'));
+    }
+
+    public function wordWiseInvoiceReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'tax_payer_type' => ['nullable', 'array'],
+            'tax_payer_type.*' => [Rule::exists('tax_payer_types', 'id')],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+        ]);
+
+        $invoices = Invoice::with('InvoiceParticulars')->where(function ($query) use ($request) {
+            $this->filterDataFromUser($query, $request);
+        })->get()->map(function ($invoice) {
+            return [
+                'ward' => $invoice->ward,
+                'invoice' => $invoice->is_cash_invoice,
+                'grand_total_amount' => $invoice->InvoiceParticulars->sum('grand_total_amount')
+            ];
+        });
+        $data = collect();
+
+        foreach (officeSetting()->localBody->ward_no as $ward_no) {
+            $data->push([
+                'ward' => 'वडा नं ' .$ward_no,
+                'land_invoice' => $invoices->where('ward', $ward_no)->where('invoice', 0)->sum('grand_total_amount'),
+                'invoice' => $invoices->where('ward', $ward_no)->where('invoice', 1)->sum('grand_total_amount'),
+                'total' => $invoices->where('ward', $ward_no)->where('invoice', 0)->sum('grand_total_amount') + $invoices->where('ward', $ward_no)->where('invoice', 1)->sum('grand_total_amount'),
+                ]);
+
+        }
+        return response()->json([
+            'fiscal_years' => !empty($request->input('fiscal_year')) ? FiscalYear::select('title')->whereIn('id', Arr::wrap($request->input('fiscal_year')))->pluck('title') : FiscalYear::pluck('title'),
+            'data' => $data,
+        ]);
+
+
     }
 
 }
