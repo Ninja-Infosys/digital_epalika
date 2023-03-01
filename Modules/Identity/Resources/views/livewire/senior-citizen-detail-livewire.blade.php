@@ -30,6 +30,7 @@
                             type="file"
                             id="form.photo"
                             wire:model="form.photo"
+                            required
                         />
                         <div wire:loading wire:target="form.photo">Uploading...</div>
                         @error('form.photo')
@@ -95,7 +96,7 @@
                             type="text"
                             id="form.name"
                             placeholder="पुरा नाम"
-                            wire:model="form.name"
+                            wire:model="form.name" required
                         />
                         @error('form.name')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -110,7 +111,7 @@
                             type="text"
                             id="form.name_en"
                             placeholder="पुरा नाम (English)"
-                            wire:model="form.name_en"
+                            wire:model="form.name_en" required
                         />
                         @error('form.name_en')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -125,7 +126,7 @@
                             type="text"
                             placeholder="जन्म मिति (वि.स.)"
                             id="dob_bs"
-                            wire:model="form.dob_bs"
+                            wire:model="form.dob_bs" required
                         />
                         @error('form.dob_bs')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -136,7 +137,7 @@
                         <select
                             class="form-select @error('form.gender') is-invalid @enderror"
                             wire:model="form.gender"
-                            id="form.gender">
+                            id="form.gender" required>
                             <option value="">---लिङ्ग छान्नुहोस् ---</option>
                             @foreach(\App\Enums\Gender::cases() as $gender)
                                 <option value="{{$gender->value}}">{{$gender->label()}}</option>
@@ -154,7 +155,7 @@
                             type="text"
                             id="form.citizenship_no"
                             placeholder="नागरिता न."
-                            wire:model="form.citizenship_no"
+                            wire:model="form.citizenship_no" required
                         />
                         @error('form.citizenship_no')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -169,7 +170,7 @@
                             type="text"
                             id="issue_date_bs"
                             placeholder="जारी मिति (वि.स.)"
-                            wire:model="form.issue_date_bs"
+                            wire:model="form.issue_date_bs" required
                         />
                         @error('form.issue_date_bs')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -199,7 +200,7 @@
                             type="text"
                             id="form.spouse_en"
                             placeholder="पति/पत्नीको नाम (English)"
-                            wire:model="form.spouse_en"
+                            wire:model="form.spouse_en" required
                         />
                         @error('form.spouse_en')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -210,7 +211,7 @@
                         <select
                             class="form-select @error('form.blood_group') is-invalid @enderror"
                             wire:model="form.blood_group"
-                            id="form.blood_group">
+                            id="form.blood_group" required>
                             <option value="">---रक्त समूह छान्नुहोस् ---</option>
                             @foreach(\App\Enums\BloodGroupEnum::cases() as $bloodGroup)
                                 <option value="{{$bloodGroup->value}}">{{$bloodGroup->label()}}</option>
@@ -288,7 +289,7 @@
                             name="form.province_id"
                             wire:model="form.province_id"
                             class="form-select @error('form.province_id') is-invalid @enderror"
-                            id="form.province_id">
+                            id="form.province_id" required>
                             <option value="">प्रदेश छान्नुहोस्</option>
                             @foreach($provinces as $province)
                                 <option value="{{$province->id}}">
@@ -306,7 +307,7 @@
                             name="form.district_id"
                             wire:model="form.district_id"
                             class="form-select @error('form.district_id') is-invalid @enderror"
-                            id="form.district_id">
+                            id="form.district_id" required>
                             <option value="">जिल्ला छान्नुहोस्</option>
                             @foreach($districts as $district)
                                 <option value="{{$district->id}}">
@@ -324,7 +325,7 @@
                             name="form.local_body_id"
                             wire:model="form.local_body_id"
                             class="form-select @error('form.local_body_id') is-invalid @enderror"
-                            id="form.local_body_id">
+                            id="form.local_body_id" required>
                             <option value="">पालिका छान्नुहोस्</option>
                             @foreach($localBodies as $localBody)
                                 <option value="{{$localBody->id}}">
@@ -342,7 +343,7 @@
                             name="form.ward_no"
                             wire:model="form.ward_no"
                             class="form-select @error('form.ward_no') is-invalid @enderror"
-                            id="form.ward_no">
+                            id="form.ward_no" required>
                             <option value="">वडा नं. छान्नुहोस्</option>
                             @for($i=1;$i<=$wards;$i++)
                                 <option value="{{$i}}">
@@ -362,7 +363,7 @@
                             type="text"
                             id="form.tole"
                             placeholder="टोल "
-                            wire:model="form.tole"
+                            wire:model="form.tole" required
                         />
                         @error('form.tole')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -383,7 +384,7 @@
                             type="text"
                             id="form.patrons_name"
                             placeholder="संरक्षकको नाम "
-                            wire:model="form.patrons_name"
+                            wire:model="form.patrons_name" required
                         />
                         @error('form.patrons_name')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -398,7 +399,7 @@
                             type="text"
                             id="form.patrons_name_en"
                             placeholder="संरक्षकको नाम ( English )"
-                            wire:model="form.patrons_name_en"
+                            wire:model="form.patrons_name_en" required
                         />
                         @error('form.patrons_name_en')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -413,7 +414,7 @@
                             type="text"
                             id="form.patrons_name_address"
                             placeholder="ठेगाना"
-                            wire:model="form.patrons_name_address"
+                            wire:model="form.patrons_name_address" required
                         />
                         @error('form.patrons_name_address')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -434,7 +435,7 @@
                             type="text"
                             id="form.contact_person_name"
                             placeholder="सम्पर्क व्यक्ति नाम "
-                            wire:model="form.contact_person_name"
+                            wire:model="form.contact_person_name" required
                         />
                         @error('form.contact_person_name')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -449,7 +450,7 @@
                             type="text"
                             id="form.contact_person_name_en"
                             placeholder="सम्पर्क व्यक्ति नाम ( English )"
-                            wire:model="form.contact_person_name_en"
+                            wire:model="form.contact_person_name_en" required
                         />
                         @error('form.contact_person_name_en')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -463,7 +464,7 @@
                             type="text"
                             id="form.contact_person_phone"
                             placeholder="सम्पर्क न."
-                            wire:model="form.contact_person_phone"
+                            wire:model="form.contact_person_phone" required
                         />
                         @error('form.contact_person_phone')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -478,7 +479,7 @@
                             type="text"
                             id="form.contact_person_address"
                             placeholder="ठेगाना"
-                            wire:model="form.contact_person_address"
+                            wire:model="form.contact_person_address" required
                         />
                         @error('form.contact_person_address')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -493,14 +494,14 @@
                     <div class="col-md-2 my-3 d-flex justify-content-between">
                         <div class="form-check">
                             <input class="form-check-input" value="1" type="radio" wire:model="form.is_disease"
-                                   name="form.is_disease" id="is_disease1">
+                                   name="form.is_disease" id="is_disease1" required>
                             <label class="form-check-label" for="is_disease1">
                                 छ।
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" value="0" type="radio" wire:model="form.is_disease"
-                                   name="form.is_disease" id="is_disease2">
+                                   name="form.is_disease" id="is_disease2" required>
                             <label class="form-check-label" for="is_disease2">
                                 छैन।
                             </label>
@@ -515,7 +516,7 @@
                                 type="text"
                                 id="form.disease_name"
                                 placeholder="रोगको नाम"
-                                wire:model="form.disease_name"
+                                wire:model="form.disease_name" required
                             />
                             @error('form.disease_name')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -564,14 +565,14 @@
                     <div class="col-md-2 my-3 d-flex justify-content-between">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="form.is_medicine" value="1"
-                                   wire:model="form.is_medicine" id="medicine1">
+                                   wire:model="form.is_medicine" id="medicine1" required>
                             <label class="form-check-label" for="medicine1">
                                 छ।
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="form.is_medicine" value="0"
-                                   wire:model="form.is_medicine" id="medicine2"
+                                   wire:model="form.is_medicine" id="medicine2" required
                             >
                             <label class="form-check-label" for="medicine2">
                                 छैन।
@@ -603,7 +604,7 @@
                     <select
                         class="form-select @error('form.employee_signature_id') is-invalid @enderror"
                         wire:model="form.employee_signature_id"
-                        id="form.employee_signature_id">
+                        id="form.employee_signature_id" required>
                         <option value="">---हस्ताक्षर छान्नुहोस् ---</option>
                         @foreach($employeeSignatures as $employeeSignature)
                             <option value="{{$employeeSignature->id}}">{{$employeeSignature->name}}</option>

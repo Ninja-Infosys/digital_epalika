@@ -47,7 +47,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="object_transaction_id" class="form-label">कारोबार गर्ने वस्तुको
                                         वर्ग</label>
-                                    <select name="object_transaction_id" id="object_transaction_id" class="form-control @error('object_transaction_id') is-invalid @enderror">
+                                    <select name="object_transaction_id" id="object_transaction_id" class="form-control @error('object_transaction_id') is-invalid @enderror" required>
                                         <option value="">कारोबार गर्ने वस्तुको वर्ग छान्नुहोस्</option>
                                         @foreach($parentObjectTransactions as $parentObjectTransaction)
                                             <option
@@ -67,6 +67,7 @@
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
+                                        required
                                     />
                                     @error('title')
                                     <div class="invalid-feedback">{{$message}}</div>

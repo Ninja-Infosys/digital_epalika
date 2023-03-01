@@ -35,7 +35,8 @@
                                 <label class="form-label" for="year">बर्ष *</label>
                                 <input type="text" class="form-control @error('year') is-invalid @enderror" id="year"
                                        name="year" value="{{old('year')}}"
-                                       placeholder="बर्ष">
+                                       placeholder="बर्ष"
+                                       required>
                                 @error('year')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -43,7 +44,7 @@
                             <div class="col-md-6 mb-2">
                                 <label class="form-label" for="document">फाईल</label>
                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="file"
-                                       name="document" >
+                                       name="document" required>
                                 @error('document')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

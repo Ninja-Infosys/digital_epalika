@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-sm mb-0 table-striped table-hover">
+                                <table class="table table-sm mb-0 table-striped table-hover table-bordered">
 
                                     <tbody>
                                     <tr>

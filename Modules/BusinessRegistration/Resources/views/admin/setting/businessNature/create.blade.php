@@ -39,7 +39,7 @@
                                 <strong>व्यवसाय प्रकृति </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="title" class="form-label">शिर्षक *</label>
                                     <input
                                         type="text"
@@ -48,6 +48,7 @@
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
+                                        required
                                     />
                                     @error('title')
                                     <div class="invalid-feedback">{{$message}}</div>

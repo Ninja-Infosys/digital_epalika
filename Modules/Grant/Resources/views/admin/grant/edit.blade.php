@@ -41,7 +41,7 @@
                                         आर्थिक बर्ष <span class="text-danger">*</span>
                                     </label>
                                     <select name="fiscal_year_id"
-                                            id="fiscal_year_id" class="form-select">
+                                            id="fiscal_year_id" class="form-select" required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($fiscalYears as $fiscalYear)
                                             <option
@@ -60,7 +60,7 @@
                                     </label>
                                     <div class="input-group">
                                     <select name="grant_type_id"
-                                            id="grant_type_id" class="form-select">
+                                            id="grant_type_id" class="form-select" required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($grantTypes as $grantType)
                                             <option
@@ -85,7 +85,7 @@
                                     </label>
                                     <div class="input-group">
                                     <select name="grant_program_id"
-                                            id="grant_program_id" class="form-select">
+                                            id="grant_program_id" class="form-select" required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($grantPrograms as $grantProgram)
                                             <option value="{{$grantProgram->id}}" {{$grantProgram->id==old('grant_program_id',$grant->grant_program_id) ? 'selected' : ''}}>
@@ -111,7 +111,7 @@
 
                                     <div class="input-group">
                                     <select name="grant_office_id"
-                                            id="grant_office_id" class="form-select">
+                                            id="grant_office_id" class="form-select" required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($grantOffices as $grantOffice)
                                             <option value="{{$grantOffice->id}}" {{$grantOffice->id==old('grant_office_id',$grant->grant_office_id) ? 'selected' : ''}}>
@@ -137,7 +137,8 @@
                                     <select
                                         name="branch_id"
                                         class="form-select"
-                                        id="branch_id">
+                                        id="branch_id"
+                                        required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($branches as $branch)
                                             <option class="fw-semibold text-dark"
@@ -167,6 +168,7 @@
                                         class="form-control @error('grant_amount') is-invalid @enderror"
                                         id="grant_amount"
                                         placeholder="अनुदान रकम"
+                                        required
                                     />
                                     @error('grant_amount')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -177,7 +179,7 @@
                                         अनुदानको लागि <span class="text-danger">*</span>
                                     </label>
                                     <select name="grant_for[]" multiple data-toggle="select2"
-                                            id="grant_for" class="form-control">
+                                            id="grant_for" class="form-control" required>
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach(\Modules\Grant\Enums\GranteeEnum::cases() as $grantee)
                                             <option

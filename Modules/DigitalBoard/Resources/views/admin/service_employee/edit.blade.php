@@ -46,6 +46,7 @@
                                     class="form-control @error('employee_name') is-invalid @enderror"
                                     id="employee_name"
                                     placeholder=" नाम"
+                                    required
                                 />
                                 @error('employee_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -100,6 +101,7 @@
                                     class="form-control @error('designation') is-invalid @enderror"
                                     id="designation"
                                     placeholder="पद"
+                                    required
                                 />
                                 @error('designation')
                                 <div class="invalid-feedback">{{$message}}</div>

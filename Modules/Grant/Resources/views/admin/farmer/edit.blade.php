@@ -47,6 +47,7 @@
                                         class="form-control @error('first_name') is-invalid @enderror"
                                         id="first_name"
                                         placeholder="पहिलो नाम "
+                                        required
                                     />
                                     @error('first_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -75,6 +76,7 @@
                                         class="form-control @error('last_name') is-invalid @enderror"
                                         id="last_name"
                                         placeholder="थर"
+                                        required
                                     />
                                     @error('last_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -101,6 +103,7 @@
                                         class="form-control @error('phone_no') is-invalid @enderror"
                                         id="phone_no"
                                         placeholder="सम्पर्क नं."
+                                        required
                                     />
                                     @error('phone_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -108,7 +111,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="gender" class="form-label">लिंग *</label>
-                                    <select id="gender" name="gender" class="form-control">
+                                    <select id="gender" name="gender" class="form-control" required>
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
                                             <option
@@ -122,7 +125,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2" id="marital-status-div">
                                     <label for="marital_status" class="form-label">बैबाहिक अवस्था *</label>
-                                    <select id="marital_status" name="marital_status" class="form-control">
+                                    <select id="marital_status" name="marital_status" class="form-control" required>
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\MaritalStatusEnum::cases() as $marital_status)
                                             <option
@@ -144,6 +147,7 @@
                                         class="form-control @error('father_name') is-invalid @enderror"
                                         id="phone_no"
                                         placeholder="बुवाको नाम थर"
+                                        required
                                     />
                                     @error('father_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -158,6 +162,7 @@
                                         class="form-control @error('grandfather_name') is-invalid @enderror"
                                         id="grandfather_name"
                                         placeholder="बाजे/ससुराको नाम थर "
+                                        required
                                     />
                                     @error('grandfather_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -172,6 +177,7 @@
                                         class="form-control @error('citizenship_no') is-invalid @enderror"
                                         id="citizenship_no"
                                         placeholder="नागरिकता नं."
+                                        required
                                     />
                                     @error('citizenship_no')
                                     <div class="invalid-feedback">{{$message}}</div>
