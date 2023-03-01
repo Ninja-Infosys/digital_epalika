@@ -44,7 +44,7 @@
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" data-bs-url="{{route('admin.plan.report.report-data')}}">
+                        <form id="report-filter-form" data-bs-url="{{route('admin.revenue.report.report-data')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -88,26 +88,24 @@
                                     </strong>
                                 </legend>
                                 <div class="row">
-{{--                                    @foreach($columnData as $columns)--}}
-{{--                                        <div class="col-md-3 mb-2">--}}
-{{--                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>--}}
-{{--                                            <select name="columns[{{$columns['table_name']}}][]"--}}
-{{--                                                    id="column.{{$columns['table_name']}}" multiple--}}
-{{--                                                    data-toggle="select2"--}}
-{{--                                                    class="form-control">--}}
-{{--                                                <option disabled>--- छान्नुहोस् ---</option>--}}
-{{--                                                @foreach($columns['columns'] as $column)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
+                                    @foreach($columnData as $columns)
+                                        <div class="col-md-3 mb-2">
+                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
+                                            <select name="columns[{{$columns['table_name']}}][]"
+                                                    id="column.{{$columns['table_name']}}" multiple
+                                                    data-toggle="select2"
+                                                    class="form-control">
+                                                <option disabled>--- छान्नुहोस् ---</option>
+                                                @foreach($columns['columns'] as $column)
+                                                    <option
+                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>
+                                                @endforeach
+                                            </select>
 
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
-
+                                        </div>
+                                    @endforeach
                                 </div>
                             </fieldset>
-
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
                             </button>

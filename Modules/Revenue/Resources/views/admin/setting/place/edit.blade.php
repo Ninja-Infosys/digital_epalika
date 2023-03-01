@@ -40,7 +40,7 @@
                                 <select
                                     name="sector_id"
                                     class="form-select @error('sector_id') is-invalid @enderror"
-                                    id="sector_id" data-toggle="select2" data-width="100%">
+                                    id="sector_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($sectors as $sector)
                                         <option {{$sector->id==old('sector_id', $place->sector_id) ? 'selected' : ''}}
@@ -63,6 +63,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="स्थान"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -74,7 +75,7 @@
                                 <select
                                     name="ward_no[]"
                                     class="form-select @error('ward_no') is-invalid @enderror"
-                                    id="ward_no" data-toggle="select2" data-width="100%" multiple>
+                                    id="ward_no" data-toggle="select2" data-width="100%" multiple required>
                                     <option value="" disabled>--- छान्नुहोस् ---</option>
                                     @foreach(get_local_bodies(localBodyId: officeSetting()->local_body_id)->ward_no as $ward)
                                         <option {{in_array($ward, old('ward_no',$place->ward_no)) ? 'selected' : ''}}

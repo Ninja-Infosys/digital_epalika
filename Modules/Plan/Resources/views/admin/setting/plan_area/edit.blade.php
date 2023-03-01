@@ -63,6 +63,7 @@
                                     class="form-control @error('area_name') is-invalid @enderror"
                                     id="area_name"
                                     placeholder="योजना क्षेत्र"
+                                    required
                                 />
                                 @error('area_name')
                                 <div class="invalid-feedback">{{$message}}</div>

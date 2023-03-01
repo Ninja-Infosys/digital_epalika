@@ -47,6 +47,7 @@
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
                                         placeholder="सहकारी नाम"
+                                        required
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -55,7 +56,7 @@
                                 <div class="col-md-4">
                                     <label for="name" class="form-label">सहकारी प्रकार <span class="text-danger">*</span></label>
                                     <select name="cooperative_type_id" id="cooperative_type_id"
-                                            class="form-control @error('cooperative_type_id') is-invalid @enderror">
+                                            class="form-control @error('cooperative_type_id') is-invalid @enderror" required>
                                         <option value="">सहकारी प्रकार छान्नुहोस्</option>
                                         @foreach($cooperativeTypes as $cooperativeType)
                                             <option
@@ -78,6 +79,7 @@
                                         class="form-control @error('registration_no') is-invalid @enderror"
                                         id="registration_no"
                                         placeholder="दर्ता नं"
+                                        required
                                     />
                                     @error('registration_no')
                                     <div class="invalid-feedback">{{$message}}</div>

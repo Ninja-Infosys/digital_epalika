@@ -39,6 +39,7 @@
                                 <label for="description" class="form-label">विवरण *</label>
                                 <textarea name="description"
                                           id="description"
+                                          required
                                           cols="30" rows="10"
                                           class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->complaintDecision->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DECISION))}}</textarea>
                                 @error('description')
@@ -47,7 +48,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="application_status" class="form-label">उजुरी अवस्था </label>
-                                <select name="application_status" class="form-select" id="application_status">
+                                <select name="application_status" class="form-select" id="application_status" required>
                                     <option value="">-- छान्नुहोस् --</option>
                                     @foreach(\Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum::cases() as $applicationStatus)
                                         <option

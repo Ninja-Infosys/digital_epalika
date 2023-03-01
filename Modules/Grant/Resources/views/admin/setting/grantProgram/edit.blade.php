@@ -43,6 +43,7 @@
                                     class="form-control @error('name') is-invalid @enderror"
                                     id="name"
                                     placeholder="विषय"
+                                    required
                                 />
                                 @error('name')
                                 <div class="invalid-feedback">{{$message}}</div>

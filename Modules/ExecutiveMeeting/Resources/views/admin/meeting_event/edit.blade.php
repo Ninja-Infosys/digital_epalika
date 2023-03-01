@@ -49,6 +49,7 @@
                                     class="form-control @error('event_name') is-invalid @enderror"
                                     id="event_name"
                                     placeholder="नाम"
+                                    required
                                 />
                                 @error('event_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -61,7 +62,7 @@
                                     name="committee_ward[]"
                                     class="form-control @error('committee_ward') is-invalid @enderror"
                                     data-toggle="select2"
-                                    id="committee_ward" multiple>
+                                    id="committee_ward" required multiple>
                                     <option disabled>-- छान्नुहोस् ---</option>
                                     @foreach($officeSetting->localBody->ward_no as $ward)
                                         <option value="{{$ward}}" {{in_array($ward,$meetingEvent->committee_ward) ? 'selected' : ''}}>{{$ward}}</option>
@@ -97,6 +98,7 @@
                                     id="description"
                                     class="form-control @error('description') is-invalid @enderror"
                                     placeholder="विवरण"
+                                    required
                                     cols="30" rows="3">{{old('description',$meetingEvent->description)}}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{$message}}</div>

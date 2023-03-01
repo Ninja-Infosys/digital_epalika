@@ -54,7 +54,7 @@
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title') }}"
                                     class="form-control @error('title') is-invalid @enderror" id="name"
-                                    placeholder="शिर्षक" />
+                                    placeholder="शिर्षक" required />
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

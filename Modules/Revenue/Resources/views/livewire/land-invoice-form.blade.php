@@ -80,7 +80,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][revenue]"
-                           value="{{$detail['revenue']?? ''}}">
+                           value="{{$detail['revenue']?? ''}}" required>
                     {{$detail['revenue'] ?? 0}}
 
                     @error('particulars.'.$index.'.revenue')
@@ -89,7 +89,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][quantity]"
-                           value="{{$detail['quantity']?? ''}}">
+                           value="{{$detail['quantity']?? ''}}" required>
                     {{$detail['quantity'] ?? 0}}
                     @error('particulars.'.$index.'.quantity')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -97,7 +97,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][rate]"
-                           value="{{$detail['rate']?? ''}}">
+                           value="{{$detail['rate']?? ''}}" required>
                     {{$detail['rate'] ?? 0}}
                     @error('particulars.'.$index.'.rate')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -109,7 +109,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][due]"
-                           value="{{$detail['due']?? ''}}">
+                           value="{{$detail['due']?? ''}}" required>
                     {{$detail['deu'] ?? 0}}
                     @error('particulars.'.$index.'.due')
                     <div class="invalid-feedback">{{$message}}</div>

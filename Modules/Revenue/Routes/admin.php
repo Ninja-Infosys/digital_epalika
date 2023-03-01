@@ -43,4 +43,9 @@ Route::prefix('setting')->as('setting.')->group(function () {
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function (){
     Route::get('/','index')->name('index');
+    Route::post('report','report')->name('report-data');
+    Route::get('invoice','invoice')->name('invoice');
+    Route::post('invoice-report','invoiceReport')->name('invoice-report');
+    Route::get('tax-payer','taxPayer')->name('tax-payer');
+    Route::post('tax-payer-report','taxPayerReport')->name('tax-payer-report');
 });

@@ -39,7 +39,7 @@
                                 <select
                                     name="branch_id"
                                     class="form-select @error('branch_id') is-invalid @enderror"
-                                    id="branch_id">
+                                    id="branch_id" required>
                                     <option value="">छान्नुहोस्</option>
                                     @foreach($mainBranches as $mainBranch)
                                         <option {{$mainBranch->id===old('branch_id') ? 'selected' : ''}}
@@ -69,6 +69,7 @@
                                     class="form-control @error('service_name') is-invalid @enderror"
                                     id="service_name"
                                     placeholder="सेवा नाम"
+                                    required
                                 />
                                 @error('service_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -84,6 +85,7 @@
                                     class="form-control @error('time_taken') is-invalid @enderror"
                                     id="time_taken"
                                     placeholder="लाग्ने समय "
+                                    required
                                 />
                                 @error('time_taken')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -98,7 +100,8 @@
                                     value="{{old('responsible_officer')}}"
                                     class="form-control @error('responsible_officer') is-invalid @enderror"
                                     id="responsible_officer"
-                                    placeholder="लाग्ने समय "
+                                    placeholder="जिम्मेवार अधिकारी"
+                                    required
                                 />
                                 @error('responsible_officer')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -114,6 +117,7 @@
                                     class="form-control @error('office') is-invalid @enderror"
                                     id="office"
                                     placeholder="नम्बर /कार्यालय"
+                                    required
                                 />
                                 @error('office')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -128,14 +132,15 @@
                                         data-toggle="add-more"
                                         data-content='<div class="row align-items-center gap-1 mb-2">
 								<div class="col">
-									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceDocuments[][description]">
+									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceDocuments[][description]" required>
 								</div>
 								<div class="col-auto">
 									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
 										<i class="fa fa-times"></i>
 									</button>
 								</div>
-							</div>' data-target=".important-document">
+							</div>' data-target=".important-document"
+                            >
                                        <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                                     </button>
                                 </div>
@@ -150,14 +155,15 @@
                                         data-toggle="add-more"
                                         data-content='<div class="row align-items-center gap-1 mb-2">
 								<div class="col">
-									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceProcesses[][description]">
+									<input type="text" class="form-control" placeholder="शीर्षक" name="serviceProcesses[][description]" required>
 								</div>
 								<div class="col-auto">
 									<button type="button" class="btn btn-sm btn-danger" data-toggle="remove-parent" data-parent=".row">
 										<i class="fa fa-times"></i>
 									</button>
 								</div>
-							</div>' data-target=".process"><i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्</button>
+							</div>' data-target=".process"
+                            ><i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्</button>
                                 </div>
                                 <div class="process"></div>
                             </div>

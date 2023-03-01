@@ -147,6 +147,7 @@
                                     id="form.guardian_name"
                                     placeholder="संरक्षकको नाम"
                                     wire:model="form.guardian_name"
+                                    required
                                 />
                                 @error('form.guardian_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -161,6 +162,7 @@
                                     id="form.guardian_name_en"
                                     placeholder="संरक्षकको नाम (English)"
                                     wire:model="form.guardian_name_en"
+                                    required
                                 />
                                 @error('form.guardian_name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -171,7 +173,7 @@
                                 <select
                                     class="form-select @error('form.relationship_id') is-invalid @enderror"
                                     wire:model="form.relationship_id"
-                                    id="form.relationship_id">
+                                    id="form.relationship_id" required>
                                     <option value="">---नाता छान्नुहोस् ---</option>
                                     @foreach($relations as $relation)
                                         <option
@@ -191,6 +193,7 @@
                                     id="form.phone"
                                     placeholder="टेलिफोन वा मोबाईल नं."
                                     wire:model="form.phone"
+                                    required
                                 />
                                 @error('form.phone')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -224,7 +227,7 @@
                                 <select
                                     class="form-select @error('form.govern_disability_type_id') is-invalid @enderror"
                                     wire:model="form.govern_disability_type_id"
-                                    id="form.govern_disability_type_id">
+                                    id="form.govern_disability_type_id" required>
                                     <option value="">---अपाङ्गताको प्रकार छान्नुहोस् ---</option>
                                     @foreach($governmentDisabilityTypes as $governmentDisabilityType)
                                         <option
@@ -240,7 +243,7 @@
                                 <select
                                     class="form-select @error('form.blood_group') is-invalid @enderror"
                                     wire:model="form.blood_group"
-                                    id="form.blood_group">
+                                    id="form.blood_group" required>
                                     <option value="">---रक्त समूह छान्नुहोस् ---</option>
                                     @foreach(\App\Enums\BloodGroupEnum::cases() as $bloodGroup)
                                         <option
@@ -261,7 +264,7 @@
                                 <select
                                     class="form-select @error('form.disability_type_id') is-invalid @enderror"
                                     wire:model="form.disability_type_id"
-                                    id="form.disability_type_id">
+                                    id="form.disability_type_id" required>
                                     <option value="">---अपाङ्गताको प्रकार छान्नुहोस् ---</option>
                                     @foreach($disabilityTypes as $disabilityType)
                                         <option
@@ -282,7 +285,7 @@
                                 <select
                                     class="form-select @error('form.disability_reason_id') is-invalid @enderror"
                                     wire:model="form.disability_reason_id"
-                                    id="form.disability_reason_id">
+                                    id="form.disability_reason_id" required>
                                     <option value="">---अपाङ्गताको कारण छान्नुहोस् ---</option>
                                     @foreach($disabilityReasons as $disabilityReason)
                                         <option
@@ -318,7 +321,7 @@
                             <select
                                 class="form-select @error('form.identity_type') is-invalid @enderror"
                                 wire:model="form.identity_type"
-                                id="form.identity_type">
+                                id="form.identity_type" required>
                                 <option value="">--- छान्नुहोस् ---</option>
                                 <option value="receive">पाएको</option>
                                 <option value="not_receive">नपाएको</option>
@@ -334,7 +337,7 @@
                                     <select
                                         class="form-select @error('form.receiving_body') is-invalid @enderror"
                                         wire:model="form.receiving_body"
-                                        id="form.receiving_body">
+                                        id="form.receiving_body" required>
                                         <option value="">---छान्नुहोस् ---</option>
                                         @foreach(\Modules\Identity\Enums\ReceivingBodyEnum::cases() as $receivingBody)
                                             <option
@@ -354,6 +357,7 @@
                                         id="form.card_no"
                                         placeholder=" कार्ड नं "
                                         wire:model="form.card_no"
+                                        required
                                     />
                                     @error('form.card_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -367,6 +371,7 @@
                                         id="date_bs"
                                         placeholder="परिचय पत्र पाएको मिति (बि.स.)"
                                         wire:model="form.date_bs"
+                                        required
                                     />
                                     @error('form.date_bs')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -380,6 +385,7 @@
                                         id="date_ad"
                                         placeholder="परिचय पत्र पाएको मिति (ई.स.)"
                                         wire:model="form.date_ad"
+                                        required
                                     />
                                     @error('form.date_ad')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -395,6 +401,7 @@
                                     id="form.father_name"
                                     placeholder="बुवाको नाम"
                                     wire:model="form.father_name"
+                                    required
                                 />
                                 @error('form.father_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -409,6 +416,7 @@
                                     id="form.father_name_en"
                                     placeholder="बुवाको नाम"
                                     wire:model="form.father_name_en"
+                                    required
                                 />
                                 @error('form.father_name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -423,6 +431,7 @@
                                     id="form.grand_father_name"
                                     placeholder="हजुरबुवाको नाम"
                                     wire:model="form.grand_father_name"
+                                    required
                                 />
                                 @error('form.grand_father_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -438,6 +447,7 @@
                                     id="form.grand_father_name_en"
                                     placeholder="हजुरबुवाको नाम (English)"
                                     wire:model="form.grand_father_name_en"
+                                    required
                                 />
                                 @error('form.grand_father_name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -452,6 +462,7 @@
                                     id="form.mother_name"
                                     placeholder=" आमाको नाम "
                                     wire:model="form.mother_name"
+                                    required
                                 />
                                 @error('form.mother_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -466,6 +477,7 @@
                                     id="form.mother_name_en"
                                     placeholder="  आमाको नाम (English) "
                                     wire:model="form.mother_name_en"
+                                    required
                                 />
                                 @error('form.mother_name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -497,7 +509,7 @@
                                 <select
                                     class="form-select @error('form.is_citizenship') is-invalid @enderror"
                                     wire:model="form.is_citizenship"
-                                    id="form.is_citizenship">
+                                    id="form.is_citizenship" required>
                                     <option value="">---छान्नुहोस् ---</option>
                                     <option value="citizenship">नागरिकता</option>
                                     <option value="birth_registration">जन्म दर्ता</option>
@@ -516,6 +528,7 @@
                                         id="form.birth_registration_no"
                                         placeholder=" जन्म दर्ता नं. "
                                         wire:model="form.birth_registration_no"
+                                        required
                                     />
                                     @error('form.birth_registration_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -531,6 +544,7 @@
                                         id="form.birth_registration_place"
                                         placeholder=" जन्म दर्ता पाएको स्थान "
                                         wire:model="form.birth_registration_place"
+                                        required
                                     />
                                     @error('form.birth_registration_place')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -545,6 +559,7 @@
                                         id="birth_registration_bs"
                                         placeholder="जन्म दर्ता पाएको मिति (बि.स.)"
                                         wire:model="form.birth_registration_bs"
+                                        required
                                     />
                                     @error('form.birth_registration_bs')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -559,6 +574,7 @@
                                         id="birth_registration_ad"
                                         placeholder="जन्म दर्ता पाएको मिति (बि.स.)"
                                         wire:model="form.birth_registration_ad"
+                                        required
                                     />
                                     @error('form.birth_registration_ad')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -573,6 +589,7 @@
                                         type="file"
                                         id="form.citizenship_photo_certificate"
                                         wire:model="form.citizenship_photo_certificate"
+                                        required
                                     />
                                     <div wire:loading wire:target="form.citizenship_photo_certificate">Uploading...
                                     </div>
@@ -591,6 +608,7 @@
                                         id="form.citizenship_no"
                                         placeholder="नागरिकता नं."
                                         wire:model="form.citizenship_no"
+                                        required
                                     />
                                     @error('form.citizenship_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -606,6 +624,7 @@
                                         id="form.citizenship_no_place"
                                         placeholder="नागरिकता पाएको स्थान"
                                         wire:model="form.citizenship_no_place"
+                                        required
                                     />
                                     @error('form.citizenship_no_place')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -620,6 +639,7 @@
                                         id="citizenship_no_bs"
                                         placeholder="नागरिकता पाएको मिति (बि.स.)"
                                         wire:model="form.citizenship_no_bs"
+                                        required
                                     />
                                     @error('form.citizenship_no_bs')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -634,6 +654,7 @@
                                         id="citizenship_no_ad"
                                         placeholder="नागरिकता पाएको मिति (ई.स.)"
                                         wire:model="form.citizenship_no_ad"
+                                        required
                                     />
                                     @error('form.citizenship_no_ad')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -683,7 +704,8 @@
                                        wire:model="form.is_necessary"
                                        value="1"
                                        name="is_necessary"
-                                       id="is_necessary1">
+                                       id="is_necessary1"
+                                       required>
                                 <label class="form-check-label"
                                        for="is_necessary1"> भएको &nbsp;</label>
                             </div>
@@ -693,7 +715,8 @@
                                        wire:model="form.is_necessary"
                                        value="0"
                                        name="is_necessary"
-                                       id="is_necessary2">
+                                       id="is_necessary2"
+                                       required>
                                 <label class="form-check-label"
                                        for="is_necessary2">नभएको</label>
                             </div>
@@ -709,6 +732,7 @@
                                         id="form.material_description"
                                         placeholder=" सामाग्री विवरण "
                                         wire:model="form.material_description"
+                                        required
                                     />
                                     @error('form.material_description')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -725,7 +749,7 @@
                                 <select
                                     class="form-select @error('form.qualification') is-invalid @enderror"
                                     wire:model="form.qualification"
-                                    id="form.qualification">
+                                    id="form.qualification" required>
                                     <option value="">---छान्नुहोस् ---</option>
                                     @foreach(\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
                                         <option
@@ -746,7 +770,7 @@
                                 <select
                                     class="form-select @error('form.daily_activity') is-invalid @enderror"
                                     wire:model="form.daily_activity"
-                                    id="form.daily_activity">
+                                    id="form.daily_activity" required>
                                     <option value="">---छान्नुहोस् ---</option>
 
                                     <option value="1">सक्ने</option>
@@ -762,7 +786,7 @@
                                 <select
                                     class="form-select @error('form.supporting_material') is-invalid @enderror"
                                     wire:model="form.supporting_material"
-                                    id="form.supporting_material">
+                                    id="form.supporting_material" required>
                                     <option value="">---छान्नुहोस् ---</option>
 
                                     <option value="1">गरेको</option>
@@ -782,6 +806,7 @@
                                         id="form.material_name"
                                         placeholder="  सामाग्रीको नाम  "
                                         wire:model="form.material_name"
+                                        required
                                     />
                                     @error('form.material_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -974,6 +999,7 @@
                                     id="form.provide_detail_full_name"
                                     placeholder="नाम"
                                     wire:model="form.provide_detail_full_name"
+                                    required
                                 />
                                 @error('form.provide_detail_full_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -988,6 +1014,7 @@
                                     id="form.provide_detail_address"
                                     placeholder="ठेगाना"
                                     wire:model="form.provide_detail_address"
+                                    required
                                 />
                                 @error('form.provide_detail_address')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -1065,7 +1092,7 @@
                                 <select
                                     class="form-select @error('form.employee_signature_id') is-invalid @enderror"
                                     wire:model="form.employee_signature_id"
-                                    id="form.employee_signature_id">
+                                    id="form.employee_signature_id" required>
                                     <option value="">---हस्ताक्षर छान्नुहोस् ---</option>
                                     @foreach($employee_signatures as $employee_signature)
                                         <option
@@ -1105,7 +1132,7 @@
                                     class="form-control @error('form.photo') is-invalid @enderror"
                                     type="file"
                                     id="form.photo"
-                                    wire:model="form.photo"
+                                    wire:model="form.photo" required
                                 />
                                 <div wire:loading wire:target="form.photo">Uploading...</div>
                                 @error('form.photo')
@@ -1124,7 +1151,7 @@
                                 <select
                                     class="form-select @error('form.finger_print_type') is-invalid @enderror"
                                     wire:model="form.finger_print_type"
-                                    id="form.finger_print_type">
+                                    id="form.finger_print_type" required>
                                     <option value="">---छाप छान्नुहोस् ---</option>
                                     <option value="finger">हातको औंला</option>
                                     <option value="legs">खुट्टाको औंला</option>
@@ -1192,7 +1219,7 @@
                                     type="text"
                                     id="form.name"
                                     placeholder="पुरा नाम नेपालीमा"
-                                    wire:model="form.name"
+                                    wire:model="form.name" required
                                 />
                                 @error('form.name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -1208,7 +1235,7 @@
                                     type="text"
                                     id="form.name_en"
                                     placeholder="पुरा नाम (English)"
-                                    wire:model="form.name_en"
+                                    wire:model="form.name_en" required
                                 />
                                 @error('form.name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -1220,7 +1247,7 @@
                                 <select
                                     class="form-select @error('form.gender') is-invalid @enderror"
                                     wire:model="form.gender"
-                                    id="form.gender">
+                                    id="form.gender" required>
                                     <option value="">---लिङ्ग छान्नुहोस् ---</option>
                                     @foreach(\App\Enums\Gender::cases() as $gender)
                                         <option
@@ -1237,7 +1264,7 @@
                                 <select
                                     class="form-select @error('form.ethnicity_id') is-invalid @enderror"
                                     wire:model="form.ethnicity_id"
-                                    id="form.ethnicity_id">
+                                    id="form.ethnicity_id" required>
                                     <option value="">---जातीयता छान्नुहोस् ---</option>
                                     @foreach($ethnicities as $ethnicity)
                                         <option
@@ -1257,7 +1284,7 @@
                                     type="text"
                                     id="dob_bs"
                                     placeholder="जन्म मिति (बि.स.)"
-                                    wire:model="form.dob_bs"
+                                    wire:model="form.dob_bs" required
                                 />
                                 @error('form.dob_bs')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -1273,7 +1300,7 @@
                                     type="text"
                                     id="dob_ad"
                                     placeholder="जन्म मिति (ई.स.)"
-                                    wire:model="form.dob_ad"
+                                    wire:model="form.dob_ad" required
                                 />
                                 @error('form.dob_ad')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -1289,7 +1316,7 @@
                                 <select
                                     class="form-select @error('form.permanent_province_id') is-invalid @enderror"
                                     wire:model="form.permanent_province_id"
-                                    id="form.permanent_province_id">
+                                    id="form.permanent_province_id" required>
                                     <option value="">---प्रदेश छान्नुहोस् ---</option>
                                     @foreach($provinces as $province)
                                         <option
@@ -1305,7 +1332,7 @@
                                 <select
                                     class="form-select @error('form.permanent_district_id') is-invalid @enderror"
                                     wire:model="form.permanent_district_id"
-                                    id="form.permanent_district_id">
+                                    id="form.permanent_district_id" required>
                                     <option value="">---जिल्ला छान्नुहोस् ---</option>
                                     @foreach($permanent_districts as $permanent_district)
                                         <option
@@ -1321,7 +1348,7 @@
                                 <select
                                     class="form-select @error('form.permanent_local_body_id') is-invalid @enderror"
                                     wire:model="form.permanent_local_body_id"
-                                    id="form.permanent_local_body_id">
+                                    id="form.permanent_local_body_id" required>
                                     <option value="">---पालिका छान्नुहोस् ---</option>
                                     @foreach($permanent_localBodies as $permanent_localBody)
                                         <option
@@ -1337,7 +1364,7 @@
                                 <select
                                     class="form-select @error('form.permanent_ward') is-invalid @enderror"
                                     wire:model="form.permanent_ward"
-                                    id="form.permanent_ward">
+                                    id="form.permanent_ward" required>
                                     <option value="">---वार्ड छान्नुहोस् ---</option>
                                     @foreach($permanent_wards as $permanent_ward)
                                         <option
@@ -1356,7 +1383,7 @@
                                     type="text"
                                     id="form.permanent_tole"
                                     placeholder="टोल"
-                                    wire:model="form.permanent_tole"
+                                    wire:model="form.permanent_tole" required
                                 />
                                 @error('form.permanent_tole')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -1373,7 +1400,7 @@
                                 <select
                                     class="form-select @error('form.temporary_province_id') is-invalid @enderror"
                                     wire:model="form.temporary_province_id"
-                                    id="form.temporary_province_id">
+                                    id="form.temporary_province_id" required>
                                     <option value="">---प्रदेश छान्नुहोस् ---</option>
                                     @foreach($provinces as $province)
                                         <option
@@ -1389,7 +1416,7 @@
                                 <select
                                     class="form-select @error('form.temporary_district_id') is-invalid @enderror"
                                     wire:model="form.temporary_district_id"
-                                    id="form.temporary_district_id">
+                                    id="form.temporary_district_id" required>
                                     <option value="">---जिल्ला छान्नुहोस् ---</option>
                                     @foreach($temporary_districts as $temporary_district)
                                         <option
@@ -1405,7 +1432,7 @@
                                 <select
                                     class="form-select @error('form.temporary_local_body_id') is-invalid @enderror"
                                     wire:model="form.temporary_local_body_id"
-                                    id="form.temporary_local_body_id">
+                                    id="form.temporary_local_body_id" required>
                                     <option value="">---पालिका छान्नुहोस् ---</option>
                                     @foreach($temporary_localBodies as $temporary_localBody)
                                         <option
@@ -1421,7 +1448,7 @@
                                 <select
                                     class="form-select @error('form.temporary_ward') is-invalid @enderror"
                                     wire:model="form.temporary_ward"
-                                    id="form.temporary_ward">
+                                    id="form.temporary_ward" required>
                                     <option value="">---वार्ड छान्नुहोस् ---</option>
                                     @foreach($temporary_wards as $temporary_ward)
                                         <option
@@ -1441,7 +1468,7 @@
                                     type="text"
                                     id="form.temporary_tole"
                                     placeholder="टोल"
-                                    wire:model="form.temporary_tole"
+                                    wire:model="form.temporary_tole" required
                                 />
                                 @error('form.temporary_tole')
                                 <div class="invalid-feedback">{{$message}}</div>

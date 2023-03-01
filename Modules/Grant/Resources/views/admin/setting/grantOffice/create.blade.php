@@ -47,6 +47,7 @@
                                     class="form-control @error('office_name') is-invalid @enderror"
                                     id="office_name"
                                     placeholder="अनुदान कार्यालय"
+                                    required
                                 />
                                 @error('office_name')
                                 <div class="invalid-feedback">{{$message}}</div>

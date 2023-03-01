@@ -62,6 +62,7 @@
                                     class="form-control @error('level_name') is-invalid @enderror"
                                     id="level_name"
                                     placeholder="योजना स्तर"
+                                    required
                                 />
                                 @error('level_name')
                                 <div class="invalid-feedback">{{$message}}</div>

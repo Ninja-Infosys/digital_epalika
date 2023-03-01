@@ -55,6 +55,7 @@
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="registration_no"
                                         placeholder="दर्ता नम्बर"
+                                        required
                                     />
                                     @error('registration_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -64,7 +65,7 @@
                                     <label for="applicant_type" class="form-label">प्रकार *</label>
                                     <select name="applicant_type"
                                             class="form-select @error('applicant_type') is-invalid @enderror"
-                                            id="applicant_type">
+                                            id="applicant_type" required>
                                         <option value="">छान्नुहोस्</option>
                                         @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
                                             <option
@@ -100,6 +101,7 @@
                                         class="form-control @error('address') is-invalid @enderror"
                                         id="address"
                                         placeholder="ठेगाना "
+                                        required
                                     />
                                     @error('address')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -114,6 +116,7 @@
                                         class="form-control @error('mailing_address') is-invalid @enderror"
                                         id="mailing_address"
                                         placeholder="पत्राचार गर्ने ठेगाना "
+                                        required
                                     />
                                     @error('mailing_address')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -128,6 +131,7 @@
                                         class="form-control @error('main_person') is-invalid @enderror"
                                         id="main_person"
                                         placeholder="मुख्य व्यक्तिको  नाम"
+                                        required
                                     />
                                     @error('main_person')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -156,6 +160,7 @@
                                         class="form-control @error('mobile_no') is-invalid @enderror"
                                         id="mobile_no"
                                         placeholder="मोबाइल नम्बर"
+                                        required
                                     />
                                     @error('mobile_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -244,7 +249,7 @@
                                     <select
                                         name="business_nature"
                                         class="form-select @error('business_nature') is-invalid @enderror"
-                                        id="business_nature">
+                                        id="business_nature" required>
                                         <option value="">छान्नुहोस्</option>
                                         @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $business_nature)
                                             <option
@@ -262,6 +267,7 @@
                                     <textarea name="business_nature_description"
                                               id="business_nature_description"
                                               placeholder="बिबरण"
+                                              required
                                               class="form-control summernote @error('business_nature_description') is-invalid @enderror"
                                               cols="30"
                                               rows="3">{{old('business_nature_description',$listRegistration->business_nature_description)}}</textarea>

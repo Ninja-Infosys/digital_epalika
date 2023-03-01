@@ -62,6 +62,7 @@
                                     class="form-control @error('cost_estimation') is-invalid @enderror"
                                     id="cost_estimation"
                                     placeholder="कार्यालयको स्वीकृत विभागिय लागत अनुमान"
+                                    required
                                 />
                                 @error('cost_estimation')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -83,6 +84,7 @@
                                     class="form-control @error('newspaper_name') is-invalid @enderror"
                                     id="newspaper_name"
                                     placeholder="पत्रिकाको नाम"
+                                    required
                                 />
                                 @error('newspaper_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -135,6 +137,7 @@
                                     class="form-control @error('contract_percentage') is-invalid @enderror"
                                     id="contract_percentage"
                                     placeholder="ठेक्का विलो प्रतिशत"
+                                    required
                                 />
                                 @error('contract_percentage')
                                 <div class="invalid-feedback">{{$message}}</div>

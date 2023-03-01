@@ -51,6 +51,7 @@
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
                                         placeholder="नाम "
+                                        required
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -143,7 +144,7 @@
                                     <label for="is_employee" class="form-label">प्रकार छान्नुहोस *</label>
 
                                     <select class="form-control @error('is_employee') is-invalid @enderror"
-                                            name="is_employee" id="is_employee">
+                                            name="is_employee" id="is_employee" required>
                                         <option value="1" {{old('is_employee') == 1 ? 'selected':''}}>कर्मचारी</option>
                                         <option value="0" {{old('is_employee')==0 ? 'selected':''}}>जनप्रतिनिधि
                                         </option>
@@ -156,7 +157,7 @@
                                     <label for="show_to_index" class="form-label">गृहपृष्ठमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_index') is-invalid @enderror"
-                                            name="show_to_index" id="show_to_index">
+                                            name="show_to_index" id="show_to_index" required>
                                         <option value="1" {{old('show_to_index') == 1 ? 'selected':''}}>देखाउने
                                         </option>
                                         <option value="0" {{old('show_to_index')==0 ? 'selected':''}}>नदेखाउने
@@ -170,7 +171,7 @@
                                     <label for="show_to_mobile_app" class="form-label">मोबाइलमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"
-                                            name="show_to_mobile_app" id="show_to_mobile_app">
+                                            name="show_to_mobile_app" id="show_to_mobile_app" required>
                                         <option value="1" {{old('show_to_mobile_app') == 1 ? 'selected':''}}>देखाउने
                                         </option>
                                         <option value="0" {{old('show_to_mobile_app')==0 ? 'selected':''}}>नदेखाउने

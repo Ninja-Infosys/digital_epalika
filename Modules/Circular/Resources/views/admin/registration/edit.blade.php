@@ -51,6 +51,7 @@
                                         class="form-control @error('registration_no') is-invalid @enderror"
                                         id="registration_no"
                                         placeholder="दर्ता न."
+                                        required
                                     />
                                     @error('registration_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -97,6 +98,7 @@
                                         class="form-control @error('sender_name') is-invalid @enderror"
                                         id="sender_name"
                                         placeholder="पठाउने कार्यालयको नाम"
+                                        required
                                     />
                                     @error('sender_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -111,6 +113,7 @@
                                         class="form-control @error('subject') is-invalid @enderror"
                                         id="subject"
                                         placeholder="बिषय"
+                                        required
                                     />
                                     @error('subject')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -143,6 +146,7 @@
                                         class="form-control @error('receiver_name') is-invalid @enderror"
                                         id="receiver_name"
                                         placeholder="नाम"
+                                        required
                                     />
                                     @error('receiver_name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -191,12 +195,13 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="documents" class="form-label">डकुमेन्ट </label>
+                                    <label for="documents" class="form-label">डकुमेन्ट *</label>
                                     <input
                                         type="file"
                                         name="documents[]"
                                         class="form-control @error('documents') is-invalid @enderror"
                                         id="documents"
+                                        required
                                         multiple/>
                                     @error('documents')
                                     <div class="invalid-feedback">{{$message}}</div>
