@@ -100,42 +100,20 @@
         addMore: function () {
             $('[data-toggle="add-more"]').each(function () {
                 const target_element = $(this).data("target-element");
-                const content = $('#' + target_element).html();
                 const target_class = $(this).data('target');
-                const data = []
                 $(this).on("click", function (e) {
                     e.preventDefault();
-                    //const last_row=$(`#${target_element}`).children().last()
-                    //const inputs = $('#' + target_element).find('input,textarea,select')
-                    const arrayData=[]
                     $(`#${target_element}`).children().each((row_key, row) => {
-                        let row_element=$(row)
-                        $(row).children().each((col_key,col)=>{
-                            const col_element=$(col)
-                            const inputs = $(col).find('input,textarea,select')
-                            inputs.each((key, input) => {
-                                const name = $(input).attr('name');
-                                const array_name = name.split('[')
-                                const key_name = array_name.pop().replace(']', '')
-                                const new_name=`${array_name.shift()}[${row_key}][${key_name}]`
-                                const new_element=$(input).attr('name',new_name)
-                                //console.log(new_element)
-                                $(col_element).append($(input).closest('label'))
-                                $(col_element).append(new_element)
-                            })
-                            $(row_element).append(col_element)
-                            //console.log(row_element)
-                        })
-                        $(`#${target_element}`).append(row_element)
+                        const row_element = $(row);
+                        $(row_element).find('input, textarea, select').each(function(col_key, col) {
+                            const name = $(col).attr('name');
+                            const array_name = name.split('[');
+                            const key_name = array_name.pop().replace(']', '');
+                            const new_name = `${array_name.shift()}[${row_key}][${key_name}]`;
+                            $(col).attr('name', new_name);
+                        });
+                        $(target_class).append(row_element[0].outerHTML);
                     })
-                    //console.log(inputs)
-                    //const inputs=last_row.find('input,textarea,select')
-                    // Define an object to store the data for the last row
-
-                    // Loop through the inputs for the last row and add their values to the object
-
-
-                    $(content).append($(target_element));
                 });
             });
         },
