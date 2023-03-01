@@ -103,19 +103,16 @@
                 const target_class = $(this).data('target');
                 $(this).on("click", function (e) {
                     e.preventDefault();
-                    $(`#${target_element}`).children().each((row_key, row) => {
-                        const row_element = $(row);
-                        $(row_element).find('input, textarea, select').each(function(col_key, col) {
+                    const row_element = $(`#${target_element}`).children().first().clone();
+                    const row_index = $(`#${target_element} > div`).length;
+                    row_element.find('input, textarea, select').each(function(col_key, col) {
                             const name = $(col).attr('name');
                             const array_name = name.split('[');
                             const key_name = array_name.pop().replace(']', '');
-                            const new_name = `${array_name.shift()}[${row_key+1}][${key_name}]`;
+                            const new_name = `${array_name.shift()}[${row_index}][${key_name}]`;
                             $(col).attr('name', new_name);
                         });
-                        row_element.each((key,row)=>{
-                            $(target_class).append(row.outerHTML);
-                        })
-                    })
+                    $(target_class).append(row_element);
                 });
             });
         },
