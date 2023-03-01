@@ -4436,8 +4436,9 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--primary);
     z-index: 9999;
+    background-color: rgba(0, 71, 171, 0.7);
+
 }
 
 #preloader img {
