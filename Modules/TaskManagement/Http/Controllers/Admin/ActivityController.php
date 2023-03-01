@@ -32,6 +32,8 @@ class ActivityController extends Controller
     public function store(StoreActivityRequest $request)
     {
         $this->checkAuthorization('taskActivity_create');
+
+        dd($request->all());
     }
 
 

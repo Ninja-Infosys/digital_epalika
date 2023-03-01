@@ -31,11 +31,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{route('admin.taskManagement.activity.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <x-date-input-component
                                     label-ne="मिति *" name-ne="date"
+                                    label-en="Date *" name-en="date_en"
                                 />
                             </div>
                             <div class="col-md-12 mb-2">
@@ -45,58 +47,21 @@
                                     <button
                                         type="button"
                                         class="btn btn-xs btn-outline-info"
+                                        data-target-element="activities"
                                         data-toggle="add-more"
-                                        data-content='<div class="row justify-content-center border-bottom mb-2 activities-5">
-                            <div class="col-md-6 mb-2">
-                                <label for="title" class="form-label">शिर्षक *</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    class="form-control"
-                                    id="title"
-                                    placeholder="शिर्षक"
-                                    required
-                                />
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="documents" class="form-label">डकुमेन्ट </label>
-                                <input
-                                    type="file"
-                                    name="documents[]"
-                                    class="form-control"
-                                    id="Documents"
-                                    multiple/>
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="description"
-                                       class="form-label">विवरण</label>
-                                <textarea name="description"
-                                          id="description" cols="30" rows="5"
-                                          class="form-control ckEditor"
-                                          placeholder="विवरण"></textarea>
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="remarks" class="form-label">कैफ़ियत</label>
-                                <textarea name="remarks"
-                                          id="remarks" cols="30" rows="5"
-                                          class="form-control"
-                                          placeholder="कैफ़ियत"></textarea>
-                            </div>
-                            <button type="button" class="col-1 btn btn-sm btn-danger mb-1" data-toggle="remove-parent" data-parent=".row">
-										<i class="fa fa-times"></i>
-									</button>
-                        </div>' data-target=".activities">
+                                        data-target=".activities"
+                                    >
                                         <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                                     </button>
                                 </div>
                                 <fieldset>
-                                    <div class="activities">
+                                    <div class="activities" id="activities">
                                         <div class="row justify-content-center border-bottom mb-2 activities-5">
                                             <div class="col-md-6 mb-2">
                                                 <label for="title" class="form-label">शिर्षक *</label>
                                                 <input
                                                     type="text"
-                                                    name="title"
+                                                    name="activity_lists[0][title]"
                                                     class="form-control"
                                                     id="title"
                                                     placeholder="शिर्षक"
@@ -107,7 +72,7 @@
                                                 <label for="documents" class="form-label">डकुमेन्ट </label>
                                                 <input
                                                     type="file"
-                                                    name="documents[]"
+                                                    name="activity_lists[0][documents]"
                                                     class="form-control"
                                                     id="Documents"
                                                     multiple/>
@@ -115,14 +80,14 @@
                                             <div class="col-md-6 mb-2">
                                                 <label for="description"
                                                        class="form-label">विवरण</label>
-                                                <textarea name="description"
+                                                <textarea name="activity_lists[0][description]"
                                                           id="description" cols="30" rows="5"
                                                           class="form-control ckEditor"
                                                           placeholder="विवरण"></textarea>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <label for="remarks" class="form-label">कैफ़ियत</label>
-                                                <textarea name="remarks"
+                                                <textarea name="activity_lists[0][remarks]"
                                                           id="remarks" cols="30" rows="5"
                                                           class="form-control"
                                                           placeholder="कैफ़ियत"></textarea>
@@ -136,12 +101,12 @@
                                 </fieldset>
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="formActivity.remarks" class="form-label">कैफ़ियत</label>
-                                <textarea name="formActivity.remarks"
-                                          id="formActivity.remarks" cols="30" rows="5"
-                                          class="form-control @error('formActivity.remarks') is-invalid @enderror"
+                                <label for="remarks" class="form-label">कैफ़ियत</label>
+                                <textarea name="remarks"
+                                          id="remarks" cols="30" rows="5"
+                                          class="form-control @error('remarks') is-invalid @enderror"
                                           placeholder="कैफ़ियत"></textarea>
-                                @error('formActivity.remarks')
+                                @error('remarks')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

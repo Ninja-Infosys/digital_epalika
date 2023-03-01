@@ -99,12 +99,43 @@
     const extra = {
         addMore: function () {
             $('[data-toggle="add-more"]').each(function () {
-                const $this = $(this);
-                const content = $this.data("content");
-                const target = $this.data("target");
-                $this.on("click", function (e) {
+                const target_element = $(this).data("target-element");
+                const content = $('#' + target_element).html();
+                const target_class = $(this).data('target');
+                const data = []
+                $(this).on("click", function (e) {
                     e.preventDefault();
-                    $(target).append(content);
+                    //const last_row=$(`#${target_element}`).children().last()
+                    //const inputs = $('#' + target_element).find('input,textarea,select')
+                    const arrayData=[]
+                    $(`#${target_element}`).children().each((row_key, row) => {
+                        let row_element=$(row)
+                        $(row).children().each((col_key,col)=>{
+                            const col_element=$(col)
+                            const inputs = $(col).find('input,textarea,select')
+                            inputs.each((key, input) => {
+                                const name = $(input).attr('name');
+                                const array_name = name.split('[')
+                                const key_name = array_name.pop().replace(']', '')
+                                const new_name=`${array_name.shift()}[${row_key}][${key_name}]`
+                                const new_element=$(input).attr('name',new_name)
+                                //console.log(new_element)
+                                $(col_element).append($(input).closest('label'))
+                                $(col_element).append(new_element)
+                            })
+                            $(row_element).append(col_element)
+                            //console.log(row_element)
+                        })
+                        $(`#${target_element}`).append(row_element)
+                    })
+                    //console.log(inputs)
+                    //const inputs=last_row.find('input,textarea,select')
+                    // Define an object to store the data for the last row
+
+                    // Loop through the inputs for the last row and add their values to the object
+
+
+                    $(content).append($(target_element));
                 });
             });
         },
@@ -281,27 +312,27 @@
                 $(this).closest('form').submit();
             });
         },
-        browserBack: function (){
+        browserBack: function () {
             const previousUrl = document.referrer;
             const currentUrl = window.location.href;
-            history.pushState({ url: currentUrl }, '', currentUrl);
+            history.pushState({url: currentUrl}, '', currentUrl);
             $(window).on('popstate', function () {
                 window.location.href = previousUrl;
             });
         },
-        formFillAlert: function (){
+        formFillAlert: function () {
             let unsavedChanges = false;
-            $('form input').blur(function() {
+            $('form input').blur(function () {
                 if ($(this).val() !== '') {
                     unsavedChanges = true;
                 }
             });
-            $(window).on('beforeunload', function(event) {
+            $(window).on('beforeunload', function (event) {
                 if (unsavedChanges) {
                     event.preventDefault();
                 }
             });
-            $('form').submit(function() {
+            $('form').submit(function () {
                 unsavedChanges = false;
             });
         }
@@ -322,6 +353,7 @@
         extra.formFillAlert();
     });
 })(jQuery);
+
 function toastmessage(message, type) {
     swal.fire({
         title: message,
@@ -334,6 +366,7 @@ function toastmessage(message, type) {
         icon: type,
     });
 }
+
 function copyText(el) {
     try {
         navigator.clipboard.writeText(el);

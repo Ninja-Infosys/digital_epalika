@@ -9,13 +9,21 @@ class StoreActivityRequest extends FormRequest
 {
     public function authorize():bool
     {
-        return Gate::allows();
+        return Gate::allows('taskActivity_create');
     }
 
     public function rules():array
     {
         return [
-            //
+            'date' => ['required'],
+            'date_en' => ['required'],
+            'activity_lists' => ['required', 'array'],
+            'activity_lists.*.title' => ['required', 'string', 'max:255'],
+            'activity_lists.*.description' => ['nullable'],
+            'activity_lists.*.remarks' => ['nullable'],
+            'activity_lists.*.documents' => ['nullable', 'array'],
+            'activity_lists.*.documents.*' => ['mimes:jpg,png,jpeg,pdf'],
+            'remarks' => ['nullable']
         ];
     }
 }
