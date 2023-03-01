@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div id="printData">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm mb-0 table-striped table-hover table-bordered">
 
                             <tbody>
                             <tr>
@@ -100,7 +100,7 @@
                         </table>
                     </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         @foreach($dispatch->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
