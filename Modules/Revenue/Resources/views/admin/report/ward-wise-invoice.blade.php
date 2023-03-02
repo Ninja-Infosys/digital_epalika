@@ -97,12 +97,14 @@
                                 <thead>
                                 <tr>
                                     <th> वडा नं.</th>
-                                    <th> मालपोत रकम </th>
+                                    <th> मालपोत रकम</th>
                                     <th> नगदी रकम</th>
                                     <th>जम्मा</th>
                                 </tr>
                                 </thead>
+                                <tbody id="report-data">
 
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -113,35 +115,6 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
-                function createTable(data) {
-                    const table = document.querySelector('#report-table');
-                    // create tbody
-                    // delete tbody tag if exists
-                    if (table.querySelector('tbody')) {
-                        table.querySelector('tbody').remove();
-                    }
-
-                    const tbody = document.createElement('tbody');
-
-                    data.forEach(function (item) {
-                        // create row
-                        const tr = document.createElement('tr');
-                        // create cell
-                        Object.values(item).forEach(data => {
-                            const td = document.createElement('td');
-                            // set cell content
-                            td.innerHTML = data;
-                            // append cell to row
-                            tr.appendChild(td);
-                        });
-
-                        // append row to tbody
-                        tbody.appendChild(tr);
-                    });
-
-                    table.appendChild(tbody);
-                }
-
                 // x-csrf protection
                 $.ajaxSetup({
                     headers: {
@@ -170,7 +143,7 @@
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
                             $('#report-content').removeClass('d-none');
-                            createTable(resp.data)
+                            $('#report-data').html(resp.view)
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)
