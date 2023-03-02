@@ -41,7 +41,7 @@
                                 />
                             </div>
                             <div class="col-md-12 mb-2">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
                                     <label for="activities" class="form-label fw-bold">क्रियाकलाप <span
                                             class="text-danger">*</span></label>
                                     <button
@@ -52,49 +52,53 @@
                                         <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                                     </button>
                                 </div>
-                                <fieldset>
+                                <fieldset class="bg-soft-secondary">
                                     <div id="activities">
-                                        <div class="row justify-content-center border-bottom mb-2">
-                                            <div class="col-md-6 mb-2">
-                                                <label for="title" class="form-label">शिर्षक *</label>
-                                                <input
-                                                    type="text"
-                                                    name="activity_lists[0][title]"
-                                                    class="form-control"
-                                                    id="title"
-                                                    placeholder="शिर्षक"
-                                                    required
-                                                />
+                                        <div class="main">
+                                            <div class="text-end">
+                                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                                        data-toggle="remove-parent" data-parent=".main"
+                                                        data-target-element="activities">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
                                             </div>
-                                            <div class="col-md-6 mb-2">
-                                                <label for="documents" class="form-label">डकुमेन्ट </label>
-                                                <input
-                                                    type="file"
-                                                    name="activity_lists[0][documents]"
-                                                    class="form-control"
-                                                    id="Documents"
-                                                    multiple/>
+                                            <div class="row border-bottom mb-2">
+                                                <div class="col-md-6 mb-2">
+                                                    <label for="title" class="form-label">शिर्षक *</label>
+                                                    <input
+                                                        type="text"
+                                                        name="activity_lists[0][title]"
+                                                        class="form-control"
+                                                        id="title"
+                                                        placeholder="शिर्षक"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div class="col-md-6 mb-2">
+                                                    <label for="documents" class="form-label">डकुमेन्ट </label>
+                                                    <input
+                                                        type="file"
+                                                        name="activity_lists[0][documents]"
+                                                        class="form-control"
+                                                        id="documents"
+                                                        multiple/>
+                                                </div>
+                                                <div class="col-md-12 mb-2">
+                                                    <label for="data"
+                                                           class="form-label">विवरण</label>
+                                                    <textarea name="activity_lists[0][description]"
+                                                              id="data" cols="30" rows="5"
+                                                              class="form-control ckEditor"
+                                                              placeholder="विवरण"></textarea>
+                                                </div>
+                                                <div class="col-md-6 mb-2">
+                                                    <label for="remarks" class="form-label">कैफ़ियत</label>
+                                                    <textarea name="activity_lists[0][remarks]"
+                                                              id="remarks" cols="10" rows="2"
+                                                              class="form-control"
+                                                              placeholder="कैफ़ियत"></textarea>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 mb-2">
-                                                <label for="description"
-                                                       class="form-label">विवरण</label>
-                                                <textarea name="activity_lists[0][description]"
-                                                          id="description" cols="30" rows="5"
-                                                          class="form-control ckEditor"
-                                                          placeholder="विवरण"></textarea>
-                                            </div>
-                                            <div class="col-md-6 mb-2">
-                                                <label for="remarks" class="form-label">कैफ़ियत</label>
-                                                <textarea name="activity_lists[0][remarks]"
-                                                          id="remarks" cols="30" rows="5"
-                                                          class="form-control"
-                                                          placeholder="कैफ़ियत"></textarea>
-                                            </div>
-                                            <button type="button" class="col-1 btn btn-sm btn-danger mb-1"
-                                                    data-toggle="remove-parent" data-parent=".row"
-                                                    data-target-element="activities">
-                                                <i class="fa fa-times"></i>
-                                            </button>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -118,4 +122,8 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
+    @endpush
 @endsection
