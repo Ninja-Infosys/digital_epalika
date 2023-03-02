@@ -168,20 +168,19 @@
                     icon: type,
                 });
             }
-
-            $('#recommendation_category_id').on('change', function () {
-                let val = $(this).val();
-                $.ajax({
-                    type: 'GET',
-                    url: window.location.origin + '/admin/recommendation/setting/recommendationCategory' + '/' + val + '/getTemplate',
-                    success: function (resp) {
-                        CKEDITOR.instances.recommendation_data.setData(resp.data);
-                    },
-                    error: function () {
-                        alert('Something Went Wrong')
-                    }
-                })
-            })
         });
+        $('#recommendation_category_id').on('change', function () {
+            let val = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: window.location.origin + '/admin/recommendation/setting/recommendationCategory' + '/' + val + '/getTemplate',
+                success: function (resp) {
+                    CKEDITOR.instances.recommendation_data.setData(resp.data);
+                },
+                error: function () {
+                    alert('Something Went Wrong')
+                }
+            })
+        })
     </script>
 @endpush

@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
             'plan_level_id' => ['required', Rule::exists('plan_levels', 'id')->withoutTrashed()],
             'ward_no' => ['nullable', 'array'],
             'ward_no.*' => ['integer'],
+            'projectAllocatedAmounts' => ['required', 'array'],
             'projectAllocatedAmounts.*.budget_head_id' => ['required', Rule::exists('budget_heads', 'id')->withoutTrashed()],
             'projectAllocatedAmounts.*.amount' => ['required', 'numeric'],
             'project_venue' => ['nullable'],

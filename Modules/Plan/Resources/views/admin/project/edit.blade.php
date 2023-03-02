@@ -397,26 +397,92 @@
     </div>
     @push('scripts')
         <script>
-            $(document).ready(function (){
-                //set if changed on select
-                $('#budget_head_id').on('change',function (){
-                    setProjectAllocatedAmountInputs()
-                })
-            })
+            $(document).ready(() => {
+                const budgetHeadSelect = $('#budget_head_id');
+                const allocatedAmountsContainer = $('#allocated-amounts');
+                let allocatedAmounts = {}; // store allocated amounts for each option
 
-            function setProjectAllocatedAmountInputs(){
-                $('#allocated-amounts').empty()
-                $('#budget_head_id option:selected').each((key,option)=>{
-                    const col_element=$('<div></div>').addClass('col-md-3 mb-2');
-                    const label=$('<label></label>').addClass('form-label').attr('for','projectAllocatedAmounts'+key).text($(option).text()+' *')
-                    const amount_input=$('<input/>').attr('type','number').attr('min',0).addClass('form-control').attr('placeholder',$.trim($(option).text())).attr('id','projectAllocatedAmounts'+key).attr('name',`projectAllocatedAmounts[${key}][amount]`)
-                    const budget_head_input=$('<input/>').attr('type','hidden').attr('name',`projectAllocatedAmounts[${key}][budget_head_id]`).val($(option).val())
-                    $(col_element).append(label)
-                    $(col_element).append(amount_input)
-                    $(col_element).append(budget_head_input)
-                    $('#allocated-amounts').append(col_element)
-                })
-            }
+                // loop through existing input fields and store their values in allocatedAmounts
+                allocatedAmountsContainer.find('input[name^="projectAllocatedAmounts"]').each((index, inputField) => {
+                    const budgetHeadId = $(inputField).siblings('input[name$="[budget_head_id]"]').val();
+                    allocatedAmounts[budgetHeadId] = $(inputField).val();
+                });
+
+                budgetHeadSelect.on('change', setProjectAllocatedAmountInputs);
+
+                function setProjectAllocatedAmountInputs() {
+                    const selectedOptions = budgetHeadSelect.find('option:selected');
+
+                    selectedOptions.each((index, option) => {
+                        const budgetHeadId = $(option).val();
+
+                        // check if input fields already exist for this option
+                        const existingFields = $(`input[name^="projectAllocatedAmounts"][data-budget-head-id="${budgetHeadId}"]`);
+
+                        if (existingFields.length) {
+                            const amountInput = existingFields.filter('[name$="[amount]"]');
+
+                            // update existing input field value to stored value (if it exists and input value is empty)
+                            if (allocatedAmounts.hasOwnProperty(budgetHeadId) && !amountInput.val()) {
+                                amountInput.val(allocatedAmounts[budgetHeadId]['amount']);
+                            }
+                        } else {
+                            // create new input fields
+                            const div = $('<div>').addClass('col-md-4 mb-2');
+                            const label = $('<label>').addClass('form-label');
+                            label.attr('for', `projectAllocatedAmounts${index}`);
+                            label.text(`${$(option).text()} *`);
+
+                            let amount = 0; // default amount is 0
+
+                            // check if allocated amount exists for this option
+                            if (allocatedAmounts.hasOwnProperty(budgetHeadId)) {
+                                amount = allocatedAmounts[budgetHeadId]['amount'];
+                            }
+
+                            const amountInput = $('<input>').attr({
+                                type: 'number',
+                                min: 0,
+                                placeholder: $.trim($(option).text()),
+                                id: `projectAllocatedAmounts${index}`,
+                                name: `projectAllocatedAmounts[${index}][amount]`,
+                                'data-budget-head-id': budgetHeadId,
+                                value: amount // set input value to stored amount
+                            }).addClass('form-control');
+
+                            const budgetHeadInput = $('<input>').attr({
+                                type: 'hidden',
+                                name: `projectAllocatedAmounts[${index}][budget_head_id]`,
+                                value: budgetHeadId,
+                            });
+
+                            const idInput = $('<input>').attr({
+                                type: 'hidden',
+                                name: `projectAllocatedAmounts[${index}][id]`,
+                                value: allocatedAmounts[budgetHeadId]['id'] // set ID value to stored ID
+                            });
+
+                            // update stored amount when input value changes
+                            amountInput.on('input', () => {
+                                allocatedAmounts[budgetHeadId]['amount'] = amountInput.val();
+                            });
+
+                            div.append(label);
+                            div.append(amountInput);
+                            div.append(budgetHeadInput);
+                            div.append(idInput);
+
+                            const existingDiv = allocatedAmountsContainer.find(`div[data-budget-head-id="${budgetHeadId}"]`);
+                            if (existingDiv.length) {
+                                existingDiv.replaceWith(div);
+                            } else {
+                                allocatedAmountsContainer.append(div);
+                            }
+                        }
+                    });
+                }
+            });
+
         </script>
     @endpush
 @endsection
