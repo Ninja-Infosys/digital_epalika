@@ -104,15 +104,17 @@
                     e.preventDefault();
                     const row_element = $(`#${target_element}`).children().first().clone();
                     const row_index = $(`#${target_element}`).children().length;
-                    row_element.find('input, textarea, select').each(function(col_key, col) {
-                            const name = $(col).attr('name');
-                            const array_name = name.split('[').filter(d=>d.length>1);
-                            console.log(array_name)
-                            const key_name = array_name.pop().replace(']', '');
-                            const new_name = `${array_name.shift()}[${row_index}][${key_name}]`;
-                            $(col).attr('name', new_name);
-                            $(col).val('');
-                        });
+                    row_element.find('input, textarea, select').each(function (col_key, col) {
+                        const name = $(col).attr('name');
+                        const array_name = name.split(/\[([^\[\]]*)\]/).filter(d => d.length > 1);
+                        const key_name = array_name.pop();
+                        let new_name = `${array_name.shift()}[${row_index}][${key_name}]`;
+                        if (name.endsWith('[]')) {
+                            new_name += '[]';
+                        }
+                        $(col).attr('name', new_name);
+                        $(col).val('');
+                    });
                     $(`#${target_element}`).append(row_element);
                 });
             });
@@ -128,7 +130,7 @@
                 const parent = $this.data("parent");
                 const target_element = $(this).data("target-element");
                 const element_length = $(`#${target_element}`).children().length;
-                if (element_length > 1){
+                if (element_length > 1) {
                     $this.closest(parent).remove();
                 }
             });
