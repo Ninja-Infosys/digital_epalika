@@ -10,16 +10,11 @@ if (CKEDITOR.env.ie && CKEDITOR.env.version < 9) {
     CKEDITOR.tools.enableHtml5Elements(document);
 }
 $(".ckEditor").each(function () {
-    const editorElement = CKEDITOR.document.getById(this.id);
-    const editor = createEditor(this.id, config);
+    const editor = CKEDITOR.replace(this.id, config);
     if (!hasWysiwygArea()) {
-        makeInline(editorElement);
+        makeInline(editor);
     }
 });
-
-function createEditor(id, config) {
-    return CKEDITOR.replace(id, config);
-}
 
 function hasWysiwygArea() {
     if (CKEDITOR.revision === ('%RE' + 'V%')) {

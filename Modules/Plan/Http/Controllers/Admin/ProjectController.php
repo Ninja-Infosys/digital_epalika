@@ -5,6 +5,7 @@ namespace Modules\Plan\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\Plan\Entities\BudgetHead;
@@ -13,6 +14,7 @@ use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
+use Modules\Plan\Entities\ProjectAllocatedAmount;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
@@ -70,10 +72,18 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_create');
 
-        Project::create($request->validated() + [
-                'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                'project_status' => ProjectStatusEnum::NOT_STARTED
-            ]);
+        dd($request->validated());
+
+        DB::transaction(function () use ($request) {
+            $project = Project::create($request->validated() + [
+                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                    'project_status' => ProjectStatusEnum::NOT_STARTED
+                ]);
+
+            foreach ($request->input('projectAllocatedAmounts') as $projectAllocatedAmount) {
+                $project->projectAllocatedAmounts()->create($projectAllocatedAmount);
+            }
+        });
 
         toast('योजना/कार्यक्रम सफलतापूर्वक थपियो', 'success');
         return back();
@@ -110,7 +120,16 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_edit');
 
-        $project->update($request->validated());
+        DB::transaction(function () use ($request, $project) {
+            $project->update($request->validated());
+
+            foreach ($request->input('projectAllocatedAmounts') as $projectAllocatedAmount) {
+                ProjectAllocatedAmount::updateOrCreate(
+                    ['project_id' => $project->id, 'id' => $project['id'] ?? ''],
+                    $projectAllocatedAmount
+                );
+            }
+        });
 
         toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो', 'success');
 

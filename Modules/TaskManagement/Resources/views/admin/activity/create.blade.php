@@ -31,6 +31,15 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{route('admin.taskManagement.activity.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -78,7 +87,7 @@
                                                     <label for="documents" class="form-label">डकुमेन्ट </label>
                                                     <input
                                                         type="file"
-                                                        name="activity_lists[0][documents]"
+                                                        name="activity_lists[0][documents][]"
                                                         class="form-control"
                                                         id="documents"
                                                         multiple/>

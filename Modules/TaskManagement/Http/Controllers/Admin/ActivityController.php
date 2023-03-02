@@ -37,6 +37,7 @@ class ActivityController extends Controller
     public function store(StoreActivityRequest $request)
     {
         $this->checkAuthorization('taskActivity_create');
+        dd($request->validated());
 
         DB::transaction(function () use ($request) {
             $activity = Activity::create($request->validated() + [
