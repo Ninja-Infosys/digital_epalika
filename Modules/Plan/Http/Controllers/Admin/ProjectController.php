@@ -120,7 +120,6 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $this->checkAuthorization('project_edit');
-
         DB::transaction(function () use ($request, $project) {
             $project->update($request->validated());
 
