@@ -9,19 +9,10 @@ use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\Group;
-use Illuminate\Support\Collection;
 
 class DashboardController extends Controller
 {
 
-//    protected Collection $cooperatives ;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->cooperatives = Cooperative::first();
-    }
 
     public function __invoke()
     {
@@ -30,12 +21,11 @@ class DashboardController extends Controller
         $groups_count = Group::count();
         $enterprise_count = Enterprise::count();
         $grant_detail_count = GrantDetail::count();
-
-//        dd($this->getGrantData());
         if (request()->ajax()) {
             return [
                 'cooperativeWise' => $this->getCooperativeData(),
-                'grant'=>$this->getGrantData()
+                'grant' => $this->getGrantData(),
+                'wardWiseData' => $this->getWardWiseData()
             ];
         }
         return view('grant::admin.dashboard', compact('grant_detail_count', 'enterprise_count', 'farmers_count', 'cooperative_count', 'groups_count'));
@@ -66,9 +56,9 @@ class DashboardController extends Controller
 
     public function getGrantData()
     {
-        $grants = Grant::with('grantDetails','grantType')->where(function ($q) {
+        $grants = Grant::with('grantDetails', 'grantType')->where(function ($q) {
             $q->where('fiscal_year_id', officeSetting()->fiscal_year_id);
-            })
+        })
             ->withCount('grantDetails')->get()
             ->map(function ($grant) {
                 return [
@@ -82,6 +72,30 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $grants->pluck('total')->toArray(),
+                    'label' => 'जम्मा',
+                ],
+            ],
+        ];
+    }
+
+    public function getWardWiseData()
+    {
+
+        $grantDetails = GrantDetail::whereHas('grant', function ($q) {
+            $q->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
+        })->get();
+        $wardData = collect();
+        foreach (officeSetting()->localBody->ward_no as $ward) {
+            $wardData->push([
+                'ward_no' => 'वडा नं ' . $ward,
+                'total' => $grantDetails->where('ward_no', $ward)->count(),
+            ]);
+        }
+        return [
+            'labels' => $wardData->pluck('ward_no')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $wardData->pluck('total')->toArray(),
                     'label' => 'जम्मा',
                 ],
             ],
