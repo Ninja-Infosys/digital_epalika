@@ -218,6 +218,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <div id="wardWiseData" chart-type="column"
+                         chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) तथा वडा अनुसार जारि अनुदान"></div>
+                    <div class="loading">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
                     <div id="grant" chart-type="column"
                          chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) अनुसार जारि अनुदान"></div>
                     <div class="loading">
@@ -228,6 +241,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     @push('scripts')
         <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
