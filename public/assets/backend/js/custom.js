@@ -95,9 +95,6 @@
                 });
             }
         },
-        editor: function (){
-
-        }
     };
     const extra = {
         addMore: function () {
@@ -108,13 +105,14 @@
                     const row_element = $(`#${target_element}`).children().first().clone();
                     const row_index = $(`#${target_element}`).children().length;
                     row_element.find('input, textarea, select, label').each(function (col_key, col) {
+                        console.log(col)
                         if ($(col).is('label')) {
                             const forAttr = $(col).attr('for');
                             if (forAttr) {
                                 const new_for = `${forAttr}_${row_index}`;
                                 $(col).attr('for', new_for);
                             }
-                        } else {
+                        }  else {
                             const name = $(col).attr('name');
                             const array_name = name.split(/\[([^\[\]]*)\]/).filter(d => d.length > 1);
                             const key_name = array_name.pop();

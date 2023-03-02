@@ -92,18 +92,18 @@
                                                         id="documents"
                                                         multiple/>
                                                 </div>
-                                                <div class="col-md-12 mb-2">
-                                                    <label for="data"
+                                                <div class="col-md-6 mb-2">
+                                                    <label for="description"
                                                            class="form-label">विवरण</label>
                                                     <textarea name="activity_lists[0][description]"
-                                                              id="data" cols="30" rows="5"
+                                                              id="description" cols="30" rows="5"
                                                               class="form-control ckEditor"
                                                               placeholder="विवरण"></textarea>
                                                 </div>
                                                 <div class="col-md-6 mb-2">
                                                     <label for="remarks" class="form-label">कैफ़ियत</label>
                                                     <textarea name="activity_lists[0][remarks]"
-                                                              id="remarks" cols="10" rows="2"
+                                                              id="remarks" cols="30" rows="5"
                                                               class="form-control"
                                                               placeholder="कैफ़ियत"></textarea>
                                                 </div>
@@ -131,8 +131,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
-    @endpush
 @endsection
