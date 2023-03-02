@@ -30,6 +30,15 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{route('admin.plan.project.store')}}" method="post">
                         @csrf
                         <div class="row">
@@ -222,7 +231,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div id="allocated-amounts">
+                            <div id="allocated-amounts" class="row">
 
                             </div>
                             <div class="col-md-4 mb-2">
@@ -241,20 +250,6 @@
                                     @endforeach
                                 </select>
                                 @error('operated_through')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="allocated_amount" class="form-label">योजना स्वीकृत रकम</label>
-                                <input
-                                    type="number"
-                                    name="allocated_amount"
-                                    value="{{old('allocated_amount')}}"
-                                    class="form-control @error('allocated_amount') is-invalid @enderror"
-                                    id="allocated_amount"
-                                    placeholder="योजना स्वीकृत रकम"
-                                />
-                                @error('allocated_amount')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -343,14 +338,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <select name="attributes[]" id="attributes" class="form-control" multiple>
-                                <option value="1">Test</option>
-                                <option value="2">Test</option>
-                                <option value="3">Test</option>
-                        </select>
-                        <div id="test_options">
-
-                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
@@ -361,24 +348,28 @@
     </div>
     @push('scripts')
         <script>
-            function add_html_element (){
-                $('#test_options').append('\
-                <div class="form-group row">\
-                    <div class="col-md-3">\
-                        <input type="hidden" name="test[]" value="1">\
-                        <input type="text" class="form-control" name="choice[]" value="test" placeholder="test" readonly>\
-                    </div>\
-                    <div class="col-md-8">\
-                    <input type="text" class="form-control" name="test[]" value="test" placeholder="test">\
-                    </div>\
-                </div>');
+            $(document).ready(function (){
+                //if already selected
+                setProjectAllocatedAmountInputs()
+                //set if changed on select
+                $('#budget_head_id').on('change',function (){
+                    setProjectAllocatedAmountInputs()
+                })
+            })
+
+            function setProjectAllocatedAmountInputs(){
+                $('#allocated-amounts').empty()
+                $('#budget_head_id option:selected').each((key,option)=>{
+                    const col_element=$('<div></div>').addClass('col-md-4 mb-2');
+                    const label=$('<label></label>').addClass('form-label').attr('for','projectAllocatedAmounts'+key).text($(option).text()+' *')
+                    const amount_input=$('<input/>').attr('type','number').attr('min',0).addClass('form-control').attr('placeholder',$.trim($(option).text())).attr('id','projectAllocatedAmounts'+key).attr('name',`projectAllocatedAmounts[${key}][amount]`)
+                    const budget_head_input=$('<input/>').attr('type','hidden').attr('name',`projectAllocatedAmounts[${key}][budget_head_id]`).val($(option).val())
+                    $(col_element).append(label)
+                    $(col_element).append(amount_input)
+                    $(col_element).append(budget_head_input)
+                    $('#allocated-amounts').append(col_element)
+                })
             }
-            $('#attributes').on('change', function() {
-                $('#options').html(null);
-                $.each($("#attributes option:selected"), function(){
-                    add_html_element();
-                });
-            });
         </script>
     @endpush
 @endsection
