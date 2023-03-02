@@ -23,7 +23,6 @@ class DashboardController extends Controller
         $grant_detail_count = GrantDetail::count();
         if (request()->ajax()) {
             return [
-                'cooperativeWise' => $this->getCooperativeData(),
                 'grant' => $this->getGrantData(),
                 'wardWiseData' => $this->getWardWiseData()
             ];
@@ -32,27 +31,6 @@ class DashboardController extends Controller
 
     }
 
-    public function getCooperativeData()
-    {
-        $cooperatives = Cooperative::with('farmers')
-            ->withCount('farmers')->get()
-            ->map(function ($cooperative) {
-                return [
-                    'name' => $cooperative->name,
-                    'total' => $cooperative->farmers_count
-                ];
-            });
-
-        return [
-            'labels' => $cooperatives->pluck('name')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $cooperatives->pluck('total')->toArray(),
-                    'label' => 'जम्मा',
-                ],
-            ],
-        ];
-    }
 
     public function getGrantData()
     {

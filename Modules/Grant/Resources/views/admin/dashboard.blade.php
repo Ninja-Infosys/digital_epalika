@@ -202,19 +202,7 @@
     </div>
 
     <div class="row" id="charts" data-chart-url="{{route('admin.grant.dashboard')}}">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="cooperativeWise" chart-type="column"
-                         chart-title="hh"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
