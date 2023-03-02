@@ -5,6 +5,7 @@ namespace Modules\Plan\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -27,7 +28,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $projects = Project::with('planArea')->where(function (Builder $q) {
+        $projects = Project::with('planArea')->withSum('projectAllocatedAmounts','amount')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['registration_no', 'project_name'], request('search'));
             }
@@ -72,8 +73,6 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_create');
 
-        dd($request->validated());
-
         DB::transaction(function () use ($request) {
             $project = Project::create($request->validated() + [
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,
@@ -108,6 +107,8 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_edit');
 
+        $project->load('projectAllocatedAmounts.budgetHead');
+
         $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
@@ -125,10 +126,11 @@ class ProjectController extends Controller
 
             foreach ($request->input('projectAllocatedAmounts') as $projectAllocatedAmount) {
                 ProjectAllocatedAmount::updateOrCreate(
-                    ['project_id' => $project->id, 'id' => $project['id'] ?? ''],
+                    ['project_id' => $project->id, 'id' => $projectAllocatedAmount['id'] ?? ''],
                     $projectAllocatedAmount
                 );
             }
+            $project->projectAllocatedAmounts()->whereNotIn('id', Arr::pluck($request->input('projectAllocatedAmounts'), 'id'))->delete();
         });
 
         toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो', 'success');

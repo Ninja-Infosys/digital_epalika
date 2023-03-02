@@ -32,6 +32,15 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{route('admin.taskManagement.activity.update', $activity)}}" method="post"
                           enctype="multipart/form-data">
                         @method('PUT')
@@ -88,7 +97,7 @@
                                                         <label for="documents" class="form-label">डकुमेन्ट </label>
                                                         <input
                                                             type="file"
-                                                            name="activity_lists[{{$key}}][documents]"
+                                                            name="activity_lists[{{$key}}][documents][]"
                                                             class="form-control"
                                                             id="Documents"
                                                             multiple/>
@@ -141,22 +150,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @foreach($activity->activityLists as $activityList)
+                                @foreach($activityList->files as $file)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$activityList->title}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
-                    @foreach($activity->activityLists as $list)
-                        1. {{$list->title}} <br>
-                        @foreach($list->files as $file)
-                            <a href="{{$file->file_url}}" target="_blank">{{$file->file_name}} |</a>
-                        @endforeach
-                    @endforeach
                 </div>
             </div>
         </div>

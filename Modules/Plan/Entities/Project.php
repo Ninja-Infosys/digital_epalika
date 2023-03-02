@@ -43,7 +43,6 @@ class Project extends Model
         'project_completion_date',
         'plan_level_id',
         'ward_no',
-        'allocated_amount',
         'project_venue',
         'evaluation_amount',
         'purpose',

@@ -141,7 +141,7 @@
                                 <td>{{$project->planArea->area_name??''}}</td>
                                 <td>{{$project->project_start_date}}</td>
                                 <td>{{implode(',',$project->ward_no)}}</td>
-                                <td>रू. {{$project->allocated_amount}}</td>
+                                <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
                                 <td>
                                     <div class="btn-group dropstart">

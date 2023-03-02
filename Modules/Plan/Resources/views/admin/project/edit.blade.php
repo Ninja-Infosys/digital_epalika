@@ -29,6 +29,15 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{route('admin.plan.project.update',$project)}}" method="post">
                         @csrf
                         @method('PUT')
@@ -184,19 +193,19 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-7 mb-2">
                                 <label for="budget_head_id" class="form-label">बजेट शिर्षक *</label>
                                 <select
-                                    name="budget_head_id"
+                                    name="budget_head_id[]"
                                     class="form-control @error('budget_head_id') is-invalid @enderror"
-                                    id="budget_head_id" data-toggle="select2" data-width="100%">
+                                    id="budget_head_id" data-toggle="select2" data-width="100%" multiple>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($budgetHeads as $budgetHead)
                                         @if(count($budgetHead->budgetHeads)>0)
                                             <optgroup label="{{$budgetHead->title}}">
                                                 @foreach($budgetHead->budgetHeads as $budget_sub_head)
                                                     <option
-                                                        {{old('budget_head_id',$project->budget_head_id)==$budget_sub_head->id ? 'selected' : ''}}
+                                                        {{in_array($budget_sub_head->id,$project->projectAllocatedAmounts->pluck('budget_head_id')->toArray()) ? 'selected' : ''}}
                                                         value="{{$budget_sub_head->id}}">
                                                         {{$budget_sub_head->title}}
                                                     </option>
@@ -204,7 +213,7 @@
                                             </optgroup>
                                         @else
                                             <option
-                                                {{old('budget_head_id',$project->budget_head_id)==$budgetHead->id ? 'selected' : ''}}
+                                                {{in_array($budgetHead->id,$project->projectAllocatedAmounts->pluck('budget_head_id')->toArray()) ? 'selected' : ''}}
                                                 value="{{$budgetHead->id}}">
                                                 {{$budgetHead->title}}
                                             </option>
@@ -215,19 +224,21 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="allocated_amount" class="form-label">विनियोजित रकम </label>
-                                <input
-                                    type="number"
-                                    name="allocated_amount"
-                                    value="{{old('allocated_amount',$project->allocated_amount)}}"
-                                    class="form-control @error('allocated_amount') is-invalid @enderror"
-                                    id="allocated_amount"
-                                    placeholder="विनियोजित रकम"
-                                />
-                                @error('allocated_amount')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                            <div id="allocated-amounts" class="row">
+                                @foreach($project->projectAllocatedAmounts as $key=>$projectAllocatedAmount)
+                                    <div class="col-md-4 mb-2">
+                                        <input type="hidden" name="projectAllocatedAmounts[{{$key}}][id]" value="{{$projectAllocatedAmount->id}}">
+                                        <input type="hidden" name="projectAllocatedAmounts[{{$key}}][budget_head_id]" value="{{$projectAllocatedAmount->budget_head_id}}">
+                                        <label for="projectAllocatedAmounts{{$key}}" class="form-label">{{$projectAllocatedAmount->budgetHead->title??''}} *</label>
+                                        <input
+                                            type="number"
+                                            name="projectAllocatedAmounts[{{$key}}][amount]"
+                                            value="{{$projectAllocatedAmount->amount}}"
+                                            class="form-control"
+                                            id="projectAllocatedAmounts{{$key}}"
+                                        />
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="project_venue" class="form-label">आयोजना स्थल </label>
@@ -384,4 +395,28 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function (){
+                //set if changed on select
+                $('#budget_head_id').on('change',function (){
+                    setProjectAllocatedAmountInputs()
+                })
+            })
+
+            function setProjectAllocatedAmountInputs(){
+                $('#allocated-amounts').empty()
+                $('#budget_head_id option:selected').each((key,option)=>{
+                    const col_element=$('<div></div>').addClass('col-md-3 mb-2');
+                    const label=$('<label></label>').addClass('form-label').attr('for','projectAllocatedAmounts'+key).text($(option).text()+' *')
+                    const amount_input=$('<input/>').attr('type','number').attr('min',0).addClass('form-control').attr('placeholder',$.trim($(option).text())).attr('id','projectAllocatedAmounts'+key).attr('name',`projectAllocatedAmounts[${key}][amount]`)
+                    const budget_head_input=$('<input/>').attr('type','hidden').attr('name',`projectAllocatedAmounts[${key}][budget_head_id]`).val($(option).val())
+                    $(col_element).append(label)
+                    $(col_element).append(amount_input)
+                    $(col_element).append(budget_head_input)
+                    $('#allocated-amounts').append(col_element)
+                })
+            }
+        </script>
+    @endpush
 @endsection
