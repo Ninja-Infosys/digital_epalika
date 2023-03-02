@@ -16,7 +16,7 @@ class StoreActivityRequest extends FormRequest
     {
         return [
             'date' => ['required'],
-            'date_en' => ['required'],
+            'date_en' => ['required','date'],
             'activity_lists' => ['required', 'array'],
             'activity_lists.*.title' => ['required', 'string', 'max:255'],
             'activity_lists.*.description' => ['nullable'],

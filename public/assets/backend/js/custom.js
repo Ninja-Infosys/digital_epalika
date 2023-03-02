@@ -106,7 +106,8 @@
                     const row_index = $(`#${target_element}`).children().length;
                     row_element.find('input, textarea, select').each(function(col_key, col) {
                             const name = $(col).attr('name');
-                            const array_name = name.split('[');
+                            const array_name = name.split('[').filter(d=>d.length>1);
+                            console.log(array_name)
                             const key_name = array_name.pop().replace(']', '');
                             const new_name = `${array_name.shift()}[${row_index}][${key_name}]`;
                             $(col).attr('name', new_name);
