@@ -113,6 +113,7 @@
                             new_name += '[]';
                         }
                         $(col).attr('name', new_name);
+                        $(col).attr('id',$(col).attr('id')+row_index)
                         $(col).val('');
                     });
                     $(`#${target_element}`).append(row_element);
