@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.taskManagement.dashboard')}}">
+                            <a href="{{ route('admin.taskManagement.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -24,14 +24,99 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">कार्य</h4>
                         <div class="d-flex flex-wrap align-items-center">
-                            <a href="{{route('admin.taskManagement.activity.index')}}"
-                               class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            <a href="{{ route('admin.taskManagement.activity.index') }}"
+                                class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-list"></i> कार्यहरूको सुची</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-sm mb-0 table-striped table-hover table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>शाखा</th>
+                                            <td>{{ $activity->branch->branch_name ?? '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>कार्यहरु</th>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($activity->activityLists as $list)
+                                                        <li>{{ $list->title }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>मिति</th>
+                                            <td>
+                                                {{ $activity->date }}
+                                            </td>
+                                        </tr>
 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="header-title text-decoration-underline mt-3">आवश्यक कागजातहरु</h4>
+                        <div class="row mx-n1 g-0">
+                            <div class="col-xl-3 col-lg-6">
+                                <div class="card m-1 shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto pe-0">
+                                                <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-secondary rounded">
+                                                        <i class="fa fa-file-pdf font-18"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <a href="javascript:void(0);" class="text-muted fw-medium">Documentation.pdf</a>
+                                                <p class="mb-0 font-13">7.5 MB</p>
+                                            </div>
+                                            <div class="col">
+                                                <a href="#"
+                                                    class="btn btn-xs btn-outline-primary mx-2">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div> <!-- end row -->
+                                    </div> <!-- end .p-2-->
+                                </div> <!-- end col -->
+                            </div> <!-- end col--> 
+                            <div class="col-xl-3 col-lg-6">
+                                <div class="card m-1 shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto pe-0">
+                                                <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-secondary rounded">
+                                                        <i class="fa fa-file-pdf font-18"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <a href="javascript:void(0);" class="text-muted fw-medium">Documentation.pdf</a>
+                                                <p class="mb-0 font-13">7.5 MB</p>
+                                            </div>
+                                            <div class="col">
+                                                <a href="#"
+                                                    class="btn btn-xs btn-outline-primary mx-2">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div> <!-- end row -->
+                                    </div> <!-- end .p-2-->
+                                </div> <!-- end col -->
+                            </div> <!-- end col-->           
+                        </div> <!-- end row-->          
+                        </div> <!-- end row-->
+                    </div>
                 </div>
             </div>
         </div>
