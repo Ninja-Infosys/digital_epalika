@@ -28,7 +28,7 @@ class CooperativeController extends Controller
                 $q->whereLike(['unique_id', 'registration_no', 'name', 'cooperativeType',], request('search'));
             }
         })
-            ->latest()->paginate(10);
+            ->latest()->paginate(15);
 
         return view('grant::admin.cooperative.index', compact('cooperatives'));
     }
