@@ -49,9 +49,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($cooperatives as $cooperative)
+                            @forelse($cooperatives as $index=>$cooperative)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$index + $cooperatives->firstItem()}}</td>
                                     <td>{{$cooperative->unique_id}}</td>
                                     <td>{{$cooperative->registration_no}}</td>
                                     <td>{{$cooperative->name}}</td>
@@ -92,7 +92,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        {{ $cooperatives->onEachSide(config('app.pagination_count'))->links() }}
+                        {{ $cooperatives->links() }}
                     </div>
                 </div>
             </div>
