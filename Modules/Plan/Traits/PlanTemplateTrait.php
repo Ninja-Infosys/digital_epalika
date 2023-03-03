@@ -195,8 +195,10 @@ trait PlanTemplateTrait
     public function getProjectReplacement(): array
     {
         $budgetHeads=[];
+        $allocated_amount_sum=0;
         foreach($this->projectAllocatedAmounts as $allocatedAmount){
             $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
+            $allocated_amount_sum+=$allocatedAmount->amount;
         }
 
         return [
@@ -212,7 +214,7 @@ trait PlanTemplateTrait
             '[@plan_level]' => $this->planLevel->level_name ?? '',
             '[@ward_no]' => implode(',', $this->ward_no ?? ''),
             '[@budget_head]' => implode(',',$budgetHeads),
-            '[@allocated_amount]' => $this->allocated_amount ?? '',
+            '[@allocated_amount]' => $allocated_amount_sum,
             '[@project_venue]' => $this->project_venue ?? '',
             '[@purpose]' => $this->purpose ?? '',
             '[@operated_through]' => $this->operated_through?->label() ?? '',
