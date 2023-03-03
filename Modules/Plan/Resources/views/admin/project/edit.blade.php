@@ -397,92 +397,149 @@
     </div>
     @push('scripts')
         <script>
+            // $(document).ready(() => {
+            //     const budgetHeadSelect = $('#budget_head_id');
+            //     const allocatedAmountsContainer = $('#allocated-amounts');
+            //     let allocatedAmounts = {}; // store allocated amounts for each option
+            //
+            //     // loop through existing input fields and store their values in allocatedAmounts
+            //     allocatedAmountsContainer.find('input[name^="projectAllocatedAmounts"]').each((index, inputField) => {
+            //         const budgetHeadId = $(inputField).siblings('input[name$="[budget_head_id]"]').val();
+            //         allocatedAmounts[budgetHeadId] = $(inputField).val();
+            //     });
+            //
+            //     budgetHeadSelect.on('change', setProjectAllocatedAmountInputs);
+            //
+            //     function setProjectAllocatedAmountInputs() {
+            //         const selectedOptions = budgetHeadSelect.find('option:selected');
+            //
+            //         selectedOptions.each((index, option) => {
+            //             const budgetHeadId = $(option).val();
+            //
+            //             // check if input fields already exist for this option
+            //             const existingFields = $(`input[name^="projectAllocatedAmounts"][data-budget-head-id="${budgetHeadId}"]`);
+            //
+            //             if (existingFields.length) {
+            //                 const amountInput = existingFields.filter('[name$="[amount]"]');
+            //
+            //                 // update existing input field value to stored value (if it exists and input value is empty)
+            //                 if (allocatedAmounts.hasOwnProperty(budgetHeadId) && !amountInput.val()) {
+            //                     amountInput.val(allocatedAmounts[budgetHeadId]['amount']);
+            //                 }
+            //             } else {
+            //                 // create new input fields
+            //                 const div = $('<div>').addClass('col-md-4 mb-2');
+            //                 const label = $('<label>').addClass('form-label');
+            //                 label.attr('for', `projectAllocatedAmounts${index}`);
+            //                 label.text(`${$(option).text()} *`);
+            //
+            //                 let amount = 0; // default amount is 0
+            //
+            //                 // check if allocated amount exists for this option
+            //                 if (allocatedAmounts.hasOwnProperty(budgetHeadId)) {
+            //                     amount = allocatedAmounts[budgetHeadId]['amount'];
+            //                 }
+            //
+            //                 const amountInput = $('<input>').attr({
+            //                     type: 'number',
+            //                     min: 0,
+            //                     placeholder: $.trim($(option).text()),
+            //                     id: `projectAllocatedAmounts${index}`,
+            //                     name: `projectAllocatedAmounts[${index}][amount]`,
+            //                     'data-budget-head-id': budgetHeadId,
+            //                     value: amount // set input value to stored amount
+            //                 }).addClass('form-control');
+            //
+            //                 const budgetHeadInput = $('<input>').attr({
+            //                     type: 'hidden',
+            //                     name: `projectAllocatedAmounts[${index}][budget_head_id]`,
+            //                     value: budgetHeadId,
+            //                 });
+            //
+            //                 const idInput = $('<input>').attr({
+            //                     type: 'hidden',
+            //                     name: `projectAllocatedAmounts[${index}][id]`,
+            //                     value: allocatedAmounts[budgetHeadId]['id'] // set ID value to stored ID
+            //                 });
+            //
+            //                 // update stored amount when input value changes
+            //                 amountInput.on('input', () => {
+            //                     allocatedAmounts[budgetHeadId]['amount'] = amountInput.val();
+            //                 });
+            //
+            //                 div.append(label);
+            //                 div.append(amountInput);
+            //                 div.append(budgetHeadInput);
+            //                 div.append(idInput);
+            //
+            //                 const existingDiv = allocatedAmountsContainer.find(`div[data-budget-head-id="${budgetHeadId}"]`);
+            //                 if (existingDiv.length) {
+            //                     existingDiv.replaceWith(div);
+            //                 } else {
+            //                     allocatedAmountsContainer.append(div);
+            //                 }
+            //             }
+            //         });
+            //     }
+            // });
             $(document).ready(() => {
                 const budgetHeadSelect = $('#budget_head_id');
                 const allocatedAmountsContainer = $('#allocated-amounts');
                 let allocatedAmounts = {}; // store allocated amounts for each option
-
-                // loop through existing input fields and store their values in allocatedAmounts
-                allocatedAmountsContainer.find('input[name^="projectAllocatedAmounts"]').each((index, inputField) => {
-                    const budgetHeadId = $(inputField).siblings('input[name$="[budget_head_id]"]').val();
-                    allocatedAmounts[budgetHeadId] = $(inputField).val();
+                budgetHeadSelect.on('change', () => {
+                    setProjectAllocatedAmountInputs();
                 });
-
-                budgetHeadSelect.on('change', setProjectAllocatedAmountInputs);
-
                 function setProjectAllocatedAmountInputs() {
-                    const selectedOptions = budgetHeadSelect.find('option:selected');
+                    const selectedOptions = budgetHeadSelect.find('option:selected').toArray();
+                    const existingOptions = allocatedAmountsContainer.children('.dynamic-option').toArray();
 
-                    selectedOptions.each((index, option) => {
+                    const newOptions = selectedOptions.filter(option => !existingOptions.some(div => div.querySelector('input[type="hidden"]').value === option.value));
+
+                    allocatedAmountsContainer.append(newOptions.map((option, index) => {
+                        const div = $('<div>').addClass('col-md-4 mb-2 dynamic-option');
+                        const label = $('<label>').addClass('form-label');
+                        label.attr('for', `projectAllocatedAmounts${index}`);
+                        label.text(`${$(option).text()} *`);
+
                         const budgetHeadId = $(option).val();
+                        let amount = 0; // default amount is 0
 
-                        // check if input fields already exist for this option
-                        const existingFields = $(`input[name^="projectAllocatedAmounts"][data-budget-head-id="${budgetHeadId}"]`);
-
-                        if (existingFields.length) {
-                            const amountInput = existingFields.filter('[name$="[amount]"]');
-
-                            // update existing input field value to stored value (if it exists and input value is empty)
-                            if (allocatedAmounts.hasOwnProperty(budgetHeadId) && !amountInput.val()) {
-                                amountInput.val(allocatedAmounts[budgetHeadId]['amount']);
-                            }
-                        } else {
-                            // create new input fields
-                            const div = $('<div>').addClass('col-md-4 mb-2');
-                            const label = $('<label>').addClass('form-label');
-                            label.attr('for', `projectAllocatedAmounts${index}`);
-                            label.text(`${$(option).text()} *`);
-
-                            let amount = 0; // default amount is 0
-
-                            // check if allocated amount exists for this option
-                            if (allocatedAmounts.hasOwnProperty(budgetHeadId)) {
-                                amount = allocatedAmounts[budgetHeadId]['amount'];
-                            }
-
-                            const amountInput = $('<input>').attr({
-                                type: 'number',
-                                min: 0,
-                                placeholder: $.trim($(option).text()),
-                                id: `projectAllocatedAmounts${index}`,
-                                name: `projectAllocatedAmounts[${index}][amount]`,
-                                'data-budget-head-id': budgetHeadId,
-                                value: amount // set input value to stored amount
-                            }).addClass('form-control');
-
-                            const budgetHeadInput = $('<input>').attr({
-                                type: 'hidden',
-                                name: `projectAllocatedAmounts[${index}][budget_head_id]`,
-                                value: budgetHeadId,
-                            });
-
-                            const idInput = $('<input>').attr({
-                                type: 'hidden',
-                                name: `projectAllocatedAmounts[${index}][id]`,
-                                value: allocatedAmounts[budgetHeadId]['id'] // set ID value to stored ID
-                            });
-
-                            // update stored amount when input value changes
-                            amountInput.on('input', () => {
-                                allocatedAmounts[budgetHeadId]['amount'] = amountInput.val();
-                            });
-
-                            div.append(label);
-                            div.append(amountInput);
-                            div.append(budgetHeadInput);
-                            div.append(idInput);
-
-                            const existingDiv = allocatedAmountsContainer.find(`div[data-budget-head-id="${budgetHeadId}"]`);
-                            if (existingDiv.length) {
-                                existingDiv.replaceWith(div);
-                            } else {
-                                allocatedAmountsContainer.append(div);
-                            }
+                        // check if allocated amount exists for this option
+                        if (allocatedAmounts.hasOwnProperty(budgetHeadId)) {
+                            amount = allocatedAmounts[budgetHeadId];
                         }
-                    });
-                }
-            });
 
+                        const amountInput = $('<input>').attr({
+                            type: 'number',
+                            min: 0,
+                            placeholder: $.trim($(option).text()),
+                            id: `projectAllocatedAmounts${index}`,
+                            name: `projectAllocatedAmounts[${index}][amount]`,
+                            value: amount // set input value to stored amount
+                        }).addClass('form-control');
+
+                        const budgetHeadInput = $('<input>').attr({
+                            type: 'hidden',
+                            name: `projectAllocatedAmounts[${index}][budget_head_id]`,
+                            value: budgetHeadId,
+                        });
+
+                        // update stored amount when input value changes
+                        amountInput.on('input', () => {
+                            allocatedAmounts[budgetHeadId] = amountInput.val();
+                        });
+
+                        div.append(label);
+                        div.append(amountInput);
+                        div.append(budgetHeadInput);
+
+                        return div;
+                    }));
+
+                    existingOptions.filter(div => !selectedOptions.some(option => div.querySelector('input[type="hidden"]').value === option.value)).forEach(div => $(div).remove());
+                }
+
+            });
         </script>
     @endpush
 @endsection
