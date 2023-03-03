@@ -194,6 +194,10 @@ trait PlanTemplateTrait
 
     public function getProjectReplacement(): array
     {
+        $budgetHeads=[];
+        foreach($this->projectAllocatedAmounts as $allocatedAmount){
+            $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
+        }
 
         return [
             '[@date]'=>$this->get_today_nepali_date(),
@@ -207,7 +211,7 @@ trait PlanTemplateTrait
             '[@project_completion_date]' => $this->project_completion_date ?? '',
             '[@plan_level]' => $this->planLevel->level_name ?? '',
             '[@ward_no]' => implode(',', $this->ward_no ?? ''),
-            '[@budget_head]' => $this->budgetHead->title ?? '',
+            '[@budget_head]' => implode(',',$budgetHeads),
             '[@allocated_amount]' => $this->allocated_amount ?? '',
             '[@project_venue]' => $this->project_venue ?? '',
             '[@purpose]' => $this->purpose ?? '',
