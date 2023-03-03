@@ -357,9 +357,8 @@
 
                 function setProjectAllocatedAmountInputs() {
                     allocatedAmountsContainer.empty();
-                    const selectedOptions = budgetHeadSelect.find('option:selected');
-
-                    selectedOptions.each((index, option) => {
+                    const selectedOptions = budgetHeadSelect.find('option:selected').toArray();
+                    selectedOptions.forEach((option, index) => {
                         const div = $('<div>').addClass('col-md-4 mb-2');
                         const label = $('<label>').addClass('form-label');
                         label.attr('for', `projectAllocatedAmounts${index}`);
@@ -401,6 +400,7 @@
                     });
                 }
             });
+
         </script>
     @endpush
 @endsection
