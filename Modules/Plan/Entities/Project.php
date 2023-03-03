@@ -73,7 +73,6 @@ class Project extends Model
     protected $casts = [
         'project_status' => ProjectStatusEnum::class,
         'operated_through' => ProjectOperatedThroughEnum::class,
-        'allocated_amount' => 'int',
         'agencies_grants' => 'int',
         'share_amount' => 'int',
         'committee_share_amount' => 'int',
@@ -89,7 +88,8 @@ class Project extends Model
 
     public function getTotalAmountForContingencyAttribute(): float
     {
-        return round($this->allocated_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount, 2);
+        $this->loadSum('projectAllocatedAmounts','amount');
+        return round($this->project_allocated_amounts_sum_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount, 2);
     }
 
     public function getContingencyPercentAttribute(): float

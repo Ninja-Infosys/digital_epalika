@@ -28,13 +28,13 @@
                     <td></td>
                     <td>- -</td>
                     <td>- -</td>
-                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                     <td>- -</td>
-                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                     <td>- -</td>
                 </tr>
                 @php
-                    $balance=$project->allocated_amount;
+                    $balance=$project->project_allocated_amounts_sum_amount;
                 @endphp
                 @forelse($project->projectBidSubmissions as $key=>$projectBidSubmission)
                     @php
@@ -73,7 +73,7 @@
                     <td>रू. {{$project->allocated_amount}}</td>
                     <td>रू. {{$project->projectBidSubmissions->sum('amount')}}</td>
                     <td>
-                        रू. {{$project->allocated_amount-$project->projectBidSubmissions->sum('amount')}}</td>
+                        रू. {{$project->project_allocated_amounts_sum_amount-$project->projectBidSubmissions->sum('amount')}}</td>
                     <td></td>
                 </tr>
             </table>

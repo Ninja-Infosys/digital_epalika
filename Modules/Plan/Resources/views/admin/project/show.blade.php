@@ -60,7 +60,7 @@
                         <h5>योजनाको उपक्षेत्र : {{$project->planArea->area_name??''}}</h5>
                         <h5>संचालन हुने वडा नं : {{implode(',',$project->ward_no)}}</h5>
                         <h5>बजेट उप-शीर्षक : {{$project->budgetHead->title??''}}</h5>
-                        <h5>विनियोजित रकम रु. : {{$project->allocated_amount}}</h5>
+                        <h5>विनियोजित रकम रु. : {{$project->projectAllocatedAmounts->sum('amount')}}</h5>
                         <h5>आयोजना स्थल : {{$project->project_venue}}</h5>
                         <h5>मूल्याङ्कन रकम रु. : {{$project->evaluation_amount}}</h5>
                         <h5>उद्देश्य : {{$project->purpose}}</h5>
@@ -96,7 +96,7 @@
                             <tbody>
                             <tr>
                                 <td>कार्यालयबाट स्वीकृत रकम</td>
-                                <td>रू. {{$project->allocated_amount}}</td>
+                                <td>रू. {{$project->projectAllocatedAmounts->sum('amount')}}</td>
                             </tr>
                             <tr>
                                 <td>अन्य निकायबाट प्राप्त रकम</td>

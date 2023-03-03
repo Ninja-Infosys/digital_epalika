@@ -11,6 +11,8 @@ class ProjectBidSubmissionController extends Controller
 {
     public function index(Project $project)
     {
+        $project->loadSum('projectAllocatedAmounts','amount');
+
         return view('plan::admin.project_bid_submission.index',compact('project'));
     }
 
