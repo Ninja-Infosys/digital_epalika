@@ -162,16 +162,7 @@
                         submitButton.html("<i class='fa fa-spinner fa-spin'></i> loading");
                     },
                     success: function (response) {
-                        swal.fire({
-                            title: response.message,
-                            toast: true,
-                            position: 'top-right',
-                            timer: 3000,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            width: 400,
-                            icon: 'success',
-                        });
+                        toastmessage(response.message,'success')
                         $('#staticBackdrop').modal('hide');
 
                     },
@@ -195,16 +186,7 @@
                         cacheButton.html("<i class='fa fa-spinner fa-spin'></i>");
                     },
                     success: function (response) {
-                        swal.fire({
-                            title: response.message,
-                            toast: true,
-                            position: 'top-right',
-                            timer: 3000,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            width: 400,
-                            icon: 'success',
-                        });
+                        toastmessage(response.message,'success')
                         cacheButton.attr('disabled', false);
                         cacheButton.html("<i class='fas fa-brush'></i>");
                     }, error: function () {
@@ -329,6 +311,11 @@
             $('form').submit(function () {
                 unsavedChanges = false;
             });
+        },
+        listenLivewireEvent:function (){
+            window.addEventListener('toast_message', event => {
+                toastmessage(event.detail.title,event.detail.type)
+            })
         }
     };
     $(document).ready(function () {
@@ -345,6 +332,7 @@
         extra.searchFocusOut();
         extra.browserBack();
         extra.formFillAlert();
+        extra.listenLivewireEvent();
     });
 })(jQuery);
 

@@ -107,11 +107,11 @@ class ProjectCostDetailLivewire extends Component
 
     private function assignProjectData($project_id)
     {
-        $project = Project::with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+        $project = Project::withSum('projectAllocatedAmounts','amount')->with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
 
         $this->project = $project;
 
-        $this->form['office_grant'] = $project->allocated_amount ?? 0;
+        $this->form['office_grant'] = $project->project_allocated_amounts_sum_amount ?? 0;
         $this->form['agencies_grants'] = $project->agencies_grants ?? 0;
         $this->form['share_amount'] = $project->share_amount ?? 0;
         $this->form['committee_share_amount'] = $project->committee_share_amount ?? 0;

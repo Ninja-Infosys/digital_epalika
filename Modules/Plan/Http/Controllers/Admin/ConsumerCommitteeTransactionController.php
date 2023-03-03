@@ -15,7 +15,7 @@ class ConsumerCommitteeTransactionController extends Controller
 {
     public function index(Project $project)
     {
-        $project->load(['consumerCommitteeTransactions']);
+        $project->load(['consumerCommitteeTransactions'])->loadSum('projectAllocatedAmounts','amount');
 
         return view('plan::admin.consumer_committee_transaction.index', compact('project'));
     }
