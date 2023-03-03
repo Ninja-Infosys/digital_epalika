@@ -129,16 +129,14 @@ class RegistrationDetailController extends Controller
 
    private function getClientFile($request, RegistrationDetail $registrationDetail)
     {
-        if ($request->input('files')) {
-            foreach ($request->validated()['files'] as $file) {
-                $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
-                $registrationDetail->files()->create([
-                    'file_name' => $file['file_name'],
-                    'file' => $data,
-                    'extension' => $file['file']->getClientOriginalExtension(),
-                    'type' => 'ClientFile'
-                ]);
-            }
+        foreach ($request->validated()['files']??[] as $file) {
+            $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
+            $registrationDetail->files()->create([
+                'file_name' => $file['file_name'],
+                'file' => $data,
+                'extension' => $file['file']->getClientOriginalExtension(),
+                'type' => 'ClientFile'
+            ]);
         }
     }
 
