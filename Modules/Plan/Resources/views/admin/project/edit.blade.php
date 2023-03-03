@@ -288,20 +288,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="allocated_amount" class="form-label">योजना स्वीकृत रकम</label>
-                                <input
-                                    type="number"
-                                    name="allocated_amount"
-                                    value="{{old('allocated_amount', $project->allocated_amount)}}"
-                                    class="form-control @error('allocated_amount') is-invalid @enderror"
-                                    id="allocated_amount"
-                                    placeholder="योजना स्वीकृत रकम"
-                                />
-                                @error('allocated_amount')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="first_quarterly_amount" class="form-label">पहिलो चौमासिक आर्थिक लक्ष्य</label>
                                 <input
                                     type="number"

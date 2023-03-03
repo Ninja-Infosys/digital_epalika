@@ -71,7 +71,7 @@
                             <b class="text-primary">योजनाको उपक्षेत्र : </b> {{$project->planArea->area_name??''}}
                         </td>
                         <td>
-                            <b class="text-primary">योजना स्वीकृत रकम : </b> रू. {{$project->allocated_amount}}
+                            <b class="text-primary">योजना स्वीकृत रकम : </b> रू. {{$project->projectAllocatedAmounts->sum('amount')}}
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +160,7 @@
                     <tbody>
                     <tr>
                         <td>कार्यालयबाट स्वीकृत रकम</td>
-                        <td>रू. {{$project->allocated_amount}}</td>
+                        <td>रू. {{$project->projectAllocatedAmounts->sum('amount')}}</td>
                     </tr>
                     <tr>
                         <td>अन्य निकायबाट प्राप्त रकम</td>
