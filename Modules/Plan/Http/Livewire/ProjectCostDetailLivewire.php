@@ -107,7 +107,7 @@ class ProjectCostDetailLivewire extends Component
 
     private function assignProjectData($project_id)
     {
-        $project = Project::withSum('projectAllocatedAmounts','amount')->with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+        $project = Project::withSum('projectAllocatedAmounts', 'amount')->with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
 
         $this->project = $project;
 
@@ -116,7 +116,7 @@ class ProjectCostDetailLivewire extends Component
         $this->form['share_amount'] = $project->share_amount ?? 0;
         $this->form['committee_share_amount'] = $project->committee_share_amount ?? 0;
         $this->form['contingency_amount'] = $project->contingency_amount ?? 0;
-        $this->form['contingency_percent'] = round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2);
+        $this->form['contingency_percent'] = $this->totalAmountForContingency() > 0 ? round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2) : 0;
         $this->form['other_taxes'] = $project->other_taxes ?? 0;
         $this->form['labor_amount'] = $project->labor_amount ?? 0;
         $this->form['benefited_organization'] = $project->benefited_organization ?? 0;
