@@ -134,7 +134,7 @@
                                                     <div class="col-md-6 mb-2">
                                                         <label for="title" class="form-label">शिर्षक</label>
                                                         <input type="text" name="files[][file_name]" class="form-control"
-                                                            id="title" placeholder="शिर्षक" />
+                                                            id="title" placeholder="शिर्षक"  />
                                                     </div>
                                                     <div class="col-md-6 mb-2">
                                                         <label for="documents" class="form-label">डकुमेन्ट </label>
