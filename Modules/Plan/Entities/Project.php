@@ -88,13 +88,13 @@ class Project extends Model
 
     public function getTotalAmountForContingencyAttribute(): float
     {
-        $this->loadSum('projectAllocatedAmounts','amount');
+        $this->loadSum('projectAllocatedAmounts', 'amount');
         return round($this->project_allocated_amounts_sum_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount, 2);
     }
 
     public function getContingencyPercentAttribute(): float
     {
-        return round($this->contingency_amount * 100 / $this->total_amount_for_contingency, 2);
+        return $this->total_amount_for_contingency > 0 ? round($this->contingency_amount * 100 / $this->total_amount_for_contingency, 2) : 0;
     }
 
     public function getProjectContractAmountAttribute(): float

@@ -62,17 +62,7 @@ class RegistrationDetailController extends Controller
                     'fiscal_year_id' => officeSetting()->fiscal_year_id,
                     'ward_no' => auth()->user()->role->type === 'Super' ? $request->input('ward_no') : auth()->user()->ward_no
                 ]);
-            if ($request->input('files')) {
-                foreach ($request->validated()['files'] as $file) {
-                    $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
-                    $registrationDetail->files()->create([
-                        'file_name' => $file['file_name'],
-                        'file' => $data,
-                        'extension' => $file['file']->getClientOriginalExtension(),
-                        'type' => 'ClientFile'
-                    ]);
-                }
-            }
+            $this->getClientFile($request, $registrationDetail);
         });
         toast('दर्ता सफलतापूर्वक गरियो', 'success');
         return redirect()->route('admin.recommendation.registrationDetail.index');
@@ -96,7 +86,11 @@ class RegistrationDetailController extends Controller
     public function update(UpdateRegistrationRequest $request, RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_edit');
-        $registrationDetail->update($request->validated());
+        DB::transaction(function () use ($request,$registrationDetail){
+            $registrationDetail->update($request->validated());
+            $this->getClientFile($request, $registrationDetail);
+        });
+
         toast('सिफारिस विवरण सफलतापूर्वक गरियो', 'success');
         return redirect()->route('admin.recommendation.registrationDetail.index');
     }
@@ -130,6 +124,22 @@ class RegistrationDetailController extends Controller
         });
         toast('सिफारिस फाईल सफलतापूर्वक थपियो', 'success');
         return back();
+    }
+
+
+   private function getClientFile($request, RegistrationDetail $registrationDetail)
+    {
+        if ($request->input('files')) {
+            foreach ($request->validated()['files'] as $file) {
+                $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
+                $registrationDetail->files()->create([
+                    'file_name' => $file['file_name'],
+                    'file' => $data,
+                    'extension' => $file['file']->getClientOriginalExtension(),
+                    'type' => 'ClientFile'
+                ]);
+            }
+        }
     }
 
 }
