@@ -35,15 +35,15 @@
                     <form action="{{route('admin.listRegistrations.listRegistration.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
+                        <fieldset class="mb-2">
+                            <legend>
                                 <strong>
                                     १. मौजुदा सूचीको लागि दर्ता दिने व्यक्ति, संस्था, आपूर्तिकर्ता,निर्माण ब्यबसायी,
                                     परामर्शदाता वा सेवा प्रदायकको बिबरण
                                 </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="registration_no" class="form-label">दर्ता नम्बर * </label>
                                     <input
                                         type="text"
@@ -58,7 +58,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="applicant_type" class="form-label">प्रकार *</label>
                                     <select name="applicant_type"
                                             class="form-select @error('applicant_type') is-invalid @enderror"
@@ -75,7 +75,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="name" class="form-label">नाम </label>
                                     <input
                                         type="text"
@@ -89,7 +89,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="address" class="form-label">ठेगाना *</label>
                                     <input
                                         type="text"
@@ -104,7 +104,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="mailing_address" class="form-label">पत्राचार गर्ने ठेगाना *</label>
                                     <input
                                         type="text"
@@ -119,7 +119,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="main_person" class="form-label">मुख्य व्यक्तिको नाम *</label>
                                     <input
                                         type="text"
@@ -134,7 +134,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="telephone" class="form-label">टेलिफोन नम्बर</label>
                                     <input
                                         type="text"
@@ -148,7 +148,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="mobile_no" class="form-label">मोबाइल नम्बर *</label>
                                     <input
                                         type="text"
@@ -165,8 +165,8 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
+                        <fieldset class="mb-2">
+                            <legend>
                                 <strong>
                                     २. तपशिल कागजात अपलोड गर्नुहोस
                                 </strong>
@@ -214,13 +214,13 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-8 mb-2">
-                                    <label for="license_photo" class="form-label">कुन खरिद को लागि सूची दर्ता हुन निबेदन
-                                        दिने हो, सो को लागि इजाजत पत्र </label>
+                                <div class="col-md-4 mb-2">
+                                    <label for="license_photo" class="form-label">इजाजत पत्र </label>
                                     <input type="file"
                                            name="license_photo"
                                            class="form-control @error('license_photo') is-invalid @enderror"
-                                           id="tax_payment_certificate">
+                                           id="license_photo">
+                                    <div id="license_photo" class="form-text">जुन खरिद को लागि सूची दर्ता हुन निबेदन दिने हो</div>
                                     @error('license_photo')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -233,9 +233,8 @@
                                 </div>
                             </div>
                         </fieldset>
-
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
+                        <fieldset class="mb-2">
+                            <legend>
                                 <strong>
                                     ३. सार्बजनिक निकायबाट हुने खरिदको लागि दर्ता हुन चाहने खरिदको प्रकृति बिबरण
                                 </strong>
@@ -273,9 +272,8 @@
                                 </div>
                             </div>
                         </fieldset>
-
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
+                        <fieldset class="mb-2">
+                            <legend>
                                 <strong>
                                     ४. निबेदन मिति
                                 </strong>
@@ -289,7 +287,6 @@
                                 </div>
                             </div>
                         </fieldset>
-
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
