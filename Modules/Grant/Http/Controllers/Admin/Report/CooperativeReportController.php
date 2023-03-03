@@ -27,7 +27,7 @@ class CooperativeReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $cooperatives = Cooperative::where(function ($q) use ($request) {
+        $cooperatives = Cooperative::with('cooperativeType')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 

@@ -24,11 +24,23 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">अनुदान रिपोर्ट</h4>
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                aria-controls="collapseExample">
-                            <i class="fa fa-filter"></i>
-                        </button>
+                        <div class="d-flex gap-1 justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर</i>
+                            </button>
+                            <x-html-to-excel
+                                file-name="अनुदान रिपोर्ट"
+                                target-table="report-table"
+                            />
+                            <x-print-button
+                                target-element="report-content"
+                                title="अनुदान रिपोर्ट"
+
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
