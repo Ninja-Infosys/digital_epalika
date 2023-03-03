@@ -8,20 +8,29 @@ use Illuminate\Validation\Rule;
 
 class UpdateRegistrationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('recommendation_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
-        return [
-            'date_ne'=>['required'],
-            'date_en'=>['required'],
-            'ward_no' => ['required','integer'],
-            'recommendation_data'=>['required'],
-            'personal_detail_id'=>['nullable',Rule::exists('personal_details','id')->withoutTrashed()],
-            'recommendation_category_id'=>['nullable',Rule::exists('recommendation_categories','id')->withoutTrashed()]
+        $data= [
+            'date_ne' => ['required'],
+            'date_en' => ['required'],
+            'recommendation_data' => ['required'],
+            'personal_detail_id' => ['nullable', Rule::exists('personal_details', 'id')->withoutTrashed()],
+            'recommendation_category_id' => ['nullable', Rule::exists('recommendation_categories', 'id')->withoutTrashed()],
+            'files' => ['nullable', 'array'],
+            'files.*.file_name' => ['nullable', 'string'],
+            'files.*.file' => ['nullable', 'mimes:jpg,png,jpeg,pdf'],
         ];
+
+        if (auth()->user()->role->type === 'Super') {
+            $data = array_merge($data, [
+                'ward_no' => ['required', 'integer'],
+            ]);
+        }
+        return $data;
     }
 }
