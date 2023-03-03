@@ -11,7 +11,7 @@
                             <div class="flex-grow-1 ms-3">
                                 <h5>{{ $employee->name }}</h5>
                                 <h6 class="text-muted">{{ $employee->designation }}</h6>
-                                <h6 class="text-muted"><i class="fa-solid fa-phone"></i> {{ $employee->phone }}</h6>
+                                <h6 class="text-muted"><i class="fa fa-phone"></i> {{ $employee->phone }}</h6>
                             </div>
                         </div>
                     @endforeach
