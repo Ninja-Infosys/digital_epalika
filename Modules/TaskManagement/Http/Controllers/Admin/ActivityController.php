@@ -37,19 +37,16 @@ class ActivityController extends Controller
     public function store(StoreActivityRequest $request)
     {
         $this->checkAuthorization('taskActivity_create');
-        dd($request->validated());
-
         DB::transaction(function () use ($request) {
             $activity = Activity::create($request->validated() + [
                     'user_id' => auth()->id(),
                     'branch_id' => auth()->user()->branch_id,
                     'fiscal_year_id' => officeSetting()->fiscal_year_id
                 ]);
-            foreach ($request->input('activity_lists') as $activityList) {
-                $activity->activityLists()->create($activityList);
-
-                if (!empty($activityList['documents'])) {
-                    $this->uploadDocuments($activityList['documents'], $activityList);
+            foreach ($request->validated()['activity_lists'] as $list) {
+                $activityList = $activity->activityLists()->create($list);
+                if (!empty($list['documents'])) {
+                $this->uploadDocuments($list['documents'], $activityList);
                 }
             }
         });
@@ -80,14 +77,14 @@ class ActivityController extends Controller
         DB::transaction(function () use ($request, $activity) {
             $activity->update($request->validated());
 
-            foreach ($request->input('activity_lists') as $activityList) {
-                ActivityList::updateOrCreate(
-                    ['activity_id' => $activity->id, 'id' => $activityList['id']] ?? null,
-                    $activityList
+            foreach ($request->validated()['activity_lists'] as $list) {
+                $activityList = ActivityList::updateOrCreate(
+                    ['activity_id' => $activity->id, 'id' => $list['id']] ?? null,
+                        $list
                 );
 
-                if (!empty($activityList['documents'])) {
-                    $this->uploadDocuments($activityList['documents'], $activityList);
+                if (!empty($list['documents'])) {
+                    $this->uploadDocuments($list['documents'], $activityList);
                 }
             }
             $activity->activityLists()->whereNotIn('id', Arr::pluck($request->input('activity_lists'), 'id'))->delete();

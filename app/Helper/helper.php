@@ -259,14 +259,14 @@ if (!function_exists('getFileIconClass')) {
     function getFileIconClass(string $mime): string
     {
         return match ($mime) {
-            'application/pdf' => 'fa-file-pdf',
+            'pdf' => 'fa-file-pdf',
             'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'fa-file-word',
             'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'fa-file-excel',
             'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'fa-file-powerpoint',
             'application/zip', 'application/x-rar-compressed' => 'fa-file-archive',
-            'image/jpeg', 'image/png', 'image/gif' => 'fa-file-image',
-            'audio/mpeg', 'audio/x-wav' => 'fa-file-audio',
-            'video/mp4', 'video/x-msvideo' => 'fa-file-video',
+            'jpeg', 'png', 'gif', 'jpg' => 'fa-file-image',
+            'mpeg', 'x-wav' => 'fa-file-audio',
+            'mp4', 'x-msvideo' => 'fa-file-video',
             default => 'fa-file',
         };
     }
