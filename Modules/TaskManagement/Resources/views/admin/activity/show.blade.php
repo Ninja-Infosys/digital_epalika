@@ -25,7 +25,7 @@
                         <h4 class="header-title mb-0">कार्य</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             <a href="{{ route('admin.taskManagement.activity.index') }}"
-                                class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                               class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-list"></i> कार्यहरूको सुची</a>
                         </div>
                     </div>
@@ -34,89 +34,75 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-sm mb-0 table-striped table-hover table-bordered">
+                                <table class="table table-sm mb-0 table-striped table-bordered">
                                     <tbody>
-                                        <tr>
-                                            <th>शाखा</th>
-                                            <td>{{ $activity->branch->branch_name ?? '' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>कार्यहरु</th>
-                                            <td>
-                                                <ul>
-                                                    @foreach ($activity->activityLists as $list)
-                                                        <li>{{ $list->title }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>मिति</th>
-                                            <td>
-                                                {{ $activity->date }}
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <th>शाखा</th>
+                                        <td>{{ $activity->branch->branch_name ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>कार्यहरु</th>
+                                        <td>
+                                            <ul class="list-group list-group-numbered">
+                                                @foreach ($activity->activityLists as $list)
+                                                    <li class="list-group-item">{{ $list->title }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>मिति</th>
+                                        <td>
+                                            {{ $activity->date }}
+                                        </td>
+                                    </tr>
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <h4 class="header-title text-decoration-underline mt-3">आवश्यक कागजातहरु</h4>
-                        <div class="row mx-n1 g-0">
-                            <div class="col-xl-3 col-lg-6">
-                                <div class="card m-1 shadow-none border">
-                                    <div class="p-2">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto pe-0">
-                                                <div class="avatar-sm">
+                </div> <!-- end row-->
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="header-title mb-0">कागजातहरू</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach($activity->activityLists as $activityList)
+                            @forelse($activityList->files as $file)
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
                                                     <span class="avatar-title bg-light text-secondary rounded">
-                                                        <i class="fa fa-file-pdf font-18"></i>
+                                                          <i class="fa {{getFileIconClass($file->extension)}} font-18"></i>
                                                     </span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col">
-                                                <a href="javascript:void(0);" class="text-muted fw-medium">Documentation.pdf</a>
-                                                <p class="mb-0 font-13">7.5 MB</p>
-                                            </div>
-                                            <div class="col">
-                                                <a href="#"
-                                                    class="btn btn-xs btn-outline-primary mx-2">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
-                                            </div>
-                                        </div> <!-- end row -->
-                                    </div> <!-- end .p-2-->
-                                </div> <!-- end col -->
-                            </div> <!-- end col--> 
-                            <div class="col-xl-3 col-lg-6">
-                                <div class="card m-1 shadow-none border">
-                                    <div class="p-2">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto pe-0">
-                                                <div class="avatar-sm">
-                                                    <span class="avatar-title bg-light text-secondary rounded">
-                                                        <i class="fa fa-file-pdf font-18"></i>
-                                                    </span>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                       class="text-muted fw-medium">{{$activityList->title}}
+                                                        .{{$file->extension}}</a>
+                                                    <p class="mb-0 font-13">{{convert_to_highest_unit($file->file_size)}}</p>
                                                 </div>
-                                            </div>
-                                            <div class="col">
-                                                <a href="javascript:void(0);" class="text-muted fw-medium">Documentation.pdf</a>
-                                                <p class="mb-0 font-13">7.5 MB</p>
-                                            </div>
-                                            <div class="col">
-                                                <a href="#"
-                                                    class="btn btn-xs btn-outline-primary mx-2">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
-                                            </div>
-                                        </div> <!-- end row -->
-                                    </div> <!-- end .p-2-->
-                                </div> <!-- end col -->
-                            </div> <!-- end col-->           
-                        </div> <!-- end row-->          
-                        </div> <!-- end row-->
-                    </div>
+                                                <div class="col-2">
+                                                        <a href="{{route('admin.file.download', $file)}}" class="btn btn-xs btn-outline-primary">
+                                                            <i class="fa fa-download"></i>
+                                                        </a>
+                                                </div>
+                                            </div> <!-- end row -->
+                                        </div> <!-- end .p-2-->
+                                    </div> <!-- end col -->
+                                </div>
+                            @empty
+                                <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                            @endforelse
+                        @endforeach
+                    </div> <!-- end row-->
                 </div>
             </div>
         </div>

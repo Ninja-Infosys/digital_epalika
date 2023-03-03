@@ -54,9 +54,9 @@
                                         {{$activity->branch->branch_name ?? ''}}
                                     </td>
                                     <td>
-                                        <ul>
+                                        <ul class="list-group list-group-numbered">
                                             @foreach($activity->activityLists as $list)
-                                                <li>{{$list->title}}</li>
+                                                <li class="list-group-item">{{$list->title}}</li>
                                             @endforeach
                                         </ul>
                                     </td>

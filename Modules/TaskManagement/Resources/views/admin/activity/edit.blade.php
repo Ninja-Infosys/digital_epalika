@@ -138,31 +138,52 @@
                             Save
                         </button>
                     </form>
-                    <div class="table-responsive mt-3">
-                        <table class="table table-sm table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>फाइलको नाम</th>
-                                <th>फाइलको प्रकार</th>
-                                <th>फाइलको आकार</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($activity->activityLists as $activityList)
-                                @foreach($activityList->files as $file)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$activityList->title}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h4 class="header-title mb-0">कागजातहरु</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach($activity->activityLists as $activityList)
+                                    @forelse($activityList->files as $file)
+                                        <div class="col-xl-4 col-lg-6">
+                                            <div class="card shadow-none border">
+                                                <div class="p-2">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-2 pe-0">
+                                                            <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-secondary rounded">
+                                                        <i class="fa {{getFileIconClass($file->extension)}} font-18"></i>
+                                                    </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <a href="javascript:void(0);"
+                                                               class="text-muted fw-medium">{{$activityList->title}}.{{$file->extension}}</a>
+                                                            <p class="mb-0 font-13">{{convert_to_highest_unit($file->file_size)}}</p>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <form action="{{route('admin.file.destroy',$file)}}"
+                                                                  method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button data-bs-type="delete"
+                                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                                        title="मेटाउनु होस्">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div> <!-- end row -->
+                                                </div> <!-- end .p-2-->
+                                            </div> <!-- end col -->
+                                        </div>
+                                    @empty
+                                        <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                                    @endforelse
                                 @endforeach
-                            @endforeach
-                            </tbody>
-                        </table>
+                            </div> <!-- end row-->
+                        </div>
                     </div>
                 </div>
             </div>
