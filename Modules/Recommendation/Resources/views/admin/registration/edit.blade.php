@@ -121,7 +121,42 @@
                                         @enderror
                                     </div>
                                 @endif
-                                @livewire('multiple-file')
+                                
+                                <div class="col-md-12 mb-2">
+                                    <div class="d-flex align-items-center justify-content-between mb-1">
+                                        <label for="files" class="form-label fw-bold">आवश्यक कागजातहरु <span
+                                                class="text-danger">*</span></label>
+                                        <button type="button" class="btn btn-xs btn-outline-info"
+                                            data-target-element="files" data-toggle="add-more">
+                                            <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                        </button>
+                                    </div>
+                                    <fieldset class="bg-soft-secondary">
+                                        <div id="files">
+                                            <div class="main">
+                                                <div class="text-end">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                        data-toggle="remove-parent" data-parent=".main"
+                                                        data-target-element="files">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="row border-bottom mb-2">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="title" class="form-label">शिर्षक *</label>
+                                                        <input type="text" name="files[0][file_name]" class="form-control"
+                                                            id="title" placeholder="शिर्षक" required />
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="documents" class="form-label">डकुमेन्ट </label>
+                                                        <input type="file" name="files[0][file]" class="form-control"
+                                                            id="documents" multiple />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
                             </div>
                         </fieldset>
                         <div class="row mt-2">

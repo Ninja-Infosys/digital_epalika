@@ -96,92 +96,50 @@
                             </div>
                         </div>
                     </div>
-
-                    <h4 class="mt-4 text-decoration-underline">आवश्यक कागजातहरु</h4>
-                    <div class="row mt-3">
-                        @foreach ($registration->files as $document)
-                        <div class="col-md-4 mb-3">
-                            <div class="container">
-                                @if ($document->extension === 'pdf')
-                                    <iframe src="{{ $document->file_url }}" frameborder="0" width="100%"></iframe>
-                                @elseif($document->extension === 'png' or $document->extension === 'jpg' or $document->extension === 'jpeg')
-                                    <img src="{{ $document->file_url }}" class="figure-img img-fluid rounded"
-                                        alt="" height="60px;" width="100%">
-                                @endif
-                                <div class="bottom-left">{{ $document->file_name }}</div>
-                                <div class="top-right d-flex justify-content-around">
-                                    <a href="{{ route('admin.file-url-download', ['file_url' => $document->file]) }}"
-                                        class="btn btn-xs btn-outline-primary mx-1 bg-primary">
-                                        <i class="fa fa-download text-white"></i>
-                                    </a>
-                                    <form action="{{ route('admin.file.destroy', $document) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
-                                            <i class="fa fa-window-close"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-
-                    {{-- <div class="row mt-2">
-                        @foreach ($registration->files as $document)
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <div class="card-header ">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-download"></i>
-                                        </a>
-                                        <form action="{{route('admin.file.destroy',$document)}}" style="float: right"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
-                                                <i class="fa fa-window-close"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="card-body">
-                                        @if ($document->extension === 'pdf')
-                                            <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
-                                        @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
-                                            <img src="{{ $document->file_url }}" class="card-image" alt="Image"
-                                                 height=150px;" width="100%">
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            .container {
-                position: relative;
-                text-align: center;
-                color: rgb(249, 249, 249);
-                font-size: 16px
-            }
-
-            .bottom-left {
-                position: absolute;
-                bottom: 15px;
-                left: 16px;
-                background: rgba(0, 0, 0, 0.7);
-            }
-
-            .top-right {
-                position: absolute;
-                top: 8px;
-                right: 16px;
-            }
-        </style>
-    @endpush
+    <div class="card">
+        <div class="card-header">
+            <h4 class="header-title mb-0">आवश्यक कागजातहरु</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @forelse ($registration->files as $document)
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card shadow-none border">
+                            <div class="p-2">
+                                <div class="row align-items-center">
+                                    <div class="col-2 pe-0">
+                                        <div class="avatar-sm">
+                                            <span class="avatar-title bg-light text-secondary rounded">
+                                                <i
+                                                    class="fa {{ getFileIconClass($document->extension) }} font-18"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="javascript:void(0);"
+                                            class="text-muted fw-medium">{{ $document->file_name }}
+                                            .{{ $document->extension }}</a>
+                                        <p class="mb-0 font-13">
+                                            {{ convert_to_highest_unit($document->file_size) }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="{{ route('admin.file.download', $document) }}"
+                                            class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div> <!-- end row -->
+                            </div> <!-- end .p-2-->
+                        </div> <!-- end col -->
+                    </div>
+                @empty
+                    <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                @endforelse
+            </div> <!-- end row-->
+        </div>
+    </div>
 @endsection
