@@ -101,20 +101,20 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <label for="activities" class="form-label fw-bold">आबश्यक कागजात<span
+                                    <label for="documents" class="form-label fw-bold">आबश्यक कागजात<span
                                             class="text-danger">*</span></label>
                                     <button type="button" class="btn btn-xs btn-outline-info"
-                                        data-target-element="activities" data-toggle="add-more">
+                                        data-target-element="documents" data-toggle="add-more">
                                         <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                                     </button>
                                 </div>
                                 <fieldset class="bg-soft-secondary">
-                                    <div id="activities">
+                                    <div id="documents">
                                         <div class="main">
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-sm btn-outline-danger"
                                                     data-toggle="remove-parent" data-parent=".main"
-                                                    data-target-element="activities">
+                                                    data-target-element="documents">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </div>
@@ -122,7 +122,7 @@
                                                 <div class="row border-bottom mb-2">
                                                     <input type="hidden" name="serviceDocuments[{{ $key }}][id]"
                                                         value="{{ $serviceDocument->id }}">
-                                                    <div class="col-md-6 mb-2">
+                                                    <div class="col-md-12 mb-2">
                                                         <label for="title" class="form-label">शिर्षक *</label>
                                                         <input type="text"
                                                             name="serviceDocuments[{{ $key }}][description]"
@@ -138,20 +138,20 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <label for="activities" class="form-label fw-bold">उपलब्ध गराउने प्रक्रिया<span
+                                    <label for="process" class="form-label fw-bold">उपलब्ध गराउने प्रक्रिया<span
                                             class="text-danger">*</span></label>
                                     <button type="button" class="btn btn-xs btn-outline-info"
-                                        data-target-element="activities" data-toggle="add-more">
+                                        data-target-element="process" data-toggle="add-more">
                                         <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                                     </button>
                                 </div>
                                 <fieldset class="bg-soft-secondary">
-                                    <div id="activities">
+                                    <div id="process">
                                         <div class="main">
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-sm btn-outline-danger"
                                                     data-toggle="remove-parent" data-parent=".main"
-                                                    data-target-element="activities">
+                                                    data-target-element="process">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </div>
@@ -160,7 +160,7 @@
                                                     <input type="hidden"
                                                         name="serviceProcesses[{{ $key }}][id]"
                                                         value="{{ $serviceProcess->id }}">
-                                                    <div class="col-md-6 mb-2">
+                                                    <div class="col-md-12 mb-2">
                                                         <label for="title" class="form-label">शिर्षक *</label>
                                                         <input type="text"
                                                             name="serviceProcesses[{{ $key }}][description]"
