@@ -98,7 +98,7 @@
                             <div class="card bg-success text-light text-center">
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">लग इन</h5>
-                                    <i class="fa fa-gears fs-5"></i>
+                                    <i class="fa fa-key fs-5"></i>
                                     <h6>इ-नक्सा लग इन </h6>
                                     <a href="{{route('organization.login.form')}}" class="btn btn-light"
                                        ><span>लग इन गर्नुहोस्</span>
