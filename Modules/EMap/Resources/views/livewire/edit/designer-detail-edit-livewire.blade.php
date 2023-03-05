@@ -55,18 +55,6 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-2">
-                        <label class="form-label" for="designerDetails.{{$key}}.father_name"> बुवाको नाम</label>
-                        <input type="text"
-                               class="form-control form-control-sm"
-                               id="designerDetails.{{$key}}.father_name"
-                               {{$dataToEdit !== $key ?'disabled':''}}
-                               wire:model="designerDetails.{{$key}}.father_name"
-                        >
-                        @error("designerDetails.$key.father_name")
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-2">
                         <label class="form-label" for="designerDetails.{{$key}}.grandfather_name">
                             हजुरबुबाको नाम
                         </label>
