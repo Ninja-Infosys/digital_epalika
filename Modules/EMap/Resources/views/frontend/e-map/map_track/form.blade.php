@@ -21,8 +21,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="data">डाटा</label>
-                            <textarea class="form-control ckEditor" placeholder="डाटा" name="data" id="data" cols="50"
-                                      rows="10">{{old('data',( $mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
+                            <textarea class="form-control ckEditor"
+                             placeholder="डाटा"
+                              name="data" 
+                              id="data" 
+                              cols="50"
+                              rows="10">{{old('data',( $mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
                         </div>
                     </div>
                     <div class=" d-flex justify-content-end pt-3">
@@ -115,6 +119,8 @@
                 });
             });
         </script>
+          <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+          <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 
 
