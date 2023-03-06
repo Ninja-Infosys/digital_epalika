@@ -31,7 +31,6 @@ class UpdateProjectRequest extends FormRequest
             'projectAllocatedAmounts.*.amount' => ['required', 'numeric'],
             'project_venue' => ['nullable'],
             'purpose' => ['nullable'],
-            'operated_through' => ['nullable', new Enum(ProjectOperatedThroughEnum::class)],
             'first_quarterly_amount' => ['nullable', 'numeric'],
             'first_quarterly_goal' => ['nullable', 'numeric'],
             'second_quarterly_amount' => ['nullable', 'numeric'],

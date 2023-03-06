@@ -121,7 +121,7 @@
                                         @enderror
                                     </div>
                                 @endif
-                                
+
                                 <div class="col-md-12 mb-2">
                                     <div class="d-flex align-items-center justify-content-between mb-1">
                                         <label for="files" class="form-label fw-bold">आवश्यक कागजातहरु <span
@@ -143,9 +143,9 @@
                                                 </div>
                                                 <div class="row border-bottom mb-2">
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="title" class="form-label">शिर्षक *</label>
+                                                        <label for="title" class="form-label">शिर्षक</label>
                                                         <input type="text" name="files[0][file_name]" class="form-control"
-                                                            id="title" placeholder="शिर्षक" required />
+                                                            id="title" placeholder="शिर्षक" />
                                                     </div>
                                                     <div class="col-md-6 mb-2">
                                                         <label for="documents" class="form-label">डकुमेन्ट </label>
