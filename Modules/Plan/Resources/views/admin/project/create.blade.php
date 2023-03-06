@@ -232,7 +232,7 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="budget_head_id" class="form-label">बजेट शिर्षक *</label>
                                             <select
-                                                name="budget_head_id[]"
+                                                name="projectAllocatedAmounts[0][budget_head_id]"
                                                 class="form-select @error('budget_head_id') is-invalid @enderror"
                                                 id="budget_head_id">
                                                 <option value="" disabled>--- छान्नुहोस् ---</option>
@@ -261,13 +261,13 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <label for="title" class="form-label">शिर्षक *</label>
+                                            <label for="amount" class="form-label">रकम *</label>
                                             <input
                                                 type="number"
-                                                name="activity_lists[0][title]"
+                                                name="projectAllocatedAmounts[0][amount]"
                                                 class="form-control"
-                                                id="title"
-                                                placeholder="शिर्षक"
+                                                id="amount"
+                                                placeholder="रकम"
                                                 required
                                                 min="0"
                                             />

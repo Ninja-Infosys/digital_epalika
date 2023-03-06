@@ -269,25 +269,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="operated_through" class="form-label">खरिद बिधि *</label>
-                                <select
-                                    name="operated_through"
-                                    class="form-control @error('operated_through') is-invalid @enderror"
-                                    id="operated_through" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThrough)
-                                        <option
-                                            {{old('operated_through',$project->operated_through->value)==$operatedThrough->value ? 'selected' : ''}}
-                                            value="{{$operatedThrough->value}}">
-                                            {{$operatedThrough->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('operated_through')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="first_quarterly_amount" class="form-label">पहिलो चौमासिक आर्थिक लक्ष्य</label>
                                 <input
                                     type="number"
