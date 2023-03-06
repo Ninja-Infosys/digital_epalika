@@ -17,7 +17,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -36,7 +35,7 @@
                                 target-table="report-table"
                             />
                             <x-print-button
-                                target-element="report-content"
+                                target-element="report-table"
                                 title="समूह रिपोर्ट"
 
                             />
@@ -44,8 +43,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="collapse show mb-2" id="collapseFilterForm" style="">
-                        <form id="report-filter-form" method="POST">
+                    <div class="collapse show mb-2" id="collapseFilterForm" >
+                        <form id="report-filter-form" data-bs-url="{{route('admin.grant.report.group.report-data')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <label for="ward_no" class="form-label">
@@ -59,7 +58,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <fieldset>
                                 <legend class="font-16 text-info">
                                     <strong>
@@ -67,13 +65,18 @@
                                     </strong>
                                 </legend>
                                 <div class="row">
-                                    @foreach ($columnData as $columns)
+                                    @foreach($columnData as $columns)
                                         <div class="col-md-3 mb-2">
-                                            <label for="column.{{ $columns['table_name'] }}">{{ $columns['name'] }}</label>
-                                            <select name="columns[{{ $columns['table_name'] }}][]"
-                                                id="column.{{ $columns['table_name'] }}" multiple data-toggle="select2"
-                                                class="form-control">
+                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
+                                            <select name="columns[{{$columns['table_name']}}][]"
+                                                    id="column.{{$columns['table_name']}}" multiple
+                                                    data-toggle="select2"
+                                                    class="form-control">
                                                 <option disabled>--- छान्नुहोस् ---</option>
+                                                @foreach($columns['columns'] as $column)
+                                                    <option
+                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>
+                                                @endforeach
                                             </select>
 
                                         </div>
@@ -81,67 +84,18 @@
 
                                 </div>
                             </fieldset>
-
                             <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
                                 पेश गर्नुहोस्
                             </button>
                         </form>
                     </div>
+                    <div id="report-table"></div>
                 </div>
-                <div id="report-table"></div>
             </div>
         </div>
     </div>
 
     @push('scripts')
-        <script>
-            $(document).ready(function() {
-                // x-csrf protection
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $(document.body).delegate('#report-filter-form', 'submit', function(e) {
-                    e.preventDefault()
-                    $.ajax({
-                        type: "post",
-                        url: "{{ route('admin.grant.report.group.report-data') }}",
-                        data: new FormData(this),
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function() {
-                            $("#submitFormBtn").prop('disabled', true);
-                            $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
-                        },
-                        success: function(resp) {
-                            $("#submitFormBtn").prop('disabled', false);
-                            $("#collapseFilterForm").collapse('hide')
-                            $("#submitFormBtn").html("पेश गर्नुहोस्");
-                            $('#report-table').html(resp.view)
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            $('#submitFormBtn').prop('disabled', false)
-                            $("#submitFormBtn").html("पेश गर्नुहोस्");
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    });
-                })
-
-                function toastMessage(type, title) {
-                    swal.fire({
-                        title: title,
-                        toast: true,
-                        position: 'top-right',
-                        showConfirmButton: false,
-                        width: 450,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        icon: type,
-                    });
-                }
-            });
-        </script>
+        <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
     @endpush
 @endsection

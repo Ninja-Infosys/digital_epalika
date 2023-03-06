@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Grant\Entities\Affiliation;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
+use Modules\Grant\Transformers\CooperativeReportResource;
 
 class CooperativeReportController extends Controller
 {
@@ -27,12 +28,12 @@ class CooperativeReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $cooperatives = Cooperative::with('cooperativeType')->where(function ($q) use ($request) {
+        $cooperatives = Cooperative::with('cooperativeType','affiliation','province','localBody','district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('grant::admin.report.cooperative.table_data', compact('cooperatives'))
+            'data' => CooperativeReportResource::collection($cooperatives)
         ]);
     }
 
