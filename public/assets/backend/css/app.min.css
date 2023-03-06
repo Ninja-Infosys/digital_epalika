@@ -10099,3 +10099,6 @@ table[data-toggle=table] {
 #report-table .table > :not(caption) > * > * {
     padding:.2rem !important;
 }
+.inline-gap h5:nth-child(even){
+    /*padding: 0 10px 0 10px;*/
+}
