@@ -147,7 +147,7 @@
                                     </td>
                                     <td>{{ $registrationDetail->date_ne }}</td>
                                     <td>
-                                        <a type="button" class="btn btn-xs btn-outline-warning" data-bs-toggle="modal"
+                                        <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
                                            data-bs-target="#staticBackdrop">
                                             <i class="fa fa-file"></i>
                                         </a>
@@ -162,7 +162,7 @@
                                         @can('recommendation_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
+                                               class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>

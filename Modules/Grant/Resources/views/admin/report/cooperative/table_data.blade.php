@@ -1,16 +1,5 @@
-    <div class="col-sm" style="text-align: end; margin-right: 10px">
-        <button class="btn btn-sm btn-info"
-            onclick="printJS({
-            printable: 'printData',
-            targetStyles: ['*'],
-            ignoreElements:['ignore-header'],
-            type: 'html'
-            })">
-            <i class="fa fa-print"></i> Print
-        </button>
-    </div>
 
-    <div class="table-responsive" id="printData">
+    <div class="table-responsive" id="report-content">
         <table class="table table-sm table-striped table-hover mt-2">
             <thead>
                 <tr>
