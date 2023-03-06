@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <fieldset class="mb-2">
-                            <legend>योजना/कार्यक्रम</legend>
+                            <legend>आयोजनाको विवरण</legend>
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="project_name" class="form-label">योजना/कार्यक्रमको नाम *</label>
