@@ -607,7 +607,7 @@
                             </div>
                             <div id="budget">
                                 <div class="main">
-                                    @foreach($project->consumerCommittee->consumerCommitteeOfficials as $key=>$consumerCommitteeOfficial)
+                                    @foreach($project->consumerCommittee?->consumerCommitteeOfficials ?? collect() as $key=>$consumerCommitteeOfficial)
                                         <div class="text-end">
                                             <button type="button" class="btn btn-sm btn-outline-danger"
                                                     data-toggle="remove-parent" data-parent=".main"

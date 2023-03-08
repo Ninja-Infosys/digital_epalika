@@ -13,6 +13,7 @@ use Modules\Plan\Entities\ConsumerCommitteeOfficial;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectBidDetail;
 use Modules\Plan\Enums\ConsumerCommitteePostEnum;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 
 class ProjectAgreementController extends Controller
@@ -43,6 +44,7 @@ class ProjectAgreementController extends Controller
             'consumerCommitteeOfficials.*.gender' => ['nullable'],
             'consumerCommitteeOfficials.*.phone' => ['nullable'],
             'consumerCommitteeOfficials.*.citizenship_no' => ['nullable'],
+            'operated_through' => ['required', new Enum(ProjectOperatedThroughEnum::class)],
             'contract_date' => ['required'],
             'project_start_date' => ['required'],
             'project_completion_date' => ['required', 'after:form.project_start_date'],
@@ -50,6 +52,7 @@ class ProjectAgreementController extends Controller
 
         DB::transaction(function () use ($project, $request) {
             $project->update([
+                'operated_through' => $request->input('operated_through'),
                 'is_contracted' => 1,
                 'project_status' => ProjectStatusEnum::IN_PROGRESS,
                 'contract_date' => $request->input('contract_date'),
@@ -118,6 +121,7 @@ class ProjectAgreementController extends Controller
             'insurance_expiry_date' => ['nullable'],
             'insurance_extended_date' => ['nullable'],
             'contract_date' => ['required'],
+            'operated_through' => ['required', new Enum(ProjectOperatedThroughEnum::class)],
             'project_start_date' => ['required'],
             'project_completion_date' => ['required', 'after:project_start_date'],
         ]);
@@ -130,6 +134,7 @@ class ProjectAgreementController extends Controller
 
             $project->update([
                 'is_contracted' => 1,
+                'operated_through' => $validated['operated_through'],
                 'project_status' => ProjectStatusEnum::IN_PROGRESS,
                 'contract_date' => $validated['contract_date'] ?? null,
                 'project_start_date' => $validated['project_start_date'] ?? null,
