@@ -101,12 +101,12 @@
                     <div class="p-2">
                         <div class="inline-gap">
                         <h5 class="fw-bold">क)भौतिक तथा वित्तीय प्रगतिको विवरण</h5>
-                        <h5><b>वित्तीय प्रगति खर्च रकम रु. :</b> {{ $project->progress_spent_amount }}
+                        <h5>वित्तीय प्रगति खर्च रकम रु. : {{ $project->progress_spent_amount }}
                         </h5>
-                        <h5><b>भौतिक प्रगति लक्ष्य :</b> {{ $project->physical_progress_target }}</h5>
-                        <h5><b>भौतिक प्रगति सम्पन्न :</b> {{ $project->physical_progress_completed }}
+                        <h5>भौतिक प्रगति लक्ष्य : {{ $project->physical_progress_target }}</h5>
+                        <h5>भौतिक प्रगति सम्पन्न : {{ $project->physical_progress_completed }}
                         </h5>
-                        <h5><b>भौतिक प्रगति एकाइ :</b> {{ $project->physical_progress_unit }}</h5>
+                        <h5>भौतिक प्रगति एकाइ : {{ $project->physical_progress_unit }}</h5>
                         </div>
                         <h5 class="mt-1"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}</h5>
                         <h5 class="fw-bold">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
