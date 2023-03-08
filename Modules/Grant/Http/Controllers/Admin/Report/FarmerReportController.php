@@ -14,6 +14,7 @@ use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Group;
+use Modules\Grant\Transformers\FarmerReportResource;
 
 class FarmerReportController extends Controller
 {
@@ -35,12 +36,22 @@ class FarmerReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $farmers = Farmer::where(function ($q) use ($request) {
+        if (empty($request->input('columns'))) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'farmers' => ['first_name', 'last_name', 'gender', 'phone_no']
+                    ]
+                ]
+            );
+        }
+
+        $farmers = Farmer::with('province','localBody','district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('grant::admin.report.farmer.table_data', compact('farmers'))
+            'data' => FarmerReportResource::collection($farmers)
         ]);
     }
 

@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\EnterpriseType;
+use Modules\Grant\Transformers\EnterpriseReportResource;
 
 class EnterpriseReportController extends Controller
 {
@@ -26,12 +27,12 @@ class EnterpriseReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $enterprises = Enterprise::where(function ($q) use ($request) {
+        $enterprises = Enterprise::with('enterpriseType','localBody','province','district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('grant::admin.report.enterprise.table_data', compact('enterprises'))
+            'data' => EnterpriseReportResource::collection($enterprises)
         ]);
     }
 

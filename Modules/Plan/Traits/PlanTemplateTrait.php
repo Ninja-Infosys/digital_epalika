@@ -196,6 +196,7 @@ trait PlanTemplateTrait
     {
         $budgetHeads=[];
         $allocated_amount_sum=0;
+        $this->load('projectAllocatedAmounts.budgetHead');
         foreach($this->projectAllocatedAmounts as $allocatedAmount){
             $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
             $allocated_amount_sum+=$allocatedAmount->amount;

@@ -16,6 +16,7 @@ use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantOffice;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
+use Modules\Grant\Transformers\GrantResourceReport;
 
 class GrantReportController extends Controller
 {
@@ -36,12 +37,12 @@ class GrantReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $grantDetails = GrantDetail::where(function ($q) use ($request) {
+        $grantDetails = GrantDetail::with('grant','localBody')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('grant::admin.report.grant.table_data', compact('grantDetails'))
+            'data' => GrantResourceReport::collection($grantDetails)
         ]);
     }
 
@@ -49,10 +50,10 @@ class GrantReportController extends Controller
     {
         $columnData = collect();
 
-        (new Grant())
+        (new GrantDetail())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return array_keys($column, 'Grant');
+                return array_keys($column, 'GrantDetail');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
