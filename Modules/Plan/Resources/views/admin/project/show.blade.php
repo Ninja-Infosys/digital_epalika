@@ -57,7 +57,7 @@
                         </div>
                         <h4>ख) आयोजनाको विवरण</h4>
                     @endif
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h4 class="mb-0">योजना विवरण</h4>
                         <h5 class="d-inline"><b>योजना/कार्यक्रमको नाम :</b> {{ $project->project_name }}</h5>
                         <h5 class="d-inline"><b>उद्देश्य :</b> {{ $project->purpose }}</h5>
@@ -68,7 +68,7 @@
                         <h5 class="d-inline"><b>आयोजना अवस्था :</b> {{ $project->project_status?->label() }}</h5>
 
                     </div>
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h4 class="mb-0">बजेट</h4>
                         <h5 class="d-inline"><b>बजेट शीर्षक :</b>
                             @foreach ($project->projectAllocatedAmounts as $projectAllocatedAmount)
@@ -78,38 +78,32 @@
                         <h5 class="d-inline"><b>विनियोजित रकम रु. :</b>
                             {{ $project->projectAllocatedAmounts->sum('amount') }}</h5>
                     </div>
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h4>चौमासिक अनुसार लक्ष्य</h4>
                         <h5 class="d-inline"><b>मूल्याङ्कन रकम रु. :</b> {{ $project->evaluation_amount }}</h5>
                     </div>
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h5 class="d-inline"><b>आयोजना सुरु हुने मिति :</b> {{ $project->project_start_date }}</h5>
                         <h5 class="d-inline"><b>आयोजना सम्पन्‍न हुने मिति :</b> {{ $project->project_completion_date }}
                         </h5>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
+
+                    <div class="d-flex justify-content-between mt-3">
                         <h4 class="header-title fw-bold">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                     </div>
                     <div class="p-2">
-                        <div class="inline-gap">
-                        <h5 class="fw-bold">क)भौतिक तथा वित्तीय प्रगतिको विवरण</h5>
-                        <h5><b>वित्तीय प्रगति खर्च रकम रु. :</b> {{ $project->progress_spent_amount }}
-                        </h5>
-                        <h5><b>भौतिक प्रगति लक्ष्य :</b> {{ $project->physical_progress_target }}</h5>
-                        <h5><b>भौतिक प्रगति सम्पन्न :</b> {{ $project->physical_progress_completed }}
-                        </h5>
-                        <h5><b>भौतिक प्रगति एकाइ :</b> {{ $project->physical_progress_unit }}</h5>
+                        <div class="inline-gap p-2">
+                            <h5 class="fw-bold">क)भौतिक तथा वित्तीय प्रगतिको विवरण</h5>
+                            <h5>वित्तीय प्रगति खर्च रकम रु. : {{ $project->progress_spent_amount }}
+                            </h5>
+                            <h5>भौतिक प्रगति लक्ष्य : {{ $project->physical_progress_target }}</h5>
+                            <h5>भौतिक प्रगति सम्पन्न : {{ $project->physical_progress_completed }}
+                            </h5>
+                            <h5>भौतिक प्रगति एकाइ : {{ $project->physical_progress_unit }}</h5>
                         </div>
-                        <h5 class="mt-1"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}</h5>
-                        <h5 class="fw-bold">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
+                        <h5 class="mt-1 p-2"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}
+                        </h5>
+                        <h5 class="fw-bold p-2">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
                         <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
@@ -161,7 +155,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h5>घ) बस्तुगत अनुदानको विवरण: </h5>
+                        <h5 class="p-2">घ) बस्तुगत अनुदानको विवरण: </h5>
                         <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
@@ -186,7 +180,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <h5>ङ) आयोजनाबाट लाभान्वित हुने: </h5>
+                        <h5 class="p-2">ङ) आयोजनाबाट लाभान्वित हुने: </h5>
                         <ul>
                             <li>संगठित संस्था: {{ $project->benefited_organization ?? '' }}</li>
                             <li>अन्य: {{ $project->others_benefited ?? '' }}</li>
@@ -231,15 +225,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+
+                    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ३. उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको
@@ -281,15 +268,7 @@
                         <h5> ग) गठन गर्दा उपस्थित लाभान्वितको
                             संख्या: {{ $project->consumerCommittee->beneficiary_no ?? '' }}-
                         </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @else
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @else
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ३. बोलपत्र सम्वन्धि विवरण
@@ -297,12 +276,10 @@
                         </div>
                         <div class="p-2">
                             <div class="row">
-
                                 <div class="col-md-6 mt-2">
                                     <h5><b>क) कार्यालयको स्वीकृत विभागिय लागत अनुमान</b>
                                         : {{ $project->projectBidDetail->cost_estimation ?? '' }}</h5>
                                 </div>
-
                                 <div class="col-md-6 mt-2">
                                     <h5><b>ख) बोलपत्र सम्वन्धि विवरण </b>
                                         <ul>
@@ -427,15 +404,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-    @endif
-    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @endif
+
+
+                    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ४) मोविलाईजेशन पेश्की/रनिङ विल विवरण
@@ -467,15 +439,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @else
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @else
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ४) किस्ता/पेश्की विवरण
@@ -507,17 +471,9 @@
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+                    @endif
 
-    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                         <h4 class="header-title fw-bold">
                             ५). आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था
                         </h4>
@@ -527,7 +483,8 @@
                             <h5>ख) मर्मत संम्भारको सम्भावित स्रोत (छ छैन खुलाउने):
                                 <ul>
                                     <li>
-                                        जनश्रमदान: {{ $project->projectMaintenanceArrangement->public_service ?? '' }}</li>
+                                        जनश्रमदान: {{ $project->projectMaintenanceArrangement->public_service ?? '' }}
+                                    </li>
                                     <li>सेवा
                                         शुल्क: {{ $project->projectMaintenanceArrangement->service_fee ?? '' }}</li>
                                     <li>दस्तुर,
@@ -537,29 +494,15 @@
                                         भए: {{ $project->projectMaintenanceArrangement->others ?? '' }}</li>
                                 </ul>
                             </h5>
-
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+                    @endif
+
+
                     <h4 class="header-title fw-bold">६). सम्झौताको शर्तहरु</h4>
                     <div class="p-2">
                         {!! $project->projectAgreementTerm->data ?? '' !!}
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+
                     <h4 class="header-title fw-bold">
                         ७). सम्बन्धित कागजातहरू
                     </h4>
@@ -593,14 +536,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+
                     <h4 class="header-title fw-bold">
                         ८). योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
@@ -643,6 +579,7 @@
             </div>
         </div>
     </div>
+
     @push('scripts')
         <script>
             $(".printProjectDocument").on("click", function(e) {
