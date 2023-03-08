@@ -164,11 +164,11 @@
                                     @endcan
                                 </td>
                                 <td>
+                                    <a class="btn btn-xs btn-outline-primary"
+                                       href="{{route('admin.plan.project.projectAgreement.index',$project)}}">
+                                        <i class="fa fa-handshake"> योजना सम्झौता</i>
+                                    </a>
                                     @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-                                        <a class="btn btn-xs btn-outline-primary"
-                                           href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
-                                            <i class="fa fa-handshake"> योजना सम्झौता</i>
-                                        </a>
                                         @if($project->is_contracted)
                                             <a class="btn btn-xs btn-outline-primary"
                                                href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
@@ -180,10 +180,6 @@
                                             </a>
                                         @endif
                                     @else
-                                        <a class="btn btn-xs btn-outline-primary"
-                                           href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
-                                            <i class="fa fa-handshake"> योजना सम्झौता </i>
-                                        </a>
                                         @if($project->is_contracted)
                                             <a class="btn btn-xs btn-outline-primary"
                                                href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">

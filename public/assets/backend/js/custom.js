@@ -114,7 +114,6 @@
                     const row_element = $(`#${target_element}`).children().first().clone();
                     const row_index = $(`#${target_element}`).children().length;
                     row_element.find('input, textarea, select, label').each(function (col_key, col) {
-                        console.log(col)
                         if ($(col).is('label')) {
                             const forAttr = $(col).attr('for');
                             if (forAttr) {

@@ -18,7 +18,6 @@ return new class () extends Migration {
             $table->string('meeting_date')->nullable()->comment('बैठक मिति');
             $table->string('registration_no')->nullable()->comment('दर्ता नं');
             $table->integer('beneficiary_no')->nullable()->comment('गठन गर्दा उपस्थित लाभान्वितको संख्या');
-            $table->integer('member_number')->default(0)->comment('सदस्य संख्या');
             $table->string('experience_in_project')->nullable()->comment('कार्यक्रममा अनुभव');
             $table->timestamps();
             $table->softDeletes();
