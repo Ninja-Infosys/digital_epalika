@@ -225,6 +225,7 @@
                             </tbody>
                         </table>
                     </div>
+
                     @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
@@ -406,6 +407,8 @@
                             </div>
                         </div>
                     @endif
+
+
                     @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
@@ -495,6 +498,8 @@
                             </h5>
                         </div>
                     @endif
+
+
                     <h4 class="header-title fw-bold">६). सम्झौताको शर्तहरु</h4>
                     <div class="p-2">
                         {!! $project->projectAgreementTerm->data ?? '' !!}
@@ -572,8 +577,6 @@
                             </div>
                         @endforeach
                     </div>
-
-
                 </div>
             </div>
         </div>
