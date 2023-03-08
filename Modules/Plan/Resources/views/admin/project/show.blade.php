@@ -57,7 +57,7 @@
                         </div>
                         <h4>ख) आयोजनाको विवरण</h4>
                     @endif
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h4 class="mb-0">योजना विवरण</h4>
                         <h5 class="d-inline"><b>योजना/कार्यक्रमको नाम :</b> {{ $project->project_name }}</h5>
                         <h5 class="d-inline"><b>उद्देश्य :</b> {{ $project->purpose }}</h5>
@@ -68,7 +68,7 @@
                         <h5 class="d-inline"><b>आयोजना अवस्था :</b> {{ $project->project_status?->label() }}</h5>
 
                     </div>
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h4 class="mb-0">बजेट</h4>
                         <h5 class="d-inline"><b>बजेट शीर्षक :</b>
                             @foreach ($project->projectAllocatedAmounts as $projectAllocatedAmount)
@@ -78,11 +78,11 @@
                         <h5 class="d-inline"><b>विनियोजित रकम रु. :</b>
                             {{ $project->projectAllocatedAmounts->sum('amount') }}</h5>
                     </div>
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h4>चौमासिक अनुसार लक्ष्य</h4>
                         <h5 class="d-inline"><b>मूल्याङ्कन रकम रु. :</b> {{ $project->evaluation_amount }}</h5>
                     </div>
-                    <div class="inline-gap">
+                    <div class="inline-gap p-2">
                         <h5 class="d-inline"><b>आयोजना सुरु हुने मिति :</b> {{ $project->project_start_date }}</h5>
                         <h5 class="d-inline"><b>आयोजना सम्पन्‍न हुने मिति :</b> {{ $project->project_completion_date }}
                         </h5>
@@ -92,7 +92,7 @@
                         <h4 class="header-title fw-bold">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                     </div>
                     <div class="p-2">
-                        <div class="inline-gap">
+                        <div class="inline-gap p-2">
                             <h5 class="fw-bold">क)भौतिक तथा वित्तीय प्रगतिको विवरण</h5>
                             <h5>वित्तीय प्रगति खर्च रकम रु. : {{ $project->progress_spent_amount }}
                             </h5>
@@ -101,9 +101,9 @@
                             </h5>
                             <h5>भौतिक प्रगति एकाइ : {{ $project->physical_progress_unit }}</h5>
                         </div>
-                        <h5 class="mt-1"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}
+                        <h5 class="mt-1 p-2"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}
                         </h5>
-                        <h5 class="fw-bold">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
+                        <h5 class="fw-bold p-2">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
                         <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
@@ -155,7 +155,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h5>घ) बस्तुगत अनुदानको विवरण: </h5>
+                        <h5 class="p-2">घ) बस्तुगत अनुदानको विवरण: </h5>
                         <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
@@ -180,7 +180,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <h5>ङ) आयोजनाबाट लाभान्वित हुने: </h5>
+                        <h5 class="p-2">ङ) आयोजनाबाट लाभान्वित हुने: </h5>
                         <ul>
                             <li>संगठित संस्था: {{ $project->benefited_organization ?? '' }}</li>
                             <li>अन्य: {{ $project->others_benefited ?? '' }}</li>
@@ -276,12 +276,10 @@
                         </div>
                         <div class="p-2">
                             <div class="row">
-
                                 <div class="col-md-6 mt-2">
                                     <h5><b>क) कार्यालयको स्वीकृत विभागिय लागत अनुमान</b>
                                         : {{ $project->projectBidDetail->cost_estimation ?? '' }}</h5>
                                 </div>
-
                                 <div class="col-md-6 mt-2">
                                     <h5><b>ख) बोलपत्र सम्वन्धि विवरण </b>
                                         <ul>
