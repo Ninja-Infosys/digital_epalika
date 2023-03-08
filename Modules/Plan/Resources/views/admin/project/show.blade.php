@@ -87,28 +87,22 @@
                         <h5 class="d-inline"><b>आयोजना सम्पन्‍न हुने मिति :</b> {{ $project->project_completion_date }}
                         </h5>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
+
+                    <div class="d-flex justify-content-between mt-3">
                         <h4 class="header-title fw-bold">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                     </div>
                     <div class="p-2">
                         <div class="inline-gap">
-                        <h5 class="fw-bold">क)भौतिक तथा वित्तीय प्रगतिको विवरण</h5>
-                        <h5>वित्तीय प्रगति खर्च रकम रु. : {{ $project->progress_spent_amount }}
-                        </h5>
-                        <h5>भौतिक प्रगति लक्ष्य : {{ $project->physical_progress_target }}</h5>
-                        <h5>भौतिक प्रगति सम्पन्न : {{ $project->physical_progress_completed }}
-                        </h5>
-                        <h5>भौतिक प्रगति एकाइ : {{ $project->physical_progress_unit }}</h5>
+                            <h5 class="fw-bold">क)भौतिक तथा वित्तीय प्रगतिको विवरण</h5>
+                            <h5>वित्तीय प्रगति खर्च रकम रु. : {{ $project->progress_spent_amount }}
+                            </h5>
+                            <h5>भौतिक प्रगति लक्ष्य : {{ $project->physical_progress_target }}</h5>
+                            <h5>भौतिक प्रगति सम्पन्न : {{ $project->physical_progress_completed }}
+                            </h5>
+                            <h5>भौतिक प्रगति एकाइ : {{ $project->physical_progress_unit }}</h5>
                         </div>
-                        <h5 class="mt-1"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}</h5>
+                        <h5 class="mt-1"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}
+                        </h5>
                         <h5 class="fw-bold">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
                         <table class="table table-sm table-bordered">
                             <thead>
@@ -231,15 +225,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ३. उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको
@@ -281,15 +267,7 @@
                         <h5> ग) गठन गर्दा उपस्थित लाभान्वितको
                             संख्या: {{ $project->consumerCommittee->beneficiary_no ?? '' }}-
                         </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @else
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @else
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ३. बोलपत्र सम्वन्धि विवरण
@@ -427,15 +405,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-    @endif
-    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @endif
+                    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ४) मोविलाईजेशन पेश्की/रनिङ विल विवरण
@@ -467,15 +438,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @else
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @else
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title fw-bold">
                                 ४) किस्ता/पेश्की विवरण
@@ -507,17 +470,9 @@
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+                    @endif
 
-    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                    @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                         <h4 class="header-title fw-bold">
                             ५). आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था
                         </h4>
@@ -527,7 +482,8 @@
                             <h5>ख) मर्मत संम्भारको सम्भावित स्रोत (छ छैन खुलाउने):
                                 <ul>
                                     <li>
-                                        जनश्रमदान: {{ $project->projectMaintenanceArrangement->public_service ?? '' }}</li>
+                                        जनश्रमदान: {{ $project->projectMaintenanceArrangement->public_service ?? '' }}
+                                    </li>
                                     <li>सेवा
                                         शुल्क: {{ $project->projectMaintenanceArrangement->service_fee ?? '' }}</li>
                                     <li>दस्तुर,
@@ -537,29 +493,13 @@
                                         भए: {{ $project->projectMaintenanceArrangement->others ?? '' }}</li>
                                 </ul>
                             </h5>
-
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+                    @endif
                     <h4 class="header-title fw-bold">६). सम्झौताको शर्तहरु</h4>
                     <div class="p-2">
                         {!! $project->projectAgreementTerm->data ?? '' !!}
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+
                     <h4 class="header-title fw-bold">
                         ७). सम्बन्धित कागजातहरू
                     </h4>
@@ -593,14 +533,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+
                     <h4 class="header-title fw-bold">
                         ८). योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
@@ -639,10 +572,13 @@
                             </div>
                         @endforeach
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+
     @push('scripts')
         <script>
             $(".printProjectDocument").on("click", function(e) {
