@@ -95,7 +95,16 @@
                 });
             }
         },
-    };
+        fooTable: function (){
+            if ($("#demo-foo-accordion").length) {
+                $("#demo-foo-accordion").footable().on("footable_row_expanded", function(o) {
+                    $("#demo-foo-accordion tbody tr.footable-detail-show").not(o.row).each(function() {
+                        $("#demo-foo-accordion").data("footable").toggleDetail(this);
+                    });
+                });
+            }
+            }
+    }
     const extra = {
         addMore: function () {
             $('[data-toggle="add-more"]').each(function () {
@@ -322,6 +331,7 @@
         // plugins
         plugins.selectInit();
         plugins.chartInit();
+        plugins.fooTable()
         // extra
         extra.checkPin();
         extra.addMore();
