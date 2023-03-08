@@ -427,7 +427,7 @@
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
-                    </form>
+                    </form >
                     <form id="consumer-committee-form" class="d-none"
                           action="{{route('admin.plan.project.projectAgreement.consumer-committee',$project)}}"
                           method="post">
@@ -440,6 +440,7 @@
                                     <x-date-input-component
                                         nameNe="contract_date" labelNe="सम्झौता मिति *"
                                         :getTodayDate="false"
+                                        id-ne="contract_date_consumer"
                                         :editDateNe="$project->contract_date??''"
                                     />
                                 </div>
@@ -447,6 +448,7 @@
                                     <x-date-input-component
                                         nameNe="project_start_date" labelNe="आयोजना सुरु हुने मिति *"
                                         :getTodayDate="false"
+                                        id-ne="project_start_date_consumer"
                                         :editDateNe="$project->project_start_date??''"
                                     />
                                 </div>
@@ -454,6 +456,7 @@
                                     <x-date-input-component
                                         nameNe="project_completion_date" labelNe="आयोजना सम्पन्न हुने मिति *"
                                         :getTodayDate="false"
+                                        id-ne="project_completion_date_consumer"
                                         :editDateNe="$project->project_completion_date??''"
                                     />
                                 </div>
@@ -505,46 +508,25 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="formation_date" class="form-label">गठन भएको मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="formation_date"
-                                        value="{{old('formation_date',$project->consumerCommittee->formation_date??'')}}"
-                                        class="form-control @error('formation_date') is-invalid @enderror"
-                                        id="formation_date"
-                                        placeholder="गठन भएको मिति"
+                                    <x-date-input-component
+                                        nameNe="formation_date" labelNe="गठन भएको मिति *"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->formation_date??''"
                                     />
-                                    @error('formation_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="committee_registration_date" class="form-label">समिती दर्ता मिति</label>
-                                    <input
-                                        type="text"
-                                        name="committee_registration_date"
-                                        value="{{old('committee_registration_date',$project->consumerCommittee->committee_registration_date??'')}}"
-                                        class="form-control @error('committee_registration_date') is-invalid @enderror"
-                                        id="committee_registration_date"
-                                        placeholder="समिती दर्ता मिति"
+                                    <x-date-input-component
+                                        nameNe="committee_registration_date" labelNe="समिती दर्ता मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->committee_registration_date??''"
                                     />
-                                    @error('committee_registration_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="meeting_date" class="form-label">बैठक बसेको मिति</label>
-                                    <input
-                                        type="text"
-                                        name="meeting_date"
-                                        value="{{old('meeting_date',$project->consumerCommittee->meeting_date??'')}}"
-                                        class="form-control @error('meeting_date') is-invalid @enderror"
-                                        id="meeting_date"
-                                        placeholder="बैठक बसेको मिति"
+                                    <x-date-input-component
+                                        nameNe="meeting_date" labelNe="बैठक बसेको मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->meeting_date??''"
                                     />
-                                    @error('meeting_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="registration_no" class="form-label">समिती दर्ता नं. *</label>
@@ -606,8 +588,8 @@
                                 </button>
                             </div>
                             <div id="budget">
+                                @forelse($project->consumerCommittee?->consumerCommitteeOfficials ?? collect() as $key=>$consumerCommitteeOfficial)
                                 <div class="main">
-                                    @foreach($project->consumerCommittee?->consumerCommitteeOfficials ?? collect() as $key=>$consumerCommitteeOfficial)
                                         <div class="text-end">
                                             <button type="button" class="btn btn-sm btn-outline-danger"
                                                     data-toggle="remove-parent" data-parent=".main"
@@ -709,8 +691,100 @@
                                                 />
                                             </div>
                                         </div>
-                                    @endforeach
                                 </div>
+                                @empty
+                                    <div class="main">
+                                        <div class="text-end">
+                                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                                    data-toggle="remove-parent" data-parent=".main"
+                                                    data-target-element="budget">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <div class="row border-bottom mb-2">
+                                            <div class="col-md-4 mb-2">
+                                                <label for="post" class="form-label">पद *</label>
+                                                <select
+                                                    name="consumerCommitteeOfficials[0][post]"
+                                                    class="form-select">
+                                                    <option value="">छान्नुहोस्</option>
+                                                    @foreach(\Modules\Plan\Enums\ConsumerCommitteePostEnum::cases() as $post)
+                                                        <option value="{{$post->value}}">
+                                                            {{$post->label()}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="name" class="form-label">नाम थर *</label>
+                                                <input
+                                                    type="text"
+                                                    name="consumerCommitteeOfficials[0][name]"
+                                                    class="form-control"
+                                                    placeholder="नाम थर"
+                                                />
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="phone" class="form-label">सम्पर्क नं.</label>
+                                                <input
+                                                    type="text"
+                                                    name="consumerCommitteeOfficials[0][phone]"
+                                                    class="form-control"
+                                                    placeholder="सम्पर्क नं."
+                                                />
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="citizenship_no" class="form-label">नागरिकता नं.</label>
+                                                <input
+                                                    type="text"
+                                                    name="consumerCommitteeOfficials[0][citizenship_no]"
+                                                    class="form-control"
+                                                    placeholder="नागरिकता नं."
+                                                />
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="gender" class="form-label">लिङ्ग</label>
+                                                <select
+                                                    name="consumerCommitteeOfficials[0][gender]"
+                                                    class="form-select">
+                                                    <option value="">छान्नुहोस्</option>
+                                                    @foreach(\App\Enums\Gender::cases() as $gender)
+                                                        <option value="{{$gender->value}}">
+                                                            {{$gender->label()}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="address" class="form-label">ठेगाना</label>
+                                                <input
+                                                    type="text"
+                                                    name="consumerCommitteeOfficials[0][address]"
+                                                    class="form-control"
+                                                    placeholder="ठेगाना"
+                                                />
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="father_name" class="form-label">बुवा/पतिको नाम</label>
+                                                <input
+                                                    type="text"
+                                                    name="consumerCommitteeOfficials[0][father_name]"
+                                                    class="form-control"
+                                                    placeholder="बुवा/पतिको नाम"
+                                                />
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="grandfather_name" class="form-label">बाजेको नाम</label>
+                                                <input
+                                                    type="text"
+                                                    name="consumerCommitteeOfficials[0][grandfather_name]"
+                                                    class="form-control"
+                                                    placeholder="बाजेको नाम"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforelse
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">

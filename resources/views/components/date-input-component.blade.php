@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-{{$showEnglishDate?'6':'12'}}">
-        <label for="{{$nameNe}}">{{$labelNe}}</label>
+        <label for="{{$idNe ?? $nameNe}}">{{$labelNe}}</label>
         <input type="text" name="{{$nameNe}}"
                class="form-control @error($nameNe) is-invalid @enderror"
                placeholder="{{$labelNe}}"
-               id="{{$nameNe}}" value="{{old($nameNe, ($editDateNe))}}">
+               id="{{$idNe ?? $nameNe}}" value="{{old($nameNe, ($editDateNe))}}">
         @error($nameNe)
         <span class="text-danger">{{$message}}</span>
         @enderror
@@ -32,12 +32,12 @@
     @push('scripts')
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#{{$nameNe}}").nepaliDatePicker({
+                $("#{{$idNe ?? $nameNe}}").nepaliDatePicker({
                     ndpYear: true,
                     ndpMonth: true,
                     container:"{{$container}}",
                     onChange: function () {
-                        let parsedDate = NepaliFunctions.ParseDate($("#{{$nameNe}}").val());
+                        let parsedDate = NepaliFunctions.ParseDate($("#{{$idNe ?? $nameNe}}").val());
                         let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
                         let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
                         $("#{{$nameEn}}").val(formattedDate)
@@ -53,7 +53,7 @@
 
                 @if($getTodayDate)
                 let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                $('#{{$nameNe}}').val(todayBsDate)
+                $('#{{$idNe ?? $nameNe}}').val(todayBsDate)
                 let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
                 $('#{{$nameEn}}').val(todayAdDate)
                 @endif
