@@ -1,4 +1,4 @@
-{{-- <form wire:submit.prevent="submitFormData">
+<form wire:submit.prevent="submitFormData">
     <h4 class="header-title border-bottom mb-2">भौतिक तथा वित्तीय प्रगतिको विवरण</h4>
     <div class="row">
         <div class="col-md-3 mb-2">
@@ -458,4 +458,4 @@
     <button type="submit" class="btn btn-primary">
         Save
     </button>
-</form> --}}
+</form>

@@ -1,12 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Plan\Http\Controllers\Admin\ConsumerCommitteeController;
 use Modules\Plan\Http\Controllers\Admin\ConsumerCommitteeTransactionController;
 use Modules\Plan\Http\Controllers\Admin\DashboardController;
 use Modules\Plan\Http\Controllers\Admin\ProjectAgreementController;
 use Modules\Plan\Http\Controllers\Admin\ProjectAgreementTermController;
-use Modules\Plan\Http\Controllers\Admin\ProjectBidDetailController;
 use Modules\Plan\Http\Controllers\Admin\ProjectBidSubmissionController;
 use Modules\Plan\Http\Controllers\Admin\ProjectController;
 use Modules\Plan\Http\Controllers\Admin\ProjectCostDetailController;
