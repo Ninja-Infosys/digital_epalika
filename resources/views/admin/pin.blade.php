@@ -26,7 +26,11 @@
             </div>
         </div>
     @endif
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/checkPin.js')}}"></script>
-    @endpush
+{{--    @push('scripts')--}}
+{{--        <script>--}}
+{{--            $(document).ready(function (){--}}
+{{--               $('#staticBackdropLabel').modal('show')--}}
+{{--            });--}}
+{{--        </script>--}}
+{{--    @endpush--}}
 @endsection

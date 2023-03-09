@@ -19,5 +19,27 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('images/map.jpg')}}" alt="" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+   @push('scripts')
+       <script>
+           $(document).ready(function() {
+               $('#staticBackdrop').modal('show');
+               setTimeout(function () {
+                   $('#staticBackdrop').modal('hide');
+               }, 10000);
+           });
+       </script>
+   @endpush
 
 @endsection

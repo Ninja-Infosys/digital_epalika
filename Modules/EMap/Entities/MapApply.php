@@ -167,6 +167,11 @@ class MapApply extends Model
         return $this->morphOne(Otp::class, 'model')->latest();
     }
 
+    public function attachDocument(): HasOne
+    {
+        return $this->hasOne(AttachDocument::class);
+    }
+
     public function scopeSentToAdmin($query)
     {
         return $query->whereNotNull('sent_to_admin_at');
