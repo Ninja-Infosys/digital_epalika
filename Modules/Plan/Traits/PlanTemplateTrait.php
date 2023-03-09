@@ -256,7 +256,7 @@ trait PlanTemplateTrait
             '[@consumerCommittee.meeting_date]' => $this->consumerCommittee->meeting_date ?? '',
             '[@consumerCommittee.registration_no]' => $this->consumerCommittee->registration_no ?? '',
             '[@consumerCommittee.beneficiary_no]' => $this->consumerCommittee->beneficiary_no ?? '',
-            '[@consumerCommittee.member_number]' => $this->consumerCommittee->member_number ?? '',
+            '[@consumerCommittee.member_number]' => $this->consumerCommittee?->consumerCommitteeOfficials->count(),
             '[@consumerCommittee.experience_in_project]' => $this->consumerCommittee->experience_in_project ?? '',
             '[@consumerCommittee.chairman]' => $this->consumerCommittee?->consumerCommitteeOfficials->where('post', \Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)?->first()->name ?? '',
             '[@consumerCommittee.consumerCommitteeOfficials]' => (string)View::make('plan::admin.template_table.consumerCommitteeOfficials', [
