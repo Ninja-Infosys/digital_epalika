@@ -85,8 +85,10 @@
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                       class="text-muted fw-medium">{{$activityList->title}}
-                                                        .{{$file->extension}}</a>
+                                                       class="text-muted fw-medium" type="button"
+                                                       data-bs-toggle="offcanvas"
+                                                       data-bs-target="#offcanvasRight"
+                                                       aria-controls="offcanvasRight">{{$activityList->title}}.{{$file->extension}}</a>
                                                     <p class="mb-0 font-13">{{convert_to_highest_unit($file->file_size)}}</p>
                                                 </div>
                                                 <div class="col-2">
@@ -106,5 +108,10 @@
                 </div>
             </div>
         </div>
+        <x-file-view
+            title="{{$activityList->title}}"
+            extension="{{$file->extension}}"
+            file-url="{{$file->file_url}}"
+        />
     </div>
 @endsection

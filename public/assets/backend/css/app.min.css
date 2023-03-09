@@ -3502,10 +3502,6 @@ body[data-layout-mode=two-column] .sidebar-icon-menu .nav .nav-link {
     border-radius: 4px
 }
 
-.offcanvas-body {
-    background-color: var(--primary);
-}
-
 body[data-layout-mode=two-column] .sidebar-icon-menu .nav .nav-link.active {
     background-color: rgba(255, 255, 255, .12)
 }
@@ -9847,9 +9843,7 @@ table[data-toggle=table] {
 .top-heading{
     line-height: 60px;
 }
-.offcanvas-header{
-    background-color: var(--primary);
-}
+
 .ck.ck-editor__main > .ck-editor__editable{
     height: 50vh;
 }
