@@ -1,4 +1,4 @@
-{{-- <form wire:submit.prevent="submitFormData">
+<form wire:submit.prevent="submitFormData">
     <div class="table-responsive">
         <table class="table table-sm table-bordered">
             <thead>
@@ -94,4 +94,4 @@
     <button type="submit" class="btn btn-primary">
         Save
     </button>
-</form> --}}
+</form>
