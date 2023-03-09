@@ -95,7 +95,16 @@
                 });
             }
         },
-    };
+        fooTable: function (){
+            if ($("#demo-foo-accordion").length) {
+                $("#demo-foo-accordion").footable().on("footable_row_expanded", function(o) {
+                    $("#demo-foo-accordion tbody tr.footable-detail-show").not(o.row).each(function() {
+                        $("#demo-foo-accordion").data("footable").toggleDetail(this);
+                    });
+                });
+            }
+            }
+    }
     const extra = {
         addMore: function () {
             $('[data-toggle="add-more"]').each(function () {
@@ -105,7 +114,6 @@
                     const row_element = $(`#${target_element}`).children().first().clone();
                     const row_index = $(`#${target_element}`).children().length;
                     row_element.find('input, textarea, select, label').each(function (col_key, col) {
-                        console.log(col)
                         if ($(col).is('label')) {
                             const forAttr = $(col).attr('for');
                             if (forAttr) {
@@ -322,6 +330,7 @@
         // plugins
         plugins.selectInit();
         plugins.chartInit();
+        plugins.fooTable()
         // extra
         extra.checkPin();
         extra.addMore();

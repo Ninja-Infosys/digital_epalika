@@ -13,6 +13,7 @@ use Modules\Plan\Entities\ProjectAgreementTerm;
 class ProjectAgreementTermController extends Controller
 {
     use NepaliDateConverter;
+
     public function index(Project $project)
     {
         return view('plan::index');
@@ -26,7 +27,7 @@ class ProjectAgreementTermController extends Controller
         $agreementTermTemplate=(String)View::make('plan::admin.setting.template.agreement_term_template',compact('project','today_date'));
         $project->load('projectAgreementTerm');
 
-        return view('plan::admin.project_agreement_term.create',compact('project','agreementTermTemplate'));
+        return view('plan::admin.agreement_term.create',compact('project','agreementTermTemplate'));
     }
 
     public function store(Request $request,Project $project)

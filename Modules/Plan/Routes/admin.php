@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Plan\Http\Controllers\Admin\ConsumerCommitteeController;
 use Modules\Plan\Http\Controllers\Admin\ConsumerCommitteeTransactionController;
 use Modules\Plan\Http\Controllers\Admin\DashboardController;
+use Modules\Plan\Http\Controllers\Admin\ProjectAgreementController;
 use Modules\Plan\Http\Controllers\Admin\ProjectAgreementTermController;
 use Modules\Plan\Http\Controllers\Admin\ProjectBidDetailController;
 use Modules\Plan\Http\Controllers\Admin\ProjectBidSubmissionController;
@@ -30,8 +31,11 @@ Route::get('project/{project}/planTemplate/{planTemplate}',[ProjectController::c
 Route::resource('project', ProjectController::class);
 Route::resource('project/{project}/projectCostDetail', ProjectCostDetailController::class)->names('project.projectCostDetail')->only('index');
 Route::resource('project/{project}/projectDocument', ProjectDocumentController::class)->names('project.projectDocument');
-Route::resource('project/{project}/projectBidDetail', ProjectBidDetailController::class)->names('project.projectBidDetail');
-Route::resource('project/{project}/consumerCommittee', ConsumerCommitteeController::class)->names('project.consumerCommittee');
+Route::controller(ProjectAgreementController::class)->prefix('project/{project}/projectAgreement')->as('project.projectAgreement.')->group(function (){
+    Route::get('/','index')->name('index');
+    Route::post('consumer-committee','storeConsumerCommittee')->name('consumer-committee');
+    Route::post('bid-detail','storeProjectBidDetail')->name('bid-detail');
+});
 Route::resource('project/{project}/projectAgreementTerm', ProjectAgreementTermController::class)->names('project.projectAgreementTerm');
 Route::resource('project/{project}/projectBidSubmission', ProjectBidSubmissionController::class)->names('project.projectBidSubmission');
 Route::resource('project/{project}/consumerCommitteeTransaction', ConsumerCommitteeTransactionController::class)->names('project.consumerCommitteeTransaction');
