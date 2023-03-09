@@ -58,38 +58,116 @@
                         <h4>ख) आयोजनाको विवरण</h4>
                     @endif
                     <div class="inline-gap p-2">
-                        <h4 class="mb-0">योजना विवरण</h4>
-                        <h5 class="d-inline"><b>योजना/कार्यक्रमको नाम :</b> {{ $project->project_name }}</h5>
-                        <h5 class="d-inline"><b>उद्देश्य :</b> {{ $project->purpose }}</h5>
-                        <h5 class="d-inline"><b>योजनाको क्षेत्र : </b>{{ $project->planArea->area_name ?? '' }}</h5>
-                        <h5 class="d-inline"><b>योजना स्तर :</b> {{ $project->planLevel->level_name ?? '' }}</h5>
-                        <h5 class="d-inline"><b>आयोजना स्थल :</b> {{ $project->project_venue }}</h5>
-                        <h5 class="d-inline"><b>संचालन हुने वडा नं :</b> {{ implode(',', $project->ward_no) }}</h5>
-                        <h5 class="d-inline"><b>आयोजना अवस्था :</b> {{ $project->project_status?->label() }}</h5>
+                        <h4 class="mb-1">योजना विवरण</h4>
+                        <div class="table-responsive p-2">
+                            <table class="table table-sm  table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>योजना/कार्यक्रमको नाम </th>
+                                        <td>{{ $project->project_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>उद्देश्य</th>
+                                        <td>
+                                            {{ $project->purpose }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>उद्देश्य</th>
+                                        <td>
+                                            {{ $project->purpose }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>योजनाको क्षेत्र</th>
+                                        <td>
+                                            {{ $project->planArea->area_name ?? '' }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>योजना स्तर</th>
+                                        <td>
+                                            {{ $project->planLevel->level_name ?? '' }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>आयोजना स्थल</th>
+                                        <td>
+                                            {{ $project->project_venue }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>संचालन हुने वडा नं</th>
+                                        <td>
+                                            {{ implode(',', $project->ward_no) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>आयोजना अवस्था</th>
+                                        <td>
+                                            {{ $project->project_status?->label() }}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
-                    <div class="inline-gap p-2">
-                        <h4 class="mb-0">बजेट</h4>
-                        <h5 class="d-inline"><b>बजेट शीर्षक :</b>
-                            @foreach ($project->projectAllocatedAmounts as $projectAllocatedAmount)
-                                {{ $projectAllocatedAmount->budgetHead->title ?? '' }} {{ !$loop->last ? ',' : '' }}
-                            @endforeach
-                        </h5>
-                        <h5 class="d-inline"><b>विनियोजित रकम रु. :</b>
-                            {{ $project->projectAllocatedAmounts->sum('amount') }}</h5>
+                    <div class="p-2">
+                        <h4 class="mb-1">बजेट</h4>
+                        <div class="table-responsive p-2">
+                            <table class="table table-sm table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>बजेट शीर्षक </th>
+                                        <td>
+                                            @foreach ($project->projectAllocatedAmounts as $projectAllocatedAmount)
+                                                {{ $projectAllocatedAmount->budgetHead->title ?? '' }}
+                                                {{ !$loop->last ? ',' : '' }}
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>विनियोजित रकम रु.</th>
+                                        <td>
+                                            {{ $project->projectAllocatedAmounts->sum('amount') }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="inline-gap p-2">
-                        <h4>चौमासिक अनुसार लक्ष्य</h4>
-                        <h5 class="d-inline"><b>मूल्याङ्कन रकम रु. :</b> {{ $project->evaluation_amount }}</h5>
-                    </div>
-                    <div class="inline-gap p-2">
-                        <h5 class="d-inline"><b>आयोजना सुरु हुने मिति :</b> {{ $project->project_start_date }}</h5>
-                        <h5 class="d-inline"><b>आयोजना सम्पन्‍न हुने मिति :</b> {{ $project->project_completion_date }}
-                        </h5>
-                    </div>
+                        <h4 class="mb-1">चौमासिक अनुसार लक्ष्य</h4>
+                        <div class="table-responsive p-2">
+                            <table class="table table-sm table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>मूल्याङ्कन रकम रु.</th>
+                                        <td>
+                                            {{ $project->evaluation_amount }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>आयोजना सुरु हुने मिति</th>
+                                        <td>
+                                            {{ $project->project_start_date }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>आयोजना सम्पन्‍न हुने मिति</th>
+                                        <td>
+                                            {{ $project->project_completion_date }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
 
                     <div class="d-flex justify-content-between mt-3">
-                        <h4 class="header-title fw-bold">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
+                        <h4 class="header-title fw-bold mb-0">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                     </div>
                     <div class="p-2">
                         <div class="inline-gap p-2">
@@ -101,9 +179,10 @@
                             </h5>
                             <h5>भौतिक प्रगति एकाइ : {{ $project->physical_progress_unit }}</h5>
                         </div>
-                        <h5 class="mt-1 p-2"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}
+                        <h5 class="p-2"><b>ख) आयोजनाको अनुमान लागत रु:</b> {{ $project->total_cost_estimate_amount }}
                         </h5>
-                        <h5 class="fw-bold p-2">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
+                        <h5 class="fw-bold p-2 mb-0">ग) लागत व्यहोर्ने स्रोतहरु:</h5>
+                        <div class="table-responsive p-4">
                         <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
@@ -155,6 +234,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                         <h5 class="p-2">घ) बस्तुगत अनुदानको विवरण: </h5>
                         <table class="table table-sm table-bordered">
                             <thead>
