@@ -130,9 +130,9 @@
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
 
-                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span> व्यक्ति</span>
-                                        <i class="fa fa-angle-double-right"></i>
-                                    </a>
+{{--                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span> व्यक्ति</span>--}}
+{{--                                        <i class="fa fa-angle-double-right"></i>--}}
+{{--                                    </a>--}}
                                 </div>
                             </div>
                         </div>
