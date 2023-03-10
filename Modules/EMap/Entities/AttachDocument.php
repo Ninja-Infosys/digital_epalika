@@ -94,4 +94,44 @@ class AttachDocument extends Model
             set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
+
+    public function getLandOwnerDocumentSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['land_owner_document']);
+    }
+
+    public function getLandRevenueDocumentSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['land_revenue_document']);
+    }
+
+    public function getLandOwnerCitizenshipSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['land_owner_citizenship']);
+    }
+
+    public function getBluePrintSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['blue_print']);
+    }
+
+    public function getPassDocumentSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['pass_document']);
+    }
+
+    public function getDesignerDocumentSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['designer_document']);
+    }
+
+    public function getPermissionDocumentSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['permission_document']);
+    }
+
+    public function getInheritanceDocumentSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['inheritance_document']);
+    }
 }

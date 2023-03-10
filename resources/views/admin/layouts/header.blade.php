@@ -27,12 +27,17 @@
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                            <span class="float-end">
-                      <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark">
-                        <small>सबै खाली गर्नुहोस्</small>
-                      </a> </span>नोटिफिकेसन</h5>
+                    <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="m-0 font-16 fw-semibold"> नोटिफिकेसन</h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark text-decoration-underline">
+                                    <small>सबै खाली गर्नुहोस्</small>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="noti-scroll" data-simplebar>
                         @forelse (auth()->user()->unreadNotifications as $notification)
@@ -59,7 +64,6 @@
                             <h4 class="text-center my-3">कुनै डाटा उपलब्ध छैन !</h4>
                         @endforelse
                     </div>
-                    <!-- All-->
                     <a href="{{route('admin.notification')}}"
                        class="dropdown-item text-center text-primary notify-item notify-all">
                         सबै हेर्नुहोस्

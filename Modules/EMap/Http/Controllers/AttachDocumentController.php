@@ -12,9 +12,7 @@ class AttachDocumentController extends Controller
 {
     public function index(MapApply $mapApply)
     {
-
         $mapApply->load('attachDocument');
-
         return view('emap::organization.attach-document.index', compact('mapApply'));
     }
 
@@ -36,9 +34,40 @@ class AttachDocumentController extends Controller
             'inheritance_document' => ['required', 'mimes:png,jpg,jpeg'],
         ]);
 
-        AttachDocument::updateOrCreate($data, [
+        if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_document'));
+        }
+
+        if ($request->hasFile('land_revenue_document') && !empty($mapApply->attachDocument->land_revenue_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_revenue_document'));
+        }
+
+        if ($request->hasFile('land_owner_citizenship') && !empty($mapApply->attachDocument->land_owner_citizenship)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_citizenship'));
+        }
+
+        if ($request->hasFile('blue_print') && !empty($mapApply->attachDocument->blue_print)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('blue_print'));
+        }
+
+        if ($request->hasFile('pass_document') && !empty($mapApply->attachDocument->pass_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('pass_document'));
+        }
+
+        if ($request->hasFile('designer_document') && !empty($mapApply->attachDocument->designer_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('designer_document'));
+        }
+
+        if ($request->hasFile('permission_document') && !empty($mapApply->attachDocument->permission_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('permission_document'));
+        }
+
+        if ($request->hasFile('inheritance_document') && !empty($mapApply->attachDocument->inheritance_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('inheritance_document'));
+        }
+        AttachDocument::updateOrCreate([
             'map_apply_id' => $mapApply->id
-        ]);
+        ], $data);
         toast('File added successfully', 'success');
         return back();
     }

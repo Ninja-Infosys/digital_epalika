@@ -52,11 +52,28 @@
                         <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                         <td>{{$mapApply->organization->name ?? ''}}</td>
                         <td>
-                            <a href="{{route('emap.admin.mapApply.mapRegistration.index', $mapApply)}}"
-                               type="button" class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
-                                <i class="fa fa-{{empty($mapApply->registration_no) ? 'times-circle':  'check-circle'}}"></i>
-                                दर्ता {{empty($mapApply->registration_no) ? 'गर्नुहोस्':  'भएको'}}
-                            </a>
+                            <div class="d-flex gap-1">
+                                @if($mapApply->sent_to_organization=='Accept')
+                                    <a href="{{route('emap.admin.mapApply.mapRegistration.index', $mapApply)}}"
+                                       class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
+                                        <i class="fa fa-{{empty($mapApply->registration_no) ? 'times-circle':  'check-circle'}}"></i>
+                                        दर्ता {{empty($mapApply->registration_no) ? 'गर्नुहोस्':  'भएको'}}
+                                    </a>
+                                @endif
+                                <form action="{{route('emap.admin.map.mapApply.updateStatus',[$mapApply,$applicationFormTypeEnum])}}" method="post">
+                                    @csrf
+                                    @method('put')
+                                    <div class="input-group">
+                                        <select class="form-select form-select-sm" name="sent_to_organization" id="sent_to_organization" aria-label="Example select with button addon">
+                                            <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                            <option value="Unseen" {{$mapApply->sent_to_organization=="Unseen" ? 'selected':''}}>प्रक्रियामा</option>
+                                            <option value="Accept" {{$mapApply->sent_to_organization=="Accept" ? 'selected':''}}>स्वीकार</option>
+                                            <option value="Reject" {{$mapApply->sent_to_organization=="Reject" ? 'selected':''}}>अस्वीकार</option>
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="submit">पेश गर्नुहोस्</button>
+                                    </div>
+                                </form>
+                            </div>
                         </td>
                         <td>
                             <div class="button-list">
