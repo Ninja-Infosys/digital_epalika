@@ -70,7 +70,7 @@
                                             <option value="Accept" {{$mapApply->sent_to_organization=="Accept" ? 'selected':''}}>स्वीकार</option>
                                             <option value="Reject" {{$mapApply->sent_to_organization=="Reject" ? 'selected':''}}>अस्वीकार</option>
                                         </select>
-                                        <button class="btn btn-sm btn-outline-secondary" type="submit">पेश गर्नुहोस्</button>
+                                        <button class="btn btn-sm btn-outline-primary" type="submit">पेश गर्नुहोस्</button>
                                     </div>
                                 </form>
                             </div>
