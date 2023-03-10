@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -12,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">कार्यालय सेटिङ</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">सुविधा सेटिंग सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -25,7 +24,6 @@
     @foreach($featureActivations as $key=>$featureActivation)
         <div class="row">
             <h4 class="page-title">{{\App\Enums\FeatureTypeEnum::tryFrom($key)->label()}}</h4>
-
             @foreach($featureActivation as $data)
                 <div class="col-md-4">
                     <div class="card">

@@ -11,8 +11,9 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.department.index')}}">बिभागहरुको विवरण</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
+                        <li class="breadcrumb-item active">बिभागहरु</li>
                     </ol>
                 </div>
                 <h4 class="page-title">बिभागहरुको विवरण</h4>
@@ -26,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">बिभाग सूची</h4>
                         @can('department_create')
-                            <a href="{{route('admin.department.create')}}"
+                            <a href="{{route('admin.generalSetting.department.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -51,18 +52,18 @@
                                     <td>{{$department->title}}</td>
                                     <td>
                                         @can('department_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.department.edit', $department)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.department.edit', $department)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('department_delete')
-                                            <form action="{{route('admin.department.destroy', $department)}}"
+                                            <form action="{{route('admin.generalSetting.department.destroy', $department)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

@@ -10,7 +10,9 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                        </li>
                         <li class="breadcrumb-item active">शाखा/उपशाखा</li>
                     </ol>
                 </div>
@@ -26,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">शाखा/उपशाखाहरु</h4>
                         @can('branch_create')
-                            <a href="{{route('admin.branch.create')}}"
+                            <a href="{{route('admin.generalSetting.branch.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -52,13 +54,13 @@
                                     <td></td>
                                     <td>
                                         @can('branch_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.branch.edit',$branch)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.branch.edit',$branch)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('branch_delete')
-                                            <form action="{{route('admin.branch.destroy',$branch)}}"
+                                            <form action="{{route('admin.generalSetting.branch.destroy',$branch)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -80,14 +82,14 @@
                                         <td>{{$subBranch->branch->branch_name??''}}</td>
                                         <td>
                                             @can('branch_edit')
-                                                <a data-bs-type="edit" href="{{route('admin.branch.edit',$subBranch)}}"
+                                                <a data-bs-type="edit" href="{{route('admin.generalSetting.branch.edit',$subBranch)}}"
                                                    title="सम्पादन गर्नुहोस्"
                                                    class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                             @endcan
                                             @can('branch_delete')
-                                                <form action="{{route('admin.branch.destroy',$subBranch)}}"
+                                                <form action="{{route('admin.generalSetting.branch.destroy',$subBranch)}}"
                                                       method="post">
                                                     @csrf
                                                     @method('delete')

@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.emergencyNumber.index')}}">आपतकालिन सम्पर्क</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
-                        <li class="breadcrumb-item active">आपतकालिन सम्पर्क थप गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">आपतकालिन सम्पर्क</li>
                     </ol>
                 </div>
-                <h4 class="page-title">आपतकालिन सम्पर्क थप</h4>
+                <h4 class="page-title">आपतकालिन सम्पर्क</h4>
             </div>
         </div>
     </div>
@@ -25,18 +25,18 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ आपतकालिन सम्पर्क थप्नुहोस्</h4>
-                        <a href="{{route('admin.emergencyNumber.index')}}" class="btn btn-sm btn-outline-primary">
+                        <h4 class="header-title">आपतकालिन सम्पर्क</h4>
+                        <a href="{{route('admin.generalSetting.emergencyNumber.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आपतकालिन सम्पर्क सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.emergencyNumber.update',$emergencyNumber)}}" method="post">
+                    <form action="{{route('admin.generalSetting.emergencyNumber.update',$emergencyNumber)}}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="type" class="form-label">प्रकार आबश्यक छ *</label>
                                 <input id="title" type="text" name="type" placeholder="प्रकार"
                                        class="form-control @error('type') is-invalid @enderror"
@@ -46,7 +46,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">शिर्षक आबस्यक छ *</label>
                                 <input id="title" type="text" name="title" placeholder="शिर्षक आबस्यक छ"
                                        class="form-control @error('title') is-invalid @enderror"
@@ -56,7 +56,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="contact_no" class="form-label">सम्पर्क नं. आबश्यक छ *</label>
                                 <input id="title" type="text" name="contact_no" placeholder="सम्पर्क नं. आबश्यक छ"
                                        class="form-control @error('contact_no') is-invalid @enderror"

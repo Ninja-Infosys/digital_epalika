@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.officeSetting.index')}}">कार्यालय सेटिङ</a>
+                            <a href="{{route('admin.systemSetting.officeSetting.index')}}">कार्यालय सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">कार्यालय सेटिङ सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -27,18 +27,16 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कार्यालय सेटिङ सम्पादन गर्नुहोस्</h4>
+                        <h4 class="header-title">कार्यालय सेटिङ</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.officeSetting.update',$officeSetting)}}" method="post"
+                    <form action="{{route('admin.systemSetting.officeSetting.update',$officeSetting)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>कार्यालय बिवरण </strong>
-                            </legend>
+                        <fieldset class="mb-2">
+                            <legend>कार्यालय बिवरण</legend>
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="name" class="form-label">नाम *</label>
@@ -228,10 +226,8 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>ठेगाना</strong>
-                            </legend>
+                        <fieldset class="mb-2">
+                            <legend>ठेगाना</legend>
                             @livewire('address',['address'=>array_merge($officeSetting->address,$officeSetting->ward)])
                         </fieldset>
 
@@ -239,92 +235,83 @@
                             Save
                         </button>
                     </form>
-                    @livewire('office-header-livewire')
+
                 </div>
             </div>
         </div>
     </div>
+
+        @livewire('office-header-livewire')
 
     <div class="row">
         <div class="col-md-12">
             <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="mb-0 header-title">कार्यालयको नाम</h4>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <fieldset class="border p-2 mb-2">
-                        <legend class="font-16 text-info">
-                            <strong>कार्यालय विवरण </strong>
-                        </legend>
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-sm mb-0 table-striped table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>क्र.स</th>
-                                        <th>शिर्षक</th>
-                                        <th>फन्ट</th>
-                                        <th>फन्ट साइज</th>
-                                        <th>स्थान</th>
-                                        <th>#</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @forelse($officeHeaders as $officeheader)
-                                        <tr>
-                                            <td>{{$loop->iteration}}</td>
-                                            <td>{{$officeheader->title}}</td>
-                                            <td>{{$officeheader->font}}</td>
-                                            <td>{{$officeheader->font_size}}</td>
-                                            <td>{{$officeheader->position}}</td>
-                                            <td>
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>शिर्षक</th>
+                                <th>फन्ट</th>
+                                <th>फन्ट साइज</th>
+                                <th>स्थान</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($officeHeaders as $officeheader)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$officeheader->title}}</td>
+                                    <td>{{$officeheader->font}}</td>
+                                    <td>{{$officeheader->font_size}}</td>
+                                    <td>{{$officeheader->position}}</td>
+                                    <td>
 
-                                                @can('officeHeader_edit')
-                                                    <a data-bs-type="edit"
-                                                       href="{{route('admin.officeHeader.edit',$officeheader)}}"
-                                                       class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                        <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                                    </a>
-                                                @endcan
+                                        @can('officeHeader_edit')
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.officeHeader.edit',$officeheader)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
 
 
-                                                <form action="{{route('admin.officeHeader.destroy',$officeheader)}}"
-                                                      method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    @can('officeHeader_delete')
-                                                        <button data-bs-type="delete"
-                                                                class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                            <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                        </button>
-                                                    @endcan
-                                                </form>
+                                        <form action="{{route('admin.officeHeader.destroy',$officeheader)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            @can('officeHeader_delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            @endcan
+                                        </form>
 
-                                            </td>
-                                        </tr>
-                                    @empty
+                                    </td>
+                                </tr>
+                            @empty
 
-                                    @endforelse
-                                    </tbody>
+                            @endforelse
+                            </tbody>
 
-                                </table>
-                            </div>
-                        </div>
-                    </fieldset>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-        @push('style')
-            <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-            <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-        @endpush
         @push('scripts')
-            <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-            <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+            <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+            <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
         @endpush
-
-{{--    @push('scripts')--}}
-{{--        <script src="{{asset('assets/backend/ckEditor/ckEditor.js')}}"></script>--}}
-{{--        <script src="{{asset('assets/backend/ckEditor/init/editor.js')}}"></script>--}}
-{{--    @endpush--}}
 
 @endsection

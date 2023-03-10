@@ -42,8 +42,8 @@ enum FeatureTypeEnum: string
     public static function getSettingUrl(self $value): string
     {
         return match ($value) {
-            self::SMS => route('admin.sms-setting'),
-            self::MAIL => route('admin.mail-setting'),
+            self::SMS => route('admin.featureSetting.sms-setting'),
+            self::MAIL => route('admin.featureSetting.mail-setting'),
             self::PIN => '',
         };
     }

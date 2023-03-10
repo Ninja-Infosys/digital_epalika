@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.ethnicity.index')}}">जातियता</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">जातियता सम्पादन</li>
                     </ol>
@@ -26,17 +26,17 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">जातियता सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.ethnicity.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.generalSetting.ethnicity.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> जातियता सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.ethnicity.update',$ethnicity)}}" method="post">
+                    <form action="{{route('admin.generalSetting.ethnicity.update',$ethnicity)}}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">जातियता *</label>
                                 <input id="title" type="text" name="title" placeholder="जातियता"
                                        class="form-control @error('title') is-invalid @enderror"

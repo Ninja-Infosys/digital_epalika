@@ -65,31 +65,26 @@ Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
 
     //    sms
-    Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
     Route::get('featureActivation/{featureActivation}', [FeatureActivationController::class, 'updateFeatureActivation'])->name('update-feature-activation');
 
 //    sms setting
-    Route::get('sms', [SmsSettingController::class, 'smsSetting'])->name('sms-setting');
     Route::put('update-samaya-sms-config', [SmsSettingController::class, 'updateSamayaSmsConfig'])->name('update-samaya-sms-config');
     Route::put('update-aakash-sms-config', [SmsSettingController::class, 'updateAakashSmsConfig'])->name('update-aakash-sms-config');
 
 //    mail setting
-    Route::get('mail', [MailSettingController::class, 'mailSetting'])->name('mail-setting');
     Route::put('update-mail-setting', [MailSettingController::class, 'updateMailSetting'])->name('update-mail-setting');
     Route::post('send-test-mail', [MailSettingController::class, 'sendTestMail'])->name('send-test-mail');
 
-
-    Route::resource('occupation', OccupationController::class);
-    Route::resource('ethnicity', EthnicityController::class);
-    Route::resource('fiscalYear', FiscalYearController::class);
-    Route::resource('emergencyNumber', EmergencyNumberController::class);
-
-    Route::resource('department', DepartmentController::class);
-    Route::resource('designation', DesignationController::class);
-
-    Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
-    Route::resource('branch', BranchController::class);
-
+    Route::prefix('generalSetting')->as('generalSetting.')->group(function () {
+        Route::resource('occupation', OccupationController::class);
+        Route::resource('ethnicity', EthnicityController::class);
+        Route::resource('fiscalYear', FiscalYearController::class);
+        Route::resource('emergencyNumber', EmergencyNumberController::class);
+        Route::resource('department', DepartmentController::class);
+        Route::resource('designation', DesignationController::class);
+        Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
+        Route::resource('branch', BranchController::class);
+    });
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
         Route::get('role/{role}/letterHead',[RoleController::class,'letterHeadPage'])->name('role.letterHead');
         Route::post('role/{role}/letterHead',[RoleController::class,'letterHeadStore'])->name('role.letterHead');
@@ -105,9 +100,16 @@ Route::prefix('setting')->group(function () {
         Route::resource('unit/{unit}/internalUnitConversion', InternalUnitConversionController::class)->names('unit.internal-unit-conversion');
         Route::resource('unit/{unit}/externalUnitConversion', ExternalUnitConversionController::class)->names('unit.external-unit-conversion');
     });
-    Route::resource('officeSetting', OfficeSettingController::class);
+    Route::prefix('featureSetting')->as('featureSetting.')->group(function (){
+        Route::get('sms', [SmsSettingController::class, 'smsSetting'])->name('sms-setting');
+        Route::get('mail', [MailSettingController::class, 'mailSetting'])->name('mail-setting');
+        Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
+    });
+    Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
+        Route::resource('officeSetting', OfficeSettingController::class);
+        Route::resource('letterHead', LetterHeadController::class)->only('index','store');
+    });
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
-    Route::resource('letterHead', LetterHeadController::class)->only('index','store');
 });
 
 //file
