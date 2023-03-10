@@ -34,7 +34,7 @@
                     <form action="{{route('admin.revenue.setting.taxPayerType.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -49,7 +49,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="code" class="form-label">कोड *</label>
                                 <input
                                     type="text"
