@@ -13,6 +13,7 @@
     <!-- App css -->
     <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
     <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media='screen,print'/>
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/select2.min.css')}}" type="text/css"/>
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/sweetalert2.min.css')}}">
@@ -49,8 +50,10 @@
 
 @stack('scripts')
 @livewireScripts
-
-<script src="{{asset('assets/backend/js/custom.js')}}"></script>
+<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/plugins/select2.min.js')}}"></script>
+<script src="{{ asset('assets/backend/js/custom.js') }}"></script>
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/plugins/sweetalert2.min.js')}}"></script>
 </body>
 </html>

@@ -27,6 +27,10 @@ class MapRegistrationController extends Controller
 
         return view('emap::admin.map.map-registration.create', compact('mapApply'));
     }
+     public function show(MapApply $mapApply)
+     {
+        return view('emap::admin.map.map-registration.show',compact('mapApply'));
+     }
 
     public function store(StoreMapRegistrationRequest $request, MapApply $mapApply): RedirectResponse
     {

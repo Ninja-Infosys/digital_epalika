@@ -19,32 +19,18 @@ class FourFortDetailEditLivewire extends Component
     public function mount(MapApply $mapApply): void
     {
         $this->mapApply = $mapApply;
-        $loadedFourFort = collect();
-        $mapApply->load('fourForts');
-        foreach ($mapApply->fourForts as $fourFort) {
-            $this->fourFortDetails[] = [
-                'id' => $fourFort->id ?? null,
-                'detail' => $fourFort->detail->value ?? null,
-                'east' => $fourFort->east ?? null,
-                'south' => $fourFort->south ?? null,
-                'west' => $fourFort->west ?? null,
-                'north' => $fourFort->north ?? null,
-            ];
-
-            $loadedFourFort->push($fourFort->detail);
-        }
 
         foreach (FourSideParticularEnum::cases() as $forts) {
-            if (!$loadedFourFort->contains($forts)) {
-                $this->fourFortDetails[] = [
-                    'id' => null,
-                    'detail' => $forts->value ?? null,
-                    'east' => null,
-                    'south' => null,
-                    'west' => null,
-                    'north' => null,
-                ];
-            }
+            $fourtData = $mapApply->fourForts->where('detail', $forts)->first();
+
+            $this->fourFortDetails[] = [
+                'id' => $fourtData->id ?? null,
+                'detail' => $forts->value ?? null,
+                'east' => $fourtData->east ?? null,
+                'south' => $fourtData->south ?? null,
+                'west' => $fourtData->west ?? null,
+                'north' => $fourtData->north ?? null,
+            ];
         }
     }
 
@@ -75,10 +61,16 @@ class FourFortDetailEditLivewire extends Component
             $this->validate();
             DB::transaction(function () {
                 $dataToSave = $this->fourFortDetails[$this->dataToEdit];
-
-                if (!empty($dataToSave['id'])) {
-                    FourFort::find($dataToSave['id'])?->update($dataToSave);
-                }
+                FourFort::updateOrCreate(
+                    ['map_apply_id' => $this->mapApply->id, 'id' => $dataToSave['id'] ?? null],
+                    [
+                        'detail' => $dataToSave['detail'] ?? null,
+                        'east' => $dataToSave['east'] ?? null,
+                        'south' => $dataToSave['south'] ?? null,
+                        'west' => $dataToSave['west'] ?? null,
+                        'north' => $dataToSave['north'] ?? null,
+                    ]
+                );
             });
 
             $this->reset('dataToEdit');
