@@ -11,9 +11,9 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.designation.index')}}">पद</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ पद थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">पदहरु</li>
                     </ol>
                 </div>
                 <h4 class="page-title">पद थप्नुहोस्</h4>
@@ -27,19 +27,17 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पद थप्नुहोस्</h4>
-                        <a href="{{route('admin.designation.index')}}"
+                        <a href="{{route('admin.generalSetting.designation.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> पद सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.designation.store')}}" method="post"
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.generalSetting.designation.store')}}" method="post">
                         @csrf
-                        <div class=" col-md-12 p-2 mb-2">
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="title" class="form-label">पद *</label>
                                     <input id="title" type="text" name="title" placeholder="पद"
                                            class="form-control @error('title') is-invalid @enderror"
@@ -49,7 +47,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
                         <button type="submit" class="btn btn-primary">
                             पेश गर्नुहोस्
                         </button>

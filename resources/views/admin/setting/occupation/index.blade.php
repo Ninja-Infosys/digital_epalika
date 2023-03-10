@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.occupation.index')}}">पेसा</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">पेसा विवरण</li>
                     </ol>
@@ -27,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> पेसाहरु</h4>
                         @can('occupation_create')
-                            <a href="{{route('admin.occupation.create')}}"
+                            <a href="{{route('admin.generalSetting.occupation.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -51,18 +51,18 @@
                                     <td>{{$occupation->title}}</td>
                                     <td>
                                         @can('occupation_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.occupation.edit', $occupation)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.occupation.edit', $occupation)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('occupation_delete')
-                                            <form action="{{route('admin.occupation.destroy', $occupation)}}"
+                                            <form action="{{route('admin.generalSetting.occupation.destroy', $occupation)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

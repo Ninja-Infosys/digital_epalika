@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.fiscalYear.index')}}">आर्थिक बर्ष</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आर्थिक बर्ष</li>
                     </ol>
@@ -30,7 +30,7 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('fiscalYear_create')
-                                <a href="{{route('admin.fiscalYear.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.generalSetting.fiscalYear.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -55,13 +55,13 @@
                                     </td>
                                     <td>
                                         @can('user_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.fiscalYear.edit',$fiscalYear)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.fiscalYear.edit',$fiscalYear)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('user_delete')
-                                            <form action="{{route('admin.fiscalYear.destroy',$fiscalYear)}}"
+                                            <form action="{{route('admin.generalSetting.fiscalYear.destroy',$fiscalYear)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

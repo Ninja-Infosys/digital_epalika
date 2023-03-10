@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.emergencyNumber.index')}}">आपतकालीन सम्पर्क</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आपतकालीन सम्पर्क विवरण</li>
                     </ol>
@@ -27,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> आपतकालीन सम्पर्क सूची</h4>
                         @can('emergencyNumber_create')
-                            <a href="{{route('admin.emergencyNumber.create')}}"
+                            <a href="{{route('admin.generalSetting.emergencyNumber.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -56,13 +56,13 @@
 
                                     <td>
                                         @can('emergencyNumber_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.emergencyNumber.edit', $EmergencyNumber)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.emergencyNumber.edit', $EmergencyNumber)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
                                         @can('emergencyNumber_delete')
-                                            <form action="{{route('admin.emergencyNumber.destroy', $EmergencyNumber)}}"
+                                            <form action="{{route('admin.generalSetting.emergencyNumber.destroy', $EmergencyNumber)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

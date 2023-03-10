@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.emergencyNumber.index')}}">आपतकालिन सम्पर्क</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आपतकालिन सम्पर्क थप गर्नुहोस्</li>
                     </ol>
@@ -26,16 +26,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ आपतकालिन सम्पर्क थप्नुहोस्</h4>
-                        <a href="{{route('admin.emergencyNumber.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.generalSetting.emergencyNumber.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आपतकालिन सम्पर्क सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.emergencyNumber.store')}}" method="post">
+                    <form action="{{route('admin.generalSetting.emergencyNumber.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="type" class="form-label">प्रकार आबश्यक छ *</label>
                                 <input id="title" type="text" name="type" placeholder="प्रकार आबश्यक छ "
                                        class="form-control @error('type') is-invalid @enderror"
@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">शिर्षक आबस्यक छ *</label>
                                 <input id="title" type="text" name="title" placeholder="शिर्षक आबस्यक छ"
                                        class="form-control @error('title') is-invalid @enderror"
@@ -55,7 +55,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12-off mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="contact_no" class="form-label">सम्पर्क नं. आबश्यक छ *</label>
                                 <input id="title" type="text" name="contact_no" placeholder="सम्पर्क नं. आबश्यक छ"
                                        class="form-control @error('contact_no') is-invalid @enderror"

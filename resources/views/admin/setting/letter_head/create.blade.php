@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.letterHead.store')}}" method="post">
+                    <form action="{{route('admin.systemSetting.letterHead.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
