@@ -153,35 +153,6 @@
                 }
             });
         },
-        checkPin: function () {
-            $(document.body).delegate('#pinData', 'submit', function (e) {
-                e.preventDefault();
-                const pin = $("input[name=pin]").val();
-                const submitButton = $("#submitBtn");
-                const url = $(this).attr('data');
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: {
-                        pin: pin,
-                    },
-                    beforeSend: function () {
-                        submitButton.attr('disabled', true);
-                        submitButton.html("<i class='fa fa-spinner fa-spin'></i> loading");
-                    },
-                    success: function (response) {
-                        toastmessage(response.message,'success')
-                        $('#staticBackdrop').modal('hide');
-
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        submitButton.attr('disabled', false);
-                        submitButton.html("पेश गर्नुहोस्");
-                        $("#error_message").html(XMLHttpRequest.responseJSON.message);
-                    },
-                });
-            });
-        },
         cacheClear: function () {
             $('.cacheButton').on('click', function (e) {
                 const cacheButton = $("#cacheBtn");
@@ -249,8 +220,7 @@
                                 type: 'POST',
                                 data: {pin: pin},
                                 success: function (response) {
-                                    console.log(response, response.valid);
-                                    if (response === true) {
+                                    if (response.status === true) {
                                         resolve();
                                     } else {
                                         extra.invalidPin()
@@ -265,13 +235,13 @@
                     allowOutsideClick: () => !swal.isLoading(),
                     backdrop: true
                 }).then((result) => {
+                    console.log(result)
                     if (result.value) {
-                        // get value in data bs type
-                        var type = $(this).data('bs-type');
+                        const type = $(this).data('bs-type');
+                        console.log(type);
                         if (type === 'delete') {
                             $(this).closest('form').submit();
                         } else if (type === 'edit') {
-                            // get href value
                             window.location.href = $(this).attr('href');
                         }
                     }
@@ -324,7 +294,7 @@
             window.addEventListener('toast_message', event => {
                 toastmessage(event.detail.title,event.detail.type)
             })
-        }
+        },
     };
     $(document).ready(function () {
         // plugins
@@ -332,7 +302,6 @@
         plugins.chartInit();
         plugins.fooTable()
         // extra
-        extra.checkPin();
         extra.addMore();
         extra.removeParent();
         extra.confirmPin();
@@ -344,7 +313,6 @@
         extra.listenLivewireEvent();
     });
 })(jQuery);
-
 function toastmessage(message, type) {
     swal.fire({
         title: message,
@@ -357,12 +325,31 @@ function toastmessage(message, type) {
         icon: type,
     });
 }
-
 function copyText(el) {
     try {
         navigator.clipboard.writeText(el);
         toastmessage('Copied to clipboard', 'success')
     } catch (err) {
         toastmessage('Unable to copy', 'error')
+    }
+}
+function openFileModal(title, extension, url) {
+    $('#file-offcanvas').offcanvas('show');
+    $('#file-offcanvas-label').html(title + '.' + extension);
+    if (extension === 'pdf') {
+        $('#file-iframe').show();
+        $('#file-img').hide();
+        $('#file-iframe').attr('src', url);
+        $('#file-iframe').attr('width', '100%');
+        $('#file-iframe').attr('height', '100%');
+    } else if (['jpg', 'jpeg', 'png'].includes(extension)) {
+        $('#file-img').show();
+        $('#file-iframe').hide();
+        $('#file-img').attr('src', url);
+    } else {
+        $('#file-iframe').hide();
+        $('#file-img').hide();
+        $('#file-icon').show();
+        $('#file-icon').attr('class', 'fa fa-file');
     }
 }

@@ -54,7 +54,6 @@
 @stack('scripts')
 @livewireScripts
 
-{{--<script src="{{asset('js/newRelic.min.js')}}"></script>--}}
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/custom.js')}}"></script>
 </body>

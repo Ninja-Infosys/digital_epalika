@@ -69,7 +69,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
+                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}"
                                            title="विवरण हेर्नुहोस्">
                                             <i class="fa fa-eye"></i>
