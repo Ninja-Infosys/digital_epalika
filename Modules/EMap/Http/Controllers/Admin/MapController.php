@@ -5,6 +5,7 @@ namespace Modules\EMap\Http\Controllers\Admin;
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Notifications\ApplyMapNoticeNotification;
+use App\Notifications\MapApplyNotification;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -162,5 +163,16 @@ class MapController extends Controller
                 'file' => $document->store('emapTemplateFile', 'public'),
             ]);
         }
+    }
+
+    public function updateStatus(Request $request,MapApply $mapApply,ApplicationFormTypeEnum $applicationFormTypeEnum)
+    {
+
+        $mapApply->update([
+            'sent_to_organization'=>$request->input('sent_to_organization')
+        ]);
+        Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
+        toast(' सफलता पुर्बक आवधिक गरियो', 'success');
+        return back();
     }
 }

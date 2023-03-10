@@ -52,11 +52,27 @@
                         <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                         <td>{{$mapApply->organization->name ?? ''}}</td>
                         <td>
+                        @if($mapApply->sent_to_organization=='Accept')
                             <a href="{{route('emap.admin.mapApply.mapRegistration.index', $mapApply)}}"
-                               type="button" class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
+                               class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
                                 <i class="fa fa-{{empty($mapApply->registration_no) ? 'times-circle':  'check-circle'}}"></i>
                                 दर्ता {{empty($mapApply->registration_no) ? 'गर्नुहोस्':  'भएको'}}
                             </a>
+                        @endif
+                        <form style="display: inline;" action="{{route('emap.admin.map.mapApply.updateStatus',[$mapApply,$applicationFormTypeEnum])}}" method="post">
+                            @csrf
+                            @method('put')
+                            <div class="input-group" style="width: 60%;">
+                                <select class="form-select" name="sent_to_organization" id="sent_to_organization" aria-label="Example select with button addon">
+                                    <option value="">छान्नुहोस्</option>
+                                    <option value="Unseen" {{$mapApply->sent_to_organization=="Unseen" ? 'selected':''}}>Unseen</option>
+                                    <option value="Accept" {{$mapApply->sent_to_organization=="Accept" ? 'selected':''}}>Accept</option>
+                                    <option value="Reject" {{$mapApply->sent_to_organization=="Reject" ? 'selected':''}}>Reject</option>
+                                </select>
+                                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                            </div>
+                        </form>
+
                         </td>
                         <td>
                             <div class="button-list">

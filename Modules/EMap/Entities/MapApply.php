@@ -55,6 +55,7 @@ class MapApply extends Model
         'consultant_mobile_no',
         'consultant_nec_no',
         'sent_to_admin_at',
+        'sent_to_organization',
         'application_type'
     ];
 
