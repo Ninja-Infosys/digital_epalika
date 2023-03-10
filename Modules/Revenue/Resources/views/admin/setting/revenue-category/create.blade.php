@@ -33,7 +33,7 @@
                     <form action="{{route('admin.revenue.setting.revenue-category.store')}}" method="post">
                         @csrf
                         <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="revenue_category_id" class="form-label">मुख्य वर्ग</label>
                                     <select
                                         name="revenue_category_id"
@@ -51,7 +51,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"

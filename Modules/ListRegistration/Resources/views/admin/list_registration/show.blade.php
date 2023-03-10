@@ -180,6 +180,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <a href="javascript:void(0);"
+                                                onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
                                                    class="text-muted fw-medium">{{$document->file_name}}
                                                     .{{$document->extension}}</a>
                                                 <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
@@ -200,5 +201,6 @@
                 </div>
             </div>
         </div>
+        @include('admin.inc.file-view');
     </div>
 @endsection
