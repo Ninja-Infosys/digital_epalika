@@ -15,6 +15,8 @@ use Modules\Plan\Entities\ProjectBidDetail;
 use Modules\Plan\Enums\ConsumerCommitteePostEnum;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
+use Modules\Plan\Http\Requests\ProjectAgreement\ConsumerCommitteeRequest;
+use Modules\Plan\Http\Requests\ProjectAgreement\ProjectBidDetailRequest;
 
 class ProjectAgreementController extends Controller
 {
@@ -23,33 +25,8 @@ class ProjectAgreementController extends Controller
         return view('plan::admin.project_agreement.index', compact('project'));
     }
 
-    public function storeConsumerCommittee(Request $request, Project $project)
+    public function storeConsumerCommittee(ConsumerCommitteeRequest $request, Project $project)
     {
-        $request->validate([
-            'name' => ['required'],
-            'address' => ['nullable'],
-            'phone' => ['nullable'],
-            'formation_date' => ['required'],
-            'committee_registration_date' => ['required'],
-            'meeting_date' => ['nullable'],
-            'registration_no' => ['required'],
-            'beneficiary_no' => ['required', 'integer'],
-            'experience_in_project' => ['nullable'],
-            'consumerCommitteeOfficials' => ['nullable', 'array'],
-            'consumerCommitteeOfficials.*.post' => ['required', new Enum(ConsumerCommitteePostEnum::class)],
-            'consumerCommitteeOfficials.*.name' => ['required'],
-            'consumerCommitteeOfficials.*.father_name' => ['nullable'],
-            'consumerCommitteeOfficials.*.grandfather_name' => ['nullable'],
-            'consumerCommitteeOfficials.*.address' => ['nullable'],
-            'consumerCommitteeOfficials.*.gender' => ['nullable'],
-            'consumerCommitteeOfficials.*.phone' => ['nullable'],
-            'consumerCommitteeOfficials.*.citizenship_no' => ['nullable'],
-            'operated_through' => ['required', new Enum(ProjectOperatedThroughEnum::class)],
-            'contract_date' => ['required'],
-            'project_start_date' => ['required'],
-            'project_completion_date' => ['required', 'after:form.project_start_date'],
-        ]);
-
         DB::transaction(function () use ($project, $request) {
             $project->update([
                 'operated_through' => $request->input('operated_through'),
@@ -88,57 +65,21 @@ class ProjectAgreementController extends Controller
         return redirect(route('admin.plan.project.index'));
     }
 
-    public function storeProjectBidDetail(Request $request, Project $project)
+    public function storeProjectBidDetail(ProjectBidDetailRequest $request, Project $project)
     {
-        $validated = $request->validate([
-            'bid_no' => ['nullable'],
-            'cost_estimation' => ['required', 'numeric'],
-            'notice_published_date' => ['required'],
-            'newspaper_name' => ['nullable'],
-            'contract_evaluation_decision_date' => ['nullable'],
-            'intent_notice_publish_date' => ['nullable'],
-            'contract_newspaper_name' => ['nullable'],
-            'contract_acceptance_decision_date' => ['nullable'],
-            'contract_percentage' => ['required', 'numeric'],
-            'contractor_name' => ['nullable'],
-            'contractor_address' => ['nullable'],
-            'contractor_phone' => ['nullable'],
-            'confession_number' => ['nullable'],
-            'contract_agreement_date' => ['nullable'],
-            'contract_assigned_date' => ['nullable'],
-            'bid_bond_amount' => ['nullable', 'numeric'],
-            'bid_bond_no' => ['nullable'],
-            'bid_bond_bank_name' => ['nullable'],
-            'bid_bond_issue_date' => ['nullable'],
-            'bid_bond_expiry_date' => ['nullable'],
-            'performance_bond_no' => ['nullable'],
-            'performance_bond_amount' => ['nullable', 'numeric'],
-            'performance_bond_bank' => ['nullable'],
-            'performance_bond_issue_date' => ['nullable'],
-            'performance_bond_expiry_date' => ['nullable'],
-            'performance_bond_extended_date' => ['nullable'],
-            'insurance_issue_date' => ['nullable'],
-            'insurance_expiry_date' => ['nullable'],
-            'insurance_extended_date' => ['nullable'],
-            'contract_date' => ['required'],
-            'operated_through' => ['required', new Enum(ProjectOperatedThroughEnum::class)],
-            'project_start_date' => ['required'],
-            'project_completion_date' => ['required', 'after:project_start_date'],
-        ]);
-
-        DB::transaction(function () use ($project, $validated) {
-            $projectBidDetail = ProjectBidDetail::updateOrCreate(
+        DB::transaction(function () use ($project, $request) {
+            ProjectBidDetail::updateOrCreate(
                 ['project_id' => $project->id],
-                $validated
+                $request->validated()
             );
 
             $project->update([
                 'is_contracted' => 1,
-                'operated_through' => $validated['operated_through'],
+                'operated_through' => $request->input('operated_through'),
                 'project_status' => ProjectStatusEnum::IN_PROGRESS,
-                'contract_date' => $validated['contract_date'] ?? null,
-                'project_start_date' => $validated['project_start_date'] ?? null,
-                'project_completion_date' => $validated['project_completion_date'] ?? null,
+                'contract_date' => $request->input('contract_date') ?? null,
+                'project_start_date' => $request->input('project_start_date') ?? null,
+                'project_completion_date' => $request->input('project_completion_date') ?? null,
             ]);
         });
 

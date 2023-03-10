@@ -17,9 +17,9 @@ class TechnicalCostEstimateController extends Controller
     {
         $this->checkAuthorization('technicalCostEstimate_access');  
 
-        $units = Unit::orderBy('position')->get();
+       
 
-        return view('plan::admin.technical_cost_estimate.index', compact('project','units'));
+        return view('plan::admin.technical_cost_estimate.index', compact('project'));
     }
 
     public function create(Project $project)
