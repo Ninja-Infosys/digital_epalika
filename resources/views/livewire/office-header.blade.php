@@ -1,19 +1,14 @@
 <div>
     @if (session()->has('message'))
-
         <div class="alert alert-success">
-
             {{ session('message') }}
-
         </div>
-
     @endif
-
     <form wire:submit.prevent="save">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h4 class="mb-0 header-title">कार्यालय सेटिङ</h4>
+                    <h4 class="mb-0 header-title">कार्यालयको नाम सेटअप</h4>
                     <button class="btn btn-xs btn-primary" wire:click.prevent="addOfficeHeader">
                         <i class="fa fa-plus"></i>
                     </button>
@@ -22,7 +17,7 @@
             <div class="card-body">
                 <fieldset>
                     <legend>
-                        कार्यालय बिवरण
+                        कार्यालयको नाम
                     </legend>
                     @if($officeHeaders)
                         @foreach($officeHeaders as $index=>$officeHeader)
@@ -67,7 +62,7 @@
                                         <label for="font_size.{{$index}}">फन्ट साइज *</label>
                                         <input type="text" id="font_size.{{$index}}"
                                                name="officeHeaders[{{$index}}][font_size]"
-                                               placeholder="फन्ट साइज" value="{{old('font_size')}}"
+                                               placeholder="फन्ट साइज (.rem)" value="{{old('font_size')}}"
                                                wire:model="officeHeaders.{{$index}}.font_size" class="form-control">
                                         @error("officeHeaders.$index.font_size")
                                         <p class="text-danger">{{$message}}</p>
@@ -135,7 +130,5 @@
             </div>
         </div>
     </form>
-
-
 </div>
 
