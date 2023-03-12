@@ -29,16 +29,21 @@
                     <h4 class="header-title">
                         योजना/कार्यक्रम म्याद थप
                     </h4>
-                    @can('projectDeadlineExtension_create')
-                        <a href="{{route('admin.plan.project.projectDeadlineExtension.create',$project)}}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-plus-circle"> म्याद थप्नुहोस्</i>
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('admin.plan.project.index') }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
                         </a>
-                    @endcan
+                        @can('projectDeadlineExtension_create')
+                            <a href="{{route('admin.plan.project.projectDeadlineExtension.create',$project)}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"> म्याद थप्नुहोस्</i>
+                            </a>
+                        @endcan
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

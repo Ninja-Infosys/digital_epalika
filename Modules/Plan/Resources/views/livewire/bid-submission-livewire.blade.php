@@ -3,9 +3,14 @@
         <h4 class="header-title">
             आर्थिक कारोबारको विवरण
         </h4>
-        <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
-            <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
-        </button>
+        <div class="d-flex gap-1">
+            <a href="{{ route('admin.plan.project.index') }}" class="btn btn-sm btn-outline-primary">
+                <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
+            </a>
+            <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
+                <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
+            </button>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">

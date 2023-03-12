@@ -94,8 +94,8 @@ protected Collection $revenues;
         if (Schema::hasTable('plan_areas')) {
             $planAreas = $this->setPlanData();
         }
-
-        return view('admin.dashboard', compact(['user_count',
+        return view('admin.dashboard', compact([
+            'user_count',
             'businessDetail_count',
             'planAreas',
             'activityLogs',

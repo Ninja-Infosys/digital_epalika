@@ -29,9 +29,14 @@
                     <h4 class="header-title">
                         योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
-                    <a href="{{route('admin.plan.project.uploadFilePage',$project)}}" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
-                    </a>
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('admin.plan.project.index') }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
+                        </a>
+                        <a href="{{route('admin.plan.project.uploadFilePage',$project)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
