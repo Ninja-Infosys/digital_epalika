@@ -131,6 +131,5 @@ Route::prefix('website')->as('website.')->group(function () {
 Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');
 
 //check pin
-
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
 Route::resource('pin', PinController::class);

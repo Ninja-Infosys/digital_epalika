@@ -80,6 +80,11 @@
                     @includeIf('admin.layouts.menu_list')
                 </div>
             </li>
+            <li class="d-none d-sm-inline-block">
+                <div class="nav-link waves-effect waves-light" id="light-dark-mode">
+                    <i class="fas fa-moon font-22"></i>
+                </div>
+            </li>
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                    data-bs-toggle="dropdown"
