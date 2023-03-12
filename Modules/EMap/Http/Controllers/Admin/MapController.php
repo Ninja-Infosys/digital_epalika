@@ -69,6 +69,13 @@ class MapController extends Controller
         return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum','data','noticeTypeEnum'));
     }
 
+    public function mapDetail(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
+    {
+        $mapApply->load('structureType','storeyDetails.mapFee','landDetail', 'landOwner', 'houseOwner', 'fourForts','designerDetails','applicantDetail');
+
+        return view('emap::admin.map.mapdetail', compact('mapApply', 'applicationFormTypeEnum'));
+    }
+
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
         $this->checkAuthorization('mapApplyNoticeReject_access');
