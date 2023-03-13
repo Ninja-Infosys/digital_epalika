@@ -33,6 +33,14 @@
                     </div>
                 </div>
                 <div id="printData">
+                    <div class="row mt-2 mx-2">
+                        <div class="col-md-4">
+                            <h4><b>संस्था :</b> {{ $mapApply->organization->organizationDetail->org_name_ne??'' }}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4><b>नक्सा :</b> {{ $mapApply->application_type?->label() }}</h4>
+                        </div>
+                    </div>
                     <fieldset class="mx-2">
                         <legend>
                             <h5 class="py-2">१. प्रस्तावित भवनको विवरण</h5>
