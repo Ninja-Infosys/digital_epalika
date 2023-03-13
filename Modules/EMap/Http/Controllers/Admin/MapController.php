@@ -71,7 +71,7 @@ class MapController extends Controller
 
     public function mapDetail(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
-        $mapApply->load('structureType','storeyDetails.mapFee','landDetail', 'landOwner', 'houseOwner', 'fourForts','designerDetails','applicantDetail','criteriaDetails','buildingDetails');
+        $mapApply->load('structureType','storeyDetails.mapFee','landDetail', 'landOwner', 'houseOwner', 'fourForts','designerDetails','applicantDetail','criteriaDetails','buildingDetails','organization.organizationDetail');
         $mapApply->load('attachDocument');
         return view('emap::admin.map.mapdetail', compact('mapApply', 'applicationFormTypeEnum'));
     }
