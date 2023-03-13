@@ -106,3 +106,27 @@
         </ul>
     </div>
 </li>
+
+<li class="{{request()->is('admin/plan/setting/*') ? 'active' : ''}}">
+    <a href="#sidebarPlanSetting"
+       {{request()->is('admin/plan/setting/*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span> सेटिङ</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/plan/setting/*') ? 'show' : ''}}"
+         id="sidebarPlanSetting">
+        <ul class="nav-second-level">
+            @can('planTemplate_access')
+                <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.expenseHead.index')}}">
+                        <span> खर्च शीर्षक </span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>

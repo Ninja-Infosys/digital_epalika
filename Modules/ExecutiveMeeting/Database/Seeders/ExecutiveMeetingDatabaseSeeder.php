@@ -9,6 +9,7 @@ class ExecutiveMeetingDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            CommitteeTypeTableSeeder::class,
             ExecutiveMeetingPermissionTableSeeder::class,
         ]);
     }
