@@ -50,12 +50,14 @@ class CommitteeTypeController extends Controller
 
         $committeeType->update($request->validated());
 
-        toast('समिति प्रकार सफलतापूर्वक थपियो', 'success');
+        toast('समिति प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.executiveMeeting.setting.committeeType.index'));
     }
 
     public function destroy(CommitteeType $committeeType)
     {
+        $this->checkAuthorization('committeeType_delete');
+
         $committeeType->delete();
 
         toast('समिति प्रकार सफलतापूर्वक हटाइयो', 'success');

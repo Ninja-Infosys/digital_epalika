@@ -107,9 +107,9 @@
     </div>
 </li>
 
-<li class="{{request()->routeIs('admin.executiveMeeting.setting.*') ? 'active' : ''}}">
+<li class="{{request()->is('admin/executiveMeeting/setting/*') ? 'active' : ''}}">
     <a href="#sidebarExecutiveMeetingSetting"
-       {{request()->routeIs('admin.executiveMeeting.setting.*') ? 'aria-expanded=true' : ''}}
+       {{request()->is('admin/executiveMeeting/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span> सेटिङ</span>
@@ -117,16 +117,23 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->routeIs('admin.executiveMeeting.setting.*') ? 'active' : ''}}"
+    <div class="collapse {{request()->is('admin/executiveMeeting/setting/*') ? 'active' : ''}}"
          id="sidebarExecutiveMeetingSetting">
         <ul class="nav-second-level">
             @can('committeeType_access')
-                <li class="{{request()->routeIs('admin.executiveMeeting.setting.committeeType.index') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/executiveMeeting/setting/committeeType*') ? 'active' : ''}}">
                     <a href="{{route('admin.executiveMeeting.setting.committeeType.index')}}">
                         <span> समिति प्रकार</span>
                     </a>
                 </li>
             @endcan
+                @can('committee_access')
+                    <li class="{{request()->is('admin/executiveMeeting/setting/committee*') ? 'active' : ''}}">
+                        <a href="{{route('admin.executiveMeeting.setting.committee.index')}}">
+                            <span> समिति</span>
+                        </a>
+                    </li>
+                @endcan
         </ul>
     </div>
 </li>
