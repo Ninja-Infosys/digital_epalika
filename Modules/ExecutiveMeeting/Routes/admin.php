@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\ExecutiveMeeting\Http\Controllers\Admin\CommitteeTypeController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\DashboardController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingDecisionController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingEventController;
@@ -9,6 +10,10 @@ use Modules\ExecutiveMeeting\Http\Controllers\Admin\WardCommitteeController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\CalenderController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+Route::prefix('setting')->as('setting.')->group(function (){
+    Route::resource('committeeType', CommitteeTypeController::class);
+});
 
 Route::controller(CalenderController::class)
     ->as('calendar.')

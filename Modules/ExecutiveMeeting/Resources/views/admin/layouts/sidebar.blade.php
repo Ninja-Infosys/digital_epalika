@@ -107,9 +107,9 @@
     </div>
 </li>
 
-<li class="{{request()->is('admin/plan/setting/*') ? 'active' : ''}}">
-    <a href="#sidebarPlanSetting"
-       {{request()->is('admin/plan/setting/*') ? 'aria-expanded=true' : ''}}
+<li class="{{request()->routeIs('admin.executiveMeeting.setting.*') ? 'active' : ''}}">
+    <a href="#sidebarExecutiveMeetingSetting"
+       {{request()->routeIs('admin.executiveMeeting.setting.*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span> सेटिङ</span>
@@ -117,13 +117,13 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/plan/setting/*') ? 'show' : ''}}"
-         id="sidebarPlanSetting">
+    <div class="collapse {{request()->routeIs('admin.executiveMeeting.setting.*') ? 'active' : ''}}"
+         id="sidebarExecutiveMeetingSetting">
         <ul class="nav-second-level">
-            @can('planTemplate_access')
-                <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.expenseHead.index')}}">
-                        <span> खर्च शीर्षक </span>
+            @can('committeeType_access')
+                <li class="{{request()->routeIs('admin.executiveMeeting.setting.committeeType.index') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.setting.committeeType.index')}}">
+                        <span> समिति प्रकार</span>
                     </a>
                 </li>
             @endcan

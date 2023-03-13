@@ -9,8 +9,6 @@ class CommitteeTypeTableSeeder extends Seeder
 {
     public function run()
     {
-        CommitteeType::truncate();
-
         $committeeTypes = [
             ['name' => 'नगरसभा/गाउँसभा वैठक', 'committee_no' => 1],
             ['name' => 'कार्यपालिकाको बैठक', 'committee_no' => 1],

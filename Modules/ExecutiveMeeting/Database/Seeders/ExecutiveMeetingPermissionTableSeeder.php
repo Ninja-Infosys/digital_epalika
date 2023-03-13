@@ -15,7 +15,11 @@ class ExecutiveMeetingPermissionTableSeeder extends Seeder
             'committeeType_access',
             'committeeType_create',
             'committeeType_edit',
-            'committeeType_delete'
+            'committeeType_delete',
+            'committee_access',
+            'committee_create',
+            'committee_edit',
+            'committee_delete',
         ];
 
         $this->storePermission($permissions);
