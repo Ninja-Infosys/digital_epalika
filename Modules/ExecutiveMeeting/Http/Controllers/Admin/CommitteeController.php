@@ -34,7 +34,9 @@ class CommitteeController extends Controller
     {
         $this->checkAuthorization('committee_create');
 
-        Committee::create($request->validated());
+        Committee::create($request->validated() + [
+                'user_id' => auth()->id()
+            ]);
 
         toast('समिति सफलतापूर्वक थपियो', 'success');
         return back();

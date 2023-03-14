@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('committee_type_id')->nullable()->constrained()->nullOnDelete();
             $table->string('committee_name');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
