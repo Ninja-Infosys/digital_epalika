@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
@@ -36,7 +37,7 @@ class MapController extends Controller
             ->isMapVerified($applicationFormTypeEnum)
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['registration_no','unique_id','organization.name'], request('search'));
+                    $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
             ->latest()
@@ -51,22 +52,23 @@ class MapController extends Controller
     {
         return view('emap::admin.map.notice-list', compact('mapApply', 'applicationFormTypeEnum'));
     }
+
     public function register(MapApply $mapApply): Factory|View|Application
     {
         return view('emap::admin.map.register', compact('mapApply'));
     }
 
-    public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum,NoticeTypeEnum $noticeTypeEnum)
+    public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum)
     {
         $mapApply->load(['fiscalYear', 'mapRegistration', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
 
-            $data=$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->data ??  $mapApply->getSpecificTemplateData($noticeTypeEnum)?? '';
+        $data = $mapApply->applyMapNotices->where('file_type', $noticeTypeEnum)?->first()->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? '';
 
         $districts = get_districts();
 
-        return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum','data','noticeTypeEnum'));
+        return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum', 'data', 'noticeTypeEnum'));
     }
 
     public function mapDetail(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
@@ -76,27 +78,28 @@ class MapController extends Controller
         return view('emap::admin.map.mapdetail', compact('mapApply', 'applicationFormTypeEnum'));
     }
 
-    public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
+    public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): Redirector|Application|RedirectResponse
     {
         $this->checkAuthorization('mapApplyNoticeReject_access');
 
         $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)
             ->where('file_type', $noticeTypeEnum->value)
             ->first();
-
-        if ($data->rejected_at === null) {
+        if (!empty($request->input('remarks'))) {
             $data->update([
+                'type'=>'Reject',
                 'rejected_at' => now(),
                 'remarks' => $request->input('remarks'),
             ]);
         } else {
             $data->update([
+                'type'=>'Accept',
                 'rejected_at' => null,
                 'remarks' => null,
             ]);
         }
 
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
+//        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
 
@@ -158,7 +161,7 @@ class MapController extends Controller
 
         toast('फाईल सफलता पुर्बक थपियो', 'success');
 
-        return redirect()->route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,$noticeTypeEnum]);
+        return redirect()->route('emap.admin.map.mapApply.show', [$mapApply, $applicationFormTypeEnum, $noticeTypeEnum]);
     }
 
     private function uploadDocuments($request, $mapApplyData): void
@@ -172,12 +175,19 @@ class MapController extends Controller
         }
     }
 
-    public function updateStatus(Request $request,MapApply $mapApply,ApplicationFormTypeEnum $applicationFormTypeEnum)
+    public function updateStatus(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
 
-        $mapApply->update([
-            'sent_to_organization'=>$request->input('sent_to_organization')
-        ]);
+        DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
+            $mapApply->update([
+                'sent_to_organization' => $request->input('sent_to_organization')
+            ]);
+            if ($mapApply->sent_to_organization == 'Reject') {
+                $mapApply->update([
+                    'sent_to_admin_at' => null
+                ]);
+            }
+        });
         Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
         toast(' सफलता पुर्बक आवधिक गरियो', 'success');
         return back();

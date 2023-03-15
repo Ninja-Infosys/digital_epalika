@@ -33,6 +33,7 @@
                     <th scope="col">क्र.स.</th>
                     <th scope="col">निबेदन/प्रतिबेदनको किसिम</th>
                     <th>स्थिति</th>
+                    <th>कारण</th>
                     <th>घरधनिको निबेदन को स्थिति</th>
                     <th>#</th>
                 </tr>
@@ -43,13 +44,20 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$noticeTypeEnum->label()}}</td>
                         <td class="text-center">
-                            @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->count() >0)
+                            @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->type=='Accept')
                                 <i class="fas fa-check"></i>
                             @endif
+                            @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->type=='Reject')
+                                <i class="fas fa-times"></i>
+                            @endif
+                        </td>
+                        <td>
+                            {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->remarks??''}}
                         </td>
                         <td class="text-center">
                             @if($fileTypes->contains($noticeTypeEnum) && $noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::HOUSE_OWNER)
-                                <a href="{{route('organization.admin.updateStatusOrganization',[$mapApply,$noticeTypeEnum->value])}}" class="btn {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'btn-outline-success':'btn-outline-danger'}} btn-xs">
+                                <a href="{{route('organization.admin.updateStatusOrganization',[$mapApply,$noticeTypeEnum->value])}}"
+                                   class="btn {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'btn-outline-success':'btn-outline-danger'}} btn-xs">
                                     <i class="fa {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'fa-check':'fa-times'}}"></i>
                                 </a>
                             @endif
@@ -57,11 +65,13 @@
                         </td>
                         <td class="text-center">
                             @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::CONSULTANT)
-                                <a href="{{route('organization.admin.getTemplateData',[$mapApply,$noticeTypeEnum->value])}}"
-                                   class="btn btn-outline-primary btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                    <span>फार्म भर्नुहोस्</span>
-                                </a>
+                                @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->type!=='Accept')
+                                    <a href="{{route('organization.admin.getTemplateData',[$mapApply,$noticeTypeEnum->value])}}"
+                                       class="btn btn-outline-primary btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                        <span>फार्म भर्नुहोस्</span>
+                                    </a>
+                                @endif
                             @endif
 
                         </td>

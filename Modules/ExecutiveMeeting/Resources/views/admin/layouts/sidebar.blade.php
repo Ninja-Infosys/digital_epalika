@@ -4,22 +4,13 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('executiveMunicipalCommittee_access')
-    <li class="{{request()->is('admin/executivemeeting/municipalCommittee*') ? 'active' : ''}}">
-        <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
+    <li class="{{request()->is('admin/executivemeeting/committeeMember*') ? 'active' : ''}}">
+        <a href="{{route('admin.executiveMeeting.committeeMember.index')}}">
             <i class="fa fa-list-alt"></i>
-            <span> पालिका कार्यसमितिहरु</span>
+            <span> समिति सदस्य</span>
         </a>
     </li>
-@endcan
-@can('executiveWardCommittee_access')
-    <li class="{{request()->is('admin/executivemeeting/wardCommittee*') ? 'active' : ''}}">
-        <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
-            <i class="fa fa-list-alt"></i>
-            <span> वडा समितिहरु</span>
-        </a>
-    </li>
-@endcan
+
 
 <li class="{{request()->is('admin/executivemeeting/municipal/*') ? 'active' : ''}}">
     <a href="#sidebarExecutiveMeetingMunicipal"

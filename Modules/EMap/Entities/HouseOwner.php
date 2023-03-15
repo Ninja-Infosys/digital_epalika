@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HouseOwner extends Model
@@ -20,7 +21,7 @@ class HouseOwner extends Model
     ];
 
     protected $fillable = [
-        'map_apply_id',
+//        'map_apply_id',
         'name',
         'phone',
         'father_name',
@@ -41,5 +42,10 @@ class HouseOwner extends Model
     public function citizenshipIssueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
+    }
+
+    public function mapApplies(): BelongsToMany
+    {
+        return $this->belongsToMany(MapApply::class);
     }
 }

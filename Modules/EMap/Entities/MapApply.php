@@ -8,6 +8,7 @@ use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -113,9 +114,9 @@ class MapApply extends Model
         return $this->hasOne(LandOwner::class);
     }
 
-    public function houseOwner(): HasOne
+    public function houseOwner(): BelongsToMany
     {
-        return $this->hasOne(HouseOwner::class);
+        return $this->belongsToMany(HouseOwner::class);
     }
 
     public function storeyDetails(): HasMany

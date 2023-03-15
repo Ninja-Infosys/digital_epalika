@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\EMap\Entities\HouseOwner;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\MapSetting;
@@ -269,7 +270,14 @@ class MapApplicationForm extends Component
 
             $mapApply->landOwner()->create($this->landOwner);
 
-            $mapApply->houseOwner()->create($this->houseOwner);
+
+            if($houseOwner=HouseOwner::where('citizenship_no',$this->houseOwner['citizenship_no'])->where('phone',$this->houseOwner['phone'])->first()){
+                $houseOwner->mapApplies()->attach([$mapApply->id]);
+            }else{
+                $houseOwner=HouseOwner::create($this->houseOwner);
+                $houseOwner->mapApplies()->attach([$mapApply->id]);
+            }
+
 
             $mapApply->applicantDetail()->create($this->applicantDetail);
 

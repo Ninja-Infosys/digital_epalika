@@ -50,7 +50,7 @@ class MapApplyController extends Controller
 
     public function mapFormInfo(MapApply $mapApply)
     {
-        $mapApply->load('applyMapNotices:map_apply_id,file_type,sent_to_admin_at');
+        $mapApply->load('applyMapNotices:map_apply_id,file_type,sent_to_admin_at,type,remarks');
         $fileTypes = $mapApply->applyMapNotices->pluck('file_type');
 
         return view('emap::organization.map-applies.map_form_info', compact('mapApply', 'fileTypes'));
@@ -76,9 +76,9 @@ class MapApplyController extends Controller
         $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
             $mapApplyData = ApplyMapNotice::updateOrCreate(
                 [
-                'map_apply_id' => $mapApply->id,
-                'file_type' => $noticeTypeEnum->value,
-            ],
+                    'map_apply_id' => $mapApply->id,
+                    'file_type' => $noticeTypeEnum->value,
+                ],
                 [
                     'data' => $request->input('data'),
                 ]
@@ -118,8 +118,12 @@ class MapApplyController extends Controller
 
     public function updateStatus(MapApply $mapApply)
     {
+        if (empty($mapApply->attachDocument)) {
+            toast('फाइल अपलोड गर्नुहोस्', 'error');
+            return back();
+        }
         $mapApply->update([
-           'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
+            'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
         ]);
 
         Notification::send(User::all(), new MapApplyNotification($mapApply));

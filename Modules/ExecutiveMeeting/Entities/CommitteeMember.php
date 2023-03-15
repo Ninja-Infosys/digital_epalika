@@ -5,11 +5,14 @@ namespace Modules\ExecutiveMeeting\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CommitteeMember extends Model
 {
@@ -36,6 +39,14 @@ class CommitteeMember extends Model
         'position',
         'user_id'
     ];
+
+    protected function Photo():Attribute
+    {
+        return Attribute::make(
+            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn($value, $attributes) => (!empty($value) && !is_string($value)) ? $value->store('committeeMember/' . Str::slug($attributes['name'], '_'), 'public'):null,
+        );
+    }
 
     public function committee(): BelongsTo
     {
