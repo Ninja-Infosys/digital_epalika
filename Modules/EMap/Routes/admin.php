@@ -8,6 +8,7 @@ use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\MapSettingController;
+use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -48,6 +49,7 @@ Route::prefix('files')->as('files.')->group(function () {
 
 //report
 
+Route::resource('oldMap', OldMapController::class);
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');

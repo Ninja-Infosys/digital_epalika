@@ -34,6 +34,11 @@ class HouseOwner extends Model
         'ward_no',
     ];
 
+    public function oldMaps(): BelongsToMany
+    {
+        return $this->belongsToMany(OldMap::class);
+    }
+
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
