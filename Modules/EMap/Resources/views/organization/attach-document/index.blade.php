@@ -141,7 +141,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->land_owner_document_size ??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('land_owner_document')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -170,7 +170,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->land_revenue_document_size??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('land_revenue_document')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -199,7 +199,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->land_owner_citizenship_size ??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('land_owner_citizenship')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -228,7 +228,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->blue_print_size??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('blue_print')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -257,7 +257,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->pass_document_size??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('pass_document')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -286,7 +286,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->designer_document_size??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('designer_document')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -315,7 +315,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->permission_document_size??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('permission_document')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
@@ -344,7 +344,7 @@
                                       <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->inheritance_document_size??'')}}</p>
                                   </div>
                                   <div class="col-2">
-                                      <a href="{{route('admin.file.download', $mapApply)}}"
+                                      <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('inheritance_document')])}}"
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
