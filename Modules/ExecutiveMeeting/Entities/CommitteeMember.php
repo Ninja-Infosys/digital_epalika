@@ -43,7 +43,7 @@ class CommitteeMember extends Model
     protected function Photo():Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
+            get: static fn($value) => $value ? Storage::disk('public')->url($value) : asset('assets/backend/images/user_icon.jpg'),
             set: static fn($value, $attributes) => (!empty($value) && !is_string($value)) ? $value->store('committeeMember/' . Str::slug($attributes['name'], '_'), 'public'):null,
         );
     }
