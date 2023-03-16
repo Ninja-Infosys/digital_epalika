@@ -1,0 +1,218 @@
+@extends('admin.layouts.master')
+
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">बैठक क्यालेन्डर</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">बैठक क्यालेन्डर</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="meeting-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="staticBackdropLabel">नयाँ बैठक विवरण थप्नुहोस्</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="meetingForm" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label for="committee_id" class="form-label">समिति *</label>
+                                <select
+                                    name="committee_id"
+                                    class="form-control"
+                                    id="committee_id" required>
+                                    <option value="">-- छान्नुहोस् ---</option>
+                                    @foreach($committees as $committee)
+                                        <option
+                                            value="{{$committee->id}}">
+                                            {{$committee->committee_name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="meeting_name" class="form-label">बैठकको शिर्षक *</label>
+                                <input
+                                    type="text"
+                                    name="meeting_name"
+                                    value="{{old('meeting_name')}}"
+                                    class="form-control"
+                                    id="meeting_name"
+                                    placeholder="नाम"
+                                    required
+                                />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="start_date" labelNe="सुरू मिति *"
+                                    nameEn="en_start_date" labelEn="Start Date"
+                                    container="#meeting-modal"
+                                    :getTodayDate="false"
+                                />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="end_date" labelNe="अन्तिम मिति"
+                                    nameEn="en_end_date" labelEn="End Date"
+                                    container="#meeting-modal"
+                                    :getTodayDate="false"
+                                />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="recurrence" class="form-label">पुनरावृत्ति *</label>
+                                <select
+                                    name="recurrence"
+                                    class="form-control"
+                                    id="recurrence" required>
+                                    <option value="">-- छान्नुहोस् ---</option>
+                                    @foreach(\Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum::cases() as $recurrence)
+                                        <option
+                                            value="{{$recurrence->value}}">
+                                            {{$recurrence->label()}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="recurrence_end_date" labelNe="पुनरावृत्ति अन्तिम मिति"
+                                    nameEn="en_recurrence_end_date" labelEn="Recurrence End Date"
+                                    container="#meeting-modal"
+                                    :getTodayDate="false"
+                                />
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="description" class="form-label">सन्देश *</label>
+                                <textarea
+                                    name="description"
+                                    id="description"
+                                    class="form-control"
+                                    placeholder="विवरण"
+                                    required
+                                    cols="30" rows="3">{{old('description')}}</textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary">
+                            Save
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @push('style')
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
+    @endpush
+
+    @push('scripts')
+        <!-- plugin js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
+        <!-- Calendar init -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('#calendar').fullCalendar({
+                    selectable: true,
+                    droppable: true,
+                    editable: true,
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    events: "{{route('admin.executiveMeeting.calendar.meetingCalendar')}}",
+                    select: function(start, end, jsEvent, view) {
+                        $('#meetingForm').trigger('reset')
+                        $('#meeting-modal').modal('toggle');
+                    },
+                    eventClick: function(calEvent, jsEvent, view) {
+                        alert('hello event')
+                        //alert('Event: ' + calEvent.title);
+                        //alert('View: ' + view.name);
+                        // change the day's background color just for fun
+                        //$(this).css('background-color', 'red');
+                    }
+                });
+
+                $(document).delegate('#meetingForm','submit',function (e){
+                    e.preventDefault()
+                    $.ajax({
+                        type: "post",
+                        url: "{{route('admin.executiveMeeting.meeting.store')}}",
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+                            $('#submitBtn').prop('disabled', true);
+                            $('#submitBtn').html("<i class='fa fa-spinner fa-spin'></i>");
+                        },
+                        success: function (resp) {
+                            $('#submitBtn').prop('disabled', false);
+                            $('#calendar').fullCalendar('refetchEvents');
+                            $('#submitBtn').html("पेश गर्नुहोस्");
+                            toastMessage('success', resp.message)
+                            $('#meeting-modal').modal('toggle')
+                            $('#meetingForm').trigger('reset')
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $('#submitBtn').prop('disabled', false)
+                            $('#submitBtn').html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    });
+                })
+
+                function toastMessage(type, title) {
+                    swal.fire({
+                        title: title,
+                        toast: true,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        width: 450,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: type,
+                    });
+                }
+            });
+        </script>
+    @endpush
+@endsection

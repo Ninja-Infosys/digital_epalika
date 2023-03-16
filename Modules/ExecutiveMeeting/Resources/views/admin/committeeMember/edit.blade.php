@@ -28,26 +28,29 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">समिति सदस्य सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.committeeMember.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.executiveMeeting.committeeMember.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> समिति सदस्य बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.committeeMember.update',$committeeMember)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.executiveMeeting.committeeMember.update',$committeeMember)}}"
+                          method="post" enctype="multipart/form-data">
                         @csrf
-
+                        @method('PUT')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>व्यक्तिगत विवरण </strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="committee_id" class="form-label">समिति  *</label>
+                                    <label for="committee_id" class="form-label">समिति *</label>
                                     <select name="committee_id" id="committee_id" class="form-select">
                                         <option value="">--छान्नुहोस्--</option>
                                         @foreach($committees as $committee)
-                                            <option value="{{$committee->id}}" {{old('committee_id',$committeeMember->committee_id)==$committee->id ? 'selected':''}}>{{$committee->committee_name}}</option>
+                                            <option
+                                                value="{{$committee->id}}" {{old('committee_id',$committeeMember->committee_id)==$committee->id ? 'selected':''}}>{{$committee->committee_name}}</option>
                                         @endforeach
                                     </select>
                                     @error('committee_id')
@@ -55,7 +58,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">नाम  *</label>
+                                    <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -70,7 +73,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="designation" class="form-label">पद  *</label>
+                                    <label for="designation" class="form-label">पद *</label>
                                     <input
                                         type="text"
                                         name="designation"
@@ -98,7 +101,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="email" class="form-label">इमेल  </label>
+                                    <label for="email" class="form-label">इमेल </label>
                                     <input
                                         type="text"
                                         name="email"
@@ -112,7 +115,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">फोन नम्बर *  </label>
+                                    <label for="phone" class="form-label">फोन नम्बर * </label>
                                     <input
                                         type="text"
                                         name="phone"
@@ -127,7 +130,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="position" class="form-label">स्थान  </label>
+                                    <label for="position" class="form-label">स्थान </label>
                                     <input
                                         type="number"
                                         name="position"
@@ -146,9 +149,12 @@
                             <legend class="font-16 text-info">
                                 <strong>ठेगाना</strong>
                             </legend>
-                            <x-address-component :local-body-id="$committeeMember->local_body_id" :district-id="$committeeMember->district_id" :province-id="$committeeMember->province_id" :ward-no="$committeeMember->ward_no"/>
+                            <x-address-component :local-body-id="$committeeMember->local_body_id"
+                                                 :district-id="$committeeMember->district_id"
+                                                 :province-id="$committeeMember->province_id"
+                                                 :ward-no="$committeeMember->ward_no"/>
                             <div class="col-md-6 mb-2">
-                                <label for="tole" class="form-label">टोल  </label>
+                                <label for="tole" class="form-label">टोल </label>
                                 <input
                                     type="text"
                                     name="tole"

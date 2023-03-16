@@ -4,26 +4,24 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\ExecutiveMeeting\Entities\Committee;
+use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
-use Modules\ExecutiveMeeting\Transformers\MeetingEventResource;
+use Modules\ExecutiveMeeting\Transformers\MeetingResource;
 
 class CalenderController extends Controller
 {
-    public function index($event_for)
+    public function index()
     {
-        $this->checkAuthorization($event_for . 'MeetingEvent_access');
+        $committees = Committee::all();
 
-        return view('executivemeeting::admin.meeting_event.calendar', compact('event_for'));
+        return view('executivemeeting::admin.meeting.calendar',compact('committees'));
     }
 
-    public function getData(Request $request, $event_for)
+    public function getData(Request $request)
     {
-        $meetingEvents = MeetingEvent::where(function ($query) use ($event_for) {
-            if ($event_for) {
-                $query->where('event_for', $event_for);
-            }
-        })->get();
+        $meetings = Meeting::get();
 
-        return MeetingEventResource::collection($meetingEvents);
+        return MeetingResource::collection($meetings);
     }
 }

@@ -4,11 +4,9 @@ namespace Modules\ExecutiveMeeting\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
-use Modules\ExecutiveMeeting\Entities\WardCommittee;
+use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Observers\CommitteeMemberObserver;
-use Modules\ExecutiveMeeting\Observers\MeetingEventObserver;
-use Modules\ExecutiveMeeting\Observers\WardCommitteeObserver;
+use Modules\ExecutiveMeeting\Observers\MeetingObserver;
 
 class ExecutiveMeetingServiceProvider extends ServiceProvider
 {
@@ -35,8 +33,7 @@ class ExecutiveMeetingServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         CommitteeMember::observe(CommitteeMemberObserver::class);
-        WardCommittee::observe(WardCommitteeObserver::class);
-        MeetingEvent::observe(MeetingEventObserver::class);
+        Meeting::observe(MeetingObserver::class);
     }
 
     /**

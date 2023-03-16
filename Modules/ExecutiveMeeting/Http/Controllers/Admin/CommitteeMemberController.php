@@ -1,9 +1,7 @@
 <?php
 
-namespace Modules\ExecutiveMeeting\Http\Controllers;
+namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
@@ -52,9 +50,11 @@ class CommitteeMemberController extends Controller
     public function update(UpdateCommitteeMemberRequest $request, CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_edit');
-        $request->update($request->validated());
+
+        $committeeMember->update($request->validated());
+
         toast('Committee member updated successfully', 'success');
-        return redirect(route('admin.executiveMeeting.CommitteeMember.index'));
+        return redirect(route('admin.executiveMeeting.committeeMember.index'));
     }
 
     public function destroy(CommitteeMember $committeeMember)
