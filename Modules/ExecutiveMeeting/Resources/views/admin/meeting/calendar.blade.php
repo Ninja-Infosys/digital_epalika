@@ -136,6 +136,7 @@
     @endpush
 
     @push('scripts')
+        <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
         <!-- plugin js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
@@ -161,6 +162,13 @@
                     events: "{{route('admin.executiveMeeting.calendar.meetingCalendar')}}",
                     select: function(start, end, jsEvent, view) {
                         $('#meetingForm').trigger('reset')
+                        $('#en_start_date').val(start.format('YYYY-MM-DD'))
+                        $('#en_end_date').val(start.format('YYYY-MM-DD'))
+                        let parsedDate = NepaliFunctions.ParseDate(start.format('YYYY-MM-DD'));
+                        let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
+                        let formattedNepaliDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
+                        $('#start_date').val(formattedNepaliDate)
+                        $('#end_date').val(formattedNepaliDate)
                         $('#meeting-modal').modal('toggle');
                     },
                     eventClick: function(calEvent, jsEvent, view) {
