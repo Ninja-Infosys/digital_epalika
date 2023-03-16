@@ -114,6 +114,11 @@ class MapApply extends Model
         return $this->hasOne(LandOwner::class);
     }
 
+    public function landOwners(): BelongsToMany
+    {
+        return $this->belongsToMany(LandOwner::class);
+    }
+
     public function houseOwner(): BelongsToMany
     {
         return $this->belongsToMany(HouseOwner::class);

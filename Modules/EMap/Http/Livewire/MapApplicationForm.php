@@ -270,14 +270,12 @@ class MapApplicationForm extends Component
 
             $mapApply->landOwner()->create($this->landOwner);
 
-
             if($houseOwner=HouseOwner::where('citizenship_no',$this->houseOwner['citizenship_no'])->where('phone',$this->houseOwner['phone'])->first()){
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
             }else{
                 $houseOwner=HouseOwner::create($this->houseOwner);
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
             }
-
 
             $mapApply->applicantDetail()->create($this->applicantDetail);
 
