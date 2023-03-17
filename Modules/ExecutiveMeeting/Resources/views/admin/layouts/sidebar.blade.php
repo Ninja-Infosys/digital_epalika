@@ -17,13 +17,13 @@
             <span> बैठक </span>
         </a>
     </li>
+    <li class="{{request()->is('admin/executivemeeting/calendar*') ? 'active' : ''}}">
+        <a href="{{route('admin.executiveMeeting.calendar.index')}}">
+            <i class="fa fa-calendar-alt"></i>
+            <span> बैठक क्यालेन्डर  </span>
+        </a>
+    </li>
 @endcan
-<li class="{{request()->is('admin/executivemeeting/calendar*') ? 'active' : ''}}">
-    <a href="{{route('admin.executiveMeeting.calendar.index')}}">
-        <i class="fa fa-calendar-alt"></i>
-        <span> बैठक क्यालेन्डर  </span>
-    </a>
-</li>
 
 <li class="{{request()->is('admin/executiveMeeting/setting/*') ? 'active' : ''}}">
     <a href="#sidebarExecutiveMeetingSetting"
