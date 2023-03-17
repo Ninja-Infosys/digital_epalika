@@ -18,7 +18,13 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            @error('file')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -28,7 +34,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('listRegistration_create')
-                                <a href="{{route('admin.listRegistrations.listRegistration.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.listRegistrations.listRegistration.create')}}"
+                                   class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -41,9 +48,9 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>दर्ता नम्बर</th>
-                                <th>मुख्य व्यक्तिको  नाम</th>
-                                <th>फोन नम्बर </th>
-                                <th>निबेदन मिति </th>
+                                <th>मुख्य व्यक्तिको नाम</th>
+                                <th>फोन नम्बर</th>
+                                <th>निबेदन मिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -57,25 +64,38 @@
                                     <td>{{$listRegistration->date}}</td>
                                     <td>
                                         @can('listRegistration_access')
-                                            <a data-bs-type="edit" href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"
                                                title="थप हेर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin'?'confirm_pin':'')}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('listRegistration_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin': ''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+                                        @can('listRegistration_edit')
+                                            <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
+                                               data-bs-target="#staticBackdropListRegistration">
+                                                <i class="fa fa-file"></i>
+                                            </a>
+                                        @endcan
+                                        @include('listregistration::admin.list_registration.inc.file')
+
                                         @can('listRegistration_delete')
-                                            <form action="{{route('admin.listRegistrations.listRegistration.destroy',$listRegistration)}}"
-                                                  method="post">
+                                            <form
+                                                action="{{route('admin.listRegistrations.listRegistration.destroy',$listRegistration)}}"
+                                                method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin'?'confirm_pin':'show_confirm')}}" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin'?'confirm_pin':'show_confirm')}}"
+                                                        title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

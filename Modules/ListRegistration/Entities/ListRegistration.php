@@ -50,6 +50,7 @@ class ListRegistration extends Model
         'business_nature',
         'business_nature_description',
         'date',
+        'file',
         'en_date'
     ];
     protected $appends = [
@@ -82,6 +83,19 @@ class ListRegistration extends Model
 
             set: fn($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
+    }
+
+    protected function File(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
+
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/file/', 'public')
                 : null
         );
     }

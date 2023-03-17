@@ -5,6 +5,7 @@ namespace Modules\ListRegistration\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\ListRegistration\Entities\ListRegistration;
@@ -139,5 +140,21 @@ class ListRegistrationController extends Controller
                 'file' => $file['file']->store('list_registration/' . Str::slug($listRegistration->main_person, '_') . '/files', 'public'),
             ]);
         }
+    }
+
+    public function updateFile(Request $request, ListRegistration $listRegistration)
+    {
+        $this->checkAuthorization('listRegistration_edit');
+
+        if ($request->hasFile('file') && $file = $listRegistration->getRawOriginal('file')) {
+            $this->deleteFile($file);
+        }
+        $data = $request->validate([
+            'file' => 'required |mimes:png,jpg,jpeg,pdf'
+        ]);
+
+        $listRegistration->update($data);
+        toast('फाईल सफलतापूर्वक थपियो', 'success');
+        return back();
     }
 }
