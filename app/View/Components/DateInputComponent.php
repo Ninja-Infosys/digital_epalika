@@ -22,6 +22,7 @@ class DateInputComponent extends Component
         public bool    $showEnglishDate = false,
         public bool    $getTodayDate = true,
         public ?string $idNe = null,
+        public ?string $idEn = null,
         public ?string $editDateNe = null,
         public ?string $editDateEn = null,
         public ?string $container = null,

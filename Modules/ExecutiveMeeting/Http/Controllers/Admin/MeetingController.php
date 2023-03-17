@@ -70,6 +70,8 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_edit');
 
+        return $request->all();
+
         $meeting->update($request->validated());
 
         toast('बैठक सफलतापूर्वक अद्यावधिक गरियो', 'success');

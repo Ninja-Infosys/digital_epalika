@@ -10,9 +10,13 @@ class MeetingResource extends JsonResource
     {
         return [
             'id' => $this->id ?? '',
+            'committee_id' => $this->committee_id ?? '',
             'title' => $this->meeting_name ?? '',
             'start' => $this->en_start_date ?? '',
+            'ne_start_date' => $this->start_date ?? '',
             'end' => $this->en_end_date ?? '',
+            'ne_end_date' => $this->end_date ?? '',
+            'description'=>$this->description??''
         ];
     }
 }
