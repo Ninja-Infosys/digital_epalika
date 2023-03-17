@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ use Modules\ListRegistration\Enums\BusinessNatureEnum;
 class ListRegistration extends Model
 {
     use HasFactory;
+    use NepaliDateConverter;
     use SoftDeletes;
     use EventObserveTrait;
     use GetAllColumns;
@@ -50,7 +52,9 @@ class ListRegistration extends Model
         'date',
         'en_date'
     ];
-
+    protected $appends = [
+        'to_day_date'
+    ];
     protected $casts = [
         'applicant_type' => ApplicantCategoryEnum::class,
         'business_nature' => BusinessNatureEnum::class
@@ -129,5 +133,10 @@ class ListRegistration extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function getToDayDateAttribute(): string
+    {
+        return $this->get_today_nepali_date();
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\EMap\Enums\LandOwnerTypeEnum;
 
@@ -21,7 +22,7 @@ class LandOwner extends Model
     ];
 
     protected $fillable = [
-        'map_apply_id',
+//        'map_apply_id',
         'land_owner_type',
         'name',
         'phone',
@@ -39,9 +40,9 @@ class LandOwner extends Model
         'land_owner_type' => LandOwnerTypeEnum::class,
     ];
 
-    public function mapApply(): BelongsTo
+    public function mapApplies(): BelongsToMany
     {
-        return $this->belongsTo(MapApply::class);
+        return $this->belongsToMany(MapApply::class);
     }
 
     public function citizenshipIssueDistrict(): BelongsTo

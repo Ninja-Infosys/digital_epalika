@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\HouseOwner;
+use Modules\EMap\Entities\LandOwner;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\MapSetting;
@@ -268,13 +269,18 @@ class MapApplicationForm extends Component
                     'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
                 ]);
 
-            $mapApply->landOwner()->create($this->landOwner);
-
             if($houseOwner=HouseOwner::where('citizenship_no',$this->houseOwner['citizenship_no'])->where('phone',$this->houseOwner['phone'])->first()){
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
             }else{
                 $houseOwner=HouseOwner::create($this->houseOwner);
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
+            }
+
+            if($landOwner=LandOwner::where('citizenship_no',$this->landOwner['citizenship_no'])->where('phone',$this->landOwner['phone'])->first()){
+                $landOwner->mapApplies()->attach([$mapApply->id]);
+            }else{
+                $landOwner=LandOwner::create($this->landOwner);
+                $landOwner->mapApplies()->attach([$mapApply->id]);
             }
 
             $mapApply->applicantDetail()->create($this->applicantDetail);

@@ -76,7 +76,7 @@ class MapApply extends Model
 
     public function getConsultantSignatureUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['consultant_signature']);
+        return $this->attributes['consultant_signature'] ? Storage::disk('public')->url($this->attributes['consultant_signature']) :'';
     }
 
     public function organization(): BelongsTo
@@ -109,12 +109,8 @@ class MapApply extends Model
         return $this->hasOne(LandDetail::class);
     }
 
-    public function landOwner(): HasOne
-    {
-        return $this->hasOne(LandOwner::class);
-    }
 
-    public function landOwners(): BelongsToMany
+    public function landOwner(): BelongsToMany
     {
         return $this->belongsToMany(LandOwner::class);
     }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
 class OldMap extends Model
@@ -29,10 +30,12 @@ class OldMap extends Model
         'registration_date',
         'construction_type',
         'usage',
+        'building_category',
     ];
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
+        'building_category' => CategorizationEnum::class,
     ];
 
     public function fiscalYear(): BelongsTo

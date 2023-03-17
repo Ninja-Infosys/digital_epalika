@@ -28,7 +28,7 @@
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label" for="oldMap">दर्ता नं. </label>
             <input class="form-control form-control-sm" type="text" id="oldMap"
                    wire:model="oldMap.registration_no"
@@ -37,7 +37,7 @@
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label" for="registration_fee">दर्ता रकम</label>
             <input class="form-control form-control-sm" type="number" step="any" id="registration_fee"
                    wire:model="oldMap.registration_fee"
@@ -46,7 +46,7 @@
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label" for="registration_date">दर्ता मिति</label>
             <input class="form-control form-control-sm" type="text" id="registration_date"
                    wire:model="oldMap.registration_date"
@@ -85,6 +85,22 @@
                     </div>
                 @endforeach
                 @error('oldMap.usage')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">१.३ भवन ऐन अनुसार वर्गीकरण *</label>
+            <div class="col">
+                @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="{{$categorization->name}}"
+                               wire:model="oldMap.building_category" value="{{$categorization->value}}">
+                        <label class="form-check-label"
+                               for="{{$categorization->name}}">{{$categorization->label()}}</label>
+                    </div>
+                @endforeach
+                @error('oldMap.building_category')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>
