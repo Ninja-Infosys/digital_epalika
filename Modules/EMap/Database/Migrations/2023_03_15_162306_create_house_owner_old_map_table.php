@@ -17,6 +17,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('table_to_house_owner_old_map');
+        Schema::dropIfExists('house_owner_old_map');
     }
 };

@@ -154,7 +154,8 @@
                                 </a>
                             </div>
                             <div class="position-absolute bottom-0 w-100 p-2 bg-soft-secondary text-center">
-                                <p class="fw-bold">कुन खरिद को लागि सूची दर्ता हुन निबेदन दिने हो, सो को लागि इजाजत पत्र </p>
+                                <p class="fw-bold">कुन खरिद को लागि सूची दर्ता हुन निबेदन दिने हो, सो को लागि इजाजत
+                                    पत्र </p>
                             </div>
                         </div>
                     </div>
@@ -180,13 +181,14 @@
                                             </div>
                                             <div class="col-8">
                                                 <a href="javascript:void(0);"
-                                                onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
+                                                   onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
                                                    class="text-muted fw-medium">{{$document->file_name}}
                                                     .{{$document->extension}}</a>
                                                 <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
                                             </div>
                                             <div class="col-2">
-                                                <a href="{{route('admin.file.download', $document)}}" class="btn btn-xs btn-outline-primary">
+                                                <a href="{{route('admin.file.download', $document)}}"
+                                                   class="btn btn-xs btn-outline-primary">
                                                     <i class="fa fa-download"></i>
                                                 </a>
                                             </div>
@@ -198,6 +200,109 @@
                             <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
                         @endforelse
                     </div> <!-- end row-->
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="header-title mb-0">मौजुदा सुची दर्ता</h4>
+                    <x-print-button
+                        target-element="print-data"
+                        title="मौजुदा सुची दर्ता"
+                    />
+                </div>
+                <div id="print-data">
+                    <div class="card-body">
+                        <p class="text-center">अनुसूची - २ क.</p>
+                        <p class="text-center">(नियम १८ को उपनियम (१) सँग सम्बन्धित)</p>
+                        <p class="text-center"> मौजुदा सूचीमा दर्ता हुनका लागी दिईने निवेदनको ढांच</p>
+                        <div class="d-flex justify-content-between">
+                            <p>
+                                श्रीमान प्रमुख प्रशासकीय ज्यु, <br>
+                                {{$officeSetting->localBody->local_body??''}} <br>
+                                {{$officeSetting->district->district??''}} , {{$officeSetting->province->province??''}}
+                                , नेपाल
+                            </p>
+                            <p>
+                                मिति : {{$listRegistration->to_day_date}}
+                            </p>
+                        </div>
+                        <h5 class="text-center">बिषय : मौजुदा सूचीमा दर्ता गरी पाऊँ  ।</h5>
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;सार्वजनिक खरिद नियमावली , २०६४ को नियम १८ को उपनियम (१) बमोजिम तपसिलमा उल्लेखित विवरण
+                            अनुसारको पुष्ट्याई गर्ने कागजात गरी मौजुदा सूचीमा दर्ता हुन योनिवेदन पेस गरेको छु ।
+                        </p>
+                        <h5 class="text-center mt-2 font-weight-bold">तपसिल</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td colspan="4"> १. मौजुदा सूचीको लागि निवेदन दिने व्यक्ति,सस्था,आपूर्तिकर्ता, निर्माण
+                                    व्यवसायी, परामर्शदाता वा सेवा प्रदायकको विवरण
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">क. नाम : {{$listRegistration->name}}</td>
+                                <td colspan="2">ख. ठेगाना : {{$listRegistration->address}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ग. पत्रचार गर्ने ठेगाना : {{$listRegistration->mailing_address}}</td>
+                                <td colspan="2">घ. मुख्य व्यक्तिको नाम : {{$listRegistration->main_person}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ङ. टेलिफोन नं: {{$listRegistration->telephone}}</td>
+                                <td colspan="2">च. मोवाईल नं : {{$listRegistration->mobile_no}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    २. मौजुदा सुचिमा दर्ता हुनेको लागि निम्नबमोजिमको प्रमाणपत्र संगलग्न गर्नुहोस । <br>
+                                    क . संस्था वा फर्म दर्ताको प्रमाणपत्र
+                                    । @if(!empty($listRegistration->registration_certificate)) छ <input type="checkbox" checked> @else छैन <input type="checkbox" checked> @endif<br>
+                                    ख . नवीकरण गरिएको ।<br>
+                                    ग . मूल्य अभिवृद्धि कर वा स्थायी लेखा नम्बर दर्ताको प्रमाण
+                                    । @if(!empty($listRegistration->pan_photo)) छ <input type="checkbox" checked> @else छैन <input type="checkbox" checked> @endif<br>
+                                    घ . कर चुक्ताको प्रमाणपत्र
+                                    । @if(!empty($listRegistration->tax_payment_certificate)) छ <input type="checkbox" checked> @else छैन <input type="checkbox" checked> @endif<br>
+                                    ङ . कुल खरिदको लागी मौजुदा सुचिमा दर्ता हुन् निवेदन दिने हो सो कामको लागी इजाजत्
+                                    पत्र आवश्यक पर्ने भएमा सोको प्रतिलिपि
+                                    । @if(!empty($listRegistration->license_photo)) छ <input type="checkbox" checked> @else छैन <input type="checkbox" checked> @endif<br>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="4">
+                                    ३. सार्वजनिक निकायबाट हुने खरिदको लागि दर्ता हुन चाहिको खरिदको प्रकृतिको विवरण :
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>क. मालसमान आपूर्ति : (मालसमानको प्रकृति समेत उल्लेख गर्ने)</td>
+
+                                <td>
+                                    {{$listRegistration->business_nature->value =='goods_supply' ? $listRegistration->business_nature_description :''}}
+                                </td>
+
+                                <td>ख. निर्माण कार्य :</td>
+                                <td>{{$listRegistration->business_nature->value =='construction_work' ? $listRegistration->business_nature_description :''}}</td>
+                            </tr>
+                            <tr>
+                                <td>ग. परामर्श सेवा : (परामर्श सेवाको प्रकृति समेत उल्लेख गर्ने)</td>
+                                <td>{{$listRegistration->business_nature->value =='consulting_service' ? $listRegistration->business_nature_description :''}}</td>
+                                <td>घ. अन्य सेवा : (अन्य सेवाको प्रकृति उल्लेख गर्ने)</td>
+                                <td>{{$listRegistration->business_nature->value =='other_service' ? $listRegistration->business_nature_description :''}}</td>
+                            </tr>
+                            <tr>
+                                <td>निवेदन दिएको मिति : {{$listRegistration->date}}<br>
+                                    आ. व. : {{$listRegistration->fiscalYear->title??''}}
+                                </td>
+                                <td colspan="2">
+                                    फर्मको छाप :
+                                </td>
+                                <td>
+                                    निवेदकको नाम : {{$listRegistration->main_person}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

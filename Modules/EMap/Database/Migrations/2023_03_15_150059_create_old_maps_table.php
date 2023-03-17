@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('registration_date')->nullable()->comment('दर्ता मिति');
             $table->string('construction_type')->comment('निर्माण कार्यको किसिम');
             $table->string('usage')->comment('प्रयोजन');
+            $table->string('building_category')->comment('भवन ऐन अनुसार वर्गीकरण');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -39,9 +39,9 @@ class HouseOwner extends Model
         return $this->belongsToMany(OldMap::class);
     }
 
-    public function mapApply(): BelongsTo
+    public function mapApplies(): BelongsToMany
     {
-        return $this->belongsTo(MapApply::class);
+        return $this->belongsToMany(MapApply::class);
     }
 
     public function citizenshipIssueDistrict(): BelongsTo
@@ -49,8 +49,5 @@ class HouseOwner extends Model
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
     }
 
-    public function mapApplies(): BelongsToMany
-    {
-        return $this->belongsToMany(MapApply::class);
-    }
+
 }

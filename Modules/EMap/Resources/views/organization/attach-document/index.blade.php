@@ -357,6 +357,5 @@
           </div>
           @include('admin.inc.file-view');
       </div>
-
   @endif
 @endsection

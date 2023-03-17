@@ -47,9 +47,9 @@ Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
 
-//report
+//oldMap
+Route::resource('oldMap', OldMapController::class)->except(['update', 'store']);
 
-Route::resource('oldMap', OldMapController::class);
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');

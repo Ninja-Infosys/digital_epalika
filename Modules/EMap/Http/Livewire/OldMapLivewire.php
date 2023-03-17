@@ -4,19 +4,11 @@ namespace Modules\EMap\Http\Livewire;
 
 use App\Models\Address\District;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
-use App\Notifications\MapApplyNotification;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\HouseOwner;
-use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\MapFee;
-use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\OldMap;
-use Modules\EMap\Entities\Organization;
-use Modules\EMap\Entities\StructureType;
 
 class OldMapLivewire extends Component
 {
@@ -25,6 +17,8 @@ class OldMapLivewire extends Component
 
     public $allDistricts = [];
     public $fiscalYears = [];
+
+    public $oldMapUpdate;
     public array $oldMap = [
         'application_type' => null,
         'fiscal_year_id' => null,
@@ -32,7 +26,8 @@ class OldMapLivewire extends Component
         'registration_no' => null,
         'registration_date' => null,
         'construction_type' => null,
-        'usage' => null
+        'usage' => null,
+        'building_category' => null
     ];
 
 
@@ -50,11 +45,31 @@ class OldMapLivewire extends Component
     ];
 
 
-    public function mount(): void
+    public function mount($oldMapUpdate = null): void
     {
 
         $this->fiscalYears = FiscalYear::all();
         $this->allDistricts = District::all();
+
+
+        if (!empty($oldMapUpdate)) {
+            $this->oldMap[] = $oldMapUpdate;
+            foreach ($this->oldMap as $key => $data) {
+                $this->oldMap[$key] = $oldMapUpdate[$key];
+            }
+            if (!empty($houseOwner = $oldMapUpdate->houseOwner->first())) {
+                $this->houseOwner['name'] = $houseOwner->name ?? null;
+                $this->houseOwner['phone'] = $houseOwner->phone ?? null;
+                $this->houseOwner['father_name'] = $houseOwner->father_name ?? null;
+                $this->houseOwner['grandfather_name'] = $houseOwner->grandfather_name ?? null;
+                $this->houseOwner['citizenship_issue_district_id'] = $houseOwner->citizenship_issue_district_id ?? null;
+                $this->houseOwner['citizenship_no'] = $houseOwner->citizenship_no ?? null;
+                $this->houseOwner['citizenship_issue_date'] = $houseOwner->citizenship_issue_date ?? null;
+                $this->houseOwner['address'] = $houseOwner->address ?? null;
+                $this->houseOwner['local_body'] = $houseOwner->local_body ?? null;
+                $this->houseOwner['ward_no'] = $houseOwner->ward_no ?? null;
+            }
+        }
     }
 
 
@@ -65,7 +80,8 @@ class OldMapLivewire extends Component
         'oldMap.registration_no' => ['required'],
         'oldMap.registration_date' => ['required'],
         'oldMap.construction_type' => ['required'],
-        'oldMap.usage' => ['required']
+        'oldMap.usage' => ['required'],
+        'oldMap.building_category' => ['required']
     ];
 
 
@@ -81,7 +97,6 @@ class OldMapLivewire extends Component
         'houseOwner.local_body' => ['required'],
         'houseOwner.ward_no' => ['required', 'integer'],
     ];
-
 
 
     public function rules(): array
@@ -100,19 +115,32 @@ class OldMapLivewire extends Component
     public function saveFormData(): \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application|\Illuminate\Routing\Redirector
     {
         $this->validate();
-         DB::transaction(function () {
-            $oldMap = OldMap::create($this->oldMap);
-            if ($houseOwner = HouseOwner::where('citizenship_no', $this->houseOwner['citizenship_no'])->where('phone', $this->houseOwner['phone'])->first()) {
-                $houseOwner->oldMaps()->attach([$oldMap->id]);
-            } else {
-                $houseOwner = HouseOwner::create($this->houseOwner);
-                $houseOwner->oldMaps()->attach([$oldMap->id]);
-            }
+        if (empty($this->oldMapUpdate)) {
+            DB::transaction(function () {
+                $oldMap = OldMap::create($this->oldMap);
+                if ($houseOwner = HouseOwner::where('citizenship_no', $this->houseOwner['citizenship_no'])->where('phone', $this->houseOwner['phone'])->first()) {
+                    $houseOwner->oldMaps()->attach([$oldMap->id]);
+                } else {
+                    $houseOwner = HouseOwner::create($this->houseOwner);
+                    $houseOwner->oldMaps()->attach([$oldMap->id]);
+                }
 
-        });
-
-
-
+            });
+        } else {
+            $this->oldMapUpdate->update($this->oldMap);
+            $this->oldMapUpdate->houseOwner->first()?->update([
+                'name' => $this->houseOwner['name'],
+                'phone' => $this->houseOwner['phone'],
+                'father_name' => $this->houseOwner['father_name'],
+                'grandfather_name' => $this->houseOwner['grandfather_name'],
+                'citizenship_issue_district_id' => $this->houseOwner['citizenship_issue_district_id'],
+                'citizenship_no' => $this->houseOwner['citizenship_no'],
+                'citizenship_issue_date' => $this->houseOwner['citizenship_issue_date'],
+                'address' => $this->houseOwner['address'],
+                'local_body' => $this->houseOwner['local_body'],
+                'ward_no' => $this->houseOwner['ward_no'],
+            ]);
+        }
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
@@ -132,6 +160,7 @@ class OldMapLivewire extends Component
             'oldMap.registration_date.required' => 'दर्ता मिति अनिवार्य छ',
             'oldMap.registration_no.required' => 'दर्ता नं अनिवार्य छ',
             'oldMap.registration_fee.required' => 'दर्ता शुल्क अनिवार्य छ',
+            'oldMap.building_category.required' => 'भवन वर्गीकरण अनिवार्य छ',
             'houseOwner.name.required' => 'घर धनीको नाम अनिवार्य छ',
             'houseOwner.father_name.required' => 'बुवाको नाम अनिवार्य छ',
             'houseOwner.citizenship_issue_district_id.required' => 'जारि जिल्ला अनिवार्य छ',
@@ -145,7 +174,6 @@ class OldMapLivewire extends Component
 
         ];
     }
-
 
 
     public function render()
