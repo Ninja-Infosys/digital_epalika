@@ -301,8 +301,8 @@
                         processData: false,
                         contentType: false,
                         beforeSend: function () {
-                            $('#submitBtn').prop('disabled', true);
-                            $('#submitBtn').html("<i class='fa fa-spinner fa-spin'></i>");
+                            $('#editSubmitBtn').prop('disabled', true);
+                            $('#editSubmitBtn').html("<i class='fa fa-spinner fa-spin'></i>");
                         },
                         success: function (resp) {
                             $('#editSubmitBtn').prop('disabled', false);
