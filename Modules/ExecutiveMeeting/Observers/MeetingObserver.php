@@ -49,12 +49,13 @@ class MeetingObserver
                     $end_date->{$recurrence['function']}();
                     $en_end_date->{$recurrence['function']}();
                     $meeting->meetings()->create([
+                        'committee_id'=>$meeting->committee_id,
                         'meeting_name' => $meeting->meeting_name,
                         'recurrence' => $meeting->recurrence,
-                        'start_date' => $start_date,
-                        'en_start_date' => $en_start_date,
-                        'end_date' => $end_date,
-                        'en_end_date' => $en_end_date,
+                        'start_date' => $start_date->toDateString(),
+                        'en_start_date' => $en_start_date->toDateString(),
+                        'end_date' => $end_date->toDateString(),
+                        'en_end_date' => $en_end_date->toDateString(),
                         'recurrence_end_date' => $meeting->recurrence_end_date,
                         'en_recurrence_end_date' => $meeting->en_recurrence_end_date,
                         'description' => $meeting->description,
