@@ -70,9 +70,14 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_edit');
 
-        return $request->all();
-
         $meeting->update($request->validated());
+
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => "",
+                'message' => "बैठक सफलतापूर्वक अद्यावधिक गरियो"
+            ]);
+        }
 
         toast('बैठक सफलतापूर्वक अद्यावधिक गरियो', 'success');
 

@@ -138,8 +138,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createMeetingForm" method="post">
+                    <form id="editMeetingForm" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="edit_committee_id" class="form-label">समिति *</label>
@@ -200,7 +201,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <button type="submit" id="editSubmitBtn" class="btn btn-primary">
                             Save
                         </button>
                     </form>
@@ -257,6 +258,8 @@
                         $('#edit_committee_id').val(eventInfo.committee_id)
                         $('#edit_en_end_date').val(eventInfo.end.format('YYYY-MM-DD'))
                         $('#edit_description').val(eventInfo.description)
+                        const meetingUrl="{{route('admin.executiveMeeting.meeting.index')}}"
+                        $('#editMeetingForm').attr('data-edit-meeting-url',`${meetingUrl}/${eventInfo.id}`)
                         $('#edit-meeting-modal').modal('toggle');
                     }
                 });
@@ -284,6 +287,34 @@
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $('#submitBtn').prop('disabled', false)
                             $('#submitBtn').html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    });
+                })
+
+                $(document).delegate('#editMeetingForm','submit',function (e){
+                    e.preventDefault()
+                    $.ajax({
+                        type: "post",
+                        url: $(this).data('edit-meeting-url'),
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+                            $('#submitBtn').prop('disabled', true);
+                            $('#submitBtn').html("<i class='fa fa-spinner fa-spin'></i>");
+                        },
+                        success: function (resp) {
+                            $('#editSubmitBtn').prop('disabled', false);
+                            $('#calendar').fullCalendar('refetchEvents');
+                            $('#editSubmitBtn').html("पेश गर्नुहोस्");
+                            toastMessage('success', resp.message)
+                            $('#edit-meeting-modal').modal('toggle')
+                            $('#editMeetingForm').trigger('reset')
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $('#editSubmitBtn').prop('disabled', false)
+                            $('#editSubmitBtn').html("पेश गर्नुहोस्");
                             toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     });
