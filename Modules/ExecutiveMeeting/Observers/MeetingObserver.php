@@ -14,7 +14,7 @@ class MeetingObserver
             return;
         }
 
-        if (! $meeting->meeting()->exists()) {
+        if (!$meeting->meeting()->exists()) {
             $recurrences = [
                 'daily' => [
                     'type' => 'day',
@@ -40,7 +40,7 @@ class MeetingObserver
             $recurrence = $recurrences[$meeting->recurrence->value];
 
             if ($recurrence) {
-                $recurrenceDates = CarbonPeriod::create($en_start_date, '1 '.$recurrence['type'], $meeting->en_recurrence_end_date);
+                $recurrenceDates = CarbonPeriod::create($en_start_date, '1 ' . $recurrence['type'], $meeting->en_recurrence_end_date);
                 $iMax = count($recurrenceDates);
 
                 for ($i = 0; $i < $iMax; $i++) {
@@ -49,16 +49,17 @@ class MeetingObserver
                     $end_date->{$recurrence['function']}();
                     $en_end_date->{$recurrence['function']}();
                     $meeting->meetings()->create([
-                        'committee_id'=>$meeting->committee_id,
+                        'committee_id' => $meeting->committee_id,
                         'meeting_name' => $meeting->meeting_name,
                         'recurrence' => $meeting->recurrence,
                         'start_date' => $start_date->toDateString(),
-                        'en_start_date' => $en_start_date->toDateString(),
+                        'en_start_date' => $en_start_date,
                         'end_date' => $end_date->toDateString(),
-                        'en_end_date' => $en_end_date->toDateString(),
+                        'en_end_date' => $en_end_date,
                         'recurrence_end_date' => $meeting->recurrence_end_date,
                         'en_recurrence_end_date' => $meeting->en_recurrence_end_date,
                         'description' => $meeting->description,
+                        'user_id' => auth()->id()
                     ]);
                 }
             }

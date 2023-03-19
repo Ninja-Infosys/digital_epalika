@@ -187,6 +187,7 @@
                                     nameEn="en_end_date" labelEn="End Date"
                                     container="#edit-meeting-modal"
                                     :getTodayDate="false"
+                                    :show-english-date="true"
                                 />
                             </div>
                             <div class="col-md-12 mb-2">
@@ -251,12 +252,13 @@
                         $('#create-meeting-modal').modal('toggle');
                     },
                     eventClick: function(eventInfo) {
+                        console.log(eventInfo)
                         $('#edit_meeting_name').val(eventInfo.title)
                         $('#edit_start_date').val(eventInfo.ne_start_date)
                         $('#edit_en_start_date').val(eventInfo.start.format('YYYY-MM-DD'))
                         $('#edit_end_date').val(eventInfo.ne_end_date)
                         $('#edit_committee_id').val(eventInfo.committee_id)
-                        $('#edit_en_end_date').val(eventInfo.end.format('YYYY-MM-DD'))
+                        $('#edit_en_end_date').val(eventInfo.en_end_date)
                         $('#edit_description').val(eventInfo.description)
                         const meetingUrl="{{route('admin.executiveMeeting.meeting.index')}}"
                         $('#editMeetingForm').attr('data-edit-meeting-url',`${meetingUrl}/${eventInfo.id}`)

@@ -126,6 +126,10 @@ class OldMapLivewire extends Component
                 }
 
             });
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => 'success',
+                'title' => 'तपाईंको फारम सफलतापूर्वक पेश भएको छ ।',
+            ]);
         } else {
             $this->oldMapUpdate->update($this->oldMap);
             $this->oldMapUpdate->houseOwner->first()?->update([
@@ -140,14 +144,13 @@ class OldMapLivewire extends Component
                 'local_body' => $this->houseOwner['local_body'],
                 'ward_no' => $this->houseOwner['ward_no'],
             ]);
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'तपाईंको फारम सफलतापूर्वक  सम्पादन गरिएको छ ।',
+            ]);
         }
-
-        $this->dispatchBrowserEvent('alert_message', [
-            'type' => 'success',
-            'title' => 'धन्यबाद',
-            'text' => "तपाईंको फारम सफलतापूर्वक पेश भएको छ |",
-        ]);
         return redirect(route('emap.admin.oldMap.index'));
+
     }
 
     public function messages(): array

@@ -18,7 +18,10 @@ class Meeting extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'en_start_date',
+        'en_end_date',
+        'en_recurrence_end_date'
     ];
 
     protected $fillable = [

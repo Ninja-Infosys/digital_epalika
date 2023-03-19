@@ -15,6 +15,7 @@ class MeetingResource extends JsonResource
             'start' => $this->en_start_date ?? '',
             'ne_start_date' => $this->start_date ?? '',
             'end' => $this->en_end_date ?? '',
+            'en_end_date' => $this->en_end_date?->toDateString(),
             'ne_end_date' => $this->end_date ?? '',
             'description'=>$this->description??''
         ];
