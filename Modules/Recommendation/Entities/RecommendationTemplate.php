@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
-use Modules\Recommendation\Enums\ApplicationTypeEnum;
+use Illuminate\Support\Str;
 
 class RecommendationTemplate extends Model
 {
@@ -28,7 +28,6 @@ class RecommendationTemplate extends Model
         'title'
     ];
 
-  
 
     public function scopeActive($q)
     {
@@ -38,5 +37,21 @@ class RecommendationTemplate extends Model
     public function scopeNotActive($q)
     {
         return $q->where('is_active', 0);
+    }
+
+    private array $template = [
+        [
+            'title' => 'विवरण',
+            'data' => [
+                'कार्यालय नाम' => '[@office_name]',
+                'कार्यालय लेटर हेड' => '[@letter_head]',
+                'आजको मिति' => '[@today_date]',
+            ],
+        ],
+    ];
+
+    public function getTemplateOptions(): array
+    {
+        return $this->template;
     }
 }

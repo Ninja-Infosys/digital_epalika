@@ -187,7 +187,6 @@
                                     nameEn="en_end_date" labelEn="End Date"
                                     container="#edit-meeting-modal"
                                     :getTodayDate="false"
-                                    :show-english-date="true"
                                 />
                             </div>
                             <div class="col-md-12 mb-2">
@@ -252,7 +251,6 @@
                         $('#create-meeting-modal').modal('toggle');
                     },
                     eventClick: function(eventInfo) {
-                        console.log(eventInfo)
                         $('#edit_meeting_name').val(eventInfo.title)
                         $('#edit_start_date').val(eventInfo.ne_start_date)
                         $('#edit_en_start_date').val(eventInfo.start.format('YYYY-MM-DD'))

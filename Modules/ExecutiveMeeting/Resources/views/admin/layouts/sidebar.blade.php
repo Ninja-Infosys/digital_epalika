@@ -24,7 +24,27 @@
         </a>
     </li>
 @endcan
-
+<li class="{{request()->is('admin/executiveMeeting/reports/*') ? 'active' : ''}}">
+    <a href="#sidebarExecutiveMeeting"
+       {{request()->is('admin/executiveMeeting/reports/*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-file"></i>
+        <span> रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/executiveMeeting/reports/*') ? 'active' : ''}}"
+         id="sidebarExecutiveMeeting">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/executiveMeeting/reports') ? 'active' : ''}}">
+                <a href="{{route('admin.executiveMeeting.report.index')}}">
+                    <span>प्रतिवेदन</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
 <li class="{{request()->is('admin/executiveMeeting/setting/*') ? 'active' : ''}}">
     <a href="#sidebarExecutiveMeetingSetting"
        {{request()->is('admin/executiveMeeting/setting/*') ? 'aria-expanded=true' : ''}}
