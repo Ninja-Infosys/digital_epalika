@@ -2,9 +2,7 @@
 
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
@@ -42,7 +40,8 @@ class MeetingController extends Controller
         $this->checkAuthorization('meeting_create');
 
         Meeting::create($request->validated() + [
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
+                'fiscal_year_id' => officeSetting()->fiscal_year_id,
             ]);
 
         if ($request->ajax()) {

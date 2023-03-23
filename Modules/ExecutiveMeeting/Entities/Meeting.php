@@ -2,7 +2,9 @@
 
 namespace Modules\ExecutiveMeeting\Entities;
 
+use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +15,7 @@ use Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum;
 
 class Meeting extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait,GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -33,7 +35,8 @@ class Meeting extends Model
         'recurrence_end_date',
         'en_recurrence_end_date',
         'description',
-        'user_id'
+        'user_id',
+        'fiscal_year_id',
     ];
 
     protected $casts = [
@@ -58,5 +61,10 @@ class Meeting extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 }

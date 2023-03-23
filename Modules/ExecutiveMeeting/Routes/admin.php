@@ -37,4 +37,5 @@ Route::resource('{meeting_for}/meetingDecision', MeetingDecisionController::clas
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/','index')->name('index');
+    Route::post('report-data','report')->name('report-data');
 });
