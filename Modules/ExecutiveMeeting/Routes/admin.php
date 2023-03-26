@@ -9,9 +9,7 @@ use Modules\ExecutiveMeeting\Http\Controllers\Admin\DashboardController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingDecisionController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingEventController;
-use Modules\ExecutiveMeeting\Http\Controllers\Admin\MunicipalCommitteeController;
-use Modules\ExecutiveMeeting\Http\Controllers\Admin\WardCommitteeController;
-use Modules\ExecutiveMeeting\Http\Controllers\ReportController;
+use Modules\ExecutiveMeeting\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 

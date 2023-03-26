@@ -1,14 +1,12 @@
 <?php
 
-namespace Modules\ExecutiveMeeting\Http\Controllers;
+namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\FiscalYear;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Modules\ExecutiveMeeting\Entities\Meeting;
-use Modules\ExecutiveMeeting\Transformers\MeetingResource;
 use Modules\ExecutiveMeeting\Transformers\MeetingResourceReport;
 
 class ReportController extends Controller
@@ -70,7 +68,7 @@ class ReportController extends Controller
         (new Meeting())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return !array_keys($column, 'printedData');
+                return array_keys($column, 'Meeting');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
