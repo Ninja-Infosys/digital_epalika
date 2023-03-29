@@ -37,7 +37,9 @@ protected Collection $revenues;
                 ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
                 ->get();
         }
-        $this->projects = Project::where('fiscal_year_id', \officeSetting()->fiscal_year_id)->get();
+        if (Schema::hasTable('projects')) {
+            $this->projects = Project::where('fiscal_year_id', \officeSetting()->fiscal_year_id)->get();
+        }
     }
     public function __invoke()
     {
