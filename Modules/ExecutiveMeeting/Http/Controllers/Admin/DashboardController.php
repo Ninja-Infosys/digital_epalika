@@ -11,9 +11,6 @@ class DashboardController extends Controller
     {
         $this->checkAuthorization('executiveMeetingDashboard_access');
 
-        $ward_meetings_count = MeetingEvent::where('event_for', 'ward')->count();
-        $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
-
         return view('executivemeeting::admin.dashboard');
     }
 }

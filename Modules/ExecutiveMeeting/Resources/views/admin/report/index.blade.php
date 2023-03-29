@@ -71,6 +71,16 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="committee">समिति </label>
+                                    <select name="committee[]" multiple data-toggle="select2"
+                                            id="committee" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($committees as $committee)
+                                            <option value="{{$committee->id}}">{{$committee->committee_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
                                 <legend class="font-16 text-info">

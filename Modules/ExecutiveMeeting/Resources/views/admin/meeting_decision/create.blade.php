@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.meetingDecision.index',$meeting_for)}}">निर्णयहरु</a>
+                            <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}">निर्णयहरु</a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ निर्णयहरु थप्नुहोस्</li>
                     </ol>
@@ -27,14 +27,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ निर्णयहरु थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.meetingDecision.index',$meeting_for)}}"
+                        <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> निर्णयहरु बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.meetingDecision.store',$meeting_for)}}" method="post"
+                    <form action="{{route('admin.executiveMeeting.meetingDecision.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
 
@@ -45,20 +45,20 @@
                             <div class="row">
 
                                 <div class="col-md-6 mb-2">
-                                    <label for="meeting_event_id" class="form-label"> बैठक *</label>
+                                    <label for="meeting_id" class="form-label"> बैठक *</label>
                                     <select
-                                        name="meeting_event_id"
-                                        class="form-select @error('meeting_event_id') is-invalid @enderror"
-                                        id="meeting_event_id" required>
+                                        name="meeting_id"
+                                        class="form-select @error('meeting_id') is-invalid @enderror"
+                                        id="meeting_id" required>
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($meetingEvents as $meetingEvent)
-                                            <option {{$meetingEvent->id===old('meeting_event_id') ? 'selected' : ''}}
-                                                    value="{{$meetingEvent->id}}">
-                                                {{$meetingEvent->event_name}} ({{$meetingEvent->start_date}})
+                                        @foreach($meetings as $meeting)
+                                            <option {{$meeting->id===old('meeting_id') ? 'selected' : ''}}
+                                                    value="{{$meeting->id}}">
+                                                {{$meeting->meeting_name}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('meeting_event_id')
+                                    @error('meeting_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

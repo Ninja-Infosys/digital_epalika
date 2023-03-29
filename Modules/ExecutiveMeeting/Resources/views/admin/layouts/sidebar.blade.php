@@ -10,6 +10,12 @@
         <span> समिति सदस्य</span>
     </a>
 </li>
+<li class="{{request()->is('admin/executivemeeting/meetingDecision*') ? 'active' : ''}}">
+    <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}">
+        <i class="fa fa-list-alt"></i>
+        <span>बैठकको निर्णय</span>
+    </a>
+</li>
 @can('meeting_access')
     <li class="{{request()->is('admin/executivemeeting/meeting*') ? 'active' : ''}}">
         <a href="{{route('admin.executiveMeeting.meeting.index')}}">

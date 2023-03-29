@@ -29,6 +29,10 @@ class ExecutiveMeetingPermissionTableSeeder extends Seeder
             'meeting_edit',
             'meeting_delete',
             'executiveMeetingDashboard_access',
+            'meetingDecision_access',
+            'meetingDecision_create',
+            'meetingDecision_edit',
+            'meetingDecision_delete',
         ];
 
         $this->storePermission($permissions);

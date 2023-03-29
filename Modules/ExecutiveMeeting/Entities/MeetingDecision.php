@@ -22,23 +22,24 @@ class MeetingDecision extends Model
     ];
 
     protected $fillable = [
-        'meeting_event_id',
-        'meeting_for',
+        'meeting_id',
         'subject',
         'date',
         'en_date',
         'description',
+        'user_id',
         'decision_file',
     ];
 
-    public function meetingEvent(): BelongsTo
+    public function meeting(): BelongsTo
     {
-        return $this->belongsTo(MeetingEvent::class);
+        return $this->belongsTo(Meeting::class);
     }
+
 
     public function setDecisionFileAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['decision_file'] = $value->store('municipalMeeting', 'public');
         }
     }
