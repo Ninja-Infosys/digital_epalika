@@ -28,13 +28,15 @@ protected Collection $revenues;
     public function __construct()
     {
         parent::__construct();
-        $this->revenues = DB::table('invoices')
-            ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
-            ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
-            ->whereNull('invoices.deleted_at')
-            ->whereNull('invoice_particulars.deleted_at')
-            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
-            ->get();
+        if (Schema::hasTable('invoices')) {
+            $this->revenues = DB::table('invoices')
+                ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
+                ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
+                ->whereNull('invoices.deleted_at')
+                ->whereNull('invoice_particulars.deleted_at')
+                ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
+                ->get();
+        }
         $this->projects = Project::where('fiscal_year_id', \officeSetting()->fiscal_year_id)->get();
     }
     public function __invoke()
