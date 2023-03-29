@@ -54,9 +54,10 @@ class UserController extends Controller
     {
         $this->checkAuthorization('user_edit');
         $roles = Role::all();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
         $user->load('role');
 
-        return view('admin.userManagement.user.edit', compact('user', 'roles'));
+        return view('admin.userManagement.user.edit', compact('user', 'roles','branches'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
