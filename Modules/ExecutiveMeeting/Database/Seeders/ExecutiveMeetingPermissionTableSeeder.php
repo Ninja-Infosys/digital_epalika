@@ -12,6 +12,7 @@ class ExecutiveMeetingPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'executiveMeetingDashboard_access',
             'committeeType_access',
             'committeeType_create',
             'committeeType_edit',
@@ -28,7 +29,6 @@ class ExecutiveMeetingPermissionTableSeeder extends Seeder
             'meeting_create',
             'meeting_edit',
             'meeting_delete',
-            'executiveMeetingDashboard_access',
             'meetingDecision_access',
             'meetingDecision_create',
             'meetingDecision_edit',

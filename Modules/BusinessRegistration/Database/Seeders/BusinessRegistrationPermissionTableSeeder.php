@@ -12,6 +12,7 @@ class BusinessRegistrationPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'businessRegistrationDashboard_access',
             'objectTransaction_access',
             'objectTransaction_create',
             'objectTransaction_edit',
@@ -42,7 +43,6 @@ class BusinessRegistrationPermissionTableSeeder extends Seeder
             'businessRenew_create',
             'businessRenew_edit',
             'businessRenew_delete',
-            'businessRegistrationDashboard_access',
         ];
 
         $this->storePermission($permissions);

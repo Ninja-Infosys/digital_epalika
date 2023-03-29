@@ -12,6 +12,7 @@ class EMapPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'eMapDashboard_access',
             'organization_access',
             'organization_edit',
             'organization_delete',
@@ -36,7 +37,6 @@ class EMapPermissionTableSeeder extends Seeder
             'mapApplyNotice_access',
             'mapApplyNotice_print',
             'mapApplyNoticeReject_access',
-            'eMapDashboard_access',
         ];
 
         $this->storePermission($permissions);

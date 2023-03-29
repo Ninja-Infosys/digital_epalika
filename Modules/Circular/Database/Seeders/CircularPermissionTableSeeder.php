@@ -12,6 +12,7 @@ class CircularPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'circularDashboard_access',
             'registration_access',
             'registration_create',
             'registration_edit',
@@ -20,7 +21,6 @@ class CircularPermissionTableSeeder extends Seeder
             'dispatch_create',
             'dispatch_edit',
             'dispatch_delete',
-            'circularDashboard_access',
         ];
 
         $this->storePermission($permissions);
