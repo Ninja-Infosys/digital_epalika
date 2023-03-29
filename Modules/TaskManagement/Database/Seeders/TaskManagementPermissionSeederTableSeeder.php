@@ -13,6 +13,7 @@ class TaskManagementPermissionSeederTableSeeder extends Seeder
     {
 
         $permissions = [
+            'taskManagementDashboard_access',
             'taskActivity_access',
             'taskActivity_create',
             'taskActivity_edit',

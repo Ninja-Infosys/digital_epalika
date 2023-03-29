@@ -26,6 +26,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('judicialCommitteeDashboard_access');
+
         $today_nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
 
         $totalApplicationsCount = ComplaintApplication::count();

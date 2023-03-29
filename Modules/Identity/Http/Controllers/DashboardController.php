@@ -22,6 +22,7 @@ class DashboardController extends Controller
     }
     public function __invoke()
     {
+        $this->checkAuthorization('identityDashboard_access');
 
         $disabilityIdentityCardCount = $this->disabilityIdentityCard->count();
         $seniorCitizenDetailCount = $this->seniorCitizenDetail->count();

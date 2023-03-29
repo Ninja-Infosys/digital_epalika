@@ -28,6 +28,7 @@ class DigitalBoardPermissionTableSeeder extends Seeder
             'employee_create',
             'employee_edit',
             'employee_delete',
+            'digitalBoardDashboard_access',
         ];
 
         $this->storePermission($permissions);

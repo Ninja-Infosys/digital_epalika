@@ -22,6 +22,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('taskManagementDashboard_access');
+
         if (request()->ajax()) {
             return [
                 'dailyTask' => $this->dailyTask(),

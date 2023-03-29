@@ -15,6 +15,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('revenueDashboard_access');
+
         $fiscal_year_id = officeSetting()->fiscal_year_id;
 
         $taxPayerCount = DB::table('tax_payers')

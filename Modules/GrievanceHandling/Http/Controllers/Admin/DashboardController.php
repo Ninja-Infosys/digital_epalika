@@ -25,6 +25,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('grievanceHandlingDashboard_access');
+
         $grievanceCount = $this->grievanceDetails->count();
         $registeredGrievanceCount = $this->grievanceDetails->where('is_approved', 0)->count();
         $publicGrievanceCount = $this->grievanceDetails->where('is_public', 1)->count();

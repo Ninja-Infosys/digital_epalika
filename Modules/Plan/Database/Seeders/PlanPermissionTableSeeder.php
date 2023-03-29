@@ -12,6 +12,7 @@ class PlanPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'planDashboard_access',
             'planArea_access',
             'planArea_create',
             'planArea_edit',

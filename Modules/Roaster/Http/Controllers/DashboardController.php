@@ -45,6 +45,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('roasterDashboard_access');
+
         if (request()->ajax()) {
             return [
                 'trainingAccordingToFiscalYear' => $this->trainingAccordingToFiscalYear(),

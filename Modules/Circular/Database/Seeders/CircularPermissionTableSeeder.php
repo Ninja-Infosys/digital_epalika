@@ -20,6 +20,7 @@ class CircularPermissionTableSeeder extends Seeder
             'dispatch_create',
             'dispatch_edit',
             'dispatch_delete',
+            'circularDashboard_access',
         ];
 
         $this->storePermission($permissions);

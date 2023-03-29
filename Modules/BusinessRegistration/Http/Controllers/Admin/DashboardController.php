@@ -28,6 +28,8 @@ class DashboardController extends Controller
     }
     public function __invoke()
     {
+        $this->checkAuthorization('businessRegistrationDashboard_access');
+
         $totalBusinessCount = $this->businessDetail->count();
         $totalBusinessDetailNatureCount = BusinessNature::count();
         $totalObjectTransactionCategoryCount = ObjectTransaction::count();

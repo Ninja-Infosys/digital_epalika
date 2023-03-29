@@ -12,6 +12,7 @@ class RecommendationPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'recommendationDashboard_access',
             'recommendationTemplate_access',
             'recommendationTemplate_create',
             'recommendationTemplate_edit',

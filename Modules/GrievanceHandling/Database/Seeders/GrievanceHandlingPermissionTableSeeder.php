@@ -12,6 +12,7 @@ class GrievanceHandlingPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'grievanceHandlingDashboard_access',
             'grievanceType_access',
             'grievanceType_create',
             'grievanceType_edit',

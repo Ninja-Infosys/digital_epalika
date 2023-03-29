@@ -41,7 +41,8 @@ class BusinessRegistrationPermissionTableSeeder extends Seeder
             'businessRenew_access',
             'businessRenew_create',
             'businessRenew_edit',
-            'businessRenew_delete'
+            'businessRenew_delete',
+            'businessRegistrationDashboard_access',
         ];
 
         $this->storePermission($permissions);

@@ -12,6 +12,7 @@ class JudicialPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'judicialCommitteeDashboard_access',
             'lawsuitNature_access',
             'lawsuitNature_create',
             'lawsuitNature_edit',

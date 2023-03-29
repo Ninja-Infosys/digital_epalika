@@ -12,6 +12,7 @@ class ListRegistrationPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'listRegistrationDashboard_access',
             'listRegistration_access',
             'listRegistration_create',
             'listRegistration_edit',

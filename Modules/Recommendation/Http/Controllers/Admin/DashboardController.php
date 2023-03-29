@@ -23,6 +23,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('recommendationDashboard_access');
+
         if (request()->ajax()) {
             return [
                 'categoryWise'=>$this->getCategoryWiseData(),

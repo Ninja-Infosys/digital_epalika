@@ -29,6 +29,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('circularDashboard_access');
+
         $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
 
         $total_registrations = Registration::count();

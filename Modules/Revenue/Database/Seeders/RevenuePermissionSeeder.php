@@ -12,6 +12,7 @@ class RevenuePermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'revenueDashboard_access',
             'invoice_access',
             'invoice_create',
             'invoice_edit',

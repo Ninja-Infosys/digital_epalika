@@ -22,6 +22,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('eMapDashboard_access');
+
         if (request()->ajax()) {
             return [
                 'mapApply' => $this->getMapApplyAccordingToFiscalYear(),

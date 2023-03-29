@@ -16,6 +16,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('grantDashboard_access');
+
         $farmers_count = Farmer::count();
         $cooperative_count = Cooperative::count();
         $groups_count = Group::count();

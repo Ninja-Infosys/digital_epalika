@@ -36,6 +36,7 @@ class EMapPermissionTableSeeder extends Seeder
             'mapApplyNotice_access',
             'mapApplyNotice_print',
             'mapApplyNoticeReject_access',
+            'eMapDashboard_access',
         ];
 
         $this->storePermission($permissions);

@@ -29,6 +29,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('listRegistrationDashboard_access');
+
         $nepali_date = $this->get_nepali_date(today()->format('Y'), today()->format('m'), today()->format('d'));
 
         if (request()->ajax()) {

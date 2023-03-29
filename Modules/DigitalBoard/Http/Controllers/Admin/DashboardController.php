@@ -16,6 +16,8 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('digitalBoardDashboard_access');
+
         $video_count = Video::count();
         $employee_count = Employee::count();
         $notice_count = Notice::whereType('Notice')->count();

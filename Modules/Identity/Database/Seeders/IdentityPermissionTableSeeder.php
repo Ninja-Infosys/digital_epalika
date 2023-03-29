@@ -12,6 +12,7 @@ class IdentityPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'identityDashboard_access',
             'disabilityReason_access',
             'disabilityReason_create',
             'disabilityReason_edit',
