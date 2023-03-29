@@ -9,6 +9,7 @@ use App\Models\Website\Slider;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use Module;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
@@ -27,6 +28,9 @@ class FrontController extends Controller
 
     public function index()
     {
+        if ($this->checkModuleExistence('DigitalBoard')) {
+            return redirect(route('login'));
+        }
         if (config('app.website_type') === 'website') {
             $employees = Employee::orderBy('position')->get();
 
@@ -139,7 +143,7 @@ class FrontController extends Controller
 
     public function disabilityIdentityCardQrcode(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        $disabilityIdentityCard->load('fingerPrints', 'employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));

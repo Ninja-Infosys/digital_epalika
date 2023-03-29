@@ -31,7 +31,7 @@ Route::resource('meeting', MeetingController::class);
 Route::resource('{event_for}/meetingEvent', MeetingEventController::class)->whereIn('event_for', ['municipal', 'ward']);
 Route::get('{event_for}/upcoming-meetings', [MeetingEventController::class, 'upcomingMeetings'])->name('upcomingMeetingEvents')->whereIn('event_for', ['municipal', 'ward']);
 
-Route::resource('{meeting_for}/meetingDecision', MeetingDecisionController::class)->whereIn('meeting_for', ['municipal', 'ward']);
+Route::resource('meetingDecision', MeetingDecisionController::class);
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/','index')->name('index');

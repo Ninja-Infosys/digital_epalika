@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
+use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Transformers\MeetingResourceReport;
 
@@ -14,14 +16,19 @@ class ReportController extends Controller
     public function index()
     {
         $fiscalYears = FiscalYear::all();
+        $committees = Committee::all();
         $columnData = $this->getColumns();
-        return view('executivemeeting::admin.report.index',compact('fiscalYears','columnData'));
+        return view('executivemeeting::admin.report.index', compact('committees', 'fiscalYears', 'columnData'));
     }
 
     public function report(Request $request)
     {
         $request->validate([
             'from_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => ['nullable', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'committee' => ['nullable', 'array'],
+            'committee.*' => ['nullable', Rule::exists('committees', 'id')->withoutTrashed()],
             'to_date' => ['nullable', 'after_or_equal:from_date'],
             'columns' => ['nullable', 'array']
         ]);
@@ -36,26 +43,9 @@ class ReportController extends Controller
             );
         }
 
-        $meetings = Meeting::with('fiscalYear','committee')->where(function ($q) use ($request) {
+        $meetings = Meeting::with('fiscalYear', 'committee')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
-
-//        if (!empty($request->input('columns')['partners'])) {
-//            $projects->load(['partners' => function ($q) {
-//                $q->with('province', 'localBody', 'district', 'issueDistrict');
-//            }]);
-//        }
-//
-//        if (!empty($request->input('columns')['registered_businesses'])) {
-//            $projects->load('registeredBusinesses');
-//        }
-//
-//        if (!empty($request->input('columns')['business_renews'])) {
-//            $projects->load(['businessRenew' => function ($q) {
-//                $q->with('fiscalYear');
-//            }]);
-//        }
-
         return response()->json([
             'data' => MeetingResourceReport::collection($meetings)
         ]);
@@ -82,24 +72,17 @@ class ReportController extends Controller
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
 
-//        if (!empty($request->input('from_date'))) {
-//            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
-//        }
-//
-//        if (!empty($request->input('to_date'))) {
-//            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
-//        }
-//
-//        if (!empty($request->input('object_transaction'))) {
-//            $q->whereIn('object_transaction_id', $request->input('object_transaction'));
-//        }
-//
-//        if (!empty($request->input('business_nature'))) {
-//            $q->whereIn('business_nature_id', $request->input('business_nature'));
-//        }
-//        if (!empty($request->input('ward_no'))) {
-//            $q->whereIn('ward_no', $request->input('ward_no'));
-//        }
+        if (!empty($request->input('from_date'))) {
+            $q->whereDate('start_date', '>=', $request->input('from_date'));
+        }
+
+        if (!empty($request->input('to_date'))) {
+            $q->whereDate('end_date', '<=', $request->input('to_date'));
+        }
+
+        if (!empty($request->input('committee'))) {
+            $q->whereIn('committee_id', $request->input('committee'));
+        }
     }
 
 }

@@ -26,8 +26,8 @@
                         <h4 class="header-title mb-0">बैठक निर्णयहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            @can($meeting_for . 'MeetingDecision_create')
-                                <a href="{{route('admin.executiveMeeting.meetingDecision.create',$meeting_for)}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            @can('meetingDecision_create')
+                                <a href="{{route('admin.executiveMeeting.meetingDecision.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -49,19 +49,19 @@
                             @forelse($meetingDecisions as $meetingDecision)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$meetingDecision->meetingEvent->event_name??''}}</td>
+                                    <td>{{$meetingDecision->meeting->meeting_name??''}}</td>
                                     <td>{{$meetingDecision->date }}</td>
                                     <td>{{$meetingDecision->subject}}</td>
 
                                     <td>
-                                        @can($meeting_for . 'MeetingDecision_edit')
-                                        <a data-bs-type="edit" href="{{route('admin.executiveMeeting.meetingDecision.edit',[$meeting_for,$meetingDecision])}}"
+                                        @can('meetingDecision_edit')
+                                        <a data-bs-type="edit" href="{{route('admin.executiveMeeting.meetingDecision.edit',$meetingDecision)}}"
                                         title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     @endcan
-                                    @can($meeting_for . 'MeetingDecision_delete')
-                                    <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',[$meeting_for,$meetingDecision])}}"
+                                    @can('meetingDecision_delete')
+                                    <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',$meetingDecision)}}"
                                     method="post">
                                             @csrf
                                             @method('delete')

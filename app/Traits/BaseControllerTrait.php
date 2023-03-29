@@ -6,6 +6,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Module;
 
 trait BaseControllerTrait
 {
@@ -37,5 +38,10 @@ trait BaseControllerTrait
     public function forgotCache(string $cacheName): void
     {
         Cache::forget($cacheName);
+    }
+
+    public function checkModuleExistence(string $moduleName): bool
+    {
+        return !collect(Module::allEnabled())->keys()->contains($moduleName);
     }
 }
