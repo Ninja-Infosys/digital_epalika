@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
+use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -103,10 +104,25 @@ class RecommendationCategoryController extends Controller
                 '[@office_name]',
                 '[@letter_head]',
                 '[@today_date]',
+                '[@province]',
+                '[@district]',
+                '[@municipal]',
             ];
             return response()->json([
-                'data' => Str::replace($replace, [officeSetting()->name, letterHead(), $this->get_today_nepali_date()], $template)
+                'data' => Str::replace($replace, $this->getRecommendationTemplateData(), $template)
             ]);
         }
+    }
+
+    protected function getRecommendationTemplateData()
+    {
+        return [
+            officeSetting()->name,
+            letterHead(),
+            $this->get_today_nepali_date(),
+            \officeSetting()->province->province ?? '',
+            \officeSetting()->district->district ?? '',
+            \officeSetting()->localBody->local_body ?? '',
+        ];
     }
 }

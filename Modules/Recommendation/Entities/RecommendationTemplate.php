@@ -47,6 +47,13 @@ class RecommendationTemplate extends Model
                 'कार्यालय लेटर हेड' => '[@letter_head]',
                 'आजको मिति' => '[@today_date]',
             ],
+        ],[
+            'title' => 'ठेगाना',
+            'data' => [
+                'प्रदेश' => '[@province]',
+                'जिल्ला' => '[@district]',
+                'पालिका' => '[@municipal]',
+            ],
         ],
     ];
 
