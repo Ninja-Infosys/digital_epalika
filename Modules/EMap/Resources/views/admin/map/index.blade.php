@@ -41,6 +41,7 @@
                         <th data-toggle="true">क्र.सं.</th>
                         <th data-hide="phone">आर्थिक वर्ष</th>
                         <th>युनिक आइडी</th>
+                        <th>फाईल कोड नं</th>
                         <th>दर्ता नं</th>
                         <th data-hide="phone">निर्माण कार्यको किसिम</th>
                         <th data-hide="phone">आवेदन भर्ने संस्था</th>
@@ -54,6 +55,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
                             <td>{{ $mapApply->unique_id ?? '' }}</td>
+                            <td>{{ $mapApply->file_code ?? '' }}</td>
                             <td>{{ $mapApply->registration_no ?? '' }}</td>
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
@@ -74,7 +76,7 @@
                                         @method('put')
                                         <div class="input-group">
                                             <select class="form-select form-select-sm" name="sent_to_organization"
-                                                id="sent_to_organization" aria-label="Example select with button addon">
+                                                id="sent_to_organization" aria-label="Example select with button addon"   @if($mapApply->sent_to_organization=='Accept') disabled @endif>
                                                 <option value="" disabled selected>--- छान्नुहोस् ---</option>
                                                 <option value="Unseen"
                                                     {{ $mapApply->sent_to_organization == 'Unseen' ? 'selected' : '' }}>
@@ -86,9 +88,10 @@
                                                     {{ $mapApply->sent_to_organization == 'Reject' ? 'selected' : '' }}>
                                                     अस्वीकार</option>
                                             </select>
-                                            <button class="btn btn-sm btn-outline-primary" type="submit">पेश
+                                            <button   @if($mapApply->sent_to_organization=='Accept') disabled @endif class="btn btn-sm btn-outline-primary" type="submit">पेश
                                                 गर्नुहोस्</button>
                                         </div>
+
                                     </form>
                                     <a href="{{ route('emap.admin.map.mapApply.mapDetail', [$mapApply, $applicationFormTypeEnum]) }}" title="विवरण हेर्नुहोस"
                                         class="btn btn-xs btn-outline-success">

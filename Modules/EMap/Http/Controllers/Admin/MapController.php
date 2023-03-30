@@ -6,6 +6,7 @@ use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Notifications\ApplyMapNoticeNotification;
 use App\Notifications\MapApplyNotification;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,6 +23,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MapController extends Controller
 {
+    use NepaliDateConverter;
+
     public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
 
@@ -73,7 +76,7 @@ class MapController extends Controller
 
     public function mapDetail(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
-        $mapApply->load('attachDocument','structureType','storeyDetails.mapFee','landDetail', 'landOwner', 'houseOwner', 'fourForts','designerDetails','applicantDetail','criteriaDetails','buildingDetails','organization.organizationDetail');
+        $mapApply->load('attachDocument', 'structureType', 'storeyDetails.mapFee', 'landDetail', 'landOwner', 'houseOwner', 'fourForts', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'organization.organizationDetail');
         return view('emap::admin.map.mapdetail', compact('mapApply', 'applicationFormTypeEnum'));
     }
 
@@ -86,13 +89,13 @@ class MapController extends Controller
             ->first();
         if (!empty($request->input('remarks'))) {
             $data->update([
-                'type'=>'Reject',
+                'type' => 'Reject',
                 'rejected_at' => now(),
                 'remarks' => $request->input('remarks'),
             ]);
         } else {
             $data->update([
-                'type'=>'Accept',
+                'type' => 'Accept',
                 'rejected_at' => null,
                 'remarks' => null,
             ]);
@@ -177,13 +180,23 @@ class MapController extends Controller
     public function updateStatus(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
 
+        $this->checkAuthorization('mapApply_access');
+        abort_if($mapApply->sent_to_organization == 'Accept', 403);
         DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
+            $number = MapApply::whereFiscalYearId(\officeSetting()->fiscal_year_id)
+                    ->max('number') + 1;
             $mapApply->update([
                 'sent_to_organization' => $request->input('sent_to_organization')
             ]);
             if ($mapApply->sent_to_organization == 'Reject') {
                 $mapApply->update([
                     'sent_to_admin_at' => null
+                ]);
+            }
+            if ($mapApply->sent_to_organization == 'Accept') {
+                $mapApply->update([
+                    'number' => $number,
+                    'file_code' => $this->get_today_nepali_date() . '/' . $mapApply->landDetail->ward_no . '/' . $number,
                 ]);
             }
         });
