@@ -88,7 +88,7 @@
         <li class="{{request()->is('admin.recommendation.dashboard') ? 'active' : ''}}">
             <a href="{{route('admin.recommendation.dashboard')}}">
                 <img src="{{asset('assets/backend/images/modules/recommendation.png')}}" height="25" loading="lazy">
-                <span>शिफारिस प्रणाली</span>
+                <span>सिफारिस प्रणाली</span>
             </a>
         </li>
     @endcan

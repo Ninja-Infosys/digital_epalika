@@ -19,7 +19,7 @@ class UpdatePersonalDetailRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'phone_no' => ['required', 'string'],
+            'phone_no' => ['nullable', 'string'],
             'is_minor' => ['nullable', 'boolean'],
             'citizenship_no' => ['required', 'string'],
             'gender' => ['required', new Enum(Gender::class)],
