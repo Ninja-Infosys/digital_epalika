@@ -63,7 +63,7 @@
                                         value="{{old('phone_no', $personalDetail->phone_no)}}"
                                         class="form-control @error('phone_no') is-invalid @enderror"
                                         id="phone_no"
-                                        placeholder="सम्पर्क नं." required
+                                        placeholder="सम्पर्क नं."
                                     />
                                     @error('phone_no')
                                     <div class="invalid-feedback">{{$message}}</div>
