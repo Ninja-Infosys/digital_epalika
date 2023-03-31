@@ -14,7 +14,7 @@ class RecommendationSettingController extends Controller
     {
         $this->checkAuthorization('recommendationSetting_access');
         $employees = Employee::all();
-        $recommendationSetting = RecommendationSetting::where('ward_no', auth()->user()->ward_no)->first() ?? RecommendationSetting::first(1);
+        $recommendationSetting = RecommendationSetting::where('ward_no', auth()->user()->ward_no)->first() ?? RecommendationSetting::findOrFail(1);
         return view('recommendation::admin.setting.employee', compact('employees', 'recommendationSetting'));
     }
 
