@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\OfficeHeader;
+use App\Models\Settings\Employee;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
-use Module;
-use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;

@@ -54,6 +54,8 @@ class RecommendationTemplate extends Model
                 'जिल्ला' => '[@district]',
                 'पालिका' => '[@municipal]',
                 'वडा नं' => '[@ward]',
+                'अध्यक्ष' => '[@chairman]',
+                'सचिव' => '[@secretary]',
             ],
         ],
     ];

@@ -4,8 +4,8 @@ namespace Modules\DigitalBoard\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
+use App\Models\Settings\Employee;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Service;
 use Modules\DigitalBoard\Entities\Video;

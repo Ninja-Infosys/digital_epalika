@@ -6,10 +6,12 @@ use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
+use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
 use Modules\Recommendation\Http\Controllers\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::prefix('setting')->as('setting.')->group(function () {
+    Route::resource('recommendationSetting', RecommendationSettingController::class)->only(['index','update']);
     Route::get('{type}/recommendationCategory/{recommendationCategory}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
     Route::get('recommendationCategory/{recommendationCategory}/getTemplate',[RecommendationCategoryController::class,'getTemplateData'])->name('recommendationCategory.getTemplate');
     Route::get('{type}/recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class,'updateStatus'])->name('recommendationCategory.updateStatus');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\DigitalBoard\Entities;
+namespace App\Models\Settings;
 
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

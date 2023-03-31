@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.employee.index')}}">डिजिटल बोर्ड</a>
+                            <a href="{{route('admin.generalSetting.employee.index')}}">डिजिटल बोर्ड</a>
                         </li>
                         <li class="breadcrumb-item active">कर्मचारी </li>
                     </ol>
@@ -31,7 +31,7 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('employee_create')
-                                <a href="{{route('admin.digitalBoard.employee.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.generalSetting.employee.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -59,16 +59,16 @@
                                     <td>{{$employee->designation}}</td>
                                     <td>{{$employee->position}}</td>
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.generalSetting.employee.updateEmployeeStatus',$employee)}}"
                                            class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}" title="स्थिति">
                                             <i class="fa  {{$employee->status==1 ?' fa-check':'fa-window-close'}}"></i>
 
                                         </a>
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.employee.edit',$employee)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.generalSetting.employee.edit',$employee)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{route('admin.digitalBoard.employee.destroy',$employee)}}"
+                                        <form action="{{route('admin.generalSetting.employee.destroy',$employee)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

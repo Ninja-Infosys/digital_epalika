@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.employee.index')}}">कर्मचारी </a>
+                            <a href="{{route('admin.generalSetting.employee.index')}}">कर्मचारी </a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ कर्मचारी थप्नुहोस्</li>
                     </ol>
@@ -28,13 +28,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कर्मचारी थप्नुहोस्</h4>
-                        <a href="{{route('admin.digitalBoard.employee.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.generalSetting.employee.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> कर्मचारी सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.employee.store')}}" method="post"
+                    <form action="{{route('admin.generalSetting.employee.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">

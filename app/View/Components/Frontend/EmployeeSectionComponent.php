@@ -2,8 +2,8 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Models\Settings\Employee;
 use Illuminate\View\Component;
-use Modules\DigitalBoard\Entities\Employee;
 
 class EmployeeSectionComponent extends Component
 {

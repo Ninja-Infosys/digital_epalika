@@ -86,12 +86,12 @@
                     </a>
                 </li>
 
-                <li class="{{request()->is('admin/recommendation/setting/recommendationSubCategory/recommendationCategory*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
-                        <span>सिफारिस उप श्रेणी</span>
-                    </a>
-                </li>
             @endcan
+            <li class="{{request()->is('admin/recommendation/setting/recommendationSetting*') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
+                    <span>सेटिङ</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

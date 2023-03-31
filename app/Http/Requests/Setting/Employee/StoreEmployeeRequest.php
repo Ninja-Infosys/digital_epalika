@@ -1,16 +1,16 @@
 <?php
 
-namespace Modules\DigitalBoard\Http\Requests\Employee;
+namespace App\Http\Requests\Setting\Employee;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class UpdateEmployeeRequest extends FormRequest
+class StoreEmployeeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('employee_edit');
+        return Gate::allows('employee_create');
     }
 
     public function rules(): array
@@ -20,8 +20,8 @@ class UpdateEmployeeRequest extends FormRequest
             'department' => ['nullable', 'string'],
             'designation' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg'],
-            'email' => ['nullable', 'email', Rule::unique('employees', 'email')->withoutTrashed()->ignore($this->employee)],
-            'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()->ignore($this->employee)],
+            'email' => ['nullable', 'email', Rule::unique('employees', 'email')->withoutTrashed()],
+            'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()],
             'position' => ['nullable', 'integer'],
             'status' => ['nullable', 'boolean'],
             'is_employee' => ['required', 'boolean'],
