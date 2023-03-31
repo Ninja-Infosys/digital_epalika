@@ -53,6 +53,7 @@ class RecommendationTemplate extends Model
                 'प्रदेश' => '[@province]',
                 'जिल्ला' => '[@district]',
                 'पालिका' => '[@municipal]',
+                'वडा' => '[@ward]',
             ],
         ],
     ];

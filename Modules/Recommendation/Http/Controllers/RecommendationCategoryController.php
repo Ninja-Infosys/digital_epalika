@@ -107,6 +107,7 @@ class RecommendationCategoryController extends Controller
                 '[@province]',
                 '[@district]',
                 '[@municipal]',
+                '[@ward]',
             ];
             return response()->json([
                 'data' => Str::replace($replace, $this->getRecommendationTemplateData(), $template)
@@ -123,6 +124,7 @@ class RecommendationCategoryController extends Controller
             \officeSetting()->province->province ?? '',
             \officeSetting()->district->district ?? '',
             \officeSetting()->localBody->local_body ?? '',
+            auth()->user()->ward_no ?? '',
         ];
     }
 }
