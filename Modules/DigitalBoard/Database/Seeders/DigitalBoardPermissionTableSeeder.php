@@ -25,10 +25,6 @@ class DigitalBoardPermissionTableSeeder extends Seeder
             'digitalBoardNews_create',
             'digitalBoardNews_edit',
             'digitalBoardNews_delete',
-            'employee_access',
-            'employee_create',
-            'employee_edit',
-            'employee_delete',
         ];
 
         $this->storePermission($permissions);
