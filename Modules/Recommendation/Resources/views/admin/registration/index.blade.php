@@ -137,9 +137,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($registrationDetails as $registrationDetail)
+                            @forelse ($registrationDetails as $key=>$registrationDetail)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $registrationDetails->firstItem() + $key }}</td>
                                     <td>{{ $registrationDetail->registration_no }}</td>
                                     <td>{{ $registrationDetail->personalDetail->name??'' }}</td>
                                     <td>
