@@ -87,11 +87,13 @@
                 </li>
 
             @endcan
-            <li class="{{request()->is('admin/recommendation/setting/recommendationSetting*') ? 'active' : ''}}">
-                <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
-                    <span>सेटिङ</span>
-                </a>
-            </li>
+            @can('recommendationSetting_access')
+                <li class="{{request()->is('admin/recommendation/setting/recommendationSetting*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
+                        <span>सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
