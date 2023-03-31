@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\Recommendation\Entities\RecommendationCategory;
+use Modules\Recommendation\Entities\RecommendationSetting;
 use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\StoreRecommendationCategoryRequest;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\UpdateRecommendationCategoryRequest;
@@ -108,6 +109,8 @@ class RecommendationCategoryController extends Controller
                 '[@district]',
                 '[@municipal]',
                 '[@ward]',
+                '[@chairman]',
+                '[@secretary]',
             ];
             return response()->json([
                 'data' => Str::replace($replace, $this->getRecommendationTemplateData(), $template)
@@ -117,6 +120,7 @@ class RecommendationCategoryController extends Controller
 
     protected function getRecommendationTemplateData()
     {
+        $recommendationSetting = RecommendationSetting::with('wardChairman','wardSecretary')->where('ward_no', auth()->user()->ward_no)?->first();
         return [
             officeSetting()->name,
             letterHead(),
@@ -125,6 +129,9 @@ class RecommendationCategoryController extends Controller
             \officeSetting()->district->district ?? '',
             \officeSetting()->localBody->local_body ?? '',
             auth()->user()->ward_no ?? '',
+            $recommendationSetting?->wardChairman->name ?? '',
+            $recommendationSetting?->wardSecretary->name ?? ''
+
         ];
     }
 }

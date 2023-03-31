@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EmergencyNumberController;
+use App\Http\Controllers\Admin\Setting\EmployeeController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
@@ -82,6 +83,8 @@ Route::prefix('setting')->group(function () {
         Route::resource('emergencyNumber', EmergencyNumberController::class);
         Route::resource('department', DepartmentController::class);
         Route::resource('designation', DesignationController::class);
+        Route::get('employee/{employee}/updateEmployeeStatus', [EmployeeController::class, 'updateEmployeeStatus'])->name('employee.updateEmployeeStatus');
+        Route::resource('employee', EmployeeController::class);
         Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
         Route::resource('branch', BranchController::class);
     });

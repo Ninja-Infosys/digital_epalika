@@ -71,6 +71,10 @@ class PermissionSeeder extends Seeder
             'occupation_create',
             'occupation_edit',
             'occupation_delete',
+            'employee_access',
+            'employee_create',
+            'employee_edit',
+            'employee_delete',
         ];
 
         $this->storePermission($permissions);
