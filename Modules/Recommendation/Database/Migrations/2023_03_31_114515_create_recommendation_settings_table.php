@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('ward_chairman_id')->nullable()->constrained('employees')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('ward_secretary_id')->nullable()->constrained('employees')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('user_id')->nullable()->constrained('employees')->nullOnDelete()->onUpdate('no action');
-            $table->string('word_no')->nullable();
+            $table->string('ward_no')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
