@@ -2,7 +2,7 @@
     <div class="row" data-toggle="address-1">
         <div class="col-md-3 mb-2">
             <label for="province_id">प्रदेश</label>
-            <select name="province_id" class="form-select" id="province_id">
+            <select name="province_id" class="form-select @error('province_id') is-invalid @enderror" id="province_id">
                 <option value="">--- छान्नुहोस् ---</option>
                 @foreach($provinces as $province)
                     <option
@@ -12,24 +12,36 @@
                     </option>
                 @endforeach
             </select>
+            @error('province_id')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-3 mb-2">
             <label for="district_id">जिल्ला</label>
-            <select name="district_id" class="form-select" id="district_id">
+            <select name="district_id" class="form-select @error('district_id') is-invalid @enderror" id="district_id">
                 <option value="">--- छान्नुहोस् ---</option>
             </select>
+            @error('district_id')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-3 mb-2">
             <label for="local_body_id">पालिका</label>
-            <select name="local_body_id" class="form-select" id="local_body_id">
+            <select name="local_body_id" class="form-select @error('local_body_id') is-invalid @enderror" id="local_body_id">
                 <option value="">--- छान्नुहोस् ---</option>
             </select>
+            @error('local_body_id')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-3 mb-2">
             <label for="ward_no">वडा नं.</label>
-            <select name="ward_no" class="form-select" id="ward_no">
+            <select name="ward_no" class="form-select @error('ward_no') is-invalid @enderror" id="ward_no">
                 <option value="">--- छान्नुहोस् ---</option>
             </select>
+            @error('ward_no')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
         </div>
     </div>
     @push('scripts')

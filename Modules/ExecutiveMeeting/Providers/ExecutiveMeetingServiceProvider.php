@@ -3,6 +3,7 @@
 namespace Modules\ExecutiveMeeting\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Observers\CommitteeMemberObserver;
@@ -31,6 +32,9 @@ class ExecutiveMeetingServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        //share meeting committee in sidebar
+        view()->share('sharedCommittees',Committee::orderBy('committee_type_id')->get());
 
         CommitteeMember::observe(CommitteeMemberObserver::class);
         Meeting::observe(MeetingObserver::class);

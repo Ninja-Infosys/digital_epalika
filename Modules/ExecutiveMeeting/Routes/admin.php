@@ -8,7 +8,6 @@ use Modules\ExecutiveMeeting\Http\Controllers\Admin\CommitteeTypeController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\DashboardController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingDecisionController;
-use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingEventController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -25,11 +24,8 @@ Route::controller(CalenderController::class)
         Route::get('meeting-calendar', 'getData')->name('meetingCalendar');
     });
 
-Route::resource('committeeMember', CommitteeMemberController::class);
+Route::resource('committee/{committee}/committeeMember', CommitteeMemberController::class)->names('committee.committeeMember');
 Route::resource('meeting', MeetingController::class);
-
-Route::resource('{event_for}/meetingEvent', MeetingEventController::class)->whereIn('event_for', ['municipal', 'ward']);
-Route::get('{event_for}/upcoming-meetings', [MeetingEventController::class, 'upcomingMeetings'])->name('upcomingMeetingEvents')->whereIn('event_for', ['municipal', 'ward']);
 
 Route::resource('meetingDecision', MeetingDecisionController::class);
 

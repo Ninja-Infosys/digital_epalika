@@ -7,17 +7,19 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.committeeMember.index')}}">इ-कार्यपालिका</a>
+                            <a href="{{route('admin.executiveMeeting.committee.committeeMember.index',$committee)}}">
+                                {{$committee->committee_name}} सदस्य
+                            </a>
                         </li>
                         <li class="breadcrumb-item active">समिति सदस्य सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">समिति सदस्य</h4>
+                <h4 class="page-title">{{$committee->committee_name}} सदस्य</h4>
             </div>
         </div>
     </div>
@@ -28,14 +30,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">समिति सदस्य सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.committeeMember.index')}}"
+                        <a href="{{route('admin.executiveMeeting.committee.committeeMember.index',$committee)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> समिति सदस्य बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.committeeMember.update',$committeeMember)}}"
+                    <form action="{{route('admin.executiveMeeting.committee.committeeMember.update',[$committee,$committeeMember])}}"
                           method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -44,19 +46,6 @@
                                 <strong>व्यक्तिगत विवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="committee_id" class="form-label">समिति *</label>
-                                    <select name="committee_id" id="committee_id" class="form-select">
-                                        <option value="">--छान्नुहोस्--</option>
-                                        @foreach($committees as $committee)
-                                            <option
-                                                value="{{$committee->id}}" {{old('committee_id',$committeeMember->committee_id)==$committee->id ? 'selected':''}}>{{$committee->committee_name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('committee_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="name" class="form-label">नाम *</label>
                                     <input

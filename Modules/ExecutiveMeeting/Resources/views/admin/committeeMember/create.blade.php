@@ -7,12 +7,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.committeeMember.index')}}">इ-कार्यपालिका</a>
+                            <a href="{{route('admin.executiveMeeting.committee.committeeMember.index',$committee)}}">
+                                {{$committee->committee_name}} सदस्य
+                            </a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ समिति सदस्य थप्नुहोस्</li>
                     </ol>
@@ -28,13 +30,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ समिति सदस्य थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.committeeMember.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.executiveMeeting.committee.committeeMember.index',$committee)}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> समिति सदस्य बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.committeeMember.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.executiveMeeting.committee.committeeMember.store',$committee)}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-2 mb-2">
@@ -42,18 +44,6 @@
                                 <strong>व्यक्तिगत विवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="committee_id" class="form-label">समिति  *</label>
-                                   <select name="committee_id" id="committee_id" class="form-select">
-                                       <option value="">--छान्नुहोस्--</option>
-                                       @foreach($committees as $committee)
-                                           <option value="{{$committee->id}}">{{$committee->committee_name}}</option>
-                                       @endforeach
-                                   </select>
-                                    @error('committee_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="name" class="form-label">नाम  *</label>
                                     <input

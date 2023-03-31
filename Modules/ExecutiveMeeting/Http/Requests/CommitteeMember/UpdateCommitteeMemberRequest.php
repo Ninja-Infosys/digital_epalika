@@ -16,7 +16,6 @@ class UpdateCommitteeMemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'committee_id' => ['required', Rule::exists('committees', 'id')->withoutTrashed()],
             'name' => ['required', 'string', 'max:255'],
             'designation' => ['required', 'string', 'max:255'],
             'phone' => ['nullable'],
