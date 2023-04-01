@@ -4,8 +4,8 @@ namespace Modules\DigitalBoard\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
+use App\Models\Settings\Employee;
 use App\Models\Settings\OfficeSetting;
-use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Service;
 use Modules\DigitalBoard\Entities\Video;

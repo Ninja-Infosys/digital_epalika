@@ -2,7 +2,7 @@
 
 namespace Modules\DigitalBoard\Observers;
 
-use Modules\DigitalBoard\Entities\Employee;
+use App\Models\Settings\Employee;
 
 class EmployeeObserver
 {

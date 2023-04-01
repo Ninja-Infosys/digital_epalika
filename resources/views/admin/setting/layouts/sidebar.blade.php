@@ -12,8 +12,9 @@
         <span>सामान्य सेटिङ </span>
         <span class="menu-arrow"><i class="fas fa-angle-right"></i></span>
     </a>
-    <div class="collapse {{request()->is('admin/setting/generalSetting*') || request()->is('admin/setting/generalSetting*') ? 'show' : ''}}"
-         id="generalSetting">
+    <div
+        class="collapse {{request()->is('admin/setting/generalSetting*') || request()->is('admin/setting/generalSetting*') ? 'show' : ''}}"
+        id="generalSetting">
         <ul class="nav-second-level">
             @can('fiscalYear_access')
                 <li class="{{request()->is('admin/setting/generalSetting/fiscalYear*') ? 'active' : ''}}">
@@ -54,20 +55,27 @@
                     </a>
                 </li>
             @endcan
-                @can('designation_access')
-                    <li class="{{request()->is('admin/setting/generalSetting/designation*') ? 'active' : ''}}">
-                        <a href="{{route('admin.generalSetting.designation.index')}}">
-                            <span> पद थप्नुहोस् </span>
-                        </a>
-                    </li>
-                @endcan
-                @can('department_access')
-                    <li class="{{request()->is('admin/setting/generalSetting/department*') ? 'active' : ''}}">
-                        <a href="{{route('admin.generalSetting.department.index')}}">
-                            <span> विभाग थप्नुहोस् </span>
-                        </a>
-                    </li>
-                @endcan
+            @can('designation_access')
+                <li class="{{request()->is('admin/setting/generalSetting/designation*') ? 'active' : ''}}">
+                    <a href="{{route('admin.generalSetting.designation.index')}}">
+                        <span> पद थप्नुहोस् </span>
+                    </a>
+                </li>
+            @endcan
+            @can('department_access')
+                <li class="{{request()->is('admin/setting/generalSetting/department*') ? 'active' : ''}}">
+                    <a href="{{route('admin.generalSetting.department.index')}}">
+                        <span> विभाग थप्नुहोस् </span>
+                    </a>
+                </li>
+            @endcan
+            @can('employee_access')
+                <li class="{{request()->is('admin/setting/generalSetting/employee*') ? 'active' : ''}}">
+                    <a href="{{route('admin.generalSetting.employee.index')}}">
+                        <span> कर्मचारीहरु</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
@@ -79,7 +87,8 @@
         <span>प्रणाली सेटिङ </span>
         <span class="menu-arrow"><i class="fas fa-angle-right"></i></span>
     </a>
-    <div class="collapse {{request()->is('admin/setting/systemSetting*') || request()->is('admin/setting/systemSetting*') ? 'show' : ''}}"
+    <div
+        class="collapse {{request()->is('admin/setting/systemSetting*') || request()->is('admin/setting/systemSetting*') ? 'show' : ''}}"
         id="systemSetting">
         <ul class="nav-second-level">
             @can('officeSetting_access')
@@ -89,11 +98,11 @@
                     </a>
                 </li>
             @endcan
-                <li class="{{request()->is('admin/setting/systemSetting/letterHead*') ? 'active' : ''}}">
-                    <a href="{{route('admin.systemSetting.letterHead.index')}}">
-                        <span> लेटर हेड </span>
-                    </a>
-                </li>
+            <li class="{{request()->is('admin/setting/systemSetting/letterHead*') ? 'active' : ''}}">
+                <a href="{{route('admin.systemSetting.letterHead.index')}}">
+                    <span> लेटर हेड </span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
@@ -105,7 +114,8 @@
         <span>सुविधा सेटिङ</span>
         <span class="menu-arrow"><i class="fas fa-angle-right"></i></span>
     </a>
-    <div class="collapse {{request()->is('admin/setting/featureSetting*') || request()->is('admin/setting/featureSetting*') ? 'show' : ''}}"
+    <div
+        class="collapse {{request()->is('admin/setting/featureSetting*') || request()->is('admin/setting/featureSetting*') ? 'show' : ''}}"
         id="featureSetting">
         <ul class="nav-second-level">
             @can('sms_access')
@@ -122,13 +132,13 @@
                     </a>
                 </li>
             @endcan
-                @can('feature_access')
-                    <li class="{{request()->is('admin/setting/featureSetting/feature*') ? 'active' : ''}}">
-                        <a href="{{route('admin.featureSetting.feature-activation')}}">
-                            <span>सुविधा सक्रियता </span>
-                        </a>
-                    </li>
-                @endcan
+            @can('feature_access')
+                <li class="{{request()->is('admin/setting/featureSetting/feature*') ? 'active' : ''}}">
+                    <a href="{{route('admin.featureSetting.feature-activation')}}">
+                        <span>सुविधा सक्रियता </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

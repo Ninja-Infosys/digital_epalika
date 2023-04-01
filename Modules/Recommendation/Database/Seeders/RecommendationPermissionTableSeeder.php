@@ -33,6 +33,8 @@ class RecommendationPermissionTableSeeder extends Seeder
             'recommendationReport_ward',
             'recommendationReport_recommendationCategory',
             'recommendationReport_personalDetail',
+            'recommendationSetting_access',
+            'recommendationSetting_edit'
         ];
 
         $this->storePermission($permissions);

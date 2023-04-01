@@ -10,58 +10,57 @@ use Modules\ExecutiveMeeting\Http\Requests\CommitteeMember\UpdateCommitteeMember
 
 class CommitteeMemberController extends Controller
 {
-    public function index()
+    public function index(Committee $committee)
     {
         $this->checkAuthorization('committeeMember_access');
-        $committeeMembers = CommitteeMember::paginate(10);
-        return view('executivemeeting::admin.committeeMember.index', compact('committeeMembers'));
+
+        $committeeMembers = CommitteeMember::where('committee_id', $committee->id)->paginate(10);
+
+        return view('executivemeeting::admin.committeeMember.index', compact('committee', 'committeeMembers'));
     }
 
-    public function create()
+    public function create(Committee $committee)
     {
         $this->checkAuthorization('committeeMember_create');
-        $committees = Committee::all();
-        return view('executivemeeting::admin.committeeMember.create',compact('committees'));
+
+        return view('executivemeeting::admin.committeeMember.create', compact('committee'));
     }
 
-    public function store(StoreCommitteeMemberRequest $request)
+    public function store(StoreCommitteeMemberRequest $request, Committee $committee)
     {
         $this->checkAuthorization('committeeMember_create');
-        CommitteeMember::create($request->validated() + [
+
+        $committee->committeeMembers()->create($request->validated() + [
                 'user_id' => auth()->id()
             ]);
-        toast('Committee member added successfully', 'success');
+
+        toast('समिति सदस्य सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 
-    public function show(CommitteeMember $committeeMember)
-    {
-        $this->checkAuthorization('committeeMember_access');
-        return view('executivemeeting::show');
-    }
-
-    public function edit(CommitteeMember $committeeMember)
+    public function edit(Committee $committee,CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_edit');
-        $committees = Committee::all();
-        return view('executivemeeting::admin.committeeMember.edit', compact('committeeMember','committees'));
+
+        return view('executivemeeting::admin.committeeMember.edit', compact('committeeMember', 'committee'));
     }
 
-    public function update(UpdateCommitteeMemberRequest $request, CommitteeMember $committeeMember)
+    public function update(UpdateCommitteeMemberRequest $request,Committee $committee, CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_edit');
 
         $committeeMember->update($request->validated());
 
-        toast('Committee member updated successfully', 'success');
-        return redirect(route('admin.executiveMeeting.committeeMember.index'));
+        toast('समिति सदस्य सफलतापूर्वक अपडेट', 'success');
+        return redirect(route('admin.executiveMeeting.committee.committeeMember.index',$committee));
     }
 
-    public function destroy(CommitteeMember $committeeMember)
+    public function destroy(Committee $committee,CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_delete');
+
         $committeeMember->delete();
-        toast('Committee member deleted successfully', 'success');
+        toast('समिति सदस्य सफलतापूर्वक हटाइयो', 'success');
         return back();
     }
 }

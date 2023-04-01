@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\DigitalBoard\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Modules\DigitalBoard\Entities\Employee;
-use Modules\DigitalBoard\Http\Requests\Employee\StoreEmployeeRequest;
-use Modules\DigitalBoard\Http\Requests\Employee\UpdateEmployeeRequest;
+use App\Http\Requests\Setting\Employee\StoreEmployeeRequest;
+use App\Http\Requests\Setting\Employee\UpdateEmployeeRequest;
+use App\Models\Settings\Employee;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 
 class EmployeeController extends Controller
 {
@@ -23,14 +23,14 @@ class EmployeeController extends Controller
         ->latest()->paginate(10);
 
 
-        return view('digitalboard::admin.employee.index', compact('employees'));
+        return view('admin.setting.employee.index', compact('employees'));
     }
 
     public function create()
     {
         $this->checkAuthorization('employee_create');
 
-        return view('digitalboard::admin.employee.create');
+        return view('admin.setting.employee.create');
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -45,16 +45,14 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        $this->checkAuthorization('employee_access');
 
-        return view('digitalboard::admin.employee.show', compact('employee'));
     }
 
     public function edit(Employee $employee)
     {
         $this->checkAuthorization('employee_edit');
 
-        return view('digitalboard::admin.employee.edit', compact('employee'));
+        return view('admin.setting.employee.edit', compact('employee'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
@@ -71,7 +69,7 @@ class EmployeeController extends Controller
 
         toast('कर्मचारी सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.digitalBoard.employee.index'));
+        return redirect(route('admin.generalSetting.employee.index'));
     }
 
     public function destroy(Employee $employee)

@@ -3,10 +3,9 @@
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Employee;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
-use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Video;
 

@@ -7,17 +7,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.dashboard') }}">
+                            <a href="{{ route('admin.executiveMeeting.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.executiveMeeting.committeeMember.index') }}">इ-कार्यपालिका</a>
-                        </li>
-                        <li class="breadcrumb-item active">समिति सदस्य</li>
+                        <li class="breadcrumb-item active">{{$committee->committee_name}} सदस्य</li>
                     </ol>
                 </div>
-                <h4 class="page-title">समिति सदस्य</h4>
+                <h4 class="page-title">{{$committee->committee_name}} सदस्य</h4>
             </div>
         </div>
     </div>
@@ -27,11 +24,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h4 class="header-title mb-0">समिति सदस्य</h4>
+                        <h4 class="header-title mb-0">{{$committee->committee_name}} सदस्य</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('committeeMember_access')
-                                <a href="{{route('admin.executiveMeeting.committeeMember.create')}}"
+                                <a href="{{route('admin.executiveMeeting.committee.committeeMember.create',$committee)}}"
                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
@@ -68,7 +65,7 @@
                                     <td>
                                         @can('committeeMember_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.executiveMeeting.committeeMember.edit',$committeeMember) }}"
+                                               href="{{ route('admin.executiveMeeting.committee.committeeMember.edit',[$committee,$committeeMember]) }}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
@@ -76,7 +73,7 @@
                                         @endcan
                                         @can('committeeMember_delete')
                                             <form
-                                                action="{{ route('admin.executiveMeeting.committeeMember.destroy',$committeeMember) }}"
+                                                action="{{ route('admin.executiveMeeting.committee.committeeMember.destroy',[$committee,$committeeMember]) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
