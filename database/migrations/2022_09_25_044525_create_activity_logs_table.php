@@ -11,7 +11,7 @@ return new class () extends Migration {
             $table->id();
             $table->nullableMorphs('model');
             $table->string('activity_type')->comment('गतिविधि प्रकार');
-            $table->foreignId('user_id')->comment('प्रयोगकर्ता ID')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->comment('प्रयोगकर्ता ID')->constrained()->nullOnDelete();
             $table->ipAddress('ip');
             $table->string('agent');
             $table->boolean('is_seen')->default(0);

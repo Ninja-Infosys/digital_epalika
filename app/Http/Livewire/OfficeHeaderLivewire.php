@@ -64,7 +64,7 @@ class OfficeHeaderLivewire extends Component
         });
 
         Cache::forget('officeHeaders');
-        return redirect(route('admin.officeSetting.index'));
+        return redirect(route('admin.systemSetting.officeSetting.index'));
     }
 
     public function render()
