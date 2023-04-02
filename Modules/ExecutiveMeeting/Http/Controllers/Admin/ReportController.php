@@ -46,6 +46,7 @@ class ReportController extends Controller
         $meetings = Meeting::with('fiscalYear', 'committee')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
+
         return response()->json([
             'data' => MeetingResourceReport::collection($meetings)
         ]);

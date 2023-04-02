@@ -28,14 +28,6 @@
     </a>
 </li>
 @endcan
-@can('employee_access')
-<li class="{{request()->is('admin/digitalBoard/employee*') ? 'active' : ''}}">
-    <a href="{{route('admin.digitalBoard.employee.index')}}">
-        <i class="fa fa-users"></i>
-        <span>जनप्रतिनिधि/कर्मचारीहरु</span>
-    </a>
-</li>
-@endcan
 @can('service_access')
     <li class="{{request()->routeIs('admin.digitalBoard.service.*') ? 'active' : ''}}">
         <a href="{{route('admin.digitalBoard.service.index')}}">
