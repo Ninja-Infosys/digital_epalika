@@ -87,6 +87,13 @@
                 </li>
 
             @endcan
+            @can('recommendationCategory_access')
+                <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
+                        <span>सिफारिस उप-श्रेणी</span>
+                    </a>
+                </li>
+            @endcan
             @can('recommendationSetting_access')
                 <li class="{{request()->is('admin/recommendation/setting/recommendationSetting*') ? 'active' : ''}}">
                     <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
