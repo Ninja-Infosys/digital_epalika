@@ -24,7 +24,8 @@ use Modules\Revenue\Http\Controllers\Admin\DashboardController as RevenueDashboa
 class DashboardController extends Controller
 {
     protected Collection $projects;
-protected Collection $revenues;
+    protected Collection $revenues;
+
     public function __construct()
     {
         parent::__construct();
@@ -41,12 +42,13 @@ protected Collection $revenues;
             $this->projects = Project::where('fiscal_year_id', \officeSetting()->fiscal_year_id)->get();
         }
     }
+
     public function __invoke()
     {
         if (request()->ajax()) {
             return [
-                "totalRevenue" =>(new RevenueDashboardController())->totalRevenue($this->revenues),
-                "revenueAccordingToMonth" =>(new RevenueDashboardController())->accordingToMonth($this->revenues),
+                "totalRevenue" => (new RevenueDashboardController())->totalRevenue($this->revenues),
+                "revenueAccordingToMonth" => (new RevenueDashboardController())->accordingToMonth($this->revenues),
                 'budgetHeadWiseProjects' => (new PlanDashboardController())->getBudgetHeadWiseProjects(),
                 'wardWiseProjects' => (new PlanDashboardController())->getWardWiseProjects(),
                 'constructionType' => (new EmapDashboardController())->getMapApplyConstructionTypeAccordingToFiscalYear(),
@@ -70,6 +72,7 @@ protected Collection $revenues;
 
         $user_count = User::count();
         $activityLogs = ActivityLog::with('user')
+            ->filter()
             ->whereDate('created_at', today()->toDateString())
             ->paginate(5);
 
@@ -140,7 +143,9 @@ protected Collection $revenues;
             ],
         ];
     }
-    public function cacheClear(){
+
+    public function cacheClear()
+    {
         Artisan::call('optimize:clear');
         return [
             'message' => 'क्यास सफलतापूर्वक खाली गरियो'
