@@ -88,7 +88,7 @@
 
             @endcan
             @can('recommendationCategory_access')
-                <li class="{{request()->is('admin/recommendation/setting/recommendationCategory/recommendationCategory*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/recommendation/setting/recommendationSubCategory/recommendationCategory*') ? 'active' : ''}}">
                     <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
                         <span>सिफारिस उप-श्रेणी</span>
                     </a>
