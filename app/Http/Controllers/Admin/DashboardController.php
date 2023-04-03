@@ -70,7 +70,7 @@ class DashboardController extends Controller
             $routeName = match ($permission) {
                 'digitalBoardDashboard_access' => route('admin.digitalBoard.dashboard'),
                 'circularDashboard_access' => route('admin.circular.dashboard'),
-                'listRegistrationDashboard_access' => route('admin.listRegistration.dashboard'),
+                'listRegistrationDashboard_access' => route('admin.listRegistrations.dashboard'),
                 'grievanceHandlingDashboard_access' => route('admin.grievanceHandling.dashboard'),
                 'executiveMeetingDashboard_access' => route('admin.executiveMeeting.dashboard'),
                 'eMapDashboard_access' => route('emap.admin.dashboard'),
