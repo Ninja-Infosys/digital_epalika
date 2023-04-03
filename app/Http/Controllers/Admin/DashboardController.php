@@ -47,7 +47,23 @@ class DashboardController extends Controller
     public function __invoke()
     {
         //dashboard redirection for particular module
-        $dashboardPermissions = collect(['digitalBoardDashboard_access', 'circularDashboard_access', 'listRegistrationDashboard_access']);
+        $dashboardPermissions = collect([
+            'digitalBoardDashboard_access',
+            'circularDashboard_access',
+            'listRegistrationDashboard_access',
+            'grievanceHandlingDashboard_access',
+            'executiveMeetingDashboard_access',
+            'eMapDashboard_access',
+            'businessRegistrationDashboard_access',
+            'recommendationDashboard_access',
+            'taskManagementDashboard_access',
+            'roasterDashboard_access',
+            'judicialCommitteeDashboard_access',
+            'planDashboard_access',
+            'grantDashboard_access',
+            'revenueDashboard_access',
+            'identityDashboard_access'
+        ]);
         $userPermissions = $dashboardPermissions->intersect(collect(auth()->user()->role->permissions->pluck('title')));
         if ($userPermissions->count() == 1) {
             $permission = $userPermissions->first();
