@@ -82,7 +82,7 @@ class DashboardController extends Controller
                 'planDashboard_access' => route('admin.plan.dashboard'),
                 'grantDashboard_access' => route('admin.grant.dashboard'),
                 'revenueDashboard_access' => route('admin.revenue.dashboard'),
-                'identityDashboard_access' => route('admin.identity.dashboard'),
+                'identityDashboard_access' => route('identity.admin.dashboard'),
                 default => route('admin.dashboard'),
             };
             return redirect($routeName);
