@@ -73,7 +73,7 @@ class DashboardController extends Controller
                 'listRegistrationDashboard_access' => route('admin.listRegistration.dashboard'),
                 'grievanceHandlingDashboard_access' => route('admin.grievanceHandling.dashboard'),
                 'executiveMeetingDashboard_access' => route('admin.executiveMeeting.dashboard'),
-                'eMapDashboard_access' => route('admin.eMap.dashboard'),
+                'eMapDashboard_access' => route('emap.admin.dashboard'),
                 'businessRegistrationDashboard_access' => route('admin.businessRegistration.dashboard'),
                 'recommendationDashboard_access' => route('admin.recommendation.dashboard'),
                 'taskManagementDashboard_access' => route('admin.taskManagement.dashboard'),
