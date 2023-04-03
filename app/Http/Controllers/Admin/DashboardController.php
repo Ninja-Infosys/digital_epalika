@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
@@ -45,6 +46,32 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        //dashboard redirection for particular module
+        $dashboardPermissions = collect(['digitalBoardDashboard_access', 'circularDashboard_access', 'listRegistrationDashboard_access']);
+        $userPermissions = $dashboardPermissions->intersect(collect(auth()->user()->role->permissions->pluck('title')));
+        if ($userPermissions->count() == 1) {
+            $permission = $userPermissions->first();
+            $routeName = match ($permission) {
+                'digitalBoardDashboard_access' => route('admin.digitalBoard.dashboard'),
+                'circularDashboard_access' => route('admin.circular.dashboard'),
+                'listRegistrationDashboard_access' => route('admin.listRegistration.dashboard'),
+                'grievanceHandlingDashboard_access' => route('admin.grievanceHandling.dashboard'),
+                'executiveMeetingDashboard_access' => route('admin.executiveMeeting.dashboard'),
+                'eMapDashboard_access' => route('admin.eMap.dashboard'),
+                'businessRegistrationDashboard_access' => route('admin.businessRegistration.dashboard'),
+                'recommendationDashboard_access' => route('admin.recommendation.dashboard'),
+                'taskManagementDashboard_access' => route('admin.taskManagement.dashboard'),
+                'roasterDashboard_access' => route('admin.roaster.dashboard'),
+                'judicialCommitteeDashboard_access' => route('admin.judicialCommittee.dashboard'),
+                'planDashboard_access' => route('admin.plan.dashboard'),
+                'grantDashboard_access' => route('admin.grant.dashboard'),
+                'revenueDashboard_access' => route('admin.revenue.dashboard'),
+                'identityDashboard_access' => route('admin.identity.dashboard'),
+                default => route('admin.dashboard'),
+            };
+            return redirect($routeName);
+        }
+
         if (request()->ajax()) {
             return [
                 "totalRevenue" => (new RevenueDashboardController())->totalRevenue($this->revenues),
@@ -56,6 +83,7 @@ class DashboardController extends Controller
                 'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
             ];
         }
+
         $businessDetail_count = 0;
         $training_count = 0;
         $project_count = 0;
@@ -101,6 +129,7 @@ class DashboardController extends Controller
         if (Schema::hasTable('plan_areas')) {
             $planAreas = $this->setPlanData();
         }
+
         return view('admin.dashboard', compact([
             'user_count',
             'businessDetail_count',
