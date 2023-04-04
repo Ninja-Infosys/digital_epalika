@@ -76,7 +76,7 @@
                                                 <optgroup label="{{ $recommendationCategory->title }}">
                                                     @foreach ($recommendationCategory->recommendationCategories as $subRecommendationCategory)
                                                         <option value="{{ $subRecommendationCategory->id }}">
-                                                            {{ $subRecommendationCategory->title }}
+                                                            --{{ $subRecommendationCategory->title }}
                                                         </option>
                                                     @endforeach
                                                 </optgroup>

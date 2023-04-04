@@ -77,7 +77,7 @@
                                                     @foreach($recommendationCategory->recommendationCategories as $subRecommendationCategory)
                                                         <option
                                                             value="{{$subRecommendationCategory->id}}" {{old('recommendation_category_id',$registrationDetail->recommendation_category_id)==$subRecommendationCategory->id ? 'selected':''}}>
-                                                            {{$subRecommendationCategory->title}}
+                                                            --{{$subRecommendationCategory->title}}
                                                         </option>
                                                     @endforeach
                                                 </optgroup>
