@@ -12,6 +12,7 @@ use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
 
@@ -21,6 +22,12 @@ if (!function_exists('officeSetting')) {
         return Cache::rememberForever('office_setting', function () {
             return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
         });
+    }
+}
+if (!function_exists('recommendationCategory')) {
+    function recommendationCategory()
+    {
+        return RecommendationCategory::with('recommendationCategories')->get();
     }
 }
 if (!function_exists('get_revenue_setting')) {
