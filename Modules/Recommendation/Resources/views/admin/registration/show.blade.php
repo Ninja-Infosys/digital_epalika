@@ -220,7 +220,7 @@
                         />
                     </div>
                 </div>
-                <div class="card-body" id="print">
+                <div class="card-body">
                     <div id="print" class="p-1">
                         <style>
                             @page {
