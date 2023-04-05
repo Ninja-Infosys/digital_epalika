@@ -46,16 +46,10 @@ class EnvironmentController extends Controller
         }
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
-        //update license config
-        $data=[
-            'created_date'=>now()->toDateString(),
-            'license_key'=>$request->input('app_license')
-        ];
-        $content = "<?php\n\nreturn " . var_export($data, true) . ";\n";
 
-        file_put_contents(config_path('license.php'),$content);
+//TODO: This is the line that is causing the error Event not found
 
-        event(new EnvironmentSaved($request));
+//        event(new EnvironmentSaved($request));
 
         return redirect(route('installer.database'))
             ->with(['results' => $results]);
@@ -77,14 +71,14 @@ class EnvironmentController extends Controller
                         'port' => $request->input('database_port'),
                         'database' => $request->input('database_name'),
                         'username' => $request->input('database_username'),
-                        'password' => $request->input('database_password'),
+                        'password' => !empty($request->input('database_password')) ? $request->input('database_password') : '',
                     ]),
                 ],
             ],
         ]);
-
+//dd(config('database'));
         DB::purge();
-
+//dd(DB::connection()->getPdo());
         try {
             DB::connection()->getPdo();
 

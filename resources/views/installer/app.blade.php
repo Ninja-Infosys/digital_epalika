@@ -51,11 +51,21 @@
             <li class="step__divider"></li>
             <li class="step__item {{request()->routeIs('installer.requirements') ? 'active' : ''}}">
                 @if(Request::is('install') || Request::is('install/requirements') || Request::is('install/permissions') || Request::is('install/environment') || Request::is('install/environment/wizard'))
-                    <a href="{{ route('LaravelInstaller::requirements') }}">
+                    <a href="{{ route('installer.requirements') }}">
                         <i class="step__icon fa fa-list" aria-hidden="true"></i>
                     </a>
                 @else
                     <i class="step__icon fa fa-list" aria-hidden="true"></i>
+                @endif
+            </li>
+            <li class="step__divider"></li>
+            <li class="step__item {{request()->routeIs('installer.license') ? 'active' : ''}}">
+                @if(Request::is('installer/license') || Request::is('installer/save-license') )
+                    <a href="{{ route('installer.license') }}">
+                        <i class="step__icon fa fa-id-card" aria-hidden="true"></i>
+                    </a>
+                @else
+                    <i class="step__icon fa fa-id-card" aria-hidden="true"></i>
                 @endif
             </li>
             <li class="step__divider"></li>

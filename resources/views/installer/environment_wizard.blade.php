@@ -8,24 +8,24 @@
 @section('content')
     <div class="tabs tabs-full">
 
-        <input id="tab1" type="radio" name="tabs" class="tab-input" checked />
+        <input id="tab1" type="radio" name="tabs" class="tab-input" checked/>
         <label for="tab1" class="tab-label">
             <i class="fa fa-cog fa-2x fa-fw" aria-hidden="true"></i>
-            <br />
+            <br/>
             Environment
         </label>
 
-        <input id="tab2" type="radio" name="tabs" class="tab-input" />
+        <input id="tab2" type="radio" name="tabs" class="tab-input"/>
         <label for="tab2" class="tab-label">
             <i class="fa fa-database fa-2x fa-fw" aria-hidden="true"></i>
-            <br />
+            <br/>
             Database
         </label>
 
-        <input id="tab3" type="radio" name="tabs" class="tab-input" />
+        <input id="tab3" type="radio" name="tabs" class="tab-input"/>
         <label for="tab3" class="tab-label">
             <i class="fa fa-cogs fa-2x fa-fw" aria-hidden="true"></i>
-            <br />
+            <br/>
             Application
         </label>
 
@@ -37,7 +37,7 @@
                     <label for="app_name">
                         App Name
                     </label>
-                    <input type="text" name="app_name" id="app_name" value="" placeholder="App Name" />
+                    <input type="text" name="app_name" id="app_name" value="" placeholder="App Name"/>
                     @if ($errors->has('app_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -67,11 +67,11 @@
                         App Debug
                     </label>
                     <label for="app_debug_true">
-                        <input type="radio" name="app_debug" id="app_debug_true" value=true checked />
+                        <input type="radio" name="app_debug" id="app_debug_true" value=true checked/>
                         True
                     </label>
                     <label for="app_debug_false">
-                        <input type="radio" name="app_debug" id="app_debug_false" value=false />
+                        <input type="radio" name="app_debug" id="app_debug_false" value=false/>
                         False
                     </label>
                     @if ($errors->has('app_debug'))
@@ -86,24 +86,11 @@
                     <label for="app_url">
                         App Url
                     </label>
-                    <input type="url" name="app_url" id="app_url" value="http://localhost" placeholder="App Url" />
+                    <input type="url" name="app_url" id="app_url" value="http://localhost" placeholder="App Url"/>
                     @if ($errors->has('app_url'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
                             {{ $errors->first('app_url') }}
-                        </span>
-                    @endif
-                </div>
-
-                <div class="form-group {{ $errors->has('app_license') ? ' has-error ' : '' }}">
-                    <label for="app_license">
-                        App License
-                    </label>
-                    <input type="text" name="app_license" id="app_license" placeholder="App License" />
-                    @if ($errors->has('app_license'))
-                        <span class="error-block">
-                            <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                            {{ $errors->first('app_license') }}
                         </span>
                     @endif
                 </div>
@@ -139,7 +126,8 @@
                     <label for="database_hostname">
                         Database Host
                     </label>
-                    <input type="text" name="database_hostname" id="database_hostname" value="127.0.0.1" placeholder="Database Host" />
+                    <input type="text" name="database_hostname" id="database_hostname" value="127.0.0.1"
+                           placeholder="Database Host"/>
                     @if ($errors->has('database_hostname'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -152,7 +140,8 @@
                     <label for="database_port">
                         Database Port
                     </label>
-                    <input type="number" name="database_port" id="database_port" value="3306" placeholder="{{ trans('installer_messages.environment.wizard.form.db_port_placeholder') }}" />
+                    <input type="number" name="database_port" id="database_port" value="3306"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.db_port_placeholder') }}"/>
                     @if ($errors->has('database_port'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -165,7 +154,7 @@
                     <label for="database_name">
                         Database Name
                     </label>
-                    <input type="text" name="database_name" id="database_name" value="" placeholder="Database Name" />
+                    <input type="text" name="database_name" id="database_name" value="" placeholder="Database Name"/>
                     @if ($errors->has('database_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -178,7 +167,8 @@
                     <label for="database_username">
                         Database User Name
                     </label>
-                    <input type="text" name="database_username" id="database_username" value="" placeholder="Database User Name" />
+                    <input type="text" name="database_username" id="database_username" value=""
+                           placeholder="Database User Name"/>
                     @if ($errors->has('database_username'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -191,7 +181,8 @@
                     <label for="database_password">
                         Database Password
                     </label>
-                    <input type="password" name="database_password" id="database_password" value="" placeholder="Database Password" />
+                    <input type="password" name="database_password" id="database_password" value=""
+                           placeholder="Database Password"/>
                     @if ($errors->has('database_password'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -209,7 +200,7 @@
             </div>
             <div class="tab" id="tab3content">
                 <div class="block">
-                    <input type="radio" name="appSettingsTabs" id="appSettingsTab1" value="null" checked />
+                    <input type="radio" name="appSettingsTabs" id="appSettingsTab1" value="null" checked/>
                     <label for="appSettingsTab1">
                         <span>
                             Broadcasting, Caching, Session, & Queue
@@ -220,13 +211,15 @@
                         <div class="form-group {{ $errors->has('broadcast_driver') ? ' has-error ' : '' }}">
                             <label for="broadcast_driver">Broadcast Driver
                                 <sup>
-                                    <a href="https://laravel.com/docs/5.4/broadcasting" target="_blank" title="More Info">
+                                    <a href="https://laravel.com/docs/5.4/broadcasting" target="_blank"
+                                       title="More Info">
                                         <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
                                         <span class="sr-only">Broadcast Driver</span>
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="broadcast_driver" id="broadcast_driver" value="log" placeholder="Broadcast Driver" />
+                            <input type="text" name="broadcast_driver" id="broadcast_driver" value="log"
+                                   placeholder="Broadcast Driver"/>
                             @if ($errors->has('broadcast_driver'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -244,7 +237,8 @@
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="cache_driver" id="cache_driver" value="file" placeholder="Cache Driver" />
+                            <input type="text" name="cache_driver" id="cache_driver" value="file"
+                                   placeholder="Cache Driver"/>
                             @if ($errors->has('cache_driver'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -258,11 +252,13 @@
                                 <sup>
                                     <a href="https://laravel.com/docs/5.4/session" target="_blank" title="More Info">
                                         <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
+                                        <span
+                                            class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="session_driver" id="session_driver" value="file" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.session_placeholder') }}" />
+                            <input type="text" name="session_driver" id="session_driver" value="file"
+                                   placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.session_placeholder') }}"/>
                             @if ($errors->has('session_driver'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -276,11 +272,13 @@
                                 <sup>
                                     <a href="https://laravel.com/docs/5.4/queues" target="_blank" title="More Info">
                                         <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
+                                        <span
+                                            class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="queue_driver" id="queue_driver" value="sync" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.queue_placeholder') }}" />
+                            <input type="text" name="queue_driver" id="queue_driver" value="sync"
+                                   placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.queue_placeholder') }}"/>
                             @if ($errors->has('queue_driver'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -304,11 +302,13 @@
                                 <sup>
                                     <a href="https://laravel.com/docs/5.4/redis" target="_blank" title="More Info">
                                         <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
+                                        <span
+                                            class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="redis_hostname" id="redis_hostname" value="127.0.0.1" placeholder="Redis Host" />
+                            <input type="text" name="redis_hostname" id="redis_hostname" value="127.0.0.1"
+                                   placeholder="Redis Host"/>
                             @if ($errors->has('redis_hostname'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -319,7 +319,8 @@
 
                         <div class="form-group {{ $errors->has('redis_password') ? ' has-error ' : '' }}">
                             <label for="redis_password"> Redis Password</label>
-                            <input type="password" name="redis_password" id="redis_password" value="null" placeholder="Redis Password" />
+                            <input type="password" name="redis_password" id="redis_password" value="null"
+                                   placeholder="Redis Password"/>
                             @if ($errors->has('redis_password'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -330,7 +331,8 @@
 
                         <div class="form-group {{ $errors->has('redis_port') ? ' has-error ' : '' }}">
                             <label for="redis_port"> Redis Port</label>
-                            <input type="number" name="redis_port" id="redis_port" value="6379" placeholder="Redis Port" />
+                            <input type="number" name="redis_port" id="redis_port" value="6379"
+                                   placeholder="Redis Port"/>
                             @if ($errors->has('redis_port'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -354,11 +356,13 @@
                                 <sup>
                                     <a href="https://laravel.com/docs/5.4/mail" target="_blank" title="More Info">
                                         <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
+                                        <span
+                                            class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="mail_driver" id="mail_driver" value="smtp" placeholder="Mail Driver" />
+                            <input type="text" name="mail_driver" id="mail_driver" value="smtp"
+                                   placeholder="Mail Driver"/>
                             @if ($errors->has('mail_driver'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -368,7 +372,8 @@
                         </div>
                         <div class="form-group {{ $errors->has('mail_host') ? ' has-error ' : '' }}">
                             <label for="mail_host">Mail Host</label>
-                            <input type="text" name="mail_host" id="mail_host" value="smtp.mailtrap.io" placeholder="Mail Host" />
+                            <input type="text" name="mail_host" id="mail_host" value="smtp.mailtrap.io"
+                                   placeholder="Mail Host"/>
                             @if ($errors->has('mail_host'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -378,7 +383,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('mail_port') ? ' has-error ' : '' }}">
                             <label for="mail_port">Mail Port</label>
-                            <input type="number" name="mail_port" id="mail_port" value="2525" placeholder="Mail Port" />
+                            <input type="number" name="mail_port" id="mail_port" value="2525" placeholder="Mail Port"/>
                             @if ($errors->has('mail_port'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -388,7 +393,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('mail_username') ? ' has-error ' : '' }}">
                             <label for="mail_username">Mail Username</label>
-                            <input type="text" name="mail_username" id="mail_username" placeholder="Mail Username" />
+                            <input type="text" name="mail_username" id="mail_username" placeholder="Mail Username"/>
                             @if ($errors->has('mail_username'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -398,7 +403,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('mail_password') ? ' has-error ' : '' }}">
                             <label for="mail_password">Mail Password</label>
-                            <input type="text" name="mail_password" id="mail_password" placeholder="Mail Password" />
+                            <input type="text" name="mail_password" id="mail_password" placeholder="Mail Password"/>
                             @if ($errors->has('mail_password'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -408,7 +413,8 @@
                         </div>
                         <div class="form-group {{ $errors->has('mail_encryption') ? ' has-error ' : '' }}">
                             <label for="mail_encryption">Mail Encryption</label>
-                            <input type="text" name="mail_encryption" id="mail_encryption" placeholder="Mail Encryption" />
+                            <input type="text" name="mail_encryption" id="mail_encryption"
+                                   placeholder="Mail Encryption"/>
                             @if ($errors->has('mail_encryption'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -430,13 +436,14 @@
                             <label for="pusher_app_id">
                                 Pusher App Id
                                 <sup>
-                                    <a href="https://pusher.com/docs/server_api_guide" target="_blank" title="More Info">
+                                    <a href="https://pusher.com/docs/server_api_guide" target="_blank"
+                                       title="More Info">
                                         <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
                                         <span class="sr-only">More Info</span>
                                     </a>
                                 </sup>
                             </label>
-                            <input type="text" name="pusher_app_id" id="pusher_app_id" placeholder="Pusher App Id" />
+                            <input type="text" name="pusher_app_id" id="pusher_app_id" placeholder="Pusher App Id"/>
                             @if ($errors->has('pusher_app_id'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -446,7 +453,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('pusher_app_key') ? ' has-error ' : '' }}">
                             <label for="pusher_app_key">Push App Key</label>
-                            <input type="text" name="pusher_app_key" id="pusher_app_key" placeholder="Pusher App Key" />
+                            <input type="text" name="pusher_app_key" id="pusher_app_key" placeholder="Pusher App Key"/>
                             @if ($errors->has('pusher_app_key'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -456,7 +463,8 @@
                         </div>
                         <div class="form-group {{ $errors->has('pusher_app_secret') ? ' has-error ' : '' }}">
                             <label for="pusher_app_secret">Pusher App Secret</label>
-                            <input type="password" name="pusher_app_secret" id="pusher_app_secret" placeholder="Pusher App Secret" />
+                            <input type="password" name="pusher_app_secret" id="pusher_app_secret"
+                                   placeholder="Pusher App Secret"/>
                             @if ($errors->has('pusher_app_secret'))
                                 <span class="error-block">
                                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -482,6 +490,7 @@
         function showDatabaseSettings() {
             document.getElementById('tab2').checked = true;
         }
+
         function showApplicationSettings() {
             document.getElementById('tab3').checked = true;
         }

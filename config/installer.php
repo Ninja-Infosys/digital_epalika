@@ -59,7 +59,6 @@ return [
                 'environment' => 'required|string|max:50',
                 'app_debug' => 'required|string',
                 'app_url' => 'required|url',
-                'app_license' => 'required',
                 'database_connection' => 'required|string|max:50',
                 'database_hostname' => 'required|string|max:50',
                 'database_port' => 'required|numeric',
