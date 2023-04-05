@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers\Installer;
 
-use App\Helper\Installer\InstalledFileManager;
+use App\Events\LaravelInstallerFinished;
 use App\Http\Controllers\Controller;
+use App\Installer\EnvironmentManager;
+use App\Installer\FinalInstallManager;
+use App\Installer\InstalledFileManager;
 use Illuminate\Http\Request;
 
 class FinalController extends Controller
 {
-    public function __invoke(InstalledFileManager $fileManager)
+    public function finish(InstalledFileManager $fileManager, FinalInstallManager $finalInstall, EnvironmentManager $environment)
     {
-        $fileManager->update();
+        $finalMessages = $finalInstall->runFinal();
+        $finalStatusMessage = $fileManager->update();
+        $finalEnvFile = $environment->getEnvContent();
 
-        return view('installer.finished');
+        event(new LaravelInstallerFinished);
+
+        return view('installer.finished', compact('finalMessages', 'finalStatusMessage', 'finalEnvFile'));
     }
 }

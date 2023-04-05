@@ -1,29 +1,31 @@
-@extends('installer.layouts.master')
+@extends('installer.app')
 
-@section('title', 'अनुमतिहरू')
-@section('section')
-    @if (isset($permissions['errors']))
-        <div class="alert alert-danger">Please fix the below error and the click फेरि अनुमति जाँच गर्नुहोस्</div>
-    @endif
+@section('title')
+    <i class="fa fa-key fa-fw" aria-hidden="true"></i>
+    Permissions
+@endsection
+
+@section('content')
+
     <ul class="list">
         @foreach($permissions['permissions'] as $permission)
             <li class="list__item list__item--permissions {{ $permission['isSet'] ? 'success' : 'error' }}">
-                {{ $permission['folder'] }}<span>{{ $permission['permission'] }}</span>
+                {{ $permission['folder'] }}
+                <span>
+                <i class="fa fa-fw fa-{{ $permission['isSet'] ? 'check-circle-o' : 'exclamation-circle' }}"></i>
+                {{ $permission['permission'] }}
+            </span>
             </li>
         @endforeach
     </ul>
 
-
-    <div class="buttons">
-        @if ( ! isset($permissions['errors']))
-            <a class="button" href="{{ route('installer.database') }}">
-                अर्को
+    @if ( ! isset($permissions['errors']))
+        <div class="buttons">
+            <a href="{{ route('installer.environment-wizard') }}" class="button">
+                Configure Environment
+                <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </a>
-        @else
-            <a class="button" href="javascript:window.location.href='';">
-                फेरि अनुमति जाँच गर्नुहोस्
-            </a>
-        @endif
-    </div>
+        </div>
+    @endif
 
-@stop
+@endsection

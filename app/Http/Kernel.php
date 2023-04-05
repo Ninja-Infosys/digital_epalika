@@ -7,6 +7,7 @@ use App\Http\Middleware\AuthLock;
 use App\Http\Middleware\CheckPinMiddleware;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\InstallerMiddleware;
 use App\Http\Middleware\InstallMiddleware;
 use App\Http\Middleware\LicenseMiddleware;
 use App\Http\Middleware\PageRenderMiddleware;
@@ -98,8 +99,8 @@ class Kernel extends HttpKernel
         'auth.lock' => AuthLock::class,
         'pageRender' => PageRenderMiddleware::class,
         'checkPinMiddleware' => CheckPinMiddleware::class,
-        'install' => InstallMiddleware::class,
         'update' => UpdateMiddleware::class,
         'license' => LicenseMiddleware::class,
+        'installerMiddleware' => InstallerMiddleware::class
     ];
 }

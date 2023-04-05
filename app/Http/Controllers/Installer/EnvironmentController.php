@@ -2,51 +2,95 @@
 
 namespace App\Http\Controllers\Installer;
 
-use App\Helper\Installer\EnvironmentManager;
+use App\Events\EnvironmentSaved;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Installer\UpdateRequest;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use App\Installer\EnvironmentManager;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class EnvironmentController extends Controller
 {
-    /**
-     * @var EnvironmentManager
-     */
-    protected EnvironmentManager $environmentManager;
-
-    /**
-     * @param EnvironmentManager $environmentManager
-     */
+    protected EnvironmentManager $EnvironmentManager;
     public function __construct(EnvironmentManager $environmentManager)
     {
-        parent::__construct();
-
-        $this->environmentManager = $environmentManager;
+        $this->EnvironmentManager = $environmentManager;
     }
 
-    /**
-     * Display the Environment page.
-     *
-     * @return Application|Factory|View
-     */
-    public function environment()
+    public function environmentWizard()
     {
-        $envConfig = $this->environmentManager->getEnvContent();
-
-        return view('installer.environment', compact('envConfig'));
+        return view('installer.environment_wizard');
     }
 
-    /**
-     * @param UpdateRequest $request
-     * @return array
-     */
-    public function save(UpdateRequest $request)
+    public function saveWizard(Request $request)
     {
+        $rules = config('installer.environment.form.rules');
+        $messages = [
+            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
+        ];
 
-        return $this->environmentManager->saveFile($request);
+        $validator = Validator::make($request->all(), $rules, $messages);
 
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        }
+
+        if (! $this->checkDatabaseConnection($request)) {
+            return back()->withInput()->withErrors([
+                'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
+            ]);
+        }
+
+        $results = $this->EnvironmentManager->saveFileWizard($request);
+        //update license config
+        $data=[
+            'created_date'=>now()->toDateString(),
+            'license_key'=>$request->input('app_license')
+        ];
+        $content = "<?php\n\nreturn " . var_export($data, true) . ";\n";
+
+        file_put_contents(config_path('license.php'),$content);
+
+        event(new EnvironmentSaved($request));
+
+        return redirect(route('installer.database'))
+            ->with(['results' => $results]);
+    }
+
+    private function checkDatabaseConnection(Request $request)
+    {
+        $connection = $request->input('database_connection');
+
+        $settings = config("database.connections.$connection");
+
+        config([
+            'database' => [
+                'default' => $connection,
+                'connections' => [
+                    $connection => array_merge($settings, [
+                        'driver' => $connection,
+                        'host' => $request->input('database_hostname'),
+                        'port' => $request->input('database_port'),
+                        'database' => $request->input('database_name'),
+                        'username' => $request->input('database_username'),
+                        'password' => $request->input('database_password'),
+                    ]),
+                ],
+            ],
+        ]);
+
+        DB::purge();
+
+        try {
+            DB::connection()->getPdo();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }

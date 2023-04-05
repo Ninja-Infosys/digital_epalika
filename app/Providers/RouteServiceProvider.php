@@ -47,9 +47,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
                 ->prefix('file_manager')
                 ->as('file_manager.')->group(base_path('routes/file_manager.php'));
-            Route::middleware(['web', 'install'])
-                ->prefix('installer')
-                ->as('installer.')->group(base_path('routes/installer.php'));
+
+            Route::prefix('installer')
+                ->as('installer.')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/installer.php'));
         });
     }
 

@@ -1,9 +1,28 @@
-@extends('installer.layouts.master')
+@extends('installer.app')
 
-@section('title', 'समाप्त भयो')
-@section('section')
-    <p class="paragraph" style="text-align: center;">{{ session('message')['message'] ?? '' }}</p>
+@section('title')
+    <i class="fa fa-flag-checkered fa-fw" aria-hidden="true"></i>
+    Final Stage
+@endsection
+
+@section('content')
+
+    @if(session('message')['dbOutputLog'])
+        <p><strong><small>{{ trans('installer_messages.final.migration') }}</small></strong></p>
+        <pre><code>{{ session('message')['dbOutputLog'] }}</code></pre>
+    @endif
+
+    <p><strong><small>{{ trans('installer_messages.final.console') }}</small></strong></p>
+    <pre><code>{{ $finalMessages }}</code></pre>
+
+    <p><strong><small>{{ trans('installer_messages.final.log') }}</small></strong></p>
+    <pre><code>{{ $finalStatusMessage }}</code></pre>
+
+    <p><strong><small>{{ trans('installer_messages.final.env') }}</small></strong></p>
+    <pre><code>{{ $finalEnvFile }}</code></pre>
+
     <div class="buttons">
-        <a href="{{ url('/') }}" class="button">बाहिर निस्कन यहाँ क्लिक गर्नुहोस्</a>
+        <a href="{{ url('/') }}" class="button">Goto Home</a>
     </div>
-@stop
+
+@endsection
