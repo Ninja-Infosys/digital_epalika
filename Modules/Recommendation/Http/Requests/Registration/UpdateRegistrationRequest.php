@@ -20,7 +20,7 @@ class UpdateRegistrationRequest extends FormRequest
             'date_en' => ['required'],
             'recommendation_data' => ['required'],
             'personal_detail_id' => ['nullable', Rule::exists('personal_details', 'id')->withoutTrashed()],
-            'recommendation_category_id' => ['nullable', Rule::exists('recommendation_categories', 'id')->withoutTrashed()],
+            'recommendation_category_id' => ['required', Rule::exists('recommendation_categories', 'id')->withoutTrashed()],
             'files' => ['nullable', 'array'],
             'files.*.file_name' => ['nullable', 'string'],
             'files.*.file' => ['nullable', 'mimes:jpg,png,jpeg,pdf'],

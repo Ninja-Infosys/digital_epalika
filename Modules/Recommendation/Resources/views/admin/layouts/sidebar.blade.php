@@ -65,6 +65,34 @@
         </ul>
     </div>
 </li>
+{{--@foreach(recommendationCategory() as $recommendationCategory)--}}
+{{--    <li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">--}}
+{{--        <a href="#recommendationCategory{{$loop->iteration}}"--}}
+{{--           {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'aria-expanded=true' : ''}}--}}
+{{--           data-bs-toggle="collapse">--}}
+{{--            <i class="fa fa-clipboard-list"></i>--}}
+{{--            <span>{{$recommendationCategory->title}}</span>--}}
+{{--            <span class="menu-arrow">--}}
+{{--            <i class="fas fa-angle-right"></i>--}}
+{{--        </span>--}}
+{{--        </a>--}}
+{{--        <div--}}
+{{--            class="collapse {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'show' : ''}}"--}}
+{{--            id="recommendationCategory{{$loop->iteration}}">--}}
+{{--            <ul class="nav-second-level">--}}
+{{--                @foreach($recommendationCategory->recommendationCategories as $category)--}}
+{{--                    <li class="{{request()->is('admin/recommendation/report') ? 'active' : ''}}">--}}
+{{--                        <a href="{{route('admin.recommendation.report.index')}}">--}}
+{{--                            <span>{{$category->title}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--    </li>--}}
+{{--@endforeach--}}
+
+
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#recommendationSetting"
        {{request()->is('admin/recommendation/setting/recommendation*') || request()->is('admin/recommendation/setting/recommendation*') ? 'aria-expanded=true' : ''}}

@@ -36,38 +36,38 @@
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0 table-bordered table-striped">
                                     <tbody>
-                                        <tr>
-                                            <th>
-                                                नाम
-                                            </th>
-                                            <td>
-                                                  {{$registrationDetail->personalDetail->name??''}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                सिफारिस
-                                            </th>
-                                            <td>
-                                                 {{$registrationDetail->recommendationCategory->title??''}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                दर्ता नं.
-                                            </th>
-                                            <td>
-                                                  {{$registrationDetail->registration_no??''}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                मिति
-                                            </th>
-                                            <td>
-                                                  {{$registrationDetail->date_ne??''}}
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <th>
+                                            नाम
+                                        </th>
+                                        <td>
+                                            {{$registrationDetail->personalDetail->name??''}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            सिफारिस
+                                        </th>
+                                        <td>
+                                            {{$registrationDetail->recommendationCategory->title??''}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            दर्ता नं.
+                                        </th>
+                                        <td>
+                                            {{$registrationDetail->registration_no??''}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            मिति
+                                        </th>
+                                        <td>
+                                            {{$registrationDetail->date_ne??''}}
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -87,35 +87,36 @@
                 <div class="card-body">
                     <div class="row">
                         @forelse($registrationDetail->files->where('type','OcFile') as $document)
-                                <div class="col-xl-4 col-lg-6">
-                                    <div class="card shadow-none border">
-                                        <div class="p-2">
-                                            <div class="row align-items-center">
-                                                <div class="col-2 pe-0">
-                                                    <div class="avatar-sm">
+                            <div class="col-xl-4 col-lg-6">
+                                <div class="card shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-2 pe-0">
+                                                <div class="avatar-sm">
                                                     <span class="avatar-title bg-light text-secondary rounded">
                                                           <i class="fa {{getFileIconClass($document->extension)}} font-18"></i>
                                                     </span>
-                                                    </div>
                                                 </div>
-                                                <div class="col-8">
-                                                    <a href="javascript:void(0);"
-                                                    onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
-                                                       class="text-muted fw-medium">{{$document->file_name}}
-                                                        .{{$document->extension}}</a>
-                                                    <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
-                                                </div>
-                                                <div class="col-2">
-                                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->getRawOriginal('file')])}}" class="btn btn-xs btn-outline-primary">
-                                                            <i class="fa fa-download"></i>
-                                                        </a>
-                                                </div>
-                                            </div> <!-- end row -->
-                                        </div> <!-- end .p-2-->
-                                    </div> <!-- end col -->
-                                </div>
-                            @empty
-                                <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                                            </div>
+                                            <div class="col-8">
+                                                <a href="javascript:void(0);"
+                                                   onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
+                                                   class="text-muted fw-medium">{{$document->file_name}}
+                                                    .{{$document->extension}}</a>
+                                                <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
+                                            </div>
+                                            <div class="col-2">
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$document->getRawOriginal('file')])}}"
+                                                   class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div> <!-- end row -->
+                                    </div> <!-- end .p-2-->
+                                </div> <!-- end col -->
+                            </div>
+                        @empty
+                            <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
                         @endforelse
                     </div> <!-- end row-->
                 </div>
@@ -161,7 +162,7 @@
             </div>
         </div>
     </div> --}}
-    
+
 
     <div class="card">
         <div class="card-header">
@@ -170,37 +171,38 @@
         <div class="card-body">
             <div class="row">
                 @forelse($registrationDetail->files->where('type','ClientFile') as $document)
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card shadow-none border">
-                                <div class="p-2">
-                                    <div class="row align-items-center">
-                                        <div class="col-2 pe-0">
-                                            <div class="avatar-sm">
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card shadow-none border">
+                            <div class="p-2">
+                                <div class="row align-items-center">
+                                    <div class="col-2 pe-0">
+                                        <div class="avatar-sm">
                                             <span class="avatar-title bg-light text-secondary rounded">
                                                   <i class="fa {{getFileIconClass($document->extension)}} font-18"></i>
                                             </span>
-                                            </div>
                                         </div>
-                                        <div class="col-8">
-                                            <a href="javascript:void(0);"
-                                            onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
-                                               class="text-muted fw-medium">{{$document->file_name}}
-                                                .{{$document->extension}}</a>
-                                            <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
-                                        </div>
-                                        <div class="col-2">
-                                                <a href="{{route('admin.file-url-download', ['file_url'=>$document->getRawOriginal('file')])}}" class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
-                                        </div>
-                                    </div> <!-- end row -->
-                                </div> <!-- end .p-2-->
-                            </div> <!-- end col -->
-                        </div>
-                    @empty
-                        <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="javascript:void(0);"
+                                           onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
+                                           class="text-muted fw-medium">{{$document->file_name}}
+                                            .{{$document->extension}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->getRawOriginal('file')])}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div> <!-- end row -->
+                            </div> <!-- end .p-2-->
+                        </div> <!-- end col -->
+                    </div>
+                @empty
+                    <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
                 @endforelse
-            </div> <!-- end row-->
+            </div>
         </div>
         @include('admin.inc.file-view');
     </div>
@@ -214,12 +216,17 @@
                         <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
                         <x-print-button
                             target-element="print"
-                            title="{{$registrationDetail-> date_ne}}"
+                            title="{{$registrationDetail->recommendationCategory->title??''}}"
                         />
                     </div>
                 </div>
                 <div class="card-body">
                     <div id="print" class="p-1">
+                        <style>
+                            @page {
+                                margin-top: 0.2px;
+                            }
+                        </style>
                         {!! $registrationDetail->recommendation_data !!}
                     </div>
                 </div>
