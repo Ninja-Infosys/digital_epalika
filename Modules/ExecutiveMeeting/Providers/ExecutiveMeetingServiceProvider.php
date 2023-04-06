@@ -2,6 +2,7 @@
 
 namespace Modules\ExecutiveMeeting\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
@@ -34,7 +35,9 @@ class ExecutiveMeetingServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         //share meeting committee in sidebar
-        view()->share('sharedCommittees',Committee::orderBy('committee_type_id')->get());
+        if (Schema::hasTable('committees')){
+            view()->share('sharedCommittees',Committee::orderBy('committee_type_id')->get());
+        }
 
         CommitteeMember::observe(CommitteeMemberObserver::class);
         Meeting::observe(MeetingObserver::class);
