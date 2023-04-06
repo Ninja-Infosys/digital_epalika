@@ -53,7 +53,18 @@
 
 @stack('scripts')
 @livewireScripts
+{{--TODO: Add a license error here--}}
+@if(session()->has('licenseError') || (cache()->has('license') && array_key_exists('is_active', cache()->get('license')) && cache()->get('license')['is_active']))
+    <script>
+        Swal.fire({
+            title: 'License Error',
+            text: 'Your license is not active. Please contact with your developer.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        })
+    </script>
 
+@endif
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/custom.js')}}"></script>
 </body>
