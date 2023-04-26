@@ -35,7 +35,7 @@ class DatabaseManager
     {
         try {
             Artisan::call('db:seed', ['--force' => true], $outputLog);
-            //Artisan::call('module:seed');
+            Artisan::call('module:seed');
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }

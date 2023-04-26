@@ -1,12 +1,9 @@
 @extends('installer.app')
-
 @section('title')
     <i class="fa fa-id-card fa-fw" aria-hidden="true"></i>
     License Setting
 @endsection
-
 @section('content')
-
     <form method="post" action="{{ route('installer.save-license') }}" class="tabs-wrap">
         @csrf
         <div class="tab" id="tab1content">

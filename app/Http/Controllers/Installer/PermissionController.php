@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Installer;
 
 use App\Http\Controllers\Controller;
 use App\Installer\PermissionsChecker;
+use function _\internal\parent;
 
 class PermissionController extends Controller
 {
@@ -11,6 +12,7 @@ class PermissionController extends Controller
 
     public function __construct(PermissionsChecker $checker)
     {
+        parent::__construct();
         $this->permissions = $checker;
     }
 

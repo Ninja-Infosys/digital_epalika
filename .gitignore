@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 modules_statuses.json
+/storage/installed
+/config/license.php
