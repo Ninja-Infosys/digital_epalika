@@ -56,7 +56,7 @@
 {{--TODO: Add a license error here--}}
 @if(cache()->has('licenseError')
 || (cache()->has('license')
-&& array_key_exists('is_active', session()->get('license'))
+&& array_key_exists('is_active', cache()->get('license'))
 && !cache()->get('license')['is_active'])
 )
     <script>

@@ -15,12 +15,12 @@
 
 @foreach(recommendationCategory() as $recommendationCategory)
     @if($recommendationCategory->recommendationCategories->count() > 0)
-        <li class="{{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'active' : ''}}">
+        <li title="{{$recommendationCategory->title}}" class="{{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'active' : ''}}">
             <a href="#recommendationCategory{{$loop->iteration}}"
                {{request()->is('admin/recommendation/recommendationCategory/registrationDetail*')  ? 'aria-expanded=true' : ''}}
                data-bs-toggle="collapse">
                 <i class="fa fa-clipboard-list"></i>
-                <span>{{Str::words($recommendationCategory->title,4,'..')}}</span>
+                <span>{{Str::limit($recommendationCategory->title,20,'..')}}</span>
                 <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -40,10 +40,10 @@
             </div>
         </li>
     @else
-        <li class="{{request()->is('admin/recommendation/recommendationCategory/'.$recommendationCategory->id.'/registrationDetail*') ? 'active' : ''}}">
+        <li title="{{$recommendationCategory->title}}" class="{{request()->is('admin/recommendation/recommendationCategory/'.$recommendationCategory->id.'/registrationDetail*') ? 'active' : ''}}">
             <a href="{{route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory->id)}}">
                 <i class="fa fa-id-card"></i>
-                <span>{{Str::words($recommendationCategory->title,4,'..')}}</span>
+                <span>{{Str::limit($recommendationCategory->title,20,'..')}}</span>
             </a>
         </li>
     @endif
