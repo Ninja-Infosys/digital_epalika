@@ -58,7 +58,7 @@
     <script>
         Swal.fire({
             title: 'License Error',
-            text: 'Your license is not active. Please contact with your developer.',
+            text: '{{cache()->get('license')['message']}}',
             icon: 'error',
             confirmButtonText: 'Ok'
         })

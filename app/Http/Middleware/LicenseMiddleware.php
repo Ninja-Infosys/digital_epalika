@@ -12,9 +12,9 @@ class LicenseMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Cache::has('license')) {
+        if (!Session::has('license')) {
             if (file_exists(config_path('license.php'))) {
-                Cache::remember('license', 60 * 60 * 24, function () {
+                Session::remember('license', function () {
                     $license = config('license.license_key');
                     $domain = request()->getUri();
                     return (new LicenseController())->checkLicense($license, $domain);
