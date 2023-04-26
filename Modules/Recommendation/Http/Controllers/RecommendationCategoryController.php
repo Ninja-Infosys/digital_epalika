@@ -97,43 +97,5 @@ class RecommendationCategoryController extends Controller
         return back();
     }
 
-    public function getTemplateData(Request $request, RecommendationCategory $recommendationCategory)
-    {
-        if ($request->ajax()) {
-            $template = $recommendationCategory->recommendationTemplates->where('is_active', 1)->first()->data ?? '';
-            $replace = [
-                '[@office_name]',
-                '[@letter_head]',
-                '[@today_date]',
-                '[@province]',
-                '[@district]',
-                '[@municipal]',
-                '[@ward]',
-                '[@chairman]',
-                '[@secretary]',
-            ];
-            return response()->json([
-                'data' => Str::replace($replace, $this->getRecommendationTemplateData(), $template)
-            ]);
-        }
-    }
 
-    protected function getRecommendationTemplateData()
-    {
-        $nepalidate = $this->get_today_nepali_date();
-        $replaced = str_replace(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], ['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], $nepalidate);
-        $recommendationSetting = RecommendationSetting::with('wardChairman', 'wardSecretary')->where('ward_no', auth()->user()->ward_no)?->first();
-        return [
-            officeSetting()->name,
-            letterHead(),
-            $replaced,
-            \officeSetting()->province->province ?? '',
-            \officeSetting()->district->district ?? '',
-            \officeSetting()->localBody->local_body ?? '',
-            auth()->user()->ward_no ?? '',
-            $recommendationSetting?->wardChairman->name ?? '',
-            $recommendationSetting?->wardSecretary->name ?? ''
-
-        ];
-    }
 }

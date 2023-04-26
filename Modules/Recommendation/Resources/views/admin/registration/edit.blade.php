@@ -25,14 +25,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">सिफारिस सम्पादन गर्नुहोस</h4>
-                        <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
+                        <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory) }}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.recommendation.registrationDetail.update', $registrationDetail) }}"
+                    <form action="{{ route('admin.recommendation.recommendationCategory.registrationDetail.update', [$recommendationCategory,$registrationDetail]) }}"
                           method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -66,36 +66,8 @@
                                     @enderror
                                 </div>
 
+
                                 <div class="col-md-4 mb-2">
-                                    <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
-                                    <select name="recommendation_category_id" data-toggle="select2"
-                                            id="recommendation_category_id" class="form-control">
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($recommendationCategories as $recommendationCategory)
-                                            @if(count($recommendationCategory->recommendationCategories)>0)
-                                                <optgroup label="{{$recommendationCategory->title}}">
-                                                    @foreach($recommendationCategory->recommendationCategories as $subRecommendationCategory)
-                                                        <option
-                                                            value="{{$subRecommendationCategory->id}}" {{old('recommendation_category_id',$registrationDetail->recommendation_category_id)==$subRecommendationCategory->id ? 'selected':''}}>
-                                                            --{{$subRecommendationCategory->title}}
-                                                        </option>
-                                                    @endforeach
-                                                </optgroup>
-                                            @else
-                                                <option
-                                                    value="{{$recommendationCategory->id}}" {{old('recommendation_category_id',$registrationDetail->recommendation_category_id)==$recommendationCategory->id ? 'selected':''}}>
-                                                    {{$recommendationCategory->title}}
-                                                </option>
-                                            @endif
-                                        @endforeach
-
-                                    </select>
-
-                                    @error('recommendation_category_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-2 mb-2">
                                     <x-date-input-component
                                         name-ne="date_ne" label-ne="नेपाली मिति *"
                                         name-en="date_en" label-en="English Date"
@@ -105,7 +77,7 @@
                                     />
                                 </div>
                                 @if(auth()->user()->role->type === 'Super')
-                                    <div class="col-md-2 mb-2">
+                                    <div class="col-md-4 mb-2">
                                         <label for="ward_no" class="form-label">वडा नं</label>
                                         <select id="ward_no" name="ward_no"
                                                 class="form-select" required>

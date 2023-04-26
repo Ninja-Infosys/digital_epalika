@@ -4,6 +4,7 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -11,16 +12,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Entities\RecommendationCategory;
+use Modules\Recommendation\Entities\RecommendationSetting;
 use Modules\Recommendation\Entities\RegistrationDetail;
 use Modules\Recommendation\Http\Requests\Registration\StoreRegistrationRequest;
 use Modules\Recommendation\Http\Requests\Registration\UpdateRegistrationRequest;
 
 class RegistrationDetailController extends Controller
 {
-    public function index()
+    use NepaliDateConverter;
+
+    public function index(RecommendationCategory $recommendationCategory)
     {
+
         $this->checkAuthorization('recommendation_access');
-        $registrationDetails = RegistrationDetail::filterData()->with('recommendationCategory', 'personalDetail')->where(function (Builder $q) {
+        $registrationDetails = RegistrationDetail::where('recommendation_category_id', $recommendationCategory->id)->filterData()->with('recommendationCategory', 'personalDetail')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['registration_no', 'date_ne'], request('search'));
             }
@@ -44,59 +49,61 @@ class RegistrationDetailController extends Controller
         $personalDetails = PersonalDetail::all();
         $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
 
-        return view('recommendation::admin.registration.index', compact('recommendationCategories', 'personalDetails', 'registrationDetails'));
+        return view('recommendation::admin.registration.index', compact('recommendationCategories', 'personalDetails', 'registrationDetails', 'recommendationCategory'));
     }
 
-    public function create()
+    public function create(RecommendationCategory $recommendationCategory)
     {
+
         $this->checkAuthorization('recommendation_create');
-        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
+        $template = $recommendationCategory->recommendationTemplates->where('is_active', 1)->first()->data ?? '';
+        $data = Str::replace($this->getReplaceData(), $this->getRecommendationTemplateData(), $template);
         $personalDetails = PersonalDetail::all();
-        return view('recommendation::admin.registration.create', compact('recommendationCategories', 'personalDetails'));
+        return view('recommendation::admin.registration.create', compact('data', 'personalDetails', 'recommendationCategory'));
     }
 
-    public function store(StoreRegistrationRequest $request)
+    public function store(StoreRegistrationRequest $request, RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendation_create');
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request, $recommendationCategory) {
             $registrationDetail = RegistrationDetail::create($request->validated() + [
                     'fiscal_year_id' => officeSetting()->fiscal_year_id,
+                    'recommendation_category_id' => $recommendationCategory->id,
                     'ward_no' => auth()->user()->role->type === 'Super' ? $request->input('ward_no') : auth()->user()->ward_no
                 ]);
             $this->getClientFile($request, $registrationDetail);
         });
         toast('दर्ता सफलतापूर्वक गरियो', 'success');
-        return redirect()->route('admin.recommendation.registrationDetail.index');
+        return redirect()->route('admin.recommendation.recommendationCategory.registrationDetail.index', $recommendationCategory);
     }
 
-    public function show(RegistrationDetail $registrationDetail)
+    public function show(RecommendationCategory $recommendationCategory, RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_access');
         $registrationDetail->load('personalDetail', 'files', 'recommendationCategory');
-        return view('recommendation::admin.registration.show', compact('registrationDetail'));
+        return view('recommendation::admin.registration.show', compact('registrationDetail','recommendationCategory'));
     }
 
-    public function edit(RegistrationDetail $registrationDetail)
+    public function edit(RecommendationCategory $recommendationCategory, RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_edit');
-        $recommendationCategories = RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
         $personalDetails = PersonalDetail::all();
-        return view('recommendation::admin.registration.edit', compact('registrationDetail', 'recommendationCategories', 'personalDetails'));
+        return view('recommendation::admin.registration.edit', compact('recommendationCategory', 'registrationDetail', 'personalDetails'));
     }
 
-    public function update(UpdateRegistrationRequest $request, RegistrationDetail $registrationDetail)
+    public function update(UpdateRegistrationRequest $request, RecommendationCategory $recommendationCategory, RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_edit');
-        DB::transaction(function () use ($request,$registrationDetail){
+        DB::transaction(function () use ($request, $registrationDetail) {
             $registrationDetail->update($request->validated());
             $this->getClientFile($request, $registrationDetail);
         });
 
         toast('सिफारिस विवरण सफलतापूर्वक गरियो', 'success');
-        return redirect()->route('admin.recommendation.registrationDetail.index');
+        return redirect()->route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory);
     }
 
-    public function destroy(RegistrationDetail $registrationDetail)
+    public function destroy(RecommendationCategory $recommendationCategory, RegistrationDetail $registrationDetail)
     {
         $this->checkAuthorization('recommendation_delete');
         $registrationDetail->delete();
@@ -104,7 +111,7 @@ class RegistrationDetailController extends Controller
         return back();
     }
 
-    public function ocFile(Request $request, RegistrationDetail $registrationDetail)
+    public function ocFile(Request $request,  RegistrationDetail $registrationDetail)
     {
         $request->validate([
             'oc_file' => ['array', 'required'],
@@ -128,14 +135,14 @@ class RegistrationDetailController extends Controller
     }
 
 
-   private function getClientFile($request, RegistrationDetail $registrationDetail)
+    private function getClientFile($request,  RegistrationDetail $registrationDetail)
     {
-        $files_count=collect($request->validated()['files'])->pluck('file')->filter(function ($file){
+        $files_count = collect($request->validated()['files'])->pluck('file')->filter(function ($file) {
             return !is_null($file);
         })->count();
 
-        if($files_count>0){
-            foreach ($request->validated()['files']??[] as $file) {
+        if ($files_count > 0) {
+            foreach ($request->validated()['files'] ?? [] as $file) {
                 $data = $file['file']->store('recommendation_file/' . Str::slug($request->input('date_ne')), 'public');
                 $registrationDetail->files()->create([
                     'file_name' => $file['file_name'],
@@ -145,6 +152,40 @@ class RegistrationDetailController extends Controller
                 ]);
             }
         }
+    }
+
+    protected function getRecommendationTemplateData()
+    {
+        $nepalidate = $this->get_today_nepali_date();
+        $replaced = str_replace(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], ['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], $nepalidate);
+        $recommendationSetting = RecommendationSetting::with('wardChairman', 'wardSecretary')->where('ward_no', auth()->user()->ward_no)?->first();
+        return [
+            officeSetting()->name,
+            letterHead(),
+            $replaced,
+            \officeSetting()->province->province ?? '',
+            \officeSetting()->district->district ?? '',
+            \officeSetting()->localBody->local_body ?? '',
+            auth()->user()->ward_no ?? '',
+            $recommendationSetting?->wardChairman->name ?? '',
+            $recommendationSetting?->wardSecretary->name ?? ''
+
+        ];
+    }
+
+    private function getReplaceData()
+    {
+        return [
+            '[@office_name]',
+            '[@letter_head]',
+            '[@today_date]',
+            '[@province]',
+            '[@district]',
+            '[@municipal]',
+            '[@ward]',
+            '[@chairman]',
+            '[@secretary]',
+        ];
     }
 
 }
