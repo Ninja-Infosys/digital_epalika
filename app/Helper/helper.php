@@ -12,6 +12,7 @@ use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use LaravelIdea\Helper\Modules\Recommendation\Entities\_IH_RecommendationCategory_C;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
@@ -20,55 +21,83 @@ if (!function_exists('officeSetting')) {
     function officeSetting()
     {
         return Cache::rememberForever('office_setting', function () {
-            return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
+
+            if (Schema::hasTable('office_settings')) {
+                return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
+            }
+            return [];
         });
     }
 }
+
 if (!function_exists('recommendationCategory')) {
-    function recommendationCategory()
+    function recommendationCategory(): \Illuminate\Database\Eloquent\Collection|_IH_RecommendationCategory_C|array
     {
-        return RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
+        if (Schema::hasTable('recommendation_categories')) {
+            return RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
+        }
+        return [];
     }
 }
+
 if (!function_exists('get_revenue_setting')) {
     function get_revenue_setting()
     {
         return Cache::rememberForever('revenue_setting', function () {
-            return RevenueSetting::with('landMeasurement', 'standardLandMeasurement')->first();
+            if (Schema::hasTable('revenue_settings')) {
+                return RevenueSetting::with('landMeasurement', 'standardLandMeasurement')->first();
+            }
+            return [];
         });
     }
 }
+
 if (!function_exists('get_office_header')) {
     function get_office_header()
     {
         return Cache::rememberForever('officeHeaders', function () {
-            return OfficeHeader::orderBy('position')->get();
+            if (Schema::hasTable('office_headers')) {
+                return OfficeHeader::orderBy('position')->get();
+            }
+            return [];
         });
     }
 }
+
 if (!function_exists('letterHead')) {
     function letterHead($type = 'header')
     {
-        $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null) ?? LetterHead::first();
+        if (Schema::hasTable('letter_heads')) {
+            $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null) ?? LetterHead::first();
 
-        return $type == 'letter_head' ? ($letterHead->letter_head ?? '') : ($letterHead->header ?? '');
+            return $type == 'letter_head' ? ($letterHead->letter_head ?? '') : ($letterHead->header ?? '');
+        }
+        return [];
     }
 }
+
 if (!function_exists('get_setting')) {
     function get_setting($key, $default = null)
     {
         $settings = Cache::remember('settings', 86400, function () {
-            return FeatureActivation::all();
+            if (Schema::hasTable('feature_activations')) {
+                return FeatureActivation::all();
+            }
+            return [];
         });
         $setting = $settings->where('feature_name_en', $key)->first();
         return $setting == null ? $default : $setting->feature_status;
     }
 }
+
 if (!function_exists('get_provinces')) {
     function get_provinces(int $provinceId = null)
     {
         $provinces = Cache::rememberForever('provinces', function () {
-            return Province::all();
+            if (Schema::hasTable('provinces')) {
+                return Province::all();
+            }
+            return [];
         });
         if ($provinceId !== null) {
             $provinces = $provinces->where('id', $provinceId)->first();
@@ -76,12 +105,16 @@ if (!function_exists('get_provinces')) {
         return $provinces ?? [];
     }
 }
+
 if (!function_exists('get_districts')) {
     function get_districts($province_ids = [], int $districtId = null)
     {
         $province_ids = is_array($province_ids) ? $province_ids : [$province_ids];
         $allDistricts = Cache::rememberForever('allDistricts', function () {
-            return District::orderBy('province_id')->get();
+            if (Schema::hasTable('districts')) {
+                return District::orderBy('province_id')->get();
+            }
+            return [];
         });
         if (!empty($province_ids)) {
             $allDistricts = $allDistricts->whereIn('province_id', $province_ids);
@@ -92,12 +125,16 @@ if (!function_exists('get_districts')) {
         return $allDistricts ?? [];
     }
 }
+
 if (!function_exists('get_local_bodies')) {
     function get_local_bodies($district_ids = [], int $localBodyId = null)
     {
         $district_ids = is_array($district_ids) ? $district_ids : [$district_ids];
         $allLocalBodies = Cache::rememberForever('localBodies', function () {
-            return LocalBody::all();
+            if (Schema::hasTable('local_bodies')) {
+                return LocalBody::all();
+            }
+            return [];
         });
         if (!empty($district_ids)) {
             $allLocalBodies = $allLocalBodies->whereIn('district_id', $district_ids);
@@ -108,6 +145,7 @@ if (!function_exists('get_local_bodies')) {
         return $allLocalBodies ?? [];
     }
 }
+
 if (!function_exists('getArrayKeys')) {
     function getArrayKeys($array = []): array
     {
@@ -122,6 +160,7 @@ if (!function_exists('getArrayKeys')) {
         return array_unique($keys);
     }
 }
+
 if (!function_exists('removeColumns')) {
     function removeColumns($array, $excludeColumns): Collection
     {
@@ -139,6 +178,7 @@ if (!function_exists('removeColumns')) {
         return collect($array);
     }
 }
+
 if (!function_exists('renderListData')) {
     function renderListData($data): void
     {
@@ -151,6 +191,7 @@ if (!function_exists('renderListData')) {
         }
     }
 }
+
 if (!function_exists('getFileType')) {
     function getFileType($base64String): string
     {
@@ -159,6 +200,7 @@ if (!function_exists('getFileType')) {
         return substr($base64String, $startPos, $endPos - $startPos);
     }
 }
+
 if (!function_exists('base64ToFile')) {
     function base64ToFile($base64String, $fileType): string
     {
@@ -170,6 +212,7 @@ if (!function_exists('base64ToFile')) {
         return $fileName;
     }
 }
+
 if (!function_exists('isBase64')) {
     function isBase64($string): bool
     {
@@ -180,6 +223,7 @@ if (!function_exists('isBase64')) {
         return $bool;
     }
 }
+
 if (!function_exists('getAllForSideBarFolders')) {
     function getAllForSideBarFolders(string $folder)
     {
@@ -192,6 +236,7 @@ if (!function_exists('getAllForSideBarFolders')) {
         return [];
     }
 }
+
 if (!function_exists('getAllFilesAndFolder')) {
     function getAllFilesAndFolder(string $folder): array
     {
@@ -210,6 +255,7 @@ if (!function_exists('getAllFilesAndFolder')) {
         return [];
     }
 }
+
 if (!function_exists('convertPathsToTree')) {
     function convertPathsToTree($paths, $separator = '/', $parent = null)
     {
@@ -245,6 +291,7 @@ if (!function_exists('convertPathsToTree')) {
             })->values();
     }
 }
+
 if (!function_exists('convert_to_highest_unit')) {
     function convert_to_highest_unit($bytes): string
     {
@@ -262,6 +309,7 @@ if (!function_exists('convert_to_highest_unit')) {
         return $bytes;
     }
 }
+
 if (!function_exists('getFileIconClass')) {
     function getFileIconClass(string $mime): string
     {
@@ -278,11 +326,15 @@ if (!function_exists('getFileIconClass')) {
         };
     }
 }
+
 if (!function_exists('get_revenue_categories')) {
     function get_revenue_categories(int $revenueCategoryId = null, bool $all = false)
     {
         $revenueCategories = Cache::rememberForever('revenueCategories', function () {
-            return RevenueCategory::with('revenueCategories')->get();
+            if (Schema::hasTable('recommendation_categories')) {
+                return RevenueCategory::with('revenueCategories')->get();
+            }
+            return [];
         });
         if (!$all) {
             $revenueCategories = $revenueCategories->whereNull('revenue_category_id');
@@ -293,12 +345,16 @@ if (!function_exists('get_revenue_categories')) {
         return $revenueCategories ?? [];
     }
 }
+
 if (!function_exists('get_revenues')) {
     function get_revenues($revenueCategories = [], int $revenueId = null)
     {
         $revenueCategories = is_array($revenueCategories) ? $revenueCategories : [$revenueCategories];
         $revenues = Cache::rememberForever('revenues', function () {
-            return Revenue::orderBy('revenue_category_id')->get();
+            if (Schema::hasTable('revenues')) {
+                return Revenue::orderBy('revenue_category_id')->get();
+            }
+            return [];
         });
         if (!empty($revenueCategories)) {
             $revenues = $revenues->whereIn('revenue_category_id', $revenueCategories);
@@ -309,6 +365,7 @@ if (!function_exists('get_revenues')) {
         return $revenues ?? [];
     }
 }
+
 if (!function_exists('get_file_type')) {
     function get_file_type($extension): string
     {
