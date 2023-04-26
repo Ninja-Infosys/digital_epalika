@@ -54,13 +54,17 @@
 @stack('scripts')
 @livewireScripts
 {{--TODO: Add a license error here--}}
-@if(session()->has('licenseError') || (cache()->has('license') && array_key_exists('is_active', cache()->get('license')) && cache()->get('license')['is_active']))
+@if(session()->has('licenseError')
+|| (session()->has('license')
+&& array_key_exists('is_active', session()->get('license'))
+&& session()->get('license')['is_active'])
+)
     <script>
         Swal.fire({
             title: 'License Error',
-            text: '{{cache()->get('license')['message']}}',
+            text: '{{session()->get('license')['message']}}',
             icon: 'error',
-            confirmButtonText: 'Ok'
+            confirmationButton: false
         })
     </script>
 
