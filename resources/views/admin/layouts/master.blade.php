@@ -57,7 +57,7 @@
 @if(session()->has('licenseError')
 || (session()->has('license')
 && array_key_exists('is_active', session()->get('license'))
-&& session()->get('license')['is_active'])
+&& !session()->get('license')['is_active'])
 )
     <script>
         Swal.fire({
