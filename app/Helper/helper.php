@@ -27,7 +27,7 @@ if (!function_exists('officeSetting')) {
 if (!function_exists('recommendationCategory')) {
     function recommendationCategory()
     {
-        return RecommendationCategory::with('recommendationCategories')->get();
+        return RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
     }
 }
 if (!function_exists('get_revenue_setting')) {

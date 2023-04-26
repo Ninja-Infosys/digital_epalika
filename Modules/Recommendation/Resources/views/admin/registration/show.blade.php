@@ -24,7 +24,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
-                        <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
+                        <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory) }}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>

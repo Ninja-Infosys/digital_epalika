@@ -21,7 +21,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
 });
 
 Route::post('registrationDetail/{registrationDetail}/ocFile',[RegistrationDetailController::class,'ocFile'])->name('registrationDetail.ocFile');
-Route::resource('registrationDetail', RegistrationDetailController::class);
+Route::resource('recommendationCategory.registrationDetail', RegistrationDetailController::class);
+
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function (){
     Route::get('/','index')->name('index');

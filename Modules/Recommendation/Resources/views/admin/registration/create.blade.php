@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
-                        <a href="{{ route('admin.recommendation.registrationDetail.index') }}"
+                        <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory) }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.recommendation.registrationDetail.store') }}" method="post"
+                    <form action="{{ route('admin.recommendation.recommendationCategory.registrationDetail.store',$recommendationCategory) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <fieldset>
@@ -66,37 +66,13 @@
                                     @enderror
                                 </div>
 
+
                                 <div class="col-md-4 mb-2">
-                                    <label for="recommendation_category_id" class="form-label">सिफारिस *</label>
-                                    <select name="recommendation_category_id" data-toggle="select2"
-                                        id="recommendation_category_id" class="form-control">
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach ($recommendationCategories as $recommendationCategory)
-                                            @if (count($recommendationCategory->recommendationCategories) > 0)
-                                                <optgroup label="{{ $recommendationCategory->title }}">
-                                                    @foreach ($recommendationCategory->recommendationCategories as $subRecommendationCategory)
-                                                        <option value="{{ $subRecommendationCategory->id }}">
-                                                            --{{ $subRecommendationCategory->title }}
-                                                        </option>
-                                                    @endforeach
-                                                </optgroup>
-                                            @else
-                                                <option value="{{ $recommendationCategory->id }}">
-                                                    {{ $recommendationCategory->title }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    @error('recommendation_category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-2 mb-2">
                                     <x-date-input-component get-today-date="{{ true }}" name-ne="date_ne"
                                         label-ne="मिति*" name-en="date_en" label-en="English Date" />
                                 </div>
                                 @if (auth()->user()->role->type === 'Super')
-                                    <div class="col-md-2 mb-2">
+                                    <div class="col-md-4 mb-2">
                                         <label for="ward_no" class="form-label">वडा नं</label>
                                         <select id="ward_no" name="ward_no" class="form-select" required>
                                             <option value="">-- छान्नुहोस् --</option>
@@ -152,7 +128,7 @@
                             <div class="col-md-12 mb-2">
                                 <label for="recommendation_data" class="form-label">डाटा *</label>
                                 <textarea name="recommendation_data" id="recommendation_data" required cols="30" rows="10"
-                                    class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data') }}</textarea>
+                                    class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data',$data) }}</textarea>
                                 @error('recommendation_data')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

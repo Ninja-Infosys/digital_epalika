@@ -12,14 +12,44 @@
         </a>
     </li>
 @endcan
-@can('recommendation_access')
-    <li class="{{request()->is('admin/recommendation/registrationDetail*') ? 'active' : ''}}">
-        <a href="{{route('admin.recommendation.registrationDetail.index')}}">
-            <i class="fa fa-id-card"></i>
-            <span>सिफारिस</span>
-        </a>
-    </li>
-@endcan
+
+@foreach(recommendationCategory() as $recommendationCategory)
+    @if($recommendationCategory->recommendationCategories->count() > 0)
+        <li class="{{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'active' : ''}}">
+            <a href="#recommendationCategory{{$loop->iteration}}"
+               {{request()->is('admin/recommendation/recommendationCategory/registrationDetail*')  ? 'aria-expanded=true' : ''}}
+               data-bs-toggle="collapse">
+                <i class="fa fa-clipboard-list"></i>
+                <span>{{Str::words($recommendationCategory->title,4,'..')}}</span>
+                <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+            </a>
+            <div
+                class="collapse {{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'show' : ''}}"
+                id="recommendationCategory{{$loop->iteration}}">
+                <ul class="nav-second-level">
+                    @foreach($recommendationCategory->recommendationCategories as $category)
+                        <li class="{{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'active' : ''}}">
+                            <a href="{{route('admin.recommendation.recommendationCategory.registrationDetail.index',$category)}}">
+                                <span>{{$category->title}}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </li>
+    @else
+        <li class="{{request()->is('admin/recommendation/recommendationCategory/'.$recommendationCategory->id.'/registrationDetail*') ? 'active' : ''}}">
+            <a href="{{route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory->id)}}">
+                <i class="fa fa-id-card"></i>
+                <span>{{Str::words($recommendationCategory->title,4,'..')}}</span>
+            </a>
+        </li>
+    @endif
+
+@endforeach
+
 <li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">
     <a href="#recommendationReport"
        {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'aria-expanded=true' : ''}}
@@ -65,34 +95,6 @@
         </ul>
     </div>
 </li>
-{{--@foreach(recommendationCategory() as $recommendationCategory)--}}
-{{--    <li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">--}}
-{{--        <a href="#recommendationCategory{{$loop->iteration}}"--}}
-{{--           {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'aria-expanded=true' : ''}}--}}
-{{--           data-bs-toggle="collapse">--}}
-{{--            <i class="fa fa-clipboard-list"></i>--}}
-{{--            <span>{{$recommendationCategory->title}}</span>--}}
-{{--            <span class="menu-arrow">--}}
-{{--            <i class="fas fa-angle-right"></i>--}}
-{{--        </span>--}}
-{{--        </a>--}}
-{{--        <div--}}
-{{--            class="collapse {{request()->is('admin/recommendation/report*') || request()->is('admin/recommendation/report*') ? 'show' : ''}}"--}}
-{{--            id="recommendationCategory{{$loop->iteration}}">--}}
-{{--            <ul class="nav-second-level">--}}
-{{--                @foreach($recommendationCategory->recommendationCategories as $category)--}}
-{{--                    <li class="{{request()->is('admin/recommendation/report') ? 'active' : ''}}">--}}
-{{--                        <a href="{{route('admin.recommendation.report.index')}}">--}}
-{{--                            <span>{{$category->title}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    </li>--}}
-{{--@endforeach--}}
-
-
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#recommendationSetting"
        {{request()->is('admin/recommendation/setting/recommendation*') || request()->is('admin/recommendation/setting/recommendation*') ? 'aria-expanded=true' : ''}}

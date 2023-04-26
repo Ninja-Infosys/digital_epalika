@@ -39,10 +39,10 @@
                                     <select name="recommendation_category" data-toggle="select2"
                                             id="recommendation_category" class="form-control">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($recommendationCategories as $recommendationCategory)
-                                            @if(count($recommendationCategory->recommendationCategories)>0)
-                                                <optgroup label="{{$recommendationCategory->title}}">
-                                                    @foreach($recommendationCategory->recommendationCategories as $subRecommendationCategory)
+                                        @foreach($recommendationCategories as $data)
+                                            @if(count($data->recommendationCategories)>0)
+                                                <optgroup label="{{$data->title}}">
+                                                    @foreach($data->recommendationCategories as $subRecommendationCategory)
                                                         <option
                                                             {{request('recommendation_category') == $subRecommendationCategory->id ? 'selected':''}}
                                                             value="{{$subRecommendationCategory->id}}">
@@ -52,9 +52,9 @@
                                                 </optgroup>
                                             @else
                                                 <option
-                                                    {{request('recommendation_category') == $recommendationCategory->id ? 'selected':''}}
-                                                    value="{{$recommendationCategory->id}}">
-                                                    {{$recommendationCategory->title}}
+                                                    {{request('recommendation_category') == $data->id ? 'selected':''}}
+                                                    value="{{$data->id}}">
+                                                    {{$data->title}}
                                                 </option>
                                             @endif
                                         @endforeach
@@ -108,8 +108,9 @@
                         <h4 class="header-title mb-0">सिफारिस सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
+
                             @can('recommendation_create')
-                                <a href="{{ route('admin.recommendation.registrationDetail.create') }}"
+                                <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.create',$recommendationCategory) }}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                                 </a>
@@ -131,7 +132,7 @@
                                 <th>क्र.स</th>
                                 <th>दर्ता नं</th>
                                 <th>नाम</th>
-                                <th>सिफारिस</th>
+
                                 <th>मिति</th>
                                 <th>#</th>
                             </tr>
@@ -142,9 +143,7 @@
                                     <td>{{ $registrationDetails->firstItem() + $key }}</td>
                                     <td>{{ $registrationDetail->registration_no }}</td>
                                     <td>{{ $registrationDetail->personalDetail->name??'' }}</td>
-                                    <td>
-                                        {{ $registrationDetail->recommendationCategory->title??'' }}
-                                    </td>
+
                                     <td>{{ $registrationDetail->date_ne }}</td>
                                     <td>
                                         <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
@@ -153,7 +152,7 @@
                                         </a>
                                         @can('recommendation_access')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.registrationDetail.show', $registrationDetail) }}"
+                                               href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.show', [$recommendationCategory,$registrationDetail]) }}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
@@ -161,14 +160,14 @@
                                         @endcan
                                         @can('recommendation_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.registrationDetail.edit', $registrationDetail) }}"
+                                               href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.edit',  [$recommendationCategory,$registrationDetail]) }}"
                                                class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
                                         <form
-                                            action="{{ route('admin.recommendation.registrationDetail.destroy',$registrationDetail) }}"
+                                            action="{{ route('admin.recommendation.recommendationCategory.registrationDetail.destroy', [$recommendationCategory,$registrationDetail]) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')
