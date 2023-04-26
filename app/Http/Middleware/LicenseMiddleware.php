@@ -14,11 +14,10 @@ class LicenseMiddleware
     {
         if (!Cache::has('license')) {
             if (file_exists(config_path('license.php'))) {
-                $license = config('license.license_key');
-                $domain = request()->getUri();
-                $response = (new LicenseController())->checkLicense($license, $domain);
-                Cache::remember('license', 60 * 60 * 24, function () use ($response) {
-                    return $response;
+                Cache::remember('license', 60 * 60 * 24, function () {
+                    $license = config('license.license_key');
+                    $domain = request()->getUri();
+                    return (new LicenseController())->checkLicense($license, $domain);
                 });
             } else {
                 Session::remember('licenseError', fn() => 'License key not found');
