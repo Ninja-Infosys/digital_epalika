@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('letter_heads', function (Blueprint $table) {
             $table->longText('header_en')->nullable();
         });
     }
 
-    public function down()
+    public function down(): void
     {
+
         Schema::table('letter_heads', function (Blueprint $table) {
             $table->dropColumn('header_en');
         });
