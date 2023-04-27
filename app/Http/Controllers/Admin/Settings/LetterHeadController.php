@@ -19,13 +19,15 @@ class LetterHeadController extends Controller
     {
         $request->validate([
             'header' => ['required'],
-            'letter_head' => ['required']
+            'header_en' => ['required'],
+            'letter_head' => ['required'],
         ]);
 
         LetterHead::updateOrCreate(
             ['model_type'=> User::class,'model_id'=>auth()->id()],
             [
                 'header'=>$request->input('header'),
+                'header_en'=>$request->input('header_en'),
                 'letter_head'=>$request->input('letter_head')
             ]
         );

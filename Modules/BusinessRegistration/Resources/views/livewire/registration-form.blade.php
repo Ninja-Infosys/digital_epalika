@@ -1135,9 +1135,9 @@
                                                            class="form-check-input"
                                                            value="1"
                                                            wire:model="form.registeredBusinesses.{{$key}}.is_active"
-                                                           id="form.registeredBusinesses.{{$key}}.is_active">
+                                                           id="form.registeredBusinesses2.{{$key}}.is_active">
                                                     <label class="form-check-label"
-                                                           for="form.registeredBusinesses.{{$key}}.is_active">छ
+                                                           for="form.registeredBusinesses2.{{$key}}.is_active">छ
                                                         &nbsp;</label>
                                                 </div>
                                                 <div class="form-check">

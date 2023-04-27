@@ -75,6 +75,17 @@ if (!function_exists('letterHead')) {
         return [];
     }
 }
+if (!function_exists('letterHeadEn')) {
+    function letterHeadEn()
+    {
+        if (Schema::hasTable('letter_heads')) {
+            $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null) ?? LetterHead::first();
+
+            return $letterHead->header_en;
+        }
+        return [];
+    }
+}
 
 if (!function_exists('get_setting')) {
     function get_setting($key, $default = null)

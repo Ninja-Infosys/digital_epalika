@@ -162,6 +162,7 @@ class RegistrationDetailController extends Controller
         return [
             officeSetting()->name,
             letterHead(),
+            letterHeadEn(),
             $replaced,
             \officeSetting()->province->province ?? '',
             \officeSetting()->district->district ?? '',
@@ -178,6 +179,7 @@ class RegistrationDetailController extends Controller
         return [
             '[@office_name]',
             '[@letter_head]',
+            '[@letter_head_en]',
             '[@today_date]',
             '[@province]',
             '[@district]',

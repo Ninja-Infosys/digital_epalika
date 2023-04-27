@@ -22,6 +22,7 @@ class LetterHead extends Model
         'model_type',
         'model_id',
         'header',
+        'header_en',
         'letter_head'
     ];
 
