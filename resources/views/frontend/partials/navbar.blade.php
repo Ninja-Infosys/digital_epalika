@@ -31,7 +31,6 @@
                         <li><a class="dropdown-item " href="{{route('photo')}}">फोटोहरु</a></li>
                         <li><a class="dropdown-item " href="{{route('audio')}}">अडियोहरु</a></li>
                         <li><a class="dropdown-item " href="{{route('video')}}">भिडियोहरु</a></li>
-
                     </ul>
                 </li>
                 <li class="nav-item">

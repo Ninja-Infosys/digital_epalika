@@ -45,6 +45,7 @@ class RecommendationTemplate extends Model
             'data' => [
                 'कार्यालय नाम' => '[@office_name]',
                 'कार्यालय लेटर हेड' => '[@letter_head]',
+                'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letter_head_en]',
                 'आजको मिति' => '[@today_date]',
             ],
         ],[

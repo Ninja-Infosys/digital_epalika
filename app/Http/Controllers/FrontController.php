@@ -26,7 +26,7 @@ class FrontController extends Controller
     public function index()
     {
         if ($this->checkModuleExistence('DigitalBoard')) {
-            return redirect(route('login'));
+            return view('frontend.welcome');
         }
         if (config('app.website_type') === 'website') {
             $employees = Employee::orderBy('position')->get();
