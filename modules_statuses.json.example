@@ -13,10 +13,6 @@
     "TaskManagement": true,
     "Recommendation": true,
     "Plan": true,
-    "Disability": true,
     "Identity": true,
-    "OrganizationRegistration": false,
-    "Request": true,
-    "UpdateBusinessRequest": true,
     "Revenue": true
 }
