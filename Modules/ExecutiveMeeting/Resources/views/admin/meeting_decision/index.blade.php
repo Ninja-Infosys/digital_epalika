@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
+                            <a href="{{ route('admin.executiveMeeting.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -27,7 +27,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('meetingDecision_create')
-                                <a href="{{route('admin.executiveMeeting.meetingDecision.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.create', $meeting) }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -37,56 +38,55 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-striped table-bordered">
                             <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>बैठक नाम</th>
-                                <th>मिति</th>
-                                <th>बैठकको बिषय </th>
-                                <th>#</th>
-                            </tr>
+                                <tr>
+                                    <th>क्र.स</th>
+                                    <th>बैठक नाम</th>
+                                    <th>मिति</th>
+                                    <th>बैठकको बिषय </th>
+                                    <th>#</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @forelse($meetingDecisions as $meetingDecision)
-                                <tr>
-                                    <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$meetingDecision->meeting->meeting_name??''}}</td>
-                                    <td>{{$meetingDecision->date }}</td>
-                                    <td>{{$meetingDecision->subject}}</td>
+                                @forelse($meeting->meetingDecisions as $meetingDecision)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $meetingDecision->meetingAgenda->proposal ?? '' }}</td>
+                                        <td>{{ $meetingDecision->date }}</td>
 
-                                    <td>
-                                        @can('meetingDecision_edit')
-                                        <a data-bs-type="edit" href="{{route('admin.executiveMeeting.meetingDecision.edit',$meetingDecision)}}"
-                                        title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    @endcan
-                                    @can('meetingDecision_delete')
-                                    <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',$meetingDecision)}}"
-                                    method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button data-bs-type="delete" type="submit" class="btn btn-xs btn-outline-danger show_confirm {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
-                                                title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    @endcan
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
+                                        <td>
+                                            @can('meetingDecision_edit')
+                                                <a data-bs-type="edit"
+                                                    href="{{ route('admin.executiveMeeting.meeting.meetingDecision.edit', [$meeting,$meetingDecision]) }}"
+                                                    title="सम्पादन गर्नुहोस्"
+                                                    class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endcan
+                                            @can('meetingDecision_delete')
+                                                <form
+                                                    action="{{ route('admin.executiveMeeting.meetingDecision.destroy', [$meeting,$meetingDecision]) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button data-bs-type="delete" type="submit"
+                                                        class="btn btn-xs btn-outline-danger show_confirm {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                        title="मेटाउनु होस्">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
-                    </div>
-                    <div class="mt-2">
-                        {{ $meetingDecisions->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-

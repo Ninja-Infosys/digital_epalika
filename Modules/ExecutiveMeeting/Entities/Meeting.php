@@ -15,7 +15,7 @@ use Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum;
 
 class Meeting extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait,GetAllColumns;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -66,5 +66,15 @@ class Meeting extends Model
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function meetingAgendas(): HasMany
+    {
+        return $this->hasMany(MeetingAgenda::class);
+    }
+
+    public function meetingDecisions(): HasMany
+    {
+        return $this->hasMany(MeetingDecision::class);
     }
 }
