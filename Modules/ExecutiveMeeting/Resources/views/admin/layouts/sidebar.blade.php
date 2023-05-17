@@ -43,14 +43,6 @@
         </a>
     </li>
 @endcan
-@can('meetingDecision_access')
-    <li class="{{request()->is('admin/executivemeeting/meetingDecision*') ? 'active' : ''}}">
-        <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}">
-            <i class="fa fa-list-alt"></i>
-            <span>बैठकको निर्णय</span>
-        </a>
-    </li>
-@endcan
 <li class="{{request()->is('admin/executiveMeeting/reports/*') ? 'active' : ''}}">
     <a href="#sidebarExecutiveMeeting"
        {{request()->is('admin/executiveMeeting/reports/*') ? 'aria-expanded=true' : ''}}

@@ -11,18 +11,24 @@ use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\UpdateMeetingDecision
 
 class MeetingDecisionController extends Controller
 {
-    public function index()
+    public function index(Meeting $meeting)
     {
         $this->checkAuthorization('meetingDecision_access');
-        $meetingDecisions = MeetingDecision::with('meeting')->latest()->paginate(10);
-        return view('executivemeeting::admin.meeting_decision.index', compact('meetingDecisions'));
+
+        $meeting->load('meetingDecisions.meetingAgenda');
+
+        return view('executivemeeting::admin.meeting_decision.index', compact('meeting'));
     }
 
-    public function create()
+    public function create(Meeting $meeting)
     {
         $this->checkAuthorization('meetingDecision_create');
-        $meetings = Meeting::get();
-        return view('executivemeeting::admin.meeting_decision.create', compact('meetings'));
+
+        $meeting->load(['meetingAgendas' => function ($query) {
+            $query->where('is_final', 1);
+        }]);
+
+        return view('executivemeeting::admin.meeting_decision.create', compact('meeting'));
     }
 
     public function store(StoreMeetingDecisionRequest $request)
@@ -40,7 +46,7 @@ class MeetingDecisionController extends Controller
 
     public function edit(MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization( 'meetingDecision_edit');
+        $this->checkAuthorization('meetingDecision_edit');
         $meetings = Meeting::get();
         return view('executivemeeting::admin.meeting_decision.edit', compact('meetings', 'meetingDecision'));
     }
