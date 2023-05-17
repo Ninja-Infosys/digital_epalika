@@ -10,6 +10,7 @@ return new class () extends Migration {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('branch_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('registration_no')->comment('दर्ता नं.');
             $table->string('registration_date')->nullable()->comment('दर्ता मिति (वि.स.)');
             $table->date('en_registration_date')->nullable()->comment('दर्ता मिति (ई.सं.)');
@@ -22,6 +23,7 @@ return new class () extends Migration {
             $table->string('phone')->nullable()->comment('बुझिलिनेको फोन');
             $table->string('signature_image')->nullable()->comment('हस्ताक्षर');
             $table->string('date')->nullable()->comment('मिति');
+            $table->string('status')->default('pending');
             $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
             $table->softDeletes();

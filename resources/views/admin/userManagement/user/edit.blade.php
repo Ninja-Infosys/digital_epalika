@@ -141,6 +141,35 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="employee_id" class="form-label">मथेल्नो तह कर्मचारी  </label>
+
+                                    <select class="form-control @error('employee_id') is-invalid @enderror"
+                                            name="employee_id" id="employee_id">
+                                        <option value=""> कर्मचारी  छान्नुहोस</option>
+                                        @foreach($allemployees as $allemployee)
+                                            <option value="{{$allemployee->id}}" {{old('employee_id',$user->employee_id)==$allemployee->id ? 'selected':''}}>{{$allemployee->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('employee_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input
+                                        type="checkbox"
+                                        name="is_dept_head"
+                                        value="1"
+                                        class="@error('is_dept_head') is-invalid @enderror"
+                                        id="is_dept_head"
+                                        {{old('is_dept_head',$user->is_dept_head)==1?'checked':''}}
+                                    />
+                                    <label for="is_dept_head" class="form-label">Is Department Head </label>
+
+                                    @error('is_dept_head')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </fieldset>
 

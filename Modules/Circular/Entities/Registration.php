@@ -42,6 +42,8 @@ class Registration extends Model
         'signature_image',
         'date',
         'remarks',
+        'status',
+        'branch_id',
     ];
 
     protected $appends = [
