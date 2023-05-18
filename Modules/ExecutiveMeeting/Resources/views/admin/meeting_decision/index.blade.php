@@ -25,7 +25,6 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">बैठक निर्णयहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
-                            @includeIf('inc.filter_form')
                             @can('meetingDecision_create')
                                 <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.create', $meeting) }}"
                                     class="btn btn-sm btn-outline-primary waves-effect waves-light">
@@ -40,9 +39,9 @@
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
-                                    <th>बैठक नाम</th>
+                                    <th>प्रस्ताव</th>
                                     <th>मिति</th>
-                                    <th>बैठकको बिषय </th>
+                                    <th>निर्णय</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -52,8 +51,9 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $meetingDecision->meetingAgenda->proposal ?? '' }}</td>
                                         <td>{{ $meetingDecision->date }}</td>
+                                        <td>{!! $meetingDecision->description !!}</td>
 
-                                        <td>
+                                        <td class="text-nowrap">
                                             @can('meetingDecision_edit')
                                                 <a data-bs-type="edit"
                                                     href="{{ route('admin.executiveMeeting.meeting.meetingDecision.edit', [$meeting,$meetingDecision]) }}"
@@ -64,7 +64,7 @@
                                             @endcan
                                             @can('meetingDecision_delete')
                                                 <form
-                                                    action="{{ route('admin.executiveMeeting.meetingDecision.destroy', [$meeting,$meetingDecision]) }}"
+                                                    action="{{ route('admin.executiveMeeting.meeting.meetingDecision.destroy', [$meeting,$meetingDecision]) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')

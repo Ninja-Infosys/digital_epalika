@@ -35,40 +35,39 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.executiveMeeting.meeting.meetingDecision.store',$meeting) }}" method="post"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.executiveMeeting.meeting.meetingDecision.store', $meeting) }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
+                        @foreach ($meeting->meetingAgendas as $meetingAgenda)
+                            <fieldset class="border border-secondary p-2 mb-2">
+                                <legend class="font-16 text-secondary">
+                                    <strong>{{ $loop->iteration }}. {{ $meetingAgenda->proposal }} </strong>
+                                </legend>
+                                <input type="hidden" name="meetingDecisions[{{ $loop->index }}][meeting_agenda_id]"
+                                    id="meeting_agenda_id{{ $loop->index }}" value="{{ $meetingAgenda->id }}">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <x-date-input-component nameNe="meetingDecisions[{{ $loop->index }}][date]"
+                                            :editDateNe="$meetingAgenda->meetingDecision->date??''"
+                                            idNe="date{{ $loop->index }}" labelNe="मिति *"
+                                            idEn="en_date{{ $loop->index }}"
+                                            nameEn="meetingDecisions[{{ $loop->index }}][en_date]" labelEn="Date"
+                                            :editDateEn="$meetingAgenda->meetingDecision->en_date??''"
+                                            :getTodayDate="false" />
+                                    </div>
 
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong> विवरण </strong>
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <x-date-input-component nameNe="date" labelNe="मिति *" nameEn="en_date"
-                                        labelEn="Date" />
+                                    <div class="col-md-12 mb-2">
+                                        <label for="description{{ $loop->index }}" class="form-label">बिवरण * </label>
+                                        <textarea name="meetingDecisions[{{ $loop->index }}][description]" id="description{{ $loop->index }}" cols="30"
+                                            placeholder="बिवरण" rows="5"
+                                            class="form-control ckEditor @error("meetingDecisions.{{ $loop->index }}.description") is-invalid @enderror">{{ old("meetingDecisions.$loop->index.description", $meetingAgenda->meetingDecision->description ?? '') }}</textarea>
+                                        @error("meetingDecisions.{{ $loop->index }}.description")
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-
-                                <div class="col-md-12 mb-2">
-                                    <label for="subject" class="form-label"> विषय * </label>
-                                    <input type="text" name="subject" value="{{ old('subject') }}"
-                                        class="form-control @error('subject') is-invalid @enderror" id="subject"
-                                        placeholder="विषय" required />
-                                    @error('subject')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-12 mb-2">
-                                    <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
-                                        class="form-control ckEditor summernote @error('meeting_subject') is-invalid @enderror">{{ old('description') }}</textarea>
-                                    @error('description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </fieldset>
+                            </fieldset>
+                        @endforeach
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
@@ -79,6 +78,6 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('assets/backend/editor/ckEditor/js/ckeditor.js') }}"></script>
-    <script src="{{ asset('assets/backend/editor/ckEditor/js/editor.js') }}"></script>
+    <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/backend/ckeditor/editor.js') }}"></script>
 @endpush

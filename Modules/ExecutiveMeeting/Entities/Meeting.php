@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum;
 
 class Meeting extends Model
@@ -76,5 +77,10 @@ class Meeting extends Model
     public function meetingDecisions(): HasMany
     {
         return $this->hasMany(MeetingDecision::class);
+    }
+
+    public function meetingMinute(): HasOne
+    {
+        return $this->hasOne(MeetingMinute::class);
     }
 }
