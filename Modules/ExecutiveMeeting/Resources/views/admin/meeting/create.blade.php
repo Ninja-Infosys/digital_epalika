@@ -35,11 +35,6 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <ul class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
                     <form action="{{ route('admin.executiveMeeting.meeting.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf

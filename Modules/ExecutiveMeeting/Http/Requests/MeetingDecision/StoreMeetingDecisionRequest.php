@@ -16,12 +16,11 @@ class StoreMeetingDecisionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'meeting_id' => ['required', Rule::exists('meetings', 'id')->withoutTrashed()],
-            'subject' => ['required', 'string', 'max:255'],
-            'date' => ['nullable'],
-            'en_date' => ['required'],
-            'description' => ['nullable'],
-            'decision_file' => ['nullable', 'mimes:jpg,png,jpeg,pdf']
+            'meetingDecisions' => ['required', 'array'],
+            'meetingDecisions.*.meeting_agenda_id' => ['required', Rule::exists('meeting_agendas', 'id')->where('meeting_id', $this->meeting->id)->withoutTrashed()],
+            'meetingDecisions.*.date' => ['required'],
+            'meetingDecisions.*.en_date' => ['required', 'date'],
+            'meetingDecisions.*.description' => ['required'],
         ];
     }
 }

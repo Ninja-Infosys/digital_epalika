@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="">
                         <table class="table table-sm table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -78,11 +78,9 @@
                                                 </button>
                                                 <div class="dropdown-menu" style="">
                                                     @can('meeting_edit')
-                                                        <a
-                                                            href="{{ route('admin.executiveMeeting.meeting.edit', $meeting) }}"
-                                                            title="सम्पादन गर्नुहोस्" class="dropdown-item text-primary">
-                                                            <i
-                                                                class="fa fa-edit"> सम्पादन गर्नुहोस</i>
+                                                        <a href="{{ route('admin.executiveMeeting.meeting.edit', $meeting) }}"
+                                                            title="सम्पादन गर्नुहोस्" class="dropdown-item text-warning">
+                                                            <i class="fa fa-edit"> सम्पादन गर्नुहोस</i>
                                                         </a>
                                                     @endcan
                                                     @can('meeting_delete')
@@ -99,22 +97,23 @@
                                                         </form>
                                                     @endcan
                                                     @can('meeting_edit')
-                                                        <a
-                                                            href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.index', $meeting) }}"
-                                                            title="बैठक एजेन्डा" class="dropdown-item text-primary">
-                                                            <i
-                                                                class="fa fa-file"> बैठक एजेन्डा</i>
+                                                        <a href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.index', $meeting) }}"
+                                                            title="बैठक एजेन्डा" class="dropdown-item text-secondary">
+                                                            <i class="fa fa-file"> बैठक एजेन्डा</i>
                                                         </a>
                                                     @endcan
                                                     @can('meetingDecision_access')
-                                                        <a
-                                                            href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}"
+                                                        <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}"
                                                             title="बैठक निर्णय" class="dropdown-item text-secondary">
-                                                            <i
-                                                                class="fa fa-tasks"> बैठक निर्णय</i>
+                                                            <i class="fa fa-tasks"> बैठक निर्णय</i>
                                                         </a>
                                                     @endcan
-
+                                                    @can('meetingDecision_access')
+                                                        <a href="{{ route('admin.executiveMeeting.meeting.meetingMinute.index', $meeting) }}"
+                                                            title="माइन्यूट" class="dropdown-item text-secondary">
+                                                            <i class="fa fa-file"> माइन्यूट </i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>

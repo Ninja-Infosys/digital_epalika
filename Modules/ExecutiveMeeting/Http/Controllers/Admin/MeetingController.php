@@ -4,9 +4,11 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
+use Modules\ExecutiveMeeting\Entities\MeetingMinute;
 use Modules\ExecutiveMeeting\Http\Requests\Meeting\StoreMeetingRequest;
 use Modules\ExecutiveMeeting\Http\Requests\Meeting\UpdateMeetingRequest;
 
@@ -63,6 +65,15 @@ class MeetingController extends Controller
         return back();
     }
 
+    public function show(Meeting $meeting)
+    {
+        $this->checkAuthorization('meeting_access');
+
+        $meeting->load('committee', 'meetingDecisions.meetingAgenda','meetingMinute');
+
+        return view('executivemeeting::admin.meeting.show', compact('meeting'));
+    }
+
     public function edit(Meeting $meeting)
     {
         $this->checkAuthorization('meeting_edit');
@@ -97,5 +108,33 @@ class MeetingController extends Controller
         toast('बैठक सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
+    }
+
+    public function minuteForm(Meeting $meeting)
+    {
+        $this->checkAuthorization('meetingDecision_access');
+
+        return view('executivemeeting::admin.meeting.minuteForm', compact('meeting'));
+    }
+
+
+    public function storeMeetingMinute(Request $request, Meeting $meeting)
+    {
+        $this->checkAuthorization('meetingDecision_access');
+
+        $request->validate([
+            'description' => ['required']
+        ]);
+
+        MeetingMinute::updateOrCreate(
+            ['meeting_id' => $meeting->id],
+            [
+                'description' => $request->input('description')
+            ]
+        );
+
+        toast('माइन्यूट सफलतापूर्वक पेश गरियो', 'success');
+
+        return redirect(route('admin.executiveMeeting.meeting.index'));
     }
 }
