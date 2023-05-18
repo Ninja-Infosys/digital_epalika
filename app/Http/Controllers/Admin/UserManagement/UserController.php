@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\User\StoreUserRequest;
 use App\Http\Requests\UserManagement\User\UpdateUserRequest;
 use App\Models\Settings\Branch;
+use App\Models\Settings\Employee;
 use App\Models\User;
 use App\Models\UserManagement\Role;
 use Illuminate\Support\Facades\Gate;
@@ -28,8 +29,8 @@ class UserController extends Controller
         $roles = Role::all();
 
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
-
-        return view('admin.userManagement.user.create', compact('roles', 'branches'));
+        $allemployees = Employee::all();
+        return view('admin.userManagement.user.create', compact('roles', 'branches','allemployees'));
     }
 
     public function store(StoreUserRequest $request)
@@ -54,10 +55,11 @@ class UserController extends Controller
     {
         $this->checkAuthorization('user_edit');
         $roles = Role::all();
+        $allemployees = Employee::all();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
         $user->load('role');
 
-        return view('admin.userManagement.user.edit', compact('user', 'roles','branches'));
+        return view('admin.userManagement.user.edit', compact('allemployees','user', 'roles','branches'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

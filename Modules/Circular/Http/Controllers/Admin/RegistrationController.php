@@ -3,8 +3,13 @@
 namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Branch;
 use App\Models\Settings\OfficeSetting;
+use App\Models\User;
+use App\Notifications\MapApplyNotification;
+use App\Notifications\RegistrationNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Modules\Circular\Entities\Registration;
 use Modules\Circular\Http\Requests\Registration\StoreRegistrationRequest;
@@ -32,24 +37,25 @@ class RegistrationController extends Controller
     {
         $this->checkAuthorization('registration_create');
         $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
-
-        return view('circular::admin.registration.create', compact('registration_no'));
+        $branches = Branch::all();
+        return view('circular::admin.registration.create', compact('registration_no','branches'));
     }
 
     public function store(StoreRegistrationRequest $request)
     {
         $this->checkAuthorization('registration_create');
 
-        DB::transaction(function () use ($request) {
+        $user =User::where('branch_id', $request->input('branch_id'))->first();
+
+        DB::transaction(function () use ($request,$user) {
             $registration = Registration::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                 ]);
-
             $this->uploadDocuments($request, $registration);
+            Notification::send($user,new RegistrationNotification($registration));
         });
 
         toast('दर्ता सफलतापूर्वक थपियो', 'success');
-
         return back();
     }
 
@@ -116,4 +122,6 @@ class RegistrationController extends Controller
             ]);
         }
     }
+
+
 }

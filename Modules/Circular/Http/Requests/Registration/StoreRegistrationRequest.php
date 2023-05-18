@@ -17,11 +17,12 @@ class StoreRegistrationRequest extends FormRequest
     {
         return [
             'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()],
+            'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'registration_date' => ['required'],
             'en_registration_date' => ['nullable', 'date'],
             'letter_number' => ['nullable'],
             'letter_date' => ['required'],
-            'en_letter_date' => ['nullable','date'],
+            'en_letter_date' => ['nullable', 'date'],
             'sender_name' => ['required'],
             'subject' => ['required'],
             'receiver_name' => ['required'],

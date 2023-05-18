@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Setting\Employee\UpdateEmployeeRequest;
+use App\Models\Settings\Branch;
 use App\Models\Settings\Employee;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -29,8 +30,9 @@ class EmployeeController extends Controller
     public function create()
     {
         $this->checkAuthorization('employee_create');
-
-        return view('admin.setting.employee.create');
+        $branches = Branch::all();
+        $allemployees = Employee::all();
+        return view('admin.setting.e  mployee.create',compact('branches','allemployees'));
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -51,8 +53,9 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $this->checkAuthorization('employee_edit');
-
-        return view('admin.setting.employee.edit', compact('employee'));
+        $branches = Branch::all();
+        $allemployees = Employee::all();
+        return view('admin.setting.employee.edit', compact('employee','branches','allemployees'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)

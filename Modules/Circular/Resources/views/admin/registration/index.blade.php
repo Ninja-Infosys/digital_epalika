@@ -45,6 +45,7 @@
                                 <th>पठाउने कार्यालयको नाम</th>
                                 <th>बुझिलिनेको नाम</th>
                                 <th>बिषय</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -58,6 +59,11 @@
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>{{$registration->subject}}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-primary" style="color: blue;border: 1px solid;">
+                                            {{$registration->status}}
+                                        </span>
+                                    </td>
                                     <td>
                                         <a data-bs-type="edit" href="{{route('admin.circular.registration.show',$registration)}}"
                                            title="थप हेर्नुहोस्"

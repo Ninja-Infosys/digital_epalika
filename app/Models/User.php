@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Settings\Branch;
+use App\Models\Settings\Employee;
 use App\Models\Settings\LetterHead;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
@@ -47,6 +49,9 @@ class User extends Authenticatable
         'ward_no',
         'profile_photo_path',
         'pin',
+        'employee_id',
+        'branch_id',
+        'is_dept_head',
     ];
 
     protected $hidden = [
@@ -108,6 +113,15 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function getAvatarAttribute(): string
