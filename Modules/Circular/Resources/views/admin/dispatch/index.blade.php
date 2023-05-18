@@ -60,6 +60,11 @@
                                     <td>{{$dispatch->subject}}</td>
                                     <td>
                                         @can('dispatch_access')
+                                            <a data-bs-type="edit"  href="{{route('admin.circular.dispatch.report', $dispatch)}}" class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}" title="थप हेर्नुहोस्">
+                                                <i class="fa fa-file"></i>
+                                            </a>
+                                        @endcan
+                                        @can('dispatch_access')
                                             <a data-bs-type="edit"  href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="थप हेर्नुहोस्">
                                                 <i class="fa fa-eye"></i>
                                             </a>

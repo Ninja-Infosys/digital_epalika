@@ -110,6 +110,10 @@ class DispatchController extends Controller
 
         return back();
     }
+    public function report(Dispatch $dispatch)
+    {
+        return view('circular::admin.dispatch.report', compact('dispatch'));
+    }
 
     private function uploadDocuments($request, $dispatch)
     {
