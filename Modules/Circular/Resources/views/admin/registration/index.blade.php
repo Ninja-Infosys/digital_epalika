@@ -27,7 +27,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('registration_create')
-                                <a href="{{route('admin.circular.registration.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.circular.registration.create')}}"
+                                   class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -53,19 +54,50 @@
                             @forelse($registrations as $registration)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$registration->registration_no}}</td>
+                                    <td>{{$registration->registration_number}}</td>
                                     <td>{{$registration->registration_date}}</td>
                                     <td>{{$registration->letter_number}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>{{$registration->subject}}</td>
                                     <td>
-                                        <span class="badge badge-pill badge-primary" style="color: blue;border: 1px solid;">
+                                        @if(auth()->user()->branch_id==$registration->branch_id)
+                                            <form
+                                                action="{{route('admin.circular.registration.updateStatus',$registration)}}"
+                                                method="post" >
+                                                @csrf
+                                                @method('put')
+                                                <div class="input-group">
+                                                        <select class="form-select form-select-sm" name="status"
+                                                                {{$registration->status=='accept' ? 'disabled':''}}
+                                                                    >
+                                                            <option value=""  >--- छान्नुहोस् ---</option>
+                                                            <option value="pending"
+                                                                {{ $registration->status == 'pending' ? 'selected' : '' }}>
+                                                                प्रक्रियामा</option>
+                                                            <option value="accept"
+                                                                {{ $registration->status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                            </option>
+                                                            <option value="reject"
+                                                                {{ $registration->status == 'reject' ? 'selected' : '' }}>
+                                                                अस्वीकार</option>
+                                                        </select>
+
+                                                    <button   @if($registration->status=='accept') disabled @endif class="btn btn-sm btn-outline-primary" type="submit">पेश
+                                                        गर्नुहोस्</button>
+                                                </div>
+
+                                            </form>
+                                        @else
+                                            <span class="badge badge-pill badge-primary"
+                                                  style="color: blue;border: 1px solid;">
                                             {{$registration->status}}
                                         </span>
+                                        @endif
                                     </td>
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.circular.registration.show',$registration)}}"
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.circular.registration.show',$registration)}}"
                                            title="थप हेर्नुहोस्"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin') ? 'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i>

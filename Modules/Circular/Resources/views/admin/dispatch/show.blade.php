@@ -51,7 +51,7 @@
                                 <tbody>
                                     <tr>
                                         <th>चलानी न.</th>
-                                        <td>{{ $dispatch->dispatch_no }}</td>
+                                        <td>{{ $dispatch->dispatch_number }}</td>
                                     </tr>
                                     <tr>
                                         <th>आर्थिक वर्ष</th>
@@ -105,7 +105,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card">
         <div class="card-header">
             <h4 class="header-title mb-0">आवश्यक कागजातहरु</h4>

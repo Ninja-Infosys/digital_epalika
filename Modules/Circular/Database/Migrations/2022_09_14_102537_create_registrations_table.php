@@ -25,6 +25,7 @@ return new class () extends Migration {
             $table->string('date')->nullable()->comment('मिति');
             $table->string('status')->default('pending');
             $table->text('remarks')->nullable()->comment('कैफियत');
+            $table->string('prefix')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

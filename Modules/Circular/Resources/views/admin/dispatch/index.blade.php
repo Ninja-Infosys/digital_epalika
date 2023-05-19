@@ -27,7 +27,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('dispatch_create')
-                                <a href="{{route('admin.circular.dispatch.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.circular.dispatch.create')}}"
+                                   class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -52,34 +53,66 @@
                             @forelse($dispatches as $dispatch)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$dispatch->dispatch_no}}</td>
+                                    <td>{{$dispatch->dispatch_number}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
                                     <td>{{$dispatch->dispatch_date}}</td>
                                     <td>{{$dispatch->letter_number}}</td>
                                     <td>{{$dispatch->letter_date}}</td>
                                     <td>{{$dispatch->subject}}</td>
                                     <td>
+                                        @if($dispatch->dispatchDetail()->count() > 0)
+
+                                            @can('dispatch_access')
+                                                <a data-bs-type="edit"
+                                                   href="{{route('admin.circular.dispatch.print', $dispatch)}}"
+                                                   class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                                >
+                                                    <i class="fa fa-print"></i>
+                                                </a>
+                                                <a data-bs-type="edit"
+                                                   href="{{route('admin.circular.dispatch.report', $dispatch)}}"
+                                                   class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                                   >
+                                                    <i class="fa fa-file"></i>
+                                                </a>
+                                            @endcan
+                                        @else
+                                            @can('dispatch_access')
+                                                <a data-bs-type="edit"
+                                                   href="{{route('admin.circular.dispatch.report', $dispatch)}}"
+                                                   class="btn btn-xs btn-outline-success {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                                  >
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            @endcan
+                                        @endif
                                         @can('dispatch_access')
-                                            <a data-bs-type="edit"  href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="थप हेर्नुहोस्">
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.circular.dispatch.show', $dispatch)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                               title="थप हेर्नुहोस्">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('dispatch_edit')
-                                            <a  data-bs-type="edit" href="{{route('admin.circular.dispatch.edit',$dispatch)}}"
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.circular.dispatch.edit',$dispatch)}}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('dispatch_delete')
-                                        <form action="{{route('admin.circular.dispatch.destroy',$dispatch)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                                            <form action="{{route('admin.circular.dispatch.destroy',$dispatch)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
                                         @endcan
                                     </td>
                                 </tr>

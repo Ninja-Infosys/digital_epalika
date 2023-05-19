@@ -50,6 +50,14 @@
         </ul>
     </div>
 </li>
+@can('registration_access')
+    <li class="{{request()->is('admin/circular/registration*') ? 'active' : ''}}">
+        <a href="{{route('admin.circular.circularSetting.index')}}">
+            <i class="fa fa-cogs"></i>
+            <span> सेटिङ</span>
+        </a>
+    </li>
+@endcan
 <li class="{{request()->is('admin/circular/files/*') ? 'active' : ''}}">
     <a href="#sidebarCircularFile"
        {{request()->is('admin/circular/files/*') ? 'aria-expanded=true  ' : ''}}

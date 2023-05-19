@@ -9,6 +9,8 @@ use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -30,6 +32,7 @@ class Dispatch extends Model
     protected $fillable = [
         'fiscal_year_id',
         'dispatch_no',
+        'prefix',
         'dispatch_date',
         'en_dispatch_date',
         'letter_number',
@@ -44,7 +47,8 @@ class Dispatch extends Model
     ];
 
     protected $appends=[
-        'dispatch_month'
+        'dispatch_month',
+        'dispatch_number',
     ];
 
     public function getReceiverSignatureUrlAttribute(): string
@@ -65,12 +69,20 @@ class Dispatch extends Model
     {
         return explode('-', $this->dispatch_date)[1] ?? '';
     }
+    public function getDispatchNumberAttribute(): string
+    {
+        return $this->attributes['prefix'].$this->attributes['dispatch_no'];
+    }
 
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
     }
 
+    public function dispatchDetail(): HasOne
+    {
+        return $this->hasOne(DispatchDetail::class);
+    }
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');

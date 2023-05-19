@@ -30,6 +30,7 @@ class Registration extends Model
     protected $fillable = [
         'fiscal_year_id',
         'registration_no',
+        'prefix',
         'registration_date',
         'en_registration_date',
         'letter_number',
@@ -47,7 +48,8 @@ class Registration extends Model
     ];
 
     protected $appends = [
-        'registration_month'
+        'registration_month',
+        'registration_number',
     ];
 
     public function getSignatureImageUrlAttribute(): string
@@ -58,16 +60,22 @@ class Registration extends Model
                 : '';
     }
 
-    public function setSignatureImageAttribute($value)
+    public function setSignatureImageAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['signature_image'] = $value->store('Registration/' . Str::slug($this->attributes['registration_no'] ?? $this->attributes['receiver_name'], '_'), 'public');
         }
     }
 
+
+
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date)[1] ?? '';
+    }
+    public function getRegistrationNumberAttribute(): string
+    {
+        return $this->attributes['prefix'] . $this->attributes['registration_no'];
     }
 
     public function fiscalYear(): BelongsTo

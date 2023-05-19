@@ -10,6 +10,7 @@ class CircularDatabaseSeeder extends Seeder
     {
         $this->call([
             CircularPermissionTableSeeder::class,
+            CircularSettingTableSeeder::class,
         ]);
     }
 }

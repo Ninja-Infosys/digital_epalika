@@ -7,23 +7,26 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\Circular\Entities\CircularSetting;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Http\Requests\Dispatch\StoreDispatchRequest;
 use Modules\Circular\Http\Requests\Dispatch\UpdateDispatchRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Circular\Traits\DispatchTrait;
 
 class DispatchController extends Controller
 {
+    use DispatchTrait;
     public function index()
     {
         $this->checkAuthorization('dispatch_access');
 
         $dispatches = Dispatch::where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['dispatch_no','receiver_name','subject'], request('search'));
+                $q->whereLike(['dispatch_no', 'receiver_name', 'subject'], request('search'));
             }
         })
-        ->latest()->paginate(10);
+            ->latest()->paginate(10);
 
 
         return view('circular::admin.dispatch.index', compact('dispatches'));
@@ -32,7 +35,7 @@ class DispatchController extends Controller
     public function create()
     {
         $this->checkAuthorization('dispatch_create');
-        $dispatch_no = 'D-'.Str::padLeft(DB::table('dispatches')->max('id') + 1, 2, 0);
+        $dispatch_no = $this->getDispatchNumber();
 
         return view('circular::admin.dispatch.create', compact('dispatch_no'));
     }
@@ -43,8 +46,10 @@ class DispatchController extends Controller
 
         DB::transaction(function () use ($request) {
             $dispatch = Dispatch::create($request->validated() + [
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-            ]);
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                    'prefix' => $this->getDispatchPrefix(),
+                    'dispatch_no' => $this->getDispatchNo()
+                ]);
 
             if ($request->hasFile('documents')) {
                 $this->uploadDocuments($request, $dispatch);
@@ -111,13 +116,26 @@ class DispatchController extends Controller
         return back();
     }
 
+    public function print(Dispatch $dispatch)
+    {
+        $dispatch->load('dispatchDetail');
+        $data =str_replace('[@letterHead]', letterHead(), $dispatch->dispatchDetail->remarks);
+        return view('circular::admin.dispatch.print', compact('data','dispatch'));
+    }
+
+    public function report(Dispatch $dispatch)
+    {
+        $dispatch->load('dispatchDetail');
+        return view('circular::admin.dispatch.report', compact('dispatch'));
+    }
+
     private function uploadDocuments($request, $dispatch)
     {
         foreach ($request->validated()['documents'] as $document) {
             $dispatch->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('dispatch/'.Str::slug($dispatch->receiver_name, '_').'/documents', 'public'),
+                'file' => $document->store('dispatch/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public'),
             ]);
         }
     }
