@@ -10,7 +10,7 @@ return new class () extends Migration {
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->string('dispatch_no')->comment('चलानी नं.');
+            $table->integer('dispatch_no')->comment('चलानी नं.');
             $table->string('prefix')->nullable();
             $table->string('dispatch_date')->nullable()->comment('चलानी मिति');
             $table->date('en_dispatch_date')->nullable()->comment('चलानी मिति ई.सं.');
