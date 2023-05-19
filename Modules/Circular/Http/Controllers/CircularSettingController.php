@@ -24,6 +24,7 @@ class CircularSettingController extends Controller
             'dispatch_number' => ['nullable', 'integer'],
         ]);
         $circularSetting->update($data);
+        toast(' सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 
