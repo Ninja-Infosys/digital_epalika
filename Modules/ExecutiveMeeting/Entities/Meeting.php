@@ -83,4 +83,9 @@ class Meeting extends Model
     {
         return $this->hasOne(MeetingMinute::class);
     }
+
+    public function meetingParticipants(): HasMany
+    {
+        return $this->hasMany(MeetingParticipant::class);
+    }
 }

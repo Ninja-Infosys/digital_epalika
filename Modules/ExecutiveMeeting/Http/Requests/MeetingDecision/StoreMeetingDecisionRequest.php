@@ -21,6 +21,8 @@ class StoreMeetingDecisionRequest extends FormRequest
             'meetingDecisions.*.date' => ['required'],
             'meetingDecisions.*.en_date' => ['required', 'date'],
             'meetingDecisions.*.description' => ['required'],
+            'meetingParticipants' => ['nullable', 'array'],
+            'meetingParticipants.*' => [Rule::exists('committee_members', 'id')->withoutTrashed()]
         ];
     }
 }
