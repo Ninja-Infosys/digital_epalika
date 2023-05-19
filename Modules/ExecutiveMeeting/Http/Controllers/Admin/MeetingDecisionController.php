@@ -7,6 +7,8 @@ use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Modules\ExecutiveMeeting\Entities\CommitteeMember;
+use Modules\ExecutiveMeeting\Entities\MeetingParticipant;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\StoreMeetingDecisionRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\UpdateMeetingDecisionRequest;
 
@@ -25,19 +27,26 @@ class MeetingDecisionController extends Controller
     {
         $this->checkAuthorization('meetingDecision_create');
 
-        $meeting->load(['meetingAgendas' => function ($query) {
-            $query->with('meetingDecision');
-            $query->where('is_final', 1);
-        }]);
+        $committeeMembers = CommitteeMember::where('committee_id', $meeting->committee_id)->orderBy('position')->get();
 
-        return view('executivemeeting::admin.meeting_decision.create', compact('meeting'));
+        $meeting->load([
+            'meetingAgendas' => function ($query) {
+                $query->with('meetingDecision');
+                $query->where('is_final', 1);
+            },
+            'meetingParticipants'
+        ]);
+
+        return view('executivemeeting::admin.meeting_decision.create', compact('meeting', 'committeeMembers'));
     }
 
     public function store(StoreMeetingDecisionRequest $request, Meeting $meeting)
     {
         $this->checkAuthorization('meetingDecision_create');
 
-        DB::transaction(function () use ($request, $meeting) {
+        $participatingMembers = CommitteeMember::whereIn('id', $request->input('meetingParticipants') ?? [])->orderBy('position')->get();
+
+        DB::transaction(function () use ($request, $meeting, $participatingMembers) {
             foreach ($request->input('meetingDecisions') as $meetingDecision) {
                 MeetingDecision::updateOrCreate(
                     ['meeting_id' => $meeting->id, 'meeting_agenda_id' => $meetingDecision['meeting_agenda_id']],
@@ -49,6 +58,20 @@ class MeetingDecisionController extends Controller
                     ]
                 );
             }
+
+            foreach ($participatingMembers as $member) {
+                MeetingParticipant::updateOrCreate(
+                    ['meeting_id' => $meeting->id, 'committee_member_id' => $member->id],
+                    [
+                        'name' => $member->name,
+                        'designation' => $member->designation,
+                        'phone' => $member->phone,
+                        'email' => $member->email,
+                    ]
+                );
+            }
+
+            $meeting->meetingParticipants()->whereNotIn('committee_member_id', $request->input('meetingParticipants')??[])->delete();
         });
 
         toast('बैठक निर्णय सफलतापूर्वक थपियो', 'success');

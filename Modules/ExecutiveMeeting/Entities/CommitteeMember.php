@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -40,11 +41,11 @@ class CommitteeMember extends Model
         'user_id'
     ];
 
-    protected function Photo():Attribute
+    protected function Photo(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) : asset('assets/backend/images/user_icon.jpg'),
-            set: static fn($value, $attributes) => (!empty($value) && !is_string($value)) ? $value->store('committeeMember/' . Str::slug($attributes['name'], '_'), 'public'):null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : asset('assets/backend/images/user_icon.jpg'),
+            set: static fn ($value, $attributes) => (!empty($value) && !is_string($value)) ? $value->store('committeeMember/' . Str::slug($attributes['name'], '_'), 'public') : null,
         );
     }
 
@@ -66,5 +67,10 @@ class CommitteeMember extends Model
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
+    }
+
+    public function meetingParticipants(): HasMany
+    {
+        return $this->hasMany(MeetingParticipant::class);
     }
 }

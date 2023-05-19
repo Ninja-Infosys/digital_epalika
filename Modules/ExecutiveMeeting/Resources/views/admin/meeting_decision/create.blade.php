@@ -38,6 +38,59 @@
                     <form action="{{ route('admin.executiveMeeting.meeting.meetingDecision.store', $meeting) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
+                        <fieldset class="border border-secondary p-2 mb-2">
+                            <legend class="font-16 text-secondary">
+                                <strong> उपस्थित सदस्यहरु </strong>
+                            </legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>नाम</th>
+                                                    <th>पद</th>
+                                                    <th>फोन</th>
+                                                    <th>इमेल</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($committeeMembers as $committeeMember)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    name="meetingParticipants[]"
+                                                                    value="{{ $committeeMember->id }}"
+                                                                    {{ in_array($committeeMember->id, $meeting->meetingParticipants->pluck('committee_member_id')->toArray()) ? 'checked' : '' }}
+                                                                    id="committeeMembers{{ $loop->index }}">
+                                                                <label class="form-check-label"
+                                                                    for="committeeMembers{{ $loop->index }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $committeeMember->name }}</td>
+                                                        <td>{{ $committeeMember->designation }}</td>
+                                                        <td>{{ $committeeMember->phone }}</td>
+                                                        <td>{{ $committeeMember->email }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        @error('meetingParticipants')
+                                            <p class="text-danger">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                        @error('meetingParticipants.*')
+                                            <p class="text-danger">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                         @foreach ($meeting->meetingAgendas as $meetingAgenda)
                             <fieldset class="border border-secondary p-2 mb-2">
                                 <legend class="font-16 text-secondary">
@@ -48,12 +101,10 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <x-date-input-component nameNe="meetingDecisions[{{ $loop->index }}][date]"
-                                            :editDateNe="$meetingAgenda->meetingDecision->date??''"
-                                            idNe="date{{ $loop->index }}" labelNe="मिति *"
+                                            :editDateNe="$meetingAgenda->meetingDecision->date ?? ''" idNe="date{{ $loop->index }}" labelNe="मिति *"
                                             idEn="en_date{{ $loop->index }}"
                                             nameEn="meetingDecisions[{{ $loop->index }}][en_date]" labelEn="Date"
-                                            :editDateEn="$meetingAgenda->meetingDecision->en_date??''"
-                                            :getTodayDate="false" />
+                                            :editDateEn="$meetingAgenda->meetingDecision->en_date ?? ''" :getTodayDate="false" />
                                     </div>
 
                                     <div class="col-md-12 mb-2">
