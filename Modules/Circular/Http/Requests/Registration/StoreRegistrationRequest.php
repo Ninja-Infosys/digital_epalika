@@ -16,7 +16,7 @@ class StoreRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()],
+
             'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'registration_date' => ['required'],
             'en_registration_date' => ['nullable', 'date'],

@@ -30,36 +30,58 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">चलानी पत्र विवरण</h4>
-
                         <a href="{{ route('admin.circular.dispatch.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> चलानी पत्र सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <div id="printData">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                चलानी नं. {{$dispatch->dispatch_number}}
+                            </div>
+                            <div class="col-md-4">
+                                <p> बिषय : {{$dispatch->subject}}</p>
+                                <p> मिति : {{$dispatch->dispatch_date}}</p>
+                            </div>
 
+                        </div>
+                        <div class="row">
+                            <form enctype="multipart/form-data" action="{{route('admin.circular.dispatch.dispatchDetail.store',$dispatch)}}" method="post">
+                                @csrf
+                                <div class="col-md-12 mb-2">
+                                    <label for="remarks" class="form-label">कैफ़ियत</label>
+                                    <textarea name="remarks"
+                                              id="remarks" cols="30" rows="5"
+                                              class="form-control ckEditor @error('remarks') is-invalid @enderror"
+                                              placeholder="कैफ़ियत">{{old('remarks',$dispatch->dispatchDetail->remarks??'[@letterHead]')}}</textarea>
+                                    @error('remarks')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="files" class="form-label">फाईल</label>
+                                    <input type="file" id="files" name="files[]" class="form-control" multiple>
+                                    @error('files')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    @error('files.*')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h4 class="header-title mb-0">आवश्यक कागजातहरु</h4>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                @forelse ($dispatch->files as $document)
-
-                @empty
-                    <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
-                @endforelse
-            </div> <!-- end row-->
-        </div>
-        @include('admin.inc.file-view');
-    </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
+    @endpush
 @endsection

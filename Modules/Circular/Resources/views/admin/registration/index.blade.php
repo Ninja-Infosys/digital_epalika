@@ -54,7 +54,7 @@
                             @forelse($registrations as $registration)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$registration->registration_no}}</td>
+                                    <td>{{$registration->registration_number}}</td>
                                     <td>{{$registration->registration_date}}</td>
                                     <td>{{$registration->letter_number}}</td>
                                     <td>{{$registration->sender_name}}</td>

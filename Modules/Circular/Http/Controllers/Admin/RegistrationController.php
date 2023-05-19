@@ -12,13 +12,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use Modules\Circular\Entities\CircularSetting;
 use Modules\Circular\Entities\Registration;
 use Modules\Circular\Http\Requests\Registration\StoreRegistrationRequest;
 use Modules\Circular\Http\Requests\Registration\UpdateRegistrationRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Circular\Traits\RegistrationTrait;
 
 class RegistrationController extends Controller
 {
+    use RegistrationTrait;
+
     public function index()
     {
         $this->checkAuthorization('registration_access');
@@ -37,7 +41,7 @@ class RegistrationController extends Controller
     public function create()
     {
         $this->checkAuthorization('registration_create');
-        $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
+        $registration_no = $this->getRegistrationNumber();
         $branches = Branch::all();
         return view('circular::admin.registration.create', compact('registration_no', 'branches'));
     }
@@ -48,16 +52,20 @@ class RegistrationController extends Controller
 
 
         DB::transaction(function () use ($request) {
-            $user =  User::where('branch_id', $request->input('branch_id'))->where('is_dept_head', true)->first();
+            $user = User::where('branch_id', $request->input('branch_id'))->where('is_dept_head', true)->first();
             $registration = Registration::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                    'prefix' => $this->getRegistrationPrefix(),
+                    'registration_no' => $this->getRegistrationNo()
                 ]);
             $notification = new RegistrationNotification($registration);
             if (!empty($user)) {
                 Notification::send($user, $notification);
             } else {
                 $userData = User::where('branch_id', $request->input('branch_id'))->first();
-                Notification::send($userData, $notification);
+                if ($userData) {
+                    Notification::send($userData, $notification);
+                }
             }
             $this->uploadDocuments($request, $registration);
 
