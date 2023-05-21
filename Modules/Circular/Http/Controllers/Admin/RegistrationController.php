@@ -3,6 +3,7 @@
 namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RegistrationMail;
 use App\Models\Settings\Branch;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Notifications\MapApplyNotification;
 use App\Notifications\RegistrationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Modules\Circular\Entities\CircularSetting;
@@ -68,6 +70,7 @@ class RegistrationController extends Controller
                     Notification::send($userData, $notification);
                 }
             }
+            Mail::to($request->input('email'))->send(new RegistrationMail($registration));
             $this->uploadDocuments($request, $registration);
 
         });
@@ -132,7 +135,7 @@ class RegistrationController extends Controller
 
     public function updateStatus(Request $request, Registration $registration)
     {
-        DB::transaction(function () use ($request,$registration){
+        DB::transaction(function () use ($request, $registration) {
             $registration->update([
                 'status' => $request->input('status'),
             ]);

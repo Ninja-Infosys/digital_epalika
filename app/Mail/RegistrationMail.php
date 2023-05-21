@@ -4,30 +4,25 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
+use Modules\Circular\Entities\Registration;
 
 class RegistrationMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(public Registration $registration)
     {
         //
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+
+    public function content(): Content
     {
-        return $this->markdown('emails.circular.registration');
+        return new Content(
+            view: 'emails.circular.registration',
+        );
     }
 }
