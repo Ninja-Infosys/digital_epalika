@@ -45,9 +45,9 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                       दर्ता नं. :  <b>{{$registration->registration_number}}</b><br>
-                                       नाम. : <b>{{$registration->receiver_name}}</b><br>
-                                        तपाइको दर्ता प्रक्रियामा छ । दर्ता भएमा अर्को मेल प्राप्त गर्नुहुनेछ ।
+                                        दर्ता नं. :  <b>{{$registration->registration_number}}</b><br>
+                                        नाम. : <b>{{$registration->receiver_name}}</b><br>
+                                        तपाइको दर्ता सफलता पूर्ण भएको छ  ।
                                     </td>
                                 </tr>
 

@@ -3,6 +3,7 @@
 namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RegistrationAcceptMail;
 use App\Mail\RegistrationMail;
 use App\Models\Settings\Branch;
 use App\Models\Settings\OfficeSetting;
@@ -141,6 +142,7 @@ class RegistrationController extends Controller
             ]);
             $user = User::findOrFail($registration->user_id);
             Notification::send($user, new RegistrationNotification($registration));
+            Mail::to($registration->email)->send(new RegistrationAcceptMail($registration));
         });
 
 
