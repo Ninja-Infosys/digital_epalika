@@ -58,7 +58,7 @@ class Dispatch extends Model
             : '';
     }
 
-    public function setReceiverSignatureAttribute($value)
+    public function setReceiverSignatureAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['receiver_signature'] = $value->store('dispatch/signature/'.Str::slug($this->attributes['receiver_name'], '_'), 'public');
@@ -71,7 +71,7 @@ class Dispatch extends Model
     }
     public function getDispatchNumberAttribute(): string
     {
-        return $this->attributes['prefix'].$this->attributes['dispatch_no'];
+        return $this->attributes['prefix']. Str::padLeft($this->attributes['dispatch_no'], 4, 0);
     }
 
     public function fiscalYear(): BelongsTo

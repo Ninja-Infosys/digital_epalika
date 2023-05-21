@@ -26,12 +26,12 @@ trait DispatchTrait
         return self::getCircularSetting()->dispatch_prefix;
     }
 
-    public function getDispatchNo(): string
+    public function getDispatchNo(): int
     {
-        $dispatchData = Dispatch::get();
+        $dispatchData = Dispatch::count();
 
-        if ($dispatchData->isNotEmpty()) {
-            $number = $dispatchData->max('dispatch_no') + 1;
+        if ($dispatchData > 0) {
+            $number = Dispatch::max('dispatch_no') + 1;
         } else {
             $number = self::getCircularSetting()->dispatch_number;
         }

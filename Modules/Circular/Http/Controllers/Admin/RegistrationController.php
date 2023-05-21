@@ -3,6 +3,7 @@
 namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RegistrationMail;
 use App\Models\Settings\Branch;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Notifications\MapApplyNotification;
 use App\Notifications\RegistrationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Modules\Circular\Entities\CircularSetting;
@@ -56,7 +58,8 @@ class RegistrationController extends Controller
             $registration = Registration::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'prefix' => $this->getRegistrationPrefix(),
-                    'registration_no' => $this->getRegistrationNo()
+                    'registration_no' => $this->getRegistrationNo(),
+                    'user_id' => auth()->id(),
                 ]);
             $notification = new RegistrationNotification($registration);
             if (!empty($user)) {
@@ -67,6 +70,7 @@ class RegistrationController extends Controller
                     Notification::send($userData, $notification);
                 }
             }
+            Mail::to($request->input('email'))->send(new RegistrationMail($registration));
             $this->uploadDocuments($request, $registration);
 
         });
@@ -131,9 +135,14 @@ class RegistrationController extends Controller
 
     public function updateStatus(Request $request, Registration $registration)
     {
-        $registration->update([
-            'status' => $request->input('status'),
-        ]);
+        DB::transaction(function () use ($request, $registration) {
+            $registration->update([
+                'status' => $request->input('status'),
+            ]);
+            $user = User::findOrFail($registration->user_id);
+            Notification::send($user, new RegistrationNotification($registration));
+        });
+
 
         toast('दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
