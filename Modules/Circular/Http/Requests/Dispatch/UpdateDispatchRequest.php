@@ -26,10 +26,8 @@ class UpdateDispatchRequest extends FormRequest
             'receiver_name' => ['required', 'max:255'],
             'receiver_address' => ['required', 'max:255'],
             'receiver_contact' => ['required'],
-            'receiver_signature' => ['nullable', 'image'],
             'remarks' => ['nullable'],
-            'documents' => ['nullable', 'array'],
-            'documents.*' => ['mimes:jpg,jpeg,png,pdf'],
+
         ];
     }
 

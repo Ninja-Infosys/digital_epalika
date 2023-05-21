@@ -42,7 +42,6 @@ class Dispatch extends Model
         'receiver_name',
         'receiver_address',
         'receiver_contact',
-        'receiver_signature',
         'remarks',
     ];
 
@@ -83,8 +82,5 @@ class Dispatch extends Model
     {
         return $this->hasOne(DispatchDetail::class);
     }
-    public function files(): MorphMany
-    {
-        return $this->morphMany(File::class, 'model');
-    }
+
 }

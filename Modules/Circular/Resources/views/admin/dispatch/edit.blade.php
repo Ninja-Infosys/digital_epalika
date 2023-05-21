@@ -139,7 +139,7 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="receiver_contact" class="form-label">हुलाक/ र.न./इमेल </label>
                                     <input
-                                        type="text"
+                                        type="email"
                                         name="receiver_contact"
                                         value="{{old('receiver_contact',$dispatch->receiver_contact)}}"
                                         class="form-control @error('receiver_contact') is-invalid @enderror"
@@ -151,53 +151,21 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="receiver_signature" class="form-label">बुझिलिनेको हस्तक्षर्</label>
-                                    <input
-                                        type="file"
-                                        name="receiver_signature"
-                                        class="form-control @error('receiver_signature') is-invalid @enderror"
-                                        id="receiver_signature"
-                                    />
-                                    @error('receiver_signature')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+
 
                                 <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफ़ियत</label>
                                     <textarea name="remarks"
                                               id="remarks" cols="30" rows="5"
-                                              class="form-control summernote @error('remarks') is-invalid @enderror"
-                                              placeholder="कैफ़ियत">{{old('remarks',$dispatch->remarks)}}</textarea>
+                                              class="form-control ckEditor @error('remarks') is-invalid @enderror"
+                                              placeholder="कैफ़ियत">{{old('remarks',$dispatch->remarks??'[@letterHead]')}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>डकुमेन्ट राख्नुहोस्</strong>
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="documents" class="form-label">डकुमेन्ट</label>
-                                    <input
-                                        type="file"
-                                        name="documents[]"
-                                        class="form-control @error('documents') is-invalid @enderror"
-                                        id="Documents"
-                                        multiple/>
-                                    @error('documents')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                    @error('documents.*')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </fieldset>
+
                         <button type="submit" class="btn btn-primary">
                             Update
                         </button>
@@ -206,4 +174,8 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
+    @endpush
 @endsection
