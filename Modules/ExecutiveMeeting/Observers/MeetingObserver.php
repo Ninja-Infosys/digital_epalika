@@ -10,6 +10,11 @@ class MeetingObserver
 {
     public function created(Meeting $meeting): void
     {
+        if($meeting->recurrence->value=='emergency'){
+            //send message
+            return ;
+        }
+
         if ($meeting->recurrence->value === 'no_recurrence') {
             return;
         }

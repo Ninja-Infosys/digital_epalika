@@ -114,6 +114,12 @@
                                                             <i class="fa fa-file"> माइन्यूट </i>
                                                         </a>
                                                     @endcan
+                                                    <a href="javascript:void(0)"
+                                                        data-meeting-print-url="{{ route('admin.executiveMeeting.meeting.printMinute', $meeting) }}"
+                                                        title="माइन्यूट"
+                                                        class="dropdown-item text-secondary showMeetingDetailModal">
+                                                        <i class="fa fa-print"> माइन्यूट प्रिन्ट </i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
@@ -131,4 +137,44 @@
             </div>
         </div>
     </div>
+    <div id="meeting-modal" class="modal fade" tabindex="-1" aria-labelledby="meeting-mdal" style="display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title text-white fw-bold mb-0" id="meeting-modal">
+                        बैठक माइन्यूट
+                    </h4>
+                    <x-print-button target-element="meeting-data" title="बैठक माइन्यूट"
+                        btn-class="btn-sm btn-outline-light mx-3" />
+                    <button type="button" class="btn-close border" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="meeting-data">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('.showMeetingDetailModal').on('click', function(e) {
+                    e.preventDefault()
+                    $.ajax({
+                        method: "GET",
+                        url: $(this).data("meeting-print-url"),
+                        success: function(resp) {
+                            $('#meeting-modal').modal('toggle')
+                            $('#meeting-data').html(resp.view)
+                        },
+                        error: function() {
+                            alert("Something Went Wrong");
+                        }
+                    });
+                })
+            })
+        </script>
+        <script src="{{ asset('assets/backend/js/plugins/footable.min.js') }}"></script>
+    @endpush
 @endsection
