@@ -71,7 +71,7 @@ class Dispatch extends Model
     }
     public function getDispatchNumberAttribute(): string
     {
-        return $this->attributes['prefix'].$this->attributes['dispatch_no'];
+        return $this->attributes['prefix']. Str::padLeft($this->attributes['dispatch_no'], 4, 0);
     }
 
     public function fiscalYear(): BelongsTo

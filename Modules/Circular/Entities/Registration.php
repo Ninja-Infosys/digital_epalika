@@ -75,7 +75,7 @@ class Registration extends Model
     }
     public function getRegistrationNumberAttribute(): string
     {
-        return $this->attributes['prefix'] . $this->attributes['registration_no'];
+        return $this->attributes['prefix'] . Str::padLeft($this->attributes['registration_no'], 4, 0);
     }
 
     public function fiscalYear(): BelongsTo
