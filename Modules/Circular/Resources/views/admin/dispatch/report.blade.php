@@ -54,8 +54,8 @@
                                     <label for="remarks" class="form-label">कैफ़ियत</label>
                                     <textarea name="remarks"
                                               id="remarks" cols="30" rows="5"
-                                              class="form-control ckEditor @error('remarks') is-invalid @enderror"
-                                              placeholder="कैफ़ियत">{{old('remarks',$dispatch->dispatchDetail->remarks??'[@letterHead]')}}</textarea>
+                                              class="form-control @error('remarks') is-invalid @enderror"
+                                              placeholder="कैफ़ियत">{{old('remarks',$dispatch->dispatchDetail->remarks??'')}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

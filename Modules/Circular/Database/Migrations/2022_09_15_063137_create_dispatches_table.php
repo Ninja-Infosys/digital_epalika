@@ -21,7 +21,6 @@ return new class () extends Migration {
             $table->string('receiver_name')->nullable()->comment('पाउने कार्यालयको नाम');
             $table->string('receiver_address')->nullable()->comment('पाउने कार्यालयको ठेगाना');
             $table->string('receiver_contact')->nullable()->comment('हुलाक/ र.न./इमेल');
-            $table->string('receiver_signature')->nullable()->comment('बुझिलिनेको हस्तक्षर्');
             $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
             $table->softDeletes();

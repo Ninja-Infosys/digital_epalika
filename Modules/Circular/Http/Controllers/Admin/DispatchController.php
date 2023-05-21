@@ -17,6 +17,7 @@ use Modules\Circular\Traits\DispatchTrait;
 class DispatchController extends Controller
 {
     use DispatchTrait;
+
     public function index()
     {
         $this->checkAuthorization('dispatch_access');
@@ -44,17 +45,13 @@ class DispatchController extends Controller
     {
         $this->checkAuthorization('dispatch_create');
 
-        DB::transaction(function () use ($request) {
-            $dispatch = Dispatch::create($request->validated() + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-                    'prefix' => $this->getDispatchPrefix(),
-                    'dispatch_no' => $this->getDispatchNo()
-                ]);
 
-            if ($request->hasFile('documents')) {
-                $this->uploadDocuments($request, $dispatch);
-            }
-        });
+        Dispatch::create($request->validated() + [
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                'prefix' => $this->getDispatchPrefix(),
+                'dispatch_no' => $this->getDispatchNo()
+            ]);
+
 
         toast('चलानी सफलतापूर्वक थपियो', 'success');
 
@@ -81,17 +78,7 @@ class DispatchController extends Controller
     {
         $this->checkAuthorization('dispatch_edit');
 
-        DB::transaction(function () use ($request, $dispatch) {
-            if ($request->hasFile('receiver_signature') && $dispatch->receiver_signature) {
-                $this->deleteFile($dispatch->receiver_signature);
-            }
-
-            $dispatch->update($request->validated());
-
-            if ($request->hasFile('documents')) {
-                $this->uploadDocuments($request, $dispatch);
-            }
-        });
+        $dispatch->update($request->validated());
 
         toast('चलानी सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -101,14 +88,7 @@ class DispatchController extends Controller
     public function destroy(Dispatch $dispatch)
     {
         $this->checkAuthorization('dispatch_delete');
-        foreach ($dispatch->files as $file) {
-            $this->deleteFile($file->file);
-        }
-        $dispatch->files()->delete();
 
-        if ($dispatch->receiver_signature) {
-            $this->deleteFile($dispatch->receiver_signature);
-        }
         $dispatch->delete();
 
         toast('चलानी सफलतापूर्वक मेटियो', 'success');
@@ -119,8 +99,8 @@ class DispatchController extends Controller
     public function print(Dispatch $dispatch)
     {
         $dispatch->load('dispatchDetail');
-        $data =str_replace('[@letterHead]', letterHead(), $dispatch->dispatchDetail->remarks);
-        return view('circular::admin.dispatch.print', compact('data','dispatch'));
+        $data = str_replace('[@letterHead]', letterHead(), $dispatch->remarks);
+        return view('circular::admin.dispatch.print', compact('data', 'dispatch'));
     }
 
     public function report(Dispatch $dispatch)
@@ -129,14 +109,5 @@ class DispatchController extends Controller
         return view('circular::admin.dispatch.report', compact('dispatch'));
     }
 
-    private function uploadDocuments($request, $dispatch)
-    {
-        foreach ($request->validated()['documents'] as $document) {
-            $dispatch->files()->create([
-                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
-                'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('dispatch/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public'),
-            ]);
-        }
-    }
+
 }
