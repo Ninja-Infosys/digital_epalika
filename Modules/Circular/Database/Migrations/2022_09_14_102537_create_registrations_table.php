@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->string('subject')->nullable()->comment('विषय');
             $table->string('receiver_name')->nullable()->comment('बुझिलिनेको नाम');
             $table->string('phone')->nullable()->comment('बुझिलिनेको फोन');
+            $table->string('email')->nullable()->comment('बुझिलिनेको ई-मेल');
             $table->string('signature_image')->nullable()->comment('हस्ताक्षर');
             $table->string('date')->nullable()->comment('मिति');
             $table->string('status')->default('pending');

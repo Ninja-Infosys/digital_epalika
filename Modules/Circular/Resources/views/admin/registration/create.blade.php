@@ -162,6 +162,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-2">
+                                    <label for="email" class="form-label">ई-मेल </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value="{{old('email')}}"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        id="email"
+                                        placeholder="ई-मेल"
+                                    />
+                                    @error('email')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
                                     <label for="signature_image" class="form-label">सहि </label>
                                     <input
                                         type="file"

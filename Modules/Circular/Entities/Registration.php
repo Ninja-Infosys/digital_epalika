@@ -41,6 +41,7 @@ class Registration extends Model
         'subject',
         'receiver_name',
         'phone',
+        'email',
         'signature_image',
         'date',
         'remarks',
