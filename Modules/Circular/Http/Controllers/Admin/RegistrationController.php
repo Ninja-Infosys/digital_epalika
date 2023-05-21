@@ -56,7 +56,8 @@ class RegistrationController extends Controller
             $registration = Registration::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'prefix' => $this->getRegistrationPrefix(),
-                    'registration_no' => $this->getRegistrationNo()
+                    'registration_no' => $this->getRegistrationNo(),
+                    'user_id' => auth()->id(),
                 ]);
             $notification = new RegistrationNotification($registration);
             if (!empty($user)) {
@@ -131,9 +132,14 @@ class RegistrationController extends Controller
 
     public function updateStatus(Request $request, Registration $registration)
     {
-        $registration->update([
-            'status' => $request->input('status'),
-        ]);
+        DB::transaction(function () use ($request,$registration){
+            $registration->update([
+                'status' => $request->input('status'),
+            ]);
+            $user = User::findOrFail($registration->user_id);
+            Notification::send($user, new RegistrationNotification($registration));
+        });
+
 
         toast('दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 

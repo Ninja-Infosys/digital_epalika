@@ -4,6 +4,7 @@ namespace Modules\Circular\Entities;
 
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
+use App\Models\User;
 use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,6 +46,7 @@ class Registration extends Model
         'remarks',
         'status',
         'branch_id',
+        'user_id',
     ];
 
     protected $appends = [
@@ -67,8 +69,6 @@ class Registration extends Model
         }
     }
 
-
-
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date)[1] ?? '';
@@ -81,6 +81,10 @@ class Registration extends Model
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function files(): MorphMany
