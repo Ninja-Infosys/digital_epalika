@@ -35,11 +35,11 @@ class DashboardController extends Controller
                 'meetings' => function ($query) {
                     $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                 },
-                'meetings as completed_meetings_count'=>function($query){
+                'meetings as completed_meetings_count' => function ($query) {
                     $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                     $query->whereDate('en_start_date', '<', today()->toDateString());
                 },
-                'meetings as upcoming_meetings_count'=>function($query){
+                'meetings as upcoming_meetings_count' => function ($query) {
                     $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                     $query->whereDate('en_start_date', '>=', today()->toDateString());
                 }
@@ -47,9 +47,9 @@ class DashboardController extends Controller
         )->get()->map(function ($committee) {
             return [
                 'committee_name' => $committee->committee_name,
-                'meetings_count' => $committee->meetings_count,
-                'completed_meetings_count' => $committee->completed_meetings_count,
-                'upcoming_meetings_count' => $committee->upcoming_meetings_count,
+                'meetings_count' => (int) $committee->meetings_count,
+                'completed_meetings_count' => (int) $committee->completed_meetings_count,
+                'upcoming_meetings_count' => (int) $committee->upcoming_meetings_count,
             ];
         });
 
