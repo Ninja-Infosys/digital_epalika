@@ -54,16 +54,18 @@ class LoginController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
+        $data = [
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ]);
-        if(App::environment('production')) {
-            $credentials= array_merge($credentials,[
+        ];
+        if (App::environment('production')) {
+            $credentials = array_merge($data, [
                 'g-recaptcha-response' => ['required']
             ]);
+        }else{
+            $credentials = $request->validate($data);
         }
-        if (Auth::attempt(\Arr::except($credentials,'g-recaptcha-response'))) {
+        if (Auth::attempt(\Arr::except($credentials, 'g-recaptcha-response'))) {
             $request->session()->regenerate();
 
             event(new ActivityLogEvent('Login'));
