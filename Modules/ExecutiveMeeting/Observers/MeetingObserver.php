@@ -50,6 +50,7 @@ class MeetingObserver
                     $en_end_date->{$recurrence['function']}();
                     $meeting->meetings()->create([
                         'committee_id' => $meeting->committee_id,
+                        'fiscal_year_id' => $meeting->fiscal_year_id,
                         'meeting_name' => $meeting->meeting_name,
                         'recurrence' => $meeting->recurrence,
                         'start_date' => $start_date->toDateString(),
