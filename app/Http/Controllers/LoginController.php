@@ -59,10 +59,10 @@ class LoginController extends Controller
             'password' => ['required'],
         ];
         if (App::environment('production')) {
-            $credentials = array_merge($data, [
+            $credentials = $request->validate(array_merge($data, [
                 'g-recaptcha-response' => ['required']
-            ]);
-        }else{
+            ]));
+        } else {
             $credentials = $request->validate($data);
         }
         if (Auth::attempt(\Arr::except($credentials, 'g-recaptcha-response'))) {
