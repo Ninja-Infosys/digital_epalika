@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingMinute;
@@ -136,5 +137,19 @@ class MeetingController extends Controller
         toast('माइन्यूट सफलतापूर्वक पेश गरियो', 'success');
 
         return redirect(route('admin.executiveMeeting.meeting.index'));
+    }
+
+    public function printMinute(Meeting $meeting)
+    {
+        $meeting->load(['meetingAgendas' => function ($query) {
+            $query->with('meetingDecision')->where('is_final', 1);
+        },
+        'meetingMinute',
+        'meetingParticipants'
+    ]);
+
+        return response()->json([
+            'view' => (string)View::make('executivemeeting::admin.meeting.minute_print', compact('meeting'))
+        ]);
     }
 }

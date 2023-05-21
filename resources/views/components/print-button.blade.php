@@ -1,5 +1,5 @@
 <div>
-    <button class="btn btn-sm btn-outline-primary"
+    <button class="btn {{ $btnClass }}"
             onclick="printForm()">
         <i class="fa fa-print"> {{ $btnLabel }}</i>
     </button>

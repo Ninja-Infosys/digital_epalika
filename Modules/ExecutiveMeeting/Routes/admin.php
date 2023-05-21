@@ -28,6 +28,7 @@ Route::controller(CalenderController::class)
 Route::resource('committee/{committee}/committeeMember', CommitteeMemberController::class)->names('committee.committeeMember');
 Route::get('meeting/{meeting}/meetingMinute',[MeetingController::class,'minuteForm'])->name('meeting.meetingMinute.index');
 Route::post('meeting/{meeting}/meetingMinute',[MeetingController::class,'storeMeetingMinute'])->name('meeting.meetingMinute.store');
+Route::get('meeting/{meeting}/printMinute',[MeetingController::class,'printMinute'])->name('meeting.printMinute');
 Route::resource('meeting', MeetingController::class);
 
 Route::get('meeting/{meeting}/meetingAgenda/{meetingAgenda}/updateStatus',[MeetingAgendaController::class,'updateStatus'])->name('meeting.meetingAgenda.updateStatus');
