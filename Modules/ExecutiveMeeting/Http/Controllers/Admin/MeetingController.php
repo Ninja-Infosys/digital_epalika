@@ -18,7 +18,7 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_access');
 
-        $meetings = Meeting::with('committee')->whereDate('en_start_date', '<=', today()->toDateString())
+        $meetings = Meeting::with('committee')->whereDate('en_start_date', '>=', today()->toDateString())
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['meeting_name', 'start_date', 'description'], request('search'));
@@ -48,7 +48,7 @@ class MeetingController extends Controller
                 'fiscal_year_id' => officeSetting()->fiscal_year_id,
             ]);
 
-            foreach ($request->input('meetingAgendas') as $meetingAgenda) {
+            foreach ($request->input('meetingAgendas') ?? [] as $meetingAgenda) {
                 $meeting->meetingAgendas()->create($meetingAgenda);
             }
         });
@@ -69,7 +69,7 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_access');
 
-        $meeting->load('committee', 'meetingDecisions.meetingAgenda','meetingMinute','meetingParticipants');
+        $meeting->load('committee', 'meetingDecisions.meetingAgenda', 'meetingMinute', 'meetingParticipants');
 
         return view('executivemeeting::admin.meeting.show', compact('meeting'));
     }

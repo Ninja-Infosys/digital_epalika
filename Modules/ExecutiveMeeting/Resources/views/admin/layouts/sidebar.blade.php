@@ -5,9 +5,9 @@
     </a>
 </li>
 @can('committeeMember_access')
-    <li class="{{request()->is('admin/executiveMeeting/reports/*') ? 'active' : ''}}">
+    <li class="{{request()->is('admin/executiveMeeting/committee/*') ? 'active' : ''}}">
         <a href="#sidebarCommitteeMembers"
-           {{request()->is('admin/executiveMeeting/reports/*') ? 'aria-expanded=true' : ''}}
+           {{request()->is('admin/executiveMeeting/committee/*') ? 'aria-expanded=true' : ''}}
            data-bs-toggle="collapse">
             <i class="fa fa-users"></i>
             <span> समिति सदस्य</span>
@@ -15,7 +15,7 @@
             <i class="fas fa-angle-right"></i>
         </span>
         </a>
-        <div class="collapse {{request()->is('admin/executiveMeeting/reports/*') ? 'active' : ''}}"
+        <div class="collapse {{request()->is('admin/executiveMeeting/committee/*') ? 'active' : ''}}"
              id="sidebarCommitteeMembers">
             <ul class="nav-second-level">
                 @foreach($sharedCommittees as $sharedCommittee)
