@@ -59,7 +59,7 @@ class LoginController extends Controller
             'g-recaptcha-response' => ['required']
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(\Arr::except($credentials,'g-recaptcha-response'))) {
             $request->session()->regenerate();
 
             event(new ActivityLogEvent('Login'));
