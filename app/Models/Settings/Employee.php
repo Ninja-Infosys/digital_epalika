@@ -5,6 +5,7 @@ namespace App\Models\Settings;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -33,6 +34,9 @@ class Employee extends Model
         'is_employee',
         'show_to_mobile_app',
         'show_to_index',
+        'employee_id',
+        'branch_id',
+        'is_dept_head',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -87,5 +91,15 @@ class Employee extends Model
     public function scopeHideInIndex($builder)
     {
         return $builder->where('show_to_index', 0);
+    }
+
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

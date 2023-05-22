@@ -22,6 +22,8 @@ class UpdateUserRequest extends FormRequest
             'role_id' => ['required', Rule::exists('roles', 'id')->withoutTrashed()],
             'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'ward_no' => ['nullable', 'integer'],
+            'employee_id' => ['nullable', Rule::exists('employees', 'id')->withoutTrashed()],
+            'is_dept_head' => ['nullable', 'boolean'],
         ];
     }
 

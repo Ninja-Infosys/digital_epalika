@@ -6,12 +6,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
+                            <a href="{{ route('admin.executiveMeeting.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}">निर्णयहरु</a>
+                            <a
+                                href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}">निर्णयहरु</a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ निर्णयहरु थप्नुहोस्</li>
                     </ol>
@@ -27,87 +28,97 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ निर्णयहरु थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}"
-                           class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> निर्णयहरु बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.meetingDecision.store')}}" method="post"
-                          enctype="multipart/form-data">
+                    <form action="{{ route('admin.executiveMeeting.meeting.meetingDecision.store', $meeting) }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
-
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong> विवरण </strong>
+                        <fieldset class="border border-secondary p-2 mb-2">
+                            <legend class="font-16 text-secondary">
+                                <strong> उपस्थित सदस्यहरु </strong>
                             </legend>
                             <div class="row">
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="meeting_id" class="form-label"> बैठक *</label>
-                                    <select
-                                        name="meeting_id"
-                                        class="form-select @error('meeting_id') is-invalid @enderror"
-                                        id="meeting_id" required>
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($meetings as $meeting)
-                                            <option {{$meeting->id===old('meeting_id') ? 'selected' : ''}}
-                                                    value="{{$meeting->id}}">
-                                                {{$meeting->meeting_name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('meeting_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <x-date-input-component
-                                        nameNe="date" labelNe="मिति *"
-                                        nameEn="en_date" labelEn="Date"
-                                    />
-                                </div>
-
-                                <div class="col-md-12 mb-2">
-                                    <label for="subject" class="form-label"> विषय * </label>
-                                    <input
-                                        type="text"
-                                        name="subject"
-                                        value="{{old('subject')}}"
-                                        class="form-control @error('subject') is-invalid @enderror"
-                                        id="subject"
-                                        placeholder="विषय"
-                                        required
-                                    />
-                                    @error('subject')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-12 mb-2">
-                                    <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
-                                              class="form-control ckEditor summernote @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
-                                    @error('description')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="decision_file" class="form-label"> फाईल * </label>
-                                    <input
-                                        type="file"
-                                        name="decision_file"
-                                        class="form-control @error('decision_file') is-invalid @enderror"
-                                        id="decision_file"
-
-                                    />
-                                    @error('decision_file')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>नाम</th>
+                                                    <th>पद</th>
+                                                    <th>फोन</th>
+                                                    <th>इमेल</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($committeeMembers as $committeeMember)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    name="meetingParticipants[]"
+                                                                    value="{{ $committeeMember->id }}"
+                                                                    {{ in_array($committeeMember->id, $meeting->meetingParticipants->pluck('committee_member_id')->toArray()) ? 'checked' : '' }}
+                                                                    id="committeeMembers{{ $loop->index }}">
+                                                                <label class="form-check-label"
+                                                                    for="committeeMembers{{ $loop->index }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $committeeMember->name }}</td>
+                                                        <td>{{ $committeeMember->designation }}</td>
+                                                        <td>{{ $committeeMember->phone }}</td>
+                                                        <td>{{ $committeeMember->email }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        @error('meetingParticipants')
+                                            <p class="text-danger">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                        @error('meetingParticipants.*')
+                                            <p class="text-danger">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>
+                        @foreach ($meeting->meetingAgendas as $meetingAgenda)
+                            <fieldset class="border border-secondary p-2 mb-2">
+                                <legend class="font-16 text-secondary">
+                                    <strong>{{ $loop->iteration }}. {{ $meetingAgenda->proposal }} </strong>
+                                </legend>
+                                <input type="hidden" name="meetingDecisions[{{ $loop->index }}][meeting_agenda_id]"
+                                    id="meeting_agenda_id{{ $loop->index }}" value="{{ $meetingAgenda->id }}">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <x-date-input-component nameNe="meetingDecisions[{{ $loop->index }}][date]"
+                                            :editDateNe="$meetingAgenda->meetingDecision->date ?? ''" idNe="date{{ $loop->index }}" labelNe="मिति *"
+                                            idEn="en_date{{ $loop->index }}"
+                                            nameEn="meetingDecisions[{{ $loop->index }}][en_date]" labelEn="Date"
+                                            :editDateEn="$meetingAgenda->meetingDecision->en_date ?? ''" :getTodayDate="false" />
+                                    </div>
+
+                                    <div class="col-md-12 mb-2">
+                                        <label for="description{{ $loop->index }}" class="form-label">बिवरण * </label>
+                                        <textarea name="meetingDecisions[{{ $loop->index }}][description]" id="description{{ $loop->index }}" cols="30"
+                                            placeholder="बिवरण" rows="5"
+                                            class="form-control ckEditor @error("meetingDecisions.{{ $loop->index }}.description") is-invalid @enderror">{{ old("meetingDecisions.$loop->index.description", $meetingAgenda->meetingDecision->description ?? '') }}</textarea>
+                                        @error("meetingDecisions.{{ $loop->index }}.description")
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </fieldset>
+                        @endforeach
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
@@ -118,6 +129,6 @@
     </div>
 @endsection
 @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
-    @endpush
+    <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/backend/ckeditor/editor.js') }}"></script>
+@endpush

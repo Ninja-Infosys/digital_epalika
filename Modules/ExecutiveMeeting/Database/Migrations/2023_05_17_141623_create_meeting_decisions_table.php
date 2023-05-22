@@ -9,13 +9,12 @@ return new class extends Migration {
     {
         Schema::create('meeting_decisions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('meeting_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->string('subject')->comment('बिषय');
+            $table->foreignId('meeting_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('meeting_agenda_id')->constrained()->cascadeOnDelete();
             $table->string('date')->nullable()->comment('मिति (वि.स.)');
             $table->string('en_date')->nullable()->comment('मिति (ई.स.)');
             $table->longText('description')->nullable()->comment('विवरण');
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->string('decision_file')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

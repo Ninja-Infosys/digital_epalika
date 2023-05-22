@@ -162,6 +162,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-2">
+                                    <label for="email" class="form-label">ई-मेल </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value="{{old('email')}}"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        id="email"
+                                        placeholder="ई-मेल"
+                                    />
+                                    @error('email')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
                                     <label for="signature_image" class="form-label">सहि </label>
                                     <input
                                         type="file"
@@ -201,6 +215,18 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                     @error('documents.*')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="branch_id" class="form-label"> Forward To </label>
+                                    <select class="form-control" name="branch_id">
+                                        <option>--Select--</option>
+                                        @foreach($branches as $branch)
+                                            <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('documents')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

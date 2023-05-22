@@ -43,7 +43,7 @@
                                     <tbody>
                                         <tr>
                                             <th>दर्ता न.</th>
-                                            <td>{{ $registration->registration_no }}</td>
+                                            <td>{{ $registration->registration_number }}</td>
                                         </tr>
                                         <tr>
                                             <th>आर्थिक वर्ष</th>

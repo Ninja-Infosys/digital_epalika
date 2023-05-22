@@ -10,7 +10,9 @@ return new class () extends Migration {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->string('registration_no')->comment('दर्ता नं.');
+            $table->foreignId('branch_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->integer('registration_no')->comment('दर्ता नं.');
             $table->string('registration_date')->nullable()->comment('दर्ता मिति (वि.स.)');
             $table->date('en_registration_date')->nullable()->comment('दर्ता मिति (ई.सं.)');
             $table->string('letter_number')->nullable()->comment('पत्र संख्या');
@@ -20,9 +22,12 @@ return new class () extends Migration {
             $table->string('subject')->nullable()->comment('विषय');
             $table->string('receiver_name')->nullable()->comment('बुझिलिनेको नाम');
             $table->string('phone')->nullable()->comment('बुझिलिनेको फोन');
+            $table->string('email')->nullable()->comment('बुझिलिनेको ई-मेल');
             $table->string('signature_image')->nullable()->comment('हस्ताक्षर');
             $table->string('date')->nullable()->comment('मिति');
+            $table->string('status')->default('pending');
             $table->text('remarks')->nullable()->comment('कैफियत');
+            $table->string('prefix')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

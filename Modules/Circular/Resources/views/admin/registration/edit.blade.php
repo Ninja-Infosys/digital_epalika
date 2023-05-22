@@ -166,6 +166,20 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="email" class="form-label">ई-मेल </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value="{{old('email',$registration->email)}}"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        id="email"
+                                        placeholder="ई-मेल"
+                                    />
+                                    @error('email')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="signature_image" class="form-label">सहि </label>
                                     <input
@@ -194,14 +208,14 @@
                                 <strong>डकुमेन्ट राख्नुहोस्</strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="documents" class="form-label">डकुमेन्ट *</label>
                                     <input
                                         type="file"
                                         name="documents[]"
                                         class="form-control @error('documents') is-invalid @enderror"
                                         id="documents"
-                                        required
+
                                         multiple/>
                                     @error('documents')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -210,7 +224,21 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="branch_id" class="form-label"> Forward To </label>
+                                    <select class="form-control" name="branch_id">
+                                        <option>--Select--</option>
+                                        @foreach($branches as $branch)
+                                            <option
+                                                value="{{$branch->id}}" {{old('branch_id',$registration->branch_id) == $branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('documents')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
+
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
                             Update

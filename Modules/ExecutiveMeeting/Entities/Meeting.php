@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum;
 
 class Meeting extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait,GetAllColumns;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -66,5 +67,25 @@ class Meeting extends Model
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function meetingAgendas(): HasMany
+    {
+        return $this->hasMany(MeetingAgenda::class);
+    }
+
+    public function meetingDecisions(): HasMany
+    {
+        return $this->hasMany(MeetingDecision::class);
+    }
+
+    public function meetingMinute(): HasOne
+    {
+        return $this->hasOne(MeetingMinute::class);
+    }
+
+    public function meetingParticipants(): HasMany
+    {
+        return $this->hasMany(MeetingParticipant::class);
     }
 }

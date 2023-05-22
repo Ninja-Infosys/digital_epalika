@@ -34,7 +34,7 @@ class CommitteeMemberController extends Controller
                 'user_id' => auth()->id()
             ]);
 
-        toast('समिति सदस्य सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('समिति सदस्य सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -51,7 +51,7 @@ class CommitteeMemberController extends Controller
 
         $committeeMember->update($request->validated());
 
-        toast('समिति सदस्य सफलतापूर्वक अपडेट', 'success');
+        toast('समिति सदस्य सफलतापूर्वक अपडेट गरियो', 'success');
         return redirect(route('admin.executiveMeeting.committee.committeeMember.index',$committee));
     }
 

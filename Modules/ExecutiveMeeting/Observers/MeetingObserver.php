@@ -10,6 +10,11 @@ class MeetingObserver
 {
     public function created(Meeting $meeting): void
     {
+        if($meeting->recurrence->value=='emergency'){
+            //send message
+            return ;
+        }
+
         if ($meeting->recurrence->value === 'no_recurrence') {
             return;
         }
@@ -50,6 +55,7 @@ class MeetingObserver
                     $en_end_date->{$recurrence['function']}();
                     $meeting->meetings()->create([
                         'committee_id' => $meeting->committee_id,
+                        'fiscal_year_id' => $meeting->fiscal_year_id,
                         'meeting_name' => $meeting->meeting_name,
                         'recurrence' => $meeting->recurrence,
                         'start_date' => $start_date->toDateString(),

@@ -90,7 +90,7 @@
                             type:'GET',
                             url:$(this).val(),
                             success:function (resp){
-                                CKEDITOR.instances.data.setData(resp);
+                                CKEDITOR.instances.data.setData(resp.data);
                             },
                             error:function (){
                                 alert('Something Went Wrong')

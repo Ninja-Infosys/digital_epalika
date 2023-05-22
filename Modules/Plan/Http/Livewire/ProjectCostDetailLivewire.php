@@ -194,14 +194,14 @@ class ProjectCostDetailLivewire extends Component
     private function assignCalculatedAmount()
     {
         $this->form['total_amount_for_contingency'] = $this->totalAmountForContingency();
-        $this->form['contingency_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) * ($this->form['contingency_percent'] ?? 0) / 100;
+        $this->form['contingency_amount'] = ((float)$this->form['total_amount_for_contingency'] ?? 0) * ((float)$this->form['contingency_percent'] ?? 0) / 100;
         $this->form['project_contract_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) - ($this->form['contingency_amount'] ?? 0) - ($this->form['other_taxes'] ?? 0);
         $this->form['total_cost_estimate_amount'] = ($this->form['project_contract_amount'] ?? 0) + ($this->form['labor_amount'] ?? 0);
     }
 
     private function totalAmountForContingency(): float|int
     {
-        return ((double)$this->form['office_grant'] ?? 0) + ((double)$this->form['agencies_grants'] ?? 0) + ((double)$this->form['share_amount'] ?? 0) + ((double)$this->form['committee_share_amount'] ?? 0);
+        return ((float)$this->form['office_grant'] ?? 0) + ((float)$this->form['agencies_grants'] ?? 0) + ((float)$this->form['share_amount'] ?? 0) + ((float)$this->form['committee_share_amount'] ?? 0);
     }
 
     public function messages(): array

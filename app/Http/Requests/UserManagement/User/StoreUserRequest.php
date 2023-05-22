@@ -21,8 +21,10 @@ class StoreUserRequest extends FormRequest
             'phone' => ['nullable', 'numeric', Rule::unique('users', 'phone')->withoutTrashed()],
             'role_id' => ['required', Rule::exists('roles', 'id')->withoutTrashed()],
             'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
+            'employee_id' => ['nullable', Rule::exists('employees', 'id')->withoutTrashed()],
             'password' => ['required', 'confirmed', 'min:7'],
             'ward_no' => ['nullable', 'integer'],
+            'is_dept_head' => ['nullable', 'boolean'],
         ];
     }
 

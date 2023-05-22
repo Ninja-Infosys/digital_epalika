@@ -10,7 +10,8 @@ return new class () extends Migration {
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->string('dispatch_no')->comment('चलानी नं.');
+            $table->integer('dispatch_no')->comment('चलानी नं.');
+            $table->string('prefix')->nullable();
             $table->string('dispatch_date')->nullable()->comment('चलानी मिति');
             $table->date('en_dispatch_date')->nullable()->comment('चलानी मिति ई.सं.');
             $table->string('letter_number')->nullable()->comment('पत्र संख्या');
@@ -20,7 +21,6 @@ return new class () extends Migration {
             $table->string('receiver_name')->nullable()->comment('पाउने कार्यालयको नाम');
             $table->string('receiver_address')->nullable()->comment('पाउने कार्यालयको ठेगाना');
             $table->string('receiver_contact')->nullable()->comment('हुलाक/ र.न./इमेल');
-            $table->string('receiver_signature')->nullable()->comment('बुझिलिनेको हस्तक्षर्');
             $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
             $table->softDeletes();

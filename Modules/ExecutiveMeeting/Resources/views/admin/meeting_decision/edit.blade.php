@@ -6,12 +6,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
+                            <a href="{{ route('admin.executiveMeeting.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}">निर्णयहरु</a>
+                            <a
+                                href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}">निर्णयहरु</a>
                         </li>
                         <li class="breadcrumb-item active">निर्णयहरु सम्पादन गर्नुहोस</li>
                     </ol>
@@ -27,91 +28,33 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">निर्णयहरु सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.executiveMeeting.meetingDecision.index')}}"
-                           class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> निर्णयहरु बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{route('admin.executiveMeeting.meetingDecision.update',$meetingDecision)}}"
-                        method="post" enctype="multipart/form-data">
+                        action="{{ route('admin.executiveMeeting.meeting.meetingDecision.update', [$meeting, $meetingDecision]) }}"
+                        method="post">
                         @csrf
                         @method('put')
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong> विवरण </strong>
-                            </legend>
-                            <div class="row">
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="meeting_id" class="form-label"> बैठक *</label>
-                                    <select
-                                        name="meeting_id"
-                                        class="form-select @error('meeting_id') is-invalid @enderror"
-                                        id="meeting_id" required>
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($meetings as $meeting)
-                                            <option {{$meeting->id===old('meeting_id',$meetingDecision->meeting_id) ? 'selected' : ''}}
-                                                    value="{{$meeting->id}}">
-                                                {{$meeting->meeting_name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('meeting_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <x-date-input-component
-                                        nameNe="date" labelNe="मिति *"
-                                        nameEn="en_date" labelEn="Date"
-                                        :getTodayDate="false"
-                                        :editDateNe="$meetingDecision->date"
-                                        :editDateEn="$meetingDecision->en_date"
-                                    />
-                                </div>
-
-                                <div class="col-md-12 mb-2">
-                                    <label for="subject" class="form-label"> विषय * </label>
-                                    <input
-                                        type="text"
-                                        name="subject"
-                                        value="{{old('subject',$meetingDecision->subject)}}"
-                                        class="form-control @error('subject') is-invalid @enderror"
-                                        id="subject"
-                                        placeholder="विषय"
-                                        required
-                                    />
-                                    @error('subject')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-12 mb-2">
-                                    <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
-                                              class="form-control summernote @error('description') is-invalid @enderror">{{old('description',$meetingDecision->description)}}</textarea>
-                                    @error('description')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="decision_file" class="form-label"> फाईल</label>
-                                    <input
-                                        type="file"
-                                        name="decision_file"
-                                        class="form-control @error('decision_file') is-invalid @enderror"
-                                        id="decision_file"
-
-                                    />
-                                    @error('decision_file')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component nameNe="date" :editDateNe="$meetingDecision->date" idNe="date" labelNe="मिति *"
+                                    idEn="en_date" nameEn="en_date" :editDateEn="$meetingDecision->en_date" labelEn="Date" :getTodayDate="false" />
                             </div>
-                        </fieldset>
+
+                            <div class="col-md-12 mb-2">
+                                <label for="description" class="form-label">बिवरण * </label>
+                                <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
+                                    class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('description', $meetingDecision->description) }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
@@ -121,3 +64,8 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/backend/ckeditor/editor.js') }}"></script>
+@endpush

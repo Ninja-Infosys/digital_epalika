@@ -23,12 +23,11 @@ class MeetingDecision extends Model
 
     protected $fillable = [
         'meeting_id',
-        'subject',
+        'meeting_agenda_id',
         'date',
         'en_date',
         'description',
-        'user_id',
-        'decision_file',
+        'user_id'
     ];
 
     public function meeting(): BelongsTo
@@ -36,18 +35,8 @@ class MeetingDecision extends Model
         return $this->belongsTo(Meeting::class);
     }
 
-
-    public function setDecisionFileAttribute($value)
+    public function meetingAgenda(): BelongsTo
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['decision_file'] = $value->store('municipalMeeting', 'public');
-        }
-    }
-
-    public function getDecisionFileUrlAttribute(): string
-    {
-        return $this->attributes['decision_file']
-            ? Storage::disk('public')->url($this->attributes['decision_file'])
-            : '';
+        return $this->belongsTo(MeetingAgenda::class);
     }
 }

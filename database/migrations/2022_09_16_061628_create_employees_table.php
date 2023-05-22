@@ -15,8 +15,11 @@ return new class () extends Migration {
             $table->string('photo')->nullable()->comment('फोटो');
             $table->string('email')->nullable()->comment('इमेल');
             $table->string('phone')->nullable()->comment('फोटो');
+            $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('branch_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->integer('position')->nullable()->comment('स्थान');
             $table->boolean('status')->default(true)->comment('स्थिति');
+            $table->boolean('is_dept_head')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
