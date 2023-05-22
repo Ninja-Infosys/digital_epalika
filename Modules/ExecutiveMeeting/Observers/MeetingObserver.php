@@ -2,17 +2,26 @@
 
 namespace Modules\ExecutiveMeeting\Observers;
 
+use App\Channel\Message\AakashSmsMessage;
 use Carbon\CarbonPeriod;
+use Exception;
 use Illuminate\Support\Carbon;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 
 class MeetingObserver
 {
+    /**
+     * @throws Exception
+     */
     public function created(Meeting $meeting): void
     {
-        if($meeting->recurrence->value=='emergency'){
-            //send message
-            return ;
+        if ($meeting->recurrence->value == 'emergency') {
+            $meeting->load('committee.committeeMembers');
+            $phoneNumbers = implode(',', $meeting->committee->committeeMembers->pluck('phone')->toArray());
+            (new AakashSmsMessage)->receiver($phoneNumbers ?? '')
+                ->message($meeting->description ?? '')
+                ->send();
+            return;
         }
 
         if ($meeting->recurrence->value === 'no_recurrence') {
