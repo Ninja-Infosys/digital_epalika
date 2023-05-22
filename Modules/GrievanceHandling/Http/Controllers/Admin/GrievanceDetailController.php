@@ -40,9 +40,11 @@ class GrievanceDetailController extends Controller
     public function show(GrievanceDetail $grievanceDetail)
     {
         $this->checkAuthorization('grievanceDetail_access');
+
         $grievanceDetail->load(
             'grievanceDetails.files',
             'grievanceDetails.user',
+            'grievanceDetails.grievanceUser',
             'grievanceType',
             'grievanceOffice',
             'files'

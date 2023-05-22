@@ -16,7 +16,6 @@
                 <h6>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन तल उल्लेखित विवरण भरेर पठाउनुहोस् ।</h6>
                 <div class="mt-3">
                     <form class="m-2" method="get" action="{{route('grievanceHandling.single-grievance')}}">
-                        @csrf
                         <div class="mb-3">
                             <label for="phone" class="form-label">सम्पर्क नम्बर *</label>
                             <input type="text" name="phone" class="" id="phone" placeholder="सम्पर्क नम्बर">

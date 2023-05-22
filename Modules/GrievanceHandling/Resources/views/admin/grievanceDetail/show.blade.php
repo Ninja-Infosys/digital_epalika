@@ -31,34 +31,36 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                        <h4 class="header-title"><b>बिषय : </b>{{ $grievanceDetail->subject }}</h4></div>
+                            <h4 class="header-title"><b>बिषय : </b>{{ $grievanceDetail->subject }}</h4>
+                        </div>
                         <div class="col-md-4">
-                        <h4 class="header-title"><b>शाखा</b>
-                            : {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h4></div>
+                            <h4 class="header-title"><b>शाखा</b>
+                                : {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h4>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                        <form class="form-inline"
-                            action="{{ route('admin.grievanceHandling.grievanceDetail.updateStatus', $grievanceDetail->id) }}"
-                            method="post">
-                            @method('put')
-                            @csrf
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label text-black"><b>स्थिति</b></label>
-                                <select name="status" class="form-control mt-1" id="grievanceDetailStatus">
-                                    @foreach (\Modules\GrievanceHandling\Enums\GrievanceStatus::cases() as $status)
-                                        <option value="{{ $status->value }}"
-                                            {{ $status == $grievanceDetail->status ? 'selected' : '' }}>
-                                            {{ $status->label() }}</option>
-                                    @endforeach
+                            <form class="form-inline"
+                                action="{{ route('admin.grievanceHandling.grievanceDetail.updateStatus', $grievanceDetail->id) }}"
+                                method="post">
+                                @method('put')
+                                @csrf
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label text-black"><b>स्थिति</b></label>
+                                    <select name="status" class="form-control mt-1" id="grievanceDetailStatus">
+                                        @foreach (\Modules\GrievanceHandling\Enums\GrievanceStatus::cases() as $status)
+                                            <option value="{{ $status->value }}"
+                                                {{ $status == $grievanceDetail->status ? 'selected' : '' }}>
+                                                {{ $status->label() }}</option>
+                                        @endforeach
 
-                                </select>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                    </div>
+                                    </select>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
                         <div class="col-md-4">
                             <h4 class="mt-3"><b>दर्ता स्थिति:</b> <a
                                     href="{{ route('admin.grievanceHandling.grievanceDetail.approve', $grievanceDetail) }}"
@@ -74,7 +76,7 @@
                                         'fa-check' => $grievanceDetail->is_approved == 1,
                                         'fa-window-close' => $grievanceDetail->is_approved == 0,
                                     ])></i></a>
-                                    {{ $grievanceDetail->is_approved == 1 ? 'निसक्रिय गर्नुहोस':'सक्रिय गर्नुहोस' }}
+                                {{ $grievanceDetail->is_approved == 1 ? 'निसक्रिय गर्नुहोस' : 'सक्रिय गर्नुहोस' }}
                             </h4>
                         </div>
                         <div class="col-md-4">
@@ -92,185 +94,186 @@
                                         'fa-check' => $grievanceDetail->is_public == 1,
                                         'fa-window-close' => $grievanceDetail->is_public == 0,
                                     ])></i></a>
-                                     {{ $grievanceDetail->is_approved == 1 ? 'निसक्रिय गर्नुहोस':'सक्रिय गर्नुहोस' }}
+                                {{ $grievanceDetail->is_approved == 1 ? 'निसक्रिय गर्नुहोस' : 'सक्रिय गर्नुहोस' }}
                             </h4>
                         </div>
                     </div>
 
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="row">
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex justify-content between">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="text-decoration-underline mt-4">
-                                        <b> प्रयोगकर्ता विवरण</b>
-                                    </h4>
-                                    <h4 class="mt-2"><b>नाम :-
-                                        </b>{{ $grievanceDetail->grievanceUser->name ?? '' }}</h4>
-                                    <h4 class="mt-2"><b>ईमेल :-
-                                        </b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
-                                    <h4 class="mt-2"><b>सम्पर्क नं :-</b>
-                                        {{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
-                                    <h4 class="mt-2"><b>ठेगाना :-
-                                        </b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
-                                    <h4 class="mb-1"><b>गुनासो गम्भीरता
-                                            :</b>{{ $grievanceDetail->complaint_severity->label() }}
-                                    </h4>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex justify-content between">
+                                    <div class="col-md-6">
+                                        <h4 class="text-decoration-underline mt-4">
+                                            <b> प्रयोगकर्ता विवरण</b>
+                                        </h4>
+                                        <h4 class="mt-2"><b>नाम :-
+                                            </b>{{ $grievanceDetail->grievanceUser->name ?? '' }}</h4>
+                                        <h4 class="mt-2"><b>ईमेल :-
+                                            </b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
+                                        <h4 class="mt-2"><b>सम्पर्क नं :-</b>
+                                            {{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
+                                        <h4 class="mt-2"><b>ठेगाना :-
+                                            </b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
+                                        <h4 class="mb-1"><b>गुनासो गम्भीरता
+                                                :</b>{{ $grievanceDetail->complaint_severity->label() }}
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-7 mt-3">
-                        <div class="d-flex justify-content-center">
-                            <div class="col-md-12 mx-10">
-                                <div class="row">
-                                    <div
-                                        class="grievanceChat mt-2 border border-dark shadow rounded px-2 h-50 overflow-auto">
-                                        <div id="chat">
-                                            <div class="my-2 p-2">
-                                                <div class="border rounded p-2">
-                                                    <div class="d-flex justify-content-start my-3 border p-2 rounded">
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <img class="order-1"
-                                                                src="{{ $grievanceDetail->grievanceUser->avatar ?? '' }}"
-                                                                alt="avatar 1" height="50">
-                                                            <div class="order-2">
-                                                                <p class="small">
-                                                                    {{ $grievanceDetail->grievanceUser->name ?? '' }}
-                                                                </p>
-                                                                <p class="small text-muted">
-                                                                    {{ $grievanceDetail->created_at?->calendar() }}</p>
+                        <div class="col-md-7 mt-3">
+                            <div class="d-flex justify-content-center">
+                                <div class="col-md-12 mx-10">
+                                    <div class="row">
+                                        <div
+                                            class="grievanceChat mt-2 border border-dark shadow rounded px-2 h-50 overflow-auto">
+                                            <div id="chat">
+                                                <div class="my-2 p-2">
+                                                    <div class="border rounded p-2">
+                                                        <div class="d-flex justify-content-start my-3 border p-2 rounded">
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <img class="order-1"
+                                                                    src="{{ $grievanceDetail->grievanceUser->avatar ?? '' }}"
+                                                                    alt="avatar 1" height="50">
+                                                                <div class="order-2">
+                                                                    <p class="small">
+                                                                        {{ $grievanceDetail->grievanceUser->name ?? '' }}
+                                                                    </p>
+                                                                    <p class="small text-muted">
+                                                                        {{ $grievanceDetail->created_at?->calendar() }}</p>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <div class="d-flex flex-column align-items-start">
+                                                            <h6 class="p-2 me-3 mb-1 rounded bg-light">
+                                                                {{ $grievanceDetail->description }}</h6>
+                                                            @foreach ($grievanceDetail->files as $file)
+                                                                <a class="me-3 btn btn-primary btn-sm"
+                                                                    href="{{ $file->file_url }}"
+                                                                    download="{{ $file->file_url }}">
+                                                                    {{ $file->file_name }} <i class="fa fa-download"></i>
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
-                                                    <div class="d-flex flex-column align-items-start">
-                                                        <h6 class="p-2 me-3 mb-1 rounded bg-light">
-                                                            {{ $grievanceDetail->description }}</h6>
-                                                        @foreach ($grievanceDetail->files as $file)
-                                                            <a class="me-3 btn btn-primary btn-sm"
-                                                                href="{{ $file->file_url }}"
-                                                                download="{{ $file->file_url }}">
-                                                                {{ $file->file_name }} <i class="fa fa-download"></i>
-                                                            </a>
-                                                        @endforeach
+                                                    <hr>
+                                                    @foreach ($grievanceDetail->grievanceDetails as $detail)
+                                                        @if (!empty($detail->user_id))
+                                                            <div class="border rounded p-2">
+                                                                <div
+                                                                    class="d-flex justify-content-start my-3 border p-2 rounded">
+                                                                    <div class="d-flex align-items-center gap-2">
+                                                                        <img class="order-1"
+                                                                            src="{{ $detail->user->avatar ?? '' }}"
+                                                                            alt="avatar 1" height="50">
+                                                                        <div class="order-2">
+                                                                            <p class="small">
+                                                                                {{ $detail->user->name ?? '' }}</p>
+                                                                            <p class="small text-muted">
+                                                                                {{ $detail->created_at?->calendar() }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex flex-column align-items-start">
+                                                                    <h6 class="p-2 ms-3 mb-1 rounded bg-light">
+                                                                        {{ $detail->description }}</h6>
+                                                                    @foreach ($detail->files as $detailFile)
+                                                                        <a class="me-3 btn btn-primary btn-sm"
+                                                                            href="{{ $detailFile->file_url }}"
+                                                                            download="{{ $detailFile->file_url }}">
+                                                                            {{ $detailFile->file_name }} <i
+                                                                                class="fa fa-download"></i>
+                                                                        </a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="border rounded p-2">
+                                                                <div
+                                                                    class="d-flex justify-content-end my-3 border p-2 rounded">
+                                                                    <div class="d-flex align-items-center gap-2">
+                                                                        <img class="order-2"
+                                                                            src="{{ $detail->grievanceUser->avatar ?? '' }}"
+                                                                            alt="avatar 1" height="50">
+                                                                        <div class="order-1">
+                                                                            <p class="small">
+                                                                                {{ $detail->grievanceUser->name ?? '' }}
+                                                                            </p>
+                                                                            <p class="small text-muted">
+                                                                                {{ $detail->created_at?->calendar() }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex flex-column align-items-end">
+                                                                    <h6 class="p-2 me-3 mb-1 rounded bg-light">
+                                                                        {{ $detail->description }}</h6>
+                                                                    @foreach ($detail->files as $detailFile)
+                                                                        <a class="me-3 btn btn-primary btn-sm"
+                                                                            href="{{ $detailFile->file_url }}"
+                                                                            download="{{ $detailFile->file_url }}">
+                                                                            {{ $detailFile->file_name }} <i
+                                                                                class="fa fa-download"></i>
+                                                                        </a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        @if (!$loop->last)
+                                                            <hr>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <form enctype="multipart/form-data"
+                                                action="{{ route('admin.grievanceHandling.grievanceDetail.replyGrievance', $grievanceDetail->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <div class="d-flex justify-content-start align-items-center my-4 p-2">
+                                                    <input type="text" class="form-control flex-shrink-1"
+                                                        name="description" id="description" placeholder="Type message">
+                                                    <div class="flex-shrink-0 text-center">
+
+
+                                                        <input type="file" id="upload" name="files[]" multiple
+                                                            hidden />
+                                                        <label class="ms-1 text-muted" for="upload"><i
+                                                                class="fas fa-paperclip"></i></label>
+
+
+
+                                                        <button type="submit" class="btn bg-white ms-3 link-info"
+                                                            href="#"><i class="fas fa-paper-plane"></i></button>
                                                     </div>
                                                 </div>
-                                                <hr>
-                                                @foreach ($grievanceDetail->grievanceDetails as $detail)
-                                                    @if (!empty($detail->user_id))
-                                                        <div class="border rounded p-2">
-                                                            <div class="d-flex justify-content-end my-3 border p-2 rounded">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img class="order-2"
-                                                                        src="{{ $detail->user->avatar ?? '' }}"
-                                                                        alt="avatar 1" height="50">
-                                                                    <div class="order-1">
-                                                                        <p class="small">
-                                                                            {{ $detail->user->name ?? '' }}
-                                                                        </p>
-                                                                        <p class="small text-muted">
-                                                                            {{ $detail->created_at?->calendar() }}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex flex-column align-items-end">
-                                                                <h6 class="p-2 me-3 mb-1 rounded bg-light">
-                                                                    {{ $detail->description }}</h6>
-                                                                @foreach ($detail->files as $detailFile)
-                                                                    <a class="me-3 btn btn-primary btn-sm"
-                                                                        href="{{ $detailFile->file_url }}"
-                                                                        download="{{ $detailFile->file_url }}">
-                                                                        {{ $detailFile->file_name }} <i
-                                                                            class="fa fa-download"></i>
-                                                                    </a>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    @else
-                                                        <div class="border rounded p-2">
-                                                            <div class="d-flex justify-content-end my-3 border p-2 rounded">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img class="order-2"
-                                                                        src="{{ $detail->grievanceUser->avatar ?? '' }}"
-                                                                        alt="avatar 1" height="50">
-                                                                    <div class="order-1">
-                                                                        <p class="small">
-                                                                            {{ $detail->grievanceUser->name ?? '' }}
-                                                                        </p>
-                                                                        <p class="small text-muted">
-                                                                            {{ $detail->created_at?->calendar() }}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex flex-column align-items-end">
-                                                                <h6 class="p-2 me-3 mb-1 rounded bg-light">
-                                                                    {{ $detail->description }}</h6>
-                                                                @foreach ($detail->files as $detailFile)
-                                                                    <a class="me-3 btn btn-primary btn-sm"
-                                                                        href="{{ $detailFile->file_url }}"
-                                                                        download="{{ $detailFile->file_url }}">
-                                                                        {{ $detailFile->file_name }} <i
-                                                                            class="fa fa-download"></i>
-                                                                    </a>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (!$loop->last)
-                                                        <hr>
-                                                    @endif
-                                                @endforeach
-                                            </div>
+                                            </form>
+                                            @error('files.*')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                            @error('files')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+
+                                            @error('description')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
-                                        <form enctype="multipart/form-data"
-                                            action="{{ route('admin.grievanceHandling.grievanceDetail.replyGrievance', $grievanceDetail->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            <div class="d-flex justify-content-start align-items-center my-4 p-2">
-                                                <input type="text" class="form-control flex-shrink-1"
-                                                    name="description" id="description" placeholder="Type message">
-                                                <div class="flex-shrink-0 text-center">
-
-
-                                                    <input type="file" id="upload" name="files[]" multiple
-                                                        hidden />
-                                                    <label class="ms-1 text-muted" for="upload"><i
-                                                            class="fas fa-paperclip"></i></label>
-
-
-
-                                                    <button type="submit" class="btn bg-white ms-3 link-info"
-                                                        href="#"><i class="fas fa-paper-plane"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        @error('files.*')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                        @error('files')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-
-                                        @error('description')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
-
-
             </div>
-        </div>
 
-    </div>
+        </div>
     </div>
 
     @push('style')
