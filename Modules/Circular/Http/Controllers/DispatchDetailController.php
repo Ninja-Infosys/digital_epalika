@@ -41,7 +41,7 @@ class DispatchDetailController extends Controller
                     'file' => $file->store('dispatchDetail', 'public')
                 ]);
             }
-//            Mail::to($dispatch->receiver_contact)->send(new DispatchMail($dispatchDetail));
+            Mail::to($dispatch->receiver_contact)->send(new DispatchMail($dispatchDetail));
         });
         toast('चलानी सफलतापूर्वक थपियो', 'success');
         return back();
