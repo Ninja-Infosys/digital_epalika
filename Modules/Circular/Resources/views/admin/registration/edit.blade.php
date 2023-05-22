@@ -89,7 +89,7 @@
                                         :editDateEn="$registration->en_letter_date"
                                     />
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="sender_name" class="form-label">पठाउने कार्यालयको नाम *</label>
                                     <input
                                         type="text"
@@ -104,7 +104,21 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
+                                    <label for="email" class="form-label">ईमेल </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value="{{old('email',$registration->email)}}"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        id="email"
+                                        placeholder="ईमेल"
+                                    />
+                                    @error('email')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <label for="subject" class="form-label">बिषय *</label>
                                     <input
                                         type="text"
@@ -166,20 +180,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 mb-2">
-                                    <label for="email" class="form-label">ई-मेल </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value="{{old('email',$registration->email)}}"
-                                        class="form-control @error('email') is-invalid @enderror"
-                                        id="email"
-                                        placeholder="ई-मेल"
-                                    />
-                                    @error('email')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+
                                 <div class="col-md-6 mb-2">
                                     <label for="signature_image" class="form-label">सहि </label>
                                     <input

@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Helper\SMS\SamayaSms;
+use App\Channel\Message\AakashSmsMessage;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Console\Command;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
-use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
-use Modules\ExecutiveMeeting\Entities\WardCommittee;
+use Modules\ExecutiveMeeting\Entities\Meeting;
 
 class SendExecutiveCommitteeMessage extends Command
 {
@@ -29,22 +28,24 @@ class SendExecutiveCommitteeMessage extends Command
      * Execute the console command.
      *
      * @return int
+     * @throws Exception
      */
-    public function handle()
+    public function handle(): int
     {
-        $meetingEvents = MeetingEvent::whereDate('en_start_date', Carbon::tomorrow()->toDateString())->get();
-        $wardCommittees = WardCommittee::select('phone')->get();
-        $municipalCommittees = MunicipalCommittee::select('phone')->get();
+        $meetings = Meeting::with('committee.committeeMembers')
+            ->where('recurrence', '!=', 'emergency')
+            ->whereDate('en_start_date', Carbon::tomorrow()->toDateString())
+            ->get();
 
-        foreach ($meetingEvents as $meetingEvent) {
-            if ($meetingEvent->event_for == 'ward') {
-                $phone = implode(',', $wardCommittees->pluck('phone')->toArray());
-            } else {
-                $phone = implode(',', $municipalCommittees->pluck('phone')->toArray());
-            }
+        foreach ($meetings as $meeting) {
+            $phoneNumbers = implode(',', $meeting->committee->committeeMembers->pluck('phone')->toArray());
 
-            (new SamayaSms())->sendTextSMS($phone, $meetingEvent->description);
+            (new AakashSmsMessage())
+                ->receiver($phoneNumbers)
+                ->message($meeting->description)
+                ->send();
         }
+
         return 0;
     }
 }

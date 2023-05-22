@@ -27,7 +27,7 @@ class UpdateRegistrationRequest extends FormRequest
             'subject' => ['required'],
             'receiver_name' => ['required'],
             'phone' => ['nullable'],
-            'email' => ['required', 'email', Rule::unique('registrations', 'email')->withoutTrashed()->ignore($this->registration)],
+            'email' => ['nullable', 'email', Rule::unique('registrations', 'email')->withoutTrashed()->ignore($this->registration)],
             'signature_image' => ['nullable', 'image'],
             'date' => ['required'],
             'remarks' => ['nullable'],

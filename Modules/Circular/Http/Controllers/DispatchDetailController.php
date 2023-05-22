@@ -2,10 +2,12 @@
 
 namespace Modules\Circular\Http\Controllers;
 
+use App\Mail\DispatchMail;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\DispatchDetail;
 
@@ -39,6 +41,7 @@ class DispatchDetailController extends Controller
                     'file' => $file->store('dispatchDetail', 'public')
                 ]);
             }
+            Mail::to($dispatch->receiver_contact)->send(new DispatchMail($dispatchDetail));
         });
         toast('चलानी सफलतापूर्वक थपियो', 'success');
         return back();
