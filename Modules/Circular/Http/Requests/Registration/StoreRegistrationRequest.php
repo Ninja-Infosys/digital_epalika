@@ -27,7 +27,7 @@ class StoreRegistrationRequest extends FormRequest
             'subject' => ['required'],
             'receiver_name' => ['required'],
             'phone' => ['nullable'],
-            'email' => ['required', 'email', Rule::unique('registrations', 'email')->withoutTrashed()],
+            'email' => ['nullable', 'email', Rule::unique('registrations', 'email')->withoutTrashed()],
             'signature_image' => ['nullable', 'image'],
             'date' => ['nullable'],
             'remarks' => ['nullable'],

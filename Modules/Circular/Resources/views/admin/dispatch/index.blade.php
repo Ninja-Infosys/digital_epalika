@@ -60,15 +60,15 @@
                                     <td>{{$dispatch->letter_date}}</td>
                                     <td>{{$dispatch->subject}}</td>
                                     <td>
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.circular.dispatch.print', $dispatch)}}"
+                                           class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                        >
+                                            <i class="fa fa-print"></i>
+                                        </a>
                                         @if($dispatch->dispatchDetail()->count() > 0)
-
                                             @can('dispatch_access')
-                                                <a data-bs-type="edit"
-                                                   href="{{route('admin.circular.dispatch.print', $dispatch)}}"
-                                                   class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"
-                                                >
-                                                    <i class="fa fa-print"></i>
-                                                </a>
+
                                                 <a data-bs-type="edit"
                                                    href="{{route('admin.circular.dispatch.report', $dispatch)}}"
                                                    class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"
