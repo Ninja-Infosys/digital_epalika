@@ -134,28 +134,25 @@
                                         <div
                                             class="grievanceChat mt-2 border border-dark shadow rounded px-2 h-50 overflow-auto">
                                             <div id="chat">
-                                                <div class="my-2 p-2">
+                                                <div class="my-2 p-2" style="height:100vh;overflow-y:scroll;">
                                                     <div class="border rounded p-2">
-                                                        <div class="d-flex justify-content-start my-3 border p-2 rounded">
+                                                        <div class="d-flex justify-content-end my-3 border p-2 rounded">
                                                             <div class="d-flex align-items-center gap-2">
-                                                                <img class="order-1"
-                                                                    src="{{ $grievanceDetail->grievanceUser->avatar ?? '' }}"
-                                                                    alt="avatar 1" height="50">
-                                                                <div class="order-2">
-                                                                    <p class="small">
-                                                                        {{ $grievanceDetail->grievanceUser->name ?? '' }}
-                                                                    </p>
+                                                                <img class="order-2"
+                                                                    src="{{ $grievanceDetail->grievanceUser->avatar ?? '' }}" alt="avatar 1"
+                                                                    height="50">
+                                                                <div class="order-1">
+                                                                    <p class="small">{{ $grievanceDetail->grievanceUser->name ?? '' }}</p>
                                                                     <p class="small text-muted">
                                                                         {{ $grievanceDetail->created_at?->calendar() }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex flex-column align-items-start">
+                                                        <div class="d-flex flex-column align-items-end">
                                                             <h6 class="p-2 me-3 mb-1 rounded bg-light">
                                                                 {{ $grievanceDetail->description }}</h6>
                                                             @foreach ($grievanceDetail->files as $file)
-                                                                <a class="me-3 btn btn-primary btn-sm"
-                                                                    href="{{ $file->file_url }}"
+                                                                <a class="me-3 btn btn-primary btn-sm" href="{{ $file->file_url }}"
                                                                     download="{{ $file->file_url }}">
                                                                     {{ $file->file_name }} <i class="fa fa-download"></i>
                                                                 </a>

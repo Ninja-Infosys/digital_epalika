@@ -34,7 +34,7 @@
                         </div>
                         <div class="grievanceChat mt-2 border rounded px-2 overflow-auto">
                             <div id="chat">
-                                <div class="my-2 p-2">
+                                <div class="my-2 p-2" style="height:100vh;overflow-y:scroll;">
                                     <div class="border rounded p-2">
                                         <div class="d-flex justify-content-end my-3 border p-2 rounded">
                                             <div class="d-flex align-items-center gap-2">
