@@ -1,19 +1,8 @@
-<!DOCTYPE html>
+<x-mail::message>
 
-<html>
+    चलानी नं. : {{$dispatchDetail->dispatch?->dispatch_no??''}}<br>
+    चलानि मिति : {{$dispatchDetail->dispatch?->dispatch_date??''}}
 
-<head>
-
-    <title>Demo Mail</title>
-
-</head>
-
-<body>
-<div>
-
-
-</div>
-
-</body>
-
-</html>
+    Thanks
+    {{ config('app.name') }}
+</x-mail::message>

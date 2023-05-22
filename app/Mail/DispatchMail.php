@@ -20,7 +20,7 @@ class DispatchMail extends Mailable
 
     public function __construct(public DispatchDetail $dispatchDetail)
     {
-        $this->dispatchDetail->load('files');
+        $this->dispatchDetail->load('files','dispatch');
     }
 
 
@@ -33,14 +33,11 @@ class DispatchMail extends Mailable
     }
 
 
-    public function content(): Content
+
+    public function build()
     {
-        return new Content(
-            view: 'emails.circular.dispatch',
-            with: [
-                'dispatchDetail' => $this->dispatchDetail
-            ]
-        );
+        return $this->markdown('emails.circular.dispatch')
+            ->with('dispatchDetail', $this->dispatchDetail);
     }
 
 
