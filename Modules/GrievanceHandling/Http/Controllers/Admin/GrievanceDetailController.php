@@ -14,6 +14,7 @@ class GrievanceDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('grievanceDetail_access');
+
         $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['token','grievanceType.title',], request('search'));

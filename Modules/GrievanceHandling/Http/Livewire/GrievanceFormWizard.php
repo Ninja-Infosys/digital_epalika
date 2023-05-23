@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
+use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 
 class GrievanceFormWizard extends Component
 {
@@ -115,13 +116,14 @@ class GrievanceFormWizard extends Component
                 'complaint_severity' => $this->form['complaint_severity'],
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
+                'grievance_medium' => GrievanceMediumEnum::SYSTEM
             ]);
-            if (! empty($this->form['files'])) {
+            if (!empty($this->form['files'])) {
                 foreach ($this->form['files'] as $file) {
                     $grievanceDetail->files()->create([
                         'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
                         'extension' => $file->getClientOriginalExtension(),
-                        'file' => $file->store('grievance/files/'.Str::slug($grievanceUser->name, '_'), 'public'),
+                        'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
                     ]);
                 }
             }
@@ -134,7 +136,7 @@ class GrievanceFormWizard extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => 'तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर '.$grievanceDetail->token.' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला',
+            'text' => 'तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला',
         ]);
     }
 
@@ -157,11 +159,11 @@ class GrievanceFormWizard extends Component
 
     public function render()
     {
-        if (! empty($this->form['grievance_type_id'])) {
+        if (!empty($this->form['grievance_type_id'])) {
             $this->grievanceType = GrievanceType::find($this->form['grievance_type_id']);
         }
 
-        if (! empty($this->form['grievance_office_id'])) {
+        if (!empty($this->form['grievance_office_id'])) {
             $this->grievanceOffice = GrievanceOffice::find($this->form['grievance_office_id']);
         }
 

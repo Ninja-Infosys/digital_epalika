@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
+use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 use Modules\GrievanceHandling\Enums\GrievanceStatus;
 
 class GrievanceDetail extends Model
@@ -38,11 +39,13 @@ class GrievanceDetail extends Model
         'status',
         'is_approved',
         'is_public',
+        'grievance_medium'
     ];
 
     protected $casts = [
         'complaint_severity' => GrievanceComplaintSeverity::class,
         'status' => GrievanceStatus::class,
+        'grievance_medium' => GrievanceMediumEnum::class
     ];
 
     public function scopeApproved($query)

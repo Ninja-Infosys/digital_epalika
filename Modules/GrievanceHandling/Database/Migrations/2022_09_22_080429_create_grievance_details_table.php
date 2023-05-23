@@ -18,7 +18,11 @@ return new class () extends Migration {
             $table->string('subject')->nullable()->comment('विषय');
             $table->longText('description')->nullable()->comment('विवरण');
             $table->string('complaint_severity')->nullable()->comment('गुनासो गम्भीरता');
+            $table->string('grievance_medium');
             $table->boolean('is_open')->default(0)->comment('खोल्नुहोस्');
+            $table->boolean('is_approved')->default(0)->comment('स्वीकृत');
+            $table->boolean('is_public')->default(0)->comment('सार्वजनिक');
+            $table->string('status')->default('unseen')->comment('स्थिति');
             $table->timestamps();
             $table->softDeletes();
         });
