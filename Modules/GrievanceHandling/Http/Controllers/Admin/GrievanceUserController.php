@@ -39,7 +39,14 @@ class GrievanceUserController extends Controller
     {
         $this->checkAuthorization('grievanceUser_create');
 
-        GrievanceUser::create($request->validated());
+        $grievanceUser = GrievanceUser::create($request->validated());
+
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $grievanceUser,
+                'message' => 'गुनासो प्रयोगकर्ता सफलतापूर्वक थपियो'
+            ]);
+        }
 
         toast('गुनासो प्रयोगकर्ता सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.grievanceHandling.grievanceUser.index'));

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\GrievanceHandling\Entities\GrievanceOffice;
+use Modules\GrievanceHandling\Entities\GrievanceType;
+use Modules\GrievanceHandling\Entities\GrievanceUser;
+use Modules\GrievanceHandling\Http\Requests\GrievanceDetail\StoreGrievanceDetailRequest;
 
 class GrievanceDetailController extends Controller
 {
@@ -17,10 +21,10 @@ class GrievanceDetailController extends Controller
 
         $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['token','grievanceType.title',], request('search'));
+                $q->whereLike(['token', 'grievanceType.title',], request('search'));
             }
         })
-        ->latest()->paginate(10);
+            ->latest()->paginate(10);
 
 
         return view('grievancehandling::admin.grievanceDetail.index', compact('grievanceDetails'));
@@ -30,12 +34,34 @@ class GrievanceDetailController extends Controller
     {
         $this->checkAuthorization('grievanceDetail_create');
 
-        return view('grievancehandling::create');
+        $grievanceTypes = GrievanceType::all();
+        $grievanceOffices = GrievanceOffice::all();
+        $grievanceUsers = GrievanceUser::latest()->get();
+
+        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'grievanceOffices', 'grievanceUsers'));
     }
 
-    public function store(Request $request)
+    public function store(StoreGrievanceDetailRequest $request)
     {
         $this->checkAuthorization('grievanceDetail_create');
+
+        DB::transaction(function ()  use ($request) {
+            $grievanceDetail = GrievanceDetail::create($request->validated() + [
+                'token' => time(),
+            ]);
+
+            foreach ($request->file('files') ?? [] as $file) {
+                $grievanceDetail->files()->create([
+                    'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'file' => $file->store('grievance/files', 'public'),
+                ]);
+            }
+        });
+
+        toast('गुनासो सफलतापुर्बक दर्ता भयो', 'success');
+
+        return redirect(route('admin.grievanceHandling.grievanceDetail.index'));
     }
 
     public function show(GrievanceDetail $grievanceDetail)
@@ -111,7 +137,7 @@ class GrievanceDetailController extends Controller
 
     public function showToPublic(GrievanceDetail $grievanceDetail): RedirectResponse
     {
-        $grievanceDetail->update(['is_public' => ! $grievanceDetail->is_public]);
+        $grievanceDetail->update(['is_public' => !$grievanceDetail->is_public]);
         toast('सफलतापूर्वक सार्वजनिक गरियो', 'success');
 
         return back();
@@ -119,7 +145,7 @@ class GrievanceDetailController extends Controller
 
     public function approve(GrievanceDetail $grievanceDetail): RedirectResponse
     {
-        $grievanceDetail->update(['is_approved' => ! $grievanceDetail->is_approved]);
+        $grievanceDetail->update(['is_approved' => !$grievanceDetail->is_approved]);
         toast('सफलतापूर्वक दर्ता गरियो', 'success');
 
         return back();

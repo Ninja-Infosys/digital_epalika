@@ -29,6 +29,11 @@
                         <h4 class="header-title mb-0">प्राप्त गुनासोहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
+                            @can('grievanceDetail_create')
+                                <a href="{{ route('admin.grievanceHandling.grievanceDetail.create') }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
                         </div>
                     </div>
                 </div>
