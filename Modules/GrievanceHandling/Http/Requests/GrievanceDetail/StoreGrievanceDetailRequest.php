@@ -23,6 +23,7 @@ class StoreGrievanceDetailRequest extends FormRequest
             'files' => ['nullable', 'array'],
             'files.*' => ['image', 'png,jpeg,jpg', 'max:10240'],
             'grievance_office_id' => ['required', Rule::exists('grievance_offices', 'id')->withoutTrashed()],
+            'assigned_user_id' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()],
             'complaint_severity' => ['required', new Enum(GrievanceComplaintSeverity::class)],
             'subject' => ['required', 'string', 'max:255'],
             'is_open' => ['nullable', 'boolean'],

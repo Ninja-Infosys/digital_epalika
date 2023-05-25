@@ -154,6 +154,21 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="assigned_user_id" class="form-label">गुनासो हेर्ने अधिकारी </label>
+                                <select name="assigned_user_id" id="assigned_user_id" class="form-select">
+                                    <option value=""> छान्नुहोस्</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ $user->id == old('assigned_user_id') ? 'selected' : '' }}>
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('assigned_user_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Save

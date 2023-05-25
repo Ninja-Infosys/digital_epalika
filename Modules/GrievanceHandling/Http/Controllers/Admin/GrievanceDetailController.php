@@ -3,11 +3,15 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\GrievanceDetailMail;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
@@ -37,8 +41,9 @@ class GrievanceDetailController extends Controller
         $grievanceTypes = GrievanceType::all();
         $grievanceOffices = GrievanceOffice::all();
         $grievanceUsers = GrievanceUser::latest()->get();
+        $users = User::whereNot('id', auth()->id())->get();
 
-        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'grievanceOffices', 'grievanceUsers'));
+        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'grievanceOffices', 'grievanceUsers', 'users'));
     }
 
     public function store(StoreGrievanceDetailRequest $request)
@@ -46,7 +51,9 @@ class GrievanceDetailController extends Controller
         $this->checkAuthorization('grievanceDetail_create');
 
         DB::transaction(function ()  use ($request) {
-            $grievanceDetail = GrievanceDetail::create($request->validated() + [
+            $grievanceDetail = GrievanceDetail::create(Arr::except($request->validated(), ['assigned_user_id']) + [
+                'publisher_id' => auth()->id(),
+                'assigned_user_id' => $request->input('assigned_user_id') ?? auth()->id(),
                 'token' => time(),
             ]);
 
@@ -56,6 +63,12 @@ class GrievanceDetailController extends Controller
                     'extension' => $file->getClientOriginalExtension(),
                     'file' => $file->store('grievance/files', 'public'),
                 ]);
+            }
+
+            if ($grievanceDetail->grievanceUser->email) {
+                Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
+                    "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
+                ));
             }
         });
 
@@ -74,6 +87,8 @@ class GrievanceDetailController extends Controller
             'grievanceDetails.grievanceUser',
             'grievanceType',
             'grievanceOffice',
+            'publisher',
+            'assignedUser',
             'files'
         );
         return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail'));

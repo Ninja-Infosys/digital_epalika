@@ -12,9 +12,11 @@ return new class () extends Migration {
             $table->foreignId('grievance_detail_id')->nullable()->constrained();
             $table->string('token')->unique()->nullable()->comment('टोकन');
             $table->foreignId('grievance_user_id')->nullable()->constrained();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('grievance_type_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('grievance_office_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('publisher_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('assigned_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('subject')->nullable()->comment('विषय');
             $table->longText('description')->nullable()->comment('विवरण');
             $table->string('complaint_severity')->nullable()->comment('गुनासो गम्भीरता');

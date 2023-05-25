@@ -2,11 +2,15 @@
 
 namespace Modules\GrievanceHandling\Http\Livewire;
 
+use App\Mail\GrievanceDetailMail;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
+use Modules\GrievanceHandling\Entities\GrievanceSetting;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
@@ -108,6 +112,8 @@ class GrievanceFormWizard extends Component
                 ]);
             }
 
+            $grievanceSetting = GrievanceSetting::first();
+
             $grievanceDetail = $grievanceUser->grievanceDetails()->create([
                 'token' => time(),
                 'grievance_type_id' => $this->form['grievance_type_id'],
@@ -116,7 +122,8 @@ class GrievanceFormWizard extends Component
                 'complaint_severity' => $this->form['complaint_severity'],
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
-                'grievance_medium' => GrievanceMediumEnum::SYSTEM
+                'grievance_medium' => GrievanceMediumEnum::SYSTEM,
+                'assigned_user_id' => $grievanceSetting->user_id ?? User::first()->id,
             ]);
             if (!empty($this->form['files'])) {
                 foreach ($this->form['files'] as $file) {
@@ -126,6 +133,12 @@ class GrievanceFormWizard extends Component
                         'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
                     ]);
                 }
+            }
+
+            if ($grievanceUser->email) {
+                Mail::to($grievanceUser->email)->send(new GrievanceDetailMail(
+                    "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
+                ));
             }
 
             return $grievanceDetail;

@@ -30,12 +30,20 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <h4 class="header-title"><b>बिषय : </b>{{ $grievanceDetail->subject }}</h4>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <h4 class="header-title"><b>शाखा</b>
                                 : {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="header-title"><b>गुनासो हेर्ने अधिकारी</b>
+                                : {{ $grievanceDetail->assignedUser->name ?? '' }}</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="header-title"><b>प्रकाशकको ​​नाम</b>
+                                : {{ $grievanceDetail->publisher->name ?? '' }}</h4>
                         </div>
                     </div>
                     <div class="row">

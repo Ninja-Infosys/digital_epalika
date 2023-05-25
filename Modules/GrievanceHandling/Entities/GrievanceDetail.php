@@ -32,6 +32,8 @@ class GrievanceDetail extends Model
         'user_id',
         'grievance_type_id',
         'grievance_office_id',
+        'publisher_id',
+        'assigned_user_id',
         'subject',
         'description',
         'complaint_severity',
@@ -91,6 +93,16 @@ class GrievanceDetail extends Model
     public function grievanceOffice(): BelongsTo
     {
         return $this->belongsTo(GrievanceOffice::class);
+    }
+
+    public function publisher()
+    {
+        return $this->belongsTo(User::class, 'publisher_id');
+    }
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
     }
 
     public function files(): MorphMany
