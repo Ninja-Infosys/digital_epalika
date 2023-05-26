@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('grievance_settings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->integer('escalation_days');
             $table->timestamps();
             $table->softDeletes();
         });

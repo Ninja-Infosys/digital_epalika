@@ -34,6 +34,7 @@ class GrievanceDetail extends Model
         'grievance_office_id',
         'publisher_id',
         'assigned_user_id',
+        'assigned_at',
         'subject',
         'description',
         'complaint_severity',

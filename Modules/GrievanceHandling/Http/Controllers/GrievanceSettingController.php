@@ -21,7 +21,8 @@ class GrievanceSettingController extends Controller
     public function update(Request $request, GrievanceSetting $grievanceSetting)
     {
         $data = $request->validate([
-            'user_id' => ['required', Rule::exists('users', 'id')->withoutTrashed()]
+            'user_id' => ['required', Rule::exists('users', 'id')->withoutTrashed()],
+            'escalation_days' => ['required', 'integer']
         ]);
         $grievanceSetting->update($data);
 
@@ -29,5 +30,4 @@ class GrievanceSettingController extends Controller
 
         return back();
     }
-
 }

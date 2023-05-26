@@ -20,7 +20,8 @@ class GrievanceSetting extends Model
    ];
 
    protected $fillable = [
-       'user_id'
+       'user_id',
+       'escalation_days'
    ];
 
     public function user(): BelongsTo

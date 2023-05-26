@@ -124,6 +124,7 @@ class GrievanceFormWizard extends Component
                 'is_open' => $this->form['is_open'],
                 'grievance_medium' => GrievanceMediumEnum::SYSTEM,
                 'assigned_user_id' => $grievanceSetting->user_id ?? User::first()->id,
+                'assigned_at' => now()
             ]);
             if (!empty($this->form['files'])) {
                 foreach ($this->form['files'] as $file) {

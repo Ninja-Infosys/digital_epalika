@@ -54,6 +54,7 @@ class GrievanceDetailController extends Controller
             $grievanceDetail = GrievanceDetail::create(Arr::except($request->validated(), ['assigned_user_id']) + [
                 'publisher_id' => auth()->id(),
                 'assigned_user_id' => $request->input('assigned_user_id') ?? auth()->id(),
+                'assigned_at' => now(),
                 'token' => time(),
             ]);
 

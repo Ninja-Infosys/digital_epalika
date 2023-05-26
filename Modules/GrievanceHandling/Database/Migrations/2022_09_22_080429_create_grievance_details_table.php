@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->foreignId('grievance_office_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('publisher_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('assigned_user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamp('assigned_at');
             $table->string('subject')->nullable()->comment('विषय');
             $table->longText('description')->nullable()->comment('विवरण');
             $table->string('complaint_severity')->nullable()->comment('गुनासो गम्भीरता');
