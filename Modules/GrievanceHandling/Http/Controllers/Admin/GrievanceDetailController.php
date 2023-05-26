@@ -70,6 +70,11 @@ class GrievanceDetailController extends Controller
                 'user_id' => $grievanceDetail->assigned_user_id
             ]);
 
+            //mail to assigned user
+            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
+                "$grievanceDetail->token टोकन नम्बरको गुनासो तपाईंको शाखामा पेश गरिएको छ । कृपया निश्चित अवधिमा सम्बोधन गरिदिनुहोला ।"
+            ));
+
             if ($grievanceDetail->grievanceUser->email) {
                 Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
                     "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
