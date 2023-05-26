@@ -110,11 +110,6 @@
                     <div class="row">
                         <div class="col-md-5">
                             <div class="row">
-                                <div class="col-md-6">
-
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="d-flex justify-content between">
                                     <div class="col-md-6">
                                         <h4 class="text-decoration-underline mt-4">
@@ -133,6 +128,35 @@
                                         </h4>
                                     </div>
                                 </div>
+                            </div>
+                            <h4 class="text-decoration-underline mt-3 fw-bold">
+                                गुनासो तोकिएको इतिहास
+                            </h4>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>क्र.सं.</th>
+                                            <th>मिति</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($grievanceDetail->grievanceAssignHistories as $history)
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <x-ad-to-bs
+                                                id="assigned_at{{ $loop->iteration }}"
+                                                :adDate="$history->assigned_at->toDateString()"
+                                                />
+                                                {{ $history->assigned_at->format('g:i A') }}
+                                            </td>
+                                            <td>{{ empty($history->grievanceDetail->grievance_detail_id) ? ($grievanceDetail->grievanceUser->name??'') : ($history->fromUser->name??'') }}</td>
+                                            <td>{{ $history->user->name??'' }}</td>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="col-md-7 mt-3">

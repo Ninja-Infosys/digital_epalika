@@ -70,6 +70,11 @@ class GrievanceDetail extends Model
         return $query->where('is_public', 0);
     }
 
+    public function grievanceDetail(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__);
+    }
+
     public function grievanceDetails(): HasMany
     {
         return $this->hasMany(__CLASS__);
@@ -108,5 +113,10 @@ class GrievanceDetail extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function grievanceAssignHistories(): HasMany
+    {
+        return $this->hasMany(GrievanceAssignHistory::class);
     }
 }

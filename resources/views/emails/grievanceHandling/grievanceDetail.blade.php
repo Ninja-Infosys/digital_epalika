@@ -1,6 +1,6 @@
 <x-mail::message>
-{{ $message }}
+    {{ $message }}
 
-Thanks,<br>
-{{ config('app.name') }}
+    धन्यबाद,
+    {{ config('app.name') }}
 </x-mail::message>

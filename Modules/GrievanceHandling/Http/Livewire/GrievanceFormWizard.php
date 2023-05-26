@@ -135,11 +135,20 @@ class GrievanceFormWizard extends Component
                 }
             }
 
+            $grievanceDetail->grievanceAssignHistories()->create([
+                'user_id' => $grievanceDetail->assigned_user_id
+            ]);
+
             if ($grievanceUser->email) {
+                //mail to grievance user
                 Mail::to($grievanceUser->email)->send(new GrievanceDetailMail(
                     "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
                 ));
             }
+            //mail to assigned user
+            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
+                "$grievanceDetail->token टोकन नम्बरको गुनासो तपाईंको शाखामा पेश गरिएको छ । कृपया निश्चित अवधिमा सम्बोधन गरिदिनुहोला ।"
+            ));
 
             return $grievanceDetail;
         });

@@ -65,6 +65,11 @@ class GrievanceDetailController extends Controller
                 ]);
             }
 
+            $grievanceDetail->grievanceAssignHistories()->create([
+                'from_user_id' => auth()->id(),
+                'user_id' => $grievanceDetail->assigned_user_id
+            ]);
+
             if ($grievanceDetail->grievanceUser->email) {
                 Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
                     "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
@@ -89,7 +94,10 @@ class GrievanceDetailController extends Controller
             'grievanceOffice',
             'publisher',
             'assignedUser',
-            'files'
+            'files',
+            'grievanceAssignHistories.grievanceDetail',
+            'grievanceAssignHistories.fromUser',
+            'grievanceAssignHistories.user'
         );
         return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail'));
     }
@@ -131,6 +139,7 @@ class GrievanceDetailController extends Controller
 
         DB::transaction(function () use ($request, $validated, $grievanceDetail) {
             $data = $grievanceDetail->grievanceDetails()->create($validated + [
+                'grievance_user_id' => $grievanceDetail->grievance_user_id,
                 'user_id' => auth()->id(),
             ]);
 
