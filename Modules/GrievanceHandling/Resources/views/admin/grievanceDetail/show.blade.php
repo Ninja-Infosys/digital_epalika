@@ -54,7 +54,7 @@
                                 @csrf
                                 <div class="col-md-4">
                                     <label for="inputState" class="form-label text-black"><b>स्थिति</b></label>
-                                    <select name="status" class="form-control mt-1" id="grievanceDetailStatus">
+                                    <select name="status" class="form-select form-select-sm mt-1" id="grievanceDetailStatus">
                                         @foreach (\Modules\GrievanceHandling\Enums\GrievanceStatus::cases() as $status)
                                             <option value="{{ $status->value }}"
                                                 {{ $status == $grievanceDetail->status ? 'selected' : '' }}>
@@ -64,7 +64,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12 mt-2">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-sm btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
