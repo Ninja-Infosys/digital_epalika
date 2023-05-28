@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceSetting;
+use Modules\GrievanceHandling\Enums\GrievanceStatus;
 
 class GrievanceEscalationCommand extends Command
 {
@@ -36,22 +37,23 @@ class GrievanceEscalationCommand extends Command
             ->whereHas('assignedUser', function ($query) {
                 $query->whereNotNull('user_id');
             })
+            ->where('status', GrievanceStatus::UNSEEN)
             ->whereNull('grievance_detail_id')
             ->whereRaw("DATE(assigned_at) = CURDATE() - INTERVAL $grievanceSetting->escalation_days DAY")
             ->get();
 
         foreach ($grievanceDetails as $grievanceDetail) {
+            $grievanceAssign=$grievanceDetail->grievanceAssignHistories()->create([
+                'from_user_id' => $grievanceDetail->assigned_user_id,
+                'user_id' => $grievanceDetail->assignedUser->user_id
+            ]);
+
             $grievanceDetail->update([
                 'assigned_user_id' => $grievanceDetail->assignedUser->user_id,
                 'assigned_at' => now()
             ]);
-
-            $grievanceDetail->grievanceAssignHistories()->create([
-                'from_user_id' => $grievanceDetail->assigned_user_id,
-                'user_id' => $grievanceDetail->assignedUser->user_id
-            ]);
             //mail to assigned user
-            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
+            Mail::to($grievanceAssign->user->email)->send(new GrievanceDetailMail(
                 "$grievanceDetail->token टोकन नम्बरको गुनासो तपाईंको शाखामा पेश गरिएको छ । कृपया निश्चित अवधिमा सम्बोधन गरिदिनुहोला ।"
             ));
         }

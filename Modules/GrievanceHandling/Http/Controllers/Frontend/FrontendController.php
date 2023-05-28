@@ -3,11 +3,13 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\GrievanceDetailMail;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Enums\GrievanceStatus;
@@ -100,6 +102,10 @@ class FrontendController extends Controller
                     ]);
                 }
             }
+            //mail to assigned user
+            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
+                $data->grievanceUser->name . " has replied $data->description to $grievanceDetail->token grievance."
+            ));
         });
 
         toast('गुनासो सफलतापुर्बक पेश गरियो', 'success');

@@ -21,7 +21,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -76,7 +75,7 @@
                                         'mx-2',
                                         'px-3',
                                         'text-white',
-                                        'btn btn-lg ',
+                                        'btn btn-sm',
                                         'bg-success' => $grievanceDetail->is_approved == 1,
                                         'bg-danger' => $grievanceDetail->is_approved == 0,
                                     ])><i @class([
@@ -94,7 +93,7 @@
                                         'mx-2',
                                         'px-3',
                                         'text-white',
-                                        'btn btn-lg',
+                                        'btn btn-sm',
                                         'bg-success' => $grievanceDetail->is_public == 1,
                                         'bg-danger' => $grievanceDetail->is_public == 0,
                                     ])><i @class([
@@ -129,6 +128,28 @@
                                     </div>
                                 </div>
                             </div>
+                            @if ($grievanceDetail->status==Modules\GrievanceHandling\Enums\GrievanceStatus::UNSEEN)
+                            <h4 class="text-decoration-underline mt-3 mb-0 fw-bold">
+                                गुनासो स्थानान्तरण गर्नुहोस
+                            </h4>
+                            <form
+                                action="{{ route('admin.grievanceHandling.grievanceDetail.grievanceTransfer', $grievanceDetail) }}"
+                                method="post">
+                                @csrf
+                                <label for="transfer_user_id" class="form-label">Transfer to user</label>
+                                <select name="transfer_user_id" id="transfer_user_id" class="form-select">
+                                    <option value="">छान्नुहोस्</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary mt-2">
+                                    पेश गर्नुहोस
+                                </button>
+                            </form>
+                            @endif
                             <h4 class="text-decoration-underline mt-3 fw-bold">
                                 गुनासो तोकिएको इतिहास
                             </h4>
@@ -144,16 +165,16 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($grievanceDetail->grievanceAssignHistories as $history)
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <x-ad-to-bs
-                                                id="assigned_at{{ $loop->iteration }}"
-                                                :adDate="$history->assigned_at->toDateString()"
-                                                />
-                                                {{ $history->assigned_at->format('g:i A') }}
-                                            </td>
-                                            <td>{{ empty($history->grievanceDetail->grievance_detail_id) ? ($grievanceDetail->grievanceUser->name??'') : ($history->fromUser->name??'') }}</td>
-                                            <td>{{ $history->user->name??'' }}</td>
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <x-ad-to-bs id="assigned_at{{ $loop->iteration }}" :adDate="$history->assigned_at->toDateString()" />
+                                                    {{ $history->assigned_at->format('g:i A') }}
+                                                </td>
+                                                <td>{{ $history->fromUser->name??'' }}
+                                                </td>
+                                                <td>{{ $history->user->name ?? '' }}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -171,10 +192,12 @@
                                                         <div class="d-flex justify-content-end my-3 border p-2 rounded">
                                                             <div class="d-flex align-items-center gap-2">
                                                                 <img class="order-2"
-                                                                    src="{{ $grievanceDetail->grievanceUser->avatar ?? '' }}" alt="avatar 1"
-                                                                    height="50">
+                                                                    src="{{ $grievanceDetail->grievanceUser->avatar ?? '' }}"
+                                                                    alt="avatar 1" height="50">
                                                                 <div class="order-1">
-                                                                    <p class="small">{{ $grievanceDetail->grievanceUser->name ?? '' }}</p>
+                                                                    <p class="small">
+                                                                        {{ $grievanceDetail->grievanceUser->name ?? '' }}
+                                                                    </p>
                                                                     <p class="small text-muted">
                                                                         {{ $grievanceDetail->created_at?->calendar() }}</p>
                                                                 </div>
@@ -184,7 +207,8 @@
                                                             <h6 class="p-2 me-3 mb-1 rounded bg-light">
                                                                 {{ $grievanceDetail->description }}</h6>
                                                             @foreach ($grievanceDetail->files as $file)
-                                                                <a class="me-3 btn btn-primary btn-sm" href="{{ $file->file_url }}"
+                                                                <a class="me-3 btn btn-primary btn-sm"
+                                                                    href="{{ $file->file_url }}"
                                                                     download="{{ $file->file_url }}">
                                                                     {{ $file->file_name }} <i class="fa fa-download"></i>
                                                                 </a>

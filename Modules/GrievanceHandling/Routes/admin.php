@@ -13,7 +13,7 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('grievanceType', GrievanceTypeController::class);
     Route::resource('grievanceOffice', GrievanceOfficeController::class);
-    Route::resource('grievanceSetting', GrievanceSettingController::class)->only(['index','update']);
+    Route::resource('grievanceSetting', GrievanceSettingController::class)->only(['index', 'update']);
 });
 
 Route::resource('grievanceDetail', GrievanceDetailController::class);
@@ -21,4 +21,5 @@ Route::get('grievanceDetail/{grievanceDetail}/approve', [GrievanceDetailControll
 Route::get('grievanceDetail/{grievanceDetail}/public', [GrievanceDetailController::class, 'showToPublic'])->name('grievance-detail.show-to-public');
 Route::post('grievanceDetail/{grievanceDetail}/replayGrievance', [GrievanceDetailController::class, 'replayGrievance'])->name('grievanceDetail.replyGrievance');
 Route::put('grievanceDetail/{grievanceDetail}/UpdateStatus', [GrievanceDetailController::class, 'updateStatus'])->name('grievanceDetail.updateStatus');
+Route::Post('grievanceDetail/{grievanceDetail}/grievanceTransfer', [GrievanceDetailController::class, 'grievanceTransfer'])->name('grievanceDetail.grievanceTransfer');
 Route::resource('grievanceUser', GrievanceUserController::class);

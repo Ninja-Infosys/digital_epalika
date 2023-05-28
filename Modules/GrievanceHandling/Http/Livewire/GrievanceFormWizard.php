@@ -148,7 +148,7 @@ class GrievanceFormWizard extends Component
             }
             //mail to assigned user
             Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
-                "$grievanceDetail->token टोकन नम्बरको गुनासो तपाईंको शाखामा पेश गरिएको छ । कृपया निश्चित अवधिमा सम्बोधन गरिदिनुहोला ।"
+                $grievanceDetail->grievanceUser->name . " has posted to " . ($grievanceDetail->grievanceOffice->title ?? '') . "with following grievance detail."
             ));
 
             return $grievanceDetail;

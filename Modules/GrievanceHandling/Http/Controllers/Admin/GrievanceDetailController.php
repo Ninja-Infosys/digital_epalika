@@ -12,6 +12,7 @@ use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
@@ -105,7 +106,9 @@ class GrievanceDetailController extends Controller
             'grievanceAssignHistories.fromUser',
             'grievanceAssignHistories.user'
         );
-        return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail'));
+        $users = User::all();
+
+        return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail', 'users'));
     }
 
     public function edit($id)
@@ -158,6 +161,11 @@ class GrievanceDetailController extends Controller
                     ]);
                 }
             }
+
+            //mail to grievance user
+            Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
+                $data->user->name. " has replied $data->description to your posted grievance."
+            ));
         });
 
         toast('सफलतापूर्वक थपियो', 'success');
@@ -178,6 +186,42 @@ class GrievanceDetailController extends Controller
         $grievanceDetail->update(['is_approved' => !$grievanceDetail->is_approved]);
         toast('सफलतापूर्वक दर्ता गरियो', 'success');
 
+        return back();
+    }
+
+    public function grievanceTransfer(Request $request, GrievanceDetail $grievanceDetail)
+    {
+        $request->validate([
+            'transfer_user_id' => ['required', Rule::exists('users', 'id')->withoutTrashed()]
+        ]);
+
+        DB::transaction(function () use ($grievanceDetail, $request) {
+            $grievanceAssign = $grievanceDetail->grievanceAssignHistories()->create([
+                'from_user_id' => $grievanceDetail->assigned_user_id,
+                'user_id' => $request->input('transfer_user_id')
+            ]);
+            $grievanceDetail->update([
+                'assigned_user_id' => $request->input('transfer_user_id'),
+                'assigned_at' => now()
+            ]);
+
+            //mail to assigned user
+            Mail::to($grievanceAssign->user->email)->send(new GrievanceDetailMail(
+                "$grievanceDetail->token grievance has been assigned to you due to inactivity from " . $grievanceAssign->fromUser->name
+            ));
+
+            //mail to (from assigned user)
+            Mail::to($grievanceAssign->fromUser->email)->send(new GrievanceDetailMail(
+                "Above grievance has been transferred from you to " . $grievanceAssign->user->email
+            ));
+
+            //mail to grievance user
+            Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
+                "Your grievance is assigned to " . $grievanceAssign->user->name . " for further inspection, Thank you."
+            ));
+        });
+
+        toast('Grievance Transferred Successfully', 'success');
         return back();
     }
 }
