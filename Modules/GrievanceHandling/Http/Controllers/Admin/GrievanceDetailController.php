@@ -164,7 +164,7 @@ class GrievanceDetailController extends Controller
 
             //mail to grievance user
             Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
-                $data->user->name. " has replied $data->description to your posted grievance."
+                $data->user->name . " has replied $data->description to your posted grievance."
             ));
         });
 
@@ -207,7 +207,7 @@ class GrievanceDetailController extends Controller
 
             //mail to assigned user
             Mail::to($grievanceAssign->user->email)->send(new GrievanceDetailMail(
-                "$grievanceDetail->token grievance has been assigned to you due to inactivity from " . $grievanceAssign->fromUser->name
+                "$grievanceDetail->token grievance has been assigned to you due to inactivity from " . ($grievanceAssign->fromUser->name ?? '')
             ));
 
             //mail to (from assigned user)
