@@ -43,7 +43,7 @@ class GrievanceEscalationCommand extends Command
             ->get();
 
         foreach ($grievanceDetails as $grievanceDetail) {
-            $grievanceAssign=$grievanceDetail->grievanceAssignHistories()->create([
+            $grievanceAssign = $grievanceDetail->grievanceAssignHistories()->create([
                 'from_user_id' => $grievanceDetail->assigned_user_id,
                 'user_id' => $grievanceDetail->assignedUser->user_id
             ]);
