@@ -62,7 +62,7 @@ class DispatchController extends Controller
     {
         $this->checkAuthorization('dispatch_access');
 
-        $dispatch->load('fiscalYear', 'files');
+        $dispatch->load('fiscalYear','dispatchDetail.files');
 
         return view('circular::admin.dispatch.show', compact('dispatch'));
     }

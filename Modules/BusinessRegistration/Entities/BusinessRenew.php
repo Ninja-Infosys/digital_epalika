@@ -31,6 +31,9 @@ class BusinessRenew extends Model
         'payment_receipt',
         'payment_receipt_date',
         'payment_receipt_date_en',
+        'reg_no',
+        'registration_no'
+
     ];
 
     public function fiscalYear(): BelongsTo
