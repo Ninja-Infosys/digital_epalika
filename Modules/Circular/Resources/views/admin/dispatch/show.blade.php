@@ -112,7 +112,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                @forelse ($dispatch->files as $document)
+                @forelse ($dispatch->dispatchDetail?->files as $document)
                     <div class="col-xl-4 col-lg-6">
                         <div class="card shadow-none border">
                             <div class="p-2">

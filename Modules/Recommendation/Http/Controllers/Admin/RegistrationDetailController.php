@@ -156,14 +156,12 @@ class RegistrationDetailController extends Controller
 
     protected function getRecommendationTemplateData()
     {
-        $nepalidate = $this->get_today_nepali_date();
-        $replaced = str_replace(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], ['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], $nepalidate);
         $recommendationSetting = RecommendationSetting::with('wardChairman', 'wardSecretary')->where('ward_no', auth()->user()->ward_no)?->first();
         return [
             officeSetting()->name,
             letterHead(),
             letterHeadEn(),
-            $replaced,
+            get_nepali_number($this->get_today_nepali_date()),
             \officeSetting()->province->province ?? '',
             \officeSetting()->district->district ?? '',
             \officeSetting()->localBody->local_body ?? '',

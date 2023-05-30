@@ -43,10 +43,10 @@
                             <div class="d-flex justify-content-between mt-3">
                                 <div>
                                     <p><strong>करदाता नं :</strong> {{get_nepali_number($businessDetail->taxpayer_number)}}</p>
-                                    <p><strong>प्रमाणपत्र नं :</strong> {{get_nepali_number($businessDetail-> registration_no)}}</p>
+                                    <p><strong>प्रमाणपत्र नं :</strong> {{get_nepali_number($businessRenew-> registration_no)}}</p>
                                 </div>
                                 <div class="certificate-title">
-                                    <h3>व्यवसाय दर्ता प्रमाण-पत्र</h3>
+                                    <h3>व्यवसाय नविकरण प्रमाण-पत्र</h3>
                                 </div>
                                 <div>
                                     <p><strong>दर्ता मिति :</strong> {{get_nepali_number($businessDetail->registration_date_ne)}}</p>
@@ -61,7 +61,7 @@
                                         class="dashed-bottom mx-1">{{get_nepali_number($businessDetail->partners->first()?->ward_no ??'')}}</span>
                                     बस्ने श्री <span
                                         class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->name ??''}}</span>
-                                    लाई निम्न विवरण अनुसारको व्यवसाय दर्ता गरी यो प्रमाण-पत्र जारी गरिएको छ ।
+                                    लाई निम्न विवरण अनुसारको व्यवसाय नविकरण गरी यो प्रमाण-पत्र जारी गरिएको छ ।
                                 </p>
                             </div>
                             <div class="mt-2">
@@ -101,5 +101,5 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 @endsection

@@ -203,6 +203,7 @@ if (!function_exists('renderListData')) {
     }
 }
 
+
 if (!function_exists('getFileType')) {
     function getFileType($base64String): string
     {
@@ -389,5 +390,12 @@ if (!function_exists('get_file_type')) {
             'zip', 'rar', '7z', 'tar' => 'archive',
             default => 'unknown',
         };
+    }
+}
+
+if (!function_exists('get_nepali_number')) {
+    function get_nepali_number($data): string|array
+    {
+        return str_replace(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], ['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], $data);
     }
 }

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('payment_receipt')->comment('बिल नं.');
             $table->string('payment_receipt_date')->comment('रसिद मिति वि.सं.');
             $table->string('payment_receipt_date_en')->comment('रसिद मिति ई.सं.');
+            $table->integer('reg_no')->default(0);
+            $table->string('registration_no');
             $table->timestamps();
             $table->softDeletes();
         });

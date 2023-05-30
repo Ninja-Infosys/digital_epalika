@@ -46,7 +46,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="object_transaction_id" class="form-label">कारोबार गर्ने वस्तुको
                                         वर्ग</label>
-                                    <select name="object_transaction_id" id="object_transaction_id" class="form-control @error('object_transaction_id') is-invalid @enderror" required>
+                                    <select name="object_transaction_id" id="object_transaction_id" class="form-control @error('object_transaction_id') is-invalid @enderror" >
                                         <option value="">कारोबार गर्ने वस्तुको वर्ग छान्नुहोस्</option>
                                         @foreach($parentObjectTransactions as $parentObjectTransaction)
                                             <option
