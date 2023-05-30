@@ -4,6 +4,11 @@ namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\GrievanceDetailMail;
+use App\Mail\GrievanceHandling\GrievanceAssignmentFromUserMail;
+use App\Mail\GrievanceHandling\GrievanceAssignmentToGrievanceUserMail;
+use App\Mail\GrievanceHandling\GrievanceAssignmentToUserMail;
+use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
+use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -73,14 +78,11 @@ class GrievanceDetailController extends Controller
             ]);
 
             //mail to assigned user
-            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
-                "$grievanceDetail->token टोकन नम्बरको गुनासो तपाईंको शाखामा पेश गरिएको छ । कृपया निश्चित अवधिमा सम्बोधन गरिदिनुहोला ।"
-            ));
+            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
 
+            //mail to grievance user
             if ($grievanceDetail->grievanceUser->email) {
-                Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
-                    "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
-                ));
+                Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
             }
         });
 
@@ -163,12 +165,14 @@ class GrievanceDetailController extends Controller
             }
 
             //mail to grievance user
-            Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
-                $data->user->name . " has replied $data->description to your posted grievance."
-            ));
+            if ($grievanceDetail->grievanceUser->email) {
+                Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
+                    $data->user->name . " has replied $data->description to your posted grievance."
+                ));
+            }
         });
 
-        toast('सफलतापूर्वक थपियो', 'success');
+        toast('गुनासो को प्रतिकृया सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
@@ -206,19 +210,15 @@ class GrievanceDetailController extends Controller
             ]);
 
             //mail to assigned user
-            Mail::to($grievanceAssign->user->email)->send(new GrievanceDetailMail(
-                "$grievanceDetail->token grievance has been assigned to you due to inactivity from " . ($grievanceAssign->fromUser->name ?? '')
-            ));
+            Mail::to($grievanceAssign->user->email)->send(new GrievanceAssignmentToUserMail($grievanceDetail, $grievanceAssign));
 
             //mail to (from assigned user)
-            Mail::to($grievanceAssign->fromUser->email)->send(new GrievanceDetailMail(
-                "Above grievance has been transferred from you to " . $grievanceAssign->user->email
-            ));
+            Mail::to($grievanceAssign->fromUser->email)->send(new GrievanceAssignmentFromUserMail($grievanceDetail, $grievanceAssign));
 
             //mail to grievance user
-            Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceDetailMail(
-                "Your grievance is assigned to " . $grievanceAssign->user->name . " for further inspection, Thank you."
-            ));
+            if ($grievanceDetail->grievanceUser->email) {
+                Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceAssignmentToGrievanceUserMail($grievanceDetail, $grievanceAssign));
+            }
         });
 
         toast('Grievance Transferred Successfully', 'success');

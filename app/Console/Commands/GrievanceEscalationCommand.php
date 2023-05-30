@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Mail\GrievanceDetailMail;
+use App\Mail\GrievanceHandling\GrievanceAssignmentFromUserMail;
+use App\Mail\GrievanceHandling\GrievanceAssignmentToGrievanceUserMail;
+use App\Mail\GrievanceHandling\GrievanceAssignmentToUserMail;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
@@ -53,9 +56,15 @@ class GrievanceEscalationCommand extends Command
                 'assigned_at' => now()
             ]);
             //mail to assigned user
-            Mail::to($grievanceAssign->user->email)->send(new GrievanceDetailMail(
-                "$grievanceDetail->token टोकन नम्बरको गुनासो तपाईंको शाखामा पेश गरिएको छ । कृपया निश्चित अवधिमा सम्बोधन गरिदिनुहोला ।"
-            ));
+            Mail::to($grievanceAssign->user->email)->send(new GrievanceAssignmentToUserMail($grievanceDetail, $grievanceAssign));
+
+            //mail to (from assigned user)
+            Mail::to($grievanceAssign->fromUser->email)->send(new GrievanceAssignmentFromUserMail($grievanceDetail, $grievanceAssign));
+
+            //mail to grievance user
+            if ($grievanceDetail->grievanceUser->email) {
+                Mail::to($grievanceDetail->grievanceUser->email)->send(new GrievanceAssignmentToGrievanceUserMail($grievanceDetail, $grievanceAssign));
+            }
         }
 
         $this->info('Grievance Escalation');

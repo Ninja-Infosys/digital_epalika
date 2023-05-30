@@ -3,6 +3,8 @@
 namespace Modules\GrievanceHandling\Http\Livewire;
 
 use App\Mail\GrievanceDetailMail;
+use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
+use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -140,16 +142,13 @@ class GrievanceFormWizard extends Component
                 'user_id' => $grievanceDetail->assigned_user_id
             ]);
 
-            if ($grievanceUser->email) {
-                //mail to grievance user
-                Mail::to($grievanceUser->email)->send(new GrievanceDetailMail(
-                    "तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला"
-                ));
-            }
             //mail to assigned user
-            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceDetailMail(
-                $grievanceDetail->grievanceUser->name . " has posted to " . ($grievanceDetail->grievanceOffice->title ?? '') . "with following grievance detail."
-            ));
+            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
+
+            //mail to grievance user
+            if ($grievanceDetail->grievanceUser->email) {
+                Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
+            }
 
             return $grievanceDetail;
         });
