@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('clear:excel')
             ->daily();
 
-        $schedule->command('grievance:escalate')->everyMinute();
+        $schedule->command('grievance:escalate')->twiceDaily();
     }
 
     protected function commands(): void
