@@ -10,13 +10,10 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('executiveCommitteeMessage:send')
-            ->dailyAt('05:00');
-        $schedule->command('clear:excel')
-            ->daily();
+            ->dailyAt('05:00')->timezone('Asia/Kathmandu');
 
-        $schedule->command('grievance:escalate')->twiceDaily();
+        $schedule->command('grievance:escalate')->twiceDaily()->timezone('Asia/Kathmandu');
     }
 
     protected function commands(): void
