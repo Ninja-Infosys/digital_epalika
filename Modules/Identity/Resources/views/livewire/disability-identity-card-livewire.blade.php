@@ -278,6 +278,36 @@
                         </div>
                     </fieldset>
                     <fieldset class="mt-3">
+                        <legend>शरीरको अंग, संरचना, प्रणाली आएको क्षतिको विवरण</legend>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="form.details_of_damage" class="form-label">शरीरको अंग, संरचना, प्रणाली आएको क्षतिको विवरण</label>
+                                <textarea  class="form-select @error('form.details_of_damage') is-invalid @enderror"
+                                           wire:model="form.details_of_damage"
+                                           id="form.details_of_damage"
+                                ></textarea>
+                                @error('form.details_of_damage')
+                                <div class="invalid-feedback ">{{$message}} </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mt-3">
+                        <legend>क्षति भएपछि दैनिक क्रियाकलापमा आएको अवरोध वा सिमितताको विवरण</legend>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="form.obstacle_description" class="form-label">क्षति भएपछि दैनिक क्रियाकलापमा आएको अवरोध वा सिमितताको विवरण</label>
+                                <textarea  class="form-select @error('form.obstacle_description') is-invalid @enderror"
+                                           wire:model="form.obstacle_description"
+                                           id="form.obstacle_description"
+                                ></textarea>
+                                @error('form.obstacle_description')
+                                <div class="invalid-feedback ">{{$message}} </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mt-3">
                         <legend>अपाङ्गताको कारण</legend>
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -1092,7 +1122,7 @@
                                 <select
                                     class="form-select @error('form.employee_signature_id') is-invalid @enderror"
                                     wire:model="form.employee_signature_id"
-                                    id="form.employee_signature_id" required>
+                                    id="form.employee_signature_id" >
                                     <option value="">---हस्ताक्षर छान्नुहोस् ---</option>
                                     @foreach($employee_signatures as $employee_signature)
                                         <option

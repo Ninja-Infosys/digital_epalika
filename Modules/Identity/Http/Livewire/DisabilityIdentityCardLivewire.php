@@ -118,7 +118,9 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no_place' => null,
         'govern_disability_type_id' => null,
         'employee_signature_id' => null,
-        'card_no' => null
+        'card_no' => null,
+        'details_of_damage' => null,
+        'obstacle_description' => null,
     ];
 
     public function mount($disabilityIdentityCard = null): void
@@ -292,6 +294,8 @@ class DisabilityIdentityCardLivewire extends Component
         'form.blood_group' => ['required'],
         'form.disability_reason_id' => ['required', 'exists:disability_reasons,id'],
         'form.govern_disability_type_id' => ['required', 'exists:governmental_disability_types,id'],
+        'form.details_of_damage' => ['nullable'],
+        'form.obstacle_description' => ['nullable'],
     ];
     protected array $fourthStepValidations = [
         'form.identity_type' => ['required'],
@@ -356,7 +360,7 @@ class DisabilityIdentityCardLivewire extends Component
         'form.provide_detail_citizenship_no' => ['nullable'],
         'form.provide_detail_citizenship_no_date' => ['nullable'],
         'form.provide_detail_citizenship_no_place' => ['nullable', 'string', 'max:255'],
-        'form.employee_signature_id' => ['required', 'exists:employee_signatures,id']
+        'form.employee_signature_id' => ['nullable', 'exists:employee_signatures,id']
     ];
 
     public function messages(): array
