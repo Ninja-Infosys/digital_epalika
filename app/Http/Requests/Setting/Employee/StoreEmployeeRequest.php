@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Setting\Employee;
 
+use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
-class StoreEmployeeRequest extends FormRequest
+class
+StoreEmployeeRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -30,6 +33,17 @@ class StoreEmployeeRequest extends FormRequest
             'employee_id' => ['nullable', Rule::exists('employees', 'id')->withoutTrashed()],
             'show_to_mobile_app' => ['required', 'boolean'],
             'show_to_index' => ['required', 'boolean'],
+            'gender' => ['required', new Enum(Gender::class)],
+            'dob' => ['required'],
+            'dob_ad' => ['required','date'],
+            'address' => ['required','string','max:255'],
+            'ethnicity_id' => ['required_if:is_employee,1'],
+            'pan_no' => ['required'],
+            'pis_no' => ['required_if:is_employee,0'],
+            'epf_no' => ['required_if:is_employee,0'],
+            'cif_no' => ['required_if:is_employee,0'],
+            'insurance_card_no' => ['required_if:is_employee,0'],
+            'description' => ['nullable'],
         ];
     }
 

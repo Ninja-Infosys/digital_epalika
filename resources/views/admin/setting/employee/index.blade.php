@@ -68,6 +68,10 @@
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        <a data-bs-type="edit" href="{{route('admin.generalSetting.employee.show',$employee)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                         <form action="{{route('admin.generalSetting.employee.destroy',$employee)}}"
                                               method="post">
                                             @csrf

@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Setting\Employee\UpdateEmployeeRequest;
+use App\Models\Ethnicity;
 use App\Models\Settings\Branch;
 use App\Models\Settings\Employee;
+use App\Models\Settings\Experience;
+use App\Models\Settings\ExperienceFile;
+use App\Models\Settings\Qualification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 
@@ -31,8 +35,9 @@ class EmployeeController extends Controller
     {
         $this->checkAuthorization('employee_create');
         $branches = Branch::all();
+        $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        return view('admin.setting.e  mployee.create',compact('branches','allemployees'));
+        return view('admin.setting.employee.create',compact('ethnicities','branches','allemployees'));
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -48,14 +53,19 @@ class EmployeeController extends Controller
     public function show(Employee $employee)
     {
 
+        $qualifications = Qualification::all();
+        $experiences = Experience::all();
+        $experienceFiles = ExperienceFile::all();
+        return view('admin.setting.employee.show',compact('experienceFiles','employee','qualifications','experiences'));
     }
 
     public function edit(Employee $employee)
     {
         $this->checkAuthorization('employee_edit');
         $branches = Branch::all();
+        $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        return view('admin.setting.employee.edit', compact('employee','branches','allemployees'));
+        return view('admin.setting.employee.edit', compact('ethnicities','employee','branches','allemployees'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)

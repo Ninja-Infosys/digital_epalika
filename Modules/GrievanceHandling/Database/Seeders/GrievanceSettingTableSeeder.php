@@ -7,7 +7,7 @@ use Modules\GrievanceHandling\Entities\GrievanceSetting;
 
 class GrievanceSettingTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         GrievanceSetting::create([
             'user_id' => null,

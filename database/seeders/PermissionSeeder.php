@@ -75,6 +75,18 @@ class PermissionSeeder extends Seeder
             'employee_create',
             'employee_edit',
             'employee_delete',
+            'experience_access',
+            'experience_create',
+            'experience_edit',
+            'experience_delete',
+            'experienceFile_access',
+            'experienceFile_create',
+            'experienceFile_edit',
+            'experienceFile_delete',
+            'qualification_access',
+            'qualification_create',
+            'qualification_edit',
+            'qualification_delete',
         ];
 
         $this->storePermission($permissions);
