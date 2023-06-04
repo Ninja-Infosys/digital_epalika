@@ -44,7 +44,7 @@
                                 <strong>कर्मचारी विवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
@@ -59,7 +59,134 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
+                                    <label for="address" class="form-label">ठेगाना *</label>
+                                    <input
+                                        type="text"
+                                        name="address"
+                                        value="{{old('address',$employee->address)}}"
+                                        class="form-control @error('address') is-invalid @enderror"
+                                        id="address"
+                                        placeholder="ठेगाना"
+
+                                    />
+                                    @error('address')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="gender" class="form-label">लिङ्ग *</label>
+
+                                    <select class="form-control @error('gender') is-invalid @enderror"
+                                            name="gender" id="gender">
+                                        <option value="">लिङ्ग थप्नुहोस्</option>
+                                        @foreach(\App\Enums\Gender::cases() as $case)
+                                            <option value="{{$case->value}}" {{old('gender',$employee->gender->value)==$case->value ? 'selected':''}}>{{$case->label()}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('gender')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <x-date-input-component
+                                        nameNe="dob" labelNe="जन्म मिति*"
+                                        nameEn="dob_ad" labelEn="Birth Date"
+                                        :getTodayDate="false"
+                                        :editDateNe="$employee->dob"
+                                        :editDateEn="$employee->dob_ad"
+                                    />
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="pan_no" class="form-label">पेन नं *</label>
+                                    <input
+                                        type="text"
+                                        name="pan_no"
+                                        value="{{old('pan_no',$employee->pan_no)}}"
+                                        class="form-control @error('pan_no') is-invalid @enderror"
+                                        id="pan_no"
+                                        placeholder="पेन नं"
+
+                                    />
+                                    @error('pan_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="ethnicity_id" class="form-label">जातियता *</label>
+
+                                    <select class="form-control @error('ethnicity_id') is-invalid @enderror"
+                                            name="ethnicity_id" id="ethnicity_id">
+                                        <option value="">जातियता थप्नुहोस्</option>
+                                        @foreach($ethnicities as $ethnicity)
+                                            <option value="{{$ethnicity->id}}" {{old('ethnicity_id',$employee->ethnicity_id)==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('ethnicity_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="pis_no" class="form-label">Pis नम्बर</label>
+                                    <input
+                                        type="text"
+                                        name="pis_no"
+                                        value="{{old('pis_no',$employee->pis_no)}}"
+                                        class="form-control @error('pis_no') is-invalid @enderror"
+                                        id="pis_no"
+                                        placeholder="Pis नम्बर"
+
+                                    />
+                                    @error('pis_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="epf_no" class="form-label">Epf नम्बर</label>
+                                    <input
+                                        type="text"
+                                        name="epf_no"
+                                        value="{{old('epf_no',$employee->epf_no)}}"
+                                        class="form-control @error('epf_no') is-invalid @enderror"
+                                        id="epf_no"
+                                        placeholder="Epf नम्बर"
+
+                                    />
+                                    @error('epf_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="cif_no" class="form-label">Cif नम्बर</label>
+                                    <input
+                                        type="text"
+                                        name="cif_no"
+                                        value="{{old('cif_no',$employee->cif_no)}}"
+                                        class="form-control @error('cif_no') is-invalid @enderror"
+                                        id="cif_no"
+                                        placeholder="Cif नम्बर"
+
+                                    />
+                                    @error('cif_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="insurance_card_no" class="form-label">Insurance Card Number</label>
+                                    <input
+                                        type="text"
+                                        name="insurance_card_no"
+                                        value="{{old('insurance_card_no',$employee->insurance_card_no)}}"
+                                        class="form-control @error('insurance_card_no') is-invalid @enderror"
+                                        id="insurance_card_no"
+                                        placeholder="Insurance Card Number"
+
+                                    />
+                                    @error('insurance_card_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <label for="department" class="form-label">समूह </label>
                                     <input
                                         type="text"
@@ -244,7 +371,13 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-
+                                <div class="col-md-12 mb-2">
+                                    <label for="description" class="form-label">कैफियत </label>
+                                    <textarea class="form-control" id="description" name="description">{{old('description',$employee->description)}}</textarea>
+                                    @error('description')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">

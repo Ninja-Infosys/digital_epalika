@@ -20,6 +20,18 @@ return new class () extends Migration {
             $table->integer('position')->nullable()->comment('स्थान');
             $table->boolean('status')->default(true)->comment('स्थिति');
             $table->boolean('is_dept_head')->default(false);
+            //new columns
+            $table->string('gender');
+            $table->string('dob')->nullable();
+            $table->string('dob_ad')->nullable();
+            $table->string('address')->nullable();
+            $table->foreignId('ethnicity_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->string('pan_no')->nullable();
+            $table->string('pis_no')->nullable();
+            $table->string('epf_no')->nullable();
+            $table->string('cif_no')->nullable();
+            $table->string('insurance_card_no')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

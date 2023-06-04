@@ -100,6 +100,8 @@ class DisabilityIdentityCard extends Model
         'user_id',
         'is_citizenship',
         'fiscal_year_id',
+        'details_of_damage',
+        'obstacle_description',
     ];
 
     protected $casts = [

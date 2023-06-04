@@ -69,6 +69,8 @@ return new class extends Migration
             $table->string('provide_detail_citizenship_no')->nullable();
             $table->string('provide_detail_citizenship_no_date')->nullable();
             $table->string('provide_detail_citizenship_no_place')->nullable();
+            $table->text('details_of_damage')->nullable();
+            $table->text('obstacle_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

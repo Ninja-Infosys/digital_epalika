@@ -2,10 +2,14 @@
 
 namespace App\Models\Settings;
 
+use App\Enums\Gender;
+use App\Models\File;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -37,6 +41,21 @@ class Employee extends Model
         'employee_id',
         'branch_id',
         'is_dept_head',
+        'gender',
+        'dob',
+        'dob_ad',
+        'address',
+        'ethnicity_id',
+        'pan_no',
+        'pis_no',
+        'epf_no',
+        'cif_no',
+        'insurance_card_no',
+        'description',
+    ];
+
+    protected $casts = [
+        'gender' => Gender::class
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -101,5 +120,14 @@ class Employee extends Model
     public function branch(): BelongsTo
     {
         return $this->belongsTo(Branch::class);
+    }
+    public function qualifications(): HasMany
+    {
+        return $this->hasMany(Qualification::class);
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class,'model');
     }
 }
