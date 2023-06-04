@@ -12,6 +12,7 @@ use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use LaravelIdea\Helper\Modules\Recommendation\Entities\_IH_RecommendationCategory_C;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
@@ -343,7 +344,7 @@ if (!function_exists('get_revenue_categories')) {
     function get_revenue_categories(int $revenueCategoryId = null, bool $all = false)
     {
         $revenueCategories = Cache::rememberForever('revenueCategories', function () {
-            if (Schema::hasTable('recommendation_categories')) {
+            if (Schema::hasTable('revenue_categories')) {
                 return RevenueCategory::with('revenueCategories')->get();
             }
             return [];

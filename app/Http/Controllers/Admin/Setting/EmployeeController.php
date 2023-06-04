@@ -18,10 +18,10 @@ class EmployeeController extends Controller
 
         $employees = Employee::orderBy('position')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['designation','name',''], request('search'));
+                $q->whereLike(['designation', 'name'], request('search'));
             }
         })
-        ->latest()->paginate(10);
+            ->latest()->paginate(10);
 
 
         return view('admin.setting.employee.index', compact('employees'));
@@ -32,7 +32,7 @@ class EmployeeController extends Controller
         $this->checkAuthorization('employee_create');
         $branches = Branch::all();
         $allemployees = Employee::all();
-        return view('admin.setting.e  mployee.create',compact('branches','allemployees'));
+        return view('admin.setting.employee.create', compact('branches', 'allemployees'));
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -47,7 +47,6 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-
     }
 
     public function edit(Employee $employee)
@@ -55,7 +54,7 @@ class EmployeeController extends Controller
         $this->checkAuthorization('employee_edit');
         $branches = Branch::all();
         $allemployees = Employee::all();
-        return view('admin.setting.employee.edit', compact('employee','branches','allemployees'));
+        return view('admin.setting.employee.edit', compact('employee', 'branches', 'allemployees'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
@@ -88,14 +87,14 @@ class EmployeeController extends Controller
         return back();
     }
 
-        public function updateEmployeeStatus(Employee $employee): RedirectResponse
-        {
-            $this->checkAuthorization('employee_access');
-            $employee->update([
-                'status' => !$employee->status,
-            ]);
-            toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+    public function updateEmployeeStatus(Employee $employee): RedirectResponse
+    {
+        $this->checkAuthorization('employee_access');
+        $employee->update([
+            'status' => !$employee->status,
+        ]);
+        toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-            return back();
-        }
+        return back();
+    }
 }
