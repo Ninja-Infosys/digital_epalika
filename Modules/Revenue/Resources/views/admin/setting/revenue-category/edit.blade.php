@@ -43,10 +43,10 @@
                                     class="form-control @error('revenue_category_id') is-invalid @enderror"
                                     id="revenue_category_id" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($revenueCategories as $revenueCategory)
-                                        <option {{$revenueCategory->id==old('revenue_category_id', $revenueCategory->revenue_category_id) ? 'selected' : ''}}
-                                                value="{{$revenueCategory->id}}">
-                                            {{$revenueCategory->title}}
+                                    @foreach($revenueCategories as $revenueCat)
+                                        <option {{$revenueCat->id==old('revenue_category_id', $revenueCategory->revenue_category_id) ? 'selected' : ''}}
+                                                value="{{$revenueCat->id}}">
+                                            {{$revenueCat->title}}
                                         </option>
                                     @endforeach
                                 </select>
