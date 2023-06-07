@@ -106,7 +106,7 @@
                                             class="form-select @error('ward_no') is-invalid @enderror"
                                             id="ward_no">
                                         <option value="">वडा छान्नुहोस्</option>
-                                        @foreach($officeSetting->localBody->ward_no as $ward)
+                                        @foreach(officeSetting()->localBody->ward_no as $ward)
                                             <option value="{{$ward}}" {{$ward==old('ward_no') ? 'selected' : ''}}>
                                                 {{$ward}}
                                             </option>
