@@ -44,7 +44,8 @@ class ReportController extends Controller
 
         if (empty($request->input('columns'))) {
             $request->request->add(
-                ['columns' =>
+                [
+                    'columns' =>
                     [
                         'projects' => ['registration_no', 'project_name', 'project_start_date', 'project_completion_date', 'allocated_amount']
                     ]
@@ -173,19 +174,19 @@ class ReportController extends Controller
                     'last_year_expense' => '',
                     'last_year_weighted_progress' => '',
                     'this_year_target_size' => $project->total_cost_estimate_amount ?? 0.00,
-                    'this_year_progress' => round(($project->progress_spent_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
+                    'this_year_progress' => $project->total_cost_estimate_amount > 0 ? round(($project->progress_spent_amount / $project->total_cost_estimate_amount) * 100, 2) : 0.00,
                     'this_year_estimate_expense' => $project->progress_spent_amount ?? 0.00,
                     'yearly_quantity' => 1.00,
                     'yearly_load' => 100.00,
                     'yearly_budget' => $project->total_cost_estimate_amount ?? 0.00,
-                    'first_quantity' => round(($project->first_quarterly_amount / $project->total_cost_estimate_amount), 2) ?? 0.00,
-                    'first_load' => round(($project->first_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
+                    'first_quantity' => $project->total_cost_estimate_amount > 0 ? round(($project->first_quarterly_amount / $project->total_cost_estimate_amount), 2) : 0.00,
+                    'first_load' => $project->total_cost_estimate_amount > 0 ? round(($project->first_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) : 0.00,
                     'first_budget' => $project->first_quarterly_amount ?? 0.00,
-                    'second_quantity' => round(($project->second_quarterly_amount / $project->total_cost_estimate_amount), 2) ?? 0.00,
-                    'second_load' => round(($project->second_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
+                    'second_quantity' => $project->total_cost_estimate_amount > 0 ? round(($project->second_quarterly_amount / $project->total_cost_estimate_amount), 2) : 0.00,
+                    'second_load' => $project->total_cost_estimate_amount > 0 ? round(($project->second_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) : 0.00,
                     'second_budget' => $project->second_quarterly_amount ?? 0.00,
-                    'third_quantity' => round(($project->third_quarterly_amount / $project->total_cost_estimate_amount), 2) ?? 0.00,
-                    'third_load' => round(($project->third_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
+                    'third_quantity' => $project->total_cost_estimate_amount > 0 ? round(($project->third_quarterly_amount / $project->total_cost_estimate_amount), 2) : 0.00,
+                    'third_load' => $project->total_cost_estimate_amount > 0 ? round(($project->third_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) : 0.00,
                     'third_budget' => $project->third_quarterly_amount ?? 0.00,
                     'remarks' => $project->remarks ?? ''
                 ];

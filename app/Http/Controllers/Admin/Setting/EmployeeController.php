@@ -22,10 +22,10 @@ class EmployeeController extends Controller
 
         $employees = Employee::orderBy('position')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['designation','name',''], request('search'));
+                $q->whereLike(['designation', 'name'], request('search'));
             }
         })
-        ->latest()->paginate(10);
+            ->latest()->paginate(10);
 
 
         return view('admin.setting.employee.index', compact('employees'));
@@ -98,14 +98,14 @@ class EmployeeController extends Controller
         return back();
     }
 
-        public function updateEmployeeStatus(Employee $employee): RedirectResponse
-        {
-            $this->checkAuthorization('employee_access');
-            $employee->update([
-                'status' => !$employee->status,
-            ]);
-            toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+    public function updateEmployeeStatus(Employee $employee): RedirectResponse
+    {
+        $this->checkAuthorization('employee_access');
+        $employee->update([
+            'status' => !$employee->status,
+        ]);
+        toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-            return back();
-        }
+        return back();
+    }
 }
