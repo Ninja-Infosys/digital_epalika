@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityIdentityCard;
+use Modules\Identity\Entities\DisabilityPrint;
 
 class DisabilityIdentityCardController extends Controller
 {
@@ -71,4 +72,9 @@ class DisabilityIdentityCardController extends Controller
 
     }
 
+    public function printDetail(DisabilityIdentityCard $disabilityIdentityCard)
+    {
+        $disabilityPrints = DisabilityPrint::where('disability_identity_card_id',$disabilityIdentityCard->id)->get();
+        return view('identity::admin.disabilityIdentityCard.printDetail',compact('disabilityPrints','disabilityIdentityCard'));
+    }
 }

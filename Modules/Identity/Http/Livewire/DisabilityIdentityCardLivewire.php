@@ -30,6 +30,7 @@ class DisabilityIdentityCardLivewire extends Component
 {
 
     use WithFileUploads;
+
     use NepaliDateConverter;
 
     public int $currentStep = 1;
@@ -39,7 +40,9 @@ class DisabilityIdentityCardLivewire extends Component
     public $disabilityTypes = [];
     public $governmentDisabilityTypes = [];
     public $disabilityReasons = [];
+
     public $ethnicities = [];
+
     public $provinces = [];
     public $permanent_districts = [];
     public $permanent_localBodies = [];
@@ -627,6 +630,9 @@ class DisabilityIdentityCardLivewire extends Component
 
         if ($this->form['is_necessary'] == 0) {
             $this->form['material_description'] = null;
+        }
+        if ($this->form['supporting_material'] == 0) {
+            $this->form['material_name'] = null;
         }
 
         if ($this->form['finger_print_type'] == 'none') {

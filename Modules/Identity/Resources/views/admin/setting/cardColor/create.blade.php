@@ -51,7 +51,7 @@
 
                             <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="title" class="form-label">कोड रङ *</label>
+                                <label for="color" class="form-label">कोड रङ *</label>
                                 <input
                                     type="color"
                                     name="color"
@@ -67,7 +67,7 @@
                             </div>
 
                         </div>
-
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

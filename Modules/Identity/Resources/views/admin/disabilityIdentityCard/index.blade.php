@@ -73,10 +73,14 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                            <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">
-                                                <i class="fa fa-print"></i>
+{{--                                            <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">--}}
+{{--                                                <i class="fa fa-print"></i>--}}
 
+{{--                                            </a>                                            --}}
+                                            <a href="{{route('identity.admin.disabilityIdentityCard.printDetail',$disabilityIdentityCard)}}"   class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-print"></i>
                                             </a>
+
                                         <form action="{{route('identity.admin.disabilityIdentityCard.destroy',$disabilityIdentityCard)}}"
                                               method="post">
                                             @csrf

@@ -5,6 +5,7 @@ use Modules\Identity\Http\Controllers\CardColorController;
 use Modules\Identity\Http\Controllers\DashboardController;
 use Modules\Identity\Http\Controllers\DisabilityIdentityCardController;
 use Modules\Identity\Http\Controllers\DisabilityIdentityCardReportController;
+use Modules\Identity\Http\Controllers\DisabilityPrintController;
 use Modules\Identity\Http\Controllers\DisabilityReasonController;
 use Modules\Identity\Http\Controllers\DisabilityTypeController;
 use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
@@ -27,6 +28,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
 
 Route::prefix('disability')->group(function () {
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/print', [DisabilityIdentityCardController::class, 'print'])->name('disabilityIdentityCard.print');
+    Route::get('disabilityIdentityCard/{disabilityIdentityCard}/printDetail', [DisabilityIdentityCardController::class, 'printDetail'])->name('disabilityIdentityCard.printDetail');
+    Route::resource('disabilityIdentityCard.disabilityPrint', DisabilityPrintController::class);
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
 });
 
