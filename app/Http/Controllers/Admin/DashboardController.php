@@ -40,7 +40,7 @@ class DashboardController extends Controller
                 ->get();
         }
         if (Schema::hasTable('projects')) {
-            $this->projects = Project::where('fiscal_year_id', officeSetting()->fiscal_year_id)->get() ?? [];
+            $this->projects = Project::where('fiscal_year_id', officeSetting()->fiscal_year_id ?? '')->get();
         }
     }
 
