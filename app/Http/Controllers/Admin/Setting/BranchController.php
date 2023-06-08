@@ -65,7 +65,7 @@ class BranchController extends Controller
 
         toast('शाखा सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.branch.index'));
+        return redirect(route('admin.generalSetting.branch.index'));
     }
 
     public function destroy(Branch $branch)

@@ -37,16 +37,23 @@ class ActivityController extends Controller
     public function store(StoreActivityRequest $request)
     {
         $this->checkAuthorization('taskActivity_create');
+
         DB::transaction(function () use ($request) {
             $activity = Activity::create($request->validated() + [
-                    'user_id' => auth()->id(),
-                    'branch_id' => auth()->user()->branch_id,
-                    'fiscal_year_id' => officeSetting()->fiscal_year_id
-                ]);
+                'user_id' => auth()->id(),
+                'branch_id' => auth()->user()->branch_id,
+                'fiscal_year_id' => officeSetting()->fiscal_year_id
+            ]);
+            $activity->assignedTasks()->create([
+                'assigned_user_id' => auth()->id(),
+                'create_user_id' => auth()->id(),
+                'created_by' => auth()->user()->name
+            ]);
+
             foreach ($request->validated()['activity_lists'] as $list) {
                 $activityList = $activity->activityLists()->create($list);
                 if (!empty($list['documents'])) {
-                $this->uploadDocuments($list['documents'], $activityList);
+                    $this->uploadDocuments($list['documents'], $activityList);
                 }
             }
         });
@@ -59,7 +66,8 @@ class ActivityController extends Controller
     public function show(Activity $activity)
     {
         $this->checkAuthorization('taskActivity_access');
-        $activity->load('activityLists.files');
+
+        $activity->load('activityLists.files','assignedTasks.assignedUser');
         return view('taskmanagement::admin.activity.show', compact('activity'));
     }
 
@@ -80,7 +88,7 @@ class ActivityController extends Controller
             foreach ($request->validated()['activity_lists'] as $list) {
                 $activityList = ActivityList::updateOrCreate(
                     ['activity_id' => $activity->id, 'id' => $list['id']] ?? null,
-                        $list
+                    $list
                 );
 
                 if (!empty($list['documents'])) {

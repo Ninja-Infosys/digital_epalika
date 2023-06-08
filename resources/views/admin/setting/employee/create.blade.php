@@ -91,6 +91,7 @@
                                     <x-date-input-component
                                         nameNe="dob" labelNe="जन्म मिति*"
                                         nameEn="dob_ad" labelEn="Birth Date"
+                                        :getTodayDate="false"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-2">

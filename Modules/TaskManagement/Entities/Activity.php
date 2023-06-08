@@ -52,4 +52,9 @@ class Activity extends Model
     {
         return $this->hasMany(ActivityList::class);
     }
+
+    public function assignedTasks(): HasMany
+    {
+        return $this->hasMany(AssignedTask::class);
+    }
 }
