@@ -9,9 +9,14 @@ use Modules\TaskManagement\Http\Controllers\Admin\ReportController;
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::resource('allActivity', AllActivityController::class)->only('index');
+Route::post('activity/{activity}/assignTask', [ActivityController::class, 'assignTask'])->name('activity.assignTask');
 Route::resource('activity', ActivityController::class);
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
+    Route::get('daily-report','dailyReportPage')->name('dailyReport');
+    Route::post('daily-report','getDailyReport')->name('getDailyReport');
+    Route::get('monthly-report','monthlyReportPage')->name('monthlyReport');
+    Route::post('monthly-report','getMonthlyReport')->name('getMonthlyReport');
 });

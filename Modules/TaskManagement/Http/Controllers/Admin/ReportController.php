@@ -51,25 +51,14 @@ class ReportController extends Controller
         return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'activities'));
     }
 
-    private function getColumns(): Collection
-    {
-        $columnData = collect();
-
-        (new Activity())
-            ->ownAndRelatedModelsFillableColumns()
-            ->filter(function ($column) {
-                return array_keys($column, 'DailyTask');
-            })
-            ->each(function ($column) use ($columnData) {
-                $columnData->push(collect($column)->put('columns', $column['columns']));
-            });
-        return $columnData;
-    }
-
     public function filterDataFromUser($q, Request $request): void
     {
         if (!empty($request->input('fiscal_year'))) {
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+        }
+
+        if (!empty($request->input('en_date'))) {
+            $q->whereDate('date_en', $request->input('en_date'));
         }
 
         if (!empty($request->input('from_date'))) {
@@ -83,5 +72,49 @@ class ReportController extends Controller
         if (!empty($request->input('branch_id'))) {
             $q->whereIn('branch_id', $request->input('branch_id'));
         }
+    }
+
+    public function dailyReportPage()
+    {
+        return view('taskmanagement::admin.report.dailyReport');
+    }
+
+    public function getDailyReport(Request $request)
+    {
+        $request->validate([
+            'en_date' => ['required', 'date']
+        ]);
+
+        $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })
+            ->get();
+
+        return response()->json([
+            'data' => (string)View::make('taskmanagement::admin.report.inc.dailyReportTable', compact('activities'))
+        ]);
+    }
+
+    public function monthlyReportPage()
+    {
+        return view('taskmanagement::admin.report.monthlyReport');
+    }
+
+    public function getMonthlyReport(Request $request)
+    {
+        $request->validate([
+            'en_date' => ['required', 'date']
+        ]);
+
+        $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })
+            ->get();
+
+        return response()->json([
+            'data' => (string)View::make('taskmanagement::admin.report.inc.monthlyReportTable', compact('activities'))
+        ]);
     }
 }

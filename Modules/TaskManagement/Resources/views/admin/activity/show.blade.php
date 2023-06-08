@@ -66,10 +66,35 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="header-title mb-0">Task Assignment History</h4>
+                    <h4 class="header-title mb-0">Assign Task To User</h4>
                 </div>
                 <div class="card-body">
-
+                    <form action="{{ route('admin.taskManagement.activity.assignTask', $activity) }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-2">
+                            <label for="assigned_user_id" class="form-label">Assign To</label>
+                            <select name="assigned_user_id" id="assigned_user_id"
+                                class="form-select @error('assigned_user_id') is-invalid @enderror">
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}"
+                                        {{ $user->id == old('assigned_user_id') ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('assigned_user_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
+                            @livewire('multiple-file')
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -86,6 +111,7 @@
                                     <th>SN</th>
                                     <th>Assigned To</th>
                                     <th>Created By</th>
+                                    <th>Files</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,6 +120,16 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $assignedTask->assignedUser->name ?? '' }}</td>
                                         <td>{{ $assignedTask->created_by }}</td>
+                                        <td>
+                                            @forelse ($assignedTask->files as $file)
+                                                <a href="{{ route('admin.file.download', $file) }}">
+                                                    <i class="fa fa-file"> {{ $file->file_name }}</i>
+                                                    {{ !$loop->last ? ',' : '' }}
+                                                </a>
+                                                @empty
+                                                No files Uploaded
+                                            @endforelse
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

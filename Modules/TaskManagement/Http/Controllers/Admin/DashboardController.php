@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->activities = Activity::withCount('activityLists')->get();
+        $this->activities = Activity::withCount('activityLists')->with('activityLists')->get();
     }
 
     public function __invoke()
