@@ -6,6 +6,7 @@ use App\Models\OfficeHeader;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use DateTime;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityIdentityCard;
@@ -33,16 +34,16 @@ class DisabilityIdentityCardController extends Controller
 
     public function show(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $this->authorize('view',$disabilityIdentityCard);
+        $this->authorize('view', $disabilityIdentityCard);
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
-        return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard','officeHeaders','todayDate'));
+        $disabilityIdentityCard->load('fingerPrints', 'employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard', 'officeHeaders', 'todayDate'));
     }
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $this->authorize('update',$disabilityIdentityCard);
+        $this->authorize('update', $disabilityIdentityCard);
         $disabilityIdentityCard->load('fingerprints');
         return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
@@ -54,27 +55,32 @@ class DisabilityIdentityCardController extends Controller
 
     public function destroy(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $this->authorize('delete',$disabilityIdentityCard);
+        $this->authorize('delete', $disabilityIdentityCard);
         $disabilityIdentityCard->delete();
 
         return back();
     }
 
-    public function print(DisabilityIdentityCard $disabilityIdentityCard)
-    {
-        $officeHeaders = OfficeHeader::get();
-        $todayDate = $this->get_today_nepali_date();
-        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
-        $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
-        return response()->json([
-            'view' => $view,
-        ]);
-
-    }
-
     public function printDetail(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $disabilityPrints = DisabilityPrint::where('disability_identity_card_id',$disabilityIdentityCard->id)->get();
-        return view('identity::admin.disabilityIdentityCard.printDetail',compact('disabilityPrints','disabilityIdentityCard'));
+
+        return view('identity::admin.disabilityIdentityCard.printDetail', compact('disabilityIdentityCard'));
+    }
+
+    public function printAll(DisabilityIdentityCard $disabilityIdentityCard)
+    {
+        $printData = DisabilityPrint::where('disability_identity_card_id', $disabilityIdentityCard->id)
+            ->get()
+            ->map(function ($disabilityPrint, $key) {
+                $dateTime = new DateTime($disabilityPrint->date_ad);
+                $time = $dateTime->format('H:i:s');
+                return [
+                    'id' => (int)$key + 1,
+                    'title' => $disabilityPrint->title,
+                    'date' => $disabilityPrint->date,
+                    'time' => $time,
+                ];
+            });
+        return response($printData);
     }
 }

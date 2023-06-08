@@ -123,7 +123,11 @@
         <div class="identity">
             <h2 class="heading">अपांगता परिचय पत्र</h2>
         </div>
-        <p>परिचय पत्रको प्रकार:{{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}}</p>
+        <div style="display: flex;justify-content: space-between;margin: 0;">
+            <p>परिचय पत्रको प्रकार:{{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}}</p>
+            <p>{{$disabilityPrint->title}}</p>
+        </div>
+
         <p>प. प. नं.: {{$disabilityIdentityCard->card_no}}</p>
         <div>
             <p>नाम थर : <span>{{$disabilityIdentityCard->name ??''}}</span></p>
@@ -170,7 +174,6 @@
             <div class="row">
                 <p class="footer-text">
                     यो परिचय पत्र कसैले पाएमा नजिकको प्रहरी कार्यालयमा वा स्थानीय निकायमा बुझाई दिनुहोला ।
-
                 </p>
             </div>
         </div>

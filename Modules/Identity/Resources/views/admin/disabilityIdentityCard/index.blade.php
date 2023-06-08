@@ -76,7 +76,7 @@
 {{--                                            <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">--}}
 {{--                                                <i class="fa fa-print"></i>--}}
 
-{{--                                            </a>                                            --}}
+{{--                                            </a>--}}
                                             <a href="{{route('identity.admin.disabilityIdentityCard.printDetail',$disabilityIdentityCard)}}"   class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-print"></i>
                                             </a>
@@ -109,26 +109,26 @@
         </div>
     </div>
 
-    @push('scripts')
-        <script>
-            $(".printDetail").on("click",function(e){
-                $.ajax({
-                    method:"GET",
-                    url:$(this).attr("route_action"),
-                    success:function(resp){
-                        const print_area = window.open();
-                        print_area.document.write(resp.view);
-                        print_area.document.close();
-                        print_area.focus();
-                        print_area.print();
-                        print_area.close();
-                    },error:function(){
-                        alert("Something Went Wrong");
-                    }
-                });
-            });
-        </script>
-    @endpush
+{{--    @push('scripts')--}}
+{{--        <script>--}}
+{{--            $(".printDetail").on("click",function(e){--}}
+{{--                $.ajax({--}}
+{{--                    method:"GET",--}}
+{{--                    url:$(this).attr("route_action"),--}}
+{{--                    success:function(resp){--}}
+{{--                        const print_area = window.open();--}}
+{{--                        print_area.document.write(resp.view);--}}
+{{--                        print_area.document.close();--}}
+{{--                        print_area.focus();--}}
+{{--                        print_area.print();--}}
+{{--                        print_area.close();--}}
+{{--                    },error:function(){--}}
+{{--                        alert("Something Went Wrong");--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
+{{--        </script>--}}
+{{--    @endpush--}}
 @endsection
 
 
