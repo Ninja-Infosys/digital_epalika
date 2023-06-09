@@ -5,9 +5,11 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Entities\ActivityList;
 use Modules\TaskManagement\Http\Requests\Activity\StoreActivityRequest;
@@ -67,8 +69,10 @@ class ActivityController extends Controller
     {
         $this->checkAuthorization('taskActivity_access');
 
-        $activity->load('activityLists.files','assignedTasks.assignedUser');
-        return view('taskmanagement::admin.activity.show', compact('activity'));
+        $activity->load('activityLists.files', 'assignedTasks.assignedUser','assignedTasks.files');
+        $users = User::whereNot('id', auth()->id())->get();
+
+        return view('taskmanagement::admin.activity.show', compact('activity', 'users'));
     }
 
     public function edit(Activity $activity)
@@ -126,5 +130,34 @@ class ActivityController extends Controller
                 'file' => $document->store('task_management/' . Str::slug($activityList->title, '_'), 'public'),
             ]);
         }
+    }
+
+    public function assignTask(Request $request, Activity $activity)
+    {
+        $formData = $request->validate([
+            'assigned_user_id' => ['required', Rule::exists('users', 'id')->withoutTrashed()],
+            'files' => ['nullable', 'array'],
+            'files.*.file_name' => ['nullable', 'string', 'max:255'],
+            'files.*.file' => ['required', 'mimes:png,jpg,pdf']
+        ]);
+
+        DB::transaction(function () use ($request, $formData, $activity) {
+            $assignedTask = $activity->assignedTasks()->create([
+                'assigned_user_id' => $request->input('assigned_user_id'),
+                'create_user_id' => auth()->id(),
+                'created_by' => auth()->user()->name
+            ]);
+            foreach ($formData['files'] ?? [] as $file) {
+                $assignedTask->files()->create([
+                    'file_name' => $file['file_name'] ?? pathinfo($file['file']->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $file['file']->getClientOriginalExtension(),
+                    'file' => $file['file']->store('task_management/files', 'public'),
+                ]);
+            }
+        });
+
+        toast('Task Assigned Successfully', 'success');
+
+        return back();
     }
 }
