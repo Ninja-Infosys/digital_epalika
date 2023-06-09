@@ -44,22 +44,22 @@
                     <span>दैनिक रिपोर्ट</span>
                 </a>
             </li>
-            <li class="{{ request()->is('admin/taskManagement/report') ? 'active' : '' }}">
+            {{-- <li class="{{ request()->is('admin/taskManagement/report') ? 'active' : '' }}">
                 <a href="{{ route('admin.taskManagement.report.index') }}">
                     <span>साप्ताहिक रिपोर्ट</span>
                 </a>
-            </li>
-            <li class="{{ request()->is('admin/taskManagement/report') ? 'active' : '' }}">
+            </li> --}}
+            <li class="{{ request()->is('admin/taskManagement/report/monthly-report') ? 'active' : '' }}">
                 <a href="{{ route('admin.taskManagement.report.monthlyReport') }}">
                     <span>मासिक रिपोर्ट</span>
                 </a>
             </li>
-            <li class="{{ request()->is('admin/taskManagement/report') ? 'active' : '' }}">
-                <a href="{{ route('admin.taskManagement.report.index') }}">
+            <li class="{{ request()->is('admin/taskManagement/report/quarterly-report') ? 'active' : '' }}">
+                <a href="{{ route('admin.taskManagement.report.quarterlyReport') }}">
                     <span>चौमासिक रिपोर्ट</span>
                 </a>
-            <li class="{{ request()->is('admin/taskManagement/report') ? 'active' : '' }}">
-                <a href="{{ route('admin.taskManagement.report.index') }}">
+            <li class="{{ request()->is('admin/taskManagement/report/yearly-report') ? 'active' : '' }}">
+                <a href="{{ route('admin.taskManagement.report.yearlyReport') }}">
                     <span>वार्षिक रिपोर्ट</span>
                 </a>
             </li>

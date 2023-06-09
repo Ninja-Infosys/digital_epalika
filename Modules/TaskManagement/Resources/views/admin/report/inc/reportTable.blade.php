@@ -18,7 +18,7 @@
     @endforeach
 @empty
     <tr>
-        <td colspan="4" class="text-center">
+        <td colspan="8" class="text-center">
             तालिकामा कुनै डाटा उपलब्ध छैन !!!
         </td>
     </tr>

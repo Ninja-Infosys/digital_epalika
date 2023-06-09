@@ -38,11 +38,50 @@
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                            data-bs-url="{{ route('admin.taskManagement.report.getDailyReport') }}">
+                            data-bs-url="{{ route('admin.taskManagement.report.getMonthlyReport') }}">
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <x-date-input-component nameNe="date" labelNe="कार्य पेश मिति" nameEn="en_date"
-                                        labelEn="Date" />
+                                <div class="col-md-4 mb-2">
+                                    <label for="fiscal_year">आर्थिक बर्ष</label>
+                                    <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($fiscalYears as $fiscalYear)
+                                            <option value="{{ $fiscalYear->id }}"
+                                                {{ $fiscalYear->id == officeSetting()->fiscal_year_id ? 'selected' : '' }}>
+                                                {{ $fiscalYear->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="month" class="form-label">महिना</label>
+                                    <select name="month" id="month" class="form-select">
+                                        <option value="">- - महिना छान्नुहोस् - -</option>
+                                        @foreach ($months as $key => $month)
+                                            <option value="{{ $key + 1 }}">
+                                                {{ $month }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-5 mb-2">
+                                    <label for="branch_id">शाखा</label>
+                                    <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($branches as $branch)
+                                            <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
+                                            @foreach ($branch->branches as $subBranch)
+                                                <option value="{{ $subBranch->id }}" {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                    --- {{ $subBranch->branch_name }}
+                                                </option>
+                                            @endforeach
+                                            <option value="{{ $branch->id }}"
+                                                {{ $branch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                {{ $branch->branch_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

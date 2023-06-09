@@ -5,14 +5,22 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
 use App\Models\Settings\FiscalYear;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rule;
 use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Entities\DailyTask;
 
 class ReportController extends Controller
 {
+    use NepaliDateConverter;
+
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -54,11 +62,15 @@ class ReportController extends Controller
     public function filterDataFromUser($q, Request $request): void
     {
         if (!empty($request->input('fiscal_year'))) {
-            $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+            $q->whereIn('fiscal_year_id', Arr::wrap($request->input('fiscal_year')));
         }
 
         if (!empty($request->input('en_date'))) {
             $q->whereDate('date_en', $request->input('en_date'));
+        }
+
+        if (!empty($request->input('month'))) {
+            $q->whereMonth('date', $request->input('month'));
         }
 
         if (!empty($request->input('from_date'))) {
@@ -76,13 +88,17 @@ class ReportController extends Controller
 
     public function dailyReportPage()
     {
-        return view('taskmanagement::admin.report.dailyReport');
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('taskmanagement::admin.report.dailyReport', compact('branches'));
     }
 
     public function getDailyReport(Request $request)
     {
         $request->validate([
-            'en_date' => ['required', 'date']
+            'en_date' => ['required', 'date'],
+            'branch_id' => ['nullable', 'array'],
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
@@ -92,19 +108,27 @@ class ReportController extends Controller
             ->get();
 
         return response()->json([
-            'data' => (string)View::make('taskmanagement::admin.report.inc.dailyReportTable', compact('activities'))
+            'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
         ]);
     }
 
     public function monthlyReportPage()
     {
-        return view('taskmanagement::admin.report.monthlyReport');
+        $fiscalYears = FiscalYear::all();
+        $months = $this->month_name;
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('taskmanagement::admin.report.monthlyReport', compact('fiscalYears', 'months', 'branches'));
     }
 
     public function getMonthlyReport(Request $request)
     {
         $request->validate([
-            'en_date' => ['required', 'date']
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'month' => ['required', 'digits_between:1,12'],
+            'branch_id' => ['nullable', 'array'],
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
@@ -114,7 +138,70 @@ class ReportController extends Controller
             ->get();
 
         return response()->json([
-            'data' => (string)View::make('taskmanagement::admin.report.inc.monthlyReportTable', compact('activities'))
+            'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
+        ]);
+    }
+
+    public function quarterlyReportPage()
+    {
+        $fiscalYears = FiscalYear::all();
+        $quarters = $this->quarters();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('taskmanagement::admin.report.quarterlyReport', compact('fiscalYears', 'quarters', 'branches'));
+    }
+
+    public function getQuarterlyReport(Request $request)
+    {
+        $request->validate([
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'quarter_value' => ['required', 'digits_between:1,4'],
+            'branch_id' => ['nullable', 'array'],
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+        ]);
+
+        $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+                if (!empty($request->input('quarter_value'))) {
+                    $quarter = $this->quarters()->where('quarter_value', $request->input('quarter_value'))->first();
+
+                    $q->whereIn(DB::raw('MONTH(date)'), $quarter['months']);
+                }
+            })
+            ->get();
+
+        return response()->json([
+            'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
+        ]);
+    }
+
+    public function yearlyReportPage()
+    {
+        $fiscalYears = FiscalYear::all();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('taskmanagement::admin.report.yearlyReport', compact('fiscalYears', 'branches'));
+    }
+
+    public function getYearlyReport(Request $request)
+    {
+        $request->validate([
+            'fiscal_year' => ['required', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'branch_id' => ['nullable', 'array'],
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+        ]);
+
+        $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })
+            ->get();
+
+        return response()->json([
+            'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
         ]);
     }
 }

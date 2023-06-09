@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">दैनिक रिपोर्ट</li>
+                        <li class="breadcrumb-item active">वार्षिक रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> दैनिक रिपोर्ट </h4>
+                <h4 class="page-title"> वार्षिक रिपोर्ट </h4>
             </div>
         </div>
     </div>
@@ -23,28 +23,37 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">दैनिक रिपोर्ट</h4>
+                        <h4 class="header-title">वार्षिक रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
                                 aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
-                            <x-html-to-excel file-name="दैनिक कार्य रिपोर्ट" target-table="report-table" />
-                            <x-print-button target-element="report-content" title="दैनिक कार्य रिपोर्ट" />
+                            <x-html-to-excel file-name="वार्षिक कार्य रिपोर्ट" target-table="report-table" />
+                            <x-print-button target-element="report-content" title="वार्षिक कार्य रिपोर्ट" />
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                            data-bs-url="{{ route('admin.taskManagement.report.getDailyReport') }}">
+                            data-bs-url="{{ route('admin.taskManagement.report.getYearlyReport') }}">
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <x-date-input-component nameNe="date" labelNe="कार्य पेश मिति" nameEn="en_date"
-                                        labelEn="Date" />
+                                <div class="col-md-4 mb-2">
+                                    <label for="fiscal_year">आर्थिक बर्ष</label>
+                                    <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($fiscalYears as $fiscalYear)
+                                            <option value="{{ $fiscalYear->id }}"
+                                                {{ $fiscalYear->id == officeSetting()->fiscal_year_id ? 'selected' : '' }}>
+                                                {{ $fiscalYear->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-5 mb-2">
                                     <label for="branch_id">शाखा</label>
                                     <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
                                         class="form-control">
@@ -52,7 +61,8 @@
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
                                             @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}" {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                <option value="{{ $subBranch->id }}"
+                                                    {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
                                                     --- {{ $subBranch->branch_name }}
                                                 </option>
                                             @endforeach

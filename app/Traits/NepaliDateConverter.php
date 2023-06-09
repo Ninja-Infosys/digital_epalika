@@ -143,7 +143,28 @@ trait NepaliDateConverter
 
     private string $end_en = '2038';
 
-    private array $month_name = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत'];
+    public array $month_name = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत'];
+
+    public function quarters()
+    {
+        return collect([
+            [
+                'quarter' => $this->month_name[3] . '-' . $this->month_name[6],
+                'quarter_value' => 1,
+                'months' => ['04', '05', '06', '07']
+            ],
+            [
+                'quarter' => $this->month_name[7] . '-' . $this->month_name[10],
+                'quarter_value' => 2,
+                'months' => ['08', '09', '10', '11']
+            ],
+            [
+                'quarter' => $this->month_name[11] . '-' . $this->month_name[2],
+                'quarter_value' => 3,
+                'months' => ['12', '01', '02', '03']
+            ]
+        ]);
+    }
 
     private array $day_name = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहिबार', 'शुक्रबार', 'शनिवार'];
 
@@ -156,7 +177,7 @@ trait NepaliDateConverter
 
     private function validate_ne($year, $month, $day)
     {
-        if (! array_key_exists($year, $this->nepali_length)) {
+        if (!array_key_exists($year, $this->nepali_length)) {
             return 'Invalid <b>Year</b> range';
         }
         if ($month > 12 || $month < 1) {
@@ -192,7 +213,7 @@ trait NepaliDateConverter
             exit($validate);
         }
 
-        $date = $year.'-'.$month.'-'.$day;
+        $date = $year . '-' . $month . '-' . $day;
         $dayname = $this->get_week_ne($year, $month, $day);
         $date_start = date_create($this->firstDay_en);
         $date_today = date_create($date);
@@ -242,9 +263,9 @@ trait NepaliDateConverter
     public function get_today_nepali_date(): string
     {
         $dateArray = explode('-', today()->toDateString());
-        $nepaliDate=$this->get_nepali_date($dateArray[0], $dateArray[1], $dateArray[2]);
+        $nepaliDate = $this->get_nepali_date($dateArray[0], $dateArray[1], $dateArray[2]);
 
-        return $nepaliDate['y'].'-'.(Str::padLeft($nepaliDate['m'], 2, 0)).'-'.(Str::padLeft($nepaliDate['d'], 2, 0));
+        return $nepaliDate['y'] . '-' . (Str::padLeft($nepaliDate['m'], 2, 0)) . '-' . (Str::padLeft($nepaliDate['d'], 2, 0));
     }
 
     //Convert Nepali Date to english
@@ -266,7 +287,7 @@ trait NepaliDateConverter
         }
         $dayCount += $day - 1;
 
-        $nep = date_add($date_start, date_interval_create_from_date_string($dayCount.' days'));
+        $nep = date_add($date_start, date_interval_create_from_date_string($dayCount . ' days'));
         $date = [];
         $date['y'] = date_format($nep, 'Y');
         $date['m'] = date_format($nep, 'm');
