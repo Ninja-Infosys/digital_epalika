@@ -145,6 +145,32 @@ trait NepaliDateConverter
 
     public array $month_name = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत'];
 
+    public function triMonthlyQuarters()
+    {
+        return collect([
+            [
+                'quarter' => $this->month_name[3] . '-' . $this->month_name[5],
+                'quarter_value' => 1,
+                'months' => ['04', '05', '06']
+            ],
+            [
+                'quarter' => $this->month_name[6] . '-' . $this->month_name[8],
+                'quarter_value' => 2,
+                'months' => ['07', '08', '09']
+            ],
+            [
+                'quarter' => $this->month_name[9] . '-' . $this->month_name[11],
+                'quarter_value' => 3,
+                'months' => ['10', '11', '12']
+            ],
+            [
+                'quarter' => $this->month_name[0] . '-' . $this->month_name[2],
+                'quarter_value' => 4,
+                'months' => ['01', '02', '03']
+            ]
+        ]);
+    }
+
     public function quarters()
     {
         return collect([

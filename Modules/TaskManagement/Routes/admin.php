@@ -21,6 +21,8 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::post('monthly-report','getMonthlyReport')->name('getMonthlyReport');
     Route::get('quarterly-report','quarterlyReportPage')->name('quarterlyReport');
     Route::post('quarterly-report','getQuarterlyReport')->name('getQuarterlyReport');
+    Route::get('trimonthly-report','trimonthlyReportPage')->name('trimonthlyReport');
+    Route::post('trimonthly-report','getTrimonthlyReport')->name('getTrimonthlyReport');
     Route::get('yearly-report','yearlyReportPage')->name('yearlyReport');
     Route::post('yearly-report','getYearlyReport')->name('getYearlyReport');
 });

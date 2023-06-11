@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">समस्थिगत क्रियाकलाप रिपोर्ट</li>
+                        <li class="breadcrumb-item active">त्रैमासिक रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> समस्थिगत क्रियाकलाप रिपोर्ट </h4>
+                <h4 class="page-title"> त्रैमासिक रिपोर्ट </h4>
             </div>
         </div>
     </div>
@@ -23,30 +23,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">समस्थिगत क्रियाकलाप रिपोर्ट</h4>
+                        <h4 class="header-title">त्रैमासिक रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
                                 aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
-                            <x-html-to-excel file-name="समस्थिगत क्रियाकलाप रिपोर्ट" target-table="report-table" />
-                            <x-print-button target-element="report-content" title="समस्थिगत क्रियाकलाप रिपोर्ट" />
+                            <x-html-to-excel file-name="त्रैमासिक कार्य रिपोर्ट" target-table="report-table" />
+                            <x-print-button target-element="report-content" title="त्रैमासिक कार्य रिपोर्ट" />
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
-                        <form id="report-filter-form" data-bs-url="{{ route('admin.taskManagement.report.report-data') }}">
+                        <form id="report-filter-form"
+                            data-bs-url="{{ route('admin.taskManagement.report.getTrimonthlyReport') }}">
                             <div class="row">
-                                <div class="col-md-4 mb-2">
-                                    <x-date-input-component nameNe="from_date" labelNe="मिति देखि" nameEn="en_from_date"
-                                        labelEn="Date" />
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <x-date-input-component nameNe="to_date" labelNe="मिति सम्म" nameEn="en_to_date"
-                                        labelEn="Date" />
-                                </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
@@ -60,7 +53,18 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-7 mb-2">
+                                <div class="col-md-3 mb-2">
+                                    <label for="quarter_value" class="form-label">महिना</label>
+                                    <select name="quarter_value" id="quarter_value" class="form-select">
+                                        <option value="">- - महिना छान्नुहोस् - -</option>
+                                        @foreach ($quarters as $quarter)
+                                            <option value="{{ $quarter['quarter_value'] }}">
+                                                {{ $quarter['quarter'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-5 mb-2">
                                     <label for="branch_id">शाखा</label>
                                     <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
                                         class="form-control">
@@ -68,24 +72,14 @@
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
                                             @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}">
+                                                <option value="{{ $subBranch->id }}"
+                                                    {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
                                                     --- {{ $subBranch->branch_name }}
                                                 </option>
                                             @endforeach
-                                            <option value="{{ $branch->id }}">
+                                            <option value="{{ $branch->id }}"
+                                                {{ $branch->id == auth()->user()->branch_id ? 'selected' : '' }}>
                                                 {{ $branch->branch_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-5 mb-2">
-                                    <label for="user_id">कर्मचारी</label>
-                                    <select name="user_id[]" multiple data-toggle="select2" id="user_id"
-                                        class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">
-                                                {{ $user->name }}
                                             </option>
                                         @endforeach
                                     </select>

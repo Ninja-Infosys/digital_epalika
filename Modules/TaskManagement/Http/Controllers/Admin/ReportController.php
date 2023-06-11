@@ -5,6 +5,7 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
 use App\Models\Settings\FiscalYear;
+use App\Models\User;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -25,44 +26,42 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::get();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $activities = [];
-        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'activities'));
+        $users = User::all();
+        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'users'));
     }
 
     public function report(Request $request)
     {
-        $fiscalYears = FiscalYear::get();
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $request->validate([
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'en_from_date' => ['nullable', 'date'],
+            'en_to_date' => ['nullable', 'after_or_equal:en_from_date'],
+            'branch_id' => ['nullable', 'array'],
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
+            'user_id' => ['nullable', 'array'],
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()]
+        ]);
+
         $activities = Activity::with('branch', 'user', 'activityLists')
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
             })
-            ->get()
-            ->map(function ($activity) {
-                $data = collect([
-                    'date' => $activity->date,
-                    'user' => $activity->user->name ?? '',
-                    'branch' => $activity->branch->name ?? '',
-                    'remarks' => $activity->remarks ?? '',
-                ]);
-                $list = [];
-                foreach ($activity->activityLists as $key => $activityList) {
-                    $list[] = [
-                        'title' => $activityList->title,
-                        'description' => $activityList->description,
-                        'remarks' => $activityList->remarks,
-                    ];
-                }
-                $data->put('list', $list);
-                return $data;
-            });
-        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'activities'));
+            ->get();
+
+        return response()->json([
+            'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
+        ]);
     }
 
     public function filterDataFromUser($q, Request $request): void
     {
         if (!empty($request->input('fiscal_year'))) {
             $q->whereIn('fiscal_year_id', Arr::wrap($request->input('fiscal_year')));
+        }
+
+        if (!empty($request->input('user_id'))) {
+            $q->whereIn('user_id', Arr::wrap($request->input('user_id')));
         }
 
         if (!empty($request->input('en_date'))) {
@@ -73,12 +72,12 @@ class ReportController extends Controller
             $q->whereMonth('date', $request->input('month'));
         }
 
-        if (!empty($request->input('from_date'))) {
-            $q->whereDate('date', '>=', $request->input('from_date'));
+        if (!empty($request->input('en_from_date'))) {
+            $q->whereDate('date_en', '>=', $request->input('en_from_date'));
         }
 
-        if (!empty($request->input('to_date'))) {
-            $q->whereDate('date', '<=', $request->input('to_date'));
+        if (!empty($request->input('en_to_date'))) {
+            $q->whereDate('date_en', '<=', $request->input('en_to_date'));
         }
 
         if (!empty($request->input('branch_id'))) {
@@ -89,8 +88,9 @@ class ReportController extends Controller
     public function dailyReportPage()
     {
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $users = User::all();
 
-        return view('taskmanagement::admin.report.dailyReport', compact('branches'));
+        return view('taskmanagement::admin.report.dailyReport', compact('branches', 'users'));
     }
 
     public function getDailyReport(Request $request)
@@ -98,7 +98,9 @@ class ReportController extends Controller
         $request->validate([
             'en_date' => ['required', 'date'],
             'branch_id' => ['nullable', 'array'],
-            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
+            'user_id' => ['nullable', 'array'],
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()]
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
@@ -156,7 +158,7 @@ class ReportController extends Controller
         $request->validate([
             'fiscal_year' => ['nullable', 'array'],
             'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
-            'quarter_value' => ['required', 'digits_between:1,4'],
+            'quarter_value' => ['required', 'digits_between:1,3'],
             'branch_id' => ['nullable', 'array'],
             'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
         ]);
@@ -166,6 +168,41 @@ class ReportController extends Controller
                 $this->filterDataFromUser($q, $request);
                 if (!empty($request->input('quarter_value'))) {
                     $quarter = $this->quarters()->where('quarter_value', $request->input('quarter_value'))->first();
+
+                    $q->whereIn(DB::raw('MONTH(date)'), $quarter['months']);
+                }
+            })
+            ->get();
+
+        return response()->json([
+            'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
+        ]);
+    }
+
+    public function trimonthlyReportPage()
+    {
+        $fiscalYears = FiscalYear::all();
+        $quarters = $this->triMonthlyQuarters();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('taskmanagement::admin.report.trimonthlyReport', compact('fiscalYears', 'quarters', 'branches'));
+    }
+
+    public function getTrimonthlyReport(Request $request)
+    {
+        $request->validate([
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'quarter_value' => ['required', 'digits_between:1,4'],
+            'branch_id' => ['nullable', 'array'],
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+        ]);
+
+        $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+                if (!empty($request->input('quarter_value'))) {
+                    $quarter = $this->triMonthlyQuarters()->where('quarter_value', $request->input('quarter_value'))->first();
 
                     $q->whereIn(DB::raw('MONTH(date)'), $quarter['months']);
                 }
