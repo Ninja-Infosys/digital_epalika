@@ -45,7 +45,15 @@ Route::post('seniorCitizenReport/reportData', [SeniorCitizenDetailReportControll
 
 Route::prefix('reports')->group(function () {
     Route::get('seniorCitizenReport', [SeniorCitizenDetailReportController::class,'index'])->name('seniorCitizenReport.index');
+    Route::get('senior-citizen-ward-wise', [SeniorCitizenDetailReportController::class,'seniorCitizenWardWise'])->name('senior-citizen-ward-wise');
+    Route::post('senior-citizen-ward-wise-report', [SeniorCitizenDetailReportController::class,'seniorCitizenWardWiseReport'])->name('senior-citizen-ward-wise-report');
     Route::get('disabilityIdentityCardReport', [DisabilityIdentityCardReportController::class,'report'])->name('disabilityIdentityCardReport');
+    Route::get('ward-wise', [DisabilityIdentityCardReportController::class,'wardWise'])->name('ward-wise');
+    Route::post('ward-wise-report', [DisabilityIdentityCardReportController::class,'wardWiseReport'])->name('ward-wise-report');
+    Route::get('governmental-disability-type', [DisabilityIdentityCardReportController::class,'governmentalDisabilityType'])->name('governmental-disability-type');
+    Route::post('governmental-disability-type-report', [DisabilityIdentityCardReportController::class,'governmentalDisabilityTypeReport'])->name('governmental-disability-type-report');
+    Route::get('disability-type', [DisabilityIdentityCardReportController::class,'disabilityType'])->name('disability-type');
+    Route::post('disability-type-report', [DisabilityIdentityCardReportController::class,'disabilityTypeReport'])->name('disability-type-report');
 });
 Route::view('test', 'identity::admin.test');
 

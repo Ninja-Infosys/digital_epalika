@@ -4,6 +4,7 @@ namespace Modules\Identity\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Modules\Identity\Enums\CategoryTypeEnum;
@@ -33,5 +34,9 @@ class GovernmentalDisabilityType extends Model
         'category' => CategoryTypeEnum::class
     ];
 
+    public function disabilityIdentityCards(): HasMany
+    {
+        return $this->hasMany(DisabilityIdentityCard::class,'govern_disability_type_id');
+    }
 
 }

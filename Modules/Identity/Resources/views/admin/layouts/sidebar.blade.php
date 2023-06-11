@@ -22,7 +22,8 @@
                 <a href="{{route('identity.admin.disabilityIdentityCard.index')}}">
                     <span> अपाङ्गता परिचय पत्र</span>
                 </a>
-            </li><li class="{{request()->is('admin/identity/seniorCitizen/seniorCitizenDetail') ? 'active' : ''}}">
+            </li>
+            <li class="{{request()->is('admin/identity/seniorCitizen/seniorCitizenDetail') ? 'active' : ''}}">
                 <a href="{{route('identity.admin.seniorCitizenDetail.index')}}">
                     <span> जेष्ठ नागरिक </span>
                 </a>
@@ -43,19 +44,40 @@
     <div class="collapse {{request()->is('admin/identity/reports*') ? 'show' : ''}}"
          id="sidebarIdentityReport">
         <ul class="nav-second-level">
-                <li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
-                    <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
-                        <span> अपाङ्गता परिचयपत्र रिपोर्ट</span>
-                    </a>
-                </li>
-                <li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
-                    <a href="{{route('identity.admin.seniorCitizenReport.index')}}">
-                        <span>जेष्ठ नागरिक  रिपोर्ट</span>
-                    </a>
-                </li>
+            <li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
+                    <span> अपाङ्गता परिचयपत्र रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/identity/reports/ward-wise') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.ward-wise')}}">
+                    <span>वडा अनुसार रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/identity/reports/governmental-disability-type') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.governmental-disability-type')}}">
+                    <span>अपाङ्गताको प्रकार अनुसार रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/identity/reports/disability-type') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.disability-type')}}">
+                    <span>प्रकृतिको आधारमा अपाङ्गताको प्रकार अनुसार रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.seniorCitizenReport.index')}}">
+                    <span>जेष्ठ नागरिक  रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/identity/reports/senior-citizen-ward-wise') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.senior-citizen-ward-wise')}}">
+                    <span>वडा अनुसार जेष्ठ नागरिक रिपोर्ट</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
+
 <li class="{{request()->is('admin/identity/setting*') ? 'active' : ''}}">
     <a href="#sidebarIdentitySetting"
        {{request()->is('admin/identity/setting*') ? 'aria-expanded=true' : ''}}

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 use Modules\Identity\Transformers\SeniorCitizenDetailResource;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
@@ -90,4 +92,32 @@ class SeniorCitizenDetailReportController extends Controller
         }
     }
 
+    public function seniorCitizenWardWise()
+    {
+        $fiscalYears = FiscalYear::all();
+        return view('identity::admin.report.seniorCitizenWardWise', compact('fiscalYears'));
+    }
+
+    public function seniorCitizenWardWiseReport(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable'],
+            'fiscal_year' => ['nullable', 'array'],
+            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')],
+        ]);
+
+        $seniorCitizenDetails = SeniorCitizenDetail::where(function ($query) use ($request) {
+            $this->filterDataFromUser($query, $request);
+        })->get();
+
+        $wardData = [];
+        foreach (officeSetting()->localBody->ward_no as $ward_no) {
+            $wardData[] = $seniorCitizenDetails->where('ward_no', $ward_no)->count();
+        }
+
+        return response()->json([
+            'view' => (string)View::make('identity::admin.report.inc.seniorCitizenWardWise', compact('wardData','seniorCitizenDetails'))
+        ]);
+    }
 }
