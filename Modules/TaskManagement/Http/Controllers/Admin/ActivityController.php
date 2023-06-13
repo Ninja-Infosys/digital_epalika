@@ -187,7 +187,7 @@ class ActivityController extends Controller
             'branch_id' => [Rule::requiredIf(auth()->user()->role->type == 'Super')],
         ]);
 
-        $excelData = $this->processExcelData($request->file('excel_file'));
+        $excelData=$this->processExcelData($request->file('excel_file'));
 
         foreach ($excelData as $formData) {
             $activity = Activity::create([

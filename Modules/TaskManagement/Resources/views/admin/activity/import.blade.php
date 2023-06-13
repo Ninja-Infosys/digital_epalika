@@ -23,7 +23,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">कार्यहरू अपलोड गर्नुहोस</h4>
-                        <div class="d-flex flex-wrap align-items-center">
+                        <div class="d-flex flex-wrap gap-1 align-items-center">
+                            <a href="{{ asset('assets/backend/files/tasks_import.xlsx') }}"
+                            download="{{ asset('assets/backend/files/tasks_import.xlsx') }}"
+                                class="btn btn-sm btn-outline-secondary waves-effect waves-light">
+                                <i class="fa fa-file-excel mx-1"></i>EXCEL Sample</a>
                             <a href="{{ route('admin.taskManagement.activity.index') }}"
                                 class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-list mx-1"></i>कार्यहरूको सुची</a>
