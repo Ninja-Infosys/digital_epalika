@@ -351,4 +351,22 @@ trait NepaliDateConverter
 
         throw new RuntimeException('Week Range Invalid');
     }
+
+    public function adToBsDate($date): string
+    {
+        $dateArray = explode('-', $date);
+
+        $bsDate = $this->get_nepali_date($dateArray[0], $dateArray[1], $dateArray[2]);
+
+        return $bsDate['y'] . '-' . Str::padLeft($bsDate['m'], 2, 0) . '-' . Str::padLeft($bsDate['d'], 2, 0);
+    }
+
+    public function bsToAdDate($date): string
+    {
+        $dateArray = explode('-', $date);
+
+        $adDate = $this->get_eng_date($dateArray[0], $dateArray[1], $dateArray[2]);
+
+        return $adDate['y'] . '-' . Str::padLeft($adDate['m'], 2, 0) . '-' . Str::padLeft($adDate['d'], 2, 0);
+    }
 }

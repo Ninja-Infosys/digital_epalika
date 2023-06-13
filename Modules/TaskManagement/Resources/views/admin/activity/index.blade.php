@@ -23,8 +23,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">कार्यहरू </h4>
-                        <div class="d-flex flex-wrap align-items-center">
+                        <div class="d-flex flex-wrap gap-1 align-items-center">
                             @includeIf('inc.filter_form')
+                            <a href="{{route('admin.taskManagement.activity.excel.import-page')}}"
+                               class="btn btn-sm btn-outline-secondary waves-effect waves-light">
+                                <i class="fa fa-file-excel"></i> EXCEL अपलोड</a>
                             <a href="{{route('admin.taskManagement.activity.create')}}"
                                class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>

@@ -10,6 +10,8 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::resource('allActivity', AllActivityController::class)->only('index');
 Route::post('activity/{activity}/assignTask', [ActivityController::class, 'assignTask'])->name('activity.assignTask');
+Route::get('activity/excel/import',[ActivityController::class,'excelImportPage'])->name('activity.excel.import-page');
+Route::post('activity/excel/import',[ActivityController::class,'import'])->name('activity.excel.import');
 Route::resource('activity', ActivityController::class);
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
