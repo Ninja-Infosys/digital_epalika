@@ -145,6 +145,32 @@ trait NepaliDateConverter
 
     public array $month_name = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत'];
 
+    public function triMonthlyQuarters()
+    {
+        return collect([
+            [
+                'quarter' => $this->month_name[3] . '-' . $this->month_name[5],
+                'quarter_value' => 1,
+                'months' => ['04', '05', '06']
+            ],
+            [
+                'quarter' => $this->month_name[6] . '-' . $this->month_name[8],
+                'quarter_value' => 2,
+                'months' => ['07', '08', '09']
+            ],
+            [
+                'quarter' => $this->month_name[9] . '-' . $this->month_name[11],
+                'quarter_value' => 3,
+                'months' => ['10', '11', '12']
+            ],
+            [
+                'quarter' => $this->month_name[0] . '-' . $this->month_name[2],
+                'quarter_value' => 4,
+                'months' => ['01', '02', '03']
+            ]
+        ]);
+    }
+
     public function quarters()
     {
         return collect([
@@ -324,5 +350,23 @@ trait NepaliDateConverter
         }
 
         throw new RuntimeException('Week Range Invalid');
+    }
+
+    public function adToBsDate($date): string
+    {
+        $dateArray = explode('-', $date);
+
+        $bsDate = $this->get_nepali_date($dateArray[0], $dateArray[1], $dateArray[2]);
+
+        return $bsDate['y'] . '-' . Str::padLeft($bsDate['m'], 2, 0) . '-' . Str::padLeft($bsDate['d'], 2, 0);
+    }
+
+    public function bsToAdDate($date): string
+    {
+        $dateArray = explode('-', $date);
+
+        $adDate = $this->get_eng_date($dateArray[0], $dateArray[1], $dateArray[2]);
+
+        return $adDate['y'] . '-' . Str::padLeft($adDate['m'], 2, 0) . '-' . Str::padLeft($adDate['d'], 2, 0);
     }
 }

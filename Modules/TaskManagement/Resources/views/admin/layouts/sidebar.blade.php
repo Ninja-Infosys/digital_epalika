@@ -54,10 +54,16 @@
                     <span>मासिक रिपोर्ट</span>
                 </a>
             </li>
+            <li class="{{ request()->is('admin/taskManagement/report/trimonthly-report') ? 'active' : '' }}">
+                <a href="{{ route('admin.taskManagement.report.trimonthlyReport') }}">
+                    <span>त्रैमासिक रिपोर्ट</span>
+                </a>
+            </li>
             <li class="{{ request()->is('admin/taskManagement/report/quarterly-report') ? 'active' : '' }}">
                 <a href="{{ route('admin.taskManagement.report.quarterlyReport') }}">
                     <span>चौमासिक रिपोर्ट</span>
                 </a>
+            </li>
             <li class="{{ request()->is('admin/taskManagement/report/yearly-report') ? 'active' : '' }}">
                 <a href="{{ route('admin.taskManagement.report.yearlyReport') }}">
                     <span>वार्षिक रिपोर्ट</span>

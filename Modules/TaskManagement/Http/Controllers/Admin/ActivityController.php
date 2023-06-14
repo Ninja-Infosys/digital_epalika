@@ -5,18 +5,26 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\TaskManagement\ActivityImport;
+use App\Models\Settings\Branch;
 use App\Models\User;
+use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Entities\ActivityList;
 use Modules\TaskManagement\Http\Requests\Activity\StoreActivityRequest;
 use Modules\TaskManagement\Http\Requests\Activity\UpdateActivityRequest;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class ActivityController extends Controller
 {
+    use NepaliDateConverter;
+
     public function index()
     {
         $this->checkAuthorization('taskActivity_access');
@@ -69,7 +77,7 @@ class ActivityController extends Controller
     {
         $this->checkAuthorization('taskActivity_access');
 
-        $activity->load('activityLists.files', 'assignedTasks.assignedUser','assignedTasks.files');
+        $activity->load('activityLists.files', 'assignedTasks.assignedUser', 'assignedTasks.files');
         $users = User::whereNot('id', auth()->id())->get();
 
         return view('taskmanagement::admin.activity.show', compact('activity', 'users'));
@@ -159,5 +167,99 @@ class ActivityController extends Controller
         toast('Task Assigned Successfully', 'success');
 
         return back();
+    }
+
+    public function excelImportPage(Request $request)
+    {
+        $this->checkAuthorization('taskActivity_create');
+
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $users = User::all();
+
+        return view('taskmanagement::admin.activity.import', compact('users', 'branches'));
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'excel_file' => ['required', 'mimes:xlsx'],
+            'user_id' => [Rule::requiredIf(auth()->user()->role->type == 'Super')],
+            'branch_id' => [Rule::requiredIf(auth()->user()->role->type == 'Super')],
+        ]);
+
+        $excelData=$this->processExcelData($request->file('excel_file'));
+
+        foreach ($excelData as $formData) {
+            $activity = Activity::create([
+                'date' => $this->excelDateToDate($formData['date']),
+                'date_en' => $this->bsToAdDate($this->excelDateToDate($formData['date'])),
+                'user_id' => $request->input('user_id') ?? auth()->id(),
+                'branch_id' => $request->input('branch_id') ?? auth()->user()->branch_id,
+                'fiscal_year_id' => officeSetting()->fiscal_year_id,
+                'remarks' => $formData['remarks'] ?? null
+            ]);
+
+            foreach ($formData['activities'] as $activityData) {
+                $activity->activityLists()->create([
+                    'title' => $activityData['title'],
+                    'description' => $activityData['description'],
+                    'remarks' => $activityData['remarks'],
+                ]);
+            }
+        }
+
+        toast('कार्यहरु सफलतापुर्बक अपलोड गरियो', 'success');
+        return back();
+    }
+
+    private function processExcelData($file)
+    {
+        $data = Excel::toArray([], $file);
+        $processedData = [];
+        // Access and process data from each sheet
+        foreach ($data as $index => $sheetData) {
+            $header = $sheetData[0];
+            $sheetData = array_slice($sheetData, 1);
+
+            // Assign the processed data to the corresponding key in the processedData array
+            $processedData["sheet" . ($index + 1)] = [];
+
+            // Process the data from the sheet
+            foreach ($sheetData as $row) {
+                // Create an associative array using the header as the key
+                $rowData = array_combine($header, $row);
+
+                // Add the processed row data to the sheet's processed data array
+                $processedData["sheet" . ($index + 1)][] = $rowData;
+            }
+        }
+
+        $sheet1Data = $processedData['sheet1'];
+        $sheet2Data = $processedData['sheet2'];
+
+        $mergedData = [];
+
+        foreach ($sheet1Data as $sheet1Row) {
+            $sn = $sheet1Row['sn'];
+
+            $sheet1Row['activities'] = [];
+
+            foreach ($sheet2Data as $sheet2Row) {
+                if ($sheet2Row['task_sn'] == $sn) {
+                    $sheet1Row['activities'][] = $sheet2Row;
+                }
+            }
+
+            $mergedData[] = $sheet1Row;
+        }
+
+        $processedData['sheet1'] = $mergedData;
+
+        return $mergedData;
+    }
+
+    private function excelDateToDate($date): string
+    {
+        return Carbon::instance(Date::excelToDateTimeObject($date))->toDateString();
     }
 }
