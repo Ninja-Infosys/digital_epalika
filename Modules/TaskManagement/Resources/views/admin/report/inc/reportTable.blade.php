@@ -1,7 +1,7 @@
 @forelse ($activities as $activity)
     <tr>
         <td rowspan="{{ $activity->activityLists->count() }}">{{ $loop->iteration }}</td>
-        <td rowspan="{{ $activity->activityLists->count() }}">{{ $activity->date }}</td>
+        <td rowspan="{{ $activity->activityLists->count() }}">{{ $activity->date ?? $activity->month }}</td>
         <td rowspan="{{ $activity->activityLists->count() }}">{{ $activity->user->name ?? '' }}</td>
         <td rowspan="{{ $activity->activityLists->count() }}"> {{ $activity->branch->branch_name ?? '' }} </td>
         <td>{{ $activity->activityLists->first()->title ?? '' }}</td>

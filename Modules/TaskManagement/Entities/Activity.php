@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use App\Traits\NepaliDateConverter;
+use Modules\TaskManagement\Enums\ActivityTypeEnum;
 
 class Activity extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns, NepaliDateConverter;
 
     protected $dates = [
         'created_at',
@@ -31,6 +33,16 @@ class Activity extends Model
         'user_id',
         'fiscal_year_id',
         'remarks',
+        'activity_type',
+        'month_range'
+    ];
+
+    protected $appends=[
+        'month'
+    ];
+
+    protected $casts = [
+        'activity_type' => ActivityTypeEnum::class
     ];
 
     public function user(): BelongsTo
@@ -56,5 +68,19 @@ class Activity extends Model
     public function assignedTasks(): HasMany
     {
         return $this->hasMany(AssignedTask::class);
+    }
+
+    public function getMonthAttribute(){
+        switch($this->attributes["activity_type"]){
+            case "monthly":
+                $data = $this->month_name[$this->attributes["month_range"] - 1];
+            case "tri_monthly":
+                $data = $this->triMonthlyQuarters()[$this->attributes["month_range"]-1]['quarter'];
+            case "quarterly":
+                $data = $this->quarters()[$this->attributes["month_range"]-1]['quarter'];
+            default:
+                $data = null;
+        }
+        return $data;
     }
 }

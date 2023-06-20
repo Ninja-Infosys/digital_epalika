@@ -119,8 +119,9 @@ class ReportController extends Controller
         $fiscalYears = FiscalYear::all();
         $months = $this->month_name;
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $users = User::all();
 
-        return view('taskmanagement::admin.report.monthlyReport', compact('fiscalYears', 'months', 'branches'));
+        return view('taskmanagement::admin.report.monthlyReport', compact('fiscalYears', 'months', 'branches', 'users'));
     }
 
     public function getMonthlyReport(Request $request)
@@ -130,12 +131,20 @@ class ReportController extends Controller
             'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
             'month' => ['required', 'digits_between:1,12'],
             'branch_id' => ['nullable', 'array'],
-            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
+            'user_id' => ['nullable', 'array'],
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()],
+            'is_month' => ['nullable', 'boolean']
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
+                if ($request->input('is_month')) {
+                    $q->whereNull('date');
+                } else {
+                    $q->whereNull('month_range');
+                }
             })
             ->get();
 

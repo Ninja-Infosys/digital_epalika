@@ -72,7 +72,8 @@
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
                                             @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}" {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                <option value="{{ $subBranch->id }}"
+                                                    {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
                                                     --- {{ $subBranch->branch_name }}
                                                 </option>
                                             @endforeach
@@ -82,6 +83,30 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="user_id">कर्मचारी</label>
+                                    <select name="user_id[]" multiple data-toggle="select2" id="user_id"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">
+                                                {{ $user->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="is_month">समस्थिगत</label>
+                                    <div class="form-check">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               name="is_month"
+                                               value="1"
+                                               id="is_month" >
+                                        <label class="form-check-label"
+                                               for="is_month"></label>
+                                    </div>
                                 </div>
                             </div>
 

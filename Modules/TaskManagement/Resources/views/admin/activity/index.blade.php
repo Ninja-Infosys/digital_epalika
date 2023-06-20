@@ -76,7 +76,7 @@
                                             <a
                                                 href="{{route('admin.taskManagement.activity.edit',$activity)}}"
                                                 title="सम्पादन गर्नुहोस्"
-                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
