@@ -151,12 +151,12 @@ trait NepaliDateConverter
             [
                 'quarter' => $this->month_name[3] . '-' . $this->month_name[5],
                 'quarter_value' => 1,
-                'months' => ['04', '05', '06']
+                'months' => ['4', '5', '6']
             ],
             [
                 'quarter' => $this->month_name[6] . '-' . $this->month_name[8],
                 'quarter_value' => 2,
-                'months' => ['07', '08', '09']
+                'months' => ['7', '8', '9']
             ],
             [
                 'quarter' => $this->month_name[9] . '-' . $this->month_name[11],
@@ -166,7 +166,7 @@ trait NepaliDateConverter
             [
                 'quarter' => $this->month_name[0] . '-' . $this->month_name[2],
                 'quarter_value' => 4,
-                'months' => ['01', '02', '03']
+                'months' => ['1', '2', '3']
             ]
         ]);
     }
@@ -177,17 +177,17 @@ trait NepaliDateConverter
             [
                 'quarter' => $this->month_name[3] . '-' . $this->month_name[6],
                 'quarter_value' => 1,
-                'months' => ['04', '05', '06', '07']
+                'months' => ['4', '5', '6', '7']
             ],
             [
                 'quarter' => $this->month_name[7] . '-' . $this->month_name[10],
                 'quarter_value' => 2,
-                'months' => ['08', '09', '10', '11']
+                'months' => ['8', '9', '10', '11']
             ],
             [
                 'quarter' => $this->month_name[11] . '-' . $this->month_name[2],
                 'quarter_value' => 3,
-                'months' => ['12', '01', '02', '03']
+                'months' => ['12', '1', '2', '3']
             ]
         ]);
     }

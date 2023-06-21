@@ -72,13 +72,11 @@
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
                                             @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}"
-                                                    {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                <option value="{{ $subBranch->id }}">
                                                     --- {{ $subBranch->branch_name }}
                                                 </option>
                                             @endforeach
-                                            <option value="{{ $branch->id }}"
-                                                {{ $branch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                            <option value="{{ $branch->id }}">
                                                 {{ $branch->branch_name }}
                                             </option>
                                         @endforeach
@@ -110,8 +108,8 @@
                                 </div>
                             </div>
 
-                            <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                                पेश गर्नुहोस्
+                            <button type="submit" id="submitFormBtn" class="btn btn-sm btn-primary">
+                                <i class="fa fa-search"> पेश गर्नुहोस्</i>
                             </button>
 
                         </form>

@@ -37,7 +37,7 @@ class Activity extends Model
         'month_range'
     ];
 
-    protected $appends=[
+    protected $appends = [
         'month'
     ];
 
@@ -70,14 +70,15 @@ class Activity extends Model
         return $this->hasMany(AssignedTask::class);
     }
 
-    public function getMonthAttribute(){
-        switch($this->attributes["activity_type"]){
+    public function getMonthAttribute()
+    {
+        switch ($this->activity_type) {
             case "monthly":
                 $data = $this->month_name[$this->attributes["month_range"] - 1];
             case "tri_monthly":
-                $data = $this->triMonthlyQuarters()[$this->attributes["month_range"]-1]['quarter'];
+                $data = $this->triMonthlyQuarters()[$this->attributes["month_range"] - 1]['quarter'];
             case "quarterly":
-                $data = $this->quarters()[$this->attributes["month_range"]-1]['quarter'];
+                $data = $this->quarters()[$this->attributes["month_range"] - 1]['quarter'];
             default:
                 $data = null;
         }

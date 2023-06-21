@@ -68,10 +68,6 @@ class ReportController extends Controller
             $q->whereDate('date_en', $request->input('en_date'));
         }
 
-        if (!empty($request->input('month'))) {
-            $q->whereMonth('date', $request->input('month'));
-        }
-
         if (!empty($request->input('en_from_date'))) {
             $q->whereDate('date_en', '>=', $request->input('en_from_date'));
         }
@@ -144,9 +140,26 @@ class ReportController extends Controller
                     $q->whereNull('date');
                 } else {
                     $q->whereNull('month_range');
+                    if (!empty($request->input('month'))) {
+                        $q->whereMonth('date', $request->input('month'));
+                    }
                 }
             })
-            ->get();
+            ->get()->filter(function ($activity) use ($request) {
+                if ($request->input('month')) {
+                    $activityType = $activity->activity_type?->value;
+                    if ($activityType == 'monthly') {
+                        return $activity->month_range == $request->input('month');
+                    } elseif ($activityType == 'tri_monthly') {
+                        $quarter = $this->triMonthlyQuarters()->where('quarter_value', $activity->month_range)->first();
+                        return in_array($request->input('month'), $quarter['months']);
+                    } elseif ($activityType == 'quarterly') {
+                        $quarter = $this->quarters()->where('quarter_value', $activity->month_range)->first();
+                        return in_array($request->input('month'), $quarter['months']);
+                    }
+                }
+                return true;
+            });
 
         return response()->json([
             'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
