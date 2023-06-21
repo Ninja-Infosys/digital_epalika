@@ -72,14 +72,24 @@
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
                                             @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}"
-                                                    {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                <option value="{{ $subBranch->id }}">
                                                     --- {{ $subBranch->branch_name }}
                                                 </option>
                                             @endforeach
-                                            <option value="{{ $branch->id }}"
-                                                {{ $branch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                            <option value="{{ $branch->id }}">
                                                 {{ $branch->branch_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="user_id">कर्मचारी</label>
+                                    <select name="user_id[]" multiple data-toggle="select2" id="user_id"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">
+                                                {{ $user->name }}
                                             </option>
                                         @endforeach
                                     </select>

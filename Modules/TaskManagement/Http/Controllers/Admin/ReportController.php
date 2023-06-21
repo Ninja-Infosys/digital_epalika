@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Entities\DailyTask;
+use Modules\TaskManagement\Enums\ActivityTypeEnum;
 
 class ReportController extends Controller
 {
@@ -171,8 +172,9 @@ class ReportController extends Controller
         $fiscalYears = FiscalYear::all();
         $quarters = $this->quarters();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $users = User::all();
 
-        return view('taskmanagement::admin.report.quarterlyReport', compact('fiscalYears', 'quarters', 'branches'));
+        return view('taskmanagement::admin.report.quarterlyReport', compact('fiscalYears', 'quarters', 'branches', 'users'));
     }
 
     public function getQuarterlyReport(Request $request)
@@ -182,16 +184,17 @@ class ReportController extends Controller
             'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
             'quarter_value' => ['required', 'digits_between:1,3'],
             'branch_id' => ['nullable', 'array'],
-            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
+            'user_id' => ['nullable', 'array'],
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()]
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where('activity_type', ActivityTypeEnum::QUARTERLY->value)
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
                 if (!empty($request->input('quarter_value'))) {
-                    $quarter = $this->quarters()->where('quarter_value', $request->input('quarter_value'))->first();
-
-                    $q->whereIn(DB::raw('MONTH(date)'), $quarter['months']);
+                    $q->where('month_range', $request->input('quarter_value'));
                 }
             })
             ->get();
@@ -206,8 +209,9 @@ class ReportController extends Controller
         $fiscalYears = FiscalYear::all();
         $quarters = $this->triMonthlyQuarters();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $users = User::all();
 
-        return view('taskmanagement::admin.report.trimonthlyReport', compact('fiscalYears', 'quarters', 'branches'));
+        return view('taskmanagement::admin.report.trimonthlyReport', compact('fiscalYears', 'quarters', 'branches', 'users'));
     }
 
     public function getTrimonthlyReport(Request $request)
@@ -217,16 +221,17 @@ class ReportController extends Controller
             'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
             'quarter_value' => ['required', 'digits_between:1,4'],
             'branch_id' => ['nullable', 'array'],
-            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
+            'user_id' => ['nullable', 'array'],
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()]
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where('activity_type', ActivityTypeEnum::TRI_MONTHLY->value)
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
                 if (!empty($request->input('quarter_value'))) {
-                    $quarter = $this->triMonthlyQuarters()->where('quarter_value', $request->input('quarter_value'))->first();
-
-                    $q->whereIn(DB::raw('MONTH(date)'), $quarter['months']);
+                    $q->where('month_range', $request->input('quarter_value'));
                 }
             })
             ->get();
