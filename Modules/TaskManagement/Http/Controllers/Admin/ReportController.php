@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 use Modules\TaskManagement\Entities\Activity;
 use Modules\TaskManagement\Entities\DailyTask;
 use Modules\TaskManagement\Enums\ActivityTypeEnum;
@@ -138,29 +139,15 @@ class ReportController extends Controller
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
                 if ($request->input('is_month')) {
-                    $q->whereNull('date');
+                    $q->whereNull('date')->where('activity_type', ActivityTypeEnum::MONTHLY->value);
                 } else {
                     $q->whereNull('month_range');
                     if (!empty($request->input('month'))) {
-                        $q->whereMonth('date', $request->input('month'));
+                        $q->whereMonth('date', $request->input('month'))->where('activity_type', ActivityTypeEnum::DAILY->value);
                     }
                 }
             })
-            ->get()->filter(function ($activity) use ($request) {
-                if ($request->input('month')) {
-                    $activityType = $activity->activity_type?->value;
-                    if ($activityType == 'monthly') {
-                        return $activity->month_range == $request->input('month');
-                    } elseif ($activityType == 'tri_monthly') {
-                        $quarter = $this->triMonthlyQuarters()->where('quarter_value', $activity->month_range)->first();
-                        return in_array($request->input('month'), $quarter['months']);
-                    } elseif ($activityType == 'quarterly') {
-                        $quarter = $this->quarters()->where('quarter_value', $activity->month_range)->first();
-                        return in_array($request->input('month'), $quarter['months']);
-                    }
-                }
-                return true;
-            });
+            ->get();
 
         return response()->json([
             'data' => (string)View::make('taskmanagement::admin.report.inc.reportTable', compact('activities'))
@@ -186,15 +173,24 @@ class ReportController extends Controller
             'branch_id' => ['nullable', 'array'],
             'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
             'user_id' => ['nullable', 'array'],
-            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()]
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()],
+            'is_month' => ['nullable', 'boolean']
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
-            ->where('activity_type', ActivityTypeEnum::QUARTERLY->value)
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
-                if (!empty($request->input('quarter_value'))) {
-                    $q->where('month_range', $request->input('quarter_value'));
+                if ($request->input('is_month')) {
+                    $q->whereNull('date')
+                        ->where('activity_type', ActivityTypeEnum::QUARTERLY->value)
+                        ->where('month_range', $request->input('quarter_value'));
+                } else {
+                    $q->whereNull('month_range');
+                    if (!empty($request->input('quarter_value'))) {
+                        $quarter = $this->quarters()->where('quarter_value', $request->input('quarter_value'))->first();
+                        $q->whereIn(DB::raw('MONTH(date)'), $quarter['months'])
+                            ->where('activity_type', ActivityTypeEnum::DAILY->value);
+                    }
                 }
             })
             ->get();
@@ -223,15 +219,24 @@ class ReportController extends Controller
             'branch_id' => ['nullable', 'array'],
             'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
             'user_id' => ['nullable', 'array'],
-            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()]
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()],
+            'is_month' => ['nullable', 'boolean']
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
-            ->where('activity_type', ActivityTypeEnum::TRI_MONTHLY->value)
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
-                if (!empty($request->input('quarter_value'))) {
-                    $q->where('month_range', $request->input('quarter_value'));
+                if ($request->input('is_month')) {
+                    $q->whereNull('date')
+                        ->where('activity_type', ActivityTypeEnum::TRI_MONTHLY->value)
+                        ->where('month_range', $request->input('quarter_value'));
+                } else {
+                    $q->whereNull('month_range');
+                    if (!empty($request->input('quarter_value'))) {
+                        $quarter = $this->triMonthlyQuarters()->where('quarter_value', $request->input('quarter_value'))->first();
+                        $q->whereIn(DB::raw('MONTH(date)'), $quarter['months'])
+                            ->where('activity_type', ActivityTypeEnum::DAILY->value);
+                    }
                 }
             })
             ->get();
@@ -245,23 +250,29 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
+        $users = User::all();
 
-        return view('taskmanagement::admin.report.yearlyReport', compact('fiscalYears', 'branches'));
+        return view('taskmanagement::admin.report.yearlyReport', compact('fiscalYears', 'branches', 'users'));
     }
 
     public function getYearlyReport(Request $request)
     {
         $request->validate([
-            'fiscal_year' => ['required', 'array'],
-            'fiscal_year.*' => [Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'fiscal_year' => ['required', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
             'branch_id' => ['nullable', 'array'],
-            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()]
+            'branch_id.*' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
+            'user_id' => ['nullable', 'array'],
+            'user_id.*' => ['nullable', Rule::exists('users', 'id')->withoutTrashed()],
+            'activity_type' => ['required', new Enum(ActivityTypeEnum::class)]
         ]);
 
         $activities = Activity::with('branch', 'user', 'activityLists')
+            ->where('activity_type', $request->input('activity_type'))
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
             })
+            ->orderBy('date')
+            ->orderBy('month_range')
             ->get();
 
         return response()->json([

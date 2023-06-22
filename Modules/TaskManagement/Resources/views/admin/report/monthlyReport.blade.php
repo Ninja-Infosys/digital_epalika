@@ -121,7 +121,7 @@
                                 <thead>
                                     <tr>
                                         <th rowspan="2">क्र.सं.</th>
-                                        <th rowspan="2">मिति</th>
+                                        <th rowspan="2">मिति/महिना</th>
                                         <th rowspan="2">कर्मचारीको नाम</th>
                                         <th rowspan="2">शाखा</th>
                                         <th colspan="3" class="text-center">कार्य विवरण</th>

@@ -40,11 +40,11 @@
                         <form id="report-filter-form"
                             data-bs-url="{{ route('admin.taskManagement.report.getYearlyReport') }}">
                             <div class="row">
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-2 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
-                                    <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
-                                        class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
+                                    <select name="fiscal_year" id="fiscal_year"
+                                        class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
                                         @foreach ($fiscalYears as $fiscalYear)
                                             <option value="{{ $fiscalYear->id }}"
                                                 {{ $fiscalYear->id == officeSetting()->fiscal_year_id ? 'selected' : '' }}>
@@ -53,7 +53,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-5 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="branch_id">शाखा</label>
                                     <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
                                         class="form-control">
@@ -61,14 +61,35 @@
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
                                             @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}"
-                                                    {{ $subBranch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                                <option value="{{ $subBranch->id }}">
                                                     --- {{ $subBranch->branch_name }}
                                                 </option>
                                             @endforeach
-                                            <option value="{{ $branch->id }}"
-                                                {{ $branch->id == auth()->user()->branch_id ? 'selected' : '' }}>
+                                            <option value="{{ $branch->id }}">
                                                 {{ $branch->branch_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="user_id">कर्मचारी</label>
+                                    <select name="user_id[]" multiple data-toggle="select2" id="user_id"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">
+                                                {{ $user->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="activity_type" class="form-label">प्रकार *</label>
+                                    <select name="activity_type" id="activity_type" class="form-select">
+                                        <option value="">- - प्रकार छान्नुहोस् - -</option>
+                                        @foreach (Modules\TaskManagement\Enums\ActivityTypeEnum::cases() as $activityType)
+                                            <option value="{{ $activityType->value }}">
+                                                {{ $activityType->label() }}
                                             </option>
                                         @endforeach
                                     </select>

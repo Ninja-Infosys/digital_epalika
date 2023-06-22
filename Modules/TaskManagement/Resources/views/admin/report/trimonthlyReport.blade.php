@@ -94,6 +94,14 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="is_month">समस्थिगत</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="is_month" value="1"
+                                            id="is_month">
+                                        <label class="form-check-label" for="is_month"></label>
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">

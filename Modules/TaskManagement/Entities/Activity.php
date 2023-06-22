@@ -72,13 +72,16 @@ class Activity extends Model
 
     public function getMonthAttribute()
     {
-        switch ($this->activity_type) {
+        switch ($this->activity_type?->value) {
             case "monthly":
                 $data = $this->month_name[$this->attributes["month_range"] - 1];
+                break;
             case "tri_monthly":
                 $data = $this->triMonthlyQuarters()[$this->attributes["month_range"] - 1]['quarter'];
+                break;
             case "quarterly":
                 $data = $this->quarters()[$this->attributes["month_range"] - 1]['quarter'];
+                break;
             default:
                 $data = null;
         }
