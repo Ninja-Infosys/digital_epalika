@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\TaskManagement\Http\Controllers\Admin\ActivityController;
 use Modules\TaskManagement\Http\Controllers\Admin\AllActivityController;
 use Modules\TaskManagement\Http\Controllers\Admin\DashboardController;
+use Modules\TaskManagement\Http\Controllers\Admin\FileTrackingController;
 use Modules\TaskManagement\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -13,6 +14,7 @@ Route::post('activity/{activity}/assignTask', [ActivityController::class, 'assig
 Route::get('activity/excel/import', [ActivityController::class, 'excelImportPage'])->name('activity.excel.import-page');
 Route::post('activity/excel/import', [ActivityController::class, 'import'])->name('activity.excel.import');
 Route::resource('activity', ActivityController::class)->except('store', 'update');
+Route::resource('fileTracking', FileTrackingController::class);
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');

@@ -54,7 +54,7 @@
 @stack('scripts')
 @livewireScripts
 {{--TODO: Add a license error here--}}
-@if(cache()->has('licenseError')
+{{-- @if(cache()->has('licenseError')
 || (cache()->has('license')
 && array_key_exists('is_active', cache()->get('license'))
 && !cache()->get('license')['is_active'])
@@ -68,7 +68,7 @@
         })
     </script>
 
-@endif
+@endif --}}
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/custom.js')}}"></script>
 </body>
