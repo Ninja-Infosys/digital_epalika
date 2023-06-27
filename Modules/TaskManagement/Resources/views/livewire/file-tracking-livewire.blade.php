@@ -19,7 +19,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <fieldset class="mx-2">
+            <fieldset class="m-2">
                 <legend>File Activity</legend>
                 <div class="row">
                     <div class="col-md-6 mb-2">
@@ -70,6 +70,7 @@
                 @enderror
             </div>
             <div class="col-md-12 mb-2">
+                <h5>फाइलहरु</h5>
                 <table class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
