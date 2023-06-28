@@ -51,6 +51,24 @@
                         @enderror
                     </div>
                     <div class="col-md-12 mb-2">
+                        <label for="users" class="form-label">प्रयोगकर्ताहरु</label>
+                        <div class="row">
+                            @foreach($users as $user)
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               wire:model="form.fileActivity.users"
+                                               value="{{$user->id}}"
+                                               id="users-{{ $user->id }}" >
+                                        <label class="form-check-label"
+                                               for="users-{{ $user->id }}">{{ $user->name }}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
                         <label for="fileActivity.remarks" class="form-label">कैफ़ियत</label>
                         <textarea id="fileActivity.remarks" cols="30" rows="5" wire:model="form.fileActivity.remarks"
                             class="form-control @error('form.fileActivity.remarks') is-invalid @enderror" placeholder="कैफ़ियत"></textarea>
@@ -100,7 +118,7 @@
                             <td>
                                 <input type="file" wire:model="form.fileTrackingFiles.{{ $key }}.files" multiple class="form-control">
                             <td>
-                                <button type="button" wire:click="removeFileRow({{$key}})" class="btn btn-sm btn-outline-danger">
+                                <button type="button" wire:click="removeFileTrackingFile({{$key}})" class="btn btn-sm btn-outline-danger">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </td>

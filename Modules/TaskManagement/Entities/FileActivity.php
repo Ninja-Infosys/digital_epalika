@@ -32,6 +32,17 @@ class FileActivity extends Model
         'remarks'
     ];
 
+    public function scopeFilterData($query)
+    {
+        if(auth()->user()->role->type!='Super'){
+            $query->whereHas('users', function ($q) {
+                $q->where('file_activity_user.user_id', auth()->id());
+            });
+        }
+
+        return $query;
+    }
+
     public function fileTracking(): BelongsTo
     {
         return $this->belongsTo(FileTracking::class);

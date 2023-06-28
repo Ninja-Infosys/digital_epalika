@@ -52,19 +52,13 @@
                                         <td>{{ $fileTracking->remarks }}</td>
                                         <td>
                                             @can('taskActivity_access')
-                                                <a href="{{ route('admin.taskManagement.activity.show', $activity) }}"
-                                                    title="हेर्नुहोस" class="btn btn-xs btn-outline-success">
+                                                <a href="{{ route('admin.taskManagement.fileTracking.show', $fileTracking) }}"
+                                                    title="हेर्नुहोस" class="btn btn-xs btn-outline-primary">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @endcan
-                                            @can('taskActivity_edit')
-                                                <a href="{{ route('admin.taskManagement.activity.edit', $activity) }}"
-                                                    title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            @endcan
                                             @can('taskActivity_delete')
-                                                <form action="{{ route('admin.taskManagement.activity.destroy', $activity) }}"
+                                                <form action="{{ route('admin.taskManagement.fileTracking.destroy', $fileTracking) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')
