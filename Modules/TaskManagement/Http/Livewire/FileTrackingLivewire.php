@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\TaskManagement\Entities\FileTracking;
+use Modules\TaskManagement\Enums\FileStatusEnum as EnumsFileStatusEnum;
 
 class FileTrackingLivewire extends Component
 {
@@ -89,6 +90,7 @@ class FileTrackingLivewire extends Component
             ]);
             $fileActivity = $fileTracking->fileActivities()->create($this->form['fileActivity'] + [
                 'assigned_by' => auth()->id(),
+                'status' => EnumsFileStatusEnum::PENDING->value
             ]);
             $fileActivity->users()->attach(
                 count($this->form['fileActivity']['users']) > 0 ? $this->form['fileActivity']['users'] : User::where('branch_id', $this->form['fileActivity']['assigned_branch_id'])->pluck('id')->toArray()

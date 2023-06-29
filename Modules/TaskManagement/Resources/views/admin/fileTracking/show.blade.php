@@ -81,19 +81,29 @@
                                         <td>{{ $fileActivity->date_bs }}</td>
                                         <td>
                                             <a href="{{ route('admin.taskManagement.fileTracking.fileActivity.updateReceivedStatus', [$fileTracking, $fileActivity]) }}"
-                                                class="btn btn-xs btn-outline-{{ $fileActivity->is_received ? 'primary' : 'danger' }}"
-                                                title="प्राप्त {{ $fileActivity->is_received ? 'गरेको' : 'नगरेको' }}">
+                                                class="btn btn-xs btn-outline-{{ $fileActivity->received_by ? 'primary' : 'danger' }}"
+                                                title="प्राप्त {{ $fileActivity->received_by ? 'गरेको' : 'नगरेको' }}">
                                                 <i
-                                                    class="fa  {{ $fileActivity->is_received ? ' fa-check' : 'fa-window-close' }}"></i>
+                                                    class="fa  {{ $fileActivity->received_by ? ' fa-check' : 'fa-window-close' }}"></i>
                                             </a>
                                         </td>
-                                        <td>
-                                            <a href="{{ route('admin.taskManagement.fileTracking.fileActivity.updateStatus', [$fileTracking, $fileActivity]) }}"
-                                                class="btn btn-xs btn-outline-{{ $fileActivity->status ? 'primary' : 'danger' }}"
-                                                title="{{ $fileActivity->status ? 'सक्रिय' : 'निष्क्रिय' }}">
-                                                <i
-                                                    class="fa  {{ $fileActivity->status ? ' fa-check' : 'fa-window-close' }}"></i>
-                                            </a>
+                                        <td style="width:150px;">
+                                            <form
+                                                action="{{ route('admin.taskManagement.fileTracking.fileActivity.updateStatus', [$fileTracking, $fileActivity]) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('put')
+                                                <select name="status" id="status{{ $loop->iteration }}"
+                                                    class="form-select form-select-sm updateFileStatus">
+                                                    <option value="">Select Status</option>
+                                                    @foreach (\Modules\TaskManagement\Enums\FileStatusEnum::cases() as $fileStatus)
+                                                        <option value="{{ $fileStatus->value }}"
+                                                            {{ $fileStatus->value == $fileActivity->status?->value ? 'selected' : '' }}>
+                                                            {{ $fileStatus->label() }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </form>
                                         </td>
                                         <td>{{ $fileActivity->assignedBy->name ?? '' }}</td>
                                         <td>
@@ -161,4 +171,14 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('.updateFileStatus').on('change', function() {
+                    $(this).closest('form').submit()
+                })
+            })
+        </script>
+    @endpush
 @endsection

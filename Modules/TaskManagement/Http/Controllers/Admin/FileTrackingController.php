@@ -12,11 +12,11 @@ class FileTrackingController extends Controller
 {
     public function index()
     {
+        $this->checkAuthorization('fileTracking_access');
+
         $fileTrackings = FileTracking::with('user')
             ->whereHas('fileActivities', function ($query) {
-                $query->whereHas('users', function ($q) {
-                    $q->where('file_activity_user.user_id', auth()->id());
-                });
+                $query->filterData();
             })
             ->orWhere('user_id', auth()->id())
             ->paginate(10);
@@ -26,18 +26,17 @@ class FileTrackingController extends Controller
 
     public function create()
     {
-        return view('taskmanagement::admin.fileTracking.create');
-    }
+        $this->checkAuthorization('fileTracking_create');
 
-    public function store(Request $request)
-    {
-        //
+        return view('taskmanagement::admin.fileTracking.create');
     }
 
     public function show(FileTracking $fileTracking)
     {
+        $this->checkAuthorization('fileTracking_access');
+
         $fileTracking->load(['fileActivities' => function ($query) {
-            $query->with('users','assignedBy');
+            $query->with('users', 'assignedBy');
             $query->filterData();
         }, 'user', 'fileTrackingFiles']);
 
@@ -48,16 +47,15 @@ class FileTrackingController extends Controller
 
     public function edit($id)
     {
-        return view('taskmanagement::edit');
-    }
+        $this->checkAuthorization('fileTracking_edit');
 
-    public function update(Request $request, $id)
-    {
-        //
+        return view('taskmanagement::edit');
     }
 
     public function destroy(FileTracking $fileTracking)
     {
+        $this->checkAuthorization('fileTracking_delete');
+
         foreach ($fileTracking->fileTrackingFiles as $fileTrackingFile) {
             $fileTrackingFile->files()->delete();
         }

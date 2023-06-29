@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Modules\TaskManagement\Enums\FileStatusEnum;
 
 class FileActivity extends Model
 {
@@ -25,16 +26,20 @@ class FileActivity extends Model
         'file_tracking_id',
         'date_bs',
         'date_ad',
-        'is_received',
+        'received_by',
         'status',
         'assigned_by',
         'assigned_branch_id',
         'remarks'
     ];
 
+    protected $casts = [
+        'status' => FileStatusEnum::class
+    ];
+
     public function scopeFilterData($query)
     {
-        if(auth()->user()->role->type!='Super'){
+        if (auth()->user()->role->type != 'Super') {
             $query->whereHas('users', function ($q) {
                 $q->where('file_activity_user.user_id', auth()->id());
             });
@@ -46,6 +51,11 @@ class FileActivity extends Model
     public function fileTracking(): BelongsTo
     {
         return $this->belongsTo(FileTracking::class);
+    }
+
+    public function receivedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'received_by');
     }
 
     public function assignedBy()

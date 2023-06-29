@@ -25,9 +25,11 @@
                         <h4 class="header-title mb-0">फाइल ट्रयाकिङ </h4>
                         <div class="d-flex flex-wrap gap-1 align-items-center">
                             @includeIf('inc.filter_form')
-                            <a href="{{ route('admin.taskManagement.fileTracking.create') }}"
-                                class="btn btn-sm btn-outline-primary waves-effect waves-light">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @can('fileTracking_create')
+                                <a href="{{ route('admin.taskManagement.fileTracking.create') }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -51,14 +53,13 @@
                                         <td>{{ $fileTracking->is_hardcopy ? 'हार्डकपि' : 'सफ्टकपि' }}</td>
                                         <td>{{ $fileTracking->remarks }}</td>
                                         <td>
-                                            @can('taskActivity_access')
-                                                <a href="{{ route('admin.taskManagement.fileTracking.show', $fileTracking) }}"
-                                                    title="हेर्नुहोस" class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            @endcan
-                                            @can('taskActivity_delete')
-                                                <form action="{{ route('admin.taskManagement.fileTracking.destroy', $fileTracking) }}"
+                                            <a href="{{ route('admin.taskManagement.fileTracking.show', $fileTracking) }}"
+                                                title="हेर्नुहोस" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            @can('fileTracking_delete')
+                                                <form
+                                                    action="{{ route('admin.taskManagement.fileTracking.destroy', $fileTracking) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')

@@ -17,7 +17,7 @@ Route::post('activity/excel/import', [ActivityController::class, 'import'])->nam
 Route::resource('activity', ActivityController::class)->except('store', 'update');
 Route::resource('fileTracking', FileTrackingController::class);
 Route::get('fileTracking/{fileTracking}/fileActivity/{fileActivity}/updateReceivedStatus', [FileActivityController::class, 'updateReceivedStatus'])->name('fileTracking.fileActivity.updateReceivedStatus');
-Route::get('fileTracking/{fileTracking}/fileActivity/{fileActivity}/updateStatus', [FileActivityController::class, 'updateStatus'])->name('fileTracking.fileActivity.updateStatus');
+Route::put('fileTracking/{fileTracking}/fileActivity/{fileActivity}/updateStatus', [FileActivityController::class, 'updateStatus'])->name('fileTracking.fileActivity.updateStatus');
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\TaskManagement\Entities\FileTracking;
+use Modules\TaskManagement\Enums\FileStatusEnum;
 
 class FileTransferLivewire extends Component
 {
@@ -61,6 +62,7 @@ class FileTransferLivewire extends Component
         DB::transaction(function () {
             $fileActivity = $this->fileTracking->fileActivities()->create($this->form + [
                 'assigned_by' => auth()->id(),
+                'status' => FileStatusEnum::PENDING->value
             ]);
             $fileActivity->users()->attach(
                 count($this->form['users']) > 0 ? $this->form['users'] : User::where('branch_id', $this->form['assigned_branch_id'])->pluck('id')->toArray()
@@ -71,7 +73,7 @@ class FileTransferLivewire extends Component
             'type' => 'success',
             'title' => 'File Transferred Successfully'
         ]);
-        return back();
+        return redirect(route('admin.taskManagement.fileTracking.show', $this->fileTracking));
     }
 
     public function render()

@@ -13,8 +13,8 @@ return new class extends Migration
             $table->foreignId('file_tracking_id')->constrained()->cascadeOnDelete();
             $table->string('date_bs');
             $table->date('date_ad');
-            $table->boolean('is_received')->default(0);
-            $table->boolean('status')->default(1);
+            $table->foreignId('received_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('status')->nullable();
             $table->foreignId('assigned_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('assigned_branch_id')->nullable()->constrained('branches')->nullOnDelete();
             $table->text('remarks')->nullable();
