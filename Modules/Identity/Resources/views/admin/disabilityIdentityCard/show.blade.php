@@ -24,17 +24,17 @@
                 <div class="card-header px-2 py-1">
                     <div class="card-title border-bottom px-1 d-flex justify-content-between">
                         <h4 class="font-18 ">श्री {{$disabilityIdentityCard->name}} को व्यतिगत विवरण</h4>
-{{--                        <div>--}}
-{{--                            <button class="btn btn-sm btn-info"--}}
-{{--                                    onclick="printJS({--}}
-{{--                                    printable: 'printData',--}}
-{{--                                    targetStyles: ['*'],--}}
-{{--                                    ignoreElements:['ignore-header'],--}}
-{{--                                    type: 'html'--}}
-{{--                                    })">--}}
-{{--                                <i class="fa fa-print"></i> Print--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
+                        <div>
+                            <button class="btn btn-sm btn-info"
+                                    onclick="printJS({
+                                    printable: 'printData',
+                                    targetStyles: ['*'],
+                                    ignoreElements:['ignore-header'],
+                                    type: 'html'
+                                    })">
+                                <i class="fa fa-print"></i> Print
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="profile-table"  id="printData">
@@ -207,12 +207,12 @@
                 <div class="identity-card">
                     <div class="border-bottom py-2 px-2 d-flex justify-content-between">
                         <h4 class="font-18">अपाङ्गता परिचयपत्र</h4>
-                        <a href="javascript:void(0)"
-                           route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}"
-                           class="btn btn-xs btn-outline-warning printDetail">
-                            <i class="fa fa-print">Print</i>
+{{--                        <a href="javascript:void(0)"--}}
+{{--                           route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}"--}}
+{{--                           class="btn btn-xs btn-outline-warning printDetail">--}}
+{{--                            <i class="fa fa-print">Print</i>--}}
 
-                        </a>
+{{--                        </a>--}}
                     </div>
                     <div class="row">
                         <div class="col-md-6 pt-5  ">
