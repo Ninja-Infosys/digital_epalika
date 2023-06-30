@@ -24,17 +24,17 @@
                 <div class="card-header px-2 py-1">
                     <div class="card-title border-bottom px-1 d-flex justify-content-between">
                         <h4 class="font-18 ">श्री {{$disabilityIdentityCard->name}} को व्यतिगत विवरण</h4>
-                        <div>
-                            <button class="btn btn-sm btn-info"
-                                    onclick="printJS({
-                                    printable: 'printData',
-                                    targetStyles: ['*'],
-                                    ignoreElements:['ignore-header'],
-                                    type: 'html'
-                                    })">
-                                <i class="fa fa-print"></i> Print
-                            </button>
-                        </div>
+{{--                        <div>--}}
+{{--                            <button class="btn btn-sm btn-info"--}}
+{{--                                    onclick="printJS({--}}
+{{--                                    printable: 'printData',--}}
+{{--                                    targetStyles: ['*'],--}}
+{{--                                    ignoreElements:['ignore-header'],--}}
+{{--                                    type: 'html'--}}
+{{--                                    })">--}}
+{{--                                <i class="fa fa-print"></i> Print--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
                 <div class="profile-table"  id="printData">
