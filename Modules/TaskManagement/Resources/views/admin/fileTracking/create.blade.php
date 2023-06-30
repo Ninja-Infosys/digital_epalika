@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">कार्यहरू</li>
+                        <li class="breadcrumb-item active">फाइल ट्रयाकिङ</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कार्यहरू </h4>
+                <h4 class="page-title">फाइल ट्रयाकिङ </h4>
             </div>
         </div>
     </div>
@@ -22,16 +22,16 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h4 class="header-title mb-0">कार्यहरू थप्नुहोस</h4>
+                        <h4 class="header-title mb-0">फाइल ट्रयाकिङ थप्नुहोस</h4>
                         <div class="d-flex flex-wrap align-items-center">
-                            <a href="{{ route('admin.taskManagement.activity.index') }}"
+                            <a href="{{ route('admin.taskManagement.fileTracking.index') }}"
                                 class="btn btn-sm btn-outline-primary waves-effect waves-light">
-                                <i class="fa fa-list mx-1"></i>कार्यहरूको सुची</a>
+                                <i class="fa fa-list mx-1"></i>फाइल ट्रयाकिङ सुची</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    @livewire('taskmanagement::activity-livewire')
+                    @livewire('taskmanagement::file-tracking-livewire')
                 </div>
             </div>
         </div>

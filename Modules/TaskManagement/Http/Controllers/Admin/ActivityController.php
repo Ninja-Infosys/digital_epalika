@@ -31,7 +31,7 @@ class ActivityController extends Controller
 
         $activities = Activity::with('branch', 'activityLists')
             ->where('user_id', auth()->id())
-            ->latest('date_en')
+            ->latest()
             ->paginate(50);
 
         return view('taskmanagement::admin.activity.index', compact('activities'));
@@ -86,7 +86,9 @@ class ActivityController extends Controller
     public function edit(Activity $activity)
     {
         $this->checkAuthorization('taskActivity_edit');
+
         $activity->load('activityLists.files');
+
         return view('taskmanagement::admin.activity.edit', compact('activity'));
     }
 
@@ -187,7 +189,7 @@ class ActivityController extends Controller
             'branch_id' => [Rule::requiredIf(auth()->user()->role->type == 'Super')],
         ]);
 
-        $excelData=$this->processExcelData($request->file('excel_file'));
+        $excelData = $this->processExcelData($request->file('excel_file'));
 
         foreach ($excelData as $formData) {
             $activity = Activity::create([

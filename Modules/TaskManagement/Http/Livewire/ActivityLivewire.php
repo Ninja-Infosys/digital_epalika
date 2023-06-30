@@ -2,23 +2,32 @@
 
 namespace Modules\TaskManagement\Http\Livewire;
 
+use App\Traits\NepaliDateConverter;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\TaskManagement\Entities\Activity;
+use Modules\TaskManagement\Enums\ActivityTypeEnum;
 
 class ActivityLivewire extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, NepaliDateConverter;
 
     protected $listeners = ['dateChanged'];
 
-    public $formActivity = [
+    public array $months;
+    public Collection $monthRanges;
+
+    public $form = [
         'date' => '',
         'date_en' => '',
         'remarks' => '',
+        'activity_type' => ActivityTypeEnum::DAILY,
+        'month_range' => '',
         'activity_lists' => [
             [
                 'title' => '',
@@ -32,11 +41,15 @@ class ActivityLivewire extends Component
 
     public function mount($dbActivity = null)
     {
+        $this->months = $this->month_name;
+
         if (!empty($dbActivity)) {
             $this->DbActivity = $dbActivity;
-            $this->formActivity['date'] = $dbActivity->date;
-            $this->formActivity['date_en'] = $dbActivity->date_en?->toDateString();
-            $this->formActivity['remarks'] = $dbActivity->remarks;
+            $this->form['date'] = $dbActivity->date;
+            $this->form['date_en'] = $dbActivity->date_en?->toDateString();
+            $this->form['remarks'] = $dbActivity->remarks;
+            $this->form['activity_type'] = $dbActivity->activity_type?->value;
+            $this->form['month_range'] = $dbActivity->month_range ?? null;
             $list = [];
             foreach ($dbActivity->activityLists as $activityList) {
                 $list[] = [
@@ -46,19 +59,19 @@ class ActivityLivewire extends Component
                     'remarks' => $activityList->remarks,
                 ];
             }
-            $this->formActivity['activity_lists'] = $list;
+            $this->form['activity_lists'] = $list;
         }
     }
 
     public function dateChanged($nepaliDate, $englishDate)
     {
-        $this->formActivity['date'] = $nepaliDate;
-        $this->formActivity['date_en'] = $englishDate;
+        $this->form['date'] = $nepaliDate;
+        $this->form['date_en'] = $englishDate;
     }
 
     public function addActivity()
     {
-        $this->formActivity['activity_lists'][] = [
+        $this->form['activity_lists'][] = [
             'title' => '',
             'description' => '',
             'remarks' => '',
@@ -66,15 +79,17 @@ class ActivityLivewire extends Component
     }
 
     protected $rules = [
-        'formActivity.date' => ['required'],
-        'formActivity.date_en' => ['required'],
-        'formActivity.activity_lists' => ['required', 'array'],
-        'formActivity.activity_lists.*.title' => ['required', 'string', 'max:255'],
-        'formActivity.activity_lists.*.description' => ['nullable'],
-        'formActivity.activity_lists.*.remarks' => ['nullable'],
-        'formActivity.activity_lists.*.documents' => ['nullable', 'array'],
-        'formActivity.activity_lists.*.documents.*' => ['file'],
-        'formActivity.remarks' => ['nullable'],
+        'form.date' => ['required_if:form.activity_type,daily'],
+        'form.date_en' => ['required_if:form.activity_type,daily'],
+        'form.activity_type' => ['required'],
+        'form.month_range' => ['required_if:form.activity_type,monthly'],
+        'form.activity_lists' => ['required', 'array'],
+        'form.activity_lists.*.title' => ['required', 'string', 'max:255'],
+        'form.activity_lists.*.description' => ['nullable'],
+        'form.activity_lists.*.remarks' => ['nullable'],
+        'form.activity_lists.*.documents' => ['nullable', 'array'],
+        'form.activity_lists.*.documents.*' => ['file'],
+        'form.remarks' => ['nullable'],
 
     ];
 
@@ -86,19 +101,35 @@ class ActivityLivewire extends Component
     public function save()
     {
         $this->validate();
+
         DB::transaction(function () {
             if (!empty($this->DbActivity)) {
-                $this->DbActivity->update($this->formActivity);
+                $this->DbActivity->update([
+                    'date' => $this->form['activity_type'] == 'daily' ? $this->form['date'] : null,
+                    'date_en' => $this->form['activity_type'] == 'daily' ? $this->form['date_en'] : null,
+                    'remarks' => $this->form['remarks'] ?? null,
+                    'activity_type' => $this->form['activity_type'],
+                    'month_range' => in_array($this->form['activity_type'], ['monthly', 'tri_monthly', 'quarterly']) ? $this->form['month_range'] : null
+                ]);
             } else {
-                $this->DbActivity = Activity::create($this->formActivity +
-                    [
-                        'user_id' => auth()->id(),
-                        'branch_id' => auth()->user()->branch_id,
-                        'fiscal_year_id' => officeSetting()->fiscal_year_id
-                    ]);
+                $this->DbActivity = Activity::create([
+                    'date' => $this->form['activity_type'] == 'daily' ? $this->form['date'] : null,
+                    'date_en' => $this->form['activity_type'] == 'daily' ? $this->form['date_en'] : null,
+                    'user_id' => auth()->id(),
+                    'branch_id' => auth()->user()->branch_id,
+                    'fiscal_year_id' => officeSetting()->fiscal_year_id,
+                    'remarks' => $this->form['remarks'] ?? null,
+                    'activity_type' => $this->form['activity_type'],
+                    'month_range' => in_array($this->form['activity_type'], ['monthly', 'tri_monthly', 'quarterly']) ? $this->form['month_range'] : null
+                ]);
+                $this->DbActivity->assignedTasks()->create([
+                    'assigned_user_id' => auth()->id(),
+                    'create_user_id' => auth()->id(),
+                    'created_by' => auth()->user()->name
+                ]);
             }
 
-            foreach ($this->formActivity['activity_lists'] as $activityList) {
+            foreach ($this->form['activity_lists'] as $activityList) {
                 if (isset($activityList['id'])) {
                     $createdActivityList = $this->DbActivity->activityLists()->find($activityList['id']);
                     $createdActivityList->update($activityList);
@@ -112,15 +143,14 @@ class ActivityLivewire extends Component
             }
         });
 
-        $this->reset('formActivity');
-        toast('Activity created successfully', 'success');
+        $this->reset('form');
+        toast("Activity " . (!empty($this->DbActivity) ? 'Updated' : 'Created') . "Successfully", 'success');
         return redirect()->route('admin.taskManagement.activity.index');
-
     }
 
     public function removeActivity($index)
     {
-        $data = $this->formActivity['activity_lists'][$index];
+        $data = $this->form['activity_lists'][$index];
 
         if (isset($data['id'])) {
             $activityList = $this->DbActivity->activityLists()->find($data['id']);
@@ -129,9 +159,9 @@ class ActivityLivewire extends Component
                 $activityList->delete();
             }
         }
-        unset($this->formActivity['activity_lists'][$index]);
+        unset($this->form['activity_lists'][$index]);
 
-        $this->formActivity['activity_lists'] = array_values($this->formActivity['activity_lists']);
+        $this->form['activity_lists'] = array_values($this->form['activity_lists']);
     }
 
     private function uploadDocuments($documents, $createdActivityList)
@@ -147,6 +177,14 @@ class ActivityLivewire extends Component
 
     public function render()
     {
+        if (!empty($this->form['activity_type'])) {
+            if ($this->form['activity_type'] == 'tri_monthly') {
+                $this->monthRanges = $this->triMonthlyQuarters();
+            } elseif ($this->form['activity_type'] == 'quarterly') {
+                $this->monthRanges = $this->quarters();
+            }
+        }
+
         return view('taskmanagement::livewire.activity-livewire');
     }
 }

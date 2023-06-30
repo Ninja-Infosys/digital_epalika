@@ -21,6 +21,28 @@
     </li>
 @endcan
 
+<li class="{{ request()->is('admin/taskManagement/fileTracking*') ? 'active' : '' }}">
+    <a href="#sidebarFileTracking" {{ request()->is('admin/taskManagement/fileTracking*') ? 'aria-expanded=true' : '' }}
+        data-bs-toggle="collapse">
+        <i class="fa fa-file"></i>
+        <span> फाइल ट्रयाकिङ</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{ request()->is('admin/taskManagement/fileTracking*') ? 'show' : '' }}"
+        id="sidebarFileTracking">
+        <ul class="nav-second-level">
+            @can('fileTracking_access')
+                <li class="{{ request()->is('admin/taskManagement/fileTracking') ? 'active' : '' }}">
+                    <a href="{{ route('admin.taskManagement.fileTracking.index') }}">
+                        <span>फाइल ट्रयाकिङ लिस्ट</span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>
 <li class="{{ request()->is('admin/taskManagement/report*') ? 'active' : '' }}">
     <a href="#sidebarTaskManagementReport"
         {{ request()->is('admin/taskManagement/report*') ? 'aria-expanded=true' : '' }} data-bs-toggle="collapse">
