@@ -207,12 +207,12 @@
                 <div class="identity-card">
                     <div class="border-bottom py-2 px-2 d-flex justify-content-between">
                         <h4 class="font-18">अपाङ्गता परिचयपत्र</h4>
-                        <a href="javascript:void(0)"
-                           route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}"
-                           class="btn btn-xs btn-outline-warning printDetail">
-                            <i class="fa fa-print">Print</i>
+{{--                        <a href="javascript:void(0)"--}}
+{{--                           route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}"--}}
+{{--                           class="btn btn-xs btn-outline-warning printDetail">--}}
+{{--                            <i class="fa fa-print">Print</i>--}}
 
-                        </a>
+{{--                        </a>--}}
                     </div>
                     <div class="row">
                         <div class="col-md-6 pt-5  ">

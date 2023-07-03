@@ -1135,6 +1135,53 @@
                             </div>
                         </div>
                     </fieldset>
+             {{--     <fieldset class="mt-3">
+                        <legend>डकुमेन्ट</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="form.provide_detail_citizenship_no_place" class="form-label">
+                                    अनुसूची-२ बमोजिमको निवेदन </label>
+                                <input
+                                    name="form.provide_detail_citizenship_no_place"
+                                    class="form-control  @error('form.provide_detail_citizenship_no_place') is-invalid @enderror"
+                                    type="text"
+                                    id="form.provide_detail_citizenship_no_place"
+                                    wire:model="form.provide_detail_citizenship_no_place"
+                                />
+                                @error('form.provide_detail_citizenship_no_place')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="form.provide_detail_citizenship_no_place" class="form-label">
+                                    वडा कार्यालयको सिफारिस </label>
+                                <input
+                                    name="form.provide_detail_citizenship_no_place"
+                                    class="form-control  @error('form.provide_detail_citizenship_no_place') is-invalid @enderror"
+                                    type="text"
+                                    id="form.provide_detail_citizenship_no_place"
+                                    wire:model="form.provide_detail_citizenship_no_place"
+                                />
+                                @error('form.provide_detail_citizenship_no_place')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="form.provide_detail_citizenship_no_place" class="form-label">
+                                    अपांगता प्रष्ट हुने चिकित्सकको प्रमाण-पत्र</label>
+                                <input
+                                    name="form.provide_detail_citizenship_no_place"
+                                    class="form-control  @error('form.provide_detail_citizenship_no_place') is-invalid @enderror"
+                                    type="text"
+                                    id="form.provide_detail_citizenship_no_place"
+                                    wire:model="form.provide_detail_citizenship_no_place"
+                                />
+                                @error('form.provide_detail_citizenship_no_place')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                  </fieldset> --}}
 
                     <span style="display: flex;justify-content: space-between;">
                         <div class="mt-2">
@@ -1320,10 +1367,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-
                             <div class="col-md-4 mb-3">
-
                                 <label for="dob_ad" class="form-label">जन्म मिति (ई.स.)</label>
                                 <input
                                     class="form-control  @error('form.dob_ad') is-invalid @enderror"
@@ -1504,11 +1548,8 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
                         </div>
                     </fieldset>
-
-
                     <div class="d-flex justify-content-end mt-2">
 
                         <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary"> अर्को <i
