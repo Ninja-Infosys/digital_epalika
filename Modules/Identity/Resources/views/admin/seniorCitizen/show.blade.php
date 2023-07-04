@@ -107,12 +107,8 @@
                             <td>ठेगाना :{{ $seniorCitizenDetail->patrons_name_address }}</td>
                         </tr>
                         <tr>
-                            <th colspan="3">सम्पर्क व्यक्तिको विवरण :</th>
-                        </tr>
-                        <tr>
-                            <td>सम्पर्क व्यक्तिको नाम : {{ $seniorCitizenDetail->contact_person_name }}</td>
-                            <td>सम्पर्क नं. : {{ $seniorCitizenDetail->contact_person_phone }}</td>
-                            <td>ठेगाना :{{ $seniorCitizenDetail->contact_person_address }}</td>
+                            <td>संरक्षकको फोन : {{ $seniorCitizenDetail->patrons_phone }}</td>
+                            <td>नाता :{{ $seniorCitizenDetail->patrons_relationship }}</td>
                         </tr>
                         <tr>
                             <th>कुनै प्रकारको रोग छ वा छैन ? : {{ $seniorCitizenDetail->is_disease == 1 ? 'छ' : 'छैन' }}

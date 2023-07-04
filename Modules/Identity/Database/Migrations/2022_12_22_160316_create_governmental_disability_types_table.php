@@ -12,7 +12,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('title_en');
+            $table->integer('position');
             $table->string('color');
+            $table->string('category')->nullable();
+            $table->string('header_color')->nullable();
+            $table->string('font_color')->nullable();
+            $table->string('raven_background')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

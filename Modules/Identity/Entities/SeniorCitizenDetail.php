@@ -56,10 +56,8 @@ class SeniorCitizenDetail extends Model
         'patrons_name',
         'patrons_name_en',
         'patrons_name_address',
-        'contact_person_name',
-        'contact_person_name_en',
-        'contact_person_phone',
-        'contact_person_address',
+        'patrons_phone',
+        'patrons_relationship',
         'is_disease',
         'disease_name',
         'description',
@@ -128,7 +126,7 @@ class SeniorCitizenDetail extends Model
                 ? Storage::disk('public')->url($this->attributes['photo'])
                 : $this->attributes['photo'];
         } else {
-            return '';
+            return asset('images/user_icon.jpg');
         }
     }
 

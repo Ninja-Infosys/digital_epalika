@@ -10,11 +10,15 @@ return new class extends Migration
     {
         Schema::create('disability_identity_cards', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक वर्ष')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->longText('photo');
             $table->string('finger_print_type')->nullable();
             $table->string('name');
             $table->string('name_en');
+            $table->string('identity_type')->nullable();
+            $table->string('material_name')->nullable();
             $table->string('gender');
+            $table->boolean('is_necessary')->default(0);
             $table->foreignId('ethnicity_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('dob_ad')->nullable();
             $table->string('dob_bs')->nullable();
@@ -22,10 +26,12 @@ return new class extends Migration
             $table->foreignId('temporary_district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('temporary_local_body_id')->nullable()->constrained('local_bodies')->nullOnDelete()->onUpdate('no action');
             $table->string('temporary_ward')->nullable();
+            $table->string('temporary_tole')->nullable();
             $table->foreignId('permanent_province_id')->nullable()->constrained('provinces')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('permanent_district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('permanent_local_body_id')->nullable()->constrained('local_bodies')->nullOnDelete()->onUpdate('no action');
             $table->string('permanent_ward')->nullable();
+            $table->string('permanent_tole')->nullable();
             $table->string('guardian_name')->nullable();
             $table->string('guardian_name_en')->nullable();
             $table->foreignId('relationship_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
@@ -47,6 +53,7 @@ return new class extends Migration
             $table->string('birth_registration_place')->nullable();
             $table->string('birth_registration_bs')->nullable();
             $table->string('birth_registration_ad')->nullable();
+            $table->string('is_citizenship')->nullable();
             $table->string('citizenship_no')->nullable();
             $table->string('citizenship_no_place')->nullable();
             $table->string('citizenship_no_bs')->nullable();
@@ -71,6 +78,7 @@ return new class extends Migration
             $table->string('provide_detail_citizenship_no_place')->nullable();
             $table->text('details_of_damage')->nullable();
             $table->text('obstacle_description')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->timestamps();
             $table->softDeletes();
         });
