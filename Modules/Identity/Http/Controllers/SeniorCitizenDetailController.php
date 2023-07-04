@@ -55,6 +55,8 @@ class SeniorCitizenDetailController extends Controller
     {
         $this->authorize('delete', $seniorCitizenDetail);
         $seniorCitizenDetail->delete();
+
+        toast('जेष्ठ नागरिक विवरण सफलतापुर्बक हटाइयो', 'success');
         return back();
     }
 
