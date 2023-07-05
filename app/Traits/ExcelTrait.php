@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Traits;
 
 use App\Exports\ReportExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-trait ExcelTrait {
+trait ExcelTrait
+{
     private function storeExcelFile($lists): string
     {
         $excelUrl = 'excel/' . date('Ymd') . '/' . time() . '.xlsx';

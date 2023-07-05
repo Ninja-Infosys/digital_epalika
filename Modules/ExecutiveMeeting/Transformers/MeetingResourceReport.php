@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class MeetingResourceReport extends JsonResource
 {
-
     public function toArray($request): array
     {
         $request_columns = $request->input('columns')['meetings'] ?? [];

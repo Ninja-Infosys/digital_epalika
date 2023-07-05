@@ -144,15 +144,15 @@ class ReportController extends Controller
     {
         $complaintSubjects = ComplaintSubject::with(['complaintApplications' => function ($query) use ($request) {
             $this->filterDataFromUser($query, $request);
-        }])->get()->map(function ($complaintSubject,$key){
+        }])->get()->map(function ($complaintSubject, $key) {
             return [
                 'sn' => (int)$key + 1,
                 'subject' => $complaintSubject->subject ?? '',
                 'total'=>$complaintSubject->complaintApplications->count(),
-                'completed'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::COMPLETED)->count(),
-                'pending'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::PENDING)->count(),
-                'recommended'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::RECOMMENDED)->count(),
-                'society_conciliated'=>$complaintSubject->complaintApplications->where('application_status',ComplaintApplicationStatusEnum::SOCIETY_CONCILIATED)->count(),
+                'completed'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::COMPLETED)->count(),
+                'pending'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::PENDING)->count(),
+                'recommended'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::RECOMMENDED)->count(),
+                'society_conciliated'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::SOCIETY_CONCILIATED)->count(),
             ];
         });
 

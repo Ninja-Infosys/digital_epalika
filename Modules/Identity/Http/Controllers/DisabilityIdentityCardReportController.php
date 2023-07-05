@@ -4,13 +4,11 @@ namespace Modules\Identity\Http\Controllers;
 
 use App\Enums\Gender;
 use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
-use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityType;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
@@ -70,7 +68,7 @@ class DisabilityIdentityCardReportController extends Controller
         }
 
         return response()->json([
-            'view' => (string)View::make('identity::admin.report.inc.ward', compact('wardData','disabilityIdentityCards'))
+            'view' => (string)View::make('identity::admin.report.inc.ward', compact('wardData', 'disabilityIdentityCards'))
         ]);
     }
 
@@ -104,7 +102,7 @@ class DisabilityIdentityCardReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $governmentalDisabilityTypes = GovernmentalDisabilityType::all();
-        return view('identity::admin.report.governmentalDisabilityType', compact('fiscalYears','governmentalDisabilityTypes'));
+        return view('identity::admin.report.governmentalDisabilityType', compact('fiscalYears', 'governmentalDisabilityTypes'));
     }
 
     public function governmentalDisabilityTypeReport(Request $request)
@@ -148,7 +146,7 @@ class DisabilityIdentityCardReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $disabilityTypes = DisabilityType::all();
-        return view('identity::admin.report.disabilityType', compact('fiscalYears','disabilityTypes'));
+        return view('identity::admin.report.disabilityType', compact('fiscalYears', 'disabilityTypes'));
     }
 
     public function disabilityTypeReport(Request $request)
@@ -187,5 +185,4 @@ class DisabilityIdentityCardReportController extends Controller
             'view' => (string)View::make('identity::admin.report.inc.disabilityType', compact('disabilityTypes'))
         ]);
     }
-
 }

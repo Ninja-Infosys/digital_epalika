@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Address\Province;
 use App\Traits\StoreSqlInDatabaseTrait;
 use Illuminate\Database\Seeder;
 

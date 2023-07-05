@@ -8,7 +8,7 @@ class FileObserver
 {
     public function creating(File $file): void
     {
-        if (auth()->check()){
+        if (auth()->check()) {
             $file->user_id = auth()->id();
         }
     }

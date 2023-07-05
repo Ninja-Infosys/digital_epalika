@@ -11,7 +11,6 @@ class TaskManagementPermissionSeederTableSeeder extends Seeder
 
     public function run()
     {
-
         $permissions = [
             'taskManagementDashboard_access',
             'taskActivity_access',

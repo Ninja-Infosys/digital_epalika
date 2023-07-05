@@ -12,11 +12,12 @@ class FileController extends Controller
 {
     public function index(Request $request)
     {
-        $all_uploads = File:: where(function ($query) {
-                if (auth()->user()->role->type !== 'Super')
-                    $query->where('user_id', auth()->id())
-                        ->orWhere('branch_id', auth()->user()->branch_id);
-            });
+        $all_uploads = File::where(function ($query) {
+            if (auth()->user()->role->type !== 'Super') {
+                $query->where('user_id', auth()->id())
+                    ->orWhere('branch_id', auth()->user()->branch_id);
+            }
+        });
 
         $search = null;
         $sort_by = null;
@@ -122,7 +123,6 @@ class FileController extends Controller
 
     public function downloadFile()
     {
-
 //        dd($_GET['file_url']);
         if (!empty($_GET['file_url']) && Storage::disk('public')->exists($_GET['file_url'])) {
             return Storage::disk('public')->download($_GET['file_url']);
@@ -147,7 +147,6 @@ class FileController extends Controller
 
     public function fileUpload(Request $request)
     {
-
         $file = $request->file('upload');
         $path = 'ckEditor/' . date("Y-m-d");
         $filename = $file->getClientOriginalName();
@@ -163,5 +162,4 @@ class FileController extends Controller
             'url' => Storage::disk('public')->url($path)
         ]);
     }
-
 }

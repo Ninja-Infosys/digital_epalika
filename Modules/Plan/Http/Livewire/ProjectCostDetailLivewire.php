@@ -6,7 +6,6 @@ use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\Plan\Entities\BenefitedMemberDetail;
 use Modules\Plan\Entities\Project;
-use Modules\Plan\Entities\ProjectCostDetail;
 use Modules\Plan\Entities\ProjectGrantDetail;
 use Modules\Plan\Enums\GrantSourceEnum;
 

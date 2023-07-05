@@ -1,4 +1,5 @@
 <?php
+
  namespace Modules\Grant\Traits;
 
  use Illuminate\Support\Facades\DB;

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\Setting\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController;
 use Modules\DigitalBoard\Http\Controllers\Admin\NoticeController;

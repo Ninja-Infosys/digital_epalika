@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class MapSetting extends Model
 {
@@ -41,19 +40,19 @@ class MapSetting extends Model
         return $this->belongsTo(Unit::class, 'land_measurement_standard_id');
     }
 
-    protected function thumbnail():Attribute
+    protected function thumbnail(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value):'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('mapSetting/', 'public'):null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('mapSetting/', 'public') : null,
         );
     }
 
-    protected function document():Attribute
+    protected function document(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value):'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('mapSetting/', 'public'):null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('mapSetting/', 'public') : null,
         );
     }
 }

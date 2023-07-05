@@ -19,7 +19,10 @@ use App\Traits\EventObserveTrait;
 
 class TaxPayer extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -115,5 +118,4 @@ class TaxPayer extends Model
     {
         return $this->hasMany(TaxPayerLand::class);
     }
-
 }

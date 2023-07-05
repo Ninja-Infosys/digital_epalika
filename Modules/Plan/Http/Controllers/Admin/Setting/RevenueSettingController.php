@@ -9,7 +9,6 @@ use App\Models\Settings\Units\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
-use Modules\EMap\Entities\MapSetting;
 
 class RevenueSettingController extends Controller
 {

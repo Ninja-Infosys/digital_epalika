@@ -8,8 +8,6 @@ use App\Models\OfficeHeader;
 use App\Models\RevenueSetting;
 use App\Models\Settings\LetterHead;
 use App\Models\Settings\OfficeSetting;
-use App\Models\Settings\Units\Unit;
-use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +20,6 @@ if (!function_exists('officeSetting')) {
     function officeSetting()
     {
         return Cache::rememberForever('office_setting', function () {
-
             if (Schema::hasTable('office_settings')) {
                 return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
             }

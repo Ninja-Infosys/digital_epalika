@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
-class
-StoreEmployeeRequest extends FormRequest
+class StoreEmployeeRequest extends FormRequest
 {
     public function authorize(): bool
     {

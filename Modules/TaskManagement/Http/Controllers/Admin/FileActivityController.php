@@ -2,7 +2,6 @@
 
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rules\Enum;

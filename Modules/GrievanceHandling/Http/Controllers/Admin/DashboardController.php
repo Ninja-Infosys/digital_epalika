@@ -7,7 +7,6 @@ use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
@@ -34,7 +33,7 @@ class DashboardController extends Controller
         $closedGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::CLOSED->value)->count();
         $investigatedGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::INVESTIGATED->value)->count();
         $seenGrievanceCount = $this->grievanceDetails->where('status', '!=', GrievanceStatus::UNSEEN->value)->count();
-        if(request()->ajax()){
+        if (request()->ajax()) {
             return [
                 'grievanceCountAccordingToSeverity' => $this->getDataAccordingToSeverity(),
             'grievanceCountAccordingToStatus' => $this->getDataAccordingToStatus(),
@@ -88,7 +87,7 @@ class DashboardController extends Controller
     {
         return GrievanceType::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
-        }])->get()->map(function ($grievanceTypes){
+        }])->get()->map(function ($grievanceTypes) {
             return [
                 'name' => $grievanceTypes->title,
                 'data' => $grievanceTypes->grievance_details_count
@@ -99,7 +98,7 @@ class DashboardController extends Controller
     {
         return GrievanceOffice::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
-        }])->get()->map(function ($grievanceOffice){
+        }])->get()->map(function ($grievanceOffice) {
             return [
                 'name' => $grievanceOffice->title,
                 'data' => $grievanceOffice->grievance_details_count
@@ -111,9 +110,9 @@ class DashboardController extends Controller
         $totalCount = collect([0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0]);
 
         $this->grievanceDetails
-            ->each(function ($grievanceDetail) use($totalCount) {
+            ->each(function ($grievanceDetail) use ($totalCount) {
                 $date = Carbon::parse($grievanceDetail->created_at);
-                $nepaliDate = $this->get_nepali_date($date->format('Y'),$date->format('m'),$date->format('d'));
+                $nepaliDate = $this->get_nepali_date($date->format('Y'), $date->format('m'), $date->format('d'));
                 $totalCount[(int)$nepaliDate['m']-1] +=1;
             });
 

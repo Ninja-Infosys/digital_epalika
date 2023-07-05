@@ -6,7 +6,6 @@ use App\Http\Controllers\Installer\LicenseController;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class LicenseMiddleware
 {
@@ -20,7 +19,7 @@ class LicenseMiddleware
                     return (new LicenseController())->checkLicense($license, $domain);
                 });
             } else {
-                Cache::remember('licenseError', 60 * 60 * 12, fn() => 'License key not found');
+                Cache::remember('licenseError', 60 * 60 * 12, fn () => 'License key not found');
             }
         }
         return $next($request);

@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SeniorCitizenDetailResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         $seniorCitizenDetail = $request->input('columns')['senior_citizen_details'] ?? [];

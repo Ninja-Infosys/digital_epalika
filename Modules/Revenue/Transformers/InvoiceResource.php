@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class InvoiceResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         $request_columns = $request->input('columns')['invoices'] ?? [];

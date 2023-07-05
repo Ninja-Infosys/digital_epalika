@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UpdateCommitteeRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('committee_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'committee_type_id' => ['required', Rule::exists('committee_types', 'id')->withoutTrashed()],

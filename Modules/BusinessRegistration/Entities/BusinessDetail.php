@@ -12,9 +12,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +20,6 @@ use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\SourceOfCapital;
 use Modules\BusinessRegistration\Traits\BusinessDetailTemplateTrait;
-use function _\get;
 
 class BusinessDetail extends Model
 {
@@ -128,12 +125,12 @@ class BusinessDetail extends Model
 
     public function SourceOfCapital(): Attribute
     {
-        return Attribute::get(fn($value) => SourceOfCapital::tryFrom($value)?->label() ?? null);
+        return Attribute::get(fn ($value) => SourceOfCapital::tryFrom($value)?->label() ?? null);
     }
 
     public function BusinessType(): Attribute
     {
-        return Attribute::get(fn($value) => BusinessTypeEnum::tryFrom($value)?->label() ?? null);
+        return Attribute::get(fn ($value) => BusinessTypeEnum::tryFrom($value)?->label() ?? null);
     }
 
 
@@ -173,7 +170,6 @@ class BusinessDetail extends Model
     public function getRentAgreementAttribute(): string
     {
         return $this->attributes['rent_agreement'] ? Storage::disk('public')->url($this->attributes['rent_agreement']) : '';
-
     }
 
     public function setLandOwnershipCertificateAttribute($value): void
@@ -186,7 +182,6 @@ class BusinessDetail extends Model
     public function getLandOwnershipCertificateAttribute(): string
     {
         return $this->attributes['land_ownership_certificate'] ? Storage::disk('public')->url($this->attributes['land_ownership_certificate']) : '';
-
     }
 
 
@@ -200,7 +195,6 @@ class BusinessDetail extends Model
     public function getWardRecommendationAttribute(): string
     {
         return $this->attributes['ward_recommendation'] ? Storage::disk('public')->url($this->attributes['ward_recommendation']) : '';
-
     }
 
     public function setEmbassyDocumentAttribute($value): void
@@ -213,7 +207,6 @@ class BusinessDetail extends Model
     public function getEmbassyDocumentAttribute(): string
     {
         return $this->attributes['embassy_document'] ? Storage::disk('public')->url($this->attributes['embassy_document']) : '';
-
     }
 
 
@@ -227,7 +220,6 @@ class BusinessDetail extends Model
     public function getRegistrationDocumentAttribute(): string
     {
         return $this->attributes['registration_document'] ? Storage::disk('public')->url($this->attributes['registration_document']) : '';
-
     }
 
 
@@ -241,7 +233,6 @@ class BusinessDetail extends Model
     public function getLicenseAttribute(): string
     {
         return $this->attributes['license'] ? Storage::disk('public')->url($this->attributes['license']) : '';
-
     }
 
 
@@ -255,15 +246,14 @@ class BusinessDetail extends Model
     public function getTaxDocumentAttribute(): string
     {
         return $this->attributes['tax_document'] ? Storage::disk('public')->url($this->attributes['tax_document']) : '';
-
     }
 
 
     public function otherFile(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => !empty($value) ? Storage::url($value) : null,
-            set: fn($value) => (!empty($value) && !is_string($value))
+            get: fn ($value) => !empty($value) ? Storage::url($value) : null,
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('other_file', 'public')
                 : null
         );
@@ -272,12 +262,10 @@ class BusinessDetail extends Model
     public function getAreaAttribute(): float|int
     {
         return $this->attributes['length'] * $this->attributes['width'];
-
     }
 
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
     }
-
 }

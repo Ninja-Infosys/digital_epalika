@@ -85,5 +85,4 @@ class ReportController extends Controller
             $q->whereIn('committee_id', $request->input('committee'));
         }
     }
-
 }

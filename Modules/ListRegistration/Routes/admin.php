@@ -6,7 +6,7 @@ use Modules\ListRegistration\Http\Controllers\Admin\ListRegistrationController;
 use Modules\ListRegistration\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-Route::put('listRegistration/{listRegistration}/updateFile',[ListRegistrationController::class,'updateFile'])->name('listRegistration.updateFile');
+Route::put('listRegistration/{listRegistration}/updateFile', [ListRegistrationController::class,'updateFile'])->name('listRegistration.updateFile');
 Route::resource('listRegistration', ListRegistrationController::class);
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {

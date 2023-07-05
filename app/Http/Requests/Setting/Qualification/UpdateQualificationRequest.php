@@ -3,16 +3,15 @@
 namespace App\Http\Requests\Setting\Qualification;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class UpdateQualificationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
-         return true;
+        return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'achievement' => ['required'],

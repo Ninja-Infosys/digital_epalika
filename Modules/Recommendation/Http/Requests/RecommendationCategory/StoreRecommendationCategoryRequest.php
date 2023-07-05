@@ -17,7 +17,7 @@ class StoreRecommendationCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'recommendation_category_id' => ['nullable',Rule::exists('recommendation_categories','id')->withoutTrashed()],
+            'recommendation_category_id' => ['nullable',Rule::exists('recommendation_categories', 'id')->withoutTrashed()],
         ];
     }
 }

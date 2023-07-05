@@ -2,7 +2,6 @@
 
 namespace Modules\Recommendation\Observers;
 
-
 use Modules\Recommendation\Entities\RegistrationDetail;
 
 class RegistrationDetailObserver

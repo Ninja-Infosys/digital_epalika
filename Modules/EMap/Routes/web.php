@@ -40,4 +40,3 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('mapApply/{mapApply:uuid}/{noticeTypeEnum}/trackData', 'loadTemplateData')->name('load-template-data');
     Route::post('mapApply/{mapApply:uuid}/{noticeTypeEnum}/storeEmapTemplateData', 'storeEmapTemplateData')->name('store-emap-template-data');
 });
-

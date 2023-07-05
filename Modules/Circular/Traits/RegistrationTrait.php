@@ -4,7 +4,6 @@ namespace Modules\Circular\Traits;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\Circular\Entities\CircularSetting;
 use Modules\Circular\Entities\Registration;
 
 trait RegistrationTrait
@@ -18,7 +17,6 @@ trait RegistrationTrait
     }
     public function getRegistrationNumber(): string
     {
-
         return $this->getRegistrationPrefix() . $this->getRegistrationNo();
     }
 

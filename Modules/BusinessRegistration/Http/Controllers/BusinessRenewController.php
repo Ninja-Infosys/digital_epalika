@@ -2,11 +2,8 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessRenew;
 use Modules\BusinessRegistration\Http\Requests\BusinessRenew\StoreBusinessRenewRequest;

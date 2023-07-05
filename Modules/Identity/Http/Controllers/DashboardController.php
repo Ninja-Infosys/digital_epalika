@@ -2,8 +2,6 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\DisabilityIdentityCard;
@@ -11,7 +9,8 @@ use Modules\Identity\Entities\SeniorCitizenDetail;
 
 class DashboardController extends Controller
 {
-    protected Collection $disabilityIdentityCard ,$seniorCitizenDetail;
+    protected Collection $disabilityIdentityCard ;
+    protected Collection $seniorCitizenDetail;
 
     public function __construct()
     {
@@ -26,27 +25,26 @@ class DashboardController extends Controller
 
         $disabilityIdentityCardCount = $this->disabilityIdentityCard->count();
         $seniorCitizenDetailCount = $this->seniorCitizenDetail->count();
-        $fiscalYearWiseDisabilityCount = $this->disabilityIdentityCard->where('fiscal_year_id',officeSetting()->fiscal_year_id)->count();
-        $fiscalYearWiseSeniorCitizenDetail = $this->seniorCitizenDetail->where('fiscal_year_id',officeSetting()->fiscal_year_id)->count();
-        if(request()->ajax()){
+        $fiscalYearWiseDisabilityCount = $this->disabilityIdentityCard->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
+        $fiscalYearWiseSeniorCitizenDetail = $this->seniorCitizenDetail->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
+        if (request()->ajax()) {
             return [
                 'wardWise' => $this->getWardWiseData(),
                 'SeniorDetailWardWise' => $this->getSeniorDetailWardWiseData(),
             ];
         }
-        return view('identity::admin.dashboard',compact('fiscalYearWiseSeniorCitizenDetail','disabilityIdentityCardCount','fiscalYearWiseDisabilityCount','seniorCitizenDetailCount'));
+        return view('identity::admin.dashboard', compact('fiscalYearWiseSeniorCitizenDetail', 'disabilityIdentityCardCount', 'fiscalYearWiseDisabilityCount', 'seniorCitizenDetailCount'));
     }
 
     public function getWardWiseData()
     {
         $wardsData = collect();
-        foreach (\officeSetting()->localBody->ward_no as $ward)
-        {
+        foreach (\officeSetting()->localBody->ward_no as $ward) {
             $wardsData->push([
                 'ward_no' => "वडा नं. $ward",
                 'disability_identity_card' => $this->disabilityIdentityCard
-                    ->where('permanent_ward',$ward)
-                    ->where('fiscal_year_id',officeSetting()->fiscal_year_id)
+                    ->where('permanent_ward', $ward)
+                    ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
                     ->count()
             ]);
         }
@@ -65,13 +63,12 @@ class DashboardController extends Controller
     public function getSeniorDetailWardWiseData()
     {
         $wardsData = collect();
-        foreach (\officeSetting()->localBody->ward_no as $ward)
-        {
+        foreach (\officeSetting()->localBody->ward_no as $ward) {
             $wardsData->push([
                 'ward_no' => "वडा नं. $ward",
                 'senior_citizen_detail_count' => $this->seniorCitizenDetail
-                    ->where('ward_no',$ward)
-                    ->where('fiscal_year_id',officeSetting()->fiscal_year_id)
+                    ->where('ward_no', $ward)
+                    ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
                     ->count()
             ]);
         }
@@ -86,6 +83,4 @@ class DashboardController extends Controller
             ],
         ];
     }
-
-
 }

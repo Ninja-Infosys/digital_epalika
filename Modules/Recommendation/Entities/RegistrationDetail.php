@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Storage;
 
 class RegistrationDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -62,14 +65,14 @@ class RegistrationDetail extends Model
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 
     public function Application(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Storage::disk('public')->url($value),
-            set: fn($value) => (!empty($value) && !is_string($value)) ? $value->store('registrationDetail', 'public') : null,
+            get: fn ($value) => Storage::disk('public')->url($value),
+            set: fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('registrationDetail', 'public') : null,
         );
     }
 
@@ -86,8 +89,4 @@ class RegistrationDetail extends Model
         }
         return $query;
     }
-
-
-
 }
-

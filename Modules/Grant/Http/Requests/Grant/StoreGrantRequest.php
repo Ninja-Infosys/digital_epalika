@@ -10,12 +10,12 @@ use Modules\Grant\Enums\GranteeEnum;
 
 class StoreGrantRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('grant_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'fiscal_year_id' => ['required', Rule::exists('fiscal_years', 'id')->withoutTrashed()],

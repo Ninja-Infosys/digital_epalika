@@ -2,7 +2,6 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Plan\Entities\Project;
@@ -11,9 +10,9 @@ class ProjectBidSubmissionController extends Controller
 {
     public function index(Project $project)
     {
-        $project->loadSum('projectAllocatedAmounts','amount');
+        $project->loadSum('projectAllocatedAmounts', 'amount');
 
-        return view('plan::admin.project_bid_submission.index',compact('project'));
+        return view('plan::admin.project_bid_submission.index', compact('project'));
     }
 
     public function create()

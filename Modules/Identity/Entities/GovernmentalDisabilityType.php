@@ -11,7 +11,9 @@ use Modules\Identity\Enums\CategoryTypeEnum;
 
 class GovernmentalDisabilityType extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -36,7 +38,6 @@ class GovernmentalDisabilityType extends Model
 
     public function disabilityIdentityCards(): HasMany
     {
-        return $this->hasMany(DisabilityIdentityCard::class,'govern_disability_type_id');
+        return $this->hasMany(DisabilityIdentityCard::class, 'govern_disability_type_id');
     }
-
 }

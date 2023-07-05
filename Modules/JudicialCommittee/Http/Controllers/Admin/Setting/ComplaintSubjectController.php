@@ -34,7 +34,7 @@ class ComplaintSubjectController extends Controller
 
         ComplaintSubject::create($request->validated());
 
-        toast('उजुरी विषय सफलतापूर्वक थपियो','success');
+        toast('उजुरी विषय सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -49,7 +49,7 @@ class ComplaintSubjectController extends Controller
 
         $lawsuitNatures=LawsuitNature::all();
 
-        return view('judicialcommittee::admin.setting.complaint_subject.edit',compact('complaintSubject','lawsuitNatures'));
+        return view('judicialcommittee::admin.setting.complaint_subject.edit', compact('complaintSubject', 'lawsuitNatures'));
     }
 
     public function update(UpdateComplaintSubjectRequest $request, ComplaintSubject $complaintSubject)
@@ -58,7 +58,7 @@ class ComplaintSubjectController extends Controller
 
         $complaintSubject->update($request->validated());
 
-        toast('उजुरी विषय सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('उजुरी विषय सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.judicialCommittee.setting.complaintSubject.index'));
     }
@@ -69,7 +69,7 @@ class ComplaintSubjectController extends Controller
 
         $complaintSubject->delete();
 
-        toast('उजुरी विषय सफलतापूर्वक हटाइयो','success');
+        toast('उजुरी विषय सफलतापूर्वक हटाइयो', 'success');
 
         return back();
     }

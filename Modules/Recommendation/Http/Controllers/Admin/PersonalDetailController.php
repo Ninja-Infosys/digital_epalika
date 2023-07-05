@@ -7,6 +7,7 @@ use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Http\Requests\PersonalDetail\StorePersonalDetailRequest;
 use Modules\Recommendation\Http\Requests\PersonalDetail\UpdatePersonalDetailRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class PersonalDetailController extends Controller
 {
     public function index()
@@ -48,8 +49,8 @@ class PersonalDetailController extends Controller
     public function show(PersonalDetail $personalDetail)
     {
         $this->checkAuthorization('personalDetail_access');
-        $personalDetail->load('province','district','localBody','registrationDetails.recommendationCategory');
-        return view('recommendation::admin.setting.personalDetail.show',compact('personalDetail'));
+        $personalDetail->load('province', 'district', 'localBody', 'registrationDetails.recommendationCategory');
+        return view('recommendation::admin.setting.personalDetail.show', compact('personalDetail'));
     }
 
     public function edit(PersonalDetail $personalDetail)

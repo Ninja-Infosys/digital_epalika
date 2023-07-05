@@ -34,10 +34,10 @@ class DashboardController extends Controller
         }
 
         $registrationDetailCount = $this->registrationDetail->count();
-        $todayRegistrationDetailCount = RegistrationDetail::whereDate('date_en',today()->toDateString())->count();
+        $todayRegistrationDetailCount = RegistrationDetail::whereDate('date_en', today()->toDateString())->count();
         $totalPersonalDetailCount = PersonalDetail::count();
-        $totalYealyRegistrationDetailCount = $this->registrationDetail->where('fiscal_year_id',officeSetting()->fiscal_year_id)->count();
-        return view('recommendation::admin.dashboard',compact('totalYealyRegistrationDetailCount','totalPersonalDetailCount','registrationDetailCount','todayRegistrationDetailCount'));
+        $totalYealyRegistrationDetailCount = $this->registrationDetail->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
+        return view('recommendation::admin.dashboard', compact('totalYealyRegistrationDetailCount', 'totalPersonalDetailCount', 'registrationDetailCount', 'todayRegistrationDetailCount'));
     }
 
     public function getWardWiseData()
@@ -103,5 +103,4 @@ class DashboardController extends Controller
             ],
         ];
     }
-
 }

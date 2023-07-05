@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Transformers\MeetingResource;
 
 class CalenderController extends Controller
@@ -15,7 +14,7 @@ class CalenderController extends Controller
     {
         $committees = Committee::all();
 
-        return view('executivemeeting::admin.meeting.calendar',compact('committees'));
+        return view('executivemeeting::admin.meeting.calendar', compact('committees'));
     }
 
     public function getData(Request $request)

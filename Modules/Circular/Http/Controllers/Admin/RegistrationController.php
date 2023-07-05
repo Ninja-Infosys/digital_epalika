@@ -8,14 +8,12 @@ use App\Mail\RegistrationMail;
 use App\Models\Settings\Branch;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
-use App\Notifications\MapApplyNotification;
 use App\Notifications\RegistrationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use Modules\Circular\Entities\CircularSetting;
 use Modules\Circular\Entities\Registration;
 use Modules\Circular\Http\Requests\Registration\StoreRegistrationRequest;
 use Modules\Circular\Http\Requests\Registration\UpdateRegistrationRequest;
@@ -71,11 +69,10 @@ class RegistrationController extends Controller
                     Notification::send($userData, $notification);
                 }
             }
-            if(!empty($request->input('email'))) {
+            if (!empty($request->input('email'))) {
                 Mail::to($request->input('email'))->send(new RegistrationMail($registration));
             }
             $this->uploadDocuments($request, $registration);
-
         });
 
         toast('दर्ता सफलतापूर्वक थपियो', 'success');
@@ -163,6 +160,4 @@ class RegistrationController extends Controller
             ]);
         }
     }
-
-
 }

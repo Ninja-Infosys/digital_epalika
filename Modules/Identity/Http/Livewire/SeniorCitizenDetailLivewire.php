@@ -10,8 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -287,7 +285,6 @@ class SeniorCitizenDetailLivewire extends Component
                 return redirect(route('identity.admin.seniorCitizenDetail.index'));
             }
             DB::transaction(function () {
-
                 $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] + [
                     'user_id' => auth()->id(),
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
@@ -331,8 +328,7 @@ class SeniorCitizenDetailLivewire extends Component
         }
     }
 
-    public
-    function render(): Factory|View|Application
+    public function render(): Factory|View|Application
     {
         if (!empty($this->form['province_id'])) {
             $this->districts = Province::with('districts')->findOrFail($this->form['province_id'])->districts;

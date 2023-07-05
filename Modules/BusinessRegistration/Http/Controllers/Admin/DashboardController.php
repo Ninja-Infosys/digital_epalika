@@ -5,9 +5,6 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
@@ -35,7 +32,7 @@ class DashboardController extends Controller
         $totalObjectTransactionCategoryCount = ObjectTransaction::count();
         $businessRenewCount = BusinessRenew::where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
 
-        if(request()->ajax()){
+        if (request()->ajax()) {
             return [
                 'businessRegistration' => $this->getBusinessRegistrationAccordingToFiscalYear(),
                 'wardWise' => $this->getWardWiseData(),
@@ -43,9 +40,12 @@ class DashboardController extends Controller
                 'monthWise' => $this->getMonthlyWise()
             ];
         }
-        return view('businessregistration::admin.dashboard', compact(  'totalBusinessCount',
+        return view('businessregistration::admin.dashboard', compact(
+            'totalBusinessCount',
             'totalBusinessDetailNatureCount',
-            'totalObjectTransactionCategoryCount', 'businessRenewCount'));
+            'totalObjectTransactionCategoryCount',
+            'businessRenewCount'
+        ));
     }
 
 
@@ -53,11 +53,11 @@ class DashboardController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $data = collect();
-        foreach ($fiscalYears as $fiscalYear){
+        foreach ($fiscalYears as $fiscalYear) {
             $data->push([
                 'name' => $fiscalYear->title,
                 'data' => $this->businessDetail
-                ->where('fiscal_year_id',$fiscalYear->id)
+                ->where('fiscal_year_id', $fiscalYear->id)
                 ->whereNotNull('registration_no')
                 ->count()]);
         }
@@ -67,13 +67,12 @@ class DashboardController extends Controller
     public function getWardWiseData()
     {
         $wardsData = collect();
-        foreach (\officeSetting()->localBody->ward_no as $ward)
-        {
+        foreach (\officeSetting()->localBody->ward_no as $ward) {
             $wardsData->push([
                 'ward_no' => "वडा नं. $ward",
                 'business_detail_count' => $this->businessDetail
-                    ->where('fiscal_year_id',\officeSetting()->fiscal_year_id)
-                    ->where('ward_no',$ward)
+                    ->where('fiscal_year_id', \officeSetting()->fiscal_year_id)
+                    ->where('ward_no', $ward)
                     ->count()
             ]);
         }
@@ -91,14 +90,14 @@ class DashboardController extends Controller
 
     public function getBusinessNature()
     {
-     return BusinessNature::withCount('businessDetails')
-         ->get()
-         ->map(function ($businessNature){
-         return [
-             'name' => $businessNature->title,
-             'data' => (int)$businessNature->business_details_count,
-         ];
-     });
+        return BusinessNature::withCount('businessDetails')
+            ->get()
+            ->map(function ($businessNature) {
+                return [
+                    'name' => $businessNature->title,
+                    'data' => (int)$businessNature->business_details_count,
+                ];
+            });
     }
 
 
@@ -107,7 +106,7 @@ class DashboardController extends Controller
         $monthlyRegistrations = [];
 
         foreach ($this->month_name as $key => $month) {
-            $monthlyRegistrations[] = $this->businessDetail->where('fiscal_year_id',\officeSetting()->fiscal_year_id)
+            $monthlyRegistrations[] = $this->businessDetail->where('fiscal_year_id', \officeSetting()->fiscal_year_id)
                 ->where('registration_month', ($key + 1))
                 ->count();
         }
@@ -121,7 +120,4 @@ class DashboardController extends Controller
             ],
         ];
     }
-
-
-
 }

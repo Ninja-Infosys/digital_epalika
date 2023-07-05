@@ -27,7 +27,6 @@ class LandInvoiceFormLivewire extends Component
         foreach ($formDetail as $value) {
             $this->particulars[] = $value;
         }
-
     }
 
     protected $rules = [
@@ -74,7 +73,6 @@ class LandInvoiceFormLivewire extends Component
 
     public function render(): Factory|View|Application
     {
-
         return view('revenue::livewire.land-invoice-form');
     }
 }

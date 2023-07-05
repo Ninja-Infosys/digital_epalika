@@ -18,7 +18,7 @@ class MeetingObserver
         if ($meeting->recurrence->value == 'emergency') {
             $meeting->load('committee.committeeMembers');
             $phoneNumbers = implode(',', $meeting->committee->committeeMembers->pluck('phone')->toArray());
-            (new AakashSmsMessage)->receiver($phoneNumbers ?? '')
+            (new AakashSmsMessage())->receiver($phoneNumbers ?? '')
                 ->message($meeting->description ?? '')
                 ->send();
             return;

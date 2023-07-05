@@ -6,7 +6,6 @@ use App\Http\Requests\Occupation\StoreOccupationRequest;
 use App\Http\Requests\Occupation\UpdateOccupationRequest;
 use App\Models\Occupation;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class OccupationController extends Controller
 {
@@ -27,7 +26,7 @@ class OccupationController extends Controller
     {
         $this->checkAuthorization('occupation_create');
         Occupation::create($request->validated());
-        toast( 'पेसा सफलतापूर्वक थपियो', 'success');
+        toast('पेसा सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -39,7 +38,7 @@ class OccupationController extends Controller
     public function edit(Occupation $occupation)
     {
         $this->checkAuthorization('occupation_edit');
-        return view('admin.setting.occupation.edit',compact('occupation'));
+        return view('admin.setting.occupation.edit', compact('occupation'));
     }
 
     public function update(UpdateOccupationRequest $request, Occupation $occupation)
@@ -47,7 +46,7 @@ class OccupationController extends Controller
         $this->checkAuthorization('occupation_edit');
 
         $occupation->update($request->validated());
-        toast( 'पेसा सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('पेसा सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.occupation.index'));
     }
 
@@ -55,7 +54,7 @@ class OccupationController extends Controller
     {
         $this->checkAuthorization('occupation_delete');
         $occupation->delete();
-        toast( 'पेसा सफलतापूर्वक मेटियो', 'success');
+        toast('पेसा सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }

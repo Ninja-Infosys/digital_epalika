@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\GrievanceDetailMail;
 use App\Mail\GrievanceHandling\GrievanceAssignmentFromUserMail;
 use App\Mail\GrievanceHandling\GrievanceAssignmentToGrievanceUserMail;
 use App\Mail\GrievanceHandling\GrievanceAssignmentToUserMail;

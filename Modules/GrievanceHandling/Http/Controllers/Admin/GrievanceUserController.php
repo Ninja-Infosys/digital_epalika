@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Modules\GrievanceHandling\Http\Requests\GrievanceUser\StoreGrievanceUserRequest;
 use Modules\GrievanceHandling\Http\Requests\GrievanceUser\UpdateGrievanceUserRequest;
 

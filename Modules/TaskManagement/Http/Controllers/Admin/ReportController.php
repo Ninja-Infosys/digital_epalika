@@ -9,15 +9,11 @@ use App\Models\User;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\TaskManagement\Entities\Activity;
-use Modules\TaskManagement\Entities\DailyTask;
 use Modules\TaskManagement\Enums\ActivityTypeEnum;
 
 class ReportController extends Controller

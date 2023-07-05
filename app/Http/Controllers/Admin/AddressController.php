@@ -7,14 +7,12 @@ use App\Http\Resources\DistrictResource;
 use App\Http\Resources\LocalBodyResource;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
     public function address()
     {
-
     }
 
     public function district(Request $request)

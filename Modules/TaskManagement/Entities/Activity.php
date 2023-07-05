@@ -17,7 +17,11 @@ use Modules\TaskManagement\Enums\ActivityTypeEnum;
 
 class Activity extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns, NepaliDateConverter;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
+    use NepaliDateConverter;
 
     protected $dates = [
         'created_at',

@@ -2,16 +2,9 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Modules\Recommendation\Entities\RecommendationCategory;
-use Modules\Recommendation\Entities\RecommendationSetting;
-use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\StoreRecommendationCategoryRequest;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\UpdateRecommendationCategoryRequest;
 
@@ -56,7 +49,7 @@ class RecommendationCategoryController extends Controller
         return view('recommendation::admin.setting.recommendationcategory.show', compact('recommendationCategory', 'type'));
     }
 
-    public function edit($type, RecommendationCategory $recommendationCategory,)
+    public function edit($type, RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationCategory_edit');
         $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
@@ -86,7 +79,6 @@ class RecommendationCategoryController extends Controller
 
     public function updateStatus($type, RecommendationCategory $recommendationCategory)
     {
-
         $this->checkAuthorization('recommendationCategory_access');
         $recommendationCategory->update([
             'is_active' => !$recommendationCategory->is_active
@@ -96,6 +88,4 @@ class RecommendationCategoryController extends Controller
 
         return back();
     }
-
-
 }

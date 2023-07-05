@@ -16,7 +16,6 @@ class TaxPayerObserver
         $taxPayer->user_id = auth()->id();
         $taxPayer->fiscal_year_id = officeSetting()->fiscal_year_id;
         $taxPayer->registration_no = $this->generateUniqueId(code: $taxPayer->taxPayerType->code);
-
     }
 
     /**
@@ -32,5 +31,4 @@ class TaxPayerObserver
 
         return $unique_id;
     }
-
 }

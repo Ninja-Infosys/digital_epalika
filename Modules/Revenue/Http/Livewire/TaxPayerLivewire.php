@@ -2,9 +2,7 @@
 
 namespace Modules\Revenue\Http\Livewire;
 
-use App\Enums\Gender;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\Revenue\Entities\TaxPayer;
 use Modules\Revenue\Entities\TaxPayerType;
@@ -155,7 +153,6 @@ class TaxPayerLivewire extends Component
         }
 
         return $defaultRule;
-
     }
 
 
@@ -179,7 +176,6 @@ class TaxPayerLivewire extends Component
 
             foreach ($this->taxPayerFamilies as $family) {
                 if (isset($family['id'])) {
-
                     $taxPayerFamily = $this->taxPayer->taxPayerFamilies()->find($family['id'])?->update($family);
                 } else {
                     $taxPayerFamily = $this->taxPayer->taxPayerFamilies()->create($family);

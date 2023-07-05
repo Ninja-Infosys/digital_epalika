@@ -44,5 +44,4 @@ class BenefitedMemberDetail extends Model
     {
         return $this->no_of_male + $this->no_of_female+$this->no_of_others;
     }
-
 }

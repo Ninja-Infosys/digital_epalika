@@ -2,7 +2,6 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Plan\Entities\Project;

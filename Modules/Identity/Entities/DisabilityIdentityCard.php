@@ -2,29 +2,22 @@
 
 namespace Modules\Identity\Entities;
 
-use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
 use App\Enums\StatusEnum;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use App\Models\Ethnicity;
-use App\Models\Occupation;
 use App\Models\Settings\FiscalYear;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
-use Modules\BusinessRegistration\Enums\Qualification;
-use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCard extends Model
 {
-    use SoftDeletes, EventObserveTrait;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -102,26 +95,22 @@ class DisabilityIdentityCard extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-
         return $this->attributes['photo']
             ? Storage::disk('public')->url($this->attributes['photo'])
             : $this->attributes['photo'];
-
     }
 
+    public function getCanEditDeleteAttribute(): bool
+    {
+        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
+    }
 
-//    public function getCanEditDeleteAttribute(): bool
-//    {
-//        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
-//    }
-//
-//    public function scopeFilterData($query)
-//    {
-//        if (auth()->user()->role->type !== 'Super') {
-//            $query->where('user_id', auth()->id());
-//            $query->orWhere('permanent_ward', auth()->user()->ward_no);
-//        }
-//        return $query;
-//    }
-
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+            $query->orWhere('permanent_ward', auth()->user()->ward_no);
+        }
+        return $query;
+    }
 }

@@ -4,10 +4,8 @@ namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Enums\MaritalStatusEnum;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +14,6 @@ use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
-use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Farmer\StoreFarmerRequest;
@@ -47,7 +44,7 @@ class FarmerController extends Controller
         $cooperativeTypes=CooperativeType::all();
         $enterpriseTypes=EnterpriseType::all();
 
-        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises','cooperativeTypes', 'enterpriseTypes'));
+        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises', 'cooperativeTypes', 'enterpriseTypes'));
     }
 
     public function store(StoreFarmerRequest $request)
@@ -98,7 +95,7 @@ class FarmerController extends Controller
         $cooperativeTypes=CooperativeType::all();
         $enterpriseTypes=EnterpriseType::all();
 
-        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises','cooperativeTypes', 'enterpriseTypes'));
+        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises', 'cooperativeTypes', 'enterpriseTypes'));
     }
 
     public function update(UpdateFarmerRequest $request, Farmer $farmer): Redirector|Application|RedirectResponse

@@ -2,7 +2,6 @@
 
 namespace Modules\Revenue\Entities;
 
-use App\Models\Settings\Units\Unit;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +11,9 @@ use App\Traits\EventObserveTrait;
 
 class TaxPayerLand extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',

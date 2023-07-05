@@ -56,7 +56,7 @@ class GrievanceDetailController extends Controller
     {
         $this->checkAuthorization('grievanceDetail_create');
 
-        DB::transaction(function ()  use ($request) {
+        DB::transaction(function () use ($request) {
             $grievanceDetail = GrievanceDetail::create(Arr::except($request->validated(), ['assigned_user_id']) + [
                 'publisher_id' => auth()->id(),
                 'assigned_user_id' => $request->input('assigned_user_id') ?? auth()->id(),

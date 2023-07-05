@@ -37,13 +37,16 @@ class DashboardController extends Controller
             ->where('date_en', today());
         $currentUserTodayTaskCount = $todayActivity
             ->sum('activity_lists_count');
-        $users = User::withCount(['activities' => fn($query) => $query->where('date_en', today())])->get();
+        $users = User::withCount(['activities' => fn ($query) => $query->where('date_en', today())])->get();
         $taskSubmittedUserCount = $users->where('activities_count', '>', 0)->count();
         $taskNotSubmittedUserCount = $users->where('activities_count', '<=', 0)->count();
         return view('taskmanagement::admin.dashboard', compact(
             'todayTaskCount',
             'currentUserTodayTaskCount',
-            'todayActivity', 'taskSubmittedUserCount', 'taskNotSubmittedUserCount'));
+            'todayActivity',
+            'taskSubmittedUserCount',
+            'taskNotSubmittedUserCount'
+        ));
     }
 
     public function dailyTask()
@@ -60,7 +63,6 @@ class DashboardController extends Controller
                     ->where('date_en', $range)
                     ->pluck('activityLists'))
             ]);
-
         }
 
 
@@ -74,5 +76,4 @@ class DashboardController extends Controller
             ],
         ];
     }
-
 }

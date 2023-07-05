@@ -133,6 +133,20 @@
                     </a>
                 </li>
             @endcan
+            @can('hospital_access')
+                <li class="{{request()->is('admin/identity/setting/hospital') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.hospital.index')}}">
+                        <span> अस्पतालहरु</span>
+                    </a>
+                </li>
+            @endcan
+            @can('disabilityCommittee_access')
+                <li class="{{request()->is('admin/identity/setting/disabilityCommittee') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.disabilityCommittee.index')}}">
+                        <span> अपाङ्ग समिति</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

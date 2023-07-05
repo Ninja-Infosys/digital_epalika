@@ -2,8 +2,6 @@
 
 namespace Modules\Plan\Http\Controllers\Admin\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Plan\Entities\ExpenseHead;
 use Modules\Plan\Http\Requests\ExpenseHead\StoreExpenseHeadRequest;

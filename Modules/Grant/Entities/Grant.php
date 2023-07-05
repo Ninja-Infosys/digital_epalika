@@ -6,18 +6,19 @@ use App\Models\Settings\Branch;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use App\Traits\GetAllColumns;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
-use Modules\Grant\Enums\GranteeEnum;
 
 class Grant extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -43,7 +44,7 @@ class Grant extends Model
         'grant_for_data'
     ];
 
-    function getGrantForDataAttribute(): array
+    public function getGrantForDataAttribute(): array
     {
         return explode(',', $this->attributes['grant_for']);
     }

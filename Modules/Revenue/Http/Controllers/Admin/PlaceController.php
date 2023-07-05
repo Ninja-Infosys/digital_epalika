@@ -2,7 +2,6 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
-use App\Models\Settings\Units\Unit;
 use App\Http\Controllers\Controller;
 use Modules\Revenue\Entities\Place;
 use Modules\Revenue\Entities\Sector;

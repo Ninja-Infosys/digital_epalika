@@ -13,6 +13,6 @@ class OrganizationDashboardController extends Controller
     {
         $mapApplyCount = MapApply::where('organization_id', auth('organization')->user()->id)->count();
         $mapSetting = MapSetting::first();
-        return view('emap::organization.dashboard', compact('mapApplyCount','mapSetting'));
+        return view('emap::organization.dashboard', compact('mapApplyCount', 'mapSetting'));
     }
 }

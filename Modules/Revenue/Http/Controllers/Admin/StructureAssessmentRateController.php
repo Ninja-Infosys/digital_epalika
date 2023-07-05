@@ -2,12 +2,8 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Revenue\Entities\StructureAssessmentRate;
-use Modules\Revenue\Http\Requests\StoreStructureAssessmentRateRequest;
-use Modules\Revenue\Http\Requests\UpdateStructureAssessmentRateRequest;
 
 class StructureAssessmentRateController extends Controller
 {

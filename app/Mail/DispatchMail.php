@@ -6,12 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use Modules\Circular\Entities\DispatchDetail;
-use Modules\Circular\Entities\Registration;
 
 class DispatchMail extends Mailable
 {
@@ -20,7 +18,7 @@ class DispatchMail extends Mailable
 
     public function __construct(public DispatchDetail $dispatchDetail)
     {
-        $this->dispatchDetail->load('files','dispatch');
+        $this->dispatchDetail->load('files', 'dispatch');
     }
 
 
@@ -44,8 +42,8 @@ class DispatchMail extends Mailable
     public function attachments(): array
     {
         $attachments = [];
-        foreach($this->dispatchDetail->files as $file){
-            if(Storage::disk('public')->exists($file->file)) {
+        foreach ($this->dispatchDetail->files as $file) {
+            if (Storage::disk('public')->exists($file->file)) {
                 $mimeType = Storage::disk('public')->mimeType($file->file);
                 $attachments[] = Attachment::fromStorageDisk('public', $file->file)
                     ->as($file->file_name)
@@ -54,6 +52,4 @@ class DispatchMail extends Mailable
         }
         return $attachments;
     }
-
-
 }

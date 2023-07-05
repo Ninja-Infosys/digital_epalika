@@ -5,7 +5,6 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Str;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 
@@ -13,7 +12,7 @@ class ApplyMapNoticeNotification extends Notification
 {
     use Queueable;
 
-    public function __construct(public MapApply $mapApply ,public ApplyMapNotice $applyMapNotice)
+    public function __construct(public MapApply $mapApply, public ApplyMapNotice $applyMapNotice)
     {
         //
     }

@@ -98,7 +98,7 @@ class MapApplyController extends Controller
             return $mapApplyData;
         });
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApply,$mapApplyData));
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApply, $mapApplyData));
 
         toast('फाईल सफलता पुर्बक थपियो', 'success');
 
@@ -138,7 +138,7 @@ class MapApplyController extends Controller
             'sent_to_admin_at' => empty($data->sent_to_admin_at) ? now() : null
         ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApply,$data));
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApply, $data));
         toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
 
         return back();

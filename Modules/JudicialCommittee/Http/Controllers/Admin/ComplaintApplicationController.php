@@ -13,7 +13,7 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision','conciliationApplication','conciliationVerification')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision', 'conciliationApplication', 'conciliationVerification')
             ->withCount('dateSheets')
             ->withCount('writtenAnswers')
             ->withCount('defendantIssuedDeadlines')
@@ -68,7 +68,8 @@ class ComplaintApplicationController extends Controller
 
     public function storeWitness(Request $request, ComplaintApplication $complaintApplication)
     {
-        $validated = $request->validate([
+        $validated = $request->validate(
+            [
             'name' => ['required', 'string', 'max:255'],
             'age' => ['nullable', 'integer'],
             'phone' => ['nullable'],
@@ -87,7 +88,8 @@ class ComplaintApplicationController extends Controller
 
     public function uploadSupportedDocument(Request $request, ComplaintApplication $complaintApplication)
     {
-        $request->validate([
+        $request->validate(
+            [
             'document_name' => ['required', 'string', 'max:255'],
             'document' => ['required', 'mimes:jpg,jpeg,png,pdf']
         ],

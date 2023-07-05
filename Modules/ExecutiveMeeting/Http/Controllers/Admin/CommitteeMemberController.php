@@ -38,24 +38,24 @@ class CommitteeMemberController extends Controller
         return back();
     }
 
-    public function edit(Committee $committee,CommitteeMember $committeeMember)
+    public function edit(Committee $committee, CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_edit');
 
         return view('executivemeeting::admin.committeeMember.edit', compact('committeeMember', 'committee'));
     }
 
-    public function update(UpdateCommitteeMemberRequest $request,Committee $committee, CommitteeMember $committeeMember)
+    public function update(UpdateCommitteeMemberRequest $request, Committee $committee, CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_edit');
 
         $committeeMember->update($request->validated());
 
         toast('समिति सदस्य सफलतापूर्वक अपडेट गरियो', 'success');
-        return redirect(route('admin.executiveMeeting.committee.committeeMember.index',$committee));
+        return redirect(route('admin.executiveMeeting.committee.committeeMember.index', $committee));
     }
 
-    public function destroy(Committee $committee,CommitteeMember $committeeMember)
+    public function destroy(Committee $committee, CommitteeMember $committeeMember)
     {
         $this->checkAuthorization('committeeMember_delete');
 

@@ -1,17 +1,18 @@
 <?php
 
 namespace Modules\JudicialCommittee\Http\Requests\DateSheet;
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
 class UpdateDateSheetRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('dateSheet_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'year' => ['required'],

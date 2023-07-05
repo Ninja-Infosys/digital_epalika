@@ -2,10 +2,7 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Settings\Units\Unit;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\TechnicalCostEstimate;
 use Modules\Plan\Http\Requests\TechnicalCostEstimate\StoreTechnicalCostEstimateRequest;
@@ -15,9 +12,9 @@ class TechnicalCostEstimateController extends Controller
 {
     public function index(Project $project)
     {
-        $this->checkAuthorization('technicalCostEstimate_access');  
+        $this->checkAuthorization('technicalCostEstimate_access');
 
-       
+
 
         return view('plan::admin.technical_cost_estimate.index', compact('project'));
     }
@@ -60,7 +57,7 @@ class TechnicalCostEstimateController extends Controller
     {
         $this->checkAuthorization('technicalCostEstimate_edit');
 
-        return view('plan::admin.technical_cost_estimate.edit',compact('project','technicalCostEstimate'));
+        return view('plan::admin.technical_cost_estimate.edit', compact('project', 'technicalCostEstimate'));
     }
 
     public function update(UpdateTechnicalCostEstimateRequest $request, Project $project, TechnicalCostEstimate $technicalCostEstimate)

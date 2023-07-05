@@ -11,17 +11,18 @@ use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Http\Requests\Setting\CooperativeType\StoreCooperativeTypeRequest;
 use Modules\Grant\Http\Requests\Setting\CooperativeType\UpdateCooperativeTypeRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class CooperativeTypeController extends Controller
 {
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('cooperativeType_access');
-       $cooperativeTypes = CooperativeType::where(function (Builder $q) {
-        if (!is_null(request('search'))) {
-            $q->whereLike(['title'], request('search'));
-        }
-    })
-        ->latest()->paginate(10);
+        $cooperativeTypes = CooperativeType::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+         ->latest()->paginate(10);
         return view('grant::admin.setting.cooperativeType.index', compact('cooperativeTypes'));
     }
 
@@ -39,7 +40,6 @@ class CooperativeTypeController extends Controller
         CooperativeType::create($request->validated());
         toast('सहकारी प्रकार सफलतापूर्वक थपियो', 'success');
         return back();
-
     }
 
     public function edit(CooperativeType $cooperativeType)
@@ -63,6 +63,5 @@ class CooperativeTypeController extends Controller
 
         toast('सहकारी प्रकार सफलतापूर्वक मेटाइयो', 'success');
         return back();
-
     }
 }

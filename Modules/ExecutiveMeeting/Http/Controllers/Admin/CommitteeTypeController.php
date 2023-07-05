@@ -2,8 +2,6 @@
 
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\ExecutiveMeeting\Entities\CommitteeType;
 use Modules\ExecutiveMeeting\Http\Requests\Setting\CommitteeType\StoreCommitteeTypeRequest;

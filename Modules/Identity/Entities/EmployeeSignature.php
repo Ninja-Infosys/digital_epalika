@@ -12,7 +12,9 @@ use Illuminate\Support\Str;
 
 class EmployeeSignature extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -36,11 +38,10 @@ class EmployeeSignature extends Model
     protected function BlackSignature(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('employeeSignature/' . Str::slug($this->attributes['name_en'], '_'), 'public')
                 : null
         );
@@ -49,11 +50,10 @@ class EmployeeSignature extends Model
     protected function RedSignature(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('employeeSignature/' . Str::slug($this->attributes['name_en'], '_'), 'public')
                 : null
         );
@@ -62,11 +62,10 @@ class EmployeeSignature extends Model
     protected function Stamp(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('employeeSignature/' . Str::slug($this->attributes['name_en'], '_'), 'public')
                 : null
         );
@@ -74,6 +73,6 @@ class EmployeeSignature extends Model
 
     public function scopeStatus($query)
     {
-        return $query->where('status',1);
+        return $query->where('status', 1);
     }
 }

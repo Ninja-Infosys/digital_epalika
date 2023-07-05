@@ -12,7 +12,6 @@ use Modules\EMap\Entities\OldMap;
 
 class OldMapLivewire extends Component
 {
-
     use WithFileUploads;
 
     public $allDistricts = [];
@@ -47,7 +46,6 @@ class OldMapLivewire extends Component
 
     public function mount($oldMapUpdate = null): void
     {
-
         $this->fiscalYears = FiscalYear::all();
         $this->allDistricts = District::all();
 
@@ -124,7 +122,6 @@ class OldMapLivewire extends Component
                     $houseOwner = HouseOwner::create($this->houseOwner);
                     $houseOwner->oldMaps()->attach([$oldMap->id]);
                 }
-
             });
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',
@@ -150,7 +147,6 @@ class OldMapLivewire extends Component
             ]);
         }
         return redirect(route('emap.admin.oldMap.index'));
-
     }
 
     public function messages(): array

@@ -3,19 +3,18 @@
 namespace App\Mail\GrievanceHandling;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Modules\GrievanceHandling\Entities\GrievanceAssignHistory;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 
 class GrievanceAssignmentToUserMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
-    public function __construct(public GrievanceDetail $grievanceDetail,public $grievanceAssign)
+    public function __construct(public GrievanceDetail $grievanceDetail, public $grievanceAssign)
     {
         $this->grievanceDetail->load('grievanceUser');
     }

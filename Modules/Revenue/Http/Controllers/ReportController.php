@@ -23,7 +23,6 @@ class ReportController extends Controller
 
     public function report(Request $request)
     {
-
         $request->validate([
             'from_date' => ['nullable'],
             'to_date' => ['nullable', 'after_or_equal:from_date'],
@@ -201,5 +200,4 @@ class ReportController extends Controller
             'view' => (string)View::make('revenue::admin.report.inc.ward-wise-invoice', compact('data'))
         ]);
     }
-
 }

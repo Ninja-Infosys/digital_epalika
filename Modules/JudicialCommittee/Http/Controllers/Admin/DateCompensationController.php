@@ -2,8 +2,6 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DateCompensation;
@@ -51,14 +49,14 @@ class DateCompensationController extends Controller
             return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
         }
 
-        return view('judicialcommittee::admin.date_compensation.show',compact('dateCompensation','complaintApplication'));
+        return view('judicialcommittee::admin.date_compensation.show', compact('dateCompensation', 'complaintApplication'));
     }
 
     public function edit(ComplaintApplication $complaintApplication, DateCompensation $dateCompensation)
     {
         $this->checkAuthorization('dateCompensation_access');
 
-        return view('judicialcommittee::admin.date_compensation.edit',compact('complaintApplication','dateCompensation'));
+        return view('judicialcommittee::admin.date_compensation.edit', compact('complaintApplication', 'dateCompensation'));
     }
 
     public function update(UpdateDateCompensationRequest $request, ComplaintApplication $complaintApplication, DateCompensation $dateCompensation)

@@ -2,19 +2,18 @@
 
 namespace Modules\Grant\Http\Requests\Group;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreGroupRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('group_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],

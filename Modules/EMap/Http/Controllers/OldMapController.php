@@ -2,8 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\OldMap;
 
@@ -12,8 +10,8 @@ class OldMapController extends Controller
     public function index()
     {
         $this->checkAuthorization('oldMap_access');
-        $oldMaps = OldMap::with('houseOwner','fiscalYear')->get();
-        return view('emap::admin.oldMap.index',compact('oldMaps'));
+        $oldMaps = OldMap::with('houseOwner', 'fiscalYear')->get();
+        return view('emap::admin.oldMap.index', compact('oldMaps'));
     }
 
     public function create()
@@ -32,7 +30,7 @@ class OldMapController extends Controller
     {
         $this->checkAuthorization('oldMap_edit');
         $oldMap->load('houseOwner');
-        return view('emap::admin.oldMap.edit',compact('oldMap'));
+        return view('emap::admin.oldMap.edit', compact('oldMap'));
     }
 
 
@@ -40,7 +38,7 @@ class OldMapController extends Controller
     {
         $this->checkAuthorization('oldMap_delete');
         $oldMap->delete();
-        toast('पुरानो नक्सा सफलतापूर्वक मेटाइयो','success');
+        toast('पुरानो नक्सा सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 }

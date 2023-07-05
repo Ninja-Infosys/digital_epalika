@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
 use Modules\ExecutiveMeeting\Entities\Meeting;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 
 class DashboardController extends Controller
 {

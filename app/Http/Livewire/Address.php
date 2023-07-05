@@ -2,9 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use Livewire\Component;
 
 class Address extends Component

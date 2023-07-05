@@ -2,13 +2,10 @@
 
 namespace Modules\Revenue\Http\Livewire;
 
-use App\Models\Settings\FiscalYear;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use Livewire\WithFileUploads;
-use Modules\Revenue\Entities\TaxPayer;
 
 class InvoiceFormLivewire extends Component
 {

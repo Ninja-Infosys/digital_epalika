@@ -45,10 +45,10 @@ Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-Route::controller(AddressController::class)->prefix('address')->as('address.')->group(function(){
-   Route::get('districts', 'district')->name('districts');
-   Route::get('local-bodies', 'localBodies')->name('local-bodies');
-   Route::get('ward-no', 'wardNo')->name('ward-no');
+Route::controller(AddressController::class)->prefix('address')->as('address.')->group(function () {
+    Route::get('districts', 'district')->name('districts');
+    Route::get('local-bodies', 'localBodies')->name('local-bodies');
+    Route::get('ward-no', 'wardNo')->name('ward-no');
 });
 Route::get('cache-clear', [DashboardController::class, 'cacheClear'])->name('cache-clear');
 Route::get('tech-help', [TechController::class, 'index'])->name('tech');
@@ -95,8 +95,8 @@ Route::prefix('setting')->group(function () {
         Route::resource('branch', BranchController::class);
     });
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
-        Route::get('role/{role}/letterHead',[RoleController::class,'letterHeadPage'])->name('role.letterHead');
-        Route::post('role/{role}/letterHead',[RoleController::class,'letterHeadStore'])->name('role.letterHead');
+        Route::get('role/{role}/letterHead', [RoleController::class,'letterHeadPage'])->name('role.letterHead');
+        Route::post('role/{role}/letterHead', [RoleController::class,'letterHeadStore'])->name('role.letterHead');
         Route::resource('role', RoleController::class);
         Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
         Route::resource('user', UserController::class);
@@ -109,14 +109,14 @@ Route::prefix('setting')->group(function () {
         Route::resource('unit/{unit}/internalUnitConversion', InternalUnitConversionController::class)->names('unit.internal-unit-conversion');
         Route::resource('unit/{unit}/externalUnitConversion', ExternalUnitConversionController::class)->names('unit.external-unit-conversion');
     });
-    Route::prefix('featureSetting')->as('featureSetting.')->group(function (){
+    Route::prefix('featureSetting')->as('featureSetting.')->group(function () {
         Route::get('sms', [SmsSettingController::class, 'smsSetting'])->name('sms-setting');
         Route::get('mail', [MailSettingController::class, 'mailSetting'])->name('mail-setting');
         Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
     });
     Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
         Route::resource('officeSetting', OfficeSettingController::class);
-        Route::resource('letterHead', LetterHeadController::class)->only('index','store');
+        Route::resource('letterHead', LetterHeadController::class)->only('index', 'store');
     });
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
 });

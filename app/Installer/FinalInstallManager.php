@@ -4,14 +4,13 @@ namespace App\Installer;
 
 use Exception;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class FinalInstallManager
 {
     public function runFinal()
     {
-        $outputLog = new BufferedOutput;
+        $outputLog = new BufferedOutput();
 
         $this->generateKey($outputLog);
         $this->publishVendorAssets($outputLog);

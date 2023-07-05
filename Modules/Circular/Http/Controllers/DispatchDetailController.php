@@ -3,7 +3,6 @@
 namespace Modules\Circular\Http\Controllers;
 
 use App\Mail\DispatchMail;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +32,7 @@ class DispatchDetailController extends Controller
         DB::transaction(function () use ($data, $dispatch, $request) {
             $dispatchDetail = DispatchDetail::updateOrCreate([
                 'dispatch_id' => $dispatch->id,
-            ],$data);
+            ], $data);
             foreach ($request->file('files') ?? [] as $file) {
                 $dispatchDetail->files()->create([
                     'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
@@ -45,8 +44,6 @@ class DispatchDetailController extends Controller
         });
         toast('चलानी सफलतापूर्वक थपियो', 'success');
         return back();
-
-
     }
 
     public function show($id)

@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UpdateActivityRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('taskActivity_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'date' => ['required'],

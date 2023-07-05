@@ -40,16 +40,16 @@ class DashboardController extends Controller
 
         Notice::where('fiscal_year_id', officeSetting()->fiscal_year_id)
             ->get()
-            ->each(function ($notice) use($totalCount,$newsCount,$noticeCount) {
+            ->each(function ($notice) use ($totalCount, $newsCount, $noticeCount) {
                 $nepaliDate = explode('-', $notice->date);
                 $totalCount[(int)$nepaliDate[1]-1] +=1;
 
-                if ($notice->type == 'Notice'){
+                if ($notice->type == 'Notice') {
                     $noticeCount[(int)$nepaliDate[1]-1] +=1;
-                }else{
+                } else {
                     $newsCount[(int)$nepaliDate[1]-1] +=1;
                 }
-          });
+            });
 
         return [
             'labels' => $this->month_name,

@@ -2,8 +2,6 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\DisabilityType;
 use Modules\Identity\Http\Requests\DisabilityType\StoreDisabilityTypeRequest;
@@ -15,7 +13,7 @@ class DisabilityTypeController extends Controller
     {
         $this->checkAuthorization('disabilityType_access');
         $disabilityTypes = DisabilityType::latest()->paginate(10);
-        return view('identity::admin.setting.disabilityType.index',compact('disabilityTypes'));
+        return view('identity::admin.setting.disabilityType.index', compact('disabilityTypes'));
     }
 
     public function create()
@@ -41,12 +39,11 @@ class DisabilityTypeController extends Controller
     public function edit(DisabilityType $disabilityType)
     {
         $this->checkAuthorization('disabilityType_edit');
-        return view('identity::admin.setting.disabilityType.edit',compact('disabilityType'));
+        return view('identity::admin.setting.disabilityType.edit', compact('disabilityType'));
     }
 
     public function update(UpdateDisabilityTypeRequest $request, DisabilityType $disabilityType)
     {
-
         $this->checkAuthorization('disabilityType_edit');
         $disabilityType->update($request->validated());
 

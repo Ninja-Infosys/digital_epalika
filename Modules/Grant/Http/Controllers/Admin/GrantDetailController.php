@@ -2,25 +2,19 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use App\Models\Settings\OfficeSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
-use Modules\Grant\Http\Requests\GrantDetail\StoreGrantDetailRequest;
-use Modules\Grant\Http\Requests\GrantDetail\UpdateGrantDetailRequest;
 
-class
-GrantDetailController extends Controller
+class GrantDetailController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('grantDetail_access');
 
-        $grantDetails = GrantDetail::with('grant.fiscalYear','grant.grantProgram', 'grant.grantType', 'model', 'localBody')
+        $grantDetails = GrantDetail::with('grant.fiscalYear', 'grant.grantProgram', 'grant.grantType', 'model', 'localBody')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike('contact', request('search'));

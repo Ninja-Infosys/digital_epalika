@@ -2,8 +2,6 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Revenue\Entities\PhysicalStructureType;
 use Modules\Revenue\Http\Requests\StorePhysicalStructureTypeRequest;

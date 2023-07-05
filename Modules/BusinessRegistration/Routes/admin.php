@@ -2,12 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessNatureController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessPurposeController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\InvestmentRevenueController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionSubCategoryController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
@@ -27,7 +24,7 @@ Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/editTemplat
 Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
 Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
-Route::get('businessDetail/{businessDetail}/print',[BusinessRegistrationController::class,'print'])->name('businessRegistration.print');
+Route::get('businessDetail/{businessDetail}/print', [BusinessRegistrationController::class,'print'])->name('businessRegistration.print');
 
 Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
 Route::resource('businessDetail.businessRenew', BusinessRenewController::class)->names('businessRegistration.businessRenew');
@@ -44,12 +41,12 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::post('business-registration-book-report', 'businessRegistrationBookReport')->name('business-registration-book-report');
     Route::get('business-nature-wise', 'businessNatureWise')->name('business-nature-wise');
     Route::post('business-nature-report', 'businessNatureWiseReport')->name('business-nature-report');
-    Route::get('object-transaction','objectTransaction')->name('object-transaction');
-    Route::post('object-transaction-report','objectTransactionReport')->name('object-transaction-report');
-    Route::get('business-objectTransaction-nature-wise','businessObjectTransactionNatureWise')->name('business-objectTransaction-nature-wise');
-    Route::post('business-objectTransaction-nature-report','businessObjectTransactionNatureReport')->name('business-objectTransaction-nature-report');
-    Route::get('ward-wise','wardWise')->name('ward-wise');
-    Route::post('ward-wise-report','wardWiseReport')->name('ward-wise-report');
+    Route::get('object-transaction', 'objectTransaction')->name('object-transaction');
+    Route::post('object-transaction-report', 'objectTransactionReport')->name('object-transaction-report');
+    Route::get('business-objectTransaction-nature-wise', 'businessObjectTransactionNatureWise')->name('business-objectTransaction-nature-wise');
+    Route::post('business-objectTransaction-nature-report', 'businessObjectTransactionNatureReport')->name('business-objectTransaction-nature-report');
+    Route::get('ward-wise', 'wardWise')->name('ward-wise');
+    Route::post('ward-wise-report', 'wardWiseReport')->name('ward-wise-report');
 });
 
 Route::prefix('files')->as('files.')->group(function () {

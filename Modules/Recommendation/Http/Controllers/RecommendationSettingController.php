@@ -3,7 +3,6 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Models\Settings\Employee;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\RecommendationSetting;
@@ -40,5 +39,4 @@ class RecommendationSettingController extends Controller
         toast('सेटिङ सफलता पुर्वक सेट गरियो');
         return back();
     }
-
 }

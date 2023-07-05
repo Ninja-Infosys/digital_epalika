@@ -2,12 +2,9 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Plan\Entities\ConsumerCommitteeTransaction;
 use Modules\Plan\Entities\Project;
-use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Http\Requests\ConsumerCommitteeTransaction\StoreConsumerCommitteeTransactionRequest;
 use Modules\Plan\Http\Requests\ConsumerCommitteeTransaction\UpdateConsumerCommitteeTransactionRequest;
 
@@ -15,7 +12,7 @@ class ConsumerCommitteeTransactionController extends Controller
 {
     public function index(Project $project)
     {
-        $project->load(['consumerCommitteeTransactions'])->loadSum('projectAllocatedAmounts','amount');
+        $project->load(['consumerCommitteeTransactions'])->loadSum('projectAllocatedAmounts', 'amount');
 
         return view('plan::admin.consumer_committee_transaction.index', compact('project'));
     }

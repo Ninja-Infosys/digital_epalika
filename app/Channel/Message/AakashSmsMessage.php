@@ -33,7 +33,8 @@ class AakashSmsMessage
             throw new Exception('SMS not correct.');
         }
 
-        $args = http_build_query([
+        $args = http_build_query(
+            [
                 'auth_token' => config('service.aakash.api'),
                 'to' => $this->receiver,
                 'text' => $this->message,

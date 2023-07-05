@@ -2,8 +2,6 @@
 
 namespace Modules\Identity\Observers;
 
-
-
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 
 class GovernmentalTypeObserver

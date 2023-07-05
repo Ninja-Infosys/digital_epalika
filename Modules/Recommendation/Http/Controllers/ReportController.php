@@ -15,7 +15,6 @@ use Modules\Recommendation\Transformers\Report\RegistrationDetailResource;
 
 class ReportController extends Controller
 {
-
     public function index()
     {
         $this->checkAuthorization('recommendationReport_main');
@@ -56,7 +55,7 @@ class ReportController extends Controller
     {
         $columnData = collect();
 
-        (new RegistrationDetail)
+        (new RegistrationDetail())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
                 return !array_keys($column, 'printedData');
@@ -84,7 +83,6 @@ class ReportController extends Controller
         if (!empty($request->input('recommendation_category'))) {
             $q->whereIn('recommendation_category_id', $request->input('recommendation_category'));
         }
-
     }
 
     public function wardWise()

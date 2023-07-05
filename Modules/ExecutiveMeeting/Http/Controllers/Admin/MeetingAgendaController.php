@@ -2,8 +2,6 @@
 
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingAgenda;
@@ -34,9 +32,9 @@ class MeetingAgendaController extends Controller
 
         $meeting->meetingAgendas()->create($request->validated());
 
-        toast('बैठकको एजेन्डा सफलतापूर्वक थपियो','success');
+        toast('बैठकको एजेन्डा सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.executiveMeeting.meeting.meetingAgenda.index',$meeting));
+        return redirect(route('admin.executiveMeeting.meeting.meetingAgenda.index', $meeting));
     }
 
     public function show(Meeting $meeting, MeetingAgenda $meetingAgenda)

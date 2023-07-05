@@ -3,7 +3,6 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
