@@ -31,6 +31,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
 });
 
 Route::prefix('disability')->group(function () {
+    Route::get('disabilityIdentityCard/search-citizenship', [DisabilityIdentityCardController::class, 'searchCitizenshipNo'])->name('disabilityIdentityCard.searchCitizenshipNo');
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/print', [DisabilityIdentityCardController::class, 'print'])->name('disabilityIdentityCard.print');
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/printDetail', [DisabilityIdentityCardController::class, 'printDetail'])->name('disabilityIdentityCard.printDetail');
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/printAll', [DisabilityIdentityCardController::class, 'printAll'])->name('disabilityIdentityCard.printAll');

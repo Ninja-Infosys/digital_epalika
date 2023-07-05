@@ -16,7 +16,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function index()
     {
-        $disabilityIdentityCards = DisabilityIdentityCard::with('governmentalDisabilityType')->filterData()->latest()->paginate(10);
+        $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')->latest()->paginate(10);
         return view('identity::admin.disabilityIdentityCard.index', compact('disabilityIdentityCards'));
     }
 
@@ -25,6 +25,10 @@ class DisabilityIdentityCardController extends Controller
         return view('identity::admin.disabilityIdentityCard.create');
     }
 
+    public function searchCitizenshipNo()
+    {
+        return view('identity::admin.disabilityIdentityCard.citizenship_search');
+    }
     public function store(Request $request)
     {
         //
@@ -35,14 +39,13 @@ class DisabilityIdentityCardController extends Controller
         $this->authorize('view', $disabilityIdentityCard);
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-        $disabilityIdentityCard->load('fingerPrints', 'employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        $disabilityIdentityCard->load('province', 'district', 'disabilityType', 'localBody', 'relationship');
         return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard', 'officeHeaders', 'todayDate'));
     }
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update', $disabilityIdentityCard);
-        $disabilityIdentityCard->load('fingerprints');
         return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
 

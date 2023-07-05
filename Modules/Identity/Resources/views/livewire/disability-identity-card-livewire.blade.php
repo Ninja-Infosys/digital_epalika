@@ -1,87 +1,4 @@
 <div>
-    <style>
-        legend {
-            background-color: gray;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        fieldset {
-            border-radius: 5px;
-        }
-
-        /*progressbar*/
-        .progressbar {
-            overflow: hidden;
-            /*CSS counters to number the steps*/
-            counter-reset: step;
-            margin: 0 auto 30px;
-        }
-
-        .progressbar li {
-            list-style-type: none;
-            color: white;
-            text-transform: uppercase;
-            width: 25%;
-            float: left;
-            position: relative;
-            text-decoration: none;
-        }
-
-        .progressbar li a {
-            text-decoration: none;
-        }
-
-        .progressbar li:before {
-            content: counter(step);
-            counter-increment: step;
-            width: 50px;
-            line-height: 50px;
-            display: block;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            background: #eeeeee;
-            border-radius: 50%;
-            margin: 0 auto 5px auto;
-        }
-
-        .progressbar .success:before {
-            background: #5ed00f;
-            color: white;
-        }
-
-        /*progressbar connectors*/
-        .progressbar li:after {
-            content: '';
-            width: 100%;
-            height: 2px;
-            background: white;
-            position: absolute;
-            left: -50%;
-            top: 9px;
-            z-index: -1;
-            /*put it behind the numbers*/
-        }
-
-        .progressbar li:first-child:after {
-            /*connector not needed before the first step*/
-            content: none;
-        }
-
-        /*marking active/completed steps green*/
-        /*The number of the step and the connector before it = green*/
-        .progressbar li.active:before,
-        .progressbar li.active:after {
-            background: rgb(255, 99, 71);
-            color: white;
-        }
-
-        .displayNone {
-            display: none;
-        }
-    </style>
     <div class="text-center">
         <ul class="progressbar d-flex justify-content-between">
             <li @class([
@@ -173,7 +90,7 @@
                         </div>
                         <div class="mt-2">
                             <button type="submit"  class="btn btn-primary">
-                                अर्को <i class="fa fa-arrow-right"></i>
+                                पेश गर्नुहोस
                             </button>
                         </div>
 
@@ -268,6 +185,19 @@
                                     wire:model="form.dob_ad" required
                                 />
                                 @error('form.dob_ad')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="citizenship_no" class="form-label">नागरिकता नं.</label>
+                                <input readonly
+                                    class="form-control   @error('form.citizenship_no') is-invalid @enderror"
+                                    type="text"
+                                    id="citizenship_no"
+                                    placeholder="नागरिकता नं."
+                                    wire:model="form.citizenship_no" required
+                                />
+                                @error('form.citizenship_no')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -460,7 +390,6 @@
             });
         </script>
         <script src="{{ asset('assets/backend/finger/js/jquery-1.11.2.min.js') }}" defer></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @endpush
 @endonce
 

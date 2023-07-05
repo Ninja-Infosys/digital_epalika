@@ -82,6 +82,9 @@ class DisabilityIdentityCardLivewire extends Component
 
     public function mount($disabilityIdentityCard = null): void
     {
+        if (empty($disabilityIdentityCard) && !empty(request('citizenship_no'))) {
+            $this->form['citizenship_no'] = request('citizenship_no');
+        }
         $officeSetting = OfficeSetting::first();
         $this->provinces = get_provinces();
         $this->ethnicities = Ethnicity::all();
@@ -166,71 +169,7 @@ class DisabilityIdentityCardLivewire extends Component
     public function messages(): array
     {
         return [
-
             'form.name.required' => ['नाम आवश्यक छ'],
-            'form.is_citizenship.required' => ['आवश्यक छ'],
-            'form.govern_disability_type_id.required' => ['आवश्यक छ'],
-            'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
-            'form.gender.required' => ['लिङ्ग आवश्यक छ'],
-            'form.ethnicity_id.required' => ['जातियता आवश्यक छ'],
-            'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
-            'form.dob_ad.required' => ['जन्म मिति अंग्रेजीमा आवश्यक छ'],
-            'form.permanent_province_id.required' => ['स्थायी प्रदेश आवश्यक छ'],
-            'form.permanent_district_id.required' => ['स्थायी जिल्ला आवश्यक छ'],
-            'form.permanent_local_body_id.required' => ['स्थायी पालिका आवश्यक छ'],
-            'form.permanent_ward.required' => ['स्थायी वार्ड आवश्यक छ'],
-            'form.permanent_tole.required' => ['स्थायी टोल आवश्यक छ'],
-            'form.temporary_province_id.required' => ['अस्थायी प्रदेश आवश्यक छ'],
-            'form.temporary_district_id.required' => ['अस्थायी जिल्ला आवश्यक छ'],
-            'form.temporary_local_body_id.required' => ['अस्थायी पालिका आवश्यक छ'],
-            'form.temporary_ward.required' => ['अस्थायी वार्ड आवश्यक छ'],
-            'form.temporary_tole.required' => ['अस्थायी टोल आवश्यक छ'],
-            'form.finger_left.required' => ['वायाँ औठाको छाप आवश्यक छ'],
-            'form.finger_right.required' => ['दायाँ औठाको छाप आवश्यक छ'],
-            'form.photo.required' => ['फोटो आवश्यक छ'],
-            'form.guardian_name.required' => ['अभिभावकको नाम आवश्यक छ'],
-            'form.guardian_name_en.required' => ['अभिभावकको नाम अंग्रेजीमा आवश्यक छ'],
-            'form.relationship_id.required' => ['सम्बन्ध आईडी आवश्यक छ'],
-            'form.phone.required' => ['सम्पर्क नं आवश्यक छ'],
-            'form.disability_type_id.required' => ['अपाङ्गताको प्रकार आवश्यक छ'],
-            'form.blood_group.required' => ['रक्त समूह आवश्यक छ'],
-            'form.disability_reason_id.required' => ['अपाङ्गताको कारण आवश्यक छ'],
-            'form.identity_type.required' => ['पहिचान प्रकार आवश्यक छ'],
-            'form.receiving_body.required' => ['कहाँ बाट आवश्यक छ'],
-            'form.date_bs.required' => ['मिति वि.स मा आवश्यक छ'],
-            'form.date_ad.required' => ['मिति ई.स मा आवश्यक छ'],
-            'form.father_name.required' => ['वुबाको नाम आवश्यक छ'],
-            'form.father_name_en.required' => ['वुबाको नाम अंग्रेजीमा आवश्यक छ'],
-            'form.grand_father_name.required' => ['हजुरवुबाको नाम आवश्यक छ'],
-            'form.grand_father_name_en.required' => ['हजुरवुबाको नाम अंग्रेजीमा आवश्यक छ'],
-            'form.mother_name.required' => ['आमाको नाम आवश्यक छ'],
-            'form.mother_name_en.required' => ['आमाको नाम अंग्रेजीमा आवश्यक छ'],
-            'form.birth_registration_no.required_if' => ['जन्म दर्ता आवश्यक छ'],
-            'form.birth_registration_place.required_if' => ['जन्मेको ठाउँ आवश्यक छ'],
-            'form.birth_registration_bs.required_if' => ['जन्म दर्ता वि.स. मा आवश्यक छ'],
-            'form.birth_registration_ad.required_if' => ['जन्म दर्ता ई.स. माआवश्यक छ'],
-            'form.citizenship_no.required_if' => ['नागरिकता नं आवश्यक छ'],
-            'form.citizenship_no_place.required_if' => ['नागरिकता पाएको स्थान आवश्यक छ'],
-            'form.citizenship_no_bs.required_if' => ['नागरिकता पाएको मिति (बि.स.)आवश्यक छ'],
-            'form.citizenship_no_ad.required_if' => ['नागरिकता पाएको मिति (ई.स.)आवश्यक छ'],
-            'form.citizenship_photo.required' => ['नागरिकताको फोटोकपी आवश्यक छ'],
-            'form.citizenship_photo_certificate.required' => ['जन्मदर्ताको फोटोकपी आवश्यक छ'],
-            'form.is_necessary.required' => ['आवश्यक छ'],
-            'form.material_description.required' => ['सामाग्री विवरण आवश्यक छ'],
-            'form.qualification.required' => ['पछिल्लो सैक्षिक योग्यता आवश्यक छ'],
-            'form.daily_activity.required' => ['दैनिक क्रियाकलाप गर्न आवश्यक छ'],
-            'form.supporting_material.required' => ['साहायक सामाग्री प्रयोग गर्ने आवश्यक छ'],
-            'form.material_name.required_if' => ['सामाग्रीको नाम आवश्यक छ'],
-            'form.helping_task.required' => ['कामको नाम आवश्यक छ'],
-            'form.without_helping_task.required' => ['कामको नाम आवश्यक छ'],
-            'form.main_training_name.required' => ['नाम आवश्यक छ'],
-            'form.provide_detail_full_name.required' => ['नाम आवश्यक छ'],
-            'form.provide_detail_address.required' => ['ठेगाना आवश्यक छ'],
-            'form.provide_detail_phone_no.required' => ['सम्पर्क नं. आवश्यक छ'],
-            'form.provide_detail_citizenship_no.required' => ['नागरिकता नं आवश्यक छ'],
-            'form.provide_detail_citizenship_no_date.required' => ['नागरिकता पाएको मिति आवश्यक छ'],
-            'form.provide_detail_citizenship_no_place.required' => ['नागरिकता पाएको स्थान आवश्यक छ'],
-
         ];
     }
 
@@ -265,23 +204,24 @@ class DisabilityIdentityCardLivewire extends Component
                 'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक अध्याबधिक भयो'
             ]);
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
+        }else{
+            DB::transaction(function () {
+                DisabilityIdentityCard::create($this->form + [
+                        'status' => StatusEnum::PENDING->value
+                    ]);
+            });
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक दर्ता भयो'
+            ]);
+            $this->reset('form');
+            return back();
         }
-        DB::transaction(function () {
-            DisabilityIdentityCard::create($this->form + [
-                    'status' => StatusEnum::PENDING->value
-                ]);
-        });
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'तपाइको अपाङ्गता परिचय पत्र दर्ता भयो'
-        ]);
-        $this->reset('form');
-        return back();
     }
 
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         if (!empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
@@ -292,20 +232,6 @@ class DisabilityIdentityCardLivewire extends Component
         if (!empty($this->form['local_body_id'])) {
             $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
-
-//        if ($this->form['is_necessary'] == 0) {
-//            $this->form['material_description'] = null;
-//        }
-//        if ($this->form['supporting_material'] == 0) {
-//            $this->form['material_name'] = null;
-//        }
-//
-//        if ($this->form['finger_print_type'] == 'none') {
-//            $this->form['right_finger'] = null;
-//            $this->form['left_finger'] = null;
-//        }
-
-
         return view('identity::livewire.disability-identity-card-livewire');
     }
 }

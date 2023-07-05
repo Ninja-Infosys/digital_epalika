@@ -27,9 +27,6 @@
                             <a href="{{route('identity.admin.disabilityIdentityCard.index')}}" class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> अपाङ्गता परिचय पत्र सुची
                             </a>
-                            <a href="https://localhost:8003/mfs100" target="_blank" class="btn btn-sm btn-outline-primary">
-                                Run MFS 100
-                            </a>
                         </div>
 
 
@@ -41,7 +38,91 @@
             </div>
         </div>
     </div>
+@push('style')
+    <style>
+        legend {
+            background-color: gray;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
 
+        fieldset {
+            border-radius: 5px;
+        }
+
+        /*progressbar*/
+        .progressbar {
+            overflow: hidden;
+            /*CSS counters to number the steps*/
+            counter-reset: step;
+            margin: 0 auto 30px;
+        }
+
+        .progressbar li {
+            list-style-type: none;
+            color: white;
+            text-transform: uppercase;
+            width: 25%;
+            float: left;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .progressbar li a {
+            text-decoration: none;
+        }
+
+        .progressbar li:before {
+            content: counter(step);
+            counter-increment: step;
+            width: 50px;
+            line-height: 50px;
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background: #eeeeee;
+            border-radius: 50%;
+            margin: 0 auto 5px auto;
+        }
+
+        .progressbar .success:before {
+            background: #5ed00f;
+            color: white;
+        }
+
+        /*progressbar connectors*/
+        .progressbar li:after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: white;
+            position: absolute;
+            left: -50%;
+            top: 9px;
+            z-index: -1;
+            /*put it behind the numbers*/
+        }
+
+        .progressbar li:first-child:after {
+            /*connector not needed before the first step*/
+            content: none;
+        }
+
+        /*marking active/completed steps green*/
+        /*The number of the step and the connector before it = green*/
+        .progressbar li.active:before,
+        .progressbar li.active:after {
+            background: rgb(255, 99, 71);
+            color: white;
+        }
+
+        .displayNone {
+            display: none;
+        }
+    </style>
+@endpush
     @push('scripts')
         <script>
             window.addEventListener('toast_message', event => {

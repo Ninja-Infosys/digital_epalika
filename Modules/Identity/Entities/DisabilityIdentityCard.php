@@ -66,7 +66,7 @@ class DisabilityIdentityCard extends Model
         return $this->belongsTo(Province::class);
     }
 
-    public function districts(): BelongsTo
+    public function district(): BelongsTo
     {
         return $this->belongsTo(District::class);
     }
