@@ -3,24 +3,17 @@
 namespace Modules\Identity\Http\Livewire;
 
 use App\Models\Ethnicity;
-use App\Models\Occupation;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\DisabilityIdentityCard;
-use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
-use Modules\Identity\Entities\EmployeeSignature;
-use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\Relationship;
-use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCardLivewire extends Component
 {
@@ -261,7 +254,7 @@ class DisabilityIdentityCardLivewire extends Component
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
         DB::transaction(function () {
-             DisabilityIdentityCard::create($this->form);
+            DisabilityIdentityCard::create($this->form);
         });
 
         $this->dispatchBrowserEvent('toast_message', [
