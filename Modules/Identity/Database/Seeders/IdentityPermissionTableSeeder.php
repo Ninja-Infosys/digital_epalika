@@ -37,6 +37,14 @@ class IdentityPermissionTableSeeder extends Seeder
             'employeeSignature_create',
             'employeeSignature_edit',
             'employeeSignature_delete',
+            'hospital_access',
+            'hospital_create',
+            'hospital_edit',
+            'hospital_delete',
+            'disabilityCommittee_access',
+            'disabilityCommittee_create',
+            'disabilityCommittee_edit',
+            'disabilityCommittee_delete',
         ];
 
         $this->storePermission($permissions);

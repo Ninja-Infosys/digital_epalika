@@ -5,9 +5,7 @@ namespace Modules\TaskManagement\Http\Livewire;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\TaskManagement\Entities\Activity;
@@ -15,7 +13,8 @@ use Modules\TaskManagement\Enums\ActivityTypeEnum;
 
 class ActivityLivewire extends Component
 {
-    use WithFileUploads, NepaliDateConverter;
+    use WithFileUploads;
+    use NepaliDateConverter;
 
     protected $listeners = ['dateChanged'];
 

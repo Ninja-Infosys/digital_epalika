@@ -7,7 +7,6 @@ use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Modules\ListRegistration\Entities\ListRegistration;
 use Modules\ListRegistration\Enums\ApplicantCategoryEnum;
 use Modules\ListRegistration\Enums\BusinessNatureEnum;
 
@@ -107,7 +106,7 @@ class DashboardController extends Controller
         $totalCount = collect([0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0]);
 
         $this->listRegistrations->where('fiscal_year_id', officeSetting()->fiscal_year_id)
-            ->each(function ($notice) use($totalCount) {
+            ->each(function ($notice) use ($totalCount) {
                 $nepaliDate = explode('-', $notice->date);
                 $totalCount[(int)$nepaliDate[1]-1] +=1;
             });
@@ -122,5 +121,4 @@ class DashboardController extends Controller
             ],
         ];
     }
-
 }

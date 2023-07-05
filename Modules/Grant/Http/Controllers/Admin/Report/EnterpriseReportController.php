@@ -2,11 +2,9 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Report;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Transformers\EnterpriseReportResource;
@@ -27,7 +25,7 @@ class EnterpriseReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $enterprises = Enterprise::with('enterpriseType','localBody','province','district')->where(function ($q) use ($request) {
+        $enterprises = Enterprise::with('enterpriseType', 'localBody', 'province', 'district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
@@ -53,7 +51,6 @@ class EnterpriseReportController extends Controller
 
     public function filterDataFromUser($q, Request $request): void
     {
-
         if (!empty($request->input('ward_no'))) {
             $q->whereIn('ward_no', $request->input('ward_no'));
         }

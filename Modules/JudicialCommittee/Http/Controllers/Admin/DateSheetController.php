@@ -2,13 +2,9 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DateSheet;
-use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
-use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\DateSheet\StoreDateSheetRequest;
 use Modules\JudicialCommittee\Http\Requests\DateSheet\UpdateDateSheetRequest;

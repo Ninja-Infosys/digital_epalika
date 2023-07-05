@@ -2,11 +2,9 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Report;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Modules\Grant\Entities\Affiliation;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
@@ -19,7 +17,7 @@ class CooperativeReportController extends Controller
         $columnData = $this->getColumns();
         $cooperativeTypes = CooperativeType::all();
         $affiliations = Affiliation::all();
-        return view('grant::admin.report.cooperative.index',compact('columnData','cooperativeTypes','affiliations'));
+        return view('grant::admin.report.cooperative.index', compact('columnData', 'cooperativeTypes', 'affiliations'));
     }
 
     public function report(Request $request)
@@ -28,7 +26,7 @@ class CooperativeReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $cooperatives = Cooperative::with('cooperativeType','affiliation','province','localBody','district')->where(function ($q) use ($request) {
+        $cooperatives = Cooperative::with('cooperativeType', 'affiliation', 'province', 'localBody', 'district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
@@ -54,7 +52,6 @@ class CooperativeReportController extends Controller
 
     public function filterDataFromUser($q, Request $request): void
     {
-
         if (!empty($request->input('ward_no'))) {
             $q->whereIn('ward_no', $request->input('ward_no'));
         }

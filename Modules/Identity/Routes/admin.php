@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Identity\Http\Controllers\CardColorController;
 use Modules\Identity\Http\Controllers\DashboardController;
+use Modules\Identity\Http\Controllers\DisabilityCommitteeController;
 use Modules\Identity\Http\Controllers\DisabilityIdentityCardController;
 use Modules\Identity\Http\Controllers\DisabilityIdentityCardReportController;
 use Modules\Identity\Http\Controllers\DisabilityPrintController;
@@ -10,6 +11,7 @@ use Modules\Identity\Http\Controllers\DisabilityReasonController;
 use Modules\Identity\Http\Controllers\DisabilityTypeController;
 use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
+use Modules\Identity\Http\Controllers\HospitalController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailReportController;
@@ -24,6 +26,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('employeeSignature', EmployeeSignatureController::class);
     Route::resource('cardColor', CardColorController::class);
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);
+    Route::resource('hospital', HospitalController::class);
+    Route::resource('disabilityCommittee', DisabilityCommitteeController::class);
 });
 
 Route::prefix('disability')->group(function () {

@@ -11,7 +11,9 @@ use App\Traits\EventObserveTrait;
 
 class RecommendationSetting extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -28,11 +30,11 @@ class RecommendationSetting extends Model
 
     public function wardChairman(): BelongsTo
     {
-        return $this->belongsTo(Employee::class,'ward_chairman_id');
+        return $this->belongsTo(Employee::class, 'ward_chairman_id');
     }
 
     public function wardSecretary(): BelongsTo
     {
-        return $this->belongsTo(Employee::class,'ward_secretary_id');
+        return $this->belongsTo(Employee::class, 'ward_secretary_id');
     }
 }

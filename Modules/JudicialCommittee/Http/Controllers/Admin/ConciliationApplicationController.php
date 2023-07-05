@@ -2,7 +2,6 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -23,17 +22,17 @@ class ConciliationApplicationController extends Controller
 
         $complaintApplication->load('conciliationApplication.files');
 
-        return view('judicialcommittee::admin.conciliation_application.index',compact('complaintApplication'));
+        return view('judicialcommittee::admin.conciliation_application.index', compact('complaintApplication'));
     }
 
     public function create(ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('conciliationApplication_create');
 
-        return view('judicialcommittee::admin.conciliation_application.create',compact('complaintApplication'));
+        return view('judicialcommittee::admin.conciliation_application.create', compact('complaintApplication'));
     }
 
-    public function store(StoreConciliationApplicationRequest $request,ComplaintApplication $complaintApplication)
+    public function store(StoreConciliationApplicationRequest $request, ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('conciliationApplication_create');
 
@@ -57,26 +56,26 @@ class ConciliationApplicationController extends Controller
         return redirect(route('admin.judicialCommittee.complaintApplication.conciliationApplication.index', $complaintApplication));
     }
 
-    public function show(ComplaintApplication $complaintApplication,ConciliationApplication $conciliationApplication)
+    public function show(ComplaintApplication $complaintApplication, ConciliationApplication $conciliationApplication)
     {
         $this->checkAuthorization('conciliationApplication_access');
 
         return view('judicialcommittee::show');
     }
 
-    public function edit(ComplaintApplication $complaintApplication,ConciliationApplication $conciliationApplication)
+    public function edit(ComplaintApplication $complaintApplication, ConciliationApplication $conciliationApplication)
     {
         $this->checkAuthorization('conciliationApplication_access');
 
         return view('judicialcommittee::edit');
     }
 
-    public function update(Request $request, ComplaintApplication $complaintApplication,ConciliationApplication $conciliationApplication)
+    public function update(Request $request, ComplaintApplication $complaintApplication, ConciliationApplication $conciliationApplication)
     {
         $this->checkAuthorization('conciliationApplication_edit');
     }
 
-    public function destroy(ComplaintApplication $complaintApplication,ConciliationApplication $conciliationApplication)
+    public function destroy(ComplaintApplication $complaintApplication, ConciliationApplication $conciliationApplication)
     {
         $this->checkAuthorization('conciliationApplication_delete');
     }

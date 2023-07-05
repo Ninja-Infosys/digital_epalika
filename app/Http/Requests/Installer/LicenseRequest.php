@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Installer;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class LicenseRequest extends FormRequest
 {

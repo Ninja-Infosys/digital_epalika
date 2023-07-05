@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Installer;
 
 use App\Http\Controllers\Controller;
 use App\Installer\PermissionsChecker;
-use function _\internal\parent;
 
 class PermissionController extends Controller
 {

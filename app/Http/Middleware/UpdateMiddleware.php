@@ -17,7 +17,7 @@ class UpdateMiddleware
             return redirect()->route('LaravelInstaller::welcome');
         }
 
-        if($this->alreadyUpdated()) {
+        if ($this->alreadyUpdated()) {
             abort(404);
         }
         return $next($request);

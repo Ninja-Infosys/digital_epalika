@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Gate;
 
 class UpdateOccupationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('occupation_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'title'=>['required','string','max:255']

@@ -2,7 +2,6 @@
 
 namespace Modules\GrievanceHandling\Http\Livewire;
 
-use App\Mail\GrievanceDetailMail;
 use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
 use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
 use App\Models\User;

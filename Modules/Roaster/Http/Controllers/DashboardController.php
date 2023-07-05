@@ -5,22 +5,14 @@ namespace Modules\Roaster\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Department;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\Roaster\Entities\Subject;
-use Modules\Roaster\Entities\TechnicalTrainee;
-use Modules\Roaster\Entities\Trainee;
 use Modules\Roaster\Entities\Trainer;
 use Modules\Roaster\Entities\Training;
 use Modules\Roaster\Enums\TrainingTypeEnum;
-use function _\internal\parent;
 
 class DashboardController extends Controller
 {
@@ -39,8 +31,6 @@ class DashboardController extends Controller
         $this->trainings = Training::with('trainingTrainees')->get();
         $this->trainee = DB::table('trainees')->whereNull('deleted_at')->get();
         $this->technicalTrainee = DB::table('technical_trainees')->whereNull('deleted_at')->get();
-
-
     }
 
     public function __invoke()
@@ -93,9 +83,11 @@ class DashboardController extends Controller
 
         foreach ($this->trainings->where('fiscal_year_id', officeSetting()->fiscal_year_id) as $training) {
             $open_date = Carbon::parse($training->open_date);
-            $openDate = $this->get_nepali_date($open_date->format('Y'),
+            $openDate = $this->get_nepali_date(
+                $open_date->format('Y'),
                 $open_date->format('m'),
-                $open_date->format('d'));
+                $open_date->format('d')
+            );
             $month[$openDate['m'] - 1] += 1;
         }
         return [
@@ -146,5 +138,4 @@ class DashboardController extends Controller
                 ];
             });
     }
-
 }

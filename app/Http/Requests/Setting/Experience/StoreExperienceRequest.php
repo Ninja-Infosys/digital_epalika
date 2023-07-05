@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Setting\Experience;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class StoreExperienceRequest extends FormRequest
 {

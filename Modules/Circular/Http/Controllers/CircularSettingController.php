@@ -2,7 +2,6 @@
 
 namespace Modules\Circular\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Circular\Entities\CircularSetting;
@@ -27,6 +26,4 @@ class CircularSettingController extends Controller
         toast(' सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
-
-
 }

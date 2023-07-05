@@ -12,7 +12,9 @@ use App\Traits\EventObserveTrait;
 
 class ConciliationApplication extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -33,6 +35,6 @@ class ConciliationApplication extends Model
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 }

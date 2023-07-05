@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UpdateEnterprisesRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('enterprise_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'enterprise_type_id' => ['required', Rule::exists('enterprise_types', 'id')->withoutTrashed()],

@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Grant\Entities\CooperativeType;
-use Modules\Grant\Entities\Farmer;
-use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Http\Controllers\Admin\CooperativeController;
 use Modules\Grant\Http\Controllers\Admin\DashboardController;
 use Modules\Grant\Http\Controllers\Admin\EnterprisesController;

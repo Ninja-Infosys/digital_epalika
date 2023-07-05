@@ -13,7 +13,7 @@ class DatabaseManager
 {
     public function migrateAndSeed()
     {
-        $outputLog = new BufferedOutput;
+        $outputLog = new BufferedOutput();
 
         $this->sqlite($outputLog);
 

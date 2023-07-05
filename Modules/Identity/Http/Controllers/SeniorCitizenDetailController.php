@@ -4,7 +4,6 @@ namespace Modules\Identity\Http\Controllers;
 
 use App\Models\OfficeHeader;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
@@ -21,7 +20,6 @@ class SeniorCitizenDetailController extends Controller
 
     public function create()
     {
-
         return view('identity::admin.seniorCitizen.create');
     }
 
@@ -67,7 +65,6 @@ class SeniorCitizenDetailController extends Controller
 
     public function print(SeniorCitizenDetail $seniorCitizenDetail)
     {
-
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         $seniorCitizenDetail->load('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody');

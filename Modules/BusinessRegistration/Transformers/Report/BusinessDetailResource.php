@@ -52,11 +52,9 @@ class BusinessDetailResource extends JsonResource
             'अघि दर्ता भएका व्यवसाय' => RegisterBusinessResource::collection($this->whenLoaded('registeredBusinesses')),
             'व्यवसाय नवीकरण' => BusinessRenewResource::collection($this->whenLoaded('businessRenew')),
         ];
-
     }
 
-    private
-    function resolveAddress($request_columns): string
+    private function resolveAddress($request_columns): string
     {
         $address = '';
         if (in_array('local_body_id', $request_columns)) {

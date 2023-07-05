@@ -4,10 +4,8 @@ namespace Modules\ListRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Traits\ExcelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Modules\ListRegistration\Entities\ListRegistration;
 use Modules\ListRegistration\Transformers\Report\ListRegistrationResource;
 

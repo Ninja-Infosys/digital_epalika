@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class InstallerMiddleware
 {
@@ -14,7 +12,6 @@ class InstallerMiddleware
             $installedRedirect = config('installer.installedAlreadyAction');
 
             switch ($installedRedirect) {
-
                 case 'route':
                     $routeName = config('installer.installed.redirectOptions.route.name');
                     $data = config('installer.installed.redirectOptions.route.message');

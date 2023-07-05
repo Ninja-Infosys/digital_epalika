@@ -2,12 +2,10 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Circular\Entities\Registration;
-use Modules\EMap\Entities\MapApply;
 
 class RegistrationNotification extends Notification
 {
@@ -16,7 +14,6 @@ class RegistrationNotification extends Notification
 
     public function __construct(public  Registration $registration)
     {
-
     }
 
 
@@ -37,7 +34,6 @@ class RegistrationNotification extends Notification
 
     public function toArray($notifiable)
     {
-
         return [
             'दर्ता न.' => $this->registration->registration_no ?? '',
             'दर्ता मिति' => $this->registration->registration_date ?? '',

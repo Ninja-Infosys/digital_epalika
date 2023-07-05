@@ -7,7 +7,6 @@ use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Modules\Revenue\Entities\Invoice;
 
 class DashboardController extends Controller
 {
@@ -56,12 +55,12 @@ class DashboardController extends Controller
                 return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
             })
             ->sum('total');
-        if(request()->ajax()){
-             return [
-                 'totalRevenue' => $this->totalRevenue($results),
-                 'totalCashBankRevenue' => $this->totalCashBankRevenue($results),
-                 'accordingToFy' => $this->accordingToFy($results),
-                 'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)),
+        if (request()->ajax()) {
+            return [
+                'totalRevenue' => $this->totalRevenue($results),
+                'totalCashBankRevenue' => $this->totalCashBankRevenue($results),
+                'accordingToFy' => $this->accordingToFy($results),
+                'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)),
             ];
         }
 
@@ -84,7 +83,6 @@ class DashboardController extends Controller
 
     public function totalCashBankRevenue(Collection $result): Collection
     {
-
         return collect([
             [
                 'name' => 'नगद',
@@ -133,9 +131,10 @@ class DashboardController extends Controller
         $data = collect();
 
         foreach ($this->month_name as $key => $month) {
-            $data->push($result->filter(function ($item) use ($key) {
-                        return date('m', strtotime($item->payment_date)) == $key+1;
-                    })
+            $data->push(
+                $result->filter(function ($item) use ($key) {
+                return date('m', strtotime($item->payment_date)) == $key+1;
+            })
                     ->sum('total')
             );
         }

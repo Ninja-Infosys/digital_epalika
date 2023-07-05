@@ -12,8 +12,6 @@ use Modules\Grant\Entities\Group;
 
 class DashboardController extends Controller
 {
-
-
     public function __invoke()
     {
         $this->checkAuthorization('grantDashboard_access');
@@ -30,7 +28,6 @@ class DashboardController extends Controller
             ];
         }
         return view('grant::admin.dashboard', compact('grant_detail_count', 'enterprise_count', 'farmers_count', 'cooperative_count', 'groups_count'));
-
     }
 
 
@@ -60,7 +57,6 @@ class DashboardController extends Controller
 
     public function getWardWiseData()
     {
-
         $grantDetails = GrantDetail::whereHas('grant', function ($q) {
             $q->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
         })->get();
@@ -81,6 +77,4 @@ class DashboardController extends Controller
             ],
         ];
     }
-
-
 }

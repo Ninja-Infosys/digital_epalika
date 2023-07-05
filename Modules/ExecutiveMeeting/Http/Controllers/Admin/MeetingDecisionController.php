@@ -5,7 +5,6 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
 use Modules\ExecutiveMeeting\Entities\MeetingParticipant;

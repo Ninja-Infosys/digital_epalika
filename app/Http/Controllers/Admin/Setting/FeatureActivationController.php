@@ -23,7 +23,7 @@ class FeatureActivationController extends Controller
     {
         $this->checkAuthorization('feature_access');
 
-        DB::transaction(function () use ($featureActivation){
+        DB::transaction(function () use ($featureActivation) {
             FeatureActivation::where('feature_type', $featureActivation->feature_type)
                 ->where('id', '!=', $featureActivation->id)
                 ->update([

@@ -14,15 +14,15 @@ class PlanLevelController extends Controller
     {
         $this->checkAuthorization('planLevel_access');
 
-        $planLevels = PlanLevel::with('planLevel')->where(function ($query) use ($type){
+        $planLevels = PlanLevel::with('planLevel')->where(function ($query) use ($type) {
             if ($type == 'planSubLevel') {
                 $query->whereNotNull('plan_level_id');
-            }else{
+            } else {
                 $query->whereNull('plan_level_id');
             }
         })->get();
 
-        return view('plan::admin.setting.plan_level.index', compact('planLevels','type'));
+        return view('plan::admin.setting.plan_level.index', compact('planLevels', 'type'));
     }
 
     public function planSubLevel(Request $request)
@@ -43,10 +43,10 @@ class PlanLevelController extends Controller
         $this->checkAuthorization('planLevel_create');
         $mainPlanLevels = PlanLevel::whereNull('plan_level_id')->get();
 
-        return view('plan::admin.setting.plan_level.create', compact('mainPlanLevels','type'));
+        return view('plan::admin.setting.plan_level.create', compact('mainPlanLevels', 'type'));
     }
 
-    public function store(StorePlanLevelRequest $request,$type)
+    public function store(StorePlanLevelRequest $request, $type)
     {
         $this->checkAuthorization('planLevel_create');
         PlanLevel::create($request->validated());
@@ -55,23 +55,23 @@ class PlanLevelController extends Controller
         return back();
     }
 
-    public function edit($type,PlanLevel $planLevel)
+    public function edit($type, PlanLevel $planLevel)
     {
         $this->checkAuthorization('planLevel_edit');
         $mainLevels = PlanLevel::whereNull('plan_level_id')->get();
-        return view('plan::admin.setting.plan_level.edit', compact('planLevel', 'mainLevels','type'));
+        return view('plan::admin.setting.plan_level.edit', compact('planLevel', 'mainLevels', 'type'));
     }
 
-    public function update(UpdatePlanLevelRequest $request, $type,PlanLevel $planLevel,)
+    public function update(UpdatePlanLevelRequest $request, $type, PlanLevel $planLevel)
     {
         $this->checkAuthorization('planLevel_edit');
         $planLevel->update($request->validated());
 
         toast('योजना स्तर सफलतापूर्वक सम्पादन गरियो', 'success');
-        return redirect(route('admin.plan.planLevel.index',$type));
+        return redirect(route('admin.plan.planLevel.index', $type));
     }
 
-    public function destroy($type,PlanLevel $planLevel)
+    public function destroy($type, PlanLevel $planLevel)
     {
         $this->checkAuthorization('planLevel_delete');
         $planLevel->planLevels()->delete();

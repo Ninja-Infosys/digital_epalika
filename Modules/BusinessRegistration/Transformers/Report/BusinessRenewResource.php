@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class BusinessRenewResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         $request_columns = $request->input('columns')['business_renews'] ?? [];

@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;

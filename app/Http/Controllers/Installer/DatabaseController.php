@@ -4,13 +4,6 @@ namespace App\Http\Controllers\Installer;
 
 use App\Http\Controllers\Controller;
 use App\Installer\DatabaseManager;
-use Exception;
-use Illuminate\Database\SQLiteConnection;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseController extends Controller
 {

@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\UserManagement\Permission;
-use App\Models\UserManagement\Role;
 use Illuminate\Support\Facades\DB;
 
 trait StoreSqlInDatabaseTrait

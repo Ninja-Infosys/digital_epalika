@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Setting\Qualification;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class StoreQualificationRequest extends FormRequest
 {

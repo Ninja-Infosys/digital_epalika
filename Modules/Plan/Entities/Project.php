@@ -110,8 +110,8 @@ class Project extends Model
     protected function wardNo(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => explode(",", $value),
-            set: fn($value) => implode(",", $value),
+            get: fn ($value) => explode(",", $value),
+            set: fn ($value) => implode(",", $value),
         );
     }
 

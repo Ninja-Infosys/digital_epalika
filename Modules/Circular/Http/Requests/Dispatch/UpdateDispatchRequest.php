@@ -25,7 +25,7 @@ class UpdateDispatchRequest extends FormRequest
             'subject' => ['required', 'max:255'],
             'receiver_name' => ['required', 'max:255'],
             'receiver_address' => ['required', 'max:255'],
-            'receiver_contact' => ['required','email' ,Rule::unique('dispatches','receiver_contact')->withoutTrashed()->ignore($this->dispatch)],
+            'receiver_contact' => ['required','email' ,Rule::unique('dispatches', 'receiver_contact')->withoutTrashed()->ignore($this->dispatch)],
             'remarks' => ['nullable'],
 
         ];

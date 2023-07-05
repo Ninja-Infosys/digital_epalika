@@ -2,8 +2,6 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DefendantIssuedDeadline;
@@ -53,14 +51,14 @@ class DefendantIssuedDeadlineController extends Controller
             return redirect(route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index'));
         }
 
-        return view('judicialcommittee::admin.defendant_issued_deadline.show',compact('complaintApplication','defendantIssuedDeadline'));
+        return view('judicialcommittee::admin.defendant_issued_deadline.show', compact('complaintApplication', 'defendantIssuedDeadline'));
     }
 
     public function edit(ComplaintApplication $complaintApplication, DefendantIssuedDeadline $defendantIssuedDeadline)
     {
         $this->checkAuthorization('defendantIssuedDeadline_edit');
 
-        return view('judicialcommittee::admin.defendant_issued_deadline.edit',compact('complaintApplication','defendantIssuedDeadline'));
+        return view('judicialcommittee::admin.defendant_issued_deadline.edit', compact('complaintApplication', 'defendantIssuedDeadline'));
     }
 
     public function update(UpdateDefendantIssuedDeadlineRequest $request, ComplaintApplication $complaintApplication, DefendantIssuedDeadline $defendantIssuedDeadline)

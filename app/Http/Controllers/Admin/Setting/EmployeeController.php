@@ -37,7 +37,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        return view('admin.setting.employee.create',compact('ethnicities','branches','allemployees'));
+        return view('admin.setting.employee.create', compact('ethnicities', 'branches', 'allemployees'));
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -52,11 +52,10 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-
         $qualifications = Qualification::all();
         $experiences = Experience::all();
         $experienceFiles = ExperienceFile::all();
-        return view('admin.setting.employee.show',compact('experienceFiles','employee','qualifications','experiences'));
+        return view('admin.setting.employee.show', compact('experienceFiles', 'employee', 'qualifications', 'experiences'));
     }
 
     public function edit(Employee $employee)
@@ -65,7 +64,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        return view('admin.setting.employee.edit', compact('ethnicities','employee','branches','allemployees'));
+        return view('admin.setting.employee.edit', compact('ethnicities', 'employee', 'branches', 'allemployees'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)

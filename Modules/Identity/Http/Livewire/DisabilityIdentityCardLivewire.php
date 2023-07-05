@@ -2,9 +2,6 @@
 
 namespace Modules\Identity\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
 use App\Models\Settings\OfficeSetting;
@@ -21,14 +18,12 @@ use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
 use Modules\Identity\Entities\EmployeeSignature;
-use Modules\Identity\Entities\FingerPrint;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\Relationship;
 use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCardLivewire extends Component
 {
-
     use WithFileUploads;
 
     use NepaliDateConverter;
@@ -169,8 +164,6 @@ class DisabilityIdentityCardLivewire extends Component
                     ];
                 }
             }
-
-
         } else {
             $this->form['permanent_province_id'] = $officeSetting->province_id;
             $this->form['permanent_district_id'] = $officeSetting->district_id;
@@ -206,8 +199,6 @@ class DisabilityIdentityCardLivewire extends Component
             'isoImage' => $isoImage,
             'quality' => $quality,
         ];
-
-
     }
 
     public function photoUpdated($base64String): void
@@ -442,7 +433,6 @@ class DisabilityIdentityCardLivewire extends Component
 
     public function rules(): array
     {
-
         return match ($this->currentStep) {
             1 => $this->firstStepValidations(),
             2 => $this->secondStepValidations,
@@ -464,7 +454,6 @@ class DisabilityIdentityCardLivewire extends Component
                 $this->seventhStepValidations,
                 $this->eighthStepValidations,
                 $this->ninthStepValidations,
-
             ),
         };
     }
@@ -563,7 +552,6 @@ class DisabilityIdentityCardLivewire extends Component
                     'user_id' => auth()->id(),
                 ]);
             }
-
         });
 
         $this->dispatchBrowserEvent('toast_message', [

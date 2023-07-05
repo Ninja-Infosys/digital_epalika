@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Setting;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Experience\StoreExperienceRequest;
 use App\Http\Requests\Setting\Experience\UpdateExperienceRequest;
 use App\Models\Settings\Employee;
 use App\Models\Settings\Experience;
-use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
@@ -41,7 +39,7 @@ class ExperienceController extends Controller
     public function edit(Employee $employee, Experience $experience)
     {
         $this->checkAuthorization('experience_edit');
-        return view('admin.setting.employee.experience.edit', compact('employee','experience'));
+        return view('admin.setting.employee.experience.edit', compact('employee', 'experience'));
     }
 
     public function update(UpdateExperienceRequest $request, Employee $employee, Experience $experience)
@@ -49,7 +47,7 @@ class ExperienceController extends Controller
         $this->checkAuthorization('experience_edit');
         $experience->update($request->validated());
         toast('कार्य अनुभव सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.generalSetting.employee.show',$employee));
+        return redirect(route('admin.generalSetting.employee.show', $employee));
     }
 
     public function destroy(Employee $employee, Experience $experience)

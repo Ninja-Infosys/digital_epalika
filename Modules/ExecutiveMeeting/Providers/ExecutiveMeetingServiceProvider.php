@@ -35,8 +35,8 @@ class ExecutiveMeetingServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         //share meeting committee in sidebar
-        if (Schema::hasTable('committees')){
-            view()->share('sharedCommittees',Committee::orderBy('committee_type_id')->get());
+        if (Schema::hasTable('committees')) {
+            view()->share('sharedCommittees', Committee::orderBy('committee_type_id')->get());
         }
 
         CommitteeMember::observe(CommitteeMemberObserver::class);

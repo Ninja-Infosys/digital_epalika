@@ -23,8 +23,7 @@ class CooperativeReportResource extends JsonResource
             ];
     }
 
-    private
-    function resolveAddress($request_columns): string
+    private function resolveAddress($request_columns): string
     {
         $address = '';
         if (in_array('local_body_id', $request_columns)) {

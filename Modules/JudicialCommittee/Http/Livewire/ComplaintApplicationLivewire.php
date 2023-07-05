@@ -2,10 +2,6 @@
 
 namespace Modules\JudicialCommittee\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
-use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

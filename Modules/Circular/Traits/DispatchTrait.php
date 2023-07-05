@@ -17,7 +17,6 @@ trait DispatchTrait
     }
     public function getDispatchNumber(): string
     {
-
         return $this->getDispatchPrefix() . $this->getDispatchNo();
     }
 

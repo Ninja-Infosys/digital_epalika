@@ -3,7 +3,6 @@
 namespace App\Mail\GrievanceHandling;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
@@ -14,11 +13,12 @@ use Modules\GrievanceHandling\Entities\GrievanceDetail;
 
 class GrievanceRegistrationAssignedUserMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public function __construct(public GrievanceDetail $grievanceDetail)
     {
-        $this->grievanceDetail->load('files','grievanceUser');
+        $this->grievanceDetail->load('files', 'grievanceUser');
     }
 
     public function envelope(): Envelope

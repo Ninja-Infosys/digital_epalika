@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Installer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Installer\LicenseRequest;
-use Illuminate\Http\Request;
 
 class LicenseController extends Controller
 {
@@ -15,7 +14,6 @@ class LicenseController extends Controller
 
     public function saveLicense(LicenseRequest $request)
     {
-
         $response = $this->checkLicense($request->input('key'), $request->getUri());
 
         if (array_key_exists('is_active', $response) && $response['is_active']) {
@@ -37,7 +35,6 @@ class LicenseController extends Controller
 
     public function checkLicense(string $licenseKey, string $domain)
     {
-
         $url = "https://digitalepalika.com/api/v1/license/check";
         $args = http_build_query(array(
             'key' => $licenseKey,

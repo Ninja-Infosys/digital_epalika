@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class DispatchResource extends JsonResource
 {
-    public function toArray($request):array
+    public function toArray($request): array
     {
         $request_columns = $request->input('columns')['dispatches'] ?? [];
 

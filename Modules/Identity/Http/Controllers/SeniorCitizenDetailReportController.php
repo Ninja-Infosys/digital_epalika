@@ -3,7 +3,6 @@
 namespace Modules\Identity\Http\Controllers;
 
 use App\Models\Settings\FiscalYear;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
@@ -12,7 +11,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 use Modules\Identity\Transformers\SeniorCitizenDetailResource;
-use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class SeniorCitizenDetailReportController extends Controller
 {
@@ -20,7 +18,7 @@ class SeniorCitizenDetailReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $columnData = $this->getColumns();
-        return view('identity::admin.seniorCitizen.report', compact('fiscalYears','columnData'));
+        return view('identity::admin.seniorCitizen.report', compact('fiscalYears', 'columnData'));
     }
 
 
@@ -117,7 +115,7 @@ class SeniorCitizenDetailReportController extends Controller
         }
 
         return response()->json([
-            'view' => (string)View::make('identity::admin.report.inc.seniorCitizenWardWise', compact('wardData','seniorCitizenDetails'))
+            'view' => (string)View::make('identity::admin.report.inc.seniorCitizenWardWise', compact('wardData', 'seniorCitizenDetails'))
         ]);
     }
 }

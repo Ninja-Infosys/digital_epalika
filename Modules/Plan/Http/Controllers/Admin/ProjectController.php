@@ -17,7 +17,6 @@ use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectAllocatedAmount;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
-use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 use Modules\Plan\Http\Requests\Project\StoreProjectRequest;
 use Modules\Plan\Http\Requests\Project\UpdateProjectRequest;
@@ -28,7 +27,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $projects = Project::with('planArea')->withSum('projectAllocatedAmounts','amount')->where(function (Builder $q) {
+        $projects = Project::with('planArea')->withSum('projectAllocatedAmounts', 'amount')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['registration_no', 'project_name'], request('search'));
             }
@@ -47,7 +46,6 @@ class ProjectController extends Controller
             if (!is_null(request('is_contracted'))) {
                 $q->where('is_contracted', request('is_contracted'));
             }
-
         })
             ->latest()->paginate(10);
         $expenseHeads = ExpenseHead::all();
@@ -92,7 +90,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates.unit','projectAllocatedAmounts.budgetHead');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates.unit', 'projectAllocatedAmounts.budgetHead');
 
         if (request()->ajax()) {
             return response()->json([
@@ -192,5 +190,4 @@ class ProjectController extends Controller
             ]);
         }
     }
-
 }

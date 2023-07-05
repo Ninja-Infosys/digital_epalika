@@ -6,7 +6,6 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Transformers\Report\DispatchResource;
 
@@ -47,7 +46,6 @@ class DispatchReportController extends Controller
         return response()->json([
             'data' => DispatchResource::collection($dispatches)
         ]);
-
     }
 
     private function getColumns(): Collection

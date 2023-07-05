@@ -58,7 +58,6 @@ class ConciliationController extends Controller
         toast('मिलापत्र सफलतापूर्वक पेश गरियो', 'success');
 
         return redirect(route('admin.judicialCommittee.complaintApplication.conciliation.index', $complaintApplication));
-
     }
 
     public function show($id)

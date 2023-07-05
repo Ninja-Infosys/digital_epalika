@@ -41,13 +41,13 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('place', PlaceController::class)->except('show');
 });
 
-Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function (){
-    Route::get('/','index')->name('index');
-    Route::post('report','report')->name('report-data');
-    Route::get('invoice','invoice')->name('invoice');
-    Route::post('invoice-report','invoiceReport')->name('invoice-report');
-    Route::get('tax-payer','taxPayer')->name('tax-payer');
-    Route::post('tax-payer-report','taxPayerReport')->name('tax-payer-report');
-    Route::get('word-wise-invoice','wordWiseInvoice')->name('word-wise-invoice');
-    Route::post('word-wise-invoice-report','wordWiseInvoiceReport')->name('word-wise-invoice-report');
+Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report', 'report')->name('report-data');
+    Route::get('invoice', 'invoice')->name('invoice');
+    Route::post('invoice-report', 'invoiceReport')->name('invoice-report');
+    Route::get('tax-payer', 'taxPayer')->name('tax-payer');
+    Route::post('tax-payer-report', 'taxPayerReport')->name('tax-payer-report');
+    Route::get('word-wise-invoice', 'wordWiseInvoice')->name('word-wise-invoice');
+    Route::post('word-wise-invoice-report', 'wordWiseInvoiceReport')->name('word-wise-invoice-report');
 });

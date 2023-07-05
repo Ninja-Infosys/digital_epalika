@@ -4,12 +4,10 @@ namespace App\Imports\TaskManagement;
 
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
@@ -18,7 +16,8 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class ActivityImport implements ToCollection, WithValidation, WithHeadingRow, SkipsEmptyRows, WithBatchInserts
 {
-    use Importable, NepaliDateConverter;
+    use Importable;
+    use NepaliDateConverter;
 
     protected int|null $user_id;
     protected int|null $branch_id;

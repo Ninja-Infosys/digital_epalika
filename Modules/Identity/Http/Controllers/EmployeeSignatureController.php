@@ -2,8 +2,6 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\EmployeeSignature;
 use Modules\Identity\Http\Requests\EmployeeSignature\StoreEmployeeSignatureRequest;
@@ -46,7 +44,6 @@ class EmployeeSignatureController extends Controller
 
     public function update(UpdateEmployeeSignatureRequest $request, EmployeeSignature $employeeSignature)
     {
-
         $this->checkAuthorization('employeeSignature_edit');
 
         if ($request->hasFile('stamp') && $employeeSignature->getRawOriginal('stamp')) {
@@ -66,7 +63,6 @@ class EmployeeSignatureController extends Controller
 
     public function destroy(EmployeeSignature $employeeSignature)
     {
-
         $this->checkAuthorization('employeeSignature_delete');
         if ($employeeSignature->getRawOriginal('stamp')) {
             $this->deleteFile($employeeSignature->getRawOriginal('stamp'));

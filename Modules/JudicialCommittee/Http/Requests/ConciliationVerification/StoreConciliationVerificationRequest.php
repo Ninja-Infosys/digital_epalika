@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Gate;
 
 class StoreConciliationVerificationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('conciliationVerification_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'description' => ['required'],

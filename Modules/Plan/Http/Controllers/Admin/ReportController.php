@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Plan\Entities\BudgetHead;
@@ -162,7 +161,6 @@ class ReportController extends Controller
                 return true;
             })
             ->map(function ($project, $key) {
-
                 return [
                     'sn' => (int)$key + 1,
                     'project_name' => $project->project_name ?? '',

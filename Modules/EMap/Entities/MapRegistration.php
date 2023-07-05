@@ -53,5 +53,4 @@ class MapRegistration extends Model
     {
         return $this->attributes['form_receipt'] + $this->attributes['application_registration_fee'] + $this->attributes['other'] + $this->getParticularTotalAmountAttribute();
     }
-
 }

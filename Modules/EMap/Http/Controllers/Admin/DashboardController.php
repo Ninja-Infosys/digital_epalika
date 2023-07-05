@@ -37,7 +37,7 @@ class DashboardController extends Controller
         }
         $organization_count = Organization::count();
         $map_apply_count = MapApply::count();
-        return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count',));
+        return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', ));
     }
 
 
@@ -64,7 +64,7 @@ class DashboardController extends Controller
             },])
             ->selectRaw('id,title')
             ->get()
-        ->map(function ($fiscalYear){
+        ->map(function ($fiscalYear) {
             return [
                 'title' => $fiscalYear->title,
                 'map_applies_count'=> (int)$fiscalYear->map_applies_count,
@@ -96,7 +96,7 @@ class DashboardController extends Controller
     public function getMapApply($hasCurrentFiscalYear = null): Collection
     {
         return DB::table('map_applies')
-            ->select('registration_date','usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
+            ->select('registration_date', 'usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
             ->whereNull('deleted_at')
             ->where(function ($query) use ($hasCurrentFiscalYear) {
                 if ($hasCurrentFiscalYear) {
@@ -124,7 +124,6 @@ class DashboardController extends Controller
         }
 
         return $result;
-
     }
 
     public function getMapApplyBuildingCategoryAccordingToFiscalYear()

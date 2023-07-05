@@ -13,7 +13,6 @@ class ModuleController extends Controller
         $modules = $this->getModules();
 
         return view('installer.module', compact('modules'));
-
     }
 
     public function saveModules(Request $request)
@@ -47,7 +46,6 @@ class ModuleController extends Controller
 
 
             copy($sourcePath, $moduleFile);
-
         }
 
         $getModuleFileData = file_get_contents($moduleFile);

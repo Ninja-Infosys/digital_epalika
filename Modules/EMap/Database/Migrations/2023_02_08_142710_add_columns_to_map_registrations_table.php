@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -14,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('map_registrations', function (Blueprint $table) {
-            $table->double('amount',12, 2)->default(0);
+            $table->double('amount', 12, 2)->default(0);
             $table->text('remarks')->nullable();
             $table->string('tax_payer')->nullable();
         });

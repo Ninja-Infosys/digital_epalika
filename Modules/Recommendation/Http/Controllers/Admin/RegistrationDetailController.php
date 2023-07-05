@@ -3,11 +3,9 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\File;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\Recommendation\Entities\PersonalDetail;
@@ -23,7 +21,6 @@ class RegistrationDetailController extends Controller
 
     public function index(RecommendationCategory $recommendationCategory)
     {
-
         $this->checkAuthorization('recommendation_access');
         $registrationDetails = RegistrationDetail::where('recommendation_category_id', $recommendationCategory->id)->filterData()->with('recommendationCategory', 'personalDetail')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
@@ -54,7 +51,6 @@ class RegistrationDetailController extends Controller
 
     public function create(RecommendationCategory $recommendationCategory)
     {
-
         $this->checkAuthorization('recommendation_create');
         $template = $recommendationCategory->recommendationTemplates->where('is_active', 1)->first()->data ?? '';
         $data = Str::replace($this->getReplaceData(), $this->getRecommendationTemplateData(), $template);
@@ -81,7 +77,7 @@ class RegistrationDetailController extends Controller
     {
         $this->checkAuthorization('recommendation_access');
         $registrationDetail->load('personalDetail', 'files', 'recommendationCategory');
-        return view('recommendation::admin.registration.show', compact('registrationDetail','recommendationCategory'));
+        return view('recommendation::admin.registration.show', compact('registrationDetail', 'recommendationCategory'));
     }
 
     public function edit(RecommendationCategory $recommendationCategory, RegistrationDetail $registrationDetail)
@@ -100,7 +96,7 @@ class RegistrationDetailController extends Controller
         });
 
         toast('सिफारिस विवरण सफलतापूर्वक गरियो', 'success');
-        return redirect()->route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory);
+        return redirect()->route('admin.recommendation.recommendationCategory.registrationDetail.index', $recommendationCategory);
     }
 
     public function destroy(RecommendationCategory $recommendationCategory, RegistrationDetail $registrationDetail)
@@ -111,7 +107,7 @@ class RegistrationDetailController extends Controller
         return back();
     }
 
-    public function ocFile(Request $request,  RegistrationDetail $registrationDetail)
+    public function ocFile(Request $request, RegistrationDetail $registrationDetail)
     {
         $request->validate([
             'oc_file' => ['array', 'required'],
@@ -135,7 +131,7 @@ class RegistrationDetailController extends Controller
     }
 
 
-    private function getClientFile($request,  RegistrationDetail $registrationDetail)
+    private function getClientFile($request, RegistrationDetail $registrationDetail)
     {
         $files_count = collect($request->validated()['files'])->pluck('file')->filter(function ($file) {
             return !is_null($file);
@@ -187,5 +183,4 @@ class RegistrationDetailController extends Controller
             '[@secretary]',
         ];
     }
-
 }

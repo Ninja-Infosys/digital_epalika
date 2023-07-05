@@ -16,8 +16,7 @@ class CardColorTableSeeder extends Seeder
             ['title'=>'घ','color'=>'#FFFFFF'],
         ];
 
-        foreach ($cardColors as $cardColor)
-        {
+        foreach ($cardColors as $cardColor) {
             CardColor::create($cardColor);
         }
     }

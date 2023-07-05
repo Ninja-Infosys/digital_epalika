@@ -21,4 +21,3 @@ Route::get('environment-wizard', [EnvironmentController::class, 'environmentWiza
 Route::post('save-wizard', [EnvironmentController::class, 'saveWizard'])->name('save-wizard');
 Route::get('database', [DatabaseController::class, 'database'])->name('database');
 Route::get('final', [FinalController::class, 'finish'])->name('final');
-

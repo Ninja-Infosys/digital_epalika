@@ -2,15 +2,11 @@
 
 namespace Modules\Plan\Traits;
 
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Modules\EMap\Entities\EMapTemplate;
-use Modules\EMap\Enums\NoticeTypeEnum;
-use Modules\EMap\Enums\PostsEnum;
 use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
 
@@ -197,7 +193,7 @@ trait PlanTemplateTrait
         $budgetHeads=[];
         $allocated_amount_sum=0;
         $this->load('projectAllocatedAmounts.budgetHead');
-        foreach($this->projectAllocatedAmounts as $allocatedAmount){
+        foreach ($this->projectAllocatedAmounts as $allocatedAmount) {
             $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
             $allocated_amount_sum+=$allocatedAmount->amount;
         }
@@ -214,7 +210,7 @@ trait PlanTemplateTrait
             '[@project_completion_date]' => $this->project_completion_date ?? '',
             '[@plan_level]' => $this->planLevel->level_name ?? '',
             '[@ward_no]' => implode(',', $this->ward_no ?? ''),
-            '[@budget_head]' => implode(',',$budgetHeads),
+            '[@budget_head]' => implode(',', $budgetHeads),
             '[@allocated_amount]' => $allocated_amount_sum,
             '[@project_venue]' => $this->project_venue ?? '',
             '[@purpose]' => $this->purpose ?? '',

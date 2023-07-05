@@ -13,7 +13,6 @@ use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\Recommendation;
-use Modules\Recommendation\Http\Requests\StoreRecommendationFormRequest;
 use Modules\Recommendation\Http\Requests\StoreRecommendationRequest;
 use Modules\Recommendation\Http\Requests\UpdateRecommendationRequest;
 
@@ -56,7 +55,6 @@ class RecommendationController extends Controller
 
     public function store(StoreRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
-
         $this->checkAuthorization('recommendation_create');
 
 
@@ -174,12 +172,10 @@ class RecommendationController extends Controller
         $resolvedData = $recommendationData->recommendationDataForm->data ?? $this->resolve($recommendation);
 
         return view('recommendation::admin.recommendation.template', compact('resolvedData', 'recommendation'));
-
     }
 
     private function getData($data): array
     {
-
         $resolvedData = [];
 
         foreach ($data as $key => $value) {
@@ -206,7 +202,6 @@ class RecommendationController extends Controller
 
     public function formData(Request $request, Recommendation $recommendation)
     {
-
         $data = $request->validate([
             'data' => 'required'
         ]);
@@ -222,5 +217,4 @@ class RecommendationController extends Controller
         toast('डाटा सफलतापूर्वक थपियो', 'success');
         return back();
     }
-
 }

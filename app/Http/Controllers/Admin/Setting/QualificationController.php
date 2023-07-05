@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Setting;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Qualification\StoreQualificationRequest;
 use App\Http\Requests\Setting\Qualification\UpdateQualificationRequest;
 use App\Models\Settings\Employee;
 use App\Models\Settings\Qualification;
-use Illuminate\Http\Request;
 
 class QualificationController extends Controller
 {
@@ -20,10 +18,10 @@ class QualificationController extends Controller
     public function create(Employee $employee)
     {
         $this->checkAuthorization('qualification_create');
-        return view('admin.setting.employee.qualification.create',compact('employee'));
+        return view('admin.setting.employee.qualification.create', compact('employee'));
     }
 
-    public function store(StoreQualificationRequest $request ,Employee $employee)
+    public function store(StoreQualificationRequest $request, Employee $employee)
     {
         $this->checkAuthorization('qualification_create');
 
@@ -32,30 +30,29 @@ class QualificationController extends Controller
             ]);
         toast('शैक्षिक योग्यता सफलतापूर्वक थपियो', 'success');
         return back();
-
     }
 
-    public function show(Employee $employee,Qualification $qualification)
+    public function show(Employee $employee, Qualification $qualification)
     {
         $this->checkAuthorization('qualification_access');
     }
 
-    public function edit(Employee $employee,Qualification $qualification)
+    public function edit(Employee $employee, Qualification $qualification)
     {
         $this->checkAuthorization('qualification_edit');
-        return view('admin.setting.employee.qualification.edit',compact('employee','qualification'));
+        return view('admin.setting.employee.qualification.edit', compact('employee', 'qualification'));
     }
 
-    public function update(UpdateQualificationRequest $request, Employee $employee,Qualification $qualification)
+    public function update(UpdateQualificationRequest $request, Employee $employee, Qualification $qualification)
     {
         $this->checkAuthorization('qualification_edit');
         $qualification->update($request->validated());
         toast('शैक्षिक योग्यता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.generalSetting.employee.show',$employee));
+        return redirect(route('admin.generalSetting.employee.show', $employee));
     }
 
-    public function destroy(Employee $employee,Qualification $qualification)
+    public function destroy(Employee $employee, Qualification $qualification)
     {
         $this->checkAuthorization('qualification_delete');
         $qualification->delete();

@@ -4,9 +4,7 @@ namespace Modules\BusinessRegistration\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\BusinessRegistration\Entities\BusinessRenew;
-use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Observers\BusinessRenewObserver;
-use Modules\BusinessRegistration\Observers\CustomObserver;
 
 class BusinessRegistrationServiceProvider extends ServiceProvider
 {

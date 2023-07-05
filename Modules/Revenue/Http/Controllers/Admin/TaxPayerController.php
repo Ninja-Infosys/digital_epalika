@@ -5,7 +5,6 @@ namespace Modules\Revenue\Http\Controllers\Admin;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Modules\Revenue\Entities\TaxPayer;
-use Modules\Revenue\Entities\TaxPayerType;
 use Modules\Revenue\Http\Requests\TaxPayer\StoreTaxPayerRequest;
 use Modules\Revenue\Http\Requests\TaxPayer\UpdateTaxPayerRequest;
 

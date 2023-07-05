@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\LetterHead;
 use App\Models\User;
-use App\Models\UserManagement\Role;
 use Illuminate\Http\Request;
 
 class LetterHeadController extends Controller
@@ -32,7 +31,7 @@ class LetterHeadController extends Controller
             ]
         );
 
-        toast('लेटर हेड सफलतापूर्वक पेश गरियो','success');
+        toast('लेटर हेड सफलतापूर्वक पेश गरियो', 'success');
         return back();
     }
 

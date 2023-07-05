@@ -26,16 +26,16 @@ Route::controller(CalenderController::class)
     });
 
 Route::resource('committee/{committee}/committeeMember', CommitteeMemberController::class)->names('committee.committeeMember');
-Route::get('meeting/{meeting}/meetingMinute',[MeetingController::class,'minuteForm'])->name('meeting.meetingMinute.index');
-Route::post('meeting/{meeting}/meetingMinute',[MeetingController::class,'storeMeetingMinute'])->name('meeting.meetingMinute.store');
-Route::get('meeting/{meeting}/printMinute',[MeetingController::class,'printMinute'])->name('meeting.printMinute');
+Route::get('meeting/{meeting}/meetingMinute', [MeetingController::class,'minuteForm'])->name('meeting.meetingMinute.index');
+Route::post('meeting/{meeting}/meetingMinute', [MeetingController::class,'storeMeetingMinute'])->name('meeting.meetingMinute.store');
+Route::get('meeting/{meeting}/printMinute', [MeetingController::class,'printMinute'])->name('meeting.printMinute');
 Route::resource('meeting', MeetingController::class);
 
-Route::get('meeting/{meeting}/meetingAgenda/{meetingAgenda}/updateStatus',[MeetingAgendaController::class,'updateStatus'])->name('meeting.meetingAgenda.updateStatus');
-Route::resource('meeting/{meeting}/meetingAgenda',MeetingAgendaController::class)->names('meeting.meetingAgenda');
-Route::resource('meeting/{meeting}/meetingDecision',MeetingDecisionController::class)->names('meeting.meetingDecision');
+Route::get('meeting/{meeting}/meetingAgenda/{meetingAgenda}/updateStatus', [MeetingAgendaController::class,'updateStatus'])->name('meeting.meetingAgenda.updateStatus');
+Route::resource('meeting/{meeting}/meetingAgenda', MeetingAgendaController::class)->names('meeting.meetingAgenda');
+Route::resource('meeting/{meeting}/meetingDecision', MeetingDecisionController::class)->names('meeting.meetingDecision');
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
-    Route::get('/','index')->name('index');
-    Route::post('report-data','report')->name('report-data');
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
 });

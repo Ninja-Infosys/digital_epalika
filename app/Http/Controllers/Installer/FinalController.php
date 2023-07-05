@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Installer\EnvironmentManager;
 use App\Installer\FinalInstallManager;
 use App\Installer\InstalledFileManager;
-use Illuminate\Http\Request;
 
 class FinalController extends Controller
 {
@@ -16,7 +15,7 @@ class FinalController extends Controller
         $finalMessages = $finalInstall->runFinal();
         $finalStatusMessage = $fileManager->update();
         $finalEnvFile = $environment->getEnvContent();
-//TODO: This is the line that is causing the error Event not found
+        //TODO: This is the line that is causing the error Event not found
 //        event(new LaravelInstallerFinished);
 
         return view('installer.finished', compact('finalMessages', 'finalStatusMessage', 'finalEnvFile'));

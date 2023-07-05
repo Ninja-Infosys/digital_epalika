@@ -2,12 +2,9 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\CardColor;
-use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Http\Requests\StoreGovernmentalDisablityRequest;
 use Modules\Identity\Http\Requests\UpdateGovernmentalDisablityRequest;
@@ -23,14 +20,14 @@ class GovernmentalDisabilityTypeController extends Controller
             }
         })
             ->latest()->paginate(10);
-        return view('identity::admin.setting.governmentalDisabilityType.index',compact('governmentalDisabilityTypes'));
+        return view('identity::admin.setting.governmentalDisabilityType.index', compact('governmentalDisabilityTypes'));
     }
 
     public function create()
     {
         $this->checkAuthorization('governmentalDisabilityType_create');
         $cardColors = CardColor::all();
-        return view('identity::admin.setting.governmentalDisabilityType.create',compact('cardColors'));
+        return view('identity::admin.setting.governmentalDisabilityType.create', compact('cardColors'));
     }
 
     public function store(StoreGovernmentalDisablityRequest $request)
@@ -51,12 +48,11 @@ class GovernmentalDisabilityTypeController extends Controller
     {
         $this->checkAuthorization('governmentalDisabilityType_edit');
         $cardColors = CardColor::all();
-        return view('identity::admin.setting.governmentalDisabilityType.edit',compact('cardColors','governmentalDisabilityType'));
+        return view('identity::admin.setting.governmentalDisabilityType.edit', compact('cardColors', 'governmentalDisabilityType'));
     }
 
     public function update(UpdateGovernmentalDisablityRequest $request, GovernmentalDisabilityType $governmentalDisabilityType)
     {
-
         $this->checkAuthorization('governmentalDisabilityType_edit');
         $governmentalDisabilityType->update($request->validated());
         toast('अपांगताको प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -65,7 +61,6 @@ class GovernmentalDisabilityTypeController extends Controller
 
     public function destroy(GovernmentalDisabilityType $governmentalDisabilityType)
     {
-
         $this->checkAuthorization('governmentalDisabilityType_delete');
         $governmentalDisabilityType->delete();
         toast('अपांगताको प्रकार सफलतापूर्वक मेटियो', 'success');

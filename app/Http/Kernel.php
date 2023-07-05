@@ -8,7 +8,6 @@ use App\Http\Middleware\CheckPinMiddleware;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\InstallerMiddleware;
-use App\Http\Middleware\InstallMiddleware;
 use App\Http\Middleware\LicenseMiddleware;
 use App\Http\Middleware\PageRenderMiddleware;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;

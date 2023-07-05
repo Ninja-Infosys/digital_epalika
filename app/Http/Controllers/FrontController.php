@@ -130,12 +130,10 @@ class FrontController extends Controller
 
     public function seniorCitizenDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
     {
-
         $seniorCitizenDetail->load('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody');
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.seniorCitizenprint', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
-
     }
 
     public function disabilityIdentityCardQrcode(DisabilityIdentityCard $disabilityIdentityCard)
@@ -144,6 +142,5 @@ class FrontController extends Controller
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
-
     }
 }

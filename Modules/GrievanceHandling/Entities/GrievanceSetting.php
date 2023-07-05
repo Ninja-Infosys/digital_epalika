@@ -11,21 +11,23 @@ use App\Traits\EventObserveTrait;
 
 class GrievanceSetting extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'user_id',
-       'escalation_days'
-   ];
+    protected $fillable = [
+        'user_id',
+        'escalation_days'
+    ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-   }
+    }
 }

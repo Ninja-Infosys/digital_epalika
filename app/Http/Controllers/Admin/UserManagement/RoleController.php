@@ -102,10 +102,10 @@ class RoleController extends Controller
 
     public function letterHeadPage(Role $role)
     {
-        return view('admin.userManagement.role.letter_head',compact('role'));
+        return view('admin.userManagement.role.letter_head', compact('role'));
     }
 
-    public function letterHeadStore(Request $request,Role $role)
+    public function letterHeadStore(Request $request, Role $role)
     {
         $request->validate([
             'header'=>['required'],
@@ -120,7 +120,7 @@ class RoleController extends Controller
             ]
         );
 
-        toast('लेटर हेड सफलतापूर्वक पेश गरियो','success');
+        toast('लेटर हेड सफलतापूर्वक पेश गरियो', 'success');
         return back();
     }
 

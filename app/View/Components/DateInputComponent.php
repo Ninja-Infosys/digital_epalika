@@ -26,8 +26,7 @@ class DateInputComponent extends Component
         public ?string $editDateNe = null,
         public ?string $editDateEn = null,
         public ?string $container = null,
-    )
-    {
+    ) {
     }
 
     /**

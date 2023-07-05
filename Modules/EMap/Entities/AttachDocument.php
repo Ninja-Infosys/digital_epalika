@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 class AttachDocument extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -41,57 +43,57 @@ class AttachDocument extends Model
     protected function landOwnerDocument(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function landRevenueDocument(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function landOwnerCitizenship(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function bluePrint(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function passDocument(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function designerDocument(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function permissionDocument(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
     protected function inheritanceDocument(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) :'',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
         );
     }
 

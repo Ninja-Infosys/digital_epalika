@@ -14,7 +14,10 @@ use App\Traits\EventObserveTrait;
 
 class Invoice extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait,GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',

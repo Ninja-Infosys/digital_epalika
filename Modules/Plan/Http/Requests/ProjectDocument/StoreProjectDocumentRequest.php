@@ -3,7 +3,6 @@
 namespace Modules\Plan\Http\Requests\ProjectDocument;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreProjectDocumentRequest extends FormRequest
 {

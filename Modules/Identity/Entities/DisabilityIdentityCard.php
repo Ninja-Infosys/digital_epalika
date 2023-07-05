@@ -23,7 +23,8 @@ use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCard extends Model
 {
-    use SoftDeletes, EventObserveTrait;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -204,7 +205,6 @@ class DisabilityIdentityCard extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-
         if ($this->attributes['photo']) {
             return !isBase64($this->attributes['photo'])
                 ? Storage::disk('public')->url($this->attributes['photo'])
@@ -218,7 +218,6 @@ class DisabilityIdentityCard extends Model
     public function getCitizenshipPhotoUrlAttribute(): string
     {
         return $this->attributes['citizenship_photo'] ? Storage::disk('public')->url($this->attributes['citizenship_photo']) : '';
-
     }
 
     public function setCitizenshipPhotoAttribute($value): void
@@ -231,7 +230,6 @@ class DisabilityIdentityCard extends Model
     public function getCitizenshipPhotoCertificateUrlAttribute(): string
     {
         return $this->attributes['citizenship_photo_certificate'] ? Storage::disk('public')->url($this->attributes['citizenship_photo_certificate']) : '';
-
     }
 
     public function setCitizenshipPhotoCertificateAttribute($value): void
@@ -243,19 +241,17 @@ class DisabilityIdentityCard extends Model
 
     protected function HelpingTask(): Attribute
     {
-
         return Attribute::make(
-            get: static fn($value) => explode(',', $value),
-            set: static fn($value) => implode(',', $value),
+            get: static fn ($value) => explode(',', $value),
+            set: static fn ($value) => implode(',', $value),
         );
     }
 
     protected function WithoutHelpingTask(): Attribute
     {
-
         return Attribute::make(
-            get: static fn($value) => explode(',', $value),
-            set: static fn($value) => implode(',', $value),
+            get: static fn ($value) => explode(',', $value),
+            set: static fn ($value) => implode(',', $value),
         );
     }
 
@@ -294,5 +290,4 @@ class DisabilityIdentityCard extends Model
         }
         return $query;
     }
-
 }

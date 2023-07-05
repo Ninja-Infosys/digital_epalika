@@ -9,12 +9,12 @@ use Modules\Identity\Enums\CategoryTypeEnum;
 
 class StoreGovernmentalDisablityRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('governmentalDisabilityType_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'title' => ['required','string','max:255'],

@@ -2,14 +2,11 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\ComplaintDecision;
-use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
-use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\ComplaintDecision\StoreComplaintDecisionRequest;
 

@@ -3,7 +3,6 @@
 namespace Modules\JudicialCommittee\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class JudicialReceiptBillRequest extends FormRequest
 {

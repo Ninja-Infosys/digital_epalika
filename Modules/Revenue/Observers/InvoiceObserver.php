@@ -29,7 +29,6 @@ class InvoiceObserver
             $invoice->name = $invoice->taxPayer->name ?? '';
             $invoice->address = $invoice->address ?? $invoice->taxPayer->address;
         }
-
     }
 
     private function generateUniqueId($fiscalYear, $table = 'invoices', $code = 'REV'): string

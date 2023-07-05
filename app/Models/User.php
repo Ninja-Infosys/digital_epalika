@@ -127,7 +127,7 @@ class User extends Authenticatable
     public function getAvatarAttribute(): string
     {
         $name = $this->attributes['name'] ?? 'User';
-        return (new Avatar)->create($name)->toBase64();
+        return (new Avatar())->create($name)->toBase64();
     }
 
     public function letterHead(): MorphOne

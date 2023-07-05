@@ -11,29 +11,31 @@ use App\Traits\EventObserveTrait;
 
 class ComplaintLog extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'complaint_application_id',
-       'model_type',
-       'model_id',
-       'title',
-       'description'
-   ];
+    protected $fillable = [
+        'complaint_application_id',
+        'model_type',
+        'model_id',
+        'title',
+        'description'
+    ];
 
     public function complaintApplication(): BelongsTo
     {
         return $this->belongsTo(ComplaintApplication::class);
-   }
+    }
 
     public function model(): MorphTo
     {
         return $this->morphTo();
-   }
+    }
 }

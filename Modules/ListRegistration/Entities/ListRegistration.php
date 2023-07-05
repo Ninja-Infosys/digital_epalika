@@ -64,11 +64,10 @@ class ListRegistration extends Model
     protected function ApplicationPhoto(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -77,11 +76,10 @@ class ListRegistration extends Model
     protected function RegistrationCertificate(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -90,11 +88,10 @@ class ListRegistration extends Model
     protected function File(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/file/', 'public')
                 : null
         );
@@ -103,11 +100,10 @@ class ListRegistration extends Model
     protected function PanPhoto(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -116,11 +112,10 @@ class ListRegistration extends Model
     protected function TaxPaymentCertificate(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -129,11 +124,10 @@ class ListRegistration extends Model
     protected function LicensePhoto(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );

@@ -2,11 +2,7 @@
 
 namespace Modules\EMap\Http\Livewire;
 
-use App\Models\Address\District;
 use App\Models\Settings\OfficeSetting;
-use App\Models\Settings\Units\MeasurementUnit;
-use App\Models\Settings\Units\Unit;
-use App\Models\Settings\Units\UnitConversion;
 use App\Notifications\MapApplyNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -269,16 +265,16 @@ class MapApplicationForm extends Component
                     'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
                 ]);
 
-            if($houseOwner=HouseOwner::where('citizenship_no',$this->houseOwner['citizenship_no'])->where('phone',$this->houseOwner['phone'])->first()){
+            if ($houseOwner=HouseOwner::where('citizenship_no', $this->houseOwner['citizenship_no'])->where('phone', $this->houseOwner['phone'])->first()) {
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
-            }else{
+            } else {
                 $houseOwner=HouseOwner::create($this->houseOwner);
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
             }
 
-            if($landOwner=LandOwner::where('citizenship_no',$this->landOwner['citizenship_no'])->where('phone',$this->landOwner['phone'])->first()){
+            if ($landOwner=LandOwner::where('citizenship_no', $this->landOwner['citizenship_no'])->where('phone', $this->landOwner['phone'])->first()) {
                 $landOwner->mapApplies()->attach([$mapApply->id]);
-            }else{
+            } else {
                 $landOwner=LandOwner::create($this->landOwner);
                 $landOwner->mapApplies()->attach([$mapApply->id]);
             }

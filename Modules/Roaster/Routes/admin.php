@@ -34,7 +34,7 @@ Route::get('technicalTrainee/{technicalTrainee}/updateSelectTechnicalTrainee', [
 Route::resource('technicalTrainee', TechnicalTraineeController::class)->only(['updateSelectTechnicalTrainee', 'show', 'edit']);
 
 
-Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function (){
-    Route::get('/','getRequiredData')->name('report');
-    Route::post('report-data','report')->name('report-data');
+Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
+    Route::get('/', 'getRequiredData')->name('report');
+    Route::post('report-data', 'report')->name('report-data');
 });

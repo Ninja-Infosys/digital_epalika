@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Gate;
 
 class StoreActivityRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('taskActivity_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'date' => ['required'],

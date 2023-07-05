@@ -10,7 +10,9 @@ use App\Traits\EventObserveTrait;
 
 class FingerPrint extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -31,8 +33,6 @@ class FingerPrint extends Model
 
     public function model(): MorphTo
     {
-       return $this->morphTo();
+        return $this->morphTo();
     }
-
-
 }

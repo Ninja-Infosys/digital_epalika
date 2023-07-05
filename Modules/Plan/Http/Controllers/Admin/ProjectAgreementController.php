@@ -2,18 +2,13 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rules\Enum;
 use Modules\Plan\Entities\ConsumerCommittee;
 use Modules\Plan\Entities\ConsumerCommitteeOfficial;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectBidDetail;
-use Modules\Plan\Enums\ConsumerCommitteePostEnum;
-use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 use Modules\Plan\Http\Requests\ProjectAgreement\ConsumerCommitteeRequest;
 use Modules\Plan\Http\Requests\ProjectAgreement\ProjectBidDetailRequest;

@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PartnerResource extends JsonResource
 {
-
     public function toArray($request)
     {
         $request_columns = $request->input('columns')['partners'] ?? [];
@@ -34,12 +33,9 @@ class PartnerResource extends JsonResource
             'नागरिकता अपलोड गर्नुहोस् (आगाडी)' => $this->when(in_array('citizenship_front', $request_columns), $this->citizenship_front ?? ''),
             'नागरिकता अपलोड गर्नुहोस् (पछाडी)' => $this->when(in_array('citizenship_back', $request_columns), $this->citizenship_back ?? ''),
         ];
-
-
     }
 
-    private
-    function resolveAddress($request_columns): string
+    private function resolveAddress($request_columns): string
     {
         $address = '';
         if (in_array('local_body_id', $request_columns)) {

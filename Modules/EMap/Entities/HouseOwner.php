@@ -48,6 +48,4 @@ class HouseOwner extends Model
     {
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
     }
-
-
 }

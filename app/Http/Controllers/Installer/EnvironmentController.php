@@ -7,11 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Installer\EnvironmentManager;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 class EnvironmentController extends Controller
 {
@@ -47,7 +44,7 @@ class EnvironmentController extends Controller
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
 
-//TODO: This is the line that is causing the error Event not found
+        //TODO: This is the line that is causing the error Event not found
 
 //        event(new EnvironmentSaved($request));
 
@@ -76,9 +73,9 @@ class EnvironmentController extends Controller
                 ],
             ],
         ]);
-//dd(config('database'));
+        //dd(config('database'));
         DB::purge();
-//dd(DB::connection()->getPdo());
+        //dd(DB::connection()->getPdo());
         try {
             DB::connection()->getPdo();
 

@@ -10,11 +10,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\Qualification;
 
 class Partner extends Model
@@ -67,8 +65,8 @@ class Partner extends Model
     public function photo(): Attribute
     {
         return Attribute::make(
-            get: fn($value) =>  !empty($value) ? Storage::url($value) : asset("assets/backend/images/user_icon.jpg"),
-            set: fn($value) => (!empty($value) && !is_string($value))
+            get: fn ($value) =>  !empty($value) ? Storage::url($value) : asset("assets/backend/images/user_icon.jpg"),
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
@@ -77,8 +75,8 @@ class Partner extends Model
     public function signature(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
+            get: fn ($value) => Storage::url($value),
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
@@ -86,8 +84,8 @@ class Partner extends Model
     public function citizenshipFront(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
+            get: fn ($value) => Storage::url($value),
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
@@ -95,8 +93,8 @@ class Partner extends Model
     public function citizenshipBack(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
+            get: fn ($value) => Storage::url($value),
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
@@ -116,7 +114,7 @@ class Partner extends Model
 
     public function issueDistrict(): BelongsTo
     {
-        return $this->belongsTo(District::class,'issue_district_id');
+        return $this->belongsTo(District::class, 'issue_district_id');
     }
 
     public function localBody(): BelongsTo

@@ -4,7 +4,6 @@ namespace Modules\TaskManagement\Http\Livewire;
 
 use App\Models\Settings\Branch;
 use App\Models\User;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;

@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class StoreEnterprisesRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('enterprise_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'enterprise_type_id' => ['required', Rule::exists('enterprise_types', 'id')->withoutTrashed()],

@@ -9,7 +9,6 @@ use App\Models\Settings\Branch;
 use App\Models\Settings\Employee;
 use App\Models\User;
 use App\Models\UserManagement\Role;
-use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -30,7 +29,7 @@ class UserController extends Controller
 
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
         $allemployees = Employee::all();
-        return view('admin.userManagement.user.create', compact('roles', 'branches','allemployees'));
+        return view('admin.userManagement.user.create', compact('roles', 'branches', 'allemployees'));
     }
 
     public function store(StoreUserRequest $request)
@@ -59,7 +58,7 @@ class UserController extends Controller
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
         $user->load('role');
 
-        return view('admin.userManagement.user.edit', compact('allemployees','user', 'roles','branches'));
+        return view('admin.userManagement.user.edit', compact('allemployees', 'user', 'roles', 'branches'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

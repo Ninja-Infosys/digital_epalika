@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class JudicialReceiptBill extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',

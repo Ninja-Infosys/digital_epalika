@@ -4,11 +4,9 @@ namespace Modules\Identity\Http\Controllers;
 
 use App\Models\OfficeHeader;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use DateTime;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
 
@@ -63,7 +61,6 @@ class DisabilityIdentityCardController extends Controller
 
     public function printDetail(DisabilityIdentityCard $disabilityIdentityCard)
     {
-
         return view('identity::admin.disabilityIdentityCard.printDetail', compact('disabilityIdentityCard'));
     }
 

@@ -2,7 +2,6 @@
 
 namespace Modules\Identity\Database\Seeders;
 
-use App\Models\FeatureActivation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
@@ -23,8 +22,7 @@ class GovernmentalDisabilityTypeTableSeeder extends Seeder
 
         ];
 
-        foreach ($governmentalDisabilityTypes as $governmentalDisabilityType)
-        {
+        foreach ($governmentalDisabilityTypes as $governmentalDisabilityType) {
             GovernmentalDisabilityType::create($governmentalDisabilityType);
         }
     }

@@ -2,8 +2,6 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Group\StoreGroupRequest;
@@ -11,7 +9,6 @@ use Modules\Grant\Http\Requests\Group\UpdateGroupRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Farmer;
-use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 
 class GroupController extends Controller

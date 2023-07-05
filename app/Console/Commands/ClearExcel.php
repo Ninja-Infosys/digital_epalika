@@ -24,7 +24,6 @@ class ClearExcel extends Command
 
     public function handle()
     {
-
         $all = $this->option('all');
         $date = $this->option('date');
 
@@ -46,7 +45,7 @@ class ClearExcel extends Command
                     $this->info('Excel file from ' . date('Y-m-d', strtotime($d)) . ' has been deleted');
                 }
             }
-        }else{
+        } else {
 //            delete all directory if all option is true else delete all directory except today
             if ($all) {
                 $directories->each(function ($directory) {
@@ -62,6 +61,5 @@ class ClearExcel extends Command
                 $this->info('All excel file except today has been deleted');
             }
         }
-
     }
 }

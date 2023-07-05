@@ -19,9 +19,9 @@ Route::prefix('files')->as('files.')->group(function () {
 });
 
 Route::resource('registration', RegistrationController::class);
-Route::put('registration/{registration}/updateStatus',[RegistrationController::class,'updateStatus'])->name('registration.updateStatus');
-Route::get('dispatch/{dispatch}/report',[DispatchController::class,'report'])->name('dispatch.report');
-Route::get('dispatch/{dispatch}/print',[DispatchController::class,'print'])->name('dispatch.print');
+Route::put('registration/{registration}/updateStatus', [RegistrationController::class,'updateStatus'])->name('registration.updateStatus');
+Route::get('dispatch/{dispatch}/report', [DispatchController::class,'report'])->name('dispatch.report');
+Route::get('dispatch/{dispatch}/print', [DispatchController::class,'print'])->name('dispatch.print');
 Route::resource('dispatch', DispatchController::class);
 Route::resource('dispatch.dispatchDetail', DispatchDetailController::class);
 

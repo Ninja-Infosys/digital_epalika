@@ -7,7 +7,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Http\Requests\Setting\GrantProgram\StoreGrantProgramRequest;
 use Modules\Grant\Http\Requests\Setting\GrantProgram\UpdateGrantProgramRequest;
@@ -39,7 +38,7 @@ class GrantProgramController extends Controller
 
         $grantProgram=GrantProgram::create($request->validated());
 
-        if ($request->ajax()){
+        if ($request->ajax()) {
             return response()->json([
                 'data'=> [
                     'grantProgram_id'=>$grantProgram->id,
@@ -68,7 +67,6 @@ class GrantProgramController extends Controller
         $grantProgram->update($request->validated());
         toast('अनुदान कार्यक्रम सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.grantProgram.index'));
-
     }
 
     public function destroy(GrantProgram $grantProgram)
@@ -77,6 +75,5 @@ class GrantProgramController extends Controller
         $grantProgram->delete();
         toast('अनुदान कार्यक्रम सफलता पुर्वक हटाइयो', 'success');
         return back();
-
     }
 }

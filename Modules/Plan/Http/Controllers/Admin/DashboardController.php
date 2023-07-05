@@ -2,7 +2,6 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Models\Settings\OfficeSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Modules\Plan\Entities\BudgetHead;
@@ -25,7 +24,7 @@ class DashboardController extends Controller
     public function __invoke()
     {
         $this->checkAuthorization('planDashboard_access');
-        
+
         $not_started_project_count = $this->projects->where('project_status', ProjectStatusEnum::NOT_STARTED)->count();
         $in_progress_project_count = $this->projects->where('project_status', ProjectStatusEnum::IN_PROGRESS)->count();
         $completed_project_count = $this->projects->where('project_status', ProjectStatusEnum::COMPLETED)->count();

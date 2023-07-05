@@ -5,7 +5,6 @@ namespace Modules\Plan\Http\Requests\Project;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
-use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 
 class UpdateProjectRequest extends FormRequest

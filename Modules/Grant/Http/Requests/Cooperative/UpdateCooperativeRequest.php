@@ -7,12 +7,12 @@ use Illuminate\Validation\Rule;
 
 class UpdateCooperativeRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],

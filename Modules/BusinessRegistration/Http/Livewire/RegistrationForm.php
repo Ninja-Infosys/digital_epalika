@@ -2,21 +2,14 @@
 
 namespace Modules\BusinessRegistration\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
-use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
-use Modules\BusinessRegistration\Entities\BusinessPurpose;
-use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\Partner;
 use Modules\BusinessRegistration\Entities\RegisteredBusiness;
@@ -103,8 +96,6 @@ class RegistrationForm extends Component
             $this->form['district_id'] = \officeSetting()->district_id;
             $this->form['local_body_id'] = \officeSetting()->local_body_id;
         }
-
-
     }
 
     private function assignBusinessDetailData()
@@ -331,7 +322,6 @@ class RegistrationForm extends Component
         ]);
         $this->reset('form');
         return redirect()->route('businessRegistration.detail.print', $businessDetail->id);
-
     }
 
     private function saveBusinessDetailsData($businessDetail)
