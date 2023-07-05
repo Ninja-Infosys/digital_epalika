@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Http\Livewire;
 
+use App\Enums\StatusEnum;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -112,7 +113,6 @@ class DisabilityIdentityCardLivewire extends Component
     }
 
 
-
     public function nextStep($step): void
     {
         $this->validate();
@@ -129,16 +129,17 @@ class DisabilityIdentityCardLivewire extends Component
         'form.name_en' => ['required', 'string', 'max:255'],
         'form.citizenship_no' => ['nullable'],
         'form.birth_registration_no' => ['nullable'],
-        'form.father_name' => ['required','string','max:255'],
-        'form.father_name_en' => ['required','string','max:255'],
-        'form.mother_name' => ['required', 'string','max:255'],
-        'form.mother_name_en' => ['required', 'string','max:255'],
+        'form.father_name' => ['required', 'string', 'max:255'],
+        'form.father_name_en' => ['required', 'string', 'max:255'],
+        'form.mother_name' => ['required', 'string', 'max:255'],
+        'form.mother_name_en' => ['required', 'string', 'max:255'],
         'form.dob' => ['required'],
         'form.gender' => ['required'],
         'form.province_id' => ['required', 'exists:provinces,id'],
         'form.district_id' => ['required', 'exists:districts,id'],
         'form.local_body_id' => ['required', 'exists:local_bodies,id'],
         'form.ward_no' => ['required', 'integer'],
+        'form.tole' => ['required','string','max:255'],
         'form.disability_type_id' => ['required', 'exists:disability_types,id'],
 
     ];
@@ -160,8 +161,6 @@ class DisabilityIdentityCardLivewire extends Component
         'form.relationship_id' => ['required', 'exists:relationships,id'],
         'form.phone' => ['required'],
     ];
-
-
 
 
     public function messages(): array
@@ -268,7 +267,9 @@ class DisabilityIdentityCardLivewire extends Component
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
         DB::transaction(function () {
-             DisabilityIdentityCard::create($this->form);
+            DisabilityIdentityCard::create($this->form + [
+                    'status' => StatusEnum::PENDING->value
+                ]);
         });
 
         $this->dispatchBrowserEvent('toast_message', [
@@ -278,8 +279,6 @@ class DisabilityIdentityCardLivewire extends Component
         $this->reset('form');
         return back();
     }
-
-
 
 
     public function render()
@@ -305,7 +304,6 @@ class DisabilityIdentityCardLivewire extends Component
 //            $this->form['right_finger'] = null;
 //            $this->form['left_finger'] = null;
 //        }
-
 
 
         return view('identity::livewire.disability-identity-card-livewire');

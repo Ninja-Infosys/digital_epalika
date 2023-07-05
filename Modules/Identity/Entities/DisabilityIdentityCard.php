@@ -47,6 +47,7 @@ class DisabilityIdentityCard extends Model
         'district_id',
         'local_body_id',
         'ward_no',
+        'tole',
         'photo',
         'guardian_name',
         'guardian_name_en',

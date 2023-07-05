@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained('local_bodies')->nullOnDelete()->onUpdate('no action');
             $table->integer('ward_no');
+            $table->string('tole');
             $table->string('photo')->nullable();
             $table->string('guardian_name');
             $table->string('guardian_name_en');
