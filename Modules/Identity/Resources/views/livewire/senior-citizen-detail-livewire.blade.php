@@ -406,6 +406,34 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
+                        <label for="form.patrons_phone" class="form-label">सम्पर्क न.  </label>
+                        <input
+                            name="form.patrons_phone"
+                            class="form-control  @error('form.patrons_phone') is-invalid @enderror"
+                            type="text"
+                            id="form.patrons_phone"
+                            placeholder="सम्पर्क न."
+                            wire:model="form.patrons_phone"
+                        />
+                        @error('form.patrons_phone')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="form.patrons_relationship" class="form-label">नाता </label>
+                        <input
+                            name="form.patrons_relationship"
+                            class="form-control  @error('form.patrons_relationship') is-invalid @enderror"
+                            type="text"
+                            id="form.patrons_relationship"
+                            placeholder="नाता"
+                            wire:model="form.patrons_relationship"
+                        />
+                        @error('form.patrons_relationship')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <label for="form.patrons_name_address" class="form-label">ठेगाना <span
                                 class="text-danger">*</span> </label>
                         <input
@@ -417,71 +445,6 @@
                             wire:model="form.patrons_name_address"
                         />
                         @error('form.patrons_name_address')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                </div>
-            </fieldset>
-            <fieldset class="mt-3">
-                <legend>सम्पर्क व्यक्तिको विवरण</legend>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_name" class="form-label">सम्पर्क व्यक्ति नाम <span
-                                class="text-danger">*</span> </label>
-                        <input
-                            name="form.contact_person_name"
-                            class="form-control  @error('form.contact_person_name') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_name"
-                            placeholder="सम्पर्क व्यक्ति नाम "
-                            wire:model="form.contact_person_name"
-                        />
-                        @error('form.contact_person_name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_name_en" class="form-label">सम्पर्क व्यक्ति नाम ( English )<span
-                                class="text-danger">*</span> </label>
-                        <input
-                            name="form.contact_person_name_en"
-                            class="form-control  @error('form.contact_person_name_en') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_name_en"
-                            placeholder="सम्पर्क व्यक्ति नाम ( English )"
-                            wire:model="form.contact_person_name_en"
-                        />
-                        @error('form.contact_person_name_en')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_phone" class="form-label">सम्पर्क न.  </label>
-                        <input
-                            name="form.contact_person_phone"
-                            class="form-control  @error('form.contact_person_phone') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_phone"
-                            placeholder="सम्पर्क न."
-                            wire:model="form.contact_person_phone"
-                        />
-                        @error('form.contact_person_phone')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_address" class="form-label">ठेगाना<span
-                                class="text-danger">*</span> </label>
-                        <input
-                            name="form.contact_person_address"
-                            class="form-control  @error('form.contact_person_address') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_address"
-                            placeholder="ठेगाना"
-                            wire:model="form.contact_person_address"
-                        />
-                        @error('form.contact_person_address')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>

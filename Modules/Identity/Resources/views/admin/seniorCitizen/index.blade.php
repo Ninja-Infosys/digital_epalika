@@ -26,7 +26,7 @@
                         <h4 class="header-title mb-0">जेष्ठ नागरिक परिचय पत्रहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            <a href="{{route('identity.admin.seniorCitizenDetail.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            <a href="{{route('identity.admin.seniorCitizenDetail.searchCitizenshipNo')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                         </div>
                     </div>

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{$seniorCitizenDetail->name??''}} </title>
+    <title>{{ $seniorCitizenDetail->name ?? '' }} </title>
 
     <style>
-
         .container {
             text-align: center;
         }
+
         .footer-text {
             display: inline-flex;
             padding: 3px;
@@ -19,6 +20,7 @@
             background-color: red;
             color: #fff;
         }
+
         body {
             visibility: hidden;
         }
@@ -52,7 +54,7 @@
             font-size: 7px
         }
 
-        p > span {
+        p>span {
             border-bottom: 1px dotted;
         }
 
@@ -63,7 +65,7 @@
             border-radius: 8px;
         }
 
-        .header > .office_header {
+        .header>.office_header {
             display: flex;
             justify-content: space-between;
         }
@@ -73,7 +75,7 @@
             justify-content: space-between;
         }
 
-        .identity > h2 {
+        .identity>h2 {
             font-size: 8px;
         }
 
@@ -97,7 +99,7 @@
             font-size: 10px;
         }
 
-        .footer-part > div > span {
+        .footer-part>div>span {
             border-bottom: 1px dotted;
             font-size: 8px !important;
         }
@@ -127,171 +129,181 @@
         }
     </style>
 </head>
+
 <body>
-<div>
-    <div class="header" style="height: 204.48px;width: 324.48px;">
-        <div class="office_header">
-            <div>
-                <img src="{{$officeSetting->logo_url}}" alt="" height="30">
-            </div>
-            <div>
-                @foreach($officeHeaders as $header)
-                    <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$header->font_color}};line-height: 0.2;text-align: center;">{{$header->title}}</p>
-                @endforeach
-            </div>
-            <div>
-                <img src="{{$seniorCitizenDetail->employeeSignature->red_signature}}" alt="{{$seniorCitizenDetail->name_en}}" height="20" id="signature_image"/>
-                <img src="{{$seniorCitizenDetail->photo}}" alt="{{$seniorCitizenDetail->name_en}}" height="40">
-            </div>
-
-        </div>
-        <div class="identity">
-            <h2 class="heading">
-                जेष्ठ नागरिक परिचय पत्र
-            </h2>
-        </div>
-        <div class="row">
-            <div class="col-md-9">
-                <p>आईडी कार्ड नं: <span>{{$seniorCitizenDetail->card_no}}</span></p>
-                <p>व्यक्तिको पुरा नाम: <span>{{$seniorCitizenDetail->name}}</span></p>
-                <p>नागरिकता नं : <span>{{$seniorCitizenDetail->citizenship_no}}</span></p>
-                <p>रोग : <span>{{$seniorCitizenDetail->is_disease==1 ? 'छ':'छैन'}}</span></p>
-                <p>ठेगाना :<span>{{$seniorCitizenDetail->localBody->local_body??''}},{{$seniorCitizenDetail->district->district??''}},{{$seniorCitizenDetail->province->province??''}}</span>
-                </p>
-                <p>पति,पत्नीको नाम :
-                    <span>{{$seniorCitizenDetail->spouse}} </span>
-                </p>
-            </div>
-            <div class="col-md-3">
-                <p>लिङ्ग: {{$seniorCitizenDetail->gender->label()??''}}</p>
-                <p>रक्त समूह: {{$seniorCitizenDetail->blood_group->label()??''}}</p>
-                <p>उमेर: {{$seniorCitizenDetail->age}}</p>
-            </div>
-        </div>
-        <table style="width: 100%;">
-            <tr style="font-size: 5px;">
-                <th>
-                    <span style="border-bottom: dashed 1px">
-                        {{$seniorCitizenDetail->employeeSignature->name}}
-                    </span>
-                    <br>
-                    नाम
-                </th>
-                <th>
-                    <span>
-                         <img
-                             src="{{$seniorCitizenDetail->employeeSignature->red_signature??''}}"
-                             alt="" height="30"
-                             class="signature">
-                    </span>
-                    <br>
-                    हस्ताक्षर
-                </th>
-                <th>
-                    <span style="border-bottom: dashed 1px"> {{$seniorCitizenDetail->employeeSignature->designation}}</span>
-                    <br>
-                    पद
-                </th>
-            </tr>
-        </table>
-        <div class="container">
-            <div class="row">
-                <p class="footer-text">
-                        यो परिचय पत्र कसैले पाएमा नजिकको प्रहरी कार्यालयमा वा स्थानीय निकायमा बुझाई दिनुहोला ।
-
-                </p>
-            </div>
-        </div>
-
-        <div class="break-page"></div>
-        <div class="header" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
+    <div>
+        <div class="header" style="height: 204.48px;width: 324.48px;">
             <div class="office_header">
                 <div>
-                    <img src="{{$officeSetting->logo_url}}" alt="" height="30">
+                    <img src="{{ $officeSetting->logo_url }}" alt="" height="30">
                 </div>
                 <div>
-                    @foreach($officeHeaders as $header)
-                        <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$header->font_color}};line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
+                    @foreach ($officeHeaders as $header)
+                        <p
+                            style="font-size: {{ $header->card_font }}rem;font-weight:{{ $header->font }};color:{{ $header->font_color }};line-height: 0.2;text-align: center;">
+                            {{ $header->title }}</p>
                     @endforeach
                 </div>
                 <div>
-                    {!! QrCode::size(45)->generate(route('seniorCitizenDetail.qrcode',$seniorCitizenDetail)); !!}
-                    <img src="" alt="" height="20" id="signature_image"/>
+                    <img src="{{ $seniorCitizenDetail->employeeSignature->red_signature ?? '' }}"
+                        alt="{{ $seniorCitizenDetail->name_en }}" height="20" id="signature_image" />
+                    <img src="{{ $seniorCitizenDetail->photo }}" alt="{{ $seniorCitizenDetail->name_en }}"
+                        height="40">
                 </div>
+
             </div>
             <div class="identity">
                 <h2 class="heading">
-                    Senior Citizen ID Card
+                    जेष्ठ नागरिक परिचय पत्र
                 </h2>
             </div>
             <div class="row">
                 <div class="col-md-9">
-                    <p>ID Card No
-                        : {{$seniorCitizenDetail->card_no}}</p>
-                    <p>Full Name : {{$seniorCitizenDetail->name_en}}</p>
-                    <p>Citizenship No: {{$seniorCitizenDetail->citizenship_no}}<span></span></p>
-                    <p>Disease : <span>{{$seniorCitizenDetail->is_disease==1 ? 'Yes':'No'}}</span></p>
-                    <p>Address :
-                        <span> {{$seniorCitizenDetail->localBody->local_body_en??''}},{{$seniorCitizenDetail->district->district_en??''}},{{$seniorCitizenDetail->province->province_en??''}}</span>
+                    <p>आईडी कार्ड नं: <span>{{ $seniorCitizenDetail->card_no }}</span></p>
+                    <p>व्यक्तिको पुरा नाम: <span>{{ $seniorCitizenDetail->name }}</span></p>
+                    <p>नागरिकता नं : <span>{{ $seniorCitizenDetail->citizenship_no }}</span></p>
+                    <p>रोग : <span>{{ $seniorCitizenDetail->is_disease == 1 ? 'छ' : 'छैन' }}</span></p>
+                    <p>ठेगाना
+                        :<span>{{ $seniorCitizenDetail->localBody->local_body ?? '' }},{{ $seniorCitizenDetail->district->district ?? '' }},{{ $seniorCitizenDetail->province->province ?? '' }}</span>
                     </p>
-                    <p>Husband/Wife Name :
-                        <span> {{$seniorCitizenDetail->spouse_en}}</span></p>
+                    <p>पति,पत्नीको नाम :
+                        <span>{{ $seniorCitizenDetail->spouse }} </span>
+                    </p>
                 </div>
                 <div class="col-md-3">
-                    <p>Gender
-                        : {{$seniorCitizenDetail->gender}}</p>
-                    <p>Blood Group : {{$seniorCitizenDetail->blood_group->label()??''}}
-                    </p>
-                    <p>Age
-                        : {{$seniorCitizenDetail->age}}</p>
+                    <p>लिङ्ग: {{ $seniorCitizenDetail->gender->label() ?? '' }}</p>
+                    <p>रक्त समूह: {{ $seniorCitizenDetail->blood_group->label() ?? '' }}</p>
+                    <p>उमेर: {{ $seniorCitizenDetail->age }}</p>
                 </div>
             </div>
-            <div class="row" style="margin-top: 2px;">
-                <div class="col-md-6" style="display: flex;justify-content: center;">
-                    <h2></h2>
-                </div>
-                <div class="col-md-6" style="display: flex;justify-content: space-evenly;">
-                    <div>
-                        @foreach($seniorCitizenDetail->fingerPrints->where('finger','left') as $fingerPrint)
-                            <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
-                            <p style="margin-top: 0;">बाँया </p>
-                        @endforeach
-                    </div>
-                    <div>
-                        @foreach($seniorCitizenDetail->fingerPrints->where('finger','right') as $fingerPrint)
-                            <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
-                            <p style="margin-top: 0;">दाँया </p>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
             <table style="width: 100%;">
                 <tr style="font-size: 5px;">
                     <th>
-                        <span style="border-bottom: dashed 1px"> {{$seniorCitizenDetail->employeeSignature->name_en}}</span>
+                        <span style="border-bottom: dashed 1px">
+                            {{ $seniorCitizenDetail->employeeSignature->name ?? '' }}
+                        </span>
                         <br>
-                        Name
+                        नाम
+                    </th>
+                    <th>
+                        <span>
+                            <img src="{{ $seniorCitizenDetail->employeeSignature->red_signature ?? '' }}"
+                                alt="" height="30" class="signature">
+                        </span>
+                        <br>
+                        हस्ताक्षर
                     </th>
                     <th>
                         <span style="border-bottom: dashed 1px">
-                            <img
-                                src="{{$seniorCitizenDetail->employeeSignature->red_signature??''}}"
-                                alt="" height="30"
-                                class="signature">
-                        </span>
+                            {{ $seniorCitizenDetail->employeeSignature->designation ?? '' }}</span>
                         <br>
-                        Signature
-                    </th>
-                    <th>
-                        <span style="border-bottom: dashed 1px">{{$seniorCitizenDetail->employeeSignature->designation_en}}</span>
-                        <br>
-                        Designation
+                        पद
                     </th>
                 </tr>
             </table>
+            <div class="container">
+                <div class="row">
+                    <p class="footer-text">
+                        यो परिचय पत्र कसैले पाएमा नजिकको प्रहरी कार्यालयमा वा स्थानीय निकायमा बुझाई दिनुहोला ।
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="break-page"></div>
+            <div class="header" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
+                <div class="office_header">
+                    <div>
+                        <img src="{{ $officeSetting->logo_url }}" alt="" height="30">
+                    </div>
+                    <div>
+                        @foreach ($officeHeaders as $header)
+                            <p
+                                style="font-size: {{ $header->card_font }}rem;font-weight:{{ $header->font }};color:{{ $header->font_color }};line-height: 0.2;text-align: center;">
+                                {{ $header->title_en }}</p>
+                        @endforeach
+                    </div>
+                    <div>
+                        {!! QrCode::size(45)->generate(route('seniorCitizenDetail.qrcode', $seniorCitizenDetail)) !!}
+                        <img src="" alt="" height="20" id="signature_image" />
+                    </div>
+                </div>
+                <div class="identity">
+                    <h2 class="heading">
+                        Senior Citizen ID Card
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p>ID Card No
+                            : {{ $seniorCitizenDetail->card_no }}</p>
+                        <p>Full Name : {{ $seniorCitizenDetail->name_en }}</p>
+                        <p>Citizenship No: {{ $seniorCitizenDetail->citizenship_no }}<span></span></p>
+                        <p>Disease : <span>{{ $seniorCitizenDetail->is_disease == 1 ? 'Yes' : 'No' }}</span></p>
+                        <p>Address :
+                            <span>
+                                {{ $seniorCitizenDetail->localBody->local_body_en ?? '' }},{{ $seniorCitizenDetail->district->district_en ?? '' }},{{ $seniorCitizenDetail->province->province_en ?? '' }}</span>
+                        </p>
+                        <p>Husband/Wife Name :
+                            <span> {{ $seniorCitizenDetail->spouse_en }}</span>
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Gender
+                            : {{ $seniorCitizenDetail->gender }}</p>
+                        <p>Blood Group : {{ $seniorCitizenDetail->blood_group->label() ?? '' }}
+                        </p>
+                        <p>Age
+                            : {{ $seniorCitizenDetail->age }}</p>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 2px;">
+                    <div class="col-md-6" style="display: flex;justify-content: center;">
+                        <h2></h2>
+                    </div>
+                    <div class="col-md-6" style="display: flex;justify-content: space-evenly;">
+                        <div>
+                            @foreach ($seniorCitizenDetail->fingerPrints->where('finger', 'left') as $fingerPrint)
+                                <img src="{{ $fingerPrint->finger_image }}" alt="" height="20"><br>
+                                <p style="margin-top: 0;">बाँया </p>
+                            @endforeach
+                        </div>
+                        <div>
+                            @foreach ($seniorCitizenDetail->fingerPrints->where('finger', 'right') as $fingerPrint)
+                                <img src="{{ $fingerPrint->finger_image }}" alt="" height="20"><br>
+                                <p style="margin-top: 0;">दाँया </p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <table style="width: 100%;">
+                    <tr style="font-size: 5px;">
+                        <th>
+                            <span style="border-bottom: dashed 1px">
+                                {{ $seniorCitizenDetail->employeeSignature->name_en ?? '' }}</span>
+                            <br>
+                            Name
+                        </th>
+                        <th>
+                            <span style="border-bottom: dashed 1px">
+                                <img src="{{ $seniorCitizenDetail->employeeSignature->red_signature ?? '' }}"
+                                    alt="" height="30" class="signature">
+                            </span>
+                            <br>
+                            Signature
+                        </th>
+                        <th>
+                            <span
+                                style="border-bottom: dashed 1px">{{ $seniorCitizenDetail->employeeSignature->designation_en ?? '' }}</span>
+                            <br>
+                            Designation
+                        </th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

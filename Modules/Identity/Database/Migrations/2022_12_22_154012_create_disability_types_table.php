@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('disability_types', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('title_en')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,7 +16,7 @@ class SeniorCitizenDetailController extends Controller
     public function index()
     {
         $seniorCitizenDetails = SeniorCitizenDetail::filterData()->get();
-        return view('identity::admin.seniorCitizen.index',compact('seniorCitizenDetails'));
+        return view('identity::admin.seniorCitizen.index', compact('seniorCitizenDetails'));
     }
 
     public function create()
@@ -27,23 +27,22 @@ class SeniorCitizenDetailController extends Controller
 
     public function store(Request $request)
     {
-
     }
 
     public function show(SeniorCitizenDetail $seniorCitizenDetail)
     {
-        $this->authorize('view',$seniorCitizenDetail);
+        $this->authorize('view', $seniorCitizenDetail);
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-        $seniorCitizenDetail->load('fingerPrints','province','district','localBody','employeeSignature');
+        $seniorCitizenDetail->load('fingerPrints', 'province', 'district', 'localBody', 'employeeSignature');
 
-        return view('identity::admin.seniorCitizen.show', compact('seniorCitizenDetail','officeHeaders','todayDate'));
+        return view('identity::admin.seniorCitizen.show', compact('seniorCitizenDetail', 'officeHeaders', 'todayDate'));
     }
 
     public function edit(SeniorCitizenDetail $seniorCitizenDetail)
     {
-        $this->authorize('update',$seniorCitizenDetail);
-        $seniorCitizenDetail->load('province','district','localBody');
+        $this->authorize('update', $seniorCitizenDetail);
+        $seniorCitizenDetail->load('province', 'district', 'localBody');
         return view('identity::admin.seniorCitizen.edit', compact('seniorCitizenDetail'));
     }
 
@@ -54,9 +53,16 @@ class SeniorCitizenDetailController extends Controller
 
     public function destroy(SeniorCitizenDetail $seniorCitizenDetail)
     {
-        $this->authorize('delete',$seniorCitizenDetail);
+        $this->authorize('delete', $seniorCitizenDetail);
         $seniorCitizenDetail->delete();
+
+        toast('जेष्ठ नागरिक विवरण सफलतापुर्बक हटाइयो', 'success');
         return back();
+    }
+
+    public function searchCitizenshipNo()
+    {
+        return view('identity::admin.seniorCitizen.citizenship_search');
     }
 
     public function print(SeniorCitizenDetail $seniorCitizenDetail)
@@ -64,12 +70,11 @@ class SeniorCitizenDetailController extends Controller
 
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-        $seniorCitizenDetail->load('fingerPrints','employeeSignature','province','district','localBody');
+        $seniorCitizenDetail->load('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody');
         $view = (string)View::make('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
 
         return response()->json([
             'view' => $view,
         ]);
     }
-
 }
