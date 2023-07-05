@@ -31,94 +31,47 @@ class DisabilityIdentityCardLivewire extends Component
     public int $currentStep = 1;
 
     public $relations = [];
-    public $occupations = [];
     public $disabilityTypes = [];
-    public $governmentDisabilityTypes = [];
-    public $disabilityReasons = [];
 
     public $ethnicities = [];
 
     public $provinces = [];
-    public $permanent_districts = [];
-    public $permanent_localBodies = [];
-    public $permanent_wards = [];
-    public $temporary_districts = [];
-    public $temporary_localBodies = [];
-    public $temporary_wards = [];
-    public $employee_signatures = [];
+
+    public $districts = [];
+
+    public $localBodies = [];
+
+
+    public $wards = [];
 
     public DisabilityIdentityCard $disabilityIdentityCard;
 
     public array $form = [
-        'is_citizenship' => null,
-        'material_name' => null,
-        'is_necessary' => null,
-        'identity_type' => null,
-        'finger_print_type' => null,
-        'finger_left' => null,
-        'finger_right' => null,
-        'photo' => null,
         'name' => null,
         'name_en' => null,
-        'gender' => null,
-        'ethnicity_id' => null,
-        'dob_bs' => null,
+        'citizenship_no' => null,
+        'birth_registration_no' => null,
+        'father_name' => null,
+        'father_name_en' => null,
+        'mother_name' => null,
+        'mother_name_en' => null,
+        'dob' => null,
         'dob_ad' => null,
-        'permanent_province_id' => null,
-        'permanent_district_id' => null,
-        'permanent_local_body_id' => null,
-        'permanent_ward' => null,
-        'permanent_tole' => null,
-        'temporary_province_id' => null,
-        'temporary_district_id' => null,
-        'temporary_local_body_id' => null,
-        'temporary_ward' => null,
-        'temporary_tole' => null,
+        'gender' => null,
+        'province_id' => null,
+        'district_id' => null,
+        'local_body_id' => null,
+        'ward_no' => null,
+        'tole' => null,
+        'photo' => null,
+        //step2
         'guardian_name' => null,
         'guardian_name_en' => null,
         'relationship_id' => null,
         'phone' => null,
         'disability_type_id' => null,
-        'blood_group' => null,
-        'disability_reason_id' => null,
-        'receiving_body' => null,
-        'date_bs' => null,
-        'date_ad' => null,
-        'father_name' => null,
-        'father_name_en' => null,
-        'grand_father_name' => null,
-        'grand_father_name_en' => null,
-        'mother_name' => null,
-        'mother_name_en' => null,
-        'birth_registration_no' => null,
-        'birth_registration_place' => null,
-        'birth_registration_bs' => null,
-        'birth_registration_ad' => null,
-        'citizenship_no' => null,
-        'citizenship_no_place' => null,
-        'citizenship_no_bs' => null,
-        'citizenship_no_ad' => null,
-        'citizenship_photo' => null,
-        'citizenship_photo_certificate' => null,
-        'material_description' => null,
-        'qualification' => null,
-        'daily_activity' => null,
-        'supporting_material' => null,
-        'helping_task' => [],
-        'without_helping_task' => [],
-        'main_training_name' => null,
-        'occupation_id' => null,
-        'provide_detail_full_name' => null,
-        'provide_detail_address' => null,
-        'provide_detail_phone_no' => null,
-        'provide_detail_citizenship_no' => null,
-        'provide_detail_citizenship_no_date' => null,
-        'provide_detail_citizenship_no_place' => null,
-        'govern_disability_type_id' => null,
-        'employee_signature_id' => null,
-        'card_no' => null,
-        'details_of_damage' => null,
-        'obstacle_description' => null,
+        'status' => null,
+
     ];
 
     public function mount($disabilityIdentityCard = null): void
@@ -128,107 +81,30 @@ class DisabilityIdentityCardLivewire extends Component
         $this->ethnicities = Ethnicity::all();
         $this->relations = Relationship::all();
         $this->disabilityTypes = DisabilityType::all();
-        $this->governmentDisabilityTypes = GovernmentalDisabilityType::all();
-        $this->disabilityReasons = DisabilityReason::all();
-        $this->occupations = Occupation::all();
-        $this->employee_signatures = EmployeeSignature::status()->get();
-
 
         if (!empty($disabilityIdentityCard)) {
             $this->disabilityIdentityCard = $disabilityIdentityCard;
             foreach ($this->form as $key => $data) {
-                if (!in_array($key, ['photo', 'citizenship_photo', 'citizenship_photo_certificate'])) {
+                if (!in_array($key, ['photo'])) {
                     $this->form[$key] = $disabilityIdentityCard[$key];
                 }
             }
-            if ($disabilityIdentityCard->fingerprints->count() > 0) {
-                if (!empty($rightFinger = $disabilityIdentityCard->fingerprints->where('finger', 'right')->first())) {
-                    $this->form['right_finger'] = [
-                        'id' => $rightFinger->id,
-                        'image' => $rightFinger->finger_image,
-                        'isoTemplate' => $rightFinger->iso_temp,
-                        'ansiTemplate' => $rightFinger->ansi_temp,
-                        'isoImage' => $rightFinger->iso_image,
-                        'quality' => $rightFinger->quality
-                    ];
-                }
-
-                if (!empty($leftFinger = $disabilityIdentityCard->fingerprints->where('finger', 'left')->first())) {
-                    $this->form['left_finger'] = [
-                        'id' => $leftFinger->id,
-                        'image' => $leftFinger->finger_image,
-                        'isoTemplate' => $leftFinger->iso_temp,
-                        'ansiTemplate' => $leftFinger->ansi_temp,
-                        'isoImage' => $leftFinger->iso_image,
-                        'quality' => $leftFinger->quality
-                    ];
-                }
-            }
         } else {
-            $this->form['permanent_province_id'] = $officeSetting->province_id;
-            $this->form['permanent_district_id'] = $officeSetting->district_id;
-            $this->form['permanent_local_body_id'] = $officeSetting->local_body_id;
-            $this->form['temporary_province_id'] = $officeSetting->province_id;
-            $this->form['temporary_district_id'] = $officeSetting->district_id;
-            $this->form['temporary_local_body_id'] = $officeSetting->local_body_id;
+            $this->form['province_id'] = $officeSetting->province_id;
+            $this->form['district_id'] = $officeSetting->district_id;
+            $this->form['local_body_id'] = $officeSetting->local_body_id;
         }
     }
 
-    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged', 'photoUpdated', 'setRight' => 'setRightThumb',
-        'setLeft' => 'setLeftThumb',];
+    protected $listeners = ['dobChanged'];
 
-    public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
-    {
-        $this->form['right_finger'] = [
-            'id' => $this->form['right_finger']['id'] ?? null,
-            'image' => $image,
-            'isoTemplate' => $isoTemplate,
-            'ansiTemplate' => $ansiTemplate,
-            'isoImage' => $isoImage,
-            'quality' => $quality,
-        ];
-    }
-
-    public function setLeftThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
-    {
-        $this->form['left_finger'] = [
-            'id' => $this->form['left_finger']['id'] ?? null,
-            'image' => $image,
-            'isoTemplate' => $isoTemplate,
-            'ansiTemplate' => $ansiTemplate,
-            'isoImage' => $isoImage,
-            'quality' => $quality,
-        ];
-    }
-
-    public function photoUpdated($base64String): void
-    {
-        $this->form['photo'] = $base64String;
-    }
 
     public function dobChanged($nepaliDate, $englishDate): void
     {
-        $this->form['dob_bs'] = $nepaliDate;
+        $this->form['dob'] = $nepaliDate;
         $this->form['dob_ad'] = $englishDate;
     }
 
-    public function dateChanged($nepaliDate, $englishDate): void
-    {
-        $this->form['date_bs'] = $nepaliDate;
-        $this->form['date_ad'] = $englishDate;
-    }
-
-    public function birthRegistrationChanged($nepaliDate, $englishDate): void
-    {
-        $this->form['birth_registration_bs'] = $nepaliDate;
-        $this->form['birth_registration_ad'] = $englishDate;
-    }
-
-    public function citizenshipNoChanged($nepaliDate, $englishDate): void
-    {
-        $this->form['citizenship_no_bs'] = $nepaliDate;
-        $this->form['citizenship_no_ad'] = $englishDate;
-    }
 
 
     public function nextStep($step): void
@@ -243,36 +119,31 @@ class DisabilityIdentityCardLivewire extends Component
     }
 
     protected array $identityDetailValidations = [
-        'form.finger_print_type' => ['required'],
         'form.name' => ['required', 'string', 'max:255'],
         'form.name_en' => ['required', 'string', 'max:255'],
+        'form.citizenship_no' => ['nullable'],
+        'form.birth_registration_no' => ['nullable'],
+        'form.father_name' => ['required','string','max:255'],
+        'form.father_name_en' => ['required','string','max:255'],
+        'form.mother_name' => ['required', 'string','max:255'],
+        'form.mother_name_en' => ['required', 'string','max:255'],
+        'form.dob' => ['required'],
         'form.gender' => ['required'],
-        'form.ethnicity_id' => ['required', 'exists:ethnicities,id'],
-        'form.dob_bs' => ['required'],
-        'form.dob_ad' => ['required'],
-        'form.permanent_province_id' => ['required', 'exists:provinces,id'],
-        'form.permanent_district_id' => ['required', 'exists:districts,id'],
-        'form.permanent_local_body_id' => ['required', 'exists:local_bodies,id'],
-        'form.permanent_ward' => ['required', 'integer'],
-        'form.permanent_tole' => ['required', 'string'],
-        'form.temporary_province_id' => ['required', 'exists:provinces,id'],
-        'form.temporary_district_id' => ['required', 'exists:districts,id'],
-        'form.temporary_local_body_id' => ['required', 'exists:local_bodies,id'],
-        'form.temporary_ward' => ['required', 'integer'],
-        'form.temporary_tole' => ['required', 'string'],
+        'form.province_id' => ['required', 'exists:provinces,id'],
+        'form.district_id' => ['required', 'exists:districts,id'],
+        'form.local_body_id' => ['required', 'exists:local_bodies,id'],
+        'form.ward_no' => ['required', 'integer'],
+        'form.disability_type_id' => ['required', 'exists:disability_types,id'],
+
     ];
 
     protected function firstStepValidations(): array
     {
         return !empty($this->disabilityIdentityCard)
             ? array_merge($this->identityDetailValidations, [
-                'form.left_finger' => ['nullable'],
-                'form.right_finger' => ['nullable'],
                 'form.photo' => ['nullable'],
             ])
             : array_merge($this->identityDetailValidations, [
-                'form.right_finger' => ['nullable'],
-                'form.left_finger' => ['nullable'],
                 'form.photo' => ['required'],
             ]);
     }
@@ -283,86 +154,14 @@ class DisabilityIdentityCardLivewire extends Component
         'form.relationship_id' => ['required', 'exists:relationships,id'],
         'form.phone' => ['required'],
     ];
-    protected array $thirdStepValidations = [
-        'form.disability_type_id' => ['required', 'exists:disability_types,id'],
-        'form.blood_group' => ['required'],
-        'form.disability_reason_id' => ['required', 'exists:disability_reasons,id'],
-        'form.govern_disability_type_id' => ['required', 'exists:governmental_disability_types,id'],
-        'form.details_of_damage' => ['nullable'],
-        'form.obstacle_description' => ['nullable'],
-    ];
-    protected array $fourthStepValidations = [
-        'form.identity_type' => ['required'],
-        'form.receiving_body' => ['required_if:form.identity_type,==,receive'],
-        'form.date_bs' => ['required_if:form.identity_type,==,receive'],
-        'form.date_ad' => ['required_if:form.identity_type,==,receive'],
-        'form.father_name' => ['required', 'string', 'max:255'],
-        'form.father_name_en' => ['required', 'string', 'max:255'],
-        'form.grand_father_name' => ['required', 'string', 'max:255'],
-        'form.grand_father_name_en' => ['required', 'string', 'max:255'],
-        'form.mother_name' => ['required', 'string', 'max:255'],
-        'form.mother_name_en' => ['required', 'string', 'max:255'],
-    ];
 
-    protected array $disclosureStatementRules = [
-        'form.is_citizenship' => ['required'],
-        'form.birth_registration_no' => ['required_if:form.is_citizenship,==,birth_registration'],
-        'form.birth_registration_place' => ['required_if:form.is_citizenship,==,birth_registration'],
-        'form.birth_registration_bs' => ['required_if:form.is_citizenship,==,birth_registration'],
-        'form.birth_registration_ad' => ['required_if:form.is_citizenship,==,birth_registration'],
-        'form.citizenship_no' => ['required_if:form.is_citizenship,==,citizenship'],
-        'form.citizenship_no_place' => ['required_if:form.is_citizenship,==,citizenship'],
-        'form.citizenship_no_bs' => ['required_if:form.is_citizenship,==,citizenship'],
-        'form.citizenship_no_ad' => ['required_if:form.is_citizenship,==,citizenship']
-    ];
 
-    protected function fifthStepValidations(): array
-    {
-        return !empty($this->disabilityIdentityCard)
-            ? array_merge($this->disclosureStatementRules, [
-                'form.citizenship_photo' => ['nullable', 'image'],
-                'form.citizenship_photo_certificate' => ['nullable', 'image']
-            ])
-            : array_merge($this->disclosureStatementRules, [
-                'form.citizenship_photo' => ['nullable', 'image'],
-                'form.citizenship_photo_certificate' => ['nullable', 'image']
-            ]);
-    }
 
-    protected array $sixthStepValidations = [
-        'form.is_necessary' => ['required', 'boolean'],
-        'form.material_description' => ['required_if:form.is_necessary,==,1'],
-        'form.qualification' => ['required'],
-        'form.daily_activity' => ['required'],
-        'form.supporting_material' => ['required'],
-        'form.material_name' => ['required_if:form.supporting_material,==,1'],
-    ];
-    protected array $seventhStepValidations = [
-        'form.helping_task' => ['nullable', 'array'],
-        'form.helping_task.*' => ['nullable'],
-        'form.without_helping_task' => ['nullable', 'array'],
-        'form.without_helping_task.*' => ['nullable'],
-    ];
-    protected array $eighthStepValidations = [
-        'form.main_training_name' => ['nullable', 'string'],
-        'form.occupation_id' => ['nullable', 'exists:occupations,id'],
-    ];
-    protected array $ninthStepValidations = [
-        'form.provide_detail_full_name' => ['required', 'string', 'max:255'],
-        'form.provide_detail_address' => ['required', 'string', 'max:255'],
-        'form.provide_detail_phone_no' => ['nullable'],
-        'form.provide_detail_citizenship_no' => ['nullable'],
-        'form.provide_detail_citizenship_no_date' => ['nullable'],
-        'form.provide_detail_citizenship_no_place' => ['nullable', 'string', 'max:255'],
-        'form.employee_signature_id' => ['nullable', 'exists:employee_signatures,id']
-    ];
 
     public function messages(): array
     {
         return [
-            'form.finger_print_type.required' => ['औलाको छाप आवश्यक छ'],
-            'form.left_finger.required_if' => ['बायाँ औंला आवश्यक छ'],
-            'form.right_finger.required_if' => ['दाहिने औंला आवश्यक छ'],
+
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.is_citizenship.required' => ['आवश्यक छ'],
             'form.govern_disability_type_id.required' => ['आवश्यक छ'],
@@ -436,24 +235,10 @@ class DisabilityIdentityCardLivewire extends Component
         return match ($this->currentStep) {
             1 => $this->firstStepValidations(),
             2 => $this->secondStepValidations,
-            3 => $this->thirdStepValidations,
-            4 => $this->fourthStepValidations,
-            5 => $this->fifthStepValidations(),
-            6 => $this->sixthStepValidations,
-            7 => $this->seventhStepValidations,
-            8 => $this->eighthStepValidations,
-            9 => $this->ninthStepValidations,
 
             default => array_merge(
                 $this->firstStepValidations(),
                 $this->secondStepValidations,
-                $this->thirdStepValidations,
-                $this->fourthStepValidations,
-                $this->fifthStepValidations(),
-                $this->sixthStepValidations,
-                $this->seventhStepValidations,
-                $this->eighthStepValidations,
-                $this->ninthStepValidations,
             ),
         };
     }
@@ -469,58 +254,6 @@ class DisabilityIdentityCardLivewire extends Component
         $this->validate();
         if (!empty($this->disabilityIdentityCard)) {
             $this->disabilityIdentityCard->update($this->form);
-            if ($this->form['finger_print_type'] !== 'none') {
-                if (!empty($this->form['left_finger']['id'])) {
-                    $this->disabilityIdentityCard
-                        ->fingerPrints
-                        ->where('id', $this->form['left_finger']['id'])
-                        ->first()
-                        ?->update([
-                            'finger_image' => $this->form['left_finger']['image'],
-                            'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                            'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                            'iso_image' => $this->form['left_finger']['isoImage'],
-                            'quality' => $this->form['left_finger']['quality'],
-                        ]);
-                } else {
-                    $this->disabilityIdentityCard
-                        ->fingerPrints()
-                        ->create([
-                            'finger_image' => $this->form['left_finger']['image'],
-                            'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                            'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                            'iso_image' => $this->form['left_finger']['isoImage'],
-                            'finger' => 'left',
-                            'quality' => $this->form['left_finger']['quality'],
-                            'user_id' => auth()->id(),
-                        ]);
-                }
-                if (!empty($this->form['right_finger']['id'])) {
-                    $this->disabilityIdentityCard
-                        ->fingerPrints
-                        ->where('id', $this->form['right_finger']['id'])
-                        ->first()
-                        ?->update([
-                            'finger_image' => $this->form['right_finger']['image'],
-                            'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                            'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                            'iso_image' => $this->form['right_finger']['isoImage'],
-                            'quality' => $this->form['right_finger']['quality'],
-                        ]);
-                } else {
-                    $this->disabilityIdentityCard
-                        ->fingerPrints()
-                        ->create([
-                            'finger_image' => $this->form['right_finger']['image'],
-                            'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                            'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                            'iso_image' => $this->form['right_finger']['isoImage'],
-                            'finger' => 'right',
-                            'quality' => $this->form['right_finger']['quality'],
-                            'user_id' => auth()->id(),
-                        ]);
-                }
-            }
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
                 'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक अध्याबधिक भयो'
@@ -528,30 +261,7 @@ class DisabilityIdentityCardLivewire extends Component
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
         DB::transaction(function () {
-            $disabilityIdentityCard = DisabilityIdentityCard::create($this->form + [
-                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'user_id'=>auth()->id()
-                ]);
-            if ($this->form['finger_print_type'] !== 'none') {
-                $disabilityIdentityCard->fingerPrints()->create([
-                    'finger_image' => $this->form['left_finger']['image'] ?? null,
-                    'iso_temp' => $this->form['left_finger']['isoTemplate'] ?? null,
-                    'ansi_temp' => $this->form['left_finger']['ansiTemplate']?? null,
-                    'iso_image' => $this->form['left_finger']['isoImage']?? null,
-                    'finger' => 'left',
-                    'quality' => $this->form['left_finger']['quality']?? null,
-                    'user_id' => auth()->id(),
-                ]);
-                $disabilityIdentityCard->fingerPrints()->create([
-                    'finger_image' => $this->form['right_finger']['image']?? null,
-                    'iso_temp' => $this->form['right_finger']['isoTemplate']?? null,
-                    'ansi_temp' => $this->form['right_finger']['ansiTemplate']?? null,
-                    'iso_image' => $this->form['right_finger']['isoImage']?? null,
-                    'finger' => 'right',
-                    'quality' => $this->form['right_finger']['quality']?? null,
-                    'user_id' => auth()->id(),
-                ]);
-            }
+             DisabilityIdentityCard::create($this->form);
         });
 
         $this->dispatchBrowserEvent('toast_message', [
@@ -562,78 +272,34 @@ class DisabilityIdentityCardLivewire extends Component
         return back();
     }
 
-    public function helpingTaskIncrement(): void
+
+
+
+    public function render()
     {
-        $this->form['helping_task'][] = [];
-    }
-
-    public function helpingTaskDecrement($index): void
-    {
-        unset($this->form['helping_task'][$index]);
-        $this->form['helping_task'] = array_values($this->form['helping_task']);
-        if (!empty($this->disabilityIdentityCard)) {
-            $this->disabilityIdentityCard->update([
-                'helping_task' => $this->form['helping_task']
-            ]);
+        if (!empty($this->form['province_id'])) {
+            $this->districts = get_districts($this->form['province_id']);
         }
-    }
-
-    public function withoutHelpingTaskIncrement(): void
-    {
-        $this->form['without_helping_task'][] = [];
-    }
-
-    public function withoutHelpingTaskDecrement($index): void
-    {
-        unset($this->form['without_helping_task'][$index]);
-        $this->form['without_helping_task'] = array_values($this->form['without_helping_task']);
-        if (!empty($this->disabilityIdentityCard)) {
-            $this->disabilityIdentityCard->update([
-                'without_helping_task' => $this->form['without_helping_task']
-            ]);
+        if (!empty($this->form['district_id'])) {
+            $this->localBodies = get_local_bodies($this->form['district_id']);
         }
-    }
-
-    public function render(): Factory|View|Application
-    {
-        if (!empty($this->form['permanent_province_id'])) {
-            $this->permanent_districts = get_districts($this->form['permanent_province_id']);
-        }
-        if (!empty($this->form['permanent_district_id'])) {
-            $this->permanent_localBodies = get_local_bodies($this->form['permanent_district_id']);
-        }
-        if (!empty($this->form['permanent_local_body_id'])) {
-            $this->permanent_wards = get_local_bodies(localBodyId: $this->form['permanent_local_body_id'])->ward_no;
+        if (!empty($this->form['local_body_id'])) {
+            $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
-        if (!empty($this->form['temporary_province_id'])) {
-            $this->temporary_districts = get_districts($this->form['temporary_province_id']);
-        }
-        if (!empty($this->form['temporary_district_id'])) {
-            $this->temporary_localBodies = get_local_bodies($this->form['temporary_district_id']);
-        }
-        if (!empty($this->form['temporary_local_body_id'])) {
-            $this->temporary_wards = get_local_bodies(localBodyId: $this->form['temporary_local_body_id'])->ward_no;
-        }
+//        if ($this->form['is_necessary'] == 0) {
+//            $this->form['material_description'] = null;
+//        }
+//        if ($this->form['supporting_material'] == 0) {
+//            $this->form['material_name'] = null;
+//        }
+//
+//        if ($this->form['finger_print_type'] == 'none') {
+//            $this->form['right_finger'] = null;
+//            $this->form['left_finger'] = null;
+//        }
 
-        if ($this->form['is_necessary'] == 0) {
-            $this->form['material_description'] = null;
-        }
-        if ($this->form['supporting_material'] == 0) {
-            $this->form['material_name'] = null;
-        }
 
-        if ($this->form['finger_print_type'] == 'none') {
-            $this->form['right_finger'] = null;
-            $this->form['left_finger'] = null;
-        }
-
-        if ($this->form['identity_type'] == 'not_receive') {
-            $this->form['card_no'] = DB::table('disability_identity_cards')->max('id') + 1;
-            $this->form['receiving_body'] = ReceivingBodyEnum::LOCAL_BODY->value;
-            $this->form['date_bs'] = $this->get_today_nepali_date();
-            $this->form['date_ad'] = today()->toDateString();
-        }
 
         return view('identity::livewire.disability-identity-card-livewire');
     }
