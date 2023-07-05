@@ -4,6 +4,7 @@ namespace Modules\Identity\Entities;
 
 use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
+use App\Enums\StatusEnum;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -59,6 +60,7 @@ class DisabilityIdentityCard extends Model
 
     protected $casts = [
         'gender' => Gender::class,
+        'status' => StatusEnum::class,
     ];
 
     public function fiscalYear(): BelongsTo

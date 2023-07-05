@@ -76,7 +76,7 @@ class DisabilityIdentityCardLivewire extends Component
         'relationship_id' => null,
         'phone' => null,
         'disability_type_id' => null,
-        'status' => null,
+
 
     ];
 
