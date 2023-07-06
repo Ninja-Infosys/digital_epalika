@@ -13,11 +13,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
+use Modules\Identity\Traits\IdentityRecommendationTemplateTrait;
 
 class DisabilityIdentityCard extends Model
 {
     use SoftDeletes;
     use EventObserveTrait;
+    use IdentityRecommendationTemplateTrait;
 
     protected $dates = [
         'created_at',

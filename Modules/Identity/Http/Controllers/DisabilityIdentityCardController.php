@@ -9,6 +9,7 @@ use DateTime;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
+use Modules\Identity\Entities\RecommendationTemplateSetting;
 
 class DisabilityIdentityCardController extends Controller
 {
@@ -64,11 +65,13 @@ class DisabilityIdentityCardController extends Controller
 
     public function printDetail(DisabilityIdentityCard $disabilityIdentityCard)
     {
+//        dd($disabilityIdentityCard->getPlanTemplateData(RecommendationTemplateSetting::first()));
         return view('identity::admin.disabilityIdentityCard.printDetail', compact('disabilityIdentityCard'));
     }
 
     public function printAll(DisabilityIdentityCard $disabilityIdentityCard)
     {
+
         $printData = DisabilityPrint::where('disability_identity_card_id', $disabilityIdentityCard->id)
             ->get()
             ->map(function ($disabilityPrint, $key) {

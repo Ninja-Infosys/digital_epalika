@@ -147,6 +147,13 @@
                     </a>
                 </li>
             @endcan
+            @can('disabilityCommittee_access')
+                <li class="{{request()->is('admin/identity/setting/recommendationSetting') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.recommendationTemplateSetting.index')}}">
+                        <span>सिफारिस टेम्पलेट</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

@@ -12,6 +12,7 @@ use Modules\Identity\Http\Controllers\DisabilityTypeController;
 use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\HospitalController;
+use Modules\Identity\Http\Controllers\RecommendationTemplateSettingController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailReportController;
@@ -28,6 +29,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);
     Route::resource('hospital', HospitalController::class);
     Route::resource('disabilityCommittee', DisabilityCommitteeController::class);
+    Route::get('recommendationTemplateSetting', [RecommendationTemplateSettingController::class,'index'])->name('recommendationTemplateSetting.index');
+    Route::post('recommendationTemplateSetting', [RecommendationTemplateSettingController::class,'store'])->name('recommendationTemplateSetting.store');
 });
 
 Route::prefix('disability')->group(function () {
