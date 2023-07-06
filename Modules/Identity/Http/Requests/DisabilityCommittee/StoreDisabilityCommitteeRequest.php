@@ -21,4 +21,11 @@ class StoreDisabilityCommitteeRequest extends FormRequest
             'position' => ['nullable', 'integer']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => ['नाम अनिबार्य छ']
+        ];
+    }
 }

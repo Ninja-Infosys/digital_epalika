@@ -21,4 +21,12 @@ class UpdateHospitalRequest extends FormRequest
             'address' => ['required', 'string', 'max:255']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => ['नाम अनिबार्य छ'],
+            'address.required' => ['ठेगाना अनिबार्य छ'],
+        ];
+    }
 }

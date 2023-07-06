@@ -76,7 +76,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="address" class="form-label">ठेगाना</label>
+                                <label for="address" class="form-label">ठेगाना *</label>
                                 <input
                                     type="text"
                                     name="address"
