@@ -91,6 +91,7 @@
                             url:$(this).val(),
                             success:function (resp){
                                 CKEDITOR.instances.data.setData(resp.data);
+                                console.log(resp)
                             },
                             error:function (){
                                 alert('Something Went Wrong')
