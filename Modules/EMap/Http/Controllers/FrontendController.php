@@ -23,7 +23,6 @@ class FrontendController extends Controller
 {
     public function eMap()
     {
-
         return view('emap::frontend.e-map.index');
     }
 

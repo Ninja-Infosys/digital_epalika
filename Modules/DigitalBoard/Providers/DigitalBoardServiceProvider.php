@@ -2,8 +2,8 @@
 
 namespace Modules\DigitalBoard\Providers;
 
+use App\Models\Settings\Employee;
 use Illuminate\Support\ServiceProvider;
-use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Observers\EmployeeObserver;
 
 class DigitalBoardServiceProvider extends ServiceProvider

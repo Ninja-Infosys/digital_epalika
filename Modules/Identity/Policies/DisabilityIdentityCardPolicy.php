@@ -33,7 +33,6 @@ class DisabilityIdentityCardPolicy
                 : Response::denyAsNotFound();
         }
         return Response::allow();
-
     }
 
     public function delete(User $user, DisabilityIdentityCard $disabilityIdentityCard): Response

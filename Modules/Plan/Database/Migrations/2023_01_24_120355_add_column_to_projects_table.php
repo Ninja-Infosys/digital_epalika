@@ -4,12 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+return new class () extends Migration {
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
@@ -28,15 +23,21 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('plans', function (Blueprint $table) {
-
+            $table->dropColumn('first_quarterly_amount');
+            $table->dropColumn('first_quarterly_goal');
+            $table->dropColumn('second_quarterly_amount');
+            $table->dropColumn('second_quarterly_goal');
+            $table->dropColumn('third_quarterly_amount');
+            $table->dropColumn('third_quarterly_goal');
+            $table->dropColumn('agencies_grants');
+            $table->dropColumn('share_amount');
+            $table->dropColumn('committee_share_amount');
+            $table->dropColumn('labor_amount');
+            $table->dropColumn('benefited_organization');
+            $table->dropColumn('others_benefited');
         });
     }
 };

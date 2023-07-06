@@ -1,6 +1,5 @@
 <div>
-    <video controls="controls" id="myVideo" autoplay>
-    </video>
+    <video controls="controls" id="myVideo" autoplay></video>
 </div>
 
 @push('scripts')
@@ -11,21 +10,22 @@
         @endforeach
         let i = 0; // define i
         const videoCount = videoSource.length;
-
         function videoPlay(videoNum) {
-            document.getElementById("myVideo").setAttribute("src", videoSource[videoNum]);
-            document.getElementById("myVideo").load();
-            document.getElementById("myVideo").play();
+            const myVideo = $('#myVideo');
+            if (myVideo.length === 0) {
+                return;
+            }
+            myVideo.attr('src', videoSource[videoNum]);
+            myVideo.get(0).load();
+            myVideo.get(0).play();
         }
-
         videoPlay(i);
-        document.getElementById('myVideo').addEventListener('ended', (event) => {
+        $('#myVideo').on('ended', function() {
             myHandler();
         });
-
         function myHandler() {
             i++;
-            if (i > (videoCount - 1)) {
+            if (i >= videoCount) {
                 i = 0;
             }
             videoPlay(i);

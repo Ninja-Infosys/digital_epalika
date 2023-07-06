@@ -107,12 +107,8 @@
                             <td>ठेगाना :{{ $seniorCitizenDetail->patrons_name_address }}</td>
                         </tr>
                         <tr>
-                            <th colspan="3">सम्पर्क व्यक्तिको विवरण :</th>
-                        </tr>
-                        <tr>
-                            <td>सम्पर्क व्यक्तिको नाम : {{ $seniorCitizenDetail->contact_person_name }}</td>
-                            <td>सम्पर्क नं. : {{ $seniorCitizenDetail->contact_person_phone }}</td>
-                            <td>ठेगाना :{{ $seniorCitizenDetail->contact_person_address }}</td>
+                            <td>संरक्षकको फोन : {{ $seniorCitizenDetail->patrons_phone }}</td>
+                            <td>नाता :{{ $seniorCitizenDetail->patrons_relationship }}</td>
                         </tr>
                         <tr>
                             <th>कुनै प्रकारको रोग छ वा छैन ? : {{ $seniorCitizenDetail->is_disease == 1 ? 'छ' : 'छैन' }}
@@ -159,7 +155,7 @@
                                         @endforeach
                                     </div>
                                     <div>
-                                        <img src="{{$seniorCitizenDetail->employeeSignature->red_signature}}"
+                                        <img src="{{$seniorCitizenDetail->employeeSignature->red_signature ??''}}"
                                              alt="{{$seniorCitizenDetail->name_en}}" height="30" id="signature_image"
                                              style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
                                         <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
@@ -188,8 +184,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="card-font-color">
-                                            <p>लिङ्ग: {{$seniorCitizenDetail->gender->label()??''}}</p>
-                                            <p>रक्त समूह: {{$seniorCitizenDetail->blood_group->label()??''}}</p>
+                                            <p>लिङ्ग: {{$seniorCitizenDetail->gender?->label()??''}}</p>
+                                            <p>रक्त समूह: {{$seniorCitizenDetail->blood_group?->label()??''}}</p>
                                             <p>उमेर: {{$seniorCitizenDetail->age}}</p>
                                         </div>
                                     </div>
@@ -235,7 +231,7 @@
                                         @endforeach
                                     </div>
                                     <div>
-                                        <img src="{{$seniorCitizenDetail->employeeSignature->red_signature}}"
+                                        <img src="{{$seniorCitizenDetail->employeeSignature->red_signature??''}}"
                                              alt="{{$seniorCitizenDetail->name_en}}" height="30" id="signature_image"
                                              style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
                                         <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
@@ -257,7 +253,7 @@
                                         <div class="card-font-color">
                                             <p>Gender
                                                 : {{$seniorCitizenDetail->gender}}</p>
-                                            <p>Blood Group : {{$seniorCitizenDetail->blood_group->label()??''}}
+                                            <p>Blood Group : {{$seniorCitizenDetail->blood_group?->label()??''}}
                                             </p>
                                             <p>Age
                                                 :  {{$seniorCitizenDetail->age}}</p>

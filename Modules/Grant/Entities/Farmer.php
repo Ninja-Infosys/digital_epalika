@@ -18,11 +18,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Modules\EMap\Enums\RelationEnum;
 
 class Farmer extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -120,4 +122,3 @@ class Farmer extends Model
        return $this->morphMany(GrantDetail::class, 'model');
    }
 }
-

@@ -18,5 +18,4 @@ class ReportExport implements FromView, ShouldAutoSize
             'excelUrl' => null
         ]);
     }
-
 }

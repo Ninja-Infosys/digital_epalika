@@ -3,102 +3,121 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use App\Models\Settings\FiscalYear;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
+use Modules\BusinessRegistration\Entities\BusinessRenew;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
-use Modules\BusinessRegistration\Entities\Partner;
-use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 
 class DashboardController extends Controller
 {
-    public function __invoke(): Factory|View|Application
+    use NepaliDateConverter;
+
+    protected Collection $businessDetail;
+
+    public function __construct()
     {
-        $totalBusinessCount = BusinessDetail::count();
+        parent::__construct();
+
+        $this->businessDetail = BusinessDetail::selectRaw('fiscal_year_id,ward_no,registration_no,registration_date_ne')->whereNotNull('registration_no')->get();
+    }
+    public function __invoke()
+    {
+        $this->checkAuthorization('businessRegistrationDashboard_access');
+
+        $totalBusinessCount = $this->businessDetail->count();
         $totalBusinessDetailNatureCount = BusinessNature::count();
         $totalObjectTransactionCategoryCount = ObjectTransaction::count();
+        $businessRenewCount = BusinessRenew::where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
 
-
-        $businessRegistrationAccordingToFiscalYear = $this->getBusinessRegistrationAccordingToFiscalYear();
-
-        $businessDetailTransaction = $this->getTotalTransactionData();
-
-        $businessDetailAccordingToBusinessType = $this->getBusinessDetailAccordingToBusinessTypes();
-
-        return view('businessregistration::admin.dashboard', compact('businessDetailAccordingToBusinessType', 'businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailNatureCount', 'totalObjectTransactionCategoryCount'));
+        if (request()->ajax()) {
+            return [
+                'businessRegistration' => $this->getBusinessRegistrationAccordingToFiscalYear(),
+                'wardWise' => $this->getWardWiseData(),
+                'businessNature' => $this->getBusinessNature(),
+                'monthWise' => $this->getMonthlyWise()
+            ];
+        }
+        return view('businessregistration::admin.dashboard', compact(
+            'totalBusinessCount',
+            'totalBusinessDetailNatureCount',
+            'totalObjectTransactionCategoryCount',
+            'businessRenewCount'
+        ));
     }
 
 
-    public function getBusinessDetail($hasCurrentFiscalYear = null): Collection
+    public function getBusinessRegistrationAccordingToFiscalYear(): Collection
     {
-        return BusinessDetail::where(function ($query) use ($hasCurrentFiscalYear) {
-            if ($hasCurrentFiscalYear) {
-                $query->where('fiscal_year_id', $hasCurrentFiscalYear);
-            }
-        })
-            ->get();
+        $fiscalYears = FiscalYear::all();
+        $data = collect();
+        foreach ($fiscalYears as $fiscalYear) {
+            $data->push([
+                'name' => $fiscalYear->title,
+                'data' => $this->businessDetail
+                ->where('fiscal_year_id', $fiscalYear->id)
+                ->whereNotNull('registration_no')
+                ->count()]);
+        }
+        return $data;
     }
 
-
-    public function getBusinessRegistrationAccordingToFiscalYear(): array
+    public function getWardWiseData()
     {
-        $businessDetails = $this->getBusinessDetail();
+        $wardsData = collect();
+        foreach (\officeSetting()->localBody->ward_no as $ward) {
+            $wardsData->push([
+                'ward_no' => "वडा नं. $ward",
+                'business_detail_count' => $this->businessDetail
+                    ->where('fiscal_year_id', \officeSetting()->fiscal_year_id)
+                    ->where('ward_no', $ward)
+                    ->count()
+            ]);
+        }
+
         return [
-            'labels' => ['दर्ता भएका', 'दर्ता नभएका'],
+            'labels' => $wardsData->pluck('ward_no')->toArray(),
             'dataSets' => [
                 [
-                    'label' => 'व्यवसाय',
-                    'data' => [$businessDetails->whereNotNull('registration_no')->count(), $businessDetails->whereNull('registration_no')->count()],
-                    'fill' => 'false',
+                    'data' => $wardsData->pluck('business_detail_count')->toArray(),
+                    'label' => 'जम्मा',
                 ],
             ],
         ];
     }
 
-
-    public function getOfficeSetting(): mixed
+    public function getBusinessNature()
     {
-        return OfficeSetting::first();
+        return BusinessNature::withCount('businessDetails')
+            ->get()
+            ->map(function ($businessNature) {
+                return [
+                    'name' => $businessNature->title,
+                    'data' => (int)$businessNature->business_details_count,
+                ];
+            });
     }
 
-    public function getTotalTransactionData(): array
+
+    public function getMonthlyWise(): array
     {
-        $transaction = ObjectTransaction::withCount('objectTransactions')->whereNull('object_transaction_id')->get();
+        $monthlyRegistrations = [];
+
+        foreach ($this->month_name as $key => $month) {
+            $monthlyRegistrations[] = $this->businessDetail->where('fiscal_year_id', \officeSetting()->fiscal_year_id)
+                ->where('registration_month', ($key + 1))
+                ->count();
+        }
         return [
-            'labels' => $transaction->pluck('title')->toArray(),
+            'labels' => $this->month_name,
             'dataSets' => [
                 [
-                    'data' => $transaction->pluck('object_transactions_count')->toArray(),
-                    'label' => 'उप श्रेणी ',
-                    'fill' => 'false',
-                ]
+                    'data' => $monthlyRegistrations,
+                    'label' => 'दर्ता',
+                ],
             ],
         ];
     }
-
-
-    public function getBusinessDetailAccordingToBusinessTypes(): array
-    {
-        $officeSetting = $this->getOfficeSetting();
-        $proprietorDetail = Partner::whereHas('businessDetail', function ($query) use ($officeSetting) {
-            $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
-        })->get();
-        return [
-            'labels' => ['नयाँ दर्ता', 'नवीकरण'],
-            'dataSets' => [
-                [
-                    'data' => [$proprietorDetail->where('business_type', BusinessTypeEnum::NEW_REGISTRATION)->count(),
-                        $proprietorDetail->where('business_type', BusinessTypeEnum::RENEWAL)->count()
-                    ],
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-        ];
-    }
-
 }

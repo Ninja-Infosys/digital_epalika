@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
+use App\Models\Settings\Branch;
+use App\Models\Settings\Employee;
 use App\Models\Settings\LetterHead;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
@@ -21,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
+use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
 {
@@ -49,6 +49,9 @@ class User extends Authenticatable
         'ward_no',
         'profile_photo_path',
         'pin',
+        'employee_id',
+        'branch_id',
+        'is_dept_head',
     ];
 
     protected $hidden = [
@@ -64,14 +67,14 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value): void
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
 
     public function setPinAttribute($value): void
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             $this->attributes['pin'] = bcrypt($value);
         }
     }
@@ -85,8 +88,8 @@ class User extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -111,14 +114,29 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
     public function getAvatarAttribute(): string
     {
         $name = $this->attributes['name'] ?? 'User';
-        return (new Avatar)->create($name)->toBase64();
+        return (new Avatar())->create($name)->toBase64();
     }
 
     public function letterHead(): MorphOne
     {
-        return $this->morphOne(LetterHead::class,'model');
+        return $this->morphOne(LetterHead::class, 'model');
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(Activity::class);
     }
 }

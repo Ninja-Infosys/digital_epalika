@@ -2,9 +2,7 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\CardColor;
 use Modules\Identity\Http\Requests\CardColor\StoreCardColorRequest;
@@ -21,9 +19,10 @@ class CardColorController extends Controller
                 $q->whereLike(['title'], request('search'));
             }
         })
-            ->latest()->paginate(10);;
+            ->latest()->paginate(10);
+            ;
 
-        return view('identity::admin.setting.cardColor.index',compact('cardColors'));
+        return view('identity::admin.setting.cardColor.index', compact('cardColors'));
     }
 
     public function create()
@@ -49,7 +48,7 @@ class CardColorController extends Controller
     public function edit(CardColor $cardColor)
     {
         $this->checkAuthorization('cardColor_edit');
-        return view('identity::admin.setting.cardColor.edit',compact('cardColor'));
+        return view('identity::admin.setting.cardColor.edit', compact('cardColor'));
     }
 
     public function update(UpdateCardColorRequest $request, CardColor $cardColor)
@@ -66,6 +65,5 @@ class CardColorController extends Controller
         $cardColor->delete();
         toast('रंग सफलतापूर्वक मेटियो', 'success');
         return back();
-
     }
 }

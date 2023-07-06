@@ -12,6 +12,7 @@
         </a>
     </li>
 @endcan
+
 <li class="{{request()->is('admin/emap/map/mapApply*') ? 'active' : ''}}">
     <a href="#sidebarMaptype" {{request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
@@ -40,6 +41,12 @@
             @endcan
         </ul>
     </div>
+</li>
+<li class="{{request()->is('admin/emap') ? 'active' : ''}}">
+    <a href="{{route('emap.admin.oldMap.index')}}">
+        <i class="fa fa-building"></i>
+        <span>पुरानो नक्सा </span>
+    </a>
 </li>
 <li class="{{request()->is('admin/emap/setting/*') ? 'active' : ''}}">
     <a href="#sidebarEMapSetting"

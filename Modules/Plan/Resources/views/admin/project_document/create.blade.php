@@ -42,6 +42,7 @@
                                     class="form-control @error('document_name') is-invalid @enderror"
                                     id="document_name"
                                     placeholder="कागजात नाम"
+                                    required
                                 />
                                 @error('document_name')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -62,6 +63,7 @@
                                 <label for="data" class="form-label">डाटा *</label>
                                 <textarea name="data"
                                           id="data"
+                                          required
                                           cols="30" rows="10"
                                           class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
                                 @error('data')
@@ -78,14 +80,9 @@
             </div>
         </div>
     </div>
-        @push('style')
-            <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-            <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-        @endpush
         @push('scripts')
-            <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-            <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
-
+            <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+            <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
             <script>
                 $(document).ready(function (){
                     $('#plan_template_id').on('change',function (){

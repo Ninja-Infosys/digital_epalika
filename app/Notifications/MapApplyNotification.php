@@ -51,9 +51,12 @@ class MapApplyNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'construction_type' => $this->mapApply->construction_type?->label() ?? '',
-            'building_category' => $this->mapApply->building_category ?? '',
-            'structure_type_id' => $this->mapApply->structureType?->title ?? '',
+            'निर्माण कार्यको किसिम' => $this->mapApply->construction_type?->label() ?? '',
+            'भवन वर्गीकरण' => $this->mapApply->building_category ?? '',
+            'स्ट्रकचर टाईप' => $this->mapApply->structureType?->title ?? '',
+//            'घर धनीको नाम' => $this->mapApply->houseOwner->name ?? '',
+            'application_type' => $this->mapApply->application_type->label() ?? '',
+            'सन्देश'=>$this->mapApply->sent_to_organization=='Reject' || $this->mapApply->sent_to_organization=='Unseen' ? 'तपाईको फारम पालिकाले अस्वीकार गरेको छ' : 'तपाईको फारम पालिकाले स्वीकार गरेको छ'
         ];
     }
 }

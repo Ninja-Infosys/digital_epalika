@@ -7,17 +7,15 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('executiveCommitteeMessage:send')
-            ->everyMinute();
-        $schedule->command('clear:excel')
-            ->daily();
+            ->dailyAt('05:00')->timezone('Asia/Kathmandu');
+
+        $schedule->command('grievance:escalate')->twiceDaily()->timezone('Asia/Kathmandu');
     }
 
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
 

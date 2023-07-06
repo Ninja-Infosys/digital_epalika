@@ -52,6 +52,7 @@
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
+                                        required
                                     />
                                     @error('title')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -80,6 +81,7 @@
                                         class="form-control @error('category_a') is-invalid @enderror"
                                         id="category_a"
                                         placeholder="करोड भन्दा बढी पुजी लगानी भएका"
+                                        required
                                     />
                                     @error('category_a')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -94,6 +96,7 @@
                                         class="form-control @error('category_b') is-invalid @enderror"
                                         id="category_b"
                                         placeholder="लाख देखि करोड सम्म पुजि लगानी भएका"
+                                        required
                                     />
                                     @error('category_b')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -108,6 +111,7 @@
                                         class="form-control @error('category_c') is-invalid @enderror"
                                         id="category_c"
                                         placeholder="लाख भन्दा कम पुजि लगानी भएका"
+                                        required
                                     />
                                     @error('category_c')
                                     <div class="invalid-feedback">{{$message}}</div>

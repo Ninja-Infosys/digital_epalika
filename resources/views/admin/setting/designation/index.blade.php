@@ -11,11 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.designation.index')}}">पदहरुको विवरण</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
+                        <li class="breadcrumb-item active">पदहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title">पदहरुको विवरण</h4>
+                <h4 class="page-title">पदहरु</h4>
             </div>
         </div>
     </div>
@@ -26,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पद सूची</h4>
                         @can('designation_create')
-                            <a href="{{route('admin.designation.create')}}"
+                            <a href="{{route('admin.generalSetting.designation.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -50,18 +51,18 @@
                                     <td>{{$designation->title}}</td>
                                     <td>
                                         @can('designation_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.designation.edit', $designation)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.designation.edit', $designation)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('designation_delete')
-                                            <form action="{{route('admin.designation.destroy', $designation)}}"
+                                            <form action="{{route('admin.generalSetting.designation.destroy', $designation)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

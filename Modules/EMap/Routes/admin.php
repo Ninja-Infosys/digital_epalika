@@ -8,6 +8,7 @@ use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\MapSettingController;
+use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -29,6 +30,8 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
     Route::get('mapApply/{applicationFormTypeEnum}', 'index')->name('mapApply.index');
+    Route::get('mapApply/{mapApply}/detail/{applicationFormTypeEnum}', 'mapDetail')->name('mapApply.mapDetail');
+    Route::put('mapApply/{mapApply}/{applicationFormTypeEnum}', 'updateStatus')->name('mapApply.updateStatus');
 });
 
 Route::prefix('setting')->group(function () {
@@ -44,7 +47,8 @@ Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
 
-//report
+//oldMap
+Route::resource('oldMap', OldMapController::class)->except(['update', 'store']);
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/', 'getRequiredData')->name('report');

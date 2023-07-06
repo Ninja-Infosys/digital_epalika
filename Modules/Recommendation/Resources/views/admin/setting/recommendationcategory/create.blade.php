@@ -6,15 +6,15 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.setting.dashboard') }}">
+                            <a href="{{ route('admin.recommendation.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">आधरभूत सेटिंग</li>
+                        <li class="breadcrumb-item active">सिफारिस</li>
                     </ol>
                 </div>
-                <h4 class="page-title">आधरभूत सेटिंग</h4>
+                <h4 class="page-title">सिफारिस</h4>
             </div>
         </div>
     </div>
@@ -24,11 +24,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सिफारिस प्रकार थप्नुहोस</h4>
+                        <h4 class="header-title">नयाँ {{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} थप्नुहोस</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.setting.recommendationCategory.index', $type) }}"
                                 class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"></i> सिफारिस प्रकार सूची
+                                <i class="fa fa-list"></i> {{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} सूची
                             </a>
                         @endcan
                     </div>
@@ -40,13 +40,13 @@
                         <div class="row">
                             @if($type=='recommendationSubCategory')
                             <div class="col-md-12">
-                                <label for="recommendation_category_id">सिफारिस प्रकार आ.डी</label>
+                                <label for="recommendation_category_id">वर्ग</label>
                                 <select id="recommendation_category_id" name="recommendation_category_id" class="form-control">
                                     <option>छान्नुहोस्</option>
                                     @foreach ($recommendationCategories as $recommendationCategory )
-                                    <option value="{{ $recommendationCategory->id }}">{{ $recommendationCategory->title }}</option> 
+                                    <option value="{{ $recommendationCategory->id }}">{{ $recommendationCategory->title }}</option>
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
                             @endif
@@ -54,7 +54,7 @@
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title') }}"
                                     class="form-control @error('title') is-invalid @enderror" id="name"
-                                    placeholder="शिर्षक" />
+                                    placeholder="शिर्षक" required />
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

@@ -7,7 +7,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\Setting\GrantType\StoreGrantTypeRequest;
 use Modules\Grant\Http\Requests\Setting\GrantType\UpdateGrantTypeRequest;
@@ -53,7 +52,6 @@ class GrantTypeController extends Controller
 
         toast('अनुदान प्रकार सफलता पुर्वक थपियो', 'success');
         return back();
-
     }
 
     public function edit(GrantType $grantType)
@@ -79,6 +77,5 @@ class GrantTypeController extends Controller
 
         toast('अनुदान प्रकार सफलता पुर्वक हटाईयो', 'success');
         return back();
-
     }
 }

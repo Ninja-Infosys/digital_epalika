@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.ethnicity.index')}}">जातियता</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">जातियता विवरण</li>
                     </ol>
@@ -29,7 +29,7 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('ethnicity_create')
-                                <a href="{{route('admin.ethnicity.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.generalSetting.ethnicity.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -52,13 +52,13 @@
                                     <td>{{$ethnicity->title}}</td>
                                     <td>
                                         @can('ethnicity_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.ethnicity.edit', $ethnicity)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.ethnicity.edit', $ethnicity)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('ethnicity_delete')
-                                            <form action="{{route('admin.ethnicity.destroy', $ethnicity)}}"
+                                            <form action="{{route('admin.generalSetting.ethnicity.destroy', $ethnicity)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

@@ -3,224 +3,139 @@
 namespace Modules\Roaster\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Settings\Department;
+use App\Models\Settings\FiscalYear;
+use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Modules\Roaster\Entities\Subject;
-use Modules\Roaster\Entities\TechnicalTrainee;
-use Modules\Roaster\Entities\Trainee;
 use Modules\Roaster\Entities\Trainer;
 use Modules\Roaster\Entities\Training;
+use Modules\Roaster\Enums\TrainingTypeEnum;
 
 class DashboardController extends Controller
 {
-    public function __invoke(): Factory|View|Application
+    use NepaliDateConverter;
+
+    private Collection $trainers;
+    private Collection $trainings;
+    private Collection $trainee;
+    private Collection $technicalTrainee;
+
+    public function __construct()
     {
-        [$trainingCount, $trainingCountInFy, $trainingInFyData] = $this->getTrainingData();
+        parent::__construct();
 
-        [$trainerCount, $trainerAccordingToDistrictsData] = $this->getTrainerData();
+        $this->trainers = Trainer::all();
+        $this->trainings = Training::with('trainingTrainees')->get();
+        $this->trainee = DB::table('trainees')->whereNull('deleted_at')->get();
+        $this->technicalTrainee = DB::table('technical_trainees')->whereNull('deleted_at')->get();
+    }
 
-        $trainerAccordingToSubjectData = $this->getTrainerAccordingToSubject();
-        [$traineeCount, $traineeAccordingToDistrictsData] = $this->getTraineeData();
+    public function __invoke()
+    {
+        $this->checkAuthorization('roasterDashboard_access');
 
-        [$technicalTraineeCount, $technicalTraineeAccordingToDistrictsData] = $this->getTechnicalTraineeData();
-
-        return view('roaster::admin.dashboard', compact([
-            'trainingInFyData',
-            'trainerAccordingToDistrictsData',
-            'traineeAccordingToDistrictsData',
-            'technicalTraineeAccordingToDistrictsData',
-            'trainerCount',
-            'trainerAccordingToSubjectData',
-            'technicalTraineeCount',
-            'traineeCount',
+        if (request()->ajax()) {
+            return [
+                'trainingAccordingToFiscalYear' => $this->trainingAccordingToFiscalYear(),
+                'trainingAccordingToMonth' => $this->trainingAccordingToMonth(),
+                'trainerAccordingToSubject' => $this->trainerAccordingToSubject(),
+                'trainingAccordingToType' => $this->trainingAccordingToType(),
+                'trainerAccordingToDepartment'=>$this->trainerAccordingToDepartment()
+            ];
+        }
+        $trainerCount = $this->trainers->count();
+        $trainingCount = $this->trainings->count();
+        $traineeCount = $this->trainee->count();
+        $technicalTraineeCount = $this->technicalTrainee->count();
+        return view('roaster::admin.dashboard', compact(['trainerCount',
             'trainingCount',
-            'trainingCountInFy',]));
+            'traineeCount',
+            'technicalTraineeCount']));
     }
 
-
-    private function getTrainingData(): array
+    public function trainingAccordingToFiscalYear()
     {
-        $setting = $this->getSetting();
-
-        $trainings = Training::query();
-
-        $trainingCount = $trainings->count();
-
-        $trainingQueryInFy = $trainings->where('fiscal_year_id', $setting->fiscal_year_id);
-
-        $trainingCountInFy = $trainingQueryInFy->count();
-
-        $trainingInFyData = $this->getTrainingDataAccordingToFiscalYear($trainingQueryInFy);
-
-        return array($trainingCount, $trainingCountInFy, $trainingInFyData);
-    }
-
-    /**
-     * @return array
-     */
-    private function getTrainerData(): array
-    {
-        $trainers = Trainer::query();
-
-        $trainerCount = $trainers->count();
-
-        $trainerAccordingToDistrictsData = $this->getTrainerAccordingToDistricts($trainers);
-        return array($trainerCount, $trainerAccordingToDistrictsData);
-    }
-
-    /**
-     * @return array
-     */
-    private function getTraineeData(): array
-    {
-        $trainee = Trainee::query();
-
-        $traineeCount = $trainee->count();
-
-        $traineeAccordingToDistrictsData = $this->getTraineeAccordingToDistricts($trainee);
-        return array($traineeCount, $traineeAccordingToDistrictsData);
-    }
-
-    /**
-     * @return array
-     */
-    private function getTechnicalTraineeData(): array
-    {
-        $technicalTrainee = TechnicalTrainee::query();
-        $technicalTraineeCount = $technicalTrainee->count();
-        $technicalTraineeAccordingToDistrictsData = $this->getTraineeAccordingToDistricts($technicalTrainee);
-        return array($technicalTraineeCount, $technicalTraineeAccordingToDistrictsData);
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getSetting(): mixed
-    {
-        return OfficeSetting::selectRaw('fiscal_year_id')->with('fiscalYear')->first();
-    }
-
-    /**
-     * @param Builder $trainingQueryInFy
-     * @return array
-     */
-    private function getTrainingDataAccordingToFiscalYear(Builder $trainingQueryInFy): array
-    {
-        $trainingInFy = $trainingQueryInFy
-            ->with('trainingTrainees', 'trainingTrainees.model')
+        $fiscalYears = FiscalYear::withCount('trainings')
             ->get()
-            ->map(function ($training) {
-                $model = $training->trainingTrainees->pluck('model');
-
+            ->map(function ($fiscalYear) {
                 return [
-                    'training_name' => $training->name ?? '',
-                    'trainee_count' => $training->trainingTrainees->count() ?? 0,
-                    'selected_trainee' => $model->where('select', 1)->count() ?? 0,
-                    'unselected_trainee' => $model->where('select', 0)->count() ?? 0,
+                    'title' => $fiscalYear->title,
+                    'trainings_count' => (int)$fiscalYear->trainings_count,
                 ];
             });
 
         return [
-            'labels' => $trainingInFy->pluck('training_name')->toArray(),
+            'labels' => $fiscalYears->pluck('title')->toArray(),
             'dataSets' => [
                 [
-                    'data' => $trainingInFy->pluck('trainee_count')->toArray(),
-                    'label' => 'जम्मा प्रशियार्थी',
-                    'fill' => 'false',
-                ],
-                [
-                    'data' => $trainingInFy->pluck('selected_trainee')->toArray(),
-                    'label' => 'छानिएका प्रशियार्थी',
-                    'fill' => 'false',
-                ],
-                [
-                    'data' => $trainingInFy->pluck('unselected_trainee')->toArray(),
-                    'label' => 'नछानिएका प्रशियार्थी',
-                    'fill' => 'false',
+                    'data' => $fiscalYears->pluck('trainings_count')->toArray(),
+                    'label' => 'जम्मा नक्सा',
                 ]
             ],
         ];
     }
-
-    /**
-     * @param Builder $trainers
-     * @return array
-     */
-    private function getTrainerAccordingToDistricts(Builder $trainers): array
+    public function trainingAccordingToMonth()
     {
-        $trainerAccordingToDistricts = $trainers
-            ->with('district')
-            ->selectRaw('province_id,district_id')
-            ->get()
-            ->groupBy('district.district')
-            ->map(function ($trainer, $key) {
-                return [
-                    'district' => $key,
-                    'count' => count($trainer),
-                ];
-            });
+        $month = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0];
 
-
+        foreach ($this->trainings->where('fiscal_year_id', officeSetting()->fiscal_year_id) as $training) {
+            $open_date = Carbon::parse($training->open_date);
+            $openDate = $this->get_nepali_date(
+                $open_date->format('Y'),
+                $open_date->format('m'),
+                $open_date->format('d')
+            );
+            $month[$openDate['m'] - 1] += 1;
+        }
         return [
-            'labels' => $trainerAccordingToDistricts->pluck('district')->toArray(),
+            'labels' => $this->month_name,
             'dataSets' => [
                 [
-                    'data' => $trainerAccordingToDistricts->pluck('count')->toArray(),
-                    'label' => 'प्रशिक्षकहरू',
-                    'fill' => 'false',
+                    'data' => $month,
+                    'label' => 'तालिम',
                 ]
             ]
         ];
     }
 
-    /**
-     * @param Builder $trainee
-     * @return array
-     */
-    private function getTraineeAccordingToDistricts(Builder $trainee): array
+    public function trainerAccordingToSubject()
     {
-        $traineeAccordingToDistricts = $trainee->with('district')
-            ->selectRaw('province_id,district_id')
+        return Subject::withCount('trainers')
             ->get()
-            ->groupBy('district.district')
-            ->map(function ($trainee, $key) {
+            ->map(function ($subject) {
                 return [
-                    'district' => $key,
-                    'count' => count($trainee),
+                    'name' => $subject->title,
+                    'data' => (int)$subject->trainers_count
                 ];
             });
-
-        return [
-            'labels' => $traineeAccordingToDistricts->pluck('district')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $traineeAccordingToDistricts->pluck('count')->toArray(),
-                    'label' => 'प्रशिक्षकहरू',
-                    'fill' => 'false',
-                ]
-            ]
-        ];
     }
-
-    /**
-     * @return array
-     */
-    private function getTrainerAccordingToSubject(): array
+    public function trainingAccordingToType()
     {
-        $trainerAccordingToSubject = Subject::withCount('trainers')->selectRaw('id, title')->get();
+        $data = collect();
 
-        return [
-            'labels' => $trainerAccordingToSubject->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $trainerAccordingToSubject->pluck('trainers_count')->toArray(),
-                    'label' => 'जम्मा प्रशिक्षकहरू',
-                    'fill' => 'false',
-                ]
-            ]
-        ];
+        foreach (TrainingTypeEnum::cases() as $trainingTypeEnum) {
+            $data->push([
+                'name' => $trainingTypeEnum->label(),
+                'data' => $this->trainings
+                    ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+                    ->where('form_type', $trainingTypeEnum)
+                    ->count()
+            ]);
+        }
+        return $data;
+    }
+    public function trainerAccordingToDepartment()
+    {
+        return Department::withCount('trainers')
+            ->get()
+            ->map(function ($department) {
+                return [
+                    'name' => $department->title,
+                    'data' => (int)$department->trainers_count
+                ];
+            });
     }
 }

@@ -1,113 +1,57 @@
 <!DOCTYPE html>
-{{--<html lang="{{app()->getLocale()}}">--}}
-
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-
+<html lang="en">
 <head>
-
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>{{config('app.name')}}</title>
+    <title>{{config('app.name','Digital E-Palika')}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="A complete solution for a digital palika." name="description"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="icon" href="{{asset('assets/backend/emap/admin/img/logo.png')}}" type="image/png">
-
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/bootstrap1.min.css')}}"/>
-
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/vendors/themefy_icon/themify-icons.css')}}"/>
-
-
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/vendors/font_awesome/css/all.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
-
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/metisMenu.css')}}">
-
-    <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/style1.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
-
-    <link
-        href="{{asset('assets/backend/css/app.min.css')}}"
-        rel="stylesheet"
-        type="text/css"
-        id="app-style"
-    />
-
-
+    <meta content="Ninja Infosys" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
+    <!-- App css -->
+    <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
+    <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media='screen,print'/>
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/select2.min.css')}}" type="text/css"/>
+    <!-- icons -->
+    <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/sweetalert2.min.css')}}">
     @stack('style')
     @livewireStyles
 </head>
 
-<body class="crm_body_bg">
-
-
-@include('emap::organization.layouts.sidebar')
-
-
-<section class="main_content dashboard_part">
-
-    @include('emap::organization.layouts.navbar')
-
-    <div class="main_content_iner ">
-        <div class="container-fluid p-0">
-            @yield('content')
+<!-- body start -->
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+    @include('emap::organization.layouts.header')
+    @include('emap::organization.layouts.sidebar')
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                @yield('content')
+            </div>
         </div>
+        <footer class="footer">
+            <div class="container-fluid text-center">
+                {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
+            </div>
+        </footer>
+        <!-- end Footer -->
     </div>
-
-    @include('emap::organization.layouts.footer')
-</section>
-
-
-<script src="{{asset('assets/backend/emap/admin/js/jquery1-3.4.1.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/js/bootstrap1.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/js/metisMenu.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/count_up/jquery.waypoints.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/count_up/jquery.counterup.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/niceselect/js/jquery.nice-select.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/owl_carousel/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/tagsinput/tagsinput.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/vendors/text_editor/summernote-bs4.js')}}"></script>
-<script src="{{asset('assets/backend/emap/admin/js/custom.js')}}"></script>
-
-<script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
-
+</div>
+<div class="rightbar-overlay"></div>
+<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
-
-<script>
-    $('.show_confirm').click(function (event) {
-        var form = $(this).closest("form");
-        event.preventDefault();
-
-        swal.fire({
-
-            title: "Are You Sure to Delete ? ",
-            text: "If you delete this, it will be gone forever.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: 'red',
-            confirmButtonText: "Delete",
-            dangerMode: true,
-
-        })
-            .then((willDelete) => {
-                if (willDelete.isConfirmed) {
-                    form.submit();
-                }
-            });
-    });
-
-
-    window.addEventListener('alert_message', event => {
-        swal.fire({
-            title: event.detail.title,
-            text: event.detail.text,
-            icon: event.detail.type,
-        });
-    });
-</script>
-
 @include('sweetalert::alert')
 
 @stack('scripts')
 @livewireScripts
+<script src="{{asset('assets/backend/js/plugins/select2.min.js')}}"></script>
+<script src="{{ asset('assets/backend/js/custom.js') }}"></script>
+<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/plugins/sweetalert2.min.js')}}"></script>
 </body>
-
 </html>

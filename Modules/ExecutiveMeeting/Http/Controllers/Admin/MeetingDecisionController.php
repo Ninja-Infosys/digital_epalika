@@ -3,92 +3,111 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
+use Illuminate\Support\Facades\DB;
+use Modules\ExecutiveMeeting\Entities\CommitteeMember;
+use Modules\ExecutiveMeeting\Entities\MeetingParticipant;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\StoreMeetingDecisionRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\UpdateMeetingDecisionRequest;
-use Illuminate\Database\Eloquent\Builder;
 
 class MeetingDecisionController extends Controller
 {
-    public function index($meeting_for)
+    public function index(Meeting $meeting)
     {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_access');
-        $meetingDecisions = MeetingDecision::with('meetingEvent')->where('meeting_for', $meeting_for)
-        ->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['meetingEvent.event_name','date'], request('search'));
+        $this->checkAuthorization('meetingDecision_access');
+
+        $meeting->load('meetingDecisions.meetingAgenda');
+
+        return view('executivemeeting::admin.meeting_decision.index', compact('meeting'));
+    }
+
+    public function create(Meeting $meeting)
+    {
+        $this->checkAuthorization('meetingDecision_create');
+
+        $committeeMembers = CommitteeMember::where('committee_id', $meeting->committee_id)->orderBy('position')->get();
+
+        $meeting->load([
+            'meetingAgendas' => function ($query) {
+                $query->with('meetingDecision');
+                $query->where('is_final', 1);
+            },
+            'meetingParticipants'
+        ]);
+
+        return view('executivemeeting::admin.meeting_decision.create', compact('meeting', 'committeeMembers'));
+    }
+
+    public function store(StoreMeetingDecisionRequest $request, Meeting $meeting)
+    {
+        $this->checkAuthorization('meetingDecision_create');
+
+        $participatingMembers = CommitteeMember::whereIn('id', $request->input('meetingParticipants') ?? [])->orderBy('position')->get();
+
+        DB::transaction(function () use ($request, $meeting, $participatingMembers) {
+            foreach ($request->input('meetingDecisions') as $meetingDecision) {
+                MeetingDecision::updateOrCreate(
+                    ['meeting_id' => $meeting->id, 'meeting_agenda_id' => $meetingDecision['meeting_agenda_id']],
+                    [
+                        'date' => $meetingDecision['date'],
+                        'en_date' => $meetingDecision['en_date'],
+                        'description' => $meetingDecision['description'],
+                        'user_id' => auth()->id()
+                    ]
+                );
             }
-        })
-        ->latest()->paginate(10);
 
+            foreach ($participatingMembers as $member) {
+                MeetingParticipant::updateOrCreate(
+                    ['meeting_id' => $meeting->id, 'committee_member_id' => $member->id],
+                    [
+                        'name' => $member->name,
+                        'designation' => $member->designation,
+                        'phone' => $member->phone,
+                        'email' => $member->email,
+                    ]
+                );
+            }
 
-        return view('executivemeeting::admin.meeting_decision.index', compact('meeting_for', 'meetingDecisions'));
-    }
-
-    public function create($meeting_for)
-    {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_create');
-
-        $meetingEvents = MeetingEvent::where('event_for', $meeting_for)
-            ->whereDate('en_start_date', '<=', today()->toDateString())
-            ->latest()->get();
-
-        return view('executivemeeting::admin.meeting_decision.create', compact('meeting_for', 'meetingEvents'));
-    }
-
-    public function store(StoreMeetingDecisionRequest $request, $meeting_for)
-    {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_create');
-
-        MeetingDecision::create($request->validated() + [
-                'meeting_for' => $meeting_for,
-            ]);
+            $meeting->meetingParticipants()->whereNotIn('committee_member_id', $request->input('meetingParticipants')??[])->delete();
+        });
 
         toast('बैठक निर्णय सफलतापूर्वक थपियो', 'success');
-
-        return back();
+        return redirect(route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting));
     }
 
-    public function show($meeting_for, MeetingDecision $meetingDecision)
+    public function show(Meeting $meeting, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_access');
+        $this->checkAuthorization('meetingDecision_access');
     }
 
-    public function edit($meeting_for, MeetingDecision $meetingDecision)
+    public function edit(Meeting $meeting, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_edit');
-        $meetingEvents = MeetingEvent::where('event_for', $meeting_for)
-            ->whereDate('en_start_date', '<=', today()->toDateString())
-            ->latest()->get();
+        $this->checkAuthorization('meetingDecision_edit');
 
-        return view('executivemeeting::admin.meeting_decision.edit', compact('meeting_for', 'meetingEvents', 'meetingDecision'));
+        $meeting->load(['meetingAgendas' => function ($query) {
+            $query->where('is_final', 1);
+        }]);
+
+        return view('executivemeeting::admin.meeting_decision.edit', compact('meeting', 'meetingDecision'));
     }
 
-    public function update(UpdateMeetingDecisionRequest $request, $meeting_for, MeetingDecision $meetingDecision)
+    public function update(UpdateMeetingDecisionRequest $request, Meeting $meeting, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_edit');
-
-        if ($request->hasFile('decision_file')) {
-            if ($meetingDecision->decision_file) {
-                $this->deleteFile($meetingDecision->decision_file);
-            }
-        }
+        $this->checkAuthorization('meetingDecision_edit');
 
         $meetingDecision->update($request->validated());
 
         toast('बैठक निर्णय सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.executiveMeeting.meetingDecision.index', $meeting_for));
+        return redirect(route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting));
     }
 
-    public function destroy($meeting_for, MeetingDecision $meetingDecision)
+    public function destroy(Meeting $meeting, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_delete');
+        $this->checkAuthorization('meetingDecision_delete');
 
-        if ($meetingDecision->decision_file) {
-            $this->deleteFile($meetingDecision->decision_file);
-        }
         $meetingDecision->delete();
 
         toast('बैठक निर्णय सफलतापूर्वक हटाइयो', 'success');

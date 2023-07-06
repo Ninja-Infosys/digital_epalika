@@ -11,9 +11,6 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="">महत्त्वपूर्ण लिङ्क</a>
-                        </li>
                         <li class="breadcrumb-item active">महत्त्वपूर्ण लिङ्क</li>
                     </ol>
                 </div>
@@ -31,14 +28,14 @@
                         @can('role_create')
                             <a href="{{route('admin.website.importantLink.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ महत्त्वपूर्ण लिङ्क थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm mb-0 table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

@@ -38,7 +38,7 @@
                         @csrf
                         @method('put')
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">भूमिका शीर्षक *</label>
                                 <input
                                     type="text"
@@ -61,10 +61,8 @@
                                 <div class="row">
                                     @foreach($permissionGroups as $key=>$permissionGroup)
                                         <div class="col-md-6">
-                                            <fieldset class="border p-2 mb-2">
-                                                <legend class="font-16 text-info">
-                                                    <strong>{{$key}}</strong>
-                                                </legend>
+                                            <fieldset class="mb-2">
+                                                <legend>{{$key}}</legend>
                                                 <div class="row">
                                                     @foreach($permissionGroup as $permission)
                                                         <div class="col-md-3">

@@ -44,7 +44,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{ old('name') }}"
                                            class="form-control @error('name') is-invalid @enderror" id="name"
-                                           placeholder="निजि उधम/फर्मको नाम"/>
+                                           placeholder="निजि उधम/फर्मको नाम" required/>
                                     @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -52,7 +52,7 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="enterprise_type_id" class="fs-5">निजि उधम/फर्म प्रकार<span
                                             class="text-danger">*</span></label>
-                                    <select name="enterprise_type_id" id="enterprise_type_id" class="form-select">
+                                    <select name="enterprise_type_id" id="enterprise_type_id" class="form-select" required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach ($enterpriseTypes as $enterpriseType)
                                             <option value="{{ $enterpriseType->id }}"

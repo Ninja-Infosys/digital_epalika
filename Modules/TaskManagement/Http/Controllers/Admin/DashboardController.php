@@ -3,66 +3,76 @@
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\FiscalYear;
+use App\Models\User;
+use App\Traits\NepaliDateConverter;
 use Carbon\CarbonPeriod;
-use Modules\TaskManagement\Entities\DailyTask;
-use Modules\TaskManagement\Entities\TaskCategory;
-use Modules\TaskManagement\Entities\TaskDivision;
+use Modules\TaskManagement\Entities\Activity;
 
 class DashboardController extends Controller
 {
+    use NepaliDateConverter;
+
+    private $activities;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->activities = Activity::withCount('activityLists')->with('activityLists')->get();
+    }
+
     public function __invoke()
     {
-        $dailyTaskCount = DailyTask::whereDate('en_date', now()->toDateString())->count();
-        $totalTaskCount = DailyTask::count();
-        $totalTaskCategory = TaskCategory::count();
-        $totalTaskDivision = TaskDivision::count();
-        $taskData = $this->taskDataYearWise();
-        $weeklyTasks=$this->weeklyTasks();
+        $this->checkAuthorization('taskManagementDashboard_access');
 
+        if (request()->ajax()) {
+            return [
+                'dailyTask' => $this->dailyTask(),
+            ];
+        }
+        $todayTaskCount = $this->activities
+            ->where('date_en', today())
+            ->sum('activity_lists_count');
+        $todayActivity = $this->activities
+            ->where('user_id', auth()->id())
+            ->where('date_en', today());
+        $currentUserTodayTaskCount = $todayActivity
+            ->sum('activity_lists_count');
+        $users = User::withCount(['activities' => fn ($query) => $query->where('date_en', today())])->get();
+        $taskSubmittedUserCount = $users->where('activities_count', '>', 0)->count();
+        $taskNotSubmittedUserCount = $users->where('activities_count', '<=', 0)->count();
         return view('taskmanagement::admin.dashboard', compact(
-            'dailyTaskCount',
-            'totalTaskCount',
-            'totalTaskCategory',
-            'totalTaskDivision',
-            'taskData',
-            'weeklyTasks'
+            'todayTaskCount',
+            'currentUserTodayTaskCount',
+            'todayActivity',
+            'taskSubmittedUserCount',
+            'taskNotSubmittedUserCount'
         ));
     }
 
-    public function taskDataYearWise(): array
+    public function dailyTask()
     {
-        $fiscalYears = FiscalYear::withCount('dailyTasks')->get();
+        $ranges = CarbonPeriod::create(today()->subDays(6), today());
+        $data = collect();
+        foreach ($ranges as $range) {
+            $nepaliDate = $this->get_nepali_date($range->format('Y'), $range->format('m'), $range->format('d'));
 
-        return [
-            'labels' => $fiscalYears->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $fiscalYears->pluck('daily_tasks_count')->toArray(),
-                ],
-            ],
-        ];
-    }
-
-    public function weeklyTasks()
-    {
-        $weeklyData=collect();
-        $weekDays=CarbonPeriod::create(now()->subWeek()->toDateString(), '1 day', now()->toDateString());
-        foreach ($weekDays as $weekDay) {
-            $weeklyData->push([
-                'date'=>$weekDay->toDateString(),
-                'tasks_count'=>DailyTask::whereDate('en_date', $weekDay->toDateString())->count()
+            $data->push([
+                'label' => $nepaliDate['y'] . "/" . $nepaliDate['m'] . "/" . $nepaliDate['d'],
+                'count' => (int)count($this->activities
+                    ->where('user_id', auth()->id())
+                    ->where('date_en', $range)
+                    ->pluck('activityLists'))
             ]);
         }
 
+
         return [
-            'labels' => $weeklyData->pluck('date')->toArray(),
+            'labels' => $data->pluck('label')->toArray(),
             'dataSets' => [
                 [
-                    'data' => $weeklyData->pluck('tasks_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ],
+                    'data' => $data->pluck('count')->toArray(),
+                    'label' => 'जम्मा नक्सा',
+                ]
             ],
         ];
     }

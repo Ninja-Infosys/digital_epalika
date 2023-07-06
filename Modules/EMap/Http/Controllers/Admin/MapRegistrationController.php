@@ -13,10 +13,10 @@ use Modules\EMap\Http\Requests\MapRegistration\UpdateMapRegistrationRequest;
 
 class MapRegistrationController extends Controller
 {
-    public function index(MapApply $mapApply){
-
+    public function index(MapApply $mapApply)
+    {
         $mapApply->load('mapRegistration');
-        if(!$mapApply->mapRegistration){
+        if (!$mapApply->mapRegistration) {
             return redirect(route('emap.admin.mapApply.mapRegistration.create', $mapApply));
         }
         return view('emap::admin.map.map-registration.index', compact('mapApply'));
@@ -36,7 +36,7 @@ class MapRegistrationController extends Controller
                 $request->validated()
             );
 
-            if($mapRegistration->wasRecentlyCreated){
+            if ($mapRegistration->wasRecentlyCreated) {
                 $mapApply->update([
                     'registration_date' => now(),
                     'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,

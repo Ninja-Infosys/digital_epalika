@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LetterHead extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -22,6 +24,7 @@ class LetterHead extends Model
         'model_type',
         'model_id',
         'header',
+        'header_en',
         'letter_head'
     ];
 

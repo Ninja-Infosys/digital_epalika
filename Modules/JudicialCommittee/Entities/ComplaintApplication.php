@@ -2,13 +2,9 @@
 
 namespace Modules\JudicialCommittee\Entities;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
 
 class ComplaintApplication extends Model
@@ -37,24 +34,7 @@ class ComplaintApplication extends Model
         'submission_no',
         'registration_no',
         'lawsuit_nature_id',
-        'complainant_province_id',
-        'complainant_district_id',
-        'complainant_local_body_id',
-        'complainant_ward_no',
-        'complainant_tole',
-        'complainant_guardian_name',
-        'complainant_relationship',
-        'complainant_age',
-        'complainant_name',
-        'defendant_province_id',
-        'defendant_district_id',
-        'defendant_local_body_id',
-        'defendant_ward_no',
-        'defendant_tole',
-        'defendant_guardian_name',
-        'defendant_relationship',
-        'defendant_age',
-        'defendant_name',
+        'complaint_subject_id',
         'subject',
         'complaint_detail',
         'date',
@@ -63,14 +43,19 @@ class ComplaintApplication extends Model
         'applicant_phone',
         'applicant_address',
         'applicant_signature',
+        'application_status'
     ];
 
-    protected $appends=[
+    protected $appends = [
         'month',
         'en_month'
     ];
 
-    public function getApplicantSignatureAttribute(): string
+    protected $casts = [
+        'application_status' => ComplaintApplicationStatusEnum::class
+    ];
+
+    public function getApplicantSignatureUrlAttribute(): string
     {
         return !empty($this->attributes['applicant_signature'])
             ? Storage::disk('public')->url($this->attributes['applicant_signature'])
@@ -104,34 +89,14 @@ class ComplaintApplication extends Model
         return $this->belongsTo(LawsuitNature::class);
     }
 
-    public function complainantProvince(): BelongsTo
+    public function complainantDefendants(): HasMany
     {
-        return $this->belongsTo(Province::class, 'complainant_province_id');
+        return $this->hasMany(ComplainantDefendant::class);
     }
 
-    public function complainantDistrict(): BelongsTo
+    public function complaintSubject(): BelongsTo
     {
-        return $this->belongsTo(District::class, 'complainant_district_id');
-    }
-
-    public function complainantLocalBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class, 'complainant_local_body_id');
-    }
-
-    public function defendantProvince(): BelongsTo
-    {
-        return $this->belongsTo(Province::class, 'defendant_province_id');
-    }
-
-    public function defendantDistrict(): BelongsTo
-    {
-        return $this->belongsTo(District::class, 'defendant_district_id');
-    }
-
-    public function defendantLocalBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class, 'defendant_local_body_id');
+        return $this->belongsTo(ComplaintSubject::class);
     }
 
     public function judicialReceiptBill(): HasOne
@@ -154,9 +119,9 @@ class ComplaintApplication extends Model
         return $this->hasMany(DefendantIssuedDeadline::class);
     }
 
-    public function dateCompensation(): HasOne
+    public function dateCompensations(): HasMany
     {
-        return $this->hasOne(DateCompensation::class);
+        return $this->hasMany(DateCompensation::class);
     }
 
     public function writtenAnswers(): HasMany
@@ -172,5 +137,30 @@ class ComplaintApplication extends Model
     public function complaintLogs(): HasMany
     {
         return $this->hasMany(ComplaintLog::class);
+    }
+
+    public function witnesses(): HasMany
+    {
+        return $this->hasMany(Witness::class);
+    }
+
+    public function supportedDocuments(): HasMany
+    {
+        return $this->hasMany(SupportedDocument::class);
+    }
+
+    public function conciliationApplication(): HasOne
+    {
+        return $this->hasOne(ConciliationApplication::class);
+    }
+
+    public function conciliationVerification(): HasOne
+    {
+        return $this->hasOne(ConciliationVerification::class);
+    }
+
+    public function conciliation(): HasOne
+    {
+        return $this->hasOne(Conciliation::class);
     }
 }

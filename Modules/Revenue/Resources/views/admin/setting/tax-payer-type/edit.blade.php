@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.dashboard')}}">
+                            <a href="{{route('admin.revenue.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -35,7 +35,7 @@
                         @csrf
                         @method('PATCH')
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -49,7 +49,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="code" class="form-label">कोड *</label>
                                 <input
                                     type="text"

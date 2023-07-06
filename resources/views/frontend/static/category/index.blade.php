@@ -52,7 +52,4 @@
         </div>
     </div>
 </section>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/static/category.css')}}">
-@endpush
 @endsection

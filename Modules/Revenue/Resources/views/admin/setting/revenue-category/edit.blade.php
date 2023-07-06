@@ -36,17 +36,17 @@
                         @csrf
                         @method('PATCH')
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="revenue_category_id" class="form-label">मुख्य वर्ग</label>
                                 <select
                                     name="revenue_category_id"
                                     class="form-control @error('revenue_category_id') is-invalid @enderror"
                                     id="revenue_category_id" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($revenueCategories as $revenueCategory)
-                                        <option {{$revenueCategory->id==old('revenue_category_id', $revenueCategory->revenue_category_id) ? 'selected' : ''}}
-                                                value="{{$revenueCategory->id}}">
-                                            {{$revenueCategory->title}}
+                                    @foreach($revenueCategories as $revenueCat)
+                                        <option {{$revenueCat->id==old('revenue_category_id', $revenueCategory->revenue_category_id) ? 'selected' : ''}}
+                                                value="{{$revenueCat->id}}">
+                                            {{$revenueCat->title}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -54,7 +54,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -63,6 +63,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>

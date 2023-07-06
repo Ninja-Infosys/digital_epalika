@@ -7929,7 +7929,7 @@ textarea.form-control-lg {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    padding: var(--ct-offcanvas-padding-y) var(--ct-offcanvas-padding-x);
+    padding-top: 5px;
     overflow-y: auto
 }
 
@@ -14438,4 +14438,11 @@ textarea.form-control-lg {
 .certificate{
     border: 10px solid transparent;
     padding: 15px;
+}
+.highcharts-menu hr{
+    margin: 0 !important;
+    border-top: 1px solid var(--primary);
+}
+#print .text-big{
+    font-size: 16px;
 }

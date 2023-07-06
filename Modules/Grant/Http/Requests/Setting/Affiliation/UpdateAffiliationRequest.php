@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Gate;
 
 class UpdateAffiliationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('affiliation_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name'=>['required', 'string', 'max:255']

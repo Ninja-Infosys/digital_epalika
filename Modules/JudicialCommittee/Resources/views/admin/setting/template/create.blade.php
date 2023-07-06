@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="type" class="form-label">टेम्प्लेट *</label>
-                                <select name="type" id="type" class="form-control">
+                                <select name="type" id="type" class="form-select">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::cases() as $type)
                                         <option {{old('type')==$type->value ? 'selected':''}}
@@ -68,19 +68,18 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="row">
-
+                            <div class="col-md-12 mb-2">
                                 @foreach( (new \Modules\JudicialCommittee\Entities\ComplaintApplication())->getTemplateOptions() as $template)
-                                    <div class="col-md-12 mt-1">
-                                        <h6>{{$template['title'] ?? ''}}</h6>
-                                    </div>
-                                    <div class="col-md-12">
-                                        @foreach($template['data'] as $key=>$templateValue)
-                                            <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                               onclick="copyText('{{$templateValue}}')">
-                                                {{$key}} : {{$templateValue}}
-                                            </a>
-                                        @endforeach
+                                    <div class="mt-2">
+                                        <h4>{{$template['title'] ?? ''}} :</h4>
+                                        <div class="button-list">
+                                            @foreach($template['data'] as $key=>$templateValue)
+                                                <button type="button" class="btn btn-outline-primary btn-xs"
+                                                        onclick="copyText('{{$templateValue}}')">
+                                                    {{$key}}
+                                                </button>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
@@ -103,13 +102,9 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 @endsection
 

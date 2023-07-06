@@ -16,8 +16,7 @@ class DisabilityReasonTableSeeder extends Seeder
             ['title'=>'दुुर्घटना'],
         ];
 
-        foreach ($disabilityReasons as $disabilityReason)
-        {
+        foreach ($disabilityReasons as $disabilityReason) {
             DisabilityReason::create($disabilityReason);
         }
     }

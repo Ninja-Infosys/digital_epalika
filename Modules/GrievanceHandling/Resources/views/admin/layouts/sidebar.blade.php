@@ -25,7 +25,7 @@
        {{request()->is('admin/grievanceHandling/setting/*') ? 'aria-expanded=true  ' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
-        <span>सेटिंग </span>
+        <span>सेटिङ </span>
         <span class="menu-arrow">
                                         <i class="fa fa-angle-right"></i>
                                     </span>
@@ -47,6 +47,13 @@
                     </a>
                 </li>
             @endcan
+
+                <li class="{{request()->is('admin/grievanceHandling/setting/grievanceSetting/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.grievanceHandling.setting.grievanceSetting.index')}}">
+                        <span> गुनासो सुन्ने अधिकारी </span>
+                    </a>
+                </li>
+
         </ul>
     </div>
 </li>

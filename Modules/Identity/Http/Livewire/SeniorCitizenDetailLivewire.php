@@ -6,12 +6,10 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
-
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -57,10 +55,8 @@ class SeniorCitizenDetailLivewire extends Component
         'patrons_name' => null,
         'patrons_name_en' => null,
         'patrons_name_address' => null,
-        'contact_person_name' => null,
-        'contact_person_name_en' => null,
-        'contact_person_phone' => null,
-        'contact_person_address' => null,
+        'patrons_phone' => null,
+        'patrons_relationship' => null,
         'is_disease' => 0,
         'disease_name' => null,
         'description' => null,
@@ -75,7 +71,9 @@ class SeniorCitizenDetailLivewire extends Component
 
     public function mount($seniorCitizenDetail = null): void
     {
-
+        if (empty($seniorCitizenDetail) && !empty(request('citizenship_no'))) {
+            $this->form['citizenship_no'] = request('citizenship_no');
+        }
         $officeSetting = OfficeSetting::first();
         $this->employeeSignatures = EmployeeSignature::Status()->get();
         $this->provinces = Province::all();
@@ -115,8 +113,10 @@ class SeniorCitizenDetailLivewire extends Component
         }
     }
 
-    protected $listeners = ['dobChanged', 'issueDateChanged', 'photoUpdated', 'setRight' => 'setRightThumb',
-        'setLeft' => 'setLeftThumb',];
+    protected $listeners = [
+        'dobChanged', 'issueDateChanged', 'photoUpdated', 'setRight' => 'setRightThumb',
+        'setLeft' => 'setLeftThumb',
+    ];
 
     public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
     {
@@ -140,8 +140,6 @@ class SeniorCitizenDetailLivewire extends Component
             'isoImage' => $isoImage,
             'quality' => $quality,
         ];
-
-
     }
 
     public function dobChanged($nepaliDate, $englishDate)
@@ -167,21 +165,22 @@ class SeniorCitizenDetailLivewire extends Component
                 'form.photo' => ['nullable'],
                 'form.left_finger' => ['nullable'],
                 'form.right_finger' => ['nullable'],
+                'form.citizenship_no' => ['required', 'unique:senior_citizen_details,citizenship_no,' . $this->seniorCitizenDetail->id],
             ])
             : array_merge($this->validationRules, [
-                'form.photo' => ['required'],
-                'form.left_finger' => ['required'],
-                'form.right_finger' => ['required'],
+                'form.photo' => ['nullable'],
+                'form.left_finger' => ['nullable'],
+                'form.right_finger' => ['nullable'],
+                'form.citizenship_no' => ['required', 'unique:senior_citizen_details,citizenship_no'],
             ]);
     }
 
     protected array $validationRules = [
         'form.name' => ['required', 'string', 'max:255'],
-        'form.dob_ad' => ['required'],
+        'form.dob_ad' => ['required', 'date'],
         'form.name_en' => ['required', 'string', 'max:255'],
         'form.dob_bs' => ['required'],
         'form.gender' => ['required'],
-        'form.citizenship_no' => ['required'],
         'form.issue_date_bs' => ['required'],
         'form.spouse' => ['required', 'string', 'max:255'],
         'form.spouse_en' => ['required', 'string', 'max:255'],
@@ -198,17 +197,15 @@ class SeniorCitizenDetailLivewire extends Component
         'form.patrons_name' => ['required', 'string', 'max:255'],
         'form.patrons_name_en' => ['required', 'string', 'max:255'],
         'form.patrons_name_address' => ['required', 'string', 'max:255'],
-        'form.contact_person_name' => ['required', 'string', 'max:255'],
-        'form.contact_person_name_en' => ['required', 'string', 'max:255'],
-        'form.contact_person_phone' => ['nullable'],
-        'form.contact_person_address' => ['required', 'string', 'max:255'],
+        'form.patrons_phone' => ['nullable'],
+        'form.patrons_relationship' => ['nullable'],
         'form.is_disease' => ['required', 'boolean'],
         'form.disease_name' => ['required_if:form.is_disease,==,1'],
         'form.description' => ['nullable'],
         'form.description_en' => ['nullable'],
         'form.is_medicine' => ['required', 'boolean'],
         'form.medicine_name' => ['required_if:form.is_medicine,==,1'],
-        'form.employee_signature_id' => ['required', 'exists:employee_signatures,id'],
+        'form.employee_signature_id' => ['nullable', 'exists:employee_signatures,id'],
     ];
 
 
@@ -239,10 +236,7 @@ class SeniorCitizenDetailLivewire extends Component
             'form.patrons_name.required' => ['संरक्षकको नाम आवश्यक छ'],
             'form.patrons_name_en.required' => ['संरक्षकको अंग्रेजीमा नाम आवश्यक छ'],
             'form.patrons_name_address.required' => ['संरक्षकको ठेगाना आवश्यक छ'],
-            'form.contact_person_name.required' => ['सम्पर्क व्यक्तिको नाम आवश्यक छ'],
-            'form.contact_person_name_en.required' => ['सम्पर्क व्यक्तिको अंग्रेजीमा नाम आवश्यक छ'],
-            'form.contact_person_phone.required' => ['सम्पर्क न. आवश्यक छ'],
-            'form.contact_person_address.required' => ['ठेगाना आवश्यक छ'],
+            'form.patrons_phone.required' => ['सम्पर्क न. आवश्यक छ'],
             'form.is_disease.required' => ['रोगको नाम आवश्यक छ'],
             'form.disease_name.required_if' => ['रोगको नाम आवश्यक छ'],
             'form.description.required' => ['हेरचाह केन्द्रको विवरण आवश्यक छ'],
@@ -251,7 +245,6 @@ class SeniorCitizenDetailLivewire extends Component
             'form.medicine_name.required_if' => ['औषधिको नाम आवश्यक छ'],
             'form.employee_signature_id.required' => ['हस्ताक्षर आवश्यक छ'],
         ];
-
     }
 
 
@@ -260,72 +253,82 @@ class SeniorCitizenDetailLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function saveForm(): Redirector|RedirectResponse|Application
+    public function saveForm()
     {
-
         $this->validate()['form'];
-        if (!empty($this->seniorCitizenDetail)) {
-            $this->seniorCitizenDetail->update($this->validate()['form']);
-            if (!empty($this->form['left_finger']['id'])) {
-                Fingerprint::find($this->form['left_finger']['id'])->update([
-                    'finger_image' => $this->form['left_finger']['image'],
-                    'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                    'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                    'iso_image' => $this->form['left_finger']['isoImage'],
-                    'quality' => $this->form['left_finger']['quality'],
+
+        if (Carbon::parse($this->form['dob_ad'])->age > 60) {
+            if (!empty($this->seniorCitizenDetail)) {
+                $this->seniorCitizenDetail->update($this->validate()['form']);
+                if (!empty($this->form['left_finger']['id'])) {
+                    Fingerprint::find($this->form['left_finger']['id'])->update([
+                        'finger_image' => $this->form['left_finger']['image'],
+                        'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                        'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                        'iso_image' => $this->form['left_finger']['isoImage'],
+                        'quality' => $this->form['left_finger']['quality'],
+                    ]);
+                }
+                if (!empty($this->form['right_finger']['id'])) {
+                    Fingerprint::find($this->form['right_finger']['id'])->update([
+                        'finger_image' => $this->form['right_finger']['image'],
+                        'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                        'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                        'iso_image' => $this->form['right_finger']['isoImage'],
+                        'quality' => $this->form['right_finger']['quality'],
+                    ]);
+                }
+                $this->dispatchBrowserEvent('toast_message', [
+                    'type' => 'success',
+                    'title' => ' जेस्ठ नागरिक विवरण सफलतापुर्बक अध्याबधिक भयो'
                 ]);
+                return redirect(route('identity.admin.seniorCitizenDetail.index'));
             }
-            if (!empty($this->form['right_finger']['id'])) {
-                Fingerprint::find($this->form['right_finger']['id'])->update([
-                    'finger_image' => $this->form['right_finger']['image'],
-                    'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                    'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                    'iso_image' => $this->form['right_finger']['isoImage'],
-                    'quality' => $this->form['right_finger']['quality'],
-                ]);
-            }
-            $this->dispatchBrowserEvent('toast_message', [
-                'type' => 'success',
-                'title' => ' जेस्ठ नागरिक विवरण सफलतापुर्बक अध्याबधिक भयो'
-            ]);
-            return redirect(route('identity.admin.seniorCitizenDetail.index'));
-        }
-        DB::transaction(function () {
-            $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] + [
+            DB::transaction(function () {
+                $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] + [
                     'user_id' => auth()->id(),
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'card_no' => DB::table('senior_citizen_details')->max('id') + 1,
                 ]);
-            $seniorCitizenDetail->fingerPrints()->create([
-                'finger_image' => $this->form['left_finger']['image'],
-                'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                'iso_image' => $this->form['left_finger']['isoImage'],
-                'finger' => 'left',
-                'quality' => $this->form['left_finger']['quality'],
-                'user_id' => auth()->id(),
-            ]);
-            $seniorCitizenDetail->fingerPrints()->create([
-                'finger_image' => $this->form['right_finger']['image'],
-                'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                'iso_image' => $this->form['right_finger']['isoImage'],
-                'finger' => 'right',
-                'quality' => $this->form['right_finger']['quality'],
-                'user_id' => auth()->id(),
-            ]);
+                if (!empty($this->form['left_finger']['image'])) {
+                    $seniorCitizenDetail->fingerPrints()->create([
+                        'finger_image' => $this->form['left_finger']['image'] ?? null,
+                        'iso_temp' => $this->form['left_finger']['isoTemplate'] ?? null,
+                        'ansi_temp' => $this->form['left_finger']['ansiTemplate'] ?? null,
+                        'iso_image' => $this->form['left_finger']['isoImage'] ?? null,
+                        'finger' => 'left',
+                        'quality' => $this->form['left_finger']['quality'] ?? null,
+                        'user_id' => auth()->id(),
+                    ]);
+                }
 
-        });
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'
-        ]);
-        $this->reset('form');
-        return back();
+                if (!empty($this->form['right_finger']['image'])) {
+                    $seniorCitizenDetail->fingerPrints()->create([
+                        'finger_image' => $this->form['right_finger']['image'] ?? null,
+                        'iso_temp' => $this->form['right_finger']['isoTemplate'] ?? null,
+                        'ansi_temp' => $this->form['right_finger']['ansiTemplate'] ?? null,
+                        'iso_image' => $this->form['right_finger']['isoImage'] ?? null,
+                        'finger' => 'right',
+                        'quality' => $this->form['right_finger']['quality'] ?? null,
+                        'user_id' => auth()->id(),
+                    ]);
+                }
+            });
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'
+            ]);
+            $this->reset('form');
+            return back();
+        } else {
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'error',
+                'title' => 'जेष्ठ नागरिक परिचयपत्रको लागि उमेर ६० वा त्यो भन्दा माथि हुनुपर्छ'
+            ]);
+        }
     }
 
-    public
-    function render(): Factory|View|Application
+    public function render(): Factory|View|Application
     {
         if (!empty($this->form['province_id'])) {
             $this->districts = Province::with('districts')->findOrFail($this->form['province_id'])->districts;

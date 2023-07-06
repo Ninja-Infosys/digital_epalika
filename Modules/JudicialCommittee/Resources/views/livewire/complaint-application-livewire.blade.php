@@ -6,7 +6,7 @@
                     <h4 class="text-info">निवेदक को विवरण</h4>
                 </legend>
                 <div class="row">
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-3 mb-2">
                         <label for="applicant_name" class="form-label"> नाम <span
                                 class="text-danger">*</span></label>
                         <input
@@ -15,27 +15,29 @@
                             class="form-control"
                             id="applicant_name"
                             placeholder="निवेदक को नाम"
+                            required
                         />
                         @error('form.applicant_name')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-3 mb-2">
                         <label for="applicant_phone" class="form-label"> फोन न:<span
                                 class="text-danger">*</span></label>
                         <input
                             type="text"
                             wire:model="form.applicant_phone"
                             class="form-control"
-                            id="applicant_name"
+                            id="applicant_phone"
                             placeholder="फोन न"
+                            required
                         />
                         @error('form.applicant_phone')
 
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-3 mb-2">
                         <label for="applicant_address" class="form-label">ठेगाना</label>
                         <input
                             type="text"
@@ -49,7 +51,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-3 mb-2">
                         <label for="applicant_signature" class="form-label">सहि</label>
                         <input
                             type="file"
@@ -66,61 +68,78 @@
             </fieldset>
         </div>
         <div class="col-md-12 mb-2">
+            @foreach($form['complainants'] as $key=>$complainant)
             <fieldset class="mb-2">
                 <legend>
                     <h4 class="text-info">वादीको विवरण</h4>
                 </legend>
                 <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <label for="complainant_name" class="form-label">वादी को नाम <span class="text-danger">*</span></label>
+                    <div class="col-md-3 mb-2">
+                        <label for="complainants.{{$key}}.name" class="form-label">वादी को नाम <span class="text-danger">*</span></label>
                         <input
                             type="text"
-                            wire:model="form.complainant_name"
+                            wire:model="form.complainants.{{$key}}.name"
                             class="form-control"
-                            id="complainant_name"
+                            id="complainants.{{$key}}.name"
                             placeholder="वादी को नाम"
+                            required
                         />
-                        @error('form.complainant_name')
+                        @error("form.complainants.$key.name")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="complainant_age" class="form-label">उमेर <span class="text-danger">*</span></label>
+                    <div class="col-md-2 mb-2">
+                        <label for="complainants.{{$key}}.age" class="form-label">उमेर <span class="text-danger">*</span></label>
                         <input
                             type="number"
-                            wire:model="form.complainant_age"
+                            wire:model="form.complainants.{{$key}}.age"
                             class="form-control"
-                            id="complainant_age"
+                            id="complainants.{{$key}}.age"
                             placeholder="उमेर"
+                            required
                         />
-                        @error('form.complainant_age')
+                        @error("form.complainants.$key.age")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="complainant_guardian_name" class="form-label">अभिभावक को नाम <span
+                    <div class="col-md-3 mb-2">
+                        <label for="complainants.{{$key}}.father_name" class="form-label">बुवाको नाम <span
                                 class="text-danger">*</span></label>
                         <input
                             type="text"
-                            wire:model="form.complainant_guardian_name"
+                            wire:model="form.complainants.{{$key}}.father_name"
                             class="form-control"
-                            id="complainant_guardian_name"
-                            placeholder="अभिभावक को नाम"
+                            id="complainants.{{$key}}.father_name"
+                            placeholder="बुवाको नाम"
+                            required
                         />
-                        @error('form.complainant_guardian_name')
+                        @error("form.complainants.$key.father_name")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="complainant_relationship" class="form-label">नाता <span class="text-danger">*</span></label>
+                    <div class="col-md-2 mb-2">
+                        <label for="complainants.{{$key}}.grandfather_name" class="form-label">हजुरबुबाको नाम</label>
                         <input
                             type="text"
-                            wire:model="form.complainant_relationship"
+                            wire:model="form.complainants.{{$key}}.grandfather_name"
                             class="form-control"
-                            id="complainant_relationship"
-                            placeholder="नाता"
+                            id="complainants.{{$key}}.grandfather_name"
+                            placeholder="हजुरबुबाको नाम"
                         />
-                        @error('form.complainant_relationship')
+                        @error("form.complainants.$key.grandfather_name")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <label for="complainants.{{$key}}.spouse_name" class="form-label">पति/पत्नीको नाम </label>
+                        <input
+                            type="text"
+                            wire:model="form.complainants.{{$key}}.spouse_name"
+                            class="form-control"
+                            id="complainants.{{$key}}.spouse_name"
+                            placeholder="पति/पत्नीको नाम"
+                        />
+                        @error("form.complainants.$key.spouse_name")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -130,225 +149,269 @@
                         <h5 class="text-info">ठेगाना</h5>
                     </legend>
                     <div class="row">
-                        <div class="col-md-4 mb-2">
-                            <label for="complainant_province_id" class="form-label">प्रदेश <span
+                        <div class="col-md-2 mb-2">
+                            <label for="complainants.{{$key}}.province_id" class="form-label">प्रदेश <span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.complainant_province_id" class="form-control"
-                                    id="complainant_province_id">
-                                <option value=""> प्रदेश छान्नुहोस्</option>
+                            <select wire:model="form.complainants.{{$key}}.province_id" class="form-select"
+                                    id="complainants.{{$key}}.province_id" required>
+                                <option value=""> - - छान्नुहोस् - - </option>
                                 @foreach($provinces as $province)
                                     <option
                                         value="{{$province->id}}">{{$province->province}}</option>
                                 @endforeach
                             </select>
-                            @error('form.complainant_province_id')
+                            @error("form.complainants.$key.province_id")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="complainant_district_id" class="form-label">जिल्ला <span
+                        <div class="col-md-2 mb-2">
+                            <label for="complainants.{{$key}}.district_id" class="form-label">जिल्ला <span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.complainant_district_id" class="form-control"
-                                    id="complainant_district_id">
-                                <option value="">जिल्ला छान्नुहोस्</option>
-                                @foreach($complainantDistricts as $district)
+                            <select wire:model="form.complainants.{{$key}}.district_id" class="form-select"
+                                    id="complainants.{{$key}}.district_id" required>
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach(!empty($form['complainants'][$key]['province_id']) ? get_districts(province_ids: $form['complainants'][$key]['province_id']):[] as $district)
                                     <option
                                         value="{{$district->id}}">{{$district->district}}</option>
                                 @endforeach
                             </select>
-                            @error('form.complainant_district_id')
+                            @error("form.complainants.$key.district_id")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="complainant_local_body_id" class="form-label">पालिका <span
+                        <div class="col-md-3 mb-2">
+                            <label for="complainants.{{$key}}.local_body_id" class="form-label">पालिका <span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.complainant_local_body_id" class="form-control"
-                                    id="complainant_local_body_id">
-                                <option value="">पालिका छान्नुहोस्</option>
-                                @foreach($complainantLocalBodies as $localBody)
+                            <select wire:model="form.complainants.{{$key}}.local_body_id" class="form-select"
+                                    id="complainants.{{$key}}.local_body_id" required>
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach(!empty($form['complainants'][$key]['district_id']) ? get_local_bodies(district_ids: $form['complainants'][$key]['district_id']):[] as $localBody)
                                     <option
                                         value="{{$localBody->id}}">{{$localBody->local_body}}</option>
                                 @endforeach
                             </select>
-                            @error('form.complainant_local_body_id')
+                            @error("form.complainants.$key.local_body_id")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="complainant_ward_no" class="form-label">वार्ड न:<span
+                        <div class="col-md-2 mb-2">
+                            <label for="complainants.{{$key}}.ward_no" class="form-label">वार्ड न:<span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.complainant_ward_no" class="form-control" id="complainant_ward_no">
-                                <option value="">वार्ड न: छान्नुहोस्</option>
-                                @foreach($complainantWards as $ward)
+                            <select wire:model="form.complainants.{{$key}}.ward_no" class="form-select"
+                                    id="complainants.{{$key}}.ward_no" required>
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach(!empty($form['complainants'][$key]['local_body_id']) ? get_local_bodies(localBodyId: $form['complainants'][$key]['local_body_id'])->ward_no:[] as $ward)
                                     <option
                                         value="{{$ward}}">{{$ward}}</option>
                                 @endforeach
                             </select>
-                            @error('form.complainant_ward_no')
+                            @error("form.complainants.$key.ward_no")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="complainant_tole" class="form-label">टोल</label>
+                        <div class="col-md-3 mb-2">
+                            <label for="complainants.{{$key}}.tole" class="form-label">टोल</label>
                             <input
                                 type="text"
-                                wire:model="form.complainant_tole"
+                                wire:model="form.complainants.{{$key}}.tole"
                                 class="form-control"
-                                id="complainant_tole"
+                                id="complainants.{{$key}}.tole"
                                 placeholder="टोल"
                             />
-                            @error('form.complainant_tole')
+                            @error("form.complainants.$key.tole")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
                 </fieldset>
             </fieldset>
-
+                @if(!$loop->first )
+                    <button type="button" class="btn btn-sm btn-danger"
+                            wire:click.prevent="removeComplainant({{$key}})">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                @endif
+                @if($loop->last)
+                    <button type="button" wire:click.prevent="addComplainants" class="btn btn-sm btn-info">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                @endif
+                @if(!$loop->last)
+                    <hr class="border border-info">
+                @endif
+            @endforeach
+        </div>
+        <div class="col-md-12 mb-2">
+            @foreach($form['defendants'] as $key=>$defendant)
             <fieldset class="mb-2">
                 <legend>
-                    <h4 class="text-info">प्रतिवादी विवरण</h4>
+                    <h4 class="text-info">प्रतिवादीको विवरण</h4>
                 </legend>
                 <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <label for="defendant_name" class="form-label">प्रतिवादी को नाम<span
-                                class="text-danger">*</span></label>
+                    <div class="col-md-3 mb-2">
+                        <label for="defendants.{{$key}}.name" class="form-label">प्रतिवादी को नाम <span class="text-danger">*</span></label>
                         <input
                             type="text"
-                            wire:model="form.defendant_name"
+                            wire:model="form.defendants.{{$key}}.name"
                             class="form-control"
-                            id="defendant_name"
+                            id="defendants.{{$key}}.name"
                             placeholder="प्रतिवादी को नाम"
+                            required
                         />
-                        @error('form.defendant_name')
+                        @error("form.defendants.$key.name")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="defendant_age" class="form-label">उमेर<span class="text-danger">*</span></label>
+                    <div class="col-md-2 mb-2">
+                        <label for="defendants.{{$key}}.age" class="form-label">उमेर <span class="text-danger">*</span></label>
                         <input
                             type="number"
-                            wire:model="form.defendant_age"
+                            wire:model="form.defendants.{{$key}}.age"
                             class="form-control"
-                            id="defendant_age"
+                            id="defendants.{{$key}}.age"
                             placeholder="उमेर"
                         />
-                        @error('form.defendant_age')
+                        @error("form.defendants.$key.age")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-
-                    <div class="col-md-4 mb-2">
-                        <label for="defendant_guardian_name" class="form-label">अभिभावक को नाम<span
+                    <div class="col-md-3 mb-2">
+                        <label for="defendants.{{$key}}.father_name" class="form-label">बुवाको नाम <span
                                 class="text-danger">*</span></label>
                         <input
                             type="text"
-                            wire:model="form.defendant_guardian_name"
+                            wire:model="form.defendants.{{$key}}.father_name"
                             class="form-control"
-                            id="defendant_guardian_name"
-                            placeholder="अभिभावक को नाम"
+                            id="defendants.{{$key}}.father_name"
+                            placeholder="बुवाको नाम"
                         />
-                        @error('form.defendant_guardian_name')
+                        @error("form.defendants.$key.father_name")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="defendant_relationship" class="form-label">नाता<span
-                                class="text-danger">*</span></label>
+                    <div class="col-md-2 mb-2">
+                        <label for="defendants.{{$key}}.grandfather_name" class="form-label">हजुरबुबाको नाम</label>
                         <input
                             type="text"
-                            wire:model="form.defendant_relationship"
+                            wire:model="form.defendants.{{$key}}.grandfather_name"
                             class="form-control"
-                            id="defendant_relationship"
-                            placeholder="नाता"
+                            id="defendants.{{$key}}.grandfather_name"
+                            placeholder="हजुरबुबाको नाम"
                         />
-                        @error('form.defendant_relationship')
+                        @error("form.defendants.$key.grandfather_name")
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-
+                    <div class="col-md-2 mb-2">
+                        <label for="defendants.{{$key}}.spouse_name" class="form-label">पति/पत्नीको नाम </label>
+                        <input
+                            type="text"
+                            wire:model="form.defendants.{{$key}}.spouse_name"
+                            class="form-control"
+                            id="defendants.{{$key}}.spouse_name"
+                            placeholder="पति/पत्नीको नाम"
+                        />
+                        @error("form.defendants.$key.spouse_name")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                 </div>
                 <fieldset class="mb-2">
                     <legend>
                         <h5 class="text-info">ठेगाना</h5>
                     </legend>
                     <div class="row">
-                        <div class="col-md-4 mb-2">
-                            <label for="defendant_province_id" class="form-label">प्रदेश <span
+                        <div class="col-md-2 mb-2">
+                            <label for="defendants.{{$key}}.province_id" class="form-label">प्रदेश <span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.defendant_province_id" class="form-control"
-                                    id="defendant_province_id">
-                                <option value=""> प्रदेश छान्नुहोस्</option>
+                            <select wire:model="form.defendants.{{$key}}.province_id" class="form-select"
+                                    id="defendants.{{$key}}.province_id">
+                                <option value=""> - - छान्नुहोस् - - </option>
                                 @foreach($provinces as $province)
                                     <option
                                         value="{{$province->id}}">{{$province->province}}</option>
                                 @endforeach
                             </select>
-                            @error('form.defendant_province_id')
+                            @error("form.defendants.$key.province_id")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="defendant_district_id" class="form-label">जिल्ला <span
+                        <div class="col-md-2 mb-2">
+                            <label for="defendants.{{$key}}.district_id" class="form-label">जिल्ला <span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.defendant_district_id" class="form-control"
-                                    id="defendant_district_id">
-                                <option value="">जिल्ला छान्नुहोस्</option>
-                                @foreach($defendantDistricts as $district)
+                            <select wire:model="form.defendants.{{$key}}.district_id" class="form-select"
+                                    id="defendants.{{$key}}.district_id">
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach(!empty($form['defendants'][$key]['province_id']) ? get_districts(province_ids: $form['defendants'][$key]['province_id']):[] as $district)
                                     <option
                                         value="{{$district->id}}">{{$district->district}}</option>
                                 @endforeach
                             </select>
-                            @error('form.defendant_district_id')
+                            @error("form.defendants.$key.district_id")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="defendant_local_body_id" class="form-label">पालिका <span
+                        <div class="col-md-3 mb-2">
+                            <label for="defendants.{{$key}}.local_body_id" class="form-label">पालिका <span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.defendant_local_body_id" class="form-control"
-                                    id="defendant_local_body_id">
-                                <option value="">पालिका छान्नुहोस्</option>
-                                @foreach($defendantLocalBodies as $localBody)
+                            <select wire:model="form.defendants.{{$key}}.local_body_id" class="form-select"
+                                    id="defendants.{{$key}}.local_body_id">
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach(!empty($form['defendants'][$key]['district_id']) ? get_local_bodies(district_ids: $form['defendants'][$key]['district_id']):[] as $localBody)
                                     <option
                                         value="{{$localBody->id}}">{{$localBody->local_body}}</option>
                                 @endforeach
                             </select>
-                            @error('form.defendant_local_body_id')
+                            @error("form.defendants.$key.local_body_id")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="defendant_ward_no" class="form-label">वार्ड न:<span
+                        <div class="col-md-2 mb-2">
+                            <label for="defendants.{{$key}}.ward_no" class="form-label">वार्ड न:<span
                                     class="text-danger">*</span></label>
-                            <select wire:model="form.defendant_ward_no" class="form-control" id="defendant_ward_no">
-                                <option value="">वार्ड न: छान्नुहोस्</option>
-                                @foreach($defendantWards as $ward)
+                            <select wire:model="form.defendants.{{$key}}.ward_no" class="form-select"
+                                    id="defendants.{{$key}}.ward_no">
+                                <option value="">- - छान्नुहोस् - -</option>
+                                @foreach(!empty($form['defendants'][$key]['local_body_id']) ? get_local_bodies(localBodyId: $form['defendants'][$key]['local_body_id'])->ward_no:[] as $ward)
                                     <option
                                         value="{{$ward}}">{{$ward}}</option>
                                 @endforeach
                             </select>
-                            @error('form.defendant_ward_no')
+                            @error("form.defendants.$key.ward_no")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="defendant_tole" class="form-label">टोल</label>
+                        <div class="col-md-3 mb-2">
+                            <label for="defendants.{{$key}}.tole" class="form-label">टोल</label>
                             <input
                                 type="text"
-                                wire:model="form.defendant_tole"
+                                wire:model="form.defendants.{{$key}}.tole"
                                 class="form-control"
-                                id="defendant_tole"
+                                id="defendants.{{$key}}.tole"
                                 placeholder="टोल"
                             />
-                            @error('form.defendant_tole')
+                            @error("form.defendants.$key.tole")
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
                 </fieldset>
             </fieldset>
+                @if(!$loop->first )
+                    <button type="button" class="btn btn-sm btn-danger"
+                            wire:click.prevent="removeDefendant({{$key}})">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                @endif
+                @if($loop->last)
+                    <button type="button" wire:click.prevent="addDefendants" class="btn btn-sm btn-info">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                @endif
+                @if(!$loop->last)
+                    <hr class="border border-info">
+                @endif
+            @endforeach
         </div>
         <div class="col-md-12">
             <fieldset class="mb-2">
@@ -362,7 +425,7 @@
                         <select
                             wire:model="form.lawsuit_nature_id"
                             class="form-select"
-                            id="lawsuit_nature_id">
+                            id="lawsuit_nature_id" required>
                             <option value="">--छान्नुहोस्--</option>
                             @foreach($lawsuitNatures as $lawsuitNature)
                                 <option
@@ -376,15 +439,20 @@
                         @enderror
                     </div>
                     <div class="col-md-6 mb-2">
-                        <label for="subject" class="form-label">विषय<span class="text-danger">*</span></label>
-                        <input
-                            type="text"
-                            wire:model="form.subject"
-                            class="form-control"
-                            id="subject"
-                            placeholder="उजुरी विषय"
-                        />
-                        @error('form.subject')
+                        <label for="complaint_subject_id" class="form-label">विषय<span class="text-danger">*</span></label>
+                        <select
+                            wire:model="form.complaint_subject_id"
+                            class="form-select"
+                            id="complaint_subject_id" required>
+                            <option value="">--छान्नुहोस्--</option>
+                            @foreach($complaintSubjects as $complaintSubject)
+                                <option
+                                    value="{{$complaintSubject->id}}">
+                                    {{$complaintSubject->subject}}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('form.complaint_subject_id')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -396,6 +464,7 @@
                             class="form-control"
                             id="date"
                             placeholder="मिति"
+                            required
                         />
                         @error('form.date')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -408,16 +477,105 @@
                                   wire:model="form.complaint_detail"
                                   class="form-control @error('form.complaint_detail') is-invalid @enderror"
                                   cols="100"
-                                  placeholder="विवरण"></textarea>
+                                  placeholder="विवरण"
+                                  required></textarea>
                         @error('form.complaint_detail')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="col-md-12 mb-2">
-                        <label for="complaint_detail" class="form-label">सम्बन्धित सदस्यहरू <span
-                                class="text-danger">*</span></label>
+                        <label for="complaint_detail" class="form-label">साक्षीहरु</label>
                         <div class="table-responsive">
-                            <table class="table table-sm table-bordered">
+                            <table class="table table-sm mb-0 table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>क्र.स.</th>
+                                    <th>नाम</th>
+                                    <th>उमेर</th>
+                                    <th>फोन</th>
+                                    <th>ठेगाना</th>
+                                    <th>
+                                        <button type="button" wire:click="addWitnesses"
+                                                class="btn btn-xs btn-outline-primary" title="नयाँ सदस्य थप्नुहोस्">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($form['witnesses'] as $key=>$witness)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.witnesses.{{$key}}.name"
+                                                class="form-control form-control-sm"
+                                                placeholder="नाम"
+                                                required
+                                            />
+                                            @error("form.witnesses.$key.name")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                wire:model="form.witnesses.{{$key}}.age"
+                                                class="form-control form-control-sm"
+                                                placeholder="उमेर"
+                                            />
+                                            @error("form.witnesses.$key.age")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.witnesses.{{$key}}.phone"
+                                                class="form-control form-control-sm"
+                                                placeholder="फोन"
+                                            />
+                                            @error("form.witnesses.$key.phone")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.witnesses.{{$key}}.address"
+                                                class="form-control form-control-sm"
+                                                placeholder="ठेगाना"
+                                            />
+                                            @error("form.witnesses.$key.address")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <button type="button" wire:click="removeWitness({{$key}})"
+                                                    class="btn btn-xs btn-outline-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="7">
+                                            विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                            @error('form.witnesses')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="complaint_detail" class="form-label">सम्बन्धित सदस्यहरू</label>
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0 table-bordered">
                                 <thead>
                                 <tr>
                                     <th>क्र.स.</th>
@@ -444,6 +602,7 @@
                                                 wire:model="form.relatedMembers.{{$key}}.name"
                                                 class="form-control form-control-sm"
                                                 placeholder="नाम"
+                                                required
                                             />
                                             @error("form.relatedMembers.$key.name")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -455,6 +614,7 @@
                                                 wire:model="form.relatedMembers.{{$key}}.phone"
                                                 class="form-control form-control-sm"
                                                 placeholder="फोन"
+                                                required
                                             />
                                             @error("form.relatedMembers.$key.phone")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -477,6 +637,7 @@
                                                 wire:model="form.relatedMembers.{{$key}}.designation"
                                                 class="form-control form-control-sm"
                                                 placeholder="पद"
+                                                required
                                             />
                                             @error("form.relatedMembers.$key.designation")
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -514,6 +675,72 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="supported_documents" class="form-label">सम्बन्धित कागजातहरू</label>
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0 table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>क्र.स.</th>
+                                    <th>फाइलको नाम</th>
+                                    <th>फाइल</th>
+                                    <th>
+                                        <button type="button" wire:click="addSupportedDocuments"
+                                                class="btn btn-xs btn-outline-primary" title="नयाँ फाइल थप्नुहोस्">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($form['supportedDocuments'] as $key=>$document)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.supportedDocuments.{{$key}}.document_name"
+                                                class="form-control form-control-sm"
+                                                placeholder="फाइलको नाम"
+                                                required
+                                            />
+                                            @error("form.supportedDocuments.$key.document_name")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="file"
+                                                wire:model="form.supportedDocuments.{{$key}}.document"
+                                                class="form-control form-control-sm"
+                                                placeholder="फाइल"
+                                                required
+                                            />
+                                            @error("form.supportedDocuments.$key.document")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <button type="button" wire:click="removeSupportedDocument({{$key}})"
+                                                    class="btn btn-xs btn-outline-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="7">
+                                            विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                            @error('form.relatedMembers')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -525,12 +752,9 @@
     </div>
 </form>
 
-@once
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-    @endpush
-@endonce
 @push('scripts')
+    <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#date").nepaliDatePicker({

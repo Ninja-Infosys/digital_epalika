@@ -40,7 +40,6 @@ class AffiliationController extends Controller
         Affiliation::create($request->validated());
         toast('सहकारी आव्धता सफलता पुर्वक थपियो', 'success');
         return back();
-
     }
 
     public function edit(Affiliation $affiliation)
@@ -58,14 +57,13 @@ class AffiliationController extends Controller
         $affiliation->update($request->validated());
         toast('सहकारी आव्धता सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.affiliation.index'));
-
     }
 
     public function destroy(Affiliation $affiliation): RedirectResponse
     {
         $this->checkAuthorization('affiliation_delete');
         $affiliation->delete();
-        toast('सहकारी आव्धता सफलता पुर्वक हटाइयो', 'success' );
+        toast('सहकारी आव्धता सफलता पुर्वक हटाइयो', 'success');
         return back();
     }
 }

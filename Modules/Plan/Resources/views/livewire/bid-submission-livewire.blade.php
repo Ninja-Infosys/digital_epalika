@@ -3,9 +3,14 @@
         <h4 class="header-title">
             आर्थिक कारोबारको विवरण
         </h4>
-        <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
-            <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
-        </button>
+        <div class="d-flex gap-1">
+            <a href="{{ route('admin.plan.project.index') }}" class="btn btn-sm btn-outline-primary">
+                <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
+            </a>
+            <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
+                <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
+            </button>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -28,13 +33,13 @@
                     <td></td>
                     <td>- -</td>
                     <td>- -</td>
-                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                     <td>- -</td>
-                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                     <td>- -</td>
                 </tr>
                 @php
-                    $balance=$project->allocated_amount;
+                    $balance=$project->project_allocated_amounts_sum_amount;
                 @endphp
                 @forelse($project->projectBidSubmissions as $key=>$projectBidSubmission)
                     @php
@@ -73,7 +78,7 @@
                     <td>रू. {{$project->allocated_amount}}</td>
                     <td>रू. {{$project->projectBidSubmissions->sum('amount')}}</td>
                     <td>
-                        रू. {{$project->allocated_amount-$project->projectBidSubmissions->sum('amount')}}</td>
+                        रू. {{$project->project_allocated_amounts_sum_amount-$project->projectBidSubmissions->sum('amount')}}</td>
                     <td></td>
                 </tr>
             </table>
@@ -255,7 +260,7 @@
 
 @once
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#date").nepaliDatePicker({

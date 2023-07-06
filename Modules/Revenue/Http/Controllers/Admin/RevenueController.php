@@ -2,8 +2,6 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Modules\Revenue\Entities\Revenue;

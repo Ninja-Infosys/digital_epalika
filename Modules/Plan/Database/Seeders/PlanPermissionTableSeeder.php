@@ -12,6 +12,7 @@ class PlanPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'planDashboard_access',
             'planArea_access',
             'planArea_create',
             'planArea_edit',
@@ -24,18 +25,10 @@ class PlanPermissionTableSeeder extends Seeder
             'budgetHead_create',
             'budgetHead_edit',
             'budgetHead_delete',
-            'budgetSource_access',
-            'budgetSource_create',
-            'budgetSource_edit',
-            'budgetSource_delete',
             'expenseHead_access',
             'expenseHead_create',
             'expenseHead_edit',
             'expenseHead_delete',
-            'grantCategory_access',
-            'grantCategory_create',
-            'grantCategory_edit',
-            'grantCategory_delete',
             'planTemplate_access',
             'planTemplate_create',
             'planTemplate_edit',

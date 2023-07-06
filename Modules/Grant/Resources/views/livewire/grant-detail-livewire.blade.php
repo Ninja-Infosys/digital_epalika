@@ -6,7 +6,7 @@
                 <label for="grant_id" class="form-label">कार्यक्रम/क्रियाकलाप * </label>
 
                 <select wire:model="form.grant_id" id="grant_id"
-                        class="form-control @error('form.grant_id') is-invalid @enderror">
+                        class="form-control @error('form.grant_id') is-invalid @enderror" required>
                     <option value="">कार्यक्रम/क्रियाकलाप छान्नुहोस्</option>
                     @foreach($grants as $grantData)
                         <option value="{{$grantData->id}}">
@@ -21,7 +21,7 @@
             <div class="col-md-4 mb-2">
                 <label for="grant_for" class="form-label">अनुदानग्राहीको प्रकार * </label>
                 <select wire:model="form.grant_for" id="grant_for"
-                        class="form-control @error('form.grant_for') is-invalid @enderror">
+                        class="form-control @error('form.grant_for') is-invalid @enderror" required>
                     <option value="">अनुदानग्राहीको प्रकार छान्नुहोस्</option>
                     @foreach($grant->grant_for_data??collect() as $grant_for)
                         <option value="{{$grant_for}}">

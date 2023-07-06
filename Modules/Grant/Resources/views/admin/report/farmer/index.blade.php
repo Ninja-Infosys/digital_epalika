@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active"> रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> कृषक रिपोर्ट </h4>
+                <h4 class="page-title"> सेवाग्राही रिपोर्ट </h4>
             </div>
         </div>
     </div>
@@ -23,17 +23,29 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कृषक रिपोर्ट</h4>
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                aria-controls="collapseExample">
-                            <i class="fa fa-filter"></i>
-                        </button>
+                        <h4 class="header-title">सेवाग्राही रिपोर्ट</h4>
+                        <div class="d-flex gap-1 justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर</i>
+                            </button>
+                            <x-html-to-excel
+                                file-name="सेवाग्राही रिपोर्ट"
+                                target-table="report-table"
+                            />
+                            <x-print-button
+                                target-element="report-table"
+                                title="सेवाग्राही रिपोर्ट"
+
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm" style="">
-                        <form id="report-filter-form" method="POST">
+                        <form id="report-filter-form" data-bs-url="{{route('admin.grant.report.farmer.report-data')}}">
                             <div class="row">
                                     <div class="col-md-3 mb-2">
                                         <label for="ward_no" class="form-label">
@@ -158,55 +170,6 @@
     </div>
 
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script>
-            $(document).ready(function () {
-                // x-csrf protection
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
-                    e.preventDefault()
-                    $.ajax({
-                        type: "post",
-                        url: "{{route('admin.grant.report.farmer.report-data')}}",
-                        data: new FormData(this),
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function () {
-                            $("#submitFormBtn").prop('disabled', true);
-                            $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
-                        },
-                        success: function (resp) {
-                            $("#submitFormBtn").prop('disabled', false);
-                            $("#collapseFilterForm").collapse('hide')
-                            $("#submitFormBtn").html("पेश गर्नुहोस्");
-                            $('#report-table').html(resp.view)
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            $('#submitFormBtn').prop('disabled', false)
-                            $("#submitFormBtn").html("पेश गर्नुहोस्");
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    });
-                })
-
-                function toastMessage(type, title) {
-                    swal.fire({
-                        title: title,
-                        toast: true,
-                        position: 'top-right',
-                        showConfirmButton: false,
-                        width: 450,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        icon: type,
-                    });
-                }
-            });
-        </script>
+        <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
     @endpush
 @endsection

@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ use Modules\ListRegistration\Enums\BusinessNatureEnum;
 class ListRegistration extends Model
 {
     use HasFactory;
+    use NepaliDateConverter;
     use SoftDeletes;
     use EventObserveTrait;
     use GetAllColumns;
@@ -48,31 +50,24 @@ class ListRegistration extends Model
         'business_nature',
         'business_nature_description',
         'date',
+        'file',
+        'en_date'
     ];
-
-//    protected $casts = [
-//        'applicant_type' => ApplicantCategoryEnum::class,
-//        'business_nature' => BusinessNatureEnum::class
-//    ];
-
-    public function getApplicantTypeAttribute(): string
-    {
-        return ApplicantCategoryEnum::tryFrom($this->attributes['applicant_type'])?->label();
-    }
-
-    public function getBusinessNatureAttribute(): string
-    {
-        return BusinessNatureEnum::tryFrom($this->attributes['business_nature'])?->label();
-    }
+    protected $appends = [
+        'to_day_date'
+    ];
+    protected $casts = [
+        'applicant_type' => ApplicantCategoryEnum::class,
+        'business_nature' => BusinessNatureEnum::class
+    ];
 
     protected function ApplicationPhoto(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -81,12 +76,23 @@ class ListRegistration extends Model
     protected function RegistrationCertificate(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
+    }
+
+    protected function File(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
+            set: fn ($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/file/', 'public')
                 : null
         );
     }
@@ -94,11 +100,10 @@ class ListRegistration extends Model
     protected function PanPhoto(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -107,11 +112,10 @@ class ListRegistration extends Model
     protected function TaxPaymentCertificate(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -120,11 +124,10 @@ class ListRegistration extends Model
     protected function LicensePhoto(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ?
+            get: fn ($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-
-            set: fn($value) => (!empty($value) && !is_string($value))
+            set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
                 : null
         );
@@ -138,5 +141,10 @@ class ListRegistration extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function getToDayDateAttribute(): string
+    {
+        return $this->get_today_nepali_date();
     }
 }

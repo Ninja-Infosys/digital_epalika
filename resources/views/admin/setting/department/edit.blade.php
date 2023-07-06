@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.department.index')}}">बिभाग</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">बिभाग सम्पादन</li>
                     </ol>
@@ -26,20 +26,18 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">विभाग सम्पादन</h4>
-                        <a href="{{route('admin.department.index')}}"
+                        <a href="{{route('admin.generalSetting.department.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> विभाग सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.department.update',$department)}}" method="post"
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.generalSetting.department.update',$department)}}" method="post">
                         @csrf
                         @method('PUT')
-                        <div class="col-md-12 p-2 mb-2">
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="title" class="form-label">विभाग *</label>
                                     <input id="title" type="text" name="title" placeholder="बिभाग"
                                            class="form-control @error('title') is-invalid @enderror" value="{{old('title', $department->title)}}">
@@ -48,7 +46,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
                         <button type="submit" class="btn btn-primary">
                             पेश गर्नुहोस्
                         </button>

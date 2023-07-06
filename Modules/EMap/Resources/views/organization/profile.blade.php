@@ -1,5 +1,4 @@
 @extends('emap::organization.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -7,14 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('organization.admin.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">संगठन</li>
+                        <li class="breadcrumb-item active">मेरो प्रोफाइल</li>
                     </ol>
                 </div>
-                <h4 class="page-title">संगठन </h4>
+                <h4 class="page-title">मेरो प्रोफाइल</h4>
             </div>
         </div>
     </div>
@@ -24,100 +23,18 @@
                 <div class="card-body">
                     <img src="{{$organization->profile_photo_url}}" class="rounded-circle avatar-lg img-thumbnail"
                          alt="profile-image">
-
                     <h4 class="mb-0">{{$organization->name}}</h4>
-                    {{--                    <p class="text-muted">@webdesigner</p>--}}
-
                     <div class="text-start mt-3">
-
                         <p class="text-muted mb-2 font-13"><strong>नाम :</strong> <span
                                 class="ms-2">{{$organization->name}}</span>
                         </p>
                         <p class="text-muted mb-2 font-13"><strong>इमेल :</strong><span
                                 class="ms-2">{{$organization->email}}</span></p>
-
                         <p class="text-muted mb-2 font-13"><strong>फोन :</strong> <span
                                 class="ms-2">{{$organization->phone}}</span></p>
-
                     </div>
-
                 </div>
             </div>
-
-{{--            <div class="card">--}}
-{{--                <div class="card-body">--}}
-{{--                    <h4 class="header-title mb-3">Activities</h4>--}}
-
-{{--                    <div class="inbox-widget" data-simplebar style="max-height: 350px;">--}}
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-2.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Tomaslau</p>--}}
-{{--                            <p class="inbox-item-text">I've finished it! See you so...</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Stillnotdavid</p>--}}
-{{--                            <p class="inbox-item-text">This theme is awesome!</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Kurafire</p>--}}
-{{--                            <p class="inbox-item-text">Nice to meet you</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-5.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Shahedk</p>--}}
-{{--                            <p class="inbox-item-text">Hey! there I'm available...</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-6.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Adhamdannaway</p>--}}
-{{--                            <p class="inbox-item-text">This theme is awesome!</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Stillnotdavid</p>--}}
-{{--                            <p class="inbox-item-text">This theme is awesome!</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inbox-item">--}}
-{{--                            <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle"--}}
-{{--                                                             alt=""></div>--}}
-{{--                            <p class="inbox-item-author">Kurafire</p>--}}
-{{--                            <p class="inbox-item-text">Nice to meet you</p>--}}
-{{--                            <p class="inbox-item-date">--}}
-{{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    </div> --}}
-{{--                </div>--}}
-{{--            </div> --}}
-
         </div> <!-- end col-->
 
         <div class="col-lg-8 col-xl-8">
@@ -147,7 +64,7 @@
                     <div class="tab-content">
                         @if($organization->is_organization==0)
                         <div class="tab-pane {{$organization->is_organization==0 ? 'show active':''}}" id="aboutme">
-                            <table class="table table-sm mb-0 table-striped table-hover">
+                            <table class="table table-sm table-striped table-bordered">
                                 <tr>
                                     <th>नाम</th>
                                     <td>{{$organization->userDetail->name_ne ?? ''}}
@@ -221,7 +138,7 @@
                         @endif
                             @if($organization->is_organization==1)
                         <div class="tab-pane {{$organization->is_organization==1 ? 'show active':''}}" id="timeline">
-                            <table class="table table-sm mb-0 table-striped table-hover">
+                            <table class="table table-sm mb-0 table-striped table-bordered">
                                 <tr>
                                     <th>नाम</th>
                                     <td>{{$organization->organizationDetail->org_name_ne ?? ''}}
@@ -257,7 +174,6 @@
                             </table>
                         </div>
                             @endif
-
                         <div class="tab-pane" id="settings">
                             <div class="row">
                                 @if($organization->is_organization==0)
@@ -266,7 +182,7 @@
                                         <div class="card-header">नागरिकता (आगाडी)</div>
                                         <div class="card-body">
                                             <img src="{{$organization->userDetail->citizenship_front_url}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                 height="100" width="200">
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +191,7 @@
                                         <div class="card-header">नागरिकता (पछाडी)</div>
                                         <div class="card-body">
                                             <img src="{{$organization->userDetail->citizenship_back_url}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                 height="100" width="200">
                                         </div>
                                     </div>
                                 </div>
@@ -284,7 +200,7 @@
                                         <div class="card-header">NECको प्रमाणपत्र</div>
                                         <div class="card-body">
                                             <img src="{{$organization->userDetail->nec_certificate_url}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                 height="100" width="200">
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +212,7 @@
                                         <div class="card-body">
                                             <img
                                                 src="{{$organization->organizationDetail->org_registration_document_url ?? ''}}"
-                                                alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                alt="" height="100" width="200">
                                         </div>
                                     </div>
                                 </div>
@@ -305,7 +221,7 @@
                                         <div class="card-header">कम्पनी PANको प्रमाणपत्र</div>
                                         <div class="card-body">
                                             <img src="{{$organization->organizationDetail->org_pan_document_url ?? ''}}"
-                                                 alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                 alt="" height="100" width="200">
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +230,7 @@
                                         <div class="card-header">लोगो</div>
                                         <div class="card-body">
                                             <img src="{{$organization->organizationDetail->logo_url ?? ''}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                 height="100" width="100">
                                         </div>
                                     </div>
                                 </div>
@@ -323,7 +239,7 @@
                             @if($organization->is_organization==1)
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-sm mb-0 table-striped table-hover">
+                                    <table class="table table-sm mb-0 table-striped table-bordered">
                                         <thead>
                                         <tr>
                                             <th>क्र.सं</th>
@@ -336,7 +252,7 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$taxClearance->year ?? ''}}</td>
-                                                <td><img src="{{$taxClearance->document_url}}" alt="" style="max-width: 100%;height: 200px;object-fit: contain;"></td>
+                                                <td><img src="{{$taxClearance->document_url}}" alt="" height="100" width="200"></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

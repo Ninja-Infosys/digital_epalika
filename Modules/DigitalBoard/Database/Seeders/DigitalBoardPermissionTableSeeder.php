@@ -12,6 +12,7 @@ class DigitalBoardPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'digitalBoardDashboard_access',
             'digitalBoardVideo_access',
             'digitalBoardVideo_create',
             'digitalBoardVideo_edit',
@@ -24,10 +25,6 @@ class DigitalBoardPermissionTableSeeder extends Seeder
             'digitalBoardNews_create',
             'digitalBoardNews_edit',
             'digitalBoardNews_delete',
-            'employee_access',
-            'employee_create',
-            'employee_edit',
-            'employee_delete',
         ];
 
         $this->storePermission($permissions);

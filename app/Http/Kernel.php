@@ -7,11 +7,14 @@ use App\Http\Middleware\AuthLock;
 use App\Http\Middleware\CheckPinMiddleware;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\InstallerMiddleware;
+use App\Http\Middleware\LicenseMiddleware;
 use App\Http\Middleware\PageRenderMiddleware;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
+use App\Http\Middleware\UpdateMiddleware;
 use App\Http\Middleware\ValidateSignature;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
@@ -62,11 +65,12 @@ class Kernel extends HttpKernel
             StartSession::class,
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
-            SubstituteBindings::class
+            SubstituteBindings::class,
+            'license',
         ],
 
         'api' => [
-             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             SubstituteBindings::class,
         ],
@@ -94,6 +98,9 @@ class Kernel extends HttpKernel
         'password.check' => CheckOrganizationPassword::class,
         'auth.lock' => AuthLock::class,
         'pageRender' => PageRenderMiddleware::class,
-        'checkPinMiddleware'=>CheckPinMiddleware::class
+        'checkPinMiddleware' => CheckPinMiddleware::class,
+        'update' => UpdateMiddleware::class,
+        'license' => LicenseMiddleware::class,
+        'installerMiddleware' => InstallerMiddleware::class
     ];
 }

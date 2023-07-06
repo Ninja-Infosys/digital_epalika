@@ -76,7 +76,7 @@ class DesignerDetailEditLivewire extends Component
             'designerDetails.'.$this->dataToEdit.'.post' => ['required'],
             'designerDetails.'.$this->dataToEdit.'.nec_council_no' => ['required'],
             'designerDetails.'.$this->dataToEdit.'.local_body_registration_no' => ['required'],
-            'designerDetails.'.$this->dataToEdit.'.consulting_firm_name' => ['required'],
+            //'designerDetails.'.$this->dataToEdit.'.consulting_firm_name' => ['required'],
         ];
     }
 
@@ -106,10 +106,9 @@ class DesignerDetailEditLivewire extends Component
 
             $this->reset('dataToEdit');
 
-            $this->dispatchBrowserEvent('alert_message', [
+            $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
-                'title' => 'धन्यबाद',
-                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
+                'title' => 'फारम सफलतापूर्वक सम्पादन गरियो'
             ]);
         }
     }

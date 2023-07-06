@@ -42,6 +42,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -50,7 +51,7 @@
 
                             <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="title" class="form-label">कोड रङ *</label>
+                                <label for="color" class="form-label">कोड रङ *</label>
                                 <input
                                     type="color"
                                     name="color"
@@ -58,6 +59,7 @@
                                     class="form-control @error('color') is-invalid @enderror"
                                     id="color"
                                     placeholder="कोड रङ"
+                                    required
                                 />
                                 @error('color')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -65,7 +67,7 @@
                             </div>
 
                         </div>
-
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

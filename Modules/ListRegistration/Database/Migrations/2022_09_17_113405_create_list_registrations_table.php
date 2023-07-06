@@ -9,15 +9,15 @@ return new class () extends Migration {
     {
         Schema::create('list_registrations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fiscal_year_id')->constrained();
-            $table->string('registration_no')->comment('दर्ता नं');
+            $table->foreignId('fiscal_year_id')->comment('आर्थिक वर्ष')->constrained();
+            $table->string('registration_no')->comment('दर्ता नं.');
             $table->string('applicant_type')->nullable()->comment('आवेदक प्रकार');
             $table->string('name')->nullable()->comment('नाम');
             $table->string('address')->nullable()->comment('ठेगाना');
             $table->string('mailing_address')->nullable()->comment('पत्राचार ठेगाना');
             $table->string('main_person')->nullable()->comment('मुख्य व्यक्ति');
             $table->string('telephone')->nullable()->comment('टेलिफोन');
-            $table->string('mobile_no')->nullable()->comment('मोबाइल नम्बर');
+            $table->string('mobile_no')->nullable()->comment('फोन नम्बर');
             $table->string('application_photo')->nullable()->comment('आवेदन फोटो');
             $table->string('registration_certificate')->nullable()->comment('दर्ता प्रमाणपत्र');
             $table->string('pan_photo')->nullable()->comment('प्यान फोटो');

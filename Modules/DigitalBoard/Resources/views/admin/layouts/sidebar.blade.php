@@ -15,7 +15,7 @@
 @can('digitalBoardNotice_access')
 <li class="{{request()->is('admin/digitalBoard/Notice/notice*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.notice.index','Notice')}}">
-        <i class="fa fa-paperclip"></i>
+        <i class="fa fa-info-circle"></i>
         <span> सूचनाहरु </span>
     </a>
 </li>
@@ -28,12 +28,11 @@
     </a>
 </li>
 @endcan
-@can('employee_access')
-<li class="{{request()->is('admin/digitalBoard/employee*') ? 'active' : ''}}">
-    <a href="{{route('admin.digitalBoard.employee.index')}}">
-        <i class="fa fa-user"></i>
-        <span>जनप्रतिनिधि/कर्मचारीहरु</span>
-    </a>
-</li>
+@can('service_access')
+    <li class="{{request()->routeIs('admin.digitalBoard.service.*') ? 'active' : ''}}">
+        <a href="{{route('admin.digitalBoard.service.index')}}">
+            <i class="fa fa-scroll"></i>
+            <span> सेवाहरु</span>
+        </a>
+    </li>
 @endcan
-

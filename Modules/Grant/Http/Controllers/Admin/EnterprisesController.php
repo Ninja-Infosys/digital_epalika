@@ -3,11 +3,9 @@
 namespace Modules\Grant\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Routing\Redirector;
@@ -33,7 +31,6 @@ class EnterprisesController extends Controller
             ->latest()->paginate(10);
 
         return view('grant::admin.enterprise.index', compact('enterprises'));
-
     }
 
     public function create()
@@ -43,7 +40,7 @@ class EnterprisesController extends Controller
         $farmers = Farmer::all();
         $enterpriseTypes=EnterpriseType::all();
 
-        return view('grant::admin.enterprise.create', compact('farmers','enterpriseTypes'));
+        return view('grant::admin.enterprise.create', compact('farmers', 'enterpriseTypes'));
     }
 
     public function store(StoreEnterprisesRequest $request)
@@ -58,7 +55,7 @@ class EnterprisesController extends Controller
             return $enterprise;
         });
 
-        if($request->ajax()){
+        if ($request->ajax()) {
             return response()->json([
                 'data'=> [
                     'enterprise_id'=> $enterprises->id,
@@ -81,7 +78,7 @@ class EnterprisesController extends Controller
         $farmers=Farmer::all();
 
 
-        return view('grant::admin.enterprise.edit', compact('enterprise','enterpriseTypes', 'farmers'));
+        return view('grant::admin.enterprise.edit', compact('enterprise', 'enterpriseTypes', 'farmers'));
     }
 
     public function update(UpdateEnterprisesRequest  $request, Enterprise $enterprise): Redirector|Application|RedirectResponse
@@ -115,15 +112,15 @@ class EnterprisesController extends Controller
     {
         $this->checkAuthorization('enterprise_access');
 
-        $enterprise->load('province', 'district', 'localBody','enterpriseType', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $enterprise->load('province', 'district', 'localBody', 'enterpriseType', 'farmers', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
         $grantPrograms = GrantProgram::all();
-        return view('grant::admin.enterprise.show', compact('enterprise','grantPrograms'));
+        return view('grant::admin.enterprise.show', compact('enterprise', 'grantPrograms'));
     }
     public function grantDetails(Enterprise $enterprise)
     {
         $this->checkAuthorization('enterprise_access');
 
-        $enterprise->load('province', 'district', 'localBody','enterpriseType', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $enterprise->load('province', 'district', 'localBody', 'enterpriseType', 'farmers', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
         return view('grant::admin.enterprise.grant_details', compact('enterprise'));
     }
 }

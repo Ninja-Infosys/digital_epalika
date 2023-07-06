@@ -29,8 +29,10 @@ class ApplyMapNotice extends Model
         'data',
         'rejected_at',
         'remarks',
+        'type',
         'sent_to_admin_at',
     ];
+
 
     protected $casts = [
         'file_type' => NoticeTypeEnum::class,

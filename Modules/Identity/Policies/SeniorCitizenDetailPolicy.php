@@ -15,7 +15,6 @@ class SeniorCitizenDetailPolicy
     {
         return $user->id === $seniorCitizenDetail->user_id ? Response::allow()
             : Response::denyAsNotFound();
-
     }
 
     public function view(User $user, SeniorCitizenDetail $seniorCitizenDetail): Response
@@ -25,7 +24,6 @@ class SeniorCitizenDetailPolicy
                 : Response::denyAsNotFound();
         }
         return Response::allow();
-
     }
 
     public function update(User $user, SeniorCitizenDetail $seniorCitizenDetail): Response
@@ -35,7 +33,6 @@ class SeniorCitizenDetailPolicy
                 : Response::denyAsNotFound();
         }
         return Response::allow();
-
     }
 
     public function delete(User $user, SeniorCitizenDetail $seniorCitizenDetail): Response

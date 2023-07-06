@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up()
     {
         Schema::create('personal_details', function (Blueprint $table) {
@@ -15,12 +14,12 @@ return new class extends Migration
             $table->string('name')->nullable()->comment('नाम');
             $table->string('phone_no')->nullable()->comment('सम्पर्क नं');
             $table->boolean('is_minor')->default(0);
-            $table->string('gender')->default('male');
+            $table->string('gender')->comment('लिङ्ग');
             $table->string('citizenship_no')->nullable()->comment('नागरिकता नं');
-            $table->foreignId('province_id')->nullable()->constrained('provinces');
-            $table->foreignId('district_id')->nullable()->constrained('districts');
-            $table->foreignId('local_body_id')->nullable()->constrained('local_bodies');
-            $table->integer('ward_no')->nullable()->comment('वार्ड नं');
+            $table->foreignId('province_id')->nullable()->comment('प्रदेश')->constrained();
+            $table->foreignId('district_id')->nullable()->comment('जिल्ला')->constrained();
+            $table->foreignId('local_body_id')->nullable()->comment('पालिका')->constrained();
+            $table->integer('ward_no')->nullable()->comment('वडा नं');
             $table->string('tole')->nullable()->comment('टोल');
             $table->timestamps();
             $table->softDeletes();

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('invoice_particulars', function (Blueprint $table) {
-            $table->integer('due')->default(0)->after('rate');
+            $table->integer('due')->comment('बाकि')->default(0)->after('rate');
         });
     }
 
@@ -25,7 +25,6 @@ return new class extends Migration {
     public function down()
     {
         Schema::table('invoice_particulars', function (Blueprint $table) {
-
         });
     }
 };

@@ -53,32 +53,6 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="grant_category_id">अनुदान किसिम</label>
-                                    <select name="grant_category_id"
-                                            id="grant_category_id" class="form-select">
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($grantCategories as $grantCategory)
-                                            <option
-                                                {{$grantCategory->id==request('grant_category_id') ? 'selected' : ''}}
-                                                value="{{$grantCategory->id}}">{{$grantCategory->title}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <label for="budget_source_id">बजेट श्रोत</label>
-                                    <select name="budget_source_id"
-                                            id="budget_source_id" class="form-select">
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($budgetSources as $budgetSource)
-                                            <option
-                                                {{$budgetSource->id==request('budget_source_id') ? 'selected' : ''}}
-                                                value="{{$budgetSource->id}}">{{$budgetSource->source_name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3 mb-2">
                                     <label for="expense_head_id">खर्च शिर्षक</label>
                                     <select name="expense_head_id"
                                             id="expense_head_id" class="form-select">
@@ -134,18 +108,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-sm table-striped">
+                    <table id="demo-foo-accordion" class="table table-bordered mb-0 toggle-arrow-tiny">
                         <thead>
                         <tr>
-                            <th>क्र.स</th>
+                            <th data-toggle="true">क्र.स</th>
                             <th>दर्ता नं.</th>
-                            <th class="text-nowrap">आयोजना/कार्यक्रमको नाम</th>
-                            <th class="text-nowrap">योजना उपक्षेत्र</th>
-                            <th class="text-nowrap">सुरु हुने मिति</th>
-                            <th class="text-nowrap">वडा नं.</th>
-                            <th class="text-nowrap">स्वीकृत रकम</th>
-                            <th class="text-nowrap">आयोजनाको अवस्था</th>
-                            <th>#</th>
+                            <th>आयोजना/कार्यक्रमको नाम</th>
+                            <th data-hide="phone">योजना उपक्षेत्र</th>
+                            <th data-hide="phone">सुरु हुने मिति</th>
+                            <th data-hide="phone">वडा नं.</th>
+                            <th data-hide="phone">स्वीकृत रकम</th>
+                            <th data-hide="phone">आयोजनाको अवस्था</th>
+                            <th data-hide="all">लागत</th>
+                            <th data-hide="all">सम्झौता</th>
+                            <th data-hide="all">अन्य</th>
+                            <th data-hide="all">कार्य</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -165,86 +142,80 @@
                                     </a>
                                 </td>
                                 <td>{{$project->planArea->area_name??''}}</td>
-                                <td>{{$project->project_start_date}}</td>
+                                <td>
+                                    @if($project->project_start_date)
+                                    {{$project->project_start_date}}
+                                    @else
+                                        <p class="text-danger">सुरु भएको छैन</p>
+                                    @endif
+                                </td>
                                 <td>{{implode(',',$project->ward_no)}}</td>
-                                <td>रू. {{$project->allocated_amount}}</td>
+                                <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
                                 <td>
-                                    <div class="btn-group dropstart">
-                                        <a href="{{route('admin.plan.project.show',$project)}}"
-                                           class="btn btn-sm btn-primary">
-                                            <i class="fa fa-eye"> विवरण </i>
+                                    <a class="btn btn-xs btn-outline-secondary" href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
+                                        <i class="fa fa-list"> आयोजनाको लागत</i>
+                                    </a>
+                                    @can('technicalCostEstimate_access')
+                                        <a class="btn btn-xs btn-outline-secondary"
+                                           href="{{route('admin.plan.project.technicalCostEstimate.index',$project)}}">
+                                            <i class="fa fa-user-cog"> प्राविधिक लागत</i>
                                         </a>
-                                        <button type="button" class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            <i class="fa fa-angle-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu" style="">
-                                            <a class="dropdown-item"
-                                               href="{{route('admin.plan.project.edit',$project)}}">
-                                                <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
+                                    @endcan
+                                </td>
+                                <td>
+                                    <a class="btn btn-xs btn-outline-primary"
+                                       href="{{route('admin.plan.project.projectAgreement.index',$project)}}">
+                                        <i class="fa fa-handshake"> योजना सम्झौता</i>
+                                    </a>
+                                    @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
+                                        @if($project->is_contracted)
+                                            <a class="btn btn-xs btn-outline-primary"
+                                               href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
+                                                <i class="fa fa-money-bill"> आर्थिक कारोबार</i>
                                             </a>
-                                            <a class="dropdown-item"
-                                               href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
-                                                <i class="fa fa-list"> आयोजनाको लागत सम्वन्धि विवरण</i>
+                                            <a class="btn btn-xs btn-outline-primary"
+                                               href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
+                                                <i class="fa fa-cog"> मर्मत संम्भार सम्बन्धी</i>
                                             </a>
-                                            @can('technicalCostEstimate_access')
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.technicalCostEstimate.index',$project)}}">
-                                                    <i class="fa fa-check"> प्राविधिक लागत अनुमान</i>
-                                                </a>
-                                            @endcan
-                                            @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
-                                                    <i class="fa fa-list"> योजना सम्झौता</i>
-                                                </a>
-                                                @if($project->is_contracted)
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
-                                                        <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
-                                                    </a>
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
-                                                        <i class="fa fa-list"> आयोजना मर्मत संम्भार सम्बन्धी
-                                                            व्यवस्था </i>
-                                                    </a>
-                                                @endif
-                                            @else
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
-                                                    <i class="fa fa-list"> योजना सम्झौता </i>
-                                                </a>
-                                                @if($project->is_contracted)
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                        <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
-                                                    </a>
-                                                @endif
-                                            @endif
-                                            @if($project->is_contracted)
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
-                                                    <i class="fa fa-file-alt"> सम्झौताको शर्तहरु </i>
-                                                </a>
-                                                @can('projectDocument_access')
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.plan.project.projectDocument.index',$project)}}">
-                                                        <i class="fa fa-file-alt"> सम्बन्धित कागजातहरू </i>
-                                                    </a>
-                                                @endcan
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.fileList',$project)}}">
-                                                    <i class="fa fa-file"> योजना संग सम्बन्धित फोटो/फाईलहरू </i>
-                                                </a>
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectDeadlineExtension.index',$project)}}">
-                                                    <i class="fa fa-calendar-alt"> म्याद थप </i>
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
+                                        @endif
+                                    @else
+                                        @if($project->is_contracted)
+                                            <a class="btn btn-xs btn-outline-primary"
+                                               href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
+                                                <i class="fa fa-money-bill"> आर्थिक कारोबार </i>
+                                            </a>
+                                        @endif
+                                    @endif</td>
+                                <td>
+                                    @if($project->is_contracted)
+                                        <a class="btn btn-xs btn-outline-success"
+                                           href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
+                                            <i class="fa fa-clipboard-check"> शर्तहरु </i>
+                                        </a>
+                                        @can('projectDocument_access')
+                                            <a class="btn btn-xs btn-outline-success"
+                                               href="{{route('admin.plan.project.projectDocument.index',$project)}}">
+                                                <i class="fa fa-file-contract"> सम्बन्धित कागजातहरू </i>
+                                            </a>
+                                        @endcan
+                                        <a class="btn btn-xs btn-outline-success"
+                                           href="{{route('admin.plan.project.fileList',$project)}}">
+                                            <i class="fa fa-file"> सम्बन्धित फोटो/फाईलहरू </i>
+                                        </a>
+                                        <a class="btn btn-xs btn-outline-success"
+                                           href="{{route('admin.plan.project.projectDeadlineExtension.index',$project)}}">
+                                            <i class="fa fa-calendar-alt"> म्याद थप </i>
+                                        </a>
+                                    @else
+                                        <p class="text-center">सम्झौता भएको छैन ।</p>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{route('admin.plan.project.show',$project)}}" class="btn btn-xs btn-outline-info">
+                                        <i class="fa fa-eye"></i> विवरण हेर्नुहोस्</a>
+                                    <a href="{{route('admin.plan.project.edit',$project)}}" class="btn btn-xs btn-outline-warning">
+                                        <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्</a>
                                 </td>
                             </tr>
                         @empty
@@ -288,5 +259,6 @@
                 })
             })
         </script>
+        <script src="{{asset('assets/backend/js/plugins/footable.min.js')}}"></script>
     @endpush
 @endsection

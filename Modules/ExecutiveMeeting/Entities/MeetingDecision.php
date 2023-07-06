@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 
 class MeetingDecision extends Model
 {
@@ -22,31 +21,21 @@ class MeetingDecision extends Model
     ];
 
     protected $fillable = [
-        'meeting_event_id',
-        'meeting_for',
-        'subject',
+        'meeting_id',
+        'meeting_agenda_id',
         'date',
         'en_date',
         'description',
-        'decision_file',
+        'user_id'
     ];
 
-    public function meetingEvent(): BelongsTo
+    public function meeting(): BelongsTo
     {
-        return $this->belongsTo(MeetingEvent::class);
+        return $this->belongsTo(Meeting::class);
     }
 
-    public function setDecisionFileAttribute($value)
+    public function meetingAgenda(): BelongsTo
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['decision_file'] = $value->store('municipalMeeting', 'public');
-        }
-    }
-
-    public function getDecisionFileUrlAttribute(): string
-    {
-        return $this->attributes['decision_file']
-            ? Storage::disk('public')->url($this->attributes['decision_file'])
-            : '';
+        return $this->belongsTo(MeetingAgenda::class);
     }
 }

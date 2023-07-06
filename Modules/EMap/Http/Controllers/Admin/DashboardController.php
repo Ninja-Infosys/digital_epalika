@@ -4,10 +4,8 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapApply;
@@ -20,36 +18,40 @@ use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
 class DashboardController extends Controller
 {
-    public function __invoke(): Factory|View|Application
+    use NepaliDateConverter;
+
+    public function __invoke()
     {
+        $this->checkAuthorization('eMapDashboard_access');
+
+        if (request()->ajax()) {
+            return [
+                'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
+                'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
+                'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
+                'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
+                'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
+                'mapAccordingToMonth' => $this->mapAccordingToMonth(),
+
+            ];
+        }
         $organization_count = Organization::count();
         $map_apply_count = MapApply::count();
-        $mapAppliesAccordingToFiscalYears = $this->getMapApplyAccordingToFiscalYear();
-        $mapApplyBuildingUsageAccordingToFiscalYears = $this->getMapApplyBuildingUsageAccordingToFiscalYear();
-        $mapApplyBuildingCategoryAccordingToFiscalYears = $this->getMapApplyBuildingCategoryAccordingToFiscalYear();
-        $mapApplyConstructionTypeAccordingToFiscalYears = $this->getMapApplyConstructionTypeAccordingToFiscalYear();
-        $mapApplyStructureTypeAccordingToFiscalYears = $this->getMapApplyStructureTypeAccordingToFiscalYear();
-
-        return view('emap::admin.dashboard', compact('mapApplyStructureTypeAccordingToFiscalYears', 'mapApplyBuildingUsageAccordingToFiscalYears', 'mapApplyBuildingCategoryAccordingToFiscalYears', 'organization_count', 'mapApplyConstructionTypeAccordingToFiscalYears', 'map_apply_count', 'mapAppliesAccordingToFiscalYears'));
+        return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', ));
     }
 
 
-    public function getMapApplyStructureTypeAccordingToFiscalYear(): array
+    public function getMapApplyStructureTypeAccordingToFiscalYear()
     {
-        $structure = StructureType::withCount(['mapApply'])
+        return StructureType::withCount(['mapApply'])
             ->selectRaw('id,title')
-            ->get();
-
-        return [
-            'labels' => $structure->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $structure->pluck('map_apply_count')->toArray(),
-                    'label' => 'जम्मा नक्सा',
-                    'fill' => 'false',
-                ],
-            ],
-            ];
+            ->get()
+            ->map(function ($structure) {
+                return [
+                    'name' => $structure->title,
+                    'data' => (int)$structure->map_apply_count
+                ];
+            });
     }
 
     public function getMapApplyAccordingToFiscalYear(): array
@@ -61,24 +63,29 @@ class DashboardController extends Controller
                 $query->where('application_type', ApplicationFormTypeEnum::MAP_VERIFIED);
             },])
             ->selectRaw('id,title')
-            ->get();
+            ->get()
+        ->map(function ($fiscalYear) {
+            return [
+                'title' => $fiscalYear->title,
+                'map_applies_count'=> (int)$fiscalYear->map_applies_count,
+                'mapRegistrationCount'=> (int)$fiscalYear->mapRegistrationCount,
+                'mapVerificationCount' => (int)$fiscalYear->mapVerificationCount,
+            ];
+        });
         return [
             'labels' => $fiscalYear->pluck('title')->toArray(),
             'dataSets' => [
                 [
                     'data' => $fiscalYear->pluck('map_applies_count')->toArray(),
                     'label' => 'जम्मा नक्सा',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYear->pluck('mapRegistrationCount')->toArray(),
                     'label' => 'नक्सा दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYear->pluck('mapVerificationCount')->toArray(),
                     'label' => 'नक्सा प्रमाणित',
-                    'fill' => 'false',
                 ]
             ],
 
@@ -89,7 +96,7 @@ class DashboardController extends Controller
     public function getMapApply($hasCurrentFiscalYear = null): Collection
     {
         return DB::table('map_applies')
-            ->select('usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
+            ->select('registration_date', 'usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
             ->whereNull('deleted_at')
             ->where(function ($query) use ($hasCurrentFiscalYear) {
                 if ($hasCurrentFiscalYear) {
@@ -99,33 +106,27 @@ class DashboardController extends Controller
             ->get();
     }
 
-    public function getMapApplyBuildingUsageAccordingToFiscalYear(): array
+    public function getMapApplyBuildingUsageAccordingToFiscalYear()
     {
         $officeSetting = $this->getOfficeSetting();
 
-        $map_applies = $this->getMapApply($officeSetting->fiscal_year_id)
-            ->groupBy('usage')
-            ->map(function ($map_apply, $key) {
-                return [
-                    'usage' => BuildingUsageEnum::tryFrom($key)?->label(),
-                    'count' => count($map_apply)
-                ];
-            });
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $buildingUsages = $mapApplies->pluck('usage')->unique();
 
-        return [
-            'labels' => $map_applies->pluck('usage')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $map_applies->pluck('count')->toArray(),
-                    'fill' => 'false',
-                ]
-            ],
+        $result = collect();
+        foreach ($buildingUsages as $usage) {
+            $count = $mapApplies->where('usage', $usage)->count();
+            $label = BuildingUsageEnum::tryFrom($usage)?->label();
+            $result->push([
+                'name' => $label,
+                'data' => $count
+            ]);
+        }
 
-
-        ];
+        return $result;
     }
 
-    public function getMapApplyBuildingCategoryAccordingToFiscalYear(): array
+    public function getMapApplyBuildingCategoryAccordingToFiscalYear()
     {
         $officeSetting = $this->getOfficeSetting();
 
@@ -165,38 +166,52 @@ class DashboardController extends Controller
     }
 
 
-    public function getMapApplyConstructionTypeAccordingToFiscalYear(): array
+    public function getMapApplyConstructionTypeAccordingToFiscalYear()
     {
         $officeSetting = $this->getOfficeSetting();
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $buildingUsages = $mapApplies->pluck('construction_type')->unique();
 
-        $map_applies = $this->getMapApply($officeSetting->fiscal_year_id)
-            ->groupBy('construction_type')
-            ->map(function ($map_apply, $key) {
-                return [
-                    'construction_type' => TypeOfConstructionWorkEnum::tryFrom($key)?->label(),
-                    'count' => count($map_apply),
-                ];
-            });
+        $result = collect();
+        foreach ($buildingUsages as $usage) {
+            $count = $mapApplies->where('construction_type', $usage)->count();
+            $label = TypeOfConstructionWorkEnum::tryFrom($usage)?->label();
+            $result->push([
+                'name' => $label,
+                'data' => $count
+            ]);
+        }
 
-        return [
-            'labels' => $map_applies->pluck('construction_type')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $map_applies->pluck('count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ],
-            ],
-
-
-        ];
+        return $result;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOfficeSetting(): mixed
+    public function getOfficeSetting()
     {
-        return OfficeSetting::first();
+        return officeSetting();
+    }
+
+    public function mapAccordingToMonth()
+    {
+        $officeSetting = $this->getOfficeSetting();
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $month = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0];
+
+        foreach ($mapApplies as $mapApply) {
+            if (!empty($mapApply->registration_date)) {
+                $registration_date = Carbon::parse($mapApply->registration_date);
+                $registrationDate = $this->get_nepali_date($registration_date->format('Y'), $registration_date->format('m'), $registration_date->format('d'));
+                $month[$registrationDate['m'] - 1] += 1;
+            }
+        }
+
+        return [
+            'labels' => $this->month_name,
+            'dataSets' => [
+                [
+                    'data' => $month,
+                    'label' => 'नक्सा दर्ता',
+                ]
+            ]
+        ];
     }
 }

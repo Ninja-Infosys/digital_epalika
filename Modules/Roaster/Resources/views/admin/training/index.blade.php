@@ -30,7 +30,7 @@
                 <div class="card-body">
                     @csrf
                     <div class="row">
-                        <div class="col-md-3 col-sm-12 form-group">
+                        <div class="col-md-4 mb-2">
                             <label for="name">तालिमको नाम * </label>
                             <input id="name" type="text" name="name" placeholder="तालिमको नाम"
                                    class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
@@ -38,7 +38,7 @@
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-2 col-sm-12 form-group">
+                        <div class="col-md-4 mb-2">
                             <label for="form_type">प्रशिक्षार्थीको प्रकार * </label>
                             <select id="form_type" name="form_type"
                                     class="form-control @error('form_type') is-invalid @enderror">
@@ -52,7 +52,7 @@
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-2 col-sm-12">
+                        <div class="col-md-4 mb-2">
                             <label for="open_date">फारम खुल्ने मिति * </label><br>
                             <input id="open_date" type="datetime-local" name="open_date" placeholder="फारम खुल्ने मिति"
                                    class="form-control @error('open_date') is-invalid @enderror"
@@ -61,7 +61,7 @@
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-2 col-sm-12">
+                        <div class="col-md-4 mb-2">
                             <label for="closed_date">फारम बन्द हुने मिति * </label><br>
                             <input id="closed_date" type="datetime-local" name="closed_date"
                                    placeholder="फारम बन्द हुने मिति"
@@ -71,11 +71,11 @@
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-3 col-sm-12 form-group">
+                        <div class="col-md-4 mb-2">
                             <label for="trainers">प्रशिक्षक * </label>
                             <select id="form_type" name="trainers[]"
-                                    class="form-control @error('trainers') is-invalid @enderror" multiple>
-                                <option value="">प्रशिक्षक छान्नुहोस्</option>
+                                    class="form-control @error('trainers') is-invalid @enderror" data-toggle="select2" multiple>
+                                <option value="" disabled>प्रशिक्षक छान्नुहोस्</option>
                                 @foreach($trainers as $trainer)
                                     <option
                                         value="{{$trainer->id}}" {{in_array($trainer->id, old('trainers',[])) ? 'selected': ''}}>{{$trainer->name}}</option>

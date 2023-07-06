@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.fiscalYear.index')}}">आर्थिक बर्ष</a>
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ आर्थिक बर्ष थप्नुहोस्</li>
                     </ol>
@@ -28,37 +28,28 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ आर्थिक बर्ष थप्नुहोस्</h4>
-                        <a href="{{route('admin.fiscalYear.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.generalSetting.fiscalYear.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आर्थिक बर्ष सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.fiscalYear.store')}}" method="post">
+                    <form action="{{route('admin.generalSetting.fiscalYear.store')}}" method="post">
                         @csrf
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>आर्थिक बर्ष </strong>
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-12-off mb-2">
-                                    <label for="title" class="form-label">आर्थिक बर्ष  *</label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        value="{{old('title')}}"
-                                        class="form-control @error('title') is-invalid @enderror"
-                                        id="title"
-                                        placeholder="आर्थिक बर्ष "
-                                    />
-                                    @error('title')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-                            </div>
-                        </fieldset>
-
+                        <div class="col-md-4 mb-2">
+                            <label for="title" class="form-label">आर्थिक बर्ष  *</label>
+                            <input
+                                type="text"
+                                name="title"
+                                value="{{old('title')}}"
+                                class="form-control @error('title') is-invalid @enderror"
+                                id="title"
+                                placeholder="आर्थिक बर्ष "
+                            />
+                            @error('title')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

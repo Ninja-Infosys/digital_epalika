@@ -3,21 +3,20 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\Plan\Entities\BudgetHead;
-use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\ExpenseHead;
-use Modules\Plan\Entities\GrantCategory;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
+use Modules\Plan\Entities\ProjectAllocatedAmount;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
-use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 use Modules\Plan\Http\Requests\Project\StoreProjectRequest;
 use Modules\Plan\Http\Requests\Project\UpdateProjectRequest;
@@ -28,7 +27,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $projects = Project::with('planArea')->where(function (Builder $q) {
+        $projects = Project::with('planArea')->withSum('projectAllocatedAmounts', 'amount')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['registration_no', 'project_name'], request('search'));
             }
@@ -41,27 +40,18 @@ class ProjectController extends Controller
             if (!empty(request('project_status'))) {
                 $q->where('project_status', request('project_status'));
             }
-            if (!empty(request('grant_category_id'))) {
-                $q->where('grant_category_id', request('grant_category_id'));
-            }
-            if (!empty(request('budget_source_id'))) {
-                $q->where('budget_source_id', request('budget_source_id'));
-            }
             if (!empty(request('expense_head_id'))) {
                 $q->where('expense_head_id', request('expense_head_id'));
             }
             if (!is_null(request('is_contracted'))) {
                 $q->where('is_contracted', request('is_contracted'));
             }
-
         })
             ->latest()->paginate(10);
-        $budgetSources = BudgetSource::all();
-        $grantCategories = GrantCategory::all();
         $expenseHeads = ExpenseHead::all();
 
 
-        return view('plan::admin.project.index', compact('projects', 'budgetSources', 'grantCategories', 'expenseHeads'));
+        return view('plan::admin.project.index', compact('projects', 'expenseHeads'));
     }
 
     public function create()
@@ -70,23 +60,27 @@ class ProjectController extends Controller
 
         $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
-        $budgetSources = BudgetSource::all();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
-        $grantCategories = GrantCategory::all();
         $expenseHeads = ExpenseHead::all();
         $registration_no = "PP-" . (\officeSetting()->fiscalYear->title ?? '') . '-' . Str::padLeft(Project::max('id') + 1, 3, 0);
 
-        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads', 'registration_no'));
+        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetHeads', 'expenseHeads', 'registration_no'));
     }
 
     public function store(StoreProjectRequest $request)
     {
         $this->checkAuthorization('project_create');
 
-        Project::create($request->validated() + [
-                'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                'project_status' => ProjectStatusEnum::NOT_STARTED
-            ]);
+        DB::transaction(function () use ($request) {
+            $project = Project::create($request->validated() + [
+                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                    'project_status' => ProjectStatusEnum::NOT_STARTED
+                ]);
+
+            foreach ($request->input('projectAllocatedAmounts') as $projectAllocatedAmount) {
+                $project->projectAllocatedAmounts()->create($projectAllocatedAmount);
+            }
+        });
 
         toast('योजना/कार्यक्रम सफलतापूर्वक थपियो', 'success');
         return back();
@@ -96,7 +90,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates.unit');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates.unit', 'projectAllocatedAmounts.budgetHead');
 
         if (request()->ajax()) {
             return response()->json([
@@ -111,21 +105,30 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_edit');
 
+        $project->load('projectAllocatedAmounts.budgetHead');
+
         $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
-        $budgetSources = BudgetSource::all();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
-        $grantCategories = GrantCategory::all();
         $expenseHeads = ExpenseHead::all();
 
-        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads'));
+        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetHeads', 'expenseHeads'));
     }
 
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $this->checkAuthorization('project_edit');
+        DB::transaction(function () use ($request, $project) {
+            $project->update($request->validated());
 
-        $project->update($request->validated());
+            foreach ($request->input('projectAllocatedAmounts') as $projectAllocatedAmount) {
+                ProjectAllocatedAmount::updateOrCreate(
+                    ['project_id' => $project->id, 'id' => $projectAllocatedAmount['id'] ?? ''],
+                    $projectAllocatedAmount
+                );
+            }
+            $project->projectAllocatedAmounts()->whereNotIn('id', Arr::pluck($request->input('projectAllocatedAmounts'), 'id'))->delete();
+        });
 
         toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -187,5 +190,4 @@ class ProjectController extends Controller
             ]);
         }
     }
-
 }

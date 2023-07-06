@@ -28,9 +28,7 @@
                             <a href="{{route('identity.admin.disabilityIdentityCard.index')}}" class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> अपाङ्गता परिचय पत्र सुची
                             </a>
-                            <a href="https://localhost:8003/mfs100" target="_blank" class="btn btn-sm btn-outline-primary">
-                                Run MFS 100
-                            </a>
+
                         </div>
 
                     </div>

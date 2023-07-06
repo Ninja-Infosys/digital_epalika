@@ -10,6 +10,7 @@ class GrievanceHandlingDatabaseSeeder extends Seeder
     {
         $this->call([
             GrievanceHandlingPermissionTableSeeder::class,
+            GrievanceSettingTableSeeder::class,
         ]);
     }
 }

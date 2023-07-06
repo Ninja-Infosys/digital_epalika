@@ -33,7 +33,6 @@ class WardCommitteePolicy
                 : Response::denyAsNotFound();
         }
         return Response::allow();
-
     }
 
     public function delete(User $user, WardCommittee $wardCommittee): Response

@@ -78,7 +78,7 @@
                                     <td>
                                         @can('trainer_access')
                                             <a data-bs-type="edit" href="{{route('admin.roaster.trainer.show', $trainer)}}"
-                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                               class="btn btn-xs btn-outline-info">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan

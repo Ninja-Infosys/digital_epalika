@@ -12,7 +12,6 @@ use App\Models\User;
 use App\Traits\GetAllColumns;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +22,11 @@ use Illuminate\Support\Facades\Storage;
 
 class SeniorCitizenDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, NepaliDateConverter,GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use NepaliDateConverter;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -56,10 +59,8 @@ class SeniorCitizenDetail extends Model
         'patrons_name',
         'patrons_name_en',
         'patrons_name_address',
-        'contact_person_name',
-        'contact_person_name_en',
-        'contact_person_phone',
-        'contact_person_address',
+        'patrons_phone',
+        'patrons_relationship',
         'is_disease',
         'disease_name',
         'description',
@@ -122,13 +123,12 @@ class SeniorCitizenDetail extends Model
 
     public function getPhotoAttribute(): string
     {
-
         if ($this->attributes['photo']) {
             return !isBase64($this->attributes['photo'])
                 ? Storage::disk('public')->url($this->attributes['photo'])
                 : $this->attributes['photo'];
         } else {
-            return '';
+            return asset('images/user_icon.jpg');
         }
     }
 
@@ -145,7 +145,6 @@ class SeniorCitizenDetail extends Model
             $query->orWhere('ward_no', auth()->user()->ward_no);
         }
         return $query;
-
     }
 
     public function getAgeAttribute(): int

@@ -10,18 +10,18 @@ return new class () extends Migration {
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->string('dispatch_no')->comment('चलानी नं.');
+            $table->integer('dispatch_no')->comment('चलानी नं.');
+            $table->string('prefix')->nullable();
             $table->string('dispatch_date')->nullable()->comment('चलानी मिति');
-            $table->date('en_dispatch_date')->nullable()->comment('चलानी मिति अंग्रेजी');
+            $table->date('en_dispatch_date')->nullable()->comment('चलानी मिति ई.सं.');
             $table->string('letter_number')->nullable()->comment('पत्र संख्या');
             $table->string('letter_date')->nullable()->comment('पत्र मिति');
-            $table->date('en_letter_date')->nullable()->comment('पत्र मिति अंग्रेजी');
+            $table->date('en_letter_date')->nullable()->comment('पत्र मिति ई.सं.');
             $table->string('subject')->nullable()->comment('विषय');
-            $table->string('receiver_name')->nullable()->comment('प्राप्तकर्ता नाम');
-            $table->string('receiver_address')->nullable()->comment('प्राप्तकर्ता ठेगाना');
-            $table->string('receiver_contact')->nullable()->comment('प्राप्तकर्ता सम्पर्क');
-            $table->string('receiver_signature')->nullable()->comment('प्राप्तकर्ता हस्ताक्षर');
-            $table->text('remarks')->nullable()->comment('टिप्पणीहरू');
+            $table->string('receiver_name')->nullable()->comment('पाउने कार्यालयको नाम');
+            $table->string('receiver_address')->nullable()->comment('पाउने कार्यालयको ठेगाना');
+            $table->string('receiver_contact')->nullable()->comment('हुलाक/ र.न./इमेल');
+            $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
             $table->softDeletes();
         });

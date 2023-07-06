@@ -24,16 +24,13 @@ class LandInvoiceFormLivewire extends Component
 
     public function mount($formDetail = [])
     {
-        $this->revenueCategories = get_revenue_categories();
         foreach ($formDetail as $value) {
             $this->particulars[] = $value;
         }
-
     }
 
     protected $rules = [
-        'form.revenue_category_id' => ['required', 'exists:revenue_categories,id,deleted_at,NULL'],
-        'form.revenue_id' => ['required', 'exists:revenues,id,deleted_at,NULL'],
+        'form.revenue' => ['required', 'string'],
         'form.quantity' => ['required', 'numeric', 'min:0'],
         'form.rate' => ['required', 'numeric', 'min:0'],
         'form.fine' => ['required', 'numeric', 'min:0'],
@@ -73,19 +70,9 @@ class LandInvoiceFormLivewire extends Component
         $this->particulars = array_values($this->particulars);
     }
 
-    public function setRate()
-    {
-        if (!empty($this->form['revenue_id'])) {
-            $this->form['rate'] = get_revenues(revenueId: $this->form['revenue_id'])->amount;
-        }
-    }
 
     public function render(): Factory|View|Application
     {
-        if (!empty($this->form['revenue_category_id'])) {
-            $this->revenues = get_revenues(revenueCategories: $this->form['revenue_category_id']);
-        }
-
         return view('revenue::livewire.land-invoice-form');
     }
 }

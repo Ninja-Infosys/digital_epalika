@@ -36,7 +36,6 @@ class Project extends Model
         'registration_no',
         'fiscal_year_id',
         'project_name',
-        'grant_category_id',
         'expense_head_id',
         'plan_area_id',
         'project_status',
@@ -44,9 +43,6 @@ class Project extends Model
         'project_completion_date',
         'plan_level_id',
         'ward_no',
-        'budget_source_id',
-        'budget_head_id',
-        'allocated_amount',
         'project_venue',
         'evaluation_amount',
         'purpose',
@@ -77,7 +73,6 @@ class Project extends Model
     protected $casts = [
         'project_status' => ProjectStatusEnum::class,
         'operated_through' => ProjectOperatedThroughEnum::class,
-        'allocated_amount' => 'int',
         'agencies_grants' => 'int',
         'share_amount' => 'int',
         'committee_share_amount' => 'int',
@@ -93,12 +88,13 @@ class Project extends Model
 
     public function getTotalAmountForContingencyAttribute(): float
     {
-        return round($this->allocated_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount, 2);
+        $this->loadSum('projectAllocatedAmounts', 'amount');
+        return round($this->project_allocated_amounts_sum_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount, 2);
     }
 
     public function getContingencyPercentAttribute(): float
     {
-        return round($this->contingency_amount * 100 / $this->total_amount_for_contingency, 2);
+        return $this->total_amount_for_contingency > 0 ? round($this->contingency_amount * 100 / $this->total_amount_for_contingency, 2) : 0;
     }
 
     public function getProjectContractAmountAttribute(): float
@@ -114,8 +110,8 @@ class Project extends Model
     protected function wardNo(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => explode(",", $value),
-            set: fn($value) => implode(",", $value),
+            get: fn ($value) => explode(",", $value),
+            set: fn ($value) => implode(",", $value),
         );
     }
 
@@ -130,11 +126,6 @@ class Project extends Model
         return $this->belongsTo(PlanArea::class);
     }
 
-    public function grantCategory(): BelongsTo
-    {
-        return $this->belongsTo(GrantCategory::class);
-    }
-
     public function expenseHead(): BelongsTo
     {
         return $this->belongsTo(ExpenseHead::class);
@@ -143,11 +134,6 @@ class Project extends Model
     public function planLevel(): BelongsTo
     {
         return $this->belongsTo(PlanLevel::class);
-    }
-
-    public function budgetSource(): BelongsTo
-    {
-        return $this->belongsTo(BudgetSource::class);
     }
 
     public function budgetHead(): BelongsTo
@@ -218,5 +204,10 @@ class Project extends Model
     public function technicalCostEstimates(): HasMany
     {
         return $this->hasMany(TechnicalCostEstimate::class);
+    }
+
+    public function projectAllocatedAmounts(): HasMany
+    {
+        return $this->hasMany(ProjectAllocatedAmount::class);
     }
 }

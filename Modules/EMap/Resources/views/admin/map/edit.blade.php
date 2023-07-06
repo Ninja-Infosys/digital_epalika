@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">   {{$noticeTypeEnum->label()}}</h4>
+                        <h4 class="header-title">{{$noticeTypeEnum->label()}}</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -36,42 +36,38 @@
                         method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        <fieldset class="border p-2 mb-2">
-
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="data" class="form-label">डाटा *</label>
-                                    <textarea name="data" id="data" cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
-                                    @error('data')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="files" class="form-label">फाइल </label>
-                                    <input
-                                        type="file"
-                                        name="files[]"
-
-                                        class="form-control @error('files') is-invalid @enderror"
-                                        id="files"
-                                        multiple/>
-                                    @foreach($mapApply->applyMapNotices as $applyMapNotice)
-                                        @foreach($applyMapNotice->files as $file)
-                                            <a href="{{$file->file_url}}" download="{{$file->file_url}}">
-                                                <i class="fa fa-download"></i>
-                                                Download &nbsp;</a>
-                                        @endforeach
-                                    @endforeach
-                                    @error('files')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                    @error('files.*')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label for="data" class="form-label">डाटा *</label>
+                                <textarea name="data" id="data" cols="30" rows="10"
+                                          class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
+                                @error('data')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
-                        </fieldset>
+                            <div class="col-md-12 mb-2">
+                                <label for="files" class="form-label">फाइल </label>
+                                <input
+                                    type="file"
+                                    name="files[]"
+                                    class="form-control @error('files') is-invalid @enderror"
+                                    id="files"
+                                    multiple/>
+                                @foreach($mapApply->applyMapNotices as $applyMapNotice)
+                                    @foreach($applyMapNotice->files as $file)
+                                        <a href="{{$file->file_url}}" download="{{$file->file_url}}">
+                                            <i class="fa fa-download"></i>
+                                            Download &nbsp;</a>
+                                    @endforeach
+                                @endforeach
+                                @error('files')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                @error('files.*')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
@@ -80,13 +76,9 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 @endsection
 

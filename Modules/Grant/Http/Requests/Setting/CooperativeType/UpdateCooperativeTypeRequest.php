@@ -2,18 +2,17 @@
 
 namespace Modules\Grant\Http\Requests\Setting\CooperativeType;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
 class UpdateCooperativeTypeRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('cooperativeType_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'title'=>['required', 'string', 'max:255']

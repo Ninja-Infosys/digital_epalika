@@ -80,7 +80,7 @@
             @can('farmerReport_access')
                 <li class="{{ request()->is('admin/grant/report/farmer') ? 'active' : '' }}">
                     <a href="{{ route('admin.grant.report.farmer.index') }}">
-                        <span> कृषक/व्यक्ति रिपोर्ट </span>
+                        <span> सेवाग्राही रिपोर्ट </span>
                     </a>
                 </li>
             @endcan

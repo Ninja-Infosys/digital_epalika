@@ -22,12 +22,13 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return redirect(route('admin.dashboard'));
 //});
+
 Route::post('/login', [LoginController::class,'login'])->name('login');
 Route::get('/login', [LoginController::class,'loginPage'])->name('loginPage');
 Route::post('/logout', [LoginController::class,'logout'])->name('logout')->middleware('auth:sanctum');
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
-Route::get('seniorCitizenDetail/{seniorCitizenDetail}/seniorCitizenQrcode',[FrontController::class,'seniorCitizenDetailQrcode'])->name('seniorCitizenDetail.qrcode');
-Route::get('disabilityIdentityCard/{disabilityIdentityCard}/disabilityQrcode',[FrontController::class,'disabilityIdentityCardQrcode'])->name('disabilityIdentityCard.qrcode');
+Route::get('seniorCitizenDetail/{seniorCitizenDetail}/seniorCitizenQrcode', [FrontController::class,'seniorCitizenDetailQrcode'])->name('seniorCitizenDetail.qrcode');
+Route::get('disabilityIdentityCard/{disabilityIdentityCard}/disabilityQrcode', [FrontController::class,'disabilityIdentityCardQrcode'])->name('disabilityIdentityCard.qrcode');
 Route::get('introduction', [FrontController::class, 'introduction'])->name('introduction');
 Route::get('category', [FrontController::class, 'category'])->name('category');
 Route::get('contact', [FrontController::class, 'contact'])->name('contact');

@@ -6,7 +6,6 @@ use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\Plan\Entities\BenefitedMemberDetail;
 use Modules\Plan\Entities\Project;
-use Modules\Plan\Entities\ProjectCostDetail;
 use Modules\Plan\Entities\ProjectGrantDetail;
 use Modules\Plan\Enums\GrantSourceEnum;
 
@@ -107,16 +106,16 @@ class ProjectCostDetailLivewire extends Component
 
     private function assignProjectData($project_id)
     {
-        $project = Project::with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+        $project = Project::withSum('projectAllocatedAmounts', 'amount')->with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
 
         $this->project = $project;
 
-        $this->form['office_grant'] = $project->allocated_amount ?? 0;
+        $this->form['office_grant'] = $project->project_allocated_amounts_sum_amount ?? 0;
         $this->form['agencies_grants'] = $project->agencies_grants ?? 0;
         $this->form['share_amount'] = $project->share_amount ?? 0;
         $this->form['committee_share_amount'] = $project->committee_share_amount ?? 0;
         $this->form['contingency_amount'] = $project->contingency_amount ?? 0;
-        $this->form['contingency_percent'] = round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2);
+        $this->form['contingency_percent'] = $this->totalAmountForContingency() > 0 ? round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2) : 0;
         $this->form['other_taxes'] = $project->other_taxes ?? 0;
         $this->form['labor_amount'] = $project->labor_amount ?? 0;
         $this->form['benefited_organization'] = $project->benefited_organization ?? 0;
@@ -144,7 +143,8 @@ class ProjectCostDetailLivewire extends Component
                 'dalit_backward_no' => $benefitedMemberDetail->dalit_backward_no ?? 0,
                 'other_households_no' => $benefitedMemberDetail->other_households_no ?? 0,
                 'no_of_male' => $benefitedMemberDetail->no_of_male ?? 0,
-                'no_of_female' => $benefitedMemberDetail->no_of_female ?? 0
+                'no_of_female' => $benefitedMemberDetail->no_of_female ?? 0,
+                'no_of_others' => $benefitedMemberDetail->no_of_others ?? 0,
             ];
         }
     }
@@ -193,14 +193,14 @@ class ProjectCostDetailLivewire extends Component
     private function assignCalculatedAmount()
     {
         $this->form['total_amount_for_contingency'] = $this->totalAmountForContingency();
-        $this->form['contingency_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) * ($this->form['contingency_percent'] ?? 0) / 100;
+        $this->form['contingency_amount'] = ((float)$this->form['total_amount_for_contingency'] ?? 0) * ((float)$this->form['contingency_percent'] ?? 0) / 100;
         $this->form['project_contract_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) - ($this->form['contingency_amount'] ?? 0) - ($this->form['other_taxes'] ?? 0);
         $this->form['total_cost_estimate_amount'] = ($this->form['project_contract_amount'] ?? 0) + ($this->form['labor_amount'] ?? 0);
     }
 
     private function totalAmountForContingency(): float|int
     {
-        return ((double)$this->form['office_grant'] ?? 0) + ((double)$this->form['agencies_grants'] ?? 0) + ((double)$this->form['share_amount'] ?? 0) + ((double)$this->form['committee_share_amount'] ?? 0);
+        return ((float)$this->form['office_grant'] ?? 0) + ((float)$this->form['agencies_grants'] ?? 0) + ((float)$this->form['share_amount'] ?? 0) + ((float)$this->form['committee_share_amount'] ?? 0);
     }
 
     public function messages(): array

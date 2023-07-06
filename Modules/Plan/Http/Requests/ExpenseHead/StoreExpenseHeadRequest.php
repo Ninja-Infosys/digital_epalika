@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 
 class StoreExpenseHeadRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }

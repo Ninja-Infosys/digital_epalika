@@ -12,6 +12,7 @@ class GrievanceHandlingPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'grievanceHandlingDashboard_access',
             'grievanceType_access',
             'grievanceType_create',
             'grievanceType_edit',
@@ -24,7 +25,10 @@ class GrievanceHandlingPermissionTableSeeder extends Seeder
             'grievanceDetail_create',
             'grievanceDetail_edit',
             'grievanceDetail_delete',
-            'grievanceUser_access'
+            'grievanceUser_access',
+            'grievanceUser_create',
+            'grievanceUser_edit',
+            'grievanceUser_delete',
         ];
 
         $this->storePermission($permissions);

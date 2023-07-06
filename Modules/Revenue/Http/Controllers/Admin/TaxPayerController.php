@@ -2,12 +2,9 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Revenue\Entities\TaxPayer;
-use Modules\Revenue\Entities\TaxPayerType;
 use Modules\Revenue\Http\Requests\TaxPayer\StoreTaxPayerRequest;
 use Modules\Revenue\Http\Requests\TaxPayer\UpdateTaxPayerRequest;
 
@@ -21,22 +18,22 @@ class TaxPayerController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['tax_payer_type_id', 'fiscal_year_id', 'registration_no', 'name', 'name_en', 'phone', 'email', 'father_name', 'grandfather_name', 'citizenship_no', 'ward',], request('search'));
             }
-        })->latest()->paginate(1);
+        })->latest()->paginate(10);
         return view('revenue::admin.tax-payer.index', compact('taxPayers'));
     }
 
     public function create()
     {
         $this->checkAuthorization('taxPayer_create');
-        $taxPayerTypes = TaxPayerType::all();
-        return view('revenue::admin.tax-payer.create', compact('taxPayerTypes'));
+
+        return view('revenue::admin.tax-payer.create');
     }
 
     public function store(StoreTaxPayerRequest $request)
     {
         $this->checkAuthorization('taxPayer_create');
 
-        TaxPayer::create($request->validated());
+
         toast('करदाता सफलतापूर्वक थपियो', 'success');
         return back();
     }
@@ -44,16 +41,14 @@ class TaxPayerController extends Controller
     public function show(TaxPayer $taxPayer)
     {
         $this->checkAuthorization('taxPayer_access');
-
-//        TODO: Alert Show Form For Tax Payer
-        return view('revenue::show');
+        return view('revenue::admin.tax-payer.show', compact('taxPayer'));
     }
 
     public function edit(TaxPayer $taxPayer)
     {
         $this->checkAuthorization('taxPayer_edit');
-        $taxPayerTypes = TaxPayerType::all();
-        return view('revenue::admin.tax-payer.edit', compact('taxPayer', 'taxPayerTypes'));
+        $taxPayer->load('taxPayerFamilies');
+        return view('revenue::admin.tax-payer.edit', compact('taxPayer'));
     }
 
     public function update(UpdateTaxPayerRequest $request, TaxPayer $taxPayer)

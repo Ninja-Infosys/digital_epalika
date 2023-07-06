@@ -3,7 +3,6 @@
 namespace Modules\Grant\Entities;
 
 use App\Models\Address\LocalBody;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +14,10 @@ use Modules\Grant\Enums\GranteeEnum;
 
 class GrantDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -61,5 +63,4 @@ class GrantDetail extends Model
     {
         return $this->belongsTo(LocalBody::class);
     }
-
 }

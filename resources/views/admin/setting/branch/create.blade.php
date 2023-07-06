@@ -10,10 +10,13 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">शाखा</li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                        </li>
+                        <li class="breadcrumb-item active">शाखा/उपशाखा</li>
                     </ol>
                 </div>
-                <h4 class="page-title">शाखा</h4>
+                <h4 class="page-title">शाखा/उपशाखा</h4>
             </div>
         </div>
     </div>
@@ -24,16 +27,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ शाखा थप्नुहोस्</h4>
-                        <a href="{{route('admin.branch.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.generalSetting.branch.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> शाखा सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.branch.store')}}" method="post">
+                    <form action="{{route('admin.generalSetting.branch.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="branch_id" class="form-label">मुख्य शाखा</label>
                                 <select
                                     name="branch_id"
@@ -51,7 +54,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="branch_name" class="form-label">शाखा नाम *</label>
                                 <input
                                     type="text"

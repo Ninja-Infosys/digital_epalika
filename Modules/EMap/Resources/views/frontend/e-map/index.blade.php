@@ -98,7 +98,7 @@
                             <div class="card bg-success text-light text-center">
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">लग इन</h5>
-                                    <i class="fa fa-gears fs-5"></i>
+                                    <i class="fa fa-key fs-5"></i>
                                     <h6>इ-नक्सा लग इन </h6>
                                     <a href="{{route('organization.login.form')}}" class="btn btn-light"
                                        ><span>लग इन गर्नुहोस्</span>
@@ -130,9 +130,9 @@
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
 
-                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span> व्यक्ति</span>
-                                        <i class="fa fa-angle-double-right"></i>
-                                    </a>
+{{--                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span> व्यक्ति</span>--}}
+{{--                                        <i class="fa fa-angle-double-right"></i>--}}
+{{--                                    </a>--}}
                                 </div>
                             </div>
                         </div>
@@ -141,28 +141,4 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <style>
-            .doc {
-                top: 45vh;
-                position: relative;
-                box-sizing: border-box;
-                animation: marquee 50s linear infinite;
-                margin: 0 auto;
-                text-align: left !important;
-                color: var(--mainColor);
-            }
-
-            .scroll {
-                border-radius: 5px;
-                border: 2px solid #0D6EFD;
-                width: 100%;
-                height: 50vh;
-                margin: 10px  auto;
-                overflow: hidden;
-                position: relative;
-                box-sizing: border-box;
-            }
-        </style>
-    @endpush
 @endsection

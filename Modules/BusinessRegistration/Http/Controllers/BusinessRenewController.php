@@ -2,9 +2,7 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessRenew;
@@ -18,7 +16,7 @@ class BusinessRenewController extends Controller
         $this->checkAuthorization('businessRenew_access');
         $businessRenews = BusinessRenew::with('fiscalYear')->where('business_detail_id', $businessDetail->id)->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['business_renew_date','payment_receipt'], request('search'));
+                $q->whereLike(['business_renew_date', 'payment_receipt'], request('search'));
             }
         })->latest()->paginate(15);
         return view('businessregistration::admin.businessRenew.index', compact('businessDetail', 'businessRenews'));
@@ -37,18 +35,18 @@ class BusinessRenewController extends Controller
                 'fiscal_year_id' => officeSetting()->fiscal_year_id,
             ]);
         toast('व्यवसाय नवीकरण सफलतापूर्वक थपियो', 'success');
-        return redirect(route('admin.businessRegistration.businessRegistration.businessRenew.index',$businessDetail));
+        return redirect(route('admin.businessRegistration.businessRegistration.businessRenew.index', $businessDetail));
     }
 
     public function show(BusinessDetail $businessDetail, BusinessRenew $businessRenew)
     {
-        return view('businessregistration::show');
+        return view('businessregistration::admin.businessRenew.show', compact('businessRenew', 'businessDetail'));
     }
 
     public function edit(BusinessDetail $businessDetail, BusinessRenew $businessRenew)
     {
         $this->checkAuthorization('businessRenew_edit');
-        return view('businessregistration::admin.businessRenew.edit', compact('businessDetail','businessRenew'));
+        return view('businessregistration::admin.businessRenew.edit', compact('businessDetail', 'businessRenew'));
     }
 
     public function update(UpdateBusinessRenewRequest $request, BusinessDetail $businessDetail, BusinessRenew $businessRenew)
@@ -56,7 +54,7 @@ class BusinessRenewController extends Controller
         $this->checkAuthorization('businessRenew_edit');
         $businessDetail->businessRenew()->update($request->validated());
         toast('व्यवसाय नवीकरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.businessRegistration.businessRegistration.businessRenew.index',$businessDetail));
+        return redirect(route('admin.businessRegistration.businessRegistration.businessRenew.index', $businessDetail));
     }
 
     public function destroy(BusinessDetail $businessDetail, BusinessRenew $businessRenew)

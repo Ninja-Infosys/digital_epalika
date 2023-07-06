@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateExpenseHeadRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }

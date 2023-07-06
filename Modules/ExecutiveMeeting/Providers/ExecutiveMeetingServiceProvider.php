@@ -2,13 +2,13 @@
 
 namespace Modules\ExecutiveMeeting\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
-use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
-use Modules\ExecutiveMeeting\Entities\WardCommittee;
-use Modules\ExecutiveMeeting\Observers\MeetingEventObserver;
-use Modules\ExecutiveMeeting\Observers\MunicipalCommitteeObserver;
-use Modules\ExecutiveMeeting\Observers\WardCommitteeObserver;
+use Modules\ExecutiveMeeting\Entities\Committee;
+use Modules\ExecutiveMeeting\Entities\CommitteeMember;
+use Modules\ExecutiveMeeting\Entities\Meeting;
+use Modules\ExecutiveMeeting\Observers\CommitteeMemberObserver;
+use Modules\ExecutiveMeeting\Observers\MeetingObserver;
 
 class ExecutiveMeetingServiceProvider extends ServiceProvider
 {
@@ -34,9 +34,13 @@ class ExecutiveMeetingServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
-        MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
-        WardCommittee::observe(WardCommitteeObserver::class);
-        MeetingEvent::observe(MeetingEventObserver::class);
+        //share meeting committee in sidebar
+        if (Schema::hasTable('committees')) {
+            view()->share('sharedCommittees', Committee::orderBy('committee_type_id')->get());
+        }
+
+        CommitteeMember::observe(CommitteeMemberObserver::class);
+        Meeting::observe(MeetingObserver::class);
     }
 
     /**

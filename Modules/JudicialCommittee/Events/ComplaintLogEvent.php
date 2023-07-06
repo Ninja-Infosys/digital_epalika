@@ -13,7 +13,7 @@ class ComplaintLogEvent
      *
      * @return void
      */
-    public function __construct(public $complaint_application_id,public $model_type,public $model_id,public $title,public $description)
+    public function __construct(public $complaint_application_id, public $model_type, public $model_id, public $title, public $description)
     {
         //
     }

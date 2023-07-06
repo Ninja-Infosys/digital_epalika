@@ -40,7 +40,7 @@
                                 <select
                                     name="revenue_category_id"
                                     class="form-select @error('revenue_category_id') is-invalid @enderror"
-                                    id="revenue_category_id" data-toggle="select2" data-width="100%">
+                                    id="revenue_category_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($revenueCategories as $revenueCategory)
                                         @include('revenue::admin.setting.revenue.option' , ['revenueCategory' => $revenueCategory, 'revenue' => $revenue ?? ''])
@@ -59,6 +59,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -73,6 +74,7 @@
                                     class="form-control @error('code_no') is-invalid @enderror"
                                     id="code_no"
                                     placeholder="कोड नं."
+                                    required
                                 />
                                 @error('code_no')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -88,6 +90,7 @@
                                     class="form-control @error('amount') is-invalid @enderror"
                                     id="amount"
                                     placeholder="रकम"
+                                    required
                                 />
                                 @error('amount')
                                 <div class="invalid-feedback">{{$message}}</div>

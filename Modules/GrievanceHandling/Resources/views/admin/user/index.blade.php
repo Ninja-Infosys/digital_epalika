@@ -30,6 +30,11 @@
                         <h4 class="header-title mb-0">गुनासो प्रयोगकर्ताहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
+                            @can('grievanceUser_create')
+                                <a href="{{ route('admin.grievanceHandling.grievanceUser.create') }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -55,11 +60,25 @@
                                         <td>{{ $grievanceUser->phone }}</td>
                                         <td>{{ $grievanceUser->grievance_details_count }}</td>
                                         <td>
-                                            <a href="{{route('admin.grievanceHandling.grievanceUser.show',$grievanceUser)}}"
-                                           title="थप हेर्नुहोस्"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+                                            <a href="{{ route('admin.grievanceHandling.grievanceUser.show', $grievanceUser) }}"
+                                                title="थप हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a data-bs-type="edit"
+                                                href="{{ route('admin.grievanceHandling.grievanceUser.edit', $grievanceUser) }}"
+                                                class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <form
+                                                action="{{ route('admin.grievanceHandling.grievanceUser.destroy', $grievanceUser) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                    class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Gate;
 
 class UpdateTechnicalCostEstimateRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('technicalCostEstimate_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'detail' => ['required', 'string', 'max:255'],

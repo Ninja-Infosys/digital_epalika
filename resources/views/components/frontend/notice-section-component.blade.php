@@ -12,21 +12,21 @@
                 <div class="scroll">
                     <div class="doc pt-2">
                         <div class="d-flex gap-3 align-items-center">
-                            <i class="fa-solid fa-clock fa-xl title"></i>
+                            <i class="fa fa-clock fa-xl title"></i>
                             <div class="title">
                                 अनुमति लग्ने समय <h6 class="mt-1">{{$service->time_taken}}</h6>
                             </div>
                         </div>
                         <hr>
                         <div class="d-flex gap-3 align-items-center">
-                            <i class="fa-solid fa-user fa-xl title"></i>
+                            <i class="fa fa-user fa-xl title"></i>
                             <div class="title">
                                 जिम्मेवार अधिकारी <h6 class="mt-1">{{$service->responsible_officer}}</h6>
                             </div>
                         </div>
                         <hr>
                         <div class="d-flex gap-3 align-items-center">
-                            <i class="fa-solid fa-file-contract fa-xl title"></i>
+                            <i class="fa fa-file-contract fa-xl title"></i>
                             <div class="title">
                                 आवश्यक कागजातहरु
                                 @foreach($service->serviceDocuments as $document)

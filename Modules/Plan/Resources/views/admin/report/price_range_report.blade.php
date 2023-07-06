@@ -136,18 +136,6 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="budget_source_id">बजेट स्रोत</label>
-                                    <select name="budget_source_id[]" multiple data-toggle="select2"
-                                            id="budget_source_id" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($budgetSources as $budgetSource)
-                                            <option
-                                                value="{{$budgetSource->id}}">{{$budgetSource->source_name}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="col-md-3 mb-2">
                                     <label for="project_status">योजनाको अवस्था</label>
                                     <select name="project_status[]" multiple data-toggle="select2"
                                             id="project_status" class="form-control">

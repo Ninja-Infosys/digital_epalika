@@ -34,6 +34,6 @@ class Role extends Model
 
     public function letterHead(): MorphOne
     {
-        return $this->morphOne(LetterHead::class,'model');
+        return $this->morphOne(LetterHead::class, 'model');
     }
 }

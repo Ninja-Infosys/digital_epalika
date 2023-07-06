@@ -2,8 +2,6 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DefendantIssuedDeadline;
@@ -18,6 +16,8 @@ class DefendantIssuedDeadlineController extends Controller
     public function index(ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('defendantIssuedDeadline_access');
+
+        $complaintApplication->load('defendantIssuedDeadlines');
 
         return view('judicialcommittee::admin.defendant_issued_deadline.index', compact('complaintApplication'));
     }
@@ -48,17 +48,17 @@ class DefendantIssuedDeadlineController extends Controller
 
         if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::DEFENDANT_ISSUED_DEADLINE)->count() == 0) {
             toast('टेम्प्लेट सेट गरिएको छैन', 'error');
-            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
+            return redirect(route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index'));
         }
 
-        return view('judicialcommittee::admin.defendant_issued_deadline.show',compact('complaintApplication','defendantIssuedDeadline'));
+        return view('judicialcommittee::admin.defendant_issued_deadline.show', compact('complaintApplication', 'defendantIssuedDeadline'));
     }
 
     public function edit(ComplaintApplication $complaintApplication, DefendantIssuedDeadline $defendantIssuedDeadline)
     {
         $this->checkAuthorization('defendantIssuedDeadline_edit');
 
-        return view('judicialcommittee::admin.defendant_issued_deadline.edit',compact('complaintApplication','defendantIssuedDeadline'));
+        return view('judicialcommittee::admin.defendant_issued_deadline.edit', compact('complaintApplication', 'defendantIssuedDeadline'));
     }
 
     public function update(UpdateDefendantIssuedDeadlineRequest $request, ComplaintApplication $complaintApplication, DefendantIssuedDeadline $defendantIssuedDeadline)

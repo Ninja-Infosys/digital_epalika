@@ -20,17 +20,17 @@ class LandOwnerEditLivewire extends Component
         $this->allDistricts = $districts;
 
         $this->landOwner = [
-            'land_owner_type' => $mapApply->landOwner->land_owner_type ?? null,
-            'name' => $mapApply->landOwner->name ?? null,
-            'phone' => $mapApply->landOwner->phone ?? null,
-            'father_name' => $mapApply->landOwner->father_name ?? null,
-            'grandfather_name' => $mapApply->landOwner->grandfather_name ?? null,
-            'citizenship_issue_district_id' => $mapApply->landOwner->citizenship_issue_district_id ?? null,
-            'citizenship_no' => $mapApply->landOwner->citizenship_no ?? null,
-            'citizenship_issue_date' => $mapApply->landOwner->citizenship_issue_date ?? null,
-            'address' => $mapApply->landOwner->address ?? null,
-            'local_body' => $mapApply->landOwner->local_body ?? null,
-            'ward_no' => $mapApply->landOwner->ward_no ?? null,
+            'land_owner_type' => $mapApply->landOwner->first()?->land_owner_type ?? null,
+            'name' => $mapApply->landOwner->first()?->name ?? null,
+            'phone' => $mapApply->landOwner->first()?->phone ?? null,
+            'father_name' => $mapApply->landOwner->first()?->father_name ?? null,
+            'grandfather_name' => $mapApply->landOwner->first()?->grandfather_name ?? null,
+            'citizenship_issue_district_id' => $mapApply->landOwner->first()?->citizenship_issue_district_id ?? null,
+            'citizenship_no' => $mapApply->landOwner->first()?->citizenship_no ?? null,
+            'citizenship_issue_date' => $mapApply->landOwner->first()?->citizenship_issue_date ?? null,
+            'address' => $mapApply->landOwner->first()?->address ?? null,
+            'local_body' => $mapApply->landOwner->first()?->local_body ?? null,
+            'ward_no' => $mapApply->landOwner->first()?->ward_no ?? null,
         ];
     }
 

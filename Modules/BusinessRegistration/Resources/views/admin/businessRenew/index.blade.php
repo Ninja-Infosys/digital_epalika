@@ -78,6 +78,14 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+                                        @can('businessRenew_access')
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.businessRegistration.businessRegistration.businessRenew.show',[$businessDetail,$businessRenew])}}"
+                                               title="सम्पादन गर्नुहोस्"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-print"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

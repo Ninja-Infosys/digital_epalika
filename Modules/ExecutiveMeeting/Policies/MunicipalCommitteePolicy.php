@@ -33,7 +33,6 @@ class MunicipalCommitteePolicy
                 : Response::denyAsNotFound();
         }
         return Response::allow();
-
     }
 
     public function delete(User $user, MunicipalCommittee $municipalCommittee): Response

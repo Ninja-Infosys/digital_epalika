@@ -3,32 +3,26 @@
 namespace Modules\ExecutiveMeeting\Http\Requests\MeetingDecision;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreMeetingDecisionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('meetingDecision_create');
     }
 
     public function rules(): array
     {
         return [
-            'meeting_event_id' => ['required', Rule::exists('meeting_events', 'id')->withoutTrashed()],
-            'subject' => ['required', 'string'],
-            'date' => ['required'],
-            'en_date' => ['nullable', 'date'],
-            'description' => ['nullable'],
-            'decision_file' => ['nullable', 'mimes:png,jpeg,jpg'],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'meeting_event_id.required' => 'बैठक आवश्यक छ',
-            'decision_file.mimes' => 'फाइल png, jpeg, jpg मा हुनुपर्छ ',
+            'meetingDecisions' => ['required', 'array'],
+            'meetingDecisions.*.meeting_agenda_id' => ['required', Rule::exists('meeting_agendas', 'id')->where('meeting_id', $this->meeting->id)->withoutTrashed()],
+            'meetingDecisions.*.date' => ['required'],
+            'meetingDecisions.*.en_date' => ['required', 'date'],
+            'meetingDecisions.*.description' => ['required'],
+            'meetingParticipants' => ['nullable', 'array'],
+            'meetingParticipants.*' => [Rule::exists('committee_members', 'id')->withoutTrashed()]
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,7 +13,6 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('business_details', function (Blueprint $table) {
-
             $table->string('bill_no')->nullable()->comment('बिल नं.');
             $table->string('bill_date_bs')->nullable()->comment('बिल मिति बि स.');
             $table->string('bill_date_ad')->nullable()->comment('बिल मिति ई स.');

@@ -20,7 +20,6 @@ class ProjectResource extends JsonResource
             'आयोजना सम्पन्‍न हुने मिति' => $this->when(in_array('project_completion_date', $request_columns), $this->project_completion_date ?? ''),
             'योजना स्तर' => $this->when(in_array('plan_level_id', $request_columns), $this->planLevel->level_name ?? ''),
             'वार्ड नं.' => $this->when(in_array('ward_no', $request_columns), $this->ward_no ?? ''),
-            'बजेट स्रोत' => $this->when(in_array('budget_source_id', $request_columns), $this->budgetSource->source_name ?? ''),
             'बजेट शीर्षक' => $this->when(in_array('budget_head_id', $request_columns), $this->budgetHead->title ?? ''),
             'विनियोजित रकम' => $this->when(in_array('allocated_amount', $request_columns), $this->allocated_amount ?? 0),
             'कार्यक्रम स्थल' => $this->when(in_array('project_venue', $request_columns), $this->project_venue ?? ''),

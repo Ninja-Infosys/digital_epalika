@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class RegisterBusinessResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         $request_columns = $request->input('columns')['registered_businesses'] ?? [];

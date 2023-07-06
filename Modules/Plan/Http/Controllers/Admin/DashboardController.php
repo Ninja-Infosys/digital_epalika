@@ -2,7 +2,6 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Models\Settings\OfficeSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Modules\Plan\Entities\BudgetHead;
@@ -24,28 +23,31 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        $this->checkAuthorization('planDashboard_access');
+
         $not_started_project_count = $this->projects->where('project_status', ProjectStatusEnum::NOT_STARTED)->count();
         $in_progress_project_count = $this->projects->where('project_status', ProjectStatusEnum::IN_PROGRESS)->count();
         $completed_project_count = $this->projects->where('project_status', ProjectStatusEnum::COMPLETED)->count();
         $deadline_extended_project_count = Project::whereHas('projectDeadlineExtensions')->count();
-        $wardWiseProjects = $this->getWardWiseProjects();
-        $planAreaWiseProjects = $this->getPlanAreaWiseProjects();
-        $budgetHeadWiseProjects = $this->getBudgetHeadWiseProjects();
-        $planLevelWiseProjects = $this->getPlanLevelWiseProjects();
+
+        if (request()->ajax()) {
+            return [
+                'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
+                'wardWiseProjects' => $this->getWardWiseProjects(),
+                'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
+                'planAreaWiseProjects' => $this->getPlanAreaWiseProjects()
+            ];
+        }
 
         return view('plan::admin.dashboard', compact(
             'not_started_project_count',
             'in_progress_project_count',
             'deadline_extended_project_count',
-            'completed_project_count',
-            'wardWiseProjects',
-            'planAreaWiseProjects',
-            'budgetHeadWiseProjects',
-            'planLevelWiseProjects'
+            'completed_project_count'
         ));
     }
 
-    private function getWardWiseProjects()
+    public function getWardWiseProjects()
     {
         $wardsData = collect();
 
@@ -67,7 +69,6 @@ class DashboardController extends Controller
                 [
                     'data' => $wardsData->pluck('projects_count')->toArray(),
                     'label' => 'जम्मा',
-                    'fill' => 'false',
                 ],
             ],
         ];
@@ -112,33 +113,24 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getBudgetHeadWiseProjects()
+    public function getBudgetHeadWiseProjects()
     {
-        $budgetHeads = BudgetHead::withCount(['projects' => function ($query) {
+        return BudgetHead::withCount(['projects' => function ($query) {
             $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
         }])
             ->with(['budgetHeads' => function ($query) {
                 $query->withCount(['projects' => function ($sub_query) {
                     $sub_query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                 }]);
-            }])->whereNull('budget_head_id')->get()->map(function ($budgetHead) {
+            }])
+            ->whereNull('budget_head_id')
+            ->get()
+            ->map(function ($budgetHead) {
                 return [
-                    'title' => $budgetHead->title,
-                    'projects_count' => $budgetHead->projects_count + $budgetHead->budgetHeads->sum('projects_count')
+                    'name' => $budgetHead->title,
+                    'data' => $budgetHead->projects_count + $budgetHead->budgetHeads->sum('projects_count')
                 ];
             });
-
-        return [
-            'labels' => $budgetHeads->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $budgetHeads->pluck('projects_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-
-        ];
     }
 
     private function getPlanLevelWiseProjects()
@@ -152,21 +144,11 @@ class DashboardController extends Controller
                 }]);
             }])->whereNull('plan_level_id')->get()->map(function ($planLevel) {
                 return [
-                    'level_name' => $planLevel->level_name,
-                    'projects_count' => $planLevel->projects_count + $planLevel->planLevels->sum('projects_count')
+                    'name' => $planLevel->level_name,
+                    'data' => $planLevel->projects_count + $planLevel->planLevels->sum('projects_count')
                 ];
             });
 
-        return [
-            'labels' => $planLevels->pluck('level_name')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $planLevels->pluck('projects_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
-                ]
-            ],
-
-        ];
+        return $planLevels;
     }
 }

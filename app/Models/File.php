@@ -23,10 +23,22 @@ class File extends Model
         'file_name',
         'extension',
         'file',
+        'type',
+        'user_id'
+    ];
+
+    protected $appends = [
+        'file_url',
+        'file_size'
     ];
 
     public function getFileUrlAttribute(): string
     {
         return Storage::disk('public')->url($this->attributes['file']);
+    }
+
+    public function getFileSizeAttribute(): string
+    {
+        return Storage::disk('public')->size($this->attributes['file']);
     }
 }

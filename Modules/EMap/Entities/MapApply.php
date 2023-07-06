@@ -8,6 +8,7 @@ use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -30,6 +31,7 @@ class MapApply extends Model
         'updated_at',
         'deleted_at',
         'sent_to_admin_at',
+        'registration_date',
     ];
 
     protected $fillable = [
@@ -54,26 +56,29 @@ class MapApply extends Model
         'consultant_mobile_no',
         'consultant_nec_no',
         'sent_to_admin_at',
-        'application_type'
+        'sent_to_organization',
+        'application_type',
+        'file_code',
+        'number',
     ];
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
         'usage' => BuildingUsageEnum::class,
         'building_category' => CategorizationEnum::class,
-        'application_type'=>ApplicationFormTypeEnum::class
+        'application_type' => ApplicationFormTypeEnum::class
     ];
 
     public function setConsultantSignatureAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
         }
     }
 
     public function getConsultantSignatureUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['consultant_signature']);
+        return $this->attributes['consultant_signature'] ? Storage::disk('public')->url($this->attributes['consultant_signature']) : '';
     }
 
     public function organization(): BelongsTo
@@ -106,14 +111,15 @@ class MapApply extends Model
         return $this->hasOne(LandDetail::class);
     }
 
-    public function landOwner(): HasOne
+
+    public function landOwner(): BelongsToMany
     {
-        return $this->hasOne(LandOwner::class);
+        return $this->belongsToMany(LandOwner::class);
     }
 
-    public function houseOwner(): HasOne
+    public function houseOwner(): BelongsToMany
     {
-        return $this->hasOne(HouseOwner::class);
+        return $this->belongsToMany(HouseOwner::class);
     }
 
     public function storeyDetails(): HasMany
@@ -164,6 +170,11 @@ class MapApply extends Model
     public function otp(): MorphOne
     {
         return $this->morphOne(Otp::class, 'model')->latest();
+    }
+
+    public function attachDocument(): HasOne
+    {
+        return $this->hasOne(AttachDocument::class);
     }
 
     public function scopeSentToAdmin($query)

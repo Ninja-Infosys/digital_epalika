@@ -4,7 +4,6 @@ namespace Modules\JudicialCommittee\Http\Requests\JudicialMember;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class UpdateJudicialMemberRequest extends FormRequest
 {

@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{ route('admin.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी पत्र </a>
+                            <a href="{{ route('admin.circular.dispatch.index') }}">चलानी पत्र </a>
                         </li>
                         <li class="breadcrumb-item active">चलानी</li>
                     </ol>
@@ -24,9 +24,9 @@
     <div class="row">
         <div class="col-sm" style="text-align: end">
             <button class="btn btn-sm btn-info"
-                    onclick="printJS({
+                onclick="printJS({
                     printable: 'printData',
-                    css: '{{asset('assets/backend/css/print.css')}}',
+                    css: '{{ asset('assets/backend/css/print.css') }}',
                     type: 'html'
                     })">
                 <i class="fa fa-print"></i> Print
@@ -38,7 +38,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">चलानी पत्र विवरण</h4>
 
-                        <a href="{{route('admin.circular.dispatch.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.circular.dispatch.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> चलानी पत्र सूची
                         </a>
                     </div>
@@ -46,92 +46,107 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div id="printData">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <table class="table table-sm mb-0 table-striped table-hover table-bordered">
 
-                            <tbody>
-                            <tr>
-                                <th>चलानी न.</th>
-                                <td>{{$dispatch->dispatch_no}}</td>
-                            </tr>
-                            <tr>
-                                <th>आर्थिक वर्ष</th>
-                                <td>{{$dispatch->fiscalYear->title??''}}</td>
-                            </tr>
-                            <tr>
-                                <th>चलानी मिति</th>
-                                <td>{{$dispatch->dispatch_date}}</td>
-                            </tr>
-                            <tr>
-                                <th>पत्र संख्या.</th>
-                                <td>{{$dispatch->letter_number}}</td>
-                            </tr>
-                            <tr>
-                                <th>पत्रको मिति.</th>
-                                <td>{{$dispatch->letter_date}}</td>
-                            </tr>
-                            <tr>
-                                <th>पाउने कार्यालयको नाम</th>
-                                <td>{{$dispatch->receiver_name}}</td>
-                            </tr>
-                            <tr>
-                                <th>पाउने कार्यालयको ठेगाना</th>
-                                <td>{{$dispatch->receiver_address}}</td>
-                            </tr>
-                            <tr>
-                                <th>बिषय.</th>
-                                <td>{{$dispatch->subject}}</td>
-                            </tr>
-                            <tr>
-                                <th>हुलाक/ र.न./इमेल.</th>
-                                <td>{{$dispatch->receiver_contact}}</td>
-                            </tr>
-                            <tr>
-                                <th>बुझिलिनेको हस्तक्षर्</th>
-                                <td>
-                                    <img src="{{$dispatch->receiver_signature_url}}" alt="" height="60">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>कैफ़ियत.</th>
-                                <td>{{$dispatch->remarks}}</td>
-                            </tr>
-                            <tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-                    <div class="row">
-                        @foreach($dispatch->files as $document)
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <div class="card-header d-flex justify-content-around">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-download"></i>
-                                        </a>
-                                        <form action="{{route('admin.file.destroy',$document)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
-                                                <i class="fa fa-window-close"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="card-body">
-                                        @if($document->extension ==='pdf')
-                                            <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
-                                        @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
-                                            <img src="{{ $document->file_url }}" class="card-image" alt="Image"
-                                                 height=150px;" width="100%">
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                <tbody>
+                                    <tr>
+                                        <th>चलानी न.</th>
+                                        <td>{{ $dispatch->dispatch_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>आर्थिक वर्ष</th>
+                                        <td>{{ $dispatch->fiscalYear->title ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>चलानी मिति</th>
+                                        <td>{{ $dispatch->dispatch_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>पत्र संख्या.</th>
+                                        <td>{{ $dispatch->letter_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>पत्रको मिति.</th>
+                                        <td>{{ $dispatch->letter_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>पाउने कार्यालयको नाम</th>
+                                        <td>{{ $dispatch->receiver_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>पाउने कार्यालयको ठेगाना</th>
+                                        <td>{{ $dispatch->receiver_address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>बिषय.</th>
+                                        <td>{{ $dispatch->subject }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>हुलाक/ र.न./इमेल.</th>
+                                        <td>{{ $dispatch->receiver_contact }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>बुझिलिनेको हस्तक्षर्</th>
+                                        <td>
+                                            <img src="{{ $dispatch->receiver_signature_url }}" alt=""
+                                                height="60">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>कैफ़ियत.</th>
+                                        <td>{{ $dispatch->remarks }}</td>
+                                    </tr>
+                                    <tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="header-title mb-0">आवश्यक कागजातहरु</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @forelse ($dispatch->dispatchDetail?->files as $document)
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card shadow-none border">
+                            <div class="p-2">
+                                <div class="row align-items-center">
+                                    <div class="col-2 pe-0">
+                                        <div class="avatar-sm">
+                                            <span class="avatar-title bg-light text-secondary rounded">
+                                                <i class="fa {{ getFileIconClass($document->extension) }} font-18"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="javascript:void(0);"
+                                        onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
+                                            class="text-muted fw-medium">{{ $document->file_name }}
+                                            .{{ $document->extension }}</a>
+                                        <p class="mb-0 font-13">
+                                            {{ convert_to_highest_unit($document->file_size) }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="{{ route('admin.file.download', $document) }}"
+                                            class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div> <!-- end row -->
+                            </div> <!-- end .p-2-->
+                        </div> <!-- end col -->
+                    </div>
+                @empty
+                    <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                @endforelse
+            </div> <!-- end row-->
+        </div>
+        @include('admin.inc.file-view');
     </div>
 @endsection

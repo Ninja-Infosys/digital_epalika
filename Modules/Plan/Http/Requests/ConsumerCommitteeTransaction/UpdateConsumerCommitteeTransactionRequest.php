@@ -8,18 +8,18 @@ use Modules\Plan\Enums\TransactionTypeEnum;
 
 class UpdateConsumerCommitteeTransactionRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         info($this->consumerCommitteeTransaction->id);
         return [
             'type' => ['required', new Enum(TransactionTypeEnum::class)],
             'date' => ['required'],
-            'amount' => ['required', 'numeric','lte:'.($this->project->allocated_amount-$this->project->consumerCommitteeTransactions->where('id','!=',$this->consumerCommitteeTransaction->id)->sum('amount'))],
+            'amount' => ['required', 'numeric','lte:'.($this->project->allocated_amount-$this->project->consumerCommitteeTransactions->where('id', '!=', $this->consumerCommitteeTransaction->id)->sum('amount'))],
             'remarks' => ['nullable']
         ];
     }

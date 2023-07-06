@@ -43,6 +43,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शिर्षक"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -57,6 +58,7 @@
                                     class="form-control @error('title_en') is-invalid @enderror"
                                     id="title_en"
                                     placeholder="शिर्षक (English)"
+                                    required
                                 />
                                 @error('title_en')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -68,7 +70,7 @@
                                     <label for="category">Category</label>
                                     <select name="category" id="category"
                                             class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-control"
-                                            aria-label="Default select example">
+                                            aria-label="Default select example" required>
                                         <option value="">Select Category</option>
                                         @foreach (\Modules\Identity\Enums\CategoryTypeEnum::cases() as $category)
                                             <option value="{{ $category->value }}" {{old('category')==$category->value ? 'selected':''}}>
@@ -87,7 +89,7 @@
                                     <label for="color">Card Color</label>
                                     <select name="color" id="color"
                                             class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-control"
-                                            aria-label="Default select example">
+                                            aria-label="Default select example" required>
                                         <option value="">Select Category</option>
                                         @foreach ($cardColors as $cardColor)
                                             <option value="{{ $cardColor->color }}" {{old('color')==$cardColor->color ? 'selected':''}}>

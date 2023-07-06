@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\App;
 
 class LoginController extends Controller
 {
@@ -53,12 +54,18 @@ class LoginController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
+        $data = [
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
+        ];
+        if (App::environment('production')) {
+            $credentials = $request->validate(array_merge($data, [
+                'g-recaptcha-response' => ['required']
+            ]));
+        } else {
+            $credentials = $request->validate($data);
+        }
+        if (Auth::attempt(\Arr::except($credentials, 'g-recaptcha-response'))) {
             $request->session()->regenerate();
 
             event(new ActivityLogEvent('Login'));

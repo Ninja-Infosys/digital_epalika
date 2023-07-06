@@ -6,14 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.plan.dashboard') }}">
+                            <a href="{{ route('admin.businessRegistration.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> व्यवसाय दर्ता रिपोर्ट</li>
+                        <li class="breadcrumb-item active"> प्रतिवेदनहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> व्यवसाय दर्ता रिपोर्ट </h4>
+                <h4 class="page-title"> प्रतिवेदनहरु </h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय दर्ता रिपोर्ट</h4>
+                        <h4 class="header-title">व्यवसाय दर्ता प्रतिवेदन</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
@@ -31,12 +31,14 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel
-                                file-name="व्यवसाय दर्ता रिपोर्ट"
+                                file-name="प्रतिवेदन रिपोर्ट"
                                 target-table="report-table"
                             />
                             <x-print-button
                                 target-element="report-table"
-                                title="व्यवसाय दर्ता रिपोर्ट"
+                                title="प्रतिवेदन रिपोर्ट"
+                                :headerRequired="true"
+
                             />
                         </div>
                     </div>
@@ -135,101 +137,14 @@
                             </button>
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive"></div>
+                    <div class="table-responsive">
+                        <div id="report-table"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
-        <script>
-            $(document).ready(function () {
-                // x-csrf protection
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $(document.body).delegate('#plan_area_id', 'change', function (e) {
-                    let plan_area_id = $('#plan_area_id').val()
-                    $('#plan_sub_area_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!plan_area_id.length) {
-                        return false;
-                    }
-                    $.ajax({
-                        type: 'get',
-                        data: {plan_area_id: plan_area_id},
-                        url: "{{route('admin.plan.planSubArea')}}",
-                        success: function (resp) {
-                            $(resp.data).each(function (key, data) {
-                                $('#plan_sub_area_id').append("<option value=" + data.id + ">" + data.area_name + "</option>")
-                            })
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    })
-                })
-
-                $(document.body).delegate('#plan_level_id', 'change', function (e) {
-                    let plan_level_id = $('#plan_level_id').val()
-                    $('#plan_sub_level_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!plan_level_id.length) {
-                        return false;
-                    }
-                    $.ajax({
-                        type: 'get',
-                        data: {plan_level_id: plan_level_id},
-                        url: "{{route('admin.plan.planSubLevel')}}",
-                        success: function (resp) {
-                            $(resp.data).each(function (key, data) {
-                                $('#plan_sub_level_id').append("<option value=" + data.id + ">" + data.level_name + "</option>")
-                            })
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    })
-                })
-
-                $(document.body).delegate('#budget_head_id', 'change', function (e) {
-                    let budget_head_id = $('#budget_head_id').val()
-                    $('#budget_sub_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!budget_head_id.length) {
-                        return false;
-                    }
-                    $.ajax({
-                        type: 'get',
-                        data: {budget_head_id: budget_head_id},
-                        url: "{{route('admin.plan.budgetSubHead')}}",
-                        success: function (resp) {
-                            $(resp.data).each(function (key, data) {
-                                $('#budget_sub_head_id').append("<option value=" + data.id + ">" + data.title + "</option>")
-                            })
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            toastMessage('error', XMLHttpRequest.responseJSON.message)
-                        }
-                    })
-                })
-
-                function toastMessage(type, title) {
-                    swal.fire({
-                        title: title,
-                        toast: true,
-                        position: 'top-right',
-                        showConfirmButton: false,
-                        width: 450,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        icon: type,
-                    });
-                }
-            });
-        </script>
     @endpush
 @endsection

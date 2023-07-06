@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
+use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 use Modules\GrievanceHandling\Enums\GrievanceStatus;
 
 class GrievanceDetail extends Model
@@ -31,6 +32,9 @@ class GrievanceDetail extends Model
         'user_id',
         'grievance_type_id',
         'grievance_office_id',
+        'publisher_id',
+        'assigned_user_id',
+        'assigned_at',
         'subject',
         'description',
         'complaint_severity',
@@ -38,11 +42,13 @@ class GrievanceDetail extends Model
         'status',
         'is_approved',
         'is_public',
+        'grievance_medium'
     ];
 
     protected $casts = [
         'complaint_severity' => GrievanceComplaintSeverity::class,
         'status' => GrievanceStatus::class,
+        'grievance_medium' => GrievanceMediumEnum::class
     ];
 
     public function scopeApproved($query)
@@ -63,6 +69,11 @@ class GrievanceDetail extends Model
     public function scopeNotPublic($query)
     {
         return $query->where('is_public', 0);
+    }
+
+    public function grievanceDetail(): BelongsTo
+    {
+        return $this->belongsTo(__CLASS__);
     }
 
     public function grievanceDetails(): HasMany
@@ -90,8 +101,23 @@ class GrievanceDetail extends Model
         return $this->belongsTo(GrievanceOffice::class);
     }
 
+    public function publisher()
+    {
+        return $this->belongsTo(User::class, 'publisher_id');
+    }
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
+    }
+
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function grievanceAssignHistories(): HasMany
+    {
+        return $this->hasMany(GrievanceAssignHistory::class);
     }
 }

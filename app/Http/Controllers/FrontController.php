@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\OfficeHeader;
+use App\Models\Settings\Employee;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
-use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
@@ -27,6 +25,9 @@ class FrontController extends Controller
 
     public function index()
     {
+        if ($this->checkModuleExistence('DigitalBoard')) {
+            return view('frontend.welcome');
+        }
         if (config('app.website_type') === 'website') {
             $employees = Employee::orderBy('position')->get();
 
@@ -129,20 +130,17 @@ class FrontController extends Controller
 
     public function seniorCitizenDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
     {
-
         $seniorCitizenDetail->load('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody');
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.seniorCitizenprint', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
-
     }
 
     public function disabilityIdentityCardQrcode(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        $disabilityIdentityCard->load('fingerPrints', 'employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
-
     }
 }

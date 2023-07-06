@@ -2,22 +2,15 @@
 
 namespace Modules\ListRegistration\Http\Controllers\Admin;
 
-use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
-use App\Traits\ExcelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\View;
-use LaravelIdea\Helper\Modules\ListRegistration\Entities\_IH_ListRegistration_C;
-use Maatwebsite\Excel\Facades\Excel;
 use Modules\ListRegistration\Entities\ListRegistration;
+use Modules\ListRegistration\Transformers\Report\ListRegistrationResource;
 
 class ReportController extends Controller
 {
-    use ExcelTrait;
-
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -34,21 +27,22 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        list($listRegistrationColumns, $fiscalYearColumns) = $this->resolveColumns($request);
-        $lists = $this->getDataFromListRegistrations($request, $listRegistrationColumns);
-
-        if (!empty($fiscalYearColumns)) {
-            $lists->load(['fiscalYear' => function ($query) use ($fiscalYearColumns) {
-                $query->select($fiscalYearColumns);
-            }]);
+        if (empty($request->input('columns'))) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'list_registrations' => ['registration_no', 'applicant_type', 'main_person', 'mobile_no', 'date']
+                    ]
+                ]
+            );
         }
 
-        $lists = $this->excludeColumnsFromListRegistration($lists);
-
-        $excelUrl = $this->storeExcelFile($lists);
+        $listRegistrations = ListRegistration::with('fiscalYear')->where(function ($q) use ($request) {
+            $this->filterDataFromUser($q, $request);
+        })->get();
 
         return response()->json([
-            'view' => (string)View::make('report.table', compact('lists', 'excelUrl'))
+            'data' => ListRegistrationResource::collection($listRegistrations)
         ]);
     }
 
@@ -58,9 +52,9 @@ class ReportController extends Controller
 
         (new ListRegistration())
             ->ownAndRelatedModelsFillableColumns()
-//            ->filter(function ($column) {
-//                return array_keys($column, 'ListRegistration');
-//            })
+            ->filter(function ($column) {
+                return !array_keys($column, 'printedData');
+            })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
             });
@@ -92,49 +86,5 @@ class ReportController extends Controller
         if (!empty($request->input('business_nature'))) {
             $q->whereIn('business_nature', $request->input('business_nature'));
         }
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    private function resolveColumns(Request $request): array
-    {
-        $listRegistrationColumns = ['registration_no', 'applicant_type', 'name', 'address', 'mailing_address', 'main_person', 'telephone', 'mobile_no', 'business_nature', 'business_nature_description', 'date'];
-        $fiscalYearColumns = [];
-
-        if (!empty($request->input('columns'))) {
-            $listRegistrationColumns = ['id'];
-            if (!empty($request->input('columns')['list_registrations'])) {
-                $listRegistrationColumns = $request->input('columns')['list_registrations'];
-            }
-
-            if (!empty($request->input('columns')['fiscal_years'])) {
-                $listRegistrationColumns[] = 'fiscal_year_id';
-
-                $fiscalYearColumns = $request->input('columns')['fiscal_years'];
-                $fiscalYearColumns[] = 'id';
-            }
-
-        }
-        return array($listRegistrationColumns, $fiscalYearColumns);
-    }
-
-
-    private function getDataFromListRegistrations(Request $request, mixed $listRegistrationColumns)
-    {
-        return ListRegistration::where(function ($q) use ($request) {
-            $this->filterDataFromUser($q, $request);
-        })
-            ->select($listRegistrationColumns)
-            ->get();
-    }
-
-    private function excludeColumnsFromListRegistration($lists)
-    {
-        return $lists
-            ->map(function ($list) {
-                return removeColumns($list->toArray(), ['id', 'created_at', 'updated_at', 'deleted_at', 'fiscal_year_id']);
-            });
     }
 }

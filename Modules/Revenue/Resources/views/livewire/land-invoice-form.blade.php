@@ -2,42 +2,12 @@
     <fieldset>
         <legend>फारम</legend>
         <div class="row">
-            <div class="col-md-6 mb-2">
-                <label for="form.revenue_category_id">राजस्वको वर्ग</label>
-                <select
-                    wire:model="form.revenue_category_id"
-                    class="form-select @error('form.revenue_category_id') is-invalid @enderror"
-                    id="form.revenue_category_id">
-                    <option value="">--- छान्नुहोस् ---</option>
-                    @foreach($revenueCategories as $revenue_category)
-                        <option
-                            value="{{$revenue_category->id}}"
-                        >
-                            {{$revenue_category->title}}
-                        </option>
-                    @endforeach
-                </select>
-                @error('form.revenue_category_id')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-            </div>
-            <div class="col-md-6 mb-2">
-                <label for="form.revenue_id">राजस्वको शिर्षक</label>
-                <select
-                    wire:model="form.revenue_id"
-                    wire:change="setRate()"
-                    class="form-select @error('form.revenue_id') is-invalid @enderror"
-                    id="form.revenue_id">
-                    <option value="">--- छान्नुहोस् ---</option>
-                    @foreach($revenues as $revenue)
-                        <option
-                            value="{{$revenue->id}}"
-                        >
-                            ({{$revenue->code_no}}) {{$revenue->title}}
-                        </option>
-                    @endforeach
-                </select>
-                @error('form.revenue_id')
+            <div class="col-md-12 mb-2">
+                <label for="form.revenue">राजस्वको शिर्षक</label>
+                <input type="text" id="form.revenue"
+                       class="form-control @error('form.revenue') is-invalid @enderror"
+                       wire:model="form.revenue">
+                @error('form.revenue')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
@@ -87,24 +57,21 @@
             <i class="fa fa-save"></i>
         </button>
     </fieldset>
+
     <table class="table table-bordered table-sm mt-2">
         <thead>
         <tr>
-            <th rowspan="2">क्र.सं</th>
-            <th colspan="2">विवरण</th>
-            <th rowspan="2">क्षेत्रफल</th>
-            <th rowspan="2">दर</th>
-            <th rowspan="2">रकम</th>
-            <th rowspan="2">ब.आ.व</th>
-            <th rowspan="2">बक्यौता</th>
-            <th rowspan="2">जरिवाना</th>
-            <th rowspan="2">जम्मा</th>
-            <th rowspan="2">कैफियत</th>
-            <th rowspan="2">#</th>
-        </tr>
-        <tr>
-            <th>वर्ग</th>
-            <th>राजस्वको शिर्षक</th>
+            <th>क्र.सं</th>
+            <th>विवरण</th>
+            <th>क्षेत्रफल (वर्ग मीटरमा)</th>
+            <th>दर</th>
+            <th>रकम</th>
+            <th>ब.आ.व</th>
+            <th>बक्यौता</th>
+            <th>जरिवाना</th>
+            <th>जम्मा</th>
+            <th>कैफियत</th>
+            <th>#</th>
         </tr>
         </thead>
         <tbody>
@@ -112,34 +79,17 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    <input type="hidden" name="particulars[{{$index}}][id]"
-                           value="{{$detail['id'] ?? ''}}">
-                    {{get_revenue_categories(revenueCategoryId: $detail['revenue_category_id'] ?? null)?->title ?? ''}}
-                    <input type="hidden" name="particulars[{{$index}}][revenue_category_id]"
-                           value="{{$detail['revenue_category_id'] ?? ''}}">
-                    @error('particulars.'.$index.'.revenue_category_id')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </td>
-                <td>
-                    ({{get_revenues(revenueId: $detail['revenue_id'] ?? null)?->code_no ?? ''}}
-                    ) {{get_revenues(revenueId: $detail['revenue_id'] ?? null)?->title ?? ''}}
-                    <input type="hidden" name="particulars[{{$index}}][revenue_id]"
-                           value="{{$detail['revenue_id'] ?? ''}}">
-
                     <input type="hidden" name="particulars[{{$index}}][revenue]"
-                           value="{{get_revenues(revenueId: $detail['revenue_id'] ?? null)->title ?? ''}}">
+                           value="{{$detail['revenue']?? ''}}" required>
+                    {{$detail['revenue'] ?? 0}}
 
-                    @error('particulars.'.$index.'.revenue_id')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
                     @error('particulars.'.$index.'.revenue')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][quantity]"
-                           value="{{$detail['quantity']?? ''}}">
+                           value="{{$detail['quantity']?? ''}}" required>
                     {{$detail['quantity'] ?? 0}}
                     @error('particulars.'.$index.'.quantity')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -147,7 +97,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][rate]"
-                           value="{{$detail['rate']?? ''}}">
+                           value="{{$detail['rate']?? ''}}" required>
                     {{$detail['rate'] ?? 0}}
                     @error('particulars.'.$index.'.rate')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -159,7 +109,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][due]"
-                           value="{{$detail['due']?? ''}}">
+                           value="{{$detail['due']?? ''}}" required>
                     {{$detail['deu'] ?? 0}}
                     @error('particulars.'.$index.'.due')
                     <div class="invalid-feedback">{{$message}}</div>

@@ -1,4 +1,3 @@
-
 function createTable(headerData, bodyData) {
     const tableDiv = document.getElementById("report-table");
     tableDiv.innerHTML = "";
@@ -136,14 +135,12 @@ table.appendChild(tBody);
 
 function getHeader(data) {
     let headerData = [];
-
     Object.keys(data[0] ?? {}).forEach((key) => {
         if (!Array.isArray(data[0][key])) {
 
             headerData.push(key);
         }
     });
-
     return headerData;
 }
 

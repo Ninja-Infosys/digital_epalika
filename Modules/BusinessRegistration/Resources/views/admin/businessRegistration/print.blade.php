@@ -42,14 +42,14 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <div>
-                                    <p><strong>करदाता नं :</strong> {{$businessDetail->taxpayer_number}}</p>
-                                    <p><strong>प्रमाणपत्र नं :</strong> {{$businessDetail-> registration_no}}</p>
+                                    <p><strong>करदाता नं :</strong> {{get_nepali_number($businessDetail->taxpayer_number)}}</p>
+                                    <p><strong>प्रमाणपत्र नं :</strong> {{get_nepali_number($businessDetail-> registration_no)}}</p>
                                 </div>
                                 <div class="certificate-title">
                                     <h3>व्यवसाय दर्ता प्रमाण-पत्र</h3>
                                 </div>
                                 <div>
-                                    <p><strong>दर्ता मिति :</strong> {{$businessDetail->registration_date_ne}}</p>
+                                    <p><strong>दर्ता मिति :</strong> {{get_nepali_number($businessDetail->registration_date_ne)}}</p>
                                 </div>
                             </div>
                             <div class="mt-3">
@@ -58,7 +58,7 @@
                                     गा.बि.स./नगरपालिका <span
                                         class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->localBody->local_body ??''}}</span>
                                     वडा नं. <span
-                                        class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->ward_no ??''}}</span>
+                                        class="dashed-bottom mx-1">{{get_nepali_number($businessDetail->partners->first()?->ward_no ??'')}}</span>
                                     बस्ने श्री <span
                                         class="dashed-bottom mx-1">{{$businessDetail->partners->first()?->name ??''}}</span>
                                     लाई निम्न विवरण अनुसारको व्यवसाय दर्ता गरी यो प्रमाण-पत्र जारी गरिएको छ ।
@@ -68,7 +68,7 @@
                                 <p><strong>व्यवसायको नाम :</strong> <span class="mx-1">{{$businessDetail->name}}</span></p>
                                 <p><strong>व्यवसाय रहने स्थान :</strong>
                                     <span class="mx-1">{{$businessDetail->localBody->local_body??''}}</span>
-                                    वडा नं. <span class="mx-1">{{$businessDetail->ward_no}}</span>
+                                    वडा नं. <span class="mx-1">{{get_nepali_number($businessDetail->ward_no)}}</span>
                                     बाटोको नाम <span class="mx-1">{{$businessDetail->way}}</span></p>
                                 <p><strong>घर नं. .............. टोल</strong> <span class="mx-1">{{$businessDetail->tole}}</span></p>
                                 <p><strong>व्यवसाय रहने घर/जगाधानी नाम :</strong>
@@ -78,9 +78,9 @@
                                 <p><strong>विवरण :</strong> <span class="mx-1">{{$businessDetail->objectTransaction->title??''}}</span>
                                 </p>
                                 <p><strong>उद्देश्य : </strong><span class="mx-1">{{$businessDetail->purpose}}</span></p>
-                                <p><strong>परिचयपाटीको साइज : </strong><span class="mx-1">({{$businessDetail->length}} * {{$businessDetail->length}}) Sq.ft</span>
+                                <p><strong>परिचयपाटीको साइज : </strong><span class="mx-1">({{get_nepali_number($businessDetail->length)}} * {{get_nepali_number($businessDetail->width)}}) Sq.ft</span>
                                 </p>
-                                <p><strong>पुजीगत लगानी (रु मा) :</strong><span class="mx-1">{{$businessDetail->investment}}</span></p>
+                                <p><strong>पुजीगत लगानी (रु मा) :</strong><span class="mx-1">{{get_nepali_number($businessDetail->investment)}}</span></p>
 
                             </div>
                             <div class="d-flex justify-content-between mt-5">

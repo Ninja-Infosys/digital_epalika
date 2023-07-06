@@ -12,6 +12,7 @@ class CircularPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'circularDashboard_access',
             'registration_access',
             'registration_create',
             'registration_edit',

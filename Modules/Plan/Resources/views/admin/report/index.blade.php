@@ -37,6 +37,7 @@
                             <x-print-button
                                 target-element="report-table"
                                 title="योजना रिपोर्ट"
+                                :header-required="true"
                             />
                         </div>
                     </div>
@@ -135,18 +136,6 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="budget_source_id">बजेट स्रोत</label>
-                                    <select name="budget_source_id[]" multiple data-toggle="select2"
-                                            id="budget_source_id" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($budgetSources as $budgetSource)
-                                            <option
-                                                value="{{$budgetSource->id}}">{{$budgetSource->source_name}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="col-md-3 mb-2">
                                     <label for="project_status">योजनाको अवस्था</label>
                                     <select name="project_status"
                                             id="project_status" class="form-select">
@@ -197,9 +186,6 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
         <script>

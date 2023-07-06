@@ -54,14 +54,14 @@
                             <td></td>
                             <td></td>
                             <td>- -</td>
-                            <td>रू. {{$project->allocated_amount}}</td>
+                            <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                             <td>- -</td>
-                            <td>रू. {{$project->allocated_amount}}</td>
+                            <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                             <td>- -</td>
                             <td>- -</td>
                         </tr>
                         @php
-                            $balance=$project->allocated_amount;
+                            $balance=$project->project_allocated_amounts_sum_amount;
                         @endphp
                         @forelse($project->consumerCommitteeTransactions as $transaction)
                             @php
@@ -102,10 +102,10 @@
                         <tfoot>
                         <tr>
                             <th colspan="3" class="text-center">जम्मा</th>
-                            <td>रू. {{$project->allocated_amount}}</td>
+                            <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                             <td>रू. {{$project->consumerCommitteeTransactions->sum('amount')}}</td>
                             <td>
-                                रू. {{$project->allocated_amount-$project->consumerCommitteeTransactions->sum('amount')}}</td>
+                                रू. {{$project->project_allocated_amounts_sum_amount-$project->consumerCommitteeTransactions->sum('amount')}}</td>
                             <td colspan="2"></td>
                         </tr>
                         </tfoot>

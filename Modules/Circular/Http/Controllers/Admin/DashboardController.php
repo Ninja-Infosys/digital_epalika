@@ -22,37 +22,34 @@ class DashboardController extends Controller
     {
         parent::__construct();
 
-        $this->officeSetting = OfficeSetting::first();
+        $this->officeSetting = officeSetting();
         $this->currentYearRegistrations = Registration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
         $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
     }
 
     public function __invoke()
     {
+        $this->checkAuthorization('circularDashboard_access');
+
         $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
 
         $total_registrations = Registration::count();
-        $yearly_registrations = $this->currentYearRegistrations->count();
         $monthly_registrations = $this->currentYearRegistrations->where('registration_month', $nepali_date['m'])->count();
         $total_dispatches = Dispatch::count();
-        $yearly_dispatches = $this->currentYearDispatches->count();
         $monthly_dispatches = $this->currentYearDispatches->where('dispatch_month', $nepali_date['m'])->count();
-
-        $registrationChartData = $this->getTotalRegistrationAndDispatchData();
-
-        $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch();
-
+        if (request()->ajax()) {
+            return [
+                'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
+                'totalMonthRegistrationAndDispatch' => $this->getCurrentFyRegistrationAndDispatch()
+            ];
+        }
         return view(
             'circular::admin.dashboard',
             compact(
                 'total_registrations',
-                'yearly_registrations',
                 'monthly_registrations',
                 'total_dispatches',
-                'yearly_dispatches',
-                'monthly_dispatches',
-                'registrationChartData',
-                'registrationYearlyChartData'
+                'monthly_dispatches'
             )
         );
     }
@@ -60,9 +57,17 @@ class DashboardController extends Controller
     /**
      * @return array
      */
-    public function getTotalRegistrationAndDispatchData(): array
+    public function getFyRegistrationAndDispatchData(): array
     {
-        $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])->get();
+        $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])
+            ->get()
+            ->map(function ($fiscalYear) {
+                return [
+                    'title' => $fiscalYear->title,
+                    'registrations_count' => (int)$fiscalYear->registrations_count,
+                    'dispatch_count' => (int)$fiscalYear->dispatch_count,
+                ];
+            });
 
         return [
             'labels' => $fiscalYears->pluck('title')->toArray(),
@@ -70,18 +75,16 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
                     'label' => 'दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
                     'label' => 'चलानी',
-                    'fill' => 'false',
                 ],
             ],
         ];
     }
 
-    public function getCurrentFyMonthlyRegistrationAndDispatch(): array
+    public function getCurrentFyRegistrationAndDispatch(): array
     {
         $monthlyRegistrations = [];
         $monthlyDispatches = [];
@@ -97,12 +100,10 @@ class DashboardController extends Controller
                 [
                     'data' => $monthlyRegistrations,
                     'label' => 'दर्ता',
-                    'fill' => 'false',
                 ],
                 [
                     'data' => $monthlyDispatches,
                     'label' => 'चलानी',
-                    'fill' => 'false',
                 ],
             ],
         ];

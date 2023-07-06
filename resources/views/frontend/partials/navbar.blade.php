@@ -31,7 +31,6 @@
                         <li><a class="dropdown-item " href="{{route('photo')}}">फोटोहरु</a></li>
                         <li><a class="dropdown-item " href="{{route('audio')}}">अडियोहरु</a></li>
                         <li><a class="dropdown-item " href="{{route('video')}}">भिडियोहरु</a></li>
-
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -52,11 +51,6 @@
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('grievanceHandling.grievance') ? 'active' : ''}}" href="{{route('grievanceHandling.grievance')}}">
                         गुनासो
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{{route('helpdesk.helpdesk')}}">
-                        नागरिक सहयोग
                     </a>
                 </li>
                 <li class="nav-item">

@@ -40,13 +40,19 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
+            Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', 'checkPinMiddleware'])
                 ->prefix('admin')
                 ->as('admin.')->group(base_path('routes/admin.php'));
 
             Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
                 ->prefix('file_manager')
                 ->as('file_manager.')->group(base_path('routes/file_manager.php'));
+
+            Route::prefix('installer')
+                ->as('installer.')
+                ->middleware(['web','installerMiddleware'])
+                ->namespace($this->namespace)
+                ->group(base_path('routes/installer.php'));
         });
     }
 

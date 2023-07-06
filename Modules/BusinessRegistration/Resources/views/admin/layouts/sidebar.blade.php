@@ -7,7 +7,7 @@
 @can('businessRegistration_access')
     <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
         <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
-            <i class="fa fa-file"></i>
+            <i class="fa fa-clipboard"></i>
             <span> व्यवसाय दर्ता / नविकरण</span>
         </a>
     </li>
@@ -28,7 +28,36 @@
         <ul class="nav-second-level">
             <li class="{{request()->is('admin/businessRegistration/report') ? 'active' : ''}}">
                 <a href="{{route('admin.businessRegistration.report.index')}}">
-                    <span>रिपोर्ट</span>
+                    <span>प्रतिवेदनहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/business-registration-book') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.business-registration-book')}}">
+                    <span>दर्ता प्रतिवेदन</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/business-nature-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.business-nature-wise')}}">
+                    <span>प्रकृति अनुसार </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/object-transaction') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.object-transaction')}}">
+                    <span>
+                         मुख्य सेवा/बस्तु
+                    </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/business-objectTransaction-nature-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.business-objectTransaction-nature-wise')}}">
+                    <span>प्रकृति तथा मुख्य सेवा/बस्तु </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/report/ward-wise') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.report.ward-wise')}}">
+                    <span>
+                        वडा अनुसार
+                    </span>
                 </a>
             </li>
         </ul>

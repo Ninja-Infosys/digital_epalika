@@ -20,8 +20,7 @@ class DisabilityTypeTableSeeder extends Seeder
             ['title'=>'शारीरिक अपाङ्गता','title_en'=>'Physical disability'],
         ];
 
-        foreach ($disabilityTypes as $disabilityType)
-        {
+        foreach ($disabilityTypes as $disabilityType) {
             DisabilityType::create($disabilityType);
         }
     }

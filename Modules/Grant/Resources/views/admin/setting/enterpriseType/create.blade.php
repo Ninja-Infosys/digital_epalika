@@ -45,6 +45,7 @@
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
                                     placeholder="शीर्षक"
+                                    required
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>

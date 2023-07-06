@@ -31,8 +31,6 @@ class JudicialCommitteeServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         JudicialMember::observe(JudicialMemberObserver::class);
-
-
     }
 
     /**

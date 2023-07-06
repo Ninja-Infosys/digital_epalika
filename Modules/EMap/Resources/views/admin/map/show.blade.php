@@ -40,25 +40,37 @@
                                     target-element="print"
                                     title="{{$noticeTypeEnum->label()}}"
                                 />
-                                @endcan
+                            @endcan
                             @if($noticeTypeEnum->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
                                 <form
                                     action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeTypeEnum])}}"
                                     method="POST"
-                                    class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
+                                    class="show_reject_confirm">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <input type="hidden" class="reject_remarks"
+                                           name="remarks">
+                                    @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->type!== 'Accept')
+                                        @can('mapApplyNoticeReject_access')
+                                            <button type="button" class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-times-circle"></i> अस्वीकार
+                                            </button>
+                                        @endcan
+                                    @endif
+
+                                </form>
+                                <form
+                                    action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeTypeEnum])}}"
+                                    method="POST"
+                                    class="show_accept_confirm">
                                     @csrf
                                     @method('PUT')
 
                                     <input type="hidden" class="reject_remarks"
                                            name="remarks">
 
-                                    @if(empty($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->remarks))
-                                        @can('mapApplyNoticeReject_access')
-                                            <button type="button" class="btn btn-outline-danger btn-sm">
-                                                <i class="fas fa-times-circle"></i> अस्वीकार
-                                            </button>
-                                        @endcan
-                                    @else
+                                    @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->type!== 'Accept')
                                         @can('mapApplyNoticeReject_access')
                                             <button type="button"
                                                     class="btn btn-outline-success btn-sm">
@@ -76,10 +88,10 @@
                                 </a>
                             @endcan
                         @endif
-                            <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
-                               class="btn btn-outline-success btn-sm">
-                                <i class="fas fa-list"></i> निबेदन/प्रतिबेदन सुची
-                            </a>
+                        <a href="{{route('emap.admin.map.mapApply.index',$applicationFormTypeEnum)}}"
+                           class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-list"></i> निबेदन/प्रतिबेदन सुची
+                        </a>
                     </div>
                 </div>
             </div>

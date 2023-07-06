@@ -70,7 +70,7 @@ class FiscalYearController extends Controller
 
         toast('आर्थिक बर्ष सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.fiscalYear.index'));
+        return redirect(route('admin.generalSetting.fiscalYear.index'));
     }
 
     public function destroy(FiscalYear $fiscalYear)

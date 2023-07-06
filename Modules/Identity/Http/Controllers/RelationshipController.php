@@ -2,9 +2,7 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\Relationship;
 use Modules\Identity\Http\Requests\Relationship\StoreRelationshipRequest;

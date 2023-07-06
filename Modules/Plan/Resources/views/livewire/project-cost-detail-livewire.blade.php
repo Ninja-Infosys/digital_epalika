@@ -336,7 +336,7 @@
                 <th rowspan="2" class="align-middle">वडा नं.</th>
                 <th rowspan="2" class="align-middle text-center">गाँउ बस्ति</th>
                 <th colspan="3" class="text-center">घरधुरी संख्या</th>
-                <th colspan="3" class="text-center">जनसंख्या</th>
+                <th colspan="4" class="text-center">जनसंख्या</th>
                 <th rowspan="2" class="align-middle">
                     <button type="button" wire:click="addBenefitedMemberDetails" class="btn btn-xs btn-outline-primary">
                         <i class="fa fa-plus-circle"></i>
@@ -349,6 +349,7 @@
                 <th>जम्मा</th>
                 <th>महिला</th>
                 <th>पुरुष</th>
+                <th>अन्य</th>
                 <th>जम्मा</th>
             </tr>
             </thead>
@@ -367,9 +368,6 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error("form.benefitedMemberDetails.$key.ward_no")
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
                     </td>
                     <td>
                         <input
@@ -378,59 +376,57 @@
                             class="form-control form-control-sm"
                             placeholder="गाँउ बस्ति"
                         />
-                        @error("form.benefitedMemberDetails.$key.village")
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
                     </td>
                     <td width="120">
                         <input
                             type="number"
+                            min="0"
                             wire:model="form.benefitedMemberDetails.{{$key}}.dalit_backward_no"
                             class="form-control form-control-sm"
                             placeholder="दलित/पिछडिएका"
                         />
-                        @error("form.benefitedMemberDetails.$key.dalit_backward_no")
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
                     </td>
                     <td width="90">
                         <input
                             type="number"
+                            min="0"
                             wire:model="form.benefitedMemberDetails.{{$key}}.other_households_no"
                             class="form-control form-control-sm"
                             placeholder="अन्य"
                         />
-                        @error("form.benefitedMemberDetails.$key.other_households_no")
-                        <div class="invalid-feedback">{{$message}}</div>
                     </td>
-                    @enderror
                     <td>
                         {{((double)($form['benefitedMemberDetails'][$key]['dalit_backward_no']??0))+((double)($form['benefitedMemberDetails'][$key]['other_households_no']??0))}}
                     </td>
                     <td width="90">
                         <input
                             type="number"
+                            min="0"
                             wire:model="form.benefitedMemberDetails.{{$key}}.no_of_female"
                             class="form-control form-control-sm"
                             placeholder="महिला"
                         />
-                        @error("form.benefitedMemberDetails.$key.no_of_female")
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
                     </td>
                     <td width="90">
                         <input
                             type="number"
+                            min="0"
                             wire:model="form.benefitedMemberDetails.{{$key}}.no_of_male"
                             class="form-control form-control-sm"
                             placeholder="पुरुष"
                         />
-                        @error("form.benefitedMemberDetails.$key.no_of_male")
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
+                    </td>
+                    <td width="90">
+                        <input
+                            type="number"
+                            min="0"
+                            wire:model="form.benefitedMemberDetails.{{$key}}.no_of_others"
+                            class="form-control form-control-sm"
+                            placeholder="अन्य"
+                        />
                     </td>
                     <td>
-                        {{((double)($form['benefitedMemberDetails'][$key]['no_of_female']??0))+((double)($form['benefitedMemberDetails'][$key]['no_of_male']??0))}}
+                        {{((double)($form['benefitedMemberDetails'][$key]['no_of_female']??0))+((double)($form['benefitedMemberDetails'][$key]['no_of_male']??0))+((double)($form['benefitedMemberDetails'][$key]['no_of_others']??0))}}
                     </td>
                     <td>
                         <button type="button" wire:click="removeBenefitedMemberDetails({{$key}})"
@@ -441,13 +437,22 @@
                 </tr>
             @empty
                 <tr>
-                    <td class="text-center" colspan="9">
+                    <td class="text-center" colspan="10">
                         विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
                     </td>
                 </tr>
             @endforelse
             </tbody>
         </table>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 
     <button type="submit" class="btn btn-primary">

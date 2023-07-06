@@ -3,8 +3,9 @@
 namespace Modules\Identity\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use Modules\Identity\Entities\DisabilityCommittee;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
+use Modules\Identity\Observers\DisabilityCommitteeObserver;
 use Modules\Identity\Observers\GovernmentalTypeObserver;
 
 class IdentityServiceProvider extends ServiceProvider
@@ -26,8 +27,9 @@ class IdentityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         GovernmentalDisabilityType::observe(GovernmentalTypeObserver::class);
+        DisabilityCommittee::observe(DisabilityCommitteeObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -55,7 +57,8 @@ class IdentityServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 

@@ -27,16 +27,21 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="header-title">
-                        ५. सम्बन्धित कागजातहरू
+                        सम्बन्धित कागजातहरू
                     </h4>
-                    <a href="{{route('admin.plan.project.projectDocument.create',$project)}}"
-                       class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-plus-circle"> नयाँ कागजात थप्नुहोस्</i>
-                    </a>
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('admin.plan.project.index') }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
+                        </a>
+                        <a href="{{route('admin.plan.project.projectDocument.create',$project)}}"
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-plus-circle"> नयाँ कागजात थप्नुहोस्</i>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

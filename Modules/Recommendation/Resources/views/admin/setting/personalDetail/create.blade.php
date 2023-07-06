@@ -6,11 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grant.dashboard')}}">
+                            <a href="{{route('admin.recommendation.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> आधारभूत सेटिंग</li>
+                        <li class="breadcrumb-item active"> व्यक्तिगत विवरण </li>
+                        <li class="breadcrumb-item active">नयाँ व्यक्तिगत विवरण </li>
                     </ol>
                 </div>
                 <h4 class="page-title">व्यक्तिगत विवरण</h4>
@@ -24,14 +25,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ व्यक्तिगतको विवरण थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> व्यक्तिगत विवरण सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <form action="{{route('admin.recommendation.setting.personalDetail.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.recommendation.setting.personalDetail.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <fieldset>
                             <legend><h4 class="text-info">व्यक्तिगत विवरण</h4></legend>
@@ -45,7 +48,7 @@
                                         value="{{old('name')}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
-                                        placeholder="पुरा नाम "
+                                        placeholder="पुरा नाम " required
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -67,7 +70,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="gender" class="form-label">लिंग *</label>
-                                    <select id="gender" name="gender" class="form-select">
+                                    <select id="gender" name="gender" class="form-select" required>
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
                                             <option
@@ -98,7 +101,7 @@
                                         value="{{old('citizenship_no')}}"
                                         class="form-control @error('citizenship_no') is-invalid @enderror"
                                         id="citizenship_no"
-                                        placeholder="नागरिकता नं."
+                                        placeholder="नागरिकता नं." required
                                     />
                                     @error('citizenship_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -116,21 +119,20 @@
                             'local_body_id' => old('local_body_id',$officeSetting->local_body_id) ,
                             'ward_no' =>  old('ward_no',$officeSetting->ward_no)
                             ])
-                                <div class="col-md-6 mb-2">
-                                    <label for="tole" class="form-label">
-                                        टोल</label>
-                                    <input
-                                        type="text"
-                                        name="tole"
-                                        value="{{old('tole')}}"
-                                        class="form-control @error('tole') is-invalid @enderror"
-                                        id="tole"
-                                        placeholder="टोल"
-                                    />
-                                    @error('tole')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="tole" class="form-label">
+                                    टोल</label>
+                                <input
+                                    type="text"
+                                    name="tole"
+                                    value="{{old('tole')}}"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    id="tole"
+                                    placeholder="टोल" required
+                                />
+                                @error('tole')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">

@@ -55,7 +55,4 @@
                 width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/static/contact.css')}}">
-@endpush
 @endsection

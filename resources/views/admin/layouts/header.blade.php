@@ -2,72 +2,89 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
             <li class="d-none d-xl-block">
-                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक
+                    वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-none d-lg-inline-block">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                   data-toggle="fullscreen" id="full-tour"
-                   href="#">
-                    <i class="fa fa-expand-arrows-alt noti-icon"></i>
-                </a>
+                <div class="nav-link dropdown-toggle arrow-none waves-effect waves-light">
+                    <button class="btn btn-primary btn-xs cacheButton" id="cacheBtn" type="button"
+                            data="{{route('admin.cache-clear')}}">
+                        <i class="fas fa-brush"></i>
+                    </button>
+                </div>
             </li>
-
             <li class="dropdown notification-list topbar-dropdown">
-                <a
-                    class="nav-link dropdown-toggle waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false" id="noti-tour">
-                    <i @class([
-            'ring-bell'=>count(auth()->user()->unreadNotifications)>0,
-            'fa', 'fa-bell', 'noti-icon'
-            ])></i>
+                <a class="nav-link dropdown-toggle waves-effect waves-light"
+                   data-bs-toggle="dropdown"
+                   href="#"
+                   role="button"
+                   aria-haspopup="false"
+                   aria-expanded="false" id="noti-tour">
+                    <i @class(['ring-bell'=>count(auth()->user()->unreadNotifications)>0,'fa', 'fa-bell', 'noti-icon'])></i>
                     @if(count(auth()->user()->unreadNotifications)>0)
                         <span class="badge bg-danger rounded-circle noti-icon-badge">
                         {{count(auth()->user()->unreadNotifications)}}</span>
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                            <span class="float-end">
-                      <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark">
-                        <small>सबै खाली गर्नुहोस्</small>
-                      </a> </span>नोटिफिकेसन</h5>
+                    <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="m-0 font-16 fw-semibold"> नोटिफिकेसन</h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark text-decoration-underline">
+                                    <small>सबै खाली गर्नुहोस्</small>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="noti-scroll" data-simplebar>
                         @forelse (auth()->user()->unreadNotifications as $notification)
-                            <a
-                                href="{{ route('admin.notification.read',$notification) }}"
-                                class="dropdown-item notify-item"
-                            >
-                                <div class="notify-icon bg-secondary">
-                                    <i class="fa fa-heart"></i>
+                            <a href="{{ route('admin.notification.read',$notification) }}"
+                               class="dropdown-item notify-item">
+                                <div class="notify-icon bg-info">
+                                    <i class="fas fa-bell"></i>
                                 </div>
                                 <p class="notify-details">
-                                    {{class_basename($notification->type)}}
-
+                                    @switch(class_basename($notification->type))
+                                        @case('ApplyMapNoticeNotification')
+                                            घर-नक्सा पासमा नयाँ निबेदन/प्रतिबेदन प्राप्त
+                                            @break
+                                        @case('MapApplyNotification')
+                                            घर-नक्सा पासमा नयाँ नक्सा प्राप्त
+                                            @break
+                                        @default
+                                            नयाँ नोटिफिकेसन
+                                    @endswitch
                                     <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
                                 </p>
                             </a>
                         @empty
-                            <h4 class="text-center">कुनै डाटा उपलब्ध छैन !</h4>
+                            <h4 class="text-center my-3">कुनै डाटा उपलब्ध छैन !</h4>
                         @endforelse
                     </div>
-
-                    <!-- All-->
                     <a href="{{route('admin.notification')}}"
                        class="dropdown-item text-center text-primary notify-item notify-all">
                         सबै हेर्नुहोस्
-                        <i class="fe-arrow-right"></i>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </li>
-
+            <li class="dropdown topbar-dropdown">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown"
+                   href="#" role="button" aria-haspopup="false" aria-expanded="true">
+                    <i class="fas fa-th noti-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-lg dropdown-menu-end" data-popper-placement="bottom-end">
+                    @includeIf('admin.layouts.menu_list')
+                </div>
+            </li>
+            <li class="d-none d-sm-inline-block">
+                <div class="nav-link waves-effect waves-light" id="light-dark-mode">
+                    <i class="fas fa-moon font-22"></i>
+                </div>
+            </li>
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                    data-bs-toggle="dropdown"
@@ -75,12 +92,7 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="profile-tour">
-                    <img src="{{auth()->user()->profile_photo_url ?? ''}}"
-                         alt="user-image"
-                         class="rounded-circle"/>
-                    <span class="pro-user-name ms-1">
-                  {{auth()->user()->name ?? ''}} <i class="fa fa-angle-down"></i>
-                </span>
+                    <img src="{{auth()->user()->profile_photo_url ?? ''}}" alt="user-image" class="rounded-circle"/>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
@@ -113,14 +125,15 @@
         </ul>
         <!-- LOGO -->
         <div class="logo-box dropdown">
-            <a class="logo logo-light text-center"
-               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
+            <a href="{{route('admin.dashboard')}}" class="logo logo-light text-center">
                 <span class="logo-sm">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
-                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}"
+                             alt=""
                              height="40"/>
                     @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
-                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                        <img src="{{asset('assets/backend/images/modules/'.Str::lower(Request::segment(2)).'.png')}}"
+                             alt=""
                              height="40"/>
                     @else
                         <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
@@ -129,20 +142,21 @@
                 </span>
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
-                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
-                             height="40"/>
+                        <img
+                            src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}"
+                            alt=""
+                            height="40"/>
                     @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
-                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
-                             height="40"/>
+                        <img
+                            src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}"
+                            alt=""
+                            height="40"/>
                     @else
                         <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
                              height="35"/>
                     @endif
               </span>
             </a>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                @includeIf('admin.layouts.menu_list')
-            </div>
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
@@ -155,6 +169,18 @@
                 <h3 class="top-heading text-light fw-bold">
                     {{$officeSetting->localBody->local_body ?? ''}}
                 </h3>
+            </li>
+            @if(config('app.app_is_demo'))
+            <li class="d-none d-xl-block ms-2">
+                <p class="top-heading text-danger">
+                    नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
+                </p>
+            </li>
+            @endif
+            <li class="d-none d-xl-block ms-1">
+                <p class="top-heading text-danger">
+                    ({{config('app.app_version')}})
+                </p>
             </li>
         </ul>
     </div>

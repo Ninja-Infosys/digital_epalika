@@ -3,7 +3,6 @@
 namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\OrganizationRegisteredJob;
 use App\Mail\OrganizationRegistered;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

@@ -51,6 +51,7 @@
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
+                                        required
                                     />
                                     @error('title')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -94,14 +95,9 @@
             </div>
         </div>
     </div>
-
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 @endsection
 

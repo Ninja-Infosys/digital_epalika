@@ -18,6 +18,8 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
     'website_type' => env('WEBSITE_TYPE', 'digital_board'),
     'pagination_count' => env('PAGINATION_COUNT', 2),
+    'app_version' => env('APP_VERSION', '1.0.0'),
+    'app_is_demo' => env('APP_IS_DEMO', false),
 
     /*
     |--------------------------------------------------------------------------

@@ -30,6 +30,7 @@
                             type="file"
                             id="form.photo"
                             wire:model="form.photo"
+
                         />
                         <div wire:loading wire:target="form.photo">Uploading...</div>
                         @error('form.photo')
@@ -136,7 +137,7 @@
                         <select
                             class="form-select @error('form.gender') is-invalid @enderror"
                             wire:model="form.gender"
-                            id="form.gender">
+                            id="form.gender" >
                             <option value="">---लिङ्ग छान्नुहोस् ---</option>
                             @foreach(\App\Enums\Gender::cases() as $gender)
                                 <option value="{{$gender->value}}">{{$gender->label()}}</option>
@@ -210,7 +211,7 @@
                         <select
                             class="form-select @error('form.blood_group') is-invalid @enderror"
                             wire:model="form.blood_group"
-                            id="form.blood_group">
+                            id="form.blood_group" >
                             <option value="">---रक्त समूह छान्नुहोस् ---</option>
                             @foreach(\App\Enums\BloodGroupEnum::cases() as $bloodGroup)
                                 <option value="{{$bloodGroup->value}}">{{$bloodGroup->label()}}</option>
@@ -288,7 +289,7 @@
                             name="form.province_id"
                             wire:model="form.province_id"
                             class="form-select @error('form.province_id') is-invalid @enderror"
-                            id="form.province_id">
+                            id="form.province_id" >
                             <option value="">प्रदेश छान्नुहोस्</option>
                             @foreach($provinces as $province)
                                 <option value="{{$province->id}}">
@@ -306,7 +307,7 @@
                             name="form.district_id"
                             wire:model="form.district_id"
                             class="form-select @error('form.district_id') is-invalid @enderror"
-                            id="form.district_id">
+                            id="form.district_id" >
                             <option value="">जिल्ला छान्नुहोस्</option>
                             @foreach($districts as $district)
                                 <option value="{{$district->id}}">
@@ -324,7 +325,7 @@
                             name="form.local_body_id"
                             wire:model="form.local_body_id"
                             class="form-select @error('form.local_body_id') is-invalid @enderror"
-                            id="form.local_body_id">
+                            id="form.local_body_id" >
                             <option value="">पालिका छान्नुहोस्</option>
                             @foreach($localBodies as $localBody)
                                 <option value="{{$localBody->id}}">
@@ -342,7 +343,7 @@
                             name="form.ward_no"
                             wire:model="form.ward_no"
                             class="form-select @error('form.ward_no') is-invalid @enderror"
-                            id="form.ward_no">
+                            id="form.ward_no" >
                             <option value="">वडा नं. छान्नुहोस्</option>
                             @for($i=1;$i<=$wards;$i++)
                                 <option value="{{$i}}">
@@ -405,6 +406,34 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
+                        <label for="form.patrons_phone" class="form-label">सम्पर्क न.  </label>
+                        <input
+                            name="form.patrons_phone"
+                            class="form-control  @error('form.patrons_phone') is-invalid @enderror"
+                            type="text"
+                            id="form.patrons_phone"
+                            placeholder="सम्पर्क न."
+                            wire:model="form.patrons_phone"
+                        />
+                        @error('form.patrons_phone')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="form.patrons_relationship" class="form-label">नाता </label>
+                        <input
+                            name="form.patrons_relationship"
+                            class="form-control  @error('form.patrons_relationship') is-invalid @enderror"
+                            type="text"
+                            id="form.patrons_relationship"
+                            placeholder="नाता"
+                            wire:model="form.patrons_relationship"
+                        />
+                        @error('form.patrons_relationship')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <label for="form.patrons_name_address" class="form-label">ठेगाना <span
                                 class="text-danger">*</span> </label>
                         <input
@@ -423,84 +452,19 @@
                 </div>
             </fieldset>
             <fieldset class="mt-3">
-                <legend>सम्पर्क व्यक्तिको विवरण</legend>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_name" class="form-label">सम्पर्क व्यक्ति नाम <span
-                                class="text-danger">*</span> </label>
-                        <input
-                            name="form.contact_person_name"
-                            class="form-control  @error('form.contact_person_name') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_name"
-                            placeholder="सम्पर्क व्यक्ति नाम "
-                            wire:model="form.contact_person_name"
-                        />
-                        @error('form.contact_person_name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_name_en" class="form-label">सम्पर्क व्यक्ति नाम ( English )<span
-                                class="text-danger">*</span> </label>
-                        <input
-                            name="form.contact_person_name_en"
-                            class="form-control  @error('form.contact_person_name_en') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_name_en"
-                            placeholder="सम्पर्क व्यक्ति नाम ( English )"
-                            wire:model="form.contact_person_name_en"
-                        />
-                        @error('form.contact_person_name_en')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_phone" class="form-label">सम्पर्क न.  </label>
-                        <input
-                            name="form.contact_person_phone"
-                            class="form-control  @error('form.contact_person_phone') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_phone"
-                            placeholder="सम्पर्क न."
-                            wire:model="form.contact_person_phone"
-                        />
-                        @error('form.contact_person_phone')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_address" class="form-label">ठेगाना<span
-                                class="text-danger">*</span> </label>
-                        <input
-                            name="form.contact_person_address"
-                            class="form-control  @error('form.contact_person_address') is-invalid @enderror"
-                            type="text"
-                            id="form.contact_person_address"
-                            placeholder="ठेगाना"
-                            wire:model="form.contact_person_address"
-                        />
-                        @error('form.contact_person_address')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                </div>
-            </fieldset>
-            <fieldset class="mt-3">
                 <legend>कुनै प्रकारको रोग छ वा छैन ?</legend>
                 <div class="row">
                     <div class="col-md-2 my-3 d-flex justify-content-between">
                         <div class="form-check">
                             <input class="form-check-input" value="1" type="radio" wire:model="form.is_disease"
-                                   name="form.is_disease" id="is_disease1">
+                                   name="form.is_disease" id="is_disease1" >
                             <label class="form-check-label" for="is_disease1">
                                 छ।
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" value="0" type="radio" wire:model="form.is_disease"
-                                   name="form.is_disease" id="is_disease2">
+                                   name="form.is_disease" id="is_disease2" >
                             <label class="form-check-label" for="is_disease2">
                                 छैन।
                             </label>
@@ -564,7 +528,7 @@
                     <div class="col-md-2 my-3 d-flex justify-content-between">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="form.is_medicine" value="1"
-                                   wire:model="form.is_medicine" id="medicine1">
+                                   wire:model="form.is_medicine" id="medicine1" >
                             <label class="form-check-label" for="medicine1">
                                 छ।
                             </label>
@@ -603,7 +567,7 @@
                     <select
                         class="form-select @error('form.employee_signature_id') is-invalid @enderror"
                         wire:model="form.employee_signature_id"
-                        id="form.employee_signature_id">
+                        id="form.employee_signature_id" >
                         <option value="">---हस्ताक्षर छान्नुहोस् ---</option>
                         @foreach($employeeSignatures as $employeeSignature)
                             <option value="{{$employeeSignature->id}}">{{$employeeSignature->name}}</option>
@@ -624,9 +588,12 @@
     </form>
 </div>
 
-@once
+    @once
+        @push('scripts')
+            <script src="{{ asset('assets/backend/js/plugins/datepicker.min.js') }}"></script>
+        @endpush
+    @endonce
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#dob_bs").nepaliDatePicker({
@@ -734,10 +701,8 @@
         <script src="{{ asset('assets/backend/finger/js/jquery-1.11.2.min.js') }}" defer></script>
         <script src="{{ asset('assets/backend/finger/js/msf100.min.js') }}" defer></script>
         <script src="{{ asset('assets/backend/finger/js/msfDevice.js') }}" defer></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     @endpush
-@endonce
+
 
 
 

@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Gate;
 
 class StoreAffiliationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('affiliation_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name'=>['required', 'string', 'max:255']

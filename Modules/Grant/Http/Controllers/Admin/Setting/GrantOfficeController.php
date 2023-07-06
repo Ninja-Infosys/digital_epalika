@@ -3,11 +3,9 @@
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Routing\Redirector;
@@ -27,7 +25,7 @@ class GrantOfficeController extends Controller
             }
         })
             ->latest()->paginate(10);
-        return view('grant::admin.setting.grantOffice.index',compact('offices'));
+        return view('grant::admin.setting.grantOffice.index', compact('offices'));
     }
 
     public function create(): Factory|View|Application
@@ -42,7 +40,7 @@ class GrantOfficeController extends Controller
 
         $grantOffice=GrantOffice::create($request->validated());
 
-        if ($request->ajax()){
+        if ($request->ajax()) {
             return response()->json([
                 'data'=> [
                     'grantOffice_id'=>$grantOffice->id,
@@ -52,7 +50,7 @@ class GrantOfficeController extends Controller
             ]);
         }
 
-        toast('अनुदान कार्यालय सफलतापूर्वक थपियो','success');
+        toast('अनुदान कार्यालय सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -73,7 +71,7 @@ class GrantOfficeController extends Controller
 
         $grantOffice->update($request->validated());
 
-        toast('अनुदान कार्यालय सफलतापूर्वक सम्पादन गरियो','success');
+        toast('अनुदान कार्यालय सफलतापूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.grantOffice.index'));
     }
 
@@ -82,7 +80,7 @@ class GrantOfficeController extends Controller
         $this->checkAuthorization('grantOffice_delete');
 
         $grantOffice->delete();
-        toast('अनुदान कार्यालय सफलतापूर्वक हटाइयो','success');
+        toast('अनुदान कार्यालय सफलतापूर्वक हटाइयो', 'success');
 
         return back();
     }

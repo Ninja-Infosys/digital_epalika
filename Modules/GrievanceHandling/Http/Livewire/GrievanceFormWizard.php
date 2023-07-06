@@ -2,13 +2,19 @@
 
 namespace Modules\GrievanceHandling\Http\Livewire;
 
+use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
+use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
+use Modules\GrievanceHandling\Entities\GrievanceSetting;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
+use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 
 class GrievanceFormWizard extends Component
 {
@@ -107,6 +113,8 @@ class GrievanceFormWizard extends Component
                 ]);
             }
 
+            $grievanceSetting = GrievanceSetting::first();
+
             $grievanceDetail = $grievanceUser->grievanceDetails()->create([
                 'token' => time(),
                 'grievance_type_id' => $this->form['grievance_type_id'],
@@ -115,15 +123,30 @@ class GrievanceFormWizard extends Component
                 'complaint_severity' => $this->form['complaint_severity'],
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
+                'grievance_medium' => GrievanceMediumEnum::SYSTEM,
+                'assigned_user_id' => $grievanceSetting->user_id ?? User::first()->id,
+                'assigned_at' => now()
             ]);
-            if (! empty($this->form['files'])) {
+            if (!empty($this->form['files'])) {
                 foreach ($this->form['files'] as $file) {
                     $grievanceDetail->files()->create([
                         'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
                         'extension' => $file->getClientOriginalExtension(),
-                        'file' => $file->store('grievance/files/'.Str::slug($grievanceUser->name, '_'), 'public'),
+                        'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
                     ]);
                 }
+            }
+
+            $grievanceDetail->grievanceAssignHistories()->create([
+                'user_id' => $grievanceDetail->assigned_user_id
+            ]);
+
+            //mail to assigned user
+            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
+
+            //mail to grievance user
+            if ($grievanceDetail->grievanceUser->email) {
+                Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
             }
 
             return $grievanceDetail;
@@ -134,7 +157,7 @@ class GrievanceFormWizard extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => 'तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर '.$grievanceDetail->token.' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला',
+            'text' => 'तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर ' . $grievanceDetail->token . ' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला',
         ]);
     }
 
@@ -157,11 +180,11 @@ class GrievanceFormWizard extends Component
 
     public function render()
     {
-        if (! empty($this->form['grievance_type_id'])) {
+        if (!empty($this->form['grievance_type_id'])) {
             $this->grievanceType = GrievanceType::find($this->form['grievance_type_id']);
         }
 
-        if (! empty($this->form['grievance_office_id'])) {
+        if (!empty($this->form['grievance_office_id'])) {
             $this->grievanceOffice = GrievanceOffice::find($this->form['grievance_office_id']);
         }
 

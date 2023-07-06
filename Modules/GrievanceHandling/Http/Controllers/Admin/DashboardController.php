@@ -3,7 +3,10 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Modules\GrievanceHandling\Entities\GrievanceDetail;
+use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
@@ -11,117 +14,114 @@ use Modules\GrievanceHandling\Enums\GrievanceStatus;
 
 class DashboardController extends Controller
 {
+    use NepaliDateConverter;
+    public Collection $grievanceDetails;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->grievanceDetails = DB::table('grievance_details')->whereNull('grievance_detail_id')->whereNull('deleted_at')->get();
+    }
+
     public function __invoke()
     {
-        $grievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->count();
-        $registeredGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->approved()->count();
-        $publicGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->public()->count();
+        $this->checkAuthorization('grievanceHandlingDashboard_access');
 
-        $unseenGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::UNSEEN->value)->count();
-        $closedGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::CLOSED->value)->count();
-        $investigatedGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::INVESTIGATED->value)->count();
-        $seenGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', '!=', GrievanceStatus::UNSEEN->value)->count();
-
-        $grievanceCountAccordingToSeverity = $this->getDataAccordingToSeverity();
-
-        $grievanceCountAccordingToStatus = $this->getDataAccordingToStatus();
-
-        $dataAccordingToGrievanceType = $this->getDataAccordingToGrievanceType();
-
-        $dataAccordingToGrievanceOffice = $this->getDataAccordingToGrievanceOffice();
-
+        $grievanceCount = $this->grievanceDetails->count();
+        $registeredGrievanceCount = $this->grievanceDetails->where('is_approved', 0)->count();
+        $publicGrievanceCount = $this->grievanceDetails->where('is_public', 1)->count();
+        $unseenGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::UNSEEN->value)->count();
+        $closedGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::CLOSED->value)->count();
+        $investigatedGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::INVESTIGATED->value)->count();
+        $seenGrievanceCount = $this->grievanceDetails->where('status', '!=', GrievanceStatus::UNSEEN->value)->count();
+        if (request()->ajax()) {
+            return [
+                'grievanceCountAccordingToSeverity' => $this->getDataAccordingToSeverity(),
+            'grievanceCountAccordingToStatus' => $this->getDataAccordingToStatus(),
+            'dataAccordingToGrievanceType' => $this->getDataAccordingToGrievanceType(),
+            'dataAccordingToGrievanceOffice' => $this->getDataAccordingToGrievanceOffice(),
+                'getDataAccordingToMonth' => $this->getDataAccordingToMonth(),
+            ];
+        }
         return view('grievancehandling::admin.dashboard', compact(
-            'grievanceCountAccordingToSeverity',
             'seenGrievanceCount',
             'registeredGrievanceCount',
             'publicGrievanceCount',
             'grievanceCount',
             'unseenGrievanceCount',
             'closedGrievanceCount',
-            'investigatedGrievanceCount',
-            'grievanceCountAccordingToStatus',
-            'dataAccordingToGrievanceType',
-            'dataAccordingToGrievanceOffice'
+            'investigatedGrievanceCount'
         ));
     }
 
-    public function getDataAccordingToSeverity(): array
+    public function getDataAccordingToSeverity(): Collection
     {
         $grievanceComplaintSeverity = GrievanceComplaintSeverity::cases();
 
-        $label = [];
-        $grievanceAccordingToSeverityCount = [];
+        $data = collect();
         foreach ($grievanceComplaintSeverity as $grievanceSeverity) {
-            $label[] = $grievanceSeverity->label();
-            $grievanceAccordingToSeverityCount[] = GrievanceDetail::whereNull('grievance_detail_id')
-                ->where('complaint_severity', $grievanceSeverity->value)
-                ->count();
+            $data->push([
+                'name'=>$grievanceSeverity->label(),
+                'data'=>$this->grievanceDetails
+                    ->where('complaint_severity', $grievanceSeverity->value)
+                    ->count()
+            ]);
         }
-
-        return [
-            'labels' => $label,
-            'dataSets' => [
-                [
-                    'label' => 'गुनासो गम्भीरता',
-                    'data' => $grievanceAccordingToSeverityCount,
-                ],
-            ],
-        ];
+        return $data;
     }
-
-    public function getDataAccordingToStatus(): array
+    public function getDataAccordingToStatus(): Collection
     {
         $grievanceComplaintStatus = GrievanceStatus::cases();
 
-        $label = [];
-        $grievanceAccordingToStatusCount = [];
+        $data = collect();
         foreach ($grievanceComplaintStatus as $grievanceStatus) {
-            $label[] = $grievanceStatus->label();
-            $grievanceAccordingToStatusCount[] = GrievanceDetail::whereNull('grievance_detail_id')
-                ->where('status', $grievanceStatus->value)
-                ->count();
+            $data->push([
+                'name' => $grievanceStatus->label(),
+                'data' => $this->grievanceDetails
+                    ->where('status', $grievanceStatus->value)
+                    ->count()
+            ]);
         }
-
-        return [
-            'labels' => $label,
-            'dataSets' => [
-                [
-                    'label' => 'गुनासोको स्थिति',
-                    'data' => $grievanceAccordingToStatusCount,
-                ],
-            ],
-        ];
+        return $data;
     }
-
-    public function getDataAccordingToGrievanceType(): array
+    public function getDataAccordingToGrievanceType()
     {
-        $grievanceTypes = GrievanceType::withCount(['grievanceDetails' => function ($query) {
+        return GrievanceType::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
-        }])->get();
-
-        return [
-            'labels' => $grievanceTypes->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'label' => 'गुनासोको प्रकार',
-                    'data' => $grievanceTypes->pluck('grievance_details_count')->toArray(),
-                ],
-            ],
-        ];
+        }])->get()->map(function ($grievanceTypes) {
+            return [
+                'name' => $grievanceTypes->title,
+                'data' => $grievanceTypes->grievance_details_count
+            ];
+        });
     }
-
-    public function getDataAccordingToGrievanceOffice(): array
+    public function getDataAccordingToGrievanceOffice()
     {
-        $grievanceOffice = GrievanceOffice::withCount(['grievanceDetails' => function ($query) {
+        return GrievanceOffice::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
-        }])->get();
+        }])->get()->map(function ($grievanceOffice) {
+            return [
+                'name' => $grievanceOffice->title,
+                'data' => $grievanceOffice->grievance_details_count
+            ];
+        });
+    }
+    public function getDataAccordingToMonth()
+    {
+        $totalCount = collect([0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0]);
+
+        $this->grievanceDetails
+            ->each(function ($grievanceDetail) use ($totalCount) {
+                $date = Carbon::parse($grievanceDetail->created_at);
+                $nepaliDate = $this->get_nepali_date($date->format('Y'), $date->format('m'), $date->format('d'));
+                $totalCount[(int)$nepaliDate['m']-1] +=1;
+            });
 
         return [
-            'labels' => $grievanceOffice->pluck('title')->toArray(),
+            'labels' => $this->month_name,
             'dataSets' => [
                 [
-                    'label' => 'गुनासो शाखा',
-                    'data' => $grievanceOffice->pluck('grievance_details_count')->toArray(),
+                    'data' => $totalCount,
+                    'label' => 'जम्मा'
                 ],
             ],
         ];

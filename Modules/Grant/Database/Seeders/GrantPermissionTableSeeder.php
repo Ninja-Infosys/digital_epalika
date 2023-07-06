@@ -12,6 +12,7 @@ class GrantPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'grantDashboard_access',
             'grantType_access',
             'grantType_create',
             'grantType_edit',

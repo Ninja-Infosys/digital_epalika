@@ -13,11 +13,7 @@ use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
-use Modules\Grant\Entities\GrantOffice;
-use Modules\Grant\Entities\GrantProgram;
-use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Entities\Group;
-use Modules\HelpDesk\Entities\Branch;
 
 class GrantDetailLivewire extends Component
 {
@@ -64,7 +60,7 @@ class GrantDetailLivewire extends Component
 
         if (!empty($grantDetail)) {
             $this->grantDetail = $grantDetail;
-            foreach (Arr::except($this->form,['grant_for','model_type']) as $key => $data) {
+            foreach (Arr::except($this->form, ['grant_for','model_type']) as $key => $data) {
                 $this->form[$key] = $grantDetail[$key];
             }
             $this->form['grant_for']=$grantDetail->grant_for->value;
@@ -118,10 +114,9 @@ class GrantDetailLivewire extends Component
                 'title' => 'अनुदान सफलतापूर्वक थपियो'
             ]);
         }
-
     }
 
-    function fetchGranteesData()
+    public function fetchGranteesData()
     {
         if (!empty($this->form['grant_for'])) {
             switch ($this->form['grant_for']) {
@@ -137,7 +132,7 @@ class GrantDetailLivewire extends Component
                     $this->grantees = Enterprise::all();
                     $this->form['model_type'] = Enterprise::class;
                     break;
-                default :
+                default:
                     $this->grantees = Farmer::all();
                     $this->form['model_type'] = Farmer::class;
             }

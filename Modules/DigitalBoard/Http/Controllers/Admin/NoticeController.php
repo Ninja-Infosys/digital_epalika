@@ -39,14 +39,14 @@ class NoticeController extends Controller
             ->latest()->paginate(10);
         }
 
-        return view('digitalboard::notice.index', compact('notices', 'type'));
+        return view('digitalboard::admin.notice.index', compact('notices', 'type'));
     }
 
     public function create($type)
     {
         $this->checkAuthorization('digitalBoardNotice_create');
 
-        return view('digitalboard::notice.create', compact('type'));
+        return view('digitalboard::admin.notice.create', compact('type'));
     }
 
     public function store($type, Request $request)
@@ -100,14 +100,14 @@ class NoticeController extends Controller
 
         $notice->load('files');
 
-        return view('digitalboard::notice.show', compact('notice', 'type'));
+        return view('digitalboard::admin.notice.show', compact('notice', 'type'));
     }
 
     public function edit($type, Notice $notice)
     {
         $this->checkAuthorization('digitalBoardNotice_edit');
 
-        return view('digitalboard::notice.edit', compact('notice', 'type'));
+        return view('digitalboard::admin.notice.edit', compact('notice', 'type'));
     }
 
     public function update($type, UpdateNoticeRequest $request, Notice $notice)

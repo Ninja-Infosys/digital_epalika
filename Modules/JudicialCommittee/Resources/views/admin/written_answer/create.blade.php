@@ -40,7 +40,7 @@
                                 <textarea name="description"
                                           id="description"
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DEFENDANT_APPLICATION))}}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -73,12 +73,8 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 @endsection

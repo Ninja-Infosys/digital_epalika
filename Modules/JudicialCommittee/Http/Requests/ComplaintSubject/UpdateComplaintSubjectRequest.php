@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UpdateComplaintSubjectRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('complaintSubject_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'lawsuit_nature_id' => ['required', Rule::exists('lawsuit_natures', 'id')->withoutTrashed()],

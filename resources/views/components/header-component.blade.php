@@ -15,47 +15,8 @@
                 <x-convert-to-unicode number="{{$day}}" id="today_day"></x-convert-to-unicode>
             </h6>
             <h6><i class="fa fa-clock"></i> <span id="clock-container"></span></h6>
-            <h6><i class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}</h6>
-            <h6><i class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}</h6>
+            <h6><i class="fa fa-phone"></i> {{$officeSetting->phone??''}}</h6>
+            <h6><i class="fa fa-envelope"></i> {{$officeSetting->email??''}}</h6>
         </div>
     @endif
 </div>
-@once
-    @push('scripts')
-        @if($hasClock)
-            <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        @endif
-    @endpush
-@endonce
-@push('scripts')
-    @if($hasClock)
-        <script>
-            function makeDigitalClock() {
-                const currentTime = new Date();
-                let hours = currentTime.getHours();
-                let minutes = currentTime.getMinutes();
-                let seconds = currentTime.getSeconds();
-                let ampm = "विहानको";
-                if (hours > 12) {
-                    hours = hours - 12;
-                    ampm = "अपराह्नको";
-                } else if (hours === 0) {
-                    hours = 12;
-                }
-                if (minutes < 10) {
-                    minutes = "0" + minutes;
-                }
-                if (seconds < 10) {
-                    seconds = "0" + seconds;
-                }
-                document.getElementById("clock-container").innerHTML = ampm + " " +
-                    NepaliFunctions.ConvertToUnicode(hours) + ":" +
-                    NepaliFunctions.ConvertToUnicode(minutes) + ":" +
-                    NepaliFunctions.ConvertToUnicode(seconds);
-            }
-
-            setInterval(makeDigitalClock, 1000);
-        </script>
-    @endif
-
-@endpush

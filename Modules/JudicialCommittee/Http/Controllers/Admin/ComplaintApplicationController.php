@@ -3,27 +3,28 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Modules\Grant\Enums\GranteeEnum;
+use Illuminate\Http\Request;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
-use Modules\JudicialCommittee\Entities\JudicialReceiptBill;
-use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
+use Modules\JudicialCommittee\Entities\SupportedDocument;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 
 class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature')->whereHas('judicialReceiptBill')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision', 'conciliationApplication', 'conciliationVerification')
+            ->withCount('dateSheets')
+            ->withCount('writtenAnswers')
+            ->withCount('defendantIssuedDeadlines')
+            ->whereHas('judicialReceiptBill')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['submission_no', 'registration_no', 'subject', 'date'], request('search'));
                 }
             })->orderByDesc('date')->paginate(10);
 
-        return view('judicialcommittee::admin.registered_application', compact('complaintApplications'));
+        return view('judicialcommittee::admin.complaint_application.registered_application', compact('complaintApplications'));
     }
 
     public function index()
@@ -51,7 +52,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantProvince', 'complainantDistrict', 'complainantLocalBody', 'defendantProvince', 'defendantDistrict', 'defendantLocalBody');
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantDefendants.province', 'complainantDefendants.district', 'complainantDefendants.localBody', 'witnesses', 'defendantIssuedDeadlines');
 
         return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
@@ -60,9 +61,51 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_edit');
 
-        $complaintApplication->load('relatedMembers');
+        $complaintApplication->load('complainantDefendants', 'relatedMembers', 'witnesses');
 
         return view('judicialcommittee::admin.complaint_application.edit', compact('complaintApplication'));
+    }
+
+    public function storeWitness(Request $request, ComplaintApplication $complaintApplication)
+    {
+        $validated = $request->validate(
+            [
+            'name' => ['required', 'string', 'max:255'],
+            'age' => ['nullable', 'integer'],
+            'phone' => ['nullable'],
+            'address' => ['nullable'],
+        ],
+            ['name.required' => 'नाम आवश्यक छ'],
+        );
+
+        $complaintApplication->witnesses()->create($validated + [
+                'type' => ComplainantDefendantTypeEnum::DEFENDANT,
+            ]);
+
+        toast('साक्षी सफलतापूर्वक थपियो', 'success');
+        return back();
+    }
+
+    public function uploadSupportedDocument(Request $request, ComplaintApplication $complaintApplication)
+    {
+        $request->validate(
+            [
+            'document_name' => ['required', 'string', 'max:255'],
+            'document' => ['required', 'mimes:jpg,jpeg,png,pdf']
+        ],
+            ['document_name.required' => 'फाइलको नाम आवश्यक छ'],
+            ['document.required' => 'फाइल आवश्यक छ'],
+        );
+
+        $complaintApplication->supportedDocuments()->create([
+            'type' => ComplainantDefendantTypeEnum::DEFENDANT,
+            'document_name' => $request->input('document_name'),
+            'document' => $request->file('document')
+        ]);
+
+        toast('फाइल सफलतापूर्वक थपियो', 'success');
+
+        return back();
     }
 
     public function destroy(ComplaintApplication $complaintApplication)
@@ -74,12 +117,25 @@ class ComplaintApplicationController extends Controller
         }
 
         $complaintApplication->relatedMembers()->delete();
-        if ($signature = $complaintApplication->getRawOriginal('applicant_signature')) {
-            $this->deleteFile($signature);
+        $complaintApplication->complainantDefendants()->delete();
+        if ($complaintApplication->applicant_signature) {
+            $this->deleteFile($complaintApplication->applicant_signature);
         }
         $complaintApplication->delete();
 
         toast('आवेदन सफलतापूर्वक मेटाइयो', 'success');
+
+        return back();
+    }
+
+    public function deleteSupportedDocument(ComplaintApplication $complaintApplication, SupportedDocument $supportedDocument)
+    {
+        if ($supportedDocument->document) {
+            $this->deleteFile($supportedDocument->document);
+        }
+        $supportedDocument->delete();
+
+        toast('फाइल सफलतापूर्वक मेटियो', 'success');
 
         return back();
     }

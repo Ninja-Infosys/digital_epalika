@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
@@ -11,12 +12,16 @@ use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EmergencyNumberController;
+use App\Http\Controllers\Admin\Setting\EmployeeController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
+use App\Http\Controllers\Admin\Setting\ExperienceController;
+use App\Http\Controllers\Admin\Setting\ExperienceFileController;
 use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\MailSettingController;
 use App\Http\Controllers\Admin\Setting\OccupationController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
+use App\Http\Controllers\Admin\Setting\QualificationController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
 use App\Http\Controllers\Admin\Setting\SmsSettingController;
 use App\Http\Controllers\Admin\Setting\Units\ExternalUnitConversionController;
@@ -40,9 +45,16 @@ Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::controller(AddressController::class)->prefix('address')->as('address.')->group(function () {
+    Route::get('districts', 'district')->name('districts');
+    Route::get('local-bodies', 'localBodies')->name('local-bodies');
+    Route::get('ward-no', 'wardNo')->name('ward-no');
+});
+Route::get('cache-clear', [DashboardController::class, 'cacheClear'])->name('cache-clear');
 Route::get('tech-help', [TechController::class, 'index'])->name('tech');
 Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
 Route::view('terms', 'admin.terms_and_conditions.index')->name('terms');
+Route::get('fileView', [FileController::class, 'index'])->name('fileView');
 
 //notification
 Route::get('notification', [NotificationController::class, 'notification'])->name('notification');
@@ -57,34 +69,34 @@ Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
 
     //    sms
-    Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
     Route::get('featureActivation/{featureActivation}', [FeatureActivationController::class, 'updateFeatureActivation'])->name('update-feature-activation');
 
 //    sms setting
-    Route::get('sms', [SmsSettingController::class, 'smsSetting'])->name('sms-setting');
     Route::put('update-samaya-sms-config', [SmsSettingController::class, 'updateSamayaSmsConfig'])->name('update-samaya-sms-config');
     Route::put('update-aakash-sms-config', [SmsSettingController::class, 'updateAakashSmsConfig'])->name('update-aakash-sms-config');
 
 //    mail setting
-    Route::get('mail', [MailSettingController::class, 'mailSetting'])->name('mail-setting');
     Route::put('update-mail-setting', [MailSettingController::class, 'updateMailSetting'])->name('update-mail-setting');
     Route::post('send-test-mail', [MailSettingController::class, 'sendTestMail'])->name('send-test-mail');
 
-
-    Route::resource('occupation', OccupationController::class);
-    Route::resource('ethnicity', EthnicityController::class);
-    Route::resource('fiscalYear', FiscalYearController::class);
-    Route::resource('emergencyNumber', EmergencyNumberController::class);
-
-    Route::resource('department', DepartmentController::class);
-    Route::resource('designation', DesignationController::class);
-
-    Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
-    Route::resource('branch', BranchController::class);
-
+    Route::prefix('generalSetting')->as('generalSetting.')->group(function () {
+        Route::resource('occupation', OccupationController::class);
+        Route::resource('ethnicity', EthnicityController::class);
+        Route::resource('fiscalYear', FiscalYearController::class);
+        Route::resource('emergencyNumber', EmergencyNumberController::class);
+        Route::resource('department', DepartmentController::class);
+        Route::resource('designation', DesignationController::class);
+        Route::resource('employee.qualification', QualificationController::class);
+        Route::resource('employee.experience', ExperienceController::class);
+        Route::resource('employee.experienceFile', ExperienceFileController::class);
+        Route::get('employee/{employee}/updateEmployeeStatus', [EmployeeController::class, 'updateEmployeeStatus'])->name('employee.updateEmployeeStatus');
+        Route::resource('employee', EmployeeController::class);
+        Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
+        Route::resource('branch', BranchController::class);
+    });
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
-        Route::get('role/{role}/letterHead',[RoleController::class,'letterHeadPage'])->name('role.letterHead');
-        Route::post('role/{role}/letterHead',[RoleController::class,'letterHeadStore'])->name('role.letterHead');
+        Route::get('role/{role}/letterHead', [RoleController::class,'letterHeadPage'])->name('role.letterHead');
+        Route::post('role/{role}/letterHead', [RoleController::class,'letterHeadStore'])->name('role.letterHead');
         Route::resource('role', RoleController::class);
         Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
         Route::resource('user', UserController::class);
@@ -97,14 +109,22 @@ Route::prefix('setting')->group(function () {
         Route::resource('unit/{unit}/internalUnitConversion', InternalUnitConversionController::class)->names('unit.internal-unit-conversion');
         Route::resource('unit/{unit}/externalUnitConversion', ExternalUnitConversionController::class)->names('unit.external-unit-conversion');
     });
-    Route::resource('officeSetting', OfficeSettingController::class);
+    Route::prefix('featureSetting')->as('featureSetting.')->group(function () {
+        Route::get('sms', [SmsSettingController::class, 'smsSetting'])->name('sms-setting');
+        Route::get('mail', [MailSettingController::class, 'mailSetting'])->name('mail-setting');
+        Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
+    });
+    Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
+        Route::resource('officeSetting', OfficeSettingController::class);
+        Route::resource('letterHead', LetterHeadController::class)->only('index', 'store');
+    });
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
-    Route::resource('letterHead', LetterHeadController::class)->only('index','store');
 });
 
 //file
 Route::get('file/{file}/download', [FileController::class, 'download'])->name('file.download');
 Route::get('file-download', [FileController::class, 'downloadFile'])->name('file-url-download');
+Route::post('file-upload', [FileController::class, 'fileUpload'])->name('file-upload');
 Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
@@ -120,7 +140,5 @@ Route::prefix('website')->as('website.')->group(function () {
 Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');
 
 //check pin
-
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
-Route::post('ckeditor-file-upload', [PinController::class, 'fileUpload']);
 Route::resource('pin', PinController::class);

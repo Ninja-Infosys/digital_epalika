@@ -2,8 +2,6 @@
 
 namespace Modules\JudicialCommittee\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\JudicialCommittee\Entities\ComplaintLog;
 
 class ComplaintLogListener

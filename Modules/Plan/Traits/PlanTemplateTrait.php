@@ -2,15 +2,11 @@
 
 namespace Modules\Plan\Traits;
 
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Modules\EMap\Entities\EMapTemplate;
-use Modules\EMap\Enums\NoticeTypeEnum;
-use Modules\EMap\Enums\PostsEnum;
 use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
 
@@ -26,14 +22,12 @@ trait PlanTemplateTrait
                 'योजना/कार्यक्रमको नाम' => '[@project_name]',
                 'दर्ता नं.' => '[@registration_no]',
                 'खर्चको किसिम' => '[@expense_head]',
-                'अनुदान किसिम' => '[@grant_category]',
                 'योजनाको क्षेत्र' => '[@plan_area]',
                 'योजनाको अबस्था' => '[@project_status]',
                 'आयोजना सुरु हुने मिति' => '[@project_start_date]',
                 'आयोजना सम्पन्न हुने मिति' => '[@project_completion_date]',
                 'योजनाको स्तर' => '[@plan_level]',
                 'वडा नं.' => '[@ward_no]',
-                'बजेटको श्रोत' => '[@budget_source]',
                 'बजेट शिर्षक' => '[@budget_head]',
                 'विनियोजित रकम' => '[@allocated_amount]',
                 'आयोजना स्थल' => '[@project_venue]',
@@ -196,6 +190,13 @@ trait PlanTemplateTrait
 
     public function getProjectReplacement(): array
     {
+        $budgetHeads=[];
+        $allocated_amount_sum=0;
+        $this->load('projectAllocatedAmounts.budgetHead');
+        foreach ($this->projectAllocatedAmounts as $allocatedAmount) {
+            $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
+            $allocated_amount_sum+=$allocatedAmount->amount;
+        }
 
         return [
             '[@date]'=>$this->get_today_nepali_date(),
@@ -203,16 +204,14 @@ trait PlanTemplateTrait
             '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
             '[@expense_head]' => $this->expenseHead->title ?? '',
-            '[@grant_category]' => $this->grantCategory->title ?? '',
             '[@plan_area]' => $this->planArea->area_name ?? '',
             '[@project_status]' => $this->project_status?->label() ?? '',
             '[@project_start_date]' => $this->project_start_date ?? '',
             '[@project_completion_date]' => $this->project_completion_date ?? '',
             '[@plan_level]' => $this->planLevel->level_name ?? '',
             '[@ward_no]' => implode(',', $this->ward_no ?? ''),
-            '[@budget_source]' => $this->budgetSource->source_name ?? '',
-            '[@budget_head]' => $this->budgetHead->title ?? '',
-            '[@allocated_amount]' => $this->allocated_amount ?? '',
+            '[@budget_head]' => implode(',', $budgetHeads),
+            '[@allocated_amount]' => $allocated_amount_sum,
             '[@project_venue]' => $this->project_venue ?? '',
             '[@purpose]' => $this->purpose ?? '',
             '[@operated_through]' => $this->operated_through?->label() ?? '',
@@ -253,7 +252,7 @@ trait PlanTemplateTrait
             '[@consumerCommittee.meeting_date]' => $this->consumerCommittee->meeting_date ?? '',
             '[@consumerCommittee.registration_no]' => $this->consumerCommittee->registration_no ?? '',
             '[@consumerCommittee.beneficiary_no]' => $this->consumerCommittee->beneficiary_no ?? '',
-            '[@consumerCommittee.member_number]' => $this->consumerCommittee->member_number ?? '',
+            '[@consumerCommittee.member_number]' => $this->consumerCommittee?->consumerCommitteeOfficials->count(),
             '[@consumerCommittee.experience_in_project]' => $this->consumerCommittee->experience_in_project ?? '',
             '[@consumerCommittee.chairman]' => $this->consumerCommittee?->consumerCommitteeOfficials->where('post', \Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)?->first()->name ?? '',
             '[@consumerCommittee.consumerCommitteeOfficials]' => (string)View::make('plan::admin.template_table.consumerCommitteeOfficials', [

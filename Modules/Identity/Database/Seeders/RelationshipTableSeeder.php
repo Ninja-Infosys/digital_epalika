@@ -17,8 +17,7 @@ class RelationshipTableSeeder extends Seeder
             ['title'=>'आमा'],
         ];
 
-        foreach ($relationships as $relationship)
-        {
+        foreach ($relationships as $relationship) {
             Relationship::create($relationship);
         }
     }

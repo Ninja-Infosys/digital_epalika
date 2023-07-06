@@ -98,7 +98,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][id]"
-                           value="{{$detail['id'] ?? ''}}">
+                           value="{{$detail['id'] ?? ''}}" required>
                     {{get_revenue_categories(revenueCategoryId: $detail['revenue_category_id'] ?? null)?->title ?? ''}}
                     <input type="hidden" name="particulars[{{$index}}][revenue_category_id]"
                            value="{{$detail['revenue_category_id']}}">
@@ -113,7 +113,7 @@
                            value="{{$detail['revenue_id']}}">
 
                     <input type="hidden" name="particulars[{{$index}}][revenue]"
-                           value="{{get_revenues(revenueId: $detail['revenue_id'] ?? null)->title ?? ''}}">
+                           value="{{get_revenues(revenueId: $detail['revenue_id'] ?? null)->title ?? ''}}" required>
 
                     @error('particulars.'.$index.'.revenue_id')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -124,7 +124,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][quantity]"
-                           value="{{$detail['quantity']}}">
+                           value="{{$detail['quantity']}}" required>
                     {{$detail['quantity'] ?? 0}}
                     @error('particulars.'.$index.'.quantity')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -132,7 +132,7 @@
                 </td>
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][rate]"
-                           value="{{$detail['rate']}}">
+                           value="{{$detail['rate']}}" required>
                     {{$detail['rate'] ?? 0}}
                     @error('particulars.'.$index.'.rate')
                     <div class="invalid-feedback">{{$message}}</div>

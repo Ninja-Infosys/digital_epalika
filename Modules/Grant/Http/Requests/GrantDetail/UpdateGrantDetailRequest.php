@@ -9,12 +9,12 @@ use Modules\Grant\Enums\NewOrContinueEnum;
 
 class UpdateGrantDetailRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'grant_program_id' => ['required', Rule::exists('grant_programs', 'id')->withoutTrashed()],

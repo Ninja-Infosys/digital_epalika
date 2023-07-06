@@ -12,6 +12,7 @@ class RoasterPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'roasterDashboard_access',
             'department_access',
             'department_create',
             'department_edit',

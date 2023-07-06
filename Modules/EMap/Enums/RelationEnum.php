@@ -4,6 +4,7 @@ namespace Modules\EMap\Enums;
 
 enum RelationEnum: string
 {
+    case SELF = 'self';
     case SON_DAUGHTER = 'son daughter';
     case MOTHER_FATHER = 'mother father';
     case RELATIVE = 'relative';
@@ -17,6 +18,7 @@ enum RelationEnum: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
+            self::SELF => 'स्वयम',
             self::SON_DAUGHTER => 'छोरा/छोरी',
             self::MOTHER_FATHER => 'आमा/बुवा',
             self::RELATIVE => 'नातेदार',

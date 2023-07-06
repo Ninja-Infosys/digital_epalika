@@ -4,6 +4,7 @@ namespace Modules\Revenue\Entities;
 
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +14,10 @@ use App\Traits\EventObserveTrait;
 
 class Invoice extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',

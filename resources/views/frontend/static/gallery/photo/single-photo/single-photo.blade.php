@@ -43,7 +43,4 @@
         </div>
     </div>
 </section>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/gallery/single-photo/singlephoto.css')}}">
-@endpush
 @endsection

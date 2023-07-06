@@ -23,4 +23,5 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('public-grievance', 'publicGrievance')->name('public-grievance');
     Route::get('grievance-list', 'grievanceList')->name('grievance-list');
     Route::get('track', 'track')->name('track');
+    Route::post('grievanceDetail/{grievanceDetail}/reply', 'replyGrievance')->name('replyGrievance');
 });

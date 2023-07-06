@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Mail\OrganizationRegistered;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,7 +13,10 @@ use Modules\EMap\Entities\Organization;
 
 class OrganizationRegisteredJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new job instance.
@@ -22,7 +24,8 @@ class OrganizationRegisteredJob implements ShouldQueue
      * @return void
      */
     public function __construct(public Organization $organization, public $url)
-    {}
+    {
+    }
 
     /**
      * Execute the job.

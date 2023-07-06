@@ -55,7 +55,7 @@ class ApplicantDetail extends Model
 
     public function getSignatureUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['signature']);
+        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
     }
 
     public function setSignatureAttribute($value): void

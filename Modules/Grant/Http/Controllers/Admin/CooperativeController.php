@@ -2,10 +2,6 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use App\Models\Address\Province;
-use App\Models\User;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +24,7 @@ class CooperativeController extends Controller
                 $q->whereLike(['unique_id', 'registration_no', 'name', 'cooperativeType',], request('search'));
             }
         })
-            ->latest()->paginate(10);
+            ->latest()->paginate(15);
 
         return view('grant::admin.cooperative.index', compact('cooperatives'));
     }

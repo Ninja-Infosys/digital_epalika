@@ -4,7 +4,6 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -61,9 +60,10 @@ class BusinessRegistrationController extends Controller
     {
         $this->checkAuthorization('businessRegistration_access');
 
-        $businessDetail->load(['partners' => function ($query) {
-                $query->with('issueDistrict', 'district', 'localBody');
-            }, 'businessNature', 'registeredBusinesses']
+        $businessDetail->load(
+            ['partners' => function ($query) {
+            $query->with('issueDistrict', 'district', 'localBody');
+        }, 'businessNature', 'registeredBusinesses']
         );
 
         return view('businessregistration::admin.businessRegistration.show', compact('businessDetail'));
@@ -77,7 +77,7 @@ class BusinessRegistrationController extends Controller
             'bill_no' => ['required'],
             'bill_date_bs' => ['required'],
             'bill_date_ad' => ['required'],
-            'other_file' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'other_file' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'amount' => ['required'],
             'taxpayer_number' => ['nullable'],
         ]);
@@ -90,7 +90,7 @@ class BusinessRegistrationController extends Controller
                 $data = array_merge($data, [
                     'reg_no' => $reg_no,
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'registration_no' => 'BR-' . officeSetting()->fiscalYear->title . '-' . Str::padLeft($reg_no,4,0),
+                    'registration_no' => 'BR-' . officeSetting()->fiscalYear->title . '-' . Str::padLeft($reg_no, 4, 0),
                     'registration_date_en' => today()->toDateString(),
                     'registration_date_ne' => $this->get_today_nepali_date()
                 ]);
@@ -104,9 +104,9 @@ class BusinessRegistrationController extends Controller
 
     public function edit(BusinessDetail $businessDetail)
     {
-        $businessDetail->load('partners','registeredBusinesses','files');
+        $businessDetail->load('partners', 'registeredBusinesses', 'files');
 
-        return view('businessregistration::admin.businessRegistration.edit',compact('businessDetail'));
+        return view('businessregistration::admin.businessRegistration.edit', compact('businessDetail'));
     }
 
 //    public function editData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
@@ -167,12 +167,12 @@ class BusinessRegistrationController extends Controller
     public function print(BusinessDetail $businessDetail)
     {
         $officeHeaders = OfficeHeader::get();
-        $businessDetail->load(['partners' => function ($query) {
-                $query->with('issueDistrict', 'district', 'localBody', 'province');
-            }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
+        $businessDetail->load(
+            ['partners' => function ($query) {
+            $query->with('issueDistrict', 'district', 'localBody', 'province');
+        }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
         );
 
         return view('businessregistration::admin.businessRegistration.print', compact('businessDetail', 'officeHeaders'));
-
     }
 }

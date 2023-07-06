@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up()
     {
         Schema::create('senior_citizen_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक बर्ष')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->longText('photo')->nullable();
             $table->string('name')->nullable()->comment('नाम');
             $table->string('name_en')->nullable()->comment('नाम अग्रेजीमा');
             $table->string('dob_bs')->nullable()->comment('जन्म मिति (वि.स.)');
+            $table->string('dob_ad')->nullable()->comment('जन्म मिति (ई.स.)');
             $table->string('card_no')->nullable()->comment('कार्ड नं.');
             $table->string('gender')->comment('लिङ्ग');
             $table->string('citizenship_no')->nullable()->comment('नागरिता नं.');
@@ -33,10 +34,8 @@ return new class extends Migration
             $table->string('patrons_name')->nullable()->comment('संरक्षकको नाम');
             $table->string('patrons_name_en')->nullable()->comment('संरक्षकको नाम अग्रेजीमा');
             $table->string('patrons_name_address')->nullable()->comment('संरक्षकको ठेगाना');
-            $table->string('contact_person_name')->nullable()->comment('सम्पर्क व्यक्ति नाम');
-            $table->string('contact_person_name_en')->nullable()->comment('सम्पर्क व्यक्ति नाम अग्रेजीमा');
-            $table->string('contact_person_phone')->nullable()->comment('सम्पर्क व्यक्तिको सम्पर्क नं');
-            $table->string('contact_person_address')->nullable()->comment('सम्पर्क व्यक्तिको ठेगाना');
+            $table->string('patrons_phone')->nullable()->comment('संरक्षकको सम्पर्क नं');
+            $table->string('patrons_relationship')->nullable()->comment('संरक्षक नाता');
             $table->boolean('is_disease')->default(0);
             $table->string('disease_name')->nullable()->comment('रोगको नाम');
             $table->longText('description')->nullable()->comment('हेरचाह केन्द्रको विवरण');
@@ -44,6 +43,7 @@ return new class extends Migration
             $table->boolean('is_medicine')->default(0);
             $table->string('medicine_name')->nullable()->comment('औषधिको नाम');
             $table->foreignId('employee_signature_id')->nullable()->comment('हस्ताक्षर')->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->timestamps();
             $table->softDeletes();
         });

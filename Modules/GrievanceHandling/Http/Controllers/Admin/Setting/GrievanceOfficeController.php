@@ -14,7 +14,7 @@ class GrievanceOfficeController extends Controller
     {
         $this->checkAuthorization('grievanceOffice_access');
 
-         $grievanceOffices = GrievanceOffice::where(function (Builder $q) {
+        $grievanceOffices = GrievanceOffice::where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['grievanceOffice'], request('search'));
             }

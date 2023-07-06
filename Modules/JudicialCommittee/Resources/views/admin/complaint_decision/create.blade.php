@@ -39,23 +39,38 @@
                                 <label for="description" class="form-label">विवरण *</label>
                                 <textarea name="description"
                                           id="description"
+                                          required
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->complaintDecision->description??'')}}</textarea>
+                                          class="form-control ckEditor @error('description') is-invalid @enderror">{{old('description',$complaintApplication->complaintDecision->description??$complaintApplication->getSpecificTemplateData(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DECISION))}}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <div class="col-md-6 mb-2">
-                                    <x-date-input-component
-                                        nameNe="submitted_date" labelNe="पेश मिति *"
-                                        nameEn="en_submitted_date"
-                                        labelEn="Submitted Date"
-                                        :editDateNe="$complaintApplication->complaintDecision->submitted_date ?? ''"
-                                        :getTodayDate="!isset($complaintApplication->complaintDecision->submitted_date)"/>
-                                </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="application_status" class="form-label">उजुरी अवस्था </label>
+                                <select name="application_status" class="form-select" id="application_status" required>
+                                    <option value="">-- छान्नुहोस् --</option>
+                                    @foreach(\Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum::cases() as $applicationStatus)
+                                        <option
+                                            {{$applicationStatus->value==old('application_status',$complaintApplication->application_status?->value) ? 'selected' : ''}}
+                                            value="{{$applicationStatus->value}}">
+                                            {{$applicationStatus->label()}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('application_status')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
+                                <x-date-input-component
+                                    nameNe="submitted_date" labelNe="पेश मिति *"
+                                    nameEn="en_submitted_date"
+                                    labelEn="Submitted Date"
+                                    :editDateNe="$complaintApplication->complaintDecision->submitted_date ?? ''"
+                                    :getTodayDate="!isset($complaintApplication->complaintDecision->submitted_date)"/>
+                            </div>
+                            <div class="col-md-4 mb-2">
                                 <label for="files" class="form-label"> निर्णय फाइल (Multiple)</label>
                                 <input type="file" id="files" name="files[]" multiple class="form-control">
                                 @error('files')
@@ -77,12 +92,8 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
     @endpush
 @endsection
