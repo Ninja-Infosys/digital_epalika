@@ -33,7 +33,7 @@ class DynamicFormsStorageController extends Controller
      */
     protected function authorizeFileAction(string $action, string $fileKey, Request $request, string $backend): void
     {
-        $permission = "${action}Files"; // uploadFiles, downloadFiles -- it's a convention
+        $permission = "{$action}Files"; // uploadFiles, downloadFiles -- it's a convention
 
         Gate::authorize($permission, [
             $request->user(),

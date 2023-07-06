@@ -11,12 +11,12 @@ class EnvironmentManager
     /**
      * @var string
      */
-    private $envPath;
+    private string $envPath;
 
     /**
      * @var string
      */
-    private $envExamplePath;
+    private string $envExamplePath;
 
     /**
      * Set the .env and .env.example paths.
@@ -32,7 +32,7 @@ class EnvironmentManager
      *
      * @return string
      */
-    public function getEnvContent()
+    public function getEnvContent(): string
     {
         if (!file_exists($this->envPath)) {
             if (file_exists($this->envExamplePath)) {
@@ -46,21 +46,21 @@ class EnvironmentManager
     }
 
     /**
-     * Get the the .env file path.
+     * Get the .env file path.
      *
      * @return string
      */
-    public function getEnvPath()
+    public function getEnvPath(): string
     {
         return $this->envPath;
     }
 
     /**
-     * Get the the .env.example file path.
+     * Get the .env.example file path.
      *
      * @return string
      */
-    public function getEnvExamplePath()
+    public function getEnvExamplePath(): string
     {
         return $this->envExamplePath;
     }
@@ -71,7 +71,7 @@ class EnvironmentManager
      * @param Request $input
      * @return string
      */
-    public function saveFileClassic(Request $input)
+    public function saveFileClassic(Request $input): string
     {
         $message = trans('installer_messages.environment.success');
 
@@ -90,7 +90,7 @@ class EnvironmentManager
      * @param Request $request
      * @return string
      */
-    public function saveFileWizard(Request $request)
+    public function saveFileWizard(Request $request): string
     {
         $results = trans('installer_messages.environment.success');
 
@@ -122,51 +122,51 @@ class EnvironmentManager
             'PUSHER_APP_ID=' . $request->pusher_app_id . "\n" .
             'PUSHER_APP_KEY=' . $request->pusher_app_key . "\n" .
             'PUSHER_APP_SECRET=' . $request->pusher_app_secret .
-            "\n
-            AWS_ACCESS_KEY_ID=\n
-            AWS_SECRET_ACCESS_KEY=\n
-            AWS_DEFAULT_REGION=us-east-1\n
-            AWS_BUCKET=\n
-            AWS_USE_PATH_STYLE_ENDPOINT=false\n
-            \n
-            PUSHER_HOST=\n
-            PUSHER_PORT=443\n
-            PUSHER_SCHEME=https\n
-            PUSHER_APP_CLUSTER=mt1\n
-            \n
-            VITE_PUSHER_APP_KEY='\${PUSHER_APP_KEY}'\n
-            VITE_PUSHER_HOST='\${PUSHER_HOST}'\n
-            VITE_PUSHER_PORT='\${PUSHER_PORT}'\n
-            VITE_PUSHER_SCHEME='\${PUSHER_SCHEME}'\n
-            VITE_PUSHER_APP_CLUSTER='\${PUSHER_APP_CLUSTER}'\n
-            \n
-            RECAPTCHA_SITE_KEY=6LfS04QiAAAAAL_Ncl93KrMZi86kg8mlWjanxvPJ\n
-            RECAPTCHA_SECRET_KEY=6LfS04QiAAAAAC8x57iXBFUOp3qayV2337pntLCK\n
-            \n
-            WEBSITE_TYPE='digital_board'\n
-            \n
-            #bool value only\n
-            TRAINER_STATUS_BANK_DETAIL_FORM=true\n
-            TRAINER_STATUS_EXPERIENCE_FORM=true\n
-            TRAINER_STATUS_QUALIFICATION_FORM=true\n
-            TRAINER_STATUS_EXPERIENCE_AS_TRAINEE_FORM=true\n
-            TRAINER_STATUS_EXPERIENCE_AS_TRAINER_FORM=true\n
-            TRAINER_STATUS_OTHER_DOCUMENT_FORM=true\n
-            TRAINER_COMPACT_FORM=true\n
-            \n
-            #'extended' and 'compact' value only\n
-            TRAINER_BANK_DETAIL_FORM_TYPE='extended'\n
-            TRAINER_EXPERIENCE_FORM_TYPE='extended'\n
-            TRAINER_QUALIFICATION_FORM_TYPE='extended'\n
-            TRAINER_EXPERIENCE_AS_TRAINEE_FORM_TYPE='extended'\n
-            TRAINER_EXPERIENCE_AS_TRAINER_FORM_TYPE='extended'\n
-            \n
-            SMS_API_KEY='261D841F89F835'\n
-            SMS_SENDER_ID='SMSBit'\n
-            \n
-            PAGINATION_COUNT='3'\n
-            \n
-            APP_VERSION='Delta 1.0.8'\n
+            "
+            AWS_ACCESS_KEY_ID=
+            AWS_SECRET_ACCESS_KEY=
+            AWS_DEFAULT_REGION=us-east-1
+            AWS_BUCKET=
+            AWS_USE_PATH_STYLE_ENDPOINT=false
+
+            PUSHER_HOST=
+            PUSHER_PORT=443
+            PUSHER_SCHEME=https
+            PUSHER_APP_CLUSTER=mt1
+
+            VITE_PUSHER_APP_KEY='\${PUSHER_APP_KEY}'
+            VITE_PUSHER_HOST='\${PUSHER_HOST}'
+            VITE_PUSHER_PORT='\${PUSHER_PORT}'
+            VITE_PUSHER_SCHEME='\${PUSHER_SCHEME}'
+            VITE_PUSHER_APP_CLUSTER='\${PUSHER_APP_CLUSTER}'
+
+            RECAPTCHA_SITE_KEY=6LfxS5cjAAAAAGpMX3j47_3Ru23axACInj8AOwCX
+            RECAPTCHA_SECRET_KEY=6LfxS5cjAAAAAEoP1diELViR6ldNAPNUnQVPzuC9
+
+            WEBSITE_TYPE='digital_board'
+
+            #bool value only
+            TRAINER_STATUS_BANK_DETAIL_FORM=true
+            TRAINER_STATUS_EXPERIENCE_FORM=true
+            TRAINER_STATUS_QUALIFICATION_FORM=true
+            TRAINER_STATUS_EXPERIENCE_AS_TRAINEE_FORM=true
+            TRAINER_STATUS_EXPERIENCE_AS_TRAINER_FORM=true
+            TRAINER_STATUS_OTHER_DOCUMENT_FORM=true
+            TRAINER_COMPACT_FORM=true
+
+            #'extended' and 'compact' value only
+            TRAINER_BANK_DETAIL_FORM_TYPE='extended'
+            TRAINER_EXPERIENCE_FORM_TYPE='extended'
+            TRAINER_QUALIFICATION_FORM_TYPE='extended'
+            TRAINER_EXPERIENCE_AS_TRAINEE_FORM_TYPE='extended'
+            TRAINER_EXPERIENCE_AS_TRAINER_FORM_TYPE='extended'
+
+            SMS_API_KEY='261D841F89F835'
+            SMS_SENDER_ID='SMSBit'
+
+            PAGINATION_COUNT='3'
+
+            APP_VERSION='Delta 1.0.8'
             APP_IS_DEMO=true";
 
         try {

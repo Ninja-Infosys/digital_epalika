@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Installer;
 
-use App\Events\LaravelInstallerFinished;
 use App\Http\Controllers\Controller;
 use App\Installer\EnvironmentManager;
 use App\Installer\FinalInstallManager;
