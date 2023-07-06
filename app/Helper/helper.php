@@ -11,7 +11,6 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
-use LaravelIdea\Helper\Modules\Recommendation\Entities\_IH_RecommendationCategory_C;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
@@ -29,10 +28,12 @@ if (!function_exists('officeSetting')) {
 }
 
 if (!function_exists('recommendationCategory')) {
-    function recommendationCategory(): \Illuminate\Database\Eloquent\Collection|_IH_RecommendationCategory_C|array
+    function recommendationCategory()
     {
         if (Schema::hasTable('recommendation_categories')) {
-            return RecommendationCategory::with('recommendationCategories')->whereNull('recommendation_category_id')->get();
+            return RecommendationCategory::with('recommendationCategories')
+                ->whereNull('recommendation_category_id')
+                ->get();
         }
         return [];
     }
@@ -55,7 +56,8 @@ if (!function_exists('get_office_header')) {
     {
         return Cache::rememberForever('officeHeaders', function () {
             if (Schema::hasTable('office_headers')) {
-                return OfficeHeader::orderBy('position')->get();
+                return OfficeHeader::orderBy('position')
+                    ->get();
             }
             return [];
         });
@@ -66,7 +68,9 @@ if (!function_exists('letterHead')) {
     function letterHead($type = 'header')
     {
         if (Schema::hasTable('letter_heads')) {
-            $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null) ?? LetterHead::first();
+            $letterHead = auth()->user()->letterHead
+                ?? (auth()->user()->role->letterHead ?? null)
+                ?? LetterHead::first();
 
             return $type == 'letter_head' ? ($letterHead->letter_head ?? '') : ($letterHead->header ?? '');
         }
@@ -77,7 +81,9 @@ if (!function_exists('letterHeadEn')) {
     function letterHeadEn()
     {
         if (Schema::hasTable('letter_heads')) {
-            $letterHead = auth()->user()->letterHead ?? (auth()->user()->role->letterHead ?? null) ?? LetterHead::first();
+            $letterHead = auth()->user()->letterHead
+                ?? (auth()->user()->role->letterHead ?? null)
+                ?? LetterHead::first();
 
             return $letterHead->header_en;
         }

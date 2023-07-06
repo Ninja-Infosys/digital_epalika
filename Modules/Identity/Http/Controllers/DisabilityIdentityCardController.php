@@ -2,7 +2,8 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use App\Models\OfficeHeader;
+use App\Enums\StatusEnum;
+use App\Models\Ethnicity;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use DateTime;
@@ -10,6 +11,10 @@ use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
+use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\Relationship;
+use Modules\Identity\Http\Requests\DisabilityIdentityCard\StoreDisabilityIdentityCardRequest;
+use Modules\Identity\Http\Requests\DisabilityIdentityCard\UpdateDisabilityIdentityCardRequest;
 
 class DisabilityIdentityCardController extends Controller
 {
@@ -23,22 +28,33 @@ class DisabilityIdentityCardController extends Controller
 
     public function create()
     {
-        return view('identity::admin.disabilityIdentityCard.create');
+        $officeSetting = officeSetting();
+        $ethnicities = Ethnicity::all();
+        $relations = Relationship::all();
+        $disabilityTypes = DisabilityType::all();
+        return view('identity::admin.disabilityIdentityCard.create', compact('officeSetting', 'ethnicities', 'relations', 'disabilityTypes'));
+    }
+
+    public function store(StoreDisabilityIdentityCardRequest $request)
+    {
+        DisabilityIdentityCard::create($request->validated() + [
+                'status' => StatusEnum::PENDING->value
+            ]);
+
+        toast('अपाङ्गता परिचय पत्र सफलतापुर्बक दर्ता भयो', 'success');
+        return back();
     }
 
     public function searchCitizenshipNo()
     {
         return view('identity::admin.disabilityIdentityCard.citizenship_search');
     }
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     public function show(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('view', $disabilityIdentityCard);
-        $officeHeaders = OfficeHeader::get();
+        $officeHeaders = get_office_header();
         $todayDate = $this->get_today_nepali_date();
         $disabilityIdentityCard->load('province', 'district', 'disabilityType', 'localBody', 'relationship');
         return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard', 'officeHeaders', 'todayDate'));
@@ -50,9 +66,12 @@ class DisabilityIdentityCardController extends Controller
         return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
 
-    public function update(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
+    public function update(UpdateDisabilityIdentityCardRequest $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
-        //
+        $this->authorize('update', $disabilityIdentityCard);
+        $disabilityIdentityCard->update($request->validated());
+        toast('अपाङ्गता परिचय पत्र सफलतापुर्बक अपडेट भयो', 'success');
+        return redirect(route('identity.admin.disabilityIdentityCard.index'));
     }
 
     public function destroy(DisabilityIdentityCard $disabilityIdentityCard)
