@@ -28,7 +28,7 @@ class UpdateEmployeeRequest extends FormRequest
             'status' => ['nullable', 'boolean'],
             'is_employee' => ['nullable', 'boolean'],
             'is_dept_head' => ['nullable', 'boolean'],
-            'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
+            'branch_id' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
             'employee_id' => ['nullable', Rule::exists('employees', 'id')->withoutTrashed()],
             'show_to_mobile_app' => ['nullable', 'boolean'],
             'show_to_index' => ['nullable', 'boolean'],
