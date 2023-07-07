@@ -98,6 +98,7 @@ class DisabilityIdentityCardController extends Controller
         return redirect(route('identity.admin.disabilityIdentityCard.index'));
     }
 
+
     public function destroy(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('delete', $disabilityIdentityCard);
