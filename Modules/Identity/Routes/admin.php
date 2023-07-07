@@ -12,6 +12,7 @@ use Modules\Identity\Http\Controllers\DisabilityTypeController;
 use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\HospitalController;
+use Modules\Identity\Http\Controllers\IdentityMeetingController;
 use Modules\Identity\Http\Controllers\RecommendationTemplateSettingController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
@@ -40,6 +41,8 @@ Route::prefix('disability')->group(function () {
     Route::resource('disabilityIdentityCard.disabilityPrint', DisabilityPrintController::class)->only('store');
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
 });
+
+Route::resource('identityMeeting', IdentityMeetingController::class);
 
 Route::prefix('seniorCitizen')->group(function () {
     Route::get('seniorCitizenDetail/search-citizenship', [SeniorCitizenDetailController::class, 'searchCitizenshipNo'])->name('seniorCitizenDetail.searchCitizenshipNo');
