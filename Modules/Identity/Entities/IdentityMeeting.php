@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class RecommendationTemplateSetting extends Model
+class IdentityMeeting extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -21,6 +21,8 @@ class RecommendationTemplateSetting extends Model
 
     protected $fillable = [
         'title',
-        'description',
+        'date_bs',
+        'date_ad',
+        'description'
     ];
 }
