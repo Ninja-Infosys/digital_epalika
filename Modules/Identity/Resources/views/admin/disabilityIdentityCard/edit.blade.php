@@ -34,9 +34,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('identity.admin.disabilityIdentityCard.store')}}"
+                    <form method="POST"
+                          action="{{route('identity.admin.disabilityIdentityCard.update', $disabilityIdentityCard)}}"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="card mt-3">
                             <fieldset>
                                 <legend>अपाङ्गता भएको व्यक्तिको विवरण</legend>

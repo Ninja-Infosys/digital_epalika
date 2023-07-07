@@ -23,16 +23,16 @@ class UpdateDisabilityIdentityCardRequest extends FormRequest
             'citizenship_no' => [
                 'required_if:birth_registration_no,null',
                 Rule::unique('disability_identity_cards', 'citizenship_no')
-                    ->ignore($this->disabilityIdentityCard)
                     ->whereNotNull('citizenship_no')
                     ->withoutTrashed()
+                    ->ignore($this->disabilityIdentityCard)
             ],
             'birth_registration_no' => [
                 'required_if:citizenship_no,null',
                 Rule::unique('disability_identity_cards', 'birth_registration_no')
-                    ->ignore($this->disabilityIdentityCard)
                     ->whereNotNull('birth_registration_no')
                     ->withoutTrashed()
+                    ->ignore($this->disabilityIdentityCard)
             ],
             'father_name' => ['required', 'string', 'max:255'],
             'father_name_en' => ['required', 'string', 'max:255'],
