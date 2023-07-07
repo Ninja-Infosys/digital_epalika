@@ -27,6 +27,7 @@ class UpdateDisabilityIdentityCardRequest extends FormRequest
             'mother_name' => ['required', 'string', 'max:255'],
             'mother_name_en' => ['required', 'string', 'max:255'],
             'dob' => ['required'],
+            'dob_ad' => ['required'],
             'gender' => ['required', new Enum(Gender::class)],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
             'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],

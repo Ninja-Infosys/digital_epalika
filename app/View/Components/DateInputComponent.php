@@ -26,6 +26,10 @@ class DateInputComponent extends Component
         public ?string $editDateNe = null,
         public ?string $editDateEn = null,
         public ?string $container = null,
+        public ?string $disableBeforeAd = null,
+        public ?string $disableAfterAd = null,
+        public ?string $disableBefore = null,
+        public ?string $disableAfter = null
     ) {
     }
 
