@@ -29,8 +29,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);
     Route::resource('hospital', HospitalController::class);
     Route::resource('disabilityCommittee', DisabilityCommitteeController::class);
-    Route::get('recommendationTemplateSetting', [RecommendationTemplateSettingController::class,'index'])->name('recommendationTemplateSetting.index');
-    Route::post('recommendationTemplateSetting', [RecommendationTemplateSettingController::class,'store'])->name('recommendationTemplateSetting.store');
+    Route::resource('recommendationTemplateSetting', RecommendationTemplateSettingController::class)->only(['index','store']);
 });
 
 Route::prefix('disability')->group(function () {

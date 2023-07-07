@@ -42,7 +42,7 @@
                         <tbody>
                         <tr>
                             <td>
-                                नागरिकता नं. : {{$disabilityIdentityCard->citizenship_no}}
+                                नागरिकता नं. : {{get_nepali_number($disabilityIdentityCard->citizenship_no)}}
                             </td>
                             <td>
                                 परिचयपत्रको प्रकार
@@ -63,7 +63,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>जन्म मिति : {{$disabilityIdentityCard->dob}}</td>
+                            <td>जन्म मिति : {{get_nepali_number($disabilityIdentityCard->dob)}}</td>
                             <td>  लिङ्ग : {{$disabilityIdentityCard->gender?->label() ?? ''}}</td>
                         </tr>
 
