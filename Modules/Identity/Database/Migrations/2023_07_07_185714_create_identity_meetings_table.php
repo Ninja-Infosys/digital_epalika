@@ -7,10 +7,12 @@ use Illuminate\Database\Migrations\Migration;
 return new class () extends Migration {
     public function up()
     {
-        Schema::create('recommendation_template_settings', function (Blueprint $table) {
+        Schema::create('identity_meetings', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->longText('description');
+            $table->string('title');
+            $table->string('date_bs');
+            $table->date('date_ad');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -18,6 +20,6 @@ return new class () extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('recommendation_template_settings');
+        Schema::dropIfExists('identity_meetings');
     }
 };

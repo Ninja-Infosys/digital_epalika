@@ -5,10 +5,8 @@ namespace Modules\Identity\Http\Controllers;
 use App\Enums\StatusEnum;
 use App\Models\Ethnicity;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Http\Request;
 use DateTime;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Lottery;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
@@ -87,7 +85,7 @@ class DisabilityIdentityCardController extends Controller
         $disabilityTypes = DisabilityType::all();
         $todayDateInBS = $this->get_today_nepali_date();
         $officeSetting = officeSetting();
-        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard', 'ethnicities', 'relations', 'disabilityTypes','todayDateInBS','officeSetting'));
+        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard', 'ethnicities', 'relations', 'disabilityTypes', 'todayDateInBS', 'officeSetting'));
     }
 
     public function update(UpdateDisabilityIdentityCardRequest $request, DisabilityIdentityCard $disabilityIdentityCard)
@@ -115,7 +113,6 @@ class DisabilityIdentityCardController extends Controller
 
     public function printAll(DisabilityIdentityCard $disabilityIdentityCard)
     {
-
         $printData = DisabilityPrint::where('disability_identity_card_id', $disabilityIdentityCard->id)
             ->get()
             ->map(function ($disabilityPrint, $key) {
