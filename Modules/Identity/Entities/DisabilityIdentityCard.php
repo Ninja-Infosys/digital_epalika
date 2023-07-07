@@ -95,7 +95,7 @@ class DisabilityIdentityCard extends Model
         }
     }
 
-    public function getPhotoUrlAttribute(): string
+    public function getPhotoUrlAttribute(): string|null
     {
         return $this->attributes['photo']
             ? Storage::disk('public')->url($this->attributes['photo'])

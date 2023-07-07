@@ -4,7 +4,7 @@
         <input type="text" name="{{$nameNe}}"
                class="form-control @error($nameNe) is-invalid @enderror"
                placeholder="{{$labelNe}}"
-               id="{{$idNe ?? $nameNe}}" value="{{old($nameNe, ($editDateNe))}}">
+               id="{{$idNe ?? $nameNe}}" value="{{old($nameNe, ($editDateNe ?? ""))}}">
         @error($nameNe)
         <span class="text-danger">{{$message}}</span>
         @enderror
@@ -19,7 +19,7 @@
         <input type="date" name="{{$nameEn}}"
                class="form-control @error($nameEn) is-invalid @enderror"
                placeholder="{{$labelEn}}"
-               id="{{$idEn??$nameEn}}" value="{{old($nameEn, ($editDateEn ?? ''))}}">
+               id="{{$idEn??$nameEn}}" value="{{old($nameEn, ($editDateEn ?? ''))}}" max="{{$disableAfterAd}}" min="{{$disableBeforeAd}}">
         @error($nameEn)
         <span class="text-danger">{{$message}}</span>
         @enderror
@@ -36,6 +36,14 @@
                     ndpYear: true,
                     ndpMonth: true,
                     container: "{{$container}}",
+                    @if(!empty($disableBefore))
+                    disableBefore: "{{$disableBefore}}",
+                    @endif
+
+                        @if(!empty($disableAfter))
+                    disableAfter: "{{$disableAfter}}",
+                    @endif
+
                     onChange: function () {
                         let parsedDate = NepaliFunctions.ParseDate($("#{{$idNe ?? $nameNe}}").val());
                         let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)

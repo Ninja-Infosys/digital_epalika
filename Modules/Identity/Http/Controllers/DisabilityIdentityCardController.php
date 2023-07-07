@@ -8,6 +8,7 @@ use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use DateTime;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Lottery;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
@@ -22,7 +23,24 @@ class DisabilityIdentityCardController extends Controller
 
     public function index()
     {
-        $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')->latest()->paginate(10);
+        $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')
+            ->where(function ($q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike([
+                        'name',
+                        'name_en',
+                        'citizenship_no',
+                        'birth_registration_no',
+                        'guardian_name',
+                        'guardian_name_en',
+                        'phone'
+                    ], request('search'));
+                }
+            })
+            ->where('status', StatusEnum::PENDING->value)
+            ->latest()
+            ->paginate(10);
+
         return view('identity::admin.disabilityIdentityCard.index', compact('disabilityIdentityCards'));
     }
 
@@ -32,7 +50,8 @@ class DisabilityIdentityCardController extends Controller
         $ethnicities = Ethnicity::all();
         $relations = Relationship::all();
         $disabilityTypes = DisabilityType::all();
-        return view('identity::admin.disabilityIdentityCard.create', compact('officeSetting', 'ethnicities', 'relations', 'disabilityTypes'));
+        $todayDateInBS = $this->get_today_nepali_date();
+        return view('identity::admin.disabilityIdentityCard.create', compact('officeSetting', 'ethnicities', 'relations', 'disabilityTypes', 'todayDateInBS'));
     }
 
     public function store(StoreDisabilityIdentityCardRequest $request)
@@ -63,7 +82,12 @@ class DisabilityIdentityCardController extends Controller
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update', $disabilityIdentityCard);
-        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
+        $ethnicities = Ethnicity::all();
+        $relations = Relationship::all();
+        $disabilityTypes = DisabilityType::all();
+        $todayDateInBS = $this->get_today_nepali_date();
+        $officeSetting = officeSetting();
+        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard', 'ethnicities', 'relations', 'disabilityTypes','todayDateInBS','officeSetting'));
     }
 
     public function update(UpdateDisabilityIdentityCardRequest $request, DisabilityIdentityCard $disabilityIdentityCard)

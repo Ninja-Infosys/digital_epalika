@@ -107,6 +107,8 @@
                                             nameNe="dob" labelNe="जन्म मिति (बि.स.) *"
                                             nameEn="dob_ad" labelEn="जन्म मिति (ई.स.)"
                                             :showEnglishDate="true"
+                                            disable-after="{{$todayDateInBS}}"
+                                            disable-after-Ad="{{today()->toDateString()}}"
                                         />
                                     </div>
                                     <div class="col-md-4 mb-3">
@@ -182,7 +184,6 @@
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-
                                 </div>
                             </fieldset>
                             <fieldset class="mt-3">
@@ -212,41 +213,39 @@
                             <fieldset class="mt-3">
                                 <legend>कागजात विवरण</legend>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="col-md-4 mb-3">
-                                            <input type="radio" name="is_minor" id="is_not_minor"
-                                                   value="0" {{old("is_minor", 0)==0 ? "selected" : ""}}>
-                                            <label for="is_not_minor">बालिक</label>
-                                            <input type="radio" name="is_minor" id="is_minor"
-                                                   value="1" {{old("is_minor")==1 ? "selected" : ""}}>
-                                            <label for="is_minor">नाबालिक</label>
-                                        </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="citizenship_no" class="form-label">नागरिकता नं.</label>
+                                        <input
+                                            class="form-control   @error('citizenship_no') is-invalid @enderror"
+                                            type="text"
+                                            id="citizenship_no"
+                                            name="citizenship_no"
+                                            value="{{old('citizenship_no', request()->get('citizenship_no'))}}"
+                                            placeholder="नागरिकता नं."
+                                            required
+                                            {{ request()->has('birth_registration_no') || request()->has('citizenship_no') ? "readonly" : ""}}
+                                        />
+                                        @error('citizenship_no')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-12" id="citizenshipSection">
-                                        <div class="row">
-                                            <div class="col-md-4 mb-3">
-                                                <label for="citizenship_no" class="form-label">नागरिकता नं.</label>
-                                                <input
-                                                    class="form-control   @error('citizenship_no') is-invalid @enderror"
-                                                    type="text"
-                                                    id="citizenship_no"
-                                                    name="citizenship_no"
-                                                    value="{{old('citizenship_no', request()->get('citizenship_no'))}}"
-                                                    placeholder="नागरिकता नं."
-                                                    required
-                                                    {{ request()->get('citizenship_no') ? "readonly" : ""}}
-                                                />
-                                                @error('citizenship_no')
-                                                <div class="invalid-feedback">{{$message}}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
+                                    <div class="col-md-4 mb-3">
+                                        <label for="birth_registration_no" class="form-label">जन्म दर्ता
+                                            नं.</label>
+                                        <input
+                                            class="form-control   @error('birth_registration_no') is-invalid @enderror"
+                                            type="text"
+                                            id="birth_registration_no"
+                                            name="birth_registration_no"
+                                            value="{{old('birth_registration_no', request()->get('birth_registration_no'))}}"
+                                            placeholder="जन्म दर्ता नं."
+                                            required
+                                            {{ request()->has('birth_registration_no') || request()->has('citizenship_no')  ? "readonly" : ""}}
+                                        />
+                                        @error('birth_registration_no')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-12" id="birthCertificateSection">
-
-                                    </div>
-
                                 </div>
                             </fieldset>
                             <fieldset class="mt-3">
@@ -292,7 +291,7 @@
                                             @foreach($relations as $relation)
                                                 <option
                                                     value="{{$relation->id}}"
-                                                    {{old("relationship_id"==$relation->id ? "selected": "")}}>{{$relation->title}}</option>
+                                                    {{old("relationship_id"==$relation->id) ? "selected": ""}}>{{$relation->title}}</option>
                                             @endforeach
                                         </select>
                                         @error('relationship_id')
@@ -341,34 +340,6 @@
                 border-radius: 5px;
             }
         </style>
-    @endpush
-    @push('scripts')
-        <script>
-            $(document).ready(function () {
-                // Listen for changes in the radio input
-                $('input[name=is_minor]').change(function () {
-                    // Get the value of the selected radio input
-                    const isMinorValue = $(this).val();
-
-                    // Select the sections to show/hide
-                    const citizenshipSection = $('#citizenshipSection');
-                    const birthCertificateSection = $('#birthCertificateSection');
-
-                    if (isMinorValue === '1') {
-                        // Show the birth certificate section and hide the citizenship section
-                        birthCertificateSection.show();
-                        citizenshipSection.hide();
-                        citizenshipSection.find('input').val('')
-                    } else {
-                        // Show the citizenship section and hide the birth certificate section
-                        citizenshipSection.show();
-                        birthCertificateSection.hide();
-                        birthCertificateSection.find('input').val('')
-                    }
-                });
-            });
-
-        </script>
     @endpush
 @endsection
 
