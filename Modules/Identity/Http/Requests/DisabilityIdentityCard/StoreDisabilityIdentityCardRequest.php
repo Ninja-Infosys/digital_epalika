@@ -17,7 +17,7 @@ class StoreDisabilityIdentityCardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo' => ['nullable'],
+            'photo' => ['nullable','mimes:jpeg,jpg,png'],
             'name' => ['required', 'string', 'max:255'],
             'name_en' => ['required', 'string', 'max:255'],
             'citizenship_no' => ['required_if:birth_registration_no,null', Rule::unique('disability_identity_cards', 'citizenship_no')->whereNotNull('citizenship_no')->withoutTrashed()],

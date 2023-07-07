@@ -102,7 +102,7 @@
                                             @foreach(\App\Enums\Gender::cases() as $gender)
                                                 <option
                                                     value="{{$gender->value}}"
-                                                    {{old('gender', $disabilityIdentityCard->gender) == $gender ? "selected" : ""}}>{{$gender->label()}}</option>
+                                                    {{old('gender', $disabilityIdentityCard->gender->value) == $gender->value ? "selected" : ""}}>{{$gender->label()}}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')
