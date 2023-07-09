@@ -50,6 +50,7 @@ class DisabilityIdentityCard extends Model
         'relationship_id',
         'phone',
         'disability_type_id',
+        'governmental_disability_type_id',
         'status',
     ];
 
@@ -83,6 +84,11 @@ class DisabilityIdentityCard extends Model
         return $this->belongsTo(DisabilityType::class);
     }
 
+    public function governmentalDisabilityType()
+    {
+        return $this->belongsTo(GovernmentalDisabilityType::class);
+    }
+
     public function relationship(): BelongsTo
     {
         return $this->belongsTo(Relationship::class);
@@ -104,7 +110,7 @@ class DisabilityIdentityCard extends Model
 
     public function getCanEditDeleteAttribute(): bool
     {
-        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
+        return (auth()->user()->role->type === 'Super' || auth()->id() == $this->user_id);
     }
 
     public function scopeFilterData($query)

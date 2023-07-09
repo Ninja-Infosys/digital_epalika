@@ -31,6 +31,14 @@
         </ul>
     </div>
 </li>
+
+<li class="{{request()->is('admin/identity/identityMeeting') ? 'active' : ''}}">
+    <a href="{{route('identity.admin.identityMeeting.index')}}">
+        <i class="fa fa-layer-group"></i>
+        <span> बैठक</span>
+    </a>
+</li>
+
 <li class="{{request()->is('admin/identity/reports*') ? 'active' : ''}}">
     <a href="#sidebarIdentityReport"
        {{request()->is('admin/identity/reports*') ? 'aria-expanded=true' : ''}}

@@ -6,15 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('identity.admin.dashboard')}}">
+                            <a href="{{ route('identity.admin.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">सेटिङ</li>
-                        <li class="breadcrumb-item active">अस्पताल</li>
+                        <li class="breadcrumb-item active">बैठक</li>
                     </ol>
                 </div>
-                <h4 class="page-title">अस्पताल</h4>
+                <h4 class="page-title">बैठक</h4>
             </div>
         </div>
     </div>
@@ -24,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अस्पताल सूची</h4>
-                        <a href="{{route('identity.admin.setting.hospital.create')}}"
-                           class="btn btn-sm btn-outline-primary">
+                        <h4 class="header-title">बैठक सूची</h4>
+                        <a href="{{ route('identity.admin.identityMeeting.create') }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                         </a>
                     </div>
@@ -34,43 +33,46 @@
                 <div class="card-body">
                     <table class="table table-sm table-striped table-bordered">
                         <thead>
-                        <tr>
-                            <th scope="col">क्र.सं.</th>
-                            <th scope="col">नाम</th>
-                            <th scope="col">फोन</th>
-                            <th scope="col">इमेल</th>
-                            <th scope="col">ठेगाना</th>
-                            <th scope="col">#</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">क्र.सं.</th>
+                                <th scope="col">बैठकको नाम</th>
+                                <th scope="col">मिति</th>
+                                <th scope="col">उपस्थित सदस्य</th>
+                                <th scope="col">#</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @forelse($hospitals as $hospital)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$hospital->name ?? ''}}</td>
-                                <td>{{$hospital->phone ?? ''}}</td>
-                                <td>{{$hospital->email ?? ''}}</td>
-                                <td>{{$hospital->address ?? ''}}</td>
-                                <td>
-                                    <a data-bs-type="edit" href="{{route('identity.admin.setting.hospital.edit', $hospital)}}"
-                                       type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{route('identity.admin.setting.hospital.destroy',$hospital)}}"
-                                          method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                            </tr>
-                        @endforelse
+                            @forelse($identityMeetings as $identityMeeting)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $identityMeeting->title ?? '' }}</td>
+                                    <td>{{ $identityMeeting->date_bs ?? '' }}</td>
+                                    <td>{{ $identityMeeting->disability_committees_count }}</td>
+                                    <td>
+                                        <a disabled data-bs-type="edit"
+                                            href="{{ route('identity.admin.identityMeeting.edit', $identityMeeting) }}"
+                                            type="button"
+                                            class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form
+                                            action="{{ route('identity.admin.identityMeeting.destroy', $identityMeeting) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button disabled data-bs-type="delete"
+                                                class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -78,4 +80,3 @@
         </div>
     </div>
 @endsection
-

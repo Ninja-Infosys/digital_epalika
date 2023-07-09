@@ -2,10 +2,15 @@
 
 namespace Modules\Identity\Http\Controllers;
 
+use App\Enums\StatusEnum;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Modules\Identity\Entities\DisabilityCommittee;
+use Modules\Identity\Entities\DisabilityIdentityCard;
+use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\IdentityMeeting;
 use Modules\Identity\Http\Requests\IdentityMeeting\StoreIdentityMeetingRequest;
 
@@ -13,20 +18,34 @@ class IdentityMeetingController extends Controller
 {
     public function index()
     {
-        return view('identity::admin.identityMeeting.index');
+        $identityMeetings = IdentityMeeting::withCount('disabilityCommittees')->latest('date_ad')->get();
+
+        return view('identity::admin.identityMeeting.index', compact('identityMeetings'));
     }
 
     public function create()
     {
-        return view('identity::admin.identityMeeting.create');
+        $disabilityCommittees = DisabilityCommittee::orderBy('position')->get();
+        $governmentDisabilityTypes = GovernmentalDisabilityType::orderBy('position')->get();
+
+        return view('identity::admin.identityMeeting.create', compact('disabilityCommittees', 'governmentDisabilityTypes'));
     }
 
     public function store(StoreIdentityMeetingRequest $request)
     {
         DB::transaction(function () use ($request) {
-            $identityMeeting=IdentityMeeting::create($request->validated());
+            $identityMeeting = IdentityMeeting::create($request->validated());
 
             $identityMeeting->disabilityCommittees()->attach($request->validated()['committees']);
+
+            foreach ($request->validated()['disabilityIdentityCards'] as $disabilityIdentityCard) {
+                if (!empty($disabilityIdentityCard['id'])) {
+                    DisabilityIdentityCard::find($disabilityIdentityCard['id'])->update([
+                        'governmental_disability_type_id' => $disabilityIdentityCard['governmental_disability_type_id'],
+                        'status' => StatusEnum::APPROVE->value
+                    ]);
+                }
+            }
         });
 
         toast('बैठक सफलतापुर्बक थपियो', 'success');
@@ -49,7 +68,7 @@ class IdentityMeetingController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(IdentityMeeting $identityMeeting)
     {
         //
     }

@@ -29,6 +29,6 @@ class IdentityMeeting extends Model
 
     public function disabilityCommittees(): BelongsToMany
     {
-        return $this->belongsToMany(DisabilityCommittee::class, 'committee_id', 'meeting_id');
+        return $this->belongsToMany(DisabilityCommittee::class, 'disability_committee_identity_meeting', 'meeting_id', 'committee_id');
     }
 }
