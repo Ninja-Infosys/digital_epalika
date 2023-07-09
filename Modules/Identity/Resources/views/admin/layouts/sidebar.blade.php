@@ -31,6 +31,12 @@
         </ul>
     </div>
 </li>
+<li class="{{request()->routeIs('identity.admin.disabilityFullDetail.*') ? 'active' : ''}}">
+    <a href="{{route('identity.admin.disabilityFullDetail.index')}}">
+        <i class="fa fa-info-circle"></i>
+        <span>पूर्ण विवरण</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/identity/reports*') ? 'active' : ''}}">
     <a href="#sidebarIdentityReport"
        {{request()->is('admin/identity/reports*') ? 'aria-expanded=true' : ''}}
