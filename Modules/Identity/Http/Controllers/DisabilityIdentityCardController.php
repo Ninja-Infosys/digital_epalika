@@ -5,10 +5,14 @@ namespace Modules\Identity\Http\Controllers;
 use App\Enums\StatusEnum;
 use App\Models\Ethnicity;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Http\Request;
 use DateTime;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Lottery;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
+use Modules\Identity\Entities\Hospital;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Identity\Entities\DisabilityType;
 use Modules\Identity\Entities\Relationship;
@@ -38,8 +42,8 @@ class DisabilityIdentityCardController extends Controller
             ->where('status', StatusEnum::PENDING->value)
             ->latest()
             ->paginate(10);
-
-        return view('identity::admin.disabilityIdentityCard.index', compact('disabilityIdentityCards'));
+        $hospitals = Hospital::all();
+        return view('identity::admin.disabilityIdentityCard.index', compact('hospitals', 'disabilityIdentityCards'));
     }
 
     public function create()
@@ -107,12 +111,30 @@ class DisabilityIdentityCardController extends Controller
 
     public function printDetail(DisabilityIdentityCard $disabilityIdentityCard)
     {
-//        dd($disabilityIdentityCard->getPlanTemplateData(RecommendationTemplateSetting::first()));
+
         return view('identity::admin.disabilityIdentityCard.printDetail', compact('disabilityIdentityCard'));
+    }
+
+    public function printData(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
+    {
+        $request->validate([
+            'hospital_id' => 'required',
+            'date' => 'required'
+        ]);
+        $disabilityIdentityCard->update([
+            'hospital_id' => $request->input('hospital_id')
+        ]);
+        $data = $disabilityIdentityCard->getIdentityTemplateData(RecommendationTemplateSetting::first());
+        $data = str_replace('[@today_date]',get_nepali_number($request->input('date')),$data);
+        $view = (string)View::make('identity::admin.disabilityIdentityCard.inc.print', compact('data'));
+        return response()->json([
+            'view' => $view,
+        ]);
     }
 
     public function printAll(DisabilityIdentityCard $disabilityIdentityCard)
     {
+
         $printData = DisabilityPrint::where('disability_identity_card_id', $disabilityIdentityCard->id)
             ->get()
             ->map(function ($disabilityPrint, $key) {
