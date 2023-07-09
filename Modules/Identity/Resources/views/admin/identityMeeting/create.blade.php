@@ -58,8 +58,8 @@
                                     @foreach ($disabilityCommittees as $disabilityCommittee)
                                         <div class="col-sm-3">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input"
-                                                    name="committees[]" value="{{ $disabilityCommittee->id }}"
+                                                <input type="checkbox" class="form-check-input" name="committees[]"
+                                                    value="{{ $disabilityCommittee->id }}"
                                                     id="committees{{ $disabilityCommittee->id }}">
                                                 <label class="form-check-label"
                                                     for="committees{{ $disabilityCommittee->id }}">{{ $disabilityCommittee->name }}</label>
@@ -78,23 +78,24 @@
                                 <label for="disabilityIdentityCards" class="form-label">अपाङ्गता परिचय पत्र को लागि योग्य
                                     *</label>
                                 <div class="row">
-                                    @foreach ($disabilityCommittees as $disabilityCommittee)
+                                    @foreach ($disabilityIdentityCards as $disabilityIdentityCard)
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input"
                                                     name="disabilityIdentityCards[{{ $loop->index }}][id]"
-                                                    value="{{ $disabilityCommittee->id }}"
-                                                    id="disabilityIdentityCards{{ $disabilityCommittee->id }}">
+                                                    value="{{ $disabilityIdentityCard->id }}"
+                                                    id="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">
                                                 <label class="form-check-label"
-                                                    for="disabilityIdentityCards{{ $disabilityCommittee->id }}">{{ $disabilityCommittee->name }}</label>
+                                                    for="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">{{ $disabilityIdentityCard->name }}</label>
                                             </div>
                                             @error("disabilityIdentityCards.$loop->index.id")
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-sm-6 mb-2">
-                                            <select name="disabilityIdentityCards[{{ $loop->index }}][governmental_disability_type_id]" class="form-select form-select-sm"
-                                                id="disabilityIdentityCards">
+                                            <select
+                                                name="disabilityIdentityCards[{{ $loop->index }}][governmental_disability_type_id]"
+                                                class="form-select form-select-sm" id="disabilityIdentityCards">
                                                 <option value="">छान्नुहोस्</option>
                                                 @foreach ($governmentDisabilityTypes as $governmentDisabilityType)
                                                     <option value="{{ $governmentDisabilityType->id }}">

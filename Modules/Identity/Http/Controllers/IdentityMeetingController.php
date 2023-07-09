@@ -3,10 +3,8 @@
 namespace Modules\Identity\Http\Controllers;
 
 use App\Enums\StatusEnum;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Modules\Identity\Entities\DisabilityCommittee;
 use Modules\Identity\Entities\DisabilityIdentityCard;

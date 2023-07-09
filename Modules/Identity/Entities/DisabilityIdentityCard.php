@@ -58,7 +58,6 @@ class DisabilityIdentityCard extends Model
         'governmental_disability_type_id',
         'status',
         'recommend_at',
-
         "disability_reason_id",
         "citizenship_no_place",
         "citizenship_date_ad",
