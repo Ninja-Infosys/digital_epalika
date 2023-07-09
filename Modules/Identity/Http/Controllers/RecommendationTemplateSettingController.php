@@ -2,7 +2,6 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
@@ -24,7 +23,7 @@ class RecommendationTemplateSettingController extends Controller
         $recommendationTemplateSetting = $this->recommendationTemplateSettingData();
         if ($recommendationTemplateSetting) {
             $recommendationTemplateSetting->update($data);
-        }else{
+        } else {
             RecommendationTemplateSetting::create($data);
         }
         toast('टेम्पलेट सफलतापूर्वक थपियो', 'success');
