@@ -11,6 +11,7 @@
                     id="disabilityPrint">
                     @csrf
                     <div class="row">
+                        <p class="text-danger" id="error_message"></p>
                         <div class="col-md-12 mb-2">
                             <label for="hospital_id" class="form-label">अस्पताल
                                 *</label>
@@ -22,7 +23,7 @@
                                         value="{{$hospital->id}}">{{$hospital->name}}</option>
                                 @endforeach
                             </select>
-                            <p class="text-danger" id="error_message"></p>
+
                         </div>
                         <div class="col-md-12">
                             <x-date-input-component

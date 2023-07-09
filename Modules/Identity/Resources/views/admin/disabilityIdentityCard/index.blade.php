@@ -70,7 +70,7 @@
 
                                             <a data-bs-type="edit"
                                                href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -80,9 +80,9 @@
                                                 <i class="fa fa-print"></i>
                                             </button>
                                                 @include('identity::admin.disabilityIdentityCard.inc.print-model')
-                                            <button type="button" class="btn btn-xs btn-outline-warning"
+                                            <button type="button" class="btn btn-xs btn-outline-success"
                                                     data-bs-toggle="modal" data-bs-target="#print1">
-                                                <i class="fa fa-print"></i> Print
+                                                <i class="fa fa-plus"></i>
                                             </button>
 
                                             @include('identity::admin.disabilityIdentityCard.inc.report')
@@ -138,6 +138,16 @@
                     success: function (resp) {
                         $("#disabilityPrint")[0].reset();
                         $("#print").modal("hide");
+                        swal.fire({
+                            title: 'Data Updated Successfully',
+                            toast:true,
+                            position:'top-right',
+                            timer:3000,
+                            showConfirmButton:false,
+                            timerProgressBar:true,
+                            width:400,
+                            icon: 'success',
+                        });
                         printButton.prop("disabled", false);
                         printButton.html('Save & Print  <i class="fa fa-print"></i>');
                         const print_area = window.open();
@@ -148,7 +158,7 @@
                         print_area.close();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        $("#error_message1").html(XMLHttpRequest.responseJSON.message);
+                        $("#error_message").html(XMLHttpRequest.responseJSON.message);
                         printButton.prop("disabled", false);
                         printButton.html('Save & Print  <i class="fa fa-print"></i>');
                     },
@@ -168,6 +178,16 @@
                     success: function (resp) {
                         $("#disabilityReportData")[0].reset();
                         $("#print1").modal("hide");
+                        swal.fire({
+                            title: 'Data Updated Successfully',
+                            toast:true,
+                            position:'top-right',
+                            timer:3000,
+                            showConfirmButton:false,
+                            timerProgressBar:true,
+                            width:400,
+                            icon: 'success',
+                        });
                         location.replace(window.location.href);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
