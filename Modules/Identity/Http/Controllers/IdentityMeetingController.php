@@ -27,8 +27,9 @@ class IdentityMeetingController extends Controller
     {
         $disabilityCommittees = DisabilityCommittee::orderBy('position')->get();
         $governmentDisabilityTypes = GovernmentalDisabilityType::orderBy('position')->get();
+        $disabilityIdentityCards=DisabilityIdentityCard::where('status',StatusEnum::ELIGIBILITY_FOR_MEETING->value)->get();
 
-        return view('identity::admin.identityMeeting.create', compact('disabilityCommittees', 'governmentDisabilityTypes'));
+        return view('identity::admin.identityMeeting.create', compact('disabilityCommittees', 'governmentDisabilityTypes','disabilityIdentityCards'));
     }
 
     public function store(StoreIdentityMeetingRequest $request)

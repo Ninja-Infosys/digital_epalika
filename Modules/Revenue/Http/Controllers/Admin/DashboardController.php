@@ -133,8 +133,8 @@ class DashboardController extends Controller
         foreach ($this->month_name as $key => $month) {
             $data->push(
                 $result->filter(function ($item) use ($key) {
-                return date('m', strtotime($item->payment_date)) == $key+1;
-            })
+                    return date('m', strtotime($item->payment_date)) == $key+1;
+                })
                     ->sum('total')
             );
         }

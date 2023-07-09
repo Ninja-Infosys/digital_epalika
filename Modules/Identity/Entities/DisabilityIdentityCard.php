@@ -8,11 +8,13 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
+use Modules\BusinessRegistration\Enums\Qualification;
 use Modules\Identity\Traits\IdentityRecommendationTemplateTrait;
 
 class DisabilityIdentityCard extends Model
@@ -32,6 +34,8 @@ class DisabilityIdentityCard extends Model
         'name_en',
         'citizenship_no',
         'birth_registration_no',
+        'doctor_name',
+        'identity_no',
         'father_name',
         'father_name_en',
         'mother_name',
@@ -50,14 +54,51 @@ class DisabilityIdentityCard extends Model
         'relationship_id',
         'phone',
         'disability_type_id',
+        'hospital_id',
         'governmental_disability_type_id',
         'status',
+        'recommend_at',
+
+        "disability_reason_id",
+        "citizenship_no_place",
+        "citizenship_date_ad",
+        "citizenship_date",
+        "document_photo",
+        "document_photo_back",
+        "material_description",
+        "qualification",
+        "daily_activity",
+        "supporting_material",
+        "supporting_material",
+        "helping_task",
+        "without_helping_task",
+        "main_training_name",
+        "occupation_id",
     ];
 
     protected $casts = [
         'gender' => Gender::class,
         'status' => StatusEnum::class,
+        'qualification' => Qualification::class,
     ];
+
+    protected function HelpingTask(): Attribute
+    {
+
+        return Attribute::make(
+            get: static fn($value) => explode(',', $value),
+            set: static fn($value) => implode(',', $value),
+        );
+    }
+
+    protected function WithoutHelpingTask(): Attribute
+    {
+
+        return Attribute::make(
+            get: static fn($value) => explode(',', $value),
+            set: static fn($value) => implode(',', $value),
+        );
+    }
 
     public function fiscalYear(): BelongsTo
     {
@@ -92,6 +133,11 @@ class DisabilityIdentityCard extends Model
     public function relationship(): BelongsTo
     {
         return $this->belongsTo(Relationship::class);
+    }
+
+    public function hospital(): BelongsTo
+    {
+        return $this->belongsTo(Hospital::class);
     }
 
     public function setPhotoAttribute($value): void

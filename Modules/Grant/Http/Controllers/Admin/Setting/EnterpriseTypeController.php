@@ -20,7 +20,7 @@ class EnterpriseTypeController extends Controller
             }
         })
             ->latest()->paginate(10);
-            ;
+        ;
         return view('grant::admin.setting.enterpriseType.index', compact('enterpriseTypes'));
     }
 
