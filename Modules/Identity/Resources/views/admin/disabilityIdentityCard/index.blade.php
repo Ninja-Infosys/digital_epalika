@@ -80,10 +80,13 @@
                                                 <i class="fa fa-print"></i>
                                             </button>
                                                 @include('identity::admin.disabilityIdentityCard.inc.print-model')
-                                            <button type="button" class="btn btn-xs btn-outline-success"
-                                                    data-bs-toggle="modal" data-bs-target="#print1">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
+                                           @if(!empty($disabilityIdentityCard->recommend_at))
+                                                <button type="button" class="btn btn-xs btn-outline-success"
+                                                        data-bs-toggle="modal" data-bs-target="#print1">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                           @endif
+
 
                                             @include('identity::admin.disabilityIdentityCard.inc.report')
 
@@ -148,6 +151,7 @@
                             width:400,
                             icon: 'success',
                         });
+                        location.replace(window.location.href);
                         printButton.prop("disabled", false);
                         printButton.html('Save & Print  <i class="fa fa-print"></i>');
                         const print_area = window.open();

@@ -122,16 +122,18 @@ class DisabilityIdentityCardController extends Controller
             'date' => 'required'
         ]);
         $disabilityIdentityCard->update([
-            'hospital_id' => $request->input('hospital_id')
+            'hospital_id' => $request->input('hospital_id'),
+            'recommend_at' => now()
         ]);
         $data = $disabilityIdentityCard->getIdentityTemplateData(RecommendationTemplateSetting::first());
-        $data = str_replace('[@today_date]',get_nepali_number($request->input('date')),$data);
+        $data = str_replace('[@today_date]', get_nepali_number($request->input('date')), $data);
         $view = (string)View::make('identity::admin.disabilityIdentityCard.inc.print', compact('data'));
         return response()->json([
             'view' => $view,
         ]);
 
     }
+
     public function reportData(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
 
@@ -140,7 +142,7 @@ class DisabilityIdentityCardController extends Controller
             'identity_no' => 'required'
         ]);
         $disabilityIdentityCard->update([
-            'status'=> StatusEnum::ELIGIBILITY_FOR_MEETING->value,
+            'status' => StatusEnum::ELIGIBILITY_FOR_MEETING->value,
             'doctor_name' => $request->input('doctor_name'),
             'identity_no' => $request->input('identity_no'),
         ]);

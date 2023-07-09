@@ -54,6 +54,7 @@ class DisabilityIdentityCard extends Model
         'disability_type_id',
         'hospital_id',
         'status',
+        'recommend_at',
     ];
 
     protected $casts = [

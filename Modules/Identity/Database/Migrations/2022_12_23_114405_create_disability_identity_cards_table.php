@@ -35,6 +35,7 @@ return new class () extends Migration {
             $table->foreignId('disability_type_id')->nullable()->constrained('disability_types')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('hospital_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('status');
+            $table->timestamp('recommend_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
