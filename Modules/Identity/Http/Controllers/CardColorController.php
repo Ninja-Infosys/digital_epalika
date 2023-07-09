@@ -20,7 +20,7 @@ class CardColorController extends Controller
             }
         })
             ->latest()->paginate(10);
-            ;
+        ;
 
         return view('identity::admin.setting.cardColor.index', compact('cardColors'));
     }

@@ -14,8 +14,7 @@ class AddressComponent extends Component
         public $districtId = null,
         public $localBodyId = null,
         public $wardNo = null
-    )
-    {
+    ) {
         $this->provinces = Province::all();
     }
 

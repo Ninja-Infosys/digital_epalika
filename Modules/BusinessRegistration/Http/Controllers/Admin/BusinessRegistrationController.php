@@ -62,8 +62,8 @@ class BusinessRegistrationController extends Controller
 
         $businessDetail->load(
             ['partners' => function ($query) {
-            $query->with('issueDistrict', 'district', 'localBody');
-        }, 'businessNature', 'registeredBusinesses']
+                $query->with('issueDistrict', 'district', 'localBody');
+            }, 'businessNature', 'registeredBusinesses']
         );
 
         return view('businessregistration::admin.businessRegistration.show', compact('businessDetail'));
@@ -169,8 +169,8 @@ class BusinessRegistrationController extends Controller
         $officeHeaders = OfficeHeader::get();
         $businessDetail->load(
             ['partners' => function ($query) {
-            $query->with('issueDistrict', 'district', 'localBody', 'province');
-        }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
+                $query->with('issueDistrict', 'district', 'localBody', 'province');
+            }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
         );
 
         return view('businessregistration::admin.businessRegistration.print', compact('businessDetail', 'officeHeaders'));
