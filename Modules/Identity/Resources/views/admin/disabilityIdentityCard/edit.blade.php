@@ -34,9 +34,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('identity.admin.disabilityIdentityCard.store')}}"
+                    <form method="POST"
+                          action="{{route('identity.admin.disabilityIdentityCard.update', $disabilityIdentityCard)}}"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="card mt-3">
                             <fieldset>
                                 <legend>अपाङ्गता भएको व्यक्तिको विवरण</legend>
@@ -102,7 +104,7 @@
                                             @foreach(\App\Enums\Gender::cases() as $gender)
                                                 <option
                                                     value="{{$gender->value}}"
-                                                    {{old('gender', $disabilityIdentityCard->gender) == $gender ? "selected" : ""}}>{{$gender->label()}}</option>
+                                                    {{old('gender', $disabilityIdentityCard->gender->value) == $gender->value ? "selected" : ""}}>{{$gender->label()}}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')

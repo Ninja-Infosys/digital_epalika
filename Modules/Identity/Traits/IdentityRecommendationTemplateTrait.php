@@ -109,7 +109,4 @@ trait IdentityRecommendationTemplateTrait
             '[@phone]' => $this->phone ?? '',
         ];
     }
-
-
 }
-

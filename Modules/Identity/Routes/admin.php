@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Identity\Http\Controllers\CardColorController;
 use Modules\Identity\Http\Controllers\DashboardController;
 use Modules\Identity\Http\Controllers\DisabilityCommitteeController;
+use Modules\Identity\Http\Controllers\DisabilityFullDetailController;
 use Modules\Identity\Http\Controllers\DisabilityIdentityCardController;
 use Modules\Identity\Http\Controllers\DisabilityIdentityCardReportController;
 use Modules\Identity\Http\Controllers\DisabilityPrintController;
@@ -12,6 +13,7 @@ use Modules\Identity\Http\Controllers\DisabilityTypeController;
 use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\HospitalController;
+use Modules\Identity\Http\Controllers\IdentityMeetingController;
 use Modules\Identity\Http\Controllers\RecommendationTemplateSettingController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
@@ -29,7 +31,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);
     Route::resource('hospital', HospitalController::class);
     Route::resource('disabilityCommittee', DisabilityCommitteeController::class);
-    Route::resource('recommendationTemplateSetting', RecommendationTemplateSettingController::class)->only(['index','store']);
+    Route::resource('recommendationTemplateSetting', RecommendationTemplateSettingController::class)->only(['index', 'store']);
 });
 
 Route::prefix('disability')->group(function () {
@@ -40,7 +42,10 @@ Route::prefix('disability')->group(function () {
     Route::resource('disabilityIdentityCard.disabilityPrint', DisabilityPrintController::class)->only('store');
     Route::post('disabilityIdentityCard/{disabilityIdentityCard}/data', [DisabilityIdentityCardController::class,'printData'])->name('disabilityIdentityCard.printData');
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
+    Route::resource('fullDetail/disabilityIdentityCard', DisabilityFullDetailController::class)->names('disabilityFullDetail');
 });
+
+Route::resource('identityMeeting', IdentityMeetingController::class);
 
 Route::prefix('seniorCitizen')->group(function () {
     Route::get('seniorCitizenDetail/search-citizenship', [SeniorCitizenDetailController::class, 'searchCitizenshipNo'])->name('seniorCitizenDetail.searchCitizenshipNo');

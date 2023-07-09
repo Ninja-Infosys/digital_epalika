@@ -3,11 +3,7 @@
 namespace Modules\Identity\Http\Livewire;
 
 use App\Enums\StatusEnum;
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use App\Models\Ethnicity;
-use App\Models\Occupation;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
@@ -19,17 +15,11 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\DisabilityIdentityCard;
-use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
-use Modules\Identity\Entities\EmployeeSignature;
-use Modules\Identity\Entities\FingerPrint;
-use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\Relationship;
-use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCardLivewire extends Component
 {
-
     use WithFileUploads;
 
     use NepaliDateConverter;
@@ -98,7 +88,6 @@ class DisabilityIdentityCardLivewire extends Component
                     $this->form[$key] = $disabilityIdentityCard[$key];
                 }
             }
-
         } else {
             $this->form['province_id'] = $officeSetting->province_id;
             $this->form['district_id'] = $officeSetting->district_id;
@@ -176,7 +165,6 @@ class DisabilityIdentityCardLivewire extends Component
 
     public function rules(): array
     {
-
         return match ($this->currentStep) {
             1 => $this->firstStepValidations(),
             2 => $this->secondStepValidations,
@@ -204,7 +192,7 @@ class DisabilityIdentityCardLivewire extends Component
                 'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक अध्याबधिक भयो'
             ]);
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
-        }else{
+        } else {
             DB::transaction(function () {
                 DisabilityIdentityCard::create($this->form + [
                         'status' => StatusEnum::PENDING->value
@@ -217,7 +205,6 @@ class DisabilityIdentityCardLivewire extends Component
             $this->reset('form');
             return back();
         }
-
     }
 
 

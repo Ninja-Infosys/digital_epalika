@@ -17,11 +17,23 @@ class UpdateDisabilityIdentityCardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo' => ['nullable'],
+            'photo' => ['nullable', 'mimes:jpeg,jpg,png'],
             'name' => ['required', 'string', 'max:255'],
             'name_en' => ['required', 'string', 'max:255'],
-            'citizenship_no' => ['nullable', Rule::unique('disability_identity_cards', 'citizenship_no')->withoutTrashed()->ignore($this->disabilityIdentityCard)],
-            'birth_registration_no' => ['nullable', Rule::unique('disability_identity_cards', 'birth_registration_no')->withoutTrashed()->ignore($this->disabilityIdentityCard)],
+            'citizenship_no' => [
+                'required_if:birth_registration_no,null',
+                Rule::unique('disability_identity_cards', 'citizenship_no')
+                    ->whereNotNull('citizenship_no')
+                    ->withoutTrashed()
+                    ->ignore($this->disabilityIdentityCard)
+            ],
+            'birth_registration_no' => [
+                'required_if:citizenship_no,null',
+                Rule::unique('disability_identity_cards', 'birth_registration_no')
+                    ->whereNotNull('birth_registration_no')
+                    ->withoutTrashed()
+                    ->ignore($this->disabilityIdentityCard)
+            ],
             'father_name' => ['required', 'string', 'max:255'],
             'father_name_en' => ['required', 'string', 'max:255'],
             'mother_name' => ['required', 'string', 'max:255'],

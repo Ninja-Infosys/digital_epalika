@@ -28,7 +28,7 @@ class DisabilityPrintController extends Controller
                     'date_ad' => now()
                 ]);
         });
-        $disabilityIdentityCard->load( 'disabilityType', 'province', 'district', 'localBody');
+        $disabilityIdentityCard->load('disabilityType', 'province', 'district', 'localBody');
         $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders', 'disabilityPrint'));
         return response()->json([
             'view' => $view,

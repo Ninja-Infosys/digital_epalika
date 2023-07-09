@@ -26,8 +26,9 @@ class SearchDisabilityIdentityCitizenshipLivewire extends Component
 
         $column = 'citizenship_no';
 
-        if ($this->is_minor)
+        if ($this->is_minor) {
             $column = 'birth_registration_no';
+        }
 
         if ($disabilityIdentityCard = DisabilityIdentityCard::where($column, $this->citizenship_no)->first()) {
             return redirect(route('identity.admin.disabilityIdentityCard.show', $disabilityIdentityCard));
