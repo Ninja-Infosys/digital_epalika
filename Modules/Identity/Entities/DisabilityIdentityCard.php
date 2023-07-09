@@ -55,7 +55,7 @@ class DisabilityIdentityCard extends Model
         'phone',
         'disability_type_id',
         'hospital_id',
-        'governmental_disability_type_id',
+        'gov_disability_type_id',
         'status',
         'recommend_at',
         "disability_reason_id",
@@ -124,9 +124,9 @@ class DisabilityIdentityCard extends Model
         return $this->belongsTo(DisabilityType::class);
     }
 
-    public function governmentalDisabilityType()
+    public function governmentalDisabilityType(): BelongsTo
     {
-        return $this->belongsTo(GovernmentalDisabilityType::class);
+        return $this->belongsTo(GovernmentalDisabilityType::class,'gov_disability_type_id');
     }
 
     public function relationship(): BelongsTo

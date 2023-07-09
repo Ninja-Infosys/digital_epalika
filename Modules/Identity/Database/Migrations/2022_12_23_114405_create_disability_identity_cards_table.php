@@ -32,9 +32,9 @@ return new class () extends Migration {
             $table->string('guardian_name_en');
             $table->foreignId('relationship_id')->nullable()->constrained('relationships')->nullOnDelete()->onUpdate('no action');
             $table->string('phone')->nullable();
-            $table->foreignId('disability_type_id')->nullable()->constrained('disability_types')->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('disability_type_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('hospital_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->foreignId('governmental_disability_type_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('gov_disability_type_id')->nullable()->constrained('governmental_disability_types')->nullOnDelete()->onUpdate('no action');
             $table->string('status');
             $table->string("disability_reason_id")->nullable();
             $table->string("citizenship_no_place")->nullable();
