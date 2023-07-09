@@ -3,12 +3,17 @@
 namespace Modules\Identity\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Models\Occupation;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\DisabilityIdentityCard;
+use Modules\Identity\Entities\DisabilityReason;
 
 class DisabilityFullDetailController extends Controller
 {
+    use NepaliDateConverter;
+
     public function index()
     {
         $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')
@@ -32,33 +37,22 @@ class DisabilityFullDetailController extends Controller
         return view('identity::admin.disabilityFullDetail.index', compact('disabilityIdentityCards'));
     }
 
-    public function create()
+
+    public function show(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::create');
+        return view('identity::admin.disabilityFullDetail.show', compact('disabilityIdentityCard'));
     }
 
-    public function store(Request $request)
+    public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        //
+        $todayDateInBS = $this->get_today_nepali_date();
+        $disabilityReasons = DisabilityReason::all();
+        $occupations = Occupation::all();
+        return view('identity::admin.disabilityFullDetail.edit', compact('disabilityIdentityCard', 'disabilityReasons', 'occupations','todayDateInBS'));
     }
 
-    public function show($id)
+    public function update(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::show');
-    }
 
-    public function edit($id)
-    {
-        return view('identity::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

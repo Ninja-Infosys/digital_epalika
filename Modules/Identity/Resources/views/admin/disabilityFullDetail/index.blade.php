@@ -57,12 +57,12 @@
                                     </td>
                                     <td>
                                         @if($disabilityIdentityCard->can_edit_delete)
-                                            <a data-bs-type="edit" href="{{route('identity.admin.disabilityIdentityCard.show',$disabilityIdentityCard)}}"
+                                            <a data-bs-type="edit" href="{{route('identity.admin.disabilityFullDetail.show',$disabilityIdentityCard)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
-                                            <a data-bs-type="edit" href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
+                                            <a data-bs-type="edit" href="{{route('identity.admin.disabilityFullDetail.edit',$disabilityIdentityCard)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -71,18 +71,6 @@
                                             {{--                                                <i class="fa fa-print"></i>--}}
 
                                             {{--                                            </a>--}}
-                                            <a href="{{route('identity.admin.disabilityIdentityCard.printDetail',$disabilityIdentityCard)}}"   class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-print"></i>
-                                            </a>
-
-                                            <form action="{{route('identity.admin.disabilityIdentityCard.destroy',$disabilityIdentityCard)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
                                         @endif
 
                                     </td>

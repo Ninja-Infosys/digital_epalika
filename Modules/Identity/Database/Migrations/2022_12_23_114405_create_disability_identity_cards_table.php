@@ -35,6 +35,21 @@ return new class () extends Migration {
             $table->foreignId('disability_type_id')->nullable()->constrained('disability_types')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('hospital_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('status');
+
+            $table->string("disability_reason_id")->nullable();
+            $table->string("citizenship_no_place")->nullable();
+            $table->string("citizenship_date_ad")->nullable();
+            $table->string("citizenship_date")->nullable();
+            $table->string("document_photo")->nullable();
+            $table->string("document_photo_back")->nullable();
+            $table->string("material_description")->nullable();
+            $table->string("qualification")->nullable();
+            $table->boolean("daily_activity")->default(false);
+            $table->boolean("supporting_material")->default(false);
+            $table->longText("helping_task")->nullable();
+            $table->longText("without_helping_task")->nullable();
+            $table->string("main_training_name")->nullable();
+            $table->string("occupation_id")->nullable();
             $table->timestamp('recommend_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
