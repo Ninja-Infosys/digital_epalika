@@ -29,8 +29,18 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form method="POST"
-                          action="{{route("identity.admin.disabilityIdentityCard.update", $disabilityIdentityCard)}}">
+                          action="{{route("identity.admin.disabilityFullDetail.update", $disabilityIdentityCard)}}"
+                          enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="card mt-3">
@@ -110,8 +120,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <x-date-input-component
-                                                nameNe="dob" labelNe="नागरिकता जारि भएको मिति (बि.स.) *"
-                                                nameEn="dob_ad" labelEn="नागरिकता जारि भएको मिति (ई.स.)"
+                                                nameNe="citizenship_date" labelNe="नागरिकता जारि भएको मिति (बि.स.) *"
+                                                nameEn="citizenship_date_ad" labelEn="नागरिकता जारि भएको मिति (ई.स.)"
                                                 disable-after="{{$todayDateInBS}}"
                                                 disable-after-Ad="{{today()->toDateString()}}"
                                                 :editDateEn="$disabilityIdentityCard->citizenship_date_ad ?? ''"
@@ -123,7 +133,7 @@
                                         <label for="document_photo" class="form-label">
                                             {{!is_null($disabilityIdentityCard->citizenship_no) ? "नागरिकता (अगाडी)": "जन्मदर्ता" }}</label>
                                         <input
-                                            name="citizenship_photo"
+                                            name="document_photo"
                                             class="form-control  @error('document_photo') is-invalid @enderror"
                                             type="file"
                                             id="document_photo"
@@ -405,7 +415,8 @@
                                             id="occupation_id">
                                             <option value="">---छान्नुहोस् ---</option>
                                             @foreach($occupations as $occupation)
-                                                <option value="{{$occupation->id}}" {{old("occupation_id",$disabilityIdentityCard->occupation_id) == $occupation->id ? "selected" : "" }}>{{$occupation->title}}</option>
+                                                <option
+                                                    value="{{$occupation->id}}" {{old("occupation_id",$disabilityIdentityCard->occupation_id) == $occupation->id ? "selected" : "" }}>{{$occupation->title}}</option>
                                             @endforeach
 
                                         </select>

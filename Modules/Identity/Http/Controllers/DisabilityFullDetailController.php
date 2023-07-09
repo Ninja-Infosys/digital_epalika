@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
+use Modules\Identity\Http\Requests\UpdateDisabilityFullDetailResource;
 
 class DisabilityFullDetailController extends Controller
 {
@@ -48,11 +49,13 @@ class DisabilityFullDetailController extends Controller
         $todayDateInBS = $this->get_today_nepali_date();
         $disabilityReasons = DisabilityReason::all();
         $occupations = Occupation::all();
-        return view('identity::admin.disabilityFullDetail.edit', compact('disabilityIdentityCard', 'disabilityReasons', 'occupations','todayDateInBS'));
+        return view('identity::admin.disabilityFullDetail.edit', compact('disabilityIdentityCard', 'disabilityReasons', 'occupations', 'todayDateInBS'));
     }
 
-    public function update(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
+    public function update(UpdateDisabilityFullDetailResource $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
-
+        $disabilityIdentityCard->update($request->validated());
+        toast('Disability Full Detail Updated Successfully', 'success');
+        return redirect()->route('identity.admin.disabilityFullDetail.index');
     }
 }
