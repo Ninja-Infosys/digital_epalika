@@ -79,51 +79,13 @@
                                                     data-bs-toggle="modal" data-bs-target="#print">
                                                 <i class="fa fa-print"></i>
                                             </button>
+                                                @include('identity::admin.disabilityIdentityCard.inc.print-model')
+                                            <button type="button" class="btn btn-xs btn-outline-warning"
+                                                    data-bs-toggle="modal" data-bs-target="#print1">
+                                                <i class="fa fa-print"></i> Print
+                                            </button>
 
-                                            <div class="modal fade" id="print" data-bs-backdrop="static"
-                                                 data-bs-keyboard="false" tabindex="-1"
-                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body">
-                                                            <form
-                                                                action="{{route('identity.admin.disabilityIdentityCard.printData',$disabilityIdentityCard)}}"
-                                                                id="disabilityPrint">
-                                                                @csrf
-                                                                <div class="row">
-                                                                    <div class="col-md-12 mb-2">
-                                                                        <label for="hospital_id" class="form-label">अस्पताल
-                                                                            *</label>
-                                                                        <select class="form-control" name="hospital_id"
-                                                                                id="hospital_id">
-                                                                            <option value="">अस्पताल छान्नुहोस्</option>
-                                                                            @foreach($hospitals as $hospital)
-                                                                                <option
-                                                                                    value="{{$hospital->id}}">{{$hospital->name}}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                        <p class="text-danger" id="error_message"></p>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <x-date-input-component
-                                                                            container="#print"
-                                                                            nameNe="date" labelNe="मिति"
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <button type="submit"
-                                                                        class="btn btn-xs btn-outline-primary printData mt-2">
-                                                                    Save & Print <i class="fa fa-print"></i>
-                                                                </button>
-                                                                <button type="button"
-                                                                        class="btn btn-xs btn-outline-danger mt-2"
-                                                                        data-bs-dismiss="modal">Close
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @include('identity::admin.disabilityIdentityCard.inc.report')
 
                                             {{--                                            <a href="{{route('identity.admin.disabilityIdentityCard.printDetail',$disabilityIdentityCard)}}"   class="btn btn-xs btn-outline-warning">--}}
                                             {{--                                                <i class="fa fa-print"></i>--}}
@@ -160,27 +122,6 @@
         </div>
     </div>
 
-    {{--    @push('scripts')--}}
-    {{--        <script>--}}
-    {{--            $(".printDetail").on("click",function(e){--}}
-    {{--                $.ajax({--}}
-    {{--                    method:"GET",--}}
-    {{--                    url:$(this).attr("route_action"),--}}
-    {{--                    success:function(resp){--}}
-    {{--                        const print_area = window.open();--}}
-    {{--                        print_area.document.write(resp.view);--}}
-    {{--                        print_area.document.close();--}}
-    {{--                        print_area.focus();--}}
-    {{--                        print_area.print();--}}
-    {{--                        print_area.close();--}}
-    {{--                    },error:function(){--}}
-    {{--                        alert("Something Went Wrong");--}}
-    {{--                    }--}}
-    {{--                });--}}
-    {{--            });--}}
-    {{--        </script>--}}
-    {{--    @endpush--}}
-
     @push('scripts')
         <script>
             $(".printData").on("click", function (e) {
@@ -207,7 +148,30 @@
                         print_area.close();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        $("#error_message").html(XMLHttpRequest.responseJSON.message);
+                        $("#error_message1").html(XMLHttpRequest.responseJSON.message);
+                        printButton.prop("disabled", false);
+                        printButton.html('Save & Print  <i class="fa fa-print"></i>');
+                    },
+                });
+            });
+            $(".printReportData").on("click", function (e) {
+                e.preventDefault();
+                var printButton = $(this);
+                var data = $("#disabilityReportData").serialize();
+                var url = $("#disabilityReportData").attr("action");
+                printButton.prop("disabled", true);
+                printButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...');
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: data,
+                    success: function (resp) {
+                        $("#disabilityReportData")[0].reset();
+                        $("#print1").modal("hide");
+                        location.replace(window.location.href);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $("#error_message1").html(XMLHttpRequest.responseJSON.message);
                         printButton.prop("disabled", false);
                         printButton.html('Save & Print  <i class="fa fa-print"></i>');
                     },

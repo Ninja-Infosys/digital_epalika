@@ -32,6 +32,8 @@ class DisabilityIdentityCard extends Model
         'name_en',
         'citizenship_no',
         'birth_registration_no',
+        'doctor_name',
+        'identity_no',
         'father_name',
         'father_name_en',
         'mother_name',

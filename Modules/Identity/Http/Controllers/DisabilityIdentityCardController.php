@@ -130,6 +130,24 @@ class DisabilityIdentityCardController extends Controller
         return response()->json([
             'view' => $view,
         ]);
+
+    }
+    public function reportData(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
+    {
+
+        $request->validate([
+            'doctor_name' => 'required',
+            'identity_no' => 'required'
+        ]);
+        $disabilityIdentityCard->update([
+            'status'=> StatusEnum::ELIGIBILITY_FOR_MEETING->value,
+            'doctor_name' => $request->input('doctor_name'),
+            'identity_no' => $request->input('identity_no'),
+        ]);
+        return response()->json([
+            'message' => 'Report Data Added Successfully',
+        ]);
+
     }
 
     public function printAll(DisabilityIdentityCard $disabilityIdentityCard)

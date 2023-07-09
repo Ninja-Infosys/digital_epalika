@@ -309,7 +309,7 @@
         extra.cacheClear();
         extra.searchFocusOut();
         extra.browserBack();
-        extra.formFillAlert();
+        // extra.formFillAlert();
         extra.listenLivewireEvent();
     });
 })(jQuery);

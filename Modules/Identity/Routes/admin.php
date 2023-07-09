@@ -41,6 +41,7 @@ Route::prefix('disability')->group(function () {
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/printAll', [DisabilityIdentityCardController::class, 'printAll'])->name('disabilityIdentityCard.printAll');
     Route::resource('disabilityIdentityCard.disabilityPrint', DisabilityPrintController::class)->only('store');
     Route::post('disabilityIdentityCard/{disabilityIdentityCard}/data', [DisabilityIdentityCardController::class,'printData'])->name('disabilityIdentityCard.printData');
+    Route::post('disabilityIdentityCard/{disabilityIdentityCard}/reportData', [DisabilityIdentityCardController::class,'reportData'])->name('disabilityIdentityCard.reportData');
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
     Route::resource('fullDetail/disabilityIdentityCard', DisabilityFullDetailController::class)->names('disabilityFullDetail');
 });

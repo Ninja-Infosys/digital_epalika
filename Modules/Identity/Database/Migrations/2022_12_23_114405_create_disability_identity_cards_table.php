@@ -13,6 +13,8 @@ return new class () extends Migration {
             $table->string('name_en');
             $table->string('citizenship_no')->nullable();
             $table->string('birth_registration_no')->nullable();
+            $table->string('doctor_name')->nullable();
+            $table->string('identity_no')->nullable();
             $table->string('father_name');
             $table->string('father_name_en');
             $table->string('mother_name');
