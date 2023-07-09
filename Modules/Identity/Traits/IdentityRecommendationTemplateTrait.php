@@ -16,15 +16,19 @@ trait IdentityRecommendationTemplateTrait
             'data' => [
                 'नाम' => '[@name]',
                 'नाम (अंग्रेजीमा)' => '[@name_en]',
-                'नागरिकता नं' => '[@citizenship_no]',
-                'जन्म दर्ता नं' => '[@birth_registration_no]',
+                'नागरिकता नं / जन्म दर्ता नं' => '[@document_no]',
                 'जन्म मिति' => '[@dob]',
                 'लिङ्ग' => '[@gender]',
+                'अस्पतालको नाम' => '[@hospital]',
+                'अस्पतालको ठेगाना' => '[@hospital_address]',
                 'अपांगताको प्रकार' => '[@disabilityType]',
                 'जिल्ला' => '[@district]',
                 'पालिका' => '[@municipal]',
                 'वडा नं' => '[@ward_no]',
                 'टोल' => '[@tole]',
+                'आजको मिति' => '[@today_date]',
+                'कार्यालय लेटर हेड' => '[@letterHead]',
+                'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
                 'बाबुको नाम' => '[@father_name]',
                 'बाबुको नाम (अंग्रेजीमा)' => '[@father_name_en]',
                 'आमाको नाम' => '[@mother_name]',
@@ -42,7 +46,8 @@ trait IdentityRecommendationTemplateTrait
     ];
 
 
-    public function getPlanTemplateData(RecommendationTemplateSetting $recommendationTemplateSetting): string
+
+    public function getIdentityTemplateData(RecommendationTemplateSetting $recommendationTemplateSetting): string
     {
         return $this->getData($recommendationTemplateSetting->description);
     }
@@ -67,17 +72,26 @@ trait IdentityRecommendationTemplateTrait
 
     public function getDisabilityData(): array
     {
+        $documentNo = '';
+        if(!empty($this->birth_registration_no)){
+            $documentNo = "$this->birth_registration_no (जन्म दर्ता)";
+        }else{
+            $documentNo = "$this->citizenship_no (नागरिकता)";
+        }
         return [
             '[@name]' => $this->name ?? '',
+            '[@letterHead]' => letterHead() ?? '',
+            '[@letterHeadEn]' => letterHeadEn() ?? '',
+            '[@hospital]' => $this->hospital->name ?? '',
+            '[@hospital_address]' => $this->hospital->address ?? '',
             '[@name_en]' => $this->name_en ?? '',
-            '[@citizenship_no]' => $this->citizenship_no ?? '',
-            '[@birth_registration_no]' => $this->birth_registration_no ?? '',
-            '[@dob]' => $this->dob ?? '',
+            '[@document_no]' => get_nepali_number($documentNo) ?? '',
+            '[@dob]' => get_nepali_number($this->dob) ?? '',
             '[@gender]' => $this->gender?->label() ?? '',
             '[@disabilityType]' => $this->disabilityType->title ?? '',
             '[@district]' => $this->district->district ?? '',
             '[@municipal]' => $this->localBody->local_body ?? '',
-            '[@ward_no]' => $this->ward_no ?? '',
+            '[@ward_no]' => get_nepali_number($this->ward_no) ?? '',
             '[@tole]' => $this->tole ?? '',
             '[@father_name]' => $this->father_name ?? '',
             '[@father_name_en]' => $this->father_name_en ?? '',

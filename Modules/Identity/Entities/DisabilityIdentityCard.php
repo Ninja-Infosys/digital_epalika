@@ -50,6 +50,7 @@ class DisabilityIdentityCard extends Model
         'relationship_id',
         'phone',
         'disability_type_id',
+        'hospital_id',
         'status',
     ];
 
@@ -86,6 +87,11 @@ class DisabilityIdentityCard extends Model
     public function relationship(): BelongsTo
     {
         return $this->belongsTo(Relationship::class);
+    }
+
+    public function hospital(): BelongsTo
+    {
+        return $this->belongsTo(Hospital::class);
     }
 
     public function setPhotoAttribute($value): void

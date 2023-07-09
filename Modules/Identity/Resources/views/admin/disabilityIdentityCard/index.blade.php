@@ -26,8 +26,9 @@
                         <h4 class="header-title mb-0">अपाङ्गता परिचय पत्रहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                                <a href="{{route('identity.admin.disabilityIdentityCard.searchCitizenshipNo')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
-                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            <a href="{{route('identity.admin.disabilityIdentityCard.searchCitizenshipNo')}}"
+                               class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                         </div>
                     </div>
                 </div>
@@ -50,7 +51,8 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>
-                                        <img src="{{$disabilityIdentityCard->photo_url}}" height="60" alt="{{$disabilityIdentityCard->name}}">
+                                        <img src="{{$disabilityIdentityCard->photo_url}}" height="60"
+                                             alt="{{$disabilityIdentityCard->name}}">
                                     </td>
                                     <td>{{$disabilityIdentityCard->name}}</td>
                                     <td>{{$disabilityIdentityCard->gender->label()??''}}</td>
@@ -59,32 +61,85 @@
                                     </td>
                                     <td>
                                         @if($disabilityIdentityCard->can_edit_delete)
-                                        <a data-bs-type="edit" href="{{route('identity.admin.disabilityIdentityCard.show',$disabilityIdentityCard)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-
-                                        <a data-bs-type="edit" href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-
-{{--                                            <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">--}}
-{{--                                                <i class="fa fa-print"></i>--}}
-
-{{--                                            </a>--}}
-                                            <a href="{{route('identity.admin.disabilityIdentityCard.printDetail',$disabilityIdentityCard)}}"   class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-print"></i>
+                                            <a data-bs-type="edit"
+                                               href="{{route('identity.admin.disabilityIdentityCard.show',$disabilityIdentityCard)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
                                             </a>
 
-                                        <form action="{{route('identity.admin.disabilityIdentityCard.destroy',$disabilityIdentityCard)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
+                                            <a data-bs-type="edit"
+                                               href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+
+                                            <button type="button" class="btn btn-xs btn-outline-warning"
+                                                    data-bs-toggle="modal" data-bs-target="#print">
+                                                <i class="fa fa-print"></i>
                                             </button>
-                                        </form>
+
+                                            <div class="modal fade" id="print" data-bs-backdrop="static"
+                                                 data-bs-keyboard="false" tabindex="-1"
+                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <form
+                                                                action="{{route('identity.admin.disabilityIdentityCard.printData',$disabilityIdentityCard)}}"
+                                                                id="disabilityPrint">
+                                                                @csrf
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-2">
+                                                                        <label for="hospital_id" class="form-label">अस्पताल
+                                                                            *</label>
+                                                                        <select class="form-control" name="hospital_id"
+                                                                                id="hospital_id">
+                                                                            <option value="">अस्पताल छान्नुहोस्</option>
+                                                                            @foreach($hospitals as $hospital)
+                                                                                <option
+                                                                                    value="{{$hospital->id}}">{{$hospital->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        <p class="text-danger" id="error_message"></p>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <x-date-input-component
+                                                                            container="#print"
+                                                                            nameNe="date" labelNe="मिति"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <button type="submit"
+                                                                        class="btn btn-xs btn-outline-primary printData mt-2">
+                                                                    Save & Print <i class="fa fa-print"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                        class="btn btn-xs btn-outline-danger mt-2"
+                                                                        data-bs-dismiss="modal">Close
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{--                                            <a href="{{route('identity.admin.disabilityIdentityCard.printDetail',$disabilityIdentityCard)}}"   class="btn btn-xs btn-outline-warning">--}}
+                                            {{--                                                <i class="fa fa-print"></i>--}}
+                                            {{--                                            </a>--}}
+
+                                            <form
+                                                action="{{route('identity.admin.disabilityIdentityCard.destroy',$disabilityIdentityCard)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
                                         @endif
 
                                     </td>
@@ -105,26 +160,62 @@
         </div>
     </div>
 
-{{--    @push('scripts')--}}
-{{--        <script>--}}
-{{--            $(".printDetail").on("click",function(e){--}}
-{{--                $.ajax({--}}
-{{--                    method:"GET",--}}
-{{--                    url:$(this).attr("route_action"),--}}
-{{--                    success:function(resp){--}}
-{{--                        const print_area = window.open();--}}
-{{--                        print_area.document.write(resp.view);--}}
-{{--                        print_area.document.close();--}}
-{{--                        print_area.focus();--}}
-{{--                        print_area.print();--}}
-{{--                        print_area.close();--}}
-{{--                    },error:function(){--}}
-{{--                        alert("Something Went Wrong");--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            });--}}
-{{--        </script>--}}
-{{--    @endpush--}}
+    {{--    @push('scripts')--}}
+    {{--        <script>--}}
+    {{--            $(".printDetail").on("click",function(e){--}}
+    {{--                $.ajax({--}}
+    {{--                    method:"GET",--}}
+    {{--                    url:$(this).attr("route_action"),--}}
+    {{--                    success:function(resp){--}}
+    {{--                        const print_area = window.open();--}}
+    {{--                        print_area.document.write(resp.view);--}}
+    {{--                        print_area.document.close();--}}
+    {{--                        print_area.focus();--}}
+    {{--                        print_area.print();--}}
+    {{--                        print_area.close();--}}
+    {{--                    },error:function(){--}}
+    {{--                        alert("Something Went Wrong");--}}
+    {{--                    }--}}
+    {{--                });--}}
+    {{--            });--}}
+    {{--        </script>--}}
+    {{--    @endpush--}}
+
+    @push('scripts')
+        <script>
+            $(".printData").on("click", function (e) {
+                e.preventDefault();
+                var printButton = $(this);
+                var data = $("#disabilityPrint").serialize();
+                var url = $("#disabilityPrint").attr("action");
+                printButton.prop("disabled", true);
+                printButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...');
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: data,
+                    success: function (resp) {
+                        $("#disabilityPrint")[0].reset();
+                        $("#print").modal("hide");
+                        printButton.prop("disabled", false);
+                        printButton.html('Save & Print  <i class="fa fa-print"></i>');
+                        const print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $("#error_message").html(XMLHttpRequest.responseJSON.message);
+                        printButton.prop("disabled", false);
+                        printButton.html('Save & Print  <i class="fa fa-print"></i>');
+                    },
+                });
+            });
+
+        </script>
+    @endpush
 @endsection
 
 
