@@ -55,7 +55,9 @@ class DisabilityFullDetailController extends Controller
     public function update(UpdateDisabilityFullDetailResource $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
         $disabilityIdentityCard->update($request->validated());
+
         toast('Disability Full Detail Updated Successfully', 'success');
+
         return redirect()->route('identity.admin.disabilityFullDetail.index');
     }
 }

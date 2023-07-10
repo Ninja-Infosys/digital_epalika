@@ -4,7 +4,7 @@ namespace Modules\Identity\Http\Livewire;
 
 use Livewire\Component;
 
-class TaskLivewire extends Component
+class WithoutHelpingTaskLivewire extends Component
 {
     public $tasks = [];
 
@@ -26,6 +26,6 @@ class TaskLivewire extends Component
 
     public function render()
     {
-        return view('identity::livewire.task-livewire');
+        return view('identity::livewire.without-helping-task-livewire');
     }
 }

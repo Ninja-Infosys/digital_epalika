@@ -57,8 +57,8 @@
                                     </td>
                                     <td>
                                         @if($disabilityIdentityCard->can_edit_delete)
-                                            <a data-bs-type="edit" href="{{route('identity.admin.disabilityFullDetail.show',$disabilityIdentityCard)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
+                                            <a href="{{route('identity.admin.disabilityFullDetail.show',$disabilityIdentityCard)}}"
+                                               class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
