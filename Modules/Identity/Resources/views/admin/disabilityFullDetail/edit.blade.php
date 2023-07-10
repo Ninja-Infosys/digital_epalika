@@ -225,7 +225,7 @@
                             <fieldset class="mt-3">
                                 <legend>अन्य व्यक्तिको सहयोग लिनु पर्ने भए त्यस्तो सहयोग लिनु पर्ने काम</legend>
                                 @livewire('identity::task-livewire', [
-                                    'tasks' => $disabilityIdentityCard->helping_task,
+                                    'tasks' => old('helping_task', $disabilityIdentityCard->helping_task) ?? [],
                                 ])
                             </fieldset>
                             <fieldset class="mt-3">
