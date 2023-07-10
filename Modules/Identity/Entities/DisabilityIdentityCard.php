@@ -68,7 +68,6 @@ class DisabilityIdentityCard extends Model
         "qualification",
         "daily_activity",
         "supporting_material",
-        "supporting_material",
         "helping_task",
         "without_helping_task",
         "main_training_name",
@@ -83,7 +82,6 @@ class DisabilityIdentityCard extends Model
 
     protected function HelpingTask(): Attribute
     {
-
         return Attribute::make(
             get: static fn($value) => explode(',', $value),
             set: static fn($value) => implode(',', $value),
@@ -157,6 +155,21 @@ class DisabilityIdentityCard extends Model
     {
         return (auth()->user()->role->type === 'Super' || auth()->id() == $this->user_id);
     }
+
+    public function setDocumentPhotoAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['document_photo'] = $value->store('disabilityIdentityCard', 'public');
+        }
+    }
+
+    public function setDocumentPhotoBackAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['document_photo_back'] = $value->store('disabilityIdentityCard', 'public');
+        }
+    }
+
 
     public function scopeFilterData($query)
     {
