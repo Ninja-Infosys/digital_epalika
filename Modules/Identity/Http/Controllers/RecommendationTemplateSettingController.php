@@ -31,6 +31,15 @@ class RecommendationTemplateSettingController extends Controller
         return back();
     }
 
+    public function updateStatus(RecommendationTemplateSetting $recommendationTemplateSetting)
+    {
+        $recommendationTemplateSetting->update([
+            'status'=>!$recommendationTemplateSetting->status
+        ]);
+        toast('टेम्पलेट सफलतापूर्वक थपियो', 'success');
+        return back();
+    }
+
     private function recommendationTemplateSettingData()
     {
         return RecommendationTemplateSetting::first();

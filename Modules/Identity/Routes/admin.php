@@ -31,7 +31,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);
     Route::resource('hospital', HospitalController::class);
     Route::resource('disabilityCommittee', DisabilityCommitteeController::class);
-    Route::resource('recommendationTemplateSetting', RecommendationTemplateSettingController::class)->only(['index', 'store']);
+    Route::get('recommendationTemplateSetting/{recommendationTemplateSetting}/updateStatus', [RecommendationTemplateSettingController::class,'updateStatus'])->name('recommendationTemplateSetting.updateStatus');
+    Route::resource('recommendationTemplateSetting', RecommendationTemplateSettingController::class);
 });
 
 Route::prefix('disability')->group(function () {

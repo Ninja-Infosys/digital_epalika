@@ -10,6 +10,7 @@ return new class () extends Migration {
         Schema::create('recommendation_template_settings', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->boolean('status')->default(1);
             $table->longText('description');
             $table->timestamps();
             $table->softDeletes();
