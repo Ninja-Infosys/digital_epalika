@@ -79,13 +79,13 @@
                                                     data-bs-toggle="modal" data-bs-target="#print">
                                                 <i class="fa fa-print"></i>
                                             </button>
-                                                @include('identity::admin.disabilityIdentityCard.inc.print-model')
-                                           @if(!empty($disabilityIdentityCard->recommend_at))
+                                            @include('identity::admin.disabilityIdentityCard.inc.print-model')
+                                            @if(!empty($disabilityIdentityCard->recommend_at))
                                                 <button type="button" class="btn btn-xs btn-outline-success"
                                                         data-bs-toggle="modal" data-bs-target="#print1">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
-                                           @endif
+                                            @endif
 
 
                                             @include('identity::admin.disabilityIdentityCard.inc.report')
@@ -143,12 +143,12 @@
                         $("#print").modal("hide");
                         swal.fire({
                             title: 'Data Updated Successfully',
-                            toast:true,
-                            position:'top-right',
-                            timer:3000,
-                            showConfirmButton:false,
-                            timerProgressBar:true,
-                            width:400,
+                            toast: true,
+                            position: 'top-right',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            width: 400,
                             icon: 'success',
                         });
                         location.replace(window.location.href);
@@ -184,12 +184,12 @@
                         $("#print1").modal("hide");
                         swal.fire({
                             title: 'Data Updated Successfully',
-                            toast:true,
-                            position:'top-right',
-                            timer:3000,
-                            showConfirmButton:false,
-                            timerProgressBar:true,
-                            width:400,
+                            toast: true,
+                            position: 'top-right',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            width: 400,
                             icon: 'success',
                         });
                         location.replace(window.location.href);
@@ -197,7 +197,7 @@
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $("#error_message1").html(XMLHttpRequest.responseJSON.message);
                         printButton.prop("disabled", false);
-                        printButton.html('Save & Print  <i class="fa fa-print"></i>');
+                        printButton.html('Save');
                     },
                 });
             });
