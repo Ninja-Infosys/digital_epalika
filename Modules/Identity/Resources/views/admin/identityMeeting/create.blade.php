@@ -11,9 +11,6 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.executiveMeeting.meeting.index') }}">बैठक विवरण </a>
-                        </li>
                         <li class="breadcrumb-item active"> नयाँ बैठक विवरण थप्नुहोस्</li>
                     </ol>
                 </div>
