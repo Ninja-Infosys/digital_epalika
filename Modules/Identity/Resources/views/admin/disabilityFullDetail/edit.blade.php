@@ -256,68 +256,9 @@
 
                             <fieldset class="mt-3">
                                 <legend>अन्य व्यक्तिको सहयोग लिनु पर्ने भए त्यस्तो सहयोग लिनु पर्ने काम</legend>
-                                <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <label for="file" class="form-label fw-bold"></label>
-                                    <button
-                                        type="button"
-                                        class="btn btn-xs btn-outline-info"
-                                        data-target-element="helpingTask"
-                                        data-toggle="add-more">
-                                        <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
-                                    </button>
-                                </div>
-                                @if($disabilityIdentityCard->helpingTasks)
-                                    @foreach($disabilityIdentityCard->helpingTasks as $index=>$helpingTask)
-                                        <div id="helpingTask">
-                                            <div class="main">
-                                                <div class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                                            data-toggle="remove-parent" data-parent=".main"
-                                                            data-target-element="helpingTask">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="row border-bottom mb-2">
-                                                    <div class="col-md-12 mb-2">
-                                                        <label for="title" class="form-label">कामको नाम *</label>
-                                                        <input
-                                                            type="text"
-                                                            name="helping_task[{{$index}}]"
-                                                            class="form-control"
-                                                            id="title"
-                                                            value="{{old("helping_task[$index]",$helpingTask)}}"
-                                                            placeholder="कामको नाम"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                                <div id="helpingTask">
-                                    <div class="main">
-                                        <div class="text-end">
-                                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                                    data-toggle="remove-parent" data-parent=".main"
-                                                    data-target-element="helpingTask">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </div>
-                                        <div class="row border-bottom mb-2">
-                                            <div class="col-md-12 mb-2">
-                                                <label for="title" class="form-label">कामको नाम *</label>
-                                                <input
-                                                    type="text"
-                                                    name="helping_task[]"
-                                                    class="form-control"
-                                                    id="title"
-                                                    placeholder="कामको नाम"
-                                                />
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                @livewire("identity::task-livewire",[
+                                "tasks" => old("helping_task", $disabilityIdentityCard->withHelpingTask ?? []) ?? []
+                                ])
                             </fieldset>
                             <fieldset class="mt-3">
                                 <legend>अन्य व्यक्तिको सहयोग बिना गर्न सक्ने दैनिक कार्य</legend>
