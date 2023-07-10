@@ -6,43 +6,62 @@
 </li>
 
 <li class="{{request()->is('admin/identity/disability*') ? 'active' : ''}}">
-    <a href="#sidebarDisabilityIdentityCard"
+    <a href="#sidebarDisability"
        {{request()->is('admin/identity/disability*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-clipboard"></i>
-        <span>निवेदन</span>
+        <i class="fa fa-wheelchair"></i>
+        <span>अपाङ्गता परिचय पत्र</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
     <div class="collapse {{request()->is('admin/identity/disability*') ? 'show' : ''}}"
-         id="sidebarDisabilityIdentityCard">
+         id="sidebarDisability">
         <ul class="nav-second-level">
             <li class="{{request()->is('admin/identity/disability/disabilityIdentityCard') ? 'active' : ''}}">
                 <a href="{{route('identity.admin.disabilityIdentityCard.index')}}">
-                    <span> अपाङ्गता परिचय पत्र</span>
+                    <span> निवेदन</span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/identity/seniorCitizen/seniorCitizenDetail') ? 'active' : ''}}">
-                <a href="{{route('identity.admin.seniorCitizenDetail.index')}}">
-                    <span> जेष्ठ नागरिक </span>
+            <li class="{{request()->routeIs('identity.admin.identityMeeting.*') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.identityMeeting.index')}}">
+                    <span> बैठक </span>
+                </a>
+            </li>
+            <li class="{{request()->routeIs('identity.admin.disabilityFullDetail.*') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.disabilityFullDetail.index')}}">
+                    <span> पूर्ण विवरण </span>
+                </a>
+            </li>
+            <li class="{{request()->routeIs('identity.admin.disabilityFullDetail.*') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.disabilityFullDetail.index')}}">
+                    <span> प्रिन्ट परिचय पत्र </span>
                 </a>
             </li>
         </ul>
     </div>
 </li>
-<li class="{{request()->routeIs('identity.admin.disabilityFullDetail.*') ? 'active' : ''}}">
-    <a href="{{route('identity.admin.disabilityFullDetail.index')}}">
-        <i class="fa fa-info-circle"></i>
-        <span>पूर्ण विवरण</span>
-    </a>
-</li>
 
-<li class="{{request()->is('admin/identity/identityMeeting') ? 'active' : ''}}">
-    <a href="{{route('identity.admin.identityMeeting.index')}}">
-        <i class="fa fa-layer-group"></i>
-        <span> बैठक</span>
+<li class="{{request()->is('admin/identity/seniorCitizen*') ? 'active' : ''}}">
+    <a href="#sidebarDisabilityIdentityCard"
+       {{request()->is('admin/identity/seniorCitizen*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-user"></i>
+        <span>जेष्ठ नागरिक</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/identity/seniorCitizen*') ? 'show' : ''}}"
+         id="sidebarDisabilityIdentityCard">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/identity/seniorCitizen/seniorCitizenDetail') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.seniorCitizenDetail.index')}}">
+                    <span>निवेदन </span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
 
 <li class="{{request()->is('admin/identity/reports*') ? 'active' : ''}}">
