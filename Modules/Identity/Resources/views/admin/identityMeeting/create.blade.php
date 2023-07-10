@@ -112,6 +112,14 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="minute" class="form-label">माइन्युट </label>
+                                <textarea name="minute" id="minute" cols="30" placeholder="माइन्युट" rows="5"
+                                    class="form-control ckEditor @error('minute') is-invalid @enderror">{{ old('minute') }}</textarea>
+                                @error('minute')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">
@@ -122,4 +130,8 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('assets/backend/ckeditor/editor.js') }}"></script>
+    @endpush
 @endsection

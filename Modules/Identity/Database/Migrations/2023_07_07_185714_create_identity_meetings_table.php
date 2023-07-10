@@ -13,6 +13,7 @@ return new class () extends Migration {
             $table->string('date_bs');
             $table->date('date_ad');
             $table->text('description')->nullable();
+            $table->longText('minute')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

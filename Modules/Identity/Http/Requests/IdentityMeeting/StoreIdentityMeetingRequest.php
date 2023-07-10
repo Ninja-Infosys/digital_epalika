@@ -19,6 +19,7 @@ class StoreIdentityMeetingRequest extends FormRequest
             'date_bs' => ['required'],
             'date_ad' => ['required', 'date'],
             'description' => ['nullable'],
+            'minute' => ['nullable'],
             'committees' => ['required', 'array'],
             'committees.*' => [Rule::exists('disability_committees', 'id')->withoutTrashed()],
             'disabilityIdentityCards' => ['required', 'array'],
