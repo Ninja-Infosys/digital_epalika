@@ -38,6 +38,6 @@ class GovernmentalDisabilityType extends Model
 
     public function disabilityIdentityCards(): HasMany
     {
-        return $this->hasMany(DisabilityIdentityCard::class, 'govern_disability_type_id');
+        return $this->hasMany(DisabilityIdentityCard::class, 'gov_disability_type_id');
     }
 }

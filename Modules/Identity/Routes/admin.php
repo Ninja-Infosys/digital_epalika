@@ -14,6 +14,7 @@ use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\HospitalController;
 use Modules\Identity\Http\Controllers\IdentityMeetingController;
+use Modules\Identity\Http\Controllers\IdentityPrintController;
 use Modules\Identity\Http\Controllers\RecommendationTemplateSettingController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
@@ -45,6 +46,7 @@ Route::prefix('disability')->group(function () {
     Route::post('disabilityIdentityCard/{disabilityIdentityCard}/reportData', [DisabilityIdentityCardController::class,'reportData'])->name('disabilityIdentityCard.reportData');
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
     Route::resource('fullDetail/disabilityIdentityCard', DisabilityFullDetailController::class)->names('disabilityFullDetail')->except('create','store','destroy');
+    Route::get('identityPrint',[IdentityPrintController::class,'print'])->name('identityPrint');
 });
 
 Route::resource('identityMeeting', IdentityMeetingController::class);

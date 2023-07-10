@@ -33,8 +33,8 @@
                     <span> पूर्ण विवरण </span>
                 </a>
             </li>
-            <li class="{{request()->routeIs('identity.admin.disabilityFullDetail.*') ? 'active' : ''}}">
-                <a href="{{route('identity.admin.disabilityFullDetail.index')}}">
+            <li class="{{request()->routeIs('identity.admin.identityPrint') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.identityPrint')}}">
                     <span> प्रिन्ट परिचय पत्र </span>
                 </a>
             </li>
