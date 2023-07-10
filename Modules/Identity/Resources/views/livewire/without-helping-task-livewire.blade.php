@@ -16,9 +16,10 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        <input type="text" name="helping_task[]" class="form-control"
-                            id="helping_task-{{ $index }}" value="{{ $task }}" placeholder="कामको नाम" />
-                        @error("helping_task.$index")
+                        <input type="text" name="without_helping_task[]" class="form-control"
+                            id="without_helping_task-{{ $index }}" value="{{ $task }}"
+                            placeholder="कामको नाम" />
+                        @error("without_helping_task.$index")
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
                     </td>

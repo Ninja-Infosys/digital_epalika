@@ -25,9 +25,9 @@ class IdentityMeetingController extends Controller
     {
         $disabilityCommittees = DisabilityCommittee::orderBy('position')->get();
         $governmentDisabilityTypes = GovernmentalDisabilityType::orderBy('position')->get();
-        $disabilityIdentityCards=DisabilityIdentityCard::where('status',StatusEnum::ELIGIBILITY_FOR_MEETING->value)->get();
+        $disabilityIdentityCards = DisabilityIdentityCard::where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value)->get();
 
-        return view('identity::admin.identityMeeting.create', compact('disabilityCommittees', 'governmentDisabilityTypes','disabilityIdentityCards'));
+        return view('identity::admin.identityMeeting.create', compact('disabilityCommittees', 'governmentDisabilityTypes', 'disabilityIdentityCards'));
     }
 
     public function store(StoreIdentityMeetingRequest $request)
@@ -49,7 +49,7 @@ class IdentityMeetingController extends Controller
 
         toast('बैठक सफलतापुर्बक थपियो', 'success');
 
-        return back();
+        return redirect(route('identity.admin.identityMeeting.index'));
     }
 
     public function show($id)

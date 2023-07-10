@@ -80,7 +80,7 @@ class DisabilityIdentityCard extends Model
         'qualification' => Qualification::class,
     ];
 
-    protected function HelpingTask(): Attribute
+    protected function helpingTask(): Attribute
     {
         return Attribute::make(
             get: static fn($value) => explode(',', $value),
@@ -88,9 +88,8 @@ class DisabilityIdentityCard extends Model
         );
     }
 
-    protected function WithoutHelpingTask(): Attribute
+    protected function withoutHelpingTask(): Attribute
     {
-
         return Attribute::make(
             get: static fn($value) => explode(',', $value),
             set: static fn($value) => implode(',', $value),

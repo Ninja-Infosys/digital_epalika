@@ -55,7 +55,9 @@
                                     @foreach ($disabilityCommittees as $disabilityCommittee)
                                         <div class="col-sm-3">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" name="committees[]"
+                                                <input type="checkbox"
+                                                    {{ in_array($disabilityCommittee->id, old('committees') ?? []) ? 'checked' : '' }}
+                                                    class="form-check-input" name="committees[]"
                                                     value="{{ $disabilityCommittee->id }}"
                                                     id="committees{{ $disabilityCommittee->id }}">
                                                 <label class="form-check-label"
