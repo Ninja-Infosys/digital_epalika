@@ -15,14 +15,11 @@ class IdentityPrintController extends Controller
 {
     public function print()
     {
+
         $governmentalDisabilityTypes = GovernmentalDisabilityType::with(['disabilityIdentityCards' => function ($query) {
             $query->where('status', StatusEnum::READY_FOR_PRINT->value);
         }])
-            ->get()
-            ->groupBy(function ($type){
-                return $type->category?->label();
-            });
-
+            ->get();
         return view('identity::admin.disabilityPrint.print', compact('governmentalDisabilityTypes'));
     }
 
@@ -35,7 +32,7 @@ class IdentityPrintController extends Controller
             'district',
             'disabilityType',
         );
-        return view('identity::admin.disabilityPrint.idCard',compact('disabilityIdentityCard'));
+        return view('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
         $view = (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
         return response()->json([
             'view' => $view,

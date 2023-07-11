@@ -148,7 +148,7 @@ class DisabilityIdentityCard extends Model
     {
         return $this->attributes['photo']
             ? Storage::disk('public')->url($this->attributes['photo'])
-            : $this->attributes['photo'];
+            : '';
     }
 
     public function getCanEditDeleteAttribute(): bool

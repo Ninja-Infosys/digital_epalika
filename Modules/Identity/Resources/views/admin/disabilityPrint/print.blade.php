@@ -23,17 +23,18 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-bordered nav-justified" role="tablist">
-                        @foreach($governmentalDisabilityTypes as $key =>$data)
+                        @foreach($governmentalDisabilityTypes as $governmentalDisabilityType)
                             <li class="nav-item" role="presentation">
                                 <a href="#home-b2{{$loop->iteration}}" data-bs-toggle="tab" aria-expanded="false"
                                    class="nav-link {{$loop->first ? 'active':''}}" aria-selected="true" role="tab">
-                                    {{$key}}
+                                    {{$governmentalDisabilityType->category?->label()??''}}
+
                                 </a>
                             </li>
                         @endforeach
                     </ul>
                     <div class="tab-content">
-                        @foreach($governmentalDisabilityTypes as $key =>$data)
+                        @foreach($governmentalDisabilityTypes as $data)
                             <div class="tab-pane {{$loop->first ? 'active show':''}}" id="home-b2{{$loop->iteration}}"
                                  role="tabpanel">
                                 <div class="table-responsive">
@@ -49,25 +50,23 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($data as $disabilityType)
-                                            @foreach($disabilityType['disabilityIdentityCards'] as $disabilityIdentityCard)
+                                            @foreach($data->disabilityIdentityCards as $disabilityIdentityCard)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
                                                     <td>
-                                                        <img src="{{$disabilityIdentityCard['photo_url']}}"
-                                                             alt="{{$disabilityIdentityCard['name']}}" height="60">
+                                                        <img src="{{$disabilityIdentityCard->photo_url}}"
+                                                             alt="{{$disabilityIdentityCard->name}}" height="60">
                                                     </td>
-                                                    <td>{{$disabilityIdentityCard['name']}}</td>
-                                                    <td>{{$disabilityIdentityCard['gender']?->label() ??''}}</td>
-                                                    <td>{{$disabilityIdentityCard['citizenship_no']}}</td>
+                                                    <td>{{$disabilityIdentityCard->name}}</td>
+                                                    <td>{{$disabilityIdentityCard->gender?->label() ??''}}</td>
+                                                    <td>{{$disabilityIdentityCard->citizenship_no}}</td>
                                                     <td>
-                                                        <a href="{{route('identity.admin.disabilityIdentityCard.printCard',$disabilityIdentityCard['id'])}}">
+                                                        <a href="{{route('identity.admin.disabilityIdentityCard.printCard',$disabilityIdentityCard)}}">
                                                             <i class="fa fa-print"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
