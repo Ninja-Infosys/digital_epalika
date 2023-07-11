@@ -49,20 +49,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
-                                        @json($data[0]->disabilityIdentityCards)
-{{--                                        @foreach($datadisabilityIdentityCards as $disabilityIdentityCard)--}}
-{{--                                            <tr>--}}
-{{--                                                <td>{{$loop->iteration}}</td>--}}
-{{--                                                <td>--}}
-{{--                                                    <img src="{{$disabilityIdentityCard->photo_url}}"--}}
-{{--                                                         alt="{{$disabilityIdentityCard->name}}" height="60">--}}
-{{--                                                </td>--}}
-{{--                                                <td>{{$disabilityIdentityCard->name}}</td>--}}
-{{--                                                <td>{{$disabilityIdentityCard->gender?->label() ??''}}</td>--}}
-{{--                                                <td>{{$disabilityIdentityCard->citizenship_no}}</td>--}}
-{{--                                            </tr>--}}
-{{--                                        @endforeach--}}
+                                        @foreach($data as $disabilityType)
+                                            @foreach($disabilityType['disabilityIdentityCards'] as $disabilityIdentityCard)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>
+                                                        <img src="{{$disabilityIdentityCard['photo_url']}}"
+                                                             alt="{{$disabilityIdentityCard['name']}}" height="60">
+                                                    </td>
+                                                    <td>{{$disabilityIdentityCard['name']}}</td>
+                                                    <td>{{$disabilityIdentityCard['gender']?->label() ??''}}</td>
+                                                    <td>{{$disabilityIdentityCard['citizenship_no']}}</td>
+                                                    <td>
+                                                        <a href="{{route('identity.admin.disabilityIdentityCard.printCard',$disabilityIdentityCard['id'])}}">
+                                                            <i class="fa fa-print"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

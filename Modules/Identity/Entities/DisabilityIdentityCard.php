@@ -43,6 +43,7 @@ class DisabilityIdentityCard extends Model
         'dob',
         'dob_ad',
         'gender',
+        'print_count',
         'province_id',
         'district_id',
         'local_body_id',

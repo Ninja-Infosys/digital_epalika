@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->string('dob');
             $table->date('dob_ad');
             $table->string('gender');
+            $table->integer('print_count')->default(0);
             $table->foreignId('province_id')->nullable()->constrained('provinces')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained('local_bodies')->nullOnDelete()->onUpdate('no action');

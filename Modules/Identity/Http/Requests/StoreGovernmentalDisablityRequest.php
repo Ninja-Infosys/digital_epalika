@@ -4,6 +4,7 @@ namespace Modules\Identity\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Identity\Enums\CategoryTypeEnum;
 
@@ -24,7 +25,7 @@ class StoreGovernmentalDisablityRequest extends FormRequest
             'header_color'=>['nullable'],
             'font_color'=>['nullable'],
             'raven_background'=>['nullable'],
-            'category'=>['required',new Enum(CategoryTypeEnum::class)],
+            'category'=>['required',Rule::unique('governmental_disability_types','category')->withoutTrashed(), new Enum(CategoryTypeEnum::class)],
         ];
     }
 

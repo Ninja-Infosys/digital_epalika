@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.officeSetting.index')}}">कार्यालय सेटिङ</a>
+                            <a href="">कार्यालय सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">कार्यालय सेटिङ सम्पादन गर्नुहोस्</li>
                     </ol>

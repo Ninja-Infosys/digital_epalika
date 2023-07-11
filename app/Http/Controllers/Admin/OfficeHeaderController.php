@@ -22,7 +22,7 @@ class OfficeHeaderController extends Controller
         Cache::forget('officeHeaders');
         toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.officeSetting.index'));
+        return redirect(route('admin.systemSetting.officeSetting.index'));
     }
 
     public function destroy(OfficeHeader $officeHeader)
