@@ -24,7 +24,8 @@ class IdentityMeeting extends Model
         'title',
         'date_bs',
         'date_ad',
-        'description'
+        'description',
+        'minute'
     ];
 
     public function disabilityCommittees(): BelongsToMany
