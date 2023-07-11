@@ -403,21 +403,57 @@ if (!function_exists('get_nepali_number')) {
         return str_replace(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], ['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], $data);
     }
 }
+if (!function_exists('get_english_number')) {
+    function get_english_number($data): string|array
+    {
+        return str_replace(['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'],['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'] , $data);
+    }
+}
 if (!function_exists('get_nepali_count')) {
-    function get_nepali_count($key): string|array
+    function get_nepali_count(int $key,string $language='ne'): string
     {
         $count = [
-            2 => 'पहिलो प्रतिलिपि',
-            3 => 'दोस्रो प्रतिलिपि',
-            4 => 'तेस्रो प्रतिलिपि',
-            5 => 'चौथो प्रतिलिपि',
-            6 => 'पाँचौं प्रतिलिपि',
-            7 => 'छैटौं प्रतिलिपि',
-            8 => 'सातौं प्रतिलिपि',
-            9 => 'आठौं प्रतिलिपि',
-            10 => 'नवौं प्रतिलिपि',
-            11 => 'दसौं प्रतिलिपि',
+            2 => [
+                'ne'=>'पहिलो प्रतिलिपि',
+                'en'=>"First Copy",
+            ],
+            3 => [
+                'ne'=>'दोस्रो प्रतिलिपि',
+                'en'=>"Second Copy",
+            ],
+            4 => [
+                'ne'=>'तेस्रो प्रतिलिपि',
+                'en'=>"Third Copy",
+            ],
+            5 => [
+                'ne'=>'चौथो प्रतिलिपि',
+                'en'=>"Fourth Copy",
+            ],
+            6 => [
+                'ne'=>'पाँचौं प्रतिलिपि',
+                'en'=>"Fifth Copy",
+            ],
+            7 => [
+                'ne'=>'छैटौं प्रतिलिपि',
+                'en'=>"Sixth Copy",
+            ],
+            8 => [
+                'ne'=>'सातौं प्रतिलिपि',
+                'en'=>"Seventh Copy",
+            ],
+            9 => [
+                'ne'=>'आठौं प्रतिलिपि',
+                'en'=>"Eighth Copy",
+            ],
+            10 => [
+                'ne'=>'नवौं प्रतिलिपि',
+                'en'=>"Ninth Copy",
+            ],
+            11 => [
+                'ne'=>'दसौं प्रतिलिपि',
+                'en'=>"Tenth Copy",
+            ],
         ];
-        return $count($key) ?? '';
+        return $count[$key][$language] ?? '';
     }
 }

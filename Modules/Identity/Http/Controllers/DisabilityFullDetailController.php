@@ -7,6 +7,7 @@ use App\Models\Occupation;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Http\Requests\UpdateDisabilityFullDetailResource;
@@ -54,9 +55,22 @@ class DisabilityFullDetailController extends Controller
 
     public function update(UpdateDisabilityFullDetailResource $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
+        if (empty($disabilityIdentityCard->number)) {
+            $number = DisabilityIdentityCard::where('fiscal_year_id', officeSetting()->fiscal_year_id)->max('number') + 1;
+        } else {
+            $number = $disabilityIdentityCard->number;
+        }
+        if (empty($disabilityIdentityCard->card_no)) {
+            $card_no = officeSetting()->fiscalYear->title . '-' . Str::padLeft($number, 3, 0);
+        } else {
+            $card_no = $disabilityIdentityCard->card_no;
+        }
+
         $disabilityIdentityCard->update($request->validated() + [
-            'status' => StatusEnum::READY_FOR_PRINT->value
-        ]);
+                'status' => StatusEnum::READY_FOR_PRINT->value,
+                'number' => $number,
+                'card_no' => $card_no,
+            ]);
 
         toast('Disability Full Detail Updated Successfully', 'success');
 

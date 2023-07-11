@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
 use App\Enums\StatusEnum;
 use App\Models\Address\District;
@@ -43,7 +44,11 @@ class DisabilityIdentityCard extends Model
         'dob',
         'dob_ad',
         'gender',
+        "blood_group",
+        "number",
+        "card_no",
         'print_count',
+        "fiscal_year_id",
         'province_id',
         'district_id',
         'local_body_id',
@@ -73,12 +78,14 @@ class DisabilityIdentityCard extends Model
         "without_helping_task",
         "main_training_name",
         "occupation_id",
+
     ];
 
     protected $casts = [
         'gender' => Gender::class,
         'status' => StatusEnum::class,
         'qualification' => Qualification::class,
+        'blood_group' => BloodGroupEnum::class,
     ];
 
     protected function helpingTask(): Attribute
@@ -124,7 +131,7 @@ class DisabilityIdentityCard extends Model
 
     public function governmentalDisabilityType(): BelongsTo
     {
-        return $this->belongsTo(GovernmentalDisabilityType::class,'gov_disability_type_id');
+        return $this->belongsTo(GovernmentalDisabilityType::class, 'gov_disability_type_id');
     }
 
     public function relationship(): BelongsTo

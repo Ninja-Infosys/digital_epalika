@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Http\Requests;
 
+use App\Enums\BloodGroupEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -25,6 +26,7 @@ class UpdateDisabilityFullDetailResource extends FormRequest
             "document_photo_back" => ['nullable', 'file', 'mimes:jpeg,jpg,png'],
             "material_description" => ['required'],
             "qualification" => ['required', new Enum(Qualification::class)],
+            "blood_group" => ['required', new Enum(BloodGroupEnum::class)],
             "daily_activity" => ['required'],
             "supporting_material" => ['required'],
             "helping_task" => ['nullable', 'array'],

@@ -6,6 +6,7 @@ use App\Enums\StatusEnum;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
@@ -25,15 +26,18 @@ class IdentityPrintController extends Controller
 
     public function printCard(DisabilityIdentityCard $disabilityIdentityCard)
     {
-
-        $disabilityIdentityCard->load('governmentalDisabilityType',
-            'province',
-            'localBody',
-            'district',
-            'disabilityType',
-        );
-        return view('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
-        $view = (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
+        $view = DB::transaction(function () use ($disabilityIdentityCard) {
+            $disabilityIdentityCard->update([
+                'print_count' => $disabilityIdentityCard->print_count + 1
+            ]);
+            $disabilityIdentityCard->load('governmentalDisabilityType',
+                'province',
+                'localBody',
+                'district',
+                'disabilityType',
+            );
+            return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
+        });
         return response()->json([
             'view' => $view,
         ]);

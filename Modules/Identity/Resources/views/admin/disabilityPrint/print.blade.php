@@ -50,23 +50,26 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($data->disabilityIdentityCards as $disabilityIdentityCard)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>
-                                                        <img src="{{$disabilityIdentityCard->photo_url}}"
-                                                             alt="{{$disabilityIdentityCard->name}}" height="60">
-                                                    </td>
-                                                    <td>{{$disabilityIdentityCard->name}}</td>
-                                                    <td>{{$disabilityIdentityCard->gender?->label() ??''}}</td>
-                                                    <td>{{$disabilityIdentityCard->citizenship_no}}</td>
-                                                    <td>
-                                                        <a href="{{route('identity.admin.disabilityIdentityCard.printCard',$disabilityIdentityCard)}}">
-                                                            <i class="fa fa-print"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                        @foreach($data->disabilityIdentityCards as $disabilityIdentityCard)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>
+                                                    <img src="{{$disabilityIdentityCard->photo_url}}"
+                                                         alt="{{$disabilityIdentityCard->name}}" height="60">
+                                                </td>
+                                                <td>{{$disabilityIdentityCard->name}}</td>
+                                                <td>{{$disabilityIdentityCard->gender?->label() ??''}}</td>
+                                                <td>{{$disabilityIdentityCard->citizenship_no}}</td>
+                                                <td>
+                                                    <a href="javascript:void(0)"
+                                                       route_action="{{route('identity.admin.disabilityIdentityCard.printCard',$disabilityIdentityCard)}}"
+                                                       class="btn btn-xs btn-outline-warning printDetail">
+                                                        <i class="fa fa-print"></i>
+
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -78,5 +81,24 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click", function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
+                        var print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection

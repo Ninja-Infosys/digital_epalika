@@ -4,7 +4,9 @@ namespace Modules\Identity\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Identity\Entities\DisabilityCommittee;
+use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
+use Modules\Identity\Observers\DisabilityCardObserver;
 use Modules\Identity\Observers\DisabilityCommitteeObserver;
 use Modules\Identity\Observers\GovernmentalTypeObserver;
 

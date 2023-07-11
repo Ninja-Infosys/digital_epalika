@@ -21,4 +21,17 @@ enum Gender: string
             self::OTHER => 'अन्य',
         };
     }
+    public function labelEn(): string
+    {
+        return self::getLabelEn($this);
+    }
+
+    public static function getLabelEn(self $value): string
+    {
+        return match ($value) {
+            self::MALE => 'Male',
+            self::FEMALE => 'Female',
+            self::OTHER => 'Other',
+        };
+    }
 }

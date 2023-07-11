@@ -59,7 +59,8 @@ class DisabilityIdentityCardController extends Controller
     public function store(StoreDisabilityIdentityCardRequest $request)
     {
         DisabilityIdentityCard::create($request->validated() + [
-                'status' => StatusEnum::PENDING->value
+                'status' => StatusEnum::PENDING->value,
+                'fiscal_year_id' => officeSetting()->fiscal_year_id ?? null,
             ]);
 
         toast('अपाङ्गता परिचय पत्र सफलतापुर्बक दर्ता भयो', 'success');

@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum BloodGroupEnum: string
 {
-    case NA_POSITIVE = 'n/a';
+    case NA = 'n/a';
     case O_POSITIVE = 'o+';
     case O_NEGATIVE = 'o-';
     case A_NEGATIVE = 'a-';
@@ -22,7 +22,25 @@ enum BloodGroupEnum: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
-            self::NA_POSITIVE => 'N/A',
+            self::NA => 'N/A',
+            self::O_NEGATIVE => 'ओ नेगेटिभ',
+            self::O_POSITIVE => 'ओ पोजेटिभ',
+            self::A_NEGATIVE => 'ए पोजेटिभ',
+            self::A_POSITIVE => 'ए नेगेटिभ',
+            self::B_NEGATIVE => 'बि पोजेटिभ',
+            self::B_POSITIVE => 'बि नेगेटिभ',
+            self::AB_NEGATIVE => 'एबि पोजेटिभ',
+            self::AB_POSITIVE => 'एबि नेगेटिभ',
+        };
+    }public function labelEn(): string
+    {
+        return self::getLabelEn($this);
+    }
+
+    public static function getLabelEn(self $value): string
+    {
+        return match ($value) {
+            self::NA => 'N/A',
             self::O_POSITIVE => 'O+',
             self::O_NEGATIVE => 'O-',
             self::A_NEGATIVE => 'A-',
