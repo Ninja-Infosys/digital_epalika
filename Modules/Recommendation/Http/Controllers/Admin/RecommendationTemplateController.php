@@ -28,6 +28,7 @@ class RecommendationTemplateController extends Controller
     public function store(StoreRecommendationTemplateRequest $request, $type, RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationTemplate_create');
+
         RecommendationTemplate::create($request->validated() + [
                 'user_id'=>auth()->id(),
                 'recommendation_category_id' => $recommendationCategory->id,

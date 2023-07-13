@@ -23,5 +23,6 @@ class RecommendationTemplateSetting extends Model
         'title',
         'description',
         'status',
+        'is_hospital_detail_required'
     ];
 }

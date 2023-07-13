@@ -7,10 +7,12 @@ use Livewire\Component;
 class WithoutHelpingTaskLivewire extends Component
 {
     public $tasks = [];
+    public $hasNameGroup = false;
 
-    public function mount($tasks)
+    public function mount($tasks, $hasNameGroup = false)
     {
         $this->tasks = $tasks;
+        $this->hasNameGroup = $hasNameGroup;
     }
 
     public function incrementTask()

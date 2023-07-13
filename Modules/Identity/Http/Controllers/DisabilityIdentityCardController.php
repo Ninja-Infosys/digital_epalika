@@ -2,20 +2,23 @@
 
 namespace Modules\Identity\Http\Controllers;
 
+use DateTime;
 use App\Enums\StatusEnum;
 use App\Models\Ethnicity;
-use App\Traits\NepaliDateConverter;
+use App\Models\Occupation;
 use Illuminate\Http\Request;
-use DateTime;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Lottery;
-use Modules\Identity\Entities\DisabilityIdentityCard;
-use Modules\Identity\Entities\DisabilityPrint;
+use App\Traits\NepaliDateConverter;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\Hospital;
-use Modules\Identity\Entities\RecommendationTemplateSetting;
-use Modules\Identity\Entities\DisabilityType;
 use Modules\Identity\Entities\Relationship;
+use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\DisabilityPrint;
+use Modules\Identity\Entities\DisabilityReason;
+use Modules\Identity\Entities\DisabilityIdentityCard;
+use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Identity\Http\Requests\DisabilityIdentityCard\StoreDisabilityIdentityCardRequest;
 use Modules\Identity\Http\Requests\DisabilityIdentityCard\UpdateDisabilityIdentityCardRequest;
 
@@ -27,6 +30,13 @@ class DisabilityIdentityCardController extends Controller
     {
         $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')
             ->where(function ($q) {
+                $recommendationSetting = RecommendationTemplateSetting::first();
+                if ($recommendationSetting->is_hospital_detail_required) {
+                    $q->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
+                } else {
+                    $q->where('status', StatusEnum::PENDING->value);
+                }
+
                 if (!is_null(request('search'))) {
                     $q->whereLike([
                         'name',
@@ -39,7 +49,6 @@ class DisabilityIdentityCardController extends Controller
                     ], request('search'));
                 }
             })
-            ->where('status', StatusEnum::PENDING->value)
             ->latest()
             ->paginate(10);
         $hospitals = Hospital::all();
@@ -53,15 +62,24 @@ class DisabilityIdentityCardController extends Controller
         $relations = Relationship::all();
         $disabilityTypes = DisabilityType::all();
         $todayDateInBS = $this->get_today_nepali_date();
-        return view('identity::admin.disabilityIdentityCard.create', compact('officeSetting', 'ethnicities', 'relations', 'disabilityTypes', 'todayDateInBS'));
+        $disabilityReasons = DisabilityReason::all();
+        $occupations = Occupation::all();
+
+        return view('identity::admin.disabilityIdentityCard.create', compact('officeSetting', 'ethnicities', 'relations', 'disabilityTypes', 'todayDateInBS', 'disabilityReasons', 'occupations'));
     }
 
     public function store(StoreDisabilityIdentityCardRequest $request)
     {
-        DisabilityIdentityCard::create($request->validated() + [
-                'status' => StatusEnum::PENDING->value,
+        DB::transaction(function () use ($request) {
+            $disabilityIdentityCard = DisabilityIdentityCard::create($request->validated() + [
+                'status' => $request->boolean('is_full_detail_required') ? StatusEnum::ELIGIBILITY_FOR_MEETING->value : StatusEnum::PENDING->value,
                 'fiscal_year_id' => officeSetting()->fiscal_year_id ?? null,
             ]);
+
+            if ($disabilityIdentityCard->is_full_detail_required) {
+                $disabilityIdentityCard->update($request->validated()['fullDetail']);
+            }
+        });
 
         toast('अपाङ्गता परिचय पत्र सफलतापुर्बक दर्ता भयो', 'success');
         return back();
@@ -132,7 +150,6 @@ class DisabilityIdentityCardController extends Controller
         return response()->json([
             'view' => $view,
         ]);
-
     }
 
     public function reportData(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
@@ -150,7 +167,6 @@ class DisabilityIdentityCardController extends Controller
         return response()->json([
             'message' => 'Report Data Added Successfully',
         ]);
-
     }
 
     public function printAll(DisabilityIdentityCard $disabilityIdentityCard)

@@ -59,6 +59,7 @@ class DisabilityIdentityCard extends Model
         'guardian_name_en',
         'relationship_id',
         'phone',
+        'is_full_detail_required',
         'disability_type_id',
         'hospital_id',
         'gov_disability_type_id',

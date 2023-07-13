@@ -18,9 +18,12 @@ class RecommendationTemplateSettingController extends Controller
     {
         $data = $request->validate([
             'title' => ['nullable', 'string', 'max:255'],
+            'is_hospital_detail_required' => ['nullable', 'boolean'],
             'description' => ['required'],
         ]);
+
         $recommendationTemplateSetting = $this->recommendationTemplateSettingData();
+
         if ($recommendationTemplateSetting) {
             $recommendationTemplateSetting->update($data);
         } else {
@@ -34,7 +37,7 @@ class RecommendationTemplateSettingController extends Controller
     public function updateStatus(RecommendationTemplateSetting $recommendationTemplateSetting)
     {
         $recommendationTemplateSetting->update([
-            'status'=>!$recommendationTemplateSetting->status
+            'status' => !$recommendationTemplateSetting->status
         ]);
         toast('टेम्पलेट सफलतापूर्वक थपियो', 'success');
         return back();

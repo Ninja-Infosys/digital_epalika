@@ -11,6 +11,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('title')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('is_hospital_detail_required')->default(1);
             $table->longText('description');
             $table->timestamps();
             $table->softDeletes();

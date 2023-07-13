@@ -16,9 +16,19 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        <input type="text" name="without_helping_task[]" class="form-control"
-                            id="without_helping_task-{{ $index }}" value="{{ $task }}"
-                            placeholder="कामको नाम" />
+                        @if ($hasNameGroup)
+                            <input type="text" name="fullDetail[without_helping_task][]" class="form-control"
+                                id="without_helping_task-{{ $index }}" value="{{ $task }}"
+                                placeholder="कामको नाम" />
+                        @else
+                            <input type="text" name="without_helping_task[]" class="form-control"
+                                id="without_helping_task-{{ $index }}" value="{{ $task }}"
+                                placeholder="कामको नाम" />
+                        @endif
+
+                        @error("fullDetail.without_helping_task.$index")
+                            <div class="invalid-feedback ">{{ $message }} </div>
+                        @enderror
                         @error("without_helping_task.$index")
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
@@ -39,4 +49,7 @@
             @endforelse
         </tbody>
     </table>
+    @error('without_helping_task')
+        <div class="invalid-feedback ">{{ $message }} </div>
+    @enderror
 </div>

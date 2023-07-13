@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     public function up(): void
     {
         Schema::create('disability_identity_cards', function (Blueprint $table) {
@@ -41,6 +42,7 @@ return new class () extends Migration {
             $table->foreignId('hospital_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('gov_disability_type_id')->nullable()->constrained('governmental_disability_types')->nullOnDelete()->onUpdate('no action');
             $table->string('status');
+            $table->boolean('is_full_detail_required')->default(0);
             $table->string("disability_reason_id")->nullable();
             $table->string("citizenship_no_place")->nullable();
             $table->string("citizenship_date_ad")->nullable();
