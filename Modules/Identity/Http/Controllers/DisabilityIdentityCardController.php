@@ -50,7 +50,8 @@ class DisabilityIdentityCardController extends Controller
             ->latest()
             ->paginate(10);
         $hospitals = Hospital::all();
-        return view('identity::admin.disabilityIdentityCard.index', compact('hospitals', 'disabilityIdentityCards'));
+        $recommendationTemplateSetting = RecommendationTemplateSetting::first();
+        return view('identity::admin.disabilityIdentityCard.index', compact('hospitals', 'disabilityIdentityCards', 'recommendationTemplateSetting'));
     }
 
     public function create()
