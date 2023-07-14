@@ -28,6 +28,8 @@ class DisabilityIdentityCardController extends Controller
 
     public function index()
     {
+        $recommendationTemplateSetting = RecommendationTemplateSetting::first();
+
         $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')
             ->where(function ($q) {
                 if (!is_null(request('search'))) {
@@ -43,14 +45,15 @@ class DisabilityIdentityCardController extends Controller
                 }
             })
             ->where('status', StatusEnum::PENDING->value)
-            ->orWhere(function ($q) {
-                $q->where('is_full_detail_required', 1)
-                    ->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
+            ->orWhere(function ($q) use ($recommendationTemplateSetting) {
+                if ($recommendationTemplateSetting->is_hospital_detail_required) {
+                    $q->where('is_full_detail_required', 1);
+                }
+                $q->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
             })
             ->latest()
             ->paginate(10);
         $hospitals = Hospital::all();
-        $recommendationTemplateSetting = RecommendationTemplateSetting::first();
         return view('identity::admin.disabilityIdentityCard.index', compact('hospitals', 'disabilityIdentityCards', 'recommendationTemplateSetting'));
     }
 
