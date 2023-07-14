@@ -39,9 +39,10 @@ class IdentityMeetingController extends Controller
 
             foreach ($request->validated()['disabilityIdentityCards'] as $disabilityIdentityCard) {
                 if (!empty($disabilityIdentityCard['id'])) {
-                    DisabilityIdentityCard::find($disabilityIdentityCard['id'])->update([
+                    $disabilityIdentityCard = DisabilityIdentityCard::find($disabilityIdentityCard['id']);
+                    $disabilityIdentityCard->update([
                         'gov_disability_type_id' => $disabilityIdentityCard['governmental_disability_type_id'],
-                        'status' => StatusEnum::APPROVE->value
+                        'status' => $disabilityIdentityCard->is_full_detail_required ? StatusEnum::READY_FOR_PRINT->value : StatusEnum::APPROVE->value
                     ]);
                 }
             }
