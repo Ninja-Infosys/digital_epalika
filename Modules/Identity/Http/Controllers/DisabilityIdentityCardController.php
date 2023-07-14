@@ -30,13 +30,6 @@ class DisabilityIdentityCardController extends Controller
     {
         $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')
             ->where(function ($q) {
-                $recommendationSetting = RecommendationTemplateSetting::first();
-                if ($recommendationSetting->is_hospital_detail_required) {
-                    $q->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
-                } else {
-                    $q->where('status', StatusEnum::PENDING->value);
-                }
-
                 if (!is_null(request('search'))) {
                     $q->whereLike([
                         'name',
@@ -48,6 +41,11 @@ class DisabilityIdentityCardController extends Controller
                         'phone'
                     ], request('search'));
                 }
+            })
+            ->where('status', StatusEnum::PENDING->value)
+            ->orWhere(function ($q) {
+                $q->where('is_full_detail_required', 1)
+                    ->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
             })
             ->latest()
             ->paginate(10);
