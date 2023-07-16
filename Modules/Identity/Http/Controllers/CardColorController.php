@@ -34,6 +34,7 @@ class CardColorController extends Controller
     public function store(StoreCardColorRequest $request)
     {
         $this->checkAuthorization('cardColor_create');
+
         CardColor::create($request->validated());
         toast('रंग  सफलतापूर्वक थपियो', 'success');
         return back();
