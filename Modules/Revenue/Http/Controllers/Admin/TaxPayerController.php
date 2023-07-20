@@ -4,6 +4,8 @@ namespace Modules\Revenue\Http\Controllers\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Revenue\Entities\Invoice;
 use Modules\Revenue\Entities\TaxPayer;
 use Modules\Revenue\Http\Requests\TaxPayer\StoreTaxPayerRequest;
 use Modules\Revenue\Http\Requests\TaxPayer\UpdateTaxPayerRequest;
@@ -41,7 +43,27 @@ class TaxPayerController extends Controller
     public function show(TaxPayer $taxPayer)
     {
         $this->checkAuthorization('taxPayer_access');
-        return view('revenue::admin.tax-payer.show', compact('taxPayer'));
+        $taxPayer->load("taxPayerType",
+            "fiscalYear",
+            "user",
+            "province",
+            "district",
+            "localBody",
+            "taxPayerFamilies"
+        );
+
+        $invoices = Invoice::withSum(['invoiceParticulars' => function ($query) {
+            $query->select(DB::raw('SUM((rate * quantity) + (rate * quantity) * due + fine) as total'));
+        }], 'total')
+            ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
+            ->where('tax_payer_id', $taxPayer->id)
+            ->latest('payment_date_en')
+            ->get()
+            ->groupBy(function ($data) {
+                return $data->is_cash_invoice ? 'नगदी रसिद' : 'मालपोत रसिद';
+            });
+
+        return view('revenue::admin.tax-payer.show', compact('taxPayer', 'invoices'));
     }
 
     public function edit(TaxPayer $taxPayer)

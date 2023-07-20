@@ -69,6 +69,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach($invoice->invoiceParticulars as $key=>$particular)
+
                                                     <tr>
                                                         <td>{{$particular->revenue}}</td>
                                                         <td>
@@ -80,7 +81,7 @@
                                                                                   number="{{$particular->rate}}"/>
                                                         </td>
                                                         <td>रु.
-                                                            <x-convert-to-unicode id="total__customer_rate{{$key}}"
+                                                            <x-convert-to-unicode id="total__customer_due{{$key}}"
                                                                                   number="{{$particular->due_amount}}"/>
                                                         </td>
                                                         <td>रु.
@@ -167,7 +168,7 @@
                                                                       number="{{$particular->rate}}"/>
                                             </td>
                                             <td>रु.
-                                                <x-convert-to-unicode id="total__office_rate{{$key}}"
+                                                <x-convert-to-unicode id="total__office_due{{$key}}"
                                                                       number="{{$particular->due_amount}}"/>
                                             </td>
                                             <td>रु.

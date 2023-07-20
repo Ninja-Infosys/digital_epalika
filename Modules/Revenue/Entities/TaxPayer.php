@@ -118,4 +118,9 @@ class TaxPayer extends Model
     {
         return $this->hasMany(TaxPayerLand::class);
     }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

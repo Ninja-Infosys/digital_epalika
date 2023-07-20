@@ -110,7 +110,7 @@
                 <td>
                     <input type="hidden" name="particulars[{{$index}}][due]"
                            value="{{$detail['due']?? ''}}" required>
-                    {{$detail['deu'] ?? 0}}
+                    {{$detail['due'] ?? 0}}
                     @error('particulars.'.$index.'.due')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror

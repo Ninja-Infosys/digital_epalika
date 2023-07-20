@@ -105,7 +105,7 @@
                                         class="form-control @error('reference_code') is-invalid @enderror"
                                         id="reference_code"
                                         placeholder="Reference Code"
-                                        required/>
+                                        />
                                     @error('reference_code')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
