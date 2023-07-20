@@ -22,7 +22,7 @@ class StoreRegistrationRequest extends FormRequest
             'personal_detail_id' => ['nullable', Rule::exists('personal_details', 'id')->withoutTrashed()],
             'files' => ['nullable', 'array'],
             'files.*.file_name' => ['nullable', 'string'],
-            'files.*.file' => ['nullable', 'mimes:jpg,png,jpeg,pdf'],
+            'files.*.file' => ['nullable', 'file'],
         ];
         if (auth()->user()->role->type === 'Super') {
             $data = array_merge($data, [
