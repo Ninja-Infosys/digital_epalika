@@ -17,3 +17,4 @@ yarn-error.log
 modules_statuses.json
 /storage/installed
 /config/license.php
+.htaccess
