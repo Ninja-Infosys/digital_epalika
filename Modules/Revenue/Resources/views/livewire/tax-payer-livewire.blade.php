@@ -416,7 +416,7 @@
             Save
         </button>
     </form>
-@push('scripts')
+    @push('scripts')
         <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -428,9 +428,6 @@
                         Livewire.emit('setTaxPayerIssuedDate', inputFieldDate);
                     }
                 });
-
-                let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                Livewire.emit('setTaxPayerIssuedDate', todayBsDate);
             });
         </script>
     @endpush
