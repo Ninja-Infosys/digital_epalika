@@ -26,8 +26,7 @@ class BusinessDetail extends Model
     use HasFactory;
     use SoftDeletes;
     use GetAllColumns;
-
-//    use BusinessDetailTemplateTrait;
+    use BusinessDetailTemplateTrait;
 
     protected $fillable = [
         'reg_no',
