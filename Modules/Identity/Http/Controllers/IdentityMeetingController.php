@@ -36,7 +36,7 @@ class IdentityMeetingController extends Controller
             $identityMeeting = IdentityMeeting::create($request->validated());
 
             $identityMeeting->disabilityCommittees()->attach($request->validated()['committees']);
-
+            $disabilityIds = [];
             foreach ($request->validated()['disabilityIdentityCards'] as $disabilityIdentityCard) {
                 if (!empty($disabilityIdentityCard['id'])) {
                     $disabilityIdentityCard = DisabilityIdentityCard::find($disabilityIdentityCard['id']);
@@ -44,7 +44,14 @@ class IdentityMeetingController extends Controller
                         'gov_disability_type_id' => $disabilityIdentityCard['governmental_disability_type_id'],
                         'status' => $disabilityIdentityCard->is_full_detail_required ? StatusEnum::READY_FOR_PRINT->value : StatusEnum::APPROVE->value
                     ]);
+                    $disabilityIds[] = $disabilityIdentityCard['id'];
                 }
+            }
+
+            $identityMeeting->disabilityIdentityCards()->attach($disabilityIds);
+
+            foreach ($request->validated()["guests"] as $guest) {
+                $identityMeeting->invitedGuests()->create($guest);
             }
         });
 
@@ -53,14 +60,14 @@ class IdentityMeetingController extends Controller
         return redirect(route('identity.admin.identityMeeting.index'));
     }
 
-    public function show($id)
-    {
-        return view('identity::show');
-    }
 
-    public function edit($id)
+    public function edit(IdentityMeeting $identityMeeting)
     {
-        return view('identity::edit');
+        $disabilityCommittees = DisabilityCommittee::orderBy('position')->get();
+        $governmentDisabilityTypes = GovernmentalDisabilityType::orderBy('position')->get();
+
+        $identityMeeting->load('disabilityCommittees', 'invitedGuests','disabilityIdentityCards');
+        return view('identity::admin.identityMeeting.edit', compact('identityMeeting', 'disabilityCommittees', 'governmentDisabilityTypes'));
     }
 
     public function update(Request $request, $id)

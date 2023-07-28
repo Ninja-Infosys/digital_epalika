@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -11,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> नयाँ बैठक विवरण थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">बैठक</li>
                     </ol>
                 </div>
-                <h4 class="page-title">बैठक विवरण </h4>
+                <h4 class="page-title">बैठक</h4>
             </div>
         </div>
     </div>
@@ -24,10 +23,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ बैठक विवरण थप्नुहोस्</h4>
+                        <h4 class="header-title">बैठक सम्पादन गर्नुहोस</h4>
                         <a href="{{ route('identity.admin.identityMeeting.index') }}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> बैठक विवरण
+                            <i class="fa fa-plus-circle"></i> बैठक सूची
                         </a>
                     </div>
                 </div>
@@ -38,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">बैठकको शिर्षक *</label>
-                                <input type="text" name="title" value="{{ old('title') }}"
+                                <input type="text" name="title" value="{{ old('title', $identityMeeting->title) }}"
                                        class="form-control @error('title') is-invalid @enderror" id="title"
                                        placeholder="बैठकको शिर्षक"/>
                                 @error('title')
@@ -46,8 +45,14 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <x-date-input-component nameNe="date_bs" labelNe="बैठक मिति *" nameEn="date_ad"
-                                                        labelEn="Meeting Date"/>
+                                <x-date-input-component nameNe="date_bs"
+                                                        labelNe="बैठक मिति *"
+                                                        nameEn="date_ad"
+                                                        labelEn="Meeting Date"
+                                                        :getTodayDate="false"
+                                                        :editDateNe="$identityMeeting->date_bs"
+                                                        :editDateEn="$identityMeeting->date_ad"
+                                />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <fieldset>
@@ -57,7 +62,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-check">
                                                     <input type="checkbox"
-                                                           {{ in_array($disabilityCommittee->id, old('committees') ?? []) ? 'checked' : '' }}
+                                                           {{ in_array($disabilityCommittee->id, old('committees',($identityMeeting->disabilityCommittees?->pluck('id')?->toArray() ?? []))) ? 'checked' : '' }}
                                                            class="form-check-input" name="committees[]"
                                                            value="{{ $disabilityCommittee->id }}"
                                                            id="committees{{ $disabilityCommittee->id }}">
@@ -76,14 +81,14 @@
                                 </fieldset>
                             </div>
                             <div class="col-md-12">
-                                @livewire('identity::invited-guest-livewire')
+                                @livewire('identity::invited-guest-livewire',['guests' => old('guests', $identityMeeting->invitedGuests)])
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="disabilityIdentityCards" class="form-label">अपाङ्गता परिचय पत्र को लागि
                                     योग्य
                                     *</label>
                                 <div class="row">
-                                    @foreach ($disabilityIdentityCards as $disabilityIdentityCard)
+                                    @foreach ($identityMeeting->disabilityIdentityCards as $disabilityIdentityCard)
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input"
@@ -121,7 +126,7 @@
                             <div class="col-md-12 mb-2">
                                 <label for="minute" class="form-label">माइन्युट </label>
                                 <textarea name="minute" id="minute" cols="30" placeholder="माइन्युट" rows="5"
-                                          class="form-control ckEditor @error('minute') is-invalid @enderror">{{ old('minute') }}</textarea>
+                                          class="form-control ckEditor @error('minute') is-invalid @enderror">{{ old('minute', $identityMeeting->minute) }}</textarea>
                                 @error('minute')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -136,6 +141,7 @@
             </div>
         </div>
     </div>
+
     @push('scripts')
         <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
         <script src="{{ asset('assets/backend/ckeditor/editor.js') }}"></script>

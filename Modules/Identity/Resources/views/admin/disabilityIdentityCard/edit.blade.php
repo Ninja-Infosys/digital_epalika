@@ -330,6 +330,225 @@
                                     </div>
                                 </div>
                             </fieldset>
+
+                            <fieldset class="mt-3">
+                                <legend>पूर्ण विवरण</legend>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="is_full_detail_required" class="form-label">
+                                            पूर्ण विवरण आवश्यक छ ?
+                                        </label>
+                                        <select name="is_full_detail_required" id="is_full_detail_required"
+                                                class="form-select">
+                                            <option value="0"
+                                                {{ old('is_full_detail_required', $disabilityIdentityCard->is_full_detail_required) == '0' ? 'selected' : '' }}>
+                                                छैन
+                                            </option>
+                                            <option value="1"
+                                                {{ old('is_full_detail_required', $disabilityIdentityCard->is_full_detail_required) == '1' ? 'selected' : '' }}>
+                                                छ
+                                            </option>
+                                        </select>
+                                        @error('is_full_detail_required')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div id="full-detail-fields">
+                                <fieldset class="mt-3">
+                                    <legend>अपाङ्गताको कारण</legend>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="disability_reason_id" class="form-label">अपाङ्गताको
+                                                कारण</label>
+                                            <select
+                                                class="form-select @error('fullDetail.disability_reason_id') is-invalid @enderror"
+                                                name="fullDetail[disability_reason_id]" id="disability_reason_id">
+                                                <option value="">---अपाङ्गताको कारण छान्नुहोस् ---</option>
+                                                @foreach ($disabilityReasons as $disabilityReason)
+                                                    <option value="{{ $disabilityReason->id }}"
+                                                        {{ old('fullDetail.disability_reason_id', $disabilityIdentityCard->disability_reason_id) == $disabilityReason->id ? 'selected' : '' }}>
+                                                        {{ $disabilityReason->title }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('fullDetail.disability_reason_id')
+                                            <div class="invalid-feedback ">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend>परिचय खुलाउने विवरण</legend>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="blood_group" class="form-label"> रक्त समुह </label>
+                                            <select name="fullDetail[blood_group]" id="blood_group"
+                                                    class="form-select  @error('fullDetail.blood_group') is-invalid @enderror">
+                                                <option value="">--रक्त समुह छान्नुहोस्--</option>
+                                                @foreach (\App\Enums\BloodGroupEnum::cases() as $case)
+                                                    <option value="{{ $case->value }}"
+                                                        {{ old('fullDetail.blood_group', $disabilityIdentityCard->blood_group->value) == $case->value ? 'selected' : '' }}>
+                                                        {{ $case->label() }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('fullDetail.blood_group')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend>सहयोग सामाग्री प्रयोग गर्नुपर्ने आबश्यकता</legend>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="material_description" class="form-label"> सामाग्री
+                                                विवरण </label>
+                                            <input name="fullDetail[material_description]"
+                                                   class="form-control  @error('fullDetail.material_description') is-invalid @enderror"
+                                                   type="text" id="material_description"
+                                                   value="{{ old('fullDetail.material_description', $disabilityIdentityCard->material_description) }}"
+                                                   placeholder=" सामाग्री विवरण " />
+                                            @error('fullDetail.material_description')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend>पछिल्लो सैक्षिक योग्यता</legend>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="qualification" class="form-label"> पछिल्लो सैक्षिक
+                                                योग्यता </label>
+                                            <select
+                                                class="form-select @error('fullDetail.qualification') is-invalid @enderror"
+                                                name="fullDetail[qualification]" id="qualification">
+                                                <option value="">---छान्नुहोस् ---</option>
+                                                @foreach (\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
+                                                    <option value="{{ $qualification->value }}"
+                                                        {{ old('fullDetail.qualification', $disabilityIdentityCard->qualification->value) == $qualification->value ? 'selected' : '' }}>
+                                                        {{ $qualification->label() }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('fullDetail.qualification')
+                                            <div class="invalid-feedback ">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend>दैनिक क्रियाकलाप गर्न</legend>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="daily_activity" class="form-label"> दैनिक क्रियाकलाप
+                                                गर्न </label>
+                                            <select
+                                                class="form-select @error('fullDetail.daily_activity') is-invalid @enderror"
+                                                name="fullDetail[daily_activity]" id="daily_activity">
+                                                <option value="">---छान्नुहोस् ---</option>
+
+                                                <option value="1"
+                                                    {{ old('fullDetail.daily_activity', $disabilityIdentityCard->daily_activity) == 1 ? 'selected' : '' }}>
+                                                    सक्ने
+                                                </option>
+                                                <option value="0"
+                                                    {{ old('fullDetail.daily_activity', $disabilityIdentityCard->daily_activity) == 0 ? 'selected' : '' }}>
+                                                    नसक्ने
+                                                </option>
+                                            </select>
+                                            @error('fullDetail.daily_activity')
+                                            <div class="invalid-feedback ">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="supporting_material" class="form-label"> साहायक सामाग्री
+                                                प्रयोग
+                                                गर्ने </label>
+                                            <select
+                                                class="form-select @error('fullDetail.supporting_material') is-invalid @enderror"
+                                                name="fullDetail[supporting_material]" id="supporting_material">
+                                                <option value="">---छान्नुहोस् ---</option>
+
+                                                <option value="1"
+                                                    {{ old('fullDetail.supporting_material', $disabilityIdentityCard->supporting_material) == 1 ? 'selected' : '' }}>
+                                                    गरेको
+                                                </option>
+                                                <option value="0"
+                                                    {{ old('fullDetail.supporting_material', $disabilityIdentityCard->supporting_material) == 0 ? 'selected' : '' }}>
+                                                    नगरेको
+                                                </option>
+                                            </select>
+                                            @error('fullDetail.supporting_material')
+                                            <div class="invalid-feedback ">{{ $message }} </div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="mt-3">
+                                    <legend>अन्य व्यक्तिको सहयोग लिनु पर्ने भए त्यस्तो सहयोग लिनु पर्ने काम</legend>
+                                    @livewire('identity::task-livewire', [
+                                        'tasks' => old('fullDetail.helping_task', $disabilityIdentityCard->helping_task) ?? [],
+                                        'hasNameGroup' => true,
+                                    ])
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend>अन्य व्यक्तिको सहयोग बिना गर्न सक्ने दैनिक कार्य</legend>
+                                    @livewire('identity::without-helping-task-livewire', [
+                                        'tasks' => old('fullDetail.without_helping_task', $disabilityIdentityCard->without_helping_task) ?? [],
+                                        'hasNameGroup' => true,
+                                    ])
+                                </fieldset>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="mt-3">
+                                            <legend>कुनै तालिम प्राप्त गरेको भए मुख्य तालिमको</legend>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="main_training_name" class="form-label"> नाम</label>
+                                                    <input name="fullDetail[main_training_name]"
+                                                           class="form-control  @error('fullDetail.main_training_name') is-invalid @enderror"
+                                                           type="text" id="fullDetail.main_training_name"
+                                                           placeholder="नाम"
+                                                           value="{{ old('fullDetail.main_training_name') }}" />
+                                                    @error('fullDetail.main_training_name')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="mt-3">
+                                            <legend> हालको पेसा</legend>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="occupation_id" class="form-label"> हालको पेसा </label>
+                                                    <select
+                                                        class="form-select @error('fullDetail.occupation_id') is-invalid @enderror"
+                                                        name="fullDetail[occupation_id]" id="occupation_id">
+                                                        <option value="">---छान्नुहोस् ---</option>
+                                                        @foreach ($occupations as $occupation)
+                                                            <option value="{{ $occupation->id }}"
+                                                                {{ old('fullDetail.occupation_id', $disabilityIdentityCard->occupation_id) == $occupation->id ? 'selected' : '' }}>
+                                                                {{ $occupation->title }}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                    @error('fullDetail.occupation_id')
+                                                    <div class="invalid-feedback ">{{ $message }} </div>
+                                                    @enderror
+                                                </div>
+
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="d-flex justify-content-end mt-2">
 
                                 <button type="submit" class="btn btn-primary">
@@ -342,20 +561,27 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            legend {
-                background-color: gray;
-                color: white;
-                padding: 5px 10px;
-                border-radius: 5px;
-            }
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
 
-            fieldset {
-                border-radius: 5px;
-            }
+                const is_full_detail_required = $('#is_full_detail_required').val();
 
-        </style>
+                toggleFullDetailFields(is_full_detail_required)
+
+                $('#is_full_detail_required').on('change', function() {
+                    toggleFullDetailFields($(this).val())
+                })
+
+                function toggleFullDetailFields(required) {
+                    if (required == "1") {
+                        $('#full-detail-fields').removeClass('d-none')
+                    } else {
+                        $('#full-detail-fields').addClass('d-none')
+                    }
+                }
+            })
+        </script>
     @endpush
 @endsection
 

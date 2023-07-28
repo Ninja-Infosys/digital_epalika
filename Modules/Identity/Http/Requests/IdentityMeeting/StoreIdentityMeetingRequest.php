@@ -24,11 +24,15 @@ class StoreIdentityMeetingRequest extends FormRequest
             'committees.*' => [Rule::exists('disability_committees', 'id')->withoutTrashed()],
             'disabilityIdentityCards' => ['required', 'array'],
             'disabilityIdentityCards.*.id' => ['nullable', Rule::exists('disability_identity_cards', 'id')->withoutTrashed()],
-            'disabilityIdentityCards.*.governmental_disability_type_id' => ['required_with:disabilityIdentityCards.*.id']
+            'disabilityIdentityCards.*.governmental_disability_type_id' => ['required_with:disabilityIdentityCards.*.id'],
+            "guests" => ['nullable', 'array'],
+            "guests.*.name" => ['required'],
+            "guests.*.phone" => ['nullable'],
+            "guests.*.id" => ['nullable'],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'बैठकको शिर्षक आवश्यक छ',

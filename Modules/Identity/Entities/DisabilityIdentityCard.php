@@ -12,6 +12,7 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
@@ -92,7 +93,7 @@ class DisabilityIdentityCard extends Model
     protected function helpingTask(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => explode(',', $value),
+            get: static fn($value) => $value ? explode(',', $value) : [],
             set: static fn($value) => implode(',', $value),
         );
     }
@@ -100,7 +101,7 @@ class DisabilityIdentityCard extends Model
     protected function withoutHelpingTask(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => explode(',', $value),
+            get: static fn($value) => $value ? explode(',', $value) : [],
             set: static fn($value) => implode(',', $value),
         );
     }
@@ -186,5 +187,10 @@ class DisabilityIdentityCard extends Model
             $query->orWhere('permanent_ward', auth()->user()->ward_no);
         }
         return $query;
+    }
+
+    public function identityMeeting(): BelongsToMany
+    {
+        return $this->belongsToMany(IdentityMeeting::class);
     }
 }

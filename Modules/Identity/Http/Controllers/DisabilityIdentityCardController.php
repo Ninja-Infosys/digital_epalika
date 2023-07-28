@@ -75,9 +75,12 @@ class DisabilityIdentityCardController extends Controller
         DB::transaction(function () use ($request) {
             $recommendationTemplateSetting = RecommendationTemplateSetting::first();
             $disabilityIdentityCard = DisabilityIdentityCard::create($request->validated() + [
-                'status' => ($request->boolean('is_full_detail_required') || !$recommendationTemplateSetting->is_hospital_detail_required) ? StatusEnum::ELIGIBILITY_FOR_MEETING->value : StatusEnum::PENDING->value,
-                'fiscal_year_id' => officeSetting()->fiscal_year_id ?? null,
-            ]);
+                    'status' => ($request->boolean('is_full_detail_required')
+                        || !$recommendationTemplateSetting->is_hospital_detail_required)
+                        ? StatusEnum::ELIGIBILITY_FOR_MEETING->value
+                        : StatusEnum::PENDING->value,
+                    'fiscal_year_id' => officeSetting()->fiscal_year_id ?? null,
+                ]);
 
             if ($disabilityIdentityCard->is_full_detail_required) {
                 $disabilityIdentityCard->update($request->validated()['fullDetail']);
@@ -106,18 +109,35 @@ class DisabilityIdentityCardController extends Controller
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update', $disabilityIdentityCard);
+        $officeSetting = officeSetting();
         $ethnicities = Ethnicity::all();
         $relations = Relationship::all();
         $disabilityTypes = DisabilityType::all();
         $todayDateInBS = $this->get_today_nepali_date();
-        $officeSetting = officeSetting();
-        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard', 'ethnicities', 'relations', 'disabilityTypes', 'todayDateInBS', 'officeSetting'));
+        $disabilityReasons = DisabilityReason::all();
+        $occupations = Occupation::all();
+        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard', 'ethnicities', 'relations', 'disabilityTypes', 'todayDateInBS', 'officeSetting', 'disabilityReasons', 'occupations'));
     }
 
     public function update(UpdateDisabilityIdentityCardRequest $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update', $disabilityIdentityCard);
-        $disabilityIdentityCard->update($request->validated());
+        $recommendationTemplateSetting = RecommendationTemplateSetting::first();
+
+        $extraFields = [
+            'status' => ($request->boolean('is_full_detail_required')
+                || !$recommendationTemplateSetting->is_hospital_detail_required)
+                ? StatusEnum::ELIGIBILITY_FOR_MEETING->value
+                : StatusEnum::PENDING->value,
+        ];
+
+        if ($disabilityIdentityCard->is_full_detail_required) {
+            $extraFields = array_merge($extraFields, $request->validated()['fullDetail']);
+        }
+
+        $disabilityIdentityCard->update($request->validated() + $extraFields);
+
+
         toast('अपाङ्गता परिचय पत्र सफलतापुर्बक अपडेट भयो', 'success');
         return redirect(route('identity.admin.disabilityIdentityCard.index'));
     }
