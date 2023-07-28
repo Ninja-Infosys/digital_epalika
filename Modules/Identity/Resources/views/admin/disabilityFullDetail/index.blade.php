@@ -38,7 +38,7 @@
                                 <th>फोटो</th>
                                 <th>नाम</th>
                                 <th>लिङ्ग</th>
-                                <th>नागरिकता नं.</th>
+                                <th>नागरिकता नं./जन्मदर्ता नं.</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -52,7 +52,7 @@
                                     <td>{{$disabilityIdentityCard->name}}</td>
                                     <td>{{$disabilityIdentityCard->gender->label()??''}}</td>
                                     <td>
-                                        {{$disabilityIdentityCard->citizenship_no}}
+                                        {{ $disabilityIdentityCard->citizenship_no."(नागरिकता)" ?? $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
                                     </td>
                                     <td>
                                         @if($disabilityIdentityCard->can_edit_delete)
