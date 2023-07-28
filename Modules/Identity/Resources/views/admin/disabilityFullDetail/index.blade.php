@@ -52,7 +52,7 @@
                                     <td>{{$disabilityIdentityCard->name}}</td>
                                     <td>{{$disabilityIdentityCard->gender->label()??''}}</td>
                                     <td>
-                                        {{ $disabilityIdentityCard->citizenship_no."(नागरिकता)" ?? $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
+                                        {{ $disabilityIdentityCard->citizenship_no? $disabilityIdentityCard->citizenship_no."(नागरिकता)" : $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
                                     </td>
                                     <td>
                                         @if($disabilityIdentityCard->can_edit_delete)
