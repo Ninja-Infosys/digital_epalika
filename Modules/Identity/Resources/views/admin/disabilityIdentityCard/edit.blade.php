@@ -388,7 +388,7 @@
                                                 <option value="">--रक्त समुह छान्नुहोस्--</option>
                                                 @foreach (\App\Enums\BloodGroupEnum::cases() as $case)
                                                     <option value="{{ $case->value }}"
-                                                        {{ old('fullDetail.blood_group', $disabilityIdentityCard->blood_group->value) == $case->value ? 'selected' : '' }}>
+                                                        {{ old('fullDetail.blood_group', $disabilityIdentityCard->blood_group?->value) == $case->value ? 'selected' : '' }}>
                                                         {{ $case->label() }}</option>
                                                 @endforeach
                                             </select>
