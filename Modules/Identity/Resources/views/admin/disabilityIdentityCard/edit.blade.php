@@ -104,7 +104,7 @@
                                             @foreach(\App\Enums\Gender::cases() as $gender)
                                                 <option
                                                     value="{{$gender->value}}"
-                                                    {{old('gender', $disabilityIdentityCard->gender->value) == $gender->value ? "selected" : ""}}>{{$gender->label()}}</option>
+                                                    {{old('gender', $disabilityIdentityCard->gender?->value) == $gender->value ? "selected" : ""}}>{{$gender->label()}}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')
@@ -429,7 +429,7 @@
                                                 <option value="">---छान्नुहोस् ---</option>
                                                 @foreach (\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
                                                     <option value="{{ $qualification->value }}"
-                                                        {{ old('fullDetail.qualification', $disabilityIdentityCard->qualification->value) == $qualification->value ? 'selected' : '' }}>
+                                                        {{ old('fullDetail.qualification', $disabilityIdentityCard->qualification?->value) == $qualification->value ? 'selected' : '' }}>
                                                         {{ $qualification->label() }}</option>
                                                 @endforeach
                                             </select>
