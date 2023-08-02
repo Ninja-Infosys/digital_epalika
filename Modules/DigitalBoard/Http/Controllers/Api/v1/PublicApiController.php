@@ -9,12 +9,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Service;
 use Modules\DigitalBoard\Entities\Video;
+use Modules\DigitalBoard\Transformers\api\v1\BranchResource;
 use Modules\DigitalBoard\Transformers\api\v1\EmployeeResource;
 use Modules\DigitalBoard\Transformers\api\v1\NewsResource;
 use Modules\DigitalBoard\Transformers\api\v1\NoticeResource;
+use Modules\DigitalBoard\Transformers\api\v1\ServiceResource;
 use Modules\DigitalBoard\Transformers\VideoResource;
-use Modules\HelpDesk\Transformers\api\v1\BranchResource;
-use Modules\HelpDesk\Transformers\api\v1\ServiceResource;
 
 class PublicApiController extends Controller
 {
