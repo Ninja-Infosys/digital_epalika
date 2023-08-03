@@ -7,7 +7,6 @@ use App\Enums\StatusEnum;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Lottery;
 use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +27,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function index()
     {
-        $recommendationTemplateSetting = RecommendationTemplateSetting::first();
+        $recommendationTemplateSetting = recommendationTemplateSettingData();
 
         $disabilityIdentityCards = DisabilityIdentityCard::with('disabilityType')
             ->where(function ($q) {
@@ -44,12 +43,12 @@ class DisabilityIdentityCardController extends Controller
                     ], request('search'));
                 }
             })
-            ->where('status', StatusEnum::PENDING->value)
             ->orWhere(function ($q) use ($recommendationTemplateSetting) {
-                if ($recommendationTemplateSetting->is_hospital_detail_required) {
-                    $q->where('is_full_detail_required', 1);
+                if ($recommendationTemplateSetting?->is_hospital_detail_required) {
+                    $q->where('status', StatusEnum::PENDING->value);
+                } else {
+                    $q->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
                 }
-                $q->where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value);
             })
             ->latest()
             ->paginate(10);
@@ -126,7 +125,7 @@ class DisabilityIdentityCardController extends Controller
 
         $extraFields = [
             'status' => ($request->boolean('is_full_detail_required')
-                || !$recommendationTemplateSetting->is_hospital_detail_required)
+                || !$recommendationTemplateSetting?->is_hospital_detail_required)
                 ? StatusEnum::ELIGIBILITY_FOR_MEETING->value
                 : StatusEnum::PENDING->value,
         ];
@@ -154,7 +153,8 @@ class DisabilityIdentityCardController extends Controller
     public function printDetail(DisabilityIdentityCard $disabilityIdentityCard)
     {
 
-        return view('identity::admin.disabilityIdentityCard.printDetail', compact('disabilityIdentityCard'));
+        return view('identity::admin.disabilityIdentityCard.printDetail',
+            compact('disabilityIdentityCard'));
     }
 
     public function printData(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
@@ -169,7 +169,8 @@ class DisabilityIdentityCardController extends Controller
         ]);
         $data = $disabilityIdentityCard->getIdentityTemplateData(RecommendationTemplateSetting::first());
         $data = str_replace('[@today_date]', get_nepali_number($request->input('date')), $data);
-        $view = (string)View::make('identity::admin.disabilityIdentityCard.inc.print', compact('data'));
+        $view = (string)View::make('identity::admin.disabilityIdentityCard.inc.print',
+            compact('data'));
         return response()->json([
             'view' => $view,
         ]);

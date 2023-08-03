@@ -19,15 +19,15 @@ class StoreIdentityMeetingRequest extends FormRequest
             'date_bs' => ['required'],
             'date_ad' => ['required', 'date'],
             'description' => ['nullable'],
-            'minute' => ['nullable'],
             'committees' => ['required', 'array'],
             'committees.*' => [Rule::exists('disability_committees', 'id')->withoutTrashed()],
             'disabilityIdentityCards' => ['required', 'array'],
             'disabilityIdentityCards.*.id' => ['nullable', Rule::exists('disability_identity_cards', 'id')->withoutTrashed()],
-            'disabilityIdentityCards.*.governmental_disability_type_id' => ['required_with:disabilityIdentityCards.*.id'],
+            'disabilityIdentityCards.*.gov_disability_type_id' => ['required_with:disabilityIdentityCards.*.id'],
             "guests" => ['nullable', 'array'],
             "guests.*.name" => ['required'],
             "guests.*.phone" => ['nullable'],
+            "guests.*.designation" => ['nullable'],
             "guests.*.id" => ['nullable'],
         ];
     }

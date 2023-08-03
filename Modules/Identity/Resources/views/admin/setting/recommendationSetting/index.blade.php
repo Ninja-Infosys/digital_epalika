@@ -30,14 +30,17 @@
                     <form action="{{ route('identity.admin.setting.recommendationTemplateSetting.store') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
-                                <h4 class="form-label">स्थिति</h4>
-                                <a href="{{ route('identity.admin.setting.recommendationTemplateSetting.updateStatus', $recommendationTemplateSetting ?? '') }}"
-                                    class="btn btn-xs btn-outline-{{ !empty($recommendationTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
-                                    <i
-                                        class="fa {{ !empty($recommendationTemplateSetting->status) == 1 ? 'fa-check' : 'fa-times' }}"></i>
-                                </a>
-                            </div>
+                            @if($recommendationTemplateSetting)
+                                <div class="col-md-12 mb-2">
+                                    <h4 class="form-label">स्थिति</h4>
+                                    <a href="{{ route('identity.admin.setting.recommendationTemplateSetting.updateStatus', $recommendationTemplateSetting ?? '') }}"
+                                       class="btn btn-xs btn-outline-{{ !empty($recommendationTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
+                                        <i
+                                            class="fa {{ !empty($recommendationTemplateSetting->status) == 1 ? 'fa-check' : 'fa-times' }}"></i>
+                                    </a>
+                                </div>
+                            @endif
+
                             <div class="col-md-12 mb-2">
                                 @foreach ((new \Modules\Identity\Entities\DisabilityIdentityCard())->getTemplateOptions() as $template)
                                     <div class="mt-2">
@@ -64,15 +67,16 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
                             <div class="col-md-6 mb-2">
                                 <label for="is_hospital_detail_required" class="form-label">अस्पताल विवरण आवश्यक छ ?</label>
                                 <select name="is_hospital_detail_required" id="is_hospital_detail_required"
                                     class="form-select">
                                     <option
-                                        {{ $recommendationTemplateSetting->is_hospital_detail_required ? 'selected' : '' }}
+                                        {{ $recommendationTemplateSetting?->is_hospital_detail_required ? 'selected' : '' }}
                                         value="1">छ</option>
                                     <option
-                                        {{ !$recommendationTemplateSetting->is_hospital_detail_required ? 'selected' : '' }}
+                                        {{ !$recommendationTemplateSetting?->is_hospital_detail_required ? 'selected' : '' }}
                                         value="0">छैन</option>
                                 </select>
                                 @error('is_hospital_detail_required')

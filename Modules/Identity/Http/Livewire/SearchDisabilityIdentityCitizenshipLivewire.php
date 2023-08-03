@@ -20,7 +20,7 @@ class SearchDisabilityIdentityCitizenshipLivewire extends Component
     ];
 
 
-    public function searchCitizenshipNo(): Redirector|Application|RedirectResponse
+    public function searchCitizenshipNo()
     {
         $this->validate();
 
@@ -41,7 +41,7 @@ class SearchDisabilityIdentityCitizenshipLivewire extends Component
         }
     }
 
-    public function render(): Factory|View|Application
+    public function render()
     {
         return view('identity::livewire.search-disability-identity-citizenship-livewire');
     }

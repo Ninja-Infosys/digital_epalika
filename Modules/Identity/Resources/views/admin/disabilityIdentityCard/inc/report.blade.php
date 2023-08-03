@@ -16,7 +16,7 @@
 
                         </div>
                         <div class="col-md-12 mb-2">
-                            <label for="identity_no" class="form-label">संकेत नं</label>
+                            <label for="identity_no" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="Nepal Medical Council">NMC No</label>
                             <input class="form-control" name="identity_no" id="identity_no" placeholder="संकेत नं">
                         </div>
 

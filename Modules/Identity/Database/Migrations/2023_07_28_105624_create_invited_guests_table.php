@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('identity_meeting_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('phone')->nullable();
+            $table->string('designation')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

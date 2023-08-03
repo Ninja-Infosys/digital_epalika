@@ -20,6 +20,7 @@ class InvitedGuestLivewire extends Component
                     'id' => $guest->id ?? null,
                     'name' => $guest->name ?? '',
                     'phone' => $guest->phone ?? '',
+                    'designation' => $guest->designation ?? '',
                 ];
             })
                 ->toArray();

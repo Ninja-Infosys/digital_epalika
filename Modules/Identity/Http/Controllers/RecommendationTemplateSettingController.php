@@ -4,14 +4,16 @@ namespace Modules\Identity\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
 
 class RecommendationTemplateSettingController extends Controller
 {
     public function index()
     {
-        $recommendationTemplateSetting = $this->recommendationTemplateSettingData();
-        return view('identity::admin.setting.recommendationSetting.index', compact('recommendationTemplateSetting'));
+        $recommendationTemplateSetting = recommendationTemplateSettingData();
+        return view('identity::admin.setting.recommendationSetting.index',
+            compact('recommendationTemplateSetting'));
     }
 
     public function store(Request $request)
@@ -22,13 +24,14 @@ class RecommendationTemplateSettingController extends Controller
             'description' => ['required'],
         ]);
 
-        $recommendationTemplateSetting = $this->recommendationTemplateSettingData();
+        $recommendationTemplateSetting = recommendationTemplateSettingData();
 
         if ($recommendationTemplateSetting) {
             $recommendationTemplateSetting->update($data);
         } else {
             RecommendationTemplateSetting::create($data);
         }
+        Cache::forget('recommendationTemplateSetting');
         toast('टेम्पलेट सफलतापूर्वक थपियो', 'success');
 
         return back();
@@ -39,12 +42,11 @@ class RecommendationTemplateSettingController extends Controller
         $recommendationTemplateSetting->update([
             'status' => !$recommendationTemplateSetting->status
         ]);
+
+        Cache::forget('recommendationTemplateSetting');
+
         toast('टेम्पलेट सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
-    private function recommendationTemplateSettingData()
-    {
-        return RecommendationTemplateSetting::first();
-    }
 }

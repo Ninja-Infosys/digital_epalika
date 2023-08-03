@@ -94,7 +94,9 @@
                                                 <input type="checkbox" class="form-check-input"
                                                        name="disabilityIdentityCards[{{ $loop->index }}][id]"
                                                        value="{{ $disabilityIdentityCard->id }}"
-                                                       id="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">
+                                                       id="disabilityIdentityCards{{ $disabilityIdentityCard->id }}"
+                                                         {{ in_array($disabilityIdentityCard->id, old('disabilityIdentityCards',($identityMeeting->disabilityIdentityCards?->pluck('id')?->toArray() ?? []))) ? 'checked' : '' }}
+                                                >
                                                 <label class="form-check-label"
                                                        for="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">{{ $disabilityIdentityCard->name }}</label>
                                             </div>
@@ -104,16 +106,18 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <select
-                                                name="disabilityIdentityCards[{{ $loop->index }}][governmental_disability_type_id]"
+                                                name="disabilityIdentityCards[{{ $loop->index }}][gov_disability_type_id]"
                                                 class="form-select form-select-sm" id="disabilityIdentityCards">
                                                 <option value="">छान्नुहोस्</option>
                                                 @foreach ($governmentDisabilityTypes as $governmentDisabilityType)
-                                                    <option value="{{ $governmentDisabilityType->id }}">
+                                                    <option value="{{ $governmentDisabilityType->id }}"
+                                                            {{ old("disabilityIdentityCards.$loop->index.gov_disability_type_id", $disabilityIdentityCard->gov_disability_type_id) == $governmentDisabilityType->id ? 'selected' : '' }}
+                                                    >
                                                         {{ $governmentDisabilityType->title }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @error("disabilityIdentityCards.$loop->index.governmental_disability_type_id")
+                                            @error("disabilityIdentityCards.$loop->index.gov_disability_type_id")
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -123,14 +127,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <label for="minute" class="form-label">माइन्युट </label>
-                                <textarea name="minute" id="minute" cols="30" placeholder="माइन्युट" rows="5"
-                                          class="form-control ckEditor @error('minute') is-invalid @enderror">{{ old('minute', $identityMeeting->minute) }}</textarea>
-                                @error('minute')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                         </div>
 
                         <button type="submit" class="btn btn-primary">

@@ -11,6 +11,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
+use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
@@ -23,6 +24,15 @@ if (!function_exists('officeSetting')) {
                 return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
             }
             return [];
+        });
+    }
+}
+
+if (!function_exists('recommendationTemplateSettingData')) {
+    function recommendationTemplateSettingData()
+    {
+        return Cache::rememberForever('recommendationTemplateSetting', function () {
+            return RecommendationTemplateSetting::first();
         });
     }
 }
@@ -406,52 +416,52 @@ if (!function_exists('get_nepali_number')) {
 if (!function_exists('get_english_number')) {
     function get_english_number($data): string|array
     {
-        return str_replace(['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'],['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'] , $data);
+        return str_replace(['१', '२', '३', '४', '५', '६', '७', '८', '९', '०'], ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], $data);
     }
 }
 if (!function_exists('get_nepali_count')) {
-    function get_nepali_count(int $key,string $language='ne'): string
+    function get_nepali_count(int $key, string $language = 'ne'): string
     {
         $count = [
             2 => [
-                'ne'=>'पहिलो प्रतिलिपि',
-                'en'=>"First Copy",
+                'ne' => 'पहिलो प्रतिलिपि',
+                'en' => "First Copy",
             ],
             3 => [
-                'ne'=>'दोस्रो प्रतिलिपि',
-                'en'=>"Second Copy",
+                'ne' => 'दोस्रो प्रतिलिपि',
+                'en' => "Second Copy",
             ],
             4 => [
-                'ne'=>'तेस्रो प्रतिलिपि',
-                'en'=>"Third Copy",
+                'ne' => 'तेस्रो प्रतिलिपि',
+                'en' => "Third Copy",
             ],
             5 => [
-                'ne'=>'चौथो प्रतिलिपि',
-                'en'=>"Fourth Copy",
+                'ne' => 'चौथो प्रतिलिपि',
+                'en' => "Fourth Copy",
             ],
             6 => [
-                'ne'=>'पाँचौं प्रतिलिपि',
-                'en'=>"Fifth Copy",
+                'ne' => 'पाँचौं प्रतिलिपि',
+                'en' => "Fifth Copy",
             ],
             7 => [
-                'ne'=>'छैटौं प्रतिलिपि',
-                'en'=>"Sixth Copy",
+                'ne' => 'छैटौं प्रतिलिपि',
+                'en' => "Sixth Copy",
             ],
             8 => [
-                'ne'=>'सातौं प्रतिलिपि',
-                'en'=>"Seventh Copy",
+                'ne' => 'सातौं प्रतिलिपि',
+                'en' => "Seventh Copy",
             ],
             9 => [
-                'ne'=>'आठौं प्रतिलिपि',
-                'en'=>"Eighth Copy",
+                'ne' => 'आठौं प्रतिलिपि',
+                'en' => "Eighth Copy",
             ],
             10 => [
-                'ne'=>'नवौं प्रतिलिपि',
-                'en'=>"Ninth Copy",
+                'ne' => 'नवौं प्रतिलिपि',
+                'en' => "Ninth Copy",
             ],
             11 => [
-                'ne'=>'दसौं प्रतिलिपि',
-                'en'=>"Tenth Copy",
+                'ne' => 'दसौं प्रतिलिपि',
+                'en' => "Tenth Copy",
             ],
         ];
         return $count[$key][$language] ?? '';

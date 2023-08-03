@@ -4,11 +4,10 @@ namespace Modules\Identity\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class InvitedGuest extends Model
+class MinuteTemplateSetting extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -19,14 +18,8 @@ class InvitedGuest extends Model
     ];
 
     protected $fillable = [
-        "identity_meeting_id",
-        "name",
-        "phone",
-        "designation",
+        "title",
+        "status",
+        "description",
     ];
-
-    public function identityMeeting(): BelongsTo
-    {
-        return $this->belongsTo(IdentityMeeting::class);
-    }
 }

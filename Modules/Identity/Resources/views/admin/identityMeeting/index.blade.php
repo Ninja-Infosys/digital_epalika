@@ -38,16 +38,20 @@
                                 <th scope="col">बैठकको नाम</th>
                                 <th scope="col">मिति</th>
                                 <th scope="col">उपस्थित सदस्य</th>
+                                <th scope="col">आमन्त्रित</th>
+                                <th scope="col">अपाङ्गता भएका व्यक्तिहरू</th>
                                 <th scope="col">#</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($identityMeetings as $identityMeeting)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $identityMeeting->title ?? '' }}</td>
-                                    <td>{{ $identityMeeting->date_bs ?? '' }}</td>
-                                    <td>{{ $identityMeeting->disability_committees_count }}</td>
+                                    <td>{{ get_nepali_number($identityMeeting->date_bs ?? '') }}</td>
+                                    <td>{{ get_nepali_number($identityMeeting->disability_committees_count ?? 0) }}</td>
+                                    <td>{{ get_nepali_number($identityMeeting->invited_guests_count ?? 0) }}</td>
+                                    <td>{{ get_nepali_number($identityMeeting->disability_identity_cards_count) }}</td>
                                     <td>
                                         <a disabled data-bs-type="edit"
                                             href="{{ route('identity.admin.identityMeeting.edit', $identityMeeting) }}"
