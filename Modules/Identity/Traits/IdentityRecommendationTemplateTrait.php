@@ -72,7 +72,6 @@ trait IdentityRecommendationTemplateTrait
 
     public function getDisabilityData(): array
     {
-        $documentNo = '';
         if(!empty($this->birth_registration_no)){
             $documentNo = "$this->birth_registration_no (जन्म दर्ता)";
         }else{

@@ -187,6 +187,13 @@
                     </a>
                 </li>
             @endcan
+            @can('disabilityCommittee_access')
+                <li class="{{request()->is('admin/identity/setting/minuteTemplateSetting') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.minuteTemplateSetting.index')}}">
+                        <span>माईनिउट टेम्पलेट</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

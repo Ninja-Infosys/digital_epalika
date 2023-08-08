@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Modules\Identity\Traits\IdentityMinuteTemplateTrait;
 
 class IdentityMeeting extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
+    use IdentityMinuteTemplateTrait;
 
     protected $dates = [
         'created_at',

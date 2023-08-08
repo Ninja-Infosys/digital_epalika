@@ -31,9 +31,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('identity.admin.identityMeeting.store') }}" method="post"
+                    <form action="{{ route('identity.admin.identityMeeting.update', $identityMeeting) }}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">बैठकको शिर्षक *</label>
@@ -95,7 +96,7 @@
                                                        name="disabilityIdentityCards[{{ $loop->index }}][id]"
                                                        value="{{ $disabilityIdentityCard->id }}"
                                                        id="disabilityIdentityCards{{ $disabilityIdentityCard->id }}"
-                                                         {{ in_array($disabilityIdentityCard->id, old('disabilityIdentityCards',($identityMeeting->disabilityIdentityCards?->pluck('id')?->toArray() ?? []))) ? 'checked' : '' }}
+                                                    {{ in_array($disabilityIdentityCard->id, old('disabilityIdentityCards',($identityMeeting->disabilityIdentityCards?->pluck('id')?->toArray() ?? []))) ? 'checked' : '' }}
                                                 >
                                                 <label class="form-check-label"
                                                        for="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">{{ $disabilityIdentityCard->name }}</label>
@@ -111,7 +112,7 @@
                                                 <option value="">छान्नुहोस्</option>
                                                 @foreach ($governmentDisabilityTypes as $governmentDisabilityType)
                                                     <option value="{{ $governmentDisabilityType->id }}"
-                                                            {{ old("disabilityIdentityCards.$loop->index.gov_disability_type_id", $disabilityIdentityCard->gov_disability_type_id) == $governmentDisabilityType->id ? 'selected' : '' }}
+                                                        {{ old("disabilityIdentityCards.$loop->index.gov_disability_type_id", $disabilityIdentityCard->gov_disability_type_id) == $governmentDisabilityType->id ? 'selected' : '' }}
                                                     >
                                                         {{ $governmentDisabilityType->title }}
                                                     </option>

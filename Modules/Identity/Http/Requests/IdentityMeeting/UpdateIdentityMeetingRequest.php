@@ -16,7 +16,7 @@ class UpdateIdentityMeetingRequest extends FormRequest
             'description' => ['nullable'],
             'committees' => ['required', 'array'],
             'committees.*' => [Rule::exists('disability_committees', 'id')->withoutTrashed()],
-            'disabilityIdentityCards' => ['required', 'array'],
+            'disabilityIdentityCards' => ['nullable', 'array'],
             'disabilityIdentityCards.*.id' => ['nullable', Rule::exists('disability_identity_cards', 'id')->withoutTrashed()],
             'disabilityIdentityCards.*.gov_disability_type_id' => ['required_with:disabilityIdentityCards.*.id'],
             "guests" => ['nullable', 'array'],

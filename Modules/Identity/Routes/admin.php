@@ -15,6 +15,7 @@ use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\HospitalController;
 use Modules\Identity\Http\Controllers\IdentityMeetingController;
 use Modules\Identity\Http\Controllers\IdentityPrintController;
+use Modules\Identity\Http\Controllers\MinuteTemplateSettingController;
 use Modules\Identity\Http\Controllers\RecommendationTemplateSettingController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
@@ -32,8 +33,10 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);
     Route::resource('hospital', HospitalController::class);
     Route::resource('disabilityCommittee', DisabilityCommitteeController::class);
-    Route::get('recommendationTemplateSetting/{recommendationTemplateSetting}/updateStatus', [RecommendationTemplateSettingController::class,'updateStatus'])->name('recommendationTemplateSetting.updateStatus');
+    Route::get('recommendationTemplateSetting/{recommendationTemplateSetting}/updateStatus', [RecommendationTemplateSettingController::class, 'updateStatus'])->name('recommendationTemplateSetting.updateStatus');
     Route::resource('recommendationTemplateSetting', RecommendationTemplateSettingController::class);
+    Route::get('minuteTemplateSetting/{minuteTemplateSetting}/updateStatus', [MinuteTemplateSettingController::class, 'updateStatus'])->name('minuteTemplateSetting.updateStatus');
+    Route::resource('minuteTemplateSetting', MinuteTemplateSettingController::class);
 });
 
 Route::prefix('disability')->group(function () {
@@ -42,14 +45,17 @@ Route::prefix('disability')->group(function () {
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/printDetail', [DisabilityIdentityCardController::class, 'printDetail'])->name('disabilityIdentityCard.printDetail');
     Route::get('disabilityIdentityCard/{disabilityIdentityCard}/printAll', [DisabilityIdentityCardController::class, 'printAll'])->name('disabilityIdentityCard.printAll');
     Route::resource('disabilityIdentityCard.disabilityPrint', DisabilityPrintController::class)->only('store');
-    Route::post('disabilityIdentityCard/{disabilityIdentityCard}/data', [DisabilityIdentityCardController::class,'printData'])->name('disabilityIdentityCard.printData');
-    Route::post('disabilityIdentityCard/{disabilityIdentityCard}/reportData', [DisabilityIdentityCardController::class,'reportData'])->name('disabilityIdentityCard.reportData');
+    Route::post('disabilityIdentityCard/{disabilityIdentityCard}/data', [DisabilityIdentityCardController::class, 'printData'])->name('disabilityIdentityCard.printData');
+    Route::post('disabilityIdentityCard/{disabilityIdentityCard}/reportData', [DisabilityIdentityCardController::class, 'reportData'])->name('disabilityIdentityCard.reportData');
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
-    Route::resource('fullDetail/disabilityIdentityCard', DisabilityFullDetailController::class)->names('disabilityFullDetail')->except('create','store','destroy');
-    Route::get('identityPrint/disabilityIdentityCard/{disabilityIdentityCard}/print',[IdentityPrintController::class,'printCard'])->name('disabilityIdentityCard.printCard');
-    Route::get('identityPrint',[IdentityPrintController::class,'print'])->name('identityPrint');
+    Route::resource('fullDetail/disabilityIdentityCard', DisabilityFullDetailController::class)->names('disabilityFullDetail')->except('create', 'store', 'destroy');
+    Route::get('identityPrint/disabilityIdentityCard/{disabilityIdentityCard}/print', [IdentityPrintController::class, 'printCard'])->name('disabilityIdentityCard.printCard');
+    Route::get('identityPrint', [IdentityPrintController::class, 'print'])->name('identityPrint');
 });
 
+Route::post('identityMeeting/{identityMeeting}/minute', [IdentityMeetingController::class, 'minuteStore'])->name('identityMeeting.minute.store');
+Route::get('identityMeeting/{identityMeeting}/minute', [IdentityMeetingController::class, 'minuteIndex'])->name('identityMeeting.minute');
+Route::get('identityMeeting/{identityMeeting}/minutePrint', [IdentityMeetingController::class, 'minutePrint'])->name('identityMeeting.minutePrint');
 Route::resource('identityMeeting', IdentityMeetingController::class);
 
 Route::prefix('seniorCitizen')->group(function () {

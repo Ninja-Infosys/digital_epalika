@@ -15,7 +15,7 @@ class InvitedGuestLivewire extends Component
     public function mount($guests = []): void
     {
         if (!empty($guests)) {
-            $this->guests = $guests->map(function ($guest) {
+            $this->guests = collect($guests)->map(function ($guest) {
                 return [
                     'id' => $guest->id ?? null,
                     'name' => $guest->name ?? '',

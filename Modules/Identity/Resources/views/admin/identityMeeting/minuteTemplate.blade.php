@@ -16,6 +16,6 @@
                 <td>{{ $committee->name }}</td>
                 <td>{{ $committee->designation }}</td>
             </tr>
-        @endforeach
+        @endforelse
     </tbody>
 </table>

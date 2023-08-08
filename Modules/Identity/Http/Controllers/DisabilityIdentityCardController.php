@@ -121,7 +121,7 @@ class DisabilityIdentityCardController extends Controller
     public function update(UpdateDisabilityIdentityCardRequest $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update', $disabilityIdentityCard);
-        $recommendationTemplateSetting = RecommendationTemplateSetting::first();
+        $recommendationTemplateSetting = recommendationTemplateSettingData();
 
         $extraFields = [
             'status' => ($request->boolean('is_full_detail_required')

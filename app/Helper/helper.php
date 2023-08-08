@@ -11,6 +11,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
+use Modules\Identity\Entities\MinuteTemplateSetting;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
@@ -24,6 +25,15 @@ if (!function_exists('officeSetting')) {
                 return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
             }
             return [];
+        });
+    }
+}
+
+if (!function_exists('minuteTemplateSettingData')) {
+    function minuteTemplateSettingData()
+    {
+        return Cache::rememberForever('minuteTemplateSetting', function () {
+            return MinuteTemplateSetting::first();
         });
     }
 }
