@@ -72,7 +72,7 @@ trait IdentityMinuteTemplateTrait
     {
         $disabilityCommittees = $this->load('disabilityCommittees')->disabilityCommittees;
         $invitedGuests = $this->load('invitedGuests')->invitedGuests;
-        $disabilityIdentityCards = $this->load('disabilityIdentityCards')->disabilityIdentityCards;
+        $disabilityIdentityCards = $this->load('disabilityIdentityCards.governmentalDisabilityType')->disabilityIdentityCards;
         return [
             '[@letterHead]' => letterHead() ?? '',
             '[@letterHeadEn]' => letterHeadEn() ?? '',
