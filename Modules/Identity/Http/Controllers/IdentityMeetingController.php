@@ -44,9 +44,11 @@ class IdentityMeetingController extends Controller
             $disabilityIds = $this->UpdateDisabilityIdentityCards($request);
 
             $identityMeeting->disabilityIdentityCards()->attach($disabilityIds);
+            if (array_key_exists('guests', $request->validated()) && !empty($request->validated()["guests"])) {
 
-            foreach ($request->validated()["guests"] as $guest) {
-                $identityMeeting->invitedGuests()->create($guest);
+                foreach ($request->validated()["guests"] as $guest) {
+                    $identityMeeting->invitedGuests()->create($guest);
+                }
             }
         });
 
