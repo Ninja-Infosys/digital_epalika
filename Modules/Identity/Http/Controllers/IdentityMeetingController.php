@@ -88,12 +88,13 @@ class IdentityMeetingController extends Controller
 
                 $identityMeeting->disabilityIdentityCards()->sync($disabilityIds);
             }
-
-            foreach ($request->validated()["guests"] as $guest) {
-                if (array_key_exists('id', $guest) && !empty($guest['id'])) {
-                    InvitedGuest::find($guest['id'])->update($guest);
-                } else {
-                    $identityMeeting->invitedGuests()->create($guest);
+            if (array_key_exists('guests', $request->validated()) && !empty($request->validated()["guests"])) {
+                foreach ($request->validated()["guests"] as $guest) {
+                    if (array_key_exists('id', $guest) && !empty($guest['id'])) {
+                        InvitedGuest::find($guest['id'])->update($guest);
+                    } else {
+                        $identityMeeting->invitedGuests()->create($guest);
+                    }
                 }
             }
         });
@@ -149,9 +150,9 @@ class IdentityMeetingController extends Controller
             if (!empty($disabilityIdentityCard['id'])) {
                 $disabilityIdentityCardDetail = DisabilityIdentityCard::find($disabilityIdentityCard['id']);
                 $disabilityIdentityCardDetail->update([
-                        'gov_disability_type_id' => $disabilityIdentityCard['gov_disability_type_id'],
-                        'status' => $disabilityIdentityCardDetail?->is_full_detail_required ? StatusEnum::READY_FOR_PRINT->value : StatusEnum::APPROVE->value
-                    ]);
+                    'gov_disability_type_id' => $disabilityIdentityCard['gov_disability_type_id'],
+                    'status' => $disabilityIdentityCardDetail?->is_full_detail_required ? StatusEnum::READY_FOR_PRINT->value : StatusEnum::APPROVE->value
+                ]);
                 $disabilityIds[] = $disabilityIdentityCard['id'];
             }
         }
