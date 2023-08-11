@@ -11,7 +11,7 @@
 
         @media print {
             @page {
-                size: A4 landscape;
+                size: A4 portrait;
             }
 
             .page-break {
