@@ -19,9 +19,9 @@ class UpdateDisabilityFullDetailResource extends FormRequest
     {
         return [
             "disability_reason_id" => ['required', Rule::exists('disability_reasons', 'id')->withoutTrashed()],
-            "citizenship_no_place" => ['required', 'string', 'max:255'],
-            "citizenship_date_ad" => ['required'],
-            "citizenship_date" => ['required'],
+            "citizenship_no_place" => ['nullable', 'string', 'max:255'],
+            "citizenship_date_ad" => ['nullable'],
+            "citizenship_date" => ['nullable'],
             "document_photo" => ['nullable', 'file', 'mimes:jpeg,jpg,png'],
             "document_photo_back" => ['nullable', 'file', 'mimes:jpeg,jpg,png'],
             "material_description" => ['required'],
