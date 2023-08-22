@@ -2,21 +2,21 @@
 
 namespace Modules\Identity\Http\Controllers;
 
-use DateTime;
 use App\Enums\StatusEnum;
+use App\Http\Controllers\Controller;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
-use Illuminate\Http\Request;
+use App\Models\Settings\Relationship;
 use App\Traits\NepaliDateConverter;
-use App\Http\Controllers\Controller;
+use DateTime;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use Modules\Identity\Entities\Hospital;
-use Modules\Identity\Entities\Relationship;
-use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
 use Modules\Identity\Entities\DisabilityReason;
-use Modules\Identity\Entities\DisabilityIdentityCard;
+use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\Hospital;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Identity\Http\Requests\DisabilityIdentityCard\StoreDisabilityIdentityCardRequest;
 use Modules\Identity\Http\Requests\DisabilityIdentityCard\UpdateDisabilityIdentityCardRequest;

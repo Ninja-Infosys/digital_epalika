@@ -184,7 +184,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं (कृषक सूचीकरण नम्बर)</label>
+                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं (कृषक सूचीकरण
+                                        नम्बर)</label>
                                     <input
                                         type="text"
                                         name="farmer_id_card_no"
@@ -258,6 +259,48 @@
                             </div>
                         </fieldset>
                         <fieldset>
+                            <legend><h4 class="text-info">नाता ? *</h4></legend>
+                            <h6 class="py-2"> नोट: घरमुलीको आफै भएको खण्डमा खाली खोद्नु होस्</h6>
+                            <div class="row">
+                                <div class="col-md-6  mb-2">
+                                    <label for="farmer_id" class="form-label">
+                                        घरमुलीको नाम</label>
+                                    <div class="input-group">
+                                        <select name="farmer_id" multiple data-toggle="select2"
+                                                id="farmer_id" class="form-select"
+                                                aria-describedby="button-cooperatives">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($countrymen as $countryman)
+                                                <option
+                                                    value="{{$countryman->id}}" {{old('farmer_id', $farmer->farmer_id) == $countryman->id ? 'selected' : ""}}>{{$countryman->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('farmer_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="relationship_id" class="form-label">
+                                        नाता</label>
+                                    <div class="input-group">
+                                        <select name="relationship_id" multiple data-toggle="select2"
+                                                id="relationship_id" class="form-control"
+                                                aria-describedby="button-group">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($relationships as $relationship)
+                                                <option
+                                                    value="{{$relationship->id}}" {{old('relationship_id', $farmer->relationship_id) == $relationship->id ? 'selected' : ""}}>{{$relationship->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('relationship_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
                             <legend><h4 class="text-info">संलग्नता ? *</h4></legend>
                             <h6 class="py-2"> नोट: कुनै समूह, सहकारी वा उद्यममा संलग्न भएमा ।</h6>
                             <div class="row">
@@ -265,22 +308,22 @@
                                     <label for="cooperatives" class="form-label">
                                         सहकारी</label>
                                     <div class="input-group">
-                                    <select name="cooperatives[]" multiple data-toggle="select2"
-                                            id="cooperatives" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($cooperatives as $cooperative)
-                                            <option
-                                                value="{{$cooperative->id}}" {{in_array($cooperative->id,$farmer->cooperatives->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                                {{$cooperative->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <button class="btn btn-sm btn-outline-primary" type="button"
-                                            id="button-enterprise"
-                                            title="उधम थप" data-bs-toggle="modal"
-                                            data-bs-target="#cooperative-modal">
-                                        <i class="fa fa-plus"></i></button>
-                                </div>
+                                        <select name="cooperatives[]" multiple data-toggle="select2"
+                                                id="cooperatives" class="form-control">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($cooperatives as $cooperative)
+                                                <option
+                                                    value="{{$cooperative->id}}" {{in_array($cooperative->id,$farmer->cooperatives->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                                    {{$cooperative->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="उधम थप" data-bs-toggle="modal"
+                                                data-bs-target="#cooperative-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('cooperatives')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -292,22 +335,22 @@
                                     <label for="groups" class="form-label">
                                         समूह</label>
                                     <div class="input-group">
-                                    <select name="groups[]" multiple data-toggle="select2"
-                                            id="groups" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($groups as $group)
-                                            <option
-                                                value="{{$group->id}}" {{in_array($group->id,$farmer->groups->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                                {{$group->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <button class="btn btn-sm btn-outline-primary" type="button"
-                                            id="button-enterprise"
-                                            title="उधम थप" data-bs-toggle="modal"
-                                            data-bs-target="#group-modal">
-                                        <i class="fa fa-plus"></i></button>
-                                </div>
+                                        <select name="groups[]" multiple data-toggle="select2"
+                                                id="groups" class="form-control">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($groups as $group)
+                                                <option
+                                                    value="{{$group->id}}" {{in_array($group->id,$farmer->groups->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                                    {{$group->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="उधम थप" data-bs-toggle="modal"
+                                                data-bs-target="#group-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('groups')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -319,22 +362,22 @@
                                     <label for="enterprises" class="form-label">
                                         उद्यम</label>
                                     <div class="input-group">
-                                    <select name="enterprises[]" multiple data-toggle="select2"
-                                            id="enterprises" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($enterprises as $enterprise)
-                                            <option
-                                                value="{{$enterprise->id}}" {{in_array($enterprise->id,$farmer->enterprises->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                                {{$enterprise->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <button class="btn btn-sm btn-outline-primary" type="button"
-                                            id="button-enterprise"
-                                            title="उधम थप" data-bs-toggle="modal"
-                                            data-bs-target="#enterprise-modal">
-                                        <i class="fa fa-plus"></i></button>
-                                </div>
+                                        <select name="enterprises[]" multiple data-toggle="select2"
+                                                id="enterprises" class="form-control">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($enterprises as $enterprise)
+                                                <option
+                                                    value="{{$enterprise->id}}" {{in_array($enterprise->id,$farmer->enterprises->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                                    {{$enterprise->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="उधम थप" data-bs-toggle="modal"
+                                                data-bs-target="#enterprise-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('enterprises')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

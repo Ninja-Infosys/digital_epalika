@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\Setting\MailSettingController;
 use App\Http\Controllers\Admin\Setting\OccupationController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\QualificationController;
+use App\Http\Controllers\Admin\Setting\RelationshipController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
 use App\Http\Controllers\Admin\Setting\SmsSettingController;
 use App\Http\Controllers\Admin\Setting\Units\ExternalUnitConversionController;
@@ -67,6 +68,7 @@ Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileSt
 // setting
 Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
+    Route::resource('relationship', RelationshipController::class);
 
     //    sms
     Route::get('featureActivation/{featureActivation}', [FeatureActivationController::class, 'updateFeatureActivation'])->name('update-feature-activation');

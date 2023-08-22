@@ -26,8 +26,13 @@ class GrantController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['fiscalYear', 'grantOffice', 'grantProgram', 'grantType',], request('search'));
             }
+
+            if (!is_null(auth()->user()->branch_id)) {
+                $q->where('branch_id', auth()->user()->branch_id);
+            }
         })
-            ->latest()->paginate(10);
+            ->latest()
+            ->paginate(10);
 
         return view('grant::admin.grant.index', compact('grants'));
     }
@@ -95,6 +100,7 @@ class GrantController extends Controller
 
         return back();
     }
+
     public function grantDetails(Grant $grant)
     {
         $this->checkAuthorization('grant_access');

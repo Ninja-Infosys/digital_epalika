@@ -10,7 +10,6 @@ class IdentityDatabaseSeeder extends Seeder
     {
         $this->call([
             IdentityPermissionTableSeeder::class,
-            RelationshipTableSeeder::class,
             DisabilityReasonTableSeeder::class,
             DisabilityTypeTableSeeder::class,
             CardColorTableSeeder::class,

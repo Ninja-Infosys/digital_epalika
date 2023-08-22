@@ -7,12 +7,15 @@ use App\Enums\MaritalStatusEnum;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\Relationship;
 use App\Models\User;
 use App\Traits\GetAllColumns;
+use Database\Seeders\RelationshipTableSeeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
@@ -54,11 +57,18 @@ class Farmer extends Model
         'village',
         'tole',
         'user_id',
+        "farmer_id",
+        "relationship_id",
     ];
 
     protected $casts = [
         'gender' => Gender::class,
         'marital_status' => MaritalStatusEnum::class
+    ];
+
+    protected $appends = [
+      'photo_url',
+      'name',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -68,7 +78,7 @@ class Farmer extends Model
             : asset('images/user_icon.jpg');
     }
 
-    public function setPhotoAttribute($value)
+    public function setPhotoAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('farmer/' . Str::slug($this->attributes['first_name'] . $this->attributes['last_name'], '_') . 'photo', 'public');
@@ -80,6 +90,21 @@ class Farmer extends Model
         return (!empty($this->attributes['first_name']) ? ($this->attributes['first_name'] ?? '') . " " : "")
             . (!empty($this->attributes['middle_name']) ? ($this->attributes['middle_name'] ?? '') . " " : "")
             . (!empty($this->attributes['last_name']) ? ($this->attributes['last_name'] ?? '') : "");
+    }
+
+    public function relationship(): BelongsTo
+    {
+        return $this->belongsTo(Relationship::class);
+    }
+
+    public function farmer(): BelongsTo
+    {
+        return $this->belongsTo(Farmer::class);
+    }
+
+    public function farmers(): HasMany
+    {
+        return $this->hasMany(Farmer::class);
     }
 
     public function province(): BelongsTo
@@ -117,8 +142,8 @@ class Farmer extends Model
         return $this->belongsToMany(Cooperative::class);
     }
 
-   public function grantDetails(): MorphMany
-   {
-       return $this->morphMany(GrantDetail::class, 'model');
-   }
+    public function grantDetails(): MorphMany
+    {
+        return $this->morphMany(GrantDetail::class, 'model');
+    }
 }

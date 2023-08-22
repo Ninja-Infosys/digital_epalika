@@ -28,13 +28,18 @@ class GrantDetailController extends Controller
         return view('grant::admin.grant_detail.index', compact('grantDetails'));
     }
 
+    public function checkGrant()
+    {
+        $this->checkAuthorization('grantDetail_create');
+        return view('grant::admin.grant_detail.check');
+
+    }
+
     public function create()
     {
         $this->checkAuthorization('grantDetail_create');
 
-        $grantPrograms = GrantProgram::all();
-        $grantTypes = GrantType::all();
-        return view('grant::admin.grant_detail.create', compact('grantPrograms', 'grantTypes'));
+        return view('grant::admin.grant_detail.create' );
     }
 
     public function show(GrantDetail $grantDetail)

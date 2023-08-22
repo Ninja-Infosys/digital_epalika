@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Setting\RelationshipController;
 use Illuminate\Support\Facades\Route;
 use Modules\Identity\Http\Controllers\CardColorController;
 use Modules\Identity\Http\Controllers\DashboardController;
@@ -10,21 +11,19 @@ use Modules\Identity\Http\Controllers\DisabilityIdentityCardReportController;
 use Modules\Identity\Http\Controllers\DisabilityPrintController;
 use Modules\Identity\Http\Controllers\DisabilityReasonController;
 use Modules\Identity\Http\Controllers\DisabilityTypeController;
-use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
+use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\HospitalController;
 use Modules\Identity\Http\Controllers\IdentityMeetingController;
 use Modules\Identity\Http\Controllers\IdentityPrintController;
 use Modules\Identity\Http\Controllers\MinuteTemplateSettingController;
 use Modules\Identity\Http\Controllers\RecommendationTemplateSettingController;
-use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::prefix('setting')->as('setting.')->group(function () {
-    Route::resource('relationship', RelationshipController::class);
     Route::resource('disabilityReason', DisabilityReasonController::class);
     Route::resource('disabilityType', DisabilityTypeController::class);
     Route::put('employeeSignature/{employeeSignature}/updateStatus', [EmployeeSignatureController::class, 'updateStatus'])->name('employeeSignature.updateStatus');

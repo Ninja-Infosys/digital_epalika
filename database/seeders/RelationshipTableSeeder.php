@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Identity\Database\Seeders;
+namespace Database\Seeders;
 
+use App\Models\Settings\Relationship;
 use Illuminate\Database\Seeder;
-use Modules\Identity\Entities\Relationship;
 
 class RelationshipTableSeeder extends Seeder
 {

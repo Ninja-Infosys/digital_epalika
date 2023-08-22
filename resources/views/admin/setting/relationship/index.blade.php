@@ -28,7 +28,7 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('relationship_create')
-                                <a href="{{route('identity.admin.setting.relationship.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{route('admin.relationship.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -50,14 +50,14 @@
                                 <td>{{$relationship->title ?? ''}}</td>
                                 <td>
                                     @can('relationship_edit')
-                                        <a data-bs-type="edit" href="{{route('identity.admin.setting.relationship.edit', $relationship)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.relationship.edit', $relationship)}}"
                                            type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     @endcan
                                     @can('relationship_delete')
                                         <form
-                                            action="{{route('identity.admin.setting.relationship.destroy',$relationship)}}"
+                                            action="{{route('admin.relationship.destroy',$relationship)}}"
                                             method="post">
                                             @csrf
                                             @method('delete')

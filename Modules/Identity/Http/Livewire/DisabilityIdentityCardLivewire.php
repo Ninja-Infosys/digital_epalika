@@ -5,6 +5,7 @@ namespace Modules\Identity\Http\Livewire;
 use App\Enums\StatusEnum;
 use App\Models\Ethnicity;
 use App\Models\Settings\OfficeSetting;
+use App\Models\Settings\Relationship;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -16,7 +17,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityType;
-use Modules\Identity\Entities\Relationship;
 
 class DisabilityIdentityCardLivewire extends Component
 {

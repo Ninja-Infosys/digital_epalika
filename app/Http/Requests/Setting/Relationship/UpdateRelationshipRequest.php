@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Identity\Http\Requests\Relationship;
+namespace App\Http\Requests\Setting\Relationship;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;

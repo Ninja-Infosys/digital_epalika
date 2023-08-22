@@ -132,7 +132,7 @@
 
 <body>
     <div>
-        <div class="header" style="height: 204.48px;width: 324.48px;">
+        <div class="header" style="height: 204px;width: 324px;">
             <div class="office_header">
                 <div>
                     <img src="{{ $officeSetting->logo_url }}" alt="" height="30">
@@ -159,9 +159,9 @@
             </div>
             <div class="row">
                 <div class="col-md-9">
-                    <p>आईडी कार्ड नं: <span>{{ $seniorCitizenDetail->card_no }}</span></p>
-                    <p>व्यक्तिको पुरा नाम: <span>{{ $seniorCitizenDetail->name }}</span></p>
-                    <p>नागरिकता नं : <span>{{ $seniorCitizenDetail->citizenship_no }}</span></p>
+                    <p>प.प.नं: <span>{{ $seniorCitizenDetail->card_no }}</span></p>
+                    <p>नाम थर: <span>{{ $seniorCitizenDetail->name }}</span></p>
+                    <p>ना.प्रा.नं : <span>{{ $seniorCitizenDetail->citizenship_no }}</span></p>
                     <p>रोग : <span>{{ $seniorCitizenDetail->is_disease == 1 ? 'छ' : 'छैन' }}</span></p>
                     <p>ठेगाना
                         :<span>{{ $seniorCitizenDetail->localBody->local_body ?? '' }},{{ $seniorCitizenDetail->district->district ?? '' }},{{ $seniorCitizenDetail->province->province ?? '' }}</span>
