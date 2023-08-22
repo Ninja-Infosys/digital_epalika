@@ -14,9 +14,10 @@ class LicenseController extends Controller
 
     public function saveLicense(LicenseRequest $request)
     {
-        $response = $this->checkLicense($request->input('key'), $request->getUri());
+        $response = $this->checkLicense($request->input('key'), $request->getUri()) ?? [];
 
-        if (array_key_exists('is_active', $response) && $response['is_active']) {
+        if (array_key_exists('is_active', $response)
+            && $response['is_active']) {
             $data = [
                 'created_date' => now()->toDateString(),
                 'days' => $response['days'] ?? 0,

@@ -36,20 +36,20 @@
             <div class="col-md-4 mb-2">
                 <label for="model_id" class="form-label">अनुदानग्राही </label>
                 <div class="input-group">
-                <select wire:model="form.model_id" id="model_id"
-                        class="form-control @error('form.model_id') is-invalid @enderror">
-                    <option value="">--अनुदानग्राही छान्नुहोस्--</option>
-                    @foreach($grantees as $grantee)
-                        <option value="{{$grantee->id}}">
-                            {{$grantee->name ?? ''}} ({{$grantee->unique_id ?? ''}})
-                        </option>
-                    @endforeach
-                </select>
-                <button wire:ignore class="btn btn-sm btn-outline-primary" type="button"
-                        id="form-popup-button"
-                        data-bs-toggle="modal">
-                    <i class="fa fa-plus"></i></button>
-            </div>
+                    <select wire:model="form.model_id" id="model_id"
+                            class="form-control @error('form.model_id') is-invalid @enderror">
+                        <option value="">--अनुदानग्राही छान्नुहोस्--</option>
+                        @foreach($grantees as $grantee)
+                            <option value="{{$grantee->id}}">
+                                {{$grantee->name ?? ''}} ({{$grantee->unique_id ?? ''}})
+                            </option>
+                        @endforeach
+                    </select>
+                    <button wire:ignore class="btn btn-sm btn-outline-primary" type="button"
+                            id="form-popup-button"
+                            data-bs-toggle="modal">
+                        <i class="fa fa-plus"></i></button>
+                </div>
                 @error('form.model_id')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -272,10 +272,35 @@
                     }
                 }
 
-                function setButtonAttribute(attrVal){
-                    $('#form-popup-button').attr('data-bs-target', '#'+attrVal)
+                function setButtonAttribute(attrVal) {
+                    $('#form-popup-button').attr('data-bs-target', '#' + attrVal)
                 }
             });
+        </script>
+
+        <script>
+
+            window.addEventListener('grantDetail', event => {
+
+                Swal.fire({
+                    title: '<strong>अनुदान विवरण</strong>',
+                    icon: 'warning',
+                    html:
+                    event.detail.grants,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        'अनुदान दिनुहोस',
+                    cancelButtonText:
+                        'अनुदान नदिनुहोस'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emit('storeData')
+                    }
+                })
+            })
+
         </script>
     @endpush
 @endonce

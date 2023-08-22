@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             OfficeSettingSeeder::class,
             FeatureActivationSeeder::class,
             LetterHeadTableSeeder::class,
+            RelationshipTableSeeder::class
         ]);
     }
 }

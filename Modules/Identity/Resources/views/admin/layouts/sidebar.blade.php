@@ -124,13 +124,6 @@
     <div class="collapse {{request()->is('admin/identity/setting*') ? 'show' : ''}}"
          id="sidebarIdentitySetting">
         <ul class="nav-second-level">
-            @can('relationship_access')
-                <li class="{{request()->is('admin/identity/setting/relationship') ? 'active' : ''}}">
-                    <a href="{{route('identity.admin.setting.relationship.index')}}">
-                        <span> नाता</span>
-                    </a>
-                </li>
-            @endcan
             @can('disabilityReason_access')
                 <li class="{{request()->is('admin/identity/setting/disabilityReason') ? 'active' : ''}}">
                     <a href="{{route('identity.admin.setting.disabilityReason.index')}}">

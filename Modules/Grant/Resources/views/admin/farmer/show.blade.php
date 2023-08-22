@@ -133,13 +133,73 @@
                             <tbody>
                             @foreach ($farmer->grantDetails as $grantDetail)
                                 <tr>
-                                    <td>
-                                    {{ $loop->iteration }}</th>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $grantDetail->grant->grantProgram->name ?? '' }}</td>
                                     <td>{{ $grantDetail->personal_investment }}</td>
                                     <td>{{ $grantDetail->localBody->local_body ?? '' }}
                                         - {{ $grantDetail->ward_no }} {{ $grantDetail->village }},
                                         {{ $grantDetail->tole }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title my-2">
+                            परिवार विवरण
+                        </h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm mt-3">
+                            <thead>
+                            <tr>
+                                <th scope="col">क्र.स</th>
+                                <th scope="col">नाम</th>
+                                <th scope="col">नागरिकता नं</th>
+                                <th scope="col">नाता</th>
+                                <th scope="col">अहिलेसम्म लागेको अनुदान</th>
+                                <th scope="col">#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($families as $family)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{$family->name ?? ''}}</td>
+                                    <td>{{$family->citizenship_no ?? ''}}</td>
+                                    <td>{{$family->relationship->title ?? 'घरमुली'}}</td>
+                                    <td>{{count($family->grantDetails) ?? 0}}</td>
+                                    <td>
+                                        <a data-bs-type="edit" href="{{route('admin.grant.farmer.show', $family)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}"
+                                           title="विवरण हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        @can('farmer_edit')
+                                            <a data-bs-type="edit" href="{{route('admin.grant.farmer.edit', $family)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('farmer_delete')
+                                            <form
+                                                action="{{route('admin.grant.farmer.destroy', $family)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
+                                                        title=" मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

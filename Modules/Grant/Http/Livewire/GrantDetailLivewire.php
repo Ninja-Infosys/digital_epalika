@@ -5,6 +5,7 @@ namespace Modules\Grant\Http\Livewire;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\View;
 use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
@@ -28,6 +29,8 @@ class GrantDetailLivewire extends Component
 
     public $enterpriseTypes = [];
 
+    public bool $forceStore = true;
+
     public GrantDetail $grantDetail;
 
     public array $form = [
@@ -49,9 +52,10 @@ class GrantDetailLivewire extends Component
         'contact' => null,
     ];
 
-    protected $listeners = ['fetchGranteesData'];
+    protected $listeners = ['fetchGranteesData', "storeData"=>'storeAndUpdateData'];
+    private array $families = [];
 
-    public function mount($grantDetail = null)
+    public function mount($grantDetail = null): void
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
@@ -60,10 +64,38 @@ class GrantDetailLivewire extends Component
 
         if (!empty($grantDetail)) {
             $this->grantDetail = $grantDetail;
-            foreach (Arr::except($this->form, ['grant_for','model_type']) as $key => $data) {
+            foreach (Arr::except($this->form, ['grant_for', 'model_type']) as $key => $data) {
                 $this->form[$key] = $grantDetail[$key];
             }
-            $this->form['grant_for']=$grantDetail->grant_for->value;
+            $this->form['grant_for'] = $grantDetail->grant_for->value;
+        }
+    }
+
+    public function getGrantData()
+    {
+        if ($this->form['grant_for'] == 'farmer' && !is_null($this->form['model_id'])) {
+            $farmer = Farmer::with(
+                'farmers',
+                'farmer')
+                ->find($this->form['model_id']);
+            $familyId = [];
+            $familyId[] = $farmer->id;
+
+            if ($farmer->farmer) {
+                $familyId[] = $farmer->farmer->id;
+            }
+
+            if ($farmer->farmers) {
+                foreach ($farmer->farmers as $farmersData) {
+                    $familyId[] = $farmersData->id;
+                }
+            }
+
+            return GrantDetail::where('model_type', Farmer::class)
+                ->whereIn('model_id', $familyId)
+                ->with('model', 'grant.grantProgram', 'grant.fiscalYear')
+                ->latest()
+                ->get();
         }
     }
 
@@ -84,39 +116,29 @@ class GrantDetailLivewire extends Component
         'form.contact' => ['nullable'],
     ];
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
 
-    public function submitFormData()
+    public function submitFormData(): void
     {
         $this->validate();
+        if (!$this->forceStore) {
+            $grants = $this->getGrantData();
 
-        if (!empty($this->grantDetail)) {
-            $this->grantDetail->update($this->form);
-
-            $this->dispatchBrowserEvent('toast_message', [
-                'type' => 'success',
-                'title' => 'अनुदान सफलतापूर्वक सम्पादन गरियो'
-            ]);
-
-            return redirect(route('admin.grant.grantDetail.index'));
-        } else {
-            GrantDetail::create($this->form + [
-                    'local_body_id' => OfficeSetting::first()->local_body_id
+            if (!empty($grants)) {
+                $grantView = (string)View::make('grant::admin.inc.grantDetails', compact('grants'));
+                $this->dispatchBrowserEvent('grantDetail', [
+                    'grants' => $grantView,
                 ]);
-
-            $this->reset('form');
-
-            $this->dispatchBrowserEvent('toast_message', [
-                'type' => 'success',
-                'title' => 'अनुदान सफलतापूर्वक थपियो'
-            ]);
+                return;
+            }
         }
+        $this->storeAndUpdateData();
     }
 
-    public function fetchGranteesData()
+    public function fetchGranteesData(): void
     {
         if (!empty($this->form['grant_for'])) {
             switch ($this->form['grant_for']) {
@@ -148,6 +170,10 @@ class GrantDetailLivewire extends Component
 
         $this->fetchGranteesData();
 
+        if ($this->form['grant_for'] == 'farmer') {
+            $this->forceStore = false;
+        }
+
         if ($this->form['is_old'] == 0) {
             $this->form['prev_fiscal_year_id'] = null;
             $this->form['investment_amount'] = 0;
@@ -169,5 +195,30 @@ class GrantDetailLivewire extends Component
             'form.investment_amount.numeric' => 'लगानी नम्बरमा हुनुपर्छ ।',
             'form.ward_no.required' => 'वडा नं. आवश्यक छ।',
         ];
+    }
+
+    public function storeAndUpdateData(): void
+    {
+        if (!empty($this->grantDetail)) {
+            $this->grantDetail->update($this->form);
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक सम्पादन गरियो'
+            ]);
+
+            redirect(route('admin.grant.grantDetail.index'));
+        } else {
+            GrantDetail::create($this->form + [
+                    'local_body_id' => OfficeSetting::first()->local_body_id
+                ]);
+
+            $this->reset('form');
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक थपियो'
+            ]);
+        }
     }
 }

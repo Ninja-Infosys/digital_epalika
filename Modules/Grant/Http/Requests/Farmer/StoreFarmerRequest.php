@@ -44,6 +44,8 @@ class StoreFarmerRequest extends FormRequest
             'enterprises.*' => [Rule::exists('enterprises', 'id')->withoutTrashed()],
             'cooperatives' => ['nullable', 'array'],
             'cooperatives.*' => [Rule::exists('cooperatives', 'id')->withoutTrashed()],
+            'farmer_id' => ['nullable',Rule::exists('farmers', 'id')->whereNull('farmer_id')->withoutTrashed()],
+            'relationship_id' => ['nullable',Rule::exists('relationships', 'id')->withoutTrashed()],
         ];
     }
     public function messages()

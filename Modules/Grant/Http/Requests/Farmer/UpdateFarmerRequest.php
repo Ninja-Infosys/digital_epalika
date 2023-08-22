@@ -23,8 +23,8 @@ class UpdateFarmerRequest extends FormRequest
             'middle_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'photo' => ['nullable', 'image'],
-            'gender' => ['required',new Enum(Gender::class)],
-            'marital_status' => ['required',new Enum(MaritalStatusEnum::class) ],
+            'gender' => ['required', new Enum(Gender::class)],
+            'marital_status' => ['required', new Enum(MaritalStatusEnum::class)],
             'spouse_name' => ['required_if:marital_status,married'],
             'father_name' => ['required', 'string', 'max:255'],
             'grandfather_name' => ['required', 'string', 'max:255'],
@@ -44,8 +44,11 @@ class UpdateFarmerRequest extends FormRequest
             'enterprises.*' => [Rule::exists('enterprises', 'id')->withoutTrashed()],
             'cooperatives' => ['nullable', 'array'],
             'cooperatives.*' => [Rule::exists('cooperatives', 'id')->withoutTrashed()],
+            'farmer_id' => ['nullable', Rule::exists('farmers', 'id')->whereNull('farmer_id')->withoutTrashed()],
+            'relationship_id' => ['nullable', Rule::exists('relationships', 'id')->withoutTrashed()],
         ];
     }
+
     public function messages()
     {
         return [

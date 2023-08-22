@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Identity\Http\Controllers;
+namespace App\Http\Controllers\Admin\Setting;
 
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
-use Modules\Identity\Entities\Relationship;
-use Modules\Identity\Http\Requests\Relationship\StoreRelationshipRequest;
-use Modules\Identity\Http\Requests\Relationship\UpdateRelationshipRequest;
+use App\Http\Requests\Setting\Relationship\StoreRelationshipRequest;
+use App\Http\Requests\Setting\Relationship\UpdateRelationshipRequest;
+use App\Models\Settings\Relationship;
+use Illuminate\Http\RedirectResponse;
 
 class RelationshipController extends Controller
 {
@@ -14,13 +14,13 @@ class RelationshipController extends Controller
     {
         $this->checkAuthorization('relationship_access');
         $relationships = Relationship::latest()->paginate(10);
-        return view('identity::admin.setting.relationship.index', compact('relationships'));
+        return view('admin.setting.relationship.index', compact('relationships'));
     }
 
     public function create()
     {
         $this->checkAuthorization('relationship_create');
-        return view('identity::admin.setting.relationship.create');
+        return view('admin.setting.relationship.create');
     }
 
     public function store(StoreRelationshipRequest $request): RedirectResponse
@@ -34,13 +34,13 @@ class RelationshipController extends Controller
     public function show(Relationship $relationship)
     {
         $this->checkAuthorization('relationship_access');
-        return view('identity::show');
+        return view('show');
     }
 
     public function edit(Relationship $relationship)
     {
         $this->checkAuthorization('relationship_edit');
-        return view('identity::admin.setting.relationship.edit', compact('relationship'));
+        return view('admin.setting.relationship.edit', compact('relationship'));
     }
 
     public function update(UpdateRelationshipRequest $request, Relationship $relationship)
@@ -48,7 +48,7 @@ class RelationshipController extends Controller
         $this->checkAuthorization('relationship_edit');
         $relationship->update($request->validated());
         toast('नाता सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('identity.admin.setting.relationship.index'));
+        return redirect(route('admin.relationship.index'));
     }
 
     public function destroy(Relationship $relationship): RedirectResponse

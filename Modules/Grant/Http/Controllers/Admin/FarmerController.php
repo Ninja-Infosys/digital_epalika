@@ -3,6 +3,7 @@
 namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Enums\MaritalStatusEnum;
+use App\Models\Settings\Relationship;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -30,7 +31,8 @@ class FarmerController extends Controller
                 $q->whereLike(['unique_id', 'first_name', 'citizenship_no', 'farmer_id_card_no', 'national_id_card_no', 'phone_no'], request('search'));
             }
         })
-            ->latest()->paginate(10);
+            ->latest()
+            ->paginate(10);
         return view('grant::admin.farmer.index', compact('farmers'));
     }
 
@@ -41,10 +43,12 @@ class FarmerController extends Controller
         $cooperatives = Cooperative::latest()->get();
         $groups = Group::latest()->get();
         $enterprises = Enterprise::latest()->get();
-        $cooperativeTypes=CooperativeType::all();
-        $enterpriseTypes=EnterpriseType::all();
+        $cooperativeTypes = CooperativeType::all();
+        $enterpriseTypes = EnterpriseType::all();
+        $relationships = Relationship::get();
+        $countrymen = Farmer::whereNull('farmer_id')->latest()->get();
 
-        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises', 'cooperativeTypes', 'enterpriseTypes'));
+        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises', 'cooperativeTypes', 'enterpriseTypes', 'relationships', 'countrymen'));
     }
 
     public function store(StoreFarmerRequest $request)
@@ -77,10 +81,22 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_access');
 
-        $farmer->load('province', 'district', 'localBody', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
+        $farmer
+            ->load('province', 'district', 'localBody', 'grantDetails.grant.grantProgram', 'grantDetails.localBody', 'farmers.relationship', 'farmers.grantDetails', 'farmer', 'farmer.grantDetails', 'relationship');
         $grantPrograms = GrantProgram::all();
 
-        return view('grant::admin.farmer.show', compact('farmer', 'grantPrograms'));
+        $families = collect();
+
+        if ($farmer->farmer) {
+            $families->push($farmer->farmer);
+        }
+
+        if ($farmer->farmers) {
+            $families = $families->concat($farmer->farmers);
+        }
+
+
+        return view('grant::admin.farmer.show', compact('farmer', 'grantPrograms', 'families'));
     }
 
     public function edit(Farmer $farmer)
@@ -92,10 +108,11 @@ class FarmerController extends Controller
         $cooperatives = Cooperative::latest()->get();
         $groups = Group::latest()->get();
         $enterprises = Enterprise::latest()->get();
-        $cooperativeTypes=CooperativeType::all();
-        $enterpriseTypes=EnterpriseType::all();
-
-        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises', 'cooperativeTypes', 'enterpriseTypes'));
+        $cooperativeTypes = CooperativeType::all();
+        $enterpriseTypes = EnterpriseType::all();
+        $relationships = Relationship::get();
+        $countrymen = Farmer::whereNull('farmer_id')->latest()->get();
+        return view('grant::admin.farmer.edit', compact('countrymen', 'relationships', 'farmer', 'cooperatives', 'groups', 'enterprises', 'cooperativeTypes', 'enterpriseTypes'));
     }
 
     public function update(UpdateFarmerRequest $request, Farmer $farmer): Redirector|Application|RedirectResponse
@@ -136,6 +153,7 @@ class FarmerController extends Controller
 
         return back();
     }
+
     public function grantDetails(Farmer $farmer)
     {
         $this->checkAuthorization('farmer_access');

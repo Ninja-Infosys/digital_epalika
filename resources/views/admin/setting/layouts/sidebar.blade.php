@@ -40,6 +40,14 @@
                 </li>
             @endcan
 
+                @can('relationship_access')
+                    <li class="{{request()->is('admin/setting/relationship') ? 'active' : ''}}">
+                        <a href="{{route('admin.relationship.index')}}">
+                            <span>नाता</span>
+                        </a>
+                    </li>
+                @endcan
+
             @can('emergencyNumber_access')
                 <li class="{{request()->is('admin/setting/generalSetting/emergencyNumber/*') ? 'active' : ''}}">
                     <a href="{{route('admin.generalSetting.emergencyNumber.index')}}">
