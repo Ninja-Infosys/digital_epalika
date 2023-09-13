@@ -136,3 +136,44 @@
 </li>
 
 
+<li class="{{request()->is('admin/recommendation/sipharish*') ? 'active' : ''}}">
+    <a href="#recommendationSetting"
+       {{request()->is('admin/recommendation/sipharish/sipharishCategory*') || request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span>सिफारिस आधारभूत सेटिंग</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div
+        class="collapse {{request()->is('admin/recommendation/sipharish/sipharishCategory*') || request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'show' : ''}}"
+        id="recommendationSetting">
+        <ul class="nav-second-level">
+            @can('recommendationCategory_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.index')}}">
+                        <span>सिफारिस श्रेणी</span>
+                    </a>
+                </li>
+
+            @endcan
+            @can('recommendationCategory_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishSubCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.subcategory.index')}}">
+                        <span>सिफारिस उप-श्रेणी</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationSetting_access')
+                <li class="{{request()->is('admin/recommendation/setting/recommendationSetting*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
+                        <span>सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>
+
+

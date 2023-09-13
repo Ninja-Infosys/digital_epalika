@@ -7,7 +7,10 @@ use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateControll
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
+use Modules\Recommendation\Http\Controllers\SipharishCategoryController;
 use Modules\Recommendation\Http\Controllers\ReportController;
+use Modules\Recommendation\Http\Controllers\SipharisSubCategoryController;
+
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::prefix('setting')->as('setting.')->group(function () {
@@ -22,6 +25,21 @@ Route::prefix('setting')->as('setting.')->group(function () {
 
 Route::post('registrationDetail/{registrationDetail}/ocFile', [RegistrationDetailController::class,'ocFile'])->name('registrationDetail.ocFile');
 Route::resource('recommendationCategory.registrationDetail', RegistrationDetailController::class);
+
+Route::get('sipharish/sipharishCategory',[SipharishCategoryController::class,'index'])->name('sipharish.index');
+Route::get('sipharish/sipharishCategory/create',[SipharishCategoryController::class,'create'])->name('sipharish.create');
+Route::post('sipharish/sipharishCategory/store',[SipharishCategoryController::class,'store'])->name('sipharish.store');
+Route::get('sipharish/sipharishCategory/toggleStatus/{recommendationCategory}',[SipharishCategoryController::class,'updateStatus'])->name('sipharish.updateStatus');
+Route::get('sipharish/sipharishCategory/edit/{sipharisModel}',[SipharishCategoryController::class,'edit'])->name('sipharish.edit');
+Route::post('sipharish/sipharishCategory/update/{sipharisModel}',[SipharishCategoryController::class,'update'])->name('sipharish.update');
+
+
+Route::get('sipharish/sipharishSubCategory',[SipharisSubCategoryController::class,'index'])->name('sipharish.subcategory.index');
+Route::get('sipharish/sipharishSubCategory/create',[SipharisSubCategoryController::class,'create'])->name('sipharish.subcategory.create');
+Route::post('sipharish/sipharishSubCategory/store',[SipharisSubCategoryController::class,'store'])->name('sipharish.subcategory.store');
+Route::get('sipharish/sipharishSubCategory/toggleStatus/{recommendationCategory}',[SipharisSubCategoryController::class,'updateStatus'])->name('sipharish.subcategory.updateStatus');
+Route::get('sipharish/sipharishSubCategory/edit/{siphariSubsModel}',[SipharisSubCategoryController::class,'edit'])->name('sipharish.subcategory.edit');
+Route::post('sipharish/sipharishSubCategory/update/{siphariSubsModel}',[SipharisSubCategoryController::class,'update'])->name('sipharish.subcategory.update');
 
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {
