@@ -10,6 +10,9 @@ use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
 use Modules\Recommendation\Http\Controllers\SipharishCategoryController;
 use Modules\Recommendation\Http\Controllers\ReportController;
 use Modules\Recommendation\Http\Controllers\SipharisSubCategoryController;
+use Modules\Recommendation\Http\Controllers\SipharishFormTypeController;
+use Modules\Recommendation\Http\Controllers\SipharisFormFieldsController;
+
 
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -40,6 +43,16 @@ Route::post('sipharish/sipharishSubCategory/store',[SipharisSubCategoryControlle
 Route::get('sipharish/sipharishSubCategory/toggleStatus/{recommendationCategory}',[SipharisSubCategoryController::class,'updateStatus'])->name('sipharish.subcategory.updateStatus');
 Route::get('sipharish/sipharishSubCategory/edit/{siphariSubsModel}',[SipharisSubCategoryController::class,'edit'])->name('sipharish.subcategory.edit');
 Route::post('sipharish/sipharishSubCategory/update/{siphariSubsModel}',[SipharisSubCategoryController::class,'update'])->name('sipharish.subcategory.update');
+
+Route::get('sipharish/sipharishFormType',[SipharishFormTypeController::class,'index'])->name('sipharish.form-type.index');
+Route::get('sipharish/sipharishFormType/create',[SipharishFormTypeController::class,'create'])->name('sipharish.form-type.create');
+Route::post('sipharish/sipharishFormType/store',[SipharishFormTypeController::class,'store'])->name('sipharish.form-type.store');
+Route::get('sipharish/sipharishFormType/edit/{sipharisFormTypeModel}',[SipharishFormTypeController::class,'edit'])->name('sipharish.form-type.edit');
+Route::put('sipharish/sipharishFormType/update/{sipharisFormTypeModel}',[SipharishFormTypeController::class,'update'])->name('sipharish.form-type.update');
+
+
+Route::get('sipharish/sipharishFormFields/create/{formType}',[SipharisFormFieldsController::class,'create'])->name('sipharish.form-fields.create');
+Route::post('sipharish/sipharishFormFields/store/{sipharis}',[SipharisFormFieldsController::class,'store'])->name('sipharish.form-fields.store');
 
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {

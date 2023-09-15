@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Modules\Recommendation\Entities\SipharisFormType;
 
-class SipharisSubCategory extends Model
+class SipharisFormFields extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
-    public $table = 'sipharis_sub_category';
+    public $table = 'sipharis_form_fields';
 
     protected $dates = [
         'created_at',
@@ -23,14 +24,18 @@ class SipharisSubCategory extends Model
     ];
 
     protected $fillable = [
-        'title',
-        'sipharis_category_id',
+        'sipharish_form_type_id',
+        'field_name',
         'status',
         'created_by'
     ];
 
-    public static function getSipharisSubCategoryByCategoryId($id){
-        return self::select('id','title','sipharis_category_id')->where('sipharis_category_id',$id)->get();
+    public static function getFormFieldByFormType($id){
+        return self::select('sipharis_form_fields.id','sipharis_form_fields.field_name','sipharis_form_fields.status')->where('sipharish_form_type_id',$id)->get();
+    }
 
+    public function formType()
+    {
+        return $this -> belongsTo(SipharisFormType::class, 'billing_id');
     }
 }

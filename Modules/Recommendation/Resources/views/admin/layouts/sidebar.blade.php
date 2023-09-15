@@ -166,8 +166,8 @@
                 </li>
             @endcan
             @can('recommendationSetting_access')
-                <li class="{{request()->is('admin/recommendation/setting/recommendationSetting*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.setting.recommendationSetting.index')}}">
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishFormType*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.form-type.index')}}">
                         <span>सेटिङ</span>
                     </a>
                 </li>
