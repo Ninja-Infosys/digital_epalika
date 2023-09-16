@@ -12,6 +12,8 @@ use Modules\Recommendation\Http\Controllers\ReportController;
 use Modules\Recommendation\Http\Controllers\SipharisSubCategoryController;
 use Modules\Recommendation\Http\Controllers\SipharishFormTypeController;
 use Modules\Recommendation\Http\Controllers\SipharisFormFieldsController;
+use Modules\Recommendation\Http\Controllers\SipharisCreateController;
+use Modules\Recommendation\Http\Controllers\SignatureDetailController;
 
 
 
@@ -53,6 +55,17 @@ Route::put('sipharish/sipharishFormType/update/{sipharisFormTypeModel}',[Siphari
 
 Route::get('sipharish/sipharishFormFields/create/{formType}',[SipharisFormFieldsController::class,'create'])->name('sipharish.form-fields.create');
 Route::post('sipharish/sipharishFormFields/store/{sipharis}',[SipharisFormFieldsController::class,'store'])->name('sipharish.form-fields.store');
+
+Route::get('sipharish/sipharishSignature',[SignatureDetailController::class,'index'])->name('sipharish.signature.index');
+Route::get('sipharish/sipharishSignature/create',[SignatureDetailController::class,'create'])->name('sipharish.signature.create');
+Route::post('sipharish/sipharishSignature/store',[SignatureDetailController::class,'store'])->name('sipharish.signature.store');
+Route::get('sipharish/sipharishSignature/edit/{signatureDetail}',[SignatureDetailController::class,'edit'])->name('sipharish.signature.edit');
+Route::post('sipharish/sipharishSignature/update/{signatureDetail}',[SignatureDetailController::class,'update'])->name('sipharish.signature.update');
+Route::get('sipharish/sipharishSignature/toggleStatus/{signatureDetail}',[SignatureDetailController::class,'updateStatus'])->name('sipharish.signature.updateStatus');
+
+
+Route::get('sipharish/sipharishCreate/create',[SipharisCreateController::class,'create'])->name('sipharish.sipharishCreate.create');
+Route::post('sipharish/sipharishCreate/store',[SipharisCreateController::class,'store'])->name('sipharish.sipharishCreate.store');
 
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {

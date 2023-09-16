@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SipharisSubCategory extends Model
+class SipharisCreatedValue extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
-    public $table = 'sipharis_sub_category';
+    public $table = 'sipharish_created_value';
 
     protected $dates = [
         'created_at',
@@ -23,18 +23,9 @@ class SipharisSubCategory extends Model
     ];
 
     protected $fillable = [
-        'title',
-        'sipharis_category_id',
-        'status',
-        'created_by'
+        'sipharish_created_id',
+        'sipharish_form_fields_id',
+        'value',
+        'status'
     ];
-
-    public static function getSipharisSubCategoryByCategoryId($id){
-        return self::select('id','title','sipharis_category_id')->where('sipharis_category_id',$id)->get();
-
-    }
-
-    public static function getActiveSubCategory(){
-        return self::select('id','title','sipharis_category_id')->get();
-    }
 }

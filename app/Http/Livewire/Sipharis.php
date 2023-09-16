@@ -7,7 +7,7 @@ use  Modules\Recommendation\Entities\SipharisSubCategory;
 
 use Livewire\Component;
 
-class Category extends Component
+class Sipharis extends Component
 {
 
     public $sipharis_category_id = null;
@@ -16,6 +16,8 @@ class Category extends Component
 
     public $sipharishCategories = [];
     public $sipharishSubCategories = [];
+    public $siharisFormFields = [];
+    public $sipharisFormTypes = [];
 
     public $selectedCategory = null;
 
@@ -40,7 +42,7 @@ class Category extends Component
         $this->sipharishSubCategories = SipharisSubCategory::getActiveSubCategory();
         
 
-        return view('livewire.category');
+        return view('livewire.sipharis');
     }
 
     public function upSelectedCategory($id){

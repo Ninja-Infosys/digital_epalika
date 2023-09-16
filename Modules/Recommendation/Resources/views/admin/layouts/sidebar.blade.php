@@ -172,6 +172,13 @@
                     </a>
                 </li>
             @endcan
+            @can('recommendationSetting_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishSignature*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.signature.index')}}">
+                        <span>हस्ताक्षर सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

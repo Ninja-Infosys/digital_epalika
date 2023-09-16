@@ -68,7 +68,7 @@
                                         <select id="personal_detail_id" name="sipharis_sub_category_id"
                                             class="form-select @error('sipharis_sub_category_id') is-invalid @enderror" personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            @foreach ($sipharishCategories as $sipharishCategory)
+                                            @foreach ($sipharishSubCategories as $sipharishCategory)
                                                 <option
                                                     {{ $sipharishCategory->id == old('sipharis_sub_category_id',$getOnesipharisSubCategory->id) ? 'selected' : '' }}
                                                     value="{{ $sipharishCategory->id }}">{{ $sipharishCategory->title }}

@@ -45,5 +45,13 @@ class SipharisFormType extends Model
         return $this->hasMany(SipharisFormFields::class, 'sipharish_form_type_id');
     }
 
+    public static function getAllActiveFormType(){
+        return self::where('status','active')->get();
+    }
+
+    public static function getAllFormTypeBySubCategory($subCategoryId){
+        return self::where(['sipharis_sub_category_id'=>$subCategoryId,'status'=>'active'])->get();
+    }
+
    
 }
