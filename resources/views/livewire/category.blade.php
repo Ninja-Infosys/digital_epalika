@@ -1,7 +1,7 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="personal_detail_id" class="form-label">सिफारिस श्रेणी</label>
                                     <div class="d-flex justify-content-between gap-1">
-                                        <select id="sipharis_category_id" wire:model="selectedCategory" wire:change="upSelectedCategory($event.target.value)" name="sipharis_category_id"
+                                        <select id="sipharis_category_id" wire:model="selectedCategory" name="sipharis_category_id"
                                             class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
                                             @foreach ($sipharishCategories as $sipharishCategory)

@@ -16,6 +16,7 @@ use Modules\Recommendation\Http\Requests\SipharisCategory\StoreSipharisCategoryR
 use Modules\Recommendation\Http\Requests\SipharisCategory\UpdateSipharisCategoryRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Modules\Recommendation\Entities\PersonalDetail;
 
 
 class SipharisCreateController extends Controller
@@ -32,12 +33,13 @@ class SipharisCreateController extends Controller
         $sipharishCategories = SipharisCategory::all();
         $formTypes = SipharisFormType::getAllActiveFormType();
         $fields =  $this->getFormFieldsByFormType(1);
+        $personalDetails = PersonalDetail::all();
         return view('recommendation::admin.sipharisCreate.create',compact('formTypes','fields'));
     }
     public function store(StoreSipharisCreatedRequest $storeSipharisCreatedRequest){
-        //dd($request->all());
+        //dd($storeSipharisCreatedRequest->all());
             \DB::beginTransaction();
-           $filter =  $storeSipharisCreatedRequest->only('sipharis_form_type_id','status');
+           $filter =  $storeSipharisCreatedRequest->only('sipharis_form_type_id','personal_detail_id','status');
             $formType = $storeSipharisCreatedRequest->validated()['field'];
             $sipharis = SipharisCreated::create($filter +[
             'created_by' => auth()->id()

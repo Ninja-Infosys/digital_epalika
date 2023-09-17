@@ -24,6 +24,7 @@ class SipharisCreated extends Model
 
     protected $fillable = [
         'sipharis_form_type_id',
+        'personal_detail_id',
         'signatured_by',
         'approved_by',
         'approved_date',

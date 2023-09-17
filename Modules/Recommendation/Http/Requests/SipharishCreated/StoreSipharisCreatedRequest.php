@@ -25,6 +25,7 @@ class StoreSipharisCreatedRequest extends FormRequest
                 ];
             default:
                 return [
+                    'personal_detail_id'=>'required',
                     'sipharis_form_type_id'       => 'required',
                     'status'                          => 'required',
                     'field' => ['required', 'array'],

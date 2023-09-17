@@ -35,6 +35,7 @@
             <div class="card-body">
 
                 <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post">
+                    
                     @csrf
                     @livewire('field', [
                                     'sipharis_category_id' =>  old('sipharis_category_id')

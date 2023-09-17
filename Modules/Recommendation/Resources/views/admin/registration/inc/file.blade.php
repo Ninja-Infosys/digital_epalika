@@ -146,7 +146,8 @@
                         $('.personalDetail').append("<option value=" + resp.data.personal_detail_id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
                         toastMessage('success', resp.message)
                         $('#personalDetail-modal').modal('toggle')
-                        $('#personalDetail-form').trigger('reset')
+                        $('#personalDetail-form').trigger('reset');
+                        window.location.reload();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         personalDetailSubmitBtn.prop('disabled', false)
