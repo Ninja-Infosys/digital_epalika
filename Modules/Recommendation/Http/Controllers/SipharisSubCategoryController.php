@@ -2,7 +2,6 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharisSubCategory;
@@ -12,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class SipharisSubCategoryController extends Controller
 {
-    use NepaliDateConverter;
 
     public function index(){
         $this->checkAuthorization('recommendationCategory_access');

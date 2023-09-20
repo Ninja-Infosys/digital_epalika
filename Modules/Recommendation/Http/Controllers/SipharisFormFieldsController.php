@@ -2,22 +2,17 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharisSubCategory;
 use Modules\Recommendation\Entities\SipharisFormType;
 use Modules\Recommendation\Entities\SipharisFormFields;
 use Modules\Recommendation\Http\Requests\SipharisFormType\StoreSipharisFormTypeRequest;
-use Modules\Recommendation\Http\Requests\SipharisFormFields\StoreSipharisFormFieldsRequest;
-use Modules\Recommendation\Http\Requests\SipharisCategory\StoreSipharisCategoryRequest;
-use Modules\Recommendation\Http\Requests\SipharisCategory\UpdateSipharisCategoryRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SipharisFormFieldsController extends Controller
 {
-    use NepaliDateConverter;
 
     public function index(){
         $this->checkAuthorization('recommendationCategory_access');
