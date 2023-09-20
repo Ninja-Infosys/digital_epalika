@@ -27,7 +27,7 @@
                         <h4 class="header-title">सिफारिस श्रेणी
                             सूची</h4>
                         @can('recommendationCategory_create')
-                            <a href="{{ route('admin.recommendation.sipharish.create') }}"
+                            <a href="{{ route('admin.recommendation.sipharish.sipharishCategory.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i>
                                 नयाँ सिफारिस श्रेणी  थप्नुहोस
@@ -56,7 +56,7 @@
                                        
                                     <td>
                                         @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.updateStatus',[$recommendationCategory])}}">
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishCategory.updateStatus',$recommendationCategory)}}">
                                                 <i class="fa fa-2x {{ $recommendationCategory->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
@@ -70,14 +70,14 @@
                                         @endif
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.sipharish.edit', [$recommendationCategory]) }}"
+                                               href="{{ route('admin.recommendation.sipharish.sipharishCategory.edit', [$recommendationCategory]) }}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
                                         <form
-                                            action="{{ route('admin.recommendation.setting.recommendationCategory.destroy', ['sss',$recommendationCategory]) }}"
+                                            action="{{ route('admin.recommendation.sipharish.sipharishCategory.destroy',$recommendationCategory) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')

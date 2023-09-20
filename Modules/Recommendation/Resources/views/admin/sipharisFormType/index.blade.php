@@ -44,7 +44,7 @@
                             @includeIf('inc.filter_form')
 
                             @can('recommendation_create')
-                                <a href="{{ route('admin.recommendation.sipharish.form-type.create') }}"
+                                <a href="{{ route('admin.recommendation.sipharish.sipharishFormType.create') }}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                                 </a>
@@ -75,40 +75,39 @@
                             @forelse ($sipharishFormTypes as $sipharishFormType)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $sipharishFormType->title }}</td>
-                                    <td>{{ $sipharishFormType->sipharis_sub_category}}</td>
+                                    <td>{{ $sipharishFormType->title ?? '' }}</td>
+                                    <td>{{ $sipharishFormType->subCategories->title ?? '' }}</td>
 
-                                    <td>{{ $sipharishFormType->status }}</td>
                                     <td>
-                                        <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
+                                        @can('recommendationCategory_access')
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishFormType.updateStatus',$sipharishFormType)}}">
+                                                <i class="fa fa-2x {{ $sipharishFormType->status == true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                            </a>
+                                        @endcan
+                                    </td>
+                                    <td>
+                                        <!-- <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
                                            data-bs-target="#staticBackdrop">
                                             <i class="fa fa-file"></i>
-                                        </a>
-                                        @can('recommendation_access')
+                                        </a> -->
+                                        <!-- @can('recommendation_access')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.show', ['d',$sipharishFormType]) }}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                        @endcan
+                                        @endcan -->
                                         @can('recommendation_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.sipharish.form-type.edit',  [$sipharishFormType]) }}"
+                                               href="{{ route('admin.recommendation.sipharish.sipharishFormType.edit',  $sipharishFormType) }}"
                                                class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
-
-                                        <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.sipharish.form-fields.create',  [$sipharishFormType->id]) }}"
-                                               class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
-                                               title="फारम Field थपनुहोश">
-                                                <i class="fa fa-pen"></i>
-                                            </a>
                                         <form
-                                            action="{{ route('admin.recommendation.recommendationCategory.registrationDetail.destroy', ['d',$sipharishFormType]) }}"
+                                            action="{{ route('admin.recommendation.sipharish.sipharishFormType.destroy', $sipharishFormType) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')

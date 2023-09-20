@@ -26,7 +26,7 @@
                     <div class="d-flex justify-content-between">
                     <h4 class="header-title">नयाँ सिफारिस श्रेणी थप्नुहोस</h4>
                         @can('branch_create')
-                            <a href="{{ route('admin.recommendation.sipharish.index') }}"
+                            <a href="{{ route('admin.recommendation.sipharish.sipharishCategory.index') }}"
                                 class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> सिफारिस श्रेणी सूची
                             </a>
@@ -34,14 +34,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.recommendation.sipharish.update',[$sipharisModel]) }}"
+                    <form action="{{ route('admin.recommendation.sipharish.sipharishCategory.update',$sipharishCategory) }}"
                         method="post">
+                        @method('put')
                         @csrf
                         <div class="row">
                            
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
-                                <input type="text" name="title" value="{{ old('title',$sipharisCategory->title) }}"
+                                <input type="text" name="title" value="{{ old('title',$getSipharisCategory->title) }}"
                                     class="form-control @error('title') is-invalid @enderror" id="name"
                                     placeholder="शिर्षक" required />
                                 @error('title')

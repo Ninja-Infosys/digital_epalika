@@ -9,12 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SignatureDetail extends Model
+class SipharishCreate extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
-    public $table = 'sipharis_signature_detail';
 
     protected $dates = [
         'created_at',
@@ -23,10 +22,21 @@ class SignatureDetail extends Model
     ];
 
     protected $fillable = [
-        'full_name',
-        'position',
-        'signature',
-        'status',
-        'created_by'
+        'sipharis_form_type_id',
+        'personal_detail_id',
+        'signatured_by',
+        'approved_by',
+        'approved_date',
+        'approved_status',
+        'created_by',
+        'status'
     ];
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function formValues()
+    {
+        return $this->hasMany(SipharishCreatedValue::class, 'sipharish_create_id');
+    }
 }

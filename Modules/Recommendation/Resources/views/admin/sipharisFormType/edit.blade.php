@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> सिफारिस दर्ता गर्नुहोस</h4>
-                        <a href="{{ route('admin.recommendation.sipharish.form-type.index') }}"
+                        <a href="{{ route('admin.recommendation.sipharish.sipharishFormType.index') }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.recommendation.sipharish.form-type.update',$sipharisFormTypeModel) }}" method="post">
+                    <form action="{{ route('admin.recommendation.sipharish.sipharishFormType.update',$sipharishFormType) }}" method="post">
                         @csrf
 							@method("PUT")
                         <fieldset>
@@ -70,7 +70,7 @@
                                             <option value="">-- छान्नुहोस् --</option>
                                             @foreach ($sipharishSubCategories as $sipharishCategory)
                                                 <option
-                                                    {{ $sipharishCategory->id == old('sipharis_sub_category_id',$getOnesipharisSubCategory->id) ? 'selected' : '' }}
+                                                    {{ $sipharishCategory->id == old('sipharis_sub_category_id',$fields->sipharis_sub_category_id) ? 'selected' : '' }}
                                                     value="{{ $sipharishCategory->id }}">{{ $sipharishCategory->title }}
                                                 </option>
                                             @endforeach
@@ -84,7 +84,7 @@
 
                                 <div class="col-md-4 mb-2">
                                     <label for="title" class="form-label">शिर्षक <span class="text-danger">*</span></label>
-                                        <input type="text" name="title" value="{{ old('title',$sipharishFormType->title) }}"
+                                        <input type="text" name="title" value="{{ old('title',$fields->title) }}"
                                         class="form-control @error('title') is-invalid @enderror" id="title"
                                         placeholder="शिर्षक" />
                                 </div>
@@ -101,8 +101,8 @@
                                         <select id="personal_detail_id" name="status"
                                             class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            <option value="active" {{old('status',$sipharishFormType->status) == 'active'?'selected':''}}>Active</option>
-									        <option value="inactive" {{old('status',$sipharishFormType->status) == 'inactive'?'selected':''}}>Inactive</option>
+                                            <option value="1" {{old('status',$fields->status) == '1'?'selected':''}}>Active</option>
+									        <option value="0" {{old('status',$fields->status) == '0'?'selected':''}}>Inactive</option>
                                         </select>
                                         
                                     </div>
@@ -117,8 +117,8 @@
                                         <select id="personal_detail_id" name="need_approval"
                                             class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            <option value="yes" {{old('need_approval',$sipharishFormType->need_approval) == 'yes'?'selected':''}}>Yes</option>
-									        <option value="no" {{old('need_approval',$sipharishFormType->need_approval) == 'no'?'selected':''}}>No</option>
+                                            <option value="1" {{old('need_approval',$fields->need_approval) == '1'?'selected':''}}>Yes</option>
+									        <option value="0" {{old('need_approval',$fields->need_approval) == '0'?'selected':''}}>No</option>
                                         </select>
                                         
                                     </div>
@@ -133,7 +133,7 @@
                             <div class="col-md-12 mb-2">
                                 <label for="recommendation_data" class="form-label">डाटा <span class="text-danger">*</span></label>
                                 <textarea name="content" id="recommendation_data" required cols="30" rows="10"
-                                    class="form-control ckEditor @error('content') is-invalid @enderror">{{ old('content',$sipharishFormType->content) }}</textarea>
+                                    class="form-control ckEditor @error('content') is-invalid @enderror">{{ old('content',$fields->content) }}</textarea>
                                 @error('content')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -152,7 +152,7 @@
                                     </div>
                                     <fieldset class="bg-soft-secondary">
                                         <div id="files">
-                                            @foreach($formFields as $key=>$formField)
+                                            @foreach($fields->formFields as $key=>$formField)
                                             <div class="main">
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-sm btn-outline-danger"
@@ -174,8 +174,8 @@
                                                     <select id="personal_detail_id" name="field[{{$key}}][status]"
                                                             class="form-select personalDetail">
                                                         <option value="">-- छान्नुहोस् --</option>
-                                                        <option value="active" {{$formField->status == 'active'?'selected':''}}>Active</option>
-                                                        <option value="inactive" {{$formField->status == 'inactive'?'selected':''}}>Inactive</option>
+                                                        <option value="1" {{$formField->status == '1'?'selected':''}}>Active</option>
+                                                        <option value="0" {{$formField->status == '0'?'selected':''}}>Inactive</option>
                                                     </select>
                                                     </div>
                                                 </div>

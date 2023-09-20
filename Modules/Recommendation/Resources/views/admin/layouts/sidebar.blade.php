@@ -152,7 +152,7 @@
         <ul class="nav-second-level">
             @can('recommendationCategory_access')
                 <li class="{{request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.index')}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishCategory.index')}}">
                         <span>सिफारिस श्रेणी</span>
                     </a>
                 </li>
@@ -160,22 +160,30 @@
             @endcan
             @can('recommendationCategory_access')
                 <li class="{{request()->is('admin/recommendation/sipharish/sipharishSubCategory*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.subcategory.index')}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishSubCategory.index')}}">
                         <span>सिफारिस उप-श्रेणी</span>
                     </a>
                 </li>
             @endcan
             @can('recommendationSetting_access')
                 <li class="{{request()->is('admin/recommendation/sipharish/sipharishFormType*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.form-type.index')}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishFormType.index')}}">
                         <span>सेटिङ</span>
                     </a>
                 </li>
             @endcan
             @can('recommendationSetting_access')
                 <li class="{{request()->is('admin/recommendation/sipharish/sipharishSignature*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.signature.index')}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishSignature.index')}}">
                         <span>हस्ताक्षर सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('recommendationSetting_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishCreate.create')}}">
+                        <span>सिफारिस सिर्जना गर्नुहोस्</span>
                     </a>
                 </li>
             @endcan

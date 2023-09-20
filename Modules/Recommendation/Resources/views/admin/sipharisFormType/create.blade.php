@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.recommendation.sipharish.form-type.store') }}" method="post">
+                    <form action="{{ route('admin.recommendation.sipharish.sipharishFormType.store') }}" method="post">
                         @csrf
                         <fieldset>
                             <legend>
@@ -66,8 +66,8 @@
                                         <select id="personal_detail_id" name="status"
                                             class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            <option value="active" {{old('status') == 'active'?'selected':''}}>Active</option>
-									        <option value="inactive" {{old('status') == 'active'?'selected':''}}>Inactive</option>
+                                            <option value="1" {{old('status') == '1'?'selected':''}}>Active</option>
+									        <option value="0" {{old('status') == '0'?'selected':''}}>Inactive</option>
                                         </select>
                                         
                                     </div>
@@ -82,8 +82,8 @@
                                         <select id="personal_detail_id" name="need_approval"
                                             class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            <option value="yes" {{old('status') == 'yes'?'selected':''}}>Yes</option>
-									        <option value="no" {{old('status') == 'no'?'selected':''}}>No</option>
+                                            <option value="1" {{old('need_approval') == '1'?'selected':''}}>Yes</option>
+									        <option value="0" {{old('need_approval') == '0'?'selected':''}}>No</option>
                                         </select>
                                         
                                     </div>
@@ -135,8 +135,8 @@
                                                     <select id="personal_detail_id" name="field[][status]"
                                                             class="form-select personalDetail">
                                                         <option value="">-- छान्नुहोस् --</option>
-                                                        <option value="active" {{old('status') == 'active'?'selected':''}}>Active</option>
-                                                        <option value="inactive" {{old('status') == 'active'?'selected':''}}>Inactive</option>
+                                                        <option value="1" {{old('status') == '1'?'selected':''}}>Active</option>
+                                                        <option value="0" {{old('status') == '0'?'selected':''}}>Inactive</option>
                                                     </select>
                                                     </div>
                                                 </div>

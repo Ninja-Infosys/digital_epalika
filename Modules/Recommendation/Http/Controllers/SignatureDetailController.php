@@ -2,61 +2,73 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
-use Modules\Recommendation\Entities\SipharisCategory;
-use Modules\Recommendation\Entities\SignatureDetail;
+use Modules\Recommendation\Entities\SipharisSignatureDetail;
 use Modules\Recommendation\Http\Requests\SignatureDetail\StoreSignatureRequest;
 use Modules\Recommendation\Http\Requests\SignatureDetail\UpdateSignatureRequest;
-use Modules\Recommendation\Http\Requests\SipharisCategory\StoreSipharisCategoryRequest;
-use Modules\Recommendation\Http\Requests\SipharisCategory\UpdateSipharisCategoryRequest;
 use Illuminate\Support\Facades\DB;
 
 class SignatureDetailController extends Controller
 {
-    use NepaliDateConverter;
 
     public function index(){
-        $signatureDetails = SignatureDetail::all();
+        $signatureDetails = SipharisSignatureDetail::all();
         return view('recommendation::admin.signatureDetail.index', compact('signatureDetails'));
     }
 
     public function create(){
         return view('recommendation::admin.signatureDetail.create');
     }
-    public function store(StoreSignatureRequest $signatureStoreRequest){
+    public function store(StoreSignatureRequest $signatureStoreRequest)
+    {
+       // dd($signatureStoreRequest->all());
         $this->checkAuthorization('recommendationCategory_create');
-        if ($signatureStoreRequest->hasFile('signature')) {
-        }
-        SignatureDetail::create($signatureStoreRequest->validated() +[
+        
+        SipharisSignatureDetail::create($signatureStoreRequest->validated() +[
             'created_by' => auth()->id(),
-            //'status'=>'active'
+            'status'=>true
             ]);
             toast('सिफारिस सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
-    public function edit(SignatureDetail $signatureDetail){
+    public function edit(SipharisSignatureDetail $sipharishSignature){
         $this->checkAuthorization('recommendationCategory_edit');
-        $getSignature = SignatureDetail::find($signatureDetail->id);
-        return view('recommendation::admin.signatureDetail.edit',compact('getSignature','signatureDetail'));
+        $getSignature = $sipharishSignature;
+        return view('recommendation::admin.signatureDetail.edit',compact('getSignature','sipharishSignature'));
 
     }
-    public function update(UpdateSignatureRequest $signatureUpdateRequest,SignatureDetail $signatureDetail){
+    public function update(UpdateSignatureRequest $signatureUpdateRequest,SipharisSignatureDetail $sipharishSignature)
+    {
+        if ($signatureUpdateRequest->hasFile('signature') && $sipharishSignature->getRawOriginal('signature')) {
+            $this->deleteFile($sipharishSignature->getRawOriginal('signature'));
+        }
         $this->checkAuthorization('recommendationCategory_edit');
-        $signatureDetail->update($signatureUpdateRequest->validated());
+        $sipharishSignature->update($signatureUpdateRequest->validated());
         toast('सिफारिस हस्ताक्षर अद्यावधिक गरियो', 'success');
         return back();
     }
 
-    public function updateStatus($signatureDetail)
+    public function updateStatus(SipharisSignatureDetail $sipharishSignature)
     {
         $this->checkAuthorization('recommendationTemplate_access');
        
-        $getSignature = SignatureDetail::find($signatureDetail);
-        
-        $getSignature->update(['status'=> $getSignature->status == 'active'? 'inactive':'active']);
+        $sipharishSignature->update([
+            'status' => !$sipharishSignature->status
+        ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+    public function destroy(SipharisSignatureDetail $sipharishSignature)
+    {
+        $this->checkAuthorization('recommendationCategory_delete');
+        if ($sipharishSignature->status == 1) {
+            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
+
+            return back();
+        }
+        $sipharishSignature->delete();
+        toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 

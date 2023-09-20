@@ -15,7 +15,6 @@ class SipharisFormFields extends Model
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
-    public $table = 'sipharis_form_fields';
 
     protected $dates = [
         'created_at',
@@ -36,6 +35,6 @@ class SipharisFormFields extends Model
 
     public function formType()
     {
-        return $this -> belongsTo(SipharisFormType::class, 'billing_id');
+        return $this -> belongsTo(SipharisFormType::class, 'sipharish_form_type_id');
     }
 }

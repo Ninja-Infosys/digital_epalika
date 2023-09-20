@@ -19,7 +19,7 @@ class UpdateSignatureRequest extends FormRequest
             'full_name' => ['required', 'string'],
             'position' => ['required', 'string'],
             //'status'=>['required',Rule::in(['active', 'inactive'])],
-            'signature'=>['nullable|image|mimes:jpeg,png,jpg,gif|max:2048']
+            'signature'=>['nullable','image']
         ];
     }
 }

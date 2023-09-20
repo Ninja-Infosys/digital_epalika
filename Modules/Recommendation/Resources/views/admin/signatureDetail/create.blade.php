@@ -28,13 +28,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">हस्ताक्षर  थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.sipharish.signature.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.recommendation.sipharish.sipharishSignature.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>  हस्ताक्षर सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.recommendation.sipharish.signature.store')}}" method="post"
+                    <form action="{{route('admin.recommendation.sipharish.sipharishSignature.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
@@ -77,15 +77,12 @@
                                     <label for="files" class="form-label">फाईल </label>
                                     <input
                                         type="file"
-                                        name="files[]"
-                                        class="form-control @error('files') is-invalid @enderror"
-                                        id="files"
+                                        name="signature"
+                                        class="form-control @error('signature') is-invalid @enderror"
+                                        id="signature"
 
                                     />
-                                    @error('files')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                    @error('files.*')
+                                    @error('signature')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -94,8 +91,8 @@
                                     <select id="personal_detail_id" name="status"
                                       class="form-select personalDetail">
                                        <option value="">-- छान्नुहोस् --</option>
-                                        <option value="active" {{old('status') == 'active'?'selected':''}}>Active</option>
-                                         <option value="inactive" {{old('status') == 'active'?'selected':''}}>Inactive</option>
+                                        <option value="1" {{old('status') == '1'?'selected':''}}>Active</option>
+                                         <option value="0" {{old('status') == 'active'?'1':''}}>Inactive</option>
                                          </select>
                                     </div>
                             </div>

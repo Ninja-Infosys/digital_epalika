@@ -23,40 +23,51 @@ class SipharishCategoryController extends Controller
         $this->checkAuthorization('recommendationCategory_create');
         return view('recommendation::admin.sipharishCategory.create');
     }
-    public function store(StoreSipharisCategoryRequest $sipharishStoreRequest,SipharisCategory $sipharisModel){
+    public function store(StoreSipharisCategoryRequest $sipharishStoreRequest,SipharisCategory $sipharishCategory){
         $this->checkAuthorization('recommendationCategory_create');
         SipharisCategory::create($sipharishStoreRequest->validated() +[
             'created_by' => auth()->id(),
-            'status'=>'active'
+            'status'=>true
             ]);
             toast('सिफारिस सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
-    public function edit(SipharisCategory $sipharisModel){
+    public function edit(SipharisCategory $sipharishCategory){
         $this->checkAuthorization('recommendationCategory_edit');
-        $sipharisCategory = SipharisCategory::find($sipharisModel->id);
-        return view('recommendation::admin.sipharishCategory.edit',compact('sipharisCategory','sipharisModel'));
+        $getSipharisCategory = SipharisCategory::find($sipharishCategory->id);
+        return view('recommendation::admin.sipharishCategory.edit',compact('sipharishCategory','getSipharisCategory'));
 
     }
-    public function update(UpdateSipharisCategoryRequest $sipharishUpdateRequest,SipharisCategory $sipharisModel){
+    public function update(UpdateSipharisCategoryRequest $sipharishUpdateRequest,SipharisCategory $sipharishCategory){
         $this->checkAuthorization('recommendationCategory_edit');
-        $sipharisModel->update($sipharishUpdateRequest->validated());
+        $sipharishCategory->update($sipharishUpdateRequest->validated());
         toast('सिफारिस सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 
-    public function updateStatus($sipharisCategory)
+    public function updateStatus(SipharisCategory  $sipharisModel)
     {
         $this->checkAuthorization('recommendationTemplate_access');
        
-        $getSipharisCategory = SipharisCategory::find($sipharisCategory);
-        if($getSipharisCategory->status == 'active'){
-            $getSipharisCategory->update(['status'=>'inactive']);
-        }else{
-            $getSipharisCategory->update(['status'=>'active']);
-        }
+       // $getSipharisCategory = $sipharisModel->find($sipharisModel->id);
+        $sipharisModel->update([
+            'status' => !$sipharisModel->status
+        ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function destroy(SipharisCategory $sipharishCategory)
+    {
+        $this->checkAuthorization('recommendationCategory_delete');
+        if ($sipharishCategory->status == 1) {
+            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
+
+            return back();
+        }
+        $sipharishCategory->delete();
+        toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 

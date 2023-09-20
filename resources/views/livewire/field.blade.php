@@ -95,9 +95,9 @@
           <div class="d-flex justify-content-between gap-1">
             <select id="personal_detail_id" name="status" class="form-select personalDetail" required>
               <option value="">-- छान्नुहोस् --</option>
-              <option value="active" {{old('status')=='active' ?'selected':''}}>Active
+              <option value="1" {{old('status')=='1' ?'selected':''}}>Active
               </option>
-              <option value="inactive" {{old('status')=='active' ?'selected':''}}>Inactive
+              <option value="0" {{old('status')=='0' ?'selected':''}}>Inactive
               </option>
             </select>
 
@@ -116,7 +116,7 @@
     <div class="col-md-12 mb-2">
       <fieldset class="bg-soft-secondary">
         <div id="files">
-          @foreach($fields as $key=>$field)
+          @foreach($fields->formFields ?? [] as $key=>$field)
           <div class="main">
 
             <div class="row border-bottom mb-2">

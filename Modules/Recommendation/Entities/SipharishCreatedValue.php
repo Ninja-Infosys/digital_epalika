@@ -9,12 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SipharisCreatedValue extends Model
+class SipharishCreatedValue extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
-    public $table = 'sipharish_created_value';
 
     protected $dates = [
         'created_at',
@@ -23,9 +22,14 @@ class SipharisCreatedValue extends Model
     ];
 
     protected $fillable = [
-        'sipharish_created_id',
+        'sipharish_create_id',
         'sipharish_form_fields_id',
         'value',
         'status'
     ];
+
+    public function sipharisCreated()
+    {
+        return $this->belongsTo(SipharishCreate::class, 'sipharish_create_id');
+    }
 }

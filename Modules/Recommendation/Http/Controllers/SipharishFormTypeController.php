@@ -6,7 +6,7 @@ use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharisSubCategory;
-use Modules\Recommendation\Entities\SipharisFormType;
+use Modules\Recommendation\Entities\SipharishFormType;
 use Modules\Recommendation\Entities\SipharisFormFields;
 use Modules\Recommendation\Http\Requests\SipharisFormType\StoreSipharisFormTypeRequest;
 use Modules\Recommendation\Http\Requests\SipharisCategory\StoreSipharisCategoryRequest;
@@ -21,7 +21,8 @@ class SipharishFormTypeController extends Controller
 
     public function index(){
         $this->checkAuthorization('recommendationCategory_access');
-        $sipharishFormTypes = SipharisFormType::getSipharisFormTypes();
+        $sipharishFormTypes = SipharishFormType::with("subCategories")->get();
+        //$sipharishFormTypes = SipharishFormType::getSipharisFormTypes();
         return view('recommendation::admin.sipharisFormType.index', compact('sipharishFormTypes'));
     }
 
@@ -34,17 +35,16 @@ class SipharishFormTypeController extends Controller
             \DB::beginTransaction();
            $filter =  $sipharishStoreRequest->only('title','sipharis_sub_category_id','content','need_approval','status');
             $formType = $sipharishStoreRequest->validated()['field'];
-            $sipharis = SipharisFormType::create($filter +[
-            'created_by' => auth()->id(),
-            'status'=>'active'
+            $sipharis = SipharishFormType::create($filter +[
+            'created_by' => auth()->id()
             ]);
             if($sipharis){
             foreach($formType as $data){
             //dd($data);die;
-            SipharisFormFields::create([
+            $sipharis->formFields()->create([
                 'sipharish_form_type_id'=>$sipharis->id,
                 'field_name'=>$data['field_name'],
-                'status'    =>$data['status'] ?? 'active',
+                'status'    =>$data['status'] ?? true,
                 'created_by' => auth()->id(),
                 ]);
             }
@@ -59,43 +59,31 @@ class SipharishFormTypeController extends Controller
         
     }
 
-    public function edit(SipharisFormType $sipharisFormTypeModel){
+    public function edit(SipharishFormType $sipharishFormType){
         \DB::beginTransaction();
-        $sipharishFormType = SipharisFormType::find($sipharisFormTypeModel->id);
-       // dd($sipharishFormType);
+        //$sipharishFormType = SipharishFormType::find($sipharisFormTypeModel->id);
         $sipharishCategories = SipharisCategory::all();
         $sipharishSubCategories = SipharisSubCategory::all();
-        $formFields = SipharisFormFields::getFormFieldByFormType($sipharisFormTypeModel->id);
-        $getOnesipharisSubCategory = SipharisCategory::where('id',$sipharishFormType->sipharis_sub_category_id)->first();
+        $fields = $sipharishFormType->with('formFields')->where('id',$sipharishFormType->id)->first();
         return view('recommendation::admin.sipharisFormType.edit',
-        compact('sipharishFormType','sipharisFormTypeModel','getOnesipharisSubCategory','sipharishCategories','formFields','sipharishSubCategories'));
+        compact('sipharishFormType','sipharishCategories','fields','sipharishSubCategories'));
 
     }
-    public function update(StoreSipharisFormTypeRequest $sipharishStoreRequest,SipharisFormType $sipharisFormTypeModel){
-        //dd($sipharisFormTypeModel);
+    public function update(StoreSipharisFormTypeRequest $sipharishStoreRequest,SipharishFormType $sipharishFormType){
         $formType = $sipharishStoreRequest->validated()['field'];
         $data = $sipharishStoreRequest->only('title','sipharis_sub_category_id','content','need_approval','status');
-        //dd($formType);
         $this->checkAuthorization('recommendationCategory_edit');
-        $type = $sipharisFormTypeModel->update($data);
+        $type = $sipharishFormType->update($data);
         if($type){
-            foreach($formType as $data){
-            //dd($data);die;
-            if($data['id'] == null){
-                SipharisFormFields::create([
-                'sipharish_form_type_id'=>$sipharisFormTypeModel->id,
-                'field_name'=>$data['field_name'],
-                'status'    =>$data['status'] ?? 'active',
-                'created_by' => auth()->id(),
-                ]);
-            }else{
-                SipharisFormFields::where('id',$data['id'])->update([
-                'sipharish_form_type_id'=>$sipharisFormTypeModel->id,
-                'field_name'=>$data['field_name'],
-                'status'    =>$data['status'] ?? 'active',
-                'created_by' => auth()->id(),
-                ]);
-            }
+            foreach($formType as $formData){
+            $saveOrUpdate = $sipharishFormType->formFields()->updateOrCreate(
+                ['id'=>$formData['id']],
+                [
+                'field_name'=>$formData['field_name'],
+                'status'    =>$formData['status'] ?? 1,
+                'created_by' => auth()->id()
+                ]
+            );
             
             }
         }else{
@@ -108,17 +96,27 @@ class SipharishFormTypeController extends Controller
         return back();
     }
 
-    public function updateStatus($sipharishFormType)
+    public function updateStatus(SipharishFormType $sipharisFormType)
     {
         $this->checkAuthorization('recommendationTemplate_access');
        
-        $getsipharishFormType = SipharisFormType::find($sipharishFormType);
-        if($getSipharisCategory->status == 'active'){
-            $sipharishFormType->update(['status'=>'inactive']);
-        }else{
-            $sipharishFormType->update(['status'=>'active']);
-        }
+        $sipharisFormType->update([
+            'status' => !$sipharisFormType->status
+        ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function destroy(SipharishFormType $sipharishFormType)
+    {
+        $this->checkAuthorization('recommendationCategory_delete');
+        if ($sipharishFormType->status == 1) {
+            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
+
+            return back();
+        }
+        $sipharishFormType->delete();
+        toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 

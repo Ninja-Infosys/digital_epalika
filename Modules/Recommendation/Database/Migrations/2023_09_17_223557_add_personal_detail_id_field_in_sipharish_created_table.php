@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('sipharish_created', function (Blueprint $table) {
-            $table->foreignId('personal_detail_id')->nullable()->references('id')->on('personal_details')->onDelete('cascade');
+        Schema::table('sipharish_creates', function (Blueprint $table) {
+            $table->foreignId('personal_detail_id')->constrained('personal_details')->onDelete('cascade');
 
         });
     }

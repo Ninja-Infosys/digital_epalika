@@ -36,8 +36,8 @@ class Category extends Component
        // }
 
        
-        $this->sipharishCategories = SipharisCategory::getActiveSipharis();
-        $this->sipharishSubCategories = SipharisSubCategory::getActiveSubCategory();
+        $this->sipharishCategories = SipharisCategory::active()->get();
+        $this->sipharishSubCategories = SipharisSubCategory::active()->get();
         
 
         return view('livewire.category');

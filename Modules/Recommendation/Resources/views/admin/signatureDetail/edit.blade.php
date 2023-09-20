@@ -28,15 +28,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">हस्ताक्षर  थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.sipharish.signature.create')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.recommendation.sipharish.sipharishSignature.create')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>  हस्ताक्षर सम्पादन गर्नुहोस्
 
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.recommendation.sipharish.signature.update',$signatureDetail)}}" method="post"
+                    <form action="{{route('admin.recommendation.sipharish.sipharishSignature.update',$sipharishSignature)}}" method="post"
                           enctype="multipart/form-data">
+                          @method('put')
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">

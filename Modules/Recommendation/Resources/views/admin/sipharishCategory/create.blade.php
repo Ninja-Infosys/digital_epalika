@@ -26,7 +26,7 @@
                     <div class="d-flex justify-content-between">
                     <h4 class="header-title">नयाँ सिफारिस श्रेणी थप्नुहोस</h4>
                         @can('branch_create')
-                            <a href="{{ route('admin.recommendation.sipharish.index') }}"
+                            <a href="{{ route('admin.recommendation.sipharish.sipharishCategory.index') }}"
                                 class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> सिफारिस श्रेणी सूची
                             </a>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.recommendation.sipharish.store') }}"
+                    <form action="{{ route('admin.recommendation.sipharish.sipharishCategory.store') }}"
                         method="post">
                         @csrf
                         <div class="row">

@@ -14,7 +14,6 @@ class SipharisSubCategory extends Model
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
-    public $table = 'sipharis_sub_category';
 
     protected $dates = [
         'created_at',
@@ -28,6 +27,9 @@ class SipharisSubCategory extends Model
         'status',
         'created_by'
     ];
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     public static function getSipharisSubCategoryByCategoryId($id){
         return self::select('id','title','sipharis_category_id')->where('sipharis_category_id',$id)->get();
@@ -36,5 +38,18 @@ class SipharisSubCategory extends Model
 
     public static function getActiveSubCategory(){
         return self::select('id','title','sipharis_category_id')->get();
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+    public function categories()
+    {
+        return $this->belongsTo(SipharisCategory::class, 'sipharis_category_id');
+    }
+
+    public function formTypes()
+    {
+    return $this->hasMany(SipharishFormType::class, 'sipharis_sub_category_id');
     }
 }

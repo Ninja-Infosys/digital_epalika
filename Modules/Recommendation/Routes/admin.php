@@ -31,37 +31,43 @@ Route::prefix('setting')->as('setting.')->group(function () {
 Route::post('registrationDetail/{registrationDetail}/ocFile', [RegistrationDetailController::class,'ocFile'])->name('registrationDetail.ocFile');
 Route::resource('recommendationCategory.registrationDetail', RegistrationDetailController::class);
 
-Route::get('sipharish/sipharishCategory',[SipharishCategoryController::class,'index'])->name('sipharish.index');
-Route::get('sipharish/sipharishCategory/create',[SipharishCategoryController::class,'create'])->name('sipharish.create');
-Route::post('sipharish/sipharishCategory/store',[SipharishCategoryController::class,'store'])->name('sipharish.store');
-Route::get('sipharish/sipharishCategory/toggleStatus/{recommendationCategory}',[SipharishCategoryController::class,'updateStatus'])->name('sipharish.updateStatus');
-Route::get('sipharish/sipharishCategory/edit/{sipharisModel}',[SipharishCategoryController::class,'edit'])->name('sipharish.edit');
-Route::post('sipharish/sipharishCategory/update/{sipharisModel}',[SipharishCategoryController::class,'update'])->name('sipharish.update');
+Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::resource('sipharishCategory', SipharishCategoryController::class);
+    Route::get('sipharish/sipharishCategory/toggleStatus/{sipharisModel}',[SipharishCategoryController::class,'updateStatus'])->name('sipharishCategory.updateStatus');
+
+});
 
 
-Route::get('sipharish/sipharishSubCategory',[SipharisSubCategoryController::class,'index'])->name('sipharish.subcategory.index');
-Route::get('sipharish/sipharishSubCategory/create',[SipharisSubCategoryController::class,'create'])->name('sipharish.subcategory.create');
-Route::post('sipharish/sipharishSubCategory/store',[SipharisSubCategoryController::class,'store'])->name('sipharish.subcategory.store');
-Route::get('sipharish/sipharishSubCategory/toggleStatus/{recommendationCategory}',[SipharisSubCategoryController::class,'updateStatus'])->name('sipharish.subcategory.updateStatus');
-Route::get('sipharish/sipharishSubCategory/edit/{siphariSubsModel}',[SipharisSubCategoryController::class,'edit'])->name('sipharish.subcategory.edit');
-Route::post('sipharish/sipharishSubCategory/update/{siphariSubsModel}',[SipharisSubCategoryController::class,'update'])->name('sipharish.subcategory.update');
+Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::resource('sipharishSubCategory', SipharisSubCategoryController::class);
+    Route::get('sipharish/sipharishSubCategory/toggleStatus/{sipharisSubCategory}',[SipharisSubCategoryController::class,'updateStatus'])->name('sipharishSubCategory.updateStatus');
 
-Route::get('sipharish/sipharishFormType',[SipharishFormTypeController::class,'index'])->name('sipharish.form-type.index');
-Route::get('sipharish/sipharishFormType/create',[SipharishFormTypeController::class,'create'])->name('sipharish.form-type.create');
-Route::post('sipharish/sipharishFormType/store',[SipharishFormTypeController::class,'store'])->name('sipharish.form-type.store');
-Route::get('sipharish/sipharishFormType/edit/{sipharisFormTypeModel}',[SipharishFormTypeController::class,'edit'])->name('sipharish.form-type.edit');
-Route::put('sipharish/sipharishFormType/update/{sipharisFormTypeModel}',[SipharishFormTypeController::class,'update'])->name('sipharish.form-type.update');
+});
+
+Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::resource('sipharishFormType', SipharishFormTypeController::class);
+    Route::get('sipharish/sipharishFormType/toggleStatus/{sipharisFormType}',[SipharishFormTypeController::class,'updateStatus'])->name('sipharishFormType.updateStatus');
+
+});
+
+Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::resource('sipharishSignature', SignatureDetailController::class);
+    Route::get('sipharish/sipharishSignature/toggleStatus/{sipharishSignature}',[SignatureDetailController::class,'updateStatus'])->name('sipharishSignature.updateStatus');
+
+});
+
+Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::resource('sipharishCreate', SipharisCreateController::class);
+    //Route::get('sipharish/sipharishCreate/toggleStatus/{sipharishSignature}',[SignatureDetailController::class,'updateStatus'])->name('sipharishSignature.updateStatus');
+
+});
+
 
 
 Route::get('sipharish/sipharishFormFields/create/{formType}',[SipharisFormFieldsController::class,'create'])->name('sipharish.form-fields.create');
 Route::post('sipharish/sipharishFormFields/store/{sipharis}',[SipharisFormFieldsController::class,'store'])->name('sipharish.form-fields.store');
 
-Route::get('sipharish/sipharishSignature',[SignatureDetailController::class,'index'])->name('sipharish.signature.index');
-Route::get('sipharish/sipharishSignature/create',[SignatureDetailController::class,'create'])->name('sipharish.signature.create');
-Route::post('sipharish/sipharishSignature/store',[SignatureDetailController::class,'store'])->name('sipharish.signature.store');
-Route::get('sipharish/sipharishSignature/edit/{signatureDetail}',[SignatureDetailController::class,'edit'])->name('sipharish.signature.edit');
-Route::post('sipharish/sipharishSignature/update/{signatureDetail}',[SignatureDetailController::class,'update'])->name('sipharish.signature.update');
-Route::get('sipharish/sipharishSignature/toggleStatus/{signatureDetail}',[SignatureDetailController::class,'updateStatus'])->name('sipharish.signature.updateStatus');
+
 
 
 Route::get('sipharish/sipharishCreate/create',[SipharisCreateController::class,'create'])->name('sipharish.sipharishCreate.create');

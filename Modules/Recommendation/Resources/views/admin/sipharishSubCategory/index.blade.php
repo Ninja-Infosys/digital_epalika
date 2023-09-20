@@ -27,7 +27,7 @@
                         <h4 class="header-title">सिफारिस उप श्रेणी
                             सूची</h4>
                         @can('recommendationCategory_create')
-                            <a href="{{ route('admin.recommendation.sipharish.subcategory.create') }}"
+                            <a href="{{ route('admin.recommendation.sipharish.sipharishSubCategory.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i>
                                 नयाँ सिफारिस उप श्रेणी  थप्नुहोस
@@ -52,30 +52,30 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        {{ $sipharisSubCategory->category_title ?? '' }}
+                                        {{ $sipharisSubCategory->title ?? '' }}
                                     </td>
                                     <td>
-                                        {{ $sipharisSubCategory->sub_category_title ?? '' }}
+                                        {{ $sipharisSubCategory->categories->title ?? '' }}
                                     </td>
                                        
                                     <td>
                                         @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.subcategory.updateStatus',[$sipharisSubCategory->id])}}">
-                                                <i class="fa fa-2x {{ $sipharisSubCategory->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishSubCategory.updateStatus',$sipharisSubCategory)}}">
+                                                <i class="fa fa-2x {{ $sipharisSubCategory->status == true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td>
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.sipharish.subcategory.edit', [$sipharisSubCategory->id]) }}"
+                                               href="{{ route('admin.recommendation.sipharish.sipharishSubCategory.edit', $sipharisSubCategory) }}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
                                         <form
-                                            action="{{ route('admin.recommendation.setting.recommendationCategory.destroy', ['sss',$sipharisSubCategory]) }}"
+                                            action="{{ route('admin.recommendation.sipharish.sipharishSubCategory.destroy', $sipharisSubCategory) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')

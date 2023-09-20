@@ -18,8 +18,8 @@ class StoreSignatureRequest extends FormRequest
         return [
             'full_name' => ['required', 'string'],
             'position' => ['required', 'string'],
-            'status'=>['required',Rule::in(['active', 'inactive'])],
-            'signature'=>['nullable|image|mimes:jpeg,png,jpg,gif|max:2048']
+            'status'=>['required'],
+            'signature'=>['nullable','image']
         ];
     }
 }
