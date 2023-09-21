@@ -19,59 +19,29 @@ use Modules\Recommendation\Http\Controllers\SignatureDetailController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::prefix('setting')->as('setting.')->group(function () {
-    Route::resource('recommendationSetting', RecommendationSettingController::class)->only(['index','update']);
+    Route::resource('recommendationSetting', RecommendationSettingController::class)->only(['index', 'update']);
     Route::get('{type}/recommendationCategory/{recommendationCategory}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
-    Route::get('recommendationCategory/{recommendationCategory}/getTemplate', [RecommendationCategoryController::class,'getTemplateData'])->name('recommendationCategory.getTemplate');
-    Route::get('{type}/recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class,'updateStatus'])->name('recommendationCategory.updateStatus');
+    Route::get('recommendationCategory/{recommendationCategory}/getTemplate', [RecommendationCategoryController::class, 'getTemplateData'])->name('recommendationCategory.getTemplate');
+    Route::get('{type}/recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class, 'updateStatus'])->name('recommendationCategory.updateStatus');
     Route::resource('{type}/recommendationCategory', RecommendationCategoryController::class);
     Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
     Route::resource('personalDetail', PersonalDetailController::class);
 });
 
-Route::post('registrationDetail/{registrationDetail}/ocFile', [RegistrationDetailController::class,'ocFile'])->name('registrationDetail.ocFile');
+Route::post('registrationDetail/{registrationDetail}/ocFile', [RegistrationDetailController::class, 'ocFile'])->name('registrationDetail.ocFile');
 Route::resource('recommendationCategory.registrationDetail', RegistrationDetailController::class);
 
 Route::prefix('sipharish')->as('sipharish.')->group(function () {
     Route::resource('sipharishCategory', SipharishCategoryController::class);
-    Route::get('sipharish/sipharishCategory/toggleStatus/{sipharisModel}',[SipharishCategoryController::class,'updateStatus'])->name('sipharishCategory.updateStatus');
-
-});
-
-
-Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::get('sipharish/sipharishCategory/toggleStatus/{sipharisModel}', [SipharishCategoryController::class, 'updateStatus'])->name('sipharishCategory.updateStatus');
     Route::resource('sipharishSubCategory', SipharisSubCategoryController::class);
-    Route::get('sipharish/sipharishSubCategory/toggleStatus/{sipharisSubCategory}',[SipharisSubCategoryController::class,'updateStatus'])->name('sipharishSubCategory.updateStatus');
-
-});
-
-Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::get('sipharish/sipharishSubCategory/toggleStatus/{sipharisSubCategory}', [SipharisSubCategoryController::class, 'updateStatus'])->name('sipharishSubCategory.updateStatus');
     Route::resource('sipharishFormType', SipharishFormTypeController::class);
-    Route::get('sipharish/sipharishFormType/toggleStatus/{sipharisFormType}',[SipharishFormTypeController::class,'updateStatus'])->name('sipharishFormType.updateStatus');
-
-});
-
-Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::get('sipharish/sipharishFormType/toggleStatus/{sipharisFormType}', [SipharishFormTypeController::class, 'updateStatus'])->name('sipharishFormType.updateStatus');
     Route::resource('sipharishSignature', SignatureDetailController::class);
-    Route::get('sipharish/sipharishSignature/toggleStatus/{sipharishSignature}',[SignatureDetailController::class,'updateStatus'])->name('sipharishSignature.updateStatus');
-
-});
-
-Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::get('sipharish/sipharishSignature/toggleStatus/{sipharishSignature}', [SignatureDetailController::class, 'updateStatus'])->name('sipharishSignature.updateStatus');
     Route::resource('sipharishCreate', SipharisCreateController::class);
-    //Route::get('sipharish/sipharishCreate/toggleStatus/{sipharishSignature}',[SignatureDetailController::class,'updateStatus'])->name('sipharishSignature.updateStatus');
-
 });
-
-
-
-Route::get('sipharish/sipharishFormFields/create/{formType}',[SipharisFormFieldsController::class,'create'])->name('sipharish.form-fields.create');
-Route::post('sipharish/sipharishFormFields/store/{sipharis}',[SipharisFormFieldsController::class,'store'])->name('sipharish.form-fields.store');
-
-
-
-
-Route::get('sipharish/sipharishCreate/create',[SipharisCreateController::class,'create'])->name('sipharish.sipharishCreate.create');
-Route::post('sipharish/sipharishCreate/store',[SipharisCreateController::class,'store'])->name('sipharish.sipharishCreate.store');
 
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {
