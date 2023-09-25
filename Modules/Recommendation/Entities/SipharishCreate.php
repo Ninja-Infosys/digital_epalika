@@ -24,6 +24,7 @@ class SipharishCreate extends Model
     protected $fillable = [
         'sipharis_form_type_id',
         'personal_detail_id',
+        'sipharis_signature_id',
         'signatured_by',
         'approved_by',
         'approved_date',
@@ -48,5 +49,10 @@ class SipharishCreate extends Model
     public function sipharisDocuments()
     {
         return $this->hasMany(SipharisCreatedDocument::class, 'sipharish_create_id');
+    }
+
+    public function signature()
+    {
+        return $this->belongsTo(SipharisSignatureDetail::class, 'sipharis_signature_id');
     }
 }

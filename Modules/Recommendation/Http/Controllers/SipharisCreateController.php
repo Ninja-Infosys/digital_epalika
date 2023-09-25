@@ -35,7 +35,7 @@ class SipharisCreateController extends Controller
     public function store(StoreSipharisCreatedRequest $storeSipharisCreatedRequest){
         //dd($storeSipharisCreatedRequest->all());
             \DB::beginTransaction();
-           $filter =  $storeSipharisCreatedRequest->only('sipharis_form_type_id','personal_detail_id','status');
+           $filter =  $storeSipharisCreatedRequest->only('sipharis_form_type_id','personal_detail_id','sipharis_signature_id','status');
             $formType = $storeSipharisCreatedRequest->validated()['field'];
             $files = $storeSipharisCreatedRequest->validated()['files'];
 //dd($files);
@@ -89,7 +89,8 @@ class SipharisCreateController extends Controller
                         ->where(['sipharish_creates.id'=>$id,'sipharish_created_values.sipharish_create_id'=>$id])
                         ->get();
         
-        $sipharisInfos = SipharishCreate::with(['formTypes','sipharisDocuments'])->where('id',$id)->first();
+        $sipharisInfos = SipharishCreate::with(['formTypes','sipharisDocuments','signature'])->where('id',$id)->first();
+        //dd($sipharisInfos);
         
         return view('recommendation::admin.sipharisCreate.view',compact('formFields','sipharisInfos'));
 

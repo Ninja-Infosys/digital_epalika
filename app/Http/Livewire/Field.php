@@ -7,6 +7,8 @@ use  Modules\Recommendation\Entities\SipharisFormFields;
 use  Modules\Recommendation\Entities\SipharisSubCategory;
 use  Modules\Recommendation\Entities\SipharishFormType;
 use  Modules\Recommendation\Entities\PersonalDetail;
+use  Modules\Recommendation\Entities\SipharisSignatureDetail;
+
 use Log;
 use Livewire\Component;
 
@@ -25,6 +27,7 @@ class Field extends Component
 
     public $fields = [];
     public $personalDetails = [];
+    public $sipharisSignatures = [];
 
     public $selectedCategory = null;
     public $selectedFormType = null;
@@ -40,6 +43,7 @@ class Field extends Component
         }
         $this->sipharishCategories = SipharisCategory::getActiveSipharis();
         $this->personalDetails = PersonalDetail::all();
+        $this->sipharisSignatures = SipharisSignatureDetail::all();
     }
 
     public function render()

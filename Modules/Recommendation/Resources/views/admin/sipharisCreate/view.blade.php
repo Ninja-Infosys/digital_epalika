@@ -43,6 +43,12 @@
                                     <tbody>
 
                                         <?php $ckeditorContent = $sipharisInfos->formTypes->content; ?>
+                                        @php
+                                            $ckeditorContent = replaceFormPlaceholderWith("{{{full_name}}}", $sipharisInfos->signature->full_name, $ckeditorContent)
+                                        @endphp
+                                        @php
+                                            $ckeditorContent = replaceFormPlaceholderWith("{{{position}}}", $sipharisInfos->signature->position, $ckeditorContent)
+                                        @endphp
                                         @foreach($formFields as $key=>$formField)
                                         @php
                                             $ckeditorContent = replaceFormPlaceholderWith("{{" . $formField->field_name . "}}", $formField->value, $ckeditorContent)

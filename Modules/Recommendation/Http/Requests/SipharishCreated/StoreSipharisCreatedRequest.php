@@ -27,6 +27,7 @@ class StoreSipharisCreatedRequest extends FormRequest
                 return [
                     'personal_detail_id'=>'required',
                     'sipharis_form_type_id'       => 'required',
+                    'sipharis_signature_id'       =>'required',
                     'status'                          => 'required',
                     'field' => ['required', 'array'],
                     'files' => ['nullable', 'array']

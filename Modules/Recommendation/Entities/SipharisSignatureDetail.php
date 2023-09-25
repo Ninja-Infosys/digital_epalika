@@ -47,4 +47,9 @@ class SipharisSignatureDetail extends Model
                 : null
         );
     }
+    public function sipharis()
+    {
+        return $this->hasOne(SipharishCreate::class, 'sipharis_signature_id');
+    }
+
 }

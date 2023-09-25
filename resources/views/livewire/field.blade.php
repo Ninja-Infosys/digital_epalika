@@ -85,6 +85,27 @@
           </div>
           @enderror
         </div>
+
+        <div class="col-md-4 mb-2">
+          <label for="personal_detail_id" class="form-label">हस्ताक्षर <span class="text-danger">*</span></label>
+          <div class="d-flex justify-content-between gap-1">
+            <select id="sipharis_signature_id"  name="sipharis_signature_id" class="form-select @error('sipharis_signature_id') is-invalid @enderror" personalDetail" required>
+              <option value="">-- छान्नुहोस् --</option>
+              @foreach ($sipharisSignatures as $sipharisSignature)
+              <option value="{{ $sipharisSignature->id }}">
+                {{ $sipharisSignature->full_name }}
+              </option>
+              @endforeach
+            </select>
+
+          </div>
+          @error('sipharis_signature_id')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        </div>
+
         <div class="col-md-4 mb-2">
           <label for="personal_detail_id" class="form-label">स्थिति <span class="text-danger">*</span></label>
           <div class="d-flex justify-content-between gap-1">
