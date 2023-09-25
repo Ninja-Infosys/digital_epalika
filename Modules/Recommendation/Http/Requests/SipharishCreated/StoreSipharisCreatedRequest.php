@@ -29,6 +29,7 @@ class StoreSipharisCreatedRequest extends FormRequest
                     'sipharis_form_type_id'       => 'required',
                     'status'                          => 'required',
                     'field' => ['required', 'array'],
+                    'files' => ['nullable', 'array']
                 ];
                 break;
         }

@@ -39,4 +39,14 @@ class SipharishCreate extends Model
     {
         return $this->hasMany(SipharishCreatedValue::class, 'sipharish_create_id');
     }
+
+     public function formTypes()
+    {
+        return $this->belongsTo(SipharishFormType::class, 'sipharis_form_type_id');
+    }
+
+    public function sipharisDocuments()
+    {
+        return $this->hasMany(SipharisCreatedDocument::class, 'sipharish_create_id');
+    }
 }

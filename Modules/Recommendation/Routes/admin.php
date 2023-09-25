@@ -41,8 +41,12 @@ Route::prefix('sipharish')->as('sipharish.')->group(function () {
     Route::resource('sipharishSignature', SignatureDetailController::class);
     Route::get('sipharish/sipharishSignature/toggleStatus/{sipharishSignature}', [SignatureDetailController::class, 'updateStatus'])->name('sipharishSignature.updateStatus');
     Route::resource('sipharishCreate', SipharisCreateController::class);
+    Route::get('sipharish/sipharishCreate/toggleStatus/{sipharishCreate}', [SipharisCreateController::class, 'updateStatus'])->name('sipharishCreate.updateStatus');
+
+
 });
 
+Route::get('sipharish/sipharishCreate/show/{id}', [SipharisCreateController::class, 'show'])->name('sipharishCreate.view');
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {
     Route::get('/', 'index')->name('index');

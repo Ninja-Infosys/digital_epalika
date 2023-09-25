@@ -26,7 +26,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
-                    <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.index','1') }}"
+                    <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}"
                         class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-list"></i> सिफारिस सुची
                     </a>
@@ -34,12 +34,47 @@
             </div>
             <div class="card-body">
 
-                <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post">
+                <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post" enctype="multipart/form-data">
                     
                     @csrf
                     @livewire('field', [
                                     'sipharis_category_id' =>  old('sipharis_category_id')
                                     ])
+                                    <div class="col-md-12 mb-2">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <label for="documents" class="form-label fw-bold">आवश्यक कागजातहरु <span
+                                                    class="text-danger">*</span></label>
+                                            <button type="button" class="btn btn-xs btn-outline-info"
+                                                data-target-element="documents" data-toggle="add-more">
+                                                <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                            </button>
+                                        </div>
+                                        <fieldset class="bg-soft-secondary">
+                                            <div id="documents">
+                                                <div class="main">
+                                                    <div class="text-end">
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            data-toggle="remove-parent" data-parent=".main"
+                                                            data-target-element="documents">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="row border-bottom mb-2">
+                                                        <div class="col-md-6 mb-2">
+                                                            <label for="title" class="form-label">शिर्षक</label>
+                                                            <input type="text" name="files[][file_name]" class="form-control"
+                                                                id="title" placeholder="शिर्षक"  />
+                                                        </div>
+                                                        <div class="col-md-6 mb-2">
+                                                            <label for="documents" class="form-label">डकुमेन्ट </label>
+                                                            <input type="file" name="files[][file]" class="form-control"
+                                                                id="documents" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
                         <button type="submit" class="btn btn-primary mt-2">
                             पेश गर्नुहोस्
                         </button>

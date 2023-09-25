@@ -49,6 +49,11 @@ class SipharishFormType extends Model
     {
         return $this->belongsTo(SipharisSubCategory::class, 'sipharis_sub_category_id');
     }
+
+    public function sipharisCreate()
+    {
+        return $this->hasMany(SipharishCreate::class, 'sipharis_form_type_id');
+    }
     public static function getAllFormTypeBySubCategory($subCategoryId){
         return self::where(['sipharis_sub_category_id'=>$subCategoryId,'status'=>true])->get();
     }
