@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="title" class="form-label">शिर्षक <span class="text-danger">*</span></label>
-                                    <input type="text" name="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="शिर्षक" />
+                                    <input type="text" name="title" wire:model="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="शिर्षक" />
                                 </div>
                                 @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>

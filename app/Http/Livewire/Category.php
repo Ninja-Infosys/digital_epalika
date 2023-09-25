@@ -13,6 +13,7 @@ class Category extends Component
     public $sipharis_category_id = null;
 
     public $sipharis_sub_category_id = '';
+    public $title = '';
 
     public $sipharishCategories = [];
     public $sipharishSubCategories = [];
@@ -25,6 +26,7 @@ class Category extends Component
         if (!empty($categorySubCategory)) {
             $this->sipharis_category_id = $categorySubCategory['sipharis_category_id'] ?? '';
             $this->sipharis_sub_category_id = $categorySubCategory['sipharis_sub_category_id'] ?? '';
+            $this->title = $categorySubCategory['title'] ?? '';
         }
         $this->sipharishCategories = SipharisCategory::active()->get();
         $this->sipharishSubCategories = SipharisSubCategory::active()->get();
