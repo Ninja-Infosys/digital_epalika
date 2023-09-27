@@ -10,6 +10,7 @@ return new class () extends Migration {
         Schema::create('disability_prints', function (Blueprint $table) {
             $table->id();
             $table->foreignId('disability_identity_card_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('employee_signature_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('title');
             $table->string('date');
             $table->timestamp('date_ad');
