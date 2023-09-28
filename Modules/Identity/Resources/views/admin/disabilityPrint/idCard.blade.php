@@ -285,7 +285,7 @@
                             नाम, थर :
                         </div>
                         <div class="dynamic-content" style="color: white !important;">
-                             {{$employeeSignature->name??''}}
+                             {{$disabilityIdentityCard->employeeSignature->name??''}}
                         </div>
                     </div>
                 </td>

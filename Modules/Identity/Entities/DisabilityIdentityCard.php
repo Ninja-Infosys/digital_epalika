@@ -81,6 +81,7 @@ class DisabilityIdentityCard extends Model
         "without_helping_task",
         "main_training_name",
         "occupation_id",
+        "employee_signature_id"
 
     ];
 
@@ -145,6 +146,10 @@ class DisabilityIdentityCard extends Model
     public function hospital(): BelongsTo
     {
         return $this->belongsTo(Hospital::class);
+    }
+    public function employeeSignature(): BelongsTo
+    {
+        return $this->belongsTo(EmployeeSignature::class);
     }
 
     public function setPhotoAttribute($value): void

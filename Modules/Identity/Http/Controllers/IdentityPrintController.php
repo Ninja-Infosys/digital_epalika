@@ -3,7 +3,6 @@
 namespace Modules\Identity\Http\Controllers;
 
 use App\Enums\StatusEnum;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +25,7 @@ class IdentityPrintController extends Controller
 
     public function printCard(DisabilityIdentityCard $disabilityIdentityCard)
     {
+dd($disabilityIdentityCard);
         $view = DB::transaction(function () use ($disabilityIdentityCard) {
             $disabilityIdentityCard->update([
                 'print_count' => $disabilityIdentityCard->print_count + 1
@@ -35,6 +35,7 @@ class IdentityPrintController extends Controller
                 'localBody',
                 'district',
                 'disabilityType',
+                'employeeSignature'
             );
             return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
         });
