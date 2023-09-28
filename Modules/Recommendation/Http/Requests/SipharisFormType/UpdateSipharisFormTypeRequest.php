@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class StoreSipharisFormTypeRequest extends FormRequest
+class UpdateSipharisFormTypeRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -23,7 +23,6 @@ class StoreSipharisFormTypeRequest extends FormRequest
             'status' => ['required', 'boolean'],
             'fields' => ['required', 'array'],
             'fields.*.field_name' => ['required', 'max:255'],
-            'fields.*.id' => ['nullable', Rule::exists('sipharis_form_fields' . 'id')->withoutTrashed()],
             'fields.*.status' => ['nullable', 'boolean'],
 
         ];

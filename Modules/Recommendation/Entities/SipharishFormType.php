@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,31 +35,30 @@ class SipharishFormType extends Model
         'status' => 'boolean',
     ];
 
-   
 
-    public function formFields()
+    public function sipharisFormFields(): HasMany
     {
-        return $this->hasMany(SipharisFormFields::class, 'sipharish_form_type_id');
+        return $this->hasMany(SipharisFormField::class);
     }
+
     public function scopeActive($query)
     {
         return $query->where('status', 1);
     }
 
-    public function subCategories()
+    public function sipharisSubCategory(): BelongsTo
     {
-        return $this->belongsTo(SipharisSubCategory::class, 'sipharis_sub_category_id');
+        return $this->belongsTo(SipharisSubCategory::class);
     }
 
-    public function sipharisCreate()
+    public function sipharishCreates(): HasMany
     {
-        return $this->hasMany(SipharishCreate::class, 'sipharis_form_type_id');
-    }
-    public static function getAllFormTypeBySubCategory($subCategoryId){
-        return self::where(['sipharis_sub_category_id'=>$subCategoryId,'status'=>true])->get();
+        return $this->hasMany(SipharishCreate::class);
     }
 
-    
 
-   
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

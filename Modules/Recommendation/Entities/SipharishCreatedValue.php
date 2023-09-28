@@ -23,13 +23,18 @@ class SipharishCreatedValue extends Model
 
     protected $fillable = [
         'sipharish_create_id',
-        'sipharish_form_fields_id',
+        'sipharish_form_field_id',
         'value',
         'status'
     ];
 
-    public function sipharisCreated()
+    public function SipharishCreate(): BelongsTo
     {
-        return $this->belongsTo(SipharishCreate::class, 'sipharish_create_id');
+        return $this->belongsTo(SipharishCreate::class,'sipharish_create_id');
+    }
+
+    public function SipharisFormFields(): BelongsTo
+    {
+        return $this->belongsTo(SipharisFormField::class,'sipharish_form_field_id');
     }
 }

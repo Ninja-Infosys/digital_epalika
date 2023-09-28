@@ -15,23 +15,18 @@ class StoreSipharisCreatedRequest extends FormRequest
 
     public function rules(): array
     {
-        switch ($this->method()) {
-            case 'GET':
-                return [];
-                break;
-            case 'PUT':
-                return [
-                    
-                ];
-            default:
-                return [
-                    'personal_detail_id'=>'required',
-                    'sipharis_form_type_id'       => 'required',
-                    'status'                          => 'required',
-                    'field' => ['required', 'array'],
-                    'files' => ['nullable', 'array']
-                ];
-                break;
-        }
+        return [
+            'personal_detail_id' => ['required', Rule::exists('personal_details', 'id')->withoutTrashed()],
+            'sipharis_category_id' => ['required', Rule::exists('sipharis_categories', 'id')->withoutTrashed()],
+            'sipharis_sub_category_id' => ['required', Rule::exists('sipharis_sub_categories', 'id')->withoutTrashed()],
+            'sipharis_form_type_id' => ['required', Rule::exists('sipharish_form_types', 'id')->withoutTrashed()],
+            'status' => ['required', 'boolean'],
+            'fields' => ['required', 'array'],
+            'fields.*.sipharish_form_field_id' => ['required', Rule::exists('sipharis_form_fields', 'id')->withoutTrashed()],
+            'fields.*.value' => ['required'],
+            'files' => ['nullable', 'array'],
+            'files.*.title' => ['required', 'string'],
+            'files.*.filename' => ['required', 'file'],
+        ];
     }
 }

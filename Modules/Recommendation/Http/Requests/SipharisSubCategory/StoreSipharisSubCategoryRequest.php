@@ -16,8 +16,8 @@ class StoreSipharisSubCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'sipharis_category_id' => ['required']
+            'title' => ['required', 'string', 'max:255'],
+            'sipharis_category_id' => ['required', Rule::exists('sipharis_categories', 'id')->withoutTrashed()]
             //'status'=>['required',Rule::in(['active', 'inactive'])]
         ];
     }

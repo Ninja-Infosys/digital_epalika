@@ -2,12 +2,15 @@
 
 namespace Modules\Recommendation\Entities;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SipharisCreatedDocument extends Model
 {
@@ -28,21 +31,19 @@ class SipharisCreatedDocument extends Model
         'extension'
     ];
 
-   
-
-    public function createdSipharis()
+    public function SipharishCreate(): BelongsTo
     {
-        return $this->belongsTo(SipharishCreate::class, 'sipharish_create_id');
+        return $this->belongsTo(SipharishCreate::class);
     }
 
     protected function Filename(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ?
+            get: fn($value) => $value ?
                 Storage::disk('public')->url($value)
                 : '',
-            set: fn ($value) => (!empty($value) && !is_string($value))
-                ? $value->store('sipharisSignature/' . Str::slug($this->attributes['full_name'], '_'), 'sipharish_create_id')
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('sipharisSignature/' . Str::slug($this->attributes['full_name'] ?? 'recommendation', '_'), 'public')
                 : null
         );
     }

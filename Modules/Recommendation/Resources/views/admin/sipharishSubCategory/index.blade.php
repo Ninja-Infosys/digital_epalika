@@ -30,7 +30,7 @@
                             <a href="{{ route('admin.recommendation.sipharish.sipharishSubCategory.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i>
-                                नयाँ सिफारिस उप श्रेणी  थप्नुहोस
+                                नयाँ सिफारिस उप श्रेणी थप्नुहोस
                             </a>
                         @endcan
                     </div>
@@ -41,8 +41,8 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                    <th>शिर्षक</th>
-                                    <th>वर्ग</th>
+                                <th>शिर्षक</th>
+                                <th>वर्ग</th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
@@ -55,15 +55,13 @@
                                         {{ $sipharisSubCategory->title ?? '' }}
                                     </td>
                                     <td>
-                                        {{ $sipharisSubCategory->categories->title ?? '' }}
+                                        {{ $sipharisSubCategory->sipharisCategory->title ?? '' }}
                                     </td>
-                                       
                                     <td>
-                                        @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishSubCategory.updateStatus',$sipharisSubCategory)}}">
-                                                <i class="fa fa-2x {{ $sipharisSubCategory->status == true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                            </a>
-                                        @endcan
+                                        <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
+                                           href="{{route('admin.recommendation.sipharish.sipharishSubCategory.updateStatus',$sipharisSubCategory)}}">
+                                            <i class="fa fa-2x {{ $sipharisSubCategory->status ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         @can('recommendationCategory_edit')
@@ -74,19 +72,19 @@
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
-                                        <form
-                                            action="{{ route('admin.recommendation.sipharish.sipharishSubCategory.destroy', $sipharisSubCategory) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('recommendationCategory_delete')
+                                        @can('recommendationCategory_delete')
+                                            <form
+                                                action="{{ route('admin.recommendation.sipharish.sipharishSubCategory.destroy', $sipharisSubCategory) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
                                                 <button data-bs-type="delete"
                                                         class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                            @endcan
-                                        </form>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

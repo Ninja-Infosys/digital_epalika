@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
-                        <a href=""
+                        <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
@@ -37,30 +37,24 @@
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0 table-bordered table-striped">
                                     <thead>
-                                        <th>Field name </th>
-                                        <th>Value </th>
+                                    <th>Field name</th>
+                                    <th>Value</th>
                                     </thead>
                                     <tbody>
+                                    @foreach($sipharishCreate->SipharishCreatedValues as $key=>$sipharishCreatedValue)
+                                        <tr>
+                                            <td>
 
-                                        <?php $ckeditorContent = $sipharisInfos->formTypes->content; ?>
-                                        @foreach($formFields as $key=>$formField)
-                                        @php
-                                            $ckeditorContent = replaceFormPlaceholderWith("{{" . $formField->field_name . "}}", $formField->value, $ckeditorContent)
-                                        @endphp
+                                                {{$sipharishCreatedValue?->SipharisFormFields?->field_name ?? '' }}
+                                            </td>
 
-                                    <tr>
-                                        <td>
-                                      
-                                            {{$formField->field_name ?? ''}}
-                                        </td>
-                                   
-                                        <td>
-                                            {{$formField->value??''}}
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td>
+                                                {{$sipharishCreatedValue->value??''}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
                         </div>
@@ -70,8 +64,8 @@
         </div>
     </div>
 
-    
-    
+
+
 
     <div class="row">
         <div class="col-md-12">
@@ -81,7 +75,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        @forelse($sipharisInfos->sipharisDocuments ?? [] as $document)
+                        @forelse($sipharishCreate->SipharisCreatedDocuments ?? [] as $document)
                             <div class="col-xl-4 col-lg-6">
                                 <div class="card shadow-none border">
                                     <div class="p-2">
@@ -96,8 +90,7 @@
                                             <div class="col-8">
                                                 <a href="javascript:void(0);"
                                                    onclick="openFileModal('{{$document->filename}}', '{{ $document->extension }}', '{{ $document->filename }}')"
-                                                   class="text-muted fw-medium">{{$document->filename}}
-                                                    .{{$document->extension}}</a>
+                                                   class="text-muted fw-medium">{{basename($document->filename)}}</a>
                                             </div>
                                             <div class="col-2">
                                                 <a href="{{route('admin.file-url-download', ['file_url'=>$document->filename])}}"
@@ -118,7 +111,7 @@
         </div>
         @include('admin.inc.file-view')
     </div>
-    
+
 
 
     <div class="row">
@@ -137,10 +130,10 @@
                     <div id="print" class="p-1">
                         <style>
                             @page {
-                                margin-top: 0.2px;
+                                margin-top: 0;
                             }
                         </style>
-                        {!! $ckeditorContent !!}
+                        {!! $sipharishCreate->resolveTemplate() ?? '' !!}
 
                     </div>
                 </div>

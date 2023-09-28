@@ -18,8 +18,7 @@ class UpdateSignatureRequest extends FormRequest
         return [
             'full_name' => ['required', 'string'],
             'position' => ['required', 'string'],
-            //'status'=>['required',Rule::in(['active', 'inactive'])],
-            'signature'=>['nullable','image']
+            'signature' => ['nullable', 'image']
         ];
     }
 }

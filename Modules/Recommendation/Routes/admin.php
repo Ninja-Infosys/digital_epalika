@@ -32,16 +32,16 @@ Route::post('registrationDetail/{registrationDetail}/ocFile', [RegistrationDetai
 Route::resource('recommendationCategory.registrationDetail', RegistrationDetailController::class);
 
 Route::prefix('sipharish')->as('sipharish.')->group(function () {
+    Route::get('sipharishCategory/{sipharisModel}/toggleStatus', [SipharishCategoryController::class, 'updateStatus'])->name('sipharishCategory.updateStatus');
     Route::resource('sipharishCategory', SipharishCategoryController::class);
-    Route::get('sipharish/sipharishCategory/toggleStatus/{sipharisModel}', [SipharishCategoryController::class, 'updateStatus'])->name('sipharishCategory.updateStatus');
+    Route::get('sipharishSubCategory/{sipharisSubCategory}/toggleStatus', [SipharisSubCategoryController::class, 'updateStatus'])->name('sipharishSubCategory.updateStatus');
     Route::resource('sipharishSubCategory', SipharisSubCategoryController::class);
-    Route::get('sipharish/sipharishSubCategory/toggleStatus/{sipharisSubCategory}', [SipharisSubCategoryController::class, 'updateStatus'])->name('sipharishSubCategory.updateStatus');
+    Route::get('sipharishFormType/{sipharisFormType}/toggleStatus', [SipharishFormTypeController::class, 'updateStatus'])->name('sipharishFormType.updateStatus');
     Route::resource('sipharishFormType', SipharishFormTypeController::class);
-    Route::get('sipharish/sipharishFormType/toggleStatus/{sipharisFormType}', [SipharishFormTypeController::class, 'updateStatus'])->name('sipharishFormType.updateStatus');
-    Route::resource('sipharishSignature', SignatureDetailController::class);
-    Route::get('sipharish/sipharishSignature/toggleStatus/{sipharishSignature}', [SignatureDetailController::class, 'updateStatus'])->name('sipharishSignature.updateStatus');
+    Route::get('sipharisSignatureDetail/{sipharisSignatureDetail}/toggleStatus', [SignatureDetailController::class, 'updateStatus'])->name('sipharisSignatureDetail.updateStatus');
+    Route::resource('sipharisSignatureDetail', SignatureDetailController::class);
+    Route::get('sipharishCreate/{sipharishCreate}/toggleStatus', [SipharisCreateController::class, 'updateStatus'])->name('sipharishCreate.updateStatus');
     Route::resource('sipharishCreate', SipharisCreateController::class);
-    Route::get('sipharish/sipharishCreate/toggleStatus/{sipharishCreate}', [SipharisCreateController::class, 'updateStatus'])->name('sipharishCreate.updateStatus');
 
 
 });

@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index','A')}}">नयाँ हस्ताक्षर  थप्नुहोस् </a>
+                            <a href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.index')}}">हस्ताक्षर</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ हस्ताक्षर  थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">हस्ताक्षर सम्पादन</li>
                     </ol>
                 </div>
-                <h4 class="page-title">हस्ताक्षर  </h4>
+                <h4 class="page-title">हस्ताक्षर </h4>
             </div>
         </div>
     </div>
@@ -27,17 +27,20 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">हस्ताक्षर  थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.sipharish.sipharishSignature.create')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i>  हस्ताक्षर सम्पादन गर्नुहोस्
+                        <h4 class="header-title">हस्ताक्षर थप्नुहोस्</h4>
+                        <a href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.create')}}"
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> हस्ताक्षर सम्पादन गर्नुहोस्
 
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.recommendation.sipharish.sipharishSignature.update',$sipharishSignature)}}" method="post"
-                          enctype="multipart/form-data">
-                          @method('put')
+                    <form
+                        action="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.update',$sipharisSignatureDetail)}}"
+                        method="post"
+                        enctype="multipart/form-data">
+                        @method('put')
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
@@ -45,13 +48,13 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="title" class="form-label">पुरा नाम *</label>
+                                    <label for="full_name" class="form-label">पुरा नाम *</label>
                                     <input
                                         type="text"
                                         name="full_name"
-                                        value="{{old('full_name',$getSignature->full_name)}}"
+                                        value="{{old('full_name',$sipharisSignatureDetail->full_name)}}"
                                         class="form-control @error('full_name') is-invalid @enderror"
-                                        id="title"
+                                        id="full_name"
                                         placeholder="शिर्षक "
                                         required
                                     />
@@ -60,13 +63,13 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                <label for="title" class="form-label">Position *</label>
+                                    <label for="position" class="form-label">पद *</label>
                                     <input
                                         type="text"
                                         name="position"
-                                        value="{{old('position',$getSignature->position)}}"
+                                        value="{{old('position',$sipharisSignatureDetail->position)}}"
                                         class="form-control @error('position') is-invalid @enderror"
-                                        id="title"
+                                        id="position"
                                         placeholder="शिर्षक "
                                         required
                                     />
@@ -88,7 +91,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                
+
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">

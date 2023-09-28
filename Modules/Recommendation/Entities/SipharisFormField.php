@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Modules\Recommendation\Entities\SipharisFormType;
 
-class SipharisFormFields extends Model
+class SipharisFormField extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -29,12 +30,15 @@ class SipharisFormFields extends Model
         'created_by'
     ];
 
-    public static function getFormFieldByFormType($id){
-        return self::select('sipharis_form_fields.id','sipharis_form_fields.field_name','sipharis_form_fields.status')->where('sipharish_form_type_id',$id)->get();
+
+    public function SipharishFormType(): BelongsTo
+    {
+        return $this->belongsTo(SipharishFormType::class);
     }
 
-    public function formType()
+
+    public function createdBy(): BelongsTo
     {
-        return $this -> belongsTo(SipharisFormType::class, 'sipharish_form_type_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

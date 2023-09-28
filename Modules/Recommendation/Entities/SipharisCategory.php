@@ -2,6 +2,8 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,17 +33,18 @@ class SipharisCategory extends Model
         'status' => 'boolean',
     ];
 
-    public static function getActiveSipharis(){
-       return self::where('status',1)->get();
+    public function scopeStatus(Builder $query, bool $status = true): Builder
+    {
+        return $query->where('status', $status);
     }
 
-    public function scopeActive($query)
+    public function SipharisSubCategories(): HasMany
     {
-        return $query->where('status', 1);
+        return $this->hasMany(SipharisSubCategory::class);
     }
 
-    public function subCategory()
+    public function createdBy(): BelongsTo
     {
-        return $this->hasMany(SipharisSubCategory::class, 'sipharis_category_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

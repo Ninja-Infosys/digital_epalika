@@ -2,12 +2,15 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\User;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class SipharishCreate extends Model
 {
@@ -35,18 +38,50 @@ class SipharishCreate extends Model
         'status' => 'boolean',
     ];
 
-    public function formValues()
+
+    public function signaturedBy(): BelongsTo
     {
-        return $this->hasMany(SipharishCreatedValue::class, 'sipharish_create_id');
+        return $this->belongsTo(User::class, 'signatured_by');
     }
 
-     public function formTypes()
+
+    public function approvedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function SipharishCreatedValues(): HasMany
+    {
+        return $this->hasMany(SipharishCreatedValue::class);
+    }
+
+    public function personalDetail(): BelongsTo
+    {
+        return $this->belongsTo(PersonalDetail::class);
+    }
+
+    public function SipharishFormType(): BelongsTo
     {
         return $this->belongsTo(SipharishFormType::class, 'sipharis_form_type_id');
     }
 
-    public function sipharisDocuments()
+    public function SipharisCreatedDocuments(): HasMany
     {
-        return $this->hasMany(SipharisCreatedDocument::class, 'sipharish_create_id');
+        return $this->hasMany(SipharisCreatedDocument::class);
+    }
+
+    public function resolveTemplate(): string
+    {
+        $replaceableList = collect();
+        $this->load('SipharishFormType', 'SipharishCreatedValues.SipharisFormFields');
+        foreach ($this->SipharishCreatedValues as $values) {
+            $replaceableList->put('{{' . $values->SipharisFormFields->field_name . '}}', $values->value);
+        }
+        return Str::replace($replaceableList->keys(), $replaceableList->values(), $this->SipharishFormType?->content ?? '');
     }
 }

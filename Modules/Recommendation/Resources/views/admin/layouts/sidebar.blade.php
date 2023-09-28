@@ -12,7 +12,16 @@
         </a>
     </li>
 @endcan
+@can('recommendationSetting_access')
+    <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
+        <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">
+            <i class="fa fa-file"></i>
+            <span>सिफारिस सिर्जना गर्नुहोस्</span>
+        </a>
+    </li>
+@endcan
 
+{{--
 @foreach(recommendationCategory() as $recommendationCategory)
     @if($recommendationCategory->recommendationCategories->count() > 0)
         <li title="{{$recommendationCategory->title}}" class="{{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'active' : ''}}">
@@ -49,6 +58,8 @@
     @endif
 
 @endforeach
+--}}
+{{--
 
 <li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">
     <a href="#recommendationReport"
@@ -134,6 +145,7 @@
         </ul>
     </div>
 </li>
+--}}
 
 
 <li class="{{request()->is('admin/recommendation/sipharish*') ? 'active' : ''}}">
@@ -173,20 +185,13 @@
                 </li>
             @endcan
             @can('recommendationSetting_access')
-                <li class="{{request()->is('admin/recommendation/sipharish/sipharishSignature*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.sipharishSignature.index')}}">
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharisSignatureDetail*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.index')}}">
                         <span>हस्ताक्षर सेटिङ</span>
                     </a>
                 </li>
             @endcan
 
-            @can('recommendationSetting_access')
-                <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">
-                        <span>सिफारिस सिर्जना गर्नुहोस्</span>
-                    </a>
-                </li>
-            @endcan
         </ul>
     </div>
 </li>

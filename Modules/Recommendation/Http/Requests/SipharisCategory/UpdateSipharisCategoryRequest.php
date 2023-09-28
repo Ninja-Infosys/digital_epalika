@@ -10,13 +10,13 @@ class UpdateSipharisCategoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('recommendationCategory_edit');
     }
 
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
+            'title' => ['required', 'string', 'max:255'],
             //'status'=>['required',Rule::in(['active', 'inactive'])]
         ];
     }

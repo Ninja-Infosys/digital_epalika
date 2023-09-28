@@ -29,13 +29,6 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="collapse mb-2" id="collapseFilterForm">
-                <div class="card">
-                    <div class="card-body">
-                        
-                    </div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
@@ -65,9 +58,8 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>सिफारिस नाम</th>
-                                <th>सिफारिस उप-श्रेणी </th>
-
-                                <th>स्थिति </th>
+                                <th>सिफारिस उप-श्रेणी</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -76,28 +68,27 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $sipharishFormType->title ?? '' }}</td>
-                                    <td>{{ $sipharishFormType->subCategories->title ?? '' }}</td>
+                                    <td>{{ $sipharishFormType->sipharisSubCategory->title ?? '' }}</td>
 
                                     <td>
-                                        @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishFormType.updateStatus',$sipharishFormType)}}">
-                                                <i class="fa fa-2x {{ $sipharishFormType->status == true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                            </a>
-                                        @endcan
+                                        <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
+                                           href="{{route('admin.recommendation.sipharish.sipharishFormType.updateStatus',$sipharishFormType)}}">
+                                            <i class="fa fa-2x {{ $sipharishFormType->status ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                        </a>
                                     </td>
                                     <td>
-                                        <!-- <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
-                                           data-bs-target="#staticBackdrop">
-                                            <i class="fa fa-file"></i>
-                                        </a> -->
-                                        <!-- @can('recommendation_access')
-                                            <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.show', ['d',$sipharishFormType]) }}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                               title="विवरण हेर्नुहोस">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        @endcan -->
+                                        {{--        <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
+                                                   data-bs-target="#staticBackdrop">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
+                                                 @can('recommendation_access')
+                                                    <a data-bs-type="edit"
+                                                       href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.show', ['d',$sipharishFormType]) }}"
+                                                       class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
+                                                       title="विवरण हेर्नुहोस">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @endcan --}}
                                         @can('recommendation_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharishFormType.edit',  $sipharishFormType) }}"

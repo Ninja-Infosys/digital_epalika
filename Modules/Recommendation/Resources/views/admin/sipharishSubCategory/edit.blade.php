@@ -24,38 +24,40 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                    <h4 class="header-title">नयाँ सिफारिस श्रेणी थप्नुहोस</h4>
+                        <h4 class="header-title">नयाँ सिफारिस श्रेणी थप्नुहोस</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.sipharish.sipharishSubCategory.index') }}"
-                                class="btn btn-sm btn-outline-primary">
+                               class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> सिफारिस श्रेणी सूची
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishSubCategory.update',$sipharishSubCategory) }}"
+                    <form
+                        action="{{ route('admin.recommendation.sipharish.sipharishSubCategory.update',$sipharishSubCategory) }}"
                         method="post">
                         @method('put')
                         @csrf
                         <div class="row">
-                        <div class="col-md-12">
+                            <div class="col-md-12">
                                 <label for="sipharis_category_id">वर्ग</label>
                                 <select id="sipharis_category_id" name="sipharis_category_id" class="form-control">
                                     <option>छान्नुहोस्</option>
                                     @foreach ($sipharisCategories as $sipharisCategory )
-                                    <option value="{{ $sipharisCategory->id }}"{{old('sipharis_category_id',$sipharisSubCategory->sipharis_category_id == $sipharisCategory->id ? 'selected':'')}}>{{ $sipharisCategory->title }}</option>
+                                        <option
+                                            value="{{ $sipharisCategory->id }}"{{old('sipharis_category_id',$sipharishSubCategory->sipharis_category_id) == $sipharisCategory->id ? 'selected':''}}>{{ $sipharisCategory->title }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
-                                <input type="text" name="title" value="{{ old('title',$sipharisSubCategory->title) }}"
-                                    class="form-control @error('title') is-invalid @enderror" id="name"
-                                    placeholder="शिर्षक" required />
+                                <input type="text" name="title" value="{{ old('title',$sipharishSubCategory->title) }}"
+                                       class="form-control @error('title') is-invalid @enderror" id="title"
+                                       placeholder="शिर्षक" required/>
                                 @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

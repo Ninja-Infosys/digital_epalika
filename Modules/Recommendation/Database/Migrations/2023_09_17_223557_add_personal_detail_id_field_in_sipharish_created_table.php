@@ -17,7 +17,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('sipharish_created', function (Blueprint $table) {
-            //
+            $table->dropConstrainedForeignId('personal_detail_id');
         });
     }
 };

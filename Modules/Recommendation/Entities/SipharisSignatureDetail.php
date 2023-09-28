@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,7 +29,7 @@ class SipharisSignatureDetail extends Model
         'full_name',
         'position',
         'signature',
-        'status', 
+        'status',
         'created_by'
     ];
 
@@ -46,5 +47,11 @@ class SipharisSignatureDetail extends Model
                 ? $value->store('sipharisSignature/' . Str::slug($this->attributes['full_name'], '_'), 'public')
                 : null
         );
+    }
+
+
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

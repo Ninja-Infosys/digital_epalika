@@ -32,7 +32,7 @@
             <div class="collapse mb-2" id="collapseFilterForm">
                 <div class="card">
                     <div class="card-body">
-                        
+
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                             @includeIf('inc.filter_form')
 
                             @can('recommendation_create')
-                                <a href="{{ route('admin.recommendation.sipharish.sipharishFormType.create') }}"
+                                <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                                 </a>
@@ -64,38 +64,40 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                <th>सेवाग्राहीको नाम</th>
                                 <th>सिफारिस नाम</th>
-                                <th>सिफारिस स्वीकृति </th>
-
-                                <th>स्थिति </th>
+                                <th>सिफारिस स्वीकृति</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($sipharishs as $sipharish)
+                            @forelse ($sipharishCreates as $sipharish)
                                 <tr>
-                                    <td>{{ $sipharish->id }}</td>
-                                    <td>{{ $sipharish->formTypes->title ?? '' }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $sipharish->personalDetail?->name ?? '' }}</td>
+                                    <td>{{ $sipharish->SipharishFormType?->title ?? '' }}</td>
                                     <td>{{ $sipharish->approved_status ?? '' }}</td>
 
                                     <td>
                                         @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishCreate.updateStatus',$sipharish)}}">
-                                                <i class="fa fa-2x {{ $sipharish->status == true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
+                                               href="{{route('admin.recommendation.sipharish.sipharishCreate.updateStatus',$sipharish)}}">
+                                                <i class="fa fa-2x {{ $sipharish->status ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
-                                        
+
                                     </td>
                                     <td>
-                                    @can('recommendationCategory_access')
-                                        <a data-bs-type="edit"
+                                        @can('recommendationCategory_access')
+                                            <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharishCreate.show', $sipharish->id) }}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        @can('recommendation_edit')
+                                       {{-- @can('recommendation_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharishCreate.edit',  $sipharish) }}"
                                                class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
@@ -103,19 +105,19 @@
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
-                                        <form
-                                            action="{{ route('admin.recommendation.sipharish.sipharishCreate.destroy', $sipharish) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('recommendation_delete')
+                                        @can('recommendation_delete')
+                                            <form
+                                                action="{{ route('admin.recommendation.sipharish.sipharishCreate.destroy', $sipharish) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
                                                 <button data-bs-type="delete"
                                                         class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                            @endcan
-                                        </form>
+                                            </form>
+                                        @endcan--}}
                                     </td>
                                 </tr>
                             @empty

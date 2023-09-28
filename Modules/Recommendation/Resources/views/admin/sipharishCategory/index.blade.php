@@ -30,7 +30,7 @@
                             <a href="{{ route('admin.recommendation.sipharish.sipharishCategory.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i>
-                                नयाँ सिफारिस श्रेणी  थप्नुहोस
+                                नयाँ सिफारिस श्रेणी थप्नुहोस
                             </a>
                         @endcan
                     </div>
@@ -41,7 +41,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                    <th>शिर्षक</th>
+                                <th>शिर्षक</th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
@@ -53,21 +53,22 @@
                                     <td>
                                         {{ $recommendationCategory->title ?? '' }}
                                     </td>
-                                       
+
                                     <td>
                                         @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishCategory.updateStatus',$recommendationCategory)}}">
+                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
+                                               href="{{route('admin.recommendation.sipharish.sipharishCategory.updateStatus',$recommendationCategory)}}">
                                                 <i class="fa fa-2x {{ $recommendationCategory->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td>
-                                        @if(!$recommendationCategory->recommendation_categories_count)
-                                            <a data-bs-type="edit" class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                               href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', ['ddd',$recommendationCategory]) }}">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        @endif
+{{--                                        TODO: need to change ddd in route and manage route--}}
+                                        <a
+                                           class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
+                                           href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', ['ddd',$recommendationCategory]) }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharishCategory.edit', [$recommendationCategory]) }}"

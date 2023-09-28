@@ -18,8 +18,7 @@ class StoreSignatureRequest extends FormRequest
         return [
             'full_name' => ['required', 'string'],
             'position' => ['required', 'string'],
-            'status'=>['required'],
-            'signature'=>['nullable','image']
+            'signature' => ['required', 'image']
         ];
     }
 }

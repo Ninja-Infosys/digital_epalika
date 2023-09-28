@@ -27,71 +27,41 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> सिफारिस दर्ता गर्नुहोस</h4>
                         <a href="{{ route('admin.recommendation.sipharish.sipharishFormType.index') }}"
-                            class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishFormType.update',$sipharishFormType) }}" method="post">
+                    <form
+                        action="{{ route('admin.recommendation.sipharish.sipharishFormType.update',$sipharishFormType) }}"
+                        method="post">
                         @csrf
-							@method("PUT")
+                        @method("PUT")
                         <fieldset>
                             <legend>
                                 <h4 class="text-info">सिफारिस फाराम</h4>
                             </legend>
                             <div class="row">
-                                <div class="col-md-4 mb-2">
-                                    <label for="personal_detail_id" class="form-label">सिफारिस श्रेणी</label>
-                                    <div class="d-flex justify-content-between gap-1">
-                                        <select id="personal_detail_id" name="sipharis_category_id"
-                                            class="form-select personalDetail">
-                                            <option value="">-- छान्नुहोस् --</option>
-                                            @foreach ($sipharishCategories as $sipharishCategory)
-                                                <option
-                                                    {{ $sipharishCategory->id == old('sipharis_category_id') ? 'selected' : '' }}
-                                                    value="{{ $sipharishCategory->id }}">{{ $sipharishCategory->title }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        
-                                    </div>
-                                    @error('sipharis_category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-md-8">
+                                    @livewire('category', [
+                                            'sipharis_category_id' => old('sipharis_category_id', $sipharishFormType->sipharisSubCategory->sipharis_category_id),
+                                            'sipharis_sub_category_id' => old('sipharis_sub_category_id', $sipharishFormType->sipharis_sub_category_id)
+                                            ])
                                 </div>
 
                                 <div class="col-md-4 mb-2">
-                                    <label for="personal_detail_id" class="form-label">सिफारिस उप-श्रेणी <span class="text-danger">*</span></label>
-                                    <div class="d-flex justify-content-between gap-1">
-                                        <select id="personal_detail_id" name="sipharis_sub_category_id"
-                                            class="form-select @error('sipharis_sub_category_id') is-invalid @enderror" personalDetail">
-                                            <option value="">-- छान्नुहोस् --</option>
-                                            @foreach ($sipharishSubCategories as $sipharishCategory)
-                                                <option
-                                                    {{ $sipharishCategory->id == old('sipharis_sub_category_id',$fields->sipharis_sub_category_id) ? 'selected' : '' }}
-                                                    value="{{ $sipharishCategory->id }}">{{ $sipharishCategory->title }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        
-                                    </div>
-                                    @error('sipharis_sub_category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="title" class="form-label">शिर्षक <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="title" value="{{ old('title',$sipharishFormType->title) }}"
+                                           class="form-control @error('title') is-invalid @enderror" id="title"
+                                           placeholder="शिर्षक"/>
                                 </div>
+                                @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
 
-                                <div class="col-md-4 mb-2">
-                                    <label for="title" class="form-label">शिर्षक <span class="text-danger">*</span></label>
-                                        <input type="text" name="title" value="{{ old('title',$fields->title) }}"
-                                        class="form-control @error('title') is-invalid @enderror" id="title"
-                                        placeholder="शिर्षक" />
-                                </div>
-                                    @error('title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                
                             </div>
 
                             <div class="row">
@@ -99,90 +69,112 @@
                                     <label for="personal_detail_id" class="form-label">स्थिति <span class="text-danger">*</span></label>
                                     <div class="d-flex justify-content-between gap-1">
                                         <select id="personal_detail_id" name="status"
-                                            class="form-select personalDetail">
+                                                class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            <option value="1" {{old('status',$fields->status) == '1'?'selected':''}}>Active</option>
-									        <option value="0" {{old('status',$fields->status) == '0'?'selected':''}}>Inactive</option>
+                                            <option
+                                                value="1" {{old('status',$sipharishFormType->status) == 1?'selected':''}}>
+                                                Active
+                                            </option>
+                                            <option
+                                                value="0" {{old('status',$sipharishFormType->status) == 0?'selected':''}}>
+                                                Inactive
+                                            </option>
                                         </select>
-                                        
+
                                     </div>
                                     @error('status')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-4 mb-2">
-                                    <label for="personal_detail_id" class="form-label">सुइकृती चहिन्छ <span class="text-danger">*</span></label>
+                                    <label for="personal_detail_id" class="form-label">सुइकृती चहिन्छ <span
+                                            class="text-danger">*</span></label>
                                     <div class="d-flex justify-content-between gap-1">
                                         <select id="personal_detail_id" name="need_approval"
-                                            class="form-select personalDetail">
+                                                class="form-select personalDetail">
                                             <option value="">-- छान्नुहोस् --</option>
-                                            <option value="1" {{old('need_approval',$fields->need_approval) == '1'?'selected':''}}>Yes</option>
-									        <option value="0" {{old('need_approval',$fields->need_approval) == '0'?'selected':''}}>No</option>
+                                            <option
+                                                value="1" {{old('need_approval',$sipharishFormType->need_approval) == '1'?'selected':''}}>
+                                                Yes
+                                            </option>
+                                            <option
+                                                value="0" {{old('need_approval',$sipharishFormType->need_approval) == '0'?'selected':''}}>
+                                                No
+                                            </option>
                                         </select>
-                                        
+
                                     </div>
                                     @error('need_approval')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                
+
                             </div>
                         </fieldset>
                         <div class="row mt-2">
                             <div class="col-md-12 mb-2">
-                                <label for="recommendation_data" class="form-label">डाटा <span class="text-danger">*</span></label>
+                                <label for="recommendation_data" class="form-label">डाटा <span
+                                        class="text-danger">*</span></label>
                                 <textarea name="content" id="recommendation_data" required cols="30" rows="10"
-                                    class="form-control ckEditor @error('content') is-invalid @enderror">{{ old('content',$fields->content) }}</textarea>
+                                          class="form-control ckEditor @error('content') is-invalid @enderror">{{ old('content',$sipharishFormType->content) }}</textarea>
                                 @error('content')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                    <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <label for="files" class="form-label fw-bold">आवश्यक Field <span
-                                                class="text-danger">*</span></label>
-                                        <button type="button" class="btn btn-xs btn-outline-info"
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <label for="files" class="form-label fw-bold">आवश्यक Field <span
+                                            class="text-danger">*</span></label>
+                                    <button type="button" class="btn btn-xs btn-outline-info"
                                             data-target-element="files" data-toggle="add-more">
-                                            <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
-                                        </button>
-                                    </div>
-                                    <fieldset class="bg-soft-secondary">
-                                        <div id="files">
-                                            @foreach($fields->formFields as $key=>$formField)
+                                        <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                    </button>
+                                </div>
+                                <fieldset class="bg-soft-secondary">
+                                    <div id="files">
+                                        @foreach($sipharishFormType->sipharisFormFields as $key=>$formField)
                                             <div class="main">
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-sm btn-outline-danger"
-                                                        data-toggle="remove-parent" data-parent=".main"
-                                                        data-target-element="files">
+                                                            data-toggle="remove-parent" data-parent=".main"
+                                                            data-target-element="files">
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </div>
                                                 <input type="hidden" name="field[{{$key}}][id]" class="form-control"
-                                                            id="id" value="{{$formField->id}}" placeholder="शिर्षक"  />
+                                                       id="id" value="{{$formField->id}}"/>
                                                 <div class="row border-bottom mb-2">
                                                     <div class="col-md-6 mb-2">
                                                         <label for="title" class="form-label">शिर्षक</label>
-                                                        <input type="text" name="field[{{$key}}][field_name]" class="form-control"
-                                                            id="title" value="{{$formField->field_name}}" placeholder="शिर्षक"  />
+                                                        <input type="text" name="fields[{{$key}}][field_name]"
+                                                               class="form-control"
+                                                               id="title" value="{{$formField->field_name}}"
+                                                               placeholder="शिर्षक"/>
                                                     </div>
                                                     <div class="col-md-6 mb-2">
                                                         <label for="documents" class="form-label">डकुमेन्ट </label>
-                                                    <select id="personal_detail_id" name="field[{{$key}}][status]"
-                                                            class="form-select personalDetail">
-                                                        <option value="">-- छान्नुहोस् --</option>
-                                                        <option value="1" {{$formField->status == '1'?'selected':''}}>Active</option>
-                                                        <option value="0" {{$formField->status == '0'?'selected':''}}>Inactive</option>
-                                                    </select>
+                                                        <select id="personal_detail_id" name="fields[{{$key}}][status]"
+                                                                class="form-select personalDetail">
+                                                            <option value="">-- छान्नुहोस् --</option>
+                                                            <option
+                                                                value="1" {{$formField->status == 1 ?'selected':''}}>
+                                                                Active
+                                                            </option>
+                                                            <option
+                                                                value="0" {{$formField->status == 0 ?'selected':''}}>
+                                                                Inactive
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- <div id="files">
+                                        @endforeach
+                                    </div>
+                                    <!-- <div id="files">
                                             <div class="main">
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-sm btn-outline-danger"
@@ -209,11 +201,11 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                    </fieldset>
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-2">
-                            पेश गर्नुहोस्
-                        </button>
+                                </fieldset>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2">
+                                पेश गर्नुहोस्
+                            </button>
                     </form>
                 </div>
             </div>

@@ -11,7 +11,7 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">हस्ताक्षर </li>
+                        <li class="breadcrumb-item active">हस्ताक्षर</li>
                     </ol>
                 </div>
                 <h4 class="page-title">हस्ताक्षर </h4>
@@ -24,13 +24,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">हस्ताक्षर 
+                        <h4 class="header-title">हस्ताक्षर
                             सूची</h4>
                         @can('recommendationCategory_create')
-                            <a href="{{ route('admin.recommendation.sipharish.sipharishSignature.create') }}"
+                            <a href="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i>
-                                नयाँ हस्ताक्षर   थप्नुहोस
+                                नयाँ हस्ताक्षर थप्नुहोस
                             </a>
                         @endcan
                     </div>
@@ -41,10 +41,9 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                    <th>पुरा नाम</th>
-                                    <th>पद</th>
-                                    <th>हस्ताक्षर</th>
-
+                                <th>पुरा नाम</th>
+                                <th>पद</th>
+                                <th>हस्ताक्षर</th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
@@ -60,39 +59,38 @@
                                         {{ $signatureDetail->position ?? '' }}
                                     </td>
                                     <td>
-                                    <img src="{{$signatureDetail->signature}}" alt="{{$signatureDetail->full_name}}"
-                                         height="60">
-                                </td>
+                                        <img src="{{$signatureDetail->signature}}" alt="{{$signatureDetail->full_name}}"
+                                             height="60">
+                                    </td>
                                     <td>
-                                        @can('recommendationCategory_access')
-                                            <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}" href="{{route('admin.recommendation.sipharish.sipharishSignature.updateStatus',$signatureDetail)}}">
-                                                <i class="fa fa-2x {{ $signatureDetail->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                            </a>
-                                        @endcan
+                                        <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
+                                           href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.updateStatus',$signatureDetail)}}">
+                                            <i class="fa fa-2x {{ $signatureDetail->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.recommendation.sipharish.sipharishSignature.edit', $signatureDetail) }}"
+                                               href="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.edit', $signatureDetail) }}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                         @endcan
-                                        <form
-                                            action="{{ route('admin.recommendation.sipharish.sipharishSignature.destroy',$signatureDetail) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('recommendationCategory_delete')
+                                        @can('recommendationCategory_delete')
+                                            <form
+                                                action="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.destroy',$signatureDetail) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
                                                 <button data-bs-type="delete"
                                                         class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                            @endcan
-                                        </form>
+                                            </form>
                                     </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                             </tbody>
