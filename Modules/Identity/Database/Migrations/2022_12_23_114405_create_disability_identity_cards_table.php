@@ -40,6 +40,7 @@ return new class() extends Migration
             $table->string('phone')->nullable();
             $table->foreignId('disability_type_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('hospital_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('employee_signature_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('gov_disability_type_id')->nullable()->constrained('governmental_disability_types')->nullOnDelete()->onUpdate('no action');
             $table->string('status');
             $table->boolean('is_full_detail_required')->default(0);

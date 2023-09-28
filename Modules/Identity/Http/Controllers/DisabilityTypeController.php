@@ -12,14 +12,15 @@ class DisabilityTypeController extends Controller
     public function index()
     {
         $this->checkAuthorization('disabilityType_access');
-        $disabilityTypes = DisabilityType::latest()->paginate(10);
+        $disabilityTypes = DisabilityType::with('disabilityType')->latest()->paginate(10);
         return view('identity::admin.setting.disabilityType.index', compact('disabilityTypes'));
     }
 
     public function create()
     {
         $this->checkAuthorization('disabilityType_create');
-        return view('identity::admin.setting.disabilityType.create');
+        $disabilityTypes = DisabilityType::whereNull('disability_type_id')->latest()->get();
+        return view('identity::admin.setting.disabilityType.create', compact('disabilityTypes'));
     }
 
     public function store(StoreDisabilityTypeRequest $request)
@@ -39,7 +40,8 @@ class DisabilityTypeController extends Controller
     public function edit(DisabilityType $disabilityType)
     {
         $this->checkAuthorization('disabilityType_edit');
-        return view('identity::admin.setting.disabilityType.edit', compact('disabilityType'));
+        $disabilityTypes = DisabilityType::whereNull('disability_type_id')->latest()->get();
+        return view('identity::admin.setting.disabilityType.edit', compact('disabilityType','disabilityTypes'));
     }
 
     public function update(UpdateDisabilityTypeRequest $request, DisabilityType $disabilityType)

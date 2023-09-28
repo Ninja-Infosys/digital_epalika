@@ -31,6 +31,61 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="profile-table"  id="printData">
+                        <table class="table  table-bordered table-hover table-responsive py-1">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    नागरिकता नं. : {{get_nepali_number($disabilityIdentityCard->name)}}
+                                </td>
+                                <td>
+                                    परिचयपत्रको प्रकार
+                                    :  ({{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}})
+                                </td>
+                                <td rowspan="4" class="text-center ">
+                                    <img src="{{$disabilityIdentityCard->photo_url}}"
+                                         alt="{{$disabilityIdentityCard->name}}"
+                                         style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    आमाको नाम : {{$disabilityIdentityCard->mother_name}}
+                                </td>
+                                <td>
+                                    बाबुको नाम : {{$disabilityIdentityCard->father_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>जन्म मिति : {{get_nepali_number($disabilityIdentityCard->dob)}}</td>
+                                <td>  लिङ्ग : {{$disabilityIdentityCard->gender?->label() ?? ''}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    ठेगाना  : {{$disabilityIdentityCard->localBody->local_body?? ""}}
+                                    -{{$disabilityIdentityCard->ward_no}}
+                                    , {{$disabilityIdentityCard->tole}}
+                                </td>
+                                <td>
+                                    अपाङ्गताको प्रकार : {{$disabilityIdentityCard->disabilityType->title?? ""}}
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <th colspan="3" class="text-center">संरक्षकको विवरण</th>
+                            </tr>
+                            <tr>
+                                <td>नाम: {{$disabilityIdentityCard->guardian_name}}</td>
+                                <td> नाता : {{$disabilityIdentityCard->relationship->title??''}}</td>
+                                <td>फोन : {{$disabilityIdentityCard->phone}}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

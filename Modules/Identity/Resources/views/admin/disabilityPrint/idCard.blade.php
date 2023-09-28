@@ -238,7 +238,10 @@
                         <div class="fs16">
                             बाबु/आमा वा संरक्षकको नाम थर :
                         </div>
-                        <div class="dynamic-content">{{$disabilityIdentityCard->guardian_name??''}}
+                        <div class="dynamic-content">
+                            {{$disabilityIdentityCard->father_name??''}}/
+                            {{$disabilityIdentityCard->mother_name??''}}/
+                            {{$disabilityIdentityCard->guardian_name??''}}
                         </div>
                     </div>
                 </td>
@@ -281,7 +284,8 @@
                         <div class="fs16">
                             नाम, थर :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content" style="color: white !important;">
+                             {{$disabilityIdentityCard->employeeSignature->name??''}}
                         </div>
                     </div>
                 </td>
@@ -506,7 +510,10 @@
                         <div class="fs16">
                             Father/Mother Name or Guardian :
                         </div>
-                        <div class="dynamic-content">{{$disabilityIdentityCard->guardian_name_en??''}}
+                        <div class="dynamic-content">
+                            {{$disabilityIdentityCard->father_name_en??''}}/
+                            {{$disabilityIdentityCard->mother_name_en??''}}/
+                            {{$disabilityIdentityCard->guardian_name_en??''}}
                         </div>
                     </div>
                 </td>
