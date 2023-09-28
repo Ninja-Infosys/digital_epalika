@@ -284,7 +284,7 @@
                         <div class="fs16">
                             नाम, थर :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">
+                        <div class="dynamic-content" style="color: white !important;">.
                              {{$disabilityIdentityCard->employeeSignature->name??''}}
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                         <div class="fs16">
                             मिति :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content" >{{get_nepali_number($date)}}
                         </div>
                     </div>
                 </td>
@@ -580,7 +580,7 @@
                         <div class="fs16">
                             Date :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content">{{$date}}
                         </div>
                     </div>
                 </td>

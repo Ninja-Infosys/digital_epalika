@@ -75,7 +75,7 @@ class DisabilityIdentityCardController extends Controller
             $recommendationTemplateSetting = RecommendationTemplateSetting::first();
             $disabilityIdentityCard = DisabilityIdentityCard::create($request->validated() + [
                     'status' => ($request->boolean('is_full_detail_required')
-                        || !$recommendationTemplateSetting->is_hospital_detail_required)
+                        || !$recommendationTemplateSetting?->is_hospital_detail_required)
                         ? StatusEnum::ELIGIBILITY_FOR_MEETING->value
                         : StatusEnum::PENDING->value,
                     'fiscal_year_id' => officeSetting()->fiscal_year_id ?? null,

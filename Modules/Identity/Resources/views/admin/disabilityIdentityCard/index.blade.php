@@ -59,7 +59,7 @@
                                             {{ $disabilityIdentityCard->citizenship_no? $disabilityIdentityCard->citizenship_no."(नागरिकता)" : $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
                                         </td>
                                         <td>
-                                            @if ($disabilityIdentityCard->can_edit_delete)
+                                            @if ($disabilityIdentityCard?->can_edit_delete)
                                                 <a data-bs-type="edit"
                                                     href="{{ route('identity.admin.disabilityIdentityCard.show', $disabilityIdentityCard) }}"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -74,13 +74,13 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
 
-                                                @if ($recommendationTemplateSetting->is_hospital_detail_required)
+                                                @if ($recommendationTemplateSetting?->is_hospital_detail_required)
                                                     <button type="button" class="btn btn-xs btn-outline-warning"
                                                         data-bs-toggle="modal" data-bs-target="#print">
                                                         <i class="fa fa-print"></i>
                                                     </button>
                                                     @include('identity::admin.disabilityIdentityCard.inc.print-model')
-                                                    @if (!empty($disabilityIdentityCard->recommend_at))
+                                                    @if (!empty($disabilityIdentityCard?->recommend_at))
                                                         <button type="button" class="btn btn-xs btn-outline-success"
                                                             data-bs-toggle="modal" data-bs-target="#print1">
                                                             <i class="fa fa-plus"></i>
