@@ -27,6 +27,7 @@ class SipharishCreate extends Model
     protected $fillable = [
         'sipharis_form_type_id',
         'personal_detail_id',
+        'sipharis_signature_id',
         'signatured_by',
         'approved_by',
         'approved_date',
@@ -83,5 +84,10 @@ class SipharishCreate extends Model
             $replaceableList->put('{{' . $values->SipharisFormFields->field_name . '}}', $values->value);
         }
         return Str::replace($replaceableList->keys(), $replaceableList->values(), $this->SipharishFormType?->content ?? '');
+    }
+
+    public function signature()
+    {
+        return $this->belongsTo(SipharisSignatureDetail::class, 'sipharis_signature_id');
     }
 }
