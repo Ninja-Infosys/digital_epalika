@@ -82,6 +82,13 @@
                     </a>
                 </li>
             @endcan
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroup*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.enaksa.naksaPassGroup.index')}}">
+                        <span> नक्शा पास समूह  </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

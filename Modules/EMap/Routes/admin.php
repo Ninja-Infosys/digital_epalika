@@ -10,6 +10,7 @@ use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
+use Modules\EMap\Http\Controllers\NaksaPassGroupController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -41,6 +42,12 @@ Route::prefix('setting')->group(function () {
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
     Route::get('{noticeTypeEnum}/eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
     Route::resource('{noticeTypeEnum}/eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
+});
+
+
+Route::prefix('enaksa')->as('enaksa.')->group(function () {
+    Route::get('naksaPassGroup/{naksaPassGroup}/toggleStatus', [NaksaPassGroupController::class, 'updateStatus'])->name('naksaPassGroup.updateStatus');
+    Route::resource('naksaPassGroup', NaksaPassGroupController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {
