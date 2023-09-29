@@ -27,11 +27,9 @@ class Form extends Model
         "title",
         "order",
         "form_type",
-        "form_url_add",
-        "form_url_edit",
-        "form_url_view",
+        'route_name',
         "status",
-        "group_id",
+        "map_pass_group_id",
         "need_from",
     ];
 
@@ -40,7 +38,7 @@ class Form extends Model
         "need_from" => EMapFormFillerTypeEnum::class,
         "order" => 'integer',
         "status" => 'bool',
-        "group_id" => 'integer',
+        "map_pass_group_id" => 'integer',
     ];
 
     public function scopeStatus(Builder $builder, bool $status = true): void

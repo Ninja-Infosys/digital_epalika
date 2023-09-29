@@ -145,6 +145,6 @@ class User extends Authenticatable
 
     public function mapPassGroups(): BelongsToMany
     {
-        return $this->belongsToMany(MapPassGroup::class);
+        return $this->belongsToMany(\Modules\EMap\Entities\New\MapPassGroup::class);
     }
 }

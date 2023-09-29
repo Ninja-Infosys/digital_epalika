@@ -12,12 +12,10 @@ return new class extends Migration {
             $table->string('title');
             $table->integer('order')->nullable();
             $table->string('form_type');
-            $table->string('form_url_add')->nullable();
-            $table->string('form_url_edit')->nullable();
-            $table->string('form_url_view')->nullable();
+            $table->string('route_name')->nullable();
             $table->boolean('status')->default(true);
-            $table->foreignId('group_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('need_from');
+            $table->foreignId('map_pass_group_id')->nullable()->constrained('map_pass_groups')->nullOnDelete();
+            $table->enum('need_from', ['owner', 'organization','office']);
             $table->timestamps();
             $table->softDeletes();
         });

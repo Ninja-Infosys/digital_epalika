@@ -14,12 +14,12 @@ class NaksaPassGroupController extends Controller
     public function index()
     {
         $naksaPassGroups = MapPassGroup::latest()->get();
-        return view('emap::admin.mapPassGroup.index',compact('naksaPassGroups'));
+        return view('emap::admin.naksaPassGroup.index',compact('naksaPassGroups'));
     }
 
     public function create()
     {
-        return view('emap::admin.mapPassGroup.create');
+        return view('emap::admin.naksaPassGroup.create');
     }
 
     public function store(StoreNaksaPassRequest $request)
@@ -36,7 +36,7 @@ class NaksaPassGroupController extends Controller
 
     public function edit(MapPassGroup $naksaPassGroup)
     {
-        return view('emap::admin.mapPassGroup.edit',compact('naksaPassGroup'));
+        return view('emap::admin.naksaPassGroup.edit',compact('naksaPassGroup'));
     }
 
     public function update(UpdateNaksaPassRequest $request, MapPassGroup $naksaPassGroup)
