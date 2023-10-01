@@ -67,6 +67,12 @@
                                                         <i class="fa fa-print"></i>
 
                                                     </a>
+                                                     <a data-bs-type="edit"
+                                                    href="{{ route('identity.admin.identityPrint.edit', $disabilityIdentityCard) }}"
+                                                    class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                    title="सम्पादन गर्नुहोस्">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -50,6 +50,7 @@ Route::prefix('disability')->group(function () {
     Route::resource('fullDetail/disabilityIdentityCard', DisabilityFullDetailController::class)->names('disabilityFullDetail')->except('create', 'store', 'destroy');
     Route::get('identityPrint/disabilityIdentityCard/{disabilityIdentityCard}/print', [IdentityPrintController::class, 'printCard'])->name('disabilityIdentityCard.printCard');
     Route::get('identityPrint', [IdentityPrintController::class, 'print'])->name('identityPrint');
+    Route::resource('identityPrint/disabilityIdentityCard', IdentityPrintController::class)->names('identityPrint');
 });
 
 Route::post('identityMeeting/{identityMeeting}/minute', [IdentityMeetingController::class, 'minuteStore'])->name('identityMeeting.minute.store');

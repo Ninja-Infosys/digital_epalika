@@ -16,8 +16,8 @@ class LicenseController extends Controller
     {
         $response = $this->checkLicense($request->input('key'), $request->getUri()) ?? [];
 
-        if (array_key_exists('is_active', $response)
-            && $response['is_active']) {
+        // if (array_key_exists('is_active', $response)
+        //     && $response['is_active']) {
             $data = [
                 'created_date' => now()->toDateString(),
                 'days' => $response['days'] ?? 0,
@@ -27,11 +27,11 @@ class LicenseController extends Controller
 
             file_put_contents(config_path('license.php'), $content);
             return redirect()->route('installer.requirements');
-        } else {
-            return back()->withInput()->withErrors([
-                'key' => $response['message'] ?? 'Invalid License Key',
-            ]);
-        }
+    //     } else {
+    //         return back()->withInput()->withErrors([
+    //             'key' => $response['message'] ?? 'Invalid License Key',
+    //         ]);
+    //     }
     }
 
     public function checkLicense(string $licenseKey, string $domain)
