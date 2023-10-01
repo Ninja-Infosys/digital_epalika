@@ -82,6 +82,28 @@
                     </a>
                 </li>
             @endcan
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroup*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.enaksa.naksaPassGroup.index')}}">
+                        <span> नक्शा पास समूह  </span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroup*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.enaksa.naksaPassGroupUser.create')}}">
+                        <span> नक्शा पास समूह प्रयोगक्रता  </span>
+                    </a>
+                </li>
+            @endcan
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroupUser*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.enaksa.naksaForm.index')}}">
+                        <span> नक्शा पास फारम  </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

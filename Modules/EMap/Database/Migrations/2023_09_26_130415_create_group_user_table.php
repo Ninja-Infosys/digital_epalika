@@ -7,14 +7,14 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('group_user', function (Blueprint $table) {
+        Schema::create('map_pass_group_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('group_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('map_pass_group_user')->constrained('map_pass_groups')->cascadeOnDelete();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('group_user');
+        Schema::dropIfExists('map_pass_group_user');
     }
 };
