@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\EMap\Http\Requests\NaksaPassGroup;
+namespace Modules\EMap\Http\Requests\MapPassGroup;
 
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class StoreNaksaPassRequest extends FormRequest
+class StoreMapPassGroupRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,7 +18,8 @@ class StoreNaksaPassRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            //'status'=>['required',Rule::in(['active', 'inactive'])]
+            'users' => ['required', 'array'],
+            'users.*' => [Rule::exists('users', 'id')->withoutTrashed()]
         ];
     }
 }

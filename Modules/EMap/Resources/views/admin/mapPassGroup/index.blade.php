@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="header-title mb-0">नक्शा पास फारम सूची</h4>
+                        <h4 class="header-title mb-0">नक्शा पास समूह सूची</h4>
                         @can('mapFee_create')
-                            <a href="{{route('emap.admin.enaksa.naksaForm.create')}}"
+                            <a href="{{route('emap.admin.mapPassGroup.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -42,45 +42,46 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक</th>
-                                <th>क्रम शन्ख्य </th>
-                                <th>नक्शा पास फारम को किसिम </th>
+                                <th>प्रयोगकर्ता संख्या</th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($naksaForms as $naksaForm)
+                            @forelse($mapPassGroups as $mapPassGroup)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$naksaForm->title}}</td>
-                                    <td>{{$naksaForm->order}}</td>
-                                    <td>{{$naksaForm->form_type}}</td>
+                                    <td>{{$mapPassGroup->title}}</td>
+                                    <td>{{get_nepali_number($mapPassGroup->users_count)}}</td>
                                     <td>
-                                    @can('recommendationCategory_access')
+                                        @can('recommendationCategory_access')
                                             <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
-                                               href="{{route('emap.admin.enaksa.naksaForm.updateStatus',$naksaForm)}}">
-                                                <i class="fa fa-2x {{ $naksaForm->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                               href="{{route('emap.admin.mapPassGroup.updateStatus',$mapPassGroup)}}">
+                                                <i class="fa fa-2x {{ $mapPassGroup->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td>
                                         @can('mapFee_edit')
-                                        <a data-bs-type="edit" href="{{route('emap.admin.enaksa.naksaForm.edit',$naksaForm)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
+                                            <a data-bs-type="edit"
+                                               href="{{route('emap.admin.mapPassGroup.edit',$mapPassGroup)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
                                         @endcan
 
-                                        <form action="{{route('emap.admin.enaksa.naksaForm.destroy',$naksaForm)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('mapFee_delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i> मेटाउनु होस्
-                                            </button>
-                                            @endcan
-                                        </form>
+                                        @can('mapFee_delete')
+                                            <form action="{{route('emap.admin.mapPassGroup.destroy',$mapPassGroup)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
+                                                    मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

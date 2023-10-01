@@ -7,28 +7,33 @@ use Modules\EMap\Entities\Form;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
-use Modules\EMap\Http\Requests\NaksaForm\StoreNaksaFormRequest;
+use Modules\EMap\Entities\New\MapPassGroup;
+use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Http\Requests\NaksaForm\StoreFormRequest;
 
-class NaksaFormController extends Controller
+class FormController extends Controller
 {
     public function index()
     {
-        $naksaForms = Form::latest()->get();
-        return view('emap::admin.naksaPassForm.index',compact('naksaForms'));
+        $forms = Form::orderBy('order')->get();
+        return view('emap::admin.form.index', compact('forms'));
     }
 
     public function create()
     {
-        return view('emap::admin.naksaPassForm.create');
+        $mapPassGroups = MapPassGroup::latest()->get();
+        return view('emap::admin.form.create', compact('mapPassGroups'));
     }
 
-    public function store(StoreNaksaFormRequest $request)
+    public function store(StoreFormRequest $request)
     {
         DB::transaction(function () use ($request) {
             $form = Form::create($request->validated());
 
             if (array_key_exists('fields', $request->validated())
-                && !empty($request->validated()['fields'])) {
+                && !empty($request->validated()['fields'])
+                && $request->input('form_type') == FormTypeEnum::FILE->value
+            ) {
 
                 foreach ($request->validated()['fields'] as $field) {
                     $form->formDocumentFormats()->create($field);
@@ -46,11 +51,10 @@ class NaksaFormController extends Controller
         return view('emap::show');
     }
 
-    public function edit(Form $naksaForm)
+    public function edit(Form $form)
     {
-        $naksaForm->load('formDocumentFormats');
-        //dd($naksaForm);
-        return view('emap::admin.naksaPassForm.edit',compact('naksaForm'));
+        $form->load('formDocumentFormats');
+        return view('emap::admin.form.edit', compact('form'));
     }
 
     public function update(Request $request, $id)
@@ -58,22 +62,23 @@ class NaksaFormController extends Controller
         //
     }
 
-    public function destroy(Form $naksaForm)
+    public function destroy(Form $form)
     {
-        if ($naksaForm->status) {
+        if ($form->status) {
             toast('सक्रिय भएको नक्शा पास समूह मेटाउन मनाहि छ', 'error');
             return back();
         }
-        $naksaForm->delete();
+        $form->delete();
         toast('नक्शा पास समूह मेटियो', 'success');
         return back();
     }
-    public function updateStatus(Form $naksaForm)
+
+    public function updateStatus(Form $form)
     {
         $this->checkAuthorization('recommendationTemplate_access');
 
-        $naksaForm->update([
-            'status' => !$naksaForm->status
+        $form->update([
+            'status' => !$form->status
         ]);
         toast('नक्शा पास समूह सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();

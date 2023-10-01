@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
@@ -10,9 +11,8 @@ use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
-use Modules\EMap\Http\Controllers\NaksaPassGroupController;
-use Modules\EMap\Http\Controllers\NaksaPassGroupUserController;
-use Modules\EMap\Http\Controllers\NaksaFormController;
+use Modules\EMap\Http\Controllers\MapPassGroupController;
+use Modules\EMap\Http\Controllers\FormController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -44,15 +44,11 @@ Route::prefix('setting')->group(function () {
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
     Route::get('{noticeTypeEnum}/eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
     Route::resource('{noticeTypeEnum}/eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
-});
 
-
-Route::prefix('enaksa')->as('enaksa.')->group(function () {
-    Route::get('naksaPassGroup/{naksaPassGroup}/toggleStatus', [NaksaPassGroupController::class, 'updateStatus'])->name('naksaPassGroup.updateStatus');
-    Route::resource('naksaPassGroup', NaksaPassGroupController::class);
-    Route::resource('naksaPassGroupUser', NaksaPassGroupUserController::class);
-    Route::get('naksaForm/{naksaForm}/toggleStatus', [NaksaFormController::class, 'updateStatus'])->name('naksaForm.updateStatus');
-    Route::resource('naksaForm', NaksaFormController::class);
+    Route::get('mapPassGroup/{mapPassGroup}/toggleStatus', [MapPassGroupController::class, 'updateStatus'])->name('mapPassGroup.updateStatus');
+    Route::resource('mapPassGroup', MapPassGroupController::class);
+    Route::get('form/{form}/toggleStatus', [FormController::class, 'updateStatus'])->name('form.updateStatus');
+    Route::resource('form', FormController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {

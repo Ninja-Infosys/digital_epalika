@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('map_pass_group_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('map_pass_group_user')->constrained('map_pass_groups')->cascadeOnDelete();
+            $table->foreignId('map_pass_group_id')->constrained()->cascadeOnDelete();
         });
     }
 

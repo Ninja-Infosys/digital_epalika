@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="header-title mb-0">नक्शा पास समूह सूची</h4>
+                        <h4 class="header-title mb-0">नक्शा पास फारम सूची</h4>
                         @can('mapFee_create')
-                            <a href="{{route('emap.admin.enaksa.naksaPassGroup.create')}}"
+                            <a href="{{route('emap.admin.form.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -42,32 +42,36 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक</th>
+                                <th>क्रम शन्ख्य </th>
+                                <th>नक्शा पास फारम को किसिम </th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($naksaPassGroups as $naksaPassGroup)
+                            @forelse($forms as $form)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$naksaPassGroup->title}}</td>
+                                    <td>{{$form->title}}</td>
+                                    <td>{{$form->order}}</td>
+                                    <td>{{$form->form_type?->label()}}</td>
                                     <td>
                                     @can('recommendationCategory_access')
                                             <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
-                                               href="{{route('emap.admin.enaksa.naksaPassGroup.updateStatus',$naksaPassGroup)}}">
-                                                <i class="fa fa-2x {{ $naksaPassGroup->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
+                                               href="{{route('emap.admin.form.updateStatus',$form)}}">
+                                                <i class="fa fa-2x {{ $form->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td>
                                         @can('mapFee_edit')
-                                        <a data-bs-type="edit" href="{{route('emap.admin.enaksa.naksaPassGroup.edit',$naksaPassGroup)}}"
+                                        <a data-bs-type="edit" href="{{route('emap.admin.form.edit',$form)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         @endcan
 
-                                        <form action="{{route('emap.admin.enaksa.naksaPassGroup.destroy',$naksaPassGroup)}}"
+                                        <form action="{{route('emap.admin.form.destroy',$form)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -81,7 +85,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

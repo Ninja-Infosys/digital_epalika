@@ -3,6 +3,7 @@
 namespace Modules\EMap\Entities;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,15 +38,15 @@ class FormDocumentFormat extends Model
     {
         return $this->belongsTo(Form::class);
     }
-    protected function Title(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => $value ?
-                Storage::disk('public')->url($value)
-                : '',
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('naksaFormDocuments/' . Str::slug($this->attributes['form_id'] ?? 'recommendation', '_'), 'public')
-                : null
-        );
-    }
+//    protected function Title(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn($value) => $value ?
+//                Storage::disk('public')->url($value)
+//                : '',
+//            set: fn($value) => (!empty($value) && !is_string($value))
+//                ? $value->store('naksaFormDocuments/' . Str::slug($this->attributes['form_id'] ?? 'recommendation', '_'), 'public')
+//                : null
+//        );
+//    }
 }
