@@ -53,8 +53,9 @@ class FormController extends Controller
 
     public function edit(Form $form)
     {
-        $form->load('formDocumentFormats');
-        return view('emap::admin.form.edit', compact('form'));
+        $form->load('formDocumentFormats')->loadCount('formDocumentFormats');
+        $mapPassGroups = MapPassGroup::latest()->get();
+        return view('emap::admin.form.edit', compact('form', 'mapPassGroups'));
     }
 
     public function update(Request $request, $id)
