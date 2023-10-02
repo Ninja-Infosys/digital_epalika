@@ -477,3 +477,13 @@ if (!function_exists('get_nepali_count')) {
         return $count[$key][$language] ?? '';
     }
 }
+
+if (!function_exists('replaceFormPlaceholderWith')) 
+{
+    function replaceFormPlaceholderWith($fieldName,$fieldValue,$formContent)
+    {
+    return str_replace($fieldName, $fieldValue, $formContent);
+    }
+
+
+}
