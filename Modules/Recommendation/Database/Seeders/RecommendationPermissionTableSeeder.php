@@ -34,7 +34,12 @@ class RecommendationPermissionTableSeeder extends Seeder
             'recommendationReport_recommendationCategory',
             'recommendationReport_personalDetail',
             'recommendationSetting_access',
-            'recommendationSetting_edit'
+            'recommendationSetting_edit',
+            'recommendationSubCategory_access',
+            'recommendationSubCategory_edit',
+            'recommendationSubCategory_create',
+            'recommendationSubCategory_delete'
+
         ];
 
         $this->storePermission($permissions);
