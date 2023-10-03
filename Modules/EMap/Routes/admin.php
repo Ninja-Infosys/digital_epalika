@@ -8,6 +8,7 @@ use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
+use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
@@ -49,6 +50,8 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapPassGroup', MapPassGroupController::class);
     Route::get('form/{form}/toggleStatus', [FormController::class, 'updateStatus'])->name('form.updateStatus');
     Route::resource('form', FormController::class);
+    Route::get('dynamicForm/{dynamicForm}/toggleStatus', [DynamicFormController::class, 'updateStatus'])->name('dynamicForm.updateStatus');
+    Route::resource('dynamicForm', DynamicFormController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {

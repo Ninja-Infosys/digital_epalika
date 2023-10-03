@@ -96,6 +96,11 @@
                     </a>
                 </li>
             @endcan
+            <li class="{{request()->is('admin/emap/setting/dynamicForm*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.dynamicForm.index')}}">
+                    <span> नक्शा पास फारम  </span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
