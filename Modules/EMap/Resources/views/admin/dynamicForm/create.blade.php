@@ -10,11 +10,11 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">सिफारिस</li>
-                        <li class="breadcrumb-item active">नयाँ सिफारिस</li>
+                        <li class="breadcrumb-item active">नक्शा पास फारम</li>
+                        <li class="breadcrumb-item active">नयाँ नक्शा पास फारम</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नयाँ सिफारिस</h4>
+                <h4 class="page-title">नयाँ नक्शा पास फारम</h4>
             </div>
         </div>
     </div>
@@ -25,10 +25,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
+                        <h4 class="header-title">नयाँ नक्शा पास फारम दर्ता गर्नुहोस</h4>
                         <a href="{{ route('emap.admin.dynamicForm.index','') }}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सिफारिस सुची
+                            <i class="fa fa-list"></i> नक्शा पास फारम सुची
                         </a>
                     </div>
                 </div>
@@ -53,10 +53,17 @@
                                     @enderror
                                 </div>
                                 <div class="col-ms-12 md-2">
-                                    <div id="builder"></div>
-                                    <div id="form"></div>
+                                    <label for="fields" class="form-label">फारम</label>
+                                    <div class="d-flex justify-content-between gap-1">
+                                        <textarea name="fields" id="fields" class="form-control" cols="30"
+                                                  rows="10" readonly>{{old('fields')}}</textarea>
+                                    </div>
+                                    @error('fields')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+                            <div id="builder"></div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
                             पेश गर्नुहोस्
@@ -69,73 +76,43 @@
 
         </div>
     </div>
-@push('style')
-{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">--}}
-{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
-    <link rel="stylesheet" href="{{asset('assets/backend/form/css/formio.builder.min.css')}}">
-@endpush
+    @push('style')
+        {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">--}}
+        {{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
+        <link rel="stylesheet" href="{{asset('assets/backend/form/css/formio.builder.min.css')}}">
+    @endpush
 
     @push('scripts')
         <script src="{{asset('assets/backend/form/js/cash.min.js')}}"></script>
         <script src="{{asset('assets/backend/form/js/collect.min.js')}}"></script>
         <script src="{{asset('assets/backend/form/js/formio.full.min.js')}}"></script>
         <script>
-            const options = {
-                builder: {
-                    basic: {
-                        // We can change the title of a category...
-                        title: 'Basic'
-                    },
-                    layout: {
-                        // ... or change its position...
-                        weight: 100
-                    },
-                    // ... and even create custom categories
-                    custom: {
-                        title: 'Custom'
-                    }
+            function decodeHtmlEntities(input) {
+                const doc = new DOMParser().parseFromString(input, "text/html");
+                return doc.documentElement.textContent;
+            }
+
+            const fieldsInput = document.getElementById('fields');
+            const builderElement = document.getElementById('builder');
+            const initialValue = fieldsInput.value;
+
+            let component = {};
+
+            // Check if the input is not empty and is valid JSON
+            if (initialValue) {
+                try {
+                    component = JSON.parse(decodeHtmlEntities(initialValue));
+                } catch (error) {
+                    console.error('Invalid JSON:', error);
                 }
-            };
-            const form = {
-                components: [
-                    {
-                        key: 'textfield',
-                        type: 'textfield',
-                        validate: {
-                            required: true
-                        }
-                    },
-                    {
-                        key: 'datetime',
-                        type: 'datetime'
-                    },
-                    {
-                        key: 'submit',
-                        type: 'button',
-                        theme: 'primary'
-                    }
-                ]
-            };
-            const formio = {
-                builder: null,
-                form: null
-            };
+            }
 
-
-            Formio.builder(document.getElementById('builder'), form, options)
-                .then((instance) => {
-                    formio.builder = instance;
-                    // console.log(instance)
-                    // Define the on render event of the formio builder instance
-                    formio.builder.on('render', (p) => {
-                        // console.log(p)
-                        // Update the formio form object and re render the form
-                        formio.form.form = form;
-                        formio.form.render();
-
-                        // Update the json code using Prism.js
-                    });
+            // const component = document.getElementById('fields').value != null ? JSON.parse(decodeHtmlEntities(document.getElementById('fields').value)) : {};
+            Formio.builder(document.getElementById('builder'), component).then((instance) => {
+                instance.on('change', function (changed) {
+                    fieldsInput.value = JSON.stringify(changed);
                 });
+            });
         </script>
     @endpush
 @endsection

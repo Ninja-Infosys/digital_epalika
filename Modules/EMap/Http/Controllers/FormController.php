@@ -3,6 +3,7 @@
 namespace Modules\EMap\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\EMap\Entities\DynamicForm;
 use Modules\EMap\Entities\Form;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,8 @@ class FormController extends Controller
     public function create()
     {
         $mapPassGroups = MapPassGroup::latest()->get();
-        return view('emap::admin.form.create', compact('mapPassGroups'));
+        $dynamicForms = DynamicForm::all();
+        return view('emap::admin.form.create', compact('mapPassGroups','dynamicForms'));
     }
 
     public function store(StoreFormRequest $request)

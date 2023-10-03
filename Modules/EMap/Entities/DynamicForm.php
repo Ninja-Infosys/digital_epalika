@@ -22,4 +22,8 @@ class DynamicForm extends Model
         'status',
         'fields',
     ];
+
+    protected $casts = [
+        'status' => 'boolean'
+    ];
 }

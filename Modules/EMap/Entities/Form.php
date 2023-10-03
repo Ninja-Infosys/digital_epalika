@@ -27,7 +27,7 @@ class Form extends Model
         "title",
         "order",
         "form_type",
-        'route_name',
+        'dynamic_form_id',
         "status",
         "map_pass_group_id",
         "need_from",
@@ -39,6 +39,7 @@ class Form extends Model
         "order" => 'integer',
         "status" => 'bool',
         "map_pass_group_id" => 'integer',
+        "dynamic_form_id" => 'integer',
     ];
 
     public function scopeStatus(Builder $builder, bool $status = true): void
@@ -49,6 +50,11 @@ class Form extends Model
     public function group(): BelongsTo
     {
         return $this->belongsTo(MapPassGroup::class);
+    }
+
+    public function dynamicForm(): BelongsTo
+    {
+        return $this->belongsTo(DynamicForm::class);
     }
 
     public function formDocumentFormats(): HasMany

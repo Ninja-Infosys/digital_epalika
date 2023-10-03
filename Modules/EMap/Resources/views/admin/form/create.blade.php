@@ -110,13 +110,19 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2" id="form">
-                                    <label for="route_name" class="form-label">Route name</label>
+                                    <label for="dynamic_form_id" class="form-label">Route name</label>
                                     <div class="d-flex justify-content-between gap-1">
-                                        <input type="text" class="form-control personalDetail"
-                                               value="{{old('route_name')}}"
-                                               name="route_name" id="route_name"/>
+                                        <select id="dynamic_form_id" name="dynamic_form_id"
+                                                class="form-select" required>
+                                            <option value="">-- छान्नुहोस् --</option>
+                                            @foreach($dynamicForms as $dynamicForm)
+                                                <option
+                                                    value="{{$dynamicForm->id}}" {{old('dynamic_form_id') == $dynamicForm->id ? 'selected' : ''}}>{{$dynamicForm->title}}</option>
+                                            @endforeach
+
+                                        </select>
                                     </div>
-                                    @error('route_name')
+                                    @error('dynamic_form_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -132,35 +138,35 @@
                                     <fieldset class="bg-soft-secondary">
                                         <div id="files">
 
-                                                <div class="main">
-                                                    <div class="text-end">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger"
-                                                                data-toggle="remove-parent" data-parent=".main"
-                                                                data-target-element="files">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
+                                            <div class="main">
+                                                <div class="text-end">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            data-toggle="remove-parent" data-parent=".main"
+                                                            data-target-element="files">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="row border-bottom mb-2">
+                                                    <div class="col-md-12 mb-2">
+                                                        <label for="documents" class="form-label">डकुमेन्ट </label>
+                                                        <input type="text" name="fields[0][title]"
+                                                               class="form-control"
+                                                               id="documents" multiple/>
                                                     </div>
-                                                    <div class="row border-bottom mb-2">
-                                                        <div class="col-md-12 mb-2">
-                                                            <label for="documents" class="form-label">डकुमेन्ट </label>
-                                                            <input type="text" name="fields[0][title]"
-                                                                   class="form-control"
-                                                                   id="documents" multiple/>
-                                                        </div>
 
-                                                        <div class="col-md-12 mb-2">
-                                                            <label for="fields.description" class="form-label">डाटा
-                                                                *</label>
-                                                            <textarea name="fields[0][description]"
-                                                                      id="fields.description" required cols="10"
-                                                                      rows="1"
-                                                                      class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('field') }}</textarea>
-                                                            @error('description')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
+                                                    <div class="col-md-12 mb-2">
+                                                        <label for="fields.description" class="form-label">डाटा
+                                                            *</label>
+                                                        <textarea name="fields[0][description]"
+                                                                  id="fields.description" required cols="10"
+                                                                  rows="1"
+                                                                  class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('field') }}</textarea>
+                                                        @error('description')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
                                                     </div>
                                                 </div>
+                                            </div>
 
                                         </div>
                                     </fieldset>
@@ -209,8 +215,17 @@
                 // Show fields based on the selected value
                 if (selectedValue === 'form') {
                     form.classList.remove('hidden');
+
+                    const fileElements = file.querySelectorAll('input, select, textarea, select');
+                    fileElements.forEach((element) => {
+                        element.value = null;
+                    });
                 } else if (selectedValue === 'file') {
                     file.classList.remove('hidden');
+                    const formElements = form.querySelectorAll('input, select, textarea, select');
+                    formElements.forEach((element) => {
+                        element.value = null;
+                    });
                 }
                 // Add more conditions to show other fields as needed
             }
