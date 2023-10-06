@@ -89,18 +89,18 @@
                     </a>
                 </li>
             @endcan
-            @can('eMapTemplate_access')
-                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroupUser*') ? 'active' : ''}}">
-                    <a href="{{route('emap.admin.form.index')}}">
-                        <span> नक्शा पास फारम  </span>
-                    </a>
-                </li>
-            @endcan
             <li class="{{request()->is('admin/emap/setting/dynamicForm*') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.dynamicForm.index')}}">
                     <span> नक्शा पास फारम  </span>
                 </a>
             </li>
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroupUser*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.form.index')}}">
+                        <span> नक्शा पास मर्यादाक्रम</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
