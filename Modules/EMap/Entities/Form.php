@@ -27,20 +27,23 @@ class Form extends Model
         "title",
         "order",
         "form_type",
-        'dynamic_form_id',
         "status",
         "map_pass_group_id",
         "need_from",
     ];
 
     protected $casts = [
-        "form_type" => FormTypeEnum::class,
         "need_from" => EMapFormFillerTypeEnum::class,
         "order" => 'integer',
         "status" => 'bool',
         "map_pass_group_id" => 'integer',
         "dynamic_form_id" => 'integer',
     ];
+
+    public function formDataTypes(): HasMany
+    {
+        return $this->hasMany(FormDataType::class);
+    }
 
     public function scopeStatus(Builder $builder, bool $status = true): void
     {

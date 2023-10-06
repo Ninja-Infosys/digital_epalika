@@ -7,12 +7,12 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('dynamic_forms', function (Blueprint $table) {
+        Schema::create('form_data_types', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->boolean('status')->default(true);
-            $table->json('fields');
-            $table->longText('template')->nullable();
+            $table->foreignId('form_id')->constrained()->cascadeOnDelete();
+            $table->string('type');
+            $table->nullableMorphs('model');
+            $table->string('route_name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -20,6 +20,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('dynamic_forms');
+        Schema::dropIfExists('form_data_types');
     }
 };

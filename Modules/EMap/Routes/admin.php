@@ -43,14 +43,16 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapFee', MapFeeController::class);
     Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
-    Route::get('{noticeTypeEnum}/eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
-    Route::resource('{noticeTypeEnum}/eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
+    Route::get('eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
+    Route::resource('{eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
 
     Route::get('mapPassGroup/{mapPassGroup}/toggleStatus', [MapPassGroupController::class, 'updateStatus'])->name('mapPassGroup.updateStatus');
     Route::resource('mapPassGroup', MapPassGroupController::class);
     Route::get('form/{form}/toggleStatus', [FormController::class, 'updateStatus'])->name('form.updateStatus');
     Route::resource('form', FormController::class);
     Route::get('dynamicForm/{dynamicForm}/toggleStatus', [DynamicFormController::class, 'updateStatus'])->name('dynamicForm.updateStatus');
+    Route::get('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'template'])->name('dynamicForm.template');
+    Route::put('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'templateStore'])->name('dynamicForm.template.store');
     Route::resource('dynamicForm', DynamicFormController::class);
 });
 
