@@ -16,6 +16,7 @@ use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityPrint;
 use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\EmployeeSignature;
 use Modules\Identity\Entities\Hospital;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Identity\Http\Requests\DisabilityIdentityCard\StoreDisabilityIdentityCardRequest;
@@ -53,7 +54,8 @@ class DisabilityIdentityCardController extends Controller
             ->latest()
             ->paginate(10);
         $hospitals = Hospital::all();
-        return view('identity::admin.disabilityIdentityCard.index', compact('hospitals', 'disabilityIdentityCards', 'recommendationTemplateSetting'));
+
+        return view('identity::admin.disabilityIdentityCard.index', compact('hospitals', 'disabilityIdentityCards', 'recommendationTemplateSetting',));
     }
 
     public function create()
@@ -167,6 +169,7 @@ class DisabilityIdentityCardController extends Controller
             'hospital_id' => $request->input('hospital_id'),
             'recommend_at' => now()
         ]);
+
         $data = $disabilityIdentityCard->getIdentityTemplateData(RecommendationTemplateSetting::first());
         $data = str_replace('[@today_date]', get_nepali_number($request->input('date')), $data);
         $view = (string)View::make('identity::admin.disabilityIdentityCard.inc.print',
@@ -175,6 +178,7 @@ class DisabilityIdentityCardController extends Controller
             'view' => $view,
         ]);
     }
+
 
     public function reportData(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
     {

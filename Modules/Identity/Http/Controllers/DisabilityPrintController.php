@@ -15,24 +15,22 @@ use Modules\Identity\Entities\EmployeeSignature;
 class DisabilityPrintController extends Controller
 {
     use NepaliDateConverter;
-    public function store(Request $request, DisabilityIdentityCard $disabilityIdentityCard, EmployeeSignature $employeeSignature)
+    public function store(Request $request, DisabilityIdentityCard $disabilityIdentityCard,)
     {
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255']
         ]);
-        $disabilityPrint =  DB::transaction(function () use ($officeHeaders, $todayDate, $data, $disabilityIdentityCard, $employeeSignature) {
+        $disabilityPrint =  DB::transaction(function () use ($officeHeaders, $todayDate, $data, $disabilityIdentityCard,) {
             return DisabilityPrint::create($data + [
                     'disability_identity_card_id' => $disabilityIdentityCard->id,
                     'date' => $this->get_today_nepali_date(),
                     'date_ad' => now(),
-                    'employee_signature_id' => $employeeSignature->id
                 ]);
         });
         $disabilityIdentityCard->load('disabilityType', 'province', 'district', 'localBody');
-        $employeeSignature->load('name', 'designation', 'red_signature');
-        $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders', 'disabilityPrint', 'employeeSignature'));
+        $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders', 'disabilityPrint',));
         return response()->json([
             'view' => $view,
         ]);
