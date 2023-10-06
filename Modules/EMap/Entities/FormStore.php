@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Modules\EMap\Enums\DocumentStatusEnum;
 
-class AppliedDocument extends Model
+class FormStore extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -30,7 +30,9 @@ class AppliedDocument extends Model
     ];
 
     protected $casts = [
-        'status' => DocumentStatusEnum::class
+        'status' => DocumentStatusEnum::class,
+        "data" => 'json',
+        "fields" => 'json',
     ];
 
     protected $appends = [
@@ -57,18 +59,13 @@ class AppliedDocument extends Model
         return $this->belongsTo(MapApply::class);
     }
 
-    public function appliedDocumentStatuses(): HasMany
+    public function formStoreStatuses(): HasMany
     {
-        return $this->hasMany(AppliedDocumentStatus::class);
+        return $this->hasMany(FormStoreStatus::class);
     }
 
     public function uploaded_by(): MorphTo
     {
         return $this->morphTo();
-    }
-
-    public function appliedMapFiles(): MorphMany
-    {
-        return $this->morphMany(AppliedMapFile::class, 'fileable');
     }
 }
