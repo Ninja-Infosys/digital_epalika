@@ -29,22 +29,7 @@ class FormController extends Controller
 
     public function store(StoreFormRequest $request)
     {
-        DB::transaction(function () use ($request) {
-            $form = Form::create($request->validated());
 
-            if (array_key_exists('fields', $request->validated())
-                && !empty($request->validated()['fields'])
-                && $request->input('form_type') == FormTypeEnum::FILE->value
-            ) {
-
-                foreach ($request->validated()['fields'] as $field) {
-                    $form->formDocumentFormats()->create($field);
-                }
-
-            }
-        });
-        toast('सिफारिस सफलतापूर्वक थपियो', 'success');
-        return back();
 
     }
 

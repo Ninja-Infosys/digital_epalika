@@ -14,7 +14,7 @@ class DynamicFormController extends Controller
     public function index()
     {
         $dynamicForms = DynamicForm::latest()->get();
-        return view('emap::admin.dynamicForm.index',compact('dynamicForms'));
+        return view('emap::admin.dynamicForm.index', compact('dynamicForms'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class DynamicFormController extends Controller
 
     public function show(DynamicForm $dynamicForm)
     {
-        return view('emap::admin.dynamicForm.show',compact('dynamicForm'));
+        return view('emap::admin.dynamicForm.show', compact('dynamicForm'));
     }
 
     public function edit(DynamicForm $dynamicForm)
@@ -63,6 +63,27 @@ class DynamicFormController extends Controller
         $dynamicForm->update([
             'status' => !$dynamicForm->status
         ]);
+        toast('फारम सम्पादन गरियो', 'success');
+        return back();
+    }
+
+    public function template(DynamicForm $dynamicForm)
+    {
+        $data = collect(json_decode($dynamicForm->fields, true))
+            ->map(function ($collection) {
+                return collect($collection)->pluck('label', 'key');
+            });
+
+        return view('emap::admin.dynamicForm.template', compact('dynamicForm', 'data'));
+    }
+
+    public function templateStore(Request $request, DynamicForm $dynamicForm)
+    {
+       $data =  $request->validate([
+           'template'=>['required']
+        ]);
+
+        $dynamicForm->update($data);
         toast('फारम सम्पादन गरियो', 'success');
         return back();
     }

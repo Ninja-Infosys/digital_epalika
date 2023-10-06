@@ -1,0 +1,43 @@
+<?php
+
+namespace Modules\EMap\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\FormTypeEnum;
+
+class FormDataType extends Model
+{
+    use HasFactory, SoftDeletes, EventObserveTrait;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    protected $fillable = [
+        "form_id",
+        "type",
+        "model",
+        "route_name",
+    ];
+
+    protected $casts = [
+        "type" => FormTypeEnum::class,
+    ];
+
+    public function form(): BelongsTo
+    {
+        return $this->belongsTo(Form::class);
+    }
+
+    public function model(): MorphTo
+    {
+        return $this->morphTo();
+    }
+}

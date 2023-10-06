@@ -10,56 +10,52 @@ use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Http\Requests\Template\StoreEMapTemplateRequest;
 use Modules\EMap\Http\Requests\Template\UpdateEMapTemplateRequest;
+use View;
 
 class EMapTemplateController extends Controller
 {
-    public function index(NoticeTypeEnum $noticeTypeEnum)
+    public function index()
     {
         $this->checkAuthorization('eMapTemplate_access');
 
-        $eMapTemplates = EMapTemplate::where('for', $noticeTypeEnum)->latest()->get();
+        $eMapTemplates = EMapTemplate::latest()->get();
 
-        return view('emap::admin.template.index', compact('eMapTemplates', 'noticeTypeEnum'));
+        return view('emap::admin.template.index', compact('eMapTemplates'));
     }
 
-    public function create(NoticeTypeEnum $noticeTypeEnum)
+    public function create()
     {
         $this->checkAuthorization('eMapTemplate_create');
 
-        return view('emap::admin.template.create', compact('noticeTypeEnum'));
+        return view('emap::admin.template.create');
     }
 
-    public function store(StoreEMapTemplateRequest $request, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
+    public function store(StoreEMapTemplateRequest $request,): RedirectResponse
     {
         $this->checkAuthorization('eMapTemplate_create');
         $this->forgotCache('eMapTemplates');
-        EMapTemplate::create($request->validated() + [
-                'for' => $noticeTypeEnum->value,
-                'status' => EMapTemplate::where('for', $noticeTypeEnum->value)
-                    ->where('status', 1)
-                    ->count() === 0 ? '1' : '0'
-            ]);
+        EMapTemplate::create($request->validated());
 
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
 
-    public function show(NoticeTypeEnum $noticeTypeEnum, EMapTemplate $eMapTemplate)
+    public function show(EMapTemplate $eMapTemplate)
     {
         $this->checkAuthorization('eMapTemplate_access');
 
         return view('emap::show');
     }
 
-    public function edit(NoticeTypeEnum $noticeTypeEnum, EMapTemplate $eMapTemplate)
+    public function edit(EMapTemplate $eMapTemplate)
     {
         $this->checkAuthorization('eMapTemplate_edit');
 
-        return view('emap::admin.template.edit', compact('eMapTemplate', 'noticeTypeEnum'));
+        return view('emap::admin.template.edit', compact('eMapTemplate'));
     }
 
-    public function update(UpdateEMapTemplateRequest $request, NoticeTypeEnum $noticeTypeEnum, EMapTemplate $eMapTemplate)
+    public function update(UpdateEMapTemplateRequest $request, EMapTemplate $eMapTemplate)
     {
         $this->checkAuthorization('eMapTemplate_edit');
 
@@ -68,10 +64,10 @@ class EMapTemplateController extends Controller
 
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('emap.admin.eMapTemplate.index', $noticeTypeEnum));
+        return redirect(route('emap.admin.eMapTemplate.index'));
     }
 
-    public function destroy(NoticeTypeEnum $noticeTypeEnum, EMapTemplate $eMapTemplate): RedirectResponse
+    public function destroy(EMapTemplate $eMapTemplate): RedirectResponse
     {
         $this->checkAuthorization('eMapTemplate_delete');
         if ($eMapTemplate->status == 1) {
@@ -94,26 +90,25 @@ class EMapTemplateController extends Controller
         ]);
 
         return match ($request->input('type')) {
-            'naksa_certificate' => \View::make('emap::admin.notice.naksa_certificate'),
-            'level' => \View::make('emap::admin.notice.level'),
-            'superstructure' => \View::make('emap::admin.notice.superstructure'),
-            'construction-completion-certificate' => \View::make('emap::admin.notice.building_construction_completion_certificate'),
+            'naksa_certificate' => View::make('emap::admin.notice.naksa_certificate'),
+            'level' => View::make('emap::admin.notice.level'),
+            'superstructure' => View::make('emap::admin.notice.superstructure'),
+            'construction-completion-certificate' => View::make('emap::admin.notice.building_construction_completion_certificate'),
             default => 'Enter Valid Type',
         };
     }
 
-    public function updateStatus(NoticeTypeEnum $noticeTypeEnum, EMapTemplate $eMapTemplate): RedirectResponse
+    public function updateStatus(EMapTemplate $eMapTemplate): RedirectResponse
     {
         $this->checkAuthorization('eMapTemplate_access');
 
-        DB::transaction(function () use ($eMapTemplate, $noticeTypeEnum) {
+        DB::transaction(function () use ($eMapTemplate) {
             $this->forgotCache('eMapTemplates');
             $eMapTemplate->update([
                 'status' => 1
             ]);
 
             EMapTemplate::whereNot('id', $eMapTemplate->id)
-                ->where('for', $noticeTypeEnum->value)
                 ->where('status', 1)
                 ->update([
                     'status' => 0

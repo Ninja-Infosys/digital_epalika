@@ -64,8 +64,13 @@
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <a
-                                           href="{{route('emap.admin.dynamicForm.show',$dynamicForm)}}"
-                                           class="btn btn-xs btn-outline-warning ">
+                                            href="{{route('emap.admin.dynamicForm.template',$dynamicForm)}}"
+                                            class="btn btn-xs btn-outline-secondary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            <i class="fa fa-file"></i> टेम्प्लेट
+                                        </a>
+                                        <a
+                                            href="{{route('emap.admin.dynamicForm.show',$dynamicForm)}}"
+                                            class="btn btn-xs btn-outline-warning ">
                                             <i class="fa fa-eye"></i> हेर्नुहोस
                                         </a>
                                         <form action="{{route('emap.admin.dynamicForm.destroy',$dynamicForm)}}"
