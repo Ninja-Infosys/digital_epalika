@@ -91,7 +91,7 @@
                         <td>
                             <select id="type" name="type"
                                     wire:model="form.formDataType.{{$index}}.model_id"
-                                    class="form-select" required>
+                                    class="form-select">
                                 <option value="">-- छान्नुहोस् --</option>
                                 @foreach($form['formDataType'][$index]['data'] ?? [] as $key=>$data)
                                     <option

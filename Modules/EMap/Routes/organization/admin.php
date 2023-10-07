@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
 use Modules\EMap\Http\Controllers\OrganizationDashboardController;
@@ -22,7 +23,7 @@ Route::controller(MapApplyController::class)->group(function () {
 });
 Route::get('mapApply/{mapApply}/form', [MapApplyController::class,'formDetail'])->name('fromDetail');
 Route::resource('mapApply', MapApplyController::class);
-Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', \Modules\EMap\Http\Controllers\AttachDocumentController::class);
+Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::resource('taxClearance', TaxClearanceController::class);
 
 

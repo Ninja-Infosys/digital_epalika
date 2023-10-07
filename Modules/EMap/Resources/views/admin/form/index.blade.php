@@ -42,7 +42,6 @@
                                     <th>क्र.स</th>
                                     <th>शिर्षक</th>
                                     <th>क्रम शन्ख्य </th>
-                                    <th>नक्शा पास फारम को किसिम </th>
                                     <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
@@ -53,7 +52,6 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $form->title }}</td>
                                         <td>{{ $form->order }}</td>
-                                        <td>{{ $form->form_type?->label() }}</td>
                                         <td>
                                             @can('recommendationCategory_access')
                                                 <a data-bs-type="edit" class="{{ get_setting('Pin') ? 'confirm_pin' : '' }}"
