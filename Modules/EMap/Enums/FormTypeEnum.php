@@ -9,6 +9,7 @@ enum FormTypeEnum: string
 {
     case FILE = 'file';
     case FORM = 'form';
+    case PAYMENT = 'payment';
 
     public function label(): string
     {
@@ -20,19 +21,21 @@ enum FormTypeEnum: string
         return match ($value) {
             self::FILE => 'फाइल',
             self::FORM => 'फारम',
+            self::PAYMENT => 'राजस्व',
         };
     }
 
-    public function class(): string
+    public function class(): string|null
     {
         return self::getClass($this);
     }
 
-    public static function getClass(self $value): string
+    public static function getClass(self $value): string|null
     {
         return match ($value) {
-            self::FILE => new EMapTemplate(),
-            self::FORM => new DynamicForm(),
+            self::FILE => get_class(new EMapTemplate()),
+            self::FORM => get_class(new DynamicForm()),
+            self::PAYMENT => null
         };
     }
 }

@@ -22,9 +22,7 @@ class FormController extends Controller
 
     public function create()
     {
-        $mapPassGroups = MapPassGroup::latest()->get();
-        $dynamicForms = DynamicForm::all();
-        return view('emap::admin.form.create', compact('mapPassGroups','dynamicForms'));
+        return view('emap::admin.form.create');
     }
 
     public function store(StoreFormRequest $request)
@@ -40,9 +38,8 @@ class FormController extends Controller
 
     public function edit(Form $form)
     {
-        $form->load('formDocumentFormats')->loadCount('formDocumentFormats');
-        $mapPassGroups = MapPassGroup::latest()->get();
-        return view('emap::admin.form.edit', compact('form', 'mapPassGroups'));
+        $form->load('formDataTypes');
+        return view('emap::admin.form.edit', compact('form'));
     }
 
     public function update(Request $request, $id)

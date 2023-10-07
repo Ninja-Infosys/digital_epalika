@@ -8,6 +8,7 @@ use Livewire\Component;
 use Modules\EMap\Entities\DynamicForm;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\FormTypeEnum;
@@ -16,10 +17,30 @@ class FormDataTypeLivewire extends Component
 {
     public $form = [];
     public $mapPassGroups = [];
+    public $existingForm = null;
 
-    public function mount()
+    public function mount($form = null)
     {
         $this->mapPassGroups = MapPassGroup::all();
+
+        if (!empty($form)) {
+            $this->existingForm = $form;
+            $this->form['title'] = $form->title;
+            $this->form['order'] = $form->order;
+            $this->form['map_pass_group_id'] = $form->map_pass_group_id;
+            $this->form['need_from'] = $form->need_from;
+
+            $formDataTypeArray = [];
+
+            foreach ($form->formDataTypes as $index => $formDataType) {
+                $formDataTypeArray[$index]['id'] = $formDataType->id;
+                $formDataTypeArray[$index]['type'] = $formDataType->type;
+                $formDataTypeArray[$index]['model_id'] = $formDataType->model_id ?? '';
+                $formDataTypeArray[$index]['data'] = $this->resolveData($formDataType->type->value);
+            }
+
+            $this->form['formDataType'] = $formDataTypeArray;
+        }
     }
 
     public function addData(): void
@@ -35,12 +56,18 @@ class FormDataTypeLivewire extends Component
 
     public function changeData($index): void
     {
-        match ($this->form['formDataType'][$index]['type']) {
-            FormTypeEnum::FILE->value => $this->form['formDataType'][$index]['data'] = EMapTemplate::where('status', 1)->pluck('title', 'id'),
-            FormTypeEnum::FORM->value => $this->form['formDataType'][$index]['data'] = DynamicForm::where('status', 1)->pluck('title', 'id')
-        };
+        $this->form['formDataType'][$index]['data'] = $this->resolveData($this->form['formDataType'][$index]['type']);
         $this->form['formDataType'][$index]['model_id'] = null;
 
+    }
+
+    public function resolveData($type)
+    {
+        return match ($type) {
+            FormTypeEnum::FILE->value => EMapTemplate::where('status', 1)->pluck('title', 'id'),
+            FormTypeEnum::FORM->value => DynamicForm::where('status', 1)->pluck('title', 'id'),
+            default => null
+        };
     }
 
     protected $rules = [
@@ -50,7 +77,7 @@ class FormDataTypeLivewire extends Component
         "form.need_from" => ['required'],
         "form.formDataType" => ['required', 'array'],
         "form.formDataType.*.type" => ['required'],
-        "form.formDataType.*.model_id" => ['required', 'int'],
+        "form.formDataType.*.model_id" => ['nullable', 'int'],
     ];
 
 
@@ -65,12 +92,26 @@ class FormDataTypeLivewire extends Component
     {
         $validatedData = $this->validate();
         DB::transaction(function () use ($validatedData) {
-            $form = Form::create($validatedData['form']);
-
-            foreach ($validatedData['form']['formDataType'] as $formDataType) {
-                $form->formDataTypes()->create($formDataType);
+            if (!empty($this->existingForm)) {
+                $this->existingForm->update($validatedData['form']);
+                $form = $this->existingForm;
+            } else {
+                $form = Form::create($validatedData['form']);
             }
+            $existingFormFieldsId = collect($form->formDataTypes?->pluck('id'));
+            $newId = collect();
+            foreach ($validatedData['form']['formDataType'] as $formDataType) {
+                if (array_key_exists('id', $formDataType) && !empty($formDataType['id'])) {
+                    $formDataTypeData = FormDataType::find($formDataType['id']);
+                    $formDataTypeData->update($formDataType);
+                } else {
+                    $formDataTypeData = $form->formDataTypes()->create($formDataType);
+                }
+                $newId->push($formDataTypeData->id);
+            }
+            $diff = $existingFormFieldsId->diff($newId->filter());
 
+            FormDataType::whereIn('id', $diff->toArray())->delete();
         });
 
         $this->reset('form');
