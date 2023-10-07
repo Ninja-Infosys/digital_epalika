@@ -13,6 +13,7 @@ use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\NoticeTypeEnum;
+use Modules\EMap\Entities\Form;
 
 class MapApplyController extends Controller
 {
@@ -36,6 +37,13 @@ class MapApplyController extends Controller
         $mapSetting = MapSetting::first();
 
         return view('emap::organization.map-applies.edit', compact('mapSetting', 'mapApply'));
+    }
+
+    public function formDetail(MapApply $mapApply)
+    {
+        $forms = Form::with('formDataTypes.form.dynamicForm')->orderBy('order')->get();
+        return view('emap::organization.attach-document.index', compact('mapApply','forms'));
+
     }
 
     public function update(Request $request, MapApply $mapApply)

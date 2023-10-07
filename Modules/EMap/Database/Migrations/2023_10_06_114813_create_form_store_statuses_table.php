@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('form_store_id')->constrained()->cascadeOnDelete();
             $table->string('status');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->json('data');
             $table->json('fields')->nullable();
             $table->timestamps();

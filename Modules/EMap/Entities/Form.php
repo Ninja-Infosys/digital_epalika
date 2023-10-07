@@ -12,6 +12,7 @@ use App\Traits\EventObserveTrait;
 use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Entities\AppliedDocument;
 
 class Form extends Model
 {
@@ -63,5 +64,10 @@ class Form extends Model
     public function formDocumentFormats(): HasMany
     {
         return $this->hasMany(FormDocumentFormat::class);
+    }
+
+    public function appliedDocuments(): HasMany
+    {
+        return $this->hasMany(AppliedDocument::class);
     }
 }
