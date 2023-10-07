@@ -37,11 +37,11 @@ class AppliedMapFile extends Model
         return $this->belongsTo(MapApply::class);
     }
 
-    public function Document(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::disk('public')->url($value),
-            set: fn($value) => (!empty($value) && !is_string($value)) ? $value->store('mapApplies', 'public') : null,
-        );
-    }
+    // public function Document(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn($value) => Storage::disk('public')->url($value),
+    //         set: fn($value) => (!empty($value) && !is_string($value)) ? $value->store('mapApplies', 'public') : null,
+    //     );
+    // }
 }

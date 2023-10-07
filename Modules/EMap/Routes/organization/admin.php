@@ -20,8 +20,9 @@ Route::controller(MapApplyController::class)->group(function () {
     Route::get('mapApply/{mapApply}/template-data/{noticeTypeEnum}', 'getTemplateData')->name('getTemplateData');
     Route::post('mapApply/{mapApply}/storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('storeTemplateData');
 });
+Route::get('mapApply/{mapApply}/form', [MapApplyController::class,'formDetail'])->name('fromDetail');
 Route::resource('mapApply', MapApplyController::class);
-Route::resource('mapApply/{mapApply}/attachDocument', \Modules\EMap\Http\Controllers\AttachDocumentController::class);
+Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', \Modules\EMap\Http\Controllers\AttachDocumentController::class);
 Route::resource('taxClearance', TaxClearanceController::class);
 
 

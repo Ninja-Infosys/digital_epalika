@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('applied_document_id')->constrained()->cascadeOnDelete();
             $table->string('status');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

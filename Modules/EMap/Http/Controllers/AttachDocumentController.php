@@ -7,14 +7,23 @@ use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\AttachDocument;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\AppliedDocument;
+use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
+use Modules\EMap\Entities\Organization;
+use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\FormStoreStatus;
+use Modules\EMap\Entities\AppliedDocumentStatus;
+use Modules\EMap\Entities\AppliedMapFile;
+use Modules\EMap\Entities\FormDataType;
+use DB;
+use Modules\EMap\Enums\FormTypeEnum;
 
 class AttachDocumentController extends Controller
 {
     public function index(MapApply $mapApply)
     {
-        $forms = Form::orderBy('order')->get();
-        return view('emap::organization.attach-document.index', compact('mapApply','forms'));
+
     }
 
     public function create()
@@ -22,55 +31,62 @@ class AttachDocumentController extends Controller
         return view('emap::create');
     }
 
-    public function store(Request $request, MapApply $mapApply)
+    public function store(Request $request, MapApply $mapApply,Form $form,FormDataType $formDataType)
     {
-        $data = $request->validate([
-            'land_owner_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg'],
-            'blue_print' => ['required', 'mimes:png,jpg,jpeg'],
-            'pass_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'designer_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'permission_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'inheritance_document' => ['required', 'mimes:png,jpg,jpeg'],
+
+      if($formDataType->type->value == FormTypeEnum::FILE->value)
+      {
+        $data =  $request->validate([
+            'documents'=>['array','required'],
+            'documents.*'=>['mimes:pdf']
         ]);
+        DB::transaction(function () use($request,$mapApply,$form,$data){
+          $appliedDocument =   AppliedDocument::create([
+                'form_id'=> $form->id,
+                'map_apply_id'=> $mapApply->id,
+                'status'=> DocumentStatusEnum::PENDING->value,
+                'uploaded_by_type'=> Organization::class,
+                'uploaded_by_id'=> auth('organization')->user()->id
+            ]);
+            AppliedDocumentStatus::create([
+                "applied_document_id"=>$appliedDocument->id,
+                "status"=>DocumentStatusEnum::PENDING->value
+            ]);
+            foreach($data['documents'] as $file)
+            {
+                $appliedDocument->appliedMapFiles()->create([
+                    "map_apply_id"=>$mapApply->id,
+                    "document"=> $file->store('appliedDocument','public'),
+                ]);
+            }
+        });
+        toast('फाईल सफलतापूर्वक थपियो', 'success');
+        return redirect(route('organization.admin.fromDetail',$mapApply));
+      }else{
 
-        if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_document'));
-        }
-
-        if ($request->hasFile('land_revenue_document') && !empty($mapApply->attachDocument->land_revenue_document)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_revenue_document'));
-        }
-
-        if ($request->hasFile('land_owner_citizenship') && !empty($mapApply->attachDocument->land_owner_citizenship)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_citizenship'));
-        }
-
-        if ($request->hasFile('blue_print') && !empty($mapApply->attachDocument->blue_print)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('blue_print'));
-        }
-
-        if ($request->hasFile('pass_document') && !empty($mapApply->attachDocument->pass_document)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('pass_document'));
-        }
-
-        if ($request->hasFile('designer_document') && !empty($mapApply->attachDocument->designer_document)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('designer_document'));
-        }
-
-        if ($request->hasFile('permission_document') && !empty($mapApply->attachDocument->permission_document)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('permission_document'));
-        }
-
-        if ($request->hasFile('inheritance_document') && !empty($mapApply->attachDocument->inheritance_document)) {
-            $this->deleteFile($mapApply->attachDocument->getRawOriginal('inheritance_document'));
-        }
-        AttachDocument::updateOrCreate([
-            'map_apply_id' => $mapApply->id
-        ], $data);
-        toast('File added successfully', 'success');
-        return back();
+        $data =  $request->validate([
+            'data'=>['required'],
+        ]);
+        DB::transaction(function () use($request,$mapApply,$form,$data){
+          $formStore =   FormStore::create([
+                'form_id'=> $form->id,
+                'map_apply_id'=> $mapApply->id,
+                'status'=> DocumentStatusEnum::PENDING->value,
+                'uploaded_by_type'=> Organization::class,
+                'uploaded_by_id'=> auth('organization')->user()->id,
+                'data'=>json_encode($data['data']),
+                'fields'=>json_encode($data['data'])
+            ]);
+            FormStoreStatus::create([
+                "form_store_id"=>$formStore->id,
+                "status"=>DocumentStatusEnum::PENDING->value,
+                "data"=>json_encode($data['data']),
+                "fields"=>json_encode($data['data'])
+            ]);
+        });
+        toast('फाईल सफलतापूर्वक थपियो', 'success');
+        return redirect(route('organization.admin.fromDetail',$mapApply));
+      }
     }
 
     public function show($id)

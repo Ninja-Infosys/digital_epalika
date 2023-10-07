@@ -26,7 +26,10 @@ class FormStore extends Model
         'form_id',
         'map_apply_id',
         'status',
-        'uploaded_by',
+        'uploaded_by_type',
+        'uploaded_by_id',
+        'data',
+        'fields'
     ];
 
     protected $casts = [
