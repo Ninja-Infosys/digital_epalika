@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\AttachDocument;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\Form;
+use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 
 class AttachDocumentController extends Controller
 {
     public function index(MapApply $mapApply)
     {
-        $mapApply->load('attachDocument');
-        return view('emap::organization.attach-document.index', compact('mapApply'));
+        $forms = Form::orderBy('order')->get();
+        return view('emap::organization.attach-document.index', compact('mapApply','forms'));
     }
 
     public function create()
