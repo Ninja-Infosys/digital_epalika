@@ -16,7 +16,7 @@
     <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
         <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">
             <i class="fa fa-file"></i>
-            <span>सिफारिस सिर्जना गर्नुहोस्</span>
+            <span class="">सिफारिस सिर्जना गर्नुहोस्</span>
         </a>
     </li>
 @endcan
