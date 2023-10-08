@@ -26,7 +26,8 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::middleware(['web', 'auth:organization', 'password.check'])
             ->prefix('organization/admin')
-            ->as('organization.admin.')->group(base_path('/Modules/EMap/Routes/organization/admin.php'));
+            ->as('organization.admin.')
+            ->group(base_path('/Modules/EMap/Routes/organization/admin.php'));
 
         Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/emap')

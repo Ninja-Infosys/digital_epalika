@@ -20,10 +20,10 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="noti-tour">
-                    <i @class(['ring-bell'=>count(auth()->user()->unreadNotifications)>0,'fa', 'fa-bell', 'noti-icon'])></i>
-                    @if(count(auth()->user()->unreadNotifications)>0)
+                    <i @class(['ring-bell'=>count(auth()->user()?->unreadNotifications ?? [])>0,'fa', 'fa-bell', 'noti-icon'])></i>
+                    @if(count(auth()->user()?->unreadNotifications ?? [])>0)
                         <span class="badge bg-danger rounded-circle noti-icon-badge">
-                        {{count(auth()->user()->unreadNotifications)}}</span>
+                        {{count(auth()->user()?->unreadNotifications ?? [])}}</span>
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="noti-scroll" data-simplebar>
-                        @forelse (auth()->user()->unreadNotifications as $notification)
+                        @forelse (auth()->user()?->unreadNotifications ??[] as $notification)
                             <a href="{{ route('admin.notification.read',$notification) }}"
                                class="dropdown-item notify-item">
                                 <div class="notify-icon bg-info">
@@ -57,7 +57,7 @@
                                         @default
                                             नयाँ नोटिफिकेसन
                                     @endswitch
-                                    <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
+                                    <small class="text-muted">{{$notification->created_at?->diffForHumans()}}</small>
                                 </p>
                             </a>
                         @empty
@@ -92,7 +92,7 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="profile-tour">
-                    <img src="{{auth()->user()->profile_photo_url ?? ''}}" alt="user-image" class="rounded-circle"/>
+                    <img src="{{auth()->user()?->profile_photo_url ?? ''}}" alt="user-image" class="rounded-circle"/>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 

@@ -191,4 +191,24 @@ class MapApply extends Model
     {
         return $query->whereNull('sent_to_admin_at');
     }
+
+    public function appliedDocuments(): HasMany
+    {
+        return $this->hasMany(AppliedDocument::class);
+    }
+
+    public function formStores(): HasMany
+    {
+        return $this->hasMany(FormStore::class);
+    }
+
+    public function paymentStores(): HasMany
+    {
+        return $this->hasMany(PaymentStore::class);
+    }
+
+    public function getCheckFormFilledAttribute($value)
+    {
+
+    }
 }
