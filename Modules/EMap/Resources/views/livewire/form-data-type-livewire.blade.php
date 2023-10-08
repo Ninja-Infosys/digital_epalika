@@ -76,7 +76,7 @@
                         <td>
                             <select id="type" name="type"
                                     wire:model="form.formDataType.{{$index}}.type"
-                                    wire:change="changeData({{$index}})"
+                                    wire:change.prevent="changeData({{$index}})"
                                     class="form-select" required>
                                 <option value="">-- छान्नुहोस् --</option>
                                 @foreach(\Modules\EMap\Enums\FormTypeEnum::cases() as $formType)

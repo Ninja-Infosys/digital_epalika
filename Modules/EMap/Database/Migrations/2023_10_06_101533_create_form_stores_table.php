@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('form_stores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('form_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('map_applies_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
             $table->string('status');
             $table->json('data');
             $table->json('fields')->nullable();

@@ -7,12 +7,13 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('applied_documents', function (Blueprint $table) {
+        Schema::create('payment_store_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('payment_store_id')->constrained()->cascadeOnDelete();
             $table->string('status');
-            $table->nullableMorphs('uploaded_by');
+            $table->text('comment')->nullable();
+            $table->string('bill');
+            $table->float('amount')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -20,6 +21,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('applied_documents');
+        Schema::dropIfExists('payment_store_statuses');
     }
 };
