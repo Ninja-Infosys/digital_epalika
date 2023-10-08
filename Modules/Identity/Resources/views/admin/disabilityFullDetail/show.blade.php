@@ -140,7 +140,7 @@
                                 </tr>
                                 <tr>
                                     <td>पुरानो मिति: {{ $disabilityIdentityCard->old_date }}</td>
-                                    <td>दिएको मिति: {{ optional($disabilityIdentityCard->print_date)->title ?? '' }}</td>
+                                    <td>दिएको मिति: {{ $disabilityIdentityCard->print_date }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -150,9 +150,9 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
-                                            <p>नागरिकता (आगाडी)</p>
-                                            <a href="{{ route('admin.file-url-download', ['file_url' => $disabilityIdentityCard->document_photo] ?? '') }}"
-                                                class="btn btn-xs">
+                                            <p> नागरिकता (आगाडी) </p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$disabilityIdentityCard->getRawOriginal('document_photo')])}}"
+                                               class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>
@@ -170,8 +170,8 @@
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
                                             <p>नागरिकता (पछाडी)</p>
-                                            <a href="{{ route('admin.file-url-download', ['file_url' => $disabilityIdentityCard->document_photo_back] ?? '') }}"
-                                                class="btn btn-xs">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$disabilityIdentityCard->getRawOriginal('document_photo_back')])}}"
+                                               class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </div>

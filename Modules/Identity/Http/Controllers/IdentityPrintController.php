@@ -105,13 +105,15 @@ class IdentityPrintController extends Controller
     public function update(UpdateIdentityPrintRequest $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update', $disabilityIdentityCard);
-        $validatedData = $request->validated();
+        $disabilityIdentityCard->update($request->validated());
 
+
+        $printDate = $request->input('print_date');
+        $oldPrintDate = $request->input('old_print_date');
         $disabilityIdentityCard->update([
-            'print_date' => $validatedData['print_date'],
-            'old_print_date' => $validatedData['old_print_date'],
+            'print_date' => $printDate,
+            'old_print_date' => $oldPrintDate,
         ]);
-
         toast('अपाङ्गता परिचय पत्र सफलतापुर्बक अपडेट भयो', 'success');
         return redirect(route('identity.admin.identityPrint'));
     }
