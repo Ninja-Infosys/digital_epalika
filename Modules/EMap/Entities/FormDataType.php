@@ -56,4 +56,14 @@ class FormDataType extends Model
     {
         return $this->morphTo();
     }
+
+    public function appliedDocuments()
+    {
+        return $this->morphMany(AppliedDocument::class, 'form_data');
+    }
+
+    public function formStores()
+    {
+        return $this->morphMany(FormStore::class, 'form_data');
+    }
 }

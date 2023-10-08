@@ -27,7 +27,9 @@ class AppliedDocument extends Model
         'map_apply_id',
         'status',
         'uploaded_by_type',
-        'uploaded_by_id'
+        'uploaded_by_id',
+        'form_data_type',
+        'form_data_id',
     ];
 
     protected $casts = [
@@ -64,6 +66,12 @@ class AppliedDocument extends Model
     }
 
     public function uploaded_by(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
+
+    public function form_data(): MorphTo
     {
         return $this->morphTo();
     }
