@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('applied_documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('form_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('map_applies_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
             $table->string('status');
             $table->nullableMorphs('uploaded_by');
             $table->nullableMorphs('form_data');

@@ -8,9 +8,9 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="noti-tour">
-                    <i @class(['ring-bell'=>count(auth('organization')->user()->unreadNotifications)>0,'fa', 'fa-bell', 'noti-icon'])></i>
-                    <span class="badge bg-danger {{count(auth('organization')->user()->unreadNotifications)>0 ? 'd-block':'d-none'}} rounded-circle noti-icon-badge">
-                                        {{count(auth('organization')->user()->unreadNotifications)}}
+                    <i @class(['ring-bell'=>count(auth('organization')->user()->unreadNotifications ?? [])>0,'fa', 'fa-bell', 'noti-icon'])></i>
+                    <span class="badge bg-danger {{count(auth('organization')->user()->unreadNotifications?? [])>0 ? 'd-block':'d-none'}} rounded-circle noti-icon-badge">
+                                        {{count(auth('organization')->user()->unreadNotifications?? [])}}
                                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
@@ -22,7 +22,7 @@
                       </a> </span>नोटिफिकेसन</h5>
                     </div>
                     <div class="noti-scroll" data-simplebar>
-                        @forelse(auth('organization')->user()->unreadNotifications as $notification)
+                        @forelse(auth('organization')->user()->unreadNotifications?? [] as $notification)
                             <a href="{{route('organization.admin.notification',$notification)}}"
                                class="dropdown-item notify-item">
                                 <div class="notify-icon bg-info">

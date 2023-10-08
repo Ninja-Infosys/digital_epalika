@@ -4,19 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
-        Schema::create('form_stores', function (Blueprint $table) {
+        Schema::create('payment_stores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('form_id')->constrained()->cascadeOnDelete();
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
             $table->string('status');
-            $table->json('data');
-            $table->json('fields')->nullable();
+            $table->string('bill');
+            $table->float('amount')->default(0);
             $table->nullableMorphs('uploaded_by');
-            $table->nullableMorphs('form_data');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +22,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('form_stores');
+        Schema::dropIfExists('payment_stores');
     }
 };

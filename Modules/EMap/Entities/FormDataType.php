@@ -47,6 +47,11 @@ class FormDataType extends Model
         "type" => FormTypeEnum::class,
     ];
 
+    public function getOriginalTypeAttribute()
+    {
+        return $this->attributes['type'];
+    }
+
     public function form(): BelongsTo
     {
         return $this->belongsTo(Form::class);
