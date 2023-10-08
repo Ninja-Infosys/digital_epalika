@@ -5,6 +5,7 @@ namespace Modules\EMap\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\AttachDocument;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Form;
@@ -30,17 +31,16 @@ class AttachDocumentController extends Controller
                 'documents' => ['array', 'required'],
                 'documents.*' => ['file']
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data) {
+
+            DB::transaction(function () use ($request, $mapApply, $form, $data,$formDataType) {
                 $appliedDocument = $mapApply->appliedDocuments()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
-                    'uploaded_by_id' => auth('organization')->user()->id
+                    'uploaded_by_id' => auth('organization')->user()->id,
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id
                 ]);
-                /*AppliedDocumentStatus::create([
-                    "applied_document_id" => $appliedDocument->id,
-                    "status" => DocumentStatusEnum::PENDING->value
-                ]);*/
                 foreach ($data['documents'] as $file) {
                     $appliedDocument->appliedMapFiles()->create([
                         "map_apply_id" => $mapApply->id,
@@ -53,22 +53,18 @@ class AttachDocumentController extends Controller
             $data = $request->validate([
                 'data' => ['required'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data) {
+
+            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
                 $mapApply->formStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
                     'uploaded_by_id' => auth('organization')->user()->id,
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id
                     'data' => $data['data'],
                     'fields' => $form->fields ?? ''
                 ]);
-//
-//                FormStoreStatus::create([
-//                    "form_store_id" => $formStore->id,
-//                    "status" => DocumentStatusEnum::PENDING->value,
-//                    "data" => json_encode($data['data']),
-//                    "fields" => json_encode($data['data'])
-//                ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -85,17 +81,34 @@ class AttachDocumentController extends Controller
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
                 ]);
-//
-//                FormStoreStatus::create([
-//                    "form_store_id" => $formStore->id,
-//                    "status" => DocumentStatusEnum::PENDING->value,
-//                    "data" => json_encode($data['data']),
-//                    "fields" => json_encode($data['data'])
-//                ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
         return redirect(route('organization.admin.formDetail', [$mapApply, $form]));
+    }
+
+
+    public function documentDetail(AppliedDocument $appliedDocument)
+    {
+        $appliedDocument->load('appliedMapFiles');
+        return view('emap::organization.attach-document.documentDetail', compact('appliedDocument'));
+    }
+
+
+    public function formStoreDetail(FormStore $formStore)
+    {
+        $formStore->load('formStoreStatuses');
+        return view('emap::organization.attach-document.formStoreDetail', compact('formStore'));
+    }
+
+    public function printTemplate(MapApply $mapApply, FormDataType $formDataType)
+    {
+
+        $formDataType->load('model');
+
+        return response()->json([
+            'view' => (string)View::make('emap::organization.attach-document.print', compact('formDataType')),
+        ]);
     }
 
     public function update(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, $id)

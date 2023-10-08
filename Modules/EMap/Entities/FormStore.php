@@ -28,6 +28,8 @@ class FormStore extends Model
         'status',
         'uploaded_by_type',
         'uploaded_by_id',
+        'form_data_type',
+        'form_data_id',
         'data',
         'fields'
     ];
@@ -65,6 +67,11 @@ class FormStore extends Model
     public function formStoreStatuses(): HasMany
     {
         return $this->hasMany(FormStoreStatus::class);
+    }
+
+    public function form_data(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     public function uploaded_by(): MorphTo

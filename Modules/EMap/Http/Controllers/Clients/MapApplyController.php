@@ -42,14 +42,13 @@ class MapApplyController extends Controller
     public function formList(MapApply $mapApply)
     {
         $forms = Form::with('formDataTypes.form.dynamicForm')->orderBy('order')->get();
-        return view('emap::organization.attach-document.index', compact('mapApply','forms'));
-
+        return view('emap::organization.attach-document.index', compact('mapApply', 'forms'));
     }
 
-    public function formDetail(MapApply $mapApply,Form $form)
+    public function formDetail(MapApply $mapApply, Form $form)
     {
-        $form->load('formDataTypes.model');
-        return view('emap::organization.attach-document.create',compact('mapApply','form'));
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        return view('emap::organization.attach-document.create', compact('mapApply', 'form'));
     }
 
     public function update(Request $request, MapApply $mapApply)
@@ -132,10 +131,6 @@ class MapApplyController extends Controller
 
     public function updateStatus(MapApply $mapApply)
     {
-        if (empty($mapApply->attachDocument)) {
-            toast('फाइल अपलोड गर्नुहोस्', 'error');
-            return back();
-        }
         $mapApply->update([
             'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
         ]);
