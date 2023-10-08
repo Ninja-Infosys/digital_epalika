@@ -61,7 +61,7 @@
                                                     {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }}
                                                 </a>
                                                 <a class="btn btn-xs btn-outline-warning"
-                                                    href="{{ route('organization.admin.fromDetail', $mapApply) }}">
+                                                    href="{{ route('organization.admin.formList', $mapApply) }}">
                                                     <i class="fa fa-file"></i>
                                                 </a>
                                             @else

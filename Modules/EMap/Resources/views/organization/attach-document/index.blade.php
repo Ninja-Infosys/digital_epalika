@@ -30,26 +30,27 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-striped table-bordered">
                             <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>शिर्षक</th>
-                                <th>#</th>
-                            </tr>
+                                <tr>
+                                    <th>क्र.स</th>
+                                    <th>शिर्षक</th>
+                                    <th>#</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach ($forms as $form)
-                                <tr>
-                                    <td>{{get_nepali_number($loop->iteration)}}</td>
-                                    <td>{{$form->title}}</td>
-                                    <td>
-                                        @if($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
-                                            <button type="button" class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach ($forms as $form)
+                                    <tr>
+                                        <td>{{ get_nepali_number($loop->iteration) }}</td>
+                                        <td>{{ $form->title }}</td>
+                                        <td>
+                                            @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
+                                                <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
+                                                    class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -176,5 +177,5 @@
 
                 Formio.createForm(document.getElementById('form'), JSON.parse(component));
             </script>
-        @endpush--}}
+        @endpush --}}
 @endsection

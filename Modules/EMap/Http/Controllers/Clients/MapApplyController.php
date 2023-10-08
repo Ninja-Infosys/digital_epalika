@@ -39,11 +39,17 @@ class MapApplyController extends Controller
         return view('emap::organization.map-applies.edit', compact('mapSetting', 'mapApply'));
     }
 
-    public function formDetail(MapApply $mapApply)
+    public function formList(MapApply $mapApply)
     {
         $forms = Form::with('formDataTypes.form.dynamicForm')->orderBy('order')->get();
         return view('emap::organization.attach-document.index', compact('mapApply','forms'));
 
+    }
+
+    public function formDetail(MapApply $mapApply,Form $form)
+    {
+        $form->load('formDataTypes.model');
+        return view('emap::organization.attach-document.create',compact('mapApply','form'));
     }
 
     public function update(Request $request, MapApply $mapApply)
