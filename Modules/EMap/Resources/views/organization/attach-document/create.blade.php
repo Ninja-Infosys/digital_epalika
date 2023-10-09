@@ -148,7 +148,7 @@
     @endpush
 
     @push('scripts')
-        <script src="{{ asset('assets/backend/form/js/cash.min.js') }}"></script>
+        {{-- <script src="{{ asset('assets/backend/form/js/cash.min.js') }}"></script>
         <script src="{{ asset('assets/backend/form/js/collect.min.js') }}"></script>
         <script src="{{ asset('assets/backend/form/js/formio.full.min.js') }}"></script>
         <script>
@@ -159,7 +159,7 @@
             const component = decodeHtmlEntities('{{ $formDataType->model->fields ?? '' }}');
 
             Formio.createForm(document.getElementById('formData'), JSON.parse(component));
-        </script>
+        </script> --}}
          <script>
             $(".printDetail").on("click", function (e) {
                 // alert('dd');
@@ -189,8 +189,8 @@
         @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::PAYMENT)
             <x-bill-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
         @endif
-        
+
         --}}
-  
+
 
 @endsection
