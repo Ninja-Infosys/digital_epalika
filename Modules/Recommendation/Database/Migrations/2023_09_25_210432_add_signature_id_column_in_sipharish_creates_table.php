@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sipharish_creates', function (Blueprint $table) {
-            $table->foreignId('sipharis_signature_id')->constrained('sipharis_signature_details')->onDelete('cascade');
+            $table->foreignId('sipharis_signature_id')->nullable()->constrained('sipharis_signature_details')->onDelete('cascade');
 
         });
     }

@@ -37,9 +37,8 @@ class SipharishFormTypeController extends Controller
                     'created_by' => auth()->id()
                 ]);
 
-            if ($sipharis && !empty($request->validated()['field'])) {
+            if ($sipharis && !empty($request->validated()['fields'])) {
                 foreach ($request->input('fields') as $data) {
-                    //dd($data);die;
                     $sipharis->sipharisFormFields()->create($data + [
                             'created_by' => auth()->id()
                         ]);

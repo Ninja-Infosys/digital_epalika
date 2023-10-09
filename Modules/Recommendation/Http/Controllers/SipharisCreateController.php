@@ -25,7 +25,7 @@ class SipharisCreateController extends Controller
     public function store(StoreSipharisCreatedRequest $request)
     {
 //        dd($request->validated());
-        DB::transaction(function () use ($request) {
+        $sipharis = DB::transaction(function () use ($request) {
             $sipharis = SipharishCreate::create($request->validated() + [
                     'created_by' => auth()->id()
                 ]);
@@ -49,10 +49,12 @@ class SipharisCreateController extends Controller
                 }
 
             }
+
+            return $sipharis;
         });
 
         toast('सिफारिस सफलतापूर्वक थपियो', 'success');
-        return back();
+        return redirect(route('admin.recommendation.sipharish.sipharishCreate.show', $sipharis->id));
 
 
     }
