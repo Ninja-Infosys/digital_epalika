@@ -3,6 +3,7 @@
 namespace Modules\Identity\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ethnicity;
@@ -38,6 +39,7 @@ class IdentityPrintController extends Controller
     public function printCard(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $view = DB::transaction(function () use ($disabilityIdentityCard) {
+        $date = $this->get_today_nepali_date();
             $disabilityIdentityCard->update([
                 'print_count' => $disabilityIdentityCard->print_count + 1
             ]);
@@ -49,8 +51,10 @@ class IdentityPrintController extends Controller
                 'disabilityType',
                 'employeeSignature'
             );
-
             return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
+
+            return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard', 'date'));
+
         });
         return response()->json([
             'view' => $view,
