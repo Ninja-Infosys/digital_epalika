@@ -61,7 +61,7 @@ class AttachDocumentController extends Controller
                     'uploaded_by_type' => Organization::class,
                     'uploaded_by_id' => auth('organization')->user()->id,
                     'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id
+                    'form_data_id' => $formDataType->id,
                     'data' => $data['data'],
                     'fields' => $form->fields ?? ''
                 ]);

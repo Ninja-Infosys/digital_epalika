@@ -1,73 +1,120 @@
-@extends('admin.layouts.master')
-@section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.files.file')}}">फाईल</a>
-                        </li>
-                    </ol>
+ <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">नयाँ
+                                {{ $formDataType->type->value == Modules\EMap\Enums\FormTypeEnum::FILE->value ? 'फाइल' : 'फारम' }}
+                                थप्नुहोस्</h4>
+                                @if( $formDataType->type->value == Modules\EMap\Enums\FormTypeEnum::FILE->value)
+                                <a href="javascript:void(0)"
+                                route_action="{{ route('organization.admin.printTemplate',[$mapApply,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
+                                   <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
+                                </a>
+                                @endif
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if ($formDataType->type->value == Modules\EMap\Enums\FormTypeEnum::FILE->value)
+                            <form
+                                action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
+                                method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <label for="documents" class="form-label">फाईल*</label>
+                                        <input type="file" name="documents[]"
+                                            class="form-control @error('documents') is-invalid @enderror" id="documents"
+                                            multiple />
+                                        @error('documents.*')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('documents')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>
+                            </form>
+                        @else
+                            <form
+                                action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
+                                enctype="multipart/form-data" method="POST">
+                                @csrf
+                                <div id="formData">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    save
+                                </button>
+                            </form>
+                        @endif
+                    </div>
                 </div>
-                <h4 class="page-title">फाईल</h4>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">
+                                {{ $formDataType->type->value == Modules\EMap\Enums\FormTypeEnum::FILE->value ? 'फाइल' : 'फारम' }}
+                                विवरण
+                            </h4>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>क्र.स</th>
+                                        <th>अवस्था</th>
+                                        <th>मिति</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if( $formDataType->type->value == Modules\EMap\Enums\FormTypeEnum::FILE->value)
+                                        @foreach ($formDataType->appliedDocuments as $appliedDocument)
+                                            <tr>
+                                                <td>{{ get_nepali_number($loop->iteration) }}</td>
+                                                <td>{{ $appliedDocument->status->label() ?? '' }}</td>
+                                                <td>
+                                                    {{ $appliedDocument->created_at->format('Y-m-d') }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('organization.admin.documentDetail',$appliedDocument) }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                    <tr>
+                                        @foreach ($formDataType->formStores as $formStore)
+                                            <tr>
+                                                <td>{{ get_nepali_number($loop->iteration) }}</td>
+                                                <td>{{ $formStore->status->label() ?? '' }}</td>
+                                                <td>
+                                                    {{ $formStore->created_at->format('Y-m-d') }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <div class="d-md-flex justify-content-between">
-                <form class="search-bar pt-2">
-                    <div class="position-relative">
-                        <input type="text" class="form-control form-control-light" placeholder="फाईल खोज्नुहोस्...">
-                        <span class="mdi mdi-magnify"></span>
-                    </div>
-                </form>
-                <div class="pt-2 mt-md-0">
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list-alt"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-info"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="my-3">
-                <div class="row mx-n1 g-0 pb-3">
-                    <div class="border-bottom d-flex justify-content-between">
-                        <p class="text-primary fw-semibold fs-5">युनिक आईडी: २०७९/०६</p>
-                        <button class="btn-primary btn-sm btn"><i class="fa fa-download"></i></button>
-                    </div>
-                    <div class="col-xl-4 col-lg-6">
-                        <div class="card m-1 shadow border rounded" data-bs-toggle="tooltip" data-bs-placement="top"
-                             title="फाईल को शिर्षक फाईल को शिर्षक फाईल फाईल को शिर्षक फाईल को शिर्षक फाईल">
-                            <div class="p-2">
-                                <div class="row align-items-center">
-                                    <div class="col-auto pe-0">
-                                        <div class="avatar-sm">
-                                           <span class="avatar-title text-primary rounded">
-                                                <i class="fa fa-file-pdf fs-1"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col text-muted fw-bold text-truncate">
-                                        फाईल को शिर्षक फाईल को शिर्षक फाईल
-                                    </div>
-                                    <div class="col d-flex justify-content-between">
-                                        <p class="mb-0 font-13">2.3 MB</p>
-                                        <button class="btn-primary btn-sm btn">
-                                            <i class="fa fa-download text-white"></i>
-                                        </button>
-                                    </div>
-                                </div> <!-- end row -->
-                            </div> <!-- end .p-2-->
-                        </div> <!-- end col -->
-                    </div> <!-- end col-->
-                </div> <!-- end row-->
-            </div> <!-- end .mt-3-->
-        </div>
-    </div>
-@endsection

@@ -5,6 +5,7 @@ namespace Modules\EMap\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
@@ -62,12 +63,12 @@ class FormDataType extends Model
         return $this->morphTo();
     }
 
-    public function appliedDocuments()
+    public function appliedDocuments(): MorphMany
     {
         return $this->morphMany(AppliedDocument::class, 'form_data');
     }
 
-    public function formStores()
+    public function formStores(): MorphMany
     {
         return $this->morphMany(FormStore::class, 'form_data');
     }
