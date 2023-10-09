@@ -13,10 +13,10 @@ use Livewire\Component;
 class Field extends Component
 {
 
-    public int|null $personal_detail_id = null;
-    public int|null $sipharis_category_id = null;
-    public int|null $sipharis_sub_category_id = null;
-    public int|null $sipharis_form_type_id = null;
+    public string|int|null $personal_detail_id = null;
+    public string|int|null $sipharis_category_id = null;
+    public string|int|null $sipharis_sub_category_id = null;
+    public string|int|null $sipharis_form_type_id = null;
     public $status = 1;
     public $fields = [];
     public $personalDetails = [];

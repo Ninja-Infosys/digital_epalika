@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('e_map_templates', function (Blueprint $table) {
-            $table->boolean('status')->default(0)->comment('स्थिति');
+//            $table->boolean('status')->default(0)->comment('स्थिति');
         });
     }
 
@@ -25,7 +25,7 @@ return new class () extends Migration {
     public function down()
     {
         Schema::table('e_map_templates', function (Blueprint $table) {
-            $table->dropColumn('status');
+//            $table->dropColumn('status');
         });
     }
 };
