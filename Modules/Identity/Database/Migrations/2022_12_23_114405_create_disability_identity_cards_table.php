@@ -59,6 +59,8 @@ return new class() extends Migration
             $table->string("main_training_name")->nullable();
             $table->string("occupation_id")->nullable();
             $table->timestamp('recommend_at')->nullable();
+            $table->timestamp('first_print_at')->nullable();
+            $table->timestamp('latest_print_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

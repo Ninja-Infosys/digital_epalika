@@ -19,6 +19,7 @@ use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\IdentityMeeting;
 use Modules\Identity\Http\Requests\IdentityPrint\UpdateIdentityPrintRequest;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Support\Str;
 
 class IdentityPrintController extends Controller
 {
@@ -65,7 +66,10 @@ class IdentityPrintController extends Controller
         ]);
 
         $view = DB::transaction(function () use ($disabilityIdentityCard, $request) {
+            $oldPrintDate = $disabilityIdentityCard->latest_print_at?->toDateString();
             $disabilityIdentityCard->update([
+                'latest_print_at'=>now(),
+                'first_print_at'=>!empty($disabilityIdentityCard->first_print_at) ? $disabilityIdentityCard->first_print_at : now(),
                 'print_count' => $disabilityIdentityCard->print_count + 1,
                 'employee_signature_id' => $request->input('employee_signature_id')
             ]);
@@ -78,6 +82,19 @@ class IdentityPrintController extends Controller
                 'employeeSignature'
 
             );
+
+            if($disabilityIdentityCard->print_count > 1){
+                $oldDateArray = explode('-',$oldPrintDate);
+                $oldNepaliDate = $this->get_nepali_date($oldDateArray[0],$oldDateArray[1],$oldDateArray[2]);
+                $oldFormattedNepaliDate = Str::padLeft($oldNepaliDate['y'],4,0)."-".Str::padLeft($oldNepaliDate['m'],2,0)."-".Str::padLeft($oldNepaliDate['d'],2,0);
+
+                $disabilityIdentityCard->identityRecords()->create([
+                    'print_date'=>$this->get_today_nepali_date(),
+                    'print_date_en' =>today()->toDateString(),
+                    'old_print_date' =>$oldFormattedNepaliDate,
+                    'old_print_date_en' =>  $oldPrintDate
+                ]);
+            }
             $todayDate = $this->get_today_nepali_date();
             return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard', 'todayDate'));
         });
@@ -85,6 +102,7 @@ class IdentityPrintController extends Controller
             'view' => $view,
         ]);
     }
+
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
@@ -106,14 +124,6 @@ class IdentityPrintController extends Controller
     {
         $this->authorize('update', $disabilityIdentityCard);
         $disabilityIdentityCard->update($request->validated());
-
-
-        $printDate = $request->input('print_date');
-        $oldPrintDate = $request->input('old_print_date');
-        $disabilityIdentityCard->update([
-            'print_date' => $printDate,
-            'old_print_date' => $oldPrintDate,
-        ]);
         toast('अपाङ्गता परिचय पत्र सफलतापुर्बक अपडेट भयो', 'success');
         return redirect(route('identity.admin.identityPrint'));
     }

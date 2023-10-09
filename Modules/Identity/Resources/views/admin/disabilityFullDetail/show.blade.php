@@ -138,10 +138,24 @@
                                 <tr>
                                     <th colspan="3" class="text-center">संशोधन मिति</th>
                                 </tr>
-                                <tr>
-                                    <td>पुरानो मिति: {{ $disabilityIdentityCard->old_date }}</td>
-                                    <td>दिएको मिति: {{ $disabilityIdentityCard->print_date }}</td>
-                                </tr>
+                                <table class="table  table-bordered table-hover table-responsive py-1">
+                                    <thead>
+                                        <tr>
+                                            <th>Print Date (Nepali)</th>
+                                            <th>Old Print Date (Nepali)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($disabilityIdentityCard->identityRecords as $identityRecord)
+                                            <tr>
+                                                <td>{{ $identityRecord->print_date }}</td>
+                                                <td>{{ $identityRecord->old_print_date }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+
                             </tbody>
                         </table>
 
