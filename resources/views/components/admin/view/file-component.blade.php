@@ -16,7 +16,7 @@
                             <th>क्र.स</th>
                             <th>फाइल</th>
                             <th>मिति</th>
-                            <th class="w-25">स्थिति</th>
+                            <th>स्थिति</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,21 +25,19 @@
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
                                     @foreach ($appliedDocument->appliedMapFiles as $appliedMapFile)
-                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#view_file">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
                                     @endforeach
                                 </td>
                                 <td>{{ $appliedDocument->created_at->toDateString() }}</td>
-                                <td><div class="input-group">
-                                        <select class="form-select form-select-sm" name="file_status" id="file_status"
-                                            aria-label="FIle Status">
-                                            <option value="" disabled selected>--- छान्नुहोस् ---</option>
-                                            <option value="Pending">प्रक्रियामा</option>
-                                            <option value="Accept">स्वीकार</option>
-                                            <option value="Reject">अस्वीकार</option>
-                                        </select>
-                                        <button class="btn btn-sm btn-outline-primary" type="submit">पेश गर्नुहोस्</button>
-                                    </div>
-                                    </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#status_model">
+                                        स्थिति
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
 

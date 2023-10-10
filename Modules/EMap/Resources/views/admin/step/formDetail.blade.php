@@ -30,30 +30,35 @@
         @endif
     @endforeach
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reject_model">
-        Reject Model
-    </button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#view_file">
-        View File Model
-    </button>
-
 
     <!-- reject model -->
-    <div class="modal fade" id="reject_model" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
+    <div class="modal fade" id="status_model" tabindex="-1" aria-labelledby="statusLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="rejectLabel">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
+                    <h5 class="modal-title" id="statusLabel">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </form>
+                <form>
+                            <div class="mb-3">
+                                <label for="status_" class="form-label">स्थिति</label>
+                                <select class="form-select form-select-sm" name="status_" id="status_" aria-label="status">
+                                    <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                    <option value="Pending">प्रक्रियामा</option>
+                                    <option value="Accept">स्वीकार</option>
+                                    <option value="Reject">अस्वीकार</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comment" class="form-label">टिप्पणी</label>
+                                <textarea class="form-control" id="comment" rows="3"></textarea>
+                            </div>
+                        </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
-                    <button type="button" class="btn btn-primary">परिवर्तनहरू सुरक्षित गर्नुहोस</button>
+                    <button type="button" class="btn btn-primary">पेश गर्नुहोस्</button>
                 </div>
             </div>
         </div>
