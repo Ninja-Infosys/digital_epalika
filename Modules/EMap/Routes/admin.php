@@ -21,8 +21,9 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
-Route::get('mapApply/{mapApply}/steps', [AdminStepController::class,'formList'])->name('mapApply.admin-step.form-list');
-Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class,'viewDetail'])->name('mapApply.admin-step.view-detail');
+Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
+Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 'fillDetail'])->name('mapApply.admin-step.fill-detail');
+Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
