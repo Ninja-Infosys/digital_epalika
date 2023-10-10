@@ -20,6 +20,11 @@ class AdminStepController extends Controller
     {
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
         return view('emap::admin.step.formDetail', compact('mapApply', 'form'));
+    }
 
+    public function fillDetail(MapApply $mapApply, Form $form)
+    {
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        return view('emap::admin.step.formFill', compact('mapApply', 'form'));
     }
 }
