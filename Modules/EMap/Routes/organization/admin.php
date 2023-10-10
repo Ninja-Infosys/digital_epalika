@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
 use Modules\EMap\Http\Controllers\OrganizationDashboardController;
@@ -20,8 +21,13 @@ Route::controller(MapApplyController::class)->group(function () {
     Route::get('mapApply/{mapApply}/template-data/{noticeTypeEnum}', 'getTemplateData')->name('getTemplateData');
     Route::post('mapApply/{mapApply}/storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('storeTemplateData');
 });
+Route::get('mapApply/{mapApply}/form', [MapApplyController::class, 'formList'])->name('formList');
+Route::get('mapApply/{mapApply}/form/{form}/formDetail', [MapApplyController::class, 'formDetail'])->name('formDetail');
 Route::resource('mapApply', MapApplyController::class);
-Route::resource('mapApply/{mapApply}/attachDocument', \Modules\EMap\Http\Controllers\AttachDocumentController::class);
+Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AttachDocumentController::class, 'printTemplate'])->name('printTemplate');
+Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class, 'documentDetail'])->name('documentDetail');
+Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
+Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::resource('taxClearance', TaxClearanceController::class);
 
 

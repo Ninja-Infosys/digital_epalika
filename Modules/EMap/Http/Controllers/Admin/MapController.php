@@ -100,7 +100,7 @@ class MapController extends Controller
             ]);
         }
 
-//        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
+        //        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
 
@@ -182,7 +182,7 @@ class MapController extends Controller
         abort_if($mapApply->sent_to_organization == 'Accept', 403);
         DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
             $number = MapApply::whereFiscalYearId(\officeSetting()->fiscal_year_id)
-                    ->max('number') + 1;
+                ->max('number') + 1;
             $mapApply->update([
                 'sent_to_organization' => $request->input('sent_to_organization')
             ]);

@@ -31,7 +31,7 @@ class MapRegistrationController extends Controller
     public function store(StoreMapRegistrationRequest $request, MapApply $mapApply): RedirectResponse
     {
         DB::transaction(function () use ($request, $mapApply) {
-            $mapRegistration=MapRegistration::updateOrCreate(
+            $mapRegistration = MapRegistration::updateOrCreate(
                 ['map_apply_id' => $mapApply->id],
                 $request->validated()
             );

@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"> टेम्प्लेट</a>
+                            <a href="{{route('emap.admin.eMapTemplate.index')}}"> टेम्प्लेट</a>
                         </li>
                         <li class="breadcrumb-item active">टेम्प्लेट</li>
                     </ol>
@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
                         @can('eMapTemplate_create')
-                            <a href="{{route('emap.admin.eMapTemplate.create',$noticeTypeEnum)}}"
+                            <a href="{{route('emap.admin.eMapTemplate.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
@@ -43,7 +43,6 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
-                                <th>बर्ग</th>
                                 <th>स्थिति</th>
                                 <th>मिति</th>
                                 <th>#</th>
@@ -54,27 +53,25 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$eMapTemplate->title}}</td>
-                                    <td>{{$eMapTemplate->for->label() ??''}}</td>
                                     <td>
                                         @can('eMapTemplate_access')
-                                            <a href="{{route('emap.admin.eMapTemplate.updateStatus',[$noticeTypeEnum,$eMapTemplate])}}">
+                                            <a href="{{route('emap.admin.eMapTemplate.updateStatus',$eMapTemplate)}}">
                                                 <i class="fa fa-2x  {{$eMapTemplate->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td>
                                         <x-ad-to-bs id="fbs_{{$loop->iteration}}" adDate="{{$eMapTemplate->created_at->toDateString()}}" />
-
                                     </td>
                                     <td>
                                         @can('eMapTemplate_edit')
-                                            <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.edit',[$noticeTypeEnum,$eMapTemplate])}}"
+                                            <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.edit',[$eMapTemplate])}}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
 
-                                        <form action="{{route('emap.admin.eMapTemplate.destroy',[$noticeTypeEnum,$eMapTemplate])}}"
+                                        <form action="{{route('emap.admin.eMapTemplate.destroy',[$eMapTemplate])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
