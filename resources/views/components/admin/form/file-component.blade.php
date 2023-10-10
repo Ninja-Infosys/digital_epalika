@@ -102,7 +102,7 @@
                                 <td>{{$appliedDocument->status->label()}}</td>
                                 <td>{{$appliedDocument->created_at->toDateString()}}</td>
                                 <td>
-                                    <a href="{{ route('organization.admin.documentDetail',$appliedDocument) }}">
+                                    <a href="{{ route('emap.admin.documentDetail',$appliedDocument) }}">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

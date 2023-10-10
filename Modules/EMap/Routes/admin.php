@@ -26,6 +26,7 @@ Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 
 Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 
+
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
         Route::prefix('upload')->as('upload.')->group(function () {
