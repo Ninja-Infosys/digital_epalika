@@ -56,7 +56,7 @@ class FormDataTypeLivewire extends Component
 
     public function changeData($index): void
     {
-        dd($index);
+        $this->form['formDataType'][$index]['data'] = $this->resolveData($this->form['formDataType'][$index]['type']);
         $this->form['formDataType'][$index]['data'] = $this->resolveData($this->form['formDataType'][$index]['type']);
         $this->form['formDataType'][$index]['model_id'] = null;
 

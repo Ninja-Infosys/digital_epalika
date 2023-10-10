@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($mapApply->formStores->where('form_id', $form->id)) == 0)
+                @if(count($formDataType->formStores->where('form_id', $form->id)) == 0)
                     <form
                         action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
                         enctype="multipart/form-data" method="POST">
@@ -59,7 +59,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($mapApply->formStores->where('form_id', $form->id) as $formStore)
+                        @foreach($formDataType->formStores as $formStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
@@ -71,7 +71,11 @@
                                 </td>
                                 <td>{{$formStore->status->label()}}</td>
                                 <td>{{get_nepali_number($formStore->created_at->toDateString())}}</td>
-                                <td></td>
+                                <td>
+                                    <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
 
@@ -93,21 +97,22 @@
         <script src="{{ asset('assets/backend/form/js/cash.min.js') }}"></script>
         <script src="{{ asset('assets/backend/form/js/collect.min.js') }}"></script>
         <script src="{{ asset('assets/backend/form/js/formio.full.min.js') }}"></script>
+        <script>
+            function decodeHtmlEntities(input) {
+                const doc = new DOMParser().parseFromString(input, "text/html");
+                return doc.documentElement.textContent;
+            }
+        </script>
     @endpush
 @endonce
 
 @push('scripts')
     <script>
-        function decodeHtmlEntities(input) {
-            const doc = new DOMParser().parseFromString(input, "text/html");
-            return doc.documentElement.textContent;
-        }
-
-        const component = decodeHtmlEntities('{{ $formDataType->model->fields ?? null }}');
+        const component{{$unique}} = decodeHtmlEntities('{{ $formDataType->model->fields ?? null }}');
         @if(count($mapApply->formStores->where('form_id', $form->id)) == 0)
-        Formio.createForm(document.getElementById('form{{$unique}}'), JSON.parse(component));
+        Formio.createForm(document.getElementById('form{{$unique}}'), JSON.parse(component{{$unique}}));
         @else
-        Formio.createForm(document.getElementById('form{{$unique}}'), JSON.parse(component))
+        Formio.createForm(document.getElementById('form{{$unique}}'), JSON.parse(component{{$unique}}))
             .then((form) => {
                 form.submission = {
                     data: decodeHtmlEntities('{{ htmlspecialchars_decode(json_encode($mapApply->formStores->where('form_id', $form->id)->sortByDesc('created_at')->first()->data)) ?? null }}')

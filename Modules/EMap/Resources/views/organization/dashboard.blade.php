@@ -19,10 +19,10 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <a href="{{$mapSetting->document}}" download="{{$mapSetting->document}}" class="btn btn-primary btn-sm">
+    <a href="{{$mapSetting?->document}}" download="{{$mapSetting?->document}}" class="btn btn-primary btn-sm">
         <i class="fa fa-download"></i> DWG Catalog format डाउनलोड गर्नुहोस
     </a>
-    @if(!empty($mapSetting->thumbnail))
+    @if(!empty($mapSetting?->thumbnail))
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

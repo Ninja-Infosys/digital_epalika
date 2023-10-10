@@ -76,12 +76,13 @@
                         <td>
                             <select id="type" name="type"
                                     wire:model="form.formDataType.{{$index}}.type"
-                                    wire:change.prevent="changeData({{$index}})"
+                                    wire:key="form.formDataType.{{$index}}.type"
+                                    wire:change="changeData({{$index}})"
                                     class="form-select" required>
                                 <option value="">-- छान्नुहोस् --</option>
                                 @foreach(\Modules\EMap\Enums\FormTypeEnum::cases() as $formType)
                                     <option
-                                        value="{{$formType->value}}" {{old('type') == $formType->value ? 'selected' : ''}}>{{$formType->label()}}</option>
+                                        value="{{$formType->value}}">{{$formType->label()}}</option>
                                 @endforeach
                             </select>
                             @error('form.formDataType.'.$index.'.type')
