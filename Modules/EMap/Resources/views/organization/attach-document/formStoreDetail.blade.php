@@ -27,7 +27,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {{ $formStoreStatus->data }}
+                    @foreach ($formStoreStatus->data as $key => $data)
+                    {{ $key . ': ' . $data }} @if (!$loop->last)
+                        <br>
+                    @endif
+                @endforeach
                 </div>
             </div>
         </div>
