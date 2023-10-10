@@ -43,17 +43,18 @@
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
                                     <td>
+                                        {{$form->need_from->value}}
                                         {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
                                     <td>
-                                        @if ($form->need_from == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
+                                        @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
                                             <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @else
                                             <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endif
