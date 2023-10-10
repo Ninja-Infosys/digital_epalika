@@ -420,17 +420,19 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.patrons_relationship" class="form-label">नाता </label>
-                        <input
-                            name="form.patrons_relationship"
-                            class="form-control  @error('form.patrons_relationship') is-invalid @enderror"
-                            type="text"
-                            id="form.patrons_relationship"
-                            placeholder="नाता"
-                            wire:model="form.patrons_relationship"
-                        />
-                        @error('form.patrons_relationship')
-                        <div class="invalid-feedback">{{$message}}</div>
+                        <label for="patrons_relationship" class="form-label">नाता</label>
+                        <select class="form-select @error('patrons_relationship') is-invalid @enderror"
+                            name="patrons_relationship" id="patrons_relationship">
+                            <option value="">---नाता छान्नुहोस् ---</option>
+                            @foreach ($relations as $relation)
+                                <option value="{{ $relation->id }}"
+                                    {{ $relation->id == old('patrons_relationship') ? 'selected' : '' }}>
+                                    {{ $relation->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('patrons_relationship')
+                            <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">

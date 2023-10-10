@@ -5,7 +5,6 @@ namespace Modules\Identity\Traits;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Str;
 use Modules\Identity\Entities\MinuteTemplateSetting;
-use Modules\Identity\Entities\RecommendationTemplateSetting;
 use View;
 
 trait IdentityMinuteTemplateTrait
@@ -35,10 +34,15 @@ trait IdentityMinuteTemplateTrait
     ];
 
 
-    public function getIdentityTemplateData(MinuteTemplateSetting $minuteTemplateSetting): string
-    {
+    public function getIdentityTemplateData(MinuteTemplateSetting $minuteTemplateSetting = null): string
+{
+    if ($minuteTemplateSetting !== null) {
         return $this->getData($minuteTemplateSetting->description);
+    } else {
+        return "Error: MinuteTemplateSetting is null.";
     }
+}
+
 
     public function getTemplateOptions(): array
     {

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\BusinessRegistration\Enums\Qualification;
@@ -29,7 +30,9 @@ class DisabilityIdentityCard extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        "first_print_at",
+        "latest_print_at"
     ];
 
     protected $fillable = [
@@ -81,6 +84,9 @@ class DisabilityIdentityCard extends Model
         "without_helping_task",
         "main_training_name",
         "occupation_id",
+        "employee_signature_id",
+        "first_print_at",
+        "latest_print_at"
 
     ];
 
@@ -146,6 +152,10 @@ class DisabilityIdentityCard extends Model
     {
         return $this->belongsTo(Hospital::class);
     }
+    public function employeeSignature(): BelongsTo
+    {
+        return $this->belongsTo(EmployeeSignature::class);
+    }
 
     public function setPhotoAttribute($value): void
     {
@@ -193,5 +203,10 @@ class DisabilityIdentityCard extends Model
     public function identityMeeting(): BelongsToMany
     {
         return $this->belongsToMany(IdentityMeeting::class);
+    }
+
+    public function identityRecords(): HasMany
+    {
+        return $this->hasMany(IdentityRecord::class);
     }
 }
