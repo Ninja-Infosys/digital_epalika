@@ -37,6 +37,7 @@
                         <tr>
                             <th scope="col">क्र.सं.</th>
                             <th scope="col">शिर्षक</th>
+                            <th scope="col">वर्ग</th>
                             <th scope="col">#</th>
                         </tr>
                         </thead>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$disabilityType->title ?? ''}}</td>
+                                <td>{{$disabilityType->disabilityType->title ?? ''}}</td>
                                 <td>
                                     <a data-bs-type="edit" href="{{route('identity.admin.setting.disabilityType.edit', $disabilityType)}}"
                                        type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">

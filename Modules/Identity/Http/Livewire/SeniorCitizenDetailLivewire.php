@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+use App\Models\Settings\Relationship;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -28,6 +29,7 @@ class SeniorCitizenDetailLivewire extends Component
     public $wards = '';
 
     public $employeeSignatures = [];
+    public $relations = [];
 
     public SeniorCitizenDetail $seniorCitizenDetail;
     public array $form = [
@@ -76,6 +78,7 @@ class SeniorCitizenDetailLivewire extends Component
         }
         $officeSetting = OfficeSetting::first();
         $this->employeeSignatures = EmployeeSignature::Status()->get();
+        $this->relations = Relationship::all();
         $this->provinces = Province::all();
 
         if (!empty($seniorCitizenDetail)) {
@@ -237,6 +240,7 @@ class SeniorCitizenDetailLivewire extends Component
             'form.patrons_name_en.required' => ['संरक्षकको अंग्रेजीमा नाम आवश्यक छ'],
             'form.patrons_name_address.required' => ['संरक्षकको ठेगाना आवश्यक छ'],
             'form.patrons_phone.required' => ['सम्पर्क न. आवश्यक छ'],
+            'form.patrons_relationship.required' => ['नाता आवश्यक छ'],
             'form.is_disease.required' => ['रोगको नाम आवश्यक छ'],
             'form.disease_name.required_if' => ['रोगको नाम आवश्यक छ'],
             'form.description.required' => ['हेरचाह केन्द्रको विवरण आवश्यक छ'],

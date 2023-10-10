@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use  Modules\Recommendation\Entities\SipharisCategory;
+use  Modules\Recommendation\Entities\SipharisFormField;
+use  Modules\Recommendation\Entities\SipharisSubCategory;
+use  Modules\Recommendation\Entities\SipharishFormType;
+use  Modules\Recommendation\Entities\PersonalDetail;
+use Log;
+use Livewire\Component;
+
+class Field extends Component
+{
+
+    public int|null $personal_detail_id = null;
+    public int|null $sipharis_category_id = null;
+    public int|null $sipharis_sub_category_id = null;
+    public int|null $sipharis_form_type_id = null;
+    public $status = 1;
+    public $fields = [];
+    public $personalDetails = [];
+    public $sipharishCategories = [];
+    public $sipharishSubCategories = [];
+
+    public $formTypes = [];
+
+    public function mount($categorySubCategory = null): void
+    {
+
+        if (!empty($categorySubCategory)) {
+            $this->sipharis_category_id = $categorySubCategory['sipharis_category_id'] ?? null;
+            $this->sipharis_sub_category_id = $categorySubCategory['sipharis_sub_category_id'] ?? null;
+            $this->personal_detail_id = $categorySubCategory['personal_detail_id'] ?? null;
+            $this->sipharis_form_type_id = $categorySubCategory['sipharis_form_type_id'] ?? null;
+            $this->status = $categorySubCategory['status'] ?? 1;
+            if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
+                foreach ($categorySubCategory['fields'] as $field) {
+                    $this->fields[] = [
+                        'sipharish_form_fields_id' => $field['sipharish_form_fields_id'] ?? null,
+                        'value' => $field['value'] ?? null,
+                    ];
+                }
+            }
+
+        }
+        $this->sipharishCategories = SipharisCategory::status()->get();
+        $this->personalDetails = PersonalDetail::all();
+    }
+
+    public function render()
+    {
+        if (!empty($this->sipharis_category_id)) {
+            $this->sipharishSubCategories = SipharisSubCategory::where('sipharis_category_id', $this->sipharis_category_id)->get();
+        }
+
+        if (!empty($this->sipharis_sub_category_id)) {
+            $this->formTypes = SipharishFormType::where('sipharis_sub_category_id', $this->sipharis_sub_category_id)
+                ->get();
+        }
+
+        if (!empty($this->sipharis_form_type_id)) {
+            $this->fields = SipharishFormType::with('sipharisFormFields')
+                ->find($this->sipharis_form_type_id)
+                ?->sipharisFormFields;
+        }
+
+        return view('livewire.field');
+    }
+}
