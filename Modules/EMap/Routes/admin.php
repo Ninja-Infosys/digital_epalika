@@ -8,6 +8,7 @@ use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
+use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
@@ -20,6 +21,8 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
+Route::get('mapApply/{mapApply}/steps', [AdminStepController::class,'formList'])->name('mapApply.admin-step.form-list');
+Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class,'viewDetail'])->name('mapApply.admin-step.view-detail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {

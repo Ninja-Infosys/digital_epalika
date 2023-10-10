@@ -97,33 +97,13 @@
                                         class="btn btn-xs btn-outline-success">
                                         <i class="fa fa-eye"></i>
                                     </a>
+                                    <a href="{{ route('emap.admin.mapApply.admin-step.form-list', $mapApply) }}" title="नक्सा विवरण"
+                                        class="btn btn-xs btn-outline-primary">
+                                        <i class="fa fa-step-forward"></i>
+                                    </a>
                                 </div>
                             </td>
-                            <td>
-                                <div class="button-list">
-                                    @foreach (\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeTypeEnum)
-                                        @if ($applicationFormTypeEnum === \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)
-                                            @if ($noticeTypeEnum->showInMapVerification())
-                                                <a href="{{ route('emap.admin.map.mapApply.show', [$mapApply, $applicationFormTypeEnum, $noticeTypeEnum]) }}"
-                                                    @class([
-                                                        'btn btn-sm waves-effect waves-light btn-outline-danger' => !$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
-                                                        'btn btn-sm waves-effect waves-light btn-outline-success' => $mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
-                                                    ])>
-                                                    {{ $noticeTypeEnum->label() ?? '' }}
-                                                </a>
-                                            @endif
-                                        @else
-                                            <a href="{{ route('emap.admin.map.mapApply.show', [$mapApply, $applicationFormTypeEnum, $noticeTypeEnum]) }}"
-                                                @class([
-                                                    'btn btn-sm waves-effect waves-light btn-outline-danger' => !$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
-                                                    'btn btn-sm waves-effect waves-light btn-outline-success' => $mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum),
-                                                ])>
-                                                {{ $noticeTypeEnum->label() ?? '' }}
-                                            </a>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </td>
+
                         </tr>
                     @empty
                         <tr>
@@ -137,7 +117,4 @@
             {{ $maps->onEachSide(config('app.pagination_count'))->links() }}
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ asset('assets/backend/js/plugins/footable.min.js') }}"></script>
-    @endpush
 @endsection
