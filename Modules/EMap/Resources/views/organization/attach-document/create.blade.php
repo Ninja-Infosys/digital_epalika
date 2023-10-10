@@ -189,8 +189,8 @@
         @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::PAYMENT)
             <x-bill-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
         @endif
-        
+
         --}}
-  
+
 
 @endsection

@@ -1,5 +1,5 @@
 
 
-{!! $formDataType->model->data??'' !!}
+{!! $data !!}
 
 

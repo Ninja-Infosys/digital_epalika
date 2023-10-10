@@ -14,10 +14,10 @@ trait EMapTemplateTrait
 {
     private array $template = [
         [
-            'title'=>'कार्यलय लेटर हेड',
-            'data'=>[
-                'हेडर'=>'[@header]',
-                'लेटर हेड'=>'[@letter_head]'
+            'title' => 'कार्यलय लेटर हेड',
+            'data' => [
+                'हेडर' => '[@header]',
+                'लेटर हेड' => '[@letter_head]'
             ],
             'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
