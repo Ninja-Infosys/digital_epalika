@@ -17,8 +17,8 @@ enum EMapFormFillerTypeEnum: string
     {
         return match ($value) {
             self::OWNER => 'घरधनी',
-            self::ORGANIZATION => 'पालिका',
-            self::OFFICE => 'परामर्शदाता/सुपरिवेकक्षक',
+            self::ORGANIZATION => 'परामर्शदाता/सुपरिवेकक्षक',
+            self::OFFICE => 'पालिका',
         };
     }
 }

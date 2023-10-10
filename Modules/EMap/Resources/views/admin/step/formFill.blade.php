@@ -23,11 +23,11 @@
     @foreach ($form->formDataTypes as $formDataType)
 
         @if ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::FILE)
-            <x-file-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+            <x-admin.form.file-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
         @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::FORM)
-            <x-form-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+            <x-admin.form.form-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
         @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::PAYMENT)
-            <x-bill-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+            <x-admin.form.bill-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
         @endif
     @endforeach
     @push('scripts')
