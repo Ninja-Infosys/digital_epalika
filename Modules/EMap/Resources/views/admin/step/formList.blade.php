@@ -49,7 +49,7 @@
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
                                     <td>
-                                        {{$form->need_from->value}}
+                                        {{$form->need_from->label()??''}}
                                         {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
                                     <td>

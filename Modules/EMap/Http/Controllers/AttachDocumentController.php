@@ -193,6 +193,63 @@ class AttachDocumentController extends Controller
         return redirect(route('organization.admin.formDetail', [$mapApply, $form]));
     }
 
+    public function index(MapApply $mapApply)
+    {
+        $mapApply->load('attachDocument');
+        return view('emap::organization.organizationDocument.index', compact('mapApply'));
+    }
+
+    public function storeOrganizationDocument(Request $request, MapApply $mapApply)
+    {
+        $data = $request->validate([
+            'land_owner_document' => ['required', 'mimes:png,jpg,jpeg'],
+            'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg'],
+            'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg'],
+            'blue_print' => ['required', 'mimes:png,jpg,jpeg'],
+            'pass_document' => ['required', 'mimes:png,jpg,jpeg'],
+            'designer_document' => ['required', 'mimes:png,jpg,jpeg'],
+            'permission_document' => ['required', 'mimes:png,jpg,jpeg'],
+            'inheritance_document' => ['required', 'mimes:png,jpg,jpeg'],
+        ]);
+
+        if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_document'));
+        }
+
+        if ($request->hasFile('land_revenue_document') && !empty($mapApply->attachDocument->land_revenue_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_revenue_document'));
+        }
+
+        if ($request->hasFile('land_owner_citizenship') && !empty($mapApply->attachDocument->land_owner_citizenship)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_citizenship'));
+        }
+
+        if ($request->hasFile('blue_print') && !empty($mapApply->attachDocument->blue_print)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('blue_print'));
+        }
+
+        if ($request->hasFile('pass_document') && !empty($mapApply->attachDocument->pass_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('pass_document'));
+        }
+
+        if ($request->hasFile('designer_document') && !empty($mapApply->attachDocument->designer_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('designer_document'));
+        }
+
+        if ($request->hasFile('permission_document') && !empty($mapApply->attachDocument->permission_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('permission_document'));
+        }
+
+        if ($request->hasFile('inheritance_document') && !empty($mapApply->attachDocument->inheritance_document)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('inheritance_document'));
+        }
+        AttachDocument::updateOrCreate([
+            'map_apply_id' => $mapApply->id
+        ], $data);
+        toast('File added successfully', 'success');
+        return back();
+    }
+
     protected function getEmapTemplateData($mapApply)
     {
         $designerDetail = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER)->first();
