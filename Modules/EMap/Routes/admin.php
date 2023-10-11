@@ -25,7 +25,7 @@ Route::resource('organization', OrganizationController::class);
 Route::put('appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AdminStepController::class, 'updateAppliedDocumentStatus'])->name('mapApply.admin-step.updateAppliedDocumentStatus');
 Route::put('formStore/{formStore}/updateFormStoreStatus', [AdminStepController::class, 'updateFormStoreStatus'])->name('mapApply.admin-step.updateFormStoreStatus');
 Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
-
+Route::get('mapApply/{mapApply}/register', [MapController::class,'register'])->name('mapApply.register-map');
 Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
 Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 'fillDetail'])->name('mapApply.admin-step.fill-detail');
 Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
@@ -39,6 +39,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::put('reject/{noticeTypeEnum}', 'reject')->name('reject');
         });
     });
+
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
