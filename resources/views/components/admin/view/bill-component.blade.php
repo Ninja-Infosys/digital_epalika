@@ -18,6 +18,7 @@
                             <th>रकम</th>
                             <th>मिति</th>
                             <th class="w-25">स्थिति</th>
+                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,7 @@
                                 </td>
                                 <td>{{ $paymentStore->amount }}</td>
                                 <td>{{ get_nepali_number($paymentStore->created_at->toDateString()) }}</td>
+                                <td>{{ $paymentStore->status->label()??'' }}</td>
                                 <td>
                                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#status_model{{ $paymentStore->id }}">
@@ -62,7 +64,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="comment" class="form-label">टिप्पणी</label>
-                                                        <textarea class="form-control" id="comment" rows="3"></textarea>
+                                                        <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>

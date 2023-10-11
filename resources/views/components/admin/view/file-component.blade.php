@@ -17,6 +17,7 @@
                             <th>फाइल</th>
                             <th>मिति</th>
                             <th>स्थिति</th>
+                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,7 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $appliedDocument->created_at->toDateString() }}</td>
+                                <td>{{ $appliedDocument->status->label()??'' }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#status_model{{ $appliedDocument->id }}">
@@ -78,7 +80,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="comment" class="form-label">टिप्पणी</label>
-                                                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                                                            <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
