@@ -30,6 +30,10 @@
                       <p class="text-danger">{{ $message }}</p>
 
                         @enderror
+                        @error('status')
+                        <p class="text-danger">{{ $message }}</p>
+
+                          @enderror
                     </h4>
                 </div>
             </div>
