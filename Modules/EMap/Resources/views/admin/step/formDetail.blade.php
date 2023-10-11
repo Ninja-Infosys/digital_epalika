@@ -16,7 +16,22 @@
                         <li class="breadcrumb-item active">{{ $form->title }}</li>
                     </ol>
                 </div>
+
                 <h4 class="page-title">{{ $form->title }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h4 class="header-title">
+                        @error('comment')
+                      <p class="text-danger">{{ $message }}</p>
+
+                        @enderror
+                    </h4>
+                </div>
             </div>
         </div>
     </div>
@@ -31,52 +46,9 @@
     @endforeach
 
 
-    <!-- reject model -->
-    <div class="modal fade" id="status_model" tabindex="-1" aria-labelledby="statusLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="statusLabel">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form>
-                            <div class="mb-3">
-                                <label for="status_" class="form-label">स्थिति</label>
-                                <select class="form-select form-select-sm" name="status_" id="status_" aria-label="status">
-                                    <option value="" disabled selected>--- छान्नुहोस् ---</option>
-                                    <option value="Pending">प्रक्रियामा</option>
-                                    <option value="Accept">स्वीकार</option>
-                                    <option value="Reject">अस्वीकार</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="comment" class="form-label">टिप्पणी</label>
-                                <textarea class="form-control" id="comment" rows="3"></textarea>
-                            </div>
-                        </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
-                    <button type="button" class="btn btn-primary">पेश गर्नुहोस्</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- view file model pass url dynamically in the model-->
-    <div class="modal fade" id="view_file" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" class="img-fluid"/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 
     @push('scripts')
         <script>

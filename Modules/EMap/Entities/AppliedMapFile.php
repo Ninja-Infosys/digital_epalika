@@ -44,4 +44,9 @@ class AppliedMapFile extends Model
     //         set: fn($value) => (!empty($value) && !is_string($value)) ? $value->store('mapApplies', 'public') : null,
     //     );
     // }
+
+    public function getDocumentUrlAttribute()
+    {
+        return $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
+    }
 }
