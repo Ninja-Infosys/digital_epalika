@@ -60,7 +60,7 @@ class DocumentAttachController extends Controller
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
-                    'uploaded_by_id' => auth('auth_id')->user()->id,
+                    'uploaded_by_id' => auth()->user()->id,
                     'form_data_type' => FormDataType::class,
                     'form_data_id' => $formDataType->id,
                     'data' => $data['data'],
@@ -78,14 +78,14 @@ class DocumentAttachController extends Controller
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
-                    'uploaded_by_id' => auth('auth_id')->user()->id,
+                    'uploaded_by_id' => auth()->user()->id,
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
-        return redirect(route('emap.admin.mapApply.admin-step.form-detail', [$mapApply, $form]));
+        return redirect(route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]));
     }
 
 
@@ -95,11 +95,11 @@ class DocumentAttachController extends Controller
         return view('emap::organization.attach-document.documentDetail', compact('appliedDocument'));
     }
 
-
-    public function formStoreDetail(FormStore $formStore)
+    public function formStoreDetail( FormStore $formStore)
     {
         $formStore->load('formStoreStatuses');
-        return view('emap::organization.attach-document.formStoreDetail', compact('formStore'));
+        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back('',compact('formStore'));
     }
 
     public function printTemplate(MapApply $mapApply, FormDataType $formDataType)
