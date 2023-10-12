@@ -13,6 +13,7 @@ use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\NoticeTypeEnum;
+use Modules\EMap\Entities\Form;
 
 class MapApplyController extends Controller
 {
@@ -38,6 +39,23 @@ class MapApplyController extends Controller
         return view('emap::organization.map-applies.edit', compact('mapSetting', 'mapApply'));
     }
 
+    public function formList(MapApply $mapApply)
+    {
+        $forms = Form::with('formDataTypes.form.dynamicForm')->orderBy('order')->get();
+        return view('emap::organization.attach-document.index', compact('mapApply', 'forms'));
+    }
+
+    public function formDetail(MapApply $mapApply, Form $form)
+    {
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        return view('emap::organization.attach-document.create', compact('mapApply', 'form'));
+    }
+
+    public function viewDetail(MapApply $mapApply, Form $form)
+    {
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        return view('emap::organization.attach-document.viewDetail', compact('mapApply', 'form'));
+    }
     public function update(Request $request, MapApply $mapApply)
     {
         //
@@ -118,10 +136,6 @@ class MapApplyController extends Controller
 
     public function updateStatus(MapApply $mapApply)
     {
-        if (empty($mapApply->attachDocument)) {
-            toast('फाइल अपलोड गर्नुहोस्', 'error');
-            return back();
-        }
         $mapApply->update([
             'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
         ]);

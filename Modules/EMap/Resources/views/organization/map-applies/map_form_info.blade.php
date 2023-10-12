@@ -55,7 +55,7 @@
                             {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->remarks??''}}
                         </td>
                         <td class="text-center">
-                            @if($fileTypes->contains($noticeTypeEnum) && $noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::HOUSE_OWNER)
+                            @if($fileTypes->contains($noticeTypeEnum) && $noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::OWNER)
                                 <a href="{{route('organization.admin.updateStatusOrganization',[$mapApply,$noticeTypeEnum->value])}}"
                                    class="btn {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'btn-outline-success':'btn-outline-danger'}} btn-xs">
                                     <i class="fa {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'fa-check':'fa-times'}}"></i>
@@ -64,7 +64,7 @@
 
                         </td>
                         <td class="text-center">
-                            @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::CONSULTANT)
+                            @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::ORGANIZATION)
                                 @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->first()?->type!=='Accept')
                                     <a href="{{route('organization.admin.getTemplateData',[$mapApply,$noticeTypeEnum->value])}}"
                                        class="btn btn-outline-primary btn-xs">

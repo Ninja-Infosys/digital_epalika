@@ -16,7 +16,6 @@ class UpdateEMapTemplateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'type' => ['required'],
             'data' => ['required'],
         ];
     }

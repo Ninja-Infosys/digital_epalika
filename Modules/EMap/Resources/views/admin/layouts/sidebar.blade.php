@@ -15,7 +15,7 @@
 
 <li class="{{request()->is('admin/emap/map/mapApply*') ? 'active' : ''}}">
     <a href="#sidebarMaptype" {{request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : ''}}
-       data-bs-toggle="collapse">
+    data-bs-toggle="collapse">
         <i class="fa fa-map"></i>
         <span>नक्सा दर्ता/प्रमाणित</span>
         <span class="menu-arrow">
@@ -77,8 +77,27 @@
             @endcan
             @can('eMapTemplate_access')
                 <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
-                    <a href="{{route('emap.admin.eMapTemplate.enumList')}}">
+                    <a href="{{route('emap.admin.eMapTemplate.index')}}">
                         <span> टेम्प्लेट  </span>
+                    </a>
+                </li>
+            @endcan
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/mapPassGroup*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.mapPassGroup.index')}}">
+                        <span> नक्शा पास समूह  </span>
+                    </a>
+                </li>
+            @endcan
+            <li class="{{request()->is('admin/emap/setting/dynamicForm*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.dynamicForm.index')}}">
+                    <span> नक्शा पास फारम  </span>
+                </a>
+            </li>
+            @can('eMapTemplate_access')
+                <li class="{{request()->is('admin/emap/enkasa/naksaPassGroupUser*') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.form.index')}}">
+                        <span> नक्शा पास मर्यादाक्रम</span>
                     </a>
                 </li>
             @endcan

@@ -49,6 +49,7 @@
 <script src="{{asset('assets/backend/js/plugins/select2.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/plugins/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/plugins/sweetalert2.min.js')}}"></script>
+
 @include('sweetalert::alert')
 
 @stack('scripts')

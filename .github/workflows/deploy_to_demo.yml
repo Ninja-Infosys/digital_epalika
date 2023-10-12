@@ -15,7 +15,7 @@ jobs:
           password: ${{ secrets.STAGING_PASSWORD }}
           port: ${{ secrets.STAGING_PORT }}
           script: |
-            cd /home/palikae/demperp.palikaerp.com
+            cd demo.digitalepalika.com
             git pull
             composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
             php artisan migrate --force

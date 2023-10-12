@@ -55,9 +55,18 @@ class MapController extends Controller
         return view('emap::admin.map.notice-list', compact('mapApply', 'applicationFormTypeEnum'));
     }
 
-    public function register(MapApply $mapApply): Factory|View|Application
+    public function register(MapApply $mapApply)
     {
-        return view('emap::admin.map.register', compact('mapApply'));
+        if (!empty($mapApply->registration_no)){
+            toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
+            return back();
+        }
+        $mapApply->update([
+            'registration_date' => now(),
+            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+        ]);
+        toast('नक्सा सफलता पुर्वक दर्ता भयो', 'success');
+        return back();
     }
 
     public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum)
@@ -100,7 +109,7 @@ class MapController extends Controller
             ]);
         }
 
-//        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
+        //        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
 
@@ -182,7 +191,7 @@ class MapController extends Controller
         abort_if($mapApply->sent_to_organization == 'Accept', 403);
         DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
             $number = MapApply::whereFiscalYearId(\officeSetting()->fiscal_year_id)
-                    ->max('number') + 1;
+                ->max('number') + 1;
             $mapApply->update([
                 'sent_to_organization' => $request->input('sent_to_organization')
             ]);

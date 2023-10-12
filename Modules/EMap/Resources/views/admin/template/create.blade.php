@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}">
+                            <a href="{{route('emap.admin.eMapTemplate.index')}}">
                                 टेम्प्लेट
                             </a>
                         </li>
@@ -27,19 +27,19 @@
             <div class="card-header">
                 <div class="d-flex align-items-center justify-content-between">
                     <h4 class="header-title mb-0">टेम्प्लेट थप्नुहोस्</h4>
-                    <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
+                    <a href="{{route('emap.admin.eMapTemplate.index')}}"
                        class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-list"></i> टेम्प्लेट सूची
                     </a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('emap.admin.eMapTemplate.store',$noticeTypeEnum)}}"
+                <form action="{{route('emap.admin.eMapTemplate.store')}}"
                       method="post"
                       enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-12 mb-2">
                             <label for="title" class="form-label">शिर्षक *</label>
                             <input
                                 type="text"
@@ -50,20 +50,6 @@
                                 placeholder="शिर्षक"
                             />
                             @error('title')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6">
-                            <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
-                            <select name="type" id="type" class="form-select">
-                                <option value="">--- छान्नुहोस् ---</option>
-                                @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
-                                    <option {{old('type')==$type->value ? 'selected':''}}
-                                            value="{{$type->value}}">{{$type->label()}}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('type')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
