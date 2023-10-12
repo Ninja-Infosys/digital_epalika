@@ -29,6 +29,8 @@ Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class
 Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::resource('taxClearance', TaxClearanceController::class);
+Route::get('mapApply/{mapApply}/view/{form}/detail', [MapApplyController::class, 'viewDetail'])->name('organization.view-detail');
+
 
 
 //organization notification

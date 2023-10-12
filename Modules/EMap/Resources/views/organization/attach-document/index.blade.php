@@ -52,6 +52,10 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endif
+                                        <a href="{{ route('organization.admin.organization.view-detail', [$mapApply, $form]) }}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                     </td>
                                 </tr>
                             @endforeach
