@@ -2,11 +2,11 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use Modules\EMap\Entities\AttachDocument;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Form;
@@ -14,12 +14,9 @@ use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
-use Modules\EMap\Enums\EMapFormFillerTypeEnum;
-use Modules\EMap\Entities\User;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\AppliedDocumentStatus;
-use Modules\EMap\Entities\AppliedMapFile;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Enums\FormTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
@@ -38,7 +35,7 @@ class DocumentAttachController extends Controller
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
-                    'uploaded_by_id' => auth('auth_id')->user()->id,
+                    'uploaded_by_id' => auth()->user()->id,
                     'form_data_type' => FormDataType::class,
                     'form_data_id' => $formDataType->id
                 ]);
@@ -60,7 +57,7 @@ class DocumentAttachController extends Controller
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
-                    'uploaded_by_id' => auth('auth_id')->user()->id,
+                    'uploaded_by_id' => auth()->user()->id,
                     'form_data_type' => FormDataType::class,
                     'form_data_id' => $formDataType->id,
                     'data' => $data['data'],
@@ -78,31 +75,26 @@ class DocumentAttachController extends Controller
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
-                    'uploaded_by_id' => auth('auth_id')->user()->id,
+                    'uploaded_by_id' => auth()->user()->id,
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
-        return redirect(route('emap.admin.mapApply.admin-step.form-detail', [$mapApply, $form]));
+
+        return redirect(route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]));
     }
 
 
-    public function documentDetail(AppliedDocument $appliedDocument)
-    {
-        $appliedDocument->load('appliedMapFiles');
-        return view('emap::organization.attach-document.documentDetail', compact('appliedDocument'));
-    }
-
-
-    public function formStoreDetail(FormStore $formStore)
+    public function formStoreDetail( FormStore $formStore)
     {
         $formStore->load('formStoreStatuses');
-        return view('emap::organization.attach-document.formStoreDetail', compact('formStore'));
+        toast('', 'success');
+        return back()->with(compact('formStore'));
     }
 
-    public function printTemplate(MapApply $mapApply, FormDataType $formDataType)
+    public function printTemplate(MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
 
         $formDataType->load('model');
@@ -189,7 +181,7 @@ class DocumentAttachController extends Controller
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
-        return redirect(route('emap.admin.mapApply.admin-step.form-detail', [$mapApply, $form]));
+        return redirect(route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]));
     }
 
     protected function getEmapTemplateData($mapApply)

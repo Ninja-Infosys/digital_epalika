@@ -54,7 +54,7 @@
                                     </td>
                                     <td>
                                         @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
-                                            <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
+                                            <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>

@@ -1,13 +1,14 @@
 @props(['form-data-type','map-apply','form'])
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h4 class="header-title">{{$formDataType ->model?->title}}
                         थप्नुहोस्</h4>
                     <a href="javascript:void(0)"
-                       route_action="{{ route('emap.admin.printTemplate',[$mapApply,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
+                       route_action="{{ route('emap.admin.attach-document.print-template',[$mapApply,$form,$formDataType]) }}"
+                       class="btn btn-primary btn-sm printDetail">
                         <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                     </a>
                 </div>
@@ -38,7 +39,7 @@
                             Save
                         </button>
                     </form>
-                    @else
+                @else
                     <form
                         action="{{ route('emap.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')->first()->id]) }}"
                         method="post" enctype="multipart/form-data">
@@ -69,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -80,37 +81,71 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>क्र.स</th>
-                            <th>फाइल</th>
-                            <th>स्थिति</th>
-                            <th>मिति</th>
-                            <th>#</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
-                            <tr>
-                                <td>{{ get_nepali_number($loop->iteration) }}</td>
-                                <td>
-                                    @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
-                                        <a href="#"><i class="fa fa-download"></i></a>
+                    @foreach($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
+                        <div class="row">
+                            <div class="col-md-5">
+                                <table class="table table-sm table-striped table-bordered">
+                                    <tr>
+                                        <th>फाइल</th>
+                                        <td>
+                                            @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
+                                                <a href="#"><i class="fa fa-download"></i></a>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>स्थिति</th>
+                                        <td>
+                                            {{$appliedDocument->status->label()}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>मिति</th>
+                                        <td>
+                                            {{get_nepali_number($appliedDocument->created_at->toDateString())}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-7">
+                                <table class="table table-stripped">
+                                    <thead>
+                                    <tr>
+                                        <th>क्र.सं.</th>
+                                        <th>फाइल</th>
+                                        <th>स्थिति</th>
+                                        <th>प्रतिक्रिया</th>
+                                        <th>मिति</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($appliedDocument->appliedDocumentStatuses->load('appliedMapFiles')->sortByDesc('created_at') as $appliedDocumentStatus)
+                                        <tr>
+                                            <td>{{get_nepali_number($loop->iteration)}}</td>
+                                            <td>
+                                                @foreach($appliedDocument->appliedMapFiles ?? [] as $appliedMapFile)
+                                                    <a href="#"><i class="fa fa-download"></i></a>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                {{$appliedDocumentStatus->status->label() ?? ''}}
+                                            </td>
+                                            <td>
+                                                {{$appliedDocumentStatus->comment ?? ''}}
+                                            </td>
+                                            <td>
+                                                {{get_nepali_number($appliedDocumentStatus->created_at->toDateString()) ?? ''}}
+                                            </td>
+                                        </tr>
                                     @endforeach
-                                </td>
-                                <td>{{$appliedDocument->status->label()}}</td>
-                                <td>{{$appliedDocument->created_at->toDateString()}}</td>
-                                <td>
-                                    <a href="{{ route('organization.admin.documentDetail',$appliedDocument) }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-                        </tbody>
-                    </table>
+                    @endforeach
+
+
                 </div>
             </div>
         </div>
