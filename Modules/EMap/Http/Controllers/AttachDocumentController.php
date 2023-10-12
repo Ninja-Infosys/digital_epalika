@@ -202,14 +202,14 @@ class AttachDocumentController extends Controller
     public function storeOrganizationDocument(Request $request, MapApply $mapApply)
     {
         $data = $request->validate([
-            'land_owner_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg'],
-            'blue_print' => ['required', 'mimes:png,jpg,jpeg'],
-            'pass_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'designer_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'permission_document' => ['required', 'mimes:png,jpg,jpeg'],
-            'inheritance_document' => ['required', 'mimes:png,jpg,jpeg'],
+            'land_owner_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'blue_print' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'pass_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'designer_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'permission_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'inheritance_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
         ]);
 
         if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {
