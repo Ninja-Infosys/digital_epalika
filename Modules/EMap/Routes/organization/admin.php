@@ -41,3 +41,7 @@ Route::get('readAllNotification', [OrganizationNotificationController::class, 'r
 
 Route::get('mapApply/{mapApply}/attachment/organizationDocument', [AttachDocumentController::class, 'index'])->name('organizationDocument');
 Route::post('mapApply/{mapApply}/attachment/storeOrganizationDocument', [AttachDocumentController::class, 'storeOrganizationDocument'])->name('storeOrganizationDocument');
+
+Route::put('appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AttachDocumentController::class, 'updateAppliedDocumentStatus'])->name('updateAppliedDocumentStatus');
+Route::put('formStore/{formStore}/updateFormStoreStatus', [AttachDocumentController::class, 'updateFormStoreStatus'])->name('updateFormStoreStatus');
+Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AttachDocumentController::class, 'updatePaymentStoreStatus'])->name('updatePaymentStoreStatus');

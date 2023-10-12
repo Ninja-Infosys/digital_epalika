@@ -90,8 +90,8 @@ class DocumentAttachController extends Controller
     public function formStoreDetail( FormStore $formStore)
     {
         $formStore->load('formStoreStatuses');
-        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
-        return back('', compact('formStore'));
+        toast('', 'success');
+        return back()->with(compact('formStore'));
     }
 
     public function printTemplate(MapApply $mapApply, Form $form, FormDataType $formDataType)

@@ -10,6 +10,7 @@ use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
+use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
@@ -28,6 +29,8 @@ Route::put('formStore/{formStore}/updateFormStoreStatus', [AdminStepController::
 Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
 
 
+
+
 Route::get('mapApply/{mapApply}/register', [MapController::class,'register'])->name('mapApply.register-map');
 
 Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
@@ -36,6 +39,9 @@ Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTemplate', [DocumentAttachController::class,'printTemplate'])->name('attach-document.print-template');
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
+Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
+
+
 
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
