@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\AttachDocument;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\AppliedDocument;
@@ -491,5 +492,70 @@ class AttachDocumentController extends Controller
             '[@contractorDetail.local_body_registration_no]',
             '[@contractorDetail.consulting_firm_name]'
         ];
+    }
+    public function updateAppliedDocumentStatus(Request $request, AppliedDocument $appliedDocument)
+    {
+        $this->getStatusValidation($request);
+        DB::transaction(function () use ($request, $appliedDocument) {
+            $appliedDocument->update([
+                'status' => $request->input('status')
+            ]);
+            $appliedDocument->appliedDocumentStatuses()->create([
+                "applied_document_id" => $appliedDocument->id,
+                "status" => $request->input('status'),
+                "comment" => $request->input('comment'),
+            ]);
+        });
+
+        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
+    }
+
+    public function updateFormStoreStatus(Request $request, FormStore $formStore)
+    {
+        $this->getStatusValidation($request);
+        DB::transaction(function () use ($request, $formStore) {
+            $formStore->update([
+                'status' => $request->input('status')
+            ]);
+            $formStore->formStoreStatuses()->create([
+                "form_store_id" => $formStore->id,
+                "status" => $request->input('status'),
+                "comment" => $request->input('comment'),
+                "data" => $formStore->data,
+                "fields" => $formStore->fields
+            ]);
+        });
+
+        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
+    }
+
+    public function updatePaymentStoreStatus(Request $request, PaymentStore $paymentStore)
+    {
+        $this->getStatusValidation($request);
+
+        DB::transaction(function () use ($request, $paymentStore) {
+            $paymentStore->update([
+                'status' => $request->input('status')
+            ]);
+            $paymentStore->paymentStoreStatuses()->create([
+                "payment_store_id" => $paymentStore->id,
+                "status" => $request->input('status'),
+                "comment" => $request->input('comment'),
+                "bill" => $paymentStore->bill,
+                "amount" => $paymentStore->amount
+            ]);
+        });
+        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
+    }
+
+    public function getStatusValidation($request)
+    {
+        return $request->validate([
+            'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
+            'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
+        ]);
     }
 }

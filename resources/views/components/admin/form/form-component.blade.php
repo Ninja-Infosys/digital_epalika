@@ -75,7 +75,7 @@
 
                                     <a href="#">
 
-                                    <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
+                                    <a href="{{ route('emap.admin.formStoreDetail',$formStore) }}">
 
                                         <i class="fa fa-eye"></i>
                                     </a>
