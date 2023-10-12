@@ -35,18 +35,18 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="demo-foo-accordion" class="table table-bordered mb-0 toggle-arrow-tiny">
+            <table class="table table-bordered mb-0">
                 <thead>
                     <tr>
-                        <th data-toggle="true">क्र.सं.</th>
-                        <th data-hide="phone">आर्थिक वर्ष</th>
+                        <th>क्र.सं.</th>
+                        <th>आर्थिक वर्ष</th>
                         <th>युनिक आइडी</th>
                         <th>फाईल कोड नं</th>
                         <th>दर्ता नं</th>
-                        <th data-hide="phone">निर्माण कार्यको किसिम</th>
-                        <th data-hide="phone">आवेदन भर्ने संस्था</th>
-                        <th data-hide="phone">#</th>
-                        <th data-hide="all"></th>
+                        <th>निर्माण कार्यको किसिम</th>
+                        <th>आवेदन भर्ने संस्था</th>
+                        <th>#</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
