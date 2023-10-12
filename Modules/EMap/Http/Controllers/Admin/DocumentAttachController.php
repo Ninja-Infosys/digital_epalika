@@ -181,7 +181,7 @@ class DocumentAttachController extends Controller
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
-        return redirect(route('emap.admin.mapApply.admin-step.form-detail', [$mapApply, $form]));
+        return redirect(route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]));
     }
 
     protected function getEmapTemplateData($mapApply)
