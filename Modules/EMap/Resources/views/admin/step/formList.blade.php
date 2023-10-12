@@ -22,8 +22,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="header-title mb-0"></h4>
-
+                        <h4 class="header-title mb-0">{{$mapApply->unique_id}}</h4>
+                        @if(empty($mapApply->registration_no))
+                            <span>
+                            <a href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
+                                नक्सा दर्ता गर्नुहोस
+                            </a>
+                        </span>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,7 +49,7 @@
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
                                     <td>
-                                        {{$form->need_from->value}}
+                                        {{$form->need_from->label()??''}}
                                         {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
                                     <td>

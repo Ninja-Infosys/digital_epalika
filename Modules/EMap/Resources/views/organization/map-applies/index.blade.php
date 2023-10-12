@@ -62,14 +62,14 @@
                                                 </a>
                                                 <a class="btn btn-xs btn-outline-warning"
                                                     href="{{ route('organization.admin.formList', $mapApply) }}">
-                                                    <i class="fa fa-file"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                             @else
                                                 तपाईको फारम पालिकाले स्वीकार गरेको छ
                                             @endif
                                             <a class="btn btn-xs btn-outline-info"
-                                                href="{{ route('organization.admin.mapFormInfo', $mapApply) }}">
-                                                <i class="fa fa-eye"></i>
+                                                href="{{ route('organization.admin.organizationDocument', $mapApply) }}">
+                                                <i class="fa fa-file"></i>
                                             </a>
                                         </td>
                                     </tr>
