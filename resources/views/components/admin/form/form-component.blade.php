@@ -72,7 +72,11 @@
                                 <td>{{$formStore->status->label()}}</td>
                                 <td>{{get_nepali_number($formStore->created_at->toDateString())}}</td>
                                 <td>
+
+                                    <a href="#">
+
                                     <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
+
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

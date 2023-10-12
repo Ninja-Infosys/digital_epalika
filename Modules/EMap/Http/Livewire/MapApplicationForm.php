@@ -119,7 +119,7 @@ class MapApplicationForm extends Component
 
     public function mount(): void
     {
-        $this->setting = MapSetting::with('landMeasurement')->first();
+        $this->setting = MapSetting::with('landMeasurement')->first() ?? new MapSetting();
         $this->organizations = Organization::with('userDetail', 'organizationDetail')->active()->get();
         $this->mapFees = MapFee::with('unit')->get();
         $this->officeSetting = OfficeSetting::with('localBody')->first();
