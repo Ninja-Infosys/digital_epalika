@@ -21,7 +21,7 @@ class HouseOwner extends Model
     ];
 
     protected $fillable = [
-//        'map_apply_id',
+        'map_apply_id',
         'name',
         'phone',
         'father_name',
@@ -39,9 +39,9 @@ class HouseOwner extends Model
         return $this->belongsToMany(OldMap::class);
     }
 
-    public function mapApplies(): BelongsToMany
+    public function mapApply(): BelongsTo
     {
-        return $this->belongsToMany(MapApply::class);
+        return $this->belongsTo(MapApply::class);
     }
 
     public function citizenshipIssueDistrict(): BelongsTo
