@@ -7,7 +7,7 @@
                     <h4 class="header-title">{{$formDataType ->model?->title}}
                         थप्नुहोस्</h4>
                     <a href="javascript:void(0)"
-                       route_action="{{ route('emap.admin.printTemplate',[$mapApply,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
+                       route_action="{{ route('emap.admin.attach-document.print-template',[$mapApply,$form,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
                         <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                     </a>
                 </div>
@@ -102,13 +102,9 @@
                                 <td>{{$appliedDocument->status->label()}}</td>
                                 <td>{{$appliedDocument->created_at->toDateString()}}</td>
                                 <td>
-
-                                    <a href="{{ route('emap.admin.documentDetail',$appliedDocument) }}">
-
-                                    <a href="{{ route('organization.admin.documentDetail',$appliedDocument) }}">
-
+                                    {{--<a href="{{ route('organization.admin.documentDetail',$appliedDocument) }}">
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </a>--}}
                                 </td>
                             </tr>
                         @endforeach
