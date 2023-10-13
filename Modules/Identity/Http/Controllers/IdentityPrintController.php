@@ -35,6 +35,9 @@ class IdentityPrintController extends Controller
         return view('identity::admin.disabilityPrint.index', compact('governmentalDisabilityTypes', 'employeeSignatures'));
     }
 
+
+
+
     public function printCard(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $view = DB::transaction(function () use ($disabilityIdentityCard) {
@@ -57,6 +60,8 @@ class IdentityPrintController extends Controller
             'view' => $view,
         ]);
     }
+
+
 
 
 
