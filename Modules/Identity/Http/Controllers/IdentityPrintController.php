@@ -19,7 +19,6 @@ use Modules\Identity\Entities\EmployeeSignature;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\IdentityMeeting;
 use Modules\Identity\Http\Requests\IdentityPrint\UpdateIdentityPrintRequest;
-use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Str;
 
 class IdentityPrintController extends Controller
@@ -39,7 +38,6 @@ class IdentityPrintController extends Controller
     public function printCard(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $view = DB::transaction(function () use ($disabilityIdentityCard) {
-        $date = $this->get_today_nepali_date();
             $disabilityIdentityCard->update([
                 'print_count' => $disabilityIdentityCard->print_count + 1
             ]);
@@ -51,15 +49,15 @@ class IdentityPrintController extends Controller
                 'disabilityType',
                 'employeeSignature'
             );
-            return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard'));
-
-            return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard', 'date'));
-
+            $date = $this->get_today_nepali_date();
+            return (string) View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard', 'date'));
         });
+
         return response()->json([
             'view' => $view,
         ]);
     }
+
 
 
     public function updateSign(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
@@ -99,8 +97,8 @@ class IdentityPrintController extends Controller
                     'old_print_date_en' =>  $oldPrintDate
                 ]);
             }
-            $todayDate = $this->get_today_nepali_date();
-            return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard', 'todayDate'));
+            $date = $this->get_today_nepali_date();
+            return (string)View::make('identity::admin.disabilityPrint.idCard', compact('disabilityIdentityCard', 'date'));
         });
         return response()->json([
             'view' => $view,
