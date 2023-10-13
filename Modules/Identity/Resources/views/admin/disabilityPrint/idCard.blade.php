@@ -594,7 +594,6 @@
                             Date :
                         </div>
                         <div class="dynamic-content">{{$date}}
-
                         </div>
                     </div>
                 </td>
@@ -608,7 +607,6 @@
                 ">
                 <span style="font-size: 10px; font-weight: bold">
                    "If somebody finds this ID card, please deposit this in the nearby Police Station or Municipality Office."
-
                 </span>
         </div>
     </div>
