@@ -318,10 +318,7 @@
                         </div>
 
                         <div class="dynamic-content">
-                            {{ get_nepali_number($todayDate) }}
-
-                        <div class="dynamic-content" >{{get_nepali_number($date)}}
-
+                            {{ get_nepali_number($date) }}
                         </div>
                     </div>
                 </td>
@@ -596,10 +593,6 @@
                         <div class="fs16">
                             Date :
                         </div>
-
-                        <div class="dynamic-content" >
-                            {{ date('Y-m-d') }}
-
                         <div class="dynamic-content">{{$date}}
 
                         </div>

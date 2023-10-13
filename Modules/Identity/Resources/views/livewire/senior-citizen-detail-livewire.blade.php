@@ -32,7 +32,7 @@
                             wire:model="form.photo"
 
                         />
-                        <div wire:loading wire:target="form.photo">Uploading...</div>
+                        {{-- <div wire:loading wire:target="form.photo">Uploading...</div>
                         @error('form.photo')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -42,12 +42,9 @@
                         <div class="d-flex justify-content-between">
                             <video id="video" width="200" height="200" autoplay></video>
                             <canvas id="canvas" width="200" height="200"></canvas>
-                        </div>
+                        </div> --}}
                     </div>
-                    <div class="col-md-6">
-
-                    </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="card">
                             @if ( !empty($form['right_finger']['image']))
                                 <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right" alt="Right"
@@ -82,7 +79,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </fieldset>
             <fieldset class="mt-3">
@@ -129,6 +126,9 @@
                             wire:model="form.dob_bs"
                         />
                         @error('form.dob_bs')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        @error('form.dob_ad')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
