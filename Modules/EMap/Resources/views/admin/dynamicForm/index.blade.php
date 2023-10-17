@@ -65,7 +65,7 @@
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.template',$dynamicForm)}}"
-                                            class="btn btn-xs btn-outline-secondary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            class="btn btn-xs btn-outline-secondary">
                                             <i class="fa fa-file"></i> टेम्प्लेट
                                         </a>
                                         <a

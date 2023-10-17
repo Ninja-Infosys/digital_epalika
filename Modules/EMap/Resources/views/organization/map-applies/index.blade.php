@@ -44,8 +44,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration ?? '' }}</td>
                                         <td>{{ $mapApply->unique_id ?? '' }}</td>
-                                        <td>{{ $mapApply->houseOwner->first()->name ?? '' }}</td>
-                                        <td>{{ $mapApply->houseOwner->first()->phone ?? '' }}</td>
+                                        <td>{{ $mapApply->houseOwner?->first()?->name ?? '' }}</td>
+                                        <td>{{ $mapApply->houseOwner?->first()?->phone ?? '' }}</td>
                                         <td>{{ $mapApply->construction_type->label() }}</td>
                                         <td>
 

@@ -75,6 +75,10 @@
                                     <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
                                         <i class="fa fa-eye"></i>
                                     </a>
+
+                                    <a href="{{ route('organization.admin.formStorePrint',[$formDataType,$formStore]) }}">
+                                        <i class="fa fa-print"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
