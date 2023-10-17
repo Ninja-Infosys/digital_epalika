@@ -75,12 +75,14 @@ class AttachDocumentController extends Controller
                 'bill' => ['required', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data) {
+            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
                 $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
                     'uploaded_by_id' => auth('organization')->user()->id,
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id,
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
                 ]);
