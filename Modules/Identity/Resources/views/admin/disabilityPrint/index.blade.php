@@ -62,7 +62,7 @@
                                                     <td>{{ $disabilityIdentityCard->citizenship_no }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-xs btn-outline-warning"
-                                                            data-bs-toggle="modal" data-bs-target="#print">
+                                                            data-bs-toggle="modal" data-bs-target="#print{{$disabilityIdentityCard->id}}">
                                                             <i class="fa fa-print"></i>
                                                         </button>
                                                         @include('identity::admin.disabilityPrint.inc.print_modal')
@@ -96,9 +96,14 @@
         <script>
             $(".printData").on("click", function(e) {
                 e.preventDefault();
+                var button = e.target;
+                var form = button.closest('form');
+                var modal = button.closest('.modal');
+                var formId = form.id;
+                var modalId = modal.id;
                 var printButton = $(this);
-                var data = $("#disabilitySign").serialize();
-                var url = $("#disabilitySign").attr("action");
+                var data = $("#"+formId).serialize();
+                var url = $("#"+formId).attr("action");
                 printButton.prop("disabled", true);
                 printButton.html(
                     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...'
@@ -108,8 +113,8 @@
                     url: url,
                     data: data,
                     success: function(resp) {
-                        $("#disabilitySign")[0].reset();
-                        $("#print").modal("hide");
+                        $("#"+formId)[0].reset();
+                        $("#"+modalId).modal("hide");
                         swal.fire({
                             title: 'Data Updated Successfully',
                             toast: true,

@@ -51,7 +51,8 @@ Route::prefix('disability')->group(function () {
     Route::get('identityEdit/disabilityIdentityCard/{disabilityIdentityCard}/edit', [IdentityPrintController::class, 'edit'])->name('disabilityPrint.edit');
     Route::get('identityPrint/disabilityIdentityCard/{disabilityIdentityCard}/print', [IdentityPrintController::class, 'printCard'])->name('disabilityIdentityCard.printCard');
     Route::get('identityPrint', [IdentityPrintController::class, 'print'])->name('identityPrint');
-    Route::post('identityPrint/{disabilityIdentityCard}/sign', [IdentityPrintController::class, 'updateSign'])->name('disabilityIdentityCard.updateSign');
+    Route::post('admin/identity/disability/identityPrint/{disabilityIdentityCard}/sign', [IdentityPrintController::class, 'updateSign'])
+    ->name('disabilityIdentityCard.updateSign');
     Route::resource('disabilityPrint/disabilityIdentityCard', IdentityPrintController::class)->names('disabilityPrint');
 
 

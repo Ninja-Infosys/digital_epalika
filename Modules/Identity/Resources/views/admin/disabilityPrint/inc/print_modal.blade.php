@@ -1,11 +1,12 @@
-<div class="modal fade" id="print" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="print{{$disabilityIdentityCard->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <form action="{{ route('identity.admin.disabilityIdentityCard.updateSign', $disabilityIdentityCard) }}"
-                    id="disabilitySign">
+                method="post" id="disabilitySign{{$disabilityIdentityCard->id}}">
                     @csrf
+
                     <div class="row">
                         <p class="text-danger" id="error_message"></p>
                         <div class="col-md-12 mb-2">
@@ -18,7 +19,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-xs btn-outline-primary printData mt-2">
+                    <button type="button" class="btn btn-xs btn-outline-primary printData mt-2">
                         Save & Print <i class="fa fa-print"></i>
                     </button>
                     <button type="button" class="btn btn-xs btn-outline-danger mt-2"
