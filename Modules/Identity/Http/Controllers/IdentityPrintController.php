@@ -67,7 +67,6 @@ class IdentityPrintController extends Controller
 
     public function updateSign(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
     {
-
         $request->validate([
             'employee_signature_id' => 'required'
         ]);

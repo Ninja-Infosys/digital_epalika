@@ -19,11 +19,11 @@ class IdentityMeetingController extends Controller
 {
     public function index()
     {
-        $identityMeetings = IdentityMeeting::withCount('disabilityCommittees', 'invitedGuests', 'disabilityIdentityCards')
+        $disabilityIdentityCards = DisabilityIdentityCard::where('status', StatusEnum::ELIGIBILITY_FOR_MEETING->value)->get();        $identityMeetings = IdentityMeeting::withCount('disabilityCommittees', 'invitedGuests', 'disabilityIdentityCards')
             ->latest('date_ad')
             ->get();
 
-        return view('identity::admin.identityMeeting.index', compact('identityMeetings'));
+        return view('identity::admin.identityMeeting.index', compact('identityMeetings', 'disabilityIdentityCards'));
     }
 
     public function create()
