@@ -1,4 +1,5 @@
 $darkenPercentate: 8%;
+
 .btn-wrap {
   display: flex;
   gap: 8px;
@@ -13,9 +14,11 @@ $darkenPercentate: 8%;
   @extend .font-md;
   @extend .font-light;
   width: fit-content;
+
   &:focus {
     box-shadow: 0 0 0 0 $black;
   }
+
   &.radius-50 {
     border-radius: calc($primary-border-radius/2);
   }
@@ -39,6 +42,7 @@ $darkenPercentate: 8%;
   //     $darkenPercentate
   //   );
   filter: brightness(0) saturate(100%) invert(29%) sepia(6%) saturate(912%) hue-rotate(169deg) brightness(92%) contrast(85%);
+
   &:hover {
     filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(3403%) hue-rotate(193deg) brightness(93%) contrast(89%);
   }
@@ -47,57 +51,46 @@ $darkenPercentate: 8%;
 .btn-primary {
   background: $primary;
   border-color: $primary;
-  
+
   &:hover {
-    background-color: darken(
-      $primary,
-      $darkenPercentate
-    ); // Darken the background color by 10%
-    
-    border-color: darken(
-      $primary,
-      $darkenPercentate
-    ); // Darken the background color by 10%
+    background-color: darken($primary,
+        $darkenPercentate); // Darken the background color by 10%
+
+    border-color: darken($primary,
+        $darkenPercentate); // Darken the background color by 10%
   }
+
   &.btn-outline {
     background: $white;
     color: $primary;
-    border-color:$primary;
-    // filter: brightness(0) saturate(100%) invert(29%) sepia(6%) saturate(912%) hue-rotate(169deg) brightness(92%) contrast(85%);
-    // &:hover {
-    //   filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(3403%) hue-rotate(193deg) brightness(93%) contrast(89%);
-    // }
+    border-color: $primary;
+    //  
   }
 }
 
 .btn-disable {
   background: $grey;
   border-color: $grey;
+
   &:hover {
-    background-color: darken(
-      $grey,
-      $darkenPercentate
-    ); // Darken the background color by 10%
-    border-color: darken(
-      $grey,
-      $darkenPercentate
-    ); // Darken the background color by 10%
+    background-color: darken($grey,
+        $darkenPercentate); // Darken the background color by 10%
+    border-color: darken($grey,
+        $darkenPercentate); // Darken the background color by 10%
   }
 }
 
 .btn-secondary {
   background: $secondary;
   border-color: $secondary;
+
   &:hover {
-    background-color: darken(
-      $secondary,
-      $darkenPercentate
-    ); // Darken the background color by 10%
-    border-color: darken(
-      $secondary,
-      $darkenPercentate
-    ); // Darken the background color by 10%
+    background-color: darken($secondary,
+        $darkenPercentate); // Darken the background color by 10%
+    border-color: darken($secondary,
+        $darkenPercentate); // Darken the background color by 10%
   }
+
   &.btn-outline {
     background: $white;
     color: $secondary;
@@ -107,16 +100,14 @@ $darkenPercentate: 8%;
 .btn-success {
   background: $success;
   border-color: $success;
+
   &:hover {
-    background-color: darken(
-      $success,
-      $darkenPercentate
-    ); // Darken the background color by 10%
-    border-color: darken(
-      $success,
-      $darkenPercentate
-    ); // Darken the background color by 10%
+    background-color: darken($success,
+        $darkenPercentate); // Darken the background color by 10%
+    border-color: darken($success,
+        $darkenPercentate); // Darken the background color by 10%
   }
+
   &.btn-outline {
     background: $white;
     color: $success;
@@ -126,16 +117,14 @@ $darkenPercentate: 8%;
 .btn-danger {
   background: $danger;
   border-color: $danger;
+
   &:hover {
-    background-color: darken(
-      $danger,
-      $darkenPercentate
-    ); // Darken the background color by 10%
-    border-color: darken(
-      $danger,
-      $darkenPercentate
-    ); // Darken the background color by 10%
+    background-color: darken($danger,
+        $darkenPercentate); // Darken the background color by 10%
+    border-color: darken($danger,
+        $darkenPercentate); // Darken the background color by 10%
   }
+
   &.btn-outline {
     background: $white;
     color: $danger;
@@ -144,10 +133,11 @@ $darkenPercentate: 8%;
 
 .btn-tertiary {
   background: $light-bg;
-  border-color: $light-bg;
+  border-color: $light-bg; // Darken the background color by 10%
+
   &:hover {
     background: $grey;
-    border-color: $grey !important; // Darken the background color by 10%
+    border-color: $grey !important;
   }
 }
 

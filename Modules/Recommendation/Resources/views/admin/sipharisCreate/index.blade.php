@@ -41,22 +41,22 @@
             <div class="card rounded-3">
                 <div class="">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h4 class="header-title mb-0">सिफारिस सूची</h4>
+                        <h4 class="header-title mb-0 font-xxl">सिफारिस सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
 
                             @can('recommendation_create')
-                            <button class="btn btn-md btn-primary btn-outline">
+                            <button class="btn btn-md btn-tertiary">
                                 <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}">
                                 <img class="icon btn-icon me-1" src="http://127.0.0.1:8000/assets/backend/images/add.svg" alt="add-icon"> नयाँ सिफारिस थप्नुहोस
                                 </a>
                             </button>
                             @endcan
-                            <button class="btn btn-md mx-1 btn-outline waves-effect waves-light collapsed"
+                            <button class="btn btn-md mx-1 btn-tertiary waves-effect waves-light collapsed"
                                     type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                    <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/filter.svg" alt="filter-icon"> </i> फिल्टर
+                                    <img class="icon btn-icon me-1" src="http://127.0.0.1:8000/assets/backend/images/filter.svg" alt="filter-icon"> </i> फिल्टर
                             </button>
                         </div>
                     </div>

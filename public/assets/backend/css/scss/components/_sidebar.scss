@@ -79,6 +79,10 @@ $sidebarWidth: 270px;
             right: 0;
           }
         }
+        .sidebar-icon{
+          margin-right: 8px;
+          filter: brightness(0) invert(1);
+        }
       }
     }
   }

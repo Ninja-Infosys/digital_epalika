@@ -1428,6 +1428,10 @@ p {
 #sidebar-menu ul li a span {
   right: 0;
 }
+#sidebar-menu ul li a .sidebar-icon {
+  margin-right: 8px;
+  filter: brightness(0) invert(1);
+}
 
 .logo-box {
   width: 270px;
