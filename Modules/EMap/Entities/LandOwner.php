@@ -45,6 +45,11 @@ class LandOwner extends Model
         return $this->belongsTo(MapApply::class);
     }
 
+    public function mapApplies(): BelongsToMany
+    {
+        return $this->belongsToMany(MapApply::class);
+    }
+
     public function citizenshipIssueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');

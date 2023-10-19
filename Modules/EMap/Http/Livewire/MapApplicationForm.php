@@ -19,6 +19,8 @@ use Modules\EMap\Entities\StructureType;
 class MapApplicationForm extends Component
 {
     use WithFileUploads;
+    public $latitude;
+    public $longitude;
 
     public $structureTypes = [];
 
@@ -134,6 +136,17 @@ class MapApplicationForm extends Component
 
         $this->structureTypes = StructureType::latest()->get();
         $this->allDistricts = get_districts();
+    }
+
+    protected $listeners = ['locationClicked' => 'updateLocation'];
+
+    public function updateLocation($location)
+    {
+        $this->latitude = $location['latitude'];
+        $this->longitude = $location['longitude'];
+        // dd($this->latitude, $this->longitude);
+
+        // You can perform any other actions you need with these values.
     }
 
     public function addStoreyDetail(): void
@@ -254,28 +267,30 @@ class MapApplicationForm extends Component
             }
 
             $mapApply = MapApply::create($this->applyMap + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
-                ]);
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude
+            ]);
 
             foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
                 $mapApply->storeyDetails()->create($storeyDetail);
             }
 
             $mapApply->landDetail()->create($this->landDescription + [
-                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
-                ]);
+                'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
+            ]);
 
-            if ($houseOwner=HouseOwner::where('citizenship_no', $this->houseOwner['citizenship_no'])->where('phone', $this->houseOwner['phone'])->first()) {
+            if ($houseOwner = HouseOwner::where('citizenship_no', $this->houseOwner['citizenship_no'])->where('phone', $this->houseOwner['phone'])->first()) {
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
             } else {
-                $houseOwner=HouseOwner::create($this->houseOwner);
+                $houseOwner = HouseOwner::create($this->houseOwner);
                 $houseOwner->mapApplies()->attach([$mapApply->id]);
             }
 
-            if ($landOwner=LandOwner::where('citizenship_no', $this->landOwner['citizenship_no'])->where('phone', $this->landOwner['phone'])->first()) {
+            if ($landOwner = LandOwner::where('citizenship_no', $this->landOwner['citizenship_no'])->where('phone', $this->landOwner['phone'])->first()) {
                 $landOwner->mapApplies()->attach([$mapApply->id]);
             } else {
-                $landOwner=LandOwner::create($this->landOwner);
+                $landOwner = LandOwner::create($this->landOwner);
                 $landOwner->mapApplies()->attach([$mapApply->id]);
             }
 

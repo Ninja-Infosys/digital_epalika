@@ -60,6 +60,8 @@ class MapApply extends Model
         'application_type',
         'file_code',
         'number',
+        'latitude',
+        'longitude',
     ];
 
     protected $casts = [
@@ -209,6 +211,5 @@ class MapApply extends Model
 
     public function getCheckFormFilledAttribute($value)
     {
-
     }
 }
