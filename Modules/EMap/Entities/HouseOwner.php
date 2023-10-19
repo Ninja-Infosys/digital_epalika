@@ -39,6 +39,12 @@ class HouseOwner extends Model
         return $this->belongsToMany(OldMap::class);
     }
 
+
+    public function mapApplies(): BelongsToMany
+    {
+        return $this->belongsToMany(MapApply::class);
+    }
+
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
