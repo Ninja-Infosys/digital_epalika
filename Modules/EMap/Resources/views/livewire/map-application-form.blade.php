@@ -106,6 +106,28 @@
                 @enderror
             </div>
         </div>
+        <div>
+            <div id="map" style="width: 100%; height: 400px;"></div>
+
+        </div>
+
+        <div class="mb-1">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold" for="latitude">Latitude</label>
+                    <input type="number" class="form-control form-control-sm" id="latitude"
+                           wire:model="latitude"
+                           placeholder="Latitude" required>
+
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold" for="longitude">Longitude</label>
+                    <input type="number" class="form-control form-control-sm" id="longitude"
+                           wire:model="longitude"
+                           placeholder="longitude" required>
+                </div>
+            </div>
+        </div>
         <div class="mb-1">
             <div class="row">
                 <div class="col-md-4 mb-3">
@@ -676,4 +698,26 @@
         <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
     </div>
 
+   @push('styles')
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+   @endpush
+@push('scripts')
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('map').setView([28.3949, 84.1240], 7);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
+
+map.on('click', function(e) {
+
+    Livewire.emit('locationClicked', { latitude: e.latlng.lat, longitude: e.latlng.lng });
+});
+</script>
+@endpush
+
 </form>
+
+

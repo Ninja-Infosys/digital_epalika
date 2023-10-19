@@ -75,12 +75,14 @@ class AttachDocumentController extends Controller
                 'bill' => ['required', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data) {
+            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
                 $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
                     'uploaded_by_id' => auth('organization')->user()->id,
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id,
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
                 ]);
@@ -288,30 +290,30 @@ class AttachDocumentController extends Controller
 
             //landowner
 
-             $mapApply->landOwner->land_owner_type->label() ?? '',
-             $mapApply->landOwner->name ?? '',
-             $mapApply->landOwner->phone ?? '',
-             $mapApply->landOwner->father_name ?? '',
-             $mapApply->landOwner->grandfather_name ?? '',
-             $mapApply->landOwner->citizenshipIssueDistrict->district ?? '',
-             $mapApply->landOwner->citizenship_no ?? '',
-             $mapApply->landOwner->citizenship_issue_date ?? '',
-             $mapApply->landOwner->address ?? '',
-             $mapApply->landOwner->local_body ?? '',
-             $mapApply->landOwner->ward_no ?? '',
+            $mapApply->landOwner->land_owner_type->label() ?? '',
+            $mapApply->landOwner->name ?? '',
+            $mapApply->landOwner->phone ?? '',
+            $mapApply->landOwner->father_name ?? '',
+            $mapApply->landOwner->grandfather_name ?? '',
+            $mapApply->landOwner->citizenshipIssueDistrict->district ?? '',
+            $mapApply->landOwner->citizenship_no ?? '',
+            $mapApply->landOwner->citizenship_issue_date ?? '',
+            $mapApply->landOwner->address ?? '',
+            $mapApply->landOwner->local_body ?? '',
+            $mapApply->landOwner->ward_no ?? '',
 
             //houseOwner
 
-             $mapApply->houseOwner->name ?? '',
-             $mapApply->houseOwner->phone ?? '',
-             $mapApply->houseOwner->father_name ?? '',
-             $mapApply->houseOwner->grandfather_name ?? '',
-             $mapApply->houseOwner->citizenshipIssueDistrict->district ?? '',
-             $mapApply->houseOwner->citizenship_no ?? '',
-             $mapApply->houseOwner->citizenship_issue_date ?? '',
-             $mapApply->houseOwner->address ?? '',
-             $mapApply->houseOwner->local_body ?? '',
-             $mapApply->houseOwner->ward_no ?? '',
+            $mapApply->houseOwner->name ?? '',
+            $mapApply->houseOwner->phone ?? '',
+            $mapApply->houseOwner->father_name ?? '',
+            $mapApply->houseOwner->grandfather_name ?? '',
+            $mapApply->houseOwner->citizenshipIssueDistrict->district ?? '',
+            $mapApply->houseOwner->citizenship_no ?? '',
+            $mapApply->houseOwner->citizenship_issue_date ?? '',
+            $mapApply->houseOwner->address ?? '',
+            $mapApply->houseOwner->local_body ?? '',
+            $mapApply->houseOwner->ward_no ?? '',
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
@@ -410,30 +412,30 @@ class AttachDocumentController extends Controller
             '[@landDetail.percentage_of_area_covered_by_building]',
 
             //landOwner
-             '[@landOwner.land_owner_type]',
-             '[@landOwner.name]',
-             '[@landOwner.phone]',
-             '[@landOwner.father_name]',
-             '[@landOwner.grandfather_name]',
-             '[@landOwner.citizenship_issue_district]',
-             '[@landOwner.citizenship_no]',
-             '[@landOwner.citizenship_issue_date]',
-             '[@landOwner.address]',
-             '[@landOwner.local_body]',
-             '[@landOwner.ward_no]',
+            '[@landOwner.land_owner_type]',
+            '[@landOwner.name]',
+            '[@landOwner.phone]',
+            '[@landOwner.father_name]',
+            '[@landOwner.grandfather_name]',
+            '[@landOwner.citizenship_issue_district]',
+            '[@landOwner.citizenship_no]',
+            '[@landOwner.citizenship_issue_date]',
+            '[@landOwner.address]',
+            '[@landOwner.local_body]',
+            '[@landOwner.ward_no]',
 
             //houseOwner
 
-             '[@houseOwner.name]',
-             '[@houseOwner.phone]',
-             '[@houseOwner.father_name]',
-             '[@houseOwner.grandfather_name]',
-             '[@houseOwner.citizenship_issue_district]',
-             '[@houseOwner.citizenship_no]',
-             '[@houseOwner.citizenship_issue_date]',
-             '[@houseOwner.address]',
-             '[@houseOwner.local_body]',
-             '[@houseOwner.ward_no]',
+            '[@houseOwner.name]',
+            '[@houseOwner.phone]',
+            '[@houseOwner.father_name]',
+            '[@houseOwner.grandfather_name]',
+            '[@houseOwner.citizenship_issue_district]',
+            '[@houseOwner.citizenship_no]',
+            '[@houseOwner.citizenship_issue_date]',
+            '[@houseOwner.address]',
+            '[@houseOwner.local_body]',
+            '[@houseOwner.ward_no]',
 
             //FourForts
 
@@ -557,5 +559,19 @@ class AttachDocumentController extends Controller
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
             'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
         ]);
+    }
+
+    public function formStorePrint(FormDataType $formDataType, FormStore $formStore)
+    {
+        $formStore->load('form_data.model');
+        $formDataType->load('model');
+        $template = $formStore->form_data?->model?->template ?? '';
+
+        foreach ($formStore->data as $key => $value) {
+            $placeholder = '[@form.' . $key . ']';
+            $template = str_replace($placeholder, $value, $template);
+        }
+
+        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType'));
     }
 }
