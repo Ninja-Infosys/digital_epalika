@@ -43,6 +43,11 @@
                             <video id="video" width="200" height="200" autoplay></video>
                             <canvas id="canvas" width="200" height="200"></canvas>
                         </div> --}}
+
+                    </div>
+                    <div class="col-md-6">
+
+
                     </div>
                     {{-- <div class="col-md-6">
                         <div class="card">
@@ -61,8 +66,8 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> --}}
+                    {{-- <div class="col-md-6">
                         <div class="card">
                             @if ( !empty($form['left_finger']['image']))
                                 <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left" alt="Left"

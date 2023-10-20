@@ -165,16 +165,14 @@
                                     <p class="font-12 mb-2">जेष्ठ नागरिक परिचय पत्र</p>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="card-font-color">
                                             <p>आईडी कार्ड नं: {{$seniorCitizenDetail->card_no}}</p>
                                             <p>व्यक्तिको पुरा नाम: {{$seniorCitizenDetail->name}}</p>
                                         </div>
                                         <div class="card-font-color">
                                             <p>नागरिकता नं : <span>{{$seniorCitizenDetail->citizenship_no}}</span></p>
-                                            <p>रोग :
-                                                <span>{{$seniorCitizenDetail->is_disease==1 ? 'छ':'छैन'}}</span>
-                                            </p>
+                                            <p>रोगको नाम : {{ $seniorCitizenDetail->disease_name }}</span></p>
                                             <p>ठेगाना : <span> {{$seniorCitizenDetail->localBody->local_body??''}},{{$seniorCitizenDetail->district->district??''}},{{$seniorCitizenDetail->province->province??''}}</span>
                                             </p>
                                             <p>पति,पत्नीको नाम :
@@ -182,7 +180,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="card-font-color">
                                             <p>लिङ्ग: {{$seniorCitizenDetail->gender?->label()??''}}</p>
                                             <p>रक्त समूह: {{$seniorCitizenDetail->blood_group?->label()??''}}</p>
@@ -241,7 +239,7 @@
                                     <p class="font-12 mb-2">Senior Citizen ID Card</p>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="card-font-color">
                                             <p>ID Card No
                                                 : {{$seniorCitizenDetail->card_no}}</p>
@@ -249,7 +247,7 @@
                                             <p>Citizenship No: {{$seniorCitizenDetail->citizenship_no}}<span></span></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="card-font-color">
                                             <p>Gender
                                                 : {{$seniorCitizenDetail->gender}}</p>
@@ -263,7 +261,7 @@
                                 <div class="card-font-color">
                                     <div class="row">
                                         <div class="col-md-8 card-font-color">
-                                            <p>Disease : <span>{{$seniorCitizenDetail->is_disease==1 ? 'Yes':'No'}}</span></p>
+                                            <p>Disease : <span>{{ $seniorCitizenDetail->disease_name }}</span></p>
                                             <p>Address :
                                                 <span> {{$seniorCitizenDetail->localBody->local_body_en??''}},{{$seniorCitizenDetail->district->district_en??''}},{{$seniorCitizenDetail->province->province_en??''}}</span>
                                             </p>
