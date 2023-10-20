@@ -116,7 +116,6 @@
                                     name="red_signature"
                                     class="form-control @error('red_signature') is-invalid @enderror"
                                     id="red_signature"
-                                    required
 
                                 />
                                 @error('red_signature')
@@ -130,7 +129,6 @@
                                     name="black_signature"
                                     class="form-control @error('black_signature') is-invalid @enderror"
                                     id="black_signature"
-                                    required
 
                                 />
                                 @error('black_signature')

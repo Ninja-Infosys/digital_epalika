@@ -288,9 +288,6 @@
                         </div>
 
                         <div class="dynamic-content">
-
-                        <div class="dynamic-content" style="color: white !important;">.
-
                              {{$disabilityIdentityCard->employeeSignature->name??''}}
                         </div>
                     </div>
