@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @livewire('emap::form-data-type-livewire',['form'=>$form])
+                    @livewire('emap::form-data-type-livewire',['formData'=>$form])
 
                 </div>
             </div>
