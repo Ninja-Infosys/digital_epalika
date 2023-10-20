@@ -29,7 +29,8 @@
     />
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/sweetalert2.min.css')}}">
     @livewireStyles
 </head>
 
