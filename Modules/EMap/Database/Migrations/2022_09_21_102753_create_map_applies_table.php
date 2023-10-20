@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     public function up()
     {
         Schema::create('map_applies', function (Blueprint $table) {
@@ -29,6 +30,8 @@ return new class () extends Migration {
             $table->string('consultant_name')->nullable();
             $table->string('consultant_mobile_no')->nullable();
             $table->string('consultant_nec_no')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

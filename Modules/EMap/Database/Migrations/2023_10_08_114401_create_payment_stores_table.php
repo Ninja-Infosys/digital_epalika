@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up()
     {
         Schema::create('payment_stores', function (Blueprint $table) {
@@ -15,6 +16,7 @@ return new class extends Migration {
             $table->string('bill');
             $table->float('amount')->default(0);
             $table->nullableMorphs('uploaded_by');
+            $table->nullableMorphs('form_data');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -27,6 +27,8 @@ class PaymentStore extends Model
         'status',
         'uploaded_by_type',
         'uploaded_by_id',
+        'form_data_type',
+        'form_data_id',
         'bill',
         'amount'
     ];
@@ -63,6 +65,10 @@ class PaymentStore extends Model
     public function paymentStoreStatuses(): HasMany
     {
         return $this->hasMany(PaymentStoreStatus::class);
+    }
+    public function form_data(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     public function uploaded_by(): MorphTo

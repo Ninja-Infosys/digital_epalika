@@ -72,7 +72,7 @@
 
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="sipharis_form_type_id" class="form-label">सिफारिस उप-श्रेणी <span
+                <label for="sipharis_form_type_id" class="form-label">सिफारिस * <span
                         class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
                     <select id="sipharis_form_type_id" wire:model="sipharis_form_type_id"

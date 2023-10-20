@@ -43,8 +43,10 @@
                             <video id="video" width="200" height="200" autoplay></video>
                             <canvas id="canvas" width="200" height="200"></canvas>
                         </div> --}}
+
                     </div>
                     <div class="col-md-6">
+
 
                     </div>
                     {{-- <div class="col-md-6">
@@ -129,6 +131,9 @@
                             wire:model="form.dob_bs"
                         />
                         @error('form.dob_bs')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        @error('form.dob_ad')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>

@@ -33,9 +33,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{route('emap.admin.dynamicForm.store')}}"
+                    <form method="post" action="{{route('emap.admin.dynamicForm.update', $dynamicForm)}}"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <fieldset>
                             <legend>
                                 <h4 class="text-info">नक्शा पास फाराम</h4>

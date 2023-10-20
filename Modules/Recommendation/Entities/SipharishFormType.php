@@ -38,7 +38,7 @@ class SipharishFormType extends Model
 
     public function sipharisFormFields(): HasMany
     {
-        return $this->hasMany(SipharisFormField::class);
+        return $this->hasMany(SipharisFormField::class,'sipharish_form_type_id');
     }
 
     public function scopeActive($query)

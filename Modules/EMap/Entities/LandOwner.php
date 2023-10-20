@@ -22,7 +22,7 @@ class LandOwner extends Model
     ];
 
     protected $fillable = [
-//        'map_apply_id',
+        'map_apply_id',
         'land_owner_type',
         'name',
         'phone',
@@ -39,6 +39,11 @@ class LandOwner extends Model
     protected $casts = [
         'land_owner_type' => LandOwnerTypeEnum::class,
     ];
+
+    public function mapApply(): BelongsTo
+    {
+        return $this->belongsTo(MapApply::class);
+    }
 
     public function mapApplies(): BelongsToMany
     {

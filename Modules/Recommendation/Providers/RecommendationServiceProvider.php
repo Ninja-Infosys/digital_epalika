@@ -27,7 +27,7 @@ class RecommendationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       // PersonalDetail::observe(PersonalDetailObserver::class);
+        PersonalDetail::observe(PersonalDetailObserver::class);
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
