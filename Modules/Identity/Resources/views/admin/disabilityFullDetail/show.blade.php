@@ -96,14 +96,14 @@
                                 </tr>
                                 <tr>
                                     <td>अपाङ्गताको कारण: {{ $disabilityIdentityCard->disabilityReason->title ?? '' }}</td>
-                                    <td> रक्त समुह : {{ $disabilityIdentityCard->blood_group ?? '' }}</td>
+                                    <td> रक्त समुह : {{ $disabilityIdentityCard->blood_group->label() ?? '' }}</td>
                                     <td>सामाग्री विवरण: {{ $disabilityIdentityCard->material_description ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <th colspan="3" class="text-center">दैनिक क्रियाकलाप गर्न</th>
                                 </tr>
                                 <tr>
-                                    <td>पछिल्लो सैक्षिक योग्यता : {{ $disabilityIdentityCard->qualification ?? '' }}</td>
+                                    <td>पछिल्लो सैक्षिक योग्यता : {{ $disabilityIdentityCard->qualification->label()?? '' }}</td>
                                     <td>दैनिक क्रियाकलाप गर्न :
                                         {{ $disabilityIdentityCard->daily_activity == 1 ? 'सक्ने' : ' नसक्ने' }}</td>
                                     <td>साहायक सामाग्री प्रयोग गर्ने :
@@ -132,24 +132,25 @@
 
                                 </tr>
                                 <tr>
-                                    <td>हालको पेसा : {{ $disabilityIdentityCard->occupation->title ?? '' }}</td>
+                                    <td>हालको पेसा : {{ $disabilityIdentityCard->Occupation->title ?? '' }}</td>
                                 </tr>
 
-                                <tr>
-                                    <th colspan="3" class="text-center">संशोधन मिति</th>
-                                </tr>
+
                                 <table class="table  table-bordered table-hover table-responsive py-1">
                                     <thead>
                                         <tr>
-                                            <th>Print Date (Nepali)</th>
-                                            <th>Old Print Date (Nepali)</th>
+                                            <th colspan="3" class="text-center">संशोधन मिति</th>
+                                        </tr>
+                                        <tr>
+                                            <th>परिचयपत्र लिएको पुरानो मिति</th>
+                                            <th>परिचयपत्र लिएको हालसालै मिति</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($disabilityIdentityCard->identityRecords as $identityRecord)
                                             <tr>
-                                                <td>{{ $identityRecord->print_date }}</td>
-                                                <td>{{ $identityRecord->old_print_date }}</td>
+                                                <td>{{ get_nepali_number($identityRecord->old_print_date) }}</td>
+                                                <td>{{ get_nepali_number($identityRecord->print_date) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -179,6 +180,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="col-md-4">
                                     <div class="card">
