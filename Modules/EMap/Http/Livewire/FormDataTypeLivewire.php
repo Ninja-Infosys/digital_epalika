@@ -15,24 +15,32 @@ use Modules\EMap\Enums\FormTypeEnum;
 
 class FormDataTypeLivewire extends Component
 {
-    public $form = [];
+    public $formData;
+    public array $form = [
+        'title' => null,
+        'order' => null,
+        'map_pass_group_id' => null,
+        'need_from' => null,
+        'formDataType' => []
+
+    ];
     public $mapPassGroups = [];
     public $existingForm = null;
 
-    public function mount($form = null)
+    public function mount($formData = null)
     {
         $this->mapPassGroups = MapPassGroup::all();
 
-        if (!empty($form)) {
-            $this->existingForm = $form;
-            $this->form['title'] = $form->title;
-            $this->form['order'] = $form->order;
-            $this->form['map_pass_group_id'] = $form->map_pass_group_id;
-            $this->form['need_from'] = $form->need_from;
+        if (!empty($formData)) {
+            $this->existingForm = $formData;
+            $this->form['title'] = $formData->title;
+            $this->form['order'] = $formData->order;
+            $this->form['map_pass_group_id'] = $formData->map_pass_group_id;
+            $this->form['need_from'] = $formData->need_from;
 
             $formDataTypeArray = [];
 
-            foreach ($form->formDataTypes as $index => $formDataType) {
+            foreach ($formData->formDataTypes as $index => $formDataType) {
                 $formDataTypeArray[$index]['id'] = $formDataType->id;
                 $formDataTypeArray[$index]['type'] = $formDataType->type;
                 $formDataTypeArray[$index]['model_id'] = $formDataType->model_id ?? '';
@@ -45,13 +53,25 @@ class FormDataTypeLivewire extends Component
 
     public function addData(): void
     {
-        $this->form['formDataType'][] = [];
+        $this->form['formDataType'][] =   [];
     }
 
     public function removeData($index): void
     {
-        unset($this->form['formDataType'][$index]);
-        $this->form['formDataType'] = array_values($this->form['formDataType']);
+        if (isset($this->form['formDataType'][$index])) {
+            $formDataType = $this->form['formDataType'][$index];
+
+            if (isset($formDataType['id'])) {
+                $formDataTypeRecord = FormDataType::find($formDataType['id']);
+                if ($formDataTypeRecord) {
+                    $formDataTypeRecord->delete();
+                }
+            }
+            $formDataTypeCollection = collect($this->form['formDataType']);
+            $formDataTypeCollection->forget($index);
+
+            $this->form['formDataType'] = $formDataTypeCollection->values()->all();
+        }
     }
 
     public function changeData($index): void
@@ -59,7 +79,6 @@ class FormDataTypeLivewire extends Component
         $this->form['formDataType'][$index]['data'] = $this->resolveData($this->form['formDataType'][$index]['type']);
         $this->form['formDataType'][$index]['data'] = $this->resolveData($this->form['formDataType'][$index]['type']);
         $this->form['formDataType'][$index]['model_id'] = null;
-
     }
 
     public function resolveData($type)
@@ -86,7 +105,6 @@ class FormDataTypeLivewire extends Component
     {
 
         $this->validateOnly($propertyName);
-
     }
 
     public function save()
@@ -118,7 +136,6 @@ class FormDataTypeLivewire extends Component
         $this->reset('form');
         toast('सफलतापूर्वक थपियो', 'success');
         return redirect()->route('emap.admin.form.index');
-
     }
 
     public function render()
