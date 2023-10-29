@@ -30,7 +30,7 @@ class DepartmentController extends Controller
 
         Department::create($request->validated());
 
-        toast('विभाग सफलतापूर्वक थपियो!', 'success');
+        toast('विभाग सफलतापूर्वक थपियो !', 'success');
 
         return back();
     }
@@ -47,7 +47,7 @@ class DepartmentController extends Controller
         $this->checkAuthorization('department_edit');
 
         $department->update($request->validated());
-        toast('विभाग सफलतापूर्वक अद्यावधिक गरियो!', 'success');
+        toast('विभाग सफलतापूर्वक अद्यावधिक गरियो !', 'success');
 
         return redirect()->route('admin.department.index');
     }

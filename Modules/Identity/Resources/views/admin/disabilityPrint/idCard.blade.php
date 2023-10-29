@@ -35,7 +35,6 @@
         }
 
         .card-background {
-
             border-radius: 5px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType?->category->backgroundColor()??'white'}};
             color: {{$disabilityIdentityCard->governmentalDisabilityType?->category->color()??'black'}};

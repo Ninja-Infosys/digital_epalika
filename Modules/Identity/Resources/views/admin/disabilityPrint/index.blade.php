@@ -14,22 +14,22 @@
                         <li class="breadcrumb-item active">प्रिन्ट परिचय पत्र</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> प्रिन्ट परिचय पत्र </h4>
+                <h4 class="page-title">प्रिन्ट परिचय पत्र </h4>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-body">
-                    <ul class="nav nav-tabs nav-bordered nav-justified" role="tablist">
+                <div class="card-body card-background">
+                    <ul class="nav nav-pills mb-3 nav-bordered nav-justified" role="tablist">
                         @foreach ($governmentalDisabilityTypes as $governmentalDisabilityType)
                             <li class="nav-item" role="presentation">
-                                <a href="#home-b2{{ $loop->iteration }}" data-bs-toggle="tab" aria-expanded="false"
-                                    class="nav-link {{ $loop->first ? 'active' : '' }}" aria-selected="true" role="tab">
-                                    {{ $governmentalDisabilityType->category?->label() ?? '' }}
-
-                                </a>
+                                <button href="#home-b2{{ $loop->iteration }}"
+                                    class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-home-tab"
+                                    data-bs-toggle="pill" type="button" role="tab"
+                                    aria-controls="pills-home"
+                                    aria-selected="true">{{ $governmentalDisabilityType->category?->label() ?? '' }}</button>
                             </li>
                         @endforeach
                     </ul>
@@ -62,7 +62,8 @@
                                                     <td>{{ $disabilityIdentityCard->citizenship_no }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-xs btn-outline-warning"
-                                                            data-bs-toggle="modal" data-bs-target="#print{{$disabilityIdentityCard->id}}">
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#print{{ $disabilityIdentityCard->id }}">
                                                             <i class="fa fa-print"></i>
                                                         </button>
                                                         @include('identity::admin.disabilityPrint.inc.print_modal')
@@ -73,7 +74,7 @@
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         <a data-bs-type="edit"
-                                                            href="{{route('identity.admin.disabilityPrint.edit',$disabilityIdentityCard)}}"
+                                                            href="{{ route('identity.admin.disabilityPrint.edit', $disabilityIdentityCard) }}"
                                                             class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                             title="सम्पादन गर्नुहोस्">
                                                             <i class="fa fa-edit"></i>
@@ -102,8 +103,8 @@
                 var formId = form.id;
                 var modalId = modal.id;
                 var printButton = $(this);
-                var data = $("#"+formId).serialize();
-                var url = $("#"+formId).attr("action");
+                var data = $("#" + formId).serialize();
+                var url = $("#" + formId).attr("action");
                 printButton.prop("disabled", true);
                 printButton.html(
                     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...'
@@ -113,8 +114,8 @@
                     url: url,
                     data: data,
                     success: function(resp) {
-                        $("#"+formId)[0].reset();
-                        $("#"+modalId).modal("hide");
+                        $("#" + formId)[0].reset();
+                        $("#" + modalId).modal("hide");
                         swal.fire({
                             title: 'Data Updated Successfully',
                             toast: true,
