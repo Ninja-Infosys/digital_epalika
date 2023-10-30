@@ -17,14 +17,14 @@ class StoreSipharisFormTypeRequest extends FormRequest
     {
         return [
             'sipharis_sub_category_id' => ['required', Rule::exists('sipharis_sub_categories', 'id')->withoutTrashed()],
+            'sipharis_category_id' => ['required', Rule::exists('sipharis_categories', 'id')->withoutTrashed()],
             'title' => ['required'],
-            'content' => ['required'],
-            'need_approval' => ['required', 'boolean'],
             'status' => ['required', 'boolean'],
+            'need_approval' => ['required', 'boolean'],
             'fields' => ['required', 'array'],
             'fields.*.field_name' => ['required', 'max:255'],
             'fields.*.id' => ['nullable', Rule::exists('sipharis_form_fields' . 'id')->withoutTrashed()],
-            'fields.*.status' => ['nullable', 'boolean'],
+            'fields.*.slug' => ['nullable'],
 
         ];
     }

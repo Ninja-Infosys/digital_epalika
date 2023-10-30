@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sipharis_sub_category_id')->constrained('sipharis_sub_categories')->onDelete('cascade');
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->boolean('need_approval')->default(true);
             $table->boolean('status')->default(true)->comment('स्थिति');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');

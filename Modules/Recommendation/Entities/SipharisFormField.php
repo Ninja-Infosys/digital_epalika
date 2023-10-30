@@ -26,7 +26,7 @@ class SipharisFormField extends Model
     protected $fillable = [
         'sipharish_form_type_id',
         'field_name',
-        'status',
+        'slug',
         'created_by'
     ];
 
