@@ -53,8 +53,8 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-ms-12 md-2">
-                                    <label for="fields" class="form-label">फारम</label>
+                                <div class="col-ms-12 md-2 d-none">
+                                    <label for="fields" class="form-label ">फारम</label>
                                     <div class="d-flex justify-content-between gap-1">
                                         <textarea name="fields" id="fields" class="form-control" cols="30"
                                                   rows="10" readonly>{{old('fields')}}</textarea>

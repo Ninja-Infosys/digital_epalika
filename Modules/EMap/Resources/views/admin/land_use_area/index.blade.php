@@ -3,8 +3,9 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
+            <h4 class="page-title">भूउपयोग क्षेत्र</h4>
+                <div class="">
+                    <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
@@ -16,15 +17,14 @@
                         <li class="breadcrumb-item active">भूउपयोग क्षेत्र</li>
                     </ol>
                 </div>
-                <h4 class="page-title">भूउपयोग क्षेत्र</h4>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="mt-3">
             <div class="card">
-                <div class="card-header">
+                <div class="">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">भूउपयोग क्षेत्र सूची</h4>
                         <a href="{{route('emap.admin.landUseArea.create')}}"
@@ -33,7 +33,7 @@
                      </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="mt-3">
                     <div class="table-responsive">
                         <table class="table table-sm table-striped table-bordered">
                             <thead>
@@ -54,20 +54,16 @@
                                                class="btnn btnn-xs btnn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
-
-
-
                                             <form action="{{route('emap.admin.landUseArea.destroy',$landUseArea)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btnn btnn-xs btnn-outline-danger show_confirm">
+                                                        class="btnn btnn-xs btnn-outline-danger show_confirm" ata-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
-                                                    मेटाउनु होस्
+                                                    
                                                 </button>
                                             </form>
-
                                     </td>
                                 </tr>
 @empty

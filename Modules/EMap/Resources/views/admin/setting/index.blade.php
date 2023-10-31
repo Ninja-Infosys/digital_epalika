@@ -61,28 +61,28 @@
                             @enderror
                         </div>
                         <div class="col-md-3 mb-2">
-                            @if(!empty($mapSetting->thumbnail))
-                            <a href="{{$mapSetting->thumbnail}}" download="{{$mapSetting->thumbnail}}">
-                                <i class="fa fa-download"></i> डाउनलोड
-                            </a><br>
-                            @endif
                             <label for="thumbnail" class="form-label mb-2">थम्बनेल</label>
                             <input name="thumbnail" id="thumbnail" class="mt-1 form-control" type="file">
                             @error('thumbnail')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            @if(!empty($mapSetting->document))
-                            <a href="{{$mapSetting->document}}" download="{{$mapSetting->document}}">
-                                <i class="fa fa-download"></i> डाउनलोड
+                            @if(!empty($mapSetting->thumbnail))
+                            <a href="{{$mapSetting->thumbnail}}" class="mt-2 align-items-center d-flex justify-content-end" download="{{$mapSetting->thumbnail}}">
+                                <i class="fa fa-download me-1 "></i> डाउनलोड
                             </a><br>
                             @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
                             <label for="document" class="form-label mb-2">DWG Catalog format </label>
                             <input name="document" id="document" class="mt-1 form-control" type="file">
                             @error('document')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
+                            @if(!empty($mapSetting->document))
+                            <a href="{{$mapSetting->document}}" class="mt-2 d-flex align-items-center justify-content-end" download="{{$mapSetting->document}}">
+                                <i class="fa fa-download me-1"></i> डाउनलोड
+                            </a><br>
+                            @endif
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
