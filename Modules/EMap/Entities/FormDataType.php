@@ -72,4 +72,9 @@ class FormDataType extends Model
     {
         return $this->morphMany(FormStore::class, 'form_data');
     }
+
+    public function paymentStores(): MorphMany
+    {
+        return $this->morphMany(PaymentStore::class, 'form_data');
+    }
 }

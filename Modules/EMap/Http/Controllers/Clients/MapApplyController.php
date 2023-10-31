@@ -14,6 +14,7 @@ use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Entities\Form;
+use Modules\EMap\Enums\DocumentStatusEnum;
 
 class MapApplyController extends Controller
 {
@@ -41,7 +42,18 @@ class MapApplyController extends Controller
 
     public function formList(MapApply $mapApply)
     {
-        $forms = Form::with('formDataTypes.form.dynamicForm')->orderBy('order')->get();
+        $forms = Form::with('formDataTypes.form.dynamicForm', 'formStores', 'paymentStores', 'appliedDocuments')->orderBy('order')->get();
+
+        $status = collect();
+        foreach ($forms as $form) {
+            $allStatus = $form->formStores->pluck('status.value')
+                ->merge($form->paymentStores->pluck('status.value'))
+                ->merge($form->appliedDocuments->pluck('status.value'))
+                ->toArray();
+            $status->push($allStatus);
+        }
+
+
         return view('emap::organization.attach-document.index', compact('mapApply', 'forms'));
     }
 
