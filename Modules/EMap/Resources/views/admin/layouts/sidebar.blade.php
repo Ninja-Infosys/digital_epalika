@@ -111,10 +111,3 @@
     </a>
 </li>
 
-<li class="{{request()->is('admin/emap/files') ? 'active' : ''}}">
-    <a href="{{route('emap.admin.files.file')}}">
-        <i class="fa fa-file-archive"></i>
-        <span>फाईल व्यवस्थापन</span>
-    </a>
-</li>
-
