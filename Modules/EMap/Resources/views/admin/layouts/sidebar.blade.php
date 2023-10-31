@@ -104,10 +104,10 @@
         </ul>
     </div>
 </li>
-<li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
+<!-- <li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
     <a href="{{route('emap.admin.report.report')}}">
         <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
     </a>
-</li>
+</li> -->
 
