@@ -94,6 +94,13 @@
                     <span> नक्शा पास फारम  </span>
                 </a>
             </li>
+
+            <li class="{{request()->is('admin/emap/setting/landUseArea*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.landUseArea.index')}}">
+                    <span>  भूउपयोग क्षेत्र  </span>
+                </a>
+            </li>
+
             <li class="{{request()->is('admin/emap/setting/criteriaDetailSetting*') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.criteriaDetailSetting.index')}}">
                     <span> मापदण्ड  </span>

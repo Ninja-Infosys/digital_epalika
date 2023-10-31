@@ -18,6 +18,7 @@ use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
+use  Modules\EMap\Http\Controllers\LandUseAreaController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 

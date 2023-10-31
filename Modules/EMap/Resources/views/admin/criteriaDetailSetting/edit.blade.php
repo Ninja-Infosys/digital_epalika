@@ -38,6 +38,25 @@
                         @method('put')
                         <div class="row">
                             <div class="col-md-6 mb-2">
+                            <div class="col-md-12 mb-3">
+                                    <label for="land_use_area_id" class="form-label"> भूउपयोग क्षेत्र </label>
+                                    <select
+                                        class="form-select @error('land_use_area_id') is-invalid @enderror"
+                                        name="land_use_area_id" id="land_use_area_id">
+                                        <option value="">---छान्नुहोस् ---</option>
+                                        @foreach ($landUseAreas as $landUseArea)
+                                            <option value="{{ $landUseArea->id }}"
+                                                {{ old('land_use_area_id') == $landUseArea->id ? 'selected' : '' }}>
+                                                {{ $landUseArea->title }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    @error('land_use_area_id')
+                                        <div class="invalid-feedback ">{{ $message }} </div>
+                                    @enderror
+                                </div>
+
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शीर्षक *</label>
                                 <input
                                     type="text"
@@ -50,6 +69,7 @@
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+                            </div>
                             </div>
 
 
