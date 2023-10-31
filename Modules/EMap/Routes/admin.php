@@ -11,6 +11,7 @@ use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
+use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
 use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
@@ -77,6 +78,7 @@ Route::prefix('setting')->group(function () {
     Route::get('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'template'])->name('dynamicForm.template');
     Route::put('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'templateStore'])->name('dynamicForm.template.store');
     Route::resource('dynamicForm', DynamicFormController::class);
+    Route::resource('criteriaDetailSetting', CriteriaDetailSettingController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {
