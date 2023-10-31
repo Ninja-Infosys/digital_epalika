@@ -60,7 +60,7 @@
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
                             <td>
-                                <div class="d-flex gap-1">
+                                <div class="d-flex align-items-center gap-1">
                                     @if ($mapApply->sent_to_organization == 'Accept')
                                         <a href="{{ route('emap.admin.mapApply.mapRegistration.index', $mapApply) }}"
                                             class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
@@ -74,7 +74,7 @@
                                         method="post">
                                         @csrf
                                         @method('put')
-                                        <div class="input-group">
+                                        <div class="input-group d-flex align-items-center">
                                             <select class="form-select form-select-sm" name="sent_to_organization"
                                                 id="sent_to_organization" aria-label="Example select with button addon"   @if($mapApply->sent_to_organization=='Accept') disabled @endif>
                                                 <option value="" disabled selected>--- छान्नुहोस् ---</option>
@@ -88,8 +88,7 @@
                                                     {{ $mapApply->sent_to_organization == 'Reject' ? 'selected' : '' }}>
                                                     अस्वीकार</option>
                                             </select>
-                                            <button   @if($mapApply->sent_to_organization=='Accept') disabled @endif class="btn btn-sm btn-outline-primary" type="submit">पेश
-                                                गर्नुहोस्</button>
+                                            <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($mapApply->sent_to_organization=='Accept') disabled @endif ><i class="fa fa-paper-plane"></i></button>
                                         </div>
 
                                     </form>

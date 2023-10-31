@@ -3,8 +3,9 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
+            <h4 class="page-title">नक्शा पास फारम</h4>
+                <div class="">
+                    <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
                                <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
@@ -17,7 +18,6 @@
                         <li class="breadcrumb-item active">नक्शा पास फारम</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नक्शा पास फारम</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">नक्शा पास फारम सूची</h4>
                         @can('mapFee_create')
@@ -36,9 +36,9 @@
                         @endcan
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="mt-3">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-striped">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
