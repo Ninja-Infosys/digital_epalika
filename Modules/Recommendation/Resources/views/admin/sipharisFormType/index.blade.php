@@ -96,7 +96,14 @@
                                                title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
+
                                         @endcan
+                                        <a data-bs-type="edit"
+                                        href="{{ route('admin.recommendation.sipharish.sipharishFormType.show',  $sipharishFormType) }}"
+                                        class="btn btn-xs btn-outline-primary  {{get_setting('Pin')?'confirm_pin':''}}"
+                                        title="टेम्प्लेट">
+                                         <i class="fa fa-eye"></i>
+                                     </a>
                                         <form
                                             action="{{ route('admin.recommendation.sipharish.sipharishFormType.destroy', $sipharishFormType) }}"
                                             method="post">

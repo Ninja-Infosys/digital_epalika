@@ -32,16 +32,17 @@ class SipharishFormTypeController extends Controller
 
     public function store(StoreSipharisFormTypeRequest $request)
     {
+
         DB::transaction(function () use ($request) {
             $sipharis = SipharishFormType::create($request->validated() + [
-                    'created_by' => auth()->id()
-                ]);
+                'created_by' => auth()->id()
+            ]);
 
             if ($sipharis && !empty($request->validated()['fields'])) {
                 foreach ($request->input('fields') as $data) {
                     $sipharis->sipharisFormFields()->create($data + [
-                            'created_by' => auth()->id()
-                        ]);
+                        'created_by' => auth()->id()
+                    ]);
                 }
             }
         });
@@ -53,7 +54,6 @@ class SipharishFormTypeController extends Controller
     {
         $sipharishFormType->load('sipharisFormFields', 'sipharisSubCategory');
         return view('recommendation::admin.sipharisFormType.edit', compact('sipharishFormType'));
-
     }
 
     public function update(UpdateSipharisFormTypeRequest $request, SipharishFormType $sipharishFormType)
@@ -83,7 +83,6 @@ class SipharishFormTypeController extends Controller
             $diff = $existingFormFieldsId->diff($newId->filter());
 
             SipharisFormField::whereIn('id', $diff)->delete();
-
         });
         toast('सिफारिस सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
@@ -95,6 +94,23 @@ class SipharishFormTypeController extends Controller
 
         $sipharisFormType->update([
             'status' => !$sipharisFormType->status
+        ]);
+        toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function show(SipharishFormType $sipharishFormType)
+    {
+        $sipharishFormType->load('sipharisFormFields');
+        return view('recommendation::admin.sipharisFormType.show', compact('sipharishFormType'));
+    }
+
+    public function updateTemplate(Request $request, SipharishFormType $sipharishFormType)
+    {
+        $this->checkAuthorization('recommendationTemplate_access');
+
+        $sipharishFormType->update([
+            'content' => $request->content
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
@@ -112,5 +128,4 @@ class SipharishFormTypeController extends Controller
         toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
         return back();
     }
-
 }

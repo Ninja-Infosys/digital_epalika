@@ -37,13 +37,12 @@ Route::prefix('sipharish')->as('sipharish.')->group(function () {
     Route::get('sipharishSubCategory/{sipharisSubCategory}/toggleStatus', [SipharisSubCategoryController::class, 'updateStatus'])->name('sipharishSubCategory.updateStatus');
     Route::resource('sipharishSubCategory', SipharisSubCategoryController::class);
     Route::get('sipharishFormType/{sipharisFormType}/toggleStatus', [SipharishFormTypeController::class, 'updateStatus'])->name('sipharishFormType.updateStatus');
+    Route::put('sipharishFormType/{sipharishFormType}/updateTemplate', [SipharishFormTypeController::class, 'updateTemplate'])->name('sipharishFormType.updateTemplate');
     Route::resource('sipharishFormType', SipharishFormTypeController::class);
     Route::get('sipharisSignatureDetail/{sipharisSignatureDetail}/toggleStatus', [SignatureDetailController::class, 'updateStatus'])->name('sipharisSignatureDetail.updateStatus');
     Route::resource('sipharisSignatureDetail', SignatureDetailController::class);
     Route::get('sipharishCreate/{sipharishCreate}/toggleStatus', [SipharisCreateController::class, 'updateStatus'])->name('sipharishCreate.updateStatus');
     Route::resource('sipharishCreate', SipharisCreateController::class);
-
-
 });
 
 Route::get('sipharish/sipharishCreate/show/{id}', [SipharisCreateController::class, 'show'])->name('sipharishCreate.view');

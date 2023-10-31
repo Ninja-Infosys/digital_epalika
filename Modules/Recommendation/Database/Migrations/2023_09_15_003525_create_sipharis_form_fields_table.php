@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sipharish_form_type_id')->constrained('sipharish_form_types')->onDelete('cascade');
             $table->string('field_name');
-            $table->boolean('status')->default(true)->comment('स्थिति');
+            $table->string('slug')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

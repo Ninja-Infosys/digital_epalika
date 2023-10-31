@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Support\Arr;
 
 class SipharishFormType extends Model
 {
@@ -38,7 +38,7 @@ class SipharishFormType extends Model
 
     public function sipharisFormFields(): HasMany
     {
-        return $this->hasMany(SipharisFormField::class,'sipharish_form_type_id');
+        return $this->hasMany(SipharisFormField::class, 'sipharish_form_type_id');
     }
 
     public function scopeActive($query)
@@ -60,5 +60,22 @@ class SipharishFormType extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+
+
+    public function getTemplateOptions(): array
+    {
+        return [[
+            'title' => 'ठेगाना',
+            'data' => [
+                'प्रदेश' => '[@province]',
+                'जिल्ला' => '[@district]',
+                'पालिका' => '[@muncipal]',
+                'वडा नं' => '[@ward_no]',
+                'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
+                'आजको मिति (ई.स.)' => '[@today_date_ad]',
+            ],
+        ]];
     }
 }
