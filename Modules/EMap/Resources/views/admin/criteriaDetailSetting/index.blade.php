@@ -1,0 +1,96 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="">इ-नक्सा</a>
+                        </li>
+                        <li class="breadcrumb-item active">मापदण्ड</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">मापदण्ड</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title mb-0">मापदण्ड सूची</h4>
+                        @can('mapFee_create')
+                            <a href="{{route('emap.admin.criteriaDetailSetting.create')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
+                            </a>
+                        @endcan
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>शीर्षक</th>
+                                <th>क्षेत्र</th>
+                                <th>संकेत</th>
+                                <th>GCR</th>
+                                <th>FAR</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($criteriaDetailSettings as $criteriaDetailSetting)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$criteriaDetailSetting->title}}</td>
+                                    <td>{{$criteriaDetailSetting->area}}</td>
+                                    <td>{{$criteriaDetailSetting->sign}}</td>
+                                    <td>{{$criteriaDetailSetting->gcr}}</td>
+                                    <td>{{$criteriaDetailSetting->far}}</td>
+                                    <td>
+                                        <a data-bs-type="edit"
+                                           href="{{route('emap.admin.criteriaDetailSetting.edit',$criteriaDetailSetting)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        </a>
+                                        {{-- <a
+                                            href="{{route('emap.admin.criteriaDetailSetting.show',$dynamicForm)}}"
+                                            class="btn btn-xs btn-outline-warning ">
+                                            <i class="fa fa-eye"></i> हेर्नुहोस
+                                        </a> --}}
+                                        <form action="{{route('emap.admin.criteriaDetailSetting.destroy',$criteriaDetailSetting)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button data-bs-type="delete"
+                                                    class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
+                                                मेटाउनु होस्
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
