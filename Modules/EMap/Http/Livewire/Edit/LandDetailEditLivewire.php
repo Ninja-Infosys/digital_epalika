@@ -4,6 +4,7 @@ namespace Modules\EMap\Http\Livewire\Edit;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Modules\EMap\Entities\LandUseArea;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 
@@ -16,7 +17,7 @@ class LandDetailEditLivewire extends Component
     public bool $editForm = false;
 
     public array $landDescription = [
-        'land_use_area' => null,
+        'land_use_area_id' => null,
         'ward_no' => null,
         'former_ward_no' => null,
         'tole' => null,
@@ -26,12 +27,16 @@ class LandDetailEditLivewire extends Component
         'percentage_of_area_covered_by_building' => null,
     ];
 
+
+    public $landUseAreas = [];
+
     public function mount(MapApply $mapApply)
     {
         $this->mapApply = $mapApply;
+        $this->landUseAreas = LandUseArea::get();
 
         $this->landDescription = [
-            'land_use_area' => $mapApply->landDetail->land_use_area ?? null,
+            'land_use_area_id' => $mapApply->landDetail->land_use_area_id ?? null,
             'ward_no' => $mapApply->landDetail->ward_no ?? null,
             'former_ward_no' => $mapApply->landDetail->former_ward_no ?? null,
             'tole' => $mapApply->landDetail->tole ?? null,
@@ -48,7 +53,7 @@ class LandDetailEditLivewire extends Component
     }
 
     protected array $landDescriptionValidations = [
-        'landDescription.land_use_area' => ['required', 'numeric'],
+        'landDescription.land_use_area_id' => ['required', 'numeric'],
         'landDescription.ward_no' => ['required', 'integer'],
         'landDescription.former_ward_no' => ['required', 'integer'],
         'landDescription.tole' => ['nullable'],
@@ -91,8 +96,8 @@ class LandDetailEditLivewire extends Component
     public function messages(): array
     {
         return [
-            'landDescription.land_use_area.required' => 'भू-उपयोग्य क्षेत्र अनिवार्य छ|',
-            'landDescription.land_use_area.numeric' => 'भू-उपयोग्य क्षेत्र नम्बरमा हुनुपर्छ|',
+            'landDescription.land_use_area_id.required' => 'भू-उपयोग्य क्षेत्र अनिवार्य छ|',
+            'landDescription.land_use_area_id.numeric' => 'भू-उपयोग्य क्षेत्र नम्बरमा हुनुपर्छ|',
             'landDescription.ward_no.required' => 'वडा नं अनिवार्य छ|',
             'landDescription.ward_no.integer' => 'वडा नं नम्बरमा हुनुपर्छ|',
             'landDescription.former_ward_no.required' => ' साविक वडा नं अनिवार्य छ|',

@@ -129,7 +129,7 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.१ भू-उपयोग्य क्षेत्र :</b>
-                                    {{ $mapApply->landDetail?->land_use_area ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->landUseArea?->title ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
