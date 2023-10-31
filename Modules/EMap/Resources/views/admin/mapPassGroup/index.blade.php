@@ -62,11 +62,11 @@
                                             </a>
                                         @endcan
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('mapFee_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('emap.admin.mapPassGroup.edit',$mapPassGroup)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -77,7 +77,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger show_confirm">
+                                                        class="btn btn-xs me-1 btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
                                                 </button>
                                             </form>
