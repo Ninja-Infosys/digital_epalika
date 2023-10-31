@@ -1,0 +1,18 @@
+@import 'variables';
+@import 'function/function';
+@import 'mixins/mixins';
+
+*{
+  font-family: $body-font;
+}
+
+body{
+  background: $bg-grey;
+}
+
+@import 'layouts/layouts';
+@import 'elements/elements';
+@import 'pages/pages';
+
+// ------------import responsive  
+@import 'responsive';

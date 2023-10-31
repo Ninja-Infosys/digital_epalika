@@ -117,6 +117,7 @@
                     <label class="form-label fw-bold" for="latitude">Latitude</label>
                     <input type="number" class="form-control form-control-sm" id="latitude"
                            wire:model="latitude"
+                           step="0.000000000000001"
                            placeholder="Latitude" required>
 
                 </div>
@@ -124,6 +125,7 @@
                     <label class="form-label fw-bold" for="longitude">Longitude</label>
                     <input type="number" class="form-control form-control-sm" id="longitude"
                            wire:model="longitude"
+                           step="0.000000000000001"
                            placeholder="longitude" required>
                 </div>
             </div>
@@ -278,11 +280,16 @@
         <legend><h5>२. जग्गाको विवरण</h5></legend>
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.land_use_area">२.१ भू-उपयोग्य क्षेत्र</label>
-                <input class="form-control form-control-sm" type="number" id="landDescription.land_use_area"
-                       wire:model="landDescription.land_use_area"
-                       placeholder="भू-उपयोग्य क्षेत्र" min="0">
-                @error('landDescription.land_use_area')
+                <label class="form-label fw-bold" for="landDescription.land_use_area_id">२.१ भू-उपयोग्य क्षेत्र</label>
+                <select class="form-select form-select-sm"
+                        id="landDescription.land_use_area_id"
+                        wire:model="landDescription.land_use_area_id">
+                    <option value="">-- छान्नुहोस् --</option>
+                    @foreach($landUseAreas as $landUseArea)
+                        <option value="{{$landUseArea->id}}">{{$landUseArea->title}}</option>
+                    @endforeach
+                </select>
+                @error('landDescription.land_use_area_id')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>

@@ -39,7 +39,7 @@ trait EMapTemplateTrait
         [
             'title' => 'जग्गाको विवरण',
             'data' => [
-                'भू-उपयोग्य क्षेत्र' => '[@landDetail.land_use_area]',
+                'भू-उपयोग्य क्षेत्र' => '[@landDetail.land_use_area.title]',
                 'वडा नं.' => '[@landDetail.ward_no]',
                 'साविक वडा नं.' => '[@landDetail.former_ward_no]',
                 'टोलको नाम' => '[@landDetail.tole]',
@@ -237,7 +237,7 @@ trait EMapTemplateTrait
     private function getLandDetailReplacement(): array
     {
         return [
-            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
+            '[@landDetail.land_use_area.title]' => $this->landDetail?->landUseArea?->title ?? '',
             '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
             '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
             '[@landDetail.tole]' => $this->landDetail->tole ?? '',

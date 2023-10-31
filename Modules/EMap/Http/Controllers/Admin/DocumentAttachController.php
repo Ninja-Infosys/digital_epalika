@@ -210,7 +210,7 @@ class DocumentAttachController extends Controller
             $mapApply->breadth ?? '',
             $mapApply->height ?? '',
             //landDetail
-            $mapApply->landDetail->land_use_area ?? '',
+            $mapApply->landDetail?->landUseArea?->title ?? '',
             $mapApply->landDetail->ward_no ?? '',
             $mapApply->landDetail->former_ward_no ?? '',
             $mapApply->landDetail->tole ?? '',
@@ -333,7 +333,7 @@ class DocumentAttachController extends Controller
             '[@breadth]',
             '[@height]',
             //landDetail
-            '[@landDetail.land_use_area]',
+            '[@landDetail.land_use_area.title]',
             '[@landDetail.ward_no]',
             '[@landDetail.former_ward_no]',
             '[@landDetail.tole]',

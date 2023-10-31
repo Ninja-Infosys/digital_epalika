@@ -106,6 +106,11 @@
                     </a>
                 </li>
             @endcan
+            <li class="{{request()->is('admin/emap/setting/landUseArea*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.landUseArea.index')}}">
+                    <span> भूउपयोग क्षेत्र</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

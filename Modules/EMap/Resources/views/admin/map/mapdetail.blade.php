@@ -37,7 +37,7 @@
                 <div id="printData">
                     <div class="row mt-2 mx-2">
                         <div class="col-md-4">
-                            <h4><b>संस्था :</b> {{ $mapApply->organization->organizationDetail->org_name_ne??'' }}</h4>
+                            <h4><b>संस्था :</b> {{ $mapApply->organization?->organizationDetail?->org_name_ne??'' }}</h4>
                         </div>
                         <div class="col-md-4">
                             <h4><b>नक्सा :</b> {{ $mapApply->application_type?->label() }}</h4>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="mb-3">
                             <h4 class="form-label"><b>१.४ स्ट्रकचर टाईप
-                                    :</b> {{ $mapApply->structureType->title ?? '' }}
+                                    :</b> {{ $mapApply->structureType?->title ?? '' }}
                             </h4>
                         </div>
                         <div class="mb-1">
@@ -108,7 +108,7 @@
                                                 @foreach ($mapApply->storeyDetails as $storeyDetail)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $storeyDetail->mapFee->storey ?? '' }}</td>
+                                                        <td>{{ $storeyDetail->mapFee?->storey ?? '' }}</td>
                                                         <td>{{ $storeyDetail->area_of_proposed_construction }}</td>
                                                         <td>{{ $storeyDetail->area_of_former_construction }}</td>
                                                         <td>{{ $storeyDetail->total_area }}</td>
@@ -129,43 +129,43 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.१ भू-उपयोग्य क्षेत्र :</b>
-                                    {{ $mapApply->landDetail->land_use_area ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->landUseArea?->title ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.२ वडा नं :</b> {{ $mapApply->landDetail->ward_no ?? '' }}
+                                <h4 class="form-label"><b>२.२ वडा नं :</b> {{ $mapApply->landDetail?->ward_no ?? '' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.३ साविक वडा नं :</b>
-                                    {{ $mapApply->landDetail->ward_no ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->ward_no ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.४ टोलको नाम :</b>
-                                    {{ $mapApply->landDetail->tole ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->tole ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.५ सडक कोड नं :</b>
-                                    {{ $mapApply->landDetail->street_code_no ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->street_code_no ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.६ जग्गा कित्ता नं :</b>
-                                    {{ $mapApply->landDetail->plot_no ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->plot_no ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.७ क्षेत्रफल (बिघा) :</b>
-                                    {{ $mapApply->landDetail->unit_value ?? '' }}</h4>
+                                    {{ $mapApply->landDetail?->unit_value ?? '' }}</h4>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label">
                                     <b>२.८ भवनले
                                         ढाक्ने क्षेत्रफलको प्रतिशत (GCR) :</b>
-                                    {{ $mapApply->landDetail->percentage_of_area_covered_by_building ?? '' }}
+                                    {{ $mapApply->landDetail?->percentage_of_area_covered_by_building ?? '' }}
                                 </h4>
 
                             </div>
@@ -177,55 +177,55 @@
                         </legend>
                         <div class="mb-3">
                             <h4 class="form-label"><b>३.१ जग्गा धनीको किसिम :</b>
-                                {{ $mapApply->landOwner->first()?->land_owner_type->label()  ??''}}</h4>
+                                {{ $mapApply->landOwner?->first()?->land_owner_type->label()  ??''}}</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१ जग्गा धनीको नाम :</b> {{ $mapApply->landOwner->first()?->name ??'' }}
+                                <h4 class="form-label"><b>१.१ जग्गा धनीको नाम :</b> {{ $mapApply->landOwner?->first()?->name ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.२ फोन नं. :</b> {{ $mapApply->landOwner->first()?->phone ??'' }}</h4>
+                                <h4 class="form-label"><b>१.२ फोन नं. :</b> {{ $mapApply->landOwner?->first()?->phone ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.३ बुवाको नाम :</b> {{ $mapApply->landOwner->first()?->father_name ??'' }}
+                                <h4 class="form-label"><b>१.३ बुवाको नाम :</b> {{ $mapApply->landOwner?->first()?->father_name ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ हजुरबुबाको नाम :</b>
-                                    {{ $mapApply->landOwner->first()?->grandfather_name ??'' }}
+                                    {{ $mapApply->landOwner?->first()?->grandfather_name ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.६ नागरिकता नम्बर :</b>
-                                    {{ $mapApply->landOwner->first()?->citizenship_no ??'' }}
+                                    {{ $mapApply->landOwner?->first()?->citizenship_no ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.७ नागरिकता लिएको मिति :</b>
-                                    {{ $mapApply->landOwner->first()?->citizenship_issue_date ??'' }}</h4>
+                                    {{ $mapApply->landOwner?->first()?->citizenship_issue_date ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकता लिएको जिल्ला :</b>
-                                    {{ $mapApply->landOwner->first()?->citizenship_issue_district_id ??'' }}</h4>
+                                    {{ $mapApply->landOwner?->first()?->citizenship_issue_district_id ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.८ ठेगाना :</b> {{ $mapApply->landOwner->first()?->address ??'' }}</h4>
+                                <h4 class="form-label"><b>१.८ ठेगाना :</b> {{ $mapApply->landOwner?->first()?->address ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.९ पालिका :</b> {{ $mapApply->landOwner->first()?->local_body ??'' }}</h4>
+                                <h4 class="form-label"><b>१.९ पालिका :</b> {{ $mapApply->landOwner?->first()?->local_body ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१० वडा नं. :</b> {{ $mapApply->landOwner->first()?->ward_no ??'' }}</h4>
+                                <h4 class="form-label"><b>१.१० वडा नं. :</b> {{ $mapApply->landOwner?->first()?->ward_no ??'' }}</h4>
 
                             </div>
                         </div>
@@ -240,54 +240,54 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.१ जग्गा धनीको नाम :</b>
-                                    {{ $mapApply->houseOwner->first()?->name ??'' }} </h4>
+                                    {{ $mapApply->houseOwner?->first()?->name ??'' }} </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.२ फोन नं. :</b>
-                                    {{ $mapApply->houseOwner->first()?->phone ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->phone ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.३ बुवाको नाम :</b>
-                                    {{ $mapApply->houseOwner->first()?->father_name ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->father_name ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ हजुरबुबाको नाम :</b>
-                                    {{ $mapApply->houseOwner->first()?->grandfather_name ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->grandfather_name ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.६ नागरिकता नम्बर :</b>
-                                    {{ $mapApply->houseOwner->first()?->citizenship_no ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->citizenship_no ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.७ नागरिकता लिएको मिति :</b>
-                                    {{ $mapApply->houseOwner->first()?->citizenship_issue_date ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->citizenship_issue_date ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकता लिएको
                                         जिल्ला
-                                        :</b> {{ $mapApply->houseOwner->first()?->citizenship_issue_district_id??''}}
+                                        :</b> {{ $mapApply->houseOwner?->first()?->citizenship_issue_district_id??''}}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.८ ठेगाना :</b>
-                                    {{ $mapApply->houseOwner->first()?->address??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->address??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.९ पालिका :</b>
-                                    {{ $mapApply->houseOwner->first()?->local_body ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->local_body ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.१० वडा नं. :</b>
-                                    {{ $mapApply->houseOwner->first()?->ward_no ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->first()?->ward_no ??''}}</h4>
 
                             </div>
                         </div>
@@ -389,42 +389,42 @@
                         </legend>
                         <div class="mb-3">
                             <h4 class="form-label"><b>५.१ निवेदकको प्रकार :</b>
-                                {{ $mapApply->applicantDetail->applicant_type?->label() }}</h4>
+                                {{ $mapApply->applicantDetail?->applicant_type?->label() }}</h4>
 
                         </div>
                         <div class="mb-3">
                             <h4 class="form-label"><b>५.२ घरधनी सँगको सम्बन्ध :</b>
-                                {{ $mapApply->applicantDetail->relation_with_owner?->label() }}</h4>
+                                {{ $mapApply->applicantDetail?->relation_with_owner?->label() }}</h4>
 
                         </div>
                         <div class="row">
                             <h4 class="form-label fw-bold mb-2">जग्गाधनी वा घरधनी भन्दा फरक भएमा</h4>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१ नाम :</b> {{ $mapApply->applicantDetail->name }}</h4>
+                                <h4 class="form-label"><b>१.१ नाम :</b> {{ $mapApply->applicantDetail?->name }}</h4>
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.२ फोन नं. :</b> {{ $mapApply->applicantDetail->phone }}</h4>
+                                <h4 class="form-label"><b>१.२ फोन नं. :</b> {{ $mapApply->applicantDetail?->phone }}</h4>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.३ बुवाको नाम :</b>
-                                    {{ $mapApply->applicantDetail->father_name }}
+                                    {{ $mapApply->applicantDetail?->father_name }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ नागरिकता लिएको
-                                        जिल्ला :</b> {{ $mapApply->applicantDetail->citizenship_issue_district_id }}
+                                        जिल्ला :</b> {{ $mapApply->applicantDetail?->citizenship_issue_district_id }}
                                 </h4>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकत नम्बर :</b>
-                                    {{ $mapApply->applicantDetail->citizenship_no }}</h4>
+                                    {{ $mapApply->applicantDetail?->citizenship_no }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-4">
                                 <h4 class="form-label"><b>१.६ नागरिकता लिएको मिति :</b>
-                                    {{ $mapApply->applicantDetail->citizenship_issue_date }}</h4>
+                                    {{ $mapApply->applicantDetail?->citizenship_issue_date }}</h4>
 
                             </div>
 
@@ -434,13 +434,13 @@
                     <div class="d-flex justify-content-between my-3 px-2">
                         <div class="col-3">
                             <h4 class="form-label fw-bold">निबेदनको मिति :
-                                {{ $mapApply->applicantDetail->application_date }}
+                                {{ $mapApply->applicantDetail?->application_date }}
                             </h4>
 
                         </div>
                         <div class="col-3">
                             <h4 class="form-label fw-bold">निवेदकको सहि :
-                                <img src="{{ $mapApply->applicantDetail->signature_url }}" height="80" width="80"
+                                <img src="{{ $mapApply->applicantDetail?->signature_url }}" height="80" width="80"
                                      alt="Signature">
                             </h4>
                         </div>
@@ -571,19 +571,19 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->land_owner_document??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->land_owner_document??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a  href="javascript:void(0);"
-                                            onclick="openFileModal('जग्गा धनी प्रमाणपत्र प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument->land_owner_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->land_owner_document }}')"
+                                            onclick="openFileModal('जग्गा धनी प्रमाणपत्र प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument?->land_owner_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->land_owner_document }}')"
                                             class="text-muted fw-medium" type="button">जग्गा धनी प्रमाणपत्र प्रतिलिपि
-                                            .{{pathinfo($mapApply->attachDocument->land_owner_document ??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->land_owner_document_size ??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->land_owner_document ??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->land_owner_document_size ??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('land_owner_document')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('land_owner_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -599,20 +599,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->land_revenue_document??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->land_revenue_document??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('चालु आर्थिक वर्षको मालपोत तिरेको रसिदको प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument->land_revenue_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->land_revenue_document }}')"
+                                           onclick="openFileModal('चालु आर्थिक वर्षको मालपोत तिरेको रसिदको प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument?->land_revenue_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->land_revenue_document }}')"
                                            class="text-muted fw-medium" type="button">चालु आर्थिक वर्षको मालपोत तिरेको
                                             रसिदको प्रतिलिपि
-                                            .{{pathinfo($mapApply->attachDocument->land_revenue_document ??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->land_revenue_document_size??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->land_revenue_document ??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->land_revenue_document_size??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('land_revenue_document')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('land_revenue_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -628,20 +628,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->land_owner_citizenship ??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->land_owner_citizenship ??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('ज.ध. दर्ता प्रमाण पुर्जामा फोटो नभएको भए नागरिकता प्रमाणपत्रको प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument->land_owner_citizenship ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->land_owner_citizenship }}')"
+                                           onclick="openFileModal('ज.ध. दर्ता प्रमाण पुर्जामा फोटो नभएको भए नागरिकता प्रमाणपत्रको प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument?->land_owner_citizenship ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->land_owner_citizenship }}')"
                                            class="text-muted fw-medium" type="button">ज.ध. दर्ता प्रमाण पुर्जामा फोटो नभएको
                                             भए नागरिकता प्रमाणपत्रको प्रतिलिपि
-                                            .{{pathinfo($mapApply->attachDocument->land_owner_citizenship ??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->land_owner_citizenship_size ??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->land_owner_citizenship ??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->land_owner_citizenship_size ??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('land_owner_citizenship')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('land_owner_citizenship')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -657,20 +657,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->blue_print ??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->blue_print ??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('कि . न. स्पष्ट भएको नापी प्रमाणित नक्शा (ब्लु प्रिन्ट)', '{{ pathinfo($mapApply->attachDocument->blue_print ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->blue_print }}')"
+                                           onclick="openFileModal('कि . न. स्पष्ट भएको नापी प्रमाणित नक्शा (ब्लु प्रिन्ट)', '{{ pathinfo($mapApply->attachDocument?->blue_print ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->blue_print }}')"
                                            class="text-muted fw-medium" type="button">कि . न. स्पष्ट भएको नापी प्रमाणित नक्शा (ब्लु
                                             प्रिन्ट)
-                                            .{{pathinfo($mapApply->attachDocument->blue_print ??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->blue_print_size??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->blue_print ??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->blue_print_size??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('blue_print')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('blue_print')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -686,20 +686,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->pass_document??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->pass_document??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('पास गरिने नक्शाको फोटोकपी वा ब्लुप्रिन्ट(डीजाईनर र नक्शावालाको हस्ताक्षर सहित)', '{{ pathinfo($mapApply->attachDocument->pass_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->pass_document }}')"
+                                           onclick="openFileModal('पास गरिने नक्शाको फोटोकपी वा ब्लुप्रिन्ट(डीजाईनर र नक्शावालाको हस्ताक्षर सहित)', '{{ pathinfo($mapApply->attachDocument?->pass_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->pass_document }}')"
                                            class="text-muted fw-medium" type="button">पास गरिने नक्शाको फोटोकपी वा ब्लुप्रिन्ट
                                             (डीजाईनर र नक्शावालाको हस्ताक्षर सहित)
-                                            .{{pathinfo($mapApply->attachDocument->pass_document??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->pass_document_size??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->pass_document??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->pass_document_size??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('pass_document')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('pass_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -715,20 +715,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->designer_document??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->designer_document??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('डीजाईनरको इजाजतपत्रको नवीकरण सहितको फोटोकपी (सरोकारवालाबाट प्रमाणित)', '{{ pathinfo($mapApply->attachDocument->designer_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->designer_document }}')"
+                                           onclick="openFileModal('डीजाईनरको इजाजतपत्रको नवीकरण सहितको फोटोकपी (सरोकारवालाबाट प्रमाणित)', '{{ pathinfo($mapApply->attachDocument?->designer_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->designer_document }}')"
                                            class="text-muted fw-medium" type="button">डीजाईनरको इजाजतपत्रको नवीकरण सहितको
                                             फोटोकपी (सरोकारवालाबाट प्रमाणित)
-                                            .{{pathinfo($mapApply->attachDocument->designer_document??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->designer_document_size??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->designer_document??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->designer_document_size??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('designer_document')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('designer_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -744,20 +744,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->permission_document??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->permission_document??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('मन्जुरी लिई बनाउने भएमा नक्शा वालाले कानुन शाखाको रोहवरमा भएको मन्जुरीनामाको सक्क्ल', '{{ pathinfo($mapApply->attachDocument->permission_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->permission_document }}')"
+                                           onclick="openFileModal('मन्जुरी लिई बनाउने भएमा नक्शा वालाले कानुन शाखाको रोहवरमा भएको मन्जुरीनामाको सक्क्ल', '{{ pathinfo($mapApply->attachDocument?->permission_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->permission_document }}')"
                                            class="text-muted fw-medium" type="button">मन्जुरी लिई बनाउने भएमा नक्शा वालाले
                                             कानुन शाखाको रोहवरमा भएको मन्जुरीनामाको सक्क्ल
-                                            .{{pathinfo($mapApply->attachDocument->permission_document??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->permission_document_size??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->permission_document??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->permission_document_size??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('permission_document')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('permission_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
@@ -773,20 +773,20 @@
                                     <div class="col-2 pe-0">
                                         <div class="avatar-sm">
                                         <span class="avatar-title bg-light text-secondary rounded">
-                                              <i class="fa {{getFileIconClass($mapApply->attachDocument->inheritance_document??'')}} font-18"></i>
+                                              <i class="fa {{getFileIconClass($mapApply->attachDocument?->inheritance_document??'')}} font-18"></i>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                           onclick="openFileModal('वारेश राखि नक्सा पास गर्ने भए वारिसको प्रमाणितको प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument->inheritance_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->inheritance_document }}')"
+                                           onclick="openFileModal('वारेश राखि नक्सा पास गर्ने भए वारिसको प्रमाणितको प्रतिलिपि', '{{ pathinfo($mapApply->attachDocument?->inheritance_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->inheritance_document }}')"
                                            class="text-muted fw-medium" type="button">वारेश राखि नक्सा पास गर्ने भए वारिसको
                                             प्रमाणितको प्रतिलिपि
-                                            .{{pathinfo($mapApply->attachDocument->inheritance_document??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->inheritance_document_size??'')}}</p>
+                                            .{{pathinfo($mapApply->attachDocument?->inheritance_document??'',PATHINFO_EXTENSION)}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->inheritance_document_size??'')}}</p>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('inheritance_document')])}}"
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('inheritance_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
