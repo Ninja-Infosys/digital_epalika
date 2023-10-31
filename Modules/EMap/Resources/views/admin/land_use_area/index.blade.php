@@ -48,10 +48,10 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$landUseArea->title}}</td>
-                                    <td>
+                                    <td  class="d-flex">
                                             <a
                                                href="{{route('emap.admin.landUseArea.edit',$landUseArea)}}"
-                                               class="btnn btnn-xs btnn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btnn btnn-xs me-1 btnn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form action="{{route('emap.admin.landUseArea.destroy',$landUseArea)}}"
@@ -59,7 +59,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btnn btnn-xs btnn-outline-danger show_confirm" ata-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्">
+                                                        class="btnn btnn-xs me-1 btnn-outline-danger show_confirm" ata-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
 
                                                 </button>

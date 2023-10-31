@@ -58,20 +58,20 @@
                                             <i class="fa fa-2x {{ $dynamicForm->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td  class="d-flex">
                                         <a data-bs-type="edit"
                                            href="{{route('emap.admin.dynamicForm.edit',$dynamicForm)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                           class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.template',$dynamicForm)}}"
-                                            class="btn btn-xs btn-outline-secondary">
+                                            class="btn btn-xs me-1 btn-outline-secondary">
                                             <i class="fa fa-file"></i>
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.show',$dynamicForm)}}"
-                                            class="btn btn-xs btn-outline-warning ">
+                                            class="btn btn-xs me-1 btn-outline-warning ">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         <form action="{{route('emap.admin.dynamicForm.destroy',$dynamicForm)}}"
@@ -79,7 +79,7 @@
                                             @csrf
                                             @method('delete')
                                             <button data-bs-type="delete"
-                                                    class="btn btn-xs btn-outline-danger show_confirm">
+                                                    class="btn btn-xs me-1 btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
                                             </button>
                                         </form>
