@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">Rename</li>
+                        <li class="breadcrumb-item active">{{$mapApply->unique_id}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Rename</h4>
+                <h4 class="page-title">{{$mapApply->unique_id}}</h4>
             </div>
         </div>
     </div>
