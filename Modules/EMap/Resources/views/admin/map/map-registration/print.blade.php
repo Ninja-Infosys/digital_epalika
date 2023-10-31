@@ -6,7 +6,7 @@
             <p><strong>मिति: </strong> {{$mapApply->mapRegistration->nepali_date ?? ''}}</p>
         </div>
         <p><strong>घरधनीको नाम, थर:</strong><span class="dashed-bottom mx-1">{{$mapApply->houseOwner->name ?? ''}}</span></p>
-        <p><strong>भू-उपयोग क्षेत्र : </strong><span class="dashed-bottom mx-1">{{$mapApply->landDetail->land_use_area??''}} {{$mapApply->landDetail->unit->title??''}}</span></p>
+        <p><strong>भू-उपयोग क्षेत्र : </strong><span class="dashed-bottom mx-1">{{$mapApply->landDetail?->landUseArea?->title??''}} {{$mapApply->landDetail->unit->title??''}}</span></p>
         <p><strong>निर्माणको विवरण :</strong><span class="dashed-bottom mx-1">{{$mapApply->usage->label()??''}}</span></p>
         <p><strong>निर्माणको प्रयोजन :</strong><span class="dashed-bottom mx-1">{{$mapApply->construction_type->label() ??''}}</span></p>
         <p><strong>भवनको वर्गीकरण :</strong>

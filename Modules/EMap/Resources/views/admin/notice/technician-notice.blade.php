@@ -73,7 +73,7 @@
                             स्थलगत निरिक्षण गरी देहाय बमोजिमको प्रतिवेदन पेश गरेको छु ।
                         </span><br>
                         <span>१.&emsp;&emsp;भू-उपयोग क्षेत्र<span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->land_use_area??''}}</span>
+                                class="underline-dotted custom-width">{{$mapApply->landDetail?->landUseArea?->title??''}}</span>
                         </span><br>
                         <span class="mt-2">२.&emsp;&emsp;निर्माण हुने स्थलसम्म पग्ने बाटोको व्यवस्था : </span><br>
                         <span>२.१&emsp;&ensp;बाटोको किसिम :

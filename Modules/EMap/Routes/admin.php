@@ -78,7 +78,11 @@ Route::prefix('setting')->group(function () {
     Route::get('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'template'])->name('dynamicForm.template');
     Route::put('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'templateStore'])->name('dynamicForm.template.store');
     Route::resource('dynamicForm', DynamicFormController::class);
+
     Route::resource('criteriaDetailSetting', CriteriaDetailSettingController::class);
+
+    Route::resource('landUseArea', LandUseAreaController::class);
+
 });
 
 Route::prefix('files')->as('files.')->group(function () {

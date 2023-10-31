@@ -10,7 +10,7 @@ return new class () extends Migration {
         Schema::create('land_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
-            $table->double('land_use_area', 12, 2)->default(0)->comment('भूमि प्रयोग क्षेत्र');
+            $table->foreignId('land_use_area_id')->comment('भूमि प्रयोग क्षेत्र')->constrained()->cascadeOnDelete();
             $table->integer('ward_no')->nullable()->comment('वार्ड नं ');
             $table->integer('former_ward_no')->nullable()->comment('पुर्ब वार्ड नं ');
             $table->string('tole')->nullable()->comment('टोल');
