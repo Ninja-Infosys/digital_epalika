@@ -69,7 +69,7 @@ Route::prefix('setting')->group(function () {
     Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
     Route::get('eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
-    Route::resource('{eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
+    Route::resource('eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
 
     Route::get('mapPassGroup/{mapPassGroup}/toggleStatus', [MapPassGroupController::class, 'updateStatus'])->name('mapPassGroup.updateStatus');
     Route::resource('mapPassGroup', MapPassGroupController::class);

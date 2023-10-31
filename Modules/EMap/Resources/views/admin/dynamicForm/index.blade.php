@@ -62,17 +62,17 @@
                                         <a data-bs-type="edit"
                                            href="{{route('emap.admin.dynamicForm.edit',$dynamicForm)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.template',$dynamicForm)}}"
                                             class="btn btn-xs btn-outline-secondary">
-                                            <i class="fa fa-file"></i> टेम्प्लेट
+                                            <i class="fa fa-file"></i>
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.show',$dynamicForm)}}"
                                             class="btn btn-xs btn-outline-warning ">
-                                            <i class="fa fa-eye"></i> हेर्नुहोस
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <form action="{{route('emap.admin.dynamicForm.destroy',$dynamicForm)}}"
                                               method="post">
@@ -81,7 +81,6 @@
                                             <button data-bs-type="delete"
                                                     class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
-                                                मेटाउनु होस्
                                             </button>
                                         </form>
                                     </td>

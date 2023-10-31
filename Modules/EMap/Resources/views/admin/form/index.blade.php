@@ -66,7 +66,7 @@
                                             @can('mapFee_edit')
                                                 <a data-bs-type="edit" href="{{ route('emap.admin.form.edit', $form) }}"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
                                             @endcan
 
@@ -78,7 +78,6 @@
                                                         class="btn btn-xs btn-outline-danger show_confirm">
                                                         <i
                                                             class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"></i>
-                                                        मेटाउनु होस्
                                                     </button>
                                                 @endcan
                                             </form>
