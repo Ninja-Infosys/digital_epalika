@@ -144,5 +144,3 @@ Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activi
 //check pin
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
 Route::resource('pin', PinController::class);
-
-Route::view('new-dashboard','new-dashboard');

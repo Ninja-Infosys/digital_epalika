@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\CriteriaDetailSetting;
+use Modules\EMap\Entities\LandUseArea;
 use Modules\EMap\Http\Requests\CriteriaDetailSetting\StoreCriteriaDetailSettingRequest;
 use Modules\EMap\Http\Requests\CriteriaDetailSetting\UpdateCriteriaDetailSettingRequest;
 
@@ -19,7 +20,8 @@ class CriteriaDetailSettingController extends Controller
 
     public function create()
     {
-        return view('emap::admin.criteriaDetailSetting.create');
+        $landUseAreas = LandUseArea::all();
+        return view('emap::admin.criteriaDetailSetting.create',compact('landUseAreas'));
     }
 
     public function store(StoreCriteriaDetailSettingRequest $request)
@@ -36,7 +38,8 @@ class CriteriaDetailSettingController extends Controller
 
     public function edit(CriteriaDetailSetting $criteriaDetailSetting)
     {
-        return view('emap::admin.criteriaDetailSetting.edit', compact('criteriaDetailSetting'));
+        $landUseAreas = LandUseArea::all();
+        return view('emap::admin.criteriaDetailSetting.edit', compact('criteriaDetailSetting', 'landUseAreas'));
     }
 
     public function update(UpdateCriteriaDetailSettingRequest $request, CriteriaDetailSetting $criteriaDetailSetting)

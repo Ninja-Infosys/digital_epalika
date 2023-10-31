@@ -5,7 +5,6 @@ use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
-use Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
@@ -19,6 +18,7 @@ use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
+use  Modules\EMap\Http\Controllers\LandUseAreaController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -97,4 +97,3 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
 });
-

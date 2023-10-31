@@ -17,7 +17,7 @@ class StoreCriteriaDetailSettingRequest extends FormRequest
     public function rules():array
     {
         return [
-            'land_use_area_id' => ['required', Rule::unique('land_use_area', 'id')->withoutTrashed()],
+            'land_use_area_id' => ['required', Rule::exists('land_use_areas', 'id')->withoutTrashed()],
             'title' => ['required', 'string'],
             'area' => ['required', 'numeric'],
             'sign' => ['required', new Enum(SignEnum::class)],

@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <form action="{{route('emap.admin.mapFee.update',$mapFee)}}" method="post">
                         @csrf
-                        @method('post')
+                        @method('put')
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="storey" class="form-label">तल्ला *</label>

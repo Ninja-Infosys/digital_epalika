@@ -43,7 +43,7 @@ class LandUseAreaController extends Controller
     {
         $landUseArea->update($request->validated());
         toast('भूउपयोग क्षेत्र थपियो', 'success');
-        return back();
+       return redirect(route('emap.admin.landUseArea.index'));
     }
 
     public function destroy(LandUseArea $landUseArea)

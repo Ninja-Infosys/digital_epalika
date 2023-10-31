@@ -2,20 +2,18 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box mb-0">
-            <h4 class="page-title">सिफारिस</h4>
-                <div class="">
-                    <ol class="breadcrumb mb-2">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.recommendation.dashboard') }}" class="d-flex align-items-center">
-                            <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
- गृहपृष्ठ
+                            <a href="{{ route('admin.recommendation.dashboard') }}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">सिफारिस</li>
                     </ol>
                 </div>
-               
+                <h4 class="page-title">सिफारिस</h4>
             </div>
         </div>
     </div>
@@ -38,32 +36,31 @@
                     </div>
                 </div>
             </div>
-            <div class="card rounded-3">
-                <div class="">
+            <div class="card">
+                <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h4 class="header-title mb-0 font-xxl">सिफारिस सूची</h4>
+                        <h4 class="header-title mb-0">सिफारिस सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
 
                             @can('recommendation_create')
-                            <button class="btn btn-md btn-tertiary">
-                                <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}">
-                                <img class="icon btn-icon me-1" src="http://127.0.0.1:8000/assets/backend/images/add.svg" alt="add-icon"> नयाँ सिफारिस थप्नुहोस
+                                <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                                 </a>
-                            </button>
                             @endcan
-                            <button class="btn btn-md mx-1 btn-tertiary waves-effect waves-light collapsed"
+                            <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
                                     type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                    <img class="icon btn-icon me-1" src="http://127.0.0.1:8000/assets/backend/images/filter.svg" alt="filter-icon"> </i> फिल्टर
+                                <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
