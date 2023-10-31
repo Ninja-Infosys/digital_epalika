@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('emap::organization.layouts.master')
 @section('content')
     <div class="row">
         <div class="col-12">
