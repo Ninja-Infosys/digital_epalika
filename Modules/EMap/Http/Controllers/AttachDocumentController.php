@@ -95,7 +95,7 @@ class AttachDocumentController extends Controller
 
     public function documentDetail(AppliedDocument $appliedDocument)
     {
-        $appliedDocument->load('appliedMapFiles');
+        $appliedDocument->load('appliedMapFiles','form');
         return view('emap::organization.attach-document.documentDetail', compact('appliedDocument'));
     }
 

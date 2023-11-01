@@ -7,14 +7,14 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('organization.admin.dashboard') }}">
-                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">नगदी रसिदहरु</li>
+                        <li class="breadcrumb-item active">नक्सा</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नगदी रसिदहरु</h4>
+                <h4 class="page-title">नक्सा</h4>
             </div>
         </div>
     </div>
@@ -48,20 +48,20 @@
                                         <td>{{ $mapApply->houseOwner?->name ?? '' }}</td>
                                         <td>{{ $mapApply->houseOwner?->phone ?? '' }}</td>
                                         <td>{{ $mapApply->construction_type->label() }}</td>
-                                        <td>
+                                        <td class="d-flex">
 
                                             @if ($mapApply->sent_to_organization !== 'Accept')
-                                                <a class="btn btn-xs btn-outline-primary"
+                                                <a class="btn me-1 btn-xs btn-outline-primary"
                                                     href="{{ route('organization.admin.mapApply.show', $mapApply) }}">
                                                     <i class="fa fa-pen"></i>
                                                 </a>
-                                                <a class="btn btn-xs {{ $mapApply->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
+                                                <a class="btn me-1 btn-xs {{ $mapApply->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
                                                     href="{{ route('organization.admin.updateStatus', $mapApply) }}">
                                                     <i
                                                         class="fa {{ $mapApply->sent_to_admin_at == null ? 'fa-times' : 'fa-check' }}"></i>
-                                                    {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }}
+{{--                                                    {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }}--}}
                                                 </a>
-                                                <a class="btn btn-xs btn-outline-warning"
+                                                <a class="btn me-1 btn-xs btn-outline-warning"
                                                     href="{{ route('organization.admin.formList', $mapApply) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a>

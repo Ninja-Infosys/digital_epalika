@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($formDataType->formStores->where('form_id', $form->id)) == 0)
+                @if(count($mapApply->formStores->where('form_id', $form->id)) == 0)
                     <form
                         action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
                         enctype="multipart/form-data" method="POST">
@@ -59,7 +59,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($formDataType->formStores as $formStore)
+                        @foreach($mapApply->formStores?->where('form_id', $form->id) as $formStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>

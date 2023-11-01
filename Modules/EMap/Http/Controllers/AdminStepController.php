@@ -18,19 +18,20 @@ class AdminStepController extends Controller
 {
     public function formList(MapApply $mapApply)
     {
+        $mapApply->load('houseOwner');
         $forms = Form::with('formDataTypes')->orderBy('order')->get();
         return view('emap::admin.step.formList', compact('mapApply', 'forms'));
     }
 
     public function viewDetail(MapApply $mapApply, Form $form)
     {
-        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses');
         return view('emap::admin.step.formDetail', compact('mapApply', 'form'));
     }
 
     public function fillDetail(MapApply $mapApply, Form $form)
     {
-        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores');
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores', 'formDataTypes.formStores.formStoreStatuses');
         return view('emap::admin.step.formFill', compact('mapApply', 'form'));
     }
 

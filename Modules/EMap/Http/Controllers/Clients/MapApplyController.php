@@ -20,7 +20,10 @@ class MapApplyController extends Controller
 {
     public function index()
     {
-        $mapApplies = MapApply::with('houseOwner')->where('organization_id', auth('organization')->user()->id)->get();
+        $mapApplies = MapApply::with('houseOwner')
+            ->where('organization_id', auth('organization')->user()->id)
+            ->latest()
+            ->get();
 
         return view('emap::organization.map-applies.index', compact('mapApplies'));
     }
@@ -68,6 +71,7 @@ class MapApplyController extends Controller
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
         return view('emap::organization.attach-document.viewDetail', compact('mapApply', 'form'));
     }
+
     public function update(Request $request, MapApply $mapApply)
     {
         //

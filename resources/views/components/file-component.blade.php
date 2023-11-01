@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($formDataType->appliedDocuments->where('form_id', $form->id)) == 0)
+                @if(count($mapApply->appliedDocuments->where('form_id', $form->id)) == 0)
                     <form
                         action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
                         method="post" enctype="multipart/form-data">
@@ -40,7 +40,7 @@
                     </form>
                     @else
                     <form
-                        action="{{ route('organization.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')->first()->id]) }}"
+                        action="{{ route('organization.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -91,12 +91,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
+                        @foreach($mapApply->appliedDocuments?->load('appliedMapFiles')?->where('form_id', $form->id) as $appliedDocument)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
                                     @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
-                                        <a href="#"><i class="fa fa-download"></i></a>
+                                        <a href="{{$appliedMapFile->document_url}}" download="{{$appliedMapFile->document_url}}"><i class="fa fa-download"></i></a>
                                     @endforeach
                                 </td>
                                 <td>{{$appliedDocument->status->label()}}</td>

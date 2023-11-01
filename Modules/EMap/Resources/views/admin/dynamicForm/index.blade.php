@@ -4,11 +4,11 @@
         <div class="col-12">
             <div class="page-title-box">
             <h4 class="page-title">नक्शा पास फारम</h4>
-                <div class="">
+                <div class="mb-3">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
