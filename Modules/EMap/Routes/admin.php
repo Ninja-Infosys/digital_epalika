@@ -5,19 +5,20 @@ use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
-use Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
+use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
 use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
+use  Modules\EMap\Http\Controllers\LandUseAreaController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -68,7 +69,7 @@ Route::prefix('setting')->group(function () {
     Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
     Route::get('eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
-    Route::resource('{eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
+    Route::resource('eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
 
     Route::get('mapPassGroup/{mapPassGroup}/toggleStatus', [MapPassGroupController::class, 'updateStatus'])->name('mapPassGroup.updateStatus');
     Route::resource('mapPassGroup', MapPassGroupController::class);
@@ -78,7 +79,11 @@ Route::prefix('setting')->group(function () {
     Route::get('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'template'])->name('dynamicForm.template');
     Route::put('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'templateStore'])->name('dynamicForm.template.store');
     Route::resource('dynamicForm', DynamicFormController::class);
+
+    Route::resource('criteriaDetailSetting', CriteriaDetailSettingController::class);
+
     Route::resource('landUseArea', LandUseAreaController::class);
+
 });
 
 Route::prefix('files')->as('files.')->group(function () {
@@ -92,4 +97,3 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
 });
-

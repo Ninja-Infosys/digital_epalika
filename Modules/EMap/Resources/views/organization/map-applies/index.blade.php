@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('organization.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">नगदी रसिदहरु</li>
@@ -44,8 +45,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration ?? '' }}</td>
                                         <td>{{ $mapApply->unique_id ?? '' }}</td>
-                                        <td>{{ $mapApply->houseOwner?->first()?->name ?? '' }}</td>
-                                        <td>{{ $mapApply->houseOwner?->first()?->phone ?? '' }}</td>
+                                        <td>{{ $mapApply->houseOwner?->name ?? '' }}</td>
+                                        <td>{{ $mapApply->houseOwner?->phone ?? '' }}</td>
                                         <td>{{ $mapApply->construction_type->label() }}</td>
                                         <td>
 

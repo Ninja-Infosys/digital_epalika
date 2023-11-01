@@ -7,13 +7,14 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('organization.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">Rename</li>
+                        <li class="breadcrumb-item active">{{$mapApply->unique_id}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Rename</h4>
+                <h4 class="page-title">{{$mapApply->unique_id}}</h4>
             </div>
         </div>
     </div>
@@ -46,12 +47,30 @@
 {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
                                     <td>
-                                        @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
+
+                                        @php
+                                        $completed = count(array_diff(
+                                            $form->formStores->pluck('status.value')
+                                                ->merge($form->paymentStores->pluck('status.value'))
+                                                ->merge($form->appliedDocuments->pluck('status.value'))->toArray(),
+                                            [Modules\EMap\Enums\DocumentStatusEnum::APPROVED->value]
+                                        )) === 0;
+
+                                        @endphp
+                                        @if($completed)
+                                            @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
+                                                <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
+                                                class="btn btn-xs btn-outline-primary disabled" >
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endif
+                                    @else
                                             <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i>
+                                            class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i>
                                             </a>
-                                        @endif
+                                    @endif
+
                                         <a href="{{ route('organization.admin.organization.view-detail', [$mapApply, $form]) }}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i>

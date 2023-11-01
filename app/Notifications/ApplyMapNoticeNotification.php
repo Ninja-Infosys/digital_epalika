@@ -34,7 +34,7 @@ class ApplyMapNoticeNotification extends Notification
     {
         return [
             'सब्मिसन आइडी' => $this->mapApply->unique_id,
-            'घर धनीको नाम' => $this->mapApply->houseOwner->first()?->name ?? '',
+            'घर धनीको नाम' => $this->mapApply->houseOwner?->name ?? '',
             'निर्माण कार्यको किसिम' => $this->mapApply->construction_type?->label() ?? '',
             'निबेदन/प्रतिबेदन' => $this->applyMapNotice->file_type->label() ?? '',
             'परामर्शदाताको नाम' => $this->mapApply->organization->name ?? '',

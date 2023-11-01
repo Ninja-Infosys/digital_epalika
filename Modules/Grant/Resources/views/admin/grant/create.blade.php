@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.grant.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">अनुदान जारि</li>

@@ -4,11 +4,15 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
+            <h4 class="page-title mb-0">
+                    {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
+                </h4>
+                <div class="">
+                    <ol class="breadcrumb mb-2">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">नक्सा दर्ता/प्रमाणित</li>
@@ -17,14 +21,12 @@
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">
-                    {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
-                </h4>
+                
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">
+    <div class="card rounded-3">
+        <div class="">
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="header-title mb-0">
                     {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
@@ -34,8 +36,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-bordered mb-0">
+        <div class="mt-3">
+            <table class="table table-striped mb-0">
                 <thead>
                     <tr>
                         <th>क्र.सं.</th>
@@ -45,7 +47,7 @@
                         <th>निर्माण कार्यको किसिम</th>
                         <th>आवेदन भर्ने संस्था</th>
                         <th>#</th>
-                        <th></th>
+                        <!-- <th></th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +60,7 @@
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
                             <td>
-                                <div class="d-flex gap-1">
+                                <div class="d-flex align-items-center gap-1">
                                     @if ($mapApply->sent_to_organization == 'Accept')
                                         <a href="{{ route('emap.admin.mapApply.mapRegistration.index', $mapApply) }}"
                                             class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
@@ -72,7 +74,7 @@
                                         method="post">
                                         @csrf
                                         @method('put')
-                                        <div class="input-group">
+                                        <div class="input-group d-flex align-items-center">
                                             <select class="form-select form-select-sm" name="sent_to_organization"
                                                 id="sent_to_organization" aria-label="Example select with button addon"   @if($mapApply->sent_to_organization=='Accept') disabled @endif>
                                                 <option value="" disabled selected>--- छान्नुहोस् ---</option>
@@ -86,8 +88,7 @@
                                                     {{ $mapApply->sent_to_organization == 'Reject' ? 'selected' : '' }}>
                                                     अस्वीकार</option>
                                             </select>
-                                            <button   @if($mapApply->sent_to_organization=='Accept') disabled @endif class="btn btn-sm btn-outline-primary" type="submit">पेश
-                                                गर्नुहोस्</button>
+                                            <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($mapApply->sent_to_organization=='Accept') disabled @endif ><i class="fa fa-paper-plane"></i></button>
                                         </div>
 
                                     </form>

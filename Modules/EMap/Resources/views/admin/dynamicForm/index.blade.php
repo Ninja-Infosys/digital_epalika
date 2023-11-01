@@ -3,11 +3,13 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
+            <h4 class="page-title">नक्शा पास फारम</h4>
+                <div class="">
+                    <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -16,7 +18,6 @@
                         <li class="breadcrumb-item active">नक्शा पास फारम</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नक्शा पास फारम</h4>
             </div>
         </div>
     </div>
@@ -24,7 +25,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">नक्शा पास फारम सूची</h4>
                         @can('mapFee_create')
@@ -35,9 +36,9 @@
                         @endcan
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="mt-3">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-striped">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -57,30 +58,29 @@
                                             <i class="fa fa-2x {{ $dynamicForm->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td  class="d-flex">
                                         <a data-bs-type="edit"
                                            href="{{route('emap.admin.dynamicForm.edit',$dynamicForm)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.template',$dynamicForm)}}"
-                                            class="btn btn-xs btn-outline-secondary">
-                                            <i class="fa fa-file"></i> टेम्प्लेट
+                                            class="btn btn-xs me-1 btn-outline-secondary">
+                                            <i class="fa fa-file"></i>
                                         </a>
                                         <a
                                             href="{{route('emap.admin.dynamicForm.show',$dynamicForm)}}"
-                                            class="btn btn-xs btn-outline-warning ">
-                                            <i class="fa fa-eye"></i> हेर्नुहोस
+                                            class="btn btn-xs me-1 btn-outline-warning ">
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <form action="{{route('emap.admin.dynamicForm.destroy',$dynamicForm)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             <button data-bs-type="delete"
-                                                    class="btn btn-xs btn-outline-danger show_confirm">
+                                                    class="btn btn-xs me-1 btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
-                                                मेटाउनु होस्
                                             </button>
                                         </form>
                                     </td>

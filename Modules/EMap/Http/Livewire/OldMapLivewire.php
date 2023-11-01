@@ -55,7 +55,7 @@ class OldMapLivewire extends Component
             foreach ($this->oldMap as $key => $data) {
                 $this->oldMap[$key] = $oldMapUpdate[$key];
             }
-            if (!empty($houseOwner = $oldMapUpdate->houseOwner->first())) {
+            if (!empty($houseOwner = $oldMapUpdate->houseOwner)) {
                 $this->houseOwner['name'] = $houseOwner->name ?? null;
                 $this->houseOwner['phone'] = $houseOwner->phone ?? null;
                 $this->houseOwner['father_name'] = $houseOwner->father_name ?? null;
@@ -129,7 +129,7 @@ class OldMapLivewire extends Component
             ]);
         } else {
             $this->oldMapUpdate->update($this->oldMap);
-            $this->oldMapUpdate->houseOwner->first()?->update([
+            $this->oldMapUpdate->houseOwner?->update([
                 'name' => $this->houseOwner['name'],
                 'phone' => $this->houseOwner['phone'],
                 'father_name' => $this->houseOwner['father_name'],

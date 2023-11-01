@@ -12,6 +12,7 @@ use Modules\EMap\Entities\HouseOwner;
 use Modules\EMap\Entities\LandOwner;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapFee;
+use Modules\EMap\Entities\LandUseArea;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\Organization;
 use Modules\EMap\Entities\StructureType;
@@ -19,10 +20,12 @@ use Modules\EMap\Entities\StructureType;
 class MapApplicationForm extends Component
 {
     use WithFileUploads;
+
     public $latitude;
     public $longitude;
 
     public $structureTypes = [];
+    public $landUseAreas = [];
 
     public int $currentStep = 1;
 
@@ -69,7 +72,7 @@ class MapApplicationForm extends Component
     ];
 
     public array $landDescription = [
-        'land_use_area' => null,
+        'land_use_area_id' => null,
         'ward_no' => null,
         'former_ward_no' => null,
         'tole' => null,
@@ -124,6 +127,7 @@ class MapApplicationForm extends Component
         $this->setting = MapSetting::with('landMeasurement')->first() ?? new MapSetting();
         $this->organizations = Organization::with('userDetail', 'organizationDetail')->active()->get();
         $this->mapFees = MapFee::with('unit')->get();
+        $this->landUseAreas = LandUseArea::get();
         $this->officeSetting = OfficeSetting::with('localBody')->first();
 
         if (empty($this->setting->land_measurement_id)) {
@@ -190,7 +194,7 @@ class MapApplicationForm extends Component
     ];
 
     protected array $landDescriptionValidations = [
-        'landDescription.land_use_area' => ['required', 'numeric'],
+        'landDescription.land_use_area_id' => ['required', 'numeric', 'exists:land_use_areas,id'],
         'landDescription.ward_no' => ['required', 'integer'],
         'landDescription.former_ward_no' => ['nullable', 'integer'],
         'landDescription.tole' => ['nullable'],
@@ -267,32 +271,22 @@ class MapApplicationForm extends Component
             }
 
             $mapApply = MapApply::create($this->applyMap + [
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-            ]);
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                    'latitude' => $this->latitude,
+                    'longitude' => $this->longitude
+                ]);
 
             foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
                 $mapApply->storeyDetails()->create($storeyDetail);
             }
 
             $mapApply->landDetail()->create($this->landDescription + [
-                'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
-            ]);
+                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
+                ]);
 
-            if ($houseOwner = HouseOwner::where('citizenship_no', $this->houseOwner['citizenship_no'])->where('phone', $this->houseOwner['phone'])->first()) {
-                $houseOwner->mapApplies()->attach([$mapApply->id]);
-            } else {
-                $houseOwner = HouseOwner::create($this->houseOwner);
-                $houseOwner->mapApplies()->attach([$mapApply->id]);
-            }
+            $mapApply->houseOwner()->create($this->houseOwner);
 
-            if ($landOwner = LandOwner::where('citizenship_no', $this->landOwner['citizenship_no'])->where('phone', $this->landOwner['phone'])->first()) {
-                $landOwner->mapApplies()->attach([$mapApply->id]);
-            } else {
-                $landOwner = LandOwner::create($this->landOwner);
-                $landOwner->mapApplies()->attach([$mapApply->id]);
-            }
+            $mapApply->landOwner()->create($this->landOwner);
 
             $mapApply->applicantDetail()->create($this->applicantDetail);
 
@@ -306,8 +300,8 @@ class MapApplicationForm extends Component
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
-            'title' => 'धन्यबाद',
-            'text' => "तपाईंको फारम सफलतापूर्वक पेश भएको छ तपाईंको टोकन नं. $data->unique_id हो। कृपया भविष्यमा प्रयोगको लागि टोकन नं. सुरक्षित राख्नुहोस्।",
+            'title' => 'धन्यबाद!!!',
+            'text' => "तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. $data->unique_id हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस्।",
         ]);
     }
 
@@ -339,8 +333,8 @@ class MapApplicationForm extends Component
             'applyMap.storeyDetails.*.total_area.numeric' => 'जम्मा क्षेत्रफल नम्बरमा हुनुपर्छ|',
             'applyMap.storeyDetails.*.height.required' => 'उचाई अनिवार्य छ|',
             'applyMap.storeyDetails.*.height.numeric' => 'उचाई नम्बरमा हुनुपर्छ|',
-            'landDescription.land_use_area.required' => 'भू-उपयोग्य क्षेत्र अनिवार्य छ|',
-            'landDescription.land_use_area.numeric' => 'भू-उपयोग्य क्षेत्र नम्बरमा हुनुपर्छ|',
+            'landDescription.land_use_area_id.required' => 'भू-उपयोग्य क्षेत्र अनिवार्य छ|',
+            'landDescription.land_use_area_id.numeric' => 'भू-उपयोग्य क्षेत्र नम्बरमा हुनुपर्छ|',
             'landDescription.ward_no.required' => 'वडा नं अनिवार्य छ|',
             'landDescription.ward_no.integer' => 'वडा नं नम्बरमा हुनुपर्छ|',
             'landDescription.former_ward_no.required' => ' साविक वडा नं अनिवार्य छ|',

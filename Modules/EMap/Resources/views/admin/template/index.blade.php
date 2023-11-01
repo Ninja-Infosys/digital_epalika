@@ -3,11 +3,13 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
+            <h4 class="page-title mb-0">टेम्प्लेट</h4>
+                <div class="">
+                    <ol class="breadcrumb mb-2">
                         <li class="breadcrumb-item">
                             <a href="{{route('emap.admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -16,15 +18,14 @@
                         <li class="breadcrumb-item active">टेम्प्लेट</li>
                     </ol>
                 </div>
-                <h4 class="page-title">टेम्प्लेट</h4>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card rounded-3">
+                <div class="">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
                         @can('eMapTemplate_create')
@@ -36,7 +37,7 @@
 
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="mt-3">
                     <div class="table-responsive">
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
@@ -67,7 +68,7 @@
                                         @can('eMapTemplate_edit')
                                             <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.edit',[$eMapTemplate])}}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
 
@@ -78,7 +79,7 @@
                                             @can('eMapTemplate_delete')
                                                 @if($eMapTemplate->status==0)
                                                     <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i> मेटाउनु होस्
+                                                        <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
                                                     </button>
                                                 @endif
                                             @endcan

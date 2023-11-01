@@ -1,103 +1,100 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.mapSetting.index')}}">सेटिङ</a>
-                        </li>
-                        <li class="breadcrumb-item active">नक्सा सेटिङ</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">नक्सा सेटिङ</h4>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title mb-0">नक्सा सेटिङ</h4>
+            <div class="">
+                <ol class="breadcrumb mb-2">
+                    <li class="breadcrumb-item">
+                        <a href="{{route('admin.dashboard')}}">
+                            <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon"> गृहपृष्ठ
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{route('emap.admin.mapSetting.index')}}">सेटिङ</a>
+                    </li>
+                    <li class="breadcrumb-item active">नक्सा सेटिङ</li>
+                </ol>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नक्सा सेटिङ</h4>
-                    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card rounded-3">
+            <div class="">
+                <div class="d-flex justify-content-between">
+                    <h4 class="header-title">नक्सा सेटिङ</h4>
                 </div>
-                <div class="card-body">
-                    <form action="{{route('emap.admin.mapSetting.store')}}" method="post"
-                          enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="land_measurement_id" class="form-label">भूमि मापन एकाइ</label>
-                                <select name="land_measurement_id" id="land_measurement_id"
-                                        class="form-select @error('land_measurement_id') is-invalid @enderror">
-                                    <option value="">--- भूमि मापन एकाइ छान्नुहोस् ---</option>
-                                    @foreach($unitTypes as $unitType)
-                                        <option
-                                            value="{{$unitType->id}}" {{$unitType->id == old('land_measurement_id',$mapSetting->land_measurement_id ?? '') ? 'selected' : ''}}>{{$unitType->title}}</option>
-                                    @endforeach
+            </div>
+            <div class="">
+                <form action="{{route('emap.admin.mapSetting.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <label for="land_measurement_id" class="form-label mb-2">भूमि मापन एकाइ</label>
+                            <select name="land_measurement_id" id="land_measurement_id" class="mt-1 form-select @error('land_measurement_id') is-invalid @enderror">
+                                <option value="">--- भूमि मापन एकाइ छान्नुहोस् ---</option>
+                                @foreach($unitTypes as $unitType)
+                                <option value="{{$unitType->id}}" {{$unitType->id == old('land_measurement_id',$mapSetting->land_measurement_id ?? '') ? 'selected' : ''}}>{{$unitType->title}}</option>
+                                @endforeach
 
-                                </select>
-                                @error('land_measurement_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="land_measurement_standard_id" class="form-label">भूमि मापन मानक
-                                    एकाइ</label>
-                                <select name="land_measurement_standard_id" id="land_measurement_standard_id"
-                                        class="form-select @error('land_measurement_standard_id') is-invalid @enderror">
-                                    <option value="">--- भूमि मापन मानक एकाइ छान्नुहोस् ---</option>
-                                    @foreach($units as $unit)
-                                        <option
-                                            value="{{$unit->id}}" {{$unit->id == old('land_measurement_standard_id',$mapSetting->land_measurement_standard_id ?? '') ? 'selected' : ''}}>{{$unit->title}}</option>
-                                    @endforeach
-                                </select>
-                                @error('land_measurement_standard_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                @if(!empty($mapSetting->thumbnail))
-                                    <a href="{{$mapSetting->thumbnail}}" download="{{$mapSetting->thumbnail}}">
-                                        <i class="fa fa-download"></i> डाउनलोड
-                                    </a><br>
-                                @endif
-                                <label for="thumbnail" class="form-label">थम्बनेल</label>
-                                <input name="thumbnail" id="thumbnail" class="form-control" type="file">
-                                @error('thumbnail')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                @if(!empty($mapSetting->document))
-                                    <a href="{{$mapSetting->document}}" download="{{$mapSetting->document}}">
-                                        <i class="fa fa-download"></i> डाउनलोड
-                                    </a><br>
-                                @endif
-                                <label for="document" class="form-label">DWG Catalog format </label>
-                                <input name="document" id="document" class="form-control" type="file">
-                                @error('document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
+                            </select>
+                            @error('land_measurement_id')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
-
+                        <div class="col-md-3 mb-2">
+                            <label for="land_measurement_standard_id" class="form-label mb-2">भूमि मापन मानक
+                                एकाइ</label>
+                            <select name="land_measurement_standard_id" id="land_measurement_standard_id" class="mt-1 form-select @error('land_measurement_standard_id') is-invalid @enderror">
+                                <option value="">--- भूमि मापन मानक एकाइ छान्नुहोस् ---</option>
+                                @foreach($units as $unit)
+                                <option value="{{$unit->id}}" {{$unit->id == old('land_measurement_standard_id',$mapSetting->land_measurement_standard_id ?? '') ? 'selected' : ''}}>{{$unit->title}}</option>
+                                @endforeach
+                            </select>
+                            @error('land_measurement_standard_id')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="thumbnail" class="form-label mb-2">थम्बनेल</label>
+                            <input name="thumbnail" id="thumbnail" class="mt-1 form-control" type="file">
+                            @error('thumbnail')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                            @if(!empty($mapSetting->thumbnail))
+                            <a href="{{$mapSetting->thumbnail}}" class="mt-2 align-items-center d-flex justify-content-end" download="{{$mapSetting->thumbnail}}">
+                                <i class="fa fa-download me-1 "></i> डाउनलोड
+                            </a><br>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="document" class="form-label mb-2">DWG Catalog format </label>
+                            <input name="document" id="document" class="mt-1 form-control" type="file">
+                            @error('document')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                            @if(!empty($mapSetting->document))
+                            <a href="{{$mapSetting->document}}" class="mt-2 d-flex align-items-center justify-content-end" download="{{$mapSetting->document}}">
+                                <i class="fa fa-download me-1"></i> डाउनलोड
+                            </a><br>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
-                    </form>
-                </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 @endsection

@@ -6,11 +6,16 @@
         </button>
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.land_use_area">२.१ भू-उपयोग्य क्षेत्र</label>
-                <input class="form-control form-control-sm" type="number" id="landDescription.land_use_area"
-                       wire:model="landDescription.land_use_area"
-                       placeholder="भू-उपयोग्य क्षेत्र" min="0" {{$editForm ? '' : 'disabled'}}>
-                @error('landDescription.land_use_area')
+                <label class="form-label fw-bold" for="landDescription.land_use_area_id">२.१ भू-उपयोग्य क्षेत्र</label>
+                <select class="form-select form-select-sm"
+                        id="landDescription.land_use_area_id"
+                        wire:model="landDescription.land_use_area_id">
+                    <option value="">-- छान्नुहोस् --</option>
+                    @foreach($landUseAreas as $landUseArea)
+                        <option value="{{$landUseArea->id}}">{{$landUseArea->title}}</option>
+                    @endforeach
+                </select>
+                @error('landDescription.land_use_area_id')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>

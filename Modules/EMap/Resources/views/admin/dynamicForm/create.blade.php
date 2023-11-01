@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.recommendation.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">नक्शा पास फारम</li>
@@ -52,8 +53,8 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-ms-12 md-2">
-                                    <label for="fields" class="form-label">फारम</label>
+                                <div class="col-ms-12 md-2 d-none">
+                                    <label for="fields" class="form-label ">फारम</label>
                                     <div class="d-flex justify-content-between gap-1">
                                         <textarea name="fields" id="fields" class="form-control" cols="30"
                                                   rows="10" readonly>{{old('fields')}}</textarea>
