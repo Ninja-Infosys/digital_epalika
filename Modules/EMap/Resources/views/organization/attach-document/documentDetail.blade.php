@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <iframe src="{{ $appliedMapFile->document_url }}" width="100%" frameborder="0"></iframe>
+                    <iframe src="{{ $appliedMapFile->document_url }}" width="100%" height="400px" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
