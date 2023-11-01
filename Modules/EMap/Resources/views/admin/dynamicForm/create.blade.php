@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
+
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
@@ -8,7 +9,7 @@
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.recommendation.dashboard') }}">
-                            <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                            <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                         </a>
                     </li>

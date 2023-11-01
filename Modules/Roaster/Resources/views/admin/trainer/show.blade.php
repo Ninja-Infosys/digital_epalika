@@ -7,7 +7,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.roaster.dashboard') }}">
-                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-        
+
             @if (config('trainer.status.compactForm'))
                 <hr>
                 @if (config('trainer.type.bankDetailForm') == 'compact')
@@ -163,7 +163,7 @@
                     </div>
                 @endif
             @endif
-        
+
             @if (config('trainer.status.bankDetailForm') && config('trainer.type.bankDetailForm') == 'extended')
                 <div class="card mt-3">
                     <div class="card-header">

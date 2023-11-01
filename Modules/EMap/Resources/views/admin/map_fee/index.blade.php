@@ -8,7 +8,7 @@
                     <ol class="breadcrumb mb-2">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                               <img class="icon me-1" src="http://127.0.0.1:8000/assets/backend/images/home.svg" alt="document-icon">
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
@@ -59,7 +59,7 @@
                                         @can('mapFee_edit')
                                         <a data-bs-type="edit" href="{{route('emap.admin.mapFee.edit',$mapFee)}}"
                                            class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" data-bs-toggle="tooltip" data-bs-placement="top" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i> 
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         @endcan
 
@@ -69,7 +69,7 @@
                                             @method('delete')
                                             @can('mapFee_delete')
                                             <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm" data-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i> 
+                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
                                             </button>
                                             @endcan
                                         </form>
