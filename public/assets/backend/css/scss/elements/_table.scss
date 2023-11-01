@@ -28,7 +28,7 @@ table {
         gap: 5px;
     }
     .btn {
-        color: $primary;
+        // color: $primary;
         @include rectangle(26px, 26px, 2px);
         @include flex(center, center, 0);
         font-size: 13px;
