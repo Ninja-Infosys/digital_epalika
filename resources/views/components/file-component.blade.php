@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($formDataType->appliedDocuments->where('form_id', $form?->id)) == 0)
+                @if(count($mapApply->appliedDocuments->where('form_id', $form->id)) == 0)
                     <form
                         action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
                         method="post" enctype="multipart/form-data">
