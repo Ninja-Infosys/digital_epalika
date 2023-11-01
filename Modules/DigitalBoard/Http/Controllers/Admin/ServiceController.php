@@ -16,7 +16,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $this->checkAuthorization('service_access');
+
 
         $services = Service::with('branch')
         ->where(function (Builder $q) {
@@ -31,7 +31,7 @@ class ServiceController extends Controller
 
     public function create()
     {
-        $this->checkAuthorization('service_create');
+
         $mainBranches = Branch::with('branches')->whereNull('branch_id')->get();
 
         return view('digitalboard::admin.service.create', compact('mainBranches'));
@@ -39,7 +39,7 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request)
     {
-        $this->checkAuthorization('service_create');
+
 
         DB::transaction(function () use ($request) {
             $service = Service::create($request->validated());
@@ -60,7 +60,7 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        $this->checkAuthorization('service_access');
+
         $service->load('branch', 'serviceDocuments', 'serviceProcesses', 'serviceEmployees');
 
         return view('digitalboard::admin.service.show', compact('service'));
@@ -68,7 +68,7 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        $this->checkAuthorization('service_edit');
+
         $mainBranches = Branch::with('branches')->whereNull('branch_id')->get();
 
         return view('digitalboard::admin.service.edit', compact('service', 'mainBranches'));
@@ -76,7 +76,7 @@ class ServiceController extends Controller
 
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        $this->checkAuthorization('service_edit');
+
         DB::transaction(function () use ($request, $service) {
             $service->update($request->validated());
 
@@ -101,7 +101,7 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        $this->checkAuthorization('service_delete');
+
         $service->serviceDocuments()->delete();
         $service->serviceProcesses()->delete();
         $service->serviceEmployees()->delete();

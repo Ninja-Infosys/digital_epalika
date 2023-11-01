@@ -42,8 +42,13 @@
                     <tr>
                         <th>क्र.सं.</th>
                         <th>आर्थिक वर्ष</th>
-                        <th>युनिक आइडी</th>
+                        <th>सबममिसन नं</th>
                         <th>दर्ता नं</th>
+                        <th>किता नं</th>
+                        <th>वडा नं</th>
+                        <th>स्थिती</th>
+                        <th>डेस्क</th>
+                        <th>Pending Days</th>
                         <th>निर्माण कार्यको किसिम</th>
                         <th>आवेदन भर्ने संस्था</th>
                         <th>#</th>
@@ -57,6 +62,10 @@
                             <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
                             <td>{{ $mapApply->unique_id ?? '' }}</td>
                             <td>{{ $mapApply->registration_no ?? '' }}</td>
+                            <td>{{ $mapApply->plot_no ?? '' }}</td>
+                            <td>{{ $mapApply->ward_no ?? '' }}</td>
+                            <td></td>
+                            <td></td>
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
                             <td>
