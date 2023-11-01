@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($formDataType->appliedDocuments->where('form_id', $form->id)) == 0)
+                @if(count($formDataType->appliedDocuments->where('form_id', $form?->id)) == 0)
                     <form
                         action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
                         method="post" enctype="multipart/form-data">
@@ -40,7 +40,7 @@
                     </form>
                     @else
                     <form
-                        action="{{ route('organization.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')->first()->id]) }}"
+                        action="{{ route('organization.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
