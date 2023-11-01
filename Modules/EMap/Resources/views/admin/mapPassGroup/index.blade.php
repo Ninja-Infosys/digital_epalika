@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="page-title-box">
             <h4 class="page-title">नक्शा पास समूह </h4>
-                <div class="">
+                <div class="mb-3">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
