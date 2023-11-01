@@ -88,10 +88,6 @@ class MapApply extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(Client::class);
-    }
 
     public function structureType(): BelongsTo
     {

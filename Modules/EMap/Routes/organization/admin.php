@@ -40,7 +40,7 @@ Route::get('notification', [OrganizationNotificationController::class, 'notifica
 Route::get('notification/{databaseNotification}', [OrganizationNotificationController::class, 'readNotification'])->name('notification.read');
 Route::get('readAllNotification', [OrganizationNotificationController::class, 'readAllNotification'])->name('notification.readAllNotification');
 
-//organizatio document
+//organization document
 
 Route::get('mapApply/{mapApply}/attachment/organizationDocument', [AttachDocumentController::class, 'index'])->name('organizationDocument');
 Route::post('mapApply/{mapApply}/attachment/storeOrganizationDocument', [AttachDocumentController::class, 'storeOrganizationDocument'])->name('storeOrganizationDocument');

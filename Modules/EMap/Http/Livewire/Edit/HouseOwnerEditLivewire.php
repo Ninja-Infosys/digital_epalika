@@ -46,16 +46,16 @@ class HouseOwnerEditLivewire extends Component
         $this->allDistricts = $districts;
 
         $this->houseOwner = [
-            'name' => $mapApply->houseOwner->first()?->name ?? null,
-            'phone' => $mapApply->houseOwner->first()?->phone ?? null,
-            'father_name' => $mapApply->houseOwner->first()?->father_name ?? null,
-            'grandfather_name' => $mapApply->houseOwner->first()?->grandfather_name ?? null,
-            'citizenship_issue_district_id' => $mapApply->houseOwner->first()?->citizenship_issue_district_id ?? null,
-            'citizenship_no' => $mapApply->houseOwner->first()?->citizenship_no ?? null,
-            'citizenship_issue_date' => $mapApply->houseOwner->first()?->citizenship_issue_date ?? null,
-            'address' => $mapApply->houseOwner->first()?->address ?? null,
-            'local_body' => $mapApply->houseOwner->first()?->local_body ?? null,
-            'ward_no' => $mapApply->houseOwner->first()?->ward_no ?? null,
+            'name' => $mapApply->houseOwner?->name ?? null,
+            'phone' => $mapApply->houseOwner?->phone ?? null,
+            'father_name' => $mapApply->houseOwner?->father_name ?? null,
+            'grandfather_name' => $mapApply->houseOwner?->grandfather_name ?? null,
+            'citizenship_issue_district_id' => $mapApply->houseOwner?->citizenship_issue_district_id ?? null,
+            'citizenship_no' => $mapApply->houseOwner?->citizenship_no ?? null,
+            'citizenship_issue_date' => $mapApply->houseOwner?->citizenship_issue_date ?? null,
+            'address' => $mapApply->houseOwner?->address ?? null,
+            'local_body' => $mapApply->houseOwner?->local_body ?? null,
+            'ward_no' => $mapApply->houseOwner?->ward_no ?? null,
         ];
     }
 

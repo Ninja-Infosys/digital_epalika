@@ -53,7 +53,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$oldMap->fiscalYear->title??''}}</td>
                                 <td>{{$oldMap->registration_no}}</td>
-                                <td>{{$oldMap->houseOwner->first()->name??''}}</td>
+                                <td>{{$oldMap->houseOwner->name??''}}</td>
                                 <td>
                                     @can('oldMap_edit')
                                         <a data-bs-type="edit" href="{{route('emap.admin.oldMap.edit',$oldMap)}}"

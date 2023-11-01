@@ -178,55 +178,55 @@
                         </legend>
                         <div class="mb-3">
                             <h4 class="form-label"><b>३.१ जग्गा धनीको किसिम :</b>
-                                {{ $mapApply->landOwner?->first()?->land_owner_type->label()  ??''}}</h4>
+                                {{ $mapApply->landOwner?->land_owner_type->label()  ??''}}</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१ जग्गा धनीको नाम :</b> {{ $mapApply->landOwner?->first()?->name ??'' }}
+                                <h4 class="form-label"><b>१.१ जग्गा धनीको नाम :</b> {{ $mapApply->landOwner?->name ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.२ फोन नं. :</b> {{ $mapApply->landOwner?->first()?->phone ??'' }}</h4>
+                                <h4 class="form-label"><b>१.२ फोन नं. :</b> {{ $mapApply->landOwner?->phone ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.३ बुवाको नाम :</b> {{ $mapApply->landOwner?->first()?->father_name ??'' }}
+                                <h4 class="form-label"><b>१.३ बुवाको नाम :</b> {{ $mapApply->landOwner?->father_name ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ हजुरबुबाको नाम :</b>
-                                    {{ $mapApply->landOwner?->first()?->grandfather_name ??'' }}
+                                    {{ $mapApply->landOwner?->grandfather_name ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.६ नागरिकता नम्बर :</b>
-                                    {{ $mapApply->landOwner?->first()?->citizenship_no ??'' }}
+                                    {{ $mapApply->landOwner?->citizenship_no ??'' }}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.७ नागरिकता लिएको मिति :</b>
-                                    {{ $mapApply->landOwner?->first()?->citizenship_issue_date ??'' }}</h4>
+                                    {{ $mapApply->landOwner?->citizenship_issue_date ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकता लिएको जिल्ला :</b>
-                                    {{ $mapApply->landOwner?->first()?->citizenship_issue_district_id ??'' }}</h4>
+                                    {{ $mapApply->landOwner?->citizenship_issue_district_id ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.८ ठेगाना :</b> {{ $mapApply->landOwner?->first()?->address ??'' }}</h4>
+                                <h4 class="form-label"><b>१.८ ठेगाना :</b> {{ $mapApply->landOwner?->address ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.९ पालिका :</b> {{ $mapApply->landOwner?->first()?->local_body ??'' }}</h4>
+                                <h4 class="form-label"><b>१.९ पालिका :</b> {{ $mapApply->landOwner?->local_body ??'' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१० वडा नं. :</b> {{ $mapApply->landOwner?->first()?->ward_no ??'' }}</h4>
+                                <h4 class="form-label"><b>१.१० वडा नं. :</b> {{ $mapApply->landOwner?->ward_no ??'' }}</h4>
 
                             </div>
                         </div>
@@ -241,54 +241,54 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.१ जग्गा धनीको नाम :</b>
-                                    {{ $mapApply->houseOwner?->first()?->name ??'' }} </h4>
+                                    {{ $mapApply->houseOwner?->name ??'' }} </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.२ फोन नं. :</b>
-                                    {{ $mapApply->houseOwner?->first()?->phone ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->phone ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.३ बुवाको नाम :</b>
-                                    {{ $mapApply->houseOwner?->first()?->father_name ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->father_name ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ हजुरबुबाको नाम :</b>
-                                    {{ $mapApply->houseOwner?->first()?->grandfather_name ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->grandfather_name ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.६ नागरिकता नम्बर :</b>
-                                    {{ $mapApply->houseOwner?->first()?->citizenship_no ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->citizenship_no ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.७ नागरिकता लिएको मिति :</b>
-                                    {{ $mapApply->houseOwner?->first()?->citizenship_issue_date ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->citizenship_issue_date ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकता लिएको
                                         जिल्ला
-                                        :</b> {{ $mapApply->houseOwner?->first()?->citizenship_issue_district_id??''}}
+                                        :</b> {{ $mapApply->houseOwner?->citizenship_issue_district_id??''}}
                                 </h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.८ ठेगाना :</b>
-                                    {{ $mapApply->houseOwner?->first()?->address??''}}</h4>
+                                    {{ $mapApply->houseOwner?->address??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.९ पालिका :</b>
-                                    {{ $mapApply->houseOwner?->first()?->local_body ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->local_body ??''}}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.१० वडा नं. :</b>
-                                    {{ $mapApply->houseOwner?->first()?->ward_no ??''}}</h4>
+                                    {{ $mapApply->houseOwner?->ward_no ??''}}</h4>
 
                             </div>
                         </div>
