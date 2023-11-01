@@ -38,7 +38,7 @@
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model{{ $formStore->id }}">
-                                            स्थिति
+                                            <i class="fa fa-triangle-exclamation"></i>
                                         </button>
 
                                     </td>
