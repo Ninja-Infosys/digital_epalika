@@ -693,7 +693,7 @@
             @enderror
         </div>
         <div class="col-3">
-            <label class="form-label fw-bold" for="applicant_signature">निवेदकको सहि <span class="text-danger">*</span></label>
+            <label class="form-label fw-bold" for="applicant_signature">निवेदकको सहि</label>
             <input type="file" id="applicant_signature" wire:model="applicantDetail.signature"
             class="form-control form-control-sm">
             @error('applicantDetail.signature')
