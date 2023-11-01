@@ -53,7 +53,7 @@
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
-                                            <i class="fa fa-triangle-exclamation"></i>
+                                            <i class="fa fa-pen-nib"></i>
                                         </button>
                                     </td>
                                 </tr>
