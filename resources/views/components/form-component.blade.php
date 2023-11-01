@@ -59,7 +59,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($mapApply->formStores as $formStore)
+                        @foreach($mapApply->formStores?->where('form_id', $form->id) as $formStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
