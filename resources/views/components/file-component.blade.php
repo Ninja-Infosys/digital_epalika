@@ -96,7 +96,7 @@
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
                                     @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
-                                        <a href="#"><i class="fa fa-download"></i></a>
+                                        <a href="{{$appliedMapFile->document_url}}" download="{{$appliedMapFile->document_url}}"><i class="fa fa-download"></i></a>
                                     @endforeach
                                 </td>
                                 <td>{{$appliedDocument->status->label()}}</td>

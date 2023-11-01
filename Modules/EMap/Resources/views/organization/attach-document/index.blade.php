@@ -46,7 +46,7 @@
                                     <td>
 {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
 
                                         @php
                                         $completed = count(array_diff(
@@ -60,19 +60,19 @@
                                         @if($completed)
                                             @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
                                                 <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
-                                                class="btn btn-xs btn-outline-primary disabled" >
+                                                class="btn me-1 btn-xs btn-outline-primary disabled" >
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                             @endif
                                     @else
                                             <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
-                                            class="btn btn-xs btn-outline-primary">
+                                            class="btn me-1 btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i>
                                             </a>
                                     @endif
 
                                         <a href="{{ route('organization.admin.organization.view-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn me-1 btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                     </td>

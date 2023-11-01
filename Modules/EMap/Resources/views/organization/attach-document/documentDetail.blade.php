@@ -11,24 +11,25 @@
                             गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">Rename</li>
+                        <li class="breadcrumb-item active">{{$appliedDocument->form?->title}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Rename</h4>
+                <h4 class="page-title">{{$appliedDocument->form?->title}}</h4>
             </div>
         </div>
     </div>
     <div class="row">
         @foreach ($appliedDocument->appliedMapFiles as $appliedMapFile)
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="header-title mb-0"></h4>
+                        <h4 class="header-title mb-0">{{$appliedDocument->form?->title}}</h4>
+                        <a href="{{$appliedMapFile->document_url}}" class="btn btn-primary" download="{{$appliedMapFile->document_url}}"><i class="fa fa-download"></i></a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <iframe src="{{ asset('storage/'.$appliedMapFile->document) }}" frameborder="0"></iframe>
+                    <iframe src="{{ $appliedMapFile->document_url }}" width="100%" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
