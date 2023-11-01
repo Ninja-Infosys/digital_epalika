@@ -329,3 +329,4 @@ new Chart(bubbleChart, {
     data: bubbleChartData,
     options: bubbleChartOptions,
 });
+
