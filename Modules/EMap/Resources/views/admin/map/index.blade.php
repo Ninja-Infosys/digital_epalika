@@ -64,6 +64,8 @@
                             <td>{{ $mapApply->registration_no ?? '' }}</td>
                             <td>{{ $mapApply->plot_no ?? '' }}</td>
                             <td>{{ $mapApply->ward_no ?? '' }}</td>
+                            <td></td>
+                            <td></td>
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
                             <td>
