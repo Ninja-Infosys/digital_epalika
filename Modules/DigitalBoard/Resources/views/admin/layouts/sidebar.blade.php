@@ -28,11 +28,11 @@
     </a>
 </li>
 @endcan
-@can('service_access')
+
     <li class="{{request()->routeIs('admin.digitalBoard.service.*') ? 'active' : ''}}">
         <a href="{{route('admin.digitalBoard.service.index')}}">
             <i class="fa fa-scroll"></i>
             <span> सेवाहरु</span>
         </a>
     </li>
-@endcan
+
