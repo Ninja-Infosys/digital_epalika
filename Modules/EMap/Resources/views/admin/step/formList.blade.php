@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item active">{{$mapApply->unique_id}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Rename</h4>
+                <h4 class="page-title">{{$mapApply->houseOwner?->name}}</h4>
             </div>
         </div>
     </div>
