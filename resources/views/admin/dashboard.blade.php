@@ -13,7 +13,7 @@
                                     </div>
                                     <p class="text-body font-15 mb-0 ms-2">प्रयोगकर्ताहरु</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">45</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">33</span></h3>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -22,9 +22,9 @@
                                     <div class="avatar-sm bg-blue-100 d-flex align-items-center justify-content-center rounded-2">
                                         <img class="sidebar-icon" src="{{asset('assets/backend/images/document.png')}}" height="25" loading="lazy" alt="">
                                     </div>
-                                    <p class="text-body font-15 mb-0 ms-2">समाचार</p>
+                                    <p class="text-body font-15 mb-0 ms-2">योजना/कार्यक्रमहरु</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">45</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">265</span></h3>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -33,9 +33,9 @@
                                     <div class="avatar-sm bg-blue-100 d-flex align-items-center justify-content-center rounded-2">
                                         <img class="sidebar-icon" src="{{asset('assets/backend/images/document.png')}}" height="25" loading="lazy" alt="">
                                     </div>
-                                    <p class="text-body font-15 mb-0 ms-2">सुचना</p>
+                                    <p class="text-body font-15 mb-0 ms-2">सम्पन्न बैठक</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">45</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">35</span></h3>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -44,9 +44,9 @@
                                     <div class="avatar-sm bg-blue-100 d-flex align-items-center justify-content-center rounded-2">
                                         <img class="sidebar-icon" src="{{asset('assets/backend/images/document.png')}}" height="25" loading="lazy" alt="">
                                     </div>
-                                    <p class="text-body font-15 mb-0 ms-2">कर्मचारी/जनप्रतिनिधि</p>
+                                    <p class="text-body font-15 mb-0 ms-2">मुद्दा दर्ता</p>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">45</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">21</span></h3>
                             </div>
                         </div>
                     </div>
@@ -61,9 +61,7 @@
                     महिना अनुसार सूचना समाचार
                 </h4>
                 <div class="card-body">
-                    <canvas id="barChart1">
-
-                    </canvas>
+                    <canvas id="barChart1"></canvas>
                 </div>
 
             </div>
@@ -74,9 +72,7 @@
                     चालु आर्थिक वर्षाका वडा अनुसार जम्मा सिफारिस विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="steppedlineChart">
-
-                    </canvas>
+                    <canvas id="steppedlineChart"></canvas>
                 </div>
 
             </div>
@@ -87,9 +83,7 @@
                     कुल राजस्व विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="doughNut1">
-
-                    </canvas>
+                    <canvas id="doughNut1"></canvas>
                 </div>
 
             </div>
@@ -100,9 +94,7 @@
                     भुक्तानी अनुसार कुल राजस्व विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="pieChart1">
-
-                    </canvas>
+                    <canvas id="pieChart1"></canvas>
                 </div>
 
             </div>
@@ -113,9 +105,7 @@
                     विषय अनुसार तालिम विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="polarAreaChart1">
-
-                    </canvas>
+                    <canvas id="polarAreaChart1"></canvas>
                 </div>
 
             </div>
@@ -125,12 +115,10 @@
         <div class="col-lg-6">
             <div class="card">
                 <h4>
-                    आर्थिक वर्ष अनुशारको निवेदन
+                    आर्थिक वर्ष अनुशारको घरनाक्स विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="barCharthorizontal" height="170">
-
-                    </canvas>
+                    <canvas id="barChartHorizontal" height="170"></canvas>
                 </div>
             </div>
         </div>
@@ -140,11 +128,7 @@
                     आर्थिक वर्ष अनुसार व्यवसाय विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="lineChart1" height="170">
-
-                    </canvas>
-
-                    </canvas>
+                    <canvas id="lineChart1" height="170"></canvas>
                 </div>
             </div>
         </div>
@@ -153,32 +137,26 @@
         <div class="col-lg-6">
             <div class="card">
                 <h4>
-                    चालु आ.वका मासिक निवेदनहरु
+                    वर्ग अनुसार अपांगता विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="bubbleChart" >
-
-                    </canvas>
+                    <canvas id="bubbleChart" ></canvas>
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="card">
                 <h4>
-                    चालु अर्थिक अनुसार जेष्ठ नागरिक को बिवरन
+                    चालु अर्थिक अनुसार दर्ता/चलानी विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="lineChart1" height="170">
-
-                    </canvas>
-
-                    </canvas>
+                    <canvas id="barChart2" height="170"></canvas>
                 </div>
             </div>
         </div>
     </div>
     @push('scripts')
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="{{asset('assets/backend/js/chart.js')}}"></script>
         <script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
     @endpush
 @endsection
