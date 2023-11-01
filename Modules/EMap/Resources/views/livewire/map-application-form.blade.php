@@ -712,7 +712,10 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <script>
-  var map = L.map('map').setView([28.3949, 84.1240], 7);
+    var map = new L.Map('map', {
+        center: new L.LatLng(28.05, 81.61667),
+        zoom: 13
+    });
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
