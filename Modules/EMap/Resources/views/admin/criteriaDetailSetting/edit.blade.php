@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('emap.admin.criteriaDetailSetting.update', $criteriaDetailSetting)}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('emap.admin.criteriaDetailSetting.update', $criteriaDetailSetting)}}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="row">

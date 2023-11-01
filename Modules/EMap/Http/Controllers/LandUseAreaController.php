@@ -42,14 +42,14 @@ class LandUseAreaController extends Controller
     public function update(UpdateLandUseAreaRequest $request, LandUseArea $landUseArea)
     {
         $landUseArea->update($request->validated());
-        toast('भूउपयोग क्षेत्र थपियो', 'success');
+        toast('भूउपयोग क्षेत्र सफलतापूर्वक अद्यावधिक गरियो', 'success');
        return redirect(route('emap.admin.landUseArea.index'));
     }
 
     public function destroy(LandUseArea $landUseArea)
     {
         $landUseArea->delete();
-        toast('भूउपयोग क्षेत्र थपियो','success');
+        toast('भूउपयोग क्षेत्र मेटियो','success');
         return back();
     }
 }

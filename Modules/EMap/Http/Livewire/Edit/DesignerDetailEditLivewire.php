@@ -74,8 +74,8 @@ class DesignerDetailEditLivewire extends Component
             'designerDetails.'.$this->dataToEdit.'.local_body' => ['required'],
             'designerDetails.'.$this->dataToEdit.'.ward_no' => ['required', 'integer'],
             'designerDetails.'.$this->dataToEdit.'.post' => ['required'],
-            'designerDetails.'.$this->dataToEdit.'.nec_council_no' => ['required'],
-            'designerDetails.'.$this->dataToEdit.'.local_body_registration_no' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.nec_council_no' => ['nullable'],
+            'designerDetails.'.$this->dataToEdit.'.local_body_registration_no' => ['nullable'],
             //'designerDetails.'.$this->dataToEdit.'.consulting_firm_name' => ['required'],
         ];
     }
