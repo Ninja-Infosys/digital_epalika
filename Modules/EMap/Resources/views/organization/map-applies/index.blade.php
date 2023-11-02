@@ -68,7 +68,7 @@
                                             @else
                                                 तपाईको फारम पालिकाले स्वीकार गरेको छ
                                             @endif
-                                            <a class="btn btn-xs btn-outline-info"
+                                            <a class="btn btn-xs btn-outline-info mx-4"
                                                 href="{{ route('organization.admin.organizationDocument', $mapApply) }}">
                                                 <i class="fa fa-file"></i>
                                             </a>
