@@ -18,7 +18,7 @@ class OrganizationController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('organization_access');
-        $organizations = Organization::with('organizationDetail')->where(function (Builder $q) {
+        $organizations = Organization::with('organizationDetail')->withCount('mapApplies')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['email', 'phone', 'name'], request('search'));
             }
