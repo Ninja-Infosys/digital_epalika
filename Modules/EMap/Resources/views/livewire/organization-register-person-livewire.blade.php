@@ -165,8 +165,8 @@
                     </div>
                 </fieldset>
                 <ul class="list-inline wizard mt-3">
-                    <li class="next d-flex justify-content-around">
-                        <button type="button" wire:click.prevent="backStep(1)" class="btn btn-info">
+                    <li class="next d-flex justify-content-end">
+                        <button type="button" wire:click.prevent="backStep(1)" class="btn btn-info me-2">
                             <i class="fa fa-arrow-circle-left"></i> पछाडि
                         </button>
                         <button type="button"
@@ -426,9 +426,9 @@
                     </div>
                 </div>
                 <ul class="list-inline wizard mt-3">
-                    <li class="next d-flex justify-content-around">
+                    <li class="next d-flex justify-content-end">
                         <button type="button" wire:click.prevent="backStep(3)"
-                                class="btn btn-info">
+                                class="btn btn-info me-2">
                             <i class="fa fa-arrow-circle-left"></i> पछाडि
                         </button>
                         <button type="button"
@@ -757,7 +757,7 @@
                     </div>
                 </fieldset>
                 <ul class="list-inline wizard mt-3">
-                    <li class="next d-flex justify-content-around">
+                    <li class="next d-flex justify-content-end">
 
                         <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-success">
                             <i class="fa fa-arrow-circle-right"></i> अर्को

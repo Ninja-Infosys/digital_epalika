@@ -1,7 +1,7 @@
 <form wire:submit.prevent="saveFormData">
     <div class="row mb-3">
         <div class="col-md-3">
-            <label for="organization_id" class="form-label fw-bold">संस्था <span class="text-danger">*</span></label>
+            <label for="organization_id" class="form-label fw-bolder">संस्था <span class="text-danger">*</span></label>
             <select wire:model="applyMap.organization_id" id="organization_id"
                     name="organization_id" class="form-select form-select-sm" required>
                 <option value="">--- संस्था छान्नुहोस् ---</option>
@@ -15,7 +15,7 @@
             @enderror
         </div>
         <div class="col-md-3">
-            <label for="application_type" class="form-label fw-bold"> नक्सा <span class="text-danger">*</span></label>
+            <label for="application_type" class="form-label fw-bolder"> नक्सा <span class="text-danger">*</span></label>
             <select wire:model="applyMap.application_type" id="organization_id"
                     name="application_type" class="form-select form-select-sm" required>
                 <option value="">--- नक्सा छान्नुहोस् ---</option>
@@ -29,10 +29,10 @@
             @enderror
         </div>
     </div>
-    <fieldset>
+    <div class="card p-4 mb-4">
         <legend><h5>१. प्रस्तावित भवनको विवरण</h5></legend>
         <div class="mb-3">
-            <label class="form-label fw-bold">१.१ निर्माण कार्यको किसिम *</label>
+            <label class="form-label fw-bolder">१.१ निर्माण कार्यको किसिम *</label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\TypeOfConstructionWorkEnum::cases() as $constructionType)
                     <div class="form-check form-check-inline">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold">१.२ प्रयोजन *</label>
+            <label class="form-label fw-bolder">१.२ प्रयोजन *</label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\BuildingUsageEnum::cases() as $usages)
                     <div class="form-check form-check-inline">
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold">१.३ भवन ऐन अनुसार वर्गीकरण *</label>
+            <label class="form-label fw-bolder">१.३ भवन ऐन अनुसार वर्गीकरण *</label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
                     <div class="form-check form-check-inline">
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <Label class="form-label fw-bold">१.४ स्ट्रकचर टाईप *</Label>
+            <Label class="form-label fw-bolder">१.४ स्ट्रकचर टाईप *</Label>
             <div class="col">
                 @foreach($structureTypes as $structureType)
                     <div class="form-check form-check-inline">
@@ -107,14 +107,14 @@
             </div>
         </div>
         <div>
-            <div id="map" style="width: 100%; height: 400px;"></div>
+            <div id="map" style="width: 100%; height: 400px; margin-top:15px; margin-bottom: 15px"></div>
 
         </div>
 
         <div class="mb-1">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold" for="latitude">Latitude</label>
+                    <label class="form-label fw-bolder" for="latitude">Latitude</label>
                     <input type="number" class="form-control form-control-sm" id="latitude"
                            wire:model="latitude"
                            step="0.000000000000001"
@@ -122,7 +122,7 @@
 
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold" for="longitude">Longitude</label>
+                    <label class="form-label fw-bolder" for="longitude">Longitude</label>
                     <input type="number" class="form-control form-control-sm" id="longitude"
                            wire:model="longitude"
                            step="0.000000000000001"
@@ -133,7 +133,7 @@
         <div class="mb-1">
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bold" for="applyMap.current_storey">१.५ हाल निर्माण गर्ने तल्ला
+                    <label class="form-label fw-bolder" for="applyMap.current_storey">१.५ हाल निर्माण गर्ने तल्ला
                         संख्या </label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.current_storey"
                            wire:model="applyMap.current_storey"
@@ -143,7 +143,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bold" for="applyMap.area_of_plinth">१.६ प्लिन्थको क्षेत्रफल</label>
+                    <label class="form-label fw-bolder" for="applyMap.area_of_plinth">१.६ प्लिन्थको क्षेत्रफल</label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.area_of_plinth"
                            wire:model="applyMap.area_of_plinth"
                            placeholder="प्लिन्थको क्षेत्रफल (वर्ग मिटर)" min="0">
@@ -152,7 +152,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bold" for="applyMap.future_storey">१.७ भविष्यमा निर्माण गर्ने तल्ला
+                    <label class="form-label fw-bolder" for="applyMap.future_storey">१.७ भविष्यमा निर्माण गर्ने तल्ला
                         संख्या </label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.future_storey"
                            wire:model="applyMap.future_storey"
@@ -162,7 +162,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bold" for="applyMap.length">१.८ कुल भवनको लम्बाई </label>
+                    <label class="form-label fw-bolder" for="applyMap.length">१.८ कुल भवनको लम्बाई </label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.length"
                            wire:model="applyMap.length"
                            placeholder="कुल भवनको लम्बाई (मिटर)" min="0">
@@ -171,7 +171,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bold" for="applyMap.breadth">१.९ कुल भवनको चौडाई</label>
+                    <label class="form-label fw-bolder" for="applyMap.breadth">१.९ कुल भवनको चौडाई</label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.breadth"
                            wire:model="applyMap.breadth"
                            placeholder="कुल भवनको चौडाई (मिटर)" min="0">
@@ -180,7 +180,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bold" for="applyMap.height">१.१० भवनको कुल उचाई जमिनको सतहबाट</label>
+                    <label class="form-label fw-bolder" for="applyMap.height">१.१० भवनको कुल उचाई जमिनको सतहबाट</label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.height"
                            wire:model="applyMap.height"
                            placeholder="भवनको कुल उचाई जमिनको सतहबाट (मिटर)" min="0">
@@ -189,7 +189,7 @@
                     @enderror
                 </div>
                 <div class="col-md-12">
-                    <label class="form-label fw-bold">१.११ तल्लाको क्षेत्रफल र उचाईको विवरण </label>
+                    <label class="form-label fw-bolder">१.११ तल्लाको क्षेत्रफल र उचाईको विवरण </label>
                     <div class="table-responsive">
                         <table class="table table-bordered table-sm">
                             <thead>
@@ -275,12 +275,12 @@
                 </div>
             </div>
         </div>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="card p-4 mb-4">
         <legend><h5>२. जग्गाको विवरण</h5></legend>
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.land_use_area_id">२.१ भू-उपयोग्य क्षेत्र</label>
+                <label class="form-label fw-bolder" for="landDescription.land_use_area_id">२.१ भू-उपयोग्य क्षेत्र</label>
                 <select class="form-select form-select-sm"
                         id="landDescription.land_use_area_id"
                         wire:model="landDescription.land_use_area_id">
@@ -294,7 +294,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.ward_no">२.२ वडा नं</label>
+                <label class="form-label fw-bolder" for="landDescription.ward_no">२.२ वडा नं</label>
                 <input class="form-control form-control-sm" type="number" id="landDescription.ward_no"
                        wire:model="landDescription.ward_no"
                        min="0" placeholder="वडा नं">
@@ -303,7 +303,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.former_ward_no">२.३ साविक वडा नं</label>
+                <label class="form-label fw-bolder" for="landDescription.former_ward_no">२.३ साविक वडा नं</label>
                 <input class="form-control form-control-sm" type="number" id="landDescription.former_ward_no"
                        wire:model="landDescription.former_ward_no"
                        min="0" placeholder="साविक वडा नं">
@@ -312,7 +312,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.tole">२.४ टोलको नाम </label>
+                <label class="form-label fw-bolder" for="landDescription.tole">२.४ टोलको नाम </label>
                 <input class="form-control form-control-sm" type="text" id="landDescription.tole"
                        wire:model="landDescription.tole"
                        placeholder="टोलको नाम">
@@ -321,7 +321,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.street_code_no">२.५ सडक कोड नं</label>
+                <label class="form-label fw-bolder" for="landDescription.street_code_no">२.५ सडक कोड नं</label>
                 <input class="form-control form-control-sm" type="text" id="landDescription.street_code_no"
                        wire:model="landDescription.street_code_no"
                        placeholder="सडक कोड नं">
@@ -330,7 +330,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.plot_no">२.६ जग्गा कित्ता नं</label>
+                <label class="form-label fw-bolder" for="landDescription.plot_no">२.६ जग्गा कित्ता नं</label>
                 <input class="form-control form-control-sm" type="text" id="landDescription.plot_no"
                        wire:model="landDescription.plot_no"
                        placeholder="जग्गा कित्ता नं">
@@ -339,13 +339,13 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold">२.७ क्षेत्रफल ({{$setting->standardLandMeasurement->title ?? ''}})</label>
+                <label class="form-label fw-bolder">२.७ क्षेत्रफल ({{$setting->standardLandMeasurement->title ?? ''}})</label>
                 <input type="text" class="form-control form-control-sm" id="landDescription.unit_value"
                        wire:model="landDescription.unit_value"
                        placeholder="क्षेत्रफल ({{$setting->standardLandMeasurement->title ?? ''}})">
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bold" for="landDescription.percentage_of_area_covered_by_building">२.८ भवनले
+                <label class="form-label fw-bolder" for="landDescription.percentage_of_area_covered_by_building">२.८ भवनले
                     ढाक्ने क्षेत्रफलको प्रतिशत (GCR)</label>
                 <input class="form-control form-control-sm" type="number"
                        id="landDescription.percentage_of_area_covered_by_building"
@@ -356,11 +356,11 @@
                 @enderror
             </div>
         </div>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="card p-4 mb-4">
         <legend><h5>३. जग्गा धनीको विवरण</h5></legend>
         <div class="mb-3">
-            <label class="form-label fw-bold">३.१ जग्गा धनीको किसिम <span class="text-danger">*</span></label>
+            <label class="form-label fw-bolder">३.१ जग्गा धनीको किसिम <span class="text-danger">*</span></label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\LandOwnerTypeEnum::cases() as $landOwnerType)
                     <div class="form-check form-check-inline">
@@ -473,8 +473,8 @@
                 @enderror
             </div>
         </div>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="card p-4 mb-4">
         <legend><h5>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</h5></legend>
         <div class="d-flex align-items-center gap-2 mb-3">
             <label for="detail_check">के घर धनीको विवरण र जग्गाधनीको विवरण एउटै हो ?</label>
@@ -582,11 +582,11 @@
                 @enderror
             </div>
         </div>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="card p-4 mb-4">
         <legend><h5>५. निवेदकको विवरण</h5></legend>
         <div class="mb-3">
-            <label class="form-label fw-bold">५.१ निवेदकको प्रकार </label>
+            <label class="form-label fw-bolder">५.१ निवेदकको प्रकार </label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\ApplicantTypeEnum::cases() as $applicantType)
                     <div class="form-check form-check-inline">
@@ -603,7 +603,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold">५.२ घरधनी सँगको सम्बन्ध</label>
+            <label class="form-label fw-bolder">५.२ घरधनी सँगको सम्बन्ध</label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\RelationEnum::cases() as $relation)
                     <div class="form-check form-check-inline">
@@ -619,7 +619,7 @@
             </div>
         </div>
         <div class="row">
-            <label class="form-label fw-bold">जग्गाधनी वा घरधनी भन्दा फरक भएमा</label>
+            <label class="form-label fw-bolder">जग्गाधनी वा घरधनी भन्दा फरक भएमा</label>
             <div class="col-md-4 mb-3">
                 <label class="form-label" for="applicantDetail.name">१.१ नाम</label>
                 <input class="form-control form-control-sm" type="text" id="applicantDetail.name"
@@ -682,10 +682,10 @@
             </div>
         </div>
 
-    </fieldset>
+    </div>
     <div class="d-flex justify-content-between mt-3">
         <div class="col-3">
-            <label class="form-label fw-bold" for="application_date">निबेदनको मिति <span class="text-danger">*</span></label>
+            <label class="form-label fw-bolder" for="application_date">निबेदनको मिति <span class="text-danger">*</span></label>
             <input type="text" id="application_date" wire:model="applicantDetail.application_date"
                    class="form-control form-control-sm" placeholder="yyyy/mm/dd">
             @error('applicantDetail.application_date')
@@ -693,7 +693,7 @@
             @enderror
         </div>
         <div class="col-3">
-            <label class="form-label fw-bold" for="applicant_signature">निवेदकको सहि</label>
+            <label class="form-label fw-bolder" for="applicant_signature">निवेदकको सहि</label>
             <input type="file" id="applicant_signature" wire:model="applicantDetail.signature"
             class="form-control form-control-sm">
             @error('applicantDetail.signature')
