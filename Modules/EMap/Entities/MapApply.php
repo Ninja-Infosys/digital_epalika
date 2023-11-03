@@ -208,4 +208,33 @@ class MapApply extends Model
     public function getCheckFormFilledAttribute($value)
     {
     }
+
+    public function activeStep()
+    {
+        $this->load('formStores.form:id,order', 'paymentStores.form:id,order', 'appliedDocuments.form:id,order');
+        $storedDocuments = collect();
+
+        $storedDocuments =
+            $storedDocuments->merge($this->formStores)
+            ->merge($this->paymentStores)
+            ->merge($this->appliedDocuments)
+        ->sortByDesc('created_at');
+        return $storedDocuments
+            ->map(function ($storedDocument){
+                return collect($storedDocument)
+                    ->put('order', $storedDocument->form->order)
+                    ->put('form_id', $storedDocument->form->id)
+                    ->only('order','status','created_at','form_id','id')
+                    ->toArray();
+            })
+            ->groupBy('order')
+            ->map(function ($form){
+                return [
+                    'status'=>$form->pluck('status')->unique()->toArray(),
+                    'order'=>$form->pluck('order')->unique()->max()
+                ];
+            })
+            ->first()
+            ;
+    }
 }
