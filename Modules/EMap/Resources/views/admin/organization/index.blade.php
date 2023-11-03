@@ -56,7 +56,7 @@
                                     <td>{{$organization->name}}</td>
                                     <td>{{$organization->email}}</td>
                                     <td>{{$organization->phone}}</td>
-                                    <td>{{$organization->organization_count}}</td>
+                                    <td>{{$organization->map_applies_count}}</td>
 
                                     <td class="d-flex flex-wrap">
                                         @can('organization_edit')

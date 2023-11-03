@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,7 +44,7 @@ class Organization extends Authenticatable
 
     public function setPasswordAttribute($value): void
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -57,8 +58,8 @@ class Organization extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -90,5 +91,10 @@ class Organization extends Authenticatable
     public function organizationDetail(): HasOne
     {
         return $this->hasOne(OrganizationDetail::class);
+    }
+
+    public function mapApplies(): HasMany
+    {
+        return $this->hasMany(MapApply::class);
     }
 }
