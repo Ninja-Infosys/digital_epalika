@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\EMap\Entities\MapApply;
 
 class OrganizationController extends Controller
 {
@@ -53,6 +54,7 @@ class OrganizationController extends Controller
     public function show(Organization $organization)
     {
         $this->checkAuthorization('organization_access');
+        $maps = MapApply::all();
         $organization->load(['userDetail.citizenshipIssuedDistrict',
             'userDetail.permanentLocalBody',
             'userDetail.permanentDistrict',
@@ -62,7 +64,7 @@ class OrganizationController extends Controller
             'userDetail.temporaryProvince',
         ]);
 
-        return view('emap::admin.organization.show', compact('organization'));
+        return view('emap::admin.organization.show', compact('organization', 'maps'));
     }
 
     public function destroy(Organization $organization)

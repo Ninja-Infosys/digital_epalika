@@ -1,6 +1,6 @@
 @props(['form-data-type', 'map-apply', 'form'])
 <div class="row">
-    @foreach ($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
+    @foreach ($mapApply->load('appliedDocuments')->appliedDocuments?->where('form_data_id', $formDataType->id)->load('appliedMapFiles') as $appliedDocument)
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -124,7 +124,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($appliedDocument->appliedDocumentStatuses as $appliedDocumentStatus)
+                            @foreach ($appliedDocument->load('appliedDocumentStatuses')->appliedDocumentStatuses as $appliedDocumentStatus)
                                 <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>

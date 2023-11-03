@@ -55,7 +55,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$criteriaDetailSetting->title}}</td>
                                     <td>{{$criteriaDetailSetting->area}}</td>
-                                    <td>{{$criteriaDetailSetting->sign}}</td>
+                                    <td>{{$criteriaDetailSetting->sign->label()}}</td>
                                     <td>{{$criteriaDetailSetting->gcr}}</td>
                                     <td>{{$criteriaDetailSetting->far}}</td>
                                     <td class="d-flex">

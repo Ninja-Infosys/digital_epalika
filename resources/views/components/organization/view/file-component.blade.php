@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
+                        @foreach ($mapApply->appliedDocuments?->where('form_id', $form->id)?->where('form_data_id', $formDataType->id)->load('appliedMapFiles') as $appliedDocument)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>

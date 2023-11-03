@@ -1226,19 +1226,23 @@ ul.nested-list li ul li {
   margin: auto;
   margin-bottom: 30px;
 }
-.confirmation-icon svg, .confirmation-icon i {
+.confirmation-icon svg,
+.confirmation-icon i {
   font-size: 32px;
 }
 .confirmation-icon.danger, .confirmation-icon.warning {
   background: #fef1f1;
 }
-.confirmation-icon.danger svg, .confirmation-icon.danger i, .confirmation-icon.warning svg, .confirmation-icon.warning i {
+.confirmation-icon.danger svg,
+.confirmation-icon.danger i, .confirmation-icon.warning svg,
+.confirmation-icon.warning i {
   color: #ED1C24;
 }
 .confirmation-icon.success {
   background: #e5f8f1;
 }
-.confirmation-icon.success svg, .confirmation-icon.success i {
+.confirmation-icon.success svg,
+.confirmation-icon.success i {
   color: #34C38F;
 }
 
@@ -1577,4 +1581,49 @@ th:last-child {
   .responsive-sm-block {
     display: block !important;
   }
+}
+.ace-xcode .ace_gutter {
+  background: #fff !important;
+}
+
+#builder .formbuilder .formcomponents .builder-sidebar .card, #builder .formbuilder .formcomponents .builder-sidebar .modal .modal-content, .modal #builder .formbuilder .formcomponents .builder-sidebar .modal-content {
+  padding: 0px;
+  margin-bottom: 8px;
+}
+#builder .formbuilder .formcomponents .builder-sidebar .card .card-body, #builder .formbuilder .formcomponents .builder-sidebar .modal .modal-content .card-body, .modal #builder .formbuilder .formcomponents .builder-sidebar .modal-content .card-body {
+  padding: 0 !important;
+}
+#builder .formbuilder .formcomponents .builder-sidebar .card .card-body .btn, #builder .formbuilder .formcomponents .builder-sidebar .modal .modal-content .card-body .btn, .modal #builder .formbuilder .formcomponents .builder-sidebar .modal-content .card-body .btn {
+  width: 100%;
+  display: block;
+  padding: 8px;
+}
+#builder .formbuilder .formcomponents .builder-sidebar .card .card-body .btn i, #builder .formbuilder .formcomponents .builder-sidebar .modal .modal-content .card-body .btn i, .modal #builder .formbuilder .formcomponents .builder-sidebar .modal-content .card-body .btn i {
+  margin-right: 15px !important;
+}
+#builder .formbuilder .formcomponents .builder-sidebar .card button, #builder .formbuilder .formcomponents .builder-sidebar .modal .modal-content button, .modal #builder .formbuilder .formcomponents .builder-sidebar .modal-content button {
+  width: 100%;
+}
+
+.formio-dialog-content {
+  background: #fff !important;
+}
+.formio-dialog-content .card .card-header, .formio-dialog-content .modal .modal-content .card-header, .modal .formio-dialog-content .modal-content .card-header {
+  background-color: #fff;
+}
+.formio-dialog-content .card .card-header .nav-tabs .nav-link.active, .formio-dialog-content .modal .modal-content .card-header .nav-tabs .nav-link.active, .modal .formio-dialog-content .modal-content .card-header .nav-tabs .nav-link.active {
+  border-bottom: 2px solid #2F4EA2;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
+.formio-dialog-content .component-edit-container .btn-success {
+  margin-bottom: 12px;
+}
+.formio-dialog-content .component-edit-container .btn-secondary {
+  margin-bottom: 12px;
+}
+
+.ace-xcode .ace_gutter-active-line {
+  background-color: #fff;
 }/*# sourceMappingURL=style.css.map */
