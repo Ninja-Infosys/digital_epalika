@@ -45,19 +45,33 @@ class MapApplyController extends Controller
 
     public function formList(MapApply $mapApply)
     {
-        $forms = Form::with('formDataTypes.form.dynamicForm', 'formStores', 'paymentStores', 'appliedDocuments')->orderBy('order')->get();
+        $forms = Form::with('formDataTypes.form.dynamicForm', 'formStores', 'paymentStores', 'appliedDocuments')
+            ->orderBy('order')
+            ->get();
+        $order = $forms->min('order');
+        $activeStep = $mapApply->activeStep();
 
-        $status = collect();
-        foreach ($forms as $form) {
-            $allStatus = $form->formStores->pluck('status.value')
-                ->merge($form->paymentStores->pluck('status.value'))
-                ->merge($form->appliedDocuments->pluck('status.value'))
-                ->toArray();
-            $status->push($allStatus);
+        if (!empty($activeStep) && array_key_exists('status', $activeStep) && !empty($activeStep['status'])) {
+            $allApproved = true;
+
+            foreach ($activeStep['status'] as $item) {
+                if ($item !== 'approved') {
+                    $allApproved = false;
+                    break;
+                }
+            }
+
+            if ($allApproved) {
+                $order = $forms->where('order', '>', $activeStep['order'])
+                    ->sortBy('order')
+                    ->first()
+                    ?->order;
+            } else {
+                $order = $activeStep['order'];
+            }
         }
 
-
-        return view('emap::organization.attach-document.index', compact('mapApply', 'forms'));
+        return view('emap::organization.attach-document.index', compact('mapApply', 'forms', 'order'));
     }
 
     public function formDetail(MapApply $mapApply, Form $form)

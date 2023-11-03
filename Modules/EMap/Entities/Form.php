@@ -41,6 +41,7 @@ class Form extends Model
         "dynamic_form_id" => 'integer',
     ];
 
+
     public function formDataTypes(): HasMany
     {
         return $this->hasMany(FormDataType::class);

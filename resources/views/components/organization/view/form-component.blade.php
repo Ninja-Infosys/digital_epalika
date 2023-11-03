@@ -4,7 +4,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h4 class="header-title">
-                    {{ $formDataType->model?->title }} विवरण
+                    {{ $mapApply->model?->title }} विवरण
                 </h4>
             </div>
         </div>
@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($formDataType->formStores as $formStore)
+                        @foreach ($mapApply->formStores?->where('form_id', $form->id)?->where('form_data_id', $formDataType->id) as $formStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>

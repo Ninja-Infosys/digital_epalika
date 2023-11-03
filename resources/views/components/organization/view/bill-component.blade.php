@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mapApply->paymentStores->where('form_id', $form->id) as $paymentStore)
+                        @foreach ($mapApply->paymentStores->where('form_id', $form->id)?->where('form_data_id', $formDataType->id) as $paymentStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
