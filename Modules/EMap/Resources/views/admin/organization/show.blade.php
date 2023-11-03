@@ -192,10 +192,10 @@
                             </div>
                         @endif
 
-                        <div class="tab-pane" id="settings">
+                        <div class="tab-pane" id="detail">
                             <div class="row">
                                 @if($organization->is_organization==0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>नागरिकता (आगाडी)</p>
@@ -213,7 +213,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>नागरिकता (पछाडी)</p>
@@ -231,7 +231,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>NEC को प्रमाणपत्र</p>
@@ -249,7 +249,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==1)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>कम्पनी दर्ताको प्रमाणपत्र</p>
@@ -267,7 +267,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==1)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>कम्पनी PANको प्रमाणपत्र</p>
@@ -285,7 +285,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==1)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>लोगो</p>
@@ -337,6 +337,83 @@
 
                     </div>
                 </div>
+            </div>
+
+        </div>
+
+
+
+        {{-- <div class="card rounded-3">
+            <div class="">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="header-title mb-0">दर्ता भएका संगठनहरु</h4>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-xl-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="text-start mt-3">
+
+                            <p class="text-muted mb-2 font-15"><strong>संगठनको नाम :</strong> <span
+                                    class="ms-2">{{$organization->organizationDetail->org_name_ne ?? ''}}</span>
+                            </p>
+                            <p class="text-muted mb-2 font-15"><strong>इमेल :</strong><span
+                                    class="ms-2">{{$organization->email}}</span></p>
+
+                            <p class="text-muted mb-2 font-15"><strong>फोन :</strong> <span
+                                    class="ms-2">{{$organization->phone}}</span></p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+
+        <div class="card rounded-3">
+
+            <div class="mt-3">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>क्र.सं.</th>
+                            <th>आर्थिक वर्ष</th>
+                            <th>सबममिसन नं</th>
+                            <th>दर्ता नं</th>
+                            <th>किता नं</th>
+                            <th>वडा नं</th>
+                            <th>स्थिती</th>
+                            <th>डेस्क</th>
+                            <th>Pending Days</th>
+                            <th>निर्माण कार्यको किसिम</th>
+                            <th>आवेदन भर्ने संस्था</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($maps as $mapApply)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
+                                <td>{{ $mapApply->unique_id ?? '' }}</td>
+                                <td>{{ $mapApply->registration_no ?? '' }}</td>
+                                <td>{{ $mapApply->landDetail->plot_no ?? '' }}</td>
+                                <td>{{ $mapApply->landDetail->ward_no ?? '' }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
+                                <td>{{ $mapApply->organization->name ?? '' }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
 
         </div>
