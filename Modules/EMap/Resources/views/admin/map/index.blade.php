@@ -120,7 +120,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            <td class="text-center" colspan="12">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                         </tr>
                     @endforelse
                 </tbody>
