@@ -67,6 +67,11 @@ class OrganizationController extends Controller
         return view('emap::admin.organization.show', compact('organization', 'maps'));
     }
 
+
+
+    
+    
+
     public function destroy(Organization $organization)
     {
         $this->checkAuthorization('organization_delete');
