@@ -5,6 +5,7 @@ namespace Modules\EMap\Entities;
 use App\Models\Otp;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -216,25 +217,55 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-            ->merge($this->paymentStores)
-            ->merge($this->appliedDocuments)
-        ->sortByDesc('created_at');
+                ->merge($this->paymentStores)
+                ->merge($this->appliedDocuments)
+                ->sortByDesc('created_at');
         return $storedDocuments
-            ->map(function ($storedDocument){
+            ->map(function ($storedDocument) {
                 return collect($storedDocument)
                     ->put('order', $storedDocument->form->order)
                     ->put('form_id', $storedDocument->form->id)
-                    ->only('order','status','created_at','form_id','id')
+                    ->only('order', 'status', 'created_at', 'form_id', 'id')
                     ->toArray();
             })
             ->groupBy('order')
-            ->map(function ($form){
+            ->map(function ($form) {
                 return [
-                    'status'=>$form->pluck('status')->unique()->toArray(),
-                    'order'=>$form->pluck('order')->unique()->max()
+                    'status' => $form->pluck('status')->unique()->toArray(),
+                    'order' => $form->pluck('order')->unique()->max()
                 ];
             })
-            ->first()
-            ;
+            ->first();
+    }
+
+    public function getIndexDataAttribute()
+    {
+        $this->load('formStores.form', 'paymentStores.form', 'appliedDocuments.form');
+        $storedDocuments = collect();
+
+        $storedDocuments =
+            $storedDocuments->merge($this->formStores)
+                ->merge($this->paymentStores)
+                ->merge($this->appliedDocuments)
+                ->sortByDesc('created_at');
+
+        return $storedDocuments
+            ->map(function ($storedDocument) {
+                return collect($storedDocument)
+                    ->put('desk', $storedDocument?->form?->load('group')?->group?->title)
+                    ->put('form_title', $storedDocument->form?->title)
+                    ->only('desk', 'created_at', 'form_title')
+                    ->toArray();
+            })
+            ->map(function ($form) {
+                return [
+                    'desk' => $form['desk'] ?? '',
+                    'status' => $form['form_title'] ?? '',
+                    'pendingDays' => (array_key_exists('created_at', $form) && !empty($form['created_at'])) ? Carbon::parse($form['created_at'])?->diffForHumans() : $this->created_at->diffForHumans()
+
+                ];
+            })
+            ->first();
+
     }
 }

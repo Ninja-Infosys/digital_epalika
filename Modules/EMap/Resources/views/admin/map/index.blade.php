@@ -62,11 +62,11 @@
                             <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
                             <td>{{ $mapApply->unique_id ?? '' }}</td>
                             <td>{{ $mapApply->registration_no ?? '' }}</td>
-                            <td>{{ $mapApply->landDetail->plot_no ?? '' }}</td>
-                            <td>{{ $mapApply->landDetail->ward_no ?? '' }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $mapApply->landDetail?->plot_no ?? '' }}</td>
+                            <td>{{ $mapApply->landDetail?->ward_no ?? '' }}</td>
+                            <td>{{$mapApply->index_data['status'] ?? ''}}</td>
+                            <td>{{$mapApply->index_data['desk'] ?? ''}}</td>
+                            <td>{{$mapApply->index_data['pendingDays'] ?? ''}}</td>
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
                             <td>
