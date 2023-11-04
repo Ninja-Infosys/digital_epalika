@@ -192,10 +192,10 @@
                             </div>
                         @endif
 
-                        <div class="tab-pane" id="settings">
+                        <div class="tab-pane" id="detail">
                             <div class="row">
                                 @if($organization->is_organization==0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>नागरिकता (आगाडी)</p>
@@ -213,7 +213,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>नागरिकता (पछाडी)</p>
@@ -231,7 +231,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>NEC को प्रमाणपत्र</p>
@@ -249,7 +249,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==1)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>कम्पनी दर्ताको प्रमाणपत्र</p>
@@ -267,7 +267,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==1)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>कम्पनी PANको प्रमाणपत्र</p>
@@ -285,7 +285,7 @@
                                     </div>
                                 @endif
                                 @if($organization->is_organization==1)
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-around">
                                                 <p>लोगो</p>
@@ -341,5 +341,124 @@
 
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-pills nav-fill navtab-bg"
+                        @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatus)
+                        <li class="nav-item">
+                            <a href="#{{ $mapStatus->value }}" data-bs-toggle="tab" aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
+                               class="nav-link {{$loop->first ? 'active':''}}">
+                               {{ $mapStatus->label() }}
+                            </a>
+                        </li>
+                        @endforeach
+                     
+                    </ul>
+                    <div class="tab-content">
+                        @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatus)
+                            <div class="tab-pane {{$loop->first ? 'show active':''}}"
+                                 id="{{ $mapStatus->value }}">
+                                 <div class="mt-3">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>क्र.सं.</th>
+                                                <th>आर्थिक वर्ष</th>
+                                                <th>सबममिसन नं</th>
+                                                <th>दर्ता नं</th>
+                                                <th>किता नं</th>
+                                                <th>वडा नं</th>
+                                                <th>स्थिती</th>
+                                                <th>डेस्क</th>
+                                                <th>Pending Days</th>
+                                                <th>निर्माण कार्यको किसिम</th>
+                                                <th>आवेदन भर्ने संस्था</th>
+                                                <th>#</th>
+                                                <!-- <th></th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($maps->where('sent_to_organization', $mapStatus->value) as $mapApply)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
+                                                    <td>{{ $mapApply->unique_id ?? '' }}</td>
+                                                    <td>{{ $mapApply->registration_no ?? '' }}</td>
+                                                    <td>{{ $mapApply->landDetail?->plot_no ?? '' }}</td>
+                                                    <td>{{ $mapApply->landDetail?->ward_no ?? '' }}</td>
+                                                    <td>{{$mapApply->index_data['status'] ?? ''}}</td>
+                                                    <td>{{$mapApply->index_data['desk'] ?? ''}}</td>
+                                                    <td>{{$mapApply->index_data['pendingDays'] ?? ''}}</td>
+                                                    <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
+                                                    <td>{{ $mapApply->organization->name ?? '' }}</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center gap-1">
+                                                            @if ($mapApply->sent_to_organization == 'Accept')
+                                                                <a href="{{ route('emap.admin.mapApply.mapRegistration.index', $mapApply) }}"
+                                                                    class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
+                                                                    <i
+                                                                        class="fa fa-{{ empty($mapApply->registration_no) ? 'times-circle' : 'check-circle' }}"></i>
+                                                                    दर्ता {{ empty($mapApply->registration_no) ? 'गर्नुहोस्' : 'भएको' }}
+                                                                </a>
+                                                            @endif
+                                                            <form
+                                                                action="{{ route('emap.admin.map.mapApply.updateStatus', [$mapApply, $mapApply->application_type]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div class="input-group d-flex align-items-center">
+                                                                    <select class="form-select form-select-sm" name="sent_to_organization"
+                                                                        id="sent_to_organization" aria-label="Example select with button addon"
+                                                                        @if($mapApply->sent_to_organization=='Accept') disabled @endif>
+                                                                        <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                                        <option value="Unseen"
+                                                                            {{ $mapApply->sent_to_organization == 'Unseen' ? 'selected' : '' }}>
+                                                                            प्रक्रियामा</option>
+                                                                        <option value="Accept"
+                                                                            {{ $mapApply->sent_to_organization == 'Accept' ? 'selected' : '' }}>स्वीकार
+                                                                        </option>
+                                                                        <option value="Reject"
+                                                                            {{ $mapApply->sent_to_organization == 'Reject' ? 'selected' : '' }}>
+                                                                            अस्वीकार</option>
+                                                                            <option value="Complete"
+                                                                            {{ $mapApply->sent_to_organization == 'Complete' ? 'selected' : '' }}>
+                                                                            सम्पन्न</option>
+                                                                    </select>
+                                                                    <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($mapApply->sent_to_organization=='Accept') disabled @endif ><i class="fa fa-paper-plane"></i></button>
+                                                                </div>
+                        
+                                                            </form>
+                                                            <a href="{{ route('emap.admin.map.mapApply.mapDetail', [$mapApply, $mapApply->application_type]) }}" title="विवरण हेर्नुहोस"
+                                                                class="btn btn-xs btn-outline-success">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a href="{{ route('emap.admin.mapApply.admin-step.form-list', $mapApply) }}" title="नक्सा विवरण"
+                                                                class="btn btn-xs btn-outline-primary">
+                                                                <i class="fa fa-step-forward"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                        
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td class="text-center" colspan="12">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
 @endsection
 

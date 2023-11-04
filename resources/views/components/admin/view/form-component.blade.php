@@ -1,6 +1,6 @@
 @props(['form-data-type', 'map-apply', 'form'])
 <div class="row">
-    @foreach ($formDataType->formStores as $formStore)
+    @foreach ($mapApply->formStores?->where('form_data_id', $formDataType->id)?->where('form_id', $form->id) as $formStore)
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -38,7 +38,7 @@
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model{{ $formStore->id }}">
-                                            <i class="fa fa-fa-pen-nib"></i>
+                                            <i class="fa fa-pen-nib"></i>
                                         </button>
 
                                     </td>
@@ -76,12 +76,9 @@
                                                         </div>
                                                     </form>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
-
                         </tbody>
                     </table>
                 </div>
@@ -110,7 +107,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($formStore->formStoreStatuses as $formStoreStatus)
+                            @foreach ($formStore->load('formStoreStatuses')->formStoreStatuses as $formStoreStatus)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>  @foreach ($formStoreStatus->data as $key => $data)

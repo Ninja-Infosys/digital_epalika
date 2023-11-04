@@ -62,10 +62,11 @@
                             <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
                             <td>{{ $mapApply->unique_id ?? '' }}</td>
                             <td>{{ $mapApply->registration_no ?? '' }}</td>
-                            <td>{{ $mapApply->plot_no ?? '' }}</td>
-                            <td>{{ $mapApply->ward_no ?? '' }}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $mapApply->landDetail?->plot_no ?? '' }}</td>
+                            <td>{{ $mapApply->landDetail?->ward_no ?? '' }}</td>
+                            <td>{{$mapApply->index_data['status'] ?? ''}}</td>
+                            <td>{{$mapApply->index_data['desk'] ?? ''}}</td>
+                            <td>{{$mapApply->index_data['pendingDays'] ?? ''}}</td>
                             <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
                             <td>{{ $mapApply->organization->name ?? '' }}</td>
                             <td>
@@ -85,7 +86,8 @@
                                         @method('put')
                                         <div class="input-group d-flex align-items-center">
                                             <select class="form-select form-select-sm" name="sent_to_organization"
-                                                id="sent_to_organization" aria-label="Example select with button addon"   @if($mapApply->sent_to_organization=='Accept') disabled @endif>
+                                                id="sent_to_organization" aria-label="Example select with button addon"
+                                                @if($mapApply->sent_to_organization=='Accept') disabled @endif>
                                                 <option value="" disabled selected>--- छान्नुहोस् ---</option>
                                                 <option value="Unseen"
                                                     {{ $mapApply->sent_to_organization == 'Unseen' ? 'selected' : '' }}>
@@ -96,6 +98,9 @@
                                                 <option value="Reject"
                                                     {{ $mapApply->sent_to_organization == 'Reject' ? 'selected' : '' }}>
                                                     अस्वीकार</option>
+                                                    <option value="Complete"
+                                                    {{ $mapApply->sent_to_organization == 'Complete' ? 'selected' : '' }}>
+                                                    सम्पन्न</option>
                                             </select>
                                             <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($mapApply->sent_to_organization=='Accept') disabled @endif ><i class="fa fa-paper-plane"></i></button>
                                         </div>
@@ -115,7 +120,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            <td class="text-center" colspan="12">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -100,6 +100,11 @@
                     <span>  भूउपयोग क्षेत्र  </span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/emap/setting/streetDetails*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.streetDetail.index')}}">
+                    <span>  सडक विवरण </span>
+                </a>
+            </li>
 
             <li class="{{request()->is('admin/emap/setting/criteriaDetailSetting*') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.criteriaDetailSetting.index')}}">

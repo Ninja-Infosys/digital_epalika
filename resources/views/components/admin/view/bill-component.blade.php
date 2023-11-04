@@ -1,6 +1,6 @@
 @props(['form-data-type', 'map-apply', 'form'])
 <div class="row">
-    @foreach ($mapApply->paymentStores->where('form_id', $form->id) as $paymentStore)
+    @foreach ($mapApply->paymentStores?->where('form_data_id', $formDataType->id) as $paymentStore)
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -38,7 +38,7 @@
                                     <td>
                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_bill{{ $paymentStore->id }}">
-                                            स्थिति
+                                             <i class="fa fa-pen-nib"></i>
                                         </button>
                                     </td>
                                 </tr>

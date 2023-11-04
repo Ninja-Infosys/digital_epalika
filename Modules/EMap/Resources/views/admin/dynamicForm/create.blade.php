@@ -48,7 +48,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-ms-12 md-2 d-none">
+                            <div class="col-md-12 d-none">
                                 <label for="fields" class="form-label ">फारम</label>
                                 <div class="d-flex justify-content-between gap-1">
                                     <textarea name="fields" id="fields" class="form-control" cols="30" rows="10" readonly>{{old('fields')}}</textarea>
@@ -60,9 +60,11 @@
                         </div>
                         <div id="builder"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">
-                        पेश गर्नुहोस्
-                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary mt-2">
+                            पेश गर्नुहोस्
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -71,6 +73,7 @@
 @push('style')
 {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">--}}
 {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
+<link rel="stylesheet" href="{{asset('assets/backend/css/scss/style.css')}}">
 <link rel="stylesheet" href="{{asset('assets/backend/form/css/formio.builder.min.css')}}">
 @endpush
 

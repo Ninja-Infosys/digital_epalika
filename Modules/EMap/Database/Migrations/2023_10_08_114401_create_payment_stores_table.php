@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('bill');
             $table->float('amount')->default(0);
+            $table->nullableMorphs('form_data');
             $table->nullableMorphs('uploaded_by');
             $table->nullableMorphs('form_data');
             $table->timestamps();

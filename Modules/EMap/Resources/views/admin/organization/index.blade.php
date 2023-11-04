@@ -36,10 +36,13 @@
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
-                                    <th>नाम</th>
+                                    <th>संगठनको नाम</th>
+                                    <th>ठेगाना</th>
+                                    <th>संस्थापकको नाम</th>
                                     <th>इमेल</th>
                                     <th>फोन</th>
-                                    <th>संगठनको नाम</th>
+                                    <th>दर्ता निवेदन</th>
+
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -47,10 +50,14 @@
                                 @forelse($organizations as $organization)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$organization->organizationDetail->org_name_ne ?? ''}}</td>
+                                    <td>{{$organization->organizationDetail->province->province??'' }},
+                                        {{$organization->organizationDetail->district->district??'' }}</td>
                                     <td>{{$organization->name}}</td>
                                     <td>{{$organization->email}}</td>
                                     <td>{{$organization->phone}}</td>
-                                    <td>{{$organization->organizationDetail->org_name_ne ?? ''}}</td>
+                                    <td>{{$organization->map_applies_count}}</td>
+
                                     <td class="d-flex flex-wrap">
                                         @can('organization_edit')
                                         <a href="{{route('emap.admin.organization.update-login-status',$organization)}}" class="rounded-1 btn me-1 btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin':''}}" title="लग इन {{$organization->is_active==1 ?'गर्न मिल्छ':'गर्न मिल्दैन'}}">

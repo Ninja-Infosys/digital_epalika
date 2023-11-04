@@ -81,10 +81,10 @@ class AttachDocumentController extends Controller
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
                     'uploaded_by_id' => auth('organization')->user()->id,
-                    'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id,
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');

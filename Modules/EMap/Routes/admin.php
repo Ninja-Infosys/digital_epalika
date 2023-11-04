@@ -19,6 +19,8 @@ use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
 use  Modules\EMap\Http\Controllers\LandUseAreaController;
+use Modules\EMap\Http\Controllers\StreetDetailController;
+
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -83,6 +85,8 @@ Route::prefix('setting')->group(function () {
     Route::resource('criteriaDetailSetting', CriteriaDetailSettingController::class);
 
     Route::resource('landUseArea', LandUseAreaController::class);
+    Route::resource('streetDetail',StreetDetailController::class);
+
 
 });
 
