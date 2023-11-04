@@ -54,32 +54,35 @@
                             </div>
 
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 mb-2">
-                                <label for="title" class="form-label">प्रयोगकर्ता *</label>
-                                <div class="row">
-                                    @foreach($users as $index=>$user)
-                                        <div class="col-md-3 d-flex">
-                                            <input
-                                                type="checkbox"
-                                                name="users[]"
-                                                value="{{$user->id}}"
-                                                class="form-check @error('title') is-invalid @enderror"
-                                                {{in_array($user->id, old('users',$mapPassGroup->users->pluck('id')->toArray() ?? [])) ? 'checked' : ''}}
-                                                id="users.{{$index}}"
-                                            />
-                                            <label for="users.{{$index}}">{{$user->name}}</label>
-                                        </div>
-                                        @error('users.'.$index)
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    @endforeach
+                        @foreach($users as $key => $user)
+                        <div class="col-md-12 mb-2">
+                            <label for="title" class="form-label">प्रयोगकर्ता *</label>
+                            <div class="row">
+                                <div class="col-md-3 d-flex">
+                                    <input type="checkbox" name="users[{{ $key }}][user_id]" value="{{ $user['user_id'] }}" class="form-check @error('title') is-invalid @enderror me-1" {{ in_array($user['user_id'], old("users.$key.user_id", $mapPassGroup->users->pluck('user_id')->toArray())) ? 'checked' : '' }} id="users.{{ $key }}" />
+                                    <label for="users.{{ $key }}">{{ $user['name'] }}</label>
                                 </div>
-                                @error('users')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                @error("users.$key.user_id")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            @error("users.$key")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="col-md-3 mb-2">
+                                <label for="ward_no" class="form-label">वडा नं *</label>
+                                <select name="users[{{ $key }}][ward_no][]" class="form-select" multiple>
+                                    <option value="">-- छान्नुहोस् --</option>
+                                    @foreach (officeSetting()->localBody->ward_no as $ward)
+                                        <option value="{{ $ward }}" {{ in_array($ward, old("users.$key.ward_no", $mapPassGroup->users->where('user_id', $user['user_id'])->pluck('ward_no')->toArray())) ? 'selected' : '' }}>{{ $ward }}</option>
+                                    @endforeach
+                                </select>
+                                @error("users.$key.ward_no")
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                    @endforeach
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

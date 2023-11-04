@@ -46,25 +46,35 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-2">
-                            <label for="title" class="form-label">प्रयोगकर्ता *</label>
-                            <div class="row">
-                                @foreach($users as $index=>$user)
-                                <div class="col-md-3 d-flex">
-                                    <input type="checkbox" name="users[]" value="{{$user->id}}" class="form-check @error('title') is-invalid @enderror me-1" {{in_array($user->id, old('users',[])) ? 'checked' : ''}} id="users.{{$index}}" />
-                                    <label for="users.{{$index}}">{{$user->name}}</label>
-                                </div>
-                                @error('users.'.$index)
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                                @endforeach
-                            </div>
-                            @error('users')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                    </div>
+                    @foreach($users as $index => $user)
+        <div class="col-md-12 mb-2">
+            <label for="title" class="form-label">प्रयोगकर्ता *</label>
+            <div class="row">
+                <div class="col-md-3 d-flex">
+                    <input type="checkbox" name="users[{{ $index }}][user_id]" value="{{ $user->id }}" class="form-check @error('title') is-invalid @enderror me-1" {{ in_array($user->id, old('users', [])) ? 'checked' : '' }} id="users.{{ $index }}" />
+                    <label for="users.{{ $index }}">{{ $user->name }}</label>
+                </div>
+                @error("users.$index.user_id")
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            @error('users')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            <div class="col-md-3 mb-2">
+                <label for="ward_no" class="form-label">वडा नं *</label>
+                <select name="users[{{ $index }}][ward_no][]" class="form-select" multiple>
+                    <option value="">-- छान्नुहोस् --</option>
+                    @foreach (officeSetting()->localBody->ward_no as $ward)
+                        <option value="{{ $ward }}">{{ $ward }}</option>
+                    @endforeach
+                </select>
+                @error("users.$index.ward_no")
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        @endforeach
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">
                             Save
