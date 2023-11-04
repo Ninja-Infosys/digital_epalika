@@ -54,7 +54,7 @@ class Form extends Model
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(MapPassGroup::class);
+        return $this->belongsTo(MapPassGroup::class,'map_pass_group_id');
     }
 
     public function dynamicForm(): BelongsTo

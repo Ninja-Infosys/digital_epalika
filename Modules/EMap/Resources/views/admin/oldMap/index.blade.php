@@ -53,12 +53,12 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$oldMap->fiscalYear->title??''}}</td>
                                 <td>{{$oldMap->registration_no}}</td>
-                                <td>{{$oldMap->houseOwner->name??''}}</td>
-                                <td>
+                                <td>{{$oldMap->houseOwner?->first()?->name??''}}</td>
+                                <td class="d-flex">
                                     @can('oldMap_edit')
                                         <a data-bs-type="edit" href="{{route('emap.admin.oldMap.edit',$oldMap)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn me-1 btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                     @endcan
                                     <form action="{{route('emap.admin.oldMap.destroy',$oldMap)}}"
@@ -66,8 +66,8 @@
                                         @csrf
                                         @method('delete')
                                         @can('oldMap_delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button data-bs-type="delete" class="btn me-1 btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan
                                     </form>
