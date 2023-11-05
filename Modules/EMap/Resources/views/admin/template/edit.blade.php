@@ -57,20 +57,6 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
-                                <select name="type" id="type" class="form-control">
-                                    <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
-                                        <option {{old('type',$eMapTemplate->type->value)==$type->value ? 'selected':''}}
-                                                value="{{$type->value}}">{{$type->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('type')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
                             <div class="col-md-12 mb-2">
                                 @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
                                     <div class="mt-2">
