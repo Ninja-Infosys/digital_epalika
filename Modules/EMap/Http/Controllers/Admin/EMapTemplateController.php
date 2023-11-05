@@ -107,12 +107,6 @@ class EMapTemplateController extends Controller
             $eMapTemplate->update([
                 'status' => 1
             ]);
-
-            EMapTemplate::whereNot('id', $eMapTemplate->id)
-                ->where('status', 1)
-                ->update([
-                    'status' => 0
-                ]);
         });
 
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
