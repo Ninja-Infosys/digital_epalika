@@ -61,9 +61,9 @@
                                 @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
                                     <div class="mt-2">
                                         <h4>{{$template['title'] ?? ''}} :</h4>
-                                        <div class="button-list d-flex">
+                                        <div class="button-list d-flex flex-wrap mb-2">
                                         @foreach($template['data'] as $key=>$templateValue)
-                                            <button type="button" class="btn me-1 btn-outline-primary btn-xs"
+                                            <button type="button" class="btn btn-outline-primary btn-xs"
                                                onclick="copyText('{{$templateValue}}')">
                                                 {{$key}}
                                             </button>
