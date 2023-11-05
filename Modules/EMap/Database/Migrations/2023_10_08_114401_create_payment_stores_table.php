@@ -17,7 +17,6 @@ return new class extends Migration
             $table->float('amount')->default(0);
             $table->nullableMorphs('form_data');
             $table->nullableMorphs('uploaded_by');
-            $table->nullableMorphs('form_data');
             $table->timestamps();
             $table->softDeletes();
         });
