@@ -223,8 +223,8 @@ class MapApply extends Model
         return $storedDocuments
             ->map(function ($storedDocument) {
                 return collect($storedDocument)
-                    ->put('order', $storedDocument->form->order)
-                    ->put('form_id', $storedDocument->form->id)
+                    ->put('order', $storedDocument->form?->order)
+                    ->put('form_id', $storedDocument->form?->id)
                     ->only('order', 'status', 'created_at', 'form_id', 'id')
                     ->toArray();
             })

@@ -376,7 +376,6 @@
                                                 <th>Pending Days</th>
                                                 <th>निर्माण कार्यको किसिम</th>
                                                 <th>#</th>
-                                                <!-- <th></th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
