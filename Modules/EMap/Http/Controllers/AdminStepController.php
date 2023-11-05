@@ -19,7 +19,7 @@ class AdminStepController extends Controller
     public function formList(MapApply $mapApply)
     {
         $mapApply->load('houseOwner');
-        $forms = Form::with('formDataTypes')->orderBy('order')->get();
+        $forms = Form::with('formDataTypes','group.users')->orderBy('order')->get();
         return view('emap::admin.step.formList', compact('mapApply', 'forms'));
     }
 

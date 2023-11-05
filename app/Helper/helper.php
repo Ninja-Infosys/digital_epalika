@@ -478,12 +478,18 @@ if (!function_exists('get_nepali_count')) {
     }
 }
 
-if (!function_exists('replaceFormPlaceholderWith')) 
+if (!function_exists('replaceFormPlaceholderWith'))
 {
-    function replaceFormPlaceholderWith($fieldName,$fieldValue,$formContent)
+    function replaceFormPlaceholderWith($fieldName,$fieldValue,$formContent): array|string
     {
     return str_replace($fieldName, $fieldValue, $formContent);
     }
+}
 
+if (!function_exists('checkWard'))
+{
+    function checkWard(array $wards)
+    {
 
+    }
 }
