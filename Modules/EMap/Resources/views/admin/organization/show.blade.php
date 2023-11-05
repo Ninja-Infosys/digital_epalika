@@ -355,7 +355,7 @@
                             </a>
                         </li>
                         @endforeach
-                     
+
                     </ul>
                     <div class="tab-content">
                         @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatus)
@@ -375,13 +375,12 @@
                                                 <th>डेस्क</th>
                                                 <th>Pending Days</th>
                                                 <th>निर्माण कार्यको किसिम</th>
-                                                <th>आवेदन भर्ने संस्था</th>
                                                 <th>#</th>
                                                 <!-- <th></th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($maps->where('sent_to_organization', $mapStatus->value) as $mapApply)
+                                            @forelse($organization->mapApplies?->where('sent_to_organization', $mapStatus->value) as $mapApply)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $mapApply->fiscalYear->title ?? '' }}</td>
@@ -393,17 +392,16 @@
                                                     <td>{{$mapApply->index_data['desk'] ?? ''}}</td>
                                                     <td>{{$mapApply->index_data['pendingDays'] ?? ''}}</td>
                                                     <td>{{ $mapApply->construction_type->label() ?? '' }}</td>
-                                                    <td>{{ $mapApply->organization->name ?? '' }}</td>
                                                     <td>
                                                         <div class="d-flex align-items-center gap-1">
-                                                            @if ($mapApply->sent_to_organization == 'Accept')
-                                                                <a href="{{ route('emap.admin.mapApply.mapRegistration.index', $mapApply) }}"
-                                                                    class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
-                                                                    <i
-                                                                        class="fa fa-{{ empty($mapApply->registration_no) ? 'times-circle' : 'check-circle' }}"></i>
-                                                                    दर्ता {{ empty($mapApply->registration_no) ? 'गर्नुहोस्' : 'भएको' }}
-                                                                </a>
-                                                            @endif
+{{--                                                            @if ($mapApply->sent_to_organization == 'Accept')--}}
+{{--                                                                <a href="{{ route('emap.admin.mapApply.mapRegistration.index', $mapApply) }}"--}}
+{{--                                                                    class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">--}}
+{{--                                                                    <i--}}
+{{--                                                                        class="fa fa-{{ empty($mapApply->registration_no) ? 'times-circle' : 'check-circle' }}"></i>--}}
+{{--                                                                    दर्ता {{ empty($mapApply->registration_no) ? 'गर्नुहोस्' : 'भएको' }}--}}
+{{--                                                                </a>--}}
+{{--                                                            @endif--}}
                                                             <form
                                                                 action="{{ route('emap.admin.map.mapApply.updateStatus', [$mapApply, $mapApply->application_type]) }}"
                                                                 method="post">
@@ -412,7 +410,7 @@
                                                                 <div class="input-group d-flex align-items-center">
                                                                     <select class="form-select form-select-sm" name="sent_to_organization"
                                                                         id="sent_to_organization" aria-label="Example select with button addon"
-                                                                        @if($mapApply->sent_to_organization=='Accept') disabled @endif>
+                                                                      >
                                                                         <option value="" disabled selected>--- छान्नुहोस् ---</option>
                                                                         <option value="Unseen"
                                                                             {{ $mapApply->sent_to_organization == 'Unseen' ? 'selected' : '' }}>
@@ -427,9 +425,9 @@
                                                                             {{ $mapApply->sent_to_organization == 'Complete' ? 'selected' : '' }}>
                                                                             सम्पन्न</option>
                                                                     </select>
-                                                                    <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($mapApply->sent_to_organization=='Accept') disabled @endif ><i class="fa fa-paper-plane"></i></button>
+                                                                    <button  class="btn btn-lg btn-outline-primary" type="submit"   ><i class="fa fa-paper-plane"></i></button>
                                                                 </div>
-                        
+
                                                             </form>
                                                             <a href="{{ route('emap.admin.map.mapApply.mapDetail', [$mapApply, $mapApply->application_type]) }}" title="विवरण हेर्नुहोस"
                                                                 class="btn btn-xs btn-outline-success">
@@ -441,7 +439,7 @@
                                                             </a>
                                                         </div>
                                                     </td>
-                        
+
                                                 </tr>
                                             @empty
                                                 <tr>
@@ -459,6 +457,6 @@
 
         </div>
     </div>
-    
+
 @endsection
 

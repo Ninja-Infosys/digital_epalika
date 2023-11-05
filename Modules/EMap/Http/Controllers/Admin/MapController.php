@@ -188,7 +188,7 @@ class MapController extends Controller
     public function updateStatus(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
         $this->checkAuthorization('mapApply_access');
-        abort_if($mapApply->sent_to_organization == 'Accept', 403);
+//        abort_if($mapApply->sent_to_organization == 'Accept', 403);
         DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
             $number = MapApply::whereFiscalYearId(\officeSetting()->fiscal_year_id)
                 ->max('number') + 1;
@@ -203,7 +203,7 @@ class MapController extends Controller
             if ($mapApply->sent_to_organization == 'Accept') {
                 $mapApply->update([
                     'number' => $number,
-                    'file_code' => $this->get_today_nepali_date() . '/' . $mapApply->landDetail->ward_no . '/' . $number,
+                    'file_code' => $this->get_today_nepali_date() . '/' . $mapApply->landDetail?->ward_no . '/' . $number,
                 ]);
             }
         });

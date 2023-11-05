@@ -19,7 +19,10 @@ class OrganizationController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('organization_access');
-        $organizations = Organization::with('organizationDetail')->withCount('mapApplies')->where(function (Builder $q) {
+        $organizations = Organization::with('organizationDetail.province','organizationDetail.district')
+            ->withCount(['mapApplies as registeredMap'=>function($q){
+                $q->whereNotNull('registration_no');
+            }])->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['email', 'phone', 'name'], request('search'));
             }
@@ -54,7 +57,6 @@ class OrganizationController extends Controller
     public function show(Organization $organization)
     {
         $this->checkAuthorization('organization_access');
-        $maps = MapApply::all();
         $organization->load(['userDetail.citizenshipIssuedDistrict',
             'userDetail.permanentLocalBody',
             'userDetail.permanentDistrict',
@@ -62,15 +64,20 @@ class OrganizationController extends Controller
             'userDetail.temporaryLocalBody',
             'userDetail.temporaryDistrict',
             'userDetail.temporaryProvince',
+            'mapApplies'=>function($q){
+                $q->whereNotNull('sent_to_admin_at');
+            },
+            'mapApplies.fiscalYear',
+            'mapApplies.landDetail',
         ]);
 
-        return view('emap::admin.organization.show', compact('organization', 'maps'));
+        return view('emap::admin.organization.show', compact('organization'));
     }
 
 
 
-    
-    
+
+
 
     public function destroy(Organization $organization)
     {
