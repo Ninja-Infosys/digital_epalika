@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">भूउपयोग क्षेत्र</h4>
+                <h4 class="page-title">सडक विवरण</h4>
                 <div class="">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">

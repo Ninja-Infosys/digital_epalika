@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">भूउपयोग क्षेत्र</h4>
+                <h4 class="page-title">सडक विवरण</h4>
                 <div class="">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
@@ -29,9 +29,9 @@
             <div class="card">
                 <div class="">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">भूउपयोग क्षेत्र थप्नुहोस्</h4>
+                        <h4 class="header-title">सडक विवरण थप्नुहोस्</h4>
                         <a href="{{ route('emap.admin.streetDetail.index') }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> भूउपयोग क्षेत्र सूची
+                            <i class="fa fa-list"></i> सडक विवरण सूची
                         </a>
                     </div>
                 </div>
