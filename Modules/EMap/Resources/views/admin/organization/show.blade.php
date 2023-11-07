@@ -192,7 +192,7 @@
                             </div>
                         @endif
 
-                        <div class="tab-pane" id="detail">
+                        <div class="tab-pane" id="settings">
                             <div class="row">
                                 @if($organization->is_organization==0)
                                     <div class="col-md-6">
