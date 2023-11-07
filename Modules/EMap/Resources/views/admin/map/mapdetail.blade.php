@@ -589,6 +589,11 @@
                                             <i class="fa fa-download"></i>
                                         </a>
                                     </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->land_owner_document ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -617,6 +622,11 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->land_revenue_document ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -647,6 +657,11 @@
                                             <i class="fa fa-download"></i>
                                         </a>
                                     </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->land_owner_citizenship ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -675,6 +690,11 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->blue_print ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -705,6 +725,11 @@
                                             <i class="fa fa-download"></i>
                                         </a>
                                     </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->pass_document ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -733,6 +758,11 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->designer_document ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -763,6 +793,11 @@
                                             <i class="fa fa-download"></i>
                                         </a>
                                     </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->permission_document ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -791,6 +826,11 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-download"></i>
                                         </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{{$mapApply->attachDocument?->inheritance_document ?? ''}}"
+                                             alt=""
+                                             style="max-width: 100%;height: 200px;object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
