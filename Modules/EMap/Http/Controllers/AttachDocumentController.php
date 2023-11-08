@@ -213,6 +213,7 @@ class AttachDocumentController extends Controller
             'designer_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
             'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
         ]);
 
         if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {

@@ -103,6 +103,14 @@
                                    name="inheritance_document">
                         </div>
                     </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label" for="analysis_document">Analysis Document</label>
+                        <input type="file" class="form-control"
+                               id="file"
+                               name="analysis_document">
+                    </div>
+                </div>
                     <div class="mt-4 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
                     </div>
@@ -348,6 +356,35 @@
                           </div>
                       </div>
                   </div>
+
+                  <div class="col-xl-4 col-lg-6">
+                    <div class="card shadow-none border">
+                        <div class="p-2">
+                            <div class="row align-items-center">
+                                <div class="col-2 pe-0">
+                                    <div class="avatar-sm">
+                                      <span class="avatar-title bg-light text-secondary rounded">
+                                            <i class="fa {{getFileIconClass($mapApply->attachDocument->analysis_document??'')}} font-18"></i>
+                                      </span>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <a href="javascript:void(0);"
+                                       onclick="openFileModal('Analysis Document', '{{ pathinfo($mapApply->attachDocument->analysis_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument->analysis_document }}')"
+                                       class="text-muted fw-medium" type="button">Analysis Document
+                                        .{{pathinfo($mapApply->attachDocument->analysis_document??'',PATHINFO_EXTENSION)}}</a>
+                                    <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument->analysis_document_size ??'')}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument->getRawOriginal('analysis_document')])}}"
+                                       class="btn btn-xs btn-outline-primary">
+                                        <i class="fa fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </div>
           </div>
           @include('admin.inc.file-view');
