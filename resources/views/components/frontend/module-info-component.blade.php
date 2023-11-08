@@ -11,10 +11,10 @@
         </div>
     </div>
     @endif
-        @if(Route::has('e-map'))
+        @if(Route::has('ebps'))
     <div class="col-md-2">
         <div class="info-card">
-            <a href="{{route('e-map')}}">
+            <a href="{{route('ebps')}}">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/backend/images/modules/emap.png')}}" width="50" height="50">
                     <h4 class="p-2">घर-नक्सा</h4>
