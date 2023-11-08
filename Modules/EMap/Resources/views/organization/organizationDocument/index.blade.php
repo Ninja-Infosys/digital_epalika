@@ -91,22 +91,16 @@
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="permission_document">मन्जुरी लिई बनाउने भएमा नक्शा वालाले
                                 कानुन शाखाको रोहवरमा भएको मन्जुरीनामाको सक्क्ल</label>
-                            <input type="file" class="form-control @error('permission_document') is-invalid @enderror"
+                            <input type="file" class="form-control"
                                    id="file"
                                    name="permission_document">
-                            @error('permission_document')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="inheritance_document">वारेश राखि नक्सा पास गर्ने भए वारिसको
                                 प्रमाणितको प्रतिलिपि</label>
-                            <input type="file" class="form-control @error('inheritance_document') is-invalid @enderror"
+                            <input type="file" class="form-control"
                                    id="file"
                                    name="inheritance_document">
-                            @error('inheritance_document')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-end">
