@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">अपाङ्गता परिचय पत्र</li>
@@ -104,7 +104,8 @@
                                     <th colspan="3" class="text-center">दैनिक क्रियाकलाप गर्न</th>
                                 </tr>
                                 <tr>
-                                    <td>पछिल्लो सैक्षिक योग्यता : {{ $disabilityIdentityCard->qualification->label()?? '' }}</td>
+                                    <td>पछिल्लो सैक्षिक योग्यता :
+                                        {{ $disabilityIdentityCard->qualification->label() ?? '' }}</td>
                                     <td>दैनिक क्रियाकलाप गर्न :
                                         {{ $disabilityIdentityCard->daily_activity == 1 ? 'सक्ने' : ' नसक्ने' }}</td>
                                     <td>साहायक सामाग्री प्रयोग गर्ने :
@@ -115,13 +116,19 @@
                                         लिनु पर्ने काम</th>
                                 </tr>
                                 <tr>
-                                    <td>अन्य व्यक्तिको सहयोग लिनु पर्ने भए त्यस्तो सहयोग लिनु पर्ने काम :
+                                    <td>
+                                        अन्य व्यक्तिको सहयोग लिनु पर्ने भए त्यस्तो सहयोग लिनु पर्ने काम :
                                         @if (!is_null($disabilityIdentityCard->helping_task))
-                                            @foreach ($disabilityIdentityCard->helping_task as $helpingTask)
-                                                {{ $helpingTask }}
-                                            @endforeach
+                                            @if(is_array($disabilityIdentityCard->helping_task))
+                                                @foreach ($disabilityIdentityCard->helping_task as $helpingTask)
+                                                    {{ $helpingTask }}
+                                                @endforeach
+                                            @else
+                                                {{ $disabilityIdentityCard->helping_task }}
+                                            @endif
                                         @endif
                                     </td>
+
                                     <td>अन्य व्यक्तिको सहयोग बिना गर्न सक्ने दैनिक कार्य :
                                         @if (!is_null($disabilityIdentityCard->without_helping_task))
                                             @foreach ($disabilityIdentityCard->without_helping_task as $withoutHelpingTask)
@@ -148,7 +155,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($disabilityIdentityCard->identityRecords as $identityRecord)
+                                        @foreach ($disabilityIdentityCard->identityRecords as $identityRecord)
                                             <tr>
                                                 <td>{{ get_nepali_number($identityRecord->old_print_date) }}</td>
                                                 <td>{{ get_nepali_number($identityRecord->print_date) }}</td>
@@ -161,47 +168,48 @@
                             </tbody>
                         </table>
 
-                        <div class="tab-pane" id="settings">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-header d-flex justify-content-around">
-                                            <p> नागरिकता (आगाडी) </p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$disabilityIdentityCard->getRawOriginal('document_photo')])}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-download"></i>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            @if ($disabilityIdentityCard->document_photo)
-                                                <img src="{{ asset($disabilityIdentityCard->document_photo) }}"
-                                                    alt="Document Photo"
-                                                    style="max-width: 100%; height: 200px; object-fit: contain;">
-                                            @endif
-                                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-around">
+                                        <p> नागरिकता (आगाडी) </p>
+                                        <a href="{{ route('admin.file-url-download', ['file_url' => $disabilityIdentityCard->getRawOriginal('document_photo')]) }}"
+                                            class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
                                     </div>
-                                </div>
-
-
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-header d-flex justify-content-around">
-                                            <p>नागरिकता (पछाडी)</p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$disabilityIdentityCard->getRawOriginal('document_photo_back')])}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-download"></i>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            @if ($disabilityIdentityCard->document_photo_back)
-                                                <img src="{{ asset($disabilityIdentityCard->document_photo_back) }}"
-                                                    alt="Document Photo"
-                                                    style="max-width: 100%; height: 200px; object-fit: contain;">
-                                            @endif
-                                        </div>
+                                    <div class="card-body">
+                                        @if ($disabilityIdentityCard->document_photo)
+                                            <img src="{{ asset($disabilityIdentityCard->document_photo) }}"
+                                                alt="Document Photo"
+                                                style="max-width: 100%; height: 200px; object-fit: contain;">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-around">
+                                        <p>नागरिकता (पछाडी)</p>
+                                        <a href="{{ route('admin.file-url-download', ['file_url' => $disabilityIdentityCard->getRawOriginal('document_photo_back')]) }}"
+                                            class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        @if ($disabilityIdentityCard->document_photo_back)
+                                            <img src="{{ asset($disabilityIdentityCard->document_photo_back) }}"
+                                                alt="Document Photo"
+                                                style="max-width: 100%; height: 200px; object-fit: contain;">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
