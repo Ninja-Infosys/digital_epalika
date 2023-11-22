@@ -27,7 +27,7 @@ Route::prefix('organization')->as('organization.')->group(function () {
 });
 
 Route::controller(FrontendController::class)->group(function () {
-    Route::get('e-map', 'eMap')->name('e-map');
+    Route::get('ebps', 'eMap')->name('ebps');
     Route::get('downloads', 'downloads');
     Route::get('form', 'form');
     Route::get('mapTrack', 'mapTrack')->name('mapTrack');
