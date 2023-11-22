@@ -57,7 +57,7 @@
                                     <td>{{ $group->registration_date }}</td>
                                     <td>{{ $group->registered_office }}</td>
                                     <td>{{ $group->vat_pan }}</td>
-                                    <td>
+                                    <td class="gap-1 d-flex">
                                         <a data-bs-type="edit" href="{{route('admin.grant.group.show', $group)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>

@@ -59,7 +59,7 @@
                                     <td>{{$employee->department}}</td>
                                     <td>{{$employee->designation}}</td>
                                     <td>{{$employee->position}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.generalSetting.employee.updateEmployeeStatus',$employee)}}"
                                            class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}" title="स्थिति">
                                             <i class="fa  {{$employee->status==1 ?' fa-check':'fa-window-close'}}"></i>

@@ -62,7 +62,7 @@
                                              class="rounded-circle avatar avatar-md" style="width: 4rem; height: 4rem;">
                                     </td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @if($seniorCitizenDetail->can_edit_delete)
                                             <a href="{{route('identity.admin.seniorCitizenDetail.edit',$seniorCitizenDetail)}}"
                                                class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">

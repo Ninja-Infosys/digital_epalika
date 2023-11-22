@@ -48,7 +48,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$disabilityType->title ?? ''}}</td>
                                 <td>{{$disabilityType->disabilityType->title ?? ''}}</td>
-                                <td>
+                                <td class="d-flex gap-1">
                                     <a data-bs-type="edit" href="{{route('identity.admin.setting.disabilityType.edit', $disabilityType)}}"
                                        type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                         <i class="fa fa-edit"></i>

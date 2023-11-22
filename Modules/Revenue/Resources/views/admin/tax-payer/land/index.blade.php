@@ -70,11 +70,11 @@
                                     <td>{{$taxPayerLand->land_use}}</td>
                                     <td>रु. {{$taxPayerLand->current_rate}}</td>
                                     <td>{{$taxPayerLand->remarks}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('taxPayerLand_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.taxPayer.taxPayerLand.edit',[$taxPayer, $taxPayerLand])}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -85,7 +85,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

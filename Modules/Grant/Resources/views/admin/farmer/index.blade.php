@@ -57,7 +57,7 @@
                                     <td>{{$farmer->farmer_id_card_no}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
                                     <td>{{$farmer->phone_no}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.grant.farmer.show', $farmer)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
