@@ -53,11 +53,11 @@
                                     <td>{{$dateSheet->appearance_date}}</td>
                                     <td>{{$dateSheet->appearance_time}}</td>
                                     <td>{{$dateSheet->submitted_date}}</td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('dateSheet_access')
                                             <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.dateSheet.show',[$complaintApplication,$dateSheet])}}"
                                                title="विवरण हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
@@ -72,7 +72,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

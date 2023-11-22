@@ -51,11 +51,11 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$defendantIssuedDeadline->day_to_attend}}</td>
                                     <td>{{$defendantIssuedDeadline->submitted_date}}</td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('defendantIssuedDeadline_access')
                                             <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.show',[$complaintApplication,$defendantIssuedDeadline])}}"
                                                title="विवरण हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
