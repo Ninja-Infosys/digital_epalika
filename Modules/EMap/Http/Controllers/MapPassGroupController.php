@@ -58,10 +58,10 @@ class MapPassGroupController extends Controller
     {
         DB::transaction(function () use ($request, $mapPassGroup) {
             $mapPassGroup->update($request->validated());
-            $wardNos = $request->input('ward_no');
             foreach ($request->input('users') as $userId) {
+            $wardNos = $userId['ward_no'];
                 $condition = [
-                    'user_id' => $userId,
+                    'user_id' => $userId['user_id'],
                     'map_pass_group_id' => $mapPassGroup->id,
                 ];
                 $newWardNo = implode(',', $wardNos);
