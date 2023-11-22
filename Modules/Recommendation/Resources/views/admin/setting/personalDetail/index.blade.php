@@ -59,7 +59,7 @@
                                     </td>
                                     <td>{{ $personalDetail->citizenship_no }}</td>
                                     <td>{{ $personalDetail->phone_no }}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('personalDetail_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.setting.personalDetail.edit', $personalDetail) }}"

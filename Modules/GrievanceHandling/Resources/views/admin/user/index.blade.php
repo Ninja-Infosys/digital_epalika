@@ -60,7 +60,7 @@
                                         <td>{{ $grievanceUser->email }}</td>
                                         <td>{{ $grievanceUser->phone }}</td>
                                         <td>{{ $grievanceUser->grievance_details_count }}</td>
-                                        <td>
+                                        <td class="d-flex gap-1">
                                             <a href="{{ route('admin.grievanceHandling.grievanceUser.show', $grievanceUser) }}"
                                                 title="थप हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i>

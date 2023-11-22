@@ -49,23 +49,22 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$businessNature->title}}</td>
-                                    <td>
-                                        @can('businessNature_edit')
-                                        <a data-bs-type="edit" href="{{route('admin.businessRegistration.setting.businessNature.edit',$businessNature)}}"
-                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        @endcan
-                                        <form action="{{route('admin.businessRegistration.setting.businessNature.destroy',$businessNature)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('businessNature_delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                            @endcan
-                                        </form>
+                                    <td class="d-flex gap-1">
+                                        <a data-bs-type="edit"
+                                        href="{{ route('admin.businessRegistration.setting.businessNature.edit', $businessNature) }}"
+                                        class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form
+                                    action="{{ route('admin.businessRegistration.setting.businessNature.destroy', $businessNature) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button data-bs-type="delete"
+                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
                                     </td>
                                 </tr>
                             @empty

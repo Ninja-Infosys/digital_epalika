@@ -96,7 +96,7 @@
                                         </span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit"
                                            href="{{route('admin.circular.registration.show',$registration)}}"
                                            title="थप हेर्नुहोस्"

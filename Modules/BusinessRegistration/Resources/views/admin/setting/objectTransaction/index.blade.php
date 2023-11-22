@@ -55,24 +55,22 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$objectTransaction->objectTransaction->title ?? ''}}</td>
                                     <td>{{$objectTransaction->title}}</td>
-                                    <td>
-                                        @can('objectTransaction_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.setting.objectTransaction.edit',$objectTransaction)}}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                        @endcan
-                                        <form
-                                            action="{{route('admin.businessRegistration.setting.objectTransaction.destroy',$objectTransaction)}}"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('objectTransaction_delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            @endcan
-                                        </form>
+                                    <td class="d-flex gap-1">
+                                        <a data-bs-type="edit"
+                                        href="{{ route('admin.businessRegistration.setting.objectTransaction.edit', $objectTransaction) }}"
+                                        class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form
+                                    action="{{ route('admin.businessRegistration.setting.objectTransaction.destroy', $objectTransaction) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button data-bs-type="delete"
+                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
                                     </td>
                                 </tr>
                             @empty
