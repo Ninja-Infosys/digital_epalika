@@ -69,12 +69,13 @@
                             @error('users')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+
                             <div class="col-md-3 mb-2">
                                 <label for="ward_no" class="form-label">वडा नं *</label>
                                 <select name="users[{{ $index }}][ward_no][]" class="form-select" multiple>
                                     <option value="">-- छान्नुहोस् --</option>
                                     @foreach (officeSetting()->localBody->ward_no as $ward)
-                                        <option value="{{ $ward }}" {{ in_array($ward, old("users.$index.ward_no",[])) ? 'selected' : '' }}>{{ $ward }}</option>
+                                        <option value="{{ $ward }}" {{ in_array($ward, old("users.$index.ward_no",explode(',',DB::table('map_pass_group_user')->where('map_pass_group_id',$mapPassGroup->id)->where('user_id',  $user['id'])->first()?->ward_no))) ? 'selected' : '' }}>{{ $ward }}</option>
                                     @endforeach
                                 </select>
                                 @error("users.$index.ward_no")
