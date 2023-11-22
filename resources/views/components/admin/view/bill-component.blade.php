@@ -36,10 +36,12 @@
                                     <td>{{ get_nepali_number($paymentStore->created_at->toDateString()) }}</td>
                                     <td>{{ $paymentStore->status->label()??'' }}</td>
                                     <td>
+                                        @if(auth()->user()->id == 1 || $checkAuthorization)
                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_bill{{ $paymentStore->id }}">
                                              <i class="fa fa-pen-nib"></i>
                                         </button>
+                                        @endif
                                     </td>
                                 </tr>
                                   <!-- reject model -->

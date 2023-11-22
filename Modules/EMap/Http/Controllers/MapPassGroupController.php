@@ -49,6 +49,9 @@ class MapPassGroupController extends Controller
 
     public function edit(MapPassGroup $mapPassGroup)
     {
+
+        // $data = DB::table('map_pass_group_user')->where('map_pass_group_id', $mapPassGroup->id)->whereIn('user_id', $mapPassGroup->users->pluck('id')->toArray())->pluck('ward_no');
+        // dd($data);
         $mapPassGroup->load('users');
         $users = User::get();
         return view('emap::admin.mapPassGroup.edit', compact('mapPassGroup', 'users'));
@@ -59,7 +62,7 @@ class MapPassGroupController extends Controller
         DB::transaction(function () use ($request, $mapPassGroup) {
             $mapPassGroup->update($request->validated());
             foreach ($request->input('users') as $userId) {
-            $wardNos = $userId['ward_no'];
+                $wardNos = $userId['ward_no'];
                 $condition = [
                     'user_id' => $userId['user_id'],
                     'map_pass_group_id' => $mapPassGroup->id,
