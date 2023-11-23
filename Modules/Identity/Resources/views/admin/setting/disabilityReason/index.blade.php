@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$disabilityReason->title ?? ''}}</td>
-                                <td>
+                                <td class="d-flex gap-1"> 
                                     @can('disabilityReason_edit')
                                         <a data-bs-type="edit" href="{{route('identity.admin.setting.disabilityReason.edit', $disabilityReason)}}"
                                            type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">

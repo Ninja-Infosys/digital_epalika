@@ -21,14 +21,36 @@ class TaxPayerObserver
     /**
      * @throws \Exception
      */
-    private function generateUniqueId($table = 'tax_payers', $code = 'TP'): string
-    {
-        generateUniqueId:
-        $unique_id = $code . '-' . officeSetting()->fiscalyear->title . '-' . Str::padLeft(random_int(1, 999999), 6, 0);
-        if (DB::table($table)->where('registration_no', $unique_id)->count() > 0) {
-            goto generateUniqueId;
-        }
+    // private function generateUniqueId($table = 'tax_payers', $code = 'TP'): string
+    // {
+    //     generateUniqueId:
+    //     $unique_id = $code . '-' . officeSetting()->fiscalyear->title . '-' . Str::padLeft(random_int(1, 999999), 6, 0);
+    //     if (DB::table($table)->where('registration_no', $unique_id)->count() > 0) {
+    //         goto generateUniqueId;
+    //     }
 
-        return $unique_id;
+    //     return $unique_id;
+    // }
+
+    private function generateUniqueId($table = 'tax_payers', $code = 'TP'): string
+{
+    generateUniqueId:
+    $fiscalYear = officeSetting()->fiscalyear;
+
+    if ($fiscalYear === null) {
+        // Handle the case where fiscalyear is null
+        // You can throw an exception, log an error, or handle it in another way
+        // For now, let's return a default value
+        return 'DefaultUniqueId';
     }
+
+    $unique_id = $code . '-' . $fiscalYear->title . '-' . Str::padLeft(random_int(1, 999999), 6, 0);
+
+    if (DB::table($table)->where('registration_no', $unique_id)->count() > 0) {
+        goto generateUniqueId;
+    }
+
+    return $unique_id;
+}
+
 }

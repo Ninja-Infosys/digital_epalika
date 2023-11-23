@@ -59,7 +59,7 @@
                                     <td>{{$invoice->address ?? ''}}</td>
                                     <td>{{$invoice->invoice_particulars_sum_total ?? ''}}</td>
                                     <td>{{$invoice->remarks ?? ''}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('taxPayerType_access')
                                             <a
                                                 href="{{route('admin.revenue.invoice.show',[$invoice])}}"

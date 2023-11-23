@@ -164,10 +164,10 @@
                                     <td>{{$serviceEmployee->designation}}</td>
                                     <td>{{$serviceEmployee->phone}}</td>
                                     <td>{{$serviceEmployee->email}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.digitalBoard.service.serviceEmployee.edit',[$service,$serviceEmployee])}}"
                                            class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <i class="fa fa-edit"></i> 
                                         </a>
                                         <form
                                             action="{{route('admin.digitalBoard.service.serviceEmployee.destroy',[$service,$serviceEmployee])}}"
@@ -175,7 +175,7 @@
                                             @csrf
                                             @method('delete')
                                             <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <i class="fa fa-trash"></i> 
                                             </button>
                                         </form>
                                     </td>
