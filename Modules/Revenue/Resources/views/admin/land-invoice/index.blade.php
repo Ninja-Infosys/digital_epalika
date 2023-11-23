@@ -60,19 +60,19 @@
                                     <td>{{$invoice->address ?? ''}}</td>
                                     <td>{{$invoice->invoice_particulars_sum_total ?? ''}}</td>
                                     <td>{{$invoice->remarks ?? ''}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('taxPayerType_access')
                                             <a
                                                 href="{{route('admin.revenue.land.invoice.show',[$invoice])}}"
-                                                class="btn btn-xs btn-outline-success">
-                                                <i class="fa fa-eye"></i> हेर्नुहोस्
+                                                class="btn btn-xs btn-outline-success" title="हेर्नुहोस्">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('taxPayerType_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.land.invoice.edit',[$invoice])}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('taxPayerType_delete')
@@ -82,8 +82,8 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title=" मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

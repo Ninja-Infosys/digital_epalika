@@ -77,19 +77,8 @@
                                             <i class="fa fa-2x {{ $sipharishFormType->status ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                         </a>
                                     </td>
-                                    <td>
-                                        {{--        <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
-                                                   data-bs-target="#staticBackdrop">
-                                                    <i class="fa fa-file"></i>
-                                                </a>
-                                                 @can('recommendation_access')
-                                                    <a data-bs-type="edit"
-                                                       href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.show', ['d',$sipharishFormType]) }}"
-                                                       class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                                       title="विवरण हेर्नुहोस">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                @endcan --}}
+                                    <td class="d-flex gap-1">
+
                                         @can('recommendation_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharishFormType.edit',  $sipharishFormType) }}"

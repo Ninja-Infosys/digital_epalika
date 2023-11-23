@@ -29,7 +29,7 @@
                     @endif
                     @endcan
                 </td>
-                <td>
+                <td class="d-flex gap-1">
                     @can('training_access')
                     <a data-bs-type="edit" href="{{route('admin.roaster.training.show', $training)}}" class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
                        data-toggle="tooltip" data-placement="top"

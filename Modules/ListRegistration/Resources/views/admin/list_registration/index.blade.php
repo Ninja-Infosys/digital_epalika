@@ -62,7 +62,7 @@
                                     <td>{{$listRegistration->main_person}}</td>
                                     <td>{{$listRegistration->mobile_no}}</td>
                                     <td>{{$listRegistration->date}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('listRegistration_access')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"

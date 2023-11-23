@@ -82,7 +82,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="8">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                                 @endforelse
 

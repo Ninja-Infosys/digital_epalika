@@ -28,20 +28,20 @@ Route::get('organization/{organization}/updateLoginStatus', [OrganizationControl
 Route::resource('organization', OrganizationController::class);
 
 //update status from admin
-Route::put('appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AdminStepController::class, 'updateAppliedDocumentStatus'])->name('mapApply.admin-step.updateAppliedDocumentStatus');
-Route::put('formStore/{formStore}/updateFormStoreStatus', [AdminStepController::class, 'updateFormStoreStatus'])->name('mapApply.admin-step.updateFormStoreStatus');
-Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AdminStepController::class, 'updateAppliedDocumentStatus'])->name('mapApply.admin-step.updateAppliedDocumentStatus');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStore/{formStore}/updateFormStoreStatus', [AdminStepController::class, 'updateFormStoreStatus'])->name('mapApply.admin-step.updateFormStoreStatus');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
 
 
 
 
-Route::get('mapApply/{mapApply}/register', [MapController::class,'register'])->name('mapApply.register-map');
+Route::get('mapApply/{mapApply}/register', [MapController::class, 'register'])->name('mapApply.register-map');
 
 Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
 Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 'fillDetail'])->name('mapApply.admin-step.fill-detail');
 Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
-Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTemplate', [DocumentAttachController::class,'printTemplate'])->name('attach-document.print-template');
+Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTemplate', [DocumentAttachController::class, 'printTemplate'])->name('attach-document.print-template');
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
@@ -85,9 +85,7 @@ Route::prefix('setting')->group(function () {
     Route::resource('criteriaDetailSetting', CriteriaDetailSettingController::class);
 
     Route::resource('landUseArea', LandUseAreaController::class);
-    Route::resource('streetDetail',StreetDetailController::class);
-
-
+    Route::resource('streetDetail', StreetDetailController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {

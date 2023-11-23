@@ -58,7 +58,7 @@
                                     <td>{{$cooperative->name}}</td>
                                     <td>{{$cooperative->cooperativeType->title??''}}</td>
                                     <td>{{$cooperative->vat_pan}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                             @can('cooperative_access')
                                                 <a data-bs-type="edit" href="{{route('admin.grant.cooperative.show', $cooperative)}}"
                                                    class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="हेर्नुहोस्">

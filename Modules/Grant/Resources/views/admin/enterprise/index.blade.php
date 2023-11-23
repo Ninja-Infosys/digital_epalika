@@ -55,7 +55,7 @@
                                     <td>{{$enterprise->name}}</td>
                                     <td>{{$enterprise->enterpriseType->title ?? ''}}</td>
                                     <td>{{$enterprise->vat_pan}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.grant.enterprise.show', $enterprise)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
