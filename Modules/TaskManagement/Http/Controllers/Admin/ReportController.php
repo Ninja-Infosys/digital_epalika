@@ -57,9 +57,13 @@ class ReportController extends Controller
         if (!empty($request->input('fiscal_year'))) {
             $q->whereIn('fiscal_year_id', Arr::wrap($request->input('fiscal_year')));
         }
+        if (checkSuperAdmin()) {
+            if (!empty($request->input('user_id'))) {
 
-        if (!empty($request->input('user_id'))) {
-            $q->whereIn('user_id', Arr::wrap($request->input('user_id')));
+                $q->whereIn('user_id', Arr::wrap($request->input('user_id')));
+            }
+        } else {
+            $q->where('user_id', auth()->id());
         }
 
         if (!empty($request->input('en_date'))) {
@@ -81,9 +85,13 @@ class ReportController extends Controller
 
     public function dailyReportPage()
     {
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
 
+        $branches = [];
+        $users = [];
+        if (checkSuperAdmin()) {
+            $branches = Branch::with('branches')->whereNull('branch_id')->get();
+            $users = User::all();
+        }
         return view('taskmanagement::admin.report.dailyReport', compact('branches', 'users'));
     }
 
@@ -112,8 +120,13 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $months = $this->month_name;
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
+
+        $branches = [];
+        $users = [];
+        if (checkSuperAdmin()) {
+            $branches = Branch::with('branches')->whereNull('branch_id')->get();
+            $users = User::all();
+        }
 
         return view('taskmanagement::admin.report.monthlyReport', compact('fiscalYears', 'months', 'branches', 'users'));
     }
@@ -154,8 +167,12 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $quarters = $this->quarters();
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
+        $branches = [];
+        $users = [];
+        if (checkSuperAdmin()) {
+            $branches = Branch::with('branches')->whereNull('branch_id')->get();
+            $users = User::all();
+        }
 
         return view('taskmanagement::admin.report.quarterlyReport', compact('fiscalYears', 'quarters', 'branches', 'users'));
     }
@@ -200,8 +217,12 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::all();
         $quarters = $this->triMonthlyQuarters();
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
+        $branches = [];
+        $users = [];
+        if (checkSuperAdmin()) {
+            $branches = Branch::with('branches')->whereNull('branch_id')->get();
+            $users = User::all();
+        }
 
         return view('taskmanagement::admin.report.trimonthlyReport', compact('fiscalYears', 'quarters', 'branches', 'users'));
     }
@@ -245,8 +266,12 @@ class ReportController extends Controller
     public function yearlyReportPage()
     {
         $fiscalYears = FiscalYear::all();
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
+        $branches = [];
+        $users = [];
+        if (checkSuperAdmin()) {
+            $branches = Branch::with('branches')->whereNull('branch_id')->get();
+            $users = User::all();
+        }
 
         return view('taskmanagement::admin.report.yearlyReport', compact('fiscalYears', 'branches', 'users'));
     }

@@ -45,36 +45,39 @@
                                     <x-date-input-component nameNe="date" labelNe="कार्य पेश मिति" nameEn="en_date"
                                         labelEn="Date" />
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="branch_id">शाखा</label>
-                                    <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
-                                        class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach ($branches as $branch)
-                                            <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
-                                            @foreach ($branch->branches as $subBranch)
-                                                <option value="{{ $subBranch->id }}">
-                                                    --- {{ $subBranch->branch_name }}
+                                @if(checkSuperAdmin())
+                                    <div class="col-md-6 mb-2">
+                                        <label for="branch_id">शाखा</label>
+                                        <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
+                                                class="form-control">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach ($branches as $branch)
+                                                <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
+                                                @foreach ($branch->branches as $subBranch)
+                                                    <option value="{{ $subBranch->id }}">
+                                                        --- {{ $subBranch->branch_name }}
+                                                    </option>
+                                                @endforeach
+                                                <option value="{{ $branch->id }}">
+                                                    {{ $branch->branch_name }}
                                                 </option>
                                             @endforeach
-                                            <option value="{{ $branch->id }}">
-                                                {{ $branch->branch_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <label for="user_id">कर्मचारी</label>
-                                    <select name="user_id[]" multiple data-toggle="select2" id="user_id"
-                                        class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">
-                                                {{ $user->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <label for="user_id">कर्मचारी</label>
+                                        <select name="user_id[]" multiple data-toggle="select2" id="user_id"
+                                                class="form-control">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">
+                                                    {{ $user->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
                             </div>
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
