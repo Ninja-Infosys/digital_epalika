@@ -53,12 +53,12 @@
                                         <td>{{ $fileTracking->registration_no }}</td>
                                         <td>{{ $fileTracking->is_hardcopy ? 'हार्डकपि' : 'सफ्टकपि' }}</td>
                                         <td>{{ $fileTracking->remarks }}</td>
-                                        <td>
+                                        <td class="d-flex gap-1">
+
                                             <a href="{{ route('admin.taskManagement.fileTracking.show', $fileTracking) }}"
                                                 title="हेर्नुहोस" class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            @can('fileTracking_delete')
                                                 <form
                                                     action="{{ route('admin.taskManagement.fileTracking.destroy', $fileTracking) }}"
                                                     method="post">
@@ -70,7 +70,6 @@
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                            @endcan
                                         </td>
                                     </tr>
                                 @empty

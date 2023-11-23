@@ -60,7 +60,7 @@
                                     <td>{{$dispatch->letter_number}}</td>
                                     <td>{{$dispatch->letter_date}}</td>
                                     <td>{{$dispatch->subject}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit"
                                            href="{{route('admin.circular.dispatch.print', $dispatch)}}"
                                            class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"

@@ -63,7 +63,7 @@
                                     <td>{{ $committeeMember->phone }}</td>
                                     <td>{{ $committeeMember->email }}</td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('committeeMember_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.executiveMeeting.committee.committeeMember.edit',[$committee,$committeeMember]) }}"

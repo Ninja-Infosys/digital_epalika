@@ -50,23 +50,23 @@
                                     <th>{{ $loop->iteration }}</th>
                                     <td>{{ $committee->committeeType->name??'' }}</td>
                                     <td>{{ $committee->committee_name }}</td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('committee_edit')
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.executiveMeeting.setting.committee.edit', $committee) }}"
-                                               class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               href="{{route('admin.executiveMeeting.setting.committee.edit',$committee)}}"
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+
                                         @can('committee_delete')
-                                            <form
-                                                action="{{ route('admin.executiveMeeting.setting.committee.destroy', $committee) }}"
-                                                method="post">
+                                            <form action="{{route('admin.executiveMeeting.setting.committee.destroy',$committee)}}"
+                                                  method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        class="btn btn-xs me-1 btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
                                                 </button>
                                             </form>
                                         @endcan

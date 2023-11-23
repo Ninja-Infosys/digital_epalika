@@ -1,5 +1,5 @@
 <div>
-    <button type="button" onclick="exportExcel()" class="btn btn-sm btn-outline-success">
+    <button type="button" onclick="exportExcel()" class="btn btn-sm btn-outline-success" style="height: 30px;">
         <i class="fa fa-file-excel"> EXPORT</i>
     </button>
 </div>

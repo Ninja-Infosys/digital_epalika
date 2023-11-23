@@ -55,22 +55,24 @@
                                     <td>{{$subject->level}}</td>
                                     <td>{{$subject->duration}}</td>
                                     <td>{!! $subject->content !!}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('subject_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.roaster.setting.subject.edit', $subject)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
+                                        <a data-bs-type="edit" href="{{route('admin.roaster.setting.subject.edit', $subject)}}"
+                                        class="btn btn-xs btn-outline-info" title="सम्पादन गर्नुहोस्">
+                                         <i class="fa fa-edit"></i>
+                                     </a>
                                         @endcan
                                         @can('subject_delete')
-                                            <form action="{{route('admin.roaster.setting.subject.destroy', $subject)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
+                                        <form
+                                        action="{{ route('admin.roaster.setting.subject.destroy', $subject) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button data-bs-type="delete"
+                                            class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"  title="मेटाउनुहोस्">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
                                         @endcan
                                     </td>
                                 </tr>
