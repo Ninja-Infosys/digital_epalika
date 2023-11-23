@@ -54,8 +54,8 @@
                                     <td>
                                         @can('judicialCommitteeTemplate_edit')
                                             <a href="{{route('admin.judicialCommittee.setting.judicialCommitteeTemplate.edit',$judicialCommitteeTemplate)}}"
-                                               class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-warning" >
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                     </td>

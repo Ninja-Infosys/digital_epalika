@@ -50,11 +50,11 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$complaintSubject->subject}}</td>
                                     <td>{{$complaintSubject->lawsuitNature->title??''}}</td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('complaintSubject_edit')
                                             <a data-bs-type="edit" href="{{route('admin.judicialCommittee.setting.complaintSubject.edit',$complaintSubject)}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

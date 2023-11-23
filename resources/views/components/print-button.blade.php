@@ -1,6 +1,7 @@
 <div>
     <button class="btn {{ $btnClass }}"
-            onclick="printForm()" style="height: 30px;">
+            onclick="printForm()" style="height:30px;">
+
         <i class="fa fa-print"> {{ $btnLabel }}</i>
     </button>
     <div class="d-none header-content">

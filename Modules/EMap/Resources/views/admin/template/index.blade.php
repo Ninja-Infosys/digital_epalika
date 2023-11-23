@@ -64,10 +64,10 @@
                                     <td>
                                         <x-ad-to-bs id="fbs_{{$loop->iteration}}" adDate="{{$eMapTemplate->created_at->toDateString()}}" />
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('eMapTemplate_edit')
                                             <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.edit',[$eMapTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

@@ -62,18 +62,18 @@
                                     <td>
                                         {{$complaintApplication->lawsuitNature->title??''}}
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('complaintApplication_access')
                                             <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
                                                title="विवरण हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('complaintApplication_edit')
                                             <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
