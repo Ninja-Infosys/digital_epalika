@@ -46,7 +46,7 @@
                     <td>{{$mapApply->mapRegistration->remarks ?? ''}}</td>
                     <td><a href="{{route('emap.admin.mapApply.mapRegistration.create', $mapApply)}}"
                            type="button"
-                           class="btn btn-outline-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
+                           class="btn btn-outline-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}" >
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
