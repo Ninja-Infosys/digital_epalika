@@ -73,7 +73,7 @@
                                 <div class="d-flex align-items-center gap-1">
                                     @if ($mapApply->sent_to_organization == 'Accept')
                                         <a href="{{ route('emap.admin.mapApply.mapRegistration.index', $mapApply) }}"
-                                            class="btn btn-outline-info btn-sm" title="दर्ता गर्नुहोस्">
+                                            class="btn btn-outline-info btn-sm" style="width: 65px; height:40px;" title="दर्ता गर्नुहोस्">
                                             <i
                                                 class="fa fa-{{ empty($mapApply->registration_no) ? 'times-circle' : 'check-circle' }}"></i>
                                             दर्ता {{ empty($mapApply->registration_no) ? 'गर्नुहोस्' : 'भएको' }}

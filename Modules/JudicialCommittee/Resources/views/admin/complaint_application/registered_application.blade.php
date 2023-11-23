@@ -58,10 +58,10 @@
                                     <td>
                                         {{ $complaintApplication->lawsuitNature->title ?? '' }}
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
                                         <div class="btn-group dropstart">
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
-                                               class="btn btn-sm btn-primary">
+                                            <a style="width:75px;" href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
+                                               class="btn btn-sm me-1 btn-primary">
                                                 <i class="fa fa-eye"> विवरण </i>
                                             </a>
                                             <button type="button"

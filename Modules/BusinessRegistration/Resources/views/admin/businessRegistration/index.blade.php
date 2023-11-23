@@ -143,7 +143,7 @@
                                         <span>{{$businessDetail->localBody->local_body??''}}
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('businessRegistration_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.businessRegistration.businessRegistration.edit',$businessDetail)}}"
