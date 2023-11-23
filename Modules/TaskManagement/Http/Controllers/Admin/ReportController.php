@@ -23,8 +23,12 @@ class ReportController extends Controller
     public function index()
     {
         $fiscalYears = FiscalYear::get();
-        $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
+        $branches = [];
+        $users = [];
+        if (checkSuperAdmin()) {
+            $branches = Branch::with('branches')->whereNull('branch_id')->get();
+            $users = User::all();
+        }
         return view('taskmanagement::admin.report.index', compact('fiscalYears', 'branches', 'users'));
     }
 
