@@ -55,10 +55,10 @@
                                     <td>{{$EmergencyNumber->title}}</td>
                                     <td>{{$EmergencyNumber->contact_no}}</td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('emergencyNumber_edit')
                                             <a data-bs-type="edit" href="{{route('admin.generalSetting.emergencyNumber.edit', $EmergencyNumber)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -67,7 +67,7 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

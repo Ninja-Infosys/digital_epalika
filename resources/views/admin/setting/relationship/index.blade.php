@@ -49,10 +49,10 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$relationship->title ?? ''}}</td>
-                                <td>
+                                <td class="d-flex gap-1"> 
                                     @can('relationship_edit')
                                         <a data-bs-type="edit" href="{{route('admin.relationship.edit', $relationship)}}"
-                                           type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                           type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     @endcan

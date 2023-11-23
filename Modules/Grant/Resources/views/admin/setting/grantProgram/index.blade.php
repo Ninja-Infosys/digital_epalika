@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$grantProgram->name}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.grant.setting.grantProgram.edit', $grantProgram)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>

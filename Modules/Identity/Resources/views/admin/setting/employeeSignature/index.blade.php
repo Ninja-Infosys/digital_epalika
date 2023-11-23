@@ -74,7 +74,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td>
+                                <td class="d-flex gap-1">
                                     @can('employeeSignature_edit')
                                         <a data-bs-type="edit" href="{{route('identity.admin.setting.employeeSignature.edit', $employeeSignature)}}"
                                            type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">

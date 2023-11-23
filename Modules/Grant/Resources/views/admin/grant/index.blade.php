@@ -69,7 +69,7 @@
                                             @endforeach
                                         </ul>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('grant_edit')
                                             <a data-bs-type="edit" href="{{route('admin.grant.grant.edit', $grant)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">

@@ -41,10 +41,12 @@
                                     <td>{{ get_nepali_number($formStore->created_at->toDateString()) }}</td>
                                     <td>{{ $formStore->status->label()??'' }}</td>
                                     <td>
+                                        @if(auth()->user()->id == 1 || $checkAuthorization)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model{{ $formStore->id }}">
                                             <i class="fa fa-pen-nib"></i>
                                         </button>
+                                        @endif
 
                                     </td>
                                 </tr>

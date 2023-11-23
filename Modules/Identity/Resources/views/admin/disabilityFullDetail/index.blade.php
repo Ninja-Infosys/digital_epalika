@@ -55,7 +55,7 @@
                                     <td>
                                         {{ $disabilityIdentityCard->citizenship_no? $disabilityIdentityCard->citizenship_no."(नागरिकता)" : $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @if($disabilityIdentityCard->can_edit_delete)
                                             <a href="{{route('identity.admin.disabilityFullDetail.show',$disabilityIdentityCard)}}"
                                                class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">

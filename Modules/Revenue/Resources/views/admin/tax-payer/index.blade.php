@@ -62,13 +62,13 @@
                                     <td>
                                         @if($taxPayer->is_active == 1)
                                             <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}"
-                                               class="btn btn-xs btn-primary waves-effect waves-light">सक्रिय</a>
+                                               class="btn btn-xs btn-primary waves-effect waves-light" style="width: 50px;">सक्रिय</a>
                                         @else
                                             <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}"
-                                               class="btn btn-xs btn-danger waves-effect waves-light">निष्क्रिय</a>
+                                               class="btn btn-xs btn-danger waves-effect waves-light" style="width: 50px;">निष्क्रिय</a>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                     {{--    @can('taxPayerLand_access')
                                             <a
                                                 href="{{route('admin.revenue.taxPayer.taxPayerLand.index',[$taxPayer])}}"
@@ -79,13 +79,13 @@
                                         @can('taxPayer_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.taxPayer.edit',[$taxPayer])}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('taxPayer_access')
                                             <a href="{{route('admin.revenue.taxPayer.show',[$taxPayer])}}"
-                                               class="btn btn-xs btn-outline-success">
+                                               class="btn btn-xs btn-outline-success" title="">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
@@ -96,7 +96,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

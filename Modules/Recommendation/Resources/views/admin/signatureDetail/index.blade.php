@@ -69,7 +69,7 @@
                                             <i class="fa fa-2x {{ $signatureDetail->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.edit', $signatureDetail) }}"

@@ -64,7 +64,7 @@
                                             @endforeach
                                         </ul>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('taskActivity_access')
                                             <a
                                                 href="{{route('admin.taskManagement.activity.show',$activity)}}"

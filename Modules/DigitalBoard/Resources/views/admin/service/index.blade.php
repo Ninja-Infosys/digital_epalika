@@ -55,7 +55,7 @@
                                     <td>{{$service->branch->branch_name??''}}</td>
                                     <td>{{$service->responsible_officer}}</td>
                                     <td>{{$service->office}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a href="{{route('admin.digitalBoard.service.serviceEmployee.index',$service)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-plus-circle"></i>

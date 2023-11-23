@@ -52,7 +52,7 @@
                                 <td>{{$hospital->phone ?? ''}}</td>
                                 <td>{{$hospital->email ?? ''}}</td>
                                 <td>{{$hospital->address ?? ''}}</td>
-                                <td>
+                                <td class="d-flex gap-1">
                                     <a data-bs-type="edit" href="{{route('identity.admin.setting.hospital.edit', $hospital)}}"
                                        type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                         <i class="fa fa-edit"></i>
@@ -61,7 +61,7 @@
                                           method="post">
                                         @csrf
                                         @method('delete')
-                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
+                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

@@ -54,30 +54,31 @@
                             </div>
 
                         </div>
-                        @foreach($users as $key => $user)
+                        @foreach($users as $index => $user)
                         <div class="col-md-12 mb-2">
                             <label for="title" class="form-label">प्रयोगकर्ता *</label>
                             <div class="row">
                                 <div class="col-md-3 d-flex">
-                                    <input type="checkbox" name="users[{{ $key }}][user_id]" value="{{ $user['user_id'] }}" class="form-check @error('title') is-invalid @enderror me-1" {{ in_array($user['user_id'], old("users.$key.user_id", $mapPassGroup->users->pluck('user_id')->toArray())) ? 'checked' : '' }} id="users.{{ $key }}" />
-                                    <label for="users.{{ $key }}">{{ $user['name'] }}</label>
+                                    <input type="checkbox" name="users[{{ $index }}][user_id]" value="{{ $user['id'] }}" class="form-check @error('title') is-invalid @enderror me-1" {{ in_array($user['id'], old('users', $mapPassGroup->users->pluck('id')->toArray())) ? 'checked' : '' }} id="users{{ $user['id'] }}}}" />
+                                    <label for="users{{ $user['id'] }}}}">{{ $user->name }}</label>
                                 </div>
-                                @error("users.$key.user_id")
+                                @error("users.$index.user_id")
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            @error("users.$key")
+                            @error('users')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+
                             <div class="col-md-3 mb-2">
                                 <label for="ward_no" class="form-label">वडा नं *</label>
-                                <select name="users[{{ $key }}][ward_no][]" class="form-select" multiple>
+                                <select name="users[{{ $index }}][ward_no][]" class="form-select" multiple>
                                     <option value="">-- छान्नुहोस् --</option>
                                     @foreach (officeSetting()->localBody->ward_no as $ward)
-                                        <option value="{{ $ward }}" {{ in_array($ward, old("users.$key.ward_no", $mapPassGroup->users->where('user_id', $user['user_id'])->pluck('ward_no')->toArray())) ? 'selected' : '' }}>{{ $ward }}</option>
+                                        <option value="{{ $ward }}" {{ in_array($ward, old("users.$index.ward_no",explode(',',DB::table('map_pass_group_user')->where('map_pass_group_id',$mapPassGroup->id)->where('user_id',  $user['id'])->first()?->ward_no))) ? 'selected' : '' }}>{{ $ward }}</option>
                                     @endforeach
                                 </select>
-                                @error("users.$key.ward_no")
+                                @error("users.$index.ward_no")
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
