@@ -5,10 +5,15 @@ namespace Modules\EMap\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\FormStoreNotification;
+use App\Notifications\PaymentStoreNotification;
+use App\Notifications\StepNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\PaymentStore;
@@ -44,10 +49,10 @@ class AdminStepController extends Controller
         return view('emap::admin.step.formFill', compact('mapApply', 'form'));
     }
 
-    public function updateAppliedDocumentStatus(Request $request, AppliedDocument $appliedDocument)
+    public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $appliedDocument) {
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument) {
             $appliedDocument->update([
                 'status' => $request->input('status')
             ]);
@@ -56,16 +61,17 @@ class AdminStepController extends Controller
                 "status" => $request->input('status'),
                 "comment" => $request->input('comment'),
             ]);
+            Notification::send($mapApply->organization, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
         });
 
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
         return back();
     }
 
-    public function updateFormStoreStatus(Request $request, FormStore $formStore)
+    public function updateFormStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
     {
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $formStore) {
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore) {
             $formStore->update([
                 'status' => $request->input('status')
             ]);
@@ -76,17 +82,18 @@ class AdminStepController extends Controller
                 "data" => $formStore->data,
                 "fields" => $formStore->fields
             ]);
+            Notification::send($mapApply->organization, new FormStoreNotification($mapApply, $form, $formDataType, $formStore));
         });
 
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
         return back();
     }
 
-    public function updatePaymentStoreStatus(Request $request, PaymentStore $paymentStore)
+    public function updatePaymentStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, PaymentStore $paymentStore)
     {
         $this->getStatusValidation($request);
 
-        DB::transaction(function () use ($request, $paymentStore) {
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore) {
             $paymentStore->update([
                 'status' => $request->input('status')
             ]);
@@ -97,6 +104,7 @@ class AdminStepController extends Controller
                 "bill" => $paymentStore->bill,
                 "amount" => $paymentStore->amount
             ]);
+            Notification::send($mapApply->organization, new PaymentStoreNotification($mapApply, $form, $formDataType, $paymentStore));
         });
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
         return back();
