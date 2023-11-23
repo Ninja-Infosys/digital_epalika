@@ -27,7 +27,7 @@
                         <span class="mdi mdi-magnify"></span>
                     </div>
                 </form>
-                <div class="pt-2 mt-md-0">
+                <div class="pt-2 mt-md-0 d-flex gap-1">
                     <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list"></i>
                     </button>
                     <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list-alt"></i>
