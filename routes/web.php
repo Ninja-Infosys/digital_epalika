@@ -43,6 +43,7 @@ Route::get('organization', [FrontController::class, 'org'])->name('organization'
 Route::get('executive', [FrontController::class, 'executive'])->name('executive');
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
+Route::get('ward/{ward}', [FrontController::class,'wardIndex'])->name('wardIndex');
 
 Route::get('/static/notice', [FrontController::class, 'notice'])->name('notice');
 Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNotice'])->name('single-notice');

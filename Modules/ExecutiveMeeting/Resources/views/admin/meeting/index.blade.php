@@ -69,8 +69,8 @@
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <a href="{{ route('admin.executiveMeeting.meeting.show', $meeting) }}"
-                                                    class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-eye"> विवरण </i>
+                                                title="सम्पादन गर्नुहोस्" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                                 <button type="button"
                                                     class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
