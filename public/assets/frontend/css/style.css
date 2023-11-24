@@ -55,10 +55,15 @@ p{
 .bg-main{
     background-color: var(--mainColor);
 }
-/* .main-heading {
+.main-heading {
     font-family: 'Noto Sans Devanagari', sans-serif;
-    color: #E30814;
-} */
+    color: #fff;
+}
+
+.sub-title {
+    font-size: 15px !important;
+    line-height: 22px;
+  }
 
 .carousel-item>img {
     object-fit: cover;
