@@ -466,7 +466,7 @@ p{
 .move {
     position: relative;
     box-sizing: border-box;
-    animation: marquee 50s linear infinite;
+    animation: marquee 510s linear infinite;
     margin: 0 auto;
     text-align: center;
     color: var(--mainColor);
