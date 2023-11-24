@@ -57,9 +57,9 @@
                                     <td>रु. {{$revenue->amount}}</td>
                                     <td>
                                         @if($revenue->is_active == 1)
-                                            <a href="{{route('admin.revenue.setting.revenue.update-status', $revenue)}}" class="btn btn-success btn-sm" title="सक्रिय"></a>
+                                            <a href="{{route('admin.revenue.setting.revenue.update-status', $revenue)}}" class="btn btn-success btn-sm" style="width: 50px;">सक्रिय</a>
                                         @else
-                                            <a href="{{route('admin.revenue.setting.revenue.update-status', $revenue)}}" class="btn btn-danger btn-sm" title="निष्क्रिय"></a>
+                                            <a href="{{route('admin.revenue.setting.revenue.update-status', $revenue)}}" class="btn btn-danger btn-sm" style="width: 50px;">निष्क्रिय</a>
                                         @endif
                                     </td>
                                     <td>{{$revenue->description}}</td>

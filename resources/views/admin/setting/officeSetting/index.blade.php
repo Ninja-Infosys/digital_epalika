@@ -277,7 +277,7 @@
                                     <td>{{$officeheader->font}}</td>
                                     <td>{{$officeheader->font_size}}(.rem)</td>
                                     <td>{{$officeheader->position}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
 
                                         @can('officeHeader_edit')
                                             <a data-bs-type="edit"
