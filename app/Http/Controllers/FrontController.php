@@ -36,7 +36,7 @@ class FrontController extends Controller
             || Route::has('grant.index')
             || Route::has('payment.index')
             || Route::has('roaster.index')) {
-            return view('frontend.welcome');
+            return redirect(route('digital-service'));
         } else {
             return redirect(route('login'));
         }
@@ -52,6 +52,11 @@ class FrontController extends Controller
 
             return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDecisions', 'sliders', 'municipalDetails'));
         }*/
+    }
+
+    public function digitalService()
+    {
+        return view('frontend.welcome');
     }
 
     public function notice()
