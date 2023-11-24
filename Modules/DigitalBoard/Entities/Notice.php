@@ -36,6 +36,46 @@ class Notice extends Model
         'fiscal_year_id',
     ];
 
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    // public function files(): MorphMany
+    // {
+    //     return $this->morphMany(File::class, 'model');
+    // }
+
+    // public function fiscalYear(): BelongsTo
+    // {
+    //     return $this->belongsTo(FiscalYear::class);
+    // }
+
+    // public function scopeShowInIndex($builder)
+    // {
+    //     return $builder->where('show_on_index', 1);
+    // }
+
+    // public function scopeHideInIndex($builder)
+    // {
+    //     return $builder->where('show_on_index', 0);
+    // }
+
+    // public function scopeNullClosedAt($builder)
+    // {
+    //     return $builder->whereNull('closed_at');
+    // }
+
+    // public function scopeNotice($builder)
+    // {
+    //     return $builder->where('type', 'Notice');
+    // }
+
+    // public function scopeNews($builder)
+    // {
+    //     return $builder->where('type', "News");
+    // }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -46,10 +86,6 @@ class Notice extends Model
         return $this->morphMany(File::class, 'model');
     }
 
-    public function fiscalYear(): BelongsTo
-    {
-        return $this->belongsTo(FiscalYear::class);
-    }
 
     public function scopeShowInIndex($builder)
     {
@@ -66,13 +102,9 @@ class Notice extends Model
         return $builder->whereNull('closed_at');
     }
 
-    public function scopeNotice($builder)
+    public function scopeContentType($builder, string $type)
     {
-        return $builder->where('type', 'Notice');
-    }
+        return $builder->where('type', $type);
 
-    public function scopeNews($builder)
-    {
-        return $builder->where('type', "News");
     }
 }
