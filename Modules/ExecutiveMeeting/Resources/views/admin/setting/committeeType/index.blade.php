@@ -55,7 +55,7 @@
                                         @can('committeeType_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.executiveMeeting.setting.committeeType.edit',$committeeType)}}"
-                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -67,7 +67,7 @@
                                                 @method('delete')
                                                 <button data-bs-type="delete"
                                                         class="btn btn-xs me-1 btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
+                                                    <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनूहोस्"></i>
                                                 </button>
                                             </form>
                                         @endcan

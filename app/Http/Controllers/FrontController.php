@@ -143,4 +143,8 @@ class FrontController extends Controller
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
     }
+    public function wardIndex($ward)
+    {
+        return view('frontend.wardIndex', compact('ward'));
+    }
 }

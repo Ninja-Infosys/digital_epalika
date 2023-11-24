@@ -1,17 +1,14 @@
- <div class="newsbar-container">
-                <div class="flex-shrink-0 newsbar-title">समाचार</div>
-                <div class="d-block jctkr-wrapper jctkr-initialized">
-                    <div class="marquee-list">
-                        <marquee onmouseover="stop()" onmouseout="start()">
-                            @foreach($scrollNews as $news)
-                                <span>
-                                    <a href="#">
-                                        {{Str::words($news->title,12)}} <small>({{$news->date}})</small>
-                                        <span class="type">नयाँ</span>
-                                    </a>
-                                </span>
-                            @endforeach
-                        </marquee>
-                    </div>
-                </div>
-            </div>
+<div class="news-slider-wrapper">
+    <div class="d-flex align-items-center w-100">
+        <h2>समाचार</h2>
+        <marquee behavior="scroll" scrolldelay="100" scrollamount="6">
+            <ul class="news-list mt-3">
+                @foreach($scrollNews as $scrollNew)
+                    <li>
+                        {{$scrollNew->title}}
+                    </li>
+                @endforeach
+            </ul>
+        </marquee>
+    </div>
+</div>

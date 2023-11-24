@@ -66,11 +66,11 @@
                                     <td>
                                         <x-ad-to-bs id="fbs_{{$loop->iteration}}" adDate="{{$businessRegistrationTemplate->created_at->toDateString()}}" />
                                     </td>
-                                    <td>
+                                    <td class="d-flex flex-wrap">
                                         @can('businessRegistrationTemplate_edit')
                                             <a data-bs-type="edit" href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.edit',[$templateTypeEnum,$businessRegistrationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
 
@@ -80,8 +80,8 @@
                                                 @method('delete')
                                                 @can('businessRegistrationTemplate_delete')
                                                     @if($businessRegistrationTemplate->status==0)
-                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनूहोस्">
+                                                        <i class="fa fa-trash"></i>
                                                     </button>
                                                     @endif
                                                 @endcan

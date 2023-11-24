@@ -69,7 +69,7 @@
                                     </td>
                                     <td>
                                         <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                           class="btn btn-xs btn-outline-primary" title="थप हेर्नुहोस्">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>

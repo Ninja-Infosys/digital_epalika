@@ -52,9 +52,9 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$role->title}}</td>
-                                    <td>
-                                        <a href="{{route('admin.userManagement.role.letterHead',$role)}}" class="btn btn-xs btn-outline-secondary">
-                                            <i class="fa fa-file"> लेटर हेड</i>
+                                    <td class="d-flex gap-1">
+                                        <a href="{{route('admin.userManagement.role.letterHead',$role)}}" class="btn btn-xs btn-outline-secondary" title="लेटर हेड">
+                                            <i class="fa fa-file"></i>
                                         </a>
                                             <a data-bs-type="edit" href="{{route('admin.userManagement.role.edit',$role)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">

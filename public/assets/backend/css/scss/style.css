@@ -3,7 +3,11 @@
 * {
   font-family: "Poppins", sans-serif;
 }
-
+.user{
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #3a57a4;
+}
 body {
   background: #F3F4F6;
 }

@@ -57,7 +57,7 @@
                                         {{$type->measurementUnit->first()->title ?? ''}}
                                     </td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('MeasurementUnit_edit')
                                             <a data-bs-type="edit" href="{{route('admin.units.measurementUnit.edit',$type->measurementUnit->first())}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
@@ -83,7 +83,7 @@
                                             {{$unit->title ?? ''}}
                                         </td>
 
-                                        <td>
+                                        <td class="d-flex gap-1">
                                             @can('MeasurementUnit_edit')
                                                 <a data-bs-type="edit" href="{{route('admin.units.measurementUnit.edit',$unit)}}"
                                                    class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
