@@ -27,7 +27,7 @@
 </head>
 <body>
 <div id="preloader">
-    <img class="heartBeat animate" src="{{asset('assets/backend/images/logo.png')}}">
+    <img class="heartBeat animate" src="{{asset('assets/backend/images/logo.png')}}" alt="">
 </div>
 <div id="wrapper">
     @include('admin.layouts.header')
