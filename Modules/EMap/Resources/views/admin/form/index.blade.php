@@ -3,13 +3,14 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-            <h4 class="page-title">नक्शा पास मर्यादाक्रम </h4>
+                <h4 class="page-title">नक्शा पास मर्यादाक्रम </h4>
                 <div class="">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
+                                    alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -66,7 +67,8 @@
                                             @can('mapFee_edit')
                                                 <a data-bs-type="edit" href="{{ route('emap.admin.form.edit', $form) }}"
                                                     class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
-                                                    <i class="fa fa-edit"></i>
+                                                    <i class="fa fa-edit" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="सम्पादन गर्नुहोस"></i>
                                                 </a>
                                             @endcan
 
@@ -76,8 +78,9 @@
                                                 @can('mapFee_delete')
                                                     <button data-bs-type="delete"
                                                         class="btn btn-xs me-1 btn-outline-danger show_confirm">
-                                                        <i
-                                                            class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"></i>
+                                                        <i class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            title="मेटाउनु होस्"></i>
                                                     </button>
                                                 @endcan
                                             </form>

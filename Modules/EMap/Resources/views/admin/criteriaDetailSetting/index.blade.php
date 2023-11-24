@@ -61,12 +61,12 @@
                                     <td class="d-flex">
                                         <a data-bs-type="edit"
                                            href="{{route('emap.admin.criteriaDetailSetting.edit',$criteriaDetailSetting)}}"
-                                           class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                           class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" data-bs-toggle="tooltip" data-bs-placement="top" title="सम्पादन गर्नुहोस">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        {{-- <a
+                                        {{-- <a data-bs-type="show"
                                             href="{{route('emap.admin.criteriaDetailSetting.show',$dynamicForm)}}"
-                                            class="btn btn-xs me-1 btn-outline-warning ">
+                                            class="btn btn-xs me-1 btn-outline-warning"  data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
                                         </a> --}}
                                         <form action="{{route('emap.admin.criteriaDetailSetting.destroy',$criteriaDetailSetting)}}"
@@ -75,7 +75,7 @@
                                             @method('delete')
                                             <button data-bs-type="delete"
                                                     class="btn btn-xs me-1 btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"></i>
+                                                <i class="fa fa-trash {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्"></i>
                                             </button>
                                         </form>
                                     </td>
