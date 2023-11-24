@@ -60,7 +60,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                            <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateFormStoreStatus',$formStore) }}">
+                                            <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateFormStoreStatus',[$mapApply,$form,$formDataType,$formStore]) }}">
                                                 @csrf
                                                 @method('put')
                                                         <div class="mb-3">
