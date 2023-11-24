@@ -57,8 +57,8 @@
                             </td>
                             <td>{{ $notification->created_at->diffForHumans() }}</td>
                             <td>
-                                <a href="{{ route('organization.admin.notification.read',$notification) }}"
-                                   class="btn btn-outline-primary btn-sm">
+                                <a data-bs-type="show" href="{{ route('organization.admin.notification.read',$notification) }}"
+                                   class="btn btn-outline-primary btn-sm"  data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>

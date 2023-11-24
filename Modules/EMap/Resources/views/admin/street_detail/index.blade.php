@@ -61,15 +61,17 @@
                                         <td>{{ $streetDetail->from }}</td>
                                         <td>{{ $streetDetail->to }}</td>
                                         <td>{{ $streetDetail->setback }}</td>
-                                        <td>{{$streetDetail->street_code}}</td>
-                                        <td>{{$streetDetail->condition->label()}}</td>
-                                        <td>{{$streetDetail->wards}}</td>
-                                        <td>{{$streetDetail->right_of_way}}</td>
-                                        <td>{{$streetDetail->width}}</td>
-                                        <td>{{$streetDetail->road_type->label()}}</td>
+                                        <td>{{ $streetDetail->street_code }}</td>
+                                        <td>{{ $streetDetail->condition->label() }}</td>
+                                        <td>{{ $streetDetail->wards }}</td>
+                                        <td>{{ $streetDetail->right_of_way }}</td>
+                                        <td>{{ $streetDetail->width }}</td>
+                                        <td>{{ $streetDetail->road_type->label() }}</td>
                                         <td class="d-flex">
-                                            <a href="{{ route('emap.admin.streetDetail.edit', $streetDetail) }}"
-                                                class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                            <a data-bs-type="edit"
+                                                href="{{ route('emap.admin.streetDetail.edit', $streetDetail) }}"
+                                                class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="सम्पादन गर्नुहोस">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form action="{{ route('emap.admin.streetDetail.destroy', $streetDetail) }}"
@@ -78,7 +80,7 @@
                                                 @method('delete')
                                                 <button data-bs-type="delete"
                                                     class="btn btn-xs me-1 btn-outline-danger show_confirm"
-                                                    ata-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्">
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="मेटाउनु होस्">
                                                     <i
                                                         class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"></i>
 

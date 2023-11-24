@@ -62,11 +62,11 @@
                                     </td>
                                     <td>{{$municipalDetail->count}}</td>
                                     <td>{{$municipalDetail->position}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('municipalDetail_edit')
                                         <a data-bs-type="edit" href="{{route('admin.website.municipalDetail.edit',$municipalDetail)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i> 
                                         </a>
                                         @endcan
                                         <form
@@ -75,8 +75,8 @@
                                             @csrf
                                             @method('delete')
                                             @can('municipalDetail_delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title=" मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                             @endcan
                                         </form>

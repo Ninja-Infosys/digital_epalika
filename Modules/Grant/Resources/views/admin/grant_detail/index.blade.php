@@ -60,7 +60,7 @@
                                     <td>{{$grantDetail->is_old ? 'निरन्तरता': 'नयाँ'}}</td>
                                     <td class="text-center">{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}}</td>
                                     <td>{{$grantDetail->contact}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('grantDetail_edit')
                                             <a data-bs-type="edit" href="{{route('admin.grant.grantDetail.edit', $grantDetail)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">

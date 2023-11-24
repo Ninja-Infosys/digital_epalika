@@ -32,7 +32,7 @@
                         @csrf
                         <div class="row">
                             @if($recommendationTemplateSetting)
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-12 mb-2 d-flex">
                                     <h4 class="form-label">स्थिति</h4>
                                     <a href="{{ route('identity.admin.setting.recommendationTemplateSetting.updateStatus', $recommendationTemplateSetting ?? '') }}"
                                        class="btn btn-xs btn-outline-{{ !empty($recommendationTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
@@ -46,12 +46,14 @@
                                 @foreach ((new \Modules\Identity\Entities\DisabilityIdentityCard())->getTemplateOptions() as $template)
                                     <div class="mt-2">
                                         <h4>{{ $template['title'] ?? '' }} </h4>
-                                        <div class="button-list">
+                                        <div class="button-list d-flex flex-wrap mb-2">
                                             @foreach ($template['data'] as $key => $templateValue)
+                                            <div class="d-flex d-warp">
                                                 <button type="button" class="btn btn-outline-primary btn-xs"
                                                     onclick="copyText('{{ $templateValue }}')">
                                                     {{ $key }}
                                                 </button>
+                                            </div>
                                             @endforeach
                                         </div>
                                     </div>

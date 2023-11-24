@@ -478,18 +478,23 @@ if (!function_exists('get_nepali_count')) {
     }
 }
 
-if (!function_exists('replaceFormPlaceholderWith'))
-{
-    function replaceFormPlaceholderWith($fieldName,$fieldValue,$formContent): array|string
+if (!function_exists('replaceFormPlaceholderWith')) {
+    function replaceFormPlaceholderWith($fieldName, $fieldValue, $formContent): array|string
     {
-    return str_replace($fieldName, $fieldValue, $formContent);
+        return str_replace($fieldName, $fieldValue, $formContent);
     }
 }
 
-if (!function_exists('checkWard'))
-{
+if (!function_exists('checkWard')) {
     function checkWard(array $wards)
     {
 
+    }
+}
+
+if (!function_exists('checkSuperAdmin')) {
+    function checkSuperAdmin(): bool
+    {
+        return auth()->user()->load('role')?->role?->type == 'Super';
     }
 }

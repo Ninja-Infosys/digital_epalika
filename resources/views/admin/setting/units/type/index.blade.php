@@ -55,7 +55,7 @@
                                         {{$type->title}}
                                     </td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('unitType_edit')
                                             <a data-bs-type="edit" href="{{route('admin.units.type.edit',$type)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">

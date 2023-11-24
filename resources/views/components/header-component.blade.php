@@ -1,4 +1,4 @@
-<div class="d-flex gap-4">
+{{-- <div class="d-flex gap-4">
     <div class="main-heading text-center">
         @foreach ($headers as $header)
             <div
@@ -19,4 +19,21 @@
             <h6><i class="fa fa-envelope"></i> {{$officeSetting->email??''}}</h6>
         </div>
     @endif
+</div> --}}
+
+
+<div class="main-heading">
+    <h2 class="sub-title mb-1">
+        @foreach($headers as $header)
+            @if($loop->first)
+                    {{$header->title}}
+                @else
+                <span class="d-block">{{$header->title}}</span>
+            @endif
+        @endforeach
+
+        </h2>
+        <a class="link-btn mt-2 text-decoration-none" href="tel:{{officeSetting($ward ?? null)->phone}}">
+            फोन नं - {{officeSetting($ward ?? null)->phone}}
+        </a>
 </div>

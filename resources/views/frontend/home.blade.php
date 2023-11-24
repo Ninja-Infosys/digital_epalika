@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master')
+{{-- @extends('frontend.layouts.master')
 @section('content')
     <section class="home-section mt-3">
         <div class="row">
@@ -213,4 +213,4 @@
             </div>
         </div>
     </section>
-@endsection
+@endsection --}}
