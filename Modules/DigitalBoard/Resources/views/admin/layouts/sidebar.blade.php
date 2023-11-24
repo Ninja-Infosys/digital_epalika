@@ -36,3 +36,10 @@
         </a>
     </li>
 
+
+    <li class="{{request()->routeIs('admin.digitalBoard.citizenCharter.*') ? 'active' : ''}}">
+        <a href="{{route('admin.digitalBoard.citizenCharter.index')}}">
+            <i class="fa fa-scroll"></i>
+            <span> नागरिक वडापत्र</span>
+        </a>
+    </li>

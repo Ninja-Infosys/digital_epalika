@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\DigitalBoard\Entities\CitizenCharter;
 use Modules\DigitalBoard\Entities\Service;
 
 class Branch extends Model
@@ -75,5 +76,10 @@ class Branch extends Model
     {
         $this->load('services', 'branchServices');
         return count($this->services ?? 0) + count($this->branchServices ?? 0);
+    }
+
+    public function citizenCharters(): HasMany
+    {
+        return $this->hasMany(CitizenCharter::class);
     }
 }

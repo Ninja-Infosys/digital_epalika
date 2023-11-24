@@ -19,9 +19,9 @@
 @if(config('app.website_type') === 'website')
     @include('frontend.partials.navbar')
 @endif
-<div class="container-fluid">
+
     @yield('content')
-</div>
+
 
 @if(config('app.website_type') === 'website')
     @include('frontend.partials.website_footer')

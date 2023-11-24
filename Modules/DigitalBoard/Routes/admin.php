@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\DigitalBoard\Http\Controllers\Admin\CitizenCharterController;
 use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController;
 use Modules\DigitalBoard\Http\Controllers\Admin\NoticeController;
 use Modules\DigitalBoard\Http\Controllers\Admin\ServiceController;
@@ -15,3 +16,4 @@ Route::get('{type}/notice/{notice}/updateShowOnIndex', [NoticeController::class,
 
 Route::resource('service', ServiceController::class);
 Route::resource('service/{service}/serviceEmployee', ServiceEmployeeController::class)->names('service.serviceEmployee');
+Route::resource('citizenCharter',CitizenCharterController::class);
