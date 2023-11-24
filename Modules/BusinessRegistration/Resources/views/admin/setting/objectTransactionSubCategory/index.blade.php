@@ -57,8 +57,8 @@
                                     <td>
                                         @can('objectTransactionSubCategory_edit')
                                         <a data-bs-type="edit" href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.edit',$objectTransactionSubCategory)}}"
-                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         @endcan
                                         <form action="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.destroy',$objectTransactionSubCategory)}}"
@@ -66,8 +66,8 @@
                                             @csrf
                                             @method('delete')
                                             @can('objectTransactionSubCategory_delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"title="मेटाउनूहोस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                             @endcan
                                         </form>
