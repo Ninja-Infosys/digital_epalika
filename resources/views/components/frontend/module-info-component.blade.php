@@ -1,6 +1,6 @@
 <div class="row">
     @if(Route::has('grievanceHandling.grievance'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="{{route('grievanceHandling.grievance')}}">
                     <div class="pt-4 text-center">
@@ -12,7 +12,7 @@
         </div>
     @endif
     @if(Route::has('ebps'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="{{route('ebps')}}">
                     <div class="pt-4 text-center">
@@ -24,7 +24,7 @@
         </div>
     @endif
     @if(Route::has('digitalBoard.helpdesk.helpdesk'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="{{route('digitalBoard.helpdesk.helpdesk')}}">
                     <div class="pt-4 text-center">
@@ -36,7 +36,7 @@
         </div>
     @endif
     @if(Route::has('recommendation.index'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="#">
                     <div class="pt-4 text-center">
@@ -48,7 +48,7 @@
         </div>
     @endif
     @if(Route::has('businessRegistration.business'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="{{route('businessRegistration.business')}}">
                     <div class="pt-4 text-center">
@@ -61,7 +61,7 @@
         </div>
     @endif
     @if(Route::has('grant.index'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="{{route('grant.index')}}">
                     <div class="pt-4 text-center">
@@ -73,7 +73,7 @@
         </div>
     @endif
     @if(Route::has('payment.index'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card disable_menu">
                 <a href="#">
                     <div class="pt-4 text-center">
@@ -85,7 +85,7 @@
         </div>
     @endif
     @if(Route::has('roaster.index'))
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="info-card">
                 <a href="{{route('roaster.index')}}">
                     <div class="pt-4 text-center">
@@ -96,4 +96,71 @@
             </div>
         </div>
     @endif
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://pams.fcgo.gov.np/">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/jinsi.png')}}" width="50" height="50">
+                    <h4 class="p-2">जिन्सी व्यवस्थापन प्रणाली </h4>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://sutra.fcgo.gov.np/">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h4 class="p-2">संचितकोष व्यवस्थापन प्रणाली  </h4>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://online.donidcr.gov.np/">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h4 class="p-2">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://ss.donidcr.gov.np/">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h4 class="p-2">सामाजिक सुरक्षा</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://mail.nepal.gov.np/">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h4 class="p-2">इमेल सेवा</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://attendance.gov.np/">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h4 class="p-2">कार्यालयको हाजिरी</h4>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
