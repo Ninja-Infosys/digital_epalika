@@ -5,7 +5,7 @@
     <div class="mt-2">
 
         <h4 class="mb-0 fw-bold text-white">{{auth()->user()?->name}}</h4>
-        <p class="text-white mb-0">{{auth()->user()?->load('branch')?->branch?->title}}</p>
+        <p class="text-white mb-0">{{auth()->user()?->load('branch')?->branch?->branch_name}}</p>
     </div>
 </div>
 @endif

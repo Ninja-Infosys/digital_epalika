@@ -57,8 +57,13 @@ p{
 }
 .main-heading {
     font-family: 'Noto Sans Devanagari', sans-serif;
-    color: #E30814;
+    color: #fff;
 }
+
+.sub-title {
+    font-size: 15px !important;
+    line-height: 22px;
+  }
 
 .carousel-item>img {
     object-fit: cover;
@@ -461,7 +466,7 @@ p{
 .move {
     position: relative;
     box-sizing: border-box;
-    animation: marquee 50s linear infinite;
+    animation: marquee 510s linear infinite;
     margin: 0 auto;
     text-align: center;
     color: var(--mainColor);

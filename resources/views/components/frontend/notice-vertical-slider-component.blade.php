@@ -20,7 +20,7 @@
         .move {
             position: relative;
             box-sizing: border-box;
-            animation: marquee {{$notices?->pluck('files_count')?->sum() <=0 ? 15 : $notices?->pluck('files_count')?->sum() * 35}}s linear infinite;
+            animation: marquee {{$notices?->pluck('files_count')?->sum() <=0 ? 510 : $notices?->pluck('files_count')?->sum() * 35}}s linear infinite;
             margin: 0 auto;
             text-align: center;
             color: var(--mainColor);
