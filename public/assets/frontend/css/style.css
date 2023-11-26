@@ -508,7 +508,7 @@ p{
     padding: 2px;
     right: 0;
     font-size: 12px;
-    background-color: var(--mainColor);
+    background: linear-gradient(180deg, #124f9f 0.01%, #071f3e 100%);
 }
 
 .footer-content {
@@ -619,7 +619,7 @@ video {
 }
 
 .info-card {
-    background-color: #0DCAF0;
+    background: linear-gradient(180deg, #124f9f 0.01%, #38557b  100%);
     margin-bottom: 20px;
 }
 
