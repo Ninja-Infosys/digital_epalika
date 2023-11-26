@@ -121,7 +121,7 @@
 
     <div class="col-md-3">
         <div class="info-card">
-            <a href="https://online.donidcr.gov.np/">
+            <a href="https://public.donidcr.gov.np/">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
                     <h4 class="p-2">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h4>
