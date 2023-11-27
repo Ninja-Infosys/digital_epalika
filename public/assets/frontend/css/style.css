@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 :root {
     --mainColor: #0047ab;
     --secondaryColor: #8AC5EF;
@@ -57,13 +62,23 @@ p{
 }
 .main-heading {
     font-family: 'Noto Sans Devanagari', sans-serif;
-    color: #E30814;
+    color: #fff;
 }
+
+.sub-title {
+    font-size: 15px !important;
+    line-height: 22px;
+  }
 
 .carousel-item>img {
     object-fit: cover;
     height: 400px;
 }
+
+.table > thead {
+    vertical-align: none;
+    font-size: 15px;
+  }
 
 
 
@@ -461,7 +476,7 @@ p{
 .move {
     position: relative;
     box-sizing: border-box;
-    animation: marquee 50s linear infinite;
+    animation: marquee 510s linear infinite;
     margin: 0 auto;
     text-align: center;
     color: var(--mainColor);
@@ -493,7 +508,7 @@ p{
     padding: 2px;
     right: 0;
     font-size: 12px;
-    background-color: var(--mainColor);
+    background: linear-gradient(180deg, #124f9f 0.01%, #071f3e 100%);
 }
 
 .footer-content {
@@ -604,7 +619,7 @@ video {
 }
 
 .info-card {
-    background-color: #0DCAF0;
+    background: linear-gradient(180deg, #124f9f 0.01%, #38557b  100%);
     margin-bottom: 20px;
 }
 

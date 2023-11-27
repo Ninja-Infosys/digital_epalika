@@ -8,6 +8,7 @@ use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Support\Facades\Route;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
@@ -25,10 +26,21 @@ class FrontController extends Controller
 
     public function index()
     {
-        if ($this->checkModuleExistence('DigitalBoard')) {
-            return view('frontend.welcome');
+        if (!$this->checkModuleExistence('DigitalBoard')) {
+            return view('frontend.digital_board');
+        } elseif (Route::has('grievanceHandling.grievance')
+            || Route::has('ebps')
+            || Route::has('digitalBoard.helpdesk.helpdesk')
+            || Route::has('recommendation.index')
+            || Route::has('businessRegistration.business')
+            || Route::has('grant.index')
+            || Route::has('payment.index')
+            || Route::has('roaster.index')) {
+            return redirect(route('digital-service'));
+        } else {
+            return redirect(route('login'));
         }
-        if (config('app.website_type') === 'website') {
+        /*if (config('app.website_type') === 'website') {
             $employees = Employee::orderBy('position')->get();
 
             $notices = Notice::where('type', 'Notice')->orderBy('date')->limit(3)->get();
@@ -39,9 +51,12 @@ class FrontController extends Controller
             $municipalDetails = MunicipalDetail::all();
 
             return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDecisions', 'sliders', 'municipalDetails'));
-        }
+        }*/
+    }
 
-        return view('frontend.digital_board');
+    public function digitalService()
+    {
+        return view('frontend.welcome');
     }
 
     public function notice()
@@ -143,6 +158,7 @@ class FrontController extends Controller
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
     }
+
     public function wardIndex($ward)
     {
         return view('frontend.wardIndex', compact('ward'));

@@ -53,11 +53,11 @@
                                     <td>{{$slider->title}}</td>
                                     <td><img src="{{asset($slider->image_url)}}" height="60" width="100" alt="{{$slider->title}}"></td>
                                     <td>{{$slider->description}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('slider_edit')
                                         <a data-bs-type="edit" href="{{route('admin.website.slider.edit',$slider)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i> 
                                         </a>
                                         @endcan
                                         <form action="{{route('admin.website.slider.destroy',$slider)}}"
@@ -65,8 +65,8 @@
                                             @csrf
                                             @method('delete')
                                             @can('slider_delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i> 
                                             </button>
                                             @endcan
                                         </form>
