@@ -40,6 +40,7 @@ class OrganizationAuthController extends Controller
             return redirect()->route('organization.admin.dashboard');
         }
 
+
         return back()->withInput($request->only('email', 'remember'));
     }
 

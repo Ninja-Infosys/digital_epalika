@@ -5,7 +5,7 @@
                 <a href="{{route('grievanceHandling.grievance')}}">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/frontend/image/gunaso.png')}}" width="50" height="50">
-                        <h4 class="p-2">गुनासो</h4>
+                        <h6 class="p-2 text-white">गुनासो</h6>
                     </div>
                 </a>
             </div>
@@ -17,7 +17,7 @@
                 <a href="{{route('ebps')}}">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/backend/images/modules/emap.png')}}" width="50" height="50">
-                        <h4 class="p-2">घर-नक्सा</h4>
+                        <h6 class="p-2 text-white">घर-नक्सा</h6>
                     </div>
                 </a>
             </div>
@@ -29,7 +29,7 @@
                 <a href="{{route('digitalBoard.helpdesk.helpdesk')}}">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/frontend/image/help-desk.png')}}" width="50" height="50">
-                        <h4 class="p-2">हेल्प डेस्क</h4>
+                        <h6 class="p-2 text-white">हेल्प डेस्क</h6>
                     </div>
                 </a>
             </div>
@@ -41,7 +41,7 @@
                 <a href="#">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/frontend/image/sifarish.png')}}" width="50" height="50">
-                        <h4 class="p-2">सिफारिस</h4>
+                        <h6 class="p-2 text-white">सिफारिस</h6>
                     </div>
                 </a>
             </div>
@@ -54,7 +54,7 @@
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}" width="50"
                              height="50">
-                        <h4 class="p-2">व्यवसाय दर्ता</h4>
+                        <h6 class="p-2 text-white">व्यवसाय दर्ता</h6>
                     </div>
                 </a>
             </div>
@@ -66,7 +66,7 @@
                 <a href="{{route('grant.index')}}">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/frontend/image/anudan.png')}}" width="50" height="50">
-                        <h4 class="p-2">अनुदान</h4>
+                        <h6 class="p-2 text-white">अनुदान</h6>
                     </div>
                 </a>
             </div>
@@ -78,7 +78,7 @@
                 <a href="#">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/frontend/image/rajswa.png')}}" width="50" height="50">
-                        <h4 class="p-2">राजस्व</h4>
+                        <h6 class="p-2 text-white">राजस्व</h6>
                     </div>
                 </a>
             </div>
@@ -90,7 +90,7 @@
                 <a href="{{route('roaster.index')}}">
                     <div class="pt-4 text-center">
                         <img src="{{asset('assets/frontend/image/talim.png')}}" width="50" height="50">
-                        <h4 class="p-2">तालिम</h4>
+                        <h6 class="p-2 text-white">तालिम</h6>
                     </div>
                 </a>
             </div>
@@ -101,8 +101,8 @@
         <div class="info-card">
             <a href="https://pams.fcgo.gov.np/">
                 <div class="pt-4 text-center">
-                    <img src="{{asset('assets/frontend/image/jinsi.png')}}" width="50" height="50">
-                    <h4 class="p-2">जिन्सी व्यवस्थापन प्रणाली </h4>
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h6 class="p-2 text-white">जिन्सी व्यवस्थापन प्रणाली </h6>
                 </div>
             </a>
         </div>
@@ -113,7 +113,7 @@
             <a href="https://sutra.fcgo.gov.np/">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
-                    <h4 class="p-2">संचितकोष व्यवस्थापन प्रणाली  </h4>
+                    <h6 class="p-2 text-white">संचितकोष व्यवस्थापन प्रणाली  </h6>
                 </div>
             </a>
         </div>
@@ -121,10 +121,10 @@
 
     <div class="col-md-3">
         <div class="info-card">
-            <a href="https://online.donidcr.gov.np/">
+            <a href="https://public.donidcr.gov.np/">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
-                    <h4 class="p-2">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h4>
+                    <h6 class="p-2 text-white">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h6>
                 </div>
             </a>
         </div>
@@ -135,7 +135,7 @@
             <a href="https://ss.donidcr.gov.np/">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
-                    <h4 class="p-2">सामाजिक सुरक्षा</h4>
+                    <h6 class="p-2 text-white">सामाजिक सुरक्षा</h6>
                 </div>
             </a>
         </div>
@@ -146,7 +146,7 @@
             <a href="https://mail.nepal.gov.np/">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
-                    <h4 class="p-2">इमेल सेवा</h4>
+                    <h6 class="p-2 text-white">इमेल सेवा</h6>
                 </div>
             </a>
         </div>
@@ -158,7 +158,7 @@
             <a href="https://attendance.gov.np/">
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
-                    <h4 class="p-2">कार्यालयको हाजिरी</h4>
+                    <h6 class="p-2 text-white">कार्यालयको हाजिरी</h6>
                 </div>
             </a>
         </div>
