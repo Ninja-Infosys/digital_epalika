@@ -498,3 +498,19 @@ if (!function_exists('checkSuperAdmin')) {
         return auth()->user()->load('role')?->role?->type == 'Super';
     }
 }
+if (!function_exists('generateRandomRGBAColor')) {
+    function generateRandomRGBAColor(): string
+    {
+        // Generate random intensities for red, green, and blue channels
+        $red = mt_rand(0, 255);
+        $green = mt_rand(0, 255);
+        $blue = mt_rand(0, 255);
+
+        // Set alpha channel to 1
+        $alpha = 1;
+
+        // Create RGBA color code with random intensities for red, green, and blue channels
+        return "rgba($red, $green, $blue, $alpha)";
+    }
+}
+

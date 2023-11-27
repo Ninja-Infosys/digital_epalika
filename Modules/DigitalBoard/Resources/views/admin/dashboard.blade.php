@@ -50,7 +50,7 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    {{-- <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard')}}">
+    {{-- <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard.ajax')}}">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -76,17 +76,17 @@
             </div>
         </div>
 
-        
+
     </div> --}}
 
-    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard')}}">
+    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard.ajax')}}">
         <div class="col-md-6">
             <div class="card">
                 <h4>
                     महिना अनुसार सूचना समाचार
                 </h4>
                 <div class="card-body">
-                    <canvas id="barChart1"></canvas>
+                    <canvas id="allNoticeAccordingMonth" chart-type="bar"></canvas>
                 </div>
 
             </div>
@@ -96,86 +96,10 @@
                 <h4>
                     चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
                 </h4>
-                <div id="getNoticeAccordingToMonth" chart-type="column" chart-title="चालु आ.वका सूचना समाचार"></div>
                 <div class="card-body">
-                    <canvas id="steppedlineChart"></canvas>
+                    <canvas id="allNoticeAccordingFY" chart-type="line"> </canvas>
                 </div>
 
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>
-                    कुलसूचना समाचार विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="doughNut1"></canvas>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>
-                    भुक्तानी अनुसार कुल राजस्व विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="pieChart1"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>
-                    विषय अनुसार तालिम विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="polarAreaChart1"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    आर्थिक वर्ष अनुशारको घरनाक्स विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="barChartHorizontal" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    आर्थिक वर्ष अनुसार व्यवसाय विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="lineChart1" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    वर्ग अनुसार अपांगता विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="bubbleChart" ></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    चालु अर्थिक अनुसार दर्ता/चलानी विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="barChart2" height="170"></canvas>
-                </div>
             </div>
         </div>
     </div>
@@ -188,7 +112,7 @@
     @endpush --}}
     @push('scripts')
     <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-    <script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
+    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
 @endpush
 
 @endsection
