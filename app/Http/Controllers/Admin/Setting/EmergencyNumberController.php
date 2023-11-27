@@ -6,6 +6,7 @@ use App\Http\Requests\Setting\EmergencyNumber\StoreEmergencyNumberRequest;
 use App\Http\Requests\Setting\EmergencyNumber\UpdateEmergencyNumberRequest;
 use App\Models\Settings\EmergencyNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\EmergencyCategory;
 
 class EmergencyNumberController extends Controller
 {
@@ -21,14 +22,13 @@ class EmergencyNumberController extends Controller
     public function create()
     {
         $this->checkAuthorization('emergencyNumber_create');
-
-        return view('admin.setting.emergencyNumber.create');
+        $emergencyCategories = EmergencyCategory::all();
+        return view('admin.setting.emergencyNumber.create', compact('emergencyCategories'));
     }
 
     public function store(StoreEmergencyNumberRequest $request)
     {
         $this->checkAuthorization('emergencyNumber_create');
-
         EmergencyNumber::create($request->validated());
 
         toast('आपतकालीन नम्बर सफलतापूर्वक थपियो', 'success');
@@ -38,8 +38,9 @@ class EmergencyNumberController extends Controller
     public function edit(EmergencyNumber $emergencyNumber)
     {
         $this->checkAuthorization('emergencyNumber_edit');
+        $emergencyCategories = EmergencyCategory::all();
 
-        return view('admin.setting.emergencyNumber.edit', compact('emergencyNumber'));
+        return view('admin.setting.emergencyNumber.edit', compact('emergencyNumber', 'emergencyCategories'));
     }
 
     public function update(UpdateEmergencyNumberRequest $request, EmergencyNumber $emergencyNumber)
@@ -50,7 +51,7 @@ class EmergencyNumberController extends Controller
 
         toast('आपतकालीन नम्बर सफलतापूर्वक अपडेट गरियो', 'success');
 
-        return redirect(route('admin.emergencyNumber.index'));
+        return redirect(route('admin.generalSetting.emergencyNumber.index'));
     }
 
     public function destroy(EmergencyNumber $emergencyNumber)

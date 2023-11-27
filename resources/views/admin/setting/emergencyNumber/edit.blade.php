@@ -39,11 +39,20 @@
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <label for="type" class="form-label">प्रकार आबश्यक छ *</label>
-                                <input id="title" type="text" name="type" placeholder="प्रकार"
-                                       class="form-control @error('type') is-invalid @enderror"
-                                       value="{{old('type', $emergencyNumber->type)}}">
-                                @error('type')
-                                <div class="text-danger">{{$message}}</div>
+                                <select name="emergency_category_id"
+                                    class="form-select @error('emergency_category_id') is-invalid @enderror"
+                                    id="emergency_category_id" required>
+                                    <option value="">छान्नुहोस्</option>
+                                    @foreach ($emergencyCategories as $emergencyCategory)
+                                        <option
+                                            {{ $emergencyCategory->id == old('emergency_category_id', $emergencyNumber->emergency_category_id) ? 'selected' : '' }}
+                                            value="{{ $emergencyCategory->id }}">
+                                            {{ $emergencyCategory->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('emergency_category_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 

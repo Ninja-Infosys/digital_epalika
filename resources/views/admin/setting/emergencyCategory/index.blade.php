@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> आपतकालीन सम्पर्क सूची</h4>
+                        <h4 class="header-title"> आपतकालीन सम्पर्कको वर्गको सूची</h4>
                         @can('emergencyNumber_create')
-                            <a href="{{route('admin.generalSetting.emergencyNumber.create')}}"
+                            <a href="{{route('admin.generalSetting.emergencyCategory.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -41,29 +41,25 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>प्रकार</th>
                                 <th>शिर्षक</th>
-                                <th>आपतकालीन सम्पर्क नं.</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($EmergencyNumbers as $EmergencyNumber)
+                            @forelse($EmergencyCategories as $EmergencyCategory)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$EmergencyNumber->emergencyCategory->title}}</td>
-                                    <td>{{$EmergencyNumber->title}}</td>
-                                    <td>{{$EmergencyNumber->contact_no}}</td>
+                                    <td>{{$EmergencyCategory->title}}</td>
 
                                     <td class="d-flex gap-1">
                                         @can('emergencyNumber_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.emergencyNumber.edit', $EmergencyNumber)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.emergencyCategory.edit', $EmergencyCategory)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('emergencyNumber_delete')
-                                            <form action="{{route('admin.generalSetting.emergencyNumber.destroy', $EmergencyNumber)}}"
+                                            <form action="{{route('admin.generalSetting.emergencyCategory.destroy', $EmergencyCategory)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

@@ -14,9 +14,9 @@ class StoreEmergencyNumberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required'],
             'title' => ['required'],
-            'contact_no' => ['required']
+            'contact_no' => ['required'],
+            'emergency_category_id' => ['required'],
         ];
     }
 
@@ -25,7 +25,8 @@ class StoreEmergencyNumberRequest extends FormRequest
         return [
             'type.required' => 'प्रकार आबश्यक छ',
             'title.required' => 'शिर्षक आबस्यक छ',
-            'contact_no.required' => 'सम्पर्क नं. आबश्यक छ'
+            'contact_no.required' => 'सम्पर्क नं. आबश्यक छ',
+            'emergency_category_id.required' => 'सम्पर्क नं. आबश्यक छ'
         ];
     }
 }

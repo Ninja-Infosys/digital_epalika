@@ -28,6 +28,14 @@
     </a>
 </li>
 @endcan
+@can('digitalBoardNews_access')
+<li class="{{request()->is('admin/digitalBoard/PopUpNotice*') ? 'active' : ''}}">
+    <a href="{{route('admin.digitalBoard.popUpNotice.index')}}">
+        <i class="fa fa-newspaper"></i>
+        <span> Pop Up</span>
+    </a>
+</li>
+@endcan
 
     <li class="{{request()->routeIs('admin.digitalBoard.service.*') ? 'active' : ''}}">
         <a href="{{route('admin.digitalBoard.service.index')}}">

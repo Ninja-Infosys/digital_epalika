@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
 use App\Models\Settings\Employee;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Modules\DigitalBoard\Entities\News;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\DigitalBoard\Entities\PopUpNotice;
 use Modules\DigitalBoard\Entities\Service;
 use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Transformers\api\v1\BranchResource;
@@ -14,6 +16,8 @@ use Modules\DigitalBoard\Transformers\api\v1\EmployeeResource;
 use Modules\DigitalBoard\Transformers\api\v1\NewsResource;
 use Modules\DigitalBoard\Transformers\api\v1\NoticeResource;
 use Modules\DigitalBoard\Transformers\api\v1\ServiceResource;
+use Modules\DigitalBoard\Transformers\MarqueNewsResource;
+use Modules\DigitalBoard\Transformers\PopUpNoticeResource;
 use Modules\DigitalBoard\Transformers\VideoResource;
 
 class PublicApiController extends Controller
@@ -31,19 +35,23 @@ class PublicApiController extends Controller
 
         return EmployeeResource::collection($employees);
     }
-
-    public function news(): AnonymousResourceCollection
+    public function marqueNews(): AnonymousResourceCollection
     {
-        $newses = Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->get();
+        return MarqueNewsResource::collection(Notice::where('type', 'news')->latest()->get());
 
-        return NewsResource::collection($newses);
+       
     }
 
-    public function notice(): AnonymousResourceCollection
+    public function latestNews(): AnonymousResourceCollection
     {
-        $notices = Notice::with('files')->orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->get();
+        return NewsResource::collection(Notice::where('type', 'news')->with('files')->latest()->get());
 
-        return NoticeResource::collection($notices);
+    }
+
+    public function importantNotice(): AnonymousResourceCollection
+    {
+        return NoticeResource::collection(Notice::where('type', 'notice')->with('files')->latest()->get());
+
     }
 
     public function video(): AnonymousResourceCollection
@@ -51,6 +59,13 @@ class PublicApiController extends Controller
         $videos = Video::latest()->get();
 
         return VideoResource::collection($videos);
+    }
+
+    public function popUpNotice(): AnonymousResourceCollection
+    {
+        $popUpNotices = PopUpNotice::latest()->with('files')->get();
+
+        return PopUpNoticeResource::collection($popUpNotices);
     }
 
     public function showNotice(Notice $notice): NoticeResource
