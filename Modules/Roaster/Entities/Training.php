@@ -48,6 +48,10 @@ class Training extends Model
     protected $casts = [
         'form_type' => TrainingTypeEnum::class,
     ];
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active'); // Assuming 'status' is the column representing the status of the training
+    }
 
     public function trainingTrainees(): HasMany
     {

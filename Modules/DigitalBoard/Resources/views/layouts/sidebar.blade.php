@@ -1,7 +1,7 @@
 <li>
     <a href="#sidebarDigitalBoard" data-bs-toggle="collapse">
         <i class="fa fa-photo-video"></i>
-        <span>नागरिक वडापत्र</span>
+        <span>नागरिक वडापत्र </span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -30,6 +30,13 @@
                 </li>
             @endcan
 
+            {{-- @can('digitalBoardPhotoGallery_access')
+            <li class="{{request()->is('admin.digitalBoard.photoGallery.index','photoGallery') ? 'active' : ''}}">
+                <a href="{{route('admin.digitalBoard.photoGallery.index')}}">
+                    <span> फोटो ग्यालरी</span>
+                </a>
+            </li>
+            @endcan --}}
         </ul>
     </div>
 </li>

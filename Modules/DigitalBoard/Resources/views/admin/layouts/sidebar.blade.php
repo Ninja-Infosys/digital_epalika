@@ -1,7 +1,7 @@
 <li class="{{request()->is('admin/digitalBoard/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.dashboard')}}">
         <i class="fa fa-home"></i>
-        <span> ड्यासबोर्ड</span>
+        <span> ड्यासबोर्ड </span>
     </a>
 </li>
 @can('digitalBoardVideo_access')
@@ -12,6 +12,13 @@
     </a>
 </li>
 @endcan
+
+{{-- <li class="{{request()->is('admin/digitalBoard/PhotoGallery/photoGallery*') ? 'active' : ''}}">
+    <a href="{{route('admin.digitalBoard.photoGallery.index')}}">
+        <span> फोटो ग्यालरी</span>
+    </a>
+</li> --}}
+
 @can('digitalBoardNotice_access')
 <li class="{{request()->is('admin/digitalBoard/Notice/notice*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.notice.index','Notice')}}">
@@ -41,5 +48,20 @@
         <a href="{{route('admin.digitalBoard.citizenCharter.index')}}">
             <i class="fa fa-scroll"></i>
             <span> नागरिक वडापत्र</span>
+        </a>
+    </li>
+
+
+    <li class="{{request()->routeIs('admin.digitalBoard.photoGallery.*') ? 'active' : ''}}">
+        <a href="{{route('admin.digitalBoard.photoGallery.index')}}">
+            <i class="fa fa-scroll"></i>
+            <span>  फोटो ग्यालरी</span>
+        </a>
+    </li>
+
+    <li class="{{request()->routeIs('admin.digitalBoard.audio.*') ? 'active' : ''}}">
+        <a href="{{route('admin.digitalBoard.audio.index')}}">
+            <i class="fa fa-scroll"></i>
+            <span>  अडियो</span>
         </a>
     </li>
