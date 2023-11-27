@@ -76,14 +76,15 @@ class GrievanceDetailController extends Controller
                 'from_user_id' => auth()->id(),
                 'user_id' => $grievanceDetail->assigned_user_id
             ]);
-
             //mail to assigned user
-            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
+            // Mail::to($grievanceDetail->assignedUser->email)
+            // ->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
 
-            //mail to grievance user
-            if ($grievanceDetail->grievanceUser->email) {
-                Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
-            }
+            // //mail to grievance user
+            // if ($grievanceDetail->grievanceUser->email) {
+            //     Mail::to($grievanceDetail->assignedUser->email)
+            //     ->send(new GrievanceRegistrationUserMail($grievanceDetail));
+            // }
         });
 
         toast('गुनासो सफलतापुर्बक दर्ता भयो', 'success');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\PublicApiController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('admin/get-auth-token', [PublicApiController::class, 'getToken'])->name('get-token');
 Route::get('/', [PublicApiController::class, 'index'])->name('public-api.index');
