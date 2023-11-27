@@ -44,7 +44,7 @@
                             <label for="name" class="form-label">नाम </label>
                             <input type="text" name="name" value="{{ old('name') }}"
                                 class="form-control @error('name') is-invalid @enderror" id="name" placeholder="नाम" />
-                            @error('text')
+                            @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>

@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->group(module_path('EMap', '/Routes/web.php'));
-        Route::middleware('web')
+        Route::middleware('api')
         ->prefix('emap/api')
             ->group(module_path('EMap', '/Routes/api/publicRoute.php'));
 
