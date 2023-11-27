@@ -14,7 +14,6 @@
                                 <p class="text-muted font-15 mb-0">भिडियोहरु</p>
                             </div>
                         </div>
-
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
@@ -51,7 +50,7 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard')}}">
+    {{-- <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard.ajax')}}">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -76,12 +75,44 @@
                 </div>
             </div>
         </div>
+
+
+    </div> --}}
+
+    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.digitalBoard.dashboard.ajax')}}">
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    महिना अनुसार सूचना समाचार
+                </h4>
+                <div class="card-body">
+                    <canvas id="allNoticeAccordingMonth" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
+                </h4>
+                <div class="card-body">
+                    <canvas id="allNoticeAccordingFY" chart-type="line"> </canvas>
+                </div>
+
+            </div>
+        </div>
     </div>
-    @push('scripts')
+    {{-- @push('scripts')
         <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
         <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
-    @endpush
+    @endpush --}}
+    @push('scripts')
+    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
+    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
+@endpush
+
 @endsection

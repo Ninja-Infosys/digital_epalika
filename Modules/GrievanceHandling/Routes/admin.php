@@ -8,7 +8,8 @@ use Modules\GrievanceHandling\Http\Controllers\Admin\Setting\GrievanceOfficeCont
 use Modules\GrievanceHandling\Http\Controllers\Admin\Setting\{GrievanceTypeController};
 use Modules\GrievanceHandling\Http\Controllers\GrievanceSettingController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('grievanceType', GrievanceTypeController::class);
