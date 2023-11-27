@@ -19,7 +19,7 @@ enum GrievanceStatus: string
         return match ($value) {
             self::UNSEEN => 'नहेरिएको',
             self::INVESTIGATED => 'अनुसन्धान गरिदै',
-            self::REPLIED => 'जवाफ दिनुभयो',
+            self::REPLIED => 'जवाफ दिएको',
             self::CLOSED => 'बन्द',
         };
     }
