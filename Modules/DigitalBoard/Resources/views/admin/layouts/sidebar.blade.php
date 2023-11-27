@@ -1,7 +1,7 @@
 <li class="{{request()->is('admin/digitalBoard/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.dashboard')}}">
         <i class="fa fa-home"></i>
-        <span> ड्यासबोर्ड side 2</span>
+        <span> ड्यासबोर्ड </span>
     </a>
 </li>
 @can('digitalBoardVideo_access')

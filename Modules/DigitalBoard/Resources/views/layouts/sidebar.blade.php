@@ -1,7 +1,7 @@
 <li>
     <a href="#sidebarDigitalBoard" data-bs-toggle="collapse">
         <i class="fa fa-photo-video"></i>
-        <span>नागरिक वडापत्र slide 1</span>
+        <span>नागरिक वडापत्र </span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
