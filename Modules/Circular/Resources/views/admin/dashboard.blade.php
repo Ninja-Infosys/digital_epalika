@@ -188,6 +188,6 @@
 
 @push('scripts')
 <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-<script type="module" src="{{asset('assets/backend/js/circular.js')}}"></script>
+<script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
 @endpush
 @endsection
