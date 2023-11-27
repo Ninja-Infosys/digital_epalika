@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         $this->businessDetail = BusinessDetail::selectRaw('fiscal_year_id,ward_no,registration_no,registration_date_ne')->whereNotNull('registration_no')->get();
     }
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('businessRegistrationDashboard_access');
 
@@ -32,20 +32,20 @@ class DashboardController extends Controller
         $totalObjectTransactionCategoryCount = ObjectTransaction::count();
         $businessRenewCount = BusinessRenew::where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
 
-        if (request()->ajax()) {
-            return [
-                'businessRegistration' => $this->getBusinessRegistrationAccordingToFiscalYear(),
-                'wardWise' => $this->getWardWiseData(),
-                'businessNature' => $this->getBusinessNature(),
-                'monthWise' => $this->getMonthlyWise()
-            ];
-        }
         return view('businessregistration::admin.dashboard', compact(
             'totalBusinessCount',
             'totalBusinessDetailNatureCount',
             'totalObjectTransactionCategoryCount',
             'businessRenewCount'
         ));
+    }
+    public function ajaxData(){
+        return [
+            'businessRegistration' => $this->getBusinessRegistrationAccordingToFiscalYear(),
+            'wardWise' => $this->getWardWiseData(),
+            'businessNature' => $this->getBusinessNature(),
+            'monthWise' => $this->getMonthlyWise()
+        ];
     }
 
 
