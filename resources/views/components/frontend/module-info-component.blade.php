@@ -101,7 +101,7 @@
         <div class="info-card">
             <a href="https://pams.fcgo.gov.np/">
                 <div class="pt-4 text-center">
-                    <img src="{{asset('assets/frontend/image/jinsi.png')}}" width="50" height="50">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
                     <h6 class="p-2 text-white">जिन्सी व्यवस्थापन प्रणाली </h6>
                 </div>
             </a>
