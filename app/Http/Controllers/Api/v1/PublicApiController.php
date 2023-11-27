@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\EmergencyCategoryResource;
 use App\Http\Resources\Api\v1\LinkResource;
 use App\Http\Resources\Api\v1\SettingResource;
 use App\Http\Resources\Api\v1\SliderResource;
+use App\Models\Settings\EmergencyCategory;
 use App\Models\Settings\Employee;
 use App\Models\Settings\OfficeSetting;
 use App\Models\Website\ImportantLink;
@@ -53,6 +55,14 @@ class PublicApiController extends Controller
     public function importantLink(): AnonymousResourceCollection
     {
         return LinkResource::collection(ImportantLink::latest()->get());
+    }
+
+    public function emergencyCategory(): AnonymousResourceCollection
+    {
+        $emergencyCategories = EmergencyCategory::latest()->get();
+
+        return EmergencyCategoryResource::collection($emergencyCategories);
+
     }
 
     public function introduction(): array

@@ -1,30 +1,28 @@
 <?php
 
-namespace App\Http\Requests\Setting\EmergencyNumber;
+namespace App\Http\Requests\Setting\EmergencyCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
-class UpdateEmergencyNumberRequest extends FormRequest
+class StoreEmergencyCategoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
     }
 
-    public function rules(): array
+    public function rules():array
     {
         return [
             'title' => ['required'],
-            'contact_no' => ['required']
         ];
     }
 
     public function messages(): array
     {
         return [
-            'type.required' => 'प्रकार आबश्यक छ',
             'title.required' => 'शिर्षक आबस्यक छ',
-            'contact_no.required' => 'सम्पर्क नं. आबश्यक छ'
         ];
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\DigitalBoard\Transformers\api\v1;
+namespace Modules\DigitalBoard\Transformers;
 
 use App\Http\Resources\FileResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NewsResource extends JsonResource
+class PopUpNoticeResource extends JsonResource
 {
     public function toArray($request)
     {
@@ -13,9 +13,8 @@ class NewsResource extends JsonResource
             'id' => $this->id ?? '',
             'title' => $this->title ?? '',
             'date' => $this->date ?? '',
-            'type' => 'समाचार',
-                'description' => $this->description ?? '',
-                'files' => FileResource::collection($this->whenLoaded('files')),
+            'description' => $this->description ?? '',
+            'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
 }
