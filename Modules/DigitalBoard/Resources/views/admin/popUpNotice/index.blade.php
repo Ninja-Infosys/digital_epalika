@@ -57,7 +57,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $popUpNotice->title }}</td>
                                         <td>{{ $popUpNotice->date }}</td>
-                                        <td>
+                                        <td> //ToDo PopUP show on index not working
                                             <a href="{{ route('admin.digitalBoard.popUpNotice.updateShowOnIndex',$popUpNotice) }}"
                                                 class="btn btn-xs btn-outline-{{ $popUpNotice->show_on_index == 1 ? 'primary' : 'danger' }} {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
                                                 <i
