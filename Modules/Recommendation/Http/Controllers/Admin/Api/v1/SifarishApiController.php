@@ -9,20 +9,18 @@ use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRe
 use Illuminate\Support\Facades\DB;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Transformers\SifarishFormResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SifarishApiController extends Controller
 {
-    public function index()
+    public function index():AnonymousResourceCollection
     {
-        $sipharishCreates = SipharishCreate::with('SipharishFormType', 'personalDetail')->where('status',1)->latest()->get();
-        // return response()->json(['data' => $sipharishCreates], 200);
-        return response()->json(['data' => new SifarishFormResource($sipharishCreates)], 200);
+        $sifaris = SipharishCreate::with('personalDetail','SipharishFormType')->get();
+        return SifarishFormResource::collection($sifaris);
+
     }
 
-    public function create()
-    {
-        return view('recommendation::create');
-    }
+
 
     public function store(StoreSipharisCreatedRequest $request)
     {
@@ -57,27 +55,9 @@ class SifarishApiController extends Controller
             return $sipharis;
         });
 
-        // return response()->json($sipharis);
         return response()->json(['data' => new SifarishFormResource($sipharis)], 200);
+
     }
 
-    public function show($id)
-    {
-        return view('recommendation::show');
-    }
 
-    public function edit($id)
-    {
-        return view('recommendation::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }
