@@ -19,7 +19,9 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\Setting\JudicialCommitteeTe
 use Modules\JudicialCommittee\Http\Controllers\Admin\Setting\LawsuitNatureController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\WrittenAnswerController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
+
 Route::resource('judicialMember', JudicialMemberController::class);
 Route::get('complaintApplication/registered', [ComplaintApplicationController::class, 'registeredApplications'])->name('registeredApplication');
 Route::post('complaintApplication/{complaintApplication}/supportedDocument', [ComplaintApplicationController::class, 'uploadSupportedDocument'])->name('complaintApplication.supportedDocument.store');

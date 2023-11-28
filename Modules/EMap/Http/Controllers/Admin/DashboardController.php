@@ -20,26 +20,24 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('eMapDashboard_access');
 
-        if (request()->ajax()) {
-            return [
-                'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
-                'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
-                'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
-                'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
-                'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
-                'mapAccordingToMonth' => $this->mapAccordingToMonth(),
-
-            ];
-        }
         $organization_count = Organization::count();
         $map_apply_count = MapApply::count();
         return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', ));
     }
-
+public function ajaxData(){
+    return [
+        'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
+        'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
+        'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
+        'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
+        'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
+        'mapAccordingToMonth' => $this->mapAccordingToMonth(),
+    ];
+}
 
     public function getMapApplyStructureTypeAccordingToFiscalYear()
     {

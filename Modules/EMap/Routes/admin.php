@@ -22,7 +22,8 @@ use  Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\StreetDetailController;
 
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
 
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);

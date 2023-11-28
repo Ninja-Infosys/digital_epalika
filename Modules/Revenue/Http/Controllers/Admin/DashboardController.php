@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('revenueDashboard_access');
 
@@ -55,17 +55,20 @@ class DashboardController extends Controller
                 return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
             })
             ->sum('total');
-        if (request()->ajax()) {
-            return [
-                'totalRevenue' => $this->totalRevenue($results),
-                'totalCashBankRevenue' => $this->totalCashBankRevenue($results),
-                'accordingToFy' => $this->accordingToFy($results),
-                'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)),
-            ];
-        }
 
         return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
     }
+
+   public function ajaxData($results, $fiscal_year_id)
+{
+    dd($results, $fiscal_year_id); 
+    return [
+        'totalRevenue' => $this->totalRevenue($results), // Replace with the actual method call
+        'totalCashBankRevenue' => $this->totalCashBankRevenue($results), // Replace with the actual method call
+        'accordingToFy' => $this->accordingToFy($results), // Replace with the actual method call
+        'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)), // Replace with the actual method call
+    ];
+}
 
     public function totalRevenue(Collection $result): Collection
     {

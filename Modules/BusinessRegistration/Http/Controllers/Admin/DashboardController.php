@@ -2,6 +2,7 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
@@ -49,19 +50,36 @@ class DashboardController extends Controller
     }
 
 
-    public function getBusinessRegistrationAccordingToFiscalYear(): Collection
+    public function getBusinessRegistrationAccordingToFiscalYear(): array
     {
         $fiscalYears = FiscalYear::all();
+        $label = collect();
         $data = collect();
+        $color = collect();
+
         foreach ($fiscalYears as $fiscalYear) {
-            $data->push([
-                'name' => $fiscalYear->title,
-                'data' => $this->businessDetail
-                ->where('fiscal_year_id', $fiscalYear->id)
-                ->whereNotNull('registration_no')
-                ->count()]);
+            $count = $this->businessDetail
+            ->where('fiscal_year_id', $fiscalYear->id)
+            ->whereNotNull('registration_no')
+            ->count();
+
+            $label->push($fiscalYear->title ." (".$count.")");
+            $data->push($count);
+            $color->push(generateRandomRGBAColor());
+
         }
-        return $data;
+        return [
+            'labels' => $label,
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'backgroundColor' => $color,
+                    'borderColor' => $color,
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
 
     public function getWardWiseData()
@@ -90,15 +108,34 @@ class DashboardController extends Controller
 
     public function getBusinessNature()
     {
-        return BusinessNature::withCount('businessDetails')
-            ->get()
-            ->map(function ($businessNature) {
-                return [
-                    'name' => $businessNature->title,
-                    'data' => (int)$businessNature->business_details_count,
-                ];
-            });
+        $businessNatures = BusinessNature::all();
+        $label = collect();
+        $data = collect();
+        $color = collect();
+        foreach ($businessNatures as $businessNature) {
+            $count = $this->businessDetail
+            ->where('fiscal_year_id', $businessNature->id)
+            ->whereNotNull('registration_no')
+            ->count();
+
+            $label->push($businessNature->title ." (".$count.")");
+            $data->push($count);
+            $color->push(generateRandomRGBAColor());
+        }
+        return [
+            'labels' => $label,
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'backgroundColor' => $color,
+                    'borderColor' => $color,
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
+    
 
 
     public function getMonthlyWise(): array
