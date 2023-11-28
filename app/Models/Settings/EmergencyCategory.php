@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EmergencyCategory extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
@@ -26,4 +26,5 @@ class EmergencyCategory extends Model
     {
         return $this->hasMany(EmergencyNumber::class);
     }
+
 }

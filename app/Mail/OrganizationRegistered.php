@@ -31,3 +31,4 @@ class OrganizationRegistered extends Mailable
         return $this->markdown('emails.organization.registered');
     }
 }
+

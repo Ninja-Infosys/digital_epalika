@@ -11,6 +11,13 @@ Route::get('importantNotice', [PublicApiController::class, 'importantNotice'])->
 Route::get('latestNews', [PublicApiController::class, 'latestNews'])->name('api-public.latestNews');
 Route::get('marqueNews', [PublicApiController::class, 'marqueNews'])->name('api-public.marqueNews');
 Route::get('popUpNotice', [PublicApiController::class, 'popUpNotice'])->name('api-public.popUpNotice');
+Route::get('notice', [PublicApiController::class, 'notice'])->name('api-public.notice');
+Route::get('news', [PublicApiController::class, 'news'])->name('api-public.news');
+Route::get('photoGallery', [PublicApiController::class, 'photoGallery'])->name('api-public.photoGallery');
+Route::get('audio', [PublicApiController::class, 'audio'])->name('api-public.audio');
+Route::get('employee/{employeeType}', [PublicApiController::class, 'employee'])
+->name('api-public.representative')
+->whereIn('employeeType', ['employee', 'representative']);
 
 Route::get('branch/{branch}/service', [PublicApiController::class, 'getBranchService'])->name('api-public.get-branch-service');
 Route::get('branch/{branch}', [PublicApiController::class, 'getBranchDetail'])->name('api-public.detail-branch-get');
