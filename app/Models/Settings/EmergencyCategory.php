@@ -9,9 +9,9 @@ use App\Traits\EventObserveTrait;
 
 class EmergencyCategory extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
@@ -20,4 +20,6 @@ class EmergencyCategory extends Model
     protected $fillable = [
         'title',
     ];
+
+    //TODO: Add relation to emergency no.
 }
