@@ -104,7 +104,15 @@ class PublicApiController extends Controller
                 'video' => VideoResource::collection(Video::latest()->get())
             ];
         }
-        return [];
+        return [
+            'employees' => [],
+            'news' => [],
+            'notices' => [],
+            'emergencyCategories' => [],
+            'latestNews' => [],
+            'popups' => [],
+            'video' => [],
+        ];
     }
 
 
