@@ -14,7 +14,6 @@ class UpdateEmergencyNumberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required'],
             'title' => ['required'],
             'contact_no' => ['required']
         ];

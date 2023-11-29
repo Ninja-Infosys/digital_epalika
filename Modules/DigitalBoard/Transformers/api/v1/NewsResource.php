@@ -14,10 +14,8 @@ class NewsResource extends JsonResource
             'title' => $this->title ?? '',
             'date' => $this->date ?? '',
             'type' => 'समाचार',
-            $this->mergeWhen(\Route::is('api-public.show-notice'), [
                 'description' => $this->description ?? '',
                 'files' => FileResource::collection($this->whenLoaded('files')),
-            ]),
         ];
     }
 }

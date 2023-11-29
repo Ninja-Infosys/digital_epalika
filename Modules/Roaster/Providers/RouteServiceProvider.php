@@ -25,6 +25,10 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('roaster')
             ->as('roaster.')
             ->group(module_path('Roaster', '/Routes/web.php'));
+            
+            Route::middleware('web')
+            ->prefix('roaster/api')
+                ->group(module_path('Roaster', '/Routes/v1/publicRoute.php'));
 
         Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/roaster')
@@ -37,5 +41,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('Roaster', '/Routes/api.php'));
+
     }
 }
