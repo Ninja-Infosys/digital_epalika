@@ -50,14 +50,48 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.emap.dashboard.ajax')}}">
-        <div class="col-md-12">
+    {{-- <div class="row mt-2" id="charts" data-chart-url="{{route('admin.emap.dashboard.ajax')}}"> --}}
+    <div class="row mt-2" id="charts" data-chart-url="{{ route('emap.admin.dashboard.ajax') }}">
+        <div class="col-md-6">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    आर्थिक बर्ष 2080/081 अनुसार प्रयोजन
                 </h4>
                 <div class="card-body">
-                    <canvas id="allNoticeAccordingMonth" chart-type="bar"></canvas>
+                    <canvas id="mapApply" chart-type="pie"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 अनुसार भवन वर्गीकरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="buildingCategory" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 अनुसार भवन निर्माण कार्यको किसिम
+                </h4>
+                <div class="card-body">
+                    <canvas id="constructionType" chart-type="pie"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 इस्टकचर अनुसार भवनको किसिम
+                </h4>
+                <div class="card-body">
+                    <canvas id="structureType" chart-type="doughnut"></canvas>
                 </div>
 
             </div>
@@ -65,17 +99,28 @@
         <div class="col-md-12">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
+                    चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="allNoticeAccordingFY" chart-type="line"> </canvas>
+                    <canvas id="mapAccordingToMonth" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष अनुसारले नक्सा बिवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="buildingUsage" chart-type="bar"> </canvas>
                 </div>
 
             </div>
         </div>
     </div>
     @push('scripts')
-    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
-@endpush
+        <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
+        <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
+    @endpush
 @endsection

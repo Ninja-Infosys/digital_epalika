@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\EMap\Entities\New\MapPassGroup;
+// use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
@@ -23,7 +23,8 @@ use Modules\EMap\Http\Controllers\StreetDetailController;
 
 
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
-Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
+Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
+
 
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);

@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
@@ -38,19 +39,34 @@ public function ajaxData(){
         'mapAccordingToMonth' => $this->mapAccordingToMonth(),
     ];
 }
+public function getMapApplyStructureTypeAccordingToFiscalYear()
+{
+    $structureTypes = StructureType::withCount('mapApply')
+        ->selectRaw('id,title')
+        ->get()
+        ->map(function ($structure) {
+            return [
+                'name' => $structure->title,
+                'data' => (int) $structure->map_apply_count,
+                'color' => generateRandomRGBAColor()
+            ];
+        });
 
-    public function getMapApplyStructureTypeAccordingToFiscalYear()
-    {
-        return StructureType::withCount(['mapApply'])
-            ->selectRaw('id,title')
-            ->get()
-            ->map(function ($structure) {
-                return [
-                    'name' => $structure->title,
-                    'data' => (int)$structure->map_apply_count
-                ];
-            });
-    }
+    $chartData = [
+        'labels' => $structureTypes->pluck('name')->toArray(),
+        'option' => ChartOptionEnum::PIE_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $structureTypes->pluck('data')->toArray(),
+                'backgroundColor' => $structureTypes->pluck('color')?->toArray(),
+                'borderColor' => $structureTypes->pluck('color')?->toArray(),
+                'borderWidth' => 1,
+            ],
+        ],
+    ];
+
+    return $chartData;
+}
 
     public function getMapApplyAccordingToFiscalYear(): array
     {
@@ -105,24 +121,29 @@ public function ajaxData(){
     }
 
     public function getMapApplyBuildingUsageAccordingToFiscalYear()
-    {
-        $officeSetting = $this->getOfficeSetting();
+{
+    $officeSetting = $this->getOfficeSetting();
+    $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+    $buildingUsages = $mapApplies->pluck('usage')->unique();
 
-        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
-        $buildingUsages = $mapApplies->pluck('usage')->unique();
+    $chartData = [
+        'labels' => $buildingUsages->map(function ($usage) {
+            return BuildingUsageEnum::tryFrom($usage)?->label();
+        })->toArray(),
+        'option' => ChartOptionEnum::BAR_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $mapApplies->groupBy('usage')->pluck('usage_count')->toArray(),
+                'backgroundColor' => $mapApplies->pluck('color')?->toArray(),
+                'borderColor' => $mapApplies->pluck('color')?->toArray(),
+                'borderWidth' => 1,
+            ],
+        ],
+    ];
 
-        $result = collect();
-        foreach ($buildingUsages as $usage) {
-            $count = $mapApplies->where('usage', $usage)->count();
-            $label = BuildingUsageEnum::tryFrom($usage)?->label();
-            $result->push([
-                'name' => $label,
-                'data' => $count
-            ]);
-        }
+    return $chartData;
+}
 
-        return $result;
-    }
 
     public function getMapApplyBuildingCategoryAccordingToFiscalYear()
     {
@@ -164,25 +185,29 @@ public function ajaxData(){
     }
 
 
-    public function getMapApplyConstructionTypeAccordingToFiscalYear()
-    {
+    public function getMapApplyConstructionTypeAccordingToFiscalYear() {
         $officeSetting = $this->getOfficeSetting();
         $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
-        $buildingUsages = $mapApplies->pluck('construction_type')->unique();
-
-        $result = collect();
-        foreach ($buildingUsages as $usage) {
-            $count = $mapApplies->where('construction_type', $usage)->count();
-            $label = TypeOfConstructionWorkEnum::tryFrom($usage)?->label();
-            $result->push([
-                'name' => $label,
-                'data' => $count
-            ]);
-        }
-
-        return $result;
+        $constructionTypes = $mapApplies->pluck('construction_type')->unique();
+    
+        $chartData = [
+            'labels' => $constructionTypes->map(function ($constructionType) {
+                return TypeOfConstructionWorkEnum::tryFrom($constructionType)?->label();
+            })->toArray(),
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $mapApplies->groupBy('construction_type')->pluck('construction_type_count')->toArray(),
+                    'backgroundColor' => $mapApplies->pluck('color')?->toArray(),
+                    'borderColor' => $mapApplies->pluck('color')?->toArray(),
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
+    
+        return $chartData;
     }
-
+    
     public function getOfficeSetting()
     {
         return officeSetting();
