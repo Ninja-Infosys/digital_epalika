@@ -103,16 +103,19 @@ public function ajaxData(){
     public function trainerAccordingToSubject()
 {
 
-    $subjects = Subject::withCount('trainers')
-        ->get()
-        ->map(function ($subject) {
-            return [
-                'name' => $subject->title,
-                'data' => (int)$subject->trainers_count,
-                'color' => generateRandomRGBAColor() // If you have a function to generate random colors
-            ];
-        });
+    $subjects = Subject::cases();
+    $label = collect();
+    $data = collect();
+    $color = collect();
+    foreach ($subjects as $subject) {
+        $count =  (int)$subject->trainers_count
+            ->where('trainer', $subject->value)
+            ->count();
+        $label->push($subject->label($subject->title) ." (".$count.")");
+        $data->push($count);
+        $color->push(generateRandomRGBAColor());
 
+    }
     return [
         'labels' => $subjects->pluck('name')->toArray(),
         'option' => ChartOptionEnum::PIE_CHART->option(),
