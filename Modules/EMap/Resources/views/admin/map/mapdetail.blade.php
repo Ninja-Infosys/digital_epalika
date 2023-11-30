@@ -852,8 +852,7 @@
                                            onclick="openFileModal('Analysis Document', '{{ pathinfo($mapApply->attachDocument?->analysis_document ??'' ,PATHINFO_EXTENSION)}}', '{{ $mapApply->attachDocument?->analysis_document }}')"
                                            class="text-muted fw-medium" type="button">Analysis Document
                                             .{{pathinfo($mapApply->attachDocument?->analysis_document??'',PATHINFO_EXTENSION)}}</a>
-                                        <p class="mb-0 font-13">{{convert_to_highest_unit($mapApply->attachDocument?->analysis_document_size??'')}}</p>
-                                    </div>
+                                            <p class="mb-0 font-13">{{ convert_to_highest_unit(intval($mapApply->attachDocument?->analysis_document_size ?? '')) }}</p>
                                     <div class="col-2">
                                         <a href="{{route('admin.file-url-download', ['file_url'=>$mapApply->attachDocument?->getRawOriginal('analysis_document')])}}"
                                            class="btn btn-xs btn-outline-primary">
