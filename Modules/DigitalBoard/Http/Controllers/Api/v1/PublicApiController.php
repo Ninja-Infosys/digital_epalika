@@ -48,7 +48,7 @@ class PublicApiController extends Controller
     {
         return MarqueNewsResource::collection(Notice::where('type', 'news')->latest()->get());
 
-       
+
     }
 
     public function latestNews(): AnonymousResourceCollection
@@ -82,7 +82,7 @@ class PublicApiController extends Controller
         return RepresentativeResource::collection($representatives);
     }
 
-    public function importantNotice(): AnonymousResourceCollection
+    public function notice(): AnonymousResourceCollection
     {
         return NoticeResource::collection(Notice::where('type', 'notice')->with('files')->latest()->get());
 

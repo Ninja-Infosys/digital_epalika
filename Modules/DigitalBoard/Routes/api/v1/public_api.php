@@ -7,7 +7,6 @@ Route::get('employee', [PublicApiController::class, 'employee'])->name('api-publ
 Route::get('publicRepresentative', [PublicApiController::class, 'publicRepresentative'])->name('api-public.public-representative');
 
 Route::get('notice/{notice}', [PublicApiController::class, 'showNotice'])->name('api-public.show-notice');
-Route::get('importantNotice', [PublicApiController::class, 'importantNotice'])->name('api-public.importantNotice');
 Route::get('latestNews', [PublicApiController::class, 'latestNews'])->name('api-public.latestNews');
 Route::get('marqueNews', [PublicApiController::class, 'marqueNews'])->name('api-public.marqueNews');
 Route::get('popUpNotice', [PublicApiController::class, 'popUpNotice'])->name('api-public.popUpNotice');
