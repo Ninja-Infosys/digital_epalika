@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(module_path('GrievanceHandling', '/Routes/web.php'));
 
             Route::middleware('web')
-            ->prefix('grievance/api')
+            ->prefix('api/grievance')
                 ->group(module_path('GrievanceHandling', '/Routes/api/publicRoute.php'));
 
         Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])

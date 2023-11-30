@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Livewire\OfficeHeader;
-use App\Http\Resources\EmployeeResource;
-use App\Http\Resources\NoticeResource;
 use App\Http\Resources\OfficeHeaderResource;
 use App\Http\Resources\OfficeSettingResource;
-use App\Http\Resources\VideoResource;
 use App\Models\Settings\Employee;
 use App\Models\Settings\OfficeSetting;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Video;
+use Modules\DigitalBoard\Transformers\NoticeResource ;
+use Modules\DigitalBoard\Transformers\EmployeeResource ;
+use Modules\DigitalBoard\Transformers\VideoResource ;
 
 class PublicApiController extends Controller
 {
