@@ -9,6 +9,7 @@ use App\Mail\GrievanceHandling\GrievanceAssignmentToGrievanceUserMail;
 use App\Mail\GrievanceHandling\GrievanceAssignmentToUserMail;
 use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
 use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
+use App\Models\Settings\Branch;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,12 +45,13 @@ class GrievanceDetailController extends Controller
     {
         $this->checkAuthorization('grievanceDetail_create');
 
-        $grievanceTypes = GrievanceType::all();
-        $grievanceOffices = GrievanceOffice::all();
+        $grievanceDetail = GrievanceDetail::find(1);
+        $isAnonymous = $grievanceDetail->is_anonymous;
+        $branches = Branch::all();
         $grievanceUsers = GrievanceUser::latest()->get();
         $users = User::whereNot('id', auth()->id())->get();
 
-        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'grievanceOffices', 'grievanceUsers', 'users'));
+        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'branches', 'grievanceUsers', 'users'));
     }
 
     public function store(StoreGrievanceDetailRequest $request)
@@ -95,13 +97,13 @@ class GrievanceDetailController extends Controller
     public function show(GrievanceDetail $grievanceDetail)
     {
         $this->checkAuthorization('grievanceDetail_access');
-
         $grievanceDetail->load(
             'grievanceDetails.files',
             'grievanceDetails.user',
             'grievanceDetails.grievanceUser',
+             'grievanceDetails.is_anonymous',
             'grievanceType',
-            'grievanceOffice',
+            'branch',
             'publisher',
             'assignedUser',
             'files',
@@ -110,7 +112,6 @@ class GrievanceDetailController extends Controller
             'grievanceAssignHistories.user'
         );
         $users = User::all();
-
         return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail', 'users'));
     }
 

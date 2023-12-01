@@ -4,6 +4,7 @@ namespace Modules\GrievanceHandling\Http\Livewire;
 
 use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
 use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
+use App\Models\Settings\Branch;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -22,26 +23,28 @@ class GrievanceFormWizard extends Component
 
     public $grievanceTypes = [];
 
-    public $grievanceOffices = [];
+    public $branches = [];
 
     public int $currentStep = 1;
 
     public bool $is_password = false;
+    public bool $isAnonymous = false;
 
     public $grievanceType;
 
-    public $grievanceOffice;
+    public $branch;
 
     public array $form = [
         'grievance_type_id' => null,
         'description' => null,
-        'grievance_office_id' => null,
+        'branch_id' => null,
         'complaint_severity' => null,
         'subject' => null,
         'is_password' => 0,
         'password' => null,
         'password_confirmation' => null,
         'is_open' => 0,
+        'is_anonymous' => 0,
         'name' => null,
         'email' => null,
         'phone' => null,
@@ -53,7 +56,7 @@ class GrievanceFormWizard extends Component
         'form.description' => ['required'],
         'form.files' => ['nullable', 'array'],
         'form.files.*' => ['image', 'max:10240'],
-        'form.grievance_office_id' => ['required', 'exists:grievance_offices,id'],
+        'form.branch_id' => ['required', 'exists:branches,id'],
         'form.complaint_severity' => ['required'],
         'form.subject' => ['required'],
     ];
@@ -71,7 +74,7 @@ class GrievanceFormWizard extends Component
     public function mount()
     {
         $this->grievanceTypes = GrievanceType::all();
-        $this->grievanceOffices = GrievanceOffice::all();
+        $this->branches = Branch::all();
     }
 
     public function nextStep($step)
@@ -119,10 +122,11 @@ class GrievanceFormWizard extends Component
                 'token' => time(),
                 'grievance_type_id' => $this->form['grievance_type_id'],
                 'description' => $this->form['description'],
-                'grievance_office_id' => $this->form['grievance_office_id'],
+                'branch_id' => $this->form['branch_id'],
                 'complaint_severity' => $this->form['complaint_severity'],
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
+                'is_anonymous' => $this->is_anonymous,
                 'grievance_medium' => GrievanceMediumEnum::SYSTEM,
                 'assigned_user_id' => $grievanceSetting->user_id ?? User::first()->id,
                 'assigned_at' => now()
@@ -142,12 +146,12 @@ class GrievanceFormWizard extends Component
             ]);
 
             //mail to assigned user
-            Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
+            // Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationAssignedUserMail($grievanceDetail));
 
-            //mail to grievance user
-            if ($grievanceDetail->grievanceUser->email) {
-                Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
-            }
+            // //mail to grievance user
+            // if ($grievanceDetail->grievanceUser->email) {
+            //     Mail::to($grievanceDetail->assignedUser->email)->send(new GrievanceRegistrationUserMail($grievanceDetail));
+            // }
 
             return $grievanceDetail;
         });
@@ -166,7 +170,7 @@ class GrievanceFormWizard extends Component
         return [
             'form.grievance_type_id.required' => ['गुनासो प्रकार आवश्यक छ'],
             'form.description.required' => ['गुनासो विवरण आवश्यक छ'],
-            'form.grievance_office_id.required' => ['गुनासो कार्यालय आवश्यक छ'],
+            'form.branch_id.required' => ['गुनासो कार्यालय आवश्यक छ'],
             'form.complaint_severity.required' => ['गुनासो गम्भीरता आवश्यक छ'],
             'form.subject.required' => ['गुनासो बिषय आवश्यक छ'],
             'form.password_confirmation.confirmed' => ['पासवोर्ड संग मेल खाएन '],
@@ -184,10 +188,19 @@ class GrievanceFormWizard extends Component
             $this->grievanceType = GrievanceType::find($this->form['grievance_type_id']);
         }
 
-        if (!empty($this->form['grievance_office_id'])) {
-            $this->grievanceOffice = GrievanceOffice::find($this->form['grievance_office_id']);
+        if (!empty($this->form['branch_id'])) {
+            $this->branch = Branch::find($this->form['branch_id']);
         }
 
         return view('grievancehandling::livewire.grievance-form-wizard');
+    }
+
+    public function updatedIsAnonymous()
+    {
+        if ($this->isAnonymous) {
+            $this->form['name'] = null;
+            $this->form['email'] = null;
+            $this->form['phone'] = null;
+        }
     }
 }

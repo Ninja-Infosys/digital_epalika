@@ -3,6 +3,7 @@
 namespace Modules\GrievanceHandling\Entities;
 
 use App\Models\File;
+use App\Models\Settings\Branch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
 use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 use Modules\GrievanceHandling\Enums\GrievanceStatus;
@@ -31,7 +33,7 @@ class GrievanceDetail extends Model
         'grievance_user_id',
         'user_id',
         'grievance_type_id',
-        'grievance_office_id',
+        'branch_id',
         'publisher_id',
         'assigned_user_id',
         'assigned_at',
@@ -42,7 +44,8 @@ class GrievanceDetail extends Model
         'status',
         'is_approved',
         'is_public',
-        'grievance_medium'
+        'grievance_medium',
+        'is_anonymous'
     ];
 
     protected $casts = [
@@ -96,10 +99,7 @@ class GrievanceDetail extends Model
         return $this->belongsTo(GrievanceType::class);
     }
 
-    public function grievanceOffice(): BelongsTo
-    {
-        return $this->belongsTo(GrievanceOffice::class);
-    }
+
 
     public function publisher()
     {
@@ -119,5 +119,13 @@ class GrievanceDetail extends Model
     public function grievanceAssignHistories(): HasMany
     {
         return $this->hasMany(GrievanceAssignHistory::class);
+    }
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+    public function isAnonymous()
+    {
+        return $this->belongsTo(GrievanceUser::class, 'grievanceUser_id');
     }
 }
