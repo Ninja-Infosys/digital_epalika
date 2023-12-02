@@ -78,12 +78,13 @@ class SipharishCreate extends Model
 
     public function resolveTemplate(): string
     {
+        $content = letterHead() . $this->SipharishFormType?->content;
         $replaceableList = collect();
         $this->load('SipharishFormType', 'SipharishCreatedValues.SipharisFormFields');
         foreach ($this->SipharishCreatedValues as $values) {
             $replaceableList->put('{{' . $values->SipharisFormFields->field_name . '}}', $values->value);
         }
-        return Str::replace($replaceableList->keys(), $replaceableList->values(), $this->SipharishFormType?->content ?? '');
+        return Str::replace($replaceableList->keys(), $replaceableList->values(), $content ?? '');
     }
 
     public function signature()
