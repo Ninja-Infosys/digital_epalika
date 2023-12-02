@@ -67,7 +67,7 @@ class SipharisCreateController extends Controller
     public function show(SipharishCreate $sipharishCreate)
     {
 
-        $sipharishCreate->load('SipharishCreatedValues.SipharisFormFields','SipharisCreatedDocuments');
+        $sipharishCreate->load('SipharishCreatedValues.SipharisFormField','SipharisCreatedDocuments');
         return view('recommendation::admin.sipharisCreate.view', compact('sipharishCreate'));
 
     }
