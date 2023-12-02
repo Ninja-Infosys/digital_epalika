@@ -81,8 +81,8 @@ class SipharishCreate extends Model
         $content = letterHead() . $this->SipharishFormType?->content;
         $replaceableList = collect();
         $this->load('SipharishFormType', 'SipharishCreatedValues.SipharisFormFields');
-        foreach ($this->SipharishCreatedValues as $values) {
-            $replaceableList->put('{{' . !empty($values->SipharisFormFields?->slug)? $values->SipharisFormFields?->slug:$values->SipharisFormFields?->field_name . '}}', $values->value);
+        foreach ($this->SipharishCreatedValues?->load('SipharisFormFields') as $values) {
+            $replaceableList->put('{{' . $values->SipharisFormFields?->field_name . '}}', $values->value);
         }
         return Str::replace($replaceableList->keys(), $replaceableList->values(), $content ?? '');
     }
