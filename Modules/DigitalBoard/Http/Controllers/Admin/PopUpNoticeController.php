@@ -17,7 +17,7 @@ class PopUpNoticeController extends Controller
 {
     public function index()
     {
-        $popUpNotices = PopUpNotice::all();
+        $popUpNotices = PopUpNotice::latest()->paginate(10);
 
 
         return view('digitalboard::admin.popUpNotice.index', compact('popUpNotices'));
