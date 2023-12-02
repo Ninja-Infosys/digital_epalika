@@ -40,9 +40,9 @@
                         @foreach( (new \Modules\Recommendation\Entities\SipharishFormType())->getTemplateOptions() as $template)
                         <div class="mt-2">
                             <h4>{{$template['title'] ?? ''}} :</h4>
-                            <div class="button-list">
+                            <div class="button-list d-flex me-2">
                                 @foreach($template['data'] as $key=>$templateValue)
-                                    <button type="button" class="btn btn-outline-primary btn-xs"
+                                    <button type="button" class="btn btn-outline-primary btn-xs me-2"
                                             onclick="copyText('{{$templateValue}}')">
                                         {{$key}}
                                     </button>
@@ -52,9 +52,10 @@
                     @endforeach
 
                     <div class="mt-2">
-                        <div class="button-list">
+                        <div class="button-list d-flex">
+                            <h4>फारम फिल्ड:</h4>
                             @foreach($sipharishFormType->sipharisFormFields as $sipharisFormField)
-                                <button type="button" class="btn btn-outline-primary btn-xs"
+                                <button type="button" class="btn btn-outline-primary btn-xs me-2"
                                         onclick="copyText('{{"[@form.".$sipharisFormField->slug."]"}}')">
                                     {{$sipharisFormField->field_name}}
                                 </button>

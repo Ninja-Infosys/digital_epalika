@@ -63,7 +63,6 @@ class SipharishFormType extends Model
     }
 
 
-
     public function getTemplateOptions(): array
     {
         return [[
@@ -75,6 +74,7 @@ class SipharishFormType extends Model
                 'वडा नं' => '[@ward_no]',
                 'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
                 'आजको मिति (ई.स.)' => '[@today_date_ad]',
+                'लेटरहेड' => '[@letterHead]',
             ],
         ]];
     }
