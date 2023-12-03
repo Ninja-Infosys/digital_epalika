@@ -35,7 +35,6 @@
         }
 
         .card-background {
-
             border-radius: 5px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType?->category->backgroundColor()??'white'}};
             color: {{$disabilityIdentityCard->governmentalDisabilityType?->category->color()??'black'}};
@@ -238,7 +237,10 @@
                         <div class="fs16">
                             बाबु/आमा वा संरक्षकको नाम थर :
                         </div>
-                        <div class="dynamic-content">{{$disabilityIdentityCard->guardian_name??''}}
+                        <div class="dynamic-content">
+                            {{$disabilityIdentityCard->father_name??''}}/
+                            {{$disabilityIdentityCard->mother_name??''}}/
+                            {{$disabilityIdentityCard->guardian_name??''}}
                         </div>
                     </div>
                 </td>
@@ -270,7 +272,9 @@
                         <div class="fs16">
                             हस्ताक्षर
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content">
+                            <img src="{{$disabilityIdentityCard->employeeSignature->red_signature}}"
+                          alt="तस्विर" width="40" height="37" style=" max-width: 100%;">
                         </div>
                     </div>
                 </td>
@@ -281,7 +285,9 @@
                         <div class="fs16">
                             नाम, थर :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+
+                        <div class="dynamic-content">
+                             {{$disabilityIdentityCard->employeeSignature->name??''}}
                         </div>
                     </div>
                 </td>
@@ -293,19 +299,22 @@
                         <div class="fs16">
                             पद :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content">
+                            {{$disabilityIdentityCard->employeeSignature->designation ??''}}
                         </div>
                     </div>
                 </td>
             </tr>
 
             <tr>
-                <td style=" padding: 0 !important">
+                <td style="padding: 0 !important">
                     <div class="d-flex">
                         <div class="fs16">
-                            मिति :
+                            मिति:
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+
+                        <div class="dynamic-content">
+                            {{ get_nepali_number($date) }}
                         </div>
                     </div>
                 </td>
@@ -506,7 +515,10 @@
                         <div class="fs16">
                             Father/Mother Name or Guardian :
                         </div>
-                        <div class="dynamic-content">{{$disabilityIdentityCard->guardian_name_en??''}}
+                        <div class="dynamic-content">
+                            {{$disabilityIdentityCard->father_name_en??''}}/
+                            {{$disabilityIdentityCard->mother_name_en??''}}/
+                            {{$disabilityIdentityCard->guardian_name_en??''}}
                         </div>
                     </div>
                 </td>
@@ -538,7 +550,9 @@
                         <div class="fs16">
                             Signature:
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content">
+                            <img src="{{$disabilityIdentityCard->employeeSignature->red_signature}}"
+                            alt="तस्विर" width="40" height="37" style=" max-width: 100%;">
                         </div>
                     </div>
                 </td>
@@ -549,7 +563,8 @@
                         <div class="fs16">
                             Name:
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content" >
+                            {{$disabilityIdentityCard->employeeSignature->name_en ??''}}
                         </div>
                     </div>
                 </td>
@@ -561,7 +576,8 @@
                         <div class="fs16">
                             Designation:
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content">
+                            {{$disabilityIdentityCard->employeeSignature->designation_en ??''}}
                         </div>
                     </div>
                 </td>
@@ -573,7 +589,7 @@
                         <div class="fs16">
                             Date :
                         </div>
-                        <div class="dynamic-content" style="color: white !important;">.
+                        <div class="dynamic-content">{{$date}}
                         </div>
                     </div>
                 </td>
@@ -587,7 +603,6 @@
                 ">
                 <span style="font-size: 10px; font-weight: bold">
                    "If somebody finds this ID card, please deposit this in the nearby Police Station or Municipality Office."
-
                 </span>
         </div>
     </div>

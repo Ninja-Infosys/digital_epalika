@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+use App\Models\Settings\Relationship;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -28,12 +29,13 @@ class SeniorCitizenDetailLivewire extends Component
     public $wards = '';
 
     public $employeeSignatures = [];
+    public $relations = [];
 
     public SeniorCitizenDetail $seniorCitizenDetail;
     public array $form = [
         'photo' => null,
-        'left_finger' => null,
-        'right_finger' => null,
+        // 'left_finger' => null,
+        // 'right_finger' => null,
         'name' => null,
         'name_en' => null,
         'dob_bs' => null,
@@ -76,36 +78,37 @@ class SeniorCitizenDetailLivewire extends Component
         }
         $officeSetting = OfficeSetting::first();
         $this->employeeSignatures = EmployeeSignature::Status()->get();
+        $this->relations = Relationship::all();
         $this->provinces = Province::all();
 
         if (!empty($seniorCitizenDetail)) {
             $this->seniorCitizenDetail = $seniorCitizenDetail;
-            foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
-                $this->form[$key] = $seniorCitizenDetail[$key];
-            }
+            // foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
+            //     $this->form[$key] = $seniorCitizenDetail[$key];
+            // }
 
-            if ($seniorCitizenDetail->fingerprints->count() > 0) {
-                if (!empty($rightFinger = $seniorCitizenDetail->fingerprints->where('finger', 'right')->first())) {
-                    $this->form['right_finger'] = [
-                        'id' => $rightFinger->id,
-                        'image' => $rightFinger->finger_image,
-                        'isoTemplate' => $rightFinger->iso_temp,
-                        'ansiTemplate' => $rightFinger->ansi_temp,
-                        'isoImage' => $rightFinger->iso_image,
-                        'quality' => $rightFinger->quality
-                    ];
-                }
-                if (!empty($leftFinger = $seniorCitizenDetail->fingerprints->where('finger', 'left')->first())) {
-                    $this->form['left_finger'] = [
-                        'id' => $leftFinger->id,
-                        'image' => $leftFinger->finger_image,
-                        'isoTemplate' => $leftFinger->iso_temp,
-                        'ansiTemplate' => $leftFinger->ansi_temp,
-                        'isoImage' => $leftFinger->iso_image,
-                        'quality' => $leftFinger->quality
-                    ];
-                }
-            }
+            // if ($seniorCitizenDetail->fingerprints->count() > 0) {
+            //     if (!empty($rightFinger = $seniorCitizenDetail->fingerprints->where('finger', 'right')->first())) {
+            //         $this->form['right_finger'] = [
+            //             'id' => $rightFinger->id,
+            //             'image' => $rightFinger->finger_image,
+            //             'isoTemplate' => $rightFinger->iso_temp,
+            //             'ansiTemplate' => $rightFinger->ansi_temp,
+            //             'isoImage' => $rightFinger->iso_image,
+            //             'quality' => $rightFinger->quality
+            //         ];
+            //     }
+            //     if (!empty($leftFinger = $seniorCitizenDetail->fingerprints->where('finger', 'left')->first())) {
+            //         $this->form['left_finger'] = [
+            //             'id' => $leftFinger->id,
+            //             'image' => $leftFinger->finger_image,
+            //             'isoTemplate' => $leftFinger->iso_temp,
+            //             'ansiTemplate' => $leftFinger->ansi_temp,
+            //             'isoImage' => $leftFinger->iso_image,
+            //             'quality' => $leftFinger->quality
+            //         ];
+            //     }
+            // }
         } else {
             $this->form['province_id'] = $officeSetting->province_id;
             $this->form['district_id'] = $officeSetting->district_id;
@@ -118,29 +121,29 @@ class SeniorCitizenDetailLivewire extends Component
         'setLeft' => 'setLeftThumb',
     ];
 
-    public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
-    {
-        $this->form['right_finger'] = [
-            'id' => $this->form['right_finger']['id'] ?? null,
-            'image' => $image,
-            'isoTemplate' => $isoTemplate,
-            'ansiTemplate' => $ansiTemplate,
-            'isoImage' => $isoImage,
-            'quality' => $quality,
-        ];
-    }
+    // public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
+    // {
+    //     $this->form['right_finger'] = [
+    //         'id' => $this->form['right_finger']['id'] ?? null,
+    //         'image' => $image,
+    //         'isoTemplate' => $isoTemplate,
+    //         'ansiTemplate' => $ansiTemplate,
+    //         'isoImage' => $isoImage,
+    //         'quality' => $quality,
+    //     ];
+    // }
 
-    public function setLeftThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
-    {
-        $this->form['left_finger'] = [
-            'id' => $this->form['left_finger']['id'] ?? null,
-            'image' => $image,
-            'isoTemplate' => $isoTemplate,
-            'ansiTemplate' => $ansiTemplate,
-            'isoImage' => $isoImage,
-            'quality' => $quality,
-        ];
-    }
+    // public function setLeftThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
+    // {
+    //     $this->form['left_finger'] = [
+    //         'id' => $this->form['left_finger']['id'] ?? null,
+    //         'image' => $image,
+    //         'isoTemplate' => $isoTemplate,
+    //         'ansiTemplate' => $ansiTemplate,
+    //         'isoImage' => $isoImage,
+    //         'quality' => $quality,
+    //     ];
+    // }
 
     public function dobChanged($nepaliDate, $englishDate)
     {
@@ -163,14 +166,14 @@ class SeniorCitizenDetailLivewire extends Component
         return !empty($this->seniorCitizenDetail)
             ? array_merge($this->validationRules, [
                 'form.photo' => ['nullable'],
-                'form.left_finger' => ['nullable'],
-                'form.right_finger' => ['nullable'],
+                // 'form.left_finger' => ['nullable'],
+                // 'form.right_finger' => ['nullable'],
                 'form.citizenship_no' => ['required', 'unique:senior_citizen_details,citizenship_no,' . $this->seniorCitizenDetail->id],
             ])
             : array_merge($this->validationRules, [
                 'form.photo' => ['nullable'],
-                'form.left_finger' => ['nullable'],
-                'form.right_finger' => ['nullable'],
+                // 'form.left_finger' => ['nullable'],
+                // 'form.right_finger' => ['nullable'],
                 'form.citizenship_no' => ['required', 'unique:senior_citizen_details,citizenship_no'],
             ]);
     }
@@ -213,8 +216,8 @@ class SeniorCitizenDetailLivewire extends Component
     {
         return [
             'form.photo.required' => ['फोटो आवश्यक छ'],
-            'form.left_finger.required' => ['बायाँ छाप आवश्यक छ'],
-            'form.right_finger.required' => ['दाहिने छाप आवश्यक छ'],
+            // 'form.left_finger.required' => ['बायाँ छाप आवश्यक छ'],
+            // 'form.right_finger.required' => ['दाहिने छाप आवश्यक छ'],
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
             'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
@@ -237,6 +240,7 @@ class SeniorCitizenDetailLivewire extends Component
             'form.patrons_name_en.required' => ['संरक्षकको अंग्रेजीमा नाम आवश्यक छ'],
             'form.patrons_name_address.required' => ['संरक्षकको ठेगाना आवश्यक छ'],
             'form.patrons_phone.required' => ['सम्पर्क न. आवश्यक छ'],
+            'form.patrons_relationship.required' => ['नाता आवश्यक छ'],
             'form.is_disease.required' => ['रोगको नाम आवश्यक छ'],
             'form.disease_name.required_if' => ['रोगको नाम आवश्यक छ'],
             'form.description.required' => ['हेरचाह केन्द्रको विवरण आवश्यक छ'],
@@ -260,24 +264,24 @@ class SeniorCitizenDetailLivewire extends Component
         if (Carbon::parse($this->form['dob_ad'])->age > 60) {
             if (!empty($this->seniorCitizenDetail)) {
                 $this->seniorCitizenDetail->update($this->validate()['form']);
-                if (!empty($this->form['left_finger']['id'])) {
-                    Fingerprint::find($this->form['left_finger']['id'])->update([
-                        'finger_image' => $this->form['left_finger']['image'],
-                        'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                        'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                        'iso_image' => $this->form['left_finger']['isoImage'],
-                        'quality' => $this->form['left_finger']['quality'],
-                    ]);
-                }
-                if (!empty($this->form['right_finger']['id'])) {
-                    Fingerprint::find($this->form['right_finger']['id'])->update([
-                        'finger_image' => $this->form['right_finger']['image'],
-                        'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                        'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                        'iso_image' => $this->form['right_finger']['isoImage'],
-                        'quality' => $this->form['right_finger']['quality'],
-                    ]);
-                }
+                // if (!empty($this->form['left_finger']['id'])) {
+                //     Fingerprint::find($this->form['left_finger']['id'])->update([
+                //         'finger_image' => $this->form['left_finger']['image'],
+                //         'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                //         'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                //         'iso_image' => $this->form['left_finger']['isoImage'],
+                //         'quality' => $this->form['left_finger']['quality'],
+                //     ]);
+                // }
+                // if (!empty($this->form['right_finger']['id'])) {
+                //     Fingerprint::find($this->form['right_finger']['id'])->update([
+                //         'finger_image' => $this->form['right_finger']['image'],
+                //         'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                //         'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                //         'iso_image' => $this->form['right_finger']['isoImage'],
+                //         'quality' => $this->form['right_finger']['quality'],
+                //     ]);
+                // }
                 $this->dispatchBrowserEvent('toast_message', [
                     'type' => 'success',
                     'title' => ' जेस्ठ नागरिक विवरण सफलतापुर्बक अध्याबधिक भयो'
@@ -290,29 +294,29 @@ class SeniorCitizenDetailLivewire extends Component
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'card_no' => DB::table('senior_citizen_details')->max('id') + 1,
                 ]);
-                if (!empty($this->form['left_finger']['image'])) {
-                    $seniorCitizenDetail->fingerPrints()->create([
-                        'finger_image' => $this->form['left_finger']['image'] ?? null,
-                        'iso_temp' => $this->form['left_finger']['isoTemplate'] ?? null,
-                        'ansi_temp' => $this->form['left_finger']['ansiTemplate'] ?? null,
-                        'iso_image' => $this->form['left_finger']['isoImage'] ?? null,
-                        'finger' => 'left',
-                        'quality' => $this->form['left_finger']['quality'] ?? null,
-                        'user_id' => auth()->id(),
-                    ]);
-                }
+                // if (!empty($this->form['left_finger']['image'])) {
+                //     $seniorCitizenDetail->fingerPrints()->create([
+                //         'finger_image' => $this->form['left_finger']['image'] ?? null,
+                //         'iso_temp' => $this->form['left_finger']['isoTemplate'] ?? null,
+                //         'ansi_temp' => $this->form['left_finger']['ansiTemplate'] ?? null,
+                //         'iso_image' => $this->form['left_finger']['isoImage'] ?? null,
+                //         'finger' => 'left',
+                //         'quality' => $this->form['left_finger']['quality'] ?? null,
+                //         'user_id' => auth()->id(),
+                //     ]);
+                // }
 
-                if (!empty($this->form['right_finger']['image'])) {
-                    $seniorCitizenDetail->fingerPrints()->create([
-                        'finger_image' => $this->form['right_finger']['image'] ?? null,
-                        'iso_temp' => $this->form['right_finger']['isoTemplate'] ?? null,
-                        'ansi_temp' => $this->form['right_finger']['ansiTemplate'] ?? null,
-                        'iso_image' => $this->form['right_finger']['isoImage'] ?? null,
-                        'finger' => 'right',
-                        'quality' => $this->form['right_finger']['quality'] ?? null,
-                        'user_id' => auth()->id(),
-                    ]);
-                }
+                // if (!empty($this->form['right_finger']['image'])) {
+                //     $seniorCitizenDetail->fingerPrints()->create([
+                //         'finger_image' => $this->form['right_finger']['image'] ?? null,
+                //         'iso_temp' => $this->form['right_finger']['isoTemplate'] ?? null,
+                //         'ansi_temp' => $this->form['right_finger']['ansiTemplate'] ?? null,
+                //         'iso_image' => $this->form['right_finger']['isoImage'] ?? null,
+                //         'finger' => 'right',
+                //         'quality' => $this->form['right_finger']['quality'] ?? null,
+                //         'user_id' => auth()->id(),
+                //     ]);
+                // }
             });
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',

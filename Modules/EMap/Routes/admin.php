@@ -1,22 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
+use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
+use Modules\EMap\Http\Controllers\AdminStepController;
+use Modules\EMap\Http\Controllers\AttachDocumentController;
+use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
+use Modules\EMap\Http\Controllers\MapPassGroupController;
+use Modules\EMap\Http\Controllers\FormController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
+//update status from admin
+Route::put('appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AdminStepController::class, 'updateAppliedDocumentStatus'])->name('mapApply.admin-step.updateAppliedDocumentStatus');
+Route::put('formStore/{formStore}/updateFormStoreStatus', [AdminStepController::class, 'updateFormStoreStatus'])->name('mapApply.admin-step.updateFormStoreStatus');
+Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
+
+
+
+
+Route::get('mapApply/{mapApply}/register', [MapController::class,'register'])->name('mapApply.register-map');
+
+Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
+Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 'fillDetail'])->name('mapApply.admin-step.fill-detail');
+Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
+Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTemplate', [DocumentAttachController::class,'printTemplate'])->name('attach-document.print-template');
+Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
+Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
+
+
+
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
@@ -26,6 +52,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::put('reject/{noticeTypeEnum}', 'reject')->name('reject');
         });
     });
+
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
@@ -39,8 +66,17 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapFee', MapFeeController::class);
     Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
-    Route::get('{noticeTypeEnum}/eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
-    Route::resource('{noticeTypeEnum}/eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
+    Route::get('eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');
+    Route::resource('{eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
+
+    Route::get('mapPassGroup/{mapPassGroup}/toggleStatus', [MapPassGroupController::class, 'updateStatus'])->name('mapPassGroup.updateStatus');
+    Route::resource('mapPassGroup', MapPassGroupController::class);
+    Route::get('form/{form}/toggleStatus', [FormController::class, 'updateStatus'])->name('form.updateStatus');
+    Route::resource('form', FormController::class);
+    Route::get('dynamicForm/{dynamicForm}/toggleStatus', [DynamicFormController::class, 'updateStatus'])->name('dynamicForm.updateStatus');
+    Route::get('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'template'])->name('dynamicForm.template');
+    Route::put('dynamicForm/{dynamicForm}/template', [DynamicFormController::class, 'templateStore'])->name('dynamicForm.template.store');
+    Route::resource('dynamicForm', DynamicFormController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {

@@ -12,7 +12,16 @@
         </a>
     </li>
 @endcan
+@can('recommendationSetting_access')
+    <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
+        <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">
+            <i class="fa fa-file"></i>
+            <span class="">सिफारिस सिर्जना गर्नुहोस्</span>
+        </a>
+    </li>
+@endcan
 
+{{--
 @foreach(recommendationCategory() as $recommendationCategory)
     @if($recommendationCategory->recommendationCategories->count() > 0)
         <li title="{{$recommendationCategory->title}}" class="{{request()->is('admin/recommendation/recommendationCategory/registrationDetail*') ? 'active' : ''}}">
@@ -49,6 +58,8 @@
     @endif
 
 @endforeach
+--}}
+{{--
 
 <li class="{{request()->is('admin/recommendation/report*') ? 'active' : ''}}">
     <a href="#recommendationReport"
@@ -131,6 +142,56 @@
                     </a>
                 </li>
             @endcan
+        </ul>
+    </div>
+</li>
+--}}
+
+
+<li class="{{request()->is('admin/recommendation/sipharish*') ? 'active' : ''}}">
+    <a href="#recommendationSetting"
+       {{request()->is('admin/recommendation/sipharish/sipharishCategory*') || request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span>सिफारिस आधारभूत सेटिंग</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div
+        class="collapse {{request()->is('admin/recommendation/sipharish/sipharishCategory*') || request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'show' : ''}}"
+        id="recommendationSetting">
+        <ul class="nav-second-level">
+            @can('recommendationCategory_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishCategory.index')}}">
+                        <span>सिफारिस श्रेणी</span>
+                    </a>
+                </li>
+
+            @endcan
+            @can('recommendationCategory_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishSubCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishSubCategory.index')}}">
+                        <span>सिफारिस उप-श्रेणी</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationSetting_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharishFormType*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharishFormType.index')}}">
+                        <span>सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationSetting_access')
+                <li class="{{request()->is('admin/recommendation/sipharish/sipharisSignatureDetail*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.index')}}">
+                        <span>हस्ताक्षर सेटिङ</span>
+                    </a>
+                </li>
+            @endcan
+
         </ul>
     </div>
 </li>

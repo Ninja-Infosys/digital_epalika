@@ -101,7 +101,7 @@
     --ct-card-overlay-bg: rgba(255, 255, 255, 0.8);
     --ct-input-light-bg: #f3f7f9;
     --ct-lighten-300: #edeff1;
-    --primary: #0047ab;
+    --primary: #063e93;
     --secondary: #0DCAF0;
 }
 
@@ -10096,3 +10096,5 @@ table[data-toggle=table] {
 .inline-gap h5:nth-child(even){
     /*padding: 0 10px 0 10px;*/
 }
+
+

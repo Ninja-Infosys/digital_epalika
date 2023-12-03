@@ -3,6 +3,7 @@
 namespace Modules\EMap\Entities;
 
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,15 +23,10 @@ class EMapTemplate extends Model
     ];
 
     protected $fillable = [
-        'for',
-        'type',
         'data',
         'title',
         'status'
     ];
 
-    protected $casts = [
-        'for' => NoticeTypeEnum::class,
-        'type' => EMapFormFillerTypeEnum::class,
-    ];
+
 }

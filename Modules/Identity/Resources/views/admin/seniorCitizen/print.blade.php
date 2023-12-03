@@ -162,7 +162,7 @@
                     <p>प.प.नं: <span>{{ $seniorCitizenDetail->card_no }}</span></p>
                     <p>नाम थर: <span>{{ $seniorCitizenDetail->name }}</span></p>
                     <p>ना.प्रा.नं : <span>{{ $seniorCitizenDetail->citizenship_no }}</span></p>
-                    <p>रोग : <span>{{ $seniorCitizenDetail->is_disease == 1 ? 'छ' : 'छैन' }}</span></p>
+                    <p>रोगको नाम : {{ $seniorCitizenDetail->disease_name }}</span></p>
                     <p>ठेगाना
                         :<span>{{ $seniorCitizenDetail->localBody->local_body ?? '' }},{{ $seniorCitizenDetail->district->district ?? '' }},{{ $seniorCitizenDetail->province->province ?? '' }}</span>
                     </p>
@@ -239,7 +239,7 @@
                             : {{ $seniorCitizenDetail->card_no }}</p>
                         <p>Full Name : {{ $seniorCitizenDetail->name_en }}</p>
                         <p>Citizenship No: {{ $seniorCitizenDetail->citizenship_no }}<span></span></p>
-                        <p>Disease : <span>{{ $seniorCitizenDetail->is_disease == 1 ? 'Yes' : 'No' }}</span></p>
+                        <p>Disease : <span>{{ $seniorCitizenDetail->disease_name }}</span></p>
                         <p>Address :
                             <span>
                                 {{ $seniorCitizenDetail->localBody->local_body_en ?? '' }},{{ $seniorCitizenDetail->district->district_en ?? '' }},{{ $seniorCitizenDetail->province->province_en ?? '' }}</span>

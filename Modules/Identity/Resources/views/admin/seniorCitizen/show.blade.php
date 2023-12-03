@@ -108,7 +108,7 @@
                         </tr>
                         <tr>
                             <td>संरक्षकको फोन : {{ $seniorCitizenDetail->patrons_phone }}</td>
-                            <td>नाता :{{ $seniorCitizenDetail->patrons_relationship }}</td>
+                            <td>नाता :{{ $seniorCitizenDetail->patrons_relationship->title ?? '' }}</td>
                         </tr>
                         <tr>
                             <th>कुनै प्रकारको रोग छ वा छैन ? : {{ $seniorCitizenDetail->is_disease == 1 ? 'छ' : 'छैन' }}
@@ -165,28 +165,30 @@
                                     <p class="font-12 mb-2">जेष्ठ नागरिक परिचय पत्र</p>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="card-font-color">
                                             <p>आईडी कार्ड नं: {{$seniorCitizenDetail->card_no}}</p>
                                             <p>व्यक्तिको पुरा नाम: {{$seniorCitizenDetail->name}}</p>
-                                        </div>
-                                        <div class="card-font-color">
                                             <p>नागरिकता नं : <span>{{$seniorCitizenDetail->citizenship_no}}</span></p>
-                                            <p>रोग :
-                                                <span>{{$seniorCitizenDetail->is_disease==1 ? 'छ':'छैन'}}</span>
-                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-font-color">
+                                            <p>लिङ्ग: {{$seniorCitizenDetail->gender?->label()??''}}</p>
+                                            <p>रक्त समूह: {{$seniorCitizenDetail->blood_group?->label()??''}}</p>
+                                            <p>उमेर: {{$seniorCitizenDetail->age}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-font-color">
+                                            <p>रोगको नाम : {{ $seniorCitizenDetail->disease_name }}</span></p>
                                             <p>ठेगाना : <span> {{$seniorCitizenDetail->localBody->local_body??''}},{{$seniorCitizenDetail->district->district??''}},{{$seniorCitizenDetail->province->province??''}}</span>
                                             </p>
                                             <p>पति,पत्नीको नाम :
                                                 <span>{{$seniorCitizenDetail->spouse}} </span>
                                             </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card-font-color">
-                                            <p>लिङ्ग: {{$seniorCitizenDetail->gender?->label()??''}}</p>
-                                            <p>रक्त समूह: {{$seniorCitizenDetail->blood_group?->label()??''}}</p>
-                                            <p>उमेर: {{$seniorCitizenDetail->age}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -241,7 +243,7 @@
                                     <p class="font-12 mb-2">Senior Citizen ID Card</p>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="card-font-color">
                                             <p>ID Card No
                                                 : {{$seniorCitizenDetail->card_no}}</p>
@@ -249,7 +251,7 @@
                                             <p>Citizenship No: {{$seniorCitizenDetail->citizenship_no}}<span></span></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="card-font-color">
                                             <p>Gender
                                                 : {{$seniorCitizenDetail->gender}}</p>
@@ -262,15 +264,15 @@
                                 </div>
                                 <div class="card-font-color">
                                     <div class="row">
-                                        <div class="col-md-8 card-font-color">
-                                            <p>Disease : <span>{{$seniorCitizenDetail->is_disease==1 ? 'Yes':'No'}}</span></p>
+                                        <div class="col-md-12 card-font-color">
+                                            <p>Disease : <span>{{ $seniorCitizenDetail->disease_name }}</span></p>
                                             <p>Address :
                                                 <span> {{$seniorCitizenDetail->localBody->local_body_en??''}},{{$seniorCitizenDetail->district->district_en??''}},{{$seniorCitizenDetail->province->province_en??''}}</span>
                                             </p>
                                             <p>Husband/Wife Name :
                                                 <span> {{$seniorCitizenDetail->spouse_en}}</span></p>
                                         </div>
-                                        <div class="col-md-4 d-flex justify-content-between">
+                                        {{-- <div class="col-md-4 d-flex justify-content-between">
                                             <div class="text-center card-font-color">
                                                 @foreach($seniorCitizenDetail->fingerPrints->where('finger','left') as $fingerPrint)
                                                     <img src="{{$fingerPrint->finger_image}}" alt=""
@@ -287,8 +289,7 @@
                                                     <p>Right</p>
                                                 @endforeach
                                             </div>
-                                        </div>
-
+                                        </div> --}}
                                     </div>
                                     <div class="row">
                                         <div class="d-flex justify-content-center">

@@ -11,6 +11,7 @@ use App\Traits\LockableTrait;
 use App\Traits\QueryFilterTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -86,7 +87,7 @@ class User extends Authenticatable
             : asset('images/user_icon.jpg');
     }
 
-    public function setProfilePhotoPathAttribute($value)
+    public function setProfilePhotoPathAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
@@ -138,5 +139,12 @@ class User extends Authenticatable
     public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);
+    }
+
+
+
+    public function mapPassGroups(): BelongsToMany
+    {
+        return $this->belongsToMany(\Modules\EMap\Entities\New\MapPassGroup::class);
     }
 }

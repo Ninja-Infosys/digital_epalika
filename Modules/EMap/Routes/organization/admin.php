@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
 use Modules\EMap\Http\Controllers\OrganizationDashboardController;
@@ -20,9 +21,17 @@ Route::controller(MapApplyController::class)->group(function () {
     Route::get('mapApply/{mapApply}/template-data/{noticeTypeEnum}', 'getTemplateData')->name('getTemplateData');
     Route::post('mapApply/{mapApply}/storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('storeTemplateData');
 });
+Route::get('mapApply/{mapApply}/form', [MapApplyController::class, 'formList'])->name('formList');
+Route::get('mapApply/{mapApply}/form/{form}/formDetail', [MapApplyController::class, 'formDetail'])->name('formDetail');
 Route::resource('mapApply', MapApplyController::class);
-Route::resource('mapApply/{mapApply}/attachDocument', \Modules\EMap\Http\Controllers\AttachDocumentController::class);
+Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AttachDocumentController::class, 'printTemplate'])->name('printTemplate');
+Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class, 'documentDetail'])->name('documentDetail');
+Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
+Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AttachDocumentController::class, 'formStorePrint'])->name('formStorePrint');
+Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::resource('taxClearance', TaxClearanceController::class);
+Route::get('mapApply/{mapApply}/view/{form}/detail', [MapApplyController::class, 'viewDetail'])->name('organization.view-detail');
+
 
 
 //organization notification
@@ -30,3 +39,12 @@ Route::resource('taxClearance', TaxClearanceController::class);
 Route::get('notification', [OrganizationNotificationController::class, 'notification'])->name('notification');
 Route::get('notification/{databaseNotification}', [OrganizationNotificationController::class, 'readNotification'])->name('notification.read');
 Route::get('readAllNotification', [OrganizationNotificationController::class, 'readAllNotification'])->name('notification.readAllNotification');
+
+//organizatio document
+
+Route::get('mapApply/{mapApply}/attachment/organizationDocument', [AttachDocumentController::class, 'index'])->name('organizationDocument');
+Route::post('mapApply/{mapApply}/attachment/storeOrganizationDocument', [AttachDocumentController::class, 'storeOrganizationDocument'])->name('storeOrganizationDocument');
+
+Route::put('appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AttachDocumentController::class, 'updateAppliedDocumentStatus'])->name('updateAppliedDocumentStatus');
+Route::put('formStore/{formStore}/updateFormStoreStatus', [AttachDocumentController::class, 'updateFormStoreStatus'])->name('updateFormStoreStatus');
+Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AttachDocumentController::class, 'updatePaymentStoreStatus'])->name('updatePaymentStoreStatus');

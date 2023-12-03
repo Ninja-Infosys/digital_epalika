@@ -32,7 +32,7 @@
                             wire:model="form.photo"
 
                         />
-                        <div wire:loading wire:target="form.photo">Uploading...</div>
+                        {{-- <div wire:loading wire:target="form.photo">Uploading...</div>
                         @error('form.photo')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -42,12 +42,14 @@
                         <div class="d-flex justify-content-between">
                             <video id="video" width="200" height="200" autoplay></video>
                             <canvas id="canvas" width="200" height="200"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                        </div> --}}
 
                     </div>
                     <div class="col-md-6">
+
+
+                    </div>
+                    {{-- <div class="col-md-6">
                         <div class="card">
                             @if ( !empty($form['right_finger']['image']))
                                 <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right" alt="Right"
@@ -64,8 +66,8 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> --}}
+                    {{-- <div class="col-md-6">
                         <div class="card">
                             @if ( !empty($form['left_finger']['image']))
                                 <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left" alt="Left"
@@ -82,7 +84,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </fieldset>
             <fieldset class="mt-3">
@@ -129,6 +131,9 @@
                             wire:model="form.dob_bs"
                         />
                         @error('form.dob_bs')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        @error('form.dob_ad')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -420,17 +425,19 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.patrons_relationship" class="form-label">नाता </label>
-                        <input
-                            name="form.patrons_relationship"
-                            class="form-control  @error('form.patrons_relationship') is-invalid @enderror"
-                            type="text"
-                            id="form.patrons_relationship"
-                            placeholder="नाता"
-                            wire:model="form.patrons_relationship"
-                        />
-                        @error('form.patrons_relationship')
-                        <div class="invalid-feedback">{{$message}}</div>
+                        <label for="patrons_relationship" class="form-label">नाता</label>
+                        <select class="form-select @error('patrons_relationship') is-invalid @enderror"
+                            name="patrons_relationship" id="patrons_relationship">
+                            <option value="">---नाता छान्नुहोस् ---</option>
+                            @foreach ($relations as $relation)
+                                <option value="{{ $relation->id }}"
+                                    {{ $relation->id == old('patrons_relationship') ? 'selected' : '' }}>
+                                    {{ $relation->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('patrons_relationship')
+                            <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">

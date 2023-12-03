@@ -25,10 +25,16 @@ class DisabilityPrint extends Model
         'title',
         'date',
         'date_ad',
+        'employee_signature_id'
     ];
 
     public function disabilityIdentityCard(): BelongsTo
     {
         return $this->belongsTo(DisabilityIdentityCard::class);
+    }
+
+    public function employeeSignature(): BelongsTo
+    {
+        return $this->belongsTo(EmployeeSignature::class);
     }
 }
