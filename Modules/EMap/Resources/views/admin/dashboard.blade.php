@@ -50,7 +50,6 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    {{-- <div class="row mt-2" id="charts" data-chart-url="{{route('admin.emap.dashboard.ajax')}}"> --}}
     <div class="row mt-2" id="charts" data-chart-url="{{ route('emap.admin.dashboard.ajax') }}">
         <div class="col-md-6">
             <div class="card">

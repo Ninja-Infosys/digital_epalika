@@ -61,7 +61,7 @@ class DashboardController extends Controller
 
    public function ajaxData($results, $fiscal_year_id)
 {
-    dd($results, $fiscal_year_id); 
+
     return [
         'totalRevenue' => $this->totalRevenue($results), // Replace with the actual method call
         'totalCashBankRevenue' => $this->totalCashBankRevenue($results), // Replace with the actual method call

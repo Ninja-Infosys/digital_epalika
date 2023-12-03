@@ -19,7 +19,8 @@ use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::get('project/{project}/file-list', [ProjectController::class, 'fileList'])->name('project.fileList');
 Route::get('project{project}/upload-file', [ProjectController::class, 'uploadFilePage'])->name('project.uploadFilePage');

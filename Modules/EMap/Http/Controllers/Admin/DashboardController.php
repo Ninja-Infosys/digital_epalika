@@ -185,21 +185,27 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
     }
 
 
-    public function getMapApplyConstructionTypeAccordingToFiscalYear() {
-        $officeSetting = $this->getOfficeSetting();
-        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
-        $constructionTypes = $mapApplies->pluck('construction_type')->unique();
+    public function getMapApplyConstructionTypeAccordingToFiscalYear()
+    {
+        $mapApplies = MapApply::with('construction_type')
+            ->where('fiscal_year_id', $this->getOfficeSetting()->fiscal_year_id)
+            ->get()
+            ->map(function ($mapApply) {
+                return [
+                    'name' => optional(TypeOfConstructionWorkEnum::tryFrom($mapApply->construction_type))->label(),
+                    'data' => 1, // Assuming you want to count occurrences, you can adjust this as needed
+                    'color' => generateRandomRGBAColor(),
+                ];
+            });
     
         $chartData = [
-            'labels' => $constructionTypes->map(function ($constructionType) {
-                return TypeOfConstructionWorkEnum::tryFrom($constructionType)?->label();
-            })->toArray(),
+            'labels' => $mapApplies->pluck('name')->toArray(),
             'option' => ChartOptionEnum::PIE_CHART->option(),
             'dataSets' => [
                 [
-                    'data' => $mapApplies->groupBy('construction_type')->pluck('construction_type_count')->toArray(),
-                    'backgroundColor' => $mapApplies->pluck('color')?->toArray(),
-                    'borderColor' => $mapApplies->pluck('color')?->toArray(),
+                    'data' => $mapApplies->pluck('data')->toArray(),
+                    'backgroundColor' => $mapApplies->pluck('color')->toArray(),
+                    'borderColor' => $mapApplies->pluck('color')->toArray(),
                     'borderWidth' => 1,
                 ],
             ],

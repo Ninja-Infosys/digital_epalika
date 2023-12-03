@@ -71,7 +71,7 @@ public function ajaxData(){
             'dataSets' => [
                 [
                     'data' => $fiscalYears->pluck('trainings_count')->toArray(),
-                    'label' => 'जम्मा नक्सा',
+                    'label' => 'जम्मा तालिमहरु',
                 ]
             ],
         ];
@@ -101,44 +101,27 @@ public function ajaxData(){
     }
 
     public function trainerAccordingToSubject()
-{
-
-    $subjects = Subject::cases();
-    $label = collect();
-    $data = collect();
-    $color = collect();
-    foreach ($subjects as $subject) {
-        $count =  (int)$subject->trainers_count
-            ->where('trainer', $subject->value)
-            ->count();
-        $label->push($subject->label($subject->title) ." (".$count.")");
-        $data->push($count);
-        $color->push(generateRandomRGBAColor());
-
-    }
-    return [
-        'labels' => $subjects->pluck('name')->toArray(),
-        'option' => ChartOptionEnum::PIE_CHART->option(),
-        'dataSets' => [
-            [
-                'data' => $subjects->pluck('data')->toArray(),
-                'backgroundColor' => $subjects->pluck('color')->toArray(),
-                'borderColor' => $subjects->pluck('color')->toArray(),
-                'borderWidth' => 1,
+    {
+        $subjects = Subject::withCount('trainers')
+            ->get()
+            ->map(function ($subject) {
+                return [
+                    'title' => $subject->title,
+                    'trainers_count' => (int)$subject->trainers_count,
+                ];
+            });
+    
+        return [
+            'labels' => $subjects->pluck('title')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $subjects->pluck('trainers_count')->toArray(),
+                    'label' => 'Trainers Count',
+                ],
             ],
-        ],
-    ];
-}
-
-//     return Subject::withCount('trainers')
-//             ->get()
-//             ->map(function ($subject) {
-//                 return [
-//                     'name' => $subject->title,
-//                     'data' => (int)$subject->trainers_count
-//                 ];
-//             });
-// }
+        ];
+    }
+    
 
     public function trainingAccordingToType()
     {
