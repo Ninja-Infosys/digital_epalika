@@ -31,10 +31,14 @@ class CommitteeController extends Controller
     public function store(StoreCommitteeRequest $request)
     {
         $this->checkAuthorization('committee_create');
-
+        $existingCommittee = Committee::find($request->input('committee_type_id'));
+        if ($existingCommittee && $request->input('committee_no') >= $existingCommittee->committee_no) {
+            toast('Committee added is more than max committee capacity', 'error');
+            return back();
+        }
         Committee::create($request->validated() + [
-                'user_id' => auth()->id()
-            ]);
+            'user_id' => auth()->id()
+        ]);
 
         toast('समिति सफलतापूर्वक थपियो', 'success');
         return back();
