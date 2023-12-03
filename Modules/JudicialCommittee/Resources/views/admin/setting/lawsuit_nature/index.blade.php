@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.judicialCommittee.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">मुद्दा प्रकृति</li>
@@ -51,11 +52,11 @@
                                     <td>{{$lawSuitNature->title}}</td>
                                     <td>{{$lawSuitNature->title_en}}</td>
                                     <td>{{$lawSuitNature->code}}</td>
-                                    <td>
+                                    <td class="d-flex">
                                         @can('lawsuitNature_edit')
                                             <a data-bs-type="edit" href="{{route('admin.judicialCommittee.setting.lawsuitNature.edit',$lawSuitNature)}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                               class="btn btn-xs me-1 btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('organization.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">Rename</li>
@@ -28,9 +29,14 @@
                 </div>
                 <div class="card-body">
                     @foreach ($formStoreStatus->data as $key => $data)
-                    {{ $key . ': ' . $data }} @if (!$loop->last)
-                        <br>
-                    @endif
+                        @if(is_array($data))
+                            <x-form-array-data :formdata="$data"/>
+                        @else
+                            {{ $key . ': ' . $data }} @if (!$loop->last)
+                                <br>
+                            @endif
+
+                        @endif
                 @endforeach
                 </div>
             </div>

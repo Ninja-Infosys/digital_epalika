@@ -21,7 +21,7 @@ class LandDetail extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'land_use_area',
+        'land_use_area_id',
         'ward_no',
         'former_ward_no',
         'tole',
@@ -40,5 +40,10 @@ class LandDetail extends Model
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
+    }
+
+    public function LandUseArea(): BelongsTo
+    {
+        return $this->belongsTo(LandUseArea::class);
     }
 }

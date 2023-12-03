@@ -34,7 +34,7 @@
     <form wire:submit.prevent="submitFormData">
         @switch($currentStep)
             @case(2)
-                <div class="company-document">
+                <div class="company-document card p-2">
                     <div class="row">
                         <div class="col-md-3 mb-1">
                             <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो
@@ -98,8 +98,8 @@
                         </div>
                     </div>
                     <ul class="list-inline wizard mt-3">
-                        <li class="next d-flex justify-content-around">
-                            <button type="button" wire:click.prevent="backStep(1)" class="btn btn-info">
+                        <li class="next d-flex justify-content-end">
+                            <button type="button" wire:click.prevent="backStep(1)" class="btn btn-info me-2">
                                 <i class="fa fa-arrow-circle-left"></i> पछाडि
                             </button>
                             <button type="button"
@@ -112,70 +112,72 @@
                 </div>
                 @break
             @case(3)
-                <div class="alert alert-info" role="alert">
+                <div class=" card p-2 alert alert-info" role="alert">
                     निम्न प्रयोगकर्ताको इमेल, सम्पर्क नम्बर, र प्रयोगकर्ताको नाम, प्रणालीमा लग-इन गर्न प्रयोग हुनेछ
                     !!!
                 </div>
-                <div class="row">
-                    <div class="col-md-3 mb-1">
-                        <label for="user.name" class="form-label">प्रयोगकर्ताको नाम <span
-                                class="text-danger">*</span></label>
-                        <div class="input-group">
-                                            <span class="input-group-text" id="user.name">
-                                                <i class="fa fa-user"></i>
-                                            </span>
-                            <input name="user.name"
-                                   class="form-control @error('user.name') is-invalid @enderror"
-                                   type="text"
-                                   id="user.name"
-                                   placeholder="प्रयोगकर्ताको नाम"
-                                   wire:model="user.name">
+                <div class="card p-2">
+                    <div class="row">
+                        <div class="col-md-3 mb-1">
+                            <label for="user.name" class="form-label">प्रयोगकर्ताको नाम <span
+                                    class="text-danger">*</span></label>
+                            <div class="input-group">
+                                                <span class="input-group-text" id="user.name">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                <input name="user.name"
+                                       class="form-control @error('user.name') is-invalid @enderror"
+                                       type="text"
+                                       id="user.name"
+                                       placeholder="प्रयोगकर्ताको नाम"
+                                       wire:model="user.name">
+                            </div>
+                            @error('user.name')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
-                        @error('user.name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-3 mb-1">
-                        <label for="user.email" class="form-label">इमेल <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                                            <span class="input-group-text" id="user.email">
-                                                <i class="fa fa-envelope"></i>
-                                            </span>
-                            <input name="user.email"
-                                   class="form-control @error('user.email') is-invalid @enderror"
-                                   type="email"
-                                   id="user.email"
-                                   placeholder="इमेल"
-                                   wire:model="user.email">
+                        <div class="col-md-3 mb-1">
+                            <label for="user.email" class="form-label">इमेल <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                                <span class="input-group-text" id="user.email">
+                                                    <i class="fa fa-envelope"></i>
+                                                </span>
+                                <input name="user.email"
+                                       class="form-control @error('user.email') is-invalid @enderror"
+                                       type="email"
+                                       id="user.email"
+                                       placeholder="इमेल"
+                                       wire:model="user.email">
+                            </div>
+                            @error('user.email')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
-                        @error('user.email')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-3 mb-1">
-                        <label for="user.phone" class="form-label">सम्पर्क नं. <span
-                                class="text-danger">*</span></label>
-                        <div class="input-group">
-                                            <span class="input-group-text" id="user.email">
-                                                <i class="fa fa-envelope"></i>
-                                            </span>
-                            <input name="user.phone"
-                                   class="form-control @error('user.phone') is-invalid @enderror"
-                                   type="text"
-                                   id="user.phone"
-                                   placeholder="सम्पर्क नं"
-                                   wire:model="user.phone">
+    
+                        <div class="col-md-3 mb-1">
+                            <label for="user.phone" class="form-label">सम्पर्क नं. <span
+                                    class="text-danger">*</span></label>
+                            <div class="input-group">
+                                                <span class="input-group-text" id="user.email">
+                                                    <i class="fa fa-envelope"></i>
+                                                </span>
+                                <input name="user.phone"
+                                       class="form-control @error('user.phone') is-invalid @enderror"
+                                       type="text"
+                                       id="user.phone"
+                                       placeholder="सम्पर्क नं"
+                                       wire:model="user.phone">
+                            </div>
+                            @error('user.phone')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
-                        @error('user.phone')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
                     </div>
                 </div>
                 <ul class="list-inline wizard mt-3">
-                    <li class="next d-flex justify-content-around">
+                    <li class="next d-flex justify-content-end">
                         <button type="button" wire:click.prevent="backStep(2)"
-                                class="btn btn-info">
+                                class="btn btn-info me-2">
                             <i class="fa fa-arrow-circle-left"></i> पछाडि
                         </button>
                         <button type="button"
@@ -270,57 +272,59 @@
                                     </div>
 
                                     <div class="tab-pane" id="settings">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                @if ($organizationDetail['logo'])
-                                                    <div class="card">
-                                                        <div class="card-header">कम्पनी लोगो</div>
-                                                        <div class="card-body">
-                                                            <img src="{{ $organizationDetail['logo']->temporaryUrl() }}"
-                                                                 height="150"
-                                                                 alt="">
+                                        <div class="card p-2">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    @if ($organizationDetail['logo'])
+                                                        <div class="card">
+                                                            <div class="fw-bolder">कम्पनी लोगो</div>
+                                                            <div class="card-body">
+                                                                <img src="{{ $organizationDetail['logo']->temporaryUrl() }}"
+                                                                     height="150"
+                                                                     alt="">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div class="col-md-4">
-                                                @if ($organizationDetail['org_registration_document'])
-                                                    <div class="card">
-                                                        <div class="card-header">कम्पनी प्रमाणपत्र</div>
-                                                        <div class="card-body">
-                                                            <img
-                                                                src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}"
-                                                                height="250"
-                                                                alt="">
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-4">
+                                                    @if ($organizationDetail['org_registration_document'])
+                                                        <div class="card">
+                                                            <div class="fw-bolder">कम्पनी प्रमाणपत्र</div>
+                                                            <div class="card-body">
+                                                                <img
+                                                                    src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}"
+                                                                    height="250"
+                                                                    alt="">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div class="col-md-4">
-                                                @if ($organizationDetail['org_pan_document'])
-                                                    <div class="card">
-                                                        <div class="card-header">पाना</div>
-                                                        <div class="card-body">
-                                                            <img
-                                                                src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}"
-                                                                height="250"
-                                                                alt="">
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-4">
+                                                    @if ($organizationDetail['org_pan_document'])
+                                                        <div class="card">
+                                                            <div class="fw-bolder">पाना</div>
+                                                            <div class="card-body">
+                                                                <img
+                                                                    src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}"
+                                                                    height="250"
+                                                                    alt="">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div class="col-md-4">
-                                                @if ($taxClearance['document'])
-                                                    <div class="card d-flex justify-content-between">
-                                                        <div class="card-header">कर चुक्ता ({{$taxClearance['year']}})
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-4">
+                                                    @if ($taxClearance['document'])
+                                                        <div class="card d-flex justify-content-between">
+                                                            <div class="fw-bolder">कर चुक्ता ({{$taxClearance['year']}})
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <img src="{{ $taxClearance['document']->temporaryUrl() }}"
+                                                                     height="250"
+                                                                     alt="">
+                                                            </div>
                                                         </div>
-                                                        <div class="card-body">
-                                                            <img src="{{ $taxClearance['document']->temporaryUrl() }}"
-                                                                 height="250"
-                                                                 alt="">
-                                                        </div>
-                                                    </div>
-                                                @endif
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -330,8 +334,8 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <div class="next d-flex justify-content-around">
-                        <button type="button" wire:click.prevent="backStep(3)" class="btn btn-info">
+                    <div class="next d-flex justify-content-end">
+                        <button type="button" wire:click.prevent="backStep(3)" class="btn btn-info me-2">
                             <i class="fa fa-arrow-circle-left"></i> पछाडि
                         </button>
                         <button type="submit"
@@ -342,8 +346,8 @@
                 </div>
                 @break;
             @default
-                <fieldset>
-                    <legend class="title">संगठन विवरण</legend>
+                <div class="card px-2 py-2">
+                    <h4 class="title fw-bold">संगठन विवरण</h4>
                     <div class="row">
                         <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_name_ne" class="form-label">संगठनको नाम <span
@@ -437,9 +441,9 @@
                             @enderror
                         </div>
                     </div>
-                </fieldset>
-                <fieldset>
-                    <legend class="title">ठेगाना</legend>
+                </div>
+                <div class="card px-2 py-2">
+                    <h4 class="title fw-bold">ठेगाना</h4>
                     <div class="row">
                         <div class="col-md-2 mb-1">
                             <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
@@ -514,7 +518,7 @@
                             @enderror
                         </div>
                     </div>
-                </fieldset>
+                </div>
 
                 <ul class="list-inline wizard mt-3">
                     <li class="next d-flex justify-content-around">

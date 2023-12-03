@@ -94,6 +94,23 @@
                     <span> नक्शा पास फारम  </span>
                 </a>
             </li>
+
+            <li class="{{request()->is('admin/emap/setting/landUseArea*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.landUseArea.index')}}">
+                    <span>  भूउपयोग क्षेत्र  </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/emap/setting/streetDetails*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.streetDetail.index')}}">
+                    <span>  सडक विवरण </span>
+                </a>
+            </li>
+
+            <li class="{{request()->is('admin/emap/setting/criteriaDetailSetting*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.criteriaDetailSetting.index')}}">
+                    <span> मापदण्ड  </span>
+                </a>
+            </li>
             @can('eMapTemplate_access')
                 <li class="{{request()->is('admin/emap/enkasa/naksaPassGroupUser*') ? 'active' : ''}}">
                     <a href="{{route('emap.admin.form.index')}}">
@@ -104,17 +121,10 @@
         </ul>
     </div>
 </li>
-<li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
+<!-- <li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
     <a href="{{route('emap.admin.report.report')}}">
         <i class="fa fa-clipboard-list"></i>
         <span>रिपोर्ट</span>
     </a>
-</li>
-
-<li class="{{request()->is('admin/emap/files') ? 'active' : ''}}">
-    <a href="{{route('emap.admin.files.file')}}">
-        <i class="fa fa-file-archive"></i>
-        <span>फाईल व्यवस्थापन</span>
-    </a>
-</li>
+</li> -->
 

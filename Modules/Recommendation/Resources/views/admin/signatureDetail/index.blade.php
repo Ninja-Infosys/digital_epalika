@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.recommendation.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
 
@@ -68,7 +69,7 @@
                                             <i class="fa fa-2x {{ $signatureDetail->status == 'active' ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('recommendationCategory_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.edit', $signatureDetail) }}"

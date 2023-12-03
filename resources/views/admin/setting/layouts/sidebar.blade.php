@@ -54,6 +54,11 @@
                         <span> आपतकालीन सम्पर्क नं. </span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/setting/generalSetting/emergencyCategory/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.generalSetting.emergencyCategory.index')}}">
+                        <span> आपतकालीन सेवाको वर्गहरु </span>
+                    </a>
+                </li>
             @endcan
 
             @can('branch_access')

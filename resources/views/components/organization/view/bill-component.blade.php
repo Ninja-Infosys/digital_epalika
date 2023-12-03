@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mapApply->paymentStores->where('form_id', $form->id) as $paymentStore)
+                        @foreach ($mapApply->paymentStores->where('form_id', $form->id)?->where('form_data_id', $formDataType->id) as $paymentStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
@@ -33,49 +33,8 @@
                                 <td>{{ $paymentStore->amount }}</td>
                                 <td>{{ get_nepali_number($paymentStore->created_at->toDateString()) }}</td>
                                 <td>{{ $paymentStore->status->label()??'' }}</td>
-                                <td>
-                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#status_model{{ $paymentStore->id }}">
-                                        स्थिति
-                                    </button>
-                                </td>
                             </tr>
                               <!-- reject model -->
-                              <div class="modal fade" id="status_model{{ $paymentStore->id }}" tabindex="-1" aria-labelledby="statusLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="statusLabel">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                        <form method="POST" action="{{ route('organization.admin.updatePaymentStoreStatus',$paymentStore) }}">
-                                            @csrf
-                                            @method('put')
-                                                    <div class="mb-3">
-                                                        <label for="status" class="form-label">स्थिति</label>
-                                                        <select class="form-select form-select-sm" name="status" id="status_" aria-label="status">
-                                                            <option value="" disabled selected>--- छान्नुहोस् ---</option>
-                                                            @foreach (Modules\EMap\Enums\DocumentStatusEnum::cases() as $value)
-                                                            <option value="{{ $value->value }}">{{ $value->label() }}</option>
-                                                            @endforeach
-
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="comment" class="form-label">टिप्पणी</label>
-                                                        <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
-                                                        <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
-                                                    </div>
-                                                </form>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                         @endforeach
                     </tbody>
                 </table>

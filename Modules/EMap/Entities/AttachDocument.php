@@ -32,6 +32,7 @@ class AttachDocument extends Model
         'designer_document',
         'permission_document',
         'inheritance_document',
+        'analysis_document',
     ];
 
     public function mapApply(): BelongsTo
@@ -97,6 +98,14 @@ class AttachDocument extends Model
         );
     }
 
+    protected function analysisDocument(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+        );
+    }
+
     public function getLandOwnerDocumentSizeAttribute(): string
     {
         return Storage::disk('public')->size($this->attributes['land_owner_document']);
@@ -136,4 +145,13 @@ class AttachDocument extends Model
     {
         return Storage::disk('public')->size($this->attributes['inheritance_document']);
     }
+    public function getAnalysisDocumentSizeAttribute(): string
+{
+    $filePath = $this->attributes['analysis_document'];
+   
+    if (!empty($filePath)) {
+        return Storage::disk('public')->size($filePath);
+    }
+    return 'File path is empty';
+}
 }

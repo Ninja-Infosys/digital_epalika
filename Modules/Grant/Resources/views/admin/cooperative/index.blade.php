@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.grant.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -57,7 +58,7 @@
                                     <td>{{$cooperative->name}}</td>
                                     <td>{{$cooperative->cooperativeType->title??''}}</td>
                                     <td>{{$cooperative->vat_pan}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                             @can('cooperative_access')
                                                 <a data-bs-type="edit" href="{{route('admin.grant.cooperative.show', $cooperative)}}"
                                                    class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="हेर्नुहोस्">

@@ -8,7 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">महत्त्वपूर्ण लिङ्क</li>
@@ -50,17 +51,17 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$importantLink->link_title}}</td>
                                     <td>{{$importantLink->link_url}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.website.importantLink.edit',$importantLink)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i> 
                                         </a>
                                         <form action="{{route('admin.website.importantLink.destroy',$importantLink)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title=" मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i> 
                                             </button>
                                         </form>
                                     </td>

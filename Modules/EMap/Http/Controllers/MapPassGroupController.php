@@ -27,9 +27,15 @@ class MapPassGroupController extends Controller
 
     public function store(StoreMapPassGroupRequest $request)
     {
+
         DB::transaction(function () use ($request) {
+
             $mapPassGroup = MapPassGroup::create($request->validated());
-            $mapPassGroup->users()->attach($request->input('users'));
+            foreach ($request->validated()['users'] as $userData) {
+                $user = User::find($userData['user_id']);
+                $wardNos = $userData['ward_no'];
+                $mapPassGroup->users()->attach($user, ['ward_no' => implode(',', $wardNos)]);
+            }
         });
 
         toast('नक्शा पास समूह थपियो', 'success');
@@ -52,7 +58,17 @@ class MapPassGroupController extends Controller
     {
         DB::transaction(function () use ($request, $mapPassGroup) {
             $mapPassGroup->update($request->validated());
-            $mapPassGroup->users()->sync($request->input('users'));
+            foreach ($request->input('users') as $userId) {
+                $wardNos = $userId['ward_no'];
+                $condition = [
+                    'user_id' => $userId['user_id'],
+                    'map_pass_group_id' => $mapPassGroup->id,
+                ];
+                $newWardNo = implode(',', $wardNos);
+                DB::table('map_pass_group_user')
+                    ->where($condition)
+                    ->update(['ward_no' => $newWardNo]);
+            }
         });
 
         toast('नक्शा पास समूह सफलतापूर्वक अद्यावधिक गरियो', 'success');

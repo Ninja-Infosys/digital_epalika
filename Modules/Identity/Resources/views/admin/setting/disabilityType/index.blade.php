@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('identity.admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">सेटिङ</li>
@@ -47,7 +48,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$disabilityType->title ?? ''}}</td>
                                 <td>{{$disabilityType->disabilityType->title ?? ''}}</td>
-                                <td>
+                                <td class="d-flex gap-1">
                                     <a data-bs-type="edit" href="{{route('identity.admin.setting.disabilityType.edit', $disabilityType)}}"
                                        type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                         <i class="fa fa-edit"></i>

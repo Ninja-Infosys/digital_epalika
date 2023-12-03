@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> माईनिउट टेम्पलेट</li>
@@ -40,12 +41,11 @@
                                     </a>
                                 </div>
                             @endif
-
                             <div class="col-md-12 mb-2">
                                 @foreach ((new \Modules\Identity\Entities\IdentityMeeting())->getTemplateOptions() as $template)
                                     <div class="mt-2">
                                         <h4>{{ $template['title'] ?? '' }} </h4>
-                                        <div class="button-list">
+                                        <div class="button-list d-flex flex-wrap mb-2">
                                             @foreach ($template['data'] as $key => $templateValue)
                                                 <button type="button" class="btn btn-outline-primary btn-xs"
                                                     onclick="copyText('{{ $templateValue }}')">

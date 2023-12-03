@@ -21,7 +21,6 @@
     },
     "dependencies": {
         "@fullcalendar/core": "^5.11.3",
-        "@vitejs/plugin-vue": "^3.2.0",
-        "sass": "^1.68.0"
+        "@vitejs/plugin-vue": "^3.2.0"
     }
 }

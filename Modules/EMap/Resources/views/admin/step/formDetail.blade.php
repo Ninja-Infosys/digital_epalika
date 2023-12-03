@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="#">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -23,11 +24,11 @@
     </div>
     @foreach ($form->formDataTypes as $formDataType)
         @if ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::FILE)
-            <x-admin.view.file-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form" />
+            <x-admin.view.file-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form" :check-authorization="$checkAuthorization"/>
         @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::FORM)
-            <x-admin.view.form-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+            <x-admin.view.form-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form" :check-authorization="$checkAuthorization" />
         @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::PAYMENT)
-            <x-admin.view.bill-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+            <x-admin.view.bill-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form" :check-authorization="$checkAuthorization" />
         @endif
     @endforeach
 

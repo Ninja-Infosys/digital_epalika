@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('identity.admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">जेष्ठ नागरिक परिचय पत्र</li>
@@ -61,7 +62,7 @@
                                              class="rounded-circle avatar avatar-md" style="width: 4rem; height: 4rem;">
                                     </td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @if($seniorCitizenDetail->can_edit_delete)
                                             <a href="{{route('identity.admin.seniorCitizenDetail.edit',$seniorCitizenDetail)}}"
                                                class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">

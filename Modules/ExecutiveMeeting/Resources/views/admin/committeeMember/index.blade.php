@@ -8,7 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.executiveMeeting.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">{{$committee->committee_name}} सदस्य</li>
@@ -62,7 +63,7 @@
                                     <td>{{ $committeeMember->phone }}</td>
                                     <td>{{ $committeeMember->email }}</td>
 
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('committeeMember_edit')
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.executiveMeeting.committee.committeeMember.edit',[$committee,$committeeMember]) }}"

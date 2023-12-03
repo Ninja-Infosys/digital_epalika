@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('emap.admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -56,25 +57,11 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
-                                <select name="type" id="type" class="form-control">
-                                    <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
-                                        <option {{old('type',$eMapTemplate->type->value)==$type->value ? 'selected':''}}
-                                                value="{{$type->value}}">{{$type->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('type')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
                             <div class="col-md-12 mb-2">
                                 @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
                                     <div class="mt-2">
                                         <h4>{{$template['title'] ?? ''}} :</h4>
-                                        <div class="button-list">
+                                        <div class="button-list d-flex flex-wrap mb-2">
                                         @foreach($template['data'] as $key=>$templateValue)
                                             <button type="button" class="btn btn-outline-primary btn-xs"
                                                onclick="copyText('{{$templateValue}}')">

@@ -14,12 +14,16 @@ use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Entities\Form;
+use Modules\EMap\Enums\DocumentStatusEnum;
 
 class MapApplyController extends Controller
 {
     public function index()
     {
-        $mapApplies = MapApply::with('houseOwner')->where('organization_id', auth('organization')->user()->id)->get();
+        $mapApplies = MapApply::with('houseOwner')
+            ->where('organization_id', auth('organization')->user()->id)
+            ->latest()
+            ->get();
 
         return view('emap::organization.map-applies.index', compact('mapApplies'));
     }
@@ -41,8 +45,33 @@ class MapApplyController extends Controller
 
     public function formList(MapApply $mapApply)
     {
-        $forms = Form::with('formDataTypes.form.dynamicForm')->orderBy('order')->get();
-        return view('emap::organization.attach-document.index', compact('mapApply', 'forms'));
+        $forms = Form::with('formDataTypes.form.dynamicForm', 'formStores', 'paymentStores', 'appliedDocuments')
+            ->orderBy('order')
+            ->get();
+        $order = $forms->min('order');
+        $activeStep = $mapApply->activeStep();
+
+        if (!empty($activeStep) && array_key_exists('status', $activeStep) && !empty($activeStep['status'])) {
+            $allApproved = true;
+
+            foreach ($activeStep['status'] as $item) {
+                if ($item !== 'approved') {
+                    $allApproved = false;
+                    break;
+                }
+            }
+
+            if ($allApproved) {
+                $order = $forms->where('order', '>', $activeStep['order'])
+                    ->sortBy('order')
+                    ->first()
+                    ?->order;
+            } else {
+                $order = $activeStep['order'];
+            }
+        }
+
+        return view('emap::organization.attach-document.index', compact('mapApply', 'forms', 'order'));
     }
 
     public function formDetail(MapApply $mapApply, Form $form)
@@ -56,6 +85,7 @@ class MapApplyController extends Controller
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
         return view('emap::organization.attach-document.viewDetail', compact('mapApply', 'form'));
     }
+
     public function update(Request $request, MapApply $mapApply)
     {
         //

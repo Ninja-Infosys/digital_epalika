@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.circular.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">चलानी</li>
@@ -59,7 +60,7 @@
                                     <td>{{$dispatch->letter_number}}</td>
                                     <td>{{$dispatch->letter_date}}</td>
                                     <td>{{$dispatch->subject}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit"
                                            href="{{route('admin.circular.dispatch.print', $dispatch)}}"
                                            class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin' : ''}}"

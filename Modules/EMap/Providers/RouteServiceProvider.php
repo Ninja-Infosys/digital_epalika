@@ -23,6 +23,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->group(module_path('EMap', '/Routes/web.php'));
+        Route::middleware('api')
+        ->prefix('emap/api')
+            ->group(module_path('EMap', '/Routes/api/publicRoute.php'));
 
         Route::middleware(['web', 'auth:organization', 'password.check'])
             ->prefix('organization/admin')

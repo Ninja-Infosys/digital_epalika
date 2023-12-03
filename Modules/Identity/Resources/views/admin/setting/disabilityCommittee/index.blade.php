@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">सेटिङ</li>
@@ -49,7 +50,7 @@
                                     <td>{{ $disabilityCommittee->name ?? '' }}</td>
                                     <td>{{ $disabilityCommittee->phone ?? '' }}</td>
                                     <td>{{ $disabilityCommittee->designation ?? '' }}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit"
                                             href="{{ route('identity.admin.setting.disabilityCommittee.edit', $disabilityCommittee) }}"
                                             type="button"
@@ -63,7 +64,7 @@
                                             @method('delete')
                                             <button data-bs-type="delete"
                                                 class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
-                                                title="मेटाउनु होस्">
+                                               >
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">अपाङ्गता परिचय पत्र</li>
@@ -58,7 +59,7 @@
                                         <td>
                                             {{ $disabilityIdentityCard->citizenship_no? $disabilityIdentityCard->citizenship_no."(नागरिकता)" : $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
                                         </td>
-                                        <td>
+                                        <td class="d-flex d-warp gap-1">
                                             @if ($disabilityIdentityCard?->can_edit_delete)
                                                 <a data-bs-type="edit"
                                                     href="{{ route('identity.admin.disabilityIdentityCard.show', $disabilityIdentityCard) }}"

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -68,7 +69,7 @@
                                     </td>
                                     <td>
                                         <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                           class="btn btn-xs btn-outline-primary" title="थप हेर्नुहोस्">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>

@@ -1,6 +1,6 @@
 @props(['form-data-type', 'map-apply', 'form'])
 <div class="row">
-    @foreach ($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
+    @foreach ($mapApply->load('appliedDocuments')->appliedDocuments?->where('form_data_id', $formDataType->id)->load('appliedMapFiles') as $appliedDocument)
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -51,10 +51,12 @@
                                     <td>{{ $appliedDocument->created_at->toDateString() }}</td>
                                     <td>{{ $appliedDocument->status->label()??'' }}</td>
                                     <td>
+                                        @if(auth()->user()->id == 1 || $checkAuthorization)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
-                                            स्थिति
+                                            <i class="fa fa-pen-nib"></i>
                                         </button>
+                                        @endif
                                     </td>
                                 </tr>
 
@@ -67,7 +69,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateAppliedDocumentStatus',$appliedDocument) }}">
+                                                <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateAppliedDocumentStatus',[$mapApply,$form,$formDataType,$appliedDocument]) }}">
                                                     @csrf
                                                     @method('put')
                                                             <div class="mb-3">
@@ -124,7 +126,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($appliedDocument->appliedDocumentStatuses as $appliedDocumentStatus)
+                            @foreach ($appliedDocument->load('appliedDocumentStatuses')->appliedDocumentStatuses as $appliedDocumentStatus)
                                 <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>

@@ -36,4 +36,13 @@ enum DetailsRegardingCriteriaEnum: string
             self::GROUND_COVERAGE_RATIO => 'प्रतिशतमा',
         };
     }
+
+    public function getFormula(self $value)
+    {
+        switch ($value){
+            case (self::FAR):
+
+            default:
+        }
+    }
 }

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.judicialCommittee.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
 
@@ -57,10 +58,10 @@
                                     <td>
                                         {{ $complaintApplication->lawsuitNature->title ?? '' }}
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
                                         <div class="btn-group dropstart">
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
-                                               class="btn btn-sm btn-primary">
+                                            <a style="width:75px;" href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
+                                               class="btn btn-sm me-1 btn-primary">
                                                 <i class="fa fa-eye"> विवरण </i>
                                             </a>
                                             <button type="button"

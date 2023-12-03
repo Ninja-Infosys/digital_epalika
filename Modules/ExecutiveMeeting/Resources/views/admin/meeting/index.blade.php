@@ -8,7 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.executiveMeeting.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">बैठक विवरण</li>
@@ -68,8 +69,8 @@
                                         <td>
                                             <div class="btn-group dropstart">
                                                 <a href="{{ route('admin.executiveMeeting.meeting.show', $meeting) }}"
-                                                    class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-eye"> विवरण </i>
+                                                title="सम्पादन गर्नुहोस्" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                                 <button type="button"
                                                     class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
@@ -126,7 +127,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                        <td class="text-center" colspan="8">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                     </tr>
                                 @endforelse
                             </tbody>

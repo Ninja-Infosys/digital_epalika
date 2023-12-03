@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.grant.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -49,7 +50,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$office->office_name}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('grantOffice_edit')
                                             <a data-bs-type="edit" href="{{route('admin.grant.setting.grantOffice.edit', $office)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">

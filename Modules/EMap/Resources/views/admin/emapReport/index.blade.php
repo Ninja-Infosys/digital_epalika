@@ -3,25 +3,26 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
+            <h4 class="page-title mb-0">नक्सा दर्ता रिपोर्ट</h4>
+                <div class="">
+                    <ol class="breadcrumb mb-2">
                         <li class="breadcrumb-item">
                             <a href="{{ route('emap.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">नक्सा दर्ता रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नक्सा दर्ता रिपोर्ट</h4>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card rounded-3">
+                <div class="">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नक्सा दर्ता रिपोर्ट</h4>
 
@@ -32,7 +33,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form" method="POST">
                             <fieldset class="border p-2 mb-2">

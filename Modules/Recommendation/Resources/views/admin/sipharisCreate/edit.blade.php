@@ -7,7 +7,8 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.recommendation.dashboard') }}">
-                            <i class="fa fa-home"></i> गृहपृष्ठ
+                           <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                         </a>
                     </li>
                     <li class="breadcrumb-item active">सिफारिस</li>
@@ -35,7 +36,7 @@
             <div class="card-body">
 
                 <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post">
-                    
+
                     @csrf
                     @livewire('field', [
                                     'sipharis_category_id' =>  old('sipharis_category_id')

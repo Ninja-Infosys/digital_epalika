@@ -8,7 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -58,7 +59,7 @@
                                     <td>{{$employee->department}}</td>
                                     <td>{{$employee->designation}}</td>
                                     <td>{{$employee->position}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.generalSetting.employee.updateEmployeeStatus',$employee)}}"
                                            class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}" title="स्थिति">
                                             <i class="fa  {{$employee->status==1 ?' fa-check':'fa-window-close'}}"></i>

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.listRegistrations.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">मौजुदा सुची दर्ता</li>
@@ -61,7 +62,7 @@
                                     <td>{{$listRegistration->main_person}}</td>
                                     <td>{{$listRegistration->mobile_no}}</td>
                                     <td>{{$listRegistration->date}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('listRegistration_access')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"

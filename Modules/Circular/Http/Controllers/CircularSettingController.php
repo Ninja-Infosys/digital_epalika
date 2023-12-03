@@ -21,6 +21,7 @@ class CircularSettingController extends Controller
             'dispatch_prefix' => ['nullable', 'string', 'max:255'],
             'registration_number' => ['nullable', 'integer'],
             'dispatch_number' => ['nullable', 'integer'],
+            'send_email' => ['nullable','boolean']
         ]);
         $circularSetting->update($data);
         toast(' सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');

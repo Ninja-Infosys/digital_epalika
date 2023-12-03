@@ -7,13 +7,14 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('organization.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">नगदी रसिदहरु</li>
+                        <li class="breadcrumb-item active">नक्सा</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नगदी रसिदहरु</h4>
+                <h4 class="page-title">नक्सा</h4>
             </div>
         </div>
     </div>
@@ -44,33 +45,42 @@
                                     <tr>
                                         <td>{{ $loop->iteration ?? '' }}</td>
                                         <td>{{ $mapApply->unique_id ?? '' }}</td>
-                                        <td>{{ $mapApply->houseOwner?->first()?->name ?? '' }}</td>
-                                        <td>{{ $mapApply->houseOwner?->first()?->phone ?? '' }}</td>
+                                        <td>{{ $mapApply->houseOwner?->name ?? '' }}</td>
+                                        <td>{{ $mapApply->houseOwner?->phone ?? '' }}</td>
                                         <td>{{ $mapApply->construction_type->label() }}</td>
-                                        <td>
+                                        <td class="d-flex">
 
                                             @if ($mapApply->sent_to_organization !== 'Accept')
-                                                <a class="btn btn-xs btn-outline-primary"
-                                                    href="{{ route('organization.admin.mapApply.show', $mapApply) }}">
+                                                <a data-bs-type="edit" class="btn me-1 btn-xs btn-outline-primary"
+                                                    href="{{ route('organization.admin.mapApply.show', $mapApply) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="सम्पादन गर्नुहोस्">
                                                     <i class="fa fa-pen"></i>
                                                 </a>
-                                                <a class="btn btn-xs {{ $mapApply->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
-                                                    href="{{ route('organization.admin.updateStatus', $mapApply) }}">
+
+                                                <a data-bs-type="sent-to-admin"
+                                                    class="btn me-1 btn-xs {{ $mapApply->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
+                                                    href="{{ route('organization.admin.updateStatus', $mapApply) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="एडमिनलाई पठाउनुस">
                                                     <i
                                                         class="fa {{ $mapApply->sent_to_admin_at == null ? 'fa-times' : 'fa-check' }}"></i>
-                                                    {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }}
+                                                    {{--                                                    {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }} --}}
                                                 </a>
-                                                <a class="btn btn-xs btn-outline-warning"
-                                                    href="{{ route('organization.admin.formList', $mapApply) }}">
+                                                <a data-bs-type="show" class="btn me-1 btn-xs btn-outline-warning"
+                                                    href="{{ route('organization.admin.formList', $mapApply) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @else
                                                 तपाईको फारम पालिकाले स्वीकार गरेको छ
                                             @endif
-                                            <a class="btn btn-xs btn-outline-info"
-                                                href="{{ route('organization.admin.organizationDocument', $mapApply) }}">
+                                            <a data-bs-type="file" class="btn btn-xs btn-outline-info mx-1"
+                                                href="{{ route('organization.admin.organizationDocument', $mapApply) }}"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="कागजातहरु">
                                                 <i class="fa fa-file"></i>
                                             </a>
+
                                         </td>
                                     </tr>
                                 @endforeach

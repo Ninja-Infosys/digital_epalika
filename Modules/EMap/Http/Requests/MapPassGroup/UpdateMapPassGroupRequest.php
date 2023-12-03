@@ -19,7 +19,8 @@ class UpdateMapPassGroupRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'users' => ['required', 'array'],
-            'users.*' => [Rule::exists('users', 'id')->withoutTrashed()]
+            'users.*.user_id' => ['required'],
+            'users.*.ward_no' => ['required', 'array'],
         ];
     }
 }

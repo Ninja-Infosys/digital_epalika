@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -59,14 +60,14 @@
                                         <td>{{ $grievanceUser->email }}</td>
                                         <td>{{ $grievanceUser->phone }}</td>
                                         <td>{{ $grievanceUser->grievance_details_count }}</td>
-                                        <td>
+                                        <td class="d-flex gap-1">
                                             <a href="{{ route('admin.grievanceHandling.grievanceUser.show', $grievanceUser) }}"
-                                                title="थप हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                                title="थप हेर्नुहोस्" class="btn btn-xs btn-outline-primary" title="थप हेर्नुहोस्">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.grievanceHandling.grievanceUser.edit', $grievanceUser) }}"
-                                                class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form
@@ -75,7 +76,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                    class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}">
+                                                    class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}" title="मेटाउनूहोस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

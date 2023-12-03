@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">नाता</li>
@@ -48,10 +49,10 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$relationship->title ?? ''}}</td>
-                                <td>
+                                <td class="d-flex gap-1"> 
                                     @can('relationship_edit')
                                         <a data-bs-type="edit" href="{{route('admin.relationship.edit', $relationship)}}"
-                                           type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                           type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     @endcan

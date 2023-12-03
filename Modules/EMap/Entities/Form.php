@@ -41,6 +41,7 @@ class Form extends Model
         "dynamic_form_id" => 'integer',
     ];
 
+
     public function formDataTypes(): HasMany
     {
         return $this->hasMany(FormDataType::class);
@@ -53,7 +54,7 @@ class Form extends Model
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(MapPassGroup::class);
+        return $this->belongsTo(MapPassGroup::class,'map_pass_group_id');
     }
 
     public function dynamicForm(): BelongsTo
@@ -69,5 +70,15 @@ class Form extends Model
     public function appliedDocuments(): HasMany
     {
         return $this->hasMany(AppliedDocument::class);
+    }
+
+    public function formStores(): HasMany
+    {
+        return $this->hasMany(FormStore::class);
+    }
+
+    public function paymentStores(): HasMany
+    {
+        return $this->hasMany(PaymentStore::class);
     }
 }

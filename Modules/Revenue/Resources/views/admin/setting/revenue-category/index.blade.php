@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.revenue.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">राजस्वको वर्ग</li>
@@ -49,12 +50,12 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$revenueCategory->title}}</td>
                                     <td>{{$revenueCategory->revenueCategory->title ??''}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('revenueCategory_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.setting.revenue-category.edit',[$revenueCategory])}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i> 
                                             </a>
                                         @endcan
                                         @can('revenueCategory_delete')
@@ -64,8 +65,8 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i> 
                                                 </button>
                                             </form>
                                         @endcan

@@ -7,12 +7,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            <a href="{{ route('admin.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.video.index')}}">डिजिटल बोर्ड</a>
+                            <a href="{{ route('admin.digitalBoard.video.index') }}">डिजिटल बोर्ड</a>
                         </li>
                         <li class="breadcrumb-item active">भिडियो </li>
                     </ol>
@@ -31,7 +32,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             @can('digitalBoardVideo_create')
-                                <a href="{{route('admin.digitalBoard.video.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{ route('admin.digitalBoard.video.create') }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -41,51 +43,55 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-striped table-bordered">
                             <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>शिर्षक </th>
-                                <th>भिडियो </th>
-                                <th>#</th>
-                            </tr>
+                                <tr>
+                                    <th>क्र.स</th>
+                                    <th>शिर्षक </th>
+                                    <th>भिडियो </th>
+                                    <th>#</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @forelse($videos as $video)
-                                <tr>
-                                    <th scope="row" class="align-middle">
-                                        {{$loop->iteration}}
-                                    </th>
-                                    <td class="align-middle">
-                                        {{$video->title}}
-                                    </td>
-                                    <td class="align-middle">
-                                        <video width="130" height="120" controls>
-                                            <source src="{{$video->video_url}}">
-                                        </video>
-                                    </td>
-                                    <td class="align-middle">
-                                        @can('digitalBoardVideo_edit')
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.video.edit',$video)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        @endcan
-                                            @can('digitalBoardVideo_delete')
-                                        <form action="{{route('admin.digitalBoard.video.destroy',$video)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                                @forelse($videos as $video)
+                                    <tr>
+                                        <th scope="row" class="align-middle">
+                                            {{ $loop->iteration }}
+                                        </th>
+                                        <td class="align-middle">
+                                            {{ $video->title }}
+                                        </td>
+                                        <td class="align-middle">
+                                            <video width="130" height="100" controls>
+                                                <source src="{{ $video->video_url }}">
+                                            </video>
+                                        </td>
+                                        <td class="d-flex gap-1">
+                                            @can('digitalBoardVideo_edit')
+                                                <a data-bs-type="edit"
+                                                    href="{{ route('admin.digitalBoard.video.edit', $video) }}"
+                                                    class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                    title="सम्पादन गर्नुहोस्">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
                                             @endcan
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-center" colspan="4">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
+                                            @can('digitalBoardVideo_delete')
+                                                <form action="{{ route('admin.digitalBoard.video.destroy', $video) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                        title="मेटाउनु होस्">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="4">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

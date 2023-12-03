@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.plan.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
 
@@ -54,17 +55,17 @@
                                     @if($type=='planSubLevel')
                                         <td>{{$planLevel->planLevel->level_name??''}}</td>
                                     @endif
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.plan.planLevel.edit',[$type,$planLevel])}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.plan.planLevel.destroy',[$type,$planLevel])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

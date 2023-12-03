@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item ">नक्सा</li>
@@ -45,7 +46,7 @@
                     <td>{{$mapApply->mapRegistration->remarks ?? ''}}</td>
                     <td><a href="{{route('emap.admin.mapApply.mapRegistration.create', $mapApply)}}"
                            type="button"
-                           class="btn btn-outline-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
+                           class="btn btn-outline-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}" >
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>

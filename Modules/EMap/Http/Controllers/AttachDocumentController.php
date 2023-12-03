@@ -4,6 +4,11 @@ namespace Modules\EMap\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\FormStoreNotification;
+use App\Notifications\PaymentStoreNotification;
+use App\Notifications\StepNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\AttachDocument;
@@ -29,6 +34,8 @@ class AttachDocumentController extends Controller
 {
     public function store(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
+
+        $form->load('group.users');
         if ($formDataType->type == FormTypeEnum::FILE) {
             $data = $request->validate([
                 'documents' => ['array', 'required'],
@@ -50,7 +57,10 @@ class AttachDocumentController extends Controller
                         "document" => $file->store('appliedDocument', 'public'),
                     ]);
                 }
+
+                Notification::send($form->group->users, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
             });
+
             toast('फाईल सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
@@ -58,7 +68,7 @@ class AttachDocumentController extends Controller
             ]);
 
             DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
-                $mapApply->formStores()->create([
+                $formStore =   $mapApply->formStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
@@ -68,6 +78,7 @@ class AttachDocumentController extends Controller
                     'data' => $data['data'],
                     'fields' => $form->fields ?? ''
                 ]);
+                Notification::send($form->group->users, new FormStoreNotification($mapApply, $form, $formDataType, $formStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -76,16 +87,17 @@ class AttachDocumentController extends Controller
                 'amount' => ['required', 'numeric'],
             ]);
             DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
-                $mapApply->paymentStores()->create([
+                $paymentStore =  $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
                     'uploaded_by_id' => auth('organization')->user()->id,
-                    'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id,
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id
                 ]);
+                Notification::send($form->group->users, new PaymentStoreNotification($mapApply, $form, $formDataType, $paymentStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
@@ -95,7 +107,7 @@ class AttachDocumentController extends Controller
 
     public function documentDetail(AppliedDocument $appliedDocument)
     {
-        $appliedDocument->load('appliedMapFiles');
+        $appliedDocument->load('appliedMapFiles', 'form');
         return view('emap::organization.attach-document.documentDetail', compact('appliedDocument'));
     }
 
@@ -129,12 +141,13 @@ class AttachDocumentController extends Controller
 
     public function update(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, $id)
     {
+        $form->load('group.users');
         if ($formDataType->type == FormTypeEnum::FILE) {
             $data = $request->validate([
                 'documents' => ['array', 'required'],
                 'documents.*' => ['file']
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $id) {
+            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
                 $appliedDocumentStatus = AppliedDocumentStatus::create([
                     "applied_document_id" => $appliedDocument->id,
@@ -154,13 +167,15 @@ class AttachDocumentController extends Controller
                         "document" => $file->store('appliedDocument', 'public'),
                     ]);
                 }
+                Notification::send($form->group->users, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
             });
+
             toast('फाईल सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
                 'data' => ['required'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $id) {
+            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $formStore = FormStore::find($id);
                 FormStoreStatus::create([
                     "form_store_id" => $formStore->id,
@@ -171,6 +186,7 @@ class AttachDocumentController extends Controller
                 $formStore->update([
                     'data' => $data['data'],
                 ]);
+                Notification::send($form->group->users, new FormStoreNotification($mapApply, $form, $formDataType, $formStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -178,7 +194,7 @@ class AttachDocumentController extends Controller
                 'bill' => ['nullable', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $id) {
+            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $paymentStore = PaymentStore::find($id);
                 PaymentStoreStatus::create([
                     "payment_store_id" => $paymentStore->id,
@@ -190,6 +206,7 @@ class AttachDocumentController extends Controller
                     'bill' => (array_key_exists('bill', $data) && !empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
                     'amount' => $data['amount'],
                 ]);
+                Notification::send($form->group->users, new PaymentStoreNotification($mapApply, $form, $formDataType, $paymentStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
@@ -211,8 +228,9 @@ class AttachDocumentController extends Controller
             'blue_print' => ['required', 'mimes:png,jpg,jpeg,pdf'],
             'pass_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
             'designer_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'permission_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'inheritance_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+            'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
         ]);
 
         if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {
@@ -279,7 +297,7 @@ class AttachDocumentController extends Controller
             $mapApply->breadth ?? '',
             $mapApply->height ?? '',
             //landDetail
-            $mapApply->landDetail->land_use_area ?? '',
+            $mapApply->landDetail?->landUseArea?->title ?? '',
             $mapApply->landDetail->ward_no ?? '',
             $mapApply->landDetail->former_ward_no ?? '',
             $mapApply->landDetail->tole ?? '',
@@ -402,7 +420,7 @@ class AttachDocumentController extends Controller
             '[@breadth]',
             '[@height]',
             //landDetail
-            '[@landDetail.land_use_area]',
+            '[@landDetail.land_use_area.title]',
             '[@landDetail.ward_no]',
             '[@landDetail.former_ward_no]',
             '[@landDetail.tole]',

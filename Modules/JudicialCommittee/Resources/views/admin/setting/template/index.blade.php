@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.judicialCommittee.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">टेम्प्लेट</li>
@@ -53,8 +54,8 @@
                                     <td>
                                         @can('judicialCommitteeTemplate_edit')
                                             <a href="{{route('admin.judicialCommittee.setting.judicialCommitteeTemplate.edit',$judicialCommitteeTemplate)}}"
-                                               class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-warning" >
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                     </td>

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.revenue.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">नक्साहरु</li>
@@ -58,7 +59,7 @@
                                     <td>{{$invoice->address ?? ''}}</td>
                                     <td>{{$invoice->invoice_particulars_sum_total ?? ''}}</td>
                                     <td>{{$invoice->remarks ?? ''}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('taxPayerType_access')
                                             <a
                                                 href="{{route('admin.revenue.invoice.show',[$invoice])}}"

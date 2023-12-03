@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.revenue.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">करदाताको प्रकार</li>
@@ -49,12 +50,12 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$taxPayerType->title}}</td>
                                     <td>{{$taxPayerType->code}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('taxPayerType_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.revenue.setting.taxPayerType.edit',[$taxPayerType])}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i> 
                                             </a>
                                         @endcan
                                         @can('taxPayerType_delete')
@@ -64,14 +65,15 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
                                     </td>
                                 </tr>
 
+                               
                             @empty
                                 <tr>
                                     <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>

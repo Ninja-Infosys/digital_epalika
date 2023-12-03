@@ -1,6 +1,6 @@
 @props(['form-data-type', 'map-apply', 'form'])
 <div class="row">
-    @foreach ($formDataType->formStores as $formStore)
+    @foreach ($mapApply->formStores?->where('form_data_id', $formDataType->id)?->where('form_id', $form->id) as $formStore)
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -28,18 +28,25 @@
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>
                                         @foreach ($formStore->data as $key => $data)
-                                            {{ $key . ': ' . $data }} @if (!$loop->last)
-                                                <br>
+                                            @if(is_array($data))
+                                                <x-form-array-data :formdata="$data"/>
+                                            @else
+                                                {{ $key . ': ' . $data }} @if (!$loop->last)
+                                                    <br>
+                                                @endif
+
                                             @endif
                                         @endforeach
                                     </td>
                                     <td>{{ get_nepali_number($formStore->created_at->toDateString()) }}</td>
                                     <td>{{ $formStore->status->label()??'' }}</td>
                                     <td>
+                                        @if(auth()->user()->id == 1 || $checkAuthorization)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model{{ $formStore->id }}">
-                                            स्थिति
+                                            <i class="fa fa-pen-nib"></i>
                                         </button>
+                                        @endif
 
                                     </td>
                                 </tr>
@@ -53,7 +60,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                            <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateFormStoreStatus',$formStore) }}">
+                                            <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateFormStoreStatus',[$mapApply,$form,$formDataType,$formStore]) }}">
                                                 @csrf
                                                 @method('put')
                                                         <div class="mb-3">
@@ -76,12 +83,9 @@
                                                         </div>
                                                     </form>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
-
                         </tbody>
                     </table>
                 </div>
@@ -110,13 +114,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($formStore->formStoreStatuses as $formStoreStatus)
+                            @foreach ($formStore->load('formStoreStatuses')->formStoreStatuses as $formStoreStatus)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>  @foreach ($formStoreStatus->data as $key => $data)
-                                    {{ $key . ': ' . $data }} @if (!$loop->last)
-                                        <br>
-                                    @endif
+                                        @if(is_array($data))
+                                            <x-form-array-data :formdata="$data"/>
+                                        @else
+                                            {{ $key . ': ' . $data }} @if (!$loop->last)
+                                                <br>
+                                            @endif
+
+                                        @endif
                                 @endforeach</td>
                                 <td>
                                     {{ get_nepali_number($formStoreStatus->created_at->toDateString()) }}

@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('organization.admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">नोटिफिकेसन</li>
@@ -56,8 +57,8 @@
                             </td>
                             <td>{{ $notification->created_at->diffForHumans() }}</td>
                             <td>
-                                <a href="{{ route('organization.admin.notification.read',$notification) }}"
-                                   class="btn btn-outline-primary btn-sm">
+                                <a data-bs-type="show" href="{{ route('organization.admin.notification.read',$notification) }}"
+                                   class="btn btn-outline-primary btn-sm"  data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>

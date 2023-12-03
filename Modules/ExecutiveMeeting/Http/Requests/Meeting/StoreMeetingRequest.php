@@ -22,7 +22,7 @@ class StoreMeetingRequest extends FormRequest
             'meeting_name' => ['required'],
             'recurrence' => ['nullable', new Enum(RecurrenceTypeEnum::class)],
             'start_date' => ['required'],
-            'en_start_date' => ['nullable', 'date'],
+            'en_start_date' => ['required', 'date'],
             'end_date' => ['required'],
             'en_end_date' => ['nullable', 'date'],
             'recurrence_end_date' => ['nullable'],

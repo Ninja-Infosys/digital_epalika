@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
+use App\Http\Controllers\Admin\Setting\EmergencyCategoryController;
 use App\Http\Controllers\Admin\Setting\EmergencyNumberController;
 use App\Http\Controllers\Admin\Setting\EmployeeController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
@@ -86,6 +87,7 @@ Route::prefix('setting')->group(function () {
         Route::resource('ethnicity', EthnicityController::class);
         Route::resource('fiscalYear', FiscalYearController::class);
         Route::resource('emergencyNumber', EmergencyNumberController::class);
+        Route::resource('emergencyCategory', EmergencyCategoryController::class);
         Route::resource('department', DepartmentController::class);
         Route::resource('designation', DesignationController::class);
         Route::resource('employee.qualification', QualificationController::class);
@@ -144,5 +146,3 @@ Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activi
 //check pin
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
 Route::resource('pin', PinController::class);
-
-Route::view('new-dashboard','new-dashboard');

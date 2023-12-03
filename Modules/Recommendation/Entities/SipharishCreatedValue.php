@@ -33,7 +33,7 @@ class SipharishCreatedValue extends Model
         return $this->belongsTo(SipharishCreate::class,'sipharish_create_id');
     }
 
-    public function SipharisFormFields(): BelongsTo
+    public function SipharisFormField(): BelongsTo
     {
         return $this->belongsTo(SipharisFormField::class,'sipharish_form_field_id');
     }

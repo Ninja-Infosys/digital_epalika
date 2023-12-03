@@ -7,13 +7,15 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('organization.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}"
+                                     alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">Rename</li>
+                        <li class="breadcrumb-item active">{{$mapApply->unique_id}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Rename</h4>
+                <h4 class="page-title">{{$mapApply->unique_id}}</h4>
             </div>
         </div>
     </div>
@@ -43,19 +45,21 @@
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
                                     <td>
-{{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
+                                        {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
+
                                         @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
                                             <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn me-1 btn-xs btn-outline-primary {{$form->order == $order ? '' : 'disabled'}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endif
+
                                         <a href="{{ route('organization.admin.organization.view-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
+                                           class="btn me-1 btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

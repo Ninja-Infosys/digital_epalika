@@ -8,7 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.listRegistrations.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">मौजुदा सुची दर्ता थप्नुहोस</li>
@@ -230,7 +231,7 @@
                                 <div class="col-md-12">
                                     <label for="license_photo">अन्य फाइलहरु </label>
                                     @livewire('multiple-file')
-                                    
+
 
 
                                 </div>

@@ -7,13 +7,14 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('emap.admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">{{$mapApply->unique_id}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Rename</h4>
+                <h4 class="page-title">{{$mapApply->houseOwner?->name}}</h4>
             </div>
         </div>
     </div>
@@ -45,15 +46,16 @@
                             </thead>
                             <tbody>
                             @foreach ($forms as $form)
+{{--                                {{dd(in_array(auth()->id(),$form->group?->users?->pluck('id')?->toArray() ?? []))}}--}}
                                 <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
                                     <td>
-                                        {{$form->need_from->label()??''}}
+                                        {{$form->need_from?->label()??''}}
                                         {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
                                     <td>
-                                        @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
+                                        @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value && in_array(auth()->id(),$form->group?->users?->pluck('id')?->toArray() ?? []))
                                             <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>

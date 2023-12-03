@@ -12,13 +12,17 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\EMap\Entities\MapApply;
 
 class OrganizationController extends Controller
 {
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('organization_access');
-        $organizations = Organization::with('organizationDetail')->where(function (Builder $q) {
+        $organizations = Organization::with('organizationDetail.province','organizationDetail.district')
+            ->withCount(['mapApplies as registeredMap'=>function($q){
+                $q->whereNotNull('registration_no');
+            }])->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['email', 'phone', 'name'], request('search'));
             }
@@ -60,10 +64,20 @@ class OrganizationController extends Controller
             'userDetail.temporaryLocalBody',
             'userDetail.temporaryDistrict',
             'userDetail.temporaryProvince',
+            'mapApplies'=>function($q){
+                $q->whereNotNull('sent_to_admin_at');
+            },
+            'mapApplies.fiscalYear',
+            'mapApplies.landDetail',
         ]);
 
         return view('emap::admin.organization.show', compact('organization'));
     }
+
+
+
+
+
 
     public function destroy(Organization $organization)
     {

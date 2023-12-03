@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.digitalBoard.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">सेवा</li>
@@ -54,7 +55,7 @@
                                     <td>{{$service->branch->branch_name??''}}</td>
                                     <td>{{$service->responsible_officer}}</td>
                                     <td>{{$service->office}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a href="{{route('admin.digitalBoard.service.serviceEmployee.index',$service)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-plus-circle"></i>

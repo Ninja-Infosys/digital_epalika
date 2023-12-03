@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -142,7 +143,7 @@
                                         <span>{{$businessDetail->localBody->local_body??''}}
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('businessRegistration_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.businessRegistration.businessRegistration.edit',$businessDetail)}}"

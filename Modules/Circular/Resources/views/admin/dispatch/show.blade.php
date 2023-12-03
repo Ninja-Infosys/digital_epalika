@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -85,16 +86,10 @@
                                         <th>हुलाक/ र.न./इमेल.</th>
                                         <td>{{ $dispatch->receiver_contact }}</td>
                                     </tr>
-                                    <tr>
-                                        <th>बुझिलिनेको हस्तक्षर्</th>
-                                        <td>
-                                            <img src="{{ $dispatch->receiver_signature_url }}" alt=""
-                                                height="60">
-                                        </td>
-                                    </tr>
+
                                     <tr>
                                         <th>कैफ़ियत.</th>
-                                        <td>{{ $dispatch->remarks }}</td>
+                                        <td>{!! $dispatch->remarks !!}</td>
                                     </tr>
                                     <tr>
                                 </tbody>
@@ -126,7 +121,7 @@
                                     </div>
                                     <div class="col-8">
                                         <a href="javascript:void(0);"
-                                        onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
+                                            onclick="openFileModal('{{ $document->file_name }}', '{{ $document->extension }}', '{{ $document->file_url }}')"
                                             class="text-muted fw-medium">{{ $document->file_name }}
                                             .{{ $document->extension }}</a>
                                         <p class="mb-0 font-13">

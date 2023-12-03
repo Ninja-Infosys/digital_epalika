@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.circular.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">दर्ता</li>
@@ -95,7 +96,7 @@
                                         </span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit"
                                            href="{{route('admin.circular.registration.show',$registration)}}"
                                            title="थप हेर्नुहोस्"

@@ -25,12 +25,12 @@ enum BloodGroupEnum: string
             self::NA => 'N/A',
             self::O_NEGATIVE => 'ओ नेगेटिभ',
             self::O_POSITIVE => 'ओ पोजेटिभ',
-            self::A_NEGATIVE => 'ए पोजेटिभ',
-            self::A_POSITIVE => 'ए नेगेटिभ',
-            self::B_NEGATIVE => 'बि पोजेटिभ',
-            self::B_POSITIVE => 'बि नेगेटिभ',
-            self::AB_NEGATIVE => 'एबि पोजेटिभ',
-            self::AB_POSITIVE => 'एबि नेगेटिभ',
+            self::A_NEGATIVE => 'ए नेगेटिभ',
+            self::A_POSITIVE => 'ए पोजेटिभ',
+            self::B_POSITIVE => 'बि पोजेटिभ',
+            self::B_NEGATIVE => 'बि नेगेटिभ',
+            self::AB_POSITIVE => 'एबि पोजेटिभ',
+            self::AB_NEGATIVE => 'एबि नेगेटिभ',
         };
     }public function labelEn(): string
     {

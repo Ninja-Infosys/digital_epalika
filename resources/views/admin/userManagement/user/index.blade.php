@@ -8,7 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.setting.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">प्रयोगकर्ता</li>
@@ -65,7 +66,7 @@
                                             <i class="fa fa-2x {{$user->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="d-felx gap-1">
                                         @can('user_edit')
                                             <a data-bs-type="edit" href="{{route('admin.userManagement.user.edit',$user)}}"
                                                title="सम्पादन गर्नुहोस्"

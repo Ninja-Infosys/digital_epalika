@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EmergencyNumber extends Model
 {
@@ -20,8 +21,13 @@ class EmergencyNumber extends Model
     ];
 
     protected $fillable = [
-        'type',
         'title',
         'contact_no',
+        'emergency_category_id'
     ];
+
+    public function emergencyCategory(): BelongsTo
+    {
+        return $this->belongsTo(EmergencyCategory::class);
+    }
 }

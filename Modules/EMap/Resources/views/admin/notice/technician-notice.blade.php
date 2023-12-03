@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -73,7 +74,7 @@
                             स्थलगत निरिक्षण गरी देहाय बमोजिमको प्रतिवेदन पेश गरेको छु ।
                         </span><br>
                         <span>१.&emsp;&emsp;भू-उपयोग क्षेत्र<span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->land_use_area??''}}</span>
+                                class="underline-dotted custom-width">{{$mapApply->landDetail?->landUseArea?->title??''}}</span>
                         </span><br>
                         <span class="mt-2">२.&emsp;&emsp;निर्माण हुने स्थलसम्म पग्ने बाटोको व्यवस्था : </span><br>
                         <span>२.१&emsp;&ensp;बाटोको किसिम :

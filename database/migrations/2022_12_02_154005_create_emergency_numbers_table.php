@@ -9,7 +9,6 @@ return new class () extends Migration {
     {
         Schema::create('emergency_numbers', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
             $table->string('title');
             $table->string('contact_no');
             $table->timestamps();

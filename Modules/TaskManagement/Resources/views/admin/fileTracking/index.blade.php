@@ -7,7 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.taskManagement.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">फाइल ट्रयाकिङ</li>
@@ -52,12 +53,12 @@
                                         <td>{{ $fileTracking->registration_no }}</td>
                                         <td>{{ $fileTracking->is_hardcopy ? 'हार्डकपि' : 'सफ्टकपि' }}</td>
                                         <td>{{ $fileTracking->remarks }}</td>
-                                        <td>
+                                        <td class="d-flex gap-1">
+
                                             <a href="{{ route('admin.taskManagement.fileTracking.show', $fileTracking) }}"
                                                 title="हेर्नुहोस" class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            @can('fileTracking_delete')
                                                 <form
                                                     action="{{ route('admin.taskManagement.fileTracking.destroy', $fileTracking) }}"
                                                     method="post">
@@ -69,7 +70,6 @@
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
