@@ -212,6 +212,4 @@
     <script src="{{asset('assets/backend/js/chart.js')}}"></script>
     <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
 @endpush
-   
-
 @endsection

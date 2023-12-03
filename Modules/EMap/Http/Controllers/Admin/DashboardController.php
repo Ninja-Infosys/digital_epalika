@@ -187,32 +187,31 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
 
     public function getMapApplyConstructionTypeAccordingToFiscalYear()
     {
-        $mapApplies = MapApply::with('construction_type')
-            ->where('fiscal_year_id', $this->getOfficeSetting()->fiscal_year_id)
-            ->get()
-            ->map(function ($mapApply) {
-                return [
-                    'name' => optional(TypeOfConstructionWorkEnum::tryFrom($mapApply->construction_type))->label(),
-                    'data' => 1, // Assuming you want to count occurrences, you can adjust this as needed
-                    'color' => generateRandomRGBAColor(),
-                ];
-            });
+        $officeSetting = $this->getOfficeSetting();
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $constructionTypes = $mapApplies->pluck('construction_type')->unique();
     
-        $chartData = [
-            'labels' => $mapApplies->pluck('name')->toArray(),
-            'option' => ChartOptionEnum::PIE_CHART->option(),
+        $result = [
+            'labels' => [],
             'dataSets' => [
                 [
-                    'data' => $mapApplies->pluck('data')->toArray(),
-                    'backgroundColor' => $mapApplies->pluck('color')->toArray(),
-                    'borderColor' => $mapApplies->pluck('color')->toArray(),
-                    'borderWidth' => 1,
+                    'data' => [],
+                    'label' => 'Construction Types',
                 ],
             ],
         ];
     
-        return $chartData;
+        foreach ($constructionTypes as $type) {
+            $count = $mapApplies->where('construction_type', $type)->count();
+            $label = TypeOfConstructionWorkEnum::tryFrom($type)?->label();
+    
+            $result['labels'][] = $label;
+            $result['dataSets'][0]['data'][] = $count;
+        }
+    
+        return $result;
     }
+    
     
     public function getOfficeSetting()
     {
