@@ -57,7 +57,7 @@
         <li class="{{request()->routeIs('admin.executiveMeeting.dashboard') ? 'active' : ''}}">
             <a href="{{route('admin.executiveMeeting.dashboard')}}">
                 <img class="sidebar-icon" src="{{asset('assets/backend/images/modules/executivemeeting.svg')}}" height="25" loading="lazy">
-                <span>ई-कार्यपालिका</span>
+                <span>बैठक व्यवस्थापन प्रणाली</span>
             </a>
         </li>
     @endcan
