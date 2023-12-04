@@ -54,7 +54,7 @@
                                         <td>{{ $meetingDecision->date }}</td>
                                         <td>{!! $meetingDecision->description !!}</td>
 
-                                        <td class="text-nowrap">
+                                        <td class="text-nowrap d-flex gap-1">
                                             @can('meetingDecision_edit')
                                                 <a data-bs-type="edit"
                                                     href="{{ route('admin.executiveMeeting.meeting.meetingDecision.edit', [$meeting,$meetingDecision]) }}"

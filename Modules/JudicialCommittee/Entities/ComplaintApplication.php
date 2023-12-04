@@ -91,7 +91,7 @@ class ComplaintApplication extends Model
 
     public function complainantDefendants(): HasMany
     {
-        return $this->hasMany(ComplainantDefendant::class);
+        return $this->hasMany(ComplainantDefendant::class, 'complaint_application_id');
     }
 
     public function complaintSubject(): BelongsTo

@@ -109,9 +109,10 @@
                                             ({{$complaintApplication->lawsuitNature->code??''}})
                                         </td>
                                     </tr>
+                                    @foreach (Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum::cases() as $complainantDefendantType)
                                     <tr>
                                         <td colspan="3" class="text-primary fw-bold border-bottom-0">
-                                            वादीको विवरण
+                                            {{ $complainantDefendantType?->label() }}को विवरण
                                         </td>
                                     </tr>
                                     <tr>
@@ -130,7 +131,8 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($complaintApplication->complainantDefendants->where('type','complainant') as $complainant)
+                                                    {{-- @foreach($complaintApplication->complainantDefendants->where('type','complainant') as $key => $complainant) --}}
+                                                    @foreach($complaintApplication->complainantDefendants->where('type', $complainantDefendantType) as $key => $complainant)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>{{$complainant->name}}</td>
@@ -151,11 +153,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-primary fw-bold border-bottom-0">
-                                            प्रतिवादीको विवरण
-                                        </td>
-                                    </tr>
+                                    @endforeach
+
+
+
                                     <tr>
                                         <td colspan="3">
                                             <div class="table-responsive">
