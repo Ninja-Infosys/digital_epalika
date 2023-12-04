@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
@@ -20,39 +21,52 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('eMapDashboard_access');
 
-        if (request()->ajax()) {
-            return [
-                'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
-                'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
-                'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
-                'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
-                'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
-                'mapAccordingToMonth' => $this->mapAccordingToMonth(),
-
-            ];
-        }
         $organization_count = Organization::count();
         $map_apply_count = MapApply::count();
         return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', ));
     }
+public function ajaxData(){
+    return [
+        'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
+        'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
+        'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
+        'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
+        'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
+        'mapAccordingToMonth' => $this->mapAccordingToMonth(),
+    ];
+}
+public function getMapApplyStructureTypeAccordingToFiscalYear()
+{
+    $structureTypes = StructureType::withCount('mapApply')
+        ->selectRaw('id,title')
+        ->get()
+        ->map(function ($structure) {
+            return [
+                'name' => $structure->title,
+                'data' => (int) $structure->map_apply_count,
+                'color' => generateRandomRGBAColor()
+            ];
+        });
 
+    $chartData = [
+        'labels' => $structureTypes->pluck('name')->toArray(),
+        'option' => ChartOptionEnum::PIE_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $structureTypes->pluck('data')->toArray(),
+                'backgroundColor' => $structureTypes->pluck('color')?->toArray(),
+                'borderColor' => $structureTypes->pluck('color')?->toArray(),
+                'borderWidth' => 1,
+            ],
+        ],
+    ];
 
-    public function getMapApplyStructureTypeAccordingToFiscalYear()
-    {
-        return StructureType::withCount(['mapApply'])
-            ->selectRaw('id,title')
-            ->get()
-            ->map(function ($structure) {
-                return [
-                    'name' => $structure->title,
-                    'data' => (int)$structure->map_apply_count
-                ];
-            });
-    }
+    return $chartData;
+}
 
     public function getMapApplyAccordingToFiscalYear(): array
     {
@@ -107,24 +121,29 @@ class DashboardController extends Controller
     }
 
     public function getMapApplyBuildingUsageAccordingToFiscalYear()
-    {
-        $officeSetting = $this->getOfficeSetting();
+{
+    $officeSetting = $this->getOfficeSetting();
+    $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+    $buildingUsages = $mapApplies->pluck('usage')->unique();
 
-        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
-        $buildingUsages = $mapApplies->pluck('usage')->unique();
+    $chartData = [
+        'labels' => $buildingUsages->map(function ($usage) {
+            return BuildingUsageEnum::tryFrom($usage)?->label();
+        })->toArray(),
+        'option' => ChartOptionEnum::BAR_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $mapApplies->groupBy('usage')->pluck('usage_count')->toArray(),
+                'backgroundColor' => $mapApplies->pluck('color')?->toArray(),
+                'borderColor' => $mapApplies->pluck('color')?->toArray(),
+                'borderWidth' => 1,
+            ],
+        ],
+    ];
 
-        $result = collect();
-        foreach ($buildingUsages as $usage) {
-            $count = $mapApplies->where('usage', $usage)->count();
-            $label = BuildingUsageEnum::tryFrom($usage)?->label();
-            $result->push([
-                'name' => $label,
-                'data' => $count
-            ]);
-        }
+    return $chartData;
+}
 
-        return $result;
-    }
 
     public function getMapApplyBuildingCategoryAccordingToFiscalYear()
     {
@@ -170,21 +189,30 @@ class DashboardController extends Controller
     {
         $officeSetting = $this->getOfficeSetting();
         $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
-        $buildingUsages = $mapApplies->pluck('construction_type')->unique();
-
-        $result = collect();
-        foreach ($buildingUsages as $usage) {
-            $count = $mapApplies->where('construction_type', $usage)->count();
-            $label = TypeOfConstructionWorkEnum::tryFrom($usage)?->label();
-            $result->push([
-                'name' => $label,
-                'data' => $count
-            ]);
+        $constructionTypes = $mapApplies->pluck('construction_type')->unique();
+    
+        $result = [
+            'labels' => [],
+            'dataSets' => [
+                [
+                    'data' => [],
+                    'label' => 'Construction Types',
+                ],
+            ],
+        ];
+    
+        foreach ($constructionTypes as $type) {
+            $count = $mapApplies->where('construction_type', $type)->count();
+            $label = TypeOfConstructionWorkEnum::tryFrom($type)?->label();
+    
+            $result['labels'][] = $label;
+            $result['dataSets'][0]['data'][] = $count;
         }
-
+    
         return $result;
     }
-
+    
+    
     public function getOfficeSetting()
     {
         return officeSetting();

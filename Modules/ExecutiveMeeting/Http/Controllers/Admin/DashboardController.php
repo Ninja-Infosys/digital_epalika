@@ -9,22 +9,20 @@ use Modules\ExecutiveMeeting\Entities\Meeting;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('executiveMeetingDashboard_access');
-
-        if (request()->ajax()) {
-            return [
-                'committeeWiseMeetings' => $this->getCommitteeWiseMeetings()
-            ];
-        }
-
         $members_count = CommitteeMember::count();
         $meetings_count = Meeting::where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
         $upcoming_meetings = Meeting::where('fiscal_year_id', officeSetting()->fiscal_year_id)->whereDate('en_start_date', '>=', today()->toDateString())->count();
         $completed_meetings = Meeting::where('fiscal_year_id', officeSetting()->fiscal_year_id)->whereDate('en_start_date', '<', today()->toDateString())->count();
 
         return view('executivemeeting::admin.dashboard', compact('members_count', 'meetings_count', 'upcoming_meetings', 'completed_meetings'));
+    }
+    public function ajaxData(){
+        return [
+            'committeeWiseMeetings' => $this->getCommitteeWiseMeetings()
+        ];
     }
 
     private function getCommitteeWiseMeetings()
@@ -59,16 +57,25 @@ class DashboardController extends Controller
                     'data' => $committees->pluck('meetings_count')->toArray(),
                     'label' => 'जम्म्मा वैठक ',
                     'fill' => 'false',
+                    'backgroundColor' => 'rgba(6, 62, 147, 1)',
+                    'borderColor' => 'rgba(6, 62, 147, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $committees->pluck('completed_meetings_count')->toArray(),
                     'label' => 'सम्पन्न बैठकहरू',
                     'fill' => 'false',
+                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
+                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $committees->pluck('upcoming_meetings_count')->toArray(),
                     'label' => 'आगामी बैठकहरू',
                     'fill' => 'false',
+                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
+                    'borderColor' => 'rgba(0, 145, 62, 1)',
+                    'borderWidth' => 1,
                 ],
             ]
         ];

@@ -19,7 +19,7 @@ class GrievanceApiFormController extends Controller
         'grievanceUser',
         'user',
         'grievanceType',
-        'grievanceOffice',
+        'branch',
         'publisher'
         ])
         ->get();

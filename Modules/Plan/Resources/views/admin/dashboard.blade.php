@@ -208,14 +208,6 @@
     </div>
     @push('scripts')
     <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-    <script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
+    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
 @endpush
-
-    {{-- @push('scripts')
-        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
-    @endpush --}}
 @endsection

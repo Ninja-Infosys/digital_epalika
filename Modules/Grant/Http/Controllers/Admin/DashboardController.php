@@ -12,7 +12,7 @@ use Modules\Grant\Entities\Group;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('grantDashboard_access');
 
@@ -21,15 +21,14 @@ class DashboardController extends Controller
         $groups_count = Group::count();
         $enterprise_count = Enterprise::count();
         $grant_detail_count = GrantDetail::count();
-        if (request()->ajax()) {
-            return [
-                'grant' => $this->getGrantData(),
-                'wardWiseData' => $this->getWardWiseData()
-            ];
-        }
         return view('grant::admin.dashboard', compact('grant_detail_count', 'enterprise_count', 'farmers_count', 'cooperative_count', 'groups_count'));
     }
-
+public function ajaxData(){
+    return [
+        'grant' => $this->getGrantData(),
+        'wardWiseData' => $this->getWardWiseData()
+    ];
+}
 
     public function getGrantData()
     {

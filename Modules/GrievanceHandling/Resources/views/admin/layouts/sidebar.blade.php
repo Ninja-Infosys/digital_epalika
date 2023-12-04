@@ -40,13 +40,7 @@
                     </a>
                 </li>
             @endcan
-            @can('grievanceOffice_access')
-                <li class="{{request()->is('admin/grievanceHandling/setting/grievanceOffice/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">
-                        <span> शाखा/कार्यालय </span>
-                    </a>
-                </li>
-            @endcan
+
 
                 <li class="{{request()->is('admin/grievanceHandling/setting/grievanceSetting/*') ? 'active' : ''}}">
                     <a href="{{route('admin.grievanceHandling.setting.grievanceSetting.index')}}">
