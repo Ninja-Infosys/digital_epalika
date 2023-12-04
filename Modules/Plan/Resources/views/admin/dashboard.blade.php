@@ -105,14 +105,14 @@
             </div>
         </div>
     </div> --}}
-    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.plan.dashboard.ajax')}}">
+    <div class="row mt-2">
         <div class="col-md-6">
             <div class="card">
                 <h4>
                     महिना अनुसार सूचना समाचार
                 </h4>
                 <div class="card-body">
-                    <canvas id="" chart-type="bar"></canvas>
+                    <canvas id="barChart1"></canvas>
                 </div>
 
             </div>
@@ -120,12 +120,89 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
+                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सिफारिस विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="" chart-type="line"> </canvas>
+                    <canvas id="steppedlineChart"></canvas>
                 </div>
 
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>
+                    कुल राजस्व विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="doughNut1"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>
+                    भुक्तानी अनुसार कुल राजस्व विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="pieChart1"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h4>
+                    विषय अनुसार तालिम विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="polarAreaChart1"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-lg-6">
+            <div class="card">
+                <h4>
+                    आर्थिक वर्ष अनुशारको घरनाक्स विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="barChartHorizontal" height="170"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <h4>
+                    आर्थिक वर्ष अनुसार व्यवसाय विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="lineChart1" height="170"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-lg-6">
+            <div class="card">
+                <h4>
+                    वर्ग अनुसार अपांगता विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="bubbleChart" ></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <h4>
+                    चालु अर्थिक अनुसार दर्ता/चलानी विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="barChart2" height="170"></canvas>
+                </div>
             </div>
         </div>
     </div>
