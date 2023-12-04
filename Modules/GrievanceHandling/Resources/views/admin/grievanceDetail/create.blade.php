@@ -83,22 +83,21 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="grievance_office_id" class="form-label">शाखा *</label>
-                                <select name="grievance_office_id" id="grievance_office_id" class="form-select">
-                                    <option value=""> शाखा छान्नुहोस्</option>
-                                    @foreach ($grievanceOffices as $grievanceOffice)
-                                        <option value="{{ $grievanceOffice->id }}"
-                                            {{ $grievanceOffice->id == old('grievance_office_id') ? 'selected' : '' }}>
-                                            {{ $grievanceOffice->title }}
-                                        </option>
+                                <label for="branch_id" class="form-label">शाखा *</label>
+
+                                <select class="form-control @error('branch_id') is-invalid @enderror"
+                                        name="branch_id" id="branch_id">
+                                    <option value="">शाखा छान्नुहोस</option>
+                                    @foreach($branches as $branch)
+                                        <option value="{{$branch->id}}" {{old('branch_id')==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
                                     @endforeach
                                 </select>
-                                @error('grievance_office_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @error('branch_id')
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="complaint_severity" class="form-label">गुनासो गम्भीरता *</label>
+                                <label for="complaint_severity" class="form-label">गुनासोको प्राथमिकता *</label>
                                 <select name="complaint_severity" id="complaint_severity" class="form-select">
                                     <option value=""> छान्नुहोस्</option>
                                     @foreach (\Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity::cases() as $severity)

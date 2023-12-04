@@ -64,6 +64,40 @@
                         @endif
                         <div class="col-md-12 mb-4">
                             <h5>
+                                <label for="is_anonymous" class="form-label">
+                                    के तपाईं गुनासोमा अनाम हुन चाहानुहुन्छ ?
+                                </label>
+                            </h5>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" wire:model="form.is_anonymous" value="1"
+                                        id="is_anonymous1">
+                                    <label class="form-check-label" for="is_anonymous1">हो </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" wire:model="form.is_anonymous" value="0"
+                                        id="is_anonymous2">
+                                    <label class="form-check-label" for="is_anonymous2">होइन </label>
+                                </div>
+                            </div>
+                            @error('form.is_anonymous')
+                                <div class="text-danger p-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        {{-- @if (!$form['is_anonymous'])
+                            <div class="col-md-6 mb-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" wire:model="form.password" class="form-control"
+                                    placeholder="Password">
+                                @error('form.password')
+                                    <div class="text-danger p-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                        @endif --}}
+
+                        <div class="col-md-12 mb-4">
+                            <h5>
                                 <label for="is_open" class="form-label">
                                     के तपाईं आफ्नो विवरण खुलाउन चाहनुहुन्छ ?
                                 </label>
@@ -147,10 +181,10 @@
                             </tr>
                             <tr>
                                 <th>गुनासो पठाउन चाहाने कार्यालय</th>
-                                <td>{{ $grievanceOffice->title }}</td>
+                                <td>{{ $branch->branch_name }}</td>
                             </tr>
                             <tr>
-                                <th>गुनासो गम्भीरता</th>
+                                <th>गुनासोको प्राथमिकता</th>
                                 <td>
                                     @switch($form['complaint_severity'])
                                         @case('Simple')
@@ -287,7 +321,7 @@
                         </div>
                         <div class="col-md-12 mb-4">
                             <h5>
-                                <label for="grievance_office_id" class="form-label">
+                                <label for="branch_id" class="form-label">
                                     ५. गुनासो पठाउन चाहाने कार्यालय *
                                 </label>
                             </h5>
@@ -295,23 +329,25 @@
                                 (यदि तपाँइ लाई गुनासो सँग सम्बन्धित कार्यालय थाहा छ भने छनोट गर्नुहोस्,
                                 अन्यथा हामी गुनासोको प्रकृति हेरेर सम्बन्धित कार्यालय मा पाठाउने छौं)
                             </p>
-                            <select name="grievance_office_id" wire:model="form.grievance_office_id" id="grievance_office_id"
+                            <select name="branch_id" wire:model="form.branch_id" id="branch_id"
                                 class="form-select">
                                 <option value=""> छान्नुहोस्</option>
-                                @foreach ($grievanceOffices as $grievanceOffice)
-                                    <option value="{{ $grievanceOffice->id }}">
-                                        {{ $grievanceOffice->title }}
+                                @foreach($branches as $branchData)
+
+                                    <option value="{{ $branchData?->id }}">
+                                        {{ $branchData->branch_name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('form.grievance_office_id')
+                            @error('form.branch_id')
                                 <div class="text-danger p-1">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="col-md-12 mb-4">
                             <h5>
                                 <label for="complaint_severity" class="form-label">
-                                    ६ . गुनासो गम्भीरता *
+                                    ६ . गुनासोको प्राथमिकता *
                                 </label>
                             </h5>
                             <div class="d-flex">

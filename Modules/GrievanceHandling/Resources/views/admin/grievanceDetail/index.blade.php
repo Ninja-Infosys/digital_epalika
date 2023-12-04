@@ -47,8 +47,9 @@
                                 <th>टोकन</th>
                                 <th>गुनासोको प्रकार</th>
                                 <th> गुनासोको शिर्षक</th>
+                                <th>गुनासो दाखिला गरेको मिति</th>
                                 <th> गुनासो प्रकाशन मिति</th>
-                                <th> गुनासो गम्भीरता</th>
+                                <th> गुनासोको प्राथमिकता</th>
                                 <th> गुनासोको अवस्था</th>
                                 <th>#</th>
                             </tr>
@@ -60,6 +61,7 @@
                                     <td>{{$grievanceDetail->token}}</td>
                                     <td>{{$grievanceDetail->grievanceType->title??''}}</td>
                                     <td>{{$grievanceDetail->subject}}</td>
+                                    <td>{{$grievanceDetail->created_at->toDateString()}}</td>
                                     <td>{{$grievanceDetail->created_at->toDateString()}}</td>
                                     <td>
                                         {{$grievanceDetail->complaint_severity->label()}}
@@ -76,7 +78,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="8">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="10">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
