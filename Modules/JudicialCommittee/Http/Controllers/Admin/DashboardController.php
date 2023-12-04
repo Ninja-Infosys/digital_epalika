@@ -2,6 +2,7 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
@@ -22,7 +23,7 @@ class DashboardController extends Controller
         $this->currentYearApplications = ComplaintApplication::with('judicialReceiptBill')->where('fiscal_year_id', officeSetting()->fiscal_year_id)->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('judicialCommitteeDashboard_access');
 
@@ -33,12 +34,7 @@ class DashboardController extends Controller
         $currentYearApplicationsCount = $this->currentYearApplications->count();
         $currentMonthApplicationsCount = $this->currentYearApplications->where('month', $today_nepali_date['m'])->count();
         if (request()->ajax()) {
-            return [
-                'monthlyApplications' => $this->getMonthlyApplications(),
-                'lawsuitNatureWiseApplications' => $this->getLawsuitNatureWiseApplications(),
-                'fiscalYearWiseApplications' => $this->getFiscalYearWiseApplications(),
-                'lawsuitNatureWiseApplicationsData' => $this->getLawsuitNatureWiseApplicationsData()
-            ];
+            
         }
         return view('judicialcommittee::admin.dashboard', compact(
             'totalApplicationsCount',
@@ -47,7 +43,14 @@ class DashboardController extends Controller
             'currentMonthApplicationsCount',
         ));
     }
-
+public function ajaxData(){
+    return [
+        'monthlyApplications' => $this->getMonthlyApplications(),
+        'lawsuitNatureWiseApplications' => $this->getLawsuitNatureWiseApplications(),
+        'fiscalYearWiseApplications' => $this->getFiscalYearWiseApplications(),
+        'lawsuitNatureWiseApplicationsData' => $this->getLawsuitNatureWiseApplicationsData()
+    ];
+}
     private function getMonthlyApplications()
     {
         $registeredApplications = [];
@@ -77,14 +80,30 @@ class DashboardController extends Controller
 
     private function getLawsuitNatureWiseApplications()
     {
-        return LawsuitNature::withCount(['complaintApplications' => function ($query) {
-            $query->where('fiscal_year_id', officeSetting()->fiscal_year_id);
-        }])->get()->map(function ($lawsuitNature) {
-            return [
-                'name' => $lawsuitNature->title,
-                'data' => (int)$lawsuitNature->complaint_applications_count
-            ];
-        });
+    $lawsuitNatures = LawsuitNature::withCount(['complaintApplications' => function ($query) {
+        $query->whereNull('fiscal_year_id'); 
+    }])
+    ->get()
+    ->map(function ($lawsuitNature) {
+        return [
+            'name' => $lawsuitNature->title . " (" . $lawsuitNature->complaint_applications_count . ")",
+            'data' => (int)$lawsuitNature->complaint_applications_count,
+            'color' => generateRandomRGBAColor() // If you have a function to generate random colors
+        ];
+    });
+
+    return [
+        'labels' => $lawsuitNatures->pluck('name')->toArray(),
+        'option' => ChartOptionEnum::PIE_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $lawsuitNatures->pluck('data')->toArray(),
+                'backgroundColor' => $lawsuitNatures->pluck('color')->toArray(),
+                'borderColor' => $lawsuitNatures->pluck('color')->toArray(),
+                'borderWidth' => 1,
+            ],
+        ],
+    ];
     }
 
     private function getFiscalYearWiseApplications()

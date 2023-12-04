@@ -15,7 +15,8 @@ use Modules\Revenue\Http\Controllers\Admin\TaxPayerLandController;
 use Modules\Revenue\Http\Controllers\Admin\TaxPayerTypeController;
 use Modules\Revenue\Http\Controllers\ReportController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::get('taxPayer/{taxPayer}/update-status', [TaxPayerController::class, 'updateStatus'])->name('taxPayer.update-status');
 Route::resource('taxPayer/{taxPayer}/taxPayerLand', TaxPayerLandController::class)->names('taxPayer.taxPayerLand');

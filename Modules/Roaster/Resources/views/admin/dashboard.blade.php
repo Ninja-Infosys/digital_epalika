@@ -10,7 +10,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-chalkboard-teacher avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{$trainerCount}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{ $trainerCount }}</span></h3>
                                 <p class="text-muted font-15 mb-0">प्रसिक्षकहरु</p>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-hands-helping avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$trainingCount}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $trainingCount }}</span></h3>
                                 <p class="text-muted font-15 mb-0 text-truncate">तालिमहरु</p>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-users avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$traineeCount}}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $traineeCount }}</span></h3>
                                 <p class="text-muted font-15 mb-0">प्रशिक्षार्थीहरु</p>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-users-cog avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$technicalTraineeCount}}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $technicalTraineeCount }}</span></h3>
                                 <p class="text-muted font-15 mb-0">प्रभिधिक प्रशिक्षार्थीहरु</p>
                             </div>
                         </div>
@@ -110,14 +110,38 @@
         </div>
     </div> --}}
 
-    <div class="row mt-2">
+    <div class="row mt-2" id="charts" data-chart-url="{{ route('admin.roaster.dashboard.ajax') }}">
+
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    विषय अनुसार तालिमहरु
                 </h4>
                 <div class="card-body">
-                    <canvas id="barChart1"></canvas>
+                    <canvas id="trainerAccordingToSubject" chart-type="pie"></canvas>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    चालु आ.व.को प्रकार अनुसार तालिमहरु
+                </h4>
+                <div class="card-body">
+                    <canvas id="trainingAccordingToFiscalYear" chart-type="pie"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <h4>
+                    चालु आ.व.को महिना अनुसार तालिमहरु
+                </h4>
+                <div class="card-body">
+                    <canvas id="trainingAccordingToMonth" chart-type="bar"></canvas>
                 </div>
 
             </div>
@@ -125,102 +149,28 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सिफारिस विवरण
+                    सेवा समूह अनुसार प्रसिक्षकहरु
                 </h4>
                 <div class="card-body">
-                    <canvas id="steppedlineChart"></canvas>
+                    <canvas id="trainerAccordingToDepartment" chart-type="pie"></canvas>
                 </div>
 
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card">
                 <h4>
-                    कुल राजस्व विवरण
+                    आर्थिक वर्ष अनुसार तालिमहरु
                 </h4>
                 <div class="card-body">
-                    <canvas id="doughNut1"></canvas>
+                    <canvas id="trainingAccordingToType" chart-type="bar"></canvas>
                 </div>
 
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>
-                    भुक्तानी अनुसार कुल राजस्व विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="pieChart1"></canvas>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <h4>
-                    विषय अनुसार तालिम विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="polarAreaChart1"></canvas>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    आर्थिक वर्ष अनुशारको घरनाक्स विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="barChartHorizontal" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    आर्थिक वर्ष अनुसार व्यवसाय विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="lineChart1" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    वर्ग अनुसार अपांगता विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="bubbleChart" ></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    चालु अर्थिक अनुसार दर्ता/चलानी विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="barChart2" height="170"></canvas>
-                </div>
             </div>
         </div>
     </div>
     @push('scripts')
-    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-    <script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
-@endpush
-
-    {{-- @push('scripts')
-        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
-    @endpush --}}
+        <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
+        <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
+    @endpush
 @endsection

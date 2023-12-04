@@ -68,10 +68,12 @@ class DashboardController extends Controller
         $color = collect();
 
         foreach ($grievanceComplaintSeverity as $grievanceSeverity) {
-            $label->push($grievanceSeverity->label());
-            $data->push($this->grievanceDetails
+            $count = $this->grievanceDetails
                 ->where('complaint_severity', $grievanceSeverity->value)
-                ->count());
+                ->count();
+
+            $label->push($grievanceSeverity->label() ." (".$count.")");
+            $data->push($count);
             $color->push(generateRandomRGBAColor());
 
         }
@@ -97,10 +99,12 @@ class DashboardController extends Controller
         $color = collect();
 
         foreach ($grievanceComplaintStatuses as $grievanceComplaintStatus) {
-            $label->push($grievanceComplaintStatus->label());
-            $data->push($this->grievanceDetails
+            $count = $this->grievanceDetails
                 ->where('status', $grievanceComplaintStatus->value)
-                ->count());
+                ->count();
+
+            $label->push($grievanceComplaintStatus->label() ." (".$count.")");
+            $data->push($count);
             $color->push(generateRandomRGBAColor());
 
         }
@@ -124,7 +128,7 @@ class DashboardController extends Controller
             $query->whereNull('grievance_detail_id');
         }])->get()->map(function ($grievanceTypes) {
             return [
-                'name' => $grievanceTypes->title,
+                'name' => $grievanceTypes->title ." (".$grievanceTypes->grievance_details_count.")",
                 'data' => $grievanceTypes->grievance_details_count,
                 'color' => generateRandomRGBAColor()
             ];
@@ -152,7 +156,7 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($grievanceOffice) {
                 return [
-                    'name' => $grievanceOffice->title,
+                    'name' => $grievanceOffice->title." (".$grievanceOffice->grievance_details_count.")",
                     'data' => $grievanceOffice->grievance_details_count,
                     'color' => generateRandomRGBAColor()
                 ];
