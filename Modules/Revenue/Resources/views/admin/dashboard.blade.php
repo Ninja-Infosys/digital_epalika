@@ -111,57 +111,7 @@
             </div> <!-- end card-->
         </div>
     </div>
-    {{-- <div class="row mt-2" id="charts" data-chart-url="{{route('admin.revenue.dashboard')}}">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div id="totalRevenue" chart-type="pie" chart-title="कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div id="totalCashBankRevenue" chart-type="pie" chart-title="भुक्तानी अनुसार कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="accordingToMonth" chart-type="column" chart-title="चालु आर्थिक वर्षको महिना अनुसार कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="accordingToFy" chart-type="column" chart-title="आर्थिक वर्ष अनुसार कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
+   
     <div class="row mt-2" id="charts" data-chart-url="{{route('admin.revenue.dashboard.ajax')}}">
         <div class="col-md-6">
             <div class="card">
