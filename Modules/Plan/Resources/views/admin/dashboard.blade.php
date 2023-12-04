@@ -109,7 +109,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    {{-- महिना अनुसार सूचना समाचार --}}
+                    महिना अनुसार सूचना समाचार
                 </h4>
                 <div class="card-body">
                     <canvas id="" chart-type="bar"></canvas>
@@ -120,7 +120,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    {{-- चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार --}}
+                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
                 </h4>
                 <div class="card-body">
                     <canvas id="" chart-type="line"> </canvas>
