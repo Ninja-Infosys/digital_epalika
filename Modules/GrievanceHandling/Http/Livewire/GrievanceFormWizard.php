@@ -33,6 +33,7 @@ class GrievanceFormWizard extends Component
     public $grievanceType;
 
     public $branch;
+    public $is_anonymous;
 
     public array $form = [
         'grievance_type_id' => null,
@@ -65,6 +66,7 @@ class GrievanceFormWizard extends Component
         'form.password' => ['required_if:is_password,1'],
         'form.password_confirmation' => ['nullable', 'confirmed'],
         'form.is_open' => ['nullable', 'boolean'],
+        'form.is_anonymous'=>['nullable', 'boolean'],
         'form.name' => ['required'],
         'form.email' => ['required', 'email'],
         'form.phone' => ['required'],
@@ -115,7 +117,6 @@ class GrievanceFormWizard extends Component
                     'password' => $this->form['password'] ?? '',
                 ]);
             }
-
             $grievanceSetting = GrievanceSetting::first();
 
             $grievanceDetail = $grievanceUser->grievanceDetails()->create([
@@ -126,7 +127,7 @@ class GrievanceFormWizard extends Component
                 'complaint_severity' => $this->form['complaint_severity'],
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
-                'is_anonymous' => $this->is_anonymous,
+                'is_anonymous' => $this->form['is_anonymous'],
                 'grievance_medium' => GrievanceMediumEnum::SYSTEM,
                 'assigned_user_id' => $grievanceSetting->user_id ?? User::first()->id,
                 'assigned_at' => now()

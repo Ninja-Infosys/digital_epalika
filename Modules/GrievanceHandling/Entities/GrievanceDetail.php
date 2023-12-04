@@ -53,6 +53,15 @@ class GrievanceDetail extends Model
         'status' => GrievanceStatus::class,
         'grievance_medium' => GrievanceMediumEnum::class
     ];
+    public function scopeAnonymous($query)
+    {
+        return $query->where('is_anonymous', 1);
+    }
+
+    public function scopeNotAnonymous($query)
+    {
+        return $query->where('is_anonymous', 0);
+    }
 
     public function scopeApproved($query)
     {
@@ -124,8 +133,5 @@ class GrievanceDetail extends Model
     {
         return $this->belongsTo(Branch::class);
     }
-    public function isAnonymous()
-    {
-        return $this->belongsTo(GrievanceUser::class, 'grievanceUser_id');
-    }
+
 }

@@ -26,7 +26,7 @@ return new class () extends Migration {
             $table->boolean('is_approved')->default(0)->comment('स्वीकृत');
             $table->boolean('is_public')->default(0)->comment('सार्वजनिक');
             $table->string('status')->default('unseen')->comment('स्थिति');
-            $table->boolean('is_anonymous')->default(false);
+            $table->boolean('is_anonymous')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

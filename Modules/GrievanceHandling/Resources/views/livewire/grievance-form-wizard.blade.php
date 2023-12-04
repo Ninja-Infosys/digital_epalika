@@ -84,8 +84,7 @@
                                 <div class="text-danger p-1">{{ $message }}</div>
                             @enderror
                         </div>
-
-                        @if (!$form['is_anonymous'])
+                        {{-- @if (!$form['is_anonymous'])
                             <div class="col-md-6 mb-4">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" id="password" wire:model="form.password" class="form-control"
@@ -95,7 +94,7 @@
                                 @enderror
                             </div>
 
-                        @endif
+                        @endif --}}
 
                         <div class="col-md-12 mb-4">
                             <h5>

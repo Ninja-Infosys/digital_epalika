@@ -46,12 +46,13 @@ class GrievanceDetailController extends Controller
         $this->checkAuthorization('grievanceDetail_create');
 
         $grievanceDetail = GrievanceDetail::find(1);
+        $grievanceTypes= GrievanceType::all();
         $isAnonymous = $grievanceDetail->is_anonymous;
         $branches = Branch::all();
         $grievanceUsers = GrievanceUser::latest()->get();
         $users = User::whereNot('id', auth()->id())->get();
 
-        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'branches', 'grievanceUsers', 'users'));
+        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'branches', 'grievanceUsers', 'users','isAnonymous'));
     }
 
     public function store(StoreGrievanceDetailRequest $request)
@@ -101,7 +102,7 @@ class GrievanceDetailController extends Controller
             'grievanceDetails.files',
             'grievanceDetails.user',
             'grievanceDetails.grievanceUser',
-             'grievanceDetails.is_anonymous',
+            'grievanceDetails.is_anonymous',
             'grievanceType',
             'branch',
             'publisher',
@@ -111,9 +112,16 @@ class GrievanceDetailController extends Controller
             'grievanceAssignHistories.fromUser',
             'grievanceAssignHistories.user'
         );
+
+        if ($grievanceDetail->grievanceUser && isset($grievanceDetail->grievanceUser->is_anonymous)) {
+            $is_anonymous = $grievanceDetail->grievanceUser->is_anonymous;
+        }
+
         $users = User::all();
+
         return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail', 'users'));
     }
+
 
     public function edit($id)
     {
