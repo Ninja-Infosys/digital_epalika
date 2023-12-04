@@ -101,41 +101,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <label for="file" class="form-label fw-bold">एजेन्डाहरु <span
-                                            class="text-danger">*</span></label>
-                                    <button type="button" class="btn btn-xs btn-outline-info" data-target-element="file"
-                                        data-toggle="add-more">
-                                        <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
-                                    </button>
-                                </div>
-                                <fieldset class="bg-soft-secondary">
-                                    <div id="file">
-                                        <div class="main">
-                                            <div class="text-end">
-                                                <button type="button" class="btn btn-sm btn-outline-danger"
-                                                    data-toggle="remove-parent" data-parent=".main"
-                                                    data-target-element="file">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>
-                                            <div class="row border-bottom mb-2">
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="proposal" class="form-label">प्रस्ताव *</label>
-                                                    <input type="text" name="meetingAgendas[0][proposal]"
-                                                        class="form-control" id="proposal" placeholder="प्रस्ताव"
-                                                        required />
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="description" class="form-label">विवरण </label>
-                                                    <textarea name="meetingAgendas[0][description]" id="description" class="form-control" placeholder="विवरण" cols="30" rows="2"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
+
                         </div>
 
                         <button type="submit" class="btn btn-primary">

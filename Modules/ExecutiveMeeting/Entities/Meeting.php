@@ -83,6 +83,11 @@ class Meeting extends Model
         return $this->hasMany(MeetingDecision::class);
     }
 
+    public function meetingDecision(): HasOne
+    {
+        return $this->hasOne(MeetingDecision::class);
+    }
+
     public function meetingMinute(): HasOne
     {
         return $this->hasOne(MeetingMinute::class);

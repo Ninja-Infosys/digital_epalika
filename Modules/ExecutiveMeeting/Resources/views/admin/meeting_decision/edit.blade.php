@@ -46,6 +46,15 @@
                                 <x-date-input-component nameNe="date" :editDateNe="$meetingDecision->date" idNe="date" labelNe="मिति *"
                                     idEn="en_date" nameEn="en_date" :editDateEn="$meetingDecision->en_date" labelEn="Date" :getTodayDate="false" />
                             </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="chairman" class="form-label">अध्यक्ष * </label>
+                                <input type="text" name="chairman" value="{{ old('chairman',$meetingDecision->chairman) }}"
+                                class="form-control @error('chairman') is-invalid @enderror" id="chairman"
+                                placeholder="अध्यक्ष" required />
+                            @error('chairman')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            </div>
 
                             <div class="col-md-12 mb-2">
                                 <label for="description" class="form-label">बिवरण * </label>

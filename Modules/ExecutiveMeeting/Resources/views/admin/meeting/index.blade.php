@@ -97,12 +97,7 @@
                                                             </button>
                                                         </form>
                                                     @endcan
-                                                    @can('meeting_edit')
-                                                        <a href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.index', $meeting) }}"
-                                                            title="बैठक एजेन्डा" class="dropdown-item text-secondary">
-                                                            <i class="fa fa-file"> बैठक एजेन्डा</i>
-                                                        </a>
-                                                    @endcan
+
                                                     @can('meetingDecision_access')
                                                         <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}"
                                                             title="बैठक निर्णय" class="dropdown-item text-secondary">

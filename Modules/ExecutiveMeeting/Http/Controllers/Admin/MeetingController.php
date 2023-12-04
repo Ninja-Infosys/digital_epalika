@@ -43,16 +43,10 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_create');
 
-        DB::transaction(function () use ($request) {
-            $meeting = Meeting::create($request->validated() + [
-                'user_id' => auth()->id(),
-                'fiscal_year_id' => officeSetting()->fiscal_year_id,
-            ]);
-
-            foreach ($request->input('meetingAgendas') ?? [] as $meetingAgenda) {
-                $meeting->meetingAgendas()->create($meetingAgenda);
-            }
-        });
+        Meeting::create($request->validated() + [
+            'user_id' => auth()->id(),
+            'fiscal_year_id' => officeSetting()->fiscal_year_id,
+        ]);
 
         if ($request->ajax()) {
             return response()->json([
@@ -141,12 +135,13 @@ class MeetingController extends Controller
 
     public function printMinute(Meeting $meeting)
     {
-        $meeting->load(['meetingAgendas' => function ($query) {
-            $query->with('meetingDecision')->where('is_final', 1);
-        },
-        'meetingMinute',
-        'meetingParticipants'
-    ]);
+        $meeting->load([
+            'meetingAgendas' => function ($query) {
+                $query->with('meetingDecision')->where('is_final', 1);
+            },
+            'meetingMinute',
+            'meetingParticipants'
+        ]);
 
         return response()->json([
             'view' => (string)View::make('executivemeeting::admin.meeting.minute_print', compact('meeting'))

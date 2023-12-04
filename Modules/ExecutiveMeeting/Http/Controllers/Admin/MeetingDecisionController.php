@@ -33,7 +33,8 @@ class MeetingDecisionController extends Controller
                 $query->with('meetingDecision');
                 $query->where('is_final', 1);
             },
-            'meetingParticipants'
+            'meetingParticipants',
+            'meetingDecision'
         ]);
 
         return view('executivemeeting::admin.meeting_decision.create', compact('meeting', 'committeeMembers'));
@@ -46,17 +47,18 @@ class MeetingDecisionController extends Controller
         $participatingMembers = CommitteeMember::whereIn('id', $request->input('meetingParticipants') ?? [])->orderBy('position')->get();
 
         DB::transaction(function () use ($request, $meeting, $participatingMembers) {
-            foreach ($request->input('meetingDecisions') as $meetingDecision) {
-                MeetingDecision::updateOrCreate(
-                    ['meeting_id' => $meeting->id, 'meeting_agenda_id' => $meetingDecision['meeting_agenda_id']],
-                    [
-                        'date' => $meetingDecision['date'],
-                        'en_date' => $meetingDecision['en_date'],
-                        'description' => $meetingDecision['description'],
-                        'user_id' => auth()->id()
-                    ]
-                );
-            }
+
+            MeetingDecision::updateOrCreate(
+                ['meeting_id' => $meeting->id],
+                [
+                    'date' => $request->input('date'),
+                    'chairman' => $request->input('chairman'),
+                    'en_date' => $request->input('en_date'),
+                    'description' => $request->input('description'),
+                    'user_id' => auth()->id()
+                ]
+            );
+
 
             foreach ($participatingMembers as $member) {
                 MeetingParticipant::updateOrCreate(
@@ -70,12 +72,14 @@ class MeetingDecisionController extends Controller
                 );
             }
 
-            $meeting->meetingParticipants()->whereNotIn('committee_member_id', $request->input('meetingParticipants')??[])->delete();
+            $meeting->meetingParticipants()->whereNotIn('committee_member_id', $request->input('meetingParticipants') ?? [])->delete();
         });
 
         toast('बैठक निर्णय सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting));
     }
+
+
 
     public function show(Meeting $meeting, MeetingDecision $meetingDecision)
     {
