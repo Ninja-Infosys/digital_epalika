@@ -130,7 +130,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    कुल गुनासो विवरण
+                    गम्भिरता अनुसार गुनासो विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="grievanceCountAccordingToSeverity" chart-type="pie"></canvas>
