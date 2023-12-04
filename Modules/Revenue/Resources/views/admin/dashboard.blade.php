@@ -199,7 +199,7 @@
         <div class="col-md-12">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका अनुसार कुल राजस्व विवरण
+                    चालु आर्थिक वर्षाका अनुसार कुल राजस्व 
                 </h4>
                 <div class="card-body">
                     <canvas id="accordingToFy" chart-type="line"> </canvas>
