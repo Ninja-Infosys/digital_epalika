@@ -130,7 +130,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    कुल राजस्व विवरण
+                    गम्भिरता अनुसार गुनासो विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="grievanceCountAccordingToSeverity" chart-type="pie"></canvas>
@@ -141,7 +141,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    भुक्तानी अनुसार कुल राजस्व विवरण
+                    स्थिति अनुसार गुनासो  विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="grievanceCountAccordingToStatus" chart-type="doughnut"></canvas>
@@ -152,7 +152,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    विषय अनुसार तालिम विवरण
+                    विषय अनुसार  गुनासो विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="dataAccordingToGrievanceType" chart-type="polarArea"></canvas>
@@ -163,7 +163,8 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    विषय अनुसार तालिम विवरण
+                   
+                    तथ्याङ्क अनुसार गुनासो विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="dataAccordingToGrievanceOffice" chart-type="doughnut"></canvas>
@@ -174,7 +175,7 @@
         <div class="col-md-12">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    महिना अनुसार  गुनासोहरु
                 </h4>
                 <div class="card-body">
                     <canvas id="getDataAccordingToMonth" chart-type="bar"></canvas>
