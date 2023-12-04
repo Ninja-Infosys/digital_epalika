@@ -188,7 +188,7 @@
         <div class="col-md-12">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    महिना अनुसार कुल राजस्व विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="accordingToMonth" chart-type="bar"></canvas>
@@ -199,7 +199,7 @@
         <div class="col-md-12">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
+                    चालु आर्थिक वर्षाका अनुसार कुल राजस्व विवरण
                 </h4>
                 <div class="card-body">
                     <canvas id="accordingToFy" chart-type="line"> </canvas>
