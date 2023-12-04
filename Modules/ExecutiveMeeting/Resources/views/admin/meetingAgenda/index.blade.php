@@ -67,7 +67,9 @@
                                             @can('meetingAgenda_edit')
                                                 <a href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.edit', [$meeting, $meetingAgenda]) }}"
                                                     class="btn btn-xs btn-outline-warning" title="सम्पादन गर्नुहोस्">
-                                                    <i class="fa fa-edit"></i> 
+
+                                                    <i class="fa fa-edit"></i>
+
                                                 </a>
                                             @endcan
                                             @can('meetingAgenda_delete')
@@ -78,7 +80,9 @@
                                                     @method('delete')
                                                     <button data-bs-type="delete"
                                                         class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
-                                                        <i class="fa fa-trash"></i> 
+
+                                                        <i class="fa fa-trash"></i>
+
                                                     </button>
                                                 </form>
                                             @endcan
