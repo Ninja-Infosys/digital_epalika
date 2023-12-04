@@ -118,7 +118,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="position" class="form-label">स्थान  </label>
+                                    <label for="position" class="form-label">मर्यादाक्रम  </label>
                                     <input
                                         type="number"
                                         name="position"

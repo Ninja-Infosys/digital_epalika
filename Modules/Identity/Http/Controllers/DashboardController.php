@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $this->disabilityIdentityCard = DisabilityIdentityCard::get();
         $this->seniorCitizenDetail = SeniorCitizenDetail::get();
     }
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('identityDashboard_access');
 
@@ -27,15 +27,16 @@ class DashboardController extends Controller
         $seniorCitizenDetailCount = $this->seniorCitizenDetail->count();
         $fiscalYearWiseDisabilityCount = $this->disabilityIdentityCard->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
         $fiscalYearWiseSeniorCitizenDetail = $this->seniorCitizenDetail->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
-        if (request()->ajax()) {
-            return [
-                'wardWise' => $this->getWardWiseData(),
-                'SeniorDetailWardWise' => $this->getSeniorDetailWardWiseData(),
-            ];
-        }
+
         return view('identity::admin.dashboard', compact('fiscalYearWiseSeniorCitizenDetail', 'disabilityIdentityCardCount', 'fiscalYearWiseDisabilityCount', 'seniorCitizenDetailCount'));
     }
 
+    public function ajaxData(){
+        return [
+            'wardWise' => $this->getWardWiseData(),
+            'SeniorDetailWardWise' => $this->getSeniorDetailWardWiseData(),
+        ];
+    }
     public function getWardWiseData()
     {
         $wardsData = collect();

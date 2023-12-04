@@ -13,7 +13,6 @@ Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('das
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('grievanceType', GrievanceTypeController::class);
-    Route::resource('grievanceOffice', GrievanceOfficeController::class);
     Route::resource('grievanceSetting', GrievanceSettingController::class)->only(['index', 'update']);
 });
 

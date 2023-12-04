@@ -21,7 +21,7 @@ class GrievanceFormResource extends JsonResource
             'grievance_user_id'=>$this->grievance_user_id??'',
             'user_id'=>$this->user_id??'',
             'grievance_type_id'=>$this->grievance_type_id??'',
-            'grievance_office_id'=>$this->grievance_office_id??'',
+            'branch_id'=>$this->branch_id??'',
             'publisher_id'=>$this->publisher_id??'',
             'assigned_user_id'=>$this->assigned_user_id??'',
             'assigned_at'=>$this->assigned_at??'',
@@ -32,7 +32,9 @@ class GrievanceFormResource extends JsonResource
             'status'=>$this->status??'',
             'is_approved'=>$this->is_approved??'',
             'is_public'=>$this->is_public??'',
-            'grievance_medium'=>$this->grievance_medium??''
+            'grievance_medium'=>$this->grievance_medium??'',
+            'is_anonymous'=>$this->is_anonymous??'',
+
         ];
     }
 }

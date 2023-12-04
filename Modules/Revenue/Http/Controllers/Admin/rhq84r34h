@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
-    public function index()
+    public function __invoke()
     {
         $this->checkAuthorization('revenueDashboard_access');
 
@@ -55,61 +55,45 @@ class DashboardController extends Controller
                 return date('m', strtotime($item->payment_date)) == $nepaliMonth['m'] - 1;
             })
             ->sum('total');
+        if (request()->ajax()) {
+            return [
+                'totalRevenue' => $this->totalRevenue($results),
+                'totalCashBankRevenue' => $this->totalCashBankRevenue($results),
+                'accordingToFy' => $this->accordingToFy($results),
+                'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)),
+            ];
+        }
 
         return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
     }
 
-   public function ajaxData()
-{
-    $results = DB::table('invoices')
-            ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
-            ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
-            ->whereNull('invoices.deleted_at')
-            ->whereNull('invoice_particulars.deleted_at')
-            ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
-            ->get();
-    $fiscal_year_id = officeSetting()->fiscal_year_id;
-    return [
-        'totalRevenue' => $this->totalRevenue($results), 
-        'totalCashBankRevenue' => $this->totalCashBankRevenue($results), 
-        'accordingToFy' => $this->accordingToFy($results), 
-        'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)), 
-    ];
-}
-
-public function totalRevenue(Collection $result): array
-{
-    $cashReceiptTotal = $result->where('is_cash_invoice', 1)->sum('total');
-    $creditReceiptTotal = $result->where('is_cash_invoice', 0)->sum('total');
-
-    return [
-        'labels' => ['नगदी रसिद', 'मालपोत रसिद'],
-        'dataSets' => [
-            [
-                'data' => [$cashReceiptTotal, $creditReceiptTotal],
-                'label' => 'नगदी रसिद र मालपोत रसिद राजस्व',
-            ],
-        ],
-    ];
-}
-
-
-    public function totalCashBankRevenue(Collection $result): array
+    public function totalRevenue(Collection $result): Collection
     {
-        $cashTotal = $result->where('payment_method', 'Cash')->sum('total');
-        $bankTotal = $result->where('payment_method', 'Bank')->sum('total');
-    
-        return [
-            'labels' => ['नगद', 'बैंक'],
-            'dataSets' => [
-                [
-                    'data' => [$cashTotal, $bankTotal],
-                    'label' => 'नगद र बैंक राजस्व',
-                ],
+        return collect([
+            [
+                'name' => 'नगदी रसिद',
+                'data' => $result->where('is_cash_invoice', 1)->sum('total')
             ],
-        ];
+            [
+                'name' => 'मालपोत रसिद',
+                'data' => $result->where('is_cash_invoice', 0)->sum('total')
+            ]
+        ]);
     }
-    
+
+    public function totalCashBankRevenue(Collection $result): Collection
+    {
+        return collect([
+            [
+                'name' => 'नगद',
+                'data' => $result->where('payment_method', 'Cash')->sum('total')
+            ],
+            [
+                'name' => 'बैंक',
+                'data' => $result->where('payment_method', 'Bank')->sum('total')
+            ]
+        ]);
+    }
 
     public function accordingToFy(Collection $result)
     {
@@ -163,6 +147,6 @@ public function totalRevenue(Collection $result): array
                 'label' => 'जम्मा राजस्व',
             ],
         ],
-    ];
-    }
+];
+}
 }

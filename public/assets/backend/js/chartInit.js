@@ -1,42 +1,42 @@
-function createChart(targetElement, responseElement) {
-    const chart = targetElement.getContext('2d');
+    function createChart(targetElement, responseElement) {
+        const chart = targetElement.getContext('2d');
 
 
-    const chartType = $(targetElement).attr('chart-type');
-    const chartData = {
-        labels: responseElement['labels'],
-        datasets: responseElement['dataSets'],
-    };
-    const chartOptions = responseElement['option']
-    new Chart(chart, {
-        type: chartType,
-        data: chartData,
-        options: chartOptions,
+        const chartType = $(targetElement).attr('chart-type');
+        const chartData = {
+            labels: responseElement['labels'],
+            datasets: responseElement['dataSets'],
+        };
+        const chartOptions = responseElement['option']
+        new Chart(chart, {
+            type: chartType,
+            data: chartData,
+            options: chartOptions,
+        });
+
+    }
+
+    // bar chart
+    $(document).ready(() => {
+        const url = $('#charts').data('chart-url');
+        $.ajax({
+            method: 'GET',
+            url,
+            success: (response) => {
+
+                Object.keys(response).forEach((key) => {
+                    const targetElement = document.getElementById(key);
+                    if (targetElement) {
+                        createChart(targetElement, response[key]);
+                    }
+                })
+                // loading.addClass('d-none');
+            },
+            error: () => {
+                // loading.html('<p class="text-center">डाटा छैन !!!</p>');
+            },
+        })
     });
-
-}
-
-// bar chart
-$(document).ready(() => {
-    const url = $('#charts').data('chart-url');
-    $.ajax({
-        method: 'GET',
-        url,
-        success: (response) => {
-
-            Object.keys(response).forEach((key) => {
-                const targetElement = document.getElementById(key);
-                if (targetElement) {
-                    createChart(targetElement, response[key]);
-                }
-            })
-            // loading.addClass('d-none');
-        },
-        error: () => {
-            // loading.html('<p class="text-center">डाटा छैन !!!</p>');
-        },
-    })
-});
 /*
 const barChart1 = document.getElementById('barChart1').getContext('2d');
 const barChartData = {

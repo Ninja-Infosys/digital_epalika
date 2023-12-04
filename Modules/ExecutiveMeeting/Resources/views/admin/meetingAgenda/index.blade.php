@@ -8,8 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.executiveMeeting.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">बैठक एजेन्डा</li>
@@ -67,6 +67,7 @@
                                             @can('meetingAgenda_edit')
                                                 <a href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.edit', [$meeting, $meetingAgenda]) }}"
                                                     class="btn btn-xs btn-outline-warning" title="सम्पादन गर्नुहोस्">
+
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                             @endcan
@@ -78,7 +79,9 @@
                                                     @method('delete')
                                                     <button data-bs-type="delete"
                                                         class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+
                                                         <i class="fa fa-trash"></i>
+
                                                     </button>
                                                 </form>
                                             @endcan

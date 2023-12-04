@@ -10,7 +10,8 @@ use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportCont
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('businessNature', BusinessNatureController::class);

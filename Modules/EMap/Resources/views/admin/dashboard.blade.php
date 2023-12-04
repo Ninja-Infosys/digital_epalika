@@ -50,14 +50,14 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row mt-2">
+    <div class="row mt-2" id="charts" data-chart-url="{{ route('emap.admin.dashboard.ajax') }}">
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    आर्थिक बर्ष 2080/081 अनुसार प्रयोजन
                 </h4>
                 <div class="card-body">
-                    <canvas id="barChart1"></canvas>
+                    <canvas id="mapApply" chart-type="pie"></canvas>
                 </div>
 
             </div>
@@ -65,95 +65,61 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सिफारिस विवरण
+                    आर्थिक बर्ष 2080/081 अनुसार भवन वर्गीकरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="steppedlineChart"></canvas>
+                    <canvas id="buildingCategory" chart-type="bar"></canvas>
                 </div>
 
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card">
                 <h4>
-                    कुल राजस्व विवरण
+                    आर्थिक बर्ष 2080/081 अनुसार भवन निर्माण कार्यको किसिम
                 </h4>
                 <div class="card-body">
-                    <canvas id="doughNut1"></canvas>
+                    <canvas id="constructionType" chart-type="pie"></canvas>
                 </div>
 
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card">
                 <h4>
-                    भुक्तानी अनुसार कुल राजस्व विवरण
+                    आर्थिक बर्ष 2080/081 इस्टकचर अनुसार भवनको किसिम
                 </h4>
                 <div class="card-body">
-                    <canvas id="pieChart1"></canvas>
+                    <canvas id="structureType" chart-type="doughnut"></canvas>
                 </div>
 
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="card">
                 <h4>
-                    विषय अनुसार तालिम विवरण
+                    चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="polarAreaChart1"></canvas>
+                    <canvas id="mapAccordingToMonth" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष अनुसारले नक्सा बिवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="buildingUsage" chart-type="bar"> </canvas>
                 </div>
 
             </div>
         </div>
     </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    आर्थिक वर्ष अनुशारको घरनाक्स विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="barChartHorizontal" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    आर्थिक वर्ष अनुसार व्यवसाय विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="lineChart1" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    वर्ग अनुसार अपांगता विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="bubbleChart" ></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <h4>
-                    चालु अर्थिक अनुसार दर्ता/चलानी विवरण
-                </h4>
-                <div class="card-body">
-                    <canvas id="barChart2" height="170"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
     @push('scripts')
-        <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-        <script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
+        <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
+        <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
     @endpush
 @endsection

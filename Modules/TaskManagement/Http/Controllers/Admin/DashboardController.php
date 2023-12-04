@@ -20,15 +20,10 @@ class DashboardController extends Controller
         $this->activities = Activity::withCount('activityLists')->with('activityLists')->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('taskManagementDashboard_access');
 
-        if (request()->ajax()) {
-            return [
-                'dailyTask' => $this->dailyTask(),
-            ];
-        }
         $todayTaskCount = $this->activities
             ->where('date_en', today())
             ->sum('activity_lists_count');
@@ -48,7 +43,11 @@ class DashboardController extends Controller
             'taskNotSubmittedUserCount'
         ));
     }
-
+public function ajaxData(){
+    return [
+        'dailyTask' => $this->dailyTask(),
+    ];
+}
     public function dailyTask()
     {
         $ranges = CarbonPeriod::create(today()->subDays(6), today());
