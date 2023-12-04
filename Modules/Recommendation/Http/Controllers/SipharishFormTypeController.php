@@ -35,14 +35,14 @@ class SipharishFormTypeController extends Controller
 
         DB::transaction(function () use ($request) {
             $sipharis = SipharishFormType::create($request->validated() + [
-                'created_by' => auth()->id()
-            ]);
+                    'created_by' => auth()->id()
+                ]);
 
             if ($sipharis && !empty($request->validated()['fields'])) {
                 foreach ($request->input('fields') as $data) {
                     $sipharis->sipharisFormFields()->create($data + [
-                        'created_by' => auth()->id()
-                    ]);
+                            'created_by' => auth()->id()
+                        ]);
                 }
             }
         });
@@ -108,9 +108,12 @@ class SipharishFormTypeController extends Controller
     public function updateTemplate(Request $request, SipharishFormType $sipharishFormType)
     {
         $this->checkAuthorization('recommendationTemplate_access');
+        $request->validate([
+            'content' => ['required']
+        ]);
 
         $sipharishFormType->update([
-            'content' => $request->content
+            'content' => $request->input('content')
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();

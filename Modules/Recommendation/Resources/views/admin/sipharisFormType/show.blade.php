@@ -7,8 +7,9 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.recommendation.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}"
+                                     alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">सिफारिस</li>
@@ -34,33 +35,40 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishFormType.updateTemplate', $sipharishFormType) }}" method="post">
+                    <form
+                        action="{{ route('admin.recommendation.sipharish.sipharishFormType.updateTemplate', $sipharishFormType) }}"
+                        method="post">
                         @csrf
                         @method('put')
                         @foreach( (new \Modules\Recommendation\Entities\SipharishFormType())->getTemplateOptions() as $template)
+                            <div class="mt-2">
+                                <h4>{{$template['title'] ?? ''}} :</h4>
+                                <div class="button-list">
+                                    <div class="button-list d-flex flex-wrap mb-2">
+                                        @foreach($template['data'] as $key=>$templateValue)
+                                            <button type="button" class="btn btn-outline-primary btn-xs me-2"
+                                                    onclick="copyText('{{$templateValue}}')">
+                                                {{$key}}
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
                         <div class="mt-2">
-                            <h4>{{$template['title'] ?? ''}} :</h4>
-                            <div class="button-list">
-                                @foreach($template['data'] as $key=>$templateValue)
-                                    <button type="button" class="btn btn-outline-primary btn-xs"
-                                            onclick="copyText('{{$templateValue}}')">
-                                        {{$key}}
-                                    </button>
-                                @endforeach
+                            <div class="button-list ">
+                                <h4>फारम फिल्ड:</h4>
+                                <div class="button-list d-flex flex-wrap mb-2">
+                                    @foreach($sipharishFormType->sipharisFormFields as $sipharisFormField)
+                                        <button type="button" class="btn btn-outline-primary btn-xs me-2"
+                                                onclick="copyText('{{"[@form.".$sipharisFormField->slug."]"}}')">
+                                            {{$sipharisFormField->field_name}}
+                                        </button>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    @endforeach
-
-                    <div class="mt-2">
-                        <div class="button-list">
-                            @foreach($sipharishFormType->sipharisFormFields as $sipharisFormField)
-                                <button type="button" class="btn btn-outline-primary btn-xs"
-                                        onclick="copyText('{{"[@form.".$sipharisFormField->slug."]"}}')">
-                                    {{$sipharisFormField->field_name}}
-                                </button>
-                                @endforeach
-                        </div>
-                    </div>
 
                         <div class="row mt-2">
                             <div class="col-md-12 mb-2">
@@ -74,9 +82,9 @@
                             </div>
                         </div>
 
-                            <button type="submit" class="btn btn-primary mt-2">
-                                पेश गर्नुहोस्
-                            </button>
+                        <button type="submit" class="btn btn-primary mt-2">
+                            पेश गर्नुहोस्
+                        </button>
                     </form>
                 </div>
             </div>

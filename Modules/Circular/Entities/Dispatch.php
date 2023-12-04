@@ -79,4 +79,9 @@ class Dispatch extends Model
     {
         return $this->hasOne(DispatchDetail::class);
     }
+
+    public function setting()
+    {
+        return $this->belongsTo(CircularSetting::class);
+    }
 }

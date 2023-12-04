@@ -28,7 +28,6 @@ class MobileUser extends Authenticatable
     ];
 
     protected $fillable=[
-        'id',
         'name',
         'email',
         'phone',
