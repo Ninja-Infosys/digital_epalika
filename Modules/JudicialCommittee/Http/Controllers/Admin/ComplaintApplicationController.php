@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\SupportedDocument;
+use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 
 class ComplaintApplicationController extends Controller
 {
