@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     public function up()
     {
         Schema::create('meetings', function (Blueprint $table) {
@@ -21,6 +22,7 @@ return new class () extends Migration {
             $table->date('en_recurrence_end_date')->comment('पुनरावृत्ति मिति (ई. स.)')->nullable();
             $table->text('description')->comment('विवरण')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->boolean('is_print')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

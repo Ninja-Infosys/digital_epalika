@@ -42,6 +42,7 @@ class Meeting extends Model
         'description',
         'user_id',
         'fiscal_year_id',
+        'is_print'
     ];
 
     protected $casts = [
@@ -86,6 +87,11 @@ class Meeting extends Model
     public function meetingDecision(): HasOne
     {
         return $this->hasOne(MeetingDecision::class);
+    }
+
+    public function invitedMembers(): HasMany
+    {
+        return $this->hasMany(InvitedMember::class);
     }
 
     public function meetingMinute(): HasOne

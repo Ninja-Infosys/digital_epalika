@@ -93,9 +93,11 @@
                             </div>
                         </fieldset>
 
+
+
                             <fieldset class="border border-secondary p-2 mb-2">
                                 <legend class="font-16 text-secondary">
-                                    <strong>एजेन्डा </strong>
+                                    <strong>निर्णय </strong>
                                 </legend>
 
                                 <div class="row">
@@ -116,9 +118,9 @@
                                     @enderror
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <label for="description" class="form-label">बिवरण * </label>
+                                        <label for="description" class="form-label">निर्णय * </label>
                                         <textarea name="description" id="description" cols="30"
-                                            placeholder="बिवरण" rows="5"
+                                            placeholder="निर्णय" rows="5"
                                             class="form-control ckEditor @error("description") is-invalid @enderror">{{ old("description", $meeting->meetingDecision->description ?? '') }}</textarea>
                                         @error("description")
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -127,9 +129,15 @@
                                 </div>
                             </fieldset>
 
-                        <button type="submit" class="btn btn-primary">
-                            Save
-                        </button>
+
+
+
+                                @livewire('invited-member-livewire',['meeting'=>$meeting])
+
+                                    <button type="submit" class="mb-2 btn btn-primary">
+                                        Save
+                                    </button>
+
                     </form>
                 </div>
             </div>

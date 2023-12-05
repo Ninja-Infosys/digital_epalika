@@ -21,7 +21,12 @@ class StoreMeetingDecisionRequest extends FormRequest
             'description' => ['required'],
             'chairman' => ['required', 'string', 'max:255'],
             'meetingParticipants' => ['nullable', 'array'],
-            'meetingParticipants.*' => [Rule::exists('committee_members', 'id')->withoutTrashed()]
+            'meetingParticipants.*' => [Rule::exists('committee_members', 'id')->withoutTrashed()],
+            'invitedMember' => ['nullable', 'array'],
+            'invitedMember.*.name' => ['required'],
+            'invitedMember.*.designation' => ['required'],
+            'invitedMember.*.phone' => ['required'],
+            'invitedMember.*.email' => ['required', 'email'],
         ];
     }
 }

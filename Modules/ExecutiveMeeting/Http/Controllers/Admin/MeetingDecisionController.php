@@ -7,6 +7,7 @@ use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Illuminate\Support\Facades\DB;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
+use Modules\ExecutiveMeeting\Entities\InvitedMember;
 use Modules\ExecutiveMeeting\Entities\MeetingParticipant;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\StoreMeetingDecisionRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\UpdateMeetingDecisionRequest;
@@ -34,7 +35,8 @@ class MeetingDecisionController extends Controller
                 $query->where('is_final', 1);
             },
             'meetingParticipants',
-            'meetingDecision'
+            'meetingDecision',
+            'invitedMembers'
         ]);
 
         return view('executivemeeting::admin.meeting_decision.create', compact('meeting', 'committeeMembers'));
@@ -58,6 +60,23 @@ class MeetingDecisionController extends Controller
                     'user_id' => auth()->id()
                 ]
             );
+            $existingId = collect($meeting->invitedMembers?->pluck('id'));
+            $newId = collect();
+            foreach ($request->validated()['invitedMember'] as $invitedMember) {
+                $invitedData = InvitedMember::create(
+                    [
+                        'meeting_id' => $meeting->id,
+                        'name' => $invitedMember['name'],
+                        'designation' => $invitedMember['designation'],
+                        'phone' => $invitedMember['phone'],
+                        'email' => $invitedMember['email'],
+                    ]
+                );
+                $newId->push($invitedData->id);
+            }
+
+            $diff = $existingId->diff($newId->filter());
+            InvitedMember::whereIn('id', $diff->toArray())->delete();
 
 
             foreach ($participatingMembers as $member) {

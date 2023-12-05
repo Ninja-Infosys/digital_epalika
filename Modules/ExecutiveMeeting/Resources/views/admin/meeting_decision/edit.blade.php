@@ -57,8 +57,8 @@
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                <label for="description" class="form-label">बिवरण * </label>
-                                <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
+                                <label for="description" class="form-label">निर्णय * </label>
+                                <textarea name="description" id="description" cols="30" placeholder="निर्णय" rows="5"
                                     class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('description', $meetingDecision->description) }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
