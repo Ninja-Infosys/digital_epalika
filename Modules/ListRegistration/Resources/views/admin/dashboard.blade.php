@@ -43,12 +43,12 @@
                             </div>
                         </div>
 
-                    </div> <!-- end row -->
+                    </div>
                 </div>
-            </div> <!-- end card-->
-        </div> <!-- end col-->
+            </div> 
+        </div>
     </div>
-    <div class="row" id="charts" data-chart-url="{{route('admin.listRegistrations.dashboard')}}">
+    {{-- <div class="row" id="charts" data-chart-url="{{route('admin.listRegistrations.dashboard')}}">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -86,13 +86,49 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    
+    <div class="row mt-2" id="charts"data-chart-url="{{route('admin.listRegistrations.dashboard.ajax')}}">
+
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    कुल राजस्व विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="applicantTypeWiseData" chart-type="pie"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    भुक्तानी अनुसार कुल राजस्व विवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="businessNatureWiseData" chart-type="doughnut"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <h4>
+                    महिना अनुसार सूचना समाचार
+                </h4>
+                <div class="card-body">
+                    <canvas id="monthWise" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+
     </div>
+
     @push('scripts')
-        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
-    @endpush
+    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
+    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
+@endpush
 @endsection
 

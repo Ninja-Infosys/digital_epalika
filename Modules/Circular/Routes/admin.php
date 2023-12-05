@@ -9,7 +9,8 @@ use Modules\Circular\Http\Controllers\Admin\RegistrationReportController;
 use Modules\Circular\Http\Controllers\CircularSettingController;
 use Modules\Circular\Http\Controllers\DispatchDetailController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::resource('circularSetting', CircularSettingController::class);
 

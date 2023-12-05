@@ -9,17 +9,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
 use App\Models\Settings\Relationship;
+
+
+
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityCommittee;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
+
+use Modules\Identity\Entities\IdentityCardUpdate;
+use Modules\Identity\Enums\CategoryTypeEnum;
+use Modules\Identity\Http\Requests\IdentityPrint\UpdateIdentityPrint;
+
 use Modules\Identity\Entities\EmployeeSignature;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\IdentityMeeting;
 use Modules\Identity\Http\Requests\IdentityPrint\UpdateIdentityPrintRequest;
 use Illuminate\Support\Str;
+
 
 class IdentityPrintController extends Controller
 {
@@ -108,7 +118,6 @@ class IdentityPrintController extends Controller
             'view' => $view,
         ]);
     }
-
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {

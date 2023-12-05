@@ -1,4 +1,6 @@
 <?php
+use App\Models\MobileUser;
+use App\Models\User;
 
 return [
 
@@ -50,6 +52,12 @@ return [
             'driver' => 'sanctum',
             'provider' => 'users',
         ],
+
+
+        'mobileUser' => [
+            'driver' => 'sanctum',
+            'provider' => 'mobileUser',
+        ],
     ],
 
     /*
@@ -72,11 +80,15 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
         'organizations' => [
             'driver' => 'eloquent',
             'model' => \Modules\EMap\Entities\Organization::class,
+        ],
+        'mobileUser' => [
+            'driver' => 'eloquent',
+            'model' => MobileUser::class,
         ],
 
         // 'users' => [

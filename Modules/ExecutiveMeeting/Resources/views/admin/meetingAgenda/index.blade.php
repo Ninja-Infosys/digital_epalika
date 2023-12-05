@@ -8,8 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.executiveMeeting.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">बैठक एजेन्डा</li>
@@ -63,11 +63,13 @@
                                                 </a>
                                             @endcan
                                         </td>
-                                        <td>
+                                        <td class="d-flex gap-1">
                                             @can('meetingAgenda_edit')
                                                 <a href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.edit', [$meeting, $meetingAgenda]) }}"
-                                                    class="btn btn-xs btn-outline-warning">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                    class="btn btn-xs btn-outline-warning" title="सम्पादन गर्नुहोस्">
+
+                                                    <i class="fa fa-edit"></i>
+
                                                 </a>
                                             @endcan
                                             @can('meetingAgenda_delete')
@@ -77,8 +79,10 @@
                                                     @csrf
                                                     @method('delete')
                                                     <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+
+                                                        <i class="fa fa-trash"></i>
+
                                                     </button>
                                                 </form>
                                             @endcan

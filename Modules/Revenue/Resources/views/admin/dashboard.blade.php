@@ -111,61 +111,55 @@
             </div> <!-- end card-->
         </div>
     </div>
-    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.revenue.dashboard')}}">
-        <div class="col-lg-6">
+   
+    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.revenue.dashboard.ajax')}}">
+        <div class="col-md-6">
             <div class="card">
+                <h4>
+                    कुल राजस्व विवरण
+                </h4>
                 <div class="card-body">
-                    <div id="totalRevenue" chart-type="pie" chart-title="कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
+                    <canvas id="totalRevenue" chart-type="pie"></canvas>
                 </div>
+
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <div class="card">
+                <h4>
+                    भुक्तानी अनुसार कुल राजस्व विवरण
+                </h4>
                 <div class="card-body">
-                    <div id="totalCashBankRevenue" chart-type="pie" chart-title="भुक्तानी अनुसार कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
+                    <canvas id="totalCashBankRevenue" chart-type="doughnut"></canvas>
                 </div>
+
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="card">
+                <h4>
+                    महिना अनुसार कुल राजस्व विवरण
+                </h4>
                 <div class="card-body">
-                    <div id="accordingToMonth" chart-type="column" chart-title="चालु आर्थिक वर्षको महिना अनुसार कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
+                    <canvas id="accordingToMonth" chart-type="bar"></canvas>
                 </div>
+
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="card">
+                <h4>
+                    चालु आर्थिक वर्षाका अनुसार कुल राजस्व 
+                </h4>
                 <div class="card-body">
-                    <div id="accordingToFy" chart-type="column" chart-title="आर्थिक वर्ष अनुसार कुल राजस्व"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
+                    <canvas id="accordingToFy" chart-type="line"> </canvas>
                 </div>
+
             </div>
         </div>
     </div>
     @push('scripts')
-        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
-    @endpush
+    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
+    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
+@endpush
 @endsection

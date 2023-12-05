@@ -45,8 +45,8 @@
                                     @foreach($sipharishCreate->SipharishCreatedValues as $key=>$sipharishCreatedValue)
                                         <tr>
                                             <td>
-
-                                                {{$sipharishCreatedValue?->SipharisFormFields?->field_name ?? '' }}
+{{--                                                {{dd($sipharishCreatedValue->sipharish_form_field_id)}}--}}
+                                                {{$sipharishCreatedValue?->SipharisFormField?->field_name ?? '' }}
                                             </td>
 
                                             <td>

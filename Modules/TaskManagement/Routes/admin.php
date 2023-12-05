@@ -8,7 +8,9 @@ use Modules\TaskManagement\Http\Controllers\Admin\FileActivityController;
 use Modules\TaskManagement\Http\Controllers\Admin\FileTrackingController;
 use Modules\TaskManagement\Http\Controllers\Admin\ReportController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
+
 
 Route::resource('allActivity', AllActivityController::class)->only('index');
 Route::post('activity/{activity}/assignTask', [ActivityController::class, 'assignTask'])->name('activity.assignTask');

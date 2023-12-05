@@ -2,6 +2,7 @@
 
 namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
@@ -15,14 +16,16 @@ use Modules\GrievanceHandling\Enums\GrievanceStatus;
 class DashboardController extends Controller
 {
     use NepaliDateConverter;
+
     public Collection $grievanceDetails;
+
     public function __construct()
     {
         parent::__construct();
         $this->grievanceDetails = DB::table('grievance_details')->whereNull('grievance_detail_id')->whereNull('deleted_at')->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('grievanceHandlingDashboard_access');
 
@@ -33,15 +36,7 @@ class DashboardController extends Controller
         $closedGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::CLOSED->value)->count();
         $investigatedGrievanceCount = $this->grievanceDetails->where('status', GrievanceStatus::INVESTIGATED->value)->count();
         $seenGrievanceCount = $this->grievanceDetails->where('status', '!=', GrievanceStatus::UNSEEN->value)->count();
-        if (request()->ajax()) {
-            return [
-                'grievanceCountAccordingToSeverity' => $this->getDataAccordingToSeverity(),
-            'grievanceCountAccordingToStatus' => $this->getDataAccordingToStatus(),
-            'dataAccordingToGrievanceType' => $this->getDataAccordingToGrievanceType(),
-            'dataAccordingToGrievanceOffice' => $this->getDataAccordingToGrievanceOffice(),
-                'getDataAccordingToMonth' => $this->getDataAccordingToMonth(),
-            ];
-        }
+
         return view('grievancehandling::admin.dashboard', compact(
             'seenGrievanceCount',
             'registeredGrievanceCount',
@@ -53,58 +48,134 @@ class DashboardController extends Controller
         ));
     }
 
-    public function getDataAccordingToSeverity(): Collection
+    public function ajaxData()
+    {
+        return [
+            'grievanceCountAccordingToSeverity' => $this->getDataAccordingToSeverity(),
+            'grievanceCountAccordingToStatus' => $this->getDataAccordingToStatus(),
+            'dataAccordingToGrievanceType' => $this->getDataAccordingToGrievanceType(),
+            'dataAccordingToGrievanceOffice' => $this->getDataAccordingToGrievanceOffice(),
+            'getDataAccordingToMonth' => $this->getDataAccordingToMonth(),
+        ];
+    }
+
+    public function getDataAccordingToSeverity(): array
     {
         $grievanceComplaintSeverity = GrievanceComplaintSeverity::cases();
 
+        $label = collect();
         $data = collect();
-        foreach ($grievanceComplaintSeverity as $grievanceSeverity) {
-            $data->push([
-                'name'=>$grievanceSeverity->label(),
-                'data'=>$this->grievanceDetails
-                    ->where('complaint_severity', $grievanceSeverity->value)
-                    ->count()
-            ]);
-        }
-        return $data;
-    }
-    public function getDataAccordingToStatus(): Collection
-    {
-        $grievanceComplaintStatus = GrievanceStatus::cases();
+        $color = collect();
 
-        $data = collect();
-        foreach ($grievanceComplaintStatus as $grievanceStatus) {
-            $data->push([
-                'name' => $grievanceStatus->label(),
-                'data' => $this->grievanceDetails
-                    ->where('status', $grievanceStatus->value)
-                    ->count()
-            ]);
+        foreach ($grievanceComplaintSeverity as $grievanceSeverity) {
+            $count = $this->grievanceDetails
+                ->where('complaint_severity', $grievanceSeverity->value)
+                ->count();
+
+            $label->push($grievanceSeverity->label() ." (".$count.")");
+            $data->push($count);
+            $color->push(generateRandomRGBAColor());
+
         }
-        return $data;
+        return [
+            'labels' => $label,
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'backgroundColor' => $color,
+                    'borderColor' => $color,
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
+
+    public function getDataAccordingToStatus()
+    {
+        $grievanceComplaintStatuses = GrievanceStatus::cases();
+        $label = collect();
+        $data = collect();
+        $color = collect();
+
+        foreach ($grievanceComplaintStatuses as $grievanceComplaintStatus) {
+            $count = $this->grievanceDetails
+                ->where('status', $grievanceComplaintStatus->value)
+                ->count();
+
+            $label->push($grievanceComplaintStatus->label() ." (".$count.")");
+            $data->push($count);
+            $color->push(generateRandomRGBAColor());
+
+        }
+        return [
+            'labels' => $label,
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'backgroundColor' => $color,
+                    'borderColor' => $color,
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
+    }
+
     public function getDataAccordingToGrievanceType()
     {
-        return GrievanceType::withCount(['grievanceDetails' => function ($query) {
+        $grievanceTypes = GrievanceType::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
         }])->get()->map(function ($grievanceTypes) {
             return [
-                'name' => $grievanceTypes->title,
-                'data' => $grievanceTypes->grievance_details_count
+                'name' => $grievanceTypes->title ." (".$grievanceTypes->grievance_details_count.")",
+                'data' => $grievanceTypes->grievance_details_count,
+                'color' => generateRandomRGBAColor()
             ];
         });
+
+        return [
+            'labels' => $grievanceTypes->pluck('name')?->toArray(),
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $grievanceTypes->pluck('data')?->toArray(),
+                    'backgroundColor' => $grievanceTypes->pluck('color')?->toArray(),
+                    'borderColor' => $grievanceTypes->pluck('color')?->toArray(),
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
+
     public function getDataAccordingToGrievanceOffice()
     {
-        return GrievanceOffice::withCount(['grievanceDetails' => function ($query) {
+        $grievanceOffices = GrievanceOffice::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
-        }])->get()->map(function ($grievanceOffice) {
-            return [
-                'name' => $grievanceOffice->title,
-                'data' => $grievanceOffice->grievance_details_count
-            ];
-        });
+        }])
+            ->get()
+            ->map(function ($grievanceOffice) {
+                return [
+                    'name' => $grievanceOffice->title." (".$grievanceOffice->grievance_details_count.")",
+                    'data' => $grievanceOffice->grievance_details_count,
+                    'color' => generateRandomRGBAColor()
+                ];
+            });
+
+        return [
+            'labels' => $grievanceOffices->pluck('name')?->toArray(),
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $grievanceOffices->pluck('data')?->toArray(),
+                    'backgroundColor' => $grievanceOffices->pluck('color')?->toArray(),
+                    'borderColor' => $grievanceOffices->pluck('color')?->toArray(),
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
+
     public function getDataAccordingToMonth()
     {
         $totalCount = collect([0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0]);
@@ -113,15 +184,19 @@ class DashboardController extends Controller
             ->each(function ($grievanceDetail) use ($totalCount) {
                 $date = Carbon::parse($grievanceDetail->created_at);
                 $nepaliDate = $this->get_nepali_date($date->format('Y'), $date->format('m'), $date->format('d'));
-                $totalCount[(int)$nepaliDate['m']-1] +=1;
+                $totalCount[(int)$nepaliDate['m'] - 1] += 1;
             });
 
         return [
             'labels' => $this->month_name,
+            'option' => ChartOptionEnum::BAR_CHART->option(),
             'dataSets' => [
                 [
                     'data' => $totalCount,
-                    'label' => 'जम्मा'
+                    'label' => 'जम्मा',
+                    'backgroundColor' => 'rgba(6, 62, 147, 1)',
+                    'borderColor' => 'rgba(6, 62, 147, 1)',
+                    'borderWidth' => 1,
                 ],
             ],
         ];

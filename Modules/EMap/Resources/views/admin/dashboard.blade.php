@@ -10,7 +10,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-building avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{$organization_count}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{ $organization_count }}</span></h3>
                                 <p class="text-muted font-15 mb-0">दर्ता भएका संगठन</p>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-map avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$map_apply_count}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $map_apply_count }}</span></h3>
                                 <p class="text-muted font-15 mb-0 text-truncate">जम्मा दर्ता नक्सा</p>
                             </div>
                         </div>
@@ -50,87 +50,76 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div id="charts" data-chart-url="{{route('emap.admin.dashboard')}}">
-        <div class="row mt-2">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="buildingUsage" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार प्रयोजन"></div>
-                                <div class="loading">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="buildingCategory" chart-type="column" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन वर्गीकरण "></div>
-                                <div class="loading">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="constructionType" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम"></div>
-                                <div class="loading">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="structureType" chart-type="pie" chart-title="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} इस्टकचर अनुसार भवनको किसिम"></div>
-                                <div class="loading">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="mapAccordingToMonth" chart-type="column" chart-title="चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण"></div>
-                                <div class="loading">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="mapApply" chart-type="column" chart-title="आर्थिक बर्ष अनुसारले नक्सा बिवरण"></div>
-                                <div class="loading">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row mt-2" id="charts" data-chart-url="{{ route('emap.admin.dashboard.ajax') }}">
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 अनुसार प्रयोजन
+                </h4>
+                <div class="card-body">
+                    <canvas id="mapApply" chart-type="pie"></canvas>
                 </div>
+
+            </div>
         </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 अनुसार भवन वर्गीकरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="buildingCategory" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 अनुसार भवन निर्माण कार्यको किसिम
+                </h4>
+                <div class="card-body">
+                    <canvas id="constructionType" chart-type="pie"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष 2080/081 इस्टकचर अनुसार भवनको किसिम
+                </h4>
+                <div class="card-body">
+                    <canvas id="structureType" chart-type="doughnut"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <h4>
+                    चालु आर्थिक बर्षको महिना अनुसारले नक्सा बिवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="mapAccordingToMonth" chart-type="bar"></canvas>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <h4>
+                    आर्थिक बर्ष अनुसारले नक्सा बिवरण
+                </h4>
+                <div class="card-body">
+                    <canvas id="buildingUsage" chart-type="bar"> </canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
     @push('scripts')
-        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+        <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
+        <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
     @endpush
 @endsection

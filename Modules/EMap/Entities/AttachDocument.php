@@ -146,7 +146,12 @@ class AttachDocument extends Model
         return Storage::disk('public')->size($this->attributes['inheritance_document']);
     }
     public function getAnalysisDocumentSizeAttribute(): string
-    {
-        return Storage::disk('public')->size($this->attributes['analysis_document']);
+{
+    $filePath = $this->attributes['analysis_document'];
+   
+    if (!empty($filePath)) {
+        return Storage::disk('public')->size($filePath);
     }
+    return 'File path is empty';
+}
 }
