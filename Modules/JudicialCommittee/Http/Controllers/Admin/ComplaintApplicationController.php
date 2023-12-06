@@ -50,10 +50,9 @@ class ComplaintApplicationController extends Controller
 
     public function show(ComplaintApplication $complaintApplication)
     {
+
         $this->checkAuthorization('complaintApplication_access');
-
-        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantDefendants.province', 'complainantDefendants.district', 'complainantDefendants.localBody', 'witnesses', 'defendantIssuedDeadlines');
-
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantDefendants', 'complainantDefendants.province', 'complainantDefendants.district', 'complainantDefendants.localBody', 'witnesses', 'defendantIssuedDeadlines');
         return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
 

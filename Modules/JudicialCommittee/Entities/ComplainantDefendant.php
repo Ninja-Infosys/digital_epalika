@@ -45,7 +45,7 @@ class ComplainantDefendant extends Model
 
     public function complaintApplication(): BelongsTo
     {
-        return $this->belongsTo(ComplaintApplication::class);
+        return $this->belongsTo(ComplaintApplication::class, 'complaint_application_id');
     }
 
     public function province(): BelongsTo

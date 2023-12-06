@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $this->projects = Project::where('fiscal_year_id', \officeSetting()->fiscal_year_id)->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('planDashboard_access');
 
@@ -30,21 +30,20 @@ class DashboardController extends Controller
         $completed_project_count = $this->projects->where('project_status', ProjectStatusEnum::COMPLETED)->count();
         $deadline_extended_project_count = Project::whereHas('projectDeadlineExtensions')->count();
 
-        if (request()->ajax()) {
-            return [
-                'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
-                'wardWiseProjects' => $this->getWardWiseProjects(),
-                'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
-                'planAreaWiseProjects' => $this->getPlanAreaWiseProjects()
-            ];
-        }
-
         return view('plan::admin.dashboard', compact(
             'not_started_project_count',
             'in_progress_project_count',
             'deadline_extended_project_count',
             'completed_project_count'
         ));
+    } 
+    public function ajaxData(){
+        return [
+            'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
+            'wardWiseProjects' => $this->getWardWiseProjects(),
+            'planLevelWiseProjects' => $this->getPlanLevelWiseProjects(),
+            'planAreaWiseProjects' => $this->getPlanAreaWiseProjects()
+        ];
     }
 
     public function getWardWiseProjects()

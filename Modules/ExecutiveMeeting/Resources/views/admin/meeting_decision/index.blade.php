@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.executiveMeeting.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> बैठक निर्णयहरु </li>
@@ -54,10 +54,10 @@
                                         <td>{{ $meetingDecision->date }}</td>
                                         <td>{!! $meetingDecision->description !!}</td>
 
-                                        <td class="text-nowrap">
+                                        <td class="text-nowrap d-flex gap-1">
                                             @can('meetingDecision_edit')
                                                 <a data-bs-type="edit"
-                                                    href="{{ route('admin.executiveMeeting.meeting.meetingDecision.edit', [$meeting,$meetingDecision]) }}"
+                                                    href="{{ route('admin.executiveMeeting.meeting.meetingDecision.edit', [$meeting, $meetingDecision]) }}"
                                                     title="सम्पादन गर्नुहोस्"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
                                                     <i class="fa fa-edit"></i>
@@ -65,7 +65,7 @@
                                             @endcan
                                             @can('meetingDecision_delete')
                                                 <form
-                                                    action="{{ route('admin.executiveMeeting.meeting.meetingDecision.destroy', [$meeting,$meetingDecision]) }}"
+                                                    action="{{ route('admin.executiveMeeting.meeting.meetingDecision.destroy', [$meeting, $meetingDecision]) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')

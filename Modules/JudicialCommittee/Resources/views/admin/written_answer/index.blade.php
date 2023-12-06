@@ -138,7 +138,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$writtenAnswer->submitted_date}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('writtenAnswer_access')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.judicialCommittee.complaintApplication.writtenAnswer.show',[$complaintApplication,$writtenAnswer])}}"

@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('circularDashboard_access');
 
@@ -37,12 +37,7 @@ class DashboardController extends Controller
         $monthly_registrations = $this->currentYearRegistrations->where('registration_month', $nepali_date['m'])->count();
         $total_dispatches = Dispatch::count();
         $monthly_dispatches = $this->currentYearDispatches->where('dispatch_month', $nepali_date['m'])->count();
-        if (request()->ajax()) {
-            return [
-                'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
-                'totalMonthRegistrationAndDispatch' => $this->getCurrentFyRegistrationAndDispatch()
-            ];
-        }
+
         return view(
             'circular::admin.dashboard',
             compact(
@@ -53,7 +48,12 @@ class DashboardController extends Controller
             )
         );
     }
-
+    public function ajaxData(){
+        return [
+            'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
+            'totalMonthRegistrationAndDispatch' => $this->getCurrentFyRegistrationAndDispatch()
+        ];
+    }
     /**
      * @return array
      */
@@ -75,10 +75,16 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
                     'label' => 'दर्ता',
+                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
+                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
                     'label' => 'चलानी',
+                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
+                    'borderColor' => 'rgba(0, 145, 62, 1)',
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -100,10 +106,16 @@ class DashboardController extends Controller
                 [
                     'data' => $monthlyRegistrations,
                     'label' => 'दर्ता',
+                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
+                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $monthlyDispatches,
                     'label' => 'चलानी',
+                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
+                    'borderColor' => 'rgba(0, 145, 62, 1)',
+                    'borderWidth' => 1,
                 ],
             ],
         ];

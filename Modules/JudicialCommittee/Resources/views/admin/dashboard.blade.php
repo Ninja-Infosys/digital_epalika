@@ -100,112 +100,56 @@
             </div>
         </div>
     </div> -->
-<div class="row mt-2">
-    <div class="col-md-6">
-        <div class="card">
-            <h4>
-                आर्थिक वर्ष अनुसार दर्ता र चलानी
-            </h4>
-            <div class="card-body">
-                <canvas id="barChart1"></canvas>
-            </div>
 
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <h4>
-                महिना अनुसार दर्ता र चलानी
-            </h4>
-            <div class="card-body">
-                <canvas id="steppedlineChart"></canvas>
-            </div>
+    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.judicialCommittee.dashboard.ajax')}}">
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    चालु आ.वका मासिक निवेदनहरु
+                </h4>
+                <div class="card-body">
+                    <canvas id="monthlyApplications" chart-type="bar"></canvas>
+                </div>
 
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <h4>
-                कुल राजस्व विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="doughNut1"></canvas>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    चालु आ.वका मुद्दा प्रकृति अनुसारका निवेदनहरु
+                </h4>
+                <div class="card-body">
+                    <canvas id="lawsuitNatureWiseApplications" chart-type="pie"> </canvas>
+                </div>
 
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <h4>
-                भुक्तानी अनुसार कुल राजस्व विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="pieChart1"></canvas>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    आर्थिक वर्ष अनुसारका निवेदनहरु
+                </h4>
+                <div class="card-body">
+                    <canvas id="fiscalYearWiseApplications" chart-type="bar"></canvas>
+                </div>
 
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <h4>
-                विषय अनुसार तालिम विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="polarAreaChart1"></canvas>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h4>
+                    चालु आ.वका मुद्दा प्रकृति (निवेदन स्थिति) अनुसारका निवेदनहरु
+                </h4>
+                <div class="card-body">
+                    <canvas id="lawsuitNatureWiseApplicationsData" chart-type="bar"></canvas>
+                </div>
 
-        </div>
-    </div>
-</div>
-
-</div>
-<div class="row mt-2">
-    <div class="col-lg-6">
-        <div class="card">
-            <h4>
-                आर्थिक वर्ष अनुशारको घरनाक्स विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="barChartHorizontal" height="170"></canvas>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <h4>
-                आर्थिक वर्ष अनुसार व्यवसाय विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="lineChart1" height="170"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row mt-2">
-    <div class="col-lg-6">
-        <div class="card">
-            <h4>
-                वर्ग अनुसार अपांगता विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="bubbleChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <h4>
-                चालु अर्थिक अनुसार दर्ता/चलानी विवरण
-            </h4>
-            <div class="card-body">
-                <canvas id="barChart2" height="170"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
 
 @push('scripts')
 <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-<script type="module" src="{{asset('assets/backend/js/acquisitions.js')}}"></script>
+<script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
 @endpush
 @endsection
