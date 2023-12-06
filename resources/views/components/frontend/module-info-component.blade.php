@@ -11,6 +11,18 @@
             </div>
         </div>
     @endif
+    @if(Route::has('judicialCommittee.complainRegistration'))
+        <div class="col-md-3">
+            <div class="info-card">
+                <a href="{{route('judicialCommittee.complainRegistration')}}">
+                    <div class="pt-4 text-center">
+                        <img src="{{asset('assets/frontend/image/gunaso.png')}}" width="50" height="50">
+                        <h6 class="p-2 text-white">अनलाइन विवाद दर्ता</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+    @endif
     @if(Route::has('ebps'))
         <div class="col-md-3">
             <div class="info-card">
