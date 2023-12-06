@@ -91,6 +91,13 @@
                     </a>
                 </li>
             @endcan
+            @can('committee_access')
+            <li class="{{request()->is('admin/executiveMeeting/setting/minuteSetting*') ? 'active' : ''}}">
+                <a href="{{route('admin.executiveMeeting.setting.minuteSetting.index')}}">
+                    <span> माइन्यूट</span>
+                </a>
+            </li>
+        @endcan
         </ul>
     </div>
 </li>

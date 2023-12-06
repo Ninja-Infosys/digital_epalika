@@ -40,7 +40,7 @@
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
-                                    <th>प्रस्ताव</th>
+
                                     <th>मिति</th>
                                     <th>निर्णय</th>
                                     <th>#</th>
@@ -50,7 +50,6 @@
                                 @forelse($meeting->meetingDecisions as $meetingDecision)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $meetingDecision->meetingAgenda->proposal ?? '' }}</td>
                                         <td>{{ $meetingDecision->date }}</td>
                                         <td>{!! $meetingDecision->description !!}</td>
 

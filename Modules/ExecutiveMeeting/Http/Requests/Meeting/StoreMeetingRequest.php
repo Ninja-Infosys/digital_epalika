@@ -28,10 +28,7 @@ class StoreMeetingRequest extends FormRequest
             'recurrence_end_date' => ['nullable'],
             'en_recurrence_end_date' => ['nullable', 'date'],
             'description' => ['required'],
-            'meetingAgendas' => ['nullable', 'array'],
-            'meetingAgendas.*.proposal' => ['required', 'string', 'max:255'],
-            'meetingAgendas.*.description' => ['nullable'],
-            'meetingAgendas.*.is_final' => ['nullable', 'boolean'],
+
         ];
     }
 }
