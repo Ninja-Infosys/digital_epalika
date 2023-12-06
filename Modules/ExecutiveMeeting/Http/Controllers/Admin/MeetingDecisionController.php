@@ -7,6 +7,7 @@ use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Illuminate\Support\Facades\DB;
 use Modules\ExecutiveMeeting\Entities\CommitteeMember;
+use Modules\ExecutiveMeeting\Entities\InvitedMember;
 use Modules\ExecutiveMeeting\Entities\MeetingParticipant;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\StoreMeetingDecisionRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\UpdateMeetingDecisionRequest;
@@ -33,7 +34,9 @@ class MeetingDecisionController extends Controller
                 $query->with('meetingDecision');
                 $query->where('is_final', 1);
             },
-            'meetingParticipants'
+            'meetingParticipants',
+            'meetingDecision',
+            'invitedMembers'
         ]);
 
         return view('executivemeeting::admin.meeting_decision.create', compact('meeting', 'committeeMembers'));
@@ -46,17 +49,35 @@ class MeetingDecisionController extends Controller
         $participatingMembers = CommitteeMember::whereIn('id', $request->input('meetingParticipants') ?? [])->orderBy('position')->get();
 
         DB::transaction(function () use ($request, $meeting, $participatingMembers) {
-            foreach ($request->input('meetingDecisions') as $meetingDecision) {
-                MeetingDecision::updateOrCreate(
-                    ['meeting_id' => $meeting->id, 'meeting_agenda_id' => $meetingDecision['meeting_agenda_id']],
+
+            MeetingDecision::updateOrCreate(
+                ['meeting_id' => $meeting->id],
+                [
+                    'date' => $request->input('date'),
+                    'chairman' => $request->input('chairman'),
+                    'en_date' => $request->input('en_date'),
+                    'description' => $request->input('description'),
+                    'user_id' => auth()->id()
+                ]
+            );
+            $existingId = collect($meeting->invitedMembers?->pluck('id'));
+            $newId = collect();
+            foreach ($request->validated()['invitedMember'] as $invitedMember) {
+                $invitedData = InvitedMember::create(
                     [
-                        'date' => $meetingDecision['date'],
-                        'en_date' => $meetingDecision['en_date'],
-                        'description' => $meetingDecision['description'],
-                        'user_id' => auth()->id()
+                        'meeting_id' => $meeting->id,
+                        'name' => $invitedMember['name'],
+                        'designation' => $invitedMember['designation'],
+                        'phone' => $invitedMember['phone'],
+                        'email' => $invitedMember['email'],
                     ]
                 );
+                $newId->push($invitedData->id);
             }
+
+            $diff = $existingId->diff($newId->filter());
+            InvitedMember::whereIn('id', $diff->toArray())->delete();
+
 
             foreach ($participatingMembers as $member) {
                 MeetingParticipant::updateOrCreate(
@@ -70,12 +91,14 @@ class MeetingDecisionController extends Controller
                 );
             }
 
-            $meeting->meetingParticipants()->whereNotIn('committee_member_id', $request->input('meetingParticipants')??[])->delete();
+            $meeting->meetingParticipants()->whereNotIn('committee_member_id', $request->input('meetingParticipants') ?? [])->delete();
         });
 
         toast('बैठक निर्णय सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting));
     }
+
+
 
     public function show(Meeting $meeting, MeetingDecision $meetingDecision)
     {

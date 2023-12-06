@@ -105,7 +105,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    चालु आ.वका मासिक निवेदनहरु
                 </h4>
                 <div class="card-body">
                     <canvas id="monthlyApplications" chart-type="bar"></canvas>
@@ -116,7 +116,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सूचना समाचार
+                    चालु आ.वका मुद्दा प्रकृति अनुसारका निवेदनहरु
                 </h4>
                 <div class="card-body">
                     <canvas id="lawsuitNatureWiseApplications" chart-type="pie"> </canvas>
@@ -127,7 +127,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    आर्थिक वर्ष अनुसारका निवेदनहरु
                 </h4>
                 <div class="card-body">
                     <canvas id="fiscalYearWiseApplications" chart-type="bar"></canvas>
@@ -138,7 +138,7 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    महिना अनुसार सूचना समाचार
+                    चालु आ.वका मुद्दा प्रकृति (निवेदन स्थिति) अनुसारका निवेदनहरु
                 </h4>
                 <div class="card-body">
                     <canvas id="lawsuitNatureWiseApplicationsData" chart-type="bar"></canvas>

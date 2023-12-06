@@ -69,6 +69,7 @@
                                                     class="btn btn-xs btn-outline-warning" title="सम्पादन गर्नुहोस्">
 
                                                     <i class="fa fa-edit"></i>
+
                                                 </a>
                                             @endcan
                                             @can('meetingAgenda_delete')
