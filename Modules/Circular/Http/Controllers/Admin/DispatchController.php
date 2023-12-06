@@ -49,11 +49,7 @@ class DispatchController extends Controller
                 'prefix' => $this->getDispatchPrefix(),
                 'dispatch_no' => $this->getDispatchNo()
             ]);
-            $sendEmail = CircularSetting::find(1)->send_email; // Assuming the setting is stored in the first row
 
-            if ($sendEmail) {
-                Mail::to($dispatch->receiver_contact)->send(new DispatchEmail($dispatch));
-            }
 
         toast('चलानी सफलतापूर्वक थपियो', 'success');
 
