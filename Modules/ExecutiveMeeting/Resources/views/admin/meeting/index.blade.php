@@ -22,12 +22,46 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="collapse mb-2" id="collapseFilterForm">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <label for="committee" class="form-label">समिति</label>
+                                    <select name="committee" data-toggle="select2"
+                                            id="committee" class="form-control">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($committees as $committee)
+                                            <option
+                                                {{request('committee') == $committee->id ? 'selected':''}}
+                                                value="{{$committee->id}}">
+                                                {{$committee->committee_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+                            <button type="submit" class="mt-2 btn btn-sm btn-primary">
+                                <i class="fa fa-search"> पेश गर्नुहोस्</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">बैठक विवरण</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
+                            <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर</i>
+                            </button>
                             @can('meeting_create')
                                 <a href="{{ route('admin.executiveMeeting.meeting.create') }}"
                                     class="btn btn-sm btn-outline-primary waves-effect waves-light">
@@ -68,6 +102,7 @@
 
                                         <td class="d-flex">
                                             <div class="btn-group dropstart">
+
                                                 <a style="width:75px;" href="{{ route('admin.executiveMeeting.meeting.show', $meeting) }}"
                                                 title="विवरण हेर्नुहोस" class="btn btn-sm me-1 btn-primary">
                                                 <i class="fa fa-eye"> विवरण </i>
@@ -77,7 +112,9 @@
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-angle-down"></i>
                                                 </button>
+
                                                 <div class="dropdown-menu" style="">
+                                                    @if($meeting->is_print == 0)
                                                     @can('meeting_edit')
                                                         <a href="{{ route('admin.executiveMeeting.meeting.edit', $meeting) }}"
                                                             title="सम्पादन गर्नुहोस्" class="dropdown-item text-warning">
@@ -97,12 +134,7 @@
                                                             </button>
                                                         </form>
                                                     @endcan
-                                                    @can('meeting_edit')
-                                                        <a href="{{ route('admin.executiveMeeting.meeting.meetingAgenda.index', $meeting) }}"
-                                                            title="बैठक एजेन्डा" class="dropdown-item text-secondary">
-                                                            <i class="fa fa-file"> बैठक एजेन्डा</i>
-                                                        </a>
-                                                    @endcan
+
                                                     @can('meetingDecision_access')
                                                         <a href="{{ route('admin.executiveMeeting.meeting.meetingDecision.index', $meeting) }}"
                                                             title="बैठक निर्णय" class="dropdown-item text-secondary">
@@ -115,6 +147,7 @@
                                                             <i class="fa fa-file"> माइन्यूट </i>
                                                         </a>
                                                     @endcan
+                                                    @endif
                                                     <a href="javascript:void(0)"
                                                         data-meeting-print-url="{{ route('admin.executiveMeeting.meeting.printMinute', $meeting) }}"
                                                         title="माइन्यूट"

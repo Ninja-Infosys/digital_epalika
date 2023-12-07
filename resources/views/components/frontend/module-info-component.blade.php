@@ -11,6 +11,18 @@
             </div>
         </div>
     @endif
+    @if(Route::has('judicialCommittee.complainRegistration'))
+        <div class="col-md-3">
+            <div class="info-card">
+                <a href="{{route('judicialCommittee.complainRegistration')}}">
+                    <div class="pt-4 text-center">
+                        <img src="{{asset('assets/frontend/image/gunaso.png')}}" width="50" height="50">
+                        <h6 class="p-2 text-white">अनलाइन विवाद दर्ता</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+    @endif
     @if(Route::has('ebps'))
         <div class="col-md-3">
             <div class="info-card">
@@ -159,6 +171,28 @@
                 <div class="pt-4 text-center">
                     <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
                     <h6 class="p-2 text-white">कार्यालयको हाजिरी</h6>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://sms.aakashsms.com/login">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h6 class="p-2 text-white">एस.एम.एस</h6>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="info-card">
+            <a href="https://apps.aakashtel.com/login">
+                <div class="pt-4 text-center">
+                    <img src="{{asset('assets/frontend/image/logo.png')}}" width="50" height="50">
+                    <h6 class="p-2 text-white">Voice एस.एम.एस</h6>
                 </div>
             </a>
         </div>

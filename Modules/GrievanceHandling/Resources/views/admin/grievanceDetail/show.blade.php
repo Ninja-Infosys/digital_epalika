@@ -132,9 +132,7 @@
                                         <h4 class="mt-2"><b>ईमेल :-</b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
                                         <h4 class="mt-2"><b>सम्पर्क नं :-</b>{{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
                                         <h4 class="mt-2"><b>ठेगाना :-</b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
-
                                     @endif
-
                                         <h4 class="mb-1"><b>गुनासो प्राथमिकता
                                                 :</b>{{ $grievanceDetail->complaint_severity->label() }}
                                         </h4>
