@@ -24,5 +24,11 @@ class CircularSetting extends Model
         'dispatch_prefix',
         'registration_number',
         'dispatch_number',
+        'send_email'
     ];
+
+    public function dispatches()
+    {
+        return $this->hasMany(Dispatch::class);
+    }
 }

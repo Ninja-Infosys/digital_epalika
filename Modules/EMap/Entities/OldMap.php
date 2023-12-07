@@ -50,3 +50,4 @@ class OldMap extends Model
         return $this->belongsToMany(HouseOwner::class);
     }
 }
+

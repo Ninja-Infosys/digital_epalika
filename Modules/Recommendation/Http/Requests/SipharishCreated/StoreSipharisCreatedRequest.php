@@ -21,12 +21,13 @@ class StoreSipharisCreatedRequest extends FormRequest
             'sipharis_sub_category_id' => ['required', Rule::exists('sipharis_sub_categories', 'id')->withoutTrashed()],
             'sipharis_form_type_id' => ['required', Rule::exists('sipharish_form_types', 'id')->withoutTrashed()],
             'status' => ['required', 'boolean'],
-            'fields' => ['required', 'array'],
-            'fields.*.sipharish_form_field_id' => ['required', Rule::exists('sipharis_form_fields', 'id')->withoutTrashed()],
-            'fields.*.value' => ['required'],
+            'fields' => ['nullable', 'array'],
+            'fields.*.sipharish_form_field_id' => ['nullable', Rule::exists('sipharis_form_fields', 'id')->withoutTrashed()],
+            'fields.*.value' => ['nullable'],
             'files' => ['nullable', 'array'],
             'files.*.title' => ['required', 'string'],
             'files.*.filename' => ['required', 'file'],
+            'created_by' => ['nullable']
         ];
     }
 }

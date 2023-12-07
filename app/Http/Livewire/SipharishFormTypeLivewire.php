@@ -31,7 +31,7 @@ class SipharishFormTypeLivewire extends Component
         if (!empty($formData)) {
             $this->existingForm = $formData;
             $this->form['title'] = $formData->title;
-            $this->form['status'] = $formData->status == true ? 1 : 0;
+            $this->form['status'] = $formData->status ? 1 : 0;
             $this->form['sipharis_category_id'] = SipharisSubCategory::active()->where('id', $formData->sipharis_sub_category_id)->first()->sipharis_category_id ?? null;
             $this->form['sipharis_sub_category_id'] = $formData->sipharis_sub_category_id;
             $this->form['need_approval'] = $formData->need_approval;
@@ -77,6 +77,7 @@ class SipharishFormTypeLivewire extends Component
         "form.status" => ['required'],
         "form.need_approval" => ['required'],
         "form.formDataType" => ['required', 'array'],
+        "form.formDataType.*.id" => ['nullable'],
         "form.formDataType.*.field_name" => ['required'],
         "form.formDataType.*.slug" => ['required', 'alpha_dash'],
     ];

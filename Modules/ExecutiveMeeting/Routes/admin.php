@@ -12,7 +12,8 @@ use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingDecisionController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\ReportController;
 use Modules\ExecutiveMeeting\Http\Controllers\MinuteSettingController;
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('committeeType', CommitteeTypeController::class);

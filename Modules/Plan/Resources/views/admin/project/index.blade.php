@@ -6,9 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.plan.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
 
@@ -28,53 +28,42 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-3 mb-2">
-                                    <x-date-input-component
-                                        nameNe="from_date" labelNe="मिति देखि"
-                                        :get-today-date="false"
-                                        :edit-date-ne="request('from_date')"
-                                    />
+                                    <x-date-input-component nameNe="from_date" labelNe="मिति देखि" :get-today-date="false"
+                                        :edit-date-ne="request('from_date')" />
                                 </div>
                                 <div class="col-md-3">
-                                    <x-date-input-component
-                                        nameNe="to_date" labelNe="मिति सम्म"
-                                        :get-today-date="false"
-                                        :edit-date-ne="request('to_date')"
-                                    />
+                                    <x-date-input-component nameNe="to_date" labelNe="मिति सम्म" :get-today-date="false"
+                                        :edit-date-ne="request('to_date')" />
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="project_status">योजनाको अवस्था</label>
-                                    <select name="project_status"
-                                            id="project_status" class="form-select">
+                                    <select name="project_status" id="project_status" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
-                                            <option
-                                                {{$projectStatus->value==request('project_status') ? 'selected' : ''}}
-                                                value="{{$projectStatus->value}}">{{$projectStatus->label()}}</option>
+                                        @foreach (\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
+                                            <option {{ $projectStatus->value == request('project_status') ? 'selected' : '' }}
+                                                value="{{ $projectStatus->value }}">{{ $projectStatus->label() }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="expense_head_id">खर्च शिर्षक</label>
-                                    <select name="expense_head_id"
-                                            id="expense_head_id" class="form-select">
+                                    <select name="expense_head_id" id="expense_head_id" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($expenseHeads as $expenseHead)
-                                            <option
-                                                {{$expenseHead->id==request('expense_head_id') ? 'selected' : ''}}
-                                                value="{{$expenseHead->id}}">{{$expenseHead->title}}
+                                        @foreach ($expenseHeads as $expenseHead)
+                                            <option {{ $expenseHead->id == request('expense_head_id') ? 'selected' : '' }}
+                                                value="{{ $expenseHead->id }}">{{ $expenseHead->title }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="is_contracted">सम्झौता भएको/नभएको</label>
-                                    <select name="is_contracted"
-                                            id="is_contracted" class="form-select">
+                                    <select name="is_contracted" id="is_contracted" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>
+                                        <option value="1" {{ request('is_contracted') == 1 ? 'selected' : '' }}>
                                             भएको
                                         </option>
-                                        <option value="0" {{request('is_contracted')=="0" ? 'selected' : ''}}>
+                                        <option value="0" {{ request('is_contracted') == '0' ? 'selected' : '' }}>
                                             नभएको
                                         </option>
                                     </select>
@@ -96,13 +85,13 @@
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
                             <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                    aria-controls="collapseExample">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
+                                aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             @can('project_create')
-                                <a href="{{route('admin.plan.project.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <a href="{{ route('admin.plan.project.create') }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                             @endcan
                         </div>
@@ -111,20 +100,20 @@
                 <div class="card-body">
                     <table id="demo-foo-accordion" class="table table-bordered mb-0 toggle-arrow-tiny">
                         <thead>
-                        <tr>
-                            <th data-toggle="true">क्र.स</th>
-                            <th>दर्ता नं.</th>
-                            <th>आयोजना/कार्यक्रमको नाम</th>
-                            <th data-hide="phone">योजना उपक्षेत्र</th>
-                            <th data-hide="phone">सुरु हुने मिति</th>
-                            <th data-hide="phone">वडा नं.</th>
-                            <th data-hide="phone">स्वीकृत रकम</th>
-                            <th data-hide="phone">आयोजनाको अवस्था</th>
-                            <th data-hide="all">लागत</th>
-                            <th data-hide="all">सम्झौता</th>
-                            <th data-hide="all">अन्य</th>
-                            <th data-hide="all">कार्य</th>
-                        </tr>
+                            <tr>
+                                <th data-toggle="true">क्र.स</th>
+                                <th>दर्ता नं.</th>
+                                <th>आयोजना/कार्यक्रमको नाम</th>
+                                <th data-hide="phone">योजना उपक्षेत्र</th>
+                                <th data-hide="phone">सुरु हुने मिति</th>
+                                <th data-hide="phone">वडा नं.</th>
+                                <th data-hide="phone">स्वीकृत रकम</th>
+                                <th data-hide="phone">आयोजनाको अवस्था</th>
+                                <th data-hide="all">लागत</th>
+                                <th data-hide="all">सम्झौता</th>
+                                <th data-hide="all">अन्य</th>
+                                <th data-hide="all">कार्य</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @forelse($projects as $project)
@@ -153,70 +142,97 @@
                                 <td>{{implode(',',$project->ward_no)}}</td>
                                 <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
-                                <td>
-                                    <a class="btn btn-xs btn-outline-secondary" href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
-                                        <i class="fa fa-list"> आयोजनाको लागत</i>
+                                <td class="d-flex gap-1">
+                                    <a class="btn btn-xs btn-outline-secondary" title="आयोजनाको लागत"  href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
+                                        <i class="fa fa-list"> </i>
                                     </a>
                                     @can('technicalCostEstimate_access')
-                                        <a class="btn btn-xs btn-outline-secondary"
+                                        <a class="btn btn-xs btn-outline-secondary" title=" प्राविधिक लागत"
                                            href="{{route('admin.plan.project.technicalCostEstimate.index',$project)}}">
-                                            <i class="fa fa-user-cog"> प्राविधिक लागत</i>
+                                            <i class="fa fa-user-cog"></i>
                                         </a>
                                     @endcan
                                 </td>
-                                <td>
-                                    <a class="btn btn-xs btn-outline-primary"
+                                <td class="d-flex gap-1">
+                                    <a class="btn btn-xs btn-outline-primary" title=" योजना सम्झौता"
                                        href="{{route('admin.plan.project.projectAgreement.index',$project)}}">
-                                        <i class="fa fa-handshake"> योजना सम्झौता</i>
+                                        <i class="fa fa-handshake"></i>
                                     </a>
                                     @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                                         @if($project->is_contracted)
-                                            <a class="btn btn-xs btn-outline-primary"
+                                            <a class="btn btn-xs btn-outline-primary" title="आर्थिक कारोबार"
                                                href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
-                                                <i class="fa fa-money-bill"> आर्थिक कारोबार</i>
+                                                <i class="fa fa-money-bill"></i>
                                             </a>
-                                            <a class="btn btn-xs btn-outline-primary"
+                                            <a class="btn btn-xs btn-outline-primary" title=" मर्मत संम्भार सम्बन्धी"
                                                href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
-                                                <i class="fa fa-cog"> मर्मत संम्भार सम्बन्धी</i>
+                                                <i class="fa fa-cog"></i>
+
                                             </a>
+                                        @endcan
+                                    </td>
+                                    <td class="d-flex gap-1">
+                                        <a class="btn btn-xs btn-outline-primary"
+                                            href="{{ route('admin.plan.project.projectAgreement.index', $project) }}">
+                                            <i class="fa fa-handshake"> योजना सम्झौता</i>
+                                        </a>
+                                        @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
+                                            @if ($project->is_contracted)
+                                                <a class="btn btn-xs btn-outline-primary"
+                                                    href="{{ route('admin.plan.project.consumerCommitteeTransaction.index', $project) }}">
+                                                    <i class="fa fa-money-bill"> आर्थिक कारोबार</i>
+                                                </a>
+                                                <a class="btn btn-xs btn-outline-primary"
+                                                    href="{{ route('admin.plan.project.projectMaintenanceArrangement.index', $project) }}">
+                                                    <i class="fa fa-cog"> मर्मत संम्भार सम्बन्धी</i>
+                                                </a>
+                                            @endif
+                                        @else
+                                            @if ($project->is_contracted)
+                                                <a class="btn btn-xs btn-outline-primary"
+                                                    href="{{ route('admin.plan.project.projectBidSubmission.index', $project) }}">
+                                                    <i class="fa fa-money-bill"> आर्थिक कारोबार </i>
+                                                </a>
+                                            @endif
                                         @endif
                                     @else
                                         @if($project->is_contracted)
-                                            <a class="btn btn-xs btn-outline-primary"
+                                            <a class="btn btn-xs btn-outline-primary" title=" आर्थिक कारोबार"
                                                href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                <i class="fa fa-money-bill"> आर्थिक कारोबार </i>
+                                                <i class="fa fa-money-bill"> </i>
                                             </a>
                                         @endif
-                                    @endif</td>
-                                <td>
+                                    @endif
+                                </td>
+                                <td class="d-flex gap-1">
                                     @if($project->is_contracted)
-                                        <a class="btn btn-xs btn-outline-success"
+                                        <a class="btn btn-xs btn-outline-success" title="शर्तहरु"
                                            href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
-                                            <i class="fa fa-clipboard-check"> शर्तहरु </i>
+                                            <i class="fa fa-clipboard-check">  </i>
                                         </a>
                                         @can('projectDocument_access')
-                                            <a class="btn btn-xs btn-outline-success"
+                                            <a class="btn btn-xs btn-outline-success" title=" सम्बन्धित कागजातहरू "
                                                href="{{route('admin.plan.project.projectDocument.index',$project)}}">
-                                                <i class="fa fa-file-contract"> सम्बन्धित कागजातहरू </i>
+                                                <i class="fa fa-file-contract"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-xs btn-outline-success"
+                                        <a class="btn btn-xs btn-outline-success" title="सम्बन्धित फोटो/फाईलहरू"
                                            href="{{route('admin.plan.project.fileList',$project)}}">
-                                            <i class="fa fa-file"> सम्बन्धित फोटो/फाईलहरू </i>
+                                            <i class="fa fa-file">  </i>
                                         </a>
-                                        <a class="btn btn-xs btn-outline-success"
+                                        <a class="btn btn-xs btn-outline-success" title="म्याद थप"
                                            href="{{route('admin.plan.project.projectDeadlineExtension.index',$project)}}">
-                                            <i class="fa fa-calendar-alt"> म्याद थप </i>
+                                            <i class="fa fa-calendar-alt">  </i>
                                         </a>
                                     @else
                                         <p class="text-center">सम्झौता भएको छैन ।</p>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{route('admin.plan.project.show',$project)}}" class="btn btn-xs btn-outline-info">
-                                        <i class="fa fa-eye"></i> विवरण हेर्नुहोस्</a>
-                                    <a href="{{route('admin.plan.project.edit',$project)}}" class="btn btn-xs btn-outline-warning">
-                                        <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्</a>
+                                <td class="d-flex gap-1">
+                                    <a href="{{route('admin.plan.project.show',$project)}}" title=" विवरण हेर्नुहोस्" class="btn btn-xs btn-outline-info">
+                                        <i class="fa fa-eye"></i></a>
+                                    <a href="{{route('admin.plan.project.edit',$project)}}" title=" सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-warning">
+                                        <i class="fa fa-edit"></i></a>
                                 </td>
                             </tr>
                         @empty
@@ -234,7 +250,7 @@
         </div>
     </div>
     <div id="project-info-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel"
-         style="display: none;" aria-hidden="true">
+        style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-full-width">
             <div class="modal-content" id="project-data">
 
@@ -244,22 +260,23 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function () {
-                $('.projectShowBtn').on('click', function (e) {
+            $(document).ready(function() {
+                $('.projectShowBtn').on('click', function(e) {
                     e.preventDefault()
                     $.ajax({
                         method: "GET",
                         url: $(this).attr("action-url"),
-                        success: function (resp) {
+                        success: function(resp) {
                             $('#project-info-modal').modal('toggle')
                             $('#project-data').html(resp.view)
-                        }, error: function () {
+                        },
+                        error: function() {
                             alert("Something Went Wrong");
                         }
                     });
                 })
             })
         </script>
-        <script src="{{asset('assets/backend/js/plugins/footable.min.js')}}"></script>
+        <script src="{{ asset('assets/backend/js/plugins/footable.min.js') }}"></script>
     @endpush
 @endsection

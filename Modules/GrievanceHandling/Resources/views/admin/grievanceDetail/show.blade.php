@@ -26,7 +26,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="header-title"><b>टोकन : </b>{{ $grievanceDetail->token }}</h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title"> बैठक प्रतिवेदन</h4>
+                        <div class="d-flex gap-1 justify-content-between">
+
+
+                            <x-print-button
+                                target-element="report-table"
+                                title="गुनासो रिपोर्ट"
+                                :headerRequired="true"
+
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -35,7 +47,7 @@
                         </div>
                         <div class="col-md-3">
                             <h4 class="header-title"><b>शाखा</b>
-                                : {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h4>
+                                : {{ $grievanceDetail->branch->branch_name ?? '' }}</h4>
                         </div>
                         <div class="col-md-3">
                             <h4 class="header-title"><b>गुनासो हेर्ने अधिकारी</b>
@@ -115,15 +127,13 @@
                                         <h4 class="text-decoration-underline mt-4">
                                             <b> प्रयोगकर्ता विवरण</b>
                                         </h4>
-                                        <h4 class="mt-2"><b>नाम :-
-                                            </b>{{ $grievanceDetail->grievanceUser->name ?? '' }}</h4>
-                                        <h4 class="mt-2"><b>ईमेल :-
-                                            </b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
-                                        <h4 class="mt-2"><b>सम्पर्क नं :-</b>
-                                            {{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
-                                        <h4 class="mt-2"><b>ठेगाना :-
-                                            </b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
-                                        <h4 class="mb-1"><b>गुनासो गम्भीरता
+                                        @if (!$grievanceDetail->is_anonymous)
+                                        <h4 class="mt-2"><b>नाम :-</b>{{ $grievanceDetail->grievanceUser->name ?? '' }}</h4>
+                                        <h4 class="mt-2"><b>ईमेल :-</b>{{ $grievanceDetail->grievanceUser->email ?? '' }}</h4>
+                                        <h4 class="mt-2"><b>सम्पर्क नं :-</b>{{ $grievanceDetail->grievanceUser->phone ?? '' }}</h4>
+                                        <h4 class="mt-2"><b>ठेगाना :-</b>{{ $grievanceDetail->grievanceUser->address ?? '' }}</h4>
+                                    @endif
+                                        <h4 class="mb-1"><b>गुनासो प्राथमिकता
                                                 :</b>{{ $grievanceDetail->complaint_severity->label() }}
                                         </h4>
                                     </div>

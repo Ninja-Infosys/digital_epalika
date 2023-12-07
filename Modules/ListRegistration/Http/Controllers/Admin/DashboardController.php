@@ -26,23 +26,12 @@ class DashboardController extends Controller
             ->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('listRegistrationDashboard_access');
 
         $nepali_date = $this->get_nepali_date(today()->format('Y'), today()->format('m'), today()->format('d'));
-
-        if (request()->ajax()) {
-            return [
-                'applicantTypeWiseData' => $this->getApplicantTypeWiseData(),
-                'businessNatureWiseData' => $this->getBusinessNatureWiseData(),
-                'monthWise'=> $this->getAccordingToMonth()
-            ];
-        }
-
-
         $totalRegistrations = $this->listRegistrations->count();
-
         $yearlyRegistrations = $this->listRegistrations
             ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
             ->count();
@@ -66,6 +55,14 @@ class DashboardController extends Controller
                 'weeklyRegistrations'
             )
         );
+    }
+    
+    public function ajaxData(){
+        return [
+            'applicantTypeWiseData' => $this->getApplicantTypeWiseData(),
+            'businessNatureWiseData' => $this->getBusinessNatureWiseData(),
+            'monthWise'=> $this->getAccordingToMonth()
+        ];
     }
 
     private function getApplicantTypeWiseData()

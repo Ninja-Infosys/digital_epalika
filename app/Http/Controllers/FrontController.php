@@ -35,6 +35,7 @@ class FrontController extends Controller
             || Route::has('businessRegistration.business')
             || Route::has('grant.index')
             || Route::has('payment.index')
+            || Route::has('complaintApplication.complainRegistration')
             || Route::has('roaster.index')) {
             return redirect(route('digital-service'));
         } else {

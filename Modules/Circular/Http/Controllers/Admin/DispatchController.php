@@ -8,7 +8,10 @@ use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Http\Requests\Dispatch\StoreDispatchRequest;
 use Modules\Circular\Http\Requests\Dispatch\UpdateDispatchRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Circular\Entities\CircularSetting;
 use Modules\Circular\Traits\DispatchTrait;
+use Illuminate\Support\Facades\Mail;
+use Modules\Circular\Emails\DispatchEmail;
 
 class DispatchController extends Controller
 {
@@ -37,12 +40,11 @@ class DispatchController extends Controller
         return view('circular::admin.dispatch.create', compact('dispatch_no'));
     }
 
-    public function store(StoreDispatchRequest $request)
+    public function store(StoreDispatchRequest $request, )
     {
         $this->checkAuthorization('dispatch_create');
 
-
-        Dispatch::create($request->validated() + [
+        $dispatch=Dispatch::create($request->validated() + [
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                 'prefix' => $this->getDispatchPrefix(),
                 'dispatch_no' => $this->getDispatchNo()

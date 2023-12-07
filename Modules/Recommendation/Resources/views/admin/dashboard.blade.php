@@ -49,49 +49,41 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row" id="charts" data-chart-url="{{route('admin.recommendation.dashboard')}}">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="wardWiseRegistration" chart-type="column" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार जम्मा सिफारिस विवरण"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
+    <div class="col-md-12">
+        <div class="card">
+            <h4>
+                चालु आर्थिक(2080/081) वर्षका वडा अनुसार  व्यवसाय दर्ता विवरण
+            </h4>
+            <div class="card-body">
+                <canvas id="wardWiseRegistration" chart-type="bar"></canvas>
             </div>
+
         </div>
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="monthlyWiseRegistration" chart-type="column" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका महिना अनुसार जम्मा सिफारिस विवरण"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <h4>
+                चालु आर्थिक(2080/081) वर्षका महिना अनुसार व्यवसाय दर्ता विवरण
+            </h4>
+            <div class="card-body">
+                <canvas id="monthlyWiseRegistration" chart-type="bar"></canvas>
             </div>
+
         </div>
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="card">
+                <h4>
+                    विषय अनुसार तालिम विवरण
+                </h4>
                 <div class="card-body">
-                    <div id="categoryWise" chart-type="pie" chart-title="चालु आर्थिक ({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका सिफारिस अनुसार जम्मा सिफारिस विवरण"></div>
-                    <div class="loading">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status"></div>
-                        </div>
-                    </div>
+                    <canvas id="categoryWise" chart-type="doughnut"></canvas>
                 </div>
+
             </div>
         </div>
     </div>
     @push('scripts')
-        <script src="{{asset('assets/backend/js/chart/chart.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart-export.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/export-data.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/accessibility.js')}}"></script>
-        <script src="{{asset('assets/backend/js/chart/chart.init.js')}}"></script>
+    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
+    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
     @endpush
 @endsection

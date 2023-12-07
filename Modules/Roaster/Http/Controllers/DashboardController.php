@@ -2,6 +2,7 @@
 
 namespace Modules\Roaster\Http\Controllers;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Department;
 use App\Models\Settings\FiscalYear;
@@ -33,19 +34,9 @@ class DashboardController extends Controller
         $this->technicalTrainee = DB::table('technical_trainees')->whereNull('deleted_at')->get();
     }
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('roasterDashboard_access');
-
-        if (request()->ajax()) {
-            return [
-                'trainingAccordingToFiscalYear' => $this->trainingAccordingToFiscalYear(),
-                'trainingAccordingToMonth' => $this->trainingAccordingToMonth(),
-                'trainerAccordingToSubject' => $this->trainerAccordingToSubject(),
-                'trainingAccordingToType' => $this->trainingAccordingToType(),
-                'trainerAccordingToDepartment'=>$this->trainerAccordingToDepartment()
-            ];
-        }
         $trainerCount = $this->trainers->count();
         $trainingCount = $this->trainings->count();
         $traineeCount = $this->trainee->count();
@@ -55,7 +46,15 @@ class DashboardController extends Controller
             'traineeCount',
             'technicalTraineeCount']));
     }
-
+public function ajaxData(){
+    return [
+        'trainingAccordingToFiscalYear' => $this->trainingAccordingToFiscalYear(),
+        'trainingAccordingToMonth' => $this->trainingAccordingToMonth(),
+        'trainerAccordingToSubject' => $this->trainerAccordingToSubject(),
+        'trainingAccordingToType' => $this->trainingAccordingToType(),
+        'trainerAccordingToDepartment'=>$this->trainerAccordingToDepartment()
+    ];
+}
     public function trainingAccordingToFiscalYear()
     {
         $fiscalYears = FiscalYear::withCount('trainings')
@@ -72,7 +71,7 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $fiscalYears->pluck('trainings_count')->toArray(),
-                    'label' => 'जम्मा नक्सा',
+                    'label' => 'जम्मा तालिमहरु',
                 ]
             ],
         ];
@@ -103,39 +102,78 @@ class DashboardController extends Controller
 
     public function trainerAccordingToSubject()
     {
-        return Subject::withCount('trainers')
+        $subjects = Subject::withCount('trainers')
             ->get()
             ->map(function ($subject) {
                 return [
-                    'name' => $subject->title,
-                    'data' => (int)$subject->trainers_count
+                    'title' => $subject->title,
+                    'trainers_count' => (int)$subject->trainers_count,
                 ];
             });
+    
+        return [
+            'labels' => $subjects->pluck('title')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $subjects->pluck('trainers_count')->toArray(),
+                    'label' => 'Trainers Count',
+                ],
+            ],
+        ];
     }
+    
+
     public function trainingAccordingToType()
     {
+        $trainingTypeEnums = TrainingTypeEnum::cases();
+        $label = collect();
         $data = collect();
-
-        foreach (TrainingTypeEnum::cases() as $trainingTypeEnum) {
-            $data->push([
-                'name' => $trainingTypeEnum->label(),
-                'data' => $this->trainings
-                    ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
-                    ->where('form_type', $trainingTypeEnum)
-                    ->count()
-            ]);
+        $color = collect();
+        foreach ($trainingTypeEnums as $trainingTypeEnum) {
+            $count = $this->trainings
+                ->where('form_type', $trainingTypeEnum->value)
+                ->count();
+            $label->push($trainingTypeEnum->label() ." (".$count.")");
+            $data->push($count);
+            $color->push(generateRandomRGBAColor());
         }
-        return $data;
+        return [
+            'labels' => $label,
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'backgroundColor' => $color,
+                    'borderColor' => $color,
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
     public function trainerAccordingToDepartment()
-    {
-        return Department::withCount('trainers')
-            ->get()
-            ->map(function ($department) {
-                return [
-                    'name' => $department->title,
-                    'data' => (int)$department->trainers_count
-                ];
-            });
-    }
+{
+    $departments = Department::withCount('trainers')
+        ->get()
+        ->map(function ($department) {
+            return [
+                'name' => $department->title . " (" . $department->trainers_count . ")",
+                'data' => (int)$department->trainers_count,
+                'color' => generateRandomRGBAColor() // If you have a function to generate random colors
+            ];
+        });
+
+    return [
+        'labels' => $departments->pluck('name')->toArray(),
+        'option' => ChartOptionEnum::PIE_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $departments->pluck('data')->toArray(),
+                'backgroundColor' => $departments->pluck('color')->toArray(),
+                'borderColor' => $departments->pluck('color')->toArray(),
+                'borderWidth' => 1,
+            ],
+        ],
+    ];
+}
+
 }

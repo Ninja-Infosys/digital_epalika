@@ -2,6 +2,7 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Employee;
 use App\Models\Settings\FiscalYear;
@@ -13,7 +14,7 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
-    public function __invoke()
+    public function index()
     {
         $this->checkAuthorization('digitalBoardDashboard_access');
 
@@ -22,14 +23,15 @@ class DashboardController extends Controller
         $notice_count = Notice::whereType('Notice')->count();
         $news_count = Notice::whereType('News')->count();
 
-        if (request()->ajax()) {
-            return [
-                'allNoticeAccordingMonth' => $this->getNoticeAccordingToMonth(),
-                'allNoticeAccordingFY' => $this->getTotalNewsNoticeAccordingToFy()
-            ];
-        }
-
         return view('digitalboard::admin.dashboard', compact('employee_count', 'video_count', 'notice_count', 'news_count'));
+    }
+
+    public function ajaxData()
+    {
+        return [
+            'allNoticeAccordingMonth' => $this->getNoticeAccordingToMonth(),
+            'allNoticeAccordingFY' => $this->getTotalNewsNoticeAccordingToFy()
+        ];
     }
 
     public function getNoticeAccordingToMonth(): array
@@ -42,29 +44,39 @@ class DashboardController extends Controller
             ->get()
             ->each(function ($notice) use ($totalCount, $newsCount, $noticeCount) {
                 $nepaliDate = explode('-', $notice->date);
-                $totalCount[(int)$nepaliDate[1]-1] +=1;
+                $totalCount[(int)$nepaliDate[1] - 1] += 1;
 
                 if ($notice->type == 'Notice') {
-                    $noticeCount[(int)$nepaliDate[1]-1] +=1;
+                    $noticeCount[(int)$nepaliDate[1] - 1] += 1;
                 } else {
-                    $newsCount[(int)$nepaliDate[1]-1] +=1;
+                    $newsCount[(int)$nepaliDate[1] - 1] += 1;
                 }
             });
 
         return [
             'labels' => $this->month_name,
+            'option' => ChartOptionEnum::BAR_CHART->option(),
             'dataSets' => [
                 [
                     'data' => $totalCount,
-                    'label' => 'जम्मा'
+                    'label' => 'जम्मा',
+                    'backgroundColor' => 'rgba(6, 62, 147, 1)',
+                    'borderColor' => 'rgba(6, 62, 147, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $noticeCount,
-                    'label' => 'सूचना'
+                    'label' => 'सूचना',
+                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
+                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $newsCount,
-                    'label' => 'समाचार'
+                    'label' => 'समाचार',
+                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
+                    'borderColor' => 'rgba(0, 145, 62, 1)',
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -82,16 +94,23 @@ class DashboardController extends Controller
 
         return [
             'labels' => $fiscalYears->pluck('title')->toArray(),
+            'option' => ChartOptionEnum::BAR_CHART->option(),
             'dataSets' => [
                 [
                     'data' => $fiscalYears->pluck('notice_count')->toArray(),
                     'label' => 'सूचना',
                     'fill' => 'false',
+                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
+                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYears->pluck('news_count')->toArray(),
                     'label' => 'समाचार',
                     'fill' => 'false',
+                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
+                    'borderColor' => 'rgba(0, 145, 62, 1)',
+                    'borderWidth' => 1,
                 ],
             ],
         ];

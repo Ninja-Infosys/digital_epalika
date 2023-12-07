@@ -20,7 +20,6 @@ use Modules\EMap\Entities\StructureType;
 class MapApplicationForm extends Component
 {
     use WithFileUploads;
-
     public $latitude;
     public $longitude;
 

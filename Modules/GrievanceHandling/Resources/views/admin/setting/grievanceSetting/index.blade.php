@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.grievanceHandling.setting.grievanceOffice.index') }}">गुनासो सुन्ने
+                            <a href="{{ route('admin.grievanceHandling.setting.grievanceSetting.index') }}">गुनासो सुन्ने
                                 अधिकारी </a>
                         </li>
                         <li class="breadcrumb-item active">गुनासो सुन्ने अधिकारी</li>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.grievanceHandling.setting.grievanceSetting.update', $grievanceSetting) }}"
+                    <form action="{{ route('admin.grievanceHandling.setting.grievanceSetting.update',$grievanceSetting) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')

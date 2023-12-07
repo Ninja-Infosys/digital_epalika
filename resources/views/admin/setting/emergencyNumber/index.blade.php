@@ -51,7 +51,7 @@
                             @forelse($EmergencyNumbers as $EmergencyNumber)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$EmergencyNumber->type}}</td>
+                                    <td>{{$EmergencyNumber->emergencyCategory->title}}</td>
                                     <td>{{$EmergencyNumber->title}}</td>
                                     <td>{{$EmergencyNumber->contact_no}}</td>
 

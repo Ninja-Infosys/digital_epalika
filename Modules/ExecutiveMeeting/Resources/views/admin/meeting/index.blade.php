@@ -100,13 +100,13 @@
                                             {{ $meeting->end_date }}
                                         </td>
 
-                                        <td>
+                                        <td class="d-flex">
                                             <div class="btn-group dropstart">
-                                                <a href="{{ route('admin.executiveMeeting.meeting.show', $meeting) }}"
-                                                title="सम्पादन गर्नुहोस्" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
 
+                                                <a style="width:75px;" href="{{ route('admin.executiveMeeting.meeting.show', $meeting) }}"
+                                                title="विवरण हेर्नुहोस" class="btn btn-sm me-1 btn-primary">
+                                                <i class="fa fa-eye"> विवरण </i>
+                                            </a>
                                                 <button type="button"
                                                     class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
