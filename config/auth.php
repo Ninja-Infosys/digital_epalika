@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Roaster\Entities\TraineeUser;
+
 return [
 
     /*
@@ -46,6 +48,11 @@ return [
             'provider' => 'organizations',
         ],
 
+        'traineeUser' => [
+            'driver' => 'session',
+            'provider' => 'traineeUsers',
+        ],
+
         'api' => [
             'driver' => 'sanctum',
             'provider' => 'users',
@@ -77,6 +84,10 @@ return [
         'organizations' => [
             'driver' => 'eloquent',
             'model' => \Modules\EMap\Entities\Organization::class,
+        ],
+        'traineeUsers' => [
+            'driver' => 'eloquent',
+            'model' => TraineeUser::class,
         ],
 
         // 'users' => [
