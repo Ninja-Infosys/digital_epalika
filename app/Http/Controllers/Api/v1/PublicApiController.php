@@ -130,46 +130,8 @@ class PublicApiController extends Controller
         ];
     }
 
-    public function signup(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => ['required'],
-            'email' => ['required','email','unique:users,email'],
-            'phone' => ['required'],
-            'password' => ['required','min:7'],
-            'ward_no' => ['required'],
-            'role_id' => ['required'],
-            // Add other validation rules as needed for your application
-        ]);
 
-        // Hash the password before saving to the database
-        $validated['password'] = Hash::make($validated['password']);
 
-        // Create a new user
-        $user = User::create($validated);
-
-        return response()->json(['user' => $user, 'message' => 'User registered successfully'], 201);
-    }
-
-    public function login(Request $request)
-    {
-        $validated = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:7']
-        ]);
-
-        if (Auth::guard('mobileUser')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
-            $user = auth()->user();
-
-            return response()->json([
-                'user' => $user,
-                'message' => 'Authentication successful'
-            ], 200);
-        }
-        else {
-            return response()->json(['message' => 'Invalid credentials'], 401);
-        }
-    }
     public function getAllModulesData(): array
     {
         return [
