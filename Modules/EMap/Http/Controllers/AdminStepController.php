@@ -35,7 +35,7 @@ class AdminStepController extends Controller
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses', 'group');
         $checkUser =  $form->group->users->pluck('id')->contains(auth()->user()->id);
         $MapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
-        $ward_no =  $MapGroups ? explode(',', $MapGroups->ward_no) : [];
+        $ward_no =  $MapGroups ? explode(',', $MapGroups?->ward_no ?? '') : [];
         $checkAuthorization = in_array($mapApply->landDetail?->ward_no, $ward_no);
 
 
