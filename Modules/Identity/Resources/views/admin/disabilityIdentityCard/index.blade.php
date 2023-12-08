@@ -60,7 +60,7 @@
                                             {{ $disabilityIdentityCard->citizenship_no? $disabilityIdentityCard->citizenship_no."(नागरिकता)" : $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
                                         </td>
                                         <td class="d-flex d-warp gap-1">
-                                            @if ($disabilityIdentityCard?->can_edit_delete)
+{{--                                            @if ($disabilityIdentityCard?->can_edit_delete)--}}
                                                 <a data-bs-type="edit"
                                                     href="{{ route('identity.admin.disabilityIdentityCard.show', $disabilityIdentityCard) }}"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -101,7 +101,7 @@
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                            @endif
+{{--                                            @endif--}}
 
                                         </td>
                                     </tr>
