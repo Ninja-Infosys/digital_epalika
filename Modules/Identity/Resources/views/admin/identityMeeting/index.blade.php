@@ -62,7 +62,7 @@
                                     <td>{{ get_nepali_number($identityMeeting->disability_committees_count ?? 0) }}</td>
                                     <td>{{ get_nepali_number($identityMeeting->invited_guests_count ?? 0) }}</td>
                                     <td>{{ get_nepali_number($identityMeeting->disability_identity_cards_count) }}</td>
-                                    <td class="d-felx gap-1">
+                                    <td class="d-flex gap-1">
                                         <a disabled data-bs-type="edit"
                                             href="{{ route('identity.admin.identityMeeting.edit', $identityMeeting) }}"
                                             type="button"
@@ -80,7 +80,6 @@
                                                 <i class="fa fa-print"></i>
                                             </a>
                                         @endif
-
                                         <form
                                             action="{{ route('identity.admin.identityMeeting.destroy', $identityMeeting) }}"
                                             method="post">
