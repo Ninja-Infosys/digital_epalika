@@ -2,6 +2,9 @@
 
 namespace Modules\Roaster\Entities;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
