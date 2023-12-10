@@ -99,6 +99,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 p-2 mt-1">
+                            <div class="card bg-info text-light">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa fa-address-card fs-5 me-2"></i>
+                                        <h5 class="fw-semibold mt-2">संस्था दर्ता</h5>
+                                    </div>
+                                    <h6>नयाँ तालिमको लागि दर्ता गर्नुहोस् ।</h6>
+                                    <h6>(NEC नम्बर लिएकोले ।)</h6>
+                                    <a href="{{route('roaster.trainee-register')}}" class="btn btn-light"><span> संस्था </span>
+                                        <i class="fa fa-angle-double-right"></i>
+                                    </a>
+                                    {{-- <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span> व्यक्ति</span>--}}
+                                    {{-- <i class="fa fa-angle-double-right"></i>--}}
+                                    {{-- </a>--}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

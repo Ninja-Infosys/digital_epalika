@@ -26,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('roaster.')
             ->group(module_path('Roaster', '/Routes/web.php'));
 
+
             Route::middleware('web')
             ->prefix('api/roaster')
                 ->group(module_path('Roaster', '/Routes/v1/publicRoute.php'));
@@ -34,6 +35,10 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('admin/roaster')
             ->as('admin.roaster.')
             ->group(module_path('Roaster', '/Routes/admin.php'));
+        Route::middleware(['web', 'auth:traineeUser', 'password.check'])
+            ->prefix('traineeOrganization/admin')
+            ->as('traineeOrganization.admin.')
+            ->group(base_path('/Modules/Roaster/Routes/organization/admin.php'));
     }
 
     protected function mapApiRoutes()
