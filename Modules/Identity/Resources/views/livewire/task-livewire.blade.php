@@ -5,8 +5,8 @@
                 <th>क्र.सं.</th>
                 <th>कामको नाम</th>
                 <th width="140">
-                    <button type="button" class="btn btn-xs btn-outline-primary" wire:click.prevent="incrementTask">
-                        <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                    <button type="button" class="btn btn-xs btn-outline-primary" wire:click.prevent="incrementTask" title="नयाँ थप्नुहोस्">
+                        <i class="fas fa-plus-circle"></i> 
                     </button>
                 </th>
             </tr>

@@ -61,14 +61,14 @@
                                                     <td>{{ $disabilityIdentityCard->name }}</td>
                                                     <td>{{ $disabilityIdentityCard->gender?->label() ?? '' }}</td>
                                                     <td>{{ $disabilityIdentityCard->citizenship_no }}</td>
-                                                    <td>
+                                                    <td class="d-flex gap-1">
                                                         <button type="button" class="btn btn-xs btn-outline-warning"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#print{{ $disabilityIdentityCard->id }}">
                                                             <i class="fa fa-print"></i>
                                                         </button>
                                                         @include('identity::admin.disabilityPrint.inc.print_modal')
-                                                        </a>
+                                                        </a>    
 
                                                         <a href="{{ route('identity.admin.disabilityFullDetail.show', $disabilityIdentityCard) }}"
                                                             class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
