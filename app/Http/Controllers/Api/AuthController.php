@@ -38,6 +38,7 @@ class AuthController extends Controller
 
         $superAdmin = MobileUser::where('email', $request->input('email'))->first();
         if ($superAdmin && Hash::check($request->input('password'), $superAdmin->password)) {
+            $superAdmin->update(['is_active' => 1]);
             Auth::guard('mobile-user')->setUser($superAdmin);
             $authToken = auth('mobile-user')->user()->createToken('auth-token')->plainTextToken;
 
@@ -59,11 +60,27 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
 
-        return response()->json([
-            'data' => "",
-            'message' => "Logged Out Successfully"
-        ]);
+
+        $superAdmin = MobileUser::where('email', $request->input('email'))->first();
+        if ($superAdmin && Hash::check($request->input('password'), $superAdmin->password)) {
+            Auth::guard('mobile-user')->setUser($superAdmin);
+            $request = auth('mobile-user')->user()->currentAccessToken()->delete();
+            return response()->json([
+                'data' => "",
+                'message' => "Logged Out Successfully"
+            ]);
+        } else {
+            return response()->json([
+                'message' => "Invalid Credentials",
+                'errors' => [
+                    'password' => [
+                        'Invalid Credentials'
+                    ]
+                ]
+            ], 422);
+        }
+
+
     }
 }

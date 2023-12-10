@@ -18,7 +18,7 @@
                         गरी पठाउनुहोस् ।
                     </p>
                     @livewire('judicialcommittee::complain-registration-livewire')
-
+<br>
                 </div>
             </div>
         </div>
