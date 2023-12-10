@@ -8,8 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ बैठक विवरण थप्नुहोस्</li>
@@ -27,28 +27,28 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ बैठक विवरण थप्नुहोस्</h4>
                         <a href="{{ route('identity.admin.identityMeeting.index') }}"
-                           class="btn btn-sm btn-outline-primary">
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> बैठक विवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('identity.admin.identityMeeting.store') }}" method="post"
-                          enctype="multipart/form-data">
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">बैठकको शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title') }}"
-                                       class="form-control @error('title') is-invalid @enderror" id="title"
-                                       placeholder="बैठकको शिर्षक"/>
+                                    class="form-control @error('title') is-invalid @enderror" id="title"
+                                    placeholder="बैठकको शिर्षक" />
                                 @error('title')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
                                 <x-date-input-component nameNe="date_bs" labelNe="बैठक मिति *" nameEn="date_ad"
-                                                        labelEn="Meeting Date"/>
+                                    labelEn="Meeting Date" />
                             </div>
                             <div class="col-md-12 mb-2">
                                 <fieldset>
@@ -58,20 +58,20 @@
                                             <div class="col-sm-3">
                                                 <div class="form-check">
                                                     <input type="checkbox"
-                                                           {{ in_array($disabilityCommittee->id, old('committees') ?? []) ? 'checked' : '' }}
-                                                           class="form-check-input" name="committees[]"
-                                                           value="{{ $disabilityCommittee->id }}"
-                                                           id="committees{{ $disabilityCommittee->id }}">
+                                                        {{ in_array($disabilityCommittee->id, old('committees') ?? []) ? 'checked' : '' }}
+                                                        class="form-check-input" name="committees[]"
+                                                        value="{{ $disabilityCommittee->id }}"
+                                                        id="committees{{ $disabilityCommittee->id }}">
                                                     <label class="form-check-label"
-                                                           for="committees{{ $disabilityCommittee->id }}">{{ $disabilityCommittee->name }}</label>
+                                                        for="committees{{ $disabilityCommittee->id }}">{{ $disabilityCommittee->name }}</label>
                                                 </div>
                                             </div>
                                         @endforeach
                                         @error('committees')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                         @error('committees.*')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </fieldset>
@@ -88,14 +88,14 @@
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input"
-                                                       name="disabilityIdentityCards[{{ $loop->index }}][id]"
-                                                       value="{{ $disabilityIdentityCard->id }}"
-                                                       id="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">
+                                                    name="disabilityIdentityCards[{{ $loop->index }}][id]"
+                                                    value="{{ $disabilityIdentityCard->id }}"
+                                                    id="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">
                                                 <label class="form-check-label"
-                                                       for="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">{{ $disabilityIdentityCard->name }}</label>
+                                                    for="disabilityIdentityCards{{ $disabilityIdentityCard->id }}">{{ $disabilityIdentityCard->name }}</label>
                                             </div>
                                             @error("disabilityIdentityCards.$loop->index.id")
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -105,19 +105,18 @@
                                                 <option value="">छान्नुहोस्</option>
                                                 @foreach ($governmentDisabilityTypes as $governmentDisabilityType)
                                                     <option value="{{ $governmentDisabilityType->id }}"
-                                                        {{ old("disabilityIdentityCards.$loop->index.gov_disability_type_id") == $governmentDisabilityType->id ? 'selected' : '' }}
-                                                    >
+                                                        {{ old("disabilityIdentityCards.$loop->index.gov_disability_type_id") == $governmentDisabilityType->id ? 'selected' : '' }}>
                                                         {{ $governmentDisabilityType->title }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                             @error("disabilityIdentityCards.$loop->index.gov_disability_type_id")
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     @endforeach
                                     @error('disabilityIdentityCards')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -133,9 +132,7 @@
         </div>
     </div>
     @push('scripts')
-
         <script>
-
             window.addEventListener('guest-delete', event => {
 
                 Swal.fire({
@@ -177,7 +174,6 @@
                 })
 
             })
-
         </script>
     @endpush
 @endsection

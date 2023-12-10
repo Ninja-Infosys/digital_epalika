@@ -8,9 +8,8 @@
             <th><label for="designation">पद</label></th>
             <th><label for="phone">फोन</label></th>
             <th>
-                <button class="btn btn-primary btn-sm btn-icon btn-icon-only btn-round" type="button"
-                        wire:click.prevent="addGuest">
-                    <i class="fa fa-plus"></i>
+                <button class="btn btn-primary btn-sm" wire:click.prevent="addGuest">
+                    <i class="fa fa-plus-square"></i>
                 </button>
             </th>
         </tr>
@@ -31,9 +30,12 @@
                     <input type="text" class="form-control" id="phone" name="guests[{{$index}}][phone]" wire:model="guests.{{ $index }}.phone">
                 </td>
                 <td>
-                    <button class="btn btn-danger btn-sm btn-icon btn-icon-only btn-round" type="button"
-                            wire:click.prevent="removeGuest({{ $index }})">
-                        <i class="fa fa-minus"></i>
+                        {{-- <button class="btn btn-danger btn-sm btn-icon btn-icon-only btn-round" type="button"
+                                wire:click.prevent="removeGuest({{ $index }})">
+                            <i class="fa fa-minus"></i>
+                        </button> --}}
+                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeGuest({{$index}})">
+                        <i class="fa fa-minus-square"></i>
                     </button>
                 </td>
             </tr>

@@ -43,4 +43,9 @@ class FrontendController extends Controller
 
         return view('roaster::frontend.trainings', compact('trainings', 'trainingType'));
     }
+
+    public function traineeRegister()
+    {
+        return view('roaster::frontend.traineeRegister');
+    }
 }
