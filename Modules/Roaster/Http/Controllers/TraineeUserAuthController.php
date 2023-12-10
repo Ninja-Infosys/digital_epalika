@@ -48,4 +48,11 @@ class TraineeUserAuthController extends Controller
 
         return redirect('/');
     }
+
+    public function profile()
+    {
+        $traineeUser = \auth('traineeUser')->user();
+
+        return view('roaster::traineeUser.profile', compact('traineeUser'));
+    }
 }

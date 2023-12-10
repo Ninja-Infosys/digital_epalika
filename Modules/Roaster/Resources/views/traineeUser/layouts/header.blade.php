@@ -60,20 +60,20 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="profile-tour">
-                    <img src="{{auth('organization')->user()->profile_photo_url ??''}}"
+                    <img src="{{auth('traineeUser')->user()->profile_photo_url ??''}}"
                          alt="user-image"
                          class="rounded-circle"/>
                     <span class="pro-user-name ms-1">
-                  {{auth('organization')->user()->name ??''}} <i class="fa fa-angle-down"></i>
+                  {{auth('traineeUser')->user()->name ??''}} <i class="fa fa-angle-down"></i>
                 </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
-                    <a href="{{route('organization.admin.auth-organization.profile')}}" class="dropdown-item notify-item">
+                    <a href="{{route('traineeOrganization.admin.auth-organization.profile')}}" class="dropdown-item notify-item">
                         <i class="fa fa-user"></i>
                         <span>मेरो प्रोफाइल</span>
                     </a>
-                    <a href="{{route('organization.admin.taxClearance.index')}}" class="dropdown-item notify-item">
+                    <a href="{{route('traineeOrganization.admin.traineeTaxClearance.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-clipboard"></i>
                         <span>कर चुक्ता</span>
                     </a>
