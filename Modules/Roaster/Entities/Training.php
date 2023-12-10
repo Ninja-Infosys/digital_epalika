@@ -43,6 +43,10 @@ class Training extends Model
         'post_average_mark',
         'fiscal_year_id',
         'included_subjects',
+        'trainee_open_date',
+        'trainee_closed_date',
+        'organization_open_date',
+        'organization_closed_date',
     ];
 
     protected $casts = [

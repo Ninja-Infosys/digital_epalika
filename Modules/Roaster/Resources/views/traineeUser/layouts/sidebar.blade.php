@@ -8,6 +8,12 @@
                         <span> ड्यासबोर्ड</span>
                     </a>
                 </li>
+                <li class="{{request()->is('traineeOrganization/admin/organizationTraining') ? 'active' : ''}}">
+                    <a href="{{route('traineeOrganization.admin.organizationTraining.index')}}">
+                        <i class="fa fa-book"></i>
+                        <span>तालिम</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

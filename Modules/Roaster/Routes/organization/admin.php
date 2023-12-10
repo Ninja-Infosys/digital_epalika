@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Roaster\Http\Controllers\OrganizationTrainingController;
 use Modules\Roaster\Http\Controllers\TraineeTaxClearanceController;
 use Modules\Roaster\Http\Controllers\TraineeUserAuthController;
 use Modules\Roaster\Http\Controllers\TraineeUserDashboardController;
@@ -12,3 +13,4 @@ Route::prefix('profile')->group(function () {
 });
 
 Route::resource('traineeTaxClearance', TraineeTaxClearanceController::class);
+Route::resource('organizationTraining', OrganizationTrainingController::class);
