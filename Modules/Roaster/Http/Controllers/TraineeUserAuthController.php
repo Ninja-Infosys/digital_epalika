@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Modules\EMap\Http\Requests\StorePasswordRequest;
+use Modules\Roaster\Entities\TraineeUser;
 
 class TraineeUserAuthController extends Controller
 {
@@ -54,5 +56,43 @@ class TraineeUserAuthController extends Controller
         $traineeUser = \auth('traineeUser')->user();
 
         return view('roaster::traineeUser.profile', compact('traineeUser'));
+    }
+
+
+    public function invitation(TraineeUser $traineeUser)
+    {
+        if (!request()->hasValidSignature() || $traineeUser->password) {
+            abort(401);
+        }
+
+        auth('traineeUser')->login($traineeUser);
+
+        return redirect()->route('traineeOrganization.admin.dashboard');
+    }
+
+    public function create()
+    {
+
+        if (auth('traineeUser')->user()->password) {
+            return redirect()->route('traineeOrganization.admin.dashboard');
+        }
+
+        return view('roaster::traineeUser.auth.password');
+    }
+
+    public function store(StorePasswordRequest $request)
+    {
+        $redirect = redirect()->route('traineeOrganization.admin.dashboard');
+        $user = auth('traineeUser')->user();
+
+        if (!$user?->password) {
+            $user?->update([
+                'password' => $request->input('password'),
+            ]);
+
+            toast('पासवर्ड सफलतापुर्वक राखियो', 'success');
+        }
+
+        return $redirect;
     }
 }

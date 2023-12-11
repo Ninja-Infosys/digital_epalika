@@ -32,7 +32,7 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-md-3 col-sm-4 form-group">
+                        <div class="col-md-4 col-sm-4 form-group">
                             <label for="name">तालिमको नाम * </label>
                             <input id="name" type="text" name="name" placeholder="तालिमको नाम"
                                    class="form-control @error('name') is-invalid @enderror"
@@ -41,7 +41,7 @@
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-2 col-sm-4 form-group">
+                        <div class="col-md-4 col-sm-4 form-group">
                             <label for="fiscal_year_id">आर्थिक बर्ष * </label>
                             <select id="fiscal_year_id" name="fiscal_year_id"
                                     class="form-control @error('fiscal_year_id') is-invalid @enderror">
@@ -56,7 +56,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-2 col-sm-4">
+                        <div class="col-md-4 col-sm-4">
                             <label for="open_date">फारम खुल्ने मिति * </label><br>
                             <input id="open_date" type="datetime-local" name="open_date" placeholder="फारम खुल्ने मिति"
                                    class="form-control @error('open_date') is-invalid @enderror"
@@ -67,7 +67,7 @@
                         </div>
 
 
-                        <div class="col-md-2 col-sm-4">
+                        <div class="col-md-4 col-sm-4">
                             <label for="closed_date">फारम बन्द हुने मिति * </label><br>
                             <input id="closed_date" type="datetime-local" name="closed_date"
                                    placeholder="फारम बन्द हुने मिति"
@@ -77,7 +77,45 @@
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-3 col-sm-12 form-group">
+                        <div class="col-md-4 mb-2">
+                            <label for="trainee_open_date">प्रशिक्षार्थीको लागि खुल्ने मिति * </label><br>
+                            <input id="trainee_open_date" type="datetime-local" name="trainee_open_date" placeholder="प्रशिक्षार्थीको लागि खुल्ने मिति"
+                                   class="form-control @error('trainee_open_date') is-invalid @enderror"
+                                   value="{{old('trainee_open_date',$training->trainee_open_date)}}">
+                            @error('trainee_open_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="trainee_closed_date">प्रशिक्षार्थीको लागि बन्द हुने मिति * </label><br>
+                            <input id="trainee_closed_date" type="datetime-local" name="trainee_closed_date"
+                                   placeholder="प्रशिक्षार्थीको लागि बन्द हुने मिति"
+                                   class="form-control @error('trainee_closed_date') is-invalid @enderror"
+                                   value="{{old('trainee_closed_date',$training->trainee_closed_date)}}">
+                            @error('trainee_closed_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="organization_open_date">संस्था देखि खुल्ने मिति * </label><br>
+                            <input id="organization_open_date" type="datetime-local" name="organization_open_date" placeholder="संस्था देखि खुल्ने मिति"
+                                   class="form-control @error('organization_open_date') is-invalid @enderror"
+                                   value="{{old('organization_open_date',$training->organization_open_date)}}">
+                            @error('organization_open_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="organization_closed_date">संस्था देखि बन्द हुने मिति * </label><br>
+                            <input id="organization_closed_date" type="datetime-local" name="organization_closed_date"
+                                   placeholder="संस्था देखि बन्द हुने मिति"
+                                   class="form-control @error('organization_closed_date') is-invalid @enderror"
+                                   value="{{old('organization_closed_date',$training->organization_closed_date)}}">
+                            @error('organization_closed_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 col-sm-12 form-group">
                             <label for="trainers">प्रशिक्षक * </label>
                             <select id="form_type" name="trainers[]"
                                     class="form-control @error('trainers') is-invalid @enderror" multiple>

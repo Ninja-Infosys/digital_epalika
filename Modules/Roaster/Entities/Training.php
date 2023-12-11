@@ -43,6 +43,10 @@ class Training extends Model
         'post_average_mark',
         'fiscal_year_id',
         'included_subjects',
+        'trainee_open_date',
+        'trainee_closed_date',
+        'organization_open_date',
+        'organization_closed_date',
     ];
 
     protected $casts = [
@@ -62,6 +66,22 @@ class Training extends Model
     {
         $openDate = Carbon::parse($this->attributes['open_date'])->format('Y-m-d H:i:s');
         $closeDate = Carbon::parse($this->attributes['closed_date'])->format('Y-m-d H:i:s');
+        $today = now()->format('Y-m-d H:i:s');
+
+        return $openDate <= $today && $today <= $closeDate;
+    }
+    public function getFormStatusAccordingToOrganizationDateAttribute(): bool
+    {
+        $openDate = Carbon::parse($this->attributes['organization_open_date'])->format('Y-m-d H:i:s');
+        $closeDate = Carbon::parse($this->attributes['organization_closed_date'])->format('Y-m-d H:i:s');
+        $today = now()->format('Y-m-d H:i:s');
+
+        return $openDate <= $today && $today <= $closeDate;
+    }
+    public function getFormStatusAccordingToTraineeDateAttribute(): bool
+    {
+        $openDate = Carbon::parse($this->attributes['trainee_open_date'])->format('Y-m-d H:i:s');
+        $closeDate = Carbon::parse($this->attributes['trainee_closed_date'])->format('Y-m-d H:i:s');
         $today = now()->format('Y-m-d H:i:s');
 
         return $openDate <= $today && $today <= $closeDate;

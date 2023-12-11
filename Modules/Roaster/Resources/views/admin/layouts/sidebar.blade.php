@@ -4,6 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li class="{{ request()->is('admin/roaster/organization') ? 'active' : '' }}">
+    <a href="{{ route('admin.roaster.organization.index') }}">
+        <i class="fa fa-building"></i>
+        <span>दर्ता भएका संगठनहरु</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/roaster/trainer/*') ? 'active' : ''}}">
     <a href="{{route('admin.roaster.trainer.index')}}">
         <i class="fa fa-users"></i>

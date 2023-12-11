@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     public function up()
     {
         Schema::create('trainees', function (Blueprint $table) {
@@ -33,7 +34,7 @@ return new class () extends Migration {
             $table->string('passport')->nullable();
             $table->string('visa')->nullable();
             $table->string('other_training')->nullable();
-            $table->boolean('select')->default(0)->comment('छनोट');
+            $table->string('select')->nullable()->comment('छनोट');
             $table->string('reference_id')->unique();
             $table->timestamps();
             $table->softDeletes();

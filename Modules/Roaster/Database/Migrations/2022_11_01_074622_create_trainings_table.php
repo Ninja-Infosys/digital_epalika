@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     public function up()
     {
         Schema::create('trainings', function (Blueprint $table) {
@@ -25,6 +26,11 @@ return new class () extends Migration {
             $table->double('post_max_mark', 10, 2)->nullable();
             $table->double('post_min_mark', 10, 2)->nullable();
             $table->double('post_average_mark', 10, 2)->nullable();
+            //new columns
+            $table->timestamp('trainee_open_date')->nullable()->comment('प्रशिक्षार्थीको लागि खुल्ने मिति');
+            $table->timestamp('trainee_closed_date')->nullable()->comment('प्रशिक्षार्थीको बन्द हुने मिति');
+            $table->timestamp('organization_open_date')->nullable()->comment('संस्था देखि खुल्ने मिति');
+            $table->timestamp('organization_closed_date')->nullable()->comment('संस्था देखि बन्द हुने मिति');
             $table->timestamps();
             $table->softDeletes();
         });
