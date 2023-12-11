@@ -19,16 +19,16 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
     }
 
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
         Route::middleware('web')
             ->prefix('grievanceHandling')
             ->as('grievanceHandling.')
             ->group(module_path('GrievanceHandling', '/Routes/web.php'));
 
-            Route::middleware('web')
-            ->prefix('api/grievance')
-                ->group(module_path('GrievanceHandling', '/Routes/api/publicRoute.php'));
+        Route::middleware('web')
+        ->prefix('api/grievance')
+            ->group(module_path('GrievanceHandling', '/Routes/api/publicRoute.php'));
 
         Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/grievanceHandling')
@@ -36,10 +36,13 @@ class RouteServiceProvider extends ServiceProvider
             ->group(module_path('GrievanceHandling', '/Routes/admin.php'));
     }
 
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('GrievanceHandling', '/Routes/api.php'));
+        Route::prefix('api')
+            ->middleware('api/v1')
+            ->group(module_path('GrievanceHandling', '/Routes/api/publicRoute.php'));
     }
 }
