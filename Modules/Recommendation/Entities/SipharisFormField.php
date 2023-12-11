@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Enums\FormFieldEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Modules\Recommendation\Entities\SipharisFormType;
 
 class SipharisFormField extends Model
 {
@@ -27,8 +27,24 @@ class SipharisFormField extends Model
         'sipharish_form_type_id',
         'field_name',
         'slug',
-        'created_by'
+        'created_by',
+        'type',
+        'sipharis_form_field_id',
     ];
+
+    protected $casts = [
+        'type' => FormFieldEnum::class
+    ];
+
+    public function SipharishFormField(): BelongsTo
+    {
+        return $this->belongsTo(SipharisFormField::class);
+    }
+
+    public function SipharishFormFields(): HasMany
+    {
+        return $this->hasMany(SipharisFormField::class);
+    }
 
 
     public function SipharishFormType(): BelongsTo

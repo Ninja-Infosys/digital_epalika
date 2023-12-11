@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class SipharisCreateController extends Controller
 {
-
     public function index()
     {
         $this->checkAuthorization('recommendationCategory_access');
-        $sipharishCreates = SipharishCreate::with('SipharishFormType','personalDetail')->latest()->get();
+        $sipharishCreates = SipharishCreate::with('SipharishFormType', 'personalDetail')->latest()->get();
         return view('recommendation::admin.sipharisCreate.index', compact('sipharishCreates'));
     }
 
@@ -24,8 +23,9 @@ class SipharisCreateController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-//        dd($request->validated());
+        //        dd($request->validated());
         $sipharis = DB::transaction(function () use ($request) {
+
             $sipharis = SipharishCreate::create($request->validated() + [
                     'created_by' => auth()->id()
                 ]);
@@ -34,6 +34,7 @@ class SipharisCreateController extends Controller
                 && !empty($request->validated()['fields'])) {
 
                 foreach ($request->validated()['fields'] as $field) {
+//                    dd($field);
                     $sipharis->SipharishCreatedValues()->create($field);
                 }
 
@@ -67,7 +68,7 @@ class SipharisCreateController extends Controller
     public function show(SipharishCreate $sipharishCreate)
     {
 
-        $sipharishCreate->load('SipharishCreatedValues.SipharisFormField','SipharisCreatedDocuments');
+        $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
         return view('recommendation::admin.sipharisCreate.view', compact('sipharishCreate'));
 
     }

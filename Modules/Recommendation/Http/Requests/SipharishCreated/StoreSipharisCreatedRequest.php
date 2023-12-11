@@ -24,6 +24,7 @@ class StoreSipharisCreatedRequest extends FormRequest
             'fields' => ['nullable', 'array'],
             'fields.*.sipharish_form_field_id' => ['nullable', Rule::exists('sipharis_form_fields', 'id')->withoutTrashed()],
             'fields.*.value' => ['nullable'],
+            'fields.*.type' => ['required'],
             'files' => ['nullable', 'array'],
             'files.*.title' => ['required', 'string'],
             'files.*.filename' => ['required', 'file'],
