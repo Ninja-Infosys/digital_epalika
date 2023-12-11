@@ -39,7 +39,7 @@ class TrainingController extends Controller
         $this->checkAuthorization('training_create');
 
         $setting = OfficeSetting::first();
-        if (! $setting->fiscal_year_id) {
+        if (!$setting->fiscal_year_id) {
             toast('Fiscal year not added in setting', 'error');
 
             return back();
@@ -203,6 +203,6 @@ class TrainingController extends Controller
             $trainees = collect();
         }
 
-        return Excel::download(new TraineeExport($trainees, $training), $training->name.'.xlsx');
+        return Excel::download(new TraineeExport($trainees, $training), $training->name . '.xlsx');
     }
 }

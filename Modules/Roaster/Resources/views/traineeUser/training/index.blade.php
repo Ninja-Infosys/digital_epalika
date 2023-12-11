@@ -6,13 +6,13 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
-                        <a href="{{route('admin.roaster.dashboard')}}">
+                        <a href="{{route('traineeOrganization.admin.dashboard')}}">
                            <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                     गृहपृष्ठ
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('admin.roaster.training.index')}}">तालिम</a>
+                        <a href="{{route('traineeOrganization.admin.organizationTraining.index')}}">तालिम</a>
                     </li>
                     <li class="breadcrumb-item">
                         तालिम विवरण
@@ -37,7 +37,6 @@
                     <th>तालिमको नाम</th>
                     <th>खोलिएको मिति</th>
                     <th>बन्द हुने मिति</th>
-                    <th>फारमको स्थिति</th>
                     <th class="text-center"> कार्य</th>
                 </tr>
                 </thead>
@@ -46,10 +45,15 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$training->name}}</td>
-                        <td>{{$training->open_date}}</td>
-                        <td>{{$training->closed_date}}</td>
-                       <td></td>
-                       <td></td>
+                        <td>{{$training->organization_open_date}}</td>
+                        <td>{{$training->organization_closed_date}}</td>
+                       <td>
+                        <a  href="{{route('traineeOrganization.admin.traineeList', $training)}}" class="btn btn-xs btn-outline-info"
+                        data-toggle="tooltip" data-placement="top"
+                        title="{{$training->training_trainees_count}} Trainees Detail">
+                         <i class="fa fa-users"></i>
+                     </a>
+                       </td>
                     </tr>
                 @empty
                     <tr>

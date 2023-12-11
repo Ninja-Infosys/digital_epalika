@@ -70,6 +70,22 @@ class Training extends Model
 
         return $openDate <= $today && $today <= $closeDate;
     }
+    public function getFormStatusAccordingToOrganizationDateAttribute(): bool
+    {
+        $openDate = Carbon::parse($this->attributes['organization_open_date'])->format('Y-m-d H:i:s');
+        $closeDate = Carbon::parse($this->attributes['organization_closed_date'])->format('Y-m-d H:i:s');
+        $today = now()->format('Y-m-d H:i:s');
+
+        return $openDate <= $today && $today <= $closeDate;
+    }
+    public function getFormStatusAccordingToTraineeDateAttribute(): bool
+    {
+        $openDate = Carbon::parse($this->attributes['trainee_open_date'])->format('Y-m-d H:i:s');
+        $closeDate = Carbon::parse($this->attributes['trainee_closed_date'])->format('Y-m-d H:i:s');
+        $today = now()->format('Y-m-d H:i:s');
+
+        return $openDate <= $today && $today <= $closeDate;
+    }
 
     public function fiscalYear(): BelongsTo
     {
