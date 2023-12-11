@@ -106,12 +106,17 @@
                 </li>
             @endcan
             @can('grantReport_access')
-                <li class="{{ request()->is('admin/grant/report/grant') ? 'active' : '' }}">
-                    <a href="{{ route('admin.grant.report.grant.index') }}">
-                        <span>अनुदान रिपोर्ट </span>
+                <li class="{{ request()->is('admin/grant/report/program') ? 'active' : '' }}">
+                    <a href="{{ route('admin.grant.report.grant.program-report') }}">
+                        <span>कार्यक्रम अनुसार रिपोर्ट </span>
                     </a>
                 </li>
             @endcan
+            <li class="{{ request()->is('admin/grant/report/') ? 'active' : '' }}">
+                <a href="{{ route('admin.grant.report.group.index') }}">
+                    <span>समूह रिपोर्ट </span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

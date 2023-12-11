@@ -30,7 +30,7 @@ class Grant extends Model
         'fiscal_year_id',
         'grant_type_id',
         'grant_office_id',
-        'grant_program_id',
+        'grant_program_name',
         'branch_id',
         'grant_amount',
         'grant_for',
@@ -54,10 +54,7 @@ class Grant extends Model
         $this->attributes['grant_for'] = implode(',', $value);
     }
 
-    public function grantProgram(): BelongsTo
-    {
-        return $this->belongsTo(GrantProgram::class);
-    }
+
 
     public function grantOffice(): BelongsTo
     {

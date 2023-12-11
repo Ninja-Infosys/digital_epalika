@@ -12,7 +12,7 @@ return new class () extends Migration {
             $table->foreignId('fiscal_year_id')->comment('आर्थिक वर्ष')->constrained();
             $table->foreignId('grant_type_id')->comment('अनुदानको प्रकार')->constrained();
             $table->foreignId('grant_office_id')->comment('अनुदान दिने संस्था')->nullable()->constrained();
-            $table->foreignId('grant_program_id')->comment('अनुदान कार्यक्रम')->nullable()->constrained();
+            $table->text('grant_program_name')->comment('अनुदान कार्यक्रम');
             $table->foreignId('branch_id')->comment('शाखा')->nullable()->constrained();
             $table->double('grant_amount', 12, 2)->comment('अनुदान रकम')->default(0);
             $table->string('grant_for')->comment('कसको लागि अनुदान?');

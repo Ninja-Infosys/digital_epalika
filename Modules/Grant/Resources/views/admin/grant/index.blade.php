@@ -56,7 +56,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$grant->fiscalYear->title??''}}</td>
                                     <td>{{$grant->grantOffice->office_name??''}}</td>
-                                    <td>{{$grant->grantProgram->name??''}}</td>
+                                    <td>{{$grant->grant_program_name??''}}</td>
                                     <td>{{$grant->grantType->title??''}}</td>
                                     <td>{{$grant->branch->branch_name??''}}</td>
                                     <td>{{$grant->grant_amount}}</td>

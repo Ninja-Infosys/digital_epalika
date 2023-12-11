@@ -11,7 +11,7 @@
     @foreach($grants as $grant)
         <tr>
             <td>
-                {{$grant->grant->grantProgram->name ?? ''}} ({{$grant->grant->fiscalYear->title ?? ''}})
+                {{$grant->grant->grant_program_name->name ?? ''}} ({{$grant->grant->fiscalYear->title ?? ''}})
             </td>
             <td>
                 {{$grant->model->name ?? ''}}
