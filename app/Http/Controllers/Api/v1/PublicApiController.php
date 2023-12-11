@@ -27,6 +27,10 @@ use Nwidart\Modules\Facades\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Modules\DigitalBoard\Entities\Audio;
+use Modules\DigitalBoard\Entities\PhotoGallery;
+use Modules\DigitalBoard\Transformers\AudioResource;
+use Modules\DigitalBoard\Transformers\PhotoGalleryResource;
 use Nette\Utils\Json;
 
 class PublicApiController extends Controller
@@ -106,7 +110,9 @@ class PublicApiController extends Controller
                 'emergencyCategories' => EmergencyCategoryResource::collection(EmergencyCategory::get()),
                 'latestNews' => NewsResource::collection(Notice::with('files')->news()->latest()->get()),
                 'popups' => PopUpNoticeResource::collection(PopUpNotice::with('files')->latest()->get()),
-                'video' => VideoResource::collection(Video::latest()->get())
+                'video' => VideoResource::collection(Video::latest()->get()),
+                'audio' => AudioResource::collection(Audio::latest()->get()),
+                'photoGallery' => PhotoGalleryResource::collection(PhotoGallery::latest()->get())
             ];
         }
         return [
@@ -117,6 +123,8 @@ class PublicApiController extends Controller
             'latestNews' => [],
             'popups' => [],
             'video' => [],
+            'audio' => [],
+            'photoGallery' => [],
         ];
     }
 
