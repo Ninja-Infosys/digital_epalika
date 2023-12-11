@@ -1,7 +1,10 @@
 <?php
 
+
+use Modules\Roaster\Entities\TraineeUser;
 use App\Models\MobileUser;
 use App\Models\User;
+
 
 return [
 
@@ -32,6 +35,11 @@ return [
             'provider' => 'organizations',
         ],
 
+        'traineeUser' => [
+            'driver' => 'session',
+            'provider' => 'traineeUsers',
+        ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
@@ -52,6 +60,11 @@ return [
             'driver' => 'eloquent',
             'model' => \Modules\EMap\Entities\Organization::class,
         ],
+
+        'traineeUsers' => [
+            'driver' => 'eloquent',
+            'model' => TraineeUser::class,
+          ],
         'mobile-users' => [
             'driver' => 'eloquent',
             'model' => MobileUser::class,

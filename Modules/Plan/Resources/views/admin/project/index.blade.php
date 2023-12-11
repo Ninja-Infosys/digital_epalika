@@ -40,7 +40,8 @@
                                     <select name="project_status" id="project_status" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach (\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
-                                            <option {{ $projectStatus->value == request('project_status') ? 'selected' : '' }}
+                                            <option
+                                                {{ $projectStatus->value == request('project_status') ? 'selected' : '' }}
                                                 value="{{ $projectStatus->value }}">{{ $projectStatus->label() }}</option>
                                         @endforeach
                                     </select>
@@ -113,170 +114,145 @@
                                 <th data-hide="all">सम्झौता</th>
                                 <th data-hide="all">अन्य</th>
                                 <th data-hide="all">कार्य</th>
+                                <th>#</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @forelse($projects as $project)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>
-                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}"
-                                       href="javascript:void(0)">
-                                        {{$project->registration_no}}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}"
-                                       href="javascript:void(0)">
-                                        {{$project->project_name}}
-                                    </a>
-                                </td>
-                                <td>{{$project->planArea->area_name??''}}</td>
-                                <td>
-                                    @if($project->project_start_date)
-                                    {{$project->project_start_date}}
-                                    @else
-                                        <p class="text-danger">सुरु भएको छैन</p>
-                                    @endif
-                                </td>
-                                <td>{{implode(',',$project->ward_no)}}</td>
-                                <td>रू. {{$project->project_allocated_amounts_sum_amount}}</td>
-                                <td>{{$project->project_status->label()}}</td>
-                                <td class="d-flex gap-1">
-                                    <a class="btn btn-xs btn-outline-secondary" title="आयोजनाको लागत"  href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
-                                        <i class="fa fa-list"> </i>
-                                    </a>
-                                    @can('technicalCostEstimate_access')
-                                        <a class="btn btn-xs btn-outline-secondary" title=" प्राविधिक लागत"
-                                           href="{{route('admin.plan.project.technicalCostEstimate.index',$project)}}">
-                                            <i class="fa fa-user-cog"></i>
+                            @forelse($projects as $project)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <a class="projectShowBtn"
+                                            action-url="{{ route('admin.plan.project.show', $project) }}"
+                                            href="javascript:void(0)">
+                                            {{ $project->registration_no }}
                                         </a>
-                                    @endcan
-                                </td>
-                                <td class="d-flex gap-1">
-                                    <a class="btn btn-xs btn-outline-primary" title=" योजना सम्झौता"
-                                       href="{{route('admin.plan.project.projectAgreement.index',$project)}}">
-                                        <i class="fa fa-handshake"></i>
-                                    </a>
-                                    @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-                                        @if($project->is_contracted)
-                                            <a class="btn btn-xs btn-outline-primary" title="आर्थिक कारोबार"
-                                               href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
-                                                <i class="fa fa-money-bill"></i>
-                                            </a>
-                                            <a class="btn btn-xs btn-outline-primary" title=" मर्मत संम्भार सम्बन्धी"
-                                               href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
-                                                <i class="fa fa-cog"></i>
-
+                                    </td>
+                                    <td>
+                                        <a class="projectShowBtn"
+                                            action-url="{{ route('admin.plan.project.show', $project) }}"
+                                            href="javascript:void(0)">
+                                            {{ $project->project_name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $project->planArea->area_name ?? '' }}</td>
+                                    <td>
+                                        @if ($project->project_start_date)
+                                            {{ $project->project_start_date }}
+                                        @else
+                                            <p class="text-danger">सुरु भएको छैन</p>
+                                        @endif
+                                    </td>
+                                    <td>{{ implode(',', $project->ward_no) }}</td>
+                                    <td>रू. {{ $project->project_allocated_amounts_sum_amount }}</td>
+                                    <td>{{ $project->project_status->label() }}</td>
+                                    <td class="d-flex gap-1">
+                                        <a class="btn btn-xs btn-outline-secondary" title="आयोजनाको लागत"
+                                            href="{{ route('admin.plan.project.projectCostDetail.index', $project) }}">
+                                            <i class="fa fa-list"> </i>
+                                        </a>
+                                        @can('technicalCostEstimate_access')
+                                            <a class="btn btn-xs btn-outline-secondary" title=" प्राविधिक लागत"
+                                                href="{{ route('admin.plan.project.technicalCostEstimate.index', $project) }}">
+                                                <i class="fa fa-user-cog"></i>
                                             </a>
                                         @endcan
                                     </td>
                                     <td class="d-flex gap-1">
-                                        <a class="btn btn-xs btn-outline-primary"
+                                        <a class="btn btn-xs btn-outline-primary" title=" योजना सम्झौता"
                                             href="{{ route('admin.plan.project.projectAgreement.index', $project) }}">
-                                            <i class="fa fa-handshake"> योजना सम्झौता</i>
+                                            <i class="fa fa-handshake"></i>
                                         </a>
                                         @if ($project->operated_through === \Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                                             @if ($project->is_contracted)
-                                                <a class="btn btn-xs btn-outline-primary"
+                                                <a class="btn btn-xs btn-outline-primary" title="आर्थिक कारोबार"
                                                     href="{{ route('admin.plan.project.consumerCommitteeTransaction.index', $project) }}">
-                                                    <i class="fa fa-money-bill"> आर्थिक कारोबार</i>
+                                                    <i class="fa fa-money-bill"></i>
                                                 </a>
-                                                <a class="btn btn-xs btn-outline-primary"
+                                                <a class="btn btn-xs btn-outline-primary" title=" मर्मत संम्भार सम्बन्धी"
                                                     href="{{ route('admin.plan.project.projectMaintenanceArrangement.index', $project) }}">
-                                                    <i class="fa fa-cog"> मर्मत संम्भार सम्बन्धी</i>
+                                                    <i class="fa fa-cog"></i>
+
                                                 </a>
-                                            @endif
-                                        @else
-                                            @if ($project->is_contracted)
-                                                <a class="btn btn-xs btn-outline-primary"
-                                                    href="{{ route('admin.plan.project.projectBidSubmission.index', $project) }}">
-                                                    <i class="fa fa-money-bill"> आर्थिक कारोबार </i>
-                                                </a>
-                                            @endif
-                                        @endif
-                                    @else
-                                        @if($project->is_contracted)
-                                            <a class="btn btn-xs btn-outline-primary" title=" आर्थिक कारोबार"
-                                               href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                <i class="fa fa-money-bill"> </i>
-                                            </a>
-                                        @endif
-                                    @endif
+                                            @endcan
                                 </td>
-                                <td class="d-flex gap-1">
-                                    @if($project->is_contracted)
-                                        <a class="btn btn-xs btn-outline-success" title="शर्तहरु"
-                                           href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
-                                            <i class="fa fa-clipboard-check">  </i>
-                                        </a>
-                                        @can('projectDocument_access')
-                                            <a class="btn btn-xs btn-outline-success" title=" सम्बन्धित कागजातहरू "
-                                               href="{{route('admin.plan.project.projectDocument.index',$project)}}">
-                                                <i class="fa fa-file-contract"></i>
-                                            </a>
-                                        @endcan
-                                        <a class="btn btn-xs btn-outline-success" title="सम्बन्धित फोटो/फाईलहरू"
-                                           href="{{route('admin.plan.project.fileList',$project)}}">
-                                            <i class="fa fa-file">  </i>
-                                        </a>
-                                        <a class="btn btn-xs btn-outline-success" title="म्याद थप"
-                                           href="{{route('admin.plan.project.projectDeadlineExtension.index',$project)}}">
-                                            <i class="fa fa-calendar-alt">  </i>
-                                        </a>
-                                    @else
-                                        <p class="text-center">सम्झौता भएको छैन ।</p>
-                                    @endif
-                                </td>
-                                <td class="d-flex gap-1">
-                                    <a href="{{route('admin.plan.project.show',$project)}}" title=" विवरण हेर्नुहोस्" class="btn btn-xs btn-outline-info">
-                                        <i class="fa fa-eye"></i></a>
-                                    <a href="{{route('admin.plan.project.edit',$project)}}" title=" सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-warning">
-                                        <i class="fa fa-edit"></i></a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                            </tr>
+                        @endif
+                        </td>
+                        <td class="d-flex gap-1">
+                            @if ($project->is_contracted)
+                                <a class="btn btn-xs btn-outline-success" title="शर्तहरु"
+                                    href="{{ route('admin.plan.project.projectAgreementTerm.create', $project) }}">
+                                    <i class="fa fa-clipboard-check"> </i>
+                                </a>
+                                @can('projectDocument_access')
+                                    <a class="btn btn-xs btn-outline-success" title=" सम्बन्धित कागजातहरू "
+                                        href="{{ route('admin.plan.project.projectDocument.index', $project) }}">
+                                        <i class="fa fa-file-contract"></i>
+                                    </a>
+                                @endcan
+                                <a class="btn btn-xs btn-outline-success" title="सम्बन्धित फोटो/फाईलहरू"
+                                    href="{{ route('admin.plan.project.fileList', $project) }}">
+                                    <i class="fa fa-file"> </i>
+                                </a>
+                                <a class="btn btn-xs btn-outline-success" title="म्याद थप"
+                                    href="{{ route('admin.plan.project.projectDeadlineExtension.index', $project) }}">
+                                    <i class="fa fa-calendar-alt"> </i>
+                                </a>
+                            @else
+                                <p class="text-center">सम्झौता भएको छैन ।</p>
+                            @endif
+                        </td>
+                        <td class="d-flex gap-1">
+                            <a href="{{ route('admin.plan.project.show', $project) }}" title=" विवरण हेर्नुहोस्"
+                                class="btn btn-xs btn-outline-info">
+                                <i class="fa fa-eye"></i></a>
+                            <a href="{{ route('admin.plan.project.edit', $project) }}" title=" सम्पादन गर्नुहोस्"
+                                class="btn btn-xs btn-outline-warning">
+                                <i class="fa fa-edit"></i></a>
+                        </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                        </tr>
                         @endforelse
-                        </tbody>
-                    </table>
-                    <div class="mt-2">
-                        {{ $projects->onEachSide(config('app.pagination_count'))->links() }}
-                    </div>
+                    </tbody>
+                </table>
+                <div class="mt-2">
+                    {{ $projects->onEachSide(config('app.pagination_count'))->links() }}
                 </div>
             </div>
         </div>
     </div>
-    <div id="project-info-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel"
-        style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-full-width">
-            <div class="modal-content" id="project-data">
+</div>
+<div id="project-info-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-full-width">
+        <div class="modal-content" id="project-data">
 
-            </div>
         </div>
     </div>
+</div>
 
-    @push('scripts')
-        <script>
-            $(document).ready(function() {
-                $('.projectShowBtn').on('click', function(e) {
-                    e.preventDefault()
-                    $.ajax({
-                        method: "GET",
-                        url: $(this).attr("action-url"),
-                        success: function(resp) {
-                            $('#project-info-modal').modal('toggle')
-                            $('#project-data').html(resp.view)
-                        },
-                        error: function() {
-                            alert("Something Went Wrong");
-                        }
-                    });
-                })
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.projectShowBtn').on('click', function(e) {
+                e.preventDefault()
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("action-url"),
+                    success: function(resp) {
+                        $('#project-info-modal').modal('toggle')
+                        $('#project-data').html(resp.view)
+                    },
+                    error: function() {
+                        alert("Something Went Wrong");
+                    }
+                });
             })
-        </script>
-        <script src="{{ asset('assets/backend/js/plugins/footable.min.js') }}"></script>
-    @endpush
+        })
+    </script>
+    <script src="{{ asset('assets/backend/js/plugins/footable.min.js') }}"></script>
+@endpush
 @endsection

@@ -60,7 +60,7 @@
                                                 <td>{{$disabilityIdentityCard->name}}</td>
                                                 <td>{{$disabilityIdentityCard->gender?->label() ??''}}</td>
                                                 <td>{{$disabilityIdentityCard->citizenship_no}}</td>
-                                                <td>
+                                                <td class="d-flex gap-1">
                                                     <a href="javascript:void(0)"
                                                        route_action="{{route('identity.admin.disabilityIdentityCard.printCard',$disabilityIdentityCard)}}"
                                                        class="btn btn-xs btn-outline-warning printDetail">
