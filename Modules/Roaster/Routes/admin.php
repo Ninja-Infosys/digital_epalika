@@ -8,6 +8,7 @@ use Modules\Roaster\Http\Controllers\TechnicalTraineeController;
 use Modules\Roaster\Http\Controllers\TraineeController;
 use Modules\Roaster\Http\Controllers\TrainerController;
 use Modules\Roaster\Http\Controllers\TrainingController;
+use Modules\Roaster\Http\Controllers\OrganizationController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
@@ -39,3 +40,8 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
 });
+
+Route::resource('organization', OrganizationController::class)->only('index');
+Route::delete('traineeUser/{traineeUser}', [OrganizationController::class, 'destroy'])->name('organization.destroy');
+Route::get('traineeUser/{traineeUser}', [OrganizationController::class, 'show'])->name('organization.show');
+Route::get('traineeUser/{traineeUser}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');

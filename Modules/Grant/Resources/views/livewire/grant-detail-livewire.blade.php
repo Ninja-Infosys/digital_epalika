@@ -10,7 +10,7 @@
                     <option value="">कार्यक्रम/क्रियाकलाप छान्नुहोस्</option>
                     @foreach($grants as $grantData)
                         <option value="{{$grantData->id}}">
-                            {{$grantData->grantProgram->name??''}} ({{$grantData->fiscalYear->title??''}})
+                            {{$grantData->grant_program_name??''}} ({{$grantData->fiscalYear->title??''}})
                         </option>
                     @endforeach
                 </select>

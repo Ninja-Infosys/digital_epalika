@@ -7,24 +7,24 @@
                     <div class="row">
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
-                                    <div class="avatar-sm bg-blue rounded-circle">
-                                        <i class="fas fa-user avatar-title font-18 text-white"></i>
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-user avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $taxPayerCount}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $taxPayerCount }}</span></h3>
                                 <p class="text-muted font-15 mb-0">करदाता</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xl-3 border-end">
-                                <div class="d-flex flex-column align-items-center">
-                                    <div class="avatar-sm bg-blue rounded-circle">
-                                        <i class="fas fa-clipboard-list avatar-title font-18 text-white"></i>
-                                    </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$invoiceCount}}</span></h3>
-                                <p class="text-muted font-15 mb-0 text-truncate"
-                                   title="आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद">
-                                    आ.व. {{officeSetting()->fiscalYear->title ?? ''}}मा काटिएको नगदी रसिद</p>
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="avatar-sm bg-blue rounded-circle">
+                                    <i class="fas fa-clipboard-list avatar-title font-18 text-white"></i>
                                 </div>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{ $invoiceCount }}</span></h3>
+                                <p class="text-muted font-15 mb-0 text-truncate"
+                                    title="आ.व. {{ officeSetting()->fiscalYear->title ?? '' }}मा काटिएको नगदी रसिद">
+                                    आ.व. {{ officeSetting()->fiscalYear->title ?? '' }}मा काटिएको नगदी रसिद</p>
+                            </div>
                         </div>
 
                         <div class="col-sm-6 col-xl-3 border-end">
@@ -32,7 +32,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-dollar-sign avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$fiscal_year_total}}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $fiscal_year_total }}</span></h3>
                                 <p class="text-muted font-15 mb-0">चालु आर्थिक वर्षको संकलन राजस्व</p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-dollar-sign avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$all_total}}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $all_total }}</span></h3>
                                 <p class="text-muted font-15 mb-0">कुल राजस्व</p>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-8">
                             <div class="text-end">
-                                <h3 class="my-1"><span data-plugin="counterup">{{$today_total}}</span></h3>
+                                <h3 class="my-1"><span data-plugin="counterup">{{ $today_total }}</span></h3>
                                 <p class="text-muted mb-1 text-truncate">आजको </p>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-10">
                             <div class="text-end">
-                                <h3 class="my-1">रु. <span data-plugin="counterup">{{$this_month_total}}</span></h3>
+                                <h3 class="my-1">रु. <span data-plugin="counterup">{{ $this_month_total }}</span></h3>
                                 <p class="text-muted mb-1 text-truncate">चालु महिनाको</p>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col-10">
                             <div class="text-end">
-                                <h3 class="my-1">रु. <span data-plugin="counterup">{{$previous_month_total}}</span></h3>
+                                <h3 class="my-1">रु. <span data-plugin="counterup">{{ $previous_month_total }}</span></h3>
                                 <p class="text-muted mb-1 text-truncate">गत महिनाको</p>
                             </div>
                         </div>
@@ -111,8 +111,7 @@
             </div> <!-- end card-->
         </div>
     </div>
-   
-    <div class="row mt-2" id="charts" data-chart-url="{{route('admin.revenue.dashboard.ajax')}}">
+    <div class="row mt-2" id="charts" data-chart-url="{{ route('admin.revenue.dashboard.ajax') }}">
         <div class="col-md-6">
             <div class="card">
                 <h4>
@@ -149,7 +148,7 @@
         <div class="col-md-12">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका अनुसार कुल राजस्व 
+                    चालु आर्थिक वर्षाका अनुसार कुल राजस्व
                 </h4>
                 <div class="card-body">
                     <canvas id="accordingToFy" chart-type="line"> </canvas>
@@ -159,7 +158,7 @@
         </div>
     </div>
     @push('scripts')
-    <script src="{{asset('assets/backend/js/chart.js')}}"></script>
-    <script type="module" src="{{asset('assets/backend/js/chartInit.js')}}"></script>
-@endpush
+        <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
+        <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
+    @endpush
 @endsection

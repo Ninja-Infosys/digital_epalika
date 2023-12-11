@@ -33,6 +33,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Modules\EMap\Http\Middleware\CheckOrganizationPassword;
+use Modules\Roaster\Http\Middleware\CheckTraineeUserPassword;
 
 class Kernel extends HttpKernel
 {
@@ -96,6 +97,7 @@ class Kernel extends HttpKernel
         'verified' => EnsureEmailIsVerified::class,
         'checkRoleMiddleware' => CheckRoleMiddleware::class,
         'password.check' => CheckOrganizationPassword::class,
+        'traineePassword.check' => CheckTraineeUserPassword::class,
         'auth.lock' => AuthLock::class,
         'pageRender' => PageRenderMiddleware::class,
         'checkPinMiddleware' => CheckPinMiddleware::class,

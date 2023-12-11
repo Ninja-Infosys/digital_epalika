@@ -38,9 +38,14 @@ class FrontendController extends Controller
     {
         $trainings = Training::with('trainers')->where('form_type', $trainingType)->whereNull('closed_at')
             ->get()->filter(function ($data) {
-                return $data->form_status_according_to_date === true;
+                return $data->form_status_according_to_trainee_date === true;
             });
 
         return view('roaster::frontend.trainings', compact('trainings', 'trainingType'));
+    }
+
+    public function traineeRegister()
+    {
+        return view('roaster::frontend.traineeRegister');
     }
 }

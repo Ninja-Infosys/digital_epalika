@@ -22,9 +22,9 @@ class GrantController extends Controller
     {
         $this->checkAuthorization('grant_access');
 
-        $grants = Grant::with('fiscalYear', 'grantType', 'branch', 'grantProgram', 'grantOffice')->where(function (Builder $q) {
+        $grants = Grant::with('fiscalYear', 'grantType', 'branch', 'grantOffice')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['fiscalYear', 'grantOffice', 'grantProgram', 'grantType',], request('search'));
+                $q->whereLike(['fiscalYear', 'grantOffice', 'grantType',], request('search'));
             }
 
             if (!is_null(auth()->user()->branch_id)) {
@@ -43,11 +43,10 @@ class GrantController extends Controller
 
         $fiscalYears = FiscalYear::all();
         $grantTypes = GrantType::all();
-        $grantPrograms = GrantProgram::all();
         $grantOffices = GrantOffice::all();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
 
-        return view('grant::admin.grant.create', compact('fiscalYears', 'grantTypes', 'grantPrograms', 'grantOffices', 'branches'));
+        return view('grant::admin.grant.create', compact('fiscalYears', 'grantTypes', 'grantOffices', 'branches'));
     }
 
     public function store(StoreGrantRequest $request)
@@ -77,11 +76,10 @@ class GrantController extends Controller
 
         $fiscalYears = FiscalYear::all();
         $grantTypes = GrantType::all();
-        $grantPrograms = GrantProgram::all();
         $grantOffices = GrantOffice::all();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
 
-        return view('grant::admin.grant.edit', compact('grant', 'fiscalYears', 'grantTypes', 'grantPrograms', 'grantOffices', 'branches'));
+        return view('grant::admin.grant.edit', compact('grant', 'fiscalYears', 'grantTypes', 'grantOffices', 'branches'));
     }
 
     public function update(UpdateGrantRequest $request, Grant $grant)

@@ -54,7 +54,7 @@
                             @forelse($grantDetails as $grantDetail)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$grantDetail->grant->grantProgram->name??''}} ({{$grantDetail->grant->fiscalYear->title??''}})</td>
+                                    <td>{{$grantDetail->grant->grant_program_name??''}} ({{$grantDetail->grant->fiscalYear->title??''}})</td>
                                     <td class="text-center">{{$grantDetail->model->name ?? ''}}</td>
                                     <td>{{$grantDetail->personal_investment}}</td>
                                     <td>{{$grantDetail->is_old ? 'निरन्तरता': 'नयाँ'}}</td>

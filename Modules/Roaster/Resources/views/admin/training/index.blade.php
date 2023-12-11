@@ -73,6 +73,44 @@
                             @enderror
                         </div>
                         <div class="col-md-4 mb-2">
+                            <label for="trainee_open_date">प्रशिक्षार्थीको लागि खुल्ने मिति * </label><br>
+                            <input id="trainee_open_date" type="datetime-local" name="trainee_open_date" placeholder="प्रशिक्षार्थीको लागि खुल्ने मिति"
+                                   class="form-control @error('trainee_open_date') is-invalid @enderror"
+                                   value="{{old('trainee_open_date')}}">
+                            @error('trainee_open_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="trainee_closed_date">प्रशिक्षार्थीको लागि बन्द हुने मिति * </label><br>
+                            <input id="trainee_closed_date" type="datetime-local" name="trainee_closed_date"
+                                   placeholder="प्रशिक्षार्थीको लागि बन्द हुने मिति"
+                                   class="form-control @error('trainee_closed_date') is-invalid @enderror"
+                                   value="{{old('trainee_closed_date')}}">
+                            @error('trainee_closed_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="organization_open_date">संस्था देखि खुल्ने मिति * </label><br>
+                            <input id="organization_open_date" type="datetime-local" name="organization_open_date" placeholder="संस्था देखि खुल्ने मिति"
+                                   class="form-control @error('organization_open_date') is-invalid @enderror"
+                                   value="{{old('organization_open_date')}}">
+                            @error('organization_open_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="organization_closed_date">संस्था देखि बन्द हुने मिति * </label><br>
+                            <input id="organization_closed_date" type="datetime-local" name="organization_closed_date"
+                                   placeholder="संस्था देखि बन्द हुने मिति"
+                                   class="form-control @error('organization_closed_date') is-invalid @enderror"
+                                   value="{{old('organization_closed_date')}}">
+                            @error('organization_closed_date')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
                             <label for="trainers">प्रशिक्षक * </label>
                             <select id="form_type" name="trainers[]"
                                     class="form-control @error('trainers') is-invalid @enderror" data-toggle="select2" multiple>

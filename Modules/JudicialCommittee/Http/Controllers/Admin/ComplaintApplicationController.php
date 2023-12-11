@@ -13,7 +13,7 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'judicialReceiptBill', 'complaintDecision', 'conciliationApplication', 'conciliationVerification')
+        $complaintApplications = ComplaintApplication::with('complaintSubject.lawsuitNature', 'judicialReceiptBill', 'complaintDecision', 'conciliationApplication', 'conciliationVerification')
             ->withCount('dateSheets')
             ->withCount('writtenAnswers')
             ->withCount('defendantIssuedDeadlines')
@@ -31,7 +31,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplications = ComplaintApplication::with('lawsuitNature')
+        $complaintApplications = ComplaintApplication::with('complaintSubject.lawsuitNature')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['submission_no', 'registration_no', 'subject', 'date'], request('search'));

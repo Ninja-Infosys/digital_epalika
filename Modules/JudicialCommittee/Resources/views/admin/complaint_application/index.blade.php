@@ -60,7 +60,7 @@
                                     <td>{{$complaintApplication->date}}</td>
                                     <td>{{$complaintApplication->subject}}</td>
                                     <td>
-                                        {{$complaintApplication->lawsuitNature->title??''}}
+                                        {{$complaintApplication->complaintSubject?->lawsuitNature?->title??''}}
                                     </td>
                                     <td class="d-flex">
                                         @can('complaintApplication_access')

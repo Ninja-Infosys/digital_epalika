@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     public function up()
     {
         Schema::create('technical_trainees', function (Blueprint $table) {
@@ -35,7 +36,7 @@ return new class () extends Migration {
             $table->string('office_email')->nullable()->comment('कार्यालयको इमेल');
             $table->string('nomination_letter')->nullable();
             $table->string('recommendation_letter')->nullable();
-            $table->boolean('select')->default(0)->comment('छनोट');
+            $table->string('select')->nullable()->comment('छनोट');
             $table->string('reference_id')->unique();
             $table->timestamps();
             $table->softDeletes();

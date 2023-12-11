@@ -52,10 +52,15 @@ Route::controller(FarmerReportController::class)->prefix('report/farmer')->as('r
     Route::post('report-data', 'report')->name('report-data');
 });
 
-Route::controller(GrantReportController::class)->prefix('report/grant')->as('report.grant.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::post('report-data', 'report')->name('report-data');
-});
+Route::controller(GrantReportController::class)
+    ->prefix('report/grant')->as('report.grant.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('report-data', 'report')->name('report-data');
+
+        Route::get('program-report', 'programReport')->name('program-report');
+        Route::post('show-program-report', 'showProgramReport')->name('show-program-report');
+    });
 
 Route::controller(GroupReportController::class)->prefix('report/group')->as('report.group.')->group(function () {
     Route::get('/', 'index')->name('index');

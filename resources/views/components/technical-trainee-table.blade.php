@@ -26,30 +26,43 @@
             <td>{{$trainee->contact_no}}</td>
             <td>{{$trainee->email}}</td>
             <td>
-                @can('technicalTrainee_access')
-                <a href="{{route('admin.roaster.technicalTrainee.updateSelectTrainee', $trainee)}}"
-                   class=" text-{{$trainee->select == 1 ? 'primary':'danger'}} btn-sm">
-                   <i class="fa fa-2x fa-toggle-{{$trainee->select == 1 ? 'on':'off'}}"></i>
-                </a>
-                @endcan
+
+                <form
+                action="{{ route('traineeOrganization.admin.technicalTrainee.updateSelectTrainee', $trainee) }}"
+                method="post">
+                @csrf
+                @method('put')
+                <div class="input-group d-flex align-items-center">
+                    <select class="form-select form-select-sm" name="select"
+                        id="select" aria-label="Example select with button addon"
+                        @if($trainee->select=='Verified') disabled @endif>
+                        <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                        <option value="Selected"
+                            {{ $trainee->select == 'Selected' ? 'selected' : '' }}>
+                            Selected</option>
+                        <option value="Verified"
+                            {{ $trainee->select == 'Verified' ? 'selected' : '' }}>Verified
+                        </option>
+
+                    </select>
+                    <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($trainee->select=='Verified') disabled @endif ><i class="fa fa-paper-plane"></i></button>
+                </div>
+
+            </form>
             </td>
             <td class="d-flex justify-center">
-                @can('technicalTrainee_edit')
                 <a data-bs-type="edit" href="{{route('admin.roaster.technicalTrainee.edit', $trainee)}}" type="button"
                    class="btn btn-sm btn-primary {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-edit"></i>
                 </a>
-                @endcan
-                @can('technicalTrainee_access')
                 <a data-bs-type="edit" href="{{route('admin.roaster.technicalTrainee.show',$trainee )}}" class="btn btn-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-eye"></i>
                 </a>
-                    @endcan
             </td>
         </tr>
     @empty
         <tr>
-            <td colspan="6">Data not found !!!</td>
+            <td colspan="8">Data not found !!!</td>
         </tr>
     @endforelse
 
