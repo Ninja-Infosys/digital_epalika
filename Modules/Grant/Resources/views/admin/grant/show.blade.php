@@ -26,7 +26,7 @@
 
                         <p class=" text-dark mb-2 font-16"><strong>अनुदान कार्यक्रम :</strong>
                             <span class="ms-2 text-muted">
-                                {{$grant->grantProgram->name??''}}
+                                {{$grant->grant_program_name??''}}
                             </span>
                         </p>
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>आर्थिक वर्ष :</strong> <span

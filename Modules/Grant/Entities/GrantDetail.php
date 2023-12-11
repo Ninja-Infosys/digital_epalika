@@ -63,4 +63,5 @@ class GrantDetail extends Model
     {
         return $this->belongsTo(LocalBody::class);
     }
+
 }

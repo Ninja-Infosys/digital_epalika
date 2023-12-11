@@ -25,7 +25,7 @@
                     <div class="text-start mt-3">
 
                         <p class=" text-dark mb-2 font-16"><strong>अनुदान कार्यक्रम/क्रियाकलाप :</strong>
-                            <span class="ms-2 text-muted">{{$grantDetail->grant->grantProgram->name??''}}</span>
+                            <span class="ms-2 text-muted">{{$grantDetail->grant->grant_program_name->name??''}}</span>
                         </p>
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>अनुदानग्राही :</strong> <span
                                 class="ms-2 text-muted">{{$grantDetail->model->name}}</span></p>

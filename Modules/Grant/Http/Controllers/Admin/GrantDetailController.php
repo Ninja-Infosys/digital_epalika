@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
@@ -13,19 +14,19 @@ class GrantDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('grantDetail_access');
-
-        $grantDetails = GrantDetail::with('grant.fiscalYear', 'grant.grantProgram', 'grant.grantType', 'model', 'localBody')
+   $grants = Grant::with('grant_program_name');
+        $grantDetails = GrantDetail::with('grant.fiscalYear','grant.grantType', 'model', 'localBody')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike('contact', request('search'));
-                    $q->orWhereHas('grant.grantProgram', function ($sub_q) {
+                    $q->orWhereHas('grant_program_name', function ($sub_q) {
                         $sub_q->whereLike('name', request('search'));
                     });
                 }
             })
             ->latest()->paginate(10);
 
-        return view('grant::admin.grant_detail.index', compact('grantDetails'));
+        return view('grant::admin.grant_detail.index', compact('grantDetails','grants'));
     }
 
     public function checkGrant()
@@ -53,9 +54,8 @@ class GrantDetailController extends Controller
     {
         $this->checkAuthorization('grantDetail_edit');
 
-        $grantPrograms = GrantProgram::all();
         $grantTypes = GrantType::all();
-        return view('grant::admin.grant_detail.edit', compact('grantDetail', 'grantPrograms', 'grantTypes'));
+        return view('grant::admin.grant_detail.edit', compact('grantDetail',  'grantTypes'));
     }
 
     public function destroy(GrantDetail $grantDetail)
