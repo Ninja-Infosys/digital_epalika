@@ -114,7 +114,8 @@ class PublicApiController extends Controller
     {
         if ($modules->has('DigitalBoard')) {
             return [
-                'employees' => EmployeeResource::collection(Employee::orderBy('position')->active()->showForMobileAppRequest()->get()),
+                'employees' => EmployeeResource::collection(Employee::orderBy('position')->employee()->active()->showForMobileAppRequest()->get()),
+                'representatives' => EmployeeResource::collection(Employee::orderBy('position')->peopleRepresentative()->active()->showForMobileAppRequest()->get()),
                 'news' => NewsResource::collection(Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'notices' => NoticeResource::collection(Notice::with('files')->orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'emergencyCategories' => EmergencyCategoryResource::collection(EmergencyCategory::get()),
@@ -147,7 +148,6 @@ class PublicApiController extends Controller
             'sliders' => $this->slider(),
         ];
     }
-
 
 
     public function getAllModulesData(): array
@@ -185,6 +185,52 @@ class PublicApiController extends Controller
 //                    'url' => route('roaster.index')
 //                ],
 //            ]
+        ];
+    }
+
+    public function getGovtServices(): array
+    {
+        return [
+            [
+                'name' => 'जिन्सी व्यवस्थापन प्रणाली',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://pams.fcgo.gov.np/',
+            ],
+            [
+                'name' => 'संचितकोष व्यवस्थापन प्रणाली',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://sutra.fcgo.gov.np/',
+            ],
+            [
+                'name' => 'घटना दर्ता र सामाजिक सुरक्षा प्रणाली',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://public.donidcr.gov.np/',
+            ],
+            [
+                'name' => 'सामाजिक सुरक्षा',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://ss.donidcr.gov.np/',
+            ],
+            [
+                'name' => 'इमेल सेवा',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://mail.nepal.gov.np/',
+            ],
+            [
+                'name' => 'कार्यालयको हाजिरी',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://attendance.gov.np/',
+            ],
+            [
+                'name' => 'एस.एम.एस',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://sms.aakashsms.com/login',
+            ],
+            [
+                'name' => 'Voice एस.एम.एस',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://apps.aakashtel.com/login',
+            ],
         ];
     }
 }
