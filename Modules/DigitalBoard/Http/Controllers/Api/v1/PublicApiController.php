@@ -33,14 +33,21 @@ class PublicApiController extends Controller
 {
     public function employee(): AnonymousResourceCollection
     {
-        $employees = Employee::orderBy('position')->active()->employee()->showForMobileAppRequest()->get();
+        $employees = Employee::orderBy('position')
+            ->active()
+            ->employee()
+            ->showForMobileAppRequest()->get();
 
         return EmployeeResource::collection($employees);
     }
 
     public function publicRepresentative(): AnonymousResourceCollection
     {
-        $employees = Employee::orderBy('position')->active()->peopleRepresentative()->showForMobileAppRequest()->get();
+        $employees = Employee::orderBy('position')
+            ->active()
+            ->peopleRepresentative()
+            ->showForMobileAppRequest()
+            ->get();
 
         return EmployeeResource::collection($employees);
     }
