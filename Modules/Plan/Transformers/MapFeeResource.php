@@ -15,7 +15,7 @@ class MapFeeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->id ?? '',
             'storey' => $this->storey ?? '',
             'unit_id' => $this->unit_id ?? '',
             'rate' => $this->rate ?? '',
