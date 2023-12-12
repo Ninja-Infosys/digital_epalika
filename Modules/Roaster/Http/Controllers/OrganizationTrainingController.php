@@ -5,8 +5,14 @@ namespace Modules\Roaster\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\SelectedTraineeNotification;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Modules\Roaster\Entities\RoasterSetting;
 use Modules\Roaster\Entities\TechnicalTrainee;
 use Modules\Roaster\Entities\Trainee;
+use Modules\Roaster\Entities\TraineeUser;
 use Modules\Roaster\Entities\Trainer;
 use Modules\Roaster\Entities\Training;
 use Modules\Roaster\Enums\TrainingTypeEnum;
@@ -26,24 +32,36 @@ class OrganizationTrainingController extends Controller
 
     public function traineeList(Training $training)
     {
-        if ($training->form_type === TrainingTypeEnum::TECHNICAL_TRAINEE) {
-            $trainees = TechnicalTrainee::with('designation', 'department', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
-                $query->where('training_id', $training->id);
-            })->paginate(20);
-        }
-        if ($training->form_type === TrainingTypeEnum::TRAINEE) {
-            $trainees = Trainee::with('designation', 'department', 'ethnicity', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
-                $query->where('training_id', $training->id);
-            })->paginate(20);
-        }
+
+        $trainees = Trainee::with('designation', 'department', 'ethnicity', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
+            $query->where('training_id', $training->id);
+        })->paginate(20);
+
         return view('roaster::traineeUser.trainee.index', compact('training', 'trainees'));
     }
 
     public function updateSelectTrainee(Request $request, Trainee $trainee)
     {
-        $trainee->update([
-            'select' => $request->input('select'),
-        ]);
+        $trainee->load('trainingTrainee.training');
+        if ($request->input('select') == 'Verified') {
+            toast('You Can not verify', 'error');
+            return back();
+        }
+        DB::transaction(function () use ($request, $trainee) {
+            $trainee->update([
+                'select' => $request->input('select'),
+            ]);
+
+            $roasterSetting = RoasterSetting::first() ?? null;
+            if (!empty($roasterSetting && $roasterSetting->is_verified == 1)) {
+                $trainee->update([
+                    'select' => 'Verified',
+                ]);
+            }
+            $traineeUser = TraineeUser::find(auth('traineeUser')->user()->id);
+            Notification::send(User::all(), new SelectedTraineeNotification($trainee, $traineeUser));
+        });
+
         toast('Trainee updated successfully', 'success');
 
         return back();

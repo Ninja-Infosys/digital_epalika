@@ -59,16 +59,11 @@ class TrainingController extends Controller
     {
         $this->checkAuthorization('training_access');
 
-        if ($training->form_type === TrainingTypeEnum::TECHNICAL_TRAINEE) {
-            $trainees = TechnicalTrainee::with('designation', 'department', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
-                $query->where('training_id', $training->id);
-            })->paginate(20);
-        }
-        if ($training->form_type === TrainingTypeEnum::TRAINEE) {
-            $trainees = Trainee::with('designation', 'department', 'ethnicity', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
-                $query->where('training_id', $training->id);
-            })->paginate(20);
-        }
+
+        $trainees = Trainee::with('designation', 'department', 'ethnicity', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
+            $query->where('training_id', $training->id);
+        })->paginate(20);
+
 
         return view('roaster::admin.training.show', compact('trainees', 'training'));
     }

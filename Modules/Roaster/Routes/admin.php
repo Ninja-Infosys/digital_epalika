@@ -9,12 +9,14 @@ use Modules\Roaster\Http\Controllers\TraineeController;
 use Modules\Roaster\Http\Controllers\TrainerController;
 use Modules\Roaster\Http\Controllers\TrainingController;
 use Modules\Roaster\Http\Controllers\OrganizationController;
+use Modules\Roaster\Http\Controllers\RoasterSettingController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('subject', SubjectController::class);
+    Route::resource('roasterSetting', RoasterSettingController::class);
 });
 
 Route::resource('trainer', TrainerController::class)->except(['store', 'destroy', 'update']);
