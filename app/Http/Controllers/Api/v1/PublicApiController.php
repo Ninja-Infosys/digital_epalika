@@ -7,6 +7,7 @@ use App\Http\Resources\Api\v1\EmergencyCategoryResource;
 use App\Http\Resources\Api\v1\LinkResource;
 use App\Http\Resources\Api\v1\SettingResource;
 use App\Http\Resources\Api\v1\SliderResource;
+use App\Models\OfficeHeader;
 use App\Models\Settings\EmergencyCategory;
 use App\Models\Settings\Employee;
 use App\Models\Settings\OfficeSetting;
@@ -30,6 +31,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\DigitalBoard\Entities\Audio;
 use Modules\DigitalBoard\Entities\PhotoGallery;
 use Modules\DigitalBoard\Transformers\AudioResource;
+use Modules\DigitalBoard\Transformers\OfficeHeaderResource;
 use Modules\DigitalBoard\Transformers\PhotoGalleryResource;
 use Nette\Utils\Json;
 
@@ -53,11 +55,15 @@ class PublicApiController extends Controller
         return array_merge($this->getDataFromMainModule(), $this->checkModuleData(), $this->getAllModulesData());
     }
 
-    public function setting(): SettingResource
+    public function setting()
     {
         $officeSetting = $this->getOfficeSetting();
+        $officeHeader = $this->getOfficeHeader();
 
-        return SettingResource::make($officeSetting);
+        return [
+            'setting' => new SettingResource($officeSetting),
+            'header' => new OfficeHeaderResource($officeHeader),
+        ];
     }
 
     public function slider(): AnonymousResourceCollection
@@ -89,7 +95,11 @@ class PublicApiController extends Controller
 
     public function getOfficeSetting(): OfficeSetting
     {
-        return OfficeSetting::latest()->firstOrFail();
+        return OfficeSetting::with('localBody')->first();
+    }
+    public function getOfficeHeader(): OfficeHeader
+    {
+        return OfficeHeader::latest()->firstOrFail();
     }
 
     public function checkModuleData(): array
