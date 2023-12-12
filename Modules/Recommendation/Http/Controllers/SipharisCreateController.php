@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Illuminate\Support\Facades\DB;
@@ -34,8 +35,19 @@ class SipharisCreateController extends Controller
                 && !empty($request->validated()['fields'])) {
 
                 foreach ($request->validated()['fields'] as $field) {
-//                    dd($field);
-                    $sipharis->SipharishCreatedValues()->create($field);
+
+                    if (!empty($field['type']) && $field['type'] == 'image') {
+                        $value = Storage::disk('public')
+                            ->putFile('recommendation/files', $field['value']);
+                    } else {
+                        $value = $field['value'];
+                    }
+                    $sipharis->SipharishCreatedValues()
+                        ->create([
+                            'sipharish_form_field_id' => $field['sipharish_form_field_id'] ?? '',
+                            'value' => $value ?? '',
+                            'type' => $field['type'] ?? '',
+                        ]);
                 }
 
             }

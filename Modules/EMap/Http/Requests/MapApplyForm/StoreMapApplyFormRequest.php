@@ -12,7 +12,6 @@ class StoreMapApplyFormRequest extends FormRequest
     }
 
     public function rules(): array
-
     {
         return [
             'application_type' => ['required'],
@@ -74,8 +73,6 @@ class StoreMapApplyFormRequest extends FormRequest
             'applicantDetail.ward_no' => ['required'],
             'applicantDetail.application_date' => ['required'],
             'applicantDetail.signature' => ['required'],
-
-
         ];
     }
 }
