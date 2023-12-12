@@ -35,21 +35,8 @@ use Modules\Plan\Transformers\StructureTypeResource;
 
 class MapApplyFormApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index(): array
+    public function getMapApplySetting(): array
     {
-
-        $setting = MapSetting::with('landMeasurement')->first() ?? new MapSetting();
-        $organizations = Organization::with('userDetail', 'organizationDetail')->get();
-        $mapFees = MapFee::with('unit')->get();
-        $landUseAreas = LandUseArea::get();
-        $officeSetting = OfficeSetting::with('localBody')->first();
-        $structureTypes = StructureType::latest()->get();
-        $allDistricts = get_districts();
-
         return [
             'setting' => SettingResource::make(MapSetting::with('landmeasurement')->first()),
             'organizations' => OrganizationResource::make(Organization::with('userDetail')->first()),
@@ -57,30 +44,13 @@ class MapApplyFormApiController extends Controller
             'landUseAreas' => LandUseAreaResource::collection(LandUseArea::all()),
             'officeSetting' => OfficeSettingResource::make(OfficeSetting::with('localbody')->first()),
             'structureTypes' => StructureTypeResource::collection(StructureType::get()),
-            'allDistricts' => $allDistricts,
+            'allDistricts' => get_districts(),
         ];
     }
 
 
     public function store(StoreMapApplyFormRequest $request)
-    { 
-    }
-
-
-    public function show(MapApply $mapApply)
     {
-
     }
-    public function update(UpdateMapApplyFormRequest $request, MapApply $mapApply)
-{
 
-}
-
-
-
-    public function destroy(MapApply $mapApply)
-    {
-
-
-    }
 }
