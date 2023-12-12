@@ -23,6 +23,5 @@ Route::get('branch/{branch}', [PublicApiController::class, 'getBranchDetail'])->
 Route::get('branch', [PublicApiController::class, 'branch'])->name('api-public.branch');
 
 Route::get('service', [PublicApiController::class, 'getAllService'])->name('api-public.get-all-service');
-Route::get('service/{service}', [PublicApiController::class, 'getService'])->name('api-public.get-service');
 
 Route::get('video', [PublicApiController::class, 'video'])->name('api-public.video');
