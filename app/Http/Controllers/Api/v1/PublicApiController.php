@@ -104,7 +104,8 @@ class PublicApiController extends Controller
     {
         if ($modules->has('DigitalBoard')) {
             return [
-                'employees' => EmployeeResource::collection(Employee::orderBy('position')->active()->showForMobileAppRequest()->get()),
+                'employees' => EmployeeResource::collection(Employee::orderBy('position')->employee()->active()->showForMobileAppRequest()->get()),
+                'representatives' => EmployeeResource::collection(Employee::orderBy('position')->peopleRepresentative()->active()->showForMobileAppRequest()->get()),
                 'news' => NewsResource::collection(Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'notices' => NoticeResource::collection(Notice::with('files')->orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'emergencyCategories' => EmergencyCategoryResource::collection(EmergencyCategory::get()),
@@ -137,7 +138,6 @@ class PublicApiController extends Controller
             'sliders' => $this->slider(),
         ];
     }
-
 
 
     public function getAllModulesData(): array
