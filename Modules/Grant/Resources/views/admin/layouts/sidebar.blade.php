@@ -66,6 +66,14 @@
     </li>
 @endcan
 
+    <li>
+        <a href="{{ route('admin.grant.cashGrant.index') }}">
+            <i class="fa fa-list-alt"></i>
+            <span>नगद अनुदानको लागि </span>
+        </a>
+    </li>
+
+
 <li class="{{ request()->is('admin/grant/report/*') ? 'active' : '' }}">
     <a href="#sidebarGrantReport" {{ request()->is('admin/grant/report/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
@@ -169,6 +177,13 @@
                     </a>
                 </li>
             @endcan
+           
+            <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
+                <a href="{{ route('admin.grant.setting.helplessnessType.index') }}">
+                    <span> असहायताको प्रकार</span>
+                </a>
+            </li>
+       
         </ul>
     </div>
 </li>
