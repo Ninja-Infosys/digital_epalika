@@ -33,4 +33,18 @@ enum Qualification: string
             self::OTHERS => 'अन्य',
         };
     }
+
+    public static function getValuesWithLabels(): array
+    {
+        $valuesWithLabels = [];
+
+        foreach (self::cases() as $value) {
+            $valuesWithLabels[] = [
+                'value' => $value,
+                'label' => $value->label(),
+            ];
+        }
+
+        return $valuesWithLabels;
+    }
 }
