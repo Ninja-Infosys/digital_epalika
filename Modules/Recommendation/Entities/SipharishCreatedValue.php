@@ -40,18 +40,6 @@ class SipharishCreatedValue extends Model
         return $this->belongsTo(SipharisFormField::class, 'sipharish_form_field_id');
     }
 
-    public function setValueAttribute($value): void
-    {
-        dd($this->attributes, $value);
-        if ($this->attributes['type'] == 'image') {
-            if (!empty($value) && !is_string($value)) {
-                $this->attributes['value'] = $value->store('recommendation', 'public');
-            }
-        } else {
-            $this->attributes['value'] = $value;
-        }
-    }
-
     public function getValueDataAttribute(): string
     {
         if (!empty($this->attributes['value'])) {
