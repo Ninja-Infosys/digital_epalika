@@ -16,4 +16,4 @@ Route::post('mobile/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:mobile-user');
 Route::post('/forgot-password', [PublicApiController::class, 'forgotPassword']);
 Route::post('mobile/signup', [AuthController::class, 'signup']);
-// Route::patch('mobile/update', [AuthController::class, 'updateUserProfile'])->name('updateUser');
+Route::patch('mobile/update', [AuthController::class, 'updateProfile'])->middleware('auth:mobile-user');

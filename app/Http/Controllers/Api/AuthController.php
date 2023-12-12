@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MobileUser\UpdateUserProfileRequest;
 use App\Models\MobileUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Laravel\Passport\Passport;
 
 class AuthController extends Controller
@@ -17,9 +19,9 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
-            'email' => ['required','email','unique:mobile_users,email'],
+            'email' => ['required', 'email', 'unique:mobile_users,email'],
             'phone' => ['required'],
-            'password' => ['required','min:7'],
+            'password' => ['required', 'min:7'],
             // Add other validation rules as needed for your application
         ]);
 
@@ -58,10 +60,19 @@ class AuthController extends Controller
         }
     }
 
+
+    public function updateProfile(UpdateUserProfileRequest $request)
+    {
+        $request->auth('mobile-user')->user()->update($request->validated());
+
+        return response()->json([
+            'data' => "",
+            'message' => "Profile Updated Successfully"
+        ]);
+    }
+
     public function logout(Request $request)
     {
-
-
         $superAdmin = MobileUser::where('email', $request->input('email'))->first();
         if ($superAdmin && Hash::check($request->input('password'), $superAdmin->password)) {
             Auth::guard('mobile-user')->setUser($superAdmin);
@@ -80,7 +91,5 @@ class AuthController extends Controller
                 ]
             ], 422);
         }
-
-
     }
 }
