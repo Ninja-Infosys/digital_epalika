@@ -14,8 +14,8 @@ class GrantDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('grantDetail_access');
-   $grants = Grant::with('grant_program_name');
-        $grantDetails = GrantDetail::with('grant.fiscalYear','grant.grantType', 'model', 'localBody')
+        $grants = Grant::with('grant_program_name');
+        $grantDetails = GrantDetail::with('grant.fiscalYear', 'grant.grantType', 'model', 'localBody')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike('contact', request('search'));
@@ -23,10 +23,20 @@ class GrantDetailController extends Controller
                         $sub_q->whereLike('name', request('search'));
                     });
                 }
-            })
-            ->latest()->paginate(10);
 
-        return view('grant::admin.grant_detail.index', compact('grantDetails','grants'));
+
+                if (auth()->user()?->load('role')?->role?->type == 'Super'){
+
+                }elseif (auth()->user()?->is_dept_head && !is_null(auth()->user()->branch_id)){
+                    $q->where('branch_id', auth()->user()->branch_id);
+                }else{
+
+                }
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('grant::admin.grant_detail.index', compact('grantDetails', 'grants'));
     }
 
     public function checkGrant()
@@ -40,7 +50,7 @@ class GrantDetailController extends Controller
     {
         $this->checkAuthorization('grantDetail_create');
 
-        return view('grant::admin.grant_detail.create' );
+        return view('grant::admin.grant_detail.create');
     }
 
     public function show(GrantDetail $grantDetail)
@@ -55,7 +65,7 @@ class GrantDetailController extends Controller
         $this->checkAuthorization('grantDetail_edit');
 
         $grantTypes = GrantType::all();
-        return view('grant::admin.grant_detail.edit', compact('grantDetail',  'grantTypes'));
+        return view('grant::admin.grant_detail.edit', compact('grantDetail', 'grantTypes'));
     }
 
     public function destroy(GrantDetail $grantDetail)
