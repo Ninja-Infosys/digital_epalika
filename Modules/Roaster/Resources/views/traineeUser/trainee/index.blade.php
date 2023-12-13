@@ -42,6 +42,11 @@
                         छनोट नभयका
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#tab-type3" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                        प्रमाणित भएका
+                    </a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane show active" id="tab-all">
@@ -61,6 +66,11 @@
                         <x-trainee-table :trainees="$trainees->where('select',null)"/>
 
                 </div>
+                <div class="tab-pane" id="tab-type3">
+
+                    <x-trainee-table :trainees="$trainees->where('select','Verified')"/>
+
+            </div>
 
             </div>
 

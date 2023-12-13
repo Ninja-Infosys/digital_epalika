@@ -4,6 +4,8 @@ namespace Modules\Roaster\Http\Livewire;
 
 use App\Models\Address\Province;
 use App\Models\Ethnicity;
+use App\Models\Settings\Department;
+use App\Models\Settings\Designation;
 use App\Traits\AddressHelperTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -24,6 +26,9 @@ class TraineeLivewire extends Component
     public $wards = [];
 
     public $ethnicities = [];
+    public $designations = [];
+
+    public $departments = [];
 
     public $form = [
         'full_name' => null,
@@ -39,6 +44,14 @@ class TraineeLivewire extends Component
         'local_body_id' => null,
         'ward_no' => null,
         'tole' => null,
+        'is_employee' => null,
+        'designation_id' => null,
+        'department_id' => null,
+        'service_time' => null,
+        'office_name' => null,
+        'office_address' => null,
+        'office_phone' => null,
+        'office_email' => null,
     ];
 
     public $trainee;
@@ -47,13 +60,15 @@ class TraineeLivewire extends Component
 
     public function mount($trainee = null, $training = null)
     {
+        $this->designations = Designation::all();
+        $this->departments = Department::all();
         $this->trainee = $trainee;
         $this->training = $training;
 
         $this->provinces = Province::all();
         $this->ethnicities = Ethnicity::all();
 
-        if (! empty($trainee)) {
+        if (!empty($trainee)) {
             foreach ($this->form as $key => $data) {
                 $this->form[$key] = $trainee[$key];
             }
@@ -71,6 +86,8 @@ class TraineeLivewire extends Component
                 'form.citizenship_front' => ['required', 'mimes:jpg,jpeg,png,pdf'],
                 'form.citizenship_back' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
                 'form.passport' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
+                'form.nomination_letter' => ['required', 'mimes:jpg,jpeg,png,pdf'],
+                'form.recommendation_letter' => ['required', 'mimes:jpg,jpeg,png,pdf'],
             ]);
         } else {
             $this->validationRules = array_merge($this->validationRules, [
@@ -81,6 +98,8 @@ class TraineeLivewire extends Component
                 'form.citizenship_front' => ['nullable', 'mimes:pdf,jpg,jpeg,png'],
                 'form.citizenship_back' => ['nullable', 'mimes:pdf,jpg,jpeg,png'],
                 'form.passport' => ['nullable', 'mimes:pdf,jpg,jpeg,png'],
+                'form.nomination_letter' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
+                'form.recommendation_letter' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             ]);
         }
 
@@ -98,7 +117,7 @@ class TraineeLivewire extends Component
         $validated = $this->validate();
 
         DB::transaction(function () use ($validated) {
-            if (! empty($this->trainee)) {
+            if (!empty($this->trainee)) {
                 $trainee = $this->trainee;
                 $trainee->update($validated['form']);
 
@@ -138,6 +157,14 @@ class TraineeLivewire extends Component
         'form.local_body_id' => ['required', 'exists:local_bodies,id'],
         'form.ward_no' => ['required', 'integer'],
         'form.tole' => ['nullable', 'string', 'max:255'],
+        'form.is_employee' => ['required'],
+        'form.designation_id' => ['required_if:form.is_employee,==,1', 'exists:designations,id'],
+        'form.department_id' => ['required_if:form.is_employee,==,1', 'exists:departments,id'],
+        'form.service_time' => ['required_if:form.is_employee,==,1'],
+        'form.office_name' => ['required_if:form.is_employee,==,1', 'string', 'max:255'],
+        'form.office_address' => ['required_if:form.is_employee,==,1', 'string', 'max:255'],
+        'form.office_phone' => ['required_if:form.is_employee,==,1'],
+        'form.office_email' => ['required_if:form.is_employee,==,1', 'email'],
     ];
 
     protected $messages = [

@@ -4,10 +4,12 @@ namespace Modules\Roaster\Http\Controllers;
 
 use App\Exports\TraineeExport;
 use App\Http\Controllers\Controller;
+use App\Mail\TraineeVerifiedMail;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Roaster\Entities\TechnicalTrainee;
 use Modules\Roaster\Entities\Trainee;
@@ -66,6 +68,25 @@ class TrainingController extends Controller
 
 
         return view('roaster::admin.training.show', compact('trainees', 'training'));
+    }
+
+    public function updateSelectTrainee(Request $request, Training $training, Trainee $trainee)
+    {
+        $trainee->load('trainingTrainee.training');
+        if ($request->input('select') == 'Selected') {
+            toast('You Can not selected', 'error');
+            return back();
+        }
+        DB::transaction(function () use ($request, $trainee, $training) {
+            $trainee->update([
+                'select' => $request->input('select'),
+            ]);
+
+            Mail::to($trainee->email_id)->send(new TraineeVerifiedMail($training, $trainee));
+        });
+        toast('Trainee updated successfully', 'success');
+
+        return back();
     }
 
     public function edit(Training $training)

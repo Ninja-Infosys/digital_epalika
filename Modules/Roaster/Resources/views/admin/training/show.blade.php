@@ -43,19 +43,20 @@
                     </a>
                 </li>
             </ul>
+
             <div class="tab-content">
                 <div class="tab-pane show active" id="tab-all">
-                        <x-trainee-table :trainees="$trainees->filter(function ($trainee) {
+                        <x-admin-trainee-table :trainees="$trainees->filter(function ($trainee) {
                             return $trainee->select === 'Verified' || $trainee->select === 'Selected';
-                        })"/>
+                        })  " :training="$training" />
 
                 </div>
                 <div class="tab-pane" id="tab-type1">
-                        <x-trainee-table :trainees="$trainees->where('select','Verified')"/>
+                        <x-admin-trainee-table :trainees="$trainees->where('select','Verified')" :training="$training"/>
                 </div>
 
                 <div class="tab-pane" id="tab-type2">
-                        <x-trainee-table :trainees="$trainees->where('select','Selected')"/>
+                        <x-admin-trainee-table :trainees="$trainees->where('select','Selected')" :training="$training"/>
                 </div>
 
             </div>
