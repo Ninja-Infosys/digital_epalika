@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Mobile\ProfileResource;
 use App\Models\MobileUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,9 +18,9 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
-            'email' => ['required','email','unique:mobile_users,email'],
+            'email' => ['required', 'email', 'unique:mobile_users,email'],
             'phone' => ['required'],
-            'password' => ['required','min:7'],
+            'password' => ['required', 'min:7'],
             // Add other validation rules as needed for your application
         ]);
 
@@ -60,8 +61,6 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
-
         $superAdmin = MobileUser::where('email', $request->input('email'))->first();
         if ($superAdmin && Hash::check($request->input('password'), $superAdmin->password)) {
             Auth::guard('mobile-user')->setUser($superAdmin);
@@ -82,5 +81,12 @@ class AuthController extends Controller
         }
 
 
+    }
+
+    public function profile()
+    {
+        return response()->json([
+            'user' => ProfileResource::make(auth()->user())
+        ]);
     }
 }

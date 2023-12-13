@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\MobileUser;
 use App\Models\Otp;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
@@ -63,6 +64,7 @@ class MapApply extends Model
         'number',
         'latitude',
         'longitude',
+        'mobile_user_id'
     ];
 
     protected $casts = [
@@ -103,6 +105,11 @@ class MapApply extends Model
     public function unit(): BelongsTo
     {
         return $this->belongsTo(Unit::class);
+    }
+
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
     }
 
     public function landDetail(): HasOne

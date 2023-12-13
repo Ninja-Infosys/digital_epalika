@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Modules\EMap\Entities\MapApply;
 
 class MobileUser extends Authenticatable
 {
@@ -43,19 +44,19 @@ class MobileUser extends Authenticatable
         }
     }
 
-     public function getProfilePhotoUrlAttribute(): string
-     {
-         return $this->attributes['profile_photo_path']
-             ? Storage::disk('public')->url($this->attributes['profile_photo_path'])
-             : asset('images/user_icon.jpg');
-     }
+    public function getProfilePhotoUrlAttribute(): string
+    {
+        return $this->attributes['profile_photo_path']
+            ? Storage::disk('public')->url($this->attributes['profile_photo_path'])
+            : asset('images/user_icon.jpg');
+    }
 
-  /*   public function setProfilePhotoPathAttribute($value): void
-     {
-         if (!empty($value) && !is_string($value)) {
-             $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
-         }
-     }*/
+    /*   public function setProfilePhotoPathAttribute($value): void
+       {
+           if (!empty($value) && !is_string($value)) {
+               $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
+           }
+       }*/
 
     public function scopeActive($query)
     {
@@ -65,5 +66,10 @@ class MobileUser extends Authenticatable
     public function scopeNotActive($query)
     {
         return $query->where('is_active', 0);
+    }
+
+    public function mapApplies(): HasMany
+    {
+        return $this->hasMany(MapApply::class);
     }
 }

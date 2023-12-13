@@ -19,4 +19,18 @@ enum ApplicationFormTypeEnum: string
             self::MAP_VERIFIED => 'नक्सा प्रमाणित',
         };
     }
+
+    public static function getValuesWithLabels(): array
+    {
+        $valuesWithLabels = [];
+
+        foreach (self::cases() as $value) {
+            $valuesWithLabels[] = [
+                'value' => $value,
+                'label' => $value->label(),
+            ];
+        }
+
+        return $valuesWithLabels;
+    }
 }
