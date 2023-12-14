@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\EMap\Entities\MapApply;
+use Modules\GrievanceHandling\Entities\GrievanceDetail;
 
 class MobileUser extends Authenticatable
 {
@@ -16,13 +17,13 @@ class MobileUser extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'email',
         'phone',
@@ -71,5 +72,10 @@ class MobileUser extends Authenticatable
     public function mapApplies(): HasMany
     {
         return $this->hasMany(MapApply::class);
+    }
+
+    public function grievanceDetails(): HasMany
+    {
+        return $this->hasMany(GrievanceDetail::class);
     }
 }
