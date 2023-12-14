@@ -14,7 +14,6 @@ return new class() extends Migration
             $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक वर्ष')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->timestamp('open_date')->nullable()->comment('फारम खुल्ने मिति');
             $table->timestamp('closed_date')->nullable()->comment('फारम बन्द हुने मिति');
-            $table->string('form_type')->default('Farmer')->comment('प्रशिक्षार्थीको प्रकार');
             $table->timestamp('closed_at')->nullable();
             $table->text('aim')->nullable()->comment('लक्ष्य');
             $table->text('description')->nullable()->comment('विवरण');

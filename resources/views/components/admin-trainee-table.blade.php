@@ -26,42 +26,41 @@
             <td>{{$trainee->phone_no}}</td>
             <td>{{$trainee->email_id}}</td>
             <td>
-
-                @if($trainee->select == 'Verified')
+                @if($trainee->select=='Verified')
                 <span class="badge bg-success">Verified</span>
-            @else
-            <form
-            action="{{ route('traineeOrganization.admin.trainee.updateSelectTrainee', $trainee) }}"
-            method="post">
-            @csrf
-            @method('put')
-            <div class="input-group d-flex align-items-center">
-                <select class="form-select form-select-sm" name="select"
-                    id="select" aria-label="Example select with button addon"
-                    @if($trainee->select=='Verified') disabled @endif>
-                    <option value="" disabled selected>--- छान्नुहोस् ---</option>
-                    <option value="Selected"
-                    {{ $trainee->select == 'Selected' ? 'selected' : '' }}>
-                    Selected</option>
-                <option value="Verified"
-                    {{ $trainee->select == 'Verified' ? 'selected' : '' }}>Verified
-                </option>
+                @else
+                <form
+                action="{{ route('admin.roaster.trainee.updateSelectTraineeStatus', [$training,$trainee]) }}"
+                method="post">
+                @csrf
 
-                </select>
-                <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($trainee->select=='Verified') disabled @endif ><i class="fa fa-paper-plane"></i></button>
-            </div>
+                <div class="input-group d-flex align-items-center">
+                    <select class="form-select form-select-sm" name="select"
+                        id="select" aria-label="Example select with button addon"
+                        @if($trainee->select=='Verified') disabled @endif>
+                        <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                        <option value="Selected"
+                        {{ $trainee->select == 'Selected' ? 'selected' : '' }}>
+                        Selected</option>
+                    <option value="Verified"
+                        {{ $trainee->select == 'Verified' ? 'selected' : '' }}>Verified
+                    </option>
 
-        </form>
+                    </select>
+                    <button  class="btn btn-lg btn-outline-primary" type="submit"  @if($trainee->select=='Verified') disabled @endif ><i class="fa fa-paper-plane"></i></button>
+                </div>
+
+            </form>
             @endif
             </td>
             <td class="d-flex justify-center">
 
                 <a data-bs-type="edit" href="{{route('admin.roaster.trainee.edit', $trainee)}}" type="button"
-                   class="btn btn-sm btn-primary">
+                   class="btn btn-sm btn-primary {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-edit"></i>
                 </a>
 
-                <a data-bs-type="edit" href="{{route('admin.roaster.trainee.show',$trainee )}}" class="btn btn-info btn-sm">
+                <a data-bs-type="edit" href="{{route('admin.roaster.trainee.show',$trainee )}}" class="btn btn-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-eye"></i>
                 </a>
             </td>

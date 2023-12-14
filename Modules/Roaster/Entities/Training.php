@@ -30,7 +30,6 @@ class Training extends Model
         'name',
         'open_date',
         'closed_date',
-        'form_type',
         'closed_at',
         'aim',
         'description',
