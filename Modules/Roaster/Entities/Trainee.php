@@ -12,6 +12,7 @@ use App\Models\Settings\Designation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -65,6 +66,7 @@ class Trainee extends Model
         'office_email',
         'nomination_letter',
         'recommendation_letter',
+
     ];
 
     protected $casts = [
@@ -177,6 +179,11 @@ class Trainee extends Model
     public function getRecommendationLetterAttribute(): string
     {
         return asset('storage/' . $this->attributes['recommendation_letter']);
+    }
+
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Document::class, 'model');
     }
 
     public function trainingTrainee(): MorphOne

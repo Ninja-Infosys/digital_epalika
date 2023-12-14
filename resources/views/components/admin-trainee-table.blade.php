@@ -54,11 +54,12 @@
             @endif
             </td>
             <td class="d-flex justify-center">
-
+                @if($trainee->select!='Verified')
                 <a data-bs-type="edit" href="{{route('admin.roaster.trainee.edit', $trainee)}}" type="button"
                    class="btn btn-sm btn-primary {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-edit"></i>
                 </a>
+                @endif
 
                 <a data-bs-type="edit" href="{{route('admin.roaster.trainee.show',$trainee )}}" class="btn btn-info btn-sm {{get_setting('Pin')?'confirm_pin':''}}">
                     <i class="fa fa-eye"></i>

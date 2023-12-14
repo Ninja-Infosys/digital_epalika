@@ -10,6 +10,7 @@ use App\Traits\AddressHelperTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Roaster\Entities\Document;
 use Modules\Roaster\Entities\Trainee;
 
 class TraineeLivewire extends Component
@@ -52,6 +53,7 @@ class TraineeLivewire extends Component
         'office_address' => null,
         'office_phone' => null,
         'office_email' => null,
+        'documents' => [],
     ];
 
     public $trainee;
@@ -68,9 +70,18 @@ class TraineeLivewire extends Component
         $this->provinces = Province::all();
         $this->ethnicities = Ethnicity::all();
 
+
         if (!empty($trainee)) {
             foreach ($this->form as $key => $data) {
-                $this->form[$key] = $trainee[$key];
+                if ($key !== 'documents') {
+                    $this->form[$key] = $trainee[$key];
+                }
+            }
+            foreach ($trainee->documents as $document) {
+                $this->form['documents'][] = [
+                    'id' => $document->id,
+                    'title' => $document->title,
+                ];
             }
         }
     }
@@ -88,6 +99,8 @@ class TraineeLivewire extends Component
                 'form.passport' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
                 'form.nomination_letter' => ['required', 'mimes:jpg,jpeg,png,pdf'],
                 'form.recommendation_letter' => ['required', 'mimes:jpg,jpeg,png,pdf'],
+                'form.documents.*.title' => ['required_with:form.documents', 'string'],
+                'form.documents.*.document' => ['required_with:form.documents', 'file'],
             ]);
         } else {
             $this->validationRules = array_merge($this->validationRules, [
@@ -100,6 +113,8 @@ class TraineeLivewire extends Component
                 'form.passport' => ['nullable', 'mimes:pdf,jpg,jpeg,png'],
                 'form.nomination_letter' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
                 'form.recommendation_letter' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
+                'form.documents.*.title' => ['nullable', 'string'],
+                'form.documents.*.document' => ['nullable', 'file'],
             ]);
         }
 
@@ -114,13 +129,19 @@ class TraineeLivewire extends Component
 
     public function save()
     {
-        $validated = $this->validate();
+        $validated = $this->validate()['form'];
 
         DB::transaction(function () use ($validated) {
             if (!empty($this->trainee)) {
                 $trainee = $this->trainee;
-                $trainee->update($validated['form']);
-
+                $trainee->update($validated);
+                foreach ($this->form['documents'] as $document) {
+                    if (array_key_exists('id', $document)) {
+                        Document::find($document['id'])->update($document);
+                    } else {
+                        $trainee->documents()->create($document);
+                    }
+                }
                 $this->dispatchBrowserEvent('alert_message', [
                     'type' => 'success',
                     'title' => 'Thank You',
@@ -129,10 +150,14 @@ class TraineeLivewire extends Component
 
                 return redirect(route('admin.roaster.training.show', $trainee->trainingTrainee->training_id));
             } else {
-                $trainee = Trainee::create($validated['form']);
+                $trainee = Trainee::create($validated);
                 $trainee->trainingTrainee()->create([
                     'training_id' => $this->training->id,
                 ]);
+
+                foreach ($validated['documents'] as $document) {
+                    $trainee->documents()->create($document);
+                }
                 $this->reset('form');
                 $this->dispatchBrowserEvent('alert_message', [
                     'type' => 'success',
@@ -141,6 +166,38 @@ class TraineeLivewire extends Component
                 ]);
             }
         });
+    }
+
+    public function removeDocuments($index)
+    {
+        if (isset($this->form['documents'][$index])) {
+            $formDataType = $this->form['documents'][$index];
+
+            if (isset($formDataType['id'])) {
+                $formDataTypeRecord = Document::find($formDataType['id']);
+                if ($formDataTypeRecord) {
+                    $formDataTypeRecord->delete();
+                }
+            }
+            $formDataTypeCollection = collect($this->form['documents']);
+            $formDataTypeCollection->forget($index);
+
+            $this->form['documents'] = $formDataTypeCollection->values()->all();
+        }
+    }
+
+    public function documentsArrayIncrement()
+    {
+        $this->form['documents'][] = [];
+    }
+
+    public function documentsArrayDecrement($index)
+    {
+        if (array_key_exists('id', $this->form['documents'][$index])) {
+            $this->removeDocuments($index);
+        } else {
+            $this->removeDocuments($index);
+        }
     }
 
     protected $validationRules = [
@@ -165,6 +222,7 @@ class TraineeLivewire extends Component
         'form.office_address' => ['required_if:form.is_employee,==,1', 'string', 'max:255'],
         'form.office_phone' => ['required_if:form.is_employee,==,1'],
         'form.office_email' => ['required_if:form.is_employee,==,1', 'email'],
+        'form.documents' => ['nullable', 'array'],
     ];
 
     protected $messages = [
@@ -198,6 +256,17 @@ class TraineeLivewire extends Component
     public function render()
     {
         $this->getDependentAddressData();
+        if ($this->form['is_employee'] == 0) {
+            $this->form['designation_id'] = null;
+            $this->form['department_id'] = null;
+            $this->form['service_time'] = null;
+            $this->form['office_name'] = null;
+            $this->form['office_address'] = null;
+            $this->form['office_phone'] = null;
+            $this->form['office_email'] = null;
+            $this->form['nomination_letter'] = null;
+            $this->form['recommendation_letter'] = null;
+        }
 
         return view('roaster::livewire.trainee-livewire');
     }
