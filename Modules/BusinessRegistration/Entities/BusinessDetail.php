@@ -7,6 +7,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
+use App\Models\User;
 use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -72,7 +73,8 @@ class BusinessDetail extends Model
         'bill_date_ad',
         'taxpayer_number',
         'amount',
-        'other_file'
+        'other_file',
+        'mobile_user_id'
     ];
 
     protected $dates = [
@@ -266,5 +268,10 @@ class BusinessDetail extends Model
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
+    }
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
     }
 }
