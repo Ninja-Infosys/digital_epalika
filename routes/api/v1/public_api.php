@@ -13,7 +13,5 @@ Route::get('setting', [PublicApiController::class, 'setting'])->name('public-api
 Route::get('introduction', [PublicApiController::class, 'introduction'])->name('public-api.introduction');
 Route::get('emergencyCategory', [PublicApiController::class, 'emergencyCategory'])->name('public-api.emergencyCategory');
 Route::post('mobile/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:mobile-user');
 Route::post('/forgot-password', [PublicApiController::class, 'forgotPassword']);
 Route::post('mobile/signup', [AuthController::class, 'signup']);
-Route::patch('mobile/update', [AuthController::class, 'updateProfile'])->middleware('auth:mobile-user');

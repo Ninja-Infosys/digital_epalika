@@ -61,35 +61,5 @@ class AuthController extends Controller
     }
 
 
-    public function updateProfile(UpdateUserProfileRequest $request)
-    {
-        $request->auth('mobile-user')->user()->update($request->validated());
-
-        return response()->json([
-            'data' => "",
-            'message' => "Profile Updated Successfully"
-        ]);
-    }
-
-    public function logout(Request $request)
-    {
-        $superAdmin = MobileUser::where('email', $request->input('email'))->first();
-        if ($superAdmin && Hash::check($request->input('password'), $superAdmin->password)) {
-            Auth::guard('mobile-user')->setUser($superAdmin);
-            $request = auth('mobile-user')->user()->currentAccessToken()->delete();
-            return response()->json([
-                'data' => "",
-                'message' => "Logged Out Successfully"
-            ]);
-        } else {
-            return response()->json([
-                'message' => "Invalid Credentials",
-                'errors' => [
-                    'password' => [
-                        'Invalid Credentials'
-                    ]
-                ]
-            ], 422);
-        }
-    }
+   
 }
