@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MobileUser\UpdateUserProfileRequest;
+
+use App\Http\Resources\Api\Mobile\ProfileResource;
 use App\Models\MobileUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,6 +61,34 @@ class AuthController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        $superAdmin = MobileUser::where('email', $request->input('email'))->first();
+        if ($superAdmin && Hash::check($request->input('password'), $superAdmin->password)) {
+            Auth::guard('mobile-user')->setUser($superAdmin);
+            $request = auth('mobile-user')->user()->currentAccessToken()->delete();
+            return response()->json([
+                'data' => "",
+                'message' => "Logged Out Successfully"
+            ]);
+        } else {
+            return response()->json([
+                'message' => "Invalid Credentials",
+                'errors' => [
+                    'password' => [
+                        'Invalid Credentials'
+                    ]
+                ]
+            ], 422);
+        }
 
-   
+
+    }
+
+    public function profile()
+    {
+        return response()->json([
+            'user' => ProfileResource::make(auth()->user())
+        ]);
+    }
 }

@@ -47,6 +47,11 @@
                     <span>विषय</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/roaster/setting/roasterSetting') ? 'active' : ''}}">
+                <a href="{{route('admin.roaster.setting.roasterSetting.index')}}">
+                    <span>सेटिङ </span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

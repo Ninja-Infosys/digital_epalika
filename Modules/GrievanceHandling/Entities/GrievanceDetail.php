@@ -3,6 +3,7 @@
 namespace Modules\GrievanceHandling\Entities;
 
 use App\Models\File;
+use App\Models\MobileUser;
 use App\Models\Settings\Branch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,7 +46,8 @@ class GrievanceDetail extends Model
         'is_approved',
         'is_public',
         'grievance_medium',
-        'is_anonymous'
+        'is_anonymous',
+        'mobile_user_id'
     ];
 
     protected $casts = [
@@ -53,6 +55,7 @@ class GrievanceDetail extends Model
         'status' => GrievanceStatus::class,
         'grievance_medium' => GrievanceMediumEnum::class
     ];
+
     public function scopeAnonymous($query)
     {
         return $query->where('is_anonymous', 1);
@@ -88,6 +91,11 @@ class GrievanceDetail extends Model
         return $this->belongsTo(__CLASS__);
     }
 
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
+    }
+
     public function grievanceDetails(): HasMany
     {
         return $this->hasMany(__CLASS__);
@@ -109,7 +117,6 @@ class GrievanceDetail extends Model
     }
 
 
-
     public function publisher()
     {
         return $this->belongsTo(User::class, 'publisher_id');
@@ -129,6 +136,7 @@ class GrievanceDetail extends Model
     {
         return $this->hasMany(GrievanceAssignHistory::class);
     }
+
     public function branch(): BelongsTo
     {
         return $this->belongsTo(Branch::class);

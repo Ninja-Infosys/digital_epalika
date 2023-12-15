@@ -29,4 +29,18 @@ enum TypeOfConstructionWorkEnum: string
             self::ROOFING => 'घरको छाना फेर्ने',
         };
     }
+
+    public static function getValuesWithLabels(): array
+    {
+        $valuesWithLabels = [];
+
+        foreach (self::cases() as $value) {
+            $valuesWithLabels[] = [
+                'value' => $value,
+                'label' => $value->label(),
+            ];
+        }
+
+        return $valuesWithLabels;
+    }
 }

@@ -42,31 +42,35 @@
                         छनोट नभयका
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#tab-type3" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                        प्रमाणित भएका
+                    </a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane show active" id="tab-all">
-                    @if($training->form_type== \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <x-technical-trainee-table :trainees="$trainees"/>
-                    @else
+
                         <x-trainee-table :trainees="$trainees"/>
-                    @endif
+
                 </div>
 
                 <div class="tab-pane" id="tab-type1">
-                    @if($training->form_type === \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <x-technical-trainee-table :trainees="$trainees->where('select','Selected')"/>
-                    @else
+
                         <x-trainee-table :trainees="$trainees->where('select','Selected')"/>
-                    @endif
+
                 </div>
 
                 <div class="tab-pane" id="tab-type2">
-                    @if($training->form_type=== \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <x-technical-trainee-table :trainees="$trainees->where('select',null)"/>
-                    @else
+
                         <x-trainee-table :trainees="$trainees->where('select',null)"/>
-                    @endif
+
                 </div>
+                <div class="tab-pane" id="tab-type3">
+
+                    <x-trainee-table :trainees="$trainees->where('select','Verified')"/>
+
+            </div>
 
             </div>
 

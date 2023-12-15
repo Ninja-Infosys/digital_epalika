@@ -22,7 +22,6 @@ class StoreTrainingRequest extends FormRequest
             'trainee_closed_date' => ['required'],
             'organization_open_date' => ['required'],
             'organization_closed_date' => ['required'],
-            'form_type' => ['required'],
             'trainers' => ['nullable', 'array'],
             'trainers.*' => [Rule::exists('trainers', 'id')],
         ];

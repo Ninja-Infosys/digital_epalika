@@ -36,7 +36,7 @@ class FrontendController extends Controller
 
     public function individualTrainingView($trainingType)
     {
-        $trainings = Training::with('trainers')->where('form_type', $trainingType)->whereNull('closed_at')
+        $trainings = Training::with('trainers')->whereNull('closed_at')
             ->get()->filter(function ($data) {
                 return $data->form_status_according_to_trainee_date === true;
             });

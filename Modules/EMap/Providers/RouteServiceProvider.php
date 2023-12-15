@@ -44,5 +44,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('api')
             ->prefix('ebps/api/v1')
             ->group(module_path('EMap', '/Routes/api/publicRoute.php'));
+        Route::middleware(['api', 'auth:sanctum'])
+            ->prefix('ebps/api/v1/user')
+            ->group(module_path('EMap', '/Routes/api/privateRoute.php'));
     }
 }
