@@ -51,24 +51,24 @@
             <div class="tab-content">
                 <div class="tab-pane show active" id="tab-all">
 
-                        <x-trainee-table :trainees="$trainees"/>
+                        <x-trainee-table :trainees="$trainees" :training="$training"/>
 
                 </div>
 
                 <div class="tab-pane" id="tab-type1">
 
-                        <x-trainee-table :trainees="$trainees->where('select','Selected')"/>
+                        <x-trainee-table :trainees="$trainees->where('select','Selected')" :training="$training"/>
 
                 </div>
 
                 <div class="tab-pane" id="tab-type2">
 
-                        <x-trainee-table :trainees="$trainees->where('select',null)"/>
+                        <x-trainee-table :trainees="$trainees->where('select',null)" :training="$training"/>
 
                 </div>
                 <div class="tab-pane" id="tab-type3">
 
-                    <x-trainee-table :trainees="$trainees->where('select','Verified')"/>
+                    <x-trainee-table :trainees="$trainees->where('select','Verified')" :training="$training"/>
 
             </div>
 
