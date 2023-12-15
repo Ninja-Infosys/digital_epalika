@@ -326,6 +326,73 @@
                 </div>
             </div>
         </fieldset>
+        <fieldset class="border p-2 mt-2">
+            <legend class="float-none w-auto">४. अन्य कागजातहरु</legend>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>क्र.सं.</th>
+                        <th>कागजातको नाम</th>
+                        <th>फाइल</th>
+                        <th>  <button class="btn btn-primary btn-sm" wire:click.prevent="documentsArrayIncrement">
+                                <i class="fa fa-plus-square"></i>
+                            </button></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($form['documents']  ?? [] as $index=>$document)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>
+                                <input type="text"
+                                       wire:model="form.documents.{{$index}}.title"
+                                       class="form-control @error('form.documents.'.$index.'.title') is-invalid @enderror"
+                                       placeholder="कागजातको नाम" >
+                                @error('form.documents.'.$index.'.title')
+                                <span class=" text-danger">
+                                    {{ $message}}
+                                </span>
+                                @enderror
+                            </td>
+                            <td>
+                                <input type="file"
+                                       class="form-control @error('form.documents.'.$index.'.document') is-invalid @enderror"
+                                       wire:model="form.documents.{{$index}}.document" >
+                                @error('form.documents.'.$index.'.document')
+                                <span class=" text-danger">
+                                    {{ $message}}
+                                </span>
+                                @enderror
+                            </td>
+                            <td>
+
+                                <button class="btn btn-danger btn-sm" wire:click.prevent="documentsArrayDecrement({{$index}})">
+                                    <i class="fa fa-minus-square"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr class="text-center">
+                            <td colspan="8">
+                                रो थप्नको लागि
+
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="documentsArrayIncrement">
+                                    <i class="fa fa-plus-square"></i>
+                                </button>
+                                थिच्नुहोस
+                            </td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+                @error('form.documents')
+                <span class="text-danger">
+                {{$message}}
+            </span>
+                @enderror
+            </div>
+        </fieldset>
         @if(empty($trainee))
             <div class="col-md-6 mt-3">
                 <div class="alert alert-info" role="alert">
