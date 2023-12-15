@@ -8,6 +8,9 @@ Route::prefix('traineeUser')->as('traineeUser.')->group(function () {
     Route::get('login', [TraineeUserAuthController::class, 'showLoginForm'])->name('login.form');
     Route::post('login', [TraineeUserAuthController::class, 'Login'])->name('login');
     Route::post('logout', [TraineeUserAuthController::class, 'logout'])->name('logout');
+    Route::get('{traineeUser}/invitation', [TraineeUserAuthController::class, 'invitation'])->name('invitation');
+    Route::get('password/create', [TraineeUserAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
+    Route::post('password/store', [TraineeUserAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
 });
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 

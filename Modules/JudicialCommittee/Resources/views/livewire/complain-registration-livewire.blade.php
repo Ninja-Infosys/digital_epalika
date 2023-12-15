@@ -341,23 +341,7 @@
                     <h4 class="text-info">उजुरी विवरण</h4>
                 </legend>
                 <div class="row pb-2">
-                    <div class="col-md-3 mb-2">
-                        <label for="lawsuit_nature_id" class="form-label">मुद्दा प्रकृति<span
-                                class="text-danger">*</span></label>
-                        <select wire:model="form.lawsuit_nature_id" class="form-select" id="lawsuit_nature_id"
-                            required>
-                            <option value="">--छान्नुहोस्--</option>
-                            @foreach ($lawsuitNatures as $lawsuitNature)
-                                <option value="{{ $lawsuitNature->id }}"
-                                    {{ $lawsuitNature->id == old('lawsuit_nature_id') ? 'selected' : '' }}>
-                                    {{ $lawsuitNature->title }} ({{ $lawsuitNature->code }})
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('form.lawsuit_nature_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     <div class="col-md-6 mb-2">
                         <label for="complaint_subject_id" class="form-label">विषय<span
                                 class="text-danger">*</span></label>
@@ -469,92 +453,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-12 mb-2">
-                        <label for="complaint_detail" class="form-label">सम्बन्धित सदस्यहरू</label>
-                        <div class="table-responsive">
-                            <table class="table table-sm mb-0 table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>क्र.स.</th>
-                                        <th>नाम</th>
-                                        <th>फोन</th>
-                                        <th>इमेल</th>
-                                        <th>पद</th>
-                                        <th>ठेगाना</th>
-                                        <th>
-                                            <button type="button" wire:click="addRelatedMembers"
-                                                class="btn btn-xs btn-outline-primary" title="नयाँ सदस्य थप्नुहोस्">
-                                                <i class="fa fa-plus-circle"></i>
-                                            </button>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($form['relatedMembers'] as $key=>$member)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <input type="text"
-                                                    wire:model="form.relatedMembers.{{ $key }}.name"
-                                                    class="form-control form-control-sm" placeholder="नाम" required />
-                                                @error("form.relatedMembers.$key.name")
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <input type="text"
-                                                    wire:model="form.relatedMembers.{{ $key }}.phone"
-                                                    class="form-control form-control-sm" placeholder="फोन" required />
-                                                @error("form.relatedMembers.$key.phone")
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <input type="text"
-                                                    wire:model="form.relatedMembers.{{ $key }}.email"
-                                                    class="form-control form-control-sm" placeholder="इमेल" />
-                                                @error("form.relatedMembers.$key.email")
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <input type="text"
-                                                    wire:model="form.relatedMembers.{{ $key }}.designation"
-                                                    class="form-control form-control-sm" placeholder="पद" required />
-                                                @error("form.relatedMembers.$key.designation")
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <input type="text"
-                                                    wire:model="form.relatedMembers.{{ $key }}.address"
-                                                    class="form-control form-control-sm" placeholder="ठेगाना" />
-                                                @error("form.relatedMembers.$key.address")
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <button type="button"
-                                                    wire:click="removeRelatedMember({{ $key }})"
-                                                    class="btn btn-xs btn-outline-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td class="text-center" colspan="7">
-                                                विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                            @error('form.relatedMembers')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+
                     <div class="col-md-12 mb-2">
                         <label for="supported_documents" class="form-label">सम्बन्धित कागजातहरू</label>
                         <div class="table-responsive">
@@ -611,9 +510,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                            @error('form.relatedMembers')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                     </div>
                 </div>
@@ -646,7 +543,7 @@
                 }
             });
 
-            @if (!$complaintApplication)
+            @if (!$compliantRegistration)
                 let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(),
                     "YYYY-MM-DD")
                 let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(),

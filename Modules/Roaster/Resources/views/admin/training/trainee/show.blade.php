@@ -31,6 +31,57 @@
                                 {{$trainee->full_name}}
                             </td>
                         </tr>
+
+                        @if($trainee->is_employee==1)
+                        <tr>
+                            <th>सेवा समुह </th>
+                            <td>
+                                {{$trainee->department->title??''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>पद</th>
+                            <td>
+                                {{$trainee->designation->title??''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>सेवा अवधि</th>
+                            <td>
+                                {{$trainee->service_time}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>कार्यालयको
+                                नाम</th>
+                            <td>
+                                {{$trainee->office_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> कार्यालयको
+                                ठेगाना</th>
+                            <td>
+                                {{$trainee->office_address}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                कार्यालयको
+                                फोन नम्बर</th>
+                            <td>
+                                {{$trainee->office_phone}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                कार्यालयको इमेल</th>
+                            <td>
+                                {{$trainee->office_email}}
+                            </td>
+                        </tr>
+
+                        @endif
                         <tr>
                             <th>प्रशिक्षार्थी आइडी</th>
                             <td>
@@ -181,6 +232,62 @@
                                 </div>
                             </div>
                         </div>
+                        @if($trainee->is_employee==1)
+                        <div class="col-md-6 mt-2">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h6>मनोनयन पत्र</h6>
+                                    <div class="header-button">
+                                        <a href="{{$trainee->nomination_letter}}" download="{{$trainee->nomination_letter}}"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img class="file"
+                                         src="{{$trainee->nomination_letter}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h6>सिफारिस </h6>
+                                    <div class="header-button">
+                                        <a href="{{$trainee->recommendation_letter}}" download="{{$trainee->recommendation_letter}}"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img class="file"
+                                         src="{{$trainee->recommendation_letter}}">
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        @foreach ($trainee->documents as $document)
+                        <div class="col-md-6 mt-2">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h6>{{ $document->title }} </h6>
+                                    <div class="header-button">
+                                        <a href="{{$document->document_url}}" download="{{$document->document_url}}"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img class="file"
+                                         src="{{$document->document_url}}">
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

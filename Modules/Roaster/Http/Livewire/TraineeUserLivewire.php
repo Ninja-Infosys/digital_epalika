@@ -126,10 +126,7 @@ class TraineeUserLivewire extends Component
     {
         $this->validate();
         DB::transaction(function () {
-            $DbUser = TraineeUser::create($this->user + [
-                'is_active' => 1,
-                'password' => 'password'
-            ]);
+            $DbUser = TraineeUser::create($this->user);
             $DbOrgDetail = $DbUser->traineeUserDetail()->create($this->organizationDetail);
             $DbOrgDetail->traineeTaxClearances()->create($this->taxClearance);
 

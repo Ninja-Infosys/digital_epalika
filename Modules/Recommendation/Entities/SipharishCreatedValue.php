@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SipharishCreatedValue extends Model
 {
@@ -25,16 +26,30 @@ class SipharishCreatedValue extends Model
         'sipharish_create_id',
         'sipharish_form_field_id',
         'value',
-        'status'
+        'status',
+        'type'
     ];
 
     public function SipharishCreate(): BelongsTo
     {
-        return $this->belongsTo(SipharishCreate::class,'sipharish_create_id');
+        return $this->belongsTo(SipharishCreate::class, 'sipharish_create_id');
     }
 
     public function SipharisFormField(): BelongsTo
     {
-        return $this->belongsTo(SipharisFormField::class,'sipharish_form_field_id');
+        return $this->belongsTo(SipharisFormField::class, 'sipharish_form_field_id');
+    }
+
+    public function getValueDataAttribute(): string
+    {
+        if (!empty($this->attributes['value'])) {
+            if ($this->attributes['type'] == 'image') {
+                return "<img src='" . Storage::disk('public')->url($this->attributes['value']) . "'  style='width: 150px;height: 150px;object-fit: contain;' />";
+            } else {
+                return $this->attributes['value'];
+            }
+        } else {
+            return '';
+        }
     }
 }

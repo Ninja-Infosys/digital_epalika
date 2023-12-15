@@ -7,6 +7,7 @@ use App\Http\Resources\Api\v1\EmergencyCategoryResource;
 use App\Http\Resources\Api\v1\LinkResource;
 use App\Http\Resources\Api\v1\SettingResource;
 use App\Http\Resources\Api\v1\SliderResource;
+use App\Models\OfficeHeader;
 use App\Models\Settings\EmergencyCategory;
 use App\Models\Settings\Employee;
 use App\Models\Settings\OfficeSetting;
@@ -27,6 +28,11 @@ use Nwidart\Modules\Facades\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Modules\DigitalBoard\Entities\Audio;
+use Modules\DigitalBoard\Entities\PhotoGallery;
+use Modules\DigitalBoard\Transformers\AudioResource;
+use Modules\DigitalBoard\Transformers\OfficeHeaderResource;
+use Modules\DigitalBoard\Transformers\PhotoGalleryResource;
 use Nette\Utils\Json;
 
 class PublicApiController extends Controller
@@ -49,11 +55,15 @@ class PublicApiController extends Controller
         return array_merge($this->getDataFromMainModule(), $this->checkModuleData(), $this->getAllModulesData());
     }
 
-    public function setting(): SettingResource
+    public function setting()
     {
         $officeSetting = $this->getOfficeSetting();
+        $officeHeader = $this->getOfficeHeader();
 
-        return SettingResource::make($officeSetting);
+        return [
+            'setting' => new SettingResource($officeSetting),
+            'header' => new OfficeHeaderResource($officeHeader),
+        ];
     }
 
     public function slider(): AnonymousResourceCollection
@@ -85,7 +95,11 @@ class PublicApiController extends Controller
 
     public function getOfficeSetting(): OfficeSetting
     {
-        return OfficeSetting::latest()->firstOrFail();
+        return OfficeSetting::with('localBody')->first();
+    }
+    public function getOfficeHeader(): OfficeHeader
+    {
+        return OfficeHeader::latest()->firstOrFail();
     }
 
     public function checkModuleData(): array
@@ -100,13 +114,16 @@ class PublicApiController extends Controller
     {
         if ($modules->has('DigitalBoard')) {
             return [
-                'employees' => EmployeeResource::collection(Employee::orderBy('position')->active()->showForMobileAppRequest()->get()),
+                'employees' => EmployeeResource::collection(Employee::orderBy('position')->employee()->active()->showForMobileAppRequest()->get()),
+                'representatives' => EmployeeResource::collection(Employee::orderBy('position')->peopleRepresentative()->active()->showForMobileAppRequest()->get()),
                 'news' => NewsResource::collection(Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'notices' => NoticeResource::collection(Notice::with('files')->orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'emergencyCategories' => EmergencyCategoryResource::collection(EmergencyCategory::get()),
                 'latestNews' => NewsResource::collection(Notice::with('files')->news()->latest()->get()),
                 'popups' => PopUpNoticeResource::collection(PopUpNotice::with('files')->latest()->get()),
-                'video' => VideoResource::collection(Video::latest()->get())
+                'video' => VideoResource::collection(Video::latest()->get()),
+                'audio' => AudioResource::collection(Audio::latest()->get()),
+                'photoGallery' => PhotoGalleryResource::collection(PhotoGallery::latest()->get())
             ];
         }
         return [
@@ -117,6 +134,8 @@ class PublicApiController extends Controller
             'latestNews' => [],
             'popups' => [],
             'video' => [],
+            'audio' => [],
+            'photoGallery' => [],
         ];
     }
 
@@ -129,7 +148,6 @@ class PublicApiController extends Controller
             'sliders' => $this->slider(),
         ];
     }
-
 
 
     public function getAllModulesData(): array
@@ -167,6 +185,52 @@ class PublicApiController extends Controller
 //                    'url' => route('roaster.index')
 //                ],
 //            ]
+        ];
+    }
+
+    public function getGovtServices(): array
+    {
+        return [
+            [
+                'name' => 'जिन्सी व्यवस्थापन प्रणाली',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://pams.fcgo.gov.np/',
+            ],
+            [
+                'name' => 'संचितकोष व्यवस्थापन प्रणाली',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://sutra.fcgo.gov.np/',
+            ],
+            [
+                'name' => 'घटना दर्ता र सामाजिक सुरक्षा प्रणाली',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://public.donidcr.gov.np/',
+            ],
+            [
+                'name' => 'सामाजिक सुरक्षा',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://ss.donidcr.gov.np/',
+            ],
+            [
+                'name' => 'इमेल सेवा',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://mail.nepal.gov.np/',
+            ],
+            [
+                'name' => 'कार्यालयको हाजिरी',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://attendance.gov.np/',
+            ],
+            [
+                'name' => 'एस.एम.एस',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://sms.aakashsms.com/login',
+            ],
+            [
+                'name' => 'Voice एस.एम.एस',
+                'logo' => asset('assets/frontend/image/logo.png'),
+                'url' => 'https://apps.aakashtel.com/login',
+            ],
         ];
     }
 }

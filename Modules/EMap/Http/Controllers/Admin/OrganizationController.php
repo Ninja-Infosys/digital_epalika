@@ -19,14 +19,14 @@ class OrganizationController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('organization_access');
-        $organizations = Organization::with('organizationDetail.province','organizationDetail.district')
-            ->withCount(['mapApplies as registeredMap'=>function($q){
+        $organizations = Organization::with('organizationDetail.province', 'organizationDetail.district')
+            ->withCount(['mapApplies as registeredMap' => function ($q) {
                 $q->whereNotNull('registration_no');
             }])->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['email', 'phone', 'name'], request('search'));
-            }
-        })
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['email', 'phone', 'name'], request('search'));
+                }
+            })
             ->latest()->paginate(10);
 
 
@@ -57,14 +57,15 @@ class OrganizationController extends Controller
     public function show(Organization $organization)
     {
         $this->checkAuthorization('organization_access');
-        $organization->load(['userDetail.citizenshipIssuedDistrict',
+        $organization->load([
+            'userDetail.citizenshipIssuedDistrict',
             'userDetail.permanentLocalBody',
             'userDetail.permanentDistrict',
             'userDetail.permanentProvince',
             'userDetail.temporaryLocalBody',
             'userDetail.temporaryDistrict',
             'userDetail.temporaryProvince',
-            'mapApplies'=>function($q){
+            'mapApplies' => function ($q) {
                 $q->whereNotNull('sent_to_admin_at');
             },
             'mapApplies.fiscalYear',

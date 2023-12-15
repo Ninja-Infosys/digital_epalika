@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('admin/get-auth-token', [PublicApiController::class, 'getToken'])->name('get-token');
 Route::get('/', [PublicApiController::class, 'index'])->name('public-api.index');
+Route::get('govt-services', [PublicApiController::class, 'getGovtServices'])->name('get-govt-services');
 Route::get('slider', [PublicApiController::class, 'slider'])->name('public-api.slider');
 Route::get('importantLink', [PublicApiController::class, 'importantLink'])->name('public-api.important-link');
 Route::get('setting', [PublicApiController::class, 'setting'])->name('public-api.setting');
@@ -15,3 +16,4 @@ Route::post('mobile/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:mobile-user');
 Route::post('/forgot-password', [PublicApiController::class, 'forgotPassword']);
 Route::post('mobile/signup', [AuthController::class, 'signup']);
+// Route::patch('mobile/update', [AuthController::class, 'updateUserProfile'])->name('updateUser');

@@ -125,15 +125,75 @@
                             <div class="row border-bottom mb-2">
                                 <input type="hidden" name="fields[{{$key}}][sipharish_form_field_id]"
                                        class="form-control" value="{{$field->id}}" id="sipharish_form_field_id"/>
-
+                                <input type="hidden" name="fields[{{$key}}][type]"
+                                       class="form-control" value="{{$field->type->value}}" id="type"/>
 
                                 <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">{{$field->field_name}}</label>
-                                    <input type="text" name="fields[{{$key}}][value]" class="form-control" id="title"
-                                           placeholder="शिर्षक" required/>
+                                    @if($field->type != \App\Enums\FormFieldEnum::TABLE)
+                                        <input type="{{$field->type?->resolveType() ?? 'text'}}"
+                                               name="fields[{{$key}}][value]" class="form-control"
+                                               id="title"
+                                               placeholder="शिर्षक" required/>
+                                        <input type="hidden"
+                                               name="fields[{{$key}}][type]" class="form-control"
+                                               value="{{$field->type?->value}}"
+                                               id="type"
+                                               placeholder="शिर्षक" required/>
+                                    @else
+                                        <input type="hidden"
+                                               name="fields[{{$key}}][value]" class="form-control"
+                                               value="{{json_encode($data[$field->slug] ?? [])}}"
+                                               id="title"
+                                               placeholder="शिर्षक" required/>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                @foreach($field->SipharishFormFields as $sipharishFormField)
+                                                    <th>{{$sipharishFormField->field_name}}</th>
+                                                @endforeach
+                                                <th>
+                                                    <button type="button"
+                                                            wire:click.prevent="addRowInTable('{{$field->slug}}')"
+                                                            class="btn btn-sm btn-outline-primary">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($data[$field->slug] ?? [] as $index=>$tableData)
+                                                <tr>
+                                                    @foreach($field->SipharishFormFields as $sipharishFormField)
+                                                        <td>
+                                                            <input
+                                                                type="{{$sipharishFormField->type?->resolveType() ?? 'text'}}"
+                                                                class="form-control"
+                                                                wire:model="data.{{$field->slug}}.{{$index}}.{{$sipharishFormField->slug}}.data"
+                                                                id="title"
+                                                                placeholder="{{$sipharishFormField->field_name}}"
+                                                                required
+                                                                wire:change="setType('{{$field->slug}}',{{$index}},'{{$sipharishFormField->slug}}','{{$sipharishFormField->type?->value}}')"/>
+                                                            @if(empty($data[$field->slug][$index][$sipharishFormField->slug]['value']))
+                                                                <span class="text-danger">Data Not Stored</span>
+                                                            @endif
+                                                        </td>
+                                                    @endforeach
+                                                    <th>
+                                                        <button type="button"
+                                                                wire:click.prevent="removeRowInTable('{{$field->slug}}',{{$index}})"
+                                                                class="btn btn-sm btn-outline-danger">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    @endif
                                 </div>
                             </div>
-
                         </div>
                     @endforeach
                 </div>

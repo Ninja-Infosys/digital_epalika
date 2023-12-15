@@ -18,7 +18,7 @@ class ActivityEventListener
                 'model_type' => $event->model ?? null,
                 'model_id' => $event->model_id ?? null,
                 'activity_type' => $event->activity_type,
-                'user_id' => auth()->id() ?? null,
+                'user_id' => auth('web')->id() ?? null,
                 'ip' => request()->ip(),
                 'agent' => request()->userAgent(),
             ]);

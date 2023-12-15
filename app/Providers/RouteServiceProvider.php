@@ -33,6 +33,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            Route::middleware(['api', 'auth:sanctum'])
+                ->prefix('api/v1')
+                ->group(base_path('routes/api/v1/private_api.php'));
+
             Route::middleware('api')
                 ->prefix('api/v1')
                 ->group(base_path('routes/api/v1/public_api.php'));
@@ -50,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::prefix('installer')
                 ->as('installer.')
-                ->middleware(['web','installerMiddleware'])
+                ->middleware(['web', 'installerMiddleware'])
                 ->namespace($this->namespace)
                 ->group(base_path('routes/installer.php'));
         });

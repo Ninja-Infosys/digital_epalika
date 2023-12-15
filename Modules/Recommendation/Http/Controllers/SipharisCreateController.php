@@ -3,17 +3,17 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Illuminate\Support\Facades\DB;
 
 class SipharisCreateController extends Controller
 {
-
     public function index()
     {
         $this->checkAuthorization('recommendationCategory_access');
-        $sipharishCreates = SipharishCreate::with('SipharishFormType','personalDetail')->latest()->get();
+        $sipharishCreates = SipharishCreate::with('SipharishFormType', 'personalDetail')->latest()->get();
         return view('recommendation::admin.sipharisCreate.index', compact('sipharishCreates'));
     }
 
@@ -24,8 +24,9 @@ class SipharisCreateController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-//        dd($request->validated());
+        //        dd($request->validated());
         $sipharis = DB::transaction(function () use ($request) {
+
             $sipharis = SipharishCreate::create($request->validated() + [
                     'created_by' => auth()->id()
                 ]);
@@ -34,7 +35,19 @@ class SipharisCreateController extends Controller
                 && !empty($request->validated()['fields'])) {
 
                 foreach ($request->validated()['fields'] as $field) {
-                    $sipharis->SipharishCreatedValues()->create($field);
+
+                    if (!empty($field['type']) && $field['type'] == 'image') {
+                        $value = Storage::disk('public')
+                            ->putFile('recommendation/files', $field['value']);
+                    } else {
+                        $value = $field['value'];
+                    }
+                    $sipharis->SipharishCreatedValues()
+                        ->create([
+                            'sipharish_form_field_id' => $field['sipharish_form_field_id'] ?? '',
+                            'value' => $value ?? '',
+                            'type' => $field['type'] ?? '',
+                        ]);
                 }
 
             }
@@ -67,7 +80,7 @@ class SipharisCreateController extends Controller
     public function show(SipharishCreate $sipharishCreate)
     {
 
-        $sipharishCreate->load('SipharishCreatedValues.SipharisFormField','SipharisCreatedDocuments');
+        $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
         return view('recommendation::admin.sipharisCreate.view', compact('sipharishCreate'));
 
     }

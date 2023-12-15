@@ -70,7 +70,7 @@
                                     <td>{{$businessRenew->penalty_amount}}</td>
                                     <td>{{$businessRenew->payment_receipt}}</td>
                                     <td>{{$businessRenew->payment_receipt_date}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         @can('businessRenew_edit')
                                             <a data-bs-type="edit"
                                                href="{{route('admin.businessRegistration.businessRegistration.businessRenew.edit',[$businessDetail,$businessRenew])}}"

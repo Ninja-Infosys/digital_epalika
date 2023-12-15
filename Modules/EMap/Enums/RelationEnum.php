@@ -25,4 +25,18 @@ enum RelationEnum: string
             self::WORK_ONLY => 'कामको मात्र',
         };
     }
+
+    public static function getValuesWithLabels(): array
+    {
+        $valuesWithLabels = [];
+
+        foreach (self::cases() as $value) {
+            $valuesWithLabels[] = [
+                'value' => $value,
+                'label' => $value->label(),
+            ];
+        }
+
+        return $valuesWithLabels;
+    }
 }

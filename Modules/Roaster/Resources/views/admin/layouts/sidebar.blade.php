@@ -4,6 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li class="{{ request()->is('admin/roaster/organization') ? 'active' : '' }}">
+    <a href="{{ route('admin.roaster.organization.index') }}">
+        <i class="fa fa-building"></i>
+        <span>दर्ता भएका संगठनहरु</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/roaster/trainer/*') ? 'active' : ''}}">
     <a href="{{route('admin.roaster.trainer.index')}}">
         <i class="fa fa-users"></i>
@@ -39,6 +45,11 @@
             <li class="{{request()->is('admin/roaster/setting/subject') ? 'active' : ''}}">
                 <a href="{{route('admin.roaster.setting.subject.index')}}">
                     <span>विषय</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/roaster/setting/roasterSetting') ? 'active' : ''}}">
+                <a href="{{route('admin.roaster.setting.roasterSetting.index')}}">
+                    <span>सेटिङ </span>
                 </a>
             </li>
         </ul>

@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 use  Modules\Recommendation\Entities\SipharisCategory;
-use  Modules\Recommendation\Entities\SipharisFormField;
 use  Modules\Recommendation\Entities\SipharisSubCategory;
 use  Modules\Recommendation\Entities\SipharishFormType;
 use  Modules\Recommendation\Entities\PersonalDetail;
-use Log;
 use Livewire\Component;
 
 class Field extends Component
 {
+    use WithFileUploads;
 
     public string|int|null $personal_detail_id = null;
     public string|int|null $sipharis_category_id = null;
@@ -24,6 +25,8 @@ class Field extends Component
     public $sipharishSubCategories = [];
 
     public $formTypes = [];
+
+    public $data = [];
 
     public function mount($categorySubCategory = null): void
     {
@@ -48,6 +51,39 @@ class Field extends Component
         $this->personalDetails = PersonalDetail::all();
     }
 
+    public function addRowInTable($index): void
+    {
+        $this->data[$index][] = [];
+    }
+
+    public function removeRowInTable($index, $childIndex): void
+    {
+        if (isset($this->data[$index][$childIndex])) {
+            $formDataTypeCollection = collect($this->data[$index]);
+            $formDataTypeCollection->forget($childIndex);
+            $this->data[$index] = $formDataTypeCollection->values()->all();
+        }
+    }
+
+    public function setType($index, $childIndex, $childSlug, $value): void
+    {
+        $this->data[$index][$childIndex][$childSlug]['type'] = $value;
+        if (!empty($this->data[$index][$childIndex][$childSlug]['data'])) {
+            if ($value == 'image') {
+                $recommendationFile = Storage::disk('public')
+                    ->putFile('recommendation/files', $this->data[$index][$childIndex][$childSlug]['data']);
+                $this->data[$index][$childIndex][$childSlug]['value'] = $recommendationFile;
+            } else {
+                $this->data[$index][$childIndex][$childSlug]['value'] = $this->data[$index][$childIndex][$childSlug]['data'];
+            }
+        }
+    }
+    public function setParentType($index, $childIndex, $childSlug, $value): void
+    {
+        $this->data[$index]['type'] = $value;
+
+    }
+
     public function render()
     {
         if (!empty($this->sipharis_category_id)) {
@@ -60,7 +96,7 @@ class Field extends Component
         }
 
         if (!empty($this->sipharis_form_type_id)) {
-            $this->fields = SipharishFormType::with('sipharisFormFields')
+            $this->fields = SipharishFormType::with('sipharisFormFields.SipharishFormFields')
                 ->find($this->sipharis_form_type_id)
                 ?->sipharisFormFields;
         }

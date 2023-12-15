@@ -38,6 +38,10 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->group(module_path('BusinessRegistration', '/Routes/api.php'));
 
+        Route::prefix('api/v1/businessRegistration')
+            ->middleware('api')
+            ->group(module_path('BusinessRegistration', '/Routes/v1/public_api.php'));
+
         Route::middleware(['api',
 //            'auth:api',
 //            'checkRoleMiddleware'
