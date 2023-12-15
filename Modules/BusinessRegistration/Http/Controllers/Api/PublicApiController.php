@@ -17,6 +17,7 @@ class PublicApiController extends Controller
             'businessNatures' => BusinessNature::selectRaw('id,title')->get(),
             'objectTransactions' => ObjectTransaction::selectRaw('id,title')->get(),
             'qualifications' => Qualification::getValuesWithLabels(),
+            'allDistricts' => get_districts  (),
 
         ];
     }

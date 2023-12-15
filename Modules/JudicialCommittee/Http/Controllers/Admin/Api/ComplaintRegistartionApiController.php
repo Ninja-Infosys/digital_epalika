@@ -5,41 +5,18 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin\Api;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\JudicialCommittee\Entities\ComplaintSubject;
 
 class ComplaintRegistartionApiController extends Controller
 {
-    public function index()
+    public function complaintRegistrationSetting()
     {
-        return view('judicialcommittee::index');
+        return [
+            'complaintSubjects'=> ComplaintSubject::selectRaw('id,subject')->get()
+
+
+        ];
     }
 
-    public function create()
-    {
-        return view('judicialcommittee::create');
-    }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        return view('judicialcommittee::show');
-    }
-
-    public function edit($id)
-    {
-        return view('judicialcommittee::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }
