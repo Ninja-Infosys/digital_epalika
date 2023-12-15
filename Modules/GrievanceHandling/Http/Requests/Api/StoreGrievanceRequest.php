@@ -23,6 +23,8 @@ class StoreGrievanceRequest extends FormRequest
             'complaint_severity' => ['required', new Enum(GrievanceComplaintSeverity::class)],
             'subject' => ['required'],
             'is_anonymous' => ['required'],
+            'files' => ['nullable', 'array'],
+            'files.*' => ['file']
         ];
     }
 }

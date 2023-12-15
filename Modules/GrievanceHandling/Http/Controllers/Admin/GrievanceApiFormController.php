@@ -41,8 +41,8 @@ class GrievanceApiFormController extends Controller
                     'assigned_user_id' => $grievanceSetting->user_id ?? User::first()->id,
                     'assigned_at' => now()
                 ]);
-            if (!empty($this->form['files'])) {
-                foreach ($this->form['files'] as $file) {
+            if (!empty($request->validated()['files'])) {
+                foreach ($request->validated()['files'] as $file) {
                     $grievanceDetail->files()->create([
                         'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
                         'extension' => $file->getClientOriginalExtension(),
