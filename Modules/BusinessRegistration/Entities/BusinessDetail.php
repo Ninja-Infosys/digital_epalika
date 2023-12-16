@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\File;
+use App\Models\MobileUser;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use App\Traits\GetAllColumns;
@@ -273,5 +274,10 @@ class BusinessDetail extends Model
     public function assignedUser()
     {
         return $this->belongsTo(User::class, 'assigned_user_id');
+    }
+
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
     }
 }

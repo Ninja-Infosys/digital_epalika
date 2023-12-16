@@ -11,3 +11,4 @@ use Modules\BusinessRegistration\Http\Controllers\Api\PublicApiController;
 // });
 
 Route::post('businessRegistration', [PublicApiController::class, 'businessRegistration']);
+Route::get('registeredBusiness', [PublicApiController::class, 'registeredBusiness']);
