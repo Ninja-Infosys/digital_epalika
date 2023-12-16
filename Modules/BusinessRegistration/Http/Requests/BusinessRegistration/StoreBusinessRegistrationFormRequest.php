@@ -51,6 +51,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'registration_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'tax_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'other' => ['nullable','mimes:png,jpg,jpeg,pdf'],
+            'registration_no'=> ['registration_no'],
             'partners' => ['required', 'array'],
             // 'partners.*.name' => ['required','string'],
             // 'partners.*name_en' => ['required','string'],
