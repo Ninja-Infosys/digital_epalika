@@ -49,11 +49,12 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'embassy_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'license' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'registration_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'is_register' => ['nullable'],
             'tax_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'other' => ['nullable','mimes:png,jpg,jpeg,pdf'],
+            'other' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'partners' => ['required', 'array'],
-            'partners.*.name' => ['required','string'],
-            'partners.*.name_en' => ['required','string'],
+            'partners.*.name' => ['required', 'string'],
+            'partners.*.name_en' => ['required', 'string'],
             'partners.*.citizenship_no' => ['required'],
             'partners.*.issue_date' => ['required'],
             'partners.*.issue_district_id' => ['required', Rule::exists('districts', 'id')],
@@ -74,10 +75,14 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'partners.*.grandfather_name' => ['required'],
             'partners.*.photo' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'partners.*.signature' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'partners.*.citizenship_front' => ['nullable','mimes:png,jpg,jpeg,pdf'],
+            'partners.*.citizenship_front' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'partners.*.citizenship_back' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'partners.*.position' => ['required','integer'],
-
+            'partners.*.position' => ['required', 'integer'],
+            'registeredBusinesses' => ['required_if:is_register,1', 'array'],
+            'registeredBusinesses.*.business_name' => ['required_if:is_register,1'],
+            'registeredBusinesses.*.registration_no' => ['nullable',],
+            'registeredBusinesses.*.registration_date' => ['nullable', 'date'],
+            'registeredBusinesses.*.is_active' => ['nullable', 'boolean'],
 
 
         ];
