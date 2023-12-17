@@ -17,11 +17,11 @@ class ComplaintRegistrationApiController extends Controller
     public function complaintRegistration(StoreComplaintRegistrationRequest $request)
     {
         $data = DB::transaction(function () use ($request) {
-            $complaintRegistration = ComplaintApplication::create($request->validated() + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-                    'mobile_user_id' => auth()->id(),
-                    'submission_no' => time(),
-                ]);
+            $complaintRegistration = auth()->user()
+                ?->complaintRegistrations()->create($request->validated() + [
+                        'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                        'submission_no' => time(),
+                    ]);
 
             if (!empty($request->validated()['complainantDependents'])) {
                 foreach ($request->validated()['complainantDependents'] as $complainantDependent) {
