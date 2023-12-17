@@ -7,10 +7,12 @@ use Illuminate\View\Component;
 class TraineeTable extends Component
 {
     public $trainees = [];
+    public $training;
 
-    public function __construct($trainees = null)
+    public function __construct($trainees = null, $training = null)
     {
         $this->trainees = $trainees;
+        $this->training = $training;
     }
 
     public function render()

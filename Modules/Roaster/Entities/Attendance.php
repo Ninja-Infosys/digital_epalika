@@ -2,6 +2,7 @@
 
 namespace Modules\Roaster\Entities;
 
+use App\Enums\AttendanceEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,10 @@ class Attendance extends Model
         'trainee_id',
         'date',
         'status',
+    ];
+
+    protected $casts = [
+        'status' => AttendanceEnum::class
     ];
 
     public function training()

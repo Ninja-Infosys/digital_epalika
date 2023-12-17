@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('training_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('trainee_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->timestamp('date')->nullable()->comment('मिति');
-            $table->string('string');
+            $table->date('date')->nullable()->comment('मिति');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
