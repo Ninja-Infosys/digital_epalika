@@ -9,3 +9,4 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\Api\ComplaintRegistartionAp
 
 
 Route::post('complaintRegistration', [ComplaintRegistartionApiController::class, 'complaintRegistration']);
+Route::get('registeredComplain', [ComplaintRegistartionApiController::class, 'registeredComplain']);
