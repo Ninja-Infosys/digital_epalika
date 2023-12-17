@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
+use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class MobileUser extends Authenticatable
 {
@@ -77,5 +78,9 @@ class MobileUser extends Authenticatable
     public function grievanceDetails(): HasMany
     {
         return $this->hasMany(GrievanceDetail::class);
+    }
+    public function complaintRegistrations(): HasMany
+    {
+        return $this->hasMany(ComplaintApplication::class);
     }
 }
