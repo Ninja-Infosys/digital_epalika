@@ -6,6 +6,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use Modules\JudicialCommittee\Entities\ComplainantDefendant;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\ComplaintSubject;
@@ -20,12 +21,8 @@ use Modules\JudicialCommittee\Transformers\ComplaintRegistrationResource;
 class ComplaintRegistartionApiController extends Controller
 {
 
-
-
     public function complaintRegistration(StoreComplaintRegistrationRequest $request)
-    {
-        // return $request->validated();
-
+    {        
         $data = DB::transaction(function () use ($request) {
             $complaintRegistration = ComplaintApplication::create($request->validated() + [
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
@@ -64,6 +61,12 @@ class ComplaintRegistartionApiController extends Controller
             'message' => 'Complaint Registered Successfully'
         ], 201);
     }
+  
+  public function complaintRegistrationSetting()
+    {
+        return [
+            'complaintSubjects'=> ComplaintSubject::selectRaw('id,subject')->get()
+
 
     public function registeredComplain()
     {
@@ -74,8 +77,6 @@ class ComplaintRegistartionApiController extends Controller
     {
         return [
             'complaintSubjects' => ComplaintSubject::selectRaw('id,subject')->get()
-
-
         ];
     }
 }
