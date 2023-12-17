@@ -67,32 +67,28 @@
                                         <td>{{ $cashGrant->helplessnessType?->helplessness_type ?? '' }}</td>
                                         <td>{{ $cashGrant->cash ?? '' }}</td>
                                         <td class="d-flex gap-1">
-
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.grant.cashGrant.edit', $cashGrant) }}"
                                                 class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-
                                             {{-- @can('grant_access')
                                             <a data-bs-type="edit" href="{{route('admin.grant.grant.show', $grant)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan  --}}
-                                         @can('grant_delete')
-                                            <form
-                                                action="{{route('admin.grant.cashGrant.destroy', $cashGrant)}}"
+                                            <form action="{{ route('admin.grant.cashGrant.destroy', $cashGrant) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
-                                                        title=" मेटाउनु होस्">
+                                                <button data-bs-type="delete"
+                                                    class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                    title=" मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
-                                        @endcan 
                                         </td>
                                     </tr>
                                 @empty
