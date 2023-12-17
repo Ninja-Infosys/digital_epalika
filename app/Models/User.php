@@ -147,4 +147,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\Modules\EMap\Entities\New\MapPassGroup::class);
     }
+    public function complaintApplications()
+    {
+        return $this->hasMany(ComplaintApplication::class, 'assigned_user_id');
+    }
 }

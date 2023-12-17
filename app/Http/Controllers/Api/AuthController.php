@@ -23,7 +23,6 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'unique:mobile_users,email'],
             'phone' => ['required'],
             'password' => ['required', 'min:7'],
-            // Add other validation rules as needed for your application
         ]);
 
         // Create a new user
