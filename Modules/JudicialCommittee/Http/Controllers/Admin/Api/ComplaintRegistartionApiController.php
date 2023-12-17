@@ -16,9 +16,11 @@ use Modules\JudicialCommittee\Http\Requests\ComplaintRegistration\StoreComplaint
 use Illuminate\Support\Facades\DB;
 use Workbench\App\Models\User;
 use Illuminate\Support\Str;
+use Modules\JudicialCommittee\Transformers\ComplaintRegistrationResource;
 
 class ComplaintRegistartionApiController extends Controller
 {
+
     public function complaintRegistration(StoreComplaintRegistrationRequest $request)
     {        
         $data = DB::transaction(function () use ($request) {
@@ -29,22 +31,26 @@ class ComplaintRegistartionApiController extends Controller
             ]);
 
             foreach ($request->validated()['complainantDefendents'] as $complainantDefendant) {
-                $complaintRegistration->complainantDefendants()->create($complainantDefendant + [
-                    'type' => ComplainantDefendantTypeEnum::COMPLAINANT
-                ]
+                $complaintRegistration->complainantDefendants()->create(
+                    $complainantDefendant + [
+                        'type' => ComplainantDefendantTypeEnum::COMPLAINANT
+                    ]
                 );
             }
 
             foreach ($request->validated()['witnesses'] as $witness) {
-                $complaintRegistration->witnesses()->create($witness
-                    + ['type' => 'wintesses']
+                $complaintRegistration->witnesses()->create(
+                    $witness
+                        + ['type' => 'wintesses']
                 );
             }
-            
-            foreach ($request->validated()['supportedDocuments'] as $supportedDocument) {
-                $complaintRegistration->supportedDocuments()->create($supportedDocument
-                + ['type' => ComplainantDefendantTypeEnum::COMPLAINANT]);
+            if (!empty($request->validated()['other_document'])) {
+                foreach ($request->validated()['supportedDocuments'] as $supportedDocument) {
+                    $complaintRegistration->supportedDocuments()->create($supportedDocument
+                        + ['type' => ComplainantDefendantTypeEnum::COMPLAINANT]);
+                }
             }
+
             foreach ($request->validated()['relatedMembers'] as $relatedMember) {
                 $complaintRegistration->relatedMembers()->create($relatedMember);
             }
@@ -62,6 +68,15 @@ class ComplaintRegistartionApiController extends Controller
             'complaintSubjects'=> ComplaintSubject::selectRaw('id,subject')->get()
 
 
+    public function registeredComplain()
+    {
+        return ComplaintRegistrationResource::collection(auth()->user()?->load(['complaintRegistrations.complaintSubject', 'complaintRegistrations.lawsuitNature'])?->complaintRegistrations);
+    }
+
+    public function complaintRegistrationSetting()
+    {
+        return [
+            'complaintSubjects' => ComplaintSubject::selectRaw('id,subject')->get()
         ];
     }
 }

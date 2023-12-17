@@ -42,12 +42,8 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->group(module_path('BusinessRegistration', '/Routes/v1/public_api.php'));
 
-        Route::middleware(['api',
-//            'auth:api',
-//            'checkRoleMiddleware'
-        ])
-            ->prefix('api/admin/businessRegistration')
-            ->as('api.admin.businessRegistration.')
+        Route::middleware(['api', 'auth:sanctum'])
+            ->prefix('business/api/v1/user')
             ->group(module_path('BusinessRegistration', '/Routes/v1/private_api.php'));
     }
 }

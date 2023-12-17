@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
@@ -79,6 +80,12 @@ class MobileUser extends Authenticatable
     {
         return $this->hasMany(GrievanceDetail::class);
     }
+
+    public function businessDetails(): HasMany
+    {
+        return $this->hasMany(BusinessDetail::class);
+    }
+
     public function complaintRegistrations(): HasMany
     {
         return $this->hasMany(ComplaintApplication::class);

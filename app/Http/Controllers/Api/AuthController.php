@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+
 use App\Http\Resources\Api\Mobile\ProfileResource;
 use App\Models\MobileUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Laravel\Passport\Passport;
 
 class AuthController extends Controller
