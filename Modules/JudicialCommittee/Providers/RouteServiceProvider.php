@@ -7,19 +7,19 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
     }
 
-    public function map()
+    public function map(): void
     {
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
     }
 
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
         Route::middleware('web')
             ->prefix('judicial-committee')
@@ -32,15 +32,15 @@ class RouteServiceProvider extends ServiceProvider
             ->group(module_path('JudicialCommittee', 'Routes/admin.php'));
     }
 
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('JudicialCommittee', 'Routes/api.php'));
 
-//        Route::prefix('api/JudicialCommittee/user')
-//            ->middleware(['api', 'auth:sanctum'])
-//            ->group(module_path('JudicialCommittee', 'Routes/api/private_api.php'));
+        Route::prefix('api/JudicialCommittee/user')
+            ->middleware(['api', 'auth:sanctum'])
+            ->group(module_path('JudicialCommittee', 'Routes/api/private_api.php'));
 
         Route::prefix('api/v1/complainRegistration')
             ->middleware('api')
