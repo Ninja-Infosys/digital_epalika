@@ -33,6 +33,7 @@ class BusinessRegistrationResource extends JsonResource
             'fixed_capital' => $this->fixed_capital ?? '',
             'investment' => $this->investment ?? '',
             'is_rent' => $this->is_rent ?? '',
+            'is_register' => $this->is_rent ?? '',
             'house_owner_name' => $this->house_owner_name ?? '',
             'house_owner_phone' => $this->house_owner_phone ?? '',
             'house_owner_address' => $this->house_owner_address ?? '',

@@ -38,7 +38,7 @@
                 <div id="print">
                     {!! letterHead() !!}
                     <div class="table-responsive mt-3">
-                    @if($training->form_type===\Modules\Roaster\Enums\TrainingTypeEnum::TRAINEE)
+
                         <table class="table table-bordered table-striped table-sm">
                             <thead class="align-middle text-nowrap text-center">
                             <tr>
@@ -57,82 +57,21 @@
                             <tbody class="text-center">
                             @foreach($training->trainingTrainees as $trainee)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{$trainee->model->full_name ??''}}</td>
                                     <td>{{$trainee->model->localBody->local_body ??''}} {{$trainee->model->ward_no ??''}} {{$trainee->model->district->district ??''}}{{$trainee->model->province->province ??''}}</td>
                                     <td>{{$trainee->model->citizenship_no??''}}</td>
                                     <td>{{$trainee->model->phone_no??''}}</td>
                                     <td>{{$trainee->model->email_id??''}}</td>
                                     <td>{{$trainee->model->qualification??''}}</td>
-                                    <td>{{$trainee->model->gender??''}}</td>
+                                    <td>{{$trainee->model?->gender?->label()??''}}</td>
                                     <td>{{$trainee->model->ethnicity->title??''}}</td>
                                     <td>{{$trainee->model->current_profession??''}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                    @elseif($training->form_type=== \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <table class="table table-bordered table-striped table-sm">
-                            <thead class="align-middle text-nowrap text-center">
-                            <tr>
-                                <td>क्र.सं.</td>
-                                <td>पुरा नाम</td>
-                                <td>ठेगाना</td>
-                                <td>पद</td>
-                                <td>सेवा समुह</td>
-                                <td>सेवा अवधि</td>
-                                <td>सम्पर्क न</td>
-                                <td>इमेल</td>
-                                <td> शैक्षिक योग्यता</td>
-                            </tr>
-                            </thead>
-                            <tbody class="text-center">
-                            @foreach($training->trainingTrainees as $trainee)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$trainee->model->employee_name ??''}}</td>
-                                    <td>{{$trainee->model->localBody->local_body ??''}} {{$trainee->model->ward_no ??''}} {{$trainee->model->district->district ??''}}{{$trainee->model->province->province ??''}}</td>
-                                    <td>{{$trainee->model->designation->title??''}}</td>
-                                    <td>{{$trainee->model->department->title??''}}</td>
-                                    <td>{{$trainee->model->service_time??''}}</td>
-                                    <td>{{$trainee->model->contact_no??''}}</td>
-                                    <td>{{$trainee->model->email??''}}</td>
-                                    <td>{{$trainee->model->education_qualification??''}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <table class="table table-bordered table-striped table-sm">
-                            <thead class="align-middle text-nowrap text-center">
-                            <tr>
-                                <td>क्र.सं.</td>
-                                <td>पुरा नाम</td>
-                                <td>ठेगाना</td>
-                                <td>नागरिता नं</td>
-                                <td>सम्पर्क न</td>
-                                <td>इमेल</td>
-                                <td> शैक्षिक योग्यता</td>
-                                <td>लिङ्ग</td>
-                                <td> हालको व्यवसाय</td>
-                            </tr>
-                            </thead>
-                            <tbody class="text-center">
-                            @foreach($training->trainingTrainees as $trainee)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$trainee->model->full_name ??''}}</td>
-                                    <td>{{$trainee->model->localBody->local_body ??''}} {{$trainee->model->ward_no ??''}} {{$trainee->model->district->district ??''}}{{$trainee->model->province->province ??''}}</td>
-                                    <td>{{$trainee->model->citizenship_no??''}}</td>
-                                    <td>{{$trainee->model->phone_no??''}}</td>
-                                    <td>{{$trainee->model->email_id??''}}</td>
-                                    <td>{{$trainee->model->qualification??''}}</td>
-                                    <td>{{$trainee->model->gender??''}}</td>
-                                    <td>{{$trainee->model->current_profession??''}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    @endif
+
                 </div>
                 </div>
             </div>

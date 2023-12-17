@@ -25,6 +25,7 @@ class PublicApiController extends Controller
             'businessNatures' => BusinessNature::selectRaw('id,title')->get(),
             'objectTransactions' => ObjectTransaction::selectRaw('id,title')->get(),
             'qualifications' => Qualification::getValuesWithLabels(),
+            'allDistricts' => get_districts  (),
 
         ];
     }
@@ -38,10 +39,31 @@ class PublicApiController extends Controller
                 'mobile_user_id' => auth()->id(),
                 'submission_no' => time(),
             ]);
+
+
+            if(!empty($request->validated()['partners'])){
             foreach ($request->validated()['partners'] as $partner) {
 
                 $businessRegistration->partners()->create($partner);
             }
+        }
+
+        if(!empty($request->validated()['registeredBusinesses'])){
+            foreach ($request->validated()['registeredBusinesses'] as $registeredBusiness) {
+
+                $businessRegistration->registeredBusinesses()->create($registeredBusiness);
+            }
+        }
+
+        if(!empty($request->validated()['other_document'])){
+            foreach ($request->validated['other_document']??[] as $document) {
+                $businessRegistration->files()->create([
+                    'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $document->getClientOriginalExtension(),
+                    'file' => $document->store('otherDocument/', 'public')
+                ]);
+            }
+        }
 
 
 

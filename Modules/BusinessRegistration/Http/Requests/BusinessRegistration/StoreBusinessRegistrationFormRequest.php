@@ -49,6 +49,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'embassy_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'license' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'registration_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'is_register' => ['nullable'],
             'tax_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'other_file' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'registration_no' => ['registration_no'],
@@ -78,8 +79,11 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'partners.*.citizenship_front' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'partners.*.citizenship_back' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'partners.*.position' => ['required', 'integer'],
-
-
+            'registeredBusinesses' => ['required_if:is_register,1', 'array'],
+            'registeredBusinesses.*.business_name' => ['required_if:is_register,1'],
+            'registeredBusinesses.*.registration_no' => ['nullable',],
+            'registeredBusinesses.*.registration_date' => ['nullable', 'date'],
+            'registeredBusinesses.*.is_active' => ['nullable', 'boolean'],
 
 
         ];

@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
+use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class MobileUser extends Authenticatable
 {
@@ -83,5 +84,10 @@ class MobileUser extends Authenticatable
     public function businessDetails(): HasMany
     {
         return $this->hasMany(BusinessDetail::class);
+    }
+
+    public function complaintRegistrations(): HasMany
+    {
+        return $this->hasMany(ComplaintApplication::class);
     }
 }
