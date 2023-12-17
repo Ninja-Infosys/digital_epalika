@@ -69,4 +69,13 @@ class ComplaintRegistartionApiController extends Controller
     {
         return ComplaintRegistrationResource::collection(auth()->user()?->load(['complaintRegistrations.complaintSubject', 'complaintRegistrations.lawsuitNature'])?->complaintRegistrations);
     }
+
+    public function complaintRegistrationSetting()
+    {
+        return [
+            'complaintSubjects' => ComplaintSubject::selectRaw('id,subject')->get()
+
+
+        ];
+    }
 }
