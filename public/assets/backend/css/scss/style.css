@@ -936,15 +936,17 @@ section {
 .nav-pills .nav-item {
   padding: 7px 0px;
 }
+
+
 .nav-pills .nav-item .nav-link {
   background: none;
-  color: #2F4EA2;
   border-radius: 0px;
   padding: 2px 12px;
 }
-.nav-pills .nav-item .nav-link:hover {
+
+/* .nav-pills .nav-item .nav-link:hover {
   color: #ED1C24;
-}
+} */
 
 .tab-vertical .nav-link.active {
   color: #ED1C24;
