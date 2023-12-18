@@ -46,5 +46,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('Roaster', '/Routes/api.php'));
+
+        Route::prefix('api/v1/trainee')
+            ->middleware('api')
+            ->group(module_path('Roaster', '/Routes/api/publicRoute.php'));
+        Route::prefix('api/v1/trainee/user')
+            ->middleware(['api', 'auth:sanctum'])
+            ->group(module_path('Roaster', '/Routes/api/privateRoute.php'));
     }
 }
