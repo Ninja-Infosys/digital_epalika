@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
+use Modules\JudicialCommittee\Enums\ComplainTypeEnum;
 
 class ComplainantDefendant extends Model
 {
@@ -36,11 +37,12 @@ class ComplainantDefendant extends Model
         'district_id',
         'local_body_id',
         'ward_no',
-        'tole'
+        'tole',
+        'complain_type',
     ];
 
     protected $casts = [
-        'type' => ComplainantDefendantTypeEnum::class
+        'type' => ComplainantDefendantTypeEnum::class,
     ];
 
     public function complaintApplication(): BelongsTo

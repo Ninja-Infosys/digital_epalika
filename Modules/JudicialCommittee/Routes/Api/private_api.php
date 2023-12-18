@@ -6,6 +6,4 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\Api\ComplaintRegistartionAp
 
 
 
-
-
 Route::post('complaintRegistration', [ComplaintRegistartionApiController::class, 'complaintRegistration']);
