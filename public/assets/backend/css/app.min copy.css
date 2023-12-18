@@ -199,7 +199,7 @@
 :root #preloader, :root .card, :root .card-header, :root .gal-box, :root .timeline {
     --ct-card-border-color: #f7f7f7;
     --ct-card-box-shadow: var(--ct-box-shadow-sm);
-    --ct-card-cap-bg: #f1f5f8;
+    --ct-card-cap-bg: #edeff1;
     --ct-card-bg: #fff;
     padding: 10px;
 }
@@ -1434,7 +1434,7 @@ input.form-control[type=color], input.form-control[type=range] {
 .search-bar .form-control {
     padding-left: 40px;
     padding-right: 20px;
-    border-radius: 5px
+    border-radius: 30px
 }
 
 .search-bar span {
@@ -2597,7 +2597,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 }
 
 .navbar-custom {
-    background-color: #f1f5f8;
+    background-color: #ECF8FF;
     /* -webkit-box-shadow: var(--ct-box-shadow);
     box-shadow: var(--ct-box-shadow); */
     padding: 0 10px 0 0;
@@ -10170,8 +10170,8 @@ table.table-custom thead tr{
 table.table-custom tr td{
     background: none !important;
     border: none !important;
-    font-size: 15px;
-    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; 
 }
 table.table-custom tr{
     border-bottom: none !important; 
@@ -10187,7 +10187,7 @@ table.table-custom tr.empty{
     border: none !important;
 }
 table.table-custom thead tr th{
-    background-color: #f1f5f8 !important;
+    background-color: #f5f5f5 !important;
     border-bottom: none !important;
     font-size: 16px;
 }
@@ -10220,4 +10220,7 @@ color: var(--ct-danger) !important;
 table.table-custom tr td .btn-xs.btn-outline-danger:hover{
     background-color: #ffced6 !important;
     color: #ff2a4d;
+}
+fieldset legend.text-info{
+    color: var(--primary) !important;
 }

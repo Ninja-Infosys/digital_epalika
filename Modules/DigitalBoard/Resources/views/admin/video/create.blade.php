@@ -25,16 +25,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ भिडियो थप्नुहोस्</h4>
                         <a href="{{route('admin.digitalBoard.video.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सुची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.digitalBoard.video.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
