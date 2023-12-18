@@ -34,4 +34,19 @@ enum Gender: string
             self::OTHER => 'Other',
         };
     }
+
+    public static function getValuesWithLabels(): array
+    {
+        $valuesWithLabels = [];
+
+        foreach (self::cases() as $value) {
+            $valuesWithLabels[] = [
+                'value' => $value,
+                'label' => $value->label(),
+                'labelEn' => $value->labelEn(),
+            ];
+        }
+
+        return $valuesWithLabels;
+    }
 }

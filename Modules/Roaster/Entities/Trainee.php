@@ -7,6 +7,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Ethnicity;
+use App\Models\MobileUser;
 use App\Models\Settings\Department;
 use App\Models\Settings\Designation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -66,6 +67,7 @@ class Trainee extends Model
         'office_email',
         'nomination_letter',
         'recommendation_letter',
+        'mobile_user_id'
 
     ];
 
@@ -228,5 +230,10 @@ class Trainee extends Model
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
     }
 }
