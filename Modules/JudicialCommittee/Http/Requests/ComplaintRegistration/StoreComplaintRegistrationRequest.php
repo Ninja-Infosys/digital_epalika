@@ -24,7 +24,6 @@ class StoreComplaintRegistrationRequest extends FormRequest
             'applicant_address' => ['nullable'],
             'applicant_signature' => ['nullable'],
             'application_status' => ['nullable'],
-
             'complaint_subject_id' => ['required', Rule::exists('complaint_subjects', 'id')->withoutTrashed()],
             'complainantDefendents' => ['required', 'array'],
             'complainantDefendents.*.complain_type' => ['required', 'string', 'max:255'],

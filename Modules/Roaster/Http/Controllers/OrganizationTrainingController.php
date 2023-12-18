@@ -87,14 +87,19 @@ class OrganizationTrainingController extends Controller
         //
     }
 
-    public function show($id)
+    public function showTrainee(Training $training, Trainee $trainee)
     {
-        return view('roaster::show');
+
+        $trainee->load('province', 'district', 'localBody', 'ethnicity', 'documents', 'designation', 'department');
+
+        return view('roaster::traineeUser.trainee.show', compact('trainee'));
     }
 
-    public function edit($id)
+    public function editTrainee(Training $training, Trainee $trainee)
     {
-        return view('roaster::edit');
+        $trainee->load('trainingTrainee');
+
+        return view('roaster::traineeUser.trainee.edit', compact('trainee'));
     }
 
     public function update(Request $request, $id)

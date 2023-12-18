@@ -55,15 +55,23 @@
             @endif
             </td>
             <td class="d-flex justify-center">
-
-                <a data-bs-type="edit" href="{{route('admin.roaster.trainee.edit', $trainee)}}" type="button"
+                @if($trainee->select != 'Verified')
+                <a  href="{{route('traineeOrganization.admin.trainee.editTrainee', [$training,$trainee])}}" type="button"
                    class="btn btn-sm btn-primary">
                     <i class="fa fa-edit"></i>
                 </a>
+                @endif
 
-                <a data-bs-type="edit" href="{{route('admin.roaster.trainee.show',$trainee )}}" class="btn btn-info btn-sm">
+                <a  href="{{route('traineeOrganization.admin.trainee.showTrainee',[$training,$trainee] )}}" class="btn btn-info btn-sm">
                     <i class="fa fa-eye"></i>
                 </a>
+                @if($trainee->select == 'Verified')
+                <a  href="{{route('traineeOrganization.admin.attendance.index', [$training,$trainee])}}" type="button"
+                class="btn btn-sm btn-primary">
+                 <i class="fa fa-plus"></i>
+             </a>
+             @endif
+
             </td>
         </tr>
     @empty
