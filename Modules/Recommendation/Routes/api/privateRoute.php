@@ -9,3 +9,4 @@ Route::get('sipharisCategory/{sipharisCategory}', [SipharishCreateApiController:
 Route::get('sipharisSubCategory', [SipharishCreateApiController::class, 'subCategoryList']);
 Route::get('sipharisSubCategory/{sipharisSubCategory}', [SipharishCreateApiController::class, 'subCategoryShow']);
 Route::get('sipharishFormType/{sipharishFormType}', [SipharishCreateApiController::class, 'sipharishFormTypeList']);
+Route::post('sipharishCreate', [SipharishCreateApiController::class, 'store']);

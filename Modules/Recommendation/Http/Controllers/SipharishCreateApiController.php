@@ -5,9 +5,13 @@ namespace Modules\Recommendation\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharisCategory;
+use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Entities\SipharishFormType;
 use Modules\Recommendation\Entities\SipharisSubCategory;
+use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Modules\Recommendation\Transformers\SifarishFormFieldResource;
 use Modules\Recommendation\Transformers\SipharishCreateResource;
 use Modules\Recommendation\Transformers\SipharishFormFieldResource;
@@ -50,5 +54,74 @@ class SipharishCreateApiController extends Controller
             ->find($sipharishFormType->id)
             ?->sipharisFormFields;
         return response()->json(SipharishFormFieldResource::collection($fields));
+    }
+
+    public function store(StoreSipharisCreatedRequest $request)
+    {
+        // dd($request->validated());
+        $sipharis = DB::transaction(function () use ($request) {
+
+            $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated() + [
+                'created_by' => auth()->id(),
+            ]);
+            if (
+                array_key_exists('fields', $request->validated())
+                && !empty($request->validated()['fields'])
+            ) {
+
+                foreach ($request->validated()['fields'] as $field) {
+
+                    if (!empty($field['type']) && $field['type'] == 'image') {
+                        $value = Storage::disk('public')
+                            ->putFile('recommendation/files', $field['value']);
+                    } elseif (!empty($field['type']) && $field['type'] == 'table') {
+                        $values = collect();
+                        if (!empty($field['table'])) {
+                            foreach ($field['table'] as $table) {
+                                if (!empty($table['type']) && $table['type'] == 'image') {
+                                    $tableValue = Storage::disk('public')
+                                        ->putFile('recommendation/files', $table['value']);
+                                } else {
+                                    $tableValue = $table['value'];
+                                }
+                                $values->push([
+                                    'sipharish_form_field_id' => $table['sipharish_form_field_id'],
+                                    'value' => $tableValue,
+                                    'type' => $table['type'],
+                                ]);
+                            }
+                        }
+                        $value = json_encode($values);
+                    } else {
+                        $value = $field['value'];
+                    }
+
+                    $sipharis->SipharishCreatedValues()
+                        ->create([
+                            'sipharish_form_field_id' => $field['sipharish_form_field_id'] ?? '',
+                            'value' => $value ?? '',
+                            'type' => $field['type'] ?? '',
+                        ]);
+                }
+            }
+
+            if (
+                array_key_exists('files', $request->validated())
+                && !empty($request->validated()['files'])
+            ) {
+
+                foreach ($request->validated()['files'] as $file) {
+                    $sipharis->SipharisCreatedDocuments()->create($file + [
+                        'extension' => $file['filename']->getClientOriginalExtension()
+                    ]);
+                }
+            }
+
+            return $sipharis;
+        });
+
+        return response()->json([
+            'message' => 'Sipharish Create Stored Successfully'
+        ]);
     }
 }
