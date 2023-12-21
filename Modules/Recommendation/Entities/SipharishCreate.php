@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -35,7 +36,8 @@ class SipharishCreate extends Model
         'approved_date',
         'approved_status',
         'created_by',
-        'status'
+        'status',
+        'file'
     ];
     protected $casts = [
         'status' => 'boolean',
@@ -108,5 +110,17 @@ class SipharishCreate extends Model
     public function signature()
     {
         return $this->belongsTo(SipharisSignatureDetail::class, 'sipharis_signature_id');
+    }
+
+    public function setFileAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['file'] = $value->store('sipharish/', 'public');
+        }
+    }
+
+    public function getFileUrlAttribute(): string
+    {
+        return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : asset('images/user_icon.jpg');
     }
 }
