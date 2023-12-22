@@ -3,10 +3,12 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Illuminate\Support\Facades\DB;
+
 
 class SipharisCreateController extends Controller
 {
@@ -92,6 +94,16 @@ class SipharisCreateController extends Controller
             'status' => !$sipharishCreate->status
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function fileUpload(Request $request, SipharishCreate $sipharishCreate)
+    {
+        $data = $request->validate([
+            'file' => ['required', 'file']
+        ]);
+        $sipharishCreate->update($data);
+        toast('फाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 
