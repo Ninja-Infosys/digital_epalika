@@ -15,7 +15,7 @@ class SipharishFormFieldResource extends JsonResource
             'slug' => $this->slug ?? '',
 
             'type' => $this->type ?? '',
-            'sipharis_form_field_id' => $this->id ?? '',
+            'sipharish_form_field_id' => $this->id ?? '',
             'sipharishFormFields' => SipharishFormFieldResource::collection($this->whenLoaded('SipharishFormFields')) ?? null
         ];
     }
