@@ -25,21 +25,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  थप्नुहोस्</h4>
                         <a href="{{route('admin.digitalBoard.notice.index',$type)}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> {{$type==='Notice' ?'सूचना':'समाचार'}} सूची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.digitalBoard.notice.store',$type)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
+                            <legend class="font-16 text-primary">
                                 <strong> विवरण </strong>
                             </legend>
                             <div class="row">
