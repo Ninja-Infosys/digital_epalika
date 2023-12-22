@@ -45,7 +45,6 @@ class Field extends Component
                     ];
                 }
             }
-
         }
         $this->sipharishCategories = SipharisCategory::status()->get();
         $this->personalDetails = PersonalDetail::all();
@@ -81,7 +80,6 @@ class Field extends Component
     public function setParentType($index, $childIndex, $childSlug, $value): void
     {
         $this->data[$index]['type'] = $value;
-
     }
 
     public function render()
