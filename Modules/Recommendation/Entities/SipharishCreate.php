@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\MobileUser;
 use App\Models\User;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Model;
@@ -38,11 +39,17 @@ class SipharishCreate extends Model
         'created_by',
         'status',
         'file'
+        'mobile_user_id'
     ];
     protected $casts = [
         'status' => 'boolean',
     ];
 
+
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
+    }
 
     public function signaturedBy(): BelongsTo
     {
