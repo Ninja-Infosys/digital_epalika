@@ -61,9 +61,7 @@ class SipharishCreateApiController extends Controller
         // dd($request->validated());
         $sipharis = DB::transaction(function () use ($request) {
 
-            $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated() + [
-                'created_by' => auth()->id(),
-            ]);
+            $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
                 && !empty($request->validated()['fields'])
