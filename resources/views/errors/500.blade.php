@@ -5,7 +5,7 @@
     <title>पृष्ठ फेला परेन | {{config('app.name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="A complete solution for digital palika." name="description"/>
-    <meta content="NINJA INFOSYS" name="author"/>
+    <meta content="Digital ePalika" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
@@ -35,7 +35,7 @@
     </div>
 </div>
 <footer class="footer footer-alt">
-    {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
+    {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">Digital ePalika</a>
 </footer>
 </body>
 </html>
