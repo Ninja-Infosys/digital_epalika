@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-md-2 col-sm-2 col-xs-2">
-                <a href="https://digital-palika.ninjainfosys.com.np" class="main-logo">
+                <a href="https://palikaerp.palikaerp.com" class="main-logo">
                     <img alt="nepal-government-logo" class="m-2" height="120" width="140"
                         src="{{ asset('images/np.png') }}">
                 </a>

@@ -41,7 +41,7 @@
             </div>
             <footer class="footer">
                 <div class="container-fluid text-center">
-                    {{ date('Y') }} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA
+                    {{ date('Y') }} &copy; Design & Developed by <a href="https://digitalepalika.com">NINJA
                         INFOSYS</a>
                 </div>
             </footer>

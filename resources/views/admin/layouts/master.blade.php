@@ -40,7 +40,7 @@
         </div>
         <footer class="footer">
             <div class="container-fluid text-center">
-                {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">Digital ePalika</a>
+                {{date('Y')}} &copy; Design & Developed by <a href="https://digitalepalika.com">Digital ePalika</a>
             </div>
         </footer>
     </div>
