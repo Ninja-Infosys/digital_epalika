@@ -19,7 +19,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Laravolt\Avatar\Avatar;
 use Modules\TaskManagement\Entities\Activity;
 
@@ -146,5 +146,9 @@ class User extends Authenticatable
     public function mapPassGroups(): BelongsToMany
     {
         return $this->belongsToMany(\Modules\EMap\Entities\New\MapPassGroup::class);
+    }
+    public function complaintApplications()
+    {
+        return $this->hasMany(ComplaintApplication::class, 'assigned_user_id');
     }
 }

@@ -10,7 +10,7 @@ class TraineeController extends Controller
     public function show(Trainee $trainee)
     {
         $this->checkAuthorization('trainee_access');
-        $trainee->load('province', 'district', 'localBody', 'ethnicity');
+        $trainee->load('province', 'district', 'localBody', 'ethnicity', 'documents', 'designation', 'department');
 
         return view('roaster::admin.training.trainee.show', compact('trainee'));
     }
@@ -27,7 +27,7 @@ class TraineeController extends Controller
     {
         $this->checkAuthorization('trainee_access');
         $trainee->update([
-            'select' => ! $trainee->select,
+            'select' => !$trainee->select,
         ]);
         toast('Trainee updated successfully', 'success');
 

@@ -36,7 +36,6 @@
                 <div class="card-body">
                     @livewire('grant::grant-detail-livewire', [
                     'grantDetail'=>$grantDetail,
-                    'grantPrograms'=>$grantPrograms,
                     'grant_types'=>$grantTypes
                     ])
                 </div>

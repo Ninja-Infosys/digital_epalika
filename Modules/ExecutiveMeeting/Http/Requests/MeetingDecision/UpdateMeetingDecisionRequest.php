@@ -18,6 +18,7 @@ class UpdateMeetingDecisionRequest extends FormRequest
             'date' => ['required'],
             'en_date' => ['required', 'date'],
             'description' => ['required'],
+            'chairman' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -43,29 +43,20 @@
                     </a>
                 </li>
             </ul>
+
             <div class="tab-content">
                 <div class="tab-pane show active" id="tab-all">
-                    @if($training->form_type== \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <x-technical-trainee-table :trainees="$trainees"/>
-                    @else
-                        <x-trainee-table :trainees="$trainees"/>
-                    @endif
-                </div>
+                        <x-admin-trainee-table :trainees="$trainees->filter(function ($trainee) {
+                            return $trainee->select === 'Verified' || $trainee->select === 'Selected';
+                        })  " :training="$training" />
 
+                </div>
                 <div class="tab-pane" id="tab-type1">
-                    @if($training->form_type === \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <x-technical-trainee-table :trainees="$trainees->where('select',1)"/>
-                    @else
-                        <x-trainee-table :trainees="$trainees->where('select',1)"/>
-                    @endif
+                        <x-admin-trainee-table :trainees="$trainees->where('select','Verified')" :training="$training"/>
                 </div>
 
                 <div class="tab-pane" id="tab-type2">
-                    @if($training->form_type=== \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
-                        <x-technical-trainee-table :trainees="$trainees->where('select',0)"/>
-                    @else
-                        <x-trainee-table :trainees="$trainees->where('select',0)"/>
-                    @endif
+                        <x-admin-trainee-table :trainees="$trainees->where('select','Selected')" :training="$training"/>
                 </div>
 
             </div>

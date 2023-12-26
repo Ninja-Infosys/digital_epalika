@@ -4,17 +4,22 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
 use Modules\ExecutiveMeeting\Entities\MeetingMinute;
+use Modules\ExecutiveMeeting\Entities\MinuteSetting;
+use Illuminate\Support\Str;
 use Modules\ExecutiveMeeting\Http\Requests\Meeting\StoreMeetingRequest;
 use Modules\ExecutiveMeeting\Http\Requests\Meeting\UpdateMeetingRequest;
 
 class MeetingController extends Controller
 {
+    use NepaliDateConverter;
     public function index()
     {
         $this->checkAuthorization('meeting_access');
@@ -24,10 +29,14 @@ class MeetingController extends Controller
                 if (!is_null(request('search'))) {
                     $q->whereLike(['meeting_name', 'start_date', 'description'], request('search'));
                 }
+                if (!is_null(request('committee'))) {
+                    $q->where('committee_id', request('committee'));
+                }
             })
             ->paginate(10);
+        $committees = Committee::all();
 
-        return view('executivemeeting::admin.meeting.index', compact('meetings'));
+        return view('executivemeeting::admin.meeting.index', compact('meetings', 'committees'));
     }
 
     public function create()
@@ -43,16 +52,10 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_create');
 
-        DB::transaction(function () use ($request) {
-            $meeting = Meeting::create($request->validated() + [
-                'user_id' => auth()->id(),
-                'fiscal_year_id' => officeSetting()->fiscal_year_id,
-            ]);
-
-            foreach ($request->input('meetingAgendas') ?? [] as $meetingAgenda) {
-                $meeting->meetingAgendas()->create($meetingAgenda);
-            }
-        });
+        Meeting::create($request->validated() + [
+            'user_id' => auth()->id(),
+            'fiscal_year_id' => officeSetting()->fiscal_year_id,
+        ]);
 
         if ($request->ajax()) {
             return response()->json([
@@ -114,8 +117,11 @@ class MeetingController extends Controller
     public function minuteForm(Meeting $meeting)
     {
         $this->checkAuthorization('meetingDecision_access');
+        $minuteSetting = MinuteSetting::first() ?? null;
+        $meeting->load('invitedMembers', 'meetingParticipants', 'meetingDecision');
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($meeting), $minuteSetting->description);
 
-        return view('executivemeeting::admin.meeting.minuteForm', compact('meeting'));
+        return view('executivemeeting::admin.meeting.minuteForm', compact('meeting', 'minuteSetting', 'data'));
     }
 
 
@@ -141,15 +147,60 @@ class MeetingController extends Controller
 
     public function printMinute(Meeting $meeting)
     {
-        $meeting->load(['meetingAgendas' => function ($query) {
-            $query->with('meetingDecision')->where('is_final', 1);
-        },
-        'meetingMinute',
-        'meetingParticipants'
-    ]);
-
-        return response()->json([
-            'view' => (string)View::make('executivemeeting::admin.meeting.minute_print', compact('meeting'))
+        $meeting->load([
+            'meetingAgendas' => function ($query) {
+                $query->with('meetingDecision')->where('is_final', 1);
+            },
+            'meetingMinute',
+            'meetingParticipants'
         ]);
+
+        $minuteSetting = MinuteSetting::first() ?? null;
+        $meeting->load('invitedMembers', 'meetingParticipants', 'meetingDecision');
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($meeting), $minuteSetting->description);
+
+        $meeting->update([
+            'is_print' => 1
+        ]);
+        return response()->json([
+            'view' => (string)View::make('executivemeeting::admin.meeting.minute_print', compact('data'))
+        ]);
+    }
+
+    public function getReplaceData()
+    {
+        return [
+            '[@office_name]',
+            '[@letter_head]',
+            '[@letter_head_en]',
+            '[@today_date]',
+            '[@present_member]',
+            '[@invited_member]',
+            '[@chairman]',
+            '[@decision]',
+
+
+        ];
+    }
+
+    protected function getEmapTemplateData($meeting)
+    {
+
+
+        return [
+            officeSetting()->name,
+            letterHead(),
+            letterHeadEn(),
+            get_nepali_number($this->get_today_nepali_date()),
+            (string)View::make('executivemeeting::admin.inc.meeting_participant', [
+                'meetingParticipants' => $meeting->meetingParticipants,
+            ]),
+
+            (string)View::make('executivemeeting::admin.inc.invited_member', [
+                'invitedMembers' => $meeting->invitedMembers,
+            ]),
+            $meeting->meetingDecision->chairman ?? '',
+            $meeting->meetingDecision->description ?? '',
+        ];
     }
 }

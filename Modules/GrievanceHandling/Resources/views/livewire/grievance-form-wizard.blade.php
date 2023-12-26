@@ -68,7 +68,7 @@
                                     के तपाईं गुनासोमा अनाम हुन चाहानुहुन्छ ?
                                 </label>
                             </h5>
-                            <div class="d-flex">
+                            <div class="d-flex gap-1">
                                 <div class="form-check">
                                     <input type="radio" class="form-check-input" wire:model="form.is_anonymous" value="1"
                                         id="is_anonymous1">

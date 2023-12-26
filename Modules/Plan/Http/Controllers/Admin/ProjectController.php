@@ -71,10 +71,11 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_create');
 
+
         DB::transaction(function () use ($request) {
             $project = Project::create($request->validated() + [
-                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'project_status' => ProjectStatusEnum::NOT_STARTED
+                    'fiscal_year_id' => \officeSetting()->fiscal_year_id ?? '',
+                    'project_status' => ProjectStatusEnum::NOT_STARTED ?? ''
                 ]);
 
             foreach ($request->input('projectAllocatedAmounts') as $projectAllocatedAmount) {

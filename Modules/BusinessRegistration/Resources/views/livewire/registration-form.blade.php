@@ -729,7 +729,7 @@
                                        id="address_en"
                                        wire:model="form.address_en"
                                        placeholder="In English"
-                                >
+
                                 @error('form.address_en')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

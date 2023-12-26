@@ -190,7 +190,6 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
         $officeSetting = $this->getOfficeSetting();
         $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
         $constructionTypes = $mapApplies->pluck('construction_type')->unique();
-    
         $result = [
             'labels' => [],
             'dataSets' => [
@@ -200,15 +199,6 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
                 ],
             ],
         ];
-    
-        foreach ($constructionTypes as $type) {
-            $count = $mapApplies->where('construction_type', $type)->count();
-            $label = TypeOfConstructionWorkEnum::tryFrom($type)?->label();
-    
-            $result['labels'][] = $label;
-            $result['dataSets'][0]['data'][] = $count;
-        }
-    
         return $result;
     }
     

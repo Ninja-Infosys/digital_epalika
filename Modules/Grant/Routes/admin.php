@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Grant\Http\Controllers\Admin\CashGrantController;
 use Modules\Grant\Http\Controllers\Admin\CooperativeController;
 use Modules\Grant\Http\Controllers\Admin\DashboardController;
 use Modules\Grant\Http\Controllers\Admin\EnterprisesController;
@@ -19,6 +20,7 @@ use Modules\Grant\Http\Controllers\Admin\Setting\EnterpriseTypeController;
 use Modules\Grant\Http\Controllers\Admin\Setting\GrantProgramController;
 use Modules\Grant\Http\Controllers\Admin\Setting\GrantOfficeController;
 use Modules\Grant\Http\Controllers\Admin\Setting\GrantTypeController;
+use Modules\Grant\Http\Controllers\Admin\Setting\HelplessnessTypeController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
@@ -30,6 +32,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('cooperativeType', CooperativeTypeController::class);
     Route::resource('grantProgram', GrantProgramController::class);
     Route::resource('grantOffice', GrantOfficeController::class);
+    Route::resource('helplessnessType',HelplessnessTypeController::class);
 });
 
 Route::prefix('grantee')->group(function () {
@@ -52,10 +55,15 @@ Route::controller(FarmerReportController::class)->prefix('report/farmer')->as('r
     Route::post('report-data', 'report')->name('report-data');
 });
 
-Route::controller(GrantReportController::class)->prefix('report/grant')->as('report.grant.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::post('report-data', 'report')->name('report-data');
-});
+Route::controller(GrantReportController::class)
+    ->prefix('report/grant')->as('report.grant.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('report-data', 'report')->name('report-data');
+
+        Route::get('program-report', 'programReport')->name('program-report');
+        Route::post('show-program-report', 'showProgramReport')->name('show-program-report');
+    });
 
 Route::controller(GroupReportController::class)->prefix('report/group')->as('report.group.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -71,3 +79,6 @@ Route::controller(CooperativeReportController::class)->prefix('report/cooperativ
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
 });
+
+
+Route::resource('cashGrant',CashGrantController::class);

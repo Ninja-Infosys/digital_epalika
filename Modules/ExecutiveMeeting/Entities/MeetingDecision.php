@@ -25,6 +25,7 @@ class MeetingDecision extends Model
         'meeting_agenda_id',
         'date',
         'en_date',
+        'chairman',
         'description',
         'user_id'
     ];

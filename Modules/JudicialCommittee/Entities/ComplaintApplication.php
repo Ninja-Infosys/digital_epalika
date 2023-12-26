@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
 use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
+use Workbench\App\Models\User;
 
 class ComplaintApplication extends Model
 {
@@ -43,7 +44,8 @@ class ComplaintApplication extends Model
         'applicant_phone',
         'applicant_address',
         'applicant_signature',
-        'application_status'
+        'application_status',
+        'mobile_user_id'
     ];
 
     protected $appends = [
@@ -163,4 +165,12 @@ class ComplaintApplication extends Model
     {
         return $this->hasOne(Conciliation::class);
     }
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
+    }
+    public function user()
+{
+    return $this->belongsTo(User::class, 'assigned_user_id');
+}
 }

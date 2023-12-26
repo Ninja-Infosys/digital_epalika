@@ -8,12 +8,15 @@ use Modules\Roaster\Http\Controllers\TechnicalTraineeController;
 use Modules\Roaster\Http\Controllers\TraineeController;
 use Modules\Roaster\Http\Controllers\TrainerController;
 use Modules\Roaster\Http\Controllers\TrainingController;
+use Modules\Roaster\Http\Controllers\OrganizationController;
+use Modules\Roaster\Http\Controllers\RoasterSettingController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('subject', SubjectController::class);
+    Route::resource('roasterSetting', RoasterSettingController::class);
 });
 
 Route::resource('trainer', TrainerController::class)->except(['store', 'destroy', 'update']);
@@ -24,6 +27,7 @@ Route::get('training/{training}/marks', [TrainingController::class, 'marks'])->n
 Route::put('training/{training}/update-photo', [TrainingController::class, 'storePhotos'])->name('training.store-photos');
 Route::get('training/{training}/pdf', [TrainingController::class, 'pdfExport'])->name('training.pdfExport');
 Route::get('training/{training}/excelExport', [TrainingController::class, 'excelExport'])->name('training.excelReport');
+Route::post('training/{training}/trainee/{trainee}/updateSelectTrainee', [TrainingController::class, 'updateSelectTrainee'])->name('trainee.updateSelectTraineeStatus');
 Route::resource('training', TrainingController::class);
 
 //trainee
@@ -39,3 +43,8 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
 });
+
+Route::resource('organization', OrganizationController::class)->only('index');
+Route::delete('traineeUser/{traineeUser}', [OrganizationController::class, 'destroy'])->name('organization.destroy');
+Route::get('traineeUser/{traineeUser}', [OrganizationController::class, 'show'])->name('organization.show');
+Route::get('traineeUser/{traineeUser}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');

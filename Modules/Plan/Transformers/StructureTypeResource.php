@@ -14,9 +14,8 @@ class StructureTypeResource extends JsonResource
      */
     public function toArray($request)
     {
-        $request_columns = $request->input('columns')['structure_type'] ?? [];
-
         return[
+            'id' => $this->id ?? '',
             'title'=> $this->title??'',
         ];
     }

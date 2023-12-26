@@ -1,4 +1,4 @@
-<div class="row">
+    <div class="row">
     <div class="col-md-{{$showEnglishDate?'6':'12'}}">
         <label for="{{$idNe ?? $nameNe}}">{{$labelNe}}</label>
         <input type="text" name="{{$nameNe}}"

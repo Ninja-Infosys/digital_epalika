@@ -113,7 +113,65 @@
         @include('admin.inc.file-view')
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title mb-0">फाईल उपलोड़</h4>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <i class="fa fa-file"> </i> नयाँ फाईल उपलोड़ गर्नुहोस
+                            </button>
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">नयाँ फाईल उपलोड़</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('admin.recommendation.sipharish.fileUpload',$sipharishCreate) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
+                                        <div class="modal-body">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="file" class="form-label">फाईल</label>
+                                                <input name="file" class="form-control  @error('file') is-invalid @enderror"
+                                                    type="file" id="file"  />
+                                                @error('file')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
+                                    <button type="submit" class="btn btn-primary">  पेश गर्नुहोस्</button>
+                                    </div>
+                                </form>
+                                </div>
+                                </div>
+                            </div>
 
+                    </div>
+                </div>
+                @if($sipharishCreate->file)
+                <div class="card-body">
+                    <div  class="p-1">
+                        <style>
+                            @page {
+                                margin-top: 0;
+                            }
+                        </style>
+
+                     <iframe src="{{ $sipharishCreate->file_url }}" frameborder="0" width="100%" height="600"></iframe>
+
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    @if(empty($sipharishCreate->file))
 
     <div class="row">
         <div class="col-md-12">
@@ -141,4 +199,5 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection

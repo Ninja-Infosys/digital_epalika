@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">सबै कार्यहरू </h4>
                         <div class="d-flex flex-wrap align-items-center">
@@ -29,9 +29,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-custom">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -72,6 +72,9 @@
                                             </a>
                                         @endcan
                                     </td>
+                                </tr>
+                                <tr class="empty">
+                                    <td></td>
                                 </tr>
                             @empty
                                 <tr>

@@ -16,6 +16,7 @@ class UpdateEmergencyCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required'],
+            'image'=>['nullable','image','mimes:png,jpg,jpeg'],
         ];
     }
 

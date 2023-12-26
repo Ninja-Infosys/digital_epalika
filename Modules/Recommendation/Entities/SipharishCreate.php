@@ -2,15 +2,17 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\MobileUser;
 use App\Models\User;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 class SipharishCreate extends Model
@@ -35,12 +37,19 @@ class SipharishCreate extends Model
         'approved_date',
         'approved_status',
         'created_by',
-        'status'
+        'status',
+        'file'
+        'mobile_user_id'
     ];
     protected $casts = [
         'status' => 'boolean',
     ];
 
+
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
+    }
 
     public function signaturedBy(): BelongsTo
     {
@@ -80,16 +89,19 @@ class SipharishCreate extends Model
 
     public function resolveTemplate(): string
     {
-
-
         $content = letterHead() . $this->SipharishFormType?->content;
         $replaceableList = collect();
         $this->load('SipharishFormType', 'SipharishCreatedValues.SipharisFormField');
-        foreach ($this->SipharishCreatedValues?->load('SipharisFormField') as $values) {
-            $replaceableList->put('{{' . $values->SipharisFormField?->field_name . '}}', $values->value);
-            $replaceableList->put('[@form.' . $values->SipharisFormField?->field_name . ']', $values->value);
+        foreach ($this->SipharishCreatedValues?->load('SipharisFormField.SipharishFormFields') as $values) {
+            if ($values->type == 'table') {
+                $value = (string)View::make('recommendation::admin.sipharisCreate.recommendationTable', compact('values'));
+            } else {
+                $value = $values->value_data;
+            }
+            $replaceableList->put('{{' . $values->SipharisFormField?->field_name . '}}', $value);
+            $replaceableList->put('[@form.' . $values->SipharisFormField?->field_name . ']', $value);
             if (!empty($values->SipharisFormField?->slug)) {
-                $replaceableList->put('[@form.' . $values->SipharisFormField?->slug . ']', $values->value);
+                $replaceableList->put('[@form.' . $values->SipharisFormField?->slug . ']', $value);
             }
         }
         $replaceableList->put('[@province]', officeSetting()->province->province);
@@ -105,5 +117,17 @@ class SipharishCreate extends Model
     public function signature()
     {
         return $this->belongsTo(SipharisSignatureDetail::class, 'sipharis_signature_id');
+    }
+
+    public function setFileAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['file'] = $value->store('sipharish/', 'public');
+        }
+    }
+
+    public function getFileUrlAttribute(): string
+    {
+        return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : asset('images/user_icon.jpg');
     }
 }

@@ -25,6 +25,7 @@ class SipharishFormTypeLivewire extends Component
 
     ];
     public $existingForm = null;
+
     public function mount($formData = null)
     {
         $this->sipharishCategories = SipharisCategory::status()->get();
@@ -42,34 +43,56 @@ class SipharishFormTypeLivewire extends Component
                 $formDataTypeArray[$index]['id'] = $formDataType->id;
                 $formDataTypeArray[$index]['field_name'] = $formDataType->field_name;
                 $formDataTypeArray[$index]['slug'] = $formDataType->slug ?? '';
+                $formDataTypeArray[$index]['type'] = $formDataType->type->value ?? '';
+
+                foreach ($formDataType->SipharishFormFields as $childIndex=>$fields) {
+                    $formDataTypeArray[$index]['table'][$childIndex]['id'] = $fields->id;
+                    $formDataTypeArray[$index]['table'][$childIndex]['field_name'] = $fields->field_name;
+                    $formDataTypeArray[$index]['table'][$childIndex]['slug'] = $fields->slug ?? '';
+                    $formDataTypeArray[$index]['table'][$childIndex]['type'] = $fields->type->value ?? '';
+                }
             }
 
             $this->form['formDataType'] = $formDataTypeArray;
         }
     }
 
-    public function addRow()
+    public function addRow(): void
     {
-        $this->form['formDataType'][] =   [];
+        $this->form['formDataType'][] = [];
     }
 
-    public function removeRow($index)
+    public function addRowInTable($index): void
+    {
+        $this->form['formDataType'][$index]['table'][] = [];
+    }
+
+    public function removeRow($index): void
     {
         if (isset($this->form['formDataType'][$index])) {
             $formDataType = $this->form['formDataType'][$index];
 
-            if (isset($formDataType['id'])) {
-                $formDataTypeRecord = SipharisFormField::find($formDataType['id']);
-                if ($formDataTypeRecord) {
-                    $formDataTypeRecord->delete();
-                }
-            }
+            $this->deleteRowFromDb($formDataType);
             $formDataTypeCollection = collect($this->form['formDataType']);
             $formDataTypeCollection->forget($index);
 
             $this->form['formDataType'] = $formDataTypeCollection->values()->all();
         }
     }
+
+    public function removeRowInTable($index, $childIndex): void
+    {
+        if (isset($this->form['formDataType'][$index]['table'][$childIndex])) {
+            $formDataType = $this->form['formDataType'][$index]['table'][$childIndex];
+
+            $this->deleteRowFromDb($formDataType);
+            $formDataTypeCollection = collect($this->form['formDataType'][$index]['table']);
+            $formDataTypeCollection->forget($childIndex);
+
+            $this->form['formDataType'][$index]['table'] = $formDataTypeCollection->values()->all();
+        }
+    }
+
     protected $rules = [
         "form.sipharis_category_id" => ['required'],
         "form.sipharis_sub_category_id" => ['required'],
@@ -80,10 +103,12 @@ class SipharishFormTypeLivewire extends Component
         "form.formDataType.*.id" => ['nullable'],
         "form.formDataType.*.field_name" => ['required'],
         "form.formDataType.*.slug" => ['required', 'alpha_dash'],
+        "form.formDataType.*.type" => ['required'],
+        "form.formDataType.*.table" => ['nullable', 'array']
     ];
-    public function updated($propertyName)
-    {
 
+    public function updated($propertyName): void
+    {
         $this->validateOnly($propertyName);
     }
 
@@ -96,8 +121,8 @@ class SipharishFormTypeLivewire extends Component
                 $form = $this->existingForm;
             } else {
                 $form = SipharishFormType::create($validatedData['form'] + [
-                    'created_by' => auth()->id()
-                ]);
+                        'created_by' => auth()->id()
+                    ]);
             }
             $existingFormFieldsId = collect($form->sipharisFormFields?->pluck('id'));
             $newId = collect();
@@ -107,8 +132,21 @@ class SipharishFormTypeLivewire extends Component
                     $formDataTypeData->update($formDataType);
                 } else {
                     $formDataTypeData = $form->sipharisFormFields()->create($formDataType + [
-                        'created_by' => auth()->id()
-                    ]);
+                            'created_by' => auth()->id()
+                        ]);
+                }
+
+                if ($formDataType['type'] == 'table' && !empty($formDataType['table'])) {
+                    foreach ($formDataType['table'] as $table) {
+                        if (array_key_exists('id', $table) && !empty($table['id'])) {
+                            $tableData = SipharisFormField::find($table['id']);
+                            $tableData?->update($table);
+                        } else {
+                            $tableData = $formDataTypeData->SipharishFormFields()->create($table + [
+                                    'created_by' => auth()->id()
+                                ]);
+                        }
+                    }
                 }
                 $newId->push($formDataTypeData->id);
             }
@@ -130,5 +168,19 @@ class SipharishFormTypeLivewire extends Component
                 ->get();
         }
         return view('livewire.sipharish-form-type-livewire');
+    }
+
+    /**
+     * @param mixed $formDataType
+     * @return void
+     */
+    public function deleteRowFromDb(mixed $formDataType): void
+    {
+        if (isset($formDataType['id'])) {
+            $formDataTypeRecord = SipharisFormField::find($formDataType['id']);
+            if ($formDataTypeRecord) {
+                $formDataTypeRecord->delete();
+            }
+        }
     }
 }

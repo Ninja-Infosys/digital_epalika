@@ -26,14 +26,19 @@ class RouteServiceProvider extends ServiceProvider
             ->as('roaster.')
             ->group(module_path('Roaster', '/Routes/web.php'));
 
-            Route::middleware('web')
-            ->prefix('api/roaster')
-                ->group(module_path('Roaster', '/Routes/v1/publicRoute.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
+        Route::middleware('web')
+            ->prefix('api/roaster')
+            ->group(module_path('Roaster', '/Routes/v1/publicRoute.php'));
+
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', 'checkPinMiddleware'])
             ->prefix('admin/roaster')
             ->as('admin.roaster.')
             ->group(module_path('Roaster', '/Routes/admin.php'));
+        Route::middleware(['web', 'auth:traineeUser', 'traineePassword.check'])
+            ->prefix('traineeOrganization/admin')
+            ->as('traineeOrganization.admin.')
+            ->group(base_path('/Modules/Roaster/Routes/organization/admin.php'));
     }
 
     protected function mapApiRoutes()
@@ -42,5 +47,11 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->group(module_path('Roaster', '/Routes/api.php'));
 
+        Route::prefix('api/v1/trainee')
+            ->middleware('api')
+            ->group(module_path('Roaster', '/Routes/api/publicRoute.php'));
+        Route::prefix('api/v1/trainee/user')
+            ->middleware(['api', 'auth:sanctum'])
+            ->group(module_path('Roaster', '/Routes/api/privateRoute.php'));
     }
 }
