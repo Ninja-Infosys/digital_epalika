@@ -2,16 +2,12 @@
 
 namespace Modules\GrievanceHandling\Http\Livewire;
 
-use App\Mail\GrievanceHandling\GrievanceRegistrationAssignedUserMail;
-use App\Mail\GrievanceHandling\GrievanceRegistrationUserMail;
 use App\Models\Settings\Branch;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceSetting;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;

@@ -16,6 +16,7 @@ class StoreEmergencyCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required'],
+            'image' => ['required','mimes:png,jpg,jpeg'],
         ];
     }
 
@@ -23,6 +24,7 @@ class StoreEmergencyCategoryRequest extends FormRequest
     {
         return [
             'title.required' => 'शिर्षक आबस्यक छ',
+            'image.required' => 'फोटो आवश्यक छ'
         ];
     }
 }

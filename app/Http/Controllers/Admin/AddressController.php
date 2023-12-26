@@ -3,16 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\Address\ProvinceResource;
 use App\Http\Resources\DistrictResource;
 use App\Http\Resources\LocalBodyResource;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
-    public function address()
+    public function provinces()
     {
+        return ProvinceResource::collection(Province::all());
+    }
+
+    public function province(Province $province)
+    {
+        return ProvinceResource::make($province->load('districts'));
     }
 
     public function district(Request $request)

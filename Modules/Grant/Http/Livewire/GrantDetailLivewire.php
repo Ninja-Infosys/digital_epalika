@@ -57,7 +57,7 @@ class GrantDetailLivewire extends Component
 
     public function mount($grantDetail = null): void
     {
-        $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
+        $this->grants = Grant::with('fiscalYear')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
         $this->cooperativeTypes = CooperativeType::all();
         $this->enterpriseTypes = EnterpriseType::all();
@@ -93,7 +93,7 @@ class GrantDetailLivewire extends Component
 
             return GrantDetail::where('model_type', Farmer::class)
                 ->whereIn('model_id', $familyId)
-                ->with('model', 'grant.grantProgram', 'grant.fiscalYear')
+                ->with('model', 'grant.fiscalYear')
                 ->latest()
                 ->get();
         }

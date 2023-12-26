@@ -12,7 +12,7 @@ return new class () extends Migration {
             $table->foreignId('complaint_application_id')->constrained()->cascadeOnDelete();
             $table->string('type');
             $table->string('document_name')->nullable();
-            $table->string('document');
+            $table->string('document')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

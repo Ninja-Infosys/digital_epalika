@@ -43,6 +43,7 @@ Route::prefix('sipharish')->as('sipharish.')->group(function () {
     Route::get('sipharisSignatureDetail/{sipharisSignatureDetail}/toggleStatus', [SignatureDetailController::class, 'updateStatus'])->name('sipharisSignatureDetail.updateStatus');
     Route::resource('sipharisSignatureDetail', SignatureDetailController::class);
     Route::get('sipharishCreate/{sipharishCreate}/toggleStatus', [SipharisCreateController::class, 'updateStatus'])->name('sipharishCreate.updateStatus');
+    Route::put('sipharishCreate/{sipharishCreate}/fileUpload', [SipharisCreateController::class, 'fileUpload'])->name('fileUpload');
     Route::resource('sipharishCreate', SipharisCreateController::class);
 });
 

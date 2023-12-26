@@ -66,6 +66,14 @@
     </li>
 @endcan
 
+    <li>
+        <a href="{{ route('admin.grant.cashGrant.index') }}">
+            <i class="fa fa-list-alt"></i>
+            <span>नगद अनुदानको लागि </span>
+        </a>
+    </li>
+
+
 <li class="{{ request()->is('admin/grant/report/*') ? 'active' : '' }}">
     <a href="#sidebarGrantReport" {{ request()->is('admin/grant/report/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
@@ -106,12 +114,17 @@
                 </li>
             @endcan
             @can('grantReport_access')
-                <li class="{{ request()->is('admin/grant/report/grant') ? 'active' : '' }}">
-                    <a href="{{ route('admin.grant.report.grant.index') }}">
-                        <span>अनुदान रिपोर्ट </span>
+                <li class="{{ request()->is('admin/grant/report/program') ? 'active' : '' }}">
+                    <a href="{{ route('admin.grant.report.grant.program-report') }}">
+                        <span>कार्यक्रम अनुसार रिपोर्ट </span>
                     </a>
                 </li>
             @endcan
+            <li class="{{ request()->is('admin/grant/report/') ? 'active' : '' }}">
+                <a href="{{ route('admin.grant.report.group.index') }}">
+                    <span>समूह रिपोर्ट </span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
@@ -169,6 +182,13 @@
                     </a>
                 </li>
             @endcan
+           
+            <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
+                <a href="{{ route('admin.grant.setting.helplessnessType.index') }}">
+                    <span> असहायताको प्रकार</span>
+                </a>
+            </li>
+       
         </ul>
     </div>
 </li>

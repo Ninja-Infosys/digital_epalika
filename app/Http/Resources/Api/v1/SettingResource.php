@@ -12,6 +12,7 @@ class SettingResource extends JsonResource
             'name' => $this->name ?? '',
             'site_address' => $this->site_address ?? '',
             'logo' => $this->logo_url ?? '',
+            'ward no' => $this->localbody->wards ?? '',
         ];
     }
 }

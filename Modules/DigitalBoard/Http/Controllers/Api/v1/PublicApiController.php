@@ -8,6 +8,7 @@ use App\Models\Settings\Employee;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
   use Modules\DigitalBoard\Entities\Audio;
+use Modules\DigitalBoard\Entities\CitizenCharter;
 use Modules\DigitalBoard\Entities\News;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\PopUpNotice;
@@ -16,6 +17,7 @@ use Modules\DigitalBoard\Entities\PhotoGallery;
 use Modules\DigitalBoard\Entities\Service;
 use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Transformers\api\v1\BranchResource;
+use Modules\DigitalBoard\Transformers\api\v1\CitizenCharterResource;
 use Modules\DigitalBoard\Transformers\api\v1\EmployeeResource;
 use Modules\DigitalBoard\Transformers\api\v1\NewsResource;
 use Modules\DigitalBoard\Transformers\api\v1\NoticeResource;
@@ -33,14 +35,21 @@ class PublicApiController extends Controller
 {
     public function employee(): AnonymousResourceCollection
     {
-        $employees = Employee::orderBy('position')->active()->employee()->showForMobileAppRequest()->get();
+        $employees = Employee::orderBy('position')
+            ->active()
+            ->employee()
+            ->showForMobileAppRequest()->get();
 
         return EmployeeResource::collection($employees);
     }
 
     public function publicRepresentative(): AnonymousResourceCollection
     {
-        $employees = Employee::orderBy('position')->active()->peopleRepresentative()->showForMobileAppRequest()->get();
+        $employees = Employee::orderBy('position')
+            ->active()
+            ->peopleRepresentative()
+            ->showForMobileAppRequest()
+            ->get();
 
         return EmployeeResource::collection($employees);
     }
@@ -127,8 +136,8 @@ class PublicApiController extends Controller
 
     public function getAllService(): AnonymousResourceCollection
     {
-        $services = Service::with('branch')->get();
-        return ServiceResource::collection($services);
+        $services = CitizenCharter::with('branch')->get();
+        return CitizenCharterResource::collection($services);
     }
 
     public function getService(Service $service): ServiceResource

@@ -26,14 +26,14 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header search-card">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">व्यवसाय दर्ता सूची</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm table-striped">
+                        <table class="table table-sm table-custom">
                             <thead>
                             <tr>
                                 <th>क्र.स.</th>
@@ -51,6 +51,9 @@
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>
+                                </tr>
+                                <tr class="empty">
+                                    <td></td>
                                 </tr>
                             @empty
                                 <tr>

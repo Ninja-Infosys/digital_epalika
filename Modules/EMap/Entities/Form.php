@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
-use Modules\EMap\Entities\New\MapPassGroup;
+use Modules\EMap\Entities\MapPassGroup;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\FormTypeEnum;
 use Modules\EMap\Entities\AppliedDocument;

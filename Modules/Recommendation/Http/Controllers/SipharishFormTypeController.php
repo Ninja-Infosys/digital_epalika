@@ -52,7 +52,7 @@ class SipharishFormTypeController extends Controller
 
     public function edit(SipharishFormType $sipharishFormType)
     {
-        $sipharishFormType->load('sipharisFormFields', 'sipharisSubCategory');
+        $sipharishFormType->load('sipharisFormFields.SipharishFormFields', 'sipharisSubCategory');
         return view('recommendation::admin.sipharisFormType.edit', compact('sipharishFormType'));
     }
 
