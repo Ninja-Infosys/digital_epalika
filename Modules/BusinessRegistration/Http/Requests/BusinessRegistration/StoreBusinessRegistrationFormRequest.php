@@ -35,7 +35,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'fixed_capital' => ['nullable'],
             'investment' => ['required'],
             'is_rent' => ['nullable'],
-            'house_owner_name' => ['nullable', 'string'],
+            'house_owner_name' => ['required_if:is_rent,1', 'string'],
             'house_owner_phone' => ['nullable', 'string'],
             'house_owner_address' => ['nullable', 'string'],
             'house_owner_monthly_rent' => ['nullable', 'string'],
@@ -43,7 +43,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'width' => ['nullable'],
             'application_date' => ['required', 'date'],
             'application_date_en' => ['required', 'date'],
-            'rent_agreement' => ['nullable'],
+            'rent_agreement' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'land_ownership_certificate' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'ward_recommendation' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'embassy_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
@@ -84,7 +84,8 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'registeredBusinesses.*.registration_no' => ['nullable',],
             'registeredBusinesses.*.registration_date' => ['nullable', 'date'],
             'registeredBusinesses.*.is_active' => ['nullable', 'boolean'],
-
+            'files' => ['nullable', 'array'],
+            'files.*' => ['file']
 
         ];
     }
