@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-8 m-auto">
         <div class="row modules">
             @if (Route::has('grievanceHandling.grievance'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="{{ route('grievanceHandling.grievance') }}">
                             <div class="pt-4 text-center">
@@ -15,7 +15,7 @@
                 </div>
             @endif
             @if (Route::has('ebps'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="{{ route('ebps') }}">
                             <div class="pt-4 text-center">
@@ -28,7 +28,7 @@
                 </div>
             @endif
             @if (Route::has('digitalBoard.helpdesk.helpdesk'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="{{ route('digitalBoard.helpdesk.helpdesk') }}">
                             <div class="pt-4 text-center">
@@ -41,7 +41,7 @@
                 </div>
             @endif
             @if (Route::has('recommendation.index'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="#">
                             <div class="pt-4 text-center">
@@ -54,7 +54,7 @@
                 </div>
             @endif
             @if (Route::has('businessRegistration.business'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="{{ route('businessRegistration.business') }}">
                             <div class="pt-4 text-center">
@@ -68,7 +68,7 @@
                 </div>
             @endif
             @if (Route::has('grant.index'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="{{ route('grant.index') }}">
                             <div class="pt-4 text-center">
@@ -81,7 +81,7 @@
                 </div>
             @endif
             @if (Route::has('payment.index'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card disable_menu">
                         <a href="#">
                             <div class="pt-4 text-center">
@@ -94,7 +94,7 @@
                 </div>
             @endif
             @if (Route::has('roaster.index'))
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info-card module-card">
                         <a href="{{ route('roaster.index') }}">
                             <div class="pt-4 text-center">
@@ -108,55 +108,55 @@
             @endif
 
             <div class="col-md-3">
-                <div class="info-card">
+                <div class="info-card module-card">
                     <a href="https://pams.fcgo.gov.np/">
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                            <h6 class="p-2 text-white">जिन्सी व्यवस्थापन प्रणाली </h6>
+                            <h6 class="p-2 text-dark">जिन्सी व्यवस्थापन प्रणाली </h6>
                         </div>
                     </a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="info-card">
+                <div class="info-card module-card">
                     <a href="https://sutra.fcgo.gov.np/">
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                            <h6 class="p-2 text-white">संचितकोष व्यवस्थापन प्रणाली </h6>
+                            <h6 class="p-2 text-dark">संचितकोष व्यवस्थापन प्रणाली </h6>
                         </div>
                     </a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="info-card">
+                <div class="info-card module-card">
                     <a href="https://public.donidcr.gov.np/">
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                            <h6 class="p-2 text-white">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h6>
+                            <h6 class="p-2 text-dark">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h6>
                         </div>
                     </a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="info-card">
+                <div class="info-card module-card">
                     <a href="https://ss.donidcr.gov.np/">
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                            <h6 class="p-2 text-white">सामाजिक सुरक्षा</h6>
+                            <h6 class="p-2 text-dark">सामाजिक सुरक्षा</h6>
                         </div>
                     </a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="info-card">
+                <div class="info-card module-card">
                     <a href="https://mail.nepal.gov.np/">
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                            <h6 class="p-2 text-white">इमेल सेवा</h6>
+                            <h6 class="p-2 text-dark">इमेल सेवा</h6>
                         </div>
                     </a>
                 </div>
@@ -164,35 +164,35 @@
 
 
             <div class="col-md-3">
-                <div class="info-card">
+                <div class="info-card module-card">
                     <a href="https://attendance.gov.np/">
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                            <h6 class="p-2 text-white">कार्यालयको हाजिरी</h6>
+                            <h6 class="p-2 text-dark">कार्यालयको हाजिरी</h6>
                         </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="info-card">
-                <a href="https://sms.aakashsms.com/login">
-                    <div class="pt-4 text-center">
-                        <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                        <h6 class="p-2 text-white">एस.एम.एस</h6>
-                    </div>
-                </a>
+            <div class="col-md-3">
+                <div class="info-card module-card">
+                    <a href="https://sms.aakashsms.com/login">
+                        <div class="pt-4 text-center">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <h6 class="p-2 text-dark">एस.एम.एस</h6>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="info-card">
-                <a href="https://apps.aakashtel.com/login">
-                    <div class="pt-4 text-center">
-                        <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
-                        <h6 class="p-2 text-white">Voice एस.एम.एस</h6>
-                    </div>
-                </a>
+            <div class="col-md-3">
+                <div class="info-card module-card">
+                    <a href="https://apps.aakashtel.com/login">
+                        <div class="pt-4 text-center">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <h6 class="p-2 text-dark">Voice एस.एम.एस</h6>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
