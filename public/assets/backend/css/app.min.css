@@ -10221,3 +10221,37 @@ table.table-custom tr td .btn-xs.btn-outline-danger:hover{
     background-color: #ffced6 !important;
     color: #ff2a4d;
 }
+.gunaso-message{
+    position: fixed;
+    bottom: 0;
+    left: 70%;
+}
+.gunaso-message .btn-box{
+width: 335px;
+    border-radius: 0px;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 999;
+    position: relative;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    border: 1px solid #ddd !important;
+}
+
+.my-chatbox{
+    width: 338px;
+    left: 5px;
+    position: relative;
+    box-shadow: none !important;
+}
+.atach-lable{
+    height: 49px;
+    width: 38px;
+    background: #eee;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0 !important;
+}
