@@ -59,8 +59,8 @@
                         <a href="{{ route('businessRegistration.business') }}">
                             <div class="pt-4 text-center">
                                 <img src="{{ asset('assets/frontend/image/new-icons/flat.png') }}"
-                                    style="object-fit: contain; height: 35px; width: 35px" width="50"
-                                    height="50">
+                                    style="object-fit: contain; height: 35px; width: 35px" width="35"
+                                    height="35">
                                 <h6 class="p-2 text-dark">व्यवसाय दर्ता</h6>
                             </div>
                         </a>
@@ -111,7 +111,7 @@
                 <div class="info-card module-card">
                     <a href="https://pams.fcgo.gov.np/">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">जिन्सी व्यवस्थापन प्रणाली </h6>
                         </div>
                     </a>
@@ -122,7 +122,7 @@
                 <div class="info-card module-card">
                     <a href="https://sutra.fcgo.gov.np/">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">संचितकोष व्यवस्थापन प्रणाली </h6>
                         </div>
                     </a>
@@ -133,7 +133,7 @@
                 <div class="info-card module-card">
                     <a href="https://public.donidcr.gov.np/">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">घटना दर्ता र सामाजिक सुरक्षा प्रणाली</h6>
                         </div>
                     </a>
@@ -144,7 +144,7 @@
                 <div class="info-card module-card">
                     <a href="https://ss.donidcr.gov.np/">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">सामाजिक सुरक्षा</h6>
                         </div>
                     </a>
@@ -155,7 +155,7 @@
                 <div class="info-card module-card">
                     <a href="https://mail.nepal.gov.np/">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">इमेल सेवा</h6>
                         </div>
                     </a>
@@ -167,7 +167,7 @@
                 <div class="info-card module-card">
                     <a href="https://attendance.gov.np/">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">कार्यालयको हाजिरी</h6>
                         </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="info-card module-card">
                     <a href="https://sms.aakashsms.com/login">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">एस.एम.एस</h6>
                         </div>
                     </a>
@@ -188,7 +188,7 @@
                 <div class="info-card module-card">
                     <a href="https://apps.aakashtel.com/login">
                         <div class="pt-4 text-center">
-                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="50" height="50">
+                            <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">Voice एस.एम.एस</h6>
                         </div>
                     </a>

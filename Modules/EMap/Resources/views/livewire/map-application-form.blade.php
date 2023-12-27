@@ -1,9 +1,9 @@
 <form wire:submit.prevent="saveFormData">
     <div class="row mb-3">
         <div class="col-md-3">
-            <label for="organization_id" class="form-label fw-bolder">संस्था <span class="text-danger">*</span></label>
+            {{-- <label for="organization_id" class="form-label fw-bolder">संस्था <span class="text-danger">*</span></label> --}}
             <select wire:model="applyMap.organization_id" id="organization_id" name="organization_id"
-                class="form-select form-select-sm" required>
+                class="form-select form-select-sm form-control-lg" required>
                 <option value="">--- संस्था छान्नुहोस् ---</option>
                 @foreach ($organizations as $organization)
                     <option value="{{ $organization->id }}">
@@ -16,9 +16,9 @@
             @enderror
         </div>
         <div class="col-md-3">
-            <label for="application_type" class="form-label fw-bolder"> नक्सा <span class="text-danger">*</span></label>
+            {{-- <label for="application_type" class="form-label fw-bolder"> नक्सा <span class="text-danger">*</span></label> --}}
             <select wire:model="applyMap.application_type" id="organization_id" name="application_type"
-                class="form-select form-select-sm" required>
+                class="form-select form-select-sm form-control-lg" required>
                 <option value="">--- नक्सा छान्नुहोस् ---</option>
                 @foreach (\Modules\EMap\Enums\ApplicationFormTypeEnum::cases() as $applicationFormTypeEnum)
                     <option value="{{ $applicationFormTypeEnum->value }}">{{ $applicationFormTypeEnum->label() }}

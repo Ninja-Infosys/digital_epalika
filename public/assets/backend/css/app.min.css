@@ -104,6 +104,9 @@
     --ct-lighten-300: #edeff1;
     --primary: #0047ab;
     --secondary: #0DCAF0;
+    /* --ct-primary-rgb: 0 71 171; */
+    --ct-primary-rgb: 0, 71, 171;
+    --ct-primary: #0047ab;
 }
 
 :root .jsgrid-table, :root .table, :root .table-bordered, :root .table-striped {
