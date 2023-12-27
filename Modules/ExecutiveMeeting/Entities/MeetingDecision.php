@@ -22,7 +22,6 @@ class MeetingDecision extends Model
 
     protected $fillable = [
         'meeting_id',
-        'meeting_agenda_id',
         'date',
         'en_date',
         'chairman',
@@ -35,8 +34,4 @@ class MeetingDecision extends Model
         return $this->belongsTo(Meeting::class);
     }
 
-    public function meetingAgenda(): BelongsTo
-    {
-        return $this->belongsTo(MeetingAgenda::class);
-    }
 }

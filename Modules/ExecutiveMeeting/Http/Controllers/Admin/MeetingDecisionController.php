@@ -17,9 +17,6 @@ class MeetingDecisionController extends Controller
     public function index(Meeting $meeting)
     {
         $this->checkAuthorization('meetingDecision_access');
-
-        $meeting->load('meetingDecisions.meetingAgenda');
-
         return view('executivemeeting::admin.meeting_decision.index', compact('meeting'));
     }
 
@@ -30,10 +27,6 @@ class MeetingDecisionController extends Controller
         $committeeMembers = CommitteeMember::where('committee_id', $meeting->committee_id)->orderBy('position')->get();
 
         $meeting->load([
-            'meetingAgendas' => function ($query) {
-                $query->with('meetingDecision');
-                $query->where('is_final', 1);
-            },
             'meetingParticipants',
             'meetingDecision',
             'invitedMembers'
@@ -62,17 +55,20 @@ class MeetingDecisionController extends Controller
             );
             $existingId = collect($meeting->invitedMembers?->pluck('id'));
             $newId = collect();
-            foreach ($request->validated()['invitedMember'] as $invitedMember) {
-                $invitedData = InvitedMember::create(
-                    [
-                        'meeting_id' => $meeting->id,
-                        'name' => $invitedMember['name'],
-                        'designation' => $invitedMember['designation'],
-                        'phone' => $invitedMember['phone'],
-                        'email' => $invitedMember['email'],
-                    ]
-                );
-                $newId->push($invitedData->id);
+            if (!empty($request->validated()['invitedMember'])) {
+
+                foreach ($request->validated()['invitedMember'] as $invitedMember) {
+                    $invitedData = InvitedMember::create(
+                        [
+                            'meeting_id' => $meeting->id,
+                            'name' => $invitedMember['name'],
+                            'designation' => $invitedMember['designation'],
+                            'phone' => $invitedMember['phone'],
+                            'email' => $invitedMember['email'],
+                        ]
+                    );
+                    $newId->push($invitedData->id);
+                }
             }
 
             $diff = $existingId->diff($newId->filter());
@@ -108,11 +104,6 @@ class MeetingDecisionController extends Controller
     public function edit(Meeting $meeting, MeetingDecision $meetingDecision)
     {
         $this->checkAuthorization('meetingDecision_edit');
-
-        $meeting->load(['meetingAgendas' => function ($query) {
-            $query->where('is_final', 1);
-        }]);
-
         return view('executivemeeting::admin.meeting_decision.edit', compact('meeting', 'meetingDecision'));
     }
 
