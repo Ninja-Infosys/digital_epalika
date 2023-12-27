@@ -60,15 +60,15 @@ return [
         |
         */
         'properties'             => [
-            'creator'        => 'Ninja Infosys',
+            'creator'        => 'Digital ePalika',
             'lastModifiedBy' => config('app.name'),
             'title'          => 'Report Export',
             'description'    => 'Latest Report',
             'subject'        => 'Reports',
             'keywords'       => 'report,export,spreadsheet',
             'category'       => 'Reports',
-            'manager'        => 'Ninja Infosys',
-            'company'        => 'Ninja Infosys',
+            'manager'        => 'Digital ePalika',
+            'company'        => 'Digital ePalika',
         ],
     ],
 

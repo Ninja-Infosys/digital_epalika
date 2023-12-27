@@ -141,11 +141,9 @@ overflow: hidden">
     </div>
     <div class="thought">
         <h4 class="mb-1 text-dark fw-bold">प्राविधिक सहायता कक्ष</h4>
-        <p>
-            <i class="fa fa-phone-alt"></i> : 081-520361
-        </p>
+
         <p class="text-center">
-            <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
+            <i class="fa fa-envelope"></i> : epalikad@gmail.com
         </p>
     </div>
 </div>
@@ -154,7 +152,7 @@ overflow: hidden">
     <script>
         document.write(new Date().getFullYear());
     </script>
-    &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
+    &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">Digital ePalika</a>
 </footer>
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>

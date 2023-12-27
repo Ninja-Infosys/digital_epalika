@@ -16,7 +16,7 @@ class StoreSipharisCreatedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'personal_detail_id' => ['required', Rule::exists('personal_details', 'id')->withoutTrashed()],
+            'personal_detail_id' => ['nullable'],
             'sipharis_category_id' => ['required', Rule::exists('sipharis_categories', 'id')->withoutTrashed()],
             'sipharis_sub_category_id' => ['required', Rule::exists('sipharis_sub_categories', 'id')->withoutTrashed()],
             'sipharis_form_type_id' => ['required', Rule::exists('sipharish_form_types', 'id')->withoutTrashed()],
@@ -25,6 +25,10 @@ class StoreSipharisCreatedRequest extends FormRequest
             'fields.*.sipharish_form_field_id' => ['nullable', Rule::exists('sipharis_form_fields', 'id')->withoutTrashed()],
             'fields.*.value' => ['nullable'],
             'fields.*.type' => ['required'],
+            'fields.*.table' => ['required_if:fields.*.type ==,table'],
+            'fields.*.table.*.sipharish_form_field_id' => ['nullable', Rule::exists('sipharis_form_fields', 'id')->withoutTrashed()],
+            'fields.*.table.*.value' => ['nullable'],
+            'fields.*.table.*.type' => ['nullable'],
             'files' => ['nullable', 'array'],
             'files.*.title' => ['required', 'string'],
             'files.*.filename' => ['nullable', 'file'],

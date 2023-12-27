@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="A complete solution for a digital palika." name="description" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta content="Ninja Infosys" name="author" />
+    <meta content="Digital ePalika" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('images/np.png') }}" />
@@ -41,7 +41,7 @@
             </div>
             <footer class="footer">
                 <div class="container-fluid text-center">
-                    {{ date('Y') }} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA
+                    {{ date('Y') }} &copy; Design & Developed by <a href="https://digitalepalika.com">NINJA
                         INFOSYS</a>
                 </div>
             </footer>

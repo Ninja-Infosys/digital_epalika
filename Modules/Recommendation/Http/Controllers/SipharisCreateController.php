@@ -3,10 +3,12 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Illuminate\Support\Facades\DB;
+
 
 class SipharisCreateController extends Controller
 {
@@ -28,11 +30,13 @@ class SipharisCreateController extends Controller
         $sipharis = DB::transaction(function () use ($request) {
 
             $sipharis = SipharishCreate::create($request->validated() + [
-                    'created_by' => auth()->id()
-                ]);
+                'created_by' => auth()->id()
+            ]);
 
-            if (array_key_exists('fields', $request->validated())
-                && !empty($request->validated()['fields'])) {
+            if (
+                array_key_exists('fields', $request->validated())
+                && !empty($request->validated()['fields'])
+            ) {
 
                 foreach ($request->validated()['fields'] as $field) {
 
@@ -49,18 +53,18 @@ class SipharisCreateController extends Controller
                             'type' => $field['type'] ?? '',
                         ]);
                 }
-
             }
 
-            if (array_key_exists('files', $request->validated())
-                && !empty($request->validated()['files'])) {
+            if (
+                array_key_exists('files', $request->validated())
+                && !empty($request->validated()['files'])
+            ) {
 
                 foreach ($request->validated()['files'] as $file) {
                     $sipharis->SipharisCreatedDocuments()->create($file + [
-                            'extension' => $file['filename']->getClientOriginalExtension()
-                        ]);
+                        'extension' => $file['filename']->getClientOriginalExtension()
+                    ]);
                 }
-
             }
 
             return $sipharis;
@@ -68,8 +72,6 @@ class SipharisCreateController extends Controller
 
         toast('सिफारिस सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.recommendation.sipharish.sipharishCreate.show', $sipharis->id));
-
-
     }
 
     public function edit(SipharishCreate $sipharishCreate)
@@ -82,7 +84,6 @@ class SipharisCreateController extends Controller
 
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
         return view('recommendation::admin.sipharisCreate.view', compact('sipharishCreate'));
-
     }
 
     public function updateStatus(SipharishCreate $sipharishCreate)
@@ -93,6 +94,16 @@ class SipharisCreateController extends Controller
             'status' => !$sipharishCreate->status
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function fileUpload(Request $request, SipharishCreate $sipharishCreate)
+    {
+        $data = $request->validate([
+            'file' => ['required', 'file']
+        ]);
+        $sipharishCreate->update($data);
+        toast('फाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 
