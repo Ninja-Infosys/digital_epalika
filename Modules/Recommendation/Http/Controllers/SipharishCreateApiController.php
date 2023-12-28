@@ -13,6 +13,7 @@ use Modules\Recommendation\Entities\SipharishFormType;
 use Modules\Recommendation\Entities\SipharisSubCategory;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Modules\Recommendation\Transformers\SifarishFormFieldResource;
+use Modules\Recommendation\Transformers\SipharishCreateListResource;
 use Modules\Recommendation\Transformers\SipharishCreateResource;
 use Modules\Recommendation\Transformers\SipharishFormFieldResource;
 use Modules\Recommendation\Transformers\SipharishFormTypeResource;
@@ -61,9 +62,7 @@ class SipharishCreateApiController extends Controller
         // dd($request->validated());
         $sipharis = DB::transaction(function () use ($request) {
 
-            $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated() + [
-                'created_by' => auth()->id(),
-            ]);
+            $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
                 && !empty($request->validated()['fields'])
@@ -123,5 +122,20 @@ class SipharishCreateApiController extends Controller
         return response()->json([
             'message' => 'Sipharish Create Stored Successfully'
         ]);
+    }
+
+    public function sipharishCreateList()
+    {
+        $sipharishCreates = SipharishCreate::with('SipharishFormType')
+            ->where('mobile_user_id', auth()->user()->id)
+            ->latest()->get();
+
+        return response()->json(SipharishCreateListResource::collection($sipharishCreates));
+    }
+    public function sipharishCreateShow(SipharishCreate $sipharishCreate)
+    {
+        $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
+
+        return response()->json(SipharishCreateListResource::make($sipharishCreate));
     }
 }

@@ -19,7 +19,7 @@
                     <li class="breadcrumb-item active">नयाँ गुनासो प्रयोगकर्ता थप्नुहोस्</li>
                 </ol>
             </div>
-            <h4 class="page-title">गुनासो प्रयोगकर्ता </h4>
+            <h4 class="page-title">गुनासो प्रयोगकर्ता</h4>
         </div>
     </div>
 </div>

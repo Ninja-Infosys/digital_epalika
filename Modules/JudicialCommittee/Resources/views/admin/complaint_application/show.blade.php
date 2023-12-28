@@ -119,6 +119,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>क्र.स.</th>
+                                                                    <th>विवदको प्रकार</th>
                                                                     <th>नाम</th>
                                                                     <th>उमेर</th>
                                                                     <th>बुवाको नाम</th>
@@ -131,6 +132,7 @@
                                                                 @foreach ($complaintApplication->complainantDefendants->where('type', $complainantDefendantType) as $key => $complainant)
                                                                     <tr>
                                                                         <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{$complainant->complain_type}}</td>
                                                                         <td>{{ $complainant->name }}</td>
                                                                         <td>{{ $complainant->age }}</td>
                                                                         <td>{{ $complainant->father_name }}</td>

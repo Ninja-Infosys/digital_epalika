@@ -11,7 +11,6 @@ return new class() extends Migration
         Schema::create('meeting_decisions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meeting_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('meeting_agenda_id')->constrained()->cascadeOnDelete();
             $table->string('date')->nullable()->comment('मिति (वि.स.)');
             $table->string('chairman')->nullable()->comment('अध्यक्ष');
             $table->string('en_date')->nullable()->comment('मिति (ई.स.)');

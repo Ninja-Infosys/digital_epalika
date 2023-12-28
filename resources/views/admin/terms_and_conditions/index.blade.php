@@ -8,7 +8,7 @@
         content="A complete solution for digital palika."
         name="description"
     />
-    <meta content="NINJA INFOSYS" name="author"/>
+    <meta content="Digital ePalika" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>

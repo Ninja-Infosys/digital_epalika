@@ -39,7 +39,7 @@
         </nav>
       </div>
     </div>
-  
+
     <div class="container mt-4">
       <div class="row">
         <div class="shadow">
@@ -60,14 +60,14 @@
                 <td>Ninja</td>
                 <td>Mayor</td>
                 <td>उप-महानगरपालिका</td>
-                <td>ninjainfosys@gmail.com</td>
+                <td>epalikad@gmail.com</td>
               </tr>
               <tr>
                 <img src="assets/img/flag.gif">
                 <td>Ninja</td>
                 <td>Deputy mayor</td>
                 <td>उप-महानगरपालिका</td>
-                <td>ninjainfosys@gmail.com</td>
+                <td>epalikad@gmail.com</td>
               </tr>
               </tbody>
             </table>
@@ -75,6 +75,6 @@
         </div>
       </div>
     </div>
-  
+
   </section>
-@endsection  
+@endsection
