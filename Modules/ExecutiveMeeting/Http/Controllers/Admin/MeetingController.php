@@ -73,7 +73,7 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_access');
 
-        $meeting->load('committee', 'meetingDecisions.meetingAgenda', 'meetingMinute', 'meetingParticipants');
+        $meeting->load('committee','meetingMinute', 'meetingParticipants');
 
         return view('executivemeeting::admin.meeting.show', compact('meeting'));
     }

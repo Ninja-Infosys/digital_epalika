@@ -131,13 +131,12 @@ overflow: hidden">
     <footer class="footer footer-alt bg-soft-main">
         2022 -
         <script>
-            document.write(new Date().getFullYear());
+            {{date('Y')}}
         </script>
         &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
     </footer>
     <!-- Vendor js -->
     <script src="{{ asset('assets/backend/js/vendor.min.js') }}"></script>
-
     <!-- App js -->
     <script src="{{ asset('assets/backend/js/app.min.js') }}"></script>
 </body>

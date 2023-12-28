@@ -38,7 +38,7 @@ class SipharishCreate extends Model
         'approved_status',
         'created_by',
         'status',
-        'file'
+        'file',
         'mobile_user_id'
     ];
     protected $casts = [
