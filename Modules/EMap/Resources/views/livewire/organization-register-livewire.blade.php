@@ -87,6 +87,53 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="muncipalRegistration.palika_reg_no" class="form-label">पालिका दर्ता नं.
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input
+                                name="muncipalRegistration.palika_reg_no"
+                                class="form-control @error('muncipalRegistration.palika_reg_no') is-invalid @enderror"
+                                type="number"
+                                id="muncipalRegistration.palika_reg_no"
+                                placeholder="पालिका दर्ता नं."
+                                wire:model="muncipalRegistration.palika_reg_no"
+                            />
+                            @error('muncipalRegistration.palika_reg_no')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="muncipalRegistration.reg_date" class="form-label">दर्ता मिति (बि. स.)
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input
+                                name="muncipalRegistration.reg_date"
+                                class="form-control @error('muncipalRegistration.reg_date') is-invalid @enderror"
+                                type="text"
+                                id="muncipalRegistration.reg_date"
+                                placeholder="दर्ता मिति (YYYY-MM-DD)"
+                                wire:model="muncipalRegistration.reg_date"
+                            />
+                            @error('muncipalRegistration.reg_date')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="muncipalRegistration.file" class="form-label">फाइल
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input
+                                name="muncipalRegistration.file"
+                                class="form-control @error('muncipalRegistration.file') is-invalid @enderror"
+                                type="file"
+                                id="muncipalRegistration.file"
+                                wire:model="muncipalRegistration.file"
+                            />
+                            @error('muncipalRegistration.file')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
                     </div>
                     <ul class="list-inline wizard mt-3">
                         <li class="next d-flex justify-content-end">
