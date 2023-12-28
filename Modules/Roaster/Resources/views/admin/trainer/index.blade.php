@@ -25,12 +25,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">प्रशिक्षकहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
+
+                            <a href=""
+                            class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            
                         </div>
                     </div>
                 </div>

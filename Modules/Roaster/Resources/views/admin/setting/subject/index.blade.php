@@ -22,10 +22,12 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">विषयहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                        @includeIf('inc.filter_form')
                         @can('subject_create')
                             <a href="{{route('admin.roaster.setting.subject.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -33,6 +35,7 @@
                             </a>
                         @endcan
                     </div>
+                </div>
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">

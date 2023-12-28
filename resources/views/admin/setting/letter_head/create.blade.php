@@ -21,13 +21,13 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">लेटर हेड </h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.systemSetting.letterHead.store')}}" method="post">
                         @csrf
                         <div class="row">

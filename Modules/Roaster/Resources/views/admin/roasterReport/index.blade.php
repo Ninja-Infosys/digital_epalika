@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">तालिम दर्ता रिपोर्ट</h4>
 
                         <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
@@ -33,10 +33,10 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form" method="POST">
-                            <fieldset class="border p-2 mb-2">
+                            <fieldset class="border p-2 mb-2 mb-4">
                                 <legend class="font-16 text-info">
                                     <strong>मिति </strong>
                                 </legend>
@@ -60,7 +60,7 @@
                             </fieldset>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>आर्थिक बर्ष </strong>
                                         </legend>
@@ -81,7 +81,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 निर्माण कार्यको किसिम
@@ -105,7 +105,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 प्रयोजन
@@ -129,7 +129,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 भवन ऐन अनुसार वर्गीकरण
@@ -151,7 +151,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 हाल निर्माण गर्ने तल्ला संख्या
@@ -177,7 +177,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 भविष्यमा निर्माण गर्ने तल्ला संख्या
@@ -203,7 +203,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 प्लिन्थको क्षेत्रफल
@@ -229,7 +229,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 कुल भवनको लम्बाई
@@ -255,7 +255,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 कुल भवनको चौडाई
@@ -281,7 +281,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-12">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>
                                                 नक्सा

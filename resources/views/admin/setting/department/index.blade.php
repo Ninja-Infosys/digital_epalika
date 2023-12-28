@@ -23,17 +23,20 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">बिभाग सूची</h4>
-                        @can('department_create')
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('department_create')
                             <a href="{{route('admin.generalSetting.department.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
+                </div>
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">

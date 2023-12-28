@@ -1,12 +1,11 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title mb-0">नक्शा दस्तुर </h4>
-                <div class="">
-                    <ol class="breadcrumb mb-2">
-                        <li class="breadcrumb-item">
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
                                     alt="document-icon">
@@ -19,21 +18,26 @@
                         <li class="breadcrumb-item active">नक्शा दस्तुर</li>
                     </ol>
                 </div>
+                <h4 class="page-title">नक्शा दस्तुर </h4>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">नक्शा दस्तुर सूची</h4>
-                        @can('mapFee_create')
-                            <a href="{{ route('emap.admin.mapFee.create') }}" class="btn btn-sm btn-outline-primary">
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('mapFee_create')
+                            <a href="{{ route('emap.admin.mapFee.create') }}" 
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
-                        @endcan
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body px-0">

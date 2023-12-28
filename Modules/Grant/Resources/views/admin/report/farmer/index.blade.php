@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">सेवाग्राही रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show mb-2" id="collapseFilterForm" style="">
                         <form id="report-filter-form" data-bs-url="{{route('admin.grant.report.farmer.report-data')}}">
                             <div class="row">
@@ -83,7 +83,7 @@
                                     </select>
                                 </div>
 
-                                <fieldset>
+                                <fieldset class="mb-4">
                                     <legend><h4 class="text-info">संलग्नता ?</h4></legend>
                                     <h6 class="py-2"> नोट: कुनै समूह, सहकारी वा उद्यममा संलग्न भएमा ।</h6>
                                     <div class="row">
@@ -132,7 +132,7 @@
                                     </div>
                                 </fieldset>
 
-                                <fieldset>
+                                <fieldset class="mb-4">
                                     <legend class="font-16 text-info">
                                         <strong>
                                             Columns

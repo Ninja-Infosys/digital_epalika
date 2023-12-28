@@ -4,12 +4,13 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title mb-0">नक्सा सेटिङ</h4>
-            <div class="">
-                <ol class="breadcrumb mb-2">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
                         <a href="{{route('admin.dashboard')}}">
-                            <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon"> गृहपृष्ठ
+                            <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" 
+                                alt="document-icon"> 
+                            गृहपृष्ठ
                         </a>
                     </li>
                     <li class="breadcrumb-item">
@@ -18,19 +19,20 @@
                     <li class="breadcrumb-item active">नक्सा सेटिङ</li>
                 </ol>
             </div>
+            <h4 class="page-title">नक्सा सेटिङ</h4>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card rounded-3">
-            <div class="">
+        <div class="card p-0">
+            <div class="card-header search-card">
                 <div class="d-flex justify-content-between">
                     <h4 class="header-title">नक्सा सेटिङ</h4>
                 </div>
             </div>
-            <div class="">
+            <div class="card-body px-0">
                 <form action="{{route('emap.admin.mapSetting.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -85,7 +87,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end mt-3">
+                    <div class="d-flex justify-content-start mt-3">
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

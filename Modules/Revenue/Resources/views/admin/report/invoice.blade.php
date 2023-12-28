@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">वडा अनुसार रसिद रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form" data-bs-url="{{route('admin.revenue.report.invoice-report')}}">
                             <div class="row">

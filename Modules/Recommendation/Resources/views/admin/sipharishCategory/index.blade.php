@@ -22,12 +22,13 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सिफारिस श्रेणी
-                            सूची</h4>
-                        @can('recommendationCategory_create')
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title">सिफारिस श्रेणीसूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                        @includeIf('inc.filter_form')
+                            @can('recommendationCategory_create')
                             <a href="{{ route('admin.recommendation.sipharish.sipharishCategory.create') }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i>
@@ -35,6 +36,7 @@
                             </a>
                         @endcan
                     </div>
+                </div>
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">

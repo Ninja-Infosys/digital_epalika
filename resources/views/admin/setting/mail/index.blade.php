@@ -25,13 +25,13 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मेल सेटिंग</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.update-mail-setting')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -172,13 +172,13 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मेल टेस्ट गर्नुहोस्</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.send-test-mail')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -205,13 +205,13 @@
                     </form>
                 </div>
             </div>
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">निर्देशन</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <p class="text-danger">Please be carefull when you are configuring SMTP. For incorrect configuration you will get error at the time of order place, new registration, sending newsletter.</p>
                     <h4 class="mt-2">For Non-SSL</h4>
                     <ul class="list-group">

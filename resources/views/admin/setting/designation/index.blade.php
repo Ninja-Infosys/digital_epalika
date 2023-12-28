@@ -23,17 +23,20 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">पद सूची</h4>
-                        @can('designation_create')
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('designation_create')
                             <a href="{{route('admin.generalSetting.designation.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
+                </div>
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">
@@ -73,6 +76,9 @@
                                             </form>
                                         @endcan
                                     </td>
+                                </tr>
+                                <tr class="empty">
+                                    <td></td>
                                 </tr>
                             @empty
                                 <tr>

@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card" >
+            <div class="card p-0" >
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title"> अपाङ्गता परिचयपत्र रिपोर्ट</h4>
                         <div>
                             <button class="btn btn-sm btn-info" onclick="printJS({
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body" >
+                <div class="card-body px-0" >
                     <div class="table-responsive">
                         <table id="printData" class="table table-sm table-bordered table-hover">
                             <thead>

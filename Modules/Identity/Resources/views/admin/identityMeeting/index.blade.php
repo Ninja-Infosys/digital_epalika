@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex bd-highlight">
                         <h4 class="p-2 flex-grow-1 bd-highlight header-title">बैठक सूची</h4>

@@ -48,7 +48,7 @@
                         data-bs-url="{{route('admin.circular.report.registration.report-data')}}">
                         <div class="row">
                             <div class="col-md-6">
-                                <fieldset class="border p-2 mb-2">
+                                <fieldset class="border p-2 mb-2 mb-4">
                                     <legend class="font-16 text-primary">
                                         <strong>
                                             दर्ता मिति
@@ -69,7 +69,7 @@
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
-                                <fieldset class="border p-2 mb-2">
+                                <fieldset class="border p-2 mb-2 mb-4">
                                     <legend class="font-16 text-primary">
                                         <strong>
                                             पत्रको मिति
@@ -111,7 +111,7 @@
                                     placeholder="पत्र संख्या">
                             </div>
                         </div>
-                        <fieldset class="border p-2 mb-2">
+                        <fieldset class="border p-2 mb-2 mb-4">
                             <legend class="font-16 text-primary">
                                 <strong>
                                     Columns

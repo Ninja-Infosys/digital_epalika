@@ -5,7 +5,7 @@
         </div>
     @endif
     <form wire:submit.prevent="save">
-        <div class="card">
+        <div class="card p-0">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h4 class="mb-0 header-title">कार्यालयको नाम सेटअप</h4>
@@ -14,7 +14,7 @@
                     </button>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body px-0">
                 <fieldset>
                     <legend>
                         कार्यालयको नाम

@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">पक्ष/विपक्ष अनुसार उजुरी रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
@@ -43,13 +43,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
                               data-bs-url="{{route('admin.judicialCommittee.report.get-complaint-defendant-report')}}">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>निवेदन मिति </strong>
                                         </legend>
@@ -73,7 +73,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-3">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>आर्थिक बर्ष </strong>
                                         </legend>
@@ -94,7 +94,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-3">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong>मुद्दा प्रकृति</strong>
                                         </legend>

@@ -21,16 +21,19 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">खर्च शीर्षक  सूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                        @includeIf('inc.filter_form')
                         @can('expenseHead_create')
                             <a href="{{ route('admin.plan.expenseHead.create') }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ खर्च शीर्षक थप्नुहोस्
                             </a>
                         @endcan
                     </div>
+                </div>
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">

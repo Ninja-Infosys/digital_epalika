@@ -25,7 +25,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">जनप्रतिनिधि/कर्मचारीहरु</h4>
@@ -87,6 +87,9 @@
                                             </button>
                                         </form>
                                     </td>
+                                </tr>
+                                <tr class="empty">
+                                    <td></td>
                                 </tr>
                             @empty
                                 <tr>

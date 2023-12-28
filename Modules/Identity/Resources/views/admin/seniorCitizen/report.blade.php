@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title">जेष्ठ नागरिक रिपोर्ट</h4>
 
                         <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
@@ -33,13 +33,13 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form"
                               data-bs-url="{{route('identity.admin.seniorCitizenReport.report')}}">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong> मिति </strong>
                                         </legend>
@@ -63,7 +63,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
-                                    <fieldset class="border p-2 mb-2">
+                                    <fieldset class="border p-2 mb-2 mb-4">
                                         <legend class="font-16 text-info">
                                             <strong> आर्थिक बर्ष </strong>
                                         </legend>
@@ -84,7 +84,7 @@
                                     </fieldset>
                                 </div>
                             </div>
-                            <fieldset class="border p-2 mb-2">
+                            <fieldset class="border p-2 mb-2 mb-4">
                                 <legend class="font-16 text-info">
                                     <strong>
                                         Columns

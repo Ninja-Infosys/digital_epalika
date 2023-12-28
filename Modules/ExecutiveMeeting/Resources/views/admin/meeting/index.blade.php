@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">बैठक विवरण</h4>

@@ -1,61 +1,72 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-            <h4 class="page-title mb-0">
-                    {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
-                </h4>
-                <div class="">
-                    <ol class="breadcrumb mb-2">
-                        <li class="breadcrumb-item">
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" 
+                                    alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">नक्सा दर्ता/प्रमाणित</li>
+                        <li class="breadcrumb-item">
+                            <a href="">नक्सा दर्ता/प्रमाणित</a>
+                        </li>
                         <li class="breadcrumb-item active">
                             {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
                         </li>
                     </ol>
                 </div>
-
+                <h4 class="page-title">
+                    {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
+                </h4>
             </div>
         </div>
     </div>
-    <div class="card rounded-3">
-        <div class="">
-            <div class="d-flex align-items-center justify-content-between">
-                <h4 class="header-title mb-0">
-                    {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
-                </h4>
-                <div class="d-flex flex-wrap align-items-center">
-                    @includeIf('inc.filter_form')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card p-0">
+            <div class="card-header search-card">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="header-title mb-0">
+                        {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
+                    </h4>
+                    <div class="d-flex flex-wrap align-items-center">
+                        @includeIf('inc.filter_form')
+                        
+                        <a href=""
+                            class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mt-3">
-            <table class="table table-striped mb-0">
-                <thead>
-                    <tr>
-                        <th>क्र.सं.</th>
-                        <th>आर्थिक वर्ष</th>
-                        <th>सबममिसन नं</th>
-                        <th>दर्ता नं</th>
-                        <th>किता नं</th>
-                        <th>वडा नं</th>
-                        <th>स्थिती</th>
-                        <th>डेस्क</th>
-                        <th>Pending Days</th>
-                        <th>निर्माण कार्यको किसिम</th>
-                        <th>आवेदन भर्ने संस्था</th>
-                        <th>#</th>
-                        <!-- <th></th> -->
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="card-body px-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>क्र.सं.</th>
+                                <th>आर्थिक वर्ष</th>
+                                <th>सबममिसन नं</th>
+                                <th>दर्ता नं</th>
+                                <th>किता नं</th>
+                                <th>वडा नं</th>
+                                <th>स्थिती</th>
+                                <th>डेस्क</th>
+                                <th>Pending Days</th>
+                                <th>निर्माण कार्यको किसिम</th>
+                                <th>आवेदन भर्ने संस्था</th>
+                                <th>#</th>
+                                <!-- <th></th> -->
+                            </tr>
+                        </thead>
+                    <tbody>
                     @forelse($maps as $mapApply)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
@@ -116,7 +127,9 @@
                                     </a>
                                 </div>
                             </td>
-
+                        </tr>
+                        <tr class="empty">
+                            <td></td>
                         </tr>
                     @empty
                         <tr>

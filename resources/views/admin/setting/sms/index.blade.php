@@ -25,13 +25,13 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">समय एस.एम.एस सेटिंग</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.update-samaya-sms-config')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -76,13 +76,13 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">आकास एस.एम.एस सेटिंग</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{route('admin.update-aakash-sms-config')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf

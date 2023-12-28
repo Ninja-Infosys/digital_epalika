@@ -26,13 +26,12 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card p-0">
-
             <div class="card-body px-0">
                 <form action="{{ route('admin.circular.circularSetting.update', $circularSetting) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('put')
-                    <fieldset class="border p-2 mb-2">
+                    <fieldset class="border p-2 mb-2 mb-4">
                         <legend class="font-16 text-primary">
                             <strong> विवरण </strong>
                         </legend>

@@ -21,8 +21,8 @@
             </div>
         </div>
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="card p-0">
+                <div class="card-body px-0">
                     <div class="inbox-leftbar">
                         <div class="d-block mb-2">
                             <h5 class="font-16">Dispatch</h5>

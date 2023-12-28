@@ -26,13 +26,13 @@
             <h4 class="page-title">{{\App\Enums\FeatureTypeEnum::tryFrom($key)->label()}}</h4>
             @foreach($featureActivation as $data)
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card p-0">
                         <div class="card-header">
                             <h5>
                                 {{$data->feature_name_ne}}
                             </h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body px-0">
                             <a href="{{route('admin.update-feature-activation',$data)}}">
                                 <i class="fa fa-2x fa-toggle-{{$data->feature_status===true ? 'on':'off'}} text-{{$data->feature_status===true ? 'success':'danger'}}"></i>
                             </a>

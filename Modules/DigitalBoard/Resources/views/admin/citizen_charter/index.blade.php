@@ -7,7 +7,9 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">
-                            <i class="fa fa-home"></i> गृहपृष्ठ
+                        <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
+                                alt="document-icon">
+                            गृहपृष्ठ
                         </a>
                     </li>
                     <li class="breadcrumb-item">
@@ -24,13 +26,16 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card p-0">
-            <div class="card-header">
-                <div class="d-flex align-items-center justify-content-between align-items-center">
+            <div class="card-header search-card">
+                <div class="d-flex align-items-center justify-content-between">
                     <h4 class="header-title mb-0">नागरिक वडापत्र</h4>
                     <div class="d-flex flex-wrap align-items-center">
+                        @includeIf('inc.filter_form')
+
                         <a href="{{ route('admin.digitalBoard.citizenCharter.create') }}"
                             class="btn btn-sm btn-outline-primary waves-effect waves-light">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            
                     </div>
                 </div>
             </div>

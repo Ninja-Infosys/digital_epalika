@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">अपाङ्गता परिचय पत्रहरु</h4>
@@ -79,6 +79,9 @@
                                             @endif
 
                                         </td>
+                                    </tr>
+                                    <tr class="empty">
+                                        <td></td>
                                     </tr>
                                 @empty
                                     <tr>

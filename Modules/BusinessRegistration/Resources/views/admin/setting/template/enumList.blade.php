@@ -25,12 +25,20 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय दर्ता सूची</h4>
+                        <h4 class="header-title mb-0">व्यवसाय दर्ता सूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                        @includeIf('inc.filter_form')
+                       
+                        <a href=""
+                            class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                        
                     </div>
                 </div>
+            </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table table-sm table-custom">

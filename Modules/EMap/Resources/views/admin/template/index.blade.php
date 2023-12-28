@@ -1,12 +1,11 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title mb-0">टेम्प्लेट</h4>
-                <div class="">
-                    <ol class="breadcrumb mb-2">
-                        <li class="breadcrumb-item">
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
                             <a href="{{ route('emap.admin.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
                                     alt="document-icon">
@@ -19,27 +18,31 @@
                         <li class="breadcrumb-item active">टेम्प्लेट</li>
                     </ol>
                 </div>
+                <h4 class="page-title">टेम्प्लेट</h4>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card rounded-3">
-                <div class="">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">टेम्प्लेट सूची</h4>
-                        @can('eMapTemplate_create')
-                            <a href="{{ route('emap.admin.eMapTemplate.create') }}" class="btn btn-sm btn-outline-primary">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card p-0">
+            <div class="card-header search-card">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">टेम्प्लेट सूची</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('eMapTemplate_create')
+                            <a href="{{ route('emap.admin.eMapTemplate.create') }}" 
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
                         @endcan
-
+                        </div>
                     </div>
                 </div>
-                <div class="mt-3">
-                    <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                <div class="card-body px-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-custom">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
@@ -92,6 +95,9 @@
                                                 @endcan
                                             </form>
                                         </td>
+                                    </tr>
+                                    <tr class="empty">
+                                        <td></td>
                                     </tr>
                                 @empty
                                     <tr>
