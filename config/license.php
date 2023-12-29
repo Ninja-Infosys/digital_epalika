@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'created_date' => '2023-09-26',
-  'days' => 0,
-  'license_key' => '1a459ff6-5a6e-4162-9d81-5e99e8649fde',
+  'created_date' => '2023-12-28',
+  'days' => 'Lifetime',
+  'license_key' => 'c4838154-2064-4668-9dce-5dde2eb4edb1',
 );
