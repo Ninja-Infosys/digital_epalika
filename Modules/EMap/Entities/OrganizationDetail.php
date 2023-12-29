@@ -67,6 +67,11 @@ class OrganizationDetail extends Model
         return $this->hasMany(TaxClearance::class);
     }
 
+    public function emapMuncipalRegistrations(): HasMany
+    {
+        return $this->hasMany(EmapMuncipalRegistration::class);
+    }
+
     public function getOrgRegistrationDocumentUrlAttribute(): string
     {
         return $this->attributes['org_registration_document']
@@ -76,8 +81,8 @@ class OrganizationDetail extends Model
 
     public function setOrgRegistrationDocumentAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['org_registration_document'] = $value->store('user/detail/org/'.Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['org_registration_document'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
 
@@ -90,8 +95,8 @@ class OrganizationDetail extends Model
 
     public function setOrgPanDocumentAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['org_pan_document'] = $value->store('user/detail/org/'.Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['org_pan_document'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
 
@@ -104,8 +109,8 @@ class OrganizationDetail extends Model
 
     public function setLogoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['logo'] = $value->store('user/detail/org/'.Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['logo'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
 }

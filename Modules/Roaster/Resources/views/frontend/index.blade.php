@@ -49,7 +49,7 @@
                                     <div class="info text-left w-75">
                                         <h5 class="mt-0 mb-1 card-title text-left">लग इन</h5>
                                         <h6 class="card-text mt-2 text-left">तालिम लग इन</h6>
-                                        <a href="" class="btn btn-outline-primary btn-sm"><span>लग इन
+                                        <a href="{{ route('roaster.traineeUser.login.form') }}" class="btn btn-outline-primary btn-sm"><span>लग इन
                                                 गर्नुहोस्</span>
                                         </a>
                                     </div>
