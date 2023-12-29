@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Entities\New;
+namespace Modules\EMap\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
