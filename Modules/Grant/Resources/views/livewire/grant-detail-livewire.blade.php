@@ -40,10 +40,12 @@
                             class="form-control @error('form.model_id') is-invalid @enderror">
                         <option value="">--अनुदानग्राही छान्नुहोस्--</option>
                         @foreach($grantees as $grantee)
+                        @if (auth()->user()?->load('role')?->role?->type == 'Super' || $grantee->user_id == auth()->id())
                             <option value="{{$grantee->id}}">
                                 {{$grantee->name ?? ''}} ({{$grantee->unique_id ?? ''}})
                             </option>
-                        @endforeach
+                        @endif
+                    @endforeach
                     </select>
                     <button wire:ignore class="btn btn-sm btn-outline-primary" type="button"
                             id="form-popup-button"

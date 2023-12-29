@@ -81,28 +81,13 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="grant_program_id" class="form-label">
-                                        कार्यक्रमको नाम <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="input-group">
-                                    <select name="grant_program_id"
-                                            id="grant_program_id" class="form-select" required>
-                                        <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($grantPrograms as $grantProgram)
-                                            <option value="{{$grantProgram->id}}" {{$grantProgram->id==old('grant_program_id',$grant->grant_program_id) ? 'selected' : ''}}>
-                                                {{$grantProgram->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                        <button class="btn btn-sm btn-outline-primary" type="button"
-                                                id="button-enterprise"
-                                                title="अनुदान कार्यक्रम थप" data-bs-toggle="modal"
-                                                data-bs-target="#grantProgram-modal">
-                                            <i class="fa fa-plus"></i></button>
-                                    </div>
-                                    @error('grant_program_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                    <label for="grant_program_name" class="form-label">कार्यक्रमको नाम <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="grant_program_name" value="{{ old('grant_program_name', $grant->grant_program_name) }}"
+                                           class="form-control @error('grant_program_name') is-invalid @enderror" id="grant_program_name"
+                                           placeholder="कार्यक्रमको नाम" required />
+                                    @error('grant_program_name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">

@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\EnterpriseType;
@@ -21,24 +22,31 @@ class EnterprisesController extends Controller
 {
     public function index()
     {
-        $this->checkAuthorization('enterprise_access');
+        $enterprises = Enterprise::with('enterpriseType', 'province', 'district', 'localBody', 'grantDetails.localBody')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['enterprise_type_id', 'name', 'vat_pan'], request('search'));
+                }
 
-        $enterprises = Enterprise::with('enterpriseType')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['enterprise_type_id', 'name', 'vat_pan'], request('search'));
-            }
-        })
-            ->latest()->paginate(10);
+                if (!auth()->user()?->load('role')?->role?->type == 'Super') {
+                    $q->where('user_id', auth()->id());
+                }
+            })
+            ->latest()
+            ->paginate(10);
+
 
         return view('grant::admin.enterprise.index', compact('enterprises'));
     }
+
+
 
     public function create()
     {
         $this->checkAuthorization('enterprise_create');
 
         $farmers = Farmer::all();
-        $enterpriseTypes=EnterpriseType::all();
+        $enterpriseTypes = EnterpriseType::all();
 
         return view('grant::admin.enterprise.create', compact('farmers', 'enterpriseTypes'));
     }
@@ -47,7 +55,7 @@ class EnterprisesController extends Controller
     {
         $this->checkAuthorization('enterprise_create');
 
-        $enterprises=DB::transaction(function () use ($request) {
+        $enterprises = DB::transaction(function () use ($request) {
             $enterprise = Enterprise::create($request->validated());
 
             $enterprise->farmers()->attach($request->input('farmers'));
@@ -57,11 +65,11 @@ class EnterprisesController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'data'=> [
-                    'enterprise_id'=> $enterprises->id,
-                    'enterprise_name'=> $enterprises->name
+                'data' => [
+                    'enterprise_id' => $enterprises->id,
+                    'enterprise_name' => $enterprises->name
                 ],
-                'message'=> 'Enterprise Added successfully'
+                'message' => 'Enterprise Added successfully'
             ]);
         }
 
@@ -74,8 +82,8 @@ class EnterprisesController extends Controller
         $this->checkAuthorization('enterprise_edit');
 
         $enterprise->load('province', 'district', 'localBody');
-        $enterpriseTypes=EnterpriseType::all();
-        $farmers=Farmer::all();
+        $enterpriseTypes = EnterpriseType::all();
+        $farmers = Farmer::all();
 
 
         return view('grant::admin.enterprise.edit', compact('enterprise', 'enterpriseTypes', 'farmers'));
