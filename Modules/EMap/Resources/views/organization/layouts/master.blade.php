@@ -49,8 +49,6 @@
         </div>
     </div>
     <div class="rightbar-overlay"></div>
-
-
     <script src="{{asset("assets/frontend/js/jquery.min.js")}}"></script>
     <script src="{{ asset('assets/backend/js/vendor.min.js') }}"></script>
     <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
