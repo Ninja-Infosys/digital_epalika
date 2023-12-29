@@ -9,14 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
-use Modules\EMap\Entities\MapPassGroup;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
-use Modules\EMap\Enums\FormTypeEnum;
-use Modules\EMap\Entities\AppliedDocument;
 
 class Form extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -54,7 +53,7 @@ class Form extends Model
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(MapPassGroup::class,'map_pass_group_id');
+        return $this->belongsTo(MapPassGroup::class, 'map_pass_group_id');
     }
 
     public function dynamicForm(): BelongsTo
