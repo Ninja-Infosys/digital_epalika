@@ -82,7 +82,7 @@ class FarmerController extends Controller
         $this->checkAuthorization('farmer_access');
 
         $farmer
-            ->load('province', 'district', 'localBody', 'grantDetails.grant.grantProgram', 'grantDetails.localBody', 'farmers.relationship', 'farmers.grantDetails', 'farmer', 'farmer.grantDetails', 'relationship');
+            ->load('province', 'district', 'localBody', 'grantDetails.localBody', 'farmers.relationship', 'farmers.grantDetails', 'farmer', 'farmer.grantDetails', 'relationship');
         $grantPrograms = GrantProgram::all();
 
         $families = collect();
