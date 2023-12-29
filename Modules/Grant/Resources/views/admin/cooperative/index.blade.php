@@ -44,6 +44,7 @@
                                 <th>सहकारी परिचय पत्र नं.</th>
                                 <th>दर्ता नं</th>
                                 <th>सहकारीको नाम</th>
+                                <th> ठेगाना</th>
                                 <th>सहकारीको प्रकार</th>
                                 <th>पाना/भ्याट</th>
                                 <th>#</th>
@@ -56,6 +57,12 @@
                                     <td>{{$cooperative->unique_id}}</td>
                                     <td>{{$cooperative->registration_no}}</td>
                                     <td>{{$cooperative->name}}</td>
+                                    <td>{{ $cooperative->province->province ?? '' }},
+                                        {{ $cooperative->district->district ?? '' }},
+                                       {{ $cooperative->localBody->local_body ?? '' }} -
+                                  {{ $cooperative->ward_no ?? '' }},
+                                 {{ $cooperative->village ?? '' }}
+                                 {{ $cooperative->tole ?? '' }}</td>
                                     <td>{{$cooperative->cooperativeType->title??''}}</td>
                                     <td>{{$cooperative->vat_pan}}</td>
                                     <td class="d-flex gap-1">

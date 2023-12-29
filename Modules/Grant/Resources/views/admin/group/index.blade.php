@@ -42,6 +42,7 @@
                                 <th>क्र.स</th>
                                 <th>समूह परिचय पत्र नं. </th>
                                 <th>समूहको नाम </th>
+                                <th>ठेगाना</th>
                                 <th>दर्ता मिति</th>
                                 <th>दर्ता भएको कार्यलय</th>
                                 <th>पाना/भ्याट</th>
@@ -54,6 +55,12 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{$group->unique_id}}</td>
                                     <td>{{$group->name}}</td>
+                                    <td>{{ $group->province->province ?? '' }},
+                                        {{ $group->district->district ?? '' }},
+                                       {{ $group->localBody->local_body ?? '' }} -
+                                  {{ $group->groupward_no ?? '' }},
+                                 {{ $group->village ?? '' }}
+                                 {{ $group->tole ?? '' }}</td>
                                     <td>{{ $group->registration_date }}</td>
                                     <td>{{ $group->registered_office }}</td>
                                     <td>{{ $group->vat_pan }}</td>

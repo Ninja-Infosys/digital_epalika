@@ -42,6 +42,7 @@
                                 <th>क्र.स</th>
                                 <th>परिचय पत्र नं.</th>
                                 <th>पुरा नाम</th>
+                                <th>ठेगाना</th>
                                 <th>कृषक सूचीकरण नं</th>
                                 <th>नागरिकता नं</th>
                                 <th>सम्पर्क नं.</th>
@@ -54,6 +55,12 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$farmer->unique_id}}</td>
                                     <td>{{$farmer->name}}</td>
+                                    <td>{{ $farmer->province->province ?? '' }},
+                                       {{ $farmer->district->district ?? '' }},
+                                      {{ $farmer->localBody->local_body ?? '' }} -
+                                 {{ $farmer->ward_no ?? '' }},
+                                {{ $farmer->village ?? '' }}
+                                {{ $farmer->tole ?? '' }}</td>
                                     <td>{{$farmer->farmer_id_card_no}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
                                     <td>{{$farmer->phone_no}}</td>
