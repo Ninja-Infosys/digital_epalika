@@ -9,7 +9,7 @@ use Modules\EMap\Entities\DynamicForm;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
-use Modules\EMap\Entities\New\MapPassGroup;
+use Modules\EMap\Entities\MapPassGroup;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\FormTypeEnum;
 

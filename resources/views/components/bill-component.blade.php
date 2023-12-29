@@ -103,7 +103,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($mapApply->paymentStores->where('form_id', $form->id) as $formStore)
+                        @foreach($mapApply->paymentStores?->load('paymentStoreStatuses')?->where('form_id', $form->id) as $formStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
@@ -114,6 +114,18 @@
                                 <td>{{get_nepali_number($formStore->created_at->toDateString())}}</td>
                                 <td></td>
                             </tr>
+                            @foreach ($formStore->paymentStoreStatuses as $paymentStoreStatus)
+                            <tr style="background-color: #e8e5e5;">
+                                <td style="font-weight: bold;">{{ get_nepali_number($loop->iteration) }}</td>
+                                <td> </td>
+                                <td>{{$paymentStoreStatus->amount}}</td>
+                                <td>{{$paymentStoreStatus->status->label()}}</td>
+                                <td>{{get_nepali_number($paymentStoreStatus->created_at->toDateString())}}</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            @endforeach
                         @endforeach
 
                         </tbody>
