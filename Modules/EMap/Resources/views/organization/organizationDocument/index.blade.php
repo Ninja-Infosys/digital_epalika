@@ -148,6 +148,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->land_owner_document_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->land_owner_document_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -177,6 +187,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->land_revenue_document_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->land_revenue_document_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -206,6 +226,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                        class="btn btn-xs btn-outline-primary">
+                                         @if($mapApply->attachDocument?->land_owner_citizenship_status=='accept')
+                                         स्वीकार
+                                         @elseif ($mapApply->attachDocument?->land_owner_citizenship_status=='reject')
+                                         अस्वीकार
+                                         @else
+                                         प्रक्रियामा
+                                         @endif
+                                     </a>
                                   </div>
                               </div>
                           </div>
@@ -235,6 +265,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->blue_print_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->blue_print_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -264,6 +304,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->pass_document_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->pass_document_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -293,6 +343,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->designer_document_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->designer_document_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -322,6 +382,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->permission_document_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->permission_document_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -351,6 +421,16 @@
                                          class="btn btn-xs btn-outline-primary">
                                           <i class="fa fa-download"></i>
                                       </a>
+                                      <a
+                                      class="btn btn-xs btn-outline-primary">
+                                       @if($mapApply->attachDocument?->inheritance_document_status=='accept')
+                                       स्वीकार
+                                       @elseif ($mapApply->attachDocument?->inheritance_document_status=='reject')
+                                       अस्वीकार
+                                       @else
+                                       प्रक्रियामा
+                                       @endif
+                                   </a>
                                   </div>
                               </div>
                           </div>
@@ -380,6 +460,16 @@
                                        class="btn btn-xs btn-outline-primary">
                                         <i class="fa fa-download"></i>
                                     </a>
+                                    <a
+                                    class="btn btn-xs btn-outline-primary">
+                                     @if($mapApply->attachDocument?->analysis_document_status=='accept')
+                                     स्वीकार
+                                     @elseif ($mapApply->attachDocument?->analysis_document_status=='reject')
+                                     अस्वीकार
+                                     @else
+                                     प्रक्रियामा
+                                     @endif
+                                 </a>
                                 </div>
                             </div>
                         </div>

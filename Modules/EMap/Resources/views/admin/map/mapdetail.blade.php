@@ -593,6 +593,31 @@
                                         <img src="{{$mapApply->attachDocument?->land_owner_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="land_owner_document_status"
+                                                     id="land_owner_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->land_owner_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->land_owner_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->land_owner_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -627,6 +652,31 @@
                                         <img src="{{$mapApply->attachDocument?->land_revenue_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="land_revenue_document_status"
+                                                     id="land_revenue_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->land_revenue_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->land_revenue_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->land_revenue_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -661,6 +711,31 @@
                                         <img src="{{$mapApply->attachDocument?->land_owner_citizenship ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="land_owner_citizenship_status"
+                                                     id="land_owner_citizenship_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->land_owner_citizenship_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->land_owner_citizenship_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->land_owner_citizenship_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -695,6 +770,31 @@
                                         <img src="{{$mapApply->attachDocument?->blue_print ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="blue_print_status"
+                                                     id="blue_print_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->blue_print_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->blue_print_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->blue_print_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -729,6 +829,31 @@
                                         <img src="{{$mapApply->attachDocument?->pass_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="pass_document_status"
+                                                     id="pass_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->pass_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->pass_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->pass_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -763,6 +888,31 @@
                                         <img src="{{$mapApply->attachDocument?->designer_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="designer_document_status"
+                                                     id="designer_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->designer_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->designer_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->designer_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -797,6 +947,31 @@
                                         <img src="{{$mapApply->attachDocument?->permission_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="permission_document_status"
+                                                     id="permission_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->permission_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->permission_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->permission_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -831,6 +1006,31 @@
                                         <img src="{{$mapApply->attachDocument?->inheritance_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="inheritance_document_status"
+                                                     id="inheritance_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->inheritance_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->inheritance_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->inheritance_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>
@@ -863,6 +1063,31 @@
                                         <img src="{{$mapApply->attachDocument?->analysis_document ?? ''}}"
                                              alt=""
                                              style="max-width: 100%;height: 200px;object-fit: contain;">
+                                             <form
+                                             action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                             method="post">
+                                             @csrf
+                                             @method('put')
+                                             <div class="input-group d-flex align-items-center">
+                                                 <select class="form-select form-select-sm" name="analysis_document_status"
+                                                     id="analysis_document_status" aria-label="Example select with button addon"
+                                                     >
+                                                     <option value="" disabled selected>--- छान्नुहोस् ---</option>
+                                                     <option value="pending"
+                                                         {{ $mapApply->attachDocument?->analysis_document_status == 'pending' ? 'selected' : '' }}>
+                                                         प्रक्रियामा</option>
+                                                     <option value="accept"
+                                                         {{ $mapApply->attachDocument?->analysis_document_status == 'accept' ? 'selected' : '' }}>स्वीकार
+                                                     </option>
+                                                     <option value="reject"
+                                                         {{ $mapApply->attachDocument?->analysis_document_status == 'reject' ? 'selected' : '' }}>
+                                                         अस्वीकार</option>
+
+                                                 </select>
+                                                 <button  class="btn btn-lg btn-outline-primary" type="submit"  ><i class="fa fa-paper-plane"></i></button>
+                                             </div>
+
+                                         </form>
                                     </div>
                                 </div>
                             </div>

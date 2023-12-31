@@ -22,7 +22,7 @@ use  Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\StreetDetailController;
 
 
-Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 
@@ -58,7 +58,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::put('reject/{noticeTypeEnum}', 'reject')->name('reject');
         });
     });
-
+    Route::put('mapApply/{mapApply}/updateDocumentStatus', 'updateDocumentStatus')->name('mapApply.updateDocumentStatus');
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');

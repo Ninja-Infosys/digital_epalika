@@ -20,6 +20,7 @@ use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\EMap\Entities\AttachDocument;
 
 class MapController extends Controller
 {
@@ -34,7 +35,7 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices','landDetail'])
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail'])
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
             ->where(function (Builder $q) {
@@ -57,7 +58,7 @@ class MapController extends Controller
 
     public function register(MapApply $mapApply)
     {
-        if (!empty($mapApply->registration_no)){
+        if (!empty($mapApply->registration_no)) {
             toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
             return back();
         }
@@ -188,7 +189,7 @@ class MapController extends Controller
     public function updateStatus(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
         $this->checkAuthorization('mapApply_access');
-//        abort_if($mapApply->sent_to_organization == 'Accept', 403);
+        //        abort_if($mapApply->sent_to_organization == 'Accept', 403);
         DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
             $number = MapApply::whereFiscalYearId(\officeSetting()->fiscal_year_id)
                 ->max('number') + 1;
@@ -208,6 +209,49 @@ class MapController extends Controller
             }
         });
         Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
+        toast(' सफलता पुर्बक आवधिक गरियो', 'success');
+        return back();
+    }
+
+    public function updateDocumentStatus(Request $request, MapApply $mapApply)
+    {
+        if ($request->input('land_owner_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'land_owner_document_status' => $request->input('land_owner_document_status')
+            ]);
+        } elseif ($request->input('land_revenue_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'land_revenue_document_status' => $request->input('land_revenue_document_status')
+            ]);
+        } elseif ($request->input('land_owner_citizenship_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'land_owner_citizenship_status' => $request->input('land_owner_citizenship_status')
+            ]);
+        } elseif ($request->input('blue_print_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'blue_print_status' => $request->input('blue_print_status')
+            ]);
+        } elseif ($request->input('pass_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'pass_document_status' => $request->input('pass_document_status')
+            ]);
+        } elseif ($request->input('designer_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'designer_document_status' => $request->input('designer_document_status')
+            ]);
+        } elseif ($request->input('permission_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'permission_document_status' => $request->input('permission_document_status')
+            ]);
+        } elseif ($request->input('inheritance_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'inheritance_document_status' => $request->input('inheritance_document_status')
+            ]);
+        } elseif ($request->input('analysis_document_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'analysis_document_status' => $request->input('analysis_document_status')
+            ]);
+        }
         toast(' सफलता पुर्बक आवधिक गरियो', 'success');
         return back();
     }
