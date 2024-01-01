@@ -172,7 +172,6 @@
 
     @push('scripts')
         <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
-        <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
 
     @endpush
 @endsection
