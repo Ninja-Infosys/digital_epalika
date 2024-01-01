@@ -120,11 +120,7 @@
                     </a>
                 </li>
             @endcan
-            <li class="{{ request()->is('admin/grant/report/') ? 'active' : '' }}">
-                <a href="{{ route('admin.grant.report.group.index') }}">
-                    <span>समूह रिपोर्ट </span>
-                </a>
-            </li>
+
         </ul>
     </div>
 </li>

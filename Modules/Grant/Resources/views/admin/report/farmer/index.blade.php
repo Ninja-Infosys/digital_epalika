@@ -172,5 +172,6 @@
 
     @push('scripts')
         <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
+
     @endpush
 @endsection

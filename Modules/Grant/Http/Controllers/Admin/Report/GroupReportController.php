@@ -13,7 +13,6 @@ class GroupReportController extends Controller
     public function index()
     {
         $columnData = $this->getColumns();
-
         return view('grant::admin.report.group.index', compact('columnData'));
     }
 
