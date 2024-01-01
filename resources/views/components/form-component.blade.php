@@ -59,7 +59,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($mapApply->formStores?->where('form_id', $form->id)?->where('form_data_id', $formDataType->id) as $formStore)
+                        @foreach($mapApply->formStores?->load('formStoreStatuses')?->where('form_id', $form->id)?->where('form_data_id', $formDataType->id) as $formStore)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
@@ -86,6 +86,27 @@
                                     </a>
                                 </td>
                             </tr>
+                            @foreach ($formStore->formStoreStatuses as $formStoreStatus)
+                            <tr style="background-color: #e8e5e5;">
+                                <td style="font-weight: bold;">{{ get_nepali_number($loop->iteration) }}</td>
+                                <td>  @foreach($formStoreStatus->data as $key=>$data)
+                                    {{ $key . ': ' . $data }} @if (!$loop->last)
+                                    <br>
+                                @endif
+                                @endforeach </td>
+                                <td>{{ $formStoreStatus->status->label() }}</td>
+                                <td>{{$formStoreStatus->created_at->toDateString()}}</td>
+                                <td>
+                                    <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('organization.admin.formStorePrint',[$formDataType,$formStore]) }}">
+                                        <i class="fa fa-print"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
                         @endforeach
 
                         </tbody>

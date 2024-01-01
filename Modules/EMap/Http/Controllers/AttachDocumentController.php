@@ -180,7 +180,7 @@ class AttachDocumentController extends Controller
                 FormStoreStatus::create([
                     "form_store_id" => $formStore->id,
                     "status" => DocumentStatusEnum::PENDING->value,
-                    "data" => $formStore->data,
+                    "data" => $data['data'],
                     "fields" => $formStore->fields
                 ]);
                 $formStore->update([
