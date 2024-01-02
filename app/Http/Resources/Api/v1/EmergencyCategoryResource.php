@@ -12,6 +12,7 @@ class EmergencyCategoryResource extends JsonResource
         return [
             'id' => $this->id ?? '',
             'title' => $this->title ?? '',
+            'icon'=> $this->image ?? '',
             'emergencyNumbers' => EmergencyNumberResource::collection($this->whenLoaded('emergencyNumbers'))
         ];
     }
