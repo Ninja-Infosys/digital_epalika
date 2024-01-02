@@ -65,7 +65,7 @@
     </div>
 </li>
 
-<li class="{{request()->is('admin/plan/setting/*') ? 'active' : ''}}">
+<li class="{{request()->is('admin/plan/estimateSetting/*') ? 'active' : ''}}">
     <a href="#sidebarPlanSetting"
        {{request()->is('admin/plan/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
@@ -139,3 +139,28 @@
     </div>
 </li>
 
+<li class="{{request()->is('admin/plan/estimateSetting/*') ? 'active' : ''}}">
+    <a href="#sidebarPlanEstimateSetting"
+       {{request()->is('admin/plan/estimateSetting/*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span> Estimate Setting</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/plan/estimateSetting/*') ? 'show' : ''}}"
+         id="sidebarPlanEstimateSetting">
+        <ul class="nav-second-level">
+            @can('planArea_access')
+                <li class="{{request()->is('admin/plan/estimateSetting/labour') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.labour.index')}}">
+                        <span>  Labour  </span>
+                    </a>
+                </li>
+            @endcan
+
+
+        </ul>
+    </div>
+</li>
