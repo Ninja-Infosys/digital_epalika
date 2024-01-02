@@ -70,6 +70,8 @@
                                     @foreach($fiscalYears as $fiscalYear)
                                     <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                     @endforeach
+
+
                                 </select>
                             </div>
 
@@ -83,9 +85,10 @@
                                 <select name="applicant_type[]" multiple data-toggle="select2" id="applicant_type"
                                     class="form-control">
                                     <option disabled>--- छान्नुहोस् ---</option>
-                                    @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as
-                                    $applicantType)
-                                    <option value="{{$applicantType->value}}">{{$applicantType->label()}}</option>
+                                    @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
+                                        <option value="{{ $applicantType->value }}" {{ $applicantType->value == old('applicant_type') ? 'selected' : '' }}>
+                                            {{ $applicantType->label() }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -94,9 +97,11 @@
                                 <select name="business_nature[]" multiple data-toggle="select2" id="business_nature"
                                     class="form-control">
                                     <option disabled>--- छान्नुहोस् ---</option>
-                                    @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as
-                                    $businessNature)
-                                    <option value="{{$businessNature->value}}">{{$businessNature->label()}}</option>
+                                    @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $business_nature)
+                                        <!-- Dropdown Option for Business Nature -->
+                                        <option value="{{ $business_nature->value }}" {{ $business_nature->value == old('business_nature') ? 'selected' : '' }}>
+                                            {{ $business_nature->label() }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
