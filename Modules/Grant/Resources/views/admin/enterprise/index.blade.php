@@ -42,6 +42,7 @@
                                 <th>क्र.स</th>
                                 <th>निजि उधम/फर्म परिचय पत्र नं. </th>
                                 <th>निजि उधम/फर्मको नाम </th>
+                                <th>ठेगाना</th>
                                 <th>निजि उधम/फर्मको प्रकार </th>
                                 <th>पाना/भ्याट</th>
                                 <th>#</th>
@@ -53,6 +54,12 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{$enterprise->unique_id}}</td>
                                     <td>{{$enterprise->name}}</td>
+                                    <td>{{ $enterprise->province->province ?? '' }},
+                                        {{ $enterprise->district->district ?? '' }},
+                                       {{ $enterprise->localBody->local_body ?? '' }} -
+                                  {{ $enterprise->ward_no ?? '' }},
+                                 {{ $enterprise->village ?? '' }}
+                                 {{ $enterprise->tole ?? '' }}</td>
                                     <td>{{$enterprise->enterpriseType->title ?? ''}}</td>
                                     <td>{{$enterprise->vat_pan}}</td>
                                     <td class="d-flex gap-1">
