@@ -60,8 +60,8 @@
                             </div>
 
                             <div class="col-md-4 mb-2">
-                                <label for="title" class="form-label">शिर्षक छ *</label>
-                                <input id="title" type="text" name="title" placeholder="शिर्षक छ"
+                                <label for="title" class="form-label">शिर्षक *</label>
+                                <input id="title" type="text" name="title" placeholder="शिर्षक"
                                        class="form-control @error('title') is-invalid @enderror"
                                        value="{{old('title', $emergencyNumber->title)}}">
                                 @error('title')
@@ -72,7 +72,7 @@
 
                             <div class="col-md-4 mb-2">
                                 <label for="address" class="form-label">ठेगाना *</label>
-                                <input id="address" type="text" name="address" placeholder="शठेगाना"
+                                <input id="address" type="text" name="address" placeholder="ठेगाना"
                                        class="form-control @error('address') is-invalid @enderror"
                                        value="{{ old('address', $emergencyNumber->address ?? '') }}">
                                 @error('address')
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="contact_no" class="form-label">सम्पर्क नं. *</label>
-                                <input id="title" type="text" name="contact_no" placeholder="सम्पर्क नं. आबश्यक छ"
+                                <input id="title" type="text" name="contact_no" placeholder="सम्पर्क नं."
                                        class="form-control @error('contact_no') is-invalid @enderror"
                                        value="{{ old('contact_no', $emergencyNumber->contact_no ?? '') }}">
                                 @error('contact_no')
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="latitude" class="form-label">अक्षांश</label>
-                                <input id="latitude" type="text" name="latitude" placeholder="शअक्षांश"
+                                <input id="latitude" type="text" name="latitude" placeholder="अक्षांश"
                                        class="form-control @error('latitude') is-invalid @enderror"
                                        value="{{ old('latitude', $emergencyNumber->latitude ?? '') }}">
                                 @error('latitude')

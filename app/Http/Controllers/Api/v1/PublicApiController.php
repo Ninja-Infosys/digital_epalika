@@ -86,7 +86,7 @@ class PublicApiController extends Controller
 
     public function emergencyNumber(EmergencyCategory $emergencyCategory): AnonymousResourceCollection
     {
-        return EmergencyCategoryResource::collection($emergencyCategory->load('emergencyNumbers'));
+        return EmergencyCategoryResource::make($emergencyCategory->load('emergencyNumbers'));
 
     }
 

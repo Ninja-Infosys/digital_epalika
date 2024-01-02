@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="address" class="form-label">ठेगाना *</label>
-                                <input id="address" type="text" name="address" placeholder="शठेगाना"
+                                <input id="address" type="text" name="address" placeholder="ठेगाना"
                                        class="form-control @error('address') is-invalid @enderror"
                                        value="{{ old('address') }}">
                                 @error('address')
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="latitude" class="form-label">अक्षांश</label>
-                                <input id="latitude" type="text" name="latitude" placeholder="शअक्षांश"
+                                <input id="latitude" type="text" name="latitude" placeholder="अक्षांश"
                                        class="form-control @error('latitude') is-invalid @enderror"
                                        value="{{ old('latitude') }}">
                                 @error('latitude')
