@@ -84,6 +84,12 @@ class PublicApiController extends Controller
 
     }
 
+    public function emergencyNumber(EmergencyCategory $emergencyCategory): AnonymousResourceCollection
+    {
+        return EmergencyCategoryResource::make($emergencyCategory->load('emergencyNumbers'));
+
+    }
+
     public function introduction(): array
     {
         $setting = $this->getOfficeSetting();
@@ -93,10 +99,11 @@ class PublicApiController extends Controller
         ];
     }
 
-    public function getOfficeSetting(): OfficeSetting
+    public function getOfficeSetting()
     {
         return OfficeSetting::with('localBody')->first();
     }
+
     public function getOfficeHeader(): OfficeHeader
     {
         return OfficeHeader::latest()->firstOrFail();
@@ -191,41 +198,41 @@ class PublicApiController extends Controller
     public function getGovtServices(): array
     {
         return [
-           /* [
-                'name' => 'जिन्सी व्यवस्थापन प्रणाली',
-                'logo' => asset('assets/frontend/image/logo.png'),
-                'url' => 'https://pams.fcgo.gov.np/',
-            ],
-            [
-                'name' => 'संचितकोष व्यवस्थापन प्रणाली',
-                'logo' => asset('assets/frontend/image/logo.png'),
-                'url' => 'https://sutra.fcgo.gov.np/',
-            ],*/
+            /* [
+                 'name' => 'जिन्सी व्यवस्थापन प्रणाली',
+                 'logo' => asset('assets/frontend/image/logo.png'),
+                 'url' => 'https://pams.fcgo.gov.np/',
+             ],
+             [
+                 'name' => 'संचितकोष व्यवस्थापन प्रणाली',
+                 'logo' => asset('assets/frontend/image/logo.png'),
+                 'url' => 'https://sutra.fcgo.gov.np/',
+             ],*/
             [
                 'name' => 'घटना दर्ता र सामाजिक सुरक्षा प्रणाली',
                 'logo' => asset('assets/frontend/image/logo.png'),
                 'url' => 'https://public.donidcr.gov.np/',
             ],
-           /* [
-                'name' => 'इमेल सेवा',
-                'logo' => asset('assets/frontend/image/logo.png'),
-                'url' => 'https://mail.nepal.gov.np/',
-            ],
-            [
-                'name' => 'कार्यालयको हाजिरी',
-                'logo' => asset('assets/frontend/image/logo.png'),
-                'url' => 'https://attendance.gov.np/',
-            ],
-            [
-                'name' => 'एस.एम.एस',
-                'logo' => asset('assets/frontend/image/logo.png'),
-                'url' => 'https://sms.aakashsms.com/login',
-            ],
-            [
-                'name' => 'Voice एस.एम.एस',
-                'logo' => asset('assets/frontend/image/logo.png'),
-                'url' => 'https://apps.aakashtel.com/login',
-            ],*/
+            /* [
+                 'name' => 'इमेल सेवा',
+                 'logo' => asset('assets/frontend/image/logo.png'),
+                 'url' => 'https://mail.nepal.gov.np/',
+             ],
+             [
+                 'name' => 'कार्यालयको हाजिरी',
+                 'logo' => asset('assets/frontend/image/logo.png'),
+                 'url' => 'https://attendance.gov.np/',
+             ],
+             [
+                 'name' => 'एस.एम.एस',
+                 'logo' => asset('assets/frontend/image/logo.png'),
+                 'url' => 'https://sms.aakashsms.com/login',
+             ],
+             [
+                 'name' => 'Voice एस.एम.एस',
+                 'logo' => asset('assets/frontend/image/logo.png'),
+                 'url' => 'https://apps.aakashtel.com/login',
+             ],*/
         ];
     }
 }
