@@ -163,6 +163,16 @@
                         <span>  Labour Rate  </span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/fuel') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.fuel.index')}}">
+                        <span>  इन्धन  </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/fuelRate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.fuelRate.index')}}">
+                        <span>  इन्धन दर  </span>
+                    </a>
+                </li>
 
 
 
