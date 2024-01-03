@@ -14,7 +14,9 @@ class GrantDetailController extends Controller
     public function index()
     {
         $this->checkAuthorization('grantDetail_access');
+
         $grants = Grant::with('grant_program_name');
+
         $grantDetails = GrantDetail::with('grant.fiscalYear', 'grant.grantType', 'model', 'localBody')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
@@ -24,13 +26,11 @@ class GrantDetailController extends Controller
                     });
                 }
 
-
-                if (auth()->user()?->load('role')?->role?->type == 'Super'){
-
-                }elseif (auth()->user()?->is_dept_head && !is_null(auth()->user()->branch_id)){
-                    $q->where('branch_id', auth()->user()->branch_id);
-                }else{
-
+                if (auth()->user()?->role?->type == 'Super') {
+                    // Check the relationship between GrantDetail and User
+                    $q->whereHas('user', function ($user_q) {
+                        $user_q->where('id', auth()->id());
+                    });
                 }
             })
             ->latest()
@@ -38,6 +38,7 @@ class GrantDetailController extends Controller
 
         return view('grant::admin.grant_detail.index', compact('grantDetails', 'grants'));
     }
+
 
     public function checkGrant()
     {
