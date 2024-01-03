@@ -66,13 +66,22 @@
 
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <label for="complainants.{{ $key }}.name"
+                            {{-- <label for="complainants.{{ $key }}.name"
                                 class="form-label">{{ $form['complainants'][$key]['complain_type'] ?? null &&
-                                $form['complainants'][$key]['complain_type'] == 'organizational' ? 'वादी' : 'संस्थागत' }}को
-                                नाम<span class="text-danger">*</span></label>
+                                $form['complainants'][$key]['complain_type'] == 'organizational' ? 'संस्थागत' : 'वादी' }}को
+                                नाम<span class="text-danger">*</span></label> --}}
+
+                                <label for="complainants.{{ $key }}.name" class="form-label">
+                                    @if(isset($form['complainants'][$key]['complain_type']) && $form['complainants'][$key]['complain_type'] == 'organizational')
+                                        संस्थाको नाम
+                                    @else
+                                        वादीको नाम
+                                    @endif
+                                    <span class="text-danger">*</span>
+                                </label>
                             <input type="text" wire:model="form.complainants.{{ $key }}.name"
                                 class="form-control" id="complainants.{{ $key }}.name"
-                                placeholder="वादी को नाम" required />
+                                placeholder="नाम" required />
                             @error("form.complainants.$key.name")
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -239,13 +248,16 @@
                     <div class="row">
                         <div class="col-md-3 mb-2">
                             <label for="defendants.{{ $key }}.name" class="form-label">
-                                {{ $form['defendants'][$key]['complain_type'] ?? null &&
-                                $form['defendants'][$key]['complain_type']  == 'organizational' ? 'प्रतिवादी' : 'संस्थागत' }}
-                                को नाम
-                                <span class="text-danger">*</span></label>
+                                @if(isset($form['defendants'][$key]['complain_type']) && $form['defendants'][$key]['complain_type'] == 'organizational')
+                                    संस्थाको नाम
+                                @else
+                                    प्रतिवादीको नाम
+                                @endif
+                                <span class="text-danger">*</span>
+                            </label>
                             <input type="text" wire:model="form.defendants.{{ $key }}.name"
                                 class="form-control" id="defendants.{{ $key }}.name"
-                                placeholder="प्रतिवादी को नाम" required />
+                                placeholder="नाम" required />
                             @error("form.defendants.$key.name")
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

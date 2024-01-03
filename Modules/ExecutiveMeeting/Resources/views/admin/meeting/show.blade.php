@@ -64,7 +64,7 @@
                             <thead>
                                 <tr>
                                     <th>क्र.सं.</th>
-                                    <th>प्रस्ताव नं.</th>
+                                    {{-- <th>प्रस्ताव नं.</th> --}}
                                     <th>मिति</th>
                                     <th>निर्णय</th>
                                 </tr>
@@ -73,7 +73,7 @@
                                 @foreach ($meeting->meetingDecisions as $meetingDecision)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $meetingDecision->meetingAgenda->proposal ?? '' }}</td>
+                                        {{-- <td>{{ $meetingDecision->meetingAgenda->proposal ?? '' }}</td> --}}
                                         <td>{{ $meetingDecision->date }}</td>
                                         <td>{!! $meetingDecision->description !!}</td>
                                     </tr>

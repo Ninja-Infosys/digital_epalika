@@ -31,7 +31,7 @@ class StoreSipharisCreatedRequest extends FormRequest
             'fields.*.table.*.type' => ['nullable'],
             'files' => ['nullable', 'array'],
             'files.*.title' => ['required', 'string'],
-            'files.*.filename' => ['required', 'file'],
+            'files.*.filename' => ['nullable', 'file'],
             'created_by' => ['nullable']
         ];
     }

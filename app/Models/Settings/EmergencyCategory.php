@@ -12,7 +12,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class EmergencyCategory extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -34,7 +36,7 @@ class EmergencyCategory extends Model
     {
         return Attribute::make(
             get: fn (string $value) => Storage::disk('public')->url($value),
-            set: fn ($value) => $value->store('emergencyCategory','public'),
+            set: fn ($value) => $value->store('emergencyCategory', 'public'),
         );
     }
 }

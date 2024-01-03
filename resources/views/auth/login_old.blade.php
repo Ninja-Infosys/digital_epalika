@@ -139,7 +139,7 @@
                     <div class="text-center">
                         <p class="mb-0">&copy;
                             <script>document.write(new Date().getFullYear())</script>
-                            B-Palika <i class="mdi mdi-heart text-danger"></i> By Ninja Infosys
+                            B-Palika <i class="mdi mdi-heart text-danger"></i> By Digital ePalika
                         </p>
                     </div>
                 </div>

@@ -60,14 +60,14 @@
                                 <td>Ninja</td>
                                 <td>CEO</td>
                                 <td>उप-महानगरपालिका</td>
-                                <td>ninjainfosys@gmail.com</td>
+                                <td>epalikad@gmail.com</td>
                             </tr>
                             <tr>
                                 <img src="assets/img/flag.gif">
                                 <td>Ninja</td>
                                 <td>CEO</td>
                                 <td>उप-महानगरपालिका</td>
-                                <td>ninjainfosys@gmail.com</td>
+                                <td>epalikad@gmail.com</td>
                             </tr>
                         </tbody>
                     </table>
@@ -77,4 +77,4 @@
     </div>
 
 </section>
-@endsection  
+@endsection

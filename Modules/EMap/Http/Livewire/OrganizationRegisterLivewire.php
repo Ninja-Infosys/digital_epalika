@@ -60,6 +60,12 @@ class OrganizationRegisterLivewire extends Component
         'year' => null,
     ];
 
+    public array $muncipalRegistration = [
+        'palika_reg_no' => null,
+        'reg_date' => null,
+        'file' => null
+    ];
+
     protected array $firstStepValidations = [
         'organizationDetail.org_name_ne' => ['required'],
         'organizationDetail.org_name_en' => ['required'],
@@ -80,6 +86,9 @@ class OrganizationRegisterLivewire extends Component
         'organizationDetail.logo' => ['required', 'image', 'max:200'],
         'taxClearance.document' => ['required', 'max:300'],
         'taxClearance.year' => ['required'],
+        'muncipalRegistration.palika_reg_no' => ['required'],
+        'muncipalRegistration.reg_date' => ['required'],
+        'muncipalRegistration.file' => ['required', 'file'],
     ];
 
     protected array $thirdStepValidations = [
@@ -128,6 +137,7 @@ class OrganizationRegisterLivewire extends Component
             $DbUser = Organization::create($this->user);
             $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
             $DbOrgDetail->taxClearances()->create($this->taxClearance);
+            $DbOrgDetail->emapMuncipalRegistrations()->create($this->muncipalRegistration);
 
             $this->resetForm();
         });
@@ -145,15 +155,15 @@ class OrganizationRegisterLivewire extends Component
 
     public function checkOrganizationAddress(): void
     {
-        if (! empty($this->organizationDetail['province_id'])) {
+        if (!empty($this->organizationDetail['province_id'])) {
             $this->address['organizationDistricts'] = get_districts(province_ids: [$this->organizationDetail['province_id']]);
             $this->address['organizationProvince'] = get_provinces(provinceId: $this->organizationDetail['province_id']);
         }
-        if (! empty($this->organizationDetail['district_id'])) {
+        if (!empty($this->organizationDetail['district_id'])) {
             $this->address['organizationLocalBodies'] = get_local_bodies(district_ids: [$this->organizationDetail['district_id']]);
             $this->address['organizationDistrict'] = get_districts(districtId: $this->organizationDetail['district_id']);
         }
-        if (! empty($this->organizationDetail['local_body_id'])) {
+        if (!empty($this->organizationDetail['local_body_id'])) {
             $this->address['organizationWards'] = get_local_bodies(localBodyId: $this->organizationDetail['local_body_id'])->ward_no;
             $this->address['organizationLocalBody'] = $this->address['organizationLocalBodies']->firstWhere('id', $this->organizationDetail['local_body_id']);
         }
@@ -163,7 +173,7 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->checkOrganizationAddress();
 
-        if (! empty($this->userDetail['citizenship_issued_district'])) {
+        if (!empty($this->userDetail['citizenship_issued_district'])) {
             $this->address['citizenshipIssuedDistrict'] = get_districts(districtId: $this->userDetail['citizenship_issued_district']);
         }
 

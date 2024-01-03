@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Setting\EmergencyNumber;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEmergencyNumberRequest extends FormRequest
 {
@@ -16,7 +17,11 @@ class StoreEmergencyNumberRequest extends FormRequest
         return [
             'title' => ['required'],
             'contact_no' => ['required'],
-            'emergency_category_id' => ['required'],
+            'emergency_category_id' => ['required', Rule::exists('emergency_categories', 'id')->withoutTrashed()],
+            'latitude' => ['nullable'],
+            'longitude' => ['nullable'],
+            'contact_person_name' => ['required'],
+            'address' => ['required'],
         ];
     }
 

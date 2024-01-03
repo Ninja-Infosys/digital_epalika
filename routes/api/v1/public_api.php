@@ -14,6 +14,7 @@ Route::get('importantLink', [PublicApiController::class, 'importantLink'])->name
 Route::get('setting', [PublicApiController::class, 'setting'])->name('public-api.setting');
 Route::get('introduction', [PublicApiController::class, 'introduction'])->name('public-api.introduction');
 Route::get('emergencyCategory', [PublicApiController::class, 'emergencyCategory'])->name('public-api.emergencyCategory');
+Route::get('emergencyCategory/{emergencyCategory}/emergencyNumber', [PublicApiController::class, 'emergencyNumber'])->name('public-api.emergencyNumber');
 Route::post('mobile/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', [PublicApiController::class, 'forgotPassword']);
 Route::post('mobile/signup', [AuthController::class, 'signup']);

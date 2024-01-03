@@ -67,6 +67,11 @@ class TraineeUserDetail extends Model
         return $this->hasMany(TraineeTaxClearance::class);
     }
 
+    public function muncipalRegistrations(): HasMany
+    {
+        return $this->hasMany(MuncipalRegistration::class);
+    }
+
     public function getOrgRegistrationDocumentUrlAttribute(): string
     {
         return $this->attributes['org_registration_document']

@@ -23,10 +23,10 @@ class StoreMeetingDecisionRequest extends FormRequest
             'meetingParticipants' => ['nullable', 'array'],
             'meetingParticipants.*' => [Rule::exists('committee_members', 'id')->withoutTrashed()],
             'invitedMember' => ['nullable', 'array'],
-            'invitedMember.*.name' => ['required'],
-            'invitedMember.*.designation' => ['required'],
-            'invitedMember.*.phone' => ['required'],
-            'invitedMember.*.email' => ['required', 'email'],
+            'invitedMember.*.name' => ['nullable'],
+            'invitedMember.*.designation' => ['nullable'],
+            'invitedMember.*.phone' => ['nullable'],
+            'invitedMember.*.email' => ['nullable', 'email'],
         ];
     }
 }

@@ -58,12 +58,13 @@ trait GetAllColumns
 
     public function getColumns($table): Collection
     {
-        $tableColumnInfos = collect(DB::select('SHOW FULL COLUMNS FROM ' . $table));
+        $tableColumnInfos = collect(DB::select("SHOW FULL COLUMNS FROM `$table`"));
 
         $array = $this->getTableColumns($tableColumnInfos);
 
         return collect(array_values($array));
     }
+
 
     /**
      * @param Collection $tableColumnInfos

@@ -91,7 +91,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($mapApply->appliedDocuments?->load('appliedMapFiles')?->where('form_data_id', $formDataType->id) as $appliedDocument)
+                        @foreach($mapApply->appliedDocuments?->load('appliedMapFiles','appliedDocumentStatuses')?->where('form_data_id', $formDataType->id) as $appliedDocument)
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
@@ -107,6 +107,22 @@
                                     </a>
                                 </td>
                             </tr>
+
+                            @foreach ($appliedDocument->appliedDocumentStatuses as $status)
+                            <tr style="background-color: #e8e5e5;">
+                                <td style="font-weight: bold;">{{ get_nepali_number($loop->iteration) }}</td>
+                                <td>  @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
+                                    <a href="{{$appliedMapFile->document_url}}" download="{{$appliedMapFile->document_url}}"><i class="fa fa-download"></i></a>
+                                @endforeach</td>
+                                <td>{{ $status->status->label() }}</td>
+                                <td>{{$status->created_at->toDateString()}}</td>
+                                <td>
+                                    <a href="{{ route('organization.admin.documentDetail',$appliedDocument) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
                         @endforeach
 
                         </tbody>

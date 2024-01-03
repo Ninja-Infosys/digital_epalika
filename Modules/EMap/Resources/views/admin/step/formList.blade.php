@@ -7,8 +7,9 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('emap.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}"
+                                     alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">{{$mapApply->unique_id}}</li>
@@ -46,7 +47,7 @@
                             </thead>
                             <tbody>
                             @foreach ($forms as $form)
-{{--                                {{dd(in_array(auth()->id(),$form->group?->users?->pluck('id')?->toArray() ?? []))}}--}}
+                                {{--                                {{dd(in_array(auth()->id(),$form->group?->users?->pluck('id')?->toArray() ?? []))}}--}}
                                 <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
@@ -55,7 +56,7 @@
                                         {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
                                     <td>
-                                        @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value && in_array(auth()->id(),$form->group?->users?->pluck('id')?->toArray() ?? []))
+                                        @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
                                             <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>

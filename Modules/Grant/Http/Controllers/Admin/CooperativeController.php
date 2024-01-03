@@ -19,9 +19,13 @@ class CooperativeController extends Controller
     {
         $this->checkAuthorization('cooperative_access');
 
-        $cooperatives = Cooperative::with('cooperativeType')->where(function (Builder $q) {
+        $cooperatives = Cooperative::with('cooperativeType','province', 'district', 'localBody', 'grantDetails.localBody')->
+        where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['unique_id', 'registration_no', 'name', 'cooperativeType',], request('search'));
+            }
+            if (!auth()->user()?->load('role')?->role?->type == 'Super') {
+                $q->where('user_id', auth()->id());
             }
         })
             ->latest()->paginate(15);

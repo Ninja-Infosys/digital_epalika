@@ -24,10 +24,10 @@
                                             {{$training->name}}
                                         </h5>
                                         <div class="d-flex justify-content-center">
-                                            <i class="fa fa-clock px-1 text-primary"></i><h6>खुलेको मिति:</h6> <small>{{$training->open_date}} </small>
+                                            <i class="fa fa-clock px-1 text-primary"></i><h6>खुलेको मिति:</h6> <small>{{$training->trainee_open_date}} </small>
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <i class="fa fa-clock px-1 text-primary"></i><h6>बन्द हुने मिति: </h6> <small>{{$training->closed_date}}</small>
+                                            <i class="fa fa-clock px-1 text-primary"></i><h6>बन्द हुने मिति: </h6> <small>{{$training->trainee_closed_date}}</small>
                                         </div>
                                         @foreach($training->trainers as $trainer)
                                             <div class="trainerUser d-flex py-2">

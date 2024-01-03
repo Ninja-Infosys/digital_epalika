@@ -2,6 +2,7 @@
     <tr>
         <td>{{$loop->iteration}}</td>
         <td>{{$grantDetail->model?->name}}</td>
+        <td>{{$grantDetail->model?->spouse_name}}</td>
         <td>{{$grantDetail->model?->father_name}}</td>
         <td>{{$grantDetail->model?->grandfather_name}}</td>
         <td>{{$grantDetail->model?->citizenship_no}}</td>
