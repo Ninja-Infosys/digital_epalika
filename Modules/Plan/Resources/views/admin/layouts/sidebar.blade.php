@@ -152,13 +152,18 @@
     <div class="collapse {{request()->is('admin/plan/estimateSetting/*') ? 'show' : ''}}"
          id="sidebarPlanEstimateSetting">
         <ul class="nav-second-level">
-            @can('planArea_access')
+
                 <li class="{{request()->is('admin/plan/estimateSetting/labour') ? 'active' : ''}}">
                     <a href="{{route('admin.plan.labour.index')}}">
                         <span>  Labour  </span>
                     </a>
                 </li>
-            @endcan
+                <li class="{{request()->is('admin/plan/estimateSetting/labourRate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.labourRate.index')}}">
+                        <span>  Labour Rate  </span>
+                    </a>
+                </li>
+
 
 
         </ul>

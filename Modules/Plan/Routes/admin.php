@@ -19,6 +19,7 @@ use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
 use Modules\Plan\Http\Controllers\LabourController;
+use Modules\Plan\Http\Controllers\LabourRateController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
@@ -56,6 +57,7 @@ Route::prefix('setting')->group(function () {
 
 Route::prefix('estimateSetting')->group(function () {
     Route::resource('labour', LabourController::class);
+    Route::resource('labourRate', LabourRateController::class);
 });
 
 //report
