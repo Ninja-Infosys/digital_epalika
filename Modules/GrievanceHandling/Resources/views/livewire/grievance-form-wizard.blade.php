@@ -64,22 +64,14 @@
                             </div>
                         @endif
                         <div class="col-md-12 mb-4">
-                            <h6>
-                                <label for="is_anonymous" class="form-label">
-                                    के तपाईं गुनासोमा अनाम हुन चाहानुहुन्छ ?
-                                </label>
-                            </h6>
+
                             <div class="d-flex">
                                 <div class="form-check" style="margin-right:15px">
                                     <input type="radio" class="form-check-input" wire:model="form.is_anonymous" value="1"
                                         id="is_anonymous1">
-                                    <label class="form-check-label" for="is_anonymous1">हो </label>
+                                    <label class="form-check-label" for="is_anonymous1">गोप्य रहनुहोस </label>
                                 </div>
-                                <div class="form-check" style="margin-right:15px">
-                                    <input type="radio" class="form-check-input" wire:model="form.is_anonymous" value="0"
-                                        id="is_anonymous2">
-                                    <label class="form-check-label" for="is_anonymous2">होइन </label>
-                                </div>
+
                             </div>
                             @error('form.is_anonymous')
                                 <div class="text-danger p-1">{{ $message }}</div>
