@@ -53,7 +53,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="fuel_id" class="form-label">एकाई *</label>
+                                    <label for="fuel_id" class="form-label">इन्धन  *</label>
                                     <select
                                         name="fuel_id"
                                         class="form-control @error('fuel_id') is-invalid @enderror"
