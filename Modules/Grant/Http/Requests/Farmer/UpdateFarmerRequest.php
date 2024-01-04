@@ -31,7 +31,7 @@ class UpdateFarmerRequest extends FormRequest
             'citizenship_no' => ['required', Rule::unique('farmers', 'citizenship_no')->withoutTrashed()->ignore($this->farmer)],
             'farmer_id_card_no' => ['nullable', Rule::unique('farmers', 'farmer_id_card_no')->withoutTrashed()->ignore($this->farmer)],
             'national_id_card_no' => ['nullable', Rule::unique('farmers', 'national_id_card_no')->withoutTrashed()->ignore($this->farmer)],
-            'phone_no' => ['required', Rule::unique('farmers', 'phone_no')->withoutTrashed()->ignore($this->farmer)],
+            'phone_no' => ['required','regex:/^([0-9\s\-\+\(\)]*)$/','min:10'],
             'province_id' => ['required', Rule::exists('provinces', 'id')],
             'district_id' => ['required', Rule::exists('districts', 'id')],
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')],
