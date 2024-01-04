@@ -61,7 +61,7 @@
                                         {{ $cooperative->district->district ?? '' }},
                                        {{ $cooperative->localBody->local_body ?? '' }} -
                                   {{ $cooperative->ward_no ?? '' }},
-                                 {{ $cooperative->village ?? '' }}
+                                 {{ $cooperative->village ?? '' }},
                                  {{ $cooperative->tole ?? '' }}</td>
                                     <td>{{$cooperative->cooperativeType->title??''}}</td>
                                     <td>{{$cooperative->vat_pan}}</td>

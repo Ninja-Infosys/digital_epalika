@@ -58,7 +58,7 @@
                                         {{ $enterprise->district->district ?? '' }},
                                        {{ $enterprise->localBody->local_body ?? '' }} -
                                   {{ $enterprise->ward_no ?? '' }},
-                                 {{ $enterprise->village ?? '' }}
+                                 {{ $enterprise->village ?? '' }},
                                  {{ $enterprise->tole ?? '' }}</td>
                                     <td>{{$enterprise->enterpriseType->title ?? ''}}</td>
                                     <td>{{$enterprise->vat_pan}}</td>

@@ -59,7 +59,7 @@
                                        {{ $farmer->district->district ?? '' }},
                                       {{ $farmer->localBody->local_body ?? '' }} -
                                  {{ $farmer->ward_no ?? '' }},
-                                {{ $farmer->village ?? '' }}
+                                {{ $farmer->village ?? '' }},
                                 {{ $farmer->tole ?? '' }}</td>
                                     <td>{{$farmer->farmer_id_card_no}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
