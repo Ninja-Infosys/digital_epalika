@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row d-none">
     @foreach ($citizenCharters as $citizenCharter)
         <div class="col-md-4 mb-4">
             <div class="card border-0 h-100 mb-3">
@@ -109,7 +109,7 @@
     @endforeach
 </div>
 
-<table class="table table-borderless position-relative overflow-hidden d-none" id="marqueeTable">
+<table class="table table-borderless position-relative overflow-hidden" id="marqueeTable">
     <thead class="sticky-top table-headcolor">
         <tr>
             <th scope="col">क्र.सं.</th>
@@ -131,6 +131,9 @@
                 <td>{{ $citizenCharter->amount }}</td>
                 <td>{{ $citizenCharter->time }}</td>
                 <td>{{ $citizenCharter->responsible_person }}</td>
+            </tr>
+            <tr class="empty">
+                <td></td>
             </tr>
         @endforeach
 
@@ -172,6 +175,29 @@
             margin: 0 auto;
             text-align: center;
             color: var(--mainColor);
+        }
+
+        tr.empty td,
+        tr.empty th {
+            background-color: transparent !important;
+        }
+
+        tr td {
+            background-color: #fff !important;
+            text-align: justify;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        tbody tr th {
+            background-color: #fff !important;
+            color: #333;
+        }
+
+        thead tr th {
+            background-color: #0047ab !important;
+            color: #fff;
         }
     </style>
 @endpush
