@@ -59,7 +59,7 @@
                                         {{ $group->district->district ?? '' }},
                                        {{ $group->localBody->local_body ?? '' }} -
                                   {{ $group->groupward_no ?? '' }},
-                                 {{ $group->village ?? '' }}
+                                 {{ $group->village ?? '' }},
                                  {{ $group->tole ?? '' }}</td>
                                     <td>{{ $group->registration_date }}</td>
                                     <td>{{ $group->registered_office }}</td>
