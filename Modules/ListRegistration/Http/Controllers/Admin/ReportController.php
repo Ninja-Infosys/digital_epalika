@@ -15,8 +15,8 @@ class ReportController extends Controller
     {
         $fiscalYears = FiscalYear::get();
         $columnData = $this->getColumns();
-
         return view('listregistration::admin.report.index', compact('fiscalYears', 'columnData'));
+
     }
 
     public function report(Request $request)

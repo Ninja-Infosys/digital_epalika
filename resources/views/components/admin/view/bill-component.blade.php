@@ -111,10 +111,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($paymentStore->paymentStoreStatuses as $paymentStoreStatus)
-
-
                                 <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>
@@ -125,10 +122,8 @@
                                     <td>{{ $paymentStoreStatus->amount }}</td>
                                     <td>{{ get_nepali_number($paymentStoreStatus->created_at->toDateString()) }}</td>
                                     <td>{{ $paymentStoreStatus->status->label()??'' }}</td>
-
                                 </tr>
                                 @endforeach
-
                         </tbody>
                     </table>
                 </div>
