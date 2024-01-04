@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharishCreate;
@@ -60,7 +61,7 @@ class SipharishCreateApiController extends Controller
     public function store(StoreSipharisCreatedRequest $request)
     {
         // dd($request->validated());
-        $sipharis = DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) {
 
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
@@ -71,6 +72,7 @@ class SipharishCreateApiController extends Controller
                 foreach ($request->validated()['fields'] as $field) {
 
                     if (!empty($field['type']) && $field['type'] == 'image') {
+                        Log::debug($field);
                         $value = Storage::disk('public')
                             ->putFile('recommendation/files', $field['value']);
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
@@ -111,8 +113,8 @@ class SipharishCreateApiController extends Controller
 
                 foreach ($request->validated()['files'] as $file) {
                     $sipharis->SipharisCreatedDocuments()->create($file + [
-                        'extension' => $file['filename']->getClientOriginalExtension()
-                    ]);
+                            'extension' => $file['filename']->getClientOriginalExtension()
+                        ]);
                 }
             }
 
@@ -132,6 +134,7 @@ class SipharishCreateApiController extends Controller
 
         return response()->json(SipharishCreateListResource::collection($sipharishCreates));
     }
+
     public function sipharishCreateShow(SipharishCreate $sipharishCreate)
     {
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
