@@ -3,6 +3,8 @@
 namespace Modules\Grant\Entities;
 
 use App\Models\Address\LocalBody;
+use App\Models\Settings\Branch;
+use App\Models\User;
 use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -58,7 +60,14 @@ class GrantDetail extends Model
     {
         return $this->morphTo();
     }
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);

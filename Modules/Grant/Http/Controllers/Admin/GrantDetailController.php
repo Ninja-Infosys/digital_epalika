@@ -26,19 +26,16 @@ class GrantDetailController extends Controller
                     });
                 }
 
-                if (auth()->user()?->role?->type == 'Super') {
-                    // Check the relationship between GrantDetail and User
-                    $q->whereHas('user', function ($user_q) {
-                        $user_q->where('id', auth()->id());
-                    });
-                }
+
+                    if (!auth()->user()?->load('role')?->role?->type == 'Super') {
+                        $q->where('user_id', auth()->id());
+                    }
             })
             ->latest()
             ->paginate(10);
 
         return view('grant::admin.grant_detail.index', compact('grantDetails', 'grants'));
     }
-
 
     public function checkGrant()
     {
