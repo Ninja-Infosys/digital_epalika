@@ -137,9 +137,8 @@ class SipharishCreateApiController extends Controller
 
     public function storeFile($value): ?string
     {
-        Log::debug($value);
         if (!empty($value)) {
-            if (!empty($value['data'])) {
+            if (empty($value['data'])) {
                 return '';
             }
             $decodedData = base64_decode($value['data']);
