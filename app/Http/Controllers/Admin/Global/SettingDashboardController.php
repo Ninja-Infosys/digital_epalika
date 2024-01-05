@@ -16,6 +16,6 @@ class SettingDashboardController extends Controller
         $sms_setup =(bool) FeatureActivation::where('feature_type', FeatureTypeEnum::SMS)
             ->where('feature_status', 1)
             ->first();
-        return view('admin.setting.dashboard', compact('email_setup', 'sms_setup'));
+        return view('admin.global.dashboard', compact('email_setup', 'sms_setup'));
     }
 }
