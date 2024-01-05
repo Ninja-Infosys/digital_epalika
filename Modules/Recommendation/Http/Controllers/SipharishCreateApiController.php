@@ -141,18 +141,14 @@ class SipharishCreateApiController extends Controller
         return response()->json(SipharishCreateListResource::make($sipharishCreate));
     }
 
-    /**
-     * @param $value1
-     * @return string
-     */
-    public function storeFile($value1): string
+
+    public function storeFile($value): ?string
     {
-        $fileUri = $value1['uri'];
-        $fileName = $value1['name'];
-        $fileContents = file_get_contents($fileUri);
-        $date = now()->format('Y_m_d');
-        // Store the file in the storage/app/public directory
-        $fileName = "recommendation/files/{$date}/{$fileName}";
-        return Storage::disk('public')->put($fileName, $fileContents);
+        if (!empty($value)) {
+            $decodedFile = base64_decode($value);
+            $date = now()->format('Y_m_d');
+            return Storage::disk('public')->putFile("recommendation/{$date}", $decodedFile);
+        }
+        return '';
     }
 }
