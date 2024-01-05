@@ -59,7 +59,6 @@ class SipharishCreateApiController extends Controller
     {
         // dd($request->validated());
         DB::transaction(function () use ($request) {
-            Log::debug($request);
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
@@ -67,8 +66,6 @@ class SipharishCreateApiController extends Controller
             ) {
 
                 foreach ($request->validated()['fields'] as $field) {
-
-                    Log::debug($field);
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         if (!empty($field['value'])) {
                             $value = $this->storeFile($field['value']);
@@ -153,6 +150,7 @@ class SipharishCreateApiController extends Controller
             $name = $value['name'] . "." . $value['extension'];
             $path = Storage::disk('public')->put("recommendation/{$date}/{$name}", $decodedData);
 
+            Log::debug($path);
             if (Storage::disk('public')->exists($path)) {
                 return $path;
             } else {
