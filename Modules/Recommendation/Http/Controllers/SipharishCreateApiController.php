@@ -144,7 +144,8 @@ class SipharishCreateApiController extends Controller
             $decodedData = base64_decode($value['data']);
             $date = now()->format('Y_m_d');
             $name = $value['name'] . "." . $value['extension'];
-            $path = Storage::disk('public')->put("recommendation/{$date}/{$name}", $decodedData);
+            $path = "recommendation/{$date}/{$name}";
+            Storage::disk('public')->put($path, $decodedData);
 
             Log::debug($path);
             if (Storage::disk('public')->exists($path)) {
