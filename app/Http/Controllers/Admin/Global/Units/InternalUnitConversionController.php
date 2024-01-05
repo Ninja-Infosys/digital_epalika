@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting\Units;
+namespace App\Http\Controllers\Admin\Global\Units;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\MeasurementUnits\StoreUnitConversionRequest;

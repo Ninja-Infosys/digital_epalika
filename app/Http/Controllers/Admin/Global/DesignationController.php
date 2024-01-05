@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Designation\StoreDesignationRequest;
@@ -14,14 +14,14 @@ class DesignationController extends Controller
         $this->checkAuthorization('designation_access');
         $designations = Designation::latest()->get();
 
-        return view('admin.setting.designation.index', compact('designations'));
+        return view('admin.global.designation.index', compact('designations'));
     }
 
     public function create()
     {
         $this->checkAuthorization('designation_create');
 
-        return view('admin.setting.designation.create');
+        return view('admin.global.designation.create');
     }
 
     public function store(StoreDesignationRequest $request)
@@ -38,7 +38,7 @@ class DesignationController extends Controller
     {
         $this->checkAuthorization('designation_edit');
 
-        return view('admin.setting.designation.edit', compact('designation'));
+        return view('admin.global.designation.edit', compact('designation'));
     }
 
     public function update(UpdateDesignationRequest $request, Designation $designation)
