@@ -16,7 +16,7 @@ class InternalUnitConversionController extends Controller
         $conversionUnits = Unit::where('measurement_unit_id', $unit->measurement_unit_id)->get();
         $conversions = UnitConversion::where('conversion_from', $unit->id)->get();
 
-        return view('admin.setting.units.unit.conversion.internal.index', compact('unit', 'conversionUnits', 'conversions'));
+        return view('admin.global.units.unit.conversion.internal.index', compact('unit', 'conversionUnits', 'conversions'));
     }
 
     public function store(StoreUnitConversionRequest $request, Unit $unit)
@@ -33,6 +33,6 @@ class InternalUnitConversionController extends Controller
 
         toast('मापन एकाइ रुपान्तरण सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.units.unit.index'));
+        return redirect(route('admin.global.units.unit.index'));
     }
 }

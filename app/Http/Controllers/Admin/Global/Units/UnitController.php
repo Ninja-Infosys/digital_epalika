@@ -15,14 +15,14 @@ class UnitController extends Controller
 
         $units = Unit::with('measurementUnit', 'measurementUnit.type')->latest()->get();
 
-        return view('admin.setting.units.unit.index', compact('units'));
+        return view('admin.global.units.unit.index', compact('units'));
     }
 
     public function create()
     {
         $this->checkAuthorization('unit_create');
 
-        return view('admin.setting.units.unit.create');
+        return view('admin.global.units.unit.create');
     }
 
     public function store(StoreUnitRequest $request)
@@ -32,7 +32,7 @@ class UnitController extends Controller
         Unit::create($request->validated());
         toast('मापन एकाइ सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.units.unit.index'));
+        return redirect(route('admin.global.units.unit.index'));
     }
 
     public function show(Unit $unit)
@@ -45,7 +45,7 @@ class UnitController extends Controller
 
         $unit->load('measurementUnit');
 
-        return view('admin.setting.units.unit.edit', compact('unit'));
+        return view('admin.global.units.unit.edit', compact('unit'));
     }
 
     public function update(UpdateUnitRequest $request, Unit $unit)
@@ -55,7 +55,7 @@ class UnitController extends Controller
 
         toast('मापन एकाइ सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.units.unit.index'));
+        return redirect(route('admin.global.units.unit.index'));
     }
 
     public function destroy(Unit $unit)
@@ -64,6 +64,6 @@ class UnitController extends Controller
         $unit->delete();
         toast('मापन एकाइ सफलतापूर्वक मेटाइयो', 'success');
 
-        return redirect(route('admin.units.unit.index'));
+        return redirect(route('admin.global.units.unit.index'));
     }
 }

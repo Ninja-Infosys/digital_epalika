@@ -55,6 +55,6 @@ class SmsSettingController extends Controller
     {
         $this->checkAuthorization('sms_access');
 
-        return view('admin.setting.sms.index');
+        return view('admin.global.sms.index');
     }
 }

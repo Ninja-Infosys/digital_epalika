@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">भूमिका विवरणहरू अपडेट गर्नुहोस्</h4>
-                        <a href="{{route('admin.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> भूमिका सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.userManagement.role.update',$role)}}" method="post">
+                    <form action="{{route('admin.global.userManagement.role.update',$role)}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">

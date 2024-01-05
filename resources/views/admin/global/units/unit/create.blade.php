@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.units.unit.index')}}">मापन एकाइ</a>
+                            <a href="{{route('admin.global.units.unit.index')}}">मापन एकाइ</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ मापन एकाइ थप्नुहोस्</li>
                     </ol>
@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ मापन एकाइ थप्नुहोस्</h4>
-                        <a href="{{route('admin.units.unit.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.units.unit.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> मापन एकाइ सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.units.unit.store')}}" method="post">
+                    <form action="{{route('admin.global.units.unit.store')}}" method="post">
                         @csrf
                         @livewire('setting.measurement-unit')
 

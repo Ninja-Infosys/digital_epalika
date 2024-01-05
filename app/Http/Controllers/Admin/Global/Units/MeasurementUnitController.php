@@ -15,7 +15,7 @@ class MeasurementUnitController extends Controller
         $this->checkAuthorization('MeasurementUnit_access');
         $types = Type::whereHas('measurementUnit')->withCount('measurementUnit')->latest()->get();
 
-        return view('admin.setting.units.measurementUnit.index', compact('types'));
+        return view('admin.global.units.measurementUnit.index', compact('types'));
     }
 
     public function create()
@@ -24,7 +24,7 @@ class MeasurementUnitController extends Controller
 
         $types = Type::latest()->get();
 
-        return view('admin.setting.units.measurementUnit.create', compact(['types']));
+        return view('admin.global.units.measurementUnit.create', compact(['types']));
     }
 
     public function store(StoreMeasurementUnitRequest $request)
@@ -34,7 +34,7 @@ class MeasurementUnitController extends Controller
         MeasurementUnit::create($request->validated());
         toast('मापन एकाइ विविधता सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.units.measurementUnit.index'));
+        return redirect(route('admin.global.units.measurementUnit.index'));
     }
 
     public function show(MeasurementUnit $measurementUnit)
@@ -48,7 +48,7 @@ class MeasurementUnitController extends Controller
 
         $types = Type::latest()->get();
 
-        return view('admin.setting.units.measurementUnit.edit', compact('measurementUnit', 'types'));
+        return view('admin.global.units.measurementUnit.edit', compact('measurementUnit', 'types'));
     }
 
     public function update(UpdateMeasurementUnitRequest $request, MeasurementUnit $measurementUnit)
@@ -58,7 +58,7 @@ class MeasurementUnitController extends Controller
 
         toast('मापन एकाइ विविधता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.units.measurementUnit.index'));
+        return redirect(route('admin.global.units.measurementUnit.index'));
     }
 
     public function destroy(MeasurementUnit $measurementUnit)
@@ -67,6 +67,6 @@ class MeasurementUnitController extends Controller
         $measurementUnit->delete();
         toast('मापन एकाइ विविधता सफलतापूर्वक मेटाइयो', 'success');
 
-        return redirect(route('admin.units.measurementUnit.index'));
+        return redirect(route('admin.global.units.measurementUnit.index'));
     }
 }

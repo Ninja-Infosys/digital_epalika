@@ -16,7 +16,7 @@ class FeatureActivationController extends Controller
             return $feature->getRawOriginal('feature_type');
         });
 
-        return view('admin.setting.feature.index', compact('featureActivations'));
+        return view('admin.global.feature.index', compact('featureActivations'));
     }
 
     public function updateFeatureActivation(FeatureActivation $featureActivation)

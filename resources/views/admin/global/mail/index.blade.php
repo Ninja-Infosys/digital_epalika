@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">मेल सेटिंग सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.update-mail-setting')}}" method="post"
+                    <form action="{{route('admin.global.update-mail-setting')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.send-test-mail')}}" method="post"
+                    <form action="{{route('admin.global.send-test-mail')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="row">

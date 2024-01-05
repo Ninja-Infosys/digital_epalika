@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.officeHeader.update',$officeHeader)}}" method="post"
+                    <form action="{{route('admin.global.officeHeader.update',$officeHeader)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')

@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.units.type.index')}}">आर्थिक बर्ष</a>
+                            <a href="{{route('admin.global.units.type.index')}}">आर्थिक बर्ष</a>
                         </li>
                         <li class="breadcrumb-item active"> मापन एकाइ प्रकार सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -30,13 +30,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मापन एकाइ प्रकार सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.units.type.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.units.type.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> मापन एकाइ प्रकार सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.units.type.update',$type)}}" method="post">
+                    <form action="{{route('admin.global.units.type.update',$type)}}" method="post">
                         @csrf
                         @method('put')
                         <fieldset class="border p-2 mb-2">

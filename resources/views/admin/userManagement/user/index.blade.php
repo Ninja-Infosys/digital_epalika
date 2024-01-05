@@ -7,7 +7,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">
+                            <a href="{{route('admin.global.dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
@@ -27,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> प्रयोगकर्ता सूची</h4>
                         @can('user_create')
-                            <a href="{{route('admin.userManagement.user.create')}}"
+                            <a href="{{route('admin.global.userManagement.user.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ प्रयोगकर्ता थप्नुहोस्
                             </a>
@@ -62,13 +62,13 @@
                                         <span class="badge bg-info">{{$user->role->title??''}}</span>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.userManagement.user.updateStatus',$user)}}">
+                                        <a href="{{route('admin.global.userManagement.user.updateStatus',$user)}}">
                                             <i class="fa fa-2x {{$user->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
                                         </a>
                                     </td>
                                     <td class="d-flex  flex-wrap gap-1">
                                         @can('user_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.userManagement.user.edit',$user)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.global.userManagement.user.edit',$user)}}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -77,7 +77,7 @@
                                             </a>
                                         @endcan
                                         @can('user_delete')
-                                            <form data-bs-type="delete" action="{{route('admin.userManagement.user.destroy',$user)}}"
+                                            <form data-bs-type="delete" action="{{route('admin.global.userManagement.user.destroy',$user)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

@@ -22,7 +22,7 @@ class OfficeSettingController extends Controller
         $fiscalYears = FiscalYear::get();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
 
-        return view('admin.setting.officeSetting.index', compact('officeSetting', 'officeHeaders', 'fiscalYears'));
+        return view('admin.global.officeSetting.index', compact('officeSetting', 'officeHeaders', 'fiscalYears'));
     }
 
     public function update(Request $request, OfficeSetting $officeSetting)

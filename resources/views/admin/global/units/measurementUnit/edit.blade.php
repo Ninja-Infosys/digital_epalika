@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.units.measurementUnit.index')}}">मापन एकाइ विविधता</a>
+                            <a href="{{route('admin.global.units.measurementUnit.index')}}">मापन एकाइ विविधता</a>
                         </li>
                         <li class="breadcrumb-item active"> मापन एकाइ विविधता सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मापन एकाइ विविधता सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.units.measurementUnit.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.units.measurementUnit.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आर्थिक बर्ष सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.units.measurementUnit.update',$measurementUnit)}}" method="post">
+                    <form action="{{route('admin.global.units.measurementUnit.update',$measurementUnit)}}" method="post">
                         @csrf
                         @method('put')
                         <fieldset class="border p-2 mb-2">

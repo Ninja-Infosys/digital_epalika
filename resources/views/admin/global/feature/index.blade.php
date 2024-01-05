@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">सुविधा सेटिंग सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -33,7 +33,7 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{route('admin.update-feature-activation',$data)}}">
+                            <a href="{{route('admin.global.update-feature-activation',$data)}}">
                                 <i class="fa fa-2x fa-toggle-{{$data->feature_status===true ? 'on':'off'}} text-{{$data->feature_status===true ? 'success':'danger'}}"></i>
                             </a>
 

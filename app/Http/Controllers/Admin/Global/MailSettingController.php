@@ -16,7 +16,7 @@ class MailSettingController extends Controller
     {
         $this->checkAuthorization('mail_access');
 
-        return view('admin.setting.mail.index');
+        return view('admin.global.mail.index');
     }
 
     public function updateMailSetting(Request $request)

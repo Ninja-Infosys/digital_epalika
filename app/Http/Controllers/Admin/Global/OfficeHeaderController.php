@@ -12,7 +12,7 @@ class OfficeHeaderController extends Controller
     public function edit(OfficeHeader $officeHeader)
     {
         $this->checkAuthorization('officeHeader_edit');
-        return view('admin.setting.officeSetting.edit', compact('officeHeader'));
+        return view('admin.global.officeSetting.edit', compact('officeHeader'));
     }
 
     public function update(UpdateOfficeHeaderRequest $request, OfficeHeader $officeHeader)
@@ -22,7 +22,7 @@ class OfficeHeaderController extends Controller
         Cache::forget('officeHeaders');
         toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.systemSetting.officeSetting.index'));
+        return redirect(route('admin.global.systemSetting.officeSetting.index'));
     }
 
     public function destroy(OfficeHeader $officeHeader)

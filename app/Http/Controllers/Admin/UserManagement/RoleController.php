@@ -78,7 +78,7 @@ class RoleController extends Controller
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.userManagement.role.index'));
+        return redirect(route('admin.global.userManagement.role.index'));
     }
 
     public function destroy(Role $role)

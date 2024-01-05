@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.systemSetting.officeSetting.index')}}">कार्यालय सेटिङ</a>
+                            <a href="{{route('admin.global.systemSetting.officeSetting.index')}}">कार्यालय सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">कार्यालय सेटिङ सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.systemSetting.officeSetting.update',$officeSetting)}}" method="post"
+                    <form action="{{route('admin.global.systemSetting.officeSetting.update',$officeSetting)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -281,14 +281,14 @@
 
                                         @can('officeHeader_edit')
                                             <a data-bs-type="edit"
-                                               href="{{route('admin.officeHeader.edit',$officeheader)}}"
+                                               href="{{route('admin.global.officeHeader.edit',$officeheader)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
 
 
-                                        <form action="{{route('admin.officeHeader.destroy',$officeheader)}}"
+                                        <form action="{{route('admin.global.officeHeader.destroy',$officeheader)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

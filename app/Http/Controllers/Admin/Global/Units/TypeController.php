@@ -13,15 +13,14 @@ class TypeController extends Controller
     {
         $this->checkAuthorization('unitType_access');
         $types = Type::get();
-
-        return view('admin.setting.units.type.index', compact('types'));
+        return view('admin.global.units.type.index', compact('types'));
     }
 
     public function create()
     {
         $this->checkAuthorization('unitType_create');
 
-        return view('admin.setting.units.type.create');
+        return view('admin.global.units.type.create');
     }
 
     public function store(Request $request)
@@ -35,7 +34,7 @@ class TypeController extends Controller
         Type::create($validationData);
         toast('मापन एकाइ प्रकार सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.units.type.index'));
+        return redirect(route('admin.global.units.type.index'));
     }
 
     public function show(Type $type)
@@ -47,7 +46,7 @@ class TypeController extends Controller
     {
         $this->checkAuthorization('unitType_edit');
 
-        return view('admin.setting.units.type.edit', compact('type'));
+        return view('admin.global.units.type.edit', compact('type'));
     }
 
     public function update(Request $request, Type $type)
@@ -61,7 +60,7 @@ class TypeController extends Controller
 
         toast('मापन एकाइ प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.units.type.index'));
+        return redirect(route('admin.global.units.type.index'));
     }
 
     public function destroy(Type $type)
