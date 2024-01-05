@@ -145,10 +145,10 @@ class SipharishCreateApiController extends Controller
     public function storeFile($value): ?string
     {
         if (!empty($value)) {
-            if (count($value['base64']) <= 1) {
+            if (count($value['data']) <= 1) {
                 return '';
             }
-            $decodedData = base64_decode($value['base64']);
+            $decodedData = base64_decode($value['data']);
             $date = now()->format('Y_m_d');
             $name = $value['name'] . "." . $value['extension'];
             $path = Storage::disk('public')->put("recommendation/{$date}/{$name}", $decodedData);
