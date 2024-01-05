@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Branch\StoreBranchRequest;
@@ -16,7 +16,7 @@ class BranchController extends Controller
 
         $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->paginate(10);
 
-        return view('admin.setting.branch.index', compact('branches'));
+        return view('admin.global.branch.index', compact('branches'));
     }
 
     public function subBranch(Request $request)
@@ -36,7 +36,7 @@ class BranchController extends Controller
 
         $mainBranches = Branch::whereNull('branch_id')->get();
 
-        return view('admin.setting.branch.create', compact('mainBranches'));
+        return view('admin.global.branch.create', compact('mainBranches'));
     }
 
     public function store(StoreBranchRequest $request)
@@ -54,7 +54,7 @@ class BranchController extends Controller
         $this->checkAuthorization('branch_edit');
         $mainBranches = Branch::whereNull('branch_id')->get();
 
-        return view('admin.setting.branch.edit', compact('branch', 'mainBranches'));
+        return view('admin.global.branch.edit', compact('branch', 'mainBranches'));
     }
 
     public function update(UpdateBranchRequest $request, Branch $branch)

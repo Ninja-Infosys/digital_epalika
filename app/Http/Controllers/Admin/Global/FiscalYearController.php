@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;

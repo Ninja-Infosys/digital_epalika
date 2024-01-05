@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Requests\Setting\EmergencyNumber\StoreEmergencyNumberRequest;
 use App\Http\Requests\Setting\EmergencyNumber\UpdateEmergencyNumberRequest;

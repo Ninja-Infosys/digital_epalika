@@ -6,13 +6,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">
+                            <a href="{{route('admin.global.dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">शाखा/उपशाखा</li>
                     </ol>

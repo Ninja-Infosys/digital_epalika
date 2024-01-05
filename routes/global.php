@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserManagement\{RoleController, UserController};
-use App\Http\Controllers\Admin\Setting\{BranchController,
+use App\Http\Controllers\Admin\Global\{BranchController,
     LetterHeadController,
     OfficeHeaderController,
     DepartmentController,

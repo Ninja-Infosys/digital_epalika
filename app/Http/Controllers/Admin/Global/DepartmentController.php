@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Department\StoreDepartmentRequest;
@@ -15,13 +15,13 @@ class DepartmentController extends Controller
 
         $departments = Department::latest()->get();
 
-        return view('admin.setting.department.index', compact('departments'));
+        return view('admin.global.department.index', compact('departments'));
     }
 
     public function create()
     {
         $this->checkAuthorization('department_create');
-        return view('admin.setting.department.create');
+        return view('admin.global.department.create');
     }
 
     public function store(StoreDepartmentRequest $request)
@@ -39,7 +39,7 @@ class DepartmentController extends Controller
     {
         $this->checkAuthorization('department_edit');
 
-        return view('admin.setting.department.edit', compact('department'));
+        return view('admin.global.department.edit', compact('department'));
     }
 
     public function update(UpdateDepartmentRequest $request, Department $department)
