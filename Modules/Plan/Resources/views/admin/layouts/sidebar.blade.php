@@ -173,6 +173,17 @@
                         <span>  इन्धन दर  </span>
                     </a>
                 </li>
+                  <li class="{{request()->is('admin/plan/estimateSetting/equipment') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.equipment.index')}}">
+                        <span>  उपकरण  </span>
+                    </a>
+                </li>
+
+                <li class="{{request()->is('admin/plan/estimateSetting/equipmentAdditionalCost') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.equipmentAdditionalCost.index')}}">
+                        <span>  उपकरण अतिरिक्त लागत  </span>
+                    </a>
+                </li>
 
 
 

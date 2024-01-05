@@ -18,6 +18,8 @@ use Modules\Plan\Http\Controllers\Admin\Setting\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
+use Modules\Plan\Http\Controllers\EquipmentAdditionalCostController;
+use Modules\Plan\Http\Controllers\EquipmentController;
 use Modules\Plan\Http\Controllers\FuelController;
 use Modules\Plan\Http\Controllers\FuelRateController;
 use Modules\Plan\Http\Controllers\LabourController;
@@ -62,6 +64,8 @@ Route::prefix('estimateSetting')->group(function () {
     Route::resource('labourRate', LabourRateController::class);
     Route::resource('fuel', FuelController::class);
     Route::resource('fuelRate', FuelRateController::class);
+    Route::resource('equipment', EquipmentController::class);
+    Route::resource('equipmentAdditionalCost', EquipmentAdditionalCostController::class);
 });
 
 //report
