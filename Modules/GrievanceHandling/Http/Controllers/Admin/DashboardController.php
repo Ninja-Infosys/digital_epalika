@@ -131,7 +131,7 @@ class DashboardController extends Controller
             return [
                 'name' => $grievanceTypes->title ." (".$grievanceTypes->grievance_details_count.")",
                 'data' => $grievanceTypes->grievance_details_count,
-                'color' => generateRandomRGBAColor()
+               
             ];
         });
 
@@ -141,8 +141,8 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $grievanceTypes->pluck('data')?->toArray(),
-                    'backgroundColor' => $grievanceTypes->pluck('color')?->toArray(),
-                    'borderColor' => $grievanceTypes->pluck('color')?->toArray(),
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
                 ],
             ],
@@ -195,7 +195,9 @@ class DashboardController extends Controller
                 [
                     'data' => $totalCount,
                     'label' => 'जम्मा',
-                  
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
