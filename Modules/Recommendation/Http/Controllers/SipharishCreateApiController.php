@@ -71,13 +71,7 @@ class SipharishCreateApiController extends Controller
                     Log::debug($field);
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         if (!empty($field['value'])) {
-                            $fileUri = $field['value']['uri'];
-                            $fileName = $field['value']['name'];
-                            $fileContents = file_get_contents($fileUri);
-                            $date = now()->format('Y_m_d');
-                            // Store the file in the storage/app/public directory
-                            $value = "recommendation/files/{$date}/{$fileName}";
-                            Storage::put($value, $fileContents);
+                            $value = $this->storeFile($field['value']);
 
                         }
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
@@ -85,8 +79,8 @@ class SipharishCreateApiController extends Controller
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
                                 if (!empty($table['type']) && $table['type'] == 'image') {
-                                    $tableValue = Storage::disk('public')
-                                        ->putFile('recommendation/files', $table['value']);
+
+                                    $tableValue = $this->storeFile($table['value']);
                                 } else {
                                     $tableValue = $table['value'];
                                 }
@@ -145,5 +139,20 @@ class SipharishCreateApiController extends Controller
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
 
         return response()->json(SipharishCreateListResource::make($sipharishCreate));
+    }
+
+    /**
+     * @param $value1
+     * @return string
+     */
+    public function storeFile($value1): string
+    {
+        $fileUri = $value1['uri'];
+        $fileName = $value1['name'];
+        $fileContents = file_get_contents($fileUri);
+        $date = now()->format('Y_m_d');
+        // Store the file in the storage/app/public directory
+        $fileName = "recommendation/files/{$date}/{$fileName}";
+        return Storage::disk('public')->put($fileName, $fileContents);
     }
 }
