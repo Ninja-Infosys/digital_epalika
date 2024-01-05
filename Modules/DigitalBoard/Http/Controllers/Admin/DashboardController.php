@@ -60,23 +60,17 @@ class DashboardController extends Controller
                 [
                     'data' => $totalCount,
                     'label' => 'जम्मा',
-                    'backgroundColor' => 'rgba(6, 62, 147, 1)',
-                    'borderColor' => 'rgba(6, 62, 147, 1)',
-                    'borderWidth' => 1,
+                   
                 ],
                 [
                     'data' => $noticeCount,
                     'label' => 'सूचना',
-                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
-                    'borderColor' => 'rgba(233, 1, 22, 1)',
-                    'borderWidth' => 1,
+                    
                 ],
                 [
                     'data' => $newsCount,
                     'label' => 'समाचार',
-                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
-                    'borderColor' => 'rgba(0, 145, 62, 1)',
-                    'borderWidth' => 1,
+                   
                 ],
             ],
         ];
@@ -100,17 +94,13 @@ class DashboardController extends Controller
                     'data' => $fiscalYears->pluck('notice_count')->toArray(),
                     'label' => 'सूचना',
                     'fill' => 'false',
-                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
-                    'borderColor' => 'rgba(233, 1, 22, 1)',
-                    'borderWidth' => 1,
+                   
                 ],
                 [
                     'data' => $fiscalYears->pluck('news_count')->toArray(),
                     'label' => 'समाचार',
                     'fill' => 'false',
-                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
-                    'borderColor' => 'rgba(0, 145, 62, 1)',
-                    'borderWidth' => 1,
+                    
                 ],
             ],
         ];

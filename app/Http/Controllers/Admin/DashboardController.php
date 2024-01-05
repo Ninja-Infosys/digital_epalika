@@ -16,9 +16,14 @@ use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\Project;
 use Modules\Roaster\Entities\Training;
 use Schema;
-use Modules\Plan\Http\Controllers\Admin\DashboardController as PlanDashboardController;
 use Modules\EMap\Http\Controllers\Admin\DashboardController as EmapDashboardController;
 use Modules\Revenue\Http\Controllers\Admin\DashboardController as RevenueDashboardController;
+use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController as DigitalDashboardController;
+use Modules\Recommendation\Http\Controllers\Admin\DashboardController as RecommendationDashboardController;
+use Modules\Roaster\Http\Controllers\DashboardController as RoasterDashboardController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController as BusinessRegistrationDashboardController;
+use Modules\Identity\Http\Controllers\DashboardController as IdentityDashboardController;
+use Modules\Circular\Http\Controllers\Admin\DashboardController as CircularDashboardController;
 
 class DashboardController extends Controller
 {
@@ -42,7 +47,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function __invoke()
+    public function index()
     {
         //dashboard redirection for particular module
         $dashboardPermissions = collect([
@@ -86,17 +91,7 @@ class DashboardController extends Controller
             return redirect($routeName);
         }
 
-        if (request()->ajax()) {
-            return [
-                "totalRevenue" => (new RevenueDashboardController())->totalRevenue($this->revenues),
-                "revenueAccordingToMonth" => (new RevenueDashboardController())->accordingToMonth($this->revenues),
-                'budgetHeadWiseProjects' => (new PlanDashboardController())->getBudgetHeadWiseProjects(),
-                'wardWiseProjects' => (new PlanDashboardController())->getWardWiseProjects(),
-                'constructionType' => (new EmapDashboardController())->getMapApplyConstructionTypeAccordingToFiscalYear(),
-                'structureType' => (new EmapDashboardController())->getMapApplyStructureTypeAccordingToFiscalYear(),
-                'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
-            ];
-        }
+
 
         $businessDetail_count = 0;
         $training_count = 0;
@@ -155,19 +150,40 @@ class DashboardController extends Controller
             'grievance_count'
         ]));
     }
+    public function ajaxData()
+    {
+        return [
+            "allNoticeAccordingMonth" => (new DigitalDashboardController())-> getNoticeAccordingToMonth(),
+            "wardWiseRegistration" => (new RecommendationDashboardController())->getWardWiseData(),
+            "totalRevenue" => (new RevenueDashboardController())->totalRevenue($this->revenues),
+            "revenueAccordingToMonth" => (new RevenueDashboardController())->accordingToMonth($this->revenues),
+            "trainerAccordingToSubject" => (new RoasterDashboardController())->trainerAccordingToSubject(),
+            'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
+            "businessRegistration" => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
+            "wardWise" => (new IdentityDashboardController())->getWardWiseData(),
+            "fyRegistrationAndDispatch" =>(new CircularDashboardController())->getFyRegistrationAndDispatchData(),
+            
+        ];
+    }
 
     private function setPlanData(): array
     {
         $officeSetting = OfficeSetting::first();
 
-        $planAreas = PlanArea::withCount(['projects' => function ($query) use ($officeSetting) {
-            $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
-        }])
-            ->with(['planAreas' => function ($query) use ($officeSetting) {
-                $query->withCount(['projects' => function ($sub_query) use ($officeSetting) {
-                    $sub_query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
-                }]);
-            }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
+        $planAreas = PlanArea::withCount([
+            'projects' => function ($query) use ($officeSetting) {
+                $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+            }
+        ])
+            ->with([
+                'planAreas' => function ($query) use ($officeSetting) {
+                    $query->withCount([
+                        'projects' => function ($sub_query) use ($officeSetting) {
+                            $sub_query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+                        }
+                    ]);
+                }
+            ])->whereNull('plan_area_id')->get()->map(function ($planArea) {
                 return [
                     'area_name' => $planArea->area_name ?? '',
                     'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count')

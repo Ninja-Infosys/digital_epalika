@@ -75,15 +75,15 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
                     'label' => 'दर्ता',
-                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
-                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'backgroundColor' => generateRandomRGBAColor(), 
+                    'borderColor' => generateRandomRGBAColor(), 
                     'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
                     'label' => 'चलानी',
-                    'backgroundColor' => 'rgba(0, 145, 62, 1)',
-                    'borderColor' => 'rgba(0, 145, 62, 1)',
+                    'backgroundColor' => generateRandomRGBAColor(), 
+                    'borderColor' => generateRandomRGBAColor(), 
                     'borderWidth' => 1,
                 ],
             ],
@@ -106,8 +106,8 @@ class DashboardController extends Controller
                 [
                     'data' => $monthlyRegistrations,
                     'label' => 'दर्ता',
-                    'backgroundColor' => 'rgba(233, 1, 22, 1)',
-                    'borderColor' => 'rgba(233, 1, 22, 1)',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
                 ],
                 [
