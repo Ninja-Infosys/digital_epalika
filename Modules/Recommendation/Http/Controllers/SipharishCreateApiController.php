@@ -70,11 +70,13 @@ class SipharishCreateApiController extends Controller
             ) {
 
                 foreach ($request->validated()['fields'] as $field) {
-
+                    $value = '';
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         Log::debug($field);
-                        $value = Storage::disk('public')
-                            ->putFile('recommendation/files', $field['value']);
+                        if (!empty($field['value'])) {
+                            $value = Storage::disk('public')
+                                ->putFile('recommendation/files', $field['value']);
+                        }
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
