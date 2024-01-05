@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.generalSetting.employee.show',$employee)}}">कार्य अनुभव </a>
+                            <a href="{{route('admin.global.generalSetting.employee.show',$employee)}}">कार्य अनुभव </a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ कार्य अनुभव</li>
                     </ol>
@@ -29,14 +29,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ कार्य अनुभव</h4>
-                        <a href="{{route('admin.generalSetting.employee.show',$employee)}}"
+                        <a href="{{route('admin.global.generalSetting.employee.show',$employee)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> कार्य अनुभव सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.employee.experience.store',$employee)}}" method="post"
+                    <form action="{{route('admin.global.generalSetting.employee.experience.store',$employee)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">

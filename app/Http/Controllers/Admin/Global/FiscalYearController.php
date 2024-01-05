@@ -21,14 +21,14 @@ class FiscalYearController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('admin.setting.fiscalYear.index', compact('fiscalYears'));
+        return view('admin.global.fiscalYear.index', compact('fiscalYears'));
     }
 
     public function create()
     {
         $this->checkAuthorization('fiscalYear_create');
 
-        return view('admin.setting.fiscalYear.create');
+        return view('admin.global.fiscalYear.create');
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class FiscalYearController extends Controller
     {
         $this->checkAuthorization('fiscalYear_edit');
 
-        return view('admin.setting.fiscalYear.edit', compact('fiscalYear'));
+        return view('admin.global.fiscalYear.edit', compact('fiscalYear'));
     }
 
     public function update(Request $request, FiscalYear $fiscalYear)
@@ -70,7 +70,7 @@ class FiscalYearController extends Controller
 
         toast('आर्थिक बर्ष सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.generalSetting.fiscalYear.index'));
+        return redirect(route('admin.global.generalSetting.fiscalYear.index'));
     }
 
     public function destroy(FiscalYear $fiscalYear)

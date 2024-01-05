@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ आर्थिक बर्ष थप्नुहोस्</li>
                     </ol>
@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ आर्थिक बर्ष थप्नुहोस्</h4>
-                        <a href="{{route('admin.generalSetting.fiscalYear.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.generalSetting.fiscalYear.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आर्थिक बर्ष सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.fiscalYear.store')}}" method="post">
+                    <form action="{{route('admin.global.generalSetting.fiscalYear.store')}}" method="post">
                         @csrf
                         <div class="col-md-4 mb-2">
                             <label for="title" class="form-label">आर्थिक बर्ष  *</label>

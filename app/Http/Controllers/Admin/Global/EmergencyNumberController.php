@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Requests\Setting\EmergencyNumber\StoreEmergencyNumberRequest;
 use App\Http\Requests\Setting\EmergencyNumber\UpdateEmergencyNumberRequest;
-use App\Models\Settings\EmergencyNumber;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\EmergencyCategory;
+use App\Models\Settings\EmergencyNumber;
 
 class EmergencyNumberController extends Controller
 {
@@ -14,16 +14,16 @@ class EmergencyNumberController extends Controller
     {
         $this->checkAuthorization('emergencyNumber_access');
 
-        $EmergencyNumbers = EmergencyNumber::get();
+        $EmergencyNumbers = EmergencyNumber::with('emergencyCategory')->get();
 
-        return view('admin.setting.emergencyNumber.index', compact('EmergencyNumbers'));
+        return view('admin.global.emergencyNumber.index', compact('EmergencyNumbers'));
     }
 
     public function create()
     {
         $this->checkAuthorization('emergencyNumber_create');
         $emergencyCategories = EmergencyCategory::all();
-        return view('admin.setting.emergencyNumber.create', compact('emergencyCategories'));
+        return view('admin.global.emergencyNumber.create', compact('emergencyCategories'));
     }
 
     public function store(StoreEmergencyNumberRequest $request)
@@ -40,7 +40,7 @@ class EmergencyNumberController extends Controller
         $this->checkAuthorization('emergencyNumber_edit');
         $emergencyCategories = EmergencyCategory::all();
 
-        return view('admin.setting.emergencyNumber.edit', compact('emergencyNumber', 'emergencyCategories'));
+        return view('admin.global.emergencyNumber.edit', compact('emergencyNumber', 'emergencyCategories'));
     }
 
     public function update(UpdateEmergencyNumberRequest $request, EmergencyNumber $emergencyNumber)
@@ -51,7 +51,7 @@ class EmergencyNumberController extends Controller
 
         toast('आपतकालीन नम्बर सफलतापूर्वक अपडेट गरियो', 'success');
 
-        return redirect(route('admin.generalSetting.emergencyNumber.index'));
+        return redirect(route('admin.global.generalSetting.emergencyNumber.index'));
     }
 
     public function destroy(EmergencyNumber $emergencyNumber)

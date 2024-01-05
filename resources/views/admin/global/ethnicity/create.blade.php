@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">जातियता थप गर्नुहोस्</li>
                     </ol>
@@ -27,13 +27,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ जातियता थप्नुहोस्</h4>
-                        <a href="{{route('admin.generalSetting.ethnicity.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.generalSetting.ethnicity.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> जातियता सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.ethnicity.store')}}" method="post">
+                    <form action="{{route('admin.global.generalSetting.ethnicity.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-4 mb-2">

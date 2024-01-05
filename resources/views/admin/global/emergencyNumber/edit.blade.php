@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आपतकालिन सम्पर्क</li>
                     </ol>
@@ -28,14 +28,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">आपतकालिन सम्पर्क</h4>
-                        <a href="{{route('admin.generalSetting.emergencyNumber.index')}}"
+                        <a href="{{route('admin.global.generalSetting.emergencyNumber.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आपतकालिन सम्पर्क सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.emergencyNumber.update',$emergencyNumber)}}"
+                    <form action="{{route('admin.global.generalSetting.emergencyNumber.update',$emergencyNumber)}}"
                           method="post">
                         @csrf
                         @method('PUT')

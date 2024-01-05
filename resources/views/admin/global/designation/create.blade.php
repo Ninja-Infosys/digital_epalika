@@ -6,13 +6,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">
+                            <a href="{{route('admin.global.dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">पदहरु</li>
                     </ol>
@@ -28,14 +28,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पद थप्नुहोस्</h4>
-                        <a href="{{route('admin.generalSetting.designation.index')}}"
+                        <a href="{{route('admin.global.generalSetting.designation.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> पद सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.designation.store')}}" method="post">
+                    <form action="{{route('admin.global.generalSetting.designation.store')}}" method="post">
                         @csrf
                             <div class="row">
                                 <div class="col-md-4 mb-2">

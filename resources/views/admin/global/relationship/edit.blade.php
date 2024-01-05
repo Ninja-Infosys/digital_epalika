@@ -25,13 +25,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नाता सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.relationship.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.relationship.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> नाता सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.relationship.update',$relationship)}}" method="post">
+                    <form action="{{route('admin.global.relationship.update',$relationship)}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">

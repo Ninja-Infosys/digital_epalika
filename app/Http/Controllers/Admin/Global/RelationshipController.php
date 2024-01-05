@@ -14,13 +14,13 @@ class RelationshipController extends Controller
     {
         $this->checkAuthorization('relationship_access');
         $relationships = Relationship::latest()->paginate(10);
-        return view('admin.setting.relationship.index', compact('relationships'));
+        return view('admin.global.relationship.index', compact('relationships'));
     }
 
     public function create()
     {
         $this->checkAuthorization('relationship_create');
-        return view('admin.setting.relationship.create');
+        return view('admin.global.relationship.create');
     }
 
     public function store(StoreRelationshipRequest $request): RedirectResponse
@@ -40,7 +40,7 @@ class RelationshipController extends Controller
     public function edit(Relationship $relationship)
     {
         $this->checkAuthorization('relationship_edit');
-        return view('admin.setting.relationship.edit', compact('relationship'));
+        return view('admin.global.relationship.edit', compact('relationship'));
     }
 
     public function update(UpdateRelationshipRequest $request, Relationship $relationship)
@@ -48,7 +48,7 @@ class RelationshipController extends Controller
         $this->checkAuthorization('relationship_edit');
         $relationship->update($request->validated());
         toast('नाता सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.relationship.index'));
+        return redirect(route('admin.global.relationship.index'));
     }
 
     public function destroy(Relationship $relationship): RedirectResponse

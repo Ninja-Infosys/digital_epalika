@@ -7,13 +7,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.global.dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.generalSetting.employee.show',$employee)}}">फाईल</a>
+                            <a href="{{route('admin.global.generalSetting.employee.show',$employee)}}">फाईल</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ फाईल</li>
                     </ol>
@@ -29,14 +29,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ फाईल</h4>
-                        <a href="{{route('admin.generalSetting.employee.show',$employee)}}"
+                        <a href="{{route('admin.global.generalSetting.employee.show',$employee)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> फाईल सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.employee.experienceFile.store',$employee)}}" method="post"
+                    <form action="{{route('admin.global.generalSetting.employee.experienceFile.store',$employee)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">

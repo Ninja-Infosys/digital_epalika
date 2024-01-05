@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">पेसा सम्पादन</li>
                     </ol>
@@ -27,13 +27,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पेसा सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.generalSetting.occupation.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.generalSetting.occupation.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> पेसा सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.occupation.update',$occupation)}}" method="post">
+                    <form action="{{route('admin.global.generalSetting.occupation.update',$occupation)}}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">

@@ -1,23 +1,23 @@
-<li class="{{request()->is('admin/setting/dashboard') ? 'active' : ''}}">
+<li class="{{request()->is('admin/global/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.global.dashboard')}}">
         <i class="fa fa-home"></i>
         <span> गृहपृष्ठ </span>
     </a>
 </li>
-<li class="{{request()->is('admin/setting/generalSetting*') || request()->is('admin/setting/generalSetting*') ? 'active' : ''}}">
+<li class="{{request()->is('admin/global/generalSetting*') || request()->is('admin/global/generalSetting*') ? 'active' : ''}}">
     <a href="#generalSetting"
-       {{request()->is('admin/setting/generalSetting*') || request()->is('admin/setting/generalSetting*') ? 'aria-expanded=true' : ''}}
+       {{request()->is('admin/global/generalSetting*') || request()->is('admin/global/generalSetting*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cog"></i>
         <span>सामान्य सेटिङ </span>
         <span class="menu-arrow"><i class="fas fa-angle-right"></i></span>
     </a>
     <div
-        class="collapse {{request()->is('admin/setting/generalSetting*') || request()->is('admin/setting/generalSetting*') ? 'show' : ''}}"
+        class="collapse {{request()->is('admin/global/generalSetting*') || request()->is('admin/global/generalSetting*') ? 'show' : ''}}"
         id="generalSetting">
         <ul class="nav-second-level">
             @can('fiscalYear_access')
-                <li class="{{request()->is('admin/setting/generalSetting/fiscalYear*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/fiscalYear*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.fiscalYear.index')}}">
                         <span> आर्थिक बर्ष थप्नुहोस्</span>
                     </a>
@@ -25,7 +25,7 @@
             @endcan
 
             @can('ethnicity_access')
-                <li class="{{request()->is('admin/setting/generalSetting/ethnicity/*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/ethnicity/*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.ethnicity.index')}}">
                         <span> जातियता थप्नुहोस्</span>
                     </a>
@@ -33,7 +33,7 @@
             @endcan
 
             @can('occupation_access')
-                <li class="{{request()->is('admin/setting/generalSetting/occupation/*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/occupation/*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.occupation.index')}}">
                         <span> पेसा थप्नुहोस्</span>
                     </a>
@@ -41,7 +41,7 @@
             @endcan
 
                 @can('relationship_access')
-                    <li class="{{request()->is('admin/setting/relationship') ? 'active' : ''}}">
+                    <li class="{{request()->is('admin/global/relationship') ? 'active' : ''}}">
                         <a href="{{route('admin.global.relationship.index')}}">
                             <span>नाता</span>
                         </a>
@@ -49,12 +49,12 @@
                 @endcan
 
             @can('emergencyNumber_access')
-                <li class="{{request()->is('admin/setting/generalSetting/emergencyNumber/*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/emergencyNumber/*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.emergencyNumber.index')}}">
                         <span> आपतकालीन सम्पर्क नं. </span>
                     </a>
                 </li>
-                <li class="{{request()->is('admin/setting/generalSetting/emergencyCategory/*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/emergencyCategory/*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.emergencyCategory.index')}}">
                         <span> आपतकालीन सेवाको वर्गहरु </span>
                     </a>
@@ -62,28 +62,28 @@
             @endcan
 
             @can('branch_access')
-                <li class="{{request()->is('admin/setting/generalSetting/branch*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/branch*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.branch.index')}}">
                         <span> शाखा/उपशाखा थप्नुहोस्</span>
                     </a>
                 </li>
             @endcan
             @can('designation_access')
-                <li class="{{request()->is('admin/setting/generalSetting/designation*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/designation*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.designation.index')}}">
                         <span> पद थप्नुहोस् </span>
                     </a>
                 </li>
             @endcan
             @can('department_access')
-                <li class="{{request()->is('admin/setting/generalSetting/department*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/globalglobal/generalSetting/department*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.department.index')}}">
                         <span> विभाग थप्नुहोस् </span>
                     </a>
                 </li>
             @endcan
             @can('employee_access')
-                <li class="{{request()->is('admin/setting/generalSetting/employee*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/global/generalSetting/employee*') ? 'active' : ''}}">
                     <a href="{{route('admin.global.generalSetting.employee.index')}}">
                         <span> कर्मचारीहरु</span>
                     </a>

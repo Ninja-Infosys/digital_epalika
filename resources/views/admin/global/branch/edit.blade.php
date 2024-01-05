@@ -28,13 +28,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">शाखा सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.generalSetting.branch.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.generalSetting.branch.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> शाखा सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.branch.update', $branch)}}" method="post">
+                    <form action="{{route('admin.global.generalSetting.branch.update', $branch)}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">

@@ -6,14 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.dashboard') }}">
+                            <a href="{{ route('admin.global.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
                                      alt="document-icon">
                                 गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.setting.dashboard') }}">सेटिङ</a>
+                            <a href="{{ route('admin.global.dashboard') }}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आपतकालिन सम्पर्क थप गर्नुहोस्</li>
                     </ol>
@@ -28,14 +28,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ आपतकालिन सम्पर्क थप्नुहोस्</h4>
-                        <a href="{{ route('admin.generalSetting.emergencyNumber.index') }}"
+                        <a href="{{ route('admin.global.generalSetting.emergencyNumber.index') }}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आपतकालिन सम्पर्क सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.generalSetting.emergencyNumber.store') }}" method="post">
+                    <form action="{{ route('admin.global.generalSetting.emergencyNumber.store') }}" method="post">
                         @csrf
                         <div class="row">
                             @if ($errors->any())
