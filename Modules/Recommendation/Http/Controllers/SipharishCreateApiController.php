@@ -59,7 +59,7 @@ class SipharishCreateApiController extends Controller
     {
         // dd($request->validated());
         DB::transaction(function () use ($request) {
-
+            Log::debug($request);
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
