@@ -1,5 +1,5 @@
 <li class="{{request()->is('admin/setting/dashboard') ? 'active' : ''}}">
-    <a href="{{route('admin.setting.dashboard')}}">
+    <a href="{{route('admin.global.dashboard')}}">
         <i class="fa fa-home"></i>
         <span> गृहपृष्ठ </span>
     </a>
@@ -18,7 +18,7 @@
         <ul class="nav-second-level">
             @can('fiscalYear_access')
                 <li class="{{request()->is('admin/setting/generalSetting/fiscalYear*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.fiscalYear.index')}}">
+                    <a href="{{route('admin.global.generalSetting.fiscalYear.index')}}">
                         <span> आर्थिक बर्ष थप्नुहोस्</span>
                     </a>
                 </li>
@@ -26,7 +26,7 @@
 
             @can('ethnicity_access')
                 <li class="{{request()->is('admin/setting/generalSetting/ethnicity/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.ethnicity.index')}}">
+                    <a href="{{route('admin.global.generalSetting.ethnicity.index')}}">
                         <span> जातियता थप्नुहोस्</span>
                     </a>
                 </li>
@@ -34,7 +34,7 @@
 
             @can('occupation_access')
                 <li class="{{request()->is('admin/setting/generalSetting/occupation/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.occupation.index')}}">
+                    <a href="{{route('admin.global.generalSetting.occupation.index')}}">
                         <span> पेसा थप्नुहोस्</span>
                     </a>
                 </li>
@@ -42,7 +42,7 @@
 
                 @can('relationship_access')
                     <li class="{{request()->is('admin/setting/relationship') ? 'active' : ''}}">
-                        <a href="{{route('admin.relationship.index')}}">
+                        <a href="{{route('admin.global.relationship.index')}}">
                             <span>नाता</span>
                         </a>
                     </li>
@@ -50,12 +50,12 @@
 
             @can('emergencyNumber_access')
                 <li class="{{request()->is('admin/setting/generalSetting/emergencyNumber/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.emergencyNumber.index')}}">
+                    <a href="{{route('admin.global.generalSetting.emergencyNumber.index')}}">
                         <span> आपतकालीन सम्पर्क नं. </span>
                     </a>
                 </li>
                 <li class="{{request()->is('admin/setting/generalSetting/emergencyCategory/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.emergencyCategory.index')}}">
+                    <a href="{{route('admin.global.generalSetting.emergencyCategory.index')}}">
                         <span> आपतकालीन सेवाको वर्गहरु </span>
                     </a>
                 </li>
@@ -63,28 +63,28 @@
 
             @can('branch_access')
                 <li class="{{request()->is('admin/setting/generalSetting/branch*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.branch.index')}}">
+                    <a href="{{route('admin.global.generalSetting.branch.index')}}">
                         <span> शाखा/उपशाखा थप्नुहोस्</span>
                     </a>
                 </li>
             @endcan
             @can('designation_access')
                 <li class="{{request()->is('admin/setting/generalSetting/designation*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.designation.index')}}">
+                    <a href="{{route('admin.global.generalSetting.designation.index')}}">
                         <span> पद थप्नुहोस् </span>
                     </a>
                 </li>
             @endcan
             @can('department_access')
                 <li class="{{request()->is('admin/setting/generalSetting/department*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.department.index')}}">
+                    <a href="{{route('admin.global.generalSetting.department.index')}}">
                         <span> विभाग थप्नुहोस् </span>
                     </a>
                 </li>
             @endcan
             @can('employee_access')
                 <li class="{{request()->is('admin/setting/generalSetting/employee*') ? 'active' : ''}}">
-                    <a href="{{route('admin.generalSetting.employee.index')}}">
+                    <a href="{{route('admin.global.generalSetting.employee.index')}}">
                         <span> कर्मचारीहरु</span>
                     </a>
                 </li>
@@ -106,13 +106,13 @@
         <ul class="nav-second-level">
             @can('officeSetting_access')
                 <li class="{{request()->is('admin/setting/systemSetting/officeSetting*') ? 'active' : ''}}">
-                    <a href="{{route('admin.systemSetting.officeSetting.index')}}">
+                    <a href="{{route('admin.global.systemSetting.officeSetting.index')}}">
                         <span> कार्यालय सेटिङ </span>
                     </a>
                 </li>
             @endcan
             <li class="{{request()->is('admin/setting/systemSetting/letterHead*') ? 'active' : ''}}">
-                <a href="{{route('admin.systemSetting.letterHead.index')}}">
+                <a href="{{route('admin.global.systemSetting.letterHead.index')}}">
                     <span> लेटर हेड </span>
                 </a>
             </li>
@@ -133,21 +133,21 @@
         <ul class="nav-second-level">
             @can('sms_access')
                 <li class="{{request()->is('admin/setting/featureSetting/sms*') ? 'active' : ''}}">
-                    <a href="{{route('admin.featureSetting.sms-setting')}}">
+                    <a href="{{route('admin.global.featureSetting.sms-setting')}}">
                         <span>एस.एम.एस सेटअप</span>
                     </a>
                 </li>
             @endcan
             @can('mail_access')
                 <li class="{{request()->is('admin/setting/featureSetting/mail*') ? 'active' : ''}}">
-                    <a href="{{route('admin.featureSetting.mail-setting')}}">
+                    <a href="{{route('admin.global.featureSetting.mail-setting')}}">
                         <span>मेल सेटअप</span>
                     </a>
                 </li>
             @endcan
             @can('feature_access')
                 <li class="{{request()->is('admin/setting/featureSetting/feature*') ? 'active' : ''}}">
-                    <a href="{{route('admin.featureSetting.feature-activation')}}">
+                    <a href="{{route('admin.global.featureSetting.feature-activation')}}">
                         <span>सुविधा सक्रियता </span>
                     </a>
                 </li>
@@ -170,12 +170,12 @@
         <ul class="nav-second-level">
             @can('user_access')
                 <li class="{{request()->is('admin/setting/userManagement/user*') ? 'active' : ''}}">
-                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
+                    <a href="{{route('admin.global.userManagement.user.index')}}">प्रयोगकर्ता</a>
                 </li>
             @endcan
             @can('role_access')
                 <li class="{{request()->is('admin/setting/userManagement/role*') ? 'active' : ''}}">
-                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
+                    <a href="{{route('admin.global.userManagement.role.index')}}">भूमिका</a>
                 </li>
             @endcan
         </ul>
@@ -194,21 +194,21 @@
         <ul class="nav-second-level">
             @can('unitType_access')
                 <li class="{{request()->is('admin/setting/units/type*') ? 'active' : ''}}">
-                    <a href="{{route('admin.units.type.index')}}">
+                    <a href="{{route('admin.global.units.type.index')}}">
                         <span> प्रकार </span>
                     </a>
                 </li>
             @endcan
             @can('MeasurementUnit_access')
                 <li class="{{request()->is('admin/setting/units/measurementUnit*') ? 'active' : ''}}">
-                    <a href="{{route('admin.units.measurementUnit.index')}}">
+                    <a href="{{route('admin.global.units.measurementUnit.index')}}">
                         <span> विविधता </span>
                     </a>
                 </li>
             @endcan
             @can('unit_access')
                 <li class="{{request()->is('admin/setting/units/unit*') ? 'active' : ''}}">
-                    <a href="{{route('admin.units.unit.index')}}">
+                    <a href="{{route('admin.global.units.unit.index')}}">
                         <span> एकाई </span>
                     </a>
                 </li>

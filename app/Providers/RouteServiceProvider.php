@@ -48,6 +48,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('admin')
                 ->as('admin.')->group(base_path('routes/admin.php'));
 
+            Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', 'checkPinMiddleware'])
+                ->prefix('admin/global')
+                ->as('admin.global.')->group(base_path('routes/global.php'));
+
             Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
                 ->prefix('file_manager')
                 ->as('file_manager.')->group(base_path('routes/file_manager.php'));
