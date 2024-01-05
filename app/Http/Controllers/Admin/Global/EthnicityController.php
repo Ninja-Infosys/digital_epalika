@@ -19,14 +19,14 @@ class EthnicityController extends Controller
 
         $ethnicities = Ethnicity::get();
 
-        return view('admin.setting.ethnicity.index', compact('ethnicities'));
+        return view('admin.global.ethnicity.index', compact('ethnicities'));
     }
 
     public function create()
     {
         $this->checkAuthorization('ethnicity_create');
 
-        return view('admin.setting.ethnicity.create');
+        return view('admin.global.ethnicity.create');
     }
 
     public function store(StoreEthnicityRequest $request): RedirectResponse
@@ -47,7 +47,7 @@ class EthnicityController extends Controller
     {
         $this->checkAuthorization('ethnicity_edit');
 
-        return view('admin.setting.ethnicity.edit', compact('ethnicity'));
+        return view('admin.global.ethnicity.edit', compact('ethnicity'));
     }
 
     public function update(UpdateEthnicityRequest $request, Ethnicity $ethnicity)
@@ -57,7 +57,7 @@ class EthnicityController extends Controller
         $ethnicity->update($request->validated());
         toast('जातीयता सफलतापूर्वक अपडेट गरियो', 'success');
 
-        return redirect(route('admin.ethnicity.index'));
+        return redirect(route('admin.global.generalSetting.ethnicity.index'));
     }
 
     public function destroy(Ethnicity $ethnicity)

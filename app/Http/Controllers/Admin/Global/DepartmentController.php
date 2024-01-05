@@ -49,7 +49,7 @@ class DepartmentController extends Controller
         $department->update($request->validated());
         toast('विभाग सफलतापूर्वक अद्यावधिक गरियो !', 'success');
 
-        return redirect()->route('admin.department.index');
+        return redirect()->route('admin.global.department.index');
     }
 
     public function destroy(Department $department)

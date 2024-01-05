@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.generalSetting.employee.index') }}">थप विवरण</a>
+                            <a href="{{ route('admin.global.generalSetting.employee.index') }}">थप विवरण</a>
                         </li>
                         <li class="breadcrumb-item active"> थप विवरण</li>
                     </ol>
@@ -30,7 +30,7 @@
                         <h4 class="header-title mb-0">शैक्षिक योग्यता</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            <a href="{{ route('admin.generalSetting.employee.qualification.create', $employee) }}"
+                            <a href="{{ route('admin.global.generalSetting.employee.qualification.create', $employee) }}"
                                 class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
 
@@ -62,13 +62,13 @@
                                         <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('admin.generalSetting.employee.qualification.edit', [$employee, $qualification]) }}"
+                                                href="{{ route('admin.global.generalSetting.employee.qualification.edit', [$employee, $qualification]) }}"
                                                 class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form
-                                                action="{{ route('admin.generalSetting.employee.qualification.destroy', [$employee, $qualification]) }}"
+                                                action="{{ route('admin.global.generalSetting.employee.qualification.destroy', [$employee, $qualification]) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
@@ -100,7 +100,7 @@
                         <h4 class="header-title mb-0">कार्य अनुभव</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            <a href="{{ route('admin.generalSetting.employee.experience.create', $employee) }}"
+                            <a href="{{ route('admin.global.generalSetting.employee.experience.create', $employee) }}"
                                 class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
 
@@ -134,13 +134,13 @@
                                         <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('admin.generalSetting.employee.experience.edit', [$employee, $experience]) }}"
+                                                href="{{ route('admin.global.generalSetting.employee.experience.edit', [$employee, $experience]) }}"
                                                 class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form
-                                                action="{{ route('admin.generalSetting.employee.experience.destroy', [$employee, $experience]) }}"
+                                                action="{{ route('admin.global.generalSetting.employee.experience.destroy', [$employee, $experience]) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
@@ -172,7 +172,7 @@
                         <h4 class="header-title mb-0">फाईल</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            <a href="{{ route('admin.generalSetting.employee.experienceFile.create', $employee) }}"
+                            <a href="{{ route('admin.global.generalSetting.employee.experienceFile.create', $employee) }}"
                                 class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
 
@@ -203,13 +203,13 @@
                                         <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('admin.generalSetting.employee.experienceFile.edit', [$employee, $experienceFile]) }}"
+                                                href="{{ route('admin.global.generalSetting.employee.experienceFile.edit', [$employee, $experienceFile]) }}"
                                                 class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form
-                                                action="{{ route('admin.generalSetting.employee.experienceFile.destroy', [$employee, $experienceFile]) }}"
+                                                action="{{ route('admin.global.generalSetting.employee.experienceFile.destroy', [$employee, $experienceFile]) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')

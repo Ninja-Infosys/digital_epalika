@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.generalSetting.employee.index')}}">कर्मचारी </a>
+                            <a href="{{route('admin.global.generalSetting.employee.index')}}">कर्मचारी </a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ सम्पादन थप्नुहोस्</li>
                     </ol>
@@ -29,14 +29,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कर्मचारी सम्पादन थप्नुहोस्</h4>
-                        <a href="{{route('admin.generalSetting.employee.index')}}"
+                        <a href="{{route('admin.global.generalSetting.employee.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> कर्मचारी सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.generalSetting.employee.update',$employee)}}" method="post"
+                    <form action="{{route('admin.global.generalSetting.employee.update',$employee)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')

@@ -18,7 +18,7 @@ class ExperienceFileController extends Controller
     public function create(Employee $employee)
     {
         $this->checkAuthorization('experienceFile_create');
-        return view('admin.setting.employee.experienceFile.create', compact('employee'));
+        return view('admin.global.employee.experienceFile.create', compact('employee'));
     }
 
     public function store(StoreExperienceFileRequest $request, Employee $employee)
@@ -39,7 +39,7 @@ class ExperienceFileController extends Controller
     public function edit(Employee $employee, ExperienceFile $experienceFile)
     {
         $this->checkAuthorization('experienceFile_edit');
-        return view('admin.setting.employee.experienceFile.edit', compact('employee', 'experienceFile'));
+        return view('admin.global.employee.experienceFile.edit', compact('employee', 'experienceFile'));
     }
 
     public function update(UpdateExperienceFileRequest $request, Employee $employee, ExperienceFile $experienceFile)
@@ -50,7 +50,7 @@ class ExperienceFileController extends Controller
         }
         $experienceFile->update($request->validated());
         toast('फाईल सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.generalSetting.employee.show', $employee));
+        return redirect(route('admin.global.generalSetting.employee.show', $employee));
     }
 
     public function destroy(Employee $employee, ExperienceFile $experienceFile)

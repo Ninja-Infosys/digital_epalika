@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.setting.dashboard') }}">सेटिङ</a>
+                            <a href="{{ route('admin.global.dashboard') }}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आपतकालीन सम्पर्क विवरण</li>
                     </ol>
@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> आपतकालीन सम्पर्कको वर्गको सूची</h4>
                         @can('emergencyNumber_create')
-                            <a href="{{ route('admin.generalSetting.emergencyCategory.create') }}"
+                            <a href="{{ route('admin.global.generalSetting.emergencyCategory.create') }}"
                                 class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -58,7 +58,7 @@
                                         <td class="d-flex gap-1">
                                             @can('emergencyNumber_edit')
                                                 <a data-bs-type="edit"
-                                                    href="{{ route('admin.generalSetting.emergencyCategory.edit', $EmergencyCategory) }}"
+                                                    href="{{ route('admin.global.generalSetting.emergencyCategory.edit', $EmergencyCategory) }}"
                                                     class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                     title="सम्पादन गर्नुहोस्">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -68,7 +68,7 @@
                                             @endcan
                                             @can('emergencyNumber_delete')
                                                 <form
-                                                    action="{{ route('admin.generalSetting.emergencyCategory.destroy', $EmergencyCategory) }}"
+                                                    action="{{ route('admin.global.generalSetting.emergencyCategory.destroy', $EmergencyCategory) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')

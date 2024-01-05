@@ -17,12 +17,12 @@ class EmergencyCategoryController extends Controller
 
         $EmergencyCategories = EmergencyCategory::get();
 
-        return view('admin.setting.emergencyCategory.index', compact('EmergencyCategories'));
+        return view('admin.global.emergencyCategory.index', compact('EmergencyCategories'));
     }
 
     public function create()
     {
-        return view('admin.setting.emergencyCategory.create');
+        return view('admin.global.emergencyCategory.create');
     }
 
 
@@ -38,7 +38,7 @@ class EmergencyCategoryController extends Controller
 
     public function edit(EmergencyCategory $emergencyCategory)
     {
-        return view('admin.setting.emergencyCategory.edit',compact('emergencyCategory'));
+        return view('admin.global.emergencyCategory.edit',compact('emergencyCategory'));
     }
 
     public function update(UpdateEmergencyCategoryRequest $request, EmergencyCategory $emergencyCategory)
@@ -49,7 +49,7 @@ class EmergencyCategoryController extends Controller
 
         toast('आपतकालीन सेवा सफलतापूर्वक अपडेट गरियो', 'success');
 
-        return redirect(route('admin.generalSetting.emergencyCategory.index'));
+        return redirect(route('admin.global.emergencyCategory.index'));
     }
 
 

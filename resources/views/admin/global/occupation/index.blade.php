@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">सेटिङ</a>
+                            <a href="{{route('admin.global.dashboard')}}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">पेसा विवरण</li>
                     </ol>
@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> पेसाहरु</h4>
                         @can('occupation_create')
-                            <a href="{{route('admin.generalSetting.occupation.create')}}"
+                            <a href="{{route('admin.global.generalSetting.occupation.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -52,7 +52,7 @@
                                     <td>{{$occupation->title}}</td>
                                     <td class="d-flex gap-1">
                                         @can('occupation_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.generalSetting.occupation.edit', $occupation)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.global.generalSetting.occupation.edit', $occupation)}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
   <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -60,7 +60,7 @@
                                             </a>
                                         @endcan
                                         @can('occupation_delete')
-                                            <form action="{{route('admin.generalSetting.occupation.destroy', $occupation)}}"
+                                            <form action="{{route('admin.global.generalSetting.occupation.destroy', $occupation)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

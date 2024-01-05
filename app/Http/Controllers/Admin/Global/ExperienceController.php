@@ -18,7 +18,7 @@ class ExperienceController extends Controller
     public function create(Employee $employee)
     {
         $this->checkAuthorization('experience_create');
-        return view('admin.setting.employee.experience.create', compact('employee'));
+        return view('admin.global.employee.experience.create', compact('employee'));
     }
 
     public function store(StoreExperienceRequest $request, Employee $employee)
@@ -39,7 +39,7 @@ class ExperienceController extends Controller
     public function edit(Employee $employee, Experience $experience)
     {
         $this->checkAuthorization('experience_edit');
-        return view('admin.setting.employee.experience.edit', compact('employee', 'experience'));
+        return view('admin.global.employee.experience.edit', compact('employee', 'experience'));
     }
 
     public function update(UpdateExperienceRequest $request, Employee $employee, Experience $experience)
@@ -47,7 +47,7 @@ class ExperienceController extends Controller
         $this->checkAuthorization('experience_edit');
         $experience->update($request->validated());
         toast('कार्य अनुभव सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.generalSetting.employee.show', $employee));
+        return redirect(route('admin.global.generalSetting.employee.show', $employee));
     }
 
     public function destroy(Employee $employee, Experience $experience)

@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.setting.dashboard') }}">सेटिङ</a>
+                            <a href="{{ route('admin.global.dashboard') }}">सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">आपतकालिन सेवा सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -27,14 +27,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ आपतकालिन सेवा थप्नुहोस्</h4>
-                        <a href="{{ route('admin.generalSetting.emergencyCategory.index') }}"
+                        <a href="{{ route('admin.global.generalSetting.emergencyCategory.index') }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> आपतकालिन सेवाको सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.generalSetting.emergencyCategory.update', $emergencyCategory) }}" enctype="multipart/form-data"
+                    <form action="{{ route('admin.global.generalSetting.emergencyCategory.update', $emergencyCategory) }}" enctype="multipart/form-data"
                         method="post">
                         @csrf
                         @method('PUT')

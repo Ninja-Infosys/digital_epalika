@@ -28,7 +28,7 @@ class EmployeeController extends Controller
             ->latest()->paginate(10);
 
 
-        return view('admin.setting.employee.index', compact('employees'));
+        return view('admin.global.employee.index', compact('employees'));
     }
 
     public function create()
@@ -37,7 +37,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        return view('admin.setting.employee.create', compact('ethnicities', 'branches', 'allemployees'));
+        return view('admin.global.employee.create', compact('ethnicities', 'branches', 'allemployees'));
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
         $qualifications = Qualification::all();
         $experiences = Experience::all();
         $experienceFiles = ExperienceFile::all();
-        return view('admin.setting.employee.show', compact('experienceFiles', 'employee', 'qualifications', 'experiences'));
+        return view('admin.global.employee.show', compact('experienceFiles', 'employee', 'qualifications', 'experiences'));
     }
 
     public function edit(Employee $employee)
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        return view('admin.setting.employee.edit', compact('ethnicities', 'employee', 'branches', 'allemployees'));
+        return view('admin.global.employee.edit', compact('ethnicities', 'employee', 'branches', 'allemployees'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
@@ -81,7 +81,7 @@ class EmployeeController extends Controller
 
         toast('कर्मचारी सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.generalSetting.employee.index'));
+        return redirect(route('admin.global.generalSetting.employee.index'));
     }
 
     public function destroy(Employee $employee)
