@@ -67,16 +67,12 @@ class SipharishCreateApiController extends Controller
 
                 foreach ($request->validated()['fields'] as $field) {
                     if (!empty($field['type']) && $field['type'] == 'image') {
-                        if (!empty($field['value'])) {
-                            $value = $this->storeFile($field['value']);
-
-                        }
+                        $value = $this->storeFile($field['value']);
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
                                 if (!empty($table['type']) && $table['type'] == 'image') {
-
                                     $tableValue = $this->storeFile($table['value']);
                                 } else {
                                     $tableValue = $table['value'];
@@ -141,6 +137,7 @@ class SipharishCreateApiController extends Controller
 
     public function storeFile($value): ?string
     {
+        Log::debug($value);
         if (!empty($value)) {
             if (!empty($value['data'])) {
                 return '';
