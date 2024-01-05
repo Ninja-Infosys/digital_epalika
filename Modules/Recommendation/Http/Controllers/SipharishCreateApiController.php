@@ -145,7 +145,7 @@ class SipharishCreateApiController extends Controller
     public function storeFile($value): ?string
     {
         if (!empty($value)) {
-            $decodedFile = base64_decode($value);
+            $decodedFile = mb_convert_encoding(base64_decode($value), 'UTF-8', 'UTF-8');
             $date = now()->format('Y_m_d');
             return Storage::disk('public')->putFile("recommendation/{$date}", $decodedFile);
         }
