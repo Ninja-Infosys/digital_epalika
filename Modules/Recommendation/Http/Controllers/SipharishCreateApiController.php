@@ -2,8 +2,6 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +11,6 @@ use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Entities\SipharishFormType;
 use Modules\Recommendation\Entities\SipharisSubCategory;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
-use Modules\Recommendation\Transformers\SifarishFormFieldResource;
 use Modules\Recommendation\Transformers\SipharishCreateListResource;
 use Modules\Recommendation\Transformers\SipharishCreateResource;
 use Modules\Recommendation\Transformers\SipharishFormFieldResource;
@@ -71,10 +68,18 @@ class SipharishCreateApiController extends Controller
 
                 foreach ($request->validated()['fields'] as $field) {
 
+                    Log::debug($field);
                     if (!empty($field['type']) && $field['type'] == 'image') {
-                        Log::debug($field);
-                        $value = Storage::disk('public')
-                            ->putFile('recommendation/files', $field['value']);
+                        if (!empty($field['value'])) {
+                            $fileUri = $field['value']['uri'];
+                            $fileName = $field['value']['name'];
+                            $fileContents = file_get_contents($fileUri);
+                            $date = now()->format('Y_m_d');
+                            // Store the file in the storage/app/public directory
+                            $value = "recommendation/files/{$date}/{$fileName}";
+                            Storage::put($value, $fileContents);
+
+                        }
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
