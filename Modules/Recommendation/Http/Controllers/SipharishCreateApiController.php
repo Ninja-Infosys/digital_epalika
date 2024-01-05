@@ -145,7 +145,7 @@ class SipharishCreateApiController extends Controller
     public function storeFile($value): ?string
     {
         if (!empty($value)) {
-            if (count($value['data']) <= 1) {
+            if (!empty($value['data'])) {
                 return '';
             }
             $decodedData = base64_decode($value['data']);
