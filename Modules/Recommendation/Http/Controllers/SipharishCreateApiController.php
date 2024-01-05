@@ -2,6 +2,8 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -11,6 +13,7 @@ use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Entities\SipharishFormType;
 use Modules\Recommendation\Entities\SipharisSubCategory;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
+use Modules\Recommendation\Transformers\SifarishFormFieldResource;
 use Modules\Recommendation\Transformers\SipharishCreateListResource;
 use Modules\Recommendation\Transformers\SipharishCreateResource;
 use Modules\Recommendation\Transformers\SipharishFormFieldResource;
@@ -59,7 +62,7 @@ class SipharishCreateApiController extends Controller
     {
         // dd($request->validated());
         DB::transaction(function () use ($request) {
-            Log::debug($request);
+
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
@@ -68,20 +71,20 @@ class SipharishCreateApiController extends Controller
 
                 foreach ($request->validated()['fields'] as $field) {
 
-
-                    Log::debug($field);
+                    $value = '';
                     if (!empty($field['type']) && $field['type'] == 'image') {
+                        Log::debug($field);
                         if (!empty($field['value'])) {
-                            $value = $this->storeFile($field['value']);
-
+                            $value = Storage::disk('public')
+                                ->putFile('recommendation/files', $field['value']);
                         }
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
                                 if (!empty($table['type']) && $table['type'] == 'image') {
-
-                                    $tableValue = $this->storeFile($table['value']);
+                                    $tableValue = Storage::disk('public')
+                                        ->putFile('recommendation/files', $table['value']);
                                 } else {
                                     $tableValue = $table['value'];
                                 }
@@ -140,16 +143,5 @@ class SipharishCreateApiController extends Controller
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
 
         return response()->json(SipharishCreateListResource::make($sipharishCreate));
-    }
-
-
-    public function storeFile($value): ?string
-    {
-        if (!empty($value)) {
-            $decodedFile = mb_convert_encoding(base64_decode($value), 'UTF-8', 'UTF-8');
-            $date = now()->format('Y_m_d');
-            return Storage::disk('public')->putFile("recommendation/{$date}", $decodedFile);
-        }
-        return '';
     }
 }

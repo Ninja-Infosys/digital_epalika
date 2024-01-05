@@ -116,13 +116,13 @@
         <ul class="nav-second-level">
             @can('officeSetting_access')
                 <li class="{{request()->is('admin/global/systemSetting/officeSetting*') ? 'active' : ''}}">
-                    <a href="{{route('admin.systemSetting.officeSetting.index')}}">
+                    <a href="{{route('admin.global.systemSetting.officeSetting.index')}}">
                         <span> कार्यालय सेटिङ </span>
                     </a>
                 </li>
             @endcan
             <li class="{{request()->is('admin/global/systemSetting/letterHead*') ? 'active' : ''}}">
-                <a href="{{route('admin.systemSetting.letterHead.index')}}">
+                <a href="{{route('admin.global.systemSetting.letterHead.index')}}">
                     <span> लेटर हेड </span>
                 </a>
             </li>
@@ -143,21 +143,21 @@
         <ul class="nav-second-level">
             @can('sms_access')
                 <li class="{{request()->is('admin/global/featureSetting/sms*') ? 'active' : ''}}">
-                    <a href="{{route('admin.featureSetting.sms-setting')}}">
+                    <a href="{{route('admin.global.featureSetting.sms-setting')}}">
                         <span>एस.एम.एस सेटअप</span>
                     </a>
                 </li>
             @endcan
             @can('mail_access')
                 <li class="{{request()->is('admin/global/featureSetting/mail*') ? 'active' : ''}}">
-                    <a href="{{route('admin.featureSetting.mail-setting')}}">
+                    <a href="{{route('admin.global.featureSetting.mail-setting')}}">
                         <span>मेल सेटअप</span>
                     </a>
                 </li>
             @endcan
             @can('feature_access')
                 <li class="{{request()->is('admin/global/featureSetting/feature*') ? 'active' : ''}}">
-                    <a href="{{route('admin.featureSetting.feature-activation')}}">
+                    <a href="{{route('admin.global.featureSetting.feature-activation')}}">
                         <span>सुविधा सक्रियता </span>
                     </a>
                 </li>
@@ -179,13 +179,14 @@
          id="userManagement">
         <ul class="nav-second-level">
             @can('user_access')
+
                 <li class="{{request()->is('admin/global/userManagement/user*') ? 'active' : ''}}">
-                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
+                    <a href="{{route('admin.global.userManagement.user.index')}}">प्रयोगकर्ता</a>
                 </li>
             @endcan
             @can('role_access')
                 <li class="{{request()->is('admin/global/userManagement/role*') ? 'active' : ''}}">
-                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
+                    <a href="{{route('admin.global.userManagement.role.index')}}">भूमिका</a>
                 </li>
             @endcan
         </ul>
@@ -203,22 +204,25 @@
          id="measurementUnits">
         <ul class="nav-second-level">
             @can('unitType_access')
+
                 <li class="{{request()->is('admin/global/units/type*') ? 'active' : ''}}">
-                    <a href="{{route('admin.units.type.index')}}">
+                    <a href="{{route('admin.global.units.type.index')}}">
                         <span> प्रकार </span>
                     </a>
                 </li>
             @endcan
             @can('MeasurementUnit_access')
+
                 <li class="{{request()->is('admin/global/units/measurementUnit*') ? 'active' : ''}}">
-                    <a href="{{route('admin.units.measurementUnit.index')}}">
+                    <a href="{{route('admin.global.units.measurementUnit.index')}}">
                         <span> विविधता </span>
                     </a>
                 </li>
             @endcan
             @can('unit_access')
+
                 <li class="{{request()->is('admin/global/units/unit*') ? 'active' : ''}}">
-                    <a href="{{route('admin.units.unit.index')}}">
+                    <a href="{{route('admin.global.units.unit.index')}}">
                         <span> एकाई </span>
                     </a>
                 </li>
