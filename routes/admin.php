@@ -46,7 +46,9 @@ Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
+
 Route::controller(AddressController::class)->prefix('address')->as('address.')->group(function () {
     Route::get('districts', 'district')->name('districts');
     Route::get('local-bodies', 'localBodies')->name('local-bodies');

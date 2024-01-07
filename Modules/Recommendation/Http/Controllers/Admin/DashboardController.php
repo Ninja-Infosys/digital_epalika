@@ -67,6 +67,9 @@ class DashboardController extends Controller
                     'data' => $wardsData->pluck('registration_detail_count')->toArray(),
                     'label' => 'जम्मा',
                     'fill' => 'false',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -120,6 +123,9 @@ class DashboardController extends Controller
                     'data' => $monthlyRegistrations,
                     'label' => 'जम्मा',
                     'fill' => 'false',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
