@@ -64,7 +64,7 @@ class SipharishCreateApiController extends Controller
                 array_key_exists('fields', $request->validated())
                 && !empty($request->validated()['fields'])
             ) {
-
+                Log::debug($request->validated()['fields']);
                 foreach ($request->validated()['fields'] as $key => $field) {
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         $value = $this->storeFile($field['value']);
