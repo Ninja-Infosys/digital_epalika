@@ -65,17 +65,17 @@ class SipharishCreateApiController extends Controller
                 && !empty($request->validated()['fields'])
             ) {
 
-                foreach ($request->validated()['fields'] as $field) {
+                foreach ($request->validated()['fields'] as $key => $field) {
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         $value = $this->storeFile($field['value']);
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
-                                Log::debug($table);
                                 if (!empty($table['type']) && $table['type'] == 'image') {
                                     $tableValue = $this->storeFile($table['value']);
                                 } else {
+                                    Log::debug($key);
                                     $tableValue = $table['value'];
                                 }
                                 $values->push([
