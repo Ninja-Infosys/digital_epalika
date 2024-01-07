@@ -71,21 +71,21 @@ class SipharishCreateApiController extends Controller
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $key => $table) {
-                                Log::debug($key);
-                                foreach ($table as $index => $tbl) {
-                                    Log::debug($index);
-                                    Log::debug($tbl);
+                                $row = collect();
+                                foreach ($table as $tbl) {
+                                    if (!empty($tbl['type']) && $tbl['type'] == 'image') {
+                                        $tableValue = $this->storeFile($tbl['value']);
+                                    } else {
+                                        $tableValue = $tbl['value'];
+                                    }
+                                    $row->push([
+                                        'sipharish_form_field_id' => $tbl['sipharish_form_field_id'],
+                                        'value' => $tableValue,
+                                        'type' => $tbl['type'],
+                                    ]);
                                 }
-                                if (!empty($table['type']) && $table['type'] == 'image') {
-                                    $tableValue = $this->storeFile($table['value']);
-                                } else {
-                                    $tableValue = $table['value'];
-                                }
-                                $values->push([
-                                    'sipharish_form_field_id' => $table['sipharish_form_field_id'],
-                                    'value' => $tableValue,
-                                    'type' => $table['type'],
-                                ]);
+                                $values->push($row);
+
                             }
                         }
                         $value = json_encode($values);
