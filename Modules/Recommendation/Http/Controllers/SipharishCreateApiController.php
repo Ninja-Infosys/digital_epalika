@@ -71,6 +71,7 @@ class SipharishCreateApiController extends Controller
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
+                                Log::debug($table);
                                 $row = collect();
                                 foreach ($table as $key => $tbl) {
                                     if (!empty($tbl['type']) && $tbl['type'] == 'image') {
