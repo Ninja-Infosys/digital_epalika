@@ -72,6 +72,7 @@ class SipharishCreateApiController extends Controller
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
+                                Log::debug($table);
                                 if (!empty($table['type']) && $table['type'] == 'image') {
                                     $tableValue = $this->storeFile($table['value']);
                                 } else {
