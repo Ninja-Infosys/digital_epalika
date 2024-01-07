@@ -60,7 +60,7 @@ class SipharishCreateApiController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-        // dd($request->validated());
+        Log::debug($request->validated());
         DB::transaction(function () use ($request) {
 
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
