@@ -57,7 +57,7 @@ class SipharishCreateApiController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-        // dd($request->validated());
+        Log::debug($request->validated());
         DB::transaction(function () use ($request) {
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
@@ -71,7 +71,6 @@ class SipharishCreateApiController extends Controller
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
-                                Log::debug($table);
                                 $row = collect();
                                 foreach ($table as $key => $tbl) {
                                     if (!empty($tbl['type']) && $tbl['type'] == 'image') {
