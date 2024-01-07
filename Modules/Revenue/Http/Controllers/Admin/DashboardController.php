@@ -2,6 +2,7 @@
 
 namespace Modules\Revenue\Http\Controllers\Admin;
 
+use App\Enums\ChartOptionEnum;
 use App\Models\Settings\FiscalYear;
 use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
@@ -59,63 +60,81 @@ class DashboardController extends Controller
         return view('revenue::admin.dashboard', compact('taxPayerCount', 'invoiceCount', 'all_total', 'fiscal_year_total', 'today_total', 'this_month_total', 'previous_month_total'));
     }
 
-   public function ajaxData()
-{
-    $results = DB::table('invoices')
+    public function ajaxData()
+    {
+        $results = DB::table('invoices')
             ->selectRaw('invoices.is_cash_invoice,invoices.payment_method,invoices.payment_date,invoices.payment_date_en,invoices.fiscal_year_id, SUM((invoice_particulars.rate * invoice_particulars.quantity)+ (invoice_particulars.rate * invoice_particulars.quantity) * invoice_particulars.due + invoice_particulars.fine) as total')
             ->join('invoice_particulars', 'invoice_particulars.invoice_id', '=', 'invoices.id')
             ->whereNull('invoices.deleted_at')
             ->whereNull('invoice_particulars.deleted_at')
             ->groupBy('invoices.fiscal_year_id', 'invoices.payment_date', 'invoices.is_cash_invoice', 'invoices.payment_method', 'invoices.payment_date_en')
             ->get();
-    $fiscal_year_id = officeSetting()->fiscal_year_id;
-    return [
-        'totalRevenue' => $this->totalRevenue($results), 
-        'totalCashBankRevenue' => $this->totalCashBankRevenue($results), 
-        'accordingToFy' => $this->accordingToFy($results), 
-        'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)), 
-    ];
-}
+        $fiscal_year_id = officeSetting()->fiscal_year_id;
+        return [
+            'totalRevenue' => $this->totalRevenue($results),
+            'totalCashBankRevenue' => $this->totalCashBankRevenue($results),
+            'accordingToFy' => $this->accordingToFy($results),
+            'accordingToMonth' => $this->accordingToMonth($results->where('fiscal_year_id', $fiscal_year_id)),
+        ];
+    }
 
-public function totalRevenue(Collection $result): array
-{
-    $cashReceiptTotal = $result->where('is_cash_invoice', 1)->sum('total');
-    $creditReceiptTotal = $result->where('is_cash_invoice', 0)->sum('total');
+    public function totalRevenue(Collection $result): array
+    {
+        $cashReceiptTotal = $result->where('is_cash_invoice', 1)->sum('total');
+        $creditReceiptTotal = $result->where('is_cash_invoice', 0)->sum('total');
 
-    return [
-        'labels' => ['नगदी रसिद', 'मालपोत रसिद'],
-        'dataSets' => [
-            [
-                'data' => [$cashReceiptTotal, $creditReceiptTotal],
-                'label' => 'नगदी रसिद र मालपोत रसिद राजस्व',
-                'backgroundColor' => generateRandomRGBAColor(),
-                'borderColor' => generateRandomRGBAColor(),
-                'borderWidth' => 1,
+
+        return [
+            'labels' => ['नगदी रसिद', 'मालपोत रसिद'],
+
+            'dataSets' => [
+                [
+                    'data' => [$cashReceiptTotal],
+                    'label' => 'नगदी रसिद राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(), // Assign the first color
+                    'borderWidth' => 1,
+                ],
+                [
+                    'data' => [$creditReceiptTotal],
+                    'label' => 'मालपोत रसिद राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(),
+
+                    'borderWidth' => 1,
+                ],
             ],
-        ],
-    ];
-}
+        ];
+    }
 
 
     public function totalCashBankRevenue(Collection $result): array
     {
         $cashTotal = $result->where('payment_method', 'Cash')->sum('total');
         $bankTotal = $result->where('payment_method', 'Bank')->sum('total');
-    
+
         return [
             'labels' => ['नगद', 'बैंक'],
+
             'dataSets' => [
                 [
-                    'data' => [$cashTotal, $bankTotal],
-                    'label' => 'नगद र बैंक राजस्व',
+                    'data' => [$cashTotal],
+                    'label' => 'नगद राजस्व',
                     'backgroundColor' => generateRandomRGBAColor(),
-                    'borderColor' => generateRandomRGBAColor(),
+
+                    'borderWidth' => 1,
+                ],
+                [
+                    'data' => [$bankTotal],
+                    'label' => 'बैंक राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(), // Assign the second color
+
                     'borderWidth' => 1,
                 ],
             ],
         ];
     }
-    
+
+
+
 
     public function accordingToFy(Collection $result)
     {
@@ -164,23 +183,23 @@ public function totalRevenue(Collection $result): array
         foreach ($this->month_name as $key => $month) {
             $data->push(
                 $result->filter(function ($item) use ($key) {
-                    return date('m', strtotime($item->payment_date)) == $key+1;
+                    return date('m', strtotime($item->payment_date)) == $key + 1;
                 })
                     ->sum('total')
             );
         }
 
         return [
-        'labels' => $this->month_name,
-        'dataSets' => [
-            [
-                'data' => $data,
-                'label' => 'जम्मा राजस्व',
-                 'backgroundColor' => generateRandomRGBAColor(),
+            'labels' => $this->month_name,
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'label' => 'जम्मा राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(),
                     'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
+                ],
             ],
-        ],
-    ];
+        ];
     }
 }
