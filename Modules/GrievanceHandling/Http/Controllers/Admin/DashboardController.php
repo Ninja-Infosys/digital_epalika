@@ -4,6 +4,7 @@ namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Enums\ChartOptionEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Branch;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -130,7 +131,7 @@ class DashboardController extends Controller
             return [
                 'name' => $grievanceTypes->title ." (".$grievanceTypes->grievance_details_count.")",
                 'data' => $grievanceTypes->grievance_details_count,
-                'color' => generateRandomRGBAColor()
+               
             ];
         });
 
@@ -140,8 +141,8 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $grievanceTypes->pluck('data')?->toArray(),
-                    'backgroundColor' => $grievanceTypes->pluck('color')?->toArray(),
-                    'borderColor' => $grievanceTypes->pluck('color')?->toArray(),
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
                 ],
             ],
@@ -150,26 +151,26 @@ class DashboardController extends Controller
 
     public function getDataAccordingToGrievanceOffice()
     {
-        $grievanceOffices = GrievanceOffice::withCount(['grievanceDetails' => function ($query) {
+        $branches = Branch::withCount(['grievanceDetails' => function ($query) {
             $query->whereNull('grievance_detail_id');
         }])
             ->get()
-            ->map(function ($grievanceOffice) {
+            ->map(function ($branch) {
                 return [
-                    'name' => $grievanceOffice->title." (".$grievanceOffice->grievance_details_count.")",
-                    'data' => $grievanceOffice->grievance_details_count,
+                    'name' => $branch->title." (".$branch->grievance_details_count.")",
+                    'data' => $branch->grievance_details_count,
                     'color' => generateRandomRGBAColor()
                 ];
             });
 
         return [
-            'labels' => $grievanceOffices->pluck('name')?->toArray(),
+            'labels' => $branches->pluck('name')?->toArray(),
             'option' => ChartOptionEnum::PIE_CHART->option(),
             'dataSets' => [
                 [
-                    'data' => $grievanceOffices->pluck('data')?->toArray(),
-                    'backgroundColor' => $grievanceOffices->pluck('color')?->toArray(),
-                    'borderColor' => $grievanceOffices->pluck('color')?->toArray(),
+                    'data' => $branches->pluck('data')?->toArray(),
+                    'backgroundColor' => $branches->pluck('color')?->toArray(),
+                    'borderColor' => $branches->pluck('color')?->toArray(),
                     'borderWidth' => 1,
                 ],
             ],
@@ -194,8 +195,8 @@ class DashboardController extends Controller
                 [
                     'data' => $totalCount,
                     'label' => 'जम्मा',
-                    'backgroundColor' => 'rgba(6, 62, 147, 1)',
-                    'borderColor' => 'rgba(6, 62, 147, 1)',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
                 ],
             ],

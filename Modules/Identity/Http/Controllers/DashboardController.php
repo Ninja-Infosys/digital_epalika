@@ -56,6 +56,9 @@ class DashboardController extends Controller
                 [
                     'data' => $wardsData->pluck('disability_identity_card')->toArray(),
                     'label' => 'जम्मा',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -80,6 +83,9 @@ class DashboardController extends Controller
                 [
                     'data' => $wardsData->pluck('senior_citizen_detail_count')->toArray(),
                     'label' => 'जम्मा',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];

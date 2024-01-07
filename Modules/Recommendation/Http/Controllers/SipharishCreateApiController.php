@@ -68,31 +68,29 @@ class SipharishCreateApiController extends Controller
                 array_key_exists('fields', $request->validated())
                 && !empty($request->validated()['fields'])
             ) {
-
                 foreach ($request->validated()['fields'] as $field) {
 
-                    $value = '';
                     if (!empty($field['type']) && $field['type'] == 'image') {
-                        Log::debug($field);
-                        if (!empty($field['value'])) {
-                            $value = Storage::disk('public')
-                                ->putFile('recommendation/files', $field['value']);
-                        }
+                        $value = $this->storeFile($field['value']);
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
-                            foreach ($field['table'] as $table) {
-                                if (!empty($table['type']) && $table['type'] == 'image') {
-                                    $tableValue = Storage::disk('public')
-                                        ->putFile('recommendation/files', $table['value']);
-                                } else {
-                                    $tableValue = $table['value'];
+                            foreach ($field['table'] as $key => $table) {
+                                $row = collect();
+                                foreach ($table as $tbl) {
+                                    if (!empty($tbl['type']) && $tbl['type'] == 'image') {
+                                        $tableValue = $this->storeFile($tbl['value']);
+                                    } else {
+                                        $tableValue = $tbl['value'];
+                                    }
+                                    $row->push([
+                                        'sipharish_form_field_id' => $tbl['sipharish_form_field_id'],
+                                        'value' => $tableValue,
+                                        'type' => $tbl['type'],
+                                    ]);
                                 }
-                                $values->push([
-                                    'sipharish_form_field_id' => $table['sipharish_form_field_id'],
-                                    'value' => $tableValue,
-                                    'type' => $table['type'],
-                                ]);
+                                $values->push($row);
+
                             }
                         }
                         $value = json_encode($values);
@@ -143,5 +141,26 @@ class SipharishCreateApiController extends Controller
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
 
         return response()->json(SipharishCreateListResource::make($sipharishCreate));
+    }
+
+
+    public function storeFile($value): ?string
+    {
+        if (!empty($value)) {
+            if (empty($value['data'])) {
+                return '';
+            }
+            $decodedData = base64_decode($value['data']);
+            $date = now()->format('Y_m_d');
+            $name = $value['name'] . "." . $value['extension'];
+            $path = "recommendation/{$date}/{$name}";
+            Storage::disk('public')->put($path, $decodedData);
+            if (Storage::disk('public')->exists($path)) {
+                return $path;
+            } else {
+                return '';
+            }
+        }
+        return '';
     }
 }

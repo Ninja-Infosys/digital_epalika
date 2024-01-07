@@ -91,15 +91,24 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
             'dataSets' => [
                 [
                     'data' => $fiscalYear->pluck('map_applies_count')->toArray(),
-                    'label' => 'जम्मा नक्सा',
+                    'label' => 'जम्मा नक्सा', 
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYear->pluck('mapRegistrationCount')->toArray(),
                     'label' => 'नक्सा दर्ता',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYear->pluck('mapVerificationCount')->toArray(),
                     'label' => 'नक्सा प्रमाणित',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ],
 
@@ -167,16 +176,25 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
                     'data' => $map_applies->pluck('count')->toArray(),
                     'label' => 'कुल नक्सा',
                     'fill' => 'false',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $map_applies->pluck('mapRegistrationCount')->toArray(),
                     'label' => 'नक्सा दर्ता',
                     'fill' => 'false',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $map_applies->pluck('mapVerificationCount')->toArray(),
                     'label' => 'नक्सा प्रमाणीकरण',
                     'fill' => 'false',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
 
@@ -196,6 +214,9 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
                 [
                     'data' => [],
                     'label' => 'Construction Types',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -228,6 +249,9 @@ public function getMapApplyStructureTypeAccordingToFiscalYear()
                 [
                     'data' => $month,
                     'label' => 'नक्सा दर्ता',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ]
         ];
