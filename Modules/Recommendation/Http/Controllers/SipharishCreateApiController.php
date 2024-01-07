@@ -76,6 +76,7 @@ class SipharishCreateApiController extends Controller
                                     $tableValue = $this->storeFile($table['value']);
                                 } else {
                                     Log::debug($key);
+                                    Log::debug($table);
                                     $tableValue = $table['value'];
                                 }
                                 $values->push([
@@ -147,8 +148,6 @@ class SipharishCreateApiController extends Controller
             $name = $value['name'] . "." . $value['extension'];
             $path = "recommendation/{$date}/{$name}";
             Storage::disk('public')->put($path, $decodedData);
-
-            Log::debug($path);
             if (Storage::disk('public')->exists($path)) {
                 return $path;
             } else {
