@@ -72,6 +72,9 @@ public function ajaxData(){
                 [
                     'data' => $fiscalYears->pluck('trainings_count')->toArray(),
                     'label' => 'जम्मा तालिमहरु',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ],
         ];
@@ -95,6 +98,9 @@ public function ajaxData(){
                 [
                     'data' => $month,
                     'label' => 'तालिम',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ]
         ];
@@ -117,6 +123,9 @@ public function ajaxData(){
                 [
                     'data' => $subjects->pluck('trainers_count')->toArray(),
                     'label' => 'Trainers Count',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];

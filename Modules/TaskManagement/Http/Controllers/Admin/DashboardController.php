@@ -71,6 +71,9 @@ public function ajaxData(){
                 [
                     'data' => $data->pluck('count')->toArray(),
                     'label' => 'जम्मा नक्सा',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ],
         ];

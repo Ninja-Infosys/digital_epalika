@@ -60,16 +60,25 @@ class DashboardController extends Controller
                 [
                     'data' => $totalCount,
                     'label' => 'जम्मा',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                    
                 ],
                 [
                     'data' => $noticeCount,
                     'label' => 'सूचना',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                     
                 ],
                 [
                     'data' => $newsCount,
                     'label' => 'समाचार',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                    
                 ],
             ],
@@ -94,12 +103,17 @@ class DashboardController extends Controller
                     'data' => $fiscalYears->pluck('notice_count')->toArray(),
                     'label' => 'सूचना',
                     'fill' => 'false',
-                   
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYears->pluck('news_count')->toArray(),
                     'label' => 'समाचार',
                     'fill' => 'false',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                     
                 ],
             ],

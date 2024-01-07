@@ -49,6 +49,9 @@ public function ajaxData(){
                 [
                     'data' => $grants->pluck('total')->toArray(),
                     'label' => 'जम्मा',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -72,6 +75,9 @@ public function ajaxData(){
                 [
                     'data' => $wardData->pluck('total')->toArray(),
                     'label' => 'जम्मा',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];

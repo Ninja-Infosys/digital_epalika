@@ -88,6 +88,9 @@ public function totalRevenue(Collection $result): array
             [
                 'data' => [$cashReceiptTotal, $creditReceiptTotal],
                 'label' => 'नगदी रसिद र मालपोत रसिद राजस्व',
+                'backgroundColor' => generateRandomRGBAColor(),
+                'borderColor' => generateRandomRGBAColor(),
+                'borderWidth' => 1,
             ],
         ],
     ];
@@ -105,6 +108,9 @@ public function totalRevenue(Collection $result): array
                 [
                     'data' => [$cashTotal, $bankTotal],
                     'label' => 'नगद र बैंक राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
             ],
         ];
@@ -129,14 +135,23 @@ public function totalRevenue(Collection $result): array
                 [
                     'data' => $totalRevenue,
                     'label' => 'जम्मा राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $totalLandRevenue,
                     'label' => 'मालपोत राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ],
                 [
                     'data' => $totalCashRevenue,
                     'label' => 'नगदी राजस्व',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ],
         ];
@@ -161,6 +176,9 @@ public function totalRevenue(Collection $result): array
             [
                 'data' => $data,
                 'label' => 'जम्मा राजस्व',
+                 'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
             ],
         ],
     ];
