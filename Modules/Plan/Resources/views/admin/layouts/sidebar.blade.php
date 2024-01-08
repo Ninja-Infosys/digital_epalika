@@ -184,6 +184,31 @@
                         <span>  उपकरण अतिरिक्त लागत  </span>
                     </a>
                 </li>
+                     <li class="{{request()->is('admin/plan/estimateSetting/fuelDemand') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.fuelDemand.index')}}">
+                        <span> इन्धनको माग  </span>
+                    </a>
+                </li>
+                     <li class="{{request()->is('admin/plan/estimateSetting/crewRate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.crewRate.index')}}">
+                        <span>  चालक दलको दर  </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/materialType') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.materialType.index')}}">
+                        <span>  सामग्री प्रकार  </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/material') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.material.index')}}">
+                        <span>  सामग्री   </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/materialRate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.materialRate.index')}}">
+                        <span>  सामाग्री दर   </span>
+                    </a>
+                </li>
 
 
 
