@@ -79,7 +79,6 @@ class SipharishCreateApiController extends Controller
                                         $tableValue = $tbl['value'];
                                     }
                                     $row->put($key, [
-                                        'sipharish_form_field_id' => $tbl['sipharish_form_field_id'],
                                         'value' => $tableValue,
                                         'type' => $tbl['type'],
                                     ]);
