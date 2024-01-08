@@ -17,6 +17,7 @@ class StoreSipharisCreatedRequest extends FormRequest
     {
         return [
             'personal_detail_id' => ['nullable'],
+            'mobile_user_id'=>['nullable'],
             'sipharis_category_id' => ['required', Rule::exists('sipharis_categories', 'id')->withoutTrashed()],
             'sipharis_sub_category_id' => ['required', Rule::exists('sipharis_sub_categories', 'id')->withoutTrashed()],
             'sipharis_form_type_id' => ['required', Rule::exists('sipharish_form_types', 'id')->withoutTrashed()],

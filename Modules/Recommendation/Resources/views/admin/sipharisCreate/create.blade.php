@@ -49,6 +49,7 @@
                                     'sipharis_category_id' =>  old('sipharis_category_id'),
                                     'sipharis_sub_category_id' =>  old('sipharis_sub_category_id'),
                                     'personal_detail_id' =>  old('personal_detail_id'),
+                                    'mobile_user_id'=>old('mobile_user_id'),
                                     'sipharis_form_type_id' =>  old('sipharis_form_type_id'),
                                     'status' =>  old('status'),
                                     'fields' =>  old('fields'),

@@ -42,7 +42,7 @@ class UserController extends Controller
 
         toast('प्रयोगकर्ता सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.userManagement.user.index'));
+        return redirect(route('admin.global.userManagement.user.index'));
     }
 
     public function show(User $user)
@@ -69,7 +69,7 @@ class UserController extends Controller
 
         toast('प्रयोगकर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.userManagement.user.index'));
+        return redirect(route('admin.global.userManagement.user.index'));
     }
 
     public function destroy(User $user)

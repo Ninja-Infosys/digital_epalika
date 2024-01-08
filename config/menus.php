@@ -22,6 +22,6 @@ return [
     ],
     'sidebars' => [
         'website',
-        'setting',
+        'global',
     ],
 ];
