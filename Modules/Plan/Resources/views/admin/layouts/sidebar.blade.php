@@ -199,6 +199,16 @@
                         <span>  सामग्री प्रकार  </span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/material') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.material.index')}}">
+                        <span>  सामग्री   </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/materialRate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.materialRate.index')}}">
+                        <span>  सामाग्री दर   </span>
+                    </a>
+                </li>
 
 
 
