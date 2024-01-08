@@ -15,7 +15,7 @@ class SipharisCreateController extends Controller
     public function index()
     {
         $this->checkAuthorization('recommendationCategory_access');
-        $sipharishCreates = SipharishCreate::with('SipharishFormType', 'personalDetail')->latest()->get();
+        $sipharishCreates = SipharishCreate::with('SipharishFormType', 'personalDetail','mobileUser')->latest()->get();
         return view('recommendation::admin.sipharisCreate.index', compact('sipharishCreates'));
     }
 
