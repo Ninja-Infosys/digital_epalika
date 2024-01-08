@@ -60,7 +60,6 @@ class SipharishCreateApiController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-        Log::debug($request->validated());
         DB::transaction(function () use ($request) {
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
@@ -87,7 +86,6 @@ class SipharishCreateApiController extends Controller
                                     ]);
                                 }
                                 $values->push($row);
-
                             }
                         }
                         $value = json_encode($values);
