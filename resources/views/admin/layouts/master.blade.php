@@ -23,6 +23,7 @@
     <!-- icons -->
     <link href="{{ asset('assets/backend/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/scss/style.css') }}" type="text/css" />
+    
     @stack('style')
     @livewireStyles
 </head>

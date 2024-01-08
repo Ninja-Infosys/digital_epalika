@@ -107,29 +107,37 @@ public function ajaxData(){
     }
 
     public function trainerAccordingToSubject()
-    {
-        $subjects = Subject::withCount('trainers')
-            ->get()
-            ->map(function ($subject) {
-                return [
-                    'title' => $subject->title,
-                    'trainers_count' => (int)$subject->trainers_count,
-                ];
-            });
-    
-        return [
-            'labels' => $subjects->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $subjects->pluck('trainers_count')->toArray(),
-                    'label' => 'Trainers Count',
-                    'backgroundColor' => generateRandomRGBAColor(),
-                    'borderColor' => generateRandomRGBAColor(),
-                    'borderWidth' => 1,
-                ],
+{
+    $subjects = Subject::withCount('trainers')
+        ->get()
+        ->map(function ($subject) {
+            return [
+                'title' => $subject->title,
+                'trainers_count' => (int)$subject->trainers_count,
+            ];
+        });
+
+    $labelColors = collect([]);
+
+    // Generate random colors for labels
+    $subjects->each(function ($subject) use ($labelColors) {
+        $labelColors->push(generateRandomRGBAColor());
+    });
+
+    return [
+        'labels' => $subjects->pluck('title')->toArray(),
+        'dataSets' => [
+            [
+                'data' => $subjects->pluck('trainers_count')->toArray(),
+                'label' => 'Trainers Count',
+                'backgroundColor' => $labelColors->toArray(),
+                'borderColor' => generateRandomRGBAColor(),
+                'borderWidth' => 1,
             ],
-        ];
-    }
+        ],
+    ];
+}
+
     
 
     public function trainingAccordingToType()

@@ -156,7 +156,7 @@ class DashboardController extends Controller
             "allNoticeAccordingMonth" => (new DigitalDashboardController())-> getNoticeAccordingToMonth(),
             "wardWiseRegistration" => (new RecommendationDashboardController())->getWardWiseData(),
             "totalRevenue" => (new RevenueDashboardController())->totalRevenue($this->revenues),
-            "revenueAccordingToMonth" => (new RevenueDashboardController())->accordingToMonth($this->revenues),
+            "totalCashBankRevenue" => (new RevenueDashboardController())->totalCashBankRevenue($this->revenues),
             "trainerAccordingToSubject" => (new RoasterDashboardController())->trainerAccordingToSubject(),
             'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
             "businessRegistration" => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
