@@ -1,5 +1,14 @@
 @extends('admin.layouts.master')
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -150,17 +159,20 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function () {
-                $('#payment_method').change(function () {
-                    let payment_method = $(this).val();
-                    if (payment_method === 'Bank') {
-                        $('#showIfBank').removeClass('d-none');
-                    } else {
-                        $('#showIfBank').addClass('d-none');
-                    }
-                });
+           $(document).ready(function () {
+    $('#payment_method').change(function () {
+        let payment_method = $(this).val();
+        console.log('Payment Method changed to:', payment_method); // Log the selected value
+        if (payment_method === 'Bank') {
+            console.log('Bank option selected');
+            $('#showIfBank').removeClass('d-none');
+        } else {
+            console.log('Bank option NOT selected');
+            $('#showIfBank').addClass('d-none');
+        }
+    });
+});
 
-            });
         </script>
     @endpush
 @endsection

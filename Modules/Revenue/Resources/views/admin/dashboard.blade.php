@@ -129,7 +129,7 @@
                     भुक्तानी अनुसार कुल राजस्व विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="totalCashBankRevenue" chart-type="doughnut"></canvas>
+                    <canvas id="totalCashBankRevenue" chart-type="pie"></canvas>
                 </div>
 
             </div>
@@ -151,7 +151,7 @@
                     चालु आर्थिक वर्षाका अनुसार कुल राजस्व
                 </h4>
                 <div class="card-body">
-                    <canvas id="accordingToFy" chart-type="line"> </canvas>
+                    <canvas id="accordingToFy" chart-type="bar"> </canvas>
                 </div>
 
             </div>

@@ -78,61 +78,70 @@ class DashboardController extends Controller
         ];
     }
 
+
+
     public function totalRevenue(Collection $result): array
-    {
-        $cashReceiptTotal = $result->where('is_cash_invoice', 1)->sum('total');
-        $creditReceiptTotal = $result->where('is_cash_invoice', 0)->sum('total');
+{
+    $cashReceiptTotal = $result->where('is_cash_invoice', 1)->sum('total');
+    $creditReceiptTotal = $result->where('is_cash_invoice', 0)->sum('total');
+    $labels = ['नगदी रसिद', 'मालपोत रसिद'];
+    $subjects = collect([
+        ['title' => 'नगदी रसिद', 'total' => $cashReceiptTotal],
+        ['title' => 'मालपोत रसिद', 'total' => $creditReceiptTotal],
+    ]);
 
+    $labelColors = collect([]);
+    
+    // Generate random colors for labels
+    $subjects->each(function ($subject) use ($labelColors) {
+        $labelColors->push(generateRandomRGBAColor());
+    });
 
-        return [
-            'labels' => ['नगदी रसिद', 'मालपोत रसिद'],
-
-            'dataSets' => [
-                [
-                    'data' => [$cashReceiptTotal],
-                    'label' => 'नगदी रसिद राजस्व',
-                    'backgroundColor' => generateRandomRGBAColor(), // Assign the first color
-                    'borderWidth' => 1,
-                ],
-                [
-                    'data' => [$creditReceiptTotal],
-                    'label' => 'मालपोत रसिद राजस्व',
-                    'backgroundColor' => generateRandomRGBAColor(),
-
-                    'borderWidth' => 1,
-                ],
+    return [
+        'labels' => $labels,
+        'option' => ChartOptionEnum::PIE_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $subjects->pluck('total')->toArray(),
+                'label' => 'राजस्व',
+                'backgroundColor' => $labelColors->toArray(),
+                'borderWidth' => 1,
             ],
-        ];
-    }
+        ],
+    ];
+}
 
 
-    public function totalCashBankRevenue(Collection $result): array
-    {
-        $cashTotal = $result->where('payment_method', 'Cash')->sum('total');
-        $bankTotal = $result->where('payment_method', 'Bank')->sum('total');
+public function totalCashBankRevenue(Collection $result): array
+{
+    $cashTotal = $result->where('payment_method', 'Cash')->sum('total');
+    $bankTotal = $result->where('payment_method', 'Bank')->sum('total');
+    $labels = ['नगद', 'बैंक'];
+    $subjects = collect([
+        ['title' => 'नगद', 'total' => $cashTotal],
+        ['title' => 'बैंक', 'total' => $bankTotal],
+    ]);
 
-        return [
-            'labels' => ['नगद', 'बैंक'],
+    $labelColors = collect([]);
+    
+    // Generate random colors for labels
+    $subjects->each(function ($subject) use ($labelColors) {
+        $labelColors->push(generateRandomRGBAColor());
+    });
 
-            'dataSets' => [
-                [
-                    'data' => [$cashTotal],
-                    'label' => 'नगद राजस्व',
-                    'backgroundColor' => generateRandomRGBAColor(),
-
-                    'borderWidth' => 1,
-                ],
-                [
-                    'data' => [$bankTotal],
-                    'label' => 'बैंक राजस्व',
-                    'backgroundColor' => generateRandomRGBAColor(), // Assign the second color
-
-                    'borderWidth' => 1,
-                ],
+    return [
+        'labels' => $labels,
+        'option' => ChartOptionEnum::PIE_CHART->option(),
+        'dataSets' => [
+            [
+                'data' => $subjects->pluck('total')->toArray(),
+                'label' => 'राजस्व',
+                'backgroundColor' => $labelColors->toArray(),
+                'borderWidth' => 1,
             ],
-        ];
-    }
-
+        ],
+    ];
+}
 
 
 
