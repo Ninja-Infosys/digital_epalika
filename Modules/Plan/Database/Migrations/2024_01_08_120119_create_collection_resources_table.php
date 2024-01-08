@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('type'); //equipment/labour
             $table->string('quantity');
             $table->string('rate_type'); //enum: percent/flat
-            $table->string('Rate');
+            $table->string('rate');
             $table->timestamps();
             $table->softDeletes();
         });
