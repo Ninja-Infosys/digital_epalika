@@ -107,6 +107,7 @@
                 </div>
             @endif
 
+
             <div class="col-md-3">
                 <div class="info-card module-card">
                     <a href="https://pams.fcgo.gov.np/">
@@ -190,6 +191,17 @@
                         <div class="pt-4 text-center">
                             <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35" height="35">
                             <h6 class="p-2 text-dark">Voice एस.एम.एस</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info-card module-card">
+                    <a href="{{ route('mobileUser.register.form') }}">
+                        <div class="pt-4 text-center">
+                            <img src="{{ asset('assets/frontend/image/new-icons/presentation.png') }}" width="35"
+                                height="35">
+                            <h6 class="p-2 text-dark">सेवाग्राही</h6>
                         </div>
                     </a>
                 </div>

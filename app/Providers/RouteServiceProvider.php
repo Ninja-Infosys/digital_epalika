@@ -56,6 +56,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('file_manager')
                 ->as('file_manager.')->group(base_path('routes/file_manager.php'));
 
+            Route::middleware(['web', 'auth:mobile-user', 'password.check'])
+                ->prefix('mobileUser/admin')
+                ->as('mobileUser.admin.')
+                ->group(base_path('routes/mobileUser/admin.php'));
+
             Route::prefix('installer')
                 ->as('installer.')
                 ->middleware(['web', 'installerMiddleware'])

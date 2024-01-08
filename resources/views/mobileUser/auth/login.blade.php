@@ -56,32 +56,8 @@
                                             <p class="fw-bold text-dark my-1" style="font-size: 14px;">(Digital Palika
                                                 Management System)</p>
                                         </h3>
-                                        <form action="{{ route('mobileUser.register.signup') }}" method="post">
+                                        <form action="{{ route('mobileUser.login') }}" method="post">
                                             @csrf
-                                            <div class="mb-2">
-                                                <label for="name" class="form-label fw-bold">प्रयोगकर्ता नाम
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <input name="name"
-                                                    class="form-control @error('name') is-invalid @enderror"
-                                                    type="name" value="{{ old('name') }}" id="name"
-                                                    placeholder="name Address" />
-                                                @error('name')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="phone" class="form-label fw-bold">प्रयोगकर्ता मोबाइल नंबर
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <input name="phone"
-                                                    class="form-control @error('phone') is-invalid @enderror"
-                                                    type="phone" value="{{ old('phone') }}" id="phone"
-                                                    placeholder="phone Address" />
-                                                @error('phone')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
                                             <div class="mb-2">
                                                 <label for="email" class="form-label fw-bold">प्रयोगकर्ता इमेल
                                                     <span class="text-danger">*</span>
@@ -119,7 +95,7 @@
                                             <div class="d-flex justify-content-center mt-3">
                                                 <button type="submit"
                                                         class="btn btn-primary btn-block waves-effect waves-light w-50 m-auto fs-5">
-                                                        साइन-इन
+                                                        लाग-इन
                                                     </button>
 
                                             </div>
@@ -128,7 +104,8 @@
 
                                             <div class="col-12 text-center">
                                                 <p>
-                                                    <a href="{{ route('mobileUser.login.form') }}" class="text-dark-50 ms-1">Already have account? Login</a>
+                                                    <a href="#" class="text-dark-50 ms-1">Forgot your
+                                                        password?</a>
                                                 </p>
                                             </div>
                                         </div>

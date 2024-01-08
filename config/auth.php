@@ -46,7 +46,7 @@ return [
         ],
 
         'mobile-user' => [
-            'driver' => 'passport',
+            'driver' => 'session',
             'provider' => 'mobile-users',
         ],
     ],

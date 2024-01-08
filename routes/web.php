@@ -3,6 +3,7 @@
 use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MobileUser\MobileUserAuthController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -80,4 +81,14 @@ Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     Route::get('form', [ResourceController::class, 'index']);
     Route::get('form/{resource}', [ResourceController::class, 'resource']);
     Route::get('form/{resource}/submission', [ResourceController::class, 'resourceSubmissions']);
+});
+
+Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
+    Route::get('login', [MobileUserAuthController::class, 'showMobileUserLoginForm'])->name('login.form');
+    Route::post('login', [MobileUserAuthController::class, 'mobileUserLogin'])->name('login');
+    Route::get('register', [MobileUserAuthController::class, 'showMobileUserRegisterForm'])->name('register.form');
+    Route::post('register', [MobileUserAuthController::class, 'signup'])->name('register.signup');
+    Route::post('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
+    // Route::get('password/create', [MobileUserAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
+    // Route::post('password/store', [MobileUserAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
 });
