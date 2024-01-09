@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\MobileUser;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MobileUser\UpdatePasswordRequest;
+use App\Http\Requests\MobileUser\UpdateProfileRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MobileUser;
@@ -28,7 +30,7 @@ class MobileUserAuthController extends Controller
         ]);
         MobileUser::create($validated);
         toast('सफलतापुर्बक सेवाग्राही रेजिस्टर हुनु भयो !!', 'success');
-        return back();
+        return redirect(route('mobileUser.login.form'));
     }
 
     public function showMobileUserLoginForm()
@@ -65,10 +67,41 @@ class MobileUserAuthController extends Controller
         return redirect('/');
     }
 
-    public function profile()
+    public function updateProfile(UpdateProfileRequest $request, MobileUser $mobileUser)
     {
-        $mobileUser = \auth('mobile-user')->user();
-
-        return view('mobileUser.profile', compact('mobileUser'));
+        $request->user('mobile-user')->update($request->validated());
+        toast('प्रोफाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return redirect()->route('digital-service');
     }
-}
+
+    public function editProfile()
+    {
+        $mobileUser = Auth::guard('mobile-user')->user();
+        return view('mobileUser.auth.updateProfile', compact('mobileUser'));
+    }
+
+    public function editPassword()
+    {
+        $mobileUser = Auth::guard('mobile-user')->user();
+        return view('mobileUser.auth.updatePassword', compact('mobileUser'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:7',
+        ]);
+        $user = Auth::guard('mobile-user')->user();
+        if (!Hash::check($request->current_password, $user->password)) {
+            toast('Incorrect current password', 'error');
+            return back();
+        }
+        $user->update([
+            'password' =>($request->password),
+        ]);
+        toast('पासवर्ड सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return redirect()->route('digital-service');
+    }
+
+    }

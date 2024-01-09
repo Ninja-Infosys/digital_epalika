@@ -86,4 +86,5 @@ Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
     Route::resource('letterHead', LetterHeadController::class)->only('index', 'store');
 });
 Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
-Route::resource('mobileUser', MobileUserController::class)->only('index');
+Route::resource('mobileUser', MobileUserController::class);
+Route::get('mobileUser/{mobileUser}/updateLoginStatus', [MobileUserController::class, 'updateLoginStatus'])->name('mobileUser.update-login-status');

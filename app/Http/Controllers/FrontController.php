@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MobileUser;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Employee;
 use App\Models\Website\ImportantLink;
@@ -13,7 +14,7 @@ use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
-
+use Illuminate\Support\Facades\Auth;
 class FrontController extends Controller
 {
     use NepaliDateConverter;
@@ -163,5 +164,12 @@ class FrontController extends Controller
     public function wardIndex($ward)
     {
         return view('frontend.wardIndex', compact('ward'));
+    }
+
+    public function mobileUser(MobileUser $mobileUser)
+    {
+        $mobileUser = Auth::guard('mobile-user')->user();
+        return view('frontend.mobileUser.index',compact('mobileUser'));
+
     }
 }

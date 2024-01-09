@@ -46,6 +46,9 @@ Route::get('executive', [FrontController::class, 'executive'])->name('executive'
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
 Route::get('ward/{ward}', [FrontController::class,'wardIndex'])->name('wardIndex');
+Route::get('/mobileUser', [FrontController::class, 'mobileUser'])->name('mobileUser');
+// Route::get('ebps', 'eMap')->name('ebps');
+
 
 Route::get('/static/notice', [FrontController::class, 'notice'])->name('notice');
 Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNotice'])->name('single-notice');
@@ -88,7 +91,9 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::post('login', [MobileUserAuthController::class, 'mobileUserLogin'])->name('login');
     Route::get('register', [MobileUserAuthController::class, 'showMobileUserRegisterForm'])->name('register.form');
     Route::post('register', [MobileUserAuthController::class, 'signup'])->name('register.signup');
-    Route::post('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
-    // Route::get('password/create', [MobileUserAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
-    // Route::post('password/store', [MobileUserAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
+    Route::get('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
+    Route::put('updateProfile', [MobileUserAuthController::class,'updateProfile'])->name('updateProfile');
+    Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
+    Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
+    Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
 });
