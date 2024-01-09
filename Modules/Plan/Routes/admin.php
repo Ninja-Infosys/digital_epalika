@@ -26,6 +26,7 @@ use Modules\Plan\Http\Controllers\FuelDemandController;
 use Modules\Plan\Http\Controllers\FuelRateController;
 use Modules\Plan\Http\Controllers\LabourController;
 use Modules\Plan\Http\Controllers\LabourRateController;
+use Modules\Plan\Http\Controllers\MaterialCollectionController;
 use Modules\Plan\Http\Controllers\MaterialController;
 use Modules\Plan\Http\Controllers\MaterialRateController;
 use Modules\Plan\Http\Controllers\MaterialTypeController;
@@ -76,6 +77,7 @@ Route::prefix('estimateSetting')->group(function () {
     Route::resource('materialType', MaterialTypeController::class);
     Route::resource('material', MaterialController::class);
     Route::resource('materialRate', MaterialRateController::class);
+    Route::resource('materialCollection', MaterialCollectionController::class);
 });
 
 //report

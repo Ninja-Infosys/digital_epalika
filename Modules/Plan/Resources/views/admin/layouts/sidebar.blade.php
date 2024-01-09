@@ -209,6 +209,11 @@
                         <span>  सामाग्री दर   </span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/materialCollection') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.materialCollection.index')}}">
+                        <span>  सामग्री संग्रह  </span>
+                    </a>
+                </li>
 
 
 
