@@ -16,7 +16,6 @@ class StoreSipharisCreatedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'personal_detail_id' => ['nullable'],
             'sipharis_category_id' => ['required', Rule::exists('sipharis_categories', 'id')->withoutTrashed()],
             'sipharis_sub_category_id' => ['required', Rule::exists('sipharis_sub_categories', 'id')->withoutTrashed()],
             'sipharis_form_type_id' => ['required', Rule::exists('sipharish_form_types', 'id')->withoutTrashed()],
@@ -32,7 +31,6 @@ class StoreSipharisCreatedRequest extends FormRequest
             'files' => ['nullable', 'array'],
             'files.*.title' => ['required', 'string'],
             'files.*.filename' => ['nullable', 'file'],
-            'created_by' => ['nullable']
         ];
     }
 }

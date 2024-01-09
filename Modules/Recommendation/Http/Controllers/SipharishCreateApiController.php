@@ -60,9 +60,7 @@ class SipharishCreateApiController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-        Log::debug($request->validated());
         DB::transaction(function () use ($request) {
-
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
@@ -84,13 +82,11 @@ class SipharishCreateApiController extends Controller
                                         $tableValue = $tbl['value'];
                                     }
                                     $row->put($key, [
-                                        'sipharish_form_field_id' => $tbl['sipharish_form_field_id'],
                                         'value' => $tableValue,
                                         'type' => $tbl['type'],
                                     ]);
                                 }
                                 $values->push($row);
-
                             }
                         }
                         $value = json_encode($values);

@@ -77,11 +77,12 @@
         <div class="col-md-6">
             <div class="card">
                 <h4>
-                    चालु आर्थिक वर्षाका वडा अनुसार जम्मा सिफारिस विवरण
+                    वडा अनुसार  सिफारिस दर्ता विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="steppedlineChart"></canvas>
+                    <canvas id="wardWiseRegistration" chart-type="bar"></canvas>
                 </div>
+    
             </div>
         </div> 
         <div class="col-md-4">
@@ -101,9 +102,8 @@
                     भुक्तानी अनुसार कुल राजस्व विवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="totalCashBankRevenue" chart-type="doughnut"></canvas>
+                    <canvas id="totalCashBankRevenue" chart-type="pie"></canvas>
                 </div>
-
             </div>
         </div>
         <div class="col-md-4">

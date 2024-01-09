@@ -75,7 +75,11 @@
                             @forelse ($sipharishCreates as $sipharish)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $sipharish->personalDetail?->name ?? '' }}</td>
+                                 <td>   @if($sipharish->personalDetail)
+                                    {{ $sipharish->personalDetail->name ?? '' }}
+                                @elseif($sipharish->mobileUser)
+                                    {{ $sipharish->mobileUser->name ?? '' }}
+                                @endif</td>
                                     <td>{{ $sipharish->SipharishFormType?->title ?? '' }}</td>
                                     <td>{{ $sipharish->approved_status ?? '' }}</td>
 
