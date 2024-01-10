@@ -3,7 +3,7 @@
         @if(Route::has('admin.dashboard'))
             <div class="col">
                 <a class="dropdown-icon-item" href="{{route('admin.dashboard')}}">
-                    <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt="">
+                    <img src="{{asset(config('app.logo_sm'))}}" alt="">
                     <span>मुख्य ड्यासबोर्ड</span>
                 </a>
             </div>

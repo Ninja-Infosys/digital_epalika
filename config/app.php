@@ -21,6 +21,9 @@ return [
     'app_version' => env('APP_VERSION', '1.0.0'),
     'app_is_demo' => env('APP_IS_DEMO', false),
 
+    'logo_sm' => env('LOGO_SM', 'assets/backend/images/logo_sm.png'),
+    'logo' => env('LOGO', 'assets/backend/images/logo.png'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -44,7 +47,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------

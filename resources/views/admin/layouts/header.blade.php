@@ -138,7 +138,7 @@
                              alt=""
                              height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
+                        <img src="{{asset(config('app.logo_sm'))}}" alt=""
                              height="40"/>
                     @endif
                 </span>
@@ -154,7 +154,7 @@
                             alt=""
                             height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                        <img src="{{asset(config('app.logo'))}}" alt=""
                              height="35"/>
                     @endif
               </span>
