@@ -92,11 +92,11 @@
         <div class="logo-box dropdown">
             <div class="logo logo-light text-center">
                 <span class="logo-sm">
-                        <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
+                        <img src="{{asset(config('app.logo_sm'))}}" alt=""
                              height="40"/>
                 </span>
                 <span class="logo-lg">
-                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                        <img src="{{asset(config('app.logo'))}}" alt=""
                              height="35"/>
               </span>
             </div>

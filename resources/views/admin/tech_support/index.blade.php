@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-center bg-main p-2">
-                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                        <img src="{{asset(config('app.logo'))}}" alt=""
                              height="40" id="logo-tour">
                     </div>
                     <div class="system mt-2">
