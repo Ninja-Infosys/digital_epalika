@@ -8,12 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('cargo_handlings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('material_type_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('fiscal_year_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('unit_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->string('title');
-            $table->string('density');
+            $table->foreignId('material_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -21,6 +20,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('cargo_handlings');
     }
 };

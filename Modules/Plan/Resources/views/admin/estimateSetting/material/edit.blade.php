@@ -73,16 +73,21 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="unit" class="form-label">एकाई</label>
-                                    <input
-                                        type="text"
-                                        name="unit"
-                                        value="{{old('unit',$material->unit)}}"
-                                        class="form-control @error('unit') is-invalid @enderror"
-                                        id="unit"
-                                        placeholder="एकाई"
-                                    />
-                                    @error('unit')
+                                    <label for="unit_id" class="form-label">एकाई</label>
+                                    <select
+                                        name="unit_id"
+                                        class="form-control @error('unit_id') is-invalid @enderror"
+                                        id="unit_id" data-toggle="select2" data-width="100%" required>
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($units as $unit)
+                                            <option
+                                                {{old('unit_id',$unit->id)== $material->unit_id? 'selected' : ''}}
+                                                value="{{$unit->id}}">
+                                                {{$unit->title}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('unit_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

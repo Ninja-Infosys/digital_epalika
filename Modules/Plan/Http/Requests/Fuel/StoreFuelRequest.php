@@ -15,7 +15,7 @@ class StoreFuelRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'unit' => ['required'],
+            'unit_id' => ['required'],
         ];
     }
 }

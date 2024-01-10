@@ -12,10 +12,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">सामग्री </li>
+                        <li class="breadcrumb-item active">कार्गो ह्यान्डलिङ </li>
                     </ol>
                 </div>
-                <h4 class="page-title">सामग्री </h4>
+                <h4 class="page-title">कार्गो ह्यान्डलिङ </h4>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@
             <div class="card">
                 <div class="card-header search-card">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सामग्री सूची</h4>
-                            <a href="{{route('admin.plan.material.create')}}"
+                        <h4 class="header-title">कार्गो ह्यान्डलिङ सूची</h4>
+                            <a href="{{route('admin.plan.cargoHandling.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -38,29 +38,29 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>प्रकार</th>
-                                <th>शिर्षक</th>
+                                <th>आर्थिक वर्ष</th>
+                                <th>सामग्री</th>
                                 <th>एकाई</th>
                                 <th>#</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($materials as $key=>$material)
+                            @forelse($cargoHandlings as $key=>$cargoHandling)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$material->materialType->title ??''}}</td>
-                                    <td>{{$material->title}}</td>
-                                    <td>{{$material->unit->title??''}}</td>
+                                    <td>{{$cargoHandling->fiscalYear->title ??''}}</td>
+                                    <td>{{$cargoHandling->material->title ??''}}</td>
+                                    <td>{{$cargoHandling->unit->title??''}}</td>
 
                                     <td>
                                         <a data-bs-type="edit"
-                                        href="{{route('admin.plan.material.edit',$material)}}"
+                                        href="{{route('admin.plan.cargoHandling.edit',$cargoHandling)}}"
                                         class="btn btn-xs btn-outline-primary">
                                          <i class="fa fa-edit"></i>
                                      </a>
                                          <form
-                                             action="{{route('admin.plan.material.destroy',$material)}}"
+                                             action="{{route('admin.plan.cargoHandling.destroy',$cargoHandling)}}"
                                              method="post">
                                              @csrf
                                              @method('delete')

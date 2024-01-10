@@ -18,6 +18,7 @@ use Modules\Plan\Http\Controllers\Admin\Setting\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
+use Modules\Plan\Http\Controllers\CargoHandlingController;
 use Modules\Plan\Http\Controllers\CrewRateController;
 use Modules\Plan\Http\Controllers\EquipmentAdditionalCostController;
 use Modules\Plan\Http\Controllers\EquipmentController;
@@ -78,6 +79,7 @@ Route::prefix('estimateSetting')->group(function () {
     Route::resource('material', MaterialController::class);
     Route::resource('materialRate', MaterialRateController::class);
     Route::resource('materialCollection', MaterialCollectionController::class);
+    Route::resource('cargoHandling', CargoHandlingController::class);
 });
 
 //report

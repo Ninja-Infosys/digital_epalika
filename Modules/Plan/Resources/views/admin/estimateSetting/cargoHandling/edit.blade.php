@@ -12,10 +12,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">सामग्री संग्रह</li>
+                        <li class="breadcrumb-item active">कार्गो ह्यान्डलिङ</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सामग्री संग्रह</h4>
+                <h4 class="page-title">कार्गो ह्यान्डलिङ</h4>
             </div>
         </div>
     </div>
@@ -24,14 +24,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सामग्री संग्रह </h4>
-                        <a href="{{route('admin.plan.materialCollection.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i>सामग्री संग्रह सुची
+                        <h4 class="header-title">कार्गो ह्यान्डलिङ </h4>
+                        <a href="{{route('admin.plan.cargoHandling.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i>कार्गो ह्यान्डलिङ सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <livewire:plan::material-collection-livewire/>
+                    @livewire('plan::cargo-handling-livewire',['materialData'=>$cargoHandling])
                 </div>
             </div>
         </div>
