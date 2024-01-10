@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
+use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
@@ -52,7 +53,6 @@ class User extends Authenticatable
         'pin',
         'employee_id',
         'branch_id',
-        'is_dept_head',
     ];
 
     protected $hidden = [
@@ -65,6 +65,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function setPasswordAttribute($value): void
     {

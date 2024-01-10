@@ -36,4 +36,5 @@ class Role extends Model
     {
         return $this->morphOne(LetterHead::class, 'model');
     }
+    
 }

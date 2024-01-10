@@ -8,14 +8,15 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}"
+                                     alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.global.generalSetting.employee.index')}}">कर्मचारी </a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ सम्पादन थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ कर्मचारी थप्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">कर्मचारीहरु </h4>
@@ -28,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कर्मचारी सम्पादन थप्नुहोस्</h4>
+                        <h4 class="header-title">कर्मचारी थप्नुहोस्</h4>
                         <a href="{{route('admin.global.generalSetting.employee.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> कर्मचारी सूची
@@ -36,10 +37,9 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.global.generalSetting.employee.update',$employee)}}" method="post"
+                        <form action="{{route('admin.global.generalSetting.employee.update',$employee)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('put')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>कर्मचारी विवरण </strong>
@@ -50,11 +50,11 @@
                                     <input
                                         type="text"
                                         name="name"
-                                        value="{{old('name',$employee->name)}}"
+                                        value="{{old('name')}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
                                         placeholder="नाम "
-                                        required
+
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -65,7 +65,7 @@
                                     <input
                                         type="text"
                                         name="address"
-                                        value="{{old('address',$employee->address)}}"
+                                        value="{{old('address')}}"
                                         class="form-control @error('address') is-invalid @enderror"
                                         id="address"
                                         placeholder="ठेगाना"
@@ -82,7 +82,8 @@
                                             name="gender" id="gender">
                                         <option value="">लिङ्ग थप्नुहोस्</option>
                                         @foreach(\App\Enums\Gender::cases() as $case)
-                                            <option value="{{$case->value}}" {{old('gender',$employee->gender->value)==$case->value ? 'selected':''}}>{{$case->label()}}</option>
+                                            <option
+                                                value="{{$case->value}}" {{old('gender')==$case->value ? 'selected':''}}>{{$case->label()}}</option>
                                         @endforeach
                                     </select>
                                     @error('gender')
@@ -94,19 +95,17 @@
                                         nameNe="dob" labelNe="जन्म मिति*"
                                         nameEn="dob_ad" labelEn="Birth Date"
                                         :getTodayDate="false"
-                                        :editDateNe="$employee->dob"
-                                        :editDateEn="$employee->dob_ad"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="pan_no" class="form-label">पेन नं *</label>
+                                    <label for="pan_no" class="form-label">पाना नं *</label>
                                     <input
                                         type="text"
                                         name="pan_no"
-                                        value="{{old('pan_no',$employee->pan_no)}}"
+                                        value="{{old('pan_no')}}"
                                         class="form-control @error('pan_no') is-invalid @enderror"
                                         id="pan_no"
-                                        placeholder="पेन नं"
+                                        placeholder="पाना नं *"
 
                                     />
                                     @error('pan_no')
@@ -120,7 +119,8 @@
                                             name="ethnicity_id" id="ethnicity_id">
                                         <option value="">जातियता थप्नुहोस्</option>
                                         @foreach($ethnicities as $ethnicity)
-                                            <option value="{{$ethnicity->id}}" {{old('ethnicity_id',$employee->ethnicity_id)==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
+                                            <option
+                                                value="{{$ethnicity->id}}" {{old('ethnicity_id')==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
                                         @endforeach
                                     </select>
                                     @error('ethnicity_id')
@@ -132,7 +132,7 @@
                                     <input
                                         type="text"
                                         name="pis_no"
-                                        value="{{old('pis_no',$employee->pis_no)}}"
+                                        value="{{old('pis_no')}}"
                                         class="form-control @error('pis_no') is-invalid @enderror"
                                         id="pis_no"
                                         placeholder="Pis नम्बर"
@@ -147,7 +147,7 @@
                                     <input
                                         type="text"
                                         name="epf_no"
-                                        value="{{old('epf_no',$employee->epf_no)}}"
+                                        value="{{old('epf_no')}}"
                                         class="form-control @error('epf_no') is-invalid @enderror"
                                         id="epf_no"
                                         placeholder="Epf नम्बर"
@@ -162,7 +162,7 @@
                                     <input
                                         type="text"
                                         name="cif_no"
-                                        value="{{old('cif_no',$employee->cif_no)}}"
+                                        value="{{old('cif_no')}}"
                                         class="form-control @error('cif_no') is-invalid @enderror"
                                         id="cif_no"
                                         placeholder="Cif नम्बर"
@@ -177,7 +177,7 @@
                                     <input
                                         type="text"
                                         name="insurance_card_no"
-                                        value="{{old('insurance_card_no',$employee->insurance_card_no)}}"
+                                        value="{{old('insurance_card_no')}}"
                                         class="form-control @error('insurance_card_no') is-invalid @enderror"
                                         id="insurance_card_no"
                                         placeholder="Insurance Card Number"
@@ -192,7 +192,7 @@
                                     <input
                                         type="text"
                                         name="department"
-                                        value="{{old('department',$employee->department)}}"
+                                        value="{{old('department')}}"
                                         class="form-control  @error('department') is-invalid @enderror"
                                         id="department"
                                         placeholder=" समूह"
@@ -209,7 +209,7 @@
                                         <option value="">शाखा छान्नुहोस</option>
                                         @foreach($branches as $branch)
                                             <option
-                                                value="{{$branch->id}}" {{old('branch_id',$employee->branch_id)==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
+                                                value="{{$branch->id}}" {{old('branch_id')==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
                                         @endforeach
                                     </select>
                                     @error('branch_id')
@@ -221,17 +221,16 @@
 
                                     <select class="form-control @error('employee_id') is-invalid @enderror"
                                             name="employee_id" id="employee_id">
-                                        <option value="">कर्मचारी छान्नुहोस</option>
-                                        @foreach($allemployees as $allemployee)
+                                        <option value=""> कर्मचारी छान्नुहोस</option>
+                                        @foreach($allEmployees as $allEmployee)
                                             <option
-                                                value="{{$allemployee->id}}" {{old('employee_id',$employee->employee_id)==$allemployee->id ? 'selected':''}}>{{$allemployee->name}}</option>
+                                                value="{{$allEmployee->id}}" {{old('employee_id')==$allEmployee->id ? 'selected':''}}>{{$allEmployee->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('employee_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-
                                 <div class="col-md-4 mb-2">
 
                                     <input
@@ -240,7 +239,7 @@
                                         value="1"
                                         class="@error('is_dept_head') is-invalid @enderror"
                                         id="is_dept_head"
-                                        {{old('is_dept_head',$employee->is_dept_head)==1?'checked':''}}
+                                        {{old('is_dept_head')==1?'checked':''}}
                                     />
                                     <label for="is_dept_head" class="form-label">Is Department Head </label>
 
@@ -248,12 +247,12 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="designation" class="form-label">पद </label>
                                     <input
                                         type="text"
                                         name="designation"
-                                        value="{{old('designation',$employee->designation)}}"
+                                        value="{{old('designation')}}"
                                         class="form-control  @error('designation') is-invalid @enderror"
                                         id="designation"
                                         placeholder=" पद"
@@ -262,12 +261,12 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="email" class="form-label">इमेल </label>
                                     <input
-                                        type="text"
+                                        type="email"
                                         name="email"
-                                        value="{{old('email',$employee->email)}}"
+                                        value="{{old('email')}}"
                                         class="form-control  @error('email') is-invalid @enderror"
                                         id="email"
                                         placeholder=" इमेल"
@@ -276,12 +275,12 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="phone" class="form-label">फोन </label>
                                     <input
                                         type="text"
                                         name="phone"
-                                        value="{{old('phone',$employee->phone)}}"
+                                        value="{{old('phone')}}"
                                         class="form-control  @error('phone') is-invalid @enderror"
                                         id="phone"
                                         placeholder=" फोन"
@@ -290,7 +289,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="photo" class="form-label">फोटो </label>
                                     <input
                                         type="file"
@@ -303,12 +302,12 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="position" class="form-label">स्थान </label>
+                                <div class="col-md-4 mb-2">
+                                    <label for="position" class="form-label">मर्यादाक्रम </label>
                                     <input
                                         type="text"
                                         name="position"
-                                        value="{{old('position',$employee->position)}}"
+                                        value="{{old('position')}}"
                                         class="form-control @error('position') is-invalid @enderror"
                                         id="position"
                                         placeholder=" स्थान"
@@ -317,69 +316,129 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="is_employee" class="form-label">कर्मचारीको प्रकार *</label>
+                                <div class="col-md-4 mb-2">
+                                    <label for="is_employee" class="form-label">प्रकार छान्नुहोस *</label>
 
                                     <select class="form-control @error('is_employee') is-invalid @enderror"
                                             name="is_employee" id="is_employee" required>
-                                        <option
-                                            value="1" {{old('is_employee',$employee->is_employee) == 1 ? 'selected':''}}>
-                                            कर्मचारी
-                                        </option>
-                                        <option
-                                            value="0" {{old('is_employee',$employee->is_employee)==0 ? 'selected':''}}>
-                                            जनप्रतिनिधि
+                                        <option value="1" {{old('is_employee') == 1 ? 'selected':''}}>कर्मचारी</option>
+                                        <option value="0" {{old('is_employee')==0 ? 'selected':''}}>जनप्रतिनिधि
                                         </option>
                                     </select>
                                     @error('is_employee')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="show_to_index" class="form-label">गृहपृष्ठमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_index') is-invalid @enderror"
                                             name="show_to_index" id="show_to_index" required>
-                                        <option
-                                            value="1" {{old('show_to_index',$employee->show_to_index) == 1 ? 'selected':''}}>
-                                            देखाउने
+                                        <option value="1" {{old('show_to_index') == 1 ? 'selected':''}}>देखाउने
                                         </option>
-                                        <option
-                                            value="0" {{old('show_to_index',$employee->show_to_index)==0 ? 'selected':''}}>
-                                            नदेखाउने
+                                        <option value="0" {{old('show_to_index')==0 ? 'selected':''}}>नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_index')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="show_to_mobile_app" class="form-label">मोबाइलमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"
                                             name="show_to_mobile_app" id="show_to_mobile_app" required>
-                                        <option
-                                            value="1" {{old('show_to_mobile_app',$employee->show_to_mobile_app) == 1 ? 'selected':''}}>
-                                            देखाउने
+                                        <option value="1" {{old('show_to_mobile_app') == 1 ? 'selected':''}}>देखाउने
                                         </option>
-                                        <option
-                                            value="0" {{old('show_to_mobile_app',$employee->show_to_mobile_app)==0 ? 'selected':''}}>
-                                            नदेखाउने
+                                        <option value="0" {{old('show_to_mobile_app')==0 ? 'selected':''}}>नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_mobile_app')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="description" class="form-label">कैफियत </label>
-                                    <textarea class="form-control" id="description" name="description">{{old('description',$employee->description)}}</textarea>
+                                    <textarea class="form-control" id="description"
+                                              name="description">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
+                            <fieldset class="border p-2 mb-2">
+                                <legend class="font-16 text-info">
+                                    <strong>प्रयोगकर्ता विवरण </strong>
+                                </legend>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="role_id" class="form-label">भूमिका *</label>
+                                        <select name="user[role_id]"
+                                                class="form-select @error('user.role_id') is-invalid @enderror"
+                                                id="role_id">
+                                            <option value="">भूमिका छान्नुहोस्</option>
+                                            @foreach($roles as $role)
+                                                <option
+                                                    value="{{$role->id}}" {{$role->id==old('role_id') ? 'selected' : ''}}>
+                                                    {{$role->title}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('user.role_id')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="ward_no" class="form-label">वडा नं.</label>
+                                        <select name="user[ward_no]"
+                                                class="form-select @error('user.ward_no') is-invalid @enderror"
+                                                id="ward_no">
+                                            <option value="">वडा छान्नुहोस्</option>
+                                            @foreach(officeSetting()->localBody->ward_no as $ward)
+                                                <option value="{{$ward}}" {{$ward==old('ward_no') ? 'selected' : ''}}>
+                                                    {{$ward}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('user.ward_no')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+
+                            </fieldset>
+                            <fieldset class="border p-2 mb-2">
+                                <legend class="font-16 text-info">
+                                    <strong> पासवर्ड</strong>
+                                </legend>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="password" class="form-label">पासवर्ड *</label>
+                                        <input
+                                            type="password"
+                                            name="user[password]"
+                                            value="{{old('password')}}"
+                                            class="form-control @error('user.password') is-invalid @enderror"
+                                            id="password"
+                                            placeholder="पासवर्ड"
+                                        />
+                                        @error('user.password')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="password_confirmation" class="form-label">पासवर्ड सुनिश्चित गर्नुहोस
+                                            *</label>
+                                        <input
+                                            type="password"
+                                            name="user[password_confirmation]"
+                                            value="{{old('password_confirmation')}}"
+                                            class="form-control"
+                                            id="password_confirmation"
+                                            placeholder="पासवर्ड सुनिश्चित गर्नुहोस"
+                                        />
+                                    </div>
+                                </div>
+                            </fieldset>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
                             Save
