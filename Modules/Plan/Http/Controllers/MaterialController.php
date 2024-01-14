@@ -5,6 +5,7 @@ namespace Modules\Plan\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Units\Unit;
 use Modules\Plan\Entities\Material;
 use Modules\Plan\Entities\MaterialType;
 use Modules\Plan\Http\Requests\Material\StoreMaterialRequest;
@@ -14,14 +15,15 @@ class MaterialController extends Controller
 {
     public function index()
     {
-        $materials = Material::with('materialType')->get();
+        $materials = Material::with('materialType', 'unit')->get();
         return view('plan::admin.estimateSetting.material.index', compact('materials'));
     }
 
     public function create()
     {
         $materialTypes = MaterialType::all();
-        return view('plan::admin.estimateSetting.material.create', compact('materialTypes'));
+        $units = Unit::all();
+        return view('plan::admin.estimateSetting.material.create', compact('materialTypes', 'units'));
     }
 
     public function store(StoreMaterialRequest $request)
@@ -39,7 +41,8 @@ class MaterialController extends Controller
     public function edit(Material $material)
     {
         $materialTypes = MaterialType::all();
-        return view('plan::admin.estimateSetting.material.edit', compact('material', 'materialTypes'));
+        $units = Unit::all();
+        return view('plan::admin.estimateSetting.material.edit', compact('material', 'materialTypes', 'units'));
     }
 
     public function update(UpdateMaterialRequest $request, Material $material)

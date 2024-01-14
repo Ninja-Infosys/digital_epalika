@@ -95,7 +95,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="mb-2">
-                            <legend> गति</legend>
+                            <legend> Speed Without Load</legend>
                             <div class="row">
 
                                 <div class="col-md-4 mb-2">
