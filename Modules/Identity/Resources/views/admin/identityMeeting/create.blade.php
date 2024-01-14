@@ -22,9 +22,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ बैठक विवरण थप्नुहोस्</h4>
                         <a href="{{ route('identity.admin.identityMeeting.index') }}"
                             class="btn btn-sm btn-outline-primary">
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('identity.admin.identityMeeting.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf

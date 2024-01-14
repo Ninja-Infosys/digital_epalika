@@ -21,13 +21,13 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">नक्साहरु</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>

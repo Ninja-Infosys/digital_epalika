@@ -6,9 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.plan.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
 
@@ -21,17 +21,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">Labour Rates </h4>
-                        <a href="{{route('admin.plan.labourRate.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.plan.labourRate.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>Labour Rates
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="{{route('admin.plan.labourRate.store')}}" method="post">
+                <div class="card-body px-0">
+                    <form action="{{ route('admin.plan.labourRate.store') }}" method="post">
                         @csrf
 
                         <fieldset class="mb-2">
@@ -40,56 +40,45 @@
 
                                 <div class="col-md-6 mb-2">
                                     <label for="rate" class="form-label">दर</label>
-                                    <input
-                                        type="number"
-                                        step="any"
-                                        name="rate"
-                                        value="{{old('rate')}}"
-                                        class="form-control @error('rate') is-invalid @enderror"
-                                        id="rate"
-                                        placeholder="दर"
-                                    />
+                                    <input type="number" step="any" name="rate" value="{{ old('rate') }}"
+                                        class="form-control @error('rate') is-invalid @enderror" id="rate"
+                                        placeholder="दर" />
                                     @error('rate')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-6 mb-2">
                                     <label for="labour_id" class="form-label">Labour</label>
-                                    <select
-                                        name="labour_id"
-                                        class="form-control @error('labour_id') is-invalid @enderror"
+                                    <select name="labour_id" class="form-control @error('labour_id') is-invalid @enderror"
                                         id="labour_id" data-toggle="select2" data-width="100%" required>
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($labours as $labour)
-                                            <option
-                                                {{old('labour_id')==$labour->id ? 'selected' : ''}}
-                                                value="{{$labour->id}}">
-                                                {{$labour->title}}
+                                        @foreach ($labours as $labour)
+                                            <option {{ old('labour_id') == $labour->id ? 'selected' : '' }}
+                                                value="{{ $labour->id }}">
+                                                {{ $labour->title }}
                                             </option>
                                         @endforeach
                                     </select>
                                     @error('labour_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="fiscal_year_id" class="form-label">Fiscal Year</label>
-                                    <select
-                                        name="fiscal_year_id"
+                                    <select name="fiscal_year_id"
                                         class="form-control @error('fiscal_year_id') is-invalid @enderror"
                                         id="fiscal_year_id" data-toggle="select2" data-width="100%" required>
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($fiscalYears as $fiscalYear)
-                                            <option
-                                                {{old('fiscal_year_id')==$fiscalYear->id? 'selected' : ''}}
-                                                value="{{$fiscalYear->id}}">
-                                                {{$fiscalYear->title}}
+                                        @foreach ($fiscalYears as $fiscalYear)
+                                            <option {{ old('fiscal_year_id') == $fiscalYear->id ? 'selected' : '' }}
+                                                value="{{ $fiscalYear->id }}">
+                                                {{ $fiscalYear->title }}
                                             </option>
                                         @endforeach
                                     </select>
                                     @error('fiscal_year_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -156,7 +145,6 @@
                     });
                 }
             });
-
         </script>
     @endpush
 @endsection

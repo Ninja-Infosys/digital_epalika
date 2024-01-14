@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.recommendation.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">सिफारिस</li>
@@ -23,20 +23,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
-                        <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.index',$recommendationCategory) }}"
+                        <a href="{{ route('admin.recommendation.recommendationCategory.registrationDetail.index', $recommendationCategory) }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
 
-                    <form action="{{ route('admin.recommendation.recommendationCategory.registrationDetail.store',$recommendationCategory) }}" method="post"
-                        enctype="multipart/form-data">
+                    <form
+                        action="{{ route('admin.recommendation.recommendationCategory.registrationDetail.store', $recommendationCategory) }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
                         <fieldset>
                             <legend>
@@ -111,7 +112,7 @@
                                                     <div class="col-md-6 mb-2">
                                                         <label for="title" class="form-label">शिर्षक</label>
                                                         <input type="text" name="files[][file_name]" class="form-control"
-                                                            id="title" placeholder="शिर्षक"  />
+                                                            id="title" placeholder="शिर्षक" />
                                                     </div>
                                                     <div class="col-md-6 mb-2">
                                                         <label for="documents" class="form-label">डकुमेन्ट </label>
@@ -129,7 +130,7 @@
                             <div class="col-md-12 mb-2">
                                 <label for="recommendation_data" class="form-label">डाटा *</label>
                                 <textarea name="recommendation_data" id="recommendation_data" required cols="30" rows="10"
-                                    class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data',$data) }}</textarea>
+                                    class="form-control ckEditor @error('recommendation_data') is-invalid @enderror">{{ old('recommendation_data', $data) }}</textarea>
                                 @error('recommendation_data')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

@@ -6,9 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.revenue.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.revenue.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">जग्गाको मुल्यांकन</li>
@@ -21,17 +21,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ जग्गाको मुल्यांकन थप्नुहोस्</h4>
-                        <a href="{{route('admin.revenue.setting.place.index')}}"
-                           class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.revenue.setting.place.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>जग्गाको मुल्यांकन सूची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -41,79 +40,63 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{route('admin.revenue.setting.place.store')}}" method="post">
+                    <form action="{{ route('admin.revenue.setting.place.store') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="sector_id" class="form-label">क्षेत्र</label>
-                                <select
-                                    name="sector_id"
-                                    class="form-select @error('sector_id') is-invalid @enderror"
+                                <select name="sector_id" class="form-select @error('sector_id') is-invalid @enderror"
                                     id="sector_id" data-toggle="select2" data-width="100%" required>
                                     <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($sectors as $sector)
-                                        <option {{$sector->id==old('sector_id') ? 'selected' : ''}}
-                                                value="{{$sector->id}}">
-                                            {{$sector->title}}
+                                    @foreach ($sectors as $sector)
+                                        <option {{ $sector->id == old('sector_id') ? 'selected' : '' }}
+                                            value="{{ $sector->id }}">
+                                            {{ $sector->title }}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('sector_id')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">स्थान *</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value="{{old('title')}}"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="स्थान"
-                                    required
-                                />
+                                <input type="text" name="title" value="{{ old('title') }}"
+                                    class="form-control @error('title') is-invalid @enderror" id="title"
+                                    placeholder="स्थान" required />
                                 @error('title')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-4 mb-2">
                                 <label for="ward_no" class="form-label">वार्ड *</label>
-                                <select
-                                    name="ward_no[]"
-                                    class="form-select @error('ward_no') is-invalid @enderror"
+                                <select name="ward_no[]" class="form-select @error('ward_no') is-invalid @enderror"
                                     id="ward_no" data-toggle="select2" data-width="100%" multiple required>
                                     <option value="" disabled>--- छान्नुहोस् ---</option>
-                                    @foreach(get_local_bodies(localBodyId: officeSetting()->local_body_id)->ward_no as $ward)
-                                        <option {{in_array($ward, old('ward_no',[])) ? 'selected' : ''}}
-                                                value="{{$ward}}">
-                                            {{$ward}}
+                                    @foreach (get_local_bodies(localBodyId: officeSetting()->local_body_id)->ward_no as $ward)
+                                        <option {{ in_array($ward, old('ward_no', [])) ? 'selected' : '' }}
+                                            value="{{ $ward }}">
+                                            {{ $ward }}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('ward_no.*')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 @error('ward_no')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-4 mb-2">
                                 <label for="rate" class="form-label">दर (वर्ग मीटरमा) *</label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    name="rate"
-                                    value="{{old('rate')}}"
-                                    class="form-control @error('rate') is-invalid @enderror"
-                                    id="rate"
-                                    placeholder="दर"
-                                />
+                                <input type="number" step="0.01" name="rate" value="{{ old('rate') }}"
+                                    class="form-control @error('rate') is-invalid @enderror" id="rate"
+                                    placeholder="दर" />
                                 @error('rate')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 

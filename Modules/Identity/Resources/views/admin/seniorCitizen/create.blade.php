@@ -6,9 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('identity.admin.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('identity.admin.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> जेष्ठ नागरिक</li>
@@ -21,12 +21,13 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ जेष्ठ नागरिक थप्नुहोस्</h4>
                         <div>
-                            <a href="{{route('identity.admin.seniorCitizenDetail.index')}}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('identity.admin.seniorCitizenDetail.index') }}"
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> जेष्ठ नागरिक सुची
                             </a>
                             <a href="https://localhost:8003/mfs100" target="_blank" class="btn btn-sm btn-outline-primary">
@@ -35,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     @livewire('identity::senior-citizen-detail-livewire')
                 </div>
             </div>
@@ -44,7 +45,6 @@
 
     @push('styles')
         <style>
-
             /*progressbar*/
             .progressbar {
                 overflow: hidden;
@@ -68,6 +68,7 @@
             .progressbar li a {
                 text-decoration: none;
             }
+
             .progressbar li:before {
                 content: counter(step);
                 counter-increment: step;
@@ -86,6 +87,7 @@
                 background: #5ed00f;
                 color: white;
             }
+
             /*progressbar connectors*/
             .progressbar li:after {
                 content: '';
@@ -133,7 +135,4 @@
             });
         </script>
     @endpush
-
 @endsection
-
-

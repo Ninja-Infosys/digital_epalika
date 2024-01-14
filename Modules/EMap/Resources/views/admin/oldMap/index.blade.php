@@ -25,8 +25,8 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card rounded-3">
-                <div class="">
+            <div class="card">
+                <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">पुरानो नक्सा सूची</h4>
                         <a href="{{ route('emap.admin.oldMap.create') }}" class="btn btn-sm btn-outline-primary">
@@ -34,7 +34,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table table-sm table-striped">
                             <thead>

@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">अपाङ्गता परिचय पत्र</li>
@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">अपाङ्गता परिचय पत्रहरु</h4>
@@ -57,56 +57,61 @@
                                         <td>{{ $disabilityIdentityCard->name }}</td>
                                         <td>{{ $disabilityIdentityCard->gender->label() ?? '' }}</td>
                                         <td>
-                                            {{ $disabilityIdentityCard->citizenship_no? $disabilityIdentityCard->citizenship_no."(नागरिकता)" : $disabilityIdentityCard->birth_registration_no ."(जन्म दर्ता)" }}
+                                            {{ $disabilityIdentityCard->citizenship_no ? $disabilityIdentityCard->citizenship_no . '(नागरिकता)' : $disabilityIdentityCard->birth_registration_no . '(जन्म दर्ता)' }}
                                         </td>
                                         <td class="d-flex d-warp gap-1">
-{{--                                            @if ($disabilityIdentityCard?->can_edit_delete)--}}
-                                                <a data-bs-type="edit"
-                                                    href="{{ route('identity.admin.disabilityIdentityCard.show', $disabilityIdentityCard) }}"
-                                                    class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                                    title="विवरण हेर्नुहोस">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
+                                            {{--                                            @if ($disabilityIdentityCard?->can_edit_delete) --}}
+                                            <a data-bs-type="edit"
+                                                href="{{ route('identity.admin.disabilityIdentityCard.show', $disabilityIdentityCard) }}"
+                                                class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
 
-                                                <a data-bs-type="edit"
-                                                    href="{{ route('identity.admin.disabilityIdentityCard.edit', $disabilityIdentityCard) }}"
-                                                    class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                                    title="सम्पादन गर्नुहोस्">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-</svg>
-                                                </a>
+                                            <a data-bs-type="edit"
+                                                href="{{ route('identity.admin.disabilityIdentityCard.edit', $disabilityIdentityCard) }}"
+                                                class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                title="सम्पादन गर्नुहोस्">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                                </svg>
+                                            </a>
 
-                                                @if ($recommendationTemplateSetting?->is_hospital_detail_required)
-                                                    <button type="button" class="btn btn-xs btn-outline-warning"
-                                                        data-bs-toggle="modal" data-bs-target="#print">
-                                                        <i class="fa fa-print"></i>
+                                            @if ($recommendationTemplateSetting?->is_hospital_detail_required)
+                                                <button type="button" class="btn btn-xs btn-outline-warning"
+                                                    data-bs-toggle="modal" data-bs-target="#print">
+                                                    <i class="fa fa-print"></i>
+                                                </button>
+                                                @include('identity::admin.disabilityIdentityCard.inc.print-model')
+                                                @if (!empty($disabilityIdentityCard?->recommend_at))
+                                                    <button type="button" class="btn btn-xs btn-outline-success"
+                                                        data-bs-toggle="modal" data-bs-target="#print1">
+                                                        <i class="fa fa-plus"></i>
                                                     </button>
-                                                    @include('identity::admin.disabilityIdentityCard.inc.print-model')
-                                                    @if (!empty($disabilityIdentityCard?->recommend_at))
-                                                        <button type="button" class="btn btn-xs btn-outline-success"
-                                                            data-bs-toggle="modal" data-bs-target="#print1">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
-                                                    @endif
-                                                    @include('identity::admin.disabilityIdentityCard.inc.report')
                                                 @endif
+                                                @include('identity::admin.disabilityIdentityCard.inc.report')
+                                            @endif
 
-                                                <form
-                                                    action="{{ route('identity.admin.disabilityIdentityCard.destroy', $disabilityIdentityCard) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
-                                                        title="मेटाउनु होस्">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-</svg>
-                                                    </button>
-                                                </form>
-{{--                                            @endif--}}
+                                            <form
+                                                action="{{ route('identity.admin.disabilityIdentityCard.destroy', $disabilityIdentityCard) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                    class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                    title="मेटाउनु होस्">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                        <path
+                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                            {{--                                            @endif --}}
 
                                         </td>
                                     </tr>
@@ -139,7 +144,7 @@
                 printButton.prop("disabled", true);
                 printButton.html(
                     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...'
-                    );
+                );
                 $.ajax({
                     method: "POST",
                     url: url,
@@ -182,7 +187,7 @@
                 printButton.prop("disabled", true);
                 printButton.html(
                     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...'
-                    );
+                );
                 $.ajax({
                     method: "POST",
                     url: url,
