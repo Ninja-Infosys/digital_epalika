@@ -215,6 +215,17 @@
                     </a>
                 </li>
 
+                  <li class="{{request()->is('admin/plan/estimateSetting/materialCollection') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.materialCollection.index')}}">
+                        <span>  सामग्री संग्रह  </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/plan/estimateSetting/cargoHandling') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.cargoHandling.index')}}">
+                        <span>कार्गो ह्यान्डलिङ</span>
+                    </a>
+                </li>
+
 
 
         </ul>

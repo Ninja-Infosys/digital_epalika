@@ -16,7 +16,7 @@ class UpdateMaterialRequest extends FormRequest
         return [
             'material_type_id' => ['required', 'exists:material_types,id'],
             'title' => ['required', 'string', 'max:255'],
-            'unit' => ['required'],
+            'unit_id' => ['required', 'exists:units,id'],
             'density' => ['required'],
         ];
     }

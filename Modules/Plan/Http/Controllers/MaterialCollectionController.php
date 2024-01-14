@@ -50,6 +50,7 @@ class MaterialCollectionController extends Controller
         $units = Unit::all();
         $fiscalYears = FiscalYear::all();
         $materialRates = MaterialRate::all();
+        $materialCollection->load('collectionResources');
         return view('plan::admin.estimateSetting.materialCollection.edit', compact('fiscalYears', 'units', 'materialRates', 'materialCollection'));
     }
 
