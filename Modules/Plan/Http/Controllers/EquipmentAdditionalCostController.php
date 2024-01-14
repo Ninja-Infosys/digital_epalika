@@ -16,8 +16,8 @@ class EquipmentAdditionalCostController extends Controller
 {
     public function index()
     {
-        $equipmentAdditionalCosts = EquipmentAdditionalCost::with('fiscalYear', 'equipment')->get();
-        return view('plan::admin.estimateSetting.equipmentAdditionalCost.index', compact('equipmentAdditionalCosts'));
+        $equipments = Equipment::get();
+        return view('plan::admin.estimateSetting.equipmentAdditionalCost.index', compact('equipments'));
     }
 
     public function create()
@@ -40,12 +40,10 @@ class EquipmentAdditionalCostController extends Controller
         return view('plan::show');
     }
 
-    public function edit(EquipmentAdditionalCost $equipmentAdditionalCost)
+    public function edit(Equipment $equipment)
     {
-        $fiscalYears = FiscalYear::all();
-        $units = Unit::all();
-        $equipments = Equipment::all();
-        return view('plan::admin.estimateSetting.equipmentAdditionalCost.edit', compact('fiscalYears', 'units', 'equipments', 'equipmentAdditionalCost'));
+        $equipment->load('equipmentAdditionalCosts', 'fuelDemands', 'crewRates');
+        return view('plan::admin.estimateSetting.equipmentAdditionalCost.edit', compact('equipment'));
     }
 
     public function update(UpdateEquipmentAdditionalCostRequest $request, EquipmentAdditionalCost $equipmentAdditionalCost)
