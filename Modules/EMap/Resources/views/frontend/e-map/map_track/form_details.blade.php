@@ -35,7 +35,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::HOUSE_OWNER)
+                                @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::OWNER)
                                    @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum))
                                     <a href="{{route('load-template-data',[$mapApply,$noticeTypeEnum])}}"
                                        class="btn btn-primary btn-sm">
