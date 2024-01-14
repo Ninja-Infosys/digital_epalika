@@ -213,8 +213,49 @@
     </div>
 </li>
 
+
+<li class="{{ request()->is('admin/global/website*') || request()->is('admin/global/website*') ? 'active' : '' }}">
+    <a href="#website" {{ request()->is('admin/global/website') || request()->is('admin/global/website*') ? 'aria-expanded=true' : '' }}
+        data-bs-toggle="collapse">
+        <i class="fa fa-crop-alt"></i>
+        <span> वेबसाइट सेटिङ</span>
+        <span class="menu-arrow"><i class="fas fa-angle-right"></i></span>
+    </a>
+    <div class="collapse {{ request()->is('admin/global/website') || request()->is('admin/global/website*') ? 'show' : '' }}" id="website">
+        <ul class="nav-second-level">
+
+            @can('slider_access')
+                <li class="{{ request()->is('admin/global/website/slider/*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.global.website.slider.index') }}">
+                        <i class="fa fa-file-image"></i>
+                        <span>स्लाइडर</span>
+                    </a>
+                </li>
+            @endcan
+            @can('municipalDetail_access')
+                <li class="{{ request()->is('admin/global/website/municipalDetail/*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.global.website.municipalDetail.index') }}">
+                        <i class="fa fa-file"></i>
+                        <span>पालिका बिबरण </span>
+                    </a>
+                </li>
+            @endcan
+            @can('importantLink_access')
+                <li class="{{ request()->is('admin/global/website/importantLink/*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.global.website.importantLink.index') }}">
+                        <i class="fa fa-link"></i>
+                        <span>महत्त्वपूर्ण लिङ्क</span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>
+
+
+
 <li class="{{ request()->is('admin/mobileUser/*') ? 'active' : '' }}">
-    <a href="{{ route('admin.global.mobileUser.index') }}" >
+    <a href="{{ route('admin.global.mobileUser.index') }}">
         <i class="fa fa-crop-alt"></i>
         <span>सेवाग्राहीहरु</span>
     </a>

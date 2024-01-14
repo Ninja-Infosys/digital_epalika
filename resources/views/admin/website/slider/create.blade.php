@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ स्लाइडर थप्नुहोस्</h4>
-                        <a href="{{route('admin.website.slider.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.website.slider.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> स्लाइडर सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.website.slider.store')}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('admin.global.website.slider.store')}}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">

@@ -29,14 +29,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पालिका विवरण सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.website.municipalDetail.index')}}"
+                        <a href="{{route('admin.global.website.municipalDetail.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> पालिका विवरण सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.website.municipalDetail.update', $municipalDetail)}}" method="post">
+                    <form action="{{route('admin.global.website.municipalDetail.update', $municipalDetail)}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">

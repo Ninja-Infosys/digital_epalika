@@ -27,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">स्लाइडर सूची</h4>
                         @can('slider_create')
-                            <a href="{{route('admin.website.slider.create')}}"
+                            <a href="{{route('admin.global.website.slider.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -55,18 +55,18 @@
                                     <td>{{$slider->description}}</td>
                                     <td class="d-flex gap-1">
                                         @can('slider_edit')
-                                        <a data-bs-type="edit" href="{{route('admin.website.slider.edit',$slider)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.global.website.slider.edit',$slider)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i> 
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         @endcan
-                                        <form action="{{route('admin.website.slider.destroy',$slider)}}"
+                                        <form action="{{route('admin.global.website.slider.destroy',$slider)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             @can('slider_delete')
                                             <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i> 
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                             @endcan
                                         </form>
