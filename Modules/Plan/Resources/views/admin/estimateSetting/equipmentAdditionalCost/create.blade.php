@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.equipmentAdditionalCost.store')}}" method="post">
+                    {{-- <form action="{{route('admin.plan.equipmentAdditionalCost.store')}}" method="post">
                         @csrf
 
                         <fieldset class="mb-2">
@@ -116,7 +116,8 @@
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
-                    </form>
+                    </form> --}}
+                    <livewire:plan::equipment-form-livewire/>
                 </div>
             </div>
         </div>

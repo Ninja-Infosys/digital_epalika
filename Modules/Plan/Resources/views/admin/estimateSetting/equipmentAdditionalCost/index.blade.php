@@ -38,33 +38,33 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th> दर</th>
-                                <th> उपकरण </th>
-                                <th> आर्थिक वर्ष </th>
+
+                                <th> शिर्षक </th>
+                                <th>क्षमता </th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($equipmentAdditionalCosts as $key=>$equipmentAdditionalCost)
+                            @forelse($equipments as $key=>$equipment)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$equipmentAdditionalCost->rate}}</td>
+
                                     <td>
-                                        {{ $equipmentAdditionalCost->equipment->title??'' }}
+                                        {{ $equipment->title??'' }}
 
                                     </td>
                                     <td>
-                                        {{ $equipmentAdditionalCost->fiscalYear->title??'' }}
+                                        {{ $equipment->capacity??'' }}
 
                                     </td>
                                     <td>
                                         <a data-bs-type="edit"
-                                        href="{{route('admin.plan.equipmentAdditionalCost.edit',$equipmentAdditionalCost)}}"
+                                        href="{{route('admin.plan.equipmentAdditionalCost.edit',$equipment)}}"
                                         class="btn btn-xs btn-outline-primary">
                                          <i class="fa fa-edit"></i>
                                      </a>
-                                         <form
-                                             action="{{route('admin.plan.equipmentAdditionalCost.destroy',$equipmentAdditionalCost)}}"
+                                         {{-- <form
+                                             action="{{route('admin.plan.equipmentAdditionalCost.delete',$equipment)}}"
                                              method="post">
                                              @csrf
                                              @method('delete')
@@ -72,14 +72,14 @@
                                                      class="btn btn-xs btn-outline-danger">
                                                  <i class="fa fa-trash"></i>
                                              </button>
-                                         </form>
+                                         </form> --}}
 
                                     </td>
                                 </tr>
 
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
