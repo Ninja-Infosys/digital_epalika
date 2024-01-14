@@ -11,8 +11,11 @@ use App\Models\Settings\Employee;
 use App\Models\Settings\Experience;
 use App\Models\Settings\ExperienceFile;
 use App\Models\Settings\Qualification;
+use App\Models\User;
+use App\Models\UserManagement\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -34,20 +37,28 @@ class EmployeeController extends Controller
     public function create()
     {
         $this->checkAuthorization('employee_create');
-        $branches = Branch::all();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
         $ethnicities = Ethnicity::all();
-        $allemployees = Employee::all();
-        return view('admin.global.employee.create', compact('ethnicities', 'branches', 'allemployees'));
+        $allEmployees = Employee::all();
+        $roles= Role::all();
+        return view('admin.global.employee.create', compact('ethnicities', 'branches', 'allEmployees','roles'));
     }
 
     public function store(StoreEmployeeRequest $request)
     {
         $this->checkAuthorization('employee_create');
 
-        Employee::create($request->validated());
+        $employee = Employee::create($request->validated());
+        $user = $employee->user()->create(
+            $request->input('user', []) +
+            [
+                'name'=>$request->input('name'),
+                'email'=>$request->input('email'),
+                'phone'=>$request->input('phone'),
+            ]
+        );
         toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
-
-        return back();
+        return back()->with('success', 'कर्मचारी सफलतापूर्वक थपियो');
     }
 
     public function show(Employee $employee)
