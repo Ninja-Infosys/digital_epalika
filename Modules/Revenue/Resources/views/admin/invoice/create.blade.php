@@ -1,5 +1,14 @@
 @extends('admin.layouts.master')
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -149,18 +158,19 @@
     </div>
 
     @push('scripts')
-        <script>
-            $(document).ready(function () {
-                $('#payment_method').change(function () {
-                    let payment_method = $(this).val();
-                    if (payment_method === 'Bank') {
-                        $('#showIfBank').removeClass('d-none');
-                    } else {
-                        $('#showIfBank').addClass('d-none');
-                    }
-                });
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#payment_method').change(function () {
+                let payment_method = $(this).val();
+                if (payment_method === 'Bank') {
+                    $('#showIfBank').removeClass('d-none');
+                } else {
+                    $('#showIfBank').addClass('d-none');
+                }
             });
-        </script>
+
+        });
+    </script>
     @endpush
 @endsection

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('fuels', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('unit');
+            $table->foreignId('unit_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->timestamps();
             $table->softDeletes();
         });

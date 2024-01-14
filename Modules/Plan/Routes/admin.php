@@ -18,10 +18,19 @@ use Modules\Plan\Http\Controllers\Admin\Setting\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
+use Modules\Plan\Http\Controllers\CargoHandlingController;
+use Modules\Plan\Http\Controllers\CrewRateController;
+use Modules\Plan\Http\Controllers\EquipmentAdditionalCostController;
+use Modules\Plan\Http\Controllers\EquipmentController;
 use Modules\Plan\Http\Controllers\FuelController;
+use Modules\Plan\Http\Controllers\FuelDemandController;
 use Modules\Plan\Http\Controllers\FuelRateController;
 use Modules\Plan\Http\Controllers\LabourController;
 use Modules\Plan\Http\Controllers\LabourRateController;
+use Modules\Plan\Http\Controllers\MaterialCollectionController;
+use Modules\Plan\Http\Controllers\MaterialController;
+use Modules\Plan\Http\Controllers\MaterialRateController;
+use Modules\Plan\Http\Controllers\MaterialTypeController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
@@ -62,6 +71,15 @@ Route::prefix('estimateSetting')->group(function () {
     Route::resource('labourRate', LabourRateController::class);
     Route::resource('fuel', FuelController::class);
     Route::resource('fuelRate', FuelRateController::class);
+    Route::resource('equipment', EquipmentController::class);
+    Route::resource('equipmentAdditionalCost', EquipmentAdditionalCostController::class);
+    Route::resource('fuelDemand', FuelDemandController::class);
+    Route::resource('crewRate', CrewRateController::class);
+    Route::resource('materialType', MaterialTypeController::class);
+    Route::resource('material', MaterialController::class);
+    Route::resource('materialRate', MaterialRateController::class);
+    Route::resource('materialCollection', MaterialCollectionController::class);
+    Route::resource('cargoHandling', CargoHandlingController::class);
 });
 
 //report

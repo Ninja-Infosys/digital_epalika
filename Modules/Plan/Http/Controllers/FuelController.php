@@ -5,6 +5,7 @@ namespace Modules\Plan\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Units\Unit;
 use Modules\Plan\Entities\Fuel;
 use Modules\Plan\Http\Requests\Fuel\StoreFuelRequest;
 use Modules\Plan\Http\Requests\Fuel\UpdateFuelRequest;
@@ -13,13 +14,14 @@ class FuelController extends Controller
 {
     public function index()
     {
-        $fuels = Fuel::all();
+        $fuels = Fuel::with('unit')->get();
         return view('plan::admin.estimateSetting.fuel.index', compact('fuels'));
     }
 
     public function create()
     {
-        return view('plan::admin.estimateSetting.fuel.create');
+        $units = Unit::all();
+        return view('plan::admin.estimateSetting.fuel.create', compact('units'));
     }
 
     public function store(StoreFuelRequest $request)
@@ -36,7 +38,8 @@ class FuelController extends Controller
 
     public function edit(Fuel $fuel)
     {
-        return view('plan::admin.estimateSetting.fuel.edit', compact('fuel'));
+        $units = Unit::all();
+        return view('plan::admin.estimateSetting.fuel.edit', compact('fuel', 'units'));
     }
 
     public function update(UpdateFuelRequest $request, Fuel $fuel)

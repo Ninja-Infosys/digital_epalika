@@ -72,6 +72,9 @@ public function ajaxData(){
                 [
                     'data' => $fiscalYears->pluck('trainings_count')->toArray(),
                     'label' => 'जम्मा तालिमहरु',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ],
         ];
@@ -95,32 +98,46 @@ public function ajaxData(){
                 [
                     'data' => $month,
                     'label' => 'तालिम',
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
                 ]
             ]
         ];
     }
 
     public function trainerAccordingToSubject()
-    {
-        $subjects = Subject::withCount('trainers')
-            ->get()
-            ->map(function ($subject) {
-                return [
-                    'title' => $subject->title,
-                    'trainers_count' => (int)$subject->trainers_count,
-                ];
-            });
-    
-        return [
-            'labels' => $subjects->pluck('title')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $subjects->pluck('trainers_count')->toArray(),
-                    'label' => 'Trainers Count',
-                ],
+{
+    $subjects = Subject::withCount('trainers')
+        ->get()
+        ->map(function ($subject) {
+            return [
+                'title' => $subject->title,
+                'trainers_count' => (int)$subject->trainers_count,
+            ];
+        });
+
+    $labelColors = collect([]);
+
+    // Generate random colors for labels
+    $subjects->each(function ($subject) use ($labelColors) {
+        $labelColors->push(generateRandomRGBAColor());
+    });
+
+    return [
+        'labels' => $subjects->pluck('title')->toArray(),
+        'dataSets' => [
+            [
+                'data' => $subjects->pluck('trainers_count')->toArray(),
+                'label' => 'Trainers Count',
+                'backgroundColor' => $labelColors->toArray(),
+                'borderColor' => generateRandomRGBAColor(),
+                'borderWidth' => 1,
             ],
-        ];
-    }
+        ],
+    ];
+}
+
     
 
     public function trainingAccordingToType()

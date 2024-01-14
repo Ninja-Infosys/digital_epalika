@@ -49,7 +49,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$fuel->title}}</td>
                                     <td>
-                                        {{ $fuel->unit }}
+                                        {{ $fuel->unit->title??'' }}
 
                                     </td>
                                     <td>

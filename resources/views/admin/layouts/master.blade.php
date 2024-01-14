@@ -23,13 +23,14 @@
     <!-- icons -->
     <link href="{{ asset('assets/backend/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/scss/style.css') }}" type="text/css" />
+
     @stack('style')
     @livewireStyles
 </head>
 
 <body>
     <div id="preloader">
-        <img class="heartBeat animate" src="{{ asset('assets/backend/images/logo.png') }}" alt="">
+        <img class="heartBeat animate" src="{{ asset(config('app.logo')) }}" alt="">
     </div>
     <div id="wrapper">
         @include('admin.layouts.header')

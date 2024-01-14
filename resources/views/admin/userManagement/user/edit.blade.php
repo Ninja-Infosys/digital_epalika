@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
+                            <a href="{{route('admin.global.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
                         <li class="breadcrumb-item active">प्रयोगकर्ता विवरण सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रयोगकर्ता विवरण अपडेट गर्नुहोस्</h4>
-                        <a href="{{route('admin.userManagement.user.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.userManagement.user.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> प्रयोगकर्ता सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.userManagement.user.update',$user)}}" method="post">
+                    <form action="{{route('admin.global.userManagement.user.update',$user)}}" method="post">
                         @csrf
                         @method('put')
                         <fieldset class="border p-2 mb-2">

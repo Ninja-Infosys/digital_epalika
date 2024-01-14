@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0 d-flex justify-content-center align-items-center">
             <li class="d-none d-xl-block">
-                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour"><span class="arthik-barsa-badge"><i class="lnr lnr-calendar-full"></i>आर्थिक
+                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour"><span class="arthik-barsa-badge"><i
+                            class="lnr lnr-calendar-full"></i>आर्थिक
                     वर्ष: {{$officeSetting->fiscalYear->title??''}}</span></h4>
             </li>
             <li class="dropdown d-none d-lg-inline-block">
@@ -33,7 +34,8 @@
                                 <h6 class="m-0 font-16 fw-semibold"> नोटिफिकेसन</h6>
                             </div>
                             <div class="col-auto">
-                                <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark text-decoration-underline">
+                                <a href="{{route('admin.notification.readAllNotification')}}"
+                                   class="text-dark text-decoration-underline">
                                     <small>सबै खाली गर्नुहोस्</small>
                                 </a>
                             </div>
@@ -104,7 +106,7 @@
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
                     </a>
-                    <a href="{{route('admin.setting.dashboard')}}" class="dropdown-item notify-item">
+                    <a href="{{route('admin.global.dashboard')}}" class="dropdown-item notify-item">
                         <i class="fa fa-spin fa-cog"></i>
                         <span>सेटिङ</span>
                     </a>
@@ -136,7 +138,7 @@
                              alt=""
                              height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
+                        <img src="{{asset(config('app.logo_sm'))}}" alt=""
                              height="40"/>
                     @endif
                 </span>
@@ -152,7 +154,7 @@
                             alt=""
                             height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                        <img src="{{asset(config('app.logo'))}}" alt=""
                              height="35"/>
                     @endif
               </span>
@@ -171,11 +173,11 @@
                 </h3>
             </li>
             @if(config('app.app_is_demo'))
-            <li class="d-none d-xl-block ms-2">
-                <p class="top-heading text-danger">
-                    नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
-                </p>
-            </li>
+                <li class="d-none d-xl-block ms-2">
+                    <p class="top-heading text-danger">
+                        नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
+                    </p>
+                </li>
             @endif
             <li class="d-none d-xl-block ms-1">
                 <p class="top-heading text-danger">

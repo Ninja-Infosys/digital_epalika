@@ -2,6 +2,7 @@
 
 namespace Modules\Plan\Entities;
 
+use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,11 @@ class Fuel extends Model
 
     protected $fillable = [
         'title',
-        'unit',
+        'unit_id',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

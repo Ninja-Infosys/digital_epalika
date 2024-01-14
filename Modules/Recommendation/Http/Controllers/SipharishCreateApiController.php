@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharishCreate;
@@ -59,35 +60,32 @@ class SipharishCreateApiController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-        // dd($request->validated());
-        $sipharis = DB::transaction(function () use ($request) {
-
+        DB::transaction(function () use ($request) {
             $sipharis = auth()->user()?->sipharishCreates()?->create($request->validated());
             if (
                 array_key_exists('fields', $request->validated())
                 && !empty($request->validated()['fields'])
             ) {
-
                 foreach ($request->validated()['fields'] as $field) {
-
                     if (!empty($field['type']) && $field['type'] == 'image') {
-                        $value = Storage::disk('public')
-                            ->putFile('recommendation/files', $field['value']);
+                        $value = $this->storeFile($field['value']);
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {
                         $values = collect();
                         if (!empty($field['table'])) {
                             foreach ($field['table'] as $table) {
-                                if (!empty($table['type']) && $table['type'] == 'image') {
-                                    $tableValue = Storage::disk('public')
-                                        ->putFile('recommendation/files', $table['value']);
-                                } else {
-                                    $tableValue = $table['value'];
+                                $row = collect();
+                                foreach ($table as $key => $tbl) {
+                                    if (!empty($tbl['type']) && $tbl['type'] == 'image') {
+                                        $tableValue = $this->storeFile($tbl['value']);
+                                    } else {
+                                        $tableValue = $tbl['value'];
+                                    }
+                                    $row->put($key, [
+                                        'value' => $tableValue,
+                                        'type' => $tbl['type'],
+                                    ]);
                                 }
-                                $values->push([
-                                    'sipharish_form_field_id' => $table['sipharish_form_field_id'],
-                                    'value' => $tableValue,
-                                    'type' => $table['type'],
-                                ]);
+                                $values->push($row);
                             }
                         }
                         $value = json_encode($values);
@@ -111,8 +109,8 @@ class SipharishCreateApiController extends Controller
 
                 foreach ($request->validated()['files'] as $file) {
                     $sipharis->SipharisCreatedDocuments()->create($file + [
-                        'extension' => $file['filename']->getClientOriginalExtension()
-                    ]);
+                            'extension' => $file['filename']->getClientOriginalExtension()
+                        ]);
                 }
             }
 
@@ -132,10 +130,32 @@ class SipharishCreateApiController extends Controller
 
         return response()->json(SipharishCreateListResource::collection($sipharishCreates));
     }
+
     public function sipharishCreateShow(SipharishCreate $sipharishCreate)
     {
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
 
         return response()->json(SipharishCreateListResource::make($sipharishCreate));
+    }
+
+
+    public function storeFile($value): ?string
+    {
+        if (!empty($value)) {
+            if (empty($value['data'])) {
+                return '';
+            }
+            $decodedData = base64_decode($value['data']);
+            $date = now()->format('Y_m_d');
+            $name = $value['name'] . "." . $value['extension'];
+            $path = "recommendation/{$date}/{$name}";
+            Storage::disk('public')->put($path, $decodedData);
+            if (Storage::disk('public')->exists($path)) {
+                return $path;
+            } else {
+                return '';
+            }
+        }
+        return '';
     }
 }

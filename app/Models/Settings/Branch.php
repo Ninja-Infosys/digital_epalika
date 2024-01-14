@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\DigitalBoard\Entities\CitizenCharter;
 use Modules\DigitalBoard\Entities\Service;
+use Modules\GrievanceHandling\Entities\GrievanceDetail;
 
 class Branch extends Model
 {
@@ -82,4 +83,8 @@ class Branch extends Model
     {
         return $this->hasMany(CitizenCharter::class);
     }
+    public function grievanceDetails(): HasMany
+    {
+        return $this->hasMany(GrievanceDetail::class);
+    }   
 }

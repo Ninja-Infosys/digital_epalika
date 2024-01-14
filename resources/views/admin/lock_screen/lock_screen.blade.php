@@ -40,13 +40,13 @@
                             <div class="auth-logo">
                                 <a href="{{route('login')}}" class="logo logo-dark text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="42">
+                                                <img src="{{asset(config('app.logo'))}}" alt="" height="42">
                                             </span>
                                 </a>
 
                                 <a href="{{route('login')}}" class="logo logo-light text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="42">
+                                                <img src="{{asset(config('app.logo'))}}" alt="" height="42">
                                             </span>
                                 </a>
                             </div>
