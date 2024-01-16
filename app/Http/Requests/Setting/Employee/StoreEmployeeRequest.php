@@ -22,8 +22,8 @@ class StoreEmployeeRequest extends FormRequest
             'department' => ['nullable', 'string'],
             'designation' => ['required', 'string'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg'],
-            'email' => ['nullable', 'email', Rule::unique('employees', 'email')->withoutTrashed()],
-            'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()],
+            'email' => ['required', 'email'],
+            'phone' => ['required'],
             'position' => ['nullable', 'integer'],
             'status' => ['nullable', 'boolean'],
             'is_employee' => ['nullable', 'boolean'],
@@ -33,9 +33,9 @@ class StoreEmployeeRequest extends FormRequest
             'show_to_mobile_app' => ['nullable', 'boolean'],
             'show_to_index' => ['nullable', 'boolean'],
             'gender' => ['required', new Enum(Gender::class)],
-            'dob' => ['nullable'],
-            'dob_ad' => ['nullable','date'],
-            'address' => ['nullable','string','max:255'],
+            'dob' => ['nullable', 'date'],
+            'dob_ad' => ['nullable', 'date'],
+            'address' => ['nullable', 'string', 'max:255'],
             'ethnicity_id' => ['nullable'],
             'pan_no' => ['nullable'],
             'pis_no' => ['nullable'],
@@ -43,18 +43,20 @@ class StoreEmployeeRequest extends FormRequest
             'cif_no' => ['nullable'],
             'insurance_card_no' => ['nullable'],
             'description' => ['nullable'],
+            'user.role_id' => ['required'],
+            'user.ward_no' => ['required', 'integer'],
+            'user.password' => ['required', 'confirmed'],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'नाम अनिबार्य छ।',
-            'photo.mimes' => 'फोटो अनिबार्य jpg, jpeg, png मा छ। ',
+            'name.required' => 'नाम अनिवार्य छ।',
+            'photo.mimes' => 'फोटो अनिवार्य jpg, jpeg, png मा छ। ',
             'email.unique' => 'इमेल पहिले नै अवस्थित छ।',
             'phone.unique' => 'फोन पहिले नै अवस्थित छ।',
-            'position.integer' => 'position पूर्णांक हुनुपर्छ',
-
+            'position.integer' => 'Position पूर्णांक हुनुपर्छ',
         ];
     }
 }

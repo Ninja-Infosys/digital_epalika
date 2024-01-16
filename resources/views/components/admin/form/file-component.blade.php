@@ -41,7 +41,7 @@
                     </form>
                 @else
                     <form
-                        action="{{ route('emap.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')->first()->id]) }}"
+                        action="{{ route('emap.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id ?? '')->sortByDesc('created_at')->first()->id ?? '']) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

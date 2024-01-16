@@ -75,12 +75,12 @@
 
                                         </td>
                                     </tr>
-
                                 @empty
                                     <tr>
                                         <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
                         </table>
                     </div>
