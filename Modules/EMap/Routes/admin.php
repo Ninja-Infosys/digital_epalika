@@ -18,6 +18,7 @@ use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
+use Modules\EMap\Http\Controllers\HouseOwnerArchiveController;
 use  Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\StreetDetailController;
 
@@ -47,6 +48,7 @@ Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTem
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
+Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
 
 
 
@@ -93,6 +95,8 @@ Route::prefix('setting')->group(function () {
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
+
+
 
 //oldMap
 Route::resource('oldMap', OldMapController::class)->except(['update', 'store']);
