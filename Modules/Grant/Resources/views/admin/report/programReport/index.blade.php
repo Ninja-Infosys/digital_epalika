@@ -7,8 +7,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.grant.dashboard') }}">
-                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}"
-                                     alt="document-icon">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
                         </li>
@@ -22,35 +21,35 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कार्यक्रम अनुसारको रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
-                                    aria-expanded="false" aria-controls="collapseExample">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
+                                aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
-                            <x-html-to-excel file-name="कार्यक्रम अनुसारको रिपोर्टट" target-table="report-table"/>
-                            <x-print-button target-element="report-content" title="कार्यक्रम अनुसारको रिपोर्ट"/>
+                            <x-html-to-excel file-name="कार्यक्रम अनुसारको रिपोर्टट" target-table="report-table" />
+                            <x-print-button target-element="report-content" title="कार्यक्रम अनुसारको रिपोर्ट" />
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{ route('admin.grant.report.grant.show-program-report') }}">
+                            data-bs-url="{{ route('admin.grant.report.grant.show-program-report') }}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <label for="grant_program_name" class="form-label">
                                         अनुदान कार्यक्रमको नाम</label>
                                     <select name="grant_id" data-toggle="select2" id="grant_program_name"
-                                            class="form-select">
+                                        class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($grants as $grant)
-                                            <option value="{{$grant->id}}">
-                                                {{$grant->grant_program_name}} [{{$grant->fiscalYear->title}}]
+                                        @foreach ($grants as $grant)
+                                            <option value="{{ $grant->id }}">
+                                                {{ $grant->grant_program_name }} [{{ $grant->fiscalYear->title }}]
                                             </option>
                                         @endforeach
 
@@ -83,17 +82,17 @@
                             </div>
                             <table id="report-table" class="table table-sm mt-3 table-centered table-bordered">
                                 <thead>
-                                <tr>
-                                    <th>क्र.स</th>
-                                    <th>नामथर</th>
-                                    <th>पति/पत्नीको नाम</th>
-                                    <th>बुबाको नाम</th>
-                                    <th>बाजेको नाम</th>
-                                    <th>नागरिकता नं</th>
-                                    <th>सम्पर्क नं.</th>
-                                    <th>अनुदान दिने कार्यलय</th>
+                                    <tr>
+                                        <th>क्र.स</th>
+                                        <th>नामथर</th>
+                                        <th>पति/पत्नीको नाम</th>
+                                        <th>बुबाको नाम</th>
+                                        <th>बाजेको नाम</th>
+                                        <th>नागरिकता नं</th>
+                                        <th>सम्पर्क नं.</th>
+                                        <th>अनुदान दिने कार्यलय</th>
 
-                                </tr>
+                                    </tr>
                                 </thead>
                                 <tbody id="report-body">
 
@@ -107,7 +106,7 @@
     </div>
     @push('scripts')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 // x-csrf protection
                 $.ajaxSetup({
@@ -116,7 +115,7 @@
                     }
                 });
 
-                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
+                $(document.body).delegate('#report-filter-form', 'submit', function(e) {
                     e.preventDefault()
                     // get attribute data-bs-url from form and assign it to const variable url
                     const url = $(this).attr('data-bs-url');
@@ -128,11 +127,11 @@
                         data: new FormData(this),
                         processData: false,
                         contentType: false,
-                        beforeSend: function () {
+                        beforeSend: function() {
                             submitFormBtn.prop('disabled', true);
                             submitFormBtn.html("<i class='fa fa-spinner fa-spin'></i>");
                         },
-                        success: function (resp) {
+                        success: function(resp) {
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
@@ -143,7 +142,7 @@
                             $('#amount').html(resp.grant_amount)
 
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)
                             submitFormBtn.html("पेश गर्नुहोस्");
                             toastMessage('error', XMLHttpRequest.responseJSON.message)

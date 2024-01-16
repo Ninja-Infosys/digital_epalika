@@ -3035,7 +3035,7 @@ body[data-layout-mode=two-column][data-topbar-color=dark][data-leftbar-color=bra
 }
 
 .page-title-box .breadcrumb {
-    padding-top: 5px
+    padding-top: 5px; align-items: center;
 }
 
 @media (max-width: 767.98px) {

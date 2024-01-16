@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">बैठक एजेन्डा</h4>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table table-sm table-striped table-bordered">
                             <thead>

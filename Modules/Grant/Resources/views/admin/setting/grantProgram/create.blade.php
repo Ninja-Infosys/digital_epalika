@@ -6,9 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grant.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.grant.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">अनुदान कार्यक्रम</li>
@@ -21,32 +21,28 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ अनुदान कार्यक्रम थप्नुहोस्</h4>
-                        <a href="{{route('admin.grant.setting.grantProgram.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.grant.setting.grantProgram.index') }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> कार्यक्रम सुची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="{{route('admin.grant.setting.grantProgram.store')}}" method="post">
+                <div class="card-body px-0">
+                    <form action="{{ route('admin.grant.setting.grantProgram.store') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="name" class="form-label">अनुदान कार्यक्रम <span class="text-danger">*</span></label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value="{{old('name')}}"
-                                    class="form-control @error('name') is-invalid @enderror"
-                                    id="name"
-                                    placeholder="विषय"
-                                    required
-                                />
+                                <label for="name" class="form-label">अनुदान कार्यक्रम <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" name="name" value="{{ old('name') }}"
+                                    class="form-control @error('name') is-invalid @enderror" id="name"
+                                    placeholder="विषय" required />
                                 @error('name')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -61,6 +57,3 @@
         </div>
     </div>
 @endsection
-
-
-

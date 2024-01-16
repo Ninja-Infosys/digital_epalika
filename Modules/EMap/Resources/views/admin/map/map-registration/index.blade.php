@@ -19,13 +19,13 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="card p-0">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="header-title mb-0"> नक्सा दर्ता तथा दस्तुर </h4>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body px-0">
             <table class="table table-sm table-bordered">
                 <thead>
                     <tr>

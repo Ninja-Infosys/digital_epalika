@@ -25,8 +25,8 @@
 
     <div class="row">
         <div class="mt-1">
-            <div class="card">
-                <div class="">
+            <div class="card  p-0">
+                <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">नक्शा पास फारम सूची</h4>
                         @can('mapFee_create')
@@ -36,7 +36,7 @@
                         @endcan
                     </div>
                 </div>
-                <div class="mt-2">
+                <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table table-sm table-striped ">
                             <thead>

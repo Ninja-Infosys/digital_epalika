@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.recommendation.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
 
@@ -22,34 +22,38 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ {{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} थप्नुहोस</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title">नयाँ
+                            {{ $type == 'recommendationCategory' ? 'सिफारिस श्रेणी' : 'सिफारिस उप श्रेणी' }} थप्नुहोस</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.setting.recommendationCategory.index', $type) }}"
                                 class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"></i> {{$type=="recommendationCategory" ? 'सिफारिस श्रेणी':'सिफारिस उप श्रेणी'}} सूची
+                                <i class="fa fa-list"></i>
+                                {{ $type == 'recommendationCategory' ? 'सिफारिस श्रेणी' : 'सिफारिस उप श्रेणी' }} सूची
                             </a>
                         @endcan
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('admin.recommendation.setting.recommendationCategory.store', $type) }}"
                         method="post">
                         @csrf
                         <div class="row">
-                            @if($type=='recommendationSubCategory')
-                            <div class="col-md-12">
-                                <label for="recommendation_category_id">वर्ग</label>
-                                <select id="recommendation_category_id" name="recommendation_category_id" class="form-control">
-                                    <option>छान्नुहोस्</option>
-                                    @foreach ($recommendationCategories as $recommendationCategory )
-                                    <option value="{{ $recommendationCategory->id }}">{{ $recommendationCategory->title }}</option>
-                                    @endforeach
+                            @if ($type == 'recommendationSubCategory')
+                                <div class="col-md-12">
+                                    <label for="recommendation_category_id">वर्ग</label>
+                                    <select id="recommendation_category_id" name="recommendation_category_id"
+                                        class="form-control">
+                                        <option>छान्नुहोस्</option>
+                                        @foreach ($recommendationCategories as $recommendationCategory)
+                                            <option value="{{ $recommendationCategory->id }}">
+                                                {{ $recommendationCategory->title }}</option>
+                                        @endforeach
 
-                                </select>
-                            </div>
+                                    </select>
+                                </div>
                             @endif
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
