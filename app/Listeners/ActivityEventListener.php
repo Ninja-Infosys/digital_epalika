@@ -13,7 +13,7 @@ class ActivityEventListener
 
     public function handle($event)
     {
-        if (!app()->runningInConsole() && Auth::check() && Auth::user() instanceof \App\Models\User) {
+        if (!app()->runningInConsole() && \Auth::check() && \Auth::user() instanceof \App\Models\User) {
                 ActivityLog::create([
                     'model_type' => $event->model ?? null,
                     'model_id' => $event->model_id ?? null,
