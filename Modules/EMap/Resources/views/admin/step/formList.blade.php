@@ -25,13 +25,25 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">{{$mapApply->unique_id}}</h4>
-                        @if(empty($mapApply->registration_no))
-                            <span>
-                            <a href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
-                                नक्सा दर्ता गर्नुहोस
-                            </a>
-                        </span>
-                        @endif
+
+                        <span class="d-flex justify-content-between align-items-center">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Transfer
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                  <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',$mapApply) }}"> House Owner before compilation of house</a></li>
+                                  <li><a class="dropdown-item" href="#"> House Owner After compilation of house</a></li>
+                                  <li><a class="dropdown-item" href="#"> Organization</a></li>
+                                </ul>
+                              </div>
+                              @if(empty($mapApply->registration_no))
+                                <a href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
+                                    नक्सा दर्ता गर्नुहोस
+                                </a>
+                              @endif
+                    </span>
+
                     </div>
                 </div>
                 <div class="card-body">
