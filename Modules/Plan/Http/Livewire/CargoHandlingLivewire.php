@@ -32,20 +32,21 @@ class CargoHandlingLivewire extends Component
         if (!empty($materialData)) {
             $this->existingForm = $materialData;
             $this->form['fiscal_year_id'] = $materialData->fiscal_year_id;
-            $this->form['material_id'] = $materialData->material_rate_id;
+            $this->form['material_id'] = $materialData->material_id;
             $this->form['unit_id'] = $materialData->unit_id;
-            $formDataTypeArray = [];
 
             foreach ($materialData->collectionResources as $index => $formDataType) {
-                $formDataTypeArray[$index]['id'] = $formDataType->id;
-                $formDataTypeArray[$index]['collectable'] = $formDataType->collectable;
-                $formDataTypeArray[$index]['type'] = $formDataType->type ?? '';
-                $formDataTypeArray[$index]['quantity'] = $formDataType->quantity ?? '';
-                $formDataTypeArray[$index]['rate_type'] = $formDataType->rate_type;
-                $formDataTypeArray[$index]['rate'] = $formDataType->rate ?? '';
+                $this->form['collectionResources'][] = [
+                    'id' => $formDataType->id ?? null,
+                    'collectable' => $formDataType->collectable ?? null,
+                    'type' => $formDataType->type ?? null,
+                    'quantity' => $formDataType->quantity ?? null,
+                    'rate_type' => $formDataType->rate_type ?? null,
+                    'rate' => $formDataType->rate ?? null,
+                ];
             }
-
-            $this->form['collectionResources'] = $formDataTypeArray;
+        } else {
+            $this->form['collectionResources'] = [[]];
         }
 
         $this->fiscalYears = FiscalYear::all();
@@ -103,23 +104,20 @@ class CargoHandlingLivewire extends Component
             if (!empty($this->existingForm)) {
                 $this->existingForm->update($validatedData['form']);
                 $form = $this->existingForm;
+                foreach ($this->form['collectionResources'] as $formDataType) {
+                    if (array_key_exists('id', $formDataType)) {
+                        $formDataTypeData = CollectionResource::find($formDataType['id']);
+                        $formDataTypeData->update($formDataType);
+                    } else {
+                        $formDataTypeData = $form->collectionResources()->create($formDataType);
+                    }
+                }
             } else {
                 $form = CargoHandling::create($validatedData['form']);
-            }
-            $existingFormFieldsId = collect($form->collectionResources?->pluck('id'));
-            $newId = collect();
-            foreach ($validatedData['form']['collectionResources'] as $formDataType) {
-                if (array_key_exists('id', $formDataType) && !empty($formDataType['id'])) {
-                    $formDataTypeData = CollectionResource::find($formDataType['id']);
-                    $formDataTypeData->update($formDataType);
-                } else {
+                foreach ($this->form['collectionResources'] as $formDataType) {
                     $formDataTypeData = $form->collectionResources()->create($formDataType);
                 }
-                $newId->push($formDataTypeData->id);
             }
-            $diff = $existingFormFieldsId->diff($newId->filter());
-
-            CollectionResource::whereIn('id', $diff->toArray())->delete();
         });
 
         $this->reset('form');

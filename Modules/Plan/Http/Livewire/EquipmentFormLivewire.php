@@ -42,31 +42,35 @@ class EquipmentFormLivewire extends Component
         $this->labours = Labour::all();
 
         if (!empty($formData)) {
-            $this->existingForm = $formData;
+
             $this->form['equipment_id'] = $formData->id;
-            $equipmentAdditionalCostArray = [];
-            $fuelDemandArray = [];
-            $crewCreateArray = [];
 
             foreach ($formData->equipmentAdditionalCosts as $index => $equipmentAdditionalCost) {
-                $equipmentAdditionalCostArray[$index]['id'] = $equipmentAdditionalCost->id;
-                $equipmentAdditionalCostArray[$index]['rate'] = $equipmentAdditionalCost->rate;
-                $equipmentAdditionalCostArray[$index]['unit_id'] = $equipmentAdditionalCost->unit_id ?? '';
-                $equipmentAdditionalCostArray[$index]['fiscal_year_id'] = $equipmentAdditionalCost->fiscal_year_id ?? '';
+                $this->form['equipmentAdditionalCost'][] = [
+                    'id' => $equipmentAdditionalCost->id ?? null,
+                    'rate' => $equipmentAdditionalCost->rate ?? null,
+                    'unit_id' => $equipmentAdditionalCost->unit_id ?? null,
+                    'fiscal_year_id' => $equipmentAdditionalCost->fiscal_year_id ?? null,
+                ];
             }
             foreach ($formData->fuelDemands as $index => $fuelDemand) {
-                $fuelDemandArray[$index]['id'] = $fuelDemand->id;
-                $fuelDemandArray[$index]['quantity'] = $fuelDemand->quantity;
-                $fuelDemandArray[$index]['fuel_id'] = $fuelDemand->fuel_id ?? '';
+                $this->form['fuelDemand'][] = [
+                    'id' => $fuelDemand->id ?? null,
+                    'quantity' => $fuelDemand->quantity ?? null,
+                    'fuel_id' => $fuelDemand->fuel_id ?? null,
+                ];
             }
             foreach ($formData->crewRates as $index => $crewRate) {
-                $crewCreateArray[$index]['id'] = $crewRate->id;
-                $crewCreateArray[$index]['quantity'] = $crewRate->quantity;
-                $crewCreateArray[$index]['labour_id'] = $crewRate->labour_id ?? '';
+                $this->form['crewCreate'][] = [
+                    'id' => $crewRate->id ?? null,
+                    'quantity' => $crewRate->quantity ?? null,
+                    'labour_id' => $crewRate->labour_id ?? null,
+                ];
             }
-            $this->form['equipmentAdditionalCost'] = $equipmentAdditionalCostArray;
-            $this->form['fuelDemand'] = $fuelDemandArray;
-            $this->form['crewCreate'] = $crewCreateArray;
+        } else {
+            $this->form['equipmentAdditionalCost'] = [[]];
+            $this->form['fuelDemand'] = [[]];
+            $this->form['crewCreate'] = [[]];
         }
     }
 
@@ -167,51 +171,37 @@ class EquipmentFormLivewire extends Component
         $validatedData = $this->validate();
 
         DB::transaction(function () use ($validatedData) {
-            $equipment = Equipment::find($validatedData['form']['equipment_id']);
-            $equipmentAdditionalCostId = collect($equipment->equipmentAdditionalCosts?->pluck('id'));
-            $fuelDemandId = collect($equipment->fuelDemands?->pluck('id'));
-            $crewCreateId = collect($equipment->crewRates?->pluck('id'));
-            $equipmentAdditionalCostnewId = collect();
-            foreach ($validatedData['form']['equipmentAdditionalCost'] as $equipmentAdditionalCost) {
-                if (array_key_exists('id', $equipmentAdditionalCost) && !empty($equipmentAdditionalCost['id'])) {
-                    $EqData = EquipmentAdditionalCost::find($equipmentAdditionalCost['id']);
-                    $EqData->update($equipmentAdditionalCost);
-                } else {
-                    $EqData = $equipment->equipmentAdditionalCosts()->create($equipmentAdditionalCost);
+
+            if (!empty($this->formData)) {
+                $equipment = Equipment::find($validatedData['form']['equipment_id']);
+
+                foreach ($this->form['equipmentAdditionalCost'] as $equipmentAdditionalCost) {
+                    if (array_key_exists('id', $equipmentAdditionalCost)) {
+                        $EqData = EquipmentAdditionalCost::find($equipmentAdditionalCost['id']);
+                        $EqData->update($equipmentAdditionalCost);
+                    } else {
+                        $EqData = $equipment->equipmentAdditionalCosts()->create($equipmentAdditionalCost);
+                    }
                 }
-                $equipmentAdditionalCostnewId->push($EqData->id);
-            }
-            $Eqdiff = $equipmentAdditionalCostId->diff($equipmentAdditionalCostnewId->filter());
 
-            EquipmentAdditionalCost::whereIn('id', $Eqdiff->toArray())->delete();
-
-            $fuelDemandNewId = collect();
-            foreach ($validatedData['form']['fuelDemand'] as $fuelDemand) {
-                if (array_key_exists('id', $fuelDemand) && !empty($fuelDemand['id'])) {
-                    $formDataTypeData = FuelDemand::find($fuelDemand['id']);
-                    $formDataTypeData->update($fuelDemand);
-                } else {
-                    $formDataTypeData = $equipment->fuelDemands()->create($fuelDemand);
+                foreach ($this->form['fuelDemand'] as $fuelDemand) {
+                    if (array_key_exists('id', $fuelDemand)) {
+                        $formDataTypeData = FuelDemand::find($fuelDemand['id']);
+                        $formDataTypeData->update($fuelDemand);
+                    } else {
+                        $formDataTypeData = $equipment->fuelDemands()->create($fuelDemand);
+                    }
                 }
-                $fuelDemandNewId->push($formDataTypeData->id);
-            }
-            $Dediff = $fuelDemandId->diff($fuelDemandNewId->filter());
 
-            FuelDemand::whereIn('id', $Dediff->toArray())->delete();
-
-            $newId = collect();
-            foreach ($validatedData['form']['crewCreate'] as $crewRate) {
-                if (array_key_exists('id', $crewRate) && !empty($crewRate['id'])) {
-                    $formDataTypeDataCrew = CrewRate::find($crewRate['id']);
-                    $formDataTypeDataCrew->update($crewRate);
-                } else {
-                    $formDataTypeDataCrew = $equipment->crewRates()->create($crewRate);
+                foreach ($this->form['crewCreate'] as $crewRate) {
+                    if (array_key_exists('id', $crewRate) && !empty($crewRate['id'])) {
+                        $formDataTypeDataCrew = CrewRate::find($crewRate['id']);
+                        $formDataTypeDataCrew->update($crewRate);
+                    } else {
+                        $formDataTypeDataCrew = $equipment->crewRates()->create($crewRate);
+                    }
                 }
-                $newId->push($formDataTypeDataCrew->id);
             }
-            $diff = $crewCreateId->diff($newId->filter());
-
-            CrewRate::whereIn('id', $diff->toArray())->delete();
         });
 
         $this->reset('form');
