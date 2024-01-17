@@ -8,7 +8,7 @@
                     name="equipment_id"
                     wire:model="form.equipment_id"
                     class="form-control @error('equipment_id') is-invalid @enderror"
-                    id="equipment_id" data-width="100%" required>
+                    id="equipment_id" disabled data-width="100%" required>
                     <option value="">--- छान्नुहोस् ---</option>
                     @foreach($equipments as $equipment)
                         <option
