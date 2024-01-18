@@ -32,7 +32,6 @@
                                                 data-bs-target="#view_file{{ $appliedMapFile->id }}">
                                                 <i class="fa fa-eye"></i>
                                             </button>
-
                                                 <!-- view file model pass url dynamically in the model-->
                                         <div class="modal fade" id="view_file{{ $appliedMapFile->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -155,10 +154,7 @@
                                     <td>{{ $appliedDocumentStatus->status->label()??'' }}</td>
 
                                 </tr>
-
-
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
