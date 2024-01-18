@@ -95,6 +95,25 @@
                                     </a><br>
                                 @endif
                             </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="muchulka_after_complietion" class="form-label">Muchulka After Complietion </label>
+                                <textarea name="muchulka_after_complietion" id="muchulka_after_complietion" cols="30" placeholder="Muchulka After Complietion"
+                                          class="form-control ckEditor @error('muchulka_after_complietion') is-invalid @enderror"
+                                          rows="5">{{old('muchulka_after_complietion',$mapSetting->muchulka_after_complietion)}}</textarea>
+                                @error('muchulka_after_complietion')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="muchulka_before_complietion" class="form-label">Muchulka Before Complietion </label>
+                                <textarea name="muchulka_before_complietion" id="muchulka_before_complietion" cols="30" placeholder="Muchulka Before Complietion"
+                                          class="form-control ckEditor @error('muchulka_before_complietion') is-invalid @enderror"
+                                          rows="5">{{old('muchulka_before_complietion',$mapSetting->muchulka_before_complietion)}}</textarea>
+                                @error('muchulka_before_complietion')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+
                         </div>
                         <div class="d-flex justify-content-end mt-3">
                             <button type="submit" class="btn btn-primary">
@@ -107,4 +126,8 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
+@endpush
 @endsection

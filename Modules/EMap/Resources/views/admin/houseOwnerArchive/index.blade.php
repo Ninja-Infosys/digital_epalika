@@ -12,7 +12,14 @@
                                     alt="document-icon"> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">घर धनीको विवरण</li>
+                        <li class="breadcrumb-item active">
+                        <a href="{{ route('emap.admin.mapApply.admin-step.form-list',$mapApply) }}">
+                            चरण
+                            </a>
+
+
+
+                        </li>
                         <li class="breadcrumb-item active">घर धनीको विवरण</li>
                     </ol>
                 </div>
@@ -27,10 +34,6 @@
                 <div class="mb-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ घर धनीको विवरण</h4>
-                        {{-- <a href="{{ route('emap.admin.criteriaDetailSetting.index', '') }}"
-                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> मापदण्ड सुची
-                        </a> --}}
                     </div>
                 </div>
             </div>
@@ -134,7 +137,7 @@
                                 @livewire('multiple-file')
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">
-                                        Save
+                                        पेश गर्नुहोस
                                     </button>
                                 </div>
                             </div>
@@ -182,7 +185,7 @@
                                 <a data-bs-type="edit"
                                     href="{{ route('emap.admin.houseOwnerArchive.show', [$mapApply,$houseOwnerArchive]) }}"
                                     class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="सम्पादन गर्नुहोस">
+                                    data-bs-toggle="tooltip" data-bs-placement="top">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>
