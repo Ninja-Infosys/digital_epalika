@@ -164,7 +164,6 @@ public function getMapApplyConstructionTypeAccordingToFiscalYear()
         $officeSetting = $this->getOfficeSetting();
         $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
         $buildingUsages = $mapApplies->pluck('usage')->unique();
-    
         $chartData = [
             'labels' => $buildingUsages->map(function ($usage) {
                 return BuildingUsageEnum::tryFrom($usage)?->label();
