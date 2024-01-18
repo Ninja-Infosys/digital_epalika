@@ -3,6 +3,7 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\Address\District;
+use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -53,5 +54,10 @@ class HouseOwner extends Model
     public function citizenshipIssueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
+    }
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'model');
     }
 }

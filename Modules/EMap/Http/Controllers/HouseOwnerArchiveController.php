@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Address\District;
+use App\Models\File;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\HouseOwner;
 use Modules\EMap\Entities\HouseOwnerArchive;
@@ -18,7 +19,7 @@ class HouseOwnerArchiveController extends Controller
     public function index(MapApply $mapApply)
     {
         $allDistricts = District::all();
-        $houseOwnerArchives = HouseOwnerArchive::where('map_apply_id', $mapApply->id)->get();
+        $houseOwnerArchives = HouseOwnerArchive::latest()->where('map_apply_id', $mapApply->id)->get();
         return view('emap::admin.houseOwnerArchive.index', compact('mapApply', 'allDistricts', 'houseOwnerArchives'));
     }
 
@@ -31,7 +32,7 @@ class HouseOwnerArchiveController extends Controller
     {
         $houseOwner = HouseOwner::where('map_apply_id', $mapApply->id)->first();
         DB::transaction(function () use ($houseOwner, $request, $mapApply) {
-            HouseOwnerArchive::create([
+            $houseOwnerArchive =  HouseOwnerArchive::create([
                 'map_apply_id' => $mapApply->id,
                 'name' => $houseOwner->name,
                 'phone' => $houseOwner->phone,
@@ -44,6 +45,19 @@ class HouseOwnerArchiveController extends Controller
                 'local_body' => $houseOwner->local_body,
                 'ward_no' => $houseOwner->ward_no,
             ]);
+
+            $houseOwnerFiles = File::where('model_type', HouseOwner::class)
+                ->where('model_id', $houseOwner->id)
+                ->get();
+
+            if ($houseOwnerFiles->isNotEmpty()) {
+                foreach ($houseOwnerFiles as $houseOwnerFile) {
+                    $houseOwnerFile->update([
+                        'model_type' => HouseOwnerArchive::class,
+                        'model_id' => $houseOwnerArchive->id
+                    ]);
+                }
+            }
             $houseOwner->update([
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
@@ -56,6 +70,15 @@ class HouseOwnerArchiveController extends Controller
                 'local_body' => $request->input('local_body'),
                 'ward_no' => $request->input('ward_no'),
             ]);
+
+            foreach ($request->validated()['files'] as $file) {
+                $extension = $file['file']->getClientOriginalExtension();
+                $houseOwner->files()->create([
+                    'file_name' => $file['file_name'],
+                    'extension' => $extension,
+                    'file' => $file['file']->store('houseOwner', 'public'),
+                ]);
+            }
         });
 
         toast('New House Owner Updated Successfully', 'success');
