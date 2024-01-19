@@ -35,7 +35,7 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail'])
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
             ->where(function (Builder $q) {
