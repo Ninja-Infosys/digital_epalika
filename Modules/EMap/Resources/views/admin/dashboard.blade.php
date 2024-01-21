@@ -111,7 +111,7 @@
                     आर्थिक बर्ष अनुसारले नक्सा बिवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="buildingUsage" chart-type="doughnut"> </canvas>
+                    <canvas id="buildingUsage" chart-type="pie"> </canvas>
                 </div>
 
             </div>
