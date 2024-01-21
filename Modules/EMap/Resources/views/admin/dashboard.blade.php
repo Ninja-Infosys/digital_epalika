@@ -68,7 +68,7 @@
                     आर्थिक बर्ष 2080/081 अनुसार भवन वर्गीकरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="buildingCategory" chart-type="bar"></canvas>
+                    <canvas id="buildingCategory" chart-type="line"></canvas>
                 </div>
 
             </div>
@@ -111,7 +111,7 @@
                     आर्थिक बर्ष अनुसारले नक्सा बिवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="buildingUsage" chart-type="doughnut"> </canvas>
+                    <canvas id="buildingUsage" chart-type="pie"> </canvas>
                 </div>
 
             </div>
