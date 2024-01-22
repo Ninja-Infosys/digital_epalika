@@ -224,9 +224,9 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-                ->merge($this->paymentStores)
-                ->merge($this->appliedDocuments)
-                ->sortByDesc('created_at');
+            ->merge($this->paymentStores)
+            ->merge($this->appliedDocuments)
+            ->sortByDesc('created_at');
         return $storedDocuments
             ->map(function ($storedDocument) {
                 return collect($storedDocument)
@@ -252,9 +252,9 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-                ->merge($this->paymentStores)
-                ->merge($this->appliedDocuments)
-                ->sortByDesc('created_at');
+            ->merge($this->paymentStores)
+            ->merge($this->appliedDocuments)
+            ->sortByDesc('created_at');
 
         return $storedDocuments
             ->map(function ($storedDocument) {
@@ -273,6 +273,5 @@ class MapApply extends Model
                 ];
             })
             ->first();
-
     }
 }

@@ -15,6 +15,8 @@ class PaymentStore extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
+    protected $touches = ['mapApply'];
+
     protected $dates = [
         'created_at',
         'updated_at',
