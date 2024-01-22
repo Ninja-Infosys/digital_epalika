@@ -242,6 +242,7 @@ class MapApplicationForm extends Component
 
             $mapApply = MapApply::create($this->applyMap + [
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                'sent_to_organization' => 'pending'
             ]);
 
             // foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {

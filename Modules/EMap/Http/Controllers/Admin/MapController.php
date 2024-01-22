@@ -43,7 +43,7 @@ class MapController extends Controller
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->latest()
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
 

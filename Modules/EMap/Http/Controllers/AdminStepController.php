@@ -53,6 +53,11 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument) {
+            if ($request->input('status') == 'approved') {
+                $mapApply->update([
+                    'sent_to_organization' => 'processing'
+                ]);
+            }
             $appliedDocument->update([
                 'status' => $request->input('status')
             ]);
@@ -72,6 +77,11 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore) {
+            if ($request->input('status') == 'approved') {
+                $mapApply->update([
+                    'sent_to_organization' => 'processing'
+                ]);
+            }
             $formStore->update([
                 'status' => $request->input('status')
             ]);
@@ -94,6 +104,11 @@ class AdminStepController extends Controller
         $this->getStatusValidation($request);
 
         DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore) {
+            if ($request->input('status') == 'approved') {
+                $mapApply->update([
+                    'sent_to_organization' => 'processing'
+                ]);
+            }
             $paymentStore->update([
                 'status' => $request->input('status')
             ]);
