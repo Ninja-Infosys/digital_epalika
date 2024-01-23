@@ -43,9 +43,6 @@ class StoreEmployeeRequest extends FormRequest
             'cif_no' => ['nullable'],
             'insurance_card_no' => ['nullable'],
             'description' => ['nullable'],
-            'user.role_id' => ['required'],
-            'user.ward_no' => ['required', 'integer'],
-            'user.password' => ['required', 'confirmed'],
         ];
     }
 
