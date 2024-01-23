@@ -366,79 +366,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <fieldset class="border p-2 mb-2">
-                                <legend class="font-16 text-info">
-                                    <strong>प्रयोगकर्ता विवरण </strong>
-                                </legend>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="role_id" class="form-label">भूमिका *</label>
-                                        <select name="user[role_id]"
-                                                class="form-select @error('user.role_id') is-invalid @enderror"
-                                                id="role_id">
-                                            <option value="">भूमिका छान्नुहोस्</option>
-                                            @foreach($roles as $role)
-                                                <option
-                                                    value="{{$role->id}}" {{$role->id==old('role_id') ? 'selected' : ''}}>
-                                                    {{$role->title}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('user.role_id')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="ward_no" class="form-label">वडा नं.</label>
-                                        <select name="user[ward_no]"
-                                                class="form-select @error('user.ward_no') is-invalid @enderror"
-                                                id="ward_no">
-                                            <option value="">वडा छान्नुहोस्</option>
-                                            @foreach(officeSetting()->localBody->ward_no as $ward)
-                                                <option value="{{$ward}}" {{$ward==old('ward_no') ? 'selected' : ''}}>
-                                                    {{$ward}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('user.ward_no')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
 
-                            </fieldset>
-                            <fieldset class="border p-2 mb-2">
-                                <legend class="font-16 text-info">
-                                    <strong> पासवर्ड</strong>
-                                </legend>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="password" class="form-label">पासवर्ड *</label>
-                                        <input
-                                            type="password"
-                                            name="user[password]"
-                                            value="{{old('password')}}"
-                                            class="form-control @error('user.password') is-invalid @enderror"
-                                            id="password"
-                                            placeholder="पासवर्ड"
-                                        />
-                                        @error('user.password')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="password_confirmation" class="form-label">पासवर्ड सुनिश्चित गर्नुहोस
-                                            *</label>
-                                        <input
-                                            type="password"
-                                            name="user[password_confirmation]"
-                                            value="{{old('password_confirmation')}}"
-                                            class="form-control"
-                                            id="password_confirmation"
-                                            placeholder="पासवर्ड सुनिश्चित गर्नुहोस"
-                                        />
-                                    </div>
-                                </div>
-                            </fieldset>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
                             Save
