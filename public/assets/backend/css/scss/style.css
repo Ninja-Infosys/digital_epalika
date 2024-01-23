@@ -19,6 +19,16 @@ header .navbar {
 header .navbar-brand {
   height: 60px;
 }
+
+.modal .modal-content{
+  width: 50rem;
+  height: 50rem;
+}
+.modal-dialog{
+  margin-left: 300px;
+}
+
+
 header .navbar-nav .nav-link {
   color: #003893;
   padding: 10px 20px;
