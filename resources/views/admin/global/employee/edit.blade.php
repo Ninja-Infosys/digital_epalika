@@ -40,6 +40,7 @@
                         <form action="{{route('admin.global.generalSetting.employee.update',$employee)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+                            @method('PUT')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>कर्मचारी विवरण </strong>
@@ -50,7 +51,7 @@
                                     <input
                                         type="text"
                                         name="name"
-                                        value="{{old('name')}}"
+                                        value="{{old('name', $employee->name)}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
                                         placeholder="नाम "
@@ -65,7 +66,7 @@
                                     <input
                                         type="text"
                                         name="address"
-                                        value="{{old('address')}}"
+                                        value="{{old('address', $employee->address)}}"
                                         class="form-control @error('address') is-invalid @enderror"
                                         id="address"
                                         placeholder="ठेगाना"
@@ -83,7 +84,7 @@
                                         <option value="">लिङ्ग थप्नुहोस्</option>
                                         @foreach(\App\Enums\Gender::cases() as $case)
                                             <option
-                                                value="{{$case->value}}" {{old('gender')==$case->value ? 'selected':''}}>{{$case->label()}}</option>
+                                                value="{{$case->value}}" {{old('gender',$employee->gender)==$case->value ? 'selected':''}}>{{$case->label()}}</option>
                                         @endforeach
                                     </select>
                                     @error('gender')
@@ -102,7 +103,7 @@
                                     <input
                                         type="text"
                                         name="pan_no"
-                                        value="{{old('pan_no')}}"
+                                        value="{{old('pan_no',$employee->pan_no)}}"
                                         class="form-control @error('pan_no') is-invalid @enderror"
                                         id="pan_no"
                                         placeholder="पाना नं *"
@@ -120,7 +121,7 @@
                                         <option value="">जातियता थप्नुहोस्</option>
                                         @foreach($ethnicities as $ethnicity)
                                             <option
-                                                value="{{$ethnicity->id}}" {{old('ethnicity_id')==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
+                                                value="{{$ethnicity->id}}" {{old('ethnicity_id',$employee->ethnicity_id)==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
                                         @endforeach
                                     </select>
                                     @error('ethnicity_id')
@@ -132,7 +133,7 @@
                                     <input
                                         type="text"
                                         name="pis_no"
-                                        value="{{old('pis_no')}}"
+                                        value="{{old('pis_no',$employee->pis_no)}}"
                                         class="form-control @error('pis_no') is-invalid @enderror"
                                         id="pis_no"
                                         placeholder="Pis नम्बर"
@@ -147,7 +148,7 @@
                                     <input
                                         type="text"
                                         name="epf_no"
-                                        value="{{old('epf_no')}}"
+                                        value="{{old('epf_no',$employee->epf_no)}}"
                                         class="form-control @error('epf_no') is-invalid @enderror"
                                         id="epf_no"
                                         placeholder="Epf नम्बर"
@@ -162,7 +163,7 @@
                                     <input
                                         type="text"
                                         name="cif_no"
-                                        value="{{old('cif_no')}}"
+                                        value="{{old('cif_no',$employee->cif_no)}}"
                                         class="form-control @error('cif_no') is-invalid @enderror"
                                         id="cif_no"
                                         placeholder="Cif नम्बर"
@@ -177,7 +178,7 @@
                                     <input
                                         type="text"
                                         name="insurance_card_no"
-                                        value="{{old('insurance_card_no')}}"
+                                        value="{{old('insurance_card_no',$employee->insurance_card_no)}}"
                                         class="form-control @error('insurance_card_no') is-invalid @enderror"
                                         id="insurance_card_no"
                                         placeholder="Insurance Card Number"
@@ -192,7 +193,7 @@
                                     <input
                                         type="text"
                                         name="department"
-                                        value="{{old('department')}}"
+                                        value="{{old('department',$employee->department)}}"
                                         class="form-control  @error('department') is-invalid @enderror"
                                         id="department"
                                         placeholder=" समूह"
@@ -209,7 +210,7 @@
                                         <option value="">शाखा छान्नुहोस</option>
                                         @foreach($branches as $branch)
                                             <option
-                                                value="{{$branch->id}}" {{old('branch_id')==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
+                                                value="{{$branch->id}}" {{old('branch_id',$employee->branch_id)==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
                                         @endforeach
                                     </select>
                                     @error('branch_id')
@@ -222,9 +223,9 @@
                                     <select class="form-control @error('employee_id') is-invalid @enderror"
                                             name="employee_id" id="employee_id">
                                         <option value=""> कर्मचारी छान्नुहोस</option>
-                                        @foreach($allEmployees as $allEmployee)
+                                        @foreach($allemployees as $allemployee)
                                             <option
-                                                value="{{$allEmployee->id}}" {{old('employee_id')==$allEmployee->id ? 'selected':''}}>{{$allEmployee->name}}</option>
+                                                value="{{$allemployee->id}}" {{old('employee_id',$employee->employee_id)==$allemployee->id ? 'selected':''}}>{{$allemployee->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('employee_id')
@@ -252,7 +253,7 @@
                                     <input
                                         type="text"
                                         name="designation"
-                                        value="{{old('designation')}}"
+                                        value="{{old('designation',$employee->designation)}}"
                                         class="form-control  @error('designation') is-invalid @enderror"
                                         id="designation"
                                         placeholder=" पद"
@@ -266,7 +267,7 @@
                                     <input
                                         type="email"
                                         name="email"
-                                        value="{{old('email')}}"
+                                        value="{{old('email',$employee->email)}}"
                                         class="form-control  @error('email') is-invalid @enderror"
                                         id="email"
                                         placeholder=" इमेल"
@@ -280,7 +281,7 @@
                                     <input
                                         type="text"
                                         name="phone"
-                                        value="{{old('phone')}}"
+                                        value="{{old('phone',$employee->phone)}}"
                                         class="form-control  @error('phone') is-invalid @enderror"
                                         id="phone"
                                         placeholder=" फोन"
@@ -307,7 +308,7 @@
                                     <input
                                         type="text"
                                         name="position"
-                                        value="{{old('position')}}"
+                                        value="{{old('position',$employee->position)}}"
                                         class="form-control @error('position') is-invalid @enderror"
                                         id="position"
                                         placeholder=" स्थान"
