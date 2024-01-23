@@ -3,7 +3,7 @@
         <div id="sidebar-menu">
             <ul id="side-menu">
                 <li class="{{request()->is('organization/admin/dashboard') ? 'active' : ''}}">
-                    <a href="{{route('organization.admin.dashboard')}}">
+                    <a href="{{route('admin.global.organization.dashboard')}}">
                         <i class="fa fa-home"></i>
                         <span> ड्यासबोर्ड</span>
                     </a>

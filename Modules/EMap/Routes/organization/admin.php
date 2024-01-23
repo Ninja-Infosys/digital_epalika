@@ -1,14 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\Global\OrganizationAuthController;
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
-use Modules\EMap\Http\Controllers\OrganizationAuthController;
 use Modules\EMap\Http\Controllers\OrganizationDashboardController;
 use Modules\EMap\Http\Controllers\OrganizationNotificationController;
 use Modules\EMap\Http\Controllers\TaxClearanceController;
 
-Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
+// Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
 
 Route::prefix('profile')->group(function () {
     Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');

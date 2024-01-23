@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\Global\{BranchController,
     MailSettingController,
     OccupationController,
     OfficeSettingController,
+    OrganizationAuthController,
+    OrganizationDashboardController,
     QualificationController,
     RelationshipController,
     SettingDashboardController,
@@ -27,6 +29,9 @@ use App\Http\Controllers\Admin\Global\{BranchController,
     Units\TypeController,
     Units\UnitController
 };
+use Illuminate\Support\Facades\Route;
+
+
 
 Route::get('dashboard', SettingDashboardController::class)->name('dashboard');
 Route::resource('relationship', RelationshipController::class);
@@ -83,3 +88,18 @@ Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
     Route::resource('letterHead', LetterHeadController::class)->only('index', 'store');
 });
 Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
+
+
+Route::prefix('organization')->as('organization.')->group(function () {
+    Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
+    Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
+    Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
+    Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
+    Route::get('register-person', [OrganizationAuthController::class, 'showOrganizationRegisterFormPerson'])->name('register.formPerson');
+    Route::post('logout', [OrganizationAuthController::class, 'logout'])->name('logout');
+    Route::get('{organization}/invitation', [OrganizationAuthController::class, 'invitation'])->name('invitation');
+    Route::get('password/create', [OrganizationAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
+    Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
+});
+
+

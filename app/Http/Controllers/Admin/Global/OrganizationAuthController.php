@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Http\Controllers;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +13,7 @@ class OrganizationAuthController extends Controller
 {
     public function showOrganizationLoginForm()
     {
-        return view('emap::organization.auth.login');
+        return view('admin.global.organization.auth.login');
     }
 
     public function organizationLogin(Request $request): RedirectResponse
@@ -37,7 +37,7 @@ class OrganizationAuthController extends Controller
         }
 
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
-            return redirect()->route('organization.admin.dashboard');
+            return redirect()->route('admin.global.organization.dashboard');
         }
 
 
@@ -53,12 +53,12 @@ class OrganizationAuthController extends Controller
 
     public function showOrganizationRegisterForm()
     {
-        return view('emap::organization.auth.register');
+        return view('admin.global.organization.auth.register');
     }
 
     public function showOrganizationRegisterFormPerson()
     {
-        return view('emap::organization.auth.register_person');
+        return view('admin.global.auth.register_person');
     }
 
     public function invitation(Organization $organization)
@@ -78,7 +78,7 @@ class OrganizationAuthController extends Controller
             return redirect()->route('organization.admin.dashboard');
         }
 
-        return view('emap::organization.auth.password');
+        return view('admin.global.organization.auth.password');
     }
 
     public function store(StorePasswordRequest $request)
@@ -101,6 +101,6 @@ class OrganizationAuthController extends Controller
     {
         $organization = \auth('organization')->user();
 
-        return view('emap::organization.profile', compact('organization'));
+        return view('admin.global.organization.profile', compact('organization'));
     }
 }

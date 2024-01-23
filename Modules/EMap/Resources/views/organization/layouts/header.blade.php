@@ -78,7 +78,7 @@
                         <span>कर चुक्ता</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <form action="{{ route('organization.logout') }}" method="post">
+                    <form action="{{ route('admin.global.organization.logout') }}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item notify-item">
                             <i class="fa fa-sign-out-alt"></i>

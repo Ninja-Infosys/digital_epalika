@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Global\OrganizationAuthController;
 use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
@@ -81,3 +82,6 @@ Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     Route::get('form/{resource}', [ResourceController::class, 'resource']);
     Route::get('form/{resource}/submission', [ResourceController::class, 'resourceSubmissions']);
 });
+
+
+
