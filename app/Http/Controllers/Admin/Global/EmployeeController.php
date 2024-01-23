@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         $qualifications = Qualification::all();
         $experiences = Experience::all();
         $experienceFiles = ExperienceFile::all();
-        return view('admin.global.employee.show', compact('experienceFiles', 'employee', 'qualifications', 'experiences'));
+        return view('admin.global.employee.show', compact('experienceFiles', 'qualifications', 'experiences'));
     }
 
     public function edit(Employee $employee)
