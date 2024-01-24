@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\GrievanceHandling\Http\Controllers\Admin\GrievanceApiFormController;
-use Modules\JudicialCommittee\Http\Controllers\Admin\Api\ComplaintRegistartionApiController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\Api\ComplaintRegistrationApiController;
 
-Route::get('complaintRegistrationSetting', [ComplaintRegistartionApiController::class, 'complaintRegistrationSetting']);
+Route::get('complaintRegistrationSetting', [ComplaintRegistrationApiController::class, 'complaintRegistrationSetting']);

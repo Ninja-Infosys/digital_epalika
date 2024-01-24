@@ -26,16 +26,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
                         <a href="{{ route('admin.plan.planTemplate.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('admin.plan.planTemplate.store') }}" method="post">
                         @csrf
                         <div class="row">
@@ -86,12 +86,12 @@
                                     </div>
                                     <div class="button-list d-flex flex-wrap mb-2">
                                         @foreach ($template['data'] as $key => $templateValue)
-                                        <div class="d-flex d-warp">
-                                            <button type="button" class="btn btn-outline-primary btn-xs"
-                                                onclick="copyText('{{ $templateValue }}')">
-                                                {{ $key }}
-                                            </button>
-                                        </div>
+                                            <div class="d-flex d-warp">
+                                                <button type="button" class="btn btn-outline-primary btn-xs"
+                                                    onclick="copyText('{{ $templateValue }}')">
+                                                    {{ $key }}
+                                                </button>
+                                            </div>
                                         @endforeach
                                     </div>
                                 @endforeach

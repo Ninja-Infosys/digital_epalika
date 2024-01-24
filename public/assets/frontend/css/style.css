@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@100;200;300;400;500;600;700;800&display=swap");
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Mukta", sans-serif;
 }
 
 :root {
@@ -13,12 +13,13 @@
     --whiteColor: #ffffff;
     --blackColor: #0e314c;
     --fontSize: 14px;
+    --primary: #0047ab;
 }
 
 body {
     overflow-x: hidden;
     background-color: var(--whiteColor) !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     font-size: var(--fontSize);
 }
 /* devanagari */
@@ -657,9 +658,10 @@ select {
     padding-left: 25px;
   }
   .news-slider-wrapper {
-    background-color: #263a57;
+    background-color: #c4173b;
     display: flex;
     color: #ffffff;
+    font-weight: 600;
   }
 
 
@@ -1325,4 +1327,227 @@ h6,
 }
 .emp-card{
     background: #f2f2f2;
+}
+.module-card{
+    background: #fff !important;
+    color: #444;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: 0.5s ease-in-out;
+}
+.module-card:hover{
+    border: 1px solid var(--primary);
+}
+.module-card h6{
+    font-size: 14px !important;
+    font-weight: 600;
+}
+.row.modules .col-md-4{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+.modules{
+    background-color: #fff;
+}
+.module-card svg{
+    background: #f1f4ff;
+    height: 45px;
+    width: 45px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20%;
+    color: var(--primary);
+}
+.module-header {
+    background-color: var(--primary);
+    padding: 10px 0;
+}
+.module-header .main-heading{
+    display: flex;
+    margin-right: 15px
+}
+.module-header .main-heading .sub-title{
+    font-size: 22px !important;
+    font-weight: 800;
+    margin-bottom: 0 !important;
+}
+.module-header .main-heading .sub-title span{
+    font-size: 16px !important;
+}
+.module-header .main-heading .link-btn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 15px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    margin-left: 14px;
+}
+.inner-section .breadcrumb {
+    background-color: #f5f5f5;
+    padding: 0.5rem 0;
+}
+.inner-section .breadcrumb .breadcrumb-item{
+    background-color: transparent;       
+    padding-left: 0;
+}
+.inner-section .breadcrumb .breadcrumb-item a{
+    color: var(--blackColor);
+    font-weight: 500 !important;
+    font-size: 15px;
+}
+.inner-section .breadcrumb .breadcrumb-item a.whitespace-nowrap{
+    color: var(--primary);
+}
+.inner-section .breadcrumb .breadcrumb-item:before, .inner-section .breadcrumb .breadcrumb-item:after{
+    display: none;
+}
+.inner-section .breadcrumb svg{
+    height: 14px;
+    margin: 0 -2px;
+}
+.inner-section{
+    background-color: #fff;
+    padding-bottom: 50px;
+}
+.inner-section .card.custom-card .card-title{
+    text-align: left;
+    font-weight: 600;
+}
+/* .inner-section .card.custom-card{
+    border: none;
+} */
+.inner-section .card.custom-card .card-text{
+    font-size: 13px;
+    color: #666;
+}
+.btn-primary{
+    background-color: var(--primary) !important;
+    border: 1px solid var(--primary) !important;
+    font-weight: 600 !important;
+}
+.bg-l-success{
+    background-color: #e2f5e2 !important;
+}
+.bg-l-info{
+    background-color: #e2fbff !important;
+}
+.text-info.bg-l-info{
+    color: #00879a !important;
+}
+.bg-l-primary{
+    background-color: #e7edff !important;
+}
+.bg-l-warning{
+    background-color: #f3ebd3 !important;    
+}
+.text-warning.bg-l-warning{
+    color: #c99e1e !important;
+}
+.bg-l-danger{
+    background-color: #ffdbdb !important;
+}
+.bg-l-dark{
+    background-color: #e2e2e2 !important;
+}
+
+tr.empty, tr.empty td{
+    border: none;
+    padding: 4px !important;
+}
+table.table-custom thead tr th{
+    background-color: var(--navbar-bg) !important;
+    border: none !important;
+}
+table.table-custom thead tr{
+    border: none !important;
+}
+table.table-custom tr td{
+    background: none !important;
+    border: none !important;
+    font-size: 15px;
+    font-weight: 500;
+}
+table.table-custom tr{
+    border-bottom: none !important; 
+}
+ table.table-custom tr{
+    border: 1px solid #e6e8ea !important;
+    background: #fff;
+}
+table.table-custom tr td{
+    background-color: var(--ct-white) !important;
+    
+}
+table.table-custom tr.empty{
+    border: none !important;
+}
+table.table-custom thead tr th{
+    background-color: #f2f4ff !important;
+    border-bottom: none !important;
+    font-size: 16px;
+}
+table.table-custom thead tr{
+    border: none !important;
+}
+table.table-custom{
+    border: none !important;
+}
+table.table-custom tr td .btn-xs{
+    height: 30px;
+    width: 30px;
+    border: none !important;
+    color: #444444;
+    padding: 5px !important;
+    border-radius: 100% !important;
+    margin: 0px 2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+table.table-custom tr td .btn-xs:hover{
+    background-color: #edeff1 !important;
+    color: #222222;
+}
+table.table-custom tr td .btn-xs svg{
+    height: 17px;
+    width: 17px;
+}
+table.table-custom tr td .btn-xs.btn-outline-danger{
+color: var(--ct-danger) !important;
+}
+table.table-custom tr td .btn-xs.btn-outline-danger:hover{
+    background-color: #ffced6 !important;
+    color: #ff2a4d;
+}
+tr.empty{
+    background: transparent !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background-color: var(--primary) !important;
+    font-weight: 600;
+}
+.nav-pills .nav-link{
+    background-color: #f5f5f5 !important;
+    color: #888;
+    position: relative;
+}
+.inner-section h1, .inner-section h2, .inner-section h3, .inner-section h4, .inner-section h5{
+    font-weight: 600;
+}
+.inner-section h6{
+    font-weight:500;
+}
+.btn-outline-primary{
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+.btn-outline-primary:hover{
+    color: #fff !important;
+    background-color:var(--primary) !important;
 }

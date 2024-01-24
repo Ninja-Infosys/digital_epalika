@@ -61,14 +61,14 @@
                             <td>Ninja</td>
                             <td>CEO</td>
                             <td>उप-महानगरपालिका</td>
-                            <td>ninjainfosys@gmail.com</td>
+                            <td>epalikad@gmail.com</td>
                         </tr>
                         <tr>
                             <td> <img src="{{asset('assets/frontend/image/submetro.jpg')}}"></td>
                             <td>Ninja</td>
                             <td>CEO</td>
                             <td>उप-महानगरपालिका</td>
-                            <td>ninjainfosys@gmail.com</td>
+                            <td>epalikad@gmail.com</td>
                         </tr>
                         </tbody>
                     </table>

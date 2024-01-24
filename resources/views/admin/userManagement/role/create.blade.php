@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ भूमिका सूची</h4>
-                        <a href="{{route('admin.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> भूमिका सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.userManagement.role.store')}}" method="post">
+                    <form action="{{route('admin.global.userManagement.role.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-4 mb-2">

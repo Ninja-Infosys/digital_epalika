@@ -18,11 +18,12 @@ use Modules\EMap\Http\Controllers\OldMapController;
 use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
+use Modules\EMap\Http\Controllers\HouseOwnerArchiveController;
 use  Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\StreetDetailController;
 
 
-Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 
@@ -47,6 +48,7 @@ Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTem
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
+Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
 
 
 
@@ -58,7 +60,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::put('reject/{noticeTypeEnum}', 'reject')->name('reject');
         });
     });
-
+    Route::put('mapApply/{mapApply}/updateDocumentStatus', 'updateDocumentStatus')->name('mapApply.updateDocumentStatus');
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
@@ -93,6 +95,8 @@ Route::prefix('setting')->group(function () {
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
+
+
 
 //oldMap
 Route::resource('oldMap', OldMapController::class)->except(['update', 'store']);

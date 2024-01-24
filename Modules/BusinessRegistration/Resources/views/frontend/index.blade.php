@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('images/np.png') }}" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap css -->
     <link href="{{ asset('assets/backend/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
@@ -18,25 +18,34 @@
     <!-- icons -->
     <link href="{{ asset('assets/backend/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/sweetalert2.min.css') }}">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+    </style>
     @livewireStyles
 </head>
 
-<body class="auth-page" style="background-image: url({{ asset('images/mountain_photo.jpg') }});">
-    <div class="container-fluid">
-        <div class="card rounded mt-2">
-            <div class="col-md-12 system_info p-1">
-                <div class="logo">
-                    <img src="{{ asset('images/np.png') }}" height="60" alt="Logo">
-                </div>
-                <div class="title">
-                    <div class="m-2">
-                        <h4 class="text-white">डिजिटल ई-पालिका</h4>
-                        <h5 class="text-white pt-1">व्यवसाय दर्ता</h5>
+<body class="auth-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 m-auto">
+                <div class="card rounded mt-2">
+                    <div class="col-md-12 p-1 text-center">
+                        <div class="logo">
+                            <img src="{{ asset('images/np.png') }}" height="70" alt="Logo">
+                        </div>
+                        <div class="title">
+                            <div class="m-2">
+                                <h3 class="text-primary fw-bolder mb-0">डिजिटल ई-पालिका</h3>
+                                <h4 class="text-dark fw-bold pt-1">व्यवसाय दर्ता</h4>
 
+                            </div>
+                        </div>
                     </div>
+                    <livewire:businessregistration::registration-form />
                 </div>
             </div>
-            <livewire:businessregistration::registration-form />
         </div>
     </div>
     <!-- Vendor js -->

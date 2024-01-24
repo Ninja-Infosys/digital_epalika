@@ -129,7 +129,7 @@ class OldMapLivewire extends Component
             ]);
         } else {
             $this->oldMapUpdate->update($this->oldMap);
-            $this->oldMapUpdate->houseOwner?->update([
+            $this->oldMapUpdate->houseOwner?->first()?->update([
                 'name' => $this->houseOwner['name'],
                 'phone' => $this->houseOwner['phone'],
                 'father_name' => $this->houseOwner['father_name'],

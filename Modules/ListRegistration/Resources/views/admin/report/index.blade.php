@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.listRegistrations.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> मौजुदा सुची दर्ता रिपोर्ट</li>
@@ -21,53 +21,42 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">मौजुदा सुची दर्ता रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                    aria-controls="collapseExample">
+                            <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
+                                aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
-                            <x-html-to-excel
-                                file-name="मौजुदा सुची दर्ता रिपोर्ट"
-                                target-table="report-table"
-                            />
-                            <x-print-button
-                                target-element="report-table"
-                                title="मौजुदा सुची दर्ता रिपोर्ट"
-                                :header-required="true"
-                            />
+                            <x-html-to-excel file-name="मौजुदा सुची दर्ता रिपोर्ट" target-table="report-table" />
+                            <x-print-button target-element="report-table" title="मौजुदा सुची दर्ता रिपोर्ट"
+                                :header-required="true" />
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm" style="">
-                        <form id="report-filter-form" data-bs-url="{{route('admin.listRegistrations.report.report-data')}}">
+                        <form id="report-filter-form"
+                            data-bs-url="{{ route('admin.listRegistrations.report.report-data') }}">
                             <div class="row">
                                 <div class="col-md-8">
                                     <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
+                                        <legend class="font-16 text-primary">
                                             <strong>
                                                 निबेदन मिति
                                             </strong>
                                         </legend>
                                         <div class="row">
                                             <div class="col-md-6 mb-2">
-                                                <x-date-input-component
-                                                    nameNe="from_date" labelNe="मिति देखि"
-                                                    nameEn="en_from_date" labelEn="From Date"
-                                                    :get-today-date="false"
-                                                />
+                                                <x-date-input-component nameNe="from_date" labelNe="मिति देखि"
+                                                    nameEn="en_from_date" labelEn="From Date" :get-today-date="false" />
                                             </div>
                                             <div class="col-md-6 mb-2">
-                                                <x-date-input-component
-                                                    nameNe="to_date" labelNe="मिति सम्म"
-                                                    nameEn="en_to_date" labelEn="To Date"
-                                                    :get-today-date="false"
-                                                />
+                                                <x-date-input-component nameNe="to_date" labelNe="मिति सम्म"
+                                                    nameEn="en_to_date" labelEn="To Date" :get-today-date="false" />
                                             </div>
                                         </div>
                                     </fieldset>
@@ -75,59 +64,68 @@
 
                                 <div class="col-md-4 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
-                                    <select name="fiscal_year[]" multiple data-toggle="select2"
-                                            id="fiscal_year" class="form-control">
+                                    <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
+                                        class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($fiscalYears as $fiscalYear)
-                                            <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
+                                        @foreach ($fiscalYears as $fiscalYear)
+                                            <option value="{{ $fiscalYear->id }}">{{ $fiscalYear->title }}</option>
                                         @endforeach
+
+
                                     </select>
                                 </div>
 
                                 <div class="col-md-4 mb-2">
                                     <label for="registration_no">दर्ता नं.</label>
                                     <input type="text" id="registration_no" name="registration_no" class="form-control"
-                                           placeholder="दर्ता नं.">
+                                        placeholder="दर्ता नं.">
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="applicant_type">प्रकार</label>
-                                    <select name="applicant_type[]" multiple data-toggle="select2"
-                                            id="applicant_type" class="form-control">
+                                    <select name="applicant_type[]" multiple data-toggle="select2" id="applicant_type"
+                                        class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
-                                            <option value="{{$applicantType->value}}">{{$applicantType->label()}}</option>
+                                        @foreach (\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
+                                            <option value="{{ $applicantType->value }}"
+                                                {{ $applicantType->value == old('applicant_type') ? 'selected' : '' }}>
+                                                {{ $applicantType->label() }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="business_nature">खरिद प्रकृति</label>
-                                    <select name="business_nature[]" multiple data-toggle="select2"
-                                            id="business_nature" class="form-control">
+                                    <select name="business_nature[]" multiple data-toggle="select2" id="business_nature"
+                                        class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $businessNature)
-                                            <option value="{{$businessNature->value}}">{{$businessNature->label()}}</option>
+                                        @foreach (\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $business_nature)
+                                            <!-- Dropdown Option for Business Nature -->
+                                            <option value="{{ $business_nature->value }}"
+                                                {{ $business_nature->value == old('business_nature') ? 'selected' : '' }}>
+                                                {{ $business_nature->label() }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
-                                <legend class="font-16 text-info">
+                                <legend class="font-16 text-primary">
                                     <strong>
                                         Columns
                                     </strong>
                                 </legend>
                                 <div class="row">
-                                    @foreach($columnData as $columns)
+                                    @foreach ($columnData as $columns)
                                         <div class="col-md-6 mb-2">
-                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
-                                            <select name="columns[{{$columns['table_name']}}][]"
-                                                    id="column.{{$columns['table_name']}}" multiple
-                                                    data-toggle="select2"
-                                                    class="form-control">
+                                            <label
+                                                for="column.{{ $columns['table_name'] }}">{{ $columns['name'] }}</label>
+                                            <select name="columns[{{ $columns['table_name'] }}][]"
+                                                id="column.{{ $columns['table_name'] }}" multiple data-toggle="select2"
+                                                class="form-control">
                                                 <option disabled>--- छान्नुहोस् ---</option>
-                                                @foreach($columns['columns'] as $column)
-                                                    <option
-                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>
+                                                @foreach ($columns['columns'] as $column)
+                                                    <option value="{{ $column['column'] ?? '' }}">
+                                                        {{ $column['name'] ?? '' }}</option>
                                                 @endforeach
                                             </select>
 
@@ -148,6 +146,6 @@
         </div>
     </div>
     @push('scripts')
-        <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
+        <script src="{{ asset('assets/backend/js/ajaxCall.js') }}"></script>
     @endpush
 @endsection

@@ -19,8 +19,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
+use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
@@ -52,7 +53,6 @@ class User extends Authenticatable
         'pin',
         'employee_id',
         'branch_id',
-        'is_dept_head',
     ];
 
     protected $hidden = [
@@ -65,6 +65,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function setPasswordAttribute($value): void
     {
@@ -145,7 +146,7 @@ class User extends Authenticatable
 
     public function mapPassGroups(): BelongsToMany
     {
-        return $this->belongsToMany(\Modules\EMap\Entities\New\MapPassGroup::class);
+        return $this->belongsToMany(\Modules\EMap\Entities\MapPassGroup::class);
     }
     public function complaintApplications()
     {

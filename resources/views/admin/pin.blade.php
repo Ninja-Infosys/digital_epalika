@@ -5,7 +5,7 @@
     <title>कृपया सञ्चालन गर्न पिन सेट गर्नुहोस् | {{config('app.name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="A complete solution for digital palika." name="description"/>
-    <meta content="NINJA INFOSYS" name="author"/>
+    <meta content="Digital ePalika" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
@@ -27,13 +27,13 @@
                             <div class="auth-logo">
                                 <a href="{{route('login')}}" class="logo logo-dark text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                                                <img src="{{asset(config('app.logo'))}}" alt=""
                                                      height="42">
                                             </span>
                                 </a>
                                 <a href="{{route('login')}}" class="logo logo-light text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                                                <img src="{{asset(config('app.logo'))}}" alt=""
                                                      height="42">
                                             </span>
                                 </a>
@@ -72,7 +72,7 @@
     <!-- end container -->
 </div>
 <footer class="footer footer-alt bg-soft-main">
-    {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
+    {{date('Y')}} &copy; Design & Developed by <a href="https://digitalepalika.com">Digital ePalika</a>
 </footer>
 </body>
 </html>

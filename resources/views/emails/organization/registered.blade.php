@@ -31,7 +31,7 @@
                         <td class=""
                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #38414a; margin: 0; padding: 20px;"
                             align="center" bgcolor="#0047ab" valign="top">
-                            <a href="#"> <img src="{{asset('assets/backend/images/logo.png')}}" height="24" alt="logo"/></a> <br/>
+                            <a href="#"> <img src="{{asset(config('app.logo'))}}" height="24" alt="logo"/></a> <br/>
                         </td>
                     </tr>
                     <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

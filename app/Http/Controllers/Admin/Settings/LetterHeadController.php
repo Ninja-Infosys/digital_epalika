@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
@@ -11,7 +12,7 @@ class LetterHeadController extends Controller
 {
     public function index()
     {
-        return view('admin.setting.letter_head.create');
+        return view('admin.global.letter_head.create');
     }
 
     public function store(Request $request)

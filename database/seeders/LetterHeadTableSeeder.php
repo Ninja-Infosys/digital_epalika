@@ -13,9 +13,9 @@ class LetterHeadTableSeeder extends Seeder
         LetterHead::truncate();
 
         LetterHead::create([
-            'header'=>(string)View::make('admin.setting.letter_head.default_header'),
-            'header_en'=>(string)View::make('admin.setting.letter_head.default_header'),
-            'letter_head'=>(string)View::make('admin.setting.letter_head.default_letter_head'),
+            'header'=>(string)View::make('admin.global.letter_head.default_header'),
+            'header_en'=>(string)View::make('admin.global.letter_head.default_header'),
+            'letter_head'=>(string)View::make('admin.global.letter_head.default_letter_head'),
         ]);
     }
 }

@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.taskManagement.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">समस्थिगत क्रियाकलाप रिपोर्ट</li>
@@ -21,9 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">समस्थिगत क्रियाकलाप रिपोर्ट</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form" data-bs-url="{{ route('admin.taskManagement.report.report-data') }}">
                             <div class="row">
@@ -61,11 +61,11 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @if(checkSuperAdmin())
+                                @if (checkSuperAdmin())
                                     <div class="col-md-7 mb-2">
                                         <label for="branch_id">शाखा</label>
                                         <select name="branch_id[]" multiple data-toggle="select2" id="branch_id"
-                                                class="form-control">
+                                            class="form-control">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach ($branches as $branch)
                                                 <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
@@ -83,7 +83,7 @@
                                     <div class="col-md-5 mb-2">
                                         <label for="user_id">कर्मचारी</label>
                                         <select name="user_id[]" multiple data-toggle="select2" id="user_id"
-                                                class="form-control">
+                                            class="form-control">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach ($users as $user)
                                                 <option value="{{ $user->id }}">

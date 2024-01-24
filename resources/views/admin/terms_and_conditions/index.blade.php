@@ -8,7 +8,7 @@
         content="A complete solution for digital palika."
         name="description"
     />
-    <meta content="NINJA INFOSYS" name="author"/>
+    <meta content="Digital ePalika" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
@@ -41,14 +41,14 @@
                             <div class="auth-logo">
                                 <a href="{{route('login')}}" class="logo logo-dark text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                                                <img src="{{asset(config('app.logo'))}}" alt=""
                                                      height="42">
                                             </span>
                                 </a>
 
                                 <a href="{{route('login')}}" class="logo logo-light text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                                                <img src="{{asset(config('app.logo'))}}" alt=""
                                                      height="42">
                                             </span>
                                 </a>

@@ -1,11 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://cdn.linearicons.com/free/1.0.0/icon-font.min.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&display=swap');
+
 // Font Family
-$body-font: 'Poppins', sans-serif;
-$heading-font: 'Poppins', sans-serif;;
+$body-font: 'Mukta', sans-serif;
+$heading-font: 'Mukta', sans-serif;;
 
 $fontawesome: 'FontAwesome';
 //  Font Sizes
-$primary-font-size: 12px;
+$primary-font-size: 15px;
 $primary-heading-title-font-size: 26px;
 $primary-body-title-font-size: 18px;
 $body-font-size: 16px;
@@ -15,8 +18,8 @@ $amount-font-size: 20px;
 // font-weight-veriable 
 $font-heavy: 800; 
 $font-bold: 700; 
-$font-medium: 500; 
-$font-light: 400; 
+$font-medium: 600; 
+$font-light: 600; 
 $font-extra-light: 300; 
 
 // Colors ---------------
@@ -33,11 +36,11 @@ $body-color: #303030    ;
 $body-light: #DEDEDE;
 
 // Template Colors
-$primary: #2F4EA2;
+$primary: #003893;
 $secondary: #ED1C24;
 $tertiary: #202f63;
 $color-fourth: #BAD7FF;
-
+$form-border-color: #c6c6c6;
 $success: #34C38F;
 $danger: #ED1C24;
 $warning: #FFC107;

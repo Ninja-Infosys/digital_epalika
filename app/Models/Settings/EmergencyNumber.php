@@ -23,11 +23,24 @@ class EmergencyNumber extends Model
     protected $fillable = [
         'title',
         'contact_no',
-        'emergency_category_id'
+        'emergency_category_id',
+        'latitude',
+        'longitude',
+        'contact_person_name',
+        'address',
     ];
 
     public function emergencyCategory(): BelongsTo
     {
         return $this->belongsTo(EmergencyCategory::class);
+    }
+
+    public function getGoogleMapsUrlAttribute(): string
+    {
+        $latitude = (float)$this->attributes['latitude'] ?? 0;
+        $longitude = (float)$this->attributes['longitude'] ?? 0;
+
+        // Build Google Maps URL
+        return "https://www.google.com/maps?q={$latitude},{$longitude}";
     }
 }

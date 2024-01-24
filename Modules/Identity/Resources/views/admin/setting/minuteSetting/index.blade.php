@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> माईनिउट टेम्पलेट</li>
@@ -21,21 +21,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">माईनिउट टेम्पलेट</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('identity.admin.setting.minuteTemplateSetting.store') }}" method="post">
                         @csrf
                         <div class="row">
-                            @if($minuteTemplateSetting)
+                            @if ($minuteTemplateSetting)
                                 <div class="col-md-12 mb-2">
                                     <h4 class="form-label">स्थिति</h4>
                                     <a href="{{ route('identity.admin.setting.minuteTemplateSetting.updateStatus', $minuteTemplateSetting ?? '') }}"
-                                       class="btn btn-xs btn-outline-{{ !empty($minuteTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
+                                        class="btn btn-xs btn-outline-{{ !empty($minuteTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
                                         <i
                                             class="fa {{ !empty($minuteTemplateSetting->status) == 1 ? 'fa-check' : 'fa-times' }}"></i>
                                     </a>

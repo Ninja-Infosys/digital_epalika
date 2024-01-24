@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.plan.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -25,8 +25,8 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
+            <div class="card p-0">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="header-title">
                         {{ $project->project_name }}को प्राविधिक लागत अनुमान
                     </h4>
@@ -34,8 +34,8 @@
                         <i class="fa fa-list"></i> योजना/कार्यक्रमहरू
                     </a>
                 </div>
-                <div class="card-body">
-                    @livewire('plan::technical-cost-estimate-livewire',['project'=>$project])
+                <div class="card-body px-0">
+                    @livewire('plan::technical-cost-estimate-livewire', ['project' => $project])
 
                 </div>
             </div>

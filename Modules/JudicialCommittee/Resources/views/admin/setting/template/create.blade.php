@@ -26,9 +26,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
                         <a href="{{ route('admin.judicialCommittee.setting.judicialCommitteeTemplate.index') }}"
                             class="btn btn-sm btn-outline-primary">
@@ -36,7 +36,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('admin.judicialCommittee.setting.judicialCommitteeTemplate.store') }}"
                         method="post">
                         @csrf
@@ -55,7 +55,8 @@
                                 <select name="type" id="type" class="form-select">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach (\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::cases() as $type)
-                                        <option {{ old('type') == $type->value ? 'selected' : '' }} value="{{ $type->value }}">
+                                        <option {{ old('type') == $type->value ? 'selected' : '' }}
+                                            value="{{ $type->value }}">
                                             {{ $type->label() }}
                                         </option>
                                     @endforeach

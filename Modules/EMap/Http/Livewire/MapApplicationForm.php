@@ -20,8 +20,7 @@ use Modules\EMap\Entities\StructureType;
 class MapApplicationForm extends Component
 {
     use WithFileUploads;
-    public $latitude;
-    public $longitude;
+
 
     public $structureTypes = [];
     public $landUseAreas = [];
@@ -52,33 +51,26 @@ class MapApplicationForm extends Component
     public array $applyMap = [
         'application_type' => null,
         'construction_type' => null,
-        'usage' => null,
-        'building_category' => null,
-        'structure_type_id' => null,
-        'structure_type' => null,
         'current_storey' => null,
-        'area_of_plinth' => null,
         'future_storey' => null,
-        'length' => null,
-        'breadth' => null,
-        'height' => null,
         'storeyDetails' => [],
         'consultant_signature' => null,
         'consultant_name' => null,
         'consultant_mobile_no' => null,
         'consultant_nec_no' => null,
         'organization_id' => null,
+        'latitude' => null,
+        'longitude' => null,
     ];
 
     public array $landDescription = [
-        'land_use_area_id' => null,
+
         'ward_no' => null,
         'former_ward_no' => null,
         'tole' => null,
-        'street_code_no' => null,
         'plot_no' => null,
         'unit_value' => 0,
-        'percentage_of_area_covered_by_building' => null,
+
     ];
 
     public array $landOwner = [
@@ -141,29 +133,22 @@ class MapApplicationForm extends Component
         $this->allDistricts = get_districts();
     }
 
-    protected $listeners = ['locationClicked' => 'updateLocation'];
 
-    public function updateLocation($location)
-    {
-        $this->latitude = $location['latitude'];
-        $this->longitude = $location['longitude'];
-        // dd($this->latitude, $this->longitude);
 
-        // You can perform any other actions you need with these values.
-    }
 
-    public function addStoreyDetail(): void
-    {
-        if (count($this->applyMap['storeyDetails']) < $this->applyMap['current_storey']) {
-            $this->applyMap['storeyDetails'][] = [];
-        }
-    }
 
-    public function removeStoreyDetail($index): void
-    {
-        unset($this->applyMap['storeyDetails'][$index]);
-        $this->applyMap['storeyDetails'] = array_values($this->applyMap['storeyDetails']);
-    }
+    // public function addStoreyDetail(): void
+    // {
+    //     if (count($this->applyMap['storeyDetails']) < $this->applyMap['current_storey']) {
+    //         $this->applyMap['storeyDetails'][] = [];
+    //     }
+    // }
+
+    // public function removeStoreyDetail($index): void
+    // {
+    //     unset($this->applyMap['storeyDetails'][$index]);
+    //     $this->applyMap['storeyDetails'] = array_values($this->applyMap['storeyDetails']);
+    // }
 
     public function setStructureType(): void
     {
@@ -174,33 +159,23 @@ class MapApplicationForm extends Component
         'applyMap.application_type' => ['required'],
         'applyMap.organization_id' => ['required'],
         'applyMap.construction_type' => ['required'],
-        'applyMap.usage' => ['required'],
-        'applyMap.building_category' => ['required'],
-        'applyMap.structure_type_id' => ['nullable', 'exists:structure_types,id'],
-        'applyMap.structure_type' => ['nullable'],
         'applyMap.current_storey' => ['required', 'numeric'],
-        'applyMap.area_of_plinth' => ['required', 'numeric'],
         'applyMap.future_storey' => ['required', 'numeric'],
-        'applyMap.length' => ['required', 'numeric'],
-        'applyMap.breadth' => ['required', 'numeric'],
-        'applyMap.height' => ['required', 'numeric'],
-        'applyMap.storeyDetails' => ['nullable', 'array'],
-        'applyMap.storeyDetails.*.map_fee_id' => ['required', 'exists:map_fees,id'],
-        'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required', 'numeric'],
-        'applyMap.storeyDetails.*.area_of_former_construction' => ['nullable', 'numeric'],
-        'applyMap.storeyDetails.*.total_area' => ['required', 'numeric'],
-        'applyMap.storeyDetails.*.height' => ['required', 'numeric'],
+        // 'applyMap.storeyDetails' => ['nullable', 'array'],
+        // 'applyMap.storeyDetails.*.map_fee_id' => ['required', 'exists:map_fees,id'],
+        // 'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required', 'numeric'],
+        // 'applyMap.storeyDetails.*.area_of_former_construction' => ['nullable', 'numeric'],
+        // 'applyMap.storeyDetails.*.total_area' => ['required', 'numeric'],
+        // 'applyMap.storeyDetails.*.height' => ['required', 'numeric'],
     ];
 
     protected array $landDescriptionValidations = [
-        'landDescription.land_use_area_id' => ['required', 'numeric', 'exists:land_use_areas,id'],
         'landDescription.ward_no' => ['required', 'integer'],
         'landDescription.former_ward_no' => ['nullable', 'integer'],
         'landDescription.tole' => ['nullable'],
-        'landDescription.street_code_no' => ['nullable'],
         'landDescription.plot_no' => ['required'],
         'landDescription.unit_value' => ['nullable'],
-        'landDescription.percentage_of_area_covered_by_building' => ['required', 'numeric'],
+
     ];
 
     protected array $landOwnerValidations = [
@@ -263,25 +238,20 @@ class MapApplicationForm extends Component
     {
         $this->validate();
         $data = DB::transaction(function () {
-            if ($this->applyMap['structure_type']) {
-                $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
 
-                $this->applyMap['structure_type_id'] = $structure_type->id ?? '';
-            }
 
             $mapApply = MapApply::create($this->applyMap + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-                    'latitude' => $this->latitude,
-                    'longitude' => $this->longitude
-                ]);
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                'sent_to_organization' => 'pending'
+            ]);
 
-            foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
-                $mapApply->storeyDetails()->create($storeyDetail);
-            }
+            // foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
+            //     $mapApply->storeyDetails()->create($storeyDetail);
+            // }
 
             $mapApply->landDetail()->create($this->landDescription + [
-                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
-                ]);
+                'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
+            ]);
 
             $mapApply->houseOwner()->create($this->houseOwner);
 
@@ -309,8 +279,6 @@ class MapApplicationForm extends Component
         return [
             'applyMap.application_type.required' => 'अनिवार्य छ',
             'applyMap.construction_type.required' => 'निर्माण कार्यको किसिम अनिवार्य छ |',
-            'applyMap.usage.required' => 'प्रयोजन अनिवार्य छ |',
-            'applyMap.building_category.required' => ' भवनको वर्गीकरण अनिवार्य छ|',
             'applyMap.current_storey.required' => 'तल्ला संख्या अनिवार्य छ|',
             'applyMap.current_storey.numeric' => 'तल्ला संख्या नम्बरमा हुनुपर्छ|',
             'applyMap.area_of_plinth.required' => 'क्षेत्रफल अनिवार्य छ|',

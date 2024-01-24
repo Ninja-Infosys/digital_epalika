@@ -33,7 +33,8 @@ class MapFeeController extends Controller
         $this->checkAuthorization('mapFee_create');
 
         MapFee::create($request->validated() + [
-            'unit_id' => MapSetting::first()->land_measurement_standard_id,
+            'unit_id' => MapSetting::first()
+            ->land_measurement_standard_id,
         ]);
 
         toast('नक्सा शुल्क सफलतापूर्वक थपियो', 'success');

@@ -25,8 +25,8 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card rounded-3">
-                <div class="">
+            <div class="card p-0">
+                <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
                         @can('eMapTemplate_create')
@@ -37,7 +37,7 @@
 
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>

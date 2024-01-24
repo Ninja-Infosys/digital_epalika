@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Setting\RelationshipController;
+use App\Http\Controllers\Admin\Global\RelationshipController;
 use Illuminate\Support\Facades\Route;
 use Modules\Identity\Http\Controllers\CardColorController;
 use Modules\Identity\Http\Controllers\DashboardController;

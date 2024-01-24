@@ -1,13 +1,13 @@
 <li class="{{request()->is('admin/circular/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.circular.dashboard')}}">
-        <i class="fa fa-home"></i>
+        <i class="lnr lnr-home"></i>
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
 @can('registration_access')
     <li class="{{request()->is('admin/circular/registration*') ? 'active' : ''}}">
         <a href="{{route('admin.circular.registration.index')}}">
-            <i class="fa fa-file-alt"></i>
+            <i class="lnr lnr-plus-circle"></i>
             <span> दर्ता</span>
         </a>
     </li>
@@ -15,7 +15,7 @@
 @can('dispatch_access')
     <li class="{{request()->is('admin/circular/dispatch*') ? 'active' : ''}}">
         <a href="{{route('admin.circular.dispatch.index')}}">
-            <i class="fa fa-file-alt"></i>
+            <i class="lnr lnr-file-add"></i>
             <span> चलानी</span>
         </a>
     </li>
@@ -24,7 +24,7 @@
     <a href="#sidebarCircularReport"
        {{request()->is('admin/circular/report/*') ? 'aria-expanded=true  ' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-clipboard-list"></i>
+        <i class="lnr lnr-chart-bars"></i>
         <span>रिपोर्ट</span>
         <span class="menu-arrow">
                         <i class="fa fa-angle-right"></i>
@@ -53,7 +53,7 @@
 @can('registration_access')
     <li class="{{request()->is('admin/circular/registration*') ? 'active' : ''}}">
         <a href="{{route('admin.circular.circularSetting.index')}}">
-            <i class="fa fa-cogs"></i>
+            <i class="lnr lnr-cog"></i>
             <span> सेटिङ</span>
         </a>
     </li>
@@ -62,7 +62,7 @@
     <a href="#sidebarCircularFile"
        {{request()->is('admin/circular/files/*') ? 'aria-expanded=true  ' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-file-archive"></i>
+        <i class="lnr lnr-layers"></i>
         <span>फाईल व्यवस्थापन</span>
         <span class="menu-arrow">
                         <i class="fa fa-angle-right"></i>

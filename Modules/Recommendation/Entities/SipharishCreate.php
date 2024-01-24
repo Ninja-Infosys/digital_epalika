@@ -2,6 +2,7 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\MobileUser;
 use App\Models\User;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -35,12 +37,19 @@ class SipharishCreate extends Model
         'approved_date',
         'approved_status',
         'created_by',
-        'status'
+        'status',
+        'file',
+        'mobile_user_id'
     ];
     protected $casts = [
         'status' => 'boolean',
     ];
 
+
+    public function mobileUser(): BelongsTo
+    {
+        return $this->belongsTo(MobileUser::class);
+    }
 
     public function signaturedBy(): BelongsTo
     {
@@ -108,5 +117,17 @@ class SipharishCreate extends Model
     public function signature()
     {
         return $this->belongsTo(SipharisSignatureDetail::class, 'sipharis_signature_id');
+    }
+
+    public function setFileAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['file'] = $value->store('sipharish/', 'public');
+        }
+    }
+
+    public function getFileUrlAttribute(): string
+    {
+        return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : asset('images/user_icon.jpg');
     }
 }

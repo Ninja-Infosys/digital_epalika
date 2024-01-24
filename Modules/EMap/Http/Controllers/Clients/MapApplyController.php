@@ -76,7 +76,7 @@ class MapApplyController extends Controller
 
     public function formDetail(MapApply $mapApply, Form $form)
     {
-        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses', 'formDataTypes.paymentStores.paymentStoreStatuses');
         return view('emap::organization.attach-document.create', compact('mapApply', 'form'));
     }
 

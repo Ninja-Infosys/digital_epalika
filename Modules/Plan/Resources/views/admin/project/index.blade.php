@@ -23,8 +23,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="collapse mb-2" id="collapseFilterForm">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card p-0">
+                    <div class="card-body px-0">
                         <form>
                             <div class="row">
                                 <div class="col-md-3 mb-2">
@@ -79,8 +79,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
+            <div class="card p-0">
+                <div class="card-header search-card">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">योजना/कार्यक्रमहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
@@ -98,8 +98,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <table id="demo-foo-accordion" class="table table-bordered mb-0 toggle-arrow-tiny">
+                <div class="card-body px-0">
+                    <table id="demo-foo-accordion" class="table table-custom toggle-arrow-tiny">
                         <thead>
                             <tr>
                                 <th data-toggle="true">क्र.स</th>
@@ -208,8 +208,15 @@
                                 <i class="fa fa-eye"></i></a>
                             <a href="{{ route('admin.plan.project.edit', $project) }}" title=" सम्पादन गर्नुहोस्"
                                 class="btn btn-xs btn-outline-warning">
-                                <i class="fa fa-edit"></i></a>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                </svg>
                         </td>
+                        </tr>
+                        <tr class="empty">
+                            <td></td>
                         </tr>
                     @empty
                         <tr>

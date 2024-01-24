@@ -1,4 +1,5 @@
 <form wire:submit.prevent="submitFormData">
+  
     <div class="row mb-2">
         <div class="col-md-12">
             <fieldset class="mb-2">
@@ -48,58 +49,90 @@
                     <legend>
                         <h4 class="text-info">वादीको विवरण</h4>
                     </legend>
+                    <div class="col-md-3 mb-2">
+                        <label for="complainants.{{ $key }}.complain_type" class="form-label">वादीको प्रकार
+                            छान्नुहोस्<span class="text-danger">*</span></label>
+                        <select wire:model="form.complainants.{{ $key }}.complain_type" class="form-select"
+                            id="complainants.{{ $key }}.complain_type" required>
+                            <option value="">--छान्नुहोस्--</option>
+                            @foreach (Modules\JudicialCommittee\Enums\ComplainTypeEnum::cases() as $complainTypeEnum)
+                                <option value="{{ $complainTypeEnum->value }}">{{ $complainTypeEnum->label() }}</option>
+                            @endforeach
+                        </select>
+                        @error('form.complainants.*.complain_type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <label for="complainants.{{ $key }}.name" class="form-label">वादी को नाम <span
-                                    class="text-danger">*</span></label>
+                            {{-- <label for="complainants.{{ $key }}.name"
+                                class="form-label">{{ $form['complainants'][$key]['complain_type'] ?? null &&
+                                $form['complainants'][$key]['complain_type'] == 'organizational' ? 'संस्थागत' : 'वादी' }}को
+                                नाम<span class="text-danger">*</span></label> --}}
+
+                                <label for="complainants.{{ $key }}.name" class="form-label">
+                                    @if(isset($form['complainants'][$key]['complain_type']) && $form['complainants'][$key]['complain_type'] == 'organizational')
+                                        संस्थाको नाम
+                                    @else
+                                        वादीको नाम
+                                    @endif
+                                    <span class="text-danger">*</span>
+                                </label>
                             <input type="text" wire:model="form.complainants.{{ $key }}.name"
                                 class="form-control" id="complainants.{{ $key }}.name"
-                                placeholder="वादी को नाम" required />
+                                placeholder="नाम" required />
                             @error("form.complainants.$key.name")
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="complainants.{{ $key }}.age" class="form-label">उमेर <span
-                                    class="text-danger">*</span></label>
-                            <input type="number" wire:model="form.complainants.{{ $key }}.age"
-                                class="form-control" id="complainants.{{ $key }}.age" placeholder="उमेर"
-                                required />
-                            @error("form.complainants.$key.age")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label for="complainants.{{ $key }}.father_name" class="form-label">बुवाको नाम
-                                <span class="text-danger">*</span></label>
-                            <input type="text" wire:model="form.complainants.{{ $key }}.father_name"
-                                class="form-control" id="complainants.{{ $key }}.father_name"
-                                placeholder="बुवाको नाम" required />
-                            @error("form.complainants.$key.father_name")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="complainants.{{ $key }}.grandfather_name"
-                                class="form-label">हजुरबुबाको नाम</label>
-                            <input type="text" wire:model="form.complainants.{{ $key }}.grandfather_name"
-                                class="form-control" id="complainants.{{ $key }}.grandfather_name"
-                                placeholder="हजुरबुबाको नाम" />
-                            @error("form.complainants.$key.grandfather_name")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="complainants.{{ $key }}.spouse_name" class="form-label">पति/पत्नीको
-                                नाम </label>
-                            <input type="text" wire:model="form.complainants.{{ $key }}.spouse_name"
-                                class="form-control" id="complainants.{{ $key }}.spouse_name"
-                                placeholder="पति/पत्नीको नाम" />
-                            @error("form.complainants.$key.spouse_name")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @if (($form['complainants'][$key]['complain_type'] ?? null) &&
+                                $form['complainants'][$key]['complain_type'] != 'organizational')
+                            <div class="col-md-2 mb-2">
+                                <label for="complainants.{{ $key }}.age" class="form-label">उमेर <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" wire:model="form.complainants.{{ $key }}.age"
+                                    class="form-control" id="complainants.{{ $key }}.age" placeholder="उमेर"
+                                    required />
+                                @error("form.complainants.$key.age")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="complainants.{{ $key }}.father_name" class="form-label">बुवाको नाम
+                                    <span class="text-danger">*</span></label>
+                                <input type="text" wire:model="form.complainants.{{ $key }}.father_name"
+                                    class="form-control" id="complainants.{{ $key }}.father_name"
+                                    placeholder="बुवाको नाम" required />
+                                @error("form.complainants.$key.father_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <label for="complainants.{{ $key }}.grandfather_name"
+                                    class="form-label">हजुरबुबाको नाम</label>
+                                <input type="text"
+                                    wire:model="form.complainants.{{ $key }}.grandfather_name"
+                                    class="form-control" id="complainants.{{ $key }}.grandfather_name"
+                                    placeholder="हजुरबुबाको नाम" />
+                                @error("form.complainants.$key.grandfather_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <label for="complainants.{{ $key }}.spouse_name"
+                                    class="form-label">पति/पत्नीको
+                                    नाम </label>
+                                <input type="text" wire:model="form.complainants.{{ $key }}.spouse_name"
+                                    class="form-control" id="complainants.{{ $key }}.spouse_name"
+                                    placeholder="पति/पत्नीको नाम" />
+                                @error("form.complainants.$key.spouse_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        @endif
                     </div>
+
                     <fieldset class="mb-2">
                         <legend>
                             <h5 class="text-info">ठेगाना</h5>
@@ -195,56 +228,85 @@
                     <legend>
                         <h4 class="text-info">प्रतिवादीको विवरण</h4>
                     </legend>
+
+                    <div class="col-md-3 mb-2">
+                        <label for="defendants.{{ $key }}.complain_type" class="form-label">प्रतिवादीको
+                            प्रकार छान्नुहोस्<span class="text-danger">*</span></label>
+                        <select wire:model="form.defendants.{{ $key }}.complain_type" class="form-select"
+                            id="defendants.{{ $key }}.complain_type" required>
+                            <option value="">--छान्नुहोस्--</option>
+                            @foreach (Modules\JudicialCommittee\Enums\ComplainTypeEnum::cases() as $complainTypeEnum)
+                                <option value="{{ $complainTypeEnum->value }}">{{ $complainTypeEnum->label() }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('form.defendants.*.complain_type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <label for="defendants.{{ $key }}.name" class="form-label">प्रतिवादी को नाम
-                                <span class="text-danger">*</span></label>
+                            <label for="defendants.{{ $key }}.name" class="form-label">
+                                @if(isset($form['defendants'][$key]['complain_type']) && $form['defendants'][$key]['complain_type'] == 'organizational')
+                                    संस्थाको नाम
+                                @else
+                                    प्रतिवादीको नाम
+                                @endif
+                                <span class="text-danger">*</span>
+                            </label>
                             <input type="text" wire:model="form.defendants.{{ $key }}.name"
                                 class="form-control" id="defendants.{{ $key }}.name"
-                                placeholder="प्रतिवादी को नाम" required />
+                                placeholder="नाम" required />
                             @error("form.defendants.$key.name")
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="defendants.{{ $key }}.age" class="form-label">उमेर <span
-                                    class="text-danger">*</span></label>
-                            <input type="number" wire:model="form.defendants.{{ $key }}.age"
-                                class="form-control" id="defendants.{{ $key }}.age" placeholder="उमेर" />
-                            @error("form.defendants.$key.age")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label for="defendants.{{ $key }}.father_name" class="form-label">बुवाको नाम
-                                <span class="text-danger">*</span></label>
-                            <input type="text" wire:model="form.defendants.{{ $key }}.father_name"
-                                class="form-control" id="defendants.{{ $key }}.father_name"
-                                placeholder="बुवाको नाम" />
-                            @error("form.defendants.$key.father_name")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="defendants.{{ $key }}.grandfather_name"
-                                class="form-label">हजुरबुबाको नाम</label>
-                            <input type="text" wire:model="form.defendants.{{ $key }}.grandfather_name"
-                                class="form-control" id="defendants.{{ $key }}.grandfather_name"
-                                placeholder="हजुरबुबाको नाम" />
-                            @error("form.defendants.$key.grandfather_name")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="defendants.{{ $key }}.spouse_name" class="form-label">पति/पत्नीको
-                                नाम </label>
-                            <input type="text" wire:model="form.defendants.{{ $key }}.spouse_name"
-                                class="form-control" id="defendants.{{ $key }}.spouse_name"
-                                placeholder="पति/पत्नीको नाम" />
-                            @error("form.defendants.$key.spouse_name")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @if (($form['defendants'][$key]['complain_type'] ?? null) &&
+                                $form['defendants'][$key]['complain_type'] != 'organizational')
+                            <div class="col-md-2 mb-2">
+                                <label for="defendants.{{ $key }}.age" class="form-label">उमेर <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" wire:model="form.defendants.{{ $key }}.age"
+                                    class="form-control" id="defendants.{{ $key }}.age"
+                                    placeholder="उमेर" />
+                                @error("form.defendants.$key.age")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="defendants.{{ $key }}.father_name" class="form-label">बुवाको नाम
+                                    <span class="text-danger">*</span></label>
+                                <input type="text" wire:model="form.defendants.{{ $key }}.father_name"
+                                    class="form-control" id="defendants.{{ $key }}.father_name"
+                                    placeholder="बुवाको नाम" />
+                                @error("form.defendants.$key.father_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <label for="defendants.{{ $key }}.grandfather_name"
+                                    class="form-label">हजुरबुबाको नाम</label>
+                                <input type="text"
+                                    wire:model="form.defendants.{{ $key }}.grandfather_name"
+                                    class="form-control" id="defendants.{{ $key }}.grandfather_name"
+                                    placeholder="हजुरबुबाको नाम" />
+                                @error("form.defendants.$key.grandfather_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <label for="defendants.{{ $key }}.spouse_name"
+                                    class="form-label">पति/पत्नीको
+                                    नाम </label>
+                                <input type="text" wire:model="form.defendants.{{ $key }}.spouse_name"
+                                    class="form-control" id="defendants.{{ $key }}.spouse_name"
+                                    placeholder="पति/पत्नीको नाम" />
+                                @error("form.defendants.$key.spouse_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        @endif
                     </div>
                     <fieldset class="mb-2">
                         <legend>

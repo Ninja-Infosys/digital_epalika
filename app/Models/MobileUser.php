@@ -12,6 +12,8 @@ use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\Recommendation\Entities\SipharishCreate;
+use Modules\Roaster\Entities\Trainee;
 
 class MobileUser extends Authenticatable
 {
@@ -89,5 +91,14 @@ class MobileUser extends Authenticatable
     public function complaintRegistrations(): HasMany
     {
         return $this->hasMany(ComplaintApplication::class);
+    }
+
+    public function trainees(): HasMany
+    {
+        return $this->hasMany(Trainee::class);
+    }
+    public function sipharishCreates(): HasMany
+    {
+        return $this->hasMany(SipharishCreate::class);
     }
 }

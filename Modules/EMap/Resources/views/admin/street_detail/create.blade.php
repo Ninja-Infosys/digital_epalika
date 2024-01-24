@@ -26,16 +26,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">सडक विवरण थप्नुहोस्</h4>
                         <a href="{{ route('emap.admin.streetDetail.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सडक विवरण सूची
                         </a>
                     </div>
                 </div>
-
+            </div>
+            <div class="card-body px-0">
                 <form action="{{ route('emap.admin.streetDetail.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -165,7 +166,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 
     @push('style')
         <link rel="stylesheet" href="{{ asset('assets/backend/css/leaflet/leaflet.css') }}" />

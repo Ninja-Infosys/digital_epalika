@@ -61,6 +61,12 @@ class TraineeUserLivewire extends Component
         'year' => null,
     ];
 
+    public array $muncipalRegistration = [
+        'palika_reg_no' => null,
+        'reg_date' => null,
+        'file' => null
+    ];
+
     protected array $firstStepValidations = [
         'organizationDetail.org_name_ne' => ['required'],
         'organizationDetail.org_name_en' => ['required'],
@@ -81,6 +87,9 @@ class TraineeUserLivewire extends Component
         'organizationDetail.logo' => ['required', 'image', 'max:200'],
         'taxClearance.document' => ['required', 'max:300'],
         'taxClearance.year' => ['required'],
+        'muncipalRegistration.palika_reg_no' => ['required'],
+        'muncipalRegistration.reg_date' => ['required'],
+        'muncipalRegistration.file' => ['required', 'file'],
     ];
 
     protected array $thirdStepValidations = [
@@ -129,7 +138,7 @@ class TraineeUserLivewire extends Component
             $DbUser = TraineeUser::create($this->user);
             $DbOrgDetail = $DbUser->traineeUserDetail()->create($this->organizationDetail);
             $DbOrgDetail->traineeTaxClearances()->create($this->taxClearance);
-
+            $DbOrgDetail->muncipalRegistrations()->create($this->muncipalRegistration);
             $this->resetForm();
         });
         $this->dispatchBrowserEvent('alert_message', [
@@ -141,7 +150,7 @@ class TraineeUserLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'progressPercentage');
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'progressPercentage', 'muncipalRegistration');
     }
 
     public function checkOrganizationAddress(): void

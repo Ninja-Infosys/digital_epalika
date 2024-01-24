@@ -18,6 +18,19 @@ use Modules\Plan\Http\Controllers\Admin\Setting\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
+use Modules\Plan\Http\Controllers\CargoHandlingController;
+use Modules\Plan\Http\Controllers\CrewRateController;
+use Modules\Plan\Http\Controllers\EquipmentAdditionalCostController;
+use Modules\Plan\Http\Controllers\EquipmentController;
+use Modules\Plan\Http\Controllers\FuelController;
+use Modules\Plan\Http\Controllers\FuelDemandController;
+use Modules\Plan\Http\Controllers\FuelRateController;
+use Modules\Plan\Http\Controllers\LabourController;
+use Modules\Plan\Http\Controllers\LabourRateController;
+use Modules\Plan\Http\Controllers\MaterialCollectionController;
+use Modules\Plan\Http\Controllers\MaterialController;
+use Modules\Plan\Http\Controllers\MaterialRateController;
+use Modules\Plan\Http\Controllers\MaterialTypeController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
@@ -25,8 +38,8 @@ Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('da
 Route::get('project/{project}/file-list', [ProjectController::class, 'fileList'])->name('project.fileList');
 Route::get('project{project}/upload-file', [ProjectController::class, 'uploadFilePage'])->name('project.uploadFilePage');
 Route::post('project/{project}/upload-file', [ProjectController::class, 'uploadFile'])->name('project.uploadFile');
-Route::get('project/{project}/{planTemplateTypeEnum}/print', [ProjectController::class,'print'])->name('project.print');
-Route::get('project/{project}/planTemplate/{planTemplate}', [ProjectController::class,'templateData'])->name('project.templateData');
+Route::get('project/{project}/{planTemplateTypeEnum}/print', [ProjectController::class, 'print'])->name('project.print');
+Route::get('project/{project}/planTemplate/{planTemplate}', [ProjectController::class, 'templateData'])->name('project.templateData');
 Route::resource('project', ProjectController::class);
 Route::resource('project/{project}/projectCostDetail', ProjectCostDetailController::class)->names('project.projectCostDetail')->only('index');
 Route::resource('project/{project}/projectDocument', ProjectDocumentController::class)->names('project.projectDocument');
@@ -51,6 +64,26 @@ Route::prefix('setting')->group(function () {
     Route::resource('{type}/budgetHead', BudgetHeadController::class)->except('show');
     Route::resource('planTemplate', PlanTemplateController::class);
     Route::resource('expenseHead', ExpenseHeadController::class);
+});
+
+Route::prefix('estimateSetting')->group(function () {
+    Route::resource('labour', LabourController::class);
+    Route::resource('labourRate', LabourRateController::class);
+    Route::resource('fuel', FuelController::class);
+    Route::resource('fuelRate', FuelRateController::class);
+    Route::resource('equipment', EquipmentController::class);
+    Route::get('equipmentAdditionalCost/create', [EquipmentAdditionalCostController::class, 'create'])->name('equipmentAdditionalCost.create');
+    Route::get('equipmentAdditionalCost', [EquipmentAdditionalCostController::class, 'index'])->name('equipmentAdditionalCost.index');
+    Route::get('equipment/{equipment}', [EquipmentAdditionalCostController::class, 'edit'])->name('equipmentAdditionalCost.edit');
+    Route::delete('equipment/{equipment}/delete', [EquipmentAdditionalCostController::class, 'destroy'])->name('equipmentAdditionalCost.delete');
+
+    Route::resource('fuelDemand', FuelDemandController::class);
+    Route::resource('crewRate', CrewRateController::class);
+    Route::resource('materialType', MaterialTypeController::class);
+    Route::resource('material', MaterialController::class);
+    Route::resource('materialRate', MaterialRateController::class);
+    Route::resource('materialCollection', MaterialCollectionController::class);
+    Route::resource('cargoHandling', CargoHandlingController::class);
 });
 
 //report

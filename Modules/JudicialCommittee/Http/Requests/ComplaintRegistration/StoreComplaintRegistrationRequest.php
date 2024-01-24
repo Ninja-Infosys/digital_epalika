@@ -24,12 +24,12 @@ class StoreComplaintRegistrationRequest extends FormRequest
             'applicant_address' => ['nullable'],
             'applicant_signature' => ['nullable'],
             'application_status' => ['nullable'],
-
             'complaint_subject_id' => ['required', Rule::exists('complaint_subjects', 'id')->withoutTrashed()],
             'complainantDefendents' => ['required', 'array'],
+            'complainantDefendents.*.complain_type' => ['required', 'string', 'max:255'],
             'complainantDefendents.*.name' => ['required', 'string', 'max:255'],
-            'complainantDefendents.*.age' => ['required', 'integer'],
-            'complainantDefendents.*.father_name' => ['required', 'string', 'max:255'],
+            'complainantDefendents.*.age' => ['nullable', 'integer'],
+            'complainantDefendents.*.father_name' => ['nullable', 'string', 'max:255'],
             'complainantDefendents.*.grandfather_name' => ['nullable', 'string', 'max:255'],
             'complainantDefendents.*.spouse_name' => ['nullable', 'string', 'max:255'],
             'complainantDefendents.*.province_id' => ['nullable', 'exists:provinces,id'],
@@ -37,6 +37,7 @@ class StoreComplaintRegistrationRequest extends FormRequest
             'complainantDefendents.*.local_body_id' => ['nullable', 'exists:local_bodies,id'],
             'complainantDefendents.*.ward_no' => ['required', 'integer'],
             'complainantDefendents.*.tole' => ['nullable'],
+            
             'relatedMembers' => ['nullable', 'array'],
             'relatedMembers.*.name' => ['nullable'],
             'relatedMembers.*.phone' => ['nullable'],

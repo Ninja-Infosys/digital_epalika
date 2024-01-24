@@ -1,9 +1,9 @@
 <form wire:submit.prevent="saveFormData">
     <div class="row mb-3">
         <div class="col-md-3">
-            <label for="organization_id" class="form-label fw-bolder">संस्था <span class="text-danger">*</span></label>
+            {{-- <label for="organization_id" class="form-label fw-bolder">संस्था <span class="text-danger">*</span></label> --}}
             <select wire:model="applyMap.organization_id" id="organization_id" name="organization_id"
-                class="form-select form-select-sm" required>
+                class="form-select form-select-sm form-control-lg" required>
                 <option value="">--- संस्था छान्नुहोस् ---</option>
                 @foreach ($organizations as $organization)
                     <option value="{{ $organization->id }}">
@@ -16,9 +16,9 @@
             @enderror
         </div>
         <div class="col-md-3">
-            <label for="application_type" class="form-label fw-bolder"> नक्सा <span class="text-danger">*</span></label>
+            {{-- <label for="application_type" class="form-label fw-bolder"> नक्सा <span class="text-danger">*</span></label> --}}
             <select wire:model="applyMap.application_type" id="organization_id" name="application_type"
-                class="form-select form-select-sm" required>
+                class="form-select form-select-sm form-control-lg" required>
                 <option value="">--- नक्सा छान्नुहोस् ---</option>
                 @foreach (\Modules\EMap\Enums\ApplicationFormTypeEnum::cases() as $applicationFormTypeEnum)
                     <option value="{{ $applicationFormTypeEnum->value }}">{{ $applicationFormTypeEnum->label() }}
@@ -50,89 +50,14 @@
                 @enderror
             </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label fw-bolder">१.२ प्रयोजन *</label>
-            <div class="col">
-                @foreach (\Modules\EMap\Enums\BuildingUsageEnum::cases() as $usages)
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="{{ $usages->name }}"
-                            wire:model="applyMap.usage" value="{{ $usages->value }}">
-                        <label class="form-check-label" for="{{ $usages->name }}">{{ $usages->label() }}</label>
-                    </div>
-                @endforeach
-                @error('applyMap.usage')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bolder">१.३ भवन ऐन अनुसार वर्गीकरण *</label>
-            <div class="col">
-                @foreach (\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="{{ $categorization->name }}"
-                            wire:model="applyMap.building_category" value="{{ $categorization->value }}">
-                        <label class="form-check-label"
-                            for="{{ $categorization->name }}">{{ $categorization->label() }}</label>
-                    </div>
-                @endforeach
-                @error('applyMap.building_category')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-        <div class="mb-3">
-            <Label class="form-label fw-bolder">१.४ स्ट्रकचर टाईप *</Label>
-            <div class="col">
-                @foreach ($structureTypes as $structureType)
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="structure-type-{{ $loop->index }}"
-                            wire:model="applyMap.structure_type_id" value="{{ $structureType->id }}">
-                        <label class="form-check-label"
-                            for="structure-type-{{ $loop->index }}">{{ $structureType->title }}</label>
-                    </div>
-                @endforeach
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="open_structure_type"
-                        wire:model="open_structure_type" value="1">
-                    <label class="form-check-label" for="open_structure_type"
-                        wire:click.prevent="setStructureType">अन्य</label>
-                </div>
-                @if ($open_structure_type)
-                    <div class="mt-1 col-md-3">
-                        <input type="text" class="form-control" wire:model="applyMap.structure_type"
-                            id="structure-type" placeholder="अन्य स्ट्रकचर टाईप">
-                    </div>
-                @endif
-                @error('structure_type_id')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-        <div>
-            <div id="map" style="width: 100%; height: 400px; margin-top:15px; margin-bottom: 15px"></div>
 
-        </div>
+
+
 
         <div class="mb-1">
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bolder" for="latitude">Latitude</label>
-                    <input type="number" class="form-control form-control-sm" id="latitude" wire:model="latitude"
-                        step="0.000000000000001" placeholder="Latitude" required>
-
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bolder" for="longitude">Longitude</label>
-                    <input type="number" class="form-control form-control-sm" id="longitude" wire:model="longitude"
-                        step="0.000000000000001" placeholder="longitude" required>
-                </div>
-            </div>
-        </div>
-        <div class="mb-1">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bolder" for="applyMap.current_storey">१.५ हाल निर्माण गर्ने तल्ला
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-bolder" for="applyMap.current_storey">१.२ हाल निर्माण गर्ने तल्ला
                         संख्या </label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.current_storey"
                         wire:model="applyMap.current_storey" placeholder="तल्ला संख्या अंकमा" min="0">
@@ -140,17 +65,9 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bolder" for="applyMap.area_of_plinth">१.६ प्लिन्थको क्षेत्रफल</label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.area_of_plinth"
-                        wire:model="applyMap.area_of_plinth" placeholder="प्लिन्थको क्षेत्रफल (वर्ग मिटर)"
-                        min="0">
-                    @error('applyMap.area_of_plinth')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bolder" for="applyMap.future_storey">१.७ भविष्यमा निर्माण गर्ने तल्ला
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-bolder" for="applyMap.future_storey">१.३ भविष्यमा निर्माण गर्ने तल्ला
                         संख्या </label>
                     <input type="number" class="form-control form-control-sm" id="applyMap.future_storey"
                         wire:model="applyMap.future_storey" min="0"
@@ -159,33 +76,19 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bolder" for="applyMap.length">१.८ कुल भवनको लम्बाई </label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.length"
-                        wire:model="applyMap.length" placeholder="कुल भवनको लम्बाई (मिटर)" min="0">
-                    @error('applyMap.length')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-bolder" for="latitude">१.४ Latitude</label>
+                    <input type="number" class="form-control form-control-sm" id="latitude" wire:model="applyMap.latitude"
+                        step="0.000000000000001" placeholder="Latitude" required>
+
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bolder" for="applyMap.breadth">१.९ कुल भवनको चौडाई</label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.breadth"
-                        wire:model="applyMap.breadth" placeholder="कुल भवनको चौडाई (मिटर)" min="0">
-                    @error('applyMap.breadth')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-bolder" for="longitude">१.५ Longitude</label>
+                    <input type="number" class="form-control form-control-sm" id="longitude" wire:model="applyMap.longitude"
+                        step="0.000000000000001" placeholder="longitude" required>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label fw-bolder" for="applyMap.height">१.१० भवनको कुल उचाई जमिनको
-                        सतहबाट</label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.height"
-                        wire:model="applyMap.height" placeholder="भवनको कुल उचाई जमिनको सतहबाट (मिटर)"
-                        min="0">
-                    @error('applyMap.height')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-md-12">
+
+                {{-- <div class="col-md-12">
                     <label class="form-label fw-bolder">१.११ तल्लाको क्षेत्रफल र उचाईको विवरण </label>
                     <div class="table-responsive">
                         <table class="table table-bordered table-sm">
@@ -274,7 +177,7 @@
                     @error('applyMap.storeyDetails')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -283,22 +186,9 @@
             <h5>२. जग्गाको विवरण</h5>
         </legend>
         <div class="row">
+
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.land_use_area_id">२.१ भू-उपयोग्य
-                    क्षेत्र</label>
-                <select class="form-select form-select-sm" id="landDescription.land_use_area_id"
-                    wire:model="landDescription.land_use_area_id">
-                    <option value="">-- छान्नुहोस् --</option>
-                    @foreach ($landUseAreas as $landUseArea)
-                        <option value="{{ $landUseArea->id }}">{{ $landUseArea->title }}</option>
-                    @endforeach
-                </select>
-                @error('landDescription.land_use_area_id')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.ward_no">२.२ वडा नं</label>
+                <label class="form-label fw-bolder" for="landDescription.ward_no">२.१ वडा नं</label>
                 <input class="form-control form-control-sm" type="number" id="landDescription.ward_no"
                     wire:model="landDescription.ward_no" min="0" placeholder="वडा नं">
                 @error('landDescription.ward_no')
@@ -306,7 +196,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.former_ward_no">२.३ साविक वडा नं</label>
+                <label class="form-label fw-bolder" for="landDescription.former_ward_no">२.२ साविक वडा नं</label>
                 <input class="form-control form-control-sm" type="number" id="landDescription.former_ward_no"
                     wire:model="landDescription.former_ward_no" min="0" placeholder="साविक वडा नं">
                 @error('landDescription.former_ward_no')
@@ -314,23 +204,16 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.tole">२.४ टोलको नाम </label>
+                <label class="form-label fw-bolder" for="landDescription.tole">२.३ टोलको नाम </label>
                 <input class="form-control form-control-sm" type="text" id="landDescription.tole"
                     wire:model="landDescription.tole" placeholder="टोलको नाम">
                 @error('landDescription.tole')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
+
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.street_code_no">२.५ सडक कोड नं</label>
-                <input class="form-control form-control-sm" type="text" id="landDescription.street_code_no"
-                    wire:model="landDescription.street_code_no" placeholder="सडक कोड नं">
-                @error('landDescription.street_code_no')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.plot_no">२.६ जग्गा कित्ता नं</label>
+                <label class="form-label fw-bolder" for="landDescription.plot_no">२.४ जग्गा कित्ता नं</label>
                 <input class="form-control form-control-sm" type="text" id="landDescription.plot_no"
                     wire:model="landDescription.plot_no" placeholder="जग्गा कित्ता नं">
                 @error('landDescription.plot_no')
@@ -338,24 +221,13 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder">२.७ क्षेत्रफल
+                <label class="form-label fw-bolder">२.५ क्षेत्रफल
                     ({{ $setting->standardLandMeasurement->title ?? '' }})</label>
                 <input type="text" class="form-control form-control-sm" id="landDescription.unit_value"
                     wire:model="landDescription.unit_value"
                     placeholder="क्षेत्रफल ({{ $setting->standardLandMeasurement->title ?? '' }})">
             </div>
-            <div class="col-md-4 mb-3">
-                <label class="form-label fw-bolder" for="landDescription.percentage_of_area_covered_by_building">२.८
-                    भवनले
-                    ढाक्ने क्षेत्रफलको प्रतिशत (GCR)</label>
-                <input class="form-control form-control-sm" type="number"
-                    id="landDescription.percentage_of_area_covered_by_building"
-                    wire:model="landDescription.percentage_of_area_covered_by_building"
-                    placeholder="भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR)">
-                @error('landDescription.percentage_of_area_covered_by_building')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
+
         </div>
     </div>
     <div class="card p-4 mb-4">
@@ -692,30 +564,6 @@
         <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
     </div>
 
-    @push('styles')
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    @endpush
-    @push('scripts')
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-        <script>
-            var map = new L.Map('map', {
-                center: new L.LatLng(28.05, 81.61667),
-                zoom: 13
-            });
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-            }).addTo(map);
-
-            map.on('click', function(e) {
-
-                Livewire.emit('locationClicked', {
-                    latitude: e.latlng.lat,
-                    longitude: e.latlng.lng
-                });
-            });
-        </script>
-    @endpush
 
 </form>

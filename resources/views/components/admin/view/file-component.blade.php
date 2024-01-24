@@ -32,13 +32,12 @@
                                                 data-bs-target="#view_file{{ $appliedMapFile->id }}">
                                                 <i class="fa fa-eye"></i>
                                             </button>
-
                                                 <!-- view file model pass url dynamically in the model-->
                                         <div class="modal fade" id="view_file{{ $appliedMapFile->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid"></iframe>
+                                                        <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
@@ -155,10 +154,7 @@
                                     <td>{{ $appliedDocumentStatus->status->label()??'' }}</td>
 
                                 </tr>
-
-
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="A complete solution for a digital palika." name="description" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta content="Ninja Infosys" name="author" />
+    <meta content="Digital ePalika" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('images/np.png') }}" />
@@ -41,7 +41,7 @@
             </div>
             <footer class="footer">
                 <div class="container-fluid text-center">
-                    {{ date('Y') }} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA
+                    {{ date('Y') }} &copy; Design & Developed by <a href="https://digitalepalika.com">NINJA
                         INFOSYS</a>
                 </div>
             </footer>
@@ -50,18 +50,23 @@
     </div>
     <div class="rightbar-overlay"></div>
     <script src="{{ asset('assets/backend/js/vendor.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
-    @include('sweetalert::alert')
 
-    @stack('scripts')
-    @livewireScripts
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="{{ asset('assets/backend/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom.js') }}"></script>
     <script src="{{ asset('assets/backend/js/app.min.js') }}"></script>
     <script src="{{ asset('assets/backend/js/plugins/sweetalert2.min.js') }}"></script>
+    @include('sweetalert::alert')
+
+    @stack('scripts')
+    @livewireScripts
+    <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
+    <script src="{{asset("assets/frontend/js/jquery.min.js")}}"></script>
+
 </body>
 
 </html>

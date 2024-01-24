@@ -25,13 +25,15 @@ class MapSettingController extends Controller
     {
         $this->checkAuthorization('mapSetting_create');
         $data = $request->validate([
-            'thumbnail' => ['nullable','mimes:png,jpg,jpeg,pdf'],
-            'document' => ['nullable','file'],
+            'thumbnail' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'document' => ['nullable', 'file'],
             'map_request_form_format' => ['nullable'],
             'land_measurement_id' => ['nullable', Rule::exists('types', 'id')->withoutTrashed()],
             'land_measurement_standard_id' => ['nullable', Rule::exists('units', 'id')->withoutTrashed()],
+            'muchulka_after_complietion' => ['nullable'],
+            'muchulka_before_complietion' => ['nullable'],
         ]);
-        if (! empty($mapSetting = MapSetting::first())) {
+        if (!empty($mapSetting = MapSetting::first())) {
             $mapSetting->update($data);
         } else {
             MapSetting::create($data);

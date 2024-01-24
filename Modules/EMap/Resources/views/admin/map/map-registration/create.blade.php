@@ -21,13 +21,13 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">दस्तुर तथा दर्ता</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('emap.admin.mapApply.mapRegistration.store', $mapApply) }}" method="post">
                         @csrf
                         <div class="row">

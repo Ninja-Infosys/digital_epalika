@@ -9,7 +9,7 @@
         name="description"
     />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta content="Ninja Infosys" name="author"/>
+    <meta content="Digital ePalika" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>

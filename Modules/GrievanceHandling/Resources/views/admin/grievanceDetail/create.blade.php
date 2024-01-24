@@ -25,9 +25,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ गुनासो दर्ता गर्नुहोस</h4>
                         <a href="{{ route('admin.grievanceHandling.grievanceUser.index') }}"
                             class="btn btn-sm btn-outline-primary">
@@ -35,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('admin.grievanceHandling.grievanceDetail.store') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row">

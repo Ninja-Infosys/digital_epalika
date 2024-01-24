@@ -1,0 +1,38 @@
+<?php
+
+namespace Modules\EMap\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
+
+class HouseOwnerArchive extends Model
+{
+    use HasFactory, SoftDeletes, EventObserveTrait;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    protected $fillable = [
+        'map_apply_id',
+        'name',
+        'phone',
+        'father_name',
+        'grandfather_name',
+        'citizenship_issue_district_id',
+        'citizenship_no',
+        'citizenship_issue_date',
+        'address',
+        'local_body',
+        'ward_no',
+    ];
+
+    public function mapApply()
+    {
+        return $this->belongsTo(MapApply::class);
+    }
+}

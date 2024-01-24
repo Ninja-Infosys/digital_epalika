@@ -1,15 +1,16 @@
 <div class="navbar-custom">
     <div class="container-fluid">
-        <ul class="list-unstyled topnav-menu float-end mb-0">
+        <ul class="list-unstyled topnav-menu float-end mb-0 d-flex justify-content-center align-items-center">
             <li class="d-none d-xl-block">
-                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक
-                    वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour"><span class="arthik-barsa-badge"><i
+                            class="lnr lnr-calendar-full"></i>आर्थिक
+                    वर्ष: {{$officeSetting->fiscalYear->title??''}}</span></h4>
             </li>
             <li class="dropdown d-none d-lg-inline-block">
                 <div class="nav-link dropdown-toggle arrow-none waves-effect waves-light">
-                    <button class="btn btn-primary btn-xs cacheButton" id="cacheBtn" type="button"
+                    <button class="btn btn-xs cacheButton" id="cacheBtn" type="button"
                             data="{{route('admin.cache-clear')}}">
-                        <i class="fas fa-brush"></i>
+                        <i class="lnr lnr-trash"></i>
                     </button>
                 </div>
             </li>
@@ -20,7 +21,7 @@
                    role="button"
                    aria-haspopup="false"
                    aria-expanded="false" id="noti-tour">
-                    <i @class(['ring-bell'=>count(auth()->user()?->unreadNotifications ?? [])>0,'fa', 'fa-bell', 'noti-icon'])></i>
+                    <i @class(['ring-bell'=>count(auth()->user()?->unreadNotifications ?? [])>0,'fa', 'lnr lnr-alarm', 'noti-icon'])></i>
                     @if(count(auth()->user()?->unreadNotifications ?? [])>0)
                         <span class="badge bg-danger rounded-circle noti-icon-badge">
                         {{count(auth()->user()?->unreadNotifications ?? [])}}</span>
@@ -33,7 +34,8 @@
                                 <h6 class="m-0 font-16 fw-semibold"> नोटिफिकेसन</h6>
                             </div>
                             <div class="col-auto">
-                                <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark text-decoration-underline">
+                                <a href="{{route('admin.notification.readAllNotification')}}"
+                                   class="text-dark text-decoration-underline">
                                     <small>सबै खाली गर्नुहोस्</small>
                                 </a>
                             </div>
@@ -44,7 +46,7 @@
                             <a href="{{ route('admin.notification.read',$notification) }}"
                                class="dropdown-item notify-item">
                                 <div class="notify-icon bg-info">
-                                    <i class="fas fa-bell"></i>
+                                    <i class="lnr lnr-alarm"></i>
                                 </div>
                                 <p class="notify-details">
                                     @switch(class_basename($notification->type))
@@ -74,7 +76,7 @@
             <li class="dropdown topbar-dropdown">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown"
                    href="#" role="button" aria-haspopup="false" aria-expanded="true">
-                    <i class="fas fa-th noti-icon"></i>
+                    <i class="lnr lnr-list"></i>
                 </a>
                 <div class="dropdown-menu dropdown-lg dropdown-menu-end" data-popper-placement="bottom-end">
                     @includeIf('admin.layouts.menu_list')
@@ -82,7 +84,7 @@
             </li>
             <li class="d-none d-sm-inline-block">
                 <div class="nav-link waves-effect waves-light" id="light-dark-mode">
-                    <i class="fas fa-moon font-22"></i>
+                    <i class="lnr lnr-moon"></i>
                 </div>
             </li>
             <li class="dropdown notification-list topbar-dropdown">
@@ -104,7 +106,7 @@
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
                     </a>
-                    <a href="{{route('admin.setting.dashboard')}}" class="dropdown-item notify-item">
+                    <a href="{{route('admin.global.dashboard')}}" class="dropdown-item notify-item">
                         <i class="fa fa-spin fa-cog"></i>
                         <span>सेटिङ</span>
                     </a>
@@ -136,7 +138,7 @@
                              alt=""
                              height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo_sm.png')}}" alt=""
+                        <img src="{{asset(config('app.logo_sm'))}}" alt=""
                              height="40"/>
                     @endif
                 </span>
@@ -152,7 +154,7 @@
                             alt=""
                             height="40"/>
                     @else
-                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                        <img src="{{asset(config('app.logo'))}}" alt=""
                              height="35"/>
                     @endif
               </span>
@@ -162,7 +164,7 @@
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
             <li>
                 <button class="button-menu-mobile waves-effect waves-light">
-                    <i class="fa fa-bars"></i>
+                    <i class="lnr lnr-menu"></i>
                 </button>
             </li>
             <li class="d-none d-xl-block">
@@ -171,11 +173,11 @@
                 </h3>
             </li>
             @if(config('app.app_is_demo'))
-            <li class="d-none d-xl-block ms-2">
-                <p class="top-heading text-danger">
-                    नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
-                </p>
-            </li>
+                <li class="d-none d-xl-block ms-2">
+                    <p class="top-heading text-danger">
+                        नोट: यो डेमो भर्जनमा सबै फिचर उपलब्ध गराइएको छैन ।
+                    </p>
+                </li>
             @endif
             <li class="d-none d-xl-block ms-1">
                 <p class="top-heading text-danger">

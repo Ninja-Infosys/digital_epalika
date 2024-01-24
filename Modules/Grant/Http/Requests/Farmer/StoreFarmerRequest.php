@@ -31,7 +31,7 @@ class StoreFarmerRequest extends FormRequest
             'citizenship_no' => ['required', Rule::unique('farmers', 'citizenship_no')->withoutTrashed()],
             'farmer_id_card_no' => ['nullable', Rule::unique('farmers', 'farmer_id_card_no')->withoutTrashed()],
             'national_id_card_no' => ['nullable', Rule::unique('farmers', 'national_id_card_no')->withoutTrashed()],
-            'phone_no' => ['required','regex:/^([0-9\s\-\+\(\)]*)$/','min:10', Rule::unique('farmers', 'phone_no')->withoutTrashed(),],
+            'phone_no' => ['required','regex:/^([0-9\s\-\+\(\)]*)$/','min:10'],
             'province_id' => ['required', Rule::exists('provinces', 'id')],
             'district_id' => ['required', Rule::exists('districts', 'id')],
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')],

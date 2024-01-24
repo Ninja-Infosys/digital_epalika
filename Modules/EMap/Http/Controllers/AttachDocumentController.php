@@ -180,7 +180,7 @@ class AttachDocumentController extends Controller
                 FormStoreStatus::create([
                     "form_store_id" => $formStore->id,
                     "status" => DocumentStatusEnum::PENDING->value,
-                    "data" => $formStore->data,
+                    "data" => $data['data'],
                     "fields" => $formStore->fields
                 ]);
                 $formStore->update([
@@ -221,17 +221,33 @@ class AttachDocumentController extends Controller
 
     public function storeOrganizationDocument(Request $request, MapApply $mapApply)
     {
-        $data = $request->validate([
-            'land_owner_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'blue_print' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'pass_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'designer_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-            'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-        ]);
+
+        $attachdocument = AttachDocument::where('map_apply_id', $mapApply->id)->first() ?? null;
+        if (!$attachdocument) {
+            $data = $request->validate([
+                'land_owner_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'blue_print' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'pass_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'designer_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            ]);
+        } else {
+            $data = $request->validate([
+                'land_owner_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'land_revenue_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'land_owner_citizenship' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'blue_print' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'pass_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'designer_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            ]);
+        }
 
         if ($request->hasFile('land_owner_document') && !empty($mapApply->attachDocument->land_owner_document)) {
             $this->deleteFile($mapApply->attachDocument->getRawOriginal('land_owner_document'));

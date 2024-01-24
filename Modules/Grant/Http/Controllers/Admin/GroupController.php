@@ -17,9 +17,13 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_access');
 
-        $groups = Group::where(function (Builder $q) {
+        $groups = Group::with('province', 'district', 'localBody', 'grantDetails.localBody')
+        ->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['unique_id', 'name', 'vat_pan', 'registration_date',], request('search'));
+            }
+            if (!auth()->user()?->load('role')?->role?->type == 'Super') {
+                $q->where('user_id', auth()->id());
             }
         })
             ->latest()->paginate(10);

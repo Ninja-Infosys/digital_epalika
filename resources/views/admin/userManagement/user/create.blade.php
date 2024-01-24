@@ -7,13 +7,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">
+                            <a href="{{route('admin.global.dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
+                            <a href="{{route('admin.global.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ प्रयोगकर्ता थप्नुहोस्</li>
                     </ol>
@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ प्रयोगकर्ता थप्नुहोस्</h4>
-                        <a href="{{route('admin.userManagement.user.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.userManagement.user.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> प्रयोगकर्ता सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.userManagement.user.store')}}" method="post">
+                    <form action="{{route('admin.global.userManagement.user.store')}}" method="post">
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">

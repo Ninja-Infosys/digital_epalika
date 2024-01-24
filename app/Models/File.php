@@ -19,7 +19,8 @@ class File extends Model
     ];
 
     protected $fillable = [
-        'model',
+        'model_type',
+        'model_id',
         'file_name',
         'extension',
         'file',
@@ -39,6 +40,12 @@ class File extends Model
 
     public function getFileSizeAttribute(): string
     {
-        return Storage::disk('public')->size($this->attributes['file']);
+        $filePath = $this->attributes['file'];
+
+        if (Storage::disk('public')->exists($filePath)) {
+            return Storage::disk('public')->size($filePath);
+        }
+
+        return 'File not found';
     }
 }

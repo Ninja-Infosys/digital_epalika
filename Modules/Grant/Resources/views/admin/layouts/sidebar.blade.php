@@ -66,12 +66,12 @@
     </li>
 @endcan
 
-    <li>
-        <a href="{{ route('admin.grant.cashGrant.index') }}">
-            <i class="fa fa-list-alt"></i>
-            <span>नगद अनुदानको लागि </span>
-        </a>
-    </li>
+<li>
+    <a href="{{ route('admin.grant.cashGrant.index') }}">
+        <i class="fa fa-list-alt"></i>
+        <span>नगद अनुदानको लागि </span>
+    </a>
+</li>
 
 
 <li class="{{ request()->is('admin/grant/report/*') ? 'active' : '' }}">
@@ -120,11 +120,7 @@
                     </a>
                 </li>
             @endcan
-            <li class="{{ request()->is('admin/grant/report/') ? 'active' : '' }}">
-                <a href="{{ route('admin.grant.report.group.index') }}">
-                    <span>समूह रिपोर्ट </span>
-                </a>
-            </li>
+
         </ul>
     </div>
 </li>
@@ -154,8 +150,7 @@
                 </li>
             @endcan
             @can('affiliation_access')
-                <li class="{{
-    request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
+                <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
                     <a href="{{ route('admin.grant.setting.affiliation.index') }}">
                         <span> सहकारीको आवध्ता </span>
                     </a>
@@ -168,13 +163,7 @@
                     </a>
                 </li>
             @endcan
-            @can('grantProgram_access')
-                <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
-                    <a href="{{ route('admin.grant.setting.grantProgram.index') }}">
-                        <span> अनुदान कार्यक्रम </span>
-                    </a>
-                </li>
-            @endcan
+
             @can('grantOffice_access')
                 <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
                     <a href="{{ route('admin.grant.setting.grantOffice.index') }}">
@@ -185,10 +174,13 @@
            
             <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
                 <a href="{{ route('admin.grant.setting.helplessnessType.index') }}">
-                    <span> असहायताको प्रकार</span>
+                    <span>असहायताको  प्रकार </span>
                 </a>
             </li>
        
+
+
+
         </ul>
     </div>
 </li>

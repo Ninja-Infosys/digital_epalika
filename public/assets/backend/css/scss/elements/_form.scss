@@ -1,7 +1,7 @@
 form {}
 
-.form-label {
-    margin-bottom: 5px;
+.form-label, label {
+    margin-bottom: 5px !important;
     color: $dark-grey;
     @extend .font-medium;
     @extend .font-md;
@@ -9,11 +9,11 @@ form {}
 
 .form-control,
 .form-select {
-    border-color: lighten($primary, 65%);
+    border-color: lighten($primary, 75%);
     padding: 12px 16px;
     border-radius: $primary-border-radius;
     color: $dark-grey;
-    border: 1px solid $grey;
+    border: 1px solid $form-border-color;
     @extend .font-md;
     &.search-form {
         padding: 12px;

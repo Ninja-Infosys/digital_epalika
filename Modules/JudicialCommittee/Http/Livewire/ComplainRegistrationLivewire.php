@@ -15,6 +15,7 @@ use Modules\JudicialCommittee\Entities\RelatedMember;
 use Modules\JudicialCommittee\Entities\Witness;
 use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
+use Modules\JudicialCommittee\Enums\ComplainTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 
 class ComplainRegistrationLivewire extends Component
@@ -41,9 +42,9 @@ class ComplainRegistrationLivewire extends Component
         'applicant_signature' => null,
         'relatedMembers' => [],
         'witnesses' => [],
-        'supportedDocuments' => []
+        'supportedDocuments' => [],
+        'complain_type' => []
     ];
-
     public function mount($compliantRegistration = null)
     {
         $this->provinces = get_provinces();
@@ -66,9 +67,10 @@ class ComplainRegistrationLivewire extends Component
     }
 
     protected $rules = [
+        'form.complainants.*.complain_type' => ['required'],
         'form.complainants.*.name' => ['required', 'string', 'max:255'],
-        'form.complainants.*.age' => ['required', 'integer'],
-        'form.complainants.*.father_name' => ['required', 'string', 'max:255'],
+        'form.complainants.*.age' => ['nullable', 'integer'],
+        'form.complainants.*.father_name' => ['nullable', 'string', 'max:255'],
         'form.complainants.*.grandfather_name' => ['nullable', 'string', 'max:255'],
         'form.complainants.*.spouse_name' => ['nullable', 'string', 'max:255'],
         'form.complainants.*.province_id' => ['required', 'exists:provinces,id'],
@@ -76,6 +78,7 @@ class ComplainRegistrationLivewire extends Component
         'form.complainants.*.local_body_id' => ['required', 'exists:local_bodies,id'],
         'form.complainants.*.ward_no' => ['required', 'integer'],
         'form.complainants.*.tole' => ['nullable'],
+        'form.defendants.*.complain_type' => ['required'],
         'form.defendants.*.name' => ['required', 'string', 'max:255'],
         'form.defendants.*.age' => ['nullable', 'integer'],
         'form.defendants.*.father_name' => ['nullable', 'string', 'max:255'],
@@ -199,15 +202,15 @@ class ComplainRegistrationLivewire extends Component
             if (!empty($this->compliantRegistration)) {
                 $compliantRegistration = $this->compliantRegistration;
                 $compliantRegistration->update($formData + [
-                        'subject' => ComplaintSubject::find($this->form['complaint_subject_id'])->subject ?? null
-                    ]);
+                    'subject' => ComplaintSubject::find($this->form['complaint_subject_id'])->subject ?? null
+                ]);
             } else {
                 $compliantRegistration = ComplaintApplication::create($this->validate()['form'] + [
-                        'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                        'submission_no' => \officeSetting()->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0),
-                        'subject' => ComplaintSubject::find($this->form['complaint_subject_id'])->subject ?? null,
-                        'application_status' => ComplaintApplicationStatusEnum::PENDING
-                    ]);
+                    'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                    'submission_no' => \officeSetting()->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0),
+                    'subject' => ComplaintSubject::find($this->form['complaint_subject_id'])->subject ?? null,
+                    'application_status' => ComplaintApplicationStatusEnum::PENDING
+                ]);
                 //complaint log event
                 event(new ComplaintLogEvent($compliantRegistration->id, ComplaintApplication::class, $compliantRegistration->id, 'निवेदन दर्ता', "$compliantRegistration->date गते निवेदन दर्ता गरियो"));
             }
@@ -215,7 +218,8 @@ class ComplainRegistrationLivewire extends Component
                 ComplainantDefendant::updateOrCreate(
                     ['complaint_application_id' => $compliantRegistration->id, 'id' => $complainant['id'] ?? null],
                     $complainant + [
-                        'type' => ComplainantDefendantTypeEnum::COMPLAINANT
+                        'type' => ComplainantDefendantTypeEnum::COMPLAINANT,
+                        
                     ]
                 );
             }
@@ -223,7 +227,9 @@ class ComplainRegistrationLivewire extends Component
                 ComplainantDefendant::updateOrCreate(
                     ['complaint_application_id' => $compliantRegistration->id, 'id' => $defendant['id'] ?? null],
                     $defendant + [
-                        'type' => ComplainantDefendantTypeEnum::DEFENDANT
+                        'type' => ComplainantDefendantTypeEnum::DEFENDANT,
+                        
+
                     ]
                 );
             }
@@ -236,7 +242,6 @@ class ComplainRegistrationLivewire extends Component
             }
 
 
-
             foreach ($this->form['supportedDocuments'] as $supportedDocument) {
                 $compliantRegistration->supportedDocuments()->updateOrCreate([
                     'type' => ComplainantDefendantTypeEnum::COMPLAINANT,
@@ -247,18 +252,18 @@ class ComplainRegistrationLivewire extends Component
         });
 
 
-            $this->reset('form');
-            $this->dispatchBrowserEvent('toast_message', [
-                'type' => 'success',
-                'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
-            ]);
-            $this->addComplainants();
-            $this->addDefendants();
-            $this->dispatchBrowserEvent('alert_message', [
-                'type' => 'success',
-                'title' => 'धन्यबाद',
-                'text' => 'उजुरी पत्र सफलतापूर्वक थपियो ' ,
-            ]);
+        $this->reset('form');
+        $this->dispatchBrowserEvent('toast_message', [
+            'type' => 'success',
+            'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
+        ]);
+        $this->addComplainants();
+        $this->addDefendants();
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'उजुरी पत्र सफलतापूर्वक थपियो ',
+        ]);
     }
 
     private function assignComplaintApplicationData($compliantRegistration)
@@ -273,6 +278,7 @@ class ComplainRegistrationLivewire extends Component
             $this->form['complainants'][] = [
                 'id' => $complainant->id,
                 'name' => $complainant->name ?? null,
+                'complain_type' => $complainant->complain_type ?? null,
                 'age' => $complainant->age ?? null,
                 'father_name' => $complainant->father_name ?? null,
                 'grandfather_name' => $complainant->grandfather_name ?? null,
@@ -288,6 +294,7 @@ class ComplainRegistrationLivewire extends Component
         foreach ($compliantRegistration->complainantDefendants->where('type', ComplainantDefendantTypeEnum::DEFENDANT) as $defendant) {
             $this->form['defendants'][] = [
                 'id' => $defendant->id,
+                'complain_type' => $defendant->complain_type ?? null,
                 'name' => $defendant->name ?? null,
                 'age' => $defendant->age ?? null,
                 'father_name' => $defendant->father_name ?? null,
@@ -335,15 +342,14 @@ class ComplainRegistrationLivewire extends Component
     public function messages(): array
     {
         return [
+            'form.complainants.*.complain_type.required' => 'वादीको प्रकार अनिवार्य छ',
             'form.complainants.*.name.required' => 'नाम अनिवार्य छ',
-            'form.complainants.*.age.required' => 'उमेर अनिवार्य छ',
-            'form.complainants.*.father_name.required' => 'बुवाको नाम अनिवार्य छ',
             'form.complainants.*.province_id.required' => 'प्रदेश अनिवार्य छ',
             'form.complainants.*.district_id.required' => 'जिल्ला अनिवार्य छ',
             'form.complainants.*.local_body_id.required' => 'स्थानीय तह अनिवार्य छ',
             'form.complainants.*.ward_no.required' => 'वार्ड नं अनिवार्य छ',
+            'form.defendants.*.complain_type.required' => 'प्रतिवादीको प्रकार अनिवार्य छ',
             'form.defendants.*.name.required' => 'नाम अनिवार्य छ',
-            'form.defendants.*.age.required' => 'उमेर अनिवार्य छ',
             'form.defendants.*.province_id.required' => 'प्रदेश अनिवार्य छ',
             'form.defendants.*.district_id.required' => 'जिल्ला अनिवार्य छ',
             'form.defendants.*.local_body_id.required' => 'स्थानीय तह अनिवार्य छ',

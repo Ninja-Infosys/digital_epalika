@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">प्रिन्ट परिचय पत्र</li>
@@ -21,15 +21,14 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-body card-background">
                     <ul class="nav nav-pills mb-3 nav-bordered nav-justified" role="tablist">
                         @foreach ($governmentalDisabilityTypes as $governmentalDisabilityType)
                             <li class="nav-item" role="presentation">
                                 <button href="#home-b2{{ $loop->iteration }}"
                                     class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-home-tab"
-                                    data-bs-toggle="pill" type="button" role="tab"
-                                    aria-controls="pills-home"
+                                    data-bs-toggle="pill" type="button" role="tab" aria-controls="pills-home"
                                     aria-selected="true">{{ $governmentalDisabilityType->category?->label() ?? '' }}</button>
                             </li>
                         @endforeach
@@ -68,7 +67,7 @@
                                                             <i class="fa fa-print"></i>
                                                         </button>
                                                         @include('identity::admin.disabilityPrint.inc.print_modal')
-                                                        </a>    
+                                                        </a>
 
                                                         <a href="{{ route('identity.admin.disabilityFullDetail.show', $disabilityIdentityCard) }}"
                                                             class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">

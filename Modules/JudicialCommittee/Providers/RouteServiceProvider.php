@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::prefix('api/JudicialCommittee/user')
             ->middleware(['api', 'auth:sanctum'])
-            ->group(module_path('JudicialCommittee', 'Routes/api/private_api.php'));
+            ->group(module_path('JudicialCommittee', 'Routes/Api/private_api.php'));
 
         Route::prefix('api/v1/complainRegistration')
             ->middleware('api')

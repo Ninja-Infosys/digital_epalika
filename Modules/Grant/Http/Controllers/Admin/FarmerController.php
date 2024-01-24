@@ -26,13 +26,20 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_access');
 
-        $farmers = Farmer::where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['unique_id', 'first_name', 'citizenship_no', 'farmer_id_card_no', 'national_id_card_no', 'phone_no'], request('search'));
-            }
-        })
+
+        $families = collect();
+        $farmers = Farmer::with('province', 'district', 'localBody', 'grantDetails.localBody')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['unique_id', 'first_name', 'citizenship_no', 'farmer_id_card_no', 'national_id_card_no', 'phone_no'], request('search'));
+                }
+                if (!auth()->user()?->load('role')?->role?->type == 'Super') {
+                    $q->where('user_id', auth()->id());
+                }
+            })
             ->latest()
             ->paginate(10);
+
         return view('grant::admin.farmer.index', compact('farmers'));
     }
 
@@ -82,7 +89,7 @@ class FarmerController extends Controller
         $this->checkAuthorization('farmer_access');
 
         $farmer
-            ->load('province', 'district', 'localBody', 'grantDetails.grant.grantProgram', 'grantDetails.localBody', 'farmers.relationship', 'farmers.grantDetails', 'farmer', 'farmer.grantDetails', 'relationship');
+            ->load('province', 'district', 'localBody', 'grantDetails.localBody', 'farmers.relationship', 'farmers.grantDetails', 'farmer', 'farmer.grantDetails', 'relationship');
         $grantPrograms = GrantProgram::all();
 
         $families = collect();
