@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\LandInvoiceController;
+use Illuminate\Support\Facades\Route;
 use Modules\Plan\Http\Controllers\Admin\Setting\RevenueSettingController;
 use Modules\Revenue\Http\Controllers\Admin\DashboardController;
 use Modules\Revenue\Http\Controllers\Admin\InvoiceController;
