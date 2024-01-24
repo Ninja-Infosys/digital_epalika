@@ -154,7 +154,7 @@
                            value="{{$detail['remarks']}}">
                     {{$detail['remarks'] ?? ''}}
                 </td>
-                <td>
+                <td class="d-flex">
                     <button type="button" class="btn btn-warning text-white mx-1 btn-sm"
                             wire:click.prevent="editDetail({{$index}})">
                         <i class="fa fa-pen"></i>
