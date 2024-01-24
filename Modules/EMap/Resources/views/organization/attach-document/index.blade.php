@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
@@ -40,7 +40,18 @@
                             </thead>
                             <tbody>
                                 @foreach ($forms as $form)
-                                    <tr>
+                                @php
+                                $appliedDocumentStatus = Modules\EMap\Entities\AppliedDocument::where('map_apply_id', $mapApply->id)
+                               ->where('form_id', $form->id)
+                               ->pluck('status');
+                           $formStoreStatus = Modules\EMap\Entities\FormStore::where('map_apply_id', $mapApply->id)
+                               ->where('form_id', $form->id)
+                               ->pluck('status');
+                           $paymentStoreStatus = Modules\EMap\Entities\PaymentStore::where('map_apply_id', $mapApply->id)
+                               ->where('form_id', $form->id)
+                               ->pluck('status');
+                          @endphp
+                           <tr @if($appliedDocumentStatus->contains(Modules\EMap\Enums\DocumentStatusEnum::REJECTED) || $formStoreStatus->contains(Modules\EMap\Enums\DocumentStatusEnum::REJECTED)|| $paymentStoreStatus->contains(Modules\EMap\Enums\DocumentStatusEnum::REJECTED)) style="background-color:#d16969;" @endif >
                                         <td>{{ get_nepali_number($loop->iteration) }}</td>
                                         <td>{{ $form->title }}</td>
                                         <td>
