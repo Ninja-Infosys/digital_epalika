@@ -69,13 +69,13 @@ class OrganizationAuthController extends Controller
 
         auth('organization')->login($organization);
 
-        return redirect()->route('organization.admin.dashboard');
+        return redirect()->route('admin.global.organization.dashboard');
     }
 
     public function create()
     {
         if (auth('organization')->user()->password) {
-            return redirect()->route('organization.admin.dashboard');
+            return redirect()->route('admin.global.organization.dashboard');
         }
 
         return view('admin.global.organization.auth.password');
@@ -83,7 +83,7 @@ class OrganizationAuthController extends Controller
 
     public function store(StorePasswordRequest $request)
     {
-        $redirect = redirect()->route('organization.admin.dashboard');
+        $redirect = redirect()->route('admin.global.organization.dashboard');
         $user = auth('organization')->user();
 
         if (! $user?->password) {

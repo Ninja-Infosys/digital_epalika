@@ -102,4 +102,8 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
 });
 
+Route::prefix('profile')->group(function () {
+    Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
+});
+
 

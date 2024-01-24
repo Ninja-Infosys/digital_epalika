@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Global\OrganizationAuthController;
+
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
@@ -10,9 +10,7 @@ use Modules\EMap\Http\Controllers\TaxClearanceController;
 
 // Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
 
-Route::prefix('profile')->group(function () {
-    Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
-});
+
 
 Route::controller(MapApplyController::class)->group(function () {
     Route::get('mapApply/{mapApply}/map-form-info', 'mapFormInfo')->name('mapFormInfo');

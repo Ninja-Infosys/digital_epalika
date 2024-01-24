@@ -69,7 +69,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
-                    <a href="{{route('organization.admin.auth-organization.profile')}}" class="dropdown-item notify-item">
+                    <a href="{{route('admin.global.auth-organization.profile')}}" class="dropdown-item notify-item">
                         <i class="fa fa-user"></i>
                         <span>मेरो प्रोफाइल</span>
                     </a>
