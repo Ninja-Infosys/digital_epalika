@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Installer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Installer\LicenseRequest;
+use Illuminate\Support\Facades\Request;
 
 class LicenseController extends Controller
 {
@@ -12,8 +13,9 @@ class LicenseController extends Controller
         return view('installer.license');
     }
 
-    public function saveLicense(LicenseRequest $request)
+    public function saveLicense(Request $request)
     {
+        return redirect()->route('installer.requirements');
         $response = $this->checkLicense($request->input('key'), $request->getUri()) ?? [];
 
         // if (array_key_exists('is_active', $response)
