@@ -7,7 +7,7 @@
         Easy Installation and Setup Wizard
     </p>
     <p class="text-center">
-        <a href="{{ route('installer.license') }}" class="button">
+        <a href="{{ route('installer.requirements') }}" class="button">
             Check License
             <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
         </a>
