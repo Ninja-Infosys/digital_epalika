@@ -190,16 +190,16 @@ trait PlanTemplateTrait
 
     public function getProjectReplacement(): array
     {
-        $budgetHeads=[];
-        $allocated_amount_sum=0;
+        $budgetHeads = [];
+        $allocated_amount_sum = 0;
         $this->load('projectAllocatedAmounts.budgetHead');
         foreach ($this->projectAllocatedAmounts as $allocatedAmount) {
-            $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
-            $allocated_amount_sum+=$allocatedAmount->amount;
+            $budgetHeads[] = $allocatedAmount->budgetHead->title ?? '';
+            $allocated_amount_sum += $allocatedAmount->amount;
         }
 
         return [
-            '[@date]'=>$this->get_today_nepali_date(),
+            '[@date]' => $this->get_today_nepali_date(),
             '[@fiscalYear]' => $this->fiscalYear->title ?? '',
             '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',

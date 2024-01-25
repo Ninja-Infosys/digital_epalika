@@ -45,7 +45,7 @@ class SipharishFormTypeLivewire extends Component
                 $formDataTypeArray[$index]['slug'] = $formDataType->slug ?? '';
                 $formDataTypeArray[$index]['type'] = $formDataType->type->value ?? '';
 
-                foreach ($formDataType->SipharishFormFields as $childIndex=>$fields) {
+                foreach ($formDataType->SipharishFormFields as $childIndex => $fields) {
                     $formDataTypeArray[$index]['table'][$childIndex]['id'] = $fields->id;
                     $formDataTypeArray[$index]['table'][$childIndex]['field_name'] = $fields->field_name;
                     $formDataTypeArray[$index]['table'][$childIndex]['slug'] = $fields->slug ?? '';

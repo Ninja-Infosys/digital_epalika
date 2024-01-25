@@ -14,7 +14,9 @@ use Modules\EMap\Enums\DocumentStatusEnum;
 
 class AppliedDocument extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $touches = ['mapApply'];
 

@@ -31,7 +31,8 @@ class DashboardController extends Controller
         return view('identity::admin.dashboard', compact('fiscalYearWiseSeniorCitizenDetail', 'disabilityIdentityCardCount', 'fiscalYearWiseDisabilityCount', 'seniorCitizenDetailCount'));
     }
 
-    public function ajaxData(){
+    public function ajaxData()
+    {
         return [
             'wardWise' => $this->getWardWiseData(),
             'SeniorDetailWardWise' => $this->getSeniorDetailWardWiseData(),

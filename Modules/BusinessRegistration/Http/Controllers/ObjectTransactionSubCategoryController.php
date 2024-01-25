@@ -24,7 +24,7 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function store(StoreObjectTransactionSubCategoryRequest $request)
     {
-//        dd($request->all());
+        //        dd($request->all());
         ObjectTransactionSubCategory::create($request->validated());
         toast(' कारोबार गर्ने वस्तु  सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();

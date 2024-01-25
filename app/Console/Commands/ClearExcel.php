@@ -27,17 +27,17 @@ class ClearExcel extends Command
         $all = $this->option('all');
         $date = $this->option('date');
 
-//        get all directory in folder storage/app/public/excel
+        //        get all directory in folder storage/app/public/excel
         $directories = collect(Storage::disk('public')->directories('excel'))
             ->map(function ($directory) {
                 return basename($directory);
             });
 
-//        check if date is not empty
+        //        check if date is not empty
 
         if (!empty($date)) {
             foreach ($date as $d) {
-//               change format of date to Ymd
+                //               change format of date to Ymd
                 $d = date('Ymd', strtotime($d));
                 if ($directories->contains($d)) {
                     Storage::disk('public')->deleteDirectory('excel/' . $d);
@@ -46,7 +46,7 @@ class ClearExcel extends Command
                 }
             }
         } else {
-//            delete all directory if all option is true else delete all directory except today
+            //            delete all directory if all option is true else delete all directory except today
             if ($all) {
                 $directories->each(function ($directory) {
                     Storage::disk('public')->deleteDirectory('excel/' . $directory);

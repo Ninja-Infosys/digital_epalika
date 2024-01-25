@@ -60,7 +60,7 @@ enum CategoryTypeEnum: string
         return match ($value) {
             self::CATEGORY_A => '#D2042D',
             self::CATEGORY_B => 'blue',
-            self::CATEGORY_C=>'yellow',
+            self::CATEGORY_C => 'yellow',
             self::CATEGORY_D => 'white',
         };
     }

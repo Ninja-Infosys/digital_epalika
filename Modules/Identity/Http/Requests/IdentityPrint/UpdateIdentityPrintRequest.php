@@ -5,8 +5,6 @@ namespace Modules\Identity\Http\Requests\IdentityPrint;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
-use Modules\BusinessRegistration\Enums\Qualification;
-use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
 
 class UpdateIdentityPrintRequest extends FormRequest

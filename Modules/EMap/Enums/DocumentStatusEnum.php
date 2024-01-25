@@ -8,6 +8,7 @@ enum DocumentStatusEnum: string
     case REJECTED = 'rejected';
     case APPROVED = 'approved';
     case REVIEW = 'review';
+    case NOT_APPLIED = 'not-applied';
 
     public function label(): string
     {
@@ -21,6 +22,7 @@ enum DocumentStatusEnum: string
             self::REJECTED => 'Rejected',
             self::APPROVED => 'Approved',
             self::REVIEW => 'Review',
+            self::NOT_APPLIED => 'Not Applied'
         };
     }
 }

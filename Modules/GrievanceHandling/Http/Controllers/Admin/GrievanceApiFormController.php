@@ -4,21 +4,14 @@ namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Models\Settings\Branch;
 use App\Models\User;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\GrievanceHandling\Entities\GrievanceDetail;
-use Modules\GrievanceHandling\Entities\GrievanceSetting;
 use Modules\GrievanceHandling\Entities\GrievanceType;
-use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
 use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 use Modules\GrievanceHandling\Http\Requests\Api\StoreGrievanceRequest;
 use Modules\GrievanceHandling\Transformers\Api\GrievanceResource;
-use Modules\GrievanceHandling\Transformers\GrievanceFormResource;
 
 class GrievanceApiFormController extends Controller
 {

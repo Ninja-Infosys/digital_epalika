@@ -9,7 +9,7 @@ class LawsuitNatureTableSeeder extends Seeder
 {
     public function run()
     {
-        $lawsuitNatures=[
+        $lawsuitNatures = [
             ['title' => 'देवानी प्रकृति', 'title_en' => 'Civil', 'code' => 'CP'],
             ['title' => 'फौजदारी प्रकृति', 'title_en' => 'Criminal', 'code' => 'CR']
         ];

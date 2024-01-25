@@ -72,9 +72,9 @@ trait IdentityRecommendationTemplateTrait
 
     public function getDisabilityData(): array
     {
-        if(!empty($this->birth_registration_no)){
+        if(!empty($this->birth_registration_no)) {
             $documentNo = "$this->birth_registration_no (जन्म दर्ता)";
-        }else{
+        } else {
             $documentNo = "$this->citizenship_no (नागरिकता)";
         }
         return [

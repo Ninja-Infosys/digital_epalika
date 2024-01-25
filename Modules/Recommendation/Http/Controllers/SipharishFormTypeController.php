@@ -3,21 +3,15 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharisFormField;
-use Modules\Recommendation\Entities\SipharisSubCategory;
 use Modules\Recommendation\Entities\SipharishFormType;
-use Modules\Recommendation\Entities\SipharisFormFields;
 use Modules\Recommendation\Http\Requests\SipharisFormType\StoreSipharisFormTypeRequest;
-use Modules\Recommendation\Http\Requests\SipharisCategory\UpdateSipharisCategoryRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Modules\Recommendation\Http\Requests\SipharisFormType\UpdateSipharisFormTypeRequest;
 
-
 class SipharishFormTypeController extends Controller
 {
-
     public function index()
     {
         $this->checkAuthorization('recommendationCategory_access');

@@ -84,14 +84,14 @@ class BusinessDetail extends Model
         'deleted_at',
     ];
 
-    protected $appends=[
+    protected $appends = [
         'is_register',
         'registration_month'
     ];
 
     public function getIsRegisterAttribute(): bool
     {
-        return $this->registeredBusinesses->count()>0;
+        return $this->registeredBusinesses->count() > 0;
     }
 
     public function fiscalYear(): BelongsTo

@@ -19,7 +19,7 @@ class NoticeVerticalSliderComponent extends Component
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
                     $q->where('ward', $ward);
-                }else{
+                } else {
                     $q->whereNull('ward');
                 }
             })

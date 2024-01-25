@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\EMap\Entities\Organization;
 use Modules\Roaster\Entities\TraineeUser;
 
 class TraineeUserLivewire extends Component

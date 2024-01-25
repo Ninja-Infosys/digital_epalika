@@ -513,4 +513,3 @@ if (!function_exists('generateRandomRGBAColor')) {
         return "rgba($red, $green, $blue, $alpha)";
     }
 }
-

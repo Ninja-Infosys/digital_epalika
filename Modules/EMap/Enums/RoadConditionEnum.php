@@ -20,7 +20,7 @@ enum RoadConditionEnum: string
             self::GOOD => 'राम्रो',
             self::FAIR => 'ठिकै',
             self::POOR => 'खराब ',
-            self::UNDER_CONSTRUCTION =>'निर्माणाधीन'
+            self::UNDER_CONSTRUCTION => 'निर्माणाधीन'
         };
     }
 }

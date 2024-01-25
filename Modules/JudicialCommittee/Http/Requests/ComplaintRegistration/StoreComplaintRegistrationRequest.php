@@ -37,7 +37,7 @@ class StoreComplaintRegistrationRequest extends FormRequest
             'complainantDefendents.*.local_body_id' => ['nullable', 'exists:local_bodies,id'],
             'complainantDefendents.*.ward_no' => ['required', 'integer'],
             'complainantDefendents.*.tole' => ['nullable'],
-            
+
             'relatedMembers' => ['nullable', 'array'],
             'relatedMembers.*.name' => ['nullable'],
             'relatedMembers.*.phone' => ['nullable'],

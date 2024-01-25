@@ -14,7 +14,7 @@ class LocalBodyResource extends JsonResource
             'local_body' => $this->local_body ?? '',
             'local_body_en' => $this->local_body_en ?? '',
             'districts' => DistrictResource::make($this->whenLoaded('district')),
-            $this->mergeWhen(! $request->routeIs('api.v1.admin.address.district.show'), [
+            $this->mergeWhen(!$request->routeIs('api.v1.admin.address.district.show'), [
                 'wardNumbers' => $this->ward_no ?? [],
             ]),
             'toles' => ToleResource::collection($this->whenLoaded('toles')),

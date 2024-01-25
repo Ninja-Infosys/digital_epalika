@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\DigitalBoard\Entities\PhotoGallery;
 use Modules\DigitalBoard\Http\Controllers\Admin\AudioController;
 use Modules\DigitalBoard\Http\Controllers\Admin\CitizenCharterController;
 use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController;
@@ -26,7 +25,6 @@ Route::get('popUpNotice/{popUpNotice}/updateShowOnIndex', [PopUpNoticeController
 Route::resource('service', ServiceController::class);
 Route::resource('service/{service}/serviceEmployee', ServiceEmployeeController::class)->names('service.serviceEmployee');
 
-Route::resource('citizenCharter',CitizenCharterController::class);
+Route::resource('citizenCharter', CitizenCharterController::class);
 Route::resource('photoGallery', PhotoGalleryController::class);
 Route::resource('audio', AudioController::class);
-

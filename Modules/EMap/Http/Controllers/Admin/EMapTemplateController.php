@@ -7,7 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\EMapTemplate;
-use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Http\Requests\Template\StoreEMapTemplateRequest;
 use Modules\EMap\Http\Requests\Template\UpdateEMapTemplateRequest;
 use View;
@@ -30,7 +29,7 @@ class EMapTemplateController extends Controller
         return view('emap::admin.template.create');
     }
 
-    public function store(StoreEMapTemplateRequest $request,): RedirectResponse
+    public function store(StoreEMapTemplateRequest $request): RedirectResponse
     {
         $this->checkAuthorization('eMapTemplate_create');
         $this->forgotCache('eMapTemplates');

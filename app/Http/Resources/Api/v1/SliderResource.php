@@ -9,9 +9,9 @@ class SliderResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'title'=>$this->title ?? '',
-            'image'=>$this->image_url ?? '',
-            'description'=>$this->description ?? '',
+            'title' => $this->title ?? '',
+            'image' => $this->image_url ?? '',
+            'description' => $this->description ?? '',
         ];
     }
 }

@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Http\Requests\SipharisCategory\StoreSipharisCategoryRequest;
 use Modules\Recommendation\Http\Requests\SipharisCategory\UpdateSipharisCategoryRequest;
-use Illuminate\Support\Facades\DB;
 
 class SipharishCategoryController extends Controller
 {
-
     public function index()
     {
         $this->checkAuthorization('recommendationCategory_access');

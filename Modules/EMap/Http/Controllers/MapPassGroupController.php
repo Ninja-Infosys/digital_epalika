@@ -3,11 +3,9 @@
 namespace Modules\EMap\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapPassGroup;
-use Illuminate\Contracts\Support\Renderable;
 use Modules\EMap\Http\Requests\MapPassGroup\StoreMapPassGroupRequest;
 use Modules\EMap\Http\Requests\MapPassGroup\UpdateMapPassGroupRequest;
 

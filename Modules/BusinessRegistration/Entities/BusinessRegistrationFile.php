@@ -32,7 +32,7 @@ class BusinessRegistrationFile extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('business_registered/', 'public');
         }
     }
@@ -44,7 +44,7 @@ class BusinessRegistrationFile extends Model
 
     public function setCitizenshipFrontAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_front'] = $value->store('business_registered/', 'public');
         }
     }
@@ -56,7 +56,7 @@ class BusinessRegistrationFile extends Model
 
     public function setCitizenshipBackAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_back'] = $value->store('business_registered/', 'public');
         }
     }
@@ -68,7 +68,7 @@ class BusinessRegistrationFile extends Model
 
     public function setCompanyRegistrationAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['company_registration'] = $value->store('business_registered/', 'public');
         }
     }
@@ -80,7 +80,7 @@ class BusinessRegistrationFile extends Model
 
     public function setTaxPayFileAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['tax_pay_file'] = $value->store('business_registered/', 'public');
         }
     }
@@ -92,7 +92,7 @@ class BusinessRegistrationFile extends Model
 
     public function setPropertyAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['property'] = $value->store('business_registered/', 'public');
         }
     }
@@ -104,7 +104,7 @@ class BusinessRegistrationFile extends Model
 
     public function setSignatureAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['signature'] = $value->store('business_registered/', 'public');
         }
     }
@@ -116,7 +116,7 @@ class BusinessRegistrationFile extends Model
 
     public function setThumbAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['thumb'] = $value->store('business_registered/', 'public');
         }
     }

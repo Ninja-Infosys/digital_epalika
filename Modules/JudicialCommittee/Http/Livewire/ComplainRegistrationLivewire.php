@@ -10,12 +10,10 @@ use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplainantDefendant;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\ComplaintSubject;
-use Modules\JudicialCommittee\Entities\LawsuitNature;
 use Modules\JudicialCommittee\Entities\RelatedMember;
 use Modules\JudicialCommittee\Entities\Witness;
 use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 use Modules\JudicialCommittee\Enums\ComplaintApplicationStatusEnum;
-use Modules\JudicialCommittee\Enums\ComplainTypeEnum;
 use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 
 class ComplainRegistrationLivewire extends Component
@@ -219,7 +217,7 @@ class ComplainRegistrationLivewire extends Component
                     ['complaint_application_id' => $compliantRegistration->id, 'id' => $complainant['id'] ?? null],
                     $complainant + [
                         'type' => ComplainantDefendantTypeEnum::COMPLAINANT,
-                        
+
                     ]
                 );
             }
@@ -228,7 +226,7 @@ class ComplainRegistrationLivewire extends Component
                     ['complaint_application_id' => $compliantRegistration->id, 'id' => $defendant['id'] ?? null],
                     $defendant + [
                         'type' => ComplainantDefendantTypeEnum::DEFENDANT,
-                        
+
 
                     ]
                 );

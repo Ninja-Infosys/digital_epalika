@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
@@ -24,11 +23,11 @@ class LetterHeadController extends Controller
         ]);
 
         LetterHead::updateOrCreate(
-            ['model_type'=> User::class,'model_id'=>auth()->id()],
+            ['model_type' => User::class,'model_id' => auth()->id()],
             [
-                'header'=>$request->input('header'),
-                'header_en'=>$request->input('header_en'),
-                'letter_head'=>$request->input('letter_head')
+                'header' => $request->input('header'),
+                'header_en' => $request->input('header_en'),
+                'letter_head' => $request->input('letter_head')
             ]
         );
 

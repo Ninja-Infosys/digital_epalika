@@ -23,21 +23,21 @@ class StoreEmployeeSignatureRequest extends FormRequest
             'black_signature' => ['required', 'image'],
             'red_signature' => ['required', 'image'],
             'stamp' => ['required', 'image'],
-            'status'=>['nullable','boolean']
+            'status' => ['nullable','boolean']
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required'=>['नाम आवश्यक छ'],
-            'name_en.required'=>['नाम अंग्रेजीमा आवश्यक छ'],
-            'designation_en.required'=>['पद अंग्रेजीमा आवश्यक छ'],
-            'designation.required'=>['पद आवश्यक छ'],
-            'pin.required'=>['पिन आवश्यक छ'],
-            'black_signature.required'=>['कालो हस्ताक्षर आवश्यक छ'],
-            'red_signature.required'=>['रातो हस्ताक्षर आवश्यक छ'],
-            'stamp.required'=>['छाप आवश्यक छ'],
+            'name.required' => ['नाम आवश्यक छ'],
+            'name_en.required' => ['नाम अंग्रेजीमा आवश्यक छ'],
+            'designation_en.required' => ['पद अंग्रेजीमा आवश्यक छ'],
+            'designation.required' => ['पद आवश्यक छ'],
+            'pin.required' => ['पिन आवश्यक छ'],
+            'black_signature.required' => ['कालो हस्ताक्षर आवश्यक छ'],
+            'red_signature.required' => ['रातो हस्ताक्षर आवश्यक छ'],
+            'stamp.required' => ['छाप आवश्यक छ'],
         ];
     }
 }

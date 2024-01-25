@@ -28,7 +28,7 @@ class TechnicalTraineeController extends Controller
     {
         $this->checkAuthorization('technicalTrainee_access');
         $technicalTrainee->update([
-            'select' => ! $technicalTrainee->select,
+            'select' => !$technicalTrainee->select,
         ]);
         toast('Technical Trainee updated successfully', 'success');
 

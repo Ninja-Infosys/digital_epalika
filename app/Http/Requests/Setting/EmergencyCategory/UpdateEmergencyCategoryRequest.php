@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Setting\EmergencyCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class UpdateEmergencyCategoryRequest extends FormRequest
 {
@@ -16,7 +15,7 @@ class UpdateEmergencyCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'image'=>['nullable','image','mimes:png,jpg,jpeg'],
+            'image' => ['nullable','image','mimes:png,jpg,jpeg'],
         ];
     }
 

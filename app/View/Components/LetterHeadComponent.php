@@ -11,7 +11,7 @@ class LetterHeadComponent extends Component
     public Collection $officeHeaders;
     public function __construct()
     {
-        $this->officeHeaders=OfficeHeader::orderBy('position')->get();
+        $this->officeHeaders = OfficeHeader::orderBy('position')->get();
     }
 
     public function render()

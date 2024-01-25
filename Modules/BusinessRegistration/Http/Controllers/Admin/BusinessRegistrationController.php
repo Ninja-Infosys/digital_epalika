@@ -109,17 +109,17 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.edit', compact('businessDetail'));
     }
 
-//    public function editData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
-//    {
-//        $this->checkAuthorization('businessRegistration_edit');
-//
-//        $businessDetail->load('printedData');
-//        $printed_data = $businessDetail->printedData
-//            ->where('for', $templateTypeEnum)
-//            ->sortByDesc('created_at')
-//            ->first();
-//        return view('businessregistration::admin.businessRegistration.edit', compact('businessDetail', 'templateTypeEnum', 'printed_data'));
-//    }
+    //    public function editData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
+    //    {
+    //        $this->checkAuthorization('businessRegistration_edit');
+    //
+    //        $businessDetail->load('printedData');
+    //        $printed_data = $businessDetail->printedData
+    //            ->where('for', $templateTypeEnum)
+    //            ->sortByDesc('created_at')
+    //            ->first();
+    //        return view('businessregistration::admin.businessRegistration.edit', compact('businessDetail', 'templateTypeEnum', 'printed_data'));
+    //    }
 
     public function storeData(StorePrintedDataRequest $request, BusinessDetail $businessDetail, $type): RedirectResponse
     {

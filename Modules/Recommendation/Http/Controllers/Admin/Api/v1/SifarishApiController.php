@@ -2,8 +2,6 @@
 
 namespace Modules\Recommendation\Http\Controllers\Admin\Api\v1;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +11,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SifarishApiController extends Controller
 {
-    public function index():AnonymousResourceCollection
+    public function index(): AnonymousResourceCollection
     {
-        $sifaris = SipharishCreate::with('personalDetail','SipharishFormType')->get();
+        $sifaris = SipharishCreate::with('personalDetail', 'SipharishFormType')->get();
         return SifarishFormResource::collection($sifaris);
 
     }

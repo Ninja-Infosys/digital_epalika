@@ -3,7 +3,6 @@
 namespace Modules\Recommendation\Http\Requests\SipharisSubCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreSipharisSubCategoryRequest extends FormRequest
