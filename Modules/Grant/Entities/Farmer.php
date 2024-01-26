@@ -10,7 +10,6 @@ use App\Models\Address\Province;
 use App\Models\Settings\Relationship;
 use App\Models\User;
 use App\Traits\GetAllColumns;
-use Database\Seeders\RelationshipTableSeeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -36,7 +36,7 @@ class EnvironmentController extends Controller
             return back()->withInput()->withErrors($validator->errors());
         }
 
-        if (! $this->checkDatabaseConnection($request)) {
+        if (!$this->checkDatabaseConnection($request)) {
             return back()->withInput()->withErrors([
                 'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
@@ -46,7 +46,7 @@ class EnvironmentController extends Controller
 
         //TODO: This is the line that is causing the error Event not found
 
-//        event(new EnvironmentSaved($request));
+        //        event(new EnvironmentSaved($request));
 
         return redirect(route('installer.database'))
             ->with(['results' => $results]);

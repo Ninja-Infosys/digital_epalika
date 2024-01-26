@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Modules\GrievanceHandling\Http\Controllers\Admin\DashboardController;
 use Modules\GrievanceHandling\Http\Controllers\Admin\GrievanceDetailController;
 use Modules\GrievanceHandling\Http\Controllers\Admin\GrievanceUserController;
-use Modules\GrievanceHandling\Http\Controllers\Admin\Setting\GrievanceOfficeController;
 use Modules\GrievanceHandling\Http\Controllers\Admin\Setting\{GrievanceTypeController};
 use Modules\GrievanceHandling\Http\Controllers\GrievanceSettingController;
 

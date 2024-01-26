@@ -19,7 +19,7 @@ class InvoiceResource extends JsonResource
             'भुक्तानी मिति (ई.सं.)' => $this->when(in_array('payment_date_en', $request_columns), $this->payment_date_en->toDateString() ?? ''),
             'वडा' => $this->when(in_array('ward', $request_columns), $this->ward ?? ''),
             'Reference Code' => $this->when(in_array('reference_code', $request_columns), $this->reference_code ?? ''),
-            'फारम'=>InvoiceParticularResource::collection($this->whenLoaded('InvoiceParticulars'))
+            'फारम' => InvoiceParticularResource::collection($this->whenLoaded('InvoiceParticulars'))
         ];
     }
 }

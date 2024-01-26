@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\EMap\Entities\HouseOwner;
-use Modules\EMap\Entities\LandOwner;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\LandUseArea;
@@ -242,6 +240,7 @@ class MapApplicationForm extends Component
 
             $mapApply = MapApply::create($this->applyMap + [
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                'sent_to_organization' => 'pending'
             ]);
 
             // foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {

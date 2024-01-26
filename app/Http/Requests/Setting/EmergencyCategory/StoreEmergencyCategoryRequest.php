@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Setting\EmergencyCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class StoreEmergencyCategoryRequest extends FormRequest
 {
@@ -12,7 +11,7 @@ class StoreEmergencyCategoryRequest extends FormRequest
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'title' => ['required'],

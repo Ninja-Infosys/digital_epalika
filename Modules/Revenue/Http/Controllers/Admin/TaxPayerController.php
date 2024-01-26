@@ -43,7 +43,8 @@ class TaxPayerController extends Controller
     public function show(TaxPayer $taxPayer)
     {
         $this->checkAuthorization('taxPayer_access');
-        $taxPayer->load("taxPayerType",
+        $taxPayer->load(
+            "taxPayerType",
             "fiscalYear",
             "user",
             "province",

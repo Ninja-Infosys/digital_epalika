@@ -86,7 +86,7 @@ class Trainer extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('trainer/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }

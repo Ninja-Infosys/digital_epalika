@@ -3,10 +3,7 @@
 namespace Modules\Grant\Http\Controllers\Admin;
 
 use Illuminate\Console\Application;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Redirector;
 use Modules\Grant\Entities\CashGrant;
@@ -43,12 +40,12 @@ class CashGrantController extends Controller
     public function edit(CashGrant $cashGrant)
     {
         $helplessnesstypes = HelplessnessType::all();
-        return view('grant::admin.cash_grant.edit',compact('cashGrant','helplessnesstypes'));
+        return view('grant::admin.cash_grant.edit', compact('cashGrant', 'helplessnesstypes'));
     }
 
-    public function update(UpdateCashGrantRequest $request, CashGrant$cashGrant ): Redirector|Application|RedirectResponse
+    public function update(UpdateCashGrantRequest $request, CashGrant$cashGrant): Redirector|Application|RedirectResponse
     {
-    $cashGrant->update($request->validated());
+        $cashGrant->update($request->validated());
         toast('नगद अनुदन सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.cashGrant.index'));
     }

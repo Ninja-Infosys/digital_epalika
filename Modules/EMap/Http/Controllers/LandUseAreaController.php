@@ -2,8 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\LandUseArea;
 use Modules\EMap\Http\Requests\LandUseArea\StoreLandUseAreaRequest;
@@ -13,7 +11,7 @@ class LandUseAreaController extends Controller
 {
     public function index()
     {
-        $landUseAreas=LandUseArea::latest()->get();
+        $landUseAreas = LandUseArea::latest()->get();
         return view('emap::admin.land_use_area.index', compact('landUseAreas'));
     }
 
@@ -43,13 +41,13 @@ class LandUseAreaController extends Controller
     {
         $landUseArea->update($request->validated());
         toast('भूउपयोग क्षेत्र सफलतापूर्वक अद्यावधिक गरियो', 'success');
-       return redirect(route('emap.admin.landUseArea.index'));
+        return redirect(route('emap.admin.landUseArea.index'));
     }
 
     public function destroy(LandUseArea $landUseArea)
     {
         $landUseArea->delete();
-        toast('भूउपयोग क्षेत्र मेटियो','success');
+        toast('भूउपयोग क्षेत्र मेटियो', 'success');
         return back();
     }
 }

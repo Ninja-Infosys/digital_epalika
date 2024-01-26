@@ -161,8 +161,8 @@ class DashboardController extends Controller
             'mapAccordingToMonth' => (new EmapDashboardController())->mapAccordingToMonth(),
             "businessRegistration" => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
             "wardWise" => (new IdentityDashboardController())->getWardWiseData(),
-            "fyRegistrationAndDispatch" =>(new CircularDashboardController())->getFyRegistrationAndDispatchData(),
-            
+            "fyRegistrationAndDispatch" => (new CircularDashboardController())->getFyRegistrationAndDispatchData(),
+
         ];
     }
 

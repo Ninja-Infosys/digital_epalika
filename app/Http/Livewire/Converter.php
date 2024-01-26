@@ -37,7 +37,7 @@ class Converter extends Component
 
     public function convert()
     {
-        if ($this->si_unit_value > 0 && ! empty($this->conversion_id)) {
+        if ($this->si_unit_value > 0 && !empty($this->conversion_id)) {
             $rate = $this->conversionToSmallest();
 
             $this->convertedData = $rate * $this->si_unit_value;
@@ -81,7 +81,7 @@ class Converter extends Component
             ->whereMeasurementUnitId($biggerUnit->measurement_unit_id)
             ->first();
 
-        if (! empty($smallerUnit)) {
+        if (!empty($smallerUnit)) {
             $conversionRate = UnitConversion::where('conversion_to', $smallerUnit->id)
                 ->where('conversion_from', $biggerUnit->id)
                 ->first();
@@ -96,11 +96,11 @@ class Converter extends Component
     {
         if ($unit->position - 1 > 0) {
             $biggerUnit = Unit::where('position', $unit->position - 1)->first();
-            if (! empty($biggerUnit)) {
+            if (!empty($biggerUnit)) {
                 $conversionRate = UnitConversion::where('conversion_to', $biggerUnit->id)
                     ->where('conversion_from', $unit->id)
                     ->first();
-                if (! empty($conversionRate->rate)) {
+                if (!empty($conversionRate->rate)) {
                     $totalData = $this->convertedData * $conversionRate->rate;
                     $wholePart = floor($totalData);
                     $fraction = $totalData - $wholePart;
@@ -121,7 +121,7 @@ class Converter extends Component
     public function render()
     {
         $this->convert();
-        if (! empty($this->conversion_id)) {
+        if (!empty($this->conversion_id)) {
             $this->units = Unit::where('measurement_unit_id', $this->conversion_id)->orderByDesc('position')->get();
         }
 

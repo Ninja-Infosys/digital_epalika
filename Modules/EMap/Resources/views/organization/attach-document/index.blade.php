@@ -29,23 +29,26 @@
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
                                     <th>शिर्षक</th>
+                                    <th>Need From</th>
                                     <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($forms as $form)
-                                    <tr>
+                                    <tr @if ($form->map_status==\Modules\EMap\Enums\DocumentStatusEnum::REJECTED) style="background-color:#d16969;" @endif>
                                         <td>{{ get_nepali_number($loop->iteration) }}</td>
                                         <td>{{ $form->title }}</td>
                                         <td>
+                                            {{ $form->need_from?->label() ?? '' }}
                                             {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}} --}}
                                         </td>
+                                        <td>{{$form->map_status?->label()}}</td>
                                         <td class="d-flex">
 
                                             @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)

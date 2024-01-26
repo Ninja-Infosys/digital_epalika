@@ -86,7 +86,7 @@ class FrontController extends Controller
 
     public function category(): void
     {
-//        return view('frontend.static.category.category');
+        //        return view('frontend.static.category.category');
     }
 
     public function representative()
@@ -136,12 +136,12 @@ class FrontController extends Controller
 
     public function single_executive(): void
     {
-//        return view('frontend.static.executive-board.single-executive-board');
+        //        return view('frontend.static.executive-board.single-executive-board');
     }
 
     public function service_details(): void
     {
-//        return view('frontend.static.chat.service');
+        //        return view('frontend.static.chat.service');
     }
 
     public function seniorCitizenDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)

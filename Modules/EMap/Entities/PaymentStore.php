@@ -13,7 +13,11 @@ use Modules\EMap\Enums\DocumentStatusEnum;
 
 class PaymentStore extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+
+    protected $touches = ['mapApply'];
 
     protected $dates = [
         'created_at',

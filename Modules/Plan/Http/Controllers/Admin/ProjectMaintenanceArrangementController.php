@@ -42,7 +42,7 @@ class ProjectMaintenanceArrangementController extends Controller
                 'public_service' => $request->input('public_service') ?? 0,
                 'service_fee' => $request->input('service_fee') ?? 0,
                 'from_fee_donation' => $request->input('from_fee_donation') ?? 0,
-                'others' => $request->input('others')??0
+                'others' => $request->input('others') ?? 0
             ]
         );
 

@@ -39,7 +39,7 @@ enum DetailsRegardingCriteriaEnum: string
 
     public function getFormula(self $value)
     {
-        switch ($value){
+        switch ($value) {
             case (self::FAR):
 
             default:

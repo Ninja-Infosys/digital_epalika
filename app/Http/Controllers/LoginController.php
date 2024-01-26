@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\App;
 
 class LoginController extends Controller
 {
-//    public function __construct()
-//    {
-//        parent::__construct();
-//
-//        $this->middleware('guest')->except([
-//            'locked',
-//            'unlock',
-//        ]);
-//    }
+    //    public function __construct()
+    //    {
+    //        parent::__construct();
+    //
+    //        $this->middleware('guest')->except([
+    //            'locked',
+    //            'unlock',
+    //        ]);
+    //    }
 
     public function locked()
     {

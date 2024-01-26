@@ -43,7 +43,12 @@ class MapController extends Controller
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->latest()
+            ->whereHas('landDetail', function (Builder $q) {
+                if (!empty(auth()->user()->ward_no)) {
+                    $q->where('ward_no', auth()->user()->ward_no);
+                }
+            })
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
 

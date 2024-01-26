@@ -21,11 +21,11 @@ class UpdateGovernmentalDisablityRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'title_en' => ['required', 'string', 'max:255'],
             'color' => ['required', 'string', 'max:255'],
-            'position'=>['nullable','integer'],
-            'header_color'=>['nullable'],
-            'font_color'=>['nullable'],
-            'raven_background'=>['nullable'],
-            'category'=>['required',Rule::unique('governmental_disability_types','category')->withoutTrashed()->ignore($this->governmentalDisabilityType), new Enum(CategoryTypeEnum::class)],
+            'position' => ['nullable','integer'],
+            'header_color' => ['nullable'],
+            'font_color' => ['nullable'],
+            'raven_background' => ['nullable'],
+            'category' => ['required',Rule::unique('governmental_disability_types', 'category')->withoutTrashed()->ignore($this->governmentalDisabilityType), new Enum(CategoryTypeEnum::class)],
         ];
     }
 

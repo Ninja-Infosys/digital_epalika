@@ -32,7 +32,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('cooperativeType', CooperativeTypeController::class);
     Route::resource('grantProgram', GrantProgramController::class);
     Route::resource('grantOffice', GrantOfficeController::class);
-    Route::resource('helplessnessType',HelplessnessTypeController::class);
+    Route::resource('helplessnessType', HelplessnessTypeController::class);
 });
 
 Route::prefix('grantee')->group(function () {
@@ -81,4 +81,4 @@ Route::controller(CooperativeReportController::class)->prefix('report/cooperativ
 });
 
 
-Route::resource('cashGrant',CashGrantController::class);
+Route::resource('cashGrant', CashGrantController::class);

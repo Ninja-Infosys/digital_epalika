@@ -2,18 +2,14 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\SipharisCategory;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Recommendation\Entities\SipharishFormType;
 use Modules\Recommendation\Entities\SipharisSubCategory;
 use Modules\Recommendation\Http\Requests\SipharishCreated\StoreSipharisCreatedRequest;
-use Modules\Recommendation\Transformers\SifarishFormFieldResource;
 use Modules\Recommendation\Transformers\SipharishCreateListResource;
 use Modules\Recommendation\Transformers\SipharishCreateResource;
 use Modules\Recommendation\Transformers\SipharishFormFieldResource;

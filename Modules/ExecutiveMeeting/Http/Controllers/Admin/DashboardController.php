@@ -19,7 +19,8 @@ class DashboardController extends Controller
 
         return view('executivemeeting::admin.dashboard', compact('members_count', 'meetings_count', 'upcoming_meetings', 'completed_meetings'));
     }
-    public function ajaxData(){
+    public function ajaxData()
+    {
         return [
             'committeeWiseMeetings' => $this->getCommitteeWiseMeetings()
         ];

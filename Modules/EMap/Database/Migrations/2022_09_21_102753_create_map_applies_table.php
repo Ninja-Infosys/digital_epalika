@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class () extends Migration {
     public function up()
     {
         Schema::create('map_applies', function (Blueprint $table) {
@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->string('registration_no')->nullable()->comment('दर्ता नम्बर');
             $table->string('registration_date')->nullable()->comment('दर्ता मिति');
             $table->string('construction_type')->comment('निर्माण कार्यको किसिम');
-            $table->string('usage')->comment('प्रयोजन');
+            $table->string('usage')->nullable()->comment('प्रयोजन');
             $table->string('building_category')->nullable()->comment('भवन ऐन अनुसार वर्गीकरण');
             $table->foreignId('structure_type_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('fiscal_year_id')->nullable()->constrained()->cascadeOnDelete();

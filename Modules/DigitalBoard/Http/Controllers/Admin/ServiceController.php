@@ -82,13 +82,13 @@ class ServiceController extends Controller
 
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
                 ServiceDocument::updateOrCreate(
-                    ['service_id'=>$service->id,'id'=>$serviceDocument['id'] ?? null],
+                    ['service_id' => $service->id,'id' => $serviceDocument['id'] ?? null],
                     $serviceDocument
                 );
             }
             foreach ($request->input('serviceProcesses') as $serviceProcess) {
                 ServiceProcess::updateOrCreate(
-                    ['service_id'=>$service->id,'id'=>$serviceProcess['id'] ?? null],
+                    ['service_id' => $service->id,'id' => $serviceProcess['id'] ?? null],
                     $serviceProcess
                 );
             }

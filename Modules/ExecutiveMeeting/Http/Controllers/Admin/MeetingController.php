@@ -4,10 +4,8 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
-use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Modules\ExecutiveMeeting\Entities\Committee;
 use Modules\ExecutiveMeeting\Entities\Meeting;
@@ -73,7 +71,7 @@ class MeetingController extends Controller
     {
         $this->checkAuthorization('meeting_access');
 
-        $meeting->load('committee','meetingMinute', 'meetingParticipants');
+        $meeting->load('committee', 'meetingMinute', 'meetingParticipants');
 
         return view('executivemeeting::admin.meeting.show', compact('meeting'));
     }

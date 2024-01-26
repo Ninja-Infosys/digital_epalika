@@ -2,8 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\CriteriaDetailSetting;
 use Modules\EMap\Entities\LandUseArea;
@@ -21,7 +19,7 @@ class CriteriaDetailSettingController extends Controller
     public function create()
     {
         $landUseAreas = LandUseArea::all();
-        return view('emap::admin.criteriaDetailSetting.create',compact('landUseAreas'));
+        return view('emap::admin.criteriaDetailSetting.create', compact('landUseAreas'));
     }
 
     public function store(StoreCriteriaDetailSettingRequest $request)

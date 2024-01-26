@@ -86,5 +86,5 @@ class Branch extends Model
     public function grievanceDetails(): HasMany
     {
         return $this->hasMany(GrievanceDetail::class);
-    }   
+    }
 }

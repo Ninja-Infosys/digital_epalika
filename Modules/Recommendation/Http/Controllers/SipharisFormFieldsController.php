@@ -29,9 +29,9 @@ class SipharisFormFieldsController extends Controller
         foreach($request['field'] as $data) {
             //dd($data);die;
             SipharisFormFields::create([
-                'sipharish_form_type_id'=>$sipharis,
-                'field_name'=>$data['field_name'],
-                'status'    =>$data['status'] ?? 'active',
+                'sipharish_form_type_id' => $sipharis,
+                'field_name' => $data['field_name'],
+                'status'    => $data['status'] ?? 'active',
                 'created_by' => auth()->id(),
                 ]);
         }
@@ -64,9 +64,9 @@ class SipharisFormFieldsController extends Controller
 
         $getsipharishFormType = SipharisFormType::find($sipharishFormType);
         if($getSipharisCategory->status == 'active') {
-            $sipharishFormType->update(['status'=>'inactive']);
+            $sipharishFormType->update(['status' => 'inactive']);
         } else {
-            $sipharishFormType->update(['status'=>'active']);
+            $sipharishFormType->update(['status' => 'active']);
         }
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();

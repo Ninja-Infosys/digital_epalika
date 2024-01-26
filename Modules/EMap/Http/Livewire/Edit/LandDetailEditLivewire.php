@@ -49,7 +49,7 @@ class LandDetailEditLivewire extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = ! $this->editForm;
+        $this->editForm = !$this->editForm;
     }
 
     protected array $landDescriptionValidations = [

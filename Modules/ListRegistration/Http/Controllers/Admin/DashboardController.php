@@ -56,12 +56,13 @@ class DashboardController extends Controller
             )
         );
     }
-    
-    public function ajaxData(){
+
+    public function ajaxData()
+    {
         return [
             'applicantTypeWiseData' => $this->getApplicantTypeWiseData(),
             'businessNatureWiseData' => $this->getBusinessNatureWiseData(),
-            'monthWise'=> $this->getAccordingToMonth()
+            'monthWise' => $this->getAccordingToMonth()
         ];
     }
 
@@ -105,7 +106,7 @@ class DashboardController extends Controller
         $this->listRegistrations->where('fiscal_year_id', officeSetting()->fiscal_year_id)
             ->each(function ($notice) use ($totalCount) {
                 $nepaliDate = explode('-', $notice->date);
-                $totalCount[(int)$nepaliDate[1]-1] +=1;
+                $totalCount[(int)$nepaliDate[1] - 1] += 1;
             });
 
         return [

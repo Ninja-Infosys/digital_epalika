@@ -10,12 +10,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
-use Laravel\Passport\Passport;
 
 class AuthController extends Controller
 {
-
     public function signup(Request $request)
     {
         $validated = $request->validate([

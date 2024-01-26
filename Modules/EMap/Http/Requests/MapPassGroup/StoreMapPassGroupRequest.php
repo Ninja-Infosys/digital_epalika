@@ -2,10 +2,7 @@
 
 namespace Modules\EMap\Http\Requests\MapPassGroup;
 
-
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class StoreMapPassGroupRequest extends FormRequest
 {

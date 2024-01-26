@@ -20,6 +20,7 @@ use Modules\EMap\Entities\AppliedDocumentStatus;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Enums\FormTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
+
 class DocumentAttachController extends Controller
 {
     public function store(Request $request, MapApply $mapApply, Form $form, FormDataType  $formDataType)
@@ -87,7 +88,7 @@ class DocumentAttachController extends Controller
     }
 
 
-    public function formStoreDetail( FormStore $formStore)
+    public function formStoreDetail(FormStore $formStore)
     {
         $formStore->load('formStoreStatuses');
         toast('', 'success');

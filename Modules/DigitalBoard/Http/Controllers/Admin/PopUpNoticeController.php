@@ -2,7 +2,6 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +10,6 @@ use Illuminate\Support\Str;
 use Modules\DigitalBoard\Http\Requests\PopUpNotice\StorePopUpNoticeRequest;
 use Modules\DigitalBoard\Http\Requests\PopUpNotice\UpdatePopUpNoticeRequest;
 use Illuminate\Support\Facades\DB;
-
 
 class PopUpNoticeController extends Controller
 {
@@ -28,7 +26,7 @@ class PopUpNoticeController extends Controller
         return view('digitalboard::admin.popUpNotice.create');
     }
 
-    public function store(StorePopUpNoticeRequest $request,)
+    public function store(StorePopUpNoticeRequest $request)
     {
         $this->checkAuthorization('digitalBoardNotice_create');
         $data = $request->validate([

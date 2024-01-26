@@ -15,7 +15,7 @@ enum ComplainTypeEnum: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
-            self:: ORGANIZATIONAL => 'संस्थागत',
+            self::ORGANIZATIONAL => 'संस्थागत',
             self::PERSONAL => 'व्यक्तिगत'
         };
     }

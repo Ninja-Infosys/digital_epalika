@@ -39,7 +39,7 @@ class TaxClearance extends Model
 
     public function setDocumentAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['document'] = $value->store('user/detail/org/taxClearance', 'public');
         }
     }
