@@ -56,7 +56,7 @@
                                         @if ($type == 'budgetSubHead')
                                             <td>{{ $budgetHead->budgetHead->title ?? '' }}</td>
                                         @endif
-                                        <td class="d-flex gap-1">
+                                        <td class="d-flex d-warp gap-1">
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.plan.budgetHead.edit', [$type, $budgetHead]) }}"
                                                 class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"

@@ -61,6 +61,7 @@
             class="form-select @error('ward_no') is-invalid @enderror"
             id="ward_no">
             <option value="">वडा नं. छान्नुहोस्</option>
+            
             @for($i=1;$i<=$wards;$i++)
                 <option value="{{$i}}">
                     {{$i}}

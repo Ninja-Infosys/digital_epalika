@@ -28,12 +28,17 @@ class Notice extends Model
         'title',
         'date',
         'en_date',
+        'ward_no',
         'description',
         'closed_at',
         'show_on_index',
         'user_id',
         'type',
         'fiscal_year_id',
+    ];
+
+    protected $casts = [
+        'ward_no' => 'array',
     ];
 
     // public function user(): BelongsTo
