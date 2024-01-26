@@ -56,14 +56,11 @@ class AdminStepController extends Controller
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
         $this->getStatusValidation($request);
         DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
-
             if ($lastStep == $form->order) {
-                // dd('dd');
                 $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
                     ->where('map_apply_id', $mapApply->id)
                     ->where('form_id', $form->id)
                     ->pluck('status');
-
                 $formStoreStatus = FormStore::where('map_apply_id', $mapApply->id)
                     ->where('form_id', $form->id)
                     ->pluck('status');
@@ -102,6 +99,11 @@ class AdminStepController extends Controller
                 $appliedDocument->update([
                     'status' => $request->input('status')
                 ]);
+                AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
+                    ->orderBy('id', 'desc')
+                    ->first()?->update([
+                        'status' => $request->input('status')
+                    ]);
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
             } elseif ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
                 if ($appliedDocument->status != DocumentStatusEnum::APPROVED) {
@@ -119,11 +121,17 @@ class AdminStepController extends Controller
                 $appliedDocument->update([
                     'status' => $request->input('status')
                 ]);
-                $appliedDocument->appliedDocumentStatuses()->create([
+                $appliedDocumentStatusData = $appliedDocument->appliedDocumentStatuses()->create([
                     "applied_document_id" => $appliedDocument->id,
                     "status" => $request->input('status'),
                     "comment" => $request->input('comment'),
                 ]);
+                foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                    $appliedDocumentStatusData->appliedMapFiles()->create([
+                        "map_apply_id" => $mapApply->id,
+                        "document" => $existingFile->document,
+                    ]);
+                }
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
             }
             Notification::send($mapApply->organization, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
@@ -172,7 +180,6 @@ class AdminStepController extends Controller
                     ]);
                 }
             }
-
             $formStore->update([
                 'status' => $request->input('status')
             ]);
