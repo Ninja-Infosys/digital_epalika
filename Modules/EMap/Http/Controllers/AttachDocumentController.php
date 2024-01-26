@@ -149,28 +149,49 @@ class AttachDocumentController extends Controller
             ]);
             DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
-                $appliedDocumentStatus = AppliedDocumentStatus::create([
-                    "applied_document_id" => $appliedDocument->id,
-                    "status" => DocumentStatusEnum::PENDING->value
-                ]);
+                if ($appliedDocument->status == DocumentStatusEnum::PENDING) {
+                    foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                        $existingFile->forceDelete();
+                        foreach ($data['documents'] as $file) {
+                            $appliedDocument->appliedMapFiles()->create([
+                                "map_apply_id" => $mapApply->id,
+                                "document" => $file->store('appliedDocument', 'public'),
+                            ]);
+                        }
+                    }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                    return back();
+                } elseif ($appliedDocument->status == DocumentStatusEnum::REVIEW) {
+                    toast('Document On Review You Cannot Change Document', 'error');
+                    return back();
+                } elseif ($appliedDocument->status == DocumentStatusEnum::APPROVED) {
+                    toast('Document Is Already Approved', 'warning');
+                    return back();
+                } else {
+                    $appliedDocument->update([
+                        'status' => DocumentStatusEnum::PENDING->value
+                    ]);
+                    $appliedDocumentStatus = AppliedDocumentStatus::create([
+                        "applied_document_id" => $appliedDocument->id,
+                        "status" => DocumentStatusEnum::PENDING->value
+                    ]);
+                    foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                        $appliedDocumentStatus->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $existingFile->document,
+                        ]);
+                        $existingFile->forceDelete();
+                    }
+                    foreach ($data['documents'] as $file) {
+                        $appliedDocument->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $file->store('appliedDocument', 'public'),
+                        ]);
+                    }
+                }
 
-                foreach ($appliedDocument->appliedMapFiles as $existingFile) {
-                    $appliedDocumentStatus->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $existingFile->document,
-                    ]);
-                    $existingFile->forceDelete();
-                }
-                foreach ($data['documents'] as $file) {
-                    $appliedDocument->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $file->store('appliedDocument', 'public'),
-                    ]);
-                }
                 Notification::send($form->group->users, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
             });
-
-            toast('फाईल सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
                 'data' => ['required'],
