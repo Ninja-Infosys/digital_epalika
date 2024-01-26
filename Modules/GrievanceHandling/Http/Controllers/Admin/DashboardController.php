@@ -9,7 +9,6 @@ use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
 use Modules\GrievanceHandling\Enums\GrievanceStatus;
@@ -131,7 +130,7 @@ class DashboardController extends Controller
             return [
                 'name' => $grievanceTypes->title ." (".$grievanceTypes->grievance_details_count.")",
                 'data' => $grievanceTypes->grievance_details_count,
-               
+
             ];
         });
 

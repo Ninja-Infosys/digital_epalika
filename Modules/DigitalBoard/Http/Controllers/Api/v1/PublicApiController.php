@@ -7,9 +7,8 @@ use App\Models\Settings\Branch;
 use App\Models\Settings\Employee;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-  use Modules\DigitalBoard\Entities\Audio;
+use Modules\DigitalBoard\Entities\Audio;
 use Modules\DigitalBoard\Entities\CitizenCharter;
-use Modules\DigitalBoard\Entities\News;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\PopUpNotice;
 use Modules\DigitalBoard\Entities\PhotoGallery;

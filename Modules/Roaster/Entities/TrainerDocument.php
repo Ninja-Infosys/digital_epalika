@@ -28,7 +28,7 @@ class TrainerDocument extends Model
 
     public function setDocumentAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['document'] = $value->store('trainer_documents/'.Str::slug($this->attributes['title'], '_'), 'public');
         }
     }

@@ -11,7 +11,7 @@ class ServiceProcessLivewire extends Component
 
     public function mount($service = null)
     {
-        if (! empty($service)) {
+        if (!empty($service)) {
             foreach ($service->serviceProcesses as $serviceProcess) {
                 $this->serviceProcesses[] = [
                     'id' => $serviceProcess->id,
@@ -30,7 +30,7 @@ class ServiceProcessLivewire extends Component
 
     public function removeRow($index)
     {
-        if (! empty($this->serviceProcesses[$index]['id'])) {
+        if (!empty($this->serviceProcesses[$index]['id'])) {
             ServiceProcess::find($this->serviceProcesses[$index]['id'])->delete();
         }
 

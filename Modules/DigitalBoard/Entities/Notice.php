@@ -66,15 +66,15 @@ class Notice extends Model
     //     return $builder->whereNull('closed_at');
     // }
 
-     public function scopeNotice($builder)
-     {
-         return $builder->where('type', 'Notice');
-     }
+    public function scopeNotice($builder)
+    {
+        return $builder->where('type', 'Notice');
+    }
 
-     public function scopeNews($builder)
-     {
-         return $builder->where('type', "News");
-     }
+    public function scopeNews($builder)
+    {
+        return $builder->where('type', "News");
+    }
 
     public function user(): BelongsTo
     {

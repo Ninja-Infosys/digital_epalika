@@ -8,7 +8,7 @@ class RegistrationDetailObserver
 {
     public function creating(RegistrationDetail $registrationDetail): void
     {
-        $registrationDetail->registration_no = 'RD'.'-' .rand(0, 999) . '-'.officeSetting()->fiscalYear->title ??'';
+        $registrationDetail->registration_no = 'RD'.'-' .rand(0, 999) . '-'.officeSetting()->fiscalYear->title ?? '';
         $registrationDetail->user_id = auth()->id();
     }
 }

@@ -20,7 +20,7 @@ class UpdateStreetDetailRequest extends FormRequest
 
             'name' => ['required', 'string', 'max:255'],
             'from' => ['required','string','max:255'],
-            'to' =>['required', 'string', 'max:255'],
+            'to' => ['required', 'string', 'max:255'],
             'setback' => ['required', 'string', 'max:255'],
             'street_code' => ['required', 'string', 'max:255'],
             'condition' => ['required', new Enum(RoadConditionEnum::class)],

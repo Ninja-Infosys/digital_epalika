@@ -15,7 +15,7 @@ class UpdateRegistrationRequest extends FormRequest
 
     public function rules(): array
     {
-        $data= [
+        $data = [
             'date_ne' => ['required'],
             'date_en' => ['required'],
             'recommendation_data' => ['required'],

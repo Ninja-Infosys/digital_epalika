@@ -29,73 +29,74 @@ class DashboardController extends Controller
         $map_apply_count = MapApply::count();
         return view('emap::admin.dashboard', compact('organization_count', 'map_apply_count', ));
     }
-public function ajaxData(){
-    return [
-        'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
-        'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
-        'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
-        'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
-        'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
-        'mapAccordingToMonth' => $this->mapAccordingToMonth(),
-    ];
-}
-public function getMapApplyStructureTypeAccordingToFiscalYear()
-{
-    $structureTypes = StructureType::withCount('mapApply')
-        ->selectRaw('id,title')
-        ->get()
-        ->map(function ($structure) {
-            return [
-                'name' => $structure->title,
-                'data' => (int) $structure->map_apply_count,
-                'color' => generateRandomRGBAColor()
-            ];
-        });
+    public function ajaxData()
+    {
+        return [
+            'mapApply' => $this->getMapApplyAccordingToFiscalYear(),
+            'buildingUsage' => $this->getMapApplyBuildingUsageAccordingToFiscalYear(),
+            'buildingCategory' => $this->getMapApplyBuildingCategoryAccordingToFiscalYear(),
+            'constructionType' => $this->getMapApplyConstructionTypeAccordingToFiscalYear(),
+            'structureType' => $this->getMapApplyStructureTypeAccordingToFiscalYear(),
+            'mapAccordingToMonth' => $this->mapAccordingToMonth(),
+        ];
+    }
+    public function getMapApplyStructureTypeAccordingToFiscalYear()
+    {
+        $structureTypes = StructureType::withCount('mapApply')
+            ->selectRaw('id,title')
+            ->get()
+            ->map(function ($structure) {
+                return [
+                    'name' => $structure->title,
+                    'data' => (int) $structure->map_apply_count,
+                    'color' => generateRandomRGBAColor()
+                ];
+            });
 
-    $chartData = [
-        'labels' => $structureTypes->pluck('name')->toArray(),
-        'option' => ChartOptionEnum::PIE_CHART->option(),
-        'dataSets' => [
-            [ 
-                'label' => 'जम्मा',
-                'data' => $structureTypes->pluck('data')->toArray(),
-                'backgroundColor' => $structureTypes->pluck('color')?->toArray(),
-                'borderColor' => $structureTypes->pluck('color')?->toArray(),
-                'borderWidth' => 1,
+        $chartData = [
+            'labels' => $structureTypes->pluck('name')->toArray(),
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'label' => 'जम्मा',
+                    'data' => $structureTypes->pluck('data')->toArray(),
+                    'backgroundColor' => $structureTypes->pluck('color')?->toArray(),
+                    'borderColor' => $structureTypes->pluck('color')?->toArray(),
+                    'borderWidth' => 1,
+                ],
             ],
-        ],
-    ];
+        ];
 
-    return $chartData;
-}
-
-public function getMapApplyConstructionTypeAccordingToFiscalYear()
-{
-   
-    $officeSetting = $this->getOfficeSetting();
-    $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
-    $constructionTypes = $mapApplies->pluck('construction_type')->unique();
- 
-    foreach ($constructionTypes as $type) {
-        $data[] = $mapApplies->where('construction_type', $type)->count();
+        return $chartData;
     }
 
-    $chartData = [
-        'labels' =>  array_values($constructionTypes->map(function($constructionType){
-                return TypeOfConstructionWorkEnum::tryFrom($constructionType)->label() ?? '';
-        })->toArray()),
-        'dataSets' => [
-            [
-                'data' => $data,
-                'label' => 'जम्मा',
-                'backgroundColor' => $this->generateRandomRGBAColors(count($constructionTypes)),
-                'borderWidth' => 1,
-            ],
-        ],
-    ];
+    public function getMapApplyConstructionTypeAccordingToFiscalYear()
+    {
 
-    return $chartData;
-}
+        $officeSetting = $this->getOfficeSetting();
+        $mapApplies = $this->getMapApply($officeSetting->fiscal_year_id);
+        $constructionTypes = $mapApplies->pluck('construction_type')->unique();
+
+        foreach ($constructionTypes as $type) {
+            $data[] = $mapApplies->where('construction_type', $type)->count();
+        }
+
+        $chartData = [
+            'labels' =>  array_values($constructionTypes->map(function ($constructionType) {
+                return TypeOfConstructionWorkEnum::tryFrom($constructionType)->label() ?? '';
+            })->toArray()),
+            'dataSets' => [
+                [
+                    'data' => $data,
+                    'label' => 'जम्मा',
+                    'backgroundColor' => $this->generateRandomRGBAColors(count($constructionTypes)),
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
+
+        return $chartData;
+    }
 
 
     public function getMapApplyAccordingToFiscalYear(): array
@@ -111,8 +112,8 @@ public function getMapApplyConstructionTypeAccordingToFiscalYear()
         ->map(function ($fiscalYear) {
             return [
                 'title' => $fiscalYear->title,
-                'map_applies_count'=> (int)$fiscalYear->map_applies_count,
-                'mapRegistrationCount'=> (int)$fiscalYear->mapRegistrationCount,
+                'map_applies_count' => (int)$fiscalYear->map_applies_count,
+                'mapRegistrationCount' => (int)$fiscalYear->mapRegistrationCount,
                 'mapVerificationCount' => (int)$fiscalYear->mapVerificationCount,
             ];
         });
@@ -121,7 +122,7 @@ public function getMapApplyConstructionTypeAccordingToFiscalYear()
             'dataSets' => [
                 [
                     'data' => $fiscalYear->pluck('map_applies_count')->toArray(),
-                    'label' => 'जम्मा नक्सा', 
+                    'label' => 'जम्मा नक्सा',
                     'backgroundColor' => generateRandomRGBAColor(),
                     'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
@@ -181,18 +182,18 @@ public function getMapApplyConstructionTypeAccordingToFiscalYear()
         ];
         return $chartData;
     }
-    
+
     private function generateRandomRGBAColors($count)
     {
         $colors = [];
-    
+
         for ($i = 0; $i < $count; $i++) {
             $colors[] = 'rgba(' . mt_rand(0, 255) . ', ' . mt_rand(0, 255) . ', ' . mt_rand(0, 255) . ', ' . (mt_rand(50, 100) / 100) . ')';
         }
-    
+
         return $colors;
     }
-    
+
 
 
     public function getMapApplyBuildingCategoryAccordingToFiscalYear()
@@ -265,7 +266,7 @@ public function getMapApplyConstructionTypeAccordingToFiscalYear()
 
         return [
             'labels' => $this->month_name,
-            
+
             'dataSets' => [
                 [
                     'data' => $month,

@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\EMap\Entities\HouseOwner;
-use Modules\EMap\Entities\LandOwner;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\LandUseArea;

@@ -41,7 +41,7 @@ class DisabilityTypeController extends Controller
     {
         $this->checkAuthorization('disabilityType_edit');
         $disabilityTypes = DisabilityType::whereNull('disability_type_id')->latest()->get();
-        return view('identity::admin.setting.disabilityType.edit', compact('disabilityType','disabilityTypes'));
+        return view('identity::admin.setting.disabilityType.edit', compact('disabilityType', 'disabilityTypes'));
     }
 
     public function update(UpdateDisabilityTypeRequest $request, DisabilityType $disabilityType)

@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\EmergencyCategory\StoreEmergencyCategoryRequest;
 use App\Http\Requests\Setting\EmergencyCategory\UpdateEmergencyCategoryRequest;
 use App\Models\Settings\EmergencyCategory;
-use Illuminate\Http\Request;
 
 class EmergencyCategoryController extends Controller
 {
-
     public function index()
     {
         $this->checkAuthorization('emergencyNumber_access');
@@ -38,7 +36,7 @@ class EmergencyCategoryController extends Controller
 
     public function edit(EmergencyCategory $emergencyCategory)
     {
-        return view('admin.global.emergencyCategory.edit',compact('emergencyCategory'));
+        return view('admin.global.emergencyCategory.edit', compact('emergencyCategory'));
     }
 
     public function update(UpdateEmergencyCategoryRequest $request, EmergencyCategory $emergencyCategory)

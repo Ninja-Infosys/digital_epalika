@@ -40,7 +40,7 @@ class DesignerDetailEditLivewire extends Component
         }
 
         foreach (PostsEnum::cases() as $postsEnum) {
-            if (! $availablePost->unique()->contains($postsEnum->value)) {
+            if (!$availablePost->unique()->contains($postsEnum->value)) {
                 $this->designerDetails[] = [
                     'post' => $postsEnum->value,
                     'name' => null,
@@ -97,7 +97,7 @@ class DesignerDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->designerDetails[$this->dataToEdit];
 
-                if (! empty($dataToSave['id'])) {
+                if (!empty($dataToSave['id'])) {
                     DesignerDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
                     DesignerDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);

@@ -9,12 +9,12 @@ use Modules\EMap\Enums\SignEnum;
 
 class StoreCriteriaDetailSettingRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'land_use_area_id' => ['required', Rule::exists('land_use_areas', 'id')->withoutTrashed()],

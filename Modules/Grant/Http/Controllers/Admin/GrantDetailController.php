@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
-use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
 
 class GrantDetailController extends Controller
@@ -27,9 +26,9 @@ class GrantDetailController extends Controller
                 }
 
 
-                    if (!auth()->user()?->load('role')?->role?->type == 'Super') {
-                        $q->where('user_id', auth()->id());
-                    }
+                if (!auth()->user()?->load('role')?->role?->type == 'Super') {
+                    $q->where('user_id', auth()->id());
+                }
             })
             ->latest()
             ->paginate(10);

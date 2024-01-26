@@ -40,7 +40,8 @@ class DashboardController extends Controller
             'businessRenewCount'
         ));
     }
-    public function ajaxData(){
+    public function ajaxData()
+    {
         return [
             'businessRegistration' => $this->getBusinessRegistrationAccordingToFiscalYear(),
             'wardWise' => $this->getWardWiseData(),
@@ -138,7 +139,7 @@ class DashboardController extends Controller
             ],
         ];
     }
-    
+
 
 
     public function getMonthlyWise(): array

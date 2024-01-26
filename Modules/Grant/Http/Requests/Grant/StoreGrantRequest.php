@@ -24,7 +24,7 @@ class StoreGrantRequest extends FormRequest
             'grant_program_name' => ['required','string','max:255'],
             'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'grant_amount' => ['required', 'numeric'],
-            'grant_for'=>['required','array'],
+            'grant_for' => ['required','array'],
             'grant_for.*' => ['required',new Enum(GranteeEnum::class)],
             'main_activity' => ['nullable'],
             'remarks' => ['nullable'],

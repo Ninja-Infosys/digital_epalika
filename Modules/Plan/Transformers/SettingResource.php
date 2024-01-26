@@ -17,11 +17,11 @@ class SettingResource extends JsonResource
         $request_columns = $request->input('columns')['map_settings'] ?? [];
 
         return [
-            'thumbnail' => $this->thumbnail??'',
-            'document' => $this->document??'',
-            'map_request_form_format' => $this->map_request_form_format??'',
-            'land_measurement_id' => $this->land_measurement_id??'',
-            'land_measurement_standard_id' =>$this->land_measurement_standard_id??'',
+            'thumbnail' => $this->thumbnail ?? '',
+            'document' => $this->document ?? '',
+            'map_request_form_format' => $this->map_request_form_format ?? '',
+            'land_measurement_id' => $this->land_measurement_id ?? '',
+            'land_measurement_standard_id' => $this->land_measurement_standard_id ?? '',
 
 
         ];

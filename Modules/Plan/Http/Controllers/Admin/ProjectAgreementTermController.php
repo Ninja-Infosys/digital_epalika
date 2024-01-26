@@ -22,8 +22,8 @@ class ProjectAgreementTermController extends Controller
     {
         $project->load('projectAgreementTerm');
 
-        $today_date=$this->get_today_nepali_date();
-        $agreementTermTemplate=(string)View::make('plan::admin.setting.template.agreement_term_template', compact('project', 'today_date'));
+        $today_date = $this->get_today_nepali_date();
+        $agreementTermTemplate = (string)View::make('plan::admin.setting.template.agreement_term_template', compact('project', 'today_date'));
         $project->load('projectAgreementTerm');
 
         return view('plan::admin.agreement_term.create', compact('project', 'agreementTermTemplate'));

@@ -12,8 +12,10 @@ class RecommendationTemplateSettingController extends Controller
     public function index()
     {
         $recommendationTemplateSetting = recommendationTemplateSettingData();
-        return view('identity::admin.setting.recommendationSetting.index',
-            compact('recommendationTemplateSetting'));
+        return view(
+            'identity::admin.setting.recommendationSetting.index',
+            compact('recommendationTemplateSetting')
+        );
     }
 
     public function store(Request $request)

@@ -317,7 +317,7 @@ trait TrainerHelperTrait
         $data = $this->validate()['form'];
 
         DB::transaction(function () use ($data) {
-            if (! empty($this->trainer)) {
+            if (!empty($this->trainer)) {
                 $this->trainer->update($data);
                 $this->saveArrayData($this->trainer, $this->form);
                 $this->dispatchBrowserEvent('alert_message', [

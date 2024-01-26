@@ -52,7 +52,7 @@ class GrantDetailLivewire extends Component
         'contact' => null,
     ];
 
-    protected $listeners = ['fetchGranteesData', "storeData"=>'storeAndUpdateData'];
+    protected $listeners = ['fetchGranteesData', "storeData" => 'storeAndUpdateData'];
     private array $families = [];
 
     public function mount($grantDetail = null): void
@@ -76,7 +76,8 @@ class GrantDetailLivewire extends Component
         if ($this->form['grant_for'] == 'farmer' && !is_null($this->form['model_id'])) {
             $farmer = Farmer::with(
                 'farmers',
-                'farmer')
+                'farmer'
+            )
                 ->find($this->form['model_id']);
             $familyId = [];
             $familyId[] = $farmer->id;

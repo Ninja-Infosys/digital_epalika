@@ -7,17 +7,17 @@ use Illuminate\Validation\Rule;
 
 class StoreCitizenCharterRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'branch_id' => ['required','string',Rule::exists('branches', 'id')],
             'service' => ['required','string'],
-            'required_document' =>['nullable','string'],
+            'required_document' => ['nullable','string'],
             'amount' => ['required','string'],
             'time' => ['required','string'],
             'responsible_person' => ['required','string'],

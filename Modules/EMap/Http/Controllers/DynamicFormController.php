@@ -2,7 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\DynamicForm;
@@ -79,9 +78,9 @@ class DynamicFormController extends Controller
 
     public function templateStore(Request $request, DynamicForm $dynamicForm)
     {
-       $data =  $request->validate([
-           'template'=>['required']
-        ]);
+        $data =  $request->validate([
+            'template' => ['required']
+         ]);
 
         $dynamicForm->update($data);
         toast('फारम सम्पादन गरियो', 'success');

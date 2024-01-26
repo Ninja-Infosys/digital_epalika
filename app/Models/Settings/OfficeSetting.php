@@ -46,28 +46,28 @@ class OfficeSetting extends Model
 
     public function setLogoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['logo'] = $value->store('office_setting/logo', 'public');
         }
     }
 
     public function setLogo1Attribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['logo1'] = $value->store('office_setting/logo', 'public');
         }
     }
 
     public function setLogo2Attribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['logo2'] = $value->store('office_setting/logo', 'public');
         }
     }
 
     public function setBackgroundImageAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['background_image'] = $value->store('office_setting/logo', 'public');
         }
     }

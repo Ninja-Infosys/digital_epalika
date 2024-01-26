@@ -3,26 +3,24 @@
 namespace Modules\EMap\Http\Requests\StreetDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
-use Modules\EMap\Enums\RoadCondition;
 use Modules\EMap\Enums\RoadConditionEnum;
 use Modules\EMap\Enums\RoadTypeEnum;
 
 class StoreStreetDetailRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return  [
 
             'name' => ['required', 'string', 'max:255'],
             'from' => ['required','string','max:255'],
-            'to' =>['required', 'string', 'max:255'],
+            'to' => ['required', 'string', 'max:255'],
             'setback' => ['required', 'string', 'max:255'],
             'street_code' => ['nullable', 'string', 'max:255'],
            'condition' => ['required', new Enum(RoadConditionEnum::class)],

@@ -36,15 +36,15 @@ class GrantProgramController extends Controller
     {
         $this->checkAuthorization('grantProgram_create');
 
-        $grantProgram=GrantProgram::create($request->validated());
+        $grantProgram = GrantProgram::create($request->validated());
 
         if ($request->ajax()) {
             return response()->json([
-                'data'=> [
-                    'grantProgram_id'=>$grantProgram->id,
-                    'grantProgram_name'=>$grantProgram->name
+                'data' => [
+                    'grantProgram_id' => $grantProgram->id,
+                    'grantProgram_name' => $grantProgram->name
                 ],
-                'message'=> 'अनुदान कार्यक्रम सफलता पुर्वक थपियो'
+                'message' => 'अनुदान कार्यक्रम सफलता पुर्वक थपियो'
             ]);
         }
 

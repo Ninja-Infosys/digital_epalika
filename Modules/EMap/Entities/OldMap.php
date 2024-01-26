@@ -45,10 +45,9 @@ class OldMap extends Model
         return $this->belongsTo(FiscalYear::class);
     }
 
-  public function houseOwner(): BelongsToMany
-   {
-      return $this->belongsToMany(HouseOwner::class);
-  }
+    public function houseOwner(): BelongsToMany
+    {
+        return $this->belongsToMany(HouseOwner::class);
+    }
 
 }
-

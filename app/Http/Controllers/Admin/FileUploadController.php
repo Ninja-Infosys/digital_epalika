@@ -19,7 +19,7 @@ class FileUploadController extends Controller
     {
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
 
-        if (! $receiver->isUploaded()) {
+        if (!$receiver->isUploaded()) {
             // file not uploaded
             return response()->json(['message' => 'File not uploaded'], 500);
         }
