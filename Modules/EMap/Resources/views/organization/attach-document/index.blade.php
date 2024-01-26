@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
@@ -40,10 +40,11 @@
                             </thead>
                             <tbody>
                                 @foreach ($forms as $form)
-                                    <tr>
+                                    <tr @if ($form->is_rejected) style="background-color:#d16969;" @endif>
                                         <td>{{ get_nepali_number($loop->iteration) }}</td>
                                         <td>{{ $form->title }}</td>
                                         <td>
+                                            {{ $form->need_from?->label() ?? '' }}
                                             {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}} --}}
                                         </td>
                                         <td class="d-flex">

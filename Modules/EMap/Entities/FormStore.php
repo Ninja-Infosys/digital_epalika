@@ -15,7 +15,7 @@ use Modules\EMap\Enums\DocumentStatusEnum;
 class FormStore extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
-
+    protected $touches = ['mapApply'];
     protected $dates = [
         'created_at',
         'updated_at',

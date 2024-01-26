@@ -9,12 +9,16 @@ use App\Notifications\MapApplyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Enums\DocumentStatusEnum;
+use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 
 class MapApplyController extends Controller
 {
@@ -45,9 +49,30 @@ class MapApplyController extends Controller
 
     public function formList(MapApply $mapApply)
     {
+        $documentTypeModels = collect([AppliedDocument::class,FormStore::class,PaymentStore::class]);
+
+        $documents = collect([]);
+
+        foreach($documentTypeModels as $documentModel) {
+            $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
+            foreach($typeDocuments as $document) {
+                $documents->push([
+                    'document_type' => class_basename($documentModel),
+                    'form_id' => $document->form_id,
+                    'status' => $document->status?->value
+                ]);
+            }
+
+        }
+
         $forms = Form::with('formDataTypes.form.dynamicForm', 'formStores', 'paymentStores', 'appliedDocuments')
-            ->orderBy('order')
-            ->get();
+        ->orderBy('order')
+        ->get()->map(function ($form) use ($documents) {
+            $status = $documents->where('form_id', $form->id)->pluck('status');
+            $form->is_rejected = $status->contains(DocumentStatusEnum::REJECTED->value) ? true : false;
+            return $form;
+        });
+
         $order = $forms->min('order');
         $activeStep = $mapApply->activeStep();
 
@@ -63,6 +88,7 @@ class MapApplyController extends Controller
 
             if ($allApproved) {
                 $order = $forms->where('order', '>', $activeStep['order'])
+                ->where('need_from', EMapFormFillerTypeEnum::ORGANIZATION)
                     ->sortBy('order')
                     ->first()
                     ?->order;
