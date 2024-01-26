@@ -41,6 +41,12 @@
                                         नगदी रसिदहरुको सूची
                                     </a>
                                 @endcan
+                                @can('revenueCategory_create')
+                                    <a href="{{ route('admin.revenue.invoice.edit', [$invoice]) }}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fa fa-edit"></i>
+                                        सम्पादन र समिक्षा गर्नुहोस्
+                                    </a>
+                                @endcan
                                 <x-print-button target-element="report-table" title="{{ $invoice->invoice_no }}" />
                             </div>
                         @elseif (Route::is('admin.revenue.land.invoice.show'))

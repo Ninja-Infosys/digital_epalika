@@ -16,7 +16,7 @@ class UpdateRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()->ignore($this->registration)],
+            'registration_no' => ['required'],
             'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'registration_date' => ['required'],
             'en_registration_date' => ['nullable', 'date'],
@@ -27,7 +27,7 @@ class UpdateRegistrationRequest extends FormRequest
             'subject' => ['required'],
             'receiver_name' => ['required'],
             'phone' => ['nullable'],
-            'email' => ['nullable', 'email', Rule::unique('registrations', 'email')->withoutTrashed()->ignore($this->registration)],
+            'email' => ['nullable', 'email'],
             'signature_image' => ['nullable', 'image'],
             'date' => ['required'],
             'remarks' => ['nullable'],
