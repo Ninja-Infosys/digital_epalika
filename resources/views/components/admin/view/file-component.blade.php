@@ -67,7 +67,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="status_model_applied">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
+                                                </div>                  
                                                 <div class="modal-body">
                                                 <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateAppliedDocumentStatus',[$mapApply,$form,$formDataType,$appliedDocument]) }}">
                                                     @csrf
