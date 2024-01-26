@@ -28,6 +28,8 @@ class MapSetting extends Model
         'map_request_form_format',
         'land_measurement_id',
         'land_measurement_standard_id',
+        'muchulka_after_complietion',
+        'muchulka_before_complietion'
     ];
 
     public function landMeasurement(): BelongsTo

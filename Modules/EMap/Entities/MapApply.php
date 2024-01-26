@@ -64,7 +64,8 @@ class MapApply extends Model
         'number',
         'latitude',
         'longitude',
-        'mobile_user_id'
+        'mobile_user_id',
+        'comment'
     ];
 
     protected $casts = [
@@ -224,9 +225,9 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-                ->merge($this->paymentStores)
-                ->merge($this->appliedDocuments)
-                ->sortByDesc('created_at');
+            ->merge($this->paymentStores)
+            ->merge($this->appliedDocuments)
+            ->sortByDesc('created_at');
         return $storedDocuments
             ->map(function ($storedDocument) {
                 return collect($storedDocument)
@@ -252,9 +253,9 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-                ->merge($this->paymentStores)
-                ->merge($this->appliedDocuments)
-                ->sortByDesc('created_at');
+            ->merge($this->paymentStores)
+            ->merge($this->appliedDocuments)
+            ->sortByDesc('created_at');
 
         return $storedDocuments
             ->map(function ($storedDocument) {
@@ -273,6 +274,5 @@ class MapApply extends Model
                 ];
             })
             ->first();
-
     }
 }

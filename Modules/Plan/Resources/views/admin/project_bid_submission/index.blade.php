@@ -7,13 +7,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.plan.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.project.index')}}">
+                            <a href="{{ route('admin.plan.project.index') }}">
                                 योजनाहरु
                             </a>
                         </li>
@@ -26,7 +26,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @livewire('plan::bid-submission-livewire',['project'=>$project])
+            @livewire('plan::bid-submission-livewire', ['project' => $project])
         </div>
     </div>
 @endsection

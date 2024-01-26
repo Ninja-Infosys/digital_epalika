@@ -14,6 +14,7 @@ use App\Models\Settings\OfficeSetting;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Illuminate\Support\Facades\DB;
 use Modules\BusinessRegistration\Entities\Partner;
+use Modules\BusinessRegistration\Entities\RegisteredBusiness;
 use Modules\BusinessRegistration\Transformers\BusinessRegistrationResource;
 
 class PublicApiController extends Controller
@@ -39,6 +40,7 @@ class PublicApiController extends Controller
                 'submission_no' => time(),
             ]);
 
+
             if(!empty($request->validated()['partners'])){
             foreach ($request->validated()['partners'] as $partner) {
 
@@ -63,6 +65,9 @@ class PublicApiController extends Controller
             }
         }
 
+
+
+
             return $businessRegistration;
         });
 
@@ -74,6 +79,5 @@ class PublicApiController extends Controller
     public function registeredBusiness()
     {
         return BusinessRegistrationResource::collection(auth()->user()?->load(['businessDetails.objectTransaction', 'businessDetails.businessNature'])?->businessDetails);
-
     }
 }

@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('identity.admin.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> सिफारिस टेम्पलेट</li>
@@ -21,21 +21,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">सिफारिस टेम्पलेट</h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('identity.admin.setting.recommendationTemplateSetting.store') }}" method="post">
                         @csrf
                         <div class="row">
-                            @if($recommendationTemplateSetting)
+                            @if ($recommendationTemplateSetting)
                                 <div class="col-md-12 mb-2 d-flex">
                                     <h4 class="form-label">स्थिति</h4>
                                     <a href="{{ route('identity.admin.setting.recommendationTemplateSetting.updateStatus', $recommendationTemplateSetting ?? '') }}"
-                                       class="btn btn-xs btn-outline-{{ !empty($recommendationTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
+                                        class="btn btn-xs btn-outline-{{ !empty($recommendationTemplateSetting->status) == 1 ? 'primary' : 'danger' }}">
                                         <i
                                             class="fa {{ !empty($recommendationTemplateSetting->status) == 1 ? 'fa-check' : 'fa-times' }}"></i>
                                     </a>
@@ -48,12 +48,12 @@
                                         <h4>{{ $template['title'] ?? '' }} </h4>
                                         <div class="button-list d-flex flex-wrap mb-2">
                                             @foreach ($template['data'] as $key => $templateValue)
-                                            <div class="d-flex d-warp">
-                                                <button type="button" class="btn btn-outline-primary btn-xs"
-                                                    onclick="copyText('{{ $templateValue }}')">
-                                                    {{ $key }}
-                                                </button>
-                                            </div>
+                                                <div class="d-flex d-warp">
+                                                    <button type="button" class="btn btn-outline-primary btn-xs"
+                                                        onclick="copyText('{{ $templateValue }}')">
+                                                        {{ $key }}
+                                                    </button>
+                                                </div>
                                             @endforeach
                                         </div>
                                     </div>

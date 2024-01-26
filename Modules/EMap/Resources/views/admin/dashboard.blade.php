@@ -30,7 +30,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-map avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $map_apply_count }}</span></h3>
                                 <p class="text-muted font-15 mb-0">वार्षिक दर्ता नक्सा</p>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-map avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">6</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $map_apply_count }}</span></h3>
                                 <p class="text-muted font-15 mb-0">मासिक दर्ता नक्सा</p>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                     आर्थिक बर्ष 2080/081 अनुसार प्रयोजन
                 </h4>
                 <div class="card-body">
-                    <canvas id="mapApply" chart-type="pie"></canvas>
+                    <canvas id="mapApply" chart-type="bar"></canvas>
                 </div>
 
             </div>
@@ -68,7 +68,7 @@
                     आर्थिक बर्ष 2080/081 अनुसार भवन वर्गीकरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="buildingCategory" chart-type="bar"></canvas>
+                    <canvas id="buildingCategory" chart-type="line"></canvas>
                 </div>
 
             </div>
@@ -78,8 +78,8 @@
                 <h4>
                     आर्थिक बर्ष 2080/081 अनुसार भवन निर्माण कार्यको किसिम
                 </h4>
-                <div class="card-body">
-                    <canvas id="constructionType" chart-type="pie"></canvas>
+                <div class="card-body" style="height:350px; width:350px;">
+                    <canvas id="constructionType" chart-type="doughnut"></canvas>
                 </div>
 
             </div>
@@ -111,7 +111,7 @@
                     आर्थिक बर्ष अनुसारले नक्सा बिवरण
                 </h4>
                 <div class="card-body">
-                    <canvas id="buildingUsage" chart-type="bar"> </canvas>
+                    <canvas id="buildingUsage" chart-type="pie"> </canvas>
                 </div>
 
             </div>
@@ -121,4 +121,5 @@
         <script src="{{ asset('assets/backend/js/chart.js') }}"></script>
         <script type="module" src="{{ asset('assets/backend/js/chartInit.js') }}"></script>
     @endpush
+    
 @endsection

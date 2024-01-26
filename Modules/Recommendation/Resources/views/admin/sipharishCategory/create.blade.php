@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.recommendation.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
 
@@ -22,10 +22,10 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                    <h4 class="header-title">नयाँ सिफारिस श्रेणी थप्नुहोस</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title">नयाँ सिफारिस श्रेणी थप्नुहोस</h4>
                         @can('branch_create')
                             <a href="{{ route('admin.recommendation.sipharish.sipharishCategory.index') }}"
                                 class="btn btn-sm btn-outline-primary">
@@ -34,9 +34,8 @@
                         @endcan
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishCategory.store') }}"
-                        method="post">
+                <div class="card-body px-0">
+                    <form action="{{ route('admin.recommendation.sipharish.sipharishCategory.store') }}" method="post">
                         @csrf
                         <div class="row">
 

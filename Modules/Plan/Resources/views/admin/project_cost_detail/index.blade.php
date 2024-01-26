@@ -8,8 +8,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.plan.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -26,8 +26,8 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
+            <div class="card p-0">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="header-title">आयोजनाको लागत सम्वन्धि विवरण</h4>
                     <div class="d-flex gap-1">
                         <a href="{{ route('admin.plan.project.index') }}" class="btn btn-sm btn-outline-primary">
@@ -35,8 +35,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    @livewire('plan::project-cost-detail-livewire',['project_id'=>$project->id])
+                <div class="card-body px-0">
+                    @livewire('plan::project-cost-detail-livewire', ['project_id' => $project->id])
                 </div>
             </div>
         </div>

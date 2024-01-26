@@ -23,6 +23,7 @@ class AdminStepController extends Controller
 {
     public function formList(MapApply $mapApply)
     {
+
         $mapApply->load('houseOwner');
         $forms = Form::with('formDataTypes', 'group.users')->orderBy('order')->get();
         return view('emap::admin.step.formList', compact('mapApply', 'forms'));
@@ -51,8 +52,49 @@ class AdminStepController extends Controller
 
     public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument) {
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
+
+            if ($lastStep == $form->order) {
+                // dd('dd');
+                $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+
+                $formStoreStatus = FormStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+
+                if (
+                    $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $request->input('status') == DocumentStatusEnum::APPROVED->value
+                ) {
+                    if ($appliedDocumentStatus->isEmpty()) {
+                        $mapApply->update([
+                            'sent_to_organization' => 'done'
+                        ]);
+                    } else {
+                        if ($appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                            $mapApply->update([
+                                'sent_to_organization' => 'done'
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                    $mapApply->update([
+                        'sent_to_organization' => 'processing'
+                    ]);
+                }
+            }
+
             $appliedDocument->update([
                 'status' => $request->input('status')
             ]);
@@ -71,7 +113,45 @@ class AdminStepController extends Controller
     public function updateFormStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
     {
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore) {
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep) {
+
+            if ($lastStep == $form->order) {
+                $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $formStoreStatus = FormStore::where('id', '!=', $formStore->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                if (
+                    $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $request->input('status') == DocumentStatusEnum::APPROVED->value
+                ) {
+                    if ($formStoreStatus->isEmpty()) {
+                        $mapApply->update([
+                            'sent_to_organization' => 'done'
+                        ]);
+                    } else {
+                        if ($formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                            $mapApply->update([
+                                'sent_to_organization' => 'done'
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                    $mapApply->update([
+                        'sent_to_organization' => 'processing'
+                    ]);
+                }
+            }
+
             $formStore->update([
                 'status' => $request->input('status')
             ]);
@@ -92,8 +172,45 @@ class AdminStepController extends Controller
     public function updatePaymentStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, PaymentStore $paymentStore)
     {
         $this->getStatusValidation($request);
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep) {
 
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore) {
+            if ($lastStep == $form->order) {
+                $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $formStoreStatus = FormStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('id', '!=', $paymentStore->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                if (
+                    $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $request->input('status') == DocumentStatusEnum::APPROVED->value
+                ) {
+                    if ($paymentStoreStatus->isEmpty()) {
+                        $mapApply->update([
+                            'sent_to_organization' => 'done'
+                        ]);
+                    } else {
+                        if ($paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                            $mapApply->update([
+                                'sent_to_organization' => 'done'
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                    $mapApply->update([
+                        'sent_to_organization' => 'processing'
+                    ]);
+                }
+            }
+
             $paymentStore->update([
                 'status' => $request->input('status')
             ]);
@@ -116,5 +233,19 @@ class AdminStepController extends Controller
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
             'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
         ]);
+    }
+
+    public function rejectMap(Request $request, MapApply $mapApply)
+    {
+        $request->validate([
+            'comment' => ['required'],
+        ]);
+        $mapApply->update([
+            'sent_to_organization' => 'rejected',
+            'comment' => $request->input('comment')
+
+        ]);
+        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
     }
 }

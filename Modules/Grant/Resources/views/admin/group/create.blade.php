@@ -7,8 +7,8 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.grant.dashboard') }}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active">समूह थप</li>
@@ -21,16 +21,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">समूह सूचीकरण विवरण फारम</h4>
                         <a href="{{ route('admin.grant.group.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> समूह सुची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form action="{{ route('admin.grant.group.store') }}" method="post">
                         @csrf
                         <fieldset>
@@ -43,45 +43,42 @@
                                     <label for="name" class="form-label">समूहको नाम <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{ old('name') }}"
-                                           class="form-control @error('name') is-invalid @enderror" id="name"
-                                           placeholder="समूह नाम" required/>
+                                        class="form-control @error('name') is-invalid @enderror" id="name"
+                                        placeholder="समूह नाम" required />
                                     @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="registered_office" class="form-label">दर्ता भएको कार्यालय <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="registered_office" value="{{ old('registered_office') }}"
-                                           class="form-control @error('registered_office') is-invalid @enderror"
-                                           id="registered_office" placeholder="दर्ता भएको कार्यालय" required/>
+                                        class="form-control @error('registered_office') is-invalid @enderror"
+                                        id="registered_office" placeholder="दर्ता भएको कार्यालय" required />
                                     @error('registered_office')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="monthly_meeting" class="form-label">मासिक वैठक हुने गते </label>
                                     <input type="text" name="monthly_meeting" value="{{ old('monthly_meeting') }}"
-                                           class="form-control @error('monthly_meeting') is-invalid @enderror"
-                                           id="monthly_meeting" placeholder="मासिक वैठक हुने गते"/>
+                                        class="form-control @error('monthly_meeting') is-invalid @enderror"
+                                        id="monthly_meeting" placeholder="मासिक वैठक हुने गते" />
                                     @error('monthly_meeting')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <x-date-input-component
-                                        nameNe="g_registration_date" labelNe="दर्ता मिति *"
-                                        nameEn="en_registration_date" labelEn="Registration Date"
-                                        :getTodayDate="false"
-                                    />
+                                    <x-date-input-component nameNe="g_registration_date" labelNe="दर्ता मिति *"
+                                        nameEn="en_registration_date" labelEn="Registration Date" :getTodayDate="false" />
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="vat_pan" class="form-label">पाना/भ्याट </label>
                                     <input type="text" name="vat_pan" value="{{ old('vat_pan') }}"
-                                           class="form-control @error('vat_pan') is-invalid @enderror" id="vat_pan"
-                                           placeholder="पाना/भ्याट"/>
+                                        class="form-control @error('vat_pan') is-invalid @enderror" id="vat_pan"
+                                        placeholder="पाना/भ्याट" />
                                     @error('vat_pan')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -94,28 +91,28 @@
                                 र
                                 टोल छनौट गर्नुहोस् ।</h5>
                             @livewire('address', [
-                            'province_id' =>old('province_id',$officeSetting->province_id),
-                            'district_id' => old('district_id',$officeSetting->district_id),
-                            'local_body_id' => old('local_body_id',$officeSetting->local_body_id),
-                            'ward_no' => old('ward_no')
+                                'province_id' => old('province_id', $officeSetting->province_id),
+                                'district_id' => old('district_id', $officeSetting->district_id),
+                                'local_body_id' => old('local_body_id', $officeSetting->local_body_id),
+                                'ward_no' => old('ward_no'),
                             ])
                             <div class="row ">
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">गाउँ</label>
                                     <input type="text" name="village" value="{{ old('village') }}"
-                                           class="form-control @error('village') is-invalid @enderror" id="village"
-                                           placeholder="गाउँ"/>
+                                        class="form-control @error('village') is-invalid @enderror" id="village"
+                                        placeholder="गाउँ" />
                                     @error('village')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="tole" class="form-label">टोल</label>
                                     <input type="text" name="tole" value="{{ old('tole') }}"
-                                           class="form-control @error('tole') is-invalid @enderror" id="tole"
-                                           placeholder="टोल"/>
+                                        class="form-control @error('tole') is-invalid @enderror" id="tole"
+                                        placeholder="टोल" />
                                     @error('tole')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -131,24 +128,23 @@
                                     <label for="farmers" class="fs-5">कृषकहरू </label>
                                     <div class="input-group">
                                         <select name="farmers[]" multiple data-toggle="select2" id="farmers"
-                                                class="form-control" aria-describedby="button-farmer">
+                                            class="form-control" aria-describedby="button-farmer">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach ($farmers as $farmer)
                                                 <option value="{{ $farmer->id }}">{{ $farmer->name }}
-                                                    ({{$farmer->unique_id}})
+                                                    ({{ $farmer->unique_id }})
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <button class="btn btn-sm btn-outline-primary" type="button"
-                                                id="button-farmer"
-                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
+                                        <button class="btn btn-sm btn-outline-primary" type="button" id="button-farmer"
+                                            title="उधम थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
                                             <i class="fa fa-plus"></i></button>
                                     </div>
                                     @error('farmers')
-                                    <p class="text-danger">{{ $message }}</p>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                     @error('farmers.*')
-                                    <p class="text-danger">{{ $message }}</p>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>

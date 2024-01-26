@@ -24,4 +24,18 @@ class Equipment extends Model
         'capacity',
         'speed_with_out_load',
     ];
+
+    public function equipmentAdditionalCosts()
+    {
+        return $this->hasMany(EquipmentAdditionalCost::class);
+    }
+
+    public function fuelDemands()
+    {
+        return $this->hasMany(FuelDemand::class);
+    }
+    public function crewRates()
+    {
+        return $this->hasMany(CrewRate::class);
+    }
 }

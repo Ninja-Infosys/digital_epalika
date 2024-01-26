@@ -11,6 +11,7 @@ use App\Models\Settings\Employee;
 use App\Models\Settings\Experience;
 use App\Models\Settings\ExperienceFile;
 use App\Models\Settings\Qualification;
+use App\Models\UserManagement\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 
@@ -34,20 +35,21 @@ class EmployeeController extends Controller
     public function create()
     {
         $this->checkAuthorization('employee_create');
-        $branches = Branch::all();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
         $ethnicities = Ethnicity::all();
-        $allemployees = Employee::all();
-        return view('admin.global.employee.create', compact('ethnicities', 'branches', 'allemployees'));
+        $allEmployees = Employee::all();
+        $roles = Role::all();
+        return view('admin.global.employee.create', compact('ethnicities', 'branches', 'allEmployees', 'roles'));
     }
 
     public function store(StoreEmployeeRequest $request)
     {
         $this->checkAuthorization('employee_create');
 
-        Employee::create($request->validated());
-        toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
+        $employee = Employee::create($request->validated());
 
-        return back();
+        toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
+        return back()->with('success', 'कर्मचारी सफलतापूर्वक थपियो');
     }
 
     public function show(Employee $employee)
@@ -55,7 +57,7 @@ class EmployeeController extends Controller
         $qualifications = Qualification::all();
         $experiences = Experience::all();
         $experienceFiles = ExperienceFile::all();
-        return view('admin.global.employee.show', compact('experienceFiles', 'employee', 'qualifications', 'experiences'));
+        return view('admin.global.employee.show', compact('experienceFiles', 'qualifications', 'experiences'));
     }
 
     public function edit(Employee $employee)

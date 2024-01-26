@@ -8,8 +8,9 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}"
+                                     alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -36,7 +37,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.global.generalSetting.employee.store')}}" method="post"
+                                       <form action="{{route('admin.global.generalSetting.employee.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
@@ -81,7 +82,8 @@
                                             name="gender" id="gender">
                                         <option value="">लिङ्ग थप्नुहोस्</option>
                                         @foreach(\App\Enums\Gender::cases() as $case)
-                                            <option value="{{$case->value}}" {{old('gender')==$case->value ? 'selected':''}}>{{$case->label()}}</option>
+                                            <option
+                                                value="{{$case->value}}" {{old('gender')==$case->value ? 'selected':''}}>{{$case->label()}}</option>
                                         @endforeach
                                     </select>
                                     @error('gender')
@@ -96,14 +98,14 @@
                                     />
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="pan_no" class="form-label">पेन नं *</label>
+                                    <label for="pan_no" class="form-label">पाना नं *</label>
                                     <input
                                         type="text"
                                         name="pan_no"
                                         value="{{old('pan_no')}}"
                                         class="form-control @error('pan_no') is-invalid @enderror"
                                         id="pan_no"
-                                        placeholder="पेन नं"
+                                        placeholder="पाना नं *"
 
                                     />
                                     @error('pan_no')
@@ -117,7 +119,8 @@
                                             name="ethnicity_id" id="ethnicity_id">
                                         <option value="">जातियता थप्नुहोस्</option>
                                         @foreach($ethnicities as $ethnicity)
-                                            <option value="{{$ethnicity->id}}" {{old('ethnicity_id')==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
+                                            <option
+                                                value="{{$ethnicity->id}}" {{old('ethnicity_id')==$ethnicity->id ? 'selected':''}}>{{$ethnicity->title}}</option>
                                         @endforeach
                                     </select>
                                     @error('ethnicity_id')
@@ -205,7 +208,8 @@
                                             name="branch_id" id="branch_id">
                                         <option value="">शाखा छान्नुहोस</option>
                                         @foreach($branches as $branch)
-                                            <option value="{{$branch->id}}" {{old('branch_id')==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
+                                            <option
+                                                value="{{$branch->id}}" {{old('branch_id')==$branch->id ? 'selected':''}}>{{$branch->branch_name}}</option>
                                         @endforeach
                                     </select>
                                     @error('branch_id')
@@ -213,13 +217,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="employee_id" class="form-label">मथेल्नो तह कर्मचारी  </label>
+                                    <label for="employee_id" class="form-label">मथेल्नो तह कर्मचारी </label>
 
                                     <select class="form-control @error('employee_id') is-invalid @enderror"
                                             name="employee_id" id="employee_id">
-                                        <option value=""> कर्मचारी  छान्नुहोस</option>
-                                        @foreach($allemployees as $allemployee)
-                                            <option value="{{$allemployee->id}}" {{old('employee_id')==$allemployee->id ? 'selected':''}}>{{$allemployee->name}}</option>
+                                        <option value=""> कर्मचारी छान्नुहोस</option>
+                                        @foreach($allEmployees as $allEmployee)
+                                            <option
+                                                value="{{$allEmployee->id}}" {{old('employee_id')==$allEmployee->id ? 'selected':''}}>{{$allEmployee->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('employee_id')
@@ -352,9 +357,10 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="description" class="form-label">कैफियत </label>
-                                   <textarea class="form-control" id="description" name="description">{{old('description')}}</textarea>
+                                    <textarea class="form-control" id="description"
+                                              name="description">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

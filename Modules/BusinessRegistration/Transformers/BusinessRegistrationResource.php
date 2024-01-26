@@ -10,12 +10,8 @@ class BusinessRegistrationResource extends JsonResource
     {
         return [
             'id' => $this->id ?? '',
-            'reg_no' => $this->reg_no ?? '',
             'submission_no' => $this->submission_no ?? '',
             'fiscal_year_id' => $this->fiscal_year_id ?? '',
-            'registration_no' => $this->registration_no ?? '',
-            'registration_date_ne' => $this->registration_date_ne ?? '',
-            'registration_date_en' => $this->registration_date_en ?? '',
             'name' => $this->name ?? '',
             'name_en' => $this->name_en ?? '',
             'address' => $this->address ?? '',

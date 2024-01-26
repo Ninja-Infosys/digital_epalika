@@ -35,7 +35,7 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail'])
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
             ->where(function (Builder $q) {
@@ -43,7 +43,12 @@ class MapController extends Controller
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->latest()
+            ->whereHas('landDetail', function (Builder $q) {
+                if (!empty(auth()->user()->ward_no)) {
+                    $q->where('ward_no', auth()->user()->ward_no);
+                }
+            })
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
 

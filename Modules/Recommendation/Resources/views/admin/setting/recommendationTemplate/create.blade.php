@@ -6,13 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.recommendation.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index',[$type,$recommendationCategory])}}">
+                            <a
+                                href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type, $recommendationCategory]) }}">
                                 टेम्प्लेट
                             </a>
                         </li>
@@ -26,47 +27,40 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title"> टेम्प्लेट थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index',[$type,$recommendationCategory])}}"
-                           class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type, $recommendationCategory]) }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <form
-                        action="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.store',[$type,$recommendationCategory])}}"
-                        method="post"
-                        enctype="multipart/form-data">
+                        action="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.store', [$type, $recommendationCategory]) }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value="{{old('title')}}"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="शिर्षक "
-                                    required
-                                />
+                                <input type="text" name="title" value="{{ old('title') }}"
+                                    class="form-control @error('title') is-invalid @enderror" id="title"
+                                    placeholder="शिर्षक " required />
                                 @error('title')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-12 mb-2">
-                                @foreach( (new \Modules\Recommendation\Entities\RecommendationTemplate())->getTemplateOptions() as $template)
+                                @foreach ((new \Modules\Recommendation\Entities\RecommendationTemplate())->getTemplateOptions() as $template)
                                     <div class="mt-2">
-                                        <h4>{{$template['title'] ?? ''}} :</h4>
+                                        <h4>{{ $template['title'] ?? '' }} :</h4>
                                         <div class="button-list">
-                                            @foreach($template['data'] as $key=>$templateValue)
+                                            @foreach ($template['data'] as $key => $templateValue)
                                                 <button type="button" class="btn btn-outline-primary btn-xs"
-                                                        onclick="copyText('{{$templateValue}}')">
-                                                    {{$key}}
+                                                    onclick="copyText('{{ $templateValue }}')">
+                                                    {{ $key }}
                                                 </button>
                                             @endforeach
                                         </div>
@@ -75,13 +69,10 @@
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>
-                                <textarea name="data"
-                                          id="data"
-                                          required
-                                          cols="30" rows="10"
-                                          class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
+                                <textarea name="data" id="data" required cols="30" rows="10"
+                                    class="form-control ckEditor @error('data') is-invalid @enderror">{{ old('data') }}</textarea>
                                 @error('data')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -94,8 +85,7 @@
         </div>
     </div>
     @push('scripts')
-        <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
+        <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('assets/backend/ckeditor/editor.js') }}"></script>
     @endpush
 @endsection
-

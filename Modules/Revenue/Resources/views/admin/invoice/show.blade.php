@@ -11,16 +11,16 @@
                                 गृहपृष्ठ
                             </a>
                         </li>
-                        @if (Route::currentRouteName() == 'admin.revenue.invoice.show')
-                            <li class="breadcrumb-item active"> नगदी रसिद</li>
-                        @else
+                        @if (Route::is('admin.revenue.invoice.show'))
+                            <li class="breadcrumb-item active">नगदी रसिद</li>
+                        @elseif (Route::is('admin.revenue.land.invoice.show'))
                             <li class="breadcrumb-item active">मालपोत रसिद</li>
                         @endif
                     </ol>
                 </div>
-                @if (Route::currentRouteName() == 'admin.revenue.invoice.show')
+                @if (Route::is('admin.revenue.invoice.show'))
                     <h4 class="page-title">नगदी रसिद</h4>
-                @else
+                @elseif (Route::is('admin.revenue.land.invoice.show'))
                     <h4 class="page-title">मालपोत रसिद</h4>
                 @endif
             </div>
@@ -31,8 +31,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    @if (Route::currentRouteName() == 'admin.revenue.invoice.show')
-                        <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between">
+                        @if (Route::is('admin.revenue.invoice.show'))
                             <h4 class="header-title">नगदी रसिद</h4>
                             <div class="d-flex gap-2">
                                 @can('revenueCategory_create')
@@ -43,9 +43,7 @@
                                 @endcan
                                 <x-print-button target-element="report-table" title="{{ $invoice->invoice_no }}" />
                             </div>
-                        </div>
-                    @else
-                        <div class="d-flex justify-content-between">
+                        @elseif (Route::is('admin.revenue.land.invoice.show'))
                             <h4 class="header-title">मालपोत रसिद</h4>
                             <div class="d-flex gap-2">
                                 @can('revenueCategory_create')
@@ -57,20 +55,20 @@
                                 @endcan
                                 <x-print-button target-element="report-table" title="{{ $invoice->invoice_no }}" />
                             </div>
-                        </div>
-                    @endif
+                        @endif
+
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="bg-white" id="report-table">
                         <div>
                             {!! letterHead() !!}
                             <div class="text-center">
-                                @if (Route::currentRouteName() == 'admin.revenue.invoice.show')
+                                @if (Route::is('admin.revenue.invoice.show'))
                                     <h4 class="fw-bold mb-0 text-decoration-underline">नगदी रसिद</h4>
-                                @else
+                                @elseif (Route::is('admin.revenue.land.invoice.show'))
                                     <h4 class="fw-bold mb-0 text-decoration-underline">मालपोत रसिद</h4>
                                 @endif
-
                                 <p>(सेवाग्राही प्रति)</p>
                             </div>
                             <div class="info">
@@ -165,9 +163,9 @@
                             {!! letterHead() !!}
                             <div>
                                 <div class="text-center">
-                                    @if (Route::currentRouteName() == 'admin.revenue.invoice.show')
+                                    @if (Route::is('admin.revenue.invoice.show'))
                                         <h4 class="fw-bold mb-0 text-decoration-underline">नगदी रसिद</h4>
-                                    @else
+                                    @elseif (Route::is('admin.revenue.land.invoice.show'))
                                         <h4 class="fw-bold mb-0 text-decoration-underline">मालपोत रसिद</h4>
                                     @endif
                                     <p>(कार्यालय प्रति)</p>

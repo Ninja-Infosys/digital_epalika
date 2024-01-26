@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($formDataType->appliedDocuments->where('form_id', $form->id)) == 0)
+                @if(count($mapApply->appliedDocuments->where('form_id', $form->id)?->where('form_data_id',$formDataType->id)) == 0)
                     <form
                         action="{{ route('emap.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
                         method="post" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
                     </form>
                 @else
                     <form
-                        action="{{ route('emap.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')->first()->id]) }}"
+                        action="{{route('emap.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id ?? '')->sortByDesc('created_at')->first()->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -75,39 +75,39 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h4 class="header-title">
-                        {{$formDataType->model?->title}} विवरण
+                        {{$mapApply->model?->title}} विवरण
                     </h4>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    @foreach($formDataType->appliedDocuments->load('appliedMapFiles') as $appliedDocument)
+                    @foreach($mapApply->appliedDocuments?->where('form_id', $form->id)?->where('form_data_id',$formDataType->id)?->load('appliedMapFiles') as $appliedDocument)
                         <div class="row">
-                            <div class="col-md-5">
-                                <table class="table table-sm table-striped table-bordered">
+                            <div class="col-md-12">
+                                <table class="table table-stripped">
+                                    <thead>
                                     <tr>
                                         <th>फाइल</th>
+                                        <th>स्थिति</th>
+                                        <th>मिति</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
                                         <td>
                                             @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
                                                 <a href="#"><i class="fa fa-download"></i></a>
                                             @endforeach
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <th>स्थिति</th>
                                         <td>
                                             {{$appliedDocument->status->label()}}
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <th>मिति</th>
                                         <td>
                                             {{get_nepali_number($appliedDocument->created_at->toDateString())}}
                                         </td>
                                     </tr>
+                                    </tbody>
                                 </table>
-                            </div>
-                            <div class="col-md-7">
                                 <table class="table table-stripped">
                                     <thead>
                                     <tr>
@@ -119,7 +119,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($appliedDocument->appliedDocumentStatuses->load('appliedMapFiles')->sortByDesc('created_at') as $appliedDocumentStatus)
+                                    @foreach($appliedDocument?->load('appliedDocumentStatuses.appliedMapFiles')?->appliedDocumentStatuses->sortByDesc('created_at') as $appliedDocumentStatus)
                                         <tr>
                                             <td>{{get_nepali_number($loop->iteration)}}</td>
                                             <td>

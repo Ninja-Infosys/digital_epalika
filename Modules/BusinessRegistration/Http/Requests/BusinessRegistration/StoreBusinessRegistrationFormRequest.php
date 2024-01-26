@@ -35,7 +35,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'fixed_capital' => ['nullable'],
             'investment' => ['required'],
             'is_rent' => ['nullable'],
-            'house_owner_name' => ['nullable', 'string'],
+            'house_owner_name' => ['required_if:is_rent,1', 'string'],
             'house_owner_phone' => ['nullable', 'string'],
             'house_owner_address' => ['nullable', 'string'],
             'house_owner_monthly_rent' => ['nullable', 'string'],
@@ -43,7 +43,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'width' => ['nullable'],
             'application_date' => ['required', 'date'],
             'application_date_en' => ['required', 'date'],
-            'rent_agreement' => ['nullable'],
+            'rent_agreement' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'land_ownership_certificate' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'ward_recommendation' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'embassy_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
@@ -51,7 +51,8 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'registration_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'is_register' => ['nullable'],
             'tax_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
-            'other' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'other_file' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+            'registration_no' => ['registration_no'],
             'partners' => ['required', 'array'],
             'partners.*.name' => ['required', 'string'],
             'partners.*.name_en' => ['required', 'string'],
@@ -71,7 +72,7 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'partners.*.national_card_no' => ['nullable'],
             'partners.*.gender' => ['required', new Enum(Gender::class)],
             'partners.*.education_qualification' => ['required', new Enum(Qualification::class)],
-            'partners.*.father_name' => ['required'],
+            'partners.*.father_name' => ['required', 'string'],
             'partners.*.grandfather_name' => ['required'],
             'partners.*.photo' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             'partners.*.signature' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
@@ -83,7 +84,8 @@ class StoreBusinessRegistrationFormRequest extends FormRequest
             'registeredBusinesses.*.registration_no' => ['nullable',],
             'registeredBusinesses.*.registration_date' => ['nullable', 'date'],
             'registeredBusinesses.*.is_active' => ['nullable', 'boolean'],
-
+            'files' => ['nullable', 'array'],
+            'files.*' => ['file']
 
         ];
     }

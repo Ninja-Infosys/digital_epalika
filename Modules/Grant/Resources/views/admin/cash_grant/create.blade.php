@@ -20,16 +20,16 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ नगद अनुदान थप्नुहोस्</h4>
                         <a href="{{ route('admin.grant.cashGrant.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> नगद अनुदानको सुची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
 
                     <form action="{{ route('admin.grant.cashGrant.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -85,7 +85,8 @@
                                         नागरिकत नं <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" name="citizenship_no" value="{{ old('citizenship_no') }}"
-                                        class="form-control @error('citizenship_no') is-invalid @enderror" id="citizenship_no" />
+                                        class="form-control @error('citizenship_no') is-invalid @enderror"
+                                        id="citizenship_no" />
                                     @error('citizenship_no')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -105,7 +106,8 @@
                                         बाजे नाम <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" name="grandfather_name" value="{{ old('grandfather_name') }}"
-                                        class="form-control @error('grandfather_name') is-invalid @enderror" id="grandfather_name" />
+                                        class="form-control @error('grandfather_name') is-invalid @enderror"
+                                        id="grandfather_name" />
                                     @error('grandfather_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -114,7 +116,8 @@
                                     <label for="helplessness_type_id" class="form-label">
                                         असहायताको प्रकार <span class="text-danger">*</span>
                                     </label>
-                                    <select name="helplessness_type_id" id="helplessness_type_id" class="form-select" required>
+                                    <select name="helplessness_type_id" id="helplessness_type_id" class="form-select"
+                                        required>
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach ($helplessnesstypes as $helplessnesstype)
                                             <option value="{{ $helplessnesstype->id }}"
@@ -138,7 +141,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="file" class="form-label">कागजपत्र<span class="text-danger">*</span></label>
+                                    <label for="file" class="form-label">कागजपत्र<span
+                                            class="text-danger">*</span></label>
                                     <input type="file" name="file" value="{{ old('file') }}"
                                         class="form-control @error('file') is-invalid @enderror" id="file" />
                                     @error('file')
@@ -146,7 +150,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-12 ">
                                 <label for="remark" class="form-label">कैफियत</label>
                                 <textarea name="text" id="remark" class="form-control" placeholder="remark.." cols="50" rows="4"></textarea>
