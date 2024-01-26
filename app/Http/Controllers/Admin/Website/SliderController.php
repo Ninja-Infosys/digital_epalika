@@ -56,7 +56,7 @@ class SliderController extends Controller
 
         toast('स्लाइडर सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.website.slider.index'));
+        return redirect(route('admin.global.website.slider.index'));
     }
 
     public function destroy(Slider $slider): RedirectResponse

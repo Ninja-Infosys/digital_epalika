@@ -63,6 +63,7 @@ class SipharishCreateApiController extends Controller
                 && !empty($request->validated()['fields'])
             ) {
                 foreach ($request->validated()['fields'] as $field) {
+
                     if (!empty($field['type']) && $field['type'] == 'image') {
                         $value = $this->storeFile($field['value']);
                     } elseif (!empty($field['type']) && $field['type'] == 'table') {

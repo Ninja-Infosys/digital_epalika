@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Log In | {{ config('app.name') }}</title>
+    <title>Register | {{ config('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="B-Palika System" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -24,13 +24,12 @@
 </head>
 
 <body class="auth-page"
-    style="background-image: url({{ asset('images/mountain_photo.jpg') }});
-height: 100vh;
-overflow: hidden">
-    <div class="pt-4 pb-2">
-        <div class="container-fluid">
+    style="background-image: url({{ asset('images/mountain_photo.jpg') }}); margin-bottom: 10px;">
+    @include('sweetalert::alert');
+    <div class="pt-4 pb-2"    >
+        <div class="container-fluid" >
             <div class="row justify-content-center">
-                <div class="col-md-4 m-auto">
+                <div class="col-md-4 m-auto" >
                     <div class="card p-0">
                         <div class="row">
                             <div class="col-md-12 m-auto">
@@ -51,13 +50,38 @@ overflow: hidden">
                                 </div>
                                 <div class="card p-0">
                                     <div class="card-body">
-                                        <h3 class="text-primary pt-1 text-center fw-bolder mb-4" >
+                                        <h3 class="text-primary pt-1 text-center fw-bolder mb-4">
                                             डिजिटल पालिका ब्यबस्थापन प्रणालि
                                             <br>
-                                            <p class="fw-bold text-dark my-1" style="font-size: 14px;">(Digital Palika Management System)</p>
+                                            <p class="fw-bold text-dark my-1" style="font-size: 14px;">(Digital Palika
+                                                Management System)</p>
                                         </h3>
-                                        <form action="{{ route('organization.login') }}" method="post">
+                                        <form action="{{ route('mobileUser.register.signup') }}" method="post">
                                             @csrf
+                                            <div class="mb-2">
+                                                <label for="name" class="form-label fw-bold">प्रयोगकर्ता नाम
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input name="name"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    type="name" value="{{ old('name') }}" id="name"
+                                                    placeholder="name Address" />
+                                                @error('name')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="phone" class="form-label fw-bold">प्रयोगकर्ता मोबाइल नंबर
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input name="phone"
+                                                    class="form-control @error('phone') is-invalid @enderror"
+                                                    type="phone" value="{{ old('phone') }}" id="phone"
+                                                    placeholder="phone Address" />
+                                                @error('phone')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
                                             <div class="mb-2">
                                                 <label for="email" class="form-label fw-bold">प्रयोगकर्ता इमेल
                                                     <span class="text-danger">*</span>
@@ -93,20 +117,18 @@ overflow: hidden">
 
 
                                             <div class="d-flex justify-content-center mt-3">
-                                                <button type="submit" class="btn btn-primary btn-block waves-effect waves-light w-50 m-auto fs-5">
-                                                    लग-इन
-                                                </button>
-                                                <button type="reset" class="btn btn-danger w-50 waves-effect ms-3">
-                                                    रिसेट
-                                                </button>
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-block waves-effect waves-light w-50 m-auto fs-5">
+                                                        साइन-इन
+                                                    </button>
+
                                             </div>
                                         </form>
                                         <div class="row mt-3">
 
                                             <div class="col-12 text-center">
                                                 <p>
-                                                    <a href="#" class="text-dark-50 ms-1">Forgot your
-                                                        password?</a>
+                                                    <a href="{{ route('mobileUser.login.form') }}" class="text-dark-50 ms-1">Already have account? Login</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -131,7 +153,7 @@ overflow: hidden">
     <footer class="footer footer-alt bg-soft-main">
         2022 -
         <script>
-            {{date('Y')}}
+            {{ date('Y') }}
         </script>
         &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
     </footer>

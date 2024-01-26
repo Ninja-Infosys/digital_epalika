@@ -50,13 +50,7 @@ Route::post('file-upload', [FileController::class, 'fileUpload'])->name('file-up
 Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
-// website admin routes
-Route::prefix('website')->as('website.')->group(function () {
-    Route::get('dashboard', WebsiteDashboardController::class)->name('dashboard');
-    Route::resource('slider', SliderController::class)->except('show');
-    Route::resource('municipalDetail', MunicipalDetailController::class);
-    Route::resource('importantLink', ImportantLinkController::class);
-});
+
 
 //activity logs
 Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');
