@@ -1,18 +1,14 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
-use Modules\EMap\Http\Controllers\OrganizationAuthController;
-use Modules\EMap\Http\Controllers\OrganizationDashboardController;
 use Modules\EMap\Http\Controllers\OrganizationNotificationController;
-use Modules\EMap\Http\Controllers\TaxClearanceController;
 
-Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
+// Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
 
-Route::prefix('profile')->group(function () {
-    Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
-});
+
 
 Route::controller(MapApplyController::class)->group(function () {
     Route::get('mapApply/{mapApply}/map-form-info', 'mapFormInfo')->name('mapFormInfo');
@@ -29,7 +25,6 @@ Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class
 Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
 Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AttachDocumentController::class, 'formStorePrint'])->name('formStorePrint');
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
-Route::resource('taxClearance', TaxClearanceController::class);
 Route::get('mapApply/{mapApply}/view/{form}/detail', [MapApplyController::class, 'viewDetail'])->name('organization.view-detail');
 
 

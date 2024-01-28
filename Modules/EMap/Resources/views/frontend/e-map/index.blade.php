@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 p-2">
+                        {{-- <div class="col-md-3 p-2">
                             <div class="module-card text-center overflow-hidden p-3">
                                 <div class="card-body d-flex gap-3 align-items-start justify-content-between">
                                     <img src="{{ asset('assets/frontend/image/new-icons/password.png') }}" width="50"
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3 p-2 mt-1">
                             <div class="module-card text-center overflow-hidden p-3">
                                 <div class="card-body d-flex gap-3 align-items-start justify-content-between">
@@ -88,7 +88,7 @@
                                             </span></h5>
 
                                         <h6 class="text-muted text-left">नयाँ इ-नक्साको लागि दर्ता गर्नुहोस्</h6>
-                                        <a href="{{ route('organization.register.form') }}"
+                                        <a href="{{ route('admin.global.organization.register.form') }}"
                                             class="btn btn-outline-primary btn-sm mt-3"><span>दर्ता गर्नुहोस्
                                             </span>
                                         </a>

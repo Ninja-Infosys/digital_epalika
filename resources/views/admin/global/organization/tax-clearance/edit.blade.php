@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('organization.admin.dashboard')}}">
+                            <a href="{{route('dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
@@ -23,13 +23,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mb-0">कर चुक्ता सम्पादन</h4>
-                        <a href="{{route('organization.admin.taxClearance.index')}}" class="btn btn-outline-primary btn-sm">
+                        <a href="{{route('organization.taxClearance.index')}}" class="btn btn-outline-primary btn-sm">
                             <i class="fa fa-list"></i> कर चुक्ता सुची
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="{{route('organization.admin.taxClearance.update',$taxClearance)}}" method="post" enctype="multipart/form-data">
+                <div class="card-body">d
+                    <form action="{{route('organization.taxClearance.update',$taxClearance)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="row">

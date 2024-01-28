@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\Global\OrganizationAuthController;
+use App\Http\Controllers\Admin\Global\OrganizationDashboardController;
+use App\Http\Controllers\Admin\Global\RenewedController;
+use App\Http\Controllers\Admin\Global\TaxClearanceController;
 use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
@@ -96,4 +100,26 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
     Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
     Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
+});
+
+
+Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
+Route::prefix('organization')->as('organization.')->group(function () {    
+    Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
+    Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
+    Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
+    Route::get('register-person', [OrganizationAuthController::class, 'showOrganizationRegisterFormPerson'])->name('register.formPerson');
+    
+    Route::get('{organization}/invitation', [OrganizationAuthController::class, 'invitation'])->name('invitation');
+    Route::get('password/create', [OrganizationAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
+    Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
+    });
+    Route::middleware("auth:organization")->group(function(){
+        Route::post('logout', [OrganizationAuthController::class, 'logout'])->name('logout');
+        Route::resource('taxClearance', TaxClearanceController::class);
+        Route::resource('renewed', RenewedController::class);
+    });
+   
 });

@@ -20,6 +20,7 @@ class Field extends Component
     public string|int|null $sipharis_form_type_id = null;
     public $status = 1;
     public $fields = [];
+    public $fieldData = [];
     public $personalDetails = [];
     public $sipharishCategories = [];
     public $sipharishSubCategories = [];
@@ -30,18 +31,19 @@ class Field extends Component
 
     public function mount($categorySubCategory = null): void
     {
-
         if (!empty($categorySubCategory)) {
+
             $this->sipharis_category_id = $categorySubCategory['sipharis_category_id'] ?? null;
             $this->sipharis_sub_category_id = $categorySubCategory['sipharis_sub_category_id'] ?? null;
             $this->personal_detail_id = $categorySubCategory['personal_detail_id'] ?? null;
             $this->sipharis_form_type_id = $categorySubCategory['sipharis_form_type_id'] ?? null;
-            $this->status = $categorySubCategory['status'] ?? 1;
+            $this->status = $categorySubCategory['status'] ? 1 : 0;
             if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
                 foreach ($categorySubCategory['fields'] as $field) {
-                    $this->fields[] = [
-                        'sipharish_form_fields_id' => $field['sipharish_form_fields_id'] ?? null,
-                        'value' => $field['value'] ?? null,
+
+                    $this->fieldData[$field->SipharisFormField?->slug] = [
+                        'sipharish_form_fields_id' => $field->sipharish_form_field_id ?? $field['sipharish_form_fields_id'] ?? null,
+                        'value' => $field->value ?? $field['value'] ?? null,
                     ];
                 }
             }
@@ -53,6 +55,11 @@ class Field extends Component
     public function addRowInTable($index): void
     {
         $this->data[$index][] = [];
+    }
+
+    public function getFieldData(string $slug)
+    {
+        return $this->fieldData[$slug] ?? [];
     }
 
     public function removeRowInTable($index, $childIndex): void
@@ -77,6 +84,7 @@ class Field extends Component
             }
         }
     }
+
     public function setParentType($index, $childIndex, $childSlug, $value): void
     {
         $this->data[$index]['type'] = $value;
@@ -97,6 +105,7 @@ class Field extends Component
             $this->fields = SipharishFormType::with('sipharisFormFields.SipharishFormFields')
                 ->find($this->sipharis_form_type_id)
                 ?->sipharisFormFields;
+
         }
 
         return view('livewire.field');

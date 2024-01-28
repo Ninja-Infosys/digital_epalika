@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -31,6 +32,7 @@ class Organization extends Authenticatable
         'is_active',
         'is_organization',
         'password',
+        'can_work',
     ];
 
     protected $hidden = [
@@ -41,6 +43,8 @@ class Organization extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
 
     public function setPasswordAttribute($value): void
     {
@@ -97,4 +101,15 @@ class Organization extends Authenticatable
     {
         return $this->hasMany(MapApply::class);
     }
+
+    // public function canWorkUntilDate($validityDurationInDays): string
+    // {
+    //     $expiryDate = Carbon::create(null, 4, 1, 0, 0, 0);
+    //     $expiryDate->addDays($validityDurationInDays);
+    //     if (!$this->can_work) {
+    //         $expiryDate = Carbon::now();
+    //     }
+
+    //     return $expiryDate->toDateString();
+    // }
 }

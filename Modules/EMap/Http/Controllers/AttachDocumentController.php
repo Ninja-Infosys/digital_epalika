@@ -147,6 +147,7 @@ class AttachDocumentController extends Controller
             DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
                 if ($appliedDocument->status == DocumentStatusEnum::PENDING) {
+                    // dd($appliedDocument->appliedDocumentStatuses->count() >0);
                     foreach ($appliedDocument->appliedMapFiles as $existingFile) {
                         $existingFile->forceDelete();
                         foreach ($data['documents'] as $file) {
@@ -157,13 +158,10 @@ class AttachDocumentController extends Controller
                         }
                     }
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
-                    return back();
                 } elseif ($appliedDocument->status == DocumentStatusEnum::REVIEW) {
                     toast('Document On Review You Cannot Change Document', 'error');
-                    return back();
                 } elseif ($appliedDocument->status == DocumentStatusEnum::APPROVED) {
                     toast('Document Is Already Approved', 'warning');
-                    return back();
                 } else {
                     $appliedDocument->update([
                         'status' => DocumentStatusEnum::PENDING->value
@@ -173,18 +171,20 @@ class AttachDocumentController extends Controller
                         "status" => DocumentStatusEnum::PENDING->value
                     ]);
                     foreach ($appliedDocument->appliedMapFiles as $existingFile) {
-                        $appliedDocumentStatus->appliedMapFiles()->create([
-                            "map_apply_id" => $mapApply->id,
-                            "document" => $existingFile->document,
-                        ]);
                         $existingFile->forceDelete();
                     }
                     foreach ($data['documents'] as $file) {
-                        $appliedDocument->appliedMapFiles()->create([
+                        $newAppliedDocuments = $appliedDocument->appliedMapFiles()->create([
                             "map_apply_id" => $mapApply->id,
                             "document" => $file->store('appliedDocument', 'public'),
                         ]);
+
+                        $appliedDocumentStatus->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $newAppliedDocuments->document,
+                        ]);
                     }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
 
                 Notification::send($form->group->users, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
