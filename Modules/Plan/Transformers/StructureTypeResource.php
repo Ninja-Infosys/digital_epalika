@@ -16,7 +16,7 @@ class StructureTypeResource extends JsonResource
     {
         return[
             'id' => $this->id ?? '',
-            'title'=> $this->title??'',
+            'title' => $this->title ?? '',
         ];
     }
 }

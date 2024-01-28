@@ -5,13 +5,14 @@ namespace Modules\Grant\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
 class CashGrant extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -36,5 +37,5 @@ class CashGrant extends Model
     {
         return $this->belongsTo(HelplessnessType::class);
     }
-    
+
 }

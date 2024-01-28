@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\UserManagement\{RoleController, UserController};
-use App\Http\Controllers\Admin\Global\{BranchController,
+use App\Http\Controllers\Admin\Global\{
+    BranchController,
     LetterHeadController,
     OfficeHeaderController,
     DepartmentController,
@@ -25,8 +26,14 @@ use App\Http\Controllers\Admin\Global\{BranchController,
     Units\InternalUnitConversionController,
     Units\MeasurementUnitController,
     Units\TypeController,
-    Units\UnitController
+    Units\UnitController,
+    MobileUserController
 };
+use App\Http\Controllers\Admin\Website\ImportantLinkController;
+use App\Http\Controllers\Admin\Website\MunicipalDetailController;
+use App\Http\Controllers\Admin\Website\SliderController;
+use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', SettingDashboardController::class)->name('dashboard');
 Route::resource('relationship', RelationshipController::class);
@@ -83,3 +90,15 @@ Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
     Route::resource('letterHead', LetterHeadController::class)->only('index', 'store');
 });
 Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
+Route::resource('mobileUser', MobileUserController::class);
+Route::get('mobileUser/{mobileUser}/updateLoginStatus', [MobileUserController::class, 'updateLoginStatus'])->name('mobileUser.update-login-status');
+
+
+// website admin routes
+
+Route::prefix('website')->as('website.')->group(function () {
+    Route::get('dashboard', WebsiteDashboardController::class)->name('dashboard');
+    Route::resource('slider', SliderController::class)->except('show');
+    Route::resource('municipalDetail', MunicipalDetailController::class);
+    Route::resource('importantLink', ImportantLinkController::class);
+});

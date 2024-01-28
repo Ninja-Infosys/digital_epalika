@@ -16,9 +16,9 @@ class StoreDisabilityTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'disability_type_id'=>['nullable', Rule::exists('disability_types','id')->withoutTrashed()],
-            'title'=>['required','string','max:255'],
-            'title_en'=>['required','string','max:255'],
+            'disability_type_id' => ['nullable', Rule::exists('disability_types', 'id')->withoutTrashed()],
+            'title' => ['required','string','max:255'],
+            'title_en' => ['required','string','max:255'],
         ];
     }
     public function messages(): array

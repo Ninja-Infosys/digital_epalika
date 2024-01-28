@@ -40,7 +40,7 @@ class RegistrationDetail extends Model
         'ward_no',
     ];
 
-    protected $appends=[
+    protected $appends = [
         'registration_month'
     ];
     public function user(): BelongsTo

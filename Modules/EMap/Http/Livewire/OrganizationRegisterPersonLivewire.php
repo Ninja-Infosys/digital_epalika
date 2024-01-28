@@ -172,15 +172,15 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function checkPermanentAddress(): void
     {
-        if (! empty($this->userDetail['permanent_province_id'])) {
+        if (!empty($this->userDetail['permanent_province_id'])) {
             $this->address['permanentDistricts'] = get_districts(province_ids: [$this->userDetail['permanent_province_id']]);
             $this->address['permanentProvince'] = $this->provinces->firstWhere('id', $this->userDetail['permanent_province_id']);
         }
-        if (! empty($this->userDetail['permanent_district_id'])) {
+        if (!empty($this->userDetail['permanent_district_id'])) {
             $this->address['permanentLocalBodies'] = get_local_bodies(district_ids: [$this->userDetail['permanent_district_id']]);
             $this->address['permanentDistrict'] = $this->address['permanentDistricts']->firstWhere('id', $this->userDetail['permanent_district_id']);
         }
-        if (! empty($this->userDetail['permanent_local_body_id'])) {
+        if (!empty($this->userDetail['permanent_local_body_id'])) {
             $this->address['permanentWards'] = get_local_bodies(localBodyId: $this->userDetail['permanent_local_body_id'])->ward_no;
             $this->address['permanentLocalBody'] = $this->address['permanentLocalBodies']->firstWhere('id', $this->userDetail['permanent_local_body_id']);
         }
@@ -188,15 +188,15 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function checkTemporaryAddress(): void
     {
-        if (! empty($this->userDetail['temporary_province_id'])) {
+        if (!empty($this->userDetail['temporary_province_id'])) {
             $this->address['temporaryDistricts'] = get_districts(province_ids: [$this->userDetail['temporary_province_id']]);
             $this->address['temporaryProvince'] = $this->provinces->firstWhere('id', $this->userDetail['temporary_province_id']);
         }
-        if (! empty($this->userDetail['temporary_district_id'])) {
+        if (!empty($this->userDetail['temporary_district_id'])) {
             $this->address['temporaryLocalBodies'] = get_local_bodies(district_ids: [$this->userDetail['temporary_district_id']]);
             $this->address['temporaryDistrict'] = $this->address['temporaryDistricts']->firstWhere('id', $this->userDetail['temporary_district_id']);
         }
-        if (! empty($this->userDetail['temporary_local_body_id'])) {
+        if (!empty($this->userDetail['temporary_local_body_id'])) {
             $this->address['temporaryWards'] = get_local_bodies(localBodyId: $this->userDetail['temporary_local_body_id'])->ward_no;
             $this->address['temporaryLocalBody'] = $this->address['temporaryLocalBodies']->firstWhere('id', $this->userDetail['temporary_local_body_id']);
         }
@@ -204,7 +204,7 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function checkSameAsPermanentAddress(): void
     {
-        $this->is_same_as_permanent = ! $this->is_same_as_permanent;
+        $this->is_same_as_permanent = !$this->is_same_as_permanent;
 
         if ($this->is_same_as_permanent) {
             $this->address['temporaryDistricts'] = $this->address['permanentDistricts'] ?? [];
@@ -279,7 +279,7 @@ class OrganizationRegisterPersonLivewire extends Component
         $this->checkPermanentAddress();
         $this->checkTemporaryAddress();
 
-        if (! empty($this->userDetail['citizenship_issued_district'])) {
+        if (!empty($this->userDetail['citizenship_issued_district'])) {
             $this->address['citizenshipIssuedDistrict'] = $this->districts->firstWhere('id', $this->userDetail['citizenship_issued_district']);
         }
 

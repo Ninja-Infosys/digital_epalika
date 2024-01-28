@@ -11,7 +11,7 @@ class ServiceDocumentLivewire extends Component
 
     public function mount($service = null)
     {
-        if (! empty($service)) {
+        if (!empty($service)) {
             foreach ($service->serviceDocuments as $serviceDocument) {
                 $this->serviceDocuments[] = [
                     'id' => $serviceDocument->id,
@@ -30,7 +30,7 @@ class ServiceDocumentLivewire extends Component
 
     public function removeRow($index)
     {
-        if (! empty($this->serviceDocuments[$index]['id'])) {
+        if (!empty($this->serviceDocuments[$index]['id'])) {
             ServiceDocument::find($this->serviceDocuments[$index]['id'])->delete();
         }
         unset($this->serviceDocuments[$index]);

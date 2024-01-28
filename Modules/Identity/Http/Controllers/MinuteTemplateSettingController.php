@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Modules\Identity\Entities\MinuteTemplateSetting;
-use Modules\Identity\Entities\RecommendationTemplateSetting;
 
 class MinuteTemplateSettingController extends Controller
 {
     public function index()
     {
         $minuteTemplateSetting = minuteTemplateSettingData();
-        return view('identity::admin.setting.minuteSetting.index',
-            compact('minuteTemplateSetting'));
+        return view(
+            'identity::admin.setting.minuteSetting.index',
+            compact('minuteTemplateSetting')
+        );
     }
 
     public function store(Request $request)

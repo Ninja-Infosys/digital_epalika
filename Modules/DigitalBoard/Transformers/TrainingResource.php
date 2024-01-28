@@ -15,10 +15,10 @@ class TrainingResource extends JsonResource
     public function toArray($request)
     {
         return[
-            'name'=>$this->name??'',
-            'open_date'=>$this->open_date??'',
-            'closed_date'=>$this->closed_date??'',
-            'form_type'=>$this->form_type??'',
+            'name' => $this->name ?? '',
+            'open_date' => $this->open_date ?? '',
+            'closed_date' => $this->closed_date ?? '',
+            'form_type' => $this->form_type ?? '',
         ];
     }
 }

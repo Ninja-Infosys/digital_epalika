@@ -18,6 +18,7 @@ class UpdateNoticeRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'date' => ['required'],
             'description' => ['nullable'],
+            'ward_no' => ['required', 'array'],
             'closed_at' => ['nullable'],
             'show_on_index' => ['nullable', 'boolean'],
             'files' => ['nullable', 'array'],

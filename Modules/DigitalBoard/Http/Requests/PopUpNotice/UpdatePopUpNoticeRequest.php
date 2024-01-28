@@ -5,7 +5,6 @@ namespace Modules\DigitalBoard\Http\Requests\PopUpNotice;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-
 class UpdatePopUpNoticeRequest extends FormRequest
 {
     public function authorize(): bool

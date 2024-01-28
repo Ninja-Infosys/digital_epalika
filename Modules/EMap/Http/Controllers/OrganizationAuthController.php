@@ -63,7 +63,7 @@ class OrganizationAuthController extends Controller
 
     public function invitation(Organization $organization)
     {
-        if (! request()->hasValidSignature() || $organization->password) {
+        if (!request()->hasValidSignature() || $organization->password) {
             abort(401);
         }
 
@@ -86,7 +86,7 @@ class OrganizationAuthController extends Controller
         $redirect = redirect()->route('organization.admin.dashboard');
         $user = auth('organization')->user();
 
-        if (! $user?->password) {
+        if (!$user?->password) {
             $user?->update([
                 'password' => $request->input('password'),
             ]);

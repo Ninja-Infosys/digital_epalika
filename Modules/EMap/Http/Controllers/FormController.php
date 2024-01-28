@@ -3,13 +3,8 @@
 namespace Modules\EMap\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\EMap\Entities\DynamicForm;
 use Modules\EMap\Entities\Form;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\EMap\Entities\New\MapPassGroup;
-use Modules\EMap\Enums\FormTypeEnum;
 use Modules\EMap\Http\Requests\NaksaForm\StoreFormRequest;
 
 class FormController extends Controller

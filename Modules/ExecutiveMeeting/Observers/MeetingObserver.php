@@ -114,8 +114,8 @@ class MeetingObserver
             }
         }
 
-//        if($meeting->isDirty('recurrence') && $meeting->recurrence != 'none')
-//            self::created($meeting);
+        //        if($meeting->isDirty('recurrence') && $meeting->recurrence != 'none')
+        //            self::created($meeting);
     }
 
     public function deleted(Meeting $meeting): void

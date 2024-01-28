@@ -20,16 +20,16 @@ class TaxPayerLandLivewire extends Component
     public $places = [];
 
     public $taxPayerLand = [
-        'plot_no'=>'',
-        'former_ward'=>'',
-        'former_vdc'=>'',
-        'ward_no'=>'',
-        'area'=>'',
-        'sector_id'=>'',
-        'place_id'=>'',
-        'land_address'=>'',
-        'land_use'=>'',
-        'remarks'=>'',
+        'plot_no' => '',
+        'former_ward' => '',
+        'former_vdc' => '',
+        'ward_no' => '',
+        'area' => '',
+        'sector_id' => '',
+        'place_id' => '',
+        'land_address' => '',
+        'land_use' => '',
+        'remarks' => '',
     ];
 
     protected $rules = [
@@ -53,7 +53,7 @@ class TaxPayerLandLivewire extends Component
     public function save()
     {
         $this->validate();
-        $this->taxPayer->taxPayerLands()->create(array_merge($this->taxPayerLand, ['user_id'=> auth()->id()]));
+        $this->taxPayer->taxPayerLands()->create(array_merge($this->taxPayerLand, ['user_id' => auth()->id()]));
 
         $this->reset('taxPayerLand');
 

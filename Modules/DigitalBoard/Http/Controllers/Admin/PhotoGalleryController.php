@@ -2,10 +2,7 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\DigitalBoard\Entities\photo_gallery;
 use Modules\DigitalBoard\Entities\PhotoGallery;
 use Modules\DigitalBoard\Http\Requests\PhotoGallery\StorePhotoGalleryRequest;
 use Modules\DigitalBoard\Http\Requests\PhotoGallery\UpdatePhotoGalleryRequest;

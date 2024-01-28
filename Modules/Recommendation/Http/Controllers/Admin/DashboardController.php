@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
         if (request()->ajax()) {
             return [
-                'categoryWise'=>$this->getCategoryWiseData(),
+                'categoryWise' => $this->getCategoryWiseData(),
                 'wardWiseRegistration' => $this->getWardWiseData(),
                 'monthlyWiseRegistration' => $this->getMonthlyWiseData(),
             ];
@@ -39,9 +39,10 @@ class DashboardController extends Controller
         $totalYealyRegistrationDetailCount = $this->registrationDetail->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
         return view('recommendation::admin.dashboard', compact('totalYealyRegistrationDetailCount', 'totalPersonalDetailCount', 'registrationDetailCount', 'todayRegistrationDetailCount'));
     }
-    public function ajaxData(){
+    public function ajaxData()
+    {
         return [
-            'categoryWise'=>$this->getCategoryWiseData(),
+            'categoryWise' => $this->getCategoryWiseData(),
             'wardWiseRegistration' => $this->getWardWiseData(),
             'monthlyWiseRegistration' => $this->getMonthlyWiseData(),
         ];
@@ -91,7 +92,7 @@ class DashboardController extends Controller
                     'color' => generateRandomRGBAColor() // If you have a function to generate random colors
                 ];
             });
-    
+
         return [
             'labels' => $recommendationCategories->pluck('name')->toArray(),
             'option' => ChartOptionEnum::PIE_CHART->option(),
@@ -105,7 +106,7 @@ class DashboardController extends Controller
             ],
         ];
     }
-    
+
     public function getMonthlyWiseData(): array
     {
         $monthlyRegistrations = [];

@@ -16,7 +16,7 @@ class CitizenCharterComponent extends Component
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
                     $q->where('ward', $ward);
-                }else{
+                } else {
                     $q->whereNull('ward');
                 }
             })
@@ -26,10 +26,10 @@ class CitizenCharterComponent extends Component
 
 
     public function render()
-{
-    return view('components.frontend.citizen-charter-component', [
-        'citizenCharters' => $this->citizenCharters,
-    ]);
-}
+    {
+        return view('components.frontend.citizen-charter-component', [
+            'citizenCharters' => $this->citizenCharters,
+        ]);
+    }
 
 }

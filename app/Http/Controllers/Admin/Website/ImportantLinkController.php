@@ -51,7 +51,7 @@ class ImportantLinkController extends Controller
 
         toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.website.importantLink.index'));
+        return redirect(route('admin.global.website.importantLink.index'));
     }
 
     public function destroy(ImportantLink $importantLink)

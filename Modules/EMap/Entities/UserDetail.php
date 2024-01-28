@@ -69,7 +69,7 @@ class UserDetail extends Model
 
     public function setNecCertificateAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['nec_certificate'] = $value->store('user/detail/'.Str::slug($this->attributes['name_ne'], '_'), 'public');
         }
     }
@@ -83,7 +83,7 @@ class UserDetail extends Model
 
     public function setCitizenshipFrontAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_front'] = $value->store('user/detail/'.Str::slug($this->attributes['name_ne'], '_'), 'public');
         }
     }
@@ -97,7 +97,7 @@ class UserDetail extends Model
 
     public function setCitizenshipBackAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_back'] = $value->store('user/detail/'.Str::slug($this->attributes['name_ne'], '_'), 'public');
         }
     }

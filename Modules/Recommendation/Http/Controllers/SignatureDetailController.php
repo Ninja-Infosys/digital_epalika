@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\SipharisSignatureDetail;
 use Modules\Recommendation\Http\Requests\SignatureDetail\StoreSignatureRequest;
 use Modules\Recommendation\Http\Requests\SignatureDetail\UpdateSignatureRequest;
-use Illuminate\Support\Facades\DB;
 
 class SignatureDetailController extends Controller
 {
-
     public function index()
     {
         $signatureDetails = SipharisSignatureDetail::latest()->get();

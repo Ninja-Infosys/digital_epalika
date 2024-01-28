@@ -2,7 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\FormStoreNotification;
@@ -12,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Entities\AppliedDocument;
+use Modules\EMap\Entities\AppliedDocumentStatus;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
@@ -95,18 +95,38 @@ class AdminStepController extends Controller
                 }
             }
 
-            $appliedDocument->update([
-                'status' => $request->input('status')
-            ]);
-            $appliedDocument->appliedDocumentStatuses()->create([
-                "applied_document_id" => $appliedDocument->id,
-                "status" => $request->input('status'),
-                "comment" => $request->input('comment'),
-            ]);
+            if ($request->input('status') == DocumentStatusEnum::PENDING->value) {
+                toast('Updated New Status', 'warning');
+            } elseif ($request->input('status') == DocumentStatusEnum::REVIEW->value) {
+                $appliedDocument->update([
+                    'status' => $request->input('status')
+                ]);
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            } elseif ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                if ($appliedDocument->status != DocumentStatusEnum::APPROVED) {
+                    $appliedDocument->update([
+                        'status' => $request->input('status')
+                    ]);
+                    AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
+                        ->orderBy('id', 'desc')
+                        ->first()?->update([
+                            'status' => $request->input('status')
+                        ]);
+                    toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+                }
+            } else {
+                $appliedDocument->update([
+                    'status' => $request->input('status')
+                ]);
+                $appliedDocument->appliedDocumentStatuses()->create([
+                    "applied_document_id" => $appliedDocument->id,
+                    "status" => $request->input('status'),
+                    "comment" => $request->input('comment'),
+                ]);
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            }
             Notification::send($mapApply->organization, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
         });
-
-        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
         return back();
     }
 

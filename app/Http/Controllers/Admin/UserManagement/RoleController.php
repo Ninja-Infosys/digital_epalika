@@ -108,15 +108,15 @@ class RoleController extends Controller
     public function letterHeadStore(Request $request, Role $role)
     {
         $request->validate([
-            'header'=>['required'],
-            'letter_head'=>['required']
+            'header' => ['required'],
+            'letter_head' => ['required']
         ]);
 
         LetterHead::updateOrCreate(
-            ['model_type'=>Role::class,'model_id'=>$role->id],
+            ['model_type' => Role::class,'model_id' => $role->id],
             [
-                'header'=>$request->input('header'),
-                'letter_head'=>$request->input('letter_head')
+                'header' => $request->input('header'),
+                'letter_head' => $request->input('letter_head')
             ]
         );
 

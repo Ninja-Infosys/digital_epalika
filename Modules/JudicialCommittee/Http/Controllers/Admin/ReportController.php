@@ -148,11 +148,11 @@ class ReportController extends Controller
             return [
                 'sn' => (int)$key + 1,
                 'subject' => $complaintSubject->subject ?? '',
-                'total'=>$complaintSubject->complaintApplications->count(),
-                'completed'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::COMPLETED)->count(),
-                'pending'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::PENDING)->count(),
-                'recommended'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::RECOMMENDED)->count(),
-                'society_conciliated'=>$complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::SOCIETY_CONCILIATED)->count(),
+                'total' => $complaintSubject->complaintApplications->count(),
+                'completed' => $complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::COMPLETED)->count(),
+                'pending' => $complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::PENDING)->count(),
+                'recommended' => $complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::RECOMMENDED)->count(),
+                'society_conciliated' => $complaintSubject->complaintApplications->where('application_status', ComplaintApplicationStatusEnum::SOCIETY_CONCILIATED)->count(),
             ];
         });
 

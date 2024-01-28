@@ -6,34 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\Global\BranchController;
-use App\Http\Controllers\Admin\Global\DepartmentController;
-use App\Http\Controllers\Admin\Global\DesignationController;
-use App\Http\Controllers\Admin\Global\EmergencyCategoryController;
-use App\Http\Controllers\Admin\Global\EmergencyNumberController;
-use App\Http\Controllers\Admin\Global\EmployeeController;
-use App\Http\Controllers\Admin\Global\EthnicityController;
-use App\Http\Controllers\Admin\Global\ExperienceController;
-use App\Http\Controllers\Admin\Global\ExperienceFileController;
-use App\Http\Controllers\Admin\Global\FeatureActivationController;
-use App\Http\Controllers\Admin\Global\FiscalYearController;
-use App\Http\Controllers\Admin\Global\MailSettingController;
-use App\Http\Controllers\Admin\Global\OccupationController;
-use App\Http\Controllers\Admin\Global\OfficeSettingController;
-use App\Http\Controllers\Admin\Global\QualificationController;
-use App\Http\Controllers\Admin\Global\RelationshipController;
-use App\Http\Controllers\Admin\Global\SettingDashboardController;
-use App\Http\Controllers\Admin\Global\SmsSettingController;
-use App\Http\Controllers\Admin\Global\Units\ExternalUnitConversionController;
-use App\Http\Controllers\Admin\Global\Units\InternalUnitConversionController;
-use App\Http\Controllers\Admin\Global\Units\MeasurementUnitController;
-use App\Http\Controllers\Admin\Global\Units\TypeController;
-use App\Http\Controllers\Admin\Global\Units\UnitController;
-use App\Http\Controllers\Admin\Settings\LetterHeadController;
-use App\Http\Controllers\Admin\UserManagement\RoleController;
-use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
@@ -77,13 +50,7 @@ Route::post('file-upload', [FileController::class, 'fileUpload'])->name('file-up
 Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
-// website admin routes
-Route::prefix('website')->as('website.')->group(function () {
-    Route::get('dashboard', WebsiteDashboardController::class)->name('dashboard');
-    Route::resource('slider', SliderController::class)->except('show');
-    Route::resource('municipalDetail', MunicipalDetailController::class);
-    Route::resource('importantLink', ImportantLinkController::class);
-});
+
 
 //activity logs
 Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');

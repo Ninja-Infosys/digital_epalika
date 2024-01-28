@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\v1\AddressApiController;
 use App\Http\Controllers\Api\v1\PublicApiController;

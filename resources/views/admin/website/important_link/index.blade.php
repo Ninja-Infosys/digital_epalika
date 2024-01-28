@@ -27,7 +27,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">महत्त्वपूर्ण लिङ्क सूची</h4>
                         @can('role_create')
-                            <a href="{{route('admin.website.importantLink.create')}}"
+                            <a href="{{route('admin.global.website.importantLink.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -52,16 +52,16 @@
                                     <td>{{$importantLink->link_title}}</td>
                                     <td>{{$importantLink->link_url}}</td>
                                     <td class="d-flex gap-1">
-                                        <a data-bs-type="edit" href="{{route('admin.website.importantLink.edit',$importantLink)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.global.website.importantLink.edit',$importantLink)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i> 
+                                            <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{route('admin.website.importantLink.destroy',$importantLink)}}"
+                                        <form action="{{route('admin.global.website.importantLink.destroy',$importantLink)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title=" मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i> 
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

@@ -100,16 +100,16 @@ class DisabilityIdentityCard extends Model
     protected function helpingTask(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? explode(',', $value) : [],
-            set: static fn($value) => implode(',', $value),
+            get: static fn ($value) => $value ? explode(',', $value) : [],
+            set: static fn ($value) => implode(',', $value),
         );
     }
 
     protected function withoutHelpingTask(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ? explode(',', $value) : [],
-            set: static fn($value) => implode(',', $value),
+            get: static fn ($value) => $value ? explode(',', $value) : [],
+            set: static fn ($value) => implode(',', $value),
         );
     }
 

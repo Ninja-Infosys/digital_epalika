@@ -71,20 +71,35 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="files" class="form-label">फाईल </label>
                                     <input
                                         type="file"
                                         name="files[]"
                                         class="form-control @error('files') is-invalid @enderror"
                                         id="files"
-
                                    multiple />
                                     @error('files')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                     @error('files.*')
                                     <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6  mb-2">
+                                    <label for="ward_no" class="form-label"> वडा नं.</label>
+                                    <select name="ward_no[]" class="form-control @error('ward_no') is-invalid @enderror"
+                                        multiple id="ward_no" data-toggle="select2" data-width="100%">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        <option value="metro">महानगरपालिका</option>
+                                        @foreach ($officeSetting->localBody->ward_no as $ward)
+                                            <option value="{{ $ward }}">
+                                                {{ $ward }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('ward_no')
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

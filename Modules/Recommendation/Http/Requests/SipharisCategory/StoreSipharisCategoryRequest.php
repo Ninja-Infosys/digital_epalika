@@ -10,7 +10,8 @@ class StoreSipharisCategoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('recommendationCategory_create');;
+        return Gate::allows('recommendationCategory_create');
+        ;
     }
 
     public function rules(): array

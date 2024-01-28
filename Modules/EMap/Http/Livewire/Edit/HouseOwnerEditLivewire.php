@@ -61,7 +61,7 @@ class HouseOwnerEditLivewire extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = ! $this->editForm;
+        $this->editForm = !$this->editForm;
     }
 
     public function rules(): array

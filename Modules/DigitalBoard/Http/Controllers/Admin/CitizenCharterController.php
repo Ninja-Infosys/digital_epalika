@@ -2,7 +2,6 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
@@ -54,7 +53,7 @@ class CitizenCharterController extends Controller
             ->where(function ($q) {
                 if (!empty(auth()->user()->ward_no)) {
                     $q->where('ward', auth()->user()->ward_no);
-                }else{
+                } else {
                     $q->whereNull('ward');
                 }
             })

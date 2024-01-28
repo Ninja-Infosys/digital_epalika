@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 
 class MapPassGroupController extends Controller
 {
-
     public function index()
     {
 
@@ -23,7 +22,7 @@ class MapPassGroupController extends Controller
 
     }
 
-    public  function edit()
+    public function edit()
     {
 
     }
@@ -33,8 +32,9 @@ class MapPassGroupController extends Controller
 
     }
 
-    public function updateStatus(){
-        
+    public function updateStatus()
+    {
+
     }
 
 

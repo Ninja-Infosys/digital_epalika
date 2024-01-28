@@ -13,7 +13,9 @@ use Modules\EMap\Enums\FormTypeEnum;
 
 class FormDataType extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected static function boot()
     {

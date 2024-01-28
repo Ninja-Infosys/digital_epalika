@@ -10,7 +10,7 @@ class TypeSeeder extends Seeder
     public function run(): void
     {
         Type::create([
-            'title'=>'Land Measurement',
+            'title' => 'Land Measurement',
         ]);
     }
 }

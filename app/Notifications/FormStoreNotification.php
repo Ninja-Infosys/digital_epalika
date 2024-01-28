@@ -5,12 +5,10 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Enums\FormTypeEnum;
 
 class FormStoreNotification extends Notification

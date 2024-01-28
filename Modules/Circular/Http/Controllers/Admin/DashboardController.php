@@ -48,7 +48,8 @@ class DashboardController extends Controller
             )
         );
     }
-    public function ajaxData(){
+    public function ajaxData()
+    {
         return [
             'fyRegistrationAndDispatch' => $this->getFyRegistrationAndDispatchData(),
             'totalMonthRegistrationAndDispatch' => $this->getCurrentFyRegistrationAndDispatch()
@@ -75,15 +76,15 @@ class DashboardController extends Controller
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
                     'label' => 'दर्ता',
-                    'backgroundColor' => generateRandomRGBAColor(), 
-                    'borderColor' => generateRandomRGBAColor(), 
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
                     'label' => 'चलानी',
-                    'backgroundColor' => generateRandomRGBAColor(), 
-                    'borderColor' => generateRandomRGBAColor(), 
+                    'backgroundColor' => generateRandomRGBAColor(),
+                    'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
                 ],
             ],

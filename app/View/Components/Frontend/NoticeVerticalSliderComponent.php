@@ -18,8 +18,8 @@ class NoticeVerticalSliderComponent extends Component
             ->showInIndex()
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
-                    $q->where('ward', $ward);
-                }else{
+                   $q->where('ward', $ward);
+                } else {
                     $q->whereNull('ward');
                 }
             })

@@ -5,12 +5,10 @@ namespace Modules\Identity\Http\Controllers;
 use App\Enums\StatusEnum;
 use App\Models\Occupation;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
-use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Http\Requests\UpdateDisabilityFullDetailResource;
 
 class DisabilityFullDetailController extends Controller

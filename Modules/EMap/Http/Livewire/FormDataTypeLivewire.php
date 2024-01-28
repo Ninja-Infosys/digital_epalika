@@ -3,14 +3,12 @@
 namespace Modules\EMap\Http\Livewire;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\EMap\Entities\DynamicForm;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\MapPassGroup;
-use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\FormTypeEnum;
 
 class FormDataTypeLivewire extends Component

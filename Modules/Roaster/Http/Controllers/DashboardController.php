@@ -46,15 +46,16 @@ class DashboardController extends Controller
             'traineeCount',
             'technicalTraineeCount']));
     }
-public function ajaxData(){
-    return [
-        'trainingAccordingToFiscalYear' => $this->trainingAccordingToFiscalYear(),
-        'trainingAccordingToMonth' => $this->trainingAccordingToMonth(),
-        'trainerAccordingToSubject' => $this->trainerAccordingToSubject(),
-        'trainingAccordingToType' => $this->trainingAccordingToType(),
-        'trainerAccordingToDepartment'=>$this->trainerAccordingToDepartment()
-    ];
-}
+    public function ajaxData()
+    {
+        return [
+            'trainingAccordingToFiscalYear' => $this->trainingAccordingToFiscalYear(),
+            'trainingAccordingToMonth' => $this->trainingAccordingToMonth(),
+            'trainerAccordingToSubject' => $this->trainerAccordingToSubject(),
+            'trainingAccordingToType' => $this->trainingAccordingToType(),
+            'trainerAccordingToDepartment' => $this->trainerAccordingToDepartment()
+        ];
+    }
     public function trainingAccordingToFiscalYear()
     {
         $fiscalYears = FiscalYear::withCount('trainings')
@@ -107,38 +108,38 @@ public function ajaxData(){
     }
 
     public function trainerAccordingToSubject()
-{
-    $subjects = Subject::withCount('trainers')
-        ->get()
-        ->map(function ($subject) {
-            return [
-                'title' => $subject->title,
-                'trainers_count' => (int)$subject->trainers_count,
-            ];
+    {
+        $subjects = Subject::withCount('trainers')
+            ->get()
+            ->map(function ($subject) {
+                return [
+                    'title' => $subject->title,
+                    'trainers_count' => (int)$subject->trainers_count,
+                ];
+            });
+
+        $labelColors = collect([]);
+
+        // Generate random colors for labels
+        $subjects->each(function ($subject) use ($labelColors) {
+            $labelColors->push(generateRandomRGBAColor());
         });
 
-    $labelColors = collect([]);
-
-    // Generate random colors for labels
-    $subjects->each(function ($subject) use ($labelColors) {
-        $labelColors->push(generateRandomRGBAColor());
-    });
-
-    return [
-        'labels' => $subjects->pluck('title')->toArray(),
-        'dataSets' => [
-            [
-                'data' => $subjects->pluck('trainers_count')->toArray(),
-                'label' => 'Trainers Count',
-                'backgroundColor' => $labelColors->toArray(),
-                'borderColor' => generateRandomRGBAColor(),
-                'borderWidth' => 1,
+        return [
+            'labels' => $subjects->pluck('title')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $subjects->pluck('trainers_count')->toArray(),
+                    'label' => 'Trainers Count',
+                    'backgroundColor' => $labelColors->toArray(),
+                    'borderColor' => generateRandomRGBAColor(),
+                    'borderWidth' => 1,
+                ],
             ],
-        ],
-    ];
-}
+        ];
+    }
 
-    
+
 
     public function trainingAccordingToType()
     {
@@ -168,29 +169,29 @@ public function ajaxData(){
         ];
     }
     public function trainerAccordingToDepartment()
-{
-    $departments = Department::withCount('trainers')
-        ->get()
-        ->map(function ($department) {
-            return [
-                'name' => $department->title . " (" . $department->trainers_count . ")",
-                'data' => (int)$department->trainers_count,
-                'color' => generateRandomRGBAColor() // If you have a function to generate random colors
-            ];
-        });
+    {
+        $departments = Department::withCount('trainers')
+            ->get()
+            ->map(function ($department) {
+                return [
+                    'name' => $department->title . " (" . $department->trainers_count . ")",
+                    'data' => (int)$department->trainers_count,
+                    'color' => generateRandomRGBAColor() // If you have a function to generate random colors
+                ];
+            });
 
-    return [
-        'labels' => $departments->pluck('name')->toArray(),
-        'option' => ChartOptionEnum::PIE_CHART->option(),
-        'dataSets' => [
-            [
-                'data' => $departments->pluck('data')->toArray(),
-                'backgroundColor' => $departments->pluck('color')->toArray(),
-                'borderColor' => $departments->pluck('color')->toArray(),
-                'borderWidth' => 1,
+        return [
+            'labels' => $departments->pluck('name')->toArray(),
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $departments->pluck('data')->toArray(),
+                    'backgroundColor' => $departments->pluck('color')->toArray(),
+                    'borderColor' => $departments->pluck('color')->toArray(),
+                    'borderWidth' => 1,
+                ],
             ],
-        ],
-    ];
-}
+        ];
+    }
 
 }

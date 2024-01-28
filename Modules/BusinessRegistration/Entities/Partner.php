@@ -57,9 +57,9 @@ class Partner extends Model
         'position',
     ];
 
-    protected $casts=[
-        'gender'=>Gender::class,
-        'education_qualification'=>Qualification::class
+    protected $casts = [
+        'gender' => Gender::class,
+        'education_qualification' => Qualification::class
     ];
 
     public function photo(): Attribute
