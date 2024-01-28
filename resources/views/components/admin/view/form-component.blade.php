@@ -96,6 +96,9 @@
                                                         <div class="mb-3">
                                                             <label for="comment" class="form-label">टिप्पणी</label>
                                                             <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                                                            @error('comment')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
@@ -166,7 +169,7 @@
                         </div>
                             </td>
                                 <td>
-                                    {{ get_nepali_number($formStoreStatus->created_at->toDateString()) }}
+                                    {{ $formStoreStatus->created_at->toDateString() }}
                                 </td>
                                 <td>
                                    {{ $formStoreStatus->status->label()??'' }}

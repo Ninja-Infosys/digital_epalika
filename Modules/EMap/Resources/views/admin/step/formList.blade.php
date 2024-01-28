@@ -90,30 +90,21 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक</th>
+                                <th>Need From </th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($forms as $form)
-                               @php
-                                     $appliedDocumentStatus = Modules\EMap\Entities\AppliedDocument::where('map_apply_id', $mapApply->id)
-                                    ->where('form_id', $form->id)
-                                    ->pluck('status');
-                                $formStoreStatus = Modules\EMap\Entities\FormStore::where('map_apply_id', $mapApply->id)
-                                    ->where('form_id', $form->id)
-                                    ->pluck('status');
-                                $paymentStoreStatus = Modules\EMap\Entities\PaymentStore::where('map_apply_id', $mapApply->id)
-                                    ->where('form_id', $form->id)
-                                    ->pluck('status');
-                               @endphp
-                                <tr @if($appliedDocumentStatus->contains(Modules\EMap\Enums\DocumentStatusEnum::REJECTED) || $formStoreStatus->contains(Modules\EMap\Enums\DocumentStatusEnum::REJECTED)|| $paymentStoreStatus->contains(Modules\EMap\Enums\DocumentStatusEnum::REJECTED)) style="background-color:#d16969;" @endif >
+
+                                <tr>
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>{{ $form->title }}</td>
                                     <td>
                                         {{$form->need_from?->label()??''}}
-                                        {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}}--}}
                                     </td>
+                                    <td>{{$form->map_status?->label()}}</td>
                                     <td>
                                         @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
                                             <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"

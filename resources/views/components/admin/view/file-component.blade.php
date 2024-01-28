@@ -70,7 +70,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="status_model_applied">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>                  
+                                                </div>
                                                 <div class="modal-body">
                                                 <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateAppliedDocumentStatus',[$mapApply,$form,$formDataType,$appliedDocument]) }}">
                                                     @csrf
@@ -88,6 +88,9 @@
                                                             <div class="mb-3">
                                                                 <label for="comment" class="form-label">टिप्पणी</label>
                                                                 <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                                                                @error('comment')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>

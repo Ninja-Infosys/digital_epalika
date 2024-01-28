@@ -15,6 +15,7 @@ use Modules\EMap\Entities\AppliedDocumentStatus;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Enums\DocumentStatusEnum;
@@ -25,8 +26,52 @@ class AdminStepController extends Controller
     {
 
         $mapApply->load('houseOwner');
-        $forms = Form::with('formDataTypes', 'group.users')->orderBy('order')->get();
-        return view('emap::admin.step.formList', compact('mapApply', 'forms'));
+
+        $documentTypeModels = collect([AppliedDocument::class,FormStore::class,PaymentStore::class]);
+
+        $documents = collect([]);
+
+        foreach($documentTypeModels as $documentModel) {
+            $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
+            foreach($typeDocuments as $document) {
+                $documents->push([
+                    'document_type' => class_basename($documentModel),
+                    'form_id' => $document->form_id,
+                    'status' => $document->status?->value
+                ]);
+            }
+
+        }
+
+        $order = 0;
+        $allApproved = true;
+        $forms = Form::withCount('formDataTypes')
+            ->orderBy('order')
+            ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
+                $status = $documents->where('form_id', $form->id)->pluck('status');
+
+                if($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                    $order = $form->order + 1;
+                } elseif($key == 0) {
+                    $order = $form->order;
+                    $allApproved = false;
+
+                } else {
+                    $allApproved = false;
+                }
+                if($allApproved) {
+                    $mapStatus = DocumentStatusEnum::APPROVED;
+                } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
+                    $mapStatus = DocumentStatusEnum::REJECTED;
+                } elseif ($status->count() > 0) {
+                    $mapStatus = DocumentStatusEnum::PENDING;
+                } else {
+                    $mapStatus = DocumentStatusEnum::NOT_APPLIED;
+                }
+                $form->map_status = $mapStatus;
+                return $form;
+            });
+        return view('emap::admin.step.formList', compact('mapApply', 'forms','order'));
     }
 
     public function viewDetail(MapApply $mapApply, Form $form)
@@ -38,7 +83,6 @@ class AdminStepController extends Controller
         $MapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
         $ward_no =  $MapGroups ? explode(',', $MapGroups?->ward_no ?? '') : [];
         $checkAuthorization = in_array($mapApply->landDetail?->ward_no, $ward_no);
-
 
 
         return view('emap::admin.step.formDetail', compact('mapApply', 'form', 'checkAuthorization'));
@@ -179,16 +223,45 @@ class AdminStepController extends Controller
                     ]);
                 }
             }
-            $formStore->update([
-                'status' => $request->input('status')
-            ]);
-            $formStore->formStoreStatuses()->create([
-                "form_store_id" => $formStore->id,
-                "status" => $request->input('status'),
-                "comment" => $request->input('comment'),
-                "data" => $formStore->data,
-                "fields" => $formStore->fields
-            ]);
+
+            if ($request->input('status') == DocumentStatusEnum::PENDING->value) {
+                toast('Updated New Status', 'warning');
+            } elseif ($request->input('status') == DocumentStatusEnum::REVIEW->value) {
+                $formStore->update([
+                    'status' => $request->input('status')
+                ]);
+                FormStoreStatus::where('form_store_id', $formStore->id)
+                    ->orderBy('id', 'desc')
+                    ->first()?->update([
+                        'status' => $request->input('status')
+                    ]);
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            } elseif ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                if ($formStore->status != DocumentStatusEnum::APPROVED) {
+                    $formStore->update([
+                        'status' => $request->input('status')
+                    ]);
+                    FormStoreStatus::where('form_store_id', $formStore->id)
+                        ->orderBy('id', 'desc')
+                        ->first()?->update([
+                            'status' => $request->input('status')
+                        ]);
+                    toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+                }
+            } else {
+                $formStore->update([
+                    'status' => $request->input('status')
+                ]);
+                 $formStore->formStoreStatuses()->create([
+                    "form_store_id" => $formStore->id,
+                    "status" => $request->input('status'),
+                    "comment" => $request->input('comment'),
+                    "data" => $formStore->data,
+                    "fields" => $formStore->fields
+                ]);
+
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            }
             Notification::send($mapApply->organization, new FormStoreNotification($mapApply, $form, $formDataType, $formStore));
         });
 
