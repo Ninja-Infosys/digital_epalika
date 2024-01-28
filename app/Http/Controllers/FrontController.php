@@ -15,6 +15,8 @@ use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 class FrontController extends Controller
 {
     use NepaliDateConverter;
@@ -171,5 +173,22 @@ class FrontController extends Controller
         $mobileUser = Auth::guard('mobile-user')->user();
         return view('frontend.mobileUser.index',compact('mobileUser'));
 
+    }
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:7',
+        ]);
+        $user = Auth::guard('mobile-user')->user();
+        if (!Hash::check($request->current_password, $user->password)) {
+            toast('Incorrect current password', 'error');
+            return back();
+        }
+        $user->update([
+            'password' =>($request->password),
+        ]);
+        toast('पासवर्ड सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return redirect()->route('digital-service');
     }
 }
