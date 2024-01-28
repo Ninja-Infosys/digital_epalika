@@ -56,3 +56,6 @@ Route::prefix('report')->as('report.')->controller(ReportController::class)->gro
     Route::get('personal-detail', 'personalDetail')->name('personal-detail');
     Route::post('personal-detail-report', 'personalDetailReport')->name('personal-detail-report');
 });
+Route::get('searchForm', function () {
+    return view('livewire.search-livewire');
+});

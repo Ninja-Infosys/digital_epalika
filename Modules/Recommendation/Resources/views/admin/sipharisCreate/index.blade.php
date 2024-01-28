@@ -41,7 +41,11 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">सिफारिस सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
-                            @includeIf('inc.filter_form')
+                            <form action="" method="get" class="me-2">
+                                <input class="form-control form-control-sm filter-form" name="search" type="search" placeholder="Search" autocomplete="off"
+                                       value="{{old('search',\request('search'))}}">
+                            </form>
+
 
                             @can('recommendation_create')
                                 <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}"
