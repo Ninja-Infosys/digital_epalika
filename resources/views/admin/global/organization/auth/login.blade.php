@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -141,4 +141,4 @@ overflow: hidden">
     <script src="{{ asset('assets/backend/js/app.min.js') }}"></script>
 </body>
 
-</html>
+</html> --}}

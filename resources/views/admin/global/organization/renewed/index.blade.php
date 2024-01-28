@@ -11,18 +11,18 @@
                                 गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">कर चुक्ता</li>
+                        <li class="breadcrumb-item active">नविकरण</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कर चुक्ता</h4>
+                <h4 class="page-title">नविकरण </h4>
             </div>
         </div>
     </div>
     <div class="card p-0">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <h3 class="card-title mb-0">कर चुक्ता</h3>
-                <a href="{{ route('organization.admin.taxClearance.create') }}" class="btn btn-outline-primary btn-xs">
+                <h3 class="card-title mb-0">नविकरण</h3>
+                <a href="{{ route('admin.global.organization.renewed.create') }}" class="btn btn-outline-primary btn-xs">
                     <i class="fa fa-plus"></i> नयाँ थप्नुहोस
                 </a>
             </div>
@@ -38,20 +38,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($taxClearances as $taxClearance)
+                    @foreach ($reneweds as $renewed)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $taxClearance->year }}</td>
+                            <td>{{ $renewed->year }}</td>
                             <td>
-                                <img src="{{ $taxClearance->document_url }}" alt="" height="60">
+                                <img src="{{ $renewed->document_url }}" alt="" height="60">
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('organization.admin.taxClearance.edit', $taxClearance) }}"
+                                    <a href="{{ route('admin.global.organization.renewed.edit', $renewed) }}"
                                         class="btn btn-sm btn-outline-warning mx-1">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('organization.admin.taxClearance.destroy', $taxClearance) }}"
+                                    <form action="{{ route('admin.global.organization.renewed.destroy', $renewed) }}"
                                         method="post">
                                         @csrf
                                         @method('delete')

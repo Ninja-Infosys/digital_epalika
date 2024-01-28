@@ -63,7 +63,6 @@ class OrganizationController extends Controller
             'userDetail.temporaryDistrict',
             'userDetail.temporaryProvince',
         ]);
-        return view('emap::admin.organization.show', compact('organization'));
     }
 
     public function destroy(Organization $organization)

@@ -21,8 +21,11 @@ use App\Http\Controllers\Admin\Global\{BranchController,
     OrganizationDashboardController,
     QualificationController,
     RelationshipController,
+    RenewedController,
     SettingDashboardController,
     SmsSettingController,
+    SuchikritaController,
+    TaxClearanceController,
     Units\ExternalUnitConversionController,
     Units\InternalUnitConversionController,
     Units\MeasurementUnitController,
@@ -90,6 +93,8 @@ Route::prefix('systemSetting')->as('systemSetting.')->group(function () {
 Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
 
 
+
+
 Route::prefix('organization')->as('organization.')->group(function () {
     Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
     Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
@@ -100,10 +105,17 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::get('{organization}/invitation', [OrganizationAuthController::class, 'invitation'])->name('invitation');
     Route::get('password/create', [OrganizationAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
     Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
+    });
+    Route::resource('taxClearance', TaxClearanceController::class);
+    Route::resource('renewed', RenewedController::class);
 });
 
-Route::prefix('profile')->group(function () {
-    Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
-});
 
 
+
+
+
+Route::get('mapApply/{mapApply}/attachment/suchikritaDocument', [SuchikritaController::class, 'index'])->name('suchikritaDocument');
+Route::post('mapApply/{mapApply}/attachment/storeSuchikritaDocument', [SuchikritaController::class, 'storeSuchikritaDocument'])->name('storeSuchikritaDocument');

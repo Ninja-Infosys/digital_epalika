@@ -23,13 +23,13 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">कर चुक्ता थप्नुहोस</h3>
-                    <a href="{{ route('organization.admin.taxClearance.index') }}" class="btn btn-outline-primary btn-sm">
+                    <a href="{{ route('admin.global.organization.taxClearance.index') }}" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-list"></i> कर चुक्ता सुची
                     </a>
                 </div>
             </div>
             <div class="card-body px-0">
-                <form action="{{ route('organization.admin.taxClearance.store') }}" method="post"
+                <form action="{{ route('admin.global.organization.taxClearance.store') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">
