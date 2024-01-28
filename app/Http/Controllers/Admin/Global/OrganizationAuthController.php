@@ -37,7 +37,6 @@ class OrganizationAuthController extends Controller
         }
 
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
-            $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
 
