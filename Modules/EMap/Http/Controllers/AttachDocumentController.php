@@ -147,7 +147,6 @@ class AttachDocumentController extends Controller
             DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
                 if ($appliedDocument->status == DocumentStatusEnum::PENDING) {
-                    // dd($appliedDocument->appliedDocumentStatuses->count() >0);
                     foreach ($appliedDocument->appliedMapFiles as $existingFile) {
                         $existingFile->forceDelete();
                         foreach ($data['documents'] as $file) {
@@ -195,15 +194,28 @@ class AttachDocumentController extends Controller
             ]);
             DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $formStore = FormStore::find($id);
-                FormStoreStatus::create([
-                    "form_store_id" => $formStore->id,
-                    "status" => DocumentStatusEnum::PENDING->value,
-                    "data" => $data['data'],
-                    "fields" => $formStore->fields
-                ]);
-                $formStore->update([
-                    'data' => $data['data'],
-                ]);
+                if ($formStore->status == DocumentStatusEnum::PENDING) {
+                    $formStore->update([
+                        'data' => $data['data'],
+                    ]);
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                } elseif ($formStore->status == DocumentStatusEnum::REVIEW) {
+                    toast('Form Data On Review You Cannot Change Data', 'error');
+                } elseif ($formStore->status == DocumentStatusEnum::APPROVED) {
+                    toast('Form Data Is Already Approved', 'warning');
+                } else {
+                    FormStoreStatus::create([
+                        "form_store_id" => $formStore->id,
+                        "status" => DocumentStatusEnum::PENDING->value,
+                        "data" => $data['data'],
+                        "fields" => $formStore->fields
+                    ]);
+                    $formStore->update([
+                        "status" => DocumentStatusEnum::PENDING->value,
+                        'data' => $data['data'],
+                    ]);
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                }
                 Notification::send($form->group->users, new FormStoreNotification($mapApply, $form, $formDataType, $formStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
@@ -620,6 +632,20 @@ class AttachDocumentController extends Controller
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {
+            $placeholder = '[@form.' . $key . ']';
+            $template = str_replace($placeholder, $value, $template);
+        }
+
+        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType'));
+    }
+
+    public function formStoreStatusPrint(FormDataType $formDataType, FormStore $formStore,FormStoreStatus $formStoreStatus)
+    {
+        $formStore->load('form_data.model');
+        $formDataType->load('model');
+        $template = $formStore->form_data?->model?->template ?? '';
+
+        foreach ($formStoreStatus->data as $key => $value) {
             $placeholder = '[@form.' . $key . ']';
             $template = str_replace($placeholder, $value, $template);
         }
