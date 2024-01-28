@@ -32,13 +32,18 @@ class Renewed extends Model
         return $this->belongsTo(OrganizationDetail::class);
     }
 
-
-    protected function landOwnerDocument(): Attribute
+    public function getDocumentUrlAttribute(): string
     {
-        return Attribute::make(
-            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
-            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('renewed', 'public') : null,
-        );
+        return $this->attributes['document']
+            ? Storage::disk('public')->url($this->attributes['document'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setDocumentAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['document'] = $value->store('user/detail/org/renewed', 'public');
+        }
     }
 
     
