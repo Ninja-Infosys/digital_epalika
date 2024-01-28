@@ -88,7 +88,7 @@
                                             </span></h5>
 
                                         <h6 class="text-muted text-left">नयाँ इ-नक्साको लागि दर्ता गर्नुहोस्</h6>
-                                        <a href="{{ route('admin.global.organization.register.form') }}"
+                                        <a href="{{ route('organization.register.form') }}"
                                             class="btn btn-outline-primary btn-sm mt-3"><span>दर्ता गर्नुहोस्
                                             </span>
                                         </a>
