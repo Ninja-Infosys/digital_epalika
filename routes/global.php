@@ -24,7 +24,6 @@ use App\Http\Controllers\Admin\Global\{BranchController,
     RenewedController,
     SettingDashboardController,
     SmsSettingController,
-    SuchikritaController,
     TaxClearanceController,
     Units\ExternalUnitConversionController,
     Units\InternalUnitConversionController,
@@ -111,11 +110,3 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::resource('taxClearance', TaxClearanceController::class);
     Route::resource('renewed', RenewedController::class);
 });
-
-
-
-
-
-
-Route::get('mapApply/{mapApply}/attachment/suchikritaDocument', [SuchikritaController::class, 'index'])->name('suchikritaDocument');
-Route::post('mapApply/{mapApply}/attachment/storeSuchikritaDocument', [SuchikritaController::class, 'storeSuchikritaDocument'])->name('storeSuchikritaDocument');
