@@ -88,7 +88,7 @@
                                         @foreach ($template['data'] as $key => $templateValue)
                                             <div class="d-flex d-warp">
                                                 <button type="button" class="btn btn-outline-primary btn-xs"
-                                                    onclick="copyText('{{ $templateValue }}')">
+                                                        onclick="copyText('{{ $templateValue }}')">
                                                     {{ $key }}
                                                 </button>
                                             </div>

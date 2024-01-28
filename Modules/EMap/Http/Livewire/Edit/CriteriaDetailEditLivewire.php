@@ -34,7 +34,7 @@ class CriteriaDetailEditLivewire extends Component
         }
 
         foreach (DetailsRegardingCriteriaEnum::cases() as $criteria) {
-            if (! $availableCriteria->unique()->contains($criteria->value)) {
+            if (!$availableCriteria->unique()->contains($criteria->value)) {
                 $this->criteriaDetails[] = [
                     'detail' => $criteria->value,
                     'according_to_criteria' => null,
@@ -74,7 +74,7 @@ class CriteriaDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->criteriaDetails[$this->dataToEdit];
 
-                if (! empty($dataToSave['id'])) {
+                if (!empty($dataToSave['id'])) {
                     CriteriaDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
                     CriteriaDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);

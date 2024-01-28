@@ -15,7 +15,7 @@ class UpdatePhotoGalleryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'image'=>['nullable','image','mimes:png,jpg,jpeg'],
+            'image' => ['nullable','image','mimes:png,jpg,jpeg'],
             'caption' => ['required', 'string', 'max:255'],
         ];
     }

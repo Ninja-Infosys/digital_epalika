@@ -17,6 +17,8 @@ trait PlanTemplateTrait
         [
             'title' => 'आयोजनाको विवरण',
             'data' => [
+                'कार्यालय लेटर हेड' => '[@letterHead]',
+                'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
                 'मिति' => '[@date]',
                 'आर्थिक बर्ष' => '[@fiscalYear]',
                 'योजना/कार्यक्रमको नाम' => '[@project_name]',
@@ -190,16 +192,19 @@ trait PlanTemplateTrait
 
     public function getProjectReplacement(): array
     {
-        $budgetHeads=[];
-        $allocated_amount_sum=0;
+        $budgetHeads = [];
+        $allocated_amount_sum = 0;
         $this->load('projectAllocatedAmounts.budgetHead');
         foreach ($this->projectAllocatedAmounts as $allocatedAmount) {
-            $budgetHeads[]=$allocatedAmount->budgetHead->title??'';
-            $allocated_amount_sum+=$allocatedAmount->amount;
+            $budgetHeads[] = $allocatedAmount->budgetHead->title ?? '';
+            $allocated_amount_sum += $allocatedAmount->amount;
         }
 
         return [
-            '[@date]'=>$this->get_today_nepali_date(),
+
+            '[@letterHead]' => letterHead() ?? '',
+            '[@letterHeadEn]' => letterHeadEn() ?? '',
+            '[@date]'=>$this->get_today_nepali_date() ?? '',
             '[@fiscalYear]' => $this->fiscalYear->title ?? '',
             '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',

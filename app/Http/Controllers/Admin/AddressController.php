@@ -25,23 +25,23 @@ class AddressController extends Controller
 
     public function district(Request $request)
     {
-        $request->validate(['province_id'=>'required']);
+        $request->validate(['province_id' => 'required']);
 
-        $districts =District::where('province_id', $request->input('province_id'))->get();
+        $districts = District::where('province_id', $request->input('province_id'))->get();
 
         return DistrictResource::collection($districts);
     }
     public function localBodies(Request $request)
     {
-        $request->validate(['district_id'=>'required']);
+        $request->validate(['district_id' => 'required']);
 
-        $localBody =LocalBody::where('district_id', $request->input('district_id'))->get();
+        $localBody = LocalBody::where('district_id', $request->input('district_id'))->get();
 
         return LocalBodyResource::collection($localBody);
     }
     public function wardNo(Request $request)
     {
-        $request->validate(['local_body_id'=>'required']);
+        $request->validate(['local_body_id' => 'required']);
 
         return LocalBody::findOrFail($request->input('local_body_id'))->ward_no;
     }

@@ -2,6 +2,7 @@
 <div class="row">
     @foreach ($mapApply->load('appliedDocuments')->appliedDocuments?->where('form_data_id', $formDataType->id)->load('appliedMapFiles') as $appliedDocument)
     <div class="col-md-6">
+
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -10,6 +11,7 @@
                     </h4>
                 </div>
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-sm table-striped table-bordered">
@@ -37,7 +39,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid"></iframe>
+                                                        <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
@@ -50,11 +52,13 @@
                                     <td>{{ $appliedDocument->created_at->toDateString() }}</td>
                                     <td>{{ $appliedDocument->status->label()??'' }}</td>
                                     <td>
+                                        @if($appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::PENDING || $appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
                                         @if(auth()->user()->id == 1 || $checkAuthorization)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
                                             <i class="fa fa-pen-nib"></i>
                                         </button>
+                                        @endif
                                         @endif
                                     </td>
                                 </tr>
@@ -66,7 +70,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="status_model_applied">तपाईं यसलाई किन अस्वीकार गर्दै हुनुहुन्छ?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
+                                                </div>                  
                                                 <div class="modal-body">
                                                 <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.updateAppliedDocumentStatus',[$mapApply,$form,$formDataType,$appliedDocument]) }}">
                                                     @csrf
@@ -101,7 +105,9 @@
                     </table>
                 </div>
             </div>
+
         </div>
+
     </div>
     <div class="col-md-6">
         <div class="card">
@@ -130,24 +136,25 @@
                                     <td>{{ get_nepali_number($loop->iteration) }}</td>
                                     <td>
 
-                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#view_file{{ $appliedMapFile->id }}">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-
-                                                <!-- view file model pass url dynamically in the model-->
-                                        {{-- <div class="modal fade" id="view_file{{ $appliedMapFile->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid"></iframe>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
-                                                    </div>
+                                        @foreach ($appliedDocumentStatus->load('appliedMapFiles')->appliedMapFiles as $statusFile)
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#view_file1{{ $statusFile->id }}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                            <!-- view file model pass url dynamically in the model-->
+                                    <div class="modal fade" id="view_file1{{ $statusFile->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <iframe src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
+                                    </div>
+                                    @endforeach
 
                                     </td>
                                     <td>{{ $appliedDocumentStatus->created_at->toDateString() }}</td>

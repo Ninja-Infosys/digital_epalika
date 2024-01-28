@@ -14,7 +14,9 @@ use Illuminate\Support\Str;
 
 class FormDocumentFormat extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -38,15 +40,15 @@ class FormDocumentFormat extends Model
     {
         return $this->belongsTo(Form::class);
     }
-//    protected function Title(): Attribute
-//    {
-//        return Attribute::make(
-//            get: fn($value) => $value ?
-//                Storage::disk('public')->url($value)
-//                : '',
-//            set: fn($value) => (!empty($value) && !is_string($value))
-//                ? $value->store('naksaFormDocuments/' . Str::slug($this->attributes['form_id'] ?? 'recommendation', '_'), 'public')
-//                : null
-//        );
-//    }
+    //    protected function Title(): Attribute
+    //    {
+    //        return Attribute::make(
+    //            get: fn($value) => $value ?
+    //                Storage::disk('public')->url($value)
+    //                : '',
+    //            set: fn($value) => (!empty($value) && !is_string($value))
+    //                ? $value->store('naksaFormDocuments/' . Str::slug($this->attributes['form_id'] ?? 'recommendation', '_'), 'public')
+    //                : null
+    //        );
+    //    }
 }

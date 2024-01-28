@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $currentYearApplicationsCount = $this->currentYearApplications->count();
         $currentMonthApplicationsCount = $this->currentYearApplications->where('month', $today_nepali_date['m'])->count();
         if (request()->ajax()) {
-            
+
         }
         return view('judicialcommittee::admin.dashboard', compact(
             'totalApplicationsCount',
@@ -43,14 +43,15 @@ class DashboardController extends Controller
             'currentMonthApplicationsCount',
         ));
     }
-public function ajaxData(){
-    return [
-        'monthlyApplications' => $this->getMonthlyApplications(),
-        'lawsuitNatureWiseApplications' => $this->getLawsuitNatureWiseApplications(),
-        'fiscalYearWiseApplications' => $this->getFiscalYearWiseApplications(),
-        'lawsuitNatureWiseApplicationsData' => $this->getLawsuitNatureWiseApplicationsData()
-    ];
-}
+    public function ajaxData()
+    {
+        return [
+            'monthlyApplications' => $this->getMonthlyApplications(),
+            'lawsuitNatureWiseApplications' => $this->getLawsuitNatureWiseApplications(),
+            'fiscalYearWiseApplications' => $this->getFiscalYearWiseApplications(),
+            'lawsuitNatureWiseApplicationsData' => $this->getLawsuitNatureWiseApplicationsData()
+        ];
+    }
     private function getMonthlyApplications()
     {
         $registeredApplications = [];
@@ -86,30 +87,30 @@ public function ajaxData(){
 
     private function getLawsuitNatureWiseApplications()
     {
-    $lawsuitNatures = LawsuitNature::withCount(['complaintApplications' => function ($query) {
-        $query->whereNull('fiscal_year_id'); 
-    }])
-    ->get()
-    ->map(function ($lawsuitNature) {
-        return [
-            'name' => $lawsuitNature->title . " (" . $lawsuitNature->complaint_applications_count . ")",
-            'data' => (int)$lawsuitNature->complaint_applications_count,
-            'color' => generateRandomRGBAColor() // If you have a function to generate random colors
-        ];
-    });
+        $lawsuitNatures = LawsuitNature::withCount(['complaintApplications' => function ($query) {
+            $query->whereNull('fiscal_year_id');
+        }])
+        ->get()
+        ->map(function ($lawsuitNature) {
+            return [
+                'name' => $lawsuitNature->title . " (" . $lawsuitNature->complaint_applications_count . ")",
+                'data' => (int)$lawsuitNature->complaint_applications_count,
+                'color' => generateRandomRGBAColor() // If you have a function to generate random colors
+            ];
+        });
 
-    return [
-        'labels' => $lawsuitNatures->pluck('name')->toArray(),
-        'option' => ChartOptionEnum::PIE_CHART->option(),
-        'dataSets' => [
-            [
-                'data' => $lawsuitNatures->pluck('data')->toArray(),
-                'backgroundColor' => $lawsuitNatures->pluck('color')->toArray(),
-                'borderColor' => $lawsuitNatures->pluck('color')->toArray(),
-                'borderWidth' => 1,
+        return [
+            'labels' => $lawsuitNatures->pluck('name')->toArray(),
+            'option' => ChartOptionEnum::PIE_CHART->option(),
+            'dataSets' => [
+                [
+                    'data' => $lawsuitNatures->pluck('data')->toArray(),
+                    'backgroundColor' => $lawsuitNatures->pluck('color')->toArray(),
+                    'borderColor' => $lawsuitNatures->pluck('color')->toArray(),
+                    'borderWidth' => 1,
+                ],
             ],
-        ],
-    ];
+        ];
     }
 
     private function getFiscalYearWiseApplications()

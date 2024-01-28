@@ -5,7 +5,6 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin\Api;
 use App\Models\Settings\OfficeSetting;
 use App\Http\Controllers\Controller;
 
-use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\ComplaintSubject;
 use Modules\JudicialCommittee\Enums\ComplainantDefendantTypeEnum;
 use Modules\JudicialCommittee\Http\Requests\ComplaintRegistration\StoreComplaintRegistrationRequest;

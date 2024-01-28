@@ -30,7 +30,7 @@ class ProjectResource extends JsonResource
             'भौतिक प्रगति सम्पन्न परिमाण' => $this->when(in_array('physical_progress_completed', $request_columns), $this->physical_progress_completed ?? 0),
             'भौतिक प्रगति एकाइ' => $this->when(in_array('physical_progress_unit', $request_columns), $this->physical_progress_unit ?? ''),
             'बस्तुगत अनुदान सम्बन्धी विवरण' => ProjectGrantDetailResource::collection($this->whenLoaded('projectGrantDetails')),
-            'योजनाबाट प्रत्यक्ष रुपमा लाभान्वित हुने घरधुरी तथा जनसंख्याको विवरण'=>BenefitedMemberDetailResource::collection($this->whenLoaded('benefitedMemberDetails'))
+            'योजनाबाट प्रत्यक्ष रुपमा लाभान्वित हुने घरधुरी तथा जनसंख्याको विवरण' => BenefitedMemberDetailResource::collection($this->whenLoaded('benefitedMemberDetails'))
         ];
     }
 }

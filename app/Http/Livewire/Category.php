@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class Category extends Component
 {
-
     public $sipharis_category_id = null;
 
     public $sipharis_sub_category_id = null;

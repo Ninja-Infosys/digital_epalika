@@ -42,6 +42,6 @@ class BenefitedMemberDetail extends Model
     }
     public function getTotalPopulationAttribute()
     {
-        return $this->no_of_male + $this->no_of_female+$this->no_of_others;
+        return $this->no_of_male + $this->no_of_female + $this->no_of_others;
     }
 }

@@ -30,7 +30,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पालिका विवरण सूची</h4>
                         @can('municipalDetail_create')
-                            <a href="{{route('admin.website.municipalDetail.create')}}"
+                            <a href="{{route('admin.global.website.municipalDetail.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -64,13 +64,13 @@
                                     <td>{{$municipalDetail->position}}</td>
                                     <td class="d-flex gap-1">
                                         @can('municipalDetail_edit')
-                                        <a data-bs-type="edit" href="{{route('admin.website.municipalDetail.edit',$municipalDetail)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.global.website.municipalDetail.edit',$municipalDetail)}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i> 
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         @endcan
                                         <form
-                                            action="{{route('admin.website.municipalDetail.destroy',$municipalDetail)}}"
+                                            action="{{route('admin.global.website.municipalDetail.destroy',$municipalDetail)}}"
                                             method="post">
                                             @csrf
                                             @method('delete')

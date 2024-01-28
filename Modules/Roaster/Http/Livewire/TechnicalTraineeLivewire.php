@@ -66,7 +66,7 @@ class TechnicalTraineeLivewire extends Component
         $this->designations = Designation::all();
         $this->departments = Department::all();
 
-        if (! empty($technicalTrainee)) {
+        if (!empty($technicalTrainee)) {
             foreach ($this->form as $key => $data) {
                 if ($key !== 'documents') {
                     $this->form[$key] = $technicalTrainee[$key];
@@ -129,7 +129,7 @@ class TechnicalTraineeLivewire extends Component
         $data = $this->validate()['form'];
 
         DB::transaction(function () use ($data) {
-            if (! empty($this->technicalTrainee)) {
+            if (!empty($this->technicalTrainee)) {
                 $technicalTrainee = $this->technicalTrainee;
                 $technicalTrainee->update($data);
                 foreach ($this->form['documents'] as $document) {

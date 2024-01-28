@@ -38,7 +38,7 @@ class RecommendationServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-//        RecommendationFormData::observe(RecommendationFormDataObserver::class);
+        //        RecommendationFormData::observe(RecommendationFormDataObserver::class);
     }
 
     /**

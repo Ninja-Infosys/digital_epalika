@@ -8,9 +8,9 @@ use Illuminate\Validation\Rule;
 
 class UpdateUserProfileRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
-         return Gate::allows('');
+        return Gate::allows('');
     }
 
     public function rules(): array

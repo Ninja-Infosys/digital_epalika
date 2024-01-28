@@ -338,7 +338,7 @@ class RegistrationForm extends Component
                 $registeredBusiness
             );
         }
-        foreach ($this->form['other_document']??[] as $document) {
+        foreach ($this->form['other_document'] ?? [] as $document) {
             $businessDetail->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),

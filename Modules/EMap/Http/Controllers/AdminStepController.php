@@ -2,7 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\FormStoreNotification;
@@ -12,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Entities\AppliedDocument;
+use Modules\EMap\Entities\AppliedDocumentStatus;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
@@ -23,6 +23,7 @@ class AdminStepController extends Controller
 {
     public function formList(MapApply $mapApply)
     {
+
         $mapApply->load('houseOwner');
         $forms = Form::with('formDataTypes', 'group.users')->orderBy('order')->get();
         return view('emap::admin.step.formList', compact('mapApply', 'forms'));
@@ -51,36 +52,132 @@ class AdminStepController extends Controller
 
     public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument) {
-            if ($request->input('status') == 'approved') {
-                $mapApply->update([
-                    'sent_to_organization' => 'processing'
-                ]);
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
+            if ($lastStep == $form->order) {
+                $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $formStoreStatus = FormStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+
+                if (
+                    $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $request->input('status') == DocumentStatusEnum::APPROVED->value
+                ) {
+                    if ($appliedDocumentStatus->isEmpty()) {
+                        $mapApply->update([
+                            'sent_to_organization' => 'done'
+                        ]);
+                    } else {
+                        if ($appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                            $mapApply->update([
+                                'sent_to_organization' => 'done'
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                    $mapApply->update([
+                        'sent_to_organization' => 'processing'
+                    ]);
+                }
             }
-            $appliedDocument->update([
-                'status' => $request->input('status')
-            ]);
-            $appliedDocument->appliedDocumentStatuses()->create([
-                "applied_document_id" => $appliedDocument->id,
-                "status" => $request->input('status'),
-                "comment" => $request->input('comment'),
-            ]);
+
+            if ($request->input('status') == DocumentStatusEnum::PENDING->value) {
+                toast('Updated New Status', 'warning');
+            } elseif ($request->input('status') == DocumentStatusEnum::REVIEW->value) {
+                $appliedDocument->update([
+                    'status' => $request->input('status')
+                ]);
+                AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
+                    ->orderBy('id', 'desc')
+                    ->first()?->update([
+                        'status' => $request->input('status')
+                    ]);
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            } elseif ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                if ($appliedDocument->status != DocumentStatusEnum::APPROVED) {
+                    $appliedDocument->update([
+                        'status' => $request->input('status')
+                    ]);
+                    AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
+                        ->orderBy('id', 'desc')
+                        ->first()?->update([
+                            'status' => $request->input('status')
+                        ]);
+                    toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+                }
+            } else {
+                $appliedDocument->update([
+                    'status' => $request->input('status')
+                ]);
+                $appliedDocumentStatusData = $appliedDocument->appliedDocumentStatuses()->create([
+                    "applied_document_id" => $appliedDocument->id,
+                    "status" => $request->input('status'),
+                    "comment" => $request->input('comment'),
+                ]);
+                foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                    $appliedDocumentStatusData->appliedMapFiles()->create([
+                        "map_apply_id" => $mapApply->id,
+                        "document" => $existingFile->document,
+                    ]);
+                }
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            }
             Notification::send($mapApply->organization, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
         });
-
-        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
         return back();
     }
 
     public function updateFormStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
     {
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore) {
-            if ($request->input('status') == 'approved') {
-                $mapApply->update([
-                    'sent_to_organization' => 'processing'
-                ]);
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep) {
+
+            if ($lastStep == $form->order) {
+                $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $formStoreStatus = FormStore::where('id', '!=', $formStore->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                if (
+                    $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $request->input('status') == DocumentStatusEnum::APPROVED->value
+                ) {
+                    if ($formStoreStatus->isEmpty()) {
+                        $mapApply->update([
+                            'sent_to_organization' => 'done'
+                        ]);
+                    } else {
+                        if ($formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                            $mapApply->update([
+                                'sent_to_organization' => 'done'
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                    $mapApply->update([
+                        'sent_to_organization' => 'processing'
+                    ]);
+                }
             }
             $formStore->update([
                 'status' => $request->input('status')
@@ -102,13 +199,45 @@ class AdminStepController extends Controller
     public function updatePaymentStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, PaymentStore $paymentStore)
     {
         $this->getStatusValidation($request);
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep) {
 
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore) {
-            if ($request->input('status') == 'approved') {
-                $mapApply->update([
-                    'sent_to_organization' => 'processing'
-                ]);
+            if ($lastStep == $form->order) {
+                $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $formStoreStatus = FormStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('id', '!=', $paymentStore->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                if (
+                    $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+                    $request->input('status') == DocumentStatusEnum::APPROVED->value
+                ) {
+                    if ($paymentStoreStatus->isEmpty()) {
+                        $mapApply->update([
+                            'sent_to_organization' => 'done'
+                        ]);
+                    } else {
+                        if ($paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                            $mapApply->update([
+                                'sent_to_organization' => 'done'
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
+                    $mapApply->update([
+                        'sent_to_organization' => 'processing'
+                    ]);
+                }
             }
+
             $paymentStore->update([
                 'status' => $request->input('status')
             ]);
@@ -131,5 +260,19 @@ class AdminStepController extends Controller
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
             'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
         ]);
+    }
+
+    public function rejectMap(Request $request, MapApply $mapApply)
+    {
+        $request->validate([
+            'comment' => ['required'],
+        ]);
+        $mapApply->update([
+            'sent_to_organization' => 'rejected',
+            'comment' => $request->input('comment')
+
+        ]);
+        toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
     }
 }

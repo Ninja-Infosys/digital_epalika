@@ -83,32 +83,32 @@ class SeniorCitizenDetailLivewire extends Component
 
         if (!empty($seniorCitizenDetail)) {
             $this->seniorCitizenDetail = $seniorCitizenDetail;
-            // foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
-            //     $this->form[$key] = $seniorCitizenDetail[$key];
-            // }
+        // foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
+        //     $this->form[$key] = $seniorCitizenDetail[$key];
+        // }
 
-            // if ($seniorCitizenDetail->fingerprints->count() > 0) {
-            //     if (!empty($rightFinger = $seniorCitizenDetail->fingerprints->where('finger', 'right')->first())) {
-            //         $this->form['right_finger'] = [
-            //             'id' => $rightFinger->id,
-            //             'image' => $rightFinger->finger_image,
-            //             'isoTemplate' => $rightFinger->iso_temp,
-            //             'ansiTemplate' => $rightFinger->ansi_temp,
-            //             'isoImage' => $rightFinger->iso_image,
-            //             'quality' => $rightFinger->quality
-            //         ];
-            //     }
-            //     if (!empty($leftFinger = $seniorCitizenDetail->fingerprints->where('finger', 'left')->first())) {
-            //         $this->form['left_finger'] = [
-            //             'id' => $leftFinger->id,
-            //             'image' => $leftFinger->finger_image,
-            //             'isoTemplate' => $leftFinger->iso_temp,
-            //             'ansiTemplate' => $leftFinger->ansi_temp,
-            //             'isoImage' => $leftFinger->iso_image,
-            //             'quality' => $leftFinger->quality
-            //         ];
-            //     }
-            // }
+        // if ($seniorCitizenDetail->fingerprints->count() > 0) {
+        //     if (!empty($rightFinger = $seniorCitizenDetail->fingerprints->where('finger', 'right')->first())) {
+        //         $this->form['right_finger'] = [
+        //             'id' => $rightFinger->id,
+        //             'image' => $rightFinger->finger_image,
+        //             'isoTemplate' => $rightFinger->iso_temp,
+        //             'ansiTemplate' => $rightFinger->ansi_temp,
+        //             'isoImage' => $rightFinger->iso_image,
+        //             'quality' => $rightFinger->quality
+        //         ];
+        //     }
+        //     if (!empty($leftFinger = $seniorCitizenDetail->fingerprints->where('finger', 'left')->first())) {
+        //         $this->form['left_finger'] = [
+        //             'id' => $leftFinger->id,
+        //             'image' => $leftFinger->finger_image,
+        //             'isoTemplate' => $leftFinger->iso_temp,
+        //             'ansiTemplate' => $leftFinger->ansi_temp,
+        //             'isoImage' => $leftFinger->iso_image,
+        //             'quality' => $leftFinger->quality
+        //         ];
+        //     }
+        // }
         } else {
             $this->form['province_id'] = $officeSetting->province_id;
             $this->form['district_id'] = $officeSetting->district_id;

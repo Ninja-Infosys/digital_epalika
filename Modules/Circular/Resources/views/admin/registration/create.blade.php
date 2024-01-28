@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-md-3 mb-2">
                                 <label for="letter_number" class="form-label">पत्र संख्या</label>
-                                <input type="number" name="letter_number" value="{{old('letter_number')}}"
+                                <input type="string" name="letter_number" value="{{old('letter_number')}}"
                                     class="form-control @error('letter_number') is-invalid @enderror" id="letter_number"
                                     placeholder="पत्र संख्या" />
                                 @error('letter_number')

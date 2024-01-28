@@ -1,15 +1,16 @@
 <div class="modal fade" id="grantOffice-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
+     aria-labelledby="staticBackdropLabel" style="display: none;max-height: 60vh;" aria-hidden="true" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="staticBackdropLabel">नयाँ कृषक थप्नुहोस् ।</h3>
+                <h3 class="modal-title" id="staticBackdropLabel">नयाँ अनुदान दिने कार्यालय थप्नुहोस् ।</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="grantOffice-form" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
+
                         <div class="col-md-12 mb-2">
                             <label for="office_name" class="form-label">अनुदान कार्यालय</label>
                             <input

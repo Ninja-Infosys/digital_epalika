@@ -9,8 +9,8 @@ class PersonalDetailResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=> $this->id ??'',
-            'user_id'=> $this->user_id ??'',
+            'id' => $this->id ?? '',
+            'user_id' => $this->user_id ?? '',
             'reg_no' => $this->reg_no ?? '',
             'name' => $this->name ?? '',
             'phone_no' => $this->phone_no ?? '',

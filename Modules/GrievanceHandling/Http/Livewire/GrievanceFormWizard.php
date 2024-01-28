@@ -62,7 +62,7 @@ class GrievanceFormWizard extends Component
         'form.password' => ['required_if:is_password,1'],
         'form.password_confirmation' => ['nullable', 'confirmed'],
         'form.is_open' => ['nullable', 'boolean'],
-        'form.is_anonymous'=>['nullable', 'boolean'],
+        'form.is_anonymous' => ['nullable', 'boolean'],
         'form.name' => ['required'],
         'form.email' => ['required', 'email'],
         'form.phone' => ['required'],

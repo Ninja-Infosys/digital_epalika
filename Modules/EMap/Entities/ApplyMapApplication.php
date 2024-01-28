@@ -45,7 +45,7 @@ class ApplyMapApplication extends Model
 
     public function setFileAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['file'] = $value->store('applyMapApplication', 'public');
         }
     }

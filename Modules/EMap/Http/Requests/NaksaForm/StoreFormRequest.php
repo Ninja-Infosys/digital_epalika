@@ -2,9 +2,7 @@
 
 namespace Modules\EMap\Http\Requests\NaksaForm;
 
-
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;

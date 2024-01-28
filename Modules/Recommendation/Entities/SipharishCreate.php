@@ -104,9 +104,9 @@ class SipharishCreate extends Model
                 $replaceableList->put('[@form.' . $values->SipharisFormField?->slug . ']', $value);
             }
         }
-        $replaceableList->put('[@province]', officeSetting()->province->province);
-        $replaceableList->put('[@district]', officeSetting()->district->district);
-        $replaceableList->put('[@muncipal]', officeSetting()->localBody->local_body);
+        $replaceableList->put('[@province]', officeSetting()->province?->province);
+        $replaceableList->put('[@district]', officeSetting()->district?->district);
+        $replaceableList->put('[@muncipal]', officeSetting()->localBody?->local_body);
         $replaceableList->put('[@ward_no]', auth()->user()->ward_no);
         $replaceableList->put('[@today_date_bs]', get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', today()->toDateString());

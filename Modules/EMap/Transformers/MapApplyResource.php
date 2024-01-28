@@ -11,7 +11,7 @@ class MapApplyResource extends JsonResource
         return [
             'id' => $this->id ?? '',
             'unique_id' => $this->unique_id ?? '',
-            'applied_on'=>$this->created_at?->diffForHumans() ?? ''
+            'applied_on' => $this->created_at?->diffForHumans() ?? ''
         ];
     }
 }

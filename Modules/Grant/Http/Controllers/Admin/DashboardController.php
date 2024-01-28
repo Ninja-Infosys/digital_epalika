@@ -23,12 +23,13 @@ class DashboardController extends Controller
         $grant_detail_count = GrantDetail::count();
         return view('grant::admin.dashboard', compact('grant_detail_count', 'enterprise_count', 'farmers_count', 'cooperative_count', 'groups_count'));
     }
-public function ajaxData(){
-    return [
-        'grant' => $this->getGrantData(),
-        'wardWiseData' => $this->getWardWiseData()
-    ];
-}
+    public function ajaxData()
+    {
+        return [
+            'grant' => $this->getGrantData(),
+            'wardWiseData' => $this->getWardWiseData()
+        ];
+    }
 
     public function getGrantData()
     {

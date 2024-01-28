@@ -2,18 +2,14 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers\Api;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Enums\Qualification;
 use Modules\BusinessRegistration\Http\Requests\BusinessRegistration\StoreBusinessRegistrationFormRequest;
-use Modules\BusinessRegistration\Http\Requests\BusinessRegistrationTemplate\StoreBusinessRegistrationTemplateRequest;
 use App\Models\Settings\OfficeSetting;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Illuminate\Support\Facades\DB;
-use Modules\BusinessRegistration\Entities\Partner;
 use Modules\BusinessRegistration\Transformers\BusinessRegistrationResource;
 
 class PublicApiController extends Controller
@@ -24,7 +20,7 @@ class PublicApiController extends Controller
             'businessNatures' => BusinessNature::selectRaw('id,title')->get(),
             'objectTransactions' => ObjectTransaction::selectRaw('id,title')->get(),
             'qualifications' => Qualification::getValuesWithLabels(),
-            'allDistricts' => get_districts  (),
+            'allDistricts' => get_districts(),
 
         ];
     }
@@ -39,29 +35,33 @@ class PublicApiController extends Controller
                 'submission_no' => time(),
             ]);
 
-            if(!empty($request->validated()['partners'])){
-            foreach ($request->validated()['partners'] as $partner) {
 
-                $businessRegistration->partners()->create($partner);
+            if(!empty($request->validated()['partners'])) {
+                foreach ($request->validated()['partners'] as $partner) {
+
+                    $businessRegistration->partners()->create($partner);
+                }
             }
-        }
 
-        if(!empty($request->validated()['registeredBusinesses'])){
-            foreach ($request->validated()['registeredBusinesses'] as $registeredBusiness) {
+            if(!empty($request->validated()['registeredBusinesses'])) {
+                foreach ($request->validated()['registeredBusinesses'] as $registeredBusiness) {
 
-                $businessRegistration->registeredBusinesses()->create($registeredBusiness);
+                    $businessRegistration->registeredBusinesses()->create($registeredBusiness);
+                }
             }
-        }
 
-        if(!empty($request->validated()['other_document'])){
-            foreach ($request->validated['other_document']??[] as $document) {
-                $businessRegistration->files()->create([
-                    'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
-                    'extension' => $document->getClientOriginalExtension(),
-                    'file' => $document->store('otherDocument/', 'public')
-                ]);
+            if(!empty($request->validated()['other_document'])) {
+                foreach ($request->validated['other_document'] ?? [] as $document) {
+                    $businessRegistration->files()->create([
+                        'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                        'extension' => $document->getClientOriginalExtension(),
+                        'file' => $document->store('otherDocument/', 'public')
+                    ]);
+                }
             }
-        }
+
+
+
 
             return $businessRegistration;
         });
@@ -74,6 +74,5 @@ class PublicApiController extends Controller
     public function registeredBusiness()
     {
         return BusinessRegistrationResource::collection(auth()->user()?->load(['businessDetails.objectTransaction', 'businessDetails.businessNature'])?->businessDetails);
-
     }
 }

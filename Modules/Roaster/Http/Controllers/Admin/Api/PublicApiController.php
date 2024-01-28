@@ -2,14 +2,12 @@
 
 namespace Modules\Roaster\Http\Controllers\Admin\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\DigitalBoard\Transformers\TrainingResource;
 use Modules\Roaster\Entities\Training;
 use Modules\Roaster\Enums\TrainingTypeEnum;
-
 
 class PublicApiController extends Controller
 {
@@ -23,7 +21,7 @@ class PublicApiController extends Controller
 
         return response()->json($training);
     }
-    public function allTraining() :AnonymousResourceCollection
+    public function allTraining(): AnonymousResourceCollection
     {
         $allTrainings = Training::get();
         return TrainingResource::collection($allTrainings);

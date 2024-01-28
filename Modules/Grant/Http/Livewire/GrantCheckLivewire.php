@@ -2,18 +2,11 @@
 
 namespace Modules\Grant\Http\Livewire;
 
-use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
-use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
-use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
-use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\Group;
 
 class GrantCheckLivewire extends Component

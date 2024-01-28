@@ -60,7 +60,7 @@ class PesticideRetailerTrainee extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
@@ -72,7 +72,7 @@ class PesticideRetailerTrainee extends Model
 
     public function setMarkSheetAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['mark_sheet'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
@@ -84,7 +84,7 @@ class PesticideRetailerTrainee extends Model
 
     public function setCitizenshipFrontAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_front'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
@@ -96,7 +96,7 @@ class PesticideRetailerTrainee extends Model
 
     public function setCitizenshipBackAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_back'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }

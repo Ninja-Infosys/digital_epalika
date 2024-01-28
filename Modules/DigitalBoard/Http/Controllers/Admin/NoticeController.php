@@ -57,6 +57,7 @@ class NoticeController extends Controller
             $data = $request->validate([
                 'title' => ['required', 'string', 'max:255'],
                 'date' => ['required'],
+                'ward_no' => ['array','required'],
                 'description' => ['nullable'],
                 'closed_at' => ['nullable'],
                 'show_on_index' => ['nullable', 'boolean'],
@@ -67,6 +68,7 @@ class NoticeController extends Controller
             $data = $request->validate([
                 'title' => ['required', 'string', 'max:255'],
                 'date' => ['required'],
+                'ward_no' => ['array','required'],
                 'description' => ['nullable'],
                 'closed_at' => ['nullable'],
                 'show_on_index' => ['nullable', 'boolean'],
@@ -83,11 +85,11 @@ class NoticeController extends Controller
                 'type' => $type,
                 'fiscal_year_id' => $officeSetting->fiscal_year_id ?? null,
             ]);
-
             if ($request->hasFile('files')) {
                 $this->fileUpload($notice, $request);
             }
         });
+   
 
         toast($type === 'News' ? 'समाचार सफलतापूर्वक थपियो' : 'सूचना सफलतापूर्वक थपियो', 'success');
 
@@ -144,7 +146,7 @@ class NoticeController extends Controller
     public function updateClosedDate($type, Notice $notice): RedirectResponse
     {
         $notice->update([
-            'closed_at' => ! empty($notice->closed_at) ? null : now(),
+            'closed_at' => !empty($notice->closed_at) ? null : now(),
         ]);
         toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -154,7 +156,7 @@ class NoticeController extends Controller
     public function updateShowOnIndex($type, Notice $notice): RedirectResponse
     {
         $notice->update([
-            'show_on_index' => ! $notice->show_on_index,
+            'show_on_index' => !$notice->show_on_index,
         ]);
         toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 

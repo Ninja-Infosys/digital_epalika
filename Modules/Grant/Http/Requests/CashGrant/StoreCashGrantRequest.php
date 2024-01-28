@@ -7,18 +7,18 @@ use Illuminate\Validation\Rule;
 
 class StoreCashGrantRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'name'=> ['required'],
+            'name' => ['required'],
             'address' => ['required'],
             'age' => ['required'],
-            'contact'=> ['required'],
+            'contact' => ['required'],
             'citizenship_no' => ['required'],
             'father_name' => ['required'],
             'grandfather_name' => ['required'],

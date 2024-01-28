@@ -42,7 +42,7 @@ class ComplaintDecisionController extends Controller
                 $request->validated()
             );
             $complaintApplication->update([
-                'application_status'=>$request->input('application_status')
+                'application_status' => $request->input('application_status')
             ]);
 
             $this->uploadFiles($request, $complaintDecision);

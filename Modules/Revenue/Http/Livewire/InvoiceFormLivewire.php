@@ -28,7 +28,7 @@ class InvoiceFormLivewire extends Component
             $this->particulars[] = $value;
         }
 
-//        dd($this->particulars);
+        //        dd($this->particulars);
     }
 
     protected $rules = [

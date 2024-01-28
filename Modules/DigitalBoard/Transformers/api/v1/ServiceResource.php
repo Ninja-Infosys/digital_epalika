@@ -14,7 +14,7 @@ class ServiceResource extends JsonResource
             'responsible_officer' => $this->responsible_officer ?? '',
             'office' => $this->office ?? '',
             'remarks' => $this->remarks ?? '',
-            'branch_id' => $this->branch_id??'',
+            'branch_id' => $this->branch_id ?? '',
             'documents' => ServiceDocumentResource::collection($this->whenLoaded('serviceDocuments')),
             'process' => ServiceDocumentResource::collection($this->whenLoaded('serviceProcesses')),
             'employee' => ServiceEmployeeResource::collection($this->whenLoaded('serviceEmployees')),

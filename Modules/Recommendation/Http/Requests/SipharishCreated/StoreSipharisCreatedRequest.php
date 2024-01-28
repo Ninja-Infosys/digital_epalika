@@ -3,7 +3,6 @@
 namespace Modules\Recommendation\Http\Requests\SipharishCreated;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreSipharisCreatedRequest extends FormRequest

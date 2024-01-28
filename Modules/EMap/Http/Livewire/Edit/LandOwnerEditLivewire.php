@@ -36,7 +36,7 @@ class LandOwnerEditLivewire extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = ! $this->editForm;
+        $this->editForm = !$this->editForm;
     }
 
     public array $landOwner = [

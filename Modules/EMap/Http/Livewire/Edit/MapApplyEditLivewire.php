@@ -35,7 +35,7 @@ class MapApplyEditLivewire extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = ! $this->editForm;
+        $this->editForm = !$this->editForm;
     }
 
     public function mount(MapApply $mapApply, $districts): void
@@ -62,7 +62,7 @@ class MapApplyEditLivewire extends Component
 
     public function setStructureType(): void
     {
-        $this->open_structure_type = ! $this->open_structure_type;
+        $this->open_structure_type = !$this->open_structure_type;
     }
 
     protected array $applyMapValidations = [

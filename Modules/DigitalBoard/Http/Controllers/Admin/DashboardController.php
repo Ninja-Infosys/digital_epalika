@@ -63,7 +63,7 @@ class DashboardController extends Controller
                     'backgroundColor' => generateRandomRGBAColor(),
                     'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
-                   
+
                 ],
                 [
                     'data' => $noticeCount,
@@ -71,7 +71,7 @@ class DashboardController extends Controller
                     'backgroundColor' => generateRandomRGBAColor(),
                     'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
-                    
+
                 ],
                 [
                     'data' => $newsCount,
@@ -79,7 +79,7 @@ class DashboardController extends Controller
                     'backgroundColor' => generateRandomRGBAColor(),
                     'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
-                   
+
                 ],
             ],
         ];
@@ -114,7 +114,7 @@ class DashboardController extends Controller
                     'backgroundColor' => generateRandomRGBAColor(),
                     'borderColor' => generateRandomRGBAColor(),
                     'borderWidth' => 1,
-                    
+
                 ],
             ],
         ];

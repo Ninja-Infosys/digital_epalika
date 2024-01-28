@@ -52,7 +52,7 @@ class MunicipalDetailController extends Controller
 
         toast('नगरपालिका विवरण सफलतापूर्वक अपडेट गरियो', 'success');
 
-        return redirect(route('admin.website.municipalDetail.index'));
+        return redirect(route('admin.global.website.municipalDetail.index'));
     }
 
     public function destroy(MunicipalDetail $municipalDetail)

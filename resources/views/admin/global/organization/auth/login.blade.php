@@ -46,7 +46,7 @@ overflow: hidden">
                                                 {{ $officeSetting->province->province ?? '' }},
                                                 {{ $officeSetting->district->district ?? '' }}, नेपाल
                                             </span>
-                                        </h3>                                        
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="card p-0">
@@ -95,14 +95,14 @@ overflow: hidden">
                                             <div class="d-flex justify-content-center mt-3">
                                                 <button type="submit" class="btn btn-primary btn-block waves-effect waves-light w-50 m-auto fs-5">
                                                     लग-इन
-                                                </button> 
+                                                </button>
                                                 <button type="reset" class="btn btn-danger w-50 waves-effect ms-3">
                                                     रिसेट
-                                                </button>                                               
+                                                </button>
                                             </div>
                                         </form>
                                         <div class="row mt-3">
-                                        
+
                                             <div class="col-12 text-center">
                                                 <p>
                                                     <a href="#" class="text-dark-50 ms-1">Forgot your

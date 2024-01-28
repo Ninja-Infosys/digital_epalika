@@ -47,7 +47,7 @@ class ComplaintSubjectController extends Controller
     {
         $this->checkAuthorization('complaintSubject_edit');
 
-        $lawsuitNatures=LawsuitNature::all();
+        $lawsuitNatures = LawsuitNature::all();
 
         return view('judicialcommittee::admin.setting.complaint_subject.edit', compact('complaintSubject', 'lawsuitNatures'));
     }

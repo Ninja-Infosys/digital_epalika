@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as AuthUser;
 use Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity;
 use Modules\GrievanceHandling\Enums\GrievanceMediumEnum;
 use Modules\GrievanceHandling\Enums\GrievanceStatus;

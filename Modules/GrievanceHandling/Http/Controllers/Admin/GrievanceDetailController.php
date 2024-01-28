@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
-use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Modules\GrievanceHandling\Http\Requests\GrievanceDetail\StoreGrievanceDetailRequest;
@@ -46,13 +45,13 @@ class GrievanceDetailController extends Controller
         $this->checkAuthorization('grievanceDetail_create');
 
         $grievanceDetail = GrievanceDetail::find(1);
-        $grievanceTypes= GrievanceType::all();
+        $grievanceTypes = GrievanceType::all();
         $isAnonymous = $grievanceDetail->is_anonymous;
         $branches = Branch::all();
         $grievanceUsers = GrievanceUser::latest()->get();
         $users = User::whereNot('id', auth()->id())->get();
 
-        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'branches', 'grievanceUsers', 'users','isAnonymous'));
+        return view('grievancehandling::admin.grievanceDetail.create', compact('grievanceTypes', 'branches', 'grievanceUsers', 'users', 'isAnonymous'));
     }
 
     public function store(StoreGrievanceDetailRequest $request)

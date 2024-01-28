@@ -3,12 +3,9 @@
 namespace Modules\EMap\Entities;
 
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\EMap\Enums\EMapFormFillerTypeEnum;
-use Modules\EMap\Enums\NoticeTypeEnum;
 
 class EMapTemplate extends Model
 {

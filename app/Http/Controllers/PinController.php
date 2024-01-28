@@ -26,7 +26,7 @@ class PinController extends Controller
     public function checkPin(Request $request)
     {
         $request->validate([
-            'pin'=>['required','integer']
+            'pin' => ['required','integer']
         ]);
         return response()->json([
             'status' => Hash::check($request->input('pin'), auth()->user()->pin)

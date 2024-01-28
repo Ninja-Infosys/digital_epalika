@@ -2,8 +2,6 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\StreetDetail;
 use Modules\EMap\Http\Requests\StreetDetail\StoreStreetDetailRequest;
@@ -13,7 +11,7 @@ class StreetDetailController extends Controller
 {
     public function index()
     {
-        $streetDetails=StreetDetail::latest()->get();
+        $streetDetails = StreetDetail::latest()->get();
         return view('emap::admin.street_detail.index', compact('streetDetails'));
     }
 
@@ -45,13 +43,13 @@ class StreetDetailController extends Controller
     {
         $streetDetail->update($request->validated());
         toast('सडक विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
-       return redirect(route('emap.admin.streetDetail.index'));
+        return redirect(route('emap.admin.streetDetail.index'));
     }
 
     public function destroy(streetDetail $streetDetail)
     {
         $streetDetail->delete();
-        toast('सडक विवरण मेटियो','success');
+        toast('सडक विवरण मेटियो', 'success');
         return back();
     }
 }

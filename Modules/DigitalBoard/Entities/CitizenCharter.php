@@ -12,32 +12,34 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CitizenCharter extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
 
-   protected $fillable = [
-    'branch_id',
-    'service',
-    'required_document',
-    'amount',
-    'time',
-    'responsible_person',
-    'ward',
-    'user_id',
+    protected $fillable = [
+     'branch_id',
+     'service',
+     'required_document',
+     'amount',
+     'time',
+     'responsible_person',
+     'ward',
+     'user_id',
 ];
 
-public function branch(): BelongsTo
-{
-    return $this->belongsTo(Branch::class);
-}
-public function user(): BelongsTo
-{
-    return $this->belongsTo(User::class);
-}
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

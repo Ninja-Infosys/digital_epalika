@@ -46,7 +46,7 @@ class StoreyDetailEditLivewire extends Component
     {
         if ($index !== null) {
             $dataToDelete = $this->storeyDetails[$index];
-            if (! empty($dataToDelete['id'])) {
+            if (!empty($dataToDelete['id'])) {
                 StoreyDetail::find($dataToDelete['id'])?->delete();
 
                 unset($this->storeyDetails[$index]);
@@ -83,7 +83,7 @@ class StoreyDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->storeyDetails[$this->dataToEdit];
 
-                if (! empty($dataToSave['id'])) {
+                if (!empty($dataToSave['id'])) {
                     StoreyDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
                     StoreyDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);
