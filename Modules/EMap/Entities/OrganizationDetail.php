@@ -67,7 +67,7 @@ class OrganizationDetail extends Model
         return $this->hasMany(TaxClearance::class);
     }
 
-    public function renewes(): HasMany
+    public function reneweds(): HasMany
     {
         return $this->hasMany(Renewed::class);
     }

@@ -129,7 +129,7 @@
                         </div>
                         <div class="tab-pane fade" id="organization">
                             <h5 class="card-title text-white my-4">Organization Login</h5>
-                            <form action="{{ route('admin.global.organization.login') }}" method="post">
+                            <form action="{{ route('organization.login') }}" method="post">
                                 <!-- Organization Login Form Fields -->
                                 @csrf
                                 <div class="mb-3 input-group input-group-icon">

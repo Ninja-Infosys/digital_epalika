@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.global.organization.dashboard') }}">
+                            <a href="{{ route('dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -22,7 +22,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h3 class="card-title mb-0">नविकरण</h3>
-                <a href="{{ route('admin.global.organization.renewed.create') }}" class="btn btn-outline-primary btn-xs">
+                <a href="{{ route('organization.renewed.create') }}" class="btn btn-outline-primary btn-xs">
                     <i class="fa fa-plus"></i> नयाँ थप्नुहोस
                 </a>
             </div>
@@ -47,11 +47,11 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('admin.global.organization.renewed.edit', $renewed) }}"
+                                    {{-- <a href="{{ route('organization.renewed.edit', $renewed) }}"
                                         class="btn btn-sm btn-outline-warning mx-1">
                                         <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('admin.global.organization.renewed.destroy', $renewed) }}"
+                                    </a> --}}
+                                    <form action="{{ route('organization.renewed.destroy', $renewed) }}"
                                         method="post">
                                         @csrf
                                         @method('delete')

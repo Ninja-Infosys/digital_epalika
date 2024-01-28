@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.global.organization.dashboard') }}">
+                            <a href="{{ route('dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -23,13 +23,13 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">नविकरण थप्नुहोस</h3>
-                    <a href="{{ route('admin.global.organization.renewed.index') }}" class="btn btn-outline-primary btn-sm">
+                    <a href="{{ route('organization.renewed.index') }}" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-list"></i> नविकरण सुची
                     </a>
                 </div>
             </div>
             <div class="card-body px-0">
-                <form action="{{ route('admin.global.organization.renewed.store') }}" method="post"
+                <form action="{{ route('organization.renewed.store') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">

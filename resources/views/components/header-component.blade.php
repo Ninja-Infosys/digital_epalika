@@ -33,7 +33,7 @@
         @endforeach
 
         </h2>
-        <a class="link-btn mt-2 text-decoration-none" href="tel:{{officeSetting($ward ?? null)?->phone ?? ''}}">
+        {{-- <a class="link-btn mt-2 text-decoration-none" href="tel:{{officeSetting($ward ?? null)?->phone ?? ''}}">
             फोन नं - {{officeSetting($ward ?? null)?->phone ?? ''}}
-        </a>
+        </a> --}}
 </div>

@@ -11,9 +11,9 @@ class OrganizationDashboardController extends Controller
 {
     public function __invoke(Request $request)
     {
+       
         $mapApplyCount = MapApply::where('organization_id', auth('organization')->user()->id)->count();
         $mapSetting = MapSetting::first();
-        $mapApply = MapApply::first();
-        return view('admin.global.organization.dashboard', compact('mapApplyCount', 'mapSetting','mapApply'));
+        return view('admin.global.organization.dashboard', compact('mapApplyCount', 'mapSetting'));
     }
 }

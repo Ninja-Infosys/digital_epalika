@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.global.organization.dashboard')}}">
+                            <a href="{{route('dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
@@ -253,9 +253,41 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$taxClearance->year ?? ''}}</td>
-                                                <td><img src="{{$taxClearance->document_url}}" alt="" height="100" width="200"></td>
+                                                <td><img src="{{$taxClearance->document_url}}" alt="" height="200" width="200"></td>
                                             </tr>
                                         @endforeach
+                                     
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            @endif
+                            
+
+
+                            @if($organization->is_organization==1)
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <table class="table table-sm mb-0 table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>क्र.सं</th>
+                                            <th>वर्ष</th>
+                                            <th>कागजात</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($organization->organizationDetail->reneweds ?? collect() as $renewed)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$renewed->year ?? ''}}</td>
+                                                <td><img src="{{$renewed->document_url}}" alt="" height="200" width="200"></td>
+                                            </tr>
+                                        @endforeach
+                                     
+
                                         </tbody>
 
                                     </table>

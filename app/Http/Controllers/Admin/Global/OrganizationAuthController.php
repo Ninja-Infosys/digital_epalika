@@ -37,7 +37,8 @@ class OrganizationAuthController extends Controller
         }
 
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
-            return redirect()->route('admin.global.organization.dashboard');
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
         }
 
 
@@ -69,13 +70,13 @@ class OrganizationAuthController extends Controller
 
         auth('organization')->login($organization);
 
-        return redirect()->route('admin.global.organization.dashboard');
+        return redirect()->route('dashboard');
     }
 
     public function create()
     {
         if (auth('organization')->user()->password) {
-            return redirect()->route('admin.global.organization.dashboard');
+            return redirect()->route('dashboard');
         }
 
         return view('admin.global.organization.auth.password');
@@ -83,7 +84,7 @@ class OrganizationAuthController extends Controller
 
     public function store(StorePasswordRequest $request)
     {
-        $redirect = redirect()->route('admin.global.organization.dashboard');
+        $redirect = redirect()->route('dashboard');
         $user = auth('organization')->user();
 
         if (!$user?->password) {

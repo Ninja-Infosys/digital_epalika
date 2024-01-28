@@ -69,23 +69,23 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
-                    <a href="{{route('admin.global.organization.auth-organization.profile')}}" class="dropdown-item notify-item">
+                    <a href="{{route('organization.auth-organization.profile')}}" class="dropdown-item notify-item">
                         <i class="fa fa-user"></i>
                         <span>मेरो प्रोफाइल</span>
                     </a>
-                    <a href="{{route('admin.global.organization.taxClearance.index')}}" class="dropdown-item notify-item">
+                    <a href="{{route('organization.taxClearance.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-clipboard"></i>
                         <span>कर चुक्ता</span>
                     </a>
 
-                    <a href="{{route('admin.global.organization.renewed.index')}}" class="dropdown-item notify-item">
+                    <a href="{{route('organization.renewed.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-clipboard"></i>
                         <span>नविकरण</span>
                     </a>
                    
                     
                     <div class="dropdown-divider"></div>
-                    <form action="{{ route('admin.global.organization.logout') }}" method="post">
+                    <form action="{{ route('organization.logout') }}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item notify-item">
                             <i class="fa fa-sign-out-alt"></i>
