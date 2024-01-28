@@ -24,6 +24,7 @@ Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AttachDocum
 Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class, 'documentDetail'])->name('documentDetail');
 Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
 Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AttachDocumentController::class, 'formStorePrint'])->name('formStorePrint');
+Route::get('formDataType/{formDataType}/formStore/{formStore}/formStoreStatus/{formStoreStatus}/formStoreStatusPrint', [AttachDocumentController::class, 'formStoreStatusPrint'])->name('formStoreStatusPrint');
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::get('mapApply/{mapApply}/view/{form}/detail', [MapApplyController::class, 'viewDetail'])->name('organization.view-detail');
 

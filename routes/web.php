@@ -105,7 +105,7 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
 
 Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
 Route::prefix('organization')->as('organization.')->group(function () {    
-    Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
+    // Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
     Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
     Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
     Route::get('register-person', [OrganizationAuthController::class, 'showOrganizationRegisterFormPerson'])->name('register.formPerson');
