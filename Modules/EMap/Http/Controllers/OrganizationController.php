@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 
@@ -59,7 +60,6 @@ class OrganizationController extends Controller
             'userDetail.temporaryDistrict',
             'userDetail.temporaryProvince',
         ]);
-        return view('emap::admin.organization.show', compact('organization'));
     }
 
     public function destroy(Organization $organization)
