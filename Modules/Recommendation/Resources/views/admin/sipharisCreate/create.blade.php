@@ -34,16 +34,8 @@
                     </div>
                 </div>
                 <div class="card-body px-0">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post"
+                    @livewire('recommendation::create-recommendation-livewire')
+                   {{-- <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @livewire('field', [
@@ -93,7 +85,7 @@
                         <button type="submit" class="btn btn-primary mt-2">
                             पेश गर्नुहोस्
                         </button>
-                    </form>
+                    </form>--}}
                 </div>
             </div>
 

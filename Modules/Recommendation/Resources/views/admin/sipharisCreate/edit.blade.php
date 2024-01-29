@@ -36,8 +36,10 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post">
+                    <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.update', $sipharishCreate) }}"
+                          method="post">
                         @csrf
+                        @method('PUT')
                         @livewire('field', ['categorySubCategory'=>[
                                'sipharis_category_id' => old('sipharis_category_id',$sipharishCreate->SipharishFormType?->sipharisSubCategory?->sipharis_category_id),
                                'sipharis_sub_category_id' => old('sipharis_sub_category_id',$sipharishCreate->SipharishFormType?->sipharis_sub_category_id),
@@ -51,7 +53,7 @@
                         <div class="col-md-12 mb-2">
                             <div class="d-flex align-items-center justify-content-between mb-1">
                                 <label for="documents" class="form-label fw-bold">आवश्यक कागजातहरु <span
-                                        class="text-danger">*</span></label>
+                                            class="text-danger">*</span></label>
                                 <button type="button" class="btn btn-xs btn-outline-info"
                                         data-target-element="documents"
                                         data-toggle="add-more">

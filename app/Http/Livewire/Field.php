@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use  Modules\Recommendation\Entities\SipharisCategory;
+use Modules\Recommendation\Entities\SipharisFormField;
 use  Modules\Recommendation\Entities\SipharisSubCategory;
 use  Modules\Recommendation\Entities\SipharishFormType;
 use  Modules\Recommendation\Entities\PersonalDetail;
@@ -29,10 +31,17 @@ class Field extends Component
 
     public $data = [];
 
+    protected $sipharishFormFields = [];
+
+    private function getFormFields(int|string $id)
+    {
+        return $this->sipharishFormFields->where('id', $id)->first();
+    }
+
     public function mount($categorySubCategory = null): void
     {
         if (!empty($categorySubCategory)) {
-
+            $this->sipharishFormFields = SipharisFormField::all();
             $this->sipharis_category_id = $categorySubCategory['sipharis_category_id'] ?? null;
             $this->sipharis_sub_category_id = $categorySubCategory['sipharis_sub_category_id'] ?? null;
             $this->personal_detail_id = $categorySubCategory['personal_detail_id'] ?? null;
@@ -40,10 +49,22 @@ class Field extends Component
             $this->status = $categorySubCategory['status'] ? 1 : 0;
             if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
                 foreach ($categorySubCategory['fields'] as $field) {
+                    $slug = $this->getFormFields($field->sipharish_form_field_id
+                        ?? $field['sipharish_form_fields_id'])
+                        ->slug;
+                    if ($field->type ?? $field['type'] == 'table') {
+                        $value = json_decode($field->value ?? $field['value'] ?? null, true);
 
-                    $this->fieldData[$field->SipharisFormField?->slug] = [
+                        if (!empty($value) && is_array($value)) {
+                            foreach ($value as $data) {
+                                $this->data[$slug][] = $data;
+                            }
+                        }
+                    }
+                    $this->fieldData[$slug] = [
                         'sipharish_form_fields_id' => $field->sipharish_form_field_id ?? $field['sipharish_form_fields_id'] ?? null,
                         'value' => $field->value ?? $field['value'] ?? null,
+                        'type' => $field->type ?? $field['type'] ?? null,
                     ];
                 }
             }
@@ -105,9 +126,7 @@ class Field extends Component
             $this->fields = SipharishFormType::with('sipharisFormFields.SipharishFormFields')
                 ->find($this->sipharis_form_type_id)
                 ?->sipharisFormFields;
-
         }
-
         return view('livewire.field');
     }
 }

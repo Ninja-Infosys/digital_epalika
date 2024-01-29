@@ -134,6 +134,7 @@
                                         <input type="{{$field->type?->resolveType() ?? 'text'}}"
                                                name="fields[{{$key}}][value]" class="form-control"
                                                id="title"
+                                               value="{{$this->fieldData[$field->slug]['value']}}"
                                                placeholder="शिर्षक" required/>
                                         <input type="hidden"
                                                name="fields[{{$key}}][type]" class="form-control"
@@ -163,6 +164,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($data[$field->slug] ?? [] as $index=>$tableData)
+
                                                 <tr>
                                                     @foreach($field->SipharishFormFields as $sipharishFormField)
                                                         <td>
@@ -171,7 +173,8 @@
                                                                 class="form-control"
                                                                 wire:model="data.{{$field->slug}}.{{$index}}.{{$sipharishFormField->slug}}.data"
                                                                 id="title"
-                                                                placeholder="{{$sipharishFormField->field_name}}"
+                                                                value="{{$sipharishFormField->value}}"
+                                                                placeholder="{{$tableData[$sipharishFormField->slug]['value']}}"
                                                                 required
                                                                 wire:change="setType('{{$field->slug}}',{{$index}},'{{$sipharishFormField->slug}}','{{$sipharishFormField->type?->value}}')"/>
                                                             @if(empty($data[$field->slug][$index][$sipharishFormField->slug]['value']))

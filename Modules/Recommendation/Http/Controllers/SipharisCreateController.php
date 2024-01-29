@@ -26,12 +26,12 @@ class SipharisCreateController extends Controller
 
     public function store(StoreSipharisCreatedRequest $request)
     {
-        //        dd($request->validated());
+                dd($request->all());
         $sipharis = DB::transaction(function () use ($request) {
 
             $sipharis = SipharishCreate::create($request->validated() + [
-                'created_by' => auth()->id()
-            ]);
+                    'created_by' => auth()->id()
+                ]);
 
             if (
                 array_key_exists('fields', $request->validated())
@@ -62,8 +62,8 @@ class SipharisCreateController extends Controller
 
                 foreach ($request->validated()['files'] as $file) {
                     $sipharis->SipharisCreatedDocuments()->create($file + [
-                        'extension' => $file['filename']->getClientOriginalExtension()
-                    ]);
+                            'extension' => $file['filename']->getClientOriginalExtension()
+                        ]);
                 }
             }
 
@@ -78,6 +78,11 @@ class SipharisCreateController extends Controller
     {
         $sipharishCreate->load('SipharishCreatedValues.SipharisFormField', 'SipharisCreatedDocuments');
         return view('recommendation::admin.sipharisCreate.edit', compact('sipharishCreate'));
+    }
+
+    public function update(Request $request, SipharishCreate $sipharishCreate)
+    {
+        dd($request->all());
     }
 
     public function show(SipharishCreate $sipharishCreate)
