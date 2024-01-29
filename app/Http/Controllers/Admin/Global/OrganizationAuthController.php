@@ -23,9 +23,9 @@ class OrganizationAuthController extends Controller
                 [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-                'g-recaptcha-response' => ['recaptcha'],
+                // 'g-recaptcha-response' => ['recaptcha'],
             ],
-                ['g-recaptcha-response.recaptcha' => 'Please verify captcha']
+                // ['g-recaptcha-response.recaptcha' => 'Please verify captcha']
             );
         } else {
             $request->validate(
@@ -37,6 +37,7 @@ class OrganizationAuthController extends Controller
         }
 
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
+            $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
 
