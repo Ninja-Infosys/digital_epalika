@@ -30,7 +30,7 @@ class RecommendationTemplateController extends Controller
         $this->checkAuthorization('recommendationTemplate_create');
 
         RecommendationTemplate::create($request->validated() + [
-                'user_id'=>auth()->id(),
+                'user_id' => auth()->id(),
                 'recommendation_category_id' => $recommendationCategory->id,
                 'is_active' => RecommendationTemplate::where('is_active', 1)
                     ->where('recommendation_category_id', $recommendationCategory->id)

@@ -11,7 +11,6 @@ use App\Models\OfficeHeader;
 use App\Models\Settings\EmergencyCategory;
 use App\Models\Settings\Employee;
 use App\Models\Settings\OfficeSetting;
-use App\Models\User;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\Slider;
 use Illuminate\Http\JsonResponse;
@@ -25,15 +24,11 @@ use Modules\DigitalBoard\Transformers\api\v1\NoticeResource;
 use Modules\DigitalBoard\Transformers\PopUpNoticeResource;
 use Modules\DigitalBoard\Transformers\VideoResource;
 use Nwidart\Modules\Facades\Module;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Modules\DigitalBoard\Entities\Audio;
 use Modules\DigitalBoard\Entities\PhotoGallery;
 use Modules\DigitalBoard\Transformers\AudioResource;
 use Modules\DigitalBoard\Transformers\OfficeHeaderResource;
 use Modules\DigitalBoard\Transformers\PhotoGalleryResource;
-use Nette\Utils\Json;
 
 class PublicApiController extends Controller
 {

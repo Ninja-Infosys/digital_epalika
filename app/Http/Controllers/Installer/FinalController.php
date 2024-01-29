@@ -16,7 +16,7 @@ class FinalController extends Controller
         $finalStatusMessage = $fileManager->update();
         $finalEnvFile = $environment->getEnvContent();
         //TODO: This is the line that is causing the error Event not found
-//        event(new LaravelInstallerFinished);
+        //        event(new LaravelInstallerFinished);
         Artisan::call('optimize:clear');
 
         return view('installer.finished', compact('finalMessages', 'finalStatusMessage', 'finalEnvFile'));

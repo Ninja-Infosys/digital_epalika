@@ -48,7 +48,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-striped table-bordered">
+                    <table class="table table-sm table-bordered">
                         <thead>
                         <tr>
                             <th>क्र.स</th>
@@ -63,23 +63,41 @@
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
-                                    @foreach($formStore->data as $key=>$data)
-                                        @if(is_array($data))
-                                            <x-form-array-data :formdata="$data"/>
-                                        @else
-                                            {{ $key . ': ' . $data }} @if (!$loop->last)
-                                                <br>
-                                            @endif
 
-                                        @endif
-                                    @endforeach
+
+
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                    data-bs-target="#view_form{{ $formStore->id }}">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                            <!-- view file model pass url dynamically in the model-->
+                                            <div class="modal fade" id="view_form{{ $formStore->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            @foreach($formStore->data as $key=>$data)
+                                                                @if(is_array($data))
+                                                                    <x-form-array-data :formdata="$data"/>
+                                                                @else
+                                                                    {{ $key . ': ' . $data }} @if (!$loop->last)
+                                                                        <br>
+                                                                    @endif
+
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                 </td>
                                 <td>{{$formStore->status->label()}}</td>
-                                <td>{{get_nepali_number($formStore->created_at->toDateString())}}</td>
+                                <td>{{$formStore->created_at->toDateString()}}</td>
                                 <td>
-                                    <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
+
 
                                     <a href="{{ route('organization.admin.formStorePrint',[$formDataType,$formStore]) }}">
                                         <i class="fa fa-print"></i>
@@ -89,19 +107,36 @@
                             @foreach ($formStore->formStoreStatuses as $formStoreStatus)
                             <tr style="background-color: #e8e5e5;">
                                 <td style="font-weight: bold;">{{ get_nepali_number($loop->iteration) }}</td>
-                                <td>  @foreach($formStoreStatus->data as $key=>$data)
-                                    {{ $key . ': ' . $data }} @if (!$loop->last)
-                                    <br>
-                                @endif
-                                @endforeach </td>
+                                <td>
+
+
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#view_formp{{ $formStoreStatus->id }}">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <!-- view file model pass url dynamically in the model-->
+                                    <div class="modal fade" id="view_formp{{ $formStoreStatus->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @foreach($formStoreStatus->data as $key=>$data)
+                                                        {{ $key . ': ' . $data }} @if (!$loop->last)
+                                                            <br>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $formStoreStatus->status->label() }}</td>
                                 <td>{{$formStoreStatus->created_at->toDateString()}}</td>
                                 <td>
-                                    <a href="{{ route('organization.admin.formStoreDetail',$formStore) }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
 
-                                    <a href="{{ route('organization.admin.formStorePrint',[$formDataType,$formStore]) }}">
+                                    <a href="{{ route('organization.admin.formStoreStatusPrint',[$formDataType,$formStore,$formStoreStatus]) }}">
                                         <i class="fa fa-print"></i>
                                     </a>
                                 </td>

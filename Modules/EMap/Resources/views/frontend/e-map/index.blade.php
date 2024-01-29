@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 p-2">
+                        {{-- <div class="col-md-3 p-2">
                             <div class="module-card text-center overflow-hidden p-3">
                                 <div class="card-body d-flex gap-3 align-items-start justify-content-between">
                                     <img src="{{ asset('assets/frontend/image/new-icons/password.png') }}" width="50"
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3 p-2 mt-1">
                             <div class="module-card text-center overflow-hidden p-3">
                                 <div class="card-body d-flex gap-3 align-items-start justify-content-between">

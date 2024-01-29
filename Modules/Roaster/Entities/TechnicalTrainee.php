@@ -61,21 +61,21 @@ class TechnicalTrainee extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('technical_trainee/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }
 
     public function setNominationLetterAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['recommendation_letter'] = $value->store('technical_trainee/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }
 
     public function setRecommendationLetterAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['nomination_letter'] = $value->store('technical_trainee/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }

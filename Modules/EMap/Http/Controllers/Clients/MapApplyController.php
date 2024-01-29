@@ -11,14 +11,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\ApplyMapNotice;
-use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\MapSetting;
-use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Enums\DocumentStatusEnum;
-use Modules\EMap\Enums\EMapFormFillerTypeEnum;
+use Modules\EMap\Enums\NoticeTypeEnum;
+
+use function view;
 
 class MapApplyController extends Controller
 {
@@ -65,37 +66,34 @@ class MapApplyController extends Controller
 
         }
 
-        $forms = Form::with('formDataTypes.form.dynamicForm', 'formStores', 'paymentStores', 'appliedDocuments')
+        $order = 0;
+        $allApproved = true;
+        $forms = Form::withCount('formDataTypes')
         ->orderBy('order')
-        ->get()->map(function ($form) use ($documents) {
+        ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
             $status = $documents->where('form_id', $form->id)->pluck('status');
-            $form->is_rejected = $status->contains(DocumentStatusEnum::REJECTED->value) ? true : false;
+
+            if($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                $order = $form->order + 1;
+            } elseif($key == 0) {
+                $order = $form->order;
+                $allApproved = false;
+
+            } else {
+                $allApproved = false;
+            }
+            if($allApproved) {
+                $mapStatus = DocumentStatusEnum::APPROVED;
+            } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
+                $mapStatus = DocumentStatusEnum::REJECTED;
+            } elseif ($status->count() > 0) {
+                $mapStatus = DocumentStatusEnum::PENDING;
+            } else {
+                $mapStatus = DocumentStatusEnum::NOT_APPLIED;
+            }
+            $form->map_status = $mapStatus;
             return $form;
         });
-
-        $order = $forms->min('order');
-        $activeStep = $mapApply->activeStep();
-
-        if (!empty($activeStep) && array_key_exists('status', $activeStep) && !empty($activeStep['status'])) {
-            $allApproved = true;
-
-            foreach ($activeStep['status'] as $item) {
-                if ($item !== 'approved') {
-                    $allApproved = false;
-                    break;
-                }
-            }
-
-            if ($allApproved) {
-                $order = $forms->where('order', '>', $activeStep['order'])
-                ->where('need_from', EMapFormFillerTypeEnum::ORGANIZATION)
-                    ->sortBy('order')
-                    ->first()
-                    ?->order;
-            } else {
-                $order = $activeStep['order'];
-            }
-        }
 
         return view('emap::organization.attach-document.index', compact('mapApply', 'forms', 'order'));
     }
@@ -136,7 +134,7 @@ class MapApplyController extends Controller
             $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
         }]);
 
-        return \view('emap::organization.map-applies.template_data', compact('mapApply', 'noticeTypeEnum'));
+        return view('emap::organization.map-applies.template_data', compact('mapApply', 'noticeTypeEnum'));
     }
 
     public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)

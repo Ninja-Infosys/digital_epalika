@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MobileUser;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Employee;
 use App\Models\Website\ImportantLink;
@@ -13,7 +14,7 @@ use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
-
+use Illuminate\Support\Facades\Auth;
 class FrontController extends Controller
 {
     use NepaliDateConverter;
@@ -86,7 +87,7 @@ class FrontController extends Controller
 
     public function category(): void
     {
-//        return view('frontend.static.category.category');
+        //        return view('frontend.static.category.category');
     }
 
     public function representative()
@@ -136,12 +137,12 @@ class FrontController extends Controller
 
     public function single_executive(): void
     {
-//        return view('frontend.static.executive-board.single-executive-board');
+        //        return view('frontend.static.executive-board.single-executive-board');
     }
 
     public function service_details(): void
     {
-//        return view('frontend.static.chat.service');
+        //        return view('frontend.static.chat.service');
     }
 
     public function seniorCitizenDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
@@ -163,5 +164,12 @@ class FrontController extends Controller
     public function wardIndex($ward)
     {
         return view('frontend.wardIndex', compact('ward'));
+    }
+
+    public function mobileUser(MobileUser $mobileUser)
+    {
+        $mobileUser = Auth::guard('mobile-user')->user();
+        return view('frontend.mobileUser.index',compact('mobileUser'));
+
     }
 }

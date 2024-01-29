@@ -36,8 +36,9 @@ class DashboardController extends Controller
             'deadline_extended_project_count',
             'completed_project_count'
         ));
-    } 
-    public function ajaxData(){
+    }
+    public function ajaxData()
+    {
         return [
             'budgetHeadWiseProjects' => $this->getBudgetHeadWiseProjects(),
             'wardWiseProjects' => $this->getWardWiseProjects(),

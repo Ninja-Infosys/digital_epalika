@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantOffice;
-use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\Grant\StoreGrantRequest;
 use Modules\Grant\Http\Requests\Grant\UpdateGrantRequest;

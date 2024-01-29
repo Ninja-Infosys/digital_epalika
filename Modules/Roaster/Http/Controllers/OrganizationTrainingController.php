@@ -2,7 +2,6 @@
 
 namespace Modules\Roaster\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -15,7 +14,6 @@ use Modules\Roaster\Entities\Trainee;
 use Modules\Roaster\Entities\TraineeUser;
 use Modules\Roaster\Entities\Trainer;
 use Modules\Roaster\Entities\Training;
-use Modules\Roaster\Enums\TrainingTypeEnum;
 
 class OrganizationTrainingController extends Controller
 {

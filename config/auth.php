@@ -5,7 +5,6 @@ use Modules\Roaster\Entities\TraineeUser;
 use App\Models\MobileUser;
 use App\Models\User;
 
-
 return [
 
     /*
@@ -46,7 +45,7 @@ return [
         ],
 
         'mobile-user' => [
-            'driver' => 'passport',
+            'driver' => 'session',
             'provider' => 'mobile-users',
         ],
     ],

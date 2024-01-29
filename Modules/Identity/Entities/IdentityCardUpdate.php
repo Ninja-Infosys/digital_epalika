@@ -10,22 +10,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class IdentityCardUpdate extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
+    protected $fillable = [
 
-    'date',
-    'new_data',
-    'old_data'
-   ];
+     'date',
+     'new_data',
+     'old_data'
+    ];
 
-   public function disabilityIdentityCard(): BelongsTo
+    public function disabilityIdentityCard(): BelongsTo
     {
         return $this->belongsTo(DisabilityIdentityCard::class);
     }

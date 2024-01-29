@@ -29,7 +29,7 @@ class UnitObserver
 
     public function updating(Unit $unit)
     {
-        if (! $unit->isClean('is_smallest') && $unit->is_smallest == 1) {
+        if (!$unit->isClean('is_smallest') && $unit->is_smallest == 1) {
             Unit::where('measurement_unit_id', $unit->measurement_unit_id)->update(['is_smallest' => 0]);
         }
 

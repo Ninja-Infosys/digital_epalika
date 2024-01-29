@@ -3,8 +3,6 @@
 namespace Modules\Recommendation\Http\Requests\SipharisFormFields;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class StoreSipharisFormFieldsRequest extends FormRequest
 {
@@ -15,7 +13,7 @@ class StoreSipharisFormFieldsRequest extends FormRequest
 
     public function rules(): array
     {
-           switch ($this->method()) {
+        switch ($this->method()) {
             case 'GET':
                 return [];
                 break;

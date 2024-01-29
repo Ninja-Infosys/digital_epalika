@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('organization.admin.dashboard') }}">
+                            <a href="{{ route('dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -22,7 +22,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h3 class="card-title mb-0">कर चुक्ता</h3>
-                <a href="{{ route('organization.admin.taxClearance.create') }}" class="btn btn-outline-primary btn-xs">
+                <a href="{{ route('organization.taxClearance.create') }}" class="btn btn-outline-primary btn-xs">
                     <i class="fa fa-plus"></i> नयाँ थप्नुहोस
                 </a>
             </div>
@@ -47,11 +47,11 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('organization.admin.taxClearance.edit', $taxClearance) }}"
+                                    <a href="{{ route('organization.taxClearance.edit', $taxClearance) }}"
                                         class="btn btn-sm btn-outline-warning mx-1">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('organization.admin.taxClearance.destroy', $taxClearance) }}"
+                                    <form action="{{ route('organization.taxClearance.destroy', $taxClearance) }}"
                                         method="post">
                                         @csrf
                                         @method('delete')

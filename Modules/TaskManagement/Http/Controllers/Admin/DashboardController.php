@@ -43,11 +43,12 @@ class DashboardController extends Controller
             'taskNotSubmittedUserCount'
         ));
     }
-public function ajaxData(){
-    return [
-        'dailyTask' => $this->dailyTask(),
-    ];
-}
+    public function ajaxData()
+    {
+        return [
+            'dailyTask' => $this->dailyTask(),
+        ];
+    }
     public function dailyTask()
     {
         $ranges = CarbonPeriod::create(today()->subDays(6), today());

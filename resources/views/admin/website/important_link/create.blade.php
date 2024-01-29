@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ महत्त्वपूर्ण लिङ्क थप्नुहोस्</h4>
-                        <a href="{{route('admin.website.importantLink.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.global.website.importantLink.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> महत्त्वपूर्ण लिङ्क सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.website.importantLink.store')}}" enctype="multipart/form-data"
+                    <form action="{{route('admin.global.website.importantLink.store')}}" enctype="multipart/form-data"
                           method="post">
                         @csrf
                         <div class="row">

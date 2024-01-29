@@ -33,7 +33,7 @@ class DefendantIssuedDeadlineController extends Controller
     {
         $this->checkAuthorization('defendantIssuedDeadline_create');
 
-        $defendantIssuedDeadline=$complaintApplication->defendantIssuedDeadlines()->create($request->validated());
+        $defendantIssuedDeadline = $complaintApplication->defendantIssuedDeadlines()->create($request->validated());
 
         event(new ComplaintLogEvent($complaintApplication->id, DefendantIssuedDeadline::class, $defendantIssuedDeadline->id, 'प्रतिवादी म्याद जारी', "$defendantIssuedDeadline->day_to_attend दिन भित्रमा न्यायिक समिति समक्ष हाजिर हुन आउनुहोला भनेर प्रतिवादी म्याद जारी गरियो।"));
 

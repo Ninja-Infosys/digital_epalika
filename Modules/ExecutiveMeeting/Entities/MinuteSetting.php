@@ -9,7 +9,9 @@ use App\Traits\EventObserveTrait;
 
 class MinuteSetting extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -26,6 +28,8 @@ class MinuteSetting extends Model
         [
             'title' => 'विवरण',
             'data' => [
+                'बैठकको नाम'=>'[@metting_name]',
+                'समिति नाम'=>'[@committee_name]',
                 'कार्यालय नाम' => '[@office_name]',
                 'कार्यालय लेटर हेड' => '[@letter_head]',
                 'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letter_head_en]',

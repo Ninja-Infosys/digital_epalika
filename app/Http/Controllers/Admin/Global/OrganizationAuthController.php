@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Http\Controllers;
+namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +13,7 @@ class OrganizationAuthController extends Controller
 {
     public function showOrganizationLoginForm()
     {
-        return view('emap::organization.auth.login');
+        return view('admin.global.organization.auth.login');
     }
 
     public function organizationLogin(Request $request): RedirectResponse
@@ -23,9 +23,9 @@ class OrganizationAuthController extends Controller
                 [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-                'g-recaptcha-response' => ['recaptcha'],
+                // 'g-recaptcha-response' => ['recaptcha'],
             ],
-                ['g-recaptcha-response.recaptcha' => 'Please verify captcha']
+                // ['g-recaptcha-response.recaptcha' => 'Please verify captcha']
             );
         } else {
             $request->validate(
@@ -37,7 +37,8 @@ class OrganizationAuthController extends Controller
         }
 
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
-            return redirect()->route('organization.admin.dashboard');
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
         }
 
 
@@ -53,40 +54,40 @@ class OrganizationAuthController extends Controller
 
     public function showOrganizationRegisterForm()
     {
-        return view('emap::organization.auth.register');
+        return view('admin.global.organization.auth.register');
     }
 
     public function showOrganizationRegisterFormPerson()
     {
-        return view('emap::organization.auth.register_person');
+        return view('admin.global.auth.register_person');
     }
 
     public function invitation(Organization $organization)
     {
-        if (! request()->hasValidSignature() || $organization->password) {
+        if (!request()->hasValidSignature() || $organization->password) {
             abort(401);
         }
 
         auth('organization')->login($organization);
 
-        return redirect()->route('organization.admin.dashboard');
+        return redirect()->route('dashboard');
     }
 
     public function create()
     {
         if (auth('organization')->user()->password) {
-            return redirect()->route('organization.admin.dashboard');
+            return redirect()->route('dashboard');
         }
 
-        return view('emap::organization.auth.password');
+        return view('admin.global.organization.auth.password');
     }
 
     public function store(StorePasswordRequest $request)
     {
-        $redirect = redirect()->route('organization.admin.dashboard');
+        $redirect = redirect()->route('dashboard');
         $user = auth('organization')->user();
 
-        if (! $user?->password) {
+        if (!$user?->password) {
             $user?->update([
                 'password' => $request->input('password'),
             ]);
@@ -101,6 +102,6 @@ class OrganizationAuthController extends Controller
     {
         $organization = \auth('organization')->user();
 
-        return view('emap::organization.profile', compact('organization'));
+        return view('admin.global.organization.profile', compact('organization'));
     }
 }

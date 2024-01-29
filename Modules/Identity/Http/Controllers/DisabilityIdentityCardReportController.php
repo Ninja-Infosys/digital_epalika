@@ -78,24 +78,24 @@ class DisabilityIdentityCardReportController extends Controller
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
 
-//        if (!empty($request->input('from_date'))) {
-//            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
-//        }
-//
-//        if (!empty($request->input('to_date'))) {
-//            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
-//        }
-//
-//        if (!empty($request->input('object_transaction'))) {
-//            $q->whereIn('object_transaction_id', $request->input('object_transaction'));
-//        }
-//
-//        if (!empty($request->input('business_nature'))) {
-//            $q->whereIn('business_nature_id', $request->input('business_nature'));
-//        }
-//        if (!empty($request->input('ward_no'))) {
-//            $q->whereIn('ward_no', $request->input('ward_no'));
-//        }
+        //        if (!empty($request->input('from_date'))) {
+        //            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
+        //        }
+        //
+        //        if (!empty($request->input('to_date'))) {
+        //            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
+        //        }
+        //
+        //        if (!empty($request->input('object_transaction'))) {
+        //            $q->whereIn('object_transaction_id', $request->input('object_transaction'));
+        //        }
+        //
+        //        if (!empty($request->input('business_nature'))) {
+        //            $q->whereIn('business_nature_id', $request->input('business_nature'));
+        //        }
+        //        if (!empty($request->input('ward_no'))) {
+        //            $q->whereIn('ward_no', $request->input('ward_no'));
+        //        }
     }
 
     public function governmentalDisabilityType()

@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\Global\OrganizationAuthController;
+use App\Http\Controllers\Admin\Global\OrganizationDashboardController;
+use App\Http\Controllers\Admin\Global\RenewedController;
+use App\Http\Controllers\Admin\Global\TaxClearanceController;
 use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MobileUser\MobileUserAuthController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -45,6 +50,9 @@ Route::get('executive', [FrontController::class, 'executive'])->name('executive'
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
 Route::get('ward/{ward}', [FrontController::class,'wardIndex'])->name('wardIndex');
+Route::get('/mobileUser', [FrontController::class, 'mobileUser'])->name('mobileUser');
+// Route::get('ebps', 'eMap')->name('ebps');
+
 
 Route::get('/static/notice', [FrontController::class, 'notice'])->name('notice');
 Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNotice'])->name('single-notice');
@@ -80,4 +88,38 @@ Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     Route::get('form', [ResourceController::class, 'index']);
     Route::get('form/{resource}', [ResourceController::class, 'resource']);
     Route::get('form/{resource}/submission', [ResourceController::class, 'resourceSubmissions']);
+});
+
+Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
+    Route::get('login', [MobileUserAuthController::class, 'showMobileUserLoginForm'])->name('login.form');
+    Route::post('login', [MobileUserAuthController::class, 'mobileUserLogin'])->name('login');
+    Route::get('register', [MobileUserAuthController::class, 'showMobileUserRegisterForm'])->name('register.form');
+    Route::post('register', [MobileUserAuthController::class, 'signup'])->name('register.signup');
+    Route::get('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
+    Route::put('updateProfile', [MobileUserAuthController::class,'updateProfile'])->name('updateProfile');
+    Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
+    Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
+    Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
+});
+
+
+Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
+Route::prefix('organization')->as('organization.')->group(function () {    
+    // Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
+    Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
+    Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
+    Route::get('register-person', [OrganizationAuthController::class, 'showOrganizationRegisterFormPerson'])->name('register.formPerson');
+    
+    Route::get('{organization}/invitation', [OrganizationAuthController::class, 'invitation'])->name('invitation');
+    Route::get('password/create', [OrganizationAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
+    Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
+    });
+    Route::middleware("auth:organization")->group(function(){
+        Route::post('logout', [OrganizationAuthController::class, 'logout'])->name('logout');
+        Route::resource('taxClearance', TaxClearanceController::class);
+        Route::resource('renewed', RenewedController::class);
+    });
+   
 });

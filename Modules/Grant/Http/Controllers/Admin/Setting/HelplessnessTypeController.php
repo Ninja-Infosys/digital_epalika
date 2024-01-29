@@ -3,10 +3,8 @@
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
 use Illuminate\Console\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Redirector;
 use Modules\Grant\Entities\HelplessnessType;
@@ -22,12 +20,12 @@ class HelplessnessTypeController extends Controller
                 $q->whereLike(['name'], request('search'));
             }
         })->latest()->paginate(10);
-        return view('grant::admin.setting.helplessnessType.index',compact('helplessnessTypes'));
+        return view('grant::admin.setting.helplessnessType.index', compact('helplessnessTypes'));
     }
 
     public function create()
     {
-        
+
         return view('grant::admin.setting.helplessnessType.create');
     }
 
@@ -45,10 +43,10 @@ class HelplessnessTypeController extends Controller
 
     public function edit(HelplessnessType $helplessnessType)
     {
-        return view('grant::admin.setting.helplessnessType.edit',compact('helplessnessType'));
+        return view('grant::admin.setting.helplessnessType.edit', compact('helplessnessType'));
     }
 
-    public function update(UpdateHelplessnessType $request, HelplessnessType $helplessnessType ): Redirector|Application|RedirectResponse
+    public function update(UpdateHelplessnessType $request, HelplessnessType $helplessnessType): Redirector|Application|RedirectResponse
     {
         $helplessnessType->update($request->validated());
         toast('असहायताको प्रकार सफलता पुर्वक सम्पादन गरियो', 'success');

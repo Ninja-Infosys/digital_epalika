@@ -19,7 +19,7 @@ class GrantOfficeController extends Controller
     {
         $this->checkAuthorization('grantOffice_access');
 
-        $offices=GrantOffice::where(function (Builder $q) {
+        $offices = GrantOffice::where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['office_name'], request('search'));
             }
@@ -38,15 +38,15 @@ class GrantOfficeController extends Controller
     {
         $this->checkAuthorization('grantOffice_create');
 
-        $grantOffice=GrantOffice::create($request->validated());
+        $grantOffice = GrantOffice::create($request->validated());
 
         if ($request->ajax()) {
             return response()->json([
-                'data'=> [
-                    'grantOffice_id'=>$grantOffice->id,
-                    'grantOffice_name'=> $grantOffice->office_name
+                'data' => [
+                    'grantOffice_id' => $grantOffice->id,
+                    'grantOffice_name' => $grantOffice->office_name
                 ],
-                'message'=>'अनुदान कार्यालय सफलतापूर्वक थपियो'
+                'message' => 'अनुदान कार्यालय सफलतापूर्वक थपियो'
             ]);
         }
 

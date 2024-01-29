@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('organization.admin.dashboard') }}">
+                            <a href="{{ route('dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -34,19 +34,21 @@
                                 <tr>
                                     <th>क्र.स</th>
                                     <th>शिर्षक</th>
+                                    <th>Need From</th>
                                     <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($forms as $form)
-                                    <tr @if ($form->is_rejected) style="background-color:#d16969;" @endif>
+                                    <tr @if ($form->map_status==\Modules\EMap\Enums\DocumentStatusEnum::REJECTED) style="background-color:#d16969;" @endif>
                                         <td>{{ get_nepali_number($loop->iteration) }}</td>
                                         <td>{{ $form->title }}</td>
                                         <td>
                                             {{ $form->need_from?->label() ?? '' }}
                                             {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}} --}}
                                         </td>
+                                        <td>{{$form->map_status?->label()}}</td>
                                         <td class="d-flex">
 
                                             @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)

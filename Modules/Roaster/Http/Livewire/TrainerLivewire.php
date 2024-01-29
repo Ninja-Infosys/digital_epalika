@@ -74,7 +74,7 @@ class TrainerLivewire extends Component
         $this->provinces = Province::all();
         $this->subjects = Subject::latest()->get();
 
-        if (! empty($trainer)) {
+        if (!empty($trainer)) {
             $this->setDataForEdit($trainer);
         }
     }

@@ -27,21 +27,21 @@ trait IdentityMinuteTemplateTrait
                 'अपाङ्ग समिति विवरण' => '[@disabilityCommitteeDetail]',
                 'आमन्त्रित सदस्य विवरण' => '[@invitedGuestDetail]',
                 'अपाङ्ग विवरण' => '[@disableDetail]',
-                'लेटर हेड (नेपालीमा)'=>'[@letterHead]',
-                'लेटर हेड (अंग्रेजीमा)'=>'[@letterHeadEn]',
+                'लेटर हेड (नेपालीमा)' => '[@letterHead]',
+                'लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
             ],
         ],
     ];
 
 
     public function getIdentityTemplateData(MinuteTemplateSetting $minuteTemplateSetting = null): string
-{
-    if ($minuteTemplateSetting !== null) {
-        return $this->getData($minuteTemplateSetting->description);
-    } else {
-        return "Error: MinuteTemplateSetting is null.";
+    {
+        if ($minuteTemplateSetting !== null) {
+            return $this->getData($minuteTemplateSetting->description);
+        } else {
+            return "Error: MinuteTemplateSetting is null.";
+        }
     }
-}
 
 
     public function getTemplateOptions(): array

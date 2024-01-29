@@ -67,6 +67,11 @@ class OrganizationDetail extends Model
         return $this->hasMany(TaxClearance::class);
     }
 
+    public function reneweds(): HasMany
+    {
+        return $this->hasMany(Renewed::class);
+    }
+
     public function emapMuncipalRegistrations(): HasMany
     {
         return $this->hasMany(EmapMuncipalRegistration::class);

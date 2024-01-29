@@ -33,7 +33,7 @@ class Slider extends Model
 
     public function setImageAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['image'] = $value->store('slider', 'public');
         }
     }

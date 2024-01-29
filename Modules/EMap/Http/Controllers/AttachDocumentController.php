@@ -4,7 +4,6 @@ namespace Modules\EMap\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Notifications\FormStoreNotification;
 use App\Notifications\PaymentStoreNotification;
 use App\Notifications\StepNotification;
@@ -20,12 +19,10 @@ use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
-use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Entities\Organization;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\AppliedDocumentStatus;
-use Modules\EMap\Entities\AppliedMapFile;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Enums\FormTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
@@ -149,43 +146,76 @@ class AttachDocumentController extends Controller
             ]);
             DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
-                $appliedDocumentStatus = AppliedDocumentStatus::create([
-                    "applied_document_id" => $appliedDocument->id,
-                    "status" => DocumentStatusEnum::PENDING->value
-                ]);
+                if ($appliedDocument->status == DocumentStatusEnum::PENDING) {
+                    foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                        $existingFile->forceDelete();
+                        foreach ($data['documents'] as $file) {
+                            $appliedDocument->appliedMapFiles()->create([
+                                "map_apply_id" => $mapApply->id,
+                                "document" => $file->store('appliedDocument', 'public'),
+                            ]);
+                        }
+                    }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                } elseif ($appliedDocument->status == DocumentStatusEnum::REVIEW) {
+                    toast('Document On Review You Cannot Change Document', 'error');
+                } elseif ($appliedDocument->status == DocumentStatusEnum::APPROVED) {
+                    toast('Document Is Already Approved', 'warning');
+                } else {
+                    $appliedDocument->update([
+                        'status' => DocumentStatusEnum::PENDING->value
+                    ]);
+                    $appliedDocumentStatus = AppliedDocumentStatus::create([
+                        "applied_document_id" => $appliedDocument->id,
+                        "status" => DocumentStatusEnum::PENDING->value
+                    ]);
+                    foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                        $existingFile->forceDelete();
+                    }
+                    foreach ($data['documents'] as $file) {
+                        $newAppliedDocuments = $appliedDocument->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $file->store('appliedDocument', 'public'),
+                        ]);
 
-                foreach ($appliedDocument->appliedMapFiles as $existingFile) {
-                    $appliedDocumentStatus->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $existingFile->document,
-                    ]);
-                    $existingFile->forceDelete();
+                        $appliedDocumentStatus->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $newAppliedDocuments->document,
+                        ]);
+                    }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
-                foreach ($data['documents'] as $file) {
-                    $appliedDocument->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $file->store('appliedDocument', 'public'),
-                    ]);
-                }
+
                 Notification::send($form->group->users, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
             });
-
-            toast('फाईल सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
                 'data' => ['required'],
             ]);
             DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
                 $formStore = FormStore::find($id);
-                FormStoreStatus::create([
-                    "form_store_id" => $formStore->id,
-                    "status" => DocumentStatusEnum::PENDING->value,
-                    "data" => $data['data'],
-                    "fields" => $formStore->fields
-                ]);
-                $formStore->update([
-                    'data' => $data['data'],
-                ]);
+                if ($formStore->status == DocumentStatusEnum::PENDING) {
+                    $formStore->update([
+                        'data' => $data['data'],
+                    ]);
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                } elseif ($formStore->status == DocumentStatusEnum::REVIEW) {
+                    toast('Form Data On Review You Cannot Change Data', 'error');
+                } elseif ($formStore->status == DocumentStatusEnum::APPROVED) {
+                    toast('Form Data Is Already Approved', 'warning');
+                } else {
+                    FormStoreStatus::create([
+                        "form_store_id" => $formStore->id,
+                        "status" => DocumentStatusEnum::PENDING->value,
+                        "data" => $data['data'],
+                        "fields" => $formStore->fields
+                    ]);
+                    $formStore->update([
+                        "status" => DocumentStatusEnum::PENDING->value,
+                        'data' => $data['data'],
+                    ]);
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                }
                 Notification::send($form->group->users, new FormStoreNotification($mapApply, $form, $formDataType, $formStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
@@ -602,6 +632,20 @@ class AttachDocumentController extends Controller
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {
+            $placeholder = '[@form.' . $key . ']';
+            $template = str_replace($placeholder, $value, $template);
+        }
+
+        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType'));
+    }
+
+    public function formStoreStatusPrint(FormDataType $formDataType, FormStore $formStore,FormStoreStatus $formStoreStatus)
+    {
+        $formStore->load('form_data.model');
+        $formDataType->load('model');
+        $template = $formStore->form_data?->model?->template ?? '';
+
+        foreach ($formStoreStatus->data as $key => $value) {
             $placeholder = '[@form.' . $key . ']';
             $template = str_replace($placeholder, $value, $template);
         }
