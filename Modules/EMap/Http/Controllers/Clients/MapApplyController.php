@@ -211,4 +211,16 @@ class MapApplyController extends Controller
 
         return back();
     }
+
+    public function uploadDocument(Request $request,FormStore $formStore)
+    {
+      $data =  $request->validate([
+           'document'=>['required','file']
+       ]);
+
+       $formStore->update($data);
+        toast('File Upload Successfully','success');
+        return back();
+
+    }
 }

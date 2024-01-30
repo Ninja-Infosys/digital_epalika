@@ -636,7 +636,7 @@ class AttachDocumentController extends Controller
             $template = str_replace($placeholder, $value, $template);
         }
 
-        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType'));
+        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType','formStore'));
     }
 
     public function formStoreStatusPrint(FormDataType $formDataType, FormStore $formStore,FormStoreStatus $formStoreStatus)

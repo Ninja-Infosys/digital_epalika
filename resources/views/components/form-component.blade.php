@@ -65,26 +65,18 @@
                                 <td>
 
 
-
+                                            @if(!empty($formStore->document))
                                             <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                                     data-bs-target="#view_form{{ $formStore->id }}">
                                                 <i class="fa fa-eye"></i>
                                             </button>
+                                    @endif
                                             <!-- view file model pass url dynamically in the model-->
                                             <div class="modal fade" id="view_form{{ $formStore->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            @foreach($formStore->data as $key=>$data)
-                                                                @if(is_array($data))
-                                                                    <x-form-array-data :formdata="$data"/>
-                                                                @else
-                                                                    {{ $key . ': ' . $data }} @if (!$loop->last)
-                                                                        <br>
-                                                                    @endif
-
-                                                                @endif
-                                                            @endforeach
+                                                            <iframe src="{{$formStore->document_url}}"></iframe>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
