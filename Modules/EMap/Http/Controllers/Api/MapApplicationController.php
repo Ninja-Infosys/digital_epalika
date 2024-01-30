@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Http\Requests\Api\MapApplicationRequest;
+use Modules\EMap\Transformers\MapApplyResource;
 
 class MapApplicationController extends Controller
 {
     public function registerApplication(MapApplicationRequest $request)
     {
-        DB::transaction(function () use ($request) {
+        $mapApply = DB::transaction(function () use ($request) {
             $mapApply = MapApply::create($request->validated() + [
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'sent_to_organization' => 'pending'
@@ -32,9 +33,12 @@ class MapApplicationController extends Controller
             $mapApply->applicantDetail()->create($request->validated('applicantDetail'));
 
             Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
+
+            return $mapApply;
         });
         return response()->json([
-            'message' => 'Map Applied Successfully'
+            'message' => 'Map Applied Successfully',
+            'data' => MapApplyResource::make($mapApply)
         ], 201);
     }
 }

@@ -169,14 +169,20 @@
                 <label class="form-label fw-bolder">३.१ जग्गा धनीको किसिम <span class="text-danger">*</span></label>
                 <div class="col">
                     <div v-for="ownerType in eMapSetting?.ownerTypes??[]" class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" :id="ownerType.value"
-                               v-model="form.landOwner.land_owner_type" :value="ownerType.value">
+                        <input type="radio" class="form-check-input"
+                               :id="ownerType.value"
+                               v-model="form.landOwner.land_owner_type"
+                               @change="validateField('landOwner.land_owner_type')"
+                               :value="ownerType.value">
                         <label class="form-check-label"
                                :for="ownerType.value">
                             {{ownerType.label}}
                         </label>
                     </div>
                 </div>
+                <p v-if="errors['landOwner.land_owner_type']" class="text-danger">
+                    {{errors['landOwner.land_owner_type']}}
+                </p>
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
@@ -184,6 +190,8 @@
                         id="landowner-name"
                         v-model="form.landOwner.name"
                         label="जग्गा धनीको नाम"
+                        @validate="validateField('landOwner.name')"
+                        :error="errors['landOwner.name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -191,6 +199,8 @@
                         id="landowner-phone"
                         v-model="form.landOwner.phone"
                         label="फोन नं."
+                        @validate="validateField('landOwner.phone')"
+                        :error="errors['landOwner.phone']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -198,6 +208,8 @@
                         id="landowner-father-name"
                         v-model="form.landOwner.father_name"
                         label="बुवाको नाम"
+                        @validate="validateField('landOwner.father_name')"
+                        :error="errors['landOwner.father_name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -205,6 +217,8 @@
                         id="landowner-grandfather-name"
                         v-model="form.landOwner.grandfather_name"
                         label="हजुरबुबाको नाम"
+                        @validate="validateField('landOwner.grandfather_name')"
+                        :error="errors['landOwner.grandfather_name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -212,6 +226,8 @@
                         id="landowner-citizenship_no"
                         v-model="form.landOwner.citizenship_no"
                         label="नागरिकता नम्बर"
+                        @validate="validateField('landOwner.citizenship_no')"
+                        :error="errors['landOwner.citizenship_no']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -219,6 +235,8 @@
                         id="landowner-citizenship_issue_date"
                         v-model="form.landOwner.citizenship_issue_date"
                         label="नागरिकता लिएको मिति"
+                        @validate="validateField('landOwner.citizenship_issue_date')"
+                        :error="errors['landOwner.citizenship_issue_date']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -228,6 +246,8 @@
                         :options="eMapSetting?.allDistricts??[]"
                         name-prop="district"
                         label="नागरिकता लिएको जिल्ला"
+                        @validate="validateField('landOwner.citizenship_issue_district_id')"
+                        :error="errors['landOwner.citizenship_issue_district_id']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -235,6 +255,8 @@
                         id="landowner-address"
                         v-model="form.landOwner.address"
                         label="ठेगाना"
+                        @validate="validateField('landOwner.address')"
+                        :error="errors['landOwner.address']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -242,6 +264,8 @@
                         id="landowner-local_body"
                         v-model="form.landOwner.local_body"
                         label="पालिका"
+                        @validate="validateField('landOwner.local_body')"
+                        :error="errors['landOwner.local_body']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -250,6 +274,8 @@
                         id="landowner-ward_no"
                         v-model="form.landOwner.ward_no"
                         label="वडा नं."
+                        @validate="validateField('landOwner.ward_no')"
+                        :error="errors['landOwner.ward_no']"
                     />
                 </div>
             </div>
@@ -273,6 +299,8 @@
                         v-model="form.houseOwner.name"
                         label="घर धनीको नाम"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.name')"
+                        :error="errors['houseOwner.name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -281,6 +309,8 @@
                         v-model="form.houseOwner.phone"
                         label="फोन नं."
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.phone')"
+                        :error="errors['houseOwner.phone']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -289,6 +319,8 @@
                         v-model="form.houseOwner.father_name"
                         label="बुवाको नाम"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.father_name')"
+                        :error="errors['houseOwner.father_name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -297,6 +329,8 @@
                         v-model="form.houseOwner.grandfather_name"
                         label="हजुरबुबाको नाम"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.grandfather_name')"
+                        :error="errors['houseOwner.grandfather_name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -305,6 +339,8 @@
                         v-model="form.houseOwner.citizenship_no"
                         label="नागरिकता नम्बर"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.citizenship_no')"
+                        :error="errors['houseOwner.citizenship_no']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -313,6 +349,8 @@
                         v-model="form.houseOwner.citizenship_issue_date"
                         label="नागरिकता लिएको मिति"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.citizenship_issue_date')"
+                        :error="errors['houseOwner.citizenship_issue_date']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -323,6 +361,8 @@
                         name-prop="district"
                         label="नागरिकता लिएको जिल्ला"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.citizenship_issue_district_id')"
+                        :error="errors['houseOwner.citizenship_issue_district_id']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -331,6 +371,8 @@
                         v-model="form.houseOwner.address"
                         label="ठेगाना"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.address')"
+                        :error="errors['houseOwner.address']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -339,6 +381,8 @@
                         v-model="form.houseOwner.local_body"
                         label="पालिका"
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.local_body')"
+                        :error="errors['houseOwner.local_body']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -348,6 +392,8 @@
                         v-model="form.houseOwner.ward_no"
                         label="वडा नं."
                         :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.ward_no')"
+                        :error="errors['houseOwner.ward_no']"
                     />
                 </div>
             </div>
@@ -358,27 +404,36 @@
                 <h5>५. निवेदकको विवरण</h5>
             </legend>
             <div class="mb-3">
-
                 <label class="form-label fw-bolder">५.१ निवेदकको प्रकार </label>
                 <div class="col">
                     <div v-for="type in eMapSetting?.applicantTypes??[]" class="form-check form-check-inline">
                         <input type="radio" :id="type.value"
-                               v-model="form.applicantDetail.applicantType" :value="type.value"
+                               v-model="form.applicantDetail.applicant_type"
+                               :value="type.value"
+                               @change="validateField('applicantDetail.applicant_type')"
                                class="form-check-input">
                         <label class="form-check-label" :for="type.value">{{ type.label }}</label>
                     </div>
                 </div>
+                <p v-if="errors['applicantDetail.applicant_type']" class="text-danger">
+                    {{errors['applicantDetail.applicant_type']}}
+                </p>
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bolder">५.२ घरधनी सँगको सम्बन्ध</label>
                 <div class="col">
                     <div v-for="relation in eMapSetting?.relation_with_owner??[]" class="form-check form-check-inline">
                         <input type="radio" :id="relation.value"
-                               v-model="form.applicantDetail.relation_with_owner" :value="relation.value"
+                               v-model="form.applicantDetail.relation_with_owner"
+                               :value="relation.value"
+                               @change="validateField('applicantDetail.relation_with_owner')"
                                class="form-check-input">
                         <label class="form-check-label" :for="relation.value">{{ relation.label }}</label>
                     </div>
                 </div>
+                <p v-if="errors['applicantDetail.relation_with_owner']" class="text-danger">
+                    {{errors['applicantDetail.relation_with_owner']}}
+                </p>
             </div>
             <div class="row">
                 <label class="form-label fw-bolder">जग्गाधनी वा घरधनी भन्दा फरक भएमा</label>
@@ -388,6 +443,8 @@
                         v-model="form.applicantDetail.name"
                         label="नाम"
                         :disabled="isApplicantSame"
+                        @validate="validateField('applicantDetail.name')"
+                        :error="errors['applicantDetail.name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -396,6 +453,8 @@
                         v-model="form.applicantDetail.phone"
                         label="फोन नं."
                         :disabled="isApplicantSame"
+                        @validate="validateField('applicantDetail.phone')"
+                        :error="errors['applicantDetail.phone']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -404,6 +463,8 @@
                         v-model="form.applicantDetail.father_name"
                         label="बुवाको नाम"
                         :disabled="isApplicantSame"
+                        @validate="validateField('applicantDetail.father_name')"
+                        :error="errors['applicantDetail.father_name']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -412,6 +473,8 @@
                         v-model="form.applicantDetail.citizenship_no"
                         label="नागरिकता नम्बर"
                         :disabled="isApplicantSame"
+                        @validate="validateField('applicantDetail.citizenship_no')"
+                        :error="errors['applicantDetail.citizenship_no']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -420,6 +483,8 @@
                         v-model="form.applicantDetail.citizenship_issue_date"
                         label="नागरिकता लिएको मिति"
                         :disabled="isApplicantSame"
+                        @validate="validateField('applicantDetail.citizenship_issue_date')"
+                        :error="errors['applicantDetail.citizenship_issue_date']"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -430,6 +495,8 @@
                         name-prop="district"
                         label="नागरिकता लिएको जिल्ला"
                         :disabled="isApplicantSame"
+                        @validate="validateField('applicantDetail.citizenship_issue_district_id')"
+                        :error="errors['applicantDetail.citizenship_issue_district_id']"
                     />
                 </div>
             </div>
@@ -442,6 +509,8 @@
                     id="application_date"
                     v-model="form.applicantDetail.application_date"
                     label="निबेदनको मिति"
+                    @validate="validateField('applicantDetail.application_date')"
+                    :error="errors['applicantDetail.application_date']"
                 />
             </div>
             <div class="col-3">
@@ -457,7 +526,6 @@
             />
         </div>
     </form>
-    {{form}} {{errors}}
 </template>
 <script setup>
 
@@ -465,10 +533,10 @@ import {onMounted, reactive, ref, watch} from "vue";
 import {useSettingStore} from "../../stores/setting";
 import {useMapApplicationStore} from "../../stores/e-map/mapApplication";
 import {storeToRefs} from "pinia";
-import {toast} from "../../utils/toast";
 import showErrors from "../../utils/showErrors";
 import {useYup} from "../../utils/yup";
 import {object,string} from "yup";
+import Swal from "sweetalert2";
 
 const settingStore=useSettingStore();
 const mapApplicationStore=useMapApplicationStore();
@@ -480,7 +548,7 @@ onMounted(()=>{
 
 const house_owner_as_land_owner=ref(false);
 
-const form=reactive({
+const initialState={
     organization_id:'',
     application_type:'',
     construction_type:'',
@@ -521,7 +589,7 @@ const form=reactive({
         ward_no:'',
     },
     applicantDetail:{
-        applicantType:'',
+        applicant_type:'',
         relation_with_owner:'',
         name:'',
         phone:'',
@@ -530,9 +598,11 @@ const form=reactive({
         citizenship_issue_date:'',
         citizenship_issue_district_id:'',
         application_date:'',
-        signature:null,
+        signature:'',
     }
-})
+}
+
+const form = reactive({...initialState})
 
 const isSubmitting=ref(false);
 const isApplicantSame=ref(false);
@@ -571,7 +641,7 @@ const setLandOwnerToHouseOwner=()=>{
     }
 }
 
-watch(()=>form.applicantDetail.applicantType,(type)=>{
+watch(()=>form.applicantDetail.applicant_type,(type)=>{
     if(type==='house owner'){
         isApplicantSame.value=true;
         form.applicantDetail.name=form.houseOwner.name;
@@ -613,6 +683,43 @@ const validations = object({
         tole:string().required('अनिवार्य छ'),
         plot_no:string().required('अनिवार्य छ'),
         unit_value:string().required('अनिवार्य छ'),
+    }),
+    landOwner:object().shape({
+        land_owner_type:string().required('जग्गा धनीको किसिम अनिवार्य छ'),
+        name:string().required('जग्गा धनीको नाम अनिवार्य छ'),
+        phone:string(),
+        father_name:string().required('बुवाको नाम अनिवार्य छ'),
+        grandfather_name:string().required('हजुरबुबाको नाम अनिवार्य छ'),
+        citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
+        citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+        citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+        address:string().required('ठेगाना अनिवार्य छ'),
+        local_body:string().required('पालिका अनिवार्य छ'),
+        ward_no:string().required('वडा नं. अनिवार्य छ'),
+    }),
+    houseOwner:object().shape({
+        name:string().required('घर धनीको नाम अनिवार्य छ'),
+        phone:string(),
+        father_name:string().required('बुवाको नाम अनिवार्य छ'),
+        grandfather_name:string().required('हजुरबुबाको नाम अनिवार्य छ'),
+        citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
+        citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+        citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+        address:string().required('ठेगाना अनिवार्य छ'),
+        local_body:string().required('पालिका अनिवार्य छ'),
+        ward_no:string().required('वडा नं. अनिवार्य छ'),
+    }),
+    applicantDetail:object().shape({
+        applicant_type:string().required('निवेदकको प्रकार अनिवार्य छ'),
+        relation_with_owner:string().required('सम्बन्ध अनिवार्य छ'),
+        name:string().required('निवेदकको नाम अनिवार्य छ'),
+        phone:string().required('फोन न. अनिवार्य छ'),
+        father_name:string().required('बुवाको नाम अनिवार्य छ'),
+        citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
+        citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+        citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+        application_date:string(),
+        //signature:object(),
     })
 });
 
@@ -624,11 +731,31 @@ const registerApplication=async () => {
         isSubmitting.value = true;
         try {
             let res = await mapApplicationStore.storeMapApplication(form);
-            toast(res.status,res.data.message);
+            isSubmitting.value=false;
+            resetForm();
+            await Swal.fire({
+                title: 'धन्यबाद!!!',
+                text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${res.data.data?.unique_id} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
+                icon: 'success',
+            });
         }catch (e) {
             showErrors(e);
-        }finally {
             isSubmitting.value=false;
+        }
+    }
+}
+
+const resetForm=()=> {
+    errors.value = {};
+    resetNestedObject(form);
+}
+
+const resetNestedObject=(obj)=> {
+    for (const key in obj) {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            resetNestedObject(obj[key]);
+        } else {
+            obj[key] = '';
         }
     }
 }

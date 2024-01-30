@@ -21,7 +21,7 @@
 
 const emit = defineEmits(['update:modelValue', 'validate']);
 
-defineProps({
+const props=defineProps({
   id: {
     type: String
   },

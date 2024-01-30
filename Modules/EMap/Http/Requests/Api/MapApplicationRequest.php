@@ -53,18 +53,14 @@ class MapApplicationRequest extends FormRequest
             'houseOwner.address' => ['required'],
             'houseOwner.local_body' => ['required'],
             'houseOwner.ward_no' => ['required'],
-            'applicantDetail.applicantType' => ['required', new Enum(ApplicantTypeEnum::class)],
+            'applicantDetail.applicant_type' => ['required', new Enum(ApplicantTypeEnum::class)],
             'applicantDetail.relation_with_owner' => ['required'],
             'applicantDetail.name' => ['required'],
             'applicantDetail.phone' => ['required'],
             'applicantDetail.father_name' => ['required'],
-            'applicantDetail.grandfather_name' => ['required'],
             'applicantDetail.citizenship_no' => ['required'],
             'applicantDetail.citizenship_issue_district_id' => ['required', Rule::exists('districts', 'id')],
-            'applicantDetail.address' => ['required'],
-            'applicantDetail.local_body' => ['required'],
-            'applicantDetail.ward_no' => ['required'],
-            'applicantDetail.application_date' => ['required'],
+            'applicantDetail.application_date' => ['nullable'],
         ];
     }
 }

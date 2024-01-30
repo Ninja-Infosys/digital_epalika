@@ -15,76 +15,72 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {onMounted, ref} from "vue";
 import dateHelper from "../../utils/dateHelper";
-
-export default {
-    props: {
-        id: {
-            type: String,
-        },
-        inputType: {
-            type: String,
-            default: "text",
-        },
-        inputClass: {
-            type: String,
-            default: "form-control",
-        },
-        labelClass:{
-            type:String,
-            default:'form-label fw-bolder'
-        },
-        label: {
-            type: String,
-        },
-        placeholder: {
-            type: String
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        error: {
-            type: String,
-            default: ''
-        },
-
-        modelValue: {
-            type: String,
-            required: true,
-        },
-        todayDate: {
-            type: Boolean,
-            default: false,
-        },
-        disableBefore: {
-            default: null
-        }
+const emit=defineEmits([
+    'update:modelValue', 'validate'
+])
+const props=defineProps({
+    id: {
+        type: String,
     },
-    setup(props, {emit}) {
-
-        const pickerElement=ref('');
-
-        onMounted(() => {
-            if (props.todayDate) {
-                emit("update:modelValue", dateHelper.currentBsDate());
-            }
-
-            pickerElement.value.nepaliDatePicker({
-                ndpYear: true,
-                ndpMonth: true,
-                disableBefore: props.disableBefore,
-                onChange: function (e) {
-                    emit("update:modelValue", e.bs);
-                },
-            });
-        });
-
-        return {
-            pickerElement
-        }
+    inputType: {
+        type: String,
+        default: "text",
     },
-};
+    inputClass: {
+        type: String,
+        default: "form-control",
+    },
+    labelClass:{
+        type:String,
+        default:'form-label fw-bolder'
+    },
+    label: {
+        type: String,
+    },
+    placeholder: {
+        type: String
+    },
+    disabled: {
+        type: Boolean,
+        default: false
+    },
+    error: {
+        type: String,
+        default: ''
+    },
+
+    modelValue: {
+        type: String,
+        required: true,
+    },
+    todayDate: {
+        type: Boolean,
+        default: false,
+    },
+    disableBefore: {
+        default: null
+    }
+})
+
+const pickerElement=ref('');
+
+onMounted(() => {
+    if (props.todayDate) {
+        emit("update:modelValue", dateHelper.currentBsDate());
+        emit("validate");
+    }
+
+    pickerElement.value.nepaliDatePicker({
+        ndpYear: true,
+        ndpMonth: true,
+        disableBefore: props.disableBefore,
+        onChange: function (e) {
+            emit("update:modelValue", e.bs);
+            emit("validate");
+        },
+    });
+});
 </script>
