@@ -72,7 +72,7 @@ Route::prefix('generalSetting')->as('generalSetting.')->group(function () {
 });
 Route::prefix('userManagement')->as('userManagement.')->group(function () {
     Route::get('role/{role}/letterHead', [RoleController::class, 'letterHeadPage'])->name('role.letterHead');
-    Route::post('role/{role}/letterHead', [RoleController::class, 'letterHeadStore'])->name('role.letterHead');
+    Route::post('role/{role}/letterHead', [RoleController::class, 'letterHeadStore'])->name('role.letterHead.store');
     Route::resource('role', RoleController::class);
     Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
     Route::resource('user', UserController::class);
