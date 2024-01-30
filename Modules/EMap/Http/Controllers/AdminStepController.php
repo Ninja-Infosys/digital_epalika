@@ -257,7 +257,8 @@ class AdminStepController extends Controller
                     "status" => $request->input('status'),
                     "comment" => $request->input('comment'),
                     "data" => $formStore->data,
-                    "fields" => $formStore->fields
+                    "fields" => $formStore->fields,
+                     "document"=>$formStore->document
                 ]);
 
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');

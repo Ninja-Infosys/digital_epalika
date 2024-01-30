@@ -102,20 +102,18 @@
                                 <td>
 
 
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#view_formp{{ $formStoreStatus->id }}">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
+                                    @if(!empty($formStoreStatus->document))
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#view_form_status{{ $formStoreStatus->id }}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    @endif
                                     <!-- view file model pass url dynamically in the model-->
-                                    <div class="modal fade" id="view_formp{{ $formStoreStatus->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                    <div class="modal fade" id="view_form_status{{ $formStoreStatus->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    @foreach($formStoreStatus->data as $key=>$data)
-                                                        {{ $key . ': ' . $data }} @if (!$loop->last)
-                                                            <br>
-                                                        @endif
-                                                    @endforeach
+                                                    <iframe src="{{$formStoreStatus->document_url}}"></iframe>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
@@ -128,9 +126,9 @@
                                 <td>{{$formStoreStatus->created_at->toDateString()}}</td>
                                 <td>
 
-                                    <a href="{{ route('organization.admin.formStoreStatusPrint',[$formDataType,$formStore,$formStoreStatus]) }}">
-                                        <i class="fa fa-print"></i>
-                                    </a>
+{{--                                    <a href="{{ route('organization.admin.formStoreStatusPrint',[$formDataType,$formStore,$formStoreStatus]) }}">--}}
+{{--                                        <i class="fa fa-print"></i>--}}
+{{--                                    </a>--}}
                                 </td>
                             </tr>
                             @endforeach
