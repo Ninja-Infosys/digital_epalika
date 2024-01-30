@@ -66,9 +66,9 @@ Route::prefix('print')->as('print.')->controller(PrintController::class)->group(
 Route::get('login/locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unlock');
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     // Dummy route, we can use the route() helper to give formiojs the base path for this group
     Route::get('/')->name('index');
