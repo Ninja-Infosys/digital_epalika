@@ -55,7 +55,7 @@
                                         <td>{{ $mapPassGroup->title }}</td>
                                         <td>{{ get_nepali_number($mapPassGroup->users_count) }}</td>
                                         <td>
-                                            @can('mapApply_access')
+                                            @can('mapFee_access')
                                                 <a data-bs-type="edit" class="{{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                     href="{{ route('emap.admin.mapPassGroup.updateStatus', $mapPassGroup) }}">
                                                     <i
