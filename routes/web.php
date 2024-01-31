@@ -66,9 +66,9 @@ Route::prefix('print')->as('print.')->controller(PrintController::class)->group(
 Route::get('login/locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unlock');
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     // Dummy route, we can use the route() helper to give formiojs the base path for this group
     Route::get('/')->name('index');
@@ -104,12 +104,12 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
 
 
 Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
-Route::prefix('organization')->as('organization.')->group(function () {    
+Route::prefix('organization')->as('organization.')->group(function () {
     // Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
     Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
     Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
     Route::get('register-person', [OrganizationAuthController::class, 'showOrganizationRegisterFormPerson'])->name('register.formPerson');
-    
+
     Route::get('{organization}/invitation', [OrganizationAuthController::class, 'invitation'])->name('invitation');
     Route::get('password/create', [OrganizationAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
     Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
@@ -121,5 +121,5 @@ Route::prefix('organization')->as('organization.')->group(function () {
         Route::resource('taxClearance', TaxClearanceController::class);
         Route::resource('renewed', RenewedController::class);
     });
-   
+
 });

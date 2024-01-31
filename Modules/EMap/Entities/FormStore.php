@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\DocumentStatusEnum;
 
 class FormStore extends Model
@@ -32,7 +33,8 @@ class FormStore extends Model
         'form_data_type',
         'form_data_id',
         'data',
-        'fields'
+        'fields',
+        'document'
     ];
 
     protected $casts = [
@@ -78,5 +80,20 @@ class FormStore extends Model
     public function uploaded_by(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function setDocumentAttribute($value): void
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['document'] = $value->store('formStore','public');
+        }else{
+            $this->attributes['document'] = null;
+        }
+    }
+
+    public function getDocumentUrlAttribute(): string
+    {
+        return $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) :'';
     }
 }

@@ -13,6 +13,7 @@ use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\PaymentStore;
@@ -210,5 +211,25 @@ class MapApplyController extends Controller
         toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
 
         return back();
+    }
+
+    public function uploadDocument(Request $request,FormStore $formStore)
+    {
+      $data =  $request->validate([
+           'document'=>['required','file']
+       ]);
+
+      DB::transaction(function () use ($data,$request,$formStore){
+          $formStore->update($data);
+          $existingFormStore = FormStore::find($formStore->id);
+          FormStoreStatus::where('form_store_id', $formStore->id)
+              ->orderBy('id', 'desc')
+              ->first()?->update([
+                  'document' => $existingFormStore->document
+              ]);
+      });
+        toast('File Upload Successfully','success');
+        return back();
+
     }
 }

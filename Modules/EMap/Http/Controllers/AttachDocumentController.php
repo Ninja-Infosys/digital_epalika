@@ -197,7 +197,16 @@ class AttachDocumentController extends Controller
                 if ($formStore->status == DocumentStatusEnum::PENDING) {
                     $formStore->update([
                         'data' => $data['data'],
+                        'document'=>null
                     ]);
+                    if($formStore->formStoreStatuses->count() > 0)
+                    {
+                        FormStoreStatus::where('form_store_id', $formStore->id)
+                            ->orderBy('id', 'desc')
+                            ->first()?->update([
+                                'document' => null
+                            ]);
+                    }
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 } elseif ($formStore->status == DocumentStatusEnum::REVIEW) {
                     toast('Form Data On Review You Cannot Change Data', 'error');
@@ -208,11 +217,13 @@ class AttachDocumentController extends Controller
                         "form_store_id" => $formStore->id,
                         "status" => DocumentStatusEnum::PENDING->value,
                         "data" => $data['data'],
-                        "fields" => $formStore->fields
+                        "fields" => $formStore->fields,
                     ]);
+
                     $formStore->update([
                         "status" => DocumentStatusEnum::PENDING->value,
                         'data' => $data['data'],
+                        'document'=> null
                     ]);
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
@@ -636,7 +647,7 @@ class AttachDocumentController extends Controller
             $template = str_replace($placeholder, $value, $template);
         }
 
-        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType'));
+        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType','formStore'));
     }
 
     public function formStoreStatusPrint(FormDataType $formDataType, FormStore $formStore,FormStoreStatus $formStoreStatus)

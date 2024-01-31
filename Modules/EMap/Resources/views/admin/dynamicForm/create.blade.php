@@ -7,7 +7,7 @@
                 <div class="mb-3">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.recommendation.dashboard') }}">
+                            <a href="{{ route('admin.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
                                     alt="document-icon">
                                 गृहपृष्ठ
