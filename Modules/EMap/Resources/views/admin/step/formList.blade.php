@@ -108,12 +108,12 @@
                                     <td>
                                         @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
                                             <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @else
                                             <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-success">
+                                               class="btn btn-xs bn-outline-success">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endif
