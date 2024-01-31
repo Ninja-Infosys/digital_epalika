@@ -87,6 +87,8 @@ class FormStore extends Model
         if(!empty($value) && !is_string($value))
         {
             $this->attributes['document'] = $value->store('formStore','public');
+        }else{
+            $this->attributes['document'] = null;
         }
     }
 
