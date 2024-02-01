@@ -32,7 +32,7 @@ class MapApplyFormApiController extends Controller
     public function getMapApplySetting(): array
     {
         return [
-            'setting' => SettingResource::make(MapSetting::with('landmeasurement')->first()),
+            'setting' => SettingResource::make(MapSetting::with('landMeasurement', 'standardLandMeasurement')->first()),
             'organizations' => OrganizationResource::collection(Organization::with('organizationDetail')->get()),
             'mapFees' => MapFeeResource::collection(MapFee::with('unit')->get()),
             'landUseAreas' => LandUseAreaResource::collection(LandUseArea::all()),
