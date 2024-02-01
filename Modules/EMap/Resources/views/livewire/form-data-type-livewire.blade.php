@@ -10,7 +10,7 @@
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="order" class="form-label">क्रम शन्ख्य </label>
+            <label for="order" class="form-label">क्रम स्थान </label>
             <div class="d-flex justify-content-between gap-1">
                 <input type="number" id="order" class="form-control" value="{{old('order')}}" wire:model="form.order" name="order" />
             </div>
