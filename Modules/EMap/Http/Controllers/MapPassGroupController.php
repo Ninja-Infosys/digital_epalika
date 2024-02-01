@@ -56,16 +56,39 @@ class MapPassGroupController extends Controller
     {
         DB::transaction(function () use ($request, $mapPassGroup) {
             $mapPassGroup->update($request->validated());
-            foreach ($request->input('users') as $userId) {
-                $wardNos = $userId['ward_no'];
+            $existingUserIds = $mapPassGroup->users->pluck('id')->toArray();
+
+            foreach ($request->input('users') as $userData) {
+                $userId = $userData['user_id'];
+                $wardNos = $userData['ward_no'];
+
+                // If the user is not in the existing list, add them
+                if (!in_array($userId, $existingUserIds)) {
+                    $mapPassGroup->users()->attach($userId);
+                }
+
                 $condition = [
-                    'user_id' => $userId['user_id'],
+                    'user_id' => $userId,
                     'map_pass_group_id' => $mapPassGroup->id,
                 ];
                 $newWardNo = implode(',', $wardNos);
-                DB::table('map_pass_group_user')
-                    ->where($condition)
-                    ->update(['ward_no' => $newWardNo]);
+
+                // Check if the record exists, and update ward_no
+                $userRecord = DB::table('map_pass_group_user')->where($condition)->first();
+
+                if ($userRecord) {
+                    DB::table('map_pass_group_user')
+                        ->where($condition)
+                        ->update(['ward_no' => $newWardNo]);
+                } else {
+                    // If the record does not exist, create a new one
+                    DB::table('map_pass_group_user')->insert([
+                        'user_id' => $userId,
+                        'map_pass_group_id' => $mapPassGroup->id,
+                        'ward_no' => $newWardNo,
+                    ]);
+                }
+
             }
         });
 

@@ -107,10 +107,24 @@
                                     <td>{{$form->map_status?->label()}}</td>
                                     <td>
                                         @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
+                                            @if($form->map_group_id == $form->map_pass_group_id)
                                             <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
                                                class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            @else
+                                                @if($form->form_approve)
+                                                    <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
+                                                       class="btn btn-xs bn-outline-success">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
+                                                       class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                @endif
+                                            @endif
                                         @else
                                             <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
                                                class="btn btn-xs bn-outline-success">

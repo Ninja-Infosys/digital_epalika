@@ -71,6 +71,8 @@ class AdminStepController extends Controller
                 $form->map_status = $mapStatus;
                 return $form;
             });
+//        $MapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
+
         return view('emap::admin.step.formList', compact('mapApply', 'forms','order'));
     }
 
