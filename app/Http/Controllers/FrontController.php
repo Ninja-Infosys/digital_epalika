@@ -168,27 +168,5 @@ class FrontController extends Controller
         return view('frontend.wardIndex', compact('ward'));
     }
 
-    public function mobileUser(MobileUser $mobileUser)
-    {
-        $mobileUser = Auth::guard('mobile-user')->user();
-        return view('frontend.mobileUser.index',compact('mobileUser'));
 
-    }
-    public function updatePassword(Request $request)
-    {
-        $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|string|min:7',
-        ]);
-        $user = Auth::guard('mobile-user')->user();
-        if (!Hash::check($request->current_password, $user->password)) {
-            toast('Incorrect current password', 'error');
-            return back();
-        }
-        $user->update([
-            'password' =>($request->password),
-        ]);
-        toast('पासवर्ड सफलतापूर्वक परिवर्तन गरियो', 'success');
-        return redirect()->route('digital-service');
-    }
 }

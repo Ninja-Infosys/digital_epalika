@@ -8,9 +8,11 @@ use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MobileUser\MobileUserAuthController;
+use App\Http\Controllers\MobileUser\MobileUserDetailController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Models\MobileUserDetail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,16 +102,18 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
     Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
     Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
+    Route::resource('mobileUserDetail', MobileUserDetailController::class);
+
 });
 
 
 Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
-Route::prefix('organization')->as('organization.')->group(function () {    
+Route::prefix('organization')->as('organization.')->group(function () {
     // Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
     Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
     Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
     Route::get('register-person', [OrganizationAuthController::class, 'showOrganizationRegisterFormPerson'])->name('register.formPerson');
-    
+
     Route::get('{organization}/invitation', [OrganizationAuthController::class, 'invitation'])->name('invitation');
     Route::get('password/create', [OrganizationAuthController::class, 'create'])->name('password.create')->middleware(['password.check']);
     Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
@@ -121,5 +125,5 @@ Route::prefix('organization')->as('organization.')->group(function () {
         Route::resource('taxClearance', TaxClearanceController::class);
         Route::resource('renewed', RenewedController::class);
     });
-   
+
 });

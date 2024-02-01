@@ -20,8 +20,8 @@
             <div class="col-md-6">
                 <a class="btn btn-primary mt-4 d-block w-100 py-2" href="{{ route('mobileUser.editPassword') }}"> पासवर्ड अपडेट</a>
             </div>
-            <div class="col-md-12">
-                <a class="btn btn-danger mt-4 d-block w-100 py-2" href="{{ route('mobileUser.logout') }}"> लग-आउट</a>
+            <div class="col-md-6">
+                <a class="btn btn-danger mt-4 d-block w-100 py-2" style="margin-left: 95px;" href="{{ route('mobileUser.logout') }}"> लग-आउट</a>
             </div>
         </div>
     </div>

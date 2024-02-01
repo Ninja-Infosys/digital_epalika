@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MobileUser;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MobileUser\StoreMobileUserRequest;
 use App\Http\Requests\MobileUser\UpdatePasswordRequest;
 use App\Http\Requests\MobileUser\UpdateProfileRequest;
 use Illuminate\Http\RedirectResponse;
@@ -20,23 +21,18 @@ class MobileUserAuthController extends Controller
         return view('mobileUser.auth.register');
     }
 
-    public function signup(Request $request)
+
+    public function signup(StoreMobileUserRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required'],
-            'email' => ['required', 'email', 'unique:mobile_users,email'],
-            'phone' => ['required'],
-            'password' => ['required', 'min:7'],
-        ]);
-        MobileUser::create($validated);
+
+        MobileUser::create($request->validated());
+
         toast('सफलतापुर्बक सेवाग्राही रेजिस्टर हुनु भयो !!', 'success');
-        return redirect(route('mobileUser.login.form'));
+
+        return redirect(route('digital-service'));
     }
 
-    public function showMobileUserLoginForm()
-    {
-        return view('mobileUser.auth.login');
-    }
+
 
     public function mobileUserLogin(Request $request): RedirectResponse|string
     {
@@ -98,10 +94,9 @@ class MobileUserAuthController extends Controller
             return back();
         }
         $user->update([
-            'password' =>($request->password),
+            'password' => ($request->password),
         ]);
         toast('पासवर्ड सफलतापूर्वक परिवर्तन गरियो', 'success');
         return redirect()->route('digital-service');
     }
-
-    }
+}

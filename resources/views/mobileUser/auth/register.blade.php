@@ -23,13 +23,12 @@
     @endif
 </head>
 
-<body class="auth-page"
-    style="background-image: url({{ asset('images/mountain_photo.jpg') }}); margin-bottom: 10px;">
+<body class="auth-page" style="background-image: url({{ asset('images/mountain_photo.jpg') }}); margin-bottom: 10px;">
     @include('sweetalert::alert');
-    <div class="pt-4 pb-2"    >
-        <div class="container-fluid" >
+    <div class="pt-4 pb-2">
+        <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-md-4 m-auto" >
+                <div class="col-md-4 m-auto">
                     <div class="card p-0">
                         <div class="row">
                             <div class="col-md-12 m-auto">
@@ -42,8 +41,8 @@
                                             <p class="fw-bold py-0 text-white">
                                                 {{ $officeSetting->localBody->local_body ?? '' }}</p>
                                             <span class="fw-semibold fs-4 text-white">
-                                                {{ $officeSetting->province->province ?? '' }},
-                                                {{ $officeSetting->district->district ?? '' }}, नेपाल
+                                                {{ $officeSetting->province->province ?? '' }}
+                                                {{ $officeSetting->district->district ?? '' }} नेपाल
                                             </span>
                                         </h3>
                                     </div>
@@ -56,40 +55,63 @@
                                             <p class="fw-bold text-dark my-1" style="font-size: 14px;">(Digital Palika
                                                 Management System)</p>
                                         </h3>
-                                        <form action="{{ route('mobileUser.register.signup') }}" method="post">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        <form action="{{ route('mobileUser.register.signup') }}" method="post"
+                                            enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-2">
-                                                <label for="name" class="form-label fw-bold">प्रयोगकर्ता नाम
+                                                <label for="name" class="form-label fw-bold">सेवाग्राहीको नाम
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <input name="name"
                                                     class="form-control @error('name') is-invalid @enderror"
                                                     type="name" value="{{ old('name') }}" id="name"
-                                                    placeholder="name Address" />
+                                                    placeholder="सेवाग्राहीको नाम" />
                                                 @error('name')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
-                                                <label for="phone" class="form-label fw-bold">प्रयोगकर्ता मोबाइल नंबर
+                                                <label for="avatar" class="form-label fw-bold">सेवाग्राहीको फोटो
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input name="avatar"
+                                                    class="form-control @error('avatar') is-invalid @enderror"
+                                                    type="file" value="{{ old('avatar') }}" accept="image/*"
+                                                    id="avatar" />
+                                                @error('avatar')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="phone" class="form-label fw-bold">सेवाग्राहीको मोबाइल
+                                                    नंबर
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <input name="phone"
                                                     class="form-control @error('phone') is-invalid @enderror"
                                                     type="phone" value="{{ old('phone') }}" id="phone"
-                                                    placeholder="phone Address" />
+                                                    placeholder="सेवाग्राहीको मोबाइल नंबर" />
                                                 @error('phone')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
-                                                <label for="email" class="form-label fw-bold">प्रयोगकर्ता इमेल
+                                                <label for="email" class="form-label fw-bold">सेवाग्राहीको इमेल
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <input name="email"
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     type="email" value="{{ old('email') }}" id="email"
-                                                    placeholder="Email Address" />
+                                                    placeholder="सेवाग्राहीको इमेल" />
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -101,8 +123,22 @@
                                                 </label>
                                                 <input name="password"
                                                     class="form-control @error('password') is-invalid @enderror"
-                                                    type="password" id="password" placeholder="Password" />
+                                                    type="password" id="password" placeholder="पासवर्ड" />
                                                 @error('password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="password_confirmation" class="form-label fw-bold">पासवर्ड
+                                                    सुनिस्चित
+                                                    गर्नुहोस
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input name="password_confirmation"
+                                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                    type="password" value="{{ old('password_confirmation') }}"
+                                                    id="password_confirmation" placeholder="पासवर्ड" />
+                                                @error('password_confirmation')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -118,9 +154,9 @@
 
                                             <div class="d-flex justify-content-center mt-3">
                                                 <button type="submit"
-                                                        class="btn btn-primary btn-block waves-effect waves-light w-50 m-auto fs-5">
-                                                        साइन-इन
-                                                    </button>
+                                                    class="btn btn-primary btn-block waves-effect waves-light w-50 m-auto fs-5">
+                                                    साइन-इन
+                                                </button>
 
                                             </div>
                                         </form>
@@ -128,7 +164,8 @@
 
                                             <div class="col-12 text-center">
                                                 <p>
-                                                    <a href="{{ route('mobileUser.login.form') }}" class="text-dark-50 ms-1">Already have account? Login</a>
+                                                    <a href="{{ route('mobileUser.login.form') }}"
+                                                        class="text-dark-50 ms-1">Already have account? Login</a>
                                                 </p>
                                             </div>
                                         </div>
