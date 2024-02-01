@@ -507,7 +507,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="applicantDetail.citizenship_no">१.५ नागरिकत नम्बर</label>
+                <label class="form-label" for="applicantDetail.citizenship_no">१.५ नागरिकता नम्बर</label>
                 <input class="form-control form-control-sm" type="text" id="applicantDetail.citizenship_no"
                     wire:model="applicantDetail.citizenship_no" placeholder="नागरिकत नम्बर">
                 @error('applicantDetail.citizenship_no')
