@@ -284,7 +284,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="citizenship_no">१.६ नागरिकता नम्बर</label>
+                <label class="form-label" for="citizenship_no">१.५ नागरिकता नम्बर</label>
                 <input class="form-control form-control-sm" type="text" id="citizenship_no"
                     wire:model="landOwner.citizenship_no" placeholder="नागरिकता नम्बर">
                 @error('landOwner.citizenship_no')
@@ -292,7 +292,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="citizenship_issue_date">१.७ नागरिकता लिएको मिति</label>
+                <label class="form-label" for="citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
                 <input class="form-control form-control-sm" type="text" id="citizenship_issue_date"
                     wire:model="landOwner.citizenship_issue_date" placeholder="yyyy/mm/dd">
                 @error('landOwner.citizenship_issue_date')
@@ -300,7 +300,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="landOwner.citizenship_issue_district_id">१.५ नागरिकता लिएको
+                <label class="form-label" for="landOwner.citizenship_issue_district_id">१.७ नागरिकता लिएको
                     जिल्ला</label>
                 <select class="form-select form-select-sm" wire:model="landOwner.citizenship_issue_district_id"
                     id="landOwner.citizenship_issue_district_id">
@@ -386,7 +386,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_no">१.६ नागरिकता नम्बर</label>
+                <label class="form-label" for="houseOwner.citizenship_no">१.५ नागरिकता नम्बर</label>
                 <input class="form-control form-control-sm" type="text" id="houseOwner.citizenship_no"
                     wire:model="houseOwner.citizenship_no" placeholder="नागरिकता नम्बर">
                 @error('houseOwner.citizenship_no')
@@ -394,7 +394,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_issue_date">१.७ नागरिकता लिएको मिति</label>
+                <label class="form-label" for="houseOwner.citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
                 <input class="form-control form-control-sm" type="text" id="houseOwner.citizenship_issue_date"
                     wire:model="houseOwner.citizenship_issue_date" placeholder="yyyy/mm/dd">
                 @error('houseOwner.citizenship_issue_date')
@@ -402,7 +402,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_issue_district_id">१.५ नागरिकता लिएको
+                <label class="form-label" for="houseOwner.citizenship_issue_district_id">१.७ नागरिकता लिएको
                     जिल्ला</label>
                 <select class="form-select form-select-sm" wire:model="houseOwner.citizenship_issue_district_id"
                     id="houseOwner.citizenship_issue_district_id">
@@ -507,7 +507,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="applicantDetail.citizenship_no">१.५ नागरिकत नम्बर</label>
+                <label class="form-label" for="applicantDetail.citizenship_no">१.४ नागरिकत नम्बर</label>
                 <input class="form-control form-control-sm" type="text" id="applicantDetail.citizenship_no"
                     wire:model="applicantDetail.citizenship_no" placeholder="नागरिकत नम्बर">
                 @error('applicantDetail.citizenship_no')
@@ -515,7 +515,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-4">
-                <label class="form-label" for="applicantDetail.citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
+                <label class="form-label" for="applicantDetail.citizenship_issue_date">१.५ नागरिकता लिएको मिति</label>
                 <input class="form-control form-control-sm" type="text"
                     id="applicantDetail.citizenship_issue_date" wire:model="applicantDetail.citizenship_issue_date"
                     placeholder="yyyy/mm/dd">
@@ -524,7 +524,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="applicantDetail.citizenship_issue_district_id">१.४ नागरिकता लिएको
+                <label class="form-label" for="applicantDetail.citizenship_issue_district_id">१.६ नागरिकता लिएको
                     जिल्ला</label>
                 <select class="form-select form-select-sm" wire:model="applicantDetail.citizenship_issue_district_id">
                     <option value="">--- जिल्ला छान्नुहोस् ---</option>
