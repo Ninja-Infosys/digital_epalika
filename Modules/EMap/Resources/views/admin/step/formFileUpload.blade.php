@@ -21,7 +21,13 @@
             </div>
         </div>
     </div>
-
+    @foreach ($form->formDataTypes as $formDataType)
+        @if ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::FILE)
+            <x-approve-file-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+        @elseif ($formDataType->type == Modules\EMap\Enums\FormTypeEnum::FORM)
+            <x-approve-form-component :form-data-type="$formDataType" :map-apply="$mapApply" :form="$form"/>
+        @endif
+    @endforeach
     @push('scripts')
         <script>
             $(".printDetail").on("click", function (e) {
