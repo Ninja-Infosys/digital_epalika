@@ -191,8 +191,7 @@ trait EMapTemplateTrait
 
         $replace = array_merge(
             $this->getLetterHeadReplacement(),
-            $this->getMapApplyReplacement(),
-            $replace,
+            $this->getMapApplyReplacement(),       
             $this->getLandDetailReplacement(),
             $this->getLandOwnerReplacement(),
             $this->getHouseOwnerReplacement(),
@@ -202,7 +201,8 @@ trait EMapTemplateTrait
             $this->getBuildingDetailsReplacement(),
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
-            $this->getContractorDetailsReplacement()
+            $this->getContractorDetailsReplacement(),
+            $replace
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
@@ -211,8 +211,8 @@ trait EMapTemplateTrait
     private function getLetterHeadReplacement(): array
     {
         return [
-            '[@letterHead]' => letterHead() ?? '',
-            '[@letterHeadEn]' => letterHeadEn() ?? '',
+            '[@letterHead]' =>$this->letterHead() ?? '',
+            '[@letterHeadEn]' =>$this->letterHeadEn() ?? '',
         ];
     }
 
