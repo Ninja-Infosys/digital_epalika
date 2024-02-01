@@ -8,9 +8,11 @@ use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MobileUser\MobileUserAuthController;
+use App\Http\Controllers\MobileUser\MobileUserDetailController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Models\MobileUserDetail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,6 +102,8 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
     Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
     Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
+    Route::resource('mobileUserDetail', MobileUserDetailController::class);
+
 });
 
 

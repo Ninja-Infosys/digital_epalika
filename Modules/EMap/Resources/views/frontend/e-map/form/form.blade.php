@@ -1,6 +1,9 @@
 @extends('frontend.layouts.master')
+@push('styles')
+    @vite(['resources/vue/main.js'])
+@endpush
 @section('content')
-    <section class="inner-section">
+    <section id="map-app" class="inner-section">
         <div class="breadcrumb d-flex pt-2">
             <div class="container">
                 <div class="row">
@@ -26,7 +29,7 @@
                 <h4 class="fw-semibold text-left">नक्सा दरखास्त फारम</h4>
                 <div class="row justify-content-center">
                     <div class="p-4">
-                        <livewire:emap::map-application-form />
+                        <map-application></map-application>
                     </div>
                 </div>
             </div>

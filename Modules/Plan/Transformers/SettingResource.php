@@ -22,8 +22,7 @@ class SettingResource extends JsonResource
             'map_request_form_format' => $this->map_request_form_format ?? '',
             'land_measurement_id' => $this->land_measurement_id ?? '',
             'land_measurement_standard_id' => $this->land_measurement_standard_id ?? '',
-
-
+            'standard_land_measurement' => $this->standardLandMeasurement->title ?? ''
         ];
 
     }

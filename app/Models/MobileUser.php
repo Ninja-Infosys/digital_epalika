@@ -14,6 +14,9 @@ use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Roaster\Entities\Trainee;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Revenue\Entities\TaxPayer;
 
 class MobileUser extends Authenticatable
 {
@@ -32,7 +35,11 @@ class MobileUser extends Authenticatable
         'email',
         'phone',
         'is_active',
-        'password'
+        'password',
+        'tax_prayer_id',
+        'approved_at',
+        'avatar'
+
     ];
     protected $hidden = [
         'password',
@@ -49,12 +56,7 @@ class MobileUser extends Authenticatable
         }
     }
 
-    public function getProfilePhotoUrlAttribute(): string
-    {
-        return $this->attributes['profile_photo_path']
-            ? Storage::disk('public')->url($this->attributes['profile_photo_path'])
-            : asset('images/user_icon.jpg');
-    }
+
 
     /*   public function setProfilePhotoPathAttribute($value): void
        {
@@ -100,5 +102,34 @@ class MobileUser extends Authenticatable
     public function sipharishCreates(): HasMany
     {
         return $this->hasMany(SipharishCreate::class);
+    }
+
+    public function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: function (?string $value) {
+                if (!empty($value) && Storage::disk('public')->exists($value)) {
+                    return Storage::disk('public')->url($value);
+                }
+
+                return asset('assets/backend/images/user_icon.jpg');
+            },
+            set: function ($value) {
+                if (!empty($value) && !is_string($value)) {
+                    return $value->store('mobileUser', 'public');
+                }
+            }
+        );
+    }
+
+    public function taxPayer(): BelongsTo
+    {
+        return $this->belongsTo(TaxPayer::class);
+    }
+
+
+    public function mobileUserDetail(): HasMany
+    {
+        return $this->hasMany(MobileUserDetail::class);
     }
 }

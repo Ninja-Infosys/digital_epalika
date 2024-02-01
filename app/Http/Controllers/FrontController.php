@@ -15,6 +15,8 @@ use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 class FrontController extends Controller
 {
     use NepaliDateConverter;
@@ -166,10 +168,5 @@ class FrontController extends Controller
         return view('frontend.wardIndex', compact('ward'));
     }
 
-    public function mobileUser(MobileUser $mobileUser)
-    {
-        $mobileUser = Auth::guard('mobile-user')->user();
-        return view('frontend.mobileUser.index',compact('mobileUser'));
 
-    }
 }

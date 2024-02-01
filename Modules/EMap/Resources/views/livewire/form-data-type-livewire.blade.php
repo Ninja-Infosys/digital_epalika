@@ -10,7 +10,7 @@
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="order" class="form-label">क्रम शन्ख्य </label>
+            <label for="order" class="form-label">क्रम स्थान </label>
             <div class="d-flex justify-content-between gap-1">
                 <input type="number" id="order" class="form-control" value="{{old('order')}}" wire:model="form.order" name="order" />
             </div>
@@ -27,6 +27,19 @@
                 @endforeach
             </select>
             @error('form.map_pass_group_id')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <label for="map_group_id" class="form-label">फारम स्वीकृति दिने समूह</label>
+            <select id="map_group_id" name="map_group_id" wire:model="form.map_group_id" class="form-select" required>
+                <option value="">-- छान्नुहोस् --</option>
+                @foreach($mapPassGroups as $mapPassGroup)
+                    <option value="{{$mapPassGroup->id}}" {{old('map_pass_group_id') == $mapPassGroup->id ? 'selected' : ''}}>{{$mapPassGroup->title}}</option>
+                @endforeach
+            </select>
+            @error('form.map_group_id')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>

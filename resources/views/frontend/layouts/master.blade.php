@@ -11,6 +11,7 @@
     <link href="{{asset('assets/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/icons.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/datepicker.min.css')}}">
     @stack('styles')
     @livewireStyles
 </head>

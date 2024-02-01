@@ -12,6 +12,7 @@
         "@tailwindcss/typography": "^0.5.2",
         "@vitejs/plugin-vue": "^3.0.0",
         "autoprefixer": "^10.4.7",
+        "eslint-plugin-vue": "^8.0.3",
         "formiojs": "^4.12.7",
         "laravel-vite-plugin": "^0.6.0",
         "postcss": "^8.4.14",
@@ -21,6 +22,13 @@
     },
     "dependencies": {
         "@fullcalendar/core": "^5.11.3",
-        "@vitejs/plugin-vue": "^3.2.0"
+        "@vitejs/plugin-vue": "^3.2.0",
+        "@vueform/multiselect": "^2.6.6",
+        "axios": "^1.6.7",
+        "pinia": "^2.0.0-rc.10",
+        "sweetalert2": "^11.10.4",
+        "vue-router": "^4.0.13",
+        "vue-toastification": "^2.0.0-rc.5",
+        "yup": "^1.3.3"
     }
 }

@@ -8,17 +8,20 @@ use Illuminate\Validation\Rule;
 
 class StoreMobileUserRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
-         return Gate::allows('');
+        return true;
     }
 
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:20'],
-            'email' => ['required', 'email', Rule::unique('mobile_users', 'email')->withoutTrashed()->ignore(auth()->user())],
-            'phone' => ['required', Rule::unique('mobile_users', 'phone')->withoutTrashed()->ignore(auth()->user())],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', Rule::unique('mobile_users', 'email')],
+            'password' => ['required', 'confirmed'],
+            'tax_payer_id' => ['nullable', Rule::exists('tax_payers', 'id')->withoutTrashed()],
+            'phone' => ['required', 'regex:/^(?:\+?9779\d{9}|9\d{9})$/', Rule::unique('mobile_users', 'phone')],
+            'avatar' => ['nullable','image', 'mimes:png,jpg,jpeg']
         ];
     }
 }

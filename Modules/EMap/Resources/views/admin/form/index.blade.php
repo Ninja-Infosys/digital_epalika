@@ -55,13 +55,13 @@
                                         <td>{{ $form->title }}</td>
                                         <td>{{ $form->order }}</td>
                                         <td>
-                                            @can('recommendationCategory_access')
+                                           
                                                 <a data-bs-type="edit" class="{{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                     href="{{ route('emap.admin.form.updateStatus', $form) }}">
                                                     <i
                                                         class="fa fa-2x {{ $form->status == 'active' ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
                                                 </a>
-                                            @endcan
+                                         
                                         </td>
                                         <td class="d-flex">
                                             @can('mapFee_edit')

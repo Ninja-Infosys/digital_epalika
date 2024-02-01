@@ -42,7 +42,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_no">१.६ नागरिकता नम्बर</label>
+                <label class="form-label" for="houseOwner.citizenship_no">१.५ नागरिकता नम्बर</label>
                 <input class="form-control form-control-sm" type="text" id="houseOwner.citizenship_no"
                        wire:model="houseOwner.citizenship_no"
                        placeholder="नागरिकता नम्बर" {{$editForm ? '' : 'disabled'}}>
@@ -51,7 +51,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_issue_date">१.७ नागरिकता लिएको मिति</label>
+                <label class="form-label" for="houseOwner.citizenship_issue_date">१.६ नागरिकता लिएको मिति</label>
                 <input class="form-control form-control-sm" type="text" id="houseOwner.citizenship_issue_date"
                        wire:model="houseOwner.citizenship_issue_date"
                        placeholder="yyyy/mm/dd" {{$editForm ? '' : 'disabled'}}>
@@ -60,7 +60,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_issue_district_id">१.५ नागरिकता लिएको
+                <label class="form-label" for="houseOwner.citizenship_issue_district_id">१.७ नागरिकता लिएको
                     जिल्ला</label>
                 <select class="form-select form-select-sm" wire:model="houseOwner.citizenship_issue_district_id"
                         id="houseOwner.citizenship_issue_district_id" {{$editForm ? '' : 'disabled'}}>

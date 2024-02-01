@@ -14,13 +14,11 @@ trait EMapTemplateTrait
 {
     private array $template = [
         [
-            'title' => 'कार्यलय लेटर हेड',
-            'data' => [
-                'हेडर' => '[@header]',
-                'लेटर हेड' => '[@letter_head]'
-            ],
+        
             'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
+                'कार्यालय लेटर हेड' => '[@letterHead]',
+                'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
                 'दर्ता नम्बर' => '[@registration_no]',
                 'दर्ता मिति' => '[@registration_date]',
                 'निर्माण कार्यको किसिम' => '[@construction_type]',
@@ -191,8 +189,7 @@ trait EMapTemplateTrait
 
         $replace = array_merge(
             $this->getLetterHeadReplacement(),
-            $this->getMapApplyReplacement(),
-            $replace,
+            $this->getMapApplyReplacement(),       
             $this->getLandDetailReplacement(),
             $this->getLandOwnerReplacement(),
             $this->getHouseOwnerReplacement(),
@@ -202,7 +199,8 @@ trait EMapTemplateTrait
             $this->getBuildingDetailsReplacement(),
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
-            $this->getContractorDetailsReplacement()
+            $this->getContractorDetailsReplacement(),
+            $replace
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
@@ -211,14 +209,15 @@ trait EMapTemplateTrait
     private function getLetterHeadReplacement(): array
     {
         return [
-            '[@header]' => letterHead(),
-            '[@letter_head]' => letterHead('letter_head'),
+          
         ];
     }
 
     private function getMapApplyReplacement(): array
     {
         return [
+            '[@letterHead]' =>$this->letterHead() ?? '',
+            '[@letterHeadEn]' =>$this->letterHeadEn() ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
             '[@registration_date]' => $this->registration_date ?? '',
             '[@construction_type]' => $this->construction_type?->label() ?? '',

@@ -37,6 +37,8 @@ enum DetailsRegardingCriteriaEnum: string
         };
     }
 
+
+
     public function getFormula(self $value)
     {
         switch ($value) {

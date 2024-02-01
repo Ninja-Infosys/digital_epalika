@@ -19,7 +19,7 @@ class StoreRegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:mobile_users,email',
             'phone' => 'required',
-            'password' => 'required|min:7',
+            'password' => ['required', 'confirmed', 'min:7'],
         ];
     }
 
