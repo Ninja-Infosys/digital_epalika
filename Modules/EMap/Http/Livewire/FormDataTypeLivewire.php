@@ -18,6 +18,7 @@ class FormDataTypeLivewire extends Component
         'title' => null,
         'order' => null,
         'map_pass_group_id' => null,
+        'map_group_id'=>null,
         'need_from' => null,
         'formDataType' => [],
         'show_to_consultancy'=>null
@@ -35,6 +36,7 @@ class FormDataTypeLivewire extends Component
             $this->form['title'] = $formData->title;
             $this->form['order'] = $formData->order;
             $this->form['map_pass_group_id'] = $formData->map_pass_group_id;
+            $this->form['map_group_id'] = $formData->map_group_id;
             $this->form['need_from'] = $formData->need_from->value;
             $this->form['show_to_consultancy'] = $formData->show_to_consultancy;
 
@@ -95,6 +97,7 @@ class FormDataTypeLivewire extends Component
         "form.title" => ['required'],
         "form.order" => ['nullable'],
         "form.map_pass_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
+        "form.map_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.need_from" => ['required'],
         'form.show_to_consultancy' => ['required_if:form.need_from,==,office'],
         "form.formDataType" => ['required', 'array'],

@@ -42,6 +42,7 @@ class MapPassGroup extends Model
         return $this->belongsToMany(User::class);
     }
 
+
     public function forms(): HasMany
     {
         return $this->hasMany(Form::class);

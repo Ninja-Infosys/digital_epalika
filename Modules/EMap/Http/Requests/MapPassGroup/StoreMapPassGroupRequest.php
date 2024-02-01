@@ -14,10 +14,10 @@ class StoreMapPassGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => ['required', 'string'],
             'users' => ['required', 'array'],
             'users.*.user_id' => ['required'],
             'users.*.ward_no' => ['required', 'array'],
-            'title' => ['required', 'string'],
         ];
     }
 }
