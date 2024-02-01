@@ -149,7 +149,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <iframe src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                    <img src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 700px; width:700px;"></img>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
