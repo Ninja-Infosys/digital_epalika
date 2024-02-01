@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\FormStoreNotification;
@@ -17,8 +18,11 @@ use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\Organization;
 use Modules\EMap\Entities\PaymentStore;
+use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
+use Modules\EMap\Enums\FormTypeEnum;
 
 class AdminStepController extends Controller
 {
@@ -357,4 +361,191 @@ class AdminStepController extends Controller
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses', 'formDataTypes.paymentStores.paymentStoreStatuses');
         return view('emap::admin.step.formFileUpload', compact('mapApply', 'form'));
     }
+
+
+    public function storeDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType)
+    {
+        $form->load('group.users');
+        if ($formDataType->type == FormTypeEnum::FILE) {
+            $data = $request->validate([
+                'documents' => ['array', 'required'],
+                'documents.*' => ['file']
+            ]);
+
+            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+                $appliedDocument = $mapApply->appliedDocuments()->create([
+                    'form_id' => $form->id,
+                    'status' => DocumentStatusEnum::PENDING->value,
+                    'uploaded_by_type' => User::class,
+                    'uploaded_by_id' => auth()->user()->id,
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id
+                ]);
+                foreach ($data['documents'] as $file) {
+                    $appliedDocument->appliedMapFiles()->create([
+                        "map_apply_id" => $mapApply->id,
+                        "document" => $file->store('appliedDocument', 'public'),
+                    ]);
+                }
+            });
+
+            toast('फाईल सफलतापूर्वक थपियो', 'success');
+        } elseif ($formDataType->type == FormTypeEnum::FORM) {
+            $data = $request->validate([
+                'data' => ['required'],
+            ]);
+
+            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+                $formStore =   $mapApply->formStores()->create([
+                    'form_id' => $form->id,
+                    'status' => DocumentStatusEnum::PENDING->value,
+                    'uploaded_by_type' => User::class,
+                    'uploaded_by_id' => auth()->user()->id,
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id,
+                    'data' => $data['data'],
+                    'fields' => $form->fields ?? ''
+                ]);
+
+            });
+            toast('फारम सफलतापूर्वक थपियो', 'success');
+        } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
+            $data = $request->validate([
+                'bill' => ['required', 'file'],
+                'amount' => ['required', 'numeric'],
+            ]);
+            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+                $paymentStore =  $mapApply->paymentStores()->create([
+                    'form_id' => $form->id,
+                    'status' => DocumentStatusEnum::PENDING->value,
+                    'uploaded_by_type' => Organization::class,
+                    'uploaded_by_id' => auth('organization')->user()->id,
+                    'bill' => $data['bill']->store('appliedDocument', 'public'),
+                    'amount' => $data['amount'],
+                    'form_data_type' => FormDataType::class,
+                    'form_data_id' => $formDataType->id
+                ]);
+            });
+            toast('फारम सफलतापूर्वक थपियो', 'success');
+        }
+        return redirect(route('organization.admin.formDetail', [$mapApply, $form]));
+    }
+
+    public function updateDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, $id)
+    {
+        $form->load('group.users');
+        if ($formDataType->type == FormTypeEnum::FILE) {
+            $data = $request->validate([
+                'documents' => ['array', 'required'],
+                'documents.*' => ['file']
+            ]);
+            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
+                $appliedDocument = AppliedDocument::find($id);
+                if ($appliedDocument->status == DocumentStatusEnum::PENDING) {
+                    foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                        $existingFile->forceDelete();
+                        foreach ($data['documents'] as $file) {
+                            $appliedDocument->appliedMapFiles()->create([
+                                "map_apply_id" => $mapApply->id,
+                                "document" => $file->store('appliedDocument', 'public'),
+                            ]);
+                        }
+                    }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                } elseif ($appliedDocument->status == DocumentStatusEnum::REVIEW) {
+                    toast('Document On Review You Cannot Change Document', 'error');
+                } elseif ($appliedDocument->status == DocumentStatusEnum::APPROVED) {
+                    toast('Document Is Already Approved', 'warning');
+                } else {
+                    $appliedDocument->update([
+                        'status' => DocumentStatusEnum::PENDING->value
+                    ]);
+                    $appliedDocumentStatus = AppliedDocumentStatus::create([
+                        "applied_document_id" => $appliedDocument->id,
+                        "status" => DocumentStatusEnum::PENDING->value
+                    ]);
+                    foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                        $existingFile->forceDelete();
+                    }
+                    foreach ($data['documents'] as $file) {
+                        $newAppliedDocuments = $appliedDocument->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $file->store('appliedDocument', 'public'),
+                        ]);
+
+                        $appliedDocumentStatus->appliedMapFiles()->create([
+                            "map_apply_id" => $mapApply->id,
+                            "document" => $newAppliedDocuments->document,
+                        ]);
+                    }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                }
+
+
+            });
+        } elseif ($formDataType->type == FormTypeEnum::FORM) {
+            $data = $request->validate([
+                'data' => ['required'],
+            ]);
+            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
+                $formStore = FormStore::find($id);
+                if ($formStore->status == DocumentStatusEnum::PENDING) {
+                    $formStore->update([
+                        'data' => $data['data'],
+                        'document'=>null
+                    ]);
+                    if($formStore->formStoreStatuses->count() > 0)
+                    {
+                        FormStoreStatus::where('form_store_id', $formStore->id)
+                            ->orderBy('id', 'desc')
+                            ->first()?->update([
+                                'document' => null
+                            ]);
+                    }
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                } elseif ($formStore->status == DocumentStatusEnum::REVIEW) {
+                    toast('Form Data On Review You Cannot Change Data', 'error');
+                } elseif ($formStore->status == DocumentStatusEnum::APPROVED) {
+                    toast('Form Data Is Already Approved', 'warning');
+                } else {
+                    FormStoreStatus::create([
+                        "form_store_id" => $formStore->id,
+                        "status" => DocumentStatusEnum::PENDING->value,
+                        "data" => $data['data'],
+                        "fields" => $formStore->fields,
+                    ]);
+
+                    $formStore->update([
+                        "status" => DocumentStatusEnum::PENDING->value,
+                        'data' => $data['data'],
+                        'document'=> null
+                    ]);
+                    toast('फाईल सफलतापूर्वक थपियो', 'success');
+                }
+
+            });
+            toast('फारम सफलतापूर्वक थपियो', 'success');
+        } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
+            $data = $request->validate([
+                'bill' => ['nullable', 'file'],
+                'amount' => ['required', 'numeric'],
+            ]);
+            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
+                $paymentStore = PaymentStore::find($id);
+                PaymentStoreStatus::create([
+                    "payment_store_id" => $paymentStore->id,
+                    "status" => DocumentStatusEnum::PENDING->value,
+                    'bill' => $paymentStore->bill,
+                    'amount' => $paymentStore->amount,
+                ]);
+                $paymentStore->update([
+                    'bill' => (array_key_exists('bill', $data) && !empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
+                    'amount' => $data['amount'],
+                ]);
+            });
+            toast('फारम सफलतापूर्वक थपियो', 'success');
+        }
+        return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
+    }
+
 }

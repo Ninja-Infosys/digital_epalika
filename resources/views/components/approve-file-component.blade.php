@@ -15,7 +15,7 @@
             <div class="card-body">
                 @if(count($mapApply->appliedDocuments->where('form_data_id', $formDataType->id)) == 0)
                     <form
-                        action="{{ route('organization.admin.appliedDocument.store', [$mapApply, $form, $formDataType]) }}"
+                        action="{{ route('emap.admin.storeDocument', [$mapApply, $form, $formDataType]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -40,7 +40,7 @@
                     </form>
                 @else
                     <form
-                        action="{{ route('organization.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
+                        action="{{ route('emap.admin.updateDocument', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id)->sortByDesc('created_at')?->first()?->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
