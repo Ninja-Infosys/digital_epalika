@@ -91,6 +91,10 @@ class PermissionSeeder extends Seeder
             'qualification_create',
             'qualification_edit',
             'qualification_delete',
+            'mobileUser_access',
+            'mobileUser_create',
+            'mobileUser_edit',
+            'mobileUser_delete',
         ];
 
         $this->storePermission($permissions);
