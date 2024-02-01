@@ -14,12 +14,12 @@ class MapPassGroupController extends Controller
 
     public function create()
     {
-
+ 
     }
 
     public function store()
     {
-
+        
     }
 
     public function edit()
