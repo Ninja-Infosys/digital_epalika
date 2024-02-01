@@ -14,13 +14,11 @@ trait EMapTemplateTrait
 {
     private array $template = [
         [
-            'title' => 'कार्यलय लेटर हेड',
+        
+            'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
                 'कार्यालय लेटर हेड' => '[@letterHead]',
                 'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
-            ],
-            'title' => 'प्रस्तावित भवनको विवरण',
-            'data' => [
                 'दर्ता नम्बर' => '[@registration_no]',
                 'दर्ता मिति' => '[@registration_date]',
                 'निर्माण कार्यको किसिम' => '[@construction_type]',
@@ -211,14 +209,15 @@ trait EMapTemplateTrait
     private function getLetterHeadReplacement(): array
     {
         return [
-            '[@letterHead]' =>$this->letterHead() ?? '',
-            '[@letterHeadEn]' =>$this->letterHeadEn() ?? '',
+          
         ];
     }
 
     private function getMapApplyReplacement(): array
     {
         return [
+            '[@letterHead]' =>$this->letterHead() ?? '',
+            '[@letterHeadEn]' =>$this->letterHeadEn() ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
             '[@registration_date]' => $this->registration_date ?? '',
             '[@construction_type]' => $this->construction_type?->label() ?? '',
