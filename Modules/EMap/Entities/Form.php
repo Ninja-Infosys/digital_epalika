@@ -30,6 +30,8 @@ class Form extends Model
         "status",
         "map_pass_group_id",
         "need_from",
+        "show_to_consultancy",
+        "map_group_id"
     ];
 
     protected $casts = [
@@ -56,6 +58,11 @@ class Form extends Model
         return $this->belongsTo(MapPassGroup::class, 'map_pass_group_id');
     }
 
+    public function mapGroup(): BelongsTo
+    {
+        return $this->belongsTo(MapPassGroup::class, 'map_group_id');
+    }
+
     public function dynamicForm(): BelongsTo
     {
         return $this->belongsTo(DynamicForm::class);
@@ -79,5 +86,13 @@ class Form extends Model
     public function paymentStores(): HasMany
     {
         return $this->hasMany(PaymentStore::class);
+    }
+
+    public function getFormApproveAttribute()
+    {
+        return  \Illuminate\Support\Facades\DB::table('map_pass_group_user')
+            ->where('map_pass_group_id', $this->attributes['map_group_id'])
+            ->where('user_id', auth()->user()->id)
+            ->exists();
     }
 }

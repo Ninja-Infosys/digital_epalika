@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Register | {{ config('app.name') }}</title>
+    <title>Update | {{ config('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="B-Palika System" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -60,37 +60,50 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="mb-2">
-                                                <label for="name" class="form-label fw-bold">प्रयोगकर्ता नाम
+                                                <label for="name" class="form-label fw-bold">सेवाग्राहीको नाम
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <input name="name"
                                                     class="form-control @error('name') is-invalid @enderror"
                                                     type="name" value="{{ old('name', $mobileUser->name) }}"
-                                                    id="name" placeholder="name Address" />
+                                                    id="name" placeholder="सेवाग्राहीको नाम" />
                                                 @error('name')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
-                                                <label for="phone" class="form-label fw-bold">प्रयोगकर्ता मोबाइल नंबर
+                                                <label for="avatar" class="form-label fw-bold">सेवाग्राहीको फोटो
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                {{-- <img src="{{ $mobileUser->avatar }}" height= "50" alt=""> --}}
+                                                <input name="avatar"
+                                                    class="form-control @error('avatar') is-invalid @enderror"
+                                                    type="file" value="{{ old('avatar') }}" accept="image/*"
+                                                    id="avatar" />
+                                                @error('avatar')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="phone" class="form-label fw-bold">सेवाग्राहीको मोबाइल नंबर
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <input name="phone"
                                                     class="form-control @error('phone') is-invalid @enderror"
                                                     type="phone" value="{{ old('phone', $mobileUser->phone) }}"
-                                                    id="phone" placeholder="phone Address" />
+                                                    id="phone" placeholder="सेवाग्राहीको मोबाइल नंबर" />
                                                 @error('phone')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
-                                                <label for="email" class="form-label fw-bold">प्रयोगकर्ता इमेल
+                                                <label for="email" class="form-label fw-bold">सेवाग्राहीको इमेल
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <input name="email"
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     type="email" value="{{ old('email', $mobileUser->email) }}"
-                                                    id="email" placeholder="Email Address" />
+                                                    id="email" placeholder="सेवाग्राहीको इमेल" />
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

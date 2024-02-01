@@ -53,7 +53,7 @@
                                     <td>{{ $appliedDocument->status->label()??'' }}</td>
                                     <td>
                                         @if($appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::PENDING || $appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
-                                        @if(auth()->user()->id == 1 || $checkAuthorization)
+                                        @if(auth()->user()->role->type === 'Super' || $checkAuthorization)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
                                             <i class="fa fa-pen-nib"></i>

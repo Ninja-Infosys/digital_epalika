@@ -42,13 +42,15 @@ Route::get('mapApply/{mapApply}/register', [MapController::class, 'register'])->
 Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
 Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 'fillDetail'])->name('mapApply.admin-step.fill-detail');
 Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
+Route::get('mapApply/{mapApply}/form/{form}/formDetail', [AdminStepController::class, 'formDetail'])->name('mapApply.admin-step.formDetail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTemplate', [DocumentAttachController::class, 'printTemplate'])->name('attach-document.print-template');
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
 Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
-
+Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class,'storeDocument'])->name('storeDocument');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/{id}/appliedDocument', [AdminStepController::class,'updateDocument'])->name('updateDocument');
 
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {

@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\MobileUser;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use App\Traits\GetAllColumns;
@@ -122,5 +123,11 @@ class TaxPayer extends Model
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class);
+    }
+
+
+    public function mobileUsers():HasMany
+    {
+        return $this->hasMany(MobileUser::class);
     }
 }

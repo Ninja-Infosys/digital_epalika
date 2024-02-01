@@ -55,7 +55,7 @@ class FormController extends Controller
 
     public function updateStatus(Form $form)
     {
-        $this->checkAuthorization('recommendationTemplate_access');
+       
 
         $form->update([
             'status' => !$form->status
