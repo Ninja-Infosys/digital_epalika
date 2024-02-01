@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('mobile_users', function (Blueprint $table) {
-            $table->foreignId('tax_payer_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->string('tax_payer_id')->nullable();
             $table->string('approved_at')->nullable();
             $table->string('avatar')->nullable();
         });
