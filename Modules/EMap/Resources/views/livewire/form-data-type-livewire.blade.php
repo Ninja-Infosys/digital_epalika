@@ -44,6 +44,20 @@
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
+        @if($form['need_from'] == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
+        <div class="col-md-3 mb-2">
+            <label for="show_to_consultancy" class="form-label">Show Consultancy</label>
+            <select id="show_to_consultancy" name="show_to_consultancy" wire:model="form.show_to_consultancy" class="form-select" >
+                <option value="">-- छान्नुहोस् --</option>
+                    <option value="1">Yes</option>
+                <option value="0">No</option>
+
+            </select>
+            @error('form.show_to_consultancy')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        @endif
     </div>
     <div class="row">
         <table class="table table-stripped">

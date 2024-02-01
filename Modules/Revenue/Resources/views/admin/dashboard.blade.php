@@ -30,7 +30,7 @@
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-dollar-sign avatar-title font-18 text-white"></i>
+                                    <i class="fas fa-rupee-sign avatar-title font-18 text-white"></i>
                                 </div>
                                 <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $fiscal_year_total }}</span></h3>
                                 <p class="text-muted font-15 mb-0">चालु आर्थिक वर्षको संकलन राजस्व</p>
@@ -40,7 +40,7 @@
                         <div class="col-sm-6 col-xl-3">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar-sm bg-blue rounded-circle">
-                                    <i class="fas fa-dollar-sign avatar-title font-18 text-white"></i>
+                                    <i class="fas fa-rupee-sign avatar-title font-18 text-white"></i>
                                 </div>
                                 <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{ $all_total }}</span></h3>
                                 <p class="text-muted font-15 mb-0">कुल राजस्व</p>
@@ -59,7 +59,7 @@
                     <div class="row align-items-center">
                         <div class="col-4">
                             <div class="avatar-md bg-blue rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-rupee-sign avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-8">
@@ -78,7 +78,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-success rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-rupee-sign avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">
@@ -97,7 +97,7 @@
                     <div class="row align-items-center">
                         <div class="col-2">
                             <div class="avatar-md bg-info rounded-circle">
-                                <i class="fas fa-dollar-sign avatar-title font-22 text-white"></i>
+                                <i class="fas fa-rupee-sign avatar-title font-22 text-white"></i>
                             </div>
                         </div>
                         <div class="col-10">

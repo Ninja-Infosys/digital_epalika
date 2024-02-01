@@ -16,8 +16,8 @@ trait EMapTemplateTrait
         [
             'title' => 'कार्यलय लेटर हेड',
             'data' => [
-                'हेडर' => '[@header]',
-                'लेटर हेड' => '[@letter_head]'
+                'कार्यालय लेटर हेड' => '[@letterHead]',
+                'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
             ],
             'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
@@ -191,8 +191,7 @@ trait EMapTemplateTrait
 
         $replace = array_merge(
             $this->getLetterHeadReplacement(),
-            $this->getMapApplyReplacement(),
-            $replace,
+            $this->getMapApplyReplacement(),       
             $this->getLandDetailReplacement(),
             $this->getLandOwnerReplacement(),
             $this->getHouseOwnerReplacement(),
@@ -202,7 +201,8 @@ trait EMapTemplateTrait
             $this->getBuildingDetailsReplacement(),
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
-            $this->getContractorDetailsReplacement()
+            $this->getContractorDetailsReplacement(),
+            $replace
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
@@ -211,8 +211,8 @@ trait EMapTemplateTrait
     private function getLetterHeadReplacement(): array
     {
         return [
-            '[@header]' => letterHead(),
-            '[@letter_head]' => letterHead('letter_head'),
+            '[@letterHead]' =>$this->letterHead() ?? '',
+            '[@letterHeadEn]' =>$this->letterHeadEn() ?? '',
         ];
     }
 

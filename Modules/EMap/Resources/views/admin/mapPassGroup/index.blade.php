@@ -55,13 +55,13 @@
                                         <td>{{ $mapPassGroup->title }}</td>
                                         <td>{{ get_nepali_number($mapPassGroup->users_count) }}</td>
                                         <td>
-                                            @can('recommendationCategory_access')
+                                          
                                                 <a data-bs-type="edit" class="{{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                     href="{{ route('emap.admin.mapPassGroup.updateStatus', $mapPassGroup) }}">
                                                     <i
                                                         class="fa fa-2x {{ $mapPassGroup->status == 'active' ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
                                                 </a>
-                                            @endcan
+                                           
                                         </td>
                                         <td class="d-flex">
                                             @can('mapFee_edit')

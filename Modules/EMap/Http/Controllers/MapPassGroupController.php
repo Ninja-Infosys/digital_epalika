@@ -87,7 +87,7 @@ class MapPassGroupController extends Controller
 
     public function updateStatus(MapPassGroup $mapPassGroup)
     {
-        $this->checkAuthorization('recommendationTemplate_access');
+      
 
         $mapPassGroup->update([
             'status' => !$mapPassGroup->status

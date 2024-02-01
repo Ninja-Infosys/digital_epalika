@@ -30,6 +30,7 @@ class Form extends Model
         "status",
         "map_pass_group_id",
         "need_from",
+        "show_to_consultancy"
     ];
 
     protected $casts = [

@@ -19,7 +19,8 @@ class FormDataTypeLivewire extends Component
         'order' => null,
         'map_pass_group_id' => null,
         'need_from' => null,
-        'formDataType' => []
+        'formDataType' => [],
+        'show_to_consultancy'=>null
 
     ];
     public $mapPassGroups = [];
@@ -34,18 +35,20 @@ class FormDataTypeLivewire extends Component
             $this->form['title'] = $formData->title;
             $this->form['order'] = $formData->order;
             $this->form['map_pass_group_id'] = $formData->map_pass_group_id;
-            $this->form['need_from'] = $formData->need_from;
-
-            $formDataTypeArray = [];
+            $this->form['need_from'] = $formData->need_from->value;
+            $this->form['show_to_consultancy'] = $formData->show_to_consultancy;
 
             foreach ($formData->formDataTypes as $index => $formDataType) {
-                $formDataTypeArray[$index]['id'] = $formDataType->id;
-                $formDataTypeArray[$index]['type'] = $formDataType->type;
-                $formDataTypeArray[$index]['model_id'] = $formDataType->model_id ?? '';
-                $formDataTypeArray[$index]['data'] = $this->resolveData($formDataType->type->value);
-            }
+                $this->form['formDataType'][]=[
+                    'id'=>$formDataType->id ?? null,
+                    'type'=>$formDataType->type ?? null,
+                    'model_id'=>$formDataType->model_id ?? null,
+                    'data'=>$this->resolveData($formDataType->type->value) ?? null,
 
-            $this->form['formDataType'] = $formDataTypeArray;
+                ] ;
+            }
+        }else{
+            $this->form['formDataType'][] = [[]];
         }
     }
 
@@ -93,6 +96,7 @@ class FormDataTypeLivewire extends Component
         "form.order" => ['nullable'],
         "form.map_pass_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.need_from" => ['required'],
+        'form.show_to_consultancy' => ['required_if:form.need_from,==,office'],
         "form.formDataType" => ['required', 'array'],
         "form.formDataType.*.type" => ['required'],
         "form.formDataType.*.model_id" => ['nullable', 'int'],
@@ -112,25 +116,21 @@ class FormDataTypeLivewire extends Component
             if (!empty($this->existingForm)) {
                 $this->existingForm->update($validatedData['form']);
                 $form = $this->existingForm;
+                foreach ($this->form['formDataType'] as $formDataType) {
+                    if (array_key_exists('id', $formDataType)) {
+                        $formDataTypeData = FormDataType::find($formDataType['id']);
+                        $formDataTypeData->update($formDataType);
+                    } else {
+                        $formDataTypeData = $form->formDataTypes()->create($formDataType);
+                    }
+                }
             } else {
                 $form = Form::create($validatedData['form']);
-            }
-            $existingFormFieldsId = collect($form->formDataTypes?->pluck('id'));
-            $newId = collect();
-            foreach ($validatedData['form']['formDataType'] as $formDataType) {
-                if (array_key_exists('id', $formDataType) && !empty($formDataType['id'])) {
-                    $formDataTypeData = FormDataType::find($formDataType['id']);
-                    $formDataTypeData->update($formDataType);
-                } else {
+                foreach ($this->form['formDataType'] as $formDataType) {
                     $formDataTypeData = $form->formDataTypes()->create($formDataType);
                 }
-                $newId->push($formDataTypeData->id);
             }
-            $diff = $existingFormFieldsId->diff($newId->filter());
-
-            FormDataType::whereIn('id', $diff->toArray())->delete();
         });
-
         $this->reset('form');
         toast('सफलतापूर्वक थपियो', 'success');
         return redirect()->route('emap.admin.form.index');
@@ -138,6 +138,9 @@ class FormDataTypeLivewire extends Component
 
     public function render()
     {
+        if ($this->form['need_from'] != \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value) {
+            $this->form['show_to_consultancy'] = 1;
+        }
         return view('emap::livewire.form-data-type-livewire');
     }
 }
