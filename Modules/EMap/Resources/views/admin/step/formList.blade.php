@@ -119,7 +119,7 @@
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
+                                                    <a href="{{ route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]) }}"
                                                        class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

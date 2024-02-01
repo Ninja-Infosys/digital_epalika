@@ -351,4 +351,10 @@ class AdminStepController extends Controller
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
         return back();
     }
+
+    public function formDetail(MapApply $mapApply, Form $form)
+    {
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses', 'formDataTypes.paymentStores.paymentStoreStatuses');
+        return view('emap::admin.step.formFileUpload', compact('mapApply', 'form'));
+    }
 }
