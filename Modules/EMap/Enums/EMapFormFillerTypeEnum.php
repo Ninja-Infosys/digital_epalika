@@ -7,7 +7,6 @@ enum EMapFormFillerTypeEnum: string
     case OWNER = 'owner';
     case ORGANIZATION = 'organization';
     case OFFICE = 'office';
-    case WARD = 'ward';
 
     public function label(): string
     {
@@ -20,7 +19,6 @@ enum EMapFormFillerTypeEnum: string
             self::OWNER => 'घरधनी',
             self::ORGANIZATION => 'परामर्शदाता/सुपरिवेकक्षक',
             self::OFFICE => 'पालिका',
-            self::WARD => 'वडा'
         };
     }
 }
