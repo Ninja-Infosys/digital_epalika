@@ -82,14 +82,14 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    @if (config('app.env') === 'production')
+                    {{-- @if (config('app.env') === 'production')
                         <div class="mb-2">
                             {!! htmlFormSnippet() !!}
                             @error('g-recaptcha-response')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                    @endif
+                    @endif --}}
                     <button type="submit" class="btn btn-primary mt-4 d-block w-100 py-2">लग-इन</button>
                     <div class="mt-1 text-center text-white">
                         संस्था दर्ता गर्नु भएको छैन भने? &nbsp; <a
