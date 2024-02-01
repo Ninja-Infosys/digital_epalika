@@ -53,7 +53,7 @@
                                     <td>{{ $appliedDocument->status->label()??'' }}</td>
                                     <td>
                                         @if($appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::PENDING || $appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
-                                        @if(auth()->user()->role->type === 'Super' || $checkAuthorization)
+                                        @if(auth()->user()->id == 1 || $checkAuthorization)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
                                             <i class="fa fa-pen-nib"></i>
@@ -149,7 +149,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <img src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></img>
+                                                    <iframe src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
