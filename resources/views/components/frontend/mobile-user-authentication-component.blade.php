@@ -2,7 +2,7 @@
 <div class="card bg-transparent">
 
     <div class="card-body text-center">
-        <img src="{{ asset('assets/frontend/image/new-icons/presentation.png') }}"
+        <img src="{{  Auth::guard('mobile-user')->user()->avatar}}"
             class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
         <div class=" mt-3 text-center">
             <h4 class="text-white mb-2"><strong>नाम :</strong> <span

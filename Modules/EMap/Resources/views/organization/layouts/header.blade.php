@@ -64,7 +64,7 @@
                          alt="user-image"
                          class="rounded-circle"/>
                     <span class="pro-user-name ms-1">
-                  {{auth('organization')->user()->name ??''}} <i class="fa fa-angle-down"></i>
+                  {{-- {{auth('organization')->user()->name ??''}} <i class="fa fa-angle-down"></i> --}}
                 </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
@@ -82,8 +82,8 @@
                         <i class="fa fa-clipboard"></i>
                         <span>नविकरण</span>
                     </a>
-                   
-                    
+
+
                     <div class="dropdown-divider"></div>
                     <form action="{{ route('organization.logout') }}" method="post">
                         @csrf
