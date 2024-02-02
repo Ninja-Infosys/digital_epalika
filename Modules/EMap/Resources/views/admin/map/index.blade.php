@@ -40,41 +40,41 @@
         <div class="card-body px-0">
             <ul class="nav nav-pills nav-fill navtab-bg">
                 <li class="nav-item">
-                    <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
-                        सबै
+                    <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                        सबै ({{count($maps)}})
                     </a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a href="#tab-type1" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        प्रक्रियामा
+                    <a href="#tab-type1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                        प्रक्रियामा ({{count($maps->where('sent_to_organization','processing'))}})
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="#tab-type3" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        सम्पन्न
+                        सम्पन्न ({{count($maps->where('sent_to_organization','done'))}})
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#tab-type4" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        अस्वीकार
+                        अस्वीकार ({{count($maps->where('sent_to_organization','rejected'))}})
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#tab-type2" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        बाकी
+                        बाकी ({{count($maps->where('sent_to_organization','pending'))}})
                     </a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane show active" id="tab-all">
+                <div class="tab-pane " id="tab-all">
                         <x-map-apply-component :maps="$maps" :application="$applicationFormTypeEnum" />
 
                 </div>
-                <div class="tab-pane" id="tab-type1">
+                <div class="tab-pane show active" id="tab-type1">
                     <x-map-apply-component :maps="$maps->where('sent_to_organization','processing')" :application="$applicationFormTypeEnum" />
                 </div>
 
