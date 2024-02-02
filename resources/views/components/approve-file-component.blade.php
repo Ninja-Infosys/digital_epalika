@@ -10,6 +10,7 @@
                        route_action="{{ route('organization.admin.printTemplate',[$mapApply,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
                         <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                     </a>
+
                 </div>
             </div>
             <div class="card-body">
