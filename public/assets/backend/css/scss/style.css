@@ -941,13 +941,11 @@ section {
 }
 .nav-pills .nav-item .nav-link {
   background: none;
-  color: #003893;
   border-radius: 0px;
   padding: 2px 12px;
 }
-.nav-pills .nav-item .nav-link:hover {
-  color: #ED1C24;
-}
+
+
 
 .tab-vertical .nav-link.active {
   color: #ED1C24;
