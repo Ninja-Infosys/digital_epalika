@@ -12,6 +12,7 @@
                     </a>
 
                 </div>
+
             </div>
             <div class="card-body">
                 @if(count($mapApply->appliedDocuments->where('form_data_id', $formDataType->id)) == 0)

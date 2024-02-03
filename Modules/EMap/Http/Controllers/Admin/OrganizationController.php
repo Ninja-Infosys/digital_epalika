@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use App\Helper\SMS\AakashSms;
 use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
 use Illuminate\Contracts\Foundation\Application;
@@ -43,14 +44,15 @@ class OrganizationController extends Controller
 
             if (empty($organization->password) && $organization->is_active == 1) {
                 $url = URL::signedRoute('organization.invitation', $organization);
-
-                Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+                $message = "Congratulations, your request was approved. Click $url to set your password and login. Thank you.";
+                (new AakashSms())->sendTextSMS($organization->phone, $message);
+                // Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
             }
         });
 
         toast('संगठन स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return back();
+        return back();                                                                                                                                                                                                                                                                                                                                                                                               
     }
 
     public function show(Organization $organization)

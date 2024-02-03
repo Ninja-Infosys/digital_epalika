@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Http\Controllers;
 
+use App\Helper\SMS\AakashSms;
 use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
 use Illuminate\Support\Facades\DB;
@@ -37,8 +38,8 @@ class OrganizationController extends Controller
 
             if (empty($organization->password) && $organization->is_active) {
                 $url = URL::signedRoute('organization.invitation', $organization);
-
-                Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+                (new AakashSms())->sendTextSMS($organization->phone, "Hello Text");
+//                Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
             }
         });
 

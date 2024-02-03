@@ -10,6 +10,10 @@
     a {
         color: white;
     }
+    a:hover{
+        color: white;
+
+    }
 
     .new-digital-board .card-top .card {
         border: none;
