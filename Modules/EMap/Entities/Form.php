@@ -95,7 +95,6 @@ class Form extends Model
             ->where('user_id', auth()->user()->id)
             ->exists();
     }
-
     public function getFormEditAttribute()
     {
         return  \Illuminate\Support\Facades\DB::table('map_pass_group_user')
