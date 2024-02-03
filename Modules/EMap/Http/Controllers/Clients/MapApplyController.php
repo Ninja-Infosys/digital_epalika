@@ -224,6 +224,7 @@ class MapApplyController extends Controller
           $existingFormStore = FormStore::find($formStore->id);
           FormStoreStatus::where('form_store_id', $formStore->id)
               ->orderBy('id', 'desc')
+              ->where('status',DocumentStatusEnum::PENDING->value)
               ->first()?->update([
                   'document' => $existingFormStore->document
               ]);
