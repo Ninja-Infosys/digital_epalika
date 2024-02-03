@@ -21,53 +21,36 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card  p-0">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="header-title mb-0"></h4>
-
-                    </div>
-                </div>
                 <div class="card-body px-0">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>क्र.स</th>
-                                    <th>शिर्षक</th>
-                                    <th>Need From</th>
-                                    <th>स्थिति</th>
-                                    <th>#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($forms as $form)
-                                    <tr @if ($form->map_status==\Modules\EMap\Enums\DocumentStatusEnum::REJECTED) style="background-color:#d16969;" @endif>
-                                        <td>{{ get_nepali_number($loop->iteration) }}</td>
-                                        <td>{{ $form->title }}</td>
-                                        <td>
-                                            {{ $form->need_from?->label() ?? '' }}
-                                            {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}} --}}
-                                        </td>
-                                        <td>{{$form->map_status?->label()}}</td>
-                                        <td class="d-flex">
+                    <ul class="nav nav-pills nav-fill navtab-bg">
+                        <li class="nav-item">
+                            <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                                सबै ({{$forms->count()}})
+                            </a>
+                        </li>
 
-                                            @if ($form->need_from !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)
-                                                <a href="{{ route('organization.admin.formDetail', [$mapApply, $form]) }}"
-                                                    class="btn me-1 btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            @endif
-                                        @if($form->show_to_consultancy == 1)
-                                            <a href="{{ route('organization.admin.organization.view-detail', [$mapApply, $form]) }}"
-                                                class="btn me-1 btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                                @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <li class="nav-item">
+                            <a href="#tab-organization" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                                {{\Modules\EMap\Enums\EMapFormFillerTypeEnum::ORGANIZATION?->label()}} ({{$forms->where('need_from',\Modules\EMap\Enums\EMapFormFillerTypeEnum::ORGANIZATION)->count()}})
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane " id="tab-all">
+                            <x-organization.form-steps-component
+                                :map-apply="$mapApply"
+                                :forms="$forms"
+                                :order="$order"
+                            />
+                        </div>
+                        <div class="tab-pane show active" id="tab-organization">
+                            <x-organization.form-steps-component
+                                :map-apply="$mapApply"
+                                :forms="$forms->where('need_from',\Modules\EMap\Enums\EMapFormFillerTypeEnum::ORGANIZATION)"
+                                :order="$order"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
