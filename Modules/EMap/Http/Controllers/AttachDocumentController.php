@@ -65,7 +65,7 @@ class AttachDocumentController extends Controller
             ]);
 
             DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
-                $formStore =   $mapApply->formStores()->create([
+                $formStore = $mapApply->formStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
@@ -84,7 +84,7 @@ class AttachDocumentController extends Controller
                 'amount' => ['required', 'numeric'],
             ]);
             DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
-                $paymentStore =  $mapApply->paymentStores()->create([
+                $paymentStore = $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => Organization::class,
@@ -197,10 +197,9 @@ class AttachDocumentController extends Controller
                 if ($formStore->status == DocumentStatusEnum::PENDING) {
                     $formStore->update([
                         'data' => $data['data'],
-                        'document'=>null
+                        'document' => null
                     ]);
-                    if($formStore->formStoreStatuses->count() > 0)
-                    {
+                    if ($formStore->formStoreStatuses->count() > 0) {
                         FormStoreStatus::where('form_store_id', $formStore->id)
                             ->orderBy('id', 'desc')
                             ->first()?->update([
@@ -223,7 +222,7 @@ class AttachDocumentController extends Controller
                     $formStore->update([
                         "status" => DocumentStatusEnum::PENDING->value,
                         'data' => $data['data'],
-                        'document'=> null
+                        'document' => null
                     ]);
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
@@ -570,6 +569,7 @@ class AttachDocumentController extends Controller
             '[@contractorDetail.consulting_firm_name]'
         ];
     }
+
     public function updateAppliedDocumentStatus(Request $request, AppliedDocument $appliedDocument)
     {
         $this->getStatusValidation($request);
@@ -647,10 +647,10 @@ class AttachDocumentController extends Controller
             $template = str_replace($placeholder, $value, $template);
         }
 
-        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType','formStore'));
+        return view('emap::organization.attach-document.form-print', compact('template', 'formDataType', 'formStore'));
     }
 
-    public function formStoreStatusPrint(FormDataType $formDataType, FormStore $formStore,FormStoreStatus $formStoreStatus)
+    public function formStoreStatusPrint(FormDataType $formDataType, FormStore $formStore, FormStoreStatus $formStoreStatus)
     {
         $formStore->load('form_data.model');
         $formDataType->load('model');

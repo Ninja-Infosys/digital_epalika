@@ -35,7 +35,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid"></iframe>
+                                                    <iframe src="{{ $appliedMapFile->document_url }}" width="100%" height="100%" ></iframe>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
