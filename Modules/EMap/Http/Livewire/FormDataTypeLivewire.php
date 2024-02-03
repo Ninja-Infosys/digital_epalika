@@ -96,8 +96,8 @@ class FormDataTypeLivewire extends Component
     protected $rules = [
         "form.title" => ['required'],
         "form.order" => ['nullable'],
-        "form.map_pass_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
-        "form.map_group_id" => ['nullable', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
+        "form.map_pass_group_id" => ['nullable', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
+        "form.map_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.need_from" => ['required'],
         'form.show_to_consultancy' => ['required_if:form.need_from,==,office'],
         "form.formDataType" => ['required', 'array'],
