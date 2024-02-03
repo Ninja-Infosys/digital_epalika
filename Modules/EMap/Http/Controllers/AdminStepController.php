@@ -78,9 +78,8 @@ class AdminStepController extends Controller
                 $form->map_status = $mapStatus;
                 return $form;
             });
-//        $MapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
 
-        return view('emap::admin.step.formList', compact('mapApply', 'forms','order'));
+        return view('emap::admin.step.formList', compact('mapApply', 'forms', 'order'));
     }
 
     public function viewDetail(MapApply $mapApply, Form $form)
@@ -261,13 +260,13 @@ class AdminStepController extends Controller
                 $formStore->update([
                     'status' => $request->input('status')
                 ]);
-                 $formStore->formStoreStatuses()->create([
-                    "form_store_id" => $formStore->id,
-                    "status" => $request->input('status'),
-                    "comment" => $request->input('comment'),
-                    "data" => $formStore->data,
-                    "fields" => $formStore->fields,
-                     "document"=>$formStore->document
+                $formStore->formStoreStatuses()->create([
+                   "form_store_id" => $formStore->id,
+                   "status" => $request->input('status'),
+                   "comment" => $request->input('comment'),
+                   "data" => $formStore->data,
+                   "fields" => $formStore->fields,
+                    "document" => $formStore->document
                 ]);
 
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
@@ -495,10 +494,9 @@ class AdminStepController extends Controller
                 if ($formStore->status == DocumentStatusEnum::PENDING) {
                     $formStore->update([
                         'data' => $data['data'],
-                        'document'=>null
+                        'document' => null
                     ]);
-                    if($formStore->formStoreStatuses->count() > 0)
-                    {
+                    if($formStore->formStoreStatuses->count() > 0) {
                         FormStoreStatus::where('form_store_id', $formStore->id)
                             ->orderBy('id', 'desc')
                             ->first()?->update([
@@ -521,7 +519,7 @@ class AdminStepController extends Controller
                     $formStore->update([
                         "status" => DocumentStatusEnum::PENDING->value,
                         'data' => $data['data'],
-                        'document'=> null
+                        'document' => null
                     ]);
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
@@ -826,26 +824,26 @@ class AdminStepController extends Controller
             $template = str_replace($placeholder, $value, $template);
         }
 
-        return view('emap::admin.step.form-print', compact('template', 'formDataType','formStore'));
+        return view('emap::admin.step.form-print', compact('template', 'formDataType', 'formStore'));
     }
 
-    public function uploadDocument(Request $request,FormStore $formStore)
+    public function uploadDocument(Request $request, FormStore $formStore)
     {
         $data =  $request->validate([
-            'document'=>['required','file']
+            'document' => ['required','file']
         ]);
 
-        DB::transaction(function () use ($data,$request,$formStore){
+        DB::transaction(function () use ($data, $request, $formStore) {
             $formStore->update($data);
             $existingFormStore = FormStore::find($formStore->id);
             FormStoreStatus::where('form_store_id', $formStore->id)
                 ->orderBy('id', 'desc')
-                ->where('status',DocumentStatusEnum::PENDING->value)
+                ->where('status', DocumentStatusEnum::PENDING->value)
                 ->first()?->update([
                     'document' => $existingFormStore->document
                 ]);
         });
-        toast('File Upload Successfully','success');
+        toast('File Upload Successfully', 'success');
         return back();
 
     }
