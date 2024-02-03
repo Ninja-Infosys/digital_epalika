@@ -124,6 +124,11 @@
                                                        class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
+                                                    @else
+                                                        <a href="{{ route('emap.admin.mapApply.admin-step.view-document', [$mapApply, $form]) }}"
+                                                           class="btn me-1 btn-xs btn-outline-primary">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
                                                     @endif
                                                 @endif
                                             @endif
