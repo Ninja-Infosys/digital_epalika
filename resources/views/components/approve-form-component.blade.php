@@ -91,7 +91,7 @@
                                 <td>
 
 
-                                    <a href="{{ route('organization.admin.formStorePrint',[$formDataType,$formStore]) }}">
+                                    <a href="{{ route('emap.admin.formStorePrint',[$formDataType,$formStore]) }}">
                                         <i class="fa fa-print"></i>
                                     </a>
                                 </td>

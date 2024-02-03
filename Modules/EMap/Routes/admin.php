@@ -51,7 +51,9 @@ Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStore
 Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
 Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class,'storeDocument'])->name('storeDocument');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/{id}/appliedDocument', [AdminStepController::class,'updateDocument'])->name('updateDocument');
-
+Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AdminStepController::class, 'printTemplate'])->name('printTemplate');
+Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AdminStepController::class, 'formStorePrint'])->name('formStorePrint');
+Route::put('formStore/{formStore}/uploadDocument',[AdminStepController::class,'uploadDocument'])->name('uploadFormStoreDocument');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {

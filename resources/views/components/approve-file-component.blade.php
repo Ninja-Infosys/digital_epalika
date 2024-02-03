@@ -7,7 +7,7 @@
                     <h4 class="header-title">{{$formDataType ->model?->title}}
                         थप्नुहोस्</h4>
                     <a href="javascript:void(0)"
-                       route_action="{{ route('organization.admin.printTemplate',[$mapApply,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
+                       route_action="{{ route('emap.admin.printTemplate',[$mapApply,$formDataType]) }}" class="btn btn-primary btn-sm printDetail">
                         <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
                     </a>
 
