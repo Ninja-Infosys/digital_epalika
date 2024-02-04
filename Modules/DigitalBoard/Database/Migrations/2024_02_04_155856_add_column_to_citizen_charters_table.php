@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('notices', function (Blueprint $table) {
-            $table->string('ward_no'); 
-
+        Schema::table('citizen_charters', function (Blueprint $table) {
+            $table->string('is_displayed')->default(false);
         });
     }
 
@@ -26,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('notices', function (Blueprint $table) {
-            $table->dropColumn('ward_no');
+        Schema::table('citizen_charters', function (Blueprint $table) {
+            $table->string('is_displayed');
         });
     }
 };

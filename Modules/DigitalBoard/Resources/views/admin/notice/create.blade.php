@@ -38,6 +38,15 @@
                     <form action="{{route('admin.digitalBoard.notice.store',$type)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+                        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-primary">
                                 <strong> विवरण </strong>
@@ -71,7 +80,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="files" class="form-label">फाईल </label>
                                     <input
                                         type="file"
@@ -86,20 +95,35 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6  mb-2">
-                                    <label for="ward_no" class="form-label"> वडा नं.</label>
-                                    <select name="ward_no[]" class="form-control @error('ward_no') is-invalid @enderror"
-                                        multiple id="ward_no" data-toggle="select2" data-width="100%">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        <option value="metro">महानगरपालिका</option>
-                                        @foreach ($officeSetting->localBody->ward_no as $ward)
-                                            <option value="{{ $ward }}">
-                                                {{ $ward }}
-                                            </option>
+                               
+                                <div class="col-md-4 mb-2">
+                                    <label for="ward" class="form-label">वडा</label>
+                                    <select name="ward[]" id="ward" class="form-select"
+                                            @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                        <option value="">---वडा छान्नुहोस्---</option>
+                                        @foreach(officeSetting()->localbody->ward_no as $ward)
+                                            <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
                                         @endforeach
                                     </select>
-                                    @error('ward_no')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @error('ward')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    @error('ward.*')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-4 mb-2">
+                                    <input
+                                            type="checkbox"
+                                            name="is_displayed"
+                                            value="1"
+                                            class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                            id="is_displayed"/>
+                                    <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
+
+                                    @error('is_displayed')
+                                    <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>

@@ -21,6 +21,9 @@ class StoreCitizenCharterRequest extends FormRequest
             'amount' => ['required','string'],
             'time' => ['required','string'],
             'responsible_person' => ['required','string'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['integer'],
+            'is_displayed' => ['nullable', 'boolean'],
         ];
     }
 }
