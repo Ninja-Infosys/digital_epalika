@@ -131,9 +131,7 @@ class AttachDocumentController extends Controller
             'buildingDetails',
             'designerDetails'
         );
-
-        $data = $mapApply->getData($formDataType->model->data);
-//        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
 
         return response()->json([
             'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
