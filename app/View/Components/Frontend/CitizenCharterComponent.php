@@ -15,9 +15,9 @@ class CitizenCharterComponent extends Component
         $this->citizenCharters = CitizenCharter::with('branch')
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
-                    $q->where('ward', $ward);
+                    $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
                 } else {
-                    $q->whereNull('ward');
+                    $q->MainPageDisplay();
                 }
             })
             ->orderBy('branch_id')
