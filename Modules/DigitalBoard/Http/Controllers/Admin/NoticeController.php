@@ -17,27 +17,22 @@ class NoticeController extends Controller
     public function index($type)
     {
         $this->checkAuthorization('digitalBoardNotice_access');
-        if ($type === 'News') {
-            $notices = Notice::with('user')
-            ->where('type', 'News')
-            ->orderByDesc('date')
-            ->where(function (Builder $q) {
-                if (!is_null(request('search'))) {
-                    $q->whereLike(['title','date'], request('search'));
+        $notices = Notice::with('user')
+            ->where(function ($q) {
+                if (!empty(auth()->user()->ward_no)) {
+                    $q->where('ward', auth()->user()->ward_no);
                 }
             })
-            ->latest()->paginate(10);
-        } else {
-            $notices = Notice::with('user')
-            ->where('type', 'Notice')
+            ->contentType($type)
             ->orderByDesc('date')
             ->where(function (Builder $q) {
-                if (!is_null(request('search'))) {
-                    $q->whereLike(['title','date'], request('search'));
+                if (!empty(auth()->user()->ward_no)) {
+                    $authWardNo = auth()->user()->ward_no;
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
                 }
             })
-            ->latest()->paginate(10);
-        }
+            ->latest()
+            ->simplePaginate(10);
 
         return view('digitalboard::admin.notice.index', compact('notices', 'type'));
     }
@@ -57,23 +52,27 @@ class NoticeController extends Controller
             $data = $request->validate([
                 'title' => ['required', 'string', 'max:255'],
                 'date' => ['required'],
-                'ward_no' => ['array','required'],
+                // 'ward_no' => ['array','required'],
                 'description' => ['nullable'],
                 'closed_at' => ['nullable'],
                 'show_on_index' => ['nullable', 'boolean'],
                 'files' => ['array', 'nullable'],
                 'files.*' => ['mimes:png,jpeg,jpg'],
+                'ward' => ['nullable', 'array'],
+                'is_displayed' => ['nullable', 'boolean']
             ]);
         } else {
             $data = $request->validate([
                 'title' => ['required', 'string', 'max:255'],
                 'date' => ['required'],
-                'ward_no' => ['array','required'],
+                // 'ward_no' => ['array','required'],
                 'description' => ['nullable'],
                 'closed_at' => ['nullable'],
                 'show_on_index' => ['nullable', 'boolean'],
                 'files' => ['array', 'required'],
                 'files.*' => ['mimes:png,jpeg,jpg'],
+                'ward' => ['nullable', 'array'],
+                'is_displayed' => ['nullable', 'boolean']
             ]);
         }
 
@@ -81,6 +80,7 @@ class NoticeController extends Controller
         DB::transaction(function () use ($request, $type, $data) {
             $officeSetting = OfficeSetting::first();
             $notice = Notice::create($data + [
+                'ward' => auth()->user()->ward_no,
                 'user_id' => auth()->id(),
                 'type' => $type,
                 'fiscal_year_id' => $officeSetting->fiscal_year_id ?? null,

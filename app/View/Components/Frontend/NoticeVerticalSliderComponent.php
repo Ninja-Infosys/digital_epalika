@@ -18,9 +18,9 @@ class NoticeVerticalSliderComponent extends Component
             ->showInIndex()
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
-                   $q->where('ward_no', $ward);
+                    $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
                 } else {
-                    $q->whereNull('ward_no');
+                    $q->mainPageDisplay();
                 }
             })
             ->contentType('Notice')

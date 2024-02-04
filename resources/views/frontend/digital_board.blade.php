@@ -18,7 +18,7 @@
                             <x-frontend.digital-board-video-component/>
                         </div>
                         <div class="">
-                            <h2 class="sub-heading text-white px-2 mb-0">कार्यक्रमहरु</h2>
+                            <h2 class="sub-heading text-white text-center px-2 mb-0">कार्यक्रमहरु</h2>
                             <x-frontend.program-component/>
                         </div>
                         <div class="">

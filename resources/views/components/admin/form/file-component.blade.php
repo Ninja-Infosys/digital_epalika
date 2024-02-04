@@ -40,6 +40,13 @@
                         </button>
                     </form>
                 @else
+                    {{-- <form
+                        action="{{route('emap.admin.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id ?? '')->sortByDesc('created_at')->first()->id]) }}"
+                        method="post" enctype="multipart/form-data"> --}}
+                        {{-- <form
+                        action="{{route('emap.admin.map-apply.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id ?? '')->sortByDesc('created_at')->first()->id]) }}"
+                        method="post" enctype="multipart/form-data">
+                          --}}
                          <form
                         action="{{route('emap.admin.map-apply.appliedDocument.update', [$mapApply, $form, $formDataType, $mapApply->appliedDocuments->where('form_id', $form->id ?? '')->sortByDesc('created_at')->first()->id]) }}"
                         method="post" enctype="multipart/form-data">

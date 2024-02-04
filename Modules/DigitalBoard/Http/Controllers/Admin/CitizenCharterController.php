@@ -50,12 +50,11 @@ class CitizenCharterController extends Controller
     public function index()
     {
         $citizenCharters = CitizenCharter::with('branch')
-            ->where(function ($q) {
-                if (!empty(auth()->user()->ward_no)) {
-                    $q->where('ward', auth()->user()->ward_no);
-                } else {
-                    $q->whereNull('ward');
-                }
+        ->where(function ($q) {
+            if (!empty(auth()->user()->ward_no)) {
+               $authWardNo = auth()->user()->ward_no;
+               $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+           }
             })
             ->get();
         return view('digitalboard::admin.citizen_charter.index', compact('citizenCharters'));

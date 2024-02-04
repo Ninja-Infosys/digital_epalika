@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Notice extends Model
 {
@@ -28,18 +30,35 @@ class Notice extends Model
         'title',
         'date',
         'en_date',
-        'ward_no',
         'description',
         'closed_at',
         'show_on_index',
         'user_id',
         'type',
         'fiscal_year_id',
+        'is_displayed',
+        'ward',
     ];
 
     protected $casts = [
-        'ward_no' => 'array',
+        'is_displayed' => 'boolean',
+        
+        'ward' => 'array',
+        
     ];
+    protected function ward(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => $value ? explode(',', $value) : [],
+            set: fn(string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
+        );
+    }
+
+    
+    public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
+    {
+        $builder->where('is_displayed', $display);
+    }
 
     // public function user(): BelongsTo
     // {
