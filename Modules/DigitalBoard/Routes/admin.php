@@ -17,8 +17,10 @@ Route::resource('video', VideoController::class);
 Route::resource('{type}/notice', NoticeController::class);
 Route::get('{type}/notice/{notice}/noticeUpdate', [NoticeController::class, 'updateClosedDate'])->name('notice.updateClosedDate');
 Route::get('{type}/notice/{notice}/updateShowOnIndex', [NoticeController::class, 'updateShowOnIndex'])->name('notice.updateShowOnIndex');
-Route::resource('popUpNotice', PopUpNoticeController::class);
 Route::get('popUpNotice/{popUpNotice}/updateShowOnIndex', [PopUpNoticeController::class, 'updateShowOnIndex'])->name('popUpNotice.updateShowOnIndex');
+Route::resource('popUpNotice', PopUpNoticeController::class);
+Route::resource('program', \Modules\DigitalBoard\Http\Controllers\Admin\ProgramController::class);
+
 
 
 

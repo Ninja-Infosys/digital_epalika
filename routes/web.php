@@ -12,7 +12,6 @@ use App\Http\Controllers\MobileUser\MobileUserDetailController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Middleware\VerifyCsrfToken;
-use App\Models\MobileUserDetail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -120,7 +119,7 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::prefix('profile')->group(function () {
         Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
     });
-    Route::middleware("auth:organization")->group(function(){
+    Route::middleware("auth:organization")->group(function () {
         Route::post('logout', [OrganizationAuthController::class, 'logout'])->name('logout');
         Route::resource('taxClearance', TaxClearanceController::class);
         Route::resource('renewed', RenewedController::class);
