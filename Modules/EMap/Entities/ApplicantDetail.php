@@ -53,10 +53,23 @@ class ApplicantDetail extends Model
         return $this->belongsTo(District::class);
     }
 
+//    public function getSignatureUrlAttribute(): string
+//    {
+//        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
+//    }
+
+
     public function getSignatureUrlAttribute(): string
     {
-        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
+        $signaturePath = $this->attributes['signature'];
+
+        if (!empty($signaturePath) && Storage::disk('public')->exists($signaturePath)) {
+            return Storage::disk('public')->url($signaturePath);
+        }
+
+        return '';
     }
+
 
     public function setSignatureAttribute($value): void
     {
