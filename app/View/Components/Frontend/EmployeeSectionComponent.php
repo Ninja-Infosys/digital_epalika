@@ -3,18 +3,37 @@
 namespace App\View\Components\Frontend;
 
 use App\Models\Settings\Employee;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-
+use Closure;
 class EmployeeSectionComponent extends Component
 {
-    public $employees;
+    public $employees = [];
+    public $representatives = [];
 
-    public function __construct()
+    public function __construct(int|null $ward = null)
     {
-        $this->employees = Employee::orderBy('position')->get();
+        $employees = Employee::active()
+            ->showInIndex()
+            ->where(function ($q) use ($ward) {
+                if (!is_null($ward)) {
+                    $q->where('ward', $ward);
+                } else {
+                    $q->whereNull('ward');
+                }
+            })
+            ->orderBy('position')
+            ->get();
+
+        $this->employees = $employees->where('is_employee', 1);
+        $this->representatives = $employees->where('is_employee', 0);
     }
 
-    public function render()
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
     {
         return view('components.frontend.employee-section-component');
     }
