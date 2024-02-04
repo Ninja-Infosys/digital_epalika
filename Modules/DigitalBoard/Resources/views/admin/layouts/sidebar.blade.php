@@ -58,6 +58,12 @@
             <span> नागरिक वडापत्र</span>
         </a>
     </li>
+<li class="{{request()->routeIs('admin.digitalBoard.program.*') ? 'active' : ''}}">
+    <a href="{{route('admin.digitalBoard.program.index')}}">
+        <i class="fa fa-scroll"></i>
+        <span>कार्यक्रम</span>
+    </a>
+</li>
 
 
     <li class="{{request()->routeIs('admin.digitalBoard.photoGallery.*') ? 'active' : ''}}">

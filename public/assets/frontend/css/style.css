@@ -575,6 +575,7 @@ video {
     line-height:25px;
     border-bottom: 3px solid rgba(50, 147, 111, 0.3);
     margin-bottom: 10px !important;
+    background: linear-gradient(180deg, #124f9f 0.01%, #071f3e 100%);
   }
   .heading {
     font-weight: 700;
@@ -1392,7 +1393,7 @@ h6,
     padding: 0.5rem 0;
 }
 .inner-section .breadcrumb .breadcrumb-item{
-    background-color: transparent;       
+    background-color: transparent;
     padding-left: 0;
 }
 .inner-section .breadcrumb .breadcrumb-item a{
@@ -1443,7 +1444,7 @@ h6,
     background-color: #e7edff !important;
 }
 .bg-l-warning{
-    background-color: #f3ebd3 !important;    
+    background-color: #f3ebd3 !important;
 }
 .text-warning.bg-l-warning{
     color: #c99e1e !important;
@@ -1473,7 +1474,7 @@ table.table-custom tr td{
     font-weight: 500;
 }
 table.table-custom tr{
-    border-bottom: none !important; 
+    border-bottom: none !important;
 }
  table.table-custom tr{
     border: 1px solid #e6e8ea !important;
@@ -1481,7 +1482,7 @@ table.table-custom tr{
 }
 table.table-custom tr td{
     background-color: var(--ct-white) !important;
-    
+
 }
 table.table-custom tr.empty{
     border: none !important;
@@ -1550,4 +1551,95 @@ tr.empty{
 .btn-outline-primary:hover{
     color: #fff !important;
     background-color:var(--primary) !important;
+}
+
+
+.table-1{
+    height: 80vh;
+    overflow: hidden;
+}
+.table-2{
+    overflow: hidden;
+    height: 30vh;
+}
+.news-slider-wrapper {
+    height: 30px;
+    padding-left: 25px;
+}
+.video-container{
+    height: 20%;
+}
+.vertical-scroll {
+    height: 20vh;
+}
+video{
+    height: 27vh;
+}
+
+.table-headcolor{
+    background-color: red !important;
+}
+
+.sub-header{
+    font-size: 14px
+}
+.newari-img{
+    height: 100%;
+}
+a.link-btn:hover {
+    color: #eb0505;
+}
+
+img{
+    object-fit: contain;
+}
+.carousel-item > img {
+    object-fit: cover;
+    height: 18vh;
+    width: 100%;
+}
+body{
+    overflow: hidden;
+    height: 100vh;
+}
+
+
+.sub-heading{
+    font-size: 18px;
+    line-height: 25px;
+    border-bottom: 3px solid rgba(11, 244, 155, 0.3);
+    margin-bottom: 10px !important;
+    background-color: #263a57;
+}
+
+
+.title{
+    font-size: 18px;
+    line-height: 25px;
+    border-bottom: 3px solid rgba(42, 11, 244, 0.3);
+    margin-bottom: 10px !important;
+    background-color: red;
+}
+
+.jana{
+    font-size: 15px;
+    line-height: 25px;
+    border-bottom: 3px solid rgba(42, 11, 244, 0.3);
+    margin-bottom: 10px !important;
+    background-color: green;
+}
+
+
+.d-block {
+    font-size: 15px;
+}
+
+.sticky-top {
+    z-index: 2000 !important;
+}
+
+.sub-head {
+    background-color: #124f9f;
+    width: 100%;
+    padding: 6px;
 }
