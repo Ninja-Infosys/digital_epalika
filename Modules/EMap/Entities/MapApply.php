@@ -7,6 +7,7 @@ use App\Models\Otp;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -74,17 +75,27 @@ class MapApply extends Model
         'application_type' => ApplicationFormTypeEnum::class
     ];
 
-    public function setConsultantSignatureAttribute($value): void
+//    public function setConsultantSignatureAttribute($value): void
+//    {
+//        if (!empty($value) && !is_string($value)) {
+//            $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
+//        }
+//    }
+//
+//    public function getConsultantSignatureUrlAttribute(): string
+//    {
+//        return $this->attributes['consultant_signature'] ? Storage::disk('public')->url($this->attributes['consultant_signature']) : '';
+//    }
+
+
+    protected function consultantSignature(): Attribute
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
-        }
+        return Attribute::make(
+            get:fn (string $value) => Storage::disk('public')->url($value),
+            set:fn ($value) => $value->store('mapApply', 'public'),
+        );
     }
 
-    public function getConsultantSignatureUrlAttribute(): string
-    {
-        return $this->attributes['consultant_signature'] ? Storage::disk('public')->url($this->attributes['consultant_signature']) : '';
-    }
 
     public function organization(): BelongsTo
     {
