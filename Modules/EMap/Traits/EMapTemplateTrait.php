@@ -17,7 +17,7 @@ trait EMapTemplateTrait
 
             'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
-                'आजको मिति'=>'[@today_date]',
+                'आजको मिति' => '[@today_date]',
                 'कार्यालय लेटर हेड' => '[@letterHead]',
                 'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
                 'दर्ता नम्बर' => '[@registration_no]',
@@ -184,7 +184,7 @@ trait EMapTemplateTrait
         return $this->template;
     }
 
-    private function getData($data): string
+    public function getData($data): string
     {
         $replace = [];
 
@@ -217,8 +217,8 @@ trait EMapTemplateTrait
     private function getMapApplyReplacement(): array
     {
         return [
-            '[@letterHead]' =>$this->letterHead() ?? '',
-            '[@letterHeadEn]' =>$this->letterHeadEn() ?? '',
+            '[@letterHead]' => $this->letterHead() ?? '',
+            '[@letterHeadEn]' => $this->letterHeadEn() ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
             '[@registration_date]' => $this->registration_date ?? '',
             '[@construction_type]' => $this->construction_type?->label() ?? '',
