@@ -14,9 +14,10 @@ trait EMapTemplateTrait
 {
     private array $template = [
         [
-        
+
             'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
+                'आजको मिति'=>'[@today_date]',
                 'कार्यालय लेटर हेड' => '[@letterHead]',
                 'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
                 'दर्ता नम्बर' => '[@registration_no]',
@@ -189,7 +190,7 @@ trait EMapTemplateTrait
 
         $replace = array_merge(
             $this->getLetterHeadReplacement(),
-            $this->getMapApplyReplacement(),       
+            $this->getMapApplyReplacement(),
             $this->getLandDetailReplacement(),
             $this->getLandOwnerReplacement(),
             $this->getHouseOwnerReplacement(),
@@ -209,7 +210,7 @@ trait EMapTemplateTrait
     private function getLetterHeadReplacement(): array
     {
         return [
-          
+
         ];
     }
 

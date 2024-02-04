@@ -3,6 +3,7 @@
 namespace Modules\EMap\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\FormStoreNotification;
@@ -29,6 +30,7 @@ use Modules\EMap\Enums\PostsEnum;
 
 class AdminStepController extends Controller
 {
+    use NepaliDateConverter;
     public function formList(MapApply $mapApply)
     {
 
@@ -580,7 +582,8 @@ class AdminStepController extends Controller
 
             //header
             letterHead(),
-            letterHead('letter_head'),
+            letterHeadEn(),
+            get_nepali_number($this->get_today_nepali_date()),
 
             //mapApply
             $mapApply->registration_no ?? '',
@@ -702,8 +705,9 @@ class AdminStepController extends Controller
         return [
             //header
 
-            '[@header]',
-            '[@letter_head]',
+            '[@letterHead]',
+            '[@letterHeadEn]',
+            '[@today_date]',
             //mapApply
 
             '[@registration_no]',
