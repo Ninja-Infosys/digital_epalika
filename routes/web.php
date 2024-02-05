@@ -12,6 +12,7 @@ use App\Http\Controllers\MobileUser\MobileUserDetailController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Models\MobileUserDetail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,13 +30,13 @@ use Illuminate\Support\Facades\Route;
 //    return redirect(route('admin.dashboard'));
 //});
 
-Route::post('/login', [LoginController::class,'login'])->name('login');
-Route::get('/login', [LoginController::class,'loginPage'])->name('loginPage');
-Route::post('/logout', [LoginController::class,'logout'])->name('logout')->middleware('auth:sanctum');
-Route::get('digital-service', [FrontController::class,'digitalService'])->name('digital-service');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', [LoginController::class, 'loginPage'])->name('loginPage');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
+Route::get('digital-service', [FrontController::class, 'digitalService'])->name('digital-service');
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
-Route::get('seniorCitizenDetail/{seniorCitizenDetail}/seniorCitizenQrcode', [FrontController::class,'seniorCitizenDetailQrcode'])->name('seniorCitizenDetail.qrcode');
-Route::get('disabilityIdentityCard/{disabilityIdentityCard}/disabilityQrcode', [FrontController::class,'disabilityIdentityCardQrcode'])->name('disabilityIdentityCard.qrcode');
+Route::get('seniorCitizenDetail/{seniorCitizenDetail}/seniorCitizenQrcode', [FrontController::class, 'seniorCitizenDetailQrcode'])->name('seniorCitizenDetail.qrcode');
+Route::get('disabilityIdentityCard/{disabilityIdentityCard}/disabilityQrcode', [FrontController::class, 'disabilityIdentityCardQrcode'])->name('disabilityIdentityCard.qrcode');
 Route::get('introduction', [FrontController::class, 'introduction'])->name('introduction');
 Route::get('category', [FrontController::class, 'category'])->name('category');
 Route::get('contact', [FrontController::class, 'contact'])->name('contact');
@@ -50,7 +51,7 @@ Route::get('organization', [FrontController::class, 'org'])->name('organization'
 Route::get('executive', [FrontController::class, 'executive'])->name('executive');
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
-Route::get('ward/{ward}', [FrontController::class,'wardIndex'])->name('wardIndex');
+Route::get('ward/{ward}', [FrontController::class, 'wardIndex'])->name('wardIndex');
 Route::get('/mobileUser', [FrontController::class, 'mobileUser'])->name('mobileUser');
 // Route::get('ebps', 'eMap')->name('ebps');
 
@@ -67,9 +68,9 @@ Route::prefix('print')->as('print.')->controller(PrintController::class)->group(
 Route::get('login/locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unlock');
 
-// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-//     \UniSharp\LaravelFilemanager\Lfm::routes();
-// });
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     // Dummy route, we can use the route() helper to give formiojs the base path for this group
     Route::get('/')->name('index');
@@ -97,10 +98,10 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::get('register', [MobileUserAuthController::class, 'showMobileUserRegisterForm'])->name('register.form');
     Route::post('register', [MobileUserAuthController::class, 'signup'])->name('register.signup');
     Route::get('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
-    Route::put('updateProfile', [MobileUserAuthController::class,'updateProfile'])->name('updateProfile');
-    Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
-    Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
-    Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
+    Route::put('updateProfile', [MobileUserAuthController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('editProfile', [MobileUserAuthController::class, 'editProfile'])->name('editProfile');
+    Route::get('editPassword', [MobileUserAuthController::class, 'editPassword'])->name('editPassword');
+    Route::put('updatePAssword', [MobileUserAuthController::class, 'updatePassword'])->name('updatePassword');
     Route::resource('mobileUserDetail', MobileUserDetailController::class);
 
 });
