@@ -76,7 +76,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <iframe src="{{$formStore->document_url}}"></iframe>
+                                                    <iframe src="{{$formStore->document_url}}" style="height: 100%;width: 100%;"></iframe>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
@@ -113,7 +113,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <iframe src="{{$formStoreStatus->document_url}}"></iframe>
+                                                        <iframe src="{{$formStoreStatus->document_url}}" style="height: 100%;width: 100%;"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
