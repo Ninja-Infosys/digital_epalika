@@ -1,8 +1,9 @@
 <?php
 
 namespace Modules\DigitalBoard\Entities;
-
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -22,8 +23,26 @@ class PopUpNotice extends Model
         'display_duration',
         'iteration_duration',
         'is_active',
-        'ward_no'
+        'ward',
+        'user_id',
+        'is_displayed',
     ];
+
+    protected $casts = [
+        'is_displayed' => 'boolean',
+        
+    ];
+    protected function ward(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => explode(',', $value),
+            set: fn(string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+        );
+    }
+    public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
+    {
+        $builder->where('is_displayed', $display);
+    }
 
     public function getImageUrlAttribute(): string|null
     {
