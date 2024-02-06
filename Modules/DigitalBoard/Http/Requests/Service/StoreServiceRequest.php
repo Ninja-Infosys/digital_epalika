@@ -25,6 +25,9 @@ class StoreServiceRequest extends FormRequest
             'serviceDocuments.*.description' => ['required'],
             'serviceProcesses' => ['required', 'array'],
             'serviceProcesses.*.description' => ['required'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['integer'],
+            'is_displayed' => ['nullable', 'boolean'],
         ];
     }
 

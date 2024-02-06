@@ -56,7 +56,7 @@
                                     <td>
                                         <img src="{{ $program->image }}" height="70" alt="Image">
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.digitalBoard.program.edit',$program)}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>

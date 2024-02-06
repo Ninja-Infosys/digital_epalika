@@ -18,6 +18,11 @@ class VideoController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['title'], request('search'));
             }
+
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+            }
         })
         ->latest()->paginate(10);
 
@@ -36,7 +41,7 @@ class VideoController extends Controller
     {
         $this->checkAuthorization('digitalBoardVideo_create');
 
-        Video::create($request->validated());
+        Video::create($request->validated() + ['ward' => auth()->user()->ward_no, "user_id" => auth()->id()]);
 
         toast('भिडियो सफलतापूर्वक थपियो', 'success');
 
