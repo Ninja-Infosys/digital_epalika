@@ -26,12 +26,16 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <h4 class="header-title mb-0">सेवाहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
-                            @includeIf('inc.filter_form')
+                            {{-- 
                             @can('branch_create')
                                 <a href="{{ route('admin.digitalBoard.service.create') }}"
                                     class="btn btn-sm btn-outline-primary waves-effect waves-light">
                                     <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
-                            @endcan
+                            @endcan --}}
+                            @includeIf('inc.filter_form')
+                            <a href="{{ route('admin.digitalBoard.service.create') }}"
+                                    class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
                         </div>
                     </div>
                 </div>
