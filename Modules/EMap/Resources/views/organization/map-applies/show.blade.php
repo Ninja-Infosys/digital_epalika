@@ -1,4 +1,9 @@
 @extends('emap::organization.layouts.master')
+
+@push('style')
+    @vite(['resources/vue/main.js'])
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-12">

@@ -16,7 +16,10 @@
         संहिता भित्र रही निर्माण कार्य गर्नेछु/छौं। यस दरखास्त फाराममा लेखिएको व्यहोरा ठीक साँचो छ,
         झुठ्ठा ठहरे कानून बमोजिम सहुँला बुझाउँला।
     </p>
-    <p class="mt-2 fw-bold">तपसिल</p>
+    <div id="map-app">
+        <edit-applications :map-apply="{{json_encode($mapApply)}}"></edit-applications>
+    </div>
+
     <livewire:emap::edit.map-apply-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
     <p class="break-page"></p>
     <livewire:emap::edit.storey-detail-edit-livewire :mapApply="$mapApply"/>

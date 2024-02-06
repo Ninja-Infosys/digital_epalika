@@ -14,6 +14,7 @@ import myPlugins from "./plugins/my-plugins";
 
 //pages
 import MapApplication from "./pages/e-map/MapApplication.vue";
+import EditApplications from "./pages/e-map/organizaion/EditApplications.vue";
 
 createApp({})
     .use(createPinia())
@@ -24,4 +25,5 @@ createApp({})
     .component('VNepaliDatePicker', VNepaliDatePicker)
     .component('VButton', VButton)
     .component('map-application',MapApplication)
+    .component('edit-applications',EditApplications)
     .mount('#map-app')
