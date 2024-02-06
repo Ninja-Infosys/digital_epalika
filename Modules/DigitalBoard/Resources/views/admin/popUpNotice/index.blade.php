@@ -28,17 +28,18 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> पपअप सूचना</h4>
-                        @if(!empty($popUpNotice))
-                            <a href="{{route('admin.digitalBoard.popUpNotice.updateStatus',$popUpNotice)}}"
-                               class="btn btn-{{$popUpNotice->is_active? 'success':'danger'}}">
-                                {{$popUpNotice->is_active? 'पप-अप बन्द गर्नुहोस':'पप-अप देखाउनुहोस'}}
+                        @if (!empty($popUpNotice))
+                            <a href="{{ route('admin.digitalBoard.popUpNotice.updateStatus', $popUpNotice) }}"
+                                class="btn btn-{{ $popUpNotice->is_active ? 'success' : 'danger' }}">
+                                {{ $popUpNotice->is_active ? 'पप-अप बन्द गर्नुहोस' : 'पप-अप देखाउनुहोस' }}
                             </a>
                         @endif
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.digitalBoard.popUpNotice.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.digitalBoard.popUpNotice.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-2 mb-2">
@@ -49,10 +50,10 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="title" class="form-label mt-2">शिर्षक *</label>
                                     <input type="text" name="title" value="{{ old('title', $popUpNotice?->title) }}"
-                                           class="form-control mt-2 @error('title') is-invalid @enderror" id="title"
-                                           placeholder="शिर्षक " required/>
+                                        class="form-control mt-2 @error('title') is-invalid @enderror" id="title"
+                                        placeholder="शिर्षक " required />
                                     @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
@@ -63,65 +64,63 @@
                                         <img src="{{ $popUpNotice?->image_url }}" height="50" alt="">
                                     </span>
                                     <input type="file" id="image" name="image" class="form-control"
-                                           placeholder="PopUpimage">
+                                        placeholder="PopUpimage">
 
                                     @error('image')
-                                    <p class="text-danger">{{ $message }}</p>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="display_duration" class="form-label mt-2">पप-आप देखाउने समय *</label>
                                     <input type="text" name="display_duration"
-                                           value="{{ old('display_duration', $popUpNotice?->display_duration) }}"
-                                           class="form-control mt-2 @error('display_duration') is-invalid @enderror"
-                                           id="display_duration"
-                                           placeholder="पप-आप देखाउने समय"/>
+                                        value="{{ old('display_duration', $popUpNotice?->display_duration) }}"
+                                        class="form-control mt-2 @error('display_duration') is-invalid @enderror"
+                                        id="display_duration" placeholder="पप-आप देखाउने समय" />
                                     @error('display_duration')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="iteration_duration" class="form-label mt-2">पप-आप फिर्ता हुने समय
                                         *</label>
                                     <input type="text" name="iteration_duration"
-                                           value="{{ old('iteration_duration', $popUpNotice?->iteration_duration) }}"
-                                           class="form-control mt-2 @error('iteration_duration') is-invalid @enderror"
-                                           id="iteration_duration"
-                                           placeholder="पप-आप फिर्ता हुने समय"/>
+                                        value="{{ old('iteration_duration', $popUpNotice?->iteration_duration) }}"
+                                        class="form-control mt-2 @error('iteration_duration') is-invalid @enderror"
+                                        id="iteration_duration" placeholder="पप-आप फिर्ता हुने समय" />
                                     @error('iteration_duration')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="ward" class="form-label">वडा</label>
                                     <select name="ward[]" id="ward" class="form-select"
-                                            @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                        @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
                                         <option value="">---वडा छान्नुहोस्---</option>
-                                        @foreach(officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
+                                        @foreach (officeSetting()->localbody->ward_no as $ward)
+                                            <option value="{{ $ward }}"
+                                                {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no) ? [auth()->user()->ward_no] : [])) ? 'selected' : '' }}>
+                                                {{ $ward }}</option>
                                         @endforeach
                                     </select>
                                     @error('ward')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     @error('ward.*')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-4 mb-2">
-                                    <input
-                                        type="checkbox"
-                                        name="is_displayed"
-                                        value="1"
+                                    <input type="checkbox" name="is_displayed" value="1"
                                         class="form-check-input @error('is_displayed') is-invalid @enderror"
-                                        id="is_displayed"/>
+                                        id="is_displayed" />
                                     <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
 
                                     @error('is_displayed')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                              </div>
+                                    
+                                </div>
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
