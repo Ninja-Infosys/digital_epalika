@@ -17,7 +17,10 @@ class StorePopUpNoticeRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'display_duration' => ['nullable','integer'],
             'iteration_duration' => ['nullable','integer'],
-            'image' => ['nullable','mimes:png,jpeg,jpg']
+            'image' => ['nullable','mimes:png,jpeg,jpg'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['integer'],
+            'is_displayed' => ['nullable', 'boolean'],
         ];
     }
 }
