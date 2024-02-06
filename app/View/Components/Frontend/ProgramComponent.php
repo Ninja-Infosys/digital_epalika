@@ -16,9 +16,9 @@ class ProgramComponent extends Component
         $this->programs = Program::latest()
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
-                    $q->where('ward', $ward);
+                    $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
                 } else {
-                    $q->whereNull('ward');
+                    $q->MainPageDisplay();
                 }
             })
             ->orderByDesc('date')

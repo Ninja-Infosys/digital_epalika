@@ -1,7 +1,8 @@
 <?php
 
 namespace Modules\DigitalBoard\Entities;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,12 +24,26 @@ class Video extends Model
     protected $fillable = [
         'title',
         'video',
+        'ward',
+        'is_displayed',
+        'user_id'
     ];
 
-    public function getVideoUrlAttribute(): string
+    
+    protected $casts = [
+        'is_displayed' => 'boolean'
+    ];
+
+    public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
     {
-        return ($this->attributes['video'] && Storage::disk('public')->exists($this->attributes['video']))
-            ? Storage::disk('public')->url($this->attributes['video'])
-            : asset('default/noVideo.webp');
+        $builder->where('is_displayed', $display);
+    }
+
+    protected function ward(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => explode(',', $value),
+            set: fn(string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+        );
     }
 }

@@ -13,7 +13,14 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $programs = Program::latest()->get();
+        $programs = Program::
+        where(function ($q){
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+            }
+        })
+        ->get();
         return view('digitalboard::admin.program.index', compact('programs'));
     }
 
@@ -24,7 +31,7 @@ class ProgramController extends Controller
 
     public function store(StoreProgramRequest $request)
     {
-        Program::create($request->validated());
+        Program::create($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
         toast('कार्यक्रम सफलतापुर्वक थपियो', 'success');
         return back();
     }

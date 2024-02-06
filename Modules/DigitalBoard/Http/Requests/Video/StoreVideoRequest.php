@@ -17,6 +17,9 @@ class StoreVideoRequest extends FormRequest
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'video' => ['required'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['integer'],
+            'is_displayed' => ['nullable', 'boolean']
         ];
     }
 
