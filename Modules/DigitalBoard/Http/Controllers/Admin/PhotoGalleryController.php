@@ -1,7 +1,7 @@
 <?php
 
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Modules\DigitalBoard\Entities\PhotoGallery;
 use Modules\DigitalBoard\Http\Requests\PhotoGallery\StorePhotoGalleryRequest;
@@ -11,7 +11,16 @@ class PhotoGalleryController extends Controller
 {
     public function index()
     {
-        $photoGalleries = PhotoGallery::get();
+        $photoGalleries = PhotoGallery::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+            }
+        })->get();
 
         return view('digitalboard::admin.photoGallery.index', compact('photoGalleries'));
     }
@@ -24,7 +33,7 @@ class PhotoGalleryController extends Controller
     public function store(StorePhotoGalleryRequest $request)
     {
 
-        PhotoGallery::create($request->validated());
+        PhotoGallery::create($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
         toast('फोटो ग्यालरी सफलतापूर्वक थपियो', 'success');
         return back();
     }
@@ -41,7 +50,7 @@ class PhotoGalleryController extends Controller
 
     public function update(UpdatePhotoGalleryRequest $request, PhotoGallery $photoGallery)
     {
-        $photoGallery->update($request->validated());
+        $photoGallery->update($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
 
         toast('फोटो ग्यालरी सफलतापूर्वक अपडेट गरियो', 'success');
 
