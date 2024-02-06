@@ -17,7 +17,7 @@ Route::resource('video', VideoController::class);
 Route::resource('{type}/notice', NoticeController::class);
 Route::get('{type}/notice/{notice}/noticeUpdate', [NoticeController::class, 'updateClosedDate'])->name('notice.updateClosedDate');
 Route::get('{type}/notice/{notice}/updateShowOnIndex', [NoticeController::class, 'updateShowOnIndex'])->name('notice.updateShowOnIndex');
-Route::get('popUpNotice/{popUpNotice}/updateShowOnIndex', [PopUpNoticeController::class, 'updateShowOnIndex'])->name('popUpNotice.updateShowOnIndex');
+//Route::get('popUpNotice/{popUpNotice}/updateShowOnIndex', [PopUpNoticeController::class, 'updateShowOnIndex'])->name('popUpNotice.updateShowOnIndex');
 Route::resource('popUpNotice', PopUpNoticeController::class);
 Route::resource('program', \Modules\DigitalBoard\Http\Controllers\Admin\ProgramController::class);
 
@@ -30,3 +30,7 @@ Route::resource('service/{service}/serviceEmployee', ServiceEmployeeController::
 Route::resource('citizenCharter', CitizenCharterController::class);
 Route::resource('photoGallery', PhotoGalleryController::class);
 Route::resource('audio', AudioController::class);
+
+Route::get('popUpNotice/{popUpNotice}/updateStatus', [PopUpNoticeController::class, 'updateStatus'])->name('popUpNotice.updateStatus');
+Route::resource('popUpNotice', PopUpNoticeController::class)
+    ->only('index', 'store');
