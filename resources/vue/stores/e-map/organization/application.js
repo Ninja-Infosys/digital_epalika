@@ -7,18 +7,14 @@ export const useApplicationStore = defineStore('application', {
         applications: {}
     }),
     actions: {
-        getMapApplications() {
-            return axios.get(`${baseUrl}/sanctum/csrf-cookie`,{
-                withCredentials:true
-            }).then(()=>{
-                return axios.get(`${baseUrl}/api/organization/admin/applications`)
-                    .then((res) => {
-                        return res;
-                    })
-                    .catch((err) => {
-                        throw err;
-                    })
-            })
+        updateApplicationDetail(map_apply_id,form) {
+            return axios.put(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-detail`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
 
         }
     }

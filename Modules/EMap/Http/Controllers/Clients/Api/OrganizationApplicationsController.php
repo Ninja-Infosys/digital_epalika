@@ -3,33 +3,28 @@
 namespace Modules\EMap\Http\Controllers\Clients\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Notifications\ApplyMapNoticeNotification;
-use App\Notifications\MapApplyNotification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
-use Modules\EMap\Entities\AppliedDocument;
-use Modules\EMap\Entities\ApplyMapNotice;
-use Modules\EMap\Entities\Form;
-use Modules\EMap\Entities\FormStore;
-use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\MapSetting;
-use Modules\EMap\Entities\PaymentStore;
-use Modules\EMap\Enums\DocumentStatusEnum;
-use Modules\EMap\Enums\NoticeTypeEnum;
-use function view;
+use Modules\EMap\Entities\StructureType;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateMapApplicationRequest;
 
 class OrganizationApplicationsController extends Controller
 {
-    public function mapApplications()
+    public function updateMapApplication(UpdateMapApplicationRequest $request, MapApply $mapApply)
     {
-        $mapApplies = MapApply::with('houseOwner')
-            ->where('organization_id', auth('organization')->user()->id)
-            ->latest()
-            ->get();
+        $formData = $request->validated();
 
-        return $mapApplies;
+        DB::transaction(function () use ($formData, $mapApply) {
+            if (empty($formData['structure_type_id']) && !empty($formData['structure_type'])) {
+                $structure_type = StructureType::create(['title' => $formData['structure_type']]);
+                $formData['structure_type_id'] = $structure_type->id;
+            }
+
+            $mapApply->update($formData);
+        });
+
+        return response()->json([
+            'message' => 'नक्सा आवेदन सफलतापूर्वक अद्यावधिक गरियो'
+        ]);
     }
 }
