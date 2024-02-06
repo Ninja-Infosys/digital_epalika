@@ -20,6 +20,7 @@ body {
     background-color: var(--whiteColor) !important;
     font-family: 'Mukta', sans-serif !important;
     font-size: var(--fontSize);
+    overflow-x: hidden;
 }
 /* devanagari */
 @font-face {

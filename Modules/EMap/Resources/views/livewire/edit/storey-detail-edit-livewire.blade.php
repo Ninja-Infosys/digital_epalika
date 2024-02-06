@@ -31,6 +31,7 @@
                         </td>
                         <td>
                             <input type="number"
+                            step="any"
                                    id="storeyDetails.{{$index}}.area_of_proposed_construction"
                                    wire:model="storeyDetails.{{$index}}.area_of_proposed_construction"
                                    {{$dataToEdit !== $index ?'disabled':''}}
@@ -41,6 +42,9 @@
                         </td>
                         <td>
                             <input type="number"
+
+                            step="any"
+
                                    id="storeyDetails.{{$index}}.area_of_former_construction"
                                    wire:model="storeyDetails.{{$index}}.area_of_former_construction"
                                    {{$dataToEdit !== $index ?'disabled':''}}
@@ -51,6 +55,7 @@
                         </td>
                         <td>
                             <input type="number"
+                            step="any"
                                    id="storeyDetails.{{$index}}.total_area"
                                    wire:model="storeyDetails.{{$index}}.total_area"
                                    {{$dataToEdit !== $index ?'disabled':''}}
@@ -61,6 +66,7 @@
                         </td>
                         <td>
                             <input type="number"
+                            step="any"
                                    id="storeyDetails.{{$index}}.height"
                                    wire:model="storeyDetails.{{$index}}.height"
                                    {{$dataToEdit !== $index ?'disabled':''}}
