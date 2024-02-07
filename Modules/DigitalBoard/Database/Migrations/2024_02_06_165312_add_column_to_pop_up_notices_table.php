@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pop_up_notices', function (Blueprint $table) {
-            $table->string('ward')->nullable();
+            $table->string('is_displayed')->default(false);
+           
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
@@ -26,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('pop_up_notices', function (Blueprint $table) {
-            $table->string('ward');
+            $table->string('is_displayed');
+            $table->foreignId('user_id');
+            
         });
     }
 };
