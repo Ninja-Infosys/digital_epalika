@@ -8,6 +8,7 @@ use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
+use Modules\EMap\Http\Controllers\Admin\OrganizationArchiveController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
@@ -55,6 +56,10 @@ Route::get('mapApply/{mapApply}/houseOwnerArchive/documentDetail', [HouseOwnerAr
 Route::get('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/print', [HouseOwnerArchiveController::class,'print'])->name('houseOwnerArchive.printMuchulka');
 Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
 Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class, 'storeDocument'])->name('storeDocument');
+
+//organization archive
+Route::resource('mapApply/{mapApply}/organizationArchive', OrganizationArchiveController::class);
+
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/{id}/appliedDocument', [AdminStepController::class, 'updateDocument'])->name('updateDocument');
 //templete print
 Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AdminStepController::class, 'printTemplate'])->name('printTemplate');

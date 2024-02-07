@@ -279,4 +279,9 @@ class MapApply extends Model
     {
         return $this->hasMany(HouseOwnerArchive::class);
     }
+
+    public function organizationArchives(): HasMany
+    {
+        return $this->hasMany(OrganizationArchive::class);
+    }
 }
