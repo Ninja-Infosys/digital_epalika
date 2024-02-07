@@ -129,8 +129,6 @@ const editFormOpened=ref(false);
 
 const {eMapSetting}=storeToRefs(settingStore);
 
-const has_other_structure_type=ref(false);
-
 const initialState={
     land_use_area_id:'',
     ward_no:'',
@@ -145,25 +143,12 @@ const initialState={
 const form = reactive({...initialState});
 
 onMounted(()=>{
-    console.log(props.mapApply?.landDetail)
     Object.keys(form).forEach(key => {
-        form[key] =props.mapApply.landDetail ? props.mapApply.landDetail[key] : '';
+        form[key] =props.mapApply.land_detail[key]??'';
     })
 })
 
 const isSubmitting=ref(false);
-
-watch(()=>has_other_structure_type.value,(has_other_type)=>{
-    if(has_other_type){
-        form.structure_type_id='';
-    }
-})
-
-watch(()=>form.structure_type_id,(type_id)=>{
-    if(type_id){
-        has_other_structure_type.value=false;
-    }
-})
 
 const validations = object({
     land_use_area_id:string().required('अनिवार्य छ'),
@@ -173,7 +158,7 @@ const validations = object({
     street_code_no:string().nullable(),
     plot_no:string().required('अनिवार्य छ'),
     unit_value:string().required('अनिवार्य छ'),
-    percentage_of_area_covered_by_building:string().required('अनिवार्य छ')
+    percentage_of_area_covered_by_building:string().required('अनिवार्य छ'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
@@ -183,10 +168,9 @@ const saveFormData=async (map_apply_id) => {
     if (validated) {
         isSubmitting.value = true;
         try {
-            let res = await applicationStore.updateApplicationDetail(map_apply_id,form);
+            let res = await applicationStore.updateLandDetail(map_apply_id,form);
             toast(res.status,res.data.message);
             editFormOpened.value=false;
-            form.structure_type='';
         }catch (e) {
             showErrors(e);
         }finally {
