@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\Settings\OfficeSetting;
@@ -9,13 +9,14 @@ use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema as FacadesSchema;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\Project;
 use Modules\Roaster\Entities\Training;
-use Schema;
+
 use Modules\EMap\Http\Controllers\Admin\DashboardController as EmapDashboardController;
 use Modules\Revenue\Http\Controllers\Admin\DashboardController as RevenueDashboardController;
 use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController as DigitalDashboardController;
@@ -24,6 +25,7 @@ use Modules\Roaster\Http\Controllers\DashboardController as RoasterDashboardCont
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController as BusinessRegistrationDashboardController;
 use Modules\Identity\Http\Controllers\DashboardController as IdentityDashboardController;
 use Modules\Circular\Http\Controllers\Admin\DashboardController as CircularDashboardController;
+use Nette\Schema\Schema as SchemaSchema;
 
 class DashboardController extends Controller
 {
