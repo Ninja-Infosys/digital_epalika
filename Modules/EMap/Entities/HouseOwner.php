@@ -33,6 +33,7 @@ class HouseOwner extends Model
         'address',
         'local_body',
         'ward_no',
+        'status',
     ];
 
     public function oldMaps(): BelongsToMany

@@ -96,6 +96,21 @@
                                 @endif
                             </div>
                             <div class="col-md-12 mb-2">
+                                @foreach ((new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
+                                    <div class="mt-2 mb-2">
+                                        <h4>{{ $template['title'] ?? '' }} :</h4>
+                                        <div class="button-list d-flex flex-wrap mb-2">
+                                            @foreach ($template['data'] as $key => $templateValue)
+                                                <button type="button" class="btn btn-outline-primary btn-xs"
+                                                        onclick="copyText('{{ $templateValue }}')">
+                                                    {{ $key }}
+                                                </button>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="col-md-12 mb-2">
                                 <label for="muchulka_after_complietion" class="form-label">Muchulka After Complietion
                                 </label>
                                 <textarea name="muchulka_after_complietion" id="muchulka_after_complietion" cols="30"
