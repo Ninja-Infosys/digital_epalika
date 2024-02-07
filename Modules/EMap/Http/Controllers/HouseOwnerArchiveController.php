@@ -121,7 +121,12 @@ class HouseOwnerArchiveController extends Controller
 
     public function print(MapApply $mapApply,HouseOwnerArchive $houseOwnerArchive)
     {
-        $mapSetting = MapSetting::first()->muchulka_after_complietion??null;
+        if($mapApply->sent_to_organization === 'done')
+        {
+            $mapSetting = MapSetting::first()->muchulka_after_complietion??null;
+        }else{
+            $mapSetting = MapSetting::first()->muchulka_before_complietion??null;
+        }
         $mapApply->load(
             'landDetail',
             'landOwner',
