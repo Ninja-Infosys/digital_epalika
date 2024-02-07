@@ -32,9 +32,12 @@
                                     घरधनि नामसारी
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                  <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',$mapApply) }}"> House Owner before compilation of house</a></li>
-                                  <li><a class="dropdown-item" href="#"> House Owner After compilation of house</a></li>
+                                    @if($mapApply->sent_to_organization == 'done')
+                                        <li><a class="dropdown-item" href="#"> House Owner After compilation of house</a></li>
+                                        @else
+                                    <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> House Owner before compilation of house</a></li>
                                   <li><a class="dropdown-item" href="#"> Organization</a></li>
+                                        @endif
                                 </ul>
                             </div>
                             @if(empty($mapApply->registration_no))

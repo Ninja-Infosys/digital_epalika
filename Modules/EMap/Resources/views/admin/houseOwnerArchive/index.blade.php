@@ -149,57 +149,133 @@
             </div>
         </div>
     </div>
+    @if($mapApply->houseOwnerArchives->count() > 0)
     <div class="row">
         <div class="col-md-12">
             <div class="card p-0">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="header-title mb-0">पुरानो घर धनीको विवरण</h4>
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title mb-0">नया घर धनीको विवरण</h4>
 
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-sm table-striped">
-                <thead>
-                    <tr>
-                        <th>क्र.स</th>
-                        <th>जग्गा धनीको नाम</th>
-                        <th>फोन नं.</th>
-                        <th>बुवाको नाम</th>
-                        <th>हजुरबुबाको नाम</th>
-                        <th>नागरिकता नम्बर</th>
-                        <th>#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($houseOwnerArchives as $houseOwnerArchive)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $houseOwnerArchive->name }}</td>
-                            <td>{{ $houseOwnerArchive->phone }}</td>
-                            <td>{{ $houseOwnerArchive->father_name}}</td>
-                            <td>{{ $houseOwnerArchive->grandfather_name }}</td>
-                            <td>{{ $houseOwnerArchive->citizenship_no }}</td>
-                            <td class="d-flex">
-                                <a data-bs-type="edit"
-                                    href="{{ route('emap.admin.houseOwnerArchive.show', [$mapApply,$houseOwnerArchive]) }}"
-                                    class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                    data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>जग्गा धनीको नाम</th>
+                                <th>फोन नं.</th>
+                                <th>बुवाको नाम</th>
+                                <th>हजुरबुबाको नाम</th>
+                                <th>नागरिकता नम्बर</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{ $mapApply->houseOwner->name??'' }}</td>
+                                    <td>{{ $mapApply->houseOwner->phone??'' }}</td>
+                                    <td>{{ $mapApply->houseOwner->father_name??''}}</td>
+                                    <td>{{ $mapApply->houseOwner->grandfather_name ??''}}</td>
+                                    <td>{{ $mapApply->houseOwner->citizenship_no ??''}}</td>
+                                    <td class="d-flex">
+                                        <a
+                                           href="{{ route('emap.admin.houseOwnerArchive.documentList', $mapApply) }}"
+                                           class="btn btn-xs me-1 btn-outline-primary"
+                                           data-bs-toggle="tooltip" data-bs-placement="top">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    @endif
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card p-0">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="header-title mb-0">पुरानो घर धनीको विवरण</h4>
+
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>जग्गा धनीको नाम</th>
+                                <th>फोन नं.</th>
+                                <th>बुवाको नाम</th>
+                                <th>हजुरबुबाको नाम</th>
+                                <th>नागरिकता नम्बर</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($houseOwnerArchives as $houseOwnerArchive)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $houseOwnerArchive->name }}</td>
+                                    <td>{{ $houseOwnerArchive->phone }}</td>
+                                    <td>{{ $houseOwnerArchive->father_name}}</td>
+                                    <td>{{ $houseOwnerArchive->grandfather_name }}</td>
+                                    <td>{{ $houseOwnerArchive->citizenship_no }}</td>
+                                    <td class="d-flex">
+                                        <a data-bs-type="edit"
+                                            href="{{ route('emap.admin.houseOwnerArchive.show', [$mapApply,$houseOwnerArchive]) }}"
+                                            class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                            data-bs-toggle="tooltip" data-bs-placement="top">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           route_action="{{ route('emap.admin.houseOwnerArchive.printMuchulka',[$mapApply,$houseOwnerArchive]) }}" class="btn btn-primary btn-sm printDetail">
+                                            <i class="fa fa-print"></i>
+
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click", function (e) {
+                // alert('dd');
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
+                        const print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+        </script>
+    @endpush
+
 @endsection
