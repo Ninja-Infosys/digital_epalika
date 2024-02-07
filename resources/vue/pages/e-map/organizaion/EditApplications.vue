@@ -5,6 +5,8 @@
     </p>
     <p class="break-page"></p>
     <StoreyDetail :map-apply="mapApply" />
+
+    <editLandDetail :map-apply="mapApply" />
 </template>
 
 <script setup>
@@ -14,6 +16,7 @@ import {useApplicationStore} from "../../../stores/e-map/organization/applicatio
 import {useSettingStore} from "../../../stores/setting";
 import EditApplicationDetail from "./forms/EditApplicationDetail.vue";
 import StoreyDetail from "./forms/StoreyDetail.vue";
+import EditLandDetail from "./forms/EditLandDetail.vue";
 
 defineProps({
     mapApply:{

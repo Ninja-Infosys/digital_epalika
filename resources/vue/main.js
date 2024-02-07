@@ -8,6 +8,7 @@ import VSelect from "./components/base/VSelect.vue";
 import VMultiSelect from "./components/base/VMultiSelect.vue";
 import VButton from "./components/base/VButton.vue";
 import VNepaliDatePicker from "./components/base/VNepaliDatePicker.vue";
+import VModal from "./components/base/VModal.vue";
 
 //my plugins
 import myPlugins from "./plugins/my-plugins";
@@ -24,6 +25,7 @@ createApp({})
     .component('VMultiSelect', VMultiSelect)
     .component('VNepaliDatePicker', VNepaliDatePicker)
     .component('VButton', VButton)
+    .component('VModal', VModal)
     .component('map-application',MapApplication)
     .component('edit-applications',EditApplications)
     .mount('#map-app')
