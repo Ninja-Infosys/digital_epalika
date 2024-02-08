@@ -47,9 +47,9 @@
 
                             <div class="row">
                                 <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="name"> जग्गा धनीको नाम </label>
+                                    <label class="form-label" for="name"> घर धनीको नाम </label>
                                     <input class="form-control form-control-sm" type="text" value="{{ old('name') }}" name="name" id="name"
-                                         placeholder=" जग्गा धनीको नाम">
+                                         placeholder=" घर धनीको नाम">
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -165,7 +165,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>जग्गा धनीको नाम</th>
+                                <th>घर धनीको नाम</th>
                                 <th>फोन नं.</th>
                                 <th>बुवाको नाम</th>
                                 <th>हजुरबुबाको नाम</th>
@@ -279,7 +279,7 @@
                         <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>जग्गा धनीको नाम</th>
+                                <th>घर धनीको नाम</th>
                                 <th>फोन नं.</th>
                                 <th>बुवाको नाम</th>
                                 <th>हजुरबुबाको नाम</th>
