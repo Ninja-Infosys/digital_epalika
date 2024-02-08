@@ -9,11 +9,13 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
+        if(!User::where('email','admin@admin.com')->exists()){
         User::create([
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
             'password' => 'password',
             'role_id' => 1,
         ]);
+    }
     }
 }
