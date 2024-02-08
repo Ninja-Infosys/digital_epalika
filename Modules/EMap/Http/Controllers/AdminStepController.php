@@ -610,7 +610,7 @@ class AdminStepController extends Controller
 
             //landowner
 
-            $mapApply->landOwner->land_owner_type->label() ?? '',
+            $mapApply->landOwner->land_owner_type?->label() ?? '',
             $mapApply->landOwner->name ?? '',
             $mapApply->landOwner->phone ?? '',
             $mapApply->landOwner->father_name ?? '',
@@ -641,8 +641,8 @@ class AdminStepController extends Controller
             ]),
 
             //applicantDetail
-            $mapApply->applicantDetail->applicant_type->label() ?? '',
-            $mapApply->applicantDetail->relation_with_owner->label() ?? '',
+            $mapApply->applicantDetail->applicant_type?->label() ?? '',
+            $mapApply->applicantDetail->relation_with_owner?->label() ?? '',
             $mapApply->applicantDetail->name ?? '',
             $mapApply->applicantDetail->phone ?? '',
             $mapApply->applicantDetail->father_name ?? '',
