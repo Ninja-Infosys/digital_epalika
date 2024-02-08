@@ -53,7 +53,10 @@ Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedD
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
 Route::get('mapApply/{mapApply}/houseOwnerArchive/documentDetail', [HouseOwnerArchiveController::class,'documentDetail'])->name('houseOwnerArchive.documentList');
+Route::put('mapApply/{mapApply}/houseOwner/{houseOwner}/uploadDocument', [HouseOwnerArchiveController::class,'uploadDocumentHouseOwner'])->name('houseOwner.uploadDocumentHouseOwner');
+Route::put('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/uploadDocument', [HouseOwnerArchiveController::class,'uploadDocument'])->name('houseOwnerArchive.uploadDocument');
 Route::get('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/print', [HouseOwnerArchiveController::class,'print'])->name('houseOwnerArchive.printMuchulka');
+Route::get('mapApply/{mapApply}/houseOwner/{houseOwner}/print', [HouseOwnerArchiveController::class,'printHouseOwner'])->name('houseOwnerArchive.printHouseOwner');
 Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
 Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class, 'storeDocument'])->name('storeDocument');
 

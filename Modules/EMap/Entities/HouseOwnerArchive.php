@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 
 class HouseOwnerArchive extends Model
 {
@@ -36,6 +37,7 @@ class HouseOwnerArchive extends Model
         'local_body',
         'ward_no',
         'status',
+        'document',
     ];
 
     public function mapApply()
@@ -51,5 +53,19 @@ class HouseOwnerArchive extends Model
     public function citizenshipIssueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
+    }
+
+    public function setDocumentAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['document'] = $value->store('houseOwnerArchive','public');
+        }
+    }
+    public function getDocumentUrlAttribute($value)
+    {
+
+        return  $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
+
     }
 }

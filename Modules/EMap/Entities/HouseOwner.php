@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class HouseOwner extends Model
 {
@@ -34,6 +35,7 @@ class HouseOwner extends Model
         'local_body',
         'ward_no',
         'status',
+        'document',
     ];
 
     public function oldMaps(): BelongsToMany
@@ -60,5 +62,19 @@ class HouseOwner extends Model
     public function files()
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function setDocumentAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['document'] = $value->store('houseOwnerArchive','public');
+        }
+    }
+    public function getDocumentUrlAttribute($value)
+    {
+
+          return  $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
+
     }
 }
