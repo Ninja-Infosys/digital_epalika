@@ -170,6 +170,7 @@
                                 <th>बुवाको नाम</th>
                                 <th>हजुरबुबाको नाम</th>
                                 <th>नागरिकता नम्बर</th>
+                                <th>प्रिन्ट फाईल</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -181,6 +182,29 @@
                                     <td>{{ $mapApply->houseOwner->father_name??''}}</td>
                                     <td>{{ $mapApply->houseOwner->grandfather_name ??''}}</td>
                                     <td>{{ $mapApply->houseOwner->citizenship_no ??''}}</td>
+                                    <td>
+
+
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#view_file{{ $mapApply->houseOwner->id }}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                        <!-- view file model pass url dynamically in the model-->
+                                        <div class="modal fade" id="view_file{{ $mapApply->houseOwner->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <iframe src="{{ $mapApply->houseOwner->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </td>
                                     <td class="d-flex">
                                         <a
                                            href="{{ route('emap.admin.houseOwnerArchive.documentList', $mapApply) }}"
@@ -188,6 +212,48 @@
                                            data-bs-toggle="tooltip" data-bs-placement="top">
                                             <i class="fa fa-eye"></i>
                                         </a>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#fileUploadOwner">
+                                            <i class="fa fa-file"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="fileUploadOwner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">नयाँ फाईल राख्नुहोस्</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="{{ route('emap.admin.houseOwner.uploadDocumentHouseOwner', [$mapApply,$mapApply->houseOwner->id]) }}" enctype="multipart/form-data" method="post">
+                                                        <div class="modal-body">
+                                                            @csrf
+                                                            @method('put')
+                                                            <div class="col-md-12 mb-2">
+                                                                <label for="document" class="form-label">फाईल *</label>
+                                                                <input type="file" name="document"
+                                                                       class="form-control @error('document') is-invalid @enderror" id="document"  />
+                                                                @error('document')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                            <button type="submit" class="btn btn-primary">पेश गर्नुहोस</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)"
+                                           route_action="{{ route('emap.admin.houseOwnerArchive.printHouseOwner',[$mapApply,$mapApply->houseOwner->id]) }}" class="btn btn-primary btn-sm printDetail">
+                                            <i class="fa fa-print"></i>
+
+                                        </a>
+
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -218,6 +284,7 @@
                                 <th>बुवाको नाम</th>
                                 <th>हजुरबुबाको नाम</th>
                                 <th>नागरिकता नम्बर</th>
+                                <th>प्रिन्ट फाईल</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -230,6 +297,26 @@
                                     <td>{{ $houseOwnerArchive->father_name}}</td>
                                     <td>{{ $houseOwnerArchive->grandfather_name }}</td>
                                     <td>{{ $houseOwnerArchive->citizenship_no }}</td>
+                                    <td>
+
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#view_file{{ $houseOwnerArchive->id }}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                        <!-- view file model pass url dynamically in the model-->
+                                        <div class="modal fade" id="view_file{{ $houseOwnerArchive->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <iframe src="{{ $houseOwnerArchive->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="d-flex">
                                         <a data-bs-type="edit"
                                             href="{{ route('emap.admin.houseOwnerArchive.show', [$mapApply,$houseOwnerArchive]) }}"
@@ -238,10 +325,46 @@
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         <a href="javascript:void(0)"
-                                           route_action="{{ route('emap.admin.houseOwnerArchive.printMuchulka',[$mapApply,$houseOwnerArchive]) }}" class="btn btn-primary btn-sm printDetail">
+                                           route_action="{{ route('emap.admin.houseOwnerArchive.printMuchulka',[$mapApply,$houseOwnerArchive,'houseOwnerArchive']) }}" class="btn btn-primary btn-sm printDetail">
                                             <i class="fa fa-print"></i>
 
                                         </a>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#fileUpload{{$houseOwnerArchive->id}}">
+                                            <i class="fa fa-file"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="fileUpload{{$houseOwnerArchive->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">नयाँ फाईल राख्नुहोस्</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="{{ route('emap.admin.houseOwnerArchive.uploadDocument', [$mapApply,$houseOwnerArchive]) }}" enctype="multipart/form-data" method="post">
+                                                    <div class="modal-body">
+                                                            @csrf
+                                                            @method('put')
+                                                            <div class="col-md-12 mb-2">
+                                                                <label for="document" class="form-label">फाईल *</label>
+                                                                <input type="file" name="document"
+                                                                       class="form-control @error('document') is-invalid @enderror" id="document"  />
+                                                                @error('document')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                        <button type="submit" class="btn btn-primary">पेश गर्नुहोस</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </td>
                                 </tr>
                             @empty

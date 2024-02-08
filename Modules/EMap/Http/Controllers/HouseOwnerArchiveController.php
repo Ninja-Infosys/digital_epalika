@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address\District;
 use App\Models\File;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -123,9 +124,9 @@ class HouseOwnerArchiveController extends Controller
     {
         if($mapApply->sent_to_organization === 'done')
         {
-            $mapSetting = MapSetting::first()->muchulka_after_complietion??null;
+            $mapSetting = MapSetting::first()?->muchulka_after_complietion??null;
         }else{
-            $mapSetting = MapSetting::first()->muchulka_before_complietion??null;
+            $mapSetting = MapSetting::first()?->muchulka_before_complietion??null;
         }
         $mapApply->load(
             'landDetail',
@@ -144,7 +145,7 @@ class HouseOwnerArchiveController extends Controller
         ]);
     }
 
-    protected function getEmapTemplateData($mapApply,$houseOwnerArchive)
+    protected function getEmapTemplateData($mapApply,$houseOwnerArchive=null)
     {
         $designerDetail = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER)->first();
         $supervisorDetail = $mapApply->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
@@ -197,16 +198,17 @@ class HouseOwnerArchiveController extends Controller
             //houseOwner
 
 
-            $houseOwnerArchive->name ?? '',
-            $houseOwnerArchive->phone ?? '',
-            $houseOwnerArchive->father_name ?? '',
-            $houseOwnerArchive->grandfather_name ?? '',
-            $houseOwnerArchive->citizenshipIssueDistrict->district ?? '',
-            $houseOwnerArchive->citizenship_no ?? '',
-            $houseOwnerArchive->citizenship_issue_date ?? '',
-            $houseOwnerArchive->address ?? '',
-            $houseOwnerArchive->local_body ?? '',
-            $houseOwnerArchive->ward_no ?? '',
+
+            !empty($houseOwnerArchive) ? $houseOwnerArchive->name : $mapApply->houseOwner->name ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->phone : $mapApply->houseOwner->phone ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->father_name : $mapApply->houseOwner->father_name ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->grandfather_name : $mapApply->houseOwner->grandfather_name ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->citizenshipIssueDistrict->district : $mapApply->houseOwner->citizenshipIssueDistrict->district ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->citizenship_no : $mapApply->houseOwner->citizenship_no ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->citizenship_issue_date : $mapApply->houseOwner->citizenship_issue_date ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->address : $mapApply->houseOwner->address ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->local_body : $mapApply->houseOwner->local_body ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->ward_no : $mapApply->houseOwner->ward_no ?? '',
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
@@ -388,5 +390,52 @@ class HouseOwnerArchiveController extends Controller
             '[@contractorDetail.local_body_registration_no]',
             '[@contractorDetail.consulting_firm_name]'
         ];
+    }
+
+    public function uploadDocument(Request $request,MapApply $mapApply,HouseOwnerArchive $houseOwnerArchive)
+    {
+
+        $data = $request->validate([
+            'document'=>['required','file']
+        ]);
+        $houseOwnerArchive->update($data);
+        toast('Document added Successfully','success');
+        return back();
+    }
+    public function uploadDocumentHouseOwner(Request $request,MapApply $mapApply,HouseOwner $houseOwner)
+    {
+
+        $data = $request->validate([
+            'document'=>['required','file']
+        ]);
+        $houseOwner->update($data);
+        toast('Document added Successfully','success');
+        return back();
+    }
+
+    public function printHouseOwner(MapApply $mapApply,HouseOwner $houseOwner)
+    {
+        if($mapApply->sent_to_organization === 'done')
+        {
+            $mapSetting = MapSetting::first()?->muchulka_after_complietion??null;
+        }else{
+            $mapSetting = MapSetting::first()?->muchulka_before_complietion??null;
+        }
+        $mapApply->load(
+            'landDetail',
+            'landOwner',
+            'houseOwner',
+            'fourForts',
+            'applicantDetail.citizenshipIssueDistrict',
+            'criteriaDetails',
+            'buildingDetails',
+            'designerDetails'
+        );
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $mapSetting);
+
+        return response()->json([
+            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
+        ]);
+
     }
 }
