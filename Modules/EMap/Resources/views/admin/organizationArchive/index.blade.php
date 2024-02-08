@@ -30,7 +30,7 @@
             <div class="card p-0">
                 <div class="mb-3">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="header-title">संगठन विवरण</h4>
+                        <h4 class="header-title">संगठन नामसारी</h4>
                     </div>
                 </div>
             </div>
@@ -39,38 +39,33 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="card p-4 mb-4">
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="organization_id"> संगठन </label>
-                                    <select name="organization_id" id="organization_id" class="form-select">
-                                        <option value="">-- छान्नुहोस् --</option>
-                                        @foreach ($organizations as $organization)
-                                            <option value="{{ $organization->id }}">
-                                                {{$organization->organizationDetail->org_name_ne??''}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('organization_id')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                    <x-date-input-component
-                                        label-ne="संगठन अभिलेख मिति"
-                                        name-ne="archive_date_bs"
-                                    />
-                                </div>
-                                @livewire('multiple-file')
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary">
-                                        पेश गर्नुहोस
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="organization_id"> संगठन </label>
+                            <select name="organization_id" id="organization_id" class="form-select">
+                                <option value="">-- छान्नुहोस् --</option>
+                                @foreach ($organizations as $organization)
+                                    <option value="{{ $organization->id }}">
+                                        {{$organization->organizationDetail->org_name_ne??''}}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('organization_id')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
 
+                        <div class="col-md-4 mb-3">
+                            <x-date-input-component
+                                label-ne="संगठन नामसारी मिति "
+                                name-ne="archive_date_bs"
+                            />
+                        </div>
+                        @livewire('multiple-file')
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                पेश गर्नुहोस
+                            </button>
+                        </div>
                     </div>
 
                 </form>
@@ -78,7 +73,7 @@
         </div>
     </div>
     @if($mapApply->organizationArchives->count() > 0)
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-12">
             <div class="card p-0">
                 <div class="card-header">
@@ -108,7 +103,7 @@
                                     <td>{{ $mapApply->organization->phone??'' }}</td>
                                     <td class="d-flex">
                                         <a
-                                            href="#"
+                                            href="{{route('emap.admin.organization.show',$mapApply->organization)}}"
                                             class="btn btn-xs me-1 btn-outline-primary"
                                             data-bs-toggle="tooltip" data-bs-placement="top">
                                             <i class="fa fa-eye"></i>
@@ -128,7 +123,7 @@
             <div class="card p-0">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="header-title mb-0">पुरानो घर धनीको विवरण</h4>
+                    <h4 class="header-title mb-0">पुरानो संगठनको विवरण</h4>
 
                 </div>
             </div>
@@ -154,7 +149,7 @@
                             <td>{{ $organizationArchive->organization->phone??'' }}</td>
                             <td class="d-flex">
                                 <a
-                                    href="#"
+                                    href="{{route('emap.admin.organizationArchive.show',[$mapApply,$organizationArchive])}}"
                                     class="btn btn-xs me-1 btn-outline-primary"
                                     data-bs-toggle="tooltip" data-bs-placement="top">
                                     <i class="fa fa-eye"></i>

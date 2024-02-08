@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Organization;
+use Modules\EMap\Entities\OrganizationArchive;
 use Modules\EMap\Http\Requests\OrganizationArchiveRequest;
 
 class OrganizationArchiveController extends Controller
@@ -49,5 +50,12 @@ class OrganizationArchiveController extends Controller
         toast('New Organization Updated Successfully', 'success');
 
         return back();
+    }
+
+    public function show(MapApply $mapApply, OrganizationArchive $organizationArchive)
+    {
+        $organizationArchive->load('organization.organizationDetail','organization.files');
+
+        return view('emap::admin.organizationArchive.show', compact('mapApply', 'organizationArchive'));
     }
 }

@@ -71,7 +71,7 @@
                                                 @can('organization_access')
                                                     <a href="{{ route('emap.admin.organization.show', $organization) }}"
                                                         title="हेर्नुहोस्"
-                                                        class="rounded-1 btn me-1 btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                        class="rounded-1 btn me-1 btn-xs btn-outline-primary">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcan
