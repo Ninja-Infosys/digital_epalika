@@ -9,9 +9,12 @@ class RoleSeeder extends Seeder
 {
     public function run()
     {
-        Role::create([
-            'title' => 'Super Admin',
-            'type' => 'Super',
-        ]);
+        if(!Role::where('type','Super')->exists()){
+            Role::create([
+                'title' => 'Super Admin',
+                'type' => 'Super',
+            ]);
+        }
+       
     }
 }
