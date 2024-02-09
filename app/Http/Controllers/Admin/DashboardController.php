@@ -25,6 +25,7 @@ use Modules\Roaster\Http\Controllers\DashboardController as RoasterDashboardCont
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController as BusinessRegistrationDashboardController;
 use Modules\Identity\Http\Controllers\DashboardController as IdentityDashboardController;
 use Modules\Circular\Http\Controllers\Admin\DashboardController as CircularDashboardController;
+use Modules\Estimate\Http\Controllers\Admin\DashboardController as EstimateDashboardController;
 use Nette\Schema\Schema as SchemaSchema;
 
 class DashboardController extends Controller
@@ -67,7 +68,8 @@ class DashboardController extends Controller
             'planDashboard_access',
             'grantDashboard_access',
             'revenueDashboard_access',
-            'identityDashboard_access'
+            'identityDashboard_access',
+            'estimateDashboard_access'
         ]);
         $userPermissions = $dashboardPermissions->intersect(collect(auth()->user()->role->permissions->pluck('title')));
         if ($userPermissions->count() == 1) {
@@ -88,6 +90,7 @@ class DashboardController extends Controller
                 'grantDashboard_access' => route('admin.grant.dashboard'),
                 'revenueDashboard_access' => route('admin.revenue.dashboard'),
                 'identityDashboard_access' => route('identity.admin.dashboard'),
+                'estimateDashboard_access' => route('admin.estimate.dashboard'),
                 default => route('admin.dashboard'),
             };
             return redirect($routeName);
@@ -164,6 +167,7 @@ class DashboardController extends Controller
             "businessRegistration" => (new BusinessRegistrationDashboardController())->getBusinessRegistrationAccordingToFiscalYear(),
             "wardWise" => (new IdentityDashboardController())->getWardWiseData(),
             "fyRegistrationAndDispatch" => (new CircularDashboardController())->getFyRegistrationAndDispatchData(),
+
 
         ];
     }

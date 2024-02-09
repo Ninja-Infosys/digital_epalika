@@ -30,6 +30,16 @@
                 </div>
             @endcan
         @endif
+        @if(Route::has('admin.estimate.dashboard'))
+            @can('estimateDashboard_access')
+                <div class="col">
+                    <a class="dropdown-icon-item" href="{{route('admin.estimate.dashboard')}}">
+                        <img src="{{asset('assets/backend/images/modules/circular.png')}}" alt="">
+                        <span>Estimate</span>
+                    </a>
+                </div>
+            @endcan
+        @endif
         @if(Route::has('admin.listRegistrations.dashboard'))
             @can('listRegistrationDashboard_access')
                 <div class="col">

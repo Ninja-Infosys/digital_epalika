@@ -6,8 +6,11 @@ use Illuminate\Database\Seeder;
 
 class EstimateDatabaseSeeder extends Seeder
 {
-    public function run()
-    {
 
-    }
+        public function run()
+        {
+            $this->call([
+                EstimatePermissionTableSeeder::class,
+            ]);
+        }
 }
