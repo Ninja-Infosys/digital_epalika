@@ -19,6 +19,7 @@ return [
         'identity',
         'organizationregistration',
         'revenue',
+        'estimate',
     ],
     'sidebars' => [
         'website',

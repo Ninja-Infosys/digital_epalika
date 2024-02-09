@@ -21,7 +21,14 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
+        Route::middleware('web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', 'checkPinMiddleware')
+            ->prefix('admin/estimate')
+            ->as('admin.estimate.')
+            ->group(module_path('Estimate', '/Routes/admin.php'));
+
         Route::middleware('web')
+            ->prefix('estimate')
+            ->as('estimate.')
             ->group(module_path('Estimate', '/Routes/web.php'));
     }
 
