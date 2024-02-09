@@ -1,20 +1,20 @@
 <?php
 
-namespace Modules\Plan\Http\Controllers;
+namespace Modules\Estimate\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
-use Modules\Plan\Entities\CargoHandling;
-use Modules\Plan\Entities\Material;
+use Modules\Estimate\Entities\CargoHandling;
+use Modules\Estimate\Entities\Material;
 
 class CargoHandlingController extends Controller
 {
     public function index()
     {
-        $cargoHandlings = CargoHandling::with('fiscalYear', 'unit', 'material')->get();
-        return view('plan::admin.estimateSetting.cargoHandling.index', compact('cargoHandlings'));
+        $cargoHandlings =CargoHandling::with('fiscalYear', 'unit', 'material')->get();
+        return view('estimate::admin.estimateSetting.cargoHandling.index', compact('cargoHandlings'));
     }
 
     public function create()
@@ -22,7 +22,7 @@ class CargoHandlingController extends Controller
         $fiscalYears = FiscalYear::all();
         $units = Unit::all();
         $materials = Material::all();
-        return view('plan::admin.estimateSetting.cargoHandling.create');
+        return view('estimate::admin.estimateSetting.cargoHandling.create');
     }
 
     public function store(Request $request)

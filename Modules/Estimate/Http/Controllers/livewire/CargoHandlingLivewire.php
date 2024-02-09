@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Plan\Http\Livewire;
+namespace Modules\Estimate\Http\Livewire;
 
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Modules\Plan\Entities\CargoHandling;
-use Modules\Plan\Entities\CollectionResource;
-use Modules\Plan\Entities\Material;
+use Modules\Estimate\Entities\CargoHandling;
+use Modules\Estimate\Entities\CollectionResource;
+use Modules\Estimate\Entities\Material;
 
 class CargoHandlingLivewire extends Component
 {

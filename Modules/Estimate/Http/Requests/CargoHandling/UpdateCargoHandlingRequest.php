@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Plan\Http\Requests\CargoHandling;
+namespace Modules\Estimate\Http\Requests\CargoHandling;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCargoHandlingRequest extends FormRequest
+class UpdateCargoHandlingRequest extends FormRequest
 {
     public function authorize(): bool
     {
