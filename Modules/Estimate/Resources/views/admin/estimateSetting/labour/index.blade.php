@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.plan.dashboard') }}">
+                            <a href="{{ route('admin.estimate.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -26,7 +26,7 @@
                 <div class="card-header search-card">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">Labour सूची</h4>
-                        <a href="{{ route('admin.plan.labour.create') }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.estimate.labour.create') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                         </a>
                     </div>
@@ -52,11 +52,11 @@
 
                                         </td>
                                         <td>
-                                            <a data-bs-type="edit" href="{{ route('admin.plan.labour.edit', $labour) }}"
+                                            <a data-bs-type="edit" href="{{ route('admin.estimate.labour.edit', $labour) }}"
                                                 class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('admin.plan.labour.destroy', $labour) }}" method="post">
+                                            <form action="{{ route('admin.estimate.labour.destroy', $labour) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button data-bs-type="delete" class="btn btn-xs btn-outline-danger">

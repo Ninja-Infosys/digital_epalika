@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Plan\Entities;
+namespace Modules\Estimate\Entities;
 
 use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
