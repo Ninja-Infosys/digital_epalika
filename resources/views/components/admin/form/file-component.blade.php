@@ -103,7 +103,23 @@
                                     <tr>
                                         <td>
                                             @foreach($appliedDocument->appliedMapFiles as $appliedMapFile)
-                                                <a href="#"><i class="fa fa-download"></i></a>
+                                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                        data-bs-target="#view_file{{ $appliedMapFile->id }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                                <!-- view file model pass url dynamically in the model-->
+                                                <div class="modal fade" id="view_file{{ $appliedMapFile->id }}" tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endforeach
                                         </td>
                                         <td>
