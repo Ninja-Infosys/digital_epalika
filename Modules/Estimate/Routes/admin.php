@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Estimate\Http\Controllers\Admin\DashboardController;
+use Modules\Estimate\Http\Controllers\CargoHandlingController;
 use Modules\Estimate\Http\Controllers\LabourController;
 
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
