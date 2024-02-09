@@ -821,11 +821,13 @@ class AdminStepController extends Controller
     {
         $formStore->load('form_data.model');
         $formDataType->load('model');
+        $mapApply = MapApply::where('id',$formStore->map_apply_id)->first() ??'';
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {
             $placeholder = '[@form.' . $key . ']';
-            $template = str_replace($placeholder, $value, $template);
+            $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $template);
+            $template = str_replace($placeholder, $value, $data);
         }
 
         return view('emap::admin.step.form-print', compact('template', 'formDataType', 'formStore'));
