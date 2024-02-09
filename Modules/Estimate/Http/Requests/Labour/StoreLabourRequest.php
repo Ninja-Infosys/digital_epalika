@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Plan\Http\Requests\Labour;
+namespace Modules\Estimate\Http\Requests\Labour;
 
 use Illuminate\Foundation\Http\FormRequest;
 

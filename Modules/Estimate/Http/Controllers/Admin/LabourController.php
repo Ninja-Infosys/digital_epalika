@@ -1,25 +1,25 @@
 <?php
 
-namespace Modules\Plan\Http\Controllers;
+namespace Modules\Estimate\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Units\Unit;
-use Modules\Plan\Entities\Labour;
-use Modules\Plan\Http\Requests\Labour\StoreLabourRequest;
-use Modules\Plan\Http\Requests\Labour\UpdateLabourRequest;
+use Modules\Estimate\Entities\Labour;
+use Modules\Estimate\Http\Requests\Labour\StoreLabourRequest;
+use Modules\Estimate\Http\Requests\Labour\UpdateLabourRequest;
 
 class LabourController extends Controller
 {
     public function index()
     {
         $labours = Labour::with('unit')->get();
-        return view('plan::admin.estimateSetting.labour.index', compact('labours'));
+        return view('estimate::admin.estimateSetting.labour.index', compact('labours'));
     }
 
     public function create()
     {
         $units = Unit::all();
-        return view('plan::admin.estimateSetting.labour.create', compact('units'));
+        return view('estimate::admin.estimateSetting.labour.create', compact('units'));
     }
 
     public function store(StoreLabourRequest $request)
@@ -31,13 +31,13 @@ class LabourController extends Controller
 
     public function show(Labour $labour)
     {
-        return view('plan::show');
+        return view('estimate::show');
     }
 
     public function edit(Labour $labour)
     {
         $units = Unit::all();
-        return view('plan::admin.estimateSetting.labour.edit', compact('units', 'labour'));
+        return view('estimate::admin.estimateSetting.labour.edit', compact('units', 'labour'));
     }
 
     public function update(UpdateLabourRequest $request, Labour $labour)
