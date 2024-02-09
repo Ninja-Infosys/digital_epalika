@@ -55,7 +55,7 @@
                             <th>डाटा</th>
                             <th>स्थिति</th>
                             <th>मिति</th>
-                            <th>#</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -63,24 +63,44 @@
                             <tr>
                                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                                 <td>
-                                    @foreach($formStore->data as $key=>$data)
-                                        @if(is_array($data))
-                                            <x-form-array-data :formdata="$data"/>
-                                        @else
-                                            {{ $key . ': ' . $data }} @if (!$loop->last)
-                                                <br>
-                                            @endif
-                                        @endif
-                                    @endforeach
+
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                    data-bs-target="#view_data_status{{ $formStore->id }}">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+
+                                        <!-- view file model pass url dynamically in the model-->
+                                        <div class="modal fade" id="view_data_status{{ $formStore->id }}"
+                                             tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        @foreach($formStore->data as $key=>$data)
+                                                            @if(is_array($data))
+                                                                <x-form-array-data :formdata="$data"/>
+                                                            @else
+                                                                {{ $key . ': ' . $data }} @if (!$loop->last)
+                                                                    <br>
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">बन्द
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                 </td>
                                 <td>{{$formStore->status->label()}}</td>
                                 <td>{{get_nepali_number($formStore->created_at->toDateString())}}</td>
-                                <td>
-                                    <a href="#">
-                                    <a href="{{ route('emap.admin.formStoreDetail',$formStore) }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td>
+
                             </tr>
                         @endforeach
                         </tbody>
