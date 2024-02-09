@@ -39,7 +39,7 @@ class FrontController extends Controller
             || Route::has('roaster.index')) {
             return redirect(route('digital-service'));
         } else {
-            return redirect(route('login'));
+            return redirect(route('digital-service'));
         }
     }
 

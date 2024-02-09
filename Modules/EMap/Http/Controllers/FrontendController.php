@@ -89,7 +89,7 @@ class FrontendController extends Controller
 
     public function loadTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): Factory|View|Application
     {
-        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
+        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::OWNER) {
             abort(401);
         }
 
@@ -102,7 +102,7 @@ class FrontendController extends Controller
 
     public function storeEmapTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): Response|Application|ResponseFactory
     {
-        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
+        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::OWNER ) {
             abort(401);
         }
 
