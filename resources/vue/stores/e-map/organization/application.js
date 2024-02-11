@@ -63,5 +63,25 @@ export const useApplicationStore = defineStore('application', {
                 })
 
         },
+        updateLandOwner(map_apply_id,form) {
+            return axios.put(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-land-owner`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        updateHouseOwner(map_apply_id,form) {
+            return axios.put(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-house-owner`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
     }
 })

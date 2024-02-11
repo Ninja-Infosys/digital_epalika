@@ -6,7 +6,11 @@
     <p class="break-page"></p>
     <StoreyDetail :map-apply="mapApply" />
 
-    <editLandDetail :map-apply="mapApply" />
+    <EditLandDetail :map-apply="mapApply" />
+
+    <EditLandOwner :map-apply="mapApply" />
+
+    <EditHouseOwner :map-apply="mapApply" />
 </template>
 
 <script setup>
@@ -17,6 +21,8 @@ import {useSettingStore} from "../../../stores/setting";
 import EditApplicationDetail from "./forms/EditApplicationDetail.vue";
 import StoreyDetail from "./forms/StoreyDetail.vue";
 import EditLandDetail from "./forms/EditLandDetail.vue";
+import EditLandOwner from "./forms/EditLandOwner.vue";
+import EditHouseOwner from "./forms/EditHouseOwner.vue";
 
 defineProps({
     mapApply:{

@@ -40,3 +40,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{asset('assets/backend/js/plugins/datepicker.min.js')}}"></script>
+@endpush

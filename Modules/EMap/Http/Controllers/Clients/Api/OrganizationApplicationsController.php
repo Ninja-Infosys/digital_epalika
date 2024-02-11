@@ -9,6 +9,8 @@ use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StoreyDetail;
 use Modules\EMap\Entities\StructureType;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateHouseOwnerRequest;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateLandOwnerRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateLandDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateMapApplicationRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateStoreyDetailRequest;
@@ -82,6 +84,24 @@ class OrganizationApplicationsController extends Controller
 
         return response()->json([
             'message' => 'जग्गाको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+        ]);
+    }
+
+    public function updateLandOwner(UpdateLandOwnerRequest $request, MapApply $mapApply)
+    {
+        $mapApply->landOwner()->update($request->validated());
+
+        return response()->json([
+            'message' => 'जग्गा धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+        ]);
+    }
+
+    public function updateHouseOwner(UpdateHouseOwnerRequest $request, MapApply $mapApply)
+    {
+        $mapApply->houseOwner()->update($request->validated());
+
+        return response()->json([
+            'message' => 'घर धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो'
         ]);
     }
 }
