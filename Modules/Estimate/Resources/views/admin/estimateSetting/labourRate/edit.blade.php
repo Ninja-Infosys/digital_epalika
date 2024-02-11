@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.dashboard')}}">
+                            <a href="{{route('admin.estimate.dashboard')}}">
                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
                             गृहपृष्ठ
                             </a>
@@ -25,13 +25,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">Labour Rates </h4>
-                        <a href="{{route('admin.plan.labourRate.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.estimate.labourRate.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>Labour Rates
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.labourRate.update',$labourRate)}}" method="post">
+                    <form action="{{route('admin.estimate.labourRate.update',$labourRate)}}" method="post">
                         @csrf
                         @method('put')
                         <fieldset class="mb-2">

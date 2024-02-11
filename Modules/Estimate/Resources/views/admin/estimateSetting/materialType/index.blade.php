@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.plan.dashboard') }}">
+                            <a href="{{ route('admin.estimate.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -26,7 +26,7 @@
                 <div class="card-header search-card">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">सामग्री प्रकार सूची</h4>
-                        <a href="{{ route('admin.plan.materialType.create') }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.estimate.materialType.create') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                         </a>
                     </div>
@@ -47,18 +47,20 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $materialType->title }}</td>
 
-                                        <td>
-                                            <a data-bs-type="edit"
-                                                href="{{ route('admin.plan.materialType.edit', $materialType) }}"
-                                                class="btn btn-xs btn-outline-primary">
+                                        <td class="d-flex">
+                                            <a data-bs-type="edit" href="{{ route('admin.estimate.materialType.edit', $materialType) }}"
+                                                class="btn btn-xs btn-outline-primary"  data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="सम्पादन गर्नुहोस">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('admin.plan.materialType.destroy', $materialType) }}"
-                                                method="post">
+                                            <form action="{{ route('admin.estimate.materialType.destroy', $materialType) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger">
-                                                    <i class="fa fa-trash"></i>
+                                                <button data-bs-type="delete"
+                                                    class="btn btn-xs me-1 btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="मेटाउनु होस्"></i>
                                                 </button>
                                             </form>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Estimate\Http\Controllers;
+namespace Modules\Estimate\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,13 +32,13 @@ class CargoHandlingController extends Controller
 
     public function show($id)
     {
-        return view('plan::show');
+        return view('estimate::show');
     }
 
     public function edit(CargoHandling $cargoHandling)
     {
         $cargoHandling->load('collectionResources');
-        return view('plan::admin.estimateSetting.cargoHandling.edit', compact('cargoHandling'));
+        return view('estimate::admin.estimateSetting.cargoHandling.edit', compact('cargoHandling'));
     }
 
     public function update(Request $request, CargoHandling $cargoHandling)

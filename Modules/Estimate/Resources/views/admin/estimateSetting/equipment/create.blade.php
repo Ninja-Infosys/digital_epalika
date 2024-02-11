@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.plan.dashboard') }}">
+                            <a href="{{ route('admin.estimate.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -25,13 +25,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">उपकरण </h4>
-                        <a href="{{ route('admin.plan.equipment.index') }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.estimate.equipment.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>उपकरण सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body px-0">
-                    <form action="{{ route('admin.plan.equipment.store') }}" method="post">
+                    <form action="{{ route('admin.estimate.equipment.store') }}" method="post">
                         @csrf
 
                         <fieldset class="mb-2">
@@ -110,6 +110,40 @@
                                         class="form-control @error('bt') is-invalid @enderror" id="bt"
                                         placeholder="BT" />
                                     @error('bt')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                            <legend> Speed With Load </legend>
+                            <div class="row">
+
+                                <div class="col-md-4 mb-2">
+                                    <label for="er1" class="form-label">ER</label>
+                                    <input type="number" step="any" min="0" name="er1"
+                                        value="{{ old('er1') }}" class="form-control @error('er') is-invalid @enderror"
+                                        id="er1" placeholder="ER" />
+                                    @error('er1')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="gr1" class="form-label">GR</label>
+                                    <input type="number" step="any" name="gr1" min="0"
+                                        value="{{ old('gr1') }}" class="form-control @error('gr1') is-invalid @enderror"
+                                        id="gr1" placeholder="GR" />
+                                    @error('gr1')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="bt1" class="form-label">BT</label>
+                                    <input type="number" step="any" name="bt1" min="0"
+                                        value="{{ old('bt1') }}"
+                                        class="form-control @error('bt1') is-invalid @enderror" id="bt1"
+                                        placeholder="BT" />
+                                    @error('bt1')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

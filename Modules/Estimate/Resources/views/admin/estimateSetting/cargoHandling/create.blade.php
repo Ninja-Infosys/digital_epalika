@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.plan.dashboard') }}">
+                            <a href="{{ route('admin.estimate.dashboard') }}">
                                 <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
@@ -25,13 +25,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">कार्गो ह्यान्डलिङ </h4>
-                        <a href="{{ route('admin.plan.cargoHandling.index') }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.estimate.cargoHandling.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>कार्गो ह्यान्डलिङ सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body px-0">
-                    <livewire:plan::cargo-handling-livewire />
+                    <livewire:estimate::cargo-handling-livewire />
                 </div>
             </div>
         </div>

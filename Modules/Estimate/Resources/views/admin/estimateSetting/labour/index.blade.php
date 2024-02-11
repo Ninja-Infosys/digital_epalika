@@ -51,16 +51,20 @@
                                             {{ $labour->unit->title ?? '' }}
 
                                         </td>
-                                        <td>
+                                        <td class="d-flex">
                                             <a data-bs-type="edit" href="{{ route('admin.estimate.labour.edit', $labour) }}"
-                                                class="btn btn-xs btn-outline-primary">
+                                                class="btn btn-xs btn-outline-primary"  data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="सम्पादन गर्नुहोस">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <form action="{{ route('admin.estimate.labour.destroy', $labour) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger">
-                                                    <i class="fa fa-trash"></i>
+                                                <button data-bs-type="delete"
+                                                    class="btn btn-xs me-1 btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="मेटाउनु होस्"></i>
                                                 </button>
                                             </form>
 

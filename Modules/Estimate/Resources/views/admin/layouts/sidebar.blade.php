@@ -23,67 +23,59 @@
                     <span> Labour </span>
                 </a>
             </li>
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/labourRate') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.labourRate.index')}}">
-                        <span>  Labour Rate  </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/fuel') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.fuel.index')}}">
-                        <span>  इन्धन  </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/fuelRate') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.fuelRate.index')}}">
-                        <span>  इन्धन दर  </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/equipment') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.equipment.index')}}">
-                        <span>  उपकरण  </span>
-                    </a>
-                </li> --}}
+            <li class="{{ request()->is('admin/estimate/estimateSetting/labourRate') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.labourRate.index') }}">
+                    <span> Labour Rate </span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/estimate/estimateSetting/fuel') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.fuel.index') }}">
+                    <span> इन्धन </span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/estimate/estimateSetting/fuelRate') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.fuelRate.index') }}">
+                    <span> इन्धन दर </span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/estimate/estimateSetting/equipment') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.equipment.index') }}">
+                    <span> उपकरण </span>
+                </a>
+            </li>
 
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/equipmentAdditionalCost') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.equipmentAdditionalCost.index')}}">
-                        <span>  उपकरण अतिरिक्त लागत  </span>
-                    </a>
-                </li> --}}
+            <li class="{{ request()->is('admin/estimate/estimateSetting/equipmentAdditionalCost') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.equipmentAdditionalCost.index') }}">
+                    <span> उपकरण अतिरिक्त लागत </span>
+                </a>
+            </li>
 
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/materialType') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.materialType.index')}}">
-                        <span>  सामग्री प्रकार  </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/material') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.material.index')}}">
-                        <span>  सामग्री   </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/materialRate') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.materialRate.index')}}">
-                        <span>  सामाग्री दर   </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/materialCollection') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.materialCollection.index')}}">
-                        <span>  सामग्री संग्रह  </span>
-                    </a>
-                </li> --}}
+            <li class="{{ request()->is('admin/estimate/estimateSetting/materialType') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.materialType.index') }}">
+                    <span> सामग्री प्रकार </span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/estimate/estimateSetting/material') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.material.index') }}">
+                    <span> सामग्री </span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/estimate/estimateSetting/materialRate') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.materialRate.index') }}">
+                    <span> सामाग्री दर </span>
+                </a>
+            </li>
 
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/materialCollection') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.materialCollection.index')}}">
-                        <span>  सामग्री संग्रह  </span>
-                    </a>
-                </li> --}}
-            {{-- <li class="{{request()->is('admin/estimate/estimateSetting/cargoHandling') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.cargoHandling.index')}}">
-                        <span>कार्गो ह्यान्डलिङ</span>
-                    </a>
-                </li> --}}
-
-
-
+            <li class="{{ request()->is('admin/estimate/estimateSetting/materialCollection') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.materialCollection.index') }}">
+                    <span> सामग्री संग्रह </span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/estimate/estimateSetting/cargoHandling') ? 'active' : '' }}">
+                <a href="{{ route('admin.estimate.cargoHandling.index') }}">
+                    <span>कार्गो ह्यान्डलिङ</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

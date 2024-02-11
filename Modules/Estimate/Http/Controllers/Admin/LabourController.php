@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Estimate\Http\Controllers;
+namespace Modules\Estimate\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Units\Unit;
