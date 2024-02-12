@@ -19,8 +19,4 @@
     <div id="map-app">
         <edit-applications :map-apply="{{json_encode($mapApply)}}"></edit-applications>
     </div>
-    <p class="break-page"></p>
-    <livewire:emap::edit.criteria-detail-edit-livewire :mapApply="$mapApply"/>
-    <livewire:emap::edit.building-detail-edit-livewire :mapApply="$mapApply" />
-    <livewire:emap::edit.consultancy-detail-edit-liveware :mapApply="$mapApply"/>
 </div>

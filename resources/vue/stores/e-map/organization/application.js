@@ -17,7 +17,15 @@ export const useApplicationStore = defineStore('application', {
         designerDetails: {
             data:[],
             loading:false
-        }
+        },
+        criteriaDetails: {
+            data:[],
+            loading:false
+        },
+        buildingDetails: {
+            data:[],
+            loading:false
+        },
     }),
     actions: {
         updateApplicationDetail(map_apply_id,form) {
@@ -138,6 +146,62 @@ export const useApplicationStore = defineStore('application', {
         },
         updateApplicantDetail(map_apply_id, form) {
             return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-applicant-detail`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        getCriteriaDetails(map_apply_id) {
+            this.criteriaDetails.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/criteria-details`)
+                .then((res) => {
+                    this.criteriaDetails.data=res.data.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                })
+                .finally(()=>{
+                    this.criteriaDetails.loading=false;
+                })
+        },
+        updateCriteriaDetail(map_apply_id,form) {
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-criteria-detail`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        getBuildingDetails(map_apply_id) {
+            this.buildingDetails.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/building-details`)
+                .then((res) => {
+                    this.buildingDetails.data=res.data.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                })
+                .finally(()=>{
+                    this.buildingDetails.loading=false;
+                })
+        },
+        updateBuildingDetail(map_apply_id,form) {
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-building-detail`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        updateConsultancyDetail(map_apply_id,form) {
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-consultancy-detail`,form)
                 .then((res) => {
                     return res;
                 })

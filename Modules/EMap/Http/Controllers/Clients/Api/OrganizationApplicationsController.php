@@ -5,15 +5,22 @@ namespace Modules\EMap\Http\Controllers\Clients\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Modules\EMap\Entities\BuildingDetail;
+use Modules\EMap\Entities\CriteriaDetail;
 use Modules\EMap\Entities\DesignerDetail;
 use Modules\EMap\Entities\FourFort;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StoreyDetail;
 use Modules\EMap\Entities\StructureType;
+use Modules\EMap\Enums\BuildingDetailEnum;
+use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateApplicantDetailRequest;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateBuildingDetailRequest;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateConsultancyDetailRequest;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateCriteriaDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateDesignerDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateFourFortDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateHouseOwnerRequest;
@@ -205,6 +212,97 @@ class OrganizationApplicationsController extends Controller
 
         return response()->json([
             'message' => 'निवेदकको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+        ]);
+    }
+
+    public function criteriaDetails(MapApply $mapApply)
+    {
+        $mapApply->load('criteriaDetails');
+
+        $criteriaDetails = collect();
+
+        foreach (DetailsRegardingCriteriaEnum::cases() as $criteria) {
+            $criteriaData = $mapApply->criteriaDetails?->where('detail', $criteria)->first();
+
+            $criteriaDetails->push([
+                'detail' => $criteria->value,
+                'detail_label' => $criteria?->label(),
+                'according_to_criteria' => $criteriaData->according_to_criteria ?? '',
+                'according_to_map' => $criteriaData->according_to_map ?? '',
+                'compliance' => $criteriaData->compliance ?? '',
+                'remarks' => $criteriaData->remarks ?? $criteria->remarks(),
+            ]);
+        }
+
+        return response()->json([
+            'data' => $criteriaDetails,
+        ]);
+    }
+
+    public function updateCriteriaDetail(UpdateCriteriaDetailRequest $request, MapApply $mapApply)
+    {
+        $formData = $request->validated();
+
+        CriteriaDetail::updateOrCreate(
+            ['map_apply_id' => $mapApply->id, 'detail' => $formData['detail']],
+            [
+                'according_to_criteria' => $formData['according_to_criteria'] ?? null,
+                'according_to_map' => $formData['according_to_map'] ?? null,
+                'compliance' => $formData['compliance'] ?? null,
+                'remarks' => $formData['remarks'] ?? null,
+            ]
+        );
+
+        return response()->json([
+            'message' => 'मापदण्ड सम्बन्धि विवरण सफलतापूर्वक अद्यावधिक गरियो'
+        ]);
+    }
+
+    public function buildingDetails(MapApply $mapApply)
+    {
+        $mapApply->load('buildingDetails');
+
+        $buildingDetails = collect();
+
+        foreach (BuildingDetailEnum::cases() as $buildingDetail) {
+            $buildingData = $mapApply->buildingDetails?->where('detail', $buildingDetail)->first();
+
+            $buildingDetails->push([
+                'detail' => $buildingDetail->value,
+                'detail_label' => $buildingDetail?->label(),
+                'description' => $buildingData->description ?? '',
+                'remarks' => $buildingData->remarks ?? '',
+            ]);
+        }
+
+        return response()->json([
+            'data' => $buildingDetails,
+        ]);
+    }
+
+    public function updateBuildingDetail(UpdateBuildingDetailRequest $request, MapApply $mapApply)
+    {
+        $formData = $request->validated();
+
+        BuildingDetail::updateOrCreate(
+            ['map_apply_id' => $mapApply->id, 'detail' => $formData['detail']],
+            [
+                'description' => $formData['description'] ?? null,
+                'remarks' => $formData['remarks'] ?? null,
+            ]
+        );
+
+        return response()->json([
+            'message' => 'भवन सम्बन्धि विवरण सफलतापूर्वक अद्यावधिक गरियो'
+        ]);
+    }
+
+    public function updateConsultancyDetail(UpdateConsultancyDetailRequest $request, MapApply $mapApply)
+    {
+        $mapApply->update($request->validated());
+
+        return response()->json([
+            'message' => 'Consultancy Detail Updated Successfully'
         ]);
     }
 }
