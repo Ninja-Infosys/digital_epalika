@@ -11,4 +11,9 @@ Route::controller(OrganizationApplicationsController::class)->group(function () 
     Route::put('mapApply/{mapApply}/update-land-detail', 'updateLandDetail')->name('mapApply.update-land-detail');
     Route::put('mapApply/{mapApply}/update-land-owner', 'updateLandOwner')->name('mapApply.update-land-owner');
     Route::put('mapApply/{mapApply}/update-house-owner', 'updateHouseOwner')->name('mapApply.update-house-owner');
+    Route::get('mapApply/{mapApply}/four-forts', 'fourForts')->name('mapApply.four-forts');
+    Route::post('mapApply/{mapApply}/update-four-forts', 'updateFourFortDetail')->name('mapApply.update-four-forts');
+    Route::get('mapApply/{mapApply}/designer-details', 'designerDetails')->name('mapApply.designer-details');
+    Route::post('mapApply/{mapApply}/update-designer-detail', 'updateDesignerDetail')->name('mapApply.update-designer-detail');
+    Route::post('mapApply/{mapApply}/update-applicant-detail', 'updateApplicantDetail')->name('mapApply.update-applicant-detail');
 });

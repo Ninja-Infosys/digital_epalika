@@ -9,6 +9,14 @@ export const useApplicationStore = defineStore('application', {
             current_storey:0,
             storey_details_count:0,
             data:[]
+        },
+        fourForts: {
+            data:[],
+            loading:false
+        },
+        designerDetails: {
+            data:[],
+            loading:false
         }
     }),
     actions: {
@@ -75,6 +83,61 @@ export const useApplicationStore = defineStore('application', {
         },
         updateHouseOwner(map_apply_id,form) {
             return axios.put(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-house-owner`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+        },
+        getFourForts(map_apply_id) {
+            this.fourForts.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/four-forts`)
+                .then((res) => {
+                    this.fourForts.data=res.data.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                })
+                .finally(()=>{
+                    this.fourForts.loading=false;
+                })
+        },
+        updateFourFortDetail(map_apply_id,form) {
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-four-forts`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        getDesignerDetails(map_apply_id) {
+            this.designerDetails.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/designer-details`)
+                .then((res) => {
+                    this.designerDetails.data=res.data.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                })
+                .finally(()=>{
+                    this.designerDetails.loading=false;
+                })
+        },
+        updateDesignerDetail(map_apply_id, form) {
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-designer-detail`,form)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
+
+        },
+        updateApplicantDetail(map_apply_id, form) {
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-applicant-detail`,form)
                 .then((res) => {
                     return res;
                 })

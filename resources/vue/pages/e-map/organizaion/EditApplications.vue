@@ -11,6 +11,12 @@
     <EditLandOwner :map-apply="mapApply" />
 
     <EditHouseOwner :map-apply="mapApply" />
+
+    <EditFourForts :map-apply="mapApply" />
+
+    <EditDesignerDetail :map-apply="mapApply" />
+
+    <EditApplicantDetail :map-apply="mapApply" />
 </template>
 
 <script setup>
@@ -18,11 +24,14 @@ import {onMounted} from "vue";
 
 import {useApplicationStore} from "../../../stores/e-map/organization/application";
 import {useSettingStore} from "../../../stores/setting";
-import EditApplicationDetail from "./forms/EditApplicationDetail.vue";
 import StoreyDetail from "./forms/StoreyDetail.vue";
 import EditLandDetail from "./forms/EditLandDetail.vue";
 import EditLandOwner from "./forms/EditLandOwner.vue";
 import EditHouseOwner from "./forms/EditHouseOwner.vue";
+import EditFourForts from "./forms/EditFourForts.vue";
+import EditDesignerDetail from "./forms/EditDesignerDetail.vue";
+import EditApplicantDetail from "./forms/EditApplicantDetail.vue";
+import EditApplicationDetail from "./forms/EditApplicationDetail.vue";
 
 defineProps({
     mapApply:{
