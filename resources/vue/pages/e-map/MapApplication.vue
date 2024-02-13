@@ -118,7 +118,7 @@
 
                 <div class="col-md-4 mb-3">
                     <VInput
-                        input-type="number"
+                        input-type="text"
                         v-model="form.landDetail.former_ward_no"
                         label="२.२ साविक वडा नं"
                         placeholder="साविक वडा नं"
