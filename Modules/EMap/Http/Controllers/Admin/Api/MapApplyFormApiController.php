@@ -15,6 +15,7 @@ use Modules\EMap\Entities\StructureType;
 use Modules\EMap\Enums\ApplicantTypeEnum;
 use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\BuildingUsageEnum;
+use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\LandOwnerTypeEnum;
 use Modules\EMap\Enums\RelationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
@@ -40,6 +41,7 @@ class MapApplyFormApiController extends Controller
             'allDistricts' => get_districts(),
             'constructionTypes' => TypeOfConstructionWorkEnum::getValuesWithLabels(),
             'buildingUsages' => BuildingUsageEnum::getValuesWithLabels(),
+            'buildingCategories'=>CategorizationEnum::getValuesWithLabels(),
             'applicationForms' => ApplicationFormTypeEnum::getValuesWithLabels(),
             'ownerTypes' => LandOwnerTypeEnum::getValuesWithLabels(),
             'applicantTypes' => ApplicantTypeEnum::getValuesWithLabels(),
