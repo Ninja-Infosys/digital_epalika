@@ -12,7 +12,7 @@ return new class () extends Migration {
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
             $table->foreignId('land_use_area_id')->nullable()->comment('भूमि प्रयोग क्षेत्र')->constrained()->cascadeOnDelete();
             $table->integer('ward_no')->nullable()->comment('वार्ड नं ');
-            $table->integer('former_ward_no')->nullable()->comment('पुर्ब वार्ड नं ');
+            $table->string('former_ward_no')->nullable()->comment('पुर्ब वार्ड नं ');
             $table->string('tole')->nullable()->comment('टोल');
             $table->string('street_code_no')->nullable()->comment('सडक कोड न');
             $table->string('plot_no')->nullable()->comment('प्लट नं');

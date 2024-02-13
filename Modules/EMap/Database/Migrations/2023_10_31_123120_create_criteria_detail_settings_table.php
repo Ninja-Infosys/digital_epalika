@@ -11,7 +11,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('land_use_area_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->string('area');
+            $table->float('area');
             $table->string('sign');
             $table->string('gcr');
             $table->string('far');

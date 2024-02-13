@@ -5,13 +5,13 @@ use App\Enums\OfficeTypeEnum;
 return [
     'to_office' => [
         'to' => 'श्रीमान प्रमुख प्रशासकिय अधिकृत ज्यू',
-        'office_name' => 'नेपालगंज उप-महानगरपालिका',
+        'office_name' => 'घोराही उप-महानगरपालिका',
         'office' => 'नगर कार्यपालिकाको कार्यालय',
-        'office_address' => 'नेपालगंज, बाँके',
+        'office_address' => 'दाङ, घोराही',
     ],
-    'place' => 'नेपालगंज',
-    'office_district' => 'बाँके',
-    'place_short_name' => 'ने.',
+    'place' => 'घोराही',
+    'office_district' => 'दाङ',
+    'place_short_name' => 'घो.',
     'office_type' => OfficeTypeEnum::SUB_METROPOLITAN->label(),
     'office_short_name' => OfficeTypeEnum::SUB_METROPOLITAN->shortName(),
 ];
