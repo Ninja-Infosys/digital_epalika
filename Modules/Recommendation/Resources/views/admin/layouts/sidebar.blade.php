@@ -4,22 +4,22 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('personalDetail_access')
-    <li class="{{request()->is('admin/recommendation/setting/personalDetail') ? 'active' : ''}}">
-        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
-            <i class="fa fa-user"></i>
-            <span>व्यक्तिगत विवरण</span>
-        </a>
-    </li>
-@endcan
-@can('recommendationSetting_access')
-    <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
-        <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">
-            <i class="fa fa-file"></i>
-            <span>सिफारिस सिर्जना गर्नुहोस्</span>
-        </a>
-    </li>
-@endcan
+{{--@can('personalDetail_access')--}}
+{{--    <li class="{{request()->is('admin/recommendation/setting/personalDetail') ? 'active' : ''}}">--}}
+{{--        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">--}}
+{{--            <i class="fa fa-user"></i>--}}
+{{--            <span>व्यक्तिगत विवरण</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
+{{--@can('recommendationSetting_access')--}}
+{{--    <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">--}}
+{{--        <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">--}}
+{{--            <i class="fa fa-file"></i>--}}
+{{--            <span>सिफारिस सिर्जना गर्नुहोस्</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
 
 {{--
 @foreach(recommendationCategory() as $recommendationCategory)
@@ -148,9 +148,9 @@
 --}}
 
 
-<li class="{{request()->is('admin/recommendation/sipharish*') ? 'active' : ''}}">
+<li class="{{request()->is('admin/recommendation/setting*') ? 'active' : ''}}">
     <a href="#recommendationSetting"
-       {{request()->is('admin/recommendation/sipharish/sipharishCategory*') || request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'aria-expanded=true' : ''}}
+       {{request()->is('admin/recommendation/setting*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>सिफारिस आधारभूत सेटिंग</span>
@@ -159,38 +159,43 @@
         </span>
     </a>
     <div
-        class="collapse {{request()->is('admin/recommendation/sipharish/sipharishCategory*') || request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'show' : ''}}"
+        class="collapse {{request()->is('admin/recommendation/setting*') ? 'aria-expanded=true' : ''}}"
         id="recommendationSetting">
         <ul class="nav-second-level">
-            @can('recommendationCategory_access')
-                <li class="{{request()->is('admin/recommendation/sipharish/sipharishCategory*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.sipharishCategory.index')}}">
-                        <span>सिफारिस श्रेणी</span>
+
+                <li class="{{request()->is('admin/recommendation/setting/revenueHeader*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.revenueHeader.index')}}">
+                        <span>राजस्व</span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationCategory.index')}}">
+                        <span>सिफारिश वर्ग</span>
                     </a>
                 </li>
 
-            @endcan
-            @can('recommendationCategory_access')
-                <li class="{{request()->is('admin/recommendation/sipharish/sipharishSubCategory*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.sipharishSubCategory.index')}}">
-                        <span>सिफारिस उप-श्रेणी</span>
-                    </a>
-                </li>
-            @endcan
-            @can('recommendationSetting_access')
-                <li class="{{request()->is('admin/recommendation/sipharish/sipharishFormType*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.sipharishFormType.index')}}">
-                        <span>सेटिङ</span>
-                    </a>
-                </li>
-            @endcan
-            @can('recommendationSetting_access')
-                <li class="{{request()->is('admin/recommendation/sipharish/sipharisSignatureDetail*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.index')}}">
-                        <span>हस्ताक्षर सेटिङ</span>
-                    </a>
-                </li>
-            @endcan
+
+{{--            @can('recommendationCategory_access')--}}
+{{--                <li class="{{request()->is('admin/recommendation/sipharish/sipharishSubCategory*') ? 'active' : ''}}">--}}
+{{--                    <a href="{{route('admin.recommendation.sipharish.sipharishSubCategory.index')}}">--}}
+{{--                        <span>सिफारिस उप-श्रेणी</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endcan--}}
+{{--            @can('recommendationSetting_access')--}}
+{{--                <li class="{{request()->is('admin/recommendation/sipharish/sipharishFormType*') ? 'active' : ''}}">--}}
+{{--                    <a href="{{route('admin.recommendation.sipharish.sipharishFormType.index')}}">--}}
+{{--                        <span>सेटिङ</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endcan--}}
+{{--            @can('recommendationSetting_access')--}}
+{{--                <li class="{{request()->is('admin/recommendation/sipharish/sipharisSignatureDetail*') ? 'active' : ''}}">--}}
+{{--                    <a href="{{route('admin.recommendation.sipharish.sipharisSignatureDetail.index')}}">--}}
+{{--                        <span>हस्ताक्षर सेटिङ</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endcan--}}
 
         </ul>
     </div>

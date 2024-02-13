@@ -2,7 +2,6 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use App\Traits\NepaliDateConverter;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\StoreRecommendationCategoryRequest;
@@ -10,81 +9,69 @@ use Modules\Recommendation\Http\Requests\RecommendationCategory\UpdateRecommenda
 
 class RecommendationCategoryController extends Controller
 {
-    use NepaliDateConverter;
 
-    public function index($type)
+    public function index()
     {
         $this->checkAuthorization('recommendationCategory_access');
-        $recommendationCategories = RecommendationCategory::with('recommendationCategory')->withCount(['recommendationCategories'])->where(function ($query) use ($type) {
-            if ($type == 'recommendationSubCategory') {
-                $query->whereNotNull('recommendation_category_id');
-            } else {
-                $query->whereNull('recommendation_category_id');
-            }
-        })->get();
-
-        return view('recommendation::admin.setting.recommendationcategory.index', compact('recommendationCategories', 'type'));
+        $recommendationCategories = RecommendationCategory::get();
+        return view('recommendation::admin.recommendation.setting.recommendation-category.index', compact('recommendationCategories'));
     }
 
-    public function create($type)
+    public function create()
     {
         $this->checkAuthorization('recommendationCategory_create');
-        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
-        return view('recommendation::admin.setting.recommendationcategory.create', compact('type', 'recommendationCategories'));
+        return view('recommendation::admin.recommendation.setting.recommendation-category.create');
     }
 
-    public function store(StoreRecommendationCategoryRequest $request, $type)
+    public function store(StoreRecommendationCategoryRequest $request)
     {
         $this->checkAuthorization('recommendationCategory_create');
         RecommendationCategory::create($request->validated() + [
                 'user_id' => auth()->id(),
             ]);
-        toast('सिफारिस सफलतापूर्वक थपियो', 'success');
+        toast('सिफारिश वर्ग सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
-    public function show($type, RecommendationCategory $recommendationCategory)
+    public function show(RecommendationCategory $recommendationCategory)
     {
-        $this->checkAuthorization('recommendationCategory_access');
-        return view('recommendation::admin.setting.recommendationcategory.show', compact('recommendationCategory', 'type'));
+
     }
 
-    public function edit($type, RecommendationCategory $recommendationCategory)
+    public function edit(RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationCategory_edit');
-        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
-        return view('recommendation::admin.setting.recommendationcategory.edit', compact('type', 'recommendationCategory', 'recommendationCategories'));
+        return view('recommendation::admin.recommendation.setting.recommendation-category.edit', compact('recommendationCategory'));
     }
 
-    public function update(UpdateRecommendationCategoryRequest $request, $type, RecommendationCategory $recommendationCategory)
+    public function update(UpdateRecommendationCategoryRequest $request, RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationCategory_edit');
         $recommendationCategory->update($request->validated());
-        toast('सिफारिस सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
+        toast('सिफारिश वर्ग सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return redirect(route('admin.recommendation.setting.recommendationCategory.index'));
     }
 
-    public function destroy($type, RecommendationCategory $recommendationCategory)
+    public function destroy(RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationCategory_delete');
         if ($recommendationCategory->is_active == 1) {
-            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
-
+            toast('सक्रिय भएको सिफारिश वर्ग मेटाउन मनाहि छ', 'error');
             return back();
         }
         $recommendationCategory->delete();
-        toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
+        toast('सिफारिश वर्ग सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 
-    public function updateStatus($type, RecommendationCategory $recommendationCategory)
+    public function updateStatus(RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationCategory_access');
         $recommendationCategory->update([
             'is_active' => !$recommendationCategory->is_active
         ]);
 
-        toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('सिफारिश वर्ग स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }
