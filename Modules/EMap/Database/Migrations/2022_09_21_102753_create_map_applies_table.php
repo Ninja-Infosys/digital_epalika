@@ -29,8 +29,8 @@ return new class () extends Migration {
             $table->string('consultant_name')->nullable();
             $table->string('consultant_mobile_no')->nullable();
             $table->string('consultant_nec_no')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

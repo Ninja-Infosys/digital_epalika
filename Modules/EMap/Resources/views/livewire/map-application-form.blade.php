@@ -197,7 +197,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label fw-bolder" for="landDescription.former_ward_no">२.२ साविक वडा नं</label>
-                <input class="form-control form-control-sm" type="number" id="landDescription.former_ward_no"
+                <input class="form-control form-control-sm" type="text" id="landDescription.former_ward_no"
                     wire:model="landDescription.former_ward_no" min="0" placeholder="साविक वडा नं">
                 @error('landDescription.former_ward_no')
                     <p class="text-danger">{{ $message }}</p>
