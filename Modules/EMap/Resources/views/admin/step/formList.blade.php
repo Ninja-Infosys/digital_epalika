@@ -33,21 +33,21 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     @if($mapApply->sent_to_organization == 'done')
-                                        <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> House Owner After compilation of house</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> सम्पन्न घर नामसारी</a></li>
                                         @else
-                                    <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> House Owner before compilation of house</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> निर्माणाधीन घर नामसारी </a></li>
                                   <li>
-                                      <a class="dropdown-item" href="{{route('emap.admin.organizationArchive.index',$mapApply)}}"> Organization</a>
+                                      <a class="dropdown-item" href="{{route('emap.admin.organizationArchive.index',$mapApply)}}"> परामर्शदाता नामसारी</a>
                                   </li>
                                         @endif
                                 </ul>
                             </div>
                             @if(empty($mapApply->registration_no))
-                            <a href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
+                            <a  style="margin-left:10px;" href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
                                 नक्सा दर्ता गर्नुहोस
                             </a>
                             @endif
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                            <button type="button" style="margin-left:10px;" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#mapReject">
                             नक्सा अस्वीकार गर्नुहोस
                         </button>
