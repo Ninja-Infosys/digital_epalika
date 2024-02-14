@@ -12,7 +12,7 @@ return new class () extends Migration {
             $table->foreignId('user_id')->nullable()->comment('प्रयोगकर्ता')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('title')->comment('शिर्षक');
             $table->foreignId('recommendation_category_id')->nullable()->comment('सिफारिस प्रकार')->constrained()->cascadeOnDelete();
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
