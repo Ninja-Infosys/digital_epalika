@@ -15,6 +15,8 @@ class HelplessnessTypeController extends Controller
 {
     public function index()
     {
+        // $this->checkAuthorization('helplessnessType_access');
+
         $helplessnessTypes = HelplessnessType::where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['name'], request('search'));
@@ -25,29 +27,36 @@ class HelplessnessTypeController extends Controller
 
     public function create()
     {
+        $this->checkAuthorization('helplessnessType_create');
 
         return view('grant::admin.setting.helplessnessType.create');
     }
 
     public function store(StoreHelplessnessType $request): RedirectResponse
     {
+        $this->checkAuthorization('helplessnessType_create');
+        
         HelplessnessType::create($request->validated());
         toast('असहायताको प्रकार सफलता पुर्वक थपियो', 'success');
         return back();
     }
 
-    public function show($id)
-    {
-        return view('grant::show');
-    }
+    // public function show($id)
+    // {
+    //     return view('grant::show');
+    // }
 
     public function edit(HelplessnessType $helplessnessType)
     {
+        $this->checkAuthorization('helplessnessType_edit');
+
         return view('grant::admin.setting.helplessnessType.edit', compact('helplessnessType'));
     }
 
     public function update(UpdateHelplessnessType $request, HelplessnessType $helplessnessType): Redirector|Application|RedirectResponse
     {
+        $this->checkAuthorization('helplessnessType_edit');
+
         $helplessnessType->update($request->validated());
         toast('असहायताको प्रकार सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.helplessnessType.index'));
@@ -55,6 +64,8 @@ class HelplessnessTypeController extends Controller
 
     public function destroy(HelplessnessType $helplessnessType): RedirectResponse
     {
+        $this->checkAuthorization('helplessnessType_delete');
+
         $helplessnessType->delete();
         toast('असहायताको प्रकार सफलता पुर्वक हटाइयो', 'success');
         return back();

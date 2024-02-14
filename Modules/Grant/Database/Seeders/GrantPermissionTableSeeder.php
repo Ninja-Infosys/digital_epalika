@@ -65,9 +65,13 @@ class GrantPermissionTableSeeder extends Seeder
             'grantReport_access',
             'groupReport_access',
             'enterpriseReport_access',
-            'cooperativeReport_access'
+            'cooperativeReport_access',
+            'helplessnessType_access',
+            'helplessnessType_create',
+            'helplessnessType_edit',
+            'helplessnessType_delete',
+           
         ];
-
         $this->storePermission($permissions);
     }
 }
