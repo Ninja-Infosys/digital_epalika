@@ -7,6 +7,7 @@ use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateControll
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
 use Modules\Recommendation\Http\Controllers\DocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
+use Modules\Recommendation\Http\Controllers\RecommendationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationDocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
 use Modules\Recommendation\Http\Controllers\RevenueHeaderController;
@@ -65,4 +66,6 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class,'updateStatus'])->name('recommendationCategory.updateStatus');
     Route::resource('recommendationCategory', RecommendationCategoryController::class);
     Route::resource('recommendationDocument', RecommendationDocumentController::class);
+    Route::get('recommendationDetail/{recommendationDetail}/updateStatus', [RecommendationDetailController::class,'updateStatus'])->name('recommendationDetail.updateStatus');
+    Route::resource('recommendationDetail', RecommendationDetailController::class);
 });

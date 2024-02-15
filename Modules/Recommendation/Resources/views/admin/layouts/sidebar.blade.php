@@ -178,6 +178,11 @@
                         <span>कागजात</span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/recommendation/setting/recommendationDetail*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationDetail.index')}}">
+                        <span>सिफारिस विवरण</span>
+                    </a>
+                </li>
 
 
 {{--            @can('recommendationCategory_access')--}}
