@@ -5,7 +5,9 @@ use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
+use Modules\Recommendation\Http\Controllers\DocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
+use Modules\Recommendation\Http\Controllers\RecommendationDocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
 use Modules\Recommendation\Http\Controllers\RevenueHeaderController;
 use Modules\Recommendation\Http\Controllers\SipharishCategoryController;
@@ -62,4 +64,5 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('revenueHeader', RevenueHeaderController::class);
     Route::get('recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class,'updateStatus'])->name('recommendationCategory.updateStatus');
     Route::resource('recommendationCategory', RecommendationCategoryController::class);
+    Route::resource('recommendationDocument', RecommendationDocumentController::class);
 });

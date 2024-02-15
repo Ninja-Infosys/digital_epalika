@@ -173,6 +173,11 @@
                         <span>सिफारिश वर्ग</span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/recommendation/setting/recommendationDocument*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationDocument.index')}}">
+                        <span>कागजात</span>
+                    </a>
+                </li>
 
 
 {{--            @can('recommendationCategory_access')--}}
