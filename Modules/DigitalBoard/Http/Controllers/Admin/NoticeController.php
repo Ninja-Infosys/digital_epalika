@@ -82,7 +82,8 @@ class NoticeController extends Controller
                 'files' => ['array', 'nullable'],
                 'files.*' => ['mimes:png,jpeg,jpg'],
                 'ward' => ['nullable', 'array'],
-                'is_displayed' => ['nullable', 'boolean']
+                'is_displayed' => ['nullable', 'boolean'],
+
             ]);
         } else {
             $data = $request->validate([
