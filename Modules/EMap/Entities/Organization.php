@@ -35,6 +35,8 @@ class Organization extends Authenticatable
         'is_organization',
         'password',
         'can_work',
+        'status',
+        'comment',
     ];
 
     protected $hidden = [
@@ -92,6 +94,11 @@ class Organization extends Authenticatable
     public function scopeNotOrganization($query)
     {
         return $query->where('is_organization', 0);
+    }
+
+    public function scopeAcceptedOrganization($query)
+    {
+        return $query->where('status', 'accepted');
     }
 
     public function organizationDetail(): HasOne

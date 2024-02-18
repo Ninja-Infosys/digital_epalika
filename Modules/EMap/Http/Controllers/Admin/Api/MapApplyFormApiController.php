@@ -34,7 +34,7 @@ class MapApplyFormApiController extends Controller
     {
         return [
             'setting' => SettingResource::make(MapSetting::with('landMeasurement', 'standardLandMeasurement')->first()),
-            'organizations' => OrganizationResource::collection(Organization::with('organizationDetail')->get()),
+            'organizations' => OrganizationResource::collection(Organization::with('organizationDetail')->acceptedOrganization()->get()),
             'mapFees' => MapFeeResource::collection(MapFee::with('unit')->get()),
             'landUseAreas' => LandUseAreaResource::collection(LandUseArea::all()),
             'structureTypes' => StructureTypeResource::collection(StructureType::get()),
