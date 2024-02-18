@@ -16,18 +16,7 @@
         संहिता भित्र रही निर्माण कार्य गर्नेछु/छौं। यस दरखास्त फाराममा लेखिएको व्यहोरा ठीक साँचो छ,
         झुठ्ठा ठहरे कानून बमोजिम सहुँला बुझाउँला।
     </p>
-    <p class="mt-2 fw-bold">तपसिल</p>
-    <livewire:emap::edit.map-apply-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-    <p class="break-page"></p>
-    <livewire:emap::edit.storey-detail-edit-livewire :mapApply="$mapApply"/>
-    <livewire:emap::edit.land-detail-edit-livewire :mapApply="$mapApply"/>
-    <livewire:emap::edit.land-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-    <livewire:emap::edit.house-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-    <livewire:emap::edit.four-fort-detail-edit-livewire :mapApply="$mapApply"/>
-    <livewire:emap::edit.designer-detail-edit-livewire :mapApply="$mapApply"/>
-    <livewire:emap::edit.applicant-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-    <p class="break-page"></p>
-    <livewire:emap::edit.criteria-detail-edit-livewire :mapApply="$mapApply"/>
-    <livewire:emap::edit.building-detail-edit-livewire :mapApply="$mapApply" />
-    <livewire:emap::edit.consultancy-detail-edit-liveware :mapApply="$mapApply"/>
+    <div id="map-app">
+        <edit-applications :map-apply="{{json_encode($mapApply)}}"></edit-applications>
+    </div>
 </div>
