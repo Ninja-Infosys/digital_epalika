@@ -245,7 +245,7 @@ trait EMapTemplateTrait
             '[@landDetail.tole]' => $this->landDetail->tole ?? '',
             '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
             '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
-            '[@landDetail.area]' => $this->landDetail->area ?? '',
+            '[@landDetail.area]' => $this->landDetail->unit_value ?? '',
             '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
         ];
     }

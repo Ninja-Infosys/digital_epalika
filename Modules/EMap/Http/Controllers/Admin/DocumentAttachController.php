@@ -218,7 +218,7 @@ class DocumentAttachController extends Controller
             $mapApply->landDetail->tole ?? '',
             $mapApply->landDetail->street_code_no ?? '',
             $mapApply->landDetail->plot_no ?? '',
-            $mapApply->landDetail->area ?? '',
+            $mapApply->landDetail->unit_value ?? '',
             $mapApply->landDetail->percentage_of_area_covered_by_building ?? '',
 
             //landowner

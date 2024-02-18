@@ -12,10 +12,10 @@
     @foreach($fourForts as $fourFort)
     <tr>
         <td>{{$fourFort->detail->label()}}
-        <td>{{$fourFort->east}}</td>
-        <td>{{$fourFort->west}}</td>
-        <td>{{$fourFort->north}}</td>
-        <td>{{$fourFort->south}}</td>
+        <td>{{get_nepali_number($fourFort->east)}}</td>
+        <td>{{get_nepali_number($fourFort->west)}}</td>
+        <td>{{get_nepali_number($fourFort->north)}}</td>
+        <td>{{get_nepali_number($fourFort->south)}}</td>
     </tr>
     @endforeach
     </tbody>
