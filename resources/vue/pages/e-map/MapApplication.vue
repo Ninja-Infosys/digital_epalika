@@ -106,24 +106,24 @@
             </legend>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <!-- <VMultiSelect
+                    <VMultiSelect
                         input-type="number"
                         v-model="form.landDetail.ward_no"
                         label="२.१ वडा नं"
                         placeholder="वडा नं"
                         @validate="validateField('landDetail.ward_no')"
                         :error="errors['landDetail.ward_no']"
-                    />  -->
-                    <VMultiSelect
+                    /> 
+                    <!-- <VMultiSelect
                         id="landowner-citizenship_issue_district_id"
                         v-model="form.landOwner.citizenship_issue_district_id"
-                        :options="eMapSetting?.??[]"
+                        :options="eMapSetting?.ward??[]"
                         name-prop="district"
                         label="२.१ वडा नं"
                         placeholder="वडा नं"
                         @validate="validateField('landDetail.ward_no')"
                         :error="errors['landDetail.ward_no']"
-                    />
+                    /> -->
                 </div>
 
                 <div class="col-md-4 mb-3">
