@@ -3,8 +3,8 @@
     <tr>
         <th>विवरण</th>
         <th>पूर्व</th>
-        <th>दक्षिण</th>
         <th>पश्चिम</th>
+        <th>दक्षिण</th>
         <th>उत्तर</th>
     </tr>
     </thead>
@@ -13,8 +13,8 @@
     <tr>
         <td>{{$fourFort->detail->label()}}
         <td>{{$fourFort->east}}</td>
-        <td>{{$fourFort->north}}</td>
         <td>{{$fourFort->west}}</td>
+        <td>{{$fourFort->north}}</td>
         <td>{{$fourFort->south}}</td>
     </tr>
     @endforeach

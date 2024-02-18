@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
+use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
@@ -83,6 +84,7 @@ trait EMapTemplateTrait
             'title' => 'चार किल्लाको विवरण',
             'data' => [
                 'किल्ला' => '[@fourForts]',
+                'जग्गाको चार किल्ला तथा संघियारको नाम ' => '[@nameOfTheFortsAndSanghiars]',
             ],
         ],
         [
@@ -286,6 +288,10 @@ trait EMapTemplateTrait
         return [
             '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $this->fourForts,
+            ]),
+            '[@nameOfTheFortsAndSanghiars]' => (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
         ];
     }
