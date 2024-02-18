@@ -8,6 +8,7 @@ use App\Mail\OrganizationRegistered;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -33,18 +34,21 @@ class OrganizationController extends Controller
         return view('emap::admin.organization.index', compact('organizations'));
     }
 
-    public function updateLoginStatus(Organization $organization)
+    public function updateLoginStatus(Request $request, Organization $organization)
     {
+        $request->validate([
+            'status'=>['required'],
+            'comment'=>['required_if:status,==,rejected']
+        ]);
         $this->checkAuthorization('organization_edit');
 
-        DB::transaction(function () use ($organization) {
+        DB::transaction(function () use ($organization,$request) {
             $organization->update([
-                'is_active' => !$organization->is_active,
+                'status' => $request->input('status'),
+                'comment' => $request->input('comment') ?? null,
             ]);
-
-            if (empty($organization->password) && $organization->is_active == 1) {
-                $url = URL::signedRoute('organization.invitation', $organization);
-                $message = "Congratulations, your request was approved. Click $url to set your password and login. Thank you.";
+            if ($organization->status === 'accepted') {
+                $message = "Congratulations, your request was approved. Digital E-palika";
                 (new AakashSms())->sendTextSMS($organization->phone, $message);
                 // Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
             }
@@ -52,7 +56,7 @@ class OrganizationController extends Controller
 
         toast('संगठन स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return back();                                                                                                                                                                                                                                                                                                                                                                                               
+        return back();
     }
 
     public function show(Organization $organization)

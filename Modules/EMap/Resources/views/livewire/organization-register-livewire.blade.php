@@ -196,6 +196,28 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="col-md-3 mb-2">
+                            <label for="user.password" class="form-label">पासवर्ड<span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input name="user.password" class="form-control @error('user.password') is-invalid @enderror"
+                                    type="password" id="user.password" placeholder="पासवर्ड" wire:model="user.password">
+                            </div>
+                            @error('user.password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-3 mb-2">
+                            <label for="user.password_confirmation" class="form-label">पासवर्ड सुनिश्चित<span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input name="user.password_confirmation" class="form-control @error('user.password_confirmation') is-invalid @enderror"
+                                    type="password" id="user.password_confirmation" placeholder="पासवर्ड सुनिश्चित" wire:model="user.password_confirmation">
+                            </div>
+                            @error('user.password_confirmation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                 <ul class="list-inline wizard mt-3">
