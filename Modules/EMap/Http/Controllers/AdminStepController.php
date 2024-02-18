@@ -26,6 +26,7 @@ use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class AdminStepController extends Controller
@@ -586,70 +587,74 @@ class AdminStepController extends Controller
             get_nepali_number($this->get_today_nepali_date()),
 
             //mapApply
-            $mapApply->registration_no ?? '',
-            $mapApply->registration_date ?? '',
-            $mapApply->construction_type?->label() ?? '',
-            $mapApply->usage?->label() ?? '',
-            $mapApply->building_category?->label() ?? '',
-            $mapApply->structureType->title ?? '',
-            $mapApply->current_storey ?? '',
-            $mapApply->future_storey ?? '',
-            $mapApply->area_of_plinth ?? '',
-            $mapApply->length ?? '',
-            $mapApply->breadth ?? '',
-            $mapApply->height ?? '',
+            get_nepali_number($mapApply->registration_no) ?? '',
+            get_nepali_number($mapApply->registration_date) ?? '',
+            get_nepali_number($mapApply->construction_type?->label()) ?? '',
+            get_nepali_number($mapApply->usage?->label()) ?? '',
+            get_nepali_number($mapApply->building_category?->label()) ?? '',
+            get_nepali_number($mapApply->structureType->title) ?? '',
+            get_nepali_number($mapApply->current_storey) ?? '',
+            get_nepali_number($mapApply->future_storey) ?? '',
+            get_nepali_number($mapApply->area_of_plinth) ?? '',
+            get_nepali_number($mapApply->length) ?? '',
+            get_nepali_number($mapApply->breadth) ?? '',
+            get_nepali_number($mapApply->height) ?? '',
             //landDetail
-            $mapApply->landDetail?->landUseArea?->title ?? '',
-            $mapApply->landDetail->ward_no ?? '',
-            $mapApply->landDetail->former_ward_no ?? '',
-            $mapApply->landDetail->tole ?? '',
-            $mapApply->landDetail->street_code_no ?? '',
-            $mapApply->landDetail->plot_no ?? '',
-            $mapApply->landDetail->area ?? '',
-            $mapApply->landDetail->percentage_of_area_covered_by_building ?? '',
+            get_nepali_number($mapApply->landDetail?->landUseArea?->title) ?? '',
+            get_nepali_number($mapApply->landDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->landDetail->former_ward_no) ?? '',
+            get_nepali_number($mapApply->landDetail->tole) ?? '',
+            get_nepali_number($mapApply->landDetail->street_code_no) ?? '',
+            get_nepali_number($mapApply->landDetail->plot_no) ?? '',
+            get_nepali_number($mapApply->landDetail->unit_value) ?? '',
+            get_nepali_number($mapApply->landDetail->percentage_of_area_covered_by_building) ?? '',
 
             //landowner
 
-            $mapApply->landOwner->land_owner_type?->label() ?? '',
-            $mapApply->landOwner->name ?? '',
-            $mapApply->landOwner->phone ?? '',
-            $mapApply->landOwner->father_name ?? '',
-            $mapApply->landOwner->grandfather_name ?? '',
-            $mapApply->landOwner->citizenshipIssueDistrict->district ?? '',
-            $mapApply->landOwner->citizenship_no ?? '',
-            $mapApply->landOwner->citizenship_issue_date ?? '',
-            $mapApply->landOwner->address ?? '',
-            $mapApply->landOwner->local_body ?? '',
-            $mapApply->landOwner->ward_no ?? '',
+            get_nepali_number($mapApply->landOwner->land_owner_type?->label()) ?? '',
+            get_nepali_number($mapApply->landOwner->name) ?? '',
+            get_nepali_number($mapApply->landOwner->phone) ?? '',
+            get_nepali_number($mapApply->landOwner->father_name) ?? '',
+            get_nepali_number($mapApply->landOwner->grandfather_name) ?? '',
+            get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->landOwner->citizenship_no) ?? '',
+            get_nepali_number($mapApply->landOwner->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->landOwner->address) ?? '',
+            get_nepali_number($mapApply->landOwner->local_body) ?? '',
+            get_nepali_number($mapApply->landOwner->ward_no) ?? '',
 
             //houseOwner
 
-            $mapApply->houseOwner->name ?? '',
-            $mapApply->houseOwner->phone ?? '',
-            $mapApply->houseOwner->father_name ?? '',
-            $mapApply->houseOwner->grandfather_name ?? '',
-            $mapApply->houseOwner->citizenshipIssueDistrict->district ?? '',
-            $mapApply->houseOwner->citizenship_no ?? '',
-            $mapApply->houseOwner->citizenship_issue_date ?? '',
-            $mapApply->houseOwner->address ?? '',
-            $mapApply->houseOwner->local_body ?? '',
-            $mapApply->houseOwner->ward_no ?? '',
+            get_nepali_number($mapApply->houseOwner->name) ?? '',
+            get_nepali_number($mapApply->houseOwner->phone) ?? '',
+            get_nepali_number($mapApply->houseOwner->father_name) ?? '',
+            get_nepali_number($mapApply->houseOwner->grandfather_name) ?? '',
+            get_nepali_number($mapApply->houseOwner->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->houseOwner->citizenship_no) ?? '',
+            get_nepali_number($mapApply->houseOwner->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->houseOwner->address) ?? '',
+            get_nepali_number($mapApply->houseOwner->local_body) ?? '',
+            get_nepali_number($mapApply->houseOwner->ward_no) ?? '',
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $mapApply->fourForts,
             ]),
+            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
 
             //applicantDetail
-            $mapApply->applicantDetail->applicant_type?->label() ?? '',
-            $mapApply->applicantDetail->relation_with_owner?->label() ?? '',
-            $mapApply->applicantDetail->name ?? '',
-            $mapApply->applicantDetail->phone ?? '',
-            $mapApply->applicantDetail->father_name ?? '',
-            $mapApply->applicantDetail->citizenshipIssueDistrict->district ?? '',
-            $mapApply->applicantDetail->citizenship_no ?? '',
-            $mapApply->applicantDetail->citizenship_issue_date ?? '',
-            $mapApply->applicantDetail->signature_url ?? '',
+            get_nepali_number($mapApply->applicantDetail->applicant_type?->label()) ?? '',
+            get_nepali_number($mapApply->applicantDetail->relation_with_owner?->label()) ?? '',
+            get_nepali_number($mapApply->applicantDetail->name) ?? '',
+            get_nepali_number($mapApply->applicantDetail->phone) ?? '',
+            get_nepali_number($mapApply->applicantDetail->father_name) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
 
             //criteria detail
 
@@ -664,39 +669,39 @@ class AdminStepController extends Controller
 
             //DesignerDetails
 
-            $designerDetail->name ?? '',
-            $designerDetail->father_name ?? '',
-            $designerDetail->phone ?? '',
-            $designerDetail->address ?? '',
-            $designerDetail->local_body ?? '',
-            $designerDetail->ward_no ?? '',
-            $designerDetail->nec_council_no ?? '',
-            $designerDetail->local_body_registration_no ?? '',
-            $designerDetail->consulting_firm_name ?? '',
+            get_nepali_number($designerDetail->name) ?? '',
+            get_nepali_number($designerDetail->father_name) ?? '',
+            get_nepali_number($designerDetail->phone) ?? '',
+            get_nepali_number($designerDetail->address) ?? '',
+            get_nepali_number($designerDetail->local_body) ?? '',
+            get_nepali_number($designerDetail->ward_no) ?? '',
+            get_nepali_number($designerDetail->nec_council_no) ?? '',
+            get_nepali_number($designerDetail->local_body_registration_no) ?? '',
+            get_nepali_number($designerDetail->consulting_firm_name) ?? '',
 
             //supervisorDetails
 
-            $supervisorDetail->name ?? '',
-            $supervisorDetail->father_name ?? '',
-            $supervisorDetail->phone ?? '',
-            $supervisorDetail->address ?? '',
-            $supervisorDetail->local_body ?? '',
-            $supervisorDetail->ward_no ?? '',
-            $supervisorDetail->nec_council_no ?? '',
-            $supervisorDetail->local_body_registration_no ?? '',
-            $supervisorDetail->consulting_firm_name ?? '',
+            get_nepali_number($supervisorDetail->name) ?? '',
+            get_nepali_number($supervisorDetail->father_name) ?? '',
+            get_nepali_number($supervisorDetail->phone) ?? '',
+            get_nepali_number($supervisorDetail->address) ?? '',
+            get_nepali_number($supervisorDetail->local_body) ?? '',
+            get_nepali_number($supervisorDetail->ward_no) ?? '',
+            get_nepali_number($supervisorDetail->nec_council_no) ?? '',
+            get_nepali_number($supervisorDetail->local_body_registration_no) ?? '',
+            get_nepali_number($supervisorDetail->consulting_firm_name) ?? '',
 
             //ContractorDetails
 
-            $contractorDetail->name ?? '',
-            $contractorDetail->father_name ?? '',
-            $contractorDetail->phone ?? '',
-            $contractorDetail->address ?? '',
-            $contractorDetail->local_body ?? '',
-            $contractorDetail->ward_no ?? '',
-            $contractorDetail->nec_council_no ?? '',
-            $contractorDetail->local_body_registration_no ?? '',
-            $contractorDetail->consulting_firm_name ?? '',
+            get_nepali_number($contractorDetail->name) ?? '',
+            get_nepali_number($contractorDetail->father_name) ?? '',
+            get_nepali_number($contractorDetail->phone) ?? '',
+            get_nepali_number($contractorDetail->address) ?? '',
+            get_nepali_number($contractorDetail->local_body) ?? '',
+            get_nepali_number($contractorDetail->ward_no) ?? '',
+            get_nepali_number($contractorDetail->nec_council_no) ?? '',
+            get_nepali_number($contractorDetail->local_body_registration_no) ?? '',
+            get_nepali_number($contractorDetail->consulting_firm_name) ?? '',
         ];
     }
 
@@ -761,6 +766,7 @@ class AdminStepController extends Controller
             //FourForts
 
             '[@fourForts]',
+            '[@nameOfTheFortsAndSanghiars]',
 
             //applicantDetail
 
