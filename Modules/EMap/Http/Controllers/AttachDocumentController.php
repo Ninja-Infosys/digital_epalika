@@ -26,6 +26,7 @@ use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\AppliedDocumentStatus;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class AttachDocumentController extends Controller
@@ -396,6 +397,10 @@ class AttachDocumentController extends Controller
             (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $mapApply->fourForts,
             ]),
+            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
 
             //applicantDetail
             $mapApply->applicantDetail->applicant_type?->label() ?? '',
@@ -518,6 +523,7 @@ class AttachDocumentController extends Controller
             //FourForts
 
             '[@fourForts]',
+            '[@nameOfTheFortsAndSanghiars]',
 
             //applicantDetail
 

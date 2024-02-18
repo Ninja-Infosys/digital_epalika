@@ -26,6 +26,7 @@ use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class AdminStepController extends Controller
@@ -639,6 +640,10 @@ class AdminStepController extends Controller
             (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $mapApply->fourForts,
             ]),
+            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
 
             //applicantDetail
             $mapApply->applicantDetail->applicant_type?->label() ?? '',
@@ -761,6 +766,7 @@ class AdminStepController extends Controller
             //FourForts
 
             '[@fourForts]',
+            '[@nameOfTheFortsAndSanghiars]',
 
             //applicantDetail
 

@@ -14,6 +14,7 @@ use Modules\EMap\Entities\HouseOwner;
 use Modules\EMap\Entities\HouseOwnerArchive;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
+use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 use Modules\EMap\Http\Requests\HouseOwnerArchive\StoreHouseOwnerArchiveRequest;
 use Modules\EMap\Http\Requests\HouseOwnerArchive\UpdateHouseOwnerArchiveRequest;
@@ -214,7 +215,10 @@ class HouseOwnerArchiveController extends Controller
             (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $mapApply->fourForts,
             ]),
-
+            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
             //applicantDetail
             $mapApply->applicantDetail->applicant_type?->label() ?? '',
             $mapApply->applicantDetail->relation_with_owner?->label() ?? '',
@@ -336,6 +340,7 @@ class HouseOwnerArchiveController extends Controller
             //FourForts
 
             '[@fourForts]',
+            '[@nameOfTheFortsAndSanghiars]',
 
             //applicantDetail
 
