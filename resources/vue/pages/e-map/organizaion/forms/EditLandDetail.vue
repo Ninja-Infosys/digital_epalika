@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <VInput
-                        input-type="number"
+                        input-type="text"
                         id="former_ward_no"
                         v-model="form.former_ward_no"
                         @validate="validateField('former_ward_no')"
