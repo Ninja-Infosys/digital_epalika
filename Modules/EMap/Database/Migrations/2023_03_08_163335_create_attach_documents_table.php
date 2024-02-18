@@ -14,10 +14,10 @@ return new class () extends Migration {
             $table->string('land_revenue_document');
             $table->string('land_owner_citizenship');
             $table->string('blue_print');
-            $table->string('pass_document');
-            $table->string('designer_document');
-            $table->string('permission_document');
-            $table->string('inheritance_document');
+            $table->string('pass_document')->nullable();
+            $table->string('designer_document')->nullable();
+            $table->string('permission_document')->nullable();
+            $table->string('inheritance_document')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
