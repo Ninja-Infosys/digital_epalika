@@ -35,7 +35,7 @@ class StoreComplaintRegistrationRequest extends FormRequest
             'complainantDefendents.*.province_id' => ['nullable', 'exists:provinces,id'],
             'complainantDefendents.*.district_id' => ['nullable', 'exists:districts,id'],
             'complainantDefendents.*.local_body_id' => ['nullable', 'exists:local_bodies,id'],
-            'complainantDefendents.*.ward_no' => ['required', 'integer'],
+            'complainantDefendents.*.ward_no' => ['nullable', 'integer'],
             'complainantDefendents.*.tole' => ['nullable'],
 
             'relatedMembers' => ['nullable', 'array'],
@@ -45,7 +45,7 @@ class StoreComplaintRegistrationRequest extends FormRequest
             'relatedMembers.*.designation' => ['nullable'],
             'relatedMembers.*.address' => ['nullable'],
             'witnesses' => ['nullable', 'array'],
-            'witnesses.*.name' => ['required', 'string', 'max:255'],
+            'witnesses.*.name' => ['nullable', 'string', 'max:255'],
             'witnesses.*.age' => ['nullable', 'integer'],
             'witnesses.*.phone' => ['nullable'],
             'witnesses.*.address' => ['nullable'],
