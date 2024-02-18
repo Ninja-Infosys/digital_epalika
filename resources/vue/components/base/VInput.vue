@@ -44,6 +44,7 @@ const props=defineProps({
   placeholder: {
     type: String,
   },
+  
   error: {
     type: String,
     default: ''
