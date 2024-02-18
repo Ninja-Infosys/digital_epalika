@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\LandOwnerTypeEnum;
 
 class LandOwner extends Model
@@ -34,6 +35,7 @@ class LandOwner extends Model
         'address',
         'local_body',
         'ward_no',
+        'photo',
     ];
 
     protected $casts = [
@@ -53,5 +55,17 @@ class LandOwner extends Model
     public function citizenshipIssueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
+    }
+
+    public function setPhotoAttribute($value): void
+    {
+        if(!empty($value) && !is_string($value)) {
+            $this->attributes['photo'] = $value->store('e_map/land_owner/photo', 'public');
+        }
+    }
+    public function getPhotoUrlAttribute($value): string
+    {
+        return  $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+
     }
 }

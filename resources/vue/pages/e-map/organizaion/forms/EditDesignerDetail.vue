@@ -1,6 +1,6 @@
 <template>
     <fieldset>
-        <legend> ६. डिजाइनरको विवरण </legend>
+        <legend> ७. डिजाइनरको विवरण </legend>
 
         <template v-for="(designer,index) in designerDetails.data" :key="index">
             <div class="d-flex justify-content-between mt-2">
