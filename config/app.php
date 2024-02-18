@@ -219,4 +219,9 @@ return [
     ])->toArray(),
 
     'otp_expiry_time' => env('OTP_EXPIRY_TIME', 5),
+
+
+    'eloquent' => [
+        'lazy_loading' => true,
+    ],
 ];

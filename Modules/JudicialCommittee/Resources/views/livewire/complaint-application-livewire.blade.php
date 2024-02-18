@@ -1,6 +1,15 @@
 <form wire:submit.prevent="submitFormData">
     <div class="row mb-2">
         <div class="col-md-12">
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <fieldset class="mb-2">
                 <legend>
                     <h4 class="text-info">निवेदक को विवरण</h4>

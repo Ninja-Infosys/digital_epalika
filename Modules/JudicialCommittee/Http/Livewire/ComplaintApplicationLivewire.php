@@ -66,8 +66,8 @@ class ComplaintApplicationLivewire extends Component
 
     protected $rules = [
         'form.complainants.*.name' => ['required', 'string', 'max:255'],
-        'form.complainants.*.age' => ['required', 'integer'],
-        'form.complainants.*.father_name' => ['required', 'string', 'max:255'],
+        'form.complainants.*.age' => ['nullable', 'integer'],
+        'form.complainants.*.father_name' => ['nullable', 'string', 'max:255'],
         'form.complainants.*.grandfather_name' => ['nullable', 'string', 'max:255'],
         'form.complainants.*.spouse_name' => ['nullable', 'string', 'max:255'],
         'form.complainants.*.province_id' => ['required', 'exists:provinces,id'],
