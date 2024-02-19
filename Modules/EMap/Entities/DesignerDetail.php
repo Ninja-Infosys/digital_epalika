@@ -2,6 +2,9 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,6 +35,10 @@ class DesignerDetail extends Model
         'nec_council_no',
         'local_body_registration_no',
         'consulting_firm_name',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'tole'
     ];
 
     protected $casts = [
@@ -41,5 +48,20 @@ class DesignerDetail extends Model
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
+    }
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
     }
 }
