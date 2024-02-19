@@ -80,43 +80,80 @@
                     />
                 </div>
                 <div class="col-md-4 mb-3">
-                    <VInput
-                        id="houseOwner-address"
-                        v-model="form.address"
-                        label="ठेगाना"
-                        :disabled="!editFormOpened"
-                        @validate="validateField('address')"
-                        :error="errors.address"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        id="houseOwner-local_body"
-                        v-model="form.local_body"
-                        label="पालिका"
-                        :disabled="!editFormOpened"
-                        @validate="validateField('local_body')"
-                        :error="errors.local_body"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        input-type="number"
-                        id="houseOwner-ward_no"
-                        v-model="form.ward_no"
-                        label="वडा नं."
-                        :disabled="!editFormOpened"
-                        @validate="validateField('ward_no')"
-                        :error="errors.ward_no"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
                     <VFileUpload
                         id="house-owner-photo"
                         v-model="form.photo"
                         label="घर धनीको फोटो"
+                        :disabled="!editFormOpened"
                         :default-photo="houseOwner.data?.photo_url"
                     />
+                </div>
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>ठेगाना</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-province_id"
+                                    v-model="form.province_id"
+                                    :options="houseOwnerProvinces??[]"
+                                    name-prop="province"
+                                    label="प्रदेश"
+                                    @validate="validateField('province_id')"
+                                    :error="errors['province_id']"
+                                    :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-district_id"
+                                    v-model="form.district_id"
+                                    :options="houseOwnerDistricts??[]"
+                                    name-prop="district"
+                                    label="जिल्ला"
+                                    @validate="validateField('district_id')"
+                                    :error="errors['district_id']"
+                                    :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-local_body_id"
+                                    v-model="form.local_body_id"
+                                    :options="houseOwnerLocalBodies??[]"
+                                    name-prop="local_body"
+                                    label="पालिका"
+                                    @validate="validateField('local_body_id')"
+                                    :error="errors['local_body_id']"
+                                    :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-ward_no"
+                                    v-model="form.ward_no"
+                                    :options="houseOwnerWards??[]"
+                                    label="वार्ड"
+                                    @validate="validateField('ward_no')"
+                                    :error="errors['ward_no']"
+                                    :disabled="!editFormOpened"
+                                />
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <VInput
+                                    input-type="text"
+                                    id="tole"
+                                    v-model="form.tole"
+                                    placeholder="टोल"
+                                    label="टोल"
+                                    @validate="validateField('tole')"
+                                    :error="errors['tole']"
+                                    :disabled="!editFormOpened"
+                                />
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
             <div v-if="editFormOpened" class="d-flex justify-content-end">
@@ -139,84 +176,96 @@ import {useYup} from "../../../../utils/yup";
 import showErrors from "../../../../utils/showErrors";
 import {toast} from "../../../../utils/toast";
 import {useApplicationStore} from "../../../../stores/e-map/organization/application";
+import {useAddressStore} from "../../../../stores/address";
 
-const props=defineProps({
-    mapApply:{
-        required:true,
-        type:Object
+const props = defineProps({
+    mapApply: {
+        required: true,
+        type: Object
     }
 })
+const houseOwnerAddressStore = useAddressStore();
+const settingStore = useSettingStore();
+const applicationStore = useApplicationStore();
 
-const settingStore=useSettingStore();
-const applicationStore=useApplicationStore();
+const editFormOpened = ref(false);
+const {
+    provinces: houseOwnerProvinces,
+    districts: houseOwnerDistricts,
+    localBodies: houseOwnerLocalBodies,
+    wards: houseOwnerWards
+} = storeToRefs(houseOwnerAddressStore);
 
-const editFormOpened=ref(false);
+const {eMapSetting} = storeToRefs(settingStore);
+const {houseOwner} = storeToRefs(applicationStore);
 
-const {eMapSetting}=storeToRefs(settingStore);
-const {houseOwner}=storeToRefs(applicationStore);
-
-const initialState={
-    name:'',
-    phone:'',
-    father_name:'',
-    grandfather_name:'',
-    citizenship_no:'',
-    citizenship_issue_date:'',
-    citizenship_issue_district_id:'',
-    address:'',
-    local_body:'',
-    ward_no:'',
-    photo:'',
+const initialState = {
+    name: '',
+    phone: '',
+    father_name: '',
+    grandfather_name: '',
+    citizenship_no: '',
+    citizenship_issue_date: '',
+    citizenship_issue_district_id: '',
+    province_id: '',
+    district_id: '',
+    local_body_id: '',
+    ward_no: '',
+    tole: '',
+    photo: '',
 }
 
 const form = reactive({...initialState});
 
-onMounted(()=>{
+onMounted(() => {
     setHouseOwnerData();
+    houseOwnerAddressStore.getProvinces();
 })
 
-const setHouseOwnerData=async () => {
+const setHouseOwnerData = async () => {
     await applicationStore.getHouseOwner(props.mapApply.id);
     Object.keys(form).forEach(key => {
-        form[key]=houseOwner.value.data[key]??'';
+        form[key] = houseOwner.value.data[key] ?? '';
     })
 }
 
-const isSubmitting=ref(false);
+const isSubmitting = ref(false);
 
 const validations = object({
-    name:string().required('घर धनीको नाम अनिवार्य छ'),
-    phone:string(),
-    father_name:string().required('बुवाको नाम अनिवार्य छ'),
-    grandfather_name:string().required('हजुरबुबाको नाम अनिवार्य छ'),
-    citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
-    citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
-    citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-    address:string().required('ठेगाना अनिवार्य छ'),
-    local_body:string().required('पालिका अनिवार्य छ'),
-    ward_no:string().required('वडा नं. अनिवार्य छ'),
+    name: string().required('घर धनीको नाम अनिवार्य छ'),
+    phone: string(),
+    father_name: string().required('बुवाको नाम अनिवार्य छ'),
+    grandfather_name: string().required('हजुरबुबाको नाम अनिवार्य छ'),
+    citizenship_no: string().required('नागरिकता नम्बर अनिवार्य छ'),
+    citizenship_issue_date: string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+    citizenship_issue_district_id: string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+    province_id: string().required('प्रदेश अनिवार्य छ'),
+    district_id: string().required('जिल्ला अनिवार्य छ'),
+    local_body_id: string().required('पालिका अनिवार्य छ'),
+    ward_no: string().required('वडा नं. अनिवार्य छ'),
+    tole: string().required('टोल अनिवार्य छ'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
 
-const saveFormData=async (map_apply_id) => {
+const saveFormData = async (map_apply_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
         const formData = new FormData()
         Object.keys(form).forEach(key => {
-            formData.append(key, form[key]??'');
+            formData.append(key, form[key] ?? '');
         });
         try {
-            let res = await applicationStore.updateHouseOwner(map_apply_id,formData);
-            toast(res.status,res.data.message);
-            editFormOpened.value=false;
+            let res = await applicationStore.updateHouseOwner(map_apply_id, formData);
+            toast(res.status, res.data.message);
+            editFormOpened.value = false;
             resetForm();
             await setHouseOwnerData();
-        }catch (e) {
+        } catch (e) {
             showErrors(e);
-        }finally {
-            isSubmitting.value=false;
+        } finally {
+            isSubmitting.value = false;
         }
     }
 }
@@ -225,4 +274,20 @@ const resetForm = () => {
     Object.assign(form, {...initialState});
     errors.value = {};
 }
+
+watch(() => form.province_id, (province_id) => {
+    if (province_id) {
+        houseOwnerAddressStore.getProvince(province_id)
+    }
+})
+watch(() => form.district_id, (district_id) => {
+    if (district_id) {
+        houseOwnerAddressStore.getDistrict(district_id)
+    }
+})
+watch(() => form.local_body_id, (local_body_id) => {
+    if (local_body_id) {
+        houseOwnerAddressStore.getLocalBody(local_body_id)
+    }
+})
 </script>

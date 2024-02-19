@@ -33,6 +33,16 @@
                 <div class="col-md-4 mb-3">
                     <VInput
                         input-type="text"
+                        v-model="form.former_local_body"
+                        label="२.२ साविक पालिका"
+                        placeholder="साविक पालिका"
+                        @validate="validateField('landDetail.former_local_body')"
+                        :error="errors['landDetail.former_local_body']"
+                    />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        input-type="text"
                         id="former_ward_no"
                         v-model="form.former_ward_no"
                         @validate="validateField('former_ward_no')"
@@ -115,66 +125,68 @@ import showErrors from "../../../../utils/showErrors";
 import {toast} from "../../../../utils/toast";
 import {useApplicationStore} from "../../../../stores/e-map/organization/application";
 
-const props=defineProps({
-    mapApply:{
-        required:true,
-        type:Object
+const props = defineProps({
+    mapApply: {
+        required: true,
+        type: Object
     }
 })
 
-const settingStore=useSettingStore();
-const applicationStore=useApplicationStore();
+const settingStore = useSettingStore();
+const applicationStore = useApplicationStore();
 
-const editFormOpened=ref(false);
+const editFormOpened = ref(false);
 
-const {eMapSetting}=storeToRefs(settingStore);
+const {eMapSetting} = storeToRefs(settingStore);
 
-const initialState={
-    land_use_area_id:'',
-    ward_no:'',
-    former_ward_no:'',
-    tole:'',
-    street_code_no:'',
-    plot_no:'',
-    unit_value:'',
-    percentage_of_area_covered_by_building:'',
+const initialState = {
+    land_use_area_id: '',
+    ward_no: '',
+    former_local_body: '',
+    former_ward_no: '',
+    tole: '',
+    street_code_no: '',
+    plot_no: '',
+    unit_value: '',
+    percentage_of_area_covered_by_building: '',
 }
 
 const form = reactive({...initialState});
 
-onMounted(()=>{
+onMounted(() => {
     Object.keys(form).forEach(key => {
-        form[key] =props.mapApply.land_detail[key]??'';
+        form[key] = props.mapApply.land_detail[key] ?? '';
     })
 })
 
-const isSubmitting=ref(false);
+const isSubmitting = ref(false);
 
 const validations = object({
-    land_use_area_id:string().required('अनिवार्य छ'),
-    ward_no:string().required('अनिवार्य छ'),
-    former_ward_no:string().required('अनिवार्य छ'),
-    tole:string().required('अनिवार्य छ'),
-    street_code_no:string().nullable(),
-    plot_no:string().required('अनिवार्य छ'),
-    unit_value:string().required('अनिवार्य छ'),
-    percentage_of_area_covered_by_building:string().required('अनिवार्य छ'),
+    land_use_area_id: string().required('अनिवार्य छ'),
+    ward_no: string().required('अनिवार्य छ'),
+    former_local_body: string().nullable(),
+    former_ward_no: string().nullable(),
+    tole: string().required('अनिवार्य छ'),
+    street_code_no: string().nullable(),
+    plot_no: string().required('अनिवार्य छ'),
+    unit_value: string().required('अनिवार्य छ'),
+    percentage_of_area_covered_by_building: string().required('अनिवार्य छ'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
 
-const saveFormData=async (map_apply_id) => {
+const saveFormData = async (map_apply_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
         try {
-            let res = await applicationStore.updateLandDetail(map_apply_id,form);
-            toast(res.status,res.data.message);
-            editFormOpened.value=false;
-        }catch (e) {
+            let res = await applicationStore.updateLandDetail(map_apply_id, form);
+            toast(res.status, res.data.message);
+            editFormOpened.value = false;
+        } catch (e) {
             showErrors(e);
-        }finally {
-            isSubmitting.value=false;
+        } finally {
+            isSubmitting.value = false;
         }
     }
 }

@@ -100,43 +100,79 @@
                     />
                 </div>
                 <div class="col-md-4 mb-3">
-                    <VInput
-                        id="landowner-address"
-                        v-model="form.address"
-                        label="ठेगाना"
-                        @validate="validateField('address')"
-                        :disabled="!editFormOpened"
-                        :error="errors.address"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        id="landowner-local_body"
-                        v-model="form.local_body"
-                        label="पालिका"
-                        @validate="validateField('local_body')"
-                        :disabled="!editFormOpened"
-                        :error="errors.local_body"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        input-type="number"
-                        id="landowner-ward_no"
-                        v-model="form.ward_no"
-                        label="वडा नं."
-                        @validate="validateField('ward_no')"
-                        :disabled="!editFormOpened"
-                        :error="errors.ward_no"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
                     <VFileUpload
                         id="landowner-photo"
                         v-model="form.photo"
                         label="जग्गाधनीको फोटो"
                         :default-photo="landOwner.data?.photo_url"
+                        :disabled="!editFormOpened"
                     />
+                </div>
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>ठेगाना</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-province_id"
+                                    v-model="form.province_id"
+                                    :options="landOwnerProvinces??[]"
+                                    name-prop="province"
+                                    label="प्रदेश"
+                                    @validate="validateField('province_id')"
+                                    :error="errors['province_id']"
+                                     :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-district_id"
+                                    v-model="form.district_id"
+                                    :options="landOwnerDistricts??[]"
+                                    name-prop="district"
+                                    label="जिल्ला"
+                                    @validate="validateField('district_id')"
+                                    :error="errors['district_id']"
+                                     :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-local_body_id"
+                                    v-model="form.local_body_id"
+                                    :options="landOwnerLocalBodies??[]"
+                                    name-prop="local_body"
+                                    label="पालिका"
+                                    @validate="validateField('local_body_id')"
+                                    :error="errors['local_body_id']"
+                                     :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-ward_no"
+                                    v-model="form.ward_no"
+                                    :options="landOwnerWards??[]"
+                                    label="वार्ड"
+                                    @validate="validateField('ward_no')"
+                                    :error="errors['ward_no']"
+                                     :disabled="!editFormOpened"
+                                />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <VInput
+                                    input-type="text"
+                                    id="tole"
+                                    v-model="form.tole"
+                                    placeholder="टोल"
+                                    label="टोल"
+                                    @validate="validateField('tole')"
+                                    :error="errors['tole']"
+                                     :disabled="!editFormOpened"
+                                />
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
 
@@ -160,6 +196,7 @@ import {useYup} from "../../../../utils/yup";
 import showErrors from "../../../../utils/showErrors";
 import {toast} from "../../../../utils/toast";
 import {useApplicationStore} from "../../../../stores/e-map/organization/application";
+import {useAddressStore} from "../../../../stores/address";
 
 const props=defineProps({
     mapApply:{
@@ -175,7 +212,7 @@ const editFormOpened=ref(false);
 
 const {eMapSetting}=storeToRefs(settingStore);
 const {landOwner}=storeToRefs(applicationStore);
-
+const landOwnerAddressStore = useAddressStore();
 const initialState={
     land_owner_type:'',
     name:'',
@@ -185,16 +222,24 @@ const initialState={
     citizenship_no:'',
     citizenship_issue_date:'',
     citizenship_issue_district_id:'',
-    address:'',
-    local_body:'',
-    ward_no:'',
+    province_id: '',
+    district_id: '',
+    local_body_id: '',
+    ward_no: '',
+    tole: '',
     photo:'',
 }
 
 const form = reactive({...initialState});
-
+const {
+    provinces: landOwnerProvinces,
+    districts: landOwnerDistricts,
+    localBodies: landOwnerLocalBodies,
+    wards: landOwnerWards
+} = storeToRefs(landOwnerAddressStore);
 onMounted(()=>{
     setLandOwnerData();
+    landOwnerAddressStore.getProvinces();
 })
 
 const setLandOwnerData=async () => {
@@ -215,9 +260,11 @@ const validations = object({
     citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
     citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
     citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-    address:string().required('ठेगाना अनिवार्य छ'),
-    local_body:string().required('पालिका अनिवार्य छ'),
-    ward_no:string().required('वडा नं. अनिवार्य छ'),
+    province_id: string().required('प्रदेश अनिवार्य छ'),
+    district_id: string().required('जिल्ला अनिवार्य छ'),
+    local_body_id: string().required('पालिका अनिवार्य छ'),
+    ward_no: string().required('वडा नं. अनिवार्य छ'),
+    tole: string().required('टोल अनिवार्य छ'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
@@ -248,4 +295,20 @@ const resetForm = () => {
     Object.assign(form, {...initialState});
     errors.value = {};
 }
+
+watch(() => form.province_id, (province_id) => {
+    if (province_id) {
+        landOwnerAddressStore.getProvince(province_id)
+    }
+})
+watch(() => form.district_id, (district_id) => {
+    if (district_id) {
+        landOwnerAddressStore.getDistrict(district_id)
+    }
+})
+watch(() => form.local_body_id, (local_body_id) => {
+    if (local_body_id) {
+        landOwnerAddressStore.getLocalBody(local_body_id)
+    }
+})
 </script>

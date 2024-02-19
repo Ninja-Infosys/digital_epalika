@@ -67,7 +67,6 @@ export const useAddressStore = defineStore('provinces', {
                 .then((res) => {
                     this.localBody = res.data;
                     this.wards = res.data?.wards;
-                    console.log(res.data)
                 })
                 .catch((err) => {
                     showErrors(err);

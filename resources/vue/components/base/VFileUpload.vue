@@ -27,6 +27,7 @@
             :title="fileDetail.name"
             @click="selectFile" readonly
             class="form-control"
+            :disabled="disabled"
             :placeholder="fileDetail.file ? '1 file selected' : 'Select file...'"
         >
         <button v-if="fileDetail.file" @click="resetFile" class="btn btn-outline-danger" type="button">
@@ -39,6 +40,7 @@
     <input
         type="file" ref="file_element"
         @change="onFileSelected"
+        :disabled="disabled"
         class="form-control" hidden
         v-bind:class="[{'is-invalid':error}]"
         :id="id"
@@ -74,7 +76,11 @@ const props=defineProps({
     },
     showPreviewImage:{
         default:true
-    }
+    },
+    disabled: {
+        type: Boolean,
+        default: false
+    },
 })
 
 const {fileDetail, onFileSelected, resetFile} = useFileUpload();

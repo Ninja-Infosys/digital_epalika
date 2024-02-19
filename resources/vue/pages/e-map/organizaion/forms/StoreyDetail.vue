@@ -10,25 +10,29 @@
                     <th>साविक निर्माणको क्षेत्रफल</th>
                     <th>जम्मा क्षेत्रफल</th>
                     <th>उचाई</th>
+                    <th>जम्मा कोठा</th>
                     <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(storey,index) in storeyDetails" :key="storey.id">
                     <td>
-                        {{storey.mapFee?.storey || 'उपलब्ध छैन'}}
+                        {{ storey.mapFee?.storey || 'उपलब्ध छैन' }}
                     </td>
                     <td>
-                        {{storey.area_of_proposed_construction || 'उपलब्ध छैन'}}
+                        {{ storey.area_of_proposed_construction || 'उपलब्ध छैन' }}
                     </td>
                     <td>
-                        {{storey.area_of_former_construction || 'उपलब्ध छैन'}}
+                        {{ storey.area_of_former_construction || '-' }}
                     </td>
                     <td>
-                        {{storey.total_area || 'उपलब्ध छैन'}}
+                        {{ storey.total_area || 'उपलब्ध छैन' }}
                     </td>
                     <td>
-                        {{storey.height || 'उपलब्ध छैन'}}
+                        {{ storey.height || 'उपलब्ध छैन' }}
+                    </td>
+                    <td>
+                        {{ storey.room || 'उपलब्ध छैन' }}
                     </td>
                     <td>
                         <div class="d-flex gap-1">
@@ -101,8 +105,20 @@
                             id="height"
                             v-model="form.height"
                             label="उचाई"
+                            min="0"
                             @validate="validateField('height')"
                             :error="errors.height"
+                        />
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <VInput
+                            input-type="number"
+                            id="room"
+                            min-value="0"
+                            v-model="form.room"
+                            label="जम्मा कोठा"
+                            @validate="validateField('room')"
+                            :error="errors.room"
                         />
                     </div>
                     <div class="form-group mb-2">
@@ -130,58 +146,60 @@ import {toast} from "../../../../utils/toast";
 import {useApplicationStore} from "../../../../stores/e-map/organization/application";
 import Swal from "sweetalert2";
 
-const props=defineProps({
-    mapApply:{
-        required:true,
-        type:Object
+const props = defineProps({
+    mapApply: {
+        required: true,
+        type: Object
     }
 })
 
-const settingStore=useSettingStore();
-const applicationStore=useApplicationStore();
+const settingStore = useSettingStore();
+const applicationStore = useApplicationStore();
 
-const editFormOpened=ref(false);
+const editFormOpened = ref(false);
 
-const {eMapSetting}=storeToRefs(settingStore);
-const {storeyDetailsData}=storeToRefs(applicationStore);
+const {eMapSetting} = storeToRefs(settingStore);
+const {storeyDetailsData} = storeToRefs(applicationStore);
 
-const initialState={
-    id:'',
-    map_fee_id:'',
-    area_of_proposed_construction:'' ,
-    area_of_former_construction:'',
-    total_area:'',
-    height:'',
+const initialState = {
+    id: '',
+    map_fee_id: '',
+    area_of_proposed_construction: '',
+    area_of_former_construction: '',
+    total_area: '',
+    height: '',
+    room: '',
 }
 
-const storeyDetails=ref([]);
+const storeyDetails = ref([]);
 
 const form = reactive({...initialState});
 
-onMounted(()=>{
+onMounted(() => {
     getStoreyDetails();
 })
 
-const getStoreyDetails=async () => {
-    storeyDetails.value=[];
+const getStoreyDetails = async () => {
+    storeyDetails.value = [];
     await applicationStore.getStoreyDetails(props.mapApply.id);
-    storeyDetailsData.value.data.forEach((storey)=>{
+    storeyDetailsData.value.data.forEach((storey) => {
         storeyDetails.value.push(storey);
     })
     if (storeyDetailsData.value.storey_details_count < storeyDetailsData.value.current_storey) {
         for (let i = storeyDetailsData.value.storey_details_count; i < storeyDetailsData.value.current_storey; i++) {
             storeyDetails.value.push({
-                map_fee_id:'',
-                area_of_proposed_construction:'' ,
-                area_of_former_construction:'',
-                total_area:'',
-                height:'',
+                map_fee_id: '',
+                area_of_proposed_construction: '',
+                area_of_former_construction: '',
+                total_area: '',
+                height: '',
+                room: '',
             });
         }
     }
 }
 
-const isSubmitting=ref(false);
+const isSubmitting = ref(false);
 
 const validations = object({
     map_fee_id: string().required('तल्ला अनिवार्य छ |'),
@@ -189,28 +207,29 @@ const validations = object({
     area_of_former_construction: string().required('साविक क्षेत्रफल अनिवार्य छ |'),
     total_area: string().required('जम्मा क्षेत्रफल अनिवार्य छ |'),
     height: string().required('उचाई अनिवार्य छ |'),
+    room: string().required('उचाई अनिवार्य छ |'),
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
 
-const saveFormData=async (map_apply_id) => {
+const saveFormData = async (map_apply_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
         try {
-            let res = await applicationStore.updateStoreyDetail(map_apply_id,form);
-            toast(res.status,res.data.message);
+            let res = await applicationStore.updateStoreyDetail(map_apply_id, form);
+            toast(res.status, res.data.message);
             closeEditForm();
             await getStoreyDetails();
-        }catch (e) {
+        } catch (e) {
             showErrors(e);
-        }finally {
-            isSubmitting.value=false;
+        } finally {
+            isSubmitting.value = false;
         }
     }
 }
 
-const deleteStoreyDetail=(map_apply_id,id)=>{
+const deleteStoreyDetail = (map_apply_id, id) => {
     Swal.fire({
         title: 'Are You Sure to Delete ? ',
         showCancelButton: true,
@@ -219,7 +238,7 @@ const deleteStoreyDetail=(map_apply_id,id)=>{
     }).then(async (result) => {
         if (result.value) {
             try {
-                let res = await applicationStore.deleteStoreyDetail(map_apply_id,id)
+                let res = await applicationStore.deleteStoreyDetail(map_apply_id, id)
                 toast(res.status, res.data.message)
                 await getStoreyDetails();
             } catch (e) {
@@ -229,21 +248,22 @@ const deleteStoreyDetail=(map_apply_id,id)=>{
     });
 }
 
-const openEditForm=(index)=>{
-    editFormOpened.value=true;
-    const selectedStorey=storeyDetails.value[index];
-    Object.assign(form,{
-        id:selectedStorey.id??'',
-        map_fee_id:selectedStorey.map_fee_id??'',
-        area_of_proposed_construction:selectedStorey.area_of_proposed_construction??0 ,
-        area_of_former_construction:selectedStorey.area_of_former_construction??0,
-        total_area:selectedStorey.total_area??0,
-        height:selectedStorey.height??0,
+const openEditForm = (index) => {
+    editFormOpened.value = true;
+    const selectedStorey = storeyDetails.value[index];
+    Object.assign(form, {
+        id: selectedStorey.id ?? '',
+        map_fee_id: selectedStorey.map_fee_id ?? '',
+        area_of_proposed_construction: selectedStorey.area_of_proposed_construction ?? 0,
+        area_of_former_construction: selectedStorey.area_of_former_construction ?? 0,
+        total_area: selectedStorey.total_area ?? 0,
+        height: selectedStorey.height ?? 0,
+        room: selectedStorey.room ?? 0,
     })
 }
 
-const closeEditForm=()=>{
-    editFormOpened.value=false;
+const closeEditForm = () => {
+    editFormOpened.value = false;
     resetForm();
 }
 
