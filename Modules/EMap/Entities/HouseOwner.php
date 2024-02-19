@@ -3,11 +3,14 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,8 +39,27 @@ class HouseOwner extends Model
         'ward_no',
         'status',
         'document',
-        'photo'
+        'photo',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'tole',
     ];
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
 
     public function oldMaps(): BelongsToMany
     {
@@ -60,33 +82,35 @@ class HouseOwner extends Model
         return $this->belongsTo(District::class, 'citizenship_issue_district_id');
     }
 
-    public function files()
+    public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
     }
 
-    public function setDocumentAttribute($value)
+    public function setDocumentAttribute($value): void
     {
-        if(!empty($value) && !is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['document'] = $value->store('houseOwnerArchive', 'public');
         }
     }
-    public function getDocumentUrlAttribute($value)
+
+    public function getDocumentUrlAttribute($value): string
     {
 
-        return  $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
+        return $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
 
     }
 
     public function setPhotoAttribute($value): void
     {
-        if(!empty($value) && !is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('e_map/house_owner/photo', 'public');
         }
     }
+
     public function getPhotoUrlAttribute($value): string
     {
-        return  $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
 
     }
 }
