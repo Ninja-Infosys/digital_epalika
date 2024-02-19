@@ -16,7 +16,8 @@ class StoreyDetailResource extends JsonResource
             'area_of_former_construction' => $this->area_of_former_construction ?? '',
             'total_area' => $this->total_area ?? '',
             'height' => $this->height ?? '',
-            'mapFee' => MapFeeResource::make($this->whenLoaded('mapFee'))
+            'mapFee' => MapFeeResource::make($this->whenLoaded('mapFee')),
+            'room'=> $this->room ?? '',
         ];
     }
 }

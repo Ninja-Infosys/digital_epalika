@@ -21,6 +21,7 @@ class UpdateStoreyDetailRequest extends FormRequest
             'area_of_former_construction' => ['required','numeric'],
             'total_area' => ['required','numeric'],
             'height' => ['required','numeric'],
+            'room' => ['required','numeric'],
         ];
     }
 
@@ -36,6 +37,8 @@ class UpdateStoreyDetailRequest extends FormRequest
             'total_area.numeric' => 'जम्मा क्षेत्रफल नम्बरमा हुनुपर्छ|',
             'height.required' => 'उचाई अनिवार्य छ|',
             'height.numeric' => 'उचाई नम्बरमा हुनुपर्छ|',
+            'room.required' =>'कोठा अनिवार्य छ |',
+            'room.numeric' => 'कोठा नम्बरमा हुनुपर्छ |' 
         ];
     }
 }
