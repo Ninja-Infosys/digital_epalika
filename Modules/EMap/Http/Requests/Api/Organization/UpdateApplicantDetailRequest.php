@@ -27,6 +27,11 @@ class UpdateApplicantDetailRequest extends FormRequest
             'citizenship_issue_date' => ['required'],
             'application_date' => ['nullable'],
             'signature' => ['nullable', 'image'],
+            'province_id' => ['required', Rule::exists('provinces', 'id')],
+            'district_id' =>['required', Rule::exists('districts', 'id')],
+            'local_body_id' => ['required', Rule::exists('local_bodies', 'id')],
+            'ward_no' => ['required'],
+            'tole' => ['required'],
         ];
     }
 
@@ -41,6 +46,11 @@ class UpdateApplicantDetailRequest extends FormRequest
             'citizenship_issue_district_id.required' => 'जारी जिल्ला अनिवार्य छ|',
             'citizenship_no.required' => 'नागरिकता न. अनिवार्य छ|',
             'citizenship_issue_date.required' => 'जारी मिति अनिवार्य छ|',
+            'province_id.required' => 'प्रदेश अनिवार्य छ |',
+            'district_id.required' => 'जिल्ला अनिवार्य छ |',
+            'local_body_id.required' => 'पालिका अनिवार्य छ |',
+            'tole.required' => 'गाउँ/टोल अनिवार्य छ |',
+            'ward_no.required' => ' वडा नं. अनिवार्य छ|',
         ];
     }
 }
