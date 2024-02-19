@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\DocumentStatusEnum;
 
 class AppliedDocument extends Model
@@ -34,6 +35,7 @@ class AppliedDocument extends Model
         'uploaded_by_id',
         'form_data_type',
         'form_data_id',
+        'approved_document',
     ];
 
     protected $casts = [
@@ -83,5 +85,18 @@ class AppliedDocument extends Model
     public function appliedMapFiles(): MorphMany
     {
         return $this->morphMany(AppliedMapFile::class, 'fileable');
+    }
+
+    public function setApprovedDocumentAttribute($value): void
+    {
+        if(!empty($value) && !is_string($value)) {
+            $this->attributes['approved_document'] = $value->store('e_map/approved_documents', 'public');
+        }
+    }
+
+    public function getApprovedDocumentUrlAttribute($value): string
+    {
+        return  $this->attributes['approved_document'] ? Storage::disk('public')->url($this->attributes['approved_document']) : '';
+
     }
 }
