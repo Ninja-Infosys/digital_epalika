@@ -30,6 +30,8 @@ class LandDetail extends Model
         'percentage_of_area_covered_by_building',
         'unit_id',
         'unit_value',
+        'former_local_body',
+        'road_name'
     ];
 
     public function unit(): BelongsTo

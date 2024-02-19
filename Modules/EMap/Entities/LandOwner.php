@@ -3,6 +3,8 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,11 +38,29 @@ class LandOwner extends Model
         'local_body',
         'ward_no',
         'photo',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'tole',
     ];
 
     protected $casts = [
         'land_owner_type' => LandOwnerTypeEnum::class,
     ];
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
 
     public function mapApply(): BelongsTo
     {

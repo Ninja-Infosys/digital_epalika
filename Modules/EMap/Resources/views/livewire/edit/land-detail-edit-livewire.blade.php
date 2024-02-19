@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label fw-bold" for="landDescription.former_ward_no">२.३ साविक वडा नं</label>
-                <input class="form-control form-control-sm" type="number"  id="landDescription.former_ward_no"
+                <input class="form-control form-control-sm" type="text"  id="landDescription.former_ward_no"
                        wire:model="landDescription.former_ward_no"
                        min="0" placeholder="साविक वडा नं" {{$editForm ? '' : 'disabled'}}>
                 @error('landDescription.former_ward_no')
