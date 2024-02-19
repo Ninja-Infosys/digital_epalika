@@ -200,11 +200,11 @@ class HouseOwnerArchiveController extends Controller
             get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->landOwner->citizenship_no) ?? '',
             get_nepali_number($mapApply->landOwner->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->landOwner->address) ?? '',
-            get_nepali_number($mapApply->landOwner->local_body) ?? '',
-           get_nepali_number( $mapApply->landOwner->ward_no) ?? '',
-           get_nepali_number( $mapApply->landOwner->district->district) ,
-           get_nepali_number( $mapApply->landOwner->tole) ?? '',
+            get_nepali_number( $mapApply->landOwner->province?->province) ?? '',
+            get_nepali_number( $mapApply->landOwner->district?->district) ?? '',
+            get_nepali_number($mapApply->landOwner->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->landOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->landOwner->tole) ?? '',
 
             //houseOwner
 
@@ -217,10 +217,10 @@ class HouseOwnerArchiveController extends Controller
            !empty($houseOwnerArchive)? $houseOwnerArchive->citizenshipIssueDistrict->district : $mapApply->houseOwner->citizenshipIssueDistrict->district ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->citizenship_no : $mapApply->houseOwner->citizenship_no ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->citizenship_issue_date : $mapApply->houseOwner->citizenship_issue_date ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->address : $mapApply->houseOwner->address ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->local_body : $mapApply->houseOwner->local_body ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->ward_no : $mapApply->houseOwner->ward_no ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->province_id : $mapApply->houseOwner->province?->province ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->district_id : $mapApply->houseOwner->district?->district ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->local_body_id : $mapApply->houseOwner->local_body?->local_body ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->ward_no : $mapApply->houseOwner->ward_no ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->tole : $mapApply->houseOwner->tole ?? '',
 
             //FourForts
@@ -240,8 +240,12 @@ class HouseOwnerArchiveController extends Controller
             get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
-            get_nepali_number($mapApply->applicantDetail->address) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature) ?? '',
+            get_nepali_number($mapApply->applicantDetail->province?->province) ?? '',
+            get_nepali_number($mapApply->applicantDetail->district?->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->applicantDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->tole) ?? '',
 
             //criteria detail
 
@@ -344,10 +348,10 @@ class HouseOwnerArchiveController extends Controller
             '[@landOwner.citizenship_issue_district]',
             '[@landOwner.citizenship_no]',
             '[@landOwner.citizenship_issue_date]',
-            '[@landOwner.address]',
+            '[@landOwner.province]',
+            '[@landOwner.district]',
             '[@landOwner.local_body]',
             '[@landOwner.ward_no]',
-            '[@landOwner.district]',
             '[@landOwner.tole]',
 
             //houseOwner
@@ -359,10 +363,10 @@ class HouseOwnerArchiveController extends Controller
             '[@houseOwner.citizenship_issue_district]',
             '[@houseOwner.citizenship_no]',
             '[@houseOwner.citizenship_issue_date]',
-            '[@houseOwner.address]',
+            '[@houseOwner.province]',
+            '[@houseOwner.district]',
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
-            '[@houseOwner.district]',
             '[@houseOwner.tole]',
 
             //FourForts
@@ -380,9 +384,12 @@ class HouseOwnerArchiveController extends Controller
             '[@applicantDetail.citizenship_issue_district]',
             '[@applicantDetail.citizenship_no]',
             '[@applicantDetail.citizenship_issue_date]',
-            '[@applicantDetail.signature_url]',
-            '[@applicantDetail.address]',
-
+            '[@applicantDetail.signature]',
+            '[@applicantDetail.province]',
+            '[@applicantDetail.district]',
+            '[@applicantDetail.local_body]',
+            '[@applicantDetail.ward_no]',
+            '[@applicantDetail.tole]',
             //criteria detail
             '[@criteriaDetails]',
 

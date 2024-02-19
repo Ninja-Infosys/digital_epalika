@@ -651,10 +651,10 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->landOwner->citizenship_no) ?? '',
             get_nepali_number($mapApply->landOwner->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->landOwner->address) ?? '',
-            get_nepali_number($mapApply->landOwner->local_body) ?? '',
-            get_nepali_number($mapApply->landOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->landOwner->province?->province) ?? '',
             get_nepali_number( $mapApply->landOwner->district?->district) ?? '',
+            get_nepali_number($mapApply->landOwner->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->landOwner->ward_no) ?? '',
             get_nepali_number( $mapApply->landOwner->tole) ?? '',
 
             //houseOwner
@@ -666,10 +666,10 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->houseOwner->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->houseOwner->citizenship_no) ?? '',
             get_nepali_number($mapApply->houseOwner->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->houseOwner->address) ?? '',
-            get_nepali_number($mapApply->houseOwner->local_body) ?? '',
-            get_nepali_number($mapApply->houseOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->houseOwner->province?->province) ?? '',
             get_nepali_number( $mapApply->houseOwner->district?->district) ?? '',
+            get_nepali_number($mapApply->houseOwner->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->houseOwner->ward_no) ?? '',
             get_nepali_number( $mapApply->houseOwner->tole) ?? '',
 
             //FourForts
@@ -690,8 +690,12 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
-            get_nepali_number($mapApply->applicantDetail->address) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature) ?? '',
+            get_nepali_number($mapApply->applicantDetail->province?->province) ?? '',
+            get_nepali_number($mapApply->applicantDetail->district?->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->applicantDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->tole) ?? '',
 
             //criteria detail
 
@@ -796,10 +800,10 @@ class AdminStepController extends Controller
             '[@landOwner.citizenship_issue_district]',
             '[@landOwner.citizenship_no]',
             '[@landOwner.citizenship_issue_date]',
-            '[@landOwner.address]',
+            '[@landOwner.province]',
+            '[@landOwner.district]',
             '[@landOwner.local_body]',
             '[@landOwner.ward_no]',
-            '[@landOwner.district]',
             '[@landOwner.tole]',
 
             //houseOwner
@@ -811,10 +815,10 @@ class AdminStepController extends Controller
             '[@houseOwner.citizenship_issue_district]',
             '[@houseOwner.citizenship_no]',
             '[@houseOwner.citizenship_issue_date]',
-            '[@houseOwner.address]',
+            '[@houseOwner.province]',
+            '[@houseOwner.district]',
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
-            '[@houseOwner.district]',
             '[@houseOwner.tole]',
 
 
@@ -833,8 +837,12 @@ class AdminStepController extends Controller
             '[@applicantDetail.citizenship_issue_district]',
             '[@applicantDetail.citizenship_no]',
             '[@applicantDetail.citizenship_issue_date]',
-            '[@applicantDetail.signature_url]',
-            '[@applicantDetail.address]',
+            '[@applicantDetail.signature]',
+            '[@applicantDetail.province]',
+            '[@applicantDetail.district]',
+            '[@applicantDetail.local_body]',
+            '[@applicantDetail.ward_no]',
+            '[@applicantDetail.tole]',
 
 
             //criteria detail

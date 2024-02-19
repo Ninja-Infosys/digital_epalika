@@ -267,8 +267,12 @@ class DocumentAttachController extends Controller
             get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
-            get_nepali_number($mapApply->applicantDetail->address) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature) ?? '',
+            get_nepali_number($mapApply->applicantDetail->province?->province) ?? '',
+            get_nepali_number($mapApply->applicantDetail->district?->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->applicantDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->tole) ?? '',
 
             //criteria detail
 
@@ -398,9 +402,12 @@ class DocumentAttachController extends Controller
             '[@applicantDetail.citizenship_issue_district]',
             '[@applicantDetail.citizenship_no]',
             '[@applicantDetail.citizenship_issue_date]',
-            '[@applicantDetail.signature_url]',
-            '[@applicantDetail.signature_url]',
-            '[@applicantDetail.address]',
+            '[@applicantDetail.signature]',
+            '[@applicantDetail.province]',
+            '[@applicantDetail.district]',
+            '[@applicantDetail.local_body]',
+            '[@applicantDetail.ward_no]',
+            '[@applicantDetail.tole]',
 
             //criteria detail
             '[@criteriaDetails]',
