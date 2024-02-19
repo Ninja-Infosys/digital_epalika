@@ -8,9 +8,9 @@
                     <th>#</th>
                     <th>विवरण</th>
                     <th>पूर्व</th>
-                    <th>दक्षिण</th>
                     <th>पश्चिम</th>
                     <th>उत्तर</th>
+                    <th>दक्षिण</th>
                     <th>#</th>
                 </tr>
                 </thead>
@@ -26,13 +26,13 @@
                         {{fort.east}}
                     </td>
                     <td>
-                        {{fort.south}}
-                    </td>
-                    <td>
                         {{fort.west}}
                     </td>
                     <td>
                         {{fort.north}}
+                    </td>
+                    <td>
+                        {{fort.south}}
                     </td>
                     <td>
                         <div class="d-flex gap-1">
@@ -63,15 +63,7 @@
                             :error="errors.east"
                         />
                     </div>
-                    <div class="col-md-6 mb-2">
-                        <VInput
-                            id="south"
-                            v-model="form.south"
-                            label="दक्षिण"
-                            @validate="validateField('south')"
-                            :error="errors.south"
-                        />
-                    </div>
+
                     <div class="col-md-6 mb-2">
                         <VInput
                             id="west"
@@ -89,6 +81,16 @@
                             @validate="validateField('north')"
                             :error="errors.north"
                         />
+                    <div class="col-md-6 mb-2">
+                        <VInput
+                            id="south"
+                            v-model="form.south"
+                            label="दक्षिण"
+                            @validate="validateField('south')"
+                            :error="errors.south"
+                        />
+                    </div>
+
                     </div>
                     <div class="form-group mb-2">
                         <VButton

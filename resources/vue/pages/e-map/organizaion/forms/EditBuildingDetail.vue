@@ -1,6 +1,6 @@
 <template>
     <fieldset>
-        <legend> ९. भवन सम्बन्धि विवरण </legend>
+        <legend> ९. भवन सम्बन्धि विवरण</legend>
         <div class="col-md-12">
             <div class="table-responsive mt-1">
                 <table class="table table-sm table-responsive table-bordered">
@@ -14,15 +14,15 @@
                     </thead>
                     <tbody>
                     <tr v-for="(buildingDetail,index) in buildingDetails.data" :key="index">
-                        <td>{{index+1}}</td>
+                        <td>{{ index + 1 }}</td>
                         <td>
-                            {{buildingDetail.detail_label}}
+                            {{ buildingDetail.detail_label }}
                         </td>
                         <td>
-                            {{buildingDetail.description}}
+                            {{ buildingDetail.description }}
                         </td>
                         <td>
-                            {{buildingDetail.remarks}}
+                            {{ buildingDetail.remarks }}
                         </td>
                         <td>
                             <div class="d-flex gap-1">
@@ -88,76 +88,76 @@ import showErrors from "../../../../utils/showErrors";
 import {toast} from "../../../../utils/toast";
 import {useApplicationStore} from "../../../../stores/e-map/organization/application";
 
-const props=defineProps({
-    mapApply:{
-        required:true,
-        type:Object
+const props = defineProps({
+    mapApply: {
+        required: true,
+        type: Object
     }
 })
 
-const settingStore=useSettingStore();
-const applicationStore=useApplicationStore();
+const settingStore = useSettingStore();
+const applicationStore = useApplicationStore();
 
-const editFormOpened=ref(false);
+const editFormOpened = ref(false);
 
-const {eMapSetting}=storeToRefs(settingStore);
-const {buildingDetails}=storeToRefs(applicationStore);
+const {eMapSetting} = storeToRefs(settingStore);
+const {buildingDetails} = storeToRefs(applicationStore);
 
-const initialState={
-    detail:'' ,
-    description:'',
-    remarks:'',
+const initialState = {
+    detail: '',
+    description: '',
+    remarks: '',
 }
 
 const form = reactive({...initialState});
 
-onMounted(()=>{
+onMounted(() => {
     getBuildingDetails();
 })
 
-const getBuildingDetails=async () => {
+const getBuildingDetails = async () => {
     applicationStore.getBuildingDetails(props.mapApply.id);
 }
 
-const isSubmitting=ref(false);
+const isSubmitting = ref(false);
 
 const validations = object({
     detail: string().required('विवरण अनिवार्य छ |'),
     description: string().required('विवरण अनिवार्य छ|'),
-    remarks:string().nullable()
+    remarks: string().nullable()
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
 
-const saveFormData=async (map_apply_id) => {
+const saveFormData = async (map_apply_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
         try {
-            let res = await applicationStore.updateBuildingDetail(map_apply_id,form);
-            toast(res.status,res.data.message);
+            let res = await applicationStore.updateBuildingDetail(map_apply_id, form);
+            toast(res.status, res.data.message);
             closeEditForm();
             await getBuildingDetails();
-        }catch (e) {
+        } catch (e) {
             showErrors(e);
-        }finally {
-            isSubmitting.value=false;
+        } finally {
+            isSubmitting.value = false;
         }
     }
 }
 
-const openEditForm=(index)=>{
-    editFormOpened.value=true;
-    const selectedBuildingDetail=buildingDetails.value.data[index];
-    Object.assign(form,{
-        detail:selectedBuildingDetail.detail??'',
-        description:selectedBuildingDetail.description??'',
-        remarks:selectedBuildingDetail.remarks??''
+const openEditForm = (index) => {
+    editFormOpened.value = true;
+    const selectedBuildingDetail = buildingDetails.value.data[index];
+    Object.assign(form, {
+        detail: selectedBuildingDetail.detail ?? '',
+        description: selectedBuildingDetail.description ?? '',
+        remarks: selectedBuildingDetail.remarks ?? ''
     })
 }
 
-const closeEditForm=()=>{
-    editFormOpened.value=false;
+const closeEditForm = () => {
+    editFormOpened.value = false;
     resetForm();
 }
 
