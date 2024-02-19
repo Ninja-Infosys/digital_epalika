@@ -171,15 +171,15 @@
                     </a>
                 </li>
             @endcan
-           
-            <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
-                <a href="{{ route('admin.grant.setting.helplessnessType.index') }}">
-                    <span>असहायताको  प्रकार </span>
-                </a>
-            </li>
-       
 
 
+            @can('helplessnessType_access')
+                <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
+                    <a href="{{ route('admin.grant.setting.helplessnessType.index') }}">
+                        <span>असहायताको प्रकार </span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

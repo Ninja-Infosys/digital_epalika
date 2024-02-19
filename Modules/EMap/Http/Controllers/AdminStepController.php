@@ -3,6 +3,7 @@
 namespace Modules\EMap\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\FormStoreNotification;
@@ -10,6 +11,8 @@ use App\Notifications\PaymentStoreNotification;
 use App\Notifications\StepNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\AppliedDocumentStatus;
@@ -23,28 +26,30 @@ use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Enums\FourSideParticularEnum;
+use Modules\EMap\Enums\PostsEnum;
 
 class AdminStepController extends Controller
 {
+    use NepaliDateConverter;
     public function formList(MapApply $mapApply)
     {
 
         $mapApply->load('houseOwner');
 
-        $documentTypeModels = collect([AppliedDocument::class,FormStore::class,PaymentStore::class]);
+        $documentTypeModels = collect([AppliedDocument::class, FormStore::class, PaymentStore::class]);
 
         $documents = collect([]);
 
-        foreach($documentTypeModels as $documentModel) {
+        foreach ($documentTypeModels as $documentModel) {
             $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
-            foreach($typeDocuments as $document) {
+            foreach ($typeDocuments as $document) {
                 $documents->push([
                     'document_type' => class_basename($documentModel),
                     'form_id' => $document->form_id,
                     'status' => $document->status?->value
                 ]);
             }
-
         }
 
         $order = 0;
@@ -54,16 +59,15 @@ class AdminStepController extends Controller
             ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                if($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                if ($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
                     $order = $form->order + 1;
-                } elseif($key == 0) {
+                } elseif ($key == 0) {
                     $order = $form->order;
                     $allApproved = false;
-
                 } else {
                     $allApproved = false;
                 }
-                if($allApproved) {
+                if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
                 } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
@@ -75,9 +79,8 @@ class AdminStepController extends Controller
                 $form->map_status = $mapStatus;
                 return $form;
             });
-//        $MapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
 
-        return view('emap::admin.step.formList', compact('mapApply', 'forms','order'));
+        return view('emap::admin.step.formList', compact('mapApply', 'forms', 'order'));
     }
 
     public function viewDetail(MapApply $mapApply, Form $form)
@@ -188,6 +191,21 @@ class AdminStepController extends Controller
         return back();
     }
 
+    public function uploadApprovedDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
+    {
+        $request->validate([
+            'approved_document' => ['required']
+        ]);
+
+        $appliedDocument->update([
+            'approved_document' => $request->file('approved_document')
+        ]);
+
+        toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
+
+        return back();
+    }
+
     public function updateFormStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
     {
         $this->getStatusValidation($request);
@@ -258,13 +276,13 @@ class AdminStepController extends Controller
                 $formStore->update([
                     'status' => $request->input('status')
                 ]);
-                 $formStore->formStoreStatuses()->create([
+                $formStore->formStoreStatuses()->create([
                     "form_store_id" => $formStore->id,
                     "status" => $request->input('status'),
                     "comment" => $request->input('comment'),
                     "data" => $formStore->data,
                     "fields" => $formStore->fields,
-                     "document"=>$formStore->document
+                    "document" => $formStore->document
                 ]);
 
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
@@ -273,6 +291,21 @@ class AdminStepController extends Controller
         });
 
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
+    }
+
+    public function uploadFormStoreApprovedDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
+    {
+        $request->validate([
+            'approved_document' => ['required']
+        ]);
+
+        $formStore->update([
+            'approved_document' => $request->file('approved_document')
+        ]);
+
+        toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
+
         return back();
     }
 
@@ -406,7 +439,6 @@ class AdminStepController extends Controller
                     'data' => $data['data'],
                     'fields' => $form->fields ?? ''
                 ]);
-
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -428,7 +460,7 @@ class AdminStepController extends Controller
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
-        return redirect(route('organization.admin.formDetail', [$mapApply, $form]));
+        return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
 
     public function updateDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, $id)
@@ -480,8 +512,6 @@ class AdminStepController extends Controller
                     }
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
-
-
             });
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
@@ -492,10 +522,9 @@ class AdminStepController extends Controller
                 if ($formStore->status == DocumentStatusEnum::PENDING) {
                     $formStore->update([
                         'data' => $data['data'],
-                        'document'=>null
+                        'document' => null
                     ]);
-                    if($formStore->formStoreStatuses->count() > 0)
-                    {
+                    if ($formStore->formStoreStatuses->count() > 0) {
                         FormStoreStatus::where('form_store_id', $formStore->id)
                             ->orderBy('id', 'desc')
                             ->first()?->update([
@@ -518,11 +547,10 @@ class AdminStepController extends Controller
                     $formStore->update([
                         "status" => DocumentStatusEnum::PENDING->value,
                         'data' => $data['data'],
-                        'document'=> null
+                        'document' => null
                     ]);
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
-
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -548,4 +576,355 @@ class AdminStepController extends Controller
         return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
 
+    public function printTemplate(MapApply $mapApply, FormDataType $formDataType)
+    {
+
+        $formDataType->load('model');
+        $mapApply->load(
+            'landDetail',
+            'landOwner',
+            'houseOwner',
+            'fourForts',
+            'applicantDetail.citizenshipIssueDistrict',
+            'criteriaDetails',
+            'buildingDetails',
+            'designerDetails'
+        );
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
+
+        return response()->json([
+            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
+        ]);
+    }
+
+    protected function getEmapTemplateData($mapApply)
+    {
+        $designerDetail = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER)->first();
+        $supervisorDetail = $mapApply->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
+        $contractorDetail = $mapApply->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
+
+        return [
+
+            //header
+            letterHead(),
+            letterHeadEn(),
+            officeSetting()->name ?? '',
+            officeSetting()->site_address ?? '',
+            officeSetting()->province?->province ?? '',
+            officeSetting()->district?->district ?? '',
+            officeSetting()->localBody?->local_body ?? '',
+            auth('mobile-user')->users?->ward_no ??'',
+            get_nepali_number($this->get_today_nepali_date()),
+
+            //mapApply
+            get_nepali_number($mapApply->registration_no) ?? '',
+            get_nepali_number($mapApply->registration_date) ?? '',
+            get_nepali_number($mapApply->construction_type?->label()) ?? '',
+            get_nepali_number($mapApply->usage?->label()) ?? '',
+            get_nepali_number($mapApply->building_category?->label()) ?? '',
+            get_nepali_number($mapApply->structureType->title) ?? '',
+            get_nepali_number($mapApply->current_storey) ?? '',
+            get_nepali_number($mapApply->future_storey) ?? '',
+            get_nepali_number($mapApply->area_of_plinth) ?? '',
+            get_nepali_number($mapApply->length) ?? '',
+            get_nepali_number($mapApply->breadth) ?? '',
+            get_nepali_number($mapApply->height) ?? '',
+            //landDetail
+            get_nepali_number($mapApply->landDetail?->landUseArea?->title) ?? '',
+            get_nepali_number($mapApply->landDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->landDetail->former_ward_no) ?? '',
+            get_nepali_number($mapApply->landDetail->tole) ?? '',
+            get_nepali_number($mapApply->landDetail->street_code_no) ?? '',
+            get_nepali_number($mapApply->landDetail->plot_no) ?? '',
+            get_nepali_number($mapApply->landDetail->unit_value) ?? '',
+            get_nepali_number($mapApply->landDetail->percentage_of_area_covered_by_building) ?? '',
+            get_nepali_number($mapApply->landDetail->former_local_body) ?? '',
+            get_nepali_number($mapApply->landDetail->road_name) ?? '',
+
+            //landowner
+
+            get_nepali_number($mapApply->landOwner->land_owner_type?->label()) ?? '',
+            get_nepali_number($mapApply->landOwner->name) ?? '',
+            get_nepali_number($mapApply->landOwner->phone) ?? '',
+            get_nepali_number($mapApply->landOwner->father_name) ?? '',
+            get_nepali_number($mapApply->landOwner->grandfather_name) ?? '',
+            get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->landOwner->citizenship_no) ?? '',
+            get_nepali_number($mapApply->landOwner->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->landOwner->address) ?? '',
+            get_nepali_number($mapApply->landOwner->local_body) ?? '',
+            get_nepali_number($mapApply->landOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->landOwner->district?->district) ?? '',
+            get_nepali_number( $mapApply->landOwner->tole) ?? '',
+
+            //houseOwner
+
+            get_nepali_number($mapApply->houseOwner->name) ?? '',
+            get_nepali_number($mapApply->houseOwner->phone) ?? '',
+            get_nepali_number($mapApply->houseOwner->father_name) ?? '',
+            get_nepali_number($mapApply->houseOwner->grandfather_name) ?? '',
+            get_nepali_number($mapApply->houseOwner->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->houseOwner->citizenship_no) ?? '',
+            get_nepali_number($mapApply->houseOwner->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->houseOwner->address) ?? '',
+            get_nepali_number($mapApply->houseOwner->local_body) ?? '',
+            get_nepali_number($mapApply->houseOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->houseOwner->district?->district) ?? '',
+            get_nepali_number( $mapApply->houseOwner->tole) ?? '',
+
+            //FourForts
+            (string)View::make('emap::inc.four_forts_table', [
+                'fourForts' => $mapApply->fourForts,
+            ]),
+            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+
+            //applicantDetail
+            get_nepali_number($mapApply->applicantDetail->applicant_type?->label()) ?? '',
+            get_nepali_number($mapApply->applicantDetail->relation_with_owner?->label()) ?? '',
+            get_nepali_number($mapApply->applicantDetail->name) ?? '',
+            get_nepali_number($mapApply->applicantDetail->phone) ?? '',
+            get_nepali_number($mapApply->applicantDetail->father_name) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
+            get_nepali_number($mapApply->applicantDetail->address) ?? '',
+
+            //criteria detail
+
+            (string)View::make('emap::inc.criteria_details', [
+                'criteriaDetails' => $mapApply->criteriaDetails,
+            ]),
+            //BuildingDetails
+
+            (string)View::make('emap::inc.building_details', [
+                'buildingDetails' => $mapApply->buildingDetails,
+            ]),
+
+            //DesignerDetails
+
+            get_nepali_number($designerDetail->name) ?? '',
+            get_nepali_number($designerDetail->father_name) ?? '',
+            get_nepali_number($designerDetail->phone) ?? '',
+            get_nepali_number($designerDetail->address) ?? '',
+            get_nepali_number($designerDetail->local_body) ?? '',
+            get_nepali_number($designerDetail->ward_no) ?? '',
+            get_nepali_number($designerDetail->nec_council_no) ?? '',
+            get_nepali_number($designerDetail->local_body_registration_no) ?? '',
+            get_nepali_number($designerDetail->consulting_firm_name) ?? '',
+            get_nepali_number($designerDetail->district?->district) ?? '',
+
+
+            //supervisorDetails
+
+            get_nepali_number($supervisorDetail->name) ?? '',
+            get_nepali_number($supervisorDetail->father_name) ?? '',
+            get_nepali_number($supervisorDetail->phone) ?? '',
+            get_nepali_number($supervisorDetail->address) ?? '',
+            get_nepali_number($supervisorDetail->local_body) ?? '',
+            get_nepali_number($supervisorDetail->ward_no) ?? '',
+            get_nepali_number($supervisorDetail->nec_council_no) ?? '',
+            get_nepali_number($supervisorDetail->local_body_registration_no) ?? '',
+            get_nepali_number($supervisorDetail->consulting_firm_name) ?? '',
+            get_nepali_number($supervisorDetail->district?->district) ?? '',
+
+
+            //ContractorDetails
+
+            get_nepali_number($contractorDetail->name) ?? '',
+            get_nepali_number($contractorDetail->father_name) ?? '',
+            get_nepali_number($contractorDetail->phone) ?? '',
+            get_nepali_number($contractorDetail->address) ?? '',
+            get_nepali_number($contractorDetail->local_body) ?? '',
+            get_nepali_number($contractorDetail->ward_no) ?? '',
+            get_nepali_number($contractorDetail->nec_council_no) ?? '',
+            get_nepali_number($contractorDetail->local_body_registration_no) ?? '',
+            get_nepali_number($contractorDetail->consulting_firm_name) ?? '',
+            get_nepali_number($contractorDetail->district?->district) ?? '',
+
+        ];
+    }
+
+    private function getReplaceData()
+    {
+        return [
+            //header
+
+            '[@letterHead]',
+            '[@letterHeadEn]',
+            '[@officeName]',
+            '[@officeAddress]',
+            '[@officeProvince]',
+            '[@officeDistrict]',
+            '[@officeLocalBody]',
+            '[@officeWardNo]',
+            '[@today_date]',
+            //mapApply
+
+            '[@registration_no]',
+            '[@registration_date]',
+            '[@construction_type]',
+            '[@usage]',
+            '[@building_category]',
+            '[@structureType]',
+            '[@current_storey]',
+            '[@future_storey]',
+            '[@area_of_plinth]',
+            '[@length]',
+            '[@breadth]',
+            '[@height]',
+            //landDetail
+            '[@landDetail.land_use_area.title]',
+            '[@landDetail.ward_no]',
+            '[@landDetail.former_ward_no]',
+            '[@landDetail.tole]',
+            '[@landDetail.street_code_no]',
+            '[@landDetail.plot_no]',
+            '[@landDetail.area]',
+            '[@landDetail.percentage_of_area_covered_by_building]',
+            '[@landDetail.former_local_body]',
+            '[@landDetail.road_name]',
+            //landOwner
+            '[@landOwner.land_owner_type]',
+            '[@landOwner.name]',
+            '[@landOwner.phone]',
+            '[@landOwner.father_name]',
+            '[@landOwner.grandfather_name]',
+            '[@landOwner.citizenship_issue_district]',
+            '[@landOwner.citizenship_no]',
+            '[@landOwner.citizenship_issue_date]',
+            '[@landOwner.address]',
+            '[@landOwner.local_body]',
+            '[@landOwner.ward_no]',
+            '[@landOwner.district]',
+            '[@landOwner.tole]',
+
+            //houseOwner
+
+            '[@houseOwner.name]',
+            '[@houseOwner.phone]',
+            '[@houseOwner.father_name]',
+            '[@houseOwner.grandfather_name]',
+            '[@houseOwner.citizenship_issue_district]',
+            '[@houseOwner.citizenship_no]',
+            '[@houseOwner.citizenship_issue_date]',
+            '[@houseOwner.address]',
+            '[@houseOwner.local_body]',
+            '[@houseOwner.ward_no]',
+            '[@houseOwner.district]',
+            '[@houseOwner.tole]',
+
+
+            //FourForts
+
+            '[@fourForts]',
+            '[@nameOfTheFortsAndSanghiars]',
+
+            //applicantDetail
+
+            '[@applicantDetail.applicant_type]',
+            '[@applicantDetail.relation_with_owner]',
+            '[@applicantDetail.name]',
+            '[@applicantDetail.phone]',
+            '[@applicantDetail.father_name]',
+            '[@applicantDetail.citizenship_issue_district]',
+            '[@applicantDetail.citizenship_no]',
+            '[@applicantDetail.citizenship_issue_date]',
+            '[@applicantDetail.signature_url]',
+            '[@applicantDetail.address]',
+
+
+            //criteria detail
+            '[@criteriaDetails]',
+
+            //BuildingDetails
+            '[@buildingDetails]',
+
+            //DesignerDetails
+            '[@designerDetail.name]',
+            '[@designerDetail.father_name]',
+            '[@designerDetail.phone]',
+            '[@designerDetail.address]',
+            '[@designerDetail.local_body]',
+            '[@designerDetail.ward_no]',
+            '[@designerDetail.nec_council_no]',
+            '[@designerDetail.local_body_registration_no]',
+            '[@designerDetail.consulting_firm_name]',
+            '[@designerDetail.district]',
+
+
+            //supervisorDetails
+
+            '[@supervisorDetail.name]',
+            '[@supervisorDetail.father_name]',
+            '[@supervisorDetail.phone]',
+            '[@supervisorDetail.address]',
+            '[@supervisorDetail.local_body]',
+            '[@supervisorDetail.ward_no]',
+            '[@supervisorDetail.nec_council_no]',
+            '[@supervisorDetail.local_body_registration_no]',
+            '[@supervisorDetail.consulting_firm_name]',
+            '[@supervisorDetail.district]',
+
+
+            //ContractorDetails
+
+            '[@contractorDetail.name]',
+            '[@contractorDetail.father_name]',
+            '[@contractorDetail.phone]',
+            '[@contractorDetail.address]',
+            '[@contractorDetail.local_body]',
+            '[@contractorDetail.ward_no]',
+            '[@contractorDetail.nec_council_no]',
+            '[@contractorDetail.local_body_registration_no]',
+            '[@contractorDetail.consulting_firm_name]',
+            '[@contractorDetail.district]',
+
+        ];
+    }
+
+    public function formStorePrint(FormDataType $formDataType, FormStore $formStore)
+    {
+        $formStore->load('form_data.model');
+        $formDataType->load('model');
+        $mapApply = MapApply::where('id', $formStore->map_apply_id)->first() ?? '';
+        $template = $formStore->form_data?->model?->template ?? '';
+
+        foreach ($formStore->data as $key => $value) {
+            $placeholder = '[@form.' . $key . ']';
+            $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $template);
+            $template = str_replace($placeholder, $value, $data);
+        }
+
+        return view('emap::admin.step.form-print', compact('template', 'formDataType', 'formStore'));
+    }
+
+    public function uploadDocument(Request $request, FormStore $formStore)
+    {
+        $data =  $request->validate([
+            'document' => ['required', 'file']
+        ]);
+
+        DB::transaction(function () use ($data, $request, $formStore) {
+            $formStore->update($data);
+            $existingFormStore = FormStore::find($formStore->id);
+            FormStoreStatus::where('form_store_id', $formStore->id)
+                ->orderBy('id', 'desc')
+                ->where('status', DocumentStatusEnum::PENDING->value)
+                ->first()?->update([
+                    'document' => $existingFormStore->document
+                ]);
+        });
+        toast('File Upload Successfully', 'success');
+        return back();
+    }
+
+    public function viewDocumentDetail(MapApply $mapApply, Form $form)
+    {
+        $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+        return view('emap::admin.step.documentDetail', compact('mapApply', 'form'));
+    }
 }

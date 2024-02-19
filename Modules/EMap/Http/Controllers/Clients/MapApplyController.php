@@ -37,7 +37,7 @@ class MapApplyController extends Controller
     public function show(MapApply $mapApply)
     {
         $districts = get_districts();
-        $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+        $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'fourForts', 'criteriaDetails', 'buildingDetails')->loadCount('storeyDetails');
 
         return view('emap::organization.map-applies.show', compact('mapApply', 'districts'));
     }
@@ -224,6 +224,7 @@ class MapApplyController extends Controller
           $existingFormStore = FormStore::find($formStore->id);
           FormStoreStatus::where('form_store_id', $formStore->id)
               ->orderBy('id', 'desc')
+              ->where('status',DocumentStatusEnum::PENDING->value)
               ->first()?->update([
                   'document' => $existingFormStore->document
               ]);

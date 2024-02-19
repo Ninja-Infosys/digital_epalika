@@ -331,6 +331,7 @@ if (!function_exists('convertPathsToTree')) {
 if (!function_exists('convert_to_highest_unit')) {
     function convert_to_highest_unit($bytes): string
     {
+        $bytes = (int)$bytes;
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {

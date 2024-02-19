@@ -77,6 +77,11 @@
                                 आवश्यक कागजात
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#status" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                स्थिति
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         @if($organization->is_organization==0)
@@ -334,6 +339,51 @@
                                 </div>
                             @endif
                         </div>
+                            <div class="tab-pane" id="status">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-body px-0">
+                                            <form method="post" action="{{ route('emap.admin.organization.update-login-status', $organization) }}" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('put')
+                                                <div class="card border border-1">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-2">
+                                                            <label for="status" class="form-label">स्थिति</label>
+                                                            <div class="d-flex justify-content-between gap-1">
+                                                               <select class="form-select" name="status" id="status">
+                                                                   <option value="">छान्नुहोस्</option>
+                                                                   <option value="accepted" {{old('status')==='accepted'?'selected':''}}>Accepted</option>
+                                                                   <option value="rejected" {{old('status')==='rejected'?'selected':''}}>Rejected</option>
+                                                               </select>
+                                                            </div>
+                                                            @error('status')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-12 mb-2">
+                                                            <label for="comment" class="form-label">विवरण</label>
+                                                            <div class="d-flex justify-content-between gap-1">
+                                                               <textarea id="comment" class="form-control"
+                                                                         name="comment" placeholder="विवरण">{{old('comment')}}</textarea>
+                                                            </div>
+                                                            @error('comment')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary mt-2">
+                                                        पेश गर्नुहोस्
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
 
                     </div>
                 </div>

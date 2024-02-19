@@ -16,7 +16,7 @@ class UpdateRecommendationCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
+            'title' => ['required', Rule::unique('recommendation_categories','title')->withoutTrashed()->ignore($this->recommendationCategory)],
             'recommendation_category_id' => ['nullable',Rule::exists('recommendation_categories', 'id')->withoutTrashed()],
         ];
     }

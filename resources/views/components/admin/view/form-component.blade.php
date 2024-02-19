@@ -39,7 +39,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <iframe src="{{$formStore->document_url}}"></iframe>
+                                                    <iframe src="{{$formStore->document_url}}" style="height: 100%;width: 100%;"></iframe>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -62,6 +62,19 @@
                                                 <i class="fa fa-pen-nib"></i>
                                             </button>
                                         @endif
+                                    @endif
+                                    @if($formStore->status ==  Modules\EMap\Enums\DocumentStatusEnum::APPROVED && !$formStore->approved_document)
+                                        @if(auth()->user()->id == 1 || $checkAuthorization)
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    title="स्वीकार गरेको छाप अपलोड गर्नुहोस"
+                                                    data-bs-target="#upload-approval-form-store-stamp{{ $formStore->id }}">
+                                                <i class="fa fa-check-square"></i>
+                                            </button>
+                                        @endif
+                                    @endif
+
+                                    @if($formStore->approved_document)
+                                        <i class="fa fa-check-circle text-success"> </i> Stamp
                                     @endif
 
                                 </td>
@@ -114,6 +127,36 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- approved signature modal -->
+                            <div class="modal fade" id="upload-approval-form-store-stamp{{ $formStore->id }}" tabindex="-1" aria-labelledby="statusLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="status_model_applied">स्वीकार गरेको छाप अपलोड गर्नुहोस </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.uploadFormStoreApprovedDocument',[$mapApply,$form,$formDataType,$formStore]) }}" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('put')
+                                                <div class="mb-3">
+                                                    <label for="approved_document" class="form-label">स्वीकार गरेको छाप</label>
+                                                    <input type="file" name="approved_document" id="approved_document" class="form-control" required>
+                                                    @error('approved_document')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                    <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                             </tbody>
                         </table>
                     </div>
@@ -158,7 +201,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <iframe src="{{$formStoreStatus->document_url}}"></iframe>
+                                                        <iframe src="{{$formStoreStatus->document_url}}" style="height: 100%;width: 100%;"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"

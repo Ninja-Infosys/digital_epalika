@@ -274,4 +274,14 @@ class MapApply extends Model
             })
             ->first();
     }
+
+    public function houseOwnerArchives(): HasMany
+    {
+        return $this->hasMany(HouseOwnerArchive::class);
+    }
+
+    public function organizationArchives(): HasMany
+    {
+        return $this->hasMany(OrganizationArchive::class);
+    }
 }

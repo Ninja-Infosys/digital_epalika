@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MobileUser;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Employee;
 use App\Models\Website\ImportantLink;
-use App\Models\Website\MunicipalDetail;
-use App\Models\Website\Slider;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Facades\Route;
 use Modules\DigitalBoard\Entities\Notice;
-use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -29,6 +23,9 @@ class FrontController extends Controller
 
     public function index()
     {
+        if(config('app.disable_main_page')) {
+            return redirect(route('newWard'));
+        }
         if (!$this->checkModuleExistence('DigitalBoard')) {
             return view('frontend.digital_board');
         } elseif (Route::has('grievanceHandling.grievance')
@@ -42,26 +39,15 @@ class FrontController extends Controller
             || Route::has('roaster.index')) {
             return redirect(route('digital-service'));
         } else {
-            return redirect(route('login'));
+            return redirect(route('digital-service'));
         }
-        /*if (config('app.website_type') === 'website') {
-            $employees = Employee::orderBy('position')->get();
-
-            $notices = Notice::where('type', 'Notice')->orderBy('date')->limit(3)->get();
-            $newses = Notice::where('type', 'News')->orderBy('date')->limit(3)->get();
-
-            $meetingDecisions = MeetingDecision::with('meetingEvent')->latest()->get();
-            $sliders = Slider::latest()->get();
-            $municipalDetails = MunicipalDetail::all();
-
-            return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDecisions', 'sliders', 'municipalDetails'));
-        }*/
     }
 
     public function digitalService()
     {
         return view('frontend.welcome');
     }
+
 
     public function notice()
     {
@@ -92,10 +78,11 @@ class FrontController extends Controller
         //        return view('frontend.static.category.category');
     }
 
-    public function representative()
-    {
-        return view('frontend.static.representative.index');
-    }
+    //    public function representative()
+    //    {
+    //        $representatives = Employee::all();
+    //        return view('components.frontend.employee-section-component', compact('representatives'));
+    //    }
 
     public function audio()
     {

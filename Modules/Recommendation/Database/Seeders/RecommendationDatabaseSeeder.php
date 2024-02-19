@@ -10,8 +10,8 @@ class RecommendationDatabaseSeeder extends Seeder
     {
         $this->call([
             RecommendationPermissionTableSeeder::class,
-            RecommendationTemplateTableSeeder::class,
-            RecommendationSettingTableSeeder::class
+            // RecommendationTemplateTableSeeder::class,
+            // RecommendationSettingTableSeeder::class
         ]);
     }
 }

@@ -31,6 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body px-0">
+                    
                     @livewire('judicialcommittee::complaint-application-livewire')
                 </div>
             </div>

@@ -46,7 +46,8 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post"
+                    <livewire:recommendation::recommendation-apply-livewire />
+                   {{-- <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @livewire('field', [
@@ -96,7 +97,7 @@
                         <button type="submit" class="btn btn-primary mt-2">
                             पेश गर्नुहोस्
                         </button>
-                    </form>
+                    </form>--}}
                 </div>
             </div>
 

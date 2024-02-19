@@ -19,15 +19,15 @@ class UpdateStreetDetailRequest extends FormRequest
         return  [
 
             'name' => ['required', 'string', 'max:255'],
-            'from' => ['required','string','max:255'],
-            'to' => ['required', 'string', 'max:255'],
-            'setback' => ['required', 'string', 'max:255'],
-            'street_code' => ['required', 'string', 'max:255'],
-            'condition' => ['required', new Enum(RoadConditionEnum::class)],
-            'wards' => ['required', 'string', 'max:255'],
-            'right_of_way' => ['required', 'string', 'max:255'],
-            'width' => ['required', 'string', 'max:255'],
-            'road_type' => ['required', new Enum(RoadTypeEnum::class)],
+            'from' => ['nullable','string','max:255'],
+            'to' => ['nullable', 'string', 'max:255'],
+            'setback' => ['nullable', 'string', 'max:255'],
+            'street_code' => ['nullable', 'string', 'max:255'],
+            'condition' => ['nullable', new Enum(RoadConditionEnum::class)],
+            'wards' => ['nullable', 'string', 'max:255'],
+            'right_of_way' => ['nullable', 'string', 'max:255'],
+            'width' => ['nullable', 'string', 'max:255'],
+            'road_type' => ['nullable', new Enum(RoadTypeEnum::class)],
             'coordinates' => ['nullable', 'json']
         ];
     }

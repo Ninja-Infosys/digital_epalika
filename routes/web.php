@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\Global\OrganizationAuthController;
 use App\Http\Controllers\Admin\Global\OrganizationDashboardController;
 use App\Http\Controllers\Admin\Global\RenewedController;
@@ -30,13 +31,13 @@ use Illuminate\Support\Facades\Route;
 //    return redirect(route('admin.dashboard'));
 //});
 
-Route::post('/login', [LoginController::class,'login'])->name('login');
-Route::get('/login', [LoginController::class,'loginPage'])->name('loginPage');
-Route::post('/logout', [LoginController::class,'logout'])->name('logout')->middleware('auth:sanctum');
-Route::get('digital-service', [FrontController::class,'digitalService'])->name('digital-service');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', [LoginController::class, 'loginPage'])->name('loginPage');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
+Route::get('digital-service', [FrontController::class, 'digitalService'])->name('digital-service');
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
-Route::get('seniorCitizenDetail/{seniorCitizenDetail}/seniorCitizenQrcode', [FrontController::class,'seniorCitizenDetailQrcode'])->name('seniorCitizenDetail.qrcode');
-Route::get('disabilityIdentityCard/{disabilityIdentityCard}/disabilityQrcode', [FrontController::class,'disabilityIdentityCardQrcode'])->name('disabilityIdentityCard.qrcode');
+Route::get('seniorCitizenDetail/{seniorCitizenDetail}/seniorCitizenQrcode', [FrontController::class, 'seniorCitizenDetailQrcode'])->name('seniorCitizenDetail.qrcode');
+Route::get('disabilityIdentityCard/{disabilityIdentityCard}/disabilityQrcode', [FrontController::class, 'disabilityIdentityCardQrcode'])->name('disabilityIdentityCard.qrcode');
 Route::get('introduction', [FrontController::class, 'introduction'])->name('introduction');
 Route::get('category', [FrontController::class, 'category'])->name('category');
 Route::get('contact', [FrontController::class, 'contact'])->name('contact');
@@ -51,7 +52,7 @@ Route::get('organization', [FrontController::class, 'org'])->name('organization'
 Route::get('executive', [FrontController::class, 'executive'])->name('executive');
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
-Route::get('ward/{ward}', [FrontController::class,'wardIndex'])->name('wardIndex');
+Route::get('ward/{ward}', [FrontController::class, 'wardIndex'])->name('wardIndex');
 Route::get('/mobileUser', [FrontController::class, 'mobileUser'])->name('mobileUser');
 // Route::get('ebps', 'eMap')->name('ebps');
 
@@ -68,9 +69,9 @@ Route::prefix('print')->as('print.')->controller(PrintController::class)->group(
 Route::get('login/locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unlock');
 
-// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-//     \UniSharp\LaravelFilemanager\Lfm::routes();
-// });
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
     // Dummy route, we can use the route() helper to give formiojs the base path for this group
     Route::get('/')->name('index');
@@ -98,10 +99,10 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::get('register', [MobileUserAuthController::class, 'showMobileUserRegisterForm'])->name('register.form');
     Route::post('register', [MobileUserAuthController::class, 'signup'])->name('register.signup');
     Route::get('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
-    Route::put('updateProfile', [MobileUserAuthController::class,'updateProfile'])->name('updateProfile');
-    Route::get('editProfile', [MobileUserAuthController::class,'editProfile'])->name('editProfile');
-    Route::get('editPassword', [MobileUserAuthController::class,'editPassword'])->name('editPassword');
-    Route::put('updatePAssword', [MobileUserAuthController::class,'updatePassword'])->name('updatePassword');
+    Route::put('updateProfile', [MobileUserAuthController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('editProfile', [MobileUserAuthController::class, 'editProfile'])->name('editProfile');
+    Route::get('editPassword', [MobileUserAuthController::class, 'editPassword'])->name('editPassword');
+    Route::put('updatePAssword', [MobileUserAuthController::class, 'updatePassword'])->name('updatePassword');
     Route::resource('mobileUserDetail', MobileUserDetailController::class);
 
 });
@@ -119,11 +120,26 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
     Route::prefix('profile')->group(function () {
         Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
+        Route::get('organization/{organization}/profileDetail', [OrganizationAuthController::class, 'profileDetail'])->name('auth-organization.profileDetail');
+        Route::put('organization/{organization}/updateOrganization', [OrganizationAuthController::class, 'updateOrganization'])->name('auth-organization.update');
     });
-    Route::middleware("auth:organization")->group(function(){
+    Route::middleware("auth:organization")->group(function () {
         Route::post('logout', [OrganizationAuthController::class, 'logout'])->name('logout');
         Route::resource('taxClearance', TaxClearanceController::class);
         Route::resource('renewed', RenewedController::class);
     });
-
 });
+
+Route::prefix('address')
+    ->as('address.')
+    ->controller(AddressController::class)
+    ->group(function () {
+        Route::get('province', 'provinces')->name('province.index');
+        Route::get('province/{province}', 'province')->name('province.show');
+        Route::get('district', 'districts')->name('district.index');
+        Route::get('district/{district}', 'district')->name('district.show');
+        Route::get('localBody', 'localBodies')->name('localBody.index');
+        Route::get('localBody/{localBody}', 'localBody')->name('localBody.show');
+        Route::get('toles', 'toles')->name('tole.index');
+        Route::get('tole/{tole}', 'tole')->name('tole.show');
+    });

@@ -2,11 +2,13 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use App\Helper\SMS\AakashSms;
 use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -32,19 +34,27 @@ class OrganizationController extends Controller
         return view('emap::admin.organization.index', compact('organizations'));
     }
 
-    public function updateLoginStatus(Organization $organization)
+    public function updateLoginStatus(Request $request, Organization $organization)
     {
+        $request->validate([
+            'status'=>['required'],
+            'comment'=>['required_if:status,==,rejected']
+        ]);
         $this->checkAuthorization('organization_edit');
 
-        DB::transaction(function () use ($organization) {
+        DB::transaction(function () use ($organization,$request) {
             $organization->update([
-                'is_active' => !$organization->is_active,
+                'status' => $request->input('status'),
+                'comment' => $request->input('comment') ?? null,
             ]);
-
-            if (empty($organization->password) && $organization->is_active == 1) {
-                $url = URL::signedRoute('organization.invitation', $organization);
-
-                Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+            if ($organization->status === 'accepted') {
+                $message = "Dear $organization->name , your application has been approved.";
+                (new AakashSms())->sendTextSMS($organization->phone, $message);
+                // Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+            }elseif ($organization->status === 'rejected')
+            {
+                $message = "Dear $organization->name, your application in rejected because of $organization->comment.";
+                (new AakashSms())->sendTextSMS($organization->phone, $message);
             }
         });
 

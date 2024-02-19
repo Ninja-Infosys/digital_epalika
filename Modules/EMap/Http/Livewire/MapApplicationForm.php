@@ -169,7 +169,7 @@ class MapApplicationForm extends Component
 
     protected array $landDescriptionValidations = [
         'landDescription.ward_no' => ['required', 'integer'],
-        'landDescription.former_ward_no' => ['nullable', 'integer'],
+        'landDescription.former_ward_no' => ['nullable', 'string'],
         'landDescription.tole' => ['nullable'],
         'landDescription.plot_no' => ['required'],
         'landDescription.unit_value' => ['nullable'],
@@ -303,7 +303,7 @@ class MapApplicationForm extends Component
             'landDescription.ward_no.required' => 'वडा नं अनिवार्य छ|',
             'landDescription.ward_no.integer' => 'वडा नं नम्बरमा हुनुपर्छ|',
             'landDescription.former_ward_no.required' => ' साविक वडा नं अनिवार्य छ|',
-            'landDescription.former_ward_no.integer' => ' साविक वडा नं नम्बरमा हुनुपर्छ|',
+            // 'landDescription.former_ward_no.integer' => ' साविक वडा नं नम्बरमा हुनुपर्छ|',
             'landDescription.plot_no.required' => 'कित्ता नं अनिवार्य छ|',
             'landDescription.percentage_of_area_covered_by_building.required' => ' क्षेत्रफलको प्रतिशत अनिवार्य छ|',
             'landDescription.percentage_of_area_covered_by_building.numeric' => 'क्षेत्रफलको प्रतिशत नम्बरमा हुनुपर्छ|',

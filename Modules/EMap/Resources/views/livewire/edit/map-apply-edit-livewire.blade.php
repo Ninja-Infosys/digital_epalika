@@ -113,7 +113,7 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold" for="applyMap.current_storey">१.५ हाल निर्माण गर्ने तल्ला
                         संख्या </label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.current_storey"
+                    <input type="number" step="any" class="form-control form-control-sm" id="applyMap.current_storey"
                            wire:model="applyMap.current_storey"
                            placeholder="तल्ला संख्या अंकमा" min="0" {{$editForm ? '' : 'disabled'}}>
                     @error('applyMap.current_storey')
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold" for="applyMap.area_of_plinth">१.६ प्लिन्थको क्षेत्रफल</label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.area_of_plinth"
+                    <input type="number" step="any"  class="form-control form-control-sm" id="applyMap.area_of_plinth"
                            wire:model="applyMap.area_of_plinth"
                            placeholder="प्लिन्थको क्षेत्रफल (वर्ग मिटर)" min="0" {{$editForm ? '' : 'disabled'}}>
                     @error('applyMap.area_of_plinth')
@@ -132,7 +132,7 @@
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold" for="applyMap.future_storey">१.७ भविष्यमा निर्माण गर्ने तल्ला
                         संख्या </label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.future_storey"
+                    <input type="number" step="any"  class="form-control form-control-sm" id="applyMap.future_storey"
                            wire:model="applyMap.future_storey"
                            min="0" placeholder="भविष्यमा निर्माण गर्ने तल्ला संख्या" {{$editForm ? '' : 'disabled'}}>
                     @error('applyMap.future_storey')
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold" for="applyMap.length">१.८ कुल भवनको लम्बाई </label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.length"
+                    <input type="number" step="0.01"  class="form-control form-control-sm" id="applyMap.length"
                            wire:model="applyMap.length"
                            placeholder="कुल भवनको लम्बाई (मिटर)" min="0" {{$editForm ? '' : 'disabled'}}>
                     @error('applyMap.length')
@@ -150,7 +150,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold" for="applyMap.breadth">१.९ कुल भवनको चौडाई</label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.breadth"
+                    <input type="number" step="0.01"  class="form-control form-control-sm" id="applyMap.breadth"
                            wire:model="applyMap.breadth"
                            placeholder="कुल भवनको चौडाई (मिटर)" min="0" {{$editForm ? '' : 'disabled'}}>
                     @error('applyMap.breadth')
@@ -159,7 +159,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold" for="applyMap.height">१.१० भवनको कुल उचाई जमिनको सतहबाट</label>
-                    <input type="number" class="form-control form-control-sm" id="applyMap.height"
+                    <input type="number" step="0.01"  class="form-control form-control-sm" id="applyMap.height"
                            wire:model="applyMap.height"
                            placeholder="भवनको कुल उचाई जमिनको सतहबाट (मिटर)" min="0" {{$editForm ? '' : 'disabled'}}>
                     @error('applyMap.height')

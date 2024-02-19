@@ -8,6 +8,7 @@ use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
+use Modules\EMap\Http\Controllers\Admin\OrganizationArchiveController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
@@ -25,12 +26,14 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 
-Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
+Route::put('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
 //update status from admin
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AdminStepController::class, 'updateAppliedDocumentStatus'])->name('mapApply.admin-step.updateAppliedDocumentStatus');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}/uploadApprovedDocument', [AdminStepController::class, 'uploadApprovedDocument'])->name('mapApply.admin-step.uploadApprovedDocument');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStore/{formStore}/updateFormStoreStatus', [AdminStepController::class, 'updateFormStoreStatus'])->name('mapApply.admin-step.updateFormStoreStatus');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStore/{formStore}/uploadFormStoreApprovedDocument', [AdminStepController::class, 'uploadFormStoreApprovedDocument'])->name('mapApply.admin-step.uploadFormStoreApprovedDocument');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
 Route::put('mapApply/{mapApply}/mapReject', [AdminStepController::class, 'rejectMap'])->name('mapApply.rejectMap');
 
@@ -42,16 +45,31 @@ Route::get('mapApply/{mapApply}/register', [MapController::class, 'register'])->
 Route::get('mapApply/{mapApply}/steps', [AdminStepController::class, 'formList'])->name('mapApply.admin-step.form-list');
 Route::get('mapApply/{mapApply}/form/{form}/fill', [AdminStepController::class, 'fillDetail'])->name('mapApply.admin-step.fill-detail');
 Route::get('mapApply/{mapApply}/form/{form}/detail', [AdminStepController::class, 'viewDetail'])->name('mapApply.admin-step.view-detail');
+Route::get('mapApply/{mapApply}/form/{form}/documentDetail', [AdminStepController::class, 'viewDocumentDetail'])->name('mapApply.admin-step.view-document');
 Route::get('mapApply/{mapApply}/form/{form}/formDetail', [AdminStepController::class, 'formDetail'])->name('mapApply.admin-step.formDetail');
 Route::resource('mapApply/{mapApply}/mapRegistration', MapRegistrationController::class)->names('mapApply.mapRegistration');
 Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/printTemplate', [DocumentAttachController::class, 'printTemplate'])->name('attach-document.print-template');
-Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
+// Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', DocumentAttachController::class);
+Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/document/appliedDocument', [DocumentAttachController::class, 'store'])->name('map-apply.appliedDocument.store');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}', [DocumentAttachController::class, 'update'])->name('map-apply.appliedDocument.update');
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
+Route::get('mapApply/{mapApply}/houseOwnerArchive/documentDetail', [HouseOwnerArchiveController::class,'documentDetail'])->name('houseOwnerArchive.documentList');
+Route::put('mapApply/{mapApply}/houseOwner/{houseOwner}/uploadDocument', [HouseOwnerArchiveController::class,'uploadDocumentHouseOwner'])->name('houseOwner.uploadDocumentHouseOwner');
+Route::put('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/uploadDocument', [HouseOwnerArchiveController::class,'uploadDocument'])->name('houseOwnerArchive.uploadDocument');
+Route::get('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/print', [HouseOwnerArchiveController::class,'print'])->name('houseOwnerArchive.printMuchulka');
+Route::get('mapApply/{mapApply}/houseOwner/{houseOwner}/print', [HouseOwnerArchiveController::class,'printHouseOwner'])->name('houseOwnerArchive.printHouseOwner');
 Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
-Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class,'storeDocument'])->name('storeDocument');
-Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/{id}/appliedDocument', [AdminStepController::class,'updateDocument'])->name('updateDocument');
+Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class, 'storeDocument'])->name('storeDocument');
 
+//organization archive
+Route::resource('mapApply/{mapApply}/organizationArchive', OrganizationArchiveController::class);
+
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/{id}/appliedDocument', [AdminStepController::class, 'updateDocument'])->name('updateDocument');
+//templete print
+Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AdminStepController::class, 'printTemplate'])->name('printTemplate');
+Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AdminStepController::class, 'formStorePrint'])->name('formStorePrint');
+Route::put('formStore/{formStore}/uploadDocument', [AdminStepController::class, 'uploadDocument'])->name('uploadFormStoreDocument');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {

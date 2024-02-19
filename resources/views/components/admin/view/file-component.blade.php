@@ -40,6 +40,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                        <iframe src="{{ $appliedMapFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
@@ -53,12 +54,25 @@
                                     <td>{{ $appliedDocument->status->label()??'' }}</td>
                                     <td>
                                         @if($appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::PENDING || $appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
-                                        @if(auth()->user()->role->type === 'Super' || $checkAuthorization)
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
-                                            <i class="fa fa-pen-nib"></i>
-                                        </button>
+                                            @if(auth()->user()->id == 1 || $checkAuthorization)
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#status_model_applied{{ $appliedDocument->id }}">
+                                                <i class="fa fa-pen-nib"></i>
+                                            </button>
+                                            @endif
                                         @endif
+
+                                        @if($appliedDocument->status ==  Modules\EMap\Enums\DocumentStatusEnum::APPROVED && !$appliedDocument->approved_document)
+                                            @if(auth()->user()->id == 1 || $checkAuthorization)
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    title="स्वीकार गरेको छाप अपलोड गर्नुहोस"
+                                                data-bs-target="#upload-approval-stamp{{ $appliedDocument->id }}">
+                                                <i class="fa fa-check-square"></i>
+                                            </button>
+                                            @endif
+                                        @endif
+                                        @if($appliedDocument->approved_document)
+                                            <i class="fa fa-check-circle text-success"> </i> Stamp
                                         @endif
                                     </td>
                                 </tr>
@@ -103,6 +117,35 @@
                                         </div>
                                     </div>
 
+                                <!-- approved signature modal -->
+                                <div class="modal fade" id="upload-approval-stamp{{ $appliedDocument->id }}" tabindex="-1" aria-labelledby="statusLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="status_model_applied">स्वीकार गरेको छाप अपलोड गर्नुहोस </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{{ route('emap.admin.mapApply.admin-step.uploadApprovedDocument',[$mapApply,$form,$formDataType,$appliedDocument]) }}" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div class="mb-3">
+                                                        <label for="approved_document" class="form-label">स्वीकार गरेको छाप</label>
+                                                        <input type="file" name="approved_document" id="approved_document" class="form-control" required>
+                                                        @error('approved_document')
+                                                        <p class="text-danger">{{$message}}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>
+                                                        <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                         </tbody>
                     </table>
@@ -149,7 +192,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <iframe src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 100%; width:100%;"></iframe>
+                                                    <img src="{{ $statusFile->document_url }}" class="img-fluid" style="height: 700px; width:700px;"></img>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बन्द</button>

@@ -1,68 +1,66 @@
 <?php
 
 namespace Modules\DigitalBoard\Entities;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
-use App\Models\File;
-use App\Models\User;
-use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class PopUpNotice extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
     ];
 
     protected $fillable = [
         'title',
-        'date',
-        'description',
-        'closed_at',
-        'show_on_index',
+        'image',
+        'display_duration',
+        'iteration_duration',
+        'is_active',
+        'ward',
         'user_id',
-        'type',
-        'fiscal_year_id',
+        'is_displayed',
     ];
 
-    public function user(): BelongsTo
+    protected $casts = [
+        'is_displayed' => 'boolean',
+        
+    ];
+    protected function ward(): Attribute
     {
-        return $this->belongsTo(User::class);
+        return Attribute::make(
+            get: fn(string $value) => explode(',', $value),
+            set: fn(string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+        );
+    }
+    public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
+    {
+        $builder->where('is_displayed', $display);
     }
 
-    public function files(): MorphMany
+    public function getImageUrlAttribute(): string|null
     {
-        return $this->morphMany(File::class, 'model');
+        return $this->attributes['image']
+            ? Storage::disk('public')->url($this->attributes['image'])
+            : null;
+    }
+
+    public function scopeActive(Builder $builder): void
+    {
+        $builder->where('is_active', 1);
     }
 
 
-    public function scopeShowInIndex($builder)
+    public function setImageAttribute($value): void
     {
-        return $builder->where('show_on_index', 1);
-    }
-
-    public function scopeHideInIndex($builder)
-    {
-        return $builder->where('show_on_index', 0);
-    }
-
-    public function scopeNullClosedAt($builder)
-    {
-        return $builder->whereNull('closed_at');
-    }
-
-    public function scopeContentType($builder, string $type)
-    {
-        return $builder->where('type', $type);
-
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['image'] = $value->store('popupNotice/', 'public');
+        }
     }
 }

@@ -19,9 +19,10 @@ class ServiceController extends Controller
 
 
         $services = Service::with('branch')
-        ->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
+        ->where(function ($q){
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
             }
         })
         ->latest()->paginate(10);
@@ -42,7 +43,7 @@ class ServiceController extends Controller
 
 
         DB::transaction(function () use ($request) {
-            $service = Service::create($request->validated());
+            $service = Service::create($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
 
             foreach ($request->validated()['serviceDocuments'] as $serviceDocument) {
                 $service->serviceDocuments()->create($serviceDocument);
@@ -76,16 +77,16 @@ class ServiceController extends Controller
 
     public function update(UpdateServiceRequest $request, Service $service)
     {
-
         DB::transaction(function () use ($request, $service) {
-            $service->update($request->validated());
-
+            $service->update($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
+    
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
                 ServiceDocument::updateOrCreate(
                     ['service_id' => $service->id,'id' => $serviceDocument['id'] ?? null],
                     $serviceDocument
                 );
             }
+    
             foreach ($request->input('serviceProcesses') as $serviceProcess) {
                 ServiceProcess::updateOrCreate(
                     ['service_id' => $service->id,'id' => $serviceProcess['id'] ?? null],
@@ -93,9 +94,9 @@ class ServiceController extends Controller
                 );
             }
         });
-
+    
         toast('सेवा विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
-
+    
         return redirect(route('admin.digitalBoard.service.index'));
     }
 

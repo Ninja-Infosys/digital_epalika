@@ -3,10 +3,13 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Modules\EMap\Enums\ApplicantTypeEnum;
@@ -36,11 +39,22 @@ class ApplicantDetail extends Model
         'citizenship_issue_date',
         'application_date',
         'signature',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'ward_no',
+        'tole'
     ];
 
     protected $casts = [
         'applicant_type' => ApplicantTypeEnum::class,
         'relation_with_owner' => RelationEnum::class,
+    ];
+
+    protected $with=[
+        'province',
+        'district',
+        'localBody'
     ];
 
     public function mapApply(): BelongsTo
@@ -58,11 +72,24 @@ class ApplicantDetail extends Model
         return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
     }
 
-    public function setSignatureAttribute($value): void
+    public function setSignatureAttribute($value)
     {
-        info($value);
-        if (!empty($value) && !is_string($value)) {
+        if (!empty($value) && $value instanceof UploadedFile) {
             $this->attributes['signature'] = $value->store('e_map/applicant/'.Str::slug($this->attributes['name'], '_').'/signature', 'public');
         }
+    }
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
     }
 }

@@ -32,17 +32,22 @@
                                     घरधनि नामसारी
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                  <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',$mapApply) }}"> House Owner before compilation of house</a></li>
-                                  <li><a class="dropdown-item" href="#"> House Owner After compilation of house</a></li>
-                                  <li><a class="dropdown-item" href="#"> Organization</a></li>
+                                    @if($mapApply->sent_to_organization == 'done')
+                                        <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> सम्पन्न घर नामसारी</a></li>
+                                        @else
+                                    <li><a class="dropdown-item" href="{{ route('emap.admin.houseOwnerArchive.index',[$mapApply]) }}"> निर्माणाधीन घर नामसारी </a></li>
+                                  <li>
+                                      <a class="dropdown-item" href="{{route('emap.admin.organizationArchive.index',$mapApply)}}"> परामर्शदाता नामसारी</a>
+                                  </li>
+                                        @endif
                                 </ul>
                             </div>
                             @if(empty($mapApply->registration_no))
-                            <a href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
+                            <a  style="margin-left:10px;" href="{{route('emap.admin.mapApply.register-map', $mapApply)}}" class="btn btn-success">
                                 नक्सा दर्ता गर्नुहोस
                             </a>
                             @endif
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                            <button type="button" style="margin-left:10px;" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#mapReject">
                             नक्सा अस्वीकार गर्नुहोस
                         </button>
@@ -84,58 +89,49 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>शिर्षक</th>
-                                <th>Need From </th>
-                                <th>स्थिति</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($forms as $form)
+                    <ul class="nav nav-pills nav-fill navtab-bg">
+                        <li class="nav-item">
+                            <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                                सबै ({{$forms->count()}})
+                            </a>
+                        </li>
 
-                                <tr>
-                                    <td>{{ get_nepali_number($loop->iteration) }}</td>
-                                    <td>{{ $form->title }}</td>
-                                    <td>
-                                        {{$form->need_from?->label()??''}}
-                                    </td>
-                                    <td>{{$form->map_status?->label()}}</td>
-                                    <td>
-                                        @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
-                                            @if($form->map_group_id == $form->map_pass_group_id)
-                                            <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            @else
-                                                @if($form->form_approve)
-                                                    <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
-                                                       class="btn btn-xs bn-outline-success">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]) }}"
-                                                       class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                @endif
-                                            @endif
-                                        @else
-                                            <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
-                                               class="btn btn-xs bn-outline-success">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        <li class="nav-item">
+                            <a href="#tab-submission" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                                पेश गर्नुपर्ने  ({{$forms->where('form_edit',true)?->count()}})
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#tab-approval" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                स्वीकृत गर्नुपर्ने  ({{$forms->where('form_approve',true)?->count()}})
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane " id="tab-all">
+                            <x-admin.form-steps-component
+                                :map-apply="$mapApply"
+                                :forms="$forms"
+                                :order="$order"
+                            />
+                        </div>
+                        <div class="tab-pane show active" id="tab-submission">
+                            <x-admin.form-steps-component
+                                :map-apply="$mapApply"
+                                :forms="$forms->where('form_edit',true)"
+                                :order="$order"
+                            />
+                        </div>
+
+                        <div class="tab-pane" id="tab-approval">
+                            <x-admin.form-steps-component
+                                :map-apply="$mapApply"
+                                :forms="$forms->where('form_approve',true)"
+                                :order="$order"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

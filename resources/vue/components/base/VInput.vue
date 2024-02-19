@@ -6,6 +6,7 @@
       :id="id"
       v-bind:class="[inputClass, { 'is-invalid': error }]"
       v-bind:max="maxValue ? maxValue: null"
+      v-bind:min="minValue ? minValue: null"
       :value="modelValue"
       @input="updateInputValue"
       :placeholder="placeholder || label"
@@ -44,6 +45,7 @@ const props=defineProps({
   placeholder: {
     type: String,
   },
+
   error: {
     type: String,
     default: ''
@@ -57,6 +59,9 @@ const props=defineProps({
     default: false
   },
   maxValue: {
+    type: Number
+  },
+  minValue: {
     type: Number
   },
 

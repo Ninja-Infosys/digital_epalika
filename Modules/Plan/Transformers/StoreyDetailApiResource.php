@@ -22,7 +22,7 @@ class StoreyDetailApiResource extends JsonResource
             'area_of_former_construction' => $this->area_of_former_construction ?? '',
             'total_area' => $this->total_area ?? '',
             'height ' => $this->height ?? '',
-            'mapApplyForm' => MapApplyFormApiResource::make($this->whenLoaded('mapApplyForm')),
+            'mapApplyForm' => MapApplyFosrmApiResource::make($this->whenLoaded('mapApplyForm')),
 
 
         ];

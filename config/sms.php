@@ -6,6 +6,6 @@ return [
         'sms_id' => env('SAMAYA_SMS_ID', 'SMSBit')
     ],
     'aakash' => [
-        'api_key' => env('AAKASH_SMS_KEY', '57adb1e792b165e7a17f8ba78d3629159934d665b97590afde308a6c0427e0fd')
+        'api_key' => env('AAKASH_SMS_KEY', 'e059724d204c1b75eaa45e72df091098c58f4fff9646815bb115cade066c5638')
     ]
 ];

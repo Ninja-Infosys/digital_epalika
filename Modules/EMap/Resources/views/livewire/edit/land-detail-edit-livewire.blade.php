@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label fw-bold" for="landDescription.ward_no">२.२ वडा नं</label>
-                <input class="form-control form-control-sm" type="number" id="landDescription.ward_no"
+                <input class="form-control form-control-sm" type="number"  id="landDescription.ward_no"
                        wire:model="landDescription.ward_no"
                        min="0" placeholder="वडा नं" {{$editForm ? '' : 'disabled'}}>
                 @error('landDescription.ward_no')
@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label fw-bold" for="landDescription.former_ward_no">२.३ साविक वडा नं</label>
-                <input class="form-control form-control-sm" type="number" id="landDescription.former_ward_no"
+                <input class="form-control form-control-sm" type="text"  id="landDescription.former_ward_no"
                        wire:model="landDescription.former_ward_no"
                        min="0" placeholder="साविक वडा नं" {{$editForm ? '' : 'disabled'}}>
                 @error('landDescription.former_ward_no')
@@ -74,6 +74,7 @@
                 <label class="form-label fw-bold" for="landDescription.percentage_of_area_covered_by_building">२.८ भवनले
                     ढाक्ने क्षेत्रफलको प्रतिशत (GCR)</label>
                 <input class="form-control form-control-sm" type="number"
+                step="any"
                        id="landDescription.percentage_of_area_covered_by_building"
                        wire:model="landDescription.percentage_of_area_covered_by_building"
                        placeholder="भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR)" {{$editForm ? '' : 'disabled'}}>

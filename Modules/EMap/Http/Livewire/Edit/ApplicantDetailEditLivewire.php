@@ -32,6 +32,7 @@ class ApplicantDetailEditLivewire extends Component
         'citizenship_no' => null,
         'citizenship_issue_date' => null,
         'application_date' => null,
+        'address' => null,
     ];
 
     public function mount(MapApply $mapApply, $districts)
@@ -49,6 +50,7 @@ class ApplicantDetailEditLivewire extends Component
             'citizenship_no' => $mapApply->applicantDetail->citizenship_no ?? null,
             'citizenship_issue_date' => $mapApply->applicantDetail->citizenship_issue_date ?? null,
             'application_date' => $mapApply->applicantDetail->application_date ?? null,
+            'address' => $mapApply->applicantDetail->address ?? null,
         ];
         $this->signatureUrl = $mapApply->applicantDetail->signature_url ?? null;
     }
@@ -73,6 +75,7 @@ class ApplicantDetailEditLivewire extends Component
         'applicantDetail.citizenship_no' => ['required'],
         'applicantDetail.citizenship_issue_date' => ['required'],
         'applicantDetail.application_date' => ['nullable'],
+        'applicantDetail.address' => ['nullable'],
         'signature' => ['nullable', 'image'],
     ];
 
@@ -87,6 +90,7 @@ class ApplicantDetailEditLivewire extends Component
             'applicantDetail.citizenship_issue_district_id.required' => 'जारी जिल्ला अनिवार्य छ|',
             'applicantDetail.citizenship_no.required' => 'नागरिकता न. अनिवार्य छ|',
             'applicantDetail.citizenship_issue_date.required' => 'जारी मिति अनिवार्य छ|',
+            'applicantDetail.address.required' => 'ठेगाना अनिवार्य छ|',
             'signature.required' => 'निवेदकको सहि अनिवार्य छ|',
         ];
     }

@@ -7,9 +7,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                            <a href="{{ route('admin.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -29,27 +29,23 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ भूमिका सूची</h4>
-                        <a href="{{route('admin.global.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.global.userManagement.role.index') }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> भूमिका सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.global.userManagement.role.store')}}" method="post">
+                    <form action="{{ route('admin.global.userManagement.role.store') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">भूमिका शीर्षक *</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value="{{old('title')}}"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="भूमिका शीर्षक"
-                                />
+                                <input type="text" name="title" value="{{ old('title') }}"
+                                    class="form-control @error('title') is-invalid @enderror" id="title"
+                                    placeholder="भूमिका शीर्षक" />
                                 @error('title')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -59,21 +55,19 @@
                                     अनुमतिहरू *
                                 </label>
                                 <div class="row">
-                                    @foreach($permissionGroups as $key=>$permissionGroup)
+                                    @foreach ($permissionGroups as $key => $permissionGroup)
                                         <div class="col-md-6">
                                             <fieldset class="mb-2">
-                                                <legend>{{$key}}</legend>
+                                                <legend>{{ $key }}</legend>
                                                 <div class="row">
-                                                    @foreach($permissionGroup as $permission)
+                                                    @foreach ($permissionGroup as $permission)
                                                         <div class="col-md-3">
                                                             <div class="form-check">
-                                                                <input type="checkbox"
-                                                                       class="form-check-input"
-                                                                       name="permissions[]"
-                                                                       value="{{$permission['id']}}"
-                                                                       id="permission{{$permission['id']}}" >
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    name="permissions[]" value="{{ $permission['id'] }}"
+                                                                    id="permission{{ $permission['id'] }}">
                                                                 <label class="form-check-label"
-                                                                       for="permission{{$permission['id']}}">{{$permission['title']}}</label>
+                                                                    for="permission{{ $permission['id'] }}">{{ $permission['title'] }}</label>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -82,10 +76,10 @@
                                         </div>
                                     @endforeach
                                     @error('permissions')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     @error('permissions.*')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

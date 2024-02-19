@@ -36,6 +36,8 @@ class OrganizationRegisterLivewire extends Component
         'name' => null,
         'email' => null,
         'phone' => null,
+        'password' => null,
+        'password_confirmation' => null,
     ];
 
     public array $organizationDetail = [
@@ -81,10 +83,10 @@ class OrganizationRegisterLivewire extends Component
     ];
 
     protected array $secondStepValidations = [
-        'organizationDetail.org_registration_document' => ['required', 'image', 'max:300'],
-        'organizationDetail.org_pan_document' => ['required', 'image', 'max:300'],
-        'organizationDetail.logo' => ['required', 'image', 'max:200'],
-        'taxClearance.document' => ['required', 'max:300'],
+        'organizationDetail.org_registration_document' => ['required', 'image'],
+        'organizationDetail.org_pan_document' => ['required', 'image'],
+        'organizationDetail.logo' => ['required', 'image'],
+        'taxClearance.document' => ['required'],
         'taxClearance.year' => ['required'],
         'muncipalRegistration.palika_reg_no' => ['required'],
         'muncipalRegistration.reg_date' => ['required'],
@@ -95,6 +97,7 @@ class OrganizationRegisterLivewire extends Component
         'user.name' => ['required'],
         'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
+        'user.password' => ['required', 'confirmed','min:6'],
     ];
 
     public function mount(): void
@@ -134,7 +137,9 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->validate();
         DB::transaction(function () {
-            $DbUser = Organization::create($this->user);
+            $DbUser = Organization::create($this->user +[
+                'is_active'=>1, 'status'=>'pending'
+                ]);
             $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
             $DbOrgDetail->taxClearances()->create($this->taxClearance);
             $DbOrgDetail->emapMuncipalRegistrations()->create($this->muncipalRegistration);
@@ -150,7 +155,7 @@ class OrganizationRegisterLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'progressPercentage');
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'muncipalRegistration','progressPercentage');
     }
 
     public function checkOrganizationAddress(): void
@@ -219,6 +224,7 @@ class OrganizationRegisterLivewire extends Component
             'user.email.email' => 'इमेल मान्य छैन ।',
             'user.phone.required' => 'सम्पर्क नं आवश्यक छ ।',
             'user.phone.unique' => 'यो सम्पर्क नं पहिल्यै प्रयोग भई सकेको छ ।',
+            'user.password.required' => 'पासवर्ड आवश्यक छ ।',
         ];
     }
 }

@@ -19,6 +19,7 @@ use Modules\EMap\Entities\FormStoreStatus;
 use Modules\EMap\Entities\AppliedDocumentStatus;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Enums\FormTypeEnum;
+use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class DocumentAttachController extends Controller
@@ -198,28 +199,29 @@ class DocumentAttachController extends Controller
             letterHead('letter_head'),
 
             //mapApply
-            $mapApply->registration_no ?? '',
-            $mapApply->registration_date ?? '',
-            $mapApply->construction_type?->label() ?? '',
-            $mapApply->usage?->label() ?? '',
-            $mapApply->building_category?->label() ?? '',
-            $mapApply->structureType->title ?? '',
-            $mapApply->current_storey ?? '',
-            $mapApply->future_storey ?? '',
-            $mapApply->area_of_plinth ?? '',
-            $mapApply->length ?? '',
-            $mapApply->breadth ?? '',
-            $mapApply->height ?? '',
+            get_nepali_number($mapApply->registration_no) ?? '',
+            get_nepali_number($mapApply->registration_date) ?? '',
+            get_nepali_number($mapApply->construction_type?->label()) ?? '',
+            get_nepali_number($mapApply->usage?->label()) ?? '',
+            get_nepali_number($mapApply->building_category?->label()) ?? '',
+            get_nepali_number($mapApply->structureType->title) ?? '',
+            get_nepali_number($mapApply->current_storey) ?? '',
+            get_nepali_number($mapApply->future_storey) ?? '',
+            get_nepali_number($mapApply->area_of_plinth) ?? '',
+            get_nepali_number($mapApply->length) ?? '',
+            get_nepali_number($mapApply->breadth) ?? '',
+            get_nepali_number($mapApply->height) ?? '',
             //landDetail
-            $mapApply->landDetail?->landUseArea?->title ?? '',
-            $mapApply->landDetail->ward_no ?? '',
-            $mapApply->landDetail->former_ward_no ?? '',
-            $mapApply->landDetail->tole ?? '',
-            $mapApply->landDetail->street_code_no ?? '',
-            $mapApply->landDetail->plot_no ?? '',
-            $mapApply->landDetail->area ?? '',
-            $mapApply->landDetail->percentage_of_area_covered_by_building ?? '',
-
+            get_nepali_number($mapApply->landDetail?->landUseArea?->title) ?? '',
+            get_nepali_number($mapApply->landDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->landDetail->former_ward_no) ?? '',
+            get_nepali_number($mapApply->landDetail->tole) ?? '',
+            get_nepali_number($mapApply->landDetail->street_code_no) ?? '',
+            get_nepali_number($mapApply->landDetail->plot_no) ?? '',
+            get_nepali_number($mapApply->landDetail->unit_value) ?? '',
+            get_nepali_number($mapApply->landDetail->percentage_of_area_covered_by_building) ?? '',
+            get_nepali_number($mapApply->landDetail->former_local_body) ?? '',
+            get_nepali_number($mapApply->landDetail->road_name) ?? '',
             //landowner
 
             // $mapApply->landOwner->land_owner_type->label() ?? '',
@@ -251,17 +253,22 @@ class DocumentAttachController extends Controller
             (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $mapApply->fourForts,
             ]),
+            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
 
             //applicantDetail
-            $mapApply->applicantDetail->applicant_type->label() ?? '',
-            $mapApply->applicantDetail->relation_with_owner->label() ?? '',
-            $mapApply->applicantDetail->name ?? '',
-            $mapApply->applicantDetail->phone ?? '',
-            $mapApply->applicantDetail->father_name ?? '',
-            $mapApply->applicantDetail->citizenshipIssueDistrict->district ?? '',
-            $mapApply->applicantDetail->citizenship_no ?? '',
-            $mapApply->applicantDetail->citizenship_issue_date ?? '',
-            $mapApply->applicantDetail->signature_url ?? '',
+            get_nepali_number($mapApply->applicantDetail->applicant_type->label()) ?? '',
+            get_nepali_number($mapApply->applicantDetail->relation_with_owner->label()) ?? '',
+            get_nepali_number($mapApply->applicantDetail->name) ?? '',
+            get_nepali_number($mapApply->applicantDetail->phone) ?? '',
+            get_nepali_number($mapApply->applicantDetail->father_name) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
+            get_nepali_number($mapApply->applicantDetail->address) ?? '',
 
             //criteria detail
 
@@ -276,39 +283,43 @@ class DocumentAttachController extends Controller
 
             //DesignerDetails
 
-            $designerDetail->name ?? '',
-            $designerDetail->father_name ?? '',
-            $designerDetail->phone ?? '',
-            $designerDetail->address ?? '',
-            $designerDetail->local_body ?? '',
-            $designerDetail->ward_no ?? '',
-            $designerDetail->nec_council_no ?? '',
-            $designerDetail->local_body_registration_no ?? '',
-            $designerDetail->consulting_firm_name ?? '',
+            get_nepali_number($designerDetail->name) ?? '',
+            get_nepali_number($designerDetail->father_name) ?? '',
+            get_nepali_number($designerDetail->phone) ?? '',
+            get_nepali_number($designerDetail->address) ?? '',
+            get_nepali_number($designerDetail->local_body) ?? '',
+            get_nepali_number($designerDetail->ward_no) ?? '',
+           get_nepali_number( $designerDetail->nec_council_no) ?? '',
+            get_nepali_number($designerDetail->local_body_registration_no) ?? '',
+            get_nepali_number($designerDetail->consulting_firm_name) ?? '',
+            get_nepali_number($designerDetail->district?->district) ?? '',
 
             //supervisorDetails
 
-            $supervisorDetail->name ?? '',
-            $supervisorDetail->father_name ?? '',
-            $supervisorDetail->phone ?? '',
-            $supervisorDetail->address ?? '',
-            $supervisorDetail->local_body ?? '',
-            $supervisorDetail->ward_no ?? '',
-            $supervisorDetail->nec_council_no ?? '',
-            $supervisorDetail->local_body_registration_no ?? '',
-            $supervisorDetail->consulting_firm_name ?? '',
+            get_nepali_number($supervisorDetail->name) ?? '',
+            get_nepali_number($supervisorDetail->father_name) ?? '',
+            get_nepali_number($supervisorDetail->phone) ?? '',
+            get_nepali_number($supervisorDetail->address) ?? '',
+            get_nepali_number($supervisorDetail->local_body) ?? '',
+            get_nepali_number($supervisorDetail->ward_no) ?? '',
+            get_nepali_number($supervisorDetail->nec_council_no) ?? '',
+            get_nepali_number($supervisorDetail->local_body_registration_no) ?? '',
+            get_nepali_number($supervisorDetail->consulting_firm_name) ?? '',
+            get_nepali_number($supervisorDetail->district?->district) ?? '',
 
             //ContractorDetails
 
-            $contractorDetail->name ?? '',
-            $contractorDetail->father_name ?? '',
-            $contractorDetail->phone ?? '',
-            $contractorDetail->address ?? '',
-            $contractorDetail->local_body ?? '',
-            $contractorDetail->ward_no ?? '',
-            $contractorDetail->nec_council_no ?? '',
-            $contractorDetail->local_body_registration_no ?? '',
-            $contractorDetail->consulting_firm_name ?? '',
+            get_nepali_number($contractorDetail->name) ?? '',
+            get_nepali_number($contractorDetail->father_name) ?? '',
+            get_nepali_number($contractorDetail->phone) ?? '',
+            get_nepali_number($contractorDetail->address) ?? '',
+            get_nepali_number($contractorDetail->local_body) ?? '',
+            get_nepali_number($contractorDetail->ward_no) ?? '',
+            get_nepali_number($contractorDetail->nec_council_no) ?? '',
+            get_nepali_number($contractorDetail->local_body_registration_no) ?? '',
+            get_nepali_number($contractorDetail->consulting_firm_name) ?? '',
+            get_nepali_number($contractorDetail->district?->district) ?? '',
+
         ];
     }
 
@@ -342,6 +353,9 @@ class DocumentAttachController extends Controller
             '[@landDetail.plot_no]',
             '[@landDetail.area]',
             '[@landDetail.percentage_of_area_covered_by_building]',
+            '[@landDetail.former_local_body]',
+            '[@landDetail.road_name]',
+
 
             //landOwner
             // '[@landOwner.land_owner_type]',
@@ -372,6 +386,7 @@ class DocumentAttachController extends Controller
             //FourForts
 
             '[@fourForts]',
+            '[@nameOfTheFortsAndSanghiars]',
 
             //applicantDetail
 
@@ -384,6 +399,8 @@ class DocumentAttachController extends Controller
             '[@applicantDetail.citizenship_no]',
             '[@applicantDetail.citizenship_issue_date]',
             '[@applicantDetail.signature_url]',
+            '[@applicantDetail.signature_url]',
+            '[@applicantDetail.address]',
 
             //criteria detail
             '[@criteriaDetails]',
@@ -401,6 +418,8 @@ class DocumentAttachController extends Controller
             '[@designerDetail.nec_council_no]',
             '[@designerDetail.local_body_registration_no]',
             '[@designerDetail.consulting_firm_name]',
+            '[@designerDetail.district]',
+
 
             //supervisorDetails
 
@@ -413,6 +432,8 @@ class DocumentAttachController extends Controller
             '[@supervisorDetail.nec_council_no]',
             '[@supervisorDetail.local_body_registration_no]',
             '[@supervisorDetail.consulting_firm_name]',
+            '[@supervisorDetail.district]',
+
 
             //ContractorDetails
 
@@ -424,7 +445,9 @@ class DocumentAttachController extends Controller
             '[@contractorDetail.ward_no]',
             '[@contractorDetail.nec_council_no]',
             '[@contractorDetail.local_body_registration_no]',
-            '[@contractorDetail.consulting_firm_name]'
+            '[@contractorDetail.consulting_firm_name]',
+            '[@contractorDetail.district]',
+
         ];
     }
 }

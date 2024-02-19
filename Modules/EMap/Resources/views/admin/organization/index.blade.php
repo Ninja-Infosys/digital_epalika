@@ -61,17 +61,25 @@
 
                                             <td class="d-flex flex-wrap">
                                                 @can('organization_edit')
-                                                    <a href="{{ route('emap.admin.organization.update-login-status', $organization) }}"
-                                                        class="rounded-1 btn me-1 btn-xs btn-outline-{{ $organization->is_active == 1 ? 'primary' : 'danger' }} {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                                        title="लग इन {{ $organization->is_active == 1 ? 'गर्न मिल्छ' : 'गर्न मिल्दैन' }}">
-                                                        <i
-                                                            class="fa  {{ $organization->is_active == 1 ? ' fa-check' : 'fa-window-close' }}"></i>
-                                                    </a>
+                                                    @if($organization->status==='accepted')
+                                                        <a class="rounded-1 btn me-1 btn-xs btn-outline-success {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                            <i class="fa fa-check"></i>
+                                                        </a>
+                                                    @elseif($organization->status==='rejected')
+                                                        <a class="rounded-1 btn me-1 btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                            <i class="fa fa-window-close"></i>
+                                                        </a>
+                                                    @else
+                                                        <a class="rounded-1 btn me-1 btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                            <i class="fa fa-spinner"></i>
+                                                        </a>
+                                                    @endif
+
                                                 @endcan
                                                 @can('organization_access')
                                                     <a href="{{ route('emap.admin.organization.show', $organization) }}"
                                                         title="हेर्नुहोस्"
-                                                        class="rounded-1 btn me-1 btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                        class="rounded-1 btn me-1 btn-xs btn-outline-primary">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcan

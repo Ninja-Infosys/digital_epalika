@@ -171,9 +171,43 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                            
                                         </div>
                                     </div>
                                 </fieldset>
+                                
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="ward" class="form-label">वडा</label>
+                                <select name="ward[]" id="ward" class="form-select"
+                                        @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                    <option value="">---वडा छान्नुहोस्---</option>
+                                    @foreach(officeSetting()->localbody->ward_no as $ward)
+                                        <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
+                                    @endforeach
+                                </select>
+                                @error('ward')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                @error('ward.*')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+    
+                            <div class="col-md-6 mb-2">
+                                <input
+                                    type="checkbox"
+                                    name="is_displayed"
+                                    value="1"
+                                    class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                    id="is_displayed"
+                                    @if(!empty(auth()->user()->ward_no)) disabled @else checked @endif
+                                />
+                                <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
+    
+                                @error('is_displayed')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                         </div>
 
