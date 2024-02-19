@@ -53,7 +53,7 @@ trait EMapTemplateTrait
                 'जग्गा कित्ता नं.' => '[@landDetail.plot_no]',
                 'क्षेत्रफल' => '[@landDetail.area]',
                 'भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR)' => '[@landDetail.percentage_of_area_covered_by_building]',
-                'साविक पालिका' => '[@landDetail.formerLocalBody]',
+                'साविक पालिका' => '[@landDetail.former_local_body]',
                 'सडकको नाम' => '[@landDetail.roadName]',
             ],
         ],
@@ -97,6 +97,7 @@ trait EMapTemplateTrait
             'data' => [
                 'किल्ला' => '[@fourForts]',
                 'जग्गाको चार किल्ला तथा संघियारको नाम ' => '[@nameOfTheFortsAndSanghiars]',
+                'निर्माणको निमित्त प्रस्तावित जग्गाको चार किल्लाको विवरण ' => '[@landFourFortsDetail]',
             ],
         ],
         [
@@ -323,6 +324,10 @@ trait EMapTemplateTrait
                 'fourForts' => $this->fourForts,
             ]),
             '[@nameOfTheFortsAndSanghiars]' => (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+                'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            '[@landFourFortsDetail]' => (string)View::make('emap::inc.land_four_forts_detail', [
                 'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
