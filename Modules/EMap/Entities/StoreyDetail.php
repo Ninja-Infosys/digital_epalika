@@ -25,6 +25,7 @@ class StoreyDetail extends Model
         'area_of_former_construction',
         'total_area',
         'height',
+        'room'
     ];
 
     public function mapApply(): BelongsTo
