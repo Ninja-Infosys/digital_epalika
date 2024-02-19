@@ -70,6 +70,11 @@ class MapApplicationRequest extends FormRequest
             'applicantDetail.citizenship_no' => ['required'],
             'applicantDetail.citizenship_issue_date' => ['required'],
             'applicantDetail.citizenship_issue_district_id' => ['required', Rule::exists('districts', 'id')],
+            'applicantDetail.province_id' => ['required', Rule::exists('provinces', 'id')],
+            'applicantDetail.district_id' =>['required', Rule::exists('districts', 'id')],
+            'applicantDetail.local_body_id' => ['required', Rule::exists('local_bodies', 'id')],
+            'applicantDetail.ward_no' => ['required'],
+            'applicantDetail.tole' => ['required'],
             'applicantDetail.application_date' => ['nullable'],
             'applicantDetail.signature' => ['nullable','image'],
         ];

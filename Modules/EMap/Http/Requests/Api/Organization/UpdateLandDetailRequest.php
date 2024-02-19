@@ -18,6 +18,7 @@ class UpdateLandDetailRequest extends FormRequest
             'land_use_area_id' => ['required',Rule::exists('land_use_areas', 'id')],
             'ward_no' => ['required', 'integer'],
             'former_ward_no' => ['required', 'string'],
+            'former_local_body'=> ['required', 'string'],
             'tole' => ['nullable'],
             'street_code_no' => ['nullable'],
             'plot_no' => ['required'],

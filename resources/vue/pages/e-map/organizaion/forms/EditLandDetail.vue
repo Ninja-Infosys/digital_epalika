@@ -36,8 +36,9 @@
                         v-model="form.former_local_body"
                         label="२.२ साविक पालिका"
                         placeholder="साविक पालिका"
-                        @validate="validateField('landDetail.former_local_body')"
-                        :error="errors['landDetail.former_local_body']"
+                        @validate="validateField('former_local_body')"
+                        :error="errors.former_local_body"
+                        :disabled="!editFormOpened"
                     />
                 </div>
                 <div class="col-md-4 mb-3">
