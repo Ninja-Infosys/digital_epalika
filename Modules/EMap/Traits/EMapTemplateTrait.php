@@ -98,6 +98,7 @@ trait EMapTemplateTrait
                 'किल्ला' => '[@fourForts]',
                 'जग्गाको चार किल्ला तथा संघियारको नाम ' => '[@nameOfTheFortsAndSanghiars]',
                 'निर्माणको निमित्त प्रस्तावित जग्गाको चार किल्लाको विवरण ' => '[@landFourFortsDetail]',
+                'संधियारको नाम ' => '[@sanghiarsName]',
             ],
         ],
         [
@@ -163,6 +164,7 @@ trait EMapTemplateTrait
                 'निवेदकको जिल्ला' => '[@applicantDetail.district]',
                 'निवेदकको पालिका' => '[@applicantDetail.local_body]',
                 'निवेदकको वडा नं' => '[@applicantDetail.ward_no]',
+                'निवेदकको टोल' => '[@applicantDetail.tole]',
             ],
         ],
         [
@@ -329,6 +331,9 @@ trait EMapTemplateTrait
             ]),
             '[@landFourFortsDetail]' => (string)View::make('emap::inc.land_four_forts_detail', [
                 'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            '[@sanghiarsName]' => (string)View::make('emap::inc.sanghiarsName', [
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
         ];
