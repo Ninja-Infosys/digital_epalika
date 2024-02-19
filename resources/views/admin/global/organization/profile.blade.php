@@ -34,6 +34,7 @@
                         <p class="text-muted mb-2 font-13"><strong>फोन :</strong> <span
                                 class="ms-2">{{$organization->phone}}</span></p>
                     </div>
+                    <a href="{{route('organization.auth-organization.profileDetail',$organization)}}" class="btn btn-outline-primary">संगठन अद्यावधिक</a>
                 </div>
             </div>
         </div> <!-- end col-->
@@ -256,7 +257,7 @@
                                                 <td><img src="{{$taxClearance->document_url}}" alt="" height="200" width="200"></td>
                                             </tr>
                                         @endforeach
-                                     
+
 
                                         </tbody>
 
@@ -264,7 +265,7 @@
                                 </div>
                             </div>
                             @endif
-                            
+
 
 
                             @if($organization->is_organization==1)
@@ -286,7 +287,7 @@
                                                 <td><img src="{{$renewed->document_url}}" alt="" height="200" width="200"></td>
                                             </tr>
                                         @endforeach
-                                     
+
 
                                         </tbody>
 

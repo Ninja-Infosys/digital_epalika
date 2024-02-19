@@ -48,9 +48,13 @@ class OrganizationController extends Controller
                 'comment' => $request->input('comment') ?? null,
             ]);
             if ($organization->status === 'accepted') {
-                $message = "Congratulations, your request was approved. Digital E-palika";
+                $message = "Dear $organization->name , your application has been approved.";
                 (new AakashSms())->sendTextSMS($organization->phone, $message);
                 // Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+            }elseif ($organization->status === 'rejected')
+            {
+                $message = "Dear $organization->name, your application in rejected because of $organization->comment.";
+                (new AakashSms())->sendTextSMS($organization->phone, $message);
             }
         });
 
