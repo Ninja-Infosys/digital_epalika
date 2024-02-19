@@ -117,6 +117,18 @@
 
                 </div>
 
+
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        input-type="text"
+                        v-model="form.landDetail.former_local_body"
+                        label="२.२ साविक पालिका"
+                        placeholder="साविक पालिका"
+                        @validate="validateField('landDetail.former_local_body')"
+                        :error="errors['landDetail.former_local_body']"
+                    />
+                </div>
+
                 <div class="col-md-4 mb-3">
                     <VInput
                         input-type="text"
@@ -306,6 +318,17 @@
                                     :error="errors['landOwner.ward_no']"
                                 />
                             </div>
+                            <div class="col-md-3 mb-3">
+                                <VInput
+                                    input-type="text"
+                                    id="tole"
+                                    v-model="form.landOwner.tole"
+                                    placeholder="टोल"
+                                    label="टोल"
+                                    @validate="validateField('landOwner.tole')"
+                                    :error="errors['landOwner.tole']"
+                                />
+                            </div>
                         </div>
                     </fieldset>
                 </div>
@@ -454,6 +477,18 @@
                                     :disabled="house_owner_as_land_owner"
                                     @validate="validateField('houseOwner.ward_no')"
                                     :error="errors['houseOwner.ward_no']"
+                                />
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <VInput
+                                    input-type="text"
+                                    id="tole"
+                                    v-model="form.houseOwner.tole"
+                                    placeholder="टोल"
+                                    label="टोल"
+                                    @validate="validateField('houseOwner.tole')"
+                                    :error="errors['houseOwner.tole']"
                                 />
                             </div>
                         </div>
@@ -614,8 +649,18 @@ const mapApplicationStore = useMapApplicationStore();
 const {onFileSelected, fileDetail} = useFileUpload();
 
 const {eMapSetting} = storeToRefs(settingStore);
-const {provinces: houseOwnerProvinces, districts: houseOwnerDistricts, localBodies: houseOwnerLocalBodies, wards: houseOwnerWards} = storeToRefs(houseOwnerAddressStore);
-const {provinces: landOwnerProvinces, districts: landOwnerDistricts, localBodies: landOwnerLocalBodies, wards: landOwnerWards} = storeToRefs(landOwnerAddressStore);
+const {
+    provinces: houseOwnerProvinces,
+    districts: houseOwnerDistricts,
+    localBodies: houseOwnerLocalBodies,
+    wards: houseOwnerWards
+} = storeToRefs(houseOwnerAddressStore);
+const {
+    provinces: landOwnerProvinces,
+    districts: landOwnerDistricts,
+    localBodies: landOwnerLocalBodies,
+    wards: landOwnerWards
+} = storeToRefs(landOwnerAddressStore);
 
 onMounted(() => {
     settingStore.getEMapSetting();
@@ -635,6 +680,7 @@ const initialState = {
     longitude: '',
     landDetail: {
         ward_no: '',
+        former_local_body: '',
         former_ward_no: '',
         tole: '',
         plot_no: '',
@@ -649,13 +695,11 @@ const initialState = {
         citizenship_no: '',
         citizenship_issue_date: '',
         citizenship_issue_district_id: '',
-        address: '',
-        local_body:'',
-        province_id:'',
-        district_id:'',
-        local_body_id:'',
-        ward_no:'',
-        tole:'',
+        province_id: '',
+        district_id: '',
+        local_body_id: '',
+        ward_no: '',
+        tole: '',
         photo: '',
     },
     houseOwner: {
@@ -666,13 +710,11 @@ const initialState = {
         citizenship_no: '',
         citizenship_issue_date: '',
         citizenship_issue_district_id: '',
-        address: '',
-        local_body:'',
-        province_id:'',
-        district_id:'',
-        local_body_id:'',
-        ward_no:'',
-        tole:'',
+        province_id: '',
+        district_id: '',
+        local_body_id: '',
+        ward_no: '',
+        tole: '',
         photo: '',
     },
     applicantDetail: {
@@ -711,9 +753,11 @@ const setLandOwnerToHouseOwner = () => {
         form.houseOwner.citizenship_no = form.landOwner.citizenship_no;
         form.houseOwner.citizenship_issue_date = form.landOwner.citizenship_issue_date;
         form.houseOwner.citizenship_issue_district_id = form.landOwner.citizenship_issue_district_id;
-        form.houseOwner.address = form.landOwner.address;
-        form.houseOwner.local_body = form.landOwner.local_body;
+        form.houseOwner.province_id = form.landOwner.province_id;
+        form.houseOwner.district_id = form.landOwner.district_id;
+        form.houseOwner.local_body_id = form.landOwner.local_body_id;
         form.houseOwner.ward_no = form.landOwner.ward_no;
+        form.houseOwner.tole = form.landOwner.tole;
         form.houseOwner.photo = form.landOwner.photo;
     } else {
         form.houseOwner.name = '';
@@ -723,9 +767,11 @@ const setLandOwnerToHouseOwner = () => {
         form.houseOwner.citizenship_no = '';
         form.houseOwner.citizenship_issue_date = '';
         form.houseOwner.citizenship_issue_district_id = '';
-        form.houseOwner.address = '';
-        form.houseOwner.local_body = '';
+        form.houseOwner.province_id = '';
+        form.houseOwner.district_id = '';
+        form.houseOwner.local_body_id = '';
         form.houseOwner.ward_no = '';
+        form.houseOwner.tole = '';
         form.houseOwner.photo = '';
     }
 }
@@ -768,7 +814,8 @@ const validations = object({
     longitude: string().required('अनिवार्य छ'),
     landDetail: object().shape({
         ward_no: string().required('अनिवार्य छ'),
-        former_ward_no: string().required('अनिवार्य छ'),
+        former_local_body: string().nullable(),
+        former_ward_no: string().nullable(),
         tole: string().required('अनिवार्य छ'),
         plot_no: string().required('अनिवार्य छ'),
         unit_value: string().required('अनिवार्य छ'),
@@ -782,8 +829,6 @@ const validations = object({
         citizenship_no: string().required('नागरिकता नम्बर अनिवार्य छ'),
         citizenship_issue_date: string().required('नागरिकता लिएको मिति अनिवार्य छ'),
         citizenship_issue_district_id: string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-        address: string().required('ठेगाना अनिवार्य छ'),
-        local_body: string().required('पालिका अनिवार्य छ'),
         province_id: string().required('प्रदेश अनिवार्य छ'),
         district_id: string().required('जिल्ला अनिवार्य छ'),
         local_body_id: string().required('पालिका अनिवार्य छ'),
@@ -798,8 +843,6 @@ const validations = object({
         citizenship_no: string().required('नागरिकता नम्बर अनिवार्य छ'),
         citizenship_issue_date: string().required('नागरिकता लिएको मिति अनिवार्य छ'),
         citizenship_issue_district_id: string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-        address: string().required('ठेगाना अनिवार्य छ'),
-        local_body: string().required('पालिका अनिवार्य छ'),
         province_id: string().required('प्रदेश अनिवार्य छ'),
         district_id: string().required('जिल्ला अनिवार्य छ'),
         local_body_id: string().required('पालिका अनिवार्य छ'),
