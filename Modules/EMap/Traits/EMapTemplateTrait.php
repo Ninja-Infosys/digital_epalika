@@ -71,7 +71,7 @@ trait EMapTemplateTrait
                 'ठेगाना' => '[@landOwner.address]',
                 'पालिका' => '[@landOwner.local_body]',
                 'वडा नं' => '[@landOwner.ward_no]',
-                'जिल्ला' => '[@landOwner.distict]',
+                'जिल्ला' => '[@landOwner.district]',
                 'टोल' => '[@landOwner.tole]',
             ],
         ],
@@ -88,7 +88,7 @@ trait EMapTemplateTrait
                 'ठेगाना' => '[@houseOwner.address]',
                 'पालिका' => '[@houseOwner.local_body]',
                 'वडा नं' => '[@houseOwner.ward_no]',
-                'जिल्ला' => '[@houseOwner.distict]',
+                'जिल्ला' => '[@houseOwner.district]',
                 'टोल' => '[@houseOwner.tole]',
             ],
         ],
@@ -290,7 +290,7 @@ trait EMapTemplateTrait
             '[@landOwner.address]' => $this->get_nepali_number($this->landOwner->address) ?? '',
             '[@landOwner.local_body]' => $this->get_nepali_number($this->landOwner->local_body) ?? '',
             '[@landOwner.ward_no]' => $this->get_nepali_number($this->landOwner->ward_no) ?? '',
-            '[@landOwner.district_id]' => $this->get_nepali_number($this->landOwner->district?->district) ?? '',
+            '[@landOwner.district]' => $this->get_nepali_number($this->landOwner->district?->district) ?? '',
             '[@landOwner.tole]' => $this->get_nepali_number($this->landOwner->tole) ?? '',
         ];
     }
@@ -308,7 +308,7 @@ trait EMapTemplateTrait
             '[@houseOwner.address]' => $this->get_nepali_number($this->houseOwner->address) ?? '',
             '[@houseOwner.local_body]' => $this->get_nepali_number($this->houseOwner->local_body) ?? '',
             '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner->ward_no) ?? '',
-            '[@houseOwner.district_id]' => $this->get_nepali_number($this->houseOwner->district?->district) ?? '',
+            '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner->district?->district) ?? '',
             '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner->tole) ?? '',
         ];
     }
@@ -340,7 +340,7 @@ trait EMapTemplateTrait
             '[@designerDetail.nec_council_no]' => get_nepali_number($this->$designerDetail->nec_council_no) ?? '',
             '[@designerDetail.local_body_registration_no]' => get_nepali_number($this->$designerDetail->local_body_registration_no) ?? '',
             '[@designerDetail.consulting_firm_name]' => get_nepali_number($this->$designerDetail->consulting_firm_name) ?? '',
-            '[@designerDetail.district_id]' => get_nepali_number($this->$designerDetail->district?->district) ?? '',
+            '[@designerDetail.district]' => get_nepali_number($this->$designerDetail->district?->district) ?? '',
         ];
     }
 
