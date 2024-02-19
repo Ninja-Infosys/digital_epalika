@@ -5,10 +5,13 @@ namespace Modules\EMap\Http\Controllers\Clients\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Modules\EMap\Entities\ApplicantDetail;
 use Modules\EMap\Entities\BuildingDetail;
 use Modules\EMap\Entities\CriteriaDetail;
 use Modules\EMap\Entities\DesignerDetail;
 use Modules\EMap\Entities\FourFort;
+use Modules\EMap\Entities\HouseOwner;
+use Modules\EMap\Entities\LandOwner;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StoreyDetail;
@@ -28,6 +31,9 @@ use Modules\EMap\Http\Requests\Api\Organization\UpdateLandOwnerRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateLandDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateMapApplicationRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateStoreyDetailRequest;
+use Modules\EMap\Transformers\ApplicantDetailResource;
+use Modules\EMap\Transformers\HouseOwnerResource;
+use Modules\EMap\Transformers\LandOwnerResource;
 use Modules\EMap\Transformers\StoreyDetailResource;
 
 class OrganizationApplicationsController extends Controller
@@ -101,18 +107,38 @@ class OrganizationApplicationsController extends Controller
         ]);
     }
 
+    public function landOwnerDetail(MapApply $mapApply)
+    {
+        $mapApply->load('landOwner');
+
+        return LandOwnerResource::make($mapApply->landOwner);
+    }
+
     public function updateLandOwner(UpdateLandOwnerRequest $request, MapApply $mapApply)
     {
-        $mapApply->landOwner()->update($request->validated());
+        LandOwner::updateOrCreate(
+            ['map_apply_id' => $mapApply->id],
+            $request->validated()
+        );
 
         return response()->json([
             'message' => 'जग्गा धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो'
         ]);
     }
 
+    public function houseOwnerDetail(MapApply $mapApply)
+    {
+        $mapApply->load('houseOwner');
+
+        return HouseOwnerResource::make($mapApply->houseOwner);
+    }
+
     public function updateHouseOwner(UpdateHouseOwnerRequest $request, MapApply $mapApply)
     {
-        $mapApply->houseOwner()->update($request->validated());
+        HouseOwner::updateOrCreate(
+            ['map_apply_id' => $mapApply->id],
+            $request->validated()
+        );
 
         return response()->json([
             'message' => 'घर धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो'
@@ -206,9 +232,19 @@ class OrganizationApplicationsController extends Controller
         ]);
     }
 
+    public function applicantDetail(MapApply $mapApply)
+    {
+        $mapApply->load('applicantDetail');
+
+        return ApplicantDetailResource::make($mapApply->applicantDetail);
+    }
+
     public function updateApplicantDetail(UpdateApplicantDetailRequest $request, MapApply $mapApply)
     {
-        $mapApply->applicantDetail()->update($request->validated());
+        ApplicantDetail::updateOrCreate(
+            ['map_apply_id' => $mapApply->id],
+            $request->validated()
+        );
 
         return response()->json([
             'message' => 'निवेदकको विवरण सफलतापूर्वक अद्यावधिक गरियो'

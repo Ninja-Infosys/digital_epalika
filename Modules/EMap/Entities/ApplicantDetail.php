@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Modules\EMap\Enums\ApplicantTypeEnum;
@@ -58,10 +59,9 @@ class ApplicantDetail extends Model
         return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
     }
 
-    public function setSignatureAttribute($value): void
+    public function setSignatureAttribute($value)
     {
-        info($value);
-        if (!empty($value) && !is_string($value)) {
+        if (!empty($value) && $value instanceof UploadedFile) {
             $this->attributes['signature'] = $value->store('e_map/applicant/'.Str::slug($this->attributes['name'], '_').'/signature', 'public');
         }
     }

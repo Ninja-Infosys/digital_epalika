@@ -3,7 +3,6 @@
 namespace Modules\EMap\Http\Requests\Api\Organization;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateHouseOwnerRequest extends FormRequest
 {
@@ -25,6 +24,7 @@ class UpdateHouseOwnerRequest extends FormRequest
             'address' => ['required'],
             'local_body' => ['required'],
             'ward_no' => ['required', 'integer'],
+            'photo' => ['nullable','image']
         ];
     }
 

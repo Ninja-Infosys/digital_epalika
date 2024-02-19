@@ -110,6 +110,14 @@
                         :error="errors.ward_no"
                     />
                 </div>
+                <div class="col-md-4 mb-3">
+                    <VFileUpload
+                        id="house-owner-photo"
+                        v-model="form.photo"
+                        label="घर धनीको फोटो"
+                        :default-photo="houseOwner.data?.photo_url"
+                    />
+                </div>
             </div>
             <div v-if="editFormOpened" class="d-flex justify-content-end">
                 <VButton
@@ -145,6 +153,7 @@ const applicationStore=useApplicationStore();
 const editFormOpened=ref(false);
 
 const {eMapSetting}=storeToRefs(settingStore);
+const {houseOwner}=storeToRefs(applicationStore);
 
 const initialState={
     name:'',
@@ -157,15 +166,21 @@ const initialState={
     address:'',
     local_body:'',
     ward_no:'',
+    photo:'',
 }
 
 const form = reactive({...initialState});
 
 onMounted(()=>{
-    Object.keys(form).forEach(key => {
-        form[key] =props.mapApply.house_owner[key]??'';
-    })
+    setHouseOwnerData();
 })
+
+const setHouseOwnerData=async () => {
+    await applicationStore.getHouseOwner(props.mapApply.id);
+    Object.keys(form).forEach(key => {
+        form[key]=houseOwner.value.data[key]??'';
+    })
+}
 
 const isSubmitting=ref(false);
 
@@ -188,15 +203,26 @@ const saveFormData=async (map_apply_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
+        const formData = new FormData()
+        Object.keys(form).forEach(key => {
+            formData.append(key, form[key]??'');
+        });
         try {
-            let res = await applicationStore.updateHouseOwner(map_apply_id,form);
+            let res = await applicationStore.updateHouseOwner(map_apply_id,formData);
             toast(res.status,res.data.message);
             editFormOpened.value=false;
+            resetForm();
+            await setHouseOwnerData();
         }catch (e) {
             showErrors(e);
         }finally {
             isSubmitting.value=false;
         }
     }
+}
+
+const resetForm = () => {
+    Object.assign(form, {...initialState});
+    errors.value = {};
 }
 </script>

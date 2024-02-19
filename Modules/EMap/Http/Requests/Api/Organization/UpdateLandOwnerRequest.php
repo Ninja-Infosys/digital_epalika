@@ -26,6 +26,7 @@ class UpdateLandOwnerRequest extends FormRequest
             'address' => ['required'],
             'local_body' => ['required'],
             'ward_no' => ['required', 'integer'],
+            'photo' => ['required', 'image'],
         ];
     }
 

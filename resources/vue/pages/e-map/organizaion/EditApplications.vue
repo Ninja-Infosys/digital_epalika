@@ -12,11 +12,11 @@
 
     <EditHouseOwner :map-apply="mapApply" />
 
+    <EditApplicantDetail :map-apply="mapApply" />
+
     <EditFourForts :map-apply="mapApply" />
 
     <EditDesignerDetail :map-apply="mapApply" />
-
-    <EditApplicantDetail :map-apply="mapApply" />
 
     <p class="break-page"></p>
 

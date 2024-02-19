@@ -193,6 +193,21 @@ class AdminStepController extends Controller
         return back();
     }
 
+    public function uploadApprovedDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
+    {
+        $request->validate([
+            'approved_document' => ['required']
+        ]);
+
+        $appliedDocument->update([
+            'approved_document' => $request->file('approved_document')
+        ]);
+
+        toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
+
+        return back();
+    }
+
     public function updateFormStoreStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
     {
         $this->getStatusValidation($request);
@@ -278,6 +293,21 @@ class AdminStepController extends Controller
         });
 
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+        return back();
+    }
+
+    public function uploadFormStoreApprovedDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
+    {
+        $request->validate([
+            'approved_document' => ['required']
+        ]);
+
+        $formStore->update([
+            'approved_document' => $request->file('approved_document')
+        ]);
+
+        toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
+
         return back();
     }
 
@@ -827,7 +857,7 @@ class AdminStepController extends Controller
     {
         $formStore->load('form_data.model');
         $formDataType->load('model');
-        $mapApply = MapApply::where('id',$formStore->map_apply_id)->first() ??'';
+        $mapApply = MapApply::where('id', $formStore->map_apply_id)->first() ?? '';
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {

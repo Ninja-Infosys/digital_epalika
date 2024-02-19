@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="saveFormData(mapApply.id)" class="mb-2">
         <fieldset>
-            <legend> ७. निवेदकको विवरण</legend>
+            <legend> ५. निवेदकको विवरण</legend>
             <button type="button" class="btn btn-xs float-end btn-outline-primary waves-effect waves-light"
                     @click.prevent="editFormOpened=!editFormOpened"><i
                 class="fa fa-pen"></i>
@@ -106,8 +106,27 @@
                     />
                 </div>
             </div>
+            <div class="d-flex justify-content-between">
+                <div class="col-3">
+                    <VNepaliDatePicker
+                        id="application_date"
+                        v-model="form.application_date"
+                        label="निबेदनको मिति"
+                        @validate="validateField('application_date')"
+                        :error="errors.application_date"
+                    />
+                </div>
+                <div class="col-4">
+                    <VFileUpload
+                        id="applicant_signature"
+                        v-model="form.signature"
+                        label="निवेदकको सहि"
+                        :default-photo="applicantDetail.data?.signature_url"
+                    />
+                </div>
+            </div>
 
-            <div v-if="editFormOpened" class="d-flex justify-content-end">
+            <div v-if="editFormOpened" class="d-flex mt-3 justify-content-end">
                 <VButton
                     btn-label="पेश गर्नुहोस्"
                     :loading="isSubmitting"
@@ -141,6 +160,7 @@ const applicationStore=useApplicationStore();
 const editFormOpened=ref(false);
 
 const {eMapSetting}=storeToRefs(settingStore);
+const {applicantDetail}=storeToRefs(applicationStore);
 
 const initialState={
     applicant_type:'',
@@ -158,10 +178,15 @@ const initialState={
 const form = reactive({...initialState});
 
 onMounted(()=>{
-    Object.keys(form).forEach(key => {
-        form[key] =props.mapApply.applicant_detail[key]??'';
-    })
+    setApplicantDetail();
 })
+
+const setApplicantDetail=async () => {
+    await applicationStore.getApplicantDetail(props.mapApply.id);
+    Object.keys(form).forEach(key => {
+        form[key] =applicantDetail.value.data[key]??'';
+    })
+}
 
 const isSubmitting=ref(false);
 
@@ -184,15 +209,26 @@ const saveFormData=async (map_apply_id) => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
+        const formData = new FormData()
+        Object.keys(form).forEach(key => {
+            formData.append(key, form[key]??'');
+        });
         try {
-            let res = await applicationStore.updateApplicantDetail(map_apply_id,form);
+            let res = await applicationStore.updateApplicantDetail(map_apply_id,formData);
             toast(res.status,res.data.message);
             editFormOpened.value=false;
+            resetForm();
+            await setApplicantDetail();
         }catch (e) {
             showErrors(e);
         }finally {
             isSubmitting.value=false;
         }
     }
+}
+
+const resetForm = () => {
+    Object.assign(form, {...initialState});
+    errors.value = {};
 }
 </script>

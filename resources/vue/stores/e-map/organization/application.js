@@ -26,6 +26,18 @@ export const useApplicationStore = defineStore('application', {
             data:[],
             loading:false
         },
+        applicantDetail:{
+            data:{},
+            loading:false
+        },
+        landOwner:{
+            data:{},
+            loading:false
+        },
+        houseOwner:{
+            data:{},
+            loading:false
+        }
     }),
     actions: {
         updateApplicationDetail(map_apply_id,form) {
@@ -79,8 +91,20 @@ export const useApplicationStore = defineStore('application', {
                 })
 
         },
+        getLandOwner(map_apply_id) {
+            this.landOwner.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/land-owner`)
+                .then((res) => {
+                    this.landOwner.data=res.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                }).finally(()=>{
+                    this.landOwner.loading=false;
+                })
+        },
         updateLandOwner(map_apply_id,form) {
-            return axios.put(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-land-owner`,form)
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-land-owner`,form)
                 .then((res) => {
                     return res;
                 })
@@ -89,8 +113,20 @@ export const useApplicationStore = defineStore('application', {
                 })
 
         },
+        getHouseOwner(map_apply_id) {
+            this.houseOwner.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/house-owner`)
+                .then((res) => {
+                    this.houseOwner.data=res.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                }).finally(()=>{
+                    this.houseOwner.loading=false;
+                })
+        },
         updateHouseOwner(map_apply_id,form) {
-            return axios.put(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-house-owner`,form)
+            return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-house-owner`,form)
                 .then((res) => {
                     return res;
                 })
@@ -143,6 +179,18 @@ export const useApplicationStore = defineStore('application', {
                     throw err;
                 })
 
+        },
+        getApplicantDetail(map_apply_id) {
+            this.applicantDetail.loading=true;
+            return axios.get(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/applicant-detail`)
+                .then((res) => {
+                    this.applicantDetail.data=res.data;
+                })
+                .catch((err) => {
+                    showErrors(err);
+                }).finally(()=>{
+                    this.applicantDetail.loading=false;
+                })
         },
         updateApplicantDetail(map_apply_id, form) {
             return axios.post(`${baseUrl}/api/organization/admin/mapApply/${map_apply_id}/update-applicant-detail`,form)

@@ -279,6 +279,14 @@
                         :error="errors['landOwner.ward_no']"
                     />
                 </div>
+                <div class="col-md-4 mb-3">
+                    <VFileUpload
+                        id="landowner-photo"
+                        v-model="form.landOwner.photo"
+                        label="जग्गाधनीको फोटो"
+                        :show-preview-image="false"
+                    />
+                </div>
             </div>
         </div>
 
@@ -395,6 +403,14 @@
                         :disabled="house_owner_as_land_owner"
                         @validate="validateField('houseOwner.ward_no')"
                         :error="errors['houseOwner.ward_no']"
+                    />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <VFileUpload
+                        id="houseowner-photo"
+                        v-model="form.houseOwner.photo"
+                        label="घर धनीको फोटो"
+                        :show-preview-image="false"
                     />
                 </div>
             </div>
@@ -515,9 +531,12 @@
                 />
             </div>
             <div class="col-3">
-                <label class="form-label fw-bolder" for="applicant_signature">निवेदकको सहि</label>
-                <input type="file" id="applicant_signature"
-                       class="form-control form-control-sm">
+                <VFileUpload
+                    id="applicant_signature"
+                    v-model="form.applicantDetail.signature"
+                    label="निवेदकको सहि"
+                    :show-preview-image="false"
+                />
             </div>
         </div>
         <div class="mt-4 d-flex justify-content-end">
@@ -538,9 +557,12 @@ import showErrors from "../../utils/showErrors";
 import {useYup} from "../../utils/yup";
 import {object,string} from "yup";
 import Swal from "sweetalert2";
+import {useFileUpload} from "../../utils/fileUpload";
 
 const settingStore=useSettingStore();
 const mapApplicationStore=useMapApplicationStore();
+const {onFileSelected,fileDetail}=useFileUpload();
+
 const {eMapSetting}=storeToRefs(settingStore);
 
 onMounted(()=>{
@@ -576,6 +598,7 @@ const initialState={
         address:'',
         local_body:'',
         ward_no:'',
+        photo:'',
     },
     houseOwner:{
         name:'',
@@ -588,6 +611,7 @@ const initialState={
         address:'',
         local_body:'',
         ward_no:'',
+        photo:'',
     },
     applicantDetail:{
         applicant_type:'',
@@ -628,6 +652,7 @@ const setLandOwnerToHouseOwner=()=>{
         form.houseOwner.address=form.landOwner.address;
         form.houseOwner.local_body=form.landOwner.local_body;
         form.houseOwner.ward_no=form.landOwner.ward_no;
+        form.houseOwner.photo=form.landOwner.photo;
     }else{
         form.houseOwner.name='';
         form.houseOwner.phone='';
@@ -639,6 +664,7 @@ const setLandOwnerToHouseOwner=()=>{
         form.houseOwner.address='';
         form.houseOwner.local_body='';
         form.houseOwner.ward_no='';
+        form.houseOwner.photo='';
     }
 }
 
@@ -730,20 +756,34 @@ const registerApplication=async () => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
+        const formData = new FormData()
+        Object.keys(form).forEach(key => {
+            if(typeof form[key]==='object' && form[key]!==null){
+                Object.keys(form[key]).forEach(innerKey => {
+                    formData.append(`${key}[${innerKey}]`, form[key][innerKey]);
+                });
+            }else{
+                formData.append(key, form[key]);
+            }
+        });
         try {
-            let res = await mapApplicationStore.storeMapApplication(form);
-            isSubmitting.value=false;
+            let res = await mapApplicationStore.storeMapApplication(formData);
             resetForm();
-            await Swal.fire({
-                title: 'धन्यबाद!!!',
-                text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${res.data.data?.unique_id} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
-                icon: 'success',
-            });
+            toastMessage(res.data.data);
         }catch (e) {
             showErrors(e);
+        }finally {
             isSubmitting.value=false;
         }
     }
+}
+
+const toastMessage=(data)=>{
+    Swal.fire({
+        title: 'धन्यबाद!!!',
+        text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${data?.unique_id} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
+        icon: 'success',
+    });
 }
 
 const resetForm=()=> {
@@ -753,10 +793,16 @@ const resetForm=()=> {
 
 const resetNestedObject=(obj)=> {
     for (const key in obj) {
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
-            resetNestedObject(obj[key]);
-        } else {
-            obj[key] = '';
+        if(obj.hasOwnProperty(key)){
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                if (obj[key] instanceof File){
+                    obj[key]='';
+                }else{
+                    resetNestedObject(obj[key]);
+                }
+            } else {
+                obj[key] = '';
+            }
         }
     }
 }

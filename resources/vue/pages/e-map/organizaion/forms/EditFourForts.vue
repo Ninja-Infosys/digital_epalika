@@ -1,6 +1,6 @@
 <template>
     <fieldset>
-        <legend> ५. चार किल्लाको विवरण </legend>
+        <legend> ६. चार किल्लाको विवरण </legend>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
