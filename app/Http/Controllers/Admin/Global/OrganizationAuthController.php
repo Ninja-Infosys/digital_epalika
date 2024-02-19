@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\Organization;
+use Modules\EMap\Entities\OrganizationDetail;
 use Modules\EMap\Http\Requests\StorePasswordRequest;
 
 class OrganizationAuthController extends Controller
@@ -103,5 +105,44 @@ class OrganizationAuthController extends Controller
         $organization = \auth('organization')->user();
 
         return view('admin.global.organization.profile', compact('organization'));
+    }
+
+    public function profileDetail(Organization $organization)
+    {
+        return view('admin.global.organization.edit', compact('organization'));
+    }
+
+    public function updateOrganization(Request $request,Organization $organization)
+    {
+       $data =  $request->validate([
+            'org_name_ne'=>['required'],
+            'org_name_en'=>['required'],
+            'org_email'=>['required','email'],
+            'org_contact'=>['required'],
+            'org_pan_no'=>['required'],
+            'org_registration_no'=>['required'],
+            'name'=>['required','string', 'max:255'],
+            'email'=>['required','email'],
+            'phone'=>['required'],
+            'logo'=>['nullable','file'],
+            'org_registration_document'=>['nullable','file'],
+            'org_pan_document'=>['nullable','file'],
+        ]);
+        unset($data['name']);
+        unset($data['email']);
+        unset($data['phone']);
+        DB::transaction(function () use ($request,$organization,$data){
+            $organization->update([
+                'name'=>$request->input('name'),
+                'email'=>$request->input('email'),
+                'phone'=>$request->input('phone'),
+                'comment'=>null,
+                'status'=>'pending'
+            ]);
+            $organizationDetail = OrganizationDetail::find($organization->id);
+            $organizationDetail->update($data);
+        });
+        toast('संगठन सफलतापूर्वक अद्यावधिक गरियो' ,'success');
+        return back();
     }
 }

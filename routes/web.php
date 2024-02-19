@@ -119,6 +119,8 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::post('password/store', [OrganizationAuthController::class, 'store'])->name('password.store')->middleware(['password.check']);
     Route::prefix('profile')->group(function () {
         Route::get('/', [OrganizationAuthController::class, 'profile'])->name('auth-organization.profile');
+        Route::get('organization/{organization}/profileDetail', [OrganizationAuthController::class, 'profileDetail'])->name('auth-organization.profileDetail');
+        Route::put('organization/{organization}/updateOrganization', [OrganizationAuthController::class, 'updateOrganization'])->name('auth-organization.update');
     });
     Route::middleware("auth:organization")->group(function () {
         Route::post('logout', [OrganizationAuthController::class, 'logout'])->name('logout');
