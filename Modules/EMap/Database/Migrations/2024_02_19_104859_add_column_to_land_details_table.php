@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -14,8 +13,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('land_details', function (Blueprint $table) {
-            $table->string('former_local_body');
-            $table->string('road_name');
+            $table->string('former_local_body')->nullable();
+            $table->string('road_name')->nullable();
         });
     }
 
@@ -27,6 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('land_details', function (Blueprint $table) {
+            $table->dropColumn(['former_local_body', 'road_name']);
         });
     }
 };
