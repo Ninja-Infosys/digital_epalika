@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\Global\OrganizationAuthController;
 use App\Http\Controllers\Admin\Global\OrganizationDashboardController;
 use App\Http\Controllers\Admin\Global\RenewedController;
@@ -125,5 +126,18 @@ Route::prefix('organization')->as('organization.')->group(function () {
         Route::resource('taxClearance', TaxClearanceController::class);
         Route::resource('renewed', RenewedController::class);
     });
-
 });
+
+Route::prefix('address')
+    ->as('address.')
+    ->controller(AddressController::class)
+    ->group(function () {
+        Route::get('province', 'provinces')->name('province.index');
+        Route::get('province/{province}', 'province')->name('province.show');
+        Route::get('district', 'districts')->name('district.index');
+        Route::get('district/{district}', 'district')->name('district.show');
+        Route::get('localBody', 'localBodies')->name('localBody.index');
+        Route::get('localBody/{localBody}', 'localBody')->name('localBody.show');
+        Route::get('toles', 'toles')->name('tole.index');
+        Route::get('tole/{tole}', 'tole')->name('tole.show');
+    });

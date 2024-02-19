@@ -12,6 +12,8 @@ class LocalBodyResource extends JsonResource
             'id' => $this->id ?? '',
             'local_body' => $this->local_body ?? '',
             'local_body_en' => $this->local_body_en ?? '',
+            'ward_no'=>$this->wards ?? 0,
+            'wards'=>$this->ward_no ?? [],
         ];
     }
 }

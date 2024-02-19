@@ -39,12 +39,12 @@
                                :id="type.value" :value="type.value">
                         <label class="form-check-label"
                                :for="type.value">
-                            {{type.label}}
+                            {{ type.label }}
                         </label>
                     </div>
                 </div>
                 <p v-if="errors.construction_type" class="text-danger">
-                    {{errors.construction_type}}
+                    {{ errors.construction_type }}
                 </p>
             </div>
             <div class="mb-1">
@@ -106,15 +106,15 @@
             </legend>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                     <VInput
+                    <VInput
                         input-type="number"
                         v-model="form.landDetail.ward_no"
                         label="२.१ वडा नं"
                         placeholder="वडा नं"
                         @validate="validateField('landDetail.ward_no')"
                         :error="errors['landDetail.ward_no']"
-                    />  
-                   
+                    />
+
                 </div>
 
                 <div class="col-md-4 mb-3">
@@ -177,12 +177,12 @@
                                :value="ownerType.value">
                         <label class="form-check-label"
                                :for="ownerType.value">
-                            {{ownerType.label}}
+                            {{ ownerType.label }}
                         </label>
                     </div>
                 </div>
                 <p v-if="errors['landOwner.land_owner_type']" class="text-danger">
-                    {{errors['landOwner.land_owner_type']}}
+                    {{ errors['landOwner.land_owner_type'] }}
                 </p>
             </div>
             <div class="row">
@@ -252,40 +252,62 @@
                     />
                 </div>
                 <div class="col-md-4 mb-3">
-                    <VInput
-                        id="landowner-address"
-                        v-model="form.landOwner.address"
-                        label="ठेगाना"
-                        @validate="validateField('landOwner.address')"
-                        :error="errors['landOwner.address']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        id="landowner-local_body"
-                        v-model="form.landOwner.local_body"
-                        label="पालिका"
-                        @validate="validateField('landOwner.local_body')"
-                        :error="errors['landOwner.local_body']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        input-type="number"
-                        id="landowner-ward_no"
-                        v-model="form.landOwner.ward_no"
-                        label="वडा नं."
-                        @validate="validateField('landOwner.ward_no')"
-                        :error="errors['landOwner.ward_no']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
                     <VFileUpload
                         id="landowner-photo"
                         v-model="form.landOwner.photo"
                         label="जग्गाधनीको फोटो"
                         :show-preview-image="false"
                     />
+                </div>
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>ठेगाना</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-province_id"
+                                    v-model="form.landOwner.province_id"
+                                    :options="landOwnerProvinces??[]"
+                                    name-prop="province"
+                                    label="प्रदेश"
+                                    @validate="validateField('landOwner.province_id')"
+                                    :error="errors['landOwner.province_id']"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-district_id"
+                                    v-model="form.landOwner.district_id"
+                                    :options="landOwnerDistricts??[]"
+                                    name-prop="district"
+                                    label="जिल्ला"
+                                    @validate="validateField('landOwner.district_id')"
+                                    :error="errors['landOwner.district_id']"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-local_body_id"
+                                    v-model="form.landOwner.local_body_id"
+                                    :options="landOwnerLocalBodies??[]"
+                                    name-prop="local_body"
+                                    label="पालिका"
+                                    @validate="validateField('landOwner.local_body_id')"
+                                    :error="errors['landOwner.local_body_id']"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="landOwner-ward_no"
+                                    v-model="form.landOwner.ward_no"
+                                    :options="landOwnerWards??[]"
+                                    label="वार्ड"
+                                    @validate="validateField('landOwner.ward_no')"
+                                    :error="errors['landOwner.ward_no']"
+                                />
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
         </div>
@@ -296,7 +318,8 @@
             </legend>
             <div class="d-flex align-items-center gap-2 mb-3">
                 <label for="detail_check">के घर धनीको विवरण र जग्गाधनीको विवरण एउटै हो ?</label>
-                <button type="button" @click.prevent="house_owner_as_land_owner=!house_owner_as_land_owner" class="btn btn-link btn-sm border-none"
+                <button type="button" @click.prevent="house_owner_as_land_owner=!house_owner_as_land_owner"
+                        class="btn btn-link btn-sm border-none"
                         id="detail_check">
                     <i :class="'fa fa-2x fa-toggle-'+(house_owner_as_land_owner ? 'on' : 'off')"></i>
                 </button>
@@ -375,37 +398,6 @@
                     />
                 </div>
                 <div class="col-md-4 mb-3">
-                    <VInput
-                        id="houseOwner-address"
-                        v-model="form.houseOwner.address"
-                        label="ठेगाना"
-                        :disabled="house_owner_as_land_owner"
-                        @validate="validateField('houseOwner.address')"
-                        :error="errors['houseOwner.address']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        id="houseOwner-local_body"
-                        v-model="form.houseOwner.local_body"
-                        label="पालिका"
-                        :disabled="house_owner_as_land_owner"
-                        @validate="validateField('houseOwner.local_body')"
-                        :error="errors['houseOwner.local_body']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        input-type="number"
-                        id="houseOwner-ward_no"
-                        v-model="form.houseOwner.ward_no"
-                        label="वडा नं."
-                        :disabled="house_owner_as_land_owner"
-                        @validate="validateField('houseOwner.ward_no')"
-                        :error="errors['houseOwner.ward_no']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
                     <VFileUpload
                         id="houseowner-photo"
                         v-model="form.houseOwner.photo"
@@ -413,6 +405,61 @@
                         :show-preview-image="false"
                     />
                 </div>
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>ठेगाना</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-province_id"
+                                    v-model="form.houseOwner.province_id"
+                                    :options="houseOwnerProvinces??[]"
+                                    name-prop="province"
+                                    label="प्रदेश"
+                                    :disabled="house_owner_as_land_owner"
+                                    @validate="validateField('houseOwner.province_id')"
+                                    :error="errors['houseOwner.province_id']"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-district_id"
+                                    v-model="form.houseOwner.district_id"
+                                    :options="houseOwnerDistricts??[]"
+                                    name-prop="district"
+                                    label="जिल्ला"
+                                    :disabled="house_owner_as_land_owner"
+                                    @validate="validateField('houseOwner.district_id')"
+                                    :error="errors['houseOwner.district_id']"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-local_body_id"
+                                    v-model="form.houseOwner.local_body_id"
+                                    :options="houseOwnerLocalBodies??[]"
+                                    name-prop="local_body"
+                                    label="पालिका"
+                                    :disabled="house_owner_as_land_owner"
+                                    @validate="validateField('houseOwner.local_body_id')"
+                                    :error="errors['houseOwner.local_body_id']"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <VMultiSelect
+                                    id="houseOwner-ward_no"
+                                    v-model="form.houseOwner.ward_no"
+                                    :options="houseOwnerWards??[]"
+                                    label="वार्ड"
+                                    :disabled="house_owner_as_land_owner"
+                                    @validate="validateField('houseOwner.ward_no')"
+                                    :error="errors['houseOwner.ward_no']"
+                                />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
             </div>
         </div>
 
@@ -433,7 +480,7 @@
                     </div>
                 </div>
                 <p v-if="errors['applicantDetail.applicant_type']" class="text-danger">
-                    {{errors['applicantDetail.applicant_type']}}
+                    {{ errors['applicantDetail.applicant_type'] }}
                 </p>
             </div>
             <div class="mb-3">
@@ -449,7 +496,7 @@
                     </div>
                 </div>
                 <p v-if="errors['applicantDetail.relation_with_owner']" class="text-danger">
-                    {{errors['applicantDetail.relation_with_owner']}}
+                    {{ errors['applicantDetail.relation_with_owner'] }}
                 </p>
             </div>
             <div class="row">
@@ -555,144 +602,159 @@ import {useMapApplicationStore} from "../../stores/e-map/mapApplication";
 import {storeToRefs} from "pinia";
 import showErrors from "../../utils/showErrors";
 import {useYup} from "../../utils/yup";
-import {object,string} from "yup";
+import {object, string} from "yup";
 import Swal from "sweetalert2";
 import {useFileUpload} from "../../utils/fileUpload";
+import {useAddressStore} from "../../stores/address";
 
-const settingStore=useSettingStore();
-const mapApplicationStore=useMapApplicationStore();
-const {onFileSelected,fileDetail}=useFileUpload();
+const settingStore = useSettingStore();
+const houseOwnerAddressStore = useAddressStore();
+const landOwnerAddressStore = useAddressStore();
+const mapApplicationStore = useMapApplicationStore();
+const {onFileSelected, fileDetail} = useFileUpload();
 
-const {eMapSetting}=storeToRefs(settingStore);
+const {eMapSetting} = storeToRefs(settingStore);
+const {provinces: houseOwnerProvinces, districts: houseOwnerDistricts, localBodies: houseOwnerLocalBodies, wards: houseOwnerWards} = storeToRefs(houseOwnerAddressStore);
+const {provinces: landOwnerProvinces, districts: landOwnerDistricts, localBodies: landOwnerLocalBodies, wards: landOwnerWards} = storeToRefs(landOwnerAddressStore);
 
-onMounted(()=>{
+onMounted(() => {
     settingStore.getEMapSetting();
+    houseOwnerAddressStore.getProvinces();
+    landOwnerAddressStore.getProvinces();
 })
 
-const house_owner_as_land_owner=ref(false);
+const house_owner_as_land_owner = ref(false);
 
-const initialState={
-    organization_id:'',
-    application_type:'',
-    construction_type:'',
-    current_storey:'',
-    future_storey:'',
-    latitude:'',
-    longitude:'',
-    landDetail:{
+const initialState = {
+    organization_id: '',
+    application_type: '',
+    construction_type: '',
+    current_storey: '',
+    future_storey: '',
+    latitude: '',
+    longitude: '',
+    landDetail: {
+        ward_no: '',
+        former_ward_no: '',
+        tole: '',
+        plot_no: '',
+        unit_value: '',
+    },
+    landOwner: {
+        land_owner_type: '',
+        name: '',
+        phone: '',
+        father_name: '',
+        grandfather_name: '',
+        citizenship_no: '',
+        citizenship_issue_date: '',
+        citizenship_issue_district_id: '',
+        address: '',
+        local_body:'',
+        province_id:'',
+        district_id:'',
+        local_body_id:'',
         ward_no:'',
-        former_ward_no:'',
         tole:'',
-        plot_no:'',
-        unit_value:'',
+        photo: '',
     },
-    landOwner:{
-        land_owner_type:'',
-        name:'',
-        phone:'',
-        father_name:'',
-        grandfather_name:'',
-        citizenship_no:'',
-        citizenship_issue_date:'',
-        citizenship_issue_district_id:'',
-        address:'',
+    houseOwner: {
+        name: '',
+        phone: '',
+        father_name: '',
+        grandfather_name: '',
+        citizenship_no: '',
+        citizenship_issue_date: '',
+        citizenship_issue_district_id: '',
+        address: '',
         local_body:'',
+        province_id:'',
+        district_id:'',
+        local_body_id:'',
         ward_no:'',
-        photo:'',
+        tole:'',
+        photo: '',
     },
-    houseOwner:{
-        name:'',
-        phone:'',
-        father_name:'',
-        grandfather_name:'',
-        citizenship_no:'',
-        citizenship_issue_date:'',
-        citizenship_issue_district_id:'',
-        address:'',
-        local_body:'',
-        ward_no:'',
-        photo:'',
-    },
-    applicantDetail:{
-        applicant_type:'',
-        relation_with_owner:'',
-        name:'',
-        phone:'',
-        father_name:'',
-        citizenship_no:'',
-        citizenship_issue_date:'',
-        citizenship_issue_district_id:'',
-        application_date:'',
-        signature:'',
+    applicantDetail: {
+        applicant_type: '',
+        relation_with_owner: '',
+        name: '',
+        phone: '',
+        father_name: '',
+        citizenship_no: '',
+        citizenship_issue_date: '',
+        citizenship_issue_district_id: '',
+        application_date: '',
+        signature: '',
     }
 }
 
 const form = reactive({...initialState})
 
-const isSubmitting=ref(false);
-const isApplicantSame=ref(false);
+const isSubmitting = ref(false);
+const isApplicantSame = ref(false);
 
-watch(()=>house_owner_as_land_owner.value,()=>{
+watch(() => house_owner_as_land_owner.value, () => {
     setLandOwnerToHouseOwner();
 })
 
-watch(()=>form.landOwner,()=>{
+watch(() => form.landOwner, () => {
     setLandOwnerToHouseOwner();
-},{deep:true})
+}, {deep: true})
 
-const setLandOwnerToHouseOwner=()=>{
-    if(house_owner_as_land_owner.value){
-        form.houseOwner.name=form.landOwner.name;
-        form.houseOwner.phone=form.landOwner.phone;
-        form.houseOwner.father_name=form.landOwner.father_name;
-        form.houseOwner.grandfather_name=form.landOwner.grandfather_name;
-        form.houseOwner.citizenship_no=form.landOwner.citizenship_no;
-        form.houseOwner.citizenship_issue_date=form.landOwner.citizenship_issue_date;
-        form.houseOwner.citizenship_issue_district_id=form.landOwner.citizenship_issue_district_id;
-        form.houseOwner.address=form.landOwner.address;
-        form.houseOwner.local_body=form.landOwner.local_body;
-        form.houseOwner.ward_no=form.landOwner.ward_no;
-        form.houseOwner.photo=form.landOwner.photo;
-    }else{
-        form.houseOwner.name='';
-        form.houseOwner.phone='';
-        form.houseOwner.father_name='';
-        form.houseOwner.grandfather_name='';
-        form.houseOwner.citizenship_no='';
-        form.houseOwner.citizenship_issue_date='';
-        form.houseOwner.citizenship_issue_district_id='';
-        form.houseOwner.address='';
-        form.houseOwner.local_body='';
-        form.houseOwner.ward_no='';
-        form.houseOwner.photo='';
+const setLandOwnerToHouseOwner = () => {
+    if (house_owner_as_land_owner.value) {
+        form.houseOwner.name = form.landOwner.name;
+        form.houseOwner.phone = form.landOwner.phone;
+        form.houseOwner.father_name = form.landOwner.father_name;
+        form.houseOwner.grandfather_name = form.landOwner.grandfather_name;
+        form.houseOwner.citizenship_no = form.landOwner.citizenship_no;
+        form.houseOwner.citizenship_issue_date = form.landOwner.citizenship_issue_date;
+        form.houseOwner.citizenship_issue_district_id = form.landOwner.citizenship_issue_district_id;
+        form.houseOwner.address = form.landOwner.address;
+        form.houseOwner.local_body = form.landOwner.local_body;
+        form.houseOwner.ward_no = form.landOwner.ward_no;
+        form.houseOwner.photo = form.landOwner.photo;
+    } else {
+        form.houseOwner.name = '';
+        form.houseOwner.phone = '';
+        form.houseOwner.father_name = '';
+        form.houseOwner.grandfather_name = '';
+        form.houseOwner.citizenship_no = '';
+        form.houseOwner.citizenship_issue_date = '';
+        form.houseOwner.citizenship_issue_district_id = '';
+        form.houseOwner.address = '';
+        form.houseOwner.local_body = '';
+        form.houseOwner.ward_no = '';
+        form.houseOwner.photo = '';
     }
 }
 
-watch(()=>form.applicantDetail.applicant_type,(type)=>{
-    if(type==='house owner'){
-        isApplicantSame.value=true;
-        form.applicantDetail.name=form.houseOwner.name;
-        form.applicantDetail.phone=form.houseOwner.phone;
-        form.applicantDetail.father_name=form.houseOwner.father_name;
-        form.applicantDetail.citizenship_no=form.houseOwner.citizenship_no;
-        form.applicantDetail.citizenship_issue_date=form.houseOwner.citizenship_issue_date;
-        form.applicantDetail.citizenship_issue_district_id=form.houseOwner.citizenship_issue_district_id;
-    }else if (type==='land owner'){
-        isApplicantSame.value=true;
-        form.applicantDetail.name=form.landOwner.name;
-        form.applicantDetail.phone=form.landOwner.phone;
-        form.applicantDetail.father_name=form.landOwner.father_name;
-        form.applicantDetail.citizenship_no=form.landOwner.citizenship_no;
-        form.applicantDetail.citizenship_issue_date=form.landOwner.citizenship_issue_date;
-        form.applicantDetail.citizenship_issue_district_id=form.landOwner.citizenship_issue_district_id;
-    }else{
-        isApplicantSame.value=false;
-        form.applicantDetail.name='';
-        form.applicantDetail.phone='';
-        form.applicantDetail.father_name='';
-        form.applicantDetail.citizenship_no='';
-        form.applicantDetail.citizenship_issue_date='';
-        form.applicantDetail.citizenship_issue_district_id='';
+watch(() => form.applicantDetail.applicant_type, (type) => {
+    if (type === 'house owner') {
+        isApplicantSame.value = true;
+        form.applicantDetail.name = form.houseOwner.name;
+        form.applicantDetail.phone = form.houseOwner.phone;
+        form.applicantDetail.father_name = form.houseOwner.father_name;
+        form.applicantDetail.citizenship_no = form.houseOwner.citizenship_no;
+        form.applicantDetail.citizenship_issue_date = form.houseOwner.citizenship_issue_date;
+        form.applicantDetail.citizenship_issue_district_id = form.houseOwner.citizenship_issue_district_id;
+    } else if (type === 'land owner') {
+        isApplicantSame.value = true;
+        form.applicantDetail.name = form.landOwner.name;
+        form.applicantDetail.phone = form.landOwner.phone;
+        form.applicantDetail.father_name = form.landOwner.father_name;
+        form.applicantDetail.citizenship_no = form.landOwner.citizenship_no;
+        form.applicantDetail.citizenship_issue_date = form.landOwner.citizenship_issue_date;
+        form.applicantDetail.citizenship_issue_district_id = form.landOwner.citizenship_issue_district_id;
+    } else {
+        isApplicantSame.value = false;
+        form.applicantDetail.name = '';
+        form.applicantDetail.phone = '';
+        form.applicantDetail.father_name = '';
+        form.applicantDetail.citizenship_no = '';
+        form.applicantDetail.citizenship_issue_date = '';
+        form.applicantDetail.citizenship_issue_district_id = '';
     }
 })
 
@@ -700,69 +762,77 @@ const validations = object({
     organization_id: string().required('अनिवार्य छ'),
     application_type: string().required('अनिवार्य छ'),
     construction_type: string().required('निर्माण कार्यको किसिम अनिवार्य छ |'),
-    current_storey:string().required('तल्ला संख्या अनिवार्य छ|'),
-    future_storey:string().required('अनिवार्य छ'),
-    latitude:string().required('अनिवार्य छ'),
-    longitude:string().required('अनिवार्य छ'),
-    landDetail:object().shape({
-        ward_no:string().required('अनिवार्य छ'),
-        former_ward_no:string().required('अनिवार्य छ'),
-        tole:string().required('अनिवार्य छ'),
-        plot_no:string().required('अनिवार्य छ'),
-        unit_value:string().required('अनिवार्य छ'),
+    current_storey: string().required('तल्ला संख्या अनिवार्य छ|'),
+    future_storey: string().required('अनिवार्य छ'),
+    latitude: string().required('अनिवार्य छ'),
+    longitude: string().required('अनिवार्य छ'),
+    landDetail: object().shape({
+        ward_no: string().required('अनिवार्य छ'),
+        former_ward_no: string().required('अनिवार्य छ'),
+        tole: string().required('अनिवार्य छ'),
+        plot_no: string().required('अनिवार्य छ'),
+        unit_value: string().required('अनिवार्य छ'),
     }),
-    landOwner:object().shape({
-        land_owner_type:string().required('जग्गा धनीको किसिम अनिवार्य छ'),
-        name:string().required('जग्गा धनीको नाम अनिवार्य छ'),
-        phone:string(),
-        father_name:string().required('बुवाको नाम अनिवार्य छ'),
-        grandfather_name:string().required('हजुरबुबाको नाम अनिवार्य छ'),
-        citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
-        citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
-        citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-        address:string().required('ठेगाना अनिवार्य छ'),
-        local_body:string().required('पालिका अनिवार्य छ'),
-        ward_no:string().required('वडा नं. अनिवार्य छ'),
+    landOwner: object().shape({
+        land_owner_type: string().required('जग्गा धनीको किसिम अनिवार्य छ'),
+        name: string().required('जग्गा धनीको नाम अनिवार्य छ'),
+        phone: string(),
+        father_name: string().required('बुवाको नाम अनिवार्य छ'),
+        grandfather_name: string().required('हजुरबुबाको नाम अनिवार्य छ'),
+        citizenship_no: string().required('नागरिकता नम्बर अनिवार्य छ'),
+        citizenship_issue_date: string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+        citizenship_issue_district_id: string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+        address: string().required('ठेगाना अनिवार्य छ'),
+        local_body: string().required('पालिका अनिवार्य छ'),
+        province_id: string().required('प्रदेश अनिवार्य छ'),
+        district_id: string().required('जिल्ला अनिवार्य छ'),
+        local_body_id: string().required('पालिका अनिवार्य छ'),
+        ward_no: string().required('वडा नं. अनिवार्य छ'),
+        tole: string().required('टोल अनिवार्य छ'),
     }),
-    houseOwner:object().shape({
-        name:string().required('घर धनीको नाम अनिवार्य छ'),
-        phone:string(),
-        father_name:string().required('बुवाको नाम अनिवार्य छ'),
-        grandfather_name:string().required('हजुरबुबाको नाम अनिवार्य छ'),
-        citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
-        citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
-        citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-        address:string().required('ठेगाना अनिवार्य छ'),
-        local_body:string().required('पालिका अनिवार्य छ'),
-        ward_no:string().required('वडा नं. अनिवार्य छ'),
+    houseOwner: object().shape({
+        name: string().required('घर धनीको नाम अनिवार्य छ'),
+        phone: string(),
+        father_name: string().required('बुवाको नाम अनिवार्य छ'),
+        grandfather_name: string().required('हजुरबुबाको नाम अनिवार्य छ'),
+        citizenship_no: string().required('नागरिकता नम्बर अनिवार्य छ'),
+        citizenship_issue_date: string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+        citizenship_issue_district_id: string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+        address: string().required('ठेगाना अनिवार्य छ'),
+        local_body: string().required('पालिका अनिवार्य छ'),
+        province_id: string().required('प्रदेश अनिवार्य छ'),
+        district_id: string().required('जिल्ला अनिवार्य छ'),
+        local_body_id: string().required('पालिका अनिवार्य छ'),
+        ward_no: string().required('वडा नं. अनिवार्य छ'),
+        tole: string().required('टोल अनिवार्य छ'),
     }),
-    applicantDetail:object().shape({
-        applicant_type:string().required('निवेदकको प्रकार अनिवार्य छ'),
-        relation_with_owner:string().required('सम्बन्ध अनिवार्य छ'),
-        name:string().required('निवेदकको नाम अनिवार्य छ'),
-        phone:string().required('फोन न. अनिवार्य छ'),
-        father_name:string().required('बुवाको नाम अनिवार्य छ'),
-        citizenship_no:string().required('नागरिकता नम्बर अनिवार्य छ'),
-        citizenship_issue_date:string().required('नागरिकता लिएको मिति अनिवार्य छ'),
-        citizenship_issue_district_id:string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
-        application_date:string(),
+    applicantDetail: object().shape({
+        applicant_type: string().required('निवेदकको प्रकार अनिवार्य छ'),
+        relation_with_owner: string().required('सम्बन्ध अनिवार्य छ'),
+        name: string().required('निवेदकको नाम अनिवार्य छ'),
+        phone: string().required('फोन न. अनिवार्य छ'),
+        father_name: string().required('बुवाको नाम अनिवार्य छ'),
+        citizenship_no: string().required('नागरिकता नम्बर अनिवार्य छ'),
+        citizenship_issue_date: string().required('नागरिकता लिएको मिति अनिवार्य छ'),
+        citizenship_issue_district_id: string().required('नागरिकता लिएको जिल्ला अनिवार्य छ'),
+        application_date: string(),
         //signature:object(),
     })
 });
 
 const {errors, validateField, validateForm} = useYup(form, validations);
 
-const registerApplication=async () => {
+const registerApplication = async () => {
     let validated = await validateForm(validations, form)
     if (validated) {
         isSubmitting.value = true;
         const formData = new FormData()
         Object.keys(form).forEach(key => {
-            if(typeof form[key]==='object' && form[key]!==null){
+            if (typeof form[key] === 'object' && form[key] !== null) {
                 Object.keys(form[key]).forEach(innerKey => {
                     formData.append(`${key}[${innerKey}]`, form[key][innerKey]);
                 });
-            }else{
+            } else {
                 formData.append(key, form[key]);
             }
         });
@@ -770,15 +840,15 @@ const registerApplication=async () => {
             let res = await mapApplicationStore.storeMapApplication(formData);
             resetForm();
             toastMessage(res.data.data);
-        }catch (e) {
+        } catch (e) {
             showErrors(e);
-        }finally {
-            isSubmitting.value=false;
+        } finally {
+            isSubmitting.value = false;
         }
     }
 }
 
-const toastMessage=(data)=>{
+const toastMessage = (data) => {
     Swal.fire({
         title: 'धन्यबाद!!!',
         text: `तपाईंको फारम सफलतापूर्वक पेश भएको छ, तपाईंको सबमिशन नं. ${data?.unique_id} हो। कृपया भविष्यमा प्रयोगको लागि सबमिशन नं. सुरक्षित राख्नुहोस् ।`,
@@ -786,18 +856,18 @@ const toastMessage=(data)=>{
     });
 }
 
-const resetForm=()=> {
+const resetForm = () => {
     errors.value = {};
     resetNestedObject(form);
 }
 
-const resetNestedObject=(obj)=> {
+const resetNestedObject = (obj) => {
     for (const key in obj) {
-        if(obj.hasOwnProperty(key)){
+        if (obj.hasOwnProperty(key)) {
             if (typeof obj[key] === 'object' && obj[key] !== null) {
-                if (obj[key] instanceof File){
-                    obj[key]='';
-                }else{
+                if (obj[key] instanceof File) {
+                    obj[key] = '';
+                } else {
                     resetNestedObject(obj[key]);
                 }
             } else {
@@ -807,4 +877,34 @@ const resetNestedObject=(obj)=> {
     }
 }
 
+watch(() => form.houseOwner.province_id, (province_id) => {
+    if (province_id) {
+        houseOwnerAddressStore.getProvince(province_id)
+    }
+})
+watch(() => form.houseOwner.district_id, (district_id) => {
+    if (district_id) {
+        houseOwnerAddressStore.getDistrict(district_id)
+    }
+})
+watch(() => form.houseOwner.local_body_id, (local_body_id) => {
+    if (local_body_id) {
+        houseOwnerAddressStore.getLocalBody(local_body_id)
+    }
+})
+watch(() => form.landOwner.province_id, (province_id) => {
+    if (province_id) {
+        landOwnerAddressStore.getProvince(province_id)
+    }
+})
+watch(() => form.landOwner.district_id, (district_id) => {
+    if (district_id) {
+        landOwnerAddressStore.getDistrict(district_id)
+    }
+})
+watch(() => form.landOwner.local_body_id, (local_body_id) => {
+    if (local_body_id) {
+        landOwnerAddressStore.getLocalBody(local_body_id)
+    }
+})
 </script>

@@ -12,6 +12,7 @@ class DistrictResource extends JsonResource
             'id' => $this->id ?? '',
             'district' => $this->district ?? '',
             'district_en' => $this->district_en ?? '',
+            'localBodies'=>LocalBodyResource::collection($this->whenLoaded('localBodies'))
         ];
     }
 }
