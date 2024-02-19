@@ -19,6 +19,7 @@ class HouseOwner extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $with=['province','district','localBody'];
     protected $dates = [
         'created_at',
         'updated_at',

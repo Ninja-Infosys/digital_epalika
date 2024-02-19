@@ -17,6 +17,7 @@ class LandOwner extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $with=['province','district','localBody'];
 
     protected $dates = [
         'created_at',

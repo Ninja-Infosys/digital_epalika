@@ -220,6 +220,8 @@ class HouseOwnerArchiveController extends Controller
            !empty($houseOwnerArchive)? $houseOwnerArchive->address : $mapApply->houseOwner->address ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->local_body : $mapApply->houseOwner->local_body ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->ward_no : $mapApply->houseOwner->ward_no ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->district : $mapApply->houseOwner->district?->district ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->tole : $mapApply->houseOwner->tole ?? '',
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
@@ -397,7 +399,7 @@ class HouseOwnerArchiveController extends Controller
             '[@designerDetail.nec_council_no]',
             '[@designerDetail.local_body_registration_no]',
             '[@designerDetail.consulting_firm_name]',
-            '[@designerDetail.district_id]',
+            '[@designerDetail.district]',
 
             //supervisorDetails
 

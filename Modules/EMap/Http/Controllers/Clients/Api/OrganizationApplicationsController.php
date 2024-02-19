@@ -195,7 +195,7 @@ class OrganizationApplicationsController extends Controller
         $designerDetails = collect();
 
         foreach (PostsEnum::cases() as $postsEnum) {
-            $designer = $mapApply->designerDetails?->where('post', $postsEnum)?->first();
+            $designer = $mapApply->designerDetails->load('province','district','localBody')?->where('post', $postsEnum)?->first();
 
             $designerDetails->push([
                 'post' => $postsEnum->value,
