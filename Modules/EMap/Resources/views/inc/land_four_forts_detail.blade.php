@@ -1,4 +1,4 @@
-<table style="border-collapse: collapse;border: 1px solid;width: 100%;">
+<table style="border-collapse: collapse;border: 1px solid;width: 100%; margin-right:50px;">
     <thead>
     <tr>
         <th>दिशा</th>

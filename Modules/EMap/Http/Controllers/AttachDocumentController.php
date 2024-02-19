@@ -413,6 +413,10 @@ class AttachDocumentController extends Controller
                 'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
+            (string)View::make('emap::inc.land_four_forts_detail', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
 
             //applicantDetail
             get_nepali_number($mapApply->applicantDetail->applicant_type?->label()) ?? '',
@@ -560,6 +564,8 @@ class AttachDocumentController extends Controller
 
             '[@fourForts]',
             '[@nameOfTheFortsAndSanghiars]',
+            '[@landFourFortsDetail]',
+
 
             //applicantDetail
 
