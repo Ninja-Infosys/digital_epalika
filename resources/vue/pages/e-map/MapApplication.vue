@@ -117,6 +117,18 @@
 
                 </div>
 
+
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        input-type="text"
+                        v-model="form.landDetail.former_local_body"
+                        label="२.२ साविक पालिका"
+                        placeholder="साविक पालिका"
+                        @validate="validateField('landDetail.former_local_body')"
+                        :error="errors['landDetail.former_local_body']"
+                    />
+                </div>
+
                 <div class="col-md-4 mb-3">
                     <VInput
                         input-type="text"
@@ -306,6 +318,17 @@
                                     :error="errors['landOwner.ward_no']"
                                 />
                             </div>
+                            <div class="col-md-3 mb-3">
+                                <VInput
+                                    input-type="text"
+                                    id="tole"
+                                    v-model="form.landOwner.tole"
+                                    placeholder="टोल"
+                                    label="टोल"
+                                    @validate="validateField('landOwner.tole')"
+                                    :error="errors['landOwner.tole']"
+                                />
+                            </div>
                         </div>
                     </fieldset>
                 </div>
@@ -454,6 +477,18 @@
                                     :disabled="house_owner_as_land_owner"
                                     @validate="validateField('houseOwner.ward_no')"
                                     :error="errors['houseOwner.ward_no']"
+                                />
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <VInput
+                                    input-type="text"
+                                    id="tole"
+                                    v-model="form.houseOwner.tole"
+                                    placeholder="टोल"
+                                    label="टोल"
+                                    @validate="validateField('houseOwner.tole')"
+                                    :error="errors['houseOwner.tole']"
                                 />
                             </div>
                         </div>
@@ -645,6 +680,7 @@ const initialState = {
     longitude: '',
     landDetail: {
         ward_no: '',
+        former_local_body: '',
         former_ward_no: '',
         tole: '',
         plot_no: '',
@@ -778,7 +814,8 @@ const validations = object({
     longitude: string().required('अनिवार्य छ'),
     landDetail: object().shape({
         ward_no: string().required('अनिवार्य छ'),
-        former_ward_no: string().required('अनिवार्य छ'),
+        former_local_body: string().nullable(),
+        former_ward_no: string().nullable(),
         tole: string().required('अनिवार्य छ'),
         plot_no: string().required('अनिवार्य छ'),
         unit_value: string().required('अनिवार्य छ'),
