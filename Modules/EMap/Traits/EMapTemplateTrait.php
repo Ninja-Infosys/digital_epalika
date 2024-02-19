@@ -164,6 +164,7 @@ trait EMapTemplateTrait
                 'निवेदकको जिल्ला' => '[@applicantDetail.district]',
                 'निवेदकको पालिका' => '[@applicantDetail.local_body]',
                 'निवेदकको वडा नं' => '[@applicantDetail.ward_no]',
+                'निवेदकको टोल' => '[@applicantDetail.tole]',
             ],
         ],
         [

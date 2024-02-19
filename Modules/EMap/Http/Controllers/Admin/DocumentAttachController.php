@@ -197,6 +197,13 @@ class DocumentAttachController extends Controller
             //header
             letterHead(),
             letterHead('letter_head'),
+            officeSetting()->name ?? '',
+            officeSetting()->site_address ?? '',
+            officeSetting()->province?->province ?? '',
+            officeSetting()->district?->district ?? '',
+            officeSetting()->localBody?->local_body ?? '',
+            officeSetting()->ward_no ??'',
+            get_nepali_number($this->get_today_nepali_date()),
 
             //mapApply
             get_nepali_number($mapApply->registration_no) ?? '',
