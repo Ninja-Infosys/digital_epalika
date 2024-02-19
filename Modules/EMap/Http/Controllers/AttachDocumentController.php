@@ -402,7 +402,7 @@ class AttachDocumentController extends Controller
             get_nepali_number($mapApply->houseOwner->address) ?? '',
             get_nepali_number($mapApply->houseOwner->local_body) ?? '',
             get_nepali_number($mapApply->houseOwner->ward_no) ?? '',
-            get_nepali_number( $mapApply->houseOwner->district?->district) ?? '',
+            get_nepali_number($mapApply->houseOwner->district->district) ?? '',
             get_nepali_number( $mapApply->houseOwner->tole) ?? '',
 
             //FourForts
@@ -533,7 +533,7 @@ class AttachDocumentController extends Controller
             '[@landOwner.address]',
             '[@landOwner.local_body]',
             '[@landOwner.ward_no]',
-            '[@landOwner.district_id]',
+            '[@landOwner.district]',
             '[@landOwner.tole]',
 
             //houseOwner
@@ -548,7 +548,7 @@ class AttachDocumentController extends Controller
             '[@houseOwner.address]',
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
-            '[@houseOwner.district_id]',
+            '[@houseOwner.district]',
             '[@houseOwner.tole]',
 
 
@@ -587,7 +587,7 @@ class AttachDocumentController extends Controller
             '[@designerDetail.nec_council_no]',
             '[@designerDetail.local_body_registration_no]',
             '[@designerDetail.consulting_firm_name]',
-            '[@designerDetail.district_id]',
+            '[@designerDetail.district]',
 
 
             //supervisorDetails
@@ -601,7 +601,7 @@ class AttachDocumentController extends Controller
             '[@supervisorDetail.nec_council_no]',
             '[@supervisorDetail.local_body_registration_no]',
             '[@supervisorDetail.consulting_firm_name]',
-            '[@supervisorDetail.district_id]',
+            '[@supervisorDetail.district]',
 
 
             //ContractorDetails
@@ -615,7 +615,7 @@ class AttachDocumentController extends Controller
             '[@contractorDetail.nec_council_no]',
             '[@contractorDetail.local_body_registration_no]',
             '[@contractorDetail.consulting_firm_name]',
-            '[@contractorDetail.district_id]',
+            '[@contractorDetail.district]',
 
         ];
     }

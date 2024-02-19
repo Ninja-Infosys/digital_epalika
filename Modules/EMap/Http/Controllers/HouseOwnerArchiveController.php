@@ -203,7 +203,7 @@ class HouseOwnerArchiveController extends Controller
             get_nepali_number($mapApply->landOwner->address) ?? '',
             get_nepali_number($mapApply->landOwner->local_body) ?? '',
            get_nepali_number( $mapApply->landOwner->ward_no) ?? '',
-           get_nepali_number( $mapApply->landOwner->district?->district) ?? '',
+           get_nepali_number( $mapApply->landOwner->district->district) ,
            get_nepali_number( $mapApply->landOwner->tole) ?? '',
 
             //houseOwner
@@ -220,7 +220,7 @@ class HouseOwnerArchiveController extends Controller
            !empty($houseOwnerArchive)? $houseOwnerArchive->address : $mapApply->houseOwner->address ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->local_body : $mapApply->houseOwner->local_body ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->ward_no : $mapApply->houseOwner->ward_no ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->district : $mapApply->houseOwner->district?->district ?? '',
+           !empty($houseOwnerArchive)? $houseOwnerArchive->district_id : $mapApply->houseOwner->district?->district ?? '',
            !empty($houseOwnerArchive)? $houseOwnerArchive->tole : $mapApply->houseOwner->tole ?? '',
 
             //FourForts
@@ -347,7 +347,7 @@ class HouseOwnerArchiveController extends Controller
             '[@landOwner.address]',
             '[@landOwner.local_body]',
             '[@landOwner.ward_no]',
-            '[@landOwner.district_id]',
+            '[@landOwner.district]',
             '[@landOwner.tole]',
 
             //houseOwner
@@ -362,7 +362,7 @@ class HouseOwnerArchiveController extends Controller
             '[@houseOwner.address]',
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
-            '[@houseOwner.district_id]',
+            '[@houseOwner.district]',
             '[@houseOwner.tole]',
 
             //FourForts

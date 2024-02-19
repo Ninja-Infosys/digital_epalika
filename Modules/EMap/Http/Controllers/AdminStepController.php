@@ -799,7 +799,7 @@ class AdminStepController extends Controller
             '[@landOwner.address]',
             '[@landOwner.local_body]',
             '[@landOwner.ward_no]',
-            '[@landOwner.district_id]',
+            '[@landOwner.district]',
             '[@landOwner.tole]',
 
             //houseOwner
@@ -814,7 +814,7 @@ class AdminStepController extends Controller
             '[@houseOwner.address]',
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
-            '[@houseOwner.district_id]',
+            '[@houseOwner.district]',
             '[@houseOwner.tole]',
 
 
@@ -853,7 +853,7 @@ class AdminStepController extends Controller
             '[@designerDetail.nec_council_no]',
             '[@designerDetail.local_body_registration_no]',
             '[@designerDetail.consulting_firm_name]',
-            '[@designerDetail.district_id]',
+            '[@designerDetail.district]',
 
 
             //supervisorDetails
