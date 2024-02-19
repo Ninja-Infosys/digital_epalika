@@ -684,6 +684,9 @@ class AdminStepController extends Controller
                 'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
+            (string)View::make('emap::inc.sanghiarsName', [
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
 
             //applicantDetail
             get_nepali_number($mapApply->applicantDetail->applicant_type?->label()) ?? '',
@@ -831,6 +834,7 @@ class AdminStepController extends Controller
             '[@fourForts]',
             '[@nameOfTheFortsAndSanghiars]',
             '[@landFourFortsDetail]',
+            '[@sanghiarsName]',
 
             //applicantDetail
 

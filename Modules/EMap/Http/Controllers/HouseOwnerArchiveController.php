@@ -162,7 +162,7 @@ class HouseOwnerArchiveController extends Controller
             officeSetting()->province?->province ?? '',
             officeSetting()->district?->district ?? '',
             officeSetting()->localBody?->local_body ?? '',
-            auth('mobile-user')->users?->ward_no ??'',
+            officeSetting()->ward_no ??'',
             get_nepali_number($this->get_today_nepali_date()),
 
             //mapApply
@@ -233,6 +233,9 @@ class HouseOwnerArchiveController extends Controller
             ]),
             (string)View::make('emap::inc.land_four_forts_detail', [
                 'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            (string)View::make('emap::inc.sanghiarsName', [
                 'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
             //applicantDetail
@@ -378,6 +381,7 @@ class HouseOwnerArchiveController extends Controller
             '[@fourForts]',
             '[@nameOfTheFortsAndSanghiars]',
             '[@landFourFortsDetail]',
+            '[@sanghiarsName]',
 
 
             //applicantDetail
