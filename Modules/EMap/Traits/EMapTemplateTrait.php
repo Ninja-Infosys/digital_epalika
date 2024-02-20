@@ -21,6 +21,12 @@ trait EMapTemplateTrait
                 'आजको मिति' => '[@today_date]',
                 'कार्यालय लेटर हेड' => '[@letterHead]',
                 'कार्यालय लेटर हेड (अंग्रेजीमा)' => '[@letterHeadEn]',
+                'कार्यालयको नाम' => '[@officeName]',
+                'कार्यालयको ठेगाना' => '[@officeAddress]',
+                'कार्यालयको प्रदेश' => '[@officeProvince]',
+                'कार्यालयको जिल्ला' => '[@officeDistrict]',
+                'कार्यालयको पालिका' => '[@officeLocalBody]',
+                'कार्यालयको वडा नं' => '[@officeWardNo]',
                 'दर्ता नम्बर' => '[@registration_no]',
                 'दर्ता मिति' => '[@registration_date]',
                 'निर्माण कार्यको किसिम' => '[@construction_type]',
@@ -47,6 +53,8 @@ trait EMapTemplateTrait
                 'जग्गा कित्ता नं.' => '[@landDetail.plot_no]',
                 'क्षेत्रफल' => '[@landDetail.area]',
                 'भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR)' => '[@landDetail.percentage_of_area_covered_by_building]',
+                'साविक पालिका' => '[@landDetail.former_local_body]',
+                'सडकको नाम' => '[@landDetail.roadName]',
             ],
         ],
         [
@@ -60,9 +68,11 @@ trait EMapTemplateTrait
                 'नागरिकता लिएको जिल्ला' => '[@landOwner.citizenship_issue_district]',
                 'नागरिकत नम्बर' => '[@landOwner.citizenship_no]',
                 'नागरिकता लिएको मिति' => '[@landOwner.citizenship_issue_date]',
-                'ठेगाना' => '[@landOwner.address]',
+                'प्रदेश' => '[@landOwner.province]',
+                'जिल्ला' => '[@landOwner.district]',
                 'पालिका' => '[@landOwner.local_body]',
                 'वडा नं' => '[@landOwner.ward_no]',
+                'टोल' => '[@landOwner.tole]',
             ],
         ],
         [
@@ -75,9 +85,11 @@ trait EMapTemplateTrait
                 'नागरिकता लिएको जिल्ला' => '[@houseOwner.citizenship_issue_district]',
                 'नागरिकत नम्बर' => '[@houseOwner.citizenship_no]',
                 'नागरिकता लिएको मिति' => '[@houseOwner.citizenship_issue_date]',
-                'ठेगाना' => '[@houseOwner.address]',
+                'प्रदेश' => '[@houseOwner.province]',
+                'जिल्ला' => '[@houseOwner.district]',
                 'पालिका' => '[@houseOwner.local_body]',
                 'वडा नं' => '[@houseOwner.ward_no]',
+                'टोल' => '[@houseOwner.tole]',
             ],
         ],
         [
@@ -85,6 +97,8 @@ trait EMapTemplateTrait
             'data' => [
                 'किल्ला' => '[@fourForts]',
                 'जग्गाको चार किल्ला तथा संघियारको नाम ' => '[@nameOfTheFortsAndSanghiars]',
+                'निर्माणको निमित्त प्रस्तावित जग्गाको चार किल्लाको विवरण ' => '[@landFourFortsDetail]',
+                'संधियारको नाम ' => '[@sanghiarsName]',
             ],
         ],
         [
@@ -99,6 +113,7 @@ trait EMapTemplateTrait
                 'NEC Council No.' => '[@designerDetail.nec_council_no]',
                 'पालिकाको दर्ता नं.' => '[@designerDetail.local_body_registration_no]',
                 'कन्सल्टिंग फर्मबाट भए सो को नाम ' => '[@designerDetail.consulting_firm_name]',
+                'जिल्ला ' => '[@designerDetail.district]',
             ],
         ],
         [
@@ -113,6 +128,8 @@ trait EMapTemplateTrait
                 'NEC Council No.' => '[@supervisorDetail.nec_council_no]',
                 'पालिकाको दर्ता नं.' => '[@supervisorDetail.local_body_registration_no]',
                 'कन्सल्टिंग फर्मबाट भए सो को नाम ' => '[@supervisorDetail.consulting_firm_name]',
+                'जिल्ला ' => '[@supervisorDetail.district]',
+
             ],
         ],
         [
@@ -127,6 +144,8 @@ trait EMapTemplateTrait
                 'NEC Council No.' => '[@contractorDetail.nec_council_no]',
                 'पालिकाको दर्ता नं.' => '[@contractorDetail.local_body_registration_no]',
                 'कन्सल्टिंग फर्मबाट भए सो को नाम ' => '[@contractorDetail.consulting_firm_name]',
+                'जिल्ला ' => '[@contractorDetail.district]',
+
             ],
         ],
         [
@@ -140,7 +159,12 @@ trait EMapTemplateTrait
                 'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
                 'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
                 'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
-                'निवेदकको सहि' => '[@applicantDetail.signature_url]',
+                'निवेदकको सहि' => '[@applicantDetail.signature]',
+                'निवेदकको प्रदेश' => '[@applicantDetail.province]',
+                'निवेदकको जिल्ला' => '[@applicantDetail.district]',
+                'निवेदकको पालिका' => '[@applicantDetail.local_body]',
+                'निवेदकको वडा नं' => '[@applicantDetail.ward_no]',
+                'निवेदकको टोल' => '[@applicantDetail.tole]',
             ],
         ],
         [
@@ -221,6 +245,12 @@ trait EMapTemplateTrait
         return [
             '[@letterHead]' => $this->letterHead() ?? '',
             '[@letterHeadEn]' => $this->letterHeadEn() ?? '',
+            '[@officeName]' => $this->officeName() ??'',
+            '[@officeAddress]' => $this->officeAddress() ??'',
+            '[@officeProvince]' => $this->officeProvince() ?? '',
+            '[@officeDistrict]' => $this->officeDistrict() ??'',
+            '[@officeLocalBody]' => $this->officeLocalBody() ??'',
+            '[@officeWardNo]' => $this->officeWardNo() ?? '',
             '[@registration_no]' => $this->get_nepali_number($this->registration_no) ?? '',
             '[@registration_date]' => $this->get_nepali_number($this->registration_date) ?? '',
             '[@construction_type]' => $this->get_nepali_number(optional($this->construction_type)->label()) ?? '',
@@ -247,6 +277,8 @@ trait EMapTemplateTrait
             '[@landDetail.plot_no]' => $this->get_nepali_number($this->landDetail->plot_no)?? '',
             '[@landDetail.area]' => $this->get_nepali_number($this->landDetail->unit_value)?? '',
             '[@landDetail.percentage_of_area_covered_by_building]' => $this->get_nepali_number($this->landDetail->percentage_of_area_covered_by_building)?? '',
+            '[@landDetail.former_local_body]' => $this->get_nepali_number($this->landDetail->former_local_body)?? '',
+            '[@landDetail.road_name]' => $this->get_nepali_number($this->landDetail->road_name)?? '',
         ];
     }
 
@@ -264,6 +296,8 @@ trait EMapTemplateTrait
             '[@landOwner.address]' => $this->get_nepali_number($this->landOwner->address) ?? '',
             '[@landOwner.local_body]' => $this->get_nepali_number($this->landOwner->local_body) ?? '',
             '[@landOwner.ward_no]' => $this->get_nepali_number($this->landOwner->ward_no) ?? '',
+            '[@landOwner.district]' => $this->get_nepali_number($this->landOwner->district?->district) ?? '',
+            '[@landOwner.tole]' => $this->get_nepali_number($this->landOwner->tole) ?? '',
         ];
     }
 
@@ -280,6 +314,8 @@ trait EMapTemplateTrait
             '[@houseOwner.address]' => $this->get_nepali_number($this->houseOwner->address) ?? '',
             '[@houseOwner.local_body]' => $this->get_nepali_number($this->houseOwner->local_body) ?? '',
             '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner->ward_no) ?? '',
+            '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner->district?->district) ?? '',
+            '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner->tole) ?? '',
         ];
     }
 
@@ -291,6 +327,13 @@ trait EMapTemplateTrait
             ]),
             '[@nameOfTheFortsAndSanghiars]' => (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
                 'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            '[@landFourFortsDetail]' => (string)View::make('emap::inc.land_four_forts_detail', [
+                'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            '[@sanghiarsName]' => (string)View::make('emap::inc.sanghiarsName', [
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
         ];
@@ -310,6 +353,7 @@ trait EMapTemplateTrait
             '[@designerDetail.nec_council_no]' => get_nepali_number($this->$designerDetail->nec_council_no) ?? '',
             '[@designerDetail.local_body_registration_no]' => get_nepali_number($this->$designerDetail->local_body_registration_no) ?? '',
             '[@designerDetail.consulting_firm_name]' => get_nepali_number($this->$designerDetail->consulting_firm_name) ?? '',
+            '[@designerDetail.district]' => get_nepali_number($this->$designerDetail->district?->district) ?? '',
         ];
     }
 
@@ -327,6 +371,7 @@ trait EMapTemplateTrait
             '[@supervisorDetail.nec_council_no]' => get_nepali_number($this->$supervisorDetail->nec_council_no) ?? '',
             '[@supervisorDetail.local_body_registration_no]' => get_nepali_number($this->$supervisorDetail->local_body_registration_no) ?? '',
             '[@supervisorDetail.consulting_firm_name]' => get_nepali_number($this->$supervisorDetail->consulting_firm_name) ?? '',
+            '[@supervisorDetail.district]' => get_nepali_number($this->$supervisorDetail->district?->district) ?? '',
         ];
     }
 
@@ -344,6 +389,7 @@ trait EMapTemplateTrait
             '[@contractorDetail.nec_council_no]' => get_nepali_number($this->$contractorDetail->nec_council_no) ?? '',
             '[@contractorDetail.local_body_registration_no]' => get_nepali_number($this->$contractorDetail->local_body_registration_no) ?? '',
             '[@contractorDetail.consulting_firm_name]' => get_nepali_number($this->$contractorDetail->consulting_firm_name) ?? '',
+            '[@contractorDetail.district]' => get_nepali_number($this->$contractorDetail->district?->district) ?? '',
         ];
     }
 
@@ -358,7 +404,12 @@ trait EMapTemplateTrait
             '[@applicantDetail.citizenship_issue_district]' => $this->get_nepali_number($this->applicantDetail->citizenshipIssueDistrict->district) ?? '',
             '[@applicantDetail.citizenship_no]' => $this->get_nepali_number($this->applicantDetail->citizenship_no) ?? '',
             '[@applicantDetail.citizenship_issue_date]' => $this->get_nepali_number($this->applicantDetail->citizenship_issue_date) ?? '',
-            '[@applicantDetail.signature_url]' => $this->get_nepali_number($this->applicantDetail->signature_url) ?? '',
+            '[@applicantDetail.signature]' => $this->get_nepali_number($this->applicantDetail->signature) ?? '',
+            '[@applicantDetail.province]' => $this->get_nepali_number($this->applicantDetail->province?->province) ?? '',
+            '[@applicantDetail.district]' => $this->get_nepali_number($this->applicantDetail->district?->district) ?? '',
+            '[@applicantDetail.local_body]' => $this->get_nepali_number($this->applicantDetail->localBody?->local_body) ?? '',
+            '[@applicantDetail.ward_no]' => $this->get_nepali_number($this->applicantDetail->ward_no) ?? '',
+            '[@applicantDetail.tole]' => $this->get_nepali_number($this->applicantDetail->tole) ?? '',
         ];
     }
 

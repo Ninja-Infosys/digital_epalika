@@ -21,6 +21,11 @@ class ApplicantDetailResource extends JsonResource
             'citizenship_issue_date' => $this->citizenship_issue_date ?? '',
             'application_date' => $this->application_date ?? '',
             'signature_url' => $this->signature_url ?? '',
+            'province_id'=>$this->province_id ?? '',
+            'district_id'=>$this->district_id ?? '',
+            'local_body_id'=>$this->local_body_id ?? '',
+            'tole'=>$this->tole ?? '',
+            'ward_no'=> $this->ward_no ?? ''
         ];
     }
 }

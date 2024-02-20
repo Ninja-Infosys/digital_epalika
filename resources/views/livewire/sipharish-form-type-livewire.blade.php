@@ -78,7 +78,7 @@
             </div>
 
             <div class="col-md-4 mb-2">
-                <label for="need_approval" class="form-label">सुइकृती चहिन्छ <span
+                <label for="need_approval" class="form-label">स्वीकृति चहिन्छ <span
                             class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
                     <select id="need_approval" name="need_approval"

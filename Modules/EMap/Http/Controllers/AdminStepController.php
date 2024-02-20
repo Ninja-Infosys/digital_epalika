@@ -37,20 +37,19 @@ class AdminStepController extends Controller
 
         $mapApply->load('houseOwner');
 
-        $documentTypeModels = collect([AppliedDocument::class,FormStore::class,PaymentStore::class]);
+        $documentTypeModels = collect([AppliedDocument::class, FormStore::class, PaymentStore::class]);
 
         $documents = collect([]);
 
-        foreach($documentTypeModels as $documentModel) {
+        foreach ($documentTypeModels as $documentModel) {
             $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
-            foreach($typeDocuments as $document) {
+            foreach ($typeDocuments as $document) {
                 $documents->push([
                     'document_type' => class_basename($documentModel),
                     'form_id' => $document->form_id,
                     'status' => $document->status?->value
                 ]);
             }
-
         }
 
         $order = 0;
@@ -60,16 +59,15 @@ class AdminStepController extends Controller
             ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                if($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                if ($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
                     $order = $form->order + 1;
-                } elseif($key == 0) {
+                } elseif ($key == 0) {
                     $order = $form->order;
                     $allApproved = false;
-
                 } else {
                     $allApproved = false;
                 }
-                if($allApproved) {
+                if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
                 } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
@@ -279,11 +277,11 @@ class AdminStepController extends Controller
                     'status' => $request->input('status')
                 ]);
                 $formStore->formStoreStatuses()->create([
-                   "form_store_id" => $formStore->id,
-                   "status" => $request->input('status'),
-                   "comment" => $request->input('comment'),
-                   "data" => $formStore->data,
-                   "fields" => $formStore->fields,
+                    "form_store_id" => $formStore->id,
+                    "status" => $request->input('status'),
+                    "comment" => $request->input('comment'),
+                    "data" => $formStore->data,
+                    "fields" => $formStore->fields,
                     "document" => $formStore->document
                 ]);
 
@@ -441,7 +439,6 @@ class AdminStepController extends Controller
                     'data' => $data['data'],
                     'fields' => $form->fields ?? ''
                 ]);
-
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -515,8 +512,6 @@ class AdminStepController extends Controller
                     }
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
-
-
             });
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
@@ -529,7 +524,7 @@ class AdminStepController extends Controller
                         'data' => $data['data'],
                         'document' => null
                     ]);
-                    if($formStore->formStoreStatuses->count() > 0) {
+                    if ($formStore->formStoreStatuses->count() > 0) {
                         FormStoreStatus::where('form_store_id', $formStore->id)
                             ->orderBy('id', 'desc')
                             ->first()?->update([
@@ -556,7 +551,6 @@ class AdminStepController extends Controller
                     ]);
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
-
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         } elseif ($formDataType->type == FormTypeEnum::PAYMENT) {
@@ -614,6 +608,12 @@ class AdminStepController extends Controller
             //header
             letterHead(),
             letterHeadEn(),
+            officeSetting()->name ?? '',
+            officeSetting()->site_address ?? '',
+            officeSetting()->province?->province ?? '',
+            officeSetting()->district?->district ?? '',
+            officeSetting()->localBody?->local_body ?? '',
+            officeSetting()->ward_no ??'',
             get_nepali_number($this->get_today_nepali_date()),
 
             //mapApply
@@ -638,6 +638,8 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->landDetail->plot_no) ?? '',
             get_nepali_number($mapApply->landDetail->unit_value) ?? '',
             get_nepali_number($mapApply->landDetail->percentage_of_area_covered_by_building) ?? '',
+            get_nepali_number($mapApply->landDetail->former_local_body) ?? '',
+            get_nepali_number($mapApply->landDetail->road_name) ?? '',
 
             //landowner
 
@@ -649,9 +651,11 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->landOwner->citizenship_no) ?? '',
             get_nepali_number($mapApply->landOwner->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->landOwner->address) ?? '',
-            get_nepali_number($mapApply->landOwner->local_body) ?? '',
+            get_nepali_number( $mapApply->landOwner->province?->province) ?? '',
+            get_nepali_number( $mapApply->landOwner->district?->district) ?? '',
+            get_nepali_number($mapApply->landOwner->localBody?->local_body) ?? '',
             get_nepali_number($mapApply->landOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->landOwner->tole) ?? '',
 
             //houseOwner
 
@@ -662,9 +666,11 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->houseOwner->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->houseOwner->citizenship_no) ?? '',
             get_nepali_number($mapApply->houseOwner->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->houseOwner->address) ?? '',
-            get_nepali_number($mapApply->houseOwner->local_body) ?? '',
+            get_nepali_number( $mapApply->houseOwner->province?->province) ?? '',
+            get_nepali_number( $mapApply->houseOwner->district?->district) ?? '',
+            get_nepali_number($mapApply->houseOwner->localBody?->local_body) ?? '',
             get_nepali_number($mapApply->houseOwner->ward_no) ?? '',
+            get_nepali_number( $mapApply->houseOwner->tole) ?? '',
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
@@ -672,6 +678,13 @@ class AdminStepController extends Controller
             ]),
             (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
                 'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            (string)View::make('emap::inc.land_four_forts_detail', [
+                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+            (string)View::make('emap::inc.sanghiarsName', [
                 'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
 
@@ -684,7 +697,12 @@ class AdminStepController extends Controller
             get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_no) ?? '',
             get_nepali_number($mapApply->applicantDetail->citizenship_issue_date) ?? '',
-            get_nepali_number($mapApply->applicantDetail->signature_url) ?? '',
+            get_nepali_number($mapApply->applicantDetail->signature) ?? '',
+            get_nepali_number($mapApply->applicantDetail->province?->province) ?? '',
+            get_nepali_number($mapApply->applicantDetail->district?->district) ?? '',
+            get_nepali_number($mapApply->applicantDetail->localBody?->local_body) ?? '',
+            get_nepali_number($mapApply->applicantDetail->ward_no) ?? '',
+            get_nepali_number($mapApply->applicantDetail->tole) ?? '',
 
             //criteria detail
 
@@ -708,6 +726,8 @@ class AdminStepController extends Controller
             get_nepali_number($designerDetail->nec_council_no) ?? '',
             get_nepali_number($designerDetail->local_body_registration_no) ?? '',
             get_nepali_number($designerDetail->consulting_firm_name) ?? '',
+            get_nepali_number($designerDetail->district?->district) ?? '',
+
 
             //supervisorDetails
 
@@ -720,6 +740,8 @@ class AdminStepController extends Controller
             get_nepali_number($supervisorDetail->nec_council_no) ?? '',
             get_nepali_number($supervisorDetail->local_body_registration_no) ?? '',
             get_nepali_number($supervisorDetail->consulting_firm_name) ?? '',
+            get_nepali_number($supervisorDetail->district?->district) ?? '',
+
 
             //ContractorDetails
 
@@ -732,6 +754,8 @@ class AdminStepController extends Controller
             get_nepali_number($contractorDetail->nec_council_no) ?? '',
             get_nepali_number($contractorDetail->local_body_registration_no) ?? '',
             get_nepali_number($contractorDetail->consulting_firm_name) ?? '',
+            get_nepali_number($contractorDetail->district?->district) ?? '',
+
         ];
     }
 
@@ -742,6 +766,12 @@ class AdminStepController extends Controller
 
             '[@letterHead]',
             '[@letterHeadEn]',
+            '[@officeName]',
+            '[@officeAddress]',
+            '[@officeProvince]',
+            '[@officeDistrict]',
+            '[@officeLocalBody]',
+            '[@officeWardNo]',
             '[@today_date]',
             //mapApply
 
@@ -766,7 +796,8 @@ class AdminStepController extends Controller
             '[@landDetail.plot_no]',
             '[@landDetail.area]',
             '[@landDetail.percentage_of_area_covered_by_building]',
-
+            '[@landDetail.former_local_body]',
+            '[@landDetail.road_name]',
             //landOwner
             '[@landOwner.land_owner_type]',
             '[@landOwner.name]',
@@ -776,9 +807,11 @@ class AdminStepController extends Controller
             '[@landOwner.citizenship_issue_district]',
             '[@landOwner.citizenship_no]',
             '[@landOwner.citizenship_issue_date]',
-            '[@landOwner.address]',
+            '[@landOwner.province]',
+            '[@landOwner.district]',
             '[@landOwner.local_body]',
             '[@landOwner.ward_no]',
+            '[@landOwner.tole]',
 
             //houseOwner
 
@@ -789,14 +822,19 @@ class AdminStepController extends Controller
             '[@houseOwner.citizenship_issue_district]',
             '[@houseOwner.citizenship_no]',
             '[@houseOwner.citizenship_issue_date]',
-            '[@houseOwner.address]',
+            '[@houseOwner.province]',
+            '[@houseOwner.district]',
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
+            '[@houseOwner.tole]',
+
 
             //FourForts
 
             '[@fourForts]',
             '[@nameOfTheFortsAndSanghiars]',
+            '[@landFourFortsDetail]',
+            '[@sanghiarsName]',
 
             //applicantDetail
 
@@ -808,7 +846,13 @@ class AdminStepController extends Controller
             '[@applicantDetail.citizenship_issue_district]',
             '[@applicantDetail.citizenship_no]',
             '[@applicantDetail.citizenship_issue_date]',
-            '[@applicantDetail.signature_url]',
+            '[@applicantDetail.signature]',
+            '[@applicantDetail.province]',
+            '[@applicantDetail.district]',
+            '[@applicantDetail.local_body]',
+            '[@applicantDetail.ward_no]',
+            '[@applicantDetail.tole]',
+
 
             //criteria detail
             '[@criteriaDetails]',
@@ -826,6 +870,8 @@ class AdminStepController extends Controller
             '[@designerDetail.nec_council_no]',
             '[@designerDetail.local_body_registration_no]',
             '[@designerDetail.consulting_firm_name]',
+            '[@designerDetail.district]',
+
 
             //supervisorDetails
 
@@ -838,6 +884,8 @@ class AdminStepController extends Controller
             '[@supervisorDetail.nec_council_no]',
             '[@supervisorDetail.local_body_registration_no]',
             '[@supervisorDetail.consulting_firm_name]',
+            '[@supervisorDetail.district]',
+
 
             //ContractorDetails
 
@@ -849,7 +897,9 @@ class AdminStepController extends Controller
             '[@contractorDetail.ward_no]',
             '[@contractorDetail.nec_council_no]',
             '[@contractorDetail.local_body_registration_no]',
-            '[@contractorDetail.consulting_firm_name]'
+            '[@contractorDetail.consulting_firm_name]',
+            '[@contractorDetail.district]',
+
         ];
     }
 
@@ -872,7 +922,7 @@ class AdminStepController extends Controller
     public function uploadDocument(Request $request, FormStore $formStore)
     {
         $data =  $request->validate([
-            'document' => ['required','file']
+            'document' => ['required', 'file']
         ]);
 
         DB::transaction(function () use ($data, $request, $formStore) {
@@ -887,7 +937,6 @@ class AdminStepController extends Controller
         });
         toast('File Upload Successfully', 'success');
         return back();
-
     }
 
     public function viewDocumentDetail(MapApply $mapApply, Form $form)
@@ -895,5 +944,4 @@ class AdminStepController extends Controller
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
         return view('emap::admin.step.documentDetail', compact('mapApply', 'form'));
     }
-
 }

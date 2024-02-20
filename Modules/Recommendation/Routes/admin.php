@@ -69,3 +69,6 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('recommendationDetail/{recommendationDetail}/updateStatus', [RecommendationDetailController::class,'updateStatus'])->name('recommendationDetail.updateStatus');
     Route::resource('recommendationDetail', RecommendationDetailController::class);
 });
+Route::get('searchForm', function () {
+    return view('livewire.search-livewire');
+});

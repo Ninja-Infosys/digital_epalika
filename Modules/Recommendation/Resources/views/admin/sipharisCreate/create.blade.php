@@ -27,10 +27,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                      @include('livewire.search-livewire')
                         <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.index') }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
                         </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body px-0">
