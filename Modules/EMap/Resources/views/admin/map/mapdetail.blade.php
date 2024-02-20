@@ -102,6 +102,7 @@
                                                         <th>साविक निर्माणको क्षेत्रफल</th>
                                                         <th>जम्मा क्षेत्रफल</th>
                                                         <th>उचाई</th>
+                                                        <th>जम्मा कोठा</th>
                                                     </tr>
                                                 </tbody>
                                                 @foreach ($mapApply->storeyDetails as $storeyDetail)
@@ -112,6 +113,8 @@
                                                         <td>{{ $storeyDetail->area_of_former_construction }}</td>
                                                         <td>{{ $storeyDetail->total_area }}</td>
                                                         <td>{{ $storeyDetail->height }}</td>
+                                                        <td>{{ $storeyDetail->room }}</td>
+
                                                     </tr>
                                                 @endforeach
                                             </table>
@@ -133,38 +136,43 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>२.२ वडा नं :</b> {{ $mapApply->landDetail?->ward_no ?? '' }}
+
                                 </h4>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h4 class="form-label"><b>२.३ साविक पालिका :</b>
+                                    {{ $mapApply->landDetail?->former_local_body ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.३ साविक वडा नं :</b>
-                                    {{ $mapApply->landDetail?->ward_no ?? '' }}</h4>
+                                <h4 class="form-label"><b>२.४ साविक वडा नं :</b>
+                                    {{ $mapApply->landDetail?->former_ward_no ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.४ टोलको नाम :</b>
+                                <h4 class="form-label"><b>२.५ टोलको नाम :</b>
                                     {{ $mapApply->landDetail?->tole ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.५ सडक कोड नं :</b>
+                                <h4 class="form-label"><b>२.६ सडक कोड नं :</b>
                                     {{ $mapApply->landDetail?->street_code_no ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.६ जग्गा कित्ता नं :</b>
+                                <h4 class="form-label"><b>२.७ जग्गा कित्ता नं :</b>
                                     {{ $mapApply->landDetail?->plot_no ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.७ क्षेत्रफल (बिघा) :</b>
-                                    {{ $mapApply->landDetail?->unit_value ?? '' }}</h4>
+                                <h4 class="form-label"><b>२.८ क्षेत्रफल ({{$mapApply->landDetail?->unit?->title ?? ''}}) :</b>
+                                    {{ get_nepali_number($mapApply->landDetail?->unit_value) ?? '' }}</h4>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label">
                                     <b>२.८ भवनले
                                         ढाक्ने क्षेत्रफलको प्रतिशत (GCR) :</b>
-                                    {{ $mapApply->landDetail?->percentage_of_area_covered_by_building ?? '' }}
+                                    {{ get_nepali_number($mapApply->landDetail?->percentage_of_area_covered_by_building) ?? '' }}
                                 </h4>
 
                             </div>
@@ -213,23 +221,48 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकता लिएको जिल्ला :</b>
-                                    {{ $mapApply->landOwner?->citizenship_issue_district_id ?? '' }}</h4>
+                                    {{ $mapApply->landOwner?->citizenshipIssueDistrict?->district ?? '' }}</h4>
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.८ ठेगाना :</b> {{ $mapApply->landOwner?->address ?? '' }}</h4>
+                                <h4 class="form-label"><b>१.५ जग्गा धनीको फोटो :</b>
+                                    <img src="    {{ $mapApply->landOwner?->photo_url ?? '' }}" alt=""></h4>
 
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.९ पालिका :</b> {{ $mapApply->landOwner?->local_body ?? '' }}
-                                </h4>
+                            <div class="col-md-12">
+                            <fieldset>
+                                <legend>
+                                    <h5 class="py-2">ठेगाना</h5>
+                                </legend>
+                                <div class="row">
 
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१० वडा नं. :</b> {{ $mapApply->landOwner?->ward_no ?? '' }}
-                                </h4>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>१. प्रदेश :</b> {{ $mapApply->landOwner?->province->province ?? '' }}</h4>
 
-                            </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>२. जिल्ला:</b> {{ $mapApply->landOwner?->district->district ?? '' }}</h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>३. पालिका :</b> {{ $mapApply->landOwner?->local_body ?? '' }}
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>४. वडा नं. :</b> {{ $mapApply->landOwner?->ward_no ?? '' }}
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->landOwner?->tole ?? '' }}
+                                        </h4>
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
                         </div>
                     </fieldset>
                     <fieldset class="mx-2">
@@ -273,24 +306,47 @@
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ नागरिकता लिएको
                                         जिल्ला
-                                        :</b> {{ $mapApply->houseOwner?->citizenship_issue_district_id ?? '' }}
+                                        :</b> {{ $mapApply->houseOwner?->citizenshipIssueDistrict?->district ?? '' }}
                                 </h4>
 
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.८ ठेगाना :</b>
-                                    {{ $mapApply->houseOwner?->address ?? '' }}</h4>
+                            </div>  <div class="col-md-4 mb-3">
+                                <h4 class="form-label"><b>१.५ घरधनीको फोटो :</b>
+                                    <img src="    {{ $mapApply->houseOwner?->photo_url ?? '' }}" width="100" height="100" alt=""></h4>
 
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.९ पालिका :</b>
-                                    {{ $mapApply->houseOwner?->local_body ?? '' }}</h4>
+                            <div class="col-md-12">
+                                <fieldset>
+                                    <legend>
+                                        <h5 class="py-2">ठेगाना</h5>
+                                    </legend>
+                                    <div class="row">
 
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>१.१० वडा नं. :</b>
-                                    {{ $mapApply->houseOwner?->ward_no ?? '' }}</h4>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>१. प्रदेश :</b> {{ $mapApply->houseOwner?->province->province ?? '' }}</h4>
 
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>२. जिल्ला:</b> {{ $mapApply->houseOwner?->district->district ?? '' }}</h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>३. पालिका :</b> {{ $mapApply->houseOwner?->local_body ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>४. वडा नं. :</b> {{ $mapApply->houseOwner?->ward_no ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->houseOwner?->tole ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                    </div>
+
+                                </fieldset>
                             </div>
                         </div>
                     </fieldset>
@@ -330,8 +386,8 @@
                             <h5 class="py-2">६. डिजाइनरको विवरण</h5>
                         </legend>
                         @foreach ($mapApply->designerDetails as $designerDetail)
-                            <div class="d-flex align-items-center gap-2 mb-3">
-                                <h4><b>१.१ {{ $designerDetail->post?->label() }}</b></h4>
+                            <div class="d-flex align-items-center gap-2 mt-1">
+                                <h4><b>६.१ {{ $designerDetail->post?->label() }}</b></h4>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
@@ -355,21 +411,6 @@
 
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"> ठेगाना :
-                                        {{ $designerDetail->address }}</h4>
-
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"> पालिका :
-                                        {{ $designerDetail->local_body }}</h4>
-
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"> वडा नं. :
-                                        {{ $designerDetail->ward_no }}</h4>
-
-                                </div>
-                                <div class="col-md-4 mb-3">
                                     <h4 class="form-label"> NEC Council No :
                                         {{ $designerDetail->nec_council_no }}</h4>
 
@@ -380,7 +421,44 @@
 
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <fieldset>
+                                    <legend>
+                                        <h5 class="py-1">ठेगाना</h5>
+                                    </legend>
+                                    <div class="row">
+
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>१. प्रदेश :</b> {{ $designerDetail->province?->province ?? '' }}</h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>२. जिल्ला:</b> {{ $designerDetail->district?->district ?? '' }}</h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>३. पालिका :</b>  {{ $designerDetail->local_body ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>४. वडा नं. :</b> {{ $designerDetail->ward_no ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>५. टोल :</b> {{ $designerDetail?->tole ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+
                         @endforeach
+
 
                     </fieldset>
 
@@ -416,7 +494,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ नागरिकता लिएको
-                                        जिल्ला :</b> {{ $mapApply->applicantDetail?->citizenship_issue_district_id }}
+                                        जिल्ला :</b> {{ $mapApply->applicantDetail?->citizenshipIssueDistrict?->district ?? '' }}
                                 </h4>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -432,7 +510,40 @@
 
                         </div>
 
-                    </fieldset>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>
+                                    <h5 class="py-2">ठेगाना</h5>
+                                </legend>
+                                <div class="row">
+
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>१. प्रदेश :</b> {{ $mapApply->applicantDetail?->province->province ?? '' }}</h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>२. जिल्ला:</b> {{ $mapApply->applicantDetail?->district->district ?? '' }}</h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>३. पालिका :</b> {{ $mapApply->applicantDetail?->localBody->local_body ?? '' }}
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>४. वडा नं. :</b> {{ $mapApply->applicantDetail?->ward_no ?? '' }}
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->applicantDetail?->tole ?? '' }}
+                                        </h4>
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
                     <div class="d-flex justify-content-between my-3 px-2">
                         <div class="col-3">
                             <h4 class="form-label fw-bold">निबेदनको मिति :
@@ -448,7 +559,7 @@
                         </div>
                     </div>
 
-
+                    </fieldset>
                     <h4 class="fw-bold mt-3 text center text-black">निर्माण हुने भवन तथा मापदण्ड सम्बन्धि संक्षिप्त
                         विवरण
                     </h4>
