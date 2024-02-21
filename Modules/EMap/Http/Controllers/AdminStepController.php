@@ -597,6 +597,40 @@ class AdminStepController extends Controller
         ]);
     }
 
+    public function editTemplate(MapApply $mapApply ,Form $form,FormDataType $formDataType)
+    {
+        $formDataType->load('model');
+        $mapApply->load(
+            'landDetail',
+            'landOwner',
+            'houseOwner',
+            'fourForts',
+            'applicantDetail.citizenshipIssueDistrict',
+            'criteriaDetails',
+            'buildingDetails',
+            'designerDetails'
+        );
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
+        return view('emap::admin.template-edit.edit-file', compact('mapApply', 'data', 'formDataType','form'));
+    }
+
+    public function storeFileTemplate(Request $request,MapApply $mapApply ,Form $form,FormDataType $formDataType)
+    {
+        $appliedDocument = AppliedDocument::where('map_apply_id',$mapApply->id)
+            ->where('form_id',$form->id)
+            ->where('form_data_id',$formDataType->id)
+            ->first();
+
+       if(!empty($appliedDocument))
+       {
+           $appliedDocument->update([
+               'data'=>$request->input('data'),
+           ]);
+       }
+        toast('टेम्प्लेट विवरण सम्पादन सफलतापूर्वक गरियो', 'success');
+       return back();
+    }
+
     protected function getEmapTemplateData($mapApply)
     {
         $designerDetail = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER)->first();

@@ -36,6 +36,7 @@ class AppliedDocument extends Model
         'form_data_type',
         'form_data_id',
         'approved_document',
+        'data',
     ];
 
     protected $casts = [
