@@ -118,7 +118,7 @@ class AttachDocumentController extends Controller
         return view('emap::organization.attach-document.formStoreDetail', compact('formStore'));
     }
 
-    public function printTemplate(MapApply $mapApply, FormDataType $formDataType)
+    public function printTemplate(MapApply $mapApply, Form $form,FormDataType $formDataType)
     {
 
         $formDataType->load('model');

@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use Modules\EMap\Entities\AppliedDocument;
 use Modules\EMap\Entities\AppliedDocumentStatus;
+use Modules\EMap\Entities\FileTemplateStore;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Entities\FormStore;
@@ -576,8 +577,12 @@ class AdminStepController extends Controller
         return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
 
-    public function printTemplate(MapApply $mapApply, FormDataType $formDataType)
+    public function printTemplate(MapApply $mapApply, Form $form,FormDataType $formDataType)
     {
+        $fileTemplateStore = FileTemplateStore::where('map_apply_id',$mapApply->id)
+            ->where('form_id',$form->id)
+            ->where('form_data_type_id',$formDataType->id)
+            ->first()?->data ?? null;
 
         $formDataType->load('model');
         $mapApply->load(
@@ -590,7 +595,7 @@ class AdminStepController extends Controller
             'buildingDetails',
             'designerDetails'
         );
-        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
+        $data = $fileTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
 
         return response()->json([
             'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
@@ -599,6 +604,12 @@ class AdminStepController extends Controller
 
     public function editTemplate(MapApply $mapApply ,Form $form,FormDataType $formDataType)
     {
+        $fileTemplateStore = FileTemplateStore::where('map_apply_id',$mapApply->id)
+            ->where('form_id',$form->id)
+            ->where('form_data_type_id',$formDataType->id)
+            ->first()?->data ?? null;
+
+
         $formDataType->load('model');
         $mapApply->load(
             'landDetail',
@@ -610,25 +621,22 @@ class AdminStepController extends Controller
             'buildingDetails',
             'designerDetails'
         );
-        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
+        $data = $fileTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
         return view('emap::admin.template-edit.edit-file', compact('mapApply', 'data', 'formDataType','form'));
     }
 
     public function storeFileTemplate(Request $request,MapApply $mapApply ,Form $form,FormDataType $formDataType)
     {
-        $appliedDocument = AppliedDocument::where('map_apply_id',$mapApply->id)
-            ->where('form_id',$form->id)
-            ->where('form_data_id',$formDataType->id)
-            ->first();
-
-       if(!empty($appliedDocument))
-       {
-           $appliedDocument->update([
-               'data'=>$request->input('data'),
-           ]);
-       }
+        $request->validate([
+            'data'=>['required']
+        ]);
+       FileTemplateStore::updateOrCreate([
+           'map_apply_id'=>$mapApply->id,
+           'form_id'=>$form->id,
+           'form_data_type_id'=>$formDataType->id,
+       ],['data'=>$request->input('data')]);
         toast('टेम्प्लेट विवरण सम्पादन सफलतापूर्वक गरियो', 'success');
-       return back();
+       return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
 
     protected function getEmapTemplateData($mapApply)
