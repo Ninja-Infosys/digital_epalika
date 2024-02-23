@@ -3,6 +3,12 @@
 namespace Modules\EMap\Traits;
 
 use Illuminate\Support\Facades\View;
+use Modules\EMap\Entities\AppliedDocument;
+use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\PaymentStore;
+use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 
@@ -314,5 +320,55 @@ trait TemplateTrait
             '[@contractorDetail.district]',
 
         ];
+    }
+
+    public function listForms(MapApply $mapApply): array
+    {
+        $documentTypeModels = collect([AppliedDocument::class,FormStore::class,PaymentStore::class]);
+
+        $documents = collect([]);
+
+        foreach($documentTypeModels as $documentModel) {
+            $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
+            foreach($typeDocuments as $document) {
+                $documents->push([
+                    'document_type' => class_basename($documentModel),
+                    'form_id' => $document->form_id,
+                    'status' => $document->status?->value
+                ]);
+            }
+
+        }
+
+        $order = 0;
+        $allApproved = true;
+        $forms = Form::withCount('formDataTypes')
+            ->orderBy('order')
+            ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
+                $status = $documents->where('form_id', $form->id)->pluck('status');
+
+                if($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                    $order = $form->order + 1;
+                } elseif($key == 0) {
+                    $order = $form->order;
+                    $allApproved = false;
+
+                } else {
+                    $allApproved = false;
+                }
+                if($allApproved) {
+                    $mapStatus = DocumentStatusEnum::APPROVED;
+                } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
+                    $mapStatus = DocumentStatusEnum::REJECTED;
+                } elseif ($status->count() > 0) {
+                    $mapStatus = DocumentStatusEnum::PENDING;
+                } else {
+                    $mapStatus = DocumentStatusEnum::NOT_APPLIED;
+                }
+                $form->map_status = $mapStatus;
+                return $form;
+            });
+
+        return [$forms,$order];
     }
 }
