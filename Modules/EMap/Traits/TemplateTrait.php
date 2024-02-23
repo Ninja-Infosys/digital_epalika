@@ -135,44 +135,44 @@ trait TemplateTrait
 
             //DesignerDetails
 
-            get_nepali_number($designerDetail->name ?? ''),
-            get_nepali_number($designerDetail->father_name ?? ''),
-            get_nepali_number($designerDetail->phone ?? ''),
-            get_nepali_number($designerDetail->address ?? ''),
-            get_nepali_number($designerDetail->local_body ?? ''),
-            get_nepali_number($designerDetail->ward_no ?? ''),
-            get_nepali_number($designerDetail->nec_council_no ?? ''),
-            get_nepali_number($designerDetail->local_body_registration_no ?? ''),
-            get_nepali_number($designerDetail->consulting_firm_name ?? ''),
-            get_nepali_number($designerDetail->district?->district ?? ''),
+            get_nepali_number($designerDetail?->name ?? ''),
+            get_nepali_number($designerDetail?->father_name ?? ''),
+            get_nepali_number($designerDetail?->phone ?? ''),
+            get_nepali_number($designerDetail?->address ?? ''),
+            get_nepali_number($designerDetail?->local_body ?? ''),
+            get_nepali_number($designerDetail?->ward_no ?? ''),
+            get_nepali_number($designerDetail?->nec_council_no ?? ''),
+            get_nepali_number($designerDetail?->local_body_registration_no ?? ''),
+            get_nepali_number($designerDetail?->consulting_firm_name ?? ''),
+            get_nepali_number($designerDetail?->district?->district ?? ''),
 
 
             //supervisorDetails
 
-            get_nepali_number($supervisorDetail->name ?? ''),
-            get_nepali_number($supervisorDetail->father_name ?? ''),
-            get_nepali_number($supervisorDetail->phone ?? ''),
-            get_nepali_number($supervisorDetail->address ?? ''),
-            get_nepali_number($supervisorDetail->local_body ?? ''),
-            get_nepali_number($supervisorDetail->ward_no ?? ''),
-            get_nepali_number($supervisorDetail->nec_council_no ?? ''),
-            get_nepali_number($supervisorDetail->local_body_registration_no ?? ''),
-            get_nepali_number($supervisorDetail->consulting_firm_name ?? ''),
-            get_nepali_number($supervisorDetail->district?->district ?? ''),
+            get_nepali_number($supervisorDetail?->name ?? ''),
+            get_nepali_number($supervisorDetail?->father_name ?? ''),
+            get_nepali_number($supervisorDetail?->phone ?? ''),
+            get_nepali_number($supervisorDetail?->address ?? ''),
+            get_nepali_number($supervisorDetail?->local_body ?? ''),
+            get_nepali_number($supervisorDetail?->ward_no ?? ''),
+            get_nepali_number($supervisorDetail?->nec_council_no ?? ''),
+            get_nepali_number($supervisorDetail?->local_body_registration_no ?? ''),
+            get_nepali_number($supervisorDetail?->consulting_firm_name ?? ''),
+            get_nepali_number($supervisorDetail?->district?->district ?? ''),
 
 
             //ContractorDetails
 
-            get_nepali_number($contractorDetail->name ?? ''),
-            get_nepali_number($contractorDetail->father_name ?? ''),
-            get_nepali_number($contractorDetail->phone ?? ''),
-            get_nepali_number($contractorDetail->address ?? ''),
-            get_nepali_number($contractorDetail->local_body ?? ''),
-            get_nepali_number($contractorDetail->ward_no ?? ''),
-            get_nepali_number($contractorDetail->nec_council_no ?? ''),
-            get_nepali_number($contractorDetail->local_body_registration_no ?? ''),
-            get_nepali_number($contractorDetail->consulting_firm_name ?? ''),
-            get_nepali_number($contractorDetail->district?->district ?? ''),
+            get_nepali_number($contractorDetail?->name ?? ''),
+            get_nepali_number($contractorDetail?->father_name ?? ''),
+            get_nepali_number($contractorDetail?->phone ?? ''),
+            get_nepali_number($contractorDetail?->address ?? ''),
+            get_nepali_number($contractorDetail?->local_body ?? ''),
+            get_nepali_number($contractorDetail?->ward_no ?? ''),
+            get_nepali_number($contractorDetail?->nec_council_no ?? ''),
+            get_nepali_number($contractorDetail?->local_body_registration_no ?? ''),
+            get_nepali_number($contractorDetail?->consulting_firm_name ?? ''),
+            get_nepali_number($contractorDetail?->district?->district ?? ''),
 
         ];
     }
