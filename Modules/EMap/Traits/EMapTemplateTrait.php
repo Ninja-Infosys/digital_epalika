@@ -102,6 +102,13 @@ trait EMapTemplateTrait
             ],
         ],
         [
+            'title' => 'तल्लाको विवरण',
+            'data' => [
+                'प्रत्येक तल्लाको सिलिङ्ङ्को उचाई' => '[@heightOfEachStorey]',
+
+            ],
+        ],
+        [
             'title' => 'डिजाइनरको विवरण',
             'data' => [
                 'नाम' => '[@designerDetail.name]',
@@ -221,6 +228,7 @@ trait EMapTemplateTrait
             $this->getLandOwnerReplacement(),
             $this->getHouseOwnerReplacement(),
             $this->getFourFortsReplacement(),
+            $this->getHeightOfStoreyReplacement(),
             $this->getApplicantDetailReplacement(),
             $this->getCriteriaDetailsReplacement(),
             $this->getBuildingDetailsReplacement(),
@@ -270,52 +278,52 @@ trait EMapTemplateTrait
     {
         return [
             '[@landDetail.land_use_area.title]' => $this->get_nepali_number($this->landDetail?->landUseArea?->title)?? '',
-            '[@landDetail.ward_no]' => $this->get_nepali_number($this->landDetail->ward_no)?? '',
-            '[@landDetail.former_ward_no]' => $this->get_nepali_number($this->landDetail->former_ward_no)?? '',
-            '[@landDetail.tole]' => $this->get_nepali_number($this->landDetail->tole)?? '',
-            '[@landDetail.street_code_no]' => $this->get_nepali_number($this->landDetail->street_code_no)?? '',
-            '[@landDetail.plot_no]' => $this->get_nepali_number($this->landDetail->plot_no)?? '',
-            '[@landDetail.area]' => $this->get_nepali_number($this->landDetail->unit_value)?? '',
-            '[@landDetail.percentage_of_area_covered_by_building]' => $this->get_nepali_number($this->landDetail->percentage_of_area_covered_by_building)?? '',
-            '[@landDetail.former_local_body]' => $this->get_nepali_number($this->landDetail->former_local_body)?? '',
-            '[@landDetail.road_name]' => $this->get_nepali_number($this->landDetail->road_name)?? '',
+            '[@landDetail.ward_no]' => $this->get_nepali_number($this->landDetail?->ward_no)?? '',
+            '[@landDetail.former_ward_no]' => $this->get_nepali_number($this->landDetail?->former_ward_no)?? '',
+            '[@landDetail.tole]' => $this->get_nepali_number($this->landDetail?->tole)?? '',
+            '[@landDetail.street_code_no]' => $this->get_nepali_number($this->landDetail?->street_code_no)?? '',
+            '[@landDetail.plot_no]' => $this->get_nepali_number($this->landDetail?->plot_no)?? '',
+            '[@landDetail.area]' => $this->get_nepali_number($this->landDetail?->unit_value)?? '',
+            '[@landDetail.percentage_of_area_covered_by_building]' => $this->get_nepali_number($this->landDetail?->percentage_of_area_covered_by_building)?? '',
+            '[@landDetail.former_local_body]' => $this->get_nepali_number($this->landDetail?->former_local_body)?? '',
+            '[@landDetail.road_name]' => $this->get_nepali_number($this->landDetail?->road_name)?? '',
         ];
     }
 
     private function getLandOwnerReplacement(): array
     {
         return [
-            '[@landOwner.land_owner_type]' => $this->get_nepali_number($this->landOwner->land_owner_type->label()) ?? '',
-            '[@landOwner.name]' => $this->get_nepali_number($this->landOwner->name) ?? '',
-            '[@landOwner.phone]' => $this->get_nepali_number($this->landOwner->phone) ?? '',
-            '[@landOwner.father_name]' => $this->get_nepali_number($this->landOwner->father_name) ?? '',
-            '[@landOwner.grandfather_name]' => $this->get_nepali_number($this->landOwner->grandfather_name) ?? '',
-            '[@landOwner.citizenship_issue_district]' => $this->get_nepali_number($this->landOwner->citizenshipIssueDistrict->district) ?? '',
-            '[@landOwner.citizenship_no]' => $this->get_nepali_number($this->landOwner->citizenship_no) ?? '',
-            '[@landOwner.citizenship_issue_date]' => $this->get_nepali_number($this->landOwner->citizenship_issue_date) ?? '',
-            '[@landOwner.address]' => $this->get_nepali_number($this->landOwner->address) ?? '',
-            '[@landOwner.local_body]' => $this->get_nepali_number($this->landOwner->local_body) ?? '',
-            '[@landOwner.ward_no]' => $this->get_nepali_number($this->landOwner->ward_no) ?? '',
-            '[@landOwner.district]' => $this->get_nepali_number($this->landOwner->district?->district) ?? '',
-            '[@landOwner.tole]' => $this->get_nepali_number($this->landOwner->tole) ?? '',
+            '[@landOwner.land_owner_type]' => $this->get_nepali_number($this->landOwner?->land_owner_type?->label()) ?? '',
+            '[@landOwner.name]' => $this->get_nepali_number($this->landOwner?->name) ?? '',
+            '[@landOwner.phone]' => $this->get_nepali_number($this->landOwner?->phone) ?? '',
+            '[@landOwner.father_name]' => $this->get_nepali_number($this->landOwner?->father_name) ?? '',
+            '[@landOwner.grandfather_name]' => $this->get_nepali_number($this->landOwner?->grandfather_name) ?? '',
+            '[@landOwner.citizenship_issue_district]' => $this->get_nepali_number($this->landOwner?->citizenshipIssueDistrict?->district) ?? '',
+            '[@landOwner.citizenship_no]' => $this->get_nepali_number($this->landOwner?->citizenship_no) ?? '',
+            '[@landOwner.citizenship_issue_date]' => $this->get_nepali_number($this->landOwner?->citizenship_issue_date) ?? '',
+            '[@landOwner.address]' => $this->get_nepali_number($this->landOwner?->address) ?? '',
+            '[@landOwner.local_body]' => $this->get_nepali_number($this->landOwner?->local_body) ?? '',
+            '[@landOwner.ward_no]' => $this->get_nepali_number($this->landOwner?->ward_no) ?? '',
+            '[@landOwner.district]' => $this->get_nepali_number($this->landOwner?->district?->district) ?? '',
+            '[@landOwner.tole]' => $this->get_nepali_number($this->landOwner?->tole) ?? '',
         ];
     }
 
     private function getHouseOwnerReplacement(): array
     {
         return [
-            '[@houseOwner.name]' => $this->get_nepali_number($this->houseOwner->name) ?? '',
-            '[@houseOwner.phone]' => $this->get_nepali_number($this->houseOwner->phone) ?? '',
-            '[@houseOwner.father_name]' => $this->get_nepali_number($this->houseOwner->father_name) ?? '',
-            '[@houseOwner.grandfather_name]' => $this->get_nepali_number($this->houseOwner->grandfather_name) ?? '',
-            '[@houseOwner.citizenship_issue_district]' => $this->get_nepali_number($this->houseOwner->citizenshipIssueDistrict->district) ?? '',
-            '[@houseOwner.citizenship_no]' => $this->get_nepali_number($this->houseOwner->citizenship_no) ?? '',
-            '[@houseOwner.citizenship_issue_date]' => $this->get_nepali_number($this->houseOwner->citizenship_issue_date) ?? '',
-            '[@houseOwner.address]' => $this->get_nepali_number($this->houseOwner->address) ?? '',
-            '[@houseOwner.local_body]' => $this->get_nepali_number($this->houseOwner->local_body) ?? '',
-            '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner->ward_no) ?? '',
-            '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner->district?->district) ?? '',
-            '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner->tole) ?? '',
+            '[@houseOwner.name]' => $this->get_nepali_number($this->houseOwner?->name) ?? '',
+            '[@houseOwner.phone]' => $this->get_nepali_number($this->houseOwner?->phone) ?? '',
+            '[@houseOwner.father_name]' => $this->get_nepali_number($this->houseOwner?->father_name) ?? '',
+            '[@houseOwner.grandfather_name]' => $this->get_nepali_number($this->houseOwner?->grandfather_name) ?? '',
+            '[@houseOwner.citizenship_issue_district]' => $this->get_nepali_number($this->houseOwner?->citizenshipIssueDistrict?->district) ?? '',
+            '[@houseOwner.citizenship_no]' => $this->get_nepali_number($this->houseOwner?->citizenship_no) ?? '',
+            '[@houseOwner.citizenship_issue_date]' => $this->get_nepali_number($this->houseOwner?->citizenship_issue_date) ?? '',
+            '[@houseOwner.address]' => $this->get_nepali_number($this->houseOwner?->address) ?? '',
+            '[@houseOwner.local_body]' => $this->get_nepali_number($this->houseOwner?->local_body) ?? '',
+            '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner?->ward_no) ?? '',
+            '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner?->district?->district) ?? '',
+            '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner?->tole) ?? '',
         ];
     }
 
@@ -338,22 +346,30 @@ trait EMapTemplateTrait
             ]),
         ];
     }
+    private function getHeightOfStoreyReplacement(): array
+    {
+        return [
+            '[@heightOfEachStorey]' => (string)View::make('emap::inc.height_of_each_storey', [
+                'storeyDetails' => $this->storeyDetails,
+            ]),
+        ];
+    }
 
     private function getDesignerDetailsReplacement(): array
     {
         $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
 
         return [
-            '[@designerDetail.name]' => get_nepali_number($this->$designerDetail->name) ?? '',
-            '[@designerDetail.father_name]' => get_nepali_number($this->$designerDetail->father_name) ?? '',
-            '[@designerDetail.phone]' => get_nepali_number($this->$designerDetail->name) ?? '',
-            '[@designerDetail.address]' => get_nepali_number($this->$designerDetail->address) ?? '',
-            '[@designerDetail.local_body]' => get_nepali_number($this->$designerDetail->local_body) ?? '',
-            '[@designerDetail.ward_no]' => get_nepali_number($this->$designerDetail->ward_no) ?? '',
-            '[@designerDetail.nec_council_no]' => get_nepali_number($this->$designerDetail->nec_council_no) ?? '',
-            '[@designerDetail.local_body_registration_no]' => get_nepali_number($this->$designerDetail->local_body_registration_no) ?? '',
-            '[@designerDetail.consulting_firm_name]' => get_nepali_number($this->$designerDetail->consulting_firm_name) ?? '',
-            '[@designerDetail.district]' => get_nepali_number($this->$designerDetail->district?->district) ?? '',
+            '[@designerDetail.name]' => get_nepali_number($this->$designerDetail?->name) ?? '',
+            '[@designerDetail.father_name]' => get_nepali_number($this->$designerDetail?->father_name) ?? '',
+            '[@designerDetail.phone]' => get_nepali_number($this->$designerDetail?->name) ?? '',
+            '[@designerDetail.address]' => get_nepali_number($this->$designerDetail?->address) ?? '',
+            '[@designerDetail.local_body]' => get_nepali_number($this->$designerDetail?->local_body) ?? '',
+            '[@designerDetail.ward_no]' => get_nepali_number($this->$designerDetail?->ward_no) ?? '',
+            '[@designerDetail.nec_council_no]' => get_nepali_number($this->$designerDetail?->nec_council_no) ?? '',
+            '[@designerDetail.local_body_registration_no]' => get_nepali_number($this->$designerDetail?->local_body_registration_no) ?? '',
+            '[@designerDetail.consulting_firm_name]' => get_nepali_number($this->$designerDetail?->consulting_firm_name) ?? '',
+            '[@designerDetail.district]' => get_nepali_number($this->$designerDetail?->district?->district) ?? '',
         ];
     }
 
@@ -362,16 +378,16 @@ trait EMapTemplateTrait
         $supervisorDetail = $this->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
 
         return [
-            '[@supervisorDetail.name]' => get_nepali_number($this->$supervisorDetail->name) ?? '',
-            '[@supervisorDetail.father_name]' => get_nepali_number($this->$supervisorDetail->father_name) ?? '',
-            '[@supervisorDetail.phone]' => get_nepali_number($this->$supervisorDetail->name) ?? '',
-            '[@supervisorDetail.address]' => get_nepali_number($this->$supervisorDetail->address) ?? '',
-            '[@supervisorDetail.local_body]' => get_nepali_number($this->$supervisorDetail->local_body) ?? '',
-            '[@supervisorDetail.ward_no]' => get_nepali_number($this->$supervisorDetail->ward_no) ?? '',
-            '[@supervisorDetail.nec_council_no]' => get_nepali_number($this->$supervisorDetail->nec_council_no) ?? '',
-            '[@supervisorDetail.local_body_registration_no]' => get_nepali_number($this->$supervisorDetail->local_body_registration_no) ?? '',
-            '[@supervisorDetail.consulting_firm_name]' => get_nepali_number($this->$supervisorDetail->consulting_firm_name) ?? '',
-            '[@supervisorDetail.district]' => get_nepali_number($this->$supervisorDetail->district?->district) ?? '',
+            '[@supervisorDetail.name]' => get_nepali_number($this->$supervisorDetail?->name) ?? '',
+            '[@supervisorDetail.father_name]' => get_nepali_number($this->$supervisorDetail?->father_name) ?? '',
+            '[@supervisorDetail.phone]' => get_nepali_number($this->$supervisorDetail?->name) ?? '',
+            '[@supervisorDetail.address]' => get_nepali_number($this->$supervisorDetail?->address) ?? '',
+            '[@supervisorDetail.local_body]' => get_nepali_number($this->$supervisorDetail?->local_body) ?? '',
+            '[@supervisorDetail.ward_no]' => get_nepali_number($this->$supervisorDetail?->ward_no) ?? '',
+            '[@supervisorDetail.nec_council_no]' => get_nepali_number($this->$supervisorDetail?->nec_council_no) ?? '',
+            '[@supervisorDetail.local_body_registration_no]' => get_nepali_number($this->$supervisorDetail?->local_body_registration_no) ?? '',
+            '[@supervisorDetail.consulting_firm_name]' => get_nepali_number($this->$supervisorDetail?->consulting_firm_name) ?? '',
+            '[@supervisorDetail.district]' => get_nepali_number($this->$supervisorDetail?->district?->district) ?? '',
         ];
     }
 
@@ -380,36 +396,36 @@ trait EMapTemplateTrait
         $contractorDetail = $this->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
 
         return [
-            '[@contractorDetail.name]' => get_nepali_number($this->$contractorDetail->name) ?? '',
-            '[@contractorDetail.father_name]' => get_nepali_number($this->$contractorDetail->father_name) ?? '',
-            '[@contractorDetail.phone]' => get_nepali_number($this->$contractorDetail->name) ?? '',
-            '[@contractorDetail.address]' => get_nepali_number($this->$contractorDetail->address) ?? '',
-            '[@contractorDetail.local_body]' => get_nepali_number($this->$contractorDetail->local_body) ?? '',
-            '[@contractorDetail.ward_no]' => get_nepali_number($this->$contractorDetail->ward_no) ?? '',
-            '[@contractorDetail.nec_council_no]' => get_nepali_number($this->$contractorDetail->nec_council_no) ?? '',
-            '[@contractorDetail.local_body_registration_no]' => get_nepali_number($this->$contractorDetail->local_body_registration_no) ?? '',
-            '[@contractorDetail.consulting_firm_name]' => get_nepali_number($this->$contractorDetail->consulting_firm_name) ?? '',
-            '[@contractorDetail.district]' => get_nepali_number($this->$contractorDetail->district?->district) ?? '',
+            '[@contractorDetail.name]' => get_nepali_number($this->$contractorDetail?->name) ?? '',
+            '[@contractorDetail.father_name]' => get_nepali_number($this->$contractorDetail?->father_name) ?? '',
+            '[@contractorDetail.phone]' => get_nepali_number($this->$contractorDetail?->name) ?? '',
+            '[@contractorDetail.address]' => get_nepali_number($this->$contractorDetail?->address) ?? '',
+            '[@contractorDetail.local_body]' => get_nepali_number($this->$contractorDetail?->local_body) ?? '',
+            '[@contractorDetail.ward_no]' => get_nepali_number($this->$contractorDetail?->ward_no) ?? '',
+            '[@contractorDetail.nec_council_no]' => get_nepali_number($this->$contractorDetail?->nec_council_no) ?? '',
+            '[@contractorDetail.local_body_registration_no]' => get_nepali_number($this->$contractorDetail?->local_body_registration_no) ?? '',
+            '[@contractorDetail.consulting_firm_name]' => get_nepali_number($this->$contractorDetail?->consulting_firm_name) ?? '',
+            '[@contractorDetail.district]' => get_nepali_number($this->$contractorDetail?->district?->district) ?? '',
         ];
     }
 
     private function getApplicantDetailReplacement(): array
     {
         return [
-            '[@applicantDetail.applicant_type]' => $this->get_nepali_number($this->applicantDetail->applicant_type->label()) ?? '',
-            '[@applicantDetail.relation_with_owner]' => $this->get_nepali_number($this->applicantDetail->relation_with_owner->label()) ?? '',
-            '[@applicantDetail.name]' => $this->get_nepali_number($this->applicantDetail->name) ?? '',
-            '[@applicantDetail.phone]' => $this->get_nepali_number($this->applicantDetail->phone) ?? '',
-            '[@applicantDetail.father_name]' => $this->get_nepali_number($this->applicantDetail->father_name) ?? '',
-            '[@applicantDetail.citizenship_issue_district]' => $this->get_nepali_number($this->applicantDetail->citizenshipIssueDistrict->district) ?? '',
-            '[@applicantDetail.citizenship_no]' => $this->get_nepali_number($this->applicantDetail->citizenship_no) ?? '',
-            '[@applicantDetail.citizenship_issue_date]' => $this->get_nepali_number($this->applicantDetail->citizenship_issue_date) ?? '',
-            '[@applicantDetail.signature]' => $this->get_nepali_number($this->applicantDetail->signature) ?? '',
-            '[@applicantDetail.province]' => $this->get_nepali_number($this->applicantDetail->province?->province) ?? '',
-            '[@applicantDetail.district]' => $this->get_nepali_number($this->applicantDetail->district?->district) ?? '',
-            '[@applicantDetail.local_body]' => $this->get_nepali_number($this->applicantDetail->localBody?->local_body) ?? '',
-            '[@applicantDetail.ward_no]' => $this->get_nepali_number($this->applicantDetail->ward_no) ?? '',
-            '[@applicantDetail.tole]' => $this->get_nepali_number($this->applicantDetail->tole) ?? '',
+            '[@applicantDetail.applicant_type]' => $this->get_nepali_number($this->applicantDetail?->applicant_type->label()) ?? '',
+            '[@applicantDetail.relation_with_owner]' => $this->get_nepali_number($this->applicantDetail?->relation_with_owner?->label()) ?? '',
+            '[@applicantDetail.name]' => $this->get_nepali_number($this->applicantDetail?->name) ?? '',
+            '[@applicantDetail.phone]' => $this->get_nepali_number($this->applicantDetail?->phone) ?? '',
+            '[@applicantDetail.father_name]' => $this->get_nepali_number($this->applicantDetail?->father_name) ?? '',
+            '[@applicantDetail.citizenship_issue_district]' => $this->get_nepali_number($this->applicantDetail?->citizenshipIssueDistrict?->district) ?? '',
+            '[@applicantDetail.citizenship_no]' => $this->get_nepali_number($this->applicantDetail?->citizenship_no) ?? '',
+            '[@applicantDetail.citizenship_issue_date]' => $this->get_nepali_number($this->applicantDetail?->citizenship_issue_date) ?? '',
+            '[@applicantDetail.signature]' => $this->get_nepali_number($this->applicantDetail?->signature) ?? '',
+            '[@applicantDetail.province]' => $this->get_nepali_number($this->applicantDetail?->province?->province) ?? '',
+            '[@applicantDetail.district]' => $this->get_nepali_number($this->applicantDetail?->district?->district) ?? '',
+            '[@applicantDetail.local_body]' => $this->get_nepali_number($this->applicantDetail?->localBody?->local_body) ?? '',
+            '[@applicantDetail.ward_no]' => $this->get_nepali_number($this->applicantDetail?->ward_no) ?? '',
+            '[@applicantDetail.tole]' => $this->get_nepali_number($this->applicantDetail?->tole) ?? '',
         ];
     }
 

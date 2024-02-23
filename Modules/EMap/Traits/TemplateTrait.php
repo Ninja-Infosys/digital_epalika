@@ -34,103 +34,108 @@ trait TemplateTrait
             get_nepali_number($this->get_today_nepali_date()),
 
             //mapApply
-            get_nepali_number($mapApply->registration_no ?? ''),
-            get_nepali_number($mapApply->registration_date ?? ''),
-            get_nepali_number($mapApply->construction_type?->label() ?? ''),
-            get_nepali_number($mapApply->usage?->label() ?? ''),
-            get_nepali_number($mapApply->building_category?->label() ?? ''),
-            get_nepali_number($mapApply->structureType->title ?? ''),
-            get_nepali_number($mapApply->current_storey ?? ''),
-            get_nepali_number($mapApply->future_storey ?? ''),
-            get_nepali_number($mapApply->area_of_plinth ?? ''),
-            get_nepali_number($mapApply->length ?? ''),
-            get_nepali_number($mapApply->breadth ?? ''),
-            get_nepali_number($mapApply->height ?? ''),
+            get_nepali_number($mapApply?->registration_no ?? ''),
+            get_nepali_number($mapApply?->registration_date ?? ''),
+            get_nepali_number($mapApply?->construction_type?->label() ?? ''),
+            get_nepali_number($mapApply?->usage?->label() ?? ''),
+            get_nepali_number($mapApply?->building_category?->label() ?? ''),
+            get_nepali_number($mapApply?->structureType->title ?? ''),
+            get_nepali_number($mapApply?->current_storey ?? ''),
+            get_nepali_number($mapApply?->future_storey ?? ''),
+            get_nepali_number($mapApply?->area_of_plinth ?? ''),
+            get_nepali_number($mapApply?->length ?? ''),
+            get_nepali_number($mapApply?->breadth ?? ''),
+            get_nepali_number($mapApply?->height ?? ''),
             //landDetail
-            get_nepali_number($mapApply->landDetail?->landUseArea?->title ?? ''),
-            get_nepali_number($mapApply->landDetail->ward_no ?? ''),
-            get_nepali_number($mapApply->landDetail->former_ward_no ?? ''),
-            get_nepali_number($mapApply->landDetail->tole ?? ''),
-            get_nepali_number($mapApply->landDetail->street_code_no ?? ''),
-            get_nepali_number($mapApply->landDetail->plot_no ?? ''),
-            get_nepali_number($mapApply->landDetail->unit_value ?? ''),
-            get_nepali_number($mapApply->landDetail->percentage_of_area_covered_by_building ?? ''),
-            get_nepali_number($mapApply->landDetail->former_local_body ?? ''),
-            get_nepali_number($mapApply->landDetail->road_name ?? ''),
+            get_nepali_number($mapApply?->landDetail?->landUseArea?->title ?? ''),
+            get_nepali_number($mapApply?->landDetail?->ward_no ?? ''),
+            get_nepali_number($mapApply?->landDetail?->former_ward_no ?? ''),
+            get_nepali_number($mapApply?->landDetail?->tole ?? ''),
+            get_nepali_number($mapApply?->landDetail?->street_code_no ?? ''),
+            get_nepali_number($mapApply?->landDetail?->plot_no ?? ''),
+            get_nepali_number($mapApply?->landDetail?->unit_value ?? ''),
+            get_nepali_number($mapApply?->landDetail?->percentage_of_area_covered_by_building ?? ''),
+            get_nepali_number($mapApply?->landDetail?->former_local_body ?? ''),
+            get_nepali_number($mapApply?->landDetail?->road_name ?? ''),
 
             //landowner
 
-            get_nepali_number($mapApply->landOwner->land_owner_type?->label() ?? ''),
-            get_nepali_number($mapApply->landOwner->name ?? ''),
-            get_nepali_number($mapApply->landOwner->phone ?? ''),
-            get_nepali_number($mapApply->landOwner->father_name ?? ''),
-            get_nepali_number($mapApply->landOwner->grandfather_name ?? ''),
-            get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district ?? ''),
-            get_nepali_number($mapApply->landOwner->citizenship_no ?? ''),
-            get_nepali_number($mapApply->landOwner->citizenship_issue_date ?? ''),
-            get_nepali_number($mapApply->landOwner->province?->province ?? ''),
-            get_nepali_number($mapApply->landOwner->district?->district ?? ''),
-            get_nepali_number($mapApply->landOwner->localBody?->local_body ?? ''),
-            get_nepali_number($mapApply->landOwner->ward_no ?? ''),
-            get_nepali_number($mapApply->landOwner->tole ?? ''),
+            get_nepali_number($mapApply?->landOwner?->land_owner_type?->label() ?? ''),
+            get_nepali_number($mapApply?->landOwner?->name ?? ''),
+            get_nepali_number($mapApply?->landOwner?->phone ?? ''),
+            get_nepali_number($mapApply?->landOwner?->father_name ?? ''),
+            get_nepali_number($mapApply?->landOwner?->grandfather_name ?? ''),
+            get_nepali_number($mapApply?->landOwner?->citizenshipIssueDistrict?->district ?? ''),
+            get_nepali_number($mapApply?->landOwner?->citizenship_no ?? ''),
+            get_nepali_number($mapApply?->landOwner?->citizenship_issue_date ?? ''),
+            get_nepali_number($mapApply?->landOwner?->province?->province ?? ''),
+            get_nepali_number($mapApply?->landOwner?->district?->district ?? ''),
+            get_nepali_number($mapApply?->landOwner?->localBody?->local_body ?? ''),
+            get_nepali_number($mapApply?->landOwner?->ward_no ?? ''),
+            get_nepali_number($mapApply?->landOwner?->tole ?? ''),
 
             //houseOwner
 
-            get_nepali_number($mapApply->houseOwner->name ?? ''),
-            get_nepali_number($mapApply->houseOwner->phone ?? ''),
-            get_nepali_number($mapApply->houseOwner->father_name ?? ''),
-            get_nepali_number($mapApply->houseOwner->grandfather_name ?? ''),
-            get_nepali_number($mapApply->houseOwner->citizenshipIssueDistrict->district ?? ''),
-            get_nepali_number($mapApply->houseOwner->citizenship_no ?? ''),
-            get_nepali_number($mapApply->houseOwner->citizenship_issue_date ?? ''),
-            get_nepali_number($mapApply->houseOwner->province?->province ?? ''),
-            get_nepali_number($mapApply->houseOwner->district?->district ?? ''),
-            get_nepali_number($mapApply->houseOwner->localBody?->local_body ?? ''),
-            get_nepali_number($mapApply->houseOwner->ward_no ?? ''),
-            get_nepali_number($mapApply->houseOwner->tole ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->name ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->phone ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->father_name ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->grandfather_name ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->citizenshipIssueDistrict?->district ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->citizenship_no ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->citizenship_issue_date ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->province?->province ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->district?->district ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->localBody?->local_body ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->ward_no ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->tole ?? ''),
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
-                'fourForts' => $mapApply->fourForts,
+                'fourForts' => $mapApply?->fourForts,
             ]),
             (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
-                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
-                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+                'actualSetBack' => $mapApply->fourForts?->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
             (string)View::make('emap::inc.land_four_forts_detail', [
-                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
-                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+                'actualSetBack' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
+                'towards' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
             (string)View::make('emap::inc.sanghiarsName', [
-                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+                'towards' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+
+            //storeyDetails
+            (string)View::make('emap::inc.height_of_each_storey', [
+                'storeyDetails' => $mapApply?->storeyDetails,
             ]),
 
             //applicantDetail
-            get_nepali_number($mapApply->applicantDetail->applicant_type?->label() ?? ''),
-            get_nepali_number($mapApply->applicantDetail->relation_with_owner?->label() ?? ''),
-            get_nepali_number($mapApply->applicantDetail->name ?? ''),
-            get_nepali_number($mapApply->applicantDetail->phone ?? ''),
-            get_nepali_number($mapApply->applicantDetail->father_name ?? ''),
-            get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district ?? ''),
-            get_nepali_number($mapApply->applicantDetail->citizenship_no ?? ''),
-            get_nepali_number($mapApply->applicantDetail->citizenship_issue_date ?? ''),
-            get_nepali_number($mapApply->applicantDetail->signature ?? ''),
-            get_nepali_number($mapApply->applicantDetail->province?->province ?? ''),
-            get_nepali_number($mapApply->applicantDetail->district?->district ?? ''),
-            get_nepali_number($mapApply->applicantDetail->localBody?->local_body ?? ''),
-            get_nepali_number($mapApply->applicantDetail->ward_no ?? ''),
-            get_nepali_number($mapApply->applicantDetail->tole ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->applicant_type?->label() ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->relation_with_owner?->label() ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->name ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->phone ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->father_name ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->citizenshipIssueDistrict?->district ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->citizenship_no ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->citizenship_issue_date ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->signature ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->province?->province ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->district?->district ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->localBody?->local_body ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->ward_no ?? ''),
+            get_nepali_number($mapApply?->applicantDetail?->tole ?? ''),
 
 
             //criteria detail
 
             (string)View::make('emap::inc.criteria_details', [
-                'criteriaDetails' => $mapApply->criteriaDetails,
+                'criteriaDetails' => $mapApply?->criteriaDetails,
             ]),
             //BuildingDetails
 
             (string)View::make('emap::inc.building_details', [
-                'buildingDetails' => $mapApply->buildingDetails,
+                'buildingDetails' => $mapApply?->buildingDetails,
             ]),
 
             //DesignerDetails
@@ -254,6 +259,9 @@ trait TemplateTrait
             '[@landFourFortsDetail]',
             '[@sanghiarsName]',
 
+
+            //StoreyDetails
+            '[@heightOfEachStorey]',
 
             //applicantDetail
 
