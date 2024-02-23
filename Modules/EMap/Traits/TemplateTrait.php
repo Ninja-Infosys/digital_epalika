@@ -109,6 +109,10 @@ trait TemplateTrait
             (string)View::make('emap::inc.height_of_each_storey', [
                 'storeyDetails' => $mapApply?->storeyDetails,
             ]),
+            (string)View::make('emap::inc.area_of_storey', [
+                'storeyDetails' => $mapApply?->storeyDetails,
+
+            ]),
 
             //applicantDetail
             get_nepali_number($mapApply?->applicantDetail?->applicant_type?->label() ?? ''),
@@ -262,6 +266,7 @@ trait TemplateTrait
 
             //StoreyDetails
             '[@heightOfEachStorey]',
+            '[@areaOfEachStorey]',
 
             //applicantDetail
 
