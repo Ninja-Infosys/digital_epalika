@@ -102,6 +102,13 @@ trait EMapTemplateTrait
             ],
         ],
         [
+            'title' => 'तल्लाको विवरण',
+            'data' => [
+                'प्रत्येक तल्लाको सिलिङ्ङ्को उचाई' => '[@heightOfEachStorey]',
+
+            ],
+        ],
+        [
             'title' => 'डिजाइनरको विवरण',
             'data' => [
                 'नाम' => '[@designerDetail.name]',
@@ -221,6 +228,7 @@ trait EMapTemplateTrait
             $this->getLandOwnerReplacement(),
             $this->getHouseOwnerReplacement(),
             $this->getFourFortsReplacement(),
+            $this->getHeightOfStoreyReplacement(),
             $this->getApplicantDetailReplacement(),
             $this->getCriteriaDetailsReplacement(),
             $this->getBuildingDetailsReplacement(),
@@ -335,6 +343,14 @@ trait EMapTemplateTrait
             ]),
             '[@sanghiarsName]' => (string)View::make('emap::inc.sanghiarsName', [
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
+            ]),
+        ];
+    }
+    private function getHeightOfStoreyReplacement(): array
+    {
+        return [
+            '[@heightOfEachStorey]' => (string)View::make('emap::inc.height_of_each_storey', [
+                'storeyDetails' => $this->storeyDetails,
             ]),
         ];
     }
