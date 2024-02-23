@@ -54,7 +54,7 @@ return [
         'stack' => [
             'driver' => 'stack',
             'name' => env('APP_NAME'),
-            'channels' => ['single'],
+            'channels' => ['single', 'slack'],
             'ignore_exceptions' => false,
         ],
 
