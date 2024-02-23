@@ -18,10 +18,13 @@ use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
 use Modules\EMap\Http\Requests\HouseOwnerArchive\StoreHouseOwnerArchiveRequest;
 use Modules\EMap\Http\Requests\HouseOwnerArchive\UpdateHouseOwnerArchiveRequest;
+use Modules\EMap\Traits\TemplateTrait;
 
 class HouseOwnerArchiveController extends Controller
 {
     use NepaliDateConverter;
+    use TemplateTrait;
+
     public function index(MapApply $mapApply)
     {
         $mapApply->load('houseOwnerArchives');
@@ -39,7 +42,7 @@ class HouseOwnerArchiveController extends Controller
     {
         $houseOwner = HouseOwner::where('map_apply_id', $mapApply->id)->first();
         DB::transaction(function () use ($houseOwner, $request, $mapApply) {
-            $houseOwnerArchive =  HouseOwnerArchive::create([
+            $houseOwnerArchive = HouseOwnerArchive::create([
                 'map_apply_id' => $mapApply->id,
                 'name' => $houseOwner->name,
                 'phone' => $houseOwner->phone,
@@ -51,7 +54,7 @@ class HouseOwnerArchiveController extends Controller
                 'address' => $houseOwner->address,
                 'local_body' => $houseOwner->local_body,
                 'ward_no' => $houseOwner->ward_no,
-                'status'=> $mapApply->sent_to_organization === 'done' ? 'complete':'not_complete',
+                'status' => $mapApply->sent_to_organization === 'done' ? 'complete' : 'not_complete',
             ]);
 
             $houseOwnerFiles = File::where('model_type', HouseOwner::class)
@@ -77,7 +80,7 @@ class HouseOwnerArchiveController extends Controller
                 'address' => $request->input('address'),
                 'local_body' => $request->input('local_body'),
                 'ward_no' => $request->input('ward_no'),
-                'status'=> $mapApply->sent_to_organization === 'done' ? 'complete':'not_complete',
+                'status' => $mapApply->sent_to_organization === 'done' ? 'complete' : 'not_complete',
             ]);
 
             foreach ($request->validated()['files'] as $file) {
@@ -103,7 +106,7 @@ class HouseOwnerArchiveController extends Controller
     public function show(MapApply $mapApply, HouseOwnerArchive $houseOwnerArchive)
     {
         $houseOwnerArchive->load('files');
-        return view('emap::admin.houseOwnerArchive.show',compact('houseOwnerArchive','mapApply'));
+        return view('emap::admin.houseOwnerArchive.show', compact('houseOwnerArchive', 'mapApply'));
     }
 
     public function edit(MapApply $mapApply, HouseOwnerArchive $houseOwnerArchive)
@@ -121,13 +124,12 @@ class HouseOwnerArchiveController extends Controller
         //
     }
 
-    public function print(MapApply $mapApply,HouseOwnerArchive $houseOwnerArchive)
+    public function print(MapApply $mapApply, HouseOwnerArchive $houseOwnerArchive)
     {
-        if($mapApply->sent_to_organization === 'done')
-        {
-            $mapSetting = MapSetting::first()?->muchulka_after_complietion??null;
-        }else{
-            $mapSetting = MapSetting::first()?->muchulka_before_complietion??null;
+        if ($mapApply->sent_to_organization === 'done') {
+            $mapSetting = MapSetting::first()?->muchulka_after_complietion ?? null;
+        } else {
+            $mapSetting = MapSetting::first()?->muchulka_before_complietion ?? null;
         }
         $mapApply->load(
             'landDetail',
@@ -139,341 +141,41 @@ class HouseOwnerArchiveController extends Controller
             'buildingDetails',
             'designerDetails'
         );
-        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply,$houseOwnerArchive), $mapSetting);
+        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply, $houseOwnerArchive), $mapSetting);
 
         return response()->json([
             'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
         ]);
     }
 
-    protected function getEmapTemplateData($mapApply,$houseOwnerArchive=null)
-    {
-        $designerDetail = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER)->first();
-        $supervisorDetail = $mapApply->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
-        $contractorDetail = $mapApply->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
-
-        return [
-
-            //header
-            letterHead(),
-            letterHeadEn(),
-            officeSetting()->name ?? '',
-            officeSetting()->site_address ?? '',
-            officeSetting()->province?->province ?? '',
-            officeSetting()->district?->district ?? '',
-            officeSetting()->localBody?->local_body ?? '',
-            officeSetting()->ward_no ??'',
-            get_nepali_number($this->get_today_nepali_date()),
-
-            //mapApply
-            get_nepali_number($mapApply->registration_no ?? ''),
-            get_nepali_number($mapApply->registration_date ?? ''),
-            get_nepali_number($mapApply->construction_type?->label() ?? ''),
-            get_nepali_number($mapApply->usage?->label() ?? ''),
-            get_nepali_number($mapApply->building_category?->label() ?? ''),
-            get_nepali_number($mapApply->structureType->title ?? ''),
-            get_nepali_number($mapApply->current_storey ?? ''),
-            get_nepali_number($mapApply->future_storey ?? ''),
-            get_nepali_number($mapApply->area_of_plinth ?? ''),
-            get_nepali_number($mapApply->length ?? ''),
-            get_nepali_number($mapApply->breadth ?? ''),
-           get_nepali_number($mapApply->height ?? ''),
-            //landDetail
-            get_nepali_number($mapApply->landDetail?->landUseArea?->title ?? ''),
-            get_nepali_number($mapApply->landDetail->ward_no ?? ''),
-            get_nepali_number($mapApply->landDetail->former_ward_no ?? ''),
-            get_nepali_number($mapApply->landDetail->tole ?? ''),
-            get_nepali_number($mapApply->landDetail->street_code_no ?? ''),
-            get_nepali_number($mapApply->landDetail->plot_no ?? ''),
-            get_nepali_number($mapApply->landDetail->unit_value ?? ''),
-            get_nepali_number($mapApply->landDetail->percentage_of_area_covered_by_building ?? ''),
-            get_nepali_number($mapApply->landDetail->former_local_body ?? ''),
-            get_nepali_number($mapApply->landDetail->road_name ?? ''),
-
-            //landowner
-
-            get_nepali_number($mapApply->landOwner->land_owner_type?->label() ?? ''),
-            get_nepali_number($mapApply->landOwner->name ?? ''),
-            get_nepali_number($mapApply->landOwner->phone ?? ''),
-            get_nepali_number($mapApply->landOwner->father_name ?? ''),
-            get_nepali_number($mapApply->landOwner->grandfather_name ?? ''),
-            get_nepali_number($mapApply->landOwner->citizenshipIssueDistrict->district ?? ''),
-            get_nepali_number($mapApply->landOwner->citizenship_no ?? ''),
-            get_nepali_number($mapApply->landOwner->citizenship_issue_date ?? ''),
-            get_nepali_number( $mapApply->landOwner->province?->province ?? ''),
-            get_nepali_number( $mapApply->landOwner->district?->district ?? ''),
-            get_nepali_number($mapApply->landOwner->localBody?->local_body ?? ''),
-            get_nepali_number($mapApply->landOwner->ward_no ?? ''),
-            get_nepali_number( $mapApply->landOwner->tole ?? ''),
-
-            //houseOwner
-
-
-
-            !empty($houseOwnerArchive) ? $houseOwnerArchive->name : $mapApply->houseOwner->name ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->phone : $mapApply->houseOwner->phone ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->father_name : $mapApply->houseOwner->father_name ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->grandfather_name : $mapApply->houseOwner->grandfather_name ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->citizenshipIssueDistrict->district : $mapApply->houseOwner->citizenshipIssueDistrict->district ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->citizenship_no : $mapApply->houseOwner->citizenship_no ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->citizenship_issue_date : $mapApply->houseOwner->citizenship_issue_date ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->province_id : $mapApply->houseOwner->province?->province ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->district_id : $mapApply->houseOwner->district?->district ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->local_body_id : $mapApply->houseOwner->local_body?->local_body ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->ward_no : $mapApply->houseOwner->ward_no ?? '',
-           !empty($houseOwnerArchive)? $houseOwnerArchive->tole : $mapApply->houseOwner->tole ?? '',
-
-            //FourForts
-            (string)View::make('emap::inc.four_forts_table', [
-                'fourForts' => $mapApply->fourForts,
-            ]),
-            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
-                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
-                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
-            ]),
-            (string)View::make('emap::inc.land_four_forts_detail', [
-                'actualSetBack' => $mapApply->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
-                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
-            ]),
-            (string)View::make('emap::inc.sanghiarsName', [
-                'towards' => $mapApply->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
-            ]),
-            //applicantDetail
-            get_nepali_number($mapApply->applicantDetail->applicant_type?->label() ?? ''),
-            get_nepali_number($mapApply->applicantDetail->relation_with_owner?->label() ?? ''),
-            get_nepali_number($mapApply->applicantDetail->name ?? ''),
-            get_nepali_number($mapApply->applicantDetail->phone ?? ''),
-            get_nepali_number($mapApply->applicantDetail->father_name ?? ''),
-            get_nepali_number($mapApply->applicantDetail->citizenshipIssueDistrict->district ?? ''),
-            get_nepali_number($mapApply->applicantDetail->citizenship_no ?? ''),
-            get_nepali_number($mapApply->applicantDetail->citizenship_issue_date ?? ''),
-            get_nepali_number($mapApply->applicantDetail->signature ?? ''),
-            get_nepali_number($mapApply->applicantDetail->province?->province ?? ''),
-            get_nepali_number($mapApply->applicantDetail->district?->district ?? ''),
-            get_nepali_number($mapApply->applicantDetail->localBody?->local_body ?? ''),
-            get_nepali_number($mapApply->applicantDetail->ward_no ?? ''),
-            get_nepali_number($mapApply->applicantDetail->tole ?? ''),
-
-            //criteria detail
-
-            (string)View::make('emap::inc.criteria_details', [
-                'criteriaDetails' => $mapApply->criteriaDetails,
-            ]),
-            //BuildingDetails
-
-            (string)View::make('emap::inc.building_details', [
-                'buildingDetails' => $mapApply->buildingDetails,
-            ]),
-
-            //DesignerDetails
-
-            get_nepali_number($designerDetail->name ?? ''),
-            get_nepali_number($designerDetail->father_name ?? ''),
-            get_nepali_number($designerDetail->phone ?? ''),
-            get_nepali_number($designerDetail->address ?? ''),
-            get_nepali_number($designerDetail->local_body ?? ''),
-            get_nepali_number($designerDetail->ward_no ?? ''),
-            get_nepali_number($designerDetail->nec_council_no ?? ''),
-            get_nepali_number($designerDetail->local_body_registration_no ?? ''),
-            get_nepali_number($designerDetail->consulting_firm_name ?? ''),
-            get_nepali_number($designerDetail->district?->district ?? ''),
-
-            //supervisorDetails
-
-            get_nepali_number($supervisorDetail->name ?? ''),
-            get_nepali_number($supervisorDetail->father_name ?? ''),
-            get_nepali_number($supervisorDetail->phone ?? ''),
-            get_nepali_number($supervisorDetail->address ?? ''),
-            get_nepali_number($supervisorDetail->local_body ?? ''),
-            get_nepali_number($supervisorDetail->ward_no ?? ''),
-            get_nepali_number($supervisorDetail->nec_council_no ?? ''),
-            get_nepali_number($supervisorDetail->local_body_registration_no ?? ''),
-            get_nepali_number($supervisorDetail->consulting_firm_name ?? ''),
-            get_nepali_number($supervisorDetail->district?->district ?? ''),
-
-            //ContractorDetails
-
-            get_nepali_number($contractorDetail->name ?? ''),
-            get_nepali_number($contractorDetail->father_name ?? ''),
-            get_nepali_number($contractorDetail->phone ?? ''),
-            get_nepali_number($contractorDetail->address ?? ''),
-            get_nepali_number($contractorDetail->local_body ?? ''),
-            get_nepali_number($contractorDetail->ward_no ?? ''),
-            get_nepali_number($contractorDetail->nec_council_no ?? ''),
-            get_nepali_number($contractorDetail->local_body_registration_no ?? ''),
-            get_nepali_number($contractorDetail->consulting_firm_name ?? ''),
-            get_nepali_number($contractorDetail->district?->district ?? ''),
-        ];
-    }
-
-    private function getReplaceData()
-    {
-        return [
-            //header
-
-            '[@letterHead]',
-            '[@letterHeadEn]',
-            '[@officeName]',
-            '[@officeAddress]',
-            '[@officeProvince]',
-            '[@officeDistrict]',
-            '[@officeLocalBody]',
-            '[@officeWardNo]',
-            '[@today_date]',
-            //mapApply
-
-            '[@registration_no]',
-            '[@registration_date]',
-            '[@construction_type]',
-            '[@usage]',
-            '[@building_category]',
-            '[@structureType]',
-            '[@current_storey]',
-            '[@future_storey]',
-            '[@area_of_plinth]',
-            '[@length]',
-            '[@breadth]',
-            '[@height]',
-            //landDetail
-            '[@landDetail.land_use_area.title]',
-            '[@landDetail.ward_no]',
-            '[@landDetail.former_ward_no]',
-            '[@landDetail.tole]',
-            '[@landDetail.street_code_no]',
-            '[@landDetail.plot_no]',
-            '[@landDetail.area]',
-            '[@landDetail.percentage_of_area_covered_by_building]',
-            '[@landDetail.former_local_body]',
-            '[@landDetail.road_name]',
-
-            //landOwner
-            '[@landOwner.land_owner_type]',
-            '[@landOwner.name]',
-            '[@landOwner.phone]',
-            '[@landOwner.father_name]',
-            '[@landOwner.grandfather_name]',
-            '[@landOwner.citizenship_issue_district]',
-            '[@landOwner.citizenship_no]',
-            '[@landOwner.citizenship_issue_date]',
-            '[@landOwner.province]',
-            '[@landOwner.district]',
-            '[@landOwner.local_body]',
-            '[@landOwner.ward_no]',
-            '[@landOwner.tole]',
-
-            //houseOwner
-
-            '[@houseOwner.name]',
-            '[@houseOwner.phone]',
-            '[@houseOwner.father_name]',
-            '[@houseOwner.grandfather_name]',
-            '[@houseOwner.citizenship_issue_district]',
-            '[@houseOwner.citizenship_no]',
-            '[@houseOwner.citizenship_issue_date]',
-            '[@houseOwner.province]',
-            '[@houseOwner.district]',
-            '[@houseOwner.local_body]',
-            '[@houseOwner.ward_no]',
-            '[@houseOwner.tole]',
-
-            //FourForts
-
-            '[@fourForts]',
-            '[@nameOfTheFortsAndSanghiars]',
-            '[@landFourFortsDetail]',
-            '[@sanghiarsName]',
-
-
-            //applicantDetail
-
-            '[@applicantDetail.applicant_type]',
-            '[@applicantDetail.relation_with_owner]',
-            '[@applicantDetail.name]',
-            '[@applicantDetail.phone]',
-            '[@applicantDetail.father_name]',
-            '[@applicantDetail.citizenship_issue_district]',
-            '[@applicantDetail.citizenship_no]',
-            '[@applicantDetail.citizenship_issue_date]',
-            '[@applicantDetail.signature]',
-            '[@applicantDetail.province]',
-            '[@applicantDetail.district]',
-            '[@applicantDetail.local_body]',
-            '[@applicantDetail.ward_no]',
-            '[@applicantDetail.tole]',
-            //criteria detail
-            '[@criteriaDetails]',
-
-            //BuildingDetails
-            '[@buildingDetails]',
-
-            //DesignerDetails
-            '[@designerDetail.name]',
-            '[@designerDetail.father_name]',
-            '[@designerDetail.phone]',
-            '[@designerDetail.address]',
-            '[@designerDetail.local_body]',
-            '[@designerDetail.ward_no]',
-            '[@designerDetail.nec_council_no]',
-            '[@designerDetail.local_body_registration_no]',
-            '[@designerDetail.consulting_firm_name]',
-            '[@designerDetail.district]',
-
-            //supervisorDetails
-
-            '[@supervisorDetail.name]',
-            '[@supervisorDetail.father_name]',
-            '[@supervisorDetail.phone]',
-            '[@supervisorDetail.address]',
-            '[@supervisorDetail.local_body]',
-            '[@supervisorDetail.ward_no]',
-            '[@supervisorDetail.nec_council_no]',
-            '[@supervisorDetail.local_body_registration_no]',
-            '[@supervisorDetail.consulting_firm_name]',
-            '[@supervisorDetail.district]',
-
-            //ContractorDetails
-
-            '[@contractorDetail.name]',
-            '[@contractorDetail.father_name]',
-            '[@contractorDetail.phone]',
-            '[@contractorDetail.address]',
-            '[@contractorDetail.local_body]',
-            '[@contractorDetail.ward_no]',
-            '[@contractorDetail.nec_council_no]',
-            '[@contractorDetail.local_body_registration_no]',
-            '[@contractorDetail.consulting_firm_name]',
-            '[@contractorDetail.district]',
-        ];
-    }
-
-    public function uploadDocument(Request $request,MapApply $mapApply,HouseOwnerArchive $houseOwnerArchive)
+    public function uploadDocument(Request $request, MapApply $mapApply, HouseOwnerArchive $houseOwnerArchive)
     {
 
         $data = $request->validate([
-            'document'=>['required','file']
+            'document' => ['required', 'file']
         ]);
         $houseOwnerArchive->update($data);
-        toast('Document added Successfully','success');
+        toast('Document added Successfully', 'success');
         return back();
     }
-    public function uploadDocumentHouseOwner(Request $request,MapApply $mapApply,HouseOwner $houseOwner)
+
+    public function uploadDocumentHouseOwner(Request $request, MapApply $mapApply, HouseOwner $houseOwner)
     {
 
         $data = $request->validate([
-            'document'=>['required','file']
+            'document' => ['required', 'file']
         ]);
         $houseOwner->update($data);
-        toast('Document added Successfully','success');
+        toast('Document added Successfully', 'success');
         return back();
     }
 
-    public function printHouseOwner(MapApply $mapApply,HouseOwner $houseOwner)
+    public function printHouseOwner(MapApply $mapApply, HouseOwner $houseOwner)
     {
-        if($mapApply->sent_to_organization === 'done')
-        {
-            $mapSetting = MapSetting::first()?->muchulka_after_complietion??null;
-        }else{
-            $mapSetting = MapSetting::first()?->muchulka_before_complietion??null;
+        if ($mapApply->sent_to_organization === 'done') {
+            $mapSetting = MapSetting::first()?->muchulka_after_complietion ?? null;
+        } else {
+            $mapSetting = MapSetting::first()?->muchulka_before_complietion ?? null;
         }
         $mapApply->load(
             'landDetail',
