@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\DigitalBoard\Entities;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -32,20 +33,19 @@ class PhotoGallery extends Model
     ];
     protected $casts = [
         'is_displayed' => 'boolean',
-        
     ];
     protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => explode(',', $value),
-            set: fn(string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+            get: fn (string $value) => explode(',', $value),
+            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
         );
     }
     public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
     {
         $builder->where('is_displayed', $display);
     }
-    
+
     protected function image(): Attribute
     {
         return Attribute::make(

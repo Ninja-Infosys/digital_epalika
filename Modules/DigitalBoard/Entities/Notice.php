@@ -42,19 +42,16 @@ class Notice extends Model
 
     protected $casts = [
         'is_displayed' => 'boolean',
-        
-        'ward' => 'array',
-        
     ];
     protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => $value ? explode(',', $value) : [],
-            set: fn(string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
+            get: fn (string $value) => $value ? explode(',', $value) : [],
+            set: fn (string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
         );
     }
 
-    
+
     public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
     {
         $builder->where('is_displayed', $display);
