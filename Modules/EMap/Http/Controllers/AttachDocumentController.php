@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\View;
 use Modules\EMap\Entities\AttachDocument;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
+use Modules\EMap\Entities\FileTemplateStore;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\AppliedDocument;
@@ -123,20 +124,7 @@ class AttachDocumentController extends Controller
 
     public function printTemplate(MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
-
-        $formDataType->load('model');
-        $mapApply->load(
-            'landDetail',
-            'landOwner',
-            'houseOwner',
-            'fourForts',
-            'applicantDetail.citizenshipIssueDistrict',
-            'criteriaDetails',
-            'buildingDetails',
-            'designerDetails'
-        );
-        $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
-
+        $data = $this->getPrintData($mapApply, $form, $formDataType);
         return response()->json([
             'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
         ]);
@@ -425,5 +413,53 @@ class AttachDocumentController extends Controller
         }
 
         return view('emap::organization.attach-document.form-print', compact('template', 'formDataType'));
+    }
+
+    public function editTemplate(MapApply $mapApply, Form $form, FormDataType $formDataType)
+    {
+        $data = $this->getPrintData($mapApply, $form, $formDataType);
+        return view('emap::organization.template-edit.edit-file', compact('mapApply', 'data', 'formDataType', 'form'));
+    }
+
+    public function storeFileTemplate(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType)
+    {
+        $request->validate([
+            'data' => ['required']
+        ]);
+        FileTemplateStore::updateOrCreate([
+            'map_apply_id' => $mapApply->id,
+            'form_id' => $form->id,
+            'form_data_type_id' => $formDataType->id,
+        ], ['data' => $request->input('data')]);
+        toast('टेम्प्लेट विवरण सम्पादन सफलतापूर्वक गरियो', 'success');
+        return redirect(route('organization.admin.formDetail', [$mapApply, $form])  );
+    }
+
+    /**
+     * @param MapApply $mapApply
+     * @param Form $form
+     * @param FormDataType $formDataType
+     * @return string
+     */
+    public function getPrintData(MapApply $mapApply, Form $form, FormDataType $formDataType): string
+    {
+        $fileTemplateStore = FileTemplateStore::where('map_apply_id', $mapApply->id)
+            ->where('form_id', $form->id)
+            ->where('form_data_type_id', $formDataType->id)
+            ->first()?->data ?? null;
+
+        $formDataType->load('model');
+        $mapApply->load(
+            'landDetail',
+            'landOwner',
+            'houseOwner',
+            'fourForts',
+            'storeyDetails',
+            'applicantDetail.citizenshipIssueDistrict',
+            'criteriaDetails',
+            'buildingDetails',
+            'designerDetails'
+        );
+        return $fileTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model?->data);
     }
 }

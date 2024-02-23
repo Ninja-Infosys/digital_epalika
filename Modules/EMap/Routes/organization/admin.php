@@ -25,6 +25,10 @@ Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class
 Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
 Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AttachDocumentController::class, 'formStorePrint'])->name('formStorePrint');
 Route::get('formDataType/{formDataType}/formStore/{formStore}/formStoreStatus/{formStoreStatus}/formStoreStatusPrint', [AttachDocumentController::class, 'formStoreStatusPrint'])->name('formStoreStatusPrint');
+//store and edit file template
+Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/editTemplate', [AttachDocumentController::class, 'editTemplate'])->name('editTemplate');
+Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/storeFileTemplate', [AttachDocumentController::class, 'storeFileTemplate'])->name('storeFileTemplate');
+
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::get('mapApply/{mapApply}/view/{form}/detail', [MapApplyController::class, 'viewDetail'])->name('organization.view-detail');
 Route::put('formStore/{formStore}/uploadDocument', [MapApplyController::class,'uploadDocument'])->name('uploadFormStoreDocument');
