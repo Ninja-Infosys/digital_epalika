@@ -37,11 +37,10 @@
 {{--                    </div>--}}
                 </div>
                 <div class="card-body">
-                    <form action=""
+                    <form action="{{route('emap.admin.storeFileTemplate',[$mapApply,$form,$formDataType])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('put')
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>

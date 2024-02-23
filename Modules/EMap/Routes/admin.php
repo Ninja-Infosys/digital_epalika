@@ -67,7 +67,7 @@ Route::resource('mapApply/{mapApply}/organizationArchive', OrganizationArchiveCo
 
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/{id}/appliedDocument', [AdminStepController::class, 'updateDocument'])->name('updateDocument');
 //templete print
-Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AdminStepController::class, 'printTemplate'])->name('printTemplate');
+Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/print', [AdminStepController::class, 'printTemplate'])->name('printTemplate');
 Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AdminStepController::class, 'formStorePrint'])->name('formStorePrint');
 Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/editTemplate', [AdminStepController::class, 'editTemplate'])->name('editTemplate');
 Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/storeFileTemplate', [AdminStepController::class, 'storeFileTemplate'])->name('storeFileTemplate');
