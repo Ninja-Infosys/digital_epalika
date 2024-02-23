@@ -668,6 +668,7 @@ class AdminStepController extends Controller
             'landOwner',
             'houseOwner',
             'fourForts',
+            'storeyDetails',
             'applicantDetail.citizenshipIssueDistrict',
             'criteriaDetails',
             'buildingDetails',
