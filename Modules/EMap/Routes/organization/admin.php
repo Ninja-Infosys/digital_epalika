@@ -20,7 +20,7 @@ Route::controller(MapApplyController::class)->group(function () {
 Route::get('mapApply/{mapApply}/form', [MapApplyController::class, 'formList'])->name('formList');
 Route::get('mapApply/{mapApply}/form/{form}/formDetail', [MapApplyController::class, 'formDetail'])->name('formDetail');
 Route::resource('mapApply', MapApplyController::class);
-Route::get('mapApply/{mapApply}/formDataType/{formDataType}/print', [AttachDocumentController::class, 'printTemplate'])->name('printTemplate');
+Route::get('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/print', [AttachDocumentController::class, 'printTemplate'])->name('printTemplate');
 Route::get('appliedDocument/{appliedDocument}', [AttachDocumentController::class, 'documentDetail'])->name('documentDetail');
 Route::get('formStore/{formStore}', [AttachDocumentController::class, 'formStoreDetail'])->name('formStoreDetail');
 Route::get('formDataType/{formDataType}/formStore/{formStore}/print', [AttachDocumentController::class, 'formStorePrint'])->name('formStorePrint');

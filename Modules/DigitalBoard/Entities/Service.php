@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\DigitalBoard\Entities;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\Settings\Branch;
@@ -47,8 +48,8 @@ class Service extends Model
     protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => explode(',', $value),
-            set: fn(string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+            get: fn (string $value) => explode(',', $value),
+            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
         );
     }
     public function branch(): BelongsTo
