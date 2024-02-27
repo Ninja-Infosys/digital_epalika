@@ -176,7 +176,7 @@
                                         <td>{{$organization->organizationDetail->org_contact ?? ''}}</td>
                                     </tr>
                                     <tr>
-                                        <th>लिङ्ग</th>
+                                        <th>कम्पनी दर्ता नं</th>
                                         <td>{{$organization->organizationDetail->org_registration_no ?? ''}}</td>
                                     </tr>
                                     <tr>
