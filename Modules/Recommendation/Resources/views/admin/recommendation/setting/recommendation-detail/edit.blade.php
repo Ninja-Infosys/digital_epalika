@@ -185,6 +185,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                @livewire('sipharish-form-type-livewire',['formData'=>$recommendationDetail])
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">

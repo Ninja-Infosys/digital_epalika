@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -52,5 +53,10 @@ class RecommendationDetail extends Model
     public function recommendationDocuments(): BelongsToMany
     {
         return $this->belongsToMany(RecommendationDocument::class, 'recom_detail_recom_document', 'recommendation_detail_id', 'recommendation_document_id');
+    }
+
+    public function recommendationFormFields(): HasMany
+    {
+        return $this->hasMany(RecommendationFormField::class);
     }
 }

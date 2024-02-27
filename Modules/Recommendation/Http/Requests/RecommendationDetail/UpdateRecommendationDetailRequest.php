@@ -38,6 +38,16 @@ class UpdateRecommendationDetailRequest extends FormRequest
             'revenueHeaders.*'=>['required',Rule::exists('revenue_headers','id')->withoutTrashed()],
             'recommendationDocuments'=>['required','array'],
             'recommendationDocuments.*'=>['required',Rule::exists('recommendation_documents','id')->withoutTrashed()],
+            "form" => ['required', 'array'],
+            "form.*.id" => ['nullable'],
+            "form.*.field_name" => ['required'],
+            "form.*.slug" => ['required', 'alpha_dash'],
+            "form.*.type" => ['required'],
+            "form.*.table" => ['nullable', 'array'],
+            "form.*.table.*.id" => ['nullable'],
+            "form.*.table.*.field_name" => ['nullable'],
+            "form.*.table.*.slug" => ['nullable','alpha_dash'],
+            "form.*.table.*.type" => ['nullable'],
         ];
     }
 }
