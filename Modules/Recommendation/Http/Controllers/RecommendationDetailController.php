@@ -2,8 +2,6 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Recommendation\Entities\RecommendationCategory;
@@ -19,7 +17,7 @@ class RecommendationDetailController extends Controller
     public function index()
     {
         $recommendationDetails = RecommendationDetail::all();
-        return view('recommendation::admin.recommendation.setting.recommendation-detail.index',compact('recommendationDetails'));
+        return view('recommendation::admin.recommendation.setting.recommendation-detail.index', compact('recommendationDetails'));
     }
 
     public function create()
@@ -27,29 +25,26 @@ class RecommendationDetailController extends Controller
         $recommendationCategories = RecommendationCategory::all();
         $revenueHeaders = RevenueHeader::all();
         $recommendationDocuments = RecommendationDocument::all();
-        return view('recommendation::admin.recommendation.setting.recommendation-detail.create',compact('recommendationDocuments','recommendationCategories','revenueHeaders'));
+        return view('recommendation::admin.recommendation.setting.recommendation-detail.create', compact('recommendationDocuments', 'recommendationCategories', 'revenueHeaders'));
     }
 
     public function store(StoreRecommendationDetailRequest $request)
     {
 
-       DB::transaction(function () use ($request){
-           $recommendationDetail = RecommendationDetail::create($request->validated());
-           $recommendationDetail->revenueHeaders()->attach($request->validated()['revenueHeaders']);
-           $recommendationDetail->recommendationDocuments()->attach($request->validated()['recommendationDocuments']);
+        DB::transaction(function () use ($request) {
+            $recommendationDetail = RecommendationDetail::create($request->validated());
+            $recommendationDetail->revenueHeaders()->attach($request->validated()['revenueHeaders']);
+            $recommendationDetail->recommendationDocuments()->attach($request->validated()['recommendationDocuments']);
 
-           foreach ($request->validated()['form'] as $formData)
-           {
-               $recommendationData = $recommendationDetail->recommendationFormFields()->create($this->getFormData($formData));
-               if($formData['type'] === 'table')
-               {
-                   foreach ($formData['table'] as $tableData)
-                   {
-                       $recommendationData->recommendationFormFields()->create($this->getFormData($tableData));
-                   }
-               }
-           }
-       });
+            foreach ($request->validated()['form'] as $formData) {
+                $recommendationData = $recommendationDetail->recommendationFormFields()->create($this->getFormData($formData));
+                if($formData['type'] === 'table') {
+                    foreach ($formData['table'] as $tableData) {
+                        $recommendationData->recommendationFormFields()->create($this->getFormData($tableData));
+                    }
+                }
+            }
+        });
         toast('सिफारिस विवरण सफलतापूर्वक थपियो', 'success');
         return back();
     }
@@ -61,61 +56,57 @@ class RecommendationDetailController extends Controller
 
     public function edit(RecommendationDetail $recommendationDetail)
     {
-        $recommendationDetail->load('revenueHeaders','recommendationDocuments','recommendationFormFields.recommendationFormFields');
+        $recommendationDetail->load('revenueHeaders', 'recommendationDocuments', 'recommendationFormFields.recommendationFormFields');
         $revenueHeaders = RevenueHeader::all();
         $recommendationCategories = RecommendationCategory::all();
         $recommendationDocuments = RecommendationDocument::all();
-        return view('recommendation::admin.recommendation.setting.recommendation-detail.edit',compact('recommendationDocuments','revenueHeaders','recommendationDetail','recommendationCategories'));
+        return view('recommendation::admin.recommendation.setting.recommendation-detail.edit', compact('recommendationDocuments', 'revenueHeaders', 'recommendationDetail', 'recommendationCategories'));
     }
 
     public function update(UpdateRecommendationDetailRequest $request, RecommendationDetail $recommendationDetail)
     {
         $validatedData = $request->validated();
-        RecommendationFormField::whereNotIn('id', collect(collect($validatedData['form'])->pluck('id')->toArray()))
-               ->where('recommendation_detail_id',$recommendationDetail->id)
+        RecommendationFormField::whereNotIn('id', collect($validatedData['form'])->pluck('id')->toArray())
+               ->where('recommendation_detail_id', $recommendationDetail->id)
                ->delete();
-       DB::transaction(function ()use ($validatedData,$recommendationDetail){
-           $keysToCheck = ['is_citizenship_required', 'is_applicable_org', 'is_applicant_self','is_permission_required','is_taxcode_required','add_land_diff_locations','is_applicable_on_recommendation']; // Keys to check for existence
-           foreach ($keysToCheck as $key) {
-               if (!array_key_exists($key, $validatedData)) {
-                   $validatedData[$key] = 0;
-               }
-           }
-           $recommendationDetail->update($validatedData);
-           $recommendationDetail->revenueHeaders()->sync($validatedData['revenueHeaders']);
-           $recommendationDetail->recommendationDocuments()->sync($validatedData['recommendationDocuments']);
+        DB::transaction(function () use ($validatedData, $recommendationDetail) {
+            $keysToCheck = ['is_citizenship_required', 'is_applicable_org', 'is_applicant_self','is_permission_required','is_taxcode_required','add_land_diff_locations','is_applicable_on_recommendation']; // Keys to check for existence
+            foreach ($keysToCheck as $key) {
+                if (!array_key_exists($key, $validatedData)) {
+                    $validatedData[$key] = 0;
+                }
+            }
+            $recommendationDetail->update($validatedData);
+            $recommendationDetail->revenueHeaders()->sync($validatedData['revenueHeaders']);
+            $recommendationDetail->recommendationDocuments()->sync($validatedData['recommendationDocuments']);
 
-           foreach ($validatedData['form'] as $formData)
-           {
-               if(array_key_exists('id', $formData))
-               {
-                   $recommendationFormFieldId = RecommendationFormField::find($formData['id']);
+            foreach ($validatedData['form'] as $formData) {
+                if(array_key_exists('id', $formData) && !empty($formData['id'])) {
+                    $recommendationFormFieldId = RecommendationFormField::find($formData['id']);
                     $recommendationFormFieldId->update($formData);
-                   if($formData['type'] === 'table')
-                   {
-                       foreach ($formData['table'] as $tableData)
-                       {
-                            if(array_key_exists('id', $tableData) && !empty($tableData['id']))
-                            {
-                            $tableId = RecommendationFormField::find($tableData['id']);
-                            $tableId?->update($tableData);
-                            }else{
+                    if($formData['type'] === 'table') {
+                        RecommendationFormField::whereNotIn('id', collect($formData['table'])->pluck('id')->toArray())
+                            ->where('recommendation_form_field_id', $recommendationFormFieldId->id)
+                            ->delete();
+                        foreach ($formData['table'] as $tableData) {
+                            if(array_key_exists('id', $tableData) && !empty($tableData['id'])) {
+                                $tableId = RecommendationFormField::find($tableData['id']);
+                                $tableId?->update($tableData);
+                            } else {
                                 $recommendationFormFieldId->recommendationFormFields()->create($this->getFormData($tableData));
                             }
-                       }
-                   }
-               }else{
-               $recommendationData = $recommendationDetail->recommendationFormFields()->create($this->getFormData($formData));
-               if($formData['type'] === 'table')
-               {
-                   foreach ($formData['table'] as $tableData)
-                   {
-                       $recommendationData->recommendationFormFields()->create($this->getFormData($tableData));
-                   }
-               }
-           }
-           }
-       });
+                        }
+                    }
+                } else {
+                    $recommendationData = $recommendationDetail->recommendationFormFields()->create($this->getFormData($formData));
+                    if($formData['type'] === 'table') {
+                        foreach ($formData['table'] as $tableData) {
+                            $recommendationData->recommendationFormFields()->create($this->getFormData($tableData));
+                        }
+                    }
+                }
+            }
+        });
         toast('सिफारिस विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.recommendation.setting.recommendationDetail.index'));
     }
@@ -142,7 +133,7 @@ class RecommendationDetailController extends Controller
      * @param mixed $formData
      * @return array
      */
-    function getFormData(mixed $formData): array
+    public function getFormData(mixed $formData): array
     {
         return [
             'created_by' => auth()->id(),

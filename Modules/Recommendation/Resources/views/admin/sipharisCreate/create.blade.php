@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
                         <div class="d-flex flex-wrap align-items-center">
-                      @include('livewire.search-livewire')
+{{--                      @include('livewire.search-livewire')--}}
                         <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.index') }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सिफारिस सुची
@@ -46,8 +46,8 @@
                             </ul>
                         </div>
                     @endif
-                    <livewire:recommendation::recommendation-apply-livewire />
-                   {{-- <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post"
+{{--                    <livewire:recommendation::recommendation-apply-livewire />--}}
+                   <form action="{{ route('admin.recommendation.sipharish.sipharishCreate.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @livewire('field', [
@@ -97,7 +97,7 @@
                         <button type="submit" class="btn btn-primary mt-2">
                             पेश गर्नुहोस्
                         </button>
-                    </form>--}}
+                    </form>
                 </div>
             </div>
 
