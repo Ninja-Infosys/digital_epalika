@@ -38,6 +38,7 @@ class RecommendationDetail extends Model
         'order',
         'status',
         'description',
+        'content',
    ];
 
     public function recommendationCategory(): BelongsTo
@@ -58,5 +59,21 @@ class RecommendationDetail extends Model
     public function recommendationFormFields(): HasMany
     {
         return $this->hasMany(RecommendationFormField::class);
+    }
+
+    public function getTemplateOptions(): array
+    {
+        return [[
+            'title' => 'ठेगाना',
+            'data' => [
+                'प्रदेश' => '[@province]',
+                'जिल्ला' => '[@district]',
+                'पालिका' => '[@muncipal]',
+                'वडा नं' => '[@ward_no]',
+                'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
+                'आजको मिति (ई.स.)' => '[@today_date_ad]',
+//                'लेटरहेड' => '[@letterHead]',
+            ],
+        ]];
     }
 }

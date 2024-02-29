@@ -66,6 +66,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class,'updateStatus'])->name('recommendationCategory.updateStatus');
     Route::resource('recommendationCategory', RecommendationCategoryController::class);
     Route::resource('recommendationDocument', RecommendationDocumentController::class);
+    Route::put('recommendationDetail/{recommendationDetail}/updateTemplate', [RecommendationDetailController::class,'updateTemplate'])->name('recommendationDetail.updateTemplate');
     Route::get('recommendationDetail/{recommendationDetail}/updateStatus', [RecommendationDetailController::class,'updateStatus'])->name('recommendationDetail.updateStatus');
     Route::resource('recommendationDetail', RecommendationDetailController::class);
 });

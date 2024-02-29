@@ -3,6 +3,8 @@
 namespace Modules\Recommendation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RecommendationDetail;
@@ -51,7 +53,8 @@ class RecommendationDetailController extends Controller
 
     public function show(RecommendationDetail $recommendationDetail)
     {
-        return view('recommendation::show');
+        $recommendationDetail->load('recommendationFormFields');
+        return view('recommendation::admin.recommendation.setting.recommendation-detail.show', compact('recommendationDetail'));
     }
 
     public function edit(RecommendationDetail $recommendationDetail)
@@ -141,5 +144,18 @@ class RecommendationDetailController extends Controller
             'slug' => $formData['slug'],
             'type' => $formData['type'],
         ];
+    }
+
+    public function updateTemplate(Request $request, RecommendationDetail $recommendationDetail)
+    {
+        $request->validate([
+            'content' => ['required']
+        ]);
+
+        $recommendationDetail->update([
+            'content' => $request->input('content')
+        ]);
+        toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
     }
 }
