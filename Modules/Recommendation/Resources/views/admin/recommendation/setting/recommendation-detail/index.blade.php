@@ -56,7 +56,7 @@
                                             class="fa fa-2x {{ $recommendationDetail->status ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="d-flex gap-1">
 
                                     @can('recommendationCategory_edit')
                                         <a data-bs-type="edit"
@@ -66,6 +66,14 @@
                                             <i class="fa fa-pen"></i>
                                         </a>
                                     @endcan
+                                        @can('recommendationCategory_edit')
+                                            <a data-bs-type="edit"
+                                               href="{{ route('admin.recommendation.setting.recommendationDetail.show',  $recommendationDetail) }}"
+                                               class="btn btn-xs btn-outline-warning  {{get_setting('Pin')?'confirm_pin':''}}"
+                                               title="टेम्प्लेट सेट गर्नुहोस">
+                                                <i class="fa {{$recommendationDetail->content != null ? 'fa-check' : 'fa-times'}}"></i>
+                                            </a>
+                                        @endcan
                                     @can('recommendationCategory_delete')
                                         <form
                                             action="{{ route('admin.recommendation.setting.recommendationDetail.destroy', $recommendationDetail) }}"

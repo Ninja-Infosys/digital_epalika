@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -37,6 +38,7 @@ class RecommendationDetail extends Model
         'order',
         'status',
         'description',
+        'content',
    ];
 
     public function recommendationCategory(): BelongsTo
@@ -52,5 +54,26 @@ class RecommendationDetail extends Model
     public function recommendationDocuments(): BelongsToMany
     {
         return $this->belongsToMany(RecommendationDocument::class, 'recom_detail_recom_document', 'recommendation_detail_id', 'recommendation_document_id');
+    }
+
+    public function recommendationFormFields(): HasMany
+    {
+        return $this->hasMany(RecommendationFormField::class);
+    }
+
+    public function getTemplateOptions(): array
+    {
+        return [[
+            'title' => 'ठेगाना',
+            'data' => [
+                'प्रदेश' => '[@province]',
+                'जिल्ला' => '[@district]',
+                'पालिका' => '[@muncipal]',
+                'वडा नं' => '[@ward_no]',
+                'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
+                'आजको मिति (ई.स.)' => '[@today_date_ad]',
+//                'लेटरहेड' => '[@letterHead]',
+            ],
+        ]];
     }
 }
