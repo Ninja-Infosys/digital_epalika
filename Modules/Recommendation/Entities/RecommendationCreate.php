@@ -17,26 +17,29 @@ use Illuminate\Support\Str;
 
 class RecommendationCreate extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
     use NepaliDateConverter;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'recommendation_detail_id',
-       'signature_by',
-       'approved_by',
-       'approved_date',
-       'approved_status',
-       'created_by',
-       'file',
-       'mobile_user_id',
-       'status',
-   ];
+    protected $fillable = [
+        'recommendation_detail_id',
+        'signature_by',
+        'approved_by',
+        'approved_date',
+        'approved_status',
+        'created_by',
+        'file',
+        'mobile_user_id',
+        'personal_detail_id',
+        'status',
+    ];
 
     public function signatureBy(): BelongsTo
     {
@@ -66,6 +69,11 @@ class RecommendationCreate extends Model
     public function mobileUser(): BelongsTo
     {
         return $this->belongsTo(MobileUser::class);
+    }
+
+    public function personalDetail(): BelongsTo
+    {
+        return $this->belongsTo(PersonalDetail::class);
     }
 
     public function resolveTemplate(): string
@@ -105,5 +113,10 @@ class RecommendationCreate extends Model
     public function getFileUrlAttribute(): string
     {
         return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : asset('images/user_icon.jpg');
+    }
+
+    public function recommendationFiles(): HasMany
+    {
+        return $this->hasMany(RecommendationFile::class);
     }
 }

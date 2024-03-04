@@ -13,7 +13,8 @@ class RecommendationCreateController extends Controller
 {
     public function index()
     {
-        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser')->latest()->get();
+        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser','personalDetail')->latest()->get();
+
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }
 
@@ -52,17 +53,9 @@ class RecommendationCreateController extends Controller
                 }
             }
 
-            //            if (
-            //                array_key_exists('files', $request->validated())
-            //                && !empty($request->validated()['files'])
-            //            ) {
-            //
-            //                foreach ($request->validated()['files'] as $file) {
-            //                    $sipharis->SipharisCreatedDocuments()->create($file + [
-            //                            'extension' => $file['filename']->getClientOriginalExtension()
-            //                        ]);
-            //                }
-            //            }
+            foreach ($request->validated('files') ?? [] as $file) {
+                $recommendationCreate->recommendationFiles()->create($file);
+            }
 
             return $recommendationCreate;
         });
@@ -74,12 +67,14 @@ class RecommendationCreateController extends Controller
     public function edit(RecommendationCreate $recommendationCreate)
     {
         $recommendationCreate->load('recommendationValues.recommendationFormField');
+
         return view('recommendation::admin.recommendation.recommendation-create.edit', compact('recommendationCreate'));
     }
 
     public function show(RecommendationCreate $recommendationCreate)
     {
-        $recommendationCreate->load('recommendationValues.recommendationFormField');
+        $recommendationCreate->load('recommendationValues.recommendationFormField', 'recommendationFiles.recommendationDocument');
+
         return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate'));
     }
 
