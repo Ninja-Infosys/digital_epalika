@@ -5,7 +5,8 @@
         </legend>
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण</label>
+                <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण <span
+                        class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
                     <select id="personal_detail_id" name="personal_detail_id" class="form-select personalDetail"
                             wire:model="personal_detail_id">
@@ -25,59 +26,12 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="sipharis_category_id" class="form-label">सिफारिस श्रेणी</label>
-                <div class="d-flex justify-content-between gap-1">
-                    <select id="sipharis_category_id" wire:model="sipharis_category_id" name="sipharis_category_id"
-                            class="form-select personalDetail" required>
-                        <option value="">-- छान्नुहोस् --</option>
-                        @foreach ($sipharishCategories as $sipharishCategory)
-                            <option
-                                value="{{ $sipharishCategory->id }}" {{old('sipharis_category_id') == $sipharishCategory->id ? 'selected':'' }}>
-                                {{ $sipharishCategory->title }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                </div>
-                @error('sipharis_category_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="col-md-4 mb-2">
-                <label for="sipharis_sub_category_id" class="form-label">सिफारिस उप-श्रेणी <span
+                <label for="recommendation_detail_id" class="form-label">सिफारिस <span
                         class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
-                    <select id="sipharis_sub_category_id" wire:model="sipharis_sub_category_id"
-                            name="sipharis_sub_category_id"
-                            class="form-select @error('sipharis_sub_category_id') is-invalid @enderror personalDetail"
-                            required>
-                        <option value="">-- छान्नुहोस् --</option>
-                        @foreach ($sipharishSubCategories as $sipharishSubCategory)
-                            <option value="{{ $sipharishSubCategory->id }}">
-                                {{ $sipharishSubCategory->title }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                </div>
-                @error('sipharis_sub_category_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 mb-2">
-                <label for="sipharis_form_type_id" class="form-label">सिफारिस * <span
-                        class="text-danger">*</span></label>
-                <div class="d-flex justify-content-between gap-1">
-                    <select id="sipharis_form_type_id" wire:model="sipharis_form_type_id"
-                            name="sipharis_form_type_id"
-                            class="form-select @error('sipharis_form_type_id') is-invalid @enderror personalDetail"
+                    <select id="recommendation_detail_id" wire:model="recommendation_detail_id"
+                            name="recommendation_detail_id"
+                            class="form-select @error('recommendation_detail_id') is-invalid @enderror"
                             required>
                         <option value="">-- छान्नुहोस् --</option>
                         @foreach ($formTypes as $formType)
@@ -88,7 +42,7 @@
                     </select>
 
                 </div>
-                @error('sipharis_form_type_id')
+                @error('recommendation_detail_id')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -97,7 +51,7 @@
             <div class="col-md-4 mb-2">
                 <label for="personal_detail_id" class="form-label">स्थिति <span class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
-                    <select id="personal_detail_id" name="status" class="form-select personalDetail"
+                    <select id="personal_detail_id" name="status" class="form-select"
                             wire:model="status" required>
                         <option value="">-- छान्नुहोस् --</option>
                         <option value="1">Active</option>
@@ -111,23 +65,20 @@
                 </div>
                 @enderror
             </div>
-
         </div>
     </fieldset>
 
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-12 mb-2">
             <fieldset class="bg-soft-secondary">
                 <div id="files">
                     @foreach($fields ?? [] as $key=>$field)
                         <div class="main">
-
                             <div class="row border-bottom mb-2">
-                                <input type="hidden" name="fields[{{$key}}][sipharish_form_field_id]"
-                                       class="form-control" value="{{$field->id}}" id="sipharish_form_field_id"/>
+                                <input type="hidden" name="fields[{{$key}}][recommendation_form_field_id]"
+                                       class="form-control" value="{{$field->id}}" id="recommendation_form_field_id"/>
                                 <input type="hidden" name="fields[{{$key}}][type]"
                                        class="form-control" value="{{$field->type->value}}" id="type"/>
-
                                 <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">{{$field->field_name}}</label>
                                     @if($field->type != \App\Enums\FormFieldEnum::TABLE)
@@ -149,7 +100,7 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                @foreach($field->SipharishFormFields as $sipharishFormField)
+                                                @foreach($field->recommendationFormFields as $sipharishFormField)
                                                     <th>{{$sipharishFormField->field_name}}</th>
                                                 @endforeach
                                                 <th>
@@ -164,7 +115,7 @@
                                             <tbody>
                                             @foreach($data[$field->slug] ?? [] as $index=>$tableData)
                                                 <tr>
-                                                    @foreach($field->SipharishFormFields as $sipharishFormField)
+                                                    @foreach($field->recommendationFormFields as $sipharishFormField)
                                                         <td>
                                                             <input
                                                                 type="{{$sipharishFormField->type?->resolveType() ?? 'text'}}"
@@ -188,7 +139,6 @@
                                                     </th>
                                                 </tr>
                                             @endforeach
-
                                             </tbody>
                                         </table>
                                     @endif

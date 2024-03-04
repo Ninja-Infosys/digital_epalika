@@ -5,8 +5,8 @@ use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
-use Modules\Recommendation\Http\Controllers\DocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
+use Modules\Recommendation\Http\Controllers\RecommendationCreateController;
 use Modules\Recommendation\Http\Controllers\RecommendationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationDocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
@@ -70,6 +70,12 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('recommendationDetail/{recommendationDetail}/updateStatus', [RecommendationDetailController::class,'updateStatus'])->name('recommendationDetail.updateStatus');
     Route::resource('recommendationDetail', RecommendationDetailController::class);
 });
+
+//recommendation create
+Route::get('recommendationCreate/{recommendationCreate}/toggleStatus', [RecommendationCreateController::class, 'updateStatus'])->name('recommendationCreate.updateStatus');
+Route::put('recommendationCreate/{recommendationCreate}/fileUpload', [RecommendationCreateController::class, 'fileUpload'])->name('recommendationCreate.fileUpload');
+Route::resource('recommendationCreate', RecommendationCreateController::class);
+
 Route::get('searchForm', function () {
     return view('livewire.search-livewire');
 });

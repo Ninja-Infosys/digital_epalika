@@ -1,0 +1,117 @@
+<?php
+
+namespace Modules\Recommendation\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Modules\Recommendation\Entities\RecommendationCreate;
+use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
+
+class RecommendationCreateController extends Controller
+{
+    public function index()
+    {
+        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser')->latest()->get();
+        return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
+    }
+
+    public function create()
+    {
+        return view('recommendation::admin.recommendation.recommendation-create.create');
+    }
+
+    public function store(StoreRecommendationCreateRequest $request)
+    {
+        $recommendationCreate = DB::transaction(function () use ($request) {
+
+            $recommendationCreate = RecommendationCreate::create($request->validated() + [
+                    'created_by' => auth()->id()
+                ]);
+
+            if (
+                array_key_exists('fields', $request->validated())
+                && !empty($request->validated()['fields'])
+            ) {
+
+                foreach ($request->validated()['fields'] as $field) {
+
+                    if (!empty($field['type']) && $field['type'] == 'image') {
+                        $value = Storage::disk('public')
+                            ->putFile('recommendation/files', $field['value']);
+                    } else {
+                        $value = $field['value'];
+                    }
+                    $recommendationCreate->recommendationValues()
+                        ->create([
+                            'recommendation_form_field_id' => $field['recommendation_form_field_id'] ?? '',
+                            'value' => $value ?? '',
+                            'type' => $field['type'] ?? '',
+                        ]);
+                }
+            }
+
+            //            if (
+            //                array_key_exists('files', $request->validated())
+            //                && !empty($request->validated()['files'])
+            //            ) {
+            //
+            //                foreach ($request->validated()['files'] as $file) {
+            //                    $sipharis->SipharisCreatedDocuments()->create($file + [
+            //                            'extension' => $file['filename']->getClientOriginalExtension()
+            //                        ]);
+            //                }
+            //            }
+
+            return $recommendationCreate;
+        });
+
+        toast('सिफारिस सफलतापूर्वक थपियो', 'success');
+        return redirect(route('admin.recommendation.recommendationCreate.show', $recommendationCreate->id));
+    }
+
+    public function edit(RecommendationCreate $recommendationCreate)
+    {
+        $recommendationCreate->load('recommendationValues.recommendationFormField');
+        return view('recommendation::admin.recommendation.recommendation-create.edit', compact('recommendationCreate'));
+    }
+
+    public function show(RecommendationCreate $recommendationCreate)
+    {
+        $recommendationCreate->load('recommendationValues.recommendationFormField');
+        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate'));
+    }
+
+    public function updateStatus(RecommendationCreate $recommendationCreate)
+    {
+        $recommendationCreate->update([
+            'status' => !$recommendationCreate->status
+        ]);
+        toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function fileUpload(Request $request, RecommendationCreate $recommendationCreate)
+    {
+        $data = $request->validate([
+            'file' => ['required', 'file']
+        ]);
+        $recommendationCreate->update($data);
+        toast('फाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+    //
+    public function destroy(RecommendationCreate $recommendationCreate)
+    {
+
+        if ($recommendationCreate->status == 1) {
+            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
+
+            return back();
+        }
+        $recommendationCreate->delete();
+        toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
+        return back();
+    }
+}
