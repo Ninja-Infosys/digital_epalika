@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Recommendation\Http\Requests\SipharishCreated;
+namespace Modules\Recommendation\Http\Requests\RecommendationCreate;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreSipharisCreatedRequest extends FormRequest
+class StoreRecommendationCreateRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize():bool
     {
         return true;
     }
 
-    public function rules(): array
+    public function rules():array
     {
         return [
             'recommendation_detail_id' => ['required', Rule::exists('recommendation_details', 'id')->withoutTrashed()],
@@ -26,7 +26,7 @@ class StoreSipharisCreatedRequest extends FormRequest
             'fields.*.table.*.value' => ['nullable'],
             'fields.*.table.*.type' => ['nullable'],
             'files' => ['nullable', 'array'],
-            'files.*.title' => ['required', 'string'],
+            'files.*.title' => ['nullable', 'string'],
             'files.*.filename' => ['nullable', 'file'],
         ];
     }

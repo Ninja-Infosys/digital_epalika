@@ -4,9 +4,7 @@ namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
-use  Modules\Recommendation\Entities\SipharisCategory;
-use  Modules\Recommendation\Entities\SipharisSubCategory;
-use  Modules\Recommendation\Entities\SipharishFormType;
+use Modules\Recommendation\Entities\RecommendationDetail;
 use  Modules\Recommendation\Entities\PersonalDetail;
 use Livewire\Component;
 
@@ -15,15 +13,11 @@ class Field extends Component
     use WithFileUploads;
 
     public string|int|null $personal_detail_id = null;
-    public string|int|null $sipharis_category_id = null;
-    public string|int|null $sipharis_sub_category_id = null;
-    public string|int|null $sipharis_form_type_id = null;
+    public string|int|null $recommendation_detail_id = null;
     public $status = 1;
     public $fields = [];
     public $fieldData = [];
     public $personalDetails = [];
-    public $sipharishCategories = [];
-    public $sipharishSubCategories = [];
 
     public $formTypes = [];
 
@@ -32,9 +26,6 @@ class Field extends Component
     public function mount($categorySubCategory = null): void
     {
         if (!empty($categorySubCategory)) {
-
-            $this->sipharis_category_id = $categorySubCategory['sipharis_category_id'] ?? null;
-            $this->sipharis_sub_category_id = $categorySubCategory['sipharis_sub_category_id'] ?? null;
             $this->personal_detail_id = $categorySubCategory['personal_detail_id'] ?? null;
             $this->sipharis_form_type_id = $categorySubCategory['sipharis_form_type_id'] ?? null;
             $this->status = $categorySubCategory['status'] ? 1 : 0;
@@ -48,8 +39,8 @@ class Field extends Component
                 }
             }
         }
-        $this->sipharishCategories = SipharisCategory::status()->get();
         $this->personalDetails = PersonalDetail::all();
+        $this->formTypes = RecommendationDetail::get();
     }
 
     public function addRowInTable($index): void
@@ -92,19 +83,11 @@ class Field extends Component
 
     public function render()
     {
-        if (!empty($this->sipharis_category_id)) {
-            $this->sipharishSubCategories = SipharisSubCategory::where('sipharis_category_id', $this->sipharis_category_id)->get();
-        }
 
-        if (!empty($this->sipharis_sub_category_id)) {
-            $this->formTypes = SipharishFormType::where('sipharis_sub_category_id', $this->sipharis_sub_category_id)
-                ->get();
-        }
-
-        if (!empty($this->sipharis_form_type_id)) {
-            $this->fields = SipharishFormType::with('sipharisFormFields.SipharishFormFields')
-                ->find($this->sipharis_form_type_id)
-                ?->sipharisFormFields;
+        if (!empty($this->recommendation_detail_id)) {
+            $this->fields = RecommendationDetail::with('recommendationFormFields.recommendationFormFields')
+                ->find($this->recommendation_detail_id)
+                ?->recommendationFormFields;
 
         }
 

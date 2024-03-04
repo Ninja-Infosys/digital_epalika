@@ -13,8 +13,8 @@
 {{--    </li>--}}
 {{--@endcan--}}
 @can('recommendationSetting_access')
-    <li class="{{request()->is('admin/recommendation/sipharish/sipharishCreate*') ? 'active' : ''}}">
-        <a href="{{route('admin.recommendation.sipharish.sipharishCreate.index')}}">
+    <li class="{{request()->is('admin/recommendation/recommendationCreate*') ? 'active' : ''}}">
+        <a href="{{route('admin.recommendation.recommendationCreate.index')}}">
             <i class="fa fa-file"></i>
             <span>सिफारिस सिर्जना गर्नुहोस्</span>
         </a>
