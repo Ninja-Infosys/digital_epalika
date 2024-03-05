@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->registrationDetail = RegistrationDetail::get();
+        //$this->registrationDetail = RegistrationDetail::get();
     }
 
     public function index()
@@ -33,11 +33,11 @@ class DashboardController extends Controller
                 'monthlyWiseRegistration' => $this->getMonthlyWiseData(),
             ];
         }
-        $registrationDetailCount = $this->registrationDetail->count();
-        $todayRegistrationDetailCount = RegistrationDetail::whereDate('date_en', today()->toDateString())->count();
+        //$registrationDetailCount = $this->registrationDetail->count();
+        //$todayRegistrationDetailCount = RegistrationDetail::whereDate('date_en', today()->toDateString())->count();
         $totalPersonalDetailCount = PersonalDetail::count();
-        $totalYealyRegistrationDetailCount = $this->registrationDetail->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
-        return view('recommendation::admin.dashboard', compact('totalYealyRegistrationDetailCount', 'totalPersonalDetailCount', 'registrationDetailCount', 'todayRegistrationDetailCount'));
+        //$totalYealyRegistrationDetailCount = $this->registrationDetail->where('fiscal_year_id', officeSetting()->fiscal_year_id)->count();
+        return view('recommendation::admin.dashboard', compact('totalPersonalDetailCount'));
     }
     public function ajaxData()
     {

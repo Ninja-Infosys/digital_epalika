@@ -92,36 +92,36 @@
                             </div>
                             <div class="card-body ">
                                 <div class="row">
-{{--                                    @forelse($sipharishCreate->SipharisCreatedDocuments ?? [] as $document)--}}
-{{--                                        <div class="col-xl-4 col-lg-6">--}}
-{{--                                            <div class="card shadow-none border">--}}
-{{--                                                <div class="p-2">--}}
-{{--                                                    <div class="row align-items-center">--}}
-{{--                                                        <div class="col-2 pe-0">--}}
-{{--                                                            <div class="avatar-sm">--}}
-{{--                                                    <span class="avatar-title bg-light text-secondary rounded">--}}
-{{--                                                          <i class="fa {{getFileIconClass($document->extension)}} font-18"></i>--}}
-{{--                                                    </span>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="col-8">--}}
-{{--                                                            <a href="javascript:void(0);"--}}
-{{--                                                               onclick="openFileModal('{{$document->filename}}', '{{ $document->extension }}', '{{ $document->filename }}')"--}}
-{{--                                                               class="text-muted fw-medium">{{basename($document->filename)}}</a>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="col-2">--}}
-{{--                                                            <a href="{{route('admin.file-url-download', ['file_url'=>$document->filename])}}"--}}
-{{--                                                               class="btn btn-xs btn-outline-primary">--}}
-{{--                                                                <i class="fa fa-download"></i>--}}
-{{--                                                            </a>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div> <!-- end row -->--}}
-{{--                                                </div> <!-- end .p-2-->--}}
-{{--                                            </div> <!-- end col -->--}}
-{{--                                        </div>--}}
-{{--                                    @empty--}}
-{{--                                        <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>--}}
-{{--                                    @endforelse--}}
+                                    @forelse($recommendationCreate->recommendationFiles as $document)
+                                        <div class="col-xl-4 col-lg-6">
+                                            <div class="card shadow-none border">
+                                                <div class="p-2">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-2 pe-0">
+                                                            <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-secondary rounded">
+                                                          <i class="fa fa-file font-18"></i>
+                                                    </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <a href="javascript:void(0);"
+                                                               onclick="openFileModal('{{ $document->recommendationDocument->title }}', '{{ $document->file_extension }}','{{$document->file_url}}')"
+                                                               class="text-muted fw-medium">{{$document->recommendationDocument->title??''}}</a>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
+                                                               class="btn btn-xs btn-outline-primary">
+                                                                <i class="fa fa-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div> <!-- end row -->
+                                                </div> <!-- end .p-2-->
+                                            </div> <!-- end col -->
+                                        </div>
+                                    @empty
+                                        <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                                    @endforelse
                                 </div> <!-- end row-->
                             </div>
                         </div>

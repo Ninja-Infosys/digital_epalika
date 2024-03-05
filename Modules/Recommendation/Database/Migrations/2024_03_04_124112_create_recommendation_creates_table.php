@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up()
     {
         Schema::create('recommendation_creates', function (Blueprint $table) {
@@ -17,6 +16,7 @@ return new class extends Migration
             $table->enum('approved_status', ['approved','rejected','pending'])->default('pending');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('mobile_user_id')->nullable()->constrained();
+            $table->foreignId('personal_detail_id')->nullable()->constrained();
             $table->string('file')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

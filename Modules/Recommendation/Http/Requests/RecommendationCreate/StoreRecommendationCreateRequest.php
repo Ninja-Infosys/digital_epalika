@@ -7,15 +7,16 @@ use Illuminate\Validation\Rule;
 
 class StoreRecommendationCreateRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'recommendation_detail_id' => ['required', Rule::exists('recommendation_details', 'id')->withoutTrashed()],
+            'personal_detail_id' => ['required', Rule::exists('personal_details', 'id')->withoutTrashed()],
             'status' => ['required', 'boolean'],
             'fields' => ['nullable', 'array'],
             'fields.*.recommendation_form_field_id' => ['nullable', Rule::exists('recommendation_form_fields', 'id')->withoutTrashed()],
@@ -26,8 +27,8 @@ class StoreRecommendationCreateRequest extends FormRequest
             'fields.*.table.*.value' => ['nullable'],
             'fields.*.table.*.type' => ['nullable'],
             'files' => ['nullable', 'array'],
-            'files.*.title' => ['nullable', 'string'],
-            'files.*.filename' => ['nullable', 'file'],
+            'files.*.recommendation_document_id' => ['required',Rule::exists('recommendation_documents', 'id')->withoutTrashed()],
+            'files.*.file' => ['required', 'file'],
         ];
     }
 }

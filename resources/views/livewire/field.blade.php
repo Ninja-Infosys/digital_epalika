@@ -149,5 +149,41 @@
                 </div>
             </fieldset>
         </div>
+
+        @if(!empty($documents))
+            <div class="col-md-12 mb-2">
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                    <label for="documents" class="form-label fw-bold">
+                        आवश्यक कागजातहरु <span
+                            class="text-danger">*</span>
+                    </label>
+                </div>
+                <fieldset class="bg-soft-secondary">
+                    <div id="files">
+                        <div class="main">
+                            <div class="row border-bottom mb-2">
+                                @foreach($documents as $key=>$document)
+                                    <div class="col-md-6 mb-2">
+                                        <label for="recommendation_document_id{{$key}}" class="form-label">{{$document->title}}</label>
+                                        <input type="hidden" name="files[{{$key}}][recommendation_document_id]" class="form-control"
+                                               value="{{$document->id}}">
+                                        <input type="text"
+                                               readonly
+                                               value="{{$document->title}}"
+                                               class="form-control"
+                                               id="title" />
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="file{{$key}}" class="form-label">डकुमेन्ट </label>
+                                        <input type="file" name="files[{{$key}}][file]" class="form-control"
+                                               id="files{{$key}}" />
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        @endif
     </div>
 </div>

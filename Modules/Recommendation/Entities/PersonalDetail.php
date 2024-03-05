@@ -26,7 +26,6 @@ class PersonalDetail extends Model
     ];
 
     protected $fillable = [
-        'user_id',
         'reg_no',
         'name',
         'phone_no',
@@ -37,6 +36,7 @@ class PersonalDetail extends Model
         'district_id',
         'local_body_id',
         'ward_no',
+        'user_id',
         'tole'
     ];
 
@@ -62,13 +62,5 @@ class PersonalDetail extends Model
     public function registrationDetails(): HasMany
     {
         return $this->hasMany(RegistrationDetail::class);
-    }
-
-    public function scopeFilterData($query)
-    {
-        if (auth()->user()->role->type !== 'Super') {
-            $query->where('user_id', auth()->id());
-        }
-        return $query;
     }
 }

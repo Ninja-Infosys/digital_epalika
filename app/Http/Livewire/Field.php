@@ -19,6 +19,8 @@ class Field extends Component
     public $fieldData = [];
     public $personalDetails = [];
 
+    public $documents = [];
+
     public $formTypes = [];
 
     public $data = [];
@@ -85,9 +87,12 @@ class Field extends Component
     {
 
         if (!empty($this->recommendation_detail_id)) {
-            $this->fields = RecommendationDetail::with('recommendationFormFields.recommendationFormFields')
-                ->find($this->recommendation_detail_id)
-                ?->recommendationFormFields;
+            $recommendationDetail = RecommendationDetail::with('recommendationFormFields.recommendationFormFields', 'recommendationDocuments')
+                ->find($this->recommendation_detail_id);
+
+            $this->fields = $recommendationDetail?->recommendationFormFields;
+
+            $this->documents = $recommendationDetail?->recommendationDocuments ?? [];
 
         }
 

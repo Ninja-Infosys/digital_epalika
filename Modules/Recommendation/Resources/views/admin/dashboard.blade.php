@@ -10,7 +10,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-id-card avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> {{$registrationDetailCount}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup"> 3</span></h3>
                                 <p class="text-muted font-15 mb-0">जम्मा सिफारिस</p>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-id-card avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">{{$todayRegistrationDetailCount}}</span></h3>
+                                <h3 class="mt-1 mb-0"><span data-plugin="counterup">2</span></h3>
                                 <p class="text-muted font-15 mb-0 text-truncate">आज दर्ता भएका सिफारिस</p>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                 <div class="avatar-sm bg-blue rounded-circle">
                                     <i class="fas fa-file avatar-title font-18 text-white"></i>
                                 </div>
-                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">{{$totalYealyRegistrationDetailCount}}</span></h3>
+                                <h3 class="mb-0 mt-1"><span data-plugin="counterup">5</span></h3>
                                 <p class="text-muted font-15 mb-0">आर्थिक वर्षमा दर्ता भएका सिफारिस</p>
                             </div>
                         </div>

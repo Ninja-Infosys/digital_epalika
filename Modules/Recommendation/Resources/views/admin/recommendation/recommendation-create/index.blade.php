@@ -96,11 +96,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-{{--                                            @if($sipharish->personalDetail)--}}
-{{--                                                {{ $sipharish->personalDetail->name ?? '' }}--}}
-{{--                                            @elseif($sipharish->mobileUser)--}}
-{{--                                                {{ $sipharish->mobileUser->name ?? '' }}--}}
-{{--                                            @endif--}}
+                                           {{$recommendationCreate->personalDetail->name??$recommendationCreate->mobileUser->name??''}}
                                         </td>
                                         <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
                                         <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
@@ -165,11 +161,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-{{--                                            @if($sipharish->personalDetail)--}}
-{{--                                                {{ $sipharish->personalDetail->name ?? '' }}--}}
-{{--                                            @elseif($sipharish->mobileUser)--}}
-{{--                                                {{ $sipharish->mobileUser->name ?? '' }}--}}
-{{--                                            @endif--}}
+                                            {{$recommendationCreate->personalDetail->name??$recommendationCreate->mobileUser->name??''}}
                                         </td>
                                         <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
                                         <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
