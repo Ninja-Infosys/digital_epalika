@@ -27,15 +27,16 @@ class Field extends Component
 
     public function mount($categorySubCategory = null): void
     {
+//        dd($this->fields);
         if (!empty($categorySubCategory)) {
             $this->personal_detail_id = $categorySubCategory['personal_detail_id'] ?? null;
-            $this->sipharis_form_type_id = $categorySubCategory['sipharis_form_type_id'] ?? null;
+            $this->recommendation_detail_id = $categorySubCategory['recommendation_detail_id'] ?? null;
             $this->status = $categorySubCategory['status'] ? 1 : 0;
             if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
                 foreach ($categorySubCategory['fields'] as $field) {
 
-                    $this->fieldData[$field->SipharisFormField?->slug] = [
-                        'sipharish_form_fields_id' => $field->sipharish_form_field_id ?? $field['sipharish_form_fields_id'] ?? null,
+                    $this->fieldData[$field->recommendationFormField?->slug] = [
+                        'recommendation_form_field_id' => $field->sipharish_form_field_id ?? $field['recommendation_form_field_id'] ?? null,
                         'value' => $field->value ?? $field['value'] ?? null,
                     ];
                 }

@@ -55,7 +55,7 @@
                             'mobile_user_id' => old('mobile_user_id'),
                             'recommendation_detail_id' => old('recommendation_detail_id',$recommendationCreate->recommendation_detail_id),
                             'status' => old('status',$recommendationCreate->status),
-                            'fields' => old('fields'),
+                            'fields' => old('fields',$recommendationCreate->recommendationValues),
                         ])
                         <button type="submit" class="btn btn-primary mt-2">
                             पेश गर्नुहोस्
