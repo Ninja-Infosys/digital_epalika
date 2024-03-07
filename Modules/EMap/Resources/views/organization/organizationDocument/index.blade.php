@@ -31,7 +31,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="land_owner_document">जग्गा धनी प्रमाणपत्र प्रतिलिपि</label>
+                            <label class="form-label" for="land_owner_document">जग्गा धनी प्रमाणपत्र पुर्जाको प्रतिलिपि</label>
                             <input type="file" class="form-control @error('land_owner_document') is-invalid @enderror"
                                 id="file" name="land_owner_document">
                             @error('land_owner_document')
@@ -48,8 +48,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="land_owner_citizenship">ज.ध. दर्ता प्रमाण पुर्जामा फोटो नभएको
-                                भए नागरिकता प्रमाणपत्रको प्रतिलिपि</label>
+                            <label class="form-label" for="land_owner_citizenship">ज.ध.नागरिकता प्रमाणपत्रको प्रतिलिपि</label>
                             <input type="file" class="form-control @error('land_owner_citizenship') is-invalid @enderror"
                                 id="file" name="land_owner_citizenship">
                             @error('land_owner_citizenship')

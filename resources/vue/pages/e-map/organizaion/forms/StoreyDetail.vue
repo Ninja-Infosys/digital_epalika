@@ -6,7 +6,7 @@
                 <thead>
                 <tr class="text-center">
                     <th>तल्ला</th>
-                    <th>प्रस्तावित निर्माणको क्षेत्रफल</th>
+                    <th>प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट)</th>
                     <th>साविक निर्माणको क्षेत्रफल</th>
                     <th>जम्मा क्षेत्रफल</th>
                     <th>उचाई</th>
@@ -74,7 +74,7 @@
                             input-type="number"
                             id="area_of_proposed_construction"
                             v-model="form.area_of_proposed_construction"
-                            label="प्रस्तावित निर्माणको क्षेत्रफल"
+                            label="प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट)"
                             @validate="validateField('area_of_proposed_construction')"
                             :error="errors.area_of_proposed_construction"
                         />

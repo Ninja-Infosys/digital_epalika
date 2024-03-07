@@ -127,7 +127,7 @@
                             id="area_of_plinth"
                             v-model="form.area_of_plinth"
                             @validate="validateField('area_of_plinth')"
-                            label="प्लिन्थको क्षेत्रफल"
+                            label="प्लिन्थको क्षेत्रफल (वर्ग फिट)"
                             :disabled="!editFormOpened"
                             :error="errors.area_of_plinth"
                         />

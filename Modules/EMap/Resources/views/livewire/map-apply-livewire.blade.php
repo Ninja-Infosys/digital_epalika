@@ -354,7 +354,7 @@
             @enderror
             <div>
                 <label for="applyMap.consultant_name">
-                    <b>नाम: </b>
+                    <b>कन्सल्टेन्ट इंन्जिनियरको नाम: </b>
                 </label>
                 <input type="text" wire:model="applyMap.consultant_name" id="applyMap.consultant_name">
             </div>

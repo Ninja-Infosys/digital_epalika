@@ -18,7 +18,7 @@
                     <VInput
                         id="consultant_name"
                         v-model="form.consultant_name"
-                        label="नाम"
+                        label="कन्सल्टेन्ट इंन्जिनियरको नाम"
                         @validate="validateField('consultant_name')"
                         :disabled="!editFormOpened"
                         :error="errors.consultant_name"

@@ -21,10 +21,10 @@ enum BuildingDetailEnum: string
         return match ($value) {
             self::BUILDING_CATEGORY => 'भवनको वर्ग',
             self::PLINTH_AREA => 'प्लिन्थको क्षेत्रफल, (जमिन तलाको)',
-            self::LENGTH => 'भवनको लम्बाई',
-            self::BREADTH => 'भवनको चौडाई',
+            self::LENGTH => 'भवनको लम्बाई (फिट)',
+            self::BREADTH => 'भवनको चौडाई (फिट)',
             self::STOREY_COUNT => 'भवनको तला संख्या',
-            self::HEIGHT => 'भवनको कूल उचाई',
+            self::HEIGHT => 'भवनको कूल उचाई (फिट)',
         };
     }
 }
