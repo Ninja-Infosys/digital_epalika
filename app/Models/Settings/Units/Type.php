@@ -20,7 +20,8 @@ class Type extends Model
         'deleted_at',
     ];
 
-    protected $fillable = [
+
+        protected $fillable = [
         'title',
     ];
 

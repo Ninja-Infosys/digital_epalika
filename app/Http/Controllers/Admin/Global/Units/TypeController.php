@@ -16,7 +16,7 @@ class TypeController extends Controller
         return view('admin.global.units.type.index', compact('types'));
     }
 
-    public function create()
+        public function create()
     {
         $this->checkAuthorization('unitType_create');
 

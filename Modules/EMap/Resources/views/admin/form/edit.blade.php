@@ -11,11 +11,11 @@
                                 गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">सिफारिस</li>
-                        <li class="breadcrumb-item active">नयाँ सिफारिस</li>
+                        <li class="breadcrumb-item active">नक्शा पास मर्यादाक्रम </li>
+                        <li class="breadcrumb-item active">नयाँ नक्शा पास मर्यादाक्रम </li>
                     </ol>
                 </div>
-                <h4 class="page-title">नयाँ सिफारिस</h4>
+                <h4 class="page-title">नयाँ नक्शा पास मर्यादाक्रम </h4>
             </div>
         </div>
     </div>
@@ -26,10 +26,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
+                        <h4 class="header-title">नयाँ नक्शा पास मर्यादाक्रम  दर्ता गर्नुहोस</h4>
                         <a href="{{ route('emap.admin.form.index') }}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सिफारिस सुची
+                            <i class="fa fa-list"></i> नक्शा पास मर्यादाक्रम  सुची
                         </a>
                     </div>
                 </div>

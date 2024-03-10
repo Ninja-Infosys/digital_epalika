@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">नयाँ सिफारिस</h4>
+                <h4 class="page-title">नयाँ नक्शा पास मर्यादाक्रम </h4>
                 <div class="mb-3">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
@@ -13,8 +13,8 @@
                                 गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">सिफारिस</li>
-                        <li class="breadcrumb-item active">नयाँ सिफारिस</li>
+                        <li class="breadcrumb-item active">नक्शा पास मर्यादाक्रम </li>
+                        <li class="breadcrumb-item active">नयाँ नक्शा पास मर्यादाक्रम </li>
                     </ol>
                 </div>
             </div>
@@ -26,9 +26,9 @@
         <div class="col-md-12">
             <div class="card p-0">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="header-title">नयाँ सिफारिस दर्ता गर्नुहोस</h4>
+                    <h4 class="header-title">नयाँ नक्शा पास मर्यादाक्रम  दर्ता गर्नुहोस</h4>
                     <a href="{{ route('emap.admin.form.index', '') }}" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-list"></i> सिफारिस सुची
+                        <i class="fa fa-list"></i> नक्शा पास मर्यादाक्रम  सुची
                     </a>
                 </div>
             </div>
