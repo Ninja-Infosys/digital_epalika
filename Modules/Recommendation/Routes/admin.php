@@ -10,6 +10,8 @@ use Modules\Recommendation\Http\Controllers\RecommendationCreateController;
 use Modules\Recommendation\Http\Controllers\RecommendationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationDocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
+use Modules\Recommendation\Http\Controllers\RecommendationSignatureController;
+use Modules\Recommendation\Http\Controllers\RecommendationSignatureDetailController;
 use Modules\Recommendation\Http\Controllers\RevenueHeaderController;
 use Modules\Recommendation\Http\Controllers\SipharishCategoryController;
 use Modules\Recommendation\Http\Controllers\ReportController;
@@ -69,6 +71,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::put('recommendationDetail/{recommendationDetail}/updateTemplate', [RecommendationDetailController::class,'updateTemplate'])->name('recommendationDetail.updateTemplate');
     Route::get('recommendationDetail/{recommendationDetail}/updateStatus', [RecommendationDetailController::class,'updateStatus'])->name('recommendationDetail.updateStatus');
     Route::resource('recommendationDetail', RecommendationDetailController::class);
+    Route::get('recommendationSignature/{recommendationSignature}/updateStatus', [RecommendationSignatureController::class,'updateStatus'])->name('recommendationSignature.updateStatus');
+    Route::resource('recommendationSignature', RecommendationSignatureController::class);
 });
 
 //recommendation create

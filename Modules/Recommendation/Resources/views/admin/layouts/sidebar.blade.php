@@ -183,6 +183,11 @@
                         <span>सिफारिस विवरण</span>
                     </a>
                 </li>
+                <li class="{{request()->is('admin/recommendation/setting/recommendationSignature*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationSignature.index')}}">
+                        <span>हस्ताक्षर</span>
+                    </a>
+                </li>
 
 
 {{--            @can('recommendationCategory_access')--}}
