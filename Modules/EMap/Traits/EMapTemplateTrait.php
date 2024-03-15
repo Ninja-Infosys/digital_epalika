@@ -326,7 +326,7 @@ trait EMapTemplateTrait
             '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner?->ward_no) ?? '',
             '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner?->district?->district) ?? '',
             '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner?->tole) ?? '',
-            '[@houseOwner.photo]' => '<img src="' . $this->get_nepali_number($this->houseOwner?->photo) . '" alt="House Owner Photo">' ?? '',
+            '[@houseOwner.photo]' => '<img src="' . ($this->houseOwner?->photo) . '" alt="House Owner Photo">' ?? '',
         ];
     }
 
