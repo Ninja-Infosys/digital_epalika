@@ -226,7 +226,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ जग्गा धनीको फोटो :</b>
-                                    <img src="    {{ $mapApply->landOwner?->photo_url ?? '' }}" alt=""></h4>
+                                    <img src="    {{ $mapApply->landOwner?->photo_url ?? '' }}" alt="" width="100" height="100"></h4>
 
                             </div>
                             <div class="col-md-12">
