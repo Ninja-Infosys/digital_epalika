@@ -88,6 +88,7 @@ trait TemplateTrait
             get_nepali_number($mapApply?->houseOwner?->localBody?->local_body ?? ''),
             get_nepali_number($mapApply?->houseOwner?->ward_no ?? ''),
             get_nepali_number($mapApply?->houseOwner?->tole ?? ''),
+            get_nepali_number($mapApply?->houseOwner?->photo ?? ''),
 
             //FourForts
             (string)View::make('emap::inc.four_forts_table', [
@@ -254,6 +255,8 @@ trait TemplateTrait
             '[@houseOwner.local_body]',
             '[@houseOwner.ward_no]',
             '[@houseOwner.tole]',
+            '[@houseOwner.photo]',
+
 
 
             //FourForts
