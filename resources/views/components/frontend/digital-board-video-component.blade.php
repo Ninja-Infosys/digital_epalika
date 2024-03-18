@@ -1,34 +1,75 @@
-<div>
-    <video controls="controls" id="myVideo" autoplay></video>
+<div class="player">
+    <div id="youtube" style="width: 100%;height: 100%"></div>
+    <div class="controls" style="text-align: center;margin: 0 auto;">
+    </div>
 </div>
-
 @push('scripts')
+    <script src="{{asset('assets/frontend/js/youtube_api.js')}}"></script>
     <script>
-        const videoSource = [];
-        @foreach($videos as $video)
-            videoSource[{{$loop->index}}] = "{{$video->video_url}}";
-        @endforeach
-        let i = 0; // define i
-        const videoCount = videoSource.length;
-        function videoPlay(videoNum) {
-            const myVideo = $('#myVideo');
-            if (myVideo.length === 0) {
-                return;
-            }
-            myVideo.attr('src', videoSource[videoNum]);
-            myVideo.get(0).load();
-            myVideo.get(0).play();
+        var array = "{{ $videos }}";
+        var data = array.toString();
+        var split = data.split(',');
+        var count = split.length;
+
+        var videos = [];
+        for (var i = 0; i <= count - 1; i++) {
+            videos.push(split[i]);
         }
-        videoPlay(i);
-        $('#myVideo').on('ended', function() {
-            myHandler();
-        });
-        function myHandler() {
-            i++;
-            if (i >= videoCount) {
-                i = 0;
+        var YouTubePlayer = {
+            current: 0,
+            player: null,
+            videos: videos,
+            currentlyPlaying: function() {
+                console.info('Current Track id', YouTubePlayer.videos[YouTubePlayer.current]);
+                return YouTubePlayer.videos[YouTubePlayer.current];
+            },
+            playNext: function() {
+                YouTubePlayer.increaseTrack()
+                if (YouTubePlayer.player) {
+                    YouTubePlayer.currentlyPlaying();
+                    YouTubePlayer.player.loadVideoById(YouTubePlayer.videos[YouTubePlayer.current]);
+                } else {
+                    alert('Please Wait! Player is loading');
+                }
+            },
+            playPrevious: function() {
+                YouTubePlayer.decreaseTrack()
+                if (YouTubePlayer.player) {
+                    YouTubePlayer.currentlyPlaying();
+                    YouTubePlayer.player.loadVideoById(YouTubePlayer.videos[YouTubePlayer.current]);
+                } else {
+                    alert('Please Wait! Player is loading');
+                }
+
+            },
+            increaseTrack: function() {
+                YouTubePlayer.current = YouTubePlayer.current + 1;
+                if (YouTubePlayer.current >= YouTubePlayer.videos.length) {
+                    YouTubePlayer.current = 0;
+                }
+            },
+            decreaseTrack: function() {
+                YouTubePlayer.current = Math.max(YouTubePlayer.current - 1, 0);
+            },
+            onReady: function(event) {
+                event.target.loadVideoById(YouTubePlayer.videos[YouTubePlayer.current]);
+            },
+            onStateChange: function(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    YouTubePlayer.playNext();
+                }
             }
-            videoPlay(i);
+        }
+
+        function onYouTubeIframeAPIReady() {
+            YouTubePlayer.player = new YT.Player('youtube', {
+                height: '350',
+                width: '425',
+                events: {
+                    'onReady': YouTubePlayer.onReady,
+                    'onStateChange': YouTubePlayer.onStateChange
+                }
+            });
         }
     </script>
 @endpush

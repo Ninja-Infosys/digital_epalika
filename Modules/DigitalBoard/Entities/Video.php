@@ -4,7 +4,6 @@ namespace Modules\DigitalBoard\Entities;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +12,6 @@ class Video extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -29,7 +27,6 @@ class Video extends Model
         'user_id'
     ];
 
-
     protected $casts = [
         'is_displayed' => 'boolean'
     ];
@@ -39,11 +36,11 @@ class Video extends Model
         $builder->where('is_displayed', $display);
     }
 
-    protected function ward(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => explode(',', $value),
-            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
-        );
-    }
+//    protected function ward(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn (string $value) => explode(',', $value),
+//            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+//        );
+//    }
 }

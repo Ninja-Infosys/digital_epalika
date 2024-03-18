@@ -513,4 +513,29 @@ if (!function_exists('generateRandomRGBAColor')) {
         // Create RGBA color code with random intensities for red, green, and blue channels
         return "rgba($red, $green, $blue, $alpha)";
     }
+
+    if (!function_exists('extractBulkYouTubeVideoId')) {
+        function extractBulkYouTubeVideoId($videos): ?string
+        {
+            $videoIds = collect();
+            collect($videos)->each(function ($video) use ($videoIds) {
+                $videoIds->push(extractYouTubeVideoId($video));
+            });
+            return implode(",", $videoIds->filter()->toArray());
+        }
+    }
+
+    if (!function_exists('extractYouTubeVideoId')) {
+        function extractYouTubeVideoId($url): ?string
+        {
+            // Define the regex pattern to extract video ID
+            $pattern = '/youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)([a-zA-Z0-9_-]{11})/';
+
+            // Check if the URL matches the pattern
+            preg_match($pattern, $url, $matches);
+
+            // Return the video ID if found, or null otherwise
+            return $matches[1] ?? null;
+        }
+    }
 }
