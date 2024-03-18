@@ -46,6 +46,11 @@ trait TemplateTrait
             get_nepali_number($mapApply?->length ?? ''),
             get_nepali_number($mapApply?->breadth ?? ''),
             get_nepali_number($mapApply?->height ?? ''),
+            get_nepali_number($mapApply?->consultant_name ?? ''),
+            get_nepali_number($mapApply?->consultant_mobile_no ?? ''),
+            get_nepali_number($mapApply?->consultant_nec_no ?? ''),
+            $mapApply->consultant_signature_url ?? '',
+
             //landDetail
             get_nepali_number($mapApply?->landDetail?->landUseArea?->title ?? ''),
             get_nepali_number($mapApply?->landDetail?->ward_no ?? ''),
@@ -124,12 +129,12 @@ trait TemplateTrait
             get_nepali_number($mapApply?->applicantDetail?->citizenshipIssueDistrict?->district ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->citizenship_no ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->citizenship_issue_date ?? ''),
-            get_nepali_number($mapApply?->applicantDetail?->signature ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->province?->province ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->district?->district ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->localBody?->local_body ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->ward_no ?? ''),
             get_nepali_number($mapApply?->applicantDetail?->tole ?? ''),
+            $mapApply?->applicantDetail?->signature_url ?? '',
 
 
             //criteria detail
@@ -184,6 +189,7 @@ trait TemplateTrait
             get_nepali_number($contractorDetail?->consulting_firm_name ?? ''),
             get_nepali_number($contractorDetail?->district?->district ?? ''),
 
+
         ];
     }
 
@@ -215,6 +221,11 @@ trait TemplateTrait
             '[@length]',
             '[@breadth]',
             '[@height]',
+            '[@consultant_name]',
+            '[@consultant_mobile_no]',
+            '[@consultant_nec_no]',
+            '[@consultant_signature]',
+
             //landDetail
             '[@landDetail.land_use_area.title]',
             '[@landDetail.ward_no]',
@@ -281,12 +292,12 @@ trait TemplateTrait
             '[@applicantDetail.citizenship_issue_district]',
             '[@applicantDetail.citizenship_no]',
             '[@applicantDetail.citizenship_issue_date]',
-            '[@applicantDetail.signature]',
             '[@applicantDetail.province]',
             '[@applicantDetail.district]',
             '[@applicantDetail.local_body]',
             '[@applicantDetail.ward_no]',
             '[@applicantDetail.tole]',
+            '[@applicantDetail.signature]',
 
 
             //criteria detail
@@ -340,20 +351,19 @@ trait TemplateTrait
 
     public function listForms(MapApply $mapApply): array
     {
-        $documentTypeModels = collect([AppliedDocument::class,FormStore::class,PaymentStore::class]);
+        $documentTypeModels = collect([AppliedDocument::class, FormStore::class, PaymentStore::class]);
 
         $documents = collect([]);
 
-        foreach($documentTypeModels as $documentModel) {
+        foreach ($documentTypeModels as $documentModel) {
             $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
-            foreach($typeDocuments as $document) {
+            foreach ($typeDocuments as $document) {
                 $documents->push([
                     'document_type' => class_basename($documentModel),
                     'form_id' => $document->form_id,
                     'status' => $document->status?->value
                 ]);
             }
-
         }
 
         $order = 0;
@@ -363,16 +373,15 @@ trait TemplateTrait
             ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                if($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                if ($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
                     $order = $form->order + 1;
-                } elseif($key == 0) {
+                } elseif ($key == 0) {
                     $order = $form->order;
                     $allApproved = false;
-
                 } else {
                     $allApproved = false;
                 }
-                if($allApproved) {
+                if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
                 } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
@@ -385,6 +394,6 @@ trait TemplateTrait
                 return $form;
             });
 
-        return [$forms,$order];
+        return [$forms, $order];
     }
 }
