@@ -16,7 +16,7 @@ class UpdateVideoRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'video' => ['required'],
+            'video' => ['required', 'regex:/^https:\/\/www\.youtube\.com\/watch\?v=/'],
         ];
     }
 

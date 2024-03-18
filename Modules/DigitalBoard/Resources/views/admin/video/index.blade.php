@@ -61,9 +61,7 @@
                                     {{ $video->title }}
                                 </td>
                                 <td class="align-middle">
-                                    <video width="130" height="100" controls>
-                                        <source src="{{ $video->video_url }}">
-                                    </video>
+                                    {{extractYouTubeVideoId($video->video)}}
                                 </td>
                                 <td class="d-flex gap-1">
                                     @can('digitalBoardVideo_edit')

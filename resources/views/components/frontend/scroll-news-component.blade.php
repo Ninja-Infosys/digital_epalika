@@ -1,10 +1,10 @@
 <div class="news-slider-wrapper">
     <div class="d-flex align-items-center w-100">
-        <h2>समाचार</h2>
-        <marquee behavior="scroll" scrolldelay="100" scrollamount="6">
-            <ul class="news-list mt-3">
+        <h2>सूचना</h2>
+        <marquee class="w-100" behavior="scroll" scrolldelay="100" scrollamount="6">
+            <ul class="d-flex gap-5">
                 @foreach($scrollNews as $scrollNew)
-                    <li>
+                    <li class="mr-5 ">
                         {{$scrollNew->title}}
                     </li>
                 @endforeach
@@ -12,3 +12,4 @@
         </marquee>
     </div>
 </div>
+

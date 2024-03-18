@@ -4,7 +4,6 @@ namespace Modules\DigitalBoard\Entities;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +12,6 @@ class Video extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -28,7 +26,6 @@ class Video extends Model
         'is_displayed',
         'user_id'
     ];
-
 
     protected $casts = [
         'is_displayed' => 'boolean'
