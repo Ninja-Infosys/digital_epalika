@@ -16,7 +16,7 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'video' => ['required'],
+            'video' => ['required', 'regex:/^https:\/\/www\.youtube\.com\/watch\?v=/'],
             'ward' => ['nullable', 'array'],
             'ward.*' => ['integer'],
             'is_displayed' => ['nullable', 'boolean']
@@ -27,6 +27,7 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             'video.required' => 'भिडियो अनिबार्य छ ',
+            'video.regex' => ':attribute "https://www.youtube.com/watch?v=" बाट सुरु हुनुपर्छ',
         ];
     }
 }
