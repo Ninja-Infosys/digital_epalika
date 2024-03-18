@@ -40,7 +40,7 @@
                         @csrf
                         @method('put')
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">भिडियो शिर्षक </label>
                                 <input type="text" name="title" value="{{ old('title', $video->title) }}"
                                     class="form-control @error('title') is-invalid @enderror" id="title"
@@ -49,24 +49,13 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <label for="video" class="form-label">भिडियो</label>
-                                <input type="hidden" name="video" value="{{ $video->video }}" id="video">
+                            <div class="col-md-6 mb-2">
+                                <label for="video" class="form-label">भिडियो (यूट्यूब लिंक) * </label>
+                                <input type="url" name="video" id="video"  value="{{old('video', $video->video ?? '')}}"
+                                       class="form-control @error('title') is-invalid @enderror">
                                 @error('video')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                                <button type="button" class="btn btn-outline-primary form-control" id="browseFile">
-                                    <i class="fa fa-cloud-upload-alt"></i> Upload File
-                                </button>
-                                <div class="progress mt-3" style="display: none;height: 25px">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                        style="width: 75%; height: 100%">75%
-                                    </div>
-                                </div>
-                                <div id="video-preview-card" class="mt-2" style="display: none">
-                                    <video id="videoPreview" controls style="width: 100%;height: auto;"></video>
-                                </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="ward" class="form-label">वडा</label>
