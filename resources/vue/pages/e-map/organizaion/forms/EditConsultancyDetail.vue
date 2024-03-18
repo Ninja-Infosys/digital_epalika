@@ -6,13 +6,15 @@
         </button>
         <div class="d-flex flex-column align-items-end">
             <div class="col-4">
+
                 <div class="mb-1">
-                    <label class="form-label" for="consultant_signature">(कन्सल्टेन्ट इंन्जिनियरको सहि)</label>
-                    <input type="file"
-                           id="applyMap.consultant_signature"
-                           @change="onFileSelected"
-                           :disabled="!editFormOpened"
-                           class="form-control form-control-sm">
+                    <VFileUpload
+                        id="consultant_signature"
+                        v-model="form.consultant_signature"
+                        label="(कन्सल्टेन्ट इंन्जिनियरको सहि)"
+                        :default-photo="consultant_signature_url"
+                        :show-preview-image="true"
+                    />
                 </div>
                 <div class="mb-1">
                     <VInput
