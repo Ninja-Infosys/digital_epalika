@@ -34,7 +34,7 @@ video {
 
 .sub-title {
     font-size: 25px !important;
-    color: red;
+    color: white;
 }
 
 .sub-header {
@@ -63,6 +63,7 @@ img {
 .sub-heading {
     background-color: #263a57;
     padding: 5px;
+    font-size: 18px;
 }
 
 
