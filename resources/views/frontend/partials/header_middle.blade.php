@@ -16,7 +16,7 @@ $currentDateTime = date('Y-m-d H:i:s');
             <x-header-component :ward="$ward ?? null" />
         </div>
         <div class="d-flex align-items-center">
-            <a href="{{ route('digital-service') }}" class="me-3 text-white ">विधुतीय शुसासन सेवा</a>
+            <a href="{{ route('digital-service') }}" class="me-3 text-white text-decoration-underline ">विधुतीय शुसासन सेवा</a>
             <a href="{{ route('welcome') }}" class="main-logo d-flex align-items-center" style="text-decoration: none">
                 <img alt="nepal-flag" class="logo img-responsive center-block ms-2 bg-white"
                     src="{{ asset('assets/frontend/image/nepal_flag.gif') }}"
