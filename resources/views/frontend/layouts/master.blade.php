@@ -17,6 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/datepicker.min.css')}}">
+
     @stack('styles')
     <style>
         .modal-content {
@@ -48,6 +50,7 @@
 <script src="{{ asset('assets/frontend/js/custom.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/simplyScroll.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/owl/owl.carousel.min.js') }}"></script>
+<script src="{{asset('assets/frontend/js/plugins/datepicker.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var owl = $('.owl-carousel');
