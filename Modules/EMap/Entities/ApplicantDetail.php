@@ -69,15 +69,18 @@ class ApplicantDetail extends Model
 
     public function getSignatureUrlAttribute(): string
     {
+
         return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
     }
 
     public function setSignatureAttribute($value)
     {
-        if (!empty($value) && $value instanceof UploadedFile) {
-            $this->attributes['signature'] = $value->store('e_map/applicant/'.Str::slug($this->attributes['name'], '_').'/signature', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['signature'] = $value->store('e_map/applicant/signature', 'public');
         }
     }
+
+
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);

@@ -583,7 +583,8 @@ class AdminStepController extends Controller
             'applicantDetail.citizenshipIssueDistrict',
             'criteriaDetails',
             'buildingDetails',
-            'designerDetails'
+            'designerDetails',
+          
         );
         return $fileTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model?->data);
     }

@@ -7,13 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>{{config('app.name')}}</title>
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}"/>
-    <link href="{{asset('assets/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/icons.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/utils.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/owl/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/datepicker.min.css')}}">
+
     @stack('styles')
-    @livewireStyles
+    <style>
+        .modal-content {
+            min-height: auto;
+            border: 0;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        @livewireStyles
+
+    </style>
 </head>
 <body>
 @include('frontend.partials.header')
@@ -29,29 +45,27 @@
 @else
     @include('frontend.partials.digital_board_footer')
 @endif
-
-{{--<x-frontend.popup-notice-component :ward="request('ward')"  />--}}
-
-<script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
-<script src="{{asset('assets/frontend/js/print.min.js')}}"></script>
+<script src="{{ asset('assets/frontend/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/custom.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/simplyScroll.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/owl/owl.carousel.min.js') }}"></script>
 <script src="{{asset('assets/frontend/js/plugins/datepicker.min.js')}}"></script>
-<script src="{{asset('assets/frontend/js/custom.min.js')}}"></script>
-
-@livewireScripts
-
-@stack('scripts')
-
-<script>
-    window.addEventListener('alert_message', event => {
-        swal.fire({
-            title: event.detail.title,
-            text: event.detail.text,
-            icon: event.detail.type,
+<script type="text/javascript">
+    $(document).ready(function() {
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 1,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true
         });
     });
 </script>
+@stack('scripts')
+
 @include('sweetalert::alert')
 @if(app()->environment('production'))
     <script src="{{asset('js/newRelic.min.js')}}"></script>

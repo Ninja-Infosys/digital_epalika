@@ -49,24 +49,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="video" class="form-label">भिडियो * </label>
-                                <input type="hidden" name="video" id="video">
+                                <label for="video" class="form-label">भिडियो (यूट्यूब लिंक) * </label>
+                                <input type="url" name="video" id="video" required value="{{old('video')}}"
+                                       class="form-control @error('title') is-invalid @enderror">
                                 @error('video')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                                <button type="button" class="btn btn-outline-primary form-control" id="browseFile">
-                                    <i class="fa fa-cloud-upload-alt"></i> कृपया MP4 भिडियो उपलोड गर्नुहोला
-                                </button>
-                                <div class="progress mt-3" style="display: none;height: 25px">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                        style="width: 75%; height: 100%">75%
-                                    </div>
-                                </div>
-                                <div id="video-preview-card" class="mt-2" style="display: none">
-                                    <video id="videoPreview" src="" controls
-                                        style="width: 100%;height: auto;"></video>
-                                </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="ward" class="form-label">वडा</label>
@@ -82,7 +70,7 @@
                                 @enderror
                                 @error('ward.*')
                                 <div class="invalid-feedback">{{$message}}</div>
-                                @enderror   
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-2">

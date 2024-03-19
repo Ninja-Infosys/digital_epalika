@@ -303,6 +303,18 @@ p{
 .button .btn {
     background-color: var(--secondaryColor);
 }
+.vert .simply-scroll-clip {
+    height: 650px;
+    overflow: hidden;
+}
+.simply-scroll-clip {
+    position: relative;
+    overflow: hidden;
+}
+.bg-red {
+    background-color: red;
+    color: #ffffff !important;
+}
 
 .button .btn:hover {
     background-color: var(--mainColor);
@@ -380,7 +392,7 @@ p{
     color: var(--whiteColor);
     background-color: #53afe6;
     font-size: 1.4rem;
-    padding: .3rem;
+    padding: .1rem;
 }
 
 .marquee-list span.type {
@@ -683,7 +695,7 @@ select {
 
   marquee ul li {
     display: inline-block;
-    margin-right: 20px;
+      margin: 16px 10px 0;
   }
 
   a.link-btn {
@@ -1066,10 +1078,6 @@ p {
     color: #FFFFFF !important;
 }
 
-.btn {
-    padding: 0;
-    margin: 0;
-}
 
 .btn-download {
     background-color: #FA9F10;

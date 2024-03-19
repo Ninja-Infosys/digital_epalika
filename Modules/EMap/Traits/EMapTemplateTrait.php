@@ -40,6 +40,11 @@ trait EMapTemplateTrait
                 'कुल भवनको चौडाई' => '[@breadth]',
                 'भवनको कुल उचाई जमिनको सतहबाट' => '[@height]',
                 'तल्लाको क्षेत्रफल र उचाईको विवरण' => '[@storeyDetails]',
+                'कन्सल्टेन्सीको नाम' => '[@consultant_name]',
+                'कन्सल्टेन्सीको फोन नं.' => '[@consultant_mobile_no]',
+                'कन्सल्टेन्सीको एन.ई.सी. नं' => '[@consultant_nec_no]',
+                'कन्सल्टेन्टको ईन्जीन्यरको सहि' => '[@consultant_signature]',
+
             ],
         ],
         [
@@ -157,6 +162,7 @@ trait EMapTemplateTrait
 
             ],
         ],
+
         [
             'title' => 'निवेदकको विवरण',
             'data' => [
@@ -168,12 +174,12 @@ trait EMapTemplateTrait
                 'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
                 'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
                 'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
-                'निवेदकको सहि' => '[@applicantDetail.signature]',
                 'निवेदकको प्रदेश' => '[@applicantDetail.province]',
                 'निवेदकको जिल्ला' => '[@applicantDetail.district]',
                 'निवेदकको पालिका' => '[@applicantDetail.local_body]',
                 'निवेदकको वडा नं' => '[@applicantDetail.ward_no]',
                 'निवेदकको टोल' => '[@applicantDetail.tole]',
+                'निवेदकको सही' => '[@applicantDetail.signature]',
             ],
         ],
         [
@@ -237,6 +243,7 @@ trait EMapTemplateTrait
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
             $this->getContractorDetailsReplacement(),
+
             $replace
         );
 
@@ -273,6 +280,10 @@ trait EMapTemplateTrait
             '[@length]' => $this->get_nepali_number($this->length) ?? '',
             '[@breadth]' => $this->get_nepali_number($this->breadth) ?? '',
             '[@height]' => $this->get_nepali_number($this->height) ?? '',
+            '[@consultant_name]' => get_nepali_number($this->consultant_name) ?? '',
+            '[@consultant_mobile_no]' => get_nepali_number($this->consultant_mobile_no) ?? '',
+            '[@consultant_nec_no]' => get_nepali_number($this->consultant_nec_no) ?? '',
+            '[@consultant_signature]' => '<img src="' . ($this->consultant_signature_url ?? ''). '" width="100" height="100" alt="Consultancy Photo">',
         ];
     }
 
@@ -326,7 +337,8 @@ trait EMapTemplateTrait
             '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner?->ward_no) ?? '',
             '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner?->district?->district) ?? '',
             '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner?->tole) ?? '',
-            '[@houseOwner.photo]' => '<img src="' . ($this->mapApply?->houseOwner?->photo_url ?? '') . '" width="100" height="100" alt="House Owner Photo">' ?? '',
+            '[@houseOwner.photo]' => '<img src="' . ($this->houseOwner?->photo_url ?? '')  . '" width="100" height="100" alt="House Owner Photo">',
+
         ];
     }
 
@@ -415,6 +427,7 @@ trait EMapTemplateTrait
         ];
     }
 
+
     private function getApplicantDetailReplacement(): array
     {
         return [
@@ -426,12 +439,13 @@ trait EMapTemplateTrait
             '[@applicantDetail.citizenship_issue_district]' => $this->get_nepali_number($this->applicantDetail?->citizenshipIssueDistrict?->district) ?? '',
             '[@applicantDetail.citizenship_no]' => $this->get_nepali_number($this->applicantDetail?->citizenship_no) ?? '',
             '[@applicantDetail.citizenship_issue_date]' => $this->get_nepali_number($this->applicantDetail?->citizenship_issue_date) ?? '',
-            '[@applicantDetail.signature]' => $this->get_nepali_number($this->applicantDetail?->signature) ?? '',
             '[@applicantDetail.province]' => $this->get_nepali_number($this->applicantDetail?->province?->province) ?? '',
             '[@applicantDetail.district]' => $this->get_nepali_number($this->applicantDetail?->district?->district) ?? '',
             '[@applicantDetail.local_body]' => $this->get_nepali_number($this->applicantDetail?->localBody?->local_body) ?? '',
             '[@applicantDetail.ward_no]' => $this->get_nepali_number($this->applicantDetail?->ward_no) ?? '',
             '[@applicantDetail.tole]' => $this->get_nepali_number($this->applicantDetail?->tole) ?? '',
+            '[@applicantDetail.signature]' => '<img src="' . ($this->applicantDetail?->signature_url ?? ''). '" width="100" height="100" alt="Applicant Signature">',
+
         ];
     }
 

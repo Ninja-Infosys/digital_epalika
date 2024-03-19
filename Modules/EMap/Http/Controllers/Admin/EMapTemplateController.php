@@ -17,7 +17,7 @@ class EMapTemplateController extends Controller
     {
         $this->checkAuthorization('eMapTemplate_access');
 
-        $eMapTemplates = EMapTemplate::latest()->get();
+        $eMapTemplates = EMapTemplate::get();
 
         return view('emap::admin.template.index', compact('eMapTemplates'));
     }

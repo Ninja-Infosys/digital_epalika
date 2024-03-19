@@ -83,13 +83,15 @@
                                             name="gender" id="gender">
                                         <option value="">लिङ्ग थप्नुहोस्</option>
                                         @foreach(\App\Enums\Gender::cases() as $case)
-                                            <option
-                                                value="{{$case->value}}" {{old('gender',$employee->gender)==$case->value ? 'selected':''}}>{{$case->label()}}</option>
+                                            <option value="{{ $case->value }}" {{ old('gender', $employee->gender) == $case->value ? 'selected' : '' }}>
+                                                {{ $case->label() }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('gender')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
+
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <x-date-input-component
