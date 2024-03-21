@@ -29,10 +29,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">पुरानो नक्सा सूची</h4>
+                        <div class="d-flex flex-wrap ">
+                            @includeIf('inc.filter_form')
+
                         <a href="{{ route('emap.admin.oldMap.create') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                         </a>
                     </div>
+                </div>
                 </div>
                 <div class="card-body px-0">
                     <div class="table-responsive">

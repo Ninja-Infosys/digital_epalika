@@ -3,14 +3,26 @@
 namespace Modules\EMap\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Modules\EMap\Entities\OldMap;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class OldMapController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         $this->checkAuthorization('oldMap_access');
-        $oldMaps = OldMap::with('houseOwner', 'fiscalYear')->get();
+        $oldMaps = OldMap::with('houseOwner', 'fiscalYear')
+            ->withCount(['houseOwner' => function ($q) {
+                $q->whereNotNull('registration_no');
+            }])->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['registration_no', 'registration_date', 'fiscal_year_id'], request('search'));
+                }
+            })->latest()->get();
         return view('emap::admin.oldMap.index', compact('oldMaps'));
     }
 
