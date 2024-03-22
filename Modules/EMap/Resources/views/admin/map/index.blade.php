@@ -39,13 +39,11 @@
         </div>
         <div class="card-body px-0">
             <ul class="nav nav-pills nav-fill navtab-bg">
-                @if (auth()->user()->role->title == "Super Admin")
-                    <li class="nav-item">
-                        <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                            सबै ({{ count($maps) }})
-                        </a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                        सबै ({{ count($maps) }})
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="#tab-type1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                         प्रक्रियामा ({{ count($maps->where('sent_to_organization', 'processing')) }})
