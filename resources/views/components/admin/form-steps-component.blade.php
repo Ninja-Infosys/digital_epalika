@@ -31,7 +31,7 @@
                                 @if ($form->form_approve)
                                     <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
                                         class="btn btn-xs bn-outline-success">
-                                        <i class="fa fa-clipboard-check"></i>
+                                        <i class="fa fa-eye"></i>
                                     </a>
                                 @endif
                                 @if ($form->form_edit)
