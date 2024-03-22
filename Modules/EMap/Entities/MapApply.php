@@ -74,6 +74,7 @@ class MapApply extends Model
         'application_type' => ApplicationFormTypeEnum::class
     ];
 
+    protected $with = ['appliedDocuments'];
     public function setConsultantSignatureAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {

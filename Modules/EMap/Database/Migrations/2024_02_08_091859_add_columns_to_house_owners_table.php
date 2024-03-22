@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('house_owners', function (Blueprint $table) {
             $table->string('document')->nullable();
+            $table->string('photo')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
     {
         Schema::table('house_owners', function (Blueprint $table) {
             $table->dropColumn('document');
+            $table->dropColumn('photo');
         });
     }
 };

@@ -49,7 +49,6 @@
                                         <td>{{ $mapApply->houseOwner?->phone ?? '' }}</td>
                                         <td>{{ $mapApply->construction_type->label() }}</td>
                                         <td class="d-flex">
-
                                             @if ($mapApply->sent_to_organization !== 'Accept')
                                                 <a data-bs-type="edit" class="btn me-1 btn-xs btn-outline-primary"
                                                     href="{{ route('organization.admin.mapApply.show', $mapApply) }}"
@@ -58,28 +57,52 @@
                                                     <i class="fa fa-pen"></i>
                                                 </a>
 
-                                                <a data-bs-type="sent-to-admin"
-                                                    class="btn me-1 btn-xs {{ $mapApply->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
-                                                    href="{{ route('organization.admin.updateStatus', $mapApply) }}"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="एडमिनलाई पठाउनुस">
-                                                    <i
-                                                        class="fa {{ $mapApply->sent_to_admin_at == null ? 'fa-times' : 'fa-check' }}"></i>
-                                                    {{--                                                    {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }} --}}
-                                                </a>
+
+
                                                 <a data-bs-type="show" class="btn me-1 btn-xs btn-outline-warning"
                                                     href="{{ route('organization.admin.formList', $mapApply) }}"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
+                                                <a data-bs-type="file" class="btn btn-xs btn-outline-info mx-1"
+                                                    href="{{ route('organization.admin.organizationDocument', $mapApply) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="कागजातहरु">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
+                                                @if (empty($mapApply->registration_no))
+                                                    <a data-bs-type="sent-to-admin"
+                                                        class="btn me-1 btn-xs {{ $mapApply->sent_to_admin_at == null ? 'btn-outline-danger' : 'btn-outline-success' }}"
+                                                        href="{{ route('organization.admin.updateStatus', $mapApply) }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="एडमिनलाई पठाउनुस">
+                                                        <i
+                                                            class="fa {{ $mapApply->sent_to_admin_at == null ? 'fa-times' : 'fa-check' }}"></i>
+                                                        {{--                                                    {{ $mapApply->sent_to_admin_at == null ? 'सक्रिय गर्नुहोस्' : 'निष्क्रिय गर्नुहोस्' }} --}}
+                                                    </a>
+                                                    <form action="{{ route('organization.admin.mapApply.destroy', $mapApply) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+
+                                                        @if (empty($mapApply->registration_no))
+                                                            <button data-bs-type="delete"
+                                                                class="btn btn-xs btn-outline-danger show_confirm">
+                                                                <i class="fa fa-trash {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="मेटाउनु होस्"></i>
+                                                            </button>
+                                                        @endif
+
+                                                    </form>
+                                                @endif
                                             @else
                                                 तपाईको फारम पालिकाले स्वीकार गरेको छ
+                                                <a data-bs-type="file" class="btn btn-xs btn-outline-info mx-1"
+                                                    href="{{ route('organization.admin.organizationDocument', $mapApply) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="कागजातहरु">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
                                             @endif
-                                            <a data-bs-type="file" class="btn btn-xs btn-outline-info mx-1"
-                                                href="{{ route('organization.admin.organizationDocument', $mapApply) }}"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="कागजातहरु">
-                                                <i class="fa fa-file"></i>
-                                            </a>
 
                                         </td>
                                     </tr>
