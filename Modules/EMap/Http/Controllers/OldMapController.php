@@ -20,7 +20,7 @@ class OldMapController extends Controller
                 $q->whereNotNull('registration_no');
             }])->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['registration_no', 'registration_date', 'fiscal_year_id'], request('search'));
+                    $q->whereLike(['registration_no', 'registration_date', 'fiscal_year_id', 'houseOwner.name'], request('search'));
                 }
             })->latest()->get();
         return view('emap::admin.oldMap.index', compact('oldMaps'));
