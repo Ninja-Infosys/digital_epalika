@@ -66,7 +66,6 @@ class MapApplyController extends Controller
 
     public function viewDetail(MapApply $mapApply, Form $form)
     {
-        $mapApply->load('appliedDocument.appliedDocumentStatuses');
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
         return view('emap::organization.attach-document.viewDetail', compact('mapApply', 'form'));
     }
@@ -78,10 +77,7 @@ class MapApplyController extends Controller
 
     public function destroy(MapApply $mapApply)
     {
-        if (empty($mapApply->registration_no))
-        $mapApply->delete();
-        toast('फारम हटाइयो', 'success');
-        return back();
+        //
     }
 
     public function mapFormInfo(MapApply $mapApply)
