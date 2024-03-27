@@ -35,6 +35,8 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
+        $wardNos = auth()->user()->ward_no; // Get all ward numbers of the authenticated user
+
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
@@ -43,17 +45,17 @@ class MapController extends Controller
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->whereHas('landDetail', function (Builder $q) {
-                if (!empty(auth()->user()->ward_no)) {
-                    $q->where('ward_no', auth()->user()->ward_no);
+            ->whereHas('landDetail', function (Builder $q) use ($wardNos) { // Use $wardNos here
+                if (!empty($wardNos)) {
+                    $q->whereIn('ward_no', $wardNos); // Use whereIn instead of where
                 }
             })
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
-
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum'));
     }
+
 
 
     public function noticeList(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum): Factory|View|Application
