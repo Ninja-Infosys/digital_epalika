@@ -45,9 +45,9 @@ class MapController extends Controller
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->whereHas('landDetail', function (Builder $q) use ($wardNos) { // Use $wardNos here
+            ->whereHas('landDetail', function (Builder $q) use ($wardNos) { 
                 if (!empty($wardNos)) {
-                    $q->whereIn('ward_no', $wardNos); // Use whereIn instead of where
+                    $q->whereIn('ward_no', $wardNos); 
                 }
             })
             ->orderBy('updated_at', 'desc')
