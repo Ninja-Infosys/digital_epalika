@@ -42,6 +42,8 @@ class MapController extends Controller
         }
 
 
+        $wardNos = auth()->user()->ward_no; // Get all ward numbers of the authenticated user
+
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
 
             ->sentToAdmin()
@@ -56,9 +58,10 @@ class MapController extends Controller
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->whereHas('landDetail', function (Builder $q) {
-                if (!empty (auth()->user()->ward_no)) {
-                    $q->where('ward_no', auth()->user()->ward_no);
+
+            ->whereHas('landDetail', function (Builder $q) use ($wardNos) { 
+                if (!empty($wardNos)) {
+                    $q->whereIn('ward_no', $wardNos); 
                 }
             })
             ->orderBy('updated_at', 'desc')
@@ -66,10 +69,8 @@ class MapController extends Controller
 
 
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum', ));
+
     }
-
-
-
 
 
 
