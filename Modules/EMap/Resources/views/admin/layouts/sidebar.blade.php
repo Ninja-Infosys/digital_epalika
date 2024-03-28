@@ -13,9 +13,6 @@
     </li>
 @endcan
 
-
-
-
 <li class="{{ request()->is('admin/emap/map/mapApply*') ? 'active' : '' }}">
     <a href="#sidebarMaptype" {{ request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
