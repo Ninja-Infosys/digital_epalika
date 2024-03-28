@@ -23,4 +23,16 @@ enum MapStatusEnum: string
             self::UNSEEN => 'प्रक्रियामा',
         };
     }
+
+    public static function getAllValues()
+    {
+        $values = collect();
+
+        foreach (self::cases() as $value) {
+            $values->push($value->value);
+        }
+
+        return $values;
+    }
+
 }
