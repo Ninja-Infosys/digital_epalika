@@ -9,6 +9,7 @@ use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
 use App\Traits\LockableTrait;
 use App\Traits\QueryFilterTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -66,6 +67,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected function wardNo(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                return $value !== null ? explode(',', $value) : [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+                return $value;
+            }
+        );
+    }
 
     public function setPasswordAttribute($value): void
     {
