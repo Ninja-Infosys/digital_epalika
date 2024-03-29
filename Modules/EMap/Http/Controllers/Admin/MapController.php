@@ -30,7 +30,7 @@ class MapController extends Controller
 
 
 
-    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum, $mapStatusEnum)
+    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum, $mapStatusEnum = 'all')
     {
 
 
@@ -59,9 +59,9 @@ class MapController extends Controller
                 }
             })
 
-            ->whereHas('landDetail', function (Builder $q) use ($wardNos) { 
+            ->whereHas('landDetail', function (Builder $q) use ($wardNos) {
                 if (!empty($wardNos)) {
-                    $q->whereIn('ward_no', $wardNos); 
+                    $q->whereIn('ward_no', $wardNos);
 
                 }
             })
