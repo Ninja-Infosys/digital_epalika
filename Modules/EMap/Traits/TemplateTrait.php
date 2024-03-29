@@ -273,7 +273,6 @@ trait TemplateTrait
             '[@houseOwner.photo]',
 
 
-
             //FourForts
 
             '[@fourForts]',
@@ -361,7 +360,7 @@ trait TemplateTrait
         $documents = collect([]);
 
         foreach ($documentTypeModels as $documentModel) {
-            $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
+            $typeDocuments = $documentModel::selectRaw('id,status,form_id')->where('map_apply_id', $mapApply->id)->get();
             foreach ($typeDocuments as $document) {
                 $documents->push([
                     'document_type' => class_basename($documentModel),
@@ -375,10 +374,12 @@ trait TemplateTrait
         $allApproved = true;
         $forms = Form::withCount('formDataTypes')
             ->orderBy('order')
-            ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
+            ->get()
+            ->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                if ($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                if ($allApproved && $status->count() == $form->form_data_types_count
+                    && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED)) {
                     $order = $form->order + 1;
                 } elseif ($key == 0) {
                     $order = $form->order;
@@ -388,7 +389,7 @@ trait TemplateTrait
                 }
                 if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
-                } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
+                } elseif ($status->contains(DocumentStatusEnum::REJECTED)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
                 } elseif ($status->count() > 0) {
                     $mapStatus = DocumentStatusEnum::PENDING;
