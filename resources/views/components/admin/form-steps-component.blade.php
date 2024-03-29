@@ -23,7 +23,7 @@
                         @if ($form->need_from->value == \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE->value)
                             @if ($form->map_group_id == $form->map_pass_group_id)
                                 <a href="{{ route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]) }}"
-                                    class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
+                                    class="btn btn-xs btn-outline-primary {{ $form->order == $order + 1 ? '' : 'disabled' }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
 
