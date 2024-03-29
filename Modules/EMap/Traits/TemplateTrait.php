@@ -378,18 +378,16 @@ trait TemplateTrait
             ->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                $allApproved = $status->unique()->count() == 1;
-
-                if ($allApproved && $status->count() == $form->form_data_types_count) {
+                if ($allApproved && $status->count() == $form->form_data_types_count
+                    && $status->unique()->count() == 1) {
                     $order = $form->order + 1;
+                    $allApproved = true;
                 } elseif ($key == 0) {
                     $order = $form->order;
-                    $order = $form->order + 1;
                     $allApproved = false;
                 } else {
                     $allApproved = false;
                 }
-
                 if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
                 } elseif ($status->contains(DocumentStatusEnum::REJECTED)) {
@@ -400,7 +398,6 @@ trait TemplateTrait
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;
                 }
                 $form->map_status = $mapStatus;
-                dd($order);
                 return $form;
             });
 
