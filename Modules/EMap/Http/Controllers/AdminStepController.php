@@ -584,7 +584,7 @@ class AdminStepController extends Controller
             'criteriaDetails',
             'buildingDetails',
             'designerDetails',
-          
+
         );
         return $fileTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model?->data);
     }
