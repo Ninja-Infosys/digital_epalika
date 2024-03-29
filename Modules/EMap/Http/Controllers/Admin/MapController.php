@@ -44,6 +44,7 @@ class MapController extends Controller
 
         $wardNos = auth()->user()->ward_no; // Get all ward numbers of the authenticated user
 
+
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
 
             ->sentToAdmin()
@@ -68,9 +69,12 @@ class MapController extends Controller
             ->paginate(10);
 
 
+
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum', ));
 
     }
+
+
 
 
 
