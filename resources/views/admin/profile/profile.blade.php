@@ -39,7 +39,8 @@
                             </p>
                             <p class="text-muted mb-1 font-13"><strong>ठेगाना :</strong>
                                 <span class="ms-2">
-                                    {{auth()->user()->localBody->local_body ?? ''}}-{{auth()->user()->ward_no ?? ''}}
+                                    {{ auth()->user()->localBody->local_body ?? '' }}-
+                                    {{ is_array(auth()->user()->ward_no) ? implode(',', auth()->user()->ward_no) : auth()->user()->ward_no ?? '' }}
                                 </span>
                             </p>
                         </div>
