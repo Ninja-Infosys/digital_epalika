@@ -114,7 +114,7 @@
 
                         <li class="nav-item">
                             <a href="#tab-submission" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
-                                पेश गर्नुपर्ने ({{ $forms->where('form_edit', true)?->count() }})
+                                पेश गर्नुपर्ने ({{ $forms->where('form_edit', true)->where('need_from', \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)?->count() }})
                             </a>
                         </li>
 
@@ -130,7 +130,7 @@
                             <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms" :order="$order" />
                         </div>
                         <div class="tab-pane show active" id="tab-submission">
-                            <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms->where('form_edit', true)" :order="$order" />
+                            <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms->where('form_edit', true)->where('need_from', \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)" :order="$order" />
                         </div>
 
                         <div class="tab-pane" id="tab-approval">

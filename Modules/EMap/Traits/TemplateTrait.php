@@ -379,7 +379,7 @@ trait TemplateTrait
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
                 if ($allApproved && $status->count() == $form->form_data_types_count
-                    && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED)) {
+                    && $status->every(fn($s) => $s == DocumentStatusEnum::APPROVED)) {
                     $order = $form->order + 1;
                 } elseif ($key == 0) {
                     $order = $form->order;
@@ -387,11 +387,11 @@ trait TemplateTrait
                 } else {
                     $allApproved = false;
                 }
-                if ($allApproved) {
+                if ($status->unique()->count() == 1) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
                 } elseif ($status->contains(DocumentStatusEnum::REJECTED)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
-                } elseif ($status->count() > 0) {
+                } elseif ($status->contains(DocumentStatusEnum::PENDING)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;
