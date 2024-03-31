@@ -140,20 +140,7 @@
                     @endif
                 </span>
                 <span class="logo-lg">
-                    @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
-                        <img
-                            src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}"
-                            alt=""
-                            height="40"/>
-                    @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
-                        <img
-                            src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}"
-                            alt=""
-                            height="40"/>
-                    @else
-                        <img src="{{asset(config('app.logo'))}}" alt=""
-                             height="35"/>
-                    @endif
+                   <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="35"/>
               </span>
             </a>
         </div>

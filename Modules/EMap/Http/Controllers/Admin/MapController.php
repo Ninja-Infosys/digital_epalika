@@ -30,7 +30,7 @@ class MapController extends Controller
 
 
 
-    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum, $mapStatusEnum)
+    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum, $mapStatusEnum = 'all')
     {
 
 
@@ -60,9 +60,10 @@ class MapController extends Controller
                 }
             })
 
-            ->whereHas('landDetail', function (Builder $q) use ($wardNos) { 
+            ->whereHas('landDetail', function (Builder $q) use ($wardNos) {
                 if (!empty($wardNos)) {
-                    $q->whereIn('ward_no', $wardNos); 
+                    $q->whereIn('ward_no', $wardNos);
+
                 }
             })
             ->orderBy('updated_at', 'desc')
@@ -234,7 +235,6 @@ class MapController extends Controller
     public function updateStatus(Request $request, MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
         $this->checkAuthorization('mapApply_access');
-        //        abort_if($mapApply->sent_to_organization == 'Accept', 403);
         DB::transaction(function () use ($request, $mapApply, $applicationFormTypeEnum) {
             $number = MapApply::whereFiscalYearId(\officeSetting()->fiscal_year_id)
                 ->max('number') + 1;
