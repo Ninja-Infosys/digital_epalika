@@ -9,6 +9,7 @@
     <title>{{config('app.name')}}</title>
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/loginstyle.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/utils.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/owl/owl.carousel.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"

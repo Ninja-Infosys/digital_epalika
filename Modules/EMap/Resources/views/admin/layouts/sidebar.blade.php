@@ -164,6 +164,23 @@
                     </a>
                 </li>
             @endcan
+            @can('necessaryDocument_access')
+            <li class="{{ request()->is('admin/emap/setting/necessaryDocument*') ? 'active' : '' }}">
+              
+                <a href="{{ route('emap.admin.necessaryDocument.index') }}">
+                    <span>आवश्यक कागजातहरू </span>
+                </a>
+            </li>
+            @endcan
+            @can('registrationDocument_access')
+            <li class="{{ request()->is('admin/emap/setting/registrationDocument*') ? 'active' : '' }}">
+              
+                <a href="{{ route('emap.admin.registrationDocument.index') }}">
+                    <span>दरखस्त कागजातहरू </span>
+                </a>
+            </li>
+            @endcan
+            
         </ul>
     </div>
 </li>

@@ -6,7 +6,7 @@
             <div class="page-title-box">
                 <h4 class="page-title mb-0">
                     {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
-           
+
 
                 </h4>
                 <div class="">

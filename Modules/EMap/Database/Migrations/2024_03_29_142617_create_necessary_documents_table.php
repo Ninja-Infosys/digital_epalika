@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('necessary_documents', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->comment('शीर्षक');
+            $table->string('files')->nullable()->comment('कागजात');
+            $table->string('description')->nullable()->comment('विवरण');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('necessary_documents');
+    }
+};
