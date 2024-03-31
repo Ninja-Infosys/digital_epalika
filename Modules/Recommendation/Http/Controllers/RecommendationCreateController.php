@@ -7,13 +7,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
+use Modules\Recommendation\Enums\RecommendationStatusEnum;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
 
 class RecommendationCreateController extends Controller
 {
     public function index()
     {
-        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser','personalDetail')->latest()->get();
+        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->get();
 
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }
@@ -46,6 +47,7 @@ class RecommendationCreateController extends Controller
                     }
                     $recommendationCreate->recommendationValues()
                         ->create([
+
                             'recommendation_form_field_id' => $field['recommendation_form_field_id'] ?? '',
                             'value' => $value ?? '',
                             'type' => $field['type'] ?? '',
@@ -73,19 +75,27 @@ class RecommendationCreateController extends Controller
 
     public function show(RecommendationCreate $recommendationCreate)
     {
-        $recommendationCreate->load('recommendationValues.recommendationFormField', 'recommendationFiles.recommendationDocument');
+        $recommendationCreate->load(
+            'recommendationValues.recommendationFormField',
+            'recommendationFiles.recommendationDocument',
+            'recommendationDetail.revenueHeaders'
+        );
 
         return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate'));
     }
 
-    public function updateStatus(RecommendationCreate $recommendationCreate)
+
+
+
+    public function updateStatus(RecommendationCreate $recommendationCreate, RecommendationStatusEnum $recommendationStatusEnum)
     {
         $recommendationCreate->update([
-            'status' => !$recommendationCreate->status
+            'status' => $recommendationStatusEnum->value,
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
+
 
     public function fileUpload(Request $request, RecommendationCreate $recommendationCreate)
     {

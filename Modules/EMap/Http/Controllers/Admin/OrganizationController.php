@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -37,12 +36,12 @@ class OrganizationController extends Controller
     public function updateLoginStatus(Request $request, Organization $organization)
     {
         $request->validate([
-            'status'=>['required'],
-            'comment'=>['required_if:status,==,rejected']
+            'status' => ['required'],
+            'comment' => ['required_if:status,==,rejected']
         ]);
         $this->checkAuthorization('organization_edit');
 
-        DB::transaction(function () use ($organization,$request) {
+        DB::transaction(function () use ($organization, $request) {
             $organization->update([
                 'status' => $request->input('status'),
                 'comment' => $request->input('comment') ?? null,
@@ -51,8 +50,7 @@ class OrganizationController extends Controller
                 $message = "Dear $organization->name , your application has been approved.";
                 (new AakashSms())->sendTextSMS($organization->phone, $message);
                 // Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
-            }elseif ($organization->status === 'rejected')
-            {
+            } elseif ($organization->status === 'rejected') {
                 $message = "Dear $organization->name, your application in rejected because of $organization->comment.";
                 (new AakashSms())->sendTextSMS($organization->phone, $message);
             }

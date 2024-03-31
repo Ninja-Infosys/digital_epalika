@@ -62,4 +62,5 @@ class RecommendationCategory extends Model
     {
         return $q->where('is_active', 0);
     }
+
 }

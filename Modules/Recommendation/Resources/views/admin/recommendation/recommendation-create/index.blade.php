@@ -87,7 +87,6 @@
                                     <th>सेवाग्राहीको नाम</th>
                                     <th>सिफारिस नाम</th>
                                     <th>सिफारिस स्वीकृति</th>
-                                    <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
                                 </thead>
@@ -100,13 +99,6 @@
                                         </td>
                                         <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
                                         <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
-
-                                        <td>
-                                                <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
-                                                   href="{{route('admin.recommendation.recommendationCreate.updateStatus',$recommendationCreate)}}">
-                                                    <i class="fa fa-2x {{ $recommendationCreate->status==true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                                </a>
-                                        </td>
                                         <td class="d-flex gap-1">
                                                 <a data-bs-type="edit"
                                                    href="{{ route('admin.recommendation.recommendationCreate.show', $recommendationCreate) }}"
@@ -152,7 +144,6 @@
                                     <th>सेवाग्राहीको नाम</th>
                                     <th>सिफारिस नाम</th>
                                     <th>सिफारिस स्वीकृति</th>
-                                    <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
                                 </thead>
@@ -165,15 +156,6 @@
                                         </td>
                                         <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
                                         <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
-
-                                        <td>
-                                                <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
-                                                   href="{{route('admin.recommendation.recommendationCreate.updateStatus',$recommendationCreate)}}">
-                                                    <i class="fa fa-2x {{ $recommendationCreate->status==true ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                                </a>
-
-
-                                        </td>
                                         <td class="d-flex gap-1">
                                                 <a data-bs-type="edit"
                                                    href="{{ route('admin.recommendation.recommendationCreate.show', $recommendationCreate) }}"

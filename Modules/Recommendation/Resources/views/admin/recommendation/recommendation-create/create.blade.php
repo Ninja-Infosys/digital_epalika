@@ -54,7 +54,6 @@
                             'personal_detail_id' => old('personal_detail_id'),
                             'mobile_user_id' => old('mobile_user_id'),
                             'recommendation_detail_id' => old('recommendation_detail_id'),
-                            'status' => old('status'),
                             'fields' => old('fields'),
                         ])
                         <button type="submit" class="btn btn-primary mt-2">

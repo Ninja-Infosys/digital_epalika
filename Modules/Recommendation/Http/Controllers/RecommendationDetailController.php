@@ -32,7 +32,6 @@ class RecommendationDetailController extends Controller
 
     public function store(StoreRecommendationDetailRequest $request)
     {
-
         DB::transaction(function () use ($request) {
             $recommendationDetail = RecommendationDetail::create($request->validated());
             $recommendationDetail->revenueHeaders()->attach($request->validated()['revenueHeaders']);
@@ -40,7 +39,7 @@ class RecommendationDetailController extends Controller
 
             foreach ($request->validated()['form'] as $formData) {
                 $recommendationData = $recommendationDetail->recommendationFormFields()->create($this->getFormData($formData));
-                if($formData['type'] === 'table') {
+                if ($formData['type'] === 'table' && isset($formData['table'])) {
                     foreach ($formData['table'] as $tableData) {
                         $recommendationData->recommendationFormFields()->create($this->getFormData($tableData));
                     }
@@ -53,7 +52,7 @@ class RecommendationDetailController extends Controller
 
     public function show(RecommendationDetail $recommendationDetail)
     {
-        $recommendationDetail->load('recommendationFormFields');
+        $recommendationDetail->load('recommendationFormFields' );
         return view('recommendation::admin.recommendation.setting.recommendation-detail.show', compact('recommendationDetail'));
     }
 
@@ -87,7 +86,8 @@ class RecommendationDetailController extends Controller
                 if(array_key_exists('id', $formData) && !empty($formData['id'])) {
                     $recommendationFormFieldId = RecommendationFormField::find($formData['id']);
                     $recommendationFormFieldId->update($formData);
-                    if($formData['type'] === 'table') {
+                    // Check if 'table' key exists before accessing it
+                    if(array_key_exists('table', $formData) && $formData['type'] === 'table') {
                         RecommendationFormField::whereNotIn('id', collect($formData['table'])->pluck('id')->toArray())
                             ->where('recommendation_form_field_id', $recommendationFormFieldId->id)
                             ->delete();
@@ -102,13 +102,15 @@ class RecommendationDetailController extends Controller
                     }
                 } else {
                     $recommendationData = $recommendationDetail->recommendationFormFields()->create($this->getFormData($formData));
-                    if($formData['type'] === 'table') {
+                    // Check if 'table' key exists before accessing it
+                    if(array_key_exists('table', $formData) && $formData['type'] === 'table') {
                         foreach ($formData['table'] as $tableData) {
                             $recommendationData->recommendationFormFields()->create($this->getFormData($tableData));
                         }
                     }
                 }
             }
+
         });
         toast('सिफारिस विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.recommendation.setting.recommendationDetail.index'));

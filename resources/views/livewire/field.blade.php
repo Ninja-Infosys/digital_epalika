@@ -48,23 +48,6 @@
                 </div>
                 @enderror
             </div>
-            <div class="col-md-4 mb-2">
-                <label for="personal_detail_id" class="form-label">स्थिति <span class="text-danger">*</span></label>
-                <div class="d-flex justify-content-between gap-1">
-                    <select id="personal_detail_id" name="status" class="form-select"
-                            wire:model="status" required>
-                        <option value="">-- छान्नुहोस् --</option>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-
-                </div>
-                @error('status')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
         </div>
     </fieldset>
 

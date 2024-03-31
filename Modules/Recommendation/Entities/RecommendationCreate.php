@@ -119,4 +119,8 @@ class RecommendationCreate extends Model
     {
         return $this->hasMany(RecommendationFile::class);
     }
+    public function recommendationCategories(): BelongsTo
+    {
+        return $this->belongsTo(RecommendationCategory::class);
+    }
 }
