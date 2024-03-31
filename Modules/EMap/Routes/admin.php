@@ -85,9 +85,10 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
-    Route::get('mapApply/{applicationFormTypeEnum}', 'index')->name('mapApply.index');
+    Route::get('mapApply/{applicationFormTypeEnum}/{mapStatusEnum?}', 'index')->name('mapApply.index');
+
     Route::get('mapApply/{mapApply}/detail/{applicationFormTypeEnum}', 'mapDetail')->name('mapApply.mapDetail');
-    Route::put('mapApply/{mapApply}/{applicationFormTypeEnum}', 'updateStatus')->name('mapApply.updateStatus');
+    Route::put('mapApply/{applicationFormTypeEnum}/{mapApply}', 'updateStatus')->name('mapApply.updateStatus');
 });
 
 Route::prefix('setting')->group(function () {

@@ -18,16 +18,22 @@ use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\ApplicationFormTypeEnum;
+
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\EMap\Entities\AttachDocument;
+use Modules\EMap\Enums\MapStatusEnum;
 
 class MapController extends Controller
 {
     use NepaliDateConverter;
 
-    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
+
+
+    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum, $mapStatusEnum = 'all')
     {
+
+
         $this->checkAuthorization('mapApply_access');
         $application_types = collect();
 
@@ -35,24 +41,36 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
+        $wardNos = auth()->user()->ward_no; // Get all ward numbers of the authenticated user
+
+
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
+
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
+            ->where(function ($q) use ($mapStatusEnum) {
+                if (MapStatusEnum::getAllValues()->contains($mapStatusEnum)) {
+                    $q->where('sent_to_organization', $mapStatusEnum);
+                }
+            })
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-            ->whereHas('landDetail', function (Builder $q) {
-                if (!empty(auth()->user()->ward_no)) {
-                    $q->where('ward_no', auth()->user()->ward_no);
+
+            ->whereHas('landDetail', function (Builder $q) use ($wardNos) {
+                if (!empty($wardNos)) {
+                    $q->whereIn('ward_no', $wardNos);
+
                 }
             })
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
 
-        return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum'));
+
+        return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum', ));
     }
 
 
@@ -77,9 +95,23 @@ class MapController extends Controller
 
     public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum)
     {
-        $mapApply->load(['fiscalYear', 'mapRegistration', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
-            $query->latest();
-        }]);
+        $mapApply->load([
+            'fiscalYear',
+            'mapRegistration',
+            'organization.organizationDetail',
+            'storeyDetails.mapFee',
+            'landDetail.unit',
+            'landOwner.citizenshipIssueDistrict',
+            'houseOwner.citizenshipIssueDistrict',
+            'fourForts',
+            'applicantDetail',
+            'criteriaDetails',
+            'buildingDetails',
+            'mapApplyApplications',
+            'applyMapNotices' => function ($query) {
+                $query->latest();
+            }
+        ]);
 
         $data = $mapApply->applyMapNotices->where('file_type', $noticeTypeEnum)?->first()->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? '';
 
@@ -88,8 +120,9 @@ class MapController extends Controller
         return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum', 'data', 'noticeTypeEnum'));
     }
 
-    public function mapDetail(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
+    public function mapDetail(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, )
     {
+
         $mapApply->load('attachDocument', 'structureType', 'storeyDetails.mapFee', 'landDetail', 'landOwner', 'houseOwner', 'fourForts', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'organization.organizationDetail');
         return view('emap::admin.map.mapdetail', compact('mapApply', 'applicationFormTypeEnum'));
     }
@@ -132,9 +165,12 @@ class MapController extends Controller
 
     public function getTemplateData(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum, NoticeTypeEnum $noticeTypeEnum)
     {
-        $mapApply->load(['applyMapNotices.files', 'applyMapNotices' => function ($q) use ($noticeTypeEnum) {
-            $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
-        }]);
+        $mapApply->load([
+            'applyMapNotices.files',
+            'applyMapNotices' => function ($q) use ($noticeTypeEnum) {
+                $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
+            }
+        ]);
 
 
         return view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum', 'applicationFormTypeEnum'));
