@@ -78,7 +78,7 @@ class RecommendationCreateController extends Controller
         $recommendationCreate->load(
             'recommendationValues.recommendationFormField',
             'recommendationFiles.recommendationDocument',
-            'recommendationCategories'
+            'recommendationDetail.revenueHeaders'
         );
 
         return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate'));
