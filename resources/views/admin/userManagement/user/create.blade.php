@@ -143,7 +143,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="employee_id" class="form-label">मथेल्नो तह कर्मचारी  </label>
+                                    <label for="employee_id" class="form-label">मथेल्लो तह कर्मचारी  </label>
 
                                     <select class="form-control @error('employee_id') is-invalid @enderror"
                                             name="employee_id" id="employee_id">

@@ -40,4 +40,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('mapApply/{mapApply:uuid}/verifyOtp', 'verifyOtp')->name('verify-otp');
     Route::get('mapApply/{mapApply:uuid}/{noticeTypeEnum}/trackData', 'loadTemplateData')->name('load-template-data');
     Route::post('mapApply/{mapApply:uuid}/{noticeTypeEnum}/storeEmapTemplateData', 'storeEmapTemplateData')->name('store-emap-template-data');
+    Route::get('file/{file}/download', 'download')->name('file.download');
+    Route::get('file-download', 'downloadFile')->name('file-url-download');
+    
 });
