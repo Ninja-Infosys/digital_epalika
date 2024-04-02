@@ -27,8 +27,9 @@ class FrontendController extends Controller
 {
     public function eMap()
 {
-    $necessaryDocuments = NecessaryDocument::all();
+    $necessaryDocuments = NecessaryDocument::with('files')->get();
     $registrationDocuments =RegistrationDocument::all();
+
 
     return view('emap::frontend.e-map.index', compact('necessaryDocuments','registrationDocuments'));
 }
@@ -172,12 +173,12 @@ class FrontendController extends Controller
 
     public function download(File $file)
     {
+        
         return Storage::disk('public')->download($file->file, $file->file_name . $file->extension);
     }
 
     public function downloadFile()
     {
-        //        dd($_GET['file_url']);
         if (!empty($_GET['file_url']) && Storage::disk('public')->exists($_GET['file_url'])) {
             return Storage::disk('public')->download($_GET['file_url']);
         } else {

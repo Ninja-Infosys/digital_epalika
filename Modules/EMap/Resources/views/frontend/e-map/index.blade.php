@@ -122,7 +122,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                    <p style="font-size: 16px;">आवश्यक कागजातहरु</p>
+                                        <p style="font-size: 16px;">आवश्यक कागजातहरु</p>
                                         <div class="card-body px-0">
                                             <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
                                                 <table class="table table-sm table-custom">
@@ -139,16 +139,12 @@
                                                                 <td>{{ $loop->iteration }}</td>
                                                                 <th>{{ $necessaryDocument->title ?? '' }}</th>
                                                                 <td class="d-flex">
-                                                                    {{-- <a href="{{ route('emap.admin.necessaryDocument.show', $necessaryDocument) }}"
-                                                                        title="विवरण हेर्नुहोस"
-                                                                        class="btn btn-xs btn-outline-success">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a> --}}
-                                                                    
-                                                                     <a href="{{route('file-url-download', ['file_url'=>$necessaryDocument->file])}}" class="btn btn-xs btn-outline-primary">
-                                                                        <i class="fa fa-download"></i>
-                                                                    </a>
-                                                                    
+                                                                    @foreach ($necessaryDocument->files as $file)
+                                                                        <a href="{{ route('file.download', ['file' => $file->id]) }}"
+                                                                            class="btn btn-xs btn-outline-primary">
+                                                                            <i class="fa fa-download"></i>
+                                                                        </a>
+                                                                    @endforeach
                                                                 </td>
                                                             </tr>
                                                             <tr class="empty">
@@ -173,16 +169,17 @@
                                                     <tr>
                                                         <th>क्र.स</th>
                                                         <th>शीर्षक</th>
-                                                        
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @forelse($registrationDocuments as $key=>$registrationDocument)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
-                                                            <th>{{ strip_tags($registrationDocument->description ?? '') }}</th>
+                                                            <th>{{ strip_tags($registrationDocument->description ?? '') }}
+                                                            </th>
 
-                                                            
+
                                                         </tr>
                                                         <tr class="empty">
                                                             <td></td>
