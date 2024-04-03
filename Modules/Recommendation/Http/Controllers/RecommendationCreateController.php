@@ -45,13 +45,13 @@ class RecommendationCreateController extends Controller
                     } else {
                         $value = $field['value'];
                     }
-                    $recommendationCreate->recommendationValues()
-                        ->create([
-
-                            'recommendation_form_field_id' => $field['recommendation_form_field_id'] ?? '',
-                            'value' => $value ?? '',
-                            'type' => $field['type'] ?? '',
-                        ]);
+//                    $recommendationCreate->recommendationValues()
+//                        ->create([
+//
+//                            'recommendation_form_field_id' => $field['recommendation_form_field_id'] ?? '',
+//                            'value' => $value ?? '',
+//                            'type' => $field['type'] ?? '',
+//                        ]);
                 }
             }
 
@@ -85,8 +85,6 @@ class RecommendationCreateController extends Controller
     }
 
 
-
-
     public function updateStatus(RecommendationCreate $recommendationCreate, RecommendationStatusEnum $recommendationStatusEnum)
     {
         $recommendationCreate->update([
@@ -106,7 +104,7 @@ class RecommendationCreateController extends Controller
         toast('फाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
-    //
+
     public function destroy(RecommendationCreate $recommendationCreate)
     {
 
