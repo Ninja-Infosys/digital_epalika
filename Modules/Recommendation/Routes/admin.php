@@ -5,6 +5,7 @@ use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
+use Modules\Recommendation\Http\Controllers\Admin\SignaturePersonController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 use Modules\Recommendation\Http\Controllers\RecommendationCreateController;
 use Modules\Recommendation\Http\Controllers\RecommendationDetailController;
@@ -73,6 +74,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('recommendationDetail', RecommendationDetailController::class);
     Route::get('recommendationSignature/{recommendationSignature}/updateStatus', [RecommendationSignatureController::class,'updateStatus'])->name('recommendationSignature.updateStatus');
     Route::resource('recommendationSignature', RecommendationSignatureController::class);
+    Route::resource('signaturePerson', SignaturePersonController::class);
 });
 
 //recommendation create

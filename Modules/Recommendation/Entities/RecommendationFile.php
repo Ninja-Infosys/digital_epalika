@@ -54,4 +54,8 @@ class RecommendationFile extends Model
     {
         return $this->belongsTo(RecommendationDocument::class);
     }
+    public function signturePerson(): BelongsTo
+    {
+        return $this->belongsTo(SignaturePerson::class);
+    }
 }
