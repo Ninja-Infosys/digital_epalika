@@ -13,86 +13,6 @@
     </li>
 @endcan
 
-{{-- <li class="{{ request()->is('admin/emap/map/mapApply*') ? 'active' : '' }}">
-    <a href="#sidebarMaptype" {{ request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : '' }}
-        data-bs-toggle="collapse">
-        <i class="fa fa-map"></i>
-        <span>नक्सा दर्ता/प्रमाणित</span>
-        <span class="menu-arrow">
-            <i class="fas fa-angle-right"></i>
-        </span>
-    </a>
-    <div class="collapse {{ request()->is('admin/emap/map/mapApply*') ? 'show' : '' }}" id="sidebarMaptype1">
-        <ul class="nav-second-level">
-            @can('mapApply_access')
-                <li class="{{ request()->is('admin/emap/map/mapApply*') ? 'active' : '' }}">
-                    <a href="#sidebarMaptype1" {{ request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : '' }}
-                        data-bs-toggle="collapse">
-                        <span>नक्सा दर्ता</span>
-                        <span class="menu-arrow">
-                            <i style="padding-right: 20px;" class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                    <div class="collapse {{ request()->is('admin/emap/map/mapApply*') ? 'show' : '' }}"
-                        id="sidebarMaptype1">
-                        <ul class="nav-second-level">
-                            @can('mapApply_access')
-                                <li class="">
-                                    <a href="{{ route('emap.admin.map.mapApply.index', [ \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION,'all']) }}">
-                                        <span> सबै </span>
-                                    </a>
-                                </li>
-
-                                @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatusEnum)
-                                    <li class="{{ request()->is('admin/emap/map/mapApply') ? 'active' : '' }}">
-                                        <a href="{{ route('emap.admin.map.mapApply.index', [ \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION,$mapStatusEnum->value,]) }}">
-                                            <span>{{ $mapStatusEnum->label() }} </span>
-                                        </a>
-                                    </li>
-                                @endforeach
-                              
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
-            @endcan
-            @can('mapApply_access')
-                <li class="">
-                    <a href="#sidebarMaptype" {{ request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : '' }}
-                        data-bs-toggle="collapse">
-                        <span>नक्सा प्रमाणित</span>
-                        <span class="menu-arrow">
-                            <i style="padding-right: 20px;" class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                    <div class="collapse {{ request()->is('admin/emap/map/mapApply*') ? 'show' : '' }}"
-                        id="sidebarMaptype2">
-                        <ul class="nav-second-level">
-                            @can('mapApply_access')
-                                <li class="">
-                                    <a href="{{ route('emap.admin.map.mapApply.index', [ \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED,'all']) }}">
-                                        <span> सबै </span>
-                                    </a>
-                                </li>
-                                @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatusEnum)
-                                    <li class="{{ request()->is('admin/emap/map/mapApply') ? 'active' : '' }}">
-                                        <a href="{{ route('emap.admin.map.mapApply.index', [ \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED,$mapStatusEnum->value,]) }}">
-                                            <span>{{ $mapStatusEnum->label() }} </span>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
-            @endcan
-
-        </ul>
-
-    </div>
-</li> --}}
-
-
 <li class="{{ request()->is('admin/emap/map/mapApply*') ? 'active' : '' }}">
     <a href="#sidebarMaptype" {{ request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
@@ -244,6 +164,23 @@
                     </a>
                 </li>
             @endcan
+            @can('necessaryDocument_access')
+            <li class="{{ request()->is('admin/emap/setting/necessaryDocument*') ? 'active' : '' }}">
+              
+                <a href="{{ route('emap.admin.necessaryDocument.index') }}">
+                    <span>आवश्यक कागजातहरू </span>
+                </a>
+            </li>
+            @endcan
+            @can('registrationDocument_access')
+            <li class="{{ request()->is('admin/emap/setting/registrationDocument*') ? 'active' : '' }}">
+              
+                <a href="{{ route('emap.admin.registrationDocument.index') }}">
+                    <span>दरखस्त कागजातहरू </span>
+                </a>
+            </li>
+            @endcan
+            
         </ul>
     </div>
 </li>

@@ -41,6 +41,7 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
+
         $wardNos = auth()->user()->ward_no; // Get all ward numbers of the authenticated user
 
 
@@ -71,7 +72,11 @@ class MapController extends Controller
 
 
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum', ));
+
     }
+
+
+
 
 
     public function noticeList(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum): Factory|View|Application
