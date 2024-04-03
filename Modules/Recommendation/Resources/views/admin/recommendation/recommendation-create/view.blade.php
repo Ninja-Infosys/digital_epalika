@@ -166,6 +166,7 @@
                     @include('admin.inc.file-view')
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-between">
+                            @if ($recommendationCreate->status != 'sent_to_revenue')
                             <form method="POST"
                                   action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT]) }}">
                                 @csrf
@@ -173,6 +174,7 @@
                                 <button type="submit"
                                         class="btn btn-sm btn-danger">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT->label() }}</button>
                             </form>
+                            @endif
 
                             <form method="POST"
                                   action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE]) }}">
@@ -182,18 +184,19 @@
                                         class="btn btn-sm btn-primary text-white">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE->label() }}</button>
 
                             </form>
-
-                            <form method="POST"
-                                  action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER]) }}">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit"
-                                        class="btn btn-sm btn-success">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER->label() }}</button>
-                            </form>
+                            @if ($recommendationCreate->status != 'sent_to_revenue')
+                                <form method="POST"
+                                      action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER]) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit"
+                                            class="btn btn-sm btn-success">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER->label() }}</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
-                @if($recommendationCreate->sent_to_revenue)
+                @if($recommendationCreate->status == 'sent_to_revenue')
                     <div class="row mt-3">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
@@ -279,7 +282,8 @@
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="staticBackdropLabel">नयाँ फाईल
                                                                 उपलोड़</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                         </div>
                                                         <form
@@ -303,7 +307,8 @@
                                                                         data-bs-dismiss="modal">रद्द
                                                                     गर्नुहोस्
                                                                 </button>
-                                                                <button type="submit" class="btn btn-primary"> पेश गर्नुहोस्
+                                                                <button type="submit" class="btn btn-primary"> पेश
+                                                                    गर्नुहोस्
                                                                 </button>
                                                             </div>
                                                         </form>
@@ -322,7 +327,8 @@
                                                     }
                                                 </style>
 
-                                                <iframe src="{{ $recommendationCreate->file_url }}" frameborder="0" width="100%"
+                                                <iframe src="{{ $recommendationCreate->file_url }}" frameborder="0"
+                                                        width="100%"
                                                         height="600"></iframe>
 
                                             </div>
@@ -336,35 +342,32 @@
             </div>
 
 
-
-            @if(empty($recommendationCreate->file))
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                    <x-print-button
-                                        target-element="print"
-                                        title="सिफारिस प्रिन्ट"
-                                    />
-                                </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
+                                <x-print-button
+                                    target-element="print"
+                                    title="सिफारिस प्रिन्ट"
+                                />
                             </div>
-                            <div class="card-body">
-                                <div id="print" class="p-1">
-                                    <style>
-                                        @page {
-                                            margin-top: 0;
-                                        }
-                                    </style>
-                                    {!! $recommendationCreate->resolveTemplate() ?? '' !!}
+                        </div>
+                        <div class="card-body">
+                            <div id="print" class="p-1">
+                                <style>
+                                    @page {
+                                        margin-top: 0;
+                                    }
+                                </style>
+                                {!! $recommendationCreate->resolveTemplate() ?? '' !!}
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 @endsection
