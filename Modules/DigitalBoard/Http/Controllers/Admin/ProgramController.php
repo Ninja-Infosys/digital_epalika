@@ -5,24 +5,27 @@ namespace Modules\DigitalBoard\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\DigitalBoard\Entities\CitizenCharter;
 use Modules\DigitalBoard\Entities\Program;
 use Modules\DigitalBoard\Http\Requests\Program\StoreProgramRequest;
 use Modules\DigitalBoard\Http\Requests\Program\UpdateProgramRequest;
 
 class ProgramController extends Controller
 {
-    public function index()
-    {
-        $programs = Program::
-        where(function ($q){
-            if (!empty(auth()->user()->ward_no)) {
-                $authWardNo = auth()->user()->ward_no;
-                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
-            }
-        })
-        ->get();
-        return view('digitalboard::admin.program.index', compact('programs'));
-    }
+    // public function index()
+    // {
+    //     $programs = Program::
+    //     where(function ($q){
+    //         if (!empty(auth()->user()->ward_no)) {
+    //             $authWardNo = auth()->user()->ward_no;
+    //             $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+    //         }
+    //     })
+    //     ->get();
+    //     return view('digitalboard::admin.program.index', compact('programs'));
+    // }
+
+
 
     public function create()
     {

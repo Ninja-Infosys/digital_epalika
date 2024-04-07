@@ -52,11 +52,20 @@ class CitizenCharterController extends Controller
         $citizenCharters = CitizenCharter::with('branch')
         ->where(function ($q) {
             if (!empty(auth()->user()->ward_no)) {
-               $authWardNo = auth()->user()->ward_no;
-               $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
-           }
-            })
-            ->get();
+                $authWardNo = auth()->user()->ward_no;
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
+            }
+        })
+        ->get();
         return view('digitalboard::admin.citizen_charter.index', compact('citizenCharters'));
     }
 
