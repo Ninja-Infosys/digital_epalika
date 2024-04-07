@@ -23,6 +23,8 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\Recommendation\Entities\SifarisPassGroup;
+use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
@@ -122,6 +124,10 @@ class User extends Authenticatable
         return $this->belongsTo(__CLASS__);
     }
 
+    public function sipharisSetting(): BelongsTo
+    {
+        return $this->belongsTo(SipharisSetting::class, );
+    }
     public function users(): HasMany
     {
         return $this->hasMany(__CLASS__);
@@ -167,4 +173,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(ComplaintApplication::class, 'assigned_user_id');
     }
+
+
+    public function approverSifarisPassGroups()
+    {
+        return $this->hasMany(SipharisSetting::class, 'approver_id'); 
+    }
+    public function checkerSifarisPassGroups()
+    {
+        return $this->hasMany(SipharisSetting::class, 'checker_id'); 
+    }
+    
+
 }
