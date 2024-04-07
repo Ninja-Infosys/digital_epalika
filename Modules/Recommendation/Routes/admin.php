@@ -77,7 +77,6 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('recommendationDetail', RecommendationDetailController::class);
     Route::get('recommendationSignature/{recommendationSignature}/updateStatus', [RecommendationSignatureController::class,'updateStatus'])->name('recommendationSignature.updateStatus');
     Route::resource('recommendationSignature', RecommendationSignatureController::class);
-    Route::resource('signaturePerson', SignaturePersonController::class);
     Route::resource('sipharisSetting',SipharisSettingController::class);
 });
 
