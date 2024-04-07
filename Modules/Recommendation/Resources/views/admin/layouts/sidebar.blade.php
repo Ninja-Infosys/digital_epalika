@@ -188,11 +188,7 @@
                         <span>हस्ताक्षर</span>
                     </a>
                 </li>
-                <li class="{{request()->is('admin/recommendation/setting/signaturePerson*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.setting.signaturePerson.index')}}">
-                        <span>हस्ताक्षर गर्ने व्यक्ति</span>
-                    </a>
-                </li>
+                
                 <li class="{{request()->is('admin/recommendation/setting/sipharisSetting*') ? 'active' : ''}}">
                     <a href="{{route('admin.recommendation.setting.sipharisSetting.index')}}">
                         <span>सिफारिस सेटिंग </span>

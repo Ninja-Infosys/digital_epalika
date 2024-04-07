@@ -82,6 +82,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
 
 //recommendation create
 Route::put('recommendationCreate/{recommendationCreate}/updateStatus/{recommendationStatusEnum}', [RecommendationCreateController::class, 'updateStatus'])->name('recommendationCreate.updateStatus');
+Route::put('recommendationCreate/{recommendationCreate}/approvedStatus', [RecommendationCreateController::class, 'approvedStatus'])->name('recommendationCreate.approvedStatus');
 Route::put('recommendationCreate/{recommendationCreate}/fileUpload', [RecommendationCreateController::class, 'fileUpload'])->name('recommendationCreate.fileUpload');
 Route::resource('recommendationCreate', RecommendationCreateController::class);
 

@@ -160,4 +160,6 @@ class RecommendationDetailController extends Controller
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
+
+   
 }

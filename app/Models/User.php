@@ -53,6 +53,7 @@ class User extends Authenticatable
         'password',
         'ward_no',
         'profile_photo_path',
+        'signature_photo_path',
         'pin',
         'employee_id',
         'branch_id',
@@ -109,6 +110,20 @@ class User extends Authenticatable
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
+        }
+    }
+
+    public function getSignaturePhotoUrlAttribute(): string
+    {
+        return $this->attributes['profile_photo_path']
+            ? Storage::disk('public')->url($this->attributes['signature_photo_path'])
+            : '';
+    }
+
+    public function setSignaturePhotoPathAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['signature_photo_path'] = $value->store('user/signature/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 

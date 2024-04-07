@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
+use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Recommendation\Enums\RecommendationStatusEnum;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
 
@@ -80,8 +81,9 @@ class RecommendationCreateController extends Controller
             'recommendationFiles.recommendationDocument',
             'recommendationDetail.revenueHeaders'
         );
+        $sipharisSetting = SipharisSetting::first();
 
-        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate'));
+        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate','sipharisSetting'));
     }
 
 
@@ -115,6 +117,15 @@ class RecommendationCreateController extends Controller
         }
         $recommendationCreate->delete();
         toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
+        return back();
+    }
+
+    public function approvedStatus(RecommendationCreate $recommendationCreate)
+    {
+        $recommendationCreate->update([
+            'approved_status' => 'approved',
+        ]);
+        toast('तपाइको सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 }
