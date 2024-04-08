@@ -5,24 +5,48 @@ namespace Modules\DigitalBoard\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\DigitalBoard\Entities\CitizenCharter;
 use Modules\DigitalBoard\Entities\Program;
 use Modules\DigitalBoard\Http\Requests\Program\StoreProgramRequest;
 use Modules\DigitalBoard\Http\Requests\Program\UpdateProgramRequest;
 
 class ProgramController extends Controller
 {
+    // public function index()
+    // {
+    //     $programs = Program::
+    //     where(function ($q){
+    //         if (!empty(auth()->user()->ward_no)) {
+    //             $authWardNo = auth()->user()->ward_no;
+    //             $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+    //         }
+    //     })
+    //     ->get();
+    //     return view('digitalboard::admin.program.index', compact('programs'));
+    // }
     public function index()
     {
         $programs = Program::
-        where(function ($q){
+         where(function ($q) {
             if (!empty(auth()->user()->ward_no)) {
                 $authWardNo = auth()->user()->ward_no;
-                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
             }
         })
         ->get();
         return view('digitalboard::admin.program.index', compact('programs'));
     }
+
+
 
     public function create()
     {
@@ -33,7 +57,8 @@ class ProgramController extends Controller
     {
         Program::create($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
         toast('कार्यक्रम सफलतापुर्वक थपियो', 'success');
-        return back();
+        return redirect(route('admin.digitalBoard.program.index'));
+
     }
 
 
@@ -47,7 +72,8 @@ class ProgramController extends Controller
     {
         $program->update($request->validated());
         toast('कार्यक्रम सफलतापुर्वक अवधि गरियो', 'success');
-        return back();
+        return redirect(route('admin.digitalBoard.program.index'));
+
     }
 
     public function destroy(Program $program)

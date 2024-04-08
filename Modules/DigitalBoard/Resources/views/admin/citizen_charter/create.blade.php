@@ -134,7 +134,7 @@
                                     value="1"
                                     class="form-check-input @error('is_displayed') is-invalid @enderror"
                                     id="is_displayed"
-                                    @if(!empty(auth()->user()->ward_no)) disabled @else checked @endif
+                                    @if(!empty(auth()->user()->ward_no))disabled @else checked @endif
                                 />
                                 <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
 

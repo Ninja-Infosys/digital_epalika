@@ -18,7 +18,16 @@ class PhotoGalleryController extends Controller
 
             if (!empty(auth()->user()->ward_no)) {
                 $authWardNo = auth()->user()->ward_no;
-                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
             }
         })->get();
 

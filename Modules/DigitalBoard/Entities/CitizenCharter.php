@@ -42,15 +42,14 @@ class CitizenCharter extends Model
     protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => explode(',', $value),
-            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+            get: fn(string $value) => explode(',', $value),
+            set: fn(string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
         );
     }
     public function scopeMainPageDisplay(Builder $builder, bool $display = true): void
     {
         $builder->where('is_displayed', $display);
     }
-
     public function branch(): BelongsTo
     {
         return $this->belongsTo(Branch::class);

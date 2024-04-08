@@ -17,7 +17,9 @@ class StoreNoticeRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'date' => ['required'],
-            'ward_no' => ['nullable', 'array'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['integer'],
+            'is_displayed' => ['nullable', 'boolean'],
             'description' => ['nullable'],
             'closed_at' => ['nullable'],
             'show_on_index' => ['nullable', 'boolean'],

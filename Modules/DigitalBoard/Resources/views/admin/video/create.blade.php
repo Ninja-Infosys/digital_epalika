@@ -50,40 +50,40 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="video" class="form-label">भिडियो (यूट्यूब लिंक) * </label>
-                                <input type="url" name="video" id="video" required value="{{old('video')}}"
-                                       class="form-control @error('title') is-invalid @enderror">
+                                <input type="url" name="video" id="video" required value="{{ old('video') }}"
+                                    class="form-control @error('title') is-invalid @enderror">
                                 @error('video')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="ward" class="form-label">वडा</label>
                                 <select name="ward[]" id="ward" class="form-select"
-                                        @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                    @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
                                     <option value="">---वडा छान्नुहोस्---</option>
-                                    @foreach(officeSetting()->localbody->ward_no as $ward)
-                                        <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
+                                    @foreach (officeSetting()->localbody->ward_no as $ward)
+                                        <option value="{{ $ward }}"
+                                            {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no) ? [auth()->user()->ward_no] : [])) ? 'selected' : '' }}>
+                                            {{ $ward }}</option>
                                     @endforeach
                                 </select>
                                 @error('ward')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 @error('ward.*')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+
                             </div>
 
                             <div class="col-md-6 mb-2">
-                                <input
-                                        type="checkbox"
-                                        name="is_displayed"
-                                        value="1"
-                                        class="form-check-input @error('is_displayed') is-invalid @enderror"
-                                        id="is_displayed"/>
+                                <input type="checkbox" name="is_displayed" value="1"
+                                    class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                    id="is_displayed" />
                                 <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
 
                                 @error('is_displayed')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
