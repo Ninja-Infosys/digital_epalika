@@ -27,7 +27,7 @@ use Modules\EMap\Http\Controllers\OrganizationAuthController;
 // });
 
 Route::controller(FrontendController::class)->group(function () {
-    Route::get('ebps', 'eMap')->name('ebps');
+    Route::get('ebps', 'eMap')->name('ebps');   
     Route::get('ebps', 'eMap')->name('ebps');
     Route::get('downloads', 'downloads');
     Route::get('form', 'form');

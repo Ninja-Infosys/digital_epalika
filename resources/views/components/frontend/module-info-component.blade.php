@@ -234,6 +234,20 @@
                             </div>
                         </div>
                     @endif
+
+
+                    {{-- <div class="col-md-3">
+                        <div class="info-card module-card">
+                            <a href="{{ route('recommendations') }}">
+                                <div class="pt-4 text-center">
+                                    <img src="{{ asset('assets/frontend/image/sifarish.png') }}" width="35"
+                                        height="35">
+                                    <h6 class="p-2 text-dark">सिफारिस</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div> --}}
+
                     @if (Route::has('digitalBoard.helpdesk.helpdesk'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
@@ -247,10 +261,10 @@
                             </div>
                         </div>
                     @endif
-                    @if (Route::has('recommendation.index'))
+                    {{-- @if (Route::has('recommendation.index')) --}}
                         <div class="col-md-3">
                             <div class="info-card module-card">
-                                <a href="#">
+                                <a href="{{ route('recommendation.index') }}">
                                     <div class="pt-4 text-center">
                                         <img src="{{ asset('assets/frontend/image/new-icons/chat.png') }}" width="35"
                                             height="35">
@@ -259,7 +273,7 @@
                                 </a>
                             </div>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                     @if (Route::has('businessRegistration.business'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
@@ -377,7 +391,7 @@
 
                     <div class="col-md-3">
                         <div class="info-card module-card">
-                            <a href="https://attendance.gov.np/">
+                            <a href="https://attendance.gov.np/"></a>
                                 <div class="pt-4 text-center">
                                     <img src="{{ asset('assets/frontend/image/logo.png') }}" width="35"
                                         height="35">
