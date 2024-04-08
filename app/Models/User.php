@@ -113,9 +113,9 @@ class User extends Authenticatable
         }
     }
 
-    public function getSignaturePhotoUrlAttribute(): string
+    public function getSignaturePhotoPathUrlAttribute(): string
     {
-        return $this->attributes['profile_photo_path']
+        return $this->attributes['signature_photo_path']
             ? Storage::disk('public')->url($this->attributes['signature_photo_path'])
             : '';
     }

@@ -43,6 +43,11 @@
                                     {{ is_array(auth()->user()->ward_no) ? implode(',', auth()->user()->ward_no) : auth()->user()->ward_no ?? '' }}
                                 </span>
                             </p>
+                            <p class="text-muted mb-1 font-13"><strong>सहि :</strong>
+                                <span class="ms-2">  <img src="{{auth()->user()->signature_photo_path_url}}"
+                                class=""
+                                alt="profile-image" style="width:100px; height:100px" > </span>
+                            </p>
                         </div>
                     </div>
                 </div> <!-- end card -->

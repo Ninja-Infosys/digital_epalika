@@ -46,7 +46,7 @@ trait TemplateTrait
             get_nepali_number($mapApply?->length ?? ''),
             get_nepali_number($mapApply?->breadth ?? ''),
             get_nepali_number($mapApply?->height ?? ''),
-            get_nepali_number($mapApply?->consultant_name ?? ''),
+            get_nepali_number($mapApply?->consultant_name ?? ''),   
             get_nepali_number($mapApply?->consultant_mobile_no ?? ''),
             get_nepali_number($mapApply?->consultant_nec_no ?? ''),
             $mapApply->consultant_signature_url ?? '',
