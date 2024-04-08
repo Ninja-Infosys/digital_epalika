@@ -17,6 +17,9 @@ class UpdateVideoRequest extends FormRequest
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'video' => ['required', 'regex:/^https:\/\/www\.youtube\.com\/watch\?v=/'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['integer'],
+            'is_displayed' => ['nullable', 'boolean']
         ];
     }
 

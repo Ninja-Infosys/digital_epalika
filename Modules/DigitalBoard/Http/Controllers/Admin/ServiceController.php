@@ -22,7 +22,16 @@ class ServiceController extends Controller
         ->where(function ($q){
             if (!empty(auth()->user()->ward_no)) {
                 $authWardNo = auth()->user()->ward_no;
-                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
             }
         })
         ->latest()->paginate(10);
@@ -79,14 +88,14 @@ class ServiceController extends Controller
     {
         DB::transaction(function () use ($request, $service) {
             $service->update($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
-    
+
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
                 ServiceDocument::updateOrCreate(
                     ['service_id' => $service->id,'id' => $serviceDocument['id'] ?? null],
                     $serviceDocument
                 );
             }
-    
+
             foreach ($request->input('serviceProcesses') as $serviceProcess) {
                 ServiceProcess::updateOrCreate(
                     ['service_id' => $service->id,'id' => $serviceProcess['id'] ?? null],
@@ -94,9 +103,9 @@ class ServiceController extends Controller
                 );
             }
         });
-    
+
         toast('सेवा विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
-    
+
         return redirect(route('admin.digitalBoard.service.index'));
     }
 

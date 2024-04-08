@@ -83,11 +83,12 @@
                                             name="gender" id="gender">
                                         <option value="">लिङ्ग थप्नुहोस्</option>
                                         @foreach(\App\Enums\Gender::cases() as $case)
-                                            <option value="{{ $case->value }}" {{ old('gender', $employee->gender) == $case->value ? 'selected' : '' }}>
-                                                {{ $case->label() }}
-                                            </option>
+                                            
+                                        <option value="{{$case->value}}" @if($employee->gender == $case) selected @endif> {{ $case->label() }}</option>
                                         @endforeach
                                     </select>
+
+
                                     @error('gender')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -337,9 +338,9 @@
 
                                     <select class="form-control @error('show_to_index') is-invalid @enderror"
                                             name="show_to_index" id="show_to_index" required>
-                                        <option value="1" {{old('show_to_index') == 1 ? 'selected':''}}>देखाउने
+                                        <option value="1" {{old('show_to_index') == 0 ? 'selected':''}}>देखाउने
                                         </option>
-                                        <option value="0" {{old('show_to_index')==0 ? 'selected':''}}>नदेखाउने
+                                        <option value="0" {{old('show_to_index')==1 ? 'selected':''}}>नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_index')
@@ -351,9 +352,9 @@
 
                                     <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"
                                             name="show_to_mobile_app" id="show_to_mobile_app" required>
-                                        <option value="1" {{old('show_to_mobile_app') == 1 ? 'selected':''}}>देखाउने
+                                        <option value="1" {{old('show_to_mobile_app') == 0 ? 'selected':''}}>देखाउने
                                         </option>
-                                        <option value="0" {{old('show_to_mobile_app')==0 ? 'selected':''}}>नदेखाउने
+                                        <option value="0" {{old('show_to_mobile_app')==1 ? 'selected':''}}>नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_mobile_app')
@@ -368,6 +369,22 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="ward" class="form-label">वडा</label>
+                                <select name="ward[]" id="ward" class="form-select"
+                                        @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                    <option value="">---वडा छान्नुहोस्---</option>
+                                    @foreach(officeSetting()->localbody->ward_no as $ward)
+                                        <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
+                                    @endforeach
+                                </select>
+                                @error('ward')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                @error('ward.*')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
 
                         </fieldset>

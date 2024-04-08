@@ -51,7 +51,7 @@ class VideoController extends Controller
     {
         $this->checkAuthorization('digitalBoardVideo_create');
 
-        Video::create($request->validated() + [ "user_id" => auth()->id()]);
+        Video::create($request->validated() + [ 'user_id' => auth()->id(),  'ward' => auth()->user()->ward_no]);
 
         toast('भिडियो सफलतापूर्वक थपियो', 'success');
 

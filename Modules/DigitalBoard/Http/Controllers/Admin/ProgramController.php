@@ -57,7 +57,8 @@ class ProgramController extends Controller
     {
         Program::create($request->validated()+['ward'=>auth()->user()->ward_no,'user_id'=>auth()->id()]);
         toast('कार्यक्रम सफलतापुर्वक थपियो', 'success');
-        return back();
+        return redirect(route('admin.digitalBoard.program.index'));
+
     }
 
 
@@ -71,7 +72,8 @@ class ProgramController extends Controller
     {
         $program->update($request->validated());
         toast('कार्यक्रम सफलतापुर्वक अवधि गरियो', 'success');
-        return back();
+        return redirect(route('admin.digitalBoard.program.index'));
+
     }
 
     public function destroy(Program $program)
