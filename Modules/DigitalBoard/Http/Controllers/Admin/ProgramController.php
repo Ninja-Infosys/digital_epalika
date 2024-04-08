@@ -24,6 +24,27 @@ class ProgramController extends Controller
     //     ->get();
     //     return view('digitalboard::admin.program.index', compact('programs'));
     // }
+    public function index()
+    {
+        $programs = Program::
+         where(function ($q) {
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
+            }
+        })
+        ->get();
+        return view('digitalboard::admin.program.index', compact('programs'));
+    }
 
 
 

@@ -3,6 +3,7 @@
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Http\Requests\Video\StoreVideoRequest;
 use Modules\DigitalBoard\Http\Requests\Video\UpdateVideoRequest;
@@ -21,7 +22,16 @@ class VideoController extends Controller
 
             if (!empty(auth()->user()->ward_no)) {
                 $authWardNo = auth()->user()->ward_no;
-                $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
             }
         })
         ->latest()->paginate(10);
@@ -56,7 +66,9 @@ class VideoController extends Controller
     public function edit(Video $video)
     {
         $this->checkAuthorization('digitalBoardVideo_edit');
-        return view('digitalboard::admin.video.edit', compact('video'));
+        $users = User::all();
+
+        return view('digitalboard::admin.video.edit', compact('video','users'));
     }
 
     public function update(UpdateVideoRequest $request, Video $video)
