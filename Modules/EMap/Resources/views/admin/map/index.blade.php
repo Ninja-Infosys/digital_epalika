@@ -20,7 +20,7 @@
                         </li>
                         <li class="breadcrumb-item">नक्सा दर्ता/प्रमाणित</li>
                         <li class="breadcrumb-item active">
-                          
+
                             {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
                         </li>
                     </ol>
@@ -33,7 +33,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="header-title mb-0">
-                  
+
                     {{ $applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित' }}
                 </h4>
                 <div class="d-flex flex-wrap align-items-center">
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body px-0">    
+        <div class="card-body px-0">
 
             <div class="">
                 <div class="tab-pane " id="">
@@ -88,7 +88,7 @@
                                                 दर्ता {{ empty($mapApply->registration_no) ? 'गर्नुहोस्' : 'भएको' }}
                                             </a>
                                         @endif
-                
+
                                             <a href="{{ route('emap.admin.map.mapApply.mapDetail', [$mapApply, $applicationFormTypeEnum ]) }}"
                                                 title="विवरण हेर्नुहोस" class="btn btn-xs btn-outline-success">
                                                 <i class="fa fa-eye"></i>
@@ -99,7 +99,7 @@
                                         </a>
                                     </div>
                                 </td>
-                
+
                             </tr>
                         @empty
                             <tr>

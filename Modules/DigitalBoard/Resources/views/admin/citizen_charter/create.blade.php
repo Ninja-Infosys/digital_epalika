@@ -111,6 +111,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
+                                @if (auth()->user()->role->type == 'Super')
                                 <label for="ward" class="form-label">वडा</label>
                                 <select name="ward[]" id="ward" class="form-select"
                                         @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
@@ -119,6 +120,7 @@
                                         <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
                                     @endforeach
                                 </select>
+                                @endif
                                 @error('ward')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
