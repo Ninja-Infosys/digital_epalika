@@ -144,4 +144,5 @@ class RecommendationCreate extends Model
     {
         return $this->belongsTo(RecommendationCategory::class);
     }
+   
 }

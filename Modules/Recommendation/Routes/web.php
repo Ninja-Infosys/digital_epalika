@@ -8,7 +8,9 @@ use Modules\Recommendation\Http\Controllers\FrontendController;
 
 
 
-  
+
 Route::controller(FrontendController::class)->group(function () {
-    Route::resource('recommendation', 'index');
-    });  
+    Route::get('recommendation', 'recommendation')->name('recommendation.index');
+    Route::get('sipharishRegister', 'sipharishRegister')->name('recommendation.register');
+    Route::post('sipharishRegisterStore','sipharishRegisterStore')->name('recommendation.register.store');
+});

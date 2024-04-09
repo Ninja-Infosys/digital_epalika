@@ -27,7 +27,7 @@ class FrontController extends Controller
             "grievanceHandling" =>Route::has('grievanceHandling.grievance'),
             "ebps" =>Route::has('ebps'),
             "digitalBoard" =>Route::has('digitalBoard.helpdesk.helpdesk'),
-            "recommendation" =>Route::has('recommendation.index'),
+            "recommendation" =>Route::has('recommendationrecommendation.index'),
             "businessRegistration" =>Route::has('businessRegistration.business'),
             "grant" =>Route::has('grant.index'),
             "payment" =>Route::has('payment.index'),

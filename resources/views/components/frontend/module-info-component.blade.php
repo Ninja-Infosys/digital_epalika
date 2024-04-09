@@ -264,7 +264,7 @@
                     {{-- @if (Route::has('recommendation.index')) --}}
                         <div class="col-md-3">
                             <div class="info-card module-card">
-                                <a href="{{ route('recommendation.index') }}">
+                                <a href="{{ route('recommendationrecommendation.index') }}">
                                     <div class="pt-4 text-center">
                                         <img src="{{ asset('assets/frontend/image/new-icons/chat.png') }}" width="35"
                                             height="35">

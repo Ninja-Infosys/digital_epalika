@@ -46,13 +46,6 @@ class RecommendationCreateController extends Controller
                     } else {
                         $value = $field['value'];
                     }
-//                    $recommendationCreate->recommendationValues()
-//                        ->create([
-//
-//                            'recommendation_form_field_id' => $field['recommendation_form_field_id'] ?? '',
-//                            'value' => $value ?? '',
-//                            'type' => $field['type'] ?? '',
-//                        ]);
                 }
             }
 

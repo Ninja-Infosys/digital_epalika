@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/plugins/datepicker.min.css')}}">
 
     @stack('styles')
+    @livewireStyles
+
     <style>
         .modal-content {
             min-height: auto;
@@ -28,7 +30,7 @@
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-        @livewireStyles
+      
 
     </style>
 </head>
@@ -66,6 +68,7 @@
     });
 </script>
 @stack('scripts')
+@livewireScripts
 
 @include('sweetalert::alert')
 @if(app()->environment('production'))
