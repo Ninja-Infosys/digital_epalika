@@ -22,7 +22,7 @@ class UpdateCitizenCharterRequest extends FormRequest
             'time' => ['required','string'],
             'responsible_person' => ['required','string'],
             'ward' => ['nullable', 'array'],
-            'ward.*' => ['integer'],
+            'ward.*' => ['string'],
             'is_displayed' => ['nullable', 'boolean'],
         ];
     }

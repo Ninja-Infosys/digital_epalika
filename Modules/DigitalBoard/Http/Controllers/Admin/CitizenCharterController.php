@@ -105,8 +105,8 @@ class CitizenCharterController extends Controller
     public function edit(CitizenCharter $citizenCharter)
     {
         $mainBranches = Branch::with('branches')->whereNull('branch_id')->get();
-        $users = User::all();
-        return view('digitalboard::admin.citizen_charter.edit', compact('citizenCharter', 'mainBranches', 'users'));
+
+        return view('digitalboard::admin.citizen_charter.edit', compact('citizenCharter', 'mainBranches'));
 
     }
 
