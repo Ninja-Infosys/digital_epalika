@@ -34,7 +34,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.digitalBoard.program.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.digitalBoard.program.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
@@ -44,10 +45,10 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="title" class="form-label ">शिर्षक *</label>
                                     <input type="text" name="title" value="{{ old('title') }}"
-                                           class="form-control  @error('title') is-invalid @enderror" id="title"
-                                           placeholder="शिर्षक " required />
+                                        class="form-control  @error('title') is-invalid @enderror" id="title"
+                                        placeholder="शिर्षक " required />
                                     @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
@@ -59,43 +60,43 @@
                                             फोटो *
                                         </label>
                                         <input type="file" id="image" name="image" class="form-control"
-                                               placeholder="Programimage">
+                                            placeholder="Programimage">
 
                                         @error('image')
-                                        <p class="text-danger">{{ $message }}</p>
+                                            <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="ward" class="form-label">वडा</label>
-                                    <select name="ward[]" id="ward" class="form-select"
-                                            @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
-                                        <option value="">---वडा छान्नुहोस्---</option>
-                                        @foreach(officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
-                                        @endforeach
-                                    </select>
+                                    @if (auth()->user()->role->type == 'Super')
+                                        <label for="ward" class="form-label">वडा</label>
+                                        <select name="ward[]" id="ward" class="form-select"
+                                            @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                            <option value="">---वडा छान्नुहोस्---</option>
+                                            @foreach (officeSetting()->localbody->ward_no as $ward)
+                                                <option value="{{ $ward }}"
+                                                    {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no) ? [auth()->user()->ward_no] : [])) ? 'selected' : '' }}>
+                                                    {{ $ward }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
                                     @error('ward')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     @error('ward.*')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-    
+
                                 <div class="col-md-6 mb-2">
-                                    <input
-                                        type="checkbox"
-                                        name="is_displayed"
-                                        value="1"
+                                    <input type="checkbox" name="is_displayed" value="1"
                                         class="form-check-input @error('is_displayed') is-invalid @enderror"
-                                        id="is_displayed"
-                                        @if(!empty(auth()->user()->ward_no)) disabled @else checked @endif
-                                    />
+                                        id="is_displayed" @if (!empty(auth()->user()->ward_no)) disabled @else checked @endif />
                                     <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
-    
+
                                     @error('is_displayed')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

@@ -35,9 +35,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.digitalBoard.citizenCharter.store') }}" method="POST"
+                    <form action="{{ route('admin.digitalBoard.citizenCharter.update',$citizenCharter) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>नागरिक वडापत्र विवरण </strong>
@@ -115,16 +116,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
+                                    @if (auth()->user()->role->type == 'Super')
+
                                     <label for="ward" class="form-label">वडा</label>
                                     <select name="ward[]" id="ward" class="form-select"
                                         @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
                                         <option value="">---वडा छान्नुहोस्---</option>
                                         @foreach (officeSetting()->localbody->ward_no as $ward)
                                             <option value="{{ $ward }}"
-                                                {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no))) ? 'selected' : '' }}>
+                                                {{-- {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no))) ? 'selected' : '' }}> --}}
+                                                {{ in_array($ward, old('ward', $citizenCharter->ward)) ? 'selected' : '' }}>
                                                 {{ $ward }}</option>
                                         @endforeach
                                     </select>
+                                    @endif
                                     {{-- <select class="form-control @error('ward') is-invalid @enderror" name="ward[]"
                                     id="ward" {{ !empty(auth()->user()->ward_no) ? 'disabled' : '' }} multiple>
                                     <option value=""> वडा छान्नुहोस्</option>

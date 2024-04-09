@@ -299,40 +299,22 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="ward" class="form-label">वडा</label>
-                                {{-- <select name="ward[]" id="ward" class="form-select"
+
+
+                                    @if (auth()->user()->role->type == 'Super')
+
+                                    <label for="ward" class="form-label">वडा</label>
+                                    <select name="ward[]" id="ward" class="form-select"
                                         @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
-                                    <option value="">---वडा छान्नुहोस्---</option>
-                                    @foreach (officeSetting()->localbody->ward_no as $ward)
-                                        <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
-                                    @endforeach
-                                </select> --}}
-                                {{-- <select class="form-control @error('ward') is-invalid @enderror"
-                                            name="ward[]" id="ward">
-                                        <option value=""> वडा छान्नुहोस्</option>
-                                        @foreach ($allemployees as $allemployee)
-                                            <option
-                                                value="{{$allemployee->id}}" {{old('employee_id',$employee->employee_id)==$allemployee->id ? 'selected':''}}>{{$allemployee->name}}</option>
-                                        @endforeach
-                                    </select> --}}
-                                    <select class="form-control @error('ward') is-invalid @enderror" name="ward[]" id="ward" {{ !empty(auth()->user()->ward_no) ? 'disabled' : '' }} multiple>
-                                        <option value=""> वडा छान्नुहोस्</option>
+                                        <option value="">---वडा छान्नुहोस्---</option>
                                         @foreach (officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{ $ward }}" {{ in_array($ward, old('ward', ( $employee->ward))) ? 'selected' : '' }}>
-                                                {{ $ward }}
-                                            </option>
+                                            <option value="{{ $ward }}"
+                                                {{-- {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no))) ? 'selected' : '' }}> --}}
+                                                {{ in_array($ward, old('ward', $employee->ward)) ? 'selected' : '' }}>
+                                                {{ $ward }}</option>
                                         @endforeach
                                     </select>
-
-                                    {{-- <select class="form-control @error('ward') is-invalid @enderror" name="ward[]" id="ward"
-                                     @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
-                                        <option value=""> वडा छान्नुहोस्</option>
-                                        @foreach (officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{ $ward }}" {{ in_array($ward, old('ward', $employee->ward)) ? 'selected' : '' }}>
-                                                {{ $ward }}
-                                            </option>
-                                        @endforeach
-                                    </select> --}}
+                                    @endif
 
                                 @error('ward')
                                     <div class="invalid-feedback">{{ $message }}</div>
