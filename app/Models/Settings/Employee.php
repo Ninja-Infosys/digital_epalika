@@ -63,6 +63,20 @@ class Employee extends Model
         'gender' => Gender::class
     ];
 
+    // protected function ward(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: function ($value) {
+    //             return $value !== null ? explode(',', $value) : [];
+    //         },
+    //         set: function ($value) {
+    //             if (is_array($value)) {
+    //                 return implode(',', $value);
+    //             }
+    //             return $value;
+    //         }
+    //     );
+    // }
     protected function ward(): Attribute
     {
         return Attribute::make(
@@ -70,6 +84,7 @@ class Employee extends Model
             set: fn (string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
         );
     }
+
     public function getPhotoUrlAttribute(): string
     {
         return $this->attributes['photo']

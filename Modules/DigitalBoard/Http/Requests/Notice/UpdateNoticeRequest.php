@@ -19,7 +19,7 @@ class UpdateNoticeRequest extends FormRequest
             'date' => ['required'],
             'description' => ['nullable'],
             'ward' => ['nullable', 'array'],
-            'ward.*' => ['integer'],
+            'ward.*' => ['string'],
             'is_displayed' => ['nullable', 'boolean'],
             'closed_at' => ['nullable'],
             'show_on_index' => ['nullable', 'boolean'],
