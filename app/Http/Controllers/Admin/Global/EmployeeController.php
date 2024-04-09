@@ -25,11 +25,26 @@ class EmployeeController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['designation', 'name'], request('search'));
             }
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+
+                // Check if $authWardNo is an array
+                if (is_array($authWardNo)) {
+                    foreach ($authWardNo as $ward) {
+                        $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+                    }
+                } else {
+                    // If it's not an array, use it directly
+                    $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+                }
+            }
         })
             ->latest()->paginate(10);
 
 
         return view('admin.global.employee.index', compact('employees'));
+
+
     }
 
     public function create()
@@ -45,8 +60,9 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         $this->checkAuthorization('employee_create');
-
-        $employee = Employee::create($request->validated());
+        $employee = Employee::create($request->validated()+[
+        'ward' => auth()->user()->ward_no
+        ]);
 
         toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
         return back()->with('success', 'कर्मचारी सफलतापूर्वक थपियो');

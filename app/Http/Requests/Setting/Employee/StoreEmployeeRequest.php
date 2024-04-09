@@ -43,6 +43,8 @@ class StoreEmployeeRequest extends FormRequest
             'cif_no' => ['nullable'],
             'insurance_card_no' => ['nullable'],
             'description' => ['nullable'],
+            'ward_no' => ['nullable', 'array'],
+
         ];
     }
 
