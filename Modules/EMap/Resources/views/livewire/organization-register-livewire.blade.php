@@ -3,7 +3,7 @@
         <li class="nav-item">
             <a class="nav-link rounded-0 pt-2 pb-2 {{ $currentStep === 1 ? 'active' : '' }}">
                 <i class="fa fa-building me-1"></i>
-                <span class="d-none d-sm-inline">संगठन विवरण</span>
+                <span class="d-none d-sm-inline">संस्था विवरण</span>
             </a>
         </li>
         <li class="nav-item">
@@ -15,7 +15,7 @@
         <li class="nav-item">
             <a class="nav-link rounded-0 pt-2 pb-2 {{ $currentStep === 3 ? 'active' : '' }}">
                 <i class="fa fa-lock me-1"></i>
-                <span class="d-none d-sm-inline">प्रयोगकर्ता</span>
+                <span class="d-none d-sm-inline">प्रयोगकर्ता विवरण</span>
             </a>
         </li>
         <li class="nav-item">
@@ -35,9 +35,12 @@
         @switch($currentStep)
             @case(2)
                 <div class="company-document card p-2">
+                    <center>
+                        <p style="padding: 10px; color:red;">Note: (*) Please upload file must be less than 200kb.</p>
+                    </center>
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो
+                            <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो (छापा)
                                 <span class="text-danger">*</span></label>
                             <input type="file" class="form-control {{ $organizationDetail['logo'] ? 'is-valid' : '' }}"
                                 id="organizationDetail.logo" wire:model="organizationDetail.logo" />
@@ -46,7 +49,7 @@
                             @enderror
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="organizationDetail.org_registration_document" class="form-label">कम्पनी
+                            <label for="organizationDetail.org_registration_document" class="form-label">व्यवसाय दर्ता
                                 प्रमाणपत्र <span class="text-danger">*</span></label>
                             <input type="file"
                                 class="form-control {{ $organizationDetail['org_registration_document'] ? 'is-valid' : '' }}"
@@ -57,8 +60,19 @@
                             @enderror
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="organizationDetail.org_pan_document" class="form-label">पाना
+                            <label for="organizationDetail.company_registration_document" class="form-label">कम्पनी दर्ता
                                 प्रमाणपत्र <span class="text-danger">*</span></label>
+                            <input type="file"
+                                class="form-control {{ $organizationDetail['company_registration_document'] ? 'is-valid' : '' }}"
+                                id="organizationDetail.company_registration_document"
+                                wire:model="organizationDetail.company_registration_document" />
+                            @error('organizationDetail.company_registration_document')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="organizationDetail.org_pan_document" class="form-label">स्थायी लेखा नं.
+                                <span class="text-danger">*</span></label>
                             <input type="file"
                                 class="form-control {{ $organizationDetail['org_pan_document'] ? 'is-valid' : '' }}"
                                 id="organizationDetail.org_pan_document" wire:model="organizationDetail.org_pan_document" />
@@ -67,7 +81,7 @@
                             @enderror
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="taxClearance.document" class="form-label">कर चुक्ता
+                            <label for="taxClearance.document" class="form-label">कर चुक्ता प्रमाणपत्र
                                 <span class="text-danger">*</span></label>
                             <input type="file" class="form-control {{ $taxClearance['document'] ? 'is-valid' : '' }}"
                                 id="taxClearance.document" wire:model="taxClearance.document" />
@@ -81,57 +95,45 @@
                             </label>
                             <input name="taxClearance.year"
                                 class="form-control @error('taxClearance.year') is-invalid @enderror" type="text"
-                                id="taxClearance.year" placeholder="कर चुक्ता गरेको आर्थिक वर्ष"
+                                id="taxClearance.year" placeholder="(YYYY/YY)कर चुक्ता गरेको आर्थिक वर्ष"
                                 wire:model="taxClearance.year" />
                             @error('taxClearance.year')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="muncipalRegistration.palika_reg_no" class="form-label">पालिका दर्ता नं.
+                            <label for="muncipalRegistration.palika_reg_no" class="form-label">व्यवसाय दर्ता नं.
                                 <span class="text-danger">*</span>
                             </label>
-                            <input
-                                name="muncipalRegistration.palika_reg_no"
+                            <input name="muncipalRegistration.palika_reg_no"
                                 class="form-control @error('muncipalRegistration.palika_reg_no') is-invalid @enderror"
-                                type="number"
-                                id="muncipalRegistration.palika_reg_no"
-                                placeholder="पालिका दर्ता नं."
-                                wire:model="muncipalRegistration.palika_reg_no"
-                            />
+                                type="number" id="muncipalRegistration.palika_reg_no" placeholder="पालिका दर्ता नं."
+                                wire:model="muncipalRegistration.palika_reg_no" />
                             @error('muncipalRegistration.palika_reg_no')
-                            <div class="invalid-feedback">{{$message}}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="muncipalRegistration.reg_date" class="form-label">दर्ता मिति (बि. स.)
                                 <span class="text-danger">*</span>
                             </label>
-                            <input
-                                name="muncipalRegistration.reg_date"
+                            <input name="muncipalRegistration.reg_date"
                                 class="form-control @error('muncipalRegistration.reg_date') is-invalid @enderror"
-                                type="text"
-                                id="muncipalRegistration.reg_date"
-                                placeholder="दर्ता मिति (YYYY-MM-DD)"
-                                wire:model="muncipalRegistration.reg_date"
-                            />
+                                type="text" id="muncipalRegistration.reg_date" placeholder="दर्ता मिति (YYYY-MM-DD)"
+                                wire:model="muncipalRegistration.reg_date" />
                             @error('muncipalRegistration.reg_date')
-                            <div class="invalid-feedback">{{$message}}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="muncipalRegistration.file" class="form-label">फाइल
+                            <label for="muncipalRegistration.file" class="form-label">अन्य फाइल
                                 <span class="text-danger">*</span>
                             </label>
-                            <input
-                                name="muncipalRegistration.file"
-                                class="form-control @error('muncipalRegistration.file') is-invalid @enderror"
-                                type="file"
-                                id="muncipalRegistration.file"
-                                wire:model="muncipalRegistration.file"
-                            />
+                            <input name="muncipalRegistration.file"
+                                class="form-control @error('muncipalRegistration.file') is-invalid @enderror" type="file"
+                                id="muncipalRegistration.file" wire:model="muncipalRegistration.file" />
                             @error('muncipalRegistration.file')
-                            <div class="invalid-feedback">{{$message}}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -150,8 +152,7 @@
 
             @case(3)
                 <div class=" card p-2 alert alert-info" role="alert">
-                    निम्न प्रयोगकर्ताको इमेल, सम्पर्क नम्बर, र प्रयोगकर्ताको नाम, प्रणालीमा लग-इन गर्न प्रयोग हुनेछ
-                    !!!
+                    Please fill up valid email,phone number,and password.
                 </div>
                 <div class="card p-2">
                     <div class="row">
@@ -187,7 +188,7 @@
                             <label for="user.phone" class="form-label">सम्पर्क नं. <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="user.email">
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="fa fa-phone"></i>
                                 </span>
                                 <input name="user.phone" class="form-control @error('user.phone') is-invalid @enderror"
                                     type="text" id="user.phone" placeholder="सम्पर्क नं" wire:model="user.phone">
@@ -209,10 +210,13 @@
                         </div>
 
                         <div class="col-md-3 mb-2">
-                            <label for="user.password_confirmation" class="form-label">पासवर्ड सुनिश्चित<span class="text-danger">*</span></label>
+                            <label for="user.password_confirmation" class="form-label">पासवर्ड सुनिश्चित<span
+                                    class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input name="user.password_confirmation" class="form-control @error('user.password_confirmation') is-invalid @enderror"
-                                    type="password" id="user.password_confirmation" placeholder="पासवर्ड सुनिश्चित" wire:model="user.password_confirmation">
+                                <input name="user.password_confirmation"
+                                    class="form-control @error('user.password_confirmation') is-invalid @enderror"
+                                    type="password" id="user.password_confirmation" placeholder="पासवर्ड सुनिश्चित"
+                                    wire:model="user.password_confirmation">
                             </div>
                             @error('user.password_confirmation')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -241,7 +245,7 @@
                                     <li class="nav-item ">
                                         <a href="#timeline" data-bs-toggle="tab" aria-expanded="true"
                                             class="nav-link active">
-                                            संगठनको विवरण
+                                            संस्थाको विवरण
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -259,7 +263,7 @@
                                     <div class="tab-pane active" id="timeline">
                                         <table class="table table-sm mb-0 table-striped table-hover">
                                             <tr>
-                                                <td>संगठनको नाम</td>
+                                                <td>संस्थाको नाम</td>
                                                 <td>{{ $organizationDetail['org_name_ne'] }}
                                                     ({{ $organizationDetail['org_name_en'] }})
                                                 </td>
@@ -383,11 +387,11 @@
 
             @default
                 <fieldset>
-                    <legend class="title text-primary fs-4 fw-bolder">संगठन विवरण</legend>
+                    <legend class="title text-primary fs-4 fw-bolder">संस्था विवरण</legend>
                     <div class="card">
                         <div class="row">
                             <div class="col-md-8 mb-2">
-                                <label for="organizationDetail.org_name_ne" class="form-label">संगठनको नाम <span
+                                <label for="organizationDetail.org_name_ne" class="form-label">संस्थाको नाम <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input name="organizationDetail.org_name_ne"
@@ -407,19 +411,13 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="organizationDetail.org_email" class="form-label">इमेल
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="organizationDetail.org_email">
-                                        <i class="fa fa-envelope"></i>
-                                    </span>
-                                    <input name="organizationDetail.org_email"
-                                        class="form-control @error('organizationDetail.org_email') is-invalid @enderror"
-                                        type="text" id="organizationDetail.org_email" placeholder="इमेल"
-                                        wire:model="organizationDetail.org_email">
-                                </div>
-                                @error('organizationDetail.org_email')
+                                <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता
+                                    नं:</label>
+                                <input name="org_registration_no"
+                                    class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
+                                    type="text" id="organizationDetail.org_registration_no" placeholder="कम्पनी दर्ता न:"
+                                    wire:model="organizationDetail.org_registration_no" />
+                                @error('organizationDetail.org_registration_no')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -441,7 +439,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="organizationDetail.org_pan_no" class="form-label">पाना नं.</label>
+                                <label for="organizationDetail.org_pan_no" class="form-label">स्थायी लेखा नं.</label>
                                 <input name="organizationDetail.org_pan_no"
                                     class="form-control @error('organizationDetail.org_pan_no') is-invalid @enderror"
                                     type="text" id="organizationDetail.org_pan_no" placeholder="पाना नं."
@@ -450,14 +448,21 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
                             <div class="col-md-4 mb-2">
-                                <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता
-                                    नं:</label>
-                                <input name="org_registration_no"
-                                    class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
-                                    type="text" id="organizationDetail.org_registration_no" placeholder="कम्पनी दर्ता न:"
-                                    wire:model="organizationDetail.org_registration_no" />
-                                @error('organizationDetail.org_registration_no')
+                                <label for="organizationDetail.org_email" class="form-label">इमेल
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="organizationDetail.org_email">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input name="organizationDetail.org_email"
+                                        class="form-control @error('organizationDetail.org_email') is-invalid @enderror"
+                                        type="text" id="organizationDetail.org_email" placeholder="इमेल"
+                                        wire:model="organizationDetail.org_email">
+                                </div>
+                                @error('organizationDetail.org_email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

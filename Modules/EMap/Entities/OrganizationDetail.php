@@ -31,6 +31,7 @@ class OrganizationDetail extends Model
         'org_contact',
         'org_registration_no',
         'org_registration_document',
+        'company_registration_document',
         'org_pan_no',
         'org_pan_document',
         'logo',
@@ -118,4 +119,19 @@ class OrganizationDetail extends Model
             $this->attributes['logo'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
+
+    public function getCompanyRegistrationDocumentUrlAttribute(): string
+    {
+        return $this->attributes['company_registration_document']
+            ? Storage::disk('public')->url($this->attributes['company_registration_document'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setCompanyRegistrationDocumentAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['company_registration_document'] = $value->store('user/detail/company/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        }
+    }
+
 }
