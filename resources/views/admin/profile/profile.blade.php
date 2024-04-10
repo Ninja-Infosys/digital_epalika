@@ -39,8 +39,14 @@
                             </p>
                             <p class="text-muted mb-1 font-13"><strong>ठेगाना :</strong>
                                 <span class="ms-2">
-                                    {{auth()->user()->localBody->local_body ?? ''}}-{{auth()->user()->ward_no ?? ''}}
+                                    {{ auth()->user()->localBody->local_body ?? '' }}-
+                                    {{ is_array(auth()->user()->ward_no) ? implode(',', auth()->user()->ward_no) : auth()->user()->ward_no ?? '' }}
                                 </span>
+                            </p>
+                            <p class="text-muted mb-1 font-13"><strong>सहि :</strong>
+                                <span class="ms-2">  <img src="{{auth()->user()->signature_photo_path_url}}"
+                                class=""
+                                alt="profile-image" style="width:100px; height:100px" > </span>
                             </p>
                         </div>
                     </div>
@@ -171,6 +177,18 @@
                                                     id="profile_photo_path"
                                                 />
                                                 @error('profile_photo_path')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="signature_photo_path" class="form-label">सहि </label>
+                                                <input
+                                                    type="file"
+                                                    name="signature_photo_path"
+                                                    class="form-control @error('signature_photo_path') is-invalid @enderror"
+                                                    id="signature_photo_path"
+                                                />
+                                                @error('signature_photo_path')
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>

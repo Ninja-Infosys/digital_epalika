@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('district_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('local_body_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('tole')->nullable();
+            $table->string('photo')->nullable();
+
 
         });
     }
@@ -34,6 +36,7 @@ return new class extends Migration
             $table->dropConstrainedForeignId('district_id');
             $table->dropConstrainedForeignId('local_body_id');
             $table->dropColumn('tole');
+            $table->dropColumn('photo');
         });
     }
 };

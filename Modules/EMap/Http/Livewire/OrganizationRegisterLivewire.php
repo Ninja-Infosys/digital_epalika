@@ -47,6 +47,7 @@ class OrganizationRegisterLivewire extends Component
         'org_contact' => null,
         'org_registration_no' => null,
         'org_registration_document' => null,
+        'company_registration_document' => null,
         'org_pan_no' => null,
         'org_pan_document' => null,
         'logo' => null,
@@ -84,6 +85,7 @@ class OrganizationRegisterLivewire extends Component
 
     protected array $secondStepValidations = [
         'organizationDetail.org_registration_document' => ['required', 'image'],
+        'organizationDetail.company_registration_document' => ['required', 'image'],
         'organizationDetail.org_pan_document' => ['required', 'image'],
         'organizationDetail.logo' => ['required', 'image'],
         'taxClearance.document' => ['required'],
@@ -208,6 +210,9 @@ class OrganizationRegisterLivewire extends Component
             'organizationDetail.org_registration_document.required' => 'संस्था दर्ता भएको कागजात आवश्यक छ ।',
             'organizationDetail.org_registration_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
             'organizationDetail.org_registration_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'organizationDetail.company_registration_document.required' => 'कम्पनी दर्ता भएको कागजात आवश्यक छ ।',
+            'organizationDetail.company_registration_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
+            'organizationDetail.company_registration_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
             'organizationDetail.org_pan_document.required' => 'संस्थाको पाना नं को कागजात आवश्यक छ ।',
             'organizationDetail.org_pan_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
             'organizationDetail.org_pan_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',

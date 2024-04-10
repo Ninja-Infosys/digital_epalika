@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->foreignId('mobile_user_id')->nullable()->constrained();
             $table->foreignId('personal_detail_id')->nullable()->constrained();
             $table->string('file')->nullable();
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

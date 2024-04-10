@@ -81,27 +81,48 @@ class RecommendationCreate extends Model
         $content = letterHead() . $this->recommendationDetail?->content;
         $replaceableList = collect();
         $this->load('recommendationDetail', 'recommendationValues.recommendationFormField');
+
         foreach ($this->recommendationValues?->load('recommendationFormField.recommendationFormFields') as $values) {
             if ($values->type == 'table') {
-                $value = (string)View::make('recommendation::admin.recommendation.recommendation-create.recommendation-table', compact('values'));
+                $value = (string) View::make('recommendation::admin.recommendation.recommendation-create.recommendation-table', compact('values'));
             } else {
-                $value = $values->value_data;
+                $value = (string) $values->value_data;
             }
-            $replaceableList->put('{{' . $values->recommendationFormField?->field_name . '}}', $value);
-            $replaceableList->put('[@form.' . $values->recommendationFormField?->field_name . ']', $value);
+            $key = (string) $values->recommendationFormField?->field_name;
+            $value = (string) $value;
+
+            $replaceableList->put('{{' . $key . '}}', $value);
+            $replaceableList->put('[@form.' . $key . ']', $value);
             if (!empty($values->recommendationFormField?->slug)) {
-                $replaceableList->put('[@form.' . $values->recommendationFormField?->slug . ']', $value);
+                $replaceableList->put('[@form.' . $values->recommendationFormField->slug . ']', $value);
             }
         }
-        $replaceableList->put('[@province]', officeSetting()->province?->province);
-        $replaceableList->put('[@district]', officeSetting()->district?->district);
-        $replaceableList->put('[@muncipal]', officeSetting()->localBody?->local_body);
-        $replaceableList->put('[@ward_no]', auth()->user()->ward_no);
-        $replaceableList->put('[@today_date_bs]', get_nepali_number($this->get_today_nepali_date()));
-        $replaceableList->put('[@today_date_ad]', today()->toDateString());
 
-        return Str::replace($replaceableList->keys(), $replaceableList->values(), $content ?? '');
+        $replaceableList->put('[@province]', (string) officeSetting()->province?->province);
+        $replaceableList->put('[@district]', (string) officeSetting()->district?->district);
+        $replaceableList->put('[@muncipal]', (string) officeSetting()->localBody?->local_body);
+
+        $wardNo = auth()->user()->ward_no;
+        if (is_array($wardNo)) {
+            $wardNo = implode(', ', $wardNo);
+        }
+        $replaceableList->put('[@ward_no]', (string) $wardNo);
+        $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
+        $replaceableList->put('[@today_date_ad]', (string) today()->toDateString());
+        // $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
+        $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
+        $replaceableList->put('[@approver_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
+
+
+        $replaceableKeys = $replaceableList->keys()->toArray();
+        $replaceableValues = $replaceableList->values()->toArray();
+
+
+        return Str::replace($replaceableKeys, $replaceableValues, $content ?? '');
     }
+
+
+
 
     public function setFileAttribute($value)
     {
@@ -119,4 +140,9 @@ class RecommendationCreate extends Model
     {
         return $this->hasMany(RecommendationFile::class);
     }
+    public function recommendationCategories(): BelongsTo
+    {
+        return $this->belongsTo(RecommendationCategory::class);
+    }
+   
 }

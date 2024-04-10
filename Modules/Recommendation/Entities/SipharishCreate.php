@@ -91,7 +91,7 @@ class SipharishCreate extends Model
     {
         $content = letterHead() . $this->SipharishFormType?->content;
         $replaceableList = collect();
-        $this->load('SipharishFormType', 'SipharishCreatedValues.SipharisFormField');
+        $this->load('SipharishFormType', 'SipharishCreatedValues.SipharisFormField',);
         foreach ($this->SipharishCreatedValues?->load('SipharisFormField.SipharishFormFields') as $values) {
             if ($values->type == 'table') {
                 $value = (string)View::make('recommendation::admin.sipharisCreate.recommendationTable', compact('values'));
@@ -110,6 +110,9 @@ class SipharishCreate extends Model
         $replaceableList->put('[@ward_no]', auth()->user()->ward_no);
         $replaceableList->put('[@today_date_bs]', get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', today()->toDateString());
+        $replaceableList->put('[@approver_signature]', today()->toDateString());
+        $replaceableList->put('[@checker_signature]',  auth()->user()->signature_photo_path_url ??'');
+        $replaceableList->put('[@approver_signature]',  auth()->user()->signature_photo_path_url ??'');
 
         return Str::replace($replaceableList->keys(), $replaceableList->values(), $content ?? '');
     }

@@ -39,7 +39,7 @@ trait EMapTemplateTrait
                 'कुल भवनको लम्बाई' => '[@length]',
                 'कुल भवनको चौडाई' => '[@breadth]',
                 'भवनको कुल उचाई जमिनको सतहबाट' => '[@height]',
-                'तल्लाको क्षेत्रफल र उचाईको विवरण' => '[@storeyDetails]',
+            
                 'कन्सल्टेन्सीको नाम' => '[@consultant_name]',
                 'कन्सल्टेन्सीको फोन नं.' => '[@consultant_mobile_no]',
                 'कन्सल्टेन्सीको एन.ई.सी. नं' => '[@consultant_nec_no]',
@@ -112,6 +112,7 @@ trait EMapTemplateTrait
             'data' => [
                 'प्रत्येक तल्लाको सिलिङ्ङ्को उचाई' => '[@heightOfEachStorey]',
                 'floor area' => '[@areaOfEachStorey]',
+                'तल्लाको क्षेत्रफल र उचाईको विवरण' => '[@storeyDetails]',
 
             ],
         ],
@@ -368,6 +369,9 @@ trait EMapTemplateTrait
                 'storeyDetails' => $this->storeyDetails,
             ]),
             '[@areaOfEachStorey]' => (string)View::make('emap::inc.area_of_storey', [
+                'storeyDetails' => $this->storeyDetails,
+            ]),
+            '[@storeyDetails]' => (string)View::make('emap::inc.storey_details', [
                 'storeyDetails' => $this->storeyDetails,
             ]),
         ];

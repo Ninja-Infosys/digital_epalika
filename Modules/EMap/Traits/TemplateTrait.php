@@ -46,7 +46,7 @@ trait TemplateTrait
             get_nepali_number($mapApply?->length ?? ''),
             get_nepali_number($mapApply?->breadth ?? ''),
             get_nepali_number($mapApply?->height ?? ''),
-            get_nepali_number($mapApply?->consultant_name ?? ''),
+            get_nepali_number($mapApply?->consultant_name ?? ''),   
             get_nepali_number($mapApply?->consultant_mobile_no ?? ''),
             get_nepali_number($mapApply?->consultant_nec_no ?? ''),
             $mapApply->consultant_signature_url ?? '',
@@ -116,6 +116,10 @@ trait TemplateTrait
                 'storeyDetails' => $mapApply?->storeyDetails,
             ]),
             (string)View::make('emap::inc.area_of_storey', [
+                'storeyDetails' => $mapApply?->storeyDetails,
+
+            ]),
+            (string)View::make('emap::inc.storey_details', [
                 'storeyDetails' => $mapApply?->storeyDetails,
 
             ]),
@@ -269,7 +273,6 @@ trait TemplateTrait
             '[@houseOwner.photo]',
 
 
-
             //FourForts
 
             '[@fourForts]',
@@ -281,6 +284,7 @@ trait TemplateTrait
             //StoreyDetails
             '[@heightOfEachStorey]',
             '[@areaOfEachStorey]',
+            '[@storeyDetails]',
 
             //applicantDetail
 
@@ -356,7 +360,7 @@ trait TemplateTrait
         $documents = collect([]);
 
         foreach ($documentTypeModels as $documentModel) {
-            $typeDocuments = $documentModel::select('id', 'status', 'form_id')->where('map_apply_id', $mapApply->id)->get();
+            $typeDocuments = $documentModel::selectRaw('id,status,form_id')->where('map_apply_id', $mapApply->id)->get();
             foreach ($typeDocuments as $document) {
                 $documents->push([
                     'document_type' => class_basename($documentModel),
@@ -370,11 +374,14 @@ trait TemplateTrait
         $allApproved = true;
         $forms = Form::withCount('formDataTypes')
             ->orderBy('order')
-            ->get()->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
+            ->get()
+            ->map(function ($form, $key) use ($documents, &$order, &$allApproved) {
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
-                if ($allApproved && $status->count() == $form->form_data_types_count && $status->every(fn ($s) => $s == DocumentStatusEnum::APPROVED->value)) {
+                if ($allApproved && $status->count() >= $form->form_data_types_count
+                    && $status->unique()->count() == 1) {
                     $order = $form->order + 1;
+                    $allApproved = true;
                 } elseif ($key == 0) {
                     $order = $form->order;
                     $allApproved = false;
@@ -383,9 +390,9 @@ trait TemplateTrait
                 }
                 if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
-                } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
+                } elseif ($status->contains(DocumentStatusEnum::REJECTED)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
-                } elseif ($status->count() > 0) {
+                } elseif ($status->contains(DocumentStatusEnum::PENDING)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;

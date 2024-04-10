@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('add_land_diff_locations')->default(0);
             $table->boolean('is_applicable_on_recommendation')->default(0);
             $table->integer('order')->nullable();
-            $table->boolean('status')->default(1);
+            $table->string('status')->nullable();
             $table->text('description')->nullable();
             $table->longText('content')->nullable();
             $table->timestamps();

@@ -43,11 +43,25 @@ class Notice extends Model
     protected $casts = [
         'is_displayed' => 'boolean',
     ];
-    protected function ward(): Attribute
+    // protected function ward(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => $value ? explode(',', $value) : [],
+    //         set: fn (string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
+    //     );
+    // }
+   protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $value ? explode(',', $value) : [],
-            set: fn (string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
+            get: function ($value) {
+                return $value !== null ? explode(',', $value) : [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+                return $value;
+            }
         );
     }
 

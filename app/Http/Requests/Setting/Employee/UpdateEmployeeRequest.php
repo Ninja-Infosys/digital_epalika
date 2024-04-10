@@ -42,6 +42,9 @@ class UpdateEmployeeRequest extends FormRequest
             'cif_no' => ['nullable'],
             'insurance_card_no' => ['nullable'],
             'description' => ['nullable'],
+            'ward' => ['nullable', 'array'],
+            'ward.*' => ['string'],
+
         ];
     }
 

@@ -12,39 +12,41 @@ use App\Traits\EventObserveTrait;
 
 class RecommendationDetail extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-        'recommendation_category_id',
-        'title',
-        'title_en',
-        'type',
-        'service_cost',
-        'general_time',
-        'surrogate_time',
-        'is_citizenship_required',
-        'is_applicable_org',
-        'is_applicant_self',
-        'is_permission_required',
-        'is_taxcode_required',
-        'add_land_diff_locations',
-        'is_applicable_on_recommendation',
-        'order',
-        'status',
-        'description',
-        'content',
-   ];
+    protected $fillable = [
+         'recommendation_category_id',
+         'title',
+         'title_en',
+         'type',
+         'service_cost',
+         'general_time',
+         'surrogate_time',
+         'is_citizenship_required',
+         'is_applicable_org',
+         'is_applicant_self',
+         'is_permission_required',
+         'is_taxcode_required',
+         'add_land_diff_locations',
+         'is_applicable_on_recommendation',
+         'order',
+         'status',
+         'description',
+         'content',
+    ];
 
     public function recommendationCategory(): BelongsTo
     {
         return $this->belongsTo(RecommendationCategory::class);
-   }
+    }
 
     public function revenueHeaders(): BelongsToMany
     {
@@ -72,6 +74,8 @@ class RecommendationDetail extends Model
                 'वडा नं' => '[@ward_no]',
                 'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
                 'आजको मिति (ई.स.)' => '[@today_date_ad]',
+                'अनुमोदनकर्ताको सहि' => '[@approver_signature]',
+                'परिक्षकको सहि' => '[@checker_signature]', 
 //                'लेटरहेड' => '[@letterHead]',
             ],
         ]];

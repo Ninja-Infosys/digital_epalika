@@ -7,6 +7,7 @@ use App\Models\File;
 use App\Models\User;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,6 +62,28 @@ class Employee extends Model
     protected $casts = [
         'gender' => Gender::class
     ];
+
+    protected function ward(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                return $value !== null ? explode(',', $value) : [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+                return $value;
+            }
+        );
+    }
+    // protected function ward(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => $value ? explode(',', $value) : [],
+    //         set: fn (string|array|null $value) => $value ? (is_array($value) ? implode(',', $value) : $value) : null,
+    //     );
+    // }
 
     public function getPhotoUrlAttribute(): string
     {

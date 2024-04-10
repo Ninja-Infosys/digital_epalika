@@ -47,6 +47,7 @@ class AppliedDocument extends Model
         'can_edit'
     ];
 
+    protected $with = ['appliedDocumentStatuses'];
     public function getCanEditAttribute(): bool
     {
         return match ($this->attributes['status']) {

@@ -4,6 +4,7 @@ namespace Modules\EMap\Http\Controllers;
 
 use App\Helper\SMS\SamayaSms;
 use App\Http\Controllers\Controller;
+use App\Models\File;
 use App\Notifications\ApplyMapNoticeNotification;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -14,17 +15,25 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\NecessaryDocument;
+use Modules\EMap\Entities\RegistrationDocument;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 
 class FrontendController extends Controller
 {
     public function eMap()
-    {
-        return view('emap::frontend.e-map.index');
-    }
+{
+    $necessaryDocuments = NecessaryDocument::with('files')->get();
+    $registrationDocuments =RegistrationDocument::all();
+
+
+    return view('emap::frontend.e-map.index', compact('necessaryDocuments','registrationDocuments'));
+}
+
 
     public function downloads()
     {
@@ -160,5 +169,21 @@ class FrontendController extends Controller
 
 
         return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
+    }
+
+    public function download(File $file)
+    {
+        
+        return Storage::disk('public')->download($file->file, $file->file_name . $file->extension);
+    }
+
+    public function downloadFile()
+    {
+        if (!empty($_GET['file_url']) && Storage::disk('public')->exists($_GET['file_url'])) {
+            return Storage::disk('public')->download($_GET['file_url']);
+        } else {
+            toast('माफ गर्नुहोस् फाइल फेला परेन', 'error');
+            return back();
+        }
     }
 }

@@ -7,6 +7,8 @@ use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
+use Modules\EMap\Http\Controllers\Admin\NecessaryDocumentController;
+use Modules\EMap\Http\Controllers\Admin\RegistrationDocumentController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationArchiveController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
@@ -19,7 +21,7 @@ use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
 use Modules\EMap\Http\Controllers\HouseOwnerArchiveController;
-use  Modules\EMap\Http\Controllers\LandUseAreaController;
+use Modules\EMap\Http\Controllers\LandUseAreaController;
 use Modules\EMap\Http\Controllers\StreetDetailController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -54,11 +56,11 @@ Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/documen
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}', [DocumentAttachController::class, 'update'])->name('map-apply.appliedDocument.update');
 Route::get('formStore/{formStore}', [DocumentAttachController::class, 'formStoreDetail'])->name('formStoreDetail');
 
-Route::get('mapApply/{mapApply}/houseOwnerArchive/documentDetail', [HouseOwnerArchiveController::class,'documentDetail'])->name('houseOwnerArchive.documentList');
-Route::put('mapApply/{mapApply}/houseOwner/{houseOwner}/uploadDocument', [HouseOwnerArchiveController::class,'uploadDocumentHouseOwner'])->name('houseOwner.uploadDocumentHouseOwner');
-Route::put('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/uploadDocument', [HouseOwnerArchiveController::class,'uploadDocument'])->name('houseOwnerArchive.uploadDocument');
-Route::get('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/print', [HouseOwnerArchiveController::class,'print'])->name('houseOwnerArchive.printMuchulka');
-Route::get('mapApply/{mapApply}/houseOwner/{houseOwner}/print', [HouseOwnerArchiveController::class,'printHouseOwner'])->name('houseOwnerArchive.printHouseOwner');
+Route::get('mapApply/{mapApply}/houseOwnerArchive/documentDetail', [HouseOwnerArchiveController::class, 'documentDetail'])->name('houseOwnerArchive.documentList');
+Route::put('mapApply/{mapApply}/houseOwner/{houseOwner}/uploadDocument', [HouseOwnerArchiveController::class, 'uploadDocumentHouseOwner'])->name('houseOwner.uploadDocumentHouseOwner');
+Route::put('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/uploadDocument', [HouseOwnerArchiveController::class, 'uploadDocument'])->name('houseOwnerArchive.uploadDocument');
+Route::get('mapApply/{mapApply}/houseOwnerArchive/{houseOwnerArchive}/print', [HouseOwnerArchiveController::class, 'print'])->name('houseOwnerArchive.printMuchulka');
+Route::get('mapApply/{mapApply}/houseOwner/{houseOwner}/print', [HouseOwnerArchiveController::class, 'printHouseOwner'])->name('houseOwnerArchive.printHouseOwner');
 Route::resource('mapApply/{mapApply}/houseOwnerArchive', HouseOwnerArchiveController::class);
 Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', [AdminStepController::class, 'storeDocument'])->name('storeDocument');
 
@@ -85,14 +87,17 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
     Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail/{noticeTypeEnum}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
-    Route::get('mapApply/{applicationFormTypeEnum}', 'index')->name('mapApply.index');
+    Route::get('mapApply/{applicationFormTypeEnum}/{mapStatusEnum?}', 'index')->name('mapApply.index');
+
     Route::get('mapApply/{mapApply}/detail/{applicationFormTypeEnum}', 'mapDetail')->name('mapApply.mapDetail');
-    Route::put('mapApply/{mapApply}/{applicationFormTypeEnum}', 'updateStatus')->name('mapApply.updateStatus');
+    Route::put('mapApply/{applicationFormTypeEnum}/{mapApply}', 'updateStatus')->name('mapApply.updateStatus');
 });
 
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
+    Route::resource('necessaryDocument', NecessaryDocumentController::class);
+    Route::resource('registrationDocument', RegistrationDocumentController::class);
     Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
     Route::get('eMapTemplate/enumList', [EMapTemplateController::class, 'enumList'])->name('eMapTemplate.enumList');
     Route::get('eMapTemplate/{eMapTemplate}/updateStatus', [EMapTemplateController::class, 'updateStatus'])->name('eMapTemplate.updateStatus');

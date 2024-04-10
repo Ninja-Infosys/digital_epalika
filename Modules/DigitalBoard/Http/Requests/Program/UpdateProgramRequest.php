@@ -18,7 +18,7 @@ class UpdateProgramRequest extends FormRequest
             'date' => ['required','date_format:Y-m-d'],
             'image' => ['nullable','mimes:png,jpeg,jpg'],
             'ward' => ['nullable', 'array'],
-            'ward.*' => ['integer'],
+            'ward.*' => ['string'],
             'is_displayed' => ['nullable', 'boolean'],
         ];
     }

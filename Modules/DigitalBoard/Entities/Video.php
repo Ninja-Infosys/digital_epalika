@@ -36,11 +36,25 @@ class Video extends Model
         $builder->where('is_displayed', $display);
     }
 
+    // protected function ward(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => explode(',', $value),
+    //         set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+    //     );
+    // }
     protected function ward(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => explode(',', $value),
-            set: fn (string|array|null $value) => !empty($value) ? is_array($value) ? implode(',', $value) : $value : null,
+            get: function ($value) {
+                return $value !== null ? explode(',', $value) : [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+                return $value;
+            }
         );
     }
 }

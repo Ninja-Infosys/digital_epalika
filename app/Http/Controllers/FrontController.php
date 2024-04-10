@@ -23,22 +23,32 @@ class FrontController extends Controller
 
     public function index()
     {
+         $checkRoutes = collect([
+            "grievanceHandling" =>Route::has('grievanceHandling.grievance'),
+            "ebps" =>Route::has('ebps'),
+            "digitalBoard" =>Route::has('digitalBoard.helpdesk.helpdesk'),
+            "recommendation" =>Route::has('recommendationrecommendation.index'),
+            "businessRegistration" =>Route::has('businessRegistration.business'),
+            "grant" =>Route::has('grant.index'),
+            "payment" =>Route::has('payment.index'),
+            "complaintApplication" =>Route::has('complaintApplication.complainRegistration'),
+            "roaster" =>Route::has('roaster.index')
+        ]);
+
         if(config('app.disable_main_page')) {
             return redirect(route('newWard'));
         }
         if (!$this->checkModuleExistence('DigitalBoard')) {
             return view('frontend.digital_board');
-        } elseif (Route::has('grievanceHandling.grievance')
-            || Route::has('ebps')
-            || Route::has('digitalBoard.helpdesk.helpdesk')
-            || Route::has('recommendation.index')
-            || Route::has('businessRegistration.business')
-            || Route::has('grant.index')
-            || Route::has('payment.index')
-            || Route::has('complaintApplication.complainRegistration')
-            || Route::has('roaster.index')) {
+        }
+
+       
+         if ($checkRoutes->filter()->count() > 1) {
             return redirect(route('digital-service'));
         } else {
+            if(Route::has('ebps')){
+                return redirect(route('ebps'));
+            }
             return redirect(route('digital-service'));
         }
     }
