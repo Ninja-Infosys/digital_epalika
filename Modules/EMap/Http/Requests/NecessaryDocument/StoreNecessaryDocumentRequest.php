@@ -17,8 +17,8 @@ class StoreNecessaryDocumentRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:250'],   
             'description' => ['required', 'string',],
-            'files' => ['required', 'array'],
-            'files.*' => ['file', 'mimes:pdf,png,jpeg,jpg'],
+            // 'files' => ['required', 'array'],
+            // 'files.*' => ['file', 'mimes:pdf,png,jpeg,jpg'],
           
 
         ];
