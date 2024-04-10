@@ -144,6 +144,7 @@
                                                                             class="btn btn-xs btn-outline-primary">
                                                                             <i class="fa fa-download"></i>
                                                                         </a>
+                                                                        
                                                                     @endforeach
                                                                 </td>
                                                             </tr>
