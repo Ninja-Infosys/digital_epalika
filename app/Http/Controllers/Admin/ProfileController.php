@@ -18,6 +18,9 @@ class ProfileController extends Controller
         if ($request->hasFile('profile_photo_path') && $request->user()->profile_photo_path) {
             $this->deleteFile(request()->user()->profile_photo_path);
         }
+        if ($request->hasFile('signature_photo_path') && $request->user()->signature_photo_path) {
+            $this->deleteFile(request()->user()->signature_photo_path);
+        }
 
         $request->user()->update($request->validated());
 

@@ -42,7 +42,7 @@
                                         <div class="col-md-12">
                                             <h4>{{$template['title'] ?? ''}} :</h4>
                                             <div class="button-list d-flex flex-wrap mb-2">
-                                                @foreach($template['data'] as $key=>$templateValue)
+                                                 @foreach($template['data'] as $key=>$templateValue)
                                                     <button type="button" class="btn btn-outline-primary btn-xs me-2"
                                                             onclick="copyText('{{$templateValue}}')">
                                                         {{$key}}

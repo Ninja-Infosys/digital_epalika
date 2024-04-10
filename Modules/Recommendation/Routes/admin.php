@@ -5,6 +5,10 @@ use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
+use Modules\Recommendation\Http\Controllers\Admin\SettingController;
+use Modules\Recommendation\Http\Controllers\Admin\SifarisPassGroupController;
+use Modules\Recommendation\Http\Controllers\Admin\SignaturePersonController;
+use Modules\Recommendation\Http\Controllers\Admin\SipharisSettingController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 use Modules\Recommendation\Http\Controllers\RecommendationCreateController;
 use Modules\Recommendation\Http\Controllers\RecommendationDetailController;
@@ -73,10 +77,12 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('recommendationDetail', RecommendationDetailController::class);
     Route::get('recommendationSignature/{recommendationSignature}/updateStatus', [RecommendationSignatureController::class,'updateStatus'])->name('recommendationSignature.updateStatus');
     Route::resource('recommendationSignature', RecommendationSignatureController::class);
+    Route::resource('sipharisSetting',SipharisSettingController::class);
 });
 
 //recommendation create
 Route::put('recommendationCreate/{recommendationCreate}/updateStatus/{recommendationStatusEnum}', [RecommendationCreateController::class, 'updateStatus'])->name('recommendationCreate.updateStatus');
+Route::put('recommendationCreate/{recommendationCreate}/approvedStatus', [RecommendationCreateController::class, 'approvedStatus'])->name('recommendationCreate.approvedStatus');
 Route::put('recommendationCreate/{recommendationCreate}/fileUpload', [RecommendationCreateController::class, 'fileUpload'])->name('recommendationCreate.fileUpload');
 Route::resource('recommendationCreate', RecommendationCreateController::class);
 

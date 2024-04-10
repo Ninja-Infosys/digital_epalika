@@ -175,6 +175,18 @@
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="signature_photo_path" class="form-label">सहि </label>
+                                                <input
+                                                    type="file"
+                                                    name="signature_photo_path"
+                                                    class="form-control @error('signature_photo_path') is-invalid @enderror"
+                                                    id="signature_photo_path"
+                                                />
+                                                @error('signature_photo_path')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </fieldset>
                                     <button type="submit" class="btn btn-primary">

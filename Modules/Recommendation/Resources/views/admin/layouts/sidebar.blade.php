@@ -188,6 +188,12 @@
                         <span>हस्ताक्षर</span>
                     </a>
                 </li>
+                
+                <li class="{{request()->is('admin/recommendation/setting/sipharisSetting*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.sipharisSetting.index')}}">
+                        <span>सिफारिस सेटिंग </span>
+                    </a>
+                </li>
 
 
 {{--            @can('recommendationCategory_access')--}}

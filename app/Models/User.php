@@ -23,6 +23,8 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\Recommendation\Entities\SifarisPassGroup;
+use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
@@ -51,6 +53,7 @@ class User extends Authenticatable
         'password',
         'ward_no',
         'profile_photo_path',
+        'signature_photo_path',
         'pin',
         'employee_id',
         'branch_id',
@@ -110,6 +113,20 @@ class User extends Authenticatable
         }
     }
 
+    public function getSignaturePhotoUrlAttribute(): string
+    {
+        return $this->attributes['profile_photo_path']
+            ? Storage::disk('public')->url($this->attributes['signature_photo_path'])
+            : '';
+    }
+
+    public function setSignaturePhotoPathAttribute($value): void
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['signature_photo_path'] = $value->store('user/signature/' . Str::slug($this->attributes['name'], '_'), 'public');
+        }
+    }
+
     public function scopeFilter($query, $param = [])
     {
         $this->filterByUserRole($query, $param);
@@ -122,6 +139,10 @@ class User extends Authenticatable
         return $this->belongsTo(__CLASS__);
     }
 
+    public function sipharisSetting(): BelongsTo
+    {
+        return $this->belongsTo(SipharisSetting::class, );
+    }
     public function users(): HasMany
     {
         return $this->hasMany(__CLASS__);
@@ -167,4 +188,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(ComplaintApplication::class, 'assigned_user_id');
     }
+
+
+    public function approverSifarisPassGroups()
+    {
+        return $this->hasMany(SipharisSetting::class, 'approver_id'); 
+    }
+    public function checkerSifarisPassGroups()
+    {
+        return $this->hasMany(SipharisSetting::class, 'checker_id'); 
+    }
+    
+
 }

@@ -74,6 +74,8 @@ class RecommendationDetail extends Model
                 'वडा नं' => '[@ward_no]',
                 'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
                 'आजको मिति (ई.स.)' => '[@today_date_ad]',
+                'अनुमोदनकर्ताको सहि' => '[@approver_signature]',
+                'परिक्षकको सहि' => '[@checker_signature]', 
 //                'लेटरहेड' => '[@letterHead]',
             ],
         ]];
