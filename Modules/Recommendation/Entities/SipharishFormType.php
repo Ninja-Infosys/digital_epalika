@@ -64,17 +64,21 @@ class SipharishFormType extends Model
 
     public function getTemplateOptions(): array
     {
-        return [[
-            'title' => 'ठेगाना',
-            'data' => [
-                'प्रदेश' => '[@province]',
-                'जिल्ला' => '[@district]',
-                'पालिका' => '[@muncipal]',
-                'वडा नं' => '[@ward_no]',
-                'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
-                'आजको मिति (ई.स.)' => '[@today_date_ad]',
-//                'लेटरहेड' => '[@letterHead]',
-            ],
-        ]];
+        return [
+            [
+                'title' => 'ठेगाना',
+                'data' => [
+                    'प्रदेश' => '[@province]',
+                    'जिल्ला' => '[@district]',
+                    'पालिका' => '[@muncipal]',
+                    'वडा नं' => '[@ward_no]',
+                    'आजको मिति (बि‍.स‌.)' => '[@today_date_bs]',
+                    'आजको मिति (ई.स.)' => '[@today_date_ad]',
+                    //                'लेटरहेड' => '[@letterHead]',
+                    'अनुमोदनकर्ताको सहि' => '[@approver_signature]',
+                    'परिक्षकको सहि' => '[@checker_signature]',
+                ],
+            ]
+        ];
     }
 }

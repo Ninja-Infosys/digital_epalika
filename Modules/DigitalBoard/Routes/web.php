@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Modules\DigitalBoard\Http\Controllers\FrontController;
 
 Route::get('service/{service}', [FrontController::class, 'showServiceDetail'])->name('service.view');
