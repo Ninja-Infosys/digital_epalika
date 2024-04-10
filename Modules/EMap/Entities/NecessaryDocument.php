@@ -27,9 +27,9 @@ class NecessaryDocument extends Model
        
     ];
 
-    public function files(): MorphMany
+    public function files():MorphMany
     {
-        return $this->morphMany(File::class, 'model');
+        return $this->MorphMany(File::class,'model');
     }
 
 

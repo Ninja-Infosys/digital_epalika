@@ -17,8 +17,8 @@ class UpdateNecessaryDocumentRequest extends FormRequest
         return [
             'title' => ['required','string','max:250'],
             'description' => ['nullable','string','max:2000'],
-            'file' => ['nullable', 'array'],
-             'file.*' => ['mimes:png,jpeg,jpg'],
+            // 'file' => ['nullable', 'array'],
+            //  'file.*' => ['mimes:png,jpeg,jpg'],
         ];
     }
 }

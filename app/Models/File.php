@@ -33,6 +33,11 @@ class File extends Model
         'file_size'
     ];
 
+
+    public function model()
+    {
+        return $this->morphTo();
+    }
     public function getFileUrlAttribute(): string
     {
         return Storage::disk('public')->url($this->attributes['file']);

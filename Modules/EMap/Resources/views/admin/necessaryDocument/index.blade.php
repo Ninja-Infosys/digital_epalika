@@ -43,7 +43,6 @@
                                 <tr>
                                     <th>क्र.स</th>
                                     <th>शीर्षक</th>
-                                  
                                     <th>विवरण</th>
                                     <th>#</th>
                                 </tr>
@@ -53,8 +52,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <th>{{ $necessaryDocument->title ?? '' }}</th>
-                                        <td> {{ Str::limit(strip_tags($necessaryDocument->description ??''), 100, '..')}}
-                                        <td/>
+                                        <th> {{ Str::limit(strip_tags($necessaryDocument->description ??''), 100, '..')}} </th>
                                         
                                         <td class="d-flex">
                                             @can('necessaryDocument_edit')

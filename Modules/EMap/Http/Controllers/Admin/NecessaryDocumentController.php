@@ -40,6 +40,8 @@ class NecessaryDocumentController extends Controller
     public function show(NecessaryDocument $necessaryDocument)
     {
         $this->checkAuthorization('necessaryDocument_create');
+        $necessaryDocument->load('files');
+        // dd($necessaryDocument);
         return view('emap::admin.necessaryDocument.show',compact('necessaryDocument'));
     }
 
