@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfficeHeader;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,7 @@ class OrganizationAuthController extends Controller
 {
     public function showOrganizationLoginForm()
     {
+        
         return view('admin.global.organization.auth.login');
     }
 
@@ -56,7 +59,8 @@ class OrganizationAuthController extends Controller
 
     public function showOrganizationRegisterForm()
     {
-        return view('admin.global.organization.auth.register');
+        $officeheaders= OfficeHeader::orderBy('position')->get();
+        return view('admin.global.organization.auth.register',compact('officeheaders'));
     }
 
     public function showOrganizationRegisterFormPerson()
