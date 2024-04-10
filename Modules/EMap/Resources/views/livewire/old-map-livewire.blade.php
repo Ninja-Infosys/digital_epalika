@@ -105,11 +105,11 @@
     </div>
     <div class="card border border-1 round-1 mt-3">
         <legend>
-            <h5>४. घर धनीको विवरण</h5>
+            <h5>२. घर धनीको विवरण</h5>
         </legend>
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.name">१.१ जग्गा धनीको नाम </label>
+                <label class="form-label" for="houseOwner.name">२.१ जग्गा धनीको नाम </label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.name"
                     wire:model="houseOwner.name" placeholder=" जग्गा धनीको नाम">
                 @error('houseOwner.name')
@@ -117,7 +117,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.phone">१.२ फोन नं.</label>
+                <label class="form-label" for="houseOwner.phone">२.२ फोन नं.</label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.phone"
                     wire:model="houseOwner.phone" placeholder="फोन नं.">
                 @error('houseOwner.phone')
@@ -125,7 +125,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.father_name">१.३ बुवाको नाम</label>
+                <label class="form-label" for="houseOwner.father_name">२.३ बुवाको नाम</label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.father_name"
                     wire:model="houseOwner.father_name" placeholder="बुवाको नाम">
                 @error('houseOwner.father_name')
@@ -133,7 +133,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.grandfather_name">१.४ हजुरबुबाको नाम</label>
+                <label class="form-label" for="houseOwner.grandfather_name">२.४ हजुरबुबाको नाम</label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.grandfather_name"
                     wire:model="houseOwner.grandfather_name" placeholder="हजुरबुबाको नाम">
                 @error('houseOwner.grandfather_name')
@@ -141,7 +141,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_no">१.६ नागरिकता नम्बर</label>
+                <label class="form-label" for="houseOwner.citizenship_no">२.६ नागरिकता नम्बर</label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.citizenship_no"
                     wire:model="houseOwner.citizenship_no" placeholder="नागरिकता नम्बर">
                 @error('houseOwner.citizenship_no')
@@ -149,7 +149,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_issue_date">१.७ नागरिकता लिएको मिति</label>
+                <label class="form-label" for="houseOwner.citizenship_issue_date">२.७ नागरिकता लिएको मिति</label>
                 <input class="form-control form-control-sm mt-1" type="text"
                     id="houseOwner.citizenship_issue_date" wire:model="houseOwner.citizenship_issue_date"
                     placeholder="yyyy/mm/dd">
@@ -158,7 +158,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.citizenship_issue_district_id">१.५ नागरिकता लिएको
+                <label class="form-label" for="houseOwner.citizenship_issue_district_id">२.५ नागरिकता लिएको
                     जिल्ला</label>
                 <select class="form-select form-select-sm mt-1" wire:model="houseOwner.citizenship_issue_district_id"
                     id="houseOwner.citizenship_issue_district_id">
@@ -174,7 +174,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.address">१.८ ठेगाना</label>
+                <label class="form-label" for="houseOwner.address">२.८ ठेगाना</label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.address"
                     wire:model="houseOwner.address" placeholder="ठेगाना">
                 @error('houseOwner.address')
@@ -182,7 +182,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.local_body">१.९ पालिका</label>
+                <label class="form-label" for="houseOwner.local_body">२.९ पालिका</label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.local_body"
                     wire:model="houseOwner.local_body" placeholder="पालिका">
                 @error('houseOwner.local_body')
@@ -190,7 +190,7 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.ward_no">१.१० वडा नं.</label>
+                <label class="form-label" for="houseOwner.ward_no">२.१० वडा नं.</label>
                 <input class="form-control form-control-sm mt-1" type="number" id="houseOwner.ward_no"
                     wire:model="houseOwner.ward_no" min="0" placeholder="वडा नं.">
                 @error('houseOwner.ward_no')
@@ -199,8 +199,100 @@
             </div>
         </div>
     </div>
+    <div class="card border border-1 round-1 mt-3">
+        <legend>
+            <h5>३. सम्बन्धित कागजातहरू</h5>
+        </legend>
+        <div class="table-responsive">
+            <table class="table table-sm mb-0 table-bordered">
+                <thead>
+                    <tr>
+                        <th>क्र.स.</th>
+                        <th>फाइलको नाम</th>
+                        <th>फाइल</th>
+                        <th>
+                            <button type="button" wire:click="addOldMapDocuments"
+                                class="btn btn-xs btn-outline-primary" title="नयाँ फाइल थप्नुहोस्">
+                                <i class="fa fa-plus-circle"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($oldMap['oldMapDocuments'] as $key=>$document)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <input type="text"
+                                    wire:model="oldMap.oldMapDocuments.{{ $key }}.document_name"
+                                    class="form-control form-control-sm" placeholder="फाइलको नाम"
+                                    required />
+                                @error("oldMap.oldMapDocuments.$key.document_name")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <input type="file"
+                                    wire:model="oldMap.oldMapDocuments.{{ $key }}.document"
+                                    class="form-control form-control-sm" placeholder="फाइल"
+                                    required />
+                                @error("oldMap.oldMapDocuments.$key.document")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </td>
+                            <td>
+                                <button type="button"
+                                    wire:click="removeOldMapDocuments({{ $key }})"
+                                    class="btn btn-xs btn-outline-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="text-center" colspan="7">
+                                विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            @error('form.oldMapDocuments')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
     <div class="mt-4 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
     </div>
 
 </form>
+@push('scripts')
+    <script src="{{ asset('assets/backend/js/plugins/datepicker.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#date").nepaliDatePicker({
+                ndpYear: true,
+                ndpMonth: true,
+                onChange: function() {
+                    let inputFieldDate = $("#date").val();
+                    let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                    let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                    let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                    $("#en_date").val(formattedDate);
+
+                    Livewire.emit('dateChanged', inputFieldDate, formattedDate);
+                }
+            });
+
+            @if (!$oldMap)
+                let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(),
+                    "YYYY-MM-DD")
+                let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(),
+                    "YYYY-MM-DD")
+                Livewire.emit('dateChanged', todayBsDate, todayAdDate);
+            @endif
+        });
+    </script>
+@endpush

@@ -26,7 +26,9 @@ class OldMapLivewire extends Component
         'registration_date' => null,
         'construction_type' => null,
         'usage' => null,
-        'building_category' => null
+        'building_category' => null,
+        'oldMapDocuments' => []
+
     ];
 
 
@@ -79,7 +81,10 @@ class OldMapLivewire extends Component
         'oldMap.registration_date' => ['required'],
         'oldMap.construction_type' => ['required'],
         'oldMap.usage' => ['required'],
-        'oldMap.building_category' => ['required']
+        'oldMap.building_category' => ['required'],
+        'oldMap.oldMapDocuments' => ['array'],
+        'oldMap.oldMapDocuments.*.document_name' => ['required', 'string', 'max:255'],
+        'oldMap.oldMapDocuments.*.document' => ['required', 'mimes:jpg,jpeg,png,pdf']
     ];
 
 
@@ -105,6 +110,17 @@ class OldMapLivewire extends Component
         );
     }
 
+    public function addOldMapDocuments()
+    {
+        $this->oldMap['oldMapDocuments'][] = [];
+    }
+
+    public function removeOldMapDocuments($index)
+    {
+        unset($this->oldMap['oldMapDocuments'][$index]);
+        $this->oldMap['oldMapDocuments'] = array_values($this->oldMap['oldMapDocuments']);
+    }
+
     public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
@@ -121,7 +137,13 @@ class OldMapLivewire extends Component
                 } else {
                     $houseOwner = HouseOwner::create($this->houseOwner);
                     $houseOwner->oldMaps()->attach([$oldMap->id]);
+                }  foreach ($this->oldMap['oldMapDocuments'] as $oldMapDocument) {
+                    $oldMap->oldMapDocuments()->updateOrCreate([
+                        'document_name' => $oldMapDocument['document_name'],
+                        'document' => $oldMapDocument['document']
+                    ]);
                 }
+
             });
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',

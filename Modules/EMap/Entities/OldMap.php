@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\EMap\Enums\ApplicationFormTypeEnum;
+use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
@@ -37,6 +40,8 @@ class OldMap extends Model
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
+        'application_type' => ApplicationFormTypeEnum::class,
+        'usage' => BuildingUsageEnum ::class,
         'building_category' => CategorizationEnum::class,
     ];
 
@@ -50,4 +55,8 @@ class OldMap extends Model
         return $this->belongsToMany(HouseOwner::class);
     }
 
+    public function oldMapDocuments(): HasMany
+    {
+        return $this->hasMany(OldMapDocument::class);
+    }
 }

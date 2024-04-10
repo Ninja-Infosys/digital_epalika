@@ -121,6 +121,7 @@ Route::prefix('files')->as('files.')->group(function () {
 
 //oldMap
 Route::resource('oldMap', OldMapController::class)->except(['update', 'store']);
+Route::delete('oldMap/{oldMap}/oldMapDocument/{oldMapDocument}', [OldMapController::class, 'deleteOldMapDocument'])->name('oldMap.oldMapdDocument.destroy');
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
     Route::get('/', 'getRequiredData')->name('report');

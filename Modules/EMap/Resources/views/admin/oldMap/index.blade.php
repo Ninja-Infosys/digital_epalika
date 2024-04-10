@@ -55,6 +55,14 @@
                                         <td>{{ $oldMap->registration_no }}</td>
                                         <td>{{ $oldMap->houseOwner?->first()?->name ?? '' }}</td>
                                         <td class="d-flex">
+                                            @can('oldMap_access')
+                                                <a data-bs-type="show"
+                                                    href="{{ route('emap.admin.oldMap.show', $oldMap) }}"
+                                                    title="विवरण हेर्नुहोस्"
+                                                    class="btn btn-xs me-1 btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            @endcan
                                             @can('oldMap_edit')
                                                 <a data-bs-type="edit" href="{{ route('emap.admin.oldMap.edit', $oldMap) }}"
                                                     class="btn me-1 btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}"

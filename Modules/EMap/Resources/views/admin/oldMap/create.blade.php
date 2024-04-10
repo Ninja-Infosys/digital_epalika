@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">इ-नक्सा</a>
+                            <a href="">नक्सा</a>
                         </li>
                         <li class="breadcrumb-item active">पुरानो नक्सा </li>
                     </ol>
