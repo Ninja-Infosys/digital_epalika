@@ -2,6 +2,9 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\ApplicationFormTypeEnum;
+use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
@@ -38,6 +43,8 @@ class OldMap extends Model
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
+        'application_type' => ApplicationFormTypeEnum::class,
+        'usage' => BuildingUsageEnum ::class,
         'building_category' => CategorizationEnum::class,
     ];
 
@@ -51,5 +58,24 @@ class OldMap extends Model
         return $this->belongsToMany(HouseOwner::class);
     }
 
+
+    public function oldMapDocuments(): HasMany
+    {
+        return $this->hasMany(OldMapDocument::class);
+    }
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
 
 }
