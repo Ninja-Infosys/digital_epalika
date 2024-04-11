@@ -109,9 +109,9 @@
         </legend>
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label class="form-label" for="houseOwner.name">२.१ जग्गा धनीको नाम </label>
+                <label class="form-label" for="houseOwner.name">२.१ घर धनीको नाम </label>
                 <input class="form-control form-control-sm mt-1" type="text" id="houseOwner.name"
-                    wire:model="houseOwner.name" placeholder=" जग्गा धनीको नाम">
+                    wire:model="houseOwner.name" placeholder=" घर धनीको नाम">
                 @error('houseOwner.name')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -197,6 +197,78 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
+            {{-- <fieldset class="mb-2">
+                <legend>
+                    <h5 class="text-info">ठेगाना</h5>
+                </legend>
+                <div class="row">
+                    <div class="col-md-2 mb-2">
+                        <label for="houseOwner.province_id" class="form-label">प्रदेश
+                            <span class="text-danger">*</span></label>
+                        <select wire:model="oldMap.houseOwner.province_id"
+                            class="form-select" id="houseOwner.province_id">
+                            <option value=""> - - छान्नुहोस् - - </option>
+                            @foreach ($provinces as $province)
+                                <option value="{{ $province->id }}">{{ $province->province }}</option>
+                            @endforeach
+                        </select>
+                        @error("oldMap.houseOwner.province_id")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <label for="houseOwner.district_id" class="form-label">जिल्ला
+                            <span class="text-danger">*</span></label>
+                        <select wire:model="oldMap.houseOwner.district_id"
+                            class="form-select" id="houseOwner.district_id">
+                            <option value="">- - छान्नुहोस् - -</option>
+                            @foreach (!empty($oldMap['houseOwner']['province_id']) ? get_districts(province_ids: $oldMap['houseOwner']['province_id']) : [] as $district)
+                                <option value="{{ $district->id }}">{{ $district->district }}</option>
+                            @endforeach
+                        </select>
+                        @error("oldMap.houseOwner.district_id")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <label for="houseOwner.local_body_id" class="form-label">पालिका
+                            <span class="text-danger">*</span></label>
+                        <select wire:model="oldMap.houseOwner.local_body_id"
+                            class="form-select" id="houseOwner.local_body_id">
+                            <option value="">- - छान्नुहोस् - -</option>
+                            @foreach (!empty($oldMap['houseOwner']['district_id']) ? get_local_bodies(district_ids: $oldMap['houseOwner']['district_id']) : [] as $localBody)
+                                <option value="{{ $localBody->id }}">{{ $localBody->local_body }}</option>
+                            @endforeach
+                        </select>
+                        @error("oldMap.houseOwner.local_body_id")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <label for="houseOwner.ward_no" class="form-label">वार्ड न:<span
+                                class="text-danger">*</span></label>
+                        <select wire:model="oldMap.houseOwner.ward_no" class="form-select"
+                            id="houseOwner.ward_no">
+                            <option value="">- - छान्नुहोस् - -</option>
+                            @foreach (!empty($oldMap['houseOwner']['local_body_id']) ? get_local_bodies(localBodyId: $oldMap['houseOwner']['local_body_id'])->ward_no : [] as $ward)
+                                <option value="{{ $ward }}">{{ $ward }}</option>
+                            @endforeach
+                        </select>
+                        @error("oldMap.houseOwner.ward_no")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <label for="houseOwner.tole" class="form-label">टोल</label>
+                        <input type="text" wire:model="oldMap.houseOwner.tole"
+                            class="form-control" id="houseOwner.tole"
+                            placeholder="टोल" />
+                        @error("oldMap.houseOwner.tole")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </fieldset> --}}
         </div>
     </div>
     <div class="card border border-1 round-1 mt-3">
@@ -219,45 +291,46 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @forelse($oldMap['oldMapDocuments'] as $key=>$document)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>
-                                <input type="text"
-                                    wire:model="oldMap.oldMapDocuments.{{ $key }}.document_name"
-                                    class="form-control form-control-sm" placeholder="फाइलको नाम"
-                                    required />
-                                @error("oldMap.oldMapDocuments.$key.document_name")
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </td>
-                            <td>
-                                <input type="file"
-                                    wire:model="oldMap.oldMapDocuments.{{ $key }}.document"
-                                    class="form-control form-control-sm" placeholder="फाइल"
-                                    required />
-                                @error("oldMap.oldMapDocuments.$key.document")
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </td>
-                            <td>
-                                <button type="button"
-                                    wire:click="removeOldMapDocuments({{ $key }})"
-                                    class="btn btn-xs btn-outline-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center" colspan="7">
-                                विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
-                            </td>
-                        </tr>
-                    @endforelse
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>
+                            <input type="text"
+                                wire:model="oldMap.oldMapDocuments.{{ $key }}.document_name"
+                                class="form-control form-control-sm" placeholder="फाइलको नाम"
+                                required />
+                            @error("oldMap.oldMapDocuments.$key.document_name")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </td>
+                        <td>
+                            <input type="file"
+                                wire:model="oldMap.oldMapDocuments.{{ $key }}.document"
+                                class="form-control form-control-sm" placeholder="फाइल"
+                                required />
+                            @error("oldMap.oldMapDocuments.$key.document")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </td>
+                        <td>
+                            <button type="button"
+                                wire:click="removeOldMapDocuments({{ $key }})"
+                                class="btn btn-xs btn-outline-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td class="text-center" colspan="7">
+                            विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
-            @error('form.oldMapDocuments')
+            @error('oldMap.oldMapDocuments')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>

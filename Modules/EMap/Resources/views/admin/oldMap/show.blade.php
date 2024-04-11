@@ -88,7 +88,7 @@
 
                             <div class="row ">
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>२.१ जग्गा धनीको नाम :</b>
+                                    <h4 class="form-label"><b>२.१ घर धनीको नाम :</b>
                                         {{ $oldMap->houseOwner?->first()?->name ?? '' }} </h4>
 
                                 </div>
@@ -176,7 +176,7 @@
     <h4 class="header-title mt-3"> पुरानो नक्साको सम्बन्धित कागजातहरू</h4>
     <div class="row">
         @if (!empty($oldMap->oldMapDocuments))
-            @foreach ($oldMap->oldMapDocuments  as $oldMapDocument)
+            @foreach ($oldMap->oldMapDocuments as $oldMapDocument)
                 <div class="col-md-4 mb-3">
                     <div class="card border border-info">
                         <div class="card-header d-flex justify-content-between">
@@ -188,7 +188,8 @@
                                     class="btn btn-xs btn-outline-primary mx-1">
                                     <i class="fa fa-download"></i>
                                 </a>
-                                <form action="{{ route('emap.admin.oldMap.oldMapdDocument.destroy', [$oldMap, $oldMapDocument]) }}"
+                                <form
+                                    action="{{ route('emap.admin.oldMap.oldMapdDocument.destroy', [$oldMap, $oldMapDocument]) }}"
                                     method="post">
                                     @csrf
                                     @method('delete')
@@ -202,12 +203,10 @@
                         <div class="card-body">
                             @if ($oldMapDocument->extension === 'pdf')
                                 <iframe src="{{ $oldMapDocument->document_url }}" frameborder="0" width="100%"></iframe>
-
                             @elseif(in_array($oldMapDocument->extension, ['png', 'jpg', 'jpeg']))
                                 <img src="{{ $oldMapDocument->document_url }}" class="card-image" alt="Image"
                                     height="150px" width="100%">
                             @else
-                                <!-- Handle other file types here -->
                             @endif
                         </div>
                     </div>
