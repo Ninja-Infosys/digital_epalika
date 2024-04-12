@@ -12,10 +12,10 @@
                             गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">संगठन</li>
+                        <li class="breadcrumb-item active">संस्था </li>
                     </ol>
                 </div>
-                <h4 class="page-title">संगठन </h4>
+                <h4 class="page-title">संस्था </h4>
             </div>
         </div>
     </div>
@@ -36,6 +36,7 @@
                     </a>
 
                     <div class="text-start mt-3">
+                        <h4 class="mt-2 text-black font-bold">व्यक्तिगत विवरण</h4>
 
                         <p class="text-muted mb-2 font-15"><strong>नाम :</strong> <span
                                 class="ms-2">{{$organization->name}}</span>
@@ -68,7 +69,7 @@
                             <li class="nav-item">
                                 <a href="#timeline" data-bs-toggle="tab" aria-expanded="true"
                                    class="nav-link {{$organization->is_organization==1 ? 'active':''}}">
-                                    संगठनको विवरण
+                                    संस्थाको विवरण
                                 </a>
                             </li>
                         @endif
@@ -162,30 +163,33 @@
                                  id="timeline">
                                 <table class="table table-sm mb-0 table-striped table-hover">
                                     <tr>
-                                        <th>नाम</th>
+                                        <th>संस्थाको नाम</th>
                                         <td>{{$organization->organizationDetail->org_name_ne ?? ''}}
                                             ({{$organization->organizationDetail->org_name_en ?? ''}})
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>इमेल</th>
-                                        <td>{{$organization->organizationDetail->org_email ?? ''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>फोन</th>
-                                        <td>{{$organization->organizationDetail->org_contact ?? ''}}</td>
-                                    </tr>
+
                                     <tr>
                                         <th>कम्पनी दर्ता नं</th>
                                         <td>{{$organization->organizationDetail->org_registration_no ?? ''}}</td>
                                     </tr>
+
+
                                     <tr>
-                                        <th>इमेल</th>
+                                        <th>स्थायी लेखा नं</th>
                                         <td>{{$organization->organizationDetail->org_pan_no ?? ''}}</td>
                                     </tr>
 
                                     <tr>
-                                        <th>ठेगाना</th>
+                                        <th>संस्थाको फोन</th>
+                                        <td>{{$organization->organizationDetail->org_contact ?? ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>संस्थाको इमेल</th>
+                                        <td>{{$organization->organizationDetail->org_email ?? ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>संस्थाको ठेगाना</th>
                                         <td>{{$organization->organizationDetail->localBody->local_body ?? ''}}
                                             -{{$organization->organizationDetail->ward ?? ''}}
                                             , {{$organization->organizationDetail->tole ?? ''}}

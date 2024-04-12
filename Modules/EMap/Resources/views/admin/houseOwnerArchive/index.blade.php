@@ -62,22 +62,7 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="father_name">बुवाको नाम</label>
-                                    <input class="form-control form-control-sm" type="text" value="{{ old('father_name') }}" id="father_name"
-                                        name="father_name" placeholder="बुवाको नाम">
-                                    @error('father_name')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="grandfather_name"> हजुरबुबाको नाम</label>
-                                    <input class="form-control form-control-sm" type="text"  value="{{ old('grandfather_name') }}" id="grandfather_name"
-                                        name="grandfather_name" placeholder="हजुरबुबाको नाम">
-                                    @error('grandfather_name')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
+
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="citizenship_no"> नागरिकता नम्बर</label>
                                     <input class="form-control form-control-sm" type="text"  value="{{ old('citizenship_no') }}" id="citizenship_no"
@@ -108,6 +93,22 @@
                                     </select>
                                     @error('citizenship_issue_district_id')
                                         <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="father_name">बुवाको नाम</label>
+                                    <input class="form-control form-control-sm" type="text" value="{{ old('father_name') }}" id="father_name"
+                                           name="father_name" placeholder="बुवाको नाम">
+                                    @error('father_name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="grandfather_name"> हजुरबुबाको नाम</label>
+                                    <input class="form-control form-control-sm" type="text"  value="{{ old('grandfather_name') }}" id="grandfather_name"
+                                           name="grandfather_name" placeholder="हजुरबुबाको नाम">
+                                    @error('grandfather_name')
+                                    <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -167,9 +168,9 @@
                                 <th>क्र.स</th>
                                 <th>घर धनीको नाम</th>
                                 <th>फोन नं.</th>
+                                <th>नागरिकता नम्बर</th>
                                 <th>बुवाको नाम</th>
                                 <th>हजुरबुबाको नाम</th>
-                                <th>नागरिकता नम्बर</th>
                                 <th>प्रिन्ट फाईल</th>
                                 <th>#</th>
                             </tr>
@@ -179,10 +180,9 @@
                                     <td>1</td>
                                     <td>{{ $mapApply->houseOwner->name??'' }}</td>
                                     <td>{{ $mapApply->houseOwner->phone??'' }}</td>
+                                    <td>{{ $mapApply->houseOwner->citizenship_no ??''}}</td>
                                     <td>{{ $mapApply->houseOwner->father_name??''}}</td>
                                     <td>{{ $mapApply->houseOwner->grandfather_name ??''}}</td>
-                                    <td>{{ $mapApply->houseOwner->citizenship_no ??''}}</td>
-                                    <td>
 
 
                                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
@@ -281,9 +281,9 @@
                                 <th>क्र.स</th>
                                 <th>घर धनीको नाम</th>
                                 <th>फोन नं.</th>
+                                <th>नागरिकता नम्बर</th>
                                 <th>बुवाको नाम</th>
                                 <th>हजुरबुबाको नाम</th>
-                                <th>नागरिकता नम्बर</th>
                                 <th>प्रिन्ट फाईल</th>
                                 <th>#</th>
                             </tr>
@@ -294,9 +294,9 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $houseOwnerArchive->name }}</td>
                                     <td>{{ $houseOwnerArchive->phone }}</td>
+                                    <td>{{ $houseOwnerArchive->citizenship_no }}</td>
                                     <td>{{ $houseOwnerArchive->father_name}}</td>
                                     <td>{{ $houseOwnerArchive->grandfather_name }}</td>
-                                    <td>{{ $houseOwnerArchive->citizenship_no }}</td>
                                     <td>
 
                                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
