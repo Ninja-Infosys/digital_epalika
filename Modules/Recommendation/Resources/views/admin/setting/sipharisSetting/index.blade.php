@@ -44,14 +44,14 @@
                             <label for="approver_id" class="form-label">अनुमोदनकर्ता</label>
                             <select id="approver_id" name="approver_id" class="form-select">
                                 <option value="">-- छान्नुहोस् --</option>
-                                @if ($sipharisSetting)
+                                {{-- @if ($sipharisSetting) --}}
                                 @foreach ($users as $user)
                                 <option
-                                value="{{ $user->id }}"{{ $sipharisSetting->approver_id == $user->id ? 'selected' : '' }}>
+                                value="{{ $user->id }}"{{ $sipharisSetting?->approver_id == $user->id ? 'selected' : '' }}>
                                 {{ $user->name ?? '' }}
                             </option>
                                 @endforeach
-                            @endif
+                            {{-- @endif --}}
                             </select>
                             @error('approver_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -61,14 +61,14 @@
                             <label for="checker_id" class="form-label">परीक्षक</label>
                             <select id="checker_id" name="checker_id" class="form-select">
                                 <option value="">-- छान्नुहोस् --</option>
-                                @if ($sipharisSetting)
+                                {{-- @if ($sipharisSetting) --}}
                                 @foreach ($users as $user)
                                 <option
-                                value="{{ $user->id }}"{{ $sipharisSetting->checker_id == $user->id ? 'selected' : '' }}>
+                                value="{{ $user->id }}"{{ $sipharisSetting?->checker_id == $user->id ? 'selected' : '' }}>
                                 {{ $user->name ?? '' }}
                             </option>
                                 @endforeach
-                            @endif
+                            {{-- @endif --}}
                             </select>
                             @error('checker_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
