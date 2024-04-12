@@ -165,7 +165,8 @@
 
                             </div>
                             <div class="col-md-4 mb-3">
-                                <h4 class="form-label"><b>२.८ क्षेत्रफल ({{$mapApply->landDetail?->unit?->title ?? ''}}) :</b>
+                                <h4 class="form-label"><b>२.८ क्षेत्रफल ({{ $mapApply->landDetail?->unit?->title ?? '' }})
+                                        :</b>
                                     {{ get_nepali_number($mapApply->landDetail?->unit_value) ?? '' }}</h4>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -226,43 +227,49 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ जग्गा धनीको फोटो :</b>
-                                    <img src="    {{ $mapApply->landOwner?->photo_url ?? '' }}" alt="" width="100" height="100"></h4>
+                                    <img src="    {{ $mapApply->landOwner?->photo_url ?? '' }}" alt=""
+                                        width="100" height="100">
+                                </h4>
 
                             </div>
                             <div class="col-md-12">
-                            <fieldset>
-                                <legend>
-                                    <h5 class="py-2">ठेगाना</h5>
-                                </legend>
-                                <div class="row">
+                                <fieldset>
+                                    <legend>
+                                        <h5 class="py-2">ठेगाना</h5>
+                                    </legend>
+                                    <div class="row">
 
-                                    <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>१. प्रदेश :</b> {{ $mapApply->landOwner?->province->province ?? '' }}</h4>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>१. प्रदेश :</b>
+                                                {{ $mapApply->landOwner?->province->province ?? '' }}</h4>
 
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>२. जिल्ला:</b>
+                                                {{ $mapApply->landOwner?->district->district ?? '' }}</h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>३. पालिका :</b>
+                                                {{ $mapApply->landOwner?->local_body ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>४. वडा नं. :</b>
+                                                {{ $mapApply->landOwner?->ward_no ?? '' }}
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->landOwner?->tole ?? '' }}
+                                            </h4>
+
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>२. जिल्ला:</b> {{ $mapApply->landOwner?->district->district ?? '' }}</h4>
 
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>३. पालिका :</b> {{ $mapApply->landOwner?->local_body ?? '' }}
-                                        </h4>
-
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४. वडा नं. :</b> {{ $mapApply->landOwner?->ward_no ?? '' }}
-                                        </h4>
-
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->landOwner?->tole ?? '' }}
-                                        </h4>
-
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                        </div>
+                                </fieldset>
+                            </div>
                         </div>
                     </fieldset>
                     <fieldset class="mx-2">
@@ -309,9 +316,12 @@
                                         :</b> {{ $mapApply->houseOwner?->citizenshipIssueDistrict?->district ?? '' }}
                                 </h4>
 
-                            </div>  <div class="col-md-4 mb-3">
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.५ घरधनीको फोटो :</b>
-                                    <img src="    {{ $mapApply->houseOwner?->photo_url ?? '' }}" width="100" height="100" alt=""></h4>
+                                    <img src="    {{ $mapApply->houseOwner?->photo_url ?? '' }}" width="100"
+                                        height="100" alt="">
+                                </h4>
 
                             </div>
                             <div class="col-md-12">
@@ -322,25 +332,30 @@
                                     <div class="row">
 
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>१. प्रदेश :</b> {{ $mapApply->houseOwner?->province->province ?? '' }}</h4>
+                                            <h4 class="form-label"><b>१. प्रदेश :</b>
+                                                {{ $mapApply->houseOwner?->province->province ?? '' }}</h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>२. जिल्ला:</b> {{ $mapApply->houseOwner?->district->district ?? '' }}</h4>
+                                            <h4 class="form-label"><b>२. जिल्ला:</b>
+                                                {{ $mapApply->houseOwner?->district->district ?? '' }}</h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>३. पालिका :</b> {{ $mapApply->houseOwner?->local_body ?? '' }}
+                                            <h4 class="form-label"><b>३. पालिका :</b>
+                                                {{ $mapApply->houseOwner?->local_body ?? '' }}
                                             </h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>४. वडा नं. :</b> {{ $mapApply->houseOwner?->ward_no ?? '' }}
+                                            <h4 class="form-label"><b>४. वडा नं. :</b>
+                                                {{ $mapApply->houseOwner?->ward_no ?? '' }}
                                             </h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->houseOwner?->tole ?? '' }}
+                                            <h4 class="form-label"><b>५. टोल :</b>
+                                                {{ $mapApply->houseOwner?->tole ?? '' }}
                                             </h4>
 
                                         </div>
@@ -430,20 +445,24 @@
                                     <div class="row">
 
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>१. प्रदेश :</b> {{ $designerDetail->province?->province ?? '' }}</h4>
+                                            <h4 class="form-label"><b>१. प्रदेश :</b>
+                                                {{ $designerDetail->province?->province ?? '' }}</h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>२. जिल्ला:</b> {{ $designerDetail->district?->district ?? '' }}</h4>
+                                            <h4 class="form-label"><b>२. जिल्ला:</b>
+                                                {{ $designerDetail->district?->district ?? '' }}</h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>३. पालिका :</b>  {{ $designerDetail->local_body ?? '' }}
+                                            <h4 class="form-label"><b>३. पालिका :</b>
+                                                {{ $designerDetail->local_body ?? '' }}
                                             </h4>
 
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <h4 class="form-label"><b>४. वडा नं. :</b> {{ $designerDetail->ward_no ?? '' }}
+                                            <h4 class="form-label"><b>४. वडा नं. :</b>
+                                                {{ $designerDetail->ward_no ?? '' }}
                                             </h4>
 
                                         </div>
@@ -456,7 +475,6 @@
 
                                 </fieldset>
                             </div>
-
                         @endforeach
 
 
@@ -494,7 +512,8 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <h4 class="form-label"><b>१.४ नागरिकता लिएको
-                                        जिल्ला :</b> {{ $mapApply->applicantDetail?->citizenshipIssueDistrict?->district ?? '' }}
+                                        जिल्ला :</b>
+                                    {{ $mapApply->applicantDetail?->citizenshipIssueDistrict?->district ?? '' }}
                                 </h4>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -518,25 +537,30 @@
                                 <div class="row">
 
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>१. प्रदेश :</b> {{ $mapApply->applicantDetail?->province->province ?? '' }}</h4>
+                                        <h4 class="form-label"><b>१. प्रदेश :</b>
+                                            {{ $mapApply->applicantDetail?->province->province ?? '' }}</h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>२. जिल्ला:</b> {{ $mapApply->applicantDetail?->district->district ?? '' }}</h4>
+                                        <h4 class="form-label"><b>२. जिल्ला:</b>
+                                            {{ $mapApply->applicantDetail?->district->district ?? '' }}</h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>३. पालिका :</b> {{ $mapApply->applicantDetail?->localBody->local_body ?? '' }}
+                                        <h4 class="form-label"><b>३. पालिका :</b>
+                                            {{ $mapApply->applicantDetail?->localBody->local_body ?? '' }}
                                         </h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>४. वडा नं. :</b> {{ $mapApply->applicantDetail?->ward_no ?? '' }}
+                                        <h4 class="form-label"><b>४. वडा नं. :</b>
+                                            {{ $mapApply->applicantDetail?->ward_no ?? '' }}
                                         </h4>
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="form-label"><b>५. टोल :</b> {{ $mapApply->applicantDetail?->tole ?? '' }}
+                                        <h4 class="form-label"><b>५. टोल :</b>
+                                            {{ $mapApply->applicantDetail?->tole ?? '' }}
                                         </h4>
 
                                     </div>
@@ -544,20 +568,20 @@
 
                             </fieldset>
                         </div>
-                    <div class="d-flex justify-content-between my-3 px-2">
-                        <div class="col-3">
-                            <h4 class="form-label fw-bold">निबेदनको मिति :
-                                {{ $mapApply->applicantDetail?->application_date }}
-                            </h4>
+                        <div class="d-flex justify-content-between my-3 px-2">
+                            <div class="col-3">
+                                <h4 class="form-label fw-bold">निबेदनको मिति :
+                                    {{ $mapApply->applicantDetail?->application_date }}
+                                </h4>
 
+                            </div>
+                            <div class="col-3">
+                                <h4 class="form-label fw-bold">निवेदकको सहि :
+                                    <img src="{{ $mapApply->applicantDetail?->signature_url }}" height="80"
+                                        width="80" alt="Signature">
+                                </h4>
+                            </div>
                         </div>
-                        <div class="col-3">
-                            <h4 class="form-label fw-bold">निवेदकको सहि :
-                                <img src="{{ $mapApply->applicantDetail?->signature_url }}" height="80"
-                                    width="80" alt="Signature">
-                            </h4>
-                        </div>
-                    </div>
 
                     </fieldset>
                     <h4 class="fw-bold mt-3 text center text-black">निर्माण हुने भवन तथा मापदण्ड सम्बन्धि संक्षिप्त
@@ -1249,10 +1273,73 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card shadow-none border">
+                            <div class="p-2">
+                                <div class="row align-items-center">
+                                    <div class="col-2 pe-0">
+                                        <div class="avatar-sm">
+                                            <span class="avatar-title bg-light text-secondary rounded">
+                                                <i
+                                                    class="fa {{ getFileIconClass($mapApply->attachDocument?->structure_analysis_report ?? '') }} font-18"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="javascript:void(0);"
+                                            onclick="openFileModal('Analysis Document', '{{ pathinfo($mapApply->attachDocument?->structure_analysis_report ?? '', PATHINFO_EXTENSION) }}', '{{ $mapApply->attachDocument?->structure_analysis_report }}')"
+                                            class="text-muted fw-medium" type="button">Structure Analysis Report
+                                            .{{ pathinfo($mapApply->attachDocument?->structure_analysis_report ?? '', PATHINFO_EXTENSION) }}</a>
+                                        <p class="mb-0 font-13">
+                                            {{ convert_to_highest_unit(intval($mapApply->attachDocument?->structure_analysis_report_size ?? '')) }}
+                                        </p>
+                                        <div class="col-2">
+                                            <a href="{{ route('admin.file-url-download', ['file_url' => $mapApply->attachDocument?->getRawOriginal('structure_analysis_report')]) }}"
+                                                class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <img src="{{ $mapApply->attachDocument?->structure_analysis_report ?? '' }}"
+                                                alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            <form
+                                                action="{{ route('emap.admin.map.mapApply.updateDocumentStatus', $mapApply) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('put')
+                                                <div class="input-group d-flex align-items-center">
+                                                    <select class="form-select form-select-sm"
+                                                        name="structure_analysis_report_status"
+                                                        id="structure_analysis_report_status"
+                                                        aria-label="Example select with button addon">
+                                                        <option value="" disabled selected>--- छान्नुहोस् ---
+                                                        </option>
+                                                        <option value="pending"
+                                                            {{ $mapApply->attachDocument?->structure_analysis_report_status == 'pending' ? 'selected' : '' }}>
+                                                            प्रक्रियामा</option>
+                                                        <option value="accept"
+                                                            {{ $mapApply->attachDocument?->structure_analysis_report_status == 'accept' ? 'selected' : '' }}>
+                                                            स्वीकार
+                                                        </option>
+                                                        <option value="reject"
+                                                            {{ $mapApply->attachDocument?->structure_analysis_report_status == 'reject' ? 'selected' : '' }}>
+                                                            अस्वीकार</option>
+
+                                                    </select>
+                                                    <button class="btn btn-lg btn-outline-primary" type="submit"><i
+                                                            class="fa fa-paper-plane"></i></button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @include('admin.inc.file-view');
             </div>
         </div>
     @endif
-
 @endsection
