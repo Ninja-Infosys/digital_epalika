@@ -297,6 +297,11 @@ class MapController extends Controller
                 'analysis_document_status' => $request->input('analysis_document_status')
             ]);
         }
+        elseif ($request->input('structure_analysis_report_status')) {
+            AttachDocument::where('map_apply_id', $mapApply->id)->update([
+                'structure_analysis_report_status' => $request->input('structure_analysis_report_status')
+            ]);
+        }
         toast(' सफलता पुर्बक आवधिक गरियो', 'success');
         return back();
     }

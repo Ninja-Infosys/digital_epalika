@@ -128,7 +128,7 @@
                                     <div class="col-md-12">
                                         <fieldset>
                                             <legend>
-                                                <h5 class="py-2">ठेगाना</h5>
+                                                <h5 class="py-2"> ठेगाना</h5>
                                             </legend>
                                             <div class="row">
 
@@ -140,14 +140,14 @@
                                             <h4 class="form-label"><b>२. जिल्ला:</b> {{ $oldMap->houseOwner?->district->district ?? '' }}</h4>
 
                                         </div> --}}
-                                                <div class="col-md-4 mb-3">
-                                                    <h4 class="form-label"><b>३. पालिका :</b>
-                                                        {{ $oldMap->houseOwner?->first()?->localBodies->local_body ?? '' }}
+                                                <div class="col-md-12 mb-3">
+                                                    <h4 class="form-label"><b> पालिका :</b>
+                                                        {{ $oldMap->houseOwner?->first()?->local_body ?? '' }}
                                                     </h4>
 
                                                 </div>
                                                 <div class="col-md-4 mb-3">
-                                                    <h4 class="form-label"><b>४. वडा नं. :</b>
+                                                    <h4 class="form-label"><b> वडा नं. :</b>
                                                         {{ $oldMap->houseOwner?->first()?->ward_no ?? '' }}
                                                     </h4>
 
@@ -173,8 +173,8 @@
         </div>
     </div>
 
-    <h4 class="header-title mt-3"> पुरानो नक्साको सम्बन्धित कागजातहरू</h4>
-    <div class="row">
+    <h4 class="header-title mt-3 "> पुरानो नक्साको सम्बन्धित कागजातहरू</h4>
+    <div class="row mt-4">
         @if (!empty($oldMap->oldMapDocuments))
             @foreach ($oldMap->oldMapDocuments as $oldMapDocument)
                 <div class="col-md-4 mb-3">
