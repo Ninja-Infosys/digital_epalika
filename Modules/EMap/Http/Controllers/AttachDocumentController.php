@@ -243,6 +243,7 @@ class AttachDocumentController extends Controller
                 Notification::send($form->group->users, new PaymentStoreNotification($mapApply, $form, $formDataType, $paymentStore));
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
+
         }
         return redirect(route('organization.admin.formDetail', [$mapApply, $form]));
     }
@@ -268,6 +269,7 @@ class AttachDocumentController extends Controller
                 'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'structure_analysis_report' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             ]);
         } else {
             $data = $request->validate([
@@ -280,6 +282,7 @@ class AttachDocumentController extends Controller
                 'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'analysis_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
+                'structure_analysis_report' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
             ]);
         }
 
@@ -313,6 +316,9 @@ class AttachDocumentController extends Controller
 
         if ($request->hasFile('inheritance_document') && !empty($mapApply->attachDocument->inheritance_document)) {
             $this->deleteFile($mapApply->attachDocument->getRawOriginal('inheritance_document'));
+        }
+        if ($request->hasFile('structure_analysis_report') && !empty($mapApply->attachDocument->structure_analysis_report)) {
+            $this->deleteFile($mapApply->attachDocument->getRawOriginal('structure_analysis_report'));
         }
         AttachDocument::updateOrCreate([
             'map_apply_id' => $mapApply->id

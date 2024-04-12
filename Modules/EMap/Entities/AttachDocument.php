@@ -33,6 +33,7 @@ class AttachDocument extends Model
         'permission_document',
         'inheritance_document',
         'analysis_document',
+        'structure_analysis_report',
         'land_owner_document_status',
         'land_revenue_document_status',
         'land_owner_citizenship_status',
@@ -42,6 +43,7 @@ class AttachDocument extends Model
         'permission_document_status',
         'inheritance_document_status',
         'analysis_document_status',
+        'structure_analysis_report_status',
     ];
 
     public function mapApply(): BelongsTo
@@ -55,6 +57,13 @@ class AttachDocument extends Model
         return Attribute::make(
             get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
             set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('attachDocument', 'public') : null,
+        );
+    }
+    protected function structureAnalysisReport(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('structureAnalysisReport', 'public') : null,
         );
     }
 
@@ -126,6 +135,14 @@ class AttachDocument extends Model
     {
         if (!empty($this->attributes['land_owner_document'])) {
             return Storage::disk('public')->size($this->attributes['land_owner_document']);
+        } else {
+            return '';
+        }
+    }
+    public function getStructureAnalysisReportSizeAttribute(): string
+    {
+        if (!empty($this->attributes['structure_analysis_report'])) {
+            return Storage::disk('public')->size($this->attributes['structure_analysis_report']);
         } else {
             return '';
         }
