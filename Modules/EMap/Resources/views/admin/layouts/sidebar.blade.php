@@ -37,7 +37,7 @@
                             @can('mapApply_access')
                                 <li>
                                     <a href="{{ route('emap.admin.map.mapApply.index', [\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION,'all']) }}">
-                                        <span>सबै </span>
+                                        <span>दर्ता नक्साहरु </span>
                                     </a>
                                 </li>
                                 @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatusEnum)
@@ -52,7 +52,7 @@
                     </div>
                 </li>
             @endcan
-            
+
             @can('mapApply_access')
                 <li>
                     <a href="#sidebarMaptype2" data-bs-toggle="collapse">
@@ -66,7 +66,7 @@
                             @can('mapApply_access')
                                 <li>
                                     <a href="{{ route('emap.admin.map.mapApply.index', [\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED,'all']) }}">
-                                        <span>सबै </span>
+                                        <span> प्रमाणित नक्साहरु </span>
                                     </a>
                                 </li>
                                 @foreach (\Modules\EMap\Enums\MapStatusEnum::cases() as $mapStatusEnum)
@@ -166,7 +166,7 @@
             @endcan
             @can('necessaryDocument_access')
             <li class="{{ request()->is('admin/emap/setting/necessaryDocument*') ? 'active' : '' }}">
-              
+
                 <a href="{{ route('emap.admin.necessaryDocument.index') }}">
                     <span>आवश्यक कागजातहरू </span>
                 </a>
@@ -174,13 +174,13 @@
             @endcan
             @can('registrationDocument_access')
             <li class="{{ request()->is('admin/emap/setting/registrationDocument*') ? 'active' : '' }}">
-              
+
                 <a href="{{ route('emap.admin.registrationDocument.index') }}">
                     <span>दरखस्त कागजातहरू </span>
                 </a>
             </li>
             @endcan
-            
+
         </ul>
     </div>
 </li>

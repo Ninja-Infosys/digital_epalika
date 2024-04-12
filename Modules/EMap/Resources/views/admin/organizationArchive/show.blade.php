@@ -18,7 +18,7 @@
                             </a>
 
                         </li>
-                        <li class="breadcrumb-item active">संगठनको विवरण</li>
+                        <li class="breadcrumb-item active">संगठनको विवरण </li>
                     </ol>
                 </div>
             </div>
