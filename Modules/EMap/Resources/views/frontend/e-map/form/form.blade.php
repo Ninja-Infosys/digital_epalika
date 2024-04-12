@@ -26,7 +26,7 @@
         </div>
         <div class="container">
             <div class="row d-flex mt-5 ">
-                <h4 class="fw-semibold text-left">नक्सा दरखास्त फारम</h4>
+                <h4 class="fw-semibold text-left">नक्सा दरखास्त फारम </h4>
                 <div class="row justify-content-center">
                     <div class="p-4">
                         <map-application></map-application>

@@ -165,10 +165,10 @@
                                 <tr>
                                     <th>क्र.स</th>
                                     <th>जग्गा धनीको नाम</th>
+                                    <th>नागरिकता नम्बर</th>
                                     <th>फोन नं.</th>
                                     <th>बुवाको नाम</th>
                                     <th>हजुरबुबाको नाम</th>
-                                    <th>नागरिकता नम्बर</th>
 
                                 </tr>
                                 </thead>
@@ -176,10 +176,10 @@
                                 <tr>
                                     <td>1</td>
                                     <td>{{ $mapApply->houseOwner->name??'' }}</td>
+                                    <td>{{ $mapApply->houseOwner->citizenship_no ??''}}</td>
                                     <td>{{ $mapApply->houseOwner->phone??'' }}</td>
                                     <td>{{ $mapApply->houseOwner->father_name??''}}</td>
                                     <td>{{ $mapApply->houseOwner->grandfather_name ??''}}</td>
-                                    <td>{{ $mapApply->houseOwner->citizenship_no ??''}}</td>
 
                                 </tr>
                                 </tbody>

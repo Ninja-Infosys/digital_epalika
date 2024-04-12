@@ -240,24 +240,6 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <VInput
-                        id="landowner-father-name"
-                        v-model="form.landOwner.father_name"
-                        label="बुवाको नाम"
-                        @validate="validateField('landOwner.father_name')"
-                        :error="errors['landOwner.father_name']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        id="landowner-grandfather-name"
-                        v-model="form.landOwner.grandfather_name"
-                        label="हजुरबुबाको नाम"
-                        @validate="validateField('landOwner.grandfather_name')"
-                        :error="errors['landOwner.grandfather_name']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
                         id="landowner-citizenship_no"
                         v-model="form.landOwner.citizenship_no"
                         label="नागरिकता नम्बर"
@@ -293,6 +275,25 @@
                         "
                     />
                 </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        id="landowner-father-name"
+                        v-model="form.landOwner.father_name"
+                        label="बुवाको नाम"
+                        @validate="validateField('landOwner.father_name')"
+                        :error="errors['landOwner.father_name']"
+                    />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        id="landowner-grandfather-name"
+                        v-model="form.landOwner.grandfather_name"
+                        label="हजुरबुबाको नाम"
+                        @validate="validateField('landOwner.grandfather_name')"
+                        :error="errors['landOwner.grandfather_name']"
+                    />
+                </div>
+
                 <div class="col-md-4 mb-3">
                     <VFileUpload
                         id="landowner-photo"
@@ -420,26 +421,6 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <VInput
-                        id="houseOwner-father_name"
-                        v-model="form.houseOwner.father_name"
-                        label="बुवाको नाम"
-                        :disabled="house_owner_as_land_owner"
-                        @validate="validateField('houseOwner.father_name')"
-                        :error="errors['houseOwner.father_name']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
-                        id="houseOwner-grandfather_name"
-                        v-model="form.houseOwner.grandfather_name"
-                        label="हजुरबुबाको नाम"
-                        :disabled="house_owner_as_land_owner"
-                        @validate="validateField('houseOwner.grandfather_name')"
-                        :error="errors['houseOwner.grandfather_name']"
-                    />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <VInput
                         id="houseOwner-citizenship_no"
                         v-model="form.houseOwner.citizenship_no"
                         label="नागरिकता नम्बर"
@@ -478,6 +459,27 @@
                         "
                     />
                 </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        id="houseOwner-father_name"
+                        v-model="form.houseOwner.father_name"
+                        label="बुवाको नाम"
+                        :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.father_name')"
+                        :error="errors['houseOwner.father_name']"
+                    />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <VInput
+                        id="houseOwner-grandfather_name"
+                        v-model="form.houseOwner.grandfather_name"
+                        label="हजुरबुबाको नाम"
+                        :disabled="house_owner_as_land_owner"
+                        @validate="validateField('houseOwner.grandfather_name')"
+                        :error="errors['houseOwner.grandfather_name']"
+                    />
+                </div>
+
                 <div class="col-md-4 mb-3">
                     <VFileUpload
                         id="houseowner-photo"

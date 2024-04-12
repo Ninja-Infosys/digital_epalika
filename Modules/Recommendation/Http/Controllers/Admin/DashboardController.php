@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->registrationDetail = RegistrationDetail::get();
+        $this->registrationDetail = RegistrationDetail::get();
     }
 
     public function index()

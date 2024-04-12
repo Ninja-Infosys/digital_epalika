@@ -17,10 +17,10 @@ enum MapStatusEnum: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
-            self::ACCEPT => 'स्वीकार',
-            self::REJECT => 'अस्वीकार',
-            self::COMPLETE => 'सम्पन्न',
-            self::UNSEEN => 'प्रक्रियामा',
+            self::ACCEPT => 'स्वीकृत नक्सा',
+            self::REJECT => 'अस्वीकृत नक्सा',
+            self::COMPLETE => 'कार्य सम्पन्न भएका',
+            self::UNSEEN => 'प्रक्रियामा रहेका',
         };
     }
 
