@@ -189,7 +189,7 @@ class OldMapLivewire extends Component
                 // 'tole' => $this->houseOwner['tole'],
             ]);
             foreach ($this->oldMap['oldMapDocuments'] as $oldMapDocument) {
-                $this->oldMapUpdate->oldMapDocuments()->update([
+                $this->oldMapUpdate->oldMapDocuments()->create([
                     'document_name' => $oldMapDocument['document_name'],
                     'document' => $oldMapDocument['document']
                 ]);
