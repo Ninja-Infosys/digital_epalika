@@ -136,19 +136,19 @@
                         </div>
                     @endif
 
-                    @if (Route::has('recommendation.index'))
-                        <div class="col-md-3">
-                            <div class="info-card module-card">
-                                <a href="#">
-                                    <div class="pt-4 text-center">
-                                        <img src="{{ asset('assets/frontend/image/new-icons/chat.png') }}" width="35"
-                                            height="35">
-                                        <h6 class="p-2 text-dark">सिफारिस</h6>
-                                    </div>
-                                </a>
-                            </div>
+                    @if (Route::has('recommendationrecommendation.index'))
+                    <div class="col-md-3">
+                        <div class="info-card module-card">
+                            <a href="{{ route('recommendationrecommendation.index') }}">
+                                <div class="pt-4 text-center">
+                                    <img src="{{ asset('assets/frontend/image/new-icons/chat.png') }}" width="35"
+                                        height="35">
+                                    <h6 class="p-2 text-dark">सिफारिस</h6>
+                                </div>
+                            </a>
                         </div>
-                    @endif
+                    </div>
+                @endif
                     @if (Route::has('businessRegistration.business'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
@@ -261,7 +261,7 @@
                             </div>
                         </div>
                     @endif
-                    {{-- @if (Route::has('recommendation.index')) --}}
+                    @if (Route::has('recommendationrecommendation.index'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
                                 <a href="{{ route('recommendationrecommendation.index') }}">
@@ -273,7 +273,7 @@
                                 </a>
                             </div>
                         </div>
-                    {{-- @endif --}}
+                    @endif
                     @if (Route::has('businessRegistration.business'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
