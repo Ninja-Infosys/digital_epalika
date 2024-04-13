@@ -14,9 +14,13 @@
                     class="ms-2">{{ Auth::guard('mobile-user')->user()->phone }}</span></h5>
         </div>
         <div class="row">
+            {{-- <div class="col-md-6">
+                <a class="btn btn-primary mt-4 d-block w-100 py-2" href="{{ route('mobileUser.editProfile',$mobileUser) }}"> प्रोफाइल अपडेट</a>
+            </div> --}}
             <div class="col-md-6">
-                <a class="btn btn-primary mt-4 d-block w-100 py-2" href="{{ route('mobileUser.editProfile') }}"> प्रोफाइल अपडेट</a>
+                <a class="btn btn-primary mt-4 d-block w-100 py-2" href="{{ route('mobileUser.editProfile', auth()->guard('mobile-user')->user()->id) }}"> प्रोफाइल अपडेट</a>
             </div>
+
             <div class="col-md-6">
                 <a class="btn btn-primary mt-4 d-block w-100 py-2" href="{{ route('mobileUser.editPassword') }}"> पासवर्ड अपडेट</a>
             </div>

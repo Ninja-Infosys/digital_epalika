@@ -32,38 +32,85 @@
 
                                     <div class="card-body px-2">
                                         @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                        <form action="{{ route('mobileUser.mobileUserDetail.store') }}" method="post" enctype="multipart/form-data">
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        <form action="{{ route('mobileUser.mobileUserDetail.store', $mobileUser) }}"
+                                            method="post" enctype="multipart/form-data">
                                             @csrf
                                             <fieldset>
                                                 <legend>
                                                     <h4 class="text-info">व्यक्तिगत विवरण</h4>
                                                 </legend>
-                                                <div class="col-md-4 mb-2">
-                                                    <input type="hidden" name="mobile_user_id"
-                                                        value="{{ Auth::guard('mobile-user')->user()->id }}"
-                                                        class="form-control @error('mobile_user_id') is-invalid @enderror"
-                                                        id="mobile_user_id" />
 
-
-                                                </div>
                                                 <div class="row">
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="name" class="form-label">सेवाग्रहिको नाम
+                                                            *</label>
+                                                        <input type="text" name="name"
+                                                            value="{{ old('name', $mobileUser->name??'') }}"
+                                                            class="form-control @error('name') is-invalid @enderror"
+                                                            id="name" placeholder="सेवाग्रहिको नाम"  />
+                                                        @error('name')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="email" class="form-label">सेवाग्राहिको इमेल
+                                                            *</label>
+                                                        <input type="text" name="email"
+                                                            value="{{ old('email', $mobileUser->email??'') }}"
+                                                            class="form-control @error('email') is-invalid @enderror"
+                                                            id="email" placeholder="सेवाग्राहिको इमेल"
+                                                             />
+                                                        @error('email')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="phone" class="form-label">सेवाग्रहिको सम्पर्क नं.
+                                                            *</label>
+                                                        <input type="text" name="phone"
+                                                            value="{{ old('phone', $mobileUser->phone??'') }}"
+                                                            class="form-control @error('phone') is-invalid @enderror"
+                                                            id="phone" placeholder="सेवाग्रहिको नाम"  />
+                                                        @error('phone')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="avatar" class="form-label">सेवाग्राहिको फोटो
+                                                            *</label>
+                                                        <input type="file" name="avatar"
+                                                            value="{{ old('avatar', $mobileUser->avatar??'') }}"
+                                                            class="form-control @error('avatar') is-invalid @enderror"
+                                                            id="avatar" placeholder="सेवाग्राहिको इमेल"
+                                                            />
+                                                            @if ($mobileUser->avatar??'')
+                                                            <div class="col-md-3">
 
+                                                                <img src="{{ $mobileUser->avatar }}"
+                                                                    style="height:200px; width:300px;"
+                                                                    alt="सेवाग्राहिको फोटो">
+                                                            </div>
+                                                        @endif
+                                                        @error('avatar')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
                                                     <div class="col-md-4 mb-2">
                                                         <label for="citizenship_no" class="form-label">नागरिकता नं.
                                                             *</label>
                                                         <input type="text" name="citizenship_no"
-                                                            value="{{ old('citizenship_no') }}"
+                                                            value="{{ old('citizenship_no', $mobileUser->mobileUserDetail?->citizenship_no??'') }}"
                                                             class="form-control @error('citizenship_no') is-invalid @enderror"
-                                                            id="citizenship_no" placeholder="नागरिकता नं." required />
+                                                            id="citizenship_no" placeholder="नागरिकता नं."  />
                                                         @error('citizenship_no')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -71,10 +118,11 @@
                                                     <div class="col-md-4 mb-2">
                                                         <label for="nec_no" class="form-label">राष्ट्रिय परिचय पत्र नं.
                                                             *</label>
-                                                        <input type="text" name="nec_no" value="{{ old('nec_no') }}"
+                                                        <input type="text" name="nec_no"
+                                                            value="{{ old('nec_no', $mobileUser->mobileUserDetail?->nec_no??'') }}"
                                                             class="form-control @error('nec_no') is-invalid @enderror"
                                                             id="nec_no" placeholder="राष्ट्रिय परिचय पत्र नं."
-                                                            required />
+                                                             />
                                                         @error('nec_no')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -84,6 +132,7 @@
                                                             मिति *</label>
                                                         <div class="input-group">
                                                             <input name="citizenship_issued_date"
+                                                                value="{{ old('citizenship_issued_date', $mobileUser->mobileUserDetail?->citizenship_issued_date??'') }}"
                                                                 class="form-control @error('citizenship_issued_date') is-invalid @enderror"
                                                                 type="date" id="citizenship_issued_date"
                                                                 placeholder="जारि मिति">
@@ -97,35 +146,58 @@
                                                             जारी
                                                             जिल्ला *
 
-                                                        <div class="input-group">
-                                                            <select name="citizenship_issued_district"
-                                                                class="form-select @error('citizenship_issued_district') is-invalid @enderror"
-                                                                id="citizenship_issued_district">
-                                                                <option>---जिल्ला छान्नुहोस् ----</option>
-                                                                @foreach (get_districts() as $district)
-                                                                    <option value="{{ $district->id }}">
-                                                                        {{ $district->district }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('citizenship_issued_district')
-                                                                <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
+                                                            <div class="input-group">
+                                                                <select name="citizenship_issued_district"
+                                                                    class="form-select @error('citizenship_issued_district') is-invalid @enderror"
+                                                                    id="citizenship_issued_district">
+                                                                    <option>---जिल्ला छान्नुहोस् ----</option>
+                                                                    @foreach (get_districts() as $district)
+                                                                        <option value="{{ $district->id }}"
+                                                                            {{ old('citizenship_issued_district') == $district->id ? 'selected' : '' }}>
+                                                                            {{ $district->district }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('citizenship_issued_district')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+
                                                     </div>
                                                     <div class="col-md-4 mb-2">
-                                                        <label for="citizenship_front" class="form-label">नागरिकताको फोटो (अगाडी) *</label>
-                                                        <input type="file" name="citizenship_front" value="{{ old('citizenship_front') }}"
+                                                        <label for="citizenship_front" class="form-label">नागरिकताको फोटो
+                                                            (अगाडी) *</label>
+                                                        <input type="file" name="citizenship_front"
+                                                            value="{{ old('citizenship_front') }}"
                                                             class="form-control @error('citizenship_front') is-invalid @enderror"
-                                                            id="citizenship_front" required />
+                                                            id="citizenship_front"  />
+                                                        @if ($mobileUser->mobileUserDetail->citizenship_front??'')
+                                                            <div class="col-md-3">
+
+                                                                <img src="{{ $mobileUser->mobileUserDetail->citizenship_front }}"
+                                                                    style="height:200px; width:300px;"
+                                                                    alt="citizenship-front">
+                                                            </div>
+                                                        @endif
                                                         @error('citizenship_front')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-4 mb-2">
-                                                        <label for="citizenship_back" class="form-label">नागरिकताको फोटो (पछाडी)*</label>
-                                                        <input type="file" name="citizenship_back" value="{{ old('citizenship_back') }}"
+                                                        <label for="citizenship_back" class="form-label">नागरिकताको फोटो
+                                                            (पछाडी)*</label>
+                                                        <input type="file" name="citizenship_back"
+                                                            value="{{ old('citizenship_back') }}"
                                                             class="form-control @error('citizenship_back') is-invalid @enderror"
-                                                            id="citizenship_back" required />
+                                                            id="citizenship_back"  />
+                                                        @if ($mobileUser->mobileUserDetail->citizenship_back??'')
+                                                            <div class="col-md-3">
+
+                                                                <img src="{{ $mobileUser->mobileUserDetail->citizenship_back }}"
+                                                                    style="height:200px; width:300px;"
+                                                                    alt="citizenship-back">
+                                                            </div>
+                                                        @endif
                                                         @error('citizenship_back')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -140,18 +212,18 @@
                                                     नं., गाउँ र टोल छनौट
                                                     गर्नुहोस् । </h6>
                                                 @livewire('address', [
-                                                    'province_id' => old('province_id'),
-                                                    'district_id' => old('district_id'),
-                                                    'local_body_id' => old('local_body_id'),
-                                                    'ward_no' => old('ward_no'),
+                                                    'province_id' => old('province_id', $mobileUser->mobileUserDetail?->province_id??''),
+                                                    'district_id' => old('district_id', $mobileUser->mobileUserDetail?->district_id??''),
+                                                    'local_body_id' => old('local_body_id', $mobileUser->mobileUserDetail?->local_body_id??''),
+                                                    'ward_no' => old('ward_no', $mobileUser->mobileUserDetail?->ward_no??''),
                                                 ])
                                                 <div class="col-md-6 mb-2">
                                                     <label for="tole" class="form-label">
                                                         टोल</label>
                                                     <input type="text" name="tole"
-                                                        value="{{ old('tole') }}"
+                                                        value="{{ old('tole', $mobileUser->mobileUserDetail?->tole??'') }}"
                                                         class="form-control @error('tole') is-invalid @enderror"
-                                                        id="tole" placeholder="टोल" required />
+                                                        id="tole" placeholder="टोल"  />
                                                     @error('tole')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -165,18 +237,18 @@
                                                     नं., गाउँ र टोल छनौट
                                                     गर्नुहोस् । </h6>
                                                 @livewire('mobile-user-address', [
-                                                    'temporary_province_id' => old('temporary_province_id'),
-                                                    'temporary_district_id' => old('temporary_district_id'),
-                                                    'temporary_local_body_id' => old('temporary_local_body_id'),
-                                                    'temporary_ward' => old('temporary_ward'),
+                                                    'temporary_province_id' => old('temporary_province_id', $mobileUser->mobileUserDetail?->temporary_province_id??''),
+                                                    'temporary_district_id' => old('temporary_district_id', $mobileUser->mobileUserDetail?->temporary_district_id??''),
+                                                    'temporary_local_body_id' => old('temporary_local_body_id', $mobileUser->mobileUserDetail?->temporary_local_body_id??''),
+                                                    'temporary_ward' => old('temporary_ward', $mobileUser->mobileUserDetail?->temporary_ward??''),
                                                 ])
                                                 <div class="col-md-6 mb-2">
                                                     <label for="temporary_tole" class="form-label">
                                                         टोल</label>
                                                     <input type="text" name="temporary_tole"
-                                                        value="{{ old('temporary_tole') }}"
+                                                        value="{{ old('temporary_tole', $mobileUser->mobileUserDetail?->temporary_tole??'') }}"
                                                         class="form-control @error('temporary_tole') is-invalid @enderror"
-                                                        id="temporary_tole" placeholder="टोल" required />
+                                                        id="temporary_tole" placeholder="टोल"  />
                                                     @error('temporary_tole')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror

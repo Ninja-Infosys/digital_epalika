@@ -21,7 +21,7 @@
 .card-header-login:hover{
     background-color: #03A9F4;
     transition: 1s ease-in;
-    
+
 }
 
 .login-btn{
@@ -37,7 +37,7 @@
 }
 .form-control{
     background-color: transparent !important;
-    color:#fff !important;
+    /* color:#fff !important; */
 }
 .input-group {
     position: relative;
