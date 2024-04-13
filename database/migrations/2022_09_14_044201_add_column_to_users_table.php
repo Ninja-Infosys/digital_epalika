@@ -12,7 +12,7 @@ return new class () extends Migration {
             $table->foreignId('user_id')->after('id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('role_id')->after('phone')->constrained();
             $table->boolean('is_active')->default(1)->after('role_id');
-            $table->integer('ward_no')->nullable()->after('is_active');
+            $table->string('ward_no')->nullable()->after('is_active');
             $table->softDeletes();
         });
     }

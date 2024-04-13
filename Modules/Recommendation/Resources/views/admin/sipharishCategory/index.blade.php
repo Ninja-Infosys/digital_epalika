@@ -67,6 +67,7 @@
                                         </td>
                                         <td class="d-flex gap-1">
 
+
                                             {{--                                        TODO: need to change ddd in route and manage route --}}
                                             <a class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', ['ddd', $recommendationCategory]) }}"

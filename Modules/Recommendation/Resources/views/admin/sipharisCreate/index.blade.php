@@ -20,10 +20,10 @@
     <div class="row">
         <div class="col-md-12">
             @error('oc_file')
-            <div class="alert alert-danger">{{$message}}</div>
+                <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             @error('oc_file.*')
-            <div class="alert alert-danger">{{$message}}</div>
+                <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
     </div>
@@ -42,21 +42,20 @@
                         <h4 class="header-title mb-0">सिफारिस सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             <form action="" method="get" class="me-2">
-                                <input class="form-control form-control-sm filter-form" name="search" type="search" placeholder="Search" autocomplete="off"
-                                       value="{{old('search',\request('search'))}}">
+                                <input class="form-control form-control-sm filter-form" name="search" type="search"
+                                    placeholder="Search" autocomplete="off" value="{{ old('search', \request('search')) }}">
                             </form>
 
 
                             @can('recommendation_create')
                                 <a href="{{ route('admin.recommendation.sipharish.sipharishCreate.create') }}"
-                                   class="btn btn-sm btn-outline-primary">
+                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                                 </a>
                             @endcan
                             <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                    aria-controls="collapseExample">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
+                                aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                         </div>
@@ -68,11 +67,11 @@
                         <ul class="nav nav-pills mb-3 nav-bordered nav-justified" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link  active" id="pending-tab-btn" data-bs-toggle="pill" href="#pending-tab"
-                                   role="tab" aria-controls="pending-tab" aria-selected="false">Pending</a>
+                                    role="tab" aria-controls="pending-tab" aria-selected="false">Pending</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="approved-tab-btn" data-bs-toggle="pill"
-                                   href="#approved-tab" role="tab" aria-controls="approved-tab" aria-selected="true">Approved</a>
+                                <a class="nav-link" id="approved-tab-btn" data-bs-toggle="pill" href="#approved-tab"
+                                    role="tab" aria-controls="approved-tab" aria-selected="true">Approved</a>
                             </li>
 
                         </ul>
@@ -82,46 +81,50 @@
                         <div class="tab-pane" id="approved-tab" role="tabpanel">
                             <table class="table table-sm table-striped table-bordered">
                                 <thead>
-                                <tr>
-                                    <th>क्र.स</th>
-                                    <th>सेवाग्राहीको नाम</th>
-                                    <th>सिफारिस नाम</th>
-                                    <th>सिफारिस स्वीकृति</th>
-                                    <th>स्थिति</th>
-                                    <th>#</th>
-                                </tr>
+                                    <tr>
+                                        <th>क्र.स</th>
+                                        <th>सेवाग्राहीको नाम</th>
+                                        <th>सिफारिस नाम</th>
+                                        <th>सिफारिस स्वीकृति</th>
+                                        <th>स्थिति</th>
+                                        <th>#</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($sipharishCreates->where("approved_status",'approved') as $sipharish)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>   @if($sipharish->personalDetail)
-                                                {{ $sipharish->personalDetail->name ?? '' }}
-                                            @elseif($sipharish->mobileUser)
-                                                {{ $sipharish->mobileUser->name ?? '' }}
-                                            @endif</td>
-                                        <td>{{ $sipharish->SipharishFormType?->title ?? '' }}</td>
-                                        <td>{{ $sipharish->approved_status ?? '' }}</td>
+                                    @forelse ($sipharishCreates->where("approved_status",'approved') as $sipharish)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if ($sipharish->personalDetail)
+                                                    {{ $sipharish->personalDetail->name ?? '' }}
+                                                @elseif($sipharish->mobileUser)
+                                                    {{ $sipharish->mobileUser->name ?? '' }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $sipharish->SipharishFormType?->title ?? '' }}</td>
+                                            <td>{{ $sipharish->approved_status ?? '' }}</td>
 
-                                        <td>
-                                            @can('recommendationCategory_access')
-                                                <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
-                                                   href="{{route('admin.recommendation.sipharish.sipharishCreate.updateStatus',$sipharish)}}">
-                                                    <i class="fa fa-2x {{ $sipharish->status ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                                </a>
-                                            @endcan
+                                            <td class="d-flex gap-1">
 
-                                        </td>
-                                        <td>
-                                            @can('recommendationCategory_access')
-                                                <a data-bs-type="edit"
-                                                   href="{{ route('admin.recommendation.sipharish.sipharishCreate.show', $sipharish->id) }}"
-                                                   class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                                   title="विवरण हेर्नुहोस">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            @endcan
-                                            {{-- @can('recommendation_edit')
+                                                @can('recommendationCategory_access')
+                                                    <a data-bs-type="edit" class="{{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                        href="{{ route('admin.recommendation.sipharish.sipharishCreate.updateStatus', $sipharish) }}">
+                                                        <i
+                                                            class="fa fa-2x {{ $sipharish->status ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
+                                                    </a>
+                                                @endcan
+
+                                            </td>
+                                            <td>
+                                                @can('recommendationCategory_access')
+                                                    <a data-bs-type="edit"
+                                                        href="{{ route('admin.recommendation.sipharish.sipharishCreate.show', $sipharish->id) }}"
+                                                        class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                        title="विवरण हेर्नुहोस">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @endcan
+                                                {{-- @can('recommendation_edit')
                                                  <a data-bs-type="edit"
                                                     href="{{ route('admin.recommendation.sipharish.sipharishCreate.edit',  $sipharish) }}"
                                                     class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
@@ -141,14 +144,14 @@
                                                          <i class="fa fa-trash"></i>
                                                      </button>
                                                  </form>
-                                             @endcan--}}
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                    </tr>
-                                @endforelse
+                                             @endcan --}}
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -157,46 +160,49 @@
                         <div class="tab-pane  active show" id="pending-tab" role="tabpanel">
                             <table class="table table-sm table-striped table-bordered">
                                 <thead>
-                                <tr>
-                                    <th>क्र.स</th>
-                                    <th>सेवाग्राहीको नाम</th>
-                                    <th>सिफारिस नाम</th>
-                                    <th>सिफारिस स्वीकृति</th>
-                                    <th>स्थिति</th>
-                                    <th>#</th>
-                                </tr>
+                                    <tr>
+                                        <th>क्र.स</th>
+                                        <th>सेवाग्राहीको नाम</th>
+                                        <th>सिफारिस नाम</th>
+                                        <th>सिफारिस स्वीकृति</th>
+                                        <th>स्थिति</th>
+                                        <th>#</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($sipharishCreates->where("approved_status",'pending') as $sipharish)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>   @if($sipharish->personalDetail)
-                                                {{ $sipharish->personalDetail->name ?? '' }}
-                                            @elseif($sipharish->mobileUser)
-                                                {{ $sipharish->mobileUser->name ?? '' }}
-                                            @endif</td>
-                                        <td>{{ $sipharish->SipharishFormType?->title ?? '' }}</td>
-                                        <td>{{ $sipharish->approved_status ?? '' }}</td>
+                                    @forelse ($sipharishCreates->where("approved_status",'pending') as $sipharish)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if ($sipharish->personalDetail)
+                                                    {{ $sipharish->personalDetail->name ?? '' }}
+                                                @elseif($sipharish->mobileUser)
+                                                    {{ $sipharish->mobileUser->name ?? '' }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $sipharish->SipharishFormType?->title ?? '' }}</td>
+                                            <td>{{ $sipharish->approved_status ?? '' }}</td>
 
-                                        <td>
-                                            @can('recommendationCategory_access')
-                                                <a data-bs-type="edit" class="{{get_setting('Pin')?'confirm_pin':''}}"
-                                                   href="{{route('admin.recommendation.sipharish.sipharishCreate.updateStatus',$sipharish)}}">
-                                                    <i class="fa fa-2x {{ $sipharish->status ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
-                                                </a>
-                                            @endcan
+                                            <td>
+                                                @can('recommendationCategory_access')
+                                                    <a data-bs-type="edit" class="{{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                        href="{{ route('admin.recommendation.sipharish.sipharishCreate.updateStatus', $sipharish) }}">
+                                                        <i
+                                                            class="fa fa-2x {{ $sipharish->status ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
+                                                    </a>
+                                                @endcan
 
-                                        </td>
-                                        <td>
-                                            @can('recommendationCategory_access')
-                                                <a data-bs-type="edit"
-                                                   href="{{ route('admin.recommendation.sipharish.sipharishCreate.show', $sipharish->id) }}"
-                                                   class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}"
-                                                   title="विवरण हेर्नुहोस">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            @endcan
-                                            {{-- @can('recommendation_edit')
+                                            </td>
+                                            <td>
+                                                @can('recommendationCategory_access')
+                                                    <a data-bs-type="edit"
+                                                        href="{{ route('admin.recommendation.sipharish.sipharishCreate.show', $sipharish->id) }}"
+                                                        class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                        title="विवरण हेर्नुहोस">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @endcan
+                                                {{-- @can('recommendation_edit')
                                                  <a data-bs-type="edit"
                                                     href="{{ route('admin.recommendation.sipharish.sipharishCreate.edit',  $sipharish) }}"
                                                     class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
@@ -216,18 +222,18 @@
                                                          <i class="fa fa-trash"></i>
                                                      </button>
                                                  </form>
-                                             @endcan--}}
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                    </tr>
-                                @endforelse
+                                             @endcan --}}
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-@endsection
+        @endsection

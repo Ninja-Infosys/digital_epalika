@@ -114,13 +114,9 @@ class User extends Authenticatable
     }
 
 
-    public function getSignaturePhotoPathUrlAttribute(): string
-    {
-        return $this->attributes['signature_photo_path'];
-    }
     public function getSignaturePhotoUrlAttribute(): string
     {
-        return $this->attributes['profile_photo_path']
+        return $this->attributes['signature_photo_path']
 
             ? Storage::disk('public')->url($this->attributes['signature_photo_path'])
             : '' ;
@@ -198,12 +194,12 @@ class User extends Authenticatable
 
     public function approverSifarisPassGroups()
     {
-        return $this->hasMany(SipharisSetting::class, 'approver_id'); 
+        return $this->hasMany(SipharisSetting::class, 'approver_id');
     }
     public function checkerSifarisPassGroups()
     {
-        return $this->hasMany(SipharisSetting::class, 'checker_id'); 
+        return $this->hasMany(SipharisSetting::class, 'checker_id');
     }
-    
+
 
 }
