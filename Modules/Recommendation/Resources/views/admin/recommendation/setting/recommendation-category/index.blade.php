@@ -56,7 +56,8 @@
                                                 class="fa fa-2x {{ $recommendationCategory->is_active ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="d-flex gap-1">
+
 
                                         @can('recommendationCategory_edit')
                                              <a data-bs-type="edit"

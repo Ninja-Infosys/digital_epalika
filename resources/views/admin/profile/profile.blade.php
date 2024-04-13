@@ -44,9 +44,9 @@
                                 </span>
                             </p>
                             <p class="text-muted mb-1 font-13"><strong>सहि :</strong>
-                                <span class="ms-2">  <img src="{{auth()->user()->signature_photo_path_url}}"
+                                <span class="ms-2">  <img src="{{auth()->user()->signature_photo_url}}"
                                 class=""
-                                alt="profile-image" style="width:100px; height:100px" > </span>
+                                alt="signature-image" style="width:100px; height:100px" > </span>
                             </p>
                         </div>
                     </div>

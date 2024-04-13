@@ -70,7 +70,7 @@
                                                     class="fa fa-2x {{ $signatureDetail->status == 'active' ? 'fa-toggle-on ' : ' fa-toggle-off' }}"></i>
                                             </a>
                                         </td>
-                                        <td class="d-flex gap-1">
+                                        {{-- <td class="d-flex gap-1">
                                             @can('recommendationCategory_edit')
                                                 <a data-bs-type="edit"
                                                     href="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.edit', $signatureDetail) }}"
@@ -101,8 +101,33 @@
                                                         </svg>
                                                     </button>
                                                 </form>
-                                            </td>
-                                        @endcan
+                                            @endcan
+                                        </td> --}}
+                                        <td class="d-flex gap-1">
+                                            @can('recommendationCategory_edit')
+
+                                            <a data-bs-type="edit"
+                                                href="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.edit', $signatureDetail) }}"
+                                                class="btn btn-xs btn-outline-success  {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                title="फारम सम्पादन गर्नुहोस">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
+                                            @endcan
+                                            @can('recommendationCategory_delete')
+                                            <form
+                                                action="{{ route('admin.recommendation.sipharish.sipharisSignatureDetail.destroy', $signatureDetail) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                    class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                    title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            @endcan
+
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -23,6 +23,8 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card text-center">
                 <div class="card-body">
+                      <img src="{{ $mobileUser->avatar }}" class="rounded-circle mb-1 avatar-lg img-thumbnail"
+                        alt="profile-image">
                     <h4 class="mt-2 text-black">{{ $mobileUser->name }}</h4>
                     <a href="{{ route('admin.global.mobileUser.update-login-status', $mobileUser) }}"
                         class="btn btn-{{ $mobileUser->is_active == 1 ? 'success' : 'danger' }} btn-xs waves-effect mb-2 waves-light"
@@ -50,4 +52,5 @@
 
 
     </div>
+
 @endsection

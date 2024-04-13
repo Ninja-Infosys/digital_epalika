@@ -47,7 +47,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>  {{$revenueHeader->title}}</td>
                                     <td>{{$revenueHeader->amount?? 0}}</td>
-                                    <td>
+                                    <td class="d-flex gap-1">
+
 
                                              <a data-bs-type="edit"
                                                 href="{{ route('admin.recommendation.setting.revenueHeader.edit',  $revenueHeader) }}"

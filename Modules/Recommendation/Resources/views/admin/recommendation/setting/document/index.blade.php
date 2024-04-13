@@ -25,7 +25,7 @@
                         <h4 class="header-title mb-0">कागजात सूची</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             <a href="{{ route('admin.recommendation.setting.recommendationDocument.create') }}"
-                               class="btn btn-sm btn-outline-primary">
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ कागजात थप्नुहोस
                             </a>
                         </div>
@@ -33,38 +33,37 @@
                 </div>
                 <div class="tab-content">
                     <table class="table table-sm table-striped table-bordered">
-                            <thead>
+                        <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक</th>
                                 <th>#</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             @forelse ($recommendationDocuments as $recommendationDocument)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>  {{$recommendationDocument->title}}</td>
-                                    <td>
+                                    <td> {{ $recommendationDocument->title }}</td>
+                                    <td class="d-flex gap-1">
+                                        <a data-bs-type="edit"
+                                            href="{{ route('admin.recommendation.setting.recommendationDocument.edit', $recommendationDocument) }}"
+                                            class="btn btn-xs btn-outline-success  {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                            title="फारम सम्पादन गर्नुहोस">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
 
-                                             <a data-bs-type="edit"
-                                                href="{{ route('admin.recommendation.setting.recommendationDocument.edit',  $recommendationDocument) }}"
-                                                class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}"
-                                                title="फारम सम्पादन गर्नुहोस">
-                                                 <i class="fa fa-pen"></i>
-                                             </a>
-
-                                             <form
-                                                 action="{{ route('admin.recommendation.setting.recommendationDocument.destroy', $recommendationDocument) }}"
-                                                 method="post">
-                                                 @csrf
-                                                 @method('delete')
-                                                 <button data-bs-type="delete"
-                                                         class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
-                                                         title="मेटाउनु होस्">
-                                                     <i class="fa fa-trash"></i>
-                                                 </button>
-                                             </form>
+                                        <form
+                                            action="{{ route('admin.recommendation.setting.recommendationDocument.destroy', $recommendationDocument) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button data-bs-type="delete"
+                                                class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
 
                                     </td>
                                 </tr>
@@ -73,8 +72,8 @@
                                     <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -138,7 +138,8 @@
                                         <td>{{ $registrationDetail->personalDetail->name ?? '' }}</td>
 
                                         <td>{{ $registrationDetail->date_ne }}</td>
-                                        <td>
+                                        <td class="d-flex gap-1">
+
                                             <a type="button" class="btn btn-xs btn-outline-info" data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">
                                                 <i class="fa fa-file"></i>
