@@ -46,10 +46,7 @@ class FrontendController extends Controller
                 }
             }
             
-            // Process the files data
-            // foreach ($request->validated('files') ?? [] as $file) {
-            //     $recommendationCreate->recommendationFiles()->create($file);
-            // }
+           
     
             return $recommendationCreate;
         });
