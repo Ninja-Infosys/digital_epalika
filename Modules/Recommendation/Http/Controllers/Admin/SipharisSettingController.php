@@ -17,20 +17,18 @@ class SipharisSettingController extends Controller
     {
         $sipharisSetting = SipharisSetting::first();
         $users = User::get();
-        return view('recommendation::admin.setting.sipharisSetting.index',compact('users','sipharisSetting'));
+        return view('recommendation::admin.setting.sipharisSetting.index', compact('users', 'sipharisSetting'));
     }
- 
+
     public function store(StoreSipharisSettingRequest $request)
-{
-    DB::table('sipharis_settings')->truncate();
-    $wardNo = auth()->user()->ward_no ?? ''; 
-    $sipharisSetting = SipharisSetting::create($request->validated() + ['ward' => $wardNo]);
+    {
+        DB::table('sipharis_settings')->truncate();
+        $wardNo = auth()->user()->ward_no ?? '';
+        $sipharisSetting = SipharisSetting::create($request->validated() + ['ward' => $wardNo]);
+        Cache::forget('sipharis_settings');
+        toast('सिफारिस सफलतापूर्वक थपियो', 'success');
+        return back();
 
-    Cache::forget('sipharis_settings');
-    toast('सिफारिस सफलतापूर्वक थपियो', 'success');
-    return back();
-    
-}   
-
+    }
 
 }
