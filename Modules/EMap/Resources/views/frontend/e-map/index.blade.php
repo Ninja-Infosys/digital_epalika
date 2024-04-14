@@ -1,5 +1,6 @@
 @extends('frontend.layouts.master')
 @section('content')
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/loginstyle.css') }}" />
     <section class="inner-section">
         <div class="breadcrumb d-flex pt-2">
             <div class="container">
@@ -144,7 +145,7 @@
                                                                             class="btn btn-xs btn-outline-primary">
                                                                             <i class="fa fa-download"></i>
                                                                         </a>
-                                                                        
+
                                                                     @endforeach
                                                                 </td>
                                                             </tr>
