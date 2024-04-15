@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MobileUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
@@ -17,7 +18,12 @@ class FrontendController extends Controller
 {
     public function recommendation()
     {
-        return view('recommendation::frontend.index');
+        $recommendationCreates =RecommendationCreate::with('recommendationDetail')->latest('updated_at')->paginate(5);
+        $recommendationCount= RecommendationCreate::count();
+        $recommendationCountPending= RecommendationCreate::where('approved_status','pending')->count();
+        $recommendationCountAccept= RecommendationCreate::where('approved_status','approved')->count();
+        $recommendationCountReject= RecommendationCreate::where('approved_status','reject')->count();
+        return view('recommendation::frontend.index',compact('recommendationCount','recommendationCreates','recommendationCountPending','recommendationCountAccept','recommendationCountReject'));
     }
 
     public function sipharishRegister()
@@ -53,6 +59,12 @@ class FrontendController extends Controller
     
         toast('सिफारिस सफलतापूर्वक दर्ता भयो ', 'success');
         return back();
+    }
+    public function sipharishList()
+    {
+        // $recommendationCreates =RecommendationCreate::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        $recommendationCreates =RecommendationCreate::with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->paginate(10);
+        return view('recommendation::frontend.sipharishList',compact('recommendationCreates'));
     }
     
     public function show($id)
