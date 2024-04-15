@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MobileUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
@@ -29,7 +30,7 @@ class FrontendController extends Controller
     {
         $recommendationCreate = DB::transaction(function () use ($request) {
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                'mobile_user_id' => auth()->user()->id,
+                'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
                 'created_by' => auth()->id()
             ]);
 

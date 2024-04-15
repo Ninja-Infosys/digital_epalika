@@ -104,21 +104,21 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail->name ?? ($recommendationCreate->mobileUser->name ?? '') }}
+                                                    {{ $recommendationCreate->personalDetail->name ?? ($recommendationCreate?->mobileUser?->name ?? '') }}
                                                 </td>
 
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail?->gender->label() ?? 
-                                                    ($recommendationCreate->mobileUser->mobileUserDetail->gender->label()  ) }}
+                                                    {{ $recommendationCreate->personalDetail?->gender->label() ??
+                                                    ($recommendationCreate?->mobileUser?->mobileUserDetail?->gender->label()  ) }}
 
                                                 </td>
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail?->phone_no ?? ($recommendationCreate->mobileUser->phone ?? '') }}
+                                                    {{ $recommendationCreate->personalDetail?->phone_no ?? ($recommendationCreate?->mobileUser?->phone ?? '') }}
 
                                                 </td>
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail->province->province ?? ($recommendationCreate->mobileUser?->mobileUserDetail?->province?->province ?? '') }},
-                                                    {{ $recommendationCreate->personalDetail->district->district ?? ($recommendationCreate->mobileUser?->mobileUserDetail?->district?->district ?? '')  }}
+                                                    {{ $recommendationCreate->personalDetail->province->province ?? ($recommendationCreate?->mobileUser?->mobileUserDetail?->province?->province ?? '') }},
+                                                    {{ $recommendationCreate->personalDetail->district->district ?? ($recommendationCreate?->mobileUser?->mobileUserDetail?->district?->district ?? '')  }}
                                                 </td>
                                             </tr>
                                         </tbody>
