@@ -29,11 +29,11 @@ class FrontendController extends Controller
     {
         $recommendationCreate = DB::transaction(function () use ($request) {
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                'personal_detail_id' => auth()->user()->id,
+                'mobile_user_id' => auth()->user()->id,
                 'created_by' => auth()->id()
             ]);
-    
-          
+
+
             if (array_key_exists('fields', $request->validated()) && !empty($request->validated()['fields'])) {
                 foreach ($request->validated()['fields'] as $field) {
                     if (!empty($field['type']) && $field['type'] == 'image') {
@@ -45,16 +45,16 @@ class FrontendController extends Controller
 
                 }
             }
-            
-           
-    
+
+
+
             return $recommendationCreate;
         });
-    
+
         toast('सिफारिस सफलतापूर्वक दर्ता भयो ', 'success');
         return back();
     }
-    
+
     public function show($id)
     {
         return view('recommendation::show');

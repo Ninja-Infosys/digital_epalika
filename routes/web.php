@@ -99,12 +99,14 @@ Route::prefix('mobileUser')->as('mobileUser.')->group(function () {
     Route::get('register', [MobileUserAuthController::class, 'showMobileUserRegisterForm'])->name('register.form');
     Route::post('register', [MobileUserAuthController::class, 'signup'])->name('register.signup');
     Route::get('logout', [MobileUserAuthController::class, 'logout'])->name('logout');
+    // Route::put('updateProfile', [MobileUserAuthController::class, 'updateProfile'])->name('updateProfile');
+    // Route::get('editProfile/{mobileUser}', [MobileUserAuthController::class, 'editProfile'])->name('editProfile');
     Route::put('updateProfile', [MobileUserAuthController::class, 'updateProfile'])->name('updateProfile');
-    Route::get('editProfile', [MobileUserAuthController::class, 'editProfile'])->name('editProfile');
+    Route::get('editProfile/{mobileUser}', [MobileUserAuthController::class, 'editProfile'])->name('editProfile');
+
     Route::get('editPassword', [MobileUserAuthController::class, 'editPassword'])->name('editPassword');
     Route::put('updatePAssword', [MobileUserAuthController::class, 'updatePassword'])->name('updatePassword');
     Route::resource('mobileUserDetail', MobileUserDetailController::class);
-
 });
 
 

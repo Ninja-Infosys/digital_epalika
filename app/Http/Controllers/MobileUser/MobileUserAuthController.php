@@ -73,7 +73,7 @@ class MobileUserAuthController extends Controller
     public function editProfile()
     {
         $mobileUser = Auth::guard('mobile-user')->user();
-        return view('mobileUser.auth.updateProfile', compact('mobileUser'));
+        return view('mobileUser.mobileUserDetail', compact('mobileUser'));
     }
 
     public function editPassword()

@@ -16,6 +16,7 @@ use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Roaster\Entities\Trainee;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Revenue\Entities\TaxPayer;
 
@@ -129,9 +130,9 @@ class MobileUser extends Authenticatable
     }
 
 
-    public function mobileUserDetail(): HasMany
+    public function mobileUserDetail(): HasOne
     {
-        return $this->hasMany(MobileUserDetail::class);
+        return $this->hasOne(MobileUserDetail::class);
     }
     public function RecommendationCreate(): HasMany
     {

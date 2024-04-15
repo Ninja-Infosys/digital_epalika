@@ -31,6 +31,7 @@ class MobileUserController extends Controller
 
     public function show(MobileUser $mobileUser)
     {
+        $mobileUser->load('mobileUserDetail');
         return view('admin.global.mobileUser.show', compact('mobileUser'));
     }
 
