@@ -2,25 +2,31 @@
 
 namespace App\Models;
 
+use App\Enums\Gender;
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+use Modules\Recommendation\Entities\RegistrationDetail;
 
 class MobileUserDetail extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
-    protected $fillable=[
+    protected $fillable = [
         'mobile_user_id',
         'province_id',
         'district_id',
@@ -39,6 +45,14 @@ class MobileUserDetail extends Model
         'citizenship_back',
         'nec_no',
         'nec_certificate',
+        ' reg_no',
+        'is_minor',
+        'gender',
+        'user_id',
+        'birth_registration_no',
+    ];
+    protected $casts = [
+        'gender' => Gender::class
     ];
 
     public function mobileUser(): BelongsTo
@@ -52,7 +66,6 @@ class MobileUserDetail extends Model
                 if (!empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
-
             },
             set: function ($value) {
                 if (!empty($value) && !is_string($value)) {
@@ -68,7 +81,6 @@ class MobileUserDetail extends Model
                 if (!empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
-
             },
             set: function ($value) {
                 if (!empty($value) && !is_string($value)) {
@@ -84,7 +96,6 @@ class MobileUserDetail extends Model
                 if (!empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
-
             },
             set: function ($value) {
                 if (!empty($value) && !is_string($value)) {
@@ -92,5 +103,26 @@ class MobileUserDetail extends Model
                 }
             }
         );
+    }
+
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(localBody::class);
+    }
+
+    public function registrationDetails(): HasMany
+    {
+        return $this->hasMany(RegistrationDetail::class);
     }
 }

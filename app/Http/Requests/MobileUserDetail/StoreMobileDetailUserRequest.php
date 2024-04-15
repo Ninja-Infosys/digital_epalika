@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\MobileUserDetail;
 
+use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreMobileDetailUserRequest extends FormRequest
 {
@@ -16,25 +18,35 @@ class StoreMobileDetailUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'citizenship_no' => ['required'],
-            'nec_no' => ['required'],
-            'citizenship_issued_date' => ['required','date'],
-            'mobile_user_id' => ['required', Rule::exists('mobile_users', 'id')->withoutTrashed()],
-            'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
-            'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
-            'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-            'ward_no' => ['required','numeric'],
-            'tole' => ['required','string'],
-            'temporary_province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
-            'temporary_district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
-            'temporary_local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-            'temporary_ward' => ['required','numeric'],
-            'temporary_tole' => ['required','string'],
-            'citizenship_front' => ['required','image', 'mimes:png,jpg,jpeg'],
-            'nec_certificate' => ['required','image', 'mimes:png,jpg,jpeg'],
-            'citizenship_back' => ['required','image', 'mimes:png,jpg,jpeg'],
-            'nec_certificate' => ['nullable','image', 'mimes:png,jpg,jpeg'],
-            'citizenship_issued_district' => ['required',Rule::exists('districts', 'id')->withoutTrashed()]
+            'mobileUserDetail.citizenship_no' => ['nullable','string'],
+            'mobileUserDetail.nec_no' => ['nullable'],
+            'mobileUserDetail.citizenship_issued_date' => ['nullable','date'],
+            'mobileUserDetail.mobile_user_id' => ['nullable', Rule::exists('mobile_users', 'id')->withoutTrashed()],
+            'mobileUserDetail.province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
+            'mobileUserDetail.district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
+            'mobileUserDetail.local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+            'mobileUserDetail.ward_no' => ['nullable','numeric'],
+            'mobileUserDetail.tole' => ['nullable','string'],
+            'mobileUserDetail.temporary_province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
+            'mobileUserDetail.temporary_district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
+            'mobileUserDetail.temporary_local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+            'mobileUserDetail.temporary_ward' => ['nullable','numeric'],
+            'mobileUserDetail.temporary_tole' => ['nullable','string'],
+            'mobileUserDetail.citizenship_front' => ['nullable','image', 'mimes:png,jpg,jpeg'],
+            'mobileUserDetail.nec_certificate' => ['nullable','image', 'mimes:png,jpg,jpeg'],
+            'mobileUserDetail.citizenship_back' => ['nullable','image', 'mimes:png,jpg,jpeg'],
+            'mobileUserDetail.nec_certificate' => ['nullable','image', 'mimes:png,jpg,jpeg'],
+            'mobileUserDetail.is_minor' => ['nullable', 'boolean'],
+            'mobileUserDetail.gender' => ['nullable', new Enum(Gender::class)],
+            'mobileUserDetail.birth_registration_no' => ['nullable','string'],
+            'mobileUserDetail.citizenship_issued_district' => ['nullable',Rule::exists('districts', 'id')->withoutTrashed()],
+            'name' => ['required','string'],
+            'email' => ['required', 'email', Rule::unique('mobile_users', 'email')->ignore($this->mobileUser)],
+            'phone' => ['required', 'regex:/^(?:\+?9779\d{9}|9\d{9})$/', Rule::unique('mobile_users', 'phone')->ignore($this->mobileUser)],
+            'avatar' => ['nullable','image', 'mimes:png,jpg,jpeg'],
+
+
+
 
         ];
     }

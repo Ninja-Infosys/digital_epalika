@@ -19,7 +19,7 @@
             @else
             <h4 class="page-title">नयाँ सिफारिस</h4>
             @endif
-               
+
             </div>
         </div>
     </div>
@@ -108,16 +108,17 @@
                                                 </td>
 
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail->gender->label() ?? ($recommendationCreate->mobileUser->name ?? '') }}
+                                                    {{ $recommendationCreate->personalDetail?->gender->label() ?? 
+                                                    ($recommendationCreate->mobileUser->mobileUserDetail->gender->label()  ) }}
 
                                                 </td>
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail->phone_no ?? ($recommendationCreate->mobileUser->name ?? '') }}
+                                                    {{ $recommendationCreate->personalDetail?->phone_no ?? ($recommendationCreate->mobileUser->phone ?? '') }}
 
                                                 </td>
                                                 <td>
-                                                    {{ $recommendationCreate->personalDetail->province->province ?? '' }},
-                                                    {{ $recommendationCreate->personalDetail->district->district ?? '' }}
+                                                    {{ $recommendationCreate->personalDetail->province->province ?? ($recommendationCreate->mobileUser?->mobileUserDetail?->province?->province ?? '') }},
+                                                    {{ $recommendationCreate->personalDetail->district->district ?? ($recommendationCreate->mobileUser?->mobileUserDetail?->district?->district ?? '')  }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -443,11 +444,11 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                    
+
                                         @if ($recommendationCreate->status != 'sent_to_revenue')
                                             <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
                                         @endif
-                                
+
                                 </div>
                             </div>
                             <div class="card-body">

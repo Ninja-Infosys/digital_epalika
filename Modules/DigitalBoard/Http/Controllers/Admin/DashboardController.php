@@ -44,6 +44,7 @@ class DashboardController extends Controller
             ->get()
             ->each(function ($notice) use ($totalCount, $newsCount, $noticeCount) {
                 $nepaliDate = explode('-', $notice->date);
+                dd($nepaliDate);
                 $totalCount[(int)$nepaliDate[1] - 1] += 1;
 
                 if ($notice->type == 'Notice') {

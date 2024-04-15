@@ -63,7 +63,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-6 d-none mb-2">
                                     <x-date-input-component label-ne="मिति *" name-ne="date" />
                                 </div>
                                 <div class="col-md-12 mb-2">
