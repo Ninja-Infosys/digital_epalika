@@ -62,7 +62,7 @@ class FrontendController extends Controller
     }
     public function sipharishList()
     {
-        // $recommendationCreates =RecommendationCreate::where('user_id', Auth::user()->id)->latest()->paginate(10);
+       
         $recommendationCreates =RecommendationCreate::with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->paginate(10);
         return view('recommendation::frontend.sipharishList',compact('recommendationCreates'));
     }
