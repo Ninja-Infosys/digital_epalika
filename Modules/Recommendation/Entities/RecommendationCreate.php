@@ -110,7 +110,6 @@ class RecommendationCreate extends Model
         $replaceableList->put('[@ward_no]', (string) $wardNo);
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', (string) today()->toDateString());
-        // $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
         $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
         $replaceableList->put('[@approver_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
 

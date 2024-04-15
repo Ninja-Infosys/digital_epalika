@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('assets/frontend/css/loginstyle.css') }}" />
 <style>
     .new-digital-board .card-top {
         position: relative;
@@ -424,10 +425,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         @endauth
     </div>

@@ -13,19 +13,20 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('complaintSubject.lawsuitNature', 'judicialReceiptBill', 'complaintDecision', 'conciliationApplication', 'conciliationVerification')
-            ->withCount('dateSheets')
-            ->withCount('writtenAnswers')
-            ->withCount('defendantIssuedDeadlines')
+        $complaintApplications = ComplaintApplication::with('lawsuitNature', 'complaintSubject', 'judicialReceiptBill', 'complaintDecision', 'conciliationApplication', 'conciliationVerification')
+            ->withCount('dateSheets', 'writtenAnswers', 'defendantIssuedDeadlines')
             ->whereHas('judicialReceiptBill')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['submission_no', 'registration_no', 'subject', 'date'], request('search'));
                 }
-            })->orderByDesc('date')->paginate(10);
-
+            })
+            ->orderByDesc('date')
+            ->paginate(10);
+    
         return view('judicialcommittee::admin.complaint_application.registered_application', compact('complaintApplications'));
     }
+    
 
     public function index()
     {
@@ -53,6 +54,7 @@ class ComplaintApplicationController extends Controller
 
         $this->checkAuthorization('complaintApplication_access');
         $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantDefendants', 'complainantDefendants.province', 'complainantDefendants.district', 'complainantDefendants.localBody', 'witnesses', 'defendantIssuedDeadlines');
+      
         return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
 
