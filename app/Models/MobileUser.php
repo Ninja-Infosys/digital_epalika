@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Recommendation\Entities\RecommendationCreate;
+use Modules\Recommendation\Entities\RegistrationDetail;
 use Modules\Revenue\Entities\TaxPayer;
 
 class MobileUser extends Authenticatable
@@ -121,6 +122,7 @@ class MobileUser extends Authenticatable
                     return $value->store('mobileUser', 'public');
                 }
             }
+
         );
     }
 
@@ -137,5 +139,9 @@ class MobileUser extends Authenticatable
     public function RecommendationCreate(): HasMany
     {
         return $this->hasMany(RecommendationCreate::class);
+    }
+    public function registrationDetails(): HasMany
+    {
+        return $this->hasMany(RegistrationDetail::class);
     }
 }

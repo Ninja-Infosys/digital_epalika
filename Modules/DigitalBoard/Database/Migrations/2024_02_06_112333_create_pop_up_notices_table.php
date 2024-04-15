@@ -11,7 +11,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('title')->nullable();
             $table->string('image')->nullable();
-            $table->integer('ward')->nullable();
+            $table->string('ward')->nullable();
             $table->integer('display_duration')->default(5);
             $table->integer('iteration_duration')->default(20);
             $table->boolean('is_active')->default(true);

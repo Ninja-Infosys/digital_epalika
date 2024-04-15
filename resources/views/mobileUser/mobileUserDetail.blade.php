@@ -52,37 +52,45 @@
                                                         <label for="is_minor" class="form-label">प्रकार</label>
                                                         <select class="form-select" name="is_minor" id="is_minor">
                                                             <option value="">छान्नुहोस्</option>
-                                                            <option value="0">बालिक</option>
-                                                            <option value="1">नाबालिक</option>
+                                                            <option value="0"
+                                                                @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) == '0') selected @endif>बालिक
+                                                            </option>
+                                                            <option value="1"
+                                                                @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) == '1') selected @endif>नाबालिक
+                                                            </option>
                                                         </select>
                                                         @error('is_minor')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-6 mb-3" id="citizenship_no_field"
-                                                        style="display: none;">
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '0') style="display: none;" @endif>
                                                         <label for="citizenship_no" class="form-label">नागरिकता नं.</label>
                                                         <input
                                                             class="form-control @error('citizenship_no') is-invalid @enderror"
                                                             type="text" id="citizenship_no" placeholder="नागरिकता नं."
+                                                            value="{{ old('citizenship_no', optional($mobileUser->mobileUserDetail)->citizenship_no) }}"
                                                             name="citizenship_no" />
                                                         @error('citizenship_no')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-md-6 mb-3" id="birth_certificate_no_field"
-                                                        style="display: none;">
-                                                        <label for="birth_certificate_no" class="form-label">जन्म दर्ता
+                                                    <div class="col-md-6 mb-3" id="birth_registration_no_field"
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '1') style="display: none;" @endif>
+                                                        <label for="birth_registration_no" class="form-label">जन्म दर्ता
                                                             नं.</label>
                                                         <input
-                                                            class="form-control @error('birth_certificate_no') is-invalid @enderror"
-                                                            type="text" id="birth_certificate_no"
-                                                            placeholder="जन्म दर्ता नं." name="birth_certificate_no" />
-                                                        @error('birth_certificate_no')
+                                                            class="form-control @error('birth_registration_no') is-invalid @enderror"
+                                                            type="text" id="birth_registration_no"
+                                                            placeholder="जन्म दर्ता नं."
+                                                            value="{{ old('birth_registration_no', optional($mobileUser->mobileUserDetail)->birth_registration_no) }}"
+                                                            name="birth_registration_no" />
+                                                        @error('birth_registration_no')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
+
 
                                                 <div class="row">
                                                     <div class="col-md-4 mb-2">
@@ -142,9 +150,10 @@
                                                         <select id="gender" name="gender" class="form-select">
                                                             <option value="">-- छान्नुहोस् --</option>
                                                             @foreach (\App\Enums\Gender::cases() as $gender)
-                                                                <option
-                                                                    {{ $gender->value == old('gender') ? 'selected' : '' }}
-                                                                    value="{{ $gender->value }}">{{ $gender->label() }}
+
+                                                                <option value="{{ $gender->value }}"
+                                                                    @if ($mobileUser->mobileUserDetail?->gender == $gender) selected @endif>
+                                                                    {{ $gender->label() }}
                                                                 </option>
                                                             @endforeach
 
@@ -155,7 +164,9 @@
                                                     </div>
 
 
-                                                    <div class="col-md-4 mb-2">
+                                                    <div class="col-md-4 mb-2" id="nec_no_field"
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '0') style="display: none;" @endif>
+
                                                         <label for="nec_no" class="form-label">राष्ट्रिय परिचय पत्र नं.
                                                             *</label>
                                                         <input type="text" name="nec_no"
@@ -166,7 +177,9 @@
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-md-4 mb-2">
+                                                    <div class="col-md-4 mb-2" id="citizenship_issued_date_field"
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '0') style="display: none;" @endif>
+
                                                         <label for="citizenship_issued_date" class="form-label"> जारि
                                                             मिति *</label>
                                                         <div class="input-group">
@@ -180,7 +193,9 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4 mb-2">
+                                                    <div class="col-md-4 mb-2" id="citizenship_issued_district_field"
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '0') style="display: none;" @endif>
+
                                                         <label for="citizenship_issued_district" class="form-label">
                                                             जारी
                                                             जिल्ला *
@@ -204,7 +219,9 @@
                                                             </div>
 
                                                     </div>
-                                                    <div class="col-md-4 mb-2">
+                                                    <div class="col-md-4 mb-2" id="citizenship_front_field"
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '0') style="display: none;" @endif>
+
                                                         <label for="citizenship_front" class="form-label">नागरिकताको फोटो
                                                             (अगाडी) *</label>
                                                         <input type="file" name="citizenship_front"
@@ -223,7 +240,9 @@
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-md-4 mb-2">
+                                                    <div class="col-md-4 mb-2" id="citizenship_back_field"
+                                                        @if (old('is_minor', optional($mobileUser->mobileUserDetail)->is_minor) != '0') style="display: none;" @endif>
+
                                                         <label for="citizenship_back" class="form-label">नागरिकताको फोटो
                                                             (पछाडी)*</label>
                                                         <input type="file" name="citizenship_back"
@@ -309,20 +328,35 @@
         </div>
     </section>
     @push('scripts')
-<script>
-    document.getElementById('is_minor').addEventListener('change', function() {
-        var selectedOption = this.value;
-        if (selectedOption === '0') {
-            document.getElementById('citizenship_no_field').style.display = 'block';
-            document.getElementById('birth_certificate_no_field').style.display = 'none';
-        } else if (selectedOption === '1') {
-            document.getElementById('citizenship_no_field').style.display = 'none';
-            document.getElementById('birth_certificate_no_field').style.display = 'block';
-        } else {
-            document.getElementById('citizenship_no_field').style.display = 'none';
-            document.getElementById('birth_certificate_no_field').style.display = 'none';
-        }
-    });
-</script>
-@endpush
+        <script>
+            document.getElementById('is_minor').addEventListener('change', function() {
+                var selectedOption = this.value;
+                if (selectedOption === '0') {
+                    document.getElementById('citizenship_no_field').style.display = 'block';
+                    document.getElementById('nec_no_field').style.display = 'block';
+                    document.getElementById('citizenship_issued_date_field').style.display = 'block';
+                    document.getElementById('citizenship_issued_district_field').style.display = 'block';
+                    document.getElementById('citizenship_back_field').style.display = 'block';
+                    document.getElementById('citizenship_front_field').style.display = 'block';
+                    document.getElementById('birth_registration_no_field').style.display = 'none';
+                } else if (selectedOption === '1') {
+                    document.getElementById('citizenship_no_field').style.display = 'none';
+                    document.getElementById('nec_no_field').style.display = 'none';
+                    document.getElementById('citizenship_issued_date_field').style.display = 'none';
+                    document.getElementById('citizenship_issued_district_field').style.display = 'none';
+                    document.getElementById('citizenship_back_field').style.display = 'none';
+                    document.getElementById('citizenship_front_field').style.display = 'none';
+                    document.getElementById('birth_registration_no_field').style.display = 'block';
+                } else {
+                    document.getElementById('citizenship_no_field').style.display = 'none';
+                    document.getElementById('nec_no_field').style.display = 'none';
+                    document.getElementById('citizenship_issued_date_field').style.display = 'none';
+                    document.getElementById('citizenship_issued_district_field').style.display = 'none';
+                    document.getElementById('citizenship_back_field').style.display = 'none';
+                    document.getElementById('citizenship_front_field').style.display = 'none';
+                    document.getElementById('birth_registration_no_field').style.display = 'none';
+                }
+            });
+        </script>
+    @endpush
 @endsection
