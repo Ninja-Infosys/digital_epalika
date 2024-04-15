@@ -76,6 +76,7 @@ class RecommendationCreate extends Model
         return $this->belongsTo(PersonalDetail::class);
     }
 
+
     public function resolveTemplate(): string
     {
         $content = letterHead() . $this->recommendationDetail?->content;
@@ -144,5 +145,5 @@ class RecommendationCreate extends Model
     {
         return $this->belongsTo(RecommendationCategory::class);
     }
-   
+
 }

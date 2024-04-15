@@ -46,12 +46,12 @@
                         <h4 class="mt-2 text-black">स्थायि ठेगाना</h4>
 
                         <p class="text-muted mb-2 font-15"><strong>प्रदेश :</strong> <span
-                                class="ms-2">$mobileUser->mobileUserDetail->province?->province??''</span></p>
+                                class="ms-2">{{$mobileUser?->mobileUserDetail?->province?->province ?? ''}}</span></p>
                         <p class="text-muted mb-2 font-15"><strong>जिल्ला :</strong> <span
-                                class="ms-2">$mobileUser->mobileUserDetail->district?->district??''</span></p>
+                                class="ms-2">{{$mobileUser?->mobileUserDetail?->district?->district??''}}</span></p>
 
                         <p class="text-muted mb-2 font-15"><strong>पालिका :</strong> <span
-                                class="ms-2">{{ $mobileUser->mobileUserDetail->localBody?->localBody??'' }}</span></p>
+                                class="ms-2">{{ $mobileUser?->mobileUserDetail?->localBody?->local_body??'' }}</span></p>
 
 
 
@@ -60,7 +60,7 @@
 
                         <p class="text-muted mb-2 font-15"><strong>टोल :</strong> <span
                                 class="ms-2">{{ $mobileUser->mobileUserDetail->tole??'' }}</span></p>
-                        <h4 class="mt-2 text-black">अस्थायि ठेगाना</h4>
+                        {{-- <h4 class="mt-2 text-black">अस्थायि ठेगाना</h4>
 
                         <p class="text-muted mb-2 font-15"><strong>प्रदेश :</strong> <span
                                 class="ms-2">$mobileUser->mobileUserDetail->province?->province??''</span></p>
@@ -76,7 +76,7 @@
                                 class="ms-2">{{ $mobileUser->mobileUserDetail->temporary_ward??'' }}</span></p>
 
                         <p class="text-muted mb-2 font-15"><strong>टोल :</strong> <span
-                                class="ms-2">{{ $mobileUser->mobileUserDetail->temporary_tole??'' }}</span></p>
+                                class="ms-2">{{ $mobileUser->mobileUserDetail->temporary_tole??'' }}</span></p> --}}
 
                         <p class="text-muted mb-2 font-15"><strong>नागरिकता नं. :</strong> <span
                                 class="ms-2">{{ $mobileUser->mobileUserDetail->citizenship_no??'' }}</span></p>
@@ -97,24 +97,24 @@
         </div>
 
         <div class="row col-md-12 d-flex gap-3">
-            @if($mobileUser->mobileUserDetail->citizenship_front??'')
+            @if($mobileUser->mobileUserDetail?->citizenship_front??'')
                 <div class="col-md-3">
                     <p>नागरिकताको फोटो(अगाडि)</p>
                     <img src="{{ $mobileUser->mobileUserDetail->citizenship_front }}" style="height:200px; width:300px;"
                         alt="citizenship-front">
                 </div>
             @endif
-            @if($mobileUser->mobileUserDetail->citizenship_back??'')
+            @if($mobileUser->mobileUserDetail?->citizenship_back??'')
                 <div class="col-md-3">
                     <p>नागरिकताको फोटो(पछाडि)</p>
-                    <img src="{{ $mobileUser->mobileUserDetail->citizenship_back }}" style="height:200px; width:300px;"
+                    <img src="{{ $mobileUser->mobileUserDetail?->citizenship_back }}" style="height:200px; width:300px;"
                         alt="nec_certificate">
                 </div>
             @endif
-            @if($mobileUser->mobileUserDetail->nec_certificate??'')
+            @if($mobileUser->mobileUserDetail?->nec_certificate??'')
                 <div class="col-md-3">
                     <p>राष्ट्रिय परिचय प्रमाण पत्रको फोटो</p>
-                    <img src="{{ $mobileUser->mobileUserDetail->nec_certificate }}" style="height:200px; width:300px;"
+                    <img src="{{ $mobileUser->mobileUserDetail?->nec_certificate }}" style="height:200px; width:300px;"
                         alt="nec_certificate">
                 </div>
             @endif
