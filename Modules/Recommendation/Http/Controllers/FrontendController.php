@@ -82,9 +82,16 @@ class FrontendController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroySipharish(RecommendationCreate $recommendationCreate)
     {
-        //
+        if ($recommendationCreate->status == 1) {
+            toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
+
+            return back();
+        }
+        $recommendationCreate->delete();
+        toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
+        return back();
     }
 
 

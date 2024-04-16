@@ -58,14 +58,14 @@
                                                             d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                                     </svg>
                                                 </a>
-                                                <form action="" method="post">
+                                                <form action="{{ route('recommendationrecommendation.destroySipharish', $recommendationCreate->id) }}" method="POST">
                                                     @csrf
-                                                    @method('delete')
-                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" 
-                                                        title="मेटाउनु होस्">
+                                                    @method('DELETE')
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
+                                                
                                             </div>
                                         </td>
                                     </tr>
