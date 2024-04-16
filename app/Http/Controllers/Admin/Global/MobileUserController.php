@@ -15,7 +15,7 @@ class MobileUserController extends Controller
 
         $mobileUsers = MobileUser::latest()->get();
 
-        return view('admin.global.mobileUser.index', compact('mobileUsers'));
+        return view('admin.global.mobileUser.index',compact('mobileUsers'));
     }
 
     public function updateLoginStatus(MobileUser $mobileUser)

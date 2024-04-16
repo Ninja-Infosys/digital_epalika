@@ -21,34 +21,40 @@ class MobileUserDetailController extends Controller
     }
 
 
-    public function store(StoreMobileDetailUserRequest $request, MobileUser $mobileUser)
-    {
-      if($mobileUser)
+    public function store(StoreMobileDetailUserRequest $request)
+{
+$mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
 
-            if ($request->hasFile('citizenship_front') && $mobileUser->citizenship_front) {
-                $this->deleteFile($mobileUser->citizenship_front);
-            }
-            if ($request->hasFile('citizenship_back') && $mobileUser->citizenship_back) {
-                $this->deleteFile($mobileUser->citizenship_back);
-            }
-            if ($request->hasFile('nec_certificate') && $mobileUser->nec_certificate) {
-                $this->deleteFile($mobileUser->nec_certificate);
-            }
-
-            $mobileUser->mobileUser?->updateOrCreate($request->validated()+ [
-            // MobileUserDetail::updateOrCreate($request->validated() + [
-                'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
-            ]);
-
-        } else {
-            MobileUserDetail::updateOrCreate($request->validated() + [
-                'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
-            ]);
+    if ($mobileUser) {
+        if ($request->hasFile('citizenship_front') && $mobileUser->mobileUserDetail->citizenship_front) {
+            $this->deleteFile($mobileUser->mobileUserDetail->citizenship_front);
         }
-        MobileUserDetail::updateOrCreate([
-            'mobile_user_id' => $mobileUser->id,
-        ] + $request->validated());
+        if ($request->hasFile('citizenship_back') && $mobileUser->mobileUserDetail->citizenship_back) {
+            $this->deleteFile($mobileUser->mobileUserDetail->citizenship_back);
+        }
+        if ($request->hasFile('nec_certificate') && $mobileUser->mobileUserDetail->nec_certificate) {
+            $this->deleteFile($mobileUser->mobileUserDetail->nec_certificate);
+        }
+        $mobileUserDetail = MobileUserDetail::updateOrCreate(
+            ['mobile_user_id' => $mobileUser->mobileUserDetail->id],
+            $request->validated()
+        );
+$mobileUserUpdatedData = [
+    'name' => $request->input('name'),
+    'email' => $request->input('email'),
+    'phone' => $request->input('phone'),
+    
+];
 
-        return redirect()->route('digital-service');
+if($request->hasFile('avatar')){
+    $mobileUserUpdatedData['avatar'] = $request->file('avatar');
+}
+        $mobileUser->update($mobileUserUpdatedData);
+
+        return back()->with('success', 'Mobile user details updated successfully.');
+    } else {
+        return "not found";
     }
+}
+
 }

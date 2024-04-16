@@ -35,7 +35,7 @@ class FrontendController extends Controller
     {
         $recommendationCreate = DB::transaction(function () use ($request) {
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                'mobile_user_id' => auth()->user()->id,
+                'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
                 'created_by' => auth()->id()
             ]);
 
