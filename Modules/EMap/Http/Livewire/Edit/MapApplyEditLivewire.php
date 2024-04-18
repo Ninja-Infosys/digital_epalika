@@ -71,12 +71,12 @@ class MapApplyEditLivewire extends Component
         'applyMap.building_category' => ['required'],
         'applyMap.structure_type_id' => ['nullable', 'exists:structure_types,id'],
         'applyMap.structure_type' => ['nullable'],
-        'applyMap.current_storey' => ['required', 'numeric'],
-        'applyMap.area_of_plinth' => ['required', 'numeric'],
-        'applyMap.future_storey' => ['required', 'numeric'],
-        'applyMap.length' => ['required', 'numeric'],
-        'applyMap.breadth' => ['required', 'numeric'],
-        'applyMap.height' => ['required', 'numeric'],
+        'applyMap.current_storey' => ['required'],
+        'applyMap.area_of_plinth' => ['required'],
+        'applyMap.future_storey' => ['required'],
+        'applyMap.length' => ['required'],
+        'applyMap.breadth' => ['required'],
+        'applyMap.height' => ['required'],
     ];
 
     public function rules(): array
@@ -117,15 +117,10 @@ class MapApplyEditLivewire extends Component
             'applyMap.current_storey.required' => 'तल्ला संख्या अनिवार्य छ|',
             'applyMap.current_storey.numeric' => 'तल्ला संख्या नम्बरमा हुनुपर्छ|',
             'applyMap.area_of_plinth.required' => 'क्षेत्रफल अनिवार्य छ|',
-            'applyMap.area_of_plinth.numeric' => 'क्षेत्रफल नम्बरमा हुनुपर्छ|',
             'applyMap.future_storey.required' => 'तल्ला संख्या अनिवार्य छ|',
-            'applyMap.future_storey.numeric' => 'तल्ला संख्या नम्बरमा हुनुपर्छ|',
             'applyMap.length.required' => 'भवनको लम्बाई अनिवार्य छ|',
-            'applyMap.length.numeric' => 'भवनको लम्बाई नम्बरमा हुनुपर्छ|',
             'applyMap.breadth.required' => 'भवनको चौडाई अनिवार्य छ|',
-            'applyMap.breadth.numeric' => 'भवनको चौडाई नम्बरमा हुनुपर्छ|',
             'applyMap.height.required' => 'भवनको उचाई अनिवार्य छ|',
-            'applyMap.height.numeric' => 'भवनको उचाई नम्बरमा हुनुपर्छ|',
         ];
     }
 
