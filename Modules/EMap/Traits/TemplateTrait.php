@@ -46,7 +46,7 @@ trait TemplateTrait
             get_nepali_number($mapApply?->length ?? ''),
             get_nepali_number($mapApply?->breadth ?? ''),
             get_nepali_number($mapApply?->height ?? ''),
-            get_nepali_number($mapApply?->consultant_name ?? ''),   
+            get_nepali_number($mapApply?->consultant_name ?? ''),
             get_nepali_number($mapApply?->consultant_mobile_no ?? ''),
             get_nepali_number($mapApply?->consultant_nec_no ?? ''),
             $mapApply->consultant_signature_url ?? '',
@@ -96,30 +96,30 @@ trait TemplateTrait
             $mapApply?->houseOwner?->photo_url ?? '',
 
             //FourForts
-            (string)View::make('emap::inc.four_forts_table', [
+            (string) View::make('emap::inc.four_forts_table', [
                 'fourForts' => $mapApply?->fourForts,
             ]),
-            (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+            (string) View::make('emap::inc.NameOfTheFortsAndSanghiars', [
                 'actualSetBack' => $mapApply->fourForts?->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
-            (string)View::make('emap::inc.land_four_forts_detail', [
+            (string) View::make('emap::inc.land_four_forts_detail', [
                 'actualSetBack' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
-            (string)View::make('emap::inc.sanghiarsName', [
+            (string) View::make('emap::inc.sanghiarsName', [
                 'towards' => $mapApply?->fourForts?->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
 
             //storeyDetails
-            (string)View::make('emap::inc.height_of_each_storey', [
+            (string) View::make('emap::inc.height_of_each_storey', [
                 'storeyDetails' => $mapApply?->storeyDetails,
             ]),
-            (string)View::make('emap::inc.area_of_storey', [
+            (string) View::make('emap::inc.area_of_storey', [
                 'storeyDetails' => $mapApply?->storeyDetails,
 
             ]),
-            (string)View::make('emap::inc.storey_details', [
+            (string) View::make('emap::inc.storey_details', [
                 'storeyDetails' => $mapApply?->storeyDetails,
 
             ]),
@@ -140,15 +140,14 @@ trait TemplateTrait
             get_nepali_number($mapApply?->applicantDetail?->tole ?? ''),
             $mapApply?->applicantDetail?->signature_url ?? '',
 
-
             //criteria detail
 
-            (string)View::make('emap::inc.criteria_details', [
+            (string) View::make('emap::inc.criteria_details', [
                 'criteriaDetails' => $mapApply?->criteriaDetails,
             ]),
             //BuildingDetails
 
-            (string)View::make('emap::inc.building_details', [
+            (string) View::make('emap::inc.building_details', [
                 'buildingDetails' => $mapApply?->buildingDetails,
             ]),
 
@@ -165,7 +164,6 @@ trait TemplateTrait
             get_nepali_number($designerDetail?->consulting_firm_name ?? ''),
             get_nepali_number($designerDetail?->district?->district ?? ''),
 
-
             //supervisorDetails
 
             get_nepali_number($supervisorDetail?->name ?? ''),
@@ -179,7 +177,6 @@ trait TemplateTrait
             get_nepali_number($supervisorDetail?->consulting_firm_name ?? ''),
             get_nepali_number($supervisorDetail?->district?->district ?? ''),
 
-
             //ContractorDetails
 
             get_nepali_number($contractorDetail?->name ?? ''),
@@ -192,7 +189,6 @@ trait TemplateTrait
             get_nepali_number($contractorDetail?->local_body_registration_no ?? ''),
             get_nepali_number($contractorDetail?->consulting_firm_name ?? ''),
             get_nepali_number($contractorDetail?->district?->district ?? ''),
-
 
         ];
     }
@@ -272,14 +268,12 @@ trait TemplateTrait
             '[@houseOwner.tole]',
             '[@houseOwner.photo]',
 
-
             //FourForts
 
             '[@fourForts]',
             '[@nameOfTheFortsAndSanghiars]',
             '[@landFourFortsDetail]',
             '[@sanghiarsName]',
-
 
             //StoreyDetails
             '[@heightOfEachStorey]',
@@ -303,7 +297,6 @@ trait TemplateTrait
             '[@applicantDetail.tole]',
             '[@applicantDetail.signature]',
 
-
             //criteria detail
             '[@criteriaDetails]',
 
@@ -322,7 +315,6 @@ trait TemplateTrait
             '[@designerDetail.consulting_firm_name]',
             '[@designerDetail.district]',
 
-
             //supervisorDetails
 
             '[@supervisorDetail.name]',
@@ -335,7 +327,6 @@ trait TemplateTrait
             '[@supervisorDetail.local_body_registration_no]',
             '[@supervisorDetail.consulting_firm_name]',
             '[@supervisorDetail.district]',
-
 
             //ContractorDetails
 
@@ -365,7 +356,7 @@ trait TemplateTrait
                 $documents->push([
                     'document_type' => class_basename($documentModel),
                     'form_id' => $document->form_id,
-                    'status' => $document->status?->value
+                    'status' => $document->status?->value,
                 ]);
             }
         }
@@ -379,7 +370,8 @@ trait TemplateTrait
                 $status = $documents->where('form_id', $form->id)->pluck('status');
 
                 if ($allApproved && $status->count() >= $form->form_data_types_count
-                    && $status->unique()->count() == 1) {
+                    && $status->unique()->count() == 1
+                    && $status->unique()->filter(fn ($status) => $status == DocumentStatusEnum::APPROVED->value)->isNotEmpty()) {
                     $order = $form->order + 1;
                     $allApproved = true;
                 } elseif ($key == 0) {
@@ -390,14 +382,15 @@ trait TemplateTrait
                 }
                 if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
-                } elseif ($status->contains(DocumentStatusEnum::REJECTED)) {
+                } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
                     $mapStatus = DocumentStatusEnum::REJECTED;
-                } elseif ($status->contains(DocumentStatusEnum::PENDING)) {
+                } elseif ($status->contains(DocumentStatusEnum::PENDING->value)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;
                 }
                 $form->map_status = $mapStatus;
+
                 return $form;
             });
 

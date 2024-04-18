@@ -23,9 +23,9 @@ use Modules\EMap\Traits\EMapTemplateTrait;
 
 class MapApply extends Model
 {
+    use EMapTemplateTrait;
     use HasFactory;
     use SoftDeletes;
-    use EMapTemplateTrait;
 
     protected $dates = [
         'created_at',
@@ -64,20 +64,21 @@ class MapApply extends Model
         'latitude',
         'longitude',
         'mobile_user_id',
-        'comment'
+        'comment',
     ];
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
         'usage' => BuildingUsageEnum::class,
         'building_category' => CategorizationEnum::class,
-        'application_type' => ApplicationFormTypeEnum::class
+        'application_type' => ApplicationFormTypeEnum::class,
     ];
 
     protected $with = ['appliedDocuments'];
+
     public function setConsultantSignatureAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
         }
     }
@@ -91,7 +92,6 @@ class MapApply extends Model
     {
         return $this->belongsTo(Organization::class);
     }
-
 
     public function structureType(): BelongsTo
     {
@@ -117,7 +117,6 @@ class MapApply extends Model
     {
         return $this->hasOne(LandDetail::class);
     }
-
 
     public function landOwner(): HasOne
     {
@@ -225,9 +224,10 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-            ->merge($this->paymentStores)
-            ->merge($this->appliedDocuments)
-            ->sortByDesc('created_at');
+                ->merge($this->paymentStores)
+                ->merge($this->appliedDocuments)
+                ->sortByDesc('created_at');
+
         return $storedDocuments
             ->map(function ($storedDocument) {
                 return collect($storedDocument)
@@ -240,7 +240,7 @@ class MapApply extends Model
             ->map(function ($form) {
                 return [
                     'status' => $form->pluck('status')->unique()->toArray(),
-                    'order' => $form->pluck('order')->unique()->max()
+                    'order' => $form->pluck('order')->unique()->max(),
                 ];
             })
             ->first();
@@ -253,24 +253,24 @@ class MapApply extends Model
 
         $storedDocuments =
             $storedDocuments->merge($this->formStores)
-            ->merge($this->paymentStores)
-            ->merge($this->appliedDocuments)
-            ->sortByDesc('created_at');
+                ->merge($this->paymentStores)
+                ->merge($this->appliedDocuments)
+                ->sortByDesc('created_at');
 
         return $storedDocuments
             ->map(function ($storedDocument) {
                 return collect($storedDocument)
                     ->put('desk', $storedDocument?->form?->load('group')?->group?->title)
                     ->put('form_title', $storedDocument->form?->title)
-                    ->only('desk', 'created_at', 'form_title')
+                    ->only('desk', 'created_at', 'form_title', 'status')
                     ->toArray();
             })
             ->map(function ($form) {
                 return [
                     'desk' => $form['desk'] ?? '',
-                    'status' => $form['form_title'] ?? '',
-                    'pendingDays' => (array_key_exists('created_at', $form) && !empty($form['created_at'])) ? Carbon::parse($form['created_at'])?->diffForHumans() : $this->created_at->diffForHumans()
-
+                    'title' => $form['form_title'] ?? '',
+                    'pendingDays' => (array_key_exists('created_at', $form) && ! empty($form['created_at'])) ? Carbon::parse($form['created_at'])?->diffForHumans() : $this->created_at->diffForHumans(),
+                    'status' => $form['status'],
                 ];
             })
             ->first();
