@@ -24,12 +24,12 @@ class UpdateMapApplicationRequest extends FormRequest
             'building_category' => ['required', new Enum(CategorizationEnum::class)],
             'structure_type_id' => ['nullable',Rule::exists('structure_types', 'id')],
             'structure_type' => ['nullable'],
-            'current_storey' => ['required','numeric'],
-            'future_storey' => ['required','numeric'],
-            'area_of_plinth' => ['required','numeric'],
-            'length' => ['required','numeric'],
-            'breadth' => ['required','numeric'],
-            'height' => ['required','numeric'],
+            'current_storey' => ['required'],
+            'future_storey' => ['required'],
+            'area_of_plinth' => ['required'],
+            'length' => ['required'],
+            'breadth' => ['required'],
+            'height' => ['required'],
         ];
     }
 }

@@ -70,7 +70,7 @@
                                             संख्या :</b> {{ $mapApply->current_storey }}</h4>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>१.६ प्लिन्थको क्षेत्रफल
+                                    <h4 class="form-label"><b>१.६ प्लिन्थको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)
                                             :</b> {{ $mapApply->area_of_plinth }}
                                     </h4>
                                 </div>
@@ -79,13 +79,13 @@
                                         {{ $mapApply->future_storey }}</h4>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>१.८ कुल भवनको लम्बाई :</b> {{ $mapApply->length }}</h4>
+                                    <h4 class="form-label"><b>१.८ कुल भवनको लम्बाई (मिटर/फिट):</b> {{ $mapApply->length }}</h4>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>१.९ कुल भवनको चौडाई :</b> {{ $mapApply->breadth }}</h4>
+                                    <h4 class="form-label"><b>१.९ कुल भवनको चौडाई (मिटर/फिट):</b> {{ $mapApply->breadth }}</h4>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <h4 class="form-label"><b>१.१० भवनको कुल उचाई जमिनको सतहबाट
+                                    <h4 class="form-label"><b>१.१० भवनको कुल उचाई जमिनको सतहबाट (मिटर/फिट)
                                             : {{ $mapApply->height }}
                                     </h4>
                                 </div>
@@ -98,7 +98,7 @@
                                                     <tr>
                                                         <th>क्र.स</th>
                                                         <th>तल्ला</th>
-                                                        <th>प्रस्तावित निर्माणको क्षेत्रफल</th>
+                                                        <th>प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)</th>
                                                         <th>साविक निर्माणको क्षेत्रफल</th>
                                                         <th>जम्मा क्षेत्रफल</th>
                                                         <th>उचाई</th>
