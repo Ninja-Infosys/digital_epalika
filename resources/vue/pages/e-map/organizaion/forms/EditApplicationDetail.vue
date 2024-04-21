@@ -123,11 +123,11 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <VInput
-                            input-type="number"
+                            input-type="text"
                             id="area_of_plinth"
                             v-model="form.area_of_plinth"
                             @validate="validateField('area_of_plinth')"
-                            label="प्लिन्थको क्षेत्रफल (वर्ग फिट)"
+                            label="प्लिन्थको क्षेत्रफल (वर्ग फिट/वर्ग मिटर)"
                             :disabled="!editFormOpened"
                             :error="errors.area_of_plinth"
                         />
@@ -145,33 +145,33 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <VInput
-                            input-type="number"
+                            input-type="text"
                             id="length"
                             v-model="form.length"
                             @validate="validateField('length')"
-                            label="कुल भवनको लम्बाई (मिटर)"
+                            label="कुल भवनको लम्बाई (मिटर/फिट)"
                             :disabled="!editFormOpened"
                             :error="errors.length"
                         />
                     </div>
                     <div class="col-md-4 mb-3">
                         <VInput
-                            input-type="number"
+                            input-type="text"
                             id="breadth"
                             v-model="form.breadth"
                             @validate="validateField('breadth')"
-                            label="कुल भवनको चौडाई (मिटर)"
+                            label="कुल भवनको चौडाई (मिटर/फिट)"
                             :disabled="!editFormOpened"
                             :error="errors.breadth"
                         />
                     </div>
                     <div class="col-md-4 mb-3">
                         <VInput
-                            input-type="number"
+                            input-type="text"
                             id="height"
                             v-model="form.height"
                             @validate="validateField('height')"
-                            label="भवनको कुल उचाई जमिनको सतहबाट (मिटर)"
+                            label="भवनको कुल उचाई जमिनको सतहबाट (मिटर/फिट)"
                             :disabled="!editFormOpened"
                             :error="errors.height"
                         />

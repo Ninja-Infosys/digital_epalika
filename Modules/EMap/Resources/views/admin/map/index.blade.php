@@ -71,7 +71,7 @@
                                 <td>{{ $mapApply->unique_id ?? '' }}</td>
                                 <td>{{ $mapApply->registration_no ?? '' }}</td>
                                 <td>{{ $mapApply->landDetail?->ward_no ?? '' }}</td>
-                                <td>{{ $mapApply->index_data['status'] ?? '' }}</td>
+                                <td>{{ $mapApply->index_data['title'] ?? '' }}({{ $mapApply->index_data['status'] ?? '' }})</td>
                                 <td>{{ $mapApply->index_data['desk'] ?? '' }}</td>
                                 <td>{{ $mapApply->index_data['pendingDays'] ?? '' }}</td>
                                 <td>{{ $mapApply->construction_type->label() ?? '' }}</td>

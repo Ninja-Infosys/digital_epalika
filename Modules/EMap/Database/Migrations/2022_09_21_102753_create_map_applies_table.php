@@ -18,12 +18,12 @@ return new class () extends Migration {
             $table->string('building_category')->nullable()->comment('भवन ऐन अनुसार वर्गीकरण');
             $table->foreignId('structure_type_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('fiscal_year_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->double('current_storey', 8, 2)->comment('हाल निर्माण गर्ने तल्ला संख्या');
-            $table->double('future_storey', 8, 2)->comment('भविष्यमा निर्माण गर्ने तल्ला संख्या');
-            $table->double('area_of_plinth', 12, 2)->nullable()->comment('प्लिन्थको क्षेत्रफल');
-            $table->double('length', 12, 2)->nullable()->comment('कुल भवनको लम्बाई');
-            $table->double('breadth', 12, 2)->nullable()->comment('कुल भवनको चौडाई');
-            $table->double('height', 12, 2)->nullable()->comment('भवनको कुल उचाई जमिनको सतहबाट');
+            $table->string('current_storey' )->comment('हाल निर्माण गर्ने तल्ला संख्या');
+            $table->string('future_storey')->comment('भविष्यमा निर्माण गर्ने तल्ला संख्या');
+            $table->string('area_of_plinth')->nullable()->comment('प्लिन्थको क्षेत्रफल');
+            $table->string('length')->nullable()->comment('कुल भवनको लम्बाई');
+            $table->string('breadth')->nullable()->comment('कुल भवनको चौडाई');
+            $table->string('height')->nullable()->comment('भवनको कुल उचाई जमिनको सतहबाट');
             $table->foreignId('organization_id')->nullable()->constrained()->nullOnDelete();
             $table->string('consultant_signature')->nullable();
             $table->string('consultant_name')->nullable();

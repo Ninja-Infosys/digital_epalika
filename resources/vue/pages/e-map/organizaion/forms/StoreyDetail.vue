@@ -1,12 +1,12 @@
 <template>
-    <fieldset>
+    <fieldset class="my-3">
         <legend>१.११ तल्लाको क्षेत्रफल र उचाईको विवरण:</legend>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr class="text-center">
                     <th>तल्ला</th>
-                    <th>प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट)</th>
+                    <th>प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट/ वर्ग मिटर)</th>
                     <th>साविक निर्माणको क्षेत्रफल</th>
                     <th>जम्मा क्षेत्रफल</th>
                     <th>उचाई</th>
@@ -71,17 +71,15 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            input-type="number"
                             id="area_of_proposed_construction"
                             v-model="form.area_of_proposed_construction"
-                            label="प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट)"
+                            label="प्रस्तावित निर्माणको क्षेत्रफल (वर्ग फिट/ वर्ग मिटर)"
                             @validate="validateField('area_of_proposed_construction')"
                             :error="errors.area_of_proposed_construction"
                         />
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            input-type="number"
                             id="area_of_former_construction"
                             v-model="form.area_of_former_construction"
                             label="साविक निर्माणको क्षेत्रफल"
@@ -91,7 +89,6 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            input-type="number"
                             id="total_area"
                             v-model="form.total_area"
                             label="जम्मा क्षेत्रफल"
@@ -101,7 +98,6 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            input-type="number"
                             id="height"
                             v-model="form.height"
                             label="उचाई"
@@ -112,7 +108,6 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <VInput
-                            input-type="number"
                             id="room"
                             min-value="0"
                             v-model="form.room"
