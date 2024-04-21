@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Recommendation\Entities\RecommendationDetail;
+use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
 
@@ -18,12 +19,17 @@ class FrontendController extends Controller
 {
     public function recommendation()
     {
-        $recommendationCreates =RecommendationCreate::with('recommendationDetail')->latest('updated_at')->paginate(5);
-        $recommendationCount= RecommendationCreate::count();
-        $recommendationCountPending= RecommendationCreate::where('approved_status','pending')->count();
-        $recommendationCountAccept= RecommendationCreate::where('approved_status','approved')->count();
-        $recommendationCountReject= RecommendationCreate::where('approved_status','reject')->count();
-        return view('recommendation::frontend.index',compact('recommendationCount','recommendationCreates','recommendationCountPending','recommendationCountAccept','recommendationCountReject'));
+        $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
+        $recommendationCreates = RecommendationCreate::where('mobile_user_id', $mobileUser->id)
+            ->with('recommendationDetail', 'mobileUser')->latest('updated_at')->paginate(5);
+
+        // $recommendationCreates = RecommendationCreate::with('recommendationDetail')->latest('updated_at')->paginate(5);
+        $recommendationCount = RecommendationCreate::count();
+        $recommendationCountPending = RecommendationCreate::where('approved_status', 'pending')->count();
+        $recommendationCountAccept = RecommendationCreate::where('approved_status', 'approved')->count();
+        $recommendationCountReject = RecommendationCreate::where('approved_status', 'reject')->count();
+        return view('recommendation::frontend.index', compact('recommendationCount', 'recommendationCreates', 'recommendationCountPending', 'recommendationCountAccept', 'recommendationCountReject'));
+
     }
 
     public function sipharishRegister()
@@ -36,13 +42,11 @@ class FrontendController extends Controller
         $recommendationCreate = DB::transaction(function () use ($request) {
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
                 'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
-                'created_by' => auth()->id()
+                'created_by' => Auth::guard('mobile-user')->id()
             ]);
-
-
-            if (array_key_exists('fields', $request->validated()) && !empty($request->validated()['fields'])) {
+            if (array_key_exists('fields', $request->validated()) && !empty ($request->validated()['fields'])) {
                 foreach ($request->validated()['fields'] as $field) {
-                    if (!empty($field['type']) && $field['type'] == 'image') {
+                    if (!empty ($field['type']) && $field['type'] == 'image') {
                         // Handle image upload if required
                         $value = Storage::disk('public')->putFile('recommendation/files', $field['value']);
                     } else {
@@ -51,9 +55,6 @@ class FrontendController extends Controller
 
                 }
             }
-
-
-
             return $recommendationCreate;
         });
 
@@ -62,14 +63,27 @@ class FrontendController extends Controller
     }
     public function sipharishList()
     {
-       
-        $recommendationCreates =RecommendationCreate::with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->paginate(10);
-        return view('recommendation::frontend.sipharishList',compact('recommendationCreates'));
+        $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
+        $recommendationCreates = RecommendationCreate::where('mobile_user_id', $mobileUser->id)->with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->paginate(10);
+        return view('recommendation::frontend.sipharishList', compact('recommendationCreates'));
     }
 
-    public function show($id)
+
+    public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
-        return view('recommendation::show');
+       
+        $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
+        // $recommendationCreate = RecommendationCreate::where('mobile_user_id', $mobileUser->id)->with('recommendationDetail', 'mobileUser');
+    
+            $recommendationCreate->load(
+                'recommendationValues.recommendationFormField',
+                'recommendationFiles.recommendationDocument',
+                'recommendationDetail.revenueHeaders'
+            )->where('mobile_user_id', $mobileUser->id);
+        $sipharisSetting = SipharisSetting::first();
+
+
+        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'sipharisSetting', 'mobileUser'));
     }
 
     public function edit($id)
@@ -86,7 +100,6 @@ class FrontendController extends Controller
     {
         if ($recommendationCreate->status == 1) {
             toast('सक्रिय भएको सिफारिस प्रकार मेटाउन मनाहि छ', 'error');
-
             return back();
         }
         $recommendationCreate->delete();

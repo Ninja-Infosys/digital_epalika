@@ -46,10 +46,9 @@
                                         <td>
                                             {{ optional($recommendationCreate->created_at)->format('Y-m-d') }}
                                         </td>
-
                                         <td>
                                             <div class="d-flex justify-content-around">
-                                                <a class="btn btn-xs btn-outline-warning " href="">
+                                                <a class="btn btn-xs btn-outline-warning " href="{{ route('recommendationrecommendation.recommendationListshow',$recommendationCreate) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path

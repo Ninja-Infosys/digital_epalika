@@ -1,5 +1,3 @@
-
-
 @extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section">
@@ -52,27 +50,27 @@
                                     <div class="info text-left w-75">
                                         <h5 class="mt-0 mb-1 card-title text-left">सिफारिस सुची</h5>
                                         <h6 class="card-text mt-2 text-left">सिफारिस सुची हेर्नुहोस् ।</h6>
-                                        <a href="{{ route('recommendationrecommendation.sipharishList')}}"
+                                        <a href="{{ route('recommendationrecommendation.sipharishList') }}"
                                             class="btn btn-outline-primary btn-sm"><span>सुचीहरु</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      
+
                         <!-- <div class="col-md-6 p-2">
-                                        <div class="card shadow text-center">
-                                            <div class="card-body">
-                                                <h5 class="mt-0 mb-1 card-title text-left"></h5>
-                                                <img class="icon" style="width: 40px" src="{{ asset('assets/frontend/image/login.png') }}" alt="">
-                                                <h6 class="card-text mt-2 text-left">
-                                                </h6>
-                                                <a href="" class="btn btn-outline-primary btn-sm"><span>लग इन</span>
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    <h5 class="mt-0 mb-1 card-title text-left"></h5>
+                                                    <img class="icon" style="width: 40px" src="{{ asset('assets/frontend/image/login.png') }}" alt="">
+                                                    <h6 class="card-text mt-2 text-left">
+                                                    </h6>
+                                                    <a href="" class="btn btn-outline-primary btn-sm"><span>लग इन</span>
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div> -->
+                                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
@@ -88,7 +86,7 @@
                                             d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
                                     </svg>
                                     {{-- <h4 class="fw-bold mt-2">{{ $grievanceCount }}</h4> --}}
-                                    <h4 class="fw-bold mt-2">{{  $recommendationCount }}</h4>
+                                    <h4 class="fw-bold mt-2">{{ $recommendationCount }}</h4>
                                     <h6 class="fw-semibold">कुल प्राप्त सिफारिस</h6>
                                 </div>
                             </div>
@@ -137,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                         {{-- <div class="col-md-2 p-2">
+                        {{-- <div class="col-md-2 p-2">
                             <div class="card bg-l-dark text-dark border-0 text-center">
                                 <div class="card-body">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -168,7 +166,7 @@
                                     <h6 class="fw-semibold">अस्वीकार गरिएको</h6>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,42 +180,81 @@
                                 <tr>
                                     <th scope="col">क्र.स.</th>
                                     <th scope="col">सिफारिसहरु</th>
-                                    <th  scope="col"> #</th>
+                                    <th scope="col"> #</th>
                                 </tr>
                                 <tr class="empty">
                                     <td></td>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($recommendationCreates as $recommendationCreate)
+                                
+                                    {{-- @forelse ($recommendationCreates as $recommendationCreate)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
+
+                                            <td>
+                                                <div class="d-flex gap-1">
+                                                    <a class="btn btn-xs btn-outline-warning " href="{{ route('recommendationrecommendation.recommendationListshow',$recommendationCreate)}}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor" class="bi bi-eye"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                            <path
+                                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                                        </svg>
+                                                    </a>
+                                                    <form
+                                                        action="{{ route('recommendationrecommendation.destroySipharish', $recommendationCreate->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button data-bs-type="delete"
+                                                            class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">No data available</td>
+                                        </tr>
+                                    @endforelse --}}
+                                    @foreach ($recommendationCreates as $recommendationCreate)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
-                                      
+                                     
                                         <td>
                                             <div class="d-flex gap-1">
-                                                <a class="btn btn-xs btn-outline-warning " href="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <a class="btn btn-xs btn-outline-warning " href="{{ route('recommendationrecommendation.recommendationListshow',$recommendationCreate)}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-eye"
+                                                        viewBox="0 0 16 16">
                                                         <path
                                                             d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                                                         <path
                                                             d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('recommendationrecommendation.destroySipharish', $recommendationCreate->id) }}" method="POST">
+                                                <form
+                                                    action="{{ route('recommendationrecommendation.destroySipharish', $recommendationCreate->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
+                                                    <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                                
+
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr class="empty">
-                                        <td></td>
+                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -225,30 +262,8 @@
                         </table>
                     </div>
                 </div>
-                {{-- <div class="col-md-7 grievance-answer">
-                    <h5 class="fw-semibold mb-4">सार्वजनिक गरिएका गुनासोहरु</h5>
-                    <p>
-                        @foreach ($grievanceDetails as $grievanceDetail)
-                            <button class="btn w-100" data-bs-toggle="collapse"
-                                data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false">
-                                {{ $grievanceDetail->subject }}
-                            </button>
-                        @endforeach
-                    </p>
-                    @foreach ($grievanceDetails as $grievanceDetail)
-                        <div class="collapse" id="collapse{{ $loop->iteration }}">
-                            <div class="card card-body">
-                                <p><i class="fa fa-angle-double-right m-lg-1"></i>{{ $grievanceDetail->description }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                    <a class="btn mb-1 mt-1 btn-primary mx-auto"
-                        href="{{ route('grievanceHandling.public-grievance') }}">थप
-                        गुनासोहरु
-                    </a>
-                </div> --}}
+
             </div>
         </div>
     </section>
 @endsection
-
