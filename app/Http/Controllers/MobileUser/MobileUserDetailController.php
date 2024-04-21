@@ -22,39 +22,39 @@ class MobileUserDetailController extends Controller
 
 
     public function store(StoreMobileDetailUserRequest $request)
-{
-$mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
+    {
+        $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
 
-    if ($mobileUser) {
-        if ($request->hasFile('citizenship_front') && $mobileUser->mobileUserDetail->citizenship_front) {
-            $this->deleteFile($mobileUser->mobileUserDetail->citizenship_front);
-        }
-        if ($request->hasFile('citizenship_back') && $mobileUser->mobileUserDetail->citizenship_back) {
-            $this->deleteFile($mobileUser->mobileUserDetail->citizenship_back);
-        }
-        if ($request->hasFile('nec_certificate') && $mobileUser->mobileUserDetail->nec_certificate) {
-            $this->deleteFile($mobileUser->mobileUserDetail->nec_certificate);
-        }
-        $mobileUserDetail = MobileUserDetail::updateOrCreate(
-            ['mobile_user_id' => $mobileUser->mobileUserDetail->id],
-            $request->validated()
-        );
-$mobileUserUpdatedData = [
-    'name' => $request->input('name'),
-    'email' => $request->input('email'),
-    'phone' => $request->input('phone'),
-    
-];
+        if ($mobileUser) {
+            if ($request->hasFile('citizenship_front') && $mobileUser?->mobileUserDetail?->citizenship_front) {
+                $this->deleteFile($mobileUser?->mobileUserDetail?->citizenship_front);
+            }
+            if ($request->hasFile('citizenship_back') && $mobileUser?->mobileUserDetail?->citizenship_back) {
+                $this->deleteFile($mobileUser?->mobileUserDetail?->citizenship_back);
+            }
+            if ($request->hasFile('nec_certificate') && $mobileUser?->mobileUserDetail?->nec_certificate) {
+                $this->deleteFile($mobileUser?->mobileUserDetail?->nec_certificate);
+            }
+            $mobileUserDetail = MobileUserDetail::updateOrCreate(
+                ['mobile_user_id' => $mobileUser->id],
+                $request->validated()
+            );
+            $mobileUserUpdatedData = [
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone'),
 
-if($request->hasFile('avatar')){
-    $mobileUserUpdatedData['avatar'] = $request->file('avatar');
-}
-        $mobileUser->update($mobileUserUpdatedData);
+            ];
 
-        return back()->with('success', 'Mobile user details updated successfully.');
-    } else {
-        return "not found";
+            if ($request->hasFile('avatar')) {
+                $mobileUserUpdatedData['avatar'] = $request->file('avatar');
+            }
+            $mobileUser->update($mobileUserUpdatedData);
+
+            return back()->with('success', 'Mobile user details updated successfully.');
+        } else {
+            return "not found";
+        }
     }
-}
 
 }
