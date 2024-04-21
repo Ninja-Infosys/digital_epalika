@@ -53,11 +53,13 @@ class DashboardController extends Controller
         $wardsData = collect();
         foreach (\officeSetting()->localBody->ward_no as $ward) {
             $wardsData->push([
-                'ward_no' => "वडा नं. $ward",
-                'registration_detail_count' => $this->registrationDetail()
-                    ->where('fiscal_year_id', \officeSetting()->fiscal_year_id)
-                    ->where('ward_no', $ward)
-                    ->count()
+                [
+                    'ward_no' => "वडा नं. $ward",
+                    'registration_detail_count' => $this->registrationDetail
+                        ->where('fiscal_year_id', \officeSetting()->fiscal_year_id)
+                        ->where('ward_no', $ward)
+                        ->count()
+                ]
             ]);
         }
 
