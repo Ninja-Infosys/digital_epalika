@@ -70,43 +70,13 @@ class FrontendController extends Controller
 
 
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
-    // {
-       
-    //     $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
-    //     // $recommendationCreate = RecommendationCreate::where('mobile_user_id', $mobileUser->id)->with('recommendationDetail', 'mobileUser');
-    
-    //         $recommendationCreate->load(
-    //             'recommendationValues.recommendationFormField',
-    //             'recommendationFiles.recommendationDocument',
-    //             'recommendationDetail'
-    //         )->where('mobile_user_id', $mobileUser->id);
-    //         // dd($recommendationCreate);
-    //     $sipharisSetting = SipharisSetting::first();
-
-    //     return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'sipharisSetting', 'mobileUser'));
-    // }
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
 
-$recommendationCreate->load('recommendationDetail','recommendationValues','recommendationFiles');
+        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles');
         return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser'));
     }
-    // public function recommendationListshow(RecommendationCreate $recommendationCreate)
-    // {
 
-    //     $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
-    //     // $recommendationCreate = RecommendationCreate::where('mobile_user_id', $mobileUser->id)->with('recommendationDetail', 'mobileUser');
-
-    //         $recommendationCreate->load(
-    //             'recommendationValues.recommendationFormField',
-    //             'recommendationFiles.recommendationDocument',
-    //             'recommendationDetail.revenueHeaders'
-    //         )->where('mobile_user_id', $mobileUser->id);
-    //     $sipharisSetting = SipharisSetting::first();
-
-
-    //     return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'sipharisSetting', 'mobileUser'));
-    // }
 
     public function edit($id)
     {
