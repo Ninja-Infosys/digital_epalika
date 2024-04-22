@@ -15,5 +15,5 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('sipharishRegisterStore','sipharishRegisterStore')->name('recommendation.register.store');
     Route::get('sipharishList','sipharishList')->name('recommendation.sipharishList');
     Route::Put('destroySipharish/{recommendationCreate}','destroySipharish')->name('recommendation.destroySipharish');
-    Route::get('recommendationListshow','recommendationListshow')->name('recommendation.recommendationListshow');
+    Route::get('recommendationListshow/{recommendationCreate}','recommendationListshow')->name('recommendation.recommendationListshow');
 });

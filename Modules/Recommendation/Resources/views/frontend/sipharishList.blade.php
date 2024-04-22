@@ -35,6 +35,7 @@
                                     <th scope="col">क्र.स.</th>
                                     <th scope="col">सिफारिस शीर्षक</th>
                                     <th scope="col">प्रकाशित मिति</th>
+                                    <th scope="col">स्थिति</th>
                                     <th class="text-center" scope="col">#</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,10 @@
                                         <td>
                                             {{ optional($recommendationCreate->created_at)->format('Y-m-d') }}
                                         </td>
+                                        <td>
+                                            {{ optional($recommendationCreate)->approved_status }}
+                                        </td>
+
                                         <td>
                                             <div class="d-flex justify-content-around">
                                                 <a class="btn btn-xs btn-outline-warning " href="{{ route('recommendationrecommendation.recommendationListshow',$recommendationCreate) }}">
@@ -64,7 +69,7 @@
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                                
+
                                             </div>
                                         </td>
                                     </tr>
