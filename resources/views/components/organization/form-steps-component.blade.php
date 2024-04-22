@@ -16,7 +16,6 @@
                 <td>{{ $form->title }}</td>
                 <td>
                     {{ $form->need_from?->label() ?? '' }}
-                    {{--                                        {{$mapApply->getCheckFormFilledAttribute($form->formDataTypes->pluck('original_type')->toArray())}} --}}
                 </td>
                 <td>{{$form->map_status?->label()}}</td>
                 <td class="d-flex">
