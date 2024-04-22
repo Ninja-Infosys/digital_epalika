@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <h4 class="form-label"><b>३. पालिका :</b>
-                                                {{ $mapApply->landOwner?->local_body ?? '' }}
+                                                {{ $mapApply->landOwner?->localBody->local_body ?? '' }}
                                             </h4>
 
                                         </div>
@@ -343,7 +343,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <h4 class="form-label"><b>३. पालिका :</b>
-                                                {{ $mapApply->houseOwner?->local_body ?? '' }}
+                                                {{ $mapApply->houseOwner?->localBody->local_body ?? '' }}
                                             </h4>
 
                                         </div>
@@ -456,7 +456,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <h4 class="form-label"><b>३. पालिका :</b>
-                                                {{ $designerDetail->local_body ?? '' }}
+                                                {{ $designerDetail->localBody->local_body ?? '' }}
                                             </h4>
 
                                         </div>
