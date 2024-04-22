@@ -16,16 +16,16 @@ class DashboardController extends Controller
 
     protected Collection $registrationDetail;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->registrationDetail = RegistrationDetail::get();
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //     $this->registrationDetail = RegistrationDetail::get();
+    // }
 
     public function index()
     {
         $this->checkAuthorization('recommendationDashboard_access');
-        
+
 
         if (request()->ajax()) {
             return [
