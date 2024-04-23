@@ -21,10 +21,26 @@ class EmployeeController extends Controller
     {
         $this->checkAuthorization('employee_access');
 
+        // $employees = Employee::orderBy('position')->where(function (Builder $q) {
+        //     if (!is_null(request('search'))) {
+        //         $q->whereLike(['designation', 'name'], request('search'));
+        //     }
+        //     if (!empty(auth()->user()->ward_no)) {
+        //         $authWardNo = auth()->user()->ward_no;
+
+
+        //         if (is_array($authWardNo)) {
+        //             foreach ($authWardNo as $ward) {
+        //                 $q->orWhereRaw("FIND_IN_SET('$ward', ward) > 0");
+        //             }
+        //         } else {
+
+        //             $q->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0");
+        //         }
+        //     }
+        // })
+        //     ->latest()->paginate(10);
         $employees = Employee::orderBy('position')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['designation', 'name'], request('search'));
-            }
             if (!empty(auth()->user()->ward_no)) {
                 $authWardNo = auth()->user()->ward_no;
 
@@ -39,7 +55,7 @@ class EmployeeController extends Controller
                 }
             }
         })
-            ->latest()->paginate(10);
+        ->get();
 
 
         return view('admin.global.employee.index', compact('employees'));
@@ -60,13 +76,11 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         $this->checkAuthorization('employee_create');
-        $employee = Employee::create($request->validated()+[
-        'ward' => auth()->user()->ward_no
-        ]);
-
+        Employee::create($request->validated()+['ward'=>auth()->user()->ward_no]);
         toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
-        return back()->with('success', 'कर्मचारी सफलतापूर्वक थपियो');
+        return redirect(route('admin.global.generalSetting.employee.index'));
     }
+
 
     public function show(Employee $employee)
     {

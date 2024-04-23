@@ -96,7 +96,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $employees->onEachSide(config('app.pagination_count'))->links() }}
+                    {{-- {{ $employees->onEachSide(config('app.pagination_count'))->links() }} --}}
                 </div>
             </div>
         </div>

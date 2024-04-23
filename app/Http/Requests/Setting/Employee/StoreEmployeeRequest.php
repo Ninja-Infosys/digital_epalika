@@ -44,6 +44,7 @@ class StoreEmployeeRequest extends FormRequest
             'insurance_card_no' => ['nullable'],
             'description' => ['nullable'],
             'ward_no' => ['nullable', 'array'],
+            'is_displayed' => ['nullable', 'boolean'],
 
         ];
     }

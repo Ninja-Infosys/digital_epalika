@@ -24,6 +24,7 @@ class OfficeHeader extends Model
         'position',
         'font_color',
         'title_en',
-        'card_font'
+        'card_font',
+        'ward'
     ];
 }
