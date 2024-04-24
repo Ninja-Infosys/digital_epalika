@@ -283,7 +283,8 @@
                                         <option value="1" {{ old('show_to_mobile_app') == 0 ? 'selected' : '' }}>
                                             देखाउने
                                         </option>
-                                        <option value="0" {{ old('show_to_mobile_app') == 1 ? 'selected' : '' }}>नदेखाउने
+                                        <option value="0" {{ old('show_to_mobile_app') == 1 ? 'selected' : '' }}>
+                                            नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_mobile_app')
@@ -301,27 +302,37 @@
                             <div class="col-md-4 mb-2">
 
 
-                                    @if (auth()->user()->role->type == 'Super')
-
+                                @if (auth()->user()->role->type == 'Super')
                                     <label for="ward" class="form-label">वडा</label>
                                     <select name="ward[]" id="ward" class="form-select"
                                         @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
                                         <option value="">---वडा छान्नुहोस्---</option>
                                         @foreach (officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{ $ward }}"
-                                                {{-- {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no))) ? 'selected' : '' }}> --}}
+                                            <option value="{{ $ward }}" {{-- {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no))) ? 'selected' : '' }}> --}}
                                                 {{ in_array($ward, old('ward', $employee->ward)) ? 'selected' : '' }}>
                                                 {{ $ward }}</option>
                                         @endforeach
                                     </select>
-                                    @endif
 
-                                @error('ward')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                @error('ward.*')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+
+                                    @error('ward')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('ward.*')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="col-md-6 mb-2">
+                                        <input type="checkbox" name="is_displayed" value="1"
+                                            class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                            id="is_displayed"
+                                            @if (!empty(auth()->user()->ward_no)) disabled @else checked @endif />
+                                        <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
+
+                                        @error('is_displayed')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                @endif
                             </div>
 
                         </fieldset>

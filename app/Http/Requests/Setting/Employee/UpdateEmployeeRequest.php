@@ -44,6 +44,7 @@ class UpdateEmployeeRequest extends FormRequest
             'description' => ['nullable'],
             'ward' => ['nullable', 'array'],
             'ward.*' => ['string'],
+            'is_displayed' => ['nullable', 'boolean']
 
         ];
     }

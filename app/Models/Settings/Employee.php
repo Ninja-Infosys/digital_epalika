@@ -56,7 +56,8 @@ class Employee extends Model
         'cif_no',
         'insurance_card_no',
         'description',
-        'ward'
+        'ward',
+        'is_displayed',
     ];
 
     protected $casts = [
