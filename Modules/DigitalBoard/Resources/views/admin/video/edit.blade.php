@@ -58,8 +58,8 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
-                                @if (auth()->user()->role->type == 'Super')
+                            @if (auth()->user()->role->type == 'Super')
+                                <div class="col-md-6 mb-2">
                                     <label for="ward" class="form-label">वडा</label>
                                     <select class="form-control @error('ward') is-invalid @enderror" name="ward[]"
                                         id="ward" {{ !empty(auth()->user()->ward_no) ? 'disabled' : '' }} multiple>
@@ -72,32 +72,36 @@
                                         @endforeach
 
                                     </select>
-                                @endif
-                                @error('ward')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                @error('ward.*')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
 
-                            <div class="col-md-6 mb-2">
-                                <input type="checkbox" name="is_displayed" value="1"
-                                    class="form-check-input @error('is_displayed') is-invalid @enderror" id="is_displayed"
-                                    @if (!empty(auth()->user()->ward_no)) disabled @else checked @endif />
-                                <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
+                                    @error('ward')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('ward.*')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="col-md-6 mb-2">
+                                        <input type="checkbox" name="is_displayed" value="1"
+                                            class="form-check-input @error('is_displayed') is-invalid @enderror"
+                                            id="is_displayed"
+                                            @if (!empty(auth()->user()->ward_no)) disabled @else checked @endif />
+                                        <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
 
-                                @error('is_displayed')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                                        @error('is_displayed')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
                         </div>
+
+
 
                         <button type="submit" class="btn btn-primary">
                             Update
                         </button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

@@ -42,7 +42,7 @@ class FrontController extends Controller
             return view('frontend.digital_board');
         }
 
-       
+
          if ($checkRoutes->filter()->count() > 1) {
             return redirect(route('digital-service'));
         } else {
