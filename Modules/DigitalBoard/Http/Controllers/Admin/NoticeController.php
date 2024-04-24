@@ -14,42 +14,67 @@ use Illuminate\Database\Eloquent\Builder;
 
 class NoticeController extends Controller
 {
-    public function index($type)
-    {
-        $this->checkAuthorization('digitalBoardNotice_access');
+    // public function index($type)
+    // {
+    //     $this->checkAuthorization('digitalBoardNotice_access');
 
-        // Check if the authenticated user has a ward number
-        if (!empty(auth()->user()->ward_no)) {
-            $authWardNo = auth()->user()->ward_no;
+    //     // Check if the authenticated user has a ward number
+    //     if (!empty(auth()->user()->ward_no)) {
+    //         $authWardNo = auth()->user()->ward_no;
 
-            // Ensure $authWardNo is a string
-            if (is_array($authWardNo)) {
-                // If ward_no is an array, convert it to a comma-separated string
-                $authWardNo = implode(',', $authWardNo);
+    //         // Ensure $authWardNo is a string
+    //         if (is_array($authWardNo)) {
+    //             // If ward_no is an array, convert it to a comma-separated string
+    //             $authWardNo = implode(',', $authWardNo);
+    //         }
+
+    //         // Fetch notices for the authenticated user's ward number
+    //         $notices = Notice::with('user')
+    //             ->where('type', $type === 'News' ? 'News' : 'Notice')
+    //             ->orderByDesc('date')
+    //             ->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0")
+    //             ->latest()
+    //             ->paginate(10);
+    //     } else {
+    //         // Handle the case where auth()->user()->ward_no is empty
+    //         // Fetch all notices without filtering by ward number
+    //         $notices = Notice::with('user')
+    //             ->where('type', $type === 'News' ? 'News' : 'Notice')
+    //             ->orderByDesc('date')
+    //             ->latest()
+    //             ->paginate(10);
+    //     }
+
+    //     // Pass notices and type to the view
+    //     return view('digitalboard::admin.notice.index', compact('notices', 'type'));
+    // }
+    public function index($type){
+    $this->checkAuthorization('digitalBoardNotice_access');
+
+    // Check if the authenticated user has a ward number
+    $notices = Notice::with('user')
+        ->where(function ($q) {
+            if (!empty(auth()->user()->ward_no)) {
+                $q->where('ward', auth()->user()->ward_no);
             }
-
-            // Fetch notices for the authenticated user's ward number
-            $notices = Notice::with('user')
-                ->where('type', $type === 'News' ? 'News' : 'Notice')
-                ->orderByDesc('date')
-                ->whereRaw("FIND_IN_SET('$authWardNo', ward) > 0")
-                ->latest()
-                ->paginate(10);
-        } else {
-            // Handle the case where auth()->user()->ward_no is empty
-            // Fetch all notices without filtering by ward number
-            $notices = Notice::with('user')
-                ->where('type', $type === 'News' ? 'News' : 'Notice')
-                ->orderByDesc('date')
-                ->latest()
-                ->paginate(10);
-        }
-
-        // Pass notices and type to the view
-        return view('digitalboard::admin.notice.index', compact('notices', 'type'));
+        })
+        ->contentType($type)
+        ->orderByDesc('date')
+        ->where(function (Builder $q) {
+            if (!empty(auth()->user()->ward_no)) {
+                $authWardNo = auth()->user()->ward_no;
+               
+                $wardString = implode(',', (array) $authWardNo);
+                $q->whereRaw("FIND_IN_SET('$wardString', ward) > 0");
+            }
+        })
+        ->latest()
+        ->simplePaginate(10);
+    
+    // Pass notices and type to the view
+    return view('digitalboard::admin.notice.index', compact('notices', 'type'));
+    
     }
-
-
 
     public function create($type)
     {

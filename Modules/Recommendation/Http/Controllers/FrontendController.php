@@ -73,7 +73,7 @@ class FrontendController extends Controller
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
 
-        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles');
+        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles',);
         return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser'));
     }
 
