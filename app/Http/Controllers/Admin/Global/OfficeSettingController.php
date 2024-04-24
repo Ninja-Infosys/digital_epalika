@@ -20,7 +20,16 @@ class OfficeSettingController extends Controller
         $this->checkAuthorization('officeSetting_access');
         $officeSetting = OfficeSetting::first();
         $fiscalYears = FiscalYear::get();
-        $officeHeaders = OfficeHeader::orderBy('position')->get();
+        // $officeHeaders = OfficeHeader::orderBy('position')->get();
+        $officeHeaders = OfficeHeader::where(function ($q) {
+            if (!empty(auth()->user()->ward_no)) {
+                $q->where('ward', auth()->user()->ward_no);
+            } else {
+                $q->whereNull('ward');
+            }
+        })
+        ->orderBy('position')
+        ->get();
 
         return view('admin.global.officeSetting.index', compact('officeSetting', 'officeHeaders', 'fiscalYears'));
     }
@@ -30,27 +39,27 @@ class OfficeSettingController extends Controller
         $this->checkAuthorization('officeSetting_edit');
         $validationData = $request->validate(
             [
-            'name' => ['required', 'string'],
-            'site_address' => ['nullable', 'string'],
-            'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
-            'logo1' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
-            'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
-            'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
-            'google_map' => ['nullable'],
-            'province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
-            'district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
-            'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-            'fiscal_year_id' => ['nullable', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
-            'ward_no' => ['nullable'],
-            'phone' => ['nullable'],
-            'introduction' => ['nullable'],
-            'email' => ['nullable'],
-            'website' => ['nullable', 'url'],
-            'facebook_link' => ['nullable', 'url'],
-        ],
+                'name' => ['required', 'string'],
+                'site_address' => ['nullable', 'string'],
+                'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+                'logo1' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+                'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+                'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
+                'google_map' => ['nullable'],
+                'province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
+                'district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
+                'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+                'fiscal_year_id' => ['nullable', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+                'ward_no' => ['nullable'],
+                'phone' => ['nullable'],
+                'introduction' => ['nullable'],
+                'email' => ['nullable'],
+                'website' => ['nullable', 'url'],
+                'facebook_link' => ['nullable', 'url'],
+            ],
             [
-            'name.required' => 'नाम अनिवार्य छ|',
-        ]
+                'name.required' => 'नाम अनिवार्य छ|',
+            ]
         );
 
         if ($request->hasFile('logo') && $officeSetting->logo) {
