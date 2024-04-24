@@ -14,11 +14,11 @@
                         <li class="breadcrumb-item active">सिफारिस</li>
                     </ol>
                 </div>
-            @if ($recommendationCreate->approved_status=='approved')
-            <h4 class="page-title"> सिफारिस</h4>
-            @else
-            <h4 class="page-title">नयाँ सिफारिस</h4>
-            @endif
+                @if ($recommendationCreate->approved_status == 'approved')
+                    <h4 class="page-title"> सिफारिस</h4>
+                @else
+                    <h4 class="page-title">नयाँ सिफारिस</h4>
+                @endif
 
             </div>
         </div>
@@ -72,10 +72,8 @@
                                             @foreach ($recommendationCreate->recommendationValues as $key => $recommendationValue)
                                                 <tr>
                                                     <td>
-                                                        {{--                                                {{dd($sipharishCreatedValue->sipharish_form_field_id)}} --}}
                                                         {{ $recommendationValue?->recommendationFormField?->field_name ?? '' }}
                                                     </td>
-
                                                     <td>
                                                         {{ $recommendationValue->value ?? '' }}
                                                     </td>
@@ -109,7 +107,7 @@
 
                                                 <td>
                                                     {{ $recommendationCreate->personalDetail?->gender->label() ??
-                                                    ($recommendationCreate?->mobileUser?->mobileUserDetail?->gender->label()  ) }}
+                                                        $recommendationCreate?->mobileUser?->mobileUserDetail?->gender->label() }}
 
                                                 </td>
                                                 <td>
@@ -118,7 +116,7 @@
                                                 </td>
                                                 <td>
                                                     {{ $recommendationCreate->personalDetail->province->province ?? ($recommendationCreate?->mobileUser?->mobileUserDetail?->province?->province ?? '') }},
-                                                    {{ $recommendationCreate->personalDetail->district->district ?? ($recommendationCreate?->mobileUser?->mobileUserDetail?->district?->district ?? '')  }}
+                                                    {{ $recommendationCreate->personalDetail->district->district ?? ($recommendationCreate?->mobileUser?->mobileUserDetail?->district?->district ?? '') }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -445,9 +443,9 @@
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
 
-                                        @if ($recommendationCreate->status != 'sent_to_revenue')
-                                            <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
-                                        @endif
+                                    @if ($recommendationCreate->status != 'sent_to_revenue')
+                                        <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
+                                    @endif
 
                                 </div>
                             </div>

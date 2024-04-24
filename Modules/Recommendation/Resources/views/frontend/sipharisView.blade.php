@@ -2,21 +2,16 @@
 @section('content')
 
     @include('admin.inc.file-view')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-4">
 
-    <div class="row">
-
-        <div class="col-md-12">
-            @if ($recommendationCreate->approved_status == 'pending')
-                <div class="card">
+                <div class="">
                     <div class="d-flex justify-content-between">
                         <div>
                             <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
                         </div>
                         <div class="d-flex justify-content-between gap-1">
-                            {{-- <a href="{{ route('admin.recommendation.recommendationCreate.edit', $recommendationCreate) }}"
-                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-edit"></i> सम्पादन र समीक्षा गर्नुहोस्
-                            </a> --}}
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="header-title mb-0"></h4>
                                 <button class="btn btn-sm btn-info"
@@ -30,16 +25,16 @@
                                 </button>
                             </div>
                             {{-- <a href="{{ route('admin.recommendation.recommendationCreate.index') }}"
-                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"></i> सिफारिस सुची
-                            </a> --}}
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-list"></i> सिफारिस सुची
+                                </a> --}}
                         </div>
                     </div>
                 </div>
                 <div class="main" id="printData">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-3">
                                 <div class="table-responsive">
                                     <table class="table table-sm mb-0 table-bordered table-striped">
                                         <thead>
@@ -82,7 +77,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    {{ $mobileUser?->name ?? ''}}
+                                                    {{ $mobileUser?->name ?? '' }}
                                                 </td>
 
                                                 <td>
@@ -95,7 +90,7 @@
                                                 </td>
                                                 <td>
                                                     {{ $mobileUser?->mobileUserDetail?->province?->province ?? '' }},
-                                                    {{ $mobileUser?->mobileUserDetail?->district?->district ?? ''  }}
+                                                    {{ $mobileUser?->mobileUserDetail?->district?->district ?? '' }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -105,8 +100,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div class="row mt-3">
+                        {{-- <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="header-title mb-0">फाईलहरु</h4>
@@ -147,13 +142,13 @@
                                     </div> <!-- end row-->
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         @include('admin.inc.file-view')
 
                     </div>
-                    @if ($recommendationCreate->status == 'sent_to_revenue')
+                    @if ($recommendationCreate->status == 'sent_to_revenue' || $recommendationCreate->status == 'sent_to_approver')
                         <div class="row mt-3">
-                            <div class="card-header">
+                          <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">बिल प्रिन्ट</h4>
                                     <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
@@ -189,7 +184,8 @@
                                                         <!-- Assuming these properties exist, replace them with the actual column names -->
                                                         <td>{{ get_nepali_number($recommendationCreate->recommendationDetail->service_cost) }}
                                                         </td>
-                                                        <td>{{ get_nepali_number($revenueHeaders->quantity ?? 1) }}</td>
+                                                        <td>{{ get_nepali_number($revenueHeaders->quantity ?? 1) }}
+                                                        </td>
                                                         <td>{{ get_nepali_number($total += $recommendationCreate->recommendationDetail->service_cost * 1) }}
                                                         </td>
                                                     </tr>
@@ -202,7 +198,8 @@
                                                         <td>{{ $revenueHeaders->title }}</td>
                                                         <!-- Assuming these properties exist, replace them with the actual column names -->
                                                         <td>{{ get_nepali_number($revenueHeaders->amount) }}</td>
-                                                        <td>{{ get_nepali_number($revenueHeaders->quantity ?? 1) }}</td>
+                                                        <td>{{ get_nepali_number($revenueHeaders->quantity ?? 1) }}
+                                                        </td>
                                                         <td>{{ get_nepali_number($total += $revenueHeaders->amount * 1) }}
                                                         </td>
                                                     </tr>
@@ -224,18 +221,54 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     @endif
                 </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
+                                    @if ($recommendationCreate->status != 'sent_to_revenue')
+                                        <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="print" class="p-1">
+                                    <style>
+                                        @page {
+                                            margin-top: 0;
+                                        }
+                                    </style>
+                                    {!! $recommendationCreate->resolveTemplate() ?? '' !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-
-            @endif
-
+            </div>
         </div>
     </div>
-
+    {{-- <script>
+        function printForm() {
+            printJS({
+                printable: '{{ $targetElement }}',
+                type: 'html',
+                documentTitle: '{{ $title }}',
+                showModal: true,
+                header: $('.header-content').html(),
+                targetStyles: ['*'],
+                css: ['{{ asset('assets/backend/css/bootstrap.min.css') }}',
+                    '{{ asset('assets/backend/css/app.min.css') }}'
+                ],
+                scanStyles: false,
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
+            });
+        }
+    </script> --}}
 
 @endsection

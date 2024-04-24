@@ -59,7 +59,7 @@ class FrontController extends Controller
     }
 
 
-    public function notice()
+    public function notice($ward)
     {
         $notices = Notice::where('type', 'Notice')->orderBy('date')->get();
 
