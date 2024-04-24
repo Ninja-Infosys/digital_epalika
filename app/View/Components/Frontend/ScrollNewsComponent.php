@@ -22,7 +22,6 @@ class ScrollNewsComponent extends Component
             })
             ->orWhere('is_displayed', true) // Include notices marked as displayed everywhere
             ->orderByDesc('date')
-            
             ->get();
     }
     
