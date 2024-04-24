@@ -62,6 +62,10 @@ class RecommendationDetail extends Model
     {
         return $this->hasMany(RecommendationFormField::class);
     }
+    public function recommendationCreates(): HasMany
+    {
+        return $this->hasMany(RecommendationCreate::class);
+    }
 
     public function getTemplateOptions(): array
     {

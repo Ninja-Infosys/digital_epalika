@@ -103,15 +103,18 @@ class RecommendationCreate extends Model
         $replaceableList->put('[@district]', (string) officeSetting()->district?->district);
         $replaceableList->put('[@muncipal]', (string) officeSetting()->localBody?->local_body);
 
-        $wardNo = auth()->user()->ward_no;
+        $wardNo = auth()->user()?->ward_no;
         if (is_array($wardNo)) {
             $wardNo = implode(', ', $wardNo);
         }
-        $replaceableList->put('[@ward_no]', (string) $wardNo);
+        else{
+            return $wardNo;
+        }
+        $replaceableList->put('[@ward_no]', (string) officeSetting()->ward_no);
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', (string) today()->toDateString());
-        $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
-        $replaceableList->put('[@approver_signature]', '<img src="' . (auth()->user()->signature_photo_path_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
+        $replaceableList->put('[@approver_signature]', '<img src="' . (auth()->user()->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
+        $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
 
 
         $replaceableKeys = $replaceableList->keys()->toArray();
