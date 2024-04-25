@@ -156,7 +156,7 @@
                                     <input
                                         type="email"
                                         name="email"
-                                        value="{{old('email',$officeSetting->email)}}"
+                                        value="{{old('email',$officeSetting?->email)}}"
                                         class="form-control @error('email') is-invalid @enderror"
                                         id="email"
                                         placeholder="इमेल"
@@ -170,7 +170,7 @@
                                     <input
                                         type="text"
                                         name="phone"
-                                        value="{{old('phone',$officeSetting->phone)}}"
+                                        value="{{old('phone',$officeSetting?->phone)}}"
                                         class="form-control @error('phone') is-invalid @enderror"
                                         id="phone"
                                         placeholder="फोन नम्बर"
