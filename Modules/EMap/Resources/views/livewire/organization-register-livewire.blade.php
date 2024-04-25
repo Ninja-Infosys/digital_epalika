@@ -36,11 +36,11 @@
             @case(2)
                 <div class="company-document card p-2">
                     <center>
-                        <p style="padding: 10px; color:red;">Note: (*) Please upload file must be less than 200kb.</p>
+                        <p style="padding: 10px; color:red;">Note: (*) Please upload file must be in photo and  less than 200kb.</p>
                     </center>
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो (छापा)
+                            <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो (छापा) 
                                 <span class="text-danger">*</span></label>
                             <input type="file" class="form-control {{ $organizationDetail['logo'] ? 'is-valid' : '' }}"
                                 id="organizationDetail.logo" wire:model="organizationDetail.logo" />
@@ -126,7 +126,7 @@
                             @enderror
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="muncipalRegistration.file" class="form-label">अन्य फाइल
+                            <label for="muncipalRegistration.file" class="form-label">अन्य फाइल (photo,pdf)
                                 <span class="text-danger">*</span>
                             </label>
                             <input name="muncipalRegistration.file"

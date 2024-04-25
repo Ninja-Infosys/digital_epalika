@@ -55,6 +55,7 @@ class AppliedDocument extends Model
             DocumentStatusEnum::REVIEW->value => false,
             DocumentStatusEnum::PENDING->value,
             DocumentStatusEnum::REJECTED->value => true,
+            default => false
         };
     }
 

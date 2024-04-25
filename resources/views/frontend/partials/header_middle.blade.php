@@ -13,7 +13,7 @@ $currentDateTime = date('Y-m-d H:i:s');
                 <img alt="nepal-government-logo" class="logo img-responsive center-block d-block mx-auto"
                     src="{{ asset('assets/frontend/image/logo.png') }}" />
             </a>
-            <x-header-component :ward="$ward ?? null" />
+            <x-header-component :ward="$ward "?? nul />
         </div>
         <div class="d-flex align-items-center">
             <a href="{{ route('digital-service') }}" class="me-3 text-white text-decoration-underline ">विधुतीय शुसासन सेवा</a>
