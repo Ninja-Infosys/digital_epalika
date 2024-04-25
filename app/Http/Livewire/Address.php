@@ -25,7 +25,6 @@ class Address extends Component
     public function mount($address = null)
     {
         $this->provinces = get_provinces();
-
         if (!empty($address)) {
             $this->province_id = $address['province_id'] ?? '';
             $this->district_id = $address['district_id'] ?? '';

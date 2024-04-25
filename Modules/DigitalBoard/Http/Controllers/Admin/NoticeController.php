@@ -61,7 +61,7 @@ class NoticeController extends Controller
                 'closed_at' => ['nullable'],
                 'show_on_index' => ['nullable', 'boolean'],
                 'files' => ['array', 'nullable'],
-                'files.*' => ['mimes:png,jpeg,jpg'],
+                'files.*' => ['mimes:png,jpeg,jpg,pdf'],
                 'ward' => ['nullable', 'array'],
                 'is_displayed' => ['nullable', 'boolean'],
 
@@ -75,7 +75,7 @@ class NoticeController extends Controller
                 'closed_at' => ['nullable'],
                 'show_on_index' => ['nullable', 'boolean'],
                 'files' => ['array', 'required'],
-                'files.*' => ['mimes:png,jpeg,jpg'],
+                'files.*' => ['mimes:png,jpeg,jpg,pdf'],
                 'ward' => ['nullable', 'array'],
                 'is_displayed' => ['nullable', 'boolean']
             ]);

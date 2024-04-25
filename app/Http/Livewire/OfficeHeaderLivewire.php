@@ -37,8 +37,6 @@ class OfficeHeaderLivewire extends Component
         'officeHeaders.*.font_size' => ['required', 'max:255'],
         'officeHeaders.*.position' => ['nullable', 'integer'],
         'officeHeaders.*.font' => ['required'],
-        'officeHeaders.*.ward' => ['nullable'],
-
     ];
 
     public function addOfficeHeader()
@@ -61,10 +59,8 @@ class OfficeHeaderLivewire extends Component
 
         DB::transaction(function () {
             foreach ($this->officeHeaders as $officeHeader) {
-                // $officeHeader['ward'] = auth()->user()->ward_no; // Add 'ward' attribute to each $officeHeader
-                OfficeHeader::create($officeHeader + [
-                    'ward' => auth()->user()->ward_no
-                ]);
+                $officeHeader['ward'] = auth()->user()->ward_no; // Add 'ward' attribute to each $officeHeader
+                OfficeHeader::create($officeHeader);
             }
         });
 
