@@ -95,9 +95,10 @@ class OfficeSetting extends Model
     public function getAddressAttribute(): array
     {
         return [
-            'province_id' => $this->attributes['province_id'],
-            'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
+            'province_id' => $this->attributes['province_id'] ?? null,
+            'district_id' => $this->attributes['district_id'] ?? null,
+            'local_body_id' => $this->attributes['local_body_id'] ?? null,
+            'ward_no' => $this->attributes['ward_no'] ?? null,
         ];
     }
 

@@ -54,13 +54,13 @@
 
     <li class="{{request()->routeIs('admin.digitalBoard.citizenCharter.*') ? 'active' : ''}}">
         <a href="{{route('admin.digitalBoard.citizenCharter.index')}}">
-            <i class="fa fa-scroll"></i>
+            <i class="fa fa-file"></i>
             <span> नागरिक वडापत्र</span>
         </a>
     </li>
 <li class="{{request()->routeIs('admin.digitalBoard.program.*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.program.index')}}">
-        <i class="fa fa-scroll"></i>
+        <i class="fa fa-server"></i>
         <span>कार्यक्रम</span>
     </a>
 </li>
@@ -68,14 +68,14 @@
 
     <li class="{{request()->routeIs('admin.digitalBoard.photoGallery.*') ? 'active' : ''}}">
         <a href="{{route('admin.digitalBoard.photoGallery.index')}}">
-            <i class="fa fa-scroll"></i>
+            <i class="fa fa-images"></i>
             <span>  फोटो ग्यालरी</span>
         </a>
     </li>
 
     <li class="{{request()->routeIs('admin.digitalBoard.audio.*') ? 'active' : ''}}">
         <a href="{{route('admin.digitalBoard.audio.index')}}">
-            <i class="fa fa-scroll"></i>
+            <i class="fa fa-play"></i>
             <span>  अडियो</span>
         </a>
     </li>
