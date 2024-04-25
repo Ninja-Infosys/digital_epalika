@@ -53,6 +53,8 @@ Route::get('executive', [FrontController::class, 'executive'])->name('executive'
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
 Route::get('ward/{ward}', [FrontController::class, 'wardIndex'])->name('wardIndex');
+Route::get('/newWard', [FrontController::class,'newWard'])->name('newWard');
+
 Route::get('/mobileUser', [FrontController::class, 'mobileUser'])->name('mobileUser');
 // Route::get('ebps', 'eMap')->name('ebps');
 
