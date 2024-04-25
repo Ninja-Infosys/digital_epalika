@@ -22,14 +22,24 @@ class HeaderComponent extends Component
     public string $day = '';
     public bool $hasClock = true;
 
-    public function __construct($hasClock = true)
+    public function __construct(bool $hasClock = true, ?int $ward = null)
     {
-        $this->headers = OfficeHeader::orderBy('position')->get();
+        $this->headers = OfficeHeader::where(function ($q) use ($ward) {
+            if (!is_null($ward)) {
+                $q->where('ward', $ward);
+            } else {
+                $q->whereNull('ward');
+            }
+        })
+            ->orderBy('position')
+            ->get();
+
         $this->hasClock = $hasClock;
-        if ($hasClock) {
+
+        if ($this->hasClock) {
             $nepaliDate = $this->get_nepali_date(date('Y'), date('m'), date('d'));
-            $this->year = Str::padLeft($nepaliDate['y'], 4, 0);
-            $this->day = Str::padLeft($nepaliDate['d'], 2, 0);
+            $this->year = str_pad($nepaliDate['y'], 4, '0', STR_PAD_LEFT);
+            $this->day = str_pad($nepaliDate['d'], 2, '0', STR_PAD_LEFT);
             $this->month = $nepaliDate['M'];
         }
     }

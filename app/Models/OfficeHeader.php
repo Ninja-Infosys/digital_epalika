@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,4 +28,19 @@ class OfficeHeader extends Model
         'card_font',
         'ward'
     ];
+
+    protected function ward(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                return $value !== null ? explode(',', $value) : [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+                return $value;
+            }
+        );
+    }
 }

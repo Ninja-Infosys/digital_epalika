@@ -6,42 +6,15 @@ use App\Models\OfficeHeader;
 
 class OfficeHeaderObserver
 {
-    // public function creating(OfficeHeader $officeHeader)
-    // {
-    //     if (is_null($officeHeader->position)) {
-    //         $officeHeader->position = OfficeHeader::max('position') + 1;
-
-    //         return;
-    //     }
-
-    //     $lowerPriorityOfficeHeaders = OfficeHeader::where('position', '>=', $officeHeader->position)
-    //         ->get();
-
-    //     foreach ($lowerPriorityOfficeHeaders as $lowerPriorityOfficeHeader) {
-    //         $lowerPriorityOfficeHeader->position++;
-    //         $lowerPriorityOfficeHeader->saveQuietly();
-    //     }
-    // }
-
-    public function creating(OfficeHeader $officeHeader): void
+    public function creating(OfficeHeader $officeHeader)
     {
         if (is_null($officeHeader->position)) {
-            $officeHeader->position = OfficeHeader::where(function ($q) use ($officeHeader) {
-                    if (!empty($officeHeader->ward)) {
-                        $q->where("ward", $officeHeader->ward);
-                    }
-                })
-                    ->max('position') + 1;
+            $officeHeader->position = OfficeHeader::max('position') + 1;
 
             return;
         }
 
-        $lowerPriorityOfficeHeaders = OfficeHeader::where(function($q) use($officeHeader){
-            if(!empty($officeHeader->ward)){
-                $q->where("ward", $officeHeader->ward);
-            }
-        })
-            ->where('position', '>=', $officeHeader->position)
+        $lowerPriorityOfficeHeaders = OfficeHeader::where('position', '>=', $officeHeader->position)
             ->get();
 
         foreach ($lowerPriorityOfficeHeaders as $lowerPriorityOfficeHeader) {
@@ -49,53 +22,16 @@ class OfficeHeaderObserver
             $lowerPriorityOfficeHeader->saveQuietly();
         }
     }
-    // public function updating(OfficeHeader $officeHeader)
-    // {
-    //     if ($officeHeader->isClean('position')) {
-    //         return;
-    //     }
 
-    //     if (is_null($officeHeader->position)) {
-    //         $officeHeader->position = OfficeHeader::max('position');
-    //     }
 
-    //     if ($officeHeader->getOriginal('position') > $officeHeader->position) {
-    //         $positionRange = [
-    //             $officeHeader->position, $officeHeader->getOriginal('position'),
-    //         ];
-    //     } else {
-    //         $positionRange = [
-    //             $officeHeader->getOriginal('position'), $officeHeader->position,
-    //         ];
-    //     }
-
-    //     $lowerPriorityOfficeHeaders = OfficeHeader::whereBetween('position', $positionRange)
-    //         ->where('id', '!=', $officeHeader->id)
-    //         ->get();
-
-    //     foreach ($lowerPriorityOfficeHeaders as $lowerPriorityOfficeHeader) {
-    //         if ($officeHeader->getOriginal('position') < $officeHeader->position) {
-    //             $lowerPriorityOfficeHeader->position--;
-    //         } else {
-    //             $lowerPriorityOfficeHeader->position++;
-    //         }
-    //         $lowerPriorityOfficeHeader->saveQuietly();
-    //     }
-    // }
-
-    public function updating(OfficeHeader $officeHeader): void
+    public function updating(OfficeHeader $officeHeader)
     {
         if ($officeHeader->isClean('position')) {
             return;
         }
 
         if (is_null($officeHeader->position)) {
-            $officeHeader->position = OfficeHeader::where(function($q) use($officeHeader){
-                if(!empty($officeHeader->ward)){
-                    $q->where("ward", $officeHeader->ward);
-                }
-            })
-                ->max('position');
+            $officeHeader->position = OfficeHeader::max('position');
         }
 
         if ($officeHeader->getOriginal('position') > $officeHeader->position) {
@@ -108,12 +44,7 @@ class OfficeHeaderObserver
             ];
         }
 
-        $lowerPriorityOfficeHeaders = OfficeHeader::where(function($q) use($officeHeader){
-            if(!empty($officeHeader->ward)){
-                $q->where("ward", $officeHeader->ward);
-            }
-        })
-            ->whereBetween('position', $positionRange)
+        $lowerPriorityOfficeHeaders = OfficeHeader::whereBetween('position', $positionRange)
             ->where('id', '!=', $officeHeader->id)
             ->get();
 
@@ -127,24 +58,11 @@ class OfficeHeaderObserver
         }
     }
 
-    // public function deleting(OfficeHeader $officeHeader)
-    // {
-    //     $lowerPriorityOfficeHeaders = OfficeHeader::where('position', '>', $officeHeader->position)
-    //         ->get();
 
-    //     foreach ($lowerPriorityOfficeHeaders as $lowerPriorityOfficeHeader) {
-    //         $lowerPriorityOfficeHeader->position--;
-    //         $lowerPriorityOfficeHeader->saveQuietly();
-    //     }
-    // }
-    public function deleting(OfficeHeader $officeHeader): void
+
+    public function deleting(OfficeHeader $officeHeader)
     {
-        $lowerPriorityOfficeHeaders = OfficeHeader::where(function($q) use($officeHeader){
-            if(!empty($officeHeader->ward)){
-                $q->where("ward", $officeHeader->ward);
-            }
-        })
-            ->where('position', '>', $officeHeader->position)
+        $lowerPriorityOfficeHeaders = OfficeHeader::where('position', '>', $officeHeader->position)
             ->get();
 
         foreach ($lowerPriorityOfficeHeaders as $lowerPriorityOfficeHeader) {
@@ -152,5 +70,6 @@ class OfficeHeaderObserver
             $lowerPriorityOfficeHeader->saveQuietly();
         }
     }
+
 
 }

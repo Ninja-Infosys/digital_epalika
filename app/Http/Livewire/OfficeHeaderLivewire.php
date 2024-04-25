@@ -61,8 +61,10 @@ class OfficeHeaderLivewire extends Component
 
         DB::transaction(function () {
             foreach ($this->officeHeaders as $officeHeader) {
-                $officeHeader['ward'] = auth()->user()->ward_no; // Add 'ward' attribute to each $officeHeader
-                OfficeHeader::create($officeHeader);
+                // $officeHeader['ward'] = auth()->user()->ward_no; // Add 'ward' attribute to each $officeHeader
+                OfficeHeader::create($officeHeader + [
+                    'ward' => auth()->user()->ward_no
+                ]);
             }
         });
 
