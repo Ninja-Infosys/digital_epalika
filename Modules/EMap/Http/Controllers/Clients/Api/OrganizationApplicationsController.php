@@ -27,8 +27,8 @@ use Modules\EMap\Http\Requests\Api\Organization\UpdateCriteriaDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateDesignerDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateFourFortDetailRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateHouseOwnerRequest;
-use Modules\EMap\Http\Requests\Api\Organization\UpdateLandOwnerRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateLandDetailRequest;
+use Modules\EMap\Http\Requests\Api\Organization\UpdateLandOwnerRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateMapApplicationRequest;
 use Modules\EMap\Http\Requests\Api\Organization\UpdateStoreyDetailRequest;
 use Modules\EMap\Transformers\ApplicantDetailResource;
@@ -43,7 +43,7 @@ class OrganizationApplicationsController extends Controller
         $formData = $request->validated();
 
         DB::transaction(function () use ($formData, $mapApply) {
-            if (empty($formData['structure_type_id']) && !empty($formData['structure_type'])) {
+            if (empty($formData['structure_type_id']) && ! empty($formData['structure_type'])) {
                 $structure_type = StructureType::create(['title' => $formData['structure_type']]);
                 $formData['structure_type_id'] = $structure_type->id;
             }
@@ -52,7 +52,7 @@ class OrganizationApplicationsController extends Controller
         });
 
         return response()->json([
-            'message' => 'नक्सा आवेदन सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'नक्सा आवेदन सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -73,17 +73,17 @@ class OrganizationApplicationsController extends Controller
 
         DB::transaction(function () use ($formData, $request, $mapApply) {
 
-            if (!empty($request->validated('id'))) {
+            if (! empty($request->validated('id'))) {
                 StoreyDetail::find($request->validated('id'))?->update($formData);
             } else {
                 StoreyDetail::create($formData + [
-                    'map_apply_id' => $mapApply->id
-                    ]);
+                    'map_apply_id' => $mapApply->id,
+                ]);
             }
         });
 
         return response()->json([
-            'message' => 'तल्लाको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'तल्लाको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -92,18 +92,18 @@ class OrganizationApplicationsController extends Controller
         $storeyDetail->delete();
 
         return response()->json([
-            'message' => 'तल्लाको विवरण सफलतापूर्वक सफलतापूर्वक मेटाइयो'
+            'message' => 'तल्लाको विवरण सफलतापूर्वक सफलतापूर्वक मेटाइयो',
         ]);
     }
 
     public function updateLandDetail(UpdateLandDetailRequest $request, MapApply $mapApply)
     {
         $mapApply->landDetail()->update($request->validated() + [
-                'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
-            ]);
+            'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
+        ]);
 
         return response()->json([
-            'message' => 'जग्गाको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'जग्गाको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -122,7 +122,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'जग्गा धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'जग्गा धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -141,7 +141,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'घर धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'घर धनीको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -184,7 +184,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'चार किल्लाको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'चार किल्लाको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -195,7 +195,7 @@ class OrganizationApplicationsController extends Controller
         $designerDetails = collect();
 
         foreach (PostsEnum::cases() as $postsEnum) {
-            $designer = $mapApply->designerDetails->load('province','district','localBody')?->where('post', $postsEnum)?->first();
+            $designer = $mapApply->designerDetails->load('province', 'district', 'localBody')?->where('post', $postsEnum)?->first();
 
             $designerDetails->push([
                 'post' => $postsEnum->value,
@@ -204,13 +204,13 @@ class OrganizationApplicationsController extends Controller
                 'father_name' => $designer->father_name ?? null,
                 'grandfather_name' => $designer->grandfather_name ?? null,
                 'phone' => $designer->phone ?? null,
-                'province_id'=>$designer->province_id ?? '',
-                'province'=> $designer->province?->province ?? '',
-                'district_id'=>$designer->district_id ?? '',
-                'district'=>$designer->district?->district ?? '',
-                'local_body_id'=>$designer->local_body_id ?? '',
-                'local_body' =>$designer->localBody?->local_body ?? '',
-                'tole'=>$designer->tole ?? '',
+                'province_id' => $designer->province_id ?? '',
+                'province' => $designer->province?->province ?? '',
+                'district_id' => $designer->district_id ?? '',
+                'district' => $designer->district?->district ?? '',
+                'local_body_id' => $designer->local_body_id ?? '',
+                'local_body' => $designer->localBody?->local_body ?? '',
+                'tole' => $designer->tole ?? '',
                 'ward_no' => $designer->ward_no ?? null,
                 'nec_council_no' => $designer->nec_council_no ?? null,
                 'local_body_registration_no' => $designer->local_body_registration_no ?? null,
@@ -219,7 +219,7 @@ class OrganizationApplicationsController extends Controller
         }
 
         return response()->json([
-            'data' => $designerDetails
+            'data' => $designerDetails,
         ]);
     }
 
@@ -233,7 +233,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'डिजाइनरको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'डिजाइनरको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -252,7 +252,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'निवेदकको विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'निवेदकको विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -295,7 +295,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'मापदण्ड सम्बन्धि विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'मापदण्ड सम्बन्धि विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -334,7 +334,7 @@ class OrganizationApplicationsController extends Controller
         );
 
         return response()->json([
-            'message' => 'भवन सम्बन्धि विवरण सफलतापूर्वक अद्यावधिक गरियो'
+            'message' => 'भवन सम्बन्धि विवरण सफलतापूर्वक अद्यावधिक गरियो',
         ]);
     }
 
@@ -343,7 +343,7 @@ class OrganizationApplicationsController extends Controller
         $mapApply->update($request->validated());
 
         return response()->json([
-            'message' => 'Consultancy Detail Updated Successfully'
+            'message' => 'Consultancy Detail Updated Successfully',
         ]);
     }
 }
