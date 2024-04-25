@@ -103,6 +103,6 @@ class Kernel extends HttpKernel
         'checkPinMiddleware' => CheckPinMiddleware::class,
         'update' => UpdateMiddleware::class,
         'license' => LicenseMiddleware::class,
-        'installerMiddleware' => InstallerMiddleware::class
+        'installerMiddleware' => InstallerMiddleware::class,
     ];
 }

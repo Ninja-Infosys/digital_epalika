@@ -1,14 +1,11 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationNotificationController;
 
 // Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
-
-
 
 Route::controller(MapApplyController::class)->group(function () {
     Route::get('mapApply/{mapApply}/map-form-info', 'mapFormInfo')->name('mapFormInfo');
@@ -32,8 +29,7 @@ Route::post('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/storeFi
 
 Route::resource('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument', AttachDocumentController::class);
 Route::get('mapApply/{mapApply}/view/{form}/detail', [MapApplyController::class, 'viewDetail'])->name('organization.view-detail');
-Route::put('formStore/{formStore}/uploadDocument', [MapApplyController::class,'uploadDocument'])->name('uploadFormStoreDocument');
-
+Route::put('formStore/{formStore}/uploadDocument', [MapApplyController::class, 'uploadDocument'])->name('uploadFormStoreDocument');
 
 //organization notification
 
