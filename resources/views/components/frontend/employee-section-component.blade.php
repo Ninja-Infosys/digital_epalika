@@ -8,11 +8,11 @@
                         <div class="emp-section">
                             <div class="emp-card d-flex align-items-center p-1 rounded border">
                                 <div class="flex-shrink-0">
-                                    <h5 class="text-white mb-0 sub-head px-1">{{ $representative->designation }}</h5>
+                                    <h5 class="text-white mb-0 sub-head px-1" style="font-size: 15px;">{{ $representative->designation }}</h5>
                                     <img src="{{ $representative->photo_url }}" class="rounded" alt="{{ $representative->name }}"
                                          width="200" height="100">
-                                    <h5 class="mb-0 fw-bolder sub-head text-white text-center px-1">{{ $representative->name }}</h5>
-                                    <span class="d-block text-white sub-head text-center px-1"><i class="fa fa-phone"></i> {{ $representative->phone }} </span>
+                                    <h5 class="mb-0 fw-bolder sub-head text-white text-center px-1" style="font-size: 15px;">{{ $representative->name }}</h5>
+                                    <span class="d-block text-white sub-head text-center px-1"><i class="fa fa-phone" ></i> {{ $representative->phone }} </span>
                                     {{-- <span class="d-block text-white sub-head  px-1"><i class="fa fa-envelope"></i> {{ $representative->email }} </span> --}}
 
                                 </div>
@@ -35,10 +35,10 @@
                         <div class="emp-section">
                             <div class="emp-card d-flex align-items-center p-1 rounded border">
                                 <div class="flex-shrink-0">
-                                    <h5 class="text-white mb-0 sub-head px-1">{{ $employee->designation }}</h5>
+                                    <h5 class="text-white mb-0 sub-head px-1" style="font-size: 15px;">{{ $employee->designation }}</h5>
                                     <img src="{{ $employee->photo_url }}" class="rounded" alt="{{ $employee->name }}"
                                          width="200" height="100">
-                                    <h5 class="mb-0 fw-bolder sub-head text-white text-center px-1">{{ $employee->name }}</h5>
+                                    <h5 class="mb-0 fw-bolder sub-head text-white text-center px-1"style="font-size: 15px;">{{ $employee->name }}</h5>
                                     <span class="d-block text-white sub-head text-center px-1"><i class="fa fa-phone"></i> {{ $employee->phone }} </span>
                                     {{-- <span class="d-block text-white sub-head px-1"><i class="fa fa-envelope"></i> {{ $employee->email }} </span> --}}
                                 </div>
