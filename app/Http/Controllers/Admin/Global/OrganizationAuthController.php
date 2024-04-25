@@ -59,7 +59,7 @@ class OrganizationAuthController extends Controller
 
     public function showOrganizationRegisterForm()
     {
-        $officeheaders= OfficeHeader::orderBy('position')->get();
+        $officeheaders= OfficeHeader::where('ward_no',NULL)->orderBy('position')->get();
         return view('admin.global.organization.auth.register',compact('officeheaders'));
     }
 

@@ -46,7 +46,7 @@
                                     <option value="">आ.व. छान्नुहोस्</option>
                                     @foreach($fiscalYears as $fiscalYear)
                                         <option
-                                            value="{{$fiscalYear->id}}" {{$officeSetting->fiscal_year_id == $fiscalYear->id ? 'selected':''}}>
+                                            value="{{$fiscalYear->id}}" {{$officeSetting?->fiscal_year_id == $fiscalYear->id ? 'selected':''}}>
                                             {{$fiscalYear->title}}
                                         </option>
                                     @endforeach
@@ -64,7 +64,7 @@
                                     <input
                                         type="text"
                                         name="name"
-                                        value="{{old('name',$officeSetting->name)}}"
+                                        value="{{old('name',$officeSetting?->name)}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
                                         placeholder="नाम"
@@ -78,7 +78,7 @@
                                     <input
                                         type="text"
                                         name="site_address"
-                                        value="{{old('site_address',$officeSetting->site_address)}}"
+                                        value="{{old('site_address',$officeSetting?->site_address)}}"
                                         class="form-control @error('site_address') is-invalid @enderror"
                                         id="site_address"
                                         placeholder="ठेगाना"
@@ -100,7 +100,7 @@
                                         class="form-control @error('logo') is-invalid @enderror"
                                         id="logo"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting->logo_url}}" height="60" alt="">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo_url}}" height="60" alt="">
                                     @error('logo')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -113,7 +113,7 @@
                                         class="form-control @error('logo1') is-invalid @enderror"
                                         id="logo1"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting->logo1_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo1_url}}">
                                     @error('logo1')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -126,7 +126,7 @@
                                         class="form-control @error('logo2') is-invalid @enderror"
                                         id="logo1"
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting->logo2_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->logo2_url}}">
                                     @error('logo2')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -141,7 +141,7 @@
                                         id="background_image"
 
                                     />
-                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting->background_image_url}}">
+                                    <img class="img-fluid img-thumbnail" src="{{$officeSetting?->background_image_url}}">
                                     @error('background_image')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -184,7 +184,7 @@
                                     <input
                                         type="url"
                                         name="website"
-                                        value="{{old('website',$officeSetting->website)}}"
+                                        value="{{old('website',$officeSetting?->website)}}"
                                         class="form-control @error('website') is-invalid @enderror"
                                         id="website"
                                         placeholder="वेबसाइट"
@@ -198,7 +198,7 @@
                                     <input
                                         type="url"
                                         name="google_map"
-                                        value="{{old('google_map',$officeSetting->google_map)}}"
+                                        value="{{old('google_map',$officeSetting?->google_map)}}"
                                         class="form-control @error('google_map') is-invalid @enderror"
                                         id="google_map"
                                         placeholder="गुगल नक्शा"
@@ -212,7 +212,7 @@
                                     <input
                                         type="url"
                                         name="facebook_link"
-                                        value="{{old('facebook_link',$officeSetting->facebook_link)}}"
+                                        value="{{old('facebook_link',$officeSetting?->facebook_link)}}"
                                         class="form-control @error('facebook_link') is-invalid @enderror"
                                         id="facebook_link"
                                         placeholder="फेसबुक लिङ्क"
@@ -229,7 +229,7 @@
                                 <label for="introduction" class="form-label">परिचय </label>
                                 <textarea name="introduction" id="introduction" cols="30" placeholder="परिचय"
                                           class="form-control ckEditor @error('introduction') is-invalid @enderror"
-                                          rows="5">{{old('introduction',$officeSetting->introduction)}}</textarea>
+                                          rows="5">{{old('introduction',$officeSetting?->introduction)}}</textarea>
                                 @error('introduction')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -237,7 +237,7 @@
                         </fieldset>
                         <fieldset class="mb-2">
                             <legend>ठेगाना सेटअप</legend>
-                            @livewire('address',['address'=>array_merge($officeSetting->address,$officeSetting->ward)])
+                            @livewire('address',['address'=>array_merge($officeSetting?->address,$officeSetting?->ward)])
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
                             Save
