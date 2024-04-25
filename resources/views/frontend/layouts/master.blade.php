@@ -32,7 +32,8 @@
     </style>
 </head>
 <body>
-@include('frontend.partials.header')
+{{-- @include('frontend.partials.header') --}}
+@include('frontend.partials.header_middle')
 @if(config('app.website_type') === 'website')
     @include('frontend.partials.navbar')
 @endif

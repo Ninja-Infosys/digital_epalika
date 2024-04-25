@@ -42,7 +42,7 @@ class FrontController extends Controller
             return view('frontend.digital_board');
         }
 
-       
+
          if ($checkRoutes->filter()->count() > 1) {
             return redirect(route('digital-service'));
         } else {
@@ -59,7 +59,7 @@ class FrontController extends Controller
     }
 
 
-    public function notice($ward)
+    public function notice()
     {
         $notices = Notice::where('type', 'Notice')->orderBy('date')->get();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Global;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OfficeSetting\StoreOfficeSettingRequest;
 use App\Models\OfficeHeader;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
@@ -18,7 +19,14 @@ class OfficeSettingController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('officeSetting_access');
-        $officeSetting = OfficeSetting::first();
+        $officeSetting = OfficeSetting::where(function ($q){
+            if (!empty(auth()->user()->ward_no)){
+                $q->where('ward_no', auth()->user()->ward_no);
+            }else{
+                $q->whereNull('ward_no');
+            }
+        })
+        ->first();
         $fiscalYears = FiscalYear::get();
         // $officeHeaders = OfficeHeader::orderBy('position')->get();
         $officeHeaders = OfficeHeader::where(function ($q) {
@@ -34,47 +42,86 @@ class OfficeSettingController extends Controller
         return view('admin.global.officeSetting.index', compact('officeSetting', 'officeHeaders', 'fiscalYears'));
     }
 
-    public function update(Request $request, OfficeSetting $officeSetting)
+    // public function update(Request $request, OfficeSetting $officeSetting)
+    // {
+    //     $this->checkAuthorization('officeSetting_edit');
+    //     $validationData = $request->validate(
+    //         [
+    //             'name' => ['required', 'string'],
+    //             'site_address' => ['nullable', 'string'],
+    //             'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+    //             'logo1' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+    //             'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+    //             'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
+    //             'google_map' => ['nullable'],
+    //             'province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
+    //             'district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
+    //             'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+    //             'fiscal_year_id' => ['nullable', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+    //             'ward_no' => ['nullable'],
+    //             'phone' => ['nullable'],
+    //             'introduction' => ['nullable'],
+    //             'email' => ['nullable'],
+    //             'website' => ['nullable', 'url'],
+    //             'facebook_link' => ['nullable', 'url'],
+    //         ],
+    //         [
+    //             'name.required' => 'नाम अनिवार्य छ|',
+    //         ]
+    //     );
+
+    //     if ($request->hasFile('logo') && $officeSetting->logo) {
+    //         $this->deleteFile($officeSetting->logo);
+    //     }
+    //     if ($request->hasFile('logo1') && $officeSetting->logo1) {
+    //         $this->deleteFile($officeSetting->logo1);
+    //     }
+    //     if ($request->hasFile('logo2') && $officeSetting->logo2) {
+    //         $this->deleteFile($officeSetting->logo2);
+    //     }
+    //     if ($request->hasFile('background_image') && $officeSetting->background_image) {
+    //         $this->deleteFile($officeSetting->background_image);
+    //     }
+    //     $officeSetting->update($validationData);
+
+    //     Cache::forget('office_setting');
+
+    //     toast('कार्यालय सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
+    //     return back();
+    // }
+
+    public function store(StoreOfficeSettingRequest $request)
     {
         $this->checkAuthorization('officeSetting_edit');
-        $validationData = $request->validate(
-            [
-                'name' => ['required', 'string'],
-                'site_address' => ['nullable', 'string'],
-                'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
-                'logo1' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
-                'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
-                'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
-                'google_map' => ['nullable'],
-                'province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
-                'district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
-                'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-                'fiscal_year_id' => ['nullable', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
-                'ward_no' => ['nullable'],
-                'phone' => ['nullable'],
-                'introduction' => ['nullable'],
-                'email' => ['nullable'],
-                'website' => ['nullable', 'url'],
-                'facebook_link' => ['nullable', 'url'],
-            ],
-            [
-                'name.required' => 'नाम अनिवार्य छ|',
-            ]
-        );
 
-        if ($request->hasFile('logo') && $officeSetting->logo) {
-            $this->deleteFile($officeSetting->logo);
+        $officeSetting = OfficeSetting::where(function ($q){
+            if (!empty(auth()->user()->ward_no)){
+                $q->where('ward_no', auth()->user()->ward_no);
+            }else{
+                $q->whereNull('ward_no');
+            }
+        })
+            ->first();
+
+        if (!empty($officeSetting)){
+            if ($request->hasFile('logo') && $officeSetting->logo) {
+                $this->deleteFile($officeSetting->logo);
+            }
+            if ($request->hasFile('logo1') && $officeSetting->logo1) {
+                $this->deleteFile($officeSetting->logo1);
+            }
+            if ($request->hasFile('logo2') && $officeSetting->logo2) {
+                $this->deleteFile($officeSetting->logo2);
+            }
+            if ($request->hasFile('background_image') && $officeSetting->background_image) {
+                $this->deleteFile($officeSetting->background_image);
+            }
+            $officeSetting->update($request->validated());
+        }else{
+            OfficeSetting::create($request->validated()+['ward_no'=>auth()->user()->ward_no]);
         }
-        if ($request->hasFile('logo1') && $officeSetting->logo1) {
-            $this->deleteFile($officeSetting->logo1);
-        }
-        if ($request->hasFile('logo2') && $officeSetting->logo2) {
-            $this->deleteFile($officeSetting->logo2);
-        }
-        if ($request->hasFile('background_image') && $officeSetting->background_image) {
-            $this->deleteFile($officeSetting->background_image);
-        }
-        $officeSetting->update($validationData);
+
 
         Cache::forget('office_setting');
 

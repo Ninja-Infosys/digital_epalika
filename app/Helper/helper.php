@@ -17,20 +17,41 @@ use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
 
-if (! function_exists('officeSetting')) {
-    function officeSetting()
-    {
-        return Cache::rememberForever('office_setting', function () {
-            if (Schema::hasTable('office_settings')) {
-                return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
-            }
 
-            return [];
+// if (!function_exists('officeSetting')) {
+//     function officeSetting()
+//     {
+//         return Cache::rememberForever('office_setting', function () {
+//             if (Schema::hasTable('office_settings')) {
+//                 return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
+//             }
+//             return [];
+//         });
+//     }
+// }
+if (!function_exists('officeSetting')) {
+    function officeSetting(int|null $ward = null)
+
+    {
+        $officeSettings = Cache::rememberForever('office_setting', function () {
+            if (Schema::hasTable('office_settings')) {
+
+                                return OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first();
+                            }
+
         });
+
+        if (empty($ward)) {
+
+            return $officeSettings->whereNull('ward_no')->first();
+        } else {
+            return $officeSettings->where('ward_no', $ward)->first();
+        }
     }
 }
 
-if (! function_exists('minuteTemplateSettingData')) {
+if (!function_exists('minuteTemplateSettingData')) {
+
     function minuteTemplateSettingData()
     {
         return Cache::rememberForever('minuteTemplateSetting', function () {

@@ -17,7 +17,7 @@ class OrganizationAuthController extends Controller
 {
     public function showOrganizationLoginForm()
     {
-        
+
         return view('admin.global.organization.auth.login');
     }
 

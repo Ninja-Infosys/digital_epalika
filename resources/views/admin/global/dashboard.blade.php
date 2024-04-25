@@ -7,8 +7,8 @@
                     <div class="row">
                         <div class="col-sm-6 col-xl-3 border-end">
                             <div class="d-flex flex-column align-items-center">
-                                <div class="avatar-sm {{officeSetting()->fiscal_year_id ? 'bg-success' : 'bg-danger'}} rounded-circle">
-                                    <i class="fas {{officeSetting()->fiscal_year_id ? 'fa-check-circle' : 'fa-times-circle'}} avatar-title font-18 text-white"></i>
+                                <div class="avatar-sm {{officeSetting()?->fiscal_year_id ? 'bg-success' : 'bg-danger'}} rounded-circle">
+                                    <i class="fas {{officeSetting()?->fiscal_year_id ? 'fa-check-circle' : 'fa-times-circle'}} avatar-title font-18 text-white"></i>
                                 </div>
                                 <p class="text-muted font-15 mb-0 mt-2">आर्थिक वर्ष सेटअप भयो?</p>
                             </div>

@@ -23,6 +23,7 @@ class OfficeHeaderObserver
         }
     }
 
+
     public function updating(OfficeHeader $officeHeader)
     {
         if ($officeHeader->isClean('position')) {
@@ -57,6 +58,8 @@ class OfficeHeaderObserver
         }
     }
 
+
+
     public function deleting(OfficeHeader $officeHeader)
     {
         $lowerPriorityOfficeHeaders = OfficeHeader::where('position', '>', $officeHeader->position)
@@ -67,4 +70,6 @@ class OfficeHeaderObserver
             $lowerPriorityOfficeHeader->saveQuietly();
         }
     }
+
+
 }

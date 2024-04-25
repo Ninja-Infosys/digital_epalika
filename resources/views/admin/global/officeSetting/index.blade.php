@@ -32,10 +32,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.global.systemSetting.officeSetting.update',$officeSetting)}}" method="post"
+                    <form action="{{route('admin.global.systemSetting.officeSetting.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('put')
+
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <label for="fiscal_year_id" class="form-label">चालु आ.व. </label>
