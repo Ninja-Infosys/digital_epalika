@@ -23,6 +23,7 @@ class StoreNoticeRequest extends FormRequest
             'description' => ['nullable'],
             'closed_at' => ['nullable'],
             'show_on_index' => ['nullable', 'boolean'],
+
             //            'type'=>'Notice',
             //            'files' => ['required_if:type,Notice','nullable', 'array'],
             //            'files.*' => ['mimes:png,jpeg,jpg'],
