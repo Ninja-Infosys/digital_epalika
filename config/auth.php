@@ -1,9 +1,9 @@
 <?php
 
-
-use Modules\Roaster\Entities\TraineeUser;
 use App\Models\MobileUser;
 use App\Models\User;
+use Modules\Roaster\Entities\TraineeUser;
+use Modules\EMap\Entities\Organization;
 
 return [
 
@@ -57,13 +57,13 @@ return [
         ],
         'organizations' => [
             'driver' => 'eloquent',
-            'model' => \Modules\EMap\Entities\Organization::class,
+            'model' => Organization::class,
         ],
 
         'traineeUsers' => [
             'driver' => 'eloquent',
             'model' => TraineeUser::class,
-          ],
+        ],
         'mobile-users' => [
             'driver' => 'eloquent',
             'model' => MobileUser::class,
