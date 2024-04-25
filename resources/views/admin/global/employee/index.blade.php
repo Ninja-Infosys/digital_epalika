@@ -97,6 +97,7 @@
                         </table>
                     </div>
                     {{-- {{ $employees->onEachSide(config('app.pagination_count'))->links() }} --}}
+                    {{$employees->links()}}
                 </div>
             </div>
         </div>

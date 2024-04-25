@@ -5,8 +5,8 @@
             id="province_id">
             <option value="">प्रदेश छान्नुहोस्</option>
             @foreach ($provinces as $province)
-                <option value="{{ $province->id }}">
-                    {{ $province->province }}
+                <option value="{{ $province?->id }}">
+                    {{ $province?->province }}
                 </option>
             @endforeach
         </select>
@@ -20,8 +20,8 @@
             class="form-select @error('district_id') is-invalid @enderror" id="district_id">
             <option value="">जिल्ला छान्नुहोस्</option>
             @foreach ($districts as $district)
-                <option value="{{ $district->id }}">
-                    {{ $district->district }}
+                <option value="{{ $district?->id }}">
+                    {{ $district?->district }}
                 </option>
             @endforeach
         </select>
@@ -35,8 +35,8 @@
             class="form-select @error('local_body_id') is-invalid @enderror" id="local_body_id">
             <option value="">पालिका छान्नुहोस्</option>
             @foreach ($localBodies as $localBody)
-                <option value="{{ $localBody->id }}">
-                    {{ $localBody->local_body }}
+                <option value="{{ $localBody?->id }}">
+                    {{ $localBody?->local_body }}
                 </option>
             @endforeach
         </select>
