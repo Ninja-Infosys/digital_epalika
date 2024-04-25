@@ -79,7 +79,7 @@ class RecommendationCreate extends Model
 
     public function resolveTemplate(): string
     {
-        $content = letterHead() . $this->recommendationDetail?->content;
+        $content = letterHead() . $this->recommendationDetail?->content ;
         $replaceableList = collect();
         $this->load('recommendationDetail', 'recommendationValues.recommendationFormField');
 
@@ -108,7 +108,7 @@ class RecommendationCreate extends Model
             $wardNo = implode(', ', $wardNo);
         }
         else{
-            return $wardNo;
+             $wardNo='';
         }
         $replaceableList->put('[@ward_no]', (string) officeSetting()->ward_no);
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
