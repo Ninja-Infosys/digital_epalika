@@ -48,7 +48,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(module_path('EMap', '/Routes/api/privateRoute.php'));
 
         Route::middleware([
-            'api',
+            'web',
             'auth:organization',
         ])
             ->prefix('api/organization/admin')
