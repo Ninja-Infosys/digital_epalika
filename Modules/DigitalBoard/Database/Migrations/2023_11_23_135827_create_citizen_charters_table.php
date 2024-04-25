@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
-        });     
+        });
     }
 
     public function down()
