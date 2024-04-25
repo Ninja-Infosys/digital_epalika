@@ -23,19 +23,19 @@ class FrontController extends Controller
 
     public function index()
     {
-         $checkRoutes = collect([
-            "grievanceHandling" =>Route::has('grievanceHandling.grievance'),
-            "ebps" =>Route::has('ebps'),
-            "digitalBoard" =>Route::has('digitalBoard.helpdesk.helpdesk'),
-            "recommendation" =>Route::has('recommendationrecommendation.index'),
-            "businessRegistration" =>Route::has('businessRegistration.business'),
-            "grant" =>Route::has('grant.index'),
-            "payment" =>Route::has('payment.index'),
-            "complaintApplication" =>Route::has('complaintApplication.complainRegistration'),
-            "roaster" =>Route::has('roaster.index')
+        $checkRoutes = collect([
+            "grievanceHandling" => Route::has('grievanceHandling.grievance'),
+            "ebps" => Route::has('ebps'),
+            "digitalBoard" => Route::has('digitalBoard.helpdesk.helpdesk'),
+            "recommendation" => Route::has('recommendationrecommendation.index'),
+            "businessRegistration" => Route::has('businessRegistration.business'),
+            "grant" => Route::has('grant.index'),
+            "payment" => Route::has('payment.index'),
+            "complaintApplication" => Route::has('complaintApplication.complainRegistration'),
+            "roaster" => Route::has('roaster.index')
         ]);
 
-        if(config('app.disable_main_page')) {
+        if (config('app.disable_main_page')) {
             return redirect(route('newWard'));
         }
         if (!$this->checkModuleExistence('DigitalBoard')) {
@@ -43,21 +43,31 @@ class FrontController extends Controller
         }
 
 
-         if ($checkRoutes->filter()->count() > 1) {
+        if ($checkRoutes->filter()->count() > 1) {
             return redirect(route('digital-service'));
         } else {
-            if(Route::has('ebps')){
+            if (Route::has('ebps')) {
                 return redirect(route('ebps'));
             }
             return redirect(route('digital-service'));
         }
     }
 
+
     public function digitalService()
     {
         return view('frontend.welcome');
     }
 
+
+    public function wardIndex($ward)
+    {
+        return view('frontend.wardIndex', compact('ward'));
+    }
+    public function newWard()
+    {
+        return view('frontend.ward');
+    }
 
     public function notice()
     {
@@ -160,10 +170,8 @@ class FrontController extends Controller
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
     }
 
-    public function wardIndex($ward)
-    {
-        return view('frontend.wardIndex', compact('ward'));
-    }
+
+
 
 
 }
