@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::middleware([
             'api',
-//            'auth:organization',
+            'auth:organization',
         ])
             ->prefix('api/organization/admin')
             ->as('api.organization.admin.')
