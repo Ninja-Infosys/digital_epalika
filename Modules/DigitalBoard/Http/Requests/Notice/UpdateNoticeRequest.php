@@ -24,7 +24,7 @@ class UpdateNoticeRequest extends FormRequest
             'closed_at' => ['nullable'],
             'show_on_index' => ['nullable', 'boolean'],
             'files' => ['nullable', 'array'],
-            'files.*' => ['mimes:png,jpeg,jpg'],
+            'files.*' => ['mimes:png,jpeg,jpg,pdf'],
         ];
     }
 
