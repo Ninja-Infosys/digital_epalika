@@ -33,8 +33,7 @@ class NoticeController extends Controller
                     $q->whereRaw("FIND_IN_SET('$wardString', ward) > 0");
                 }
             })
-            ->latest()
-            ->simplePaginate(10);
+            ->latest()->paginate(10);
 
         // Pass notices and type to the view
         return view('digitalboard::admin.notice.index', compact('notices', 'type'));

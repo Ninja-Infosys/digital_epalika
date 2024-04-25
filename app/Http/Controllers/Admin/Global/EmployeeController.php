@@ -33,8 +33,7 @@ class EmployeeController extends Controller
                             $q->whereRaw("FIND_IN_SET('$wardString', ward) > 0");
                         }
                     })
-                    ->latest()
-                    ->simplePaginate(10);
+                    ->latest()->paginate(10);
         return view('admin.global.employee.index', compact('employees'));
     }
 
