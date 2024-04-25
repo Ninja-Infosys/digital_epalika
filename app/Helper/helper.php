@@ -11,6 +11,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Modules\Identity\Entities\MinuteTemplateSetting;
 use Modules\Identity\Entities\RecommendationTemplateSetting;
 use Modules\Recommendation\Entities\RecommendationCategory;
