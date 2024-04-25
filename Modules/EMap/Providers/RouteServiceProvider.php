@@ -47,7 +47,10 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('ebps/api/v1/user')
             ->group(module_path('EMap', '/Routes/api/privateRoute.php'));
 
-        Route::middleware(['api', 'auth:organization'])
+        Route::middleware([
+            'api',
+//            'auth:organization'
+        ])
             ->prefix('api/organization/admin')
             ->as('api.organization.admin.')
             ->group(module_path('EMap', '/Routes/organization/api.php'));
