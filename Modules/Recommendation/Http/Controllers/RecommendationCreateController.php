@@ -16,7 +16,6 @@ class RecommendationCreateController extends Controller
     public function index()
     {
         $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->get();
-
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }
 
@@ -75,7 +74,7 @@ class RecommendationCreateController extends Controller
             'recommendationDetail.revenueHeaders'
         );
         $sipharisSetting = SipharisSetting::first();
-
+// dd($recommendationCreate);
         return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate','sipharisSetting'));
     }
 

@@ -231,12 +231,12 @@
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
                                     @if ($recommendationCreate->status != 'sent_to_revenue')
-                                        <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
+                                        <x-print-button target-element="printSipharish" title="सिफारिस प्रिन्ट" />
                                     @endif
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="print" class="p-1">
+                                <div id="printSipharish" class="p-1">
                                     <style>
                                         @page {
                                             margin-top: 0;
@@ -252,23 +252,4 @@
             </div>
         </div>
     </div>
-    {{-- <script>
-        function printForm() {
-            printJS({
-                printable: '{{ $targetElement }}',
-                type: 'html',
-                documentTitle: '{{ $title }}',
-                showModal: true,
-                header: $('.header-content').html(),
-                targetStyles: ['*'],
-                css: ['{{ asset('assets/backend/css/bootstrap.min.css') }}',
-                    '{{ asset('assets/backend/css/app.min.css') }}'
-                ],
-                scanStyles: false,
-                honorMarginPadding: false,
-                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
-            });
-        }
-    </script> --}}
-
 @endsection
