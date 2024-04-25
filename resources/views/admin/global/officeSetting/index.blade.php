@@ -237,7 +237,8 @@
                         </fieldset>
                         <fieldset class="mb-2">
                             <legend>ठेगाना सेटअप</legend>
-                            @livewire('address',['address'=>array_merge($officeSetting?->address,$officeSetting?->ward)])
+                            {{-- @livewire('address',['address'=>array_merge($officeSetting?->address,$officeSetting?->ward)]) --}}
+                            @livewire('address', ['address' => array_merge(optional($officeSetting)->address ?? [], optional($officeSetting)->ward ?? [])])
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
                             Save
