@@ -225,6 +225,6 @@ return [
     'eloquent' => [
         'lazy_loading' => true,
     ],
-    'disable_main_page'=> env('DISABLE_MAIN_PAGE', true),
-    'ward'=> env('WARD', 8)
+    'disable_main_page' => env('DISABLE_MAIN_PAGE', false),
+    'ward' => env('WARD', 8)
 ];
