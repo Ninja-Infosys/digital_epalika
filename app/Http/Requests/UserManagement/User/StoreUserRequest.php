@@ -23,8 +23,8 @@ class StoreUserRequest extends FormRequest
             'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
             'employee_id' => ['nullable', Rule::exists('employees', 'id')->withoutTrashed()],
             'password' => ['required', 'confirmed', 'min:7'],
-            'ward_no' => ['nullable', 'array'],
-            'ward_no.*' =>['string'],
+            'ward_no' => ['nullable'],
+//            'ward_no.*' =>['string'],
             'is_dept_head' => ['nullable', 'boolean'],
         ];
     }
