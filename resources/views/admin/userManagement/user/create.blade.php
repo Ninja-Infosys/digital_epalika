@@ -103,15 +103,15 @@
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="ward_no" class="form-label">वडा नं.</label>
-                                    <select name="ward_no[]" id="ward_no" class="form-select"
-                                        @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
+                                    <select name="ward_no" id="ward_no" class="form-select" @if (!empty(auth()->user()->ward_no)) disabled @endif>
                                         <option value="">---वडा छान्नुहोस्---</option>
                                         @foreach (officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{ $ward }}"
-                                                {{ in_array($ward, old('ward_no', !empty(auth()->user()->ward_no) ? [auth()->user()->ward_no] : [])) ? 'selected' : '' }}>
-                                                {{ $ward }}</option>
+                                            <option value="{{ $ward }}" @if(auth()->check() && auth()->user()->ward_no == $ward) selected @endif>
+                                                {{ $ward }}
+                                            </option>
                                         @endforeach
                                     </select>
+
                                     @error('ward_no')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
