@@ -10,9 +10,9 @@ class CheckPinMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (auth()->check()
-            && !auth()->user()->pin
-            && !$request->routeIs('admin.pin.create')
-            && !$request->routeIs('admin.pin.store')
+            && ! auth()->user()->pin
+            && ! $request->routeIs('admin.pin.create')
+            && ! $request->routeIs('admin.pin.store')
         ) {
             return redirect()->route('admin.pin.create');
         }

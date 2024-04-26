@@ -8,12 +8,8 @@ use Illuminate\Http\Request;
 class Authenticate extends Middleware
 {
 
-    protected function redirectTo($request)
+    protected function redirectTo($request): ?string
     {
-        if (! $request->expectsJson()) {
-            return route('login');
-        }
-
-        return '';
+        return $request->expectsJson() ? null : route('login');
     }
 }
