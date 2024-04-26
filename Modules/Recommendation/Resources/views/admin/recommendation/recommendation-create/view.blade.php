@@ -320,7 +320,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    @if (auth()->check() && auth()->user()->id == $sipharisSetting->checker_id)
+                                                                   
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">रद्द
                                                                             गर्नुहोस्
@@ -329,7 +329,7 @@
                                                                             पेश
                                                                             गर्नुहोस्
                                                                         </button>
-                                                                    @endif
+                                                                    
                                                                 </div>
                                                             </form>
 
