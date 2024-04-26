@@ -218,10 +218,13 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+
     'otp_expiry_time' => env('OTP_EXPIRY_TIME', 5),
 
 
     'eloquent' => [
         'lazy_loading' => true,
     ],
+    'disable_main_page'=> env('DISABLE_MAIN_PAGE', true),
+    'ward'=> env('WARD', 8)
 ];
