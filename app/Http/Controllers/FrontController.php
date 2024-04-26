@@ -35,10 +35,11 @@ class FrontController extends Controller
             "roaster" => Route::has('roaster.index')
         ]);
 
-        if (config('app.disable_main_page')) {
-            return redirect(route('newWard'));
-        }
+
         if (!$this->checkModuleExistence('DigitalBoard')) {
+            if (config('app.disable_main_page')) {
+                return redirect(route('newWard'));
+            }
             return view('frontend.digital_board');
         }
 
