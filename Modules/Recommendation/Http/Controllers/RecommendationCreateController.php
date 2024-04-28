@@ -29,28 +29,41 @@ class RecommendationCreateController extends Controller
         $recommendationCreate = DB::transaction(function () use ($request) {
 
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                    'created_by' => auth()->id()
-                ]);
+                'created_by' => auth()->id()
+            ]);
 
             if (
                 array_key_exists('fields', $request->validated())
-                && !empty($request->validated()['fields'])
+                && !empty ($request->validated()['fields'])
             ) {
 
                 foreach ($request->validated()['fields'] as $field) {
 
-                    if (!empty($field['type']) && $field['type'] == 'image') {
+                    if (!empty ($field['type']) && $field['type'] == 'image') {
                         $value = Storage::disk('public')
                             ->putFile('recommendation/files', $field['value']);
                     } else {
                         $value = $field['value'];
                     }
+
+                    $recommendationCreate->recommendationValues()->create([
+                        'recommendation_form_field_id' => $field['recommendation_form_field_id'],
+                        'value' => $value,
+                        'type' => $field['type'],
+                    ]);
+                }
+            }
+            if (
+                array_key_exists('files', $request->validated())
+                && !empty ($request->validated()['files'])
+            ) {
+                foreach ($request->validated('files') ?? [] as $file) {
+                    $recommendationCreate->recommendationFiles()->create($file);
                 }
             }
 
-            foreach ($request->validated('files') ?? [] as $file) {
-                $recommendationCreate->recommendationFiles()->create($file);
-            }
+
+
 
             return $recommendationCreate;
         });
@@ -73,9 +86,9 @@ class RecommendationCreateController extends Controller
             'recommendationFiles.recommendationDocument',
             'recommendationDetail.revenueHeaders'
         );
-        $sipharisSetting = SipharisSetting::with('approver','checker')->first();
-// dd($recommendationCreate);
-        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate','sipharisSetting'));
+        $sipharisSetting = SipharisSetting::with('approver', 'checker')->first();
+        // dd($recommendationCreate);
+        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate', 'sipharisSetting'));
     }
 
 
