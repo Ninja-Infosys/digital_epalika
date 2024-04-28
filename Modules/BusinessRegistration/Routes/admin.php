@@ -5,6 +5,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessNatureController
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
@@ -33,6 +34,13 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
     Route::get('dateWise', 'dateWise')->name('dateWise');
     Route::get('businessNature', 'businessNature')->name('businessNature');
 });
+
+Route::post('businessRegistration/{businessDetail}/customData', [OrganizationRegistrationController::class, 'customData'])->name('store.custom');
+Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [OrganizationRegistrationController::class, 'addData'])->name('add-data.template');
+Route::get('businessDetail/{businessDetail}/print', [OrganizationRegistrationController::class,'print'])->name('businessRegistration.print');
+
+Route::resource('organizationDetail', OrganizationRegistrationController::class)->names('organizationRegistration');
+
 
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {

@@ -740,7 +740,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="form.province_id" class="form-label">प्रदेश</label>
                             <select class="form-select @error('form.province_id') is-invalid @enderror" id="form.province_id"
-                                wire:model="form.province_id" disabled>
+                                wire:model="form.province_id">
                                 <option value="">---प्रदेश छान्नुहोस् ----</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id ?? '' }}">{{ $province->province ?? '' }}
@@ -754,7 +754,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="form.district_id" class="form-label">जिल्ला</label>
                             <select class="form-select @error('form.district_id') is-invalid @enderror" id="form.district_id"
-                                wire:model="form.district_id" disabled>
+                                wire:model="form.district_id" >
                                 <option value="">---जिल्ला छान्नुहोस् ----</option>
                                 @foreach ($districts as $district)
                                     <option value="{{ $district->id }}">{{ $district->district }}</option>
@@ -767,7 +767,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="form.local_body_id" class="form-label">पालिका</label>
                             <select class="form-select @error('form.local_body_id') is-invalid @enderror"
-                                id="form.local_body_id" wire:model="form.local_body_id" disabled>
+                                id="form.local_body_id" wire:model="form.local_body_id" >
                                 <option value="">---पालिका छान्नुहोस् ----</option>
                                 @foreach ($localBodies as $localBody)
                                     <option value="{{ $localBody->id }}">{{ $localBody->local_body }}</option>

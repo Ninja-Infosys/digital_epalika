@@ -262,7 +262,7 @@
                             </div>
                         </div>
                     @endif
-                   
+
                     @if (Route::has('businessRegistration.business'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
@@ -277,6 +277,20 @@
                             </div>
                         </div>
                     @endif
+                        @if (Route::has('businessRegistration.organizationRegistration'))
+                            <div class="col-md-3">
+                                <div class="info-card module-card">
+                                    <a href="{{ route('businessRegistration.organizationRegistration') }}">
+                                        <div class="pt-4 text-center">
+                                            <img src="{{ asset('assets/frontend/image/new-icons/flat.png') }}"
+                                                 style="object-fit: contain; height: 35px; width: 35px" width="35"
+                                                 height="35">
+                                            <h6 class="p-2 text-dark">व्यवसाय संस्था दर्ता</h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
                     @if (Route::has('grant.index'))
                         <div class="col-md-3">
                             <div class="info-card module-card">
