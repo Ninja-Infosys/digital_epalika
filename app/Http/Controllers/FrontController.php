@@ -24,15 +24,16 @@ class FrontController extends Controller
     public function index()
     {
         $checkRoutes = collect([
-            "grievanceHandling" => Route::has('grievanceHandling.grievance'),
-            "ebps" => Route::has('ebps'),
-            "digitalBoard" => Route::has('digitalBoard.helpdesk.helpdesk'),
-            "recommendation" => Route::has('recommendationrecommendation.index'),
-            "businessRegistration" => Route::has('businessRegistration.business'),
-            "grant" => Route::has('grant.index'),
-            "payment" => Route::has('payment.index'),
-            "complaintApplication" => Route::has('complaintApplication.complainRegistration'),
-            "roaster" => Route::has('roaster.index')
+           "grievanceHandling" => Route::has('grievanceHandling.grievance'),
+           "ebps" => Route::has('ebps'),
+           "digitalBoard" => Route::has('digitalBoard.helpdesk.helpdesk'),
+           "recommendation" => Route::has('recommendationrecommendation.index'),
+           "businessRegistration" => Route::has('businessRegistration.business'),
+           "OrganizationRegistration" => Route::has('businessRegistration.organizationRegistration'),
+           "grant" => Route::has('grant.index'),
+           "payment" => Route::has('payment.index'),
+           "complaintApplication" => Route::has('complaintApplication.complainRegistration'),
+           "roaster" => Route::has('roaster.index')
         ]);
 
 
@@ -44,10 +45,10 @@ class FrontController extends Controller
         }
 
 
-        if ($checkRoutes->filter()->count() > 1) {
+         if ($checkRoutes->filter()->count() > 1) {
             return redirect(route('digital-service'));
         } else {
-            if (Route::has('ebps')) {
+            if(Route::has('ebps')){
                 return redirect(route('ebps'));
             }
             return redirect(route('digital-service'));

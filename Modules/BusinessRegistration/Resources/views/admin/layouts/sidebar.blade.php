@@ -13,6 +13,13 @@
     </li>
 @endcan
 
+<li class="{{request()->is('admin/businessRegistration/organizationRegistration') ? 'active' : ''}}">
+    <a href="{{route('admin.businessRegistration.organizationRegistration.index')}}">
+        <i class="fa fa-clipboard"></i>
+        <span> संस्था दर्ता / नविकरण</span>
+    </a>
+</li>
+
 <li class="{{request()->is('admin/businessRegistration/report*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationReport"
        {{request()->is('admin/businessRegistration/report*') ? 'aria-expanded=true' : ''}}
