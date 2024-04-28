@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Modules\EMap\Enums\ApplicantTypeEnum;
 use Modules\EMap\Enums\RelationEnum;
 
@@ -43,7 +41,7 @@ class ApplicantDetail extends Model
         'district_id',
         'local_body_id',
         'ward_no',
-        'tole'
+        'tole',
     ];
 
     protected $casts = [
@@ -51,10 +49,10 @@ class ApplicantDetail extends Model
         'relation_with_owner' => RelationEnum::class,
     ];
 
-    protected $with=[
+    protected $with = [
         'province',
         'district',
-        'localBody'
+        'localBody',
     ];
 
     public function mapApply(): BelongsTo
@@ -70,16 +68,15 @@ class ApplicantDetail extends Model
     public function getSignatureUrlAttribute(): string
     {
 
-        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
+        return $this->attributes['signature'] && Storage::disk('public')->exists($this->attributes['signature']) ? Storage::disk('public')->url($this->attributes['signature']) : '';
     }
 
-    public function setSignatureAttribute($value)
+    public function setSignatureAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['signature'] = $value->store('e_map/applicant/signature', 'public');
         }
     }
-
 
     public function province(): BelongsTo
     {

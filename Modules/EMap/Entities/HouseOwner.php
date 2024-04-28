@@ -19,7 +19,8 @@ class HouseOwner extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $with=['province','district','localBody'];
+    protected $with = ['province', 'district', 'localBody'];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -67,7 +68,6 @@ class HouseOwner extends Model
         return $this->belongsToMany(OldMap::class);
     }
 
-
     public function mapApplies(): BelongsToMany
     {
         return $this->belongsToMany(MapApply::class);
@@ -90,7 +90,7 @@ class HouseOwner extends Model
 
     public function setDocumentAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['document'] = $value->store('houseOwnerArchive', 'public');
         }
     }
@@ -98,20 +98,20 @@ class HouseOwner extends Model
     public function getDocumentUrlAttribute($value): string
     {
 
-        return $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : '';
+        return $this->attributes['document'] && Storage::disk('public')->exists($this->attributes['document']) ? Storage::disk('public')->url($this->attributes['document']) : '';
 
     }
 
     public function setPhotoAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['photo'] = $value->store('e_map/house_owner/photo', 'public');
         }
     }
 
     public function getPhotoUrlAttribute($value): string
     {
-        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+        return $this->attributes['photo'] && Storage::disk('public')->exists($this->attributes['photo']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
 
     }
 }
