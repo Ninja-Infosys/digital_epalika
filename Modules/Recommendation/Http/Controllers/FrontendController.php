@@ -72,9 +72,11 @@ class FrontendController extends Controller
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
+        $sipharisSetting = SipharisSetting::with('approver','checker')->first();
+
 
         $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles',);
-        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser'));
+        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser','sipharisSetting'));
     }
 
 
