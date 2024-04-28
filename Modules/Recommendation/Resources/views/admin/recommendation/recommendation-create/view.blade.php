@@ -172,35 +172,36 @@
                         @include('admin.inc.file-view')
                         <div class="row">
                             <div class="col-md-12 d-flex justify-content-between">
-                                @if (auth()->check() && (auth()->user()->id == $sipharisSetting->checker_id || auth()->user()->role_id == 1))
-                                    @if ($recommendationCreate->status != 'sent_to_revenue')
-                                        <form method="POST"
-                                            action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT]) }}">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit"
-                                                class="btn btn-sm btn-danger">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT->label() }}</button>
-                                        </form>
-                                    @endif
+                                @if ($recommendationCreate->status !== 'sent_to_approver')
+                                    @if (auth()->check() && (auth()->user()->id == $sipharisSetting->checker_id || auth()->user()->role_id == 1))
+                                        @if ($recommendationCreate->status != 'sent_to_revenue')
+                                            <form method="POST"
+                                                action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-danger">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT->label() }}</button>
+                                            </form>
+                                        @endif
 
-                                    <form method="POST"
-                                        action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE]) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit"
-                                            class="btn btn-sm btn-primary text-white">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE->label() }}</button>
-                                    </form>
-                                    @if ($recommendationCreate->status != 'sent_to_revenue')
                                         <form method="POST"
-                                            action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER]) }}">
+                                            action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE]) }}">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"
-                                                class="btn btn-sm btn-success">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER->label() }}</button>
+                                                class="btn btn-sm btn-primary text-white">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_REVENUE->label() }}</button>
                                         </form>
+                                        @if ($recommendationCreate->status != 'sent_to_revenue')
+                                            <form method="POST"
+                                                action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-success">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER->label() }}</button>
+                                            </form>
+                                        @endif
                                     @endif
                                 @endif
-
                             </div>
                         </div>
                     </div>
@@ -320,16 +321,16 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                   
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">रद्द
-                                                                            गर्नुहोस्
-                                                                        </button>
-                                                                        <button type="submit" class="btn btn-primary">
-                                                                            पेश
-                                                                            गर्नुहोस्
-                                                                        </button>
-                                                                    
+
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">रद्द
+                                                                        गर्नुहोस्
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        पेश
+                                                                        गर्नुहोस्
+                                                                    </button>
+
                                                                 </div>
                                                             </form>
 
