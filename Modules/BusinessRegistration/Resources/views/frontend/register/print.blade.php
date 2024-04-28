@@ -73,13 +73,13 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $committeeName->name ?? '' }}</td>
                                     <td>{{ $committeeName->designation ?? '' }}</td>
-                                    <td>{{ $committeeName->name ?? '' }}</td>
                                     <td>
                                         <span>
                                             {{ $committeeName->localBody->local_body ?? '' }}
                                             - {{ $committeeName->ward_no ?? '' }}
                                         </span>
                                     </td>
+                                    <td></td>
 
                                 </tr>
                             @empty
