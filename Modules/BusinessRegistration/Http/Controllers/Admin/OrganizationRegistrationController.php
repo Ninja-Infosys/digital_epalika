@@ -24,7 +24,7 @@ class OrganizationRegistrationController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $organizationRegistrations = OrganizationRegistration::with('committeNames', 'committeNames.localBody', 'localBody')->where(function (Builder $q) {
+        $organizationRegistrations = OrganizationRegistration::with('committeeNames', 'committeeNames.localBody', 'localBody')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['name', 'submission_no', 'registration_no'], request('search'));
             }
@@ -47,7 +47,7 @@ class OrganizationRegistrationController extends Controller
     {
 
         $organizationRegistration->load(
-            ['committeNames' => function ($query) {
+            ['committeeNames' => function ($query) {
                 $query->with('issueDistrict', 'district', 'localBody');
             }, 'businessNature', 'registeredBusinesses']
         );
@@ -89,7 +89,7 @@ class OrganizationRegistrationController extends Controller
 
     public function edit(OrganizationRegistration $organizationRegistration)
     {
-        $organizationRegistration->load('committeNames', 'files');
+        $organizationRegistration->load('committeeNames', 'files');
 
         return view('businessregistration::admin.organizationRegistration.edit', compact('organizationRegistration'));
     }
@@ -151,7 +151,7 @@ class OrganizationRegistrationController extends Controller
     {
         $officeHeaders = OfficeHeader::get();
         $organizationRegistration->load(
-            ['committeNames' => function ($query) {
+            ['committeeNames' => function ($query) {
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }, 'province', 'district', 'localBody']
         );

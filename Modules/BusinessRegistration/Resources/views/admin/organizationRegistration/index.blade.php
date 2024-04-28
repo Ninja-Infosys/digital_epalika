@@ -96,7 +96,8 @@
                                             </a>
 
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.organizationRegistration.businessRenew.index', $organizationRegistration) }}"
+                                            {{-- admin.businessRegistration.organizationRegistration.businessRegistration.businessRenew.index --}}
+                                               href="{{ route('admin.businessRegistration.businessRegistration.businessRenew.index', $organizationRegistration) }}"
                                                class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                title="व्यवसाय नवीकरण">
                                                 <i class="fas fa-undo"></i>
