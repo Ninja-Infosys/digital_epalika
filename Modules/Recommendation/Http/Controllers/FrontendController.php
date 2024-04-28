@@ -21,7 +21,7 @@ class FrontendController extends Controller
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
         $recommendationCreates = RecommendationCreate::where('mobile_user_id', $mobileUser->id)
-            ->with('recommendationDetail','recommendationValues', 'mobileUser')->latest('updated_at')->paginate(5);
+            ->with('recommendationDetail', 'recommendationValues', 'mobileUser')->latest('updated_at')->paginate(5);
 
         // $recommendationCreates = RecommendationCreate::with('recommendationDetail')->latest('updated_at')->paginate(5);
         $recommendationCount = $mobileUser->recommendationCreates()->count();
@@ -44,15 +44,25 @@ class FrontendController extends Controller
                 'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
                 'created_by' => Auth::guard('mobile-user')->id()
             ]);
-            if (array_key_exists('fields', $request->validated()) && !empty ($request->validated()['fields'])) {
+            if (
+                array_key_exists('fields', $request->validated())
+                && !empty ($request->validated()['fields'])
+            ) {
+
                 foreach ($request->validated()['fields'] as $field) {
+
                     if (!empty ($field['type']) && $field['type'] == 'image') {
-                        // Handle image upload if required
-                        $value = Storage::disk('public')->putFile('recommendation/files', $field['value']);
+                        $value = Storage::disk('public')
+                            ->putFile('recommendation/files', $field['value']);
                     } else {
                         $value = $field['value'];
                     }
 
+                    $recommendationCreate->recommendationValues()->create([
+                        'recommendation_form_field_id' => $field['recommendation_form_field_id'],
+                        'value' => $value,
+                        'type' => $field['type'],
+                    ]);
                 }
             }
             return $recommendationCreate;
@@ -72,11 +82,11 @@ class FrontendController extends Controller
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
-        $sipharisSetting = SipharisSetting::with('approver','checker')->first();
+        $sipharisSetting = SipharisSetting::with('approver', 'checker')->first();
 
 
-        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles',);
-        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser','sipharisSetting'));
+        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles', );
+        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser', 'sipharisSetting'));
     }
 
 
