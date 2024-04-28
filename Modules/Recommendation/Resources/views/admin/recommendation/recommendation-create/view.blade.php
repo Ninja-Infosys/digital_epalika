@@ -457,7 +457,7 @@
                                             margin-top: 0;
                                         }
                                     </style>
-                                    {!! $recommendationCreate->resolveTemplate() ?? '' !!}
+                                    {!! $recommendationCreate->resolveTemplate($sipharisSetting) ?? '' !!}
                                 </div>
                             </div>
 
