@@ -7,7 +7,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div style="background-color:#f5f5f5; border-radius:5px;">
-                        <a class="whitespace-nowrap text-primary-500" style="padding-left: 10px;" href="{{ route('recommendationrecommendation.index') }}">सिफारिस</a>
+                        <a class="whitespace-nowrap text-primary-500" style="padding-left: 10px;"
+                            href="{{ route('recommendationrecommendation.index') }}">सिफारिस</a>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                             class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -120,13 +121,13 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                       
+
                         @include('admin.inc.file-view')
 
                     </div>
                     @if ($recommendationCreate->status == 'sent_to_revenue' || $recommendationCreate->status == 'sent_to_approver')
                         <div class="row mt-3">
-                          <div class="card-header">
+                            <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">बिल प्रिन्ट</h4>
                                     <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
@@ -205,13 +206,14 @@
                                         <div class="card-header">
                                             <div class="d-flex justify-content-between">
                                                 <h4 class="header-title mb-0">फाईल उपलोड़</h4>
-                                                
+
                                                 @if ($recommendationCreate->status !== 'sent_to_approver')
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                    <i class="fa fa-file"></i> नयाँ फाईल उपलोड गर्नुहोस
-                                                </button>
-                                            @endif
-                                                
+                                                    <button type="button" class="btn btn-primary btn-sm"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        <i class="fa fa-file"></i> नयाँ फाईल उपलोड गर्नुहोस
+                                                    </button>
+                                                @endif
+
                                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                                     data-bs-keyboard="false" tabindex="-1"
                                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -242,16 +244,16 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                   
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">रद्द
-                                                                            गर्नुहोस्
-                                                                        </button>
-                                                                        <button type="submit" class="btn btn-primary">
-                                                                            पेश
-                                                                            गर्नुहोस्
-                                                                        </button>
-                                                                    
+
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">रद्द
+                                                                        गर्नुहोस्
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        पेश
+                                                                        गर्नुहोस्
+                                                                    </button>
+
                                                                 </div>
                                                             </form>
 
@@ -318,7 +320,7 @@
                                         <x-print-button target-element="printSipharish" title="सिफारिस प्रिन्ट" />
                                     @endif
                                 </div>
-                                
+
                             </div>
                             <div class="card-body">
                                 <div id="printSipharish" class="p-1">
@@ -327,7 +329,7 @@
                                             margin-top: 0;
                                         }
                                     </style>
-                                    {!! $recommendationCreate->resolveTemplate() ?? '' !!}
+                                    {!! $recommendationCreate->resolveTemplate($sipharisSetting) ?? '' !!}
                                 </div>
                             </div>
                         </div>
