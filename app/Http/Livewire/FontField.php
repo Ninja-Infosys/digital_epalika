@@ -38,6 +38,7 @@ class FontField extends Component
                     ];
                 }
             }
+            
         }
         $this->formTypes = RecommendationDetail::get();
     }
