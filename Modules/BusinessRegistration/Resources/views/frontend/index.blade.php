@@ -27,50 +27,50 @@
 </head>
 
 <body class="auth-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 m-auto">
-                <div class="card rounded mt-2">
-                    <div class="col-md-12 p-1 text-center">
-                        <div class="logo">
-                            <img src="{{ asset('images/np.png') }}" height="70" alt="Logo">
-                        </div>
-                        <div class="title">
-                            <div class="m-2">
-                                <h3 class="text-primary fw-bolder mb-0">डिजिटल ई-पालिका</h3>
-                                <h4 class="text-dark fw-bold pt-1">व्यवसाय दर्ता</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <div class="card rounded mt-2">
+                <div class="col-md-12 p-1 text-center">
+                    <div class="logo">
+                        <img src="{{ asset('images/np.png') }}" height="70" alt="Logo">
+                    </div>
+                    <div class="title">
+                        <div class="m-2">
+                            <h3 class="text-primary fw-bolder mb-0">डिजिटल ई-पालिका</h3>
+                            <h4 class="text-dark fw-bold pt-1">व्यवसाय दर्ता</h4>
 
-                            </div>
                         </div>
                     </div>
-                    <livewire:businessregistration::registration-form />
                 </div>
+                <livewire:businessregistration::registration-form />
             </div>
         </div>
     </div>
-    <!-- Vendor js -->
-    <script src="{{ asset('assets/backend/js/vendor.min.js') }}"></script>
+</div>
+<!-- Vendor js -->
+<script src="{{ asset('assets/backend/js/vendor.min.js') }}"></script>
 
-    <!-- App js -->
-    <script src="{{ asset('assets/backend/js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+<!-- App js -->
+<script src="{{ asset('assets/backend/js/app.min.js') }}"></script>
+<script src="{{ asset('assets/backend/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
 
-    <!-- Init js-->
-    <script src="{{ asset('assets/backend/js/pages/form-wizard.init.js') }}"></script>
-    <script src="{{ asset('assets/frontend/js/sweetalert2.min.js') }}"></script>
+<!-- Init js-->
+<script src="{{ asset('assets/backend/js/pages/form-wizard.init.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/sweetalert2.min.js') }}"></script>
 
-    @livewireScripts
+@livewireScripts
 
-    {{-- listener for toastr --}}
-    <script>
-        window.addEventListener('alert_message', event => {
-            swal.fire({
-                title: event.detail.title,
-                text: event.detail.text,
-                icon: event.detail.type,
-            });
+{{-- listener for toastr --}}
+<script>
+    window.addEventListener('alert_message', event => {
+        swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>

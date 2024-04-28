@@ -1,8 +1,8 @@
 <div>
     <fieldset>
-        
+
         <div class="row">
-          
+
             <div class="col-md-6 mb-4">
                 <label for="recommendation_detail_id" class="form-label">सिफारिस <span
                         class="text-danger">*</span></label>
@@ -40,7 +40,7 @@
                                     id="recommendation_form_field_id"
                                     style="color:black !important;" />
                                 <input type="hidden" name="fields[{{ $key }}][type]" class="form-control"
-                                    value="{{ $field->type->value }}" id="type" 
+                                    value="{{ $field->type->value }}" id="type"
                                     style="color:black !important;"/>
                                 <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">{{ $field->field_name }}</label>

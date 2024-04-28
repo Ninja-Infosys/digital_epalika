@@ -17,7 +17,8 @@ class LandOwner extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $with=['province','district','localBody'];
+
+    protected $with = ['province', 'district', 'localBody'];
 
     protected $dates = [
         'created_at',
@@ -48,6 +49,7 @@ class LandOwner extends Model
     protected $casts = [
         'land_owner_type' => LandOwnerTypeEnum::class,
     ];
+
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
@@ -80,13 +82,14 @@ class LandOwner extends Model
 
     public function setPhotoAttribute($value): void
     {
-        if(!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['photo'] = $value->store('e_map/land_owner/photo', 'public');
         }
     }
+
     public function getPhotoUrlAttribute($value): string
     {
-        return  $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+        return $this->attributes['photo'] && Storage::disk('public')->exists($this->attributes['photo']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
 
     }
 }

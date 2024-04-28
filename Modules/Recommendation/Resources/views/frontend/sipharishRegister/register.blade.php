@@ -44,9 +44,16 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 @livewire('font-field', [
+                                //     'personal_detail_id' => old('personal_detail_id'),
+                                //     'mobile_user_id' => old('mobile_user_id'),
+                                //     'recommendation_detail_id' => old('recommendation_detail_id'),
+                                //     'fields' => old('fields'),
+                                // ])
+                                // [
                                     'personal_detail_id' => old('personal_detail_id'),
                                     'mobile_user_id' => old('mobile_user_id'),
-                                    'recommendation_detail_id' => old('recommendation_detail_id'),
+                                    'sipharis_form_type_id' => old('sipharis_form_type_id'),
+                                    'status' => old('status'),
                                     'fields' => old('fields'),
                                 ])
                                 <button type="submit" class="btn btn-primary mt-2">
