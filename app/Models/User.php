@@ -70,21 +70,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected function wardNo(): Attribute
-    {
-        return Attribute::make(
-            get: function ($value) {
-                return $value !== null ? explode(',', $value) : [];
-            },
-            set: function ($value) {
-                if (is_array($value)) {
-                    return implode(',', $value);
-                }
-                return $value;
-            }
-        );
-    }
-
     public function setPasswordAttribute($value): void
     {
         if (!empty($value)) {

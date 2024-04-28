@@ -21,13 +21,13 @@ class FrontendController extends Controller
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
         $recommendationCreates = RecommendationCreate::where('mobile_user_id', $mobileUser->id)
-            ->with('recommendationDetail', 'mobileUser')->latest('updated_at')->paginate(5);
+            ->with('recommendationDetail','recommendationValues', 'mobileUser')->latest('updated_at')->paginate(5);
 
         // $recommendationCreates = RecommendationCreate::with('recommendationDetail')->latest('updated_at')->paginate(5);
-        $recommendationCount = RecommendationCreate::count();
-        $recommendationCountPending = RecommendationCreate::where('approved_status', 'pending')->count();
-        $recommendationCountAccept = RecommendationCreate::where('approved_status', 'approved')->count();
-        $recommendationCountReject = RecommendationCreate::where('approved_status', 'reject')->count();
+        $recommendationCount = $mobileUser->recommendationCreates()->count();
+        $recommendationCountPending = $mobileUser->recommendationCreates()->where('approved_status', 'pending')->count();
+        $recommendationCountAccept = $mobileUser->recommendationCreates()->where('approved_status', 'approved')->count();
+        $recommendationCountReject = $mobileUser->recommendationCreates()->where('approved_status', 'reject')->count();
         return view('recommendation::frontend.index', compact('recommendationCount', 'recommendationCreates', 'recommendationCountPending', 'recommendationCountAccept', 'recommendationCountReject'));
 
     }

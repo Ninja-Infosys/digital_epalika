@@ -11,7 +11,7 @@ class CheckRoleMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!empty($request->user()->role)) {
+        if (! empty($request->user()->role)) {
             if (Cache::has($this->getCacheKey())) {
                 $permissions = Cache::get($this->getCacheKey());
             } else {
@@ -19,7 +19,6 @@ class CheckRoleMiddleware
                     return $request->user()->role->permissions->pluck('title');
                 });
             }
-
 
             collect($permissions)->each(function ($title) {
                 Gate::define($title, function () {
@@ -33,6 +32,6 @@ class CheckRoleMiddleware
 
     public function getCacheKey(): string
     {
-        return md5('permissions-' . auth()->id());
+        return md5('permissions-'.auth()->id());
     }
 }

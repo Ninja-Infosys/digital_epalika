@@ -11,7 +11,7 @@
                     <div class="col-md-12">
                         <div class="breadcrumb-item">
                             <a class="whitespace-nowrap text-primary-500"
-                                href="{{ route('grievanceHandling.grievance') }}">सिफारिस</a>
+                                href="{{ route('recommendationrecommendation.index') }}">सिफारिस</a>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
