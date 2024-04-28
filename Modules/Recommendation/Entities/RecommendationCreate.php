@@ -77,7 +77,7 @@ class RecommendationCreate extends Model
     }
 
 
-    public function resolveTemplate(): string
+    public function resolveTemplate($sipharisSetting): string
     {
         $content = letterHead() . $this->recommendationDetail?->content ;
         $replaceableList = collect();
@@ -113,9 +113,8 @@ class RecommendationCreate extends Model
         $replaceableList->put('[@ward_no]', (string) officeSetting()->ward_no);
         $replaceableList->put('[@today_date_bs]', (string) get_nepali_number($this->get_today_nepali_date()));
         $replaceableList->put('[@today_date_ad]', (string) today()->toDateString());
-        $replaceableList->put('[@approver_signature]', '<img src="' . (auth()->user()->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
-        $replaceableList->put('[@checker_signature]', '<img src="' . (auth()->user()->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
-
+        $replaceableList->put('[@approver_signature]', '<img src="' . ($sipharisSetting->approver?->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
+        $replaceableList->put('[@checker_signature]', '<img src="' . ($sipharisSetting->checker?->signature_photo_url ?? '') . '" width="100" height="100" alt="Signature Photo">');
 
         $replaceableKeys = $replaceableList->keys()->toArray();
         $replaceableValues = $replaceableList->values()->toArray();

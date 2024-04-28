@@ -135,4 +135,9 @@ class OrganizationRegistration extends Model
                 : null
         );
     }
+
+    public function committeeNames(): HasMany
+    {
+        return $this->hasMany(CommitteeName::class);
+    }
 }

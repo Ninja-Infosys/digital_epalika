@@ -31,9 +31,9 @@ class FrontendController extends Controller
     public function print(OrganizationRegistration $organizationRegistration)
     {
         $organizationRegistration->load(
-            ['customerNames' => function ($query) {
+            ['committeeNames' => function ($query) {
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
-            }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
+            }]
         );
         return view('businessregistration::frontend.register.print', compact('organizationRegistration'));
     }

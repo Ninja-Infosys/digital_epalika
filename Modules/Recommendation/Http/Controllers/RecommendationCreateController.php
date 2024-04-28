@@ -73,7 +73,7 @@ class RecommendationCreateController extends Controller
             'recommendationFiles.recommendationDocument',
             'recommendationDetail.revenueHeaders'
         );
-        $sipharisSetting = SipharisSetting::first();
+        $sipharisSetting = SipharisSetting::with('approver','checker')->first();
 // dd($recommendationCreate);
         return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate','sipharisSetting'));
     }

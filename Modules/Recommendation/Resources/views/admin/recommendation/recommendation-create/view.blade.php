@@ -320,7 +320,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                   
+
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">रद्द
                                                                             गर्नुहोस्
@@ -329,7 +329,7 @@
                                                                             पेश
                                                                             गर्नुहोस्
                                                                         </button>
-                                                                    
+
                                                                 </div>
                                                             </form>
 
@@ -406,7 +406,7 @@
                                             margin-top: 0;
                                         }
                                     </style>
-                                    {!! $recommendationCreate->resolveTemplate() ?? '' !!}
+                                    {!! $recommendationCreate->resolveTemplate($sipharisSetting) ?? '' !!}
                                 </div>
                             </div>
                             <div class="row">
