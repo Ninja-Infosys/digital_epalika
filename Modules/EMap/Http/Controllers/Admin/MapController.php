@@ -65,6 +65,7 @@ class MapController extends Controller
 
                 }
             })
+
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
