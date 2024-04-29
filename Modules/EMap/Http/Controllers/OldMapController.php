@@ -8,10 +8,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Modules\EMap\Entities\OldMap;
 use Modules\EMap\Entities\OldMapDocument;
-use Modules\EMap\Enums\ApplicationFormTypeEnum;
 
 use Illuminate\Database\Eloquent\Builder;
-
 
 class OldMapController extends Controller
 {
@@ -38,7 +36,7 @@ class OldMapController extends Controller
 
     public function show(OldMap $oldMap)
     {
-        $oldMap->load('houseOwner', 'fiscalYear','oldMapDocuments');
+        $oldMap->load('houseOwner', 'fiscalYear', 'oldMapDocuments');
 
         return view('emap::admin.oldMap.show', compact('oldMap'));
     }

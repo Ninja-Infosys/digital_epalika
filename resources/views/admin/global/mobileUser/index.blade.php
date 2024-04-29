@@ -27,7 +27,12 @@
                 <div class="card-header search-card">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> सेवाग्राहीहरु</h4>
-
+{{--                        @can('branch_create')--}}
+                            <a href="{{route('admin.global.mobileUser.create')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
+                            </a>
+{{--                        @endcan--}}
                     </div>
                 </div>
                 <div class="card-body px-0">
