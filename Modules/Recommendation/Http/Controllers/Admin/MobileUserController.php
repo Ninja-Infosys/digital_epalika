@@ -3,6 +3,7 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MobileUser;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Http\Requests\PersonalDetail\StorePersonalDetailRequest;
@@ -12,16 +13,16 @@ class MobileUserController extends Controller
 {
     public function index()
     {
-        $this->checkAuthorization('personalDetail_access');
+        $this->checkAuthorization('mobile-user');
 
-        $personalDetails = PersonalDetail::filterData()->where(function (Builder $q) {
+        $mobileUsers = MobileUser::filterData()->where(function (Builder $q) {
             if (! is_null(request('search'))) {
-                $q->whereLike(['name', 'phone_no', 'reg_no', 'gender'], request('search'));
+                $q->whereLike(['name', 'phone', 'email'], request('search'));
             }
         })->latest()
             ->paginate(15);
 
-        return view('recommendation::admin.setting.personalDetail.index', compact('personalDetails'));
+        return view('recommendation::admin.setting.mobileUser.index', compact('mobileUsers'));
     }
 
     public function create()

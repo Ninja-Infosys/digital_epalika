@@ -18,7 +18,9 @@ use Modules\Recommendation\Entities\RegistrationDetail;
 
 class MobileUserDetail extends Model
 {
-    use EventObserveTrait, HasFactory, SoftDeletes;
+    use EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
@@ -45,7 +47,7 @@ class MobileUserDetail extends Model
         'citizenship_back',
         'nec_no',
         'nec_certificate',
-        ' reg_no',
+        'reg_no',
         'is_minor',
         'gender',
         'user_id',

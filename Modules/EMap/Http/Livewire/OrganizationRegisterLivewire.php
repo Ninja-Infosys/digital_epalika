@@ -139,8 +139,8 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->validate();
         DB::transaction(function () {
-            $DbUser = Organization::create($this->user +[
-                'is_active'=>1, 'status'=>'pending'
+            $DbUser = Organization::create($this->user + [
+                'is_active' => 1, 'status' => 'pending'
                 ]);
             $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
             $DbOrgDetail->taxClearances()->create($this->taxClearance);
@@ -157,7 +157,7 @@ class OrganizationRegisterLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'muncipalRegistration','progressPercentage');
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'muncipalRegistration', 'progressPercentage');
     }
 
     public function checkOrganizationAddress(): void

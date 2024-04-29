@@ -11,7 +11,7 @@
                     @csrf
                     <fieldset>
                         <legend><h4 class="text-info">व्यक्तिगत विवरण</h4></legend>
-                        <h6 class="py-2">नोट: कृपया व्यक्तिगत विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>
+                        <h6 class="py-2">नोट: कृपया व्यक्तिगत विवरण भर्दा ध्यान दिएर भर्नु होला ।</h6>
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <label for="name" class="form-label">पुरा नाम *</label>
@@ -42,6 +42,18 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
+                                <label for="email" class="form-label">इमेल. *</label>
+                                <input type="text"
+                                       name="email"
+                                       value="{{ old('email') }}"
+                                       class="form-control @error('email') is-invalid @enderror"
+                                       id="email"
+                                       placeholder="इमेल." />
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
                                 <label for="gender" class="form-label">लिंग *</label>
                                 <select id="gender" name="gender" class="form-select">
                                     <option value="">-- छान्नुहोस् --</option>
@@ -52,18 +64,6 @@
                                     @endforeach
                                 </select>
                                 @error('gender')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-4 mb-2" id="marital-status-div">
-                                <label for="is_minor" class="form-label">नाबालिका हो/होइन ?*</label>
-                                <select id="is_minor" name="is_minor" class="form-select">
-                                    <option value="">-- छान्नुहोस् --</option>
-                                    <option value="1" {{ old('is_minor') == 1 ? 'selected':'' }}>हो</option>
-                                    <option value="0" {{ old('is_minor') == 0 ? 'selected':'' }}>होइन</option>
-                                </select>
-                                @error('is_minor')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -133,7 +133,7 @@
                 const personalDetailSubmitBtn = $("#personalDetailSubmitBtn");
                 $.ajax({
                     type: "post",
-                    url: "#",
+                    url: "{{route('mobileUser.mobileUserDetail.store')}}",
                     data: new FormData(this),
                     processData: false,
                     contentType: false,

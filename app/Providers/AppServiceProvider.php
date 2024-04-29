@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Http\Middleware\PageRenderMiddleware;
 use App\Models\FeatureActivation;
 use App\Models\File;
+use App\Models\MobileUser;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Units\Unit;
 use App\Models\Website\MunicipalDetail;
@@ -21,6 +22,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Recommendation\Observers\MobileUserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
         Unit::observe(UnitObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);
         File::observe(FileObserver::class);
+        MobileUser::observe(MobileUserObserver::class);
     }
 
     /**
