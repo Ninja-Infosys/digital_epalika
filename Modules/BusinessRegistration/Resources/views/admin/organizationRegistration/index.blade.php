@@ -48,12 +48,9 @@
                                 <th rowspan="2">दर्ता नं</th>
                                 <th rowspan="2">दर्ता मिति</th>
                                 <th colspan="2">संस्था</th>
-                                <th colspan="2">व्यवसाय</th>
                                 <th rowspan="2">#</th>
                             </tr>
                             <tr>
-                                <th>नाम</th>
-                                <th>ठेगाना</th>
                                 <th>नाम</th>
                                 <th>ठेगाना</th>
                             </tr>
@@ -64,11 +61,6 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $organizationRegistration->registration_no ?? '' }}</td>
                                     <td>{{ $organizationRegistration->registration_date_ne ?? '' }}</td>
-                                    <td>{{ $organizationRegistration->committeeNames->first()?->name ?? '' }}</td>
-                                    <td>
-                                            <span>{{ $organizationRegistration->committeeNames->first()?->localBody->local_body ?? '' }}
-                                                - {{ $organizationRegistration->committeeNames->first()?->ward_no ?? '' }} </span>
-                                    </td>
                                     <td>{{ $organizationRegistration->name ?? '' }}</td>
                                     <td>
                                             <span>{{ $organizationRegistration->localBody->local_body ?? '' }}
@@ -105,7 +97,7 @@
 
                                         @if (!is_null($organizationRegistration->registration_no))
                                                 <a data-bs-type="edit"
-                                                   href="{{ route('admin.businessRegistration.organizationRegistration.print', $organizationRegistration) }}"
+                                                   href="{{ route('admin.businessRegistration.organizationRegistration.printDetail', $organizationRegistration) }}"
                                                    title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
                                                     <i class="fa fa-print"></i>
                                                 </a>

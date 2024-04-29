@@ -66,6 +66,19 @@ class OrganizationRegistration extends Model
         'registration_month'
     ];
 
+    public function getIsRegisterAttribute(): bool
+    {
+        if ($this->registeredBusinesses !== null) {
+            return $this->registeredBusinesses->count() > 0;
+        }
+        return false;
+    }
+
+
+    public function committeeNames(): HasMany
+    {
+        return $this->hasMany(CommitteeName::class)->orderBy('position');
+    }
 
     public function fiscalYear(): BelongsTo
     {
@@ -102,7 +115,9 @@ class OrganizationRegistration extends Model
     public function getWardRecommendationAttribute(): string
     {
         return $this->attributes['ward_recommendation'] ? Storage::disk('public')->url($this->attributes['ward_recommendation']) : '';
+
     }
+
 
     public function setStatuteAttribute($value): void
     {
@@ -113,19 +128,14 @@ class OrganizationRegistration extends Model
 
     public function getStatuteAttribute(): string
     {
-        return $this->attributes['statute'] ? Storage::disk('public')->url($this->attributes['statute']) : '';
+        return $this->attributes['statute'] ? Storage::disk('public')->url($this->attributes['ward_recommendation']) : '';
+
     }
-
-
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
     }
 
-    public function committee(): HasMany
-    {
-        return $this->hasMany(CommitteeName::class)->orderBy('position');
-    }
     public function otherFile(): Attribute
     {
         return Attribute::make(
@@ -136,8 +146,7 @@ class OrganizationRegistration extends Model
         );
     }
 
-    public function committeeNames(): HasMany
-    {
-        return $this->hasMany(CommitteeName::class);
-    }
+
+
+
 }
