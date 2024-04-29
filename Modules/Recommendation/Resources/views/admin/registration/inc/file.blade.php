@@ -120,6 +120,7 @@
         </div>
     </div>
 </div>
+{{--TODO: Change this to submit to mobile User--}}
 @push('scripts')
     <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
@@ -132,7 +133,7 @@
                 const personalDetailSubmitBtn = $("#personalDetailSubmitBtn");
                 $.ajax({
                     type: "post",
-                    url: "{{route('admin.recommendation.setting.personalDetail.store')}}",
+                    url: "#",
                     data: new FormData(this),
                     processData: false,
                     contentType: false,

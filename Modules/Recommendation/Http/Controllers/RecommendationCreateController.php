@@ -2,11 +2,12 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
+use Modules\Recommendation\Entities\RecommendationSetting;
 use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Recommendation\Enums\RecommendationStatusEnum;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
@@ -15,7 +16,8 @@ class RecommendationCreateController extends Controller
 {
     public function index()
     {
-        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser', 'personalDetail')->latest()->get();
+        $recommendationCreates = RecommendationCreate::with('recommendationDetail', 'mobileUser')->latest()->get();
+
         return view('recommendation::admin.recommendation.recommendation-create.index', compact('recommendationCreates'));
     }
 
@@ -29,17 +31,17 @@ class RecommendationCreateController extends Controller
         $recommendationCreate = DB::transaction(function () use ($request) {
 
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                'created_by' => auth()->id()
+                'created_by' => auth()->id(),
             ]);
 
             if (
                 array_key_exists('fields', $request->validated())
-                && !empty ($request->validated()['fields'])
+                && ! empty($request->validated()['fields'])
             ) {
 
                 foreach ($request->validated()['fields'] as $field) {
 
-                    if (!empty ($field['type']) && $field['type'] == 'image') {
+                    if (! empty($field['type']) && $field['type'] == 'image') {
                         $value = Storage::disk('public')
                             ->putFile('recommendation/files', $field['value']);
                     } else {
@@ -55,20 +57,18 @@ class RecommendationCreateController extends Controller
             }
             if (
                 array_key_exists('files', $request->validated())
-                && !empty ($request->validated()['files'])
+                && ! empty($request->validated()['files'])
             ) {
                 foreach ($request->validated('files') ?? [] as $file) {
                     $recommendationCreate->recommendationFiles()->create($file);
                 }
             }
 
-
-
-
             return $recommendationCreate;
         });
 
         toast('सिफारिस सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.recommendation.recommendationCreate.show', $recommendationCreate->id));
     }
 
@@ -86,11 +86,11 @@ class RecommendationCreateController extends Controller
             'recommendationFiles.recommendationDocument',
             'recommendationDetail.revenueHeaders'
         );
-        $sipharisSetting = SipharisSetting::with('approver', 'checker')->first();
+        $sipharisSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
+
         // dd($recommendationCreate);
         return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate', 'sipharisSetting'));
     }
-
 
     public function updateStatus(RecommendationCreate $recommendationCreate, RecommendationStatusEnum $recommendationStatusEnum)
     {
@@ -98,17 +98,18 @@ class RecommendationCreateController extends Controller
             'status' => $recommendationStatusEnum->value,
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
-
 
     public function fileUpload(Request $request, RecommendationCreate $recommendationCreate)
     {
         $data = $request->validate([
-            'file' => ['required', 'file']
+            'file' => ['required', 'file'],
         ]);
         $recommendationCreate->update($data);
         toast('फाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 
@@ -122,6 +123,7 @@ class RecommendationCreateController extends Controller
         }
         $recommendationCreate->delete();
         toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 
@@ -131,6 +133,7 @@ class RecommendationCreateController extends Controller
             'approved_status' => 'approved',
         ]);
         toast('तपाइको सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 }

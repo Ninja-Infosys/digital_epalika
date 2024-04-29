@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up()
     {
-        Schema::create('sipharis_settings', function (Blueprint $table) {
+        Schema::create('recommendation_settings', function (Blueprint $table) {
             $table->id();
             $table->integer('ward')->nullable();
             $table->foreignId('approver_id')->constrained('users')->onDelete('cascade');

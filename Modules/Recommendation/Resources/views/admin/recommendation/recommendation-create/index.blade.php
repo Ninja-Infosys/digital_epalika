@@ -94,7 +94,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                {{ $recommendationCreate->personalDetail->name ?? ($recommendationCreate->mobileUser->name ?? '') }}
+                                                {{$recommendationCreate->mobileUser->name }}
                                             </td>
                                             <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
                                             <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
@@ -151,7 +151,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                {{ $recommendationCreate?->personalDetail?->name ?? ($recommendationCreate?->mobileUser?->name ?? '') }}
+                                                {{ $recommendationCreate?->mobileUser?->name  }}
                                             </td>
                                             <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
                                             <td>{{ $recommendationCreate->approved_status ?? '' }}</td>

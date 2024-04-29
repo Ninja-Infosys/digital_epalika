@@ -4,25 +4,25 @@ namespace Modules\Recommendation\Entities;
 
 use App\Enums\Gender;
 use App\Models\Address\District;
-use App\Models\Address\Province;
 use App\Models\Address\LocalBody;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Address\Province;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class PersonalDetail extends Model
 {
+    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -37,11 +37,11 @@ class PersonalDetail extends Model
         'local_body_id',
         'ward_no',
         'user_id',
-        'tole'
+        'tole',
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
     ];
 
     public function province(): BelongsTo

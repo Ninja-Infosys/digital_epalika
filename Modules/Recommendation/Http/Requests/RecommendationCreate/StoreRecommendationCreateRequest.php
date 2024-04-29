@@ -18,7 +18,7 @@ class StoreRecommendationCreateRequest extends FormRequest
     {
         return [
             'recommendation_detail_id' => ['required', Rule::exists('recommendation_details', 'id')->withoutTrashed()],
-            'personal_detail_id' => ['nullable', Rule::exists('personal_details', 'id')->withoutTrashed()],
+            'mobile_user_id' => ['required', Rule::exists('mobile_users', 'id')->withoutTrashed()],
             'status' => ['nullable', new Enum(RecommendationStatusEnum::class)],
             'fields' => ['nullable', 'array'],
             'fields.*.recommendation_form_field_id' => ['nullable', Rule::exists('recommendation_form_fields', 'id')->withoutTrashed()],
@@ -29,7 +29,7 @@ class StoreRecommendationCreateRequest extends FormRequest
             'fields.*.table.*.value' => ['nullable'],
             'fields.*.table.*.type' => ['nullable'],
             'files' => ['nullable', 'array'],
-            'files.*.recommendation_document_id' => ['required',Rule::exists('recommendation_documents', 'id')->withoutTrashed()],
+            'files.*.recommendation_document_id' => ['required', Rule::exists('recommendation_documents', 'id')->withoutTrashed()],
             'files.*.file' => ['required', 'file'],
         ];
     }

@@ -2,22 +2,27 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\MobileUser;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Recommendation\Entities\RecommendationDetail;
-use  Modules\Recommendation\Entities\PersonalDetail;
-use Livewire\Component;
 
 class Field extends Component
 {
     use WithFileUploads;
 
-    public string|int|null $personal_detail_id = null;
+    public string|int|null $mobile_user_id = null;
+
     public string|int|null $recommendation_detail_id = null;
+
     public $status = 1;
+
     public $fields = [];
+
     public $fieldData = [];
-    public $personalDetails = [];
+
+    public $mobileUsers = [];
 
     public $documents = [];
 
@@ -27,12 +32,12 @@ class Field extends Component
 
     public function mount($categorySubCategory = null): void
     {
-//        dd($this->fields);
-        if (!empty($categorySubCategory)) {
-            $this->personal_detail_id = $categorySubCategory['personal_detail_id'] ?? null;
+        //        dd($this->fields);
+        if (! empty($categorySubCategory)) {
+            $this->mobile_user_id = $categorySubCategory['mobile_user_id'] ?? null;
             $this->recommendation_detail_id = $categorySubCategory['recommendation_detail_id'] ?? null;
             $this->status = $categorySubCategory['status'] ? 1 : 0;
-            if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
+            if (array_key_exists('fields', $categorySubCategory) && ! empty($categorySubCategory['fields'])) {
                 foreach ($categorySubCategory['fields'] as $field) {
 
                     $this->fieldData[$field->recommendationFormField?->slug] = [
@@ -42,7 +47,7 @@ class Field extends Component
                 }
             }
         }
-        $this->personalDetails = PersonalDetail::all();
+        $this->mobileUsers = MobileUser::all();
         $this->formTypes = RecommendationDetail::get();
     }
 
@@ -68,7 +73,7 @@ class Field extends Component
     public function setType($index, $childIndex, $childSlug, $value): void
     {
         $this->data[$index][$childIndex][$childSlug]['type'] = $value;
-        if (!empty($this->data[$index][$childIndex][$childSlug]['data'])) {
+        if (! empty($this->data[$index][$childIndex][$childSlug]['data'])) {
             if ($value == 'image') {
                 $recommendationFile = Storage::disk('public')
                     ->putFile('recommendation/files', $this->data[$index][$childIndex][$childSlug]['data']);
@@ -87,7 +92,7 @@ class Field extends Component
     public function render()
     {
 
-        if (!empty($this->recommendation_detail_id)) {
+        if (! empty($this->recommendation_detail_id)) {
             $recommendationDetail = RecommendationDetail::with('recommendationFormFields.recommendationFormFields', 'recommendationDocuments')
                 ->find($this->recommendation_detail_id);
 
