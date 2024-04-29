@@ -18,7 +18,6 @@ use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Recommendation\Entities\RecommendationValue;
 use Modules\Recommendation\Entities\RegistrationDetail;
-use Modules\Recommendation\Entities\SipharishCreate;
 use Modules\Revenue\Entities\TaxPayer;
 use Modules\Roaster\Entities\Trainee;
 
@@ -43,7 +42,7 @@ class MobileUser extends Authenticatable
         'tax_prayer_id',
         'approved_at',
         'avatar',
-        'reg_no'
+        'reg_no',
     ];
 
     protected $hidden = [
@@ -57,7 +56,7 @@ class MobileUser extends Authenticatable
 
     public function setPasswordAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -108,14 +107,14 @@ class MobileUser extends Authenticatable
     {
         return Attribute::make(
             get: function (?string $value) {
-                if (!empty($value) && Storage::disk('public')->exists($value)) {
+                if (! empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
 
                 return asset('assets/backend/images/user_icon.jpg');
             },
             set: function ($value) {
-                if (!empty($value) && !is_string($value)) {
+                if (! empty($value) && ! is_string($value)) {
                     return $value->store('mobileUser', 'public');
                 }
             }

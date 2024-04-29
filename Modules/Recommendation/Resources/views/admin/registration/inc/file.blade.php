@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="personalDetail-form" enctype="multipart/form-data">
+                <form id="personalDetail-form">
                     @csrf
                     <fieldset>
                         <legend><h4 class="text-info">व्यक्तिगत विवरण</h4></legend>
@@ -28,13 +28,13 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="phone_no" class="form-label">सम्पर्क नं.</label>
+                                <label for="phone" class="form-label">सम्पर्क नं.</label>
                                 <input
                                     type="text"
-                                    name="phone_no"
-                                    value="{{old('phone_no')}}"
+                                    name="phone"
+                                    value="{{old('phone')}}"
                                     class="form-control"
-                                    id="phone_no"
+                                    id="phone"
                                     placeholder="सम्पर्क नं."
                                 />
                                 @error('phone_no')
@@ -133,7 +133,7 @@
                 const personalDetailSubmitBtn = $("#personalDetailSubmitBtn");
                 $.ajax({
                     type: "post",
-                    url: "{{route('mobileUser.mobileUserDetail.store')}}",
+                    url: "{{route('admin.global.mobileUser.store')}}",
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
@@ -144,7 +144,7 @@
                     success: function (resp) {
                         personalDetailSubmitBtn.prop('disabled', false);
                         personalDetailSubmitBtn.html("पेश गर्नुहोस्");
-                        $('.personalDetail').append("<option value=" + resp.data.personal_detail_id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
+                        $('.personalDetail').append("<option value=" + resp.data.id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
                         toastMessage('success', resp.message)
                         $('#personalDetail-modal').modal('toggle')
                         $('#personalDetail-form').trigger('reset');

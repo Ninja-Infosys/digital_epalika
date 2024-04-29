@@ -25,24 +25,24 @@ class MobileUserController extends Controller
 
     public function store(StoreMobileUserRequest $request)
     {
-        $mobileUser = DB::transaction(function () use ($request){
-            $mobileUser = MobileUser::create($request->validated()->only([
-                'name',
-                'email',
-                'phone',
-            ]));
+        $mobileUser = DB::transaction(function () use ($request) {
+            $mobileUser = MobileUser::create($request->validated());
 
-            $mobileUser->mobileUserDetail()->create($request->validated()->except([
-                'name',
-                'email',
-                'phone',
-            ]));
+            $mobileUser->mobileUserDetail()->create($request->validated());
 
             return $mobileUser;
         });
-
-
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => [
+                    'personal_detail_id' => $mobileUser->id,
+                    'name' => $mobileUser->name,
+                ],
+                'message' => 'व्यक्तिगत विवरण सफलतापूर्वक थपियो !',
+            ]);
+        }
         toast('सेवाग्राही सफलतापूर्वक थपियो', 'success');
+
         return $mobileUser;
     }
 
@@ -50,16 +50,18 @@ class MobileUserController extends Controller
     {
         DB::transaction(function () use ($mobileUser) {
             $mobileUser->update([
-                'is_active' => !$mobileUser->is_active,
+                'is_active' => ! $mobileUser->is_active,
             ]);
         });
         toast('सेवाग्राहीलाइ लाग-इन गर्न दिने', 'success');
+
         return back();
     }
 
     public function show(MobileUser $mobileUser)
     {
         $mobileUser->load('mobileUserDetail');
+
         return view('admin.global.mobileUser.show', compact('mobileUser'));
     }
 

@@ -31,17 +31,17 @@ class RecommendationCreateController extends Controller
         $recommendationCreate = DB::transaction(function () use ($request) {
 
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                'created_by' => auth()->id(),
-            ]);
+                    'created_by' => auth()->id(),
+                ]);
 
             if (
                 array_key_exists('fields', $request->validated())
-                && ! empty($request->validated()['fields'])
+                && !empty($request->validated()['fields'])
             ) {
 
                 foreach ($request->validated()['fields'] as $field) {
 
-                    if (! empty($field['type']) && $field['type'] == 'image') {
+                    if (!empty($field['type']) && $field['type'] == 'image') {
                         $value = Storage::disk('public')
                             ->putFile('recommendation/files', $field['value']);
                     } else {
@@ -57,7 +57,7 @@ class RecommendationCreateController extends Controller
             }
             if (
                 array_key_exists('files', $request->validated())
-                && ! empty($request->validated()['files'])
+                && !empty($request->validated()['files'])
             ) {
                 foreach ($request->validated('files') ?? [] as $file) {
                     $recommendationCreate->recommendationFiles()->create($file);
@@ -84,18 +84,20 @@ class RecommendationCreateController extends Controller
         $recommendationCreate->load(
             'recommendationValues.recommendationFormField',
             'recommendationFiles.recommendationDocument',
-            'recommendationDetail.revenueHeaders'
+            'recommendationDetail.revenueHeaders',
+            'mobileUser.mobileUserDetail.province',
+            'mobileUser.mobileUserDetail.district',
         );
-        $sipharisSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
+        $recommendationSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
 
         // dd($recommendationCreate);
-        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate', 'sipharisSetting'));
+        return view('recommendation::admin.recommendation.recommendation-create.view', compact('recommendationCreate', 'recommendationSetting'));
     }
 
     public function updateStatus(RecommendationCreate $recommendationCreate, RecommendationStatusEnum $recommendationStatusEnum)
     {
         $recommendationCreate->update([
-            'status' => $recommendationStatusEnum->value,
+            'approved_status' => $recommendationStatusEnum->value,
         ]);
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 

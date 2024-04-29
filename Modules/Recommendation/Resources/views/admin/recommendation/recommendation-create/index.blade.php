@@ -20,10 +20,10 @@
     <div class="row">
         <div class="col-md-12">
             @error('oc_file')
-                <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             @error('oc_file.*')
-                <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
     </div>
@@ -43,19 +43,20 @@
                         <div class="d-flex flex-wrap align-items-center">
                             <form action="" method="get" class="me-2">
                                 <input class="form-control form-control-sm filter-form" name="search" type="search"
-                                    placeholder="Search" autocomplete="off" value="{{ old('search', \request('search')) }}">
+                                       placeholder="Search" autocomplete="off"
+                                       value="{{ old('search', \request('search')) }}">
                             </form>
 
 
                             @can('recommendation_create')
                                 <a href="{{ route('admin.recommendation.recommendationCreate.create') }}"
-                                    class="btn btn-sm btn-outline-primary">
+                                   class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus-circle"></i> नयाँ सिफारिस थप्नुहोस
                                 </a>
                             @endcan
                             <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
-                                aria-expanded="false" aria-controls="collapseExample">
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
+                                    aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                         </div>
@@ -65,22 +66,24 @@
                 <div class="row">
                     <div class="col-md-12 mt-2">
                         <ul class="nav nav-pills mb-3 nav-bordered nav-justified" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link  active" id="pending-tab-btn" data-bs-toggle="pill" href="#pending-tab"
-                                    role="tab" aria-controls="pending-tab" aria-selected="false">Pending</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="approved-tab-btn" data-bs-toggle="pill" href="#approved-tab"
-                                    role="tab" aria-controls="approved-tab" aria-selected="true">Approved</a>
-                            </li>
-
+                            @foreach(\Modules\Recommendation\Enums\RecommendationStatusEnum::cases() as $recommendationSettingEnumTab)
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link  {{!$loop->first?'':'active'}}"
+                                       id="recommendation-{{$recommendationSettingEnumTab->value}}-tab-btn"
+                                       data-bs-toggle="pill" href="#recommendation-{{$recommendationSettingEnumTab->value}}-tab"
+                                       role="tab" aria-controls="recommendation-{{$recommendationSettingEnumTab->value}}-tab"
+                                       aria-selected="{{!$loop->first?:'true'}}">{{$recommendationSettingEnumTab->label()}}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="tab-content">
-                        <!-- Approved Tab Content -->
-                        <div class="tab-pane" id="approved-tab" role="tabpanel">
-                            <table class="table table-sm table-striped table-bordered">
-                                <thead>
+                        @foreach(\Modules\Recommendation\Enums\RecommendationStatusEnum::cases() as $recommendationSettingEnumContent)
+                            <!-- Pending Tab Content -->
+                            <div class="tab-pane {{!$loop->first?"":'active show'}}"
+                                 id="recommendation-{{$recommendationSettingEnumContent->value}}-tab" role="tabpanel">
+                                <table class="table table-sm table-striped table-bordered">
+                                    <thead>
                                     <tr>
                                         <th>क्र.स</th>
                                         <th>सेवाग्राहीको नाम</th>
@@ -88,78 +91,21 @@
                                         <th>सिफारिस स्वीकृति</th>
                                         <th>#</th>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($recommendationCreates->where("approved_status",'approved') as $recommendationCreate)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                {{$recommendationCreate->mobileUser->name }}
-                                            </td>
-                                            <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
-                                            <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
-                                            <td class="d-flex gap-1">
-                                                <a data-bs-type="edit"
-                                                    href="{{ route('admin.recommendation.recommendationCreate.show', $recommendationCreate) }}"
-                                                    class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                                    title="विवरण हेर्नुहोस">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-
-                                                {{--                                                 <a data-bs-type="edit" --}}
-                                                {{--                                                    href="{{ route('admin.recommendation.sipharish.sipharishCreate.edit',  $sipharish) }}" --}}
-                                                {{--                                                    class="btn btn-xs btn-outline-success  {{get_setting('Pin')?'confirm_pin':''}}" --}}
-                                                {{--                                                    title="फारम सम्पादन गर्नुहोस"> --}}
-                                                {{--                                                     <i class="fa fa-pen"></i> --}}
-                                                {{--                                                 </a> --}}
-                                                <form
-                                                    action="{{ route('admin.recommendation.recommendationCreate.destroy', $recommendationCreate) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
-                                                        title="मेटाउनु होस्">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Pending Tab Content -->
-                        <div class="tab-pane  active show" id="pending-tab" role="tabpanel">
-                            <table class="table table-sm table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>क्र.स</th>
-                                        <th>सेवाग्राहीको नाम</th>
-                                        <th>सिफारिस नाम</th>
-                                        <th>सिफारिस स्वीकृति</th>
-                                        <th>#</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($recommendationCreates->where("approved_status",'pending') as $recommendationCreate)
+                                    </thead>
+                                    <tbody>
+                                    @forelse ($recommendationCreates->where("approved_status",$recommendationSettingEnumContent) as $recommendationCreate)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 {{ $recommendationCreate?->mobileUser?->name  }}
                                             </td>
                                             <td>{{ $recommendationCreate->recommendationDetail?->title ?? '' }}</td>
-                                            <td>{{ $recommendationCreate->approved_status ?? '' }}</td>
+                                            <td>{{ $recommendationCreate->approved_status?->label() ?? '' }}</td>
                                             <td class="d-flex gap-1">
                                                 <a data-bs-type="edit"
-                                                    href="{{ route('admin.recommendation.recommendationCreate.show', $recommendationCreate) }}"
-                                                    class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                                    title="विवरण हेर्नुहोस">
+                                                   href="{{ route('admin.recommendation.recommendationCreate.show', $recommendationCreate) }}"
+                                                   class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                                   title="विवरण हेर्नुहोस">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 {{--                                                 <a data-bs-type="edit" --}}
@@ -174,8 +120,8 @@
                                                     @csrf
                                                     @method('delete')
                                                     <button data-bs-type="delete"
-                                                        class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
-                                                        title="मेटाउनु होस्">
+                                                            class="btn btn-xs btn-outline-danger {{ get_setting('Pin') ? 'confirm_pin' : 'show_confirm' }}"
+                                                            title="मेटाउनु होस्">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -186,9 +132,10 @@
                                             <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                         </tr>
                                     @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
