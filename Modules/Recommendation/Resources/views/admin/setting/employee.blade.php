@@ -30,38 +30,37 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{route('admin.recommendation.setting.recommendationSetting.update',$recommendationSetting)}}"
+                        action="{{route('admin.recommendation.setting.recommendationSetting.store')}}"
                         method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        @method('put')
                         <fieldset>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="ward_chairman_id" class="form-label">अध्यक्ष</label>
-                                    <select id="ward_chairman_id" name="ward_chairman_id" class="form-select" required>
+                                    <label for="approver_id" class="form-label">अनुमोदनकर्ता</label>
+                                    <select id="approver_id" name="approver_id" class="form-select" required>
                                         <option value="">-- छान्नुहोस् --</option>
-                                        @foreach($employees as $employee)
+                                        @foreach($users as $employee)
                                             <option
-                                                {{$employee->id==old('ward_chairman_id',$recommendationSetting->ward_chairman_id) ? 'selected' : ''}}
+                                                {{$employee->id==old('approver_id',$recommendationSetting?->approver_id) ? 'selected' : ''}}
                                                 value="{{$employee->id}}">{{$employee->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('ward_chairman_id')
+                                    @error('approver_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="ward_secretary_id" class="form-label">सचिव</label>
-                                    <select id="ward_secretary_id" name="ward_secretary_id" class="form-select" required>
+                                    <label for="checker_id" class="form-label">परीक्षक</label>
+                                    <select id="checker_id" name="checker_id" class="form-select" required>
                                         <option value="">-- छान्नुहोस् --</option>
-                                        @foreach($employees as $employee)
+                                        @foreach($users as $employee)
                                             <option
-                                                {{$employee->id==old('ward_secretary_id',$recommendationSetting->ward_secretary_id) ? 'selected' : ''}}
+                                                {{$employee->id==old('checker_id',$recommendationSetting?->checker_id) ? 'selected' : ''}}
                                                 value="{{$employee->id}}">{{$employee->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('ward_secretary_id')
+                                    @error('checker_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

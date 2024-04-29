@@ -5,15 +5,15 @@
         </legend>
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="personal_detail_id" class="form-label">व्यक्तिगत विवरण <span
+                <label for="mobile_user_id" class="form-label">व्यक्तिगत विवरण <span
                         class="text-danger">*</span></label>
                 <div class="d-flex justify-content-between gap-1">
-                    <select id="personal_detail_id" name="personal_detail_id" class="form-select personalDetail"
-                        wire:model="personal_detail_id">
+                    <select id="mobile_user_id" name="mobile_user_id" class="form-select personalDetail"
+                        wire:model="mobile_user_id">
                         <option value="">-- छान्नुहोस् --</option>
-                        @foreach ($personalDetails as $personalDetail)
-                            <option value="{{ $personalDetail->id }}">{{ $personalDetail->name }}
-                                ({{ $personalDetail->reg_no }})
+                        @foreach ($mobileUsers as $mobileUser)
+                            <option value="{{ $mobileUser->id }}">{{ $mobileUser->name }}
+                                ({{ $mobileUser->reg_no ?? '' }})
                             </option>
                         @endforeach
                     </select>

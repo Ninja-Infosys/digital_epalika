@@ -50,6 +50,7 @@
                     <form action="{{ route('admin.recommendation.recommendationCreate.update',$recommendationCreate) }}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         @livewire('field', [
                             'personal_detail_id' => old('personal_detail_id',$recommendationCreate->personal_detail_id),
                             'mobile_user_id' => old('mobile_user_id'),

@@ -2,9 +2,10 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use App\Models\Settings\Employee;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Employee;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Modules\Recommendation\Entities\RecommendationSetting;
 
 class RecommendationSettingController extends Controller
@@ -12,31 +13,31 @@ class RecommendationSettingController extends Controller
     public function index()
     {
         $this->checkAuthorization('recommendationSetting_access');
-        $employees = Employee::all();
-        $recommendationSetting = RecommendationSetting::where('ward_no', auth()->user()->ward_no)->first() ?? RecommendationSetting::findOrFail(1);
-        return view('recommendation::admin.setting.employee', compact('employees', 'recommendationSetting'));
+        $users = User::all();
+        $recommendationSetting = RecommendationSetting::where('ward', auth()->user()->ward_no)->first();
+
+        return view('recommendation::admin.setting.employee', compact('users', 'recommendationSetting'));
     }
 
-
-    public function update(Request $request, RecommendationSetting $recommendationSetting)
+    public function store(Request $request)
     {
         $this->checkAuthorization('recommendationSetting_edit');
         $data = $request->validate([
-            'ward_chairman_id' => ['required'],
-            'ward_secretary_id' => ['required']
+            'approver_id' => ['required'],
+            'checker_id' => ['required'],
         ]);
 
-        $recommendationSetting = RecommendationSetting::where('ward_no', auth()->user()->ward_no)->first();
+        $recommendationSetting = RecommendationSetting::where('ward', auth()->user()->ward_no)->first();
         if ($recommendationSetting) {
             $recommendationSetting->update($data);
         } else {
             RecommendationSetting::create($data + [
-                    'ward_no' => auth()->user()->ward_no,
-                    'user_id' => auth()->id()
-                ]);
+                'ward_no' => auth()->user()->ward_no,
+            ]);
         }
 
         toast('सेटिङ सफलता पुर्वक सेट गरियो');
+
         return back();
     }
 }

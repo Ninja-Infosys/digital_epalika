@@ -2,25 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
-use Modules\Recommendation\Entities\SipharishCreate;
-use Modules\Roaster\Entities\Trainee;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Recommendation\Entities\RecommendationValue;
 use Modules\Recommendation\Entities\RegistrationDetail;
 use Modules\Revenue\Entities\TaxPayer;
+use Modules\Roaster\Entities\Trainee;
 
 class MobileUser extends Authenticatable
 {
@@ -31,7 +30,7 @@ class MobileUser extends Authenticatable
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -42,25 +41,25 @@ class MobileUser extends Authenticatable
         'password',
         'tax_prayer_id',
         'approved_at',
-        'avatar'
-
+        'avatar',
+        'reg_no',
     ];
+
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
     public function setPasswordAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
-
-
 
     /*   public function setProfilePhotoPathAttribute($value): void
        {
@@ -103,23 +102,19 @@ class MobileUser extends Authenticatable
     {
         return $this->hasMany(Trainee::class);
     }
-    public function sipharishCreates(): HasMany
-    {
-        return $this->hasMany(SipharishCreate::class);
-    }
 
     public function avatar(): Attribute
     {
         return Attribute::make(
             get: function (?string $value) {
-                if (!empty($value) && Storage::disk('public')->exists($value)) {
+                if (! empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
 
                 return asset('assets/backend/images/user_icon.jpg');
             },
             set: function ($value) {
-                if (!empty($value) && !is_string($value)) {
+                if (! empty($value) && ! is_string($value)) {
                     return $value->store('mobileUser', 'public');
                 }
             }
@@ -132,15 +127,16 @@ class MobileUser extends Authenticatable
         return $this->belongsTo(TaxPayer::class);
     }
 
-
     public function mobileUserDetail(): HasOne
     {
         return $this->hasOne(MobileUserDetail::class);
     }
+
     public function recommendationCreates(): HasMany
     {
         return $this->hasMany(RecommendationCreate::class);
     }
+
     public function registrationDetails(): HasMany
     {
         return $this->hasMany(RegistrationDetail::class);

@@ -7,11 +7,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="personalDetail-form" enctype="multipart/form-data">
+                <form id="personalDetail-form">
                     @csrf
                     <fieldset>
                         <legend><h4 class="text-info">व्यक्तिगत विवरण</h4></legend>
-                        <h6 class="py-2">नोट: कृपया व्यक्तिगत विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>
+                        <h6 class="py-2">नोट: कृपया व्यक्तिगत विवरण भर्दा ध्यान दिएर भर्नु होला ।</h6>
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <label for="name" class="form-label">पुरा नाम *</label>
@@ -28,17 +28,29 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="phone_no" class="form-label">सम्पर्क नं.</label>
+                                <label for="phone" class="form-label">सम्पर्क नं.</label>
                                 <input
                                     type="text"
-                                    name="phone_no"
-                                    value="{{old('phone_no')}}"
+                                    name="phone"
+                                    value="{{old('phone')}}"
                                     class="form-control"
-                                    id="phone_no"
+                                    id="phone"
                                     placeholder="सम्पर्क नं."
                                 />
                                 @error('phone_no')
                                 <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="email" class="form-label">इमेल. *</label>
+                                <input type="text"
+                                       name="email"
+                                       value="{{ old('email') }}"
+                                       class="form-control @error('email') is-invalid @enderror"
+                                       id="email"
+                                       placeholder="इमेल." />
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
@@ -52,18 +64,6 @@
                                     @endforeach
                                 </select>
                                 @error('gender')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-4 mb-2" id="marital-status-div">
-                                <label for="is_minor" class="form-label">नाबालिका हो/होइन ?*</label>
-                                <select id="is_minor" name="is_minor" class="form-select">
-                                    <option value="">-- छान्नुहोस् --</option>
-                                    <option value="1" {{ old('is_minor') == 1 ? 'selected':'' }}>हो</option>
-                                    <option value="0" {{ old('is_minor') == 0 ? 'selected':'' }}>होइन</option>
-                                </select>
-                                @error('is_minor')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -120,6 +120,7 @@
         </div>
     </div>
 </div>
+{{--TODO: Change this to submit to mobile User--}}
 @push('scripts')
     <script src="{{asset('assets/backend/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/backend/ckeditor/editor.js')}}"></script>
@@ -132,7 +133,7 @@
                 const personalDetailSubmitBtn = $("#personalDetailSubmitBtn");
                 $.ajax({
                     type: "post",
-                    url: "{{route('admin.recommendation.setting.personalDetail.store')}}",
+                    url: "{{route('admin.global.mobileUser.store')}}",
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
@@ -143,7 +144,7 @@
                     success: function (resp) {
                         personalDetailSubmitBtn.prop('disabled', false);
                         personalDetailSubmitBtn.html("पेश गर्नुहोस्");
-                        $('.personalDetail').append("<option value=" + resp.data.personal_detail_id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
+                        $('.personalDetail').append("<option value=" + resp.data.id + ">" + resp.data.name + " (" + resp.data.reg_no + ")" + "</option>")
                         toastMessage('success', resp.message)
                         $('#personalDetail-modal').modal('toggle')
                         $('#personalDetail-form').trigger('reset');

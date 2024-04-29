@@ -9,26 +9,26 @@ use App\Models\Address\Province;
 use App\Models\MobileUser;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class TaxPayer extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
     use EventObserveTrait;
     use GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -60,7 +60,7 @@ class TaxPayer extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function taxPayerType(): BelongsTo
@@ -125,8 +125,7 @@ class TaxPayer extends Model
         return $this->hasMany(Invoice::class);
     }
 
-
-    public function mobileUsers():HasMany
+    public function mobileUsers(): HasMany
     {
         return $this->hasMany(MobileUser::class);
     }

@@ -9,7 +9,6 @@ use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
 use App\Traits\LockableTrait;
 use App\Traits\QueryFilterTrait;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -23,19 +22,18 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
-use Modules\Recommendation\Entities\SifarisPassGroup;
 use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\TaskManagement\Entities\Activity;
 
 class User extends Authenticatable
 {
+    use EventObserveTrait;
     use HasApiTokens;
     use HasFactory;
-    use Notifiable;
-    use SoftDeletes;
-    use QueryFilterTrait;
-    use EventObserveTrait;
     use LockableTrait;
+    use Notifiable;
+    use QueryFilterTrait;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
@@ -72,14 +70,14 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
 
     public function setPinAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['pin'] = bcrypt($value);
         }
     }
@@ -93,24 +91,23 @@ class User extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
-
 
     public function getSignaturePhotoUrlAttribute(): string
     {
         return $this->attributes['signature_photo_path']
 
             ? Storage::disk('public')->url($this->attributes['signature_photo_path'])
-            : '' ;
+            : '';
     }
 
     public function setSignaturePhotoPathAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['signature_photo_path'] = $value->store('user/signature/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['signature_photo_path'] = $value->store('user/signature/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -128,8 +125,9 @@ class User extends Authenticatable
 
     public function sipharisSetting(): BelongsTo
     {
-        return $this->belongsTo(SipharisSetting::class, );
+        return $this->belongsTo(SipharisSetting::class);
     }
+
     public function users(): HasMany
     {
         return $this->hasMany(__CLASS__);
@@ -139,6 +137,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
@@ -152,6 +151,7 @@ class User extends Authenticatable
     public function getAvatarAttribute(): string
     {
         $name = $this->attributes['name'] ?? 'User';
+
         return (new Avatar())->create($name)->toBase64();
     }
 
@@ -165,26 +165,23 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class);
     }
 
-
-
     public function mapPassGroups(): BelongsToMany
     {
         return $this->belongsToMany(\Modules\EMap\Entities\MapPassGroup::class);
     }
+
     public function complaintApplications()
     {
         return $this->hasMany(ComplaintApplication::class, 'assigned_user_id');
     }
 
-
     public function approverSifarisPassGroups()
     {
         return $this->hasMany(SipharisSetting::class, 'approver_id');
     }
+
     public function checkerSifarisPassGroups()
     {
         return $this->hasMany(SipharisSetting::class, 'checker_id');
     }
-
-
 }

@@ -6,24 +6,26 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RegistrationDetail;
 
 class MobileUserDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -45,66 +47,69 @@ class MobileUserDetail extends Model
         'citizenship_back',
         'nec_no',
         'nec_certificate',
-        ' reg_no',
+        'reg_no',
         'is_minor',
         'gender',
         'user_id',
         'birth_registration_no',
     ];
+
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
     ];
 
     public function mobileUser(): BelongsTo
     {
         return $this->belongsTo(MobileUser::class);
     }
+
     public function citizenshipFront(): Attribute
     {
         return Attribute::make(
             get: function (?string $value) {
-                if (!empty($value) && Storage::disk('public')->exists($value)) {
+                if (! empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
             },
             set: function ($value) {
-                if (!empty($value) && !is_string($value)) {
+                if (! empty($value) && ! is_string($value)) {
                     return $value->store('mobileUserDetail/certificateFront', 'public');
                 }
             }
         );
     }
+
     public function citizenshipBack(): Attribute
     {
         return Attribute::make(
             get: function (?string $value) {
-                if (!empty($value) && Storage::disk('public')->exists($value)) {
+                if (! empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
             },
             set: function ($value) {
-                if (!empty($value) && !is_string($value)) {
+                if (! empty($value) && ! is_string($value)) {
                     return $value->store('mobileUserDetail/certificateBack', 'public');
                 }
             }
         );
     }
+
     public function necCertificate(): Attribute
     {
         return Attribute::make(
             get: function (?string $value) {
-                if (!empty($value) && Storage::disk('public')->exists($value)) {
+                if (! empty($value) && Storage::disk('public')->exists($value)) {
                     return Storage::disk('public')->url($value);
                 }
             },
             set: function ($value) {
-                if (!empty($value) && !is_string($value)) {
+                if (! empty($value) && ! is_string($value)) {
                     return $value->store('mobileUserDetail/necCertificate', 'public');
                 }
             }
         );
     }
-
 
     public function province(): BelongsTo
     {

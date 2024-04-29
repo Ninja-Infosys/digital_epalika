@@ -7,8 +7,7 @@
     @endonce
     <script type="text/javascript">
         $(document).ready(function () {
-            console.log(NepaliFunctions.ConvertToUnicode({{$number}}), {{$number}})
-            $("#unicode{{$id}}").html(NepaliFunctions.ConvertToUnicode({{$number}}))
+            $("#unicode{{$id}}").html(NepaliFunctions.NumberToWordsUnicode({{$number}}))
         });
     </script>
 @endpush

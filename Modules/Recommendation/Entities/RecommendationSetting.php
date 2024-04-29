@@ -3,38 +3,39 @@
 namespace Modules\Recommendation\Entities;
 
 use App\Models\Settings\Employee;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class RecommendationSetting extends Model
 {
+    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
+
+    protected $fillable = [
+        'ward',
+        'approver_id',
+        'checker_id',
+        'user_id',
+    ];
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
-    protected $fillable = [
-        'ward_chairman_id',
-        'ward_secretary_id',
-        'user_id',
-        'ward_no'
-    ];
-
-    public function wardChairman(): BelongsTo
+    public function approver(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'ward_chairman_id');
+        return $this->belongsTo(User::class, 'approver_id');
     }
 
-    public function wardSecretary(): BelongsTo
+    public function checker(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'ward_secretary_id');
+        return $this->belongsTo(User::class, 'checker_id');
     }
 }

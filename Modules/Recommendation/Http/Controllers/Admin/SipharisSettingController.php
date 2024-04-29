@@ -2,8 +2,6 @@
 
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
@@ -17,6 +15,7 @@ class SipharisSettingController extends Controller
     {
         $sipharisSetting = SipharisSetting::first();
         $users = User::get();
+
         return view('recommendation::admin.setting.sipharisSetting.index', compact('users', 'sipharisSetting'));
     }
 
@@ -24,11 +23,11 @@ class SipharisSettingController extends Controller
     {
         DB::table('sipharis_settings')->truncate();
         $wardNo = auth()->user()->ward_no ?? '';
-        $sipharisSetting = SipharisSetting::create($request->validated() + ['ward' => $wardNo]);
+        SipharisSetting::create($request->validated() + ['ward' => $wardNo]);
         Cache::forget('sipharis_settings');
         toast('सिफारिस सफलतापूर्वक थपियो', 'success');
+
         return back();
 
     }
-
 }
