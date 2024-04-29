@@ -42,7 +42,6 @@ class MapController extends Controller
         }
 
 
-        $wardNos = auth()->user()->ward_no; // Get all ward numbers of the authenticated user
 
 
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
@@ -60,12 +59,13 @@ class MapController extends Controller
                 }
             })
 
-            ->whereHas('landDetail', function (Builder $q) use ($wardNos) {
-                if (!empty($wardNos)) {
-                    $q->whereIn('ward_no', $wardNos);
+            ->whereHas('landDetail', function (Builder $q) {
+                if (!empty(auth()->user()->ward_no)) {
+                    $q->where('ward_no', auth()->user()->ward_no);
 
                 }
             })
+
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
