@@ -28,7 +28,6 @@ class OrganizationRegistrationController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['name', 'submission_no', 'registration_no'], request('search'));
             }
-
             if (!empty(request('to_date'))) {
                 $q->whereDate('registration_date_ne', '>=', request('to_date'));
             }
@@ -43,15 +42,13 @@ class OrganizationRegistrationController extends Controller
         return view('businessregistration::admin.organizationRegistration.index', compact('organizationRegistrations'));
     }
 
-    public function show(OrganizationRegistration $organizationRegistration): Factory|View|Application
+    public function show(OrganizationRegistration $organizationRegistration)
     {
-
         $organizationRegistration->load(
-            ['committeeNames' => function ($query) {
-                $query->with('issueDistrict', 'district', 'localBody');
-            }, 'businessNature', 'registeredBusinesses']
+            'committeeNames.issueDistrict',
+            'committeeNames.district',
+            'committeeNames.localBody',
         );
-
         return view('businessregistration::admin.organizationRegistration.show', compact('organizationRegistration'));
     }
 
@@ -147,7 +144,7 @@ class OrganizationRegistrationController extends Controller
     }
 
 
-    public function print(OrganizationRegistration $organizationRegistration)
+    public function printDetail(OrganizationRegistration $organizationRegistration)
     {
         $officeHeaders = OfficeHeader::get();
         $organizationRegistration->load(
@@ -156,6 +153,6 @@ class OrganizationRegistrationController extends Controller
             }, 'province', 'district', 'localBody']
         );
 
-        return view('businessregistration::admin.organizationRegistration.print', compact('organizationRegistration', 'officeHeaders'));
+        return view('businessregistration::admin.organizationRegistration.printDetail', compact('organizationRegistration', 'officeHeaders'));
     }
 }

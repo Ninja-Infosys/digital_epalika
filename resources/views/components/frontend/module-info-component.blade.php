@@ -282,8 +282,8 @@
                                 <div class="info-card module-card">
                                     <a href="{{ route('businessRegistration.organizationRegistration') }}">
                                         <div class="pt-4 text-center">
-                                            <img src="{{ asset('assets/frontend/image/new-icons/flat.png') }}"
-                                                 style="object-fit: contain; height: 35px; width: 35px" width="35"
+                                            <img src="{{ asset('assets/frontend/image/new-icons/image.png') }}"
+                                                 style="object-fit: contain; height: 70px; width: 70px" width="35"
                                                  height="35">
                                             <h6 class="p-2 text-dark">व्यवसाय संस्था दर्ता</h6>
                                         </div>

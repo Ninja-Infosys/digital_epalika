@@ -226,7 +226,6 @@ class OrganizationLivewire extends Component
         }
 
         $organizationRegistration = DB::transaction(function () {
-//            dd($this->form );
             $organizationRegistration = OrganizationRegistration::create($this->form + [
                     'submission_no' => time(),
                 ]);

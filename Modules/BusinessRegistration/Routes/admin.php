@@ -35,12 +35,10 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
     Route::get('businessNature', 'businessNature')->name('businessNature');
 });
 
-Route::post('businessRegistration/{businessDetail}/customData', [OrganizationRegistrationController::class, 'customData'])->name('store.custom');
-Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [OrganizationRegistrationController::class, 'addData'])->name('add-data.template');
-Route::get('businessDetail/{businessDetail}/print', [OrganizationRegistrationController::class,'print'])->name('businessRegistration.print');
 
-Route::resource('organizationDetail', OrganizationRegistrationController::class)->names('organizationRegistration');
-
+Route::resource('organizationRegistration', OrganizationRegistrationController::class)->names('organizationRegistration');
+Route::post('organizationRegistration/{organizationRegistration}/customData', [OrganizationRegistrationController::class, 'customData'])->name('store.custom');
+Route::get('organizationRegistration/{organizationRegistration}/printDetail', [OrganizationRegistrationController::class,'printDetail'])->name('organizationRegistration.printDetail');
 
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
