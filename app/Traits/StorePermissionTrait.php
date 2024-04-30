@@ -17,9 +17,8 @@ trait StorePermissionTrait
 
             $permissionId->push($permission->id);
         }
-        if(!empty($permissionId)) {
-            $role = Role::first();
-            $role->permissions()->sync($permissionId);
-        }
+        $role = Role::first();
+        $role->permissions()->sync($permissionId);
+
     }
 }
