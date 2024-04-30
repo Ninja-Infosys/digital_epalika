@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">नयाँ नवीकरण थप्नुहोस्</h4>
-                            <a href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.index', $businessDetail) }}"
+                            <a href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.index', $organizationRegistration) }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> नवीकरण सूची
                             </a>
