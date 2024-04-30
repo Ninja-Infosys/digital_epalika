@@ -146,6 +146,11 @@ class OrganizationRegistration extends Model
         );
     }
 
+    public function organizationRenew(): HasMany
+    {
+        return $this->hasMany(OrganizationRenew::class);
+    }
+
 
 
 
