@@ -459,7 +459,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                                <form action="{{route('admin.businessRegistration.store.custom',$businessDetail)}}"
+                                <form action="{{route('admin.businessRegistration.businessRegistration.store.custom',$businessDetail)}}"
                                       method="post"
                                       enctype="multipart/form-data">
                                     @csrf

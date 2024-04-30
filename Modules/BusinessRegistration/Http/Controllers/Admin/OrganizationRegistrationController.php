@@ -2,6 +2,7 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\OrganizationRegistration;
@@ -25,20 +25,21 @@ class OrganizationRegistrationController extends Controller
     public function index(): Factory|View|Application
     {
         $organizationRegistrations = OrganizationRegistration::with('committeeNames', 'committeeNames.localBody', 'localBody')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
+            if (! is_null(request('search'))) {
                 $q->whereLike(['name', 'submission_no', 'registration_no'], request('search'));
             }
-            if (!empty(request('to_date'))) {
+            if (! empty(request('to_date'))) {
                 $q->whereDate('registration_date_ne', '>=', request('to_date'));
             }
-            if (!empty(request('from_date'))) {
+            if (! empty(request('from_date'))) {
                 $q->whereDate('registration_date_ne', '<=', request('from_date'));
             }
-            if (!empty(request('registration_no'))) {
+            if (! empty(request('registration_no'))) {
                 $q->where('registration_no', request('registration_no'));
             }
         })->latest()
             ->paginate(15);
+
         return view('businessregistration::admin.organizationRegistration.index', compact('organizationRegistrations'));
     }
 
@@ -49,6 +50,7 @@ class OrganizationRegistrationController extends Controller
             'committeeNames.district',
             'committeeNames.localBody',
         );
+
         return view('businessregistration::admin.organizationRegistration.show', compact('organizationRegistration'));
     }
 
@@ -64,23 +66,23 @@ class OrganizationRegistrationController extends Controller
             'taxpayer_number' => ['nullable'],
         ]);
 
-
-        DB::transaction(function () use ($organizationRegistration, $data, $request) {
+        DB::transaction(function () use ($organizationRegistration, $data) {
             if (empty($organizationRegistration->registration_no)) {
                 $reg_no = OrganizationRegistration::whereFiscalYearId(\officeSetting()->fiscal_year_id)
-                        ->max('reg_no') + 1;
+                    ->max('reg_no') + 1;
                 $data = array_merge($data, [
                     'reg_no' => $reg_no,
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'registration_no' => 'OR-' . officeSetting()->fiscalYear->title . '-' . Str::padLeft($reg_no, 4, 0),
+                    'registration_no' => 'OR-'.officeSetting()->fiscalYear->title.'-'.Str::padLeft($reg_no, 4, 0),
                     'registration_date_en' => today()->toDateString(),
-                    'registration_date_ne' => $this->get_today_nepali_date()
+                    'registration_date_ne' => $this->get_today_nepali_date(),
                 ]);
             }
 
             $organizationRegistration->update($data);
         });
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -137,12 +139,10 @@ class OrganizationRegistrationController extends Controller
         }
     }
 
-
     public function addData(OrganizationRegistration $organizationRegistration, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
         return view('businessregistration::admin.organizationRegistration.customs.index', compact('organizationRegistration', 'templateTypeEnum'));
     }
-
 
     public function printDetail(OrganizationRegistration $organizationRegistration)
     {

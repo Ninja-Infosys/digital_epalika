@@ -11,22 +11,22 @@ use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportCont
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
 
-Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
-Route::get('dashboard/ajax', [DashboardController::class,'ajaxData'])->name('dashboard.ajax');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('businessNature', BusinessNatureController::class);
     Route::resource('objectTransaction', ObjectTransactionController::class);
-    Route::post('businessRegistrationTemplate/staticTemplate', [BusinessRegistrationTemplateController::class,'getStaticTemplate'])->name('get-static-template');
-    Route::get('businessRegistrationTemplate/EnumList', [BusinessRegistrationTemplateController::class,'enumList'])->name('businessRegistrationTemplate.enumList');
-    Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus', [BusinessRegistrationTemplateController::class,'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
+    Route::post('businessRegistrationTemplate/staticTemplate', [BusinessRegistrationTemplateController::class, 'getStaticTemplate'])->name('get-static-template');
+    Route::get('businessRegistrationTemplate/EnumList', [BusinessRegistrationTemplateController::class, 'enumList'])->name('businessRegistrationTemplate.enumList');
+    Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus', [BusinessRegistrationTemplateController::class, 'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
     Route::resource('{templateTypeEnum}/businessRegistrationTemplate', BusinessRegistrationTemplateController::class)->names('businessRegistrationTemplate');
 });
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
 Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
-Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
+Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('businessRegistration.store.custom');
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
-Route::get('businessDetail/{businessDetail}/print', [BusinessRegistrationController::class,'print'])->name('businessRegistration.print');
+Route::get('businessDetail/{businessDetail}/print', [BusinessRegistrationController::class, 'print'])->name('businessRegistration.print');
 
 Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
 Route::resource('businessDetail.businessRenew', BusinessRenewController::class)->names('businessRegistration.businessRenew');
@@ -35,11 +35,9 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
     Route::get('businessNature', 'businessNature')->name('businessNature');
 });
 
-
 Route::resource('organizationRegistration', OrganizationRegistrationController::class)->names('organizationRegistration');
 Route::post('organizationRegistration/{organizationRegistration}/customData', [OrganizationRegistrationController::class, 'customData'])->name('store.custom');
-Route::get('organizationRegistration/{organizationRegistration}/printDetail', [OrganizationRegistrationController::class,'printDetail'])->name('organizationRegistration.printDetail');
-
+Route::get('organizationRegistration/{organizationRegistration}/printDetail', [OrganizationRegistrationController::class, 'printDetail'])->name('organizationRegistration.printDetail');
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
