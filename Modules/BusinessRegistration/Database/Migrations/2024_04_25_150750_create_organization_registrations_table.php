@@ -17,6 +17,8 @@ return new class () extends Migration {
             $table->string('registration_date_en')->nullable()->comment('दर्ता मिति ई. सं.');
             $table->string('name')->comment('संस्थाको नाम');
             $table->string('name_en')->comment('संस्थाको नाम(अंग्रेजीमा)');
+            $table->string('phone')->comment('सम्पर्क नं नाम');
+            $table->string('email')->comment('इमेल');
             $table->string('address')->comment('ठेगाना');
             $table->string('address_en')->comment('ठेगाना(अंग्रेजीमा)');
             $table->text('purpose')->nullable()->comment('उद्देश्य');

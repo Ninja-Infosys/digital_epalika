@@ -13,15 +13,15 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a
-                                href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.index', $organizationRegistration) }}">व्यवसाय
+                                href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.index', $organizationRegistration) }}">संस्था
                                 नवीकरण </a>
                         </li>
-                        <li class="breadcrumb-item active">व्यवसाय
+                        <li class="breadcrumb-item active">संस्था
                             नवीकरण
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">व्यवसाय
+                <h4 class="page-title">संस्था
                     नवीकरण </h4>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="card p-0">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h4 class="header-title mb-0">{{ $organizationRegostration->name ?? '' }}को व्यवसाय
+                        <h4 class="header-title mb-0">{{ $organizationRegistration->name ?? '' }}को संस्था
                             नवीकरण विवरण</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
@@ -65,7 +65,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $organizationRenew->fiscalYear->title ?? '' }}</td>
-                                    <td>{{ $organizationRenew->business_renew_date }}</td>
+                                    <td>{{ $organizationRenew->date }}</td>
                                     <td>{{ $organizationRenew->date_to_be_maintained }}</td>
                                     <td>{{ $organizationRenew->renew_amount }}</td>
                                     <td>{{ $organizationRenew->penalty_amount }}</td>
@@ -74,7 +74,7 @@
                                     <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.edit', [$businessDetail, $organizationRenew]) }}"
+                                               href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.edit', [$organizationRegistration, $organizationRenew]) }}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
                                                 <i class="fa fa-edit"></i>
@@ -82,7 +82,7 @@
 
 
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.show', [$businessDetail, $organizationRenew]) }}"
+                                               href="{{ route('admin.businessRegistration.organizationRegistration.organizationRenew.show', [$organizationRegistration, $organizationRenew]) }}"
                                                title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-warning {{ get_setting('Pin') ? 'confirm_pin' : '' }}">
                                                 <i class="fa fa-print"></i>

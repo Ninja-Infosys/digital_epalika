@@ -46,8 +46,8 @@
                         <span class="dashed-bottom">{{ $organizationRegistration->way ?? '' }}</span> मार्ग
 
                     </p>
-                    <p> ३. टेलिफोन नं : <span class="dashed-bottom">{{ $organizationRegistration->committeeNames->first()?->phone ?? '' }}</span>
-                    &nbsp;    इमेल : <span class="dashed-bottom">{{ $organizationRegistration->committeeNames->first()?->email ?? '' }}</span>
+                    <p> ३. टेलिफोन नं : <span class="dashed-bottom">{{ $organizationRegistration->phone ?? '' }}</span>
+                    &nbsp;    इमेल : <span class="dashed-bottom">{{ $organizationRegistration->email ?? '' }}</span>
                     </p>
                     <p>४ . संस्थाको उदेश्य : <span
                             class="dashed-bottom">{{ $organizationRegistration->purpose ?? '' }}</span></p>
@@ -62,6 +62,8 @@
                             <tr>
                                 <th scope="col">क्र.स</th>
                                 <th scope="col">नाम, थर</th>
+                                <th scope="col">सम्पर्क नं</th>
+                                <th scope="col">इमेल</th>
                                 <th scope="col">संस्थाको पद</th>
                                 <th scope="col">स्थायी वतन</th>
                                 <th scope="col">दस्तखत</th>
@@ -72,11 +74,13 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $committeeName->name ?? '' }}</td>
+                                    <td>{{ $committeeName->phone ?? '' }}</td>
+                                    <td>{{ $committeeName->email ?? '' }}</td>
                                     <td>{{ $committeeName->designation ?? '' }}</td>
                                     <td>
                                         <span>
                                             {{ $committeeName->localBody->local_body ?? '' }}
-                                            - {{ $committeeName->ward_no ?? '' }}
+                                            - {{ $committeeName->ward_no ?? '' }}, , {{ $committeeName->district->district ?? ''}}
                                         </span>
                                     </td>
                                     <td></td>

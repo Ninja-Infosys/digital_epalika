@@ -22,7 +22,6 @@ class OrganizationRegistration extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -39,6 +38,8 @@ class OrganizationRegistration extends Model
         'registration_date_en',
         'name',
         'name_en',
+        'phone',
+        'email',
         'address',
         'address_en',
         'purpose',

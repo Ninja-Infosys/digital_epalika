@@ -6,11 +6,11 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationCont
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRegistrationController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRenewController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
+use Modules\BusinessRegistration\Http\Controllers\OrganizationRenewController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');

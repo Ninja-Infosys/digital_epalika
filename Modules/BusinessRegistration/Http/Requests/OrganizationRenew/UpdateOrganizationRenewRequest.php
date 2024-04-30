@@ -14,14 +14,14 @@ class UpdateOrganizationRenewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => ['required'],
+            'date' => ['nullable'],
             'date_en' => ['nullable'],
-            'date_to_be_maintained' => ['required'],
+            'date_to_be_maintained' => ['nullable'],
             'date_to_be_maintained_en' => ['nullable'],
-            'renew_amount' => ['required'],
-            'penalty_amount' => ['required'],
-            'payment_receipt' => ['required'],
-            'payment_receipt_date' => ['required'],
+            'renew_amount' => ['nullable'],
+            'penalty_amount' => ['nullable'],
+            'payment_receipt' => ['nullable'],
+            'payment_receipt_date' => ['nullable'],
             'payment_receipt_date_en' => ['nullable'],
         ];
     }

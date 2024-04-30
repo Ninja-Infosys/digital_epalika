@@ -1,13 +1,4 @@
 <div class="overflow-hidden p-2">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ print_r($error) }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="row">
         <div class="col">
             <ul class="nav nav-pills nav-justified form-wizard-header mb-3">
@@ -507,6 +498,28 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2 pr-0">
+                            <div class="row input-group">
+                                <div class="col-md-6 pr-0">
+                                    <label for="phone" class="form-label">सम्पर्क नं<span class="text-danger">*</span></label>
+                                    <input class="form-control @error('form.phone') is-invalid @enderror" type="text"
+                                           id="phone" wire:model="form.phone" placeholder="सम्पर्क नं">
+                                    @error('form.phone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 pr-0">
+                                    <label for="email" class="form-label">इमेल<span class="text-danger">*</span></label>
+                                    <input class="form-control @error('form.email') is-invalid @enderror" type="text"
+                                           id="email" wire:model="form.email" placeholder="इमेल">
+                                    @error('form.email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                             </div>
                         </div>
 
