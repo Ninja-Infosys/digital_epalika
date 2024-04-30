@@ -6,6 +6,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationCont
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRegistrationController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRenewController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
@@ -38,6 +39,8 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
 Route::resource('organizationRegistration', OrganizationRegistrationController::class)->names('organizationRegistration');
 Route::post('organizationRegistration/{organizationRegistration}/customData', [OrganizationRegistrationController::class, 'customData'])->name('store.custom');
 Route::get('organizationRegistration/{organizationRegistration}/printDetail', [OrganizationRegistrationController::class, 'printDetail'])->name('organizationRegistration.printDetail');
+Route::resource('organizationRegistration.organizationRenew', OrganizationRenewController::class)->names('organizationRegistration.organizationRenew');
+
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
