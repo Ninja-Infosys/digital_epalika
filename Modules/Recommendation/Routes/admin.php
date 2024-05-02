@@ -2,34 +2,35 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
+use Modules\Recommendation\Http\Controllers\Admin\MobileUserController;
 use Modules\Recommendation\Http\Controllers\Admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\Admin\RegistrationDetailController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
+use Modules\Recommendation\Http\Controllers\RecommendationCreateController;
+use Modules\Recommendation\Http\Controllers\RecommendationDetailController;
+use Modules\Recommendation\Http\Controllers\RecommendationDocumentController;
 use Modules\Recommendation\Http\Controllers\RecommendationSettingController;
-use Modules\Recommendation\Http\Controllers\SipharishCategoryController;
+use Modules\Recommendation\Http\Controllers\RecommendationSignatureController;
 use Modules\Recommendation\Http\Controllers\ReportController;
-use Modules\Recommendation\Http\Controllers\SipharisSubCategoryController;
-use Modules\Recommendation\Http\Controllers\SipharishFormTypeController;
-use Modules\Recommendation\Http\Controllers\SipharisCreateController;
-use Modules\Recommendation\Http\Controllers\SignatureDetailController;
+use Modules\Recommendation\Http\Controllers\RevenueHeaderController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 Route::prefix('setting')->as('setting.')->group(function () {
-    Route::resource('recommendationSetting', RecommendationSettingController::class)->only(['index', 'update']);
+
     Route::get('{type}/recommendationCategory/{recommendationCategory}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
     Route::get('recommendationCategory/{recommendationCategory}/getTemplate', [RecommendationCategoryController::class, 'getTemplateData'])->name('recommendationCategory.getTemplate');
     Route::get('{type}/recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class, 'updateStatus'])->name('recommendationCategory.updateStatus');
     Route::resource('{type}/recommendationCategory', RecommendationCategoryController::class);
     Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
-    Route::resource('personalDetail', PersonalDetailController::class);
+    Route::resource('mobileUser', MobileUserController::class);
 });
 
 Route::post('registrationDetail/{registrationDetail}/ocFile', [RegistrationDetailController::class, 'ocFile'])->name('registrationDetail.ocFile');
 Route::resource('recommendationCategory.registrationDetail', RegistrationDetailController::class);
 
-Route::prefix('sipharish')->as('sipharish.')->group(function () {
+/*Route::prefix('sipharish')->as('sipharish.')->group(function () {
     Route::get('sipharishCategory/{sipharisModel}/toggleStatus', [SipharishCategoryController::class, 'updateStatus'])->name('sipharishCategory.updateStatus');
     Route::resource('sipharishCategory', SipharishCategoryController::class);
     Route::get('sipharishSubCategory/{sipharisSubCategory}/toggleStatus', [SipharisSubCategoryController::class, 'updateStatus'])->name('sipharishSubCategory.updateStatus');
@@ -43,8 +44,8 @@ Route::prefix('sipharish')->as('sipharish.')->group(function () {
     Route::put('sipharishCreate/{sipharishCreate}/fileUpload', [SipharisCreateController::class, 'fileUpload'])->name('fileUpload');
     Route::resource('sipharishCreate', SipharisCreateController::class);
 });
-
-Route::get('sipharish/sipharishCreate/show/{id}', [SipharisCreateController::class, 'show'])->name('sipharishCreate.view');
+//
+Route::get('sipharish/sipharishCreate/show/{id}', [SipharisCreateController::class, 'show'])->name('sipharishCreate.view');*/
 
 Route::prefix('report')->as('report.')->controller(ReportController::class)->group(function () {
     Route::get('/', 'index')->name('index');
@@ -55,4 +56,28 @@ Route::prefix('report')->as('report.')->controller(ReportController::class)->gro
     Route::post('recommendation-category-wise-report', 'recommendationCategoryWiseReport')->name('recommendation-category-wise-report');
     Route::get('personal-detail', 'personalDetail')->name('personal-detail');
     Route::post('personal-detail-report', 'personalDetailReport')->name('personal-detail-report');
+});
+
+Route::prefix('setting')->as('setting.')->group(function () {
+    Route::resource('revenueHeader', RevenueHeaderController::class);
+    Route::get('recommendationCategory/{recommendationCategory}/updateStatus', [RecommendationCategoryController::class, 'updateStatus'])->name('recommendationCategory.updateStatus');
+    Route::resource('recommendationCategory', RecommendationCategoryController::class);
+    Route::resource('recommendationDocument', RecommendationDocumentController::class);
+    Route::put('recommendationDetail/{recommendationDetail}/updateTemplate', [RecommendationDetailController::class, 'updateTemplate'])->name('recommendationDetail.updateTemplate');
+    Route::get('recommendationDetail/{recommendationDetail}/updateStatus', [RecommendationDetailController::class, 'updateStatus'])->name('recommendationDetail.updateStatus');
+    Route::resource('recommendationDetail', RecommendationDetailController::class);
+    Route::get('recommendationSignature/{recommendationSignature}/updateStatus', [RecommendationSignatureController::class, 'updateStatus'])->name('recommendationSignature.updateStatus');
+    Route::resource('recommendationSignature', RecommendationSignatureController::class);
+    Route::resource('recommendationSetting', RecommendationSettingController::class)->only(['index', 'store']);
+    Route::resource('personalDetail', PersonalDetailController::class);
+});
+
+//recommendation create
+Route::put('recommendationCreate/{recommendationCreate}/updateStatus/{recommendationStatusEnum}', [RecommendationCreateController::class, 'updateStatus'])->name('recommendationCreate.updateStatus');
+Route::put('recommendationCreate/{recommendationCreate}/approvedStatus', [RecommendationCreateController::class, 'approvedStatus'])->name('recommendationCreate.approvedStatus');
+Route::put('recommendationCreate/{recommendationCreate}/fileUpload', [RecommendationCreateController::class, 'fileUpload'])->name('recommendationCreate.fileUpload');
+Route::resource('recommendationCreate', RecommendationCreateController::class);
+
+Route::get('searchForm', function () {
+    return view('livewire.search-livewire');
 });
