@@ -13,11 +13,14 @@ class Kernel extends ConsoleKernel
             ->dailyAt('05:00')->timezone('Asia/Kathmandu');
 
         $schedule->command('grievance:escalate')->twiceDaily()->timezone('Asia/Kathmandu');
+
+        $schedule->command('backup:clean')->daily()->at('01:00')->timezone('Asia/Kathmandu');
+        $schedule->command('backup:run')->daily()->at('01:30')->timezone('Asia/Kathmandu');
     }
 
     protected function commands(): void
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }
