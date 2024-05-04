@@ -11,11 +11,11 @@
                                 गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> व्यवसाय नवीकरण
+                        <li class="breadcrumb-item active"> संस्था नवीकरण
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title"> व्यवसाय नवीकरण
+                <h4 class="page-title"> संस्था नवीकरण
                 </h4>
             </div>
         </div>

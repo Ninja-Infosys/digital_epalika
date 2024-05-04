@@ -34,6 +34,8 @@ class OrganizationLivewire extends Component
     public array $form = [
         'name' => null,
         'name_en' => null,
+        'phone' => null,
+        'email' => null,
         'address' => null,
         'address_en' => null,
         'financial_source' => null,
@@ -133,6 +135,8 @@ class OrganizationLivewire extends Component
         return [
             'form.name' => ['required'],
             'form.name_en' => ['required'],
+            'form.phone' => ['required'],
+            'form.email' => ['required'],
             'form.address' => ['required'],
             'form.address_en' => ['required'],
             'form.financial_source' => ['nullable'],
@@ -302,6 +306,8 @@ class OrganizationLivewire extends Component
         return [
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['नाम अंग्रेजीमा आवश्यक छ'],
+            'form.phone.required' => ['फोन आबश्यक छ'],
+            'form.email.required' => ['इमेल आबश्यक छ'],
             'form.address.required' => ['ठेगाना आबश्यक छ '],
             'form.address_en.required' => ['ठेगाना अंग्रेजीमा आबश्यक छ '],
             'form.financial_source.required' => ['आर्थिक स्रोत आबश्यक छ '],

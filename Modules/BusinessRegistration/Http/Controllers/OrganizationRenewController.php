@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\BusinessRegistration\Http\Controllers\Admin;
+namespace Modules\BusinessRegistration\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\BusinessRegistration\Entities\OrganizationRegistration;
 use Modules\BusinessRegistration\Entities\OrganizationRenew;
 use Modules\BusinessRegistration\Http\Requests\OrganizationRenew\StoreOrganizationRenewRequest;
@@ -49,7 +49,7 @@ class OrganizationRenewController extends Controller
     {
         $organizationRegistration->organizationRenew()->update($request->validated());
         toast('व्यवसाय नवीकरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.businessRegistration.businessRegistration.organizationRenew.index', $organizationRegistration));
+        return redirect(route('admin.businessRegistration.organizationRegistration.organizationRenew.index', $organizationRegistration));
     }
 
     public function destroy($id)
