@@ -131,7 +131,7 @@ class DocumentAttachController extends Controller
                 $appliedDocument = AppliedDocument::find($id);
                 $appliedDocumentStatus = AppliedDocumentStatus::create([
                     "applied_document_id" => $appliedDocument->id,
-                    "status" => DocumentStatusEnum::APPROVED->value
+                    "status" => $appliedDocument->value
                 ]);
 
                 foreach ($appliedDocument->appliedMapFiles as $existingFile) {
@@ -157,7 +157,7 @@ class DocumentAttachController extends Controller
                 $formStore = FormStore::find($id);
                 FormStoreStatus::create([
                     "form_store_id" => $formStore->id,
-                    "status" => DocumentStatusEnum::APPROVED->value,
+                    "status" => $formStore->value,
                     "data" => $formStore->data,
                     "fields" => $formStore->fields
                 ]);
@@ -175,7 +175,7 @@ class DocumentAttachController extends Controller
                 $paymentStore = PaymentStore::find($id);
                 PaymentStoreStatus::create([
                     "payment_store_id" => $paymentStore->id,
-                    "status" => DocumentStatusEnum::APPROVED->value,
+                    "status" => $paymentStore->value,
                     'bill' => $paymentStore->bill,
                     'amount' => $paymentStore->amount,
                 ]);
