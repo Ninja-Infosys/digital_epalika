@@ -2,25 +2,23 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\AppliedDocument;
+use Modules\EMap\Entities\AppliedDocumentStatus;
+use Modules\EMap\Entities\Form;
+use Modules\EMap\Entities\FormDataType;
+use Modules\EMap\Entities\FormStore;
+use Modules\EMap\Entities\FormStoreStatus;
+use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
 use Modules\EMap\Enums\DocumentStatusEnum;
-use Modules\EMap\Entities\FormStore;
-use Modules\EMap\Entities\FormStoreStatus;
-use Modules\EMap\Entities\AppliedDocumentStatus;
-use Modules\EMap\Entities\FormDataType;
 use Modules\EMap\Enums\FormTypeEnum;
-use Modules\EMap\Enums\FourSideParticularEnum;
-use Modules\EMap\Enums\PostsEnum;
 use Modules\EMap\Traits\TemplateTrait;
 
 class DocumentAttachController extends Controller
@@ -29,25 +27,27 @@ class DocumentAttachController extends Controller
 
     public function store(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
+        $mapApply->load('organization:id,name', 'houseOwner:id,name');
+        $path = Str::slug($mapApply->organization?->name, '_').'/'.Str::slug($mapApply->houseOwner?->name, '_').'/'.Str::slug($form->title, '_').'/appliedDocument';
         if ($formDataType->type == FormTypeEnum::FILE) {
             $data = $request->validate([
                 'documents' => ['array', 'required'],
-                'documents.*' => ['file']
+                'documents.*' => ['file'],
             ]);
 
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+            DB::transaction(function () use ($mapApply, $form, $data, $formDataType, $path) {
                 $appliedDocument = $mapApply->appliedDocuments()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
                     'uploaded_by_id' => auth()->user()->id,
                     'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id
+                    'form_data_id' => $formDataType->id,
                 ]);
                 foreach ($data['documents'] as $file) {
                     $appliedDocument->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $file->store('appliedDocument', 'public'),
+                        'map_apply_id' => $mapApply->id,
+                        'document' => $file->store($path, 'public'),
                     ]);
                 }
             });
@@ -57,7 +57,7 @@ class DocumentAttachController extends Controller
                 'data' => ['required'],
             ]);
 
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+            DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                 $mapApply->formStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
@@ -66,7 +66,7 @@ class DocumentAttachController extends Controller
                     'form_data_type' => FormDataType::class,
                     'form_data_id' => $formDataType->id,
                     'data' => $data['data'],
-                    'fields' => $form->fields ?? ''
+                    'fields' => $form->fields ?? '',
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
@@ -75,13 +75,13 @@ class DocumentAttachController extends Controller
                 'bill' => ['required', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data) {
+            DB::transaction(function () use ($mapApply, $form, $data, $path) {
                 $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::APPROVED->value,
                     'uploaded_by_type' => User::class,
                     'uploaded_by_id' => auth()->user()->id,
-                    'bill' => $data['bill']->store('appliedDocument', 'public'),
+                    'bill' => $data['bill']->store($path, 'public'),
                     'amount' => $data['amount'],
                 ]);
             });
@@ -91,11 +91,11 @@ class DocumentAttachController extends Controller
         return redirect(route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]));
     }
 
-
     public function formStoreDetail(FormStore $formStore)
     {
         $formStore->load('formStoreStatuses');
         toast('', 'success');
+
         return back()->with(compact('formStore'));
     }
 
@@ -116,7 +116,7 @@ class DocumentAttachController extends Controller
         $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model->data);
 
         return response()->json([
-            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
+            'view' => (string) View::make('emap::organization.attach-document.print', compact('data')),
         ]);
     }
 
@@ -125,26 +125,26 @@ class DocumentAttachController extends Controller
         if ($formDataType->type == FormTypeEnum::FILE) {
             $data = $request->validate([
                 'documents' => ['array', 'required'],
-                'documents.*' => ['file']
+                'documents.*' => ['file'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $id) {
+            DB::transaction(function () use ($mapApply, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
                 $appliedDocumentStatus = AppliedDocumentStatus::create([
-                    "applied_document_id" => $appliedDocument->id,
-                    "status" => $appliedDocument->value
+                    'applied_document_id' => $appliedDocument->id,
+                    'status' => $appliedDocument->value,
                 ]);
 
                 foreach ($appliedDocument->appliedMapFiles as $existingFile) {
                     $appliedDocumentStatus->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $existingFile->document,
+                        'map_apply_id' => $mapApply->id,
+                        'document' => $existingFile->document,
                     ]);
                     $existingFile->forceDelete();
                 }
                 foreach ($data['documents'] as $file) {
                     $appliedDocument->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $file->store('appliedDocument', 'public'),
+                        'map_apply_id' => $mapApply->id,
+                        'document' => $file->store('appliedDocument', 'public'),
                     ]);
                 }
             });
@@ -153,13 +153,13 @@ class DocumentAttachController extends Controller
             $data = $request->validate([
                 'data' => ['required'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $id) {
+            DB::transaction(function () use ($data, $id) {
                 $formStore = FormStore::find($id);
                 FormStoreStatus::create([
-                    "form_store_id" => $formStore->id,
-                    "status" => $formStore->value,
-                    "data" => $formStore->data,
-                    "fields" => $formStore->fields
+                    'form_store_id' => $formStore->id,
+                    'status' => $formStore->value,
+                    'data' => $formStore->data,
+                    'fields' => $formStore->fields,
                 ]);
                 $formStore->update([
                     'data' => $data['data'],
@@ -171,21 +171,22 @@ class DocumentAttachController extends Controller
                 'bill' => ['nullable', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $id) {
+            DB::transaction(function () use ($data, $id) {
                 $paymentStore = PaymentStore::find($id);
                 PaymentStoreStatus::create([
-                    "payment_store_id" => $paymentStore->id,
-                    "status" => $paymentStore->value,
+                    'payment_store_id' => $paymentStore->id,
+                    'status' => $paymentStore->value,
                     'bill' => $paymentStore->bill,
                     'amount' => $paymentStore->amount,
                 ]);
                 $paymentStore->update([
-                    'bill' => (array_key_exists('bill', $data) && !empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
+                    'bill' => (array_key_exists('bill', $data) && ! empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
                     'amount' => $data['amount'],
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
+
         return redirect(route('emap.admin.mapApply.admin-step.fill-detail', [$mapApply, $form]));
     }
 }

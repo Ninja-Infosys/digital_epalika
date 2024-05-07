@@ -2,13 +2,13 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use App\Models\User;
-use App\Traits\NepaliDateConverter;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Notifications\FormStoreNotification;
 use App\Notifications\PaymentStoreNotification;
 use App\Notifications\StepNotification;
+use App\Traits\NepaliDateConverter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\View;
@@ -54,13 +54,13 @@ class AdminStepController extends Controller
         $ward_no = $MapGroups ? explode(',', $MapGroups?->ward_no ?? '') : [];
         $checkAuthorization = in_array($mapApply->landDetail?->ward_no, $ward_no);
 
-
         return view('emap::admin.step.formDetail', compact('mapApply', 'form', 'checkAuthorization'));
     }
 
     public function fillDetail(MapApply $mapApply, Form $form)
     {
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores', 'formDataTypes.formStores.formStoreStatuses');
+
         return view('emap::admin.step.formFill', compact('mapApply', 'form'));
     }
 
@@ -85,7 +85,7 @@ class AdminStepController extends Controller
             } else {
                 if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
                     $mapApply->update([
-                        'sent_to_organization' => 'processing'
+                        'sent_to_organization' => 'processing',
                     ]);
                 }
             }
@@ -94,56 +94,57 @@ class AdminStepController extends Controller
                 toast('Updated New Status', 'warning');
             } elseif ($request->input('status') == DocumentStatusEnum::REVIEW->value) {
                 $appliedDocument->update([
-                    'status' => $request->input('status')
+                    'status' => $request->input('status'),
                 ]);
                 AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
                     ->orderBy('id', 'desc')
                     ->first()?->update([
-                        'status' => $request->input('status')
+                        'status' => $request->input('status'),
                     ]);
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
             } elseif ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
                 if ($appliedDocument->status != DocumentStatusEnum::APPROVED) {
                     $appliedDocument->update([
-                        'status' => $request->input('status')
+                        'status' => $request->input('status'),
                     ]);
                     AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
                         ->orderBy('id', 'desc')
                         ->first()?->update([
-                            'status' => $request->input('status')
+                            'status' => $request->input('status'),
                         ]);
                     toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
                 }
             } else {
                 $appliedDocument->update([
-                    'status' => $request->input('status')
+                    'status' => $request->input('status'),
                 ]);
                 $appliedDocumentStatusData = $appliedDocument->appliedDocumentStatuses()->create([
-                    "applied_document_id" => $appliedDocument->id,
-                    "status" => $request->input('status'),
-                    "comment" => $request->input('comment'),
+                    'applied_document_id' => $appliedDocument->id,
+                    'status' => $request->input('status'),
+                    'comment' => $request->input('comment'),
                 ]);
                 foreach ($appliedDocument->appliedMapFiles as $existingFile) {
                     $appliedDocumentStatusData->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $existingFile->document,
+                        'map_apply_id' => $mapApply->id,
+                        'document' => $existingFile->document,
                     ]);
                 }
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
             }
             Notification::send($mapApply->organization, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
         });
+
         return back();
     }
 
     public function uploadApprovedDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
         $request->validate([
-            'approved_document' => ['required']
+            'approved_document' => ['required'],
         ]);
 
         $appliedDocument->update([
-            'approved_document' => $request->file('approved_document')
+            'approved_document' => $request->file('approved_document'),
         ]);
 
         toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
@@ -172,7 +173,7 @@ class AdminStepController extends Controller
             } else {
                 if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
                     $mapApply->update([
-                        'sent_to_organization' => 'processing'
+                        'sent_to_organization' => 'processing',
                     ]);
                 }
             }
@@ -181,37 +182,37 @@ class AdminStepController extends Controller
                 toast('Updated New Status', 'warning');
             } elseif ($request->input('status') == DocumentStatusEnum::REVIEW->value) {
                 $formStore->update([
-                    'status' => $request->input('status')
+                    'status' => $request->input('status'),
                 ]);
                 FormStoreStatus::where('form_store_id', $formStore->id)
                     ->orderBy('id', 'desc')
                     ->first()?->update([
-                        'status' => $request->input('status')
+                        'status' => $request->input('status'),
                     ]);
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
             } elseif ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
                 if ($formStore->status != DocumentStatusEnum::APPROVED) {
                     $formStore->update([
-                        'status' => $request->input('status')
+                        'status' => $request->input('status'),
                     ]);
                     FormStoreStatus::where('form_store_id', $formStore->id)
                         ->orderBy('id', 'desc')
                         ->first()?->update([
-                            'status' => $request->input('status')
+                            'status' => $request->input('status'),
                         ]);
                     toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
                 }
             } else {
                 $formStore->update([
-                    'status' => $request->input('status')
+                    'status' => $request->input('status'),
                 ]);
                 $formStore->formStoreStatuses()->create([
-                    "form_store_id" => $formStore->id,
-                    "status" => $request->input('status'),
-                    "comment" => $request->input('comment'),
-                    "data" => $formStore->data,
-                    "fields" => $formStore->fields,
-                    "document" => $formStore->document
+                    'form_store_id' => $formStore->id,
+                    'status' => $request->input('status'),
+                    'comment' => $request->input('comment'),
+                    'data' => $formStore->data,
+                    'fields' => $formStore->fields,
+                    'document' => $formStore->document,
                 ]);
 
                 toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
@@ -220,17 +221,18 @@ class AdminStepController extends Controller
         });
 
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+
         return back();
     }
 
     public function uploadFormStoreApprovedDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, FormStore $formStore)
     {
         $request->validate([
-            'approved_document' => ['required']
+            'approved_document' => ['required'],
         ]);
 
         $formStore->update([
-            'approved_document' => $request->file('approved_document')
+            'approved_document' => $request->file('approved_document'),
         ]);
 
         toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
@@ -259,24 +261,25 @@ class AdminStepController extends Controller
             } else {
                 if ($request->input('status') == DocumentStatusEnum::APPROVED->value) {
                     $mapApply->update([
-                        'sent_to_organization' => 'processing'
+                        'sent_to_organization' => 'processing',
                     ]);
                 }
             }
 
             $paymentStore->update([
-                'status' => $request->input('status')
+                'status' => $request->input('status'),
             ]);
             $paymentStore->paymentStoreStatuses()->create([
-                "payment_store_id" => $paymentStore->id,
-                "status" => $request->input('status'),
-                "comment" => $request->input('comment'),
-                "bill" => $paymentStore->bill,
-                "amount" => $paymentStore->amount
+                'payment_store_id' => $paymentStore->id,
+                'status' => $request->input('status'),
+                'comment' => $request->input('comment'),
+                'bill' => $paymentStore->bill,
+                'amount' => $paymentStore->amount,
             ]);
             Notification::send($mapApply->organization, new PaymentStoreNotification($mapApply, $form, $formDataType, $paymentStore));
         });
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+
         return back();
     }
 
@@ -284,7 +287,7 @@ class AdminStepController extends Controller
     {
         return $request->validate([
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
-            'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
+            'comment' => ['required_if:status,'.DocumentStatusEnum::REJECTED->value],
         ]);
     }
 
@@ -295,16 +298,18 @@ class AdminStepController extends Controller
         ]);
         $mapApply->update([
             'sent_to_organization' => 'rejected',
-            'comment' => $request->input('comment')
+            'comment' => $request->input('comment'),
 
         ]);
         toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+
         return back();
     }
 
     public function formDetail(MapApply $mapApply, Form $form)
     {
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses', 'formDataTypes.paymentStores.paymentStoreStatuses');
+
         return view('emap::admin.step.formFileUpload', compact('mapApply', 'form'));
     }
 
@@ -314,22 +319,22 @@ class AdminStepController extends Controller
         if ($formDataType->type == FormTypeEnum::FILE) {
             $data = $request->validate([
                 'documents' => ['array', 'required'],
-                'documents.*' => ['file']
+                'documents.*' => ['file'],
             ]);
 
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+            DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                 $appliedDocument = $mapApply->appliedDocuments()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
                     'uploaded_by_type' => User::class,
                     'uploaded_by_id' => auth()->user()->id,
                     'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id
+                    'form_data_id' => $formDataType->id,
                 ]);
                 foreach ($data['documents'] as $file) {
                     $appliedDocument->appliedMapFiles()->create([
-                        "map_apply_id" => $mapApply->id,
-                        "document" => $file->store('appliedDocument', 'public'),
+                        'map_apply_id' => $mapApply->id,
+                        'document' => $file->store('appliedDocument', 'public'),
                     ]);
                 }
             });
@@ -340,7 +345,7 @@ class AdminStepController extends Controller
                 'data' => ['required'],
             ]);
 
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+            DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                 $formStore = $mapApply->formStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
@@ -349,7 +354,7 @@ class AdminStepController extends Controller
                     'form_data_type' => FormDataType::class,
                     'form_data_id' => $formDataType->id,
                     'data' => $data['data'],
-                    'fields' => $form->fields ?? ''
+                    'fields' => $form->fields ?? '',
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
@@ -358,7 +363,7 @@ class AdminStepController extends Controller
                 'bill' => ['required', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
+            DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                 $paymentStore = $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
                     'status' => DocumentStatusEnum::PENDING->value,
@@ -367,11 +372,12 @@ class AdminStepController extends Controller
                     'bill' => $data['bill']->store('appliedDocument', 'public'),
                     'amount' => $data['amount'],
                     'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id
+                    'form_data_id' => $formDataType->id,
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
+
         return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
 
@@ -381,17 +387,17 @@ class AdminStepController extends Controller
         if ($formDataType->type == FormTypeEnum::FILE) {
             $data = $request->validate([
                 'documents' => ['array', 'required'],
-                'documents.*' => ['file']
+                'documents.*' => ['file'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
+            DB::transaction(function () use ($mapApply, $data, $id) {
                 $appliedDocument = AppliedDocument::find($id);
                 if ($appliedDocument->status == DocumentStatusEnum::PENDING) {
                     foreach ($appliedDocument->appliedMapFiles as $existingFile) {
                         $existingFile->forceDelete();
                         foreach ($data['documents'] as $file) {
                             $appliedDocument->appliedMapFiles()->create([
-                                "map_apply_id" => $mapApply->id,
-                                "document" => $file->store('appliedDocument', 'public'),
+                                'map_apply_id' => $mapApply->id,
+                                'document' => $file->store('appliedDocument', 'public'),
                             ]);
                         }
                     }
@@ -402,24 +408,24 @@ class AdminStepController extends Controller
                     toast('Document Is Already Approved', 'warning');
                 } else {
                     $appliedDocument->update([
-                        'status' => DocumentStatusEnum::PENDING->value
+                        'status' => DocumentStatusEnum::PENDING->value,
                     ]);
                     $appliedDocumentStatus = AppliedDocumentStatus::create([
-                        "applied_document_id" => $appliedDocument->id,
-                        "status" => DocumentStatusEnum::PENDING->value
+                        'applied_document_id' => $appliedDocument->id,
+                        'status' => DocumentStatusEnum::PENDING->value,
                     ]);
                     foreach ($appliedDocument->appliedMapFiles as $existingFile) {
                         $existingFile->forceDelete();
                     }
                     foreach ($data['documents'] as $file) {
                         $newAppliedDocuments = $appliedDocument->appliedMapFiles()->create([
-                            "map_apply_id" => $mapApply->id,
-                            "document" => $file->store('appliedDocument', 'public'),
+                            'map_apply_id' => $mapApply->id,
+                            'document' => $file->store('appliedDocument', 'public'),
                         ]);
 
                         $appliedDocumentStatus->appliedMapFiles()->create([
-                            "map_apply_id" => $mapApply->id,
-                            "document" => $newAppliedDocuments->document,
+                            'map_apply_id' => $mapApply->id,
+                            'document' => $newAppliedDocuments->document,
                         ]);
                     }
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
@@ -429,18 +435,18 @@ class AdminStepController extends Controller
             $data = $request->validate([
                 'data' => ['required'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
+            DB::transaction(function () use ($data, $id) {
                 $formStore = FormStore::find($id);
                 if ($formStore->status == DocumentStatusEnum::PENDING) {
                     $formStore->update([
                         'data' => $data['data'],
-                        'document' => null
+                        'document' => null,
                     ]);
                     if ($formStore->formStoreStatuses->count() > 0) {
                         FormStoreStatus::where('form_store_id', $formStore->id)
                             ->orderBy('id', 'desc')
                             ->first()?->update([
-                                'document' => null
+                                'document' => null,
                             ]);
                     }
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
@@ -450,16 +456,16 @@ class AdminStepController extends Controller
                     toast('Form Data Is Already Approved', 'warning');
                 } else {
                     FormStoreStatus::create([
-                        "form_store_id" => $formStore->id,
-                        "status" => DocumentStatusEnum::PENDING->value,
-                        "data" => $data['data'],
-                        "fields" => $formStore->fields,
+                        'form_store_id' => $formStore->id,
+                        'status' => DocumentStatusEnum::PENDING->value,
+                        'data' => $data['data'],
+                        'fields' => $formStore->fields,
                     ]);
 
                     $formStore->update([
-                        "status" => DocumentStatusEnum::PENDING->value,
+                        'status' => DocumentStatusEnum::PENDING->value,
                         'data' => $data['data'],
-                        'document' => null
+                        'document' => null,
                     ]);
                     toast('फाईल सफलतापूर्वक थपियो', 'success');
                 }
@@ -470,21 +476,22 @@ class AdminStepController extends Controller
                 'bill' => ['nullable', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
-            DB::transaction(function () use ($request, $mapApply, $formDataType, $form, $data, $id) {
+            DB::transaction(function () use ($data, $id) {
                 $paymentStore = PaymentStore::find($id);
                 PaymentStoreStatus::create([
-                    "payment_store_id" => $paymentStore->id,
-                    "status" => DocumentStatusEnum::PENDING->value,
+                    'payment_store_id' => $paymentStore->id,
+                    'status' => DocumentStatusEnum::PENDING->value,
                     'bill' => $paymentStore->bill,
                     'amount' => $paymentStore->amount,
                 ]);
                 $paymentStore->update([
-                    'bill' => (array_key_exists('bill', $data) && !empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
+                    'bill' => (array_key_exists('bill', $data) && ! empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
                     'amount' => $data['amount'],
                 ]);
             });
             toast('फारम सफलतापूर्वक थपियो', 'success');
         }
+
         return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
 
@@ -493,20 +500,21 @@ class AdminStepController extends Controller
         $data = $this->getPrintData($mapApply, $form, $formDataType);
 
         return response()->json([
-            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
+            'view' => (string) View::make('emap::organization.attach-document.print', compact('data')),
         ]);
     }
 
     public function editTemplate(MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
         $data = $this->getPrintData($mapApply, $form, $formDataType);
+
         return view('emap::admin.template-edit.edit-file', compact('mapApply', 'data', 'formDataType', 'form'));
     }
 
     public function storeFileTemplate(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
         $request->validate([
-            'data' => ['required']
+            'data' => ['required'],
         ]);
         FileTemplateStore::updateOrCreate([
             'map_apply_id' => $mapApply->id,
@@ -514,9 +522,9 @@ class AdminStepController extends Controller
             'form_data_type_id' => $formDataType->id,
         ], ['data' => $request->input('data')]);
         toast('टेम्प्लेट विवरण सम्पादन सफलतापूर्वक गरियो', 'success');
+
         return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
-
 
     public function formStorePrint(FormDataType $formDataType, FormStore $formStore)
     {
@@ -526,7 +534,7 @@ class AdminStepController extends Controller
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {
-            $placeholder = '[@form.' . $key . ']';
+            $placeholder = '[@form.'.$key.']';
             $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $template);
             $template = str_replace($placeholder, $value, $data);
         }
@@ -537,35 +545,31 @@ class AdminStepController extends Controller
     public function uploadDocument(Request $request, FormStore $formStore)
     {
         $data = $request->validate([
-            'document' => ['required', 'file']
+            'document' => ['required', 'file'],
         ]);
 
-        DB::transaction(function () use ($data, $request, $formStore) {
+        DB::transaction(function () use ($data, $formStore) {
             $formStore->update($data);
             $existingFormStore = FormStore::find($formStore->id);
             FormStoreStatus::where('form_store_id', $formStore->id)
                 ->orderBy('id', 'desc')
                 ->where('status', DocumentStatusEnum::PENDING->value)
                 ->first()?->update([
-                    'document' => $existingFormStore->document
+                    'document' => $existingFormStore->document,
                 ]);
         });
         toast('File Upload Successfully', 'success');
+
         return back();
     }
 
     public function viewDocumentDetail(MapApply $mapApply, Form $form)
     {
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments', 'formDataTypes.formStores');
+
         return view('emap::admin.step.documentDetail', compact('mapApply', 'form'));
     }
 
-    /**
-     * @param MapApply $mapApply
-     * @param Form $form
-     * @param FormDataType $formDataType
-     * @return string
-     */
     public function getPrintData(MapApply $mapApply, Form $form, FormDataType $formDataType): string
     {
         $fileTemplateStore = FileTemplateStore::where('map_apply_id', $mapApply->id)
@@ -586,32 +590,25 @@ class AdminStepController extends Controller
             'designerDetails',
 
         );
+
         return $fileTemplateStore ?? Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $formDataType->model?->data);
     }
 
-    /**
-     * @param \Illuminate\Support\Collection $appliedDocumentStatus
-     * @param \Illuminate\Support\Collection $formStoreStatus
-     * @param Request $request
-     * @param \Illuminate\Support\Collection $paymentStoreStatus
-     * @param MapApply $mapApply
-     * @return void
-     */
     public function paymentStoreUpdate(\Illuminate\Support\Collection $appliedDocumentStatus, \Illuminate\Support\Collection $formStoreStatus, Request $request, \Illuminate\Support\Collection $paymentStoreStatus, MapApply $mapApply): void
     {
         if (
-            $appliedDocumentStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
-            $formStoreStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+            $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+            $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
             $request->input('status') == DocumentStatusEnum::APPROVED->value
         ) {
             if ($paymentStoreStatus->isEmpty()) {
                 $mapApply->update([
-                    'sent_to_organization' => 'done'
+                    'sent_to_organization' => 'done',
                 ]);
             } else {
-                if ($paymentStoreStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                if ($paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
                     $mapApply->update([
-                        'sent_to_organization' => 'done'
+                        'sent_to_organization' => 'done',
                     ]);
                 }
             }
