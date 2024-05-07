@@ -118,7 +118,9 @@
 
         </div>
         <div class="mt-2">
-            {{ $maps->onEachSide(config('app.pagination_count'))->links() }}
+            {{-- {{ $maps->onEachSide(config('app.pagination_count'))->links() }} --}}
+            {{ $maps->appends(request()->except('page'))->onEachSide(config('app.pagination_count'))->links() }}
+
         </div>
     </div>
 @endsection
