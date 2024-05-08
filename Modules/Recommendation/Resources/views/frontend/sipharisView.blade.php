@@ -39,12 +39,12 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="header-title mb-0"></h4>
                                 <button class="btn btn-sm btn-info"
-                                    onclick="printJS({
-                                                printable: 'printData',
-                                                targetStyles: ['*'],
-                                                ignoreElements:['ignore-header'],
-                                                type: 'html'
-                                                })">
+                                        onclick="printJS({
+                                                    printable: 'printData',
+                                                    targetStyles: ['*'],
+                                                    ignoreElements:['ignore-header'],
+                                                    type: 'html'
+                                                    })">
                                     <i class="fa fa-print"></i> पूर्ण विवरण प्रिन्ट गर्नुहोस
                                 </button>
                             </div>

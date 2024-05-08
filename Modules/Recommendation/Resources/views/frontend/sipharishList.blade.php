@@ -147,10 +147,10 @@
 
                         <div class="row">
                             <div class="col-md-12 mt-2">
-                                <ul class="nav nav-pills mb-3 nav-bordered nav-justified" role="tablist">
+                                <ul class="nav nav-pills mb-3 nav-bordered nav-justified" role="tablist" style="padding:4px 5px 0 5px;">
                                     @foreach (\Modules\Recommendation\Enums\RecommendationStatusEnum::cases() as $recommendationSettingEnumTab)
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link  {{ !$loop->first ? '' : 'active' }}"
+                                            <a  style="border-radius: 0;" class="nav-link  {{ !$loop->first ? '' : 'active' }}"
                                                 id="recommendation-{{ $recommendationSettingEnumTab->value }}-tab-btn"
                                                 data-bs-toggle="pill"
                                                 href="#recommendation-{{ $recommendationSettingEnumTab->value }}-tab"
