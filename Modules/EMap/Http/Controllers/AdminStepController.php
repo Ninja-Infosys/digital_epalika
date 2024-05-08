@@ -67,8 +67,9 @@ class AdminStepController extends Controller
     public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        $firstId = Form::selectRaw('id,order')->orderBy('order')->first()?->id ?? null;
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
+        DB::transaction(function () use ($firstId, $request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
             if ($lastStep == $form->order) {
                 $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
                     ->where('map_apply_id', $mapApply->id)
@@ -87,14 +88,12 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
-                    if (!empty($mapApply->registration_no)) {
-                        toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
-                        return back();
+                    if ($form->id == $firstId && empty($mapApply->registration_no)) {
+                        $mapApply->update([
+                            'registration_date' => now(),
+                            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                        ]);
                     }
-                    $mapApply->update([
-                        'registration_date' => now(),
-                        'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
-                    ]);
                 }
             }
 
@@ -154,8 +153,9 @@ class AdminStepController extends Controller
         $appliedDocument->update([
             'approved_document' => $request->file('approved_document'),
         ]);
-        if (!empty($mapApply->registration_no)) {
+        if (! empty($mapApply->registration_no)) {
             toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
+
             return back();
         }
         $mapApply->update([
@@ -172,7 +172,8 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep) {
+        $firstId = Form::selectRaw('id,order')->orderBy('order')->first()?->id ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep, $firstId) {
 
             if ($lastStep == $form->order) {
                 $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
@@ -191,6 +192,13 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
+
+                    if ($form->id == $firstId && empty($mapApply->registration_no)) {
+                        $mapApply->update([
+                            'registration_date' => now(),
+                            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                        ]);
+                    }
                 }
             }
 
@@ -260,7 +268,8 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep) {
+        $firstId = Form::selectRaw('id,order')->orderBy('order')->first()?->id ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep, $firstId) {
 
             if ($lastStep == $form->order) {
                 $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
@@ -279,6 +288,13 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
+
+                    if ($form->id == $firstId && empty($mapApply->registration_no)) {
+                        $mapApply->update([
+                            'registration_date' => now(),
+                            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                        ]);
+                    }
                 }
             }
 
