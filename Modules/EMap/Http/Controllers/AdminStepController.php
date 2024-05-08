@@ -67,8 +67,9 @@ class AdminStepController extends Controller
     public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
         $this->getStatusValidation($request);
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
+        DB::transaction(function () use ($firstId, $request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
             if ($lastStep == $form->order) {
                 $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
                     ->where('map_apply_id', $mapApply->id)
@@ -87,6 +88,12 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
+                    if ($form->id == $firstId && empty($mapApply->registration_no)) {
+                        $mapApply->update([
+                            'registration_date' => now(),
+                            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                        ]);
+                    }
                 }
             }
 
@@ -146,6 +153,15 @@ class AdminStepController extends Controller
         $appliedDocument->update([
             'approved_document' => $request->file('approved_document'),
         ]);
+        if (! empty($mapApply->registration_no)) {
+            toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
+
+            return back();
+        }
+        $mapApply->update([
+            'registration_date' => now(),
+            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+        ]);
 
         toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
 
@@ -156,7 +172,8 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep) {
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep, $firstId) {
 
             if ($lastStep == $form->order) {
                 $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
@@ -175,6 +192,13 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
+
+                    if ($form->id == $firstId && empty($mapApply->registration_no)) {
+                        $mapApply->update([
+                            'registration_date' => now(),
+                            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                        ]);
+                    }
                 }
             }
 
@@ -244,7 +268,8 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep) {
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
+        DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep, $firstId) {
 
             if ($lastStep == $form->order) {
                 $appliedDocumentStatus = AppliedDocument::where('map_apply_id', $mapApply->id)
@@ -263,6 +288,13 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
+
+                    if ($form->id == $firstId && empty($mapApply->registration_no)) {
+                        $mapApply->update([
+                            'registration_date' => now(),
+                            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                        ]);
+                    }
                 }
             }
 
@@ -287,7 +319,7 @@ class AdminStepController extends Controller
     {
         return $request->validate([
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
-            'comment' => ['required_if:status,'.DocumentStatusEnum::REJECTED->value],
+            'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
         ]);
     }
 
@@ -485,7 +517,7 @@ class AdminStepController extends Controller
                     'amount' => $paymentStore->amount,
                 ]);
                 $paymentStore->update([
-                    'bill' => (array_key_exists('bill', $data) && ! empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
+                    'bill' => (array_key_exists('bill', $data) && !empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
                     'amount' => $data['amount'],
                 ]);
             });
@@ -500,7 +532,7 @@ class AdminStepController extends Controller
         $data = $this->getPrintData($mapApply, $form, $formDataType);
 
         return response()->json([
-            'view' => (string) View::make('emap::organization.attach-document.print', compact('data')),
+            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
         ]);
     }
 
@@ -534,7 +566,7 @@ class AdminStepController extends Controller
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {
-            $placeholder = '[@form.'.$key.']';
+            $placeholder = '[@form.' . $key . ']';
             $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $template);
             $template = str_replace($placeholder, $value, $data);
         }
@@ -597,8 +629,8 @@ class AdminStepController extends Controller
     public function paymentStoreUpdate(\Illuminate\Support\Collection $appliedDocumentStatus, \Illuminate\Support\Collection $formStoreStatus, Request $request, \Illuminate\Support\Collection $paymentStoreStatus, MapApply $mapApply): void
     {
         if (
-            $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
-            $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+            $appliedDocumentStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+            $formStoreStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
             $request->input('status') == DocumentStatusEnum::APPROVED->value
         ) {
             if ($paymentStoreStatus->isEmpty()) {
@@ -606,7 +638,7 @@ class AdminStepController extends Controller
                     'sent_to_organization' => 'done',
                 ]);
             } else {
-                if ($paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                if ($paymentStoreStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
                     $mapApply->update([
                         'sent_to_organization' => 'done',
                     ]);

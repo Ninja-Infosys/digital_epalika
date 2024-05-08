@@ -4,28 +4,29 @@ namespace Modules\Recommendation\Entities;
 
 use App\Enums\Gender;
 use App\Models\Address\District;
-use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Address\LocalBody;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
 
 class PersonalDetail extends Model
 {
-    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
 
     protected $fillable = [
+        'user_id',
         'reg_no',
         'name',
         'phone_no',
@@ -36,12 +37,11 @@ class PersonalDetail extends Model
         'district_id',
         'local_body_id',
         'ward_no',
-        'user_id',
-        'tole',
+        'tole'
     ];
 
     protected $casts = [
-        'gender' => Gender::class,
+        'gender' => Gender::class
     ];
 
     public function province(): BelongsTo
@@ -62,5 +62,13 @@ class PersonalDetail extends Model
     public function registrationDetails(): HasMany
     {
         return $this->hasMany(RegistrationDetail::class);
+    }
+
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('ward_no', auth()->user()->ward_no);
+        }
+        return $query;
     }
 }

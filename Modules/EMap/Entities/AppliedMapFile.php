@@ -2,31 +2,31 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 
 class AppliedMapFile extends Model
 {
-    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
 
     protected $fillable = [
-        'fileable',
-        'map_apply_id',
-        'document',
+        "fileable",
+        "map_apply_id",
+        "document",
     ];
 
     public function fileable(): MorphTo

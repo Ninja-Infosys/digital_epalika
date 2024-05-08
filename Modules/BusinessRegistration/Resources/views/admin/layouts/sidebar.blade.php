@@ -19,6 +19,13 @@
         <span> संस्था दर्ता / नविकरण</span>
     </a>
 </li>
+<li class="{{request()->is('admin/businessRegistration/organizationReport') ? 'active' : ''}}">
+    <a href="{{route('admin.businessRegistration.organizationReport.index')}}">
+        <i class="fa fa-clipboard"></i>
+        <span> संस्था दर्ता रिपोर्ट</span>
+    </a>
+</li>
+
 
 <li class="{{request()->is('admin/businessRegistration/report*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationReport"

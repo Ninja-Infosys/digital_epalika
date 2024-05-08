@@ -68,13 +68,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($personalDetail->registrationDetails as $registrationDetail)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $registrationDetail->recommendationCategory->title ??'' }}</td>
-                                            <td>{{ $registrationDetail->date_ne }}</td>
-                                        </tr>
-                                    @endforeach
+{{--                                    @foreach ($personalDetail->registrationDetails as $registrationDetail)--}}
+{{--                                        <tr>--}}
+{{--                                            <td>{{ $loop->iteration }}</td>--}}
+{{--                                            <td>{{ $registrationDetail->recommendationCategory->title ??'' }}</td>--}}
+{{--                                            <td>{{ $registrationDetail->date_ne }}</td>--}}
+{{--                                        </tr>--}}
+{{--                                    @endforeach--}}
                                     </tbody>
                                 </table>
 
