@@ -55,7 +55,7 @@ class MapController extends Controller
             })
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
+                    $q->whereLike(['registration_no', 'unique_id', 'organization.name', 'houseOwner.name'], request('search'));
                 }
             })
 
