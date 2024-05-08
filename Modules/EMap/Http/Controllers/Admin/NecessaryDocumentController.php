@@ -67,7 +67,7 @@ class NecessaryDocumentController extends Controller
         toast('आवश्यक कागजातहरू सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
-    
+
     public function fileUpload($neccessaryDocument, $request): void
     {
         foreach ($request->file('files') as $file) {
