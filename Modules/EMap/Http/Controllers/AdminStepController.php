@@ -87,6 +87,14 @@ class AdminStepController extends Controller
                     $mapApply->update([
                         'sent_to_organization' => 'processing',
                     ]);
+                    if (!empty($mapApply->registration_no)) {
+                        toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
+                        return back();
+                    }
+                    $mapApply->update([
+                        'registration_date' => now(),
+                        'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
+                    ]);
                 }
             }
 
@@ -145,6 +153,14 @@ class AdminStepController extends Controller
 
         $appliedDocument->update([
             'approved_document' => $request->file('approved_document'),
+        ]);
+        if (!empty($mapApply->registration_no)) {
+            toast('यो नक्सा पहिने नै दर्ता भएको छ', 'success');
+            return back();
+        }
+        $mapApply->update([
+            'registration_date' => now(),
+            'registration_no' => MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1,
         ]);
 
         toast('स्वीकार गरेको छाप अपलोड गरियो', 'success');
