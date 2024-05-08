@@ -72,6 +72,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
+        
         return view('admin.global.employee.edit', compact('ethnicities', 'employee', 'branches', 'allemployees'));
     }
 

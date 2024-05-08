@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Recommendation\Entities\RecommendationDetail;
+use Modules\Recommendation\Entities\RecommendationSetting;
 use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
@@ -25,9 +26,9 @@ class FrontendController extends Controller
 
         // $recommendationCreates = RecommendationCreate::with('recommendationDetail')->latest('updated_at')->paginate(5);
         $recommendationCount = $mobileUser->recommendationCreates()->count();
-        $recommendationCountPending = $mobileUser->recommendationCreates()->where('approved_status', 'pending')->count();
-        $recommendationCountAccept = $mobileUser->recommendationCreates()->where('approved_status', 'approved')->count();
-        $recommendationCountReject = $mobileUser->recommendationCreates()->where('approved_status', 'reject')->count();
+        $recommendationCountPending = $mobileUser->recommendationCreates()->where('approved_status', '1')->count();
+        $recommendationCountAccept = $mobileUser->recommendationCreates()->where('approved_status', '4')->count();
+        $recommendationCountReject = $mobileUser->recommendationCreates()->where('approved_status', '5')->count();
         return view('recommendation::frontend.index', compact('recommendationCount', 'recommendationCreates', 'recommendationCountPending', 'recommendationCountAccept', 'recommendationCountReject'));
 
     }
@@ -44,6 +45,7 @@ class FrontendController extends Controller
                 'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
                 'created_by' => Auth::guard('mobile-user')->id()
             ]);
+    
             if (
                 array_key_exists('fields', $request->validated())
                 && !empty ($request->validated()['fields'])
@@ -65,6 +67,14 @@ class FrontendController extends Controller
                     ]);
                 }
             }
+            if (
+                array_key_exists('files', $request->validated())
+                && !empty($request->validated()['files'])
+            ) {
+                foreach ($request->validated('files') ?? [] as $file) {
+                    $recommendationCreate->recommendationFiles()->create($file);
+                }
+            }
             return $recommendationCreate;
         });
 
@@ -82,11 +92,11 @@ class FrontendController extends Controller
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
-        $sipharisSetting = SipharisSetting::with('approver', 'checker')->first();
+       
 
-
+        $recommendationSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
         $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles', );
-        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser', 'sipharisSetting'));
+        return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser', 'recommendationSetting'));
     }
 
 

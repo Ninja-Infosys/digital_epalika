@@ -118,7 +118,7 @@
                                         </td>
 
                                         <td>
-                                            {{$recommendationCreate?->mobileUser?->mobileUserDetail?->gender->label() }}
+                                            {{$recommendationCreate?->mobileUser?->mobileUserDetail?->gender?->label() }}
 
                                         </td>
                                         <td>

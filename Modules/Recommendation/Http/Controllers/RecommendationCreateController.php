@@ -129,6 +129,7 @@ class RecommendationCreateController extends Controller
         return back();
     }
 
+    
     public function approvedStatus(RecommendationCreate $recommendationCreate)
     {
         $recommendationCreate->update([
@@ -139,3 +140,4 @@ class RecommendationCreateController extends Controller
         return back();
     }
 }
+
