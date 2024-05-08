@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\MobileUser;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Modules\Recommendation\Entities\RecommendationDetail;
@@ -11,7 +12,7 @@ use Livewire\Component;
 class FontField extends Component
 {
     use WithFileUploads;
-
+    public string|int|null $mobile_user_id = null;
     public string|int|null $recommendation_detail_id = null;
     public $status = 1;
     public $fields = [];
@@ -22,11 +23,13 @@ class FontField extends Component
     public $formTypes = [];
 
     public $data = [];
+    // public $mobileUsers = [];
 
     public function mount($categorySubCategory = null): void
     {
 //        dd($this->fields);
         if (!empty($categorySubCategory)) {
+            $this->mobile_user_id = $categorySubCategory['mobile_user_id'] ?? null;
             $this->recommendation_detail_id = $categorySubCategory['recommendation_detail_id'] ?? null;
             $this->status = $categorySubCategory['status'] ? 1 : 0;
             if (array_key_exists('fields', $categorySubCategory) && !empty($categorySubCategory['fields'])) {
@@ -40,6 +43,7 @@ class FontField extends Component
             }
             
         }
+        // $this->mobileUsers = MobileUser::all();
         $this->formTypes = RecommendationDetail::get();
     }
 

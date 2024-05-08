@@ -13,7 +13,7 @@ return new class () extends Migration {
             $table->foreignId('signature_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('approved_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->date('approved_date')->nullable();
-            $table->enum('approved_status', ['approved','rejected','pending'])->default('pending');
+            $table->string('approved_status')->default('1');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('mobile_user_id')->nullable()->constrained();
             $table->foreignId('personal_detail_id')->nullable()->constrained();

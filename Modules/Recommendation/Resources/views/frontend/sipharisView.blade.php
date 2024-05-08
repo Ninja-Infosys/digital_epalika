@@ -1,60 +1,64 @@
+
 @extends('frontend.layouts.master')
 @section('content')
-
-    @include('admin.inc.file-view')
-    <div class="breadcrumb d-flex pt-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div style="background-color:#f5f5f5; border-radius:5px;">
-                        <a class="whitespace-nowrap text-primary-500" style="padding-left: 10px;"
-                            href="{{ route('recommendationrecommendation.index') }}">सिफारिस</a>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                            class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                            <path fill-rule="evenodd"
-                                d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                        <a class="ml-1 text-primary-500">सिफारिस विवरण</a>
+    <section class="inner-section">
+        <div class="breadcrumb d-flex pt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-item">
+                            <a class="whitespace-nowrap text-primary-500"
+                                href="{{ route('recommendationrecommendation.index') }}">सिफारिस</a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd"
+                                    d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            <a class="ml-1 text-primary-500">सिफारिस सुची</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 mt-4">
-
-                <div class="">
+            <div class="col-md-12">
+                <div class="card">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h4 class="header-title">प्रयोगकर्ताको विवरण</h4>
+                            <h4 class="header-title mt-1" style="padding-left: 10px;">प्रयोगकर्ताको विवरण</h4>
                         </div>
-                        <div class="d-flex justify-content-between gap-1">
+                        <div class="d-flex justify-content-between gap-1" style="padding-right: 10px;">
+                            {{-- <a style="height: 32px;" href="{{ route('admin.recommendation.recommendationCreate.edit', $recommendationCreate) }}"
+                                class="btn btn-sm btn-outline-primary mt-1">
+                                <i class="fa fa-edit"></i> सम्पादन र समीक्षा गर्नुहोस्
+                            </a> --}}
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="header-title mb-0"></h4>
                                 <button class="btn btn-sm btn-info"
                                     onclick="printJS({
-                        printable: 'printData',
-                        targetStyles: ['*'],
-                        ignoreElements:['ignore-header'],
-                        type: 'html'
-                        })">
+                                                printable: 'printData',
+                                                targetStyles: ['*'],
+                                                ignoreElements:['ignore-header'],
+                                                type: 'html'
+                                                })">
                                     <i class="fa fa-print"></i> पूर्ण विवरण प्रिन्ट गर्नुहोस
                                 </button>
                             </div>
-                            {{-- <a href="{{ route('admin.recommendation.recommendationCreate.index') }}"
-                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="fa fa-list"></i> सिफारिस सुची
-                                </a> --}}
+                            <a style="height: 32px;" href="{{ route('recommendationrecommendation.sipharishList') }}"
+                                class="btn btn-sm btn-outline-primary mt-1">
+                                <i class="fa fa-list"></i> सिफारिस सुची
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="main" id="printData">
-                    <div class="card-body">
+                    <div class="card-body mt-4">
                         <div class="row">
-                            <div class="col-md-12 mt-3">
+                            <div class="col-md-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm mb-0 table-bordered table-striped">
                                         <thead>
@@ -62,31 +66,42 @@
                                             <th>विवरण</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($recommendationCreate->recommendationValues as $key => $recommendationValue)
+                                            @forelse ($recommendationCreate->recommendationValues as $key => $recommendationValue)
                                                 <tr>
                                                     <td>
-                                                        {{--                                                {{dd($sipharishCreatedValue->sipharish_form_field_id)}} --}}
                                                         {{ $recommendationValue?->recommendationFormField?->field_name ?? '' }}
                                                     </td>
-
                                                     <td>
-                                                        {{ $recommendationValue->value ?? '' }}
+                                                        <div>
+                                                            @if ($recommendationValue->type == 'image')
+                                                                <!-- Code to handle image type -->
+                                                            @elseif($recommendationValue->type == 'table')
+                                                                <!-- Code to handle table type -->
+                                                            @else
+                                                                {{ $recommendationValue->value ?? '' }}
+                                                            @endif
+                                                        </div>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr>
+                                                    <td class="text-center" colspan="2">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                                </tr>
+                                            @endforelse
+
                                         </tbody>
 
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card-body mt-3">
                         <div class="row">
-                            <div class="col-md-8">
-                                <h4 class="font-bold">व्यतिगत विवरण</h4>
-                                <div class="table-responsive">
+                            <div class="col-md-12 mt-3">
+                              
+                                <h4 class="font-bold " style="padding-left: 10px;">व्यतिगत विवरण</h4>
+                            </div>
+                                <div class="table-responsive mt-2">
                                     <table class="table table-sm mb-0 table-bordered table-striped">
                                         <thead>
                                             <th>पुरा नाम</th>
@@ -97,20 +112,21 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    {{ $mobileUser?->name ?? '' }}
+                                                    {{ $recommendationCreate?->mobileUser?->name ?? '' }}
                                                 </td>
 
                                                 <td>
-                                                    {{ $mobileUser?->mobileUserDetail?->gender->label() }}
+                                                    {{ $recommendationCreate?->mobileUser?->mobileUserDetail?->gender?->label() }}
 
                                                 </td>
                                                 <td>
-                                                    {{ $mobileUser?->phone ?? '' }}
+                                                    {{ $recommendationCreate?->mobileUser?->phone ?? '' }}
 
                                                 </td>
                                                 <td>
-                                                    {{ $mobileUser?->mobileUserDetail?->province?->province ?? '' }},
-                                                    {{ $mobileUser?->mobileUserDetail?->district?->district ?? '' }}
+                                                    {{ $recommendationCreate?->mobileUser?->mobileUserDetail?->province?->province ?? '' }}
+                                                    ,
+                                                    {{ $recommendationCreate?->mobileUser?->mobileUserDetail?->district?->district ?? '' }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -119,22 +135,68 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-3">
 
-                        @include('admin.inc.file-view')
-
-                    </div>
-                    @if ($recommendationCreate->status == 'sent_to_revenue' || $recommendationCreate->status == 'sent_to_approver')
-                        <div class="row mt-3">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <h4 class="header-title mb-0">बिल प्रिन्ट</h4>
-                                    <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
+                        <div class="row">
+                            <div class="col-md-12 mt-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="header-title mb-0">फाईलहरु</h4>
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            @forelse($recommendationCreate->recommendationFiles as $document)
+                                                <div class="col-xl-3 col-lg-6">
+                                                    <div class="card shadow-none border">
+                                                        <div class="p-2" style="width: 17rem;">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-2 pe-0">
+                                                                    <div class="avatar-sm">
+                                                                        <span
+                                                                            class="avatar-title bg-light text-secondary rounded">
+                                                                            <i class="fa fa-file font-18"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-8">
+                                                                    <a href="javascript:void(0);"
+                                                                        onclick="openFileModal('{{ $document->recommendationDocument->title }}', '{{ $document->file_extension }}','{{ $document->file_url }}')"
+                                                                        class="text-muted fw-medium">{{ $document->recommendationDocument->title ?? '' }}</a>
+                                                                </div>
+                                                                <div class="col-2" style="width: 12%;">
+                                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $document->file]) }}"
+                                                                        class="btn btn-xs btn-outline-primary">
+                                                                        <i class="fa fa-download"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div> <!-- end row -->
+                                                        </div> <!-- end .p-2-->
+                                                    </div> <!-- end col -->
+                                                </div>
+                                            @empty
+                                                <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                                            @endforelse
+                                        </div> <!-- end row-->
+                                    </div>
                                 </div>
                             </div>
+                            @include('admin.inc.file-view')
+                          
+                        </div>
+                    </div>
+                    @if ($recommendationCreate->approved_status->value > 1)
+
+                        <div class="row mt-3">
+                            <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="header-title">बिल प्रिन्ट</h4>
+                                    <x-print-button target-element="print" style="padding-right:10px;"  title="सिफारिस प्रिन्ट" />
+                                </div>
+                            </div>
+                            
                             <div class="card-body" id="print">
                                 <div class="col-md-12">
+                                    {!! letterHead() !!}
                                     <h4 class="text-center fw-bold mt-2">सिफारिस दस्तुर</h4>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-sm mb-0 table-striped">
@@ -148,7 +210,6 @@
                                             <tbody>
                                                 @php
                                                     $total = 0;
-                                                    $loop_iteration = 0;
                                                 @endphp
                                                 @if (
                                                     !empty(
@@ -156,71 +217,78 @@
                                                             $recommendationCreate->recommendationDetail->service_cost
                                                     ))
                                                     <tr>
-                                                        <td>{{ get_nepali_number($loop_iteration = $loop_iteration + 1) }}
+                                                        <td>{{ get_nepali_number(1) }}
                                                         </td>
                                                         <!-- Incrementing key by 1 to start from 1 instead of 0 -->
                                                         <td>सिफारिस दस्तुर</td>
                                                         <!-- Assuming these properties exist, replace them with the actual column names -->
-                                                        <td>{{ get_nepali_number($recommendationCreate->recommendationDetail->service_cost) }}
+                                                        <td>
+                                                            रु.
+                                                            {{ get_nepali_number($recommendationCreate->recommendationDetail->service_cost) }}
                                                         </td>
-                                                        <td>{{ get_nepali_number($revenueHeaders->quantity ?? 1) }}
-                                                        </td>
-                                                        <td>{{ get_nepali_number($total += $recommendationCreate->recommendationDetail->service_cost * 1) }}
+                                                        <td>{{ get_nepali_number(1) }}</td>
+                                                        <td>
+                                                            रु.
+                                                            {{ get_nepali_number($total += $recommendationCreate->recommendationDetail->service_cost * 1) }}
                                                         </td>
                                                     </tr>
                                                 @endif
                                                 @foreach ($recommendationCreate->recommendationDetail->revenueHeaders ?? [] as $key => $revenueHeaders)
                                                     <tr>
-                                                        <td>{{ get_nepali_number($loop_iteration = $loop_iteration + 1) }}
+                                                        <td>{{ get_nepali_number($loop->iteration + 1) }}
                                                         </td>
                                                         <!-- Incrementing key by 1 to start from 1 instead of 0 -->
                                                         <td>{{ $revenueHeaders->title }}</td>
                                                         <!-- Assuming these properties exist, replace them with the actual column names -->
-                                                        <td>{{ get_nepali_number($revenueHeaders->amount) }}</td>
-                                                        <td>{{ get_nepali_number($revenueHeaders->quantity ?? 1) }}
+                                                        <td>रु. {{ get_nepali_number($revenueHeaders->amount) }}</td>
+                                                        <td>{{ get_nepali_number(1) }}</td>
+                                                        <td>
+                                                            @php($total += $revenueHeaders->amount)
+                                                            रु. {{ get_nepali_number($revenueHeaders->amount * 1) }}
                                                         </td>
-                                                        <td>{{ get_nepali_number($total += $revenueHeaders->amount * 1) }}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                @foreach ($recommendationCreate->recommendationDetail->revenueHeaders ?? [] as $key => $revenueHeaders)
-                                                    <tr>
-                                                        <th scope="row"></th>
-                                                        <td colspan="2"></td>
-                                                        <td>जम्मा</td>
-                                                        <td>{{ get_nepali_number($total) }}</td>
                                                     </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <th scope="row"></th>
-                                                    <td colspan="4">रु .</td>
+                                                    <td colspan="4" class="text-center fw-bold">जम्मा</td>
+                                                    <td>रु. {{ get_nepali_number($total) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5">
+                                                     अक्षरेपी रु. :-  <x-convert-to-word id="total_amount"
+                                                            number="{{ $total }}" />
+                                                        मात्र ।
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 mt-3">
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="d-flex justify-content-between">
                                                 <h4 class="header-title mb-0">फाईल उपलोड़</h4>
-
-                                                @if ($recommendationCreate->status !== 'sent_to_approver')
+                                                @if (
+                                                    $recommendationCreate->approved_status->value == 2 &&
+                                                        auth()->check() &&
+                                                        auth()->user()->id == $recommendationSetting?->checker_id)
                                                     <button type="button" class="btn btn-primary btn-sm"
                                                         data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                        <i class="fa fa-file"></i> नयाँ फाईल उपलोड गर्नुहोस
+                                                        <i class="fa fa-file"> </i> नयाँ फाईल उपलोड़ गर्नुहोस
                                                     </button>
                                                 @endif
-
                                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                                     data-bs-keyboard="false" tabindex="-1"
                                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="staticBackdropLabel">नयाँ फाईल
+                                                                <h5 class="modal-title" id="staticBackdropLabel">नयाँ
+                                                                    फाईल
                                                                     उपलोड़</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -277,18 +345,10 @@
 
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12 d-flex justify-content-between">
-                                                        {{-- @if ((auth()->check() && auth()->user()->id == $sipharisSetting->checker_id) || auth()->user()->role_id == 1)
-                                                            @if ($recommendationCreate->status = 'sent_to_revenue')
-                                                                <form method="POST"
-                                                                    action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT]) }}">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <button type="submit"
-                                                                        class="btn btn-sm btn-danger">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::REJECT->label() }}</button>
-                                                                </form>
-                                                            @endif
-
+                                                    <div class="col-md-12 d-flex justify-content-end">
+                                                        @if (
+                                                            $recommendationCreate->approved_status->value == 2 &&
+                                                                ((auth()->check() && auth()->id() == $recommendationSetting?->checker_id) || auth()->user()->role_id == 1))
                                                             <form method="POST"
                                                                 action="{{ route('admin.recommendation.recommendationCreate.updateStatus', [$recommendationCreate, Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER]) }}">
                                                                 @csrf
@@ -296,8 +356,7 @@
                                                                 <button type="submit"
                                                                     class="btn btn-sm btn-success">{{ Modules\Recommendation\Enums\RecommendationStatusEnum::SENT_TO_APPROVER->label() }}</button>
                                                             </form>
-                                                        @endif --}}
-
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -308,35 +367,34 @@
                         </div>
                     @endif
                 </div>
+
+
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                    @if ($recommendationCreate->status != 'sent_to_approver')
-                                        <!-- Hide the print button if status is not 'sent_to_approver' -->
-                                    @else
-                                        <x-print-button target-element="printSipharish" title="सिफारिस प्रिन्ट" />
-                                    @endif
+                                    <x-print-button target-element="printForm" title="सिफारिस प्रिन्ट" />
                                 </div>
-
                             </div>
                             <div class="card-body">
-                                <div id="printSipharish" class="p-1">
+                                <div id="printForm" class="p-1">
                                     <style>
                                         @page {
                                             margin-top: 0;
+                                            font-size: 18px;
                                         }
                                     </style>
-                                    {!! $recommendationCreate->resolveTemplate($sipharisSetting) ?? '' !!}
+                                    {!! $recommendationCreate->resolveTemplate($recommendationSetting) ?? '' !!}
                                 </div>
                             </div>
+                           
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    
 @endsection

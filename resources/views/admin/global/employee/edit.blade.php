@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.global.generalSetting.employee.update', $employee) }}" method="post"
+                    <form action="{{ route('admin.global.generalSetting.employee.update', $employee) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
