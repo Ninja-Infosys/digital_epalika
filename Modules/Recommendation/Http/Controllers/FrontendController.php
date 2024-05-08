@@ -35,16 +35,27 @@ class FrontendController extends Controller
 
     public function sipharishRegister()
     {
+        // $mobileUser = Auth::guard('mobile-user')->user()->id;
+        // return ($mobileUser);
         return view('recommendation::frontend.sipharishRegister.register');
     }
 
     public function sipharishRegisterStore(StoreRecommendationCreateRequest $request)
     {
+     
         $recommendationCreate = DB::transaction(function () use ($request) {
-            $recommendationCreate = RecommendationCreate::create($request->validated() + [
-                'mobile_user_id' => Auth::guard('mobile-user')->user()->id,
-                'created_by' => Auth::guard('mobile-user')->id()
-            ]);
+            // Get the authenticated user
+            $user = Auth::guard('mobile-user')->user();
+        
+            // Create a new recommendation with validated data
+            $recommendationCreate = RecommendationCreate::create(array_merge(
+                $request->validated(),
+                [
+                    'mobile_user_id' => $user->id,
+                    'created_by' => $user->id
+                ]
+            ));
+            
     
             if (
                 array_key_exists('fields', $request->validated())

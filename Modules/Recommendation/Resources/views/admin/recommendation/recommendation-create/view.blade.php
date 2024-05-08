@@ -100,7 +100,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-md-12">
                             <h4 class="font-bold">व्यतिगत विवरण</h4>
                             <div class="table-responsive">
@@ -391,11 +391,11 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                <x-print-button target-element="print" title="सिफारिस प्रिन्ट"/>
+                                <x-print-button target-element="printForm" title="सिफारिस प्रिन्ट"/>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="print" class="p-1">
+                            <div id="printForm" class="p-1">
                                 <style>
                                     @page {
                                         margin-top: 0;

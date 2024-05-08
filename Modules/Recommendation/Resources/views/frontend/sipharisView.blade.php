@@ -32,10 +32,10 @@
                             <h4 class="header-title mt-1" style="padding-left: 10px;">प्रयोगकर्ताको विवरण</h4>
                         </div>
                         <div class="d-flex justify-content-between gap-1" style="padding-right: 10px;">
-                            <a style="height: 32px;" href="{{ route('admin.recommendation.recommendationCreate.edit', $recommendationCreate) }}"
+                            {{-- <a style="height: 32px;" href="{{ route('admin.recommendation.recommendationCreate.edit', $recommendationCreate) }}"
                                 class="btn btn-sm btn-outline-primary mt-1">
                                 <i class="fa fa-edit"></i> सम्पादन र समीक्षा गर्नुहोस्
-                            </a>
+                            </a> --}}
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="header-title mb-0"></h4>
                                 <button class="btn btn-sm btn-info"
@@ -147,7 +147,7 @@
                                             @forelse($recommendationCreate->recommendationFiles as $document)
                                                 <div class="col-xl-3 col-lg-6">
                                                     <div class="card shadow-none border">
-                                                        <div class="p-2">
+                                                        <div class="p-2" style="width: 17rem;">
                                                             <div class="row align-items-center">
                                                                 <div class="col-2 pe-0">
                                                                     <div class="avatar-sm">
@@ -162,7 +162,7 @@
                                                                         onclick="openFileModal('{{ $document->recommendationDocument->title }}', '{{ $document->file_extension }}','{{ $document->file_url }}')"
                                                                         class="text-muted fw-medium">{{ $document->recommendationDocument->title ?? '' }}</a>
                                                                 </div>
-                                                                <div class="col-2">
+                                                                <div class="col-2" style="width: 12%;">
                                                                     <a href="{{ route('admin.file-url-download', ['file_url' => $document->file]) }}"
                                                                         class="btn btn-xs btn-outline-primary">
                                                                         <i class="fa fa-download"></i>
@@ -186,12 +186,14 @@
                     @if ($recommendationCreate->approved_status->value > 1)
 
                         <div class="row mt-3">
+                            <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title">बिल प्रिन्ट</h4>
                                     <x-print-button target-element="print" style="padding-right:10px;"  title="सिफारिस प्रिन्ट" />
                                 </div>
                             </div>
+                            
                             <div class="card-body" id="print">
                                 <div class="col-md-12">
                                     {!! letterHead() !!}
@@ -252,15 +254,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="5">
-                                                        <x-convert-to-word id="total_amount"
+                                                     अक्षरेपी रु. :-  <x-convert-to-word id="total_amount"
                                                             number="{{ $total }}" />
-                                                        मात्र
+                                                        मात्र ।
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                            </div>
                             </div>
 
                             <div class="row mt-4">
@@ -372,11 +375,11 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                    <x-print-button target-element="print" title="सिफारिस प्रिन्ट" />
+                                    <x-print-button target-element="printForm" title="सिफारिस प्रिन्ट" />
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="print" class="p-1">
+                                <div id="printForm" class="p-1">
                                     <style>
                                         @page {
                                             margin-top: 0;

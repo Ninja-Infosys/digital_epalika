@@ -38,7 +38,7 @@
                                 <input type="hidden" name="fields[{{ $key }}][recommendation_form_field_id]"
                                     class="form-control" value="{{ $field->id }}"
                                     id="recommendation_form_field_id"
-                                    style="color:black !important;" />
+                                    style="color:black !important;"/>
                                 <input type="hidden" name="fields[{{ $key }}][type]" class="form-control"
                                     value="{{ $field->type->value }}" id="type"
                                     style="color:black !important;"/>
@@ -105,6 +105,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     @endforeach
                 </div>
             </fieldset>
@@ -127,7 +128,7 @@
                                             class="form-label">{{ $document->title }}</label>
                                         <input type="hidden"
                                             name="files[{{ $key }}][recommendation_document_id]"
-                                            class="form-control" value="{{ $document->id }} style="color:black !important;"">
+                                            class="form-control" value="{{ $document->id }}" style="color:black !important;">
                                         <input type="text" readonly value="{{ $document->title }}"
                                             class="form-control" id="title" style="color:black !important;" />
                                     </div>
