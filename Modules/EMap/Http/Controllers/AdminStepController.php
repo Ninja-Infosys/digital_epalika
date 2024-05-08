@@ -67,7 +67,7 @@ class AdminStepController extends Controller
     public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        $firstId = Form::selectRaw('id,order')->orderBy('order')->first()?->id ?? null;
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
         $this->getStatusValidation($request);
         DB::transaction(function () use ($firstId, $request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
             if ($lastStep == $form->order) {
@@ -172,7 +172,7 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        $firstId = Form::selectRaw('id,order')->orderBy('order')->first()?->id ?? null;
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
         DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $formStore, $lastStep, $firstId) {
 
             if ($lastStep == $form->order) {
@@ -268,7 +268,7 @@ class AdminStepController extends Controller
     {
         $this->getStatusValidation($request);
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
-        $firstId = Form::selectRaw('id,order')->orderBy('order')->first()?->id ?? null;
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
         DB::transaction(function () use ($request, $mapApply, $form, $formDataType, $paymentStore, $lastStep, $firstId) {
 
             if ($lastStep == $form->order) {
