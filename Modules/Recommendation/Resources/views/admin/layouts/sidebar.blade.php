@@ -4,6 +4,15 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+@can('personalDetail_access')
+    <li class="{{request()->is('admin/recommendation/setting/personalDetail') ? 'active' : ''}}">
+        <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
+            <i class="fa fa-user"></i>
+            <span>व्यक्तिगत विवरण</span>
+        </a>
+    </li>
+@endcan
+
 @can('recommendationSetting_access')
     <li class="{{request()->is('admin/recommendation/recommendationCreate*') ? 'active' : ''}}">
         <a href="{{route('admin.recommendation.recommendationCreate.index')}}">
@@ -12,6 +21,7 @@
         </a>
     </li>
 @endcan
+
 
 
 <li class="{{request()->is('admin/recommendation/setting*') ? 'active' : ''}}">

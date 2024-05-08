@@ -6,6 +6,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationCont
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRegistrationController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationReportController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
@@ -60,3 +61,10 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'businessregistration::admin.file.file')->name('file');
 });
+
+Route::controller(OrganizationReportController::class)->prefix('organizationReport')->as('organizationReport.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
+
+});
+

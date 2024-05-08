@@ -2,29 +2,29 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\DocumentStatusEnum;
 
 class AppliedDocument extends Model
 {
-    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
+    use EventObserveTrait;
 
     protected $touches = ['mapApply'];
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
 
     protected $fillable = [
@@ -40,15 +40,14 @@ class AppliedDocument extends Model
     ];
 
     protected $casts = [
-        'status' => DocumentStatusEnum::class,
+        'status' => DocumentStatusEnum::class
     ];
 
     protected $appends = [
-        'can_edit',
+        'can_edit'
     ];
 
     protected $with = ['appliedDocumentStatuses'];
-
     public function getCanEditAttribute(): bool
     {
         return match ($this->attributes['status']) {
@@ -80,6 +79,7 @@ class AppliedDocument extends Model
         return $this->morphTo();
     }
 
+
     public function form_data(): MorphTo
     {
         return $this->morphTo();
@@ -92,14 +92,14 @@ class AppliedDocument extends Model
 
     public function setApprovedDocumentAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if(!empty($value) && !is_string($value)) {
             $this->attributes['approved_document'] = $value->store('e_map/approved_documents', 'public');
         }
     }
 
     public function getApprovedDocumentUrlAttribute($value): string
     {
-        return $this->attributes['approved_document'] ? Storage::disk('public')->url($this->attributes['approved_document']) : '';
+        return  $this->attributes['approved_document'] ? Storage::disk('public')->url($this->attributes['approved_document']) : '';
 
     }
 }

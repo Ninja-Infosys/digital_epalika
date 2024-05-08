@@ -319,7 +319,7 @@ class AdminStepController extends Controller
     {
         return $request->validate([
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
-            'comment' => ['required_if:status,'.DocumentStatusEnum::REJECTED->value],
+            'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
         ]);
     }
 
@@ -517,7 +517,7 @@ class AdminStepController extends Controller
                     'amount' => $paymentStore->amount,
                 ]);
                 $paymentStore->update([
-                    'bill' => (array_key_exists('bill', $data) && ! empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
+                    'bill' => (array_key_exists('bill', $data) && !empty($data['bill'])) ? $data['bill']->store('appliedDocument', 'public') : $paymentStore->bill,
                     'amount' => $data['amount'],
                 ]);
             });
@@ -532,7 +532,7 @@ class AdminStepController extends Controller
         $data = $this->getPrintData($mapApply, $form, $formDataType);
 
         return response()->json([
-            'view' => (string) View::make('emap::organization.attach-document.print', compact('data')),
+            'view' => (string)View::make('emap::organization.attach-document.print', compact('data')),
         ]);
     }
 
@@ -566,7 +566,7 @@ class AdminStepController extends Controller
         $template = $formStore->form_data?->model?->template ?? '';
 
         foreach ($formStore->data as $key => $value) {
-            $placeholder = '[@form.'.$key.']';
+            $placeholder = '[@form.' . $key . ']';
             $data = Str::replace($this->getReplaceData(), $this->getEmapTemplateData($mapApply), $template);
             $template = str_replace($placeholder, $value, $data);
         }
@@ -629,8 +629,8 @@ class AdminStepController extends Controller
     public function paymentStoreUpdate(\Illuminate\Support\Collection $appliedDocumentStatus, \Illuminate\Support\Collection $formStoreStatus, Request $request, \Illuminate\Support\Collection $paymentStoreStatus, MapApply $mapApply): void
     {
         if (
-            $appliedDocumentStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
-            $formStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+            $appliedDocumentStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
+            $formStoreStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value) &&
             $request->input('status') == DocumentStatusEnum::APPROVED->value
         ) {
             if ($paymentStoreStatus->isEmpty()) {
@@ -638,7 +638,7 @@ class AdminStepController extends Controller
                     'sent_to_organization' => 'done',
                 ]);
             } else {
-                if ($paymentStoreStatus->every(fn ($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
+                if ($paymentStoreStatus->every(fn($status) => $status->value == DocumentStatusEnum::APPROVED->value)) {
                     $mapApply->update([
                         'sent_to_organization' => 'done',
                     ]);

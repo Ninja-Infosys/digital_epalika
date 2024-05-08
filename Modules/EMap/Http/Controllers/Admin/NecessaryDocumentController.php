@@ -2,20 +2,21 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\NecessaryDocument;
 use Modules\EMap\Http\Requests\NecessaryDocument\StoreNecessaryDocumentRequest;
 use Modules\EMap\Http\Requests\NecessaryDocument\UpdateNecessaryDocumentRequest;
 use Illuminate\Support\Str;
-
 class NecessaryDocumentController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('necessaryDocument_access');
 
-        $necessaryDocuments = NecessaryDocument::latest()->paginate(10);
-        return view('emap::admin.necessaryDocument.index', compact('necessaryDocuments'));
+        $necessaryDocuments=NecessaryDocument::latest()->paginate(10);
+        return view('emap::admin.necessaryDocument.index',compact('necessaryDocuments'));
     }
 
     public function create()
@@ -28,7 +29,7 @@ class NecessaryDocumentController extends Controller
     public function store(StoreNecessaryDocumentRequest $request)
     {
         $this->checkAuthorization('necessaryDocument_create');
-        $neccessaryDocument = NecessaryDocument::create($request->validated());
+       $neccessaryDocument = NecessaryDocument::create($request->validated());
         if ($request->hasFile('files')) {
             $this->fileUpload($neccessaryDocument, $request);
         }
@@ -41,13 +42,13 @@ class NecessaryDocumentController extends Controller
         $this->checkAuthorization('necessaryDocument_create');
         $necessaryDocument->load('files');
         // dd($necessaryDocument);
-        return view('emap::admin.necessaryDocument.show', compact('necessaryDocument'));
+        return view('emap::admin.necessaryDocument.show',compact('necessaryDocument'));
     }
 
     public function edit(NecessaryDocument $necessaryDocument)
     {
         $this->checkAuthorization('necessaryDocument_edit');
-        return view('emap::admin.necessaryDocument.edit', compact('necessaryDocument'));
+        return view('emap::admin.necessaryDocument.edit',compact('necessaryDocument'));
     }
 
     public function update(UpdateNecessaryDocumentRequest $request, NecessaryDocument $necessaryDocument)
@@ -61,7 +62,7 @@ class NecessaryDocumentController extends Controller
 
     public function destroy(NecessaryDocument $necessaryDocument)
     {
-        $this->checkAuthorization('necessaryDocument_delete');
+       $this->checkAuthorization('necessaryDocument_delete');
         $necessaryDocument->delete();
         toast('आवश्यक कागजातहरू सफलतापूर्वक मेटाइयो', 'success');
         return back();

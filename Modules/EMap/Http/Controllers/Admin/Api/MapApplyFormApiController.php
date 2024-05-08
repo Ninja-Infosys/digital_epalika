@@ -41,7 +41,7 @@ class MapApplyFormApiController extends Controller
             'allDistricts' => get_districts(),
             'constructionTypes' => TypeOfConstructionWorkEnum::getValuesWithLabels(),
             'buildingUsages' => BuildingUsageEnum::getValuesWithLabels(),
-            'buildingCategories' => CategorizationEnum::getValuesWithLabels(),
+            'buildingCategories'=>CategorizationEnum::getValuesWithLabels(),
             'applicationForms' => ApplicationFormTypeEnum::getValuesWithLabels(),
             'ownerTypes' => LandOwnerTypeEnum::getValuesWithLabels(),
             'applicantTypes' => ApplicantTypeEnum::getValuesWithLabels(),
