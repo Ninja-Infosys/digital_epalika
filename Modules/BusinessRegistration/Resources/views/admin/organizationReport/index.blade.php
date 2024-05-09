@@ -49,7 +49,7 @@
                                     <x-date-input-component nameNe="to_date" labelNe="मिति सम्म" nameEn="en_to_date"
                                                             labelEn="To Date" :get-today-date="false" />
                                 </div>
-                                <div class="col-md-3 mb-2">
+                                <div class="col-md-3">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
                                             class="form-control">
@@ -59,6 +59,11 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="name">व्यवसायको नाम</label>
+                                   <input type="text" class="form-control" id="name" placeholder="व्यवसायको नाम">
+                                </div>
+
                             </div>
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्

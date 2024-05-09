@@ -164,5 +164,5 @@ class Employee extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
-    }
+}
 }

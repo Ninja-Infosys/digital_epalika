@@ -72,7 +72,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $ethnicities = Ethnicity::all();
         $allemployees = Employee::all();
-        
+
         return view('admin.global.employee.edit', compact('ethnicities', 'employee', 'branches', 'allemployees'));
     }
 
@@ -115,5 +115,5 @@ class EmployeeController extends Controller
         toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
-    }
+}
 }
