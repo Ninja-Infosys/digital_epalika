@@ -214,7 +214,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h4 class="header-title mb-0">बिल प्रिन्ट</h4>
-                                <x-print-button target-element="print" title="सिफारिस प्रिन्ट"/>
+                                <x-print-button target-element="print" title="बिल प्रिन्ट"/>
                             </div>
                         </div>
                         <div class="card-body" id="print">
