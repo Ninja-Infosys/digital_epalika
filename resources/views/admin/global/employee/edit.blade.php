@@ -252,38 +252,38 @@
 
                                     <select class="form-control @error('is_employee') is-invalid @enderror"
                                         name="is_employee" id="is_employee" required>
-                                        <option value="1" {{ old('is_employee') == 0 ? 'selected' : '' }}>कर्मचारी
+                                        <option value="1" {{ old('is_employee',$employee->is_employee) == 1 ? 'selected' : '' }}>कर्मचारी
                                         </option>
-                                        <option value="0" {{ old('is_employee') == 1 ? 'selected' : '' }}>जनप्रतिनिधि
+                                        <option value="0" {{ old('is_employee',$employee->is_employee) == 0 ? 'selected' : '' }}>जनप्रतिनिधि
                                         </option>
                                     </select>
                                     @error('is_employee')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-4 mb-2">
                                     <label for="show_to_index" class="form-label">गृहपृष्ठमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_index') is-invalid @enderror"
                                         name="show_to_index" id="show_to_index" required>
-                                        <option value="1" {{ old('show_to_index') == 0 ? 'selected' : '' }}>देखाउने
-                                        </option>
-                                        <option value="0" {{ old('show_to_index') == 1 ? 'selected' : '' }}>नदेखाउने
-                                        </option>
+                                        <option value="1" {{ old('show_to_index',$employee->show_to_index) == 1 ? 'selected' : '' }}>देखाउने</option>
+                                        <option value="0" {{ old('show_to_index',$employee->show_to_index) == 0 ? 'selected' : '' }}>नदेखाउने</option>
                                     </select>
                                     @error('show_to_index')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-4 mb-2">
                                     <label for="show_to_mobile_app" class="form-label">मोबाइलमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"
                                         name="show_to_mobile_app" id="show_to_mobile_app" required>
-                                        <option value="1" {{ old('show_to_mobile_app') == 0 ? 'selected' : '' }}>
+                                        <option value="1" {{ old('show_to_mobile_app',$employee->show_to_mobile_app) == 1 ? 'selected' : '' }}>
                                             देखाउने
                                         </option>
-                                        <option value="0" {{ old('show_to_mobile_app') == 1 ? 'selected' : '' }}>
+                                        <option value="0" {{ old('show_to_mobile_app',$employee->show_to_mobile_app) == 0 ? 'selected' : '' }}>
                                             नदेखाउने
                                         </option>
                                     </select>
