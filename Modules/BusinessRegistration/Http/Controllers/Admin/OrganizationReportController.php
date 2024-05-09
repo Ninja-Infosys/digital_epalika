@@ -34,7 +34,31 @@ class OrganizationReportController extends Controller
             'data' => BusinessDetailResource::collection($projects)
         ]);
     }
+    private function filterDataFromUser($q, Request $request): void
+    {
+        if (!empty($request->input('fiscal_year'))) {
+            $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+        }
 
+        if (!empty($request->input('from_date'))) {
+            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
+        }
+
+        if (!empty($request->input('to_date'))) {
+            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
+        }
+
+        if (!empty($request->input('name'))) {
+            $q->whereIn('name', $request->input('name'));
+        }
+
+        if (!empty($request->input('business_nature'))) {
+            $q->whereIn('business_nature_id', $request->input('business_nature'));
+        }
+        if (!empty($request->input('ward_no'))) {
+            $q->whereIn('ward_no', $request->input('ward_no'));
+        }
+    }
 
     public function create()
     {

@@ -58,6 +58,6 @@ class UpdateEmployeeRequest extends FormRequest
             'phone.unique' => 'फोन पहिले नै अवस्थित छ।',
             'position.integer' => 'position पूर्णांक हुनुपर्छ',
 
-        ];
-    }
+];
+}
 }
