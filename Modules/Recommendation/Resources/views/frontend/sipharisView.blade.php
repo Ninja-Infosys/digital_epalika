@@ -43,6 +43,7 @@
                             printable: 'printData',
                             targetStyles: ['*'],
                             ignoreElements:['ignore-header'],
+                            
                             type: 'html'
                             })">
                                     <i class="fa fa-print"></i> पूर्ण विवरण प्रिन्ट गर्नुहोस
