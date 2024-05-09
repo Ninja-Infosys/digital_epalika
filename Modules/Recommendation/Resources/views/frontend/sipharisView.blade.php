@@ -40,11 +40,11 @@
                                 <h4 class="header-title mb-0"></h4>
                                 <button class="btn btn-sm btn-info"
                                         onclick="printJS({
-                                                    printable: 'printData',
-                                                    targetStyles: ['*'],
-                                                    ignoreElements:['ignore-header'],
-                                                    type: 'html'
-                                                    })">
+                            printable: 'printData',
+                            targetStyles: ['*'],
+                            ignoreElements:['ignore-header'],
+                            type: 'html'
+                            })">
                                     <i class="fa fa-print"></i> पूर्ण विवरण प्रिन्ट गर्नुहोस
                                 </button>
                             </div>
@@ -190,10 +190,13 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title">बिल प्रिन्ट</h4>
-                                    <x-print-button target-element="print" title="सिफारिस प्रिन्ट"/>
+                                   
+                                    <x-print-button
+                                    target-element="print"
+                                    title="बिल प्रिन्ट"
+                                />
                                 </div>
                             </div>
-                            
                             <div class="card-body" id="print">
                                 <div class="col-md-12">
                                     {!! letterHead() !!}
@@ -375,11 +378,11 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                    <x-print-button target-element="printForm" title="सिफारिस प्रिन्ट" />
+                                    <x-print-button target-element="recommendation-print" title="सिफारिस प्रिन्ट"/>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="printForm" class="p-1">
+                                <div id="recommendation-print" class="p-1">
                                     <style>
                                         @page {
                                             margin-top: 0;
