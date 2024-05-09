@@ -26,7 +26,7 @@ class UpdateServiceRequest extends FormRequest
             'serviceProcesses' => ['required', 'array'],
             'serviceProcesses.*.description' => ['required'],
             'ward' => ['nullable', 'array'],
-            'ward.*' => ['integer'],
+            'ward.*' => ['string','nullable'],
             'is_displayed' => ['nullable', 'boolean'],
         ];
     }

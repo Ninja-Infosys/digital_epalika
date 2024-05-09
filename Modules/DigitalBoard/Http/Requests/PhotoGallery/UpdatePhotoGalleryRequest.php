@@ -18,7 +18,7 @@ class UpdatePhotoGalleryRequest extends FormRequest
             'image' => ['nullable','image','mimes:png,jpg,jpeg'],
             'caption' => ['required', 'string', 'max:255'],
             'ward' => ['nullable', 'array'],
-            'ward.*' => ['integer'],
+            'ward.*' => ['string','nullable'],
             'is_displayed' => ['nullable', 'boolean'],
         ];
     }
