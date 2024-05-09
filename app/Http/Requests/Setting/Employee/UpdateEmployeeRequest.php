@@ -43,7 +43,7 @@ class UpdateEmployeeRequest extends FormRequest
             'insurance_card_no' => ['nullable'],
             'description' => ['nullable'],
             'ward' => ['nullable', 'array'],
-            'ward.*' => ['string'],
+            'ward.*' => ['string','nullable'],
             'is_displayed' => ['nullable', 'boolean']
 
         ];
