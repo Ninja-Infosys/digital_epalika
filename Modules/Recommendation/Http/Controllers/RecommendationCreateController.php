@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
+use Modules\Recommendation\Entities\RecommendationFile;
 use Modules\Recommendation\Entities\RecommendationSetting;
 use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Recommendation\Enums\RecommendationStatusEnum;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
+use Modules\Recommendation\Http\Requests\RecommendationCreate\UpdateRecommendationCreateRequest;
+use Modules\Recommendation\Http\Requests\UpdateRecommendationRequest;
 
 class RecommendationCreateController extends Controller
 {
@@ -28,6 +31,7 @@ class RecommendationCreateController extends Controller
 
     public function store(StoreRecommendationCreateRequest $request)
     {
+        
         $recommendationCreate = DB::transaction(function () use ($request) {
 
             $recommendationCreate = RecommendationCreate::create($request->validated() + [
@@ -79,6 +83,57 @@ class RecommendationCreateController extends Controller
         return view('recommendation::admin.recommendation.recommendation-create.edit', compact('recommendationCreate'));
     }
 
+    public function update(UpdateRecommendationCreateRequest $request, RecommendationCreate $recommendationCreate)
+{
+    
+        $recommendationCreate = DB::transaction(function () use ($request, $recommendationCreate) {
+            $recommendationCreate->update($request->validated() + [
+                'created_by' => auth()->id(),
+            ]);
+
+            if (array_key_exists('fields', $request->validated()) && !empty($request->validated()['fields'])) {
+                foreach ($request->validated()['fields'] as $field) {
+                    $value = $field['value'];
+
+                    if (!empty($field['type']) && $field['type'] == 'image') {
+                        $value = Storage::disk('public')->putFile('recommendation/files', $field['value']);
+                    }
+
+                    $recommendationValue = $recommendationCreate->recommendationValues()
+                        ->where('recommendation_form_field_id', $field['recommendation_form_field_id'])
+                        ->first();
+
+                    if ($recommendationValue) {
+                        $recommendationValue->update([
+                            'value' => $value,
+                            'type' => $field['type'],
+                        ]);
+                    } else {
+                        $recommendationCreate->recommendationValues()->create([
+                            'recommendation_form_field_id' => $field['recommendation_form_field_id'],
+                            'value' => $value,
+                            'type' => $field['type'],
+                        ]);
+                    }
+                }
+            }
+
+            if (array_key_exists('files', $request->validated()) && !empty($request->validated()['files'])) {
+                $recommendationCreate->recommendationFiles()->delete();
+                foreach ($request->validated('files') ?? [] as $file) {
+                    $recommendationCreate->recommendationFiles()->create($file);
+                }
+            }
+
+            return $recommendationCreate;
+        });
+
+        toast('सिफारिस सफलतापूर्वक अपडेट गरियो', 'success');
+        return redirect(route('admin.recommendation.recommendationCreate.show', $recommendationCreate));
+    } 
+
+    
+    
     public function show(RecommendationCreate $recommendationCreate)
     {
         $recommendationCreate->load(

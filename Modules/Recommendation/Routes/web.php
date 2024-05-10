@@ -9,6 +9,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('sipharishRegisterStore', 'sipharishRegisterStore')->name('recommendation.register.store');
     Route::get('sipharishList', 'sipharishList')->name('recommendation.sipharishList');
     Route::delete('destroySipharish/{recommendationCreate}', 'destroySipharish')->name('recommendation.destroySipharish');
+    Route::get('recommendationEdit/{recommendationCreate}', 'recommendationEdit')->name('recommendation.recommendationEdit');
+    Route::put('recommendationUpdate/{recommendationCreate}','recommendationUpdate')->name('recommendation.recommendationUpdate');
     Route::get('recommendationListshow/{recommendationCreate}', 'recommendationListshow')->name('recommendation.recommendationListshow');
 });
     
