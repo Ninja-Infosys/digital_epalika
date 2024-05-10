@@ -38,7 +38,7 @@
                             </a> --}}
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="header-title mb-0"></h4>
-                                <button class="btn btn-sm btn-info"
+                                <button class="btn btn-sm bg-transparent" style="color: #124f9f; border: 1px solid #124f9f;"
                                         onclick="printJS({
                             printable: 'printData',
                             targetStyles: ['*'],
@@ -191,14 +191,18 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="header-title">बिल प्रिन्ट</h4>
-                                   
-                                    <x-print-button
-                                    target-element="print"
-                                    title="बिल प्रिन्ट"
-                                />
+                                    <button class="btn btn-sm bg-transparent" style="color: #124f9f; border: 1px solid #124f9f;" onclick="printJS({
+                                        printable: 'printBill',
+                                        targetStyles: ['*'],
+                                        ignoreElements: ['ignore-header'],
+                                        type: 'html'
+                                    })">
+                                        <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
+                                    </button>
+                                    
                                 </div>
                             </div>
-                            <div class="card-body" id="print">
+                            <div class="card-body mt-4" id="printBill">
                                 <div class="col-md-12">
                                     {!! letterHead() !!}
                                     <h4 class="text-center fw-bold mt-2">सिफारिस दस्तुर</h4>
