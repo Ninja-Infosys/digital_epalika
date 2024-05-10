@@ -6,11 +6,10 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\BusinessRegistration\Entities\BusinessDetail;
-use Modules\BusinessRegistration\Entities\BusinessNature;
-use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\OrganizationRegistration;
-use Modules\BusinessRegistration\Transformers\Report\BusinessDetailResource;
+use Modules\BusinessRegistration\Transformers\OrganizationReport\OrganizationRegistrationResource;
+use Illuminate\Support\Collection;
+
 
 class OrganizationReportController extends Controller
 {
@@ -24,14 +23,36 @@ class OrganizationReportController extends Controller
         $request->validate([
             'from_date' => ['nullable'],
             'to_date' => ['nullable', 'after_or_equal:from_date'],
+            'columns' => ['nullable', 'array']
         ]);
 
+        if (empty($request->input('columns'))) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'organization_registrations' => ['name', 'registration_no', 'registration_date_ne','purpose']
+                    ]
+                ]
+            );
+        }
         $projects = OrganizationRegistration::with('fiscalYear', 'province', 'localBody', 'district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->whereNotNull('registration_no')->get();
 
+        if (!empty($request->input('columns')['partners'])) {
+            $projects->load(['partners' => function ($q) {
+                $q->with('province', 'localBody', 'district', 'issueDistrict');
+            }]);
+        }
+
+        if (!empty($request->input('columns')[''])) {
+            $projects->load(['organizationRenew' => function ($q) {
+                $q->with('fiscalYear');
+            }]);
+        }
+
         return response()->json([
-            'data' => BusinessDetailResource::collection($projects)
+            'data' => OrganizationRegistrationResource::collection($projects)
         ]);
     }
     private function filterDataFromUser($q, Request $request): void
@@ -49,16 +70,29 @@ class OrganizationReportController extends Controller
         }
 
         if (!empty($request->input('name'))) {
-            $q->whereIn('name', $request->input('name'));
+            $q->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        if (!empty($request->input('business_nature'))) {
-            $q->whereIn('business_nature_id', $request->input('business_nature'));
-        }
+
         if (!empty($request->input('ward_no'))) {
             $q->whereIn('ward_no', $request->input('ward_no'));
         }
     }
+    // private function getColumns(): Collection
+    // {
+    //     $columnData = collect();
+
+    //     (new OrganizationRegistration())
+    //         ->ownAndRelatedModelsFillableColumns()
+    //         ->filter(function ($column) {
+    //             return !array_keys($column, 'printedData');
+    //         })
+    //         ->each(function ($column) use ($columnData) {
+    //             $columnData->push(collect($column)->put('columns', $column['columns']));
+    //         });
+    //     return $columnData;
+    // }
+
 
     public function create()
     {
