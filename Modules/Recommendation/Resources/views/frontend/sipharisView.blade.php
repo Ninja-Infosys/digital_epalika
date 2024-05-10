@@ -32,10 +32,10 @@
                             <h4 class="header-title mt-1" style="padding-left: 10px;">प्रयोगकर्ताको विवरण</h4>
                         </div>
                         <div class="d-flex justify-content-between gap-1" style="padding-right: 10px;">
-                            {{-- <a style="height: 32px;" href="{{ route('admin.recommendation.recommendationCreate.edit', $recommendationCreate) }}"
+                            <a style="height: 32px;" href="{{ route('recommendationrecommendation.recommendationEdit',$recommendationCreate) }}"
                                 class="btn btn-sm btn-outline-primary mt-1">
                                 <i class="fa fa-edit"></i> सम्पादन र समीक्षा गर्नुहोस्
-                            </a> --}}
+                            </a>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="header-title mb-0"></h4>
                                 <button class="btn btn-sm bg-transparent" style="color: #124f9f; border: 1px solid #124f9f;"

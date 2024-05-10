@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Recommendation\Entities\RecommendationCreate;
 use Modules\Recommendation\Entities\RecommendationDetail;
+use Modules\Recommendation\Entities\RecommendationFile;
 use Modules\Recommendation\Entities\RecommendationSetting;
 use Modules\Recommendation\Entities\SipharisSetting;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Requests\RecommendationCreate\StoreRecommendationCreateRequest;
+use Modules\Recommendation\Http\Requests\RecommendationCreate\UpdateRecommendationCreateRequest;
 
 class FrontendController extends Controller
 {
@@ -103,23 +105,87 @@ class FrontendController extends Controller
     public function recommendationListshow(RecommendationCreate $recommendationCreate)
     {
         $mobileUser = Auth::guard('mobile-user')->user()->load('mobileUserDetail');
-       
-
+        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles.recommendationDocument');
         $recommendationSetting = RecommendationSetting::with('approver', 'checker')->where('ward', auth()->user()?->ward_no ?? null)->first();
-        $recommendationCreate->load('recommendationDetail', 'recommendationValues', 'recommendationFiles', );
+        
         return view('recommendation::frontend.sipharisView', compact('recommendationCreate', 'mobileUser', 'recommendationSetting'));
     }
+    
 
 
-    public function edit($id)
+    public function recommendationEdit(RecommendationCreate $recommendationCreate)
     {
-        return view('recommendation::edit');
+        $recommendationCreate->load('recommendationValues.recommendationFormField');
+        return view('recommendation::frontend.sipharishEdit',compact('recommendationCreate'));
     }
 
-    public function update(Request $request, $id)
+    public function recommendationUpdate(UpdateRecommendationCreateRequest $request, RecommendationCreate $recommendationCreate)
     {
-        //
+        $recommendationCreate = DB::transaction(function () use ($request, $recommendationCreate) {
+            // Get the authenticated user
+            $user = Auth::guard('mobile-user')->user();
+    
+            // Update the recommendation with validated data
+            $recommendationCreate->update(array_merge(
+                $request->validated(),
+                [
+                    'mobile_user_id' => $user->id,
+                    'created_by' => $user->id
+                ]
+            ));
+    
+            // Delete old files
+            if (array_key_exists('deleted_files', $request->validated())) {
+                $deletedFileIds = $request->validated()['deleted_files'];
+                $recommendationCreate->RecommendationFile::whereIn('id', $deletedFileIds)->delete();
+            }
+    
+            // Update or delete existing recommendation values
+            if (array_key_exists('fields', $request->validated()) && !empty($request->validated()['fields'])) {
+                foreach ($request->validated()['fields'] as $field) {
+                    $value = $field['value'];
+    
+                    if (!empty($field['type']) && $field['type'] == 'image') {
+                        $value = Storage::disk('public')->putFile('recommendation/files', $field['value']);
+                    }
+    
+                    $recommendationValue = $recommendationCreate->recommendationValues()
+                        ->where('recommendation_form_field_id', $field['recommendation_form_field_id'])
+                        ->first();
+    
+                    if ($recommendationValue) {
+                        $recommendationValue->update([
+                            'value' => $value,
+                            'type' => $field['type'],
+                        ]);
+                    } else {
+                        $recommendationCreate->recommendationValues()->create([
+                            'recommendation_form_field_id' => $field['recommendation_form_field_id'],
+                            'value' => $value,
+                            'type' => $field['type'],
+                        ]);
+                    }
+                }
+            }
+    
+            // Add new files
+             // Replace old files with new ones
+        if (array_key_exists('files', $request->validated()) && !empty($request->validated()['files'])) {
+            $recommendationCreate->recommendationFiles()->delete();
+            foreach ($request->validated('files') ?? [] as $file) {
+                $recommendationCreate->recommendationFiles()->create($file);
+            }
+        }
+
+    
+            return $recommendationCreate;
+        });
+    
+        toast('सिफारिस सफलतापूर्वक अपडेट गरियो', 'success');
+        return redirect(route('recommendationrecommendation.recommendationListshow', $recommendationCreate));
     }
+    
+    
 
     public function destroySipharish(RecommendationCreate $recommendationCreate)
     {
