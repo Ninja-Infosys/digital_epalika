@@ -214,10 +214,18 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h4 class="header-title mb-0">बिल प्रिन्ट</h4>
-                                <x-print-button target-element="print" title="बिल प्रिन्ट"/>
+                                <button class="btn btn-sm bg-transparent" style="color: #6f63e3; border: 1px solid #6f63e3;" onclick="printJS({
+                                    printable: 'printBill',
+                                    targetStyles: ['*'],
+                                    ignoreElements: ['ignore-header'],
+                                    type: 'html',
+                                   
+                                })">
+                                    <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
+                                </button>
                             </div>
                         </div>
-                        <div class="card-body" id="print">
+                        <div class="card-body" id="printBill">
                             <div class="col-md-12">
                                 {!! letterHead() !!}
                                 <h4 class="text-center fw-bold mt-2">सिफारिस दस्तुर</h4>
@@ -391,11 +399,11 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h4 class="header-title mb-0">सिफारिस प्रिन्ट</h4>
-                                <x-print-button target-element="print" title="सिफारिस प्रिन्ट"/>
+                                <x-print-button target-element="recommendation-print" title="सिफारिस प्रिन्ट"/>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="print" class="p-1">
+                            <div id="recommendation-print" class="p-1">
                                 <style>
                                     @page {
                                         margin-top: 0;
