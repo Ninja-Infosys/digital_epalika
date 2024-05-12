@@ -18,10 +18,11 @@ class FormDataTypeLivewire extends Component
         'title' => null,
         'order' => null,
         'map_pass_group_id' => null,
-        'map_group_id'=>null,
+        'map_group_id' => null,
+        'map_group_user_id' => null,
         'need_from' => null,
         'formDataType' => [],
-        'show_to_consultancy'=>null
+        'show_to_consultancy' => null
 
     ];
     public $mapPassGroups = [];
@@ -37,19 +38,20 @@ class FormDataTypeLivewire extends Component
             $this->form['order'] = $formData->order;
             $this->form['map_pass_group_id'] = $formData->map_pass_group_id;
             $this->form['map_group_id'] = $formData->map_group_id;
+            $this->form['map_group_user_id'] = $formData->map_group_user_id;
             $this->form['need_from'] = $formData->need_from->value;
             $this->form['show_to_consultancy'] = $formData->show_to_consultancy;
 
             foreach ($formData->formDataTypes as $index => $formDataType) {
-                $this->form['formDataType'][]=[
-                    'id'=>$formDataType->id ?? null,
-                    'type'=>$formDataType->type ?? null,
-                    'model_id'=>$formDataType->model_id ?? null,
-                    'data'=>$this->resolveData($formDataType->type->value) ?? null,
+                $this->form['formDataType'][] = [
+                    'id' => $formDataType->id ?? null,
+                    'type' => $formDataType->type ?? null,
+                    'model_id' => $formDataType->model_id ?? null,
+                    'data' => $this->resolveData($formDataType->type->value) ?? null,
 
-                ] ;
+                ];
             }
-        }else{
+        } else {
             $this->form['formDataType'][] = [[]];
         }
     }
@@ -98,6 +100,7 @@ class FormDataTypeLivewire extends Component
         "form.order" => ['nullable'],
         "form.map_pass_group_id" => ['nullable', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.map_group_id" => ['required', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
+        "form.map_group_user_id" => ['nullable', 'integer', 'exists:map_pass_groups,id,deleted_at,NULL'],
         "form.need_from" => ['required'],
         'form.show_to_consultancy' => ['required_if:form.need_from,==,office'],
         "form.formDataType" => ['required', 'array'],
@@ -117,6 +120,9 @@ class FormDataTypeLivewire extends Component
         $validatedData = $this->validate();
         DB::transaction(function () use ($validatedData) {
             if (!empty($this->existingForm)) {
+                if ($validatedData['form']['map_group_user_id'] === '') {
+                    $validatedData['form']['map_group_user_id'] = null;
+                }
                 $this->existingForm->update($validatedData['form']);
                 $form = $this->existingForm;
                 foreach ($this->form['formDataType'] as $formDataType) {
@@ -138,6 +144,7 @@ class FormDataTypeLivewire extends Component
         toast('सफलतापूर्वक थपियो', 'success');
         return redirect()->route('emap.admin.form.index');
     }
+
 
     public function render()
     {

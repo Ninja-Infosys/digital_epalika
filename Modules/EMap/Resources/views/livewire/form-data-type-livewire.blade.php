@@ -32,6 +32,18 @@
         </div>
 
         <div class="col-md-3 mb-2">
+            <label for="map_group_user_id" class="form-label">जाँच गर्ने समूह</label>
+            <select id="map_group_user_id" name="map_group_user_id" wire:model="form.map_group_user_id" class="form-select">
+                <option value="">-- छान्नुहोस् --</option>
+                @foreach($mapPassGroups as $mapPassGroup)
+                    <option value="{{$mapPassGroup->id}}" {{old('map_pass_group_id') == $mapPassGroup->id ? 'selected' : ''}}>{{$mapPassGroup->title}}</option>
+                @endforeach
+            </select>
+            @error('form.map_group_user_id')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-md-3 mb-2">
             <label for="map_group_id" class="form-label">स्वीकृति दिने समूह</label>
             <select id="map_group_id" name="map_group_id" wire:model="form.map_group_id" class="form-select">
                 <option value="">-- छान्नुहोस् --</option>
