@@ -93,7 +93,7 @@
                                         <select name="ward[]" id="ward" class="form-select"
                                             @if (!empty(auth()->user()->ward_no)) disabled @endif multiple>
                                             <option value="">---वडा छान्नुहोस्---</option>
-                                            @foreach (officeSetting()?->localbody?->ward_no as $ward)
+                                            @foreach (officeSetting()?->localbody?->ward_no ??[] as $ward)
                                                 <option value="{{ $ward }}"
                                                     {{ in_array($ward, old('ward', !empty(auth()->user()->ward_no) ? [auth()->user()->ward_no] : [])) ? 'selected' : '' }}>
                                                     {{ $ward }}</option>
