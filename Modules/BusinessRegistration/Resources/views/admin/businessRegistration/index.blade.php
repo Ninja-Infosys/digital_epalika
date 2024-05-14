@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.businessRegistration.businessRegistration.index') }}">व्यवसाय
+                            <a href="{{ route('admin.businessRegistration.registration.businessRegistration.index') }}">व्यवसाय
                                 दर्ता </a>
                         </li>
                         <li class="breadcrumb-item active">व्यवसाय दर्ता</li>

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,6 @@ class CommitteeName extends Model
     ];
 
     protected $fillable = [
-        'organization_registration_id',
         'name',
         'name_en',
         'citizenship_no',
@@ -107,8 +107,8 @@ class CommitteeName extends Model
         return $this->belongsTo(LocalBody::class);
     }
 
-    public function organizationRegistration(): BelongsTo
+    public function businessAble(): MorphTo
     {
-        return $this->belongsTo(OrganizationRegistration::class);
+        return $this->morphTo();
     }
 }

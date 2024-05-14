@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessNatureController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationReportController;
@@ -24,24 +25,32 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus', [BusinessRegistrationTemplateController::class, 'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
     Route::resource('{templateTypeEnum}/businessRegistrationTemplate', BusinessRegistrationTemplateController::class)->names('businessRegistrationTemplate');
 });
+Route::prefix('registration')->as('registration.')->group(function () {
+    Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
+    Route::resource('organizationRegistration', OrganizationRegistrationController::class)->names('organizationRegistration');
+    Route::resource('industry', IndustryController::class)->names('industry');
+
+});
+
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
 Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
 Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('businessRegistration.store.custom');
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
 Route::get('businessDetail/{businessDetail}/print', [BusinessRegistrationController::class, 'print'])->name('businessRegistration.print');
 
-Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
 Route::resource('businessDetail.businessRenew', BusinessRenewController::class)->names('businessRegistration.businessRenew');
 Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {
     Route::get('dateWise', 'dateWise')->name('dateWise');
     Route::get('businessNature', 'businessNature')->name('businessNature');
 });
 
-Route::resource('organizationRegistration', OrganizationRegistrationController::class)->names('organizationRegistration');
 Route::post('organizationRegistration/{organizationRegistration}/customData', [OrganizationRegistrationController::class, 'customData'])->name('store.custom');
 Route::get('organizationRegistration/{organizationRegistration}/printDetail', [OrganizationRegistrationController::class, 'printDetail'])->name('organizationRegistration.printDetail');
 Route::resource('organizationRegistration.organizationRenew', OrganizationRenewController::class)->names('organizationRegistration.organizationRenew');
 
+Route::post('industry/{industry}/customData', [IndustryController::class, 'customData'])->name('store.customData');
+Route::get('industry/{industry}/printDetail', [IndustryController::class, 'printDetail'])->name('industry.printDetail');
+//Route::resource('organizationRegistration.organizationRenew', OrganizationRenewController::class)->names('organizationRegistration.organizationRenew');
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
