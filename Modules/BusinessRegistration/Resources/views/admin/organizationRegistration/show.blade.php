@@ -159,15 +159,32 @@
                                         <div class="col-md-4">
                                             <div class="card">
                                                 <div class="card-header d-flex justify-content-around">
-                                                    <p> दर्ता प्रमाणपत्र </p>
-                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$organizationRegistration->getRawOriginal('statue')])}}"
+                                                    <p>  संस्थाको प्रमाणित विधान  </p>
+                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$organizationRegistration->getRawOriginal('statute')])}}"
                                                        class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body">
                                                     <img
-                                                        src="{{$organizationRegistration->statue??''}}"
+                                                        src="{{$organizationRegistration->statute??''}}"
+                                                        alt=""
+                                                        style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-header d-flex justify-content-around">
+                                                    <p> अन्य </p>
+                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$organizationRegistration->getRawOriginal('other_file')])}}"
+                                                       class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <img
+                                                        src="{{$organizationRegistration->other_file??''}}"
                                                         alt=""
                                                         style="max-width: 100%;height: 200px;object-fit: contain;">
                                                 </div>
