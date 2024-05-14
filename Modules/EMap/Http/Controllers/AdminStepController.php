@@ -25,6 +25,7 @@ use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\Organization;
 use Modules\EMap\Entities\PaymentStore;
 use Modules\EMap\Entities\PaymentStoreStatus;
+use Modules\EMap\Enums\CheckerDocumentStatusEnum;
 use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FormTypeEnum;
 use Modules\EMap\Traits\TemplateTrait;
@@ -40,8 +41,10 @@ class AdminStepController extends Controller
         $mapApply->load('houseOwner');
 
         [$forms, $order] = $this->listForms($mapApply);
+        $mapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
 
-        return view('emap::admin.step.formList', compact('mapApply', 'forms', 'order'));
+
+        return view('emap::admin.step.formList', compact('mapApply', 'forms', 'order' ,'mapGroups'));
     }
 
     public function viewDetail(MapApply $mapApply, Form $form)
@@ -50,8 +53,8 @@ class AdminStepController extends Controller
         $mapApply->load('houseOwner');
         $form->load('formDataTypes.model', 'formDataTypes.appliedDocuments.appliedDocumentStatuses', 'formDataTypes.formStores.formStoreStatuses', 'group');
         $checkUser = $form->group->users->pluck('id')->contains(auth()->user()->id);
-        $MapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
-        $ward_no = $MapGroups ? explode(',', $MapGroups?->ward_no ?? '') : [];
+        $mapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
+        $ward_no = $mapGroups ? explode(',', $mapGroups?->ward_no ?? '') : [];
         $checkAuthorization = in_array($mapApply->landDetail?->ward_no, $ward_no);
 
         return view('emap::admin.step.formDetail', compact('mapApply', 'form', 'checkAuthorization'));
@@ -64,6 +67,61 @@ class AdminStepController extends Controller
         return view('emap::admin.step.formFill', compact('mapApply', 'form'));
     }
 
+    public function updateCheckerDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
+    {
+        $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;
+        $firstId = Form::orderBy('order')->first()?->id ?? null;
+        $this->getStatusValidation($request);
+        DB::transaction(function () use ($firstId, $request, $mapApply, $form, $formDataType, $appliedDocument, $lastStep) {
+            if ($lastStep == $form->order) {
+                $appliedDocumentStatus = AppliedDocument::where('id', '!=', $appliedDocument->id)
+                    ->where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $formStoreStatus = FormStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+                $paymentStoreStatus = PaymentStore::where('map_apply_id', $mapApply->id)
+                    ->where('form_id', $form->id)
+                    ->pluck('status');
+
+                $this->paymentStoreUpdate($formStoreStatus, $paymentStoreStatus, $request, $appliedDocumentStatus, $mapApply);
+            }
+
+            if ($request->input('status') == CheckerDocumentStatusEnum::SENT_TO_APPROVER->value) {
+                if ($appliedDocument->status != CheckerDocumentStatusEnum::SENT_TO_APPROVER) {
+                    $appliedDocument->update([
+                        'status' => $request->input('status'),
+                    ]);
+                    AppliedDocumentStatus::where('applied_document_id', $appliedDocument->id)
+                        ->orderBy('id', 'desc')
+                        ->first()?->update([
+                            'status' => $request->input('status'),
+                        ]);
+                    toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+                }
+            } else {
+                $appliedDocument->update([
+                    'status' => $request->input('status'),
+                ]);
+                $appliedDocumentStatusData = $appliedDocument->appliedDocumentStatuses()->create([
+                    'applied_document_id' => $appliedDocument->id,
+                    'status' => $request->input('status'),
+                    'comment' => $request->input('comment'),
+                ]);
+                foreach ($appliedDocument->appliedMapFiles as $existingFile) {
+                    $appliedDocumentStatusData->appliedMapFiles()->create([
+                        'map_apply_id' => $mapApply->id,
+                        'document' => $existingFile->document,
+                    ]);
+                }
+                toast('स्थिति सफलतापूर्वक परिवर्तन गरियो', 'success');
+            }
+            Notification::send($mapApply->organization, new StepNotification($mapApply, $form, $formDataType, $appliedDocument));
+        });
+
+        return back();
+    }
     public function updateAppliedDocumentStatus(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, AppliedDocument $appliedDocument)
     {
         $lastStep = Form::orderBy('order', 'desc')->first()?->order ?? null;

@@ -119,10 +119,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#tab-approval" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                जाँच गर्नुपर्ने ({{ $forms->whereNotNull('map_group_user_id')?->count() }})
+                            <a href="#tab-checker" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                जाँच गर्नुपर्ने (
+                                {{
+                                    $forms->whereNotNull('map_group_user_id')->where('map_group_user_id',auth()->user()->id)?->count()
+
+                                }})
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="#tab-approval" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                 स्वीकृत गर्नुपर्ने ({{ $forms->where('form_approve', true)?->count() }})
@@ -138,8 +143,8 @@
                             <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms->where('form_edit', true)->where('need_from', \Modules\EMap\Enums\EMapFormFillerTypeEnum::OFFICE)" :order="$order" />
                         </div>
 
-                        <div class="tab-pane" id="tab-approval">
-                            <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms->whereNotNull('map_group_user_id')" :order="$order" />
+                        <div class="tab-pane" id="tab-checker">
+                            <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms->whereNotNull('map_group_user_id')->where('map_group_user_id',auth()->user()->id)" :order="$order" />
                         </div>
                         <div class="tab-pane" id="tab-approval">
                             <x-admin.form-steps-component :map-apply="$mapApply" :forms="$forms->where('form_approve', true)" :order="$order" />

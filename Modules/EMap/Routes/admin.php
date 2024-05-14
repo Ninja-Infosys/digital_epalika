@@ -33,6 +33,7 @@ Route::resource('organization', OrganizationController::class);
 
 //update status from admin
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AdminStepController::class, 'updateAppliedDocumentStatus'])->name('mapApply.admin-step.updateAppliedDocumentStatus');
+Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}/updateCheckerDocumentStatus', [AdminStepController::class, 'updateCheckerDocumentStatus'])->name('mapApply.admin-step.updateCheckerDocumentStatus');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/appliedDocument/{appliedDocument}/uploadApprovedDocument', [AdminStepController::class, 'uploadApprovedDocument'])->name('mapApply.admin-step.uploadApprovedDocument');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStore/{formStore}/updateFormStoreStatus', [AdminStepController::class, 'updateFormStoreStatus'])->name('mapApply.admin-step.updateFormStoreStatus');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStore/{formStore}/uploadFormStoreApprovedDocument', [AdminStepController::class, 'uploadFormStoreApprovedDocument'])->name('mapApply.admin-step.uploadFormStoreApprovedDocument');
