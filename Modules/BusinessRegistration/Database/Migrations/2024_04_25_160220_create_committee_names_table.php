@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('committee_names', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organization_registration_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->nullableMorphs('businessable');
             $table->string('name')->comment('नाम');
             $table->string('name_en')->comment('नाम अंग्रेजीमा');
             $table->string('citizenship_no')->comment('नागरिकता नम्बर');

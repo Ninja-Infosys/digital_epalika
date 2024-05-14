@@ -75,10 +75,9 @@ class OrganizationRegistration extends Model
         return false;
     }
 
-
-    public function committeeNames(): HasMany
+    public function committeeNames(): MorphMany
     {
-        return $this->hasMany(CommitteeName::class)->orderBy('position');
+        return $this->morphMany(CommitteeName::class, 'businessable');
     }
 
     public function fiscalYear(): BelongsTo

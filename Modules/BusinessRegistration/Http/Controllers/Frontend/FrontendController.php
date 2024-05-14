@@ -4,6 +4,7 @@ namespace Modules\BusinessRegistration\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
+use Modules\BusinessRegistration\Entities\Industry;
 use Modules\BusinessRegistration\Entities\OrganizationRegistration;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
@@ -16,6 +17,11 @@ class FrontendController extends Controller
     public function organizationRegistration()
     {
         return view('businessregistration::frontend.register.register');
+    }
+
+    public function industryRegistration()
+    {
+        return view('businessregistration::frontend.industry.index');
     }
 
     public function printDetail(BusinessDetail $businessDetail)
@@ -36,6 +42,16 @@ class FrontendController extends Controller
             }]
         );
         return view('businessregistration::frontend.register.print', compact('organizationRegistration'));
+    }
+
+    public function printIndustry(Industry $industry)
+    {
+        $industry->load(
+            ['committeeNames' => function ($query) {
+                $query->with('issueDistrict', 'district', 'localBody', 'province');
+            }]
+        );
+        return view('businessregistration::frontend.industry.print', compact('industry'));
     }
 
     public function printPdf(ProprietorDetail $proprietorDetail)

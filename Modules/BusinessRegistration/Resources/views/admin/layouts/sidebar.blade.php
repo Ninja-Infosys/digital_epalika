@@ -4,28 +4,64 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('businessRegistration_access')
-    <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
-        <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
-            <i class="fa fa-clipboard"></i>
-            <span> व्यवसाय दर्ता / नविकरण</span>
-        </a>
-    </li>
-@endcan
-
-<li class="{{request()->is('admin/businessRegistration/organizationRegistration') ? 'active' : ''}}">
-    <a href="{{route('admin.businessRegistration.organizationRegistration.index')}}">
-        <i class="fa fa-clipboard"></i>
-        <span> संस्था दर्ता / नविकरण</span>
+<li class="{{request()->is('admin/businessRegistration/registration*') ? 'active' : ''}}">
+    <a href="#sidebarBusinessRegistration"
+       {{request()->is('admin/businessRegistration/registration*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-clipboard-list"></i>
+        <span>दर्ता/नविकरण</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/businessRegistration/registration*') ? 'show' : ''}}"
+         id="sidebarBusinessRegistration">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/businessRegistration/registration/organizationRegistration') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.registration.businessRegistration.index')}}">
+                    <span>व्यवसाय दर्ता / नविकरण</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/registration/organizationRegistration') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.registration.organizationRegistration.index')}}">
+                    <span>संस्था दर्ता / नविकरण</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/registration/organizationRegistration') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.registration.industry.index')}}">
+                    <span>उधोग दर्ता / नविकरण</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
+{{--@can('businessRegistration_access')--}}
+{{--    <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">--}}
+{{--        <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">--}}
+{{--            <i class="fa fa-clipboard"></i>--}}
+{{--            <span> व्यवसाय दर्ता / नविकरण</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
+
+{{--<li class="{{request()->is('admin/businessRegistration/organizationRegistration') ? 'active' : ''}}">--}}
+{{--    <a href="{{route('admin.businessRegistration.organizationRegistration.index')}}">--}}
+{{--        <i class="fa fa-clipboard"></i>--}}
+{{--        <span> संस्था दर्ता / नविकरण</span>--}}
+{{--    </a>--}}
+{{--</li>--}}
 <li class="{{request()->is('admin/businessRegistration/organizationReport') ? 'active' : ''}}">
     <a href="{{route('admin.businessRegistration.organizationReport.index')}}">
         <i class="fa fa-clipboard"></i>
         <span> संस्था दर्ता रिपोर्ट</span>
     </a>
 </li>
-
+{{--<li class="{{request()->is('admin/businessRegistration/industry') ? 'active' : ''}}">--}}
+{{--    <a href="{{route('admin.businessRegistration.industry.index')}}">--}}
+{{--        <i class="fa fa-clipboard"></i>--}}
+{{--        <span> उधोग दर्ता / नविकरण</span>--}}
+{{--    </a>--}}
+{{--</li>--}}
 
 <li class="{{request()->is('admin/businessRegistration/report*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationReport"

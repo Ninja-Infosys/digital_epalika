@@ -5,7 +5,7 @@
                 <li class="nav-item">
                     <a class="nav-link rounded-0 pt-2 pb-2 {{ $currentStep === 1 ? 'active' : '' }}">
                         <i class="fa fa-building me-1"></i>
-                        <span class="d-none d-sm-inline fs-5 fw-bold">संस्था दर्ता</span>
+                        <span class="d-none d-sm-inline fs-5 fw-bold">उधोग दर्ता</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -42,45 +42,6 @@
                                 <input class="form-control @error('form.application_date') is-invalid @enderror" type="text"
                                        id="application_date" wire:model="form.application_date" placeholder="आवेदन मिति बि. सं.">
                                 @error('form.application_date')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-1">
-                            <label for="application_date_en" class="form-label"> आवेदन मिति ई. सं. <span
-                                    class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input class="form-control @error('form.application_date_en') is-invalid @enderror"
-                                       type="text" id="application_date_en" wire:model="form.application_date_en"
-                                       placeholder="आवेदन मिति ई. सं.">
-                                @error('form.application_date_en')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend class="title text-primary fs-4 fw-bolder"> आवश्यक कागजातहरु</legend>
-                    <div class="row">
-                        <div class="col-md-4 mb-1">
-                            <label for="ward_recommendation" class="form-label"> वार्ड सिफारिस <span
-                                    class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input class="form-control @error('form.ward_recommendation') is-invalid @enderror"
-                                       type="file" id="ward_recommendation" wire:model="form.ward_recommendation">
-                                @error('form.ward_recommendation')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-1">
-                            <label for="statute" class="form-label"> संस्थाको प्रमाणित विधान <span
-                                    class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input class="form-control @error('form.statute') is-invalid @enderror"
-                                       type="file" id="statute" wire:model="form.statute">
-                                @error('form.statute')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -479,10 +440,10 @@
 
             @default
                 <fieldset>
-                    <legend class="title text-primary fs-4 fw-bolder">संस्था विवरण</legend>
+                    <legend class="title text-primary fs-4 fw-bolder">उधोग विवरण</legend>
                     <div class="row">
                         <div class="col-md-12 mb-2 pr-0">
-                            <label for="name" class="form-label">संस्थाको नाम <span class="text-danger">*</span></label>
+                            <label for="name" class="form-label">उधोगको नाम <span class="text-danger">*</span></label>
                             <div class="row input-group">
                                 <div class="col-md-6 pr-0">
                                     <input class="form-control @error('form.name') is-invalid @enderror" type="text"
@@ -544,12 +505,123 @@
                             </div>
 
                             <div class="col-md-4 mb-2">
-                                <label for="financial_source" class="form-label">आर्थिक स्रोत</label>
+                                <label for="investment" class="form-label">कूल पूँजी </label>
                                 <div class="input-group">
-                                    <input class="form-control @error('form.financial_source') is-invalid @enderror"
-                                           type="text" step="any" id="financial_source"
-                                           wire:model="form.financial_source" placeholder="आर्थिक स्रोत">
-                                    @error('form.financial_source')
+                                    <input class="form-control @error('form.investment') is-invalid @enderror"
+                                           type="text" step="any" id="investment"
+                                           wire:model="form.investment" placeholder="कूल पूँजी">
+                                    @error('form.investment')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-2">
+                                <label for="fixed_capital" class="form-label">स्थिर पूँजी </label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.fixed_capital') is-invalid @enderror"
+                                           type="text" step="any" id="fixed_capital"
+                                           wire:model="form.fixed_capital" placeholder="स्थिर पूँजी">
+                                    @error('form.fixed_capital')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="working_capital" class="form-label">चालु पूँजी</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.working_capital') is-invalid @enderror"
+                                           type="text" step="any" id="working_capital"
+                                           wire:model="form.working_capital" placeholder="चालु पूँजी">
+                                    @error('form.working_capital')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="electricity" class="form-label">आवश्यक विधुत शक्ति</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.electricity') is-invalid @enderror"
+                                           type="text" step="any" id="electricity"
+                                           wire:model="form.electricity" placeholder="आवश्यक विधुत शक्ति">
+                                    @error('form.electricity')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="production_capacity" class="form-label">उत्पादन क्षमता</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.production_capacity') is-invalid @enderror"
+                                           type="text" step="any" id="production_capacity"
+                                           wire:model="form.production_capacity" placeholder="उत्पादन क्षमता">
+                                    @error('form.production_capacity')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="manpower" class="form-label">आवश्यक पर्ने जनशक्ति</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.manpower') is-invalid @enderror"
+                                           type="text" step="any" id="manpower"
+                                           wire:model="form.manpower" placeholder="आवश्यक पर्ने जनशक्ति">
+                                    @error('form.manpower')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="open_date" class="form-label">उधोग संचालन हुने सिफ़ट संख्या</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.open_date') is-invalid @enderror"
+                                           type="text" step="any" id="open_date"
+                                           wire:model="form.open_date" placeholder="उधोग संचालन हुने सिफ़ट संख्या">
+                                    @error('form.open_date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12 mb-2">
+                                <label for="start_date" class="form-label">उधोग संचालन, व्यावसायिक उत्पादन वा कारोवार सुरु गर्नेपर्ने अवधि</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.start_date') is-invalid @enderror"
+                                           type="text" step="any" id="start_date"
+                                           wire:model="form.start_date" placeholder="उधोग संचालन, व्यावसायिक उत्पादन वा कारोवार सुरु गर्नेपर्ने अवधि">
+                                    @error('form.start_date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="product" class="form-label">उधोगले उत्पादन गर्ने वस्तु वा सेवाको प्रकार</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.product') is-invalid @enderror"
+                                           type="text" step="any" id="product"
+                                           wire:model="form.product" placeholder="उधोगले उत्पादन गर्ने वस्तु वा सेवाको प्रकार">
+                                    @error('form.product')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="other" class="form-label">अन्य</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.other') is-invalid @enderror"
+                                           type="text" step="any" id="other"
+                                           wire:model="form.other" placeholder="अन्य">
+                                    @error('form.other')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
 

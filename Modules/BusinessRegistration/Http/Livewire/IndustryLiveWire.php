@@ -9,12 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\CommitteeName;
-use Modules\BusinessRegistration\Entities\OrganizationRegistration;
+use Modules\BusinessRegistration\Entities\Industry;
 use Modules\BusinessRegistration\Entities\Partner;
-use Modules\BusinessRegistration\Entities\RegisteredBusiness;
-use function officeSetting;
 
-class OrganizationLivewire extends Component
+class IndustryLiveWire extends Component
 {
     use WithFileUploads;
 
@@ -29,7 +27,7 @@ class OrganizationLivewire extends Component
 
     public $wards = [];
     public $committeeNames = [];
-    public OrganizationRegistration $organizationRegistration;
+    public Industry $industry;
 
     public array $form = [
         'name' => null,
@@ -38,14 +36,24 @@ class OrganizationLivewire extends Component
         'email' => null,
         'address' => null,
         'address_en' => null,
-        'financial_source' => null,
+        'investment' => null,
         'purpose' => null,
+        'working_capital' => null,
+        'fixed_capital' => null,
+        'electricity' => null,
+        'production_capacity' => null,
+        'manpower' => null,
+        'open_date' => null,
+        'working_days' => null,
+        'starting_date' => null,
+        'product' => null,
         'province_id' => null,
         'district_id' => null,
         'local_body_id' => null,
         'ward_no' => null,
         'way' => null,
         'tole' => null,
+        'others' => null,
         //third step
         'application_date' => null,
         'application_date_en' => null,
@@ -53,17 +61,17 @@ class OrganizationLivewire extends Component
         'statute' => null,
         //second step
         'committeeNames' => [],
-        'other_document' => []
+        'other_document' => [],
 
     ];
 
 
-    public function mount($organizationRegistration = null)
+    public function mount($industry = null)
     {
         $this->provinces = get_provinces();
-        if (!empty($organizationRegistration)) {
-            $this->organizationRegistration = $organizationRegistration;
-            $this->assignOrganizationRegistrationData();
+        if (!empty($industry)) {
+            $this->industry = $industry;
+            $this->assignIndustryData();
         } else {
             $this->committeeNameArrayIncrement();
             $this->form['province_id'] = officeSetting()->province_id;
@@ -72,13 +80,13 @@ class OrganizationLivewire extends Component
         }
     }
 
-    private function assignOrganizationRegistrationData()
+    private function assignIndustryData()
     {
         foreach (\Arr::except($this->form, ['photo', 'committeeNames','files', 'ward_recommendation','statute']) as $key => $data) {
-            $this->form[$key] = $this->organizationRegistration[$key];
+            $this->form[$key] = $this->industry[$key];
         }
 
-        foreach ($this->organizationRegistration->committeeNames as $committeeName) {
+        foreach ($this->industry->committeeNames as $committeeName) {
             $this->form['committeeNames'][] = [
                 'id' => $committeeName->id ?? null,
                 'name' => $committeeName->name ?? null,
@@ -139,7 +147,16 @@ class OrganizationLivewire extends Component
             'form.email' => ['required'],
             'form.address' => ['required'],
             'form.address_en' => ['required'],
-            'form.financial_source' => ['nullable'],
+            'form.working_capital' => ['nullable'],
+            'form.investment' => ['nullable'],
+            'form.fixed_capital' => ['nullable'],
+            'form.electricity' => ['nullable'],
+            'form.production_capacity' => ['nullable'],
+            'form.manpower' => ['nullable'],
+            'form.open_date' => ['nullable'],
+            'form.working_days' => ['nullable'],
+            'form.starting_date' => ['nullable'],
+            'form.product' => ['nullable'],
             'form.purpose' => ['required'],
             'form.province_id' => ['required', 'exists:provinces,id'],
             'form.district_id' => ['required', 'exists:districts,id'],
@@ -152,7 +169,7 @@ class OrganizationLivewire extends Component
 
     protected function secondStepValidations(): array
     {
-        return !empty($this->organizationRegistration)
+        return !empty($this->industry)
             ? array_merge($this->secondStepValidations, [
                 'form.committeeNames.*.photo' => ['required'],
                 'form.committeeNames.*.citizenship_front' => ['required'],
@@ -165,26 +182,20 @@ class OrganizationLivewire extends Component
             ]);
     }
 
-    protected array $thirdStepValidations = [
-        'form.application_date' => ['required'],
-        'form.application_date_en' => ['required'],
-        'form.other_document' => ['nullable', 'array'],
-
-
-    ];
+//    protected array $thirdStepValidations = [
+//        'form.application_date' => ['required'],
+//        'form.other_document' => ['nullable', 'array'],
+//    ];
 
     protected function thirdStepValidations(): array
     {
-        return !empty($this->organizationRegistration)
-            ? array_merge($this->thirdStepValidations, [
-                'form.ward_recommendation' => ['nullable'],
-                'form.statute' => ['nullable'],
-            ])
-            : array_merge($this->thirdStepValidations, [
-                'form.ward_recommendation' => ['required'],
-                'form.statute' => ['nullable'],
-            ]);
+        return [
+            'form.application_date' => ['required'],
+            'form.other_document' => ['nullable', 'array'],
+        ];
     }
+
+
 
     public function rules(): array
     {
@@ -217,24 +228,24 @@ class OrganizationLivewire extends Component
     {
         $this->validate();
 
-        if (!empty($this->organizationRegistration)) {
+        if (!empty($this->industry)) {
             DB::transaction(function () {
-                $this->organizationRegistration->update($this->form);
-                $this->saveOrganizationRegistrationsData($this->organizationRegistration);
+                $this->industry->update($this->form);
+                $this->saveIndustryData($this->industry);
             });
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',
-                'title' => 'तपाइको संस्था सफलता पुर्बक अध्याबधिक भयो'
+                'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो'
             ]);
-            return redirect(route('admin.businessRegistration.organizationRegistration.index'));
+            return redirect(route('admin.businessRegistration.industry.index'));
         }
 
-        $organizationRegistration = DB::transaction(function () {
-            $organizationRegistration = OrganizationRegistration::create($this->form + [
+        $industry = DB::transaction(function () {
+            $industry = Industry::create($this->form + [
                     'submission_no' => time(),
                 ]);
-            $this->saveOrganizationRegistrationsData($organizationRegistration);
-            return $organizationRegistration;
+            $this->saveIndustryData($industry);
+            return $industry;
         });
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
@@ -242,18 +253,18 @@ class OrganizationLivewire extends Component
             'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
         ]);
         $this->reset('form');
-        return redirect()->route('businessRegistration.print', $organizationRegistration->id);
+        return redirect()->route('businessRegistration.printIndustry', $industry->id);
     }
 
-    private function saveOrganizationRegistrationsData($organizationRegistration): void
+    private function saveIndustryData($industry): void
     {
         foreach ($this->form['committeeNames'] as $committeeName) {
             $committee = new CommitteeName($committeeName);
-            $organizationRegistration->committeeNames()->save($committee);
+            $industry->committeeNames()->save($committee);
         }
 
         foreach ($this->form['other_document'] ?? [] as $document) {
-            $organizationRegistration->files()->create([
+            $industry->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
                 'file' => $document->store('otherDocument/', 'public')
@@ -293,7 +304,7 @@ class OrganizationLivewire extends Component
             $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
-        return view('businessregistration::livewire.organization-livewire');
+        return view('businessregistration::livewire.industry-live-wire');
     }
 
     private function calculateProgressPercentage(): void
@@ -312,6 +323,15 @@ class OrganizationLivewire extends Component
             'form.address.required' => ['ठेगाना आबश्यक छ '],
             'form.address_en.required' => ['ठेगाना अंग्रेजीमा आबश्यक छ '],
             'form.financial_source.required' => ['आर्थिक स्रोत आबश्यक छ '],
+            'form.working_capital.required' => ['चालु पूँजी आबश्यक छ '],
+            'form.investment.required' => ['कूल पूँजी आबश्यक छ '],
+            'form.fixed_capital.required' => ['स्थिर पूँजी आबश्यक छ '],
+            'form.electricity.required' => ['विधुत शक्ति आबश्यक छ '],
+            'form.production_capacity.required' => ['उत्पादन क्षमता आबश्यक छ '],
+            'form.manpower.required' => ['आबश्यक पर्ने जनशक्ति'],
+            'form.open_date.required' => ['उधोग संचालन हुने सिफ़ट संख्या'],
+            'form.start_date.required' => ['कारोवार सुरु गर्नेपर्ने अवधि आबश्यक छ '],
+            'form.product.required' => ['उत्पादन गर्ने वस्तु आबश्यक छ '],
             'form.purpose.required' => ['उधेश्य आबश्यक छ '],
             'form.province_id.required' => ['प्रदेश आबश्यक छ '],
             'form.district_id.required' => ['जिल्ला आबश्यक छ '],
@@ -319,7 +339,7 @@ class OrganizationLivewire extends Component
             'form.ward_no.required' => ['वार्ड न. आबस्यक छ'],
             'form.way.required' => ['मार्ग आबश्यक छ '],
             'form.tole.required' => ['टोल आबश्यक छ '],
-            'form.rent_agreement.required_if' => ['भाडा सम्झौता आबश्यक छ'],
+            'form.other.required' => ['अन्य आबश्यक छ '],
             'form.committeeNames.required' => ['पार्टनर आबश्यक छ'],
             'form.committeeNames.*.name.required' => ['नाम आबश्यक छ'],
             'form.committeeNames.*.name_en.required' => ['नाम अंग्रेजीमा आबश्यक छ'],
@@ -345,11 +365,8 @@ class OrganizationLivewire extends Component
             'form.committeeNames.*.way.required' => ['मार्ग आबश्यक छ'],
             'form.committeeNames.*.tole.required' => ['टोल आबश्यक छ'],
             'form.application_date.required' => ['आवेदन मिति बि सं आबश्यक छ'],
-            'form.application_date_en.required' => ['आवेदन मिति सं आबश्यक छ'],
-            'form.ward_recommendation.required' => [' वार्ड सिफारिस आबश्यक छ'],
-            'form.statute.required' => ['संस्थाको प्रमाणित विधान आवश्यक छ'],
             'form.other_document' => ['अन्य कागजात आबश्यक छ'],
-
         ];
     }
 }
+

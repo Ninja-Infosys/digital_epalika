@@ -18,8 +18,10 @@ use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
 
 Route::get('/business', [FrontendController::class, 'business'])->name('business');
 Route::get('/organizationRegistration', [FrontendController::class, 'organizationRegistration'])->name('organizationRegistration');
+Route::get('/industryRegistration', [FrontendController::class, 'industryRegistration'])->name('industryRegistration');
 Route::get('/businessDetail/{businessDetail}/detail/print', [FrontendController::class, 'printDetail'])->name('detail.print');
 Route::get('/organizationRegistration/{organizationRegistration}/print', [FrontendController::class, 'print'])->name('print');
+Route::get('/industry/{industry}/print', [FrontendController::class, 'printIndustry'])->name('printIndustry');
 //Route::get('/proprietorDetail/{proprietorDetail}/print',[FrontendController::class,'printPdf'])->name('print');
 Route::view('schedule', 'businessregistration::frontend.schedule.schedule_1')->name('schedule_1');
 Route::view('schedule_2', 'businessregistration::frontend.schedule.schedule_2')->name('schedule_2');
