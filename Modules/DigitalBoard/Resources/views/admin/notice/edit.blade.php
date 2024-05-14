@@ -99,7 +99,7 @@
                                             id="ward" {{ !empty(auth()->user()->ward_no) ? 'disabled' : '' }}
                                             multiple>
                                             <option value=""> वडा छान्नुहोस्</option>
-                                            @foreach (officeSetting()->localbody->ward_no as $ward)
+                                            @foreach (officeSetting()?->localbody?->ward_no ??[] as $ward)
                                                 <option value="{{ $ward }}"
                                                     {{ in_array($ward, old('ward', $notice->ward)) ? 'selected' : '' }}>
                                                     {{ $ward }}

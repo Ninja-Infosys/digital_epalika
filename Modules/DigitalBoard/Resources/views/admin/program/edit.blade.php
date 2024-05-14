@@ -74,7 +74,7 @@
                                         <select class="form-control @error('ward') is-invalid @enderror" name="ward[]"
                                             id="ward" {{ !empty(auth()->user()->ward_no) ? 'disabled' : '' }} multiple>
                                             <option value=""> वडा छान्नुहोस्</option>
-                                            @foreach (officeSetting()->localbody->ward_no as $ward)
+                                            @foreach (officeSetting()->localbody->ward_no ??[] as $ward)
                                                 <option value="{{ $ward }}"
                                                     {{ in_array($ward, old('ward', $program->ward)) ? 'selected' : '' }}>
                                                     {{ $ward }}
