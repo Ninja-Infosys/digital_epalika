@@ -48,7 +48,7 @@ class IndustryLiveWire extends Component
         'manpower' => null,
         'open_date' => null,
         'working_days' => null,
-        'starting_date' => null,
+        'start_date' => null,
         'product' => null,
         'province_id' => null,
         'district_id' => null,
@@ -56,7 +56,7 @@ class IndustryLiveWire extends Component
         'ward_no' => null,
         'way' => null,
         'tole' => null,
-        'others' => null,
+        'other' => null,
         //third step
         'application_date' => null,
         'application_date_en' => null,
@@ -159,7 +159,7 @@ class IndustryLiveWire extends Component
             'form.manpower' => ['nullable'],
             'form.open_date' => ['nullable'],
             'form.working_days' => ['nullable'],
-            'form.starting_date' => ['nullable'],
+            'form.start_date' => ['nullable'],
             'form.product' => ['nullable'],
             'form.purpose' => ['required'],
             'form.province_id' => ['required', 'exists:provinces,id'],
@@ -168,6 +168,7 @@ class IndustryLiveWire extends Component
             'form.ward_no' => ['required', 'integer'],
             'form.way' => ['nullable', 'string'],
             'form.tole' => ['required', 'string'],
+            'form.other' => ['required', 'string'],
             'form.industry_category_id' => ['required', 'exists:industry_categories,id'],
         ];
     }
@@ -242,7 +243,7 @@ class IndustryLiveWire extends Component
                 'type' => 'success',
                 'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो'
             ]);
-            return redirect(route('admin.businessRegistration.industry.index'));
+            return redirect(route('admin.businessRegistration.registration.industry.index'));
         }
 
         $industry = DB::transaction(function () {
