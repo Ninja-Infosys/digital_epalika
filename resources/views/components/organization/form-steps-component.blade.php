@@ -11,7 +11,7 @@
         </thead>
         <tbody>
         @foreach ($forms as $form)
-            <tr @if ($form->map_status==\Modules\EMap\Enums\DocumentStatusEnum::REJECTED) style="background-color:#d16969;" @endif>
+            <tr @if ($form->map_status==\Modules\EMap\Enums\DocumentStatusEnum::MODIFY) style="background-color:#d16969;" @endif>
                 <td>{{ get_nepali_number($loop->iteration) }}</td>
                 <td>{{ $form->title }}</td>
                 <td>
