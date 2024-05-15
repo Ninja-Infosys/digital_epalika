@@ -521,7 +521,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="investment" class="form-label">कूल पूँजी </label>
                                 <div class="input-group">
                                     <input class="form-control @error('form.investment') is-invalid @enderror"
@@ -534,7 +534,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="fixed_capital" class="form-label">स्थिर पूँजी </label>
                                 <div class="input-group">
                                     <input class="form-control @error('form.fixed_capital') is-invalid @enderror"
@@ -546,7 +546,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="working_capital" class="form-label">चालु पूँजी</label>
                                 <div class="input-group">
                                     <input class="form-control @error('form.working_capital') is-invalid @enderror"
@@ -607,7 +607,6 @@
                                 </div>
                             </div>
 
-
                             <div class="col-md-12 mb-2">
                                 <label for="start_date" class="form-label">उधोग संचालन, व्यावसायिक उत्पादन वा कारोवार सुरु गर्नेपर्ने अवधि</label>
                                 <div class="input-group">
@@ -639,6 +638,18 @@
                                            type="text" step="any" id="other"
                                            wire:model="form.other" placeholder="अन्य">
                                     @error('form.other')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="working_days" class="form-label">उधोग संचालन दिन (प्रति वर्ष)</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('form.working_days') is-invalid @enderror"
+                                           type="text" step="any" id="working_days"
+                                           wire:model="form.working_days" placeholder="उधोग संचालन दिन (प्रति वर्ष)">
+                                    @error('form.working_days')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
 

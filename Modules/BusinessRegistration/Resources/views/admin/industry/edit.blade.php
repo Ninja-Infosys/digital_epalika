@@ -7,15 +7,15 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                               <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
-                            गृहपृष्ठ
+                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                                गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item active"> व्यवसाय
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title"> व्यवसाय
+                <h4 class="page-title"> उधोग
                 </h4>
             </div>
         </div>
@@ -25,14 +25,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> व्यवसाय सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.businessRegistration.registration.businessRegistration.index',$businessDetail)}}"
+                        <h4 class="header-title"> उधोग सम्पादन गर्नुहोस्</h4>
+                        <a href="{{route('admin.businessRegistration.registration.industry.index',$industry)}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> व्यवसाय सूची
+                            <i class="fa fa-list"></i> उधोग सूची
                         </a>
                     </div>
                 </div>
-                @livewire('businessregistration::registration-form',['businessDetail'=>$businessDetail])
+                @livewire('businessregistration::industry-live-wire',['industry'=>$industry])
             </div>
         </div>
     </div>
