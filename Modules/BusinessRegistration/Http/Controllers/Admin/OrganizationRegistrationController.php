@@ -152,7 +152,8 @@ class OrganizationRegistrationController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }, 'province', 'district', 'localBody']
         );
+        $todayDateInBS = $this->get_today_nepali_date();
 
-        return view('businessregistration::admin.organizationRegistration.printDetail', compact('organizationRegistration', 'officeHeaders'));
+        return view('businessregistration::admin.organizationRegistration.printDetail', compact('organizationRegistration', 'officeHeaders','todayDateInBS'));
     }
 }

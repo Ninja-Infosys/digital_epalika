@@ -31,7 +31,8 @@ class Form extends Model
         "map_pass_group_id",
         "need_from",
         "show_to_consultancy",
-        "map_group_id"
+        "map_group_id",
+        "map_group_user_id"
     ];
 
     protected $casts = [
@@ -39,6 +40,7 @@ class Form extends Model
         "order" => 'integer',
         "status" => 'bool',
         "map_pass_group_id" => 'integer',
+        "map_group_user_id" => 'integer',
         "dynamic_form_id" => 'integer',
     ];
 
