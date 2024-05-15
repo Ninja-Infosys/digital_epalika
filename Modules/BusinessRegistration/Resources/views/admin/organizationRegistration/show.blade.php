@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.organizationRegistration.index')}}">संस्था
+                            <a href="{{route('admin.businessRegistration.registration.organizationRegistration.index')}}">संस्था
                                 दर्ता </a>
                         </li>
                         <li class="breadcrumb-item active">संस्थाको विवरण</li>

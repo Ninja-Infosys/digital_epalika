@@ -504,6 +504,23 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6 mb-2">
+                                <label for="form.industry_category_id" class="form-label">उधोगको वर्ग<span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select @error('form.industry_category_id') is-invalid @enderror"
+                                        id="form.industry_category_id" wire:model="form.industry_category_id">
+                                    <option value="">---छान्नुहोस् ----</option>
+                                    @foreach ($industryCategories as $industryCategory)
+                                        <option value="{{ $industryCategory->id ?? '' }}">
+                                            {{ $industryCategory->title ?? '' }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('form.industry_category_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="col-md-4 mb-2">
                                 <label for="investment" class="form-label">कूल पूँजी </label>
                                 <div class="input-group">

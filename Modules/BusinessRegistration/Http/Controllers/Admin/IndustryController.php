@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\Industry;
+use Modules\BusinessRegistration\Entities\IndustryCategory;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
@@ -24,7 +25,7 @@ class IndustryController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $Industries = Industry::with('committeeNames', 'committeeNames.localBody', 'localBody')->where(function (Builder $q) {
+        $industries = Industry::with('committeeNames', 'committeeNames.localBody', 'localBody')->where(function (Builder $q) {
             if (! is_null(request('search'))) {
                 $q->whereLike(['name', 'submission_no', 'registration_no'], request('search'));
             }
@@ -40,7 +41,9 @@ class IndustryController extends Controller
         })->latest()
             ->paginate(15);
 
-        return view('businessregistration::admin.industry.index', compact('Industries'));
+        $industryCategories = IndustryCategory::all();
+
+        return view('businessregistration::admin.industry.index', compact('industries', 'industryCategories'));
     }
 
     public function show(Industry $industry)
@@ -49,6 +52,7 @@ class IndustryController extends Controller
             'committeeNames.issueDistrict',
             'committeeNames.district',
             'committeeNames.localBody',
+            'industryCategory'
         );
 
         return view('businessregistration::admin.industry.show', compact('industry'));
@@ -144,15 +148,15 @@ class IndustryController extends Controller
         return view('businessregistration::admin.industry.customs.index', compact('industry', 'templateTypeEnum'));
     }
 
-    public function printDetail(Industry $industry)
+    public function printData(Industry $industry)
     {
         $officeHeaders = OfficeHeader::get();
         $industry->load(
             ['committeeNames' => function ($query) {
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
-            }, 'province', 'district', 'localBody']
+            }, 'industryCategory','province', 'district', 'localBody']
         );
 
-        return view('businessregistration::admin.industry.printDetail', compact('industry', 'officeHeaders'));
+        return view('businessregistration::admin.industry.printData', compact('industry', 'officeHeaders'));
     }
 }

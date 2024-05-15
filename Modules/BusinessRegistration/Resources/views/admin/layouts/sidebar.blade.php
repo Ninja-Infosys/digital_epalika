@@ -136,7 +136,11 @@
                     </a>
                 </li>
             @endcan
-
+                <li class="{{request()->is('admin/businessRegistration/setting/industryCategory/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.businessRegistration.setting.industryCategory.index')}}">
+                        <span>उधोग वर्ग</span>
+                    </a>
+                </li>
             @can('objectTransaction_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/objectTransaction/*') ? 'active' : ''}}">
                     <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">

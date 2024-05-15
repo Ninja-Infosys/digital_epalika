@@ -56,7 +56,7 @@
                             </tr>
                             </thead>
                             <tbody class="text-nowrap text-center">
-                            @forelse($Industries as $Industry)
+                            @forelse($industries as $Industry)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $Industry->registration_no ?? '' }}</td>
@@ -97,7 +97,7 @@
 
                                         @if (!is_null($Industry->registration_no))
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.industry.printDetail', $Industry) }}"
+                                               href="{{ route('admin.businessRegistration.industry.printData', $Industry) }}"
                                                title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-print"></i>
                                             </a>
