@@ -64,7 +64,8 @@ class Industry extends Model
        'taxpayer_number',
        'amount',
        'other',
-       'other_file'
+       'other_file',
+       'industry_category_id'
    ];
 
     protected $appends = [
@@ -113,6 +114,10 @@ class Industry extends Model
     public function committeeNames(): MorphMany
     {
         return $this->morphMany(CommitteeName::class, 'businessable');
+    }
+    public function industryCategory(): BelongsTo
+    {
+        return $this->belongsTo(IndustryCategory::class);
     }
 
 }

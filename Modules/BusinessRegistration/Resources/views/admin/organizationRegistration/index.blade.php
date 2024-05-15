@@ -69,7 +69,7 @@
                                     <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.organizationRegistration.edit', $organizationRegistration) }}"
+                                               href="{{ route('admin.businessRegistration.registration.organizationRegistration.edit', $organizationRegistration) }}"
                                                class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                title="पुरा विवरण हेर्नुहोस">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -81,7 +81,7 @@
 
 
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.organizationRegistration.show', $organizationRegistration) }}"
+                                               href="{{ route('admin.businessRegistration.registration.organizationRegistration.show', $organizationRegistration) }}"
                                                class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                title="पुरा विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>

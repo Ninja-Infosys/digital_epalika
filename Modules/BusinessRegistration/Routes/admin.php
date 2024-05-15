@@ -12,6 +12,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
+use Modules\BusinessRegistration\Http\Controllers\IndustryCategoryController;
 use Modules\BusinessRegistration\Http\Controllers\OrganizationRenewController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -19,6 +20,7 @@ Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('da
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('businessNature', BusinessNatureController::class);
+    Route::resource('industryCategory', IndustryCategoryController::class);
     Route::resource('objectTransaction', ObjectTransactionController::class);
     Route::post('businessRegistrationTemplate/staticTemplate', [BusinessRegistrationTemplateController::class, 'getStaticTemplate'])->name('get-static-template');
     Route::get('businessRegistrationTemplate/EnumList', [BusinessRegistrationTemplateController::class, 'enumList'])->name('businessRegistrationTemplate.enumList');
@@ -49,7 +51,7 @@ Route::get('organizationRegistration/{organizationRegistration}/printDetail', [O
 Route::resource('organizationRegistration.organizationRenew', OrganizationRenewController::class)->names('organizationRegistration.organizationRenew');
 
 Route::post('industry/{industry}/customData', [IndustryController::class, 'customData'])->name('store.customData');
-Route::get('industry/{industry}/printDetail', [IndustryController::class, 'printDetail'])->name('industry.printDetail');
+Route::get('industry/{industry}/printData', [IndustryController::class, 'printData'])->name('industry.printData');
 //Route::resource('organizationRegistration.organizationRenew', OrganizationRenewController::class)->names('organizationRegistration.organizationRenew');
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {

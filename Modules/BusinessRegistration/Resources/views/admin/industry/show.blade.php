@@ -69,7 +69,10 @@
                                                         <th> ठेगाना अंग्रेजी</th>
                                                         <td>{{$industry->address_en??''}}</td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <th> उधोगको वर्ग </th>
+                                                        <td>{{$industry->industryCategory->title??''}}</td>
+                                                    </tr>
                                                     <tr>
                                                         <th> उदेश्य</th>
                                                         <td>{{$industry->purpose ??''}}</td>

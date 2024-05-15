@@ -10,6 +10,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\CommitteeName;
 use Modules\BusinessRegistration\Entities\Industry;
+use Modules\BusinessRegistration\Entities\IndustryCategory;
 use Modules\BusinessRegistration\Entities\Partner;
 
 class IndustryLiveWire extends Component
@@ -27,6 +28,7 @@ class IndustryLiveWire extends Component
 
     public $wards = [];
     public $committeeNames = [];
+    public $industryCategories = [];
     public Industry $industry;
 
     public array $form = [
@@ -35,6 +37,7 @@ class IndustryLiveWire extends Component
         'phone' => null,
         'email' => null,
         'address' => null,
+        'industry_category_id' => null,
         'address_en' => null,
         'investment' => null,
         'purpose' => null,
@@ -69,6 +72,7 @@ class IndustryLiveWire extends Component
     public function mount($industry = null)
     {
         $this->provinces = get_provinces();
+        $this->industryCategories = IndustryCategory::all();
         if (!empty($industry)) {
             $this->industry = $industry;
             $this->assignIndustryData();
@@ -164,6 +168,7 @@ class IndustryLiveWire extends Component
             'form.ward_no' => ['required', 'integer'],
             'form.way' => ['nullable', 'string'],
             'form.tole' => ['required', 'string'],
+            'form.industry_category_id' => ['required', 'exists:industry_categories,id'],
         ];
     }
 
@@ -319,6 +324,7 @@ class IndustryLiveWire extends Component
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['नाम अंग्रेजीमा आवश्यक छ'],
             'form.phone.required' => ['फोन आबश्यक छ'],
+            'form.industry_category_id.required' => ['उधोगको वर्ग आबश्यक छ'],
             'form.email.required' => ['इमेल आबश्यक छ'],
             'form.address.required' => ['ठेगाना आबश्यक छ '],
             'form.address_en.required' => ['ठेगाना अंग्रेजीमा आबश्यक छ '],
