@@ -135,7 +135,7 @@
                                         <td class="d-flex gap-1">
                                             @can('businessRegistration_edit')
                                                 <a data-bs-type="edit"
-                                                    href="{{ route('admin.businessRegistration.businessRegistration.edit', $businessDetail) }}"
+                                                    href="{{ route('admin.businessRegistration.registration.businessRegistration.edit', $businessDetail) }}"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                     title="पुरा विवरण हेर्नुहोस">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -147,7 +147,7 @@
                                             @endcan
                                             @can('businessRegistration_access')
                                                 <a data-bs-type="edit"
-                                                    href="{{ route('admin.businessRegistration.businessRegistration.show', $businessDetail) }}"
+                                                    href="{{ route('admin.businessRegistration.registration.businessRegistration.show', $businessDetail) }}"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                     title="पुरा विवरण हेर्नुहोस">
                                                     <i class="fa fa-eye"></i>

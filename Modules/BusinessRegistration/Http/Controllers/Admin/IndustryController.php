@@ -156,7 +156,8 @@ class IndustryController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }, 'industryCategory','province', 'district', 'localBody']
         );
+        $todayDateInBS = $this->get_today_nepali_date();
 
-        return view('businessregistration::admin.industry.printData', compact('industry', 'officeHeaders'));
+        return view('businessregistration::admin.industry.printData', compact('industry', 'officeHeaders', 'todayDateInBS'));
     }
 }
