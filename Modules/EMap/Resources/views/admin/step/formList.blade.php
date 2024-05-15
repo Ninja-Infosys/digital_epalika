@@ -77,7 +77,7 @@
                                                 <div class="mb-3">
                                                     <label for="status1" class="form-label">स्थिति</label>
                                                     <input type="text" name="status1"
-                                                        value="{{ Modules\EMap\Enums\DocumentStatusEnum::REJECTED->label() }}" class="form-control @error('status') is-invalid @enderror"
+                                                        value="{{ Modules\EMap\Enums\DocumentStatusEnum::MODIFY->label() }}" class="form-control @error('status') is-invalid @enderror"
                                                         id="status1" readonly />
                                                 </div>
                                                 <div class="mb-3">

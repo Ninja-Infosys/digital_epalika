@@ -38,7 +38,7 @@ class ApplyMapNotice extends Model
         'file_type' => NoticeTypeEnum::class,
     ];
 
-    public function scopeRejected($query)
+    public function scopeModify($query)
     {
         return $query->whereNull('rejected_at');
     }

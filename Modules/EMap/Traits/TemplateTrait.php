@@ -388,8 +388,8 @@ trait TemplateTrait
                 }
                 if ($allApproved) {
                     $mapStatus = DocumentStatusEnum::APPROVED;
-                } elseif ($status->contains(DocumentStatusEnum::REJECTED->value)) {
-                    $mapStatus = DocumentStatusEnum::REJECTED;
+                } elseif ($status->contains(DocumentStatusEnum::MODIFY->value)) {
+                    $mapStatus = DocumentStatusEnum::MODIFY;
                 } elseif ($status->contains(DocumentStatusEnum::PENDING->value)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
                 } else {
