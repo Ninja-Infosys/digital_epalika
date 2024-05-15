@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.businessRegistration.businessRegistration.index') }}">व्यवसाय
+                            <a href="{{ route('admin.businessRegistration.registration.organizationRegistration.index') }}">संस्था
                                 दर्ता </a>
                         </li>
                         <li class="breadcrumb-item active">प्रमाणपत्र प्रिन्ट</li>

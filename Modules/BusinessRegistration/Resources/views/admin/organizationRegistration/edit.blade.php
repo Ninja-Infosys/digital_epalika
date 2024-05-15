@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> व्यवसाय सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.businessRegistration.organizationRegistration.index',$organizationRegistration)}}"
+                        <a href="{{route('admin.businessRegistration.registration.organizationRegistration.index',$organizationRegistration)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> व्यवसाय सूची
                         </a>

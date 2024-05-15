@@ -13,13 +13,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.registration.organizationRegistration.index')}}">संस्था
+                            <a href="{{route('admin.businessRegistration.registration.industry.index')}}">उधोग
                                 दर्ता </a>
                         </li>
-                        <li class="breadcrumb-item active">संस्थाको विवरण</li>
+                        <li class="breadcrumb-item active">उधोगको विवरण</li>
                     </ol>
                 </div>
-                <h4 class="page-title">संस्थाको विवरण </h4>
+                <h4 class="page-title">उधोगको विवरण </h4>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                                     <div class="card mt-3">
                                         <div class="card-header">
                                             <h4 class="header-title">
-                                                संस्थाको विवरण
+                                                उधोगको विवरण
                                             </h4>
                                         </div>
                                         <div class="card-body">
@@ -55,36 +55,36 @@
                                                     <thead>
                                                     <tr>
                                                         <th>नाम</th>
-                                                        <td>{{$organizationRegistration->name ?? ''}}</td>
+                                                        <td>{{$industry->name ?? ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>नाम अंग्रेजी</th>
-                                                        <td>{{$organizationRegistration->name_en??''}}</td>
+                                                        <td>{{$industry->name_en??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
-                                                        <td>{{$organizationRegistration->address??''}}</td>
+                                                        <td>{{$industry->address??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना अंग्रेजी</th>
-                                                        <td>{{$organizationRegistration->address_en??''}}</td>
+                                                        <td>{{$industry->address_en??''}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>आर्थिक स्रोत</th>
-                                                        <td>{{$organizationRegistration->financial_source??''}}</td>
+                                                        <th> उधोगको वर्ग </th>
+                                                        <td>{{$industry->industryCategory->title??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> उदेश्य</th>
-                                                        <td>{{$organizationRegistration->purpose ??''}}</td>
+                                                        <td>{{$industry->purpose ??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
                                                         <td>
-                                                            {{$organizationRegistration->LocalBody->local_body ?? ''}}
-                                                            -{{$organizationRegistration->ward_no ?? ''}}
-                                                            , {{$organizationRegistration->tole ?? ''}}
-                                                            , {{$organizationRegistration->District->district ?? ''}}
-                                                            , {{$organizationRegistration->Province->province ?? ''}}
+                                                            {{$industry->LocalBody->local_body ?? ''}}
+                                                            -{{$industry->ward_no ?? ''}}
+                                                            , {{$industry->tole ?? ''}}
+                                                            , {{$industry->District->district ?? ''}}
+                                                            , {{$industry->Province->province ?? ''}}
                                                         </td>
                                                     </tr>
 
@@ -108,13 +108,13 @@
                                         <tr>
                                             <th scope="col">क्र.स</th>
                                             <th scope="col">नाम, थर</th>
-                                            <th scope="col">संस्थाको पद</th>
+                                            <th scope="col">उधोगको पद</th>
                                             <th scope="col">स्थायी वतन</th>
                                             <th scope="col">दस्तखत</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($organizationRegistration->committeeNames as $committeeName)
+                                        @forelse($industry->committeeNames as $committeeName)
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
                                                 <td>{{ $committeeName->name ?? '' }}</td>
@@ -138,65 +138,30 @@
 
                                     </table>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-header d-flex justify-content-around">
-                                                    <p> वार्ड सिफारिस </p>
-                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$organizationRegistration->getRawOriginal('ward_recommendation')])}}"
-                                                       class="btn btn-xs btn-outline-primary">
-                                                        <i class="fa fa-download"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body">
-                                                    <img
-                                                        src="{{$organizationRegistration->ward_recommendation??''}}"
-                                                        alt=""
-                                                        style="max-width: 100%;height: 200px;object-fit: contain;">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-header d-flex justify-content-around">
-                                                    <p>  संस्थाको प्रमाणित विधान  </p>
-                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$organizationRegistration->getRawOriginal('statute')])}}"
-                                                       class="btn btn-xs btn-outline-primary">
-                                                        <i class="fa fa-download"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body">
-                                                    <img
-                                                        src="{{$organizationRegistration->statute??''}}"
-                                                        alt=""
-                                                        style="max-width: 100%;height: 200px;object-fit: contain;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-header d-flex justify-content-around">
-                                                    <p> अन्य </p>
-                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$organizationRegistration->getRawOriginal('other_file')])}}"
-                                                       class="btn btn-xs btn-outline-primary">
-                                                        <i class="fa fa-download"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body">
-                                                    <img
-                                                        src="{{$organizationRegistration->other_file??''}}"
-                                                        alt=""
-                                                        style="max-width: 100%;height: 200px;object-fit: contain;">
-                                                </div>
-                                            </div>
-                                        </div>
+{{--                                        <div class="col-md-4">--}}
+{{--                                            <div class="card">--}}
+{{--                                                <div class="card-header d-flex justify-content-around">--}}
+{{--                                                    <p> अन्य</p>--}}
+{{--                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$industry->getRawOriginal('others_document')])}}"--}}
+{{--                                                       class="btn btn-xs btn-outline-primary">--}}
+{{--                                                        <i class="fa fa-download"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="card-body">--}}
+{{--                                                    <img--}}
+{{--                                                        src="{{$industry->others_document??''}}"--}}
+{{--                                                        alt=""--}}
+{{--                                                        style="max-width: 100%;height: 200px;object-fit: contain;">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="tab-pane" id="reg">
-                            <form action="{{route('admin.businessRegistration.store.custom',$organizationRegistration)}}"
+                            <form action="{{route('admin.businessRegistration.store.customData',$industry)}}"
                                   method="post"
                                   enctype="multipart/form-data">
                                 @csrf
@@ -209,7 +174,7 @@
                                                 name="taxpayer_number"
 
                                                 placeholder="करदाता नम्बर "
-                                                value="{{old('taxpayer_number',$organizationRegistration->taxpayer_number??'')}}"
+                                                value="{{old('taxpayer_number',$industry->taxpayer_number??'')}}"
                                                 class="form-control @error('taxpayer_number') is-invalid @enderror"
                                                 id="taxpayer_number"
                                             />
@@ -223,7 +188,7 @@
                                             <input
                                                 type="text"
                                                 name="bill_no"
-                                                value="{{old('bill_no',$organizationRegistration->bill_no??'')}}"
+                                                value="{{old('bill_no',$industry->bill_no??'')}}"
                                                 placeholder="बिल नं"
                                                 class="form-control @error('bill_no') is-invalid @enderror"
                                                 id="bill_no"
@@ -235,8 +200,8 @@
                                         <div class="col-md-6 mb-2">
                                             <x-date-input-component
                                                 get-today-date="{{false}}"
-                                                edit-date-ne="{{$organizationRegistration->bill_date_bs}}"
-                                                edit-date-en="{{$organizationRegistration->bill_date_ad}}"
+                                                edit-date-ne="{{$industry->bill_date_bs}}"
+                                                edit-date-en="{{$industry->bill_date_ad}}"
                                                 name-ne="bill_date_bs" label-ne="बिल मिति (बि स.)"
                                                 name-en="bill_date_ad" label-en="बिल मिति"
                                             />
@@ -248,7 +213,7 @@
                                                 name="amount"
                                                 step="0.01"
                                                 placeholder="रकम"
-                                                value="{{old('amount',$organizationRegistration->amount??'')}}"
+                                                value="{{old('amount',$industry->amount??'')}}"
                                                 class="form-control @error('amount') is-invalid @enderror"
                                                 id="amount"
                                             />
@@ -256,9 +221,9 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-                                        @if(!empty($organizationRegistration->other_file))
-                                            <a href="{{$organizationRegistration->other_file}}"
-                                               download="{{$organizationRegistration->other_file}}">
+                                        @if(!empty($industry->other_file))
+                                            <a href="{{$industry->other_file}}"
+                                               download="{{$industry->other_file}}">
                                                 <i class="fa fa-download"></i> Download
                                             </a>
                                         @endif
