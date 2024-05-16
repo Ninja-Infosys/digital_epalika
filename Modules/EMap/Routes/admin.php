@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
 // use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
@@ -133,3 +134,4 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
 });
+
