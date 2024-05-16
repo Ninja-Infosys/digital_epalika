@@ -10,6 +10,7 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
@@ -46,10 +47,10 @@ class Forum extends Model
         'way',
         'tole',
         'investment',
-        'East',
-        'West',
-        'North',
-        'South',
+        'east',
+        'west',
+        'north',
+        'south',
         'plot_no',
         'area',
         'establish_date',
@@ -111,5 +112,9 @@ class Forum extends Model
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
+    }
+    public function forumRenew(): HasMany
+    {
+        return $this->hasMany(ForumRenew::class);
     }
 }

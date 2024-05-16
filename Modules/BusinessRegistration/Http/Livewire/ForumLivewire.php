@@ -5,6 +5,7 @@ namespace Modules\BusinessRegistration\Http\Livewire;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -65,6 +66,7 @@ class ForumLivewire extends Component
         $this->provinces = get_provinces();
         if (!empty($forum)) {
             $this->forum = $forum;
+
             $this->assignForumData();
         } else {
             $this->partnerArrayIncrement();
@@ -75,7 +77,7 @@ class ForumLivewire extends Component
     }
     private function assignForumData()
     {
-        foreach (\Arr::except($this->form, ['photo', 'partners','files']) as $key => $data) {
+        foreach (Arr::except($this->form, ['photo', 'partners','files']) as $key => $data) {
             $this->form[$key] = $this->forum[$key];
         }
 
@@ -141,12 +143,12 @@ class ForumLivewire extends Component
             'form.address' => ['required'],
             'form.address_en' => ['required'],
             'form.investment' => ['nullable'],
-            'form.east' => ['nullable'],
-            'form.west' => ['nullable'],
-            'form.north' => ['nullable'],
-            'form.south' => ['nullable'],
-            'form.area' => ['nullable'],
-            'form.plot_no' => ['nullable'],
+            'form.east' => ['required'],
+            'form.west' => ['required'],
+            'form.north' => ['required'],
+            'form.south' => ['required'],
+            'form.area' => ['required'],
+            'form.plot_no' => ['required'],
             'form.establish_date' => ['nullable'],
             'form.product' => ['nullable'],
             'form.purpose' => ['required'],

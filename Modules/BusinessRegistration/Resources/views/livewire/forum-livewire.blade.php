@@ -333,6 +333,7 @@
                                         class="form-control @error('form.partners.' . $key . '.photo') is-invalid @enderror"
                                         type="file" id="form.partners.{{ $key }}.photo"
                                         wire:model="form.partners.{{ $key }}.photo">
+                                    <div wire:loading wire:target="form.partners.{{ $key }}.photo">Uploading...</div>
                                     @error("form.partners.$key.photo")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -347,6 +348,7 @@
                                         class="form-control @error('form.partners.' . $key . '.signature') is-invalid @enderror"
                                         type="file" id="form.partners.{{ $key }}.signature"
                                         wire:model="form.partners.{{ $key }}.signature">
+                                    <div wire:loading wire:target="form.partners.{{ $key }}.signature">Uploading...</div>
                                     @error("form.partners.$key.signature")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -362,6 +364,7 @@
                                         class="form-control @error('form.partners.' . $key . '.citizenship_front') is-invalid @enderror"
                                         type="file" id="form.partners.{{ $key }}.citizenship_front"
                                         wire:model="form.partners.{{ $key }}.citizenship_front">
+                                    <div wire:loading wire:target="form.partners.{{ $key }}.citizenship_front">Uploading...</div>
                                     @error("form.partners.$key.citizenship_front")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -377,6 +380,7 @@
                                         class="form-control @error('form.partners.' . $key . '.citizenship_back') is-invalid @enderror"
                                         type="file" id="form.partners.{{ $key }}.citizenship_back"
                                         wire:model="form.partners.{{ $key }}.citizenship_back">
+                                    <div wire:loading wire:target="form.partners.{{ $key }}.citizenship_back">Uploading...</div>
                                     @error("form.partners.$key.citizenship_back")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -745,6 +749,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="col-md-4 mb-1">
                             <label for="east" class="form-label"> पूर्व</label>
                             <div class="input-group">

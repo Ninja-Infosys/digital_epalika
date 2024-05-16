@@ -32,6 +32,11 @@
                     <span>उधोग दर्ता / नविकरण</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/businessRegistration/registration/forumRegistration') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.registration.forum.index')}}">
+                    <span>फर्म दर्ता / नविकरण</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

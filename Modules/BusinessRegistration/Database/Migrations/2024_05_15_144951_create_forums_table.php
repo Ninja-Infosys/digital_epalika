@@ -32,10 +32,10 @@ return new class extends Migration
             $table->string('tole')->nullable()->comment('गाउ/टोल');
             $table->string('investment')->nullable()->comment('कूल पूँजी');
             $table->string('product')->nullable()->comment('कारोबार विवरण');
-            $table->string('East')->nullable()->comment('पुर्ब');
-            $table->string('West')->nullable()->comment('पश्चिम');
-            $table->string('North')->nullable()->comment('उत्तर');
-            $table->string('South')->nullable()->comment('दक्षिण');
+            $table->string('east')->nullable()->comment('पुर्ब');
+            $table->string('west')->nullable()->comment('पश्चिम');
+            $table->string('north')->nullable()->comment('उत्तर');
+            $table->string('south')->nullable()->comment('दक्षिण');
             $table->string('plot_no')->nullable()->comment('जग्गाको कित्ता नं');
             $table->string('area')->nullable()->comment('जग्गाको क्षेत्रफल');
             $table->string('establish_date')->nullable()->comment('फर्म संचालन मिति');
