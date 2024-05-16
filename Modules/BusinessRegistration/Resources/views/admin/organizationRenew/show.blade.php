@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.registration.businessRegistration.index')}}">व्यवसाय
+                            <a href="{{route('admin.businessRegistration.registration.businessRegistration.index')}}">संस्था
                                 दर्ता </a>
                         </li>
                         <li class="breadcrumb-item active">प्रमाणपत्र प्रिन्ट</li>
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
@@ -35,10 +35,9 @@
                     </div>
                 </div>
                 <section class="row justify-content-center my-4 ">
-                    <div class="card col-md-8 border">
+                    <div class="card col-md-12 border">
                         <div class="card-body">
                             <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
-                            <x-print-button target-element="printData" title="{{ $organizationRegistration->name }}" />
                             <div id="printData">
                                 <p>
                                     श्रीमान प्रमुख प्रशासकीय अधिकृत ज्यु, <br>

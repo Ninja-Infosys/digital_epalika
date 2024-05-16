@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">
-                            {{ $formDataType->model?->title }} विवरण
+                            {{ $formDataType->model?->title }} विवरण sdgfsdfg
                         </h4>
                     </div>
                 </div>

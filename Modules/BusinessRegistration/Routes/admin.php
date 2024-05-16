@@ -13,6 +13,7 @@ use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportCont
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
 use Modules\BusinessRegistration\Http\Controllers\IndustryCategoryController;
+use Modules\BusinessRegistration\Http\Controllers\IndustryRenewController;
 use Modules\BusinessRegistration\Http\Controllers\OrganizationRenewController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -52,7 +53,8 @@ Route::resource('organizationRegistration.organizationRenew', OrganizationRenewC
 
 Route::post('industry/{industry}/customData', [IndustryController::class, 'customData'])->name('store.customData');
 Route::get('industry/{industry}/printData', [IndustryController::class, 'printData'])->name('industry.printData');
-//Route::resource('organizationRegistration.organizationRenew', OrganizationRenewController::class)->names('organizationRegistration.organizationRenew');
+Route::resource('industry.industryRenew', IndustryRenewController::class)->names('industry.industryRenew');
+Route::put('industryRenew/{industryRenew}/updateFile', [IndustryRenewController::class,'updateFile'])->name('industryRenew.updateFile');
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
