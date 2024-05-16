@@ -389,7 +389,7 @@ class AttachDocumentController extends Controller
     {
         return $request->validate([
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
-            'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
+            'comment' => ['required_if:status,' . DocumentStatusEnum::MODIFY->value],
         ]);
     }
 

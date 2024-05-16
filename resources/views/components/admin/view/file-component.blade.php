@@ -59,7 +59,7 @@
                                     <td>{{ $appliedDocument->created_at->toDateString() }}</td>
                                     <td>{{ $appliedDocument->status->label() ?? '' }}</td>
                                     <td>
-                                        @if (auth()->user()->mapPassGroups->first()->title == 'इन्जिनियर')
+                                        @if ($form->map_group_user_id == auth()->user()->id)
                                             @if (
                                                 $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING ||
                                                     $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::REVIEW)

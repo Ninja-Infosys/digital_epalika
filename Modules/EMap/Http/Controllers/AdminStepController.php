@@ -377,7 +377,7 @@ class AdminStepController extends Controller
     {
         return $request->validate([
             'status' => ['required', 'string', new Enum(DocumentStatusEnum::class)],
-            'comment' => ['required_if:status,' . DocumentStatusEnum::REJECTED->value],
+            'comment' => ['required_if:status,' . DocumentStatusEnum::MODIFY->value],
         ]);
     }
 
@@ -387,7 +387,7 @@ class AdminStepController extends Controller
             'comment' => ['required'],
         ]);
         $mapApply->update([
-            'sent_to_organization' => 'rejected',
+            'sent_to_organization' => 'modify',
             'comment' => $request->input('comment'),
 
         ]);
