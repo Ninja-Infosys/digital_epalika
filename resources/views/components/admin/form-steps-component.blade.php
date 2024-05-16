@@ -26,6 +26,10 @@
                                     class="btn btn-xs btn-outline-primary {{ $form->order == $order ? '' : 'disabled' }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
+                                <a href="{{ route('emap.admin.mapApply.admin-step.view-document', [$mapApply, $form]) }}"
+                                    class="btn me-1 btn-xs btn-outline-primary ">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             @else
                                 @if ($form->map_group_user_id != 'NULL' && $form->map_group_user_id == auth()->user()->id)
                                     <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
