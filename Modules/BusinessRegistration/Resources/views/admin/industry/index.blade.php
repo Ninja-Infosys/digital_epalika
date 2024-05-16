@@ -87,13 +87,12 @@
                                             <i class="fa fa-eye"></i>
                                         </a>
 
-{{--                                        <a data-bs-type="edit"--}}
-{{--                                            admin.businessRegistration.organizationRegistration.businessRegistration.organizationRenew.index --}}
-{{--                                           href="{{ route('admin.businessRegistration.industry.organizationRenew.index', $Industry) }}"--}}
-{{--                                           class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"--}}
-{{--                                           title="व्यवसाय नवीकरण">--}}
-{{--                                            <i class="fas fa-undo"></i>--}}
-{{--                                        </a>--}}
+                                        <a data-bs-type="edit"
+                                           href="{{ route('admin.businessRegistration.industry.industryRenew.index', $industry) }}"
+                                           class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
+                                           title="उधोग नवीकरण">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
 
                                         @if (!is_null($industry->registration_no))
                                             <a data-bs-type="edit"
