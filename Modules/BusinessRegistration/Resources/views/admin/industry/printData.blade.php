@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
@@ -84,8 +84,8 @@
                         <table align="left" border="0" cellpadding="0" cellspacing="0" style="width:100%">
                             <tbody>
                             <tr>
-                                <td><span style="font-size:18px">उधोग दर्ता नं: {{ get_nepali_number($industry->registration_no ?? '') }}</span></td>
-                                <td><span style="font-size:18px">मिति: {{ get_nepali_number($industry->registration_date_ne ?? '') }}</span></td>
+                                <td><span style="font-size:18px">उधोग दर्ता नं : <span class="dashed-bottom"> {{ get_nepali_number($industry->registration_no ?? '') }}</span></span></td>
+                                <td><span style="font-size:18px">मिति: <span class="dashed-bottom">{{ get_nepali_number($industry->registration_date_ne ?? '') }}</span></span></td>
                             </tr>
                             <tr>
                             <tr>
@@ -102,21 +102,21 @@
                         </p>
 
                         <p><span style="font-size:18px">१. उद्योग सञ्चालकको नाम :<br/>
-२. उद्योगको नाम :  {{$industry->name}}<br />
-३. उद्योगको ठेगाना : {{ $industry->province->province ?? '' }}, {{ $industry->district->district ?? '' }}, {{ $industry->localBody->local_body ?? '' }}-{{ get_nepali_number($industry->ward_no ?? '') }}<br />
-४. उद्योगको उद्देश्य : {{$industry->purpose}}<br />
-५. उद्योगको कूल पूँजी रू . {{$industry->investment}}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (क) स्थिर पूँजी {{$industry->fixed_capital}}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ख) चालु पूँजी {{$industry->working_capital}}<br />
-६. उद्योगको वर्ग : {{$industry->industryCategory->title}}<br />
-७. उद्योग सञ्चालन हुने सिफ्ट संख्या : {{ get_nepali_number($industry->open_date) }}<br />
-८. आवश्यक विद्युत शक्ति : {{$industry->electricity}}<br />
-९. उद्योग सञ्चालन दिन (प्रति वर्ष) : {{$industry->working_days}}<br />
-१०. उद्योगले उत्पादन गर्ने वस्तु वा सेवाको प्रकार : {{$industry->product}}<br />
-११.आवश्यक पर्ने जनशक्ति : {{$industry->manpower}}<br />
-१२. उद्योग सञ्चालन, व्यावसायिक उत्पादन वा कारोवार सुरु गर्नुपर्ने अवधि : {{$industry->start_date}}<br />
-१३. उत्पादन क्षमता : {{$industry->production_capacity}}<br />
-१४. अन्य : {{$industry->other}}</span></p>
+                                २. उद्योगको नाम :  <span class="dashed-bottom">{{$industry->name}}</span><br />
+                                ३. उद्योगको ठेगाना : <span class="dashed-bottom">{{ $industry->province->province ?? '' }}, {{ $industry->district->district ?? '' }}, {{ $industry->localBody->local_body ?? '' }} - {{ get_nepali_number($industry->ward_no ?? '') }}</span><br />
+                                ४. उद्योगको उद्देश्य : <span class="dashed-bottom">{{$industry->purpose}}</span><br />
+                                ५. उद्योगको कूल पूँजी रू . <span class="dashed-bottom">{{$industry->investment}}</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (क) स्थिर पूँजी <span class="dashed-bottom">{{$industry->fixed_capital}}</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ख) चालु पूँजी <span class="dashed-bottom">{{$industry->working_capital}}</span><br />
+                                ६. उद्योगको वर्ग : <span class="dashed-bottom">{{$industry->industryCategory->title}}</span><br />
+                                ७. उद्योग सञ्चालन हुने सिफ्ट संख्या : <span class="dashed-bottom">{{ get_nepali_number($industry->open_date) }}</span><br />
+                                ८. आवश्यक विद्युत शक्ति : <span class="dashed-bottom">{{$industry->electricity}}</span><br />
+                                ९. उद्योग सञ्चालन दिन (प्रति वर्ष) : <span class="dashed-bottom">{{$industry->working_days}}</span><br />
+                                १०. उद्योगले उत्पादन गर्ने वस्तु वा सेवाको प्रकार : <span class="dashed-bottom">{{$industry->product}}</span><br />
+                                ११.आवश्यक पर्ने जनशक्ति : <span class="dashed-bottom">{{$industry->manpower}}</span><br />
+                                १२. उद्योग सञ्चालन, व्यावसायिक उत्पादन वा कारोवार सुरु गर्नुपर्ने अवधि : <span class="dashed-bottom">{{$industry->start_date}}</span><br />
+                                १३. उत्पादन क्षमता : <span class="dashed-bottom">{{$industry->production_capacity}}</span><br />
+                                १४. अन्य : <span class="dashed-bottom">{{$industry->other}}</span></span></p>
 
                         <div class="item-auto" style="flex:1 1 auto; margin: 3rem 4rem 4rem;text-align:right"><span style="font-size:18px"><strong>...................................<br />
 प्रमाणित गर्ने अधिकृत</strong></span></div>

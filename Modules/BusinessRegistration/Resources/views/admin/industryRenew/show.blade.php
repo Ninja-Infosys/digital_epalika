@@ -70,14 +70,14 @@
                                 </div>
                                 <p class="text-center mb-0">विषय :- फर्म रजिष्ट्रेशन गरिएको</p>
                                 <p>श्री ...............................................</p>
-                                <p class="mb-0">तपाईले स्थिर पूँजी रु. {{$industry->fixed_capital}} र चालु पूँजी रु.
-                                    {{$industry->working_capital}} समेत कूल
-                                    पूँजी रु. {{$industry->investment}}
+                                <p class="mb-0">तपाईले स्थिर पूँजी रु. <span class="dashed-bottom">{{$industry->fixed_capital}}</span> र चालु पूँजी रु.
+                                    <span class="dashed-bottom">{{$industry->working_capital}}</span> समेत कूल
+                                    पूँजी रु. <span class="dashed-bottom">{{$industry->investment}}</span>
                                     लगानी गरि अन्दाजी वार्षिक रु. ............................... बराबरको
                                     ..............................................................................................
                                     उत्पादन गर्ने उदेश्यले कामदार ................................... जवान राखी,
-                                    {{ $industry->province->province ?? '' }} प्रदेश {{ $industry->district->district ?? '' }} जिल्ला
-                                    {{ $industry->localBody->local_body ?? '' }}गा.पा/न.पा. वडा नं. {{ $industry->ward_no ?? '' }} मा
+                                    <span class="dashed-bottom">{{ $industry->province->province ?? '' }}</span> प्रदेश <span class="dashed-bottom">{{ $industry->district->district ?? '' }}</span> जिल्ला
+                                    <span class="dashed-bottom">{{ $industry->localBody->local_body ?? '' }}</span> गा.पा/न.पा. वडा नं. <span class="dashed-bottom">{{ $industry->ward_no ?? '' }}</span> मा
                                     उधोग स्थापना गर्ने गरी ............................................................... नामको
                                     प्राइभेट/साझेदारी/प्रा.लि. फर्म रजिष्ट्रेशन पाउँ भनि दिएको निवेदन उपर कारबाही हुँदा मिति
                                     ..................... को निर्णयाअनुसार निम्नलिखित शर्तहरु पालना गर्नुपर्ने
@@ -127,4 +127,48 @@
                 </section>
             </div>
         </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="header-title mb-0">अन्य फाइलहरु</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @forelse ($industryRenew->files as $document)
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card shadow-none border">
+                            <div class="p-2">
+                                <div class="row align-items-center">
+                                    <div class="col-2 pe-0">
+                                        <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-secondary rounded">
+                                                          <i class="fa {{getFileIconClass($document->extension)}} font-18"></i>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="javascript:void(0);"
+                                           onclick="openFileModal('{{$document->file_name}}', '{{ $document->extension }}', '{{ $document->file_url }}')"
+                                           class="text-muted fw-medium">{{$document->file_name}}
+                                            .{{$document->extension}}</a>
+                                        <p class="mb-0 font-13">{{convert_to_highest_unit($document->file_size)}}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="{{route('admin.file.download', $document)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div> <!-- end row -->
+                            </div> <!-- end .p-2-->
+                        </div> <!-- end col -->
+                    </div>
+                @empty
+                    <p class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</p>
+                @endforelse
+            </div> <!-- end row-->
+        </div>
+    </div>
+    @include('admin.inc.file-view');
 @endsection

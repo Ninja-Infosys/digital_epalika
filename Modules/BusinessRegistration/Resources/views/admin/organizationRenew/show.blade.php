@@ -41,14 +41,14 @@
                             <div id="printData">
                                 <p>
                                     श्रीमान प्रमुख प्रशासकीय अधिकृत ज्यु, <br>
-                                    {{ $officeSetting->localBody->local_body ?? '' }} <br>
+                                    <span class="dashed-bottom">{{ $officeSetting->localBody->local_body ?? '' }}</span> <br>
                                     नगर कार्यपालिकाको कार्यालय <br>
-                                    {{ $officeSetting->district->district ?? '' }}
+                                    <span class="dashed-bottom">{{ $officeSetting->district->district ?? '' }}</span>
                                 </p>
                                 <p class="text-center fw-bold my-4">बिषय : संस्था दर्ता गरि पाउँ</p>
                                 <p>
-                                    हामीले {{ $organizationRegistration->name }} नामक सामाजिक
-                                    संस्था {{ $officeSetting->localBody->local_body ?? '' }}को स्थानिय संस्था दर्ता एन,
+                                    हामीले <span class="dashed-bottom">{{ $organizationRegistration->name }}</span> नामक सामाजिक
+                                    संस्था <span class="dashed-bottom">{{ $officeSetting->localBody->local_body ?? '' }}</span> को स्थानिय संस्था दर्ता एन,
                                     २०७७
                                     बमोजिम दर्ता गर्न चाहेकोले प्रस्तावित विधानको २ (दुई) प्रति , पदाधिकारीहरुको नागरिताको प्रमाणित
                                     प्रतिलिपि १/१ प्रति समेत यसै साथ संलग्न गरि देहायको विवरण खुलाई निवेदन गरेका छौँ |
