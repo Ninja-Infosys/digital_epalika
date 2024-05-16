@@ -104,13 +104,13 @@
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-pills nav-fill navtab-bg">
-                        @if (auth()->user()->role->type == 'Super')
+                        {{-- @if (auth()->user()->role->type == 'Super') --}}
                             <li class="nav-item">
                                 <a href="#tab-all" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
                                     सबै ({{ $forms->count() }})
                                 </a>
                             </li>
-                        @endif
+                        {{-- @endif --}}
 
                         <li class="nav-item">
                             <a href="#tab-submission" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
