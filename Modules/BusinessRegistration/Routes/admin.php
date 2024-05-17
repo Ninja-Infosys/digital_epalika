@@ -6,6 +6,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationCont
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ForumController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryReportController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\OrganizationReportController;
@@ -85,6 +86,11 @@ Route::prefix('files')->as('files.')->group(function () {
 });
 
 Route::controller(OrganizationReportController::class)->prefix('organizationReport')->as('organizationReport.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
+
+});
+Route::controller(IndustryReportController::class)->prefix('industryReport')->as('industryReport.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
 
