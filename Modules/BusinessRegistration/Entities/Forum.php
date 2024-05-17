@@ -7,6 +7,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\BusinessRegistration\Enums\ForumTypeEnum;
 
 class Forum extends Model
 {
@@ -64,6 +66,7 @@ class Forum extends Model
         'amount',
         'other',
         'other_file',
+        'type'
     ];
 
     protected $appends = [
@@ -109,6 +112,7 @@ class Forum extends Model
         return $this->morphMany(File::class, 'model');
     }
 
+
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
@@ -116,5 +120,9 @@ class Forum extends Model
     public function forumRenew(): HasMany
     {
         return $this->hasMany(ForumRenew::class);
+    }
+    public function forumType(): Attribute
+    {
+        return Attribute::get(fn ($value) => ForumTypeEnum::tryFrom($value)?->label() ?? null);
     }
 }

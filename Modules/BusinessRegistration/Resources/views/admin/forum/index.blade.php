@@ -59,8 +59,8 @@
                             @forelse($forums as $forum)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $forum->registration_no ?? '' }}</td>
-                                    <td>{{ $forum->registration_date_ne ?? '' }}</td>
+                                    <td>{{ get_nepali_number($forum->registration_no ?? '' )}}</td>
+                                    <td>{{ get_nepali_number($forum->registration_date_ne ?? '' )}}</td>
                                     <td>{{ $forum->name ?? '' }}</td>
                                     <td>
                                             <span>{{ $forum->localBody->local_body ?? '' }}

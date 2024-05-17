@@ -60,25 +60,60 @@
 
                 </fieldset>
 
-                <fieldset>
-                    <legend class="title text-primary fs-4 fw-bolder"> अन्य कागजातहरु</legend>
-                    <div class="row">
-
-                        <div class="col-md-4 mb-1">
-                            <label for="other_document" class="form-label">
-                                अन्य
-                            </label>
-                            <div class="input-group">
-                                <input class="form-control @error('form.other_document') is-invalid @enderror"
-                                       type="file"
-                                       id="other" wire:model="form.other_document" multiple>
-                                @error('form.other_document')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                <fieldset class="mb-2">
+                    <legend>
+                        <strong>
+                            अन्य फाइलहरु
+                        </strong>
+                    </legend>
+                    <div class="col-md-12 mb-2">
+                        <div class="d-flex align-items-center justify-content-end mb-1">
+                            <label for="file" class="form-label fw-bold"> </label>
+                            <button type="button" class="btn btn-xs btn-outline-info" wire:click.prevent="otherDocumentArrayIncrement"
+                                    data-toggle="add-more">
+                                <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
+                            </button>
                         </div>
+                        <fieldset class="bg-soft-secondary">
+                            <div id="documents">
+                                <div class="main">
+                                    @foreach($form['other_document'] as $key=>$otherDocument)
+                                        <div class="text-end">
+                                            <button type="button" class="btn btn-sm btn-outline-danger" wire:click.prevent="otherDocumentArrayDecrement"
+                                                    data-toggle="remove-parent" data-parent=".main"
+                                                    data-target-element="file">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @foreach($form['files'] as $key=>$file)
+                                        <div class="row border-bottom mb-2">
+                                            <div class="col-md-6 mb-2">
+                                                <label for="form.files.{{ $key }}.file_name" class="form-label"> शीर्षक*</label>
+                                                <input
+                                                    class="form-control @error('form.files.' . $key . '.file_name') is-invalid @enderror"
+                                                    type="text" id="form.files.{{ $key }}.file_name"
+                                                    wire:model="form.files.{{ $key }}.file_name" placeholder="शीर्षक">
+                                                @error("form.files.$key.file_name")
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="form.files.{{ $key }}.file" class="form-label">डकुमेन्ट *</label>
+                                                <input
+                                                    class="form-control @error('form.files.' . $key . '.file') is-invalid @enderror"
+                                                    type="file" name="files[][file]"  wire:model="form.files.{{ $key }}.file" placeholder="शीर्षक"
+                                                       id="form.files.{{ $key }}.file" multiple />
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </fieldset>
+
                 <div class="mt-3">
                     <div class="next d-flex justify-content-around">
                         <button type="button" wire:click.prevent="backStep(2)" class="btn btn-info">
@@ -591,7 +626,24 @@
                                     @enderror
 
                                 </div>
-                            </div>
+                            </div> <div class="col-md-6 mb-2 pr-0">
+                                <label for="type" class="form-label">फर्मको प्रकार<span
+                                        class="text-danger">*</span></label>
+                                <select
+                                    class="form-select @error('form.type') is-invalid @enderror"
+                                    id="form.type"
+                                    wire:model="form.type">
+                                    <option value="">---छान्नुहोस् ----</option>
+                                    @foreach (\Modules\BusinessRegistration\Enums\ForumTypeEnum::cases() as $case)
+                                        <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}</option>
+                                    @endforeach
+                                </select>
+                                    @error('form.type')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+
                             <div class="col-md-6 mb-2 pr-0">
                                 <label for="investment" class="form-label">पूँजीगत लगानी <span
                                         class="text-danger">*</span></label>

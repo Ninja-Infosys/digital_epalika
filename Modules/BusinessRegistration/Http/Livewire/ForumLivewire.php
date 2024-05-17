@@ -43,6 +43,7 @@ class ForumLivewire extends Component
         'east' => null,
         'west' => null,
         'north' => null,
+        'type' => null,
         'south' => null,
         'plot_no' => null,
         'area' => null,
@@ -58,7 +59,7 @@ class ForumLivewire extends Component
         'application_date_en' => null,
         //second step
         'partners' => [],
-        'other_document' => [],
+        'files' => [],
 
     ];
     public function mount($forum = null)
@@ -148,6 +149,7 @@ class ForumLivewire extends Component
             'form.north' => ['required'],
             'form.south' => ['required'],
             'form.area' => ['required'],
+            'form.type' => ['required'],
             'form.plot_no' => ['required'],
             'form.establish_date' => ['nullable'],
             'form.product' => ['nullable'],
@@ -271,6 +273,19 @@ class ForumLivewire extends Component
         unset($this->form['partners'][$index]);
         $this->form['partners'] = array_values($this->form['partners']);
     }
+    public function otherDocumentArrayIncrement(): void
+    {
+        $this->form['other_document'][] = [];
+    }
+
+    public function otherDocumentArrayDecrement($index): void
+    {
+        if (!empty($this->form['other_document'][$index]['id'])) {
+            Partner::find($this->form['other_document'][$index]['id'])->delete();
+        }
+        unset($this->form['other_document'][$index]);
+        $this->form['other_document'] = array_values($this->form['other_document']);
+    }
 
     public function render(): Factory|View|Application
     {
@@ -308,6 +323,7 @@ class ForumLivewire extends Component
             'form.south.required' => ['उत्तर आबश्यक छ '],
             'form.plot_no.required' => ['जग्गाको कित्ता नं आबश्यक छ '],
             'form.north.required' => ['दक्षिण आबश्यक छ'],
+            'form.type.required' => ['फर्मको प्रकार आबश्यक छ'],
             'form.establish_date.required' => ['फर्म संचालन मिति आबश्यक छ'],
             'form.area.required' => ['जग्गाको क्षेत्रफल  आबश्यक छ '],
             'form.product.required' => ['उत्पादन गर्ने वस्तु आबश्यक छ '],
