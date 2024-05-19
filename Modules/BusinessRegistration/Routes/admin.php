@@ -5,6 +5,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessNatureController
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ForumController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\ForumReportController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryReportController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
@@ -91,6 +92,11 @@ Route::controller(OrganizationReportController::class)->prefix('organizationRepo
 
 });
 Route::controller(IndustryReportController::class)->prefix('industryReport')->as('industryReport.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
+
+});
+Route::controller(ForumReportController::class)->prefix('forumReport')->as('forumReport.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
 

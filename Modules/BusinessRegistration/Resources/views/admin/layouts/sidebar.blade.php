@@ -67,6 +67,12 @@
         <span> उधोग दर्ता रिपोर्ट</span>
     </a>
 </li>
+<li class="{{request()->is('admin/businessRegistration/forumReport') ? 'active' : ''}}">
+    <a href="{{route('admin.businessRegistration.forumReport.index')}}">
+        <i class="fa fa-clipboard"></i>
+        <span> फर्म दर्ता रिपोर्ट</span>
+    </a>
+</li>
 {{--<li class="{{request()->is('admin/businessRegistration/industry') ? 'active' : ''}}">--}}
 {{--    <a href="{{route('admin.businessRegistration.industry.index')}}">--}}
 {{--        <i class="fa fa-clipboard"></i>--}}
