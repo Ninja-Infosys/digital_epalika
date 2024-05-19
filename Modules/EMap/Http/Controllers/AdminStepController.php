@@ -41,6 +41,8 @@ class AdminStepController extends Controller
         $mapApply->load('houseOwner');
 
         [$forms, $order] = $this->listForms($mapApply);
+         $forms->load('mapUserGroup');
+
         $mapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
 
 
@@ -405,31 +407,50 @@ class AdminStepController extends Controller
 
     public function storeDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType)
     {
-        $form->load('group.users');
-        if ($formDataType->type == FormTypeEnum::FILE) {
-            $data = $request->validate([
-                'documents' => ['array', 'required'],
-                'documents.*' => ['file'],
-            ]);
-
-            DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
-                $appliedDocument = $mapApply->appliedDocuments()->create([
-                    'form_id' => $form->id,
-                    'status' => DocumentStatusEnum::PENDING->value,
-                    'uploaded_by_type' => User::class,
-                    'uploaded_by_id' => auth()->user()->id,
-                    'form_data_type' => FormDataType::class,
-                    'form_data_id' => $formDataType->id,
+            $form->load('group.users');
+            if ($formDataType->type == FormTypeEnum::FILE) {
+                $data = $request->validate([
+                    'documents' => ['array', 'required'],
+                    'documents.*' => ['file'],
                 ]);
-                foreach ($data['documents'] as $file) {
-                    $appliedDocument->appliedMapFiles()->create([
-                        'map_apply_id' => $mapApply->id,
-                        'document' => $file->store('appliedDocument', 'public'),
-                    ]);
-                }
-            });
 
-            toast('फाईल सफलतापूर्वक थपियो', 'success');
+            if ($form->map_group_user_id !== null && $form->map_group_user_id == auth()->user()->id) {
+                DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
+                    $appliedDocument = $mapApply->appliedDocuments()->create([
+                        'form_id' => $form->id,
+                        'status' => DocumentStatusEnum::REVIEW->value,
+                        'uploaded_by_type' => User::class,
+                        'uploaded_by_id' => auth()->user()->id,
+                        'form_data_type' => FormDataType::class,
+                        'form_data_id' => $formDataType->id,
+                    ]);
+                    foreach ($data['documents'] as $file) {
+                        $appliedDocument->appliedMapFiles()->create([
+                            'map_apply_id' => $mapApply->id,
+                            'document' => $file->store('appliedDocument', 'public'),
+                        ]);
+                    }
+                });
+                toast('फाईल सफलतापूर्वक थपियो', 'success');
+            } else {
+                DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
+                    $appliedDocument = $mapApply->appliedDocuments()->create([
+                        'form_id' => $form->id,
+                        'status' => DocumentStatusEnum::PENDING->value,
+                        'uploaded_by_type' => User::class,
+                        'uploaded_by_id' => auth()->user()->id,
+                        'form_data_type' => FormDataType::class,
+                        'form_data_id' => $formDataType->id,
+                    ]);
+                    foreach ($data['documents'] as $file) {
+                        $appliedDocument->appliedMapFiles()->create([
+                            'map_apply_id' => $mapApply->id,
+                            'document' => $file->store('appliedDocument', 'public'),
+                        ]);
+                    }
+                });
+                toast('फाईल सफलतापूर्वक थपियो', 'success');
+            }
         } elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
                 'data' => ['required'],
@@ -453,6 +474,7 @@ class AdminStepController extends Controller
                 'bill' => ['required', 'file'],
                 'amount' => ['required', 'numeric'],
             ]);
+
             DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                 $paymentStore = $mapApply->paymentStores()->create([
                     'form_id' => $form->id,
@@ -465,11 +487,12 @@ class AdminStepController extends Controller
                     'form_data_id' => $formDataType->id,
                 ]);
             });
-            toast('फारम सफलतापूर्वक थपियो', 'success');
+            toast('भुक्तानी सफलतापूर्वक थपियो', 'success');
         }
 
         return redirect(route('emap.admin.mapApply.admin-step.formDetail', [$mapApply, $form]));
     }
+
 
     public function updateDocument(Request $request, MapApply $mapApply, Form $form, FormDataType $formDataType, $id)
     {
