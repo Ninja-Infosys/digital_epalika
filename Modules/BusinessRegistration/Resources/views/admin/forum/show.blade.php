@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="tab-pane" id="reg">
-                            <form action="{{route('admin.businessRegistration.store.customData',$forum)}}"
+                            <form action="{{route('admin.businessRegistration.store.customForumData',$forum)}}"
                                   method="post"
                                   enctype="multipart/form-data">
                                 @csrf

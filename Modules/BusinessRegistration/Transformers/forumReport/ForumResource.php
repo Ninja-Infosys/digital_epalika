@@ -14,7 +14,7 @@ class ForumResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $request_columns = $request->input('columns')['forums'] ?? [];
+        $request_columns = $request->input('columns')['forum_registrations'] ?? [];
         return [
             'सबमिशन नम्बर' => $this->when(in_array('submission_no', $request_columns), $this->submission_no ?? ''),
             'फर्मको ठेगाना ' => $this->when((bool)array_intersect(['province_id', 'district_id', 'local_body_id', 'ward_no', 'tole','way'], $request_columns), function () use ($request_columns) {

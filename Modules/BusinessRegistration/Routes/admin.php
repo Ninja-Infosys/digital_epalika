@@ -62,7 +62,7 @@ Route::resource('industry.industryRenew', IndustryRenewController::class)->names
 Route::put('industryRenew/{industryRenew}/updateFile', [IndustryRenewController::class,'updateFile'])->name('industryRenew.updateFile');
 
 
-Route::post('forum/{forum}/customData', [ForumController::class, 'customData'])->name('store.customData');
+Route::post('forum/{forum}/customData', [ForumController::class, 'customData'])->name('store.customForumData');
 Route::get('forum/{forum}/printData', [ForumController::class, 'printData'])->name('forum.printData');
 Route::resource('forum.forumRenew', ForumRenewController::class)->names('forum.forumRenew');
 Route::put('forumRenew/{forumRenew}/updateFile', [ForumRenewController::class,'updateFile'])->name('forumRenew.updateFile');
