@@ -5,13 +5,11 @@ namespace Modules\BusinessRegistration\Http\Controllers;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\Industry;
 use Modules\BusinessRegistration\Entities\IndustryRenew;
 use Modules\BusinessRegistration\Http\Requests\IndustryRenew\StoreIndustryRenewRequest;
 use Modules\BusinessRegistration\Http\Requests\IndustryRenew\UpdateIndustryRenewRequest;
-use Modules\ListRegistration\Entities\ListRegistration;
 
 class IndustryRenewController extends Controller
 {
@@ -35,9 +33,9 @@ class IndustryRenewController extends Controller
         $industry->industryRenew()->create($request->validated() + [
                 'fiscal_year_id' => officeSetting()->fiscal_year_id,
             ]);
-            if (!empty($request->validated()['files'])) {
-                $this->uploadDocuments($request, $industry);
-            }
+        if (!empty($request->validated()['files'])) {
+            $this->uploadDocuments($request, $industry);
+        }
 
 
         toast('व्यवसाय नवीकरण सफलतापूर्वक थपियो', 'success');

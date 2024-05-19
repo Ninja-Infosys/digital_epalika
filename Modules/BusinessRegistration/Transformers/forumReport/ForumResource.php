@@ -1,17 +1,23 @@
 <?php
 
-namespace Modules\BusinessRegistration\Transformers\IndustryReport;
+namespace Modules\BusinessRegistration\Transformers\forumReport;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IndustryResource extends JsonResource
+class ForumResource extends JsonResource
 {
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array
+     */
     public function toArray($request): array
     {
-        $request_columns = $request->input('columns')['industry_registrations'] ?? [];
+        $request_columns = $request->input('columns')['forums'] ?? [];
         return [
             'सबमिशन नम्बर' => $this->when(in_array('submission_no', $request_columns), $this->submission_no ?? ''),
-            'उधोगको ठेगाना ' => $this->when((bool)array_intersect(['province_id', 'district_id', 'local_body_id', 'ward_no', 'tole','way'], $request_columns), function () use ($request_columns) {
+            'फर्मको ठेगाना ' => $this->when((bool)array_intersect(['province_id', 'district_id', 'local_body_id', 'ward_no', 'tole','way'], $request_columns), function () use ($request_columns) {
                 return $this->resolveAddress($request_columns);
             }),
             'आर्थिक बर्ष' => $this->when(in_array('fiscal_year_id', $request_columns), $this->fiscalYear->title ?? ''),
@@ -23,18 +29,25 @@ class IndustryResource extends JsonResource
             'दर्ता नम्बर' => $this->when(in_array('registration_no', $request_columns), $this->registration_no ?? ''),
             'दर्ता मिति बि. सं.' => $this->when(in_array('registration_date_ne', $request_columns), $this->registration_date_ne ?? ''),
             'दर्ता मिति ई. सं.' => $this->when(in_array('registration_date_en', $request_columns), $this->registration_date_en ?? ''),
-            'उधोगको नाम' => $this->when(in_array('name', $request_columns), $this->name ?? ''),
-            'उधोगको नाम(अंग्रेजीमा)' => $this->when(in_array('name_en', $request_columns), $this->name_en ?? ''),
+            'फर्मको नाम' => $this->when(in_array('name', $request_columns), $this->name ?? ''),
+            'फर्मको नाम(अंग्रेजीमा)' => $this->when(in_array('name_en', $request_columns), $this->name_en ?? ''),
+            'फर्मको प्रकार' => $this->when(in_array('type', $request_columns), $this->type ?? ''),
             'ठेगाना' => $this->when(in_array('address', $request_columns), $this->address ?? ''),
             'ठेगाना(अंग्रेजीमा)' => $this->when(in_array('address_en', $request_columns), $this->address_en ?? ''),
             'सम्पर्क नं.' => $this->when(in_array('phone', $request_columns), $this->phone ?? ''),
             'ईमेल' => $this->when(in_array('email', $request_columns), $this->email ?? ''),
             'उद्देश्य' => $this->when(in_array('purpose', $request_columns), $this->purpose ?? ''),
+            'फर्म संचालन मिति' => $this->when(in_array('establish_date', $request_columns), $this->establish_date ?? ''),
+            'पुर्ब' => $this->when(in_array('east', $request_columns), $this->east ?? ''),
+            'पश्चिम' => $this->when(in_array('west', $request_columns), $this->west ?? ''),
+            'उत्तर' => $this->when(in_array('north', $request_columns), $this->north ?? ''),
+            'दक्षिण' => $this->when(in_array('south', $request_columns), $this->south ?? ''),
+            'कित्ता नं' => $this->when(in_array('plot_no', $request_columns), $this->plot_no ?? ''),
+            'क्षेत्रफल' => $this->when(in_array('area', $request_columns), $this->area ?? ''),
             'आवेदन मिति बि. सं.' => $this->when(in_array('application_date', $request_columns), $this->application_date ?? ''),
             'आवेदन मिति ई. सं.' => $this->when(in_array('application_date_en', $request_columns), $this->application_date_en ?? ''),
-            'व्यवसायी विवरण' => CommitteeNameResource::collection($this->whenLoaded('committeeNames')),
 
-            'व्यवसाय नवीकरण' => IndustryRenewResource::collection($this->whenLoaded('industryRenew')),
+            'फर्म नवीकरण' => ForumRenewResource::collection($this->whenLoaded('forumRenew')),
         ];
     }
 

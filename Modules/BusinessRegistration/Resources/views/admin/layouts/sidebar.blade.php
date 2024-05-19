@@ -32,6 +32,11 @@
                     <span>उधोग दर्ता / नविकरण</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/businessRegistration/registration/forumRegistration') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.registration.forum.index')}}">
+                    <span>फर्म दर्ता / नविकरण</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
@@ -60,6 +65,12 @@
     <a href="{{route('admin.businessRegistration.industryReport.index')}}">
         <i class="fa fa-clipboard"></i>
         <span> उधोग दर्ता रिपोर्ट</span>
+    </a>
+</li>
+<li class="{{request()->is('admin/businessRegistration/forumReport') ? 'active' : ''}}">
+    <a href="{{route('admin.businessRegistration.forumReport.index')}}">
+        <i class="fa fa-clipboard"></i>
+        <span> फर्म दर्ता रिपोर्ट</span>
     </a>
 </li>
 {{--<li class="{{request()->is('admin/businessRegistration/industry') ? 'active' : ''}}">--}}

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -28,7 +29,6 @@ class Partner extends Model
     ];
 
     protected $fillable = [
-        'business_detail_id',
         'name',
         'name_en',
         'citizenship_no',
@@ -122,8 +122,8 @@ class Partner extends Model
         return $this->belongsTo(LocalBody::class);
     }
 
-    public function businessDetail(): BelongsTo
+    public function businessAble(): MorphTo
     {
-        return $this->belongsTo(BusinessDetail::class);
+        return $this->morphTo();
     }
 }
