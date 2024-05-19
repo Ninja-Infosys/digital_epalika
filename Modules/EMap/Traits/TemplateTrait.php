@@ -392,6 +392,9 @@ trait TemplateTrait
                     $mapStatus = DocumentStatusEnum::MODIFY;
                 } elseif ($status->contains(DocumentStatusEnum::PENDING->value)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
+                }
+               elseif ($status->contains(DocumentStatusEnum::SENT_TO_CHECKER->value)) {
+                    $mapStatus = DocumentStatusEnum::SENT_TO_CHECKER;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;
                 }

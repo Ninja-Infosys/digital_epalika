@@ -418,7 +418,7 @@ class AdminStepController extends Controller
                 DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                     $appliedDocument = $mapApply->appliedDocuments()->create([
                         'form_id' => $form->id,
-                        'status' => DocumentStatusEnum::REVIEW->value,
+                        'status' => DocumentStatusEnum::SENT_TO_CHECKER->value,
                         'uploaded_by_type' => User::class,
                         'uploaded_by_id' => auth()->user()->id,
                         'form_data_type' => FormDataType::class,

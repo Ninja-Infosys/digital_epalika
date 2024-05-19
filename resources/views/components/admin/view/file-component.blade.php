@@ -62,7 +62,7 @@
                                     <td>
                                         @if ($form->map_group_user_id == auth()->user()->id)
                                             @if (
-                                                $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING ||
+                                                $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::SENT_TO_CHECKER ||
                                                     $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
                                                 @if (auth()->user()->id == 1 || $checkAuthorization)
                                                     <button type="button" class="btn btn-primary"
