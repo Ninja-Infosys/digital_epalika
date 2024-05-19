@@ -118,29 +118,15 @@
                             </a>
                         </li>
 
-                        {{-- <li class="nav-item">
-                            <a href="#tab-checker" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                जाँच गर्नुपर्ने (
-                                {{
-                                    $forms->filter(function ($form) use ($mapGroups) {
-                                        return $form->map_group_user_id == optional($mapGroups)->id;
-                                    })->count()
-                                }})
-                            </a>
-                        </li> --}}
                         <li class="nav-item">
                             <a href="#tab-checker" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                 जाँच गर्नुपर्ने (
                                 {{
-                                    $forms->filter(function ($form) use ($mapGroups) {
-                                        return $form->map_group_user_id == optional($mapGroups)->id &&
-                                               optional($form->mapUserGroup?->user?->first())->user_id == auth()->user()->id;
-                                    })->count()
+                                    $forms->whereNotNull('map_group_user_id')->where('map_group_user_id',auth()->user()->id)?->count()
+
                                 }})
                             </a>
                         </li>
-                        
-                        
 
                         <li class="nav-item">
                             <a href="#tab-approval" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
