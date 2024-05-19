@@ -31,8 +31,8 @@
                                     aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
-                            <x-html-to-excel file-name="संस्था रिपोर्ट" target-table="forum-report-table" />
-                            <x-print-button target-element="forum-report-table" title="संस्था रिपोर्ट" :headerRequired="true" />
+                            <x-html-to-excel file-name="फर्म रिपोर्ट" target-table="forum-report-table" />
+                            <x-print-button target-element="forum-report-table" title="फर्म रिपोर्ट" :headerRequired="true" />
                         </div>
                     </div>
                 </div>
@@ -65,10 +65,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="type">फर्मको प्रकार</label>
-                                    <select
-                                        class="form-control"
-                                        id="type"
-                                        name="type" placeholder="फर्मको प्रकार">
+                                    <select name="type[]"  multiple data-toggle="select2"   id="type"   class="form-control">
                                         <option value="">---छान्नुहोस् ----</option>
                                         @foreach (\Modules\BusinessRegistration\Enums\ForumTypeEnum::cases() as $case)
                                             <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}</option>
