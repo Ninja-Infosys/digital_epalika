@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessNatureController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\ForumController;
-use Modules\BusinessRegistration\Http\Controllers\Admin\ForumReportController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\IndustryReportController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
@@ -15,7 +13,6 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRenewController;
-use Modules\BusinessRegistration\Http\Controllers\ForumRenewController;
 use Modules\BusinessRegistration\Http\Controllers\IndustryCategoryController;
 use Modules\BusinessRegistration\Http\Controllers\IndustryRenewController;
 use Modules\BusinessRegistration\Http\Controllers\OrganizationRenewController;
@@ -36,7 +33,6 @@ Route::prefix('registration')->as('registration.')->group(function () {
     Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
     Route::resource('organizationRegistration', OrganizationRegistrationController::class)->names('organizationRegistration');
     Route::resource('industry', IndustryController::class)->names('industry');
-    Route::resource('forum', ForumController::class)->names('forum');
 
 });
 
@@ -60,12 +56,6 @@ Route::post('industry/{industry}/customData', [IndustryController::class, 'custo
 Route::get('industry/{industry}/printData', [IndustryController::class, 'printData'])->name('industry.printData');
 Route::resource('industry.industryRenew', IndustryRenewController::class)->names('industry.industryRenew');
 Route::put('industryRenew/{industryRenew}/updateFile', [IndustryRenewController::class,'updateFile'])->name('industryRenew.updateFile');
-
-
-Route::post('forum/{forum}/customData', [ForumController::class, 'customData'])->name('store.customData');
-Route::get('forum/{forum}/printData', [ForumController::class, 'printData'])->name('forum.printData');
-Route::resource('forum.forumRenew', ForumRenewController::class)->names('forum.forumRenew');
-Route::put('forumRenew/{forumRenew}/updateFile', [ForumRenewController::class,'updateFile'])->name('forumRenew.updateFile');
 
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -92,11 +82,6 @@ Route::controller(OrganizationReportController::class)->prefix('organizationRepo
 
 });
 Route::controller(IndustryReportController::class)->prefix('industryReport')->as('industryReport.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::post('report-data', 'report')->name('report-data');
-
-});
-Route::controller(ForumReportController::class)->prefix('forumReport')->as('forumReport.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
 

@@ -10,7 +10,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
-use Modules\BusinessRegistration\Entities\CommitteeName;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\Partner;
 use Modules\BusinessRegistration\Entities\RegisteredBusiness;
@@ -328,8 +327,16 @@ class RegistrationForm extends Component
     private function saveBusinessDetailsData($businessDetail)
     {
         foreach ($this->form['partners'] as $partner) {
-            $partner = new Partner($partner);
-            $businessDetail->partners()->save($partner);
+            Partner::updateOrCreate(
+                ['business_detail_id' => $businessDetail->id, 'id' => $partner['id'] ?? null],
+                $partner
+            );
+        }
+        foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
+            RegisteredBusiness::updateOrCreate(
+                ['business_detail_id' => $businessDetail->id, 'id' => $registeredBusiness['id'] ?? null],
+                $registeredBusiness
+            );
         }
         foreach ($this->form['other_document'] ?? [] as $document) {
             $businessDetail->files()->create([

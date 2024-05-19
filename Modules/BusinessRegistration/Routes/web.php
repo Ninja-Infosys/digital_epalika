@@ -26,5 +26,3 @@ Route::get('/industry/{industry}/print', [FrontendController::class, 'printIndus
 Route::view('schedule', 'businessregistration::frontend.schedule.schedule_1')->name('schedule_1');
 Route::view('schedule_2', 'businessregistration::frontend.schedule.schedule_2')->name('schedule_2');
 Route::view('schedule_3', 'businessregistration::frontend.schedule.schedule_3')->name('schedule_3');
-Route::get('/forumRegistration', [FrontendController::class, 'forumRegistration'])->name('forumRegistration');
-Route::get('/forum/{forum}/print', [FrontendController::class, 'printForum'])->name('printForum');

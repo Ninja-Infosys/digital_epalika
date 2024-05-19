@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessRenew;
 use Modules\BusinessRegistration\Http\Requests\BusinessRenew\StoreBusinessRenewRequest;
-use Modules\BusinessRegistration\Http\Requests\BusinessRenew\UpdateBusinessRenewRequest;
+use Modules\OrganizationRegistration\Http\Requests\BusinessRenew\UpdateBusinessRenewRequest;
 
 class BusinessRenewController extends Controller
 {

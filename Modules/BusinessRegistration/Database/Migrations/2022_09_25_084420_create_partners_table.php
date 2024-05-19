@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->nullableMorphs('businessable');
+            $table->foreignId('business_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name')->comment('नाम');
             $table->string('name_en')->comment('नाम अंग्रेजीमा');
             $table->string('citizenship_no')->comment('नागरिकता नम्बर');
