@@ -1,20 +1,22 @@
 <?php
 
-namespace Modules\BusinessRegistration\Transformers\IndustryReport;
+namespace Modules\BusinessRegistration\Transformers\forumReport;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IndustryRenewResource extends JsonResource
+class ForumRenewResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param  Request $request
      * @return array
      */
-    public function toArray($request)
+
+        public function toArray($request)
     {
-        $request_columns = $request->input('columns')['industry_renews'] ?? [];
+        $request_columns = $request->input('columns')['forum_renews'] ?? [];
 
         return [
             'आर्थिक बर्ष' => $this->when(in_array('fiscal_year_id', $request_columns), $this->fiscalYear->title ?? ''),
@@ -32,4 +34,5 @@ class IndustryRenewResource extends JsonResource
 
         ];
     }
+
 }
