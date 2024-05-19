@@ -69,7 +69,7 @@
                     <div class="col-md-12 mb-2">
                         <div class="d-flex align-items-center justify-content-end mb-1">
                             <label for="file" class="form-label fw-bold"> </label>
-                            <button type="button" class="btn btn-xs btn-outline-info" wire:click.prevent="otherDocumentArrayIncrement"
+                            <button type="button" class="btn btn-xs btn-outline-info" wire:click.prevent="fileArrayIncrement"
                                     data-toggle="add-more">
                                 <i class="fas fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </button>
@@ -77,17 +77,9 @@
                         <fieldset class="bg-soft-secondary">
                             <div id="documents">
                                 <div class="main">
-                                    @foreach($form['other_document'] as $key=>$otherDocument)
-                                        <div class="text-end">
-                                            <button type="button" class="btn btn-sm btn-outline-danger" wire:click.prevent="otherDocumentArrayDecrement"
-                                                    data-toggle="remove-parent" data-parent=".main"
-                                                    data-target-element="file">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </div>
                                     @foreach($form['files'] as $key=>$file)
                                         <div class="row border-bottom mb-2">
-                                            <div class="col-md-6 mb-2">
+                                            <div class="col-md-5 mb-2">
                                                 <label for="form.files.{{ $key }}.file_name" class="form-label"> शीर्षक*</label>
                                                 <input
                                                     class="form-control @error('form.files.' . $key . '.file_name') is-invalid @enderror"
@@ -102,11 +94,16 @@
                                                 <input
                                                     class="form-control @error('form.files.' . $key . '.file') is-invalid @enderror"
                                                     type="file" name="files[][file]"  wire:model="form.files.{{ $key }}.file" placeholder="शीर्षक"
-                                                       id="form.files.{{ $key }}.file" multiple />
+                                                       id="form.files.{{ $key }}.file"/>
+                                                <div wire:loading wire:target="form.files.{{ $key }}.file">Uploading...</div>
+                                            </div>
+                                            <div class="col-md-1 mb-2">
+                                                <button type="button" class="btn btn-sm btn-outline-danger" wire:click.prevent="fileArrayDecrement({{$key}})">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
                                             </div>
                                         </div>
                                         @endforeach
-                                    @endforeach
 
                                 </div>
                             </div>
@@ -493,7 +490,7 @@
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{ $key }}.ward_no" class="form-label">वार्ड
-                                    न:</label>
+                                    नं:</label>
                                 <select
                                     class="form-select @error('form.partners.' . $key . '.ward_no') is-invalid @enderror"
                                     id="form.partners.{{ $key }}.ward_no"

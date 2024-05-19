@@ -248,11 +248,11 @@ class ForumLivewire extends Component
             $forum->partners()->save($partners);
         }
 
-        foreach ($this->form['other_document'] ?? [] as $document) {
+        foreach ($this->form['files'] ?? [] as $file) {
             $forum->files()->create([
-                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
-                'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('otherDocument/', 'public')
+                'file_name' => $file['file_name'],
+                'extension' => $file['file']->getClientOriginalExtension(),
+                'file' => $file['file']->store('file/', 'public')
             ]);
         }
     }
@@ -273,18 +273,18 @@ class ForumLivewire extends Component
         unset($this->form['partners'][$index]);
         $this->form['partners'] = array_values($this->form['partners']);
     }
-    public function otherDocumentArrayIncrement(): void
+    public function fileArrayIncrement(): void
     {
-        $this->form['other_document'][] = [];
+        $this->form['files'][] = [];
     }
 
-    public function otherDocumentArrayDecrement($index): void
+    public function fileArrayDecrement($index): void
     {
-        if (!empty($this->form['other_document'][$index]['id'])) {
-            Partner::find($this->form['other_document'][$index]['id'])->delete();
+        if (!empty($this->form['files'][$index]['id'])) {
+            Partner::find($this->form['files'][$index]['id'])->delete();
         }
-        unset($this->form['other_document'][$index]);
-        $this->form['other_document'] = array_values($this->form['other_document']);
+        unset($this->form['files'][$index]);
+        $this->form['files'] = array_values($this->form['files']);
     }
 
     public function render(): Factory|View|Application

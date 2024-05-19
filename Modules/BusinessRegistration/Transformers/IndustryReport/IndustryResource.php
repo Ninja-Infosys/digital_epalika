@@ -6,8 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class IndustryResource extends JsonResource
 {
-
-    public function toArray($request):array
+    public function toArray($request): array
     {
         $request_columns = $request->input('columns')['industry_registrations'] ?? [];
         return [
