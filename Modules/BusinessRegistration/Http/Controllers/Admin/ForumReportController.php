@@ -74,7 +74,7 @@ class ForumReportController extends Controller
             $q->where('name', 'like', '%' . $request->input('name') . '%');
         }
         if (!empty($request->input('type'))) {
-            $q->where('type', $request->input('type'));
+            $q->whereIn('type', $request->input('type'));
         }
 
         if (!empty($request->input('ward_no'))) {

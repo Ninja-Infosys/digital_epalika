@@ -82,9 +82,9 @@
                             </button>
                         </form>
                     </div>
-
+                    <div class="table-responsive">
                         <div id="forum-report-table"></div>
-
+                    </div>
                 </div>
             </div>
         </div>
