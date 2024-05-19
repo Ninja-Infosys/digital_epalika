@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">
-                            {{ $formDataType->model?->title }} विवरण sdgfsdfg
+                            {{ $formDataType->model?->title }} विवरण
                         </h4>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                                                 data-bs-target="#view_file{{ $appliedMapFile->id }}">
                                                 <i class="fa fa-eye"></i>
                                             </button>
-                                           
+
                                             <!-- view file model pass url dynamically in the model-->
                                             <div class="modal fade" id="view_file{{ $appliedMapFile->id }}"
                                                 tabindex="-1" aria-labelledby="fileLabel" aria-hidden="true">
