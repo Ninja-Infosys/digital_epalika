@@ -307,6 +307,20 @@
                             </div>
                         </div>
                     @endif
+                        @if (Route::has('businessRegistration.forumRegistration'))
+                            <div class="col-md-3">
+                                <div class="info-card module-card">
+                                    <a href="{{ route('businessRegistration.forumRegistration') }}">
+                                        <div class="pt-4 text-center">
+                                            <img src="{{ asset('assets/frontend/image/new-icons/image.png') }}"
+                                                 style="object-fit: contain; height: 70px; width: 70px" width="35"
+                                                 height="35">
+                                            <h6 class="p-2 text-dark">फर्म दर्ता</h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
                     @if (Route::has('grant.index'))
                         <div class="col-md-3">
                             <div class="info-card module-card">

@@ -96,6 +96,7 @@ class MapPassGroupController extends Controller
         return back();
     }
 
+
     public function destroy(MapPassGroup $mapPassGroup)
     {
         if ($mapPassGroup->status) {
@@ -110,7 +111,7 @@ class MapPassGroupController extends Controller
 
     public function updateStatus(MapPassGroup $mapPassGroup)
     {
-      
+
 
         $mapPassGroup->update([
             'status' => !$mapPassGroup->status

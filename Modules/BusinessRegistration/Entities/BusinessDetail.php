@@ -146,11 +146,6 @@ class BusinessDetail extends Model
         return $this->hasMany(RegisteredBusiness::class);
     }
 
-    public function partners(): HasMany
-    {
-        return $this->hasMany(Partner::class)->orderBy('position');
-    }
-
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
@@ -279,5 +274,9 @@ class BusinessDetail extends Model
     public function mobileUser(): BelongsTo
     {
         return $this->belongsTo(MobileUser::class);
+    }
+    public function partners(): MorphMany
+    {
+        return $this->morphMany(Partner::class, 'businessable');
     }
 }

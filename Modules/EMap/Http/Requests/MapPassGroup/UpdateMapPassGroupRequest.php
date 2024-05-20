@@ -15,9 +15,9 @@ class UpdateMapPassGroupRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'users' => ['required', 'array'],
-            'users.*.user_id' => ['required'],
-            'users.*.ward_no' => ['required', 'array'],
+            'users' => ['nullable', 'array'],
+            'users.*.user_id' => ['nullable'],
+            'users.*.ward_no' => ['nullable', 'array'],
         ];
     }
 }
