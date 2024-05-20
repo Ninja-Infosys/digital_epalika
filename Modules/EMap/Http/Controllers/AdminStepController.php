@@ -58,8 +58,9 @@ class AdminStepController extends Controller
         $mapGroups = DB::table('map_pass_group_user')->where('user_id', auth()->user()->id)->first() ?? null;
         $ward_no = $mapGroups ? explode(',', $mapGroups?->ward_no ?? '') : [];
         $checkAuthorization = in_array($mapApply->landDetail?->ward_no, $ward_no);
+        $specificStatuses = DocumentStatusEnum::getSpecificStatuses();
 
-        return view('emap::admin.step.formDetail', compact('mapApply', 'form', 'checkAuthorization'));
+        return view('emap::admin.step.formDetail', compact('mapApply', 'form', 'checkAuthorization','specificStatuses'));
     }
 
     public function fillDetail(MapApply $mapApply, Form $form)
@@ -90,8 +91,8 @@ class AdminStepController extends Controller
                 $this->paymentStoreUpdate($formStoreStatus, $paymentStoreStatus, $request, $appliedDocumentStatus, $mapApply);
             }
 
-            if ($request->input('status') == CheckerDocumentStatusEnum::SENT_TO_APPROVER->value) {
-                if ($appliedDocument->status != CheckerDocumentStatusEnum::SENT_TO_APPROVER) {
+            if ($request->input('status') == DocumentStatusEnum::SENT_TO_APPROVER->value) {
+                if ($appliedDocument->status != DocumentStatusEnum::SENT_TO_APPROVER) {
                     $appliedDocument->update([
                         'status' => $request->input('status'),
                     ]);
