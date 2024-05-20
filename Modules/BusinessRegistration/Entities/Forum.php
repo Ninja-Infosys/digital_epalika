@@ -74,6 +74,10 @@ class Forum extends Model
         'registration_month'
     ];
 
+    protected $casts = [
+        'type' => ForumTypeEnum::class,
+    ];
+
     public function getIsRegisterAttribute(): bool
     {
         if ($this->registeredBusinesses !== null) {
