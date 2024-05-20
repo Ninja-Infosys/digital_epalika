@@ -98,7 +98,7 @@ Route::controller(IndustryReportController::class)->prefix('industryReport')->as
 });
 Route::controller(ForumReportController::class)->prefix('forumReport')->as('forumReport.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::post('report-data', 'report')->name('report-data');
+    Route::post('forum-report-data', 'report')->name('forum-report-data');
 
 });
 
