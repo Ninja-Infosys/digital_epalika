@@ -108,4 +108,11 @@ class Form extends Model
             ->where('user_id', auth()->user()->id)
             ->exists();
     }
+    public function getFormCheckAttribute()
+    {
+        return  \Illuminate\Support\Facades\DB::table('map_pass_group_user')
+            ->where('map_pass_group_id', $this->attributes['map_group_user_id'])
+            ->where('user_id', auth()->user()->id)
+            ->exists();
+    }
 }

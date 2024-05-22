@@ -1,4 +1,4 @@
-@props(['form-data-type', 'map-apply', 'form'])
+@props(['form-data-type', 'map-apply', 'form','specificStatuses'])
 <div class="row">
     @foreach ($mapApply->load('appliedDocuments')->appliedDocuments?->where('form_data_id', $formDataType->id)->load('appliedMapFiles') as $appliedDocument)
         <div class="col-md-6">
@@ -60,10 +60,10 @@
                                     <td>{{ $appliedDocument->created_at->toDateString() }}</td>
                                     <td>{{ $appliedDocument->status->label() ?? '' }}</td>
                                     <td>
-                                        @if ($form->map_group_user_id == auth()->user()->id)
+                                        @if ($form->map_group_user_id != 'NULL' && $form->form_check)
                                             @if (
-                                                $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING ||
-                                                    $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
+                                                $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::SENT_TO_CHECKER ||
+                                                    $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING)
                                                 @if (auth()->user()->id == 1 || $checkAuthorization)
                                                     <button type="button" class="btn btn-primary"
                                                         data-bs-toggle="modal"
@@ -74,7 +74,7 @@
                                             @endif
                                         @else
                                             @if (
-                                                $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING ||
+                                                $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING ||  $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::SENT_TO_APPROVER ||
                                                     $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
                                                 @if (auth()->user()->id == 1 || $checkAuthorization)
                                                     <button type="button" class="btn btn-primary"
@@ -108,7 +108,8 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="checker_status_model_applied">तपाईं यसलाई किन
+                                                <h5 class="modal-title" id="checker_status_model_applied">तपाईं यसलाई
+                                                    किन
                                                     अस्वीकार गर्दै हुनुहुन्छ?</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
@@ -124,9 +125,9 @@
                                                             id="status_" aria-label="status">
                                                             <option value="" disabled selected>--- छान्नुहोस् ---
                                                             </option>
-                                                            @foreach (Modules\EMap\Enums\CheckerDocumentStatusEnum::cases() as $value)
-                                                                <option value="{{ $value->value }}">
-                                                                    {{ $value->label() }}</option>
+                                                            @foreach ($specificStatuses as $status)
+                                                                <option value="{{ $status->value }}">
+                                                                    {{ $status->label() }}</option>
                                                             @endforeach
 
                                                         </select>

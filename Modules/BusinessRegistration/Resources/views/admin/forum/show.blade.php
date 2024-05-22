@@ -18,7 +18,7 @@
                         <li class="breadcrumb-item active">फर्मको विवरण</li>
                     </ol>
                 </div>
-                <h4 class="page-title">फर्मको विवरण dfghjk</h4>
+                <h4 class="page-title">फर्मको विवरण </h4>
             </div>
         </div>
     </div>

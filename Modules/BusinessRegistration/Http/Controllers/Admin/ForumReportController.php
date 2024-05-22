@@ -13,7 +13,8 @@ class ForumReportController extends Controller
     public function index()
     {
         $fiscalYears = FiscalYear::all();
-        return view('businessregistration::admin.forumReport.index', compact('fiscalYears'));
+        $forums = Forum::all();
+        return view('businessregistration::admin.forumReport.index', compact('fiscalYears','forums'));
     }
 
 
@@ -71,7 +72,7 @@ class ForumReportController extends Controller
 
 
         if (!empty($request->input('name'))) {
-            $q->where('name', 'like', '%' . $request->input('name') . '%');
+            $q->whereIn('name', $request->input('name'));
         }
         if (!empty($request->input('type'))) {
             $q->whereIn('type', $request->input('type'));

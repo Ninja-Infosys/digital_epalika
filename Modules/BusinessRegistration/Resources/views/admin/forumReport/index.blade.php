@@ -39,7 +39,7 @@
                 <div class="card-body px-0">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{ route('admin.businessRegistration.forumReport.report-data') }}">
+                              data-bs-url="{{ route('admin.businessRegistration.forumReport.forum-report-data') }}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component nameNe="from_date" labelNe="मिति देखि" nameEn="en_from_date"
@@ -61,7 +61,23 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="name">फर्मको नाम</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="फर्मको नाम">
+                                    <select name="name[]" multiple data-toggle="select2" id="name"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($forums as $forum)
+                                            <option value="{{ $forum->name }}">{{ $forum->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="col-md-3">
+                                    <label for="registration_no">दर्ता नं.</label>
+                                    <select name="registration_no[]" multiple data-toggle="select2" id="registration_no"
+                                        class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($forums as $forum)
+                                            <option value="{{ $forum->registration_no }}">{{ $forum->registration_no }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="type">फर्मको प्रकार</label>

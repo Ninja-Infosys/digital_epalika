@@ -8,6 +8,7 @@ use Modules\EMap\Entities\Form;
 use Modules\EMap\Entities\FormStore;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\PaymentStore;
+use Modules\EMap\Enums\CheckerDocumentStatusEnum;
 use Modules\EMap\Enums\DocumentStatusEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
@@ -392,6 +393,12 @@ trait TemplateTrait
                     $mapStatus = DocumentStatusEnum::MODIFY;
                 } elseif ($status->contains(DocumentStatusEnum::PENDING->value)) {
                     $mapStatus = DocumentStatusEnum::PENDING;
+                }
+               elseif ($status->contains(DocumentStatusEnum::SENT_TO_CHECKER->value)) {
+                    $mapStatus = DocumentStatusEnum::SENT_TO_CHECKER;
+                }
+               elseif ($status->contains(DocumentStatusEnum::SENT_TO_APPROVER->value)) {
+                    $mapStatus = DocumentStatusEnum::SENT_TO_APPROVER;
                 } else {
                     $mapStatus = DocumentStatusEnum::NOT_APPLIED;
                 }
