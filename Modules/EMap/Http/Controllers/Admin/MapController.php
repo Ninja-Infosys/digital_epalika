@@ -32,8 +32,6 @@ class MapController extends Controller
 
     public function index(ApplicationFormTypeEnum $applicationFormTypeEnum, $mapStatusEnum = 'all')
     {
-
-
         $this->checkAuthorization('mapApply_access');
         $application_types = collect();
 
@@ -41,39 +39,42 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-
-
-
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
-
+        $mapsQuery = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices', 'landDetail', 'houseOwner'])
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
             ->where(function ($q) use ($mapStatusEnum) {
                 if (MapStatusEnum::getAllValues()->contains($mapStatusEnum)) {
                     $q->where('sent_to_organization', $mapStatusEnum);
                 }
-            })
-            ->where(function (Builder $q) {
+            });
+
+        // Check for the Super Admin role
+        $user = auth()->user();
+       if (auth()->user()->role->type != 'Super') {
+            $mapsQuery->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
                     $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
                 }
             })
-
-            ->whereHas('landDetail', function (Builder $q) {
-                if (!empty(auth()->user()->ward_no)) {
-                    $q->where('ward_no', auth()->user()->ward_no);
-
+            ->whereHas('landDetail', function (Builder $q) use ($user) {
+                if (!empty($user->ward_no)) {
+                    $q->where('ward_no', $user->ward_no);
                 }
             })
+            ->whereHas('landDetail', function (Builder $q) use ($user) {
+                $mapGroups = DB::table('map_pass_group_user')->where('user_id', $user->id)->first() ?? null;
+                $ward_no = $mapGroups ? explode(',', $mapGroups?->ward_no ?? '') : [];
+                if (empty($user->ward_no)) {
+                    $q->whereIn('ward_no',  $ward_no);
+                }
+            });
+        }
 
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        $maps = $mapsQuery->orderBy('updated_at', 'desc')->paginate(10);
 
-
-
-        return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum', ));
-
+        return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum', 'mapStatusEnum'));
     }
+
 
 
 

@@ -60,10 +60,10 @@
                                     <td>{{ $appliedDocument->created_at->toDateString() }}</td>
                                     <td>{{ $appliedDocument->status->label() ?? '' }}</td>
                                     <td>
-                                        @if ($form->map_group_user_id == auth()->user()->id)
+                                        @if ($form->map_group_user_id != 'NULL' && $form->form_check)
                                             @if (
                                                 $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::SENT_TO_CHECKER ||
-                                                    $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::REVIEW)
+                                                    $appliedDocument->status == Modules\EMap\Enums\DocumentStatusEnum::PENDING)
                                                 @if (auth()->user()->id == 1 || $checkAuthorization)
                                                     <button type="button" class="btn btn-primary"
                                                         data-bs-toggle="modal"

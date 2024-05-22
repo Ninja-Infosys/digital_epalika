@@ -415,7 +415,7 @@ class AdminStepController extends Controller
                     'documents.*' => ['file'],
                 ]);
 
-            if ($form->map_group_user_id !== null && $form->map_group_user_id == auth()->user()->id) {
+            if ($form->map_group_user_id !== null ) {
                 DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
                     $appliedDocument = $mapApply->appliedDocuments()->create([
                         'form_id' => $form->id,

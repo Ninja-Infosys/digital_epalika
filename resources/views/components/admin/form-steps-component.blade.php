@@ -31,7 +31,7 @@
                                     <i class="fa fa-eye"></i>
                                 </a>
                             @else
-                                @if ($form->map_group_user_id != 'NULL' && $form->map_group_user_id == auth()->user()->id)
+                                @if ($form->map_group_user_id != 'NULL' && $form->form_check)
                                     <a href="{{ route('emap.admin.mapApply.admin-step.view-detail', [$mapApply, $form]) }}"
                                         class="btn btn-xs bn-outline-success">
                                         <i class="fa fa-eye"></i>
