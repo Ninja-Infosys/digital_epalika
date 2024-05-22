@@ -168,7 +168,7 @@
 
             @can('businessRegistrationTemplate_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.enumList')}}">
+                    <a href="{{ route('admin.businessRegistration.setting.businessRegistrationTemplate.enumList')}}">
                         <span>सेटिङ</span>
                     </a>
                 </li>
