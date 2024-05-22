@@ -27,8 +27,8 @@
                         <h4 class="header-title">उधोग दर्ता प्रतिवेदन</h4>
                         <div class="d-flex gap-1 justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary waves-effect waves-light collapsed"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
-                                aria-expanded="false" aria-controls="collapseExample">
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
+                                    aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                             <x-html-to-excel file-name="संस्था रिपोर्ट" target-table="industry-report-table" />
@@ -39,31 +39,46 @@
                 <div class="card-body px-0">
                     <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form"
-                            data-bs-url="{{ route('admin.businessRegistration.industryReport.report-data') }}">
+                              data-bs-url="{{ route('admin.businessRegistration.industryReport.report-data') }}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component nameNe="from_date" labelNe="मिति देखि" nameEn="en_from_date"
-                                        labelEn="From Date" :get-today-date="false" />
+                                                            labelEn="From Date" :get-today-date="false" />
                                 </div>
                                 <div class="col-md-3">
                                     <x-date-input-component nameNe="to_date" labelNe="मिति सम्म" nameEn="en_to_date"
-                                        labelEn="To Date" :get-today-date="false" />
+                                                            labelEn="To Date" :get-today-date="false" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2" id="fiscal_year"
-                                        class="form-control">
+                                            class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach ($fiscalYears as $fiscalYear)
                                             <option value="{{ $fiscalYear->id }}">{{ $fiscalYear->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="col-md-3">
                                     <label for="name">उधोगको नाम</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="उधोगको नाम">
+                                    <select name="name[]" multiple data-toggle="select2" id="name" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($industries as $industry)
+                                            <option value="{{ $industry->name }}">{{ $industry->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
+                                <div class="col-md-3">
+                                    <label for="type">उधोगको वर्ग</label>
+                                    <select name="type[]" multiple data-toggle="select2" id="type" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($industryCategories as $industryCategory)
+                                            <option value="{{ $industryCategory->id }}">{{ $industryCategory->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
@@ -95,7 +110,7 @@
                 header.appendChild(SnCell);
                 headerData.forEach((element) => {
                     const headerCell = document.createElement("th");
-                    headerCell.className = 'text-nowrap'
+                    headerCell.className = 'text-nowrap';
                     const cellHeader = document.createTextNode(element);
                     headerCell.appendChild(cellHeader);
                     header.appendChild(headerCell);
@@ -106,79 +121,59 @@
                 table.appendChild(thead);
 
                 bodyData.forEach((element, key) => {
-
                     const row = document.createElement("tr");
 
-                    const cell = document.createElement("td");
+                    const snCell = document.createElement("td");
+                    snCell.innerHTML = key + 1;
+                    row.appendChild(snCell);
 
-                    cell.innerHTML = key + 1;
-
-                    row.appendChild(cell);
-                    table.appendChild(row);
                     const childRow = document.createElement("tr");
-                    // hidden
-                    // if (Object.values(element).some(Array.isArray)) {
-                    childRow.className = " tr-detail" + key;
-                    childRow.id = "tr-detail" + key;
-                    const SnTd = document.createElement("td");
-                    childRow.appendChild(SnTd);
-
                     const DataTd = document.createElement("td");
-                    DataTd.colSpan = headerLength;
+                    DataTd.setAttribute("colspan", headerLength + 1);
 
                     const DivElement = document.createElement("div");
-                    DivElement.className = "detail-content";
+                    DivElement.setAttribute("class", "row");
 
                     const UlElement = document.createElement("ul");
-                    // }
-                    Object.entries(element).forEach((value, index) => {
-                        if (value[1] instanceof Array) {
+                    UlElement.setAttribute("class", "report-data-wrapper");
+
+                    Object.entries(element).forEach(([key, value]) => {
+                        if (Array.isArray(value)) {
                             const LiElement = document.createElement("li");
-
-                            const EmptyDivElement = document.createElement("div");
-                            EmptyDivElement.className = "detail";
-                            LiElement.appendChild(EmptyDivElement);
-
                             const DetailMainDivElement = document.createElement("div");
-                            DetailMainDivElement.className = "detail detail-main";
+                            DetailMainDivElement.setAttribute("class", "report-data");
 
                             const FieldSetElement = document.createElement("fieldset");
                             const LegendElement = document.createElement("legend");
-                            const SpanElement = document.createElement("span");
-                            SpanElement.className = "bg-primary rounded px-1 text-white";
-                            SpanElement.innerHTML = value[0];
-                            LegendElement.appendChild(SpanElement);
+                            LegendElement.innerHTML = key;
                             FieldSetElement.appendChild(LegendElement);
 
                             const tableDataDiv = document.createElement("div");
-                            tableDataDiv.innerHTML = "";
-                            if (value[1].length > 0) {
+
+                            if (value.length > 0) {
                                 const childTable = document.createElement("table");
-                                childTable.className = "table table-bordered table-striped table-condensed";
-                                const childThead = document.createElement("thead");
-                                const childBody = document.createElement("tbody");
-                                const childHeader = document.createElement("tr");
-                                const childHeaderSnCell = document.createElement("th");
-                                childHeaderSnCell.innerHTML = "क्र.सं";
-                                childHeader.appendChild(childHeaderSnCell);
-                                Object.keys(value[1][0]).forEach((element) => {
+                                childTable.setAttribute("class", "table table-bordered table-condensed mb-2");
+
+                                const childTHead = document.createElement("thead");
+                                const childTHeader = document.createElement("tr");
+
+                                Object.keys(value[0]).forEach((childElement) => {
                                     const childHeaderCell = document.createElement("th");
-                                    const cellHeader = document.createTextNode(element);
-                                    childHeaderCell.appendChild(cellHeader);
-                                    childHeader.appendChild(childHeaderCell);
+                                    const childCellHeader = document.createTextNode(childElement);
+                                    childHeaderCell.appendChild(childCellHeader);
+                                    childTHeader.appendChild(childHeaderCell);
                                 });
-                                childThead.appendChild(childHeader);
-                                childTable.appendChild(childThead);
 
-                                Object.values(value[1]).forEach((element, key) => {
+                                childTHead.appendChild(childTHeader);
+                                childTable.appendChild(childTHead);
+
+                                const childBody = document.createElement("tbody");
+
+                                value.forEach((child) => {
                                     const childRow = document.createElement("tr");
-
-                                    const childSnDataCell = document.createElement("td");
-                                    childSnDataCell.innerHTML = key + 1;
-                                    childRow.appendChild(childSnDataCell);
-                                    Object.values(element).forEach((value, index) => {
+                                    Object.values(child).forEach((childValue) => {
                                         const childDataCell = document.createElement("td");
-                                        const cellData = document.createTextNode(value);
+                                        const cellData = document.createTextNode(childValue);
                                         childDataCell.appendChild(cellData);
                                         childRow.appendChild(childDataCell);
                                     });
@@ -196,7 +191,7 @@
                             UlElement.appendChild(LiElement);
                         } else {
                             const dataCell = document.createElement("td");
-                            const cellData = document.createTextNode(value[1]);
+                            const cellData = document.createTextNode(value);
                             dataCell.appendChild(cellData);
                             row.appendChild(dataCell);
                         }
@@ -209,6 +204,7 @@
                     // }
                     tBody.appendChild(childRow);
                 });
+
                 table.appendChild(tBody);
                 tableDiv.appendChild(table);
                 return tableDiv;
@@ -218,16 +214,13 @@
                 let headerData = [];
                 Object.keys(data[0] ?? {}).forEach((key) => {
                     if (!Array.isArray(data[0][key])) {
-
                         headerData.push(key);
                     }
                 });
                 return headerData;
             }
 
-            // make ajax call from the form with report-filter-form id and data-url attribute for url in js
             $(document).ready(function() {
-                // x-csrf protection
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -236,7 +229,6 @@
 
                 $(document.body).delegate('#report-filter-form', 'submit', function(e) {
                     e.preventDefault()
-                    // get attribute data-bs-url from form and assign it to const variable url
                     const url = $(this).attr('data-bs-url');
                     const submitFormBtn = $("#submitFormBtn");
                     const collapseFilterForm = $("#collapseFilterForm");
@@ -254,7 +246,6 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            console.log(resp.data);
                             const headerData = getHeader(resp.data);
                             createTable(headerData, resp.data)
                         },

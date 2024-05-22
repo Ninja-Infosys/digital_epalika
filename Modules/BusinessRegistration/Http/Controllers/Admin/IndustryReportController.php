@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use Modules\BusinessRegistration\Entities\Industry;
+use Modules\BusinessRegistration\Entities\IndustryCategory;
 use Modules\BusinessRegistration\Transformers\IndustryReport\IndustryResource;
 
 class IndustryReportController extends Controller
@@ -14,7 +15,9 @@ class IndustryReportController extends Controller
     public function index()
     {
         $fiscalYears = FiscalYear::all();
-        return view('businessregistration::admin.industryReport.index', compact('fiscalYears'));
+        $industryCategories = IndustryCategory::all();
+        $industries = Industry::all();
+        return view('businessregistration::admin.industryReport.index', compact('fiscalYears', 'industryCategories', 'industries'));
     }
 
     public function report(Request $request)
@@ -34,6 +37,7 @@ class IndustryReportController extends Controller
                 ]
             );
         }
+
         $projects = Industry::with('fiscalYear', 'province', 'localBody', 'district')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->whereNotNull('registration_no')->get();
@@ -44,7 +48,7 @@ class IndustryReportController extends Controller
             }]);
         }
 
-        if (!empty($request->input('columns')[''])) {
+        if (!empty($request->input('columns')['industry_renew'])) {
             $projects->load(['industryRenew' => function ($q) {
                 $q->with('fiscalYear');
             }]);
@@ -54,6 +58,7 @@ class IndustryReportController extends Controller
             'data' => IndustryResource::collection($projects)
         ]);
     }
+
     private function filterDataFromUser($q, Request $request): void
     {
         if (!empty($request->input('fiscal_year'))) {
@@ -69,14 +74,14 @@ class IndustryReportController extends Controller
         }
 
         if (!empty($request->input('name'))) {
-            $q->where('name', 'like', '%' . $request->input('name') . '%');
+            $q->whereIn('name', $request->input('name'));
         }
-
 
         if (!empty($request->input('ward_no'))) {
             $q->whereIn('ward_no', $request->input('ward_no'));
         }
     }
+
     public function create()
     {
         return view('businessregistration::create');
