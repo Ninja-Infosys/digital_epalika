@@ -80,7 +80,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" id="submitFormBtn" class="btn btn-primary">
+                            <button type="submit" id="submitFormBtn" class="btn btn-primary mt-2">
                                 पेश गर्नुहोस्
                             </button>
                         </form>
