@@ -75,7 +75,7 @@ class Partner extends Model
     public function signature(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Storage::url($value),
+            get: fn ($value) => $value ? Storage::url($value) : null,
             set: fn ($value) => (!empty($value) && !is_string($value))
                 ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null

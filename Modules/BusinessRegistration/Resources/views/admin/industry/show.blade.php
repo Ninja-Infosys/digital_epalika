@@ -99,6 +99,46 @@
                                                         <td>{{$industry->working_days ??''}}</td>
                                                     </tr>
                                                     <tr>
+                                                        <th>कूल पूँजी</th>
+                                                        <td>{{$industry->investment  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>स्थिर पूँजी</th>
+                                                        <td>{{$industry->fixed_capital  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>चालु पूँजी</th>
+                                                        <td>{{$industry->working_capital  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>आवश्यक विधुत शक्ति</th>
+                                                        <td>{{$industry->electricity  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>उत्पादन क्षमत</th>
+                                                        <td>{{$industry->production_capacity ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>आवश्यक पर्ने जनशक्ति</th>
+                                                        <td>{{$industry->manpower ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>उधोग संचालन हुने सिफ़ट संख्या</th>
+                                                        <td>{{$industry->open_date  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>उधोग संचालन, व्यावसायिक उत्पादन वा कारोवार सुरु गर्नेपर्ने अवधि</th>
+                                                        <td>{{$industry->start_date  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>उधोगले उत्पादन गर्ने वस्तु वा सेवाको प्रकार</th>
+                                                        <td>{{$industry->product ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>उधोग संचालन दिन (प्रति वर्ष)</th>
+                                                        <td>{{$industry->electricity  ??''}}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <th> उदेश्य</th>
                                                         <td>{{$industry->purpose ??''}}</td>
                                                     </tr>
