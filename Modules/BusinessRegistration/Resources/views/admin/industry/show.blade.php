@@ -42,7 +42,7 @@
                     <div class="tab-content">
                         <div class="tab-pane show active" id="detail">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card mt-3">
                                         <div class="card-header">
                                             <h4 class="header-title">
@@ -59,19 +59,44 @@
                                                     </tr>
                                                     <tr>
                                                         <th>नाम अंग्रेजी</th>
-                                                        <td>{{$industry->name_en??''}}</td>
+                                                        <td>{{$industry->name_en ??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
-                                                        <td>{{$industry->address??''}}</td>
+                                                        <td>{{$industry->address ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> कूल पूँजी</th>
+                                                        <td>{{$industry->investment ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>स्थिर पूँजी</th>
+                                                        <td>{{$industry->fixed_capital ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> चालु पूँजी</th>
+                                                        <td>{{$industry->working_capital ??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना अंग्रेजी</th>
-                                                        <td>{{$industry->address_en??''}}</td>
+                                                        <td>{{$industry->address_en ??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th> उधोगको वर्ग </th>
-                                                        <td>{{$industry->industryCategory->title??''}}</td>
+                                                        <td>{{$industry->industryCategory->title ??''}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th> उधोग संचालन हुने सिफ़ट संख्या </th>
+                                                        <td>{{$industry->open_date ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> उधोगले उत्पादन गर्ने वस्तु वा सेवाको प्रकार</th>
+                                                        <td>{{$industry->product ??''}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> उधोग संचालन दिन (प्रति वर्ष) </th>
+                                                        <td>{{$industry->working_days ??''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>कूल पूँजी</th>
@@ -177,25 +202,25 @@
                                         </tbody>
 
                                     </table>
-                                    <div class="row">
+{{--                                    <div class="row">--}}
 {{--                                        <div class="col-md-4">--}}
 {{--                                            <div class="card">--}}
 {{--                                                <div class="card-header d-flex justify-content-around">--}}
 {{--                                                    <p> अन्य</p>--}}
-{{--                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$industry->getRawOriginal('others_document')])}}"--}}
+{{--                                                    <a href="{{route('admin.file-url-download', ['file_url'=>$industry->getRawOriginal('other_file')])}}"--}}
 {{--                                                       class="btn btn-xs btn-outline-primary">--}}
 {{--                                                        <i class="fa fa-download"></i>--}}
 {{--                                                    </a>--}}
 {{--                                                </div>--}}
 {{--                                                <div class="card-body">--}}
 {{--                                                    <img--}}
-{{--                                                        src="{{$industry->others_document??''}}"--}}
+{{--                                                        src="{{$industry->other_file ??''}}"--}}
 {{--                                                        alt=""--}}
 {{--                                                        style="max-width: 100%;height: 200px;object-fit: contain;">--}}
 {{--                                                </div>--}}
 {{--                                            </div>--}}
 {{--                                        </div>--}}
-                                    </div>
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
