@@ -5,6 +5,7 @@ namespace Modules\EMap\Http\Controllers;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Notifications\FormStoreNotification;
 use App\Notifications\PaymentStoreNotification;
 use App\Notifications\StepNotification;
@@ -45,7 +46,25 @@ class AttachDocumentController extends Controller
                 'documents' => ['array', 'required'],
                 'documents.*' => ['file']
             ]);
-
+            if ($form->map_group_user_id !== null ) {
+                DB::transaction(function () use ($mapApply, $form, $data, $formDataType) {
+                    $appliedDocument = $mapApply->appliedDocuments()->create([
+                        'form_id' => $form->id,
+                        'status' => DocumentStatusEnum::SENT_TO_CHECKER->value,
+                        'uploaded_by_type' => Organization::class,
+                        'uploaded_by_id' => auth('organization')->user()->id,
+                        'form_data_type' => FormDataType::class,
+                        'form_data_id' => $formDataType->id,
+                    ]);
+                    foreach ($data['documents'] as $file) {
+                        $appliedDocument->appliedMapFiles()->create([
+                            'map_apply_id' => $mapApply->id,
+                            'document' => $file->store('appliedDocument', 'public'),
+                        ]);
+                    }
+                });
+                toast('फाईल सफलतापूर्वक थपियो', 'success');
+            } else {
             DB::transaction(function () use ($request, $mapApply, $form, $data, $formDataType) {
                 $appliedDocument = $mapApply->appliedDocuments()->create([
                     'form_id' => $form->id,
@@ -66,7 +85,7 @@ class AttachDocumentController extends Controller
             });
 
             toast('फाईल सफलतापूर्वक थपियो', 'success');
-        } elseif ($formDataType->type == FormTypeEnum::FORM) {
+        } }elseif ($formDataType->type == FormTypeEnum::FORM) {
             $data = $request->validate([
                 'data' => ['required'],
             ]);
