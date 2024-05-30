@@ -283,7 +283,7 @@ class AttachDocumentController extends Controller
                 'land_revenue_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
                 'land_owner_citizenship' => ['required', 'mimes:png,jpg,jpeg,pdf'],
                 'blue_print' => ['required', 'mimes:png,jpg,jpeg,pdf'],
-                'pass_document' => ['required', 'mimes:png,jpg,jpeg,pdf'],
+                'pass_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'designer_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'permission_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
                 'inheritance_document' => ['nullable', 'mimes:png,jpg,jpeg,pdf'],
