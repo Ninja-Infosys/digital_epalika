@@ -78,9 +78,7 @@
                                 फोटोकपी (सरोकारवालाबाट प्रमाणित)</label>
                             <input type="file" class="form-control @error('designer_document') is-invalid @enderror"
                                 id="file" name="designer_document">
-                            @error('designer_document')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="permission_document">मन्जुरी लिई बनाउने भएमा नक्शा वालाले
