@@ -76,8 +76,9 @@
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="designer_document">डीजाईनरको इजाजतपत्रको नवीकरण सहितको
                                 फोटोकपी (सरोकारवालाबाट प्रमाणित)</label>
-                            <input type="file" class="form-control @error('designer_document') is-invalid @enderror"
-                                id="file" name="designer_document">
+
+                            <input type="file" class="form-control" id="file" name="designer_document">
+
 
                         </div>
                         <div class="col-md-6 mb-2">
