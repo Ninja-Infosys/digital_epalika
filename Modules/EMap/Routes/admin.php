@@ -14,6 +14,7 @@ use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationArchiveController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
+use Modules\EMap\Http\Controllers\BuildingDocumentationSettingController;
 use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
 use Modules\EMap\Http\Controllers\DynamicFormController;
 use Modules\EMap\Http\Controllers\MapSettingController;
@@ -118,6 +119,7 @@ Route::prefix('setting')->group(function () {
 
     Route::resource('landUseArea', LandUseAreaController::class);
     Route::resource('streetDetail', StreetDetailController::class);
+    Route::resource('buildingDocumentationSetting', BuildingDocumentationSettingController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function () {
@@ -134,4 +136,5 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
     Route::get('/', 'getRequiredData')->name('report');
     Route::post('report-data', 'report')->name('report-data');
 });
+
 

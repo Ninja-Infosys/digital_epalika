@@ -180,6 +180,14 @@
                 </a>
             </li>
             @endcan
+            @can('buildingDocumentationSetting_access')
+            <li class="{{ request()->is('admin/emap/setting/buildingDocumentationSetting*') ? 'active' : '' }}">
+
+                <a href="{{ route('emap.admin.buildingDocumentationSetting.index') }}">
+                    <span>घर अभिलेखिकरण  </span>
+                </a>
+            </li>
+            @endcan
 
         </ul>
     </div>
