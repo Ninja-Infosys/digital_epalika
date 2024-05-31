@@ -20,9 +20,9 @@ use Illuminate\Support\Str;
 
 class Employee extends Model
 {
+    use EventObserveTrait;
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -61,7 +61,7 @@ class Employee extends Model
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
     ];
 
     protected function ward(): Attribute
@@ -74,6 +74,7 @@ class Employee extends Model
                 if (is_array($value)) {
                     return implode(',', $value);
                 }
+
                 return $value;
             }
         );
@@ -95,8 +96,8 @@ class Employee extends Model
 
     public function setPhotoAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('employee/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('employee/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -139,14 +140,17 @@ class Employee extends Model
     {
         return $builder->where('show_to_index', 0);
     }
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
+
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
@@ -156,6 +160,7 @@ class Employee extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
     public function qualifications(): HasMany
     {
         return $this->hasMany(Qualification::class);
@@ -164,5 +169,5 @@ class Employee extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
-}
+    }
 }

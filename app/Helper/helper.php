@@ -44,9 +44,9 @@ if (!function_exists('officeSetting')) {
 
         if (empty($ward)) {
 
-            return $officeSettings->whereNull('ward_no')->first();
+            return $officeSettings?->whereNull('ward_no')->first();
         } else {
-            return $officeSettings->where('ward_no', $ward)->first();
+            return $officeSettings?->where('ward_no', $ward)->first();
         }
     }
 }
