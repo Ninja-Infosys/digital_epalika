@@ -53,7 +53,7 @@ class MapController extends Controller
        if (auth()->user()->role->type != 'Super') {
             $mapsQuery->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['registration_no', 'unique_id', 'organization.name'], request('search'));
+                    $q->whereLike(['registration_no', 'unique_id','houseOwner.name', 'organization.name'], request('search'));
                 }
             })
             ->whereHas('landDetail', function (Builder $q) use ($user) {

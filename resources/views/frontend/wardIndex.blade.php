@@ -18,7 +18,7 @@
                             <x-frontend.digital-board-video-component  :ward="$ward"/>
                         </div>
                         <div class="">
-                            <h2 class="sub-heading px-2 mb-0" style="color: white;">कार्यक्रमहरु</h2>
+                            <h2 class="sub-heading px-2 mb-0 text-center" style="color: white;">कार्यक्रमहरु</h2>
                             <x-frontend.program-component  :ward="$ward"/>
                         </div>
                         <div class="">

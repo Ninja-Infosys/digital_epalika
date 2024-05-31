@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('estimate')->group(function() {
-    Route::get('/', 'EstimateController@index');
-});
+// Route::prefix('estimate')->group(function() {
+//     Route::get('/', 'EstimateController@index');
+// });
