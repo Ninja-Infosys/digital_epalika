@@ -209,37 +209,8 @@ class ForumLivewire extends Component
         $this->currentStep = $step;
         $this->calculateProgressPercentage();
     }
-    public function submitForm()
-    {
-        $this->validate();
 
-        if (!empty($this->forum)) {
-            DB::transaction(function () {
-                $this->forum->update($this->form);
-                $this->saveForumData($this->forum);
-            });
-            $this->dispatchBrowserEvent('alert_message', [
-                'type' => 'success',
-                'title' => 'तपाइको फर्म सफलता पुर्बक अध्याबधिक भयो'
-            ]);
-            return redirect(route('admin.businessRegistration.registration.forum.index'));
-        }
 
-        $forum = DB::transaction(function () {
-            $forum = Forum::create($this->form + [
-                    'submission_no' => time(),
-                ]);
-            $this->saveForumData($forum);
-            return $forum;
-        });
-        $this->dispatchBrowserEvent('alert_message', [
-            'type' => 'success',
-            'title' => 'धन्यबाद',
-            'text' => 'तपाइको फर्म सफलता पुर्बक दर्ता भयो',
-        ]);
-        $this->reset('form');
-        return redirect()->route('businessRegistration.printForum', $forum->id);
-    }
 
     private function saveForumData($forum): void
     {
