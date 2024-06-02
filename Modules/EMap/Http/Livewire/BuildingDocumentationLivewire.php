@@ -55,6 +55,11 @@ class BuildingDocumentationLivewire extends Component
             $this->buildingDocument = $buildingDocuments;
 
             $this->assignBuildingDocumentData();
+        } else {
+            $this->partnerArrayIncrement();
+            $this->form['province_id'] = officeSetting()->province_id;
+            $this->form['district_id'] = officeSetting()->district_id;
+            $this->form['local_body_id'] = officeSetting()->local_body_id;
         }
     }
 
