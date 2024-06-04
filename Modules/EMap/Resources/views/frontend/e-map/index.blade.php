@@ -120,7 +120,7 @@
 
                                                 </div>
                                             </div>
-                                            @if($buildingDocumentSetting->is_building_documentation == 1)
+                                            @if($buildingDocumentSetting?->is_building_documentation == 1)
                                             <div class="col-md-5 p-2">
                                                 <div class="module-card text-center overflow-hidden p-3">
                                                     <div

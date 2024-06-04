@@ -30,7 +30,8 @@ class BuildingDocumentationSettingController extends Controller
         }
 
         toast('सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect()->route('emap.admin.buildingDocumentationSetting.index');
+        return "Your form has been submitted";
+        // return redirect()->route('emap.admin.buildingDocumentationSetting.index');
     }
 
 

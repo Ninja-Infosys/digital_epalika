@@ -545,11 +545,11 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="ward_no" class="form-label"> वार्ड नं.</label>
+                            <label for="land_ward_no" class="form-label"> वार्ड नं.</label>
                             <div class="input-group">
-                                <input class="form-control @error('form.ward_no') is-invalid @enderror" type="text"
-                                    step="any" id="ward_no" wire:model="form.ward_no" placeholder="वार्ड नं.">
-                                @error('form.ward_no')
+                                <input class="form-control @error('form.land_ward_no') is-invalid @enderror" type="text"
+                                    step="any" id="land_ward_no" wire:model="form.land_ward_no" placeholder="जग्गाको हाल वार्ड नं.">
+                                @error('form.land_ward_no')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
