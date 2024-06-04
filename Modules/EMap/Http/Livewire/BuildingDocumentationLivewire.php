@@ -69,7 +69,9 @@ class BuildingDocumentationLivewire extends Component
 
             $this->assignBuildingDocumentData();
         } else {
+
             $this->neighbourArrayIncrement();
+
 
         }
     }
