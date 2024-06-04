@@ -1,7 +1,7 @@
 <div class="font-black" id="print">
     <p>
         {{config('applicationDetail.to_office.to')}}<br>
-        {{config('app.name')}}<br>
+        {{config('app.office_name')}}<br>
         {{config('app.office')}}<br>
         {{config('app.address')}}
     </p>
