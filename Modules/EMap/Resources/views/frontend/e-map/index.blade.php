@@ -120,6 +120,29 @@
 
                                                 </div>
                                             </div>
+                                            @if($buildingDocumentSetting->is_building_documentation == 1)
+                                            <div class="col-md-5 p-2">
+                                                <div class="module-card text-center overflow-hidden p-3">
+                                                    <div
+                                                        class="card-body d-flex gap-3 align-items-start justify-content-between">
+                                                        <img src="{{ asset('assets/frontend/image/new-icons/flat.png') }}"
+                                                            width="50" height="50">
+                                                        <div
+                                                            class="d-flex flex-column align-items-start justify-content-start w-75">
+                                                            <h5 class="fw-semibold mb-1">भवन अभिलेखिकरण फारम</h5>
+
+                                                            <h6 class="text-muted">भवन अभिलेखिकरण फारम भर्नुहोस ।</h6>
+                                                            <a href="{{ url('buildingForm') }}"
+                                                                class="btn btn-outline-primary btn-sm mt-3"><span>भवन अभिलेखिकरण
+                                                                    दरखास्त</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        @endif
                                         </div>
                                     </div>
                                     <div class="col-6">

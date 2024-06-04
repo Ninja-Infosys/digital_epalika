@@ -17,6 +17,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Entities\ApplyMapNotice;
+use Modules\EMap\Entities\BuildingDocumentation;
+use Modules\EMap\Entities\BuildingDocumentationSetting;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\NecessaryDocument;
 use Modules\EMap\Entities\RegistrationDocument;
@@ -26,13 +28,23 @@ use Modules\EMap\Enums\NoticeTypeEnum;
 class FrontendController extends Controller
 {
     public function eMap()
-{
-    $necessaryDocuments = NecessaryDocument::with('files')->get();
-    $registrationDocuments =RegistrationDocument::all();
+    {
+        $necessaryDocuments = NecessaryDocument::with('files')->get();
+        $registrationDocuments = RegistrationDocument::all();
+        $buildingDocumentSetting = BuildingDocumentationSetting::first();
 
+        return view('emap::frontend.e-map.index', compact('necessaryDocuments', 'registrationDocuments', 'buildingDocumentSetting'));
+    }
 
-    return view('emap::frontend.e-map.index', compact('necessaryDocuments','registrationDocuments'));
-}
+    public function printForum(BuildingDocumentation $buildingDocumentation)
+    {
+        $buildingDocumentation->load(
+            ['partners' => function ($query) {
+                $query->all();
+            }]
+        );
+        return view('emap::frontend.e-map.index', compact('buildingDocumentation'));
+    }
 
 
     public function downloads()
@@ -49,7 +61,10 @@ class FrontendController extends Controller
     {
         return view('emap::frontend.e-map.form.form');
     }
-
+    public function buildingForm()
+    {
+        return view('emap::frontend.e-map.buildingForm.buildingForm');
+    }
     public function register()
     {
         return view('emap::frontend.e-map.register.register-form');
@@ -111,7 +126,7 @@ class FrontendController extends Controller
 
     public function storeEmapTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): Response|Application|ResponseFactory
     {
-        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::OWNER ) {
+        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::OWNER) {
             abort(401);
         }
 
@@ -173,7 +188,7 @@ class FrontendController extends Controller
 
     public function download(File $file)
     {
-        
+
         return Storage::disk('public')->download($file->file, $file->file_name . $file->extension);
     }
 

@@ -2,10 +2,19 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
+use App\Models\File;
+use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\EMap\Enums\BuildingTypeEnum;
 
 class BuildingDocumentation extends Model
 {
@@ -18,6 +27,12 @@ class BuildingDocumentation extends Model
     ];
 
     protected $fillable = [
+        'reg_no',
+        'submission_no',
+        'fiscal_year_id',
+        'registration_no',
+        'registration_date_ne',
+        'registration_date_en',
         'house_owner_name',
         'applicant_name',
         'application_date',
@@ -26,16 +41,13 @@ class BuildingDocumentation extends Model
         'local_body_id',
         'ward_no',
         'tole',
-        'former_province_id',
-        'former_district_id',
-        'former_local_body_id',
+        'former_district',
+        'former_local_body',
         'former_ward_no',
-        'former_tole',
         'phone',
         'plot_no',
         'land_area',
-        'house_start_date',
-        'house_end_date',
+        'house_built_year',
         'room',
         'storey',
         'area',
@@ -43,7 +55,57 @@ class BuildingDocumentation extends Model
         'length',
         'breadth',
         'height',
+        'other',
         'road_jurisdiction',
         'land_detail',
+        'bill_no',
+        'bill_date_bs',
+        'bill_date_ad',
+        'taxpayer_number',
+        'amount',
+        'other_file',
     ];
+
+    protected $casts = [
+        'building_category' => BuildingTypeEnum::class,
+    ];
+
+    public function requiredDocument(): HasOne
+    {
+        return $this->hasOne(RequiredDocument::class);
+    }
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody(): BelongsTo
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'model');
+    }
+
+    public function neighbours(): MorphMany
+    {
+        return $this->morphMany(Neighbour::class, 'businessable');
+    }
+
+    public function getRegistrationMonthAttribute(): string
+    {
+        return explode('-', $this->registration_date_ne)[1] ?? '';
+    }
 }

@@ -10,6 +10,7 @@ class EMapDatabaseSeeder extends Seeder
     {
         $this->call([
             EMapPermissionTableSeeder::class,
+            BuildingDocumentationSettingSeeder::class,
         ]);
     }
 }

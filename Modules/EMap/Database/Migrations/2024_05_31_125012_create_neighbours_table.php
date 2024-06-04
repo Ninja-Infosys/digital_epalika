@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('neighbours', function (Blueprint $table) {
             $table->id();
+            $table->nullableMorphs('neighbourable');
             $table->string('neighbour_name')->comment('संधियारको नाम');
             $table->string('direction')->comment('दिशा');
             $table->string('ward_no')->comment('वडा नं');

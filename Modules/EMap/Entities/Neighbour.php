@@ -5,7 +5,9 @@ namespace Modules\EMap\Entities;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\EMap\Enums\NeighbourTypeEnum;
 
 class Neighbour extends Model
 {
@@ -22,4 +24,13 @@ class Neighbour extends Model
         'direction',
         'ward_no',
     ];
+    protected $casts = [
+        'direction' => NeighbourTypeEnum::class,
+    ];
+
+
+    public function neighbourable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

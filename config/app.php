@@ -220,6 +220,9 @@ return [
 
 
     'otp_expiry_time' => env('OTP_EXPIRY_TIME', 5),
+    'address' => env('ADDRESS'),
+    'office' => env('OFFICE'),
+    'local_body' => env('LOCAL_BODY'),
 
 
     'eloquent' => [

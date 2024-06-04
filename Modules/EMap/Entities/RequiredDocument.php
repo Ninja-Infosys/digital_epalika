@@ -6,6 +6,9 @@ use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class RequiredDocument extends Model
 {
@@ -18,6 +21,7 @@ class RequiredDocument extends Model
     ];
 
     protected $fillable = [
+        'building_documentation_id',
         'citizenship',
         'landowner_proved',
         'revenue',
@@ -25,6 +29,53 @@ class RequiredDocument extends Model
         'land_map',
         'all_round_house_pic',
         'photo',
-        'other',
     ];
+
+    public function buildingDocumentation(): BelongsTo
+    {
+        return $this->belongsTo(BuildingDocumentation::class);
+    }
+
+    protected function citizenship(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
+    protected function landownerProved(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
+    protected function buildingMap(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
+    protected function landMap(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
+    protected function allRoundHousePic(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
+    protected function photo(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
 }

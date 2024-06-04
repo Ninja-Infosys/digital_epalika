@@ -57,7 +57,7 @@ class Forum extends Model
         'area',
         'establish_date',
         'product',
-        'application_date',
+    'application_date',
         'application_date_en',
         'bill_no',
         'bill_date_bs',
