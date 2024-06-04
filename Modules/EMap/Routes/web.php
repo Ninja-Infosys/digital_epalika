@@ -27,10 +27,11 @@ use Modules\EMap\Http\Controllers\OrganizationAuthController;
 // });
 
 Route::controller(FrontendController::class)->group(function () {
-    Route::get('ebps', 'eMap')->name('ebps');   
+    Route::get('ebps', 'eMap')->name('ebps');
     Route::get('ebps', 'eMap')->name('ebps');
     Route::get('downloads', 'downloads');
     Route::get('form', 'form');
+    Route::get('buildingForm', 'buildingForm');
     Route::get('mapTrack', 'mapTrack')->name('mapTrack');
     Route::get('formDetails', 'formDetails')->name('formDetails');
     Route::get('mapForm', 'mapForm')->name('mapForm');
@@ -42,5 +43,5 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('mapApply/{mapApply:uuid}/{noticeTypeEnum}/storeEmapTemplateData', 'storeEmapTemplateData')->name('store-emap-template-data');
     Route::get('file/{file}/download', 'download')->name('file.download');
     Route::get('file-download', 'downloadFile')->name('file-url-download');
-    
+
 });

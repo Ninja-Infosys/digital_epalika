@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('required_documents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('building_documentation_id')->constrained()->cascadeOnDelete();
             $table->string('citizenship')->nullable()->comment('नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी');
             $table->string('landowner_proved')->nullable()->comment('जग्गाधनि प्रमाण पत्रको प्रतिलिपी');
             $table->string('revenue')->nullable()->comment('चालु आ.व को घर जग्गा कर तिरेको रसिदको प्रतिलिपि');
@@ -17,7 +18,6 @@ return new class extends Migration
             $table->string('land_map')->nullable()->comment('जग्गाको नक्सा');
             $table->string('all_round_house_pic')->nullable()->comment('चारैतिरको फोटो');
             $table->string('photo')->nullable()->comment('घरधनिको फोटो');
-            $table->string('other')->nullable()->comment('वडामा बुझाउनु पर्ने अन्य करहरु बुझाएको प्रमाण ');
             $table->timestamps();
             $table->softDeletes();
         });
