@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
 use Modules\EMap\Entities\BuildingDocumentation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -14,9 +15,10 @@ use Illuminate\Support\Str;
 class ApplicationController extends Controller
 {
     use NepaliDateConverter;
-    public function index()
+    public function index(BuildingDocumentation $application)
     {
 
+        // return today();
         $applications = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['house_owner_name', 'submission_no', 'registration_no'], request('search'));
@@ -94,6 +96,16 @@ class ApplicationController extends Controller
             'neighbours'
         ]);
         return view('emap::admin.buildingDocumentation.template.notice', compact('application'));
+    }
+
+
+    public function printLandConfirmation(BuildingDocumentation $application)
+    {
+
+        $application->load([
+            'neighbours'
+        ]);
+        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('application'));
     }
     public function update(Request $request, $id)
     {

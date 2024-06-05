@@ -109,4 +109,13 @@ class BuildingDocumentation extends Model
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
     }
+
+    public function isRegistrationDateMoreThanAWeekOld()
+{
+    $registrationDate = new \DateTime($this->bill_date_ad);
+    $oneWeekLater = (clone $registrationDate)->modify('+7 days');
+    $now = new \DateTime();
+
+    return $now > $oneWeekLater;
+}
 }

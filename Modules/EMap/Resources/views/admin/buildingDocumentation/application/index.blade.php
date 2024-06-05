@@ -83,7 +83,23 @@
                                                 title="पुरा विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+                                            <button type="button"
+                                                class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <div class="dropdown-menu" style="">
+                                                @if ($application->isRegistrationDateMoreThanAWeekOld())
+                                                    @can('landConfirmation_access')
+                                                        <a data-bs-type="edit"
+                                                            href="{{ route('emap.admin.application.printLandConfirmation', $application) }}"
+                                                            title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
+                                                            <i class="fa fa-print"></i>सरजमिन मुचुल्का
+                                                        </a>
+                                                    @endcan
+                                                @endif
 
+                                            </div>
                                             {{-- @if (!is_null($application->registration_no))
                                             <a data-bs-type="edit"
                                                href="{{ route('admin.businessRegistration.application.printData', $application) }}"

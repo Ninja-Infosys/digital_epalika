@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Admin\BusinessDocumentation\ApplicationController;
+use Modules\EMap\Http\Controllers\Admin\BusinessDocumentation\LandConfirmationController;
 // use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
@@ -142,7 +143,10 @@ Route::prefix('buildingDocumentation')->group(function () {
     Route::resource('application', ApplicationController::class);
     Route::post('application/{application}/customData', [ApplicationController::class, 'customData'])
         ->name('store.customApplicationData');
-    Route::get('application/{application}/print', [ApplicationController::class, 'printNotice'])
+    Route::get('application/{application}/printNotice', [ApplicationController::class, 'printNotice'])
         ->name('application.printNotice');
+    Route::get('application/{application}/print', [ApplicationController::class, 'printLandConfirmation'])
+        ->name('application.printLandConfirmation');
+
 });
 
