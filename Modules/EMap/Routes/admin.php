@@ -140,5 +140,9 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
 
 Route::prefix('buildingDocumentation')->group(function () {
     Route::resource('application', ApplicationController::class);
-
+    Route::post('application/{application}/customData', [ApplicationController::class, 'customData'])
+        ->name('store.customApplicationData');
+    Route::get('application/{application}/print', [ApplicationController::class, 'printNotice'])
+        ->name('application.printNotice');
 });
+
