@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('emap.admin.application.index') }}">भवन अभिलेखिकरण दर्खास्त निवेदन </a>
+                            <a href="{{ route('emap.admin.buildingDocumentation.index') }}">भवन अभिलेखिकरण दर्खास्त निवेदन </a>
                         </li>
                         <li class="breadcrumb-item active">दर्खास्त निवेदन</li>
                     </ol>
@@ -53,20 +53,20 @@
 
                             </thead>
                             <tbody class="text-nowrap text-center">
-                                @forelse($applications as $application)
+                                @forelse($buildingDocumentations as $buildingDocumentation)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ get_nepali_number($application->registration_no ?? '') }}</td>
-                                        <td>{{ get_nepali_number($application->registration_date_ne ?? '') }}</td>
-                                        <td>{{ $application->house_owner_name ?? '' }}</td>
+                                        <td>{{ get_nepali_number($buildingDocumentation->registration_no ?? '') }}</td>
+                                        <td>{{ get_nepali_number($buildingDocumentation->registration_date_ne ?? '') }}</td>
+                                        <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
                                         <td>
-                                            <span>{{ $application->localBody->local_body ?? '' }}
-                                                - {{ $application->ward_no ?? '' }} </span>
+                                            <span>{{ $buildingDocumentation->localBody->local_body ?? '' }}
+                                                - {{ $buildingDocumentation->ward_no ?? '' }} </span>
                                         </td>
                                         <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('emap.admin.application.edit', $application) }}"
+                                                href="{{ route('emap.admin.buildingDocumentation.edit', $buildingDocumentation) }}"
                                                 class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="पुरा विवरण हेर्नुहोस">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -78,7 +78,7 @@
 
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('emap.admin.application.show', $application) }}"
+                                                href="{{ route('emap.admin.buildingDocumentation.show', $buildingDocumentation) }}"
                                                 class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="पुरा विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
@@ -89,10 +89,10 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
                                             <div class="dropdown-menu" style="">
-                                                @if ($application->isRegistrationDateMoreThanAWeekOld())
+                                                @if ($buildingDocumentation->isRegistrationDateMoreThanAWeekOld())
                                                     @can('landConfirmation_access')
                                                         <a data-bs-type="edit"
-                                                            href="{{ route('emap.admin.application.printLandConfirmation', $application) }}"
+                                                            href="{{ route('emap.admin.buildingDocumentation.printLandConfirmation', $buildingDocumentation) }}"
                                                             title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
                                                             <i class="fa fa-print"></i>सरजमिन मुचुल्का
                                                         </a>
@@ -100,9 +100,9 @@
                                                 @endif
 
                                             </div>
-                                            {{-- @if (!is_null($application->registration_no))
+                                            {{-- @if (!is_null($buildingDocumentation->registration_no))
                                             <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.application.printData', $application) }}"
+                                               href="{{ route('admin.businessRegistration.buildingDocumentation.printData', $buildingDocumentation) }}"
                                                title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-print"></i>
                                             </a>
@@ -117,7 +117,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $applications->links() }}
+                        {{ $buildingDocumentations->links() }}
                     </div>
 
                 </div>

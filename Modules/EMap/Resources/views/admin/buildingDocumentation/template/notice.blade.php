@@ -20,74 +20,74 @@
             <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
             <x-print-button target-element="printData" title="{{ $application->name }}"/>
             <div id="printData">
-                <h3>अनुसुची १</h3>
-                <h3>निर्देशिकाको दफा ५ (ग) संग सम्बन्धित</h3>
-                <h3>निवेदनको ढाँचा</h3>
-            </div>
-            <div class="header">
-                <p>श्री अध्यक्ष ज्यू :</p>
-                <p>....नं वडा कार्यालय</p>
-                <p>बागाचौर नगरपालिका,सल्यान ।</p>
-                <blockquote class="mx-4">
-                    बिषय : घर नक्सा अभिलेखिकरणका लागि सिफारिस पाँउ
-                </blockquote>
-            </div>
-            <div class="subject">
-                <p>महोदय,</p>
-                <p>
-                    उपरोक्त सम्वन्धमा यस कार्यालयमा निवेदन गर्नको कारण यो छ कि मेरो नाममा
-                    दर्ता भएको साविक जिल्ला सल्यान
-                    <span class="dashed-bottom"> {{$application->former_local_body}} </span> गा.वि.स  <span class="dashed-bottom"> {{$application->former_ward_no}} </span> नं. वडा हाल बागचौर
-                    नगरपालिका वडा नं <span class="dashed-bottom"> {{$application->land_ward_no}} </span> को कित्ता नं <span class="dashed-bottom"> {{$application->plot_no}} </span>मा
-                    <span class="dashed-bottom"> {{$application->land_area}} </span>क्षेत्रफल जग्गामा तल्ला मैले <span class="dashed-bottom"> {{$application->house_built_date}} </span> सालमा
-                    <span class="dashed-bottom"> {{$application->room}} </span>कोठा <span class="dashed-bottom"> {{$application->storey}} </span> तल्ला  <span class="dashed-bottom"> {{$application->area}} </span>क्षेत्रफलको घर निर्माण गरेको
-                    र @foreach ($application->neighbours as $neighbour)
-                        {{$neighbour->direction->label()}}मा {{$neighbour->neighbour_name}}
-                    @endforeachको जग्गाको साध सिमानालाइ समेत असर नपुर्याइ निर्माण
-                    गरेको र सो घरको नक्सापास नगरेकोले बागचौर नगरपालिकाले निर्माण गरेको
-                    मापदण्ड राम्रोसंग बुझि सहमत भइ लाग्ने दस्तुर समेत तिर्न तयार भई घर
-                    अभिलेखिकरणका लागी सिफारिस गरिदिन हुन यो निवेदन सादर पेश गरेको छु। मैले
-                    माथि उल्लेखित गरेको विवरण झुष्ठा ठहरे कानुन बमोजिम सहने छु/बुझाउने छु।
-                    मैले माथि उल्लेखित गरेको विवरण झुष्ठा ठहरे कानुन बमोजिम सहने छु/बुझाउने
-                    छु्
-                </p>
-                <div class="d-flex gap-5">
-                    <p>दायाँ</p>
-                    <p>बाँया</p>
-                </div>
-                <p>निवेदक</p>
 
-                <div class="row">
-                    <p class="text-center">हस्ताक्षर</p>
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <div
-                                class="border border-primary"
-                                style="height: 100px; width: 100px"
-                            ></div>
-                            <div
-                                class="border border-primary"
-                                style="height: 100px; width: 100px"
-                            ></div>
-                        </div>
+
+
+                <table cellspacing="0" style="border-collapse:collapse; border:none; width:100%">
+                    <tbody>
+                    <tr>
+                        <td style="width:25%"><img alt="Office Logo"
+                                                   src="http://127.0.0.1:8000/assets/backend/images/np.png"
+                                                   style="height:100px; width:130px"/></td>
+                        <td style="text-align:center; vertical-align:middle; width:50%">
+                            <div ><span
+                                    style="font-size:14px"><strong>अनुसूची-३</strong></span><br/>
+                                <span style="font-size:14px"><strong>निर्देशिकाको दफा ५ (घ) संग सम्वन्धित</strong></span>
+                            </div>
+
+                            <div style="font-size:19px; line-height:1.2">बागचौर नगरपालिका </div>
+
+                            <div style=" font-size:19px; line-height:1.2">...................नं वडा कार्यालय
+                            </div>
+                            <div style="font-size:19px; line-height:1.2">.............................
+                            </div>
+
+
+                        </td>
+
+
+                        <td style="width:25%">&nbsp;</td>
+                        <td style="width:25%">&nbsp;</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="row sub-title mt-3">
+                    <div class="col-sm sub-title1">
+                        <p class=" fw-bold lh-1">पत्र संख्या : ................</p>
+                        <p class="mt-1  fw-bold lh-1">चलानी नम्बर : ...............</p>
                     </div>
-                    <div class="col-md-6">
-                        <p>नाम : <span class="dashed-bottom"> {{$application->application_name}} </span></p>
-                        <p>ठेगाना : <span class="dashed-bottom"> {{$application->province->province ?? ''}},{{$application->district->district ?? ''}},{{$application->localBody->local_body ?? ''}}-{{ get_nepali_number($application->ward_no ?? '') }} </span></p>
-                        <p>टोल : <span class="dashed-bottom"> {{$application->tole}} </span></p>
-                        <p>सम्पर्क नं : <span class="dashed-bottom"> {{$application->phone}} </span></p>
+                    <div class="col-sm sub-title2 text-end ml-auto">
+                        <p class=" fw-bold lh-1"
+                           style="text-align: end;">मिती :
+                            ......................</p>
                     </div>
                 </div>
-                <p>निवेदन साथ निम्न कागजात प्रमाण पेश गरेको छु ।</p>
-                <p> क. नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी</p>
-                <p>ख. जग्गाधनि प्रमाण पत्रको प्रतिलिपी</p>
-                <p>ग. चालु आ.व को घर जग्गा कर तिरेको रसिदको प्रतिलिपि</p>
-                <p>घ. घरको नक्सा</p>
-                <p>ङ. वडामा बुझाउनु पर्ने अन्य करहरु बुझाएको प्रमाण</p>
-                <p>च. जग्गाको नक्सा</p>
-            </div>
-            </div>
+                <p class="fw-bold fs-5 text-center my-3">
+                    ७ दिने सूचना ।
+                </p>
+                <p style="font-size:18px; text-align: justify">
+                    <span class="dashed-bottom"> {{$buildingDocument->province->province ?? ''}},{{$buildingDocument->district->district ?? ''}},{{$buildingDocument->localBody->local_body ?? ''}}-{{ get_nepali_number($buildingDocument->ward_no ?? '') }} </span> वस्ने श्री {{$buildingDocument->applicant_name}} ले बागचौर नगरपालिका वडा नं {{ get_nepali_number($buildingDocument->ward_no ?? '') }} को साबिक.....गाविस वडा नं..... कित्ता नं..............क्षेत्रफल......को<br>
+                    पूर्व तर्फ ..................<br>
+                    पश्चिम तर्फ.................<br>
+                    उत्तर तर्फ..................<br>
+                    दक्षिण तर्फ..................<br>
+                    यति चार किल्ला भित्रको जग्गामा तपशिलं बमोजिमको निर्माण भए अनुसारको घर अभिलेखिकरण गरी पाउँ भनि मिति...............मा निवेदन दिनु भएकोले सो घरको साध संधियार कोहि कसैलाइ पिरमर्मा परेको भए आफुलाइ परेको सबै विवरण यो सूचना प्रकाशित भएको मितिले ७ दिन भित्र वडा कार्यालयमा उजुर बाजुर गर्नुहुन यो सुचना प्रकाशित गरिएको छ । म्यादभित्र पर्न नआएका उजुर प्रति कुनै कारबाही गरिने छैन ।<br>
+                </p>
+                <p class="text-decoration-underline fw-bold fs-5">तपशिल</p>
+                  <p>१. घरको किसिम <br>
+                    २. लम्बाई <br>
+                    ३. चौडाई <br>
+                    ४. उचाई <br>
+                    ५. अन्य <br></p>
+                <div class="col-sm text-end font-weight-bold">
+                    <p class="ml-4">....................<br>वडा अध्यक्ष</p>
+                </div>
+
         </div>
+        </div>
+    </div>
     </section>
     <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>

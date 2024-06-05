@@ -26,15 +26,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> दर्खास्त निवेदन सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('emap.admin.application.index',$application)}}"
+                        <a href="{{route('emap.admin.application.index',$buildingDocumentation)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> दर्खास्त निवेदन सूची
                         </a>
                     </div>
                 </div>
-                @livewire('emap::building-documentation-livewire',['businessDocumentation'=>$application])
+                @livewire('emap::building-documentation-livewire',['businessDocumentation'=>$buildingDocumentation])
             </div>
         </div>
     </div>
-
 @endsection
