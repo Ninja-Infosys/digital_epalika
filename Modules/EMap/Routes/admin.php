@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Http\Controllers\Admin\BusinessDocumentation\ApplicationController;
 // use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
@@ -137,4 +138,7 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
     Route::post('report-data', 'report')->name('report-data');
 });
 
+Route::prefix('buildingDocumentation')->group(function () {
+    Route::resource('application', ApplicationController::class);
 
+});

@@ -58,8 +58,17 @@ class BuildingDocumentationLivewire extends Component
         'road_jurisdiction' => null,
         'land_detail' => null,
         'neighbours' => [],
-        'required_documents' => [],
+
         'files' => [],
+    ];
+    public array $requiredDocument = [
+        'citizenship' => null,
+        'landowner_proved' => null,
+        'revenue' => null,
+        'building_map' => null,
+        'land_map' => null,
+        'all_round_house_pic' => null,
+        'photo' => null,
     ];
 
     public function mount($buildingDocument = null)
@@ -152,36 +161,35 @@ class BuildingDocumentationLivewire extends Component
     }
     protected array $thirdStepValidations = [
 
-        'form.required_documents.citizenship' => ['required'],
-        'form.required_documents.landowner_proved' => ['required'],
-        'form.required_documents.revenue' => ['required'],
-        'form.required_documents.building_map' => ['required'],
-        'form.required_documents.land_map' => ['required'],
-        'form.required_documents.all_round_house_pic' => ['required'],
-        'form.required_documents.photo' => ['required'],
+        'requiredDocument.citizenship' => ['required'],
+        'requiredDocument.landowner_proved' => ['required'],
+        'requiredDocument.revenue' => ['required'],
+        'requiredDocument.building_map' => ['required'],
+        'requiredDocument.land_map' => ['required'],
+        'requiredDocument.all_round_house_pic' => ['required'],
+        'requiredDocument.photo' => ['required'],
     ];
 
     protected function thirdStepValidations(): array
     {
         return !empty($this->buildingDocument)
-            ? array_merge($this->thirdStepValidations, [
-                'form.citizenship' => ['nullable'],
-                'form.landowner_proved' => ['nullable'],
-                'form.revenue' => ['nullable'],
-                'form.building_map' => ['nullable'],
-                'form.land_map' => ['nullable'],
-                'form.all_round_house_pic' => ['nullable'],
-                'form.photo' => ['nullable'],
-            ])
-            : array_merge($this->thirdStepValidations, [
-                'form.citizenship' => ['required'],
-                'form.landowner_proved' => ['nullable'],
-                'form.revenue' => ['nullable'],
-                'form.building_map' => ['nullable'],
-                'form.land_map' => ['nullable'],
-                'form.all_round_house_pic' => ['nullable'],
-                'form.photo' => ['nullable'],
-            ]);
+            ?  [
+                'requiredDocument.citizenship' => ['nullable'],
+                'requiredDocument.landowner_proved' => ['nullable'],
+                'requiredDocument.revenue' => ['nullable'],
+                'requiredDocument.building_map' => ['nullable'],
+                'requiredDocument.land_map' => ['nullable'],
+                'requiredDocument.all_round_house_pic' => ['nullable'],
+                'requiredDocument.photo' => ['nullable'],
+            ]           :  [
+                'requiredDocument.citizenship' => ['required'],
+                'requiredDocument.landowner_proved' => ['required'],
+                'requiredDocument.revenue' => ['required'],
+                'requiredDocument.building_map' => ['required'],
+                'requiredDocument.land_map' => ['required'],
+                'requiredDocument.all_round_house_pic' => ['required'],
+                'requiredDocument.photo' => ['required'],
+            ];
     }
 
     public function rules(): array
@@ -210,6 +218,37 @@ class BuildingDocumentationLivewire extends Component
         $this->currentStep = $step;
         $this->calculateProgressPercentage();
     }
+    public function submitForm()
+    {
+        $this->validate();
+
+        if (!empty($this->buildingDocument)) {
+            DB::transaction(function () {
+                $this->buildingDocument->update($this->form);
+                $this->saveBuildingDocumentData($this->buildingDocument);
+            });
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => 'success',
+                'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो'
+            ]);
+            return redirect(route('emap.admin.application.index'));
+        }
+
+        $buildingDocument = DB::transaction(function () {
+            $buildingDocument = BuildingDocumentation::create($this->form + [
+                    'submission_no' => time(),
+                ]);
+            $this->saveBuildingDocumentData($buildingDocument);
+            return $buildingDocument;
+        });
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
+        ]);
+        $this->reset('form');
+        return redirect()->route('buildingDocument.printApplication', $buildingDocument->id);
+    }
 
     private function saveBuildingDocumentData($buildingDocument): void
     {
@@ -217,7 +256,9 @@ class BuildingDocumentationLivewire extends Component
             $neighbours = new Neighbour($neighbour);
             $buildingDocument->neighbours()->save($neighbours);
         }
+
         $buildingDocument->requiredDocument()->create($this->requiredDocument);
+
 
         foreach ($this->form['files'] ?? [] as $file) {
             $buildingDocument->files()->create([
@@ -226,6 +267,8 @@ class BuildingDocumentationLivewire extends Component
                 'file' => $file['file']->store('file/', 'public')
             ]);
         }
+
+
     }
 
     public function neighbourArrayIncrement(): void
@@ -291,7 +334,7 @@ class BuildingDocumentationLivewire extends Component
             'form.phone.required' => ['फोन आबश्यक छ'],
             'form.plot_no.required' => ['जग्गाको कित्ता नं आबश्यक छ '],
             'form.land_area.required' => ['जग्गाको क्षेत्रफल आबश्यक छ '],
-            'form.land_ward_no.required' => ['जग्गाको वार्ड न. आबश्यक छ '],
+            'form.land_ward_no.required' => ['जग्गाको क्षेत्रफल आबश्यक छ '],
             'form.house_built_year.required' => ['घर बनेको वर्ष आबश्यक छ'],
             'form.room.required' => ['कोठा आबश्यक छ '],
             'form.storey.required' => ['तला अंग्रेजीमा आबश्यक छ '],
@@ -307,13 +350,13 @@ class BuildingDocumentationLivewire extends Component
             'form.neighbours.*.neighbour_name.required' => ['संधीयारको नाम आबश्यक छ'],
             'form.neighbours.*.direction.required' => ['दिशा आबश्यक छ'],
             'form.neighbours.*.ward_no.required' => ['वडा नं आबश्यक छ'],
-            'form.required_documents.*.citizenship' => ['नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी'],
-            'form.required_documents.*.landowner_proved' => ['जग्गाधनि प्रमाण पत्रको प्रतिलिपी'],
-            'form.required_documents.*.revenue' => ['चालु आ.व को घर जग्गा कर तिरेको रसिदको प्रतिलिपि'],
-            'form.required_documents.*.building_map' => ['घरको नक्सा'],
-            'form.required_documents.*.land_map' => ['जग्गाको नक्सा'],
-            'form.required_documents.*.all_round_house_pic' => ['चारैतिरको फोटो'],
-            'form.required_documents.*.photo' => ['घरधनिको फोटो'],
+            'requiredDocument.citizenship' => ['नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी'],
+            'requiredDocument.landowner_proved' => ['जग्गाधनि प्रमाण पत्रको प्रतिलिपी'],
+            'requiredDocument.revenue' => ['चालु आ.व को घर जग्गा कर तिरेको रसिदको प्रतिलिपि'],
+            'requiredDocument.building_map' => ['घरको नक्सा'],
+            'requiredDocument.land_map' => ['जग्गाको नक्सा'],
+            'requiredDocument.all_round_house_pic' => ['चारैतिरको फोटो'],
+            'requiredDocument.photo' => ['घरधनिको फोटो'],
             'form.other_document' => ['अन्य कागजात आबश्यक छ'],
 
         ];

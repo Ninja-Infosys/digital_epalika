@@ -102,7 +102,7 @@ class BuildingDocumentation extends Model
 
     public function neighbours(): MorphMany
     {
-        return $this->morphMany(Neighbour::class, 'businessable');
+        return $this->morphMany(Neighbour::class, 'neighbourable');
     }
 
     public function getRegistrationMonthAttribute(): string

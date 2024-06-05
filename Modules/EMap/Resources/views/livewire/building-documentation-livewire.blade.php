@@ -65,101 +65,101 @@
                 </fieldset>
 
                 <fieldset class="mb-2">
-                    <label for="required_documents" class="form-label"> आबश्यक कागजातहरु <span
+                    <label for="requiredDocument" class="form-label"> आबश्यक कागजातहरु <span
                             class="text-danger">*</span></label>
                     <fieldset>
                         <div class="col-md-12 main">
                             <div class="row ">
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.citizenship" class="form-label">नेपाली
+                                    <label for="requiredDocument.citizenship" class="form-label">नेपाली
                                         नागरिकताको प्रमाण पत्रको प्रतिलिपी <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.citizenship') is-invalid @enderror"
-                                            type="file" id="form.required_documents.citizenship"
-                                            wire:model="form.required_documents.citizenship" placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.citizenship')
+                                            class="form-control @error('requiredDocument.citizenship') is-invalid @enderror"
+                                            type="file" id="requiredDocument.citizenship"
+                                            wire:model="requiredDocument.citizenship" placeholder="आवेदन मिति बि. सं.">
+                                        @error('requiredDocument.citizenship')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.landowner_proved" class="form-label">जग्गाधनि प्रमाण
+                                    <label for="requiredDocument.landowner_proved" class="form-label">जग्गाधनि प्रमाण
                                         पत्रको
                                         प्रतिलिपी <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.landowner_proved') is-invalid @enderror"
-                                            type="file" id="form.required_documents.landowner_proved"
-                                            wire:model="form.required_documents.landowner_proved"
+                                            class="form-control @error('requiredDocument.landowner_proved') is-invalid @enderror"
+                                            type="file" id="requiredDocument.landowner_proved"
+                                            wire:model="requiredDocument.landowner_proved"
                                             placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.landowner_proved')
+                                        @error('requiredDocument.landowner_proved')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.revenue" class="form-label">चालु आ.व को घर
+                                    <label for="requiredDocument.revenue" class="form-label">चालु आ.व को घर
                                         जग्गा कर तिरेको रसिदको प्रतिलिपि <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.revenue') is-invalid @enderror"
-                                            type="file" id="form.required_documents.revenue"
-                                            wire:model="form.required_documents.revenue" placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.revenue')
+                                            class="form-control @error('requiredDocument.revenue') is-invalid @enderror"
+                                            type="file" id="requiredDocument.revenue"
+                                            wire:model="requiredDocument.revenue" placeholder="आवेदन मिति बि. सं.">
+                                        @error('requiredDocument.revenue')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.building_map" class="form-label">घरको नक्सा
+                                    <label for="requiredDocument.building_map" class="form-label">घरको नक्सा
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.building_map') is-invalid @enderror"
-                                            type="file" id="form.required_documents.building_map"
-                                            wire:model="form.required_documents.building_map" placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.building_map')
+                                            class="form-control @error('requiredDocument.building_map') is-invalid @enderror"
+                                            type="file" id="requiredDocument.building_map"
+                                            wire:model="requiredDocument.building_map" placeholder="आवेदन मिति बि. सं.">
+                                        @error('requiredDocument.building_map')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.land_map" class="form-label">जग्गाको नक्सा
+                                    <label for="requiredDocument.land_map" class="form-label">जग्गाको नक्सा
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.land_map') is-invalid @enderror"
-                                            type="file" id="form.required_documents.land_map"
-                                            wire:model="form.required_documents.land_map" placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.land_map')
+                                            class="form-control @error('requiredDocument.land_map') is-invalid @enderror"
+                                            type="file" id="requiredDocument.land_map"
+                                            wire:model="requiredDocument.land_map" placeholder="आवेदन मिति बि. सं.">
+                                        @error('requiredDocument.land_map')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.all_round_house_pic" class="form-label">चारैतिरको फोटो
+                                    <label for="requiredDocument.all_round_house_pic" class="form-label">चारैतिरको फोटो
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.all_round_house_pic') is-invalid @enderror"
-                                            type="file" id="form.required_documents.all_round_house_pic"
-                                            wire:model="form.required_documents.all_round_house_pic"
+                                            class="form-control @error('requiredDocument.all_round_house_pic') is-invalid @enderror"
+                                            type="file" id="requiredDocument.all_round_house_pic"
+                                            wire:model="requiredDocument.all_round_house_pic"
                                             placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.all_round_house_pic')
+                                        @error('requiredDocument.all_round_house_pic')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-1">
-                                    <label for="form.required_documents.photo" class="form-label">घरधनिको फोटो
+                                    <label for="requiredDocument.photo" class="form-label">घरधनिको फोटो
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
-                                            class="form-control @error('form.required_documents.photo') is-invalid @enderror"
-                                            type="file" id="form.required_documents.photo"
-                                            wire:model="form.required_documents.photo" placeholder="आवेदन मिति बि. सं.">
-                                        @error('form.required_documents.photo')
+                                            class="form-control @error('requiredDocument.photo') is-invalid @enderror"
+                                            type="file" id="requiredDocument.photo"
+                                            wire:model="requiredDocument.photo" placeholder="आवेदन मिति बि. सं.">
+                                        @error('requiredDocument.photo')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
