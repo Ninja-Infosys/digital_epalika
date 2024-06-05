@@ -47,6 +47,7 @@ class BuildingDocumentation extends Model
         'phone',
         'plot_no',
         'land_area',
+        'land_ward_no',
         'house_built_year',
         'room',
         'storey',
@@ -101,7 +102,7 @@ class BuildingDocumentation extends Model
 
     public function neighbours(): MorphMany
     {
-        return $this->morphMany(Neighbour::class, 'businessable');
+        return $this->morphMany(Neighbour::class, 'neighbourable');
     }
 
     public function getRegistrationMonthAttribute(): string
