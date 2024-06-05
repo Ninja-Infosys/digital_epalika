@@ -54,53 +54,53 @@
                                                     <thead>
                                                         <tr>
                                                             <th>घरधनिको नाम </th>
-                                                            <td>{{ $application->house_owner_name ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>सम्पर्क नं </th>
-                                                            <td>{{ $application->phone ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->phone ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> घरको क्षेत्रफल </th>
-                                                            <td>{{ $application->area ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->area ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> घर बनेको बर्ष </th>
-                                                            <td>{{ $application->house_built_year ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->house_built_year ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> कोठा संख्या </th>
-                                                            <td>{{ $application->room ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->room ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> घरको तल्ला </th>
-                                                            <td>{{ $application->storey ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->storey ?? '' }}</td>
                                                         </tr>
 
                                                         <tr>
                                                             <th>घरको किसिम </th>
-                                                            <td>{{ $application->building_category->label() ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> घरको लम्बाई </th>
-                                                            <td>{{ $application->length ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->length ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> घरको चौडाई </th>
-                                                            <td>{{ $application->breadth ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->breadth ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> घरको उचाई </th>
-                                                            <td>{{ $application->height ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->height ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>अन्य </th>
-                                                            <td>{{ $application->other ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->other ?? '' }}</td>
                                                         </tr>
 
                                                         <tr>
                                                             <th>अन्या विवरण</th>
-                                                            <td>{{ $application->other ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->other ?? '' }}</td>
                                                         </tr>
 
 
@@ -109,45 +109,45 @@
                                                         <tr>
                                                             <th> ठेगाना</th>
                                                             <td>
-                                                                {{ $application->LocalBody->local_body ?? '' }}
-                                                                -{{ $application->ward_no ?? '' }}
-                                                                , {{ $application->tole ?? '' }}
-                                                                , {{ $application->District->district ?? '' }}
-                                                                , {{ $application->Province->province ?? '' }}
+                                                                {{ $buildingDocumentation->LocalBody->local_body ?? '' }}
+                                                                -{{ $buildingDocumentation->ward_no ?? '' }}
+                                                                , {{ $buildingDocumentation->tole ?? '' }}
+                                                                , {{ $buildingDocumentation->District->district ?? '' }}
+                                                                , {{ $buildingDocumentation->Province->province ?? '' }}
                                                             </td>
                                                         </tr>
 
                                                         <tr>
                                                             <th> जग्गा क्षेत्रफल</th>
-                                                            <td>{{ $application->land_area ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->land_area ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> जग्गाको कित्ता नं.</th>
-                                                            <td>{{ $application->land_area ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->land_area ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> सडक अधिकार क्षेत्र</th>
-                                                            <td>{{ $application->road_jurisdiction ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->road_jurisdiction ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> जग्गा विवरण</th>
-                                                            <td>{{ $application->land_detail ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->land_detail ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> हाल वार्ड नं.</th>
-                                                            <td>{{ $application->land_ward_no ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->land_ward_no ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> साविक जिल्ला </th>
-                                                            <td>{{ $application->former_district ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->former_district ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> साविक पालिका</th>
-                                                            <td>{{ $application->former_local_body ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->former_local_body ?? '' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th> साविक वार्ड नं.</th>
-                                                            <td>{{ $application->former_ward_no ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->former_ward_no ?? '' }}</td>
                                                         </tr>
 
 
@@ -180,7 +180,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($application->neighbours as $neighbour)
+                                            @forelse($buildingDocumentation->neighbours as $neighbour)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $neighbour->direction->label() ?? '' }}</td>
@@ -224,20 +224,20 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->citizenship ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->citizenship ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी', '{{ pathinfo($application?->requiredDocument?->citizenship ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->citizenship }}')"
+                                                        onclick="openFileModal('नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी', '{{ pathinfo($buildingDocumentation?->requiredDocument?->citizenship ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->citizenship }}')"
                                                         class="text-muted fw-medium" type="button">नेपाली नागरिकताको प्रमाण
                                                         पत्रको प्रतिलिपी
-                                                        .{{ pathinfo($application?->requiredDocument?->citizenship ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->citizenship ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('citizenship')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('citizenship')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -255,20 +255,20 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->landowner_proved ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->landowner_proved ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('जग्गाधनि प्रमाणपत्रको प्रतिलिपी ', '{{ pathinfo($application?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->landowner_proved }}')"
+                                                        onclick="openFileModal('जग्गाधनि प्रमाणपत्रको प्रतिलिपी ', '{{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->landowner_proved }}')"
                                                         class="text-muted fw-medium" type="button">जग्गाधनि प्रमाणपत्रको
                                                         प्रतिलिपी
-                                                        .{{ pathinfo($application?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('landowner_proved')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('landowner_proved')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -286,20 +286,20 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->revenue ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->revenue ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('चालु आ.व को घरजग्गा कर तिरेको रसिदको प्रतिलिपि  ', '{{ pathinfo($application?->requiredDocument?->revenue ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->revenue }}')"
+                                                        onclick="openFileModal('चालु आ.व को घरजग्गा कर तिरेको रसिदको प्रतिलिपि  ', '{{ pathinfo($buildingDocumentation?->requiredDocument?->revenue ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->revenue }}')"
                                                         class="text-muted fw-medium" type="button">चालु आ.व को घर
                                                         जग्गा कर तिरेको रसिदको प्रतिलिपि
-                                                        .{{ pathinfo($application?->requiredDocument?->revenue ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->revenue ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('revenue')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('revenue')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -317,19 +317,19 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->building_map ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->building_map ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('घरको नक्सा', '{{ pathinfo($application?->requiredDocument?->building_map ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->building_map }}')"
+                                                        onclick="openFileModal('घरको नक्सा', '{{ pathinfo($buildingDocumentation?->requiredDocument?->building_map ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->building_map }}')"
                                                         class="text-muted fw-medium" type="button">घरको नक्सा
-                                                        .{{ pathinfo($application?->requiredDocument?->building_map ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->building_map ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('building_map')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('building_map')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -347,19 +347,19 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->land_map ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->land_map ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('जग्गाको नक्सा', '{{ pathinfo($application?->requiredDocument?->land_map ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->land_map }}')"
+                                                        onclick="openFileModal('जग्गाको नक्सा', '{{ pathinfo($buildingDocumentation?->requiredDocument?->land_map ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->land_map }}')"
                                                         class="text-muted fw-medium" type="button">जग्गाको नक्सा
-                                                        .{{ pathinfo($application?->requiredDocument?->land_map ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->land_map ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('land_map')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('land_map')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -377,19 +377,19 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->all_round_house_pic ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->all_round_house_pic ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('चारैतिरको फोटो', '{{ pathinfo($application?->requiredDocument?->all_round_house_pic ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->all_round_house_pic }}')"
+                                                        onclick="openFileModal('चारैतिरको फोटो', '{{ pathinfo($buildingDocumentation?->requiredDocument?->all_round_house_pic ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->all_round_house_pic }}')"
                                                         class="text-muted fw-medium" type="button">चारैतिरको फोटो
-                                                        .{{ pathinfo($application?->requiredDocument?->all_round_house_pic ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->all_round_house_pic ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('all_round_house_pic')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('all_round_house_pic')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -407,19 +407,19 @@
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <i
-                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->photo ?? '') }} font-18"></i>
+                                                                class="fa {{ getFileIconClass($buildingDocumentation?->requiredDocument?->photo ?? '') }} font-18"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <a href="javascript:void(0);"
-                                                        onclick="openFileModal('घरधनिको फोटो', '{{ pathinfo($application?->requiredDocument?->photo ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->photo }}')"
+                                                        onclick="openFileModal('घरधनिको फोटो', '{{ pathinfo($buildingDocumentation?->requiredDocument?->photo ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->photo }}')"
                                                         class="text-muted fw-medium" type="button">घरधनिको फोटो
-                                                        .{{ pathinfo($application?->requiredDocument?->photo ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->photo ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
-                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('photo')]) }}"
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $buildingDocumentation?->requiredDocument?->getRawOriginal('photo')]) }}"
                                                         class="btn btn-xs btn-outline-primary">
                                                         <i class="fa fa-download"></i>
                                                     </a>
@@ -443,7 +443,7 @@
                                 </div>
                             </div>
 
-                            @foreach ($application->files as $file)
+                            @foreach ($buildingDocumentation->files as $file)
 
                                 <div class="col-xl-4 col-lg-6">
                                     <div class="card shadow-none border">
@@ -467,7 +467,7 @@
                         </div>
 
                         <div class="tab-pane" id="reg">
-                            <form action="{{ route('emap.admin.store.customApplicationData', $application) }}"
+                            <form action="{{ route('emap.admin.store.customApplicationData', $buildingDocumentation) }}"
                                 method="post" enctype="multipart/form-data">
                                 @csrf
                                 <fieldset class="border p-2 mb-2">
@@ -475,7 +475,7 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
                                             <input type="text" name="taxpayer_number" placeholder="करदाता नम्बर "
-                                                value="{{ old('taxpayer_number', $application->taxpayer_number ?? '') }}"
+                                                value="{{ old('taxpayer_number', $buildingDocumentation->taxpayer_number ?? '') }}"
                                                 class="form-control @error('taxpayer_number') is-invalid @enderror"
                                                 id="taxpayer_number" />
                                             @error('taxpayer_number')
@@ -486,7 +486,7 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="bill_no" class="form-label">बिल नं</label>
                                             <input type="text" name="bill_no"
-                                                value="{{ old('bill_no', $application->bill_no ?? '') }}"
+                                                value="{{ old('bill_no', $buildingDocumentation->bill_no ?? '') }}"
                                                 placeholder="बिल नं"
                                                 class="form-control @error('bill_no') is-invalid @enderror"
                                                 id="bill_no" />
@@ -496,23 +496,23 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <x-date-input-component get-today-date="{{ false }}"
-                                                edit-date-ne="{{ $application->bill_date_bs }}"
-                                                edit-date-en="{{ $application->bill_date_ad }}" name-ne="bill_date_bs"
+                                                edit-date-ne="{{ $buildingDocumentation->bill_date_bs ?? '' }}"
+                                                edit-date-en="{{ $buildingDocumentation->bill_date_ad ?? '' }}" name-ne="bill_date_bs"
                                                 label-ne="बिल मिति (बि स.)" name-en="bill_date_ad" label-en="बिल मिति" />
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="amount" class="form-label">रकम </label>
                                             <input type="number" name="amount" step="0.01" placeholder="रकम"
-                                                value="{{ old('amount', $application->amount ?? '') }}"
+                                                value="{{ old('amount', $buildingDocumentation->amount ?? '') }}"
                                                 class="form-control @error('amount') is-invalid @enderror"
                                                 id="amount" />
                                             @error('amount')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        @if (!empty($application->other_file))
-                                            <a href="{{ $application->other_file }}"
-                                                download="{{ $application->other_file }}">
+                                        @if (!empty($buildingDocumentation->other_file))
+                                            <a href="{{ $buildingDocumentation->other_file }}"
+                                                download="{{ $buildingDocumentation->other_file }}">
                                                 <i class="fa fa-download"></i> Download
                                             </a>
                                         @endif

@@ -53,20 +53,20 @@
 
                             </thead>
                             <tbody class="text-nowrap text-center">
-                                @forelse($applications as $application)
+                                @forelse($buildingDocumentations as $buildingDocumentation)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ get_nepali_number($application->registration_no ?? '') }}</td>
-                                        <td>{{ get_nepali_number($application->registration_date_ne ?? '') }}</td>
-                                        <td>{{ $application->house_owner_name ?? '' }}</td>
+                                        <td>{{ get_nepali_number($buildingDocumentation->registration_no ?? '') }}</td>
+                                        <td>{{ get_nepali_number($buildingDocumentation->registration_date_ne ?? '') }}</td>
+                                        <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
                                         <td>
-                                            <span>{{ $application->localBody->local_body ?? '' }}
-                                                - {{ $application->ward_no ?? '' }} </span>
+                                            <span>{{ $buildingDocumentation->localBody->local_body ?? '' }}
+                                                - {{ $buildingDocumentation->ward_no ?? '' }} </span>
                                         </td>
                                         <td class="d-flex gap-1">
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('emap.admin.application.edit', $application) }}"
+                                                href="{{ route('emap.admin.application.edit', $buildingDocumentation) }}"
                                                 class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="पुरा विवरण हेर्नुहोस">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -78,19 +78,13 @@
 
 
                                             <a data-bs-type="edit"
-                                                href="{{ route('emap.admin.application.show', $application) }}"
+                                                href="{{ route('emap.admin.application.show', $buildingDocumentation) }}"
                                                 class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
                                                 title="पुरा विवरण हेर्नुहोस">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
-                                            {{-- @if (!is_null($application->registration_no))
-                                            <a data-bs-type="edit"
-                                               href="{{ route('admin.businessRegistration.application.printData', $application) }}"
-                                               title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-print"></i>
-                                            </a>
-                                        @endif --}}
+
                                         </td>
                                     </tr>
 
@@ -101,7 +95,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $applications->links() }}
+                        {{ $buildingDocumentations->links() }}
                     </div>
 
                 </div>
