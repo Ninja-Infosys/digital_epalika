@@ -2,9 +2,8 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\EMap\Entities\BuildingDocumentationSetting;
 
 class BuildingDocumentationSettingController extends Controller
@@ -25,14 +24,9 @@ class BuildingDocumentationSettingController extends Controller
 
         if ($buildingDocumentationSetting) {
             $buildingDocumentationSetting->update($data);
-        } else {
-            BuildingDocumentationSetting::create($data);
         }
-
         toast('सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return "Your form has been submitted";
-        // return redirect()->route('emap.admin.buildingDocumentationSetting.index');
+
+        return back();
     }
-
-
 }

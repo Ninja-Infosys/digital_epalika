@@ -46,15 +46,14 @@
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" name="is_building_documentation"
                                                 id="is_building_documentation1" value="1"
-                                                {{ $buildingDocumentationSetting->is_building_documentation == 1 ? 'checked' : '' }}>
+                                                {{ old('is_building_documentation', $buildingDocumentationSetting->is_building_documentation) == 1 ? 'checked' : '' }}>
                                             <label class="form-check-label" for="is_building_documentation1">मिल्ने
                                                 &nbsp;</label>
                                         </div>
                                         <div class="form-check">
                                             <input type="radio" class="form-check-input" name="is_building_documentation"
                                                 id="is_building_documentation2" value="0"
-                                                {{ $buildingDocumentationSetting->is_building_documentation == 0 ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="is_building_documentation2">नमिल्ने
+                                                {{ old('is_building_documentation', $buildingDocumentationSetting->is_building_documentation) == 0 ? 'checked' : '' }}>                                            <label class="form-check-label" for="is_building_documentation2">नमिल्ने
                                                 &nbsp;</label>
                                         </div>
                                     </div>
