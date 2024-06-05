@@ -56,11 +56,8 @@
                                 @forelse($applications as $application)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        {{-- <td>{{ get_nepali_number($application->registration_no ?? '') }}</td>
-                                        <td>{{ get_nepali_number($application->registration_date_ne ?? '') }}</td> --}}
-
-                                        <td>123</td>
-                                        <td>123</td>
+                                        <td>{{ get_nepali_number($application->registration_no ?? '') }}</td>
+                                        <td>{{ get_nepali_number($application->registration_date_ne ?? '') }}</td>
                                         <td>{{ $application->house_owner_name ?? '' }}</td>
                                         <td>
                                             <span>{{ $application->localBody->local_body ?? '' }}

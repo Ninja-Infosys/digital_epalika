@@ -122,8 +122,32 @@
                                                             <td>{{ $application->land_area ?? '' }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th>  जग्गाको कित्ता नं.</th>
+                                                            <th> जग्गाको कित्ता नं.</th>
                                                             <td>{{ $application->land_area ?? '' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> सडक अधिकार क्षेत्र</th>
+                                                            <td>{{ $application->road_jurisdiction ?? '' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> जग्गा विवरण</th>
+                                                            <td>{{ $application->land_detail ?? '' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> हाल वार्ड नं.</th>
+                                                            <td>{{ $application->land_ward_no ?? '' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> साविक जिल्ला </th>
+                                                            <td>{{ $application->former_district ?? '' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> साविक पालिका</th>
+                                                            <td>{{ $application->former_local_body ?? '' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> साविक वार्ड नं.</th>
+                                                            <td>{{ $application->former_ward_no ?? '' }}</td>
                                                         </tr>
 
 
@@ -142,34 +166,26 @@
                                 <div class="col-md-12">
                                     <div class="card-header">
                                         <h4 class="header-title">
-                                            प्रबन्ध समितिका पदाधिकारी को विवरण
+                                            संधियारको विवरण
                                         </h4>
                                     </div>
-                                    <table class="table table-bordered border-primary">
+                                    <table class="table table-bordered border-primary mt-3">
                                         <thead>
                                             <tr>
                                                 <th scope="col">क्र.स</th>
-                                                <th scope="col">नाम, थर</th>
-                                                <th scope="col">फोन नं</th>
-                                                <th scope="col">स्थायी वतन</th>
-                                                <th scope="col">नागरिकता नं.</th>
+                                                <th scope="col">दिशा</th>
+                                                <th scope="col">संधियारको नाम</th>
+                                                <th scope="col">वार्ड नं.</th>
                                                 <th scope="col">दस्तखत</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($application->partners as $partner)
+                                            @forelse($application->neighbours as $neighbour)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $partner->name ?? '' }}</td>
-                                                    <td>{{ $partner->phone ?? '' }}</td>
-                                                    <td>
-                                                        <span>
-                                                            {{ $partner->localBody->local_body ?? '' }}
-                                                            - {{ $partner->ward_no ?? '' }}
-                                                        </span>
-                                                    </td>
-                                                    <td>{{ $partner->citizenship_no ?? '' }}</td>
-
+                                                    <td>{{ $neighbour->direction->label() ?? '' }}</td>
+                                                    <td>{{ $neighbour->neighbour_name ?? '' }}</td>
+                                                    <td>{{ $neighbour->ward_no ?? '' }}</td>
                                                     <td></td>
                                                 </tr>
                                             @empty
@@ -186,11 +202,272 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-header">
+                                        <h4 class="header-title">
+                                            आवश्यक काग्जातहरु
+                                        </h4>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->citizenship ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी', '{{ pathinfo($application?->requiredDocument?->citizenship ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->citizenship }}')"
+                                                        class="text-muted fw-medium" type="button">नेपाली नागरिकताको प्रमाण
+                                                        पत्रको प्रतिलिपी
+                                                        .{{ pathinfo($application?->requiredDocument?->citizenship ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('citizenship')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->landowner_proved ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('जग्गाधनि प्रमाणपत्रको प्रतिलिपी ', '{{ pathinfo($application?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->landowner_proved }}')"
+                                                        class="text-muted fw-medium" type="button">जग्गाधनि प्रमाणपत्रको
+                                                        प्रतिलिपी
+                                                        .{{ pathinfo($application?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('landowner_proved')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->revenue ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('चालु आ.व को घरजग्गा कर तिरेको रसिदको प्रतिलिपि  ', '{{ pathinfo($application?->requiredDocument?->revenue ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->revenue }}')"
+                                                        class="text-muted fw-medium" type="button">चालु आ.व को घर
+                                                        जग्गा कर तिरेको रसिदको प्रतिलिपि
+                                                        .{{ pathinfo($application?->requiredDocument?->revenue ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('revenue')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->building_map ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('घरको नक्सा', '{{ pathinfo($application?->requiredDocument?->building_map ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->building_map }}')"
+                                                        class="text-muted fw-medium" type="button">घरको नक्सा
+                                                        .{{ pathinfo($application?->requiredDocument?->building_map ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('building_map')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->land_map ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('जग्गाको नक्सा', '{{ pathinfo($application?->requiredDocument?->land_map ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->land_map }}')"
+                                                        class="text-muted fw-medium" type="button">जग्गाको नक्सा
+                                                        .{{ pathinfo($application?->requiredDocument?->land_map ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('land_map')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->all_round_house_pic ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('चारैतिरको फोटो', '{{ pathinfo($application?->requiredDocument?->all_round_house_pic ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->all_round_house_pic }}')"
+                                                        class="text-muted fw-medium" type="button">चारैतिरको फोटो
+                                                        .{{ pathinfo($application?->requiredDocument?->all_round_house_pic ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('all_round_house_pic')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i
+                                                                class="fa {{ getFileIconClass($application?->requiredDocument?->photo ?? '') }} font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="javascript:void(0);"
+                                                        onclick="openFileModal('घरधनिको फोटो', '{{ pathinfo($application?->requiredDocument?->photo ?? '', PATHINFO_EXTENSION) }}', '{{ $application->requiredDocument->photo }}')"
+                                                        class="text-muted fw-medium" type="button">घरधनिको फोटो
+                                                        .{{ pathinfo($application?->requiredDocument?->photo ?? '', PATHINFO_EXTENSION) }}</a>
+
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="{{ route('admin.file-url-download', ['file_url' => $application?->requiredDocument->getRawOriginal('photo')]) }}"
+                                                        class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-header">
+                                        <h4 class="header-title">
+                                            अन्य काग्जातहरु
+                                        </h4>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            @foreach ($application->files as $file)
+
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="card shadow-none border">
+                                        <div class="p-2">
+                                            <div class="col-2">
+                                                <h3 class="text-center">{{ $file->file_name }}</h3>
+
+                                            </div>
+                                            <div class="row ">
+
+
+                                                <div class="col-8">
+                                                    <iframe src="{{ $file->file_url }}" height="200px" width="200px"></iframe>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
 
                         <div class="tab-pane" id="reg">
-                            <form
-                                action="{{ route('admin.businessRegistration.store.customapplicationData', $application) }}"
+                            <form action="{{ route('emap.admin.store.customApplicationData', $application) }}"
                                 method="post" enctype="multipart/form-data">
                                 @csrf
                                 <fieldset class="border p-2 mb-2">
@@ -227,7 +504,8 @@
                                             <label for="amount" class="form-label">रकम </label>
                                             <input type="number" name="amount" step="0.01" placeholder="रकम"
                                                 value="{{ old('amount', $application->amount ?? '') }}"
-                                                class="form-control @error('amount') is-invalid @enderror" id="amount" />
+                                                class="form-control @error('amount') is-invalid @enderror"
+                                                id="amount" />
                                             @error('amount')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
