@@ -77,6 +77,7 @@ class BuildingDocumentationController extends Controller
                     'registration_no' => 'FR-'.officeSetting()->fiscalYear?->title.'-'.Str::padLeft($reg_no, 4, 0),
                     'registration_date_en' => today()->toDateString(),
                     'registration_date_ne' => $this->get_today_nepali_date(),
+                    'status' => BuildingDocumentationStatusEnum::NOTICE->value,
                 ]);
             }
 
@@ -93,34 +94,30 @@ class BuildingDocumentationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
-        $buildingDocumentation->create([
-            'status' => BuildingDocumentationStatusEnum::NOTICE->value,
 
-        ]);
 
         return view('emap::admin.buildingDocumentation.template.notice', compact('buildingDocumentation'));
     }
     public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
     {
+        $buildingDocumentation->update([
+            'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
+        ]);
         $buildingDocumentation->load([
             'neighbours',
-        ]);
-        $buildingDocumentation->create([
-            'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
-
         ]);
         return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
     }
     public function printRecommendation(BuildingDocumentation $buildingDocumentation)
     {
+
+        $buildingDocumentation->update([
+            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
+        ]);
         $buildingDocumentation->load([
             'neighbours',
         ]);
-        $buildingDocumentation->create([
-            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
-
-        ]);
-        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
     }
 
 

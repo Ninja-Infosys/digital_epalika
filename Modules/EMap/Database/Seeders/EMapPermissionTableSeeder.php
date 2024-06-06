@@ -57,6 +57,10 @@ class EMapPermissionTableSeeder extends Seeder
             'landConfirmation_edit',
             'landConfirmation_create',
             'landConfirmation_delete',
+            'landRecommendation_access',
+            'landRecommendation_edit',
+            'landRecommendation_create',
+            'landRecommendation_delete',
         ];
 
         $this->storePermission($permissions);
