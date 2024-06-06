@@ -32,7 +32,7 @@
                         </a>
                     </div>
                 </div>
-                @livewire('emap::building-documentation-livewire',['businessDocumentation'=>$buildingDocumentation])
+                @livewire('emap::building-documentation-livewire',['buildingDocumentation'=>$buildingDocumentation])
             </div>
         </div>
     </div>
