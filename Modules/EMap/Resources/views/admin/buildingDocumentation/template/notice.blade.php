@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/icons.min.css') }}">
-    <title>{{ $application->name }}को फर्म दर्ता आवेदन</title>
+    <title>{{ $buildingDocument->name }}को फर्म दर्ता आवेदन</title>
 
 </head>
 
@@ -18,7 +18,7 @@
     <div class="card col-md-8 border">
         <div class="card-body">
             <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
-            <x-print-button target-element="printData" title="{{ $application->name }}"/>
+            <x-print-button target-element="printData" title="{{ $buildingDocument->name }}"/>
             <div id="printData">
 
 
