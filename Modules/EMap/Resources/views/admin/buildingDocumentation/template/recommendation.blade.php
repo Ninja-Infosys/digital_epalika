@@ -1,42 +1,47 @@
-<!doctype html>
-<html lang="en">
+@extends('admin.layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/icons.min.css') }}">
-    <title>{{ $buildingDocumentation->name }}को फर्म दर्ता आवेदन</title>
+@section('content')
+    <div class="row m-3">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
+                                गृहपृष्ठ
+                            </a>
+                        </li>
 
-</head>
+                        <li class="breadcrumb-item active">अभिलेखीकरण</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">सिफारिस पत्रको ढाँचा</h4>
+            </div>
+        </div>
+    </div>
 
-<body class="container bg-white">
-    <section class="row justify-content-center my-4 ">
-        <div class="card col-md-8 border">
-            @if (!is_null(auth()->user()->ward_no))
-                <form action="{{ route('emap.admin.buildingDocumentation.sentToAdmin', $buildingDocumentation) }}"
-                    method="post" style="display: inline">
-                    @csrf
-                    @method('put')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card p-0">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title">सिफारिस पत्रको ढाँचा </h4>
+                        <div class="d-flex justify-content-between">
+                            <x-print-button title="७ दिने सूचना" target-element="printData" />
 
-                    <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
-                        class="btn btn-xs btn-outline-warning">
-                        <i class="fa fa-print"></i>पालिकामा पठाउनुहोस
-                    </button>
-                </form>
-            @endif
-            @if ($buildingDocumentation->sent_admin == 'recommendation_sent' || $buildingDocumentation->sent_admin == 'land_confirmation_show' || !is_null(auth()->user()->ward_no))
-                <div class="card-body">
-                    <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
-                    <x-print-button target-element="printData" title="{{ $buildingDocumentation->name }}" />
+                            <a href="{{ route('emap.admin.buildingDocumentation.index') }}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-list"> दर्ता भएका अभिलेखीकरण</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0">
                     <div Id="printData">
                         <div class="text-center fw-bolder">
                             <div><span style="font-size:14px"><strong>अनुसूची ४</strong></span><br />
-                                <span style="font-size:14px"><strong>निर्देशिकाको दफा ५ संग
-                                        सम्वन्धिता</strong></span><br />
+                                <span style="font-size:14px"><strong>निर्देशिकाको दफा ५ संग सम्वन्धिता</strong></span><br />
                                 <span style="font-size:14px"><strong>सिफारिस पत्रको ढाँचा</strong></span>
                             </div>
                         </div>
@@ -53,21 +58,16 @@
                         <p class="text-justify-center lh-lg px-5"> चालनी नं. :</p>
                         <div class="text-justify-center lh-lg px-5">
                             <p>श्री {{ $officeSetting->localBody->local_body ?? '' }}को कार्यालय</p>
-                            <p>{{ $officeSetting->site_address }} ।</p>
+                            <p>{{$officeSetting->site_address}} ।</p>
                         </div>
-                        <p class="text-justify-center text-center lh-lg px-5"> <strong>बिषय : घर जग्गा अभिलेखिकरणको
-                                सिफारिस
+                        <p class="text-justify-center text-center lh-lg px-5"> <strong>बिषय : घर जग्गा अभिलेखिकरणको सिफारिस
                                 पठाइएको बारे ।</strong></p>
                         <p class="text-justify-center  lh-lg px-5">
                             प्रस्तुत बिषयमा {{ $officeSetting->localBody->local_body ?? '' }} वडा नं.
-                            {{ get_nepali_number($buildingDocumentation->land_ward_no) }} साविक जिल्ला
-                            {{ $buildingDocumentation->former_district }}
+                            {{get_nepali_number($buildingDocumentation->land_ward_no)}} साविक जिल्ला {{ $buildingDocumentation->former_district }}
                             {{ $buildingDocumentation->former_local_body }} वडा नं
-                            {{ get_nepali_number($buildingDocumentation->former_ward_no) }} कित्ता नं.
-                            {{ get_nepali_number($buildingDocumentation->plot_no) }} मा
-                            {{ get_nepali_number($buildingDocumentation->land_area) }} क्षेत्रफलमा घर
-                            निर्माण गरेको घरधनि श्री. {{ $buildingDocumentation->house_owner_name }} ले यस कार्यालयमा
-                            घर अभिलेखिकरणका लागी सिफारिस गरिपाउँ भनि दिएको निवेदन माथि जाँचबुझ
+                            {{ get_nepali_number($buildingDocumentation->former_ward_no) }} कित्ता नं. {{ get_nepali_number($buildingDocumentation->plot_no) }} मा {{ get_nepali_number($buildingDocumentation->land_area) }} क्षेत्रफलमा घर
+                            निर्माण गरेको घरधनि श्री. {{ $buildingDocumentation->house_owner_name }} ले यस कार्यालयमा घर अभिलेखिकरणका लागी सिफारिस गरिपाउँ भनि दिएको निवेदन माथि जाँचबुझ
                             गर्दा निजले पेश गरेको घरको अभिलेखिकरण गर्न तोकिएको मापदण्ड हरु सबै पुरा भएको देखिएकाले घर
                             अभिलेखिकरण गरिदिनुहुन सिफारिस साथ अनुरोध छ
                         </p>
@@ -75,8 +75,7 @@
                             ...................<br>
                             वडा अध्यक्ष
                         </p>
-                        <p class="text-justify-center lh-lg px-5"> <strong>(नगरपालिकामा सिफारिस गर्दा तपसिल बमोजिमका
-                                कागजात
+                        <p class="text-justify-center lh-lg px-5"> <strong>(नगरपालिकामा सिफारिस गर्दा तपसिल बमोजिमका कागजात
                                 संलग्न हुनपर्नेछ)</strong></p>
 
                         <div class="subject text-justify-center lh-lg px-5">
@@ -102,11 +101,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            </div>
         </div>
-    </section>
-    <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-</body>
 
-</html>
+@endsection
