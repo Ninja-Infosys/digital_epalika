@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
-use Modules\EMap\Http\Controllers\Admin\BusinessDocumentation\ApplicationController;
+use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingDocumentationController;
 // use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
@@ -139,10 +139,15 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
 });
 
 Route::prefix('buildingDocumentation')->group(function () {
-    Route::resource('application', ApplicationController::class);
-    Route::post('application/{application}/customData', [ApplicationController::class, 'customData'])
+    Route::resource('buildingDocumentation', BuildingDocumentationController::class);
+    Route::post('buildingDocumentation/{buildingDocumentation}/customData', [BuildingDocumentationController::class, 'customData'])
         ->name('store.customApplicationData');
-    Route::get('application/{application}/print', [ApplicationController::class, 'printNotice'])
-        ->name('application.printNotice');
+    Route::get('buildingDocumentation/{buildingDocumentation}/printNotice', [BuildingDocumentationController::class, 'printNotice'])
+        ->name('buildingDocumentation.printNotice');
+    Route::get('buildingDocumentation/{buildingDocumentation}/printLandConfirmation', [BuildingDocumentationController::class, 'printLandConfirmation'])
+        ->name('buildingDocumentation.printLandConfirmation');
+    Route::get('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
+        ->name('buildingDocumentation.printRecommendation');
+
 });
 

@@ -36,13 +36,13 @@ class FrontendController extends Controller
         return view('emap::frontend.e-map.index', compact('necessaryDocuments', 'registrationDocuments', 'buildingDocumentSetting'));
     }
 
-    public function printApplication(BuildingDocumentation $buildingDocument)
+    public function printApplication(BuildingDocumentation $buildingDocumentation)
     {
-        $buildingDocument->load([
+        $buildingDocumentation->load([
             'requiredDocument',
             'neighbours'
         ]);
-        return view('emap::frontend.e-map.buildingForm.template.application1', compact('buildingDocument'));
+        return view('emap::frontend.e-map.buildingForm.template.application1', compact('buildingDocumentation'));
     }
 
 
