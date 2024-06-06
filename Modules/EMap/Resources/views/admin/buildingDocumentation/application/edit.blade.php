@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> दर्खास्त निवेदन सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('emap.admin.application.index',$buildingDocumentation)}}"
+                        <a href="{{route('emap.admin.buildingDocumentation.index',$buildingDocumentation)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> दर्खास्त निवेदन सूची
                         </a>

@@ -1,24 +1,24 @@
 <?php
 
-namespace Modules\EMap\Http\Controllers\Admin\BusinessDocumentation;
+namespace Modules\EMap\Http\Controllers\Admin\BuildingDocumentation;
 
 use App\Http\Controllers\Controller;
 use App\Traits\NepaliDateConverter;
+use Modules\EMap\Entities\BuildingDocumentation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\EMap\Entities\BuildingDocumentation;
+use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 
-class ApplicationController extends Controller
+class BuildingDocumentationController extends Controller
 {
     use NepaliDateConverter;
-
     public function index()
     {
 
         $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
-            if (! is_null(request('search'))) {
+            if (!is_null(request('search'))) {
                 $q->whereLike(['house_owner_name', 'submission_no', 'registration_no'], request('search'));
             }
             if (! empty(request('to_date'))) {
@@ -84,7 +84,7 @@ class ApplicationController extends Controller
         });
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
 
-        return redirect()->route('emap.admin.application.printNotice', $buildingDocumentation->id);
+        return redirect()->route('emap.admin.buildingDocumentation.printNotice', $buildingDocumentation->id);
 
     }
 
@@ -93,9 +93,37 @@ class ApplicationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
+        $buildingDocumentation->create([
+            'status' => BuildingDocumentationStatusEnum::NOTICE->value,
+
+        ]);
 
         return view('emap::admin.buildingDocumentation.template.notice', compact('buildingDocumentation'));
     }
+    public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
+    {
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+        $buildingDocumentation->create([
+            'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
+
+        ]);
+        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+    }
+    public function printRecommendation(BuildingDocumentation $buildingDocumentation)
+    {
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+        $buildingDocumentation->create([
+            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
+
+        ]);
+        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+    }
+
+
 
     public function update(Request $request, $id)
     {

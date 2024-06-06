@@ -14,11 +14,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 use Modules\EMap\Enums\BuildingTypeEnum;
 
 class BuildingDocumentation extends Model
 {
-    use EventObserveTrait,HasFactory,SoftDeletes;
+    use EventObserveTrait, HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',
@@ -65,10 +66,12 @@ class BuildingDocumentation extends Model
         'taxpayer_number',
         'amount',
         'other_file',
+        'status',
     ];
 
     protected $casts = [
         'building_category' => BuildingTypeEnum::class,
+        'status' => BuildingDocumentationStatusEnum::class,
     ];
 
     public function requiredDocument(): HasOne
@@ -108,5 +111,14 @@ class BuildingDocumentation extends Model
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
+    }
+
+    public function isRegistrationDateMoreThanAWeekOld()
+    {
+        $registrationDate = new \DateTime($this->bill_date_ad);
+        $oneWeekLater = (clone $registrationDate)->modify('+7 days');
+        $now = new \DateTime();
+
+        return $now > $oneWeekLater;
     }
 }
