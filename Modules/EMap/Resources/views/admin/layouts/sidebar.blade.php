@@ -204,8 +204,8 @@
     <div class="collapse {{ request()->is('admin/emap/buildingDocumentation/*') ? 'show' : '' }}" id="sidebarEMapBuildingDocumentation">
         <ul class="nav-second-level">
             @can('buildingDocumentationApplication_access')
-                <li class="{{ request()->is('admin/emap/buildingDocumentation/application') ? 'active' : '' }}">
-                    <a href="{{ route('emap.admin.application.index') }}">
+                <li class="{{ request()->is('admin/emap/buildingDocumentation/buildingDocumentation') ? 'active' : '' }}">
+                    <a href="{{ route('emap.admin.buildingDocumentation.index') }}">
                         <span>दर्खास्त निवेदन</span>
                     </a>
                 </li>

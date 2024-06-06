@@ -43,5 +43,5 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('mapApply/{mapApply:uuid}/{noticeTypeEnum}/storeEmapTemplateData', 'storeEmapTemplateData')->name('store-emap-template-data');
     Route::get('file/{file}/download', 'download')->name('file.download');
     Route::get('file-download', 'downloadFile')->name('file-url-download');
-    Route::get('/buildingDocument/{buildingDocument}/print', 'printApplication')->name('buildingDocument.printApplication');
+    Route::get('/buildingDocumentation/{buildingDocumentation}/print', 'printApplication')->name('buildingDocumentation.printApplication');
 });

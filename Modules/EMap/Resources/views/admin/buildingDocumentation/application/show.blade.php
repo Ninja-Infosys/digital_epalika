@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('emap.admin.application.index') }}">दर्खास्त निवेदन सूची
+                            <a href="{{ route('emap.admin.buildingDocumentation.index') }}">दर्खास्त निवेदन सूची
                             </a>
                         </li>
                         <li class="breadcrumb-item active">निवेदनको विवरण</li>
@@ -180,7 +180,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($buildingDocumentation->neighbours as $neighbour)
+                                            @forelse($buildingDocumentation?->neighbours as $neighbour)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $neighbour->direction->label() ?? '' }}</td>

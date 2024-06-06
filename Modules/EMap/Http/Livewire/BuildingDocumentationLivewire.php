@@ -29,7 +29,7 @@ class BuildingDocumentationLivewire extends Component
     public $wards = [];
     public $formerWards = [];
     public $neighbours = [];
-    public BuildingDocumentation $buildingDocument;
+    public BuildingDocumentation $buildingDocumentation;
     public array $form = [
         'house_owner_name' => null,
         'applicant_name' => null,
@@ -71,11 +71,11 @@ class BuildingDocumentationLivewire extends Component
         'photo' => null,
     ];
 
-    public function mount($buildingDocument = null)
+    public function mount($buildingDocumentation = null)
     {
         $this->provinces = get_provinces();
-        if (!empty($buildingDocument)) {
-            $this->buildingDocument = $buildingDocument;
+        if (!empty($buildingDocumentation)) {
+            $this->buildingDocumentation = $buildingDocumentation;
 
             $this->assignBuildingDocumentData();
         } else {
@@ -89,10 +89,10 @@ class BuildingDocumentationLivewire extends Component
     private function assignBuildingDocumentData()
     {
         foreach (Arr::except($this->form, ['neighbours', 'files']) as $key => $data) {
-            $this->form[$key] = $this->buildingDocument[$key];
+            $this->form[$key] = $this->buildingDocumentation[$key];
         }
 
-        foreach ($this->buildingDocument->neighbours as $neighbour) {
+        foreach ($this->buildingDocumentation->neighbours as $neighbour) {
             $this->form['neighbours'][] = [
                 'neighbour_name' => $neighbour->neighbour_name ?? null,
                 'direction' => $neighbour->direction ?? null,
@@ -147,7 +147,7 @@ class BuildingDocumentationLivewire extends Component
     }
     protected function secondStepValidations(): array
     {
-        return !empty($this->buildingDocument)
+        return !empty($this->buildingDocumentation)
             ? array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['required', 'string'],
                 'form.neighbours.*.direction' => ['required'],
@@ -172,7 +172,7 @@ class BuildingDocumentationLivewire extends Component
 
     protected function thirdStepValidations(): array
     {
-        return !empty($this->buildingDocument)
+        return !empty($this->buildingDocumentation)
             ?  [
                 'requiredDocument.citizenship' => ['nullable'],
                 'requiredDocument.landowner_proved' => ['nullable'],
@@ -222,10 +222,10 @@ class BuildingDocumentationLivewire extends Component
     {
         $this->validate();
 
-        if (!empty($this->buildingDocument)) {
+        if (!empty($this->buildingDocumentation)) {
             DB::transaction(function () {
-                $this->buildingDocument->update($this->form);
-                $this->saveBuildingDocumentData($this->buildingDocument);
+                $this->buildingDocumentation->update($this->form);
+                $this->saveBuildingDocumentData($this->buildingDocumentation);
             });
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',
@@ -234,12 +234,12 @@ class BuildingDocumentationLivewire extends Component
             return redirect(route('emap.admin.application.index'));
         }
 
-        $buildingDocument = DB::transaction(function () {
-            $buildingDocument = BuildingDocumentation::create($this->form + [
+        $buildingDocumentation = DB::transaction(function () {
+            $buildingDocumentation = BuildingDocumentation::create($this->form + [
                     'submission_no' => time(),
                 ]);
-            $this->saveBuildingDocumentData($buildingDocument);
-            return $buildingDocument;
+            $this->saveBuildingDocumentData($buildingDocumentation);
+            return $buildingDocumentation;
         });
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
@@ -247,21 +247,21 @@ class BuildingDocumentationLivewire extends Component
             'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
         ]);
         $this->reset('form');
-        return redirect()->route('buildingDocument.printApplication', $buildingDocument->id);
+        return redirect()->route('buildingDocumentation.printApplication', $buildingDocumentation->id);
     }
 
-    private function saveBuildingDocumentData($buildingDocument): void
+    private function saveBuildingDocumentData($buildingDocumentation): void
     {
         foreach ($this->form['neighbours'] as $neighbour) {
             $neighbours = new Neighbour($neighbour);
-            $buildingDocument->neighbours()->save($neighbours);
+            $buildingDocumentation->neighbours()->save($neighbours);
         }
 
-        $buildingDocument->requiredDocument()->create($this->requiredDocument);
+        $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
 
 
         foreach ($this->form['files'] ?? [] as $file) {
-            $buildingDocument->files()->create([
+            $buildingDocumentation->files()->create([
                 'file_name' => $file['file_name'],
                 'extension' => $file['file']->getClientOriginalExtension(),
                 'file' => $file['file']->store('file/', 'public')
