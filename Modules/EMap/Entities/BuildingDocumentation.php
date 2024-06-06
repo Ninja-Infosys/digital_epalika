@@ -11,6 +11,7 @@ use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -120,5 +121,10 @@ class BuildingDocumentation extends Model
         $now = new \DateTime();
 
         return $now > $oneWeekLater;
+    }
+
+    public function landReports(): HasMany
+    {
+        return $this->hasMany(LandReport::class);
     }
 }
