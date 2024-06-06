@@ -17,6 +17,7 @@ class ForumLivewire extends Component
     use WithFileUploads;
 
     public int $currentStep = 1;
+
     public float $progressPercentage = 0;
 
     public $provinces = [];
@@ -26,8 +27,11 @@ class ForumLivewire extends Component
     public $localBodies = [];
 
     public $wards = [];
+
     public $partners = [];
+
     public Forum $forum;
+
     public array $form = [
         'name' => null,
         'name_en' => null,
@@ -62,10 +66,11 @@ class ForumLivewire extends Component
         'files' => [],
 
     ];
+
     public function mount($forum = null)
     {
         $this->provinces = get_provinces();
-        if (!empty($forum)) {
+        if (! empty($forum)) {
             $this->forum = $forum;
 
             $this->assignForumData();
@@ -76,9 +81,10 @@ class ForumLivewire extends Component
             $this->form['local_body_id'] = officeSetting()->local_body_id;
         }
     }
+
     private function assignForumData()
     {
-        foreach (Arr::except($this->form, ['photo', 'partners','files']) as $key => $data) {
+        foreach (Arr::except($this->form, ['photo', 'partners', 'files']) as $key => $data) {
             $this->form[$key] = $this->forum[$key];
         }
 
@@ -110,6 +116,7 @@ class ForumLivewire extends Component
             ];
         }
     }
+
     protected array $secondStepValidations = [
         'form.partners' => ['required', 'array'],
         'form.partners.*.name' => ['required'],
@@ -133,6 +140,7 @@ class ForumLivewire extends Component
         'form.partners.*.way' => ['nullable', 'string'],
         'form.partners.*.tole' => ['required', 'string'],
     ];
+
     protected function firstStepValidation(): array
     {
         return [
@@ -163,9 +171,10 @@ class ForumLivewire extends Component
             'form.other' => ['required', 'string'],
         ];
     }
+
     protected function secondStepValidations(): array
     {
-        return !empty($this->forum)
+        return ! empty($this->forum)
             ? array_merge($this->secondStepValidations, [
                 'form.partners.*.photo' => ['required'],
                 'form.partners.*.citizenship_front' => ['required'],
@@ -177,6 +186,7 @@ class ForumLivewire extends Component
                 'form.partners.*.citizenship_back' => ['nullable'],
             ]);
     }
+
     protected function thirdStepValidations(): array
     {
         return [
@@ -184,6 +194,7 @@ class ForumLivewire extends Component
             'form.other_document' => ['nullable', 'array'],
         ];
     }
+
     public function rules(): array
     {
         return match ($this->currentStep) {
@@ -192,6 +203,7 @@ class ForumLivewire extends Component
             default => $this->firstStepValidation(),
         };
     }
+
     public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
@@ -214,24 +226,26 @@ class ForumLivewire extends Component
     {
         $this->validate();
 
-        if (!empty($this->forum)) {
+        if (! empty($this->forum)) {
             DB::transaction(function () {
                 $this->forum->update($this->form);
                 $this->saveForumData($this->forum);
             });
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',
-                'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो'
+                'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो',
             ]);
+
             return redirect(route('admin.businessRegistration.registration.forum.index'));
 
         }
 
         $forum = DB::transaction(function () {
             $forum = Forum::create($this->form + [
-                    'submission_no' => time(),
-                ]);
+                'submission_no' => time(),
+            ]);
             $this->saveBuildingDocumentData($forum);
+
             return $forum;
         });
         $this->saveForumData('alert_message', [
@@ -240,6 +254,7 @@ class ForumLivewire extends Component
             'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
         ]);
         $this->reset('form');
+
         return redirect()->route('businessRegistration.printForum', $forum->id);
     }
 
@@ -254,10 +269,11 @@ class ForumLivewire extends Component
             $forum->files()->create([
                 'file_name' => $file['file_name'],
                 'extension' => $file['file']->getClientOriginalExtension(),
-                'file' => $file['file']->store('file/', 'public')
+                'file' => $file['file']->store('file/', 'public'),
             ]);
         }
     }
+
     public function partnerArrayIncrement(): void
     {
         $this->form['partners'][] = [
@@ -269,12 +285,13 @@ class ForumLivewire extends Component
 
     public function partnerArrayDecrement($index): void
     {
-        if (!empty($this->form['partners'][$index]['id'])) {
+        if (! empty($this->form['partners'][$index]['id'])) {
             Partner::find($this->form['partners'][$index]['id'])->delete();
         }
         unset($this->form['partners'][$index]);
         $this->form['partners'] = array_values($this->form['partners']);
     }
+
     public function fileArrayIncrement(): void
     {
         $this->form['files'][] = [];
@@ -282,7 +299,7 @@ class ForumLivewire extends Component
 
     public function fileArrayDecrement($index): void
     {
-        if (!empty($this->form['files'][$index]['id'])) {
+        if (! empty($this->form['files'][$index]['id'])) {
             Partner::find($this->form['files'][$index]['id'])->delete();
         }
         unset($this->form['files'][$index]);
@@ -291,13 +308,13 @@ class ForumLivewire extends Component
 
     public function render(): Factory|View|Application
     {
-        if (!empty($this->form['province_id'])) {
+        if (! empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
         }
-        if (!empty($this->form['district_id'])) {
+        if (! empty($this->form['district_id'])) {
             $this->localBodies = get_local_bodies($this->form['district_id']);
         }
-        if (!empty($this->form['local_body_id'])) {
+        if (! empty($this->form['local_body_id'])) {
             $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
@@ -309,6 +326,7 @@ class ForumLivewire extends Component
         $this->reset('progressPercentage');
         $this->progressPercentage = $this->currentStep / 3 * 100;
     }
+
     public function messages(): array
     {
         return [
