@@ -2,7 +2,6 @@
 
 namespace Modules\EMap\Http\Livewire;
 
-
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,14 +11,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\BuildingDocumentation;
 use Modules\EMap\Entities\Neighbour;
-use Modules\EMap\Entities\RequiredDocument;
 
 class BuildingDocumentationLivewire extends Component
 {
     use WithFileUploads;
 
     public int $currentStep = 1;
+
     public float $progressPercentage = 0;
+
     public $provinces = [];
 
     public $districts = [];
@@ -27,9 +27,13 @@ class BuildingDocumentationLivewire extends Component
     public $localBodies = [];
 
     public $wards = [];
+
     public $formerWards = [];
+
     public $neighbours = [];
+
     public BuildingDocumentation $buildingDocumentation;
+
     public array $form = [
         'house_owner_name' => null,
         'applicant_name' => null,
@@ -61,6 +65,7 @@ class BuildingDocumentationLivewire extends Component
 
         'files' => [],
     ];
+
     public array $requiredDocument = [
         'citizenship' => null,
         'landowner_proved' => null,
@@ -74,19 +79,18 @@ class BuildingDocumentationLivewire extends Component
     public function mount($buildingDocumentation = null)
     {
         $this->provinces = get_provinces();
-        if (!empty($buildingDocumentation)) {
+        if (! empty($buildingDocumentation)) {
             $this->buildingDocumentation = $buildingDocumentation;
 
-            $this->assignBuildingDocumentData();
+            $this->assignBuildingDocumentationData();
         } else {
 
             $this->neighbourArrayIncrement();
 
-
         }
     }
 
-    private function assignBuildingDocumentData()
+    private function assignBuildingDocumentationData()
     {
         foreach (Arr::except($this->form, ['neighbours', 'files']) as $key => $data) {
             $this->form[$key] = $this->buildingDocumentation[$key];
@@ -109,11 +113,6 @@ class BuildingDocumentationLivewire extends Component
         'form.neighbours.*.ward_no' => ['required', 'integer'],
 
     ];
-
-
-
-
-
 
     protected function firstStepValidation(): array
     {
@@ -145,9 +144,10 @@ class BuildingDocumentationLivewire extends Component
             'form.land_detail' => ['required', 'string'],
         ];
     }
+
     protected function secondStepValidations(): array
     {
-        return !empty($this->buildingDocumentation)
+        return ! empty($this->buildingDocumentation)
             ? array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['required', 'string'],
                 'form.neighbours.*.direction' => ['required'],
@@ -159,6 +159,7 @@ class BuildingDocumentationLivewire extends Component
                 'form.neighbours.*.ward_no' => ['nullable', 'integer'],
             ]);
     }
+
     protected array $thirdStepValidations = [
 
         'requiredDocument.citizenship' => ['required'],
@@ -172,8 +173,8 @@ class BuildingDocumentationLivewire extends Component
 
     protected function thirdStepValidations(): array
     {
-        return !empty($this->buildingDocumentation)
-            ?  [
+        return ! empty($this->buildingDocumentation)
+            ? [
                 'requiredDocument.citizenship' => ['nullable'],
                 'requiredDocument.landowner_proved' => ['nullable'],
                 'requiredDocument.revenue' => ['nullable'],
@@ -181,7 +182,7 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
                 'requiredDocument.photo' => ['nullable'],
-            ]           :  [
+            ] : [
                 'requiredDocument.citizenship' => ['required'],
                 'requiredDocument.landowner_proved' => ['required'],
                 'requiredDocument.revenue' => ['required'],
@@ -218,27 +219,30 @@ class BuildingDocumentationLivewire extends Component
         $this->currentStep = $step;
         $this->calculateProgressPercentage();
     }
+
     public function submitForm()
     {
         $this->validate();
 
-        if (!empty($this->buildingDocumentation)) {
+        if (! empty($this->buildingDocumentation)) {
             DB::transaction(function () {
                 $this->buildingDocumentation->update($this->form);
                 $this->saveBuildingDocumentData($this->buildingDocumentation);
             });
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',
-                'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो'
+                'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो',
             ]);
+
             return redirect(route('emap.admin.application.index'));
         }
 
         $buildingDocumentation = DB::transaction(function () {
             $buildingDocumentation = BuildingDocumentation::create($this->form + [
-                    'submission_no' => time(),
-                ]);
+                'submission_no' => time(),
+            ]);
             $this->saveBuildingDocumentData($buildingDocumentation);
+
             return $buildingDocumentation;
         });
         $this->dispatchBrowserEvent('alert_message', [
@@ -247,6 +251,7 @@ class BuildingDocumentationLivewire extends Component
             'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
         ]);
         $this->reset('form');
+
         return redirect()->route('buildingDocumentation.printApplication', $buildingDocumentation->id);
     }
 
@@ -259,15 +264,13 @@ class BuildingDocumentationLivewire extends Component
 
         $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
 
-
         foreach ($this->form['files'] ?? [] as $file) {
             $buildingDocumentation->files()->create([
                 'file_name' => $file['file_name'],
                 'extension' => $file['file']->getClientOriginalExtension(),
-                'file' => $file['file']->store('file/', 'public')
+                'file' => $file['file']->store('file/', 'public'),
             ]);
         }
-
 
     }
 
@@ -278,12 +281,13 @@ class BuildingDocumentationLivewire extends Component
 
     public function neighbourArrayDecrement($index): void
     {
-        if (!empty($this->form['neighbours'][$index]['id'])) {
+        if (! empty($this->form['neighbours'][$index]['id'])) {
             Neighbour::find($this->form['neighbours'][$index]['id'])->delete();
         }
         unset($this->form['neighbours'][$index]);
         $this->form['neighbours'] = array_values($this->form['neighbours']);
     }
+
     public function fileArrayIncrement(): void
     {
         $this->form['files'][] = [];
@@ -291,21 +295,22 @@ class BuildingDocumentationLivewire extends Component
 
     public function fileArrayDecrement($index): void
     {
-        if (!empty($this->form['files'][$index]['id'])) {
+        if (! empty($this->form['files'][$index]['id'])) {
             Neighbour::find($this->form['files'][$index]['id'])->delete();
         }
         unset($this->form['files'][$index]);
         $this->form['files'] = array_values($this->form['files']);
     }
+
     public function render(): Factory|View|Application
     {
-        if (!empty($this->form['province_id'])) {
+        if (! empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
         }
-        if (!empty($this->form['district_id'])) {
+        if (! empty($this->form['district_id'])) {
             $this->localBodies = get_local_bodies($this->form['district_id']);
         }
-        if (!empty($this->form['local_body_id'])) {
+        if (! empty($this->form['local_body_id'])) {
             $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
@@ -317,6 +322,7 @@ class BuildingDocumentationLivewire extends Component
         $this->reset('progressPercentage');
         $this->progressPercentage = $this->currentStep / 3 * 100;
     }
+
     public function messages(): array
     {
         return [
