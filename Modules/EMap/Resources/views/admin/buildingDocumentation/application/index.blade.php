@@ -105,11 +105,11 @@
                                                         </form>
                                                     @endcan
                                                 @endif
-                                                @if (
+                                                @if(
                                                     $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::LAND_CONFIRMATION ||
-                                                        Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION ||
-                                                        Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
-                                                        Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
+                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION ||
+                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
+                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
                                                     @can('landRecommendation_access')
                                                         <form
                                                             action="{{ route('emap.admin.buildingDocumentation.printRecommendation', $buildingDocumentation) }}"
@@ -124,10 +124,10 @@
                                                         </form>
                                                     @endcan
                                                 @endif
-                                                @if (
+                                                @if(
                                                     $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION ||
-                                                        Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
-                                                        Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
+                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
+                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
                                                     @can('landReport_create')
                                                         <a href="{{ route('emap.admin.buildingDocumentation.landReport.create', $buildingDocumentation) }}"
                                                             class="dropdown-item">

@@ -234,7 +234,7 @@ class BuildingDocumentationLivewire extends Component
                 'title' => 'तपाइको उधोग सफलता पुर्बक अध्याबधिक भयो',
             ]);
 
-            return redirect(route('emap.admin.application.index'));
+            return redirect(route('emap.admin.buildingDocumentation.index'));
         }
 
         $buildingDocumentation = DB::transaction(function () {

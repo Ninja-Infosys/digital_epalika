@@ -68,6 +68,7 @@ class BuildingDocumentation extends Model
         'amount',
         'other_file',
         'status',
+        'sent_admin',
     ];
 
     protected $casts = [
@@ -122,9 +123,8 @@ class BuildingDocumentation extends Model
 
         return $now > $oneWeekLater;
     }
-
-    public function landReports(): HasMany
+    public function landReport(): HasOne
     {
-        return $this->hasMany(LandReport::class);
+        return $this->hasOne(LandReport::class);
     }
 }

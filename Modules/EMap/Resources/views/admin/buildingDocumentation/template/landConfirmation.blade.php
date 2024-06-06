@@ -16,9 +16,25 @@
 <body class="container bg-white">
     <section class="row justify-content-center my-4 ">
         <div class="card col-md-8 border">
+            @if (!is_null(auth()->user()->ward_no))
+            <form action="{{ route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation) }}"
+                method="post" style="display: inline">
+                @csrf
+                @method('put')
+
+                <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
+                    class="btn btn-xs btn-outline-warning">
+                    <i class="fa fa-print"></i>पालिकामा देखाउनुस
+                </button>
+            </form>
+            @endif
+            @if ($buildingDocumentation->sent_admin == 'land_confirmation_show' || !is_null(auth()->user()->ward_no))
             <div class="card-body">
                 <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
+
+                @if (auth()->user()->ward_no != NULL)
                 <x-print-button target-element="printData" title="{{ $buildingDocumentation->name }}" />
+                @endif
                 <div id="printData">
                     <div class="text-center fw-bolder">
                         <div><span style="font-size:14px"><strong>अनुसूची-३</strong></span><br />
@@ -56,10 +72,10 @@
                         <p>संधियारहरु</p>
 
                         @foreach ($buildingDocumentation->neighbours as $neighbour)
-                            <p><strong>{{ $neighbour->direction->label() }}तर्फ :-</strong></p>
-                            <p>१. {{ $officeSetting->localBody->local_body ?? '' }} वडा नं.
-                                {{ get_nepali_number($neighbour->ward_no) }} बस्ने श्री
-                                {{ $neighbour->neighbour_name }} </p>
+                        <p><strong>{{ $neighbour->direction->label() }}तर्फ :-</strong></p>
+                        <p>१. {{ $officeSetting->localBody->local_body ?? '' }} वडा नं.
+                            {{ get_nepali_number($neighbour->ward_no) }} बस्ने श्री
+                            {{ $neighbour->neighbour_name }} </p>
                         @endforeach
 
                         <p class="mt-2">वडा अध्यक्ष श्री .................
@@ -72,6 +88,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </section>
     <script src="{{ asset('assets/backend/print/print.min.js') }}"></script>
