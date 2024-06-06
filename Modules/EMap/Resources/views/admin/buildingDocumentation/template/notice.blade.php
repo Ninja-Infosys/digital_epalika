@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/icons.min.css') }}">
+    <title>{{ $buildingDocument->name }}को फर्म दर्ता आवेदन</title>
     <title>{{ $buildingDocumentation->name }}को फर्म दर्ता आवेदन</title>
 
 </head>
