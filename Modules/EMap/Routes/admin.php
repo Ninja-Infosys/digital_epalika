@@ -144,10 +144,11 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('store.customApplicationData');
     Route::get('buildingDocumentation/{buildingDocumentation}/printNotice', [BuildingDocumentationController::class, 'printNotice'])
         ->name('buildingDocumentation.printNotice');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printLandConfirmation', [BuildingDocumentationController::class, 'printLandConfirmation'])
+    Route::put('buildingDocumentation/{buildingDocumentation}/printLandConfirmation', [BuildingDocumentationController::class, 'printLandConfirmation'])
         ->name('buildingDocumentation.printLandConfirmation');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
+    Route::put('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
         ->name('buildingDocumentation.printRecommendation');
+        // Route::put('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])->name('buildingDocumentation.printRecommendation');;
 
 });
 
