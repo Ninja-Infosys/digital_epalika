@@ -148,7 +148,8 @@
                                                         </a>
                                                     @endcan
                                                 @endif
-                                                @if (
+                                                @if ($buildingDocumentation->status ==
+                                                Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION ||
                                                     $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
                                                         $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
                                                     @can('certificate_access')

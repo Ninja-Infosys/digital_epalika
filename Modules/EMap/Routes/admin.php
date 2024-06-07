@@ -163,6 +163,5 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('buildingDocumentation.printPermission');
     Route::get('buildingDocumentation/{buildingDocumentation}/printConfession', [BuildingDocumentationController::class, 'printConfession'])
         ->name('buildingDocumentation.printConfession');
-    Route::post('buildingDocumentation/{buildingDocumentation}/landReportFile', [LandReportController::class, 'storeLandReport'])->name('buildingDocumentation.landReport.store');
 
 });
