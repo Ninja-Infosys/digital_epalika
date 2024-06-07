@@ -4,21 +4,22 @@ namespace Modules\EMap\Http\Controllers\Admin\BuildingDocumentation;
 
 use App\Http\Controllers\Controller;
 use App\Traits\NepaliDateConverter;
-use Modules\EMap\Entities\BuildingDocumentation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Modules\EMap\Entities\BuildingDocumentation;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 
 class BuildingDocumentationController extends Controller
 {
     use NepaliDateConverter;
+
     public function index()
     {
 
         $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
+            if (! is_null(request('search'))) {
                 $q->whereLike(['house_owner_name', 'submission_no', 'registration_no'], request('search'));
             }
             if (! empty(request('to_date'))) {
@@ -99,46 +100,52 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-
         return view('emap::admin.buildingDocumentation.template.notice', compact('buildingDocumentation'));
     }
+
     public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
     {
 
-        if(!is_null(auth()->user()->ward_no)){
-        $buildingDocumentation->update([
-            'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
-        ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
-    }
+        if (! is_null(auth()->user()->ward_no)) {
+            $buildingDocumentation->update([
+                'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
+            ]);
+            $buildingDocumentation->load([
+                'neighbours',
+            ]);
+        }
+
         return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
     }
+
     public function printRecommendation(BuildingDocumentation $buildingDocumentation)
     {
-        if(!is_null(auth()->user()->ward_no)){
-        $buildingDocumentation->update([
-            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
-        ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
-    }
+        if (! is_null(auth()->user()->ward_no)) {
+            $buildingDocumentation->update([
+                'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
+            ]);
+            $buildingDocumentation->load([
+                'neighbours',
+            ]);
+        }
+
         return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
     }
+
     public function printCertificate(BuildingDocumentation $buildingDocumentation)
     {
-        if(is_null(auth()->user()->ward_no)){
-        $buildingDocumentation->update([
-            'status' => BuildingDocumentationStatusEnum::CERTIFICATE->value,
-        ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
+        if (is_null(auth()->user()->ward_no)) {
+            $buildingDocumentation->update([
+                'status' => BuildingDocumentationStatusEnum::CERTIFICATE->value,
+            ]);
+            $buildingDocumentation->load([
+                'neighbours',
+            ]);
+        }
+
+        return view('emap::admin.buildingDocumentation.template.certificate', compact('buildingDocumentation'));
     }
-        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
-    }
+
     public function sentToAdmin(BuildingDocumentation $buildingDocumentation)
     {
 
@@ -148,9 +155,11 @@ class BuildingDocumentationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
+
         return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
 
     }
+
     public function showToAdmin(BuildingDocumentation $buildingDocumentation)
     {
 
@@ -160,9 +169,11 @@ class BuildingDocumentationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
+
         return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
 
     }
+
     public function printPermission(BuildingDocumentation $buildingDocumentation)
     {
 
@@ -172,6 +183,7 @@ class BuildingDocumentationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
+
         return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation'));
     }
 
@@ -184,9 +196,9 @@ class BuildingDocumentationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
+
         return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation'));
     }
-
 
     public function update(Request $request, $id)
     {

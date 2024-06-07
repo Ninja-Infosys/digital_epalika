@@ -13,7 +13,6 @@ return new class extends Migration
             $table->foreignId('building_documentation_id')->constrained()->cascadeOnDelete();
             $table->longText('description')->comment('विवरण');
             $table->string('submitted_date')->comment('पेश मिति');
-            $table->boolean('sent_to_ward')->comment('वडामा पठाउनुहोस')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -24,7 +24,6 @@ class LandReport extends Model
     'building_documentation_id',
     'description',
     'submitted_date',
-    'sent_to_ward'
 ];
 
 public function buildingDocumentation(): BelongsTo
