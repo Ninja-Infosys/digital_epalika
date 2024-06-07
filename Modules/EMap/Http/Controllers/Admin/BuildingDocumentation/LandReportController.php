@@ -30,6 +30,7 @@ class LandReportController extends Controller
 
     public function create(BuildingDocumentation $buildingDocumentation)
     {
+        if(is_null(auth()->user()->ward_no))
         $this->checkAuthorization('landReport_create');
         return view('emap::admin.buildingDocumentation.landReport.create', compact('buildingDocumentation'));
     }
@@ -41,7 +42,6 @@ class LandReportController extends Controller
         $landReport = DB::transaction(function () use ($request, $buildingDocumentation) {
             $landReport = LandReport::updateOrCreate(
                 ['building_documentation_id' => $buildingDocumentation->id],
-                ['sent_to_ward' => 1],
                 $request->validated()
             );
             $buildingDocumentation->update([

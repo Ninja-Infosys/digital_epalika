@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                @if (!is_null(auth()->user()->ward_no) && $buildingDocumentation->sent_admin == 'notice')
+                @if (!is_null(auth()->user()->ward_no) )
                     <form action="{{ route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation) }}"
                         method="post" style="display: inline">
                         @csrf
