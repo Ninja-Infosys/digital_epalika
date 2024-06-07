@@ -106,10 +106,7 @@
                                                     @endcan
                                                 @endif
                                                 @if(
-                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::LAND_CONFIRMATION ||
-                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION ||
-                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
-                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
+                                                    $buildingDocumentation->status != Modules\EMap\Enums\BuildingDocumentationStatusEnum::NOTICE )
                                                     @can('landRecommendation_access')
                                                         <form
                                                             action="{{ route('emap.admin.buildingDocumentation.printRecommendation', $buildingDocumentation) }}"
