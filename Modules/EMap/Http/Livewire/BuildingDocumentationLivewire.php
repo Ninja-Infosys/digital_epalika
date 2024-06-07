@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\BuildingDocumentation;
+use Modules\EMap\Entities\BuildingStoreyDetail;
+use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\Neighbour;
 
 class BuildingDocumentationLivewire extends Component
@@ -31,6 +33,7 @@ class BuildingDocumentationLivewire extends Component
     public $formerWards = [];
 
     public $neighbours = [];
+    public $buildingStoreyDetails = [];
 
     public BuildingDocumentation $buildingDocumentation;
 
@@ -66,6 +69,7 @@ class BuildingDocumentationLivewire extends Component
         'applicant_former_ward_no' => null,
         'citizenship_no' => null,
         'neighbours' => [],
+        'buildingStoreyDetails' => [],
 
         'files' => [],
     ];
@@ -83,6 +87,7 @@ class BuildingDocumentationLivewire extends Component
     public function mount($buildingDocumentation = null)
     {
         $this->provinces = get_provinces();
+
         if (!empty($buildingDocumentation)) {
             $this->buildingDocumentation = $buildingDocumentation;
 
@@ -90,13 +95,14 @@ class BuildingDocumentationLivewire extends Component
         } else {
 
             $this->neighbourArrayIncrement();
+            $this->buildingStoreyDetailArrayIncrement();
 
         }
     }
 
     private function assignBuildingDocumentationData()
     {
-        foreach (Arr::except($this->form, ['neighbours', 'files']) as $key => $data) {
+        foreach (Arr::except($this->form, ['neighbours','buildingStoreyDetails', 'files']) as $key => $data) {
             $this->form[$key] = $this->buildingDocumentation[$key];
         }
 
@@ -108,6 +114,15 @@ class BuildingDocumentationLivewire extends Component
 
             ];
         }
+        foreach ($this->buildingDocumentation->buildingStoreyDetails as $buildingStoreyDetail) {
+            $this->form['buildingStoreyDetails'][] = [
+                'storey' => $buildingStoreyDetail->storey ?? null,
+                'area_of_former_construction' => $buildingStoreyDetail->area_of_former_construction ?? null,
+                'land_area' => $buildingStoreyDetail->land_area ?? null,
+                'remarks' => $buildingStoreyDetail->remarks ?? null,
+
+            ];
+        }
     }
 
     protected array $secondStepValidations = [
@@ -115,6 +130,11 @@ class BuildingDocumentationLivewire extends Component
         'form.neighbours.*.neighbour_name' => ['required', 'string'],
         'form.neighbours.*.direction' => ['required'],
         'form.neighbours.*.ward_no' => ['required', 'integer'],
+        'form.buildingStoreyDetails' => ['required', 'array'],
+        'form.buildingStoreyDetails.*.storey' => ['required'],
+        'form.buildingStoreyDetails.*.area_of_former_construction' => ['required', 'string'],
+        'form.buildingStoreyDetails.*.land_area' => ['required', 'string'],
+        'form.buildingStoreyDetails.*.remarks' => ['required', 'string'],
 
     ];
 
@@ -160,11 +180,19 @@ class BuildingDocumentationLivewire extends Component
                 'form.neighbours.*.neighbour_name' => ['required', 'string'],
                 'form.neighbours.*.direction' => ['required'],
                 'form.neighbours.*.ward_no' => ['required', 'integer'],
+                'form.buildingStoreyDetails.*.storey' => ['required'],
+                'form.buildingStoreyDetails.*.area_of_former_construction' => ['required', 'string'],
+                'form.buildingStoreyDetails.*.land_area' => ['required', 'string'],
+                'form.buildingStoreyDetails.*.remarks' => ['required', 'string'],
             ])
             : array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['nullable', 'string'],
                 'form.neighbours.*.direction' => ['nullable'],
                 'form.neighbours.*.ward_no' => ['nullable', 'integer'],
+                'form.buildingStoreyDetails.*.storey' => ['nullable'],
+                'form.buildingStoreyDetails.*.area_of_former_construction' => ['nullable', 'string'],
+                'form.buildingStoreyDetails.*.land_area' => ['nullable', 'string'],
+                'form.buildingStoreyDetails.*.remarks' => ['nullable', 'string'],
             ]);
     }
 
@@ -269,6 +297,11 @@ class BuildingDocumentationLivewire extends Component
             $neighbours = new Neighbour($neighbour);
             $buildingDocumentation->neighbours()->save($neighbours);
         }
+        foreach ($this->form['buildingStoreyDetails'] as $buildingStoreyDetail) {
+            $buildingStoreyDetails = new BuildingStoreyDetail($buildingStoreyDetail);
+            $buildingDocumentation->buildingStoreyDetails()->save($buildingStoreyDetails);
+        }
+
 
         $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
 
@@ -286,6 +319,10 @@ class BuildingDocumentationLivewire extends Component
     {
         $this->form['neighbours'][] = [];
     }
+    public function buildingStoreyDetailArrayIncrement(): void
+    {
+        $this->form['buildingStoreyDetails'][] = [];
+    }
 
     public function neighbourArrayDecrement($index): void
     {
@@ -294,6 +331,14 @@ class BuildingDocumentationLivewire extends Component
         }
         unset($this->form['neighbours'][$index]);
         $this->form['neighbours'] = array_values($this->form['neighbours']);
+    }
+    public function buildingStoreyDetailArrayDecrement($index): void
+    {
+        if (!empty($this->form['buildingStoreyDetails'][$index]['id'])) {
+            BuildingStoreyDetail::find($this->form['buildingStoreyDetails'][$index]['id'])->delete();
+        }
+        unset($this->form['buildingStoreyDetails'][$index]);
+        $this->form['buildingStoreyDetails'] = array_values($this->form['buildingStoreyDetails']);
     }
 
     public function fileArrayIncrement(): void
@@ -368,6 +413,11 @@ class BuildingDocumentationLivewire extends Component
             'form.neighbours.*.neighbour_name.required' => ['संधीयारको नाम आबश्यक छ'],
             'form.neighbours.*.direction.required' => ['दिशा आबश्यक छ'],
             'form.neighbours.*.ward_no.required' => ['वडा नं आबश्यक छ'],
+            'form.buildingStoreyDetails.required' => ['संधीयार आबश्यक छ'],
+            'form.buildingStoreyDetails.*.storey.required' => ['तल्ला अनिवार्य छ'],
+            'form.buildingStoreyDetails.*.area_of_former_construction.required' => ['साविक क्षेत्रफल अनिवार्य छ'],
+            'form.buildingStoreyDetails.*.land_area.required' => ['जग्गा क्षेत्रफल अनिवार्य छ'],
+            'form.buildingStoreyDetails.*.remarks.required' => ['कैफियत आबश्यक छ'],
             'requiredDocument.citizenship' => ['नेपाली नागरिकताको प्रमाण पत्रको प्रतिलिपी'],
             'requiredDocument.landowner_proved' => ['जग्गाधनि प्रमाण पत्रको प्रतिलिपी'],
             'requiredDocument.revenue' => ['चालु आ.व को घर जग्गा कर तिरेको रसिदको प्रतिलिपि'],
