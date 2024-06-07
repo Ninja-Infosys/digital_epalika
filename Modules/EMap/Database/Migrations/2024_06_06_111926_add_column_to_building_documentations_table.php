@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('building_documentations', function (Blueprint $table) {
             $table->string('status')->nullable();
+            $table->string('sent_admin')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
     {
         Schema::table('building_documentations', function (Blueprint $table) {
             $table->string('status');
+            $table->string('sent_admin');
         });
     }
 };

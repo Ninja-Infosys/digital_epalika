@@ -32,11 +32,13 @@
                                 विवरण
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#reg" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                दर्ता
-                            </a>
-                        </li>
+                        @if (!is_null(auth()->user()->ward_no))
+                            <li class="nav-item">
+                                <a href="#reg" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                    दर्ता
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="detail">
@@ -79,7 +81,8 @@
 
                                                         <tr>
                                                             <th>घरको किसिम </th>
-                                                            <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}</td>
+                                                            <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th> घरको लम्बाई </th>
@@ -444,7 +447,6 @@
                             </div>
 
                             @foreach ($buildingDocumentation->files as $file)
-
                                 <div class="col-xl-4 col-lg-6">
                                     <div class="card shadow-none border">
                                         <div class="p-2">
@@ -456,7 +458,8 @@
 
 
                                                 <div class="col-8">
-                                                    <iframe src="{{ $file->file_url }}" height="200px" width="200px"></iframe>
+                                                    <iframe src="{{ $file->file_url }}" height="200px"
+                                                        width="200px"></iframe>
 
                                                 </div>
                                             </div>
@@ -497,8 +500,9 @@
                                         <div class="col-md-6 mb-2">
                                             <x-date-input-component get-today-date="{{ false }}"
                                                 edit-date-ne="{{ $buildingDocumentation->bill_date_bs ?? '' }}"
-                                                edit-date-en="{{ $buildingDocumentation->bill_date_ad ?? '' }}" name-ne="bill_date_bs"
-                                                label-ne="बिल मिति (बि स.)" name-en="bill_date_ad" label-en="बिल मिति" />
+                                                edit-date-en="{{ $buildingDocumentation->bill_date_ad ?? '' }}"
+                                                name-ne="bill_date_bs" label-ne="बिल मिति (बि स.)" name-en="bill_date_ad"
+                                                label-en="बिल मिति" />
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="amount" class="form-label">रकम </label>

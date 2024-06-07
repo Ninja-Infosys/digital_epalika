@@ -151,7 +151,10 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('buildingDocumentation.printLandConfirmation');
     Route::put('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
         ->name('buildingDocumentation.printRecommendation');
-        Route::post('buildingDocumentation/{buildingDocumentation}/landReportFile', [LandReportController::class, 'storeLandReport'])->name('buildingDocumentation.landReport.store');
+    Route::put('buildingDocumentation/{buildingDocumentation}/sentToAdmin', [BuildingDocumentationController::class, 'sentToAdmin'])
+        ->name('buildingDocumentation.sentToAdmin');
+    Route::put('buildingDocumentation/{buildingDocumentation}/showToAdmin', [BuildingDocumentationController::class, 'showToAdmin'])
+        ->name('buildingDocumentation.showToAdmin');
 
 });
 
