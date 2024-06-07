@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="card-body px-0">
-                    <div class="table-responsive">
+                    <div class="table">
                         <table class="table table-sm table-custom">
                             <thead class="align-middle text-nowrap text-center">
                             <tr>
@@ -98,7 +98,7 @@
                                                     aria-expanded="false">
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
-                                            <div class="dropdown-menu">
+                                            <div class="dropdown-menu" style="height: auto">
                                                 @if ($buildingDocumentation->isRegistrationDateMoreThanAWeekOld())
                                                     @can('landConfirmation_access')
                                                         <form
