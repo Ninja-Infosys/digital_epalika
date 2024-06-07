@@ -127,6 +127,18 @@ class BuildingDocumentationController extends Controller
     }
         return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
     }
+    public function printCertificate(BuildingDocumentation $buildingDocumentation)
+    {
+        if(is_null(auth()->user()->ward_no)){
+        $buildingDocumentation->update([
+            'status' => BuildingDocumentationStatusEnum::CERTIFICATE->value,
+        ]);
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+    }
+        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
+    }
     public function sentToAdmin(BuildingDocumentation $buildingDocumentation)
     {
 

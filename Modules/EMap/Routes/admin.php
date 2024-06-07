@@ -151,6 +151,14 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('buildingDocumentation.printLandConfirmation');
     Route::put('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
         ->name('buildingDocumentation.printRecommendation');
+
+    Route::put('buildingDocumentation/{buildingDocumentation}/sentToAdmin', [BuildingDocumentationController::class, 'sentToAdmin'])
+        ->name('buildingDocumentation.sentToAdmin');
+    Route::put('buildingDocumentation/{buildingDocumentation}/showToAdmin', [BuildingDocumentationController::class, 'showToAdmin'])
+        ->name('buildingDocumentation.showToAdmin');
+    Route::put('buildingDocumentation/{buildingDocumentation}/printCertificate', [BuildingDocumentationController::class, 'printCertificate'])
+        ->name('buildingDocumentation.printCertificate');
+
     Route::get('buildingDocumentation/{buildingDocumentation}/printPermission', [BuildingDocumentationController::class, 'printPermission'])
         ->name('buildingDocumentation.printPermission');
     Route::get('buildingDocumentation/{buildingDocumentation}/printConfession', [BuildingDocumentationController::class, 'printConfession'])
@@ -158,4 +166,3 @@ Route::prefix('buildingDocumentation')->group(function () {
     Route::post('buildingDocumentation/{buildingDocumentation}/landReportFile', [LandReportController::class, 'storeLandReport'])->name('buildingDocumentation.landReport.store');
 
 });
-

@@ -148,17 +148,22 @@
                                                         </a>
                                                     @endcan
                                                 @endif
-                                                @if ($buildingDocumentation->status ==
-                                                Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION ||
-                                                $buildingDocumentation->status ==
-                                                Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
-                                                $buildingDocumentation->status ==
-                                                Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
-                                                    @can('landReport_access')
-                                                        <a href="{{ route('emap.admin.buildingDocumentation.landReport.index', $buildingDocumentation) }}"
-                                                           class="dropdown-item">
-                                                            <i class="fa fa-calendar-alt"> प्रमाण पत्र </i>
-                                                        </a>
+                                                @if (
+                                                    $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
+                                                        $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
+                                                    @can('certificate_access')
+                                                        <form
+                                                            action="{{ route('emap.admin.buildingDocumentation.printCertificate', $buildingDocumentation) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('put')
+                                                            <button data-bs-type="edit" type="submit"
+                                                                title="प्रिन्ट गर्नुहोस" class="dropdown-item"
+                                                                style="font-size: 17px; font-weight:600">
+                                                                <i class="fa fa-print" style="font-size: 17px;"></i> प्रमाण
+                                                                पत्र
+                                                            </button>
+                                                        </form>
                                                     @endcan
                                                 @endif
                                                 <a href="{{ route('emap.admin.buildingDocumentation.printPermission', $buildingDocumentation) }}"

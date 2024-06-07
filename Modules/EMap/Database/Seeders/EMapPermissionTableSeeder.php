@@ -65,6 +65,10 @@ class EMapPermissionTableSeeder extends Seeder
             'landReport_edit',
             'landReport_create',
             'landReport_delete',
+            'certificate_access',
+            'certificate_edit',
+            'certificate_create',
+            'certificate_delete',
 
         ];
 

@@ -6,8 +6,8 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <img class="icon me-1" src="{{asset('assets/backend/images/home.svg')}}" alt="document-icon">
+                            <a href="{{ route('admin.dashboard') }}">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
                         </li>
@@ -30,43 +30,50 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body px-0">
-                    <form
-                        action="{{ route('emap.admin.buildingDocumentation.landReport.store', $buildingDocumentation) }}"
-                        method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-12 mb-2">
-                                <label for="description" class="form-label">विवरण *</label>
-                                <textarea name="description" id="description" cols="30" rows="10"
-                                    class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('description', $buildingDocumentation?->landReport?->description) }}</textarea>
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <x-date-input-component nameNe="submitted_date" labelNe="पेश मिति *"
-                                    nameEn="en_submitted_date" labelEn="Submitted Date" />
-                            </div>
+                @if ($buildingDocumentation?->landReport?->sent_to_ward ==1 || is_null(auth()->user()->ward_no))
+                    <div class="card-body px-0">
 
-                            <div class="col-md-4 mb-2">
-                                <label for="files" class="form-label"> निर्णय फाइल (Multiple)</label>
-                                <input type="file" id="files" name="files[]" multiple class="form-control">
-                                @error('files')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                @error('files.*')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                        <form
+                            action="{{ route('emap.admin.buildingDocumentation.landReport.store', $buildingDocumentation) }}"
+                            method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <label for="description" class="form-label">विवरण *</label>
+                                    <textarea name="description" id="description" cols="30" rows="10"
+                                        class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('description', $buildingDocumentation?->landReport?->description) }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <x-date-input-component nameNe="submitted_date" labelNe="पेश मिति *"
+                                        nameEn="en_submitted_date" labelEn="Submitted Date" />
+                                </div>
+
+                                <div class="col-md-4 mb-2">
+                                    <label for="files" class="form-label"> निर्णय फाइल (Multiple)</label>
+                                    <input type="file" id="files" name="files[]" multiple class="form-control">
+                                    @error('files')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('files.*')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary">
+                                        पेश गर्नुहोस्
+                                    </button>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <button type="submit" class="btn btn-primary">
-                                    पेश गर्नुहोस्
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                @else
+                    <div class="card-body px-0">
+                        <h3>प्राविधिक प्रतिबेदन पठाईएको छैन् ।</h3>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

@@ -30,8 +30,8 @@ class LandReportController extends Controller
 
     public function create(BuildingDocumentation $buildingDocumentation)
     {
+        if(is_null(auth()->user()->ward_no))
         $this->checkAuthorization('landReport_create');
-
         return view('emap::admin.buildingDocumentation.landReport.create', compact('buildingDocumentation'));
     }
 

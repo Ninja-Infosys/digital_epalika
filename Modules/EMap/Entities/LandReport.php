@@ -23,7 +23,8 @@ class LandReport extends Model
    protected $fillable = [
     'building_documentation_id',
     'description',
-    'submitted_date'
+    'submitted_date',
+    'sent_to_ward'
 ];
 
 public function buildingDocumentation(): BelongsTo
