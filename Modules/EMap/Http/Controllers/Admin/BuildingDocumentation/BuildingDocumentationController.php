@@ -30,6 +30,10 @@ class BuildingDocumentationController extends Controller
             if (! empty(request('registration_no'))) {
                 $q->where('registration_no', request('registration_no'));
             }
+            if (auth()->user()->role->type != 'Super') {
+                $q->where('land_ward_no', auth()->user()->ward_no);
+            }
+
         })->latest()
             ->paginate(15);
 
@@ -100,24 +104,52 @@ class BuildingDocumentationController extends Controller
     }
     public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
     {
+
+        if(!is_null(auth()->user()->ward_no)){
         $buildingDocumentation->update([
             'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
         ]);
         $buildingDocumentation->load([
             'neighbours',
         ]);
+    }
         return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
     }
     public function printRecommendation(BuildingDocumentation $buildingDocumentation)
     {
-
+        if(!is_null(auth()->user()->ward_no)){
         $buildingDocumentation->update([
             'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
         ]);
         $buildingDocumentation->load([
             'neighbours',
         ]);
+    }
         return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
+    }
+    public function sentToAdmin(BuildingDocumentation $buildingDocumentation)
+    {
+
+        $buildingDocumentation->update([
+            'sent_admin' => 'recommendation_sent',
+        ]);
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
+
+    }
+    public function showToAdmin(BuildingDocumentation $buildingDocumentation)
+    {
+
+        $buildingDocumentation->update([
+            'sent_admin' => 'land_confirmation_show',
+        ]);
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+
     }
     public function printPermission(BuildingDocumentation $buildingDocumentation)
     {

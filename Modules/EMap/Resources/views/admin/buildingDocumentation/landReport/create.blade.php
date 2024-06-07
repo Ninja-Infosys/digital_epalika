@@ -39,7 +39,7 @@
                             <div class="col-md-12 mb-2">
                                 <label for="description" class="form-label">विवरण *</label>
                                 <textarea name="description" id="description" cols="30" rows="10"
-                                    class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('description', $buildingDocumentation->description) }}</textarea>
+                                    class="form-control ckEditor @error('description') is-invalid @enderror">{{ old('description', $buildingDocumentation?->landReport?->description) }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -49,7 +49,16 @@
                                     nameEn="en_submitted_date" labelEn="Submitted Date" />
                             </div>
 
-
+                            <div class="col-md-4 mb-2">
+                                <label for="files" class="form-label"> निर्णय फाइल (Multiple)</label>
+                                <input type="file" id="files" name="files[]" multiple class="form-control">
+                                @error('files')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                @error('files.*')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">
                                     पेश गर्नुहोस्

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingDocumentationController;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\LandReportController;
@@ -11,9 +12,9 @@ use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\NecessaryDocumentController;
+use Modules\EMap\Http\Controllers\Admin\RegistrationDocumentController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationArchiveController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
-use Modules\EMap\Http\Controllers\Admin\RegistrationDocumentController;
 use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\BuildingDocumentationSettingController;
 use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
@@ -30,6 +31,7 @@ use Modules\EMap\Http\Controllers\StreetDetailController;
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 
+
 Route::put('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
@@ -41,6 +43,9 @@ Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStor
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/formStore/{formStore}/uploadFormStoreApprovedDocument', [AdminStepController::class, 'uploadFormStoreApprovedDocument'])->name('mapApply.admin-step.uploadFormStoreApprovedDocument');
 Route::put('mapApply/{mapApply}/form/{form}/formDataType/{formDataType}/paymentStore/{paymentStore}/updatePaymentStoreStatus', [AdminStepController::class, 'updatePaymentStoreStatus'])->name('mapApply.admin-step.updatePaymentStoreStatus');
 Route::put('mapApply/{mapApply}/mapReject', [AdminStepController::class, 'rejectMap'])->name('mapApply.rejectMap');
+
+
+
 
 Route::get('mapApply/{mapApply}/register', [MapController::class, 'register'])->name('mapApply.register-map');
 
@@ -123,6 +128,8 @@ Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
 
+
+
 //oldMap
 Route::resource('oldMap', OldMapController::class)->except(['update', 'store']);
 Route::delete('oldMap/{oldMap}/oldMapDocument/{oldMapDocument}', [OldMapController::class, 'deleteOldMapDocument'])->name('oldMap.oldMapdDocument.destroy');
@@ -151,3 +158,4 @@ Route::prefix('buildingDocumentation')->group(function () {
     Route::post('buildingDocumentation/{buildingDocumentation}/landReportFile', [LandReportController::class, 'storeLandReport'])->name('buildingDocumentation.landReport.store');
 
 });
+

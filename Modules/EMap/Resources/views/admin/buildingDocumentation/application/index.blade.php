@@ -65,17 +65,13 @@
                                                 - {{ $buildingDocumentation->ward_no ?? '' }} </span>
                                         </td>
                                         <td class="d-flex gap-1">
-
-                                            <a data-bs-type="edit"
-                                                href="{{ route('emap.admin.buildingDocumentation.edit', $buildingDocumentation) }}"
-                                                class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
-                                                title="पुरा विवरण हेर्नुहोस">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                                </svg>
-                                            </a>
+                                            <form action="{{ route('emap.admin.buildingDocumentation.edit', $buildingDocumentation) }}" method="get" class="d-inline">
+                                                <button type="submit" class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}" title="पुरा विवरण हेर्नुहोस">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
 
 
                                             <a data-bs-type="edit"
@@ -147,15 +143,53 @@
                                                        class="dropdown-item">
                                                         <i class="fa fa-calendar-alt"> प्राविधिक प्रतिबेदन </i>
                                                     </a>
+                                            <form action="{{ route('emap.admin.buildingDocumentation.show', $buildingDocumentation) }}" method="get" class="d-inline">
+                                                <button type="submit" class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}" title="पुरा विवरण हेर्नुहोस">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </form>
+
+                                            <div class="btn-group dropstart">
+                                                <button type="button" class="btn btn-sm btn-info waves-effect waves-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-angle-down"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    @if ($buildingDocumentation->isRegistrationDateMoreThanAWeekOld())
+                                                        @can('landConfirmation_access')
+                                                            <form action="{{ route('emap.admin.buildingDocumentation.printLandConfirmation', $buildingDocumentation) }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस" class="dropdown-item" style="font-size: 17px; font-weight:600">
+                                                                    <i class="fa fa-print"></i> सरजमिन मुचुल्का
+                                                                </button>
+                                                            </form>
+                                                        @endcan
+                                                    @endif
+
+                                                    @if ($buildingDocumentation->status != Modules\EMap\Enums\BuildingDocumentationStatusEnum::NOTICE)
+                                                        @can('landRecommendation_access')
+                                                            <form action="{{ route('emap.admin.buildingDocumentation.printRecommendation', $buildingDocumentation) }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस" class="dropdown-item" style="font-size: 17px; font-weight:600">
+                                                                    <i class="fa fa-print" style="font-size: 17px;"></i> वडाको सिफारिस
+                                                                </button>
+                                                            </form>
+                                                        @endcan
+                                                    @endif
+
+                                                    @if ($buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::RECOMMENDATION || $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT || $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
+                                                        @can('landReport_create')
+                                                            <a href="{{ route('emap.admin.buildingDocumentation.landReport.create', $buildingDocumentation) }}" class="dropdown-item">
+                                                                <i class="fa fa-calendar-alt"> प्राविधिक प्रतिबेदन </i>
+                                                            </a>
+                                                        @endcan
+                                                    @endif
+                                                </div>
                                             </div>
-                                            {{-- @if (!is_null($buildingDocumentation->registration_no))
-                                    <a data-bs-type="edit"
-                                        href="{{ route('admin.businessRegistration.buildingDocumentation.printData', $buildingDocumentation) }}"
-                                        title="प्रिन्ट गर्नुहोस" class="btn btn-xs btn-outline-warning">
-                                        <i class="fa fa-print"></i>
-                                    </a>
-                                    @endif --}}
                                         </td>
+
+
                                     </tr>
 
                                 @empty

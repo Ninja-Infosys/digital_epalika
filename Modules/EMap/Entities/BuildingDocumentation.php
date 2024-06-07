@@ -72,6 +72,7 @@ class BuildingDocumentation extends Model
         'applicant_former_local_body',
         'applicant_former_ward_no',
         'citizenship_no',
+        'sent_admin',
     ];
 
     protected $casts = [
@@ -83,7 +84,6 @@ class BuildingDocumentation extends Model
     {
         return $this->hasOne(RequiredDocument::class);
     }
-
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
@@ -127,9 +127,8 @@ class BuildingDocumentation extends Model
 
         return $now > $oneWeekLater;
     }
-
-    public function landReports(): HasMany
+    public function landReport(): HasOne
     {
-        return $this->hasMany(LandReport::class);
+        return $this->hasOne(LandReport::class);
     }
 }
