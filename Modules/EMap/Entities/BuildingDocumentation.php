@@ -68,6 +68,10 @@ class BuildingDocumentation extends Model
         'amount',
         'other_file',
         'status',
+        'applicant_former_district',
+        'applicant_former_local_body',
+        'applicant_former_ward_no',
+        'citizenship_no',
     ];
 
     protected $casts = [
@@ -79,6 +83,7 @@ class BuildingDocumentation extends Model
     {
         return $this->hasOne(RequiredDocument::class);
     }
+
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);

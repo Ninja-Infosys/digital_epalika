@@ -129,9 +129,13 @@
                                                         Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
                                                         Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
                                                     @can('landReport_create')
-                                                        <a href="{{ route('emap.admin.buildingDocumentation.landReport.create', $buildingDocumentation) }}"
+                                                        <a href="{{ route('emap.admin.buildingDocumentation.printPermission', $buildingDocumentation) }}"
                                                             class="dropdown-item">
-                                                            <i class="fa fa-calendar-alt"> प्राविधिक प्रतिबेदन </i>
+                                                            <i class="fa fa-calendar-alt"> मन्जुरी नामा </i>
+                                                        </a>
+                                                        <a href="{{ route('emap.admin.buildingDocumentation.printConfession', $buildingDocumentation )}}"
+                                                            class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> कबुलियती नामा </i>
                                                         </a>
                                                         {{-- <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
                                                                 class="btn btn-xs btn-outline-warning">
@@ -139,7 +143,10 @@
                                                             </button> --}}
                                                     @endcan
                                                 @endif
-
+                                                    <a href="{{ route('emap.admin.buildingDocumentation.landReport.create', $buildingDocumentation) }}"
+                                                       class="dropdown-item">
+                                                        <i class="fa fa-calendar-alt"> प्राविधिक प्रतिबेदन </i>
+                                                    </a>
                                             </div>
                                             {{-- @if (!is_null($buildingDocumentation->registration_no))
                                     <a data-bs-type="edit"

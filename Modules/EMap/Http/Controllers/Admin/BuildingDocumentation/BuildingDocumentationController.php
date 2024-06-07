@@ -119,7 +119,29 @@ class BuildingDocumentationController extends Controller
         ]);
         return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
     }
+    public function printPermission(BuildingDocumentation $buildingDocumentation)
+    {
 
+        $buildingDocumentation->update([
+            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
+        ]);
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+        return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation'));
+    }
+
+    public function printConfession(BuildingDocumentation $buildingDocumentation)
+    {
+
+        $buildingDocumentation->update([
+            'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
+        ]);
+        $buildingDocumentation->load([
+            'neighbours',
+        ]);
+        return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation'));
+    }
 
 
     public function update(Request $request, $id)
