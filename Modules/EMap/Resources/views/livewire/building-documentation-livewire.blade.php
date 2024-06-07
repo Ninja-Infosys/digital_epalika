@@ -333,7 +333,7 @@
                                                 id="form.buildingStoreyDetails.{{ $key }}.storey"
                                                 wire:model="form.buildingStoreyDetails.{{ $key }}.storey">
                                                 <option value="">---छान्नुहोस् ----</option>
-                                                @foreach (\Modules\EMap\Enums\NeighbourTypeEnum::cases() as $case)
+                                                @foreach (\Modules\EMap\Enums\StoreyTypeEnum::cases() as $case)
                                                     <option value="{{ $case->value ?? '' }}">{{ $case->label() ?? '' }}
                                                     </option>
                                                 @endforeach

@@ -186,10 +186,50 @@
                                             @forelse($buildingDocumentation?->neighbours as $neighbour)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $neighbour->direction->label() ?? '' }}</td>
+                                                    <td>{{ $neighbour?->direction?->label() ?? '' }}</td>
                                                     <td>{{ $neighbour->neighbour_name ?? '' }}</td>
                                                     <td>{{ $neighbour->ward_no ?? '' }}</td>
                                                     <td></td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन !!!
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+
+                                    </table>
+                                    <div class="row">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-header">
+                                        <h4 class="header-title">
+                                            तल्लाको विवरण
+                                        </h4>
+                                    </div>
+                                    <table class="table table-bordered border-primary mt-3">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">क्र.स</th>
+                                                <th scope="col">तल्ला</th>
+                                                <th scope="col">साविक निर्माण भइसकेको क्षेत्रफल</th>
+                                                <th scope="col">जग्गाको क्षेत्रफल</th>
+                                                <th scope="col">कैफियत</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($buildingDocumentation?->buildingStoreyDetails as $buildingStoreyDetail)
+                                                <tr>
+                                                    <th scope="row">{{ $loop->iteration }}</th>
+                                                    <td>{{ $buildingStoreyDetail?->storey?->label() ?? '' }}</td>
+                                                    <td>{{ $buildingStoreyDetail->area_of_former_construction ?? '' }}</td>
+                                                    <td>{{ $buildingStoreyDetail->land_area ?? '' }}</td>
+                                                    <td>{{ $buildingStoreyDetail->remarks ?? '' }}</td>
                                                 </tr>
                                             @empty
                                                 <tr>

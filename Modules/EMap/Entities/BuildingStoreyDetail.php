@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\EMap\Enums\StoreyTypeEnum;
 
 class BuildingStoreyDetail extends Model
 {
@@ -27,6 +28,9 @@ class BuildingStoreyDetail extends Model
     'remarks',
 ];
 
+protected $casts = [
+    'storey' => StoreyTypeEnum::class,
+];
 public function storeyable(): MorphTo
 {
     return $this->morphTo();

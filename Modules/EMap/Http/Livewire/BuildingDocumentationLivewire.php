@@ -134,7 +134,7 @@ class BuildingDocumentationLivewire extends Component
         'form.buildingStoreyDetails.*.storey' => ['required'],
         'form.buildingStoreyDetails.*.area_of_former_construction' => ['required', 'string'],
         'form.buildingStoreyDetails.*.land_area' => ['required', 'string'],
-        'form.buildingStoreyDetails.*.remarks' => ['required', 'string'],
+        'form.buildingStoreyDetails.*.remarks' => ['nullable', 'string'],
 
     ];
 
@@ -183,7 +183,7 @@ class BuildingDocumentationLivewire extends Component
                 'form.buildingStoreyDetails.*.storey' => ['required'],
                 'form.buildingStoreyDetails.*.area_of_former_construction' => ['required', 'string'],
                 'form.buildingStoreyDetails.*.land_area' => ['required', 'string'],
-                'form.buildingStoreyDetails.*.remarks' => ['required', 'string'],
+                'form.buildingStoreyDetails.*.remarks' => ['nullable', 'string'],
             ])
             : array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['nullable', 'string'],
