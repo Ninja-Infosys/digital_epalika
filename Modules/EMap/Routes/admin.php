@@ -10,22 +10,22 @@ use Modules\EMap\Http\Controllers\Admin\DocumentAttachController;
 use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
+use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\NecessaryDocumentController;
 use Modules\EMap\Http\Controllers\Admin\RegistrationDocumentController;
-use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationArchiveController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\AdminStepController;
 use Modules\EMap\Http\Controllers\BuildingDocumentationSettingController;
 use Modules\EMap\Http\Controllers\CriteriaDetailSettingController;
 use Modules\EMap\Http\Controllers\DynamicFormController;
-use Modules\EMap\Http\Controllers\MapSettingController;
-use Modules\EMap\Http\Controllers\OldMapController;
-use Modules\EMap\Http\Controllers\ReportController;
-use Modules\EMap\Http\Controllers\MapPassGroupController;
 use Modules\EMap\Http\Controllers\FormController;
 use Modules\EMap\Http\Controllers\HouseOwnerArchiveController;
 use Modules\EMap\Http\Controllers\LandUseAreaController;
+use Modules\EMap\Http\Controllers\MapPassGroupController;
+use Modules\EMap\Http\Controllers\MapSettingController;
+use Modules\EMap\Http\Controllers\OldMapController;
+use Modules\EMap\Http\Controllers\ReportController;
 use Modules\EMap\Http\Controllers\StreetDetailController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -151,10 +151,11 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('buildingDocumentation.printLandConfirmation');
     Route::put('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
         ->name('buildingDocumentation.printRecommendation');
-    Route::put('buildingDocumentation/{buildingDocumentation}/sentToAdmin', [BuildingDocumentationController::class, 'sentToAdmin'])
-        ->name('buildingDocumentation.sentToAdmin');
-    Route::put('buildingDocumentation/{buildingDocumentation}/showToAdmin', [BuildingDocumentationController::class, 'showToAdmin'])
-        ->name('buildingDocumentation.showToAdmin');
+    Route::get('buildingDocumentation/{buildingDocumentation}/printPermission', [BuildingDocumentationController::class, 'printPermission'])
+        ->name('buildingDocumentation.printPermission');
+    Route::get('buildingDocumentation/{buildingDocumentation}/printConfession', [BuildingDocumentationController::class, 'printConfession'])
+        ->name('buildingDocumentation.printConfession');
+    Route::post('buildingDocumentation/{buildingDocumentation}/landReportFile', [LandReportController::class, 'storeLandReport'])->name('buildingDocumentation.landReport.store');
 
 });
 

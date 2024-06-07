@@ -27,6 +27,10 @@ return new class extends Migration
             $table->string('former_district')->nullable()->comment('साविक जिल्ला');
             $table->string('former_local_body')->nullable()->comment('साविक पालिका');
             $table->string('former_ward_no')->nullable()->comment('साविक वडा नं');
+            $table->string('applicant_former_district')->nullable()->comment('निवेदकको साविक जिल्ला');
+            $table->string('applicant_former_local_body')->nullable()->comment('निवेदकको साविक पालिका');
+            $table->string('applicant_former_ward_no')->nullable()->comment('निवेदकको साविक वडा नं');
+            $table->string('citizenship_no')->nullable()->comment('निवेदकको ना.प्र.नं');
             $table->string('phone')->nullable()->comment('निवेदकको सम्पर्क नं');
             $table->string('plot_no')->nullable()->comment('कित्ता नं');
             $table->string('land_area')->nullable()->comment('जग्गाको क्षेत्रफल');
