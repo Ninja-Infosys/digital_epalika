@@ -52,6 +52,7 @@ class BuildingDocumentationController extends Controller
     {
         $buildingDocumentation->load(
             'neighbours',
+            'buildingStoreyDetails',
             'requiredDocument',
             'files'
 

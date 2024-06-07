@@ -8,8 +8,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.dashboard') }}">
-                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}"
-                                     alt="document-icon">
+                                <img class="icon me-1" src="{{ asset('assets/backend/images/home.svg') }}" alt="document-icon">
                                 गृहपृष्ठ
                             </a>
                         </li>
@@ -29,10 +28,10 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="header-title">घर अभिलेखिकरण प्रमाण पत्र</h4>
                         <div class="d-flex justify-content-between">
-                            <x-print-button title="घर अभिलेखिकरण प्रमाण पत्र" target-element="printData"/>
+                            <x-print-button title="घर अभिलेखिकरण प्रमाण पत्र" target-element="printData" />
 
                             <a href="{{ route('emap.admin.buildingDocumentation.index') }}"
-                               class="btn btn-sm btn-outline-primary">
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"> दर्ता भएका अभिलेखीकरण</i>
                             </a>
                         </div>
@@ -57,70 +56,54 @@
                         </div>
                         <p class="text-justify-center lh-lg "> अभीलेख नं. :</p>
 
-                        <p class="text-justify-center  lh-lg "> <span class="dashed-bottom">{{$buildingDocumentation->applicant_former_district}} </span> जिल्ला <span class="dashed-bottom">{{$buildingDocumentation->applicant_former_local_body}} </span>
-                            गा.पा./न.पा <span class="dashed-bottom">{{get_nepali_number($buildingDocumentation->applicant_former_ward_no)}} </span> नं. वडा स्थायी ठेगाना भइ हाल
-                            वागचौर नगरपालिका <span class="dashed-bottom">{{get_nepali_number($buildingDocumentation->ward_no)}} </span> नं. वडा
-                            <span class="dashed-bottom">{{$buildingDocumentation->tole}} </span> टोल बस्ने श्री{{$buildingDocumentation->applicant_name}} ले सविक <span class="dashed-bottom">{{$buildingDocumentation->former_district}} </span> गा.वि.स. वडा नं. <span class="dashed-bottom">{{get_nepali_number($buildingDocumentation->former_ward_no)}} </span> कित्ता
-                            नं <span class="dashed-bottom">{{$buildingDocumentation->plot_no}} </span> मा <span class="dashed-bottom">{{$buildingDocumentation->area}} </span> क्षेत्रफलमा <span class="dashed-bottom">{{$buildingDocumentation->buildingCategory}} </span> भवन अभिलेखिकरण निर्देशिका लागु हुनु
+                        <p class="text-justify-center  lh-lg "> <span
+                                class="dashed-bottom">{{ $buildingDocumentation->applicant_former_district }} </span> जिल्ला
+                            <span class="dashed-bottom">{{ $buildingDocumentation->applicant_former_local_body }} </span>
+                            गा.पा./न.पा <span
+                                class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->applicant_former_ward_no) }}
+                            </span> नं. वडा स्थायी ठेगाना भइ हाल
+                            वागचौर नगरपालिका <span
+                                class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->ward_no) }} </span> नं.
+                            वडा
+                            <span class="dashed-bottom">{{ $buildingDocumentation->tole }} </span> टोल बस्ने
+                            श्री{{ $buildingDocumentation->applicant_name }} ले सविक <span
+                                class="dashed-bottom">{{ $buildingDocumentation->former_district }} </span> गा.वि.स. वडा नं.
+                            <span class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->former_ward_no) }}
+                            </span> कित्ता
+                            नं <span class="dashed-bottom">{{ $buildingDocumentation->plot_no }} </span> मा <span
+                                class="dashed-bottom">{{ $buildingDocumentation->area }} </span> क्षेत्रफलमा <span
+                                class="dashed-bottom">{{ $buildingDocumentation->buildingCategory }} </span> भवन अभिलेखिकरण
+                            निर्देशिका लागु हुनु
                             भन्दा अगाडी घर,टहरा निर्माण सम्पन्ना भइ सकेको भनि
-                            पेश गर्नु भएको निवेदन उपर कारवाहि हुदा मिति <span class="dashed-bottom">{{$buildingDocumentation->applicantion_date}} </span> मा नगरपालिकाको स्थलगत निरिक्षण
+                            पेश गर्नु भएको निवेदन उपर कारवाहि हुदा मिति <span
+                                class="dashed-bottom">{{ $buildingDocumentation->applicantion_date }} </span> मा
+                            नगरपालिकाको स्थलगत निरिक्षण
                             प्रतिवेदन र यस
-                            नगरपालिका {{ get_nepali_number($officeSetting->ward_no ?? '' )}} नं. वडाको मिति ............. गतेको सिफारिस पत्रका आधारमा निजलाई घर
+                            नगरपालिका {{ get_nepali_number($officeSetting->ward_no ?? '') }} नं. वडाको मिति .............
+                            गतेको सिफारिस पत्रका आधारमा निजलाई घर
                             अभिलेखिकरणको प्रमाण पत्र
-                            प्रदान गरिएको छ । </p>
+                            प्रदान गरिएको छ ।
+                        </p>
 
                         <table class="table table-bordered  lh-lg px-5">
                             <thead>
-                            <tr>
-                                <th scope="col">तला</th>
-                                <th scope="col">सविका निर्माण भईसकेको क्षेत्रफल</th>
-                                <th scope="col">जग्गाको क्षेत्रफल</th>
-                                <th scope="col">कैफियत</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">तला</th>
+                                    <th scope="col">सविका निर्माण भईसकेको क्षेत्रफल</th>
+                                    <th scope="col">जग्गाको क्षेत्रफल</th>
+                                    <th scope="col">कैफियत</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">बेसमेन्ट</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">जमिन तला</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">पहिलो तला</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">दोस्रो तला</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">तेस्रो तला</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">चौथो तला</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">जम्मा तला</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                                @foreach ($buildingDocumentation?->buildingStoreyDetails as $buildingStoreyDetail)
+                                    <tr>
+                                        <th scope="row">{{$buildingStoreyDetail?->storey->label() }}</th>
+                                        <td>{{ get_nepali_number($buildingStoreyDetail->area_of_former_construction) }}</td>
+                                        <td>{{ get_nepali_number($buildingStoreyDetail->land_area) }}</td>
+                                        <td>{{ get_nepali_number($buildingStoreyDetail->remarks) }}</td>
+
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -144,5 +127,4 @@
 
         </div>
     </div>
-
 @endsection

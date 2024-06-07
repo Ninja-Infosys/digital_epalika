@@ -2,7 +2,7 @@
 
 namespace Modules\EMap\Enums;
 
-enum StoreyTpyeEnum: string
+enum StoreyTypeEnum: string
 {
     case BASEMENT = 'basement';
     case GROUND_FLOOR = 'ground floor';
@@ -10,6 +10,7 @@ enum StoreyTpyeEnum: string
     case SECOND_FLOOR = 'second floor';
     case THIRD_FLOOR = 'third floor';
     case FOUR_FLOOR = 'four floor';
+
     public function label(): string
     {
         return self::getLabel($this);
@@ -25,6 +26,20 @@ enum StoreyTpyeEnum: string
             self::THIRD_FLOOR => 'तेस्रो तला',
             self::FOUR_FLOOR => 'चौथो तला',
         };
+    }
+
+    public static function getValuesWithLabels(): array
+    {
+        $valuesWithLabels = [];
+
+        foreach (self::cases() as $value) {
+            $valuesWithLabels[] = [
+                'value' => $value,
+                'label' => $value->label(),
+            ];
+        }
+
+        return $valuesWithLabels;
     }
 
 }

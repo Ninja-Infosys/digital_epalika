@@ -156,7 +156,7 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('buildingDocumentation.sentToAdmin');
     Route::put('buildingDocumentation/{buildingDocumentation}/showToAdmin', [BuildingDocumentationController::class, 'showToAdmin'])
         ->name('buildingDocumentation.showToAdmin');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printCertificate', [BuildingDocumentationController::class, 'printCertificate'])
+    Route::put('buildingDocumentation/{buildingDocumentation}/printCertificate', [BuildingDocumentationController::class, 'printCertificate'])
         ->name('buildingDocumentation.printCertificate');
 
     Route::get('buildingDocumentation/{buildingDocumentation}/printPermission', [BuildingDocumentationController::class, 'printPermission'])
