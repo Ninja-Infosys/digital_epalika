@@ -61,6 +61,10 @@ class BuildingDocumentationLivewire extends Component
         'other' => null,
         'road_jurisdiction' => null,
         'land_detail' => null,
+        'applicant_former_district' => null,
+        'applicant_former_local_body' => null,
+        'applicant_former_ward_no' => null,
+        'citizenship_no' => null,
         'neighbours' => [],
 
         'files' => [],
@@ -79,7 +83,7 @@ class BuildingDocumentationLivewire extends Component
     public function mount($buildingDocumentation = null)
     {
         $this->provinces = get_provinces();
-        if (! empty($buildingDocumentation)) {
+        if (!empty($buildingDocumentation)) {
             $this->buildingDocumentation = $buildingDocumentation;
 
             $this->assignBuildingDocumentationData();
@@ -127,6 +131,9 @@ class BuildingDocumentationLivewire extends Component
             'form.former_district' => ['required', 'string'],
             'form.former_local_body' => ['required', 'string'],
             'form.former_ward_no' => ['required', 'string'],
+            'form.applicant_former_district' => ['required', 'string'],
+            'form.applicant_former_local_body' => ['required', 'string'],
+            'form.applicant_former_ward_no' => ['required', 'string'],
             'form.phone' => ['required', 'string'],
             'form.plot_no' => ['required', 'string'],
             'form.land_area' => ['required', 'string'],
@@ -138,6 +145,7 @@ class BuildingDocumentationLivewire extends Component
             'form.building_category' => ['required', 'string'],
             'form.length' => ['required', 'string'],
             'form.breadth' => ['required', 'string'],
+            'form.citizenship_no' => ['required', 'string'],
             'form.height' => ['required', 'string'],
             'form.other' => ['required', 'string'],
             'form.road_jurisdiction' => ['required', 'string'],
@@ -147,7 +155,7 @@ class BuildingDocumentationLivewire extends Component
 
     protected function secondStepValidations(): array
     {
-        return ! empty($this->buildingDocumentation)
+        return !empty($this->buildingDocumentation)
             ? array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['required', 'string'],
                 'form.neighbours.*.direction' => ['required'],
@@ -173,7 +181,7 @@ class BuildingDocumentationLivewire extends Component
 
     protected function thirdStepValidations(): array
     {
-        return ! empty($this->buildingDocumentation)
+        return !empty($this->buildingDocumentation)
             ? [
                 'requiredDocument.citizenship' => ['nullable'],
                 'requiredDocument.landowner_proved' => ['nullable'],
@@ -224,7 +232,7 @@ class BuildingDocumentationLivewire extends Component
     {
         $this->validate();
 
-        if (! empty($this->buildingDocumentation)) {
+        if (!empty($this->buildingDocumentation)) {
             DB::transaction(function () {
                 $this->buildingDocumentation->update($this->form);
                 $this->saveBuildingDocumentData($this->buildingDocumentation);
@@ -239,8 +247,8 @@ class BuildingDocumentationLivewire extends Component
 
         $buildingDocumentation = DB::transaction(function () {
             $buildingDocumentation = BuildingDocumentation::create($this->form + [
-                'submission_no' => time(),
-            ]);
+                    'submission_no' => time(),
+                ]);
             $this->saveBuildingDocumentData($buildingDocumentation);
 
             return $buildingDocumentation;
@@ -248,7 +256,7 @@ class BuildingDocumentationLivewire extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
+            'text' => 'तपाइको अभिलेखीकरण सफलता पुर्बक दर्ता भयो',
         ]);
         $this->reset('form');
 
@@ -281,7 +289,7 @@ class BuildingDocumentationLivewire extends Component
 
     public function neighbourArrayDecrement($index): void
     {
-        if (! empty($this->form['neighbours'][$index]['id'])) {
+        if (!empty($this->form['neighbours'][$index]['id'])) {
             Neighbour::find($this->form['neighbours'][$index]['id'])->delete();
         }
         unset($this->form['neighbours'][$index]);
@@ -295,7 +303,7 @@ class BuildingDocumentationLivewire extends Component
 
     public function fileArrayDecrement($index): void
     {
-        if (! empty($this->form['files'][$index]['id'])) {
+        if (!empty($this->form['files'][$index]['id'])) {
             Neighbour::find($this->form['files'][$index]['id'])->delete();
         }
         unset($this->form['files'][$index]);
@@ -304,13 +312,13 @@ class BuildingDocumentationLivewire extends Component
 
     public function render(): Factory|View|Application
     {
-        if (! empty($this->form['province_id'])) {
+        if (!empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
         }
-        if (! empty($this->form['district_id'])) {
+        if (!empty($this->form['district_id'])) {
             $this->localBodies = get_local_bodies($this->form['district_id']);
         }
-        if (! empty($this->form['local_body_id'])) {
+        if (!empty($this->form['local_body_id'])) {
             $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
@@ -337,7 +345,11 @@ class BuildingDocumentationLivewire extends Component
             'form.former_district.required' => ['साविक जिल्ला आबश्यक छ '],
             'form.former_local_body.required' => ['साविक स्थानीय निकाय  आबश्यक छ '],
             'form.former_ward_no.required' => ['साविक वार्ड न. आबस्यक छ'],
+            'form.applicant_former_district.required' => ['निवेदकको साविक जिल्ला आबश्यक छ '],
+            'form.applicant_former_local_body.required' => ['निवेदकको साविक स्थानीय निकाय  आबश्यक छ '],
+            'form.applicant_former_ward_no.required' => ['निवेदकको साविक वार्ड न. आबस्यक छ'],
             'form.phone.required' => ['फोन आबश्यक छ'],
+            'form.citizenship_no.required' => ['ना.प्रा.नं आबश्यक छ'],
             'form.plot_no.required' => ['जग्गाको कित्ता नं आबश्यक छ '],
             'form.land_area.required' => ['जग्गाको क्षेत्रफल आबश्यक छ '],
             'form.land_ward_no.required' => ['जग्गाको क्षेत्रफल आबश्यक छ '],
