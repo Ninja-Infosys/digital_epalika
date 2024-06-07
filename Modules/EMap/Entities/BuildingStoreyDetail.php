@@ -2,15 +2,15 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Models\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\EMap\Enums\StoreyTypeEnum;
 
-class LandReport extends Model
+class BuildingStoreyDetail extends Model
 {
     use HasFactory,SoftDeletes,EventObserveTrait;
 
@@ -21,18 +21,20 @@ class LandReport extends Model
    ];
 
    protected $fillable = [
-    'building_documentation_id',
-    'description',
-    'submitted_date',
+
+    'storey',
+    'area_of_former_construction',
+    'land_area',
+    'remarks',
 ];
 
-public function buildingDocumentation(): BelongsTo
+protected $casts = [
+    'storey' => StoreyTypeEnum::class,
+];
+public function storeyable(): MorphTo
 {
-    return $this->belongsTo(BuildingDocumentation::class);
+    return $this->morphTo();
 }
 
-public function files(): MorphMany
-{
-    return $this->morphMany(File::class, 'model');
-}
+
 }

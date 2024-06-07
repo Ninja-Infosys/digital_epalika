@@ -131,4 +131,9 @@ class BuildingDocumentation extends Model
     {
         return $this->hasOne(LandReport::class);
     }
+
+    public function buildingStoreyDetails(): MorphMany
+    {
+        return $this->morphMany(BuildingStoreyDetail::class, 'storeyable');
+    }
 }
