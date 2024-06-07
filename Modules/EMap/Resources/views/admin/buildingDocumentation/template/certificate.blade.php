@@ -110,6 +110,12 @@
                                 <td></td>
                             </tr>
                             <tr>
+                                <th scope="row">चौथो तला</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
                                 <th scope="row">जम्मा तला</th>
                                 <td></td>
                                 <td></td>
