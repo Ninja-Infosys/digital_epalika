@@ -157,13 +157,14 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
+        // return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
+        return redirect()->route('emap.admin.buildingDocumentation.sentToAdmin', $buildingDocumentation->id);
+
 
     }
 
     public function showToAdmin(BuildingDocumentation $buildingDocumentation)
     {
-
         $buildingDocumentation->update([
             'sent_admin' => 'land_confirmation_show',
         ]);
@@ -171,7 +172,9 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+        // return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+        return redirect()->route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation->id);
+
 
     }
 
