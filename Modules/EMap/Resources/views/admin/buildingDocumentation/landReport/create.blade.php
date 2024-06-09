@@ -30,7 +30,7 @@
                         </a>
                     </div>
                 </div>
-                @if ($buildingDocumentation?->landReport?->sent_to_ward ==1 || is_null(auth()->user()->ward_no))
+                @if (is_null(auth()->user()->ward_no))
                     <div class="card-body px-0">
 
                         <form
