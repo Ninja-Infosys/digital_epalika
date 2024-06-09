@@ -10,23 +10,20 @@ class BuildingDocumentationSettingController extends Controller
 {
     public function index(BuildingDocumentationSetting $buildingDocumentationSetting)
     {
+        $buildingDocumentationSetting = BuildingDocumentationSetting::first();
+
         return view('emap::admin.buildingDocumentation.setting.index', compact('buildingDocumentationSetting'));
     }
 
-    public function store(Request $request)
+
+
+    public function update(Request $request, BuildingDocumentationSetting $buildingDocumentationSetting)
     {
         $data = $request->validate([
-            'is_building_documentation' => ['nullable', 'boolean'],
-        ]);
-
-        // Find the latest BuildingDocumentationSetting record or create a new one
-        $buildingDocumentationSetting = BuildingDocumentationSetting::latest()->first();
-
-        if ($buildingDocumentationSetting) {
-            $buildingDocumentationSetting->update($data);
-        }
-        toast('सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
-
+                    'is_building_documentation' => ['nullable', 'boolean'],
+                ]);
+        $buildingDocumentationSetting->update($data);
+        toast(' सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 }
