@@ -234,7 +234,9 @@
             @case(2)
                 <legend>
                     <strong>
-                        अन्य फाइलहरु
+
+                        संधियारको विवरण
+
                     </strong>
                 </legend>
                 <div class="col-md-12 mb-2">
@@ -252,7 +254,7 @@
                                     <div class="row border-bottom mb-2">
                                         <div class="col-md-4 mb-2">
                                             <label for="form.neighbours.{{ $key }}.direction" class="form-label">
-                                                शीर्षक*</label>
+                                               दिशा*</label>
                                             <select
                                                 class="form-select @error('form.neighbours.' . $key . '.direction') is-invalid @enderror"
                                                 id="form.neighbours.{{ $key }}.direction"
@@ -328,7 +330,7 @@
                                             <label for="form.buildingStoreyDetails.{{ $key }}.storey"
                                                 class="form-label">
                                                 तल्ला*</label>
-                                                <select
+                                            <select
                                                 class="form-select @error('form.buildingStoreyDetails.' . $key . '.storey') is-invalid @enderror"
                                                 id="form.buildingStoreyDetails.{{ $key }}.storey"
                                                 wire:model="form.buildingStoreyDetails.{{ $key }}.storey">
@@ -343,7 +345,8 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label for="form.buildingStoreyDetails.{{ $key }}.area_of_former_construction"
+                                            <label
+                                                for="form.buildingStoreyDetails.{{ $key }}.area_of_former_construction"
                                                 class="form-label">
                                                 साविक निर्माण भइसकेको क्षेत्रफल*</label>
                                             <input
