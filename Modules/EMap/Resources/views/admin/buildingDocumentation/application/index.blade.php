@@ -117,7 +117,7 @@
                                                 @endif
 
                                                 @if ($buildingDocumentation->status !=
-                                                Modules\EMap\Enums\BuildingDocumentationStatusEnum::NOTICE)
+                                                Modules\EMap\Enums\BuildingDocumentationStatusEnum::NOTICE && $buildingDocumentation->registration_no != NULL)
                                                     @can('landRecommendation_access')
                                                         <form
                                                             action="{{ route('emap.admin.buildingDocumentation.printRecommendation', $buildingDocumentation) }}"
