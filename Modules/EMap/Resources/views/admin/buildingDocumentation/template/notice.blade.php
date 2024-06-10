@@ -52,9 +52,9 @@
                                                 सम्वन्धित</strong></span>
                                         </div>
 
-                                        <div style="font-size:19px; line-height:1.2">बागचौर नगरपालिका </div>
+                                        <div style="font-size:19px; line-height:1.2">{{ $officeSetting->localBody->local_body ?? '' }} </div>
 
-                                        <div style=" font-size:19px; line-height:1.2">...................नं वडा कार्यालय
+                                        <div style=" font-size:19px; line-height:1.2">{{$buildingDocumentation->former_ward_no ?? ''}} नं वडा कार्यालय
                                         </div>
                                         <div style="font-size:19px; line-height:1.2">.............................
                                         </div>

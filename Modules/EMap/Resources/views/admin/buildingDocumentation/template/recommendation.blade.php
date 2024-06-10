@@ -63,7 +63,7 @@
 
                             <div class="subject text-justify-center lh-lg px-5 ">
                                 <h5><strong> {{ $officeSetting->localBody->local_body ?? '' }}</strong></h5>
-                                <h5><strong>........ वडा कार्यालय</strong></h5>
+                                <h5><strong>{{$buildingDocumentation->former_ward_no ?? ''}} वडा कार्यालय</strong></h5>
 
                             </div>
                             <div class="d-flex text-justify-center lh-lg px-5">

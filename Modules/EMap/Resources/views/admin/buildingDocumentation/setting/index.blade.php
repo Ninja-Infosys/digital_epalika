@@ -29,10 +29,9 @@
         <div class="card p-0">
             <div class="card-body px-0">
                 <form
-                    action="{{ route('emap.admin.buildingDocumentationSetting.update', $buildingDocumentationSetting) }}"
+                    action="{{ route('emap.admin.buildingDocumentationSetting.store') }}"
                     method="post" enctype="multipart/form-data">
                     @csrf
-                    @method('put')
                     <fieldset class="border p-2 mb-2">
                         <legend class="font-16 text-primary">
                             <strong> विवरण </strong>
