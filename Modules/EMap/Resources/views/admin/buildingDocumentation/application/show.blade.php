@@ -51,112 +51,118 @@
                                             </h4>
                                         </div>
                                         <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-sm mb-0 table-striped table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>घरधनिको नाम </th>
-                                                            <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>सम्पर्क नं </th>
-                                                            <td>{{ $buildingDocumentation->phone ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> घरको क्षेत्रफल </th>
-                                                            <td>{{ $buildingDocumentation->area ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> घर बनेको बर्ष </th>
-                                                            <td>{{ $buildingDocumentation->house_built_year ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> कोठा संख्या </th>
-                                                            <td>{{ $buildingDocumentation->room ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> घरको तल्ला </th>
-                                                            <td>{{ $buildingDocumentation->storey ?? '' }}</td>
-                                                        </tr>
+                                            <div class="table">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-sm mb-0 table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>घरधनिको नाम</th>
+                                                                    <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>ठेगाना</th>
+                                                                    <td>
+                                                                        {{ $buildingDocumentation->LocalBody->local_body ?? '' }}
+                                                                        -{{ $buildingDocumentation->ward_no ?? '' }},
+                                                                        {{ $buildingDocumentation->tole ?? '' }},
+                                                                        {{ $buildingDocumentation->District->district ?? '' }},
+                                                                        {{ $buildingDocumentation->Province->province ?? '' }}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>सम्पर्क नं</th>
+                                                                    <td>{{ $buildingDocumentation->phone ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>घरको क्षेत्रफल</th>
+                                                                    <td>{{ $buildingDocumentation->area ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>घर बनेको बर्ष</th>
+                                                                    <td>{{ $buildingDocumentation->house_built_year ?? '' }}</td>
+                                                                </tr>
 
-                                                        <tr>
-                                                            <th>घरको किसिम </th>
-                                                            <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> घरको लम्बाई </th>
-                                                            <td>{{ $buildingDocumentation->length ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> घरको चौडाई </th>
-                                                            <td>{{ $buildingDocumentation->breadth ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> घरको उचाई </th>
-                                                            <td>{{ $buildingDocumentation->height ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>अन्य </th>
-                                                            <td>{{ $buildingDocumentation->other ?? '' }}</td>
-                                                        </tr>
+                                                                <tr>
+                                                                    <th>घरको तल्ला</th>
+                                                                    <td>{{ $buildingDocumentation->storey ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>घरको किसिम</th>
+                                                                    <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>घरको लम्बाई</th>
+                                                                    <td>{{ $buildingDocumentation->length ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>घरको चौडाई</th>
+                                                                    <td>{{ $buildingDocumentation->breadth ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>घरको उचाई</th>
+                                                                    <td>{{ $buildingDocumentation->height ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>कोठा संख्या</th>
+                                                                    <td>{{ $buildingDocumentation->room ?? '' }}</td>
+                                                                </tr>
 
-                                                        <tr>
-                                                            <th>अन्या विवरण</th>
-                                                            <td>{{ $buildingDocumentation->other ?? '' }}</td>
-                                                        </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
 
+                                                    <div class="col-md-6">
+                                                        <table class="table table-sm mb-0 table-striped table-hover">
+                                                            <thead>
 
-
-
-                                                        <tr>
-                                                            <th> ठेगाना</th>
-                                                            <td>
-                                                                {{ $buildingDocumentation->LocalBody->local_body ?? '' }}
-                                                                -{{ $buildingDocumentation->ward_no ?? '' }}
-                                                                , {{ $buildingDocumentation->tole ?? '' }}
-                                                                , {{ $buildingDocumentation->District->district ?? '' }}
-                                                                , {{ $buildingDocumentation->Province->province ?? '' }}
-                                                            </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th> जग्गा क्षेत्रफल</th>
-                                                            <td>{{ $buildingDocumentation->land_area ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> जग्गाको कित्ता नं.</th>
-                                                            <td>{{ $buildingDocumentation->land_area ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> सडक अधिकार क्षेत्र</th>
-                                                            <td>{{ $buildingDocumentation->road_jurisdiction ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> जग्गा विवरण</th>
-                                                            <td>{{ $buildingDocumentation->land_detail ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> हाल वार्ड नं.</th>
-                                                            <td>{{ $buildingDocumentation->land_ward_no ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> साविक जिल्ला </th>
-                                                            <td>{{ $buildingDocumentation->former_district ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> साविक पालिका</th>
-                                                            <td>{{ $buildingDocumentation->former_local_body ?? '' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th> साविक वार्ड नं.</th>
-                                                            <td>{{ $buildingDocumentation->former_ward_no ?? '' }}</td>
-                                                        </tr>
-
-                                                    </thead>
-                                                </table>
+                                                                <tr>
+                                                                    <th>जग्गा क्षेत्रफल</th>
+                                                                    <td>{{ $buildingDocumentation->land_area ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>जग्गाको कित्ता नं.</th>
+                                                                    <td>{{ $buildingDocumentation->land_area ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>सडक अधिकार क्षेत्र</th>
+                                                                    <td>{{ $buildingDocumentation->road_jurisdiction ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>जग्गा विवरण</th>
+                                                                    <td>{{ $buildingDocumentation->land_detail ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>हाल वार्ड नं.</th>
+                                                                    <td>{{ $buildingDocumentation->land_ward_no ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>साविक जिल्ला</th>
+                                                                    <td>{{ $buildingDocumentation->former_district ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>साविक पालिका</th>
+                                                                    <td>{{ $buildingDocumentation->former_local_body ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>साविक वार्ड नं.</th>
+                                                                    <td>{{ $buildingDocumentation->former_ward_no ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>अन्य</th>
+                                                                    <td>{{ $buildingDocumentation->other ?? '' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>अन्या विवरण</th>
+                                                                    <td>{{ $buildingDocumentation->other ?? '' }}</td>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
