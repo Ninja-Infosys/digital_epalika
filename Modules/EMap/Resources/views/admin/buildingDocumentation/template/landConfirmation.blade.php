@@ -41,7 +41,6 @@
                     <form action="{{ route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation) }}"
                         method="post" style="display: inline">
                         @csrf
-                        @method('put')
 
                         <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
                             class="btn btn-xs btn-outline-warning">
