@@ -23,6 +23,7 @@ class Neighbour extends Model
         'neighbour_name',
         'direction',
         'ward_no',
+        'plot_no'
     ];
     protected $casts = [
         'direction' => NeighbourTypeEnum::class,

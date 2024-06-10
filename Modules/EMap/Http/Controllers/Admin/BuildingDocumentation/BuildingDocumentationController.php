@@ -97,15 +97,17 @@ class BuildingDocumentationController extends Controller
 
     public function printNotice(BuildingDocumentation $buildingDocumentation)
     {
+        $currentDate = date('Y-m-d');
         $buildingDocumentation->load([
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.notice', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.notice', compact('buildingDocumentation','currentDate'));
     }
 
     public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
     {
+        $currentDate = date('Y-m-d');
 
         if (! is_null(auth()->user()->ward_no)) {
             $buildingDocumentation->update([
@@ -116,11 +118,12 @@ class BuildingDocumentationController extends Controller
             ]);
         }
 
-        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation','currentDate'));
     }
 
     public function printRecommendation(BuildingDocumentation $buildingDocumentation)
     {
+        $currentDate = date('Y-m-d');
         if (! is_null(auth()->user()->ward_no)) {
             $buildingDocumentation->update([
                 'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
@@ -130,11 +133,12 @@ class BuildingDocumentationController extends Controller
             ]);
         }
 
-        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation','currentDate'));
     }
 
     public function printCertificate(BuildingDocumentation $buildingDocumentation)
     {
+        $currentDate = date('Y-m-d');
         if (is_null(auth()->user()->ward_no)) {
             $buildingDocumentation->update([
                 'status' => BuildingDocumentationStatusEnum::CERTIFICATE->value,
@@ -144,7 +148,7 @@ class BuildingDocumentationController extends Controller
             ]);
         }
 
-        return view('emap::admin.buildingDocumentation.template.certificate', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.certificate', compact('buildingDocumentation','currentDate'));
     }
 
     public function sentToAdmin(BuildingDocumentation $buildingDocumentation)
@@ -160,7 +164,6 @@ class BuildingDocumentationController extends Controller
         // return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
         return redirect()->route('emap.admin.buildingDocumentation.sentToAdmin', $buildingDocumentation->id);
 
-
     }
 
     public function showToAdmin(BuildingDocumentation $buildingDocumentation)
@@ -175,12 +178,11 @@ class BuildingDocumentationController extends Controller
         // return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
         return redirect()->route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation->id);
 
-
     }
 
     public function printPermission(BuildingDocumentation $buildingDocumentation)
     {
-
+        $currentDateTime = date('Y-m-d H:i:s');
         $buildingDocumentation->update([
             'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
         ]);
@@ -188,11 +190,12 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation','currentDateTime'));
     }
 
     public function printConfession(BuildingDocumentation $buildingDocumentation)
     {
+        $currentDate = date('Y-m-d');
 
         $buildingDocumentation->update([
             'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
@@ -201,7 +204,7 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation'));
+        return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation','currentDateTime'));
     }
 
     public function update(Request $request, $id)

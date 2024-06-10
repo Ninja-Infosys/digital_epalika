@@ -52,8 +52,8 @@
 
                             </div>
                             <div class="text-end lh-lg px-5">
-                                <p>प.स.:</p>
-                                <p>प.स.:</p>
+                                <p>आ.व:{{ $officeSetting->fiscal_year ?? '' }}</p>
+                                <p>मिति:{{ get_nepali_number($currentDate)}}</p>
 
                             </div>
                             <p class="text-justify-center lh-lg "> अभीलेख नं. :</p>

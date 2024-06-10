@@ -54,7 +54,7 @@
 
                                         <div style="font-size:19px; line-height:1.2">{{ $officeSetting->localBody->local_body ?? '' }} </div>
 
-                                        <div style=" font-size:19px; line-height:1.2">{{$buildingDocumentation->former_ward_no ?? ''}} नं वडा कार्यालय
+                                        <div style=" font-size:19px; line-height:1.2">{{get_nepali_number($buildingDocumentation->land_ward_no ?? '')}}  नं वडा कार्यालय
                                         </div>
                                         <div style="font-size:19px; line-height:1.2">.............................
                                         </div>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-sm sub-title2 text-end ml-auto">
                                     <p class=" fw-bold lh-1" style="text-align: end;">मिती :
-                                        ......................</p>
+                                        {{ get_nepali_number($currentDate)}}</p>
                                 </div>
                             </div>
                             <p class="fw-bold fs-5 text-center my-3">

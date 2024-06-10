@@ -63,12 +63,12 @@
 
                             <div class="subject text-justify-center lh-lg px-5 ">
                                 <h5><strong> {{ $officeSetting->localBody->local_body ?? '' }}</strong></h5>
-                                <h5><strong>{{$buildingDocumentation->former_ward_no ?? ''}} वडा कार्यालय</strong></h5>
+                                <h5><strong>{{$buildingDocumentation->land_ward_no ?? ''}} वडा कार्यालय</strong></h5>
 
                             </div>
                             <div class="d-flex text-justify-center lh-lg px-5">
                                 <p>प.स.:</p>
-                                <p style="margin-left: 500px;">मिति :....................</p>
+                                <p style="margin-left: 500px;">मिति :{{ get_nepali_number($currentDate)}}</p>
                             </div>
                             <p class="text-justify-center lh-lg px-5"> चालनी नं. :</p>
                             <div class="text-justify-center lh-lg px-5">
