@@ -83,14 +83,14 @@
                                 निर्देशिका लागु हुनु
                                 भन्दा अगाडी घर,टहरा निर्माण सम्पन्ना भइ सकेको भनि
                                 पेश गर्नु भएको निवेदन उपर कारवाहि हुदा मिति <span
-                                    class="dashed-bottom">{{ $buildingDocumentation->applicantion_date }} </span> मा
+                                    class="dashed-bottom">................. </span> मा
                                 नगरपालिकाको स्थलगत निरिक्षण
                                 प्रतिवेदन र यस
                                 नगरपालिका {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }} नं. वडाको मिति
                              {{  get_nepali_number($buildingDocumentation->bill_date_bs ??'')}}
                                 गतेको सिफारिस पत्रका आधारमा निजलाई घर
                                 अभिलेखिकरणको प्रमाण पत्र
-                                प्रदान गरिएको छ ।
+                                प्रदान गरिएको छ ।
                             </p>
 
                             <table class="table table-bordered  lh-lg px-5">
