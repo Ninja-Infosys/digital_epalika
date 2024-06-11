@@ -29,7 +29,7 @@
                 style="width: {{ $progressPercentage }}%"></div>
         </div>
     @endif
-    <form wire:submit.prevent="submitForm">
+    <form wire:submit.prevent="submitForm" enctype="multipart/form-data">
         @switch($currentStep)
             @case(3)
                 <fieldset>
@@ -131,21 +131,21 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-4 mb-1">
+                                </div><div class="col-md-4 mb-1">
                                     <label for="requiredDocument.all_round_house_pic" class="form-label">चारैतिरको फोटो
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input
                                             class="form-control @error('requiredDocument.all_round_house_pic') is-invalid @enderror"
                                             type="file" id="requiredDocument.all_round_house_pic"
-                                            wire:model="requiredDocument.all_round_house_pic"
+                                            wire:model="requiredDocument.all_round_house_pic" multiple
                                             placeholder="आवेदन मिति बि. सं.">
                                         @error('requiredDocument.all_round_house_pic')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-md-4 mb-1">
                                     <label for="requiredDocument.photo" class="form-label">घरधनिको फोटो
                                         <span class="text-danger">*</span></label>
@@ -294,6 +294,18 @@
                                             @enderror
                                         </div>
 
+                                        <div class="col-md-4 mb-2">
+                                            <label for="form.neighbours.{{ $key }}.plot_no" class="form-label">
+                                                कित्ता नं</label>
+                                            <input
+                                                class="form-control @error('form.neighbours.' . $key . '.plot_no') is-invalid @enderror"
+                                                type="text" id="form.neighbours.{{ $key }}.plot_no"
+                                                wire:model="form.neighbours.{{ $key }}.plot_no" placeholder="कित्ता नं">
+                                            @error("form.neighbours.$key.plot_no")
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
                                         <div class="col-md-1 mb-2">
                                             <button type="button" class="btn btn-sm btn-outline-danger"
                                                 wire:click.prevent="neighbourArrayDecrement({{ $key }})">
@@ -375,7 +387,7 @@
                                         <div class="col-md-4 mb-2">
                                             <label for="form.buildingStoreyDetails.{{ $key }}.remarks"
                                                 class="form-label">
-                                                कैफियत*</label>
+                                                कैफियत</label>
                                             <input
                                                 class="form-control @error('form.buildingStoreyDetails.' . $key . '.remarks') is-invalid @enderror"
                                                 type="text" id="form.buildingStoreyDetails.{{ $key }}.remarks"
@@ -437,7 +449,7 @@
                             <label for="citizenship_no" class="form-label">ना.प्र नं <span
                                     class="text-danger">*</span></label>
                             <input class="form-control @error('form.citizenship_no') is-invalid @enderror" type="text"
-                                id="citizenship_no" wire:model="form.citizenship_no" placeholder="सम्पर्क नं">
+                                id="citizenship_no" wire:model="form.citizenship_no" placeholder="ना.प्र नं">
                             @error('form.citizenship_no')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -469,7 +481,7 @@
                             <label for="applicant_former_ward_no" class="form-label">साविक वार्ड नं.</label>
                             <div class="input-group">
                                 <input class="form-control @error('form.applicant_former_ward_no') is-invalid @enderror"
-                                    type="number" step="any" id="applicant_former_ward_no"
+                                    type="text" step="any" id="applicant_former_ward_no"
                                     wire:model="form.applicant_former_ward_no" placeholder="साबिक वडा नं">
                                 @error('form.applicant_former_ward_no')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -621,7 +633,7 @@
                             @enderror
                         </div>
                         <div class="col-md-4 mb-2 pr-0">
-                            <label for="other" class="form-label">अन्य <span class="text-danger">*</span></label>
+                            <label for="other" class="form-label">अन्य <span class="text-danger"></span></label>
                             <input class="form-control @error('form.other') is-invalid @enderror" type="text"
                                 id="other" wire:model="form.other" placeholder="अन्य ">
                             @error('form.other')
@@ -714,7 +726,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="former_ward_no" class="form-label">साविक वार्ड नं.</label>
                             <div class="input-group">
-                                <input class="form-control @error('form.former_ward_no') is-invalid @enderror" type="number"
+                                <input class="form-control @error('form.former_ward_no') is-invalid @enderror" type="text"
                                     step="any" id="former_ward_no" wire:model="form.former_ward_no"
                                     placeholder="साबिक वडा नं">
                                 @error('form.former_ward_no')

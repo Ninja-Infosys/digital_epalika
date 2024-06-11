@@ -266,11 +266,11 @@ trait EMapTemplateTrait
         return [
             '[@letterHead]' => $this->letterHead() ?? '',
             '[@letterHeadEn]' => $this->letterHeadEn() ?? '',
-            '[@officeName]' => $this->officeName() ??'',
-            '[@officeAddress]' => $this->officeAddress() ??'',
+            '[@officeName]' => $this->officeName() ?? '',
+            '[@officeAddress]' => $this->officeAddress() ?? '',
             '[@officeProvince]' => $this->officeProvince() ?? '',
-            '[@officeDistrict]' => $this->officeDistrict() ??'',
-            '[@officeLocalBody]' => $this->officeLocalBody() ??'',
+            '[@officeDistrict]' => $this->officeDistrict() ?? '',
+            '[@officeLocalBody]' => $this->officeLocalBody() ?? '',
             '[@officeWardNo]' => $this->officeWardNo() ?? '',
             '[@registration_no]' => $this->get_nepali_number($this->registration_no) ?? '',
             '[@registration_date]' => $this->get_nepali_number($this->registration_date) ?? '',
@@ -287,23 +287,23 @@ trait EMapTemplateTrait
             '[@consultant_name]' => get_nepali_number($this->consultant_name) ?? '',
             '[@consultant_mobile_no]' => get_nepali_number($this->consultant_mobile_no) ?? '',
             '[@consultant_nec_no]' => get_nepali_number($this->consultant_nec_no) ?? '',
-            '[@consultant_signature]' => '<img src="' . ($this->consultant_signature_url ?? ''). '" width="100" height="100" alt="Consultancy Photo">',
+            '[@consultant_signature]' => '<img src="'.($this->consultant_signature_url ?? '').'" width="100" height="100" alt="Consultancy Photo">',
         ];
     }
 
     private function getLandDetailReplacement(): array
     {
         return [
-            '[@landDetail.land_use_area.title]' => $this->get_nepali_number($this->landDetail?->landUseArea?->title)?? '',
-            '[@landDetail.ward_no]' => $this->get_nepali_number($this->landDetail?->ward_no)?? '',
-            '[@landDetail.former_ward_no]' => $this->get_nepali_number($this->landDetail?->former_ward_no)?? '',
-            '[@landDetail.tole]' => $this->get_nepali_number($this->landDetail?->tole)?? '',
-            '[@landDetail.street_code_no]' => $this->get_nepali_number($this->landDetail?->street_code_no)?? '',
-            '[@landDetail.plot_no]' => $this->get_nepali_number($this->landDetail?->plot_no)?? '',
-            '[@landDetail.area]' => $this->get_nepali_number($this->landDetail?->unit_value)?? '',
-            '[@landDetail.percentage_of_area_covered_by_building]' => $this->get_nepali_number($this->landDetail?->percentage_of_area_covered_by_building)?? '',
-            '[@landDetail.former_local_body]' => $this->get_nepali_number($this->landDetail?->former_local_body)?? '',
-            '[@landDetail.road_name]' => $this->get_nepali_number($this->landDetail?->road_name)?? '',
+            '[@landDetail.land_use_area.title]' => $this->get_nepali_number($this->landDetail?->landUseArea?->title) ?? '',
+            '[@landDetail.ward_no]' => $this->get_nepali_number($this->landDetail?->ward_no) ?? '',
+            '[@landDetail.former_ward_no]' => $this->get_nepali_number($this->landDetail?->former_ward_no) ?? '',
+            '[@landDetail.tole]' => $this->get_nepali_number($this->landDetail?->tole) ?? '',
+            '[@landDetail.street_code_no]' => $this->get_nepali_number($this->landDetail?->street_code_no) ?? '',
+            '[@landDetail.plot_no]' => $this->get_nepali_number($this->landDetail?->plot_no) ?? '',
+            '[@landDetail.area]' => $this->get_nepali_number($this->landDetail?->unit_value) ?? '',
+            '[@landDetail.percentage_of_area_covered_by_building]' => $this->get_nepali_number($this->landDetail?->percentage_of_area_covered_by_building) ?? '',
+            '[@landDetail.former_local_body]' => $this->get_nepali_number($this->landDetail?->former_local_body) ?? '',
+            '[@landDetail.road_name]' => $this->get_nepali_number($this->landDetail?->road_name) ?? '',
         ];
     }
 
@@ -341,7 +341,7 @@ trait EMapTemplateTrait
             '[@houseOwner.ward_no]' => $this->get_nepali_number($this->houseOwner?->ward_no) ?? '',
             '[@houseOwner.district]' => $this->get_nepali_number($this->houseOwner?->district?->district) ?? '',
             '[@houseOwner.tole]' => $this->get_nepali_number($this->houseOwner?->tole) ?? '',
-            '[@houseOwner.photo]' => '<img src="' . ($this->houseOwner?->photo_url ?? '')  . '" width="100" height="100" alt="House Owner Photo">',
+            '[@houseOwner.photo]' => '<img src="'.($this->houseOwner?->photo_url ?? '').'" width="100" height="100" alt="House Owner Photo">',
 
         ];
     }
@@ -349,32 +349,33 @@ trait EMapTemplateTrait
     private function getFourFortsReplacement(): array
     {
         return [
-            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
+            '[@fourForts]' => (string) View::make('emap::inc.four_forts_table', [
                 'fourForts' => $this->fourForts,
             ]),
-            '[@nameOfTheFortsAndSanghiars]' => (string)View::make('emap::inc.NameOfTheFortsAndSanghiars', [
+            '[@nameOfTheFortsAndSanghiars]' => (string) View::make('emap::inc.NameOfTheFortsAndSanghiars', [
                 'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
-            '[@landFourFortsDetail]' => (string)View::make('emap::inc.land_four_forts_detail', [
+            '[@landFourFortsDetail]' => (string) View::make('emap::inc.land_four_forts_detail', [
                 'actualSetBack' => $this->fourForts->where('detail', FourSideParticularEnum::ACTUAL_SETBACK)->first(),
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
-            '[@sanghiarsName]' => (string)View::make('emap::inc.sanghiarsName', [
+            '[@sanghiarsName]' => (string) View::make('emap::inc.sanghiarsName', [
                 'towards' => $this->fourForts->where('detail', FourSideParticularEnum::TOWARDS)->first(),
             ]),
         ];
     }
+
     private function getHeightOfStoreyReplacement(): array
     {
         return [
-            '[@heightOfEachStorey]' => (string)View::make('emap::inc.height_of_each_storey', [
+            '[@heightOfEachStorey]' => (string) View::make('emap::inc.height_of_each_storey', [
                 'storeyDetails' => $this->storeyDetails,
             ]),
-            '[@areaOfEachStorey]' => (string)View::make('emap::inc.area_of_storey', [
+            '[@areaOfEachStorey]' => (string) View::make('emap::inc.area_of_storey', [
                 'storeyDetails' => $this->storeyDetails,
             ]),
-            '[@storeyDetails]' => (string)View::make('emap::inc.storey_details', [
+            '[@storeyDetails]' => (string) View::make('emap::inc.storey_details', [
                 'storeyDetails' => $this->storeyDetails,
             ]),
         ];
@@ -437,7 +438,6 @@ trait EMapTemplateTrait
         ];
     }
 
-
     private function getApplicantDetailReplacement(): array
     {
         return [
@@ -454,7 +454,7 @@ trait EMapTemplateTrait
             '[@applicantDetail.local_body]' => $this->get_nepali_number($this->applicantDetail?->localBody?->local_body) ?? '',
             '[@applicantDetail.ward_no]' => $this->get_nepali_number($this->applicantDetail?->ward_no) ?? '',
             '[@applicantDetail.tole]' => $this->get_nepali_number($this->applicantDetail?->tole) ?? '',
-            '[@applicantDetail.signature]' => '<img src="' . ($this->applicantDetail?->signature_url ?? ''). '" width="100" height="100" alt="Applicant Signature">',
+            '[@applicantDetail.signature]' => '<img src="'.($this->applicantDetail?->signature_url ?? '').'" width="100" height="100" alt="Applicant Signature">',
 
         ];
     }
@@ -462,7 +462,7 @@ trait EMapTemplateTrait
     private function getCriteriaDetailsReplacement(): array
     {
         return [
-            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
+            '[@criteriaDetails]' => (string) View::make('emap::inc.criteria_details', [
                 'criteriaDetails' => $this->criteriaDetails,
             ]),
         ];
@@ -471,15 +471,12 @@ trait EMapTemplateTrait
     private function getBuildingDetailsReplacement(): array
     {
         return [
-            '[@buildingDetails]' => (string)View::make('emap::inc.building_details', [
+            '[@buildingDetails]' => (string) View::make('emap::inc.building_details', [
                 'buildingDetails' => $this->buildingDetails,
             ]),
         ];
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmapTemplates(): mixed
     {
         return Cache::rememberForever('eMapTemplates', function () {

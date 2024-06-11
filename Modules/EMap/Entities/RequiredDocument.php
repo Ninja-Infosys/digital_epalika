@@ -68,9 +68,15 @@ class RequiredDocument extends Model
     {
         return Attribute::make(
             get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
-            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+            set: static function ($value) {
+                if (!empty($value) && is_object($value)) { // Check if $value is an object
+                    return $value->store('buildingDocument', 'public');
+                }
+                return null;
+            }
         );
     }
+
     protected function photo(): Attribute
     {
         return Attribute::make(

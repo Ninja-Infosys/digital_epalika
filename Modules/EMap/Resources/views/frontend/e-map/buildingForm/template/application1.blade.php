@@ -30,7 +30,7 @@
 
                     <div class="header">
                         <p>श्री अध्यक्ष ज्यू :</p>
-                        <p>....नं वडा कार्यालय</p>
+                        <p>{{get_nepali_number($buildingDocumentation->land_ward_no ?? '')}} नं वडा कार्यालय</p>
                         <p>{{$officeSetting->localBody->local_body ?? '' }},{{$officeSetting->district->district ?? ''
                             }} ।</p>
 

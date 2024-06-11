@@ -61,7 +61,7 @@
                                                 कार्यालय मार्फत नेपाल सरकारमा चढायौं।
 
                                             </p>
-                                            <p class=" text-justify-center lh-lg px-5 fs-4"> ई.ति सम्बत् २०............साल महिना...........गते
+                                            <p class=" text-justify-center lh-lg px-5 fs-4"> ई.ति सम्बत् २०.......साल महिना...........गते
                                                 रोज.............मा सुभम्।</p>
                                             <p class=" text-justify-center lh-lg px-5 fs-4"> हस्ताक्षर</p>
                                             <p class=" text-justify-center lh-lg px-5 "> .................</p>
