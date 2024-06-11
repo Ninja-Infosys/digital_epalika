@@ -44,16 +44,16 @@
                             <div class="text-center font-weight-bold fs-4">
                                 <h4><strong>अनुसूची ५</strong></h4>
                                 <h4><strong>घर अभिलेखिकरण प्रमाण पत्र</strong></h4>
-                                <h4><strong>बागाचौर नगरपाालिका</strong></h4>
+                                <h4><strong>{{ $officeSetting?->localBody?->local_body ?? ''}}</strong></h4>
                                 <h4><strong> नगर कार्यपाालिकाको कार्यालय</strong></h4>
-                                <h4><strong>बागाचौर सल्यान</strong></h4>
+                                <h4><strong>{{ $officeSetting?->site_address ?? '' }}</strong></h4>
                                 <h4><strong>कर्णली प्रदेश नेपाल</strong></h4>
                                 <h3><strong>अभिलेखिकरण प्रमाण पत्र</strong></h3>
 
                             </div>
                             <div class="text-end lh-lg px-5">
-                                <p>प.स.:</p>
-                                <p>प.स.:</p>
+                                <p>आ.व: {{ get_nepali_number($officeSetting->fiscalYear?->title ?? '' )}}</p>
+                                <p>मिति: {{ get_nepali_number($currentDate)}}</p>
 
                             </div>
                             <p class="text-justify-center lh-lg "> अभीलेख नं. :</p>

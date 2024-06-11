@@ -38,16 +38,10 @@
                     </div>
                 </div>
                 @if (!is_null(auth()->user()->ward_no) && $buildingDocumentation->sent_admin == null)
-                    <form action="{{ route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation) }}"
-                        method="post" style="display: inline">
-                        @csrf
-                        @method('put')
-
-                        <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
-                            class="btn btn-xs btn-outline-warning">
-                            <i class="fa fa-print"></i>पालिकामा देखाउनुस
-                        </button>
-                    </form>
+                    <a href="{{ route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation) }}" data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
+                       class="btn btn-xs btn-outline-warning">
+                        <i class="fa fa-print"></i>पालिकामा देखाउनुहोस्
+                    </a>
                 @endif
                 @if (
                     $buildingDocumentation->sent_admin == 'land_confirmation_show' ||

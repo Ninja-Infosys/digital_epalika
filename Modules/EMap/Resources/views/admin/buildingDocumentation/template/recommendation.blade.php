@@ -39,16 +39,10 @@
                 </div>
 
                 @if (!is_null(auth()->user()->ward_no) && $buildingDocumentation->sent_admin == 'land_confirmation_show')
-                    <form action="{{ route('emap.admin.buildingDocumentation.sentToAdmin', $buildingDocumentation) }}"
-                        method="post" style="display: inline">
-                        @csrf
-                        @method('put')
-
-                        <button data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
-                            class="btn btn-xs btn-outline-warning">
-                            <i class="fa fa-print"></i>पालिकामा पाठाउनुहोस
-                        </button>
-                    </form>
+                    <a href="{{ route('emap.admin.buildingDocumentation.sentToAdmin', $buildingDocumentation) }}" data-bs-type="edit" type="submit" title="प्रिन्ट गर्नुहोस"
+                       class="btn btn-xs btn-outline-warning">
+                        <i class="fa fa-print"></i>पालिकामा पठाउनुहोस
+                    </a>
                 @endif
                 @if ($buildingDocumentation->sent_admin == 'recommendation_sent' || !is_null(auth()->user()->ward_no))
                     <div class="card-body px-0">
@@ -63,12 +57,12 @@
 
                             <div class="subject text-justify-center lh-lg px-5 ">
                                 <h5><strong> {{ $officeSetting->localBody->local_body ?? '' }}</strong></h5>
-                                <h5><strong>{{$buildingDocumentation->former_ward_no ?? ''}} वडा कार्यालय</strong></h5>
+                                <h5><strong>{{get_nepali_number($buildingDocumentation->land_ward_no ?? '')}} नं वडा कार्यालय</strong></h5>
 
                             </div>
                             <div class="d-flex text-justify-center lh-lg px-5">
                                 <p>प.स.:</p>
-                                <p style="margin-left: 500px;">मिति :....................</p>
+                                <p style="margin-left: 500px;">मिति :{{ get_nepali_number($currentDate)}}</p>
                             </div>
                             <p class="text-justify-center lh-lg px-5"> चालनी नं. :</p>
                             <div class="text-justify-center lh-lg px-5">

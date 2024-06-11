@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('neighbour_name')->comment('संधियारको नाम');
             $table->string('direction')->comment('दिशा');
             $table->string('ward_no')->comment('वडा नं');
+            $table->string('plot_no')->nullable()->comment('कित्ता नं');
             $table->timestamps();
             $table->softDeletes();
         });

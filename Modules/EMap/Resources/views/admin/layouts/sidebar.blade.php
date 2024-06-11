@@ -96,6 +96,30 @@
     </a>
 </li>
 
+<li class="{{ request()->is('admin/emap/buildingDocumentation/*') ? 'active' : '' }}">
+    <a href="#sidebarEMapBuildingDocumentation" {{ request()->is('admin/emap/buildingDocumentation/*') ? 'aria-expanded=true' : '' }}
+    data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span>घर अभिलेखिकरण</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{ request()->is('admin/emap/buildingDocumentation/*') ? 'show' : '' }}" id="sidebarEMapBuildingDocumentation">
+        <ul class="nav-second-level">
+            @can('buildingDocumentationApplication_access')
+                <li class="{{ request()->is('admin/emap/buildingDocumentation/buildingDocumentation') ? 'active' : '' }}">
+                    <a href="{{ route('emap.admin.buildingDocumentation.index') }}">
+                        <span>दर्खास्त निवेदन</span>
+                    </a>
+                </li>
+            @endcan
+
+
+        </ul>
+    </div>
+</li>
+
 <li class="{{ request()->is('admin/emap/setting/*') ? 'active' : '' }}">
     <a href="#sidebarEMapSetting" {{ request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
@@ -192,32 +216,3 @@
         </ul>
     </div>
 </li>
-<li class="{{ request()->is('admin/emap/buildingDocumentation/*') ? 'active' : '' }}">
-    <a href="#sidebarEMapBuildingDocumentation" {{ request()->is('admin/emap/buildingDocumentation/*') ? 'aria-expanded=true' : '' }}
-        data-bs-toggle="collapse">
-        <i class="fa fa-cogs"></i>
-        <span>घर अभिलेखिकरण</span>
-        <span class="menu-arrow">
-            <i class="fas fa-angle-right"></i>
-        </span>
-    </a>
-    <div class="collapse {{ request()->is('admin/emap/buildingDocumentation/*') ? 'show' : '' }}" id="sidebarEMapBuildingDocumentation">
-        <ul class="nav-second-level">
-            @can('buildingDocumentationApplication_access')
-                <li class="{{ request()->is('admin/emap/buildingDocumentation/buildingDocumentation') ? 'active' : '' }}">
-                    <a href="{{ route('emap.admin.buildingDocumentation.index') }}">
-                        <span>दर्खास्त निवेदन</span>
-                    </a>
-                </li>
-            @endcan
-
-
-        </ul>
-    </div>
-</li>
-<!-- <li class="{{ request()->is('admin/emap/organization/reports') ? 'active' : '' }}">
-    <a href="{{ route('emap.admin.report.report') }}">
-        <i class="fa fa-clipboard-list"></i>
-        <span>रिपोर्ट</span>
-    </a>
-</li> -->
