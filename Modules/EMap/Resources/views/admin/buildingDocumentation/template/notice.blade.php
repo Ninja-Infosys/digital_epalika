@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-sm sub-title2 text-end ml-auto">
                                     <p class=" fw-bold lh-1" style="text-align: end;">मिती :
-                                        ......................</p>
+                                        {{ get_nepali_number($buildingDocumentation->get_today_nepali_date())}}</p>
                                 </div>
                             </div>
                             <p class="fw-bold fs-5 text-center my-3">
