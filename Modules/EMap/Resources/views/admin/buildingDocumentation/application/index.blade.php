@@ -64,7 +64,7 @@
                                     <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
                                     <td>
                                     <span>{{ $buildingDocumentation->localBody->local_body ?? '' }}
-                                        - {{ $buildingDocumentation->ward_no ?? '' }} </span>
+                                        - {{ get_nepali_number( $buildingDocumentation->land_ward_no ?? '' )}} </span>
                                     </td>
                                     <td class="d-flex gap-1">
                                         <form

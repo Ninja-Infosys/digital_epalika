@@ -47,13 +47,13 @@
                                 <h4><strong>{{ $officeSetting?->localBody?->local_body ?? ''}}</strong></h4>
                                 <h4><strong> नगर कार्यपाालिकाको कार्यालय</strong></h4>
                                 <h4><strong>{{ $officeSetting?->site_address ?? '' }}</strong></h4>
-                                <h4><strong>कर्णली प्रदेश नेपाल</strong></h4>
+                                <h4><strong>{{ $officeSetting?->province?->province ?? ''}} नेपाल</strong></h4>
                                 <h3><strong>अभिलेखिकरण प्रमाण पत्र</strong></h3>
 
                             </div>
                             <div class="text-end lh-lg px-5">
                                 <p>आ.व: {{ get_nepali_number($officeSetting->fiscalYear?->title ?? '' )}}</p>
-                                <p>मिति: {{ get_nepali_number($currentDate)}}</p>
+                                <p>मिति: {{get_nepali_number($buildingDocumentation->get_today_nepali_date())}}</p>
 
                             </div>
                             <p class="text-justify-center lh-lg "> अभीलेख नं. :</p>
@@ -86,8 +86,8 @@
                                     class="dashed-bottom">{{ $buildingDocumentation->applicantion_date }} </span> मा
                                 नगरपालिकाको स्थलगत निरिक्षण
                                 प्रतिवेदन र यस
-                                नगरपालिका {{ get_nepali_number($officeSetting->ward_no ?? '') }} नं. वडाको मिति
-                                .............
+                                नगरपालिका {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }} नं. वडाको मिति
+                             {{  get_nepali_number($buildingDocumentation->bill_date_bs ??'')}}
                                 गतेको सिफारिस पत्रका आधारमा निजलाई घर
                                 अभिलेखिकरणको प्रमाण पत्र
                                 प्रदान गरिएको छ ।

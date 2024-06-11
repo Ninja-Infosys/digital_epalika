@@ -62,7 +62,7 @@
                             </div>
                             <div class="d-flex text-justify-center lh-lg px-5">
                                 <p>प.स.:</p>
-                                <p style="margin-left: 500px;">मिति :{{ get_nepali_number($currentDate)}}</p>
+                                <p style="margin-left: 500px;">मिति :{{get_nepali_number($buildingDocumentation->get_today_nepali_date())}}</p>
                             </div>
                             <p class="text-justify-center lh-lg px-5"> चालनी नं. :</p>
                             <div class="text-justify-center lh-lg px-5">

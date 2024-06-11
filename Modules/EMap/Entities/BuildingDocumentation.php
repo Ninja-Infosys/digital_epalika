@@ -8,6 +8,7 @@ use App\Models\Address\Province;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,6 +22,7 @@ use Modules\EMap\Enums\BuildingTypeEnum;
 class BuildingDocumentation extends Model
 {
     use EventObserveTrait, HasFactory, SoftDeletes;
+    use NepaliDateConverter;
 
     protected $dates = [
         'created_at',
