@@ -147,16 +147,16 @@ Route::prefix('buildingDocumentation')->group(function () {
         ->name('store.customApplicationData');
     Route::get('buildingDocumentation/{buildingDocumentation}/printNotice', [BuildingDocumentationController::class, 'printNotice'])
         ->name('buildingDocumentation.printNotice');
-    Route::put('buildingDocumentation/{buildingDocumentation}/printLandConfirmation', [BuildingDocumentationController::class, 'printLandConfirmation'])
+    Route::get('buildingDocumentation/{buildingDocumentation}/printLandConfirmation', [BuildingDocumentationController::class, 'printLandConfirmation'])
         ->name('buildingDocumentation.printLandConfirmation');
-    Route::put('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
+    Route::get('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
         ->name('buildingDocumentation.printRecommendation');
 
-    Route::put('buildingDocumentation/{buildingDocumentation}/sentToAdmin', [BuildingDocumentationController::class, 'sentToAdmin'])
+    Route::get('buildingDocumentation/{buildingDocumentation}/sentToAdmin', [BuildingDocumentationController::class, 'sentToAdmin'])
         ->name('buildingDocumentation.sentToAdmin');
     Route::get('buildingDocumentation/{buildingDocumentation}/showToAdmin', [BuildingDocumentationController::class, 'showToAdmin'])
         ->name('buildingDocumentation.showToAdmin');
-    Route::put('buildingDocumentation/{buildingDocumentation}/printCertificate', [BuildingDocumentationController::class, 'printCertificate'])
+    Route::get('buildingDocumentation/{buildingDocumentation}/printCertificate', [BuildingDocumentationController::class, 'printCertificate'])
         ->name('buildingDocumentation.printCertificate');
 
     Route::get('buildingDocumentation/{buildingDocumentation}/printPermission', [BuildingDocumentationController::class, 'printPermission'])

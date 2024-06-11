@@ -153,16 +153,10 @@ class BuildingDocumentationController extends Controller
 
     public function sentToAdmin(BuildingDocumentation $buildingDocumentation)
     {
-
         $buildingDocumentation->update([
             'sent_admin' => 'recommendation_sent',
         ]);
-        $buildingDocumentation->load([
-            'neighbours',
-        ]);
-
-        // return view('emap::admin.buildingDocumentation.template.recommendation', compact('buildingDocumentation'));
-        return redirect()->route('emap.admin.buildingDocumentation.sentToAdmin', $buildingDocumentation->id);
+        return back();
 
     }
 
@@ -174,9 +168,7 @@ class BuildingDocumentationController extends Controller
         $buildingDocumentation->load([
             'neighbours',
         ]);
-
-        // return view('emap::admin.buildingDocumentation.template.landConfirmation', compact('buildingDocumentation'));
-        return redirect()->route('emap.admin.buildingDocumentation.showToAdmin', $buildingDocumentation->id);
+        return back();
 
     }
 

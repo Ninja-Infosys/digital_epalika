@@ -101,37 +101,27 @@
                                             <div class="dropdown-menu" style="height: auto">
                                                 @if ($buildingDocumentation->isRegistrationDateMoreThanAWeekOld())
                                                     @can('landConfirmation_access')
-                                                        <form
-                                                            action="{{ route('emap.admin.buildingDocumentation.printLandConfirmation', $buildingDocumentation) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('put')
-                                                            <button data-bs-type="edit" type="submit"
+
+                                                            <a href="{{ route('emap.admin.buildingDocumentation.printLandConfirmation', $buildingDocumentation) }}"
                                                                     title="प्रिन्ट गर्नुहोस"
                                                                     class="dropdown-item"
                                                                     style="font-size: 17px; font-weight:600">
                                                                 <i class="fa fa-print"></i> सरजमिन मुचुल्का
-                                                            </button>
-                                                        </form>
+                                                            </a>
                                                     @endcan
                                                 @endif
 
                                                 @if ($buildingDocumentation->status !=
                                                 Modules\EMap\Enums\BuildingDocumentationStatusEnum::NOTICE && $buildingDocumentation->registration_no != NULL)
                                                     @can('landRecommendation_access')
-                                                        <form
-                                                            action="{{ route('emap.admin.buildingDocumentation.printRecommendation', $buildingDocumentation) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('put')
-                                                            <button data-bs-type="edit" type="submit"
+
+                                                            <a href="{{ route('emap.admin.buildingDocumentation.printRecommendation', $buildingDocumentation) }}"
                                                                     title="प्रिन्ट गर्नुहोस"
                                                                     class="dropdown-item"
                                                                     style="font-size: 17px; font-weight:600">
                                                                 <i class="fa fa-print" style="font-size: 17px;"></i>
                                                                 वडाको सिफारिस
-                                                            </button>
-                                                        </form>
+                                                            </a>
                                                     @endcan
                                                 @endif
 
@@ -152,18 +142,13 @@
                                                     $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::REPORT ||
                                                         $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
                                                     @can('certificate_access')
-                                                        <form
-                                                            action="{{ route('emap.admin.buildingDocumentation.printCertificate', $buildingDocumentation) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('put')
-                                                            <button data-bs-type="edit" type="submit"
+
+                                                            <a href="{{ route('emap.admin.buildingDocumentation.printCertificate', $buildingDocumentation) }}"
                                                                 title="प्रिन्ट गर्नुहोस" class="dropdown-item"
                                                                 style="font-size: 17px; font-weight:600">
                                                                 <i class="fa fa-print" style="font-size: 17px;"></i> प्रमाण
                                                                 पत्र
-                                                            </button>
-                                                        </form>
+                                                            </a>
                                                     @endcan
                                                 @endif
                                                 <a href="{{ route('emap.admin.buildingDocumentation.printPermission', $buildingDocumentation) }}"
