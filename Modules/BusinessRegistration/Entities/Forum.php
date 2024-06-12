@@ -108,7 +108,7 @@ class Forum extends Model
 
     public function partners(): MorphMany
     {
-        return $this->morphMany(Partner::class, 'businessAble');
+        return $this->morphMany(Partner::class, 'businessable');
     }
 
     public function files(): MorphMany

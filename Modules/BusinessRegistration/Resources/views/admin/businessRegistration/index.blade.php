@@ -124,8 +124,8 @@
                                         <td>{{ $businessDetail->registration_date_ne ?? '' }}</td>
                                         <td>{{ $businessDetail->partners->first()?->name ?? '' }}</td>
                                         <td>
-                                            <span>{{ $businessDetail->partners->first()?->localBody->local_body ?? '' }}
-                                                - {{ $businessDetail->partners->first()?->ward_no ?? '' }} </span>
+                                            <span>{{ $businessDetail?->partners->first()?->localBody->local_body ?? '' }}
+                                                - {{ $businessDetail?->partners->first()?->ward_no ?? '' }} </span>
                                         </td>
                                         <td>{{ $businessDetail->name ?? '' }}</td>
                                         <td>
