@@ -75,9 +75,9 @@ class OrganizationRegistration extends Model
         return false;
     }
 
-    public function committeeNames(): MorphMany
+    public function partners(): MorphMany
     {
-        return $this->morphMany(CommitteeName::class, 'businessable');
+        return $this->morphMany(Partner::class, 'businessAble');
     }
 
     public function fiscalYear(): BelongsTo

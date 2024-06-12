@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\BuildingDocumentationStatusEnum;
 use Modules\EMap\Enums\BuildingTypeEnum;
 
@@ -137,5 +139,14 @@ class BuildingDocumentation extends Model
     public function buildingStoreyDetails(): MorphMany
     {
         return $this->morphMany(BuildingStoreyDetail::class, 'storeyable');
+    }
+
+
+    protected function otherFile(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument/revenue', 'public') : null,
+        );
     }
 }

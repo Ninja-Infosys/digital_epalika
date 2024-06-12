@@ -81,14 +81,16 @@ class BuildingDocumentationLivewire extends Component
         'building_map' => null,
         'land_map' => null,
         'all_round_house_pic' => null,
+        'files' => [],
         'photo' => null,
     ];
 
     public function mount($buildingDocumentation = null)
     {
+
         $this->provinces = get_provinces();
 
-        if (! empty($buildingDocumentation)) {
+        if (!empty($buildingDocumentation)) {
             $this->buildingDocumentation = $buildingDocumentation;
 
             $this->assignBuildingDocumentationData();
@@ -96,8 +98,8 @@ class BuildingDocumentationLivewire extends Component
 
             $this->neighbourArrayIncrement();
             $this->buildingStoreyDetailArrayIncrement();
-
         }
+
     }
 
     private function assignBuildingDocumentationData()
@@ -177,7 +179,7 @@ class BuildingDocumentationLivewire extends Component
 
     protected function secondStepValidations(): array
     {
-        return ! empty($this->buildingDocumentation)
+        return !empty($this->buildingDocumentation)
             ? array_merge($this->secondStepValidations, [
                 'form.neighbours.*.neighbour_name' => ['required', 'string'],
                 'form.neighbours.*.direction' => ['required'],
@@ -206,13 +208,15 @@ class BuildingDocumentationLivewire extends Component
         'requiredDocument.revenue' => ['required'],
         'requiredDocument.building_map' => ['required'],
         'requiredDocument.land_map' => ['required'],
-        'requiredDocument.all_round_house_pic' => ['required'],
+        'requiredDocument.all_round_house_pic' => ['nullable'],
+        'requiredDocument.files' => ['required', 'array'],
+        'requiredDocument.files.*' => ['mimes:png,jpg,jpeg,pdf'],
         'requiredDocument.photo' => ['required'],
     ];
 
     protected function thirdStepValidations(): array
     {
-        return ! empty($this->buildingDocumentation)
+        return !empty($this->buildingDocumentation)
             ? [
                 'requiredDocument.citizenship' => ['nullable'],
                 'requiredDocument.landowner_proved' => ['nullable'],
@@ -220,14 +224,18 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.building_map' => ['nullable'],
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
+                'requiredDocument.files' => ['nullable', 'array'],
+                'requiredDocument.files.*' => ['mimes:png,jpg,jpeg,pdf'],
                 'requiredDocument.photo' => ['nullable'],
             ] : [
                 'requiredDocument.citizenship' => ['required'],
                 'requiredDocument.landowner_proved' => ['required'],
                 'requiredDocument.revenue' => ['required'],
                 'requiredDocument.building_map' => ['required'],
-                'requiredDocument.land_map' => ['required'],
-                'requiredDocument.all_round_house_pic' => ['required'],
+                'requiredDocument.land_map' => ['nullable'],
+                'requiredDocument.all_round_house_pic' => ['nullable'],
+                'requiredDocument.files' => ['required', 'array'],
+                'requiredDocument.files.*' => ['mimes:png,jpg,jpeg,pdf'],
                 'requiredDocument.photo' => ['required'],
             ];
     }
@@ -261,9 +269,10 @@ class BuildingDocumentationLivewire extends Component
 
     public function submitForm()
     {
+
         $this->validate();
 
-        if (! empty($this->buildingDocumentation)) {
+        if (!empty($this->buildingDocumentation)) {
             DB::transaction(function () {
                 $this->buildingDocumentation->update($this->form);
                 $this->saveBuildingDocumentData($this->buildingDocumentation);
@@ -275,6 +284,7 @@ class BuildingDocumentationLivewire extends Component
 
             return redirect(route('emap.admin.buildingDocumentation.index'));
         }
+
 
         $buildingDocumentation = DB::transaction(function () {
             $buildingDocumentation = BuildingDocumentation::create($this->form + [
@@ -291,6 +301,7 @@ class BuildingDocumentationLivewire extends Component
         ]);
         $this->reset('form');
 
+        dd($buildingDocumentation->requiredDocument->files);
         return redirect()->route('buildingDocumentation.printApplication', $buildingDocumentation->id);
     }
 
@@ -304,9 +315,17 @@ class BuildingDocumentationLivewire extends Component
             $buildingStoreyDetails = new BuildingStoreyDetail($buildingStoreyDetail);
             $buildingDocumentation->buildingStoreyDetails()->save($buildingStoreyDetails);
         }
-
-        $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
-
+        DB::transaction(function () use ($buildingDocumentation) {
+            $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
+            foreach ($this->form['requiredDocument.files'] ?? [] as $file) {
+                $buildingDocumentation->requiredDocument()->files()->create([
+                    'file_name' => $file['file_name'],
+                    'file' => $file['file']->store('buildingDocument/allRoundPic', 'public'),
+                    'size' => $file->getSize(),
+                    'extension' => $file['file']->getClientOriginalExtension(),
+                ]);
+            }
+        });
         foreach ($this->form['files'] ?? [] as $file) {
             $buildingDocumentation->files()->create([
                 'file_name' => $file['file_name'],
@@ -314,7 +333,6 @@ class BuildingDocumentationLivewire extends Component
                 'file' => $file['file']->store('file/', 'public'),
             ]);
         }
-
     }
 
     public function neighbourArrayIncrement(): void
@@ -329,7 +347,7 @@ class BuildingDocumentationLivewire extends Component
 
     public function neighbourArrayDecrement($index): void
     {
-        if (! empty($this->form['neighbours'][$index]['id'])) {
+        if (!empty($this->form['neighbours'][$index]['id'])) {
             Neighbour::find($this->form['neighbours'][$index]['id'])->delete();
         }
         unset($this->form['neighbours'][$index]);
@@ -338,7 +356,7 @@ class BuildingDocumentationLivewire extends Component
 
     public function buildingStoreyDetailArrayDecrement($index): void
     {
-        if (! empty($this->form['buildingStoreyDetails'][$index]['id'])) {
+        if (!empty($this->form['buildingStoreyDetails'][$index]['id'])) {
             BuildingStoreyDetail::find($this->form['buildingStoreyDetails'][$index]['id'])->delete();
         }
         unset($this->form['buildingStoreyDetails'][$index]);
@@ -352,7 +370,7 @@ class BuildingDocumentationLivewire extends Component
 
     public function fileArrayDecrement($index): void
     {
-        if (! empty($this->form['files'][$index]['id'])) {
+        if (!empty($this->form['files'][$index]['id'])) {
             Neighbour::find($this->form['files'][$index]['id'])->delete();
         }
         unset($this->form['files'][$index]);
@@ -361,13 +379,13 @@ class BuildingDocumentationLivewire extends Component
 
     public function render(): Factory|View|Application
     {
-        if (! empty($this->form['province_id'])) {
+        if (!empty($this->form['province_id'])) {
             $this->districts = get_districts($this->form['province_id']);
         }
-        if (! empty($this->form['district_id'])) {
+        if (!empty($this->form['district_id'])) {
             $this->localBodies = get_local_bodies($this->form['district_id']);
         }
-        if (! empty($this->form['local_body_id'])) {
+        if (!empty($this->form['local_body_id'])) {
             $this->wards = get_local_bodies(localBodyId: $this->form['local_body_id'])->ward_no;
         }
 
