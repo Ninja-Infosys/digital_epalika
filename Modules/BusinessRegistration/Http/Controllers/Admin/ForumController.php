@@ -87,7 +87,7 @@ class ForumController extends Controller
     {
         $forum->load('partners', 'files');
 
-        return view('businessregistration::admin.Forum.edit', compact('forum'));
+        return view('businessregistration::admin.forum.edit', compact('forum'));
     }
 
     public function storeData(StorePrintedDataRequest $request, Forum $forum, $type): RedirectResponse
