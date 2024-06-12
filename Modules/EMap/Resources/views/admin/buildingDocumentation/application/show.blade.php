@@ -203,24 +203,25 @@
                                                 <th scope="col">दस्तखत</th>
                                             </tr>
                                         </thead>
-                                        {{-- <tbody>
-                                        @if (empty($buildingDocumentation?->neighbours))
-                                        @forelse($buildingDocumentation?->neighbours as $neighbour)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $neighbour?->direction?->label() ?? '' }}</td>
-                                            <td>{{ $neighbour->neighbour_name ?? '' }}</td>
-                                            <td>{{ $neighbour->ward_no ?? '' }}</td>
-                                            <td></td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन !!!
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                        @endif
-                                    </tbody> --}}
+                                        <tbody>
+                                            @if (!empty($buildingDocumentation?->neighbours))
+                                                @forelse($buildingDocumentation?->neighbours as $neighbour)
+                                                    <tr>
+                                                        <th scope="row">{{ $loop->iteration }}</th>
+                                                        <td>{{ $neighbour?->direction?->label() ?? '' }}</td>
+                                                        <td>{{ $neighbour->neighbour_name ?? '' }}</td>
+                                                        <td>{{ $neighbour->ward_no ?? '' }}</td>
+                                                        <td></td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन
+                                                            !!!
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            @endif
+                                        </tbody>
 
                                     </table>
                                     <div class="row">
@@ -245,26 +246,27 @@
                                                 <th scope="col">कैफियत</th>
                                             </tr>
                                         </thead>
-                                        {{-- <tbody>
-                                        @if (empty($buildingDocumentation?->buildingStoreyDetails))
-                                        @forelse($buildingDocumentation?->buildingStoreyDetails as $buildingStoreyDetail)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $buildingStoreyDetail?->storey?->label() ?? '' }}</td>
-                                            <td>{{ $buildingStoreyDetail->area_of_former_construction ?? '' }}
-                                            </td>
-                                            <td>{{ $buildingStoreyDetail->land_area ?? '' }}
-                                            </td>
-                                            <td>{{ $buildingStoreyDetail->remarks ?? '' }}</td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन !!!
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                        @endif
-                                    </tbody> --}}
+                                        <tbody>
+                                            @if (!empty($buildingDocumentation?->buildingStoreyDetails))
+                                                @forelse($buildingDocumentation?->buildingStoreyDetails as $buildingStoreyDetail)
+                                                    <tr>
+                                                        <th scope="row">{{ $loop->iteration }}</th>
+                                                        <td>{{ $buildingStoreyDetail?->storey?->label() ?? '' }}</td>
+                                                        <td>{{ $buildingStoreyDetail->area_of_former_construction ?? '' }}
+                                                        </td>
+                                                        <td>{{ $buildingStoreyDetail->land_area ?? '' }}
+                                                        </td>
+                                                        <td>{{ $buildingStoreyDetail->remarks ?? '' }}</td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन
+                                                            !!!
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            @endif
+                                        </tbody>
 
                                     </table>
                                     <div class="row">
@@ -527,108 +529,114 @@
                             @endforeach
                             {{-- notice --}}
                             <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
-                            <div id="printData">
+                            @if ($buildingDocumentation->registration_no != null)
+                                <div id="printData">
 
-                                <table cellspacing="0" style="border-collapse:collapse; border:none; width:100%">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:25%"><img alt="Office Logo"
-                                                    src="http://127.0.0.1:8000/assets/backend/images/np.png"
-                                                    style="height:100px; width:130px" /></td>
-                                            <td style="text-align:center; vertical-align:middle; width:50%">
-                                                <div><span style="font-size:14px"><strong>अनुसूची-३</strong></span><br />
-                                                    <span style="font-size:14px"><strong>निर्देशिकाको दफा ५ (घ) संग
-                                                            सम्वन्धित</strong></span>
-                                                </div>
+                                    <table cellspacing="0" style="border-collapse:collapse; border:none; width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:25%"><img alt="Office Logo"
+                                                        src="http://127.0.0.1:8000/assets/backend/images/np.png"
+                                                        style="height:100px; width:130px" /></td>
+                                                <td style="text-align:center; vertical-align:middle; width:50%">
+                                                    <div><span
+                                                            style="font-size:14px"><strong>अनुसूची-३</strong></span><br />
+                                                        <span style="font-size:14px"><strong>निर्देशिकाको दफा ५ (घ) संग
+                                                                सम्वन्धित</strong></span>
+                                                    </div>
 
-                                                <div style="font-size:19px; line-height:1.2">
-                                                    {{ $officeSetting->localBody->local_body ?? '' }} </div>
+                                                    <div style="font-size:19px; line-height:1.2">
+                                                        {{ $officeSetting->localBody->local_body ?? '' }} </div>
 
-                                                <div style=" font-size:19px; line-height:1.2">
-                                                    {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }} नं
-                                                    वडा
-                                                    कार्यालय
-                                                </div>
-                                                <div style="font-size:19px; line-height:1.2">.............................
-                                                </div>
+                                                    <div style=" font-size:19px; line-height:1.2">
+                                                        {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }}
+                                                        नं
+                                                        वडा
+                                                        कार्यालय
+                                                    </div>
+                                                    <div style="font-size:19px; line-height:1.2">
+                                                        .............................
+                                                    </div>
 
 
-                                            </td>
+                                                </td>
 
 
-                                            <td style="width:25%">&nbsp;</td>
-                                            <td style="width:25%">&nbsp;</td>
-                                        </tr>
+                                                <td style="width:25%">&nbsp;</td>
+                                                <td style="width:25%">&nbsp;</td>
+                                            </tr>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
 
-                                <div class="row sub-title mt-3">
-                                    <div class="col-sm sub-title1">
-                                        <p class=" fw-bold lh-1">पत्र संख्या : ................</p>
-                                        <p class="mt-1  fw-bold lh-1">चलानी नम्बर : ...............</p>
+                                    <div class="row sub-title mt-3">
+                                        <div class="col-sm sub-title1">
+                                            <p class=" fw-bold lh-1">पत्र संख्या : ................</p>
+                                            <p class="mt-1  fw-bold lh-1">चलानी नम्बर : ...............</p>
+                                        </div>
+                                        <div class="col-sm sub-title2 text-end ml-auto">
+                                            <p class=" fw-bold lh-1" style="text-align: end;">मिती :
+                                                {{ get_nepali_number($buildingDocumentation->get_today_nepali_date()) }}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="col-sm sub-title2 text-end ml-auto">
-                                        <p class=" fw-bold lh-1" style="text-align: end;">मिती :
-                                            {{ get_nepali_number($buildingDocumentation->get_today_nepali_date()) }}</p>
+                                    <p class="fw-bold fs-5 text-center my-3">
+                                        ७ दिने सूचना ।
+                                    </p>
+                                    <p style="font-size:18px; text-align: justify">
+                                        <span class="dashed-bottom">
+                                            {{ $buildingDocumentation?->province?->province ?? '' }},{{ $buildingDocumentation?->district?->district ?? '' }},{{ $buildingDocumentation?->localBody?->local_body ?? '' }}-{{ get_nepali_number($buildingDocumentation->ward_no ?? '') }}
+                                        </span> वस्ने श्री <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->applicant_name }}
+                                        </span>ले बागचौर नगरपालिका वडा नं
+                                        <span
+                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->ward_no ?? '') }}
+                                        </span>को साबिक <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->former_local_body ?? '' }}
+                                        </span>गाविस वडा नं <span
+                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->former_ward_no) }}</span>
+                                        कित्ता नं <span
+                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->plot_no ?? '') }}</span>
+                                        क्षेत्रफल <span
+                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->area ?? '') }}
+                                        </span>
+                                        को<br>
+
+                                        @foreach ($buildingDocumentation->neighbours as $neighbour)
+                                            {{ $neighbour->direction->label() }} <span
+                                                class="dashed-bottom">{{ $neighbour->neighbour_name }}</span><br>
+                                        @endforeach
+
+                                        यति चार किल्ला भित्रको जग्गामा तपशिलं बमोजिमको निर्माण भए अनुसारको घर अभिलेखिकरण गरी
+                                        पाउँ भनि
+                                        मिति <span
+                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->application_date ?? '') }}</span>
+                                        मा निवेदन दिनु भएकोले सो घरको साध संधियार कोहि कसैलाइ पिरमर्मा परेको भए
+                                        आफुलाइ परेको सबै विवरण यो सूचना प्रकाशित भएको मितिले ७ दिन भित्र वडा कार्यालयमा उजुर
+                                        बाजुर
+                                        गर्नुहुन यो सुचना प्रकाशित गरिएको छ । म्यादभित्र पर्न नआएका उजुर प्रति कुनै कारबाही
+                                        गरिने छैन
+                                        ।<br>
+                                    </p>
+                                    <p class="text-decoration-underline fw-bold fs-5">तपशिल</p>
+                                    <p>१. घरको किसिम : <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->building_category ?? '' }}</span><br>
+                                        २. लम्बाई : <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->length ?? '' }}</span> <br>
+                                        ३. चौडाई : <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->breadth ?? '' }}</span><br>
+                                        ४. उचाई : <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->height ?? '' }}</span>
+                                        <br>
+                                        ५. अन्य : <span
+                                            class="dashed-bottom">{{ $buildingDocumentation->other ?? '' }}</span><br>
+                                    </p>
+                                    <div class="col-sm text-end font-weight-bold">
+                                        <p class="ml-4">....................<br>वडा अध्यक्ष</p>
                                     </div>
+
                                 </div>
-                                <p class="fw-bold fs-5 text-center my-3">
-                                    ७ दिने सूचना ।
-                                </p>
-                                <p style="font-size:18px; text-align: justify">
-                                    <span class="dashed-bottom">
-                                        {{ $buildingDocumentation?->province?->province ?? '' }},{{ $buildingDocumentation?->district?->district ?? '' }},{{ $buildingDocumentation?->localBody?->local_body ?? '' }}-{{ get_nepali_number($buildingDocumentation->ward_no ?? '') }}
-                                    </span> वस्ने श्री <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->applicant_name }}
-                                    </span>ले बागचौर नगरपालिका वडा नं
-                                    <span
-                                        class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->ward_no ?? '') }}
-                                    </span>को साबिक <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->former_local_body ?? '' }}
-                                    </span>गाविस वडा नं <span
-                                        class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->former_ward_no) }}</span>
-                                    कित्ता नं <span
-                                        class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->plot_no ?? '') }}</span>
-                                    क्षेत्रफल <span
-                                        class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->area ?? '') }}
-                                    </span>
-                                    को<br>
-
-                                    @foreach ($buildingDocumentation->neighbours as $neighbour)
-                                        {{ $neighbour->direction->label() }} <span
-                                            class="dashed-bottom">{{ $neighbour->neighbour_name }}</span><br>
-                                    @endforeach
-
-                                    यति चार किल्ला भित्रको जग्गामा तपशिलं बमोजिमको निर्माण भए अनुसारको घर अभिलेखिकरण गरी
-                                    पाउँ भनि
-                                    मिति <span
-                                        class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->application_date ?? '') }}</span>
-                                    मा निवेदन दिनु भएकोले सो घरको साध संधियार कोहि कसैलाइ पिरमर्मा परेको भए
-                                    आफुलाइ परेको सबै विवरण यो सूचना प्रकाशित भएको मितिले ७ दिन भित्र वडा कार्यालयमा उजुर
-                                    बाजुर
-                                    गर्नुहुन यो सुचना प्रकाशित गरिएको छ । म्यादभित्र पर्न नआएका उजुर प्रति कुनै कारबाही
-                                    गरिने छैन
-                                    ।<br>
-                                </p>
-                                <p class="text-decoration-underline fw-bold fs-5">तपशिल</p>
-                                <p>१. घरको किसिम : <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->building_category ?? '' }}</span><br>
-                                    २. लम्बाई : <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->length ?? '' }}</span> <br>
-                                    ३. चौडाई : <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->breadth ?? '' }}</span><br>
-                                    ४. उचाई : <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->height ?? '' }}</span>
-                                    <br>
-                                    ५. अन्य : <span
-                                        class="dashed-bottom">{{ $buildingDocumentation->other ?? '' }}</span><br>
-                                </p>
-                                <div class="col-sm text-end font-weight-bold">
-                                    <p class="ml-4">....................<br>वडा अध्यक्ष</p>
-                                </div>
-
-                            </div>
+                            @endif
 
                             {{-- sarjamin muchulka --}}
                             <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
@@ -702,7 +710,7 @@
 
                                 </div>
                             @endif
-{{-- sifarish --}}
+                            {{-- sifarish --}}
                             <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
 
                             @if ($buildingDocumentation->sent_admin == 'recommendation_sent' || !is_null(auth()->user()->ward_no))
@@ -789,17 +797,16 @@
                                     </div>
                                 </div>
                             @endif
-{{-- report --}}
+                            {{-- report --}}
                             <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
 
                             <div id="print-content">
                                 {!! $buildingDocumentation?->landReport?->description ?? '' !!}
                             </div>
-{{-- certificate --}}
+                            {{-- certificate --}}
                             <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
 
-                            @if (
-                                $buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE )
+                            @if ($buildingDocumentation->status == Modules\EMap\Enums\BuildingDocumentationStatusEnum::CERTIFICATE)
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card p-0">
@@ -809,41 +816,58 @@
                                                     <div class="text-center font-weight-bold fs-4">
                                                         <h4><strong>अनुसूची ५</strong></h4>
                                                         <h4><strong>घर अभिलेखिकरण प्रमाण पत्र</strong></h4>
-                                                        <h4><strong>{{ $officeSetting?->localBody?->local_body ?? ''}}</strong></h4>
+                                                        <h4><strong>{{ $officeSetting?->localBody?->local_body ?? '' }}</strong>
+                                                        </h4>
                                                         <h4><strong> नगर कार्यपाालिकाको कार्यालय</strong></h4>
-                                                        <h4><strong>{{ $officeSetting?->site_address ?? '' }}</strong></h4>
-                                                        <h4><strong>{{ $officeSetting?->province?->province ?? ''}} नेपाल</strong></h4>
+                                                        <h4><strong>{{ $officeSetting?->site_address ?? '' }}</strong>
+                                                        </h4>
+                                                        <h4><strong>{{ $officeSetting?->province?->province ?? '' }}
+                                                                नेपाल</strong></h4>
                                                         <h3><strong>अभिलेखिकरण प्रमाण पत्र</strong></h3>
 
                                                     </div>
                                                     <div class="text-end lh-lg px-5">
-                                                        <p>आ.व: {{ get_nepali_number($officeSetting->fiscalYear?->title ?? '' )}}</p>
-                                                        <p>मिति: {{get_nepali_number($buildingDocumentation->get_today_nepali_date())}}</p>
+                                                        <p>आ.व:
+                                                            {{ get_nepali_number($officeSetting->fiscalYear?->title ?? '') }}
+                                                        </p>
+                                                        <p>मिति:
+                                                            {{ get_nepali_number($buildingDocumentation->get_today_nepali_date()) }}
+                                                        </p>
 
                                                     </div>
                                                     <p class="text-justify-center lh-lg "> अभीलेख नं. :</p>
 
                                                     <p class="text-justify-center  lh-lg "> <span
-                                                            class="dashed-bottom">{{ $buildingDocumentation->applicant_former_district }} </span>
+                                                            class="dashed-bottom">{{ $buildingDocumentation->applicant_former_district }}
+                                                        </span>
                                                         जिल्ला
-                                                        <span class="dashed-bottom">{{ $buildingDocumentation->applicant_former_local_body }}
+                                                        <span
+                                                            class="dashed-bottom">{{ $buildingDocumentation->applicant_former_local_body }}
                                                         </span>
                                                         गा.पा./न.पा <span
                                                             class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->applicant_former_ward_no) }}
                                                         </span> नं. वडा स्थायी ठेगाना भइ हाल
                                                         वागचौर नगरपालिका <span
-                                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->ward_no) }} </span>
+                                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->ward_no) }}
+                                                        </span>
                                                         नं.
                                                         वडा
-                                                        <span class="dashed-bottom">{{ $buildingDocumentation->tole }} </span> टोल बस्ने
+                                                        <span class="dashed-bottom">{{ $buildingDocumentation->tole }}
+                                                        </span> टोल बस्ने
                                                         श्री{{ $buildingDocumentation->applicant_name }} ले सविक <span
-                                                            class="dashed-bottom">{{ $buildingDocumentation->former_district }} </span> गा.वि.स. वडा
+                                                            class="dashed-bottom">{{ $buildingDocumentation->former_district }}
+                                                        </span> गा.वि.स. वडा
                                                         नं.
-                                                        <span class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->former_ward_no) }}
+                                                        <span
+                                                            class="dashed-bottom">{{ get_nepali_number($buildingDocumentation->former_ward_no) }}
                                                         </span> कित्ता
-                                                        नं <span class="dashed-bottom">{{ $buildingDocumentation->plot_no }} </span> मा <span
-                                                            class="dashed-bottom">{{ $buildingDocumentation->area }} </span> क्षेत्रफलमा <span
-                                                            class="dashed-bottom">{{ $buildingDocumentation->buildingCategory }} </span> भवन
+                                                        नं <span
+                                                            class="dashed-bottom">{{ $buildingDocumentation->plot_no }}
+                                                        </span> मा <span
+                                                            class="dashed-bottom">{{ $buildingDocumentation->area }}
+                                                        </span> क्षेत्रफलमा <span
+                                                            class="dashed-bottom">{{ $buildingDocumentation->buildingCategory }}
+                                                        </span> भवन
                                                         अभिलेखिकरण
                                                         निर्देशिका लागु हुनु
                                                         भन्दा अगाडी घर,टहरा निर्माण सम्पन्ना भइ सकेको भनि
@@ -851,8 +875,10 @@
                                                             class="dashed-bottom">................. </span> मा
                                                         नगरपालिकाको स्थलगत निरिक्षण
                                                         प्रतिवेदन र यस
-                                                        नगरपालिका {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }} नं. वडाको मिति
-                                                     {{  get_nepali_number($buildingDocumentation->bill_date_bs ??'')}}
+                                                        नगरपालिका
+                                                        {{ get_nepali_number($buildingDocumentation->land_ward_no ?? '') }}
+                                                        नं. वडाको मिति
+                                                        {{ get_nepali_number($buildingDocumentation->bill_date_bs ?? '') }}
                                                         गतेको सिफारिस पत्रका आधारमा निजलाई घर
                                                         अभिलेखिकरणको प्रमाण पत्र
                                                         प्रदान गरिएको छ ।
@@ -870,11 +896,14 @@
                                                         <tbody>
                                                             @foreach ($buildingDocumentation?->buildingStoreyDetails as $buildingStoreyDetail)
                                                                 <tr>
-                                                                    <th scope="row">{{ $buildingStoreyDetail?->storey->label() }}</th>
+                                                                    <th scope="row">
+                                                                        {{ $buildingStoreyDetail?->storey->label() }}</th>
                                                                     <td>{{ get_nepali_number($buildingStoreyDetail->area_of_former_construction) }}
                                                                     </td>
-                                                                    <td>{{ get_nepali_number($buildingStoreyDetail->land_area) }}</td>
-                                                                    <td>{{ get_nepali_number($buildingStoreyDetail->remarks) }}</td>
+                                                                    <td>{{ get_nepali_number($buildingStoreyDetail->land_area) }}
+                                                                    </td>
+                                                                    <td>{{ get_nepali_number($buildingStoreyDetail->remarks) }}
+                                                                    </td>
 
                                                                 </tr>
                                                             @endforeach
