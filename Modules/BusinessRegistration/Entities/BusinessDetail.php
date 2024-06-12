@@ -277,6 +277,6 @@ class BusinessDetail extends Model
     }
     public function partners(): MorphMany
     {
-        return $this->morphMany(Partner::class, 'businessable');
+        return $this->morphMany(Partner::class, 'businessAble');
     }
 }
