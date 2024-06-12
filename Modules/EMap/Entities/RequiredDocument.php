@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\File;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -64,18 +65,18 @@ class RequiredDocument extends Model
             set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
         );
     }
-    protected function allRoundHousePic(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
-            set: static function ($value) {
-                if (!empty($value) && is_object($value)) { // Check if $value is an object
-                    return $value->store('buildingDocument', 'public');
-                }
-                return null;
-            }
-        );
-    }
+    // protected function allRoundHousePic(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+    //         set: static function ($value) {
+    //             if (!empty($value) && is_object($value)) { // Check if $value is an object
+    //                 return $value->store('buildingDocument', 'public');
+    //             }
+    //             return null;
+    //         }
+    //     );
+    // }
 
     protected function photo(): Attribute
     {
@@ -83,5 +84,16 @@ class RequiredDocument extends Model
             get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
             set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
         );
+    }
+    protected function revenue(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument', 'public') : null,
+        );
+    }
+    public function files()
+    {
+        return $this->morphMany(File::class, 'model');
     }
 }
