@@ -890,5 +890,5 @@
         margin-bottom: 3px !important;
         font-size: 15px;
         color: #333;
-    }
+}
 </style>
