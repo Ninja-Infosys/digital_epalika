@@ -81,7 +81,8 @@ class BuildingDocumentationLivewire extends Component
         'building_map' => null,
         'land_map' => null,
         'all_round_house_pic' => null,
-        'files' => [],
+        'other_document' => [],
+
         'photo' => null,
     ];
 
@@ -209,8 +210,7 @@ class BuildingDocumentationLivewire extends Component
         'requiredDocument.building_map' => ['required'],
         'requiredDocument.land_map' => ['required'],
         'requiredDocument.all_round_house_pic' => ['nullable'],
-        'requiredDocument.files' => ['required', 'array'],
-        'requiredDocument.files.*' => ['mimes:png,jpg,jpeg,pdf'],
+        'requiredDocument.other_document' => ['nullable', 'array'],
         'requiredDocument.photo' => ['required'],
     ];
 
@@ -224,8 +224,7 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.building_map' => ['nullable'],
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
-                'requiredDocument.files' => ['nullable', 'array'],
-                'requiredDocument.files.*' => ['mimes:png,jpg,jpeg,pdf'],
+                'requiredDocument.other_document' => ['nullable', 'array'],
                 'requiredDocument.photo' => ['nullable'],
             ] : [
                 'requiredDocument.citizenship' => ['required'],
@@ -234,8 +233,7 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.building_map' => ['required'],
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
-                'requiredDocument.files' => ['required', 'array'],
-                'requiredDocument.files.*' => ['mimes:png,jpg,jpeg,pdf'],
+                'requiredDocument.other_document' => ['nullable', 'array'],
                 'requiredDocument.photo' => ['required'],
             ];
     }
@@ -301,7 +299,7 @@ class BuildingDocumentationLivewire extends Component
         ]);
         $this->reset('form');
 
-        dd($buildingDocumentation->requiredDocument->files);
+        // dd($buildingDocumentation->requiredDocument->files);
         return redirect()->route('buildingDocumentation.printApplication', $buildingDocumentation->id);
     }
 
@@ -317,12 +315,19 @@ class BuildingDocumentationLivewire extends Component
         }
         DB::transaction(function () use ($buildingDocumentation) {
             $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
-            foreach ($this->form['requiredDocument.files'] ?? [] as $file) {
+            // foreach ($this->form['requiredDocument.files'] ?? [] as $file) {
+            //     $buildingDocumentation->requiredDocument()->files()->create([
+            //         'file_name' => $file['file_name'],
+            //         'file' => $file['file']->store('buildingDocument/allRoundPic', 'public'),
+            //         'size' => $file->getSize(),
+            //         'extension' => $file['file']->getClientOriginalExtension(),
+            //     ]);
+            // }
+            foreach ($this->form['requiredDocument.other_document'] ?? [] as $document) {
                 $buildingDocumentation->requiredDocument()->files()->create([
-                    'file_name' => $file['file_name'],
-                    'file' => $file['file']->store('buildingDocument/allRoundPic', 'public'),
-                    'size' => $file->getSize(),
-                    'extension' => $file['file']->getClientOriginalExtension(),
+                    'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $document->getClientOriginalExtension(),
+                    'file' => $document->store('buildingDocument/allRoundPic/', 'public')
                 ]);
             }
         });
@@ -447,7 +452,8 @@ class BuildingDocumentationLivewire extends Component
             'requiredDocument.land_map' => ['जग्गाको नक्सा'],
             'requiredDocument.all_round_house_pic' => ['चारैतिरको फोटो'],
             'requiredDocument.photo' => ['घरधनिको फोटो'],
-            'form.other_document' => ['अन्य कागजात आबश्यक छ'],
+            'requiredDocument.other_document' => ['अन्य कागजात आबश्यक छ'],
+
 
         ];
     }

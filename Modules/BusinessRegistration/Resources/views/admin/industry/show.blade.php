@@ -186,7 +186,7 @@
                                                 <td>{{ $committeeName->designation ?? '' }}</td>
                                                 <td>
                                         <span>
-                                            {{ $committeeName->localBody->local_body ?? '' }}
+                                            {{ $committeeName?->localBody->local_body ?? '' }}
                                             - {{ $committeeName->ward_no ?? '' }}
                                         </span>
                                                 </td>
