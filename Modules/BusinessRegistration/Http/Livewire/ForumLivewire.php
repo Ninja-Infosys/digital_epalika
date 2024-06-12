@@ -244,7 +244,7 @@ class ForumLivewire extends Component
             $forum = Forum::create($this->form + [
                 'submission_no' => time(),
             ]);
-            $this->saveBuildingDocumentData($forum);
+            $this->saveForumData($forum);
 
             return $forum;
         });
