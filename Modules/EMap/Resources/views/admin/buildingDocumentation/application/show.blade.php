@@ -63,6 +63,7 @@
                                                                     <th>घरधनिको नाम</th>
                                                                     <td>{{ $buildingDocumentation->house_owner_name ?? '' }}
                                                                     </td>
+
                                                                 </tr>
                                                                 <tr>
                                                                     <th>ठेगाना</th>
@@ -87,6 +88,7 @@
                                                                     <th>घर बनेको बर्ष</th>
                                                                     <td>{{ get_nepali_number($buildingDocumentation->house_built_year ?? '') }}
                                                                     </td>
+
                                                                 </tr>
 
                                                                 <tr>
@@ -333,7 +335,7 @@
                                                         onclick="openFileModal('जग्गाधनि प्रमाणपत्रको प्रतिलिपी ', '{{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->landowner_proved }}')"
                                                         class="text-muted fw-medium" type="button">जग्गाधनि प्रमाणपत्रको
                                                         प्रतिलिपी
-                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        {{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
@@ -1004,5 +1006,6 @@
                 </div>
             </div>
         </div>
+        @include('admin.inc.file-view');
     </div>
 @endsection

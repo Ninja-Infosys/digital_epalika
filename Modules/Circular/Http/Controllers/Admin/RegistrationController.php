@@ -69,9 +69,9 @@ class RegistrationController extends Controller
                     Notification::send($userData, $notification);
                 }
             }
-            if (!empty($request->input('email'))) {
-                Mail::to($request->input('email'))->send(new RegistrationMail($registration));
-            }
+            // if (!empty($request->input('email'))) {
+            //     Mail::to($request->input('email'))->send(new RegistrationMail($registration));
+            // }
             $this->uploadDocuments($request, $registration);
         });
 
