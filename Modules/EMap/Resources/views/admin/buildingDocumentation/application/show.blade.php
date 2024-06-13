@@ -58,7 +58,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>घरधनिको नाम</th>
-                                                                    <td>{{ $buildingDocumentation->house_owner_name ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->house_owner_name ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>ठेगाना</th>
@@ -80,7 +81,8 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th>घर बनेको बर्ष</th>
-                                                                    <td>{{ $buildingDocumentation->house_built_year ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->house_built_year ?? '' }}
+                                                                    </td>
                                                                 </tr>
 
                                                                 <tr>
@@ -89,7 +91,8 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th>घरको किसिम</th>
-                                                                    <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->building_category?->label() ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>घरको लम्बाई</th>
@@ -126,27 +129,33 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th>सडक अधिकार क्षेत्र</th>
-                                                                    <td>{{ $buildingDocumentation->road_jurisdiction ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->road_jurisdiction ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>जग्गा विवरण</th>
-                                                                    <td>{{ $buildingDocumentation->land_detail ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->land_detail ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>हाल वार्ड नं.</th>
-                                                                    <td>{{ $buildingDocumentation->land_ward_no ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->land_ward_no ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>साविक जिल्ला</th>
-                                                                    <td>{{ $buildingDocumentation->former_district ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->former_district ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>साविक पालिका</th>
-                                                                    <td>{{ $buildingDocumentation->former_local_body ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->former_local_body ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>साविक वार्ड नं.</th>
-                                                                    <td>{{ $buildingDocumentation->former_ward_no ?? '' }}</td>
+                                                                    <td>{{ $buildingDocumentation->former_ward_no ?? '' }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>अन्य</th>
@@ -305,7 +314,7 @@
                                                         onclick="openFileModal('जग्गाधनि प्रमाणपत्रको प्रतिलिपी ', '{{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}', '{{ $buildingDocumentation?->requiredDocument?->landowner_proved }}')"
                                                         class="text-muted fw-medium" type="button">जग्गाधनि प्रमाणपत्रको
                                                         प्रतिलिपी
-                                                        .{{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
+                                                        {{ pathinfo($buildingDocumentation?->requiredDocument?->landowner_proved ?? '', PATHINFO_EXTENSION) }}</a>
 
                                                 </div>
                                                 <div class="col-2">
@@ -572,6 +581,7 @@
                 </div>
             </div>
         </div>
+        @include('admin.inc.file-view');
     </div>
 
 

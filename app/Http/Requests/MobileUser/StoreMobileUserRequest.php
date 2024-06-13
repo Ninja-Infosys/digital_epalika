@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class StoreMobileUserRequest extends FormRequest
+e class StoreMobileUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
