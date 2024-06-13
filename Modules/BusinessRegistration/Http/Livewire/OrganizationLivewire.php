@@ -226,7 +226,7 @@ class OrganizationLivewire extends Component
                 'type' => 'success',
                 'title' => 'तपाइको संस्था सफलता पुर्बक अध्याबधिक भयो'
             ]);
-            return redirect(route('admin.businessRegistration.organizationRegistration.index'));
+            return redirect(route('admin.businessRegistration.registration.organizationRegistration.index'));
         }
 
         $organizationRegistration = DB::transaction(function () {

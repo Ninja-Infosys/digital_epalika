@@ -19,22 +19,21 @@ class BuildingDocumentationController extends Controller
     {
 
         $buildingDocumentations = BuildingDocumentation::with('requiredDocument', 'neighbours', 'localBody')->where(function (Builder $q) {
-            if (! is_null(request('search'))) {
+            if (!is_null(request('search'))) {
                 $q->whereLike(['house_owner_name', 'submission_no', 'registration_no'], request('search'));
             }
-            if (! empty(request('to_date'))) {
+            if (!empty(request('to_date'))) {
                 $q->whereDate('registration_date_ne', '>=', request('to_date'));
             }
-            if (! empty(request('from_date'))) {
+            if (!empty(request('from_date'))) {
                 $q->whereDate('registration_date_ne', '<=', request('from_date'));
             }
-            if (! empty(request('registration_no'))) {
+            if (!empty(request('registration_no'))) {
                 $q->where('registration_no', request('registration_no'));
             }
             if (auth()->user()->role->type != 'Super') {
                 $q->where('land_ward_no', auth()->user()->ward_no);
             }
-
         })->latest()
             ->paginate(15);
 
@@ -80,7 +79,7 @@ class BuildingDocumentationController extends Controller
                 $data = array_merge($data, [
                     'reg_no' => $reg_no,
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'registration_no' => 'FR-'.officeSetting()->fiscalYear?->title.'-'.Str::padLeft($reg_no, 4, 0),
+                    'registration_no' => 'FR-' . officeSetting()->fiscalYear?->title . '-' . Str::padLeft($reg_no, 4, 0),
                     'registration_date_en' => today()->toDateString(),
                     'registration_date_ne' => $this->get_today_nepali_date(),
                     'status' => BuildingDocumentationStatusEnum::NOTICE->value,
@@ -92,7 +91,6 @@ class BuildingDocumentationController extends Controller
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
 
         return redirect()->route('emap.admin.buildingDocumentation.printNotice', $buildingDocumentation->id);
-
     }
 
     public function printNotice(BuildingDocumentation $buildingDocumentation)
@@ -107,7 +105,7 @@ class BuildingDocumentationController extends Controller
     public function printLandConfirmation(BuildingDocumentation $buildingDocumentation)
     {
 
-        if (! is_null(auth()->user()->ward_no)) {
+        if (!is_null(auth()->user()->ward_no)) {
             $buildingDocumentation->update([
                 'status' => BuildingDocumentationStatusEnum::LAND_CONFIRMATION->value,
             ]);
@@ -121,7 +119,7 @@ class BuildingDocumentationController extends Controller
 
     public function printRecommendation(BuildingDocumentation $buildingDocumentation)
     {
-              if (! is_null(auth()->user()->ward_no)) {
+        if (!is_null(auth()->user()->ward_no)) {
             $buildingDocumentation->update([
                 'status' => BuildingDocumentationStatusEnum::RECOMMENDATION->value,
             ]);
@@ -135,7 +133,7 @@ class BuildingDocumentationController extends Controller
 
     public function printCertificate(BuildingDocumentation $buildingDocumentation)
     {
-              if (is_null(auth()->user()->ward_no)) {
+        if (is_null(auth()->user()->ward_no)) {
             $buildingDocumentation->update([
                 'status' => BuildingDocumentationStatusEnum::CERTIFICATE->value,
             ]);
@@ -153,7 +151,6 @@ class BuildingDocumentationController extends Controller
             'sent_admin' => 'recommendation_sent',
         ]);
         return back();
-
     }
 
     public function showToAdmin(BuildingDocumentation $buildingDocumentation)
@@ -165,7 +162,6 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
         return back();
-
     }
 
     public function printPermission(BuildingDocumentation $buildingDocumentation)
@@ -178,7 +174,7 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation','currentDateTime'));
+        return view('emap::admin.buildingDocumentation.template.permission', compact('buildingDocumentation', 'currentDateTime'));
     }
 
     public function printConfession(BuildingDocumentation $buildingDocumentation)
@@ -191,7 +187,7 @@ class BuildingDocumentationController extends Controller
             'neighbours',
         ]);
 
-        return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation','currentDateTime'));
+        return view('emap::admin.buildingDocumentation.template.confession', compact('buildingDocumentation', 'currentDateTime'));
     }
 
     public function update(Request $request, $id)

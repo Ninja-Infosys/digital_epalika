@@ -132,17 +132,17 @@
                                         @enderror
                                     </div>
                                 </div><div class="col-md-4 mb-1">
-                                    <label for="requiredDocument.all_round_house_pic" class="form-label">चारैतिरको फोटो
+                                    <label for="requiredDocument.other_document" class="form-label">चारैतिरको फोटो
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <input
-                                            class="form-control @error('requiredDocument.all_round_house_pic') is-invalid @enderror"
-                                            type="file" id="requiredDocument.all_round_house_pic"
-                                            wire:model="requiredDocument.all_round_house_pic" multiple
-                                            placeholder="आवेदन मिति बि. सं.">
-                                        @error('requiredDocument.all_round_house_pic')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                        <div class="input-group">
+                                            <input class="form-control @error('requiredDocument.other_document') is-invalid @enderror" type="file"
+                                                id="other" wire:model="requiredDocument.other_document" multiple>
+                                            @error('requiredDocument.other_document')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
                                     </div>
                                 </div>
 

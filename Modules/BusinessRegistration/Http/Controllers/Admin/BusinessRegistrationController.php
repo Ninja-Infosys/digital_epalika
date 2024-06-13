@@ -60,10 +60,13 @@ class BusinessRegistrationController extends Controller
     {
         $this->checkAuthorization('businessRegistration_access');
 
-        $businessDetail->load(
-            ['partners' => function ($query) {
-                $query->with('issueDistrict', 'district', 'localBody');
-            }, 'businessNature', 'registeredBusinesses']
+        $businessDetail->load
+        (
+            'partners.issueDistrict',
+            'partners.district',
+            'partners.localBody',
+            'businessNature',
+            'registeredBusinesses',
         );
 
         return view('businessregistration::admin.businessRegistration.show', compact('businessDetail'));

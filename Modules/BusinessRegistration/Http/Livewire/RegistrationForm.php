@@ -143,8 +143,6 @@ class RegistrationForm extends Component
             ];
         }
     }
-
-
     protected array $firstStepValidations = [
         'form.name' => ['required'],
         'form.name_en' => ['required'],
@@ -174,18 +172,6 @@ class RegistrationForm extends Component
         'form.registeredBusinesses.*.registration_date' => ['nullable'],
         'form.registeredBusinesses.*.is_active' => ['nullable'],
     ];
-
-    protected function firstStepValidation(): array
-    {
-        return !empty($this->businessDetail)
-            ? array_merge($this->firstStepValidations, [
-                'form.rent_agreement' => ['nullable'],
-            ])
-            : array_merge($this->firstStepValidations, [
-                'form.rent_agreement' => ['nullable'],
-            ]);
-    }
-
     protected array $secondStepValidations = [
         'form.partners' => ['required', 'array'],
         'form.partners.*.name' => ['required'],
@@ -212,6 +198,17 @@ class RegistrationForm extends Component
         'form.partners.*.tole' => ['required', 'string'],
     ];
 
+    protected function firstStepValidation(): array
+    {
+        return !empty($this->businessDetail)
+            ? array_merge($this->firstStepValidations, [
+                'form.rent_agreement' => ['nullable'],
+            ])
+            : array_merge($this->firstStepValidations, [
+                'form.rent_agreement' => ['nullable'],
+            ]);
+    }
+
     protected function secondStepValidations(): array
     {
         return !empty($this->businessDetail)
@@ -228,6 +225,14 @@ class RegistrationForm extends Component
                 'form.partners.*.citizenship_back' => ['nullable'],
             ]);
     }
+
+
+
+
+
+
+
+
 
     protected array $thirdStepValidations = [
 
@@ -304,7 +309,7 @@ class RegistrationForm extends Component
                 'type' => 'success',
                 'title' => 'तपाइको व्यवसाय सफलता पुर्बक अध्याबधिक भयो'
             ]);
-            return redirect(route('admin.businessRegistration.businessRegistration.index'));
+            return redirect(route('admin.businessRegistration.registration.businessRegistration.index'));
         }
 
         $businessDetail = DB::transaction(function () {
