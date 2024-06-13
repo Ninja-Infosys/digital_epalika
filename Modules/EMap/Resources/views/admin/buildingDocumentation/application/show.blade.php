@@ -63,8 +63,7 @@
                                                                     <th>घरधनिको नाम</th>
                                                                     <td>{{ $buildingDocumentation->house_owner_name ?? '' }}
                                                                     </td>
-                                                                    <td>{{ $buildingDocumentation->house_owner_name ?? '' }}
-                                                                    </td>
+
                                                                 </tr>
                                                                 <tr>
                                                                     <th>ठेगाना</th>
@@ -89,8 +88,7 @@
                                                                     <th>घर बनेको बर्ष</th>
                                                                     <td>{{ get_nepali_number($buildingDocumentation->house_built_year ?? '') }}
                                                                     </td>
-                                                                    <td>{{ $buildingDocumentation->house_built_year ?? '' }}
-                                                                    </td>
+
                                                                 </tr>
 
                                                                 <tr>
