@@ -309,7 +309,7 @@ class RegistrationForm extends Component
                 'type' => 'success',
                 'title' => 'तपाइको व्यवसाय सफलता पुर्बक अध्याबधिक भयो'
             ]);
-            return redirect(route('admin.businessRegistration.businessRegistration.index'));
+            return redirect(route('admin.businessRegistration.registration.businessRegistration.index'));
         }
 
         $businessDetail = DB::transaction(function () {

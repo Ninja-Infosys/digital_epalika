@@ -452,7 +452,7 @@
                         </div>
                     </fieldset>
                     @if (!$loop->first)
-                        <button class="btn btn-danger" wire:click.prevent="partnerArrayDecrement({{ $key }})">
+                        <button class="btn btn-danger" wire:click.prevent="committeeNameArrayDecrement({{ $key }})">
                             <i class="fa fa-minus"></i>
                         </button>
                     @endif
