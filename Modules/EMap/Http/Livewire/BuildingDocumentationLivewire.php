@@ -313,8 +313,8 @@ class BuildingDocumentationLivewire extends Component
             $buildingStoreyDetails = new BuildingStoreyDetail($buildingStoreyDetail);
             $buildingDocumentation->buildingStoreyDetails()->save($buildingStoreyDetails);
         }
+        $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
         DB::transaction(function () use ($buildingDocumentation) {
-            $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
             // foreach ($this->form['requiredDocument.files'] ?? [] as $file) {
             //     $buildingDocumentation->requiredDocument()->files()->create([
             //         'file_name' => $file['file_name'],

@@ -179,8 +179,11 @@ class ForumLivewire extends Component
     }
     protected function thirdStepValidations(): array
     {
-        return [
-            'form.application_date' => ['required'],
+        return !empty($this->forum) ?[
+            'form.application_date' => ['nullable'],
+            'form.other_document' => ['nullable', 'array'],
+        ] : [
+            'form.application_date' => ['nullable'],
             'form.other_document' => ['nullable', 'array'],
         ];
     }

@@ -8,6 +8,6 @@
     <div class="offcanvas-body">
         <iframe id="file-iframe" frameborder="0"></iframe>
         <img id="file-img" class="img-fluid img-thumbnail">
-        <i id="file-icon"></i>
+
     </div>
 </div>
