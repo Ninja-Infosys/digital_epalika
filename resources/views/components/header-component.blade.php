@@ -23,16 +23,17 @@
 
 
 <div class="main-heading">
-    <h2 class="sub-title mb-1">
+    <div class="sub-title mb-1">
         @foreach($headers as $header)
             @if($loop->first)
-                    {{$header->title}}
-                @else
-                <span class="d-block">{{$header->title}}</span>
+                <span style="color: {{$header->font_color}}; font-size: {{$header->font_size }} !important;">{{$header->title}}</span>
+            @else
+                <span class="d-block" style="color: {{$header->font_color}}; font-size: {{$header->font_size}}!important;">{{$header->title}}</span>
             @endif
         @endforeach
+    </div>
 
-        </h2>
+
 {{--        <a class="link-btn mt-2 text-decoration-none" href="tel:{{officeSetting($ward ?? null)?->phone ?? ''}}">--}}
 {{--            फोन नं - {{officeSetting($ward ?? null)?->phone ?? ''}}--}}
 {{--        </a>--}}

@@ -19,7 +19,8 @@ class StoreVideoRequest extends FormRequest
             'video' => ['required', 'regex:/^https:\/\/www\.youtube\.com\/watch\?v=/'],
             'ward' => ['nullable', 'array'],
             'ward.*' => ['integer'],
-            'is_displayed' => ['nullable', 'boolean']
+            'is_displayed' => ['nullable', 'boolean'],
+            'status' => ['nullable'],
         ];
     }
 
