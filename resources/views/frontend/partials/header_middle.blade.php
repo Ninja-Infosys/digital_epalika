@@ -13,19 +13,19 @@ $currentDateTime = date('Y-m-d H:i:s');
                 <img alt="nepal-government-logo" class="logo img-responsive center-block d-block mx-auto"
                     src="{{ asset('assets/frontend/image/logo.png') }}" />
             </a>
-            <x-header-component :ward="$ward ?? null"/>
+            <x-header-component :ward="$ward ?? null" />
         </div>
         <div class="d-flex align-items-center">
             @if (Route::has('ebps'))
 
-            <a href="{{ route('digital-service') }}" class="me-3 text-white text-decoration-underline">विधुतीय शुसासन सेवा</a>
+            <a href="{{ route('digital-service') }}" class="me-3 text-white text-decoration-underline">विधुतीय शुसासन
+                सेवा</a>
             @endif
             <a href="{{ route('welcome') }}" class="main-logo d-flex align-items-center" style="text-decoration: none">
                 <img alt="nepal-flag" class="logo img-responsive center-block ms-2 bg-white"
                     src="{{ asset('assets/frontend/image/nepal_flag.gif') }}"
                     style="height: 35px; padding: 2px; border-radius: 4px; border-top-right-radius: 0; border-bottom-right-radius: 0" />
-                <span class="fw-bold"
-                    style="display: inline-flex;
+                <span class="fw-bold" style="display: inline-flex;
                     justify-content: center;
                     align-items: center;
                     padding: 5px 15px;
@@ -45,11 +45,11 @@ $currentDateTime = date('Y-m-d H:i:s');
                         <path
                             d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                     </svg>&nbsp;&nbsp;
-                    <?php echo $currentDateTime; ?></span>
+                    <?php echo $currentDateTime; ?>
+                </span>
             </a>
             <a href="tel:०८१५३६३३८" class="main-logo d-flex align-items-center" style="text-decoration: none">
-                <span class="fw-bold"
-                    style="display: inline-flex;
+                <span class="fw-bold" style="display: inline-flex;
                     justify-content: center;
                     align-items: center;
                     padding: 5px 15px;
@@ -64,6 +64,18 @@ $currentDateTime = date('Y-m-d H:i:s');
                             d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
                     </svg>&nbsp;&nbsp;
                     फोन नं - {{ officeSetting($ward ?? null)?->phone }}</span>
+            </a>
+            <a href="mailto:{{ officeSetting($ward ?? null)?->email }}" class="main-logo d-flex align-items-center"
+                style="text-decoration: none">
+                <span class="fw-bold"
+                    style="display: inline-flex; justify-content: center; align-items: center; padding: 5px 15px; background: transparent; border: 1px solid #fff; color: #fff; margin-left: 7px; border-radius: 5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path
+                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zM.05 4.555L8 9.615l7.95-5.06A1 1 0 0 0 15 4H1a1 1 0 0 0-.95.555zM16 4.697l-7.823 4.978a.5.5 0 0 1-.354.075h-.646a.5.5 0 0 1-.354-.075L0 4.697V12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.697z" />
+                    </svg>&nbsp;&nbsp;
+                    ईमेल- {{ officeSetting($ward ?? null)?->email }}
+                </span>
             </a>
         </div>
     </div>
