@@ -82,4 +82,12 @@ class ProgramController extends Controller
         toast('कार्यक्रम सफलतापुर्वक मेटियो', 'success');
         return back();
     }
+    public function updateProgramStatus(Program $program)
+    {
+        $program->update([
+            'status' => !$program->status
+        ]);
+        toast( ('कार्यक्रम स्थिति अपडेट गरियो'), 'success');
+        return back();
+    }
 }

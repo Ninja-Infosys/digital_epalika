@@ -44,6 +44,7 @@
                                 <th>शिर्षक *</th>
                                 <th>मिति</th>
                                 <th>फोटो</th>
+                                <th>स्थिति </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -55,6 +56,17 @@
                                     <td>{{ $program->date }}</td>
                                     <td>
                                         <img src="{{ $program->image }}" height="70" alt="Image">
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('admin.digitalBoard.program.updateStatus',$program) }}"
+                                            method="post" style="display: inline">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit" style="border: none; background: none;">
+                                                <i
+                                                    class="fa fa-{{ $program->status == 1 ? 'toggle-on text-success' : 'toggle-off text-danger' }} fa-2x"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                     <td class="d-flex gap-1">
                                         <a data-bs-type="edit" href="{{route('admin.digitalBoard.program.edit',$program)}}"
