@@ -70,7 +70,6 @@ class BuildingDocumentationLivewire extends Component
         'citizenship_no' => null,
         'neighbours' => [],
         'buildingStoreyDetails' => [],
-
         'files' => [],
     ];
 
@@ -81,7 +80,7 @@ class BuildingDocumentationLivewire extends Component
         'building_map' => null,
         'land_map' => null,
         'all_round_house_pic' => null,
-        'other_document' => [],
+        'files' => [],
 
         'photo' => null,
     ];
@@ -111,6 +110,7 @@ class BuildingDocumentationLivewire extends Component
 
         foreach ($this->buildingDocumentation->neighbours as $neighbour) {
             $this->form['neighbours'][] = [
+                'id' => $neighbour->id,
                 'neighbour_name' => $neighbour->neighbour_name ?? null,
                 'direction' => $neighbour->direction ?? null,
                 'ward_no' => $neighbour->ward_no ?? null,
@@ -120,6 +120,7 @@ class BuildingDocumentationLivewire extends Component
         }
         foreach ($this->buildingDocumentation->buildingStoreyDetails as $buildingStoreyDetail) {
             $this->form['buildingStoreyDetails'][] = [
+                'id' => $buildingStoreyDetail->id,
                 'storey' => $buildingStoreyDetail->storey ?? null,
                 'area_of_former_construction' => $buildingStoreyDetail->area_of_former_construction ?? null,
                 'land_area' => $buildingStoreyDetail->land_area ?? null,
@@ -210,7 +211,6 @@ class BuildingDocumentationLivewire extends Component
         'requiredDocument.building_map' => ['required'],
         'requiredDocument.land_map' => ['required'],
         'requiredDocument.all_round_house_pic' => ['nullable'],
-        'requiredDocument.other_document' => ['nullable', 'array'],
         'requiredDocument.photo' => ['required'],
     ];
 
@@ -224,7 +224,6 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.building_map' => ['nullable'],
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
-                'requiredDocument.other_document' => ['nullable', 'array'],
                 'requiredDocument.photo' => ['nullable'],
             ] : [
                 'requiredDocument.citizenship' => ['required'],
@@ -233,7 +232,6 @@ class BuildingDocumentationLivewire extends Component
                 'requiredDocument.building_map' => ['required'],
                 'requiredDocument.land_map' => ['nullable'],
                 'requiredDocument.all_round_house_pic' => ['nullable'],
-                'requiredDocument.other_document' => ['nullable', 'array'],
                 'requiredDocument.photo' => ['required'],
             ];
     }
@@ -305,25 +303,30 @@ class BuildingDocumentationLivewire extends Component
 
     private function saveBuildingDocumentData($buildingDocumentation): void
     {
-        foreach ($this->form['neighbours'] as $neighbour) {
-            $neighbours = new Neighbour($neighbour);
-            $buildingDocumentation->neighbours()->save($neighbours);
+
+        foreach ($this->form['neighbours'] as $neighbourData) {
+            Neighbour::updateOrCreate(
+                [
+                    'building_documentation_id' => $buildingDocumentation->id,
+                    'id' => $neighbourData['id'] ?? null
+                ],
+                $neighbourData
+            );
         }
         foreach ($this->form['buildingStoreyDetails'] as $buildingStoreyDetail) {
-            $buildingStoreyDetails = new BuildingStoreyDetail($buildingStoreyDetail);
-            $buildingDocumentation->buildingStoreyDetails()->save($buildingStoreyDetails);
+            BuildingStoreyDetail::updateOrCreate(
+                [
+                    'building_documentation_id' => $buildingDocumentation->id,
+                    'id' => $buildingStoreyDetail['id'] ?? null
+                ],
+                $buildingStoreyDetail
+            );
         }
+
         $buildingDocumentation->requiredDocument()->create($this->requiredDocument);
         DB::transaction(function () use ($buildingDocumentation) {
-            // foreach ($this->form['requiredDocument.files'] ?? [] as $file) {
-            //     $buildingDocumentation->requiredDocument()->files()->create([
-            //         'file_name' => $file['file_name'],
-            //         'file' => $file['file']->store('buildingDocument/allRoundPic', 'public'),
-            //         'size' => $file->getSize(),
-            //         'extension' => $file['file']->getClientOriginalExtension(),
-            //     ]);
-            // }
-            foreach ($this->form['requiredDocument.other_document'] ?? [] as $document) {
+
+            foreach ($this->form['requiredDocument.files'] ?? [] as $document) {
                 $buildingDocumentation->requiredDocument()->files()->create([
                     'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                     'extension' => $document->getClientOriginalExtension(),

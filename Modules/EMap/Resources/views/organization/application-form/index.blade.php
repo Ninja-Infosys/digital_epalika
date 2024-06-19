@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('emap::organization.layouts.master')
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -31,11 +31,9 @@
                         <h4 class="header-title mb-0">दर्खास्त निवेदनहरु</h4>
                         <div class="d-flex flex-wrap align-items-center">
                             @includeIf('inc.filter_form')
-                            <button class="btn btn-sm mx-1 btn-outline-info waves-effect waves-light collapsed"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm"
-                                aria-expanded="false" aria-controls="collapseExample">
-                                <i class="fa fa-filter"> फिल्टर</i>
-                            </button>
+                            <a href="{{route('organization.admin.buildingDocumentation.create')}}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +66,7 @@
                                         </td>
                                         <td class="d-flex gap-1">
                                             <form
-                                                action="{{ route('emap.admin.buildingDocumentation.edit', $buildingDocumentation) }}"
+                                                action="{{ route('organization.admin.buildingDocumentation.edit', $buildingDocumentation) }}"
                                                 method="get" class="d-inline">
                                                 <button type="submit"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -82,7 +80,7 @@
                                             </form>
 
                                             <form
-                                                action="{{ route('emap.admin.buildingDocumentation.show', $buildingDocumentation) }}"
+                                                action="{{ route('organization.admin.buildingDocumentation.show', $buildingDocumentation) }}"
                                                 method="get" class="d-inline">
                                                 <button type="submit"
                                                     class="btn btn-xs btn-outline-info {{ get_setting('Pin') ? 'confirm_pin' : '' }}"
@@ -90,6 +88,12 @@
                                                     <i class="fa fa-eye"></i>
                                                 </button>
                                             </form>
+
+                                            <a data-bs-type="show" class="btn me-1 btn-xs btn-outline-warning"
+                                            href="{{ route('organization.admin.buildingDocumentationList'), $buildingDocumentation) }}"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
 
 
                                         </td>

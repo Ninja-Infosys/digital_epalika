@@ -14,7 +14,13 @@
                         <span> नक्सा</span>
                     </a>
                 </li>
-                
+                <li class="{{request()->is('organization/admin/mapApply') ? 'active' : ''}}">
+                    <a href="{{route('organization.admin.buildingDocumentation.index')}}">
+                        <i class="fa fa-map"></i>
+                        <span>भवन अभिलेखिकरण</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
 

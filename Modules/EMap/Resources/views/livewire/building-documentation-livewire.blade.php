@@ -131,14 +131,18 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div><div class="col-md-4 mb-1">
-                                    <label for="requiredDocument.other_document" class="form-label">चारैतिरको फोटो
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <label for="requiredDocument.files" class="form-label">चारैतिरको फोटो
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group">
-                                            <input class="form-control @error('requiredDocument.other_document') is-invalid @enderror" type="file"
-                                                id="other" wire:model="requiredDocument.other_document" multiple>
-                                            @error('requiredDocument.other_document')
+                                            {{-- <input class="form-control @error('requiredDocument.other_document') is-invalid @enderror" type="file"
+                                                id="other" wire:model="requiredDocument.other_document" multiple> --}}
+                                            <input class="form-control @error('requiredDocument.files.') is-invalid @enderror"
+                                                type="file" name="files[][file]" wire:model="requiredDocument.files"
+                                                placeholder="शीर्षक" id="requiredDocument.files" />
+                                            @error('requiredDocument.files')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -254,7 +258,7 @@
                                     <div class="row border-bottom mb-2">
                                         <div class="col-md-4 mb-2">
                                             <label for="form.neighbours.{{ $key }}.direction" class="form-label">
-                                               दिशा*</label>
+                                                दिशा*</label>
                                             <select
                                                 class="form-select @error('form.neighbours.' . $key . '.direction') is-invalid @enderror"
                                                 id="form.neighbours.{{ $key }}.direction"
@@ -300,7 +304,8 @@
                                             <input
                                                 class="form-control @error('form.neighbours.' . $key . '.plot_no') is-invalid @enderror"
                                                 type="text" id="form.neighbours.{{ $key }}.plot_no"
-                                                wire:model="form.neighbours.{{ $key }}.plot_no" placeholder="कित्ता नं">
+                                                wire:model="form.neighbours.{{ $key }}.plot_no"
+                                                placeholder="कित्ता नं">
                                             @error("form.neighbours.$key.plot_no")
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror

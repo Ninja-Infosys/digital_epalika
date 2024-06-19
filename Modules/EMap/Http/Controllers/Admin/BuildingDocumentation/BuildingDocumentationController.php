@@ -47,6 +47,8 @@ class BuildingDocumentationController extends Controller
         return view('emap::admin.buildingDocumentation.application.edit', compact('buildingDocumentation'));
     }
 
+   
+
     public function show(BuildingDocumentation $buildingDocumentation)
     {
         $buildingDocumentation->load(

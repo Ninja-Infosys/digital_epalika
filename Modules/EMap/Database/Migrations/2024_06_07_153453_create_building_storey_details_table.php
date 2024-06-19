@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('building_storey_details', function (Blueprint $table) {
             $table->id();
-            $table->nullableMorphs('storeyable');
+            $table->foreignId('building_documentation_id')->constrained()->cascadeOnDelete();
             $table->string('area_of_former_construction')->nullable()->comment('साविक निर्माण भइसकेको क्षेत्रफल');
             $table->string('land_area')->nullable()->comment('जग्गाको क्षेत्रफल');
             $table->string('remarks')->nullable()->comment('कैफियत');

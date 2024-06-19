@@ -204,8 +204,24 @@
                 </a>
             </li>
             @endcan
+
+        </ul>
+    </div>
+</li>
+<li class="{{ request()->is('admin/emap/setting/*') ? 'active' : '' }}">
+    <a href="#sidebarEMapBuildingDocumentationSetting" {{ request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : '' }}
+        data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span>अभिलेखिकरणको सेटिङ</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{ request()->is('admin/emap/buildingDocumentationSetting/*') ? 'show' : '' }}" id="sidebarEMapBuildingDocumentationSetting">
+        <ul class="nav-second-level">
+
             @can('buildingDocumentationSetting_access')
-            <li class="{{ request()->is('admin/emap/setting/buildingDocumentationSetting*') ? 'active' : '' }}">
+            <li class="{{ request()->is('admin/emap/buildingDocumentationSetting/buildingDocumentationSetting*') ? 'active' : '' }}">
 
                 <a href="{{ route('emap.admin.buildingDocumentationSetting.index') }}">
                     <span>घर अभिलेखिकरण  </span>
@@ -213,6 +229,13 @@
             </li>
             @endcan
 
+            @can('eMapTemplate_access')
+            <li class="{{ request()->is('admin/emap/buildingDocumentationSetting/buildingDocumentationStep*') ? 'active' : '' }}">
+                <a href="{{ route('emap.admin.buildingDocumentationStep.index') }}">
+                    <span> नक्शा पास मर्यादाक्रम</span>
+                </a>
+            </li>
+        @endcan
         </ul>
     </div>
 </li>
