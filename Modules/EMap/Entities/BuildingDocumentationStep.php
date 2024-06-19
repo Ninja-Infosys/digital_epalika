@@ -62,11 +62,7 @@ class BuildingDocumentationStep extends Model
         return $this->hasMany(BuildingFormDataType::class);
     }
 
-    public function formDataTypes(): HasMany
-    {
-        return $this->hasMany(FormDataType::class);
-    }
-
+   
     public function getFormApproveAttribute()
     {
         return  \Illuminate\Support\Facades\DB::table('map_pass_group_user')

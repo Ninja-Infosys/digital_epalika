@@ -43,9 +43,6 @@ class BuildingFormDataType extends Model
     ];
 
 
-
-
-
     public function buildingDocumentationStep(): BelongsTo
     {
         return $this->belongsTo(BuildingDocumentationStep::class);
