@@ -20,6 +20,7 @@ class StoreProgramRequest extends FormRequest
             'ward' => ['nullable', 'array'],
             'ward.*' => ['integer'],
             'is_displayed' => ['nullable', 'boolean'],
+            'status' => ['nullable'],
         ];
     }
 }

@@ -24,7 +24,8 @@ class Video extends Model
         'video',
         'ward',
         'is_displayed',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     protected $casts = [

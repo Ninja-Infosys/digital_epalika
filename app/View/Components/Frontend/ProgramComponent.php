@@ -13,7 +13,7 @@ class ProgramComponent extends Component
 
     public function __construct(int|null $ward = null)
     {
-        $this->programs = Program::latest()
+        $this->programs = Program::latest()->where('status',1)
             ->where(function ($q) use ($ward) {
                 if (!empty($ward)) {
                     $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");

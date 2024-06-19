@@ -20,6 +20,7 @@ class UpdateProgramRequest extends FormRequest
             'ward' => ['nullable', 'array'],
             'ward.*' => ['string','nullable'],
             'is_displayed' => ['nullable', 'boolean'],
+            'status' => ['nullable'],
         ];
     }
 }

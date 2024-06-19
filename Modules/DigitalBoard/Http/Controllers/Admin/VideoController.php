@@ -98,4 +98,12 @@ class VideoController extends Controller
 
         return back();
     }
+    public function updateVideoStatus(Video $video)
+    {
+        $video->update([
+            'status' => !$video->status
+        ]);
+        toast( ('भिडियोको स्थिति अपडेट गरियो'), 'success');
+        return back();
+    }
 }

@@ -7,6 +7,7 @@ use Modules\DigitalBoard\Http\Controllers\Admin\DashboardController;
 use Modules\DigitalBoard\Http\Controllers\Admin\NoticeController;
 use Modules\DigitalBoard\Http\Controllers\Admin\PopUpNoticeController;
 use Modules\DigitalBoard\Http\Controllers\Admin\PhotoGalleryController;
+use Modules\DigitalBoard\Http\Controllers\Admin\ProgramController;
 use Modules\DigitalBoard\Http\Controllers\Admin\ServiceController;
 use Modules\DigitalBoard\Http\Controllers\Admin\ServiceEmployeeController;
 use Modules\DigitalBoard\Http\Controllers\Admin\VideoController;
@@ -14,12 +15,14 @@ use Modules\DigitalBoard\Http\Controllers\Admin\VideoController;
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/ajax', [DashboardController::class, 'ajaxData'])->name('dashboard.ajax');
 Route::resource('video', VideoController::class);
+Route::put('video/{video}/updateVideoStatus', [VideoController::class, 'updateVideoStatus'])->name('video.updateStatus');
 Route::resource('{type}/notice', NoticeController::class);
 Route::get('{type}/notice/{notice}/noticeUpdate', [NoticeController::class, 'updateClosedDate'])->name('notice.updateClosedDate');
 Route::get('{type}/notice/{notice}/updateShowOnIndex', [NoticeController::class, 'updateShowOnIndex'])->name('notice.updateShowOnIndex');
 //Route::get('popUpNotice/{popUpNotice}/updateShowOnIndex', [PopUpNoticeController::class, 'updateShowOnIndex'])->name('popUpNotice.updateShowOnIndex');
 Route::resource('popUpNotice', PopUpNoticeController::class);
-Route::resource('program', \Modules\DigitalBoard\Http\Controllers\Admin\ProgramController::class);
+Route::resource('program', ProgramController::class);
+Route::put('program/{program}/updateProgramStatus', [ProgramController::class, 'updateProgramStatus'])->name('program.updateStatus');
 
 
 

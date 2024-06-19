@@ -30,6 +30,7 @@ class Program extends Model
         'ward',
         'is_displayed',
         'user_id',
+        'status',
     ];
     protected $casts = [
         'is_displayed' => 'boolean'
