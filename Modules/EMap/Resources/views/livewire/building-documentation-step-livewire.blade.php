@@ -87,27 +87,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($form['formDataType'] ?? [] as $index=>$formDataType)
+                @foreach($form['buildingFormDataType'] ?? [] as $index=>$buildingFormDataType)
                 <tr>
                     <td>
-                        <select id="type" name="type" wire:model="form.formDataType.{{$index}}.type" wire:key="form.formDataType.{{$index}}.type" wire:change="changeData({{$index}})" class="form-select" required>
+                        <select id="type" name="type" wire:model="form.buildingFormDataType.{{$index}}.type" wire:key="form.buildingFormDataType.{{$index}}.type" wire:change="changeData({{$index}})" class="form-select" required>
                             <option value="">-- छान्नुहोस् --</option>
                             @foreach(\Modules\EMap\Enums\FormTypeEnum::cases() as $formType)
                             <option value="{{$formType->value}}">{{$formType->label()}}</option>
                             @endforeach
                         </select>
-                        @error('form.formDataType.'.$index.'.type')
+                        @error('form.buildingFormDataType.'.$index.'.type')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </td>
                     <td>
-                        <select id="type" name="type" wire:model="form.formDataType.{{$index}}.model_id" class="form-select">
+                        <select id="type" name="type" wire:model="form.buildingFormDataType.{{$index}}.model_id" class="form-select">
                             <option value="">-- छान्नुहोस् --</option>
-                            @foreach($form['formDataType'][$index]['data'] ?? [] as $key=>$data)
+                            @foreach($form['buildingFormDataType'][$index]['data'] ?? [] as $key=>$data)
                             <option value="{{$key ?? ''}}" {{old('type') == $key ?? '' ? 'selected' : ''}}>{{$data ?? ''}}</option>
                             @endforeach
                         </select>
-                        @error('form.formDataType.'.$index.'.model_id')
+                        @error('form.buildingFormDataType.'.$index.'.model_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </td>
@@ -120,7 +120,7 @@
                 @endforeach
             </tbody>
         </table>
-        @error('form.formDataType')
+        @error('form.buildingFormDataType')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
