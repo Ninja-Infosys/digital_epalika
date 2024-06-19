@@ -113,11 +113,11 @@ class BuildingDocumentation extends Model
         return $this->morphMany(File::class, 'model');
     }
 
-    public function neighbours(): MorphMany
-    {
-        return $this->morphMany(Neighbour::class, 'neighbourable');
-    }
 
+    public function neighbours(): HasMany
+    {
+        return $this->hasMany(Neighbour::class);
+    }
     public function getRegistrationMonthAttribute(): string
     {
         return explode('-', $this->registration_date_ne)[1] ?? '';
@@ -136,11 +136,11 @@ class BuildingDocumentation extends Model
         return $this->hasOne(LandReport::class);
     }
 
-    public function buildingStoreyDetails(): MorphMany
-    {
-        return $this->morphMany(BuildingStoreyDetail::class, 'storeyable');
-    }
 
+    public function buildingStoreyDetails(): HasMany
+    {
+        return $this->hasMany(BuildingStoreyDetail::class);
+    }
 
     protected function otherFile(): Attribute
     {

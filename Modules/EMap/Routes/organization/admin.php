@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\AttachDocumentController;
+use Modules\EMap\Http\Controllers\Clients\BuildingDocumentationController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationNotificationController;
 
@@ -45,3 +46,12 @@ Route::post('mapApply/{mapApply}/attachment/storeOrganizationDocument', [AttachD
 Route::put('appliedDocument/{appliedDocument}/updateAppliedDocumentStatus', [AttachDocumentController::class, 'updateAppliedDocumentStatus'])->name('updateAppliedDocumentStatus');
 Route::put('formStore/{formStore}/updateFormStoreStatus', [AttachDocumentController::class, 'updateFormStoreStatus'])->name('updateFormStoreStatus');
 Route::put('paymentStore/{paymentStore}/updatePaymentStoreStatus', [AttachDocumentController::class, 'updatePaymentStoreStatus'])->name('updatePaymentStoreStatus');
+
+
+Route::prefix('buildingDocumentation')->group(function () {
+
+    Route::resource('buildingDocumentation', BuildingDocumentationController::class);
+    Route::get('buildingDocumentation/{buildingDocumentation}/buildingDocumentationList', [BuildingDocumentationController::class, 'buildingDocumentationList'])->name('buildingDocumentationList');
+
+
+});

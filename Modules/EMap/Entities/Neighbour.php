@@ -5,6 +5,7 @@ namespace Modules\EMap\Entities;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\EMap\Enums\NeighbourTypeEnum;
@@ -20,6 +21,7 @@ class Neighbour extends Model
     ];
 
     protected $fillable = [
+        'building_documentation_id',
         'neighbour_name',
         'direction',
         'ward_no',
@@ -30,8 +32,8 @@ class Neighbour extends Model
     ];
 
 
-    public function neighbourable(): MorphTo
+    public function buildingDocumentation(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(BuildingDocumentation::class);
     }
 }

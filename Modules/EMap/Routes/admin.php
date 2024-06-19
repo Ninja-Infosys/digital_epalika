@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingDocumentationController;
+use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\BuildingDocumentationStepController;
 use Modules\EMap\Http\Controllers\Admin\BuildingDocumentation\LandReportController;
 // use Modules\EMap\Entities\New\MapPassGroup;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
@@ -121,7 +122,15 @@ Route::prefix('setting')->group(function () {
 
     Route::resource('landUseArea', LandUseAreaController::class);
     Route::resource('streetDetail', StreetDetailController::class);
+});
+
+
+Route::prefix('buildingDocumentationSetting')->group(function () {
+
     Route::resource('buildingDocumentationSetting', BuildingDocumentationSettingController::class);
+    Route::resource('buildingDocumentationStep', BuildingDocumentationStepController::class);
+    Route::get('buildingDocumentationStep/{buildingDocumentationStep}/toggleStatus', [BuildingDocumentationStepController::class, 'updateStatus'])->name('buildingDocumentationStep.updateStatus');
+
 });
 
 Route::prefix('files')->as('files.')->group(function () {
@@ -140,28 +149,6 @@ Route::controller(ReportController::class)->prefix('reports')->as('report.')->gr
 });
 
 Route::prefix('buildingDocumentation')->group(function () {
+
     Route::resource('buildingDocumentation', BuildingDocumentationController::class);
-    Route::resource('buildingDocumentation/{buildingDocumentation}/landReport', LandReportController::class)->names('buildingDocumentation.landReport');
-
-    Route::post('buildingDocumentation/{buildingDocumentation}/customData', [BuildingDocumentationController::class, 'customData'])
-        ->name('store.customApplicationData');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printNotice', [BuildingDocumentationController::class, 'printNotice'])
-        ->name('buildingDocumentation.printNotice');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printLandConfirmation', [BuildingDocumentationController::class, 'printLandConfirmation'])
-        ->name('buildingDocumentation.printLandConfirmation');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printRecommendation', [BuildingDocumentationController::class, 'printRecommendation'])
-        ->name('buildingDocumentation.printRecommendation');
-
-    Route::get('buildingDocumentation/{buildingDocumentation}/sentToAdmin', [BuildingDocumentationController::class, 'sentToAdmin'])
-        ->name('buildingDocumentation.sentToAdmin');
-    Route::get('buildingDocumentation/{buildingDocumentation}/showToAdmin', [BuildingDocumentationController::class, 'showToAdmin'])
-        ->name('buildingDocumentation.showToAdmin');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printCertificate', [BuildingDocumentationController::class, 'printCertificate'])
-        ->name('buildingDocumentation.printCertificate');
-
-    Route::get('buildingDocumentation/{buildingDocumentation}/printPermission', [BuildingDocumentationController::class, 'printPermission'])
-        ->name('buildingDocumentation.printPermission');
-    Route::get('buildingDocumentation/{buildingDocumentation}/printConfession', [BuildingDocumentationController::class, 'printConfession'])
-        ->name('buildingDocumentation.printConfession');
-
 });

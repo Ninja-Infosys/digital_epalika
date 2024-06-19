@@ -3,7 +3,7 @@
 namespace Modules\EMap\Http\Livewire;
 
 use Livewire\Component;
-use Modules\EMap\Entities\New\MapPassGroup;
+use Modules\EMap\Entities\MapPassGroup;
 
 class FormLivewire extends Component
 {
