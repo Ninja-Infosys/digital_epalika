@@ -34,6 +34,6 @@ Route::resource('citizenCharter', CitizenCharterController::class);
 Route::resource('photoGallery', PhotoGalleryController::class);
 Route::resource('audio', AudioController::class);
 
-Route::get('popUpNotice/{popUpNotice}/updateStatus', [PopUpNoticeController::class, 'updateStatus'])->name('popUpNotice.updateStatus');
-Route::resource('popUpNotice', PopUpNoticeController::class)
-    ->only('index', 'store');
+Route::Put('popUpNotice/{popUpNotice}/updateStatus', [PopUpNoticeController::class, 'updateStatus'])->name('popUpNotice.updateStatus');
+// Route::resource('popUpNotice', PopUpNoticeController::class)
+//     ->only('index', 'store');
