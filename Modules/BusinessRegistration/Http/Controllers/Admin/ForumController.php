@@ -2,12 +2,12 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
-use Illuminate\Database\Eloquent\Builder;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\Forum;
@@ -36,10 +36,8 @@ class ForumController extends Controller
         })->latest()
             ->paginate(15);
 
-
         return view('businessregistration::admin.forum.index', compact('forums'));
     }
-
 
     public function show(Forum $forum)
     {
@@ -51,6 +49,7 @@ class ForumController extends Controller
 
         return view('businessregistration::admin.forum.show', compact('forum'));
     }
+
     public function customData(Request $request, Forum $forum)
     {
 
@@ -66,7 +65,7 @@ class ForumController extends Controller
         DB::transaction(function () use ($forum, $data) {
             if (empty($forum->registration_no)) {
                 $reg_no = Forum::whereFiscalYearId(\officeSetting()->fiscal_year_id)
-                        ->max('reg_no') + 1;
+                    ->max('reg_no') + 1;
                 $data = array_merge($data, [
                     'reg_no' => $reg_no,
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,
@@ -83,6 +82,11 @@ class ForumController extends Controller
         return back();
     }
 
+    public function create()
+    {
+
+        return view('businessregistration::admin.forum.create');
+    }
     public function edit(Forum $forum)
     {
         $forum->load('partners', 'files');
@@ -112,6 +116,7 @@ class ForumController extends Controller
 
         return back();
     }
+
     private function uploadDocuments($request, $printed_data): void
     {
         foreach ($request->validated()['files'] as $document) {
@@ -122,13 +127,14 @@ class ForumController extends Controller
             ]);
         }
     }
+
     public function printData(Forum $forum)
     {
         $officeHeaders = OfficeHeader::get();
         $forum->load(
             ['partners' => function ($query) {
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
-            },'province', 'district', 'localBody']
+            }, 'province', 'district', 'localBody']
         );
         $todayDateInBS = $this->get_today_nepali_date();
 

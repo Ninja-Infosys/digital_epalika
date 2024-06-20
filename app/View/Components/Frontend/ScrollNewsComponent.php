@@ -9,14 +9,14 @@ class ScrollNewsComponent extends Component
 {
     public $scrollNews;
 
-    public function __construct(int|null $ward = null)
+    public function __construct(?int $ward = null)
     {
         $this->scrollNews = Notice::where('type', 'News')
             ->whereNull('closed_at')
             ->where(function ($query) use ($ward) {
                 $query->where(function ($q) use ($ward) {
                     $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
-                })->orWhere(function ($q) use ($ward) {
+                })->orWhere(function ($q) {
                     $q->whereNull('ward');
                 });
             })
@@ -24,13 +24,6 @@ class ScrollNewsComponent extends Component
             ->orderByDesc('date')
             ->get();
     }
-    
-    
-
-    
-    
-    
-    
 
     public function render()
     {

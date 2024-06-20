@@ -35,6 +35,10 @@
                                     aria-expanded="false" aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
+                            <a href="{{ route('admin.businessRegistration.registration.organizationRegistration.create') }}"
+                               class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
+                            </a>
                         </div>
                     </div>
                 </div>
