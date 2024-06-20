@@ -8,6 +8,7 @@ use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,6 @@ use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
-use Illuminate\Database\Eloquent\Builder;
 
 class BusinessRegistrationController extends Controller
 {
@@ -28,27 +28,26 @@ class BusinessRegistrationController extends Controller
     {
         $this->checkAuthorization('businessRegistration_access');
         $businessDetails = BusinessDetail::with('partners', 'partners.localBody', 'localBody', 'businessNature')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
+            if (! is_null(request('search'))) {
                 $q->whereLike(['name', 'submission_no', 'registration_no'], request('search'));
             }
-            if (!empty(request('object_transaction_id'))) {
+            if (! empty(request('object_transaction_id'))) {
                 $q->where('object_transaction_id', request('object_transaction_id'));
             }
-            if (!empty(request('business_nature_id'))) {
+            if (! empty(request('business_nature_id'))) {
                 $q->where('business_nature_id', request('business_nature_id'));
             }
-            if (!empty(request('to_date'))) {
+            if (! empty(request('to_date'))) {
                 $q->whereDate('registration_date_ne', '>=', request('to_date'));
             }
-            if (!empty(request('from_date'))) {
+            if (! empty(request('from_date'))) {
                 $q->whereDate('registration_date_ne', '<=', request('from_date'));
             }
-            if (!empty(request('registration_no'))) {
+            if (! empty(request('registration_no'))) {
                 $q->where('registration_no', request('registration_no'));
             }
         })->latest()
             ->paginate(15);
-
 
         $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
         $businessNatures = BusinessNature::all();
@@ -56,12 +55,16 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.index', compact('businessDetails', 'objectTransactions', 'businessNatures'));
     }
 
+    public function create()
+    {
+        return view('businessregistration::admin.businessRegistration.create');
+    }
+
     public function show(BusinessDetail $businessDetail): Factory|View|Application
     {
         $this->checkAuthorization('businessRegistration_access');
 
-        $businessDetail->load
-        (
+        $businessDetail->load(
             'partners.issueDistrict',
             'partners.district',
             'partners.localBody',
@@ -85,23 +88,23 @@ class BusinessRegistrationController extends Controller
             'taxpayer_number' => ['nullable'],
         ]);
 
-
-        DB::transaction(function () use ($businessDetail, $data, $request) {
+        DB::transaction(function () use ($businessDetail, $data) {
             if (empty($businessDetail->registration_no)) {
                 $reg_no = BusinessDetail::whereFiscalYearId(\officeSetting()->fiscal_year_id)
-                        ->max('reg_no') + 1;
+                    ->max('reg_no') + 1;
                 $data = array_merge($data, [
                     'reg_no' => $reg_no,
                     'fiscal_year_id' => \officeSetting()->fiscal_year_id,
-                    'registration_no' => 'BR-' . officeSetting()->fiscalYear->title . '-' . Str::padLeft($reg_no, 4, 0),
+                    'registration_no' => 'BR-'.officeSetting()->fiscalYear->title.'-'.Str::padLeft($reg_no, 4, 0),
                     'registration_date_en' => today()->toDateString(),
-                    'registration_date_ne' => $this->get_today_nepali_date()
+                    'registration_date_ne' => $this->get_today_nepali_date(),
                 ]);
             }
 
             $businessDetail->update($data);
         });
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -159,13 +162,12 @@ class BusinessRegistrationController extends Controller
         }
     }
 
-
     public function addData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
         $this->checkAuthorization('customs_edit');
+
         return view('businessregistration::admin.businessRegistration.customs.index', compact('businessDetail', 'templateTypeEnum'));
     }
-
 
     public function print(BusinessDetail $businessDetail)
     {

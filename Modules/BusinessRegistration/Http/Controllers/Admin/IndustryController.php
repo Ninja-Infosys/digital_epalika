@@ -90,6 +90,12 @@ class IndustryController extends Controller
         return back();
     }
 
+    public function create()
+    {
+
+        return view('businessregistration::admin.industry.create');
+    }
+
     public function edit(Industry $industry)
     {
         $industry->load('committeeNames', 'files');

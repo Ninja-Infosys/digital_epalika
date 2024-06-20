@@ -3,7 +3,7 @@
 date_default_timezone_set('Asia/Kathmandu');
 
 // Get the current date and time
-$currentDateTime = date('Y-m-d H:i:s');
+$currentTime = date( 'H:i:s');
 ?>
 <div class="background module-header"
     style="background-image: url('{{ officeSetting()->background_image_url ?? asset('images/bg.png') }}')">
@@ -45,7 +45,8 @@ $currentDateTime = date('Y-m-d H:i:s');
                         <path
                             d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                     </svg>&nbsp;&nbsp;
-                    <?php echo $currentDateTime; ?>
+                    <x-frontend.top-bar-date-component/> &nbsp;
+                    <?php echo $currentTime; ?>
                 </span>
             </a>
             <a href="tel:०८१५३६३३८" class="main-logo d-flex align-items-center" style="text-decoration: none">

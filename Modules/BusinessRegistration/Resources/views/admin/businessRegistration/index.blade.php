@@ -94,6 +94,10 @@
                                 <i class="fa fa-filter"> फिल्टर</i>
                             </button>
                         </div>
+                        <a href="{{ route('admin.businessRegistration.registration.businessRegistration.create') }}"
+                           class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                            <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+
                     </div>
                 </div>
 

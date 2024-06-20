@@ -86,6 +86,11 @@ class OrganizationRegistrationController extends Controller
         return back();
     }
 
+    public function create()
+    {
+        return view('businessregistration::admin.organizationRegistration.create');
+    }
+
     public function edit(OrganizationRegistration $organizationRegistration)
     {
         $organizationRegistration->load('committeeNames', 'files');
@@ -154,6 +159,6 @@ class OrganizationRegistrationController extends Controller
         );
         $todayDateInBS = $this->get_today_nepali_date();
 
-        return view('businessregistration::admin.organizationRegistration.printDetail', compact('organizationRegistration', 'officeHeaders','todayDateInBS'));
+        return view('businessregistration::admin.organizationRegistration.printDetail', compact('organizationRegistration', 'officeHeaders', 'todayDateInBS'));
     }
 }
