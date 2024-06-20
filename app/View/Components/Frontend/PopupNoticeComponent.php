@@ -13,16 +13,20 @@ class PopupNoticeComponent extends Component
 
     public function __construct(int|null $ward = null)
     {
-        $this->popupSetting = PopUpNotice::where(function ($q) use ($ward) {
+        $this->popupSetting = PopUpNotice::withWhereHas('popupActivations', function ($q) use ($ward) {
             if (!empty($ward)) {
-                $q->whereRaw("FIND_IN_SET('$ward', ward) > 0");
-            } else {
-                $q->MainPageDisplay();
+                $q->whereRaw("FIND_IN_SET('$ward', ward) > 0")->where('is_active', 1);
             }
         })
+            ->where(function ($q) use ($ward) {
+                if (empty($ward)) {
+                    $q->mainPageDisplay();
+                }
+            })
             ->active()
             ->latest()
             ->first();
+
     }
 
     /**
@@ -32,4 +36,5 @@ class PopupNoticeComponent extends Component
     {
         return view('components.frontend.popup-notice-component');
     }
+
 }

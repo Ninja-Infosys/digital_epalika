@@ -24,110 +24,110 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> पपअप सूचना</h4>
-                        @if(!empty($popUpNotice))
-                            <a href="{{route('admin.digitalBoard.popUpNotice.updateStatus',$popUpNotice)}}"
-                               class="btn btn-{{$popUpNotice->is_active? 'success':'danger'}}">
-                                {{$popUpNotice->is_active? 'पप-अप बन्द गर्नुहोस':'पप-अप देखाउनुहोस'}}
-                            </a>
-                        @endif
+            <div class="card p-0">
+                <div class="card-header search-card">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">पपअप सूचनाहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+
+                            <a href="{{ route('admin.digitalBoard.popUpNotice.create') }}"
+                                class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-custom">
+                            <thead>
+                                <tr>
+                                    <th>क्र.स</th>
+                                    <th>शिर्षक</th>
+                                    <th>फोटो</th>
+                                    <th>पप-आप देखाउने समय</th>
+                                    <th>पप-आप फिर्ता हुने समय</th>
+                                    <th>वडा</th>
+                                    <th>पालिकामा पनि देखाउने</th>
+                                    <th>स्थिति</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($popUpNotices as $popUpNotice)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $popUpNotice->title }}</td>
+                                        <td><img src="{{ $popUpNotice->image_url }}" alt="Image" width="80"></td>
+                                        <td>
+                                            {{ $popUpNotice->display_duration }}
+                                        </td>
+                                        <td>
+                                            {{ $popUpNotice->iteration_duration }}
+                                        </td>
+                                        <td>
+                                            {{ implode(',', $popUpNotice->popupActivations->pluck('ward')->toArray()) }}
+                                        </td>
 
-                    <form action="{{ route('admin.digitalBoard.popUpNotice.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+                                        <td>
+                                            @if ($popUpNotice->is_displayed == 1)
+                                                <i class="fa-solid fa-circle-check fa-2x" style="color:green"></i>
+                                            @else
+                                                <i class="fa-solid fa-circle-xmark fa-2x" style="color:red"></i>
+                                            @endif
+                                        </td>
 
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>PopUp विवरण </strong>
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="title" class="form-label mt-2">शिर्षक *</label>
-                                    <input type="text" name="title" value="{{ old('title', $popUpNotice?->title) }}"
-                                           class="form-control mt-2 @error('title') is-invalid @enderror" id="title"
-                                           placeholder="शिर्षक " required/>
-                                    @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="image" class="form-label">
-                                        फोटो *
-                                    </label>
-                                    <span>
-                                        <img src="{{ $popUpNotice?->image_url }}" height="50" alt="">
-                                    </span>
-                                    <input type="file" id="image" name="image" class="form-control"
-                                           placeholder="PopUpimage">
 
-                                    @error('image')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="display_duration" class="form-label mt-2">पप-आप देखाउने समय *</label>
-                                    <input type="text" name="display_duration"
-                                           value="{{ old('display_duration', $popUpNotice?->display_duration) }}"
-                                           class="form-control mt-2 @error('display_duration') is-invalid @enderror"
-                                           id="display_duration"
-                                           placeholder="पप-आप देखाउने समय"/>
-                                    @error('display_duration')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="iteration_duration" class="form-label mt-2">पप-आप फिर्ता हुने समय
-                                        *</label>
-                                    <input type="text" name="iteration_duration"
-                                           value="{{ old('iteration_duration', $popUpNotice?->iteration_duration) }}"
-                                           class="form-control mt-2 @error('iteration_duration') is-invalid @enderror"
-                                           id="iteration_duration"
-                                           placeholder="पप-आप फिर्ता हुने समय"/>
-                                    @error('iteration_duration')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <label for="ward" class="form-label">वडा</label>
-                                    <select name="ward[]" id="ward" class="form-select"
-                                            @if(!empty(auth()->user()->ward_no)) disabled @endif multiple>
-                                        <option value="">---वडा छान्नुहोस्---</option>
-                                        @foreach(officeSetting()->localbody->ward_no as $ward)
-                                            <option value="{{$ward}}" {{in_array($ward, old('ward',!empty(auth()->user()->ward_no) ? [auth()->user()->ward_no]:[])) ? 'selected' : ''}}>{{$ward}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('ward')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                    @error('ward.*')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+                                        <td>
+                                            <form
+                                                action="{{ route('admin.digitalBoard.popUpNotice.updateStatus', $popUpNotice) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('put')
+                                                <button type="submit"
+                                                    class="btn btn-{{ $popUpNotice->is_active ? 'success' : 'danger' }} btn-block"
+                                                    style="width: max-content">
+                                                    {{ $popUpNotice->is_active ? 'पप-अप बन्द गर्नुहोस' : 'पप-अप देखाउनुहोस' }}
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="d-flex gap-1 mt-4">
+                                            @if (empty(auth()->user()->ward_no) || auth()->id() == $popUpNotice->user_id)
+                                            <a data-bs-type="edit"
+                                                href="{{ route('admin.digitalBoard.popUpNotice.edit', $popUpNotice) }}"
+                                                class="btn btn-xs btn-outline-primary " title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            @endif
+                                            @if (empty(auth()->user()->ward_no) || auth()->id() == $popUpNotice->user_id)
+                                                <form
+                                                    action="{{ route('admin.digitalBoard.popUpNotice.destroy', $popUpNotice) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger show_confirm"
+                                                        title="मेटाउनु होस्">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
 
-                                <div class="col-md-4 mb-2">
-                                    <input
-                                        type="checkbox"
-                                        name="is_displayed"
-                                        value="1"
-                                        class="form-check-input @error('is_displayed') is-invalid @enderror"
-                                        id="is_displayed"/>
-                                    <label for="is_displayed" class="form-label">पालिकामा पनि देखाउनु होस्</label>
+                                        </td>
 
-                                    @error('is_displayed')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                              </div>
-                            </div>
-                        </fieldset>
-                        <button type="submit" class="btn btn-primary">
-                            Save
-                        </button>
-                    </form>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        {{-- {{ $notices->onEachSide(config('app.pagination_count'))->links() }} --}}
+                    </div>
                 </div>
             </div>
         </div>
