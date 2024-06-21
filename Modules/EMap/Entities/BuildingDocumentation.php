@@ -149,4 +149,10 @@ class BuildingDocumentation extends Model
             set: static fn ($value) => (!empty($value) && !is_string($value)) ? $value->store('buildingDocument/revenue', 'public') : null,
         );
     }
+
+    public function buildingDocuments(): HasMany
+    {
+        return $this->hasMany(BuildingDocument::class);
+    }
+
 }

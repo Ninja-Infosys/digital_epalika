@@ -52,6 +52,9 @@ Route::prefix('buildingDocumentation')->group(function () {
 
     Route::resource('buildingDocumentation', BuildingDocumentationController::class);
     Route::get('buildingDocumentation/{buildingDocumentation}/buildingDocumentationList', [BuildingDocumentationController::class, 'buildingDocumentationList'])->name('buildingDocumentationList');
+    Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/documentDetail', [BuildingDocumentationController::class, 'documentDetail'])->name('documentDetail');
+    Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/templatePrint', [BuildingDocumentationController::class, 'templatePrint'])->name('templatePrint');
+    Route::get('buildingDocumentation/{buildingDocumentation}/form/{form}/buildingFormDataType/{buildingFormDataType}/templateEdit', [BuildingDocumentationController::class, 'templateEdit'])->name('templateEdit');
 
 
 });
