@@ -126,7 +126,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        {{-- {{ $notices->onEachSide(config('app.pagination_count'))->links() }} --}}
+                        {{-- {{ $popUpNotices->onEachSide(config('app.pagination_count'))->links() }} --}}
                     </div>
                 </div>
             </div>
