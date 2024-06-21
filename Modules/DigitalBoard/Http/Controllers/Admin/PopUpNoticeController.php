@@ -25,9 +25,9 @@ class PopUpNoticeController extends Controller
 
         return view('digitalboard::admin.popUpNotice.index', compact('popUpNotices'));
     }
-    public function create( PopUpNotice $popUpNotice)
+    public function create(PopUpNotice $popUpNotice)
     {
-        return view('digitalboard::admin.popUpNotice.create',compact('popUpNotice'));
+        return view('digitalboard::admin.popUpNotice.create', compact('popUpNotice'));
     }
 
     public function store(StorePopUpNoticeRequest $request)
@@ -56,48 +56,38 @@ class PopUpNoticeController extends Controller
     }
     public function edit(PopUpNotice $popUpNotice)
     {
-        return view('digitalboard::admin.popUpNotice.edit',compact('popUpNotice'));
+        return view('digitalboard::admin.popUpNotice.edit', compact('popUpNotice'));
     }
-    // public function update(UpdatePopUpNotice $request, PopUpNotice $popUpNotice)
-    // {
-
-    //     $popUpNotice->update($request->validated());
-    //     toast('पपअप सफलतापूर्वक अद्यावधिक गरियो', 'success');
-    //     return redirect(route('admin.digitalBoard.popUpNotice.index'));
-    // }
 
     public function update(UpdatePopUpNotice $request, $id)
-{
-    DB::transaction(function () use ($request, $id) {
-        // Find the PopUpNotice by ID
-        $popUpNotice = PopUpNotice::findOrFail($id);
+    {
+        DB::transaction(function () use ($request, $id) {
 
-        // Update the PopUpNotice with the validated data
-        $popUpNotice->update($request->validated() + ['user_id' => auth()->id()]);
+            $popUpNotice = PopUpNotice::findOrFail($id);
+            $popUpNotice->update($request->validated() + ['user_id' => auth()->id()]);
 
-        // Remove existing popup activations
-        $popUpNotice->popupActivations()->delete();
+            $popUpNotice->popupActivations()->delete();
 
-        // Create new popup activations
-        if (!empty($request->input('ward'))) {
-            foreach ($request->input('ward') as $ward) {
+
+            if (!empty($request->input('ward'))) {
+                foreach ($request->input('ward') as $ward) {
+                    $popUpNotice->popupActivations()->create([
+                        'is_active' => 1,
+                        'ward' => $ward
+                    ]);
+                }
+            } else {
                 $popUpNotice->popupActivations()->create([
                     'is_active' => 1,
-                    'ward' => $ward
+                    'ward' => auth()->user()->ward_no
                 ]);
             }
-        } else {
-            $popUpNotice->popupActivations()->create([
-                'is_active' => 1,
-                'ward' => auth()->user()->ward_no
-            ]);
-        }
-    });
+        });
 
-    toast('PopUp सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('PopUp सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-    return back();
-}
+        return back();
+    }
 
     public function updateStatus(PopUpNotice $popUpNotice)
     {
