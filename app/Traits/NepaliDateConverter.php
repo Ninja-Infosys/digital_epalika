@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Exception;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -115,7 +116,7 @@ trait NepaliDateConverter
         2078 => [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
         2079 => [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
         2080 => [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30],
-        2081 => [31, 31, 32, 32, 31, 30, 30, 30, 29, 30, 30, 30],
+        2081 => [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
         2082 => [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30],
         2083 => [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30],
         2084 => [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30],
@@ -145,7 +146,7 @@ trait NepaliDateConverter
 
     public array $month_name = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत'];
 
-    public function triMonthlyQuarters()
+    public function triMonthlyQuarters(): Collection
     {
         return collect([
             [
@@ -171,7 +172,7 @@ trait NepaliDateConverter
         ]);
     }
 
-    public function quarters()
+    public function quarters(): Collection
     {
         return collect([
             [
