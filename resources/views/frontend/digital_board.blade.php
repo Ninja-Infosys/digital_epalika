@@ -22,7 +22,7 @@
                             <x-frontend.program-component/>
                         </div>
                         <div class="">
-                            <h2 class="jana text-center text-white px-2 mt-1 mb-0">जिम्मेवार पदाधिकारी/कर्मचारी</h2>
+                            <h2 class="jana text-center text-white px-2 mb-0">जिम्मेवार पदाधिकारी/कर्मचारी</h2>
                             <x-frontend.employee-section-component/>
                         </div>
                     </div>
